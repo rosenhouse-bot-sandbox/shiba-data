@@ -160,13 +160,14 @@ async function openDoc(docId, page, quote, note) {
   viewer.renderId++;
   if (!doc.file) {
     viewer.doc = viewer.pdf = null;
-    $("#page-area").replaceChildren(el("p", { class: "missing" }, "No copy of this document is hosted here. ",
+    $("#page-area").replaceChildren(el("p", { class: "notice" }, "No copy of this document is hosted here. ",
       el("a", { href: doc.url, target: "_blank", rel: "noopener" }, "Open the carrier's copy ↗")));
     return;
   }
   if (viewer.doc !== docId) {
     viewer.doc = docId;
     viewer.pdf = null;
+    $("#page-area").replaceChildren(el("p", { class: "notice" }, "Loading…"));
     viewer.loading = pdfjsLib.getDocument(doc.file).promise;
   }
   const pdf = await viewer.loading;

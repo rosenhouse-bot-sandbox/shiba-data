@@ -66,7 +66,11 @@ test("every citation's quote is highlighted in full on its page", { timeout: 600
       if (!cell.cites.length) continue;
       await row(r.plan_id).locator("td").nth(site.main.columns.findIndex((c) => c.key === col)).click();
       for (const [i, c] of cell.cites.entries()) {
-        if (i) await page.locator("#source-note a").nth(i).click();
+        if (i) {
+          // Two cites can share a page, so clear the marker before the next render sets it.
+          await page.$eval("#page-area", (area) => delete area.dataset.shown);
+          await page.locator("#source-note a").nth(i).click();
+        }
         await shown(c.doc, c.page);
         // A re-issued PDF may have moved the quote; the viewer warns about it instead.
         if (site.docs[c.doc].changed) continue;
@@ -89,10 +93,14 @@ test("a slow document never shows the previous document's pages", async () => {
   const rowIn = (p, planId) => p.locator("table.sheet tr", { has: p.locator("small", { hasText: planId }) });
   await rowIn(fresh, "H3805-048-0").locator("td").first().click();
   await fresh.waitForSelector(`#page-area[data-shown="${docOf("H3805-048-0", "SB")} 1"]`);
-  await fresh.click("#next");
-  await rowIn(fresh, "H7006-018-0").locator("td").first().click();
+  const slowCell = rowIn(fresh, "H7006-018-0").locator("td").first();
+  await slowCell.evaluate((td) => {
+    document.querySelector("#next").click();
+    td.click();
+  });
   await fresh.waitForTimeout(1000);
-  assert.equal(await fresh.getAttribute("#page-area", "data-shown"), `${docOf("H3805-048-0", "SB")} 1`);
+  assert.equal(await fresh.locator("#page-area canvas").count(), 0);
+  assert.match(await fresh.textContent("#page-area"), /Loading/);
   await fresh.waitForSelector(`#page-area[data-shown="${slow} 1"]`);
   await fresh.close();
 });
