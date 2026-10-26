@@ -1,0 +1,24 @@
+plan_ids,column,line,value,kind,quote
+H3805-048-0;H3805-041-0;H2406-042-0;H2406-070-0;H2406-073-0,L_xray_imaging,2,$320,SB,$320 copay otherwise
+H3805-040-0,L_xray_imaging,2,$285,SB,$285 copay otherwise
+H2001-045-0,L_xray_imaging,2,$0 or 20%,SB,"$0 copay for each diagnostic mammogram Depending on your level of Medicaid eligibility, $0 copay or 20% coinsurance otherwise"
+H6815-038-0,L_xray_imaging,2,$200-$500,SB,$500 copay for all other diagnostic radiology services received in an outpatient hospital setting. $200 copay for all other services received in all other locations.
+H5439-015-0,L_xray_imaging,2,$225-$500,SB,$500 copay for all other diagnostic radiology services received in an outpatient hospital setting. $225 copay for all other services received in all other locations.
+H5439-019-0,L_xray_imaging,2,$250-$500,SB,$500 copay for all other diagnostic radiology services received in an outpatient hospital setting. $250 copay for all other services received in all other locations.
+H5439-011-0,L_xray_imaging,2,$125-$425,SB,$425 copay for all other diagnostic radiology services received in an outpatient hospital setting. $125 copay for all other services received in all other locations.
+H5439-010-0,L_xray_imaging,2,$125-$500,SB,$500 copay for all other diagnostic radiology services received in an outpatient hospital setting. $125 copay for all other services received in all other locations.
+H7006-018-0,L_xray_imaging,2,$0-$300,SB,"(e.g. MRI, CAT Scan) In-Network $0 - $300 copay*"
+H7006-021-0,L_xray_imaging,2,$0-$60,SB,Out-of-Network 50% coinsurance In-Network $0 - $60 copay* Out-of-Network 50% coinsurance Outpatient X-rays
+H7199-002-0;H2923-001-0;H2923-028-3;H2923-025-0;H2923-005-0;H2923-019-0,L_xray_imaging,2,$100-$300,SB,"Diagnostic Radiology (such as CT, PET Scan, etc.) Office or freestanding location: $100 or $200 copay Outpatient Hospital: $200 or $300 copay"
+H2923-001-0;H2923-028-3;H2923-025-0;H2923-005-0;H2923-019-0,L_xray_imaging,1,$25-$75,SB,Outpatient X-rays and Ultrasounds Office or freestanding location: $25 copay Outpatient hospital: $75 copay
+H2923-009-0,L_xray_imaging,2,50%,SB,"Diagnostic Radiology (such as CT, PET Scan, etc.) Office or freestanding location: 50% coinsurance Outpatient Hospital: 50% coinsurance"
+H1036-323-0;H1036-153-0;H1036-306-0;H1036-317-0,L_xray_imaging,2,$205-$345,SB,Freestanding radiological facility: $205 copay • Outpatient hospital: $345 copay
+H5216-428-2;H5216-048-0;H5216-427-2;H5216-455-0,L_xray_imaging,2,$205-$345,SB,$205 copay 50% of the cost • Outpatient hospital $345 copay 50% of the cost
+H9003-001-0,L_xray_imaging,2,$150,SB,"MRI, CT, and PET $150 per visit $225 per visit $350 per visit"
+H9003-006-0,L_xray_imaging,2,$225,SB,"MRI, CT, and PET $150 per visit $225 per visit $350 per visit"
+H9003-009-0,L_xray_imaging,2,$350,SB,"MRI, CT, and PET $150 per visit $225 per visit $350 per visit"
+H2056-003-0,L_xray_imaging,2,$350,SB,CAT scan and MRI $350 copay
+H2056-018-0,L_xray_imaging,2,$275,SB,CAT scan and MRI $275 copay
+H3817-008-1;H3817-009-1;H3817-011-1;H3817-010-0,L_xray_imaging,2,$300,SB,"Diagnostic radiology (MRI, CT, etc.)1 $300"
+H1372-003-0,L_xray_imaging,2,20%,SB,"Diagnostic radiology services (e.g., MRI, CAT scan) 20% coinsurance"
+H2001-045-0,H_inpatient,,"$0 or $1,980 per stay",SB,"you pay $0 copay per stay, or $1,980 copay per stay"

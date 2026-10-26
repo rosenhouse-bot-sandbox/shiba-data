@@ -1,0 +1,40 @@
+section,plan_id,plan_name,plan_type,organization,premium,premium_full_extra_help,moop_in_network,part_d_deductible,tier_without_part_d_deductible,c_snp_conditions,overall_star_rating
+MA-PD,H3805-048-0,AARP Medicare Advantage Essentials from UHC OR-7 (HMO-POS),HMO-POS,UnitedHealthcare,$0,$0,"$6,700",$685,Yes,Not Applicable,3.5
+MA-PD,H3805-041-0,AARP Medicare Advantage Extras from UHC OR-6 (HMO-POS),HMO-POS,UnitedHealthcare,$0,$0,"$7,150",$685,Yes,Not Applicable,3.5
+MA-PD,H2406-042-0,AARP Medicare Advantage from UHC OR-0001 (PPO),PPO,UnitedHealthcare,$94,$87.70,"$6,700",$595,Yes,Not Applicable,4.0
+MA-PD,H2406-070-0,AARP Medicare Advantage from UHC OR-0002 (PPO),PPO,UnitedHealthcare,$0,$0,"$7,150",$685,Yes,Not Applicable,4.0
+MA-PD,H2056-003-0,Aetna Medicare Elite (HMO),HMO,Aetna Medicare,$0,$0,"$7,150",$700,Yes,Not Applicable,3.0
+MA-PD,H7006-018-0,ATRIO Choice Rx (PPO),PPO,ATRIO Health Plans,$0,$0,"$5,900",$400,Yes,Not Applicable,2.5
+MA-PD,H7199-002-0,DEVOTED CHOICE PREMIUM 002 OR (PPO),PPO,Devoted Health,$28.50,$28.50,"$6,000",$650,Yes,Not Applicable,4.5
+MA-PD,H2923-001-0,DEVOTED CORE 001 OR (HMO),HMO,Devoted Health,$0,$0,"$6,700",$461,Yes,Not Applicable,3.0
+MA-PD,H2923-028-3,DEVOTED GIVEBACK 028 OR (HMO),HMO,Devoted Health,$0,$0,"$8,900",$461,Yes,Not Applicable,3.0
+MA-PD,H2923-025-0,DEVOTED GIVEBACK EXTRAS 025 OR (HMO),HMO,Devoted Health,$0,$0,"$7,700",$700,Yes,Not Applicable,3.0
+MA-PD,H2923-005-0,DEVOTED PREMIUM 005 OR (HMO),HMO,Devoted Health,$43,$43,"$5,900",$650,Yes,Not Applicable,3.0
+MA-PD,H1036-323-0,Humana Essentials Plus Giveback (HMO),HMO,Humana,$0,$0,"$9,050",$700,Yes,Not Applicable,4.5
+MA-PD,H1036-153-0,Humana Total Complete (HMO),HMO,Humana,$0,$0,"$5,150",$700,Yes,Not Applicable,4.5
+MA-PD,H5216-428-2,Humana Value Choice (PPO),PPO,Humana,$0,$0,"$6,950",$700,Yes,Not Applicable,4.0
+MA-PD,H5216-048-0,HumanaChoice H5216-048 (PPO),PPO,Humana,$97,$82.60,"$7,000",$700,Yes,Not Applicable,4.0
+MA-PD,H9003-001-0,Kaiser Permanente Senior Advantage Enhanced (HMO-POS),HMO-POS,Kaiser Permanente,$134,$134,"$4,000",$0,Not Applicable,Not Applicable,4.5
+MA-PD,H9003-006-0,Kaiser Permanente Senior Advantage Standard (HMO-POS),HMO-POS,Kaiser Permanente,$49,$49,"$5,250",$0,Not Applicable,Not Applicable,4.5
+MA-PD,H9003-009-0,Kaiser Permanente Senior Advantage Value (HMO-POS),HMO-POS,Kaiser Permanente,$0,$0,"$6,750",$0,Not Applicable,Not Applicable,4.5
+MA-PD,H3817-008-1,Regence MedAdvantage + Rx Classic (PPO),PPO,Regence BlueCross BlueShield of Oregon,$130,$123.70,"$6,700",$590,Yes,Not Applicable,3.5
+MA-PD,H3817-009-1,Regence MedAdvantage + Rx Enhanced (PPO),PPO,Regence BlueCross BlueShield of Oregon,$244,$237.70,"$5,900",$305,Yes,Not Applicable,3.5
+MA-PD,H3817-011-1,Regence MedAdvantage + Rx Primary (PPO),PPO,Regence BlueCross BlueShield of Oregon,$88,$81.70,"$7,150",$700,Yes,Not Applicable,3.5
+MA-PD,H6815-038-0,Wellcare Low Premium (HMO-POS),HMO-POS,Wellcare,$44.50,$44.50,"$7,900",$700,Yes,Not Applicable,3.0
+MA-PD,H5439-015-0,Wellcare Low Premium Open (PPO),PPO,Wellcare,$29,$29,"$9,250",$700,Yes,Not Applicable,3.0
+MA-PD,H5439-019-0,Wellcare Premium Enhanced Open (PPO),PPO,Wellcare,$76.60,$76.60,"$7,000",$700,Yes,Not Applicable,3.0
+MA-PD,H5439-011-0,Wellcare Premium Ultra Open (PPO),PPO,Wellcare,$206,$199.70,"$6,500",$700,Yes,Not Applicable,3.0
+C-SNP,H1372-003-0,AgeRight Advantage Premier Health Plan (HMO C-SNP),HMO C-SNP,AgeRight Advantage,$69,$69,"$6,500",$400,Yes,"CardiovascularDisorders,ChronicHeartFailure,DiabetesMellitus",Not Enough Data Available
+C-SNP,H2923-019-0,DEVOTED C-SNP GIVEBACK EXTRAS 019 OR (HMO C-SNP),HMO C-SNP,Devoted Health,$0,$0,"$7,700",$700,Yes,"CardiovascularDisorders,ChronicHeartFailure,DiabetesMellitus",3.0
+C-SNP,H2923-009-0,DEVOTED C-SNP PLUS 009 OR (HMO C-SNP),HMO C-SNP,Devoted Health,$0,$0,"$9,850",$461,Yes,"CardiovascularDisorders,ChronicHeartFailure,DiabetesMellitus",3.0
+C-SNP,H1036-306-0,Humana Gold Plus - Diabetes and Heart (HMO C-SNP),HMO C-SNP,Humana,$0,$0,"$4,550",$500,Yes,"CardiovascularDisorders,ChronicHeartFailure,DiabetesMellitus",4.5
+C-SNP,H1036-317-0,Humana Gold Plus - Diabetes and Heart (HMO C-SNP),HMO C-SNP,Humana,$0,$0,"$9,850",$700,Yes,"CardiovascularDisorders,ChronicHeartFailure,DiabetesMellitus",4.5
+C-SNP,H3805-040-0,UHC Complete Care OR-5 (HMO-POS C-SNP),HMO-POS C-SNP,UnitedHealthcare,$0,$0,"$7,150",$685,Yes,"CardiovascularDisorders,ChronicHeartFailure,DiabetesMellitus",3.5
+C-SNP,H2001-045-0,UHC Complete Care Support OR-1A (PPO C-SNP),PPO C-SNP,UnitedHealthcare,$0,$0,"$9,850",$700,Yes,"CardiovascularDisorders,ChronicHeartFailure,DiabetesMellitus",4.5
+NO-PART-D,H2406-073-0,AARP Medicare Advantage Patriot No Rx OR-MA01 (PPO),PPO,UnitedHealthcare,$0,n/a,"$7,150",n/a,n/a,Not Applicable,4.0
+NO-PART-D,H2056-018-0,Aetna Medicare Eagle (HMO),HMO,Aetna Medicare,$0,n/a,"$5,500",n/a,n/a,Not Applicable,3.0
+NO-PART-D,H7006-021-0,ATRIO Freedom (PPO),PPO,ATRIO Health Plans,$0,n/a,"$4,450",n/a,n/a,Not Applicable,2.5
+NO-PART-D,H5216-427-2,Humana USAA Honor Giveback (PPO),PPO,Humana,$0,n/a,"$9,150",n/a,n/a,Not Applicable,4.0
+NO-PART-D,H5216-455-0,Humana USAA Honor Giveback (PPO),PPO,Humana,$0,n/a,"$5,100",n/a,n/a,Not Applicable,4.0
+NO-PART-D,H3817-010-0,Regence Valiance (PPO),PPO,Regence BlueCross BlueShield of Oregon,$0,n/a,"$5,300",n/a,n/a,Not Applicable,3.5
+NO-PART-D,H5439-010-0,Wellcare Patriot Giveback Open (PPO),PPO,Wellcare,$0,n/a,"$6,750",n/a,n/a,Not Applicable,3.0
