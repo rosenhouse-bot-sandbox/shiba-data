@@ -69,14 +69,15 @@ function sheetView(sheet) {
   return el("div", { class: "sheet-wrap" }, table);
 }
 
-function valueCell(plan, column, cell, tag = "td") {
-  const td = el(tag, {
+function valueCell(plan, column, cell) {
+  const td = el("td", {
     class: [cell.cites.length ? "cited" : "", /^[●◐]$/.test(cell.value) ? "dot" : ""].join(" "),
     title: cell.cites.length ? "Click to see the plan document page" : "From CMS plan data. Click to open the plan's Summary of Benefits.",
     onclick: () => {
       document.querySelectorAll(".selected").forEach((s) => s.classList.remove("selected"));
       td.classList.add("selected");
       openCell(plan, column, cell);
+      td.scrollIntoView({ block: "nearest", inline: "nearest" });
     },
   });
   cell.value.split(" | ").forEach((line, i) => td.append(i ? el("br") : "", line));
@@ -84,17 +85,20 @@ function valueCell(plan, column, cell, tag = "td") {
 }
 
 function openCell(plan, column, cell) {
-  const what = `${plan.plan_name}: ${column.label} = ${cell.value}`;
+  const what = `${plan.plan_name}: ${column.label} = ${oneLine(cell.value)}`;
   if (cell.cites.length) {
     const cite = cell.cites[0];
     openDoc(cite.doc, cite.page, cite.quote, citeNote(what, cell));
   } else {
     const sb = plan.docs.find((d) => site.docs[d].kind === "SB");
     openDoc(sb, 1, null, el("div", {}, el("b", {}, what), el("p", {},
-      "This value comes from the CMS 2027 Plan Benefit Package data, which has no page to point to. ",
+      cell.value ? "This value comes from the CMS 2027 Plan Benefit Package data, which has no page to point to. "
+        : "The CMS 2027 Plan Benefit Package data has no entry for this benefit. ",
       "The plan's Summary of Benefits is shown for reference.")));
   }
 }
+
+const oneLine = (value) => value.split(" | ").join("; ");
 
 function citeNote(what, cell) {
   const note = el("div", {}, el("b", {}, what));
@@ -106,7 +110,7 @@ function citeNote(what, cell) {
       c.line ? ` (line ${c.line})` : "", `: “${c.quote}”`));
   });
   if (cell.pbp != null) {
-    note.append(el("p", { class: "pbp" }, cell.pbp ? `CMS plan data says “${cell.pbp}”. The plan document overrides it.`
+    note.append(el("p", { class: "pbp" }, cell.pbp ? `CMS plan data says “${oneLine(cell.pbp)}”. The plan document overrides it.`
       : "CMS plan data leaves this blank. The plan document fills it in."));
   }
   return note;
@@ -153,6 +157,7 @@ async function openDoc(docId, page, quote, note) {
   $("#source-note").replaceChildren(...[note, doc.changed ? el("p", { class: "warn" },
     "The carrier has changed this file since the data was extracted. Page numbers may be off.") : null].filter(Boolean));
   viewer.cite = quote ? { page, quote } : null;
+  viewer.renderId++;
   if (!doc.file) {
     viewer.doc = viewer.pdf = null;
     $("#page-area").replaceChildren(el("p", { class: "missing" }, "No copy of this document is hosted here. ",
@@ -177,11 +182,12 @@ function closeViewer() {
 }
 
 async function showPage(n, scrollToCite = false) {
-  if (!viewer.pdf) return;
-  n = Math.min(Math.max(1, n || 1), viewer.pdf.numPages);
+  const { pdf, doc } = viewer;
+  if (!pdf) return;
+  n = Math.min(Math.max(1, n || 1), pdf.numPages);
   const id = ++viewer.renderId;
   viewer.pending = [n, scrollToCite];
-  const page = await viewer.pdf.getPage(n);
+  const page = await pdf.getPage(n);
   const area = $("#page-area");
   const base = page.getViewport({ scale: 1 });
   const viewport = page.getViewport({ scale: (area.clientWidth - 24) / base.width });
@@ -201,12 +207,12 @@ async function showPage(n, scrollToCite = false) {
   const content = await page.getTextContent();
   const layer = new pdfjsLib.TextLayer({ textContentSource: content, container: text, viewport });
   await layer.render();
-  if (id !== viewer.renderId) return;
+  if (id !== viewer.renderId || pdf !== viewer.pdf) return;
   viewer.pending = null;
   viewer.page = n;
   $("#page").value = n;
   area.replaceChildren(holder);
-  area.dataset.shown = `${viewer.doc} ${n}`;
+  area.dataset.shown = `${doc} ${n}`;
   if (viewer.cite?.page === n) {
     const mark = highlight(layer.textDivs, content.items.filter((i) => "str" in i), viewer.cite.quote);
     if (!scrollToCite) return;

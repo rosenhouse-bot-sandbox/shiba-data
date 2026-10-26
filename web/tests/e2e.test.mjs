@@ -57,21 +57,75 @@ test("plan page lists the plan's documents", async () => {
   assert.match(docs, /Evidence of Coverage/);
 });
 
-test("every citation's quote is found on its page", { timeout: 600_000 }, async () => {
-  const missing = [];
+test("every citation's quote is highlighted in full on its page", { timeout: 600_000 }, async () => {
+  const squash = (t) => t.replace(/\s+/g, "").toLowerCase();
+  const wrong = [];
   await page.goto(`${base}#/main`);
   for (const r of site.main.rows) {
     for (const [col, cell] of Object.entries(r.cells)) {
-      cell.cites.forEach((c) => (c.key = `${r.plan_id} ${col} ${c.doc} p${c.page}`));
       if (!cell.cites.length) continue;
-      const index = site.main.columns.findIndex((c) => c.key === col);
-      await row(r.plan_id).locator("td").nth(index).click();
-      for (let i = 0; i < cell.cites.length; i++) {
+      await row(r.plan_id).locator("td").nth(site.main.columns.findIndex((c) => c.key === col)).click();
+      for (const [i, c] of cell.cites.entries()) {
         if (i) await page.locator("#source-note a").nth(i).click();
-        await shown(cell.cites[i].doc, cell.cites[i].page);
-        if (!(await page.locator(".textLayer mark").count())) missing.push(cell.cites[i].key);
+        await shown(c.doc, c.page);
+        // A re-issued PDF may have moved the quote; the viewer warns about it instead.
+        if (site.docs[c.doc].changed) continue;
+        const marked = (await page.locator(".textLayer mark").allTextContents()).join("");
+        if (squash(marked) !== squash(c.quote)) wrong.push(`${r.plan_id} ${col} ${c.doc} p${c.page}`);
       }
     }
   }
-  assert.deepEqual(missing, []);
+  assert.deepEqual(wrong, []);
 });
+
+test("a slow document never shows the previous document's pages", async () => {
+  const fresh = await browser.newPage({ viewport: { width: 1600, height: 1000 } });
+  const slow = docOf("H7006-018-0", "SB");
+  await fresh.route(`**/pdfs/${slow}.pdf`, async (route) => {
+    await new Promise((r) => setTimeout(r, 2000));
+    await route.continue();
+  });
+  await fresh.goto(`${base}#/main`);
+  const rowIn = (p, planId) => p.locator("table.sheet tr", { has: p.locator("small", { hasText: planId }) });
+  await rowIn(fresh, "H3805-048-0").locator("td").first().click();
+  await fresh.waitForSelector(`#page-area[data-shown="${docOf("H3805-048-0", "SB")} 1"]`);
+  await fresh.click("#next");
+  await rowIn(fresh, "H7006-018-0").locator("td").first().click();
+  await fresh.waitForTimeout(1000);
+  assert.equal(await fresh.getAttribute("#page-area", "data-shown"), `${docOf("H3805-048-0", "SB")} 1`);
+  await fresh.waitForSelector(`#page-area[data-shown="${slow} 1"]`);
+  await fresh.close();
+});
+
+test("the viewer warns about changed and missing copies", async () => {
+  const fresh = await browser.newPage({ viewport: { width: 1600, height: 1000 } });
+  const [changed, missing] = site.plans.find((p) => p.plan_id === "H2001-045-0").docs;
+  await fresh.route("**/data.json", (route) => {
+    const edited = structuredClone(site);
+    edited.docs[changed].changed = true;
+    edited.docs[missing].file = null;
+    route.fulfill({ json: edited });
+  });
+  await fresh.goto(`${base}#/plan/H2001-045-0`);
+  await fresh.locator("table.docs a", { hasText: kindName(site.docs[changed].kind) }).click();
+  await fresh.waitForSelector(`#page-area[data-shown="${changed} 1"]`);
+  assert.match(await fresh.textContent("#source-note"), /carrier has changed this file/);
+  await fresh.locator("table.docs a", { hasText: kindName(site.docs[missing].kind) }).click();
+  assert.match(await fresh.textContent("#page-area"), /No copy of this document is hosted here/);
+  assert.equal(await fresh.getAttribute("#viewer a#doc-source", "href"), site.docs[missing].url);
+  await fresh.close();
+});
+
+test("a blank uncited cell says CMS data has no entry", async () => {
+  await page.goto(`${base}#/dvha`);
+  const index = site.dvha.columns.findIndex((c) => c.key === "F_dental");
+  await row("H3805-048-0").locator("td").nth(index).click();
+  assert.match(await page.textContent("#source-note"), /has no entry for this benefit/);
+});
+
+test("closing the viewer hides it", async () => {
+  await page.click("#close");
+  assert.equal(await page.isHidden("#viewer"), true);
+});
+
+const kindName = (k) => ({ SB: "Summary of Benefits", EOC: "Evidence of Coverage" })[k];

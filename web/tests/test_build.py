@@ -89,11 +89,15 @@ class FetchPdfsTest(unittest.TestCase):
         self.assertTrue(doc["changed"])
         self.assertTrue(os.path.exists(self.dir / "site" / doc["file"]))
 
-    def test_leaves_file_unset_when_download_fails(self):
+    def test_reports_failed_download(self):
         self.src.write_bytes(b"<html>not found</html>")
-        build.fetch_pdfs(self.docs, self.dir / "site", "2026-10-26")
+        failed = build.fetch_pdfs(self.docs, self.dir / "site", "2026-10-26")
         [doc] = self.docs.values()
         self.assertIsNone(doc["file"])
+        self.assertEqual(failed, [doc["url"]])
+
+    def test_reports_no_failures(self):
+        self.assertEqual(build.fetch_pdfs(self.docs, self.dir / "site", "2026-10-26"), [])
 
 
 if __name__ == "__main__":

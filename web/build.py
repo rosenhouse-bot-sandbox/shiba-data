@@ -117,32 +117,34 @@ def download(url):
     try:
         with urllib.request.urlopen(req, timeout=180) as r:
             return r.read()
-    except OSError as e:
-        print(f"download failed: {url}: {e}", file=sys.stderr)
+    except OSError:
         return b""
 
 
 def fetch_pdfs(docs, out_dir, today):
     (out_dir / "pdfs").mkdir(parents=True, exist_ok=True)
+    failed = []
     for doc_id, doc in docs.items():
         raw = download(doc["url"])
         if not raw.startswith(b"%PDF"):
             doc.update(file=None, retrieved=None, changed=None)
-            print(f"not a PDF: {doc['url']}", file=sys.stderr)
+            failed.append(doc["url"])
             continue
         doc["file"] = f"pdfs/{doc_id}.pdf"
         doc["retrieved"] = today
         doc["changed"] = hashlib.sha256(raw).hexdigest() != doc["sha256"]
         (out_dir / doc["file"]).write_bytes(raw)
+    return failed
 
 
 def main(out, *flags):
     out_dir = pathlib.Path(out)
     shutil.copytree(HERE / "static", out_dir, dirs_exist_ok=True)
     site = site_data()
-    if "--pdfs" in flags:
-        fetch_pdfs(site["docs"], out_dir, datetime.date.today().isoformat())
+    failed = fetch_pdfs(site["docs"], out_dir, datetime.date.today().isoformat()) if "--pdfs" in flags else []
     (out_dir / "data.json").write_text(json.dumps(site))
+    if failed:
+        sys.exit("not a PDF:\n" + "\n".join(failed))
 
 
 if __name__ == "__main__":
