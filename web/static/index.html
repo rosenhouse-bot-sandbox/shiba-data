@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2027 Medicare Advantage plans: Multnomah &amp; Clackamas</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/web/pdf_viewer.css">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header>
+    <h1>2027 Medicare Advantage plans <span>Multnomah &amp; Clackamas</span></h1>
+    <nav>
+      <a href="#/main" data-view="main">Main chart</a>
+      <a href="#/dvha" data-view="dvha">Dental, vision, hearing &amp; extras</a>
+      <select id="plan-picker" aria-label="Open a plan"><option value="">Open a plan…</option></select>
+    </nav>
+  </header>
+  <div id="layout">
+    <main id="content">Loading…</main>
+    <aside id="viewer" hidden>
+      <div class="toolbar">
+        <strong id="doc-title"></strong>
+        <button id="prev" title="Previous page">‹</button>
+        <input id="page" type="number" min="1" aria-label="Page"> <span id="page-count"></span>
+        <button id="next" title="Next page">›</button>
+        <a id="doc-source" target="_blank" rel="noopener">Carrier's copy ↗</a>
+        <button id="close" title="Close">✕</button>
+      </div>
+      <div id="source-note"></div>
+      <div id="page-area"></div>
+    </aside>
+  </div>
+  <footer>
+    Plan documents are copies of carrier PDFs, kept for reference. Each links to the carrier's current copy.
+    Numbers without a page citation come from the CMS 2027 Plan Benefit Package files.
+    Built from <a href="https://github.com/rosenhouse-bot-sandbox/shiba-data/tree/main/repro">repro/</a>.
+    No person has reviewed these numbers.
+  </footer>
+</body>
+</html>
