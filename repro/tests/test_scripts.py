@@ -63,6 +63,19 @@ class MainChartTest(unittest.TestCase):
                                         "pbp_b1a_copay_mcs_amt_int2_t1": "0.00"}]}
         self.assertEqual(mc.inpatient(plan), "$465 | 1-5")
 
+    def test_inpatient_without_cost_sharing(self):
+        self.assertEqual(mc.inpatient({"pbp_b1a_inpat_hosp": [{"pbp_b1a_copay_yn": "1"}]}), "$0")
+        self.assertEqual(mc.inpatient({}), "")
+
+    def test_inpatient_rejects_provider_tiers(self):
+        with self.assertRaises(ValueError):
+            mc.inpatient({"pbp_b1a_inpat_hosp": [{"pbp_b1a_cost_vary_tiers_yn": "1"}]})
+
+    def test_out_of_network_matches_whole_category(self):
+        plan = {"pbp_Section_C_OON": [{"pbp_c_oon_out_mc_bendesc_cats": "17a;", "pbp_c_oon_outpt_coins_min_pct": "50"}]}
+        self.assertEqual(mc.out_of_network(plan, "7a"), "")
+        self.assertEqual(mc.out_of_network(plan, "17a"), "50%")
+
     def test_apply_citations_replaces_one_line(self):
         row = {"L_xray_imaging": "$0-$145 | $0-$345", "U_naturopath": ""}
         mc.apply_citations(row, [{"column": "L_xray_imaging", "line": "2", "value": "$205-$345"},
@@ -100,6 +113,10 @@ class DvhaTest(unittest.TestCase):
     def test_dental_names_narrow_comprehensive_scope(self):
         plan = {"pbp_b16_dental": [{"pbp_b16b_bendesc_oe_amo": "2", "pbp_b16c_bendesc_ags_amo": "2"}]}
         self.assertEqual(dvha.dental(plan), "PREV $0; COMP $0 (adjunctive general services only); no annual max")
+
+    def test_dental_separate_comprehensive_max(self):
+        plan = {"pbp_b16_dental": [{"pbp_b16b_bendesc_oe_amo": "2", "pbp_b16c_maxplan_cmp_amt": "1000.00"}]}
+        self.assertEqual(dvha.dental(plan), "PREV $0; COMP max $1,000")
 
     def test_vision_per_item_allowance(self):
         plan = {"pbp_b17_eye_exams_wear": [{"pbp_b17b_indv_maxplan_amt_egf": "100.00"}]}

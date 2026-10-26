@@ -16,7 +16,7 @@ Run `./run.sh <work_dir>` to download everything and regenerate `data/`. A fresh
 | Main chart | 11 of the 13 Appendix B items are reproduced. The other 2 are not errors a generator can make or avoid. |
 | DVHA sheet | 5 of the 7 significant DVHA findings are reproduced. |
 
-`tests/test_reproduction.py` runs the generators on the PBP rows of the Appendix B plans (`tests/fixtures`) and asserts each reproduced correction.
+`tests/test_reproduction.py` runs the generators on the PBP rows of the Appendix B plans (`tests/fixtures`) and asserts each reproduced correction. `run.sh` rewrites that fixture.
 
 ### Finding documents
 

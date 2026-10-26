@@ -38,7 +38,7 @@ def costs(row, fields):
         out.append(span(min(dollars), max(dollars), money))
     if pcts:
         out.append(span(min(pcts), max(pcts), pct))
-    return " or ".join(out) or "$0"
+    return " or ".join(out)
 
 
 def mandatory(row, field):

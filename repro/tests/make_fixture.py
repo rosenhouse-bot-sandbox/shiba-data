@@ -10,12 +10,11 @@ import sys
 here = os.path.dirname(os.path.abspath(__file__))
 sys.path[:0] = [here, os.path.join(here, "..", "scripts")]
 import pbp  # noqa: E402
-from test_reproduction import DVHA_CASES, MAIN_CHART_CASES  # noqa: E402
+from appendix_b import PLAN_IDS  # noqa: E402
 
 
 def main(pbp_dir):
-    plan_ids = sorted({plan for _, plan, _, _ in MAIN_CHART_CASES + DVHA_CASES})
-    plans = pbp.load(pbp_dir, plan_ids)
+    plans = pbp.load(pbp_dir, PLAN_IDS)
     present = {(stem, field) for plan in plans.values() for stem, rows in plan.items() for r in rows for field in r}
     dictionary = pbp.load_dictionary(os.path.join(pbp_dir, "PBP_Benefits_2027_dictionary.xlsx"))
     codes = [[stem, field, entry["codes"]] for (stem, field), entry in sorted(dictionary.items())
