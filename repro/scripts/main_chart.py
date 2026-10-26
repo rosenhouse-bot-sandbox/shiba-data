@@ -59,7 +59,7 @@ def copay_or_coins(row, copay_lo, copay_hi, coins_lo, coins_hi):
 
 def out_of_network(plan, category):
     for g in plan.get("pbp_Section_C_OON", []):
-        if category + ";" in g.get("pbp_c_oon_out_mc_bendesc_cats", ""):
+        if category in g.get("pbp_c_oon_out_mc_bendesc_cats", "").split(";"):
             return copay_or_coins(g, "pbp_c_oon_outpt_copay_min_amt", "pbp_c_oon_outpt_copay_max_amt",
                                   "pbp_c_oon_outpt_coins_min_pct", "pbp_c_oon_outpt_coins_max_pct")
     return ""
@@ -80,22 +80,22 @@ def moop(plan):
 
 def inpatient(plan):
     r = first(plan, "pbp_b1a_inpat_hosp")
-    for tier in ("t1",):
-        n = int(r.get(f"pbp_b1a_copay_mcs_int_num_{tier}", "0") or 0) - 1
-        days = []
-        for i in range(1, n + 1):
-            amt = num(r.get(f"pbp_b1a_copay_mcs_amt_int{i}_{tier}"))
-            if amt:
-                days.append(f"{money(amt)} | {r[f'pbp_b1a_copay_mcs_bgnd_int{i}_{tier}']}-"
-                            f"{r[f'pbp_b1a_copay_mcs_endd_int{i}_{tier}']}")
-        if days:
-            return "; ".join(days)
-        stay = num(r.get(f"pbp_b1a_copay_mcs_amt_{tier}"))
-        if stay:
-            return f"{money(stay)} per stay"
-        coins = r.get(f"pbp_b1a_coins_mcs_pct_{tier}")
-        if coins:
-            return pct(float(coins))
+    if r.get("pbp_b1a_cost_vary_tiers_yn") == "1":
+        raise ValueError("inpatient cost sharing varies by provider tier; only tier 1 is handled")
+    n = int(r.get("pbp_b1a_copay_mcs_int_num_t1", "0") or 0) - 1
+    days = []
+    for i in range(1, n + 1):
+        amt = num(r.get(f"pbp_b1a_copay_mcs_amt_int{i}_t1"))
+        if amt:
+            days.append(f"{money(amt)} | {r[f'pbp_b1a_copay_mcs_bgnd_int{i}_t1']}-{r[f'pbp_b1a_copay_mcs_endd_int{i}_t1']}")
+    if days:
+        return "; ".join(days)
+    stay = num(r.get("pbp_b1a_copay_mcs_amt_t1"))
+    if stay:
+        return f"{money(stay)} per stay"
+    coins = r.get("pbp_b1a_coins_mcs_pct_t1")
+    if coins:
+        return pct(float(coins))
     return "$0" if r.get("pbp_b1a_copay_yn") == "1" else ""
 
 

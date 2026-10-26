@@ -21,3 +21,4 @@ H2056-003-0,L_xray_imaging,2,$350,SB,CAT scan and MRI $350 copay
 H2056-018-0,L_xray_imaging,2,$275,SB,CAT scan and MRI $275 copay
 H3817-008-1;H3817-009-1;H3817-011-1;H3817-010-0,L_xray_imaging,2,$300,SB,"Diagnostic radiology (MRI, CT, etc.)1 $300"
 H1372-003-0,L_xray_imaging,2,20%,SB,"Diagnostic radiology services (e.g., MRI, CAT scan) 20% coinsurance"
+H2001-045-0,H_inpatient,,"$0 or $1,980 per stay",SB,"you pay $0 copay per stay, or $1,980 copay per stay"

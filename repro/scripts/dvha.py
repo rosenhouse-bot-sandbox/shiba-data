@@ -1,7 +1,8 @@
 """Generates the DVHA sheet (dental, vision, hearing, alternative care) from the CMS PBP Benefits files.
 
 Usage: python3 -I dvha.py <plans.csv> <pbp_dir> <out.csv>
-Cells are terse summaries of mandatory supplemental benefits, in-network. Optional packages go in column E.
+Cells summarize in-network supplemental benefits. Optional packages go in column E.
+Column J also lists SSBCI and targeted (UF/VBID) benefits.
 """
 import csv
 import os
@@ -11,7 +12,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import pbp  # noqa: E402
 from main_chart import first, flag, money, num, pct, span  # noqa: E402
 
-DICTIONARY = None
+DICTIONARY = {}
 COMPREHENSIVE = {"rs": "restorative", "end": "endodontics", "peri": "periodontics", "prm": "removable prosthodontics",
                  "prf": "fixed prosthodontics", "impl": "implants", "omsg": "oral surgery", "orth": "orthodontics",
                  "ags": "adjunctive general services", "mxpr": "maxillofacial prosthetics"}
@@ -30,6 +31,8 @@ def costs(row, fields):
     """Min-max over copay fields ($) and coinsurance fields (%) present in row."""
     dollars = [num(row[f]) for f in fields if f in row and "copay" in f]
     pcts = [num(row[f]) for f in fields if f in row and "coins" in f]
+    if not any(dollars + pcts):
+        return "$0"
     out = []
     if dollars:
         out.append(span(min(dollars), max(dollars), money))
@@ -45,7 +48,7 @@ def mandatory(row, field):
 def dental(plan):
     s = "pbp_b16_dental"
     r = first(plan, s)
-    prev_fields = [k for k in r if k.startswith("pbp_b16b_co") and k.endswith(("_amt", "_amt_min", "_amt_max"))]
+    prev_fields = [k for k in r if k.startswith(("pbp_b16b_copay_", "pbp_b16b_coins_")) and not k.endswith("_yn")]
     has_prev = any(mandatory(r, k) for k in r if k.startswith("pbp_b16b_bendesc") and k.endswith("_amo"))
     comp = [code for code in COMPREHENSIVE if mandatory(r, f"pbp_b16c_bendesc_{code}_amo")]
     parts = []
@@ -129,7 +132,7 @@ def alt_care(plan):
 
 
 def extras(plan):
-    b7, b14, b10 = (first(plan, s) for s in ("pbp_b7_health_prof", "pbp_b14_preventive", "pbp_b10_amb_trans"))
+    b14, b10 = (first(plan, s) for s in ("pbp_b14_preventive", "pbp_b10_amb_trans"))
     b13 = first(plan, "pbp_b13_other_services")
     parts = []
     if "14c4" in b14.get("pbp_b14c_bendesc_ehc", ""):
@@ -140,11 +143,13 @@ def extras(plan):
         parts.append(f"Transportation{trips}")
     if mandatory(b13, "pbp_b13c_bendesc_amo"):
         parts.append("Meals")
-    if mandatory(b7, "pbp_b7f_bendesc_amo_rf"):
-        n = f" {b7['pbp_b7f_bendesc_amt_rf']}{per('pbp_b7_health_prof', b7, 'pbp_b7f_bendesc_per_rf')}" \
-            if b7.get("pbp_b7f_bendesc_amt_rf") else ""
-        cost = span(b7.get("pbp_b7f_copay_rf_amt_min"), b7.get("pbp_b7f_copay_rf_amt_max"), money) or "$0"
-        parts.append(f"Routine foot care {cost}{n}")
+    for stem, label in (("pbp_b7_health_prof", ""), ("pbp_b7_b19b_health_prof_vbid_uf", " (targeted)")):
+        foot = first(plan, stem)
+        if mandatory(foot, "pbp_b7f_bendesc_amo_rf"):
+            n = f" {foot['pbp_b7f_bendesc_amt_rf']}{per(stem, foot, 'pbp_b7f_bendesc_per_rf')}" \
+                if foot.get("pbp_b7f_bendesc_amt_rf") else ""
+            cost = span(foot.get("pbp_b7f_copay_rf_amt_min"), foot.get("pbp_b7f_copay_rf_amt_max"), money) or "$0"
+            parts.append(f"Routine foot care {cost}{n}{label}")
     if plan.get("pbp_b13i_b19b_services_vbid_ssbci") or plan.get("pbp_b13i_b19b_other_services_vbid_ssbci"):
         parts.append("SSBCI benefits for qualifying chronic conditions")
     for package in plan.get("pbp_b19b_model_test_vbid_uf", []):

@@ -1,9 +1,11 @@
 import os
+import re
 import sys
 import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "scripts"))
 import cite  # noqa: E402
+import dvha  # noqa: E402
 import fetch_docs  # noqa: E402
 import main_chart as mc  # noqa: E402
 import universe  # noqa: E402
@@ -70,9 +72,10 @@ class MainChartTest(unittest.TestCase):
 
 class DocumentTest(unittest.TestCase):
     def test_id_patterns_match_printed_forms(self):
-        for printed in ("H5439 | 015 | 000", "H1036153000EOC27", "H3817_008001EOC2027", "H2923-028-003"):
-            plan = {"H5439": "H5439-015-0", "H1036": "H1036-153-0", "H3817": "H3817-008-1", "H2923": "H2923-028-3"}[printed[:5]]
-            self.assertTrue(any(__import__("re").search(rx, printed) for rx in fetch_docs.id_patterns(plan)), printed)
+        cases = [("H5439-015-0", "H5439 | 015 | 000"), ("H1036-153-0", "H1036153000EOC27"),
+                 ("H3817-008-1", "H3817_008001EOC2027"), ("H2923-028-3", "H2923-028-003")]
+        for plan, printed in cases:
+            self.assertTrue(any(re.search(rx, printed) for rx in fetch_docs.id_patterns(plan)), printed)
 
     def test_naturopathy_ignores_exclusion_table(self):
         excluded = {1: "Naturopath services (uses natural or alternative treatments) Not covered under any condition"}
@@ -80,8 +83,41 @@ class DocumentTest(unittest.TestCase):
         self.assertEqual(cite.naturopathy_mentions(excluded), [])
         self.assertEqual(cite.naturopathy_mentions(covered)[0][0], 2)
 
+    def test_naturopathy_from_wellness_fund_is_a_judgment_call(self):
+        self.assertEqual(cite.naturopathy_dot("use your Wellness Bucks towards office visits to a Naturopath"), "◐")
+        self.assertEqual(cite.naturopathy_dot("$0 copay for naturopathy visits"), "●")
+
     def test_find_page_collapses_whitespace(self):
         self.assertEqual(cite.find_page({7: "MRI, CT, and PET $150 per visit"}, "MRI, CT,\nand PET  $150"), 7)
+
+
+class DvhaTest(unittest.TestCase):
+    def test_costs(self):
+        self.assertEqual(dvha.costs({"a_copay": "0.00", "a_coins": "0.00"}, ["a_copay", "a_coins"]), "$0")
+        self.assertEqual(dvha.costs({"a_copay": "10.00", "b_copay": "40.00", "a_coins": "50"},
+                                    ["a_copay", "b_copay", "a_coins"]), "$10-$40 or 50%")
+
+    def test_dental_names_narrow_comprehensive_scope(self):
+        plan = {"pbp_b16_dental": [{"pbp_b16b_bendesc_oe_amo": "2", "pbp_b16c_bendesc_ags_amo": "2"}]}
+        self.assertEqual(dvha.dental(plan), "PREV $0; COMP $0 (adjunctive general services only); no annual max")
+
+    def test_vision_per_item_allowance(self):
+        plan = {"pbp_b17_eye_exams_wear": [{"pbp_b17b_indv_maxplan_amt_egf": "100.00"}]}
+        self.assertEqual(dvha.vision(plan), "eyewear $100 per item type")
+
+    def test_targeted_foot_care(self):
+        plan = {"pbp_b7_b19b_health_prof_vbid_uf": [{"pbp_b7f_bendesc_amo_rf": "2", "pbp_b7f_bendesc_amt_rf": "6"}]}
+        self.assertEqual(dvha.extras(plan), "Routine foot care $0 6 (targeted)")
+
+    def test_worldwide_er_cap(self):
+        plan = {"pbp_b4_emerg_urgent": [{"pbp_b4c_bendesc_yn": "1", "pbp_b4c_copay_amt_wec_min": "0.00",
+                                         "pbp_b4c_wwc_maxplan_amt": "25000.00"}]}
+        self.assertEqual(dvha.alt_care(plan), "Worldwide ER $0, $25,000 max")
+
+    def test_optional_package(self):
+        plan = {"pbp_Section_D_opt": [{"pbp_d_opt_name": "MyOption DEN972", "pbp_d_amt_opt_premium": "52.10",
+                                       "pbp_d_opt_maxplan_ben_cov_amt": "1500.00"}]}
+        self.assertEqual(dvha.optional_packages(plan), "MyOption DEN972 $52.10/mo, max $1,500")
 
 
 if __name__ == "__main__":

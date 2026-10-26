@@ -25,6 +25,11 @@ def find_page(doc_pages, quote):
     return next((n for n, t in doc_pages.items() if q in t), None)
 
 
+def naturopathy_dot(context):
+    """A naturopathy benefit paid from a general wellness fund is a judgment call (◐)."""
+    return "◐" if re.search(r"wellness", context, re.I) else "●"
+
+
 def naturopathy_mentions(doc_pages):
     """Pages that mention naturopathy other than in an exclusions-table "not covered" entry."""
     found = []
@@ -52,8 +57,9 @@ def main(facts_csv, docs_csv, text_dir, out_csv):
         mentions = naturopathy_mentions(text[doc["text_file"]])
         if mentions:
             page, ctx = mentions[0]
+            value = naturopathy_dot(ctx)
             for plan in doc["plan_ids"].split(";"):
-                out.append(dict(plan_id=plan, column="U_naturopath", line="", value="●", kind=doc["kind"],
+                out.append(dict(plan_id=plan, column="U_naturopath", line="", value=value, kind=doc["kind"],
                                 url=doc["url"], pdf_page=page, quote=ctx))
     with open(out_csv, "w", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=list(out[0]))

@@ -17,4 +17,5 @@ py fetch_docs.py "$data/documents.csv" "$data/plans.csv" "$here/../SOURCES_MANIF
 py cite.py "$data/sb_facts.csv" "$data/documents_checked.csv" "$work/docs/text" "$data/citations.csv"
 py main_chart.py "$data/plans.csv" "$work/pbp" "$data/citations.csv" "$data/main_chart.csv" "$data/pbp_vs_documents.csv"
 py dvha.py "$data/plans.csv" "$work/pbp" "$data/dvha.csv"
+python3 -I "$here/tests/make_fixture.py" "$work/pbp"
 python3 -I -m unittest discover -s "$here/tests"
