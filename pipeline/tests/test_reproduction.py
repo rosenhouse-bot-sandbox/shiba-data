@@ -1,4 +1,4 @@
-"""Runs the generators on the Appendix B plans and checks the corrected 2027 values in CLAUDE_ANALYSIS_METHODS.md Appendix B.
+"""Runs the generators on the Appendix B plans and checks the corrected 2027 values in docs/2027-bootstrap/CLAUDE_ANALYSIS_METHODS.md Appendix B.
 
 fixtures/pbp_appendix_b.json.gz holds those plans' PBP rows. make_fixture.py regenerates it.
 """
@@ -10,12 +10,14 @@ import sys
 import unittest
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-DATA = os.path.join(HERE, "..", "data")
-sys.path.insert(0, os.path.join(HERE, "..", "scripts"))
+sys.path.insert(0, os.path.join(HERE, ".."))
 sys.path.insert(0, HERE)
 import dvha  # noqa: E402
 import main_chart as mc  # noqa: E402
+import years  # noqa: E402
 from appendix_b import DVHA_CASES, MAIN_CHART_CASES  # noqa: E402
+
+DATA = years.data_dir(2027)
 
 
 def rows(name):

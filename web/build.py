@@ -1,4 +1,4 @@
-"""Builds the plan documents release, its zip, or the static site from repro/data.
+"""Builds the plan documents release, its zip, or the static site from the live year's data.
 
 Usage:
   python3 -I web/build.py documents <out_dir>
@@ -8,6 +8,7 @@ Usage:
 import csv
 import datetime
 import hashlib
+import html
 import json
 import pathlib
 import re
@@ -17,7 +18,10 @@ import urllib.request
 import zipfile
 
 HERE = pathlib.Path(__file__).resolve().parent
-DATA = HERE.parent / "repro" / "data"
+sys.path.insert(0, str(HERE.parent / "pipeline"))
+import years  # noqa: E402
+
+DATA = years.data_dir()
 
 MAIN_LABELS = {
     "C_premium": "Premium",
@@ -90,6 +94,8 @@ def cell(value, cites, pbp, comment):
 
 
 def site_data(data_dir=DATA):
+    config = years.config(data_dir)
+    year = config["year"]
     checked = rows("documents_checked.csv", data_dir)
     doc_by_url = {d["url"]: d["sha256"][:16] for d in checked}
     docs = {d["sha256"][:16]: {
@@ -115,13 +121,13 @@ def site_data(data_dir=DATA):
         for key, cell_cites in sheet_cites.items():
             if any(docs[c["doc"]]["kind"] != "SB" for c in cell_cites):
                 sheet_cites[key] = [c for c in cell_cites if docs[c["doc"]]["kind"] != "SB"]
-    pbp = {sheet: {(r["plan_id"], r["column"]): r["pbp"] for r in rows(name, data_dir)}
-           for sheet, name in (("main", "pbp_vs_documents.csv"), ("dvha", "pbp_vs_documents_dvha.csv"))}
+    pbp = {kind: {(r["plan_id"], r["column"]): r["pbp"] for r in rows(name, data_dir)}
+           for kind, name in (("main", "pbp_vs_documents.csv"), ("dvha", "pbp_vs_documents_dvha.csv"))}
 
     plans = rows("plans.csv", data_dir)
     for p in plans:
         p["docs"] = [i for i, d in docs.items() if p["plan_id"] in d["plan_ids"]]
-        p["plan_finder_url"] = f"https://www.medicare.gov/plan-compare/#/plan-details/2027-{p['plan_id']}?year=2027&lang=en"
+        p["plan_finder_url"] = f"https://www.medicare.gov/plan-compare/#/plan-details/{year}-{p['plan_id']}?year={year}&lang=en"
     sheets = {"main": (rows("main_chart.csv", data_dir), MAIN_LABELS), "dvha": (rows("dvha.csv", data_dir), DVHA_LABELS)}
     comments = {"main": {}, "dvha": {}}
     for c in rows("comments.csv", data_dir):
@@ -140,6 +146,8 @@ def site_data(data_dir=DATA):
         comments[c["sheet"]][(c["plan_id"], c["column"])] = {
             "kind": c["kind"], "text": c["comment"], "doc": doc_by_url[c["url"]], "page": int(c["pdf_page"]), "quote": c["quote"]}
     return {
+        "year": year,
+        "area": " & ".join(config["counties"]),
         "plans": plans,
         "docs": docs,
         **{name: sheet(csv_rows, labels, cites[name], pbp[name], comments[name])
@@ -210,6 +218,13 @@ def zip_documents(release_dir, zip_path, data_dir=DATA):
                 z.write(pdf, zip_name(plan_id, name, checked[doc_id]["kind"]))
 
 
+def titled(index_html, site):
+    title = f"{site['year']} Medicare Advantage plans"
+    area = html.escape(site["area"])
+    return (index_html.replace("<title>Medicare Advantage plans</title>", f"<title>{title}: {area}</title>")
+            .replace("<h1>Medicare Advantage plans</h1>", f"<h1>{title} <span>{area}</span></h1>"))
+
+
 def main(command, out, release=None):
     if command == "zip":
         zip_documents(pathlib.Path(out), pathlib.Path(release))
@@ -222,6 +237,7 @@ def main(command, out, release=None):
             sys.exit("not a PDF:\n" + "\n".join(failed))
         return
     shutil.copytree(HERE / "static", out_dir, dirs_exist_ok=True)
+    (out_dir / "index.html").write_text(titled((HERE / "static" / "index.html").read_text(), site))
     if release:
         missing = attach_documents(site["docs"], pathlib.Path(release), out_dir)
         for doc_id in missing:

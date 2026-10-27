@@ -3,8 +3,6 @@ import csv
 import glob
 import os
 
-import openpyxl
-
 KEY = ("pbp_a_hnumber", "pbp_a_plan_identifier", "segment_id")
 
 
@@ -32,8 +30,14 @@ def load(pbp_dir, plan_ids):
     return out
 
 
-def load_dictionary(xlsx_path):
-    """Returns {(file, field): {"title": ..., "codes": {code: meaning}}}."""
+def load_dictionary(pbp_dir):
+    """Returns {(file, field): {"title": ..., "codes": {code: meaning}}} from the year's PBP_Benefits_<year>_dictionary.xlsx."""
+    pattern = os.path.join(pbp_dir, "PBP_Benefits_*_dictionary.xlsx")
+    found = glob.glob(pattern)
+    if len(found) != 1:
+        raise FileNotFoundError(f"Want one file matching {pattern}, found {found}")
+    import openpyxl
+    xlsx_path = found[0]
     ws = openpyxl.load_workbook(xlsx_path, read_only=True).worksheets[0]
     rows = ws.iter_rows(values_only=True)
     header = next(rows)

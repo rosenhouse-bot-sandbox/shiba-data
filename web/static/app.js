@@ -170,8 +170,8 @@ function openCell(plan, column, cell) {
   } else {
     const sb = plan.docs.find((d) => site.docs[d].kind === "SB");
     openDoc(sb, 1, null, el("div", {}, header, el("p", {},
-      cell.value ? "This value comes from the CMS 2027 Plan Benefit Package data, which has no page to point to. "
-        : "The CMS 2027 Plan Benefit Package data has no entry for this benefit. ",
+      cell.value ? `This value comes from the CMS ${site.year} Plan Benefit Package data, which has no page to point to. `
+        : `The CMS ${site.year} Plan Benefit Package data has no entry for this benefit. `,
       "The plan's Summary of Benefits is shown for reference."), el("p", {}, planFinderLink(plan))));
   }
 }

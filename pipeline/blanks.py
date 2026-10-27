@@ -7,7 +7,7 @@ where <documents> comes from `web/build.py documents` or the documents.tar relea
   blanks.py claims  <work> <dir> <claims.json>        answers whose quotes pass the mechanical checks
   blanks.py verify  <work> <claims.json> <vdir>       verifier task files <vdir>/v-NN.md, with decoys from cells plans fill
   blanks.py accept  <work> <vdir> <accepted.json>     claims the verifier accepted; fails if it accepted a decoy
-  blanks.py publish <accepted.json>                   appends the citations to repro/data/eoc_citations.csv
+  blanks.py publish <accepted.json>                   appends the citations to data/<year>/eoc_citations.csv
 
 Give each task file to a small model (a Haiku subagent): "Read <file> and do exactly the task it describes."
 It writes its answer where the file says: <dir>/a-<plan>.json or <vdir>/ans-NN.json.
@@ -18,6 +18,7 @@ import collections, csv, glob, io, json, os, pathlib, random, re, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(os.path.dirname(HERE), "web"))
+import years
 from eoc import DATA, Doc, eoc, norm
 from fields import FIELDS
 
@@ -91,7 +92,7 @@ def bundle(work, out_dir):
     names = {r["plan_id"]: r["plan_name"] for r in csv.DictReader(open(f"{DATA}/main_chart.csv"))}
     for plan, keys in sorted(uncited_blanks(cells()).items()):
         layout = Doc(work, plan).pages("layout")
-        head = fill("blank_prompt.md", PLAN_NAME=names[plan], PLAN_ID=plan,
+        head = fill("blank_prompt.md", PLAN_NAME=names[plan], PLAN_ID=plan, YEAR=str(years.config(DATA)["year"]),
                     ANSWER=os.path.abspath(f"{out_dir}/a-{plan}.json"),
                     CHECK=f"python3 -I {HERE}/quote_check.py {os.path.abspath(work)} {plan}")
         body = [f"### {k}\n\n{FIELDS[k][0]}\n\n{passages(layout, k)}" for k in sorted(keys)]

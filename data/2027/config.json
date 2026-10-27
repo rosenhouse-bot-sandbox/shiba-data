@@ -1,0 +1,8 @@
+{
+  "state": "OR",
+  "counties": ["Multnomah", "Clackamas"],
+  "landscape_zip": "https://www.cms.gov/files/zip/cy2027-landscape-202610.zip",
+  "landscape_csv": "CY2027_Landscape_202610/CY2027_Landscape_202610.csv",
+  "pbp_zip": "https://www.cms.gov/files/zip/pbp-benefits-2027.zip",
+  "baseline_manifest": "docs/2027-bootstrap/SOURCES_MANIFEST.json"
+}

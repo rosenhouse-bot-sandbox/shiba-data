@@ -15,16 +15,17 @@ from unittest import mock
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 import build  # noqa: E402
 
-DATA = pathlib.Path(__file__).resolve().parents[2] / "repro" / "data"
+DATA = build.years.data_dir(2027)
 
 
 EOC_HEADER = ["sheet", "plan_id", "column", "value", "url", "pdf_page", "quote"]
 
 
-def data_copy(tmp, eoc_rows):
-    """A copy of DATA whose eoc_citations.csv holds only eoc_rows."""
-    data = pathlib.Path(tmp)
-    for f in DATA.glob("*.csv"):
+def data_copy(tmp, eoc_rows, year=2027):
+    """A copy of DATA, as data for `year`, whose eoc_citations.csv holds only eoc_rows."""
+    data = pathlib.Path(tmp) / str(year)
+    data.mkdir()
+    for f in [*DATA.glob("*.csv"), DATA / "config.json"]:
         (data / f.name).write_bytes(f.read_bytes())
     with open(data / "eoc_citations.csv", "w", newline="") as f:
         csv.writer(f).writerows([EOC_HEADER, *eoc_rows])
@@ -133,6 +134,22 @@ class SiteDataTest(unittest.TestCase):
         plan = next(p for p in self.site["plans"] if p["plan_id"] == "H2923-028-3")
         self.assertEqual(plan["plan_finder_url"],
                          "https://www.medicare.gov/plan-compare/#/plan-details/2027-H2923-028-3?year=2027&lang=en")
+
+    def test_names_the_plan_year_and_counties(self):
+        self.assertEqual((self.site["year"], self.site["area"]), (2027, "Multnomah & Clackamas"))
+        with tempfile.TemporaryDirectory() as tmp:
+            data = data_copy(tmp, [], year=2099)
+            (data / "config.json").write_text(json.dumps({"counties": ["A", "B"]}))
+            site = build.site_data(data)
+        self.assertEqual((site["year"], site["area"]), (2099, "A & B"))
+        self.assertTrue(site["plans"][0]["plan_finder_url"].startswith(
+            "https://www.medicare.gov/plan-compare/#/plan-details/2099-"))
+
+    def test_titles_the_page_with_the_year_and_counties(self):
+        html = "<title>Medicare Advantage plans</title><h1>Medicare Advantage plans</h1>"
+        self.assertEqual(build.titled(html, {"year": 2099, "area": "A & B"}),
+                         "<title>2099 Medicare Advantage plans: A &amp; B</title>"
+                         "<h1>2099 Medicare Advantage plans <span>A &amp; B</span></h1>")
 
     def test_columns_have_labels(self):
         labels = {c["key"]: c["label"] for c in self.site["main"]["columns"]}
@@ -277,7 +294,7 @@ class DocumentsTest(unittest.TestCase):
 
     def test_site_command_attaches_release(self):
         build.save_documents(self.docs, self.dir / "release", "2026-10-27")
-        site = {"docs": {i: {"url": d["url"], "sha256": d["sha256"]} for i, d in self.docs.items()}}
+        site = {"docs": {i: {"url": d["url"], "sha256": d["sha256"]} for i, d in self.docs.items()}, "year": 2027, "area": "A"}
         out = io.StringIO()
         with mock.patch.object(build, "site_data", return_value=site), contextlib.redirect_stdout(out):
             build.main("site", self.dir / "site", self.dir / "release")
@@ -286,11 +303,12 @@ class DocumentsTest(unittest.TestCase):
         self.assertIn("::warning::", out.getvalue())
         self.assertIn("gone.pdf", out.getvalue())
 
-    def test_site_command_records_build_time(self):
-        with mock.patch.object(build, "site_data", return_value={"docs": {}}):
+    def test_site_command_records_build_time_and_titles_the_page(self):
+        with mock.patch.object(build, "site_data", return_value={"docs": {}, "year": 2099, "area": "A & B"}):
             build.main("site", self.dir / "site")
         built = datetime.datetime.fromisoformat(json.loads((self.dir / "site" / "data.json").read_text())["built"])
         self.assertLess(datetime.datetime.now(datetime.timezone.utc) - built, datetime.timedelta(minutes=1))
+        self.assertIn("<title>2099 Medicare Advantage plans: A &amp; B</title>", (self.dir / "site" / "index.html").read_text())
 
 
 class ZipTest(unittest.TestCase):

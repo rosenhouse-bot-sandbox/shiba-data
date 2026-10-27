@@ -2,7 +2,7 @@
 
 Usage: python3 -I main_chart.py <plans.csv> <pbp_dir> <citations.csv> <out.csv> <pbp_vs_documents.csv>
 Cells come from the PBP unless citations.csv (made by cite.py) supplies a quoted SB/EOC value.
-Each cell is in-network unless noted. Column conventions follow CLAUDE_ANALYSIS_METHODS.md section 6.5.
+Each cell is in-network unless noted. Column conventions follow docs/2027-bootstrap/CLAUDE_ANALYSIS_METHODS.md section 6.5.
 """
 import csv
 import os

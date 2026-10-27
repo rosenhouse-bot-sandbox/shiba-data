@@ -1,6 +1,6 @@
 """Downloads documents.csv URLs, extracts page text, checks cover identity, compares to the baseline manifest.
 
-Usage: python3 -I fetch_docs.py <documents.csv> <plans.csv> <SOURCES_MANIFEST.json> <cache_dir> <out.csv>
+Usage: python3 -I fetch_docs.py <documents.csv> <plans.csv> <cache_dir> <out.csv> <year> <county,county> [<baseline_manifest.json>]
 Text goes to <cache_dir>/text/<sha256[:16]>.txt with "=====PAGE n=====" delimiters (1-based PDF pages).
 """
 import csv
@@ -40,12 +40,12 @@ def short_name(plan_name):
     return re.sub(r"\s*\(.*$", "", plan_name).strip()
 
 
-def cover_check(text, plan_ids, kind, names):
+def cover_check(text, plan_ids, kind, names, year, counties):
     head = re.sub(r"\s+", " ", text[:8000])
     whole = re.sub(r"\s+", " ", text)
     problems = []
-    if "2027" not in head:
-        problems.append("no 2027 on first pages")
+    if str(year) not in head:
+        problems.append(f"no {year} on first pages")
     for p in plan_ids:
         if not any(re.search(rx, whole, re.I) for rx in id_patterns(p)):
             if short_name(names[p]).lower() in whole.lower():
@@ -54,7 +54,7 @@ def cover_check(text, plan_ids, kind, names):
                 problems.append(f"{p} not found")
     if kind in ("SB", "EOC") and doc_kind(text) != kind:
         problems.append(f"looks like {doc_kind(text)}")
-    for county in ("Multnomah", "Clackamas"):
+    for county in counties:
         if county not in whole:
             problems.append(f"{county} not mentioned")
     return problems
@@ -81,9 +81,10 @@ def compare(sha, url, by_sha, by_url):
     return "not in baseline", ""
 
 
-def main(docs_csv, plans_csv, manifest_path, cache, out_csv):
+def main(docs_csv, plans_csv, cache, out_csv, year, counties, manifest_path=None):
     names = {r["plan_id"]: r["plan_name"] for r in csv.DictReader(open(plans_csv))}
-    by_sha, by_url = baseline_index(json.load(open(manifest_path)))
+    counties = counties.split(",")
+    by_sha, by_url = baseline_index(json.load(open(manifest_path))) if manifest_path else ({}, {})
     os.makedirs(os.path.join(cache, "pdf"), exist_ok=True)
     os.makedirs(os.path.join(cache, "text"), exist_ok=True)
     results = []
@@ -105,7 +106,7 @@ def main(docs_csv, plans_csv, manifest_path, cache, out_csv):
         text = open(txt).read() if os.path.exists(txt) else ""
         ids = d["plan_ids"].split(";")
         row.update(sha256=sha, pages=text.count("=====PAGE "), text_file=os.path.basename(txt),
-                   cover_problems="; ".join(cover_check(text, ids, d["kind"], names)))
+                   cover_problems="; ".join(cover_check(text, ids, d["kind"], names, year, counties)))
         row["baseline"], row["baseline_file"] = compare(sha, d["url"], by_sha, by_url)
         row["plan_names"] = "; ".join(names[i] for i in ids)
         results.append(row)

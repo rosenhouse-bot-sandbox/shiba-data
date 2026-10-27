@@ -37,7 +37,7 @@ class SnippetsTest(unittest.TestCase):
 
 class FillTest(unittest.TestCase):
     def test_fills_every_placeholder(self):
-        for template, values in (("blank_prompt.md", ("PLAN_NAME", "PLAN_ID", "ANSWER", "CHECK")), ("vblank_prompt.md", ("ANSWER",))):
+        for template, values in (("blank_prompt.md", ("PLAN_NAME", "PLAN_ID", "YEAR", "ANSWER", "CHECK")), ("vblank_prompt.md", ("ANSWER",))):
             text = blanks.fill(template, **{k: "VALUE" for k in values})
             self.assertNotRegex(text, r"\{[A-Z_]+\}")
             self.assertIn("VALUE", text)
@@ -131,8 +131,8 @@ class ExclusionTest(unittest.TestCase):
 class PublishTest(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
-        self.data = pathlib.Path(self.tmp.name)
-        shutil.copytree(DATA, self.data, dirs_exist_ok=True)
+        self.data = pathlib.Path(self.tmp.name) / DATA.name
+        shutil.copytree(DATA, self.data)
         self.blank = next((plan, key) for key, by_plan in blanks.cells(self.data).items()
                           for plan, c in by_plan.items() if not c["value"].strip() and not c["cites"])
 
