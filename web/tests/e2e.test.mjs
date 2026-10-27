@@ -290,8 +290,11 @@ test("every citation's and comment's quote is highlighted in full on its page", 
           await shown(c.doc, c.page);
           // A re-issued PDF may have moved the quote; the viewer warns about it instead.
           if (site.docs[c.doc].changed) continue;
-          const marked = (await page.locator(".textLayer mark").allTextContents()).join("");
-          if (!squash(marked).includes(squash(c.quote))) wrong.push(`${sheet} ${r.plan_id} ${col} ${c.doc} p${c.page}`);
+          // Quotes running down neighbouring columns interleave in page order, so also join each column alone.
+          const marks = await page.$$eval(".textLayer mark", (ms) => ms.map((m) => [m.parentElement.style.left, m.textContent]));
+          const columns = Object.values(Object.groupBy(marks, ([left]) => left));
+          const joined = [marks, ...columns].map((ms) => squash(ms.map(([, t]) => t).join("")));
+          if (!joined.some((j) => j.includes(squash(c.quote)))) wrong.push(`${sheet} ${r.plan_id} ${col} ${c.doc} p${c.page}`);
         }
       }
     }
