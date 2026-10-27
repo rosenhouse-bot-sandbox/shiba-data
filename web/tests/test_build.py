@@ -83,6 +83,16 @@ class SiteDataTest(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, f"{plan_id} {column}"):
                     build.site_data(data)
 
+    def test_comment_page_reference_must_name_one_document_page(self):
+        url = "https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf"
+        for text in ("EOC page 9999 says so.", "Rider page 2 says so."):
+            with self.subTest(text=text), tempfile.TemporaryDirectory() as tmp:
+                data = data_copy(tmp, [])
+                (data / "comments.csv").write_text(
+                    f"sheet,plan_id,column,comment,url,pdf_page,quote\nmain,H6815-038-0,K_tests_labs,{text},{url},83,EKGs\n")
+                with self.assertRaisesRegex(ValueError, text.split(" says")[0]):
+                    build.site_data(data)
+
     def test_second_comment_on_a_cell_fails(self):
         with tempfile.TemporaryDirectory() as tmp:
             data = data_copy(tmp, [])

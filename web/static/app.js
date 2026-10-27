@@ -3,6 +3,7 @@ import { matchRanges } from "./highlight.js";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.worker.min.mjs";
 
+const SHEET_NAMES = { main: "Main chart", dvha: "Dental, vision, hearing & extras" };
 const SECTIONS = {
   "MA-PD": "Medicare Advantage with drug coverage",
   "NO-PART-D": "Medicare Advantage without drug coverage",
@@ -20,9 +21,14 @@ const el = (tag, attrs = {}, ...kids) => {
   return e;
 };
 
+// Keep in sync with PAGE_REF in web/build.py.
+const PAGE_REF = /\b(EOC|SB|rider) pages? (\d+)/gi;
+
 let site;
 let pageObserver;
 let plans;
+const scrollTops = {};
+let shownHash;
 
 async function start() {
   site = await (await fetch("data.json")).json();
@@ -48,11 +54,17 @@ async function start() {
 }
 
 function route() {
-  const [, view, id] = location.hash.split("/");
+  const [, view, id, col] = location.hash.split("/");
   document.querySelectorAll("nav a").forEach((a) => a.classList.toggle("active", a.dataset.view === (view || "main")));
   const content = $("#content");
-  content.replaceChildren(view === "plan" && plans[id] ? planPage(plans[id]) : sheetView(site[view === "dvha" ? "dvha" : "main"]));
-  content.scrollTop = 0;
+  if (shownHash !== undefined) scrollTops[shownHash] = content.scrollTop;
+  shownHash = location.hash;
+  if (view === "ambiguities") content.replaceChildren(ambiguitiesView());
+  else if (view === "plan" && plans[id]) content.replaceChildren(planPage(plans[id]));
+  else content.replaceChildren(sheetView(site[view === "dvha" ? "dvha" : "main"]));
+  content.scrollTop = scrollTops[location.hash] ?? 0;
+  markOpenPlans();
+  if (view !== "plan" && id) content.querySelector(`td[data-plan="${CSS.escape(id)}"][data-col="${CSS.escape(col ?? "")}"]`)?.click();
   if (view === "plan" && plans[id] && ($("#viewer").hidden || !site.docs[viewer.showing].plan_ids.includes(id))) {
     openDoc(plans[id].docs.find((d) => site.docs[d].kind === "SB"), 1, null, null);
   }
@@ -70,7 +82,7 @@ function sheetView(sheet) {
       body.append(el("tr", { class: "section" }, el("th", { colspan: sheet.columns.length + 1 }, SECTIONS[section] || section)));
     }
     const plan = plans[row.plan_id];
-    body.append(el("tr", {},
+    body.append(el("tr", { "data-plan": row.plan_id },
       el("th", { class: "plan" }, el("a", { href: `#/plan/${row.plan_id}` }, plan.plan_name), el("small", {}, row.plan_id)),
       ...sheet.columns.map((c) => valueCell(plan, c, row.cells[c.key]))));
   }
@@ -80,6 +92,8 @@ function sheetView(sheet) {
 
 function valueCell(plan, column, cell) {
   const td = el("td", {
+    "data-plan": plan.plan_id,
+    "data-col": column.key,
     class: [cell.cites.length ? "cited" : "", cell.comment ? "commented" : "", /^[●◐]$/.test(cell.value) ? "dot" : ""].join(" "),
     title: cell.comment?.text || (cell.cites.length ? "Click to see the plan document page" : "From CMS plan data. Click to open the plan's Summary of Benefits."),
     onclick: () => {
@@ -93,20 +107,52 @@ function valueCell(plan, column, cell) {
   return td;
 }
 
+const cellHeader = (plan, column, cell) => el("div", {}, el("b", {}, `${plan.plan_name}: ${column.label} = ${oneLine(cell.value)}`),
+  cell.comment ? el("p", { class: "comment" }, ...commentText(plan, column, cell)) : null);
+
+// Links each "EOC page N" in a comment to page N of the plan's document of that kind.
+function commentText(plan, column, cell) {
+  const { text } = cell.comment;
+  const parts = [];
+  let at = 0;
+  for (const ref of text.matchAll(PAGE_REF)) {
+    const doc = plan.docs.find((d) => site.docs[d].kind === ref[1].toUpperCase());
+    parts.push(text.slice(at, ref.index), el("a", {
+      href: "#",
+      onclick: (e) => {
+        e.preventDefault();
+        const note = e.target.closest("#source-note") ? $("#source-note").firstElementChild : el("div", {}, cellHeader(plan, column, cell));
+        openDoc(doc, Number(ref[2]), null, note);
+      },
+    }, ref[0]));
+    at = ref.index + ref[0].length;
+  }
+  parts.push(text.slice(at));
+  return parts;
+}
+
+const commentSource = (cell, note) => {
+  const { doc, page, quote } = cell.comment;
+  return el("p", { class: "comment-source" }, "Comment source: ",
+    el("a", { href: "#", onclick: (e) => { e.preventDefault(); openDoc(doc, page, quote, note); } }, `${site.docs[doc].kind} page ${page}`),
+    `: “${quote}”`);
+};
+
+function openComment(plan, column, cell) {
+  const note = el("div", {}, cellHeader(plan, column, cell));
+  note.append(commentSource(cell, note), el("p", {}, planFinderLink(plan)));
+  openDoc(cell.comment.doc, cell.comment.page, cell.comment.quote, note);
+}
+
 function openCell(plan, column, cell) {
-  const header = el("div", {}, el("b", {}, `${plan.plan_name}: ${column.label} = ${oneLine(cell.value)}`),
-    cell.comment ? el("p", { class: "comment" }, cell.comment.text) : null);
+  const header = cellHeader(plan, column, cell);
   if (cell.cites.length) {
     const cite = cell.cites[0];
     const note = citeNote(header, cell);
     note.append(el("p", {}, planFinderLink(plan)));
     openDoc(cite.doc, cite.page, cite.quote, note);
   } else if (cell.comment) {
-    const { doc, page, quote } = cell.comment;
-    const note = el("div", {}, header);
-    note.append(el("p", {}, el("a", { href: "#", onclick: (e) => { e.preventDefault(); openDoc(doc, page, quote, note); } },
-      `${site.docs[doc].kind} page ${page}`)), el("p", {}, planFinderLink(plan)));
-    openDoc(doc, page, quote, note);
+    openComment(plan, column, cell);
   } else {
     const sb = plan.docs.find((d) => site.docs[d].kind === "SB");
     openDoc(sb, 1, null, el("div", {}, header, el("p", {},
@@ -124,16 +170,41 @@ function citeNote(header, cell) {
   const note = el("div", {}, header);
   cell.cites.forEach((c, i) => {
     const doc = site.docs[c.doc];
-    note.append(el("p", {},
+    note.append(el("p", { class: "cite" },
       el("a", { href: "#", onclick: (e) => { e.preventDefault(); openDoc(c.doc, c.page, c.quote, note); } },
         `${doc.kind} page ${c.page}`),
       c.line ? ` (line ${c.line})` : "", `: “${c.quote}”`));
   });
+  if (cell.comment) note.append(commentSource(cell, note));
   if (cell.pbp != null) {
     note.append(el("p", { class: "pbp" }, cell.pbp ? `CMS plan data says “${oneLine(cell.pbp)}”. The plan document overrides it.`
       : "CMS plan data leaves this blank. The plan document fills it in."));
   }
   return note;
+}
+
+function ambiguitiesView() {
+  const rows = Object.keys(SHEET_NAMES).flatMap((sheet) => site[sheet].rows.flatMap((r) =>
+    site[sheet].columns.filter((c) => r.cells[c.key].comment).map((c) => ambiguityRow(sheet, plans[r.plan_id], c, r.cells[c.key]))));
+  return el("div", { class: "ambiguities-page" }, el("h2", {}, "Ambiguities"),
+    el("table", { class: "sheet ambiguities" },
+      el("thead", {}, el("tr", {}, ...["Plan", "Benefit", "Value", "Comment", "Links"].map((h) => el("th", {}, h)))),
+      el("tbody", {}, ...rows)));
+}
+
+function ambiguityRow(sheet, plan, column, cell) {
+  const { doc, page } = cell.comment;
+  const cellHash = `#/${sheet}/${plan.plan_id}/${column.key}`;
+  return el("tr", { "data-plan": plan.plan_id },
+    el("th", {}, el("a", { href: `#/plan/${plan.plan_id}` }, plan.plan_name), el("small", {}, plan.plan_id)),
+    el("td", { class: "text" }, column.label),
+    valueCell(plan, column, cell),
+    el("td", { class: "text comment-text" }, ...commentText(plan, column, cell)),
+    el("td", { class: "text links" },
+      el("a", { href: "#", onclick: (e) => { e.preventDefault(); openComment(plan, column, cell); } }, `${site.docs[doc].kind} page ${page}`),
+      el("br"),
+      el("a", { href: cellHash, onclick: (e) => { if (location.hash === cellHash) { e.preventDefault(); route(); } } },
+        `Show in ${SHEET_NAMES[sheet]}`)));
 }
 
 function planPage(plan) {
@@ -156,8 +227,7 @@ function planPage(plan) {
     el("h2", {}, plan.plan_name),
     el("dl", {}, ...facts.flatMap(([k, v]) => [el("dt", {}, k), el("dd", {}, v)])),
     el("h3", {}, "Plan documents"), el("table", { class: "docs" }, el("tbody", {}, ...docRows)),
-    benefitTable("Main chart", site.main, plan),
-    benefitTable("Dental, vision, hearing & extras", site.dvha, plan));
+    ...Object.keys(SHEET_NAMES).map((sheet) => benefitTable(SHEET_NAMES[sheet], site[sheet], plan)));
 }
 
 function benefitTable(title, sheet, plan) {
@@ -176,6 +246,7 @@ async function openDoc(docId, page, quote, note) {
   const doc = site.docs[docId];
   viewer.showing = docId;
   $("#viewer").hidden = false;
+  markOpenPlans();
   $("#doc-title").textContent = `${kindName(doc.kind)} · ${doc.plan_ids.map((p) => plans[p]?.plan_name || p).join("; ")}`;
   $("#doc-source").href = doc.url;
   $("#source-note").replaceChildren(...[note, doc.changed ? el("p", { class: "warn" },
@@ -324,6 +395,12 @@ function markPage(holder) {
 function closeViewer() {
   $("#viewer").hidden = true;
   document.querySelectorAll(".selected").forEach((s) => s.classList.remove("selected"));
+  markOpenPlans();
+}
+
+function markOpenPlans() {
+  const open = $("#viewer").hidden || !viewer.showing ? [] : site.docs[viewer.showing].plan_ids;
+  document.querySelectorAll("tr[data-plan]").forEach((tr) => tr.classList.toggle("open-plan", open.includes(tr.dataset.plan)));
 }
 
 function highlight(divs, items, quote) {

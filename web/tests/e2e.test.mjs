@@ -97,7 +97,7 @@ test("only pages near the view keep a canvas", async () => {
 test("resizing keeps the cited quote in view", async () => {
   await page.goto(`${base}#/main`);
   await row("H2923-009-0").locator("td").nth(site.main.columns.findIndex((c) => c.key === "U_naturopath")).click();
-  await page.locator("#source-note a", { hasText: "EOC" }).click();
+  await page.locator("#source-note p.cite a", { hasText: "EOC" }).click();
   await shown(docOf("H2923-009-0", "EOC"), 71);
   await page.setViewportSize({ width: 1600, height: 600 });
   await page.waitForTimeout(1500);
@@ -151,6 +151,72 @@ test("the page has no plan dropdown, citation corners or footer", async () => {
   assert.equal(corner, "none");
 });
 
+const allCells = (sheet) => site[sheet].rows.flatMap((r) => Object.entries(r.cells).map(([col, cell]) => ({ plan_id: r.plan_id, col, cell })));
+const cellTd = (planId, col) => page.locator(`table.sheet td[data-plan="${planId}"][data-col="${col}"]`);
+
+test("Ambiguities lists every comment with links to its document page and cell", async () => {
+  const comments = ["main", "dvha"].flatMap(allCells).filter(({ cell }) => cell.comment);
+  await page.goto(`${base}#/main`);
+  await page.click("nav a[data-view=ambiguities]");
+  const rows = page.locator("table.ambiguities tbody tr");
+  await rows.first().waitFor();
+  assert.equal(await rows.count(), comments.length);
+  const wellcare = rows.filter({ has: page.locator('td[data-plan="H6815-038-0"][data-col="K_tests_labs"]') });
+  assert.match(await wellcare.textContent(), /EKGs/);
+  await wellcare.locator("td.links a", { hasText: "EOC page 83" }).click();
+  await shown(docOf("H6815-038-0", "EOC"), 83);
+  await wellcare.locator("td.links a", { hasText: "Show in Main chart" }).click();
+  await page.waitForSelector("table.sheet td.selected");
+  assert.match(await cellTd("H6815-038-0", "K_tests_labs").getAttribute("class"), /selected/);
+});
+
+test("going back to Ambiguities keeps the scroll position", async () => {
+  await page.goto(`${base}#/ambiguities`);
+  const target = page.locator("table.ambiguities tbody tr").nth(60);
+  await target.scrollIntoViewIfNeeded();
+  const before = await page.$eval("#content", (c) => c.scrollTop);
+  assert.ok(before > 0);
+  await target.locator("td.links a", { hasText: "Show in" }).click();
+  await page.waitForSelector("table.sheet td.selected");
+  await page.goBack();
+  await page.waitForSelector("table.ambiguities");
+  assert.equal(await page.$eval("#content", (c) => c.scrollTop), before);
+});
+
+test("a cited cell's note links to its comment's page", async () => {
+  const { plan_id, col, cell } = allCells("main").find(({ cell }) => cell.cites.length && cell.comment);
+  await page.goto(`${base}#/main`);
+  await cellTd(plan_id, col).click();
+  await page.$eval("#page-area", (area) => delete area.dataset.shown);
+  await page.locator("#source-note p.comment-source a").click();
+  await shown(cell.comment.doc, cell.comment.page);
+});
+
+test("page references in comment text open that page", async () => {
+  const fresh = await browser.newPage({ viewport: { width: 1600, height: 1000 } });
+  await fresh.route("**/data.json", (route) => {
+    const edited = structuredClone(site);
+    edited.main.rows.find((r) => r.plan_id === "H6815-038-0").cells.K_tests_labs.comment.text = "See EOC page 82 for EKGs.";
+    route.fulfill({ json: edited });
+  });
+  await fresh.goto(`${base}#/main`);
+  await fresh.locator('table.sheet td[data-plan="H6815-038-0"][data-col="K_tests_labs"]').click();
+  await fresh.waitForSelector(`#page-area[data-shown="${docOf("H6815-038-0", "EOC")} 83"]`);
+  await fresh.locator("#source-note .comment a", { hasText: "EOC page 82" }).click();
+  await fresh.waitForSelector(`#page-area[data-shown="${docOf("H6815-038-0", "EOC")} 82"]`);
+  await fresh.close();
+});
+
+test("the open document's plan row is highlighted until the viewer closes", async () => {
+  await page.goto(`${base}#/main`);
+  const sb = docOf("H3805-048-0", "SB");
+  await row("H3805-048-0").locator(UNCITED).first().click();
+  await shown(sb, 1);
+  assert.deepEqual((await page.locator("table.sheet tr.open-plan small").allTextContents()).sort(), [...site.docs[sb].plan_ids].sort());
+  await page.click("#close");
+  assert.equal(await page.locator("tr.open-plan").count(), 0);
+});
+
 test("plan page lists the plan's documents", async () => {
   await page.goto(`${base}#/plan/H2001-045-0`);
   const docs = await page.locator("table.docs").textContent();
@@ -172,7 +238,7 @@ test("every citation's and comment's quote is highlighted in full on its page", 
           if (i) {
             // Two cites can share a page, so clear the marker before the next render sets it.
             await page.$eval("#page-area", (area) => delete area.dataset.shown);
-            await page.locator("#source-note a").nth(i).click();
+            await page.locator("#source-note p.cite a").nth(i).click();
           }
           await shown(c.doc, c.page);
           // A re-issued PDF may have moved the quote; the viewer warns about it instead.
