@@ -70,11 +70,12 @@ class SiteDataTest(unittest.TestCase):
         self.assertIn("EKG", cell["comment"])
 
     def test_comment_on_unknown_cell_fails(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            data = data_copy(tmp, [])
-            (data / "comments.csv").write_text("sheet,plan_id,column,comment\nmain,H6815-038-0,K_tests,typo\n")
-            with self.assertRaisesRegex(ValueError, "K_tests"):
-                build.site_data(data)
+        for plan_id, column in (("H6815-038-0", "K_tests"), ("H6815-999-0", "K_tests_labs")):
+            with self.subTest(plan_id=plan_id, column=column), tempfile.TemporaryDirectory() as tmp:
+                data = data_copy(tmp, [])
+                (data / "comments.csv").write_text(f"sheet,plan_id,column,comment\nmain,{plan_id},{column},typo\n")
+                with self.assertRaisesRegex(ValueError, f"{plan_id} {column}"):
+                    build.site_data(data)
 
     def test_every_plan_has_an_sb(self):
         for p in self.site["plans"]:

@@ -1,2 +1,2 @@
 sheet,plan_id,column,comment
-main,H6815-038-0,K_tests_labs,"EOC page 83 lists EKGs with CT, MRI and PET scans as diagnostic non-laboratory tests: $200 in an office or freestanding facility, $500 in an outpatient hospital. This cell keeps the CMS data's range for diagnostic tests, which is a judgment call."
+main,H6815-038-0,K_tests_labs,"EOC page 82 (PDF page 83) groups EKGs with CT, MRI and PET scans as diagnostic non-lab tests, after the deductible. They cost $200 in a physician office or freestanding facility. Diagnostic radiology in an outpatient setting costs $500. Labs cost $0, or $50 for genetic tests. This cell keeps the CMS data's 0%-20%/$0-$50, which is a judgment call."

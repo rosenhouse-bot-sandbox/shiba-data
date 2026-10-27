@@ -40,7 +40,7 @@ td.dot { text-align: center; }
 td.cited { position: relative; }
 td.commented { background: var(--comment); }
 td.cited::after { content: ""; position: absolute; top: 0; right: 0; border: 5px solid transparent; border-top-color: var(--accent); border-right-color: var(--accent); }
-td.selected { outline: 3px solid var(--accent); outline-offset: -3px; }
+td.selected { outline: 3px solid var(--ink); outline-offset: -3px; }
 
 .plan-page { padding: 8px 16px 24px; max-width: 900px; }
 .plan-page h2 { margin: 8px 0; }
