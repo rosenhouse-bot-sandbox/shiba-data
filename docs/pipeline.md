@@ -46,23 +46,10 @@ flowchart TB
   facts & checked --> cite --> citations
   cms & plans & citations --> gen --> sheets
 
-  subgraph xref [EOC/SB cross-reference, run outside the repo]
-    retrieve[Extract text; retrieve pages per field]:::det
-    extract[Blind extract with quotes]:::cheap
-    validate[Quote and amount checks;<br>compare with cell]:::det
-    second[Second pass on uncited cells:<br>cite or explain]:::heavy
-    recheck[Quote and amount checks]:::det
-    verify[Two verifiers:<br>Sonnet and Opus]:::heavy
-    assemble[Drop decoys; pick lead quote]:::det
-    write[Recheck comments]:::heavy
-  end
+  extract[Read each EOC and SB blind;<br>quote values]:::cheap
+  verify[Verify citations;<br>write comments]:::heavy
 
-  tar & sheets --> retrieve --> extract --> validate
-  validate -- agree --> verify
-  validate -- no citation --> second --> recheck --> verify --> assemble --> eoccites
-  citations --> assemble
-  second -- EOC complicates cell --> write --> comments
-  write -- EOC contradicts cell --> facts
+  tar & sheets --> extract --> verify --> eoccites & comments
 
   docwf[Documents workflow, manual:<br>build.py documents]:::det
   sitewf[Site workflow:<br>tests, build.py site,<br>deploy from main]:::det
@@ -80,5 +67,4 @@ flowchart TB
 | Red | Heavier model (Sonnet or Opus), or an agent with a browser |
 
 - Steps in `repro/run.sh` regenerate every CSV above except `documents.csv`, `sb_facts.csv`, `eoc_citations.csv` and `comments.csv`. Models write those four.
-- The cross-reference scripts are not in the repo. Issue #8 describes them. The models ran as Claude Code subagents, not through the API.
 - The Site workflow downloads PDFs from carriers only when no documents release exists.
