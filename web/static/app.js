@@ -168,6 +168,7 @@ const oneLine = (value) => value.split(" | ").join("; ");
 
 function citeNote(header, cell) {
   const note = el("div", {}, header);
+  if (!cell.value) note.append(el("p", {}, "The plan document shows the plan does not cover this as a routine benefit:"));
   cell.cites.forEach((c, i) => {
     const doc = site.docs[c.doc];
     note.append(el("p", { class: "cite" },
