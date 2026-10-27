@@ -29,9 +29,9 @@ DVHA_CASES = [
     ("1", "H6815-038-0", "F_dental", "COMP $0 (adjunctive general services only)"),
     ("1", "H5439-015-0", "F_dental", "COMP $0 (adjunctive general services only)"),
     ("2", "H9003-006-0", "G_vision", "eyewear $100/two years"),
-    ("6", "H3817-008-1", "J_extra_benefits", "Routine Podiatry"),
-    ("6", "H3817-009-1", "J_extra_benefits", "Routine Podiatry"),
-    ("6", "H3817-011-1", "J_extra_benefits", "Routine Podiatry"),
+    ("6", "H3817-008-1", "J_extra_benefits", "Routine foot care $0 6/year"),
+    ("6", "H3817-009-1", "J_extra_benefits", "Routine foot care $0 6/year"),
+    ("6", "H3817-011-1", "J_extra_benefits", "Routine foot care $0 6/year"),
     ("7", "H5216-048-0", "E_optional_packages", "MyOption DEN972 $52.10/mo, max $1,500"),
 ] + [("3", p, "I_alt_care_otc_travel", "$25,000 max") for p in
      ("H2923-001-0", "H2923-028-3", "H2923-025-0", "H2923-005-0", "H7199-002-0", "H2923-019-0", "H2923-009-0")]
