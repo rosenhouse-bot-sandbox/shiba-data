@@ -67,4 +67,5 @@ flowchart TB
 | Red | Heavier model (Sonnet or Opus), or an agent with a browser |
 
 - Steps in `pipeline/run.py` regenerate every CSV above except `documents.csv`, `sb_facts.csv`, `eoc_citations.csv` and `comments.csv`. Models write those four.
+- `pipeline/eval.py <year> [<machine.csv>]` scores machine-written cells against the live data.
 - The Site workflow downloads PDFs from carriers only when no documents release exists.
