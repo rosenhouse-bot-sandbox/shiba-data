@@ -13,7 +13,7 @@ Say `true` only if all of these hold:
 - Each quote is about the service the field names, not a neighboring row, a different setting, or a different service.
 - The amounts apply to this plan. Some EOCs list several plans side by side.
 - The amounts are in-network unless the field says otherwise.
-- Every number in the value is shown by the quotes, read in context. For a range, both ends belong to services the field covers.
+- The quotes, read in context, show every part of the value: each amount, number and list item. For a range, both ends belong to services the field covers.
 - For a dot (● or ◐), the quote shows the plan covers that routine benefit. A Medicare-covered benefit, an exclusion, or a benefit that comes only with an optional paid package does not count. ◐ needs the benefit paid from a general allowance or wellness fund; ● needs it covered on its own.
 - No part of the value contradicts the page.
 

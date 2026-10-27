@@ -1,4 +1,5 @@
 import contextlib, csv, io, json, os, pathlib, random, shutil, sys, tempfile, unittest
+from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import filled
@@ -15,10 +16,31 @@ def ok_unless_bad(page, quote):
     return "bad" not in quote
 
 
+def fake_work(root, plan, page_text):
+    """A texts.py work directory whose EOC for the plan has one page, read as running text."""
+    work = pathlib.Path(root, "work")
+    for sub in ("text", "layout", "items"):
+        (work / sub).mkdir(parents=True, exist_ok=True)
+    doc = eoc(plan)[0]
+    for sub in ("text", "layout"):
+        (work / sub / f"{doc}.txt").write_text(f"=====PAGE 1=====\n{page_text}\n")
+    (work / "items" / f"{doc}.json").write_text(json.dumps({"1": {"strs": [page_text], "lefts": [0]}}))
+    return work
+
+
+def quiet(f, *args):
+    with contextlib.redirect_stdout(io.StringIO()):
+        return f(*args)
+
+
 class MoneyTest(unittest.TestCase):
     def test_reads_amounts_and_percentages_with_zero_percent_as_zero_dollars(self):
-        self.assertEqual(filled.money("max $1,500.00/year; COMP 20%; PREV 0%; 3 visits; $12.50"),
+        self.assertEqual(filled.money("max $1,500.00/year; COMP 20.0%; PREV 0%; 3 visits; $12.50"),
                          {"$1500", "20%", "$0", "$12.50"})
+
+    def test_numbers_counts_every_number(self):
+        self.assertEqual(filled.numbers("$0/$0; days 1-5; tiers 1,2; 1,000 rides"),
+                         {"$0": 2, "1": 2, "5": 1, "2": 1, "1000": 1})
 
 
 class TargetsTest(unittest.TestCase):
@@ -58,16 +80,29 @@ class ProblemTest(unittest.TestCase):
 
     def test_names_quotes_that_fail_the_check(self):
         got = filled.problem("main.G_specialist", "$40", [cite(4, "$40 copay"), cite(5, "bad $40")], ok_unless_bad)
-        self.assertEqual(got, 'not once on its page as running text or down one column: page 5 "bad $40"')
+        self.assertEqual(got, 'not found exactly once on its page as running text or down one column: page 5 "bad $40"')
 
     def test_names_amounts_no_quote_shows(self):
         got = filled.problem("main.G_specialist", "$40 | $80", [cite(4, "$40 copay")], ok_unless_bad)
         self.assertEqual(got, "no quote shows $80")
 
-    def test_a_dot_needs_a_quote_that_names_the_benefit(self):
-        self.assertEqual(filled.problem("main.V_massage", "●", [cite(4, "Covered")], ok_unless_bad),
-                         "no quote names the benefit")
-        self.assertIsNone(filled.problem("main.V_massage", "●", [cite(4, "Massage therapy covered")], ok_unless_bad))
+    def test_quotes_show_each_number_as_often_as_the_value(self):
+        def why(key, value, *quotes):
+            return filled.problem(key, value, [cite(4, q) for q in quotes], ok_unless_bad)
+
+        self.assertEqual(why("main.H_inpatient", "$395 | 1-5", "$395 per day for days 1-7"), "no quote shows 5")
+        self.assertEqual(why("main.K_tests_labs", "$0/$0", "$0 copay for lab services"), "no quote shows $0 2 times")
+        self.assertIsNone(why("main.K_tests_labs", "$0/$0", "$0 copay for lab services", "$0 copay for diagnostic tests"))
+
+    def test_a_dot_needs_a_quote_that_names_the_benefit_as_covered_routine_care(self):
+        why = "no quote names the benefit without saying it is excluded, Medicare-covered or optional"
+        for dot in filled.DOTS:
+            for quote in ("Covered", "Routine dental care is not covered.", "Medicare-covered dental services",
+                          "Optional supplemental dental package"):
+                self.assertEqual(filled.problem("main.R_dental", dot, [cite(4, quote)], ok_unless_bad), why, quote)
+            for quote in ("Routine dental cleanings", "non-Medicare covered routine dental services",
+                          "Dental care not covered by Original Medicare, up to 2 visits a year"):
+                self.assertIsNone(filled.problem("main.R_dental", dot, [cite(4, "Covered"), cite(5, quote)], ok_unless_bad), quote)
 
     def test_needs_a_quote(self):
         self.assertEqual(filled.problem("main.V_massage", "●", [], ok_unless_bad), "no quotes")
@@ -75,18 +110,28 @@ class ProblemTest(unittest.TestCase):
 
 class GateTest(unittest.TestCase):
     def test_splits_cite_answers_into_claims_and_failures(self):
-        values = {"main.G_specialist": "$40", "main.V_massage": "●"}
+        values = {"main.G_specialist": "$40", "main.F_primary_care": "$0", "main.V_massage": "●"}
         answers = [
             {"key": "main.G_specialist", "result": "cite", "citations": [{"page": "4", "quote": "Specialist $40"}]},
             {"key": "main.V_massage", "result": "cite", "citations": [{"page": 6, "quote": "bad massage"}]},
             {"key": "main.W_fitness", "result": "cite", "citations": [{"page": 6, "quote": "Fitness"}]},
-            {"key": "main.G_specialist", "result": "skip"},
+            {"key": "main.F_primary_care", "result": "skip"},
         ]
         claims, failed = filled.gate(PLAN, values, answers, ok_unless_bad)
         self.assertEqual(claims, [{"plan": PLAN, "key": "main.G_specialist", "value": "$40",
                                    "citations": [cite(4, "Specialist $40")]}])
         self.assertEqual(failed, {"main.V_massage": ([cite(6, "bad massage")],
-                                                     'not once on its page as running text or down one column: page 6 "bad massage"')})
+                                                     'not found exactly once on its page as running text or down one column: page 6 "bad massage"')})
+
+    def test_ignores_a_cell_answered_twice(self):
+        answer = {"key": "main.G_specialist", "result": "cite", "citations": [cite(4, "Specialist $40")]}
+        self.assertEqual(filled.gate(PLAN, {"main.G_specialist": "$40"}, [answer, answer], ok_unless_bad), ([], {}))
+
+    def test_fails_a_citation_without_one_page_number_and_a_quote(self):
+        for bad in ({"page": "4-5", "quote": "Specialist $40"}, {"page": 4, "quote": None}, {"page": 4}):
+            answers = [{"key": "main.G_specialist", "result": "cite", "citations": [bad]}]
+            self.assertEqual(filled.gate(PLAN, {"main.G_specialist": "$40"}, answers, ok_unless_bad),
+                             ([], {"main.G_specialist": ([bad], "each citation needs one page number and a quote")}))
 
 
 class AnswersTest(unittest.TestCase):
@@ -105,21 +150,14 @@ class ClaimsTest(unittest.TestCase):
                                 for p, c in sorted(values.items()) if sum(bool(filled.money(v)) for v in c.values()) > 1)
         quote = f"Cell one {one[1]}"
         with tempfile.TemporaryDirectory() as tmp:
-            work, answers = pathlib.Path(tmp, "work"), pathlib.Path(tmp, "answers")
-            for sub in ("text", "layout", "items", "answers"):
-                (work / sub).mkdir(parents=True)
+            work, answers = fake_work(tmp, plan, quote), pathlib.Path(tmp, "answers")
             answers.mkdir()
-            doc = eoc(plan)[0]
-            for sub in ("text", "layout"):
-                (work / sub / f"{doc}.txt").write_text(f"=====PAGE 1=====\n{quote}\n")
-            (work / "items" / f"{doc}.json").write_text(json.dumps({"1": {"strs": [quote], "lefts": [0]}}))
             (answers / f"a-{plan}.json").write_text(json.dumps([
                 {"key": one[0], "result": "cite", "citations": [cite(1, quote)]},
                 {"key": two[0], "result": "cite", "citations": [cite(1, "Missing text")]}]))
 
             def run():
-                with contextlib.redirect_stdout(io.StringIO()):
-                    filled.claims(str(work), str(answers), str(answers / "claims.json"))
+                quiet(filled.claims, str(work), str(answers), str(answers / "claims.json"))
                 return [c["key"] for c in filled.load(answers / "claims.json")]
 
             self.assertEqual(run(), [one[0]])
@@ -127,11 +165,29 @@ class ClaimsTest(unittest.TestCase):
             self.assertEqual(retry.count("\n### "), 1)
             self.assertIn(f"### {two[0]}", retry)
             self.assertIn(f"{answers}/r-{plan}.json", retry)
+            self.assertIn('Earlier quotes: [{"page": 1, "quote": "Missing text"}]', retry)
             (answers / f"{plan}.retry.md").unlink()
             (answers / f"r-{plan}.json").write_text(json.dumps([
                 {"key": two[0], "result": "cite", "citations": [cite(1, "Still missing")]}]))
             self.assertEqual(run(), [one[0]])
             self.assertFalse((answers / f"{plan}.retry.md").exists())
+
+
+class BundleTest(unittest.TestCase):
+    def test_writes_one_task_per_plan_for_the_cells_asked_for(self):
+        for every, want in (("", False), ("every", True)):
+            with tempfile.TemporaryDirectory() as tmp, \
+                    mock.patch.object(filled, "targets", return_value={PLAN: {"main.G_specialist": "$40"}}) as targets:
+                filled.bundle(str(fake_work(tmp, PLAN, "Specialist $40")), f"{tmp}/out", every)
+                self.assertEqual(targets.call_args.args[1], want)
+                task = pathlib.Path(tmp, "out", f"{PLAN}.md").read_text()
+            self.assertIn(f"({PLAN}), plan year {filled.years.config(DATA)['year']}.", task)
+            self.assertIn(f"{tmp}/out/a-{PLAN}.json", task)
+            self.assertIn("### main.G_specialist", task)
+
+    def test_refuses_an_unknown_mode(self):
+        with self.assertRaises(SystemExit):
+            filled.bundle("work", "out", "all")
 
 
 class SectionTest(unittest.TestCase):
@@ -153,30 +209,59 @@ class FillTest(unittest.TestCase):
 
 
 class DecoysTest(unittest.TestCase):
-    def test_bump_raises_the_first_amount(self):
-        self.assertEqual(filled.bump("$1,990 | $40"), "$2,000 | $40")
-        self.assertEqual(filled.bump("PREV 0%; COMP 50%"), "PREV 10%; COMP 50%")
-        self.assertIsNone(filled.bump("●"))
+    claims = [{"plan": PLAN, "key": "main.G_specialist", "value": "$40", "citations": [cite(1, "Specialist $40")]},
+              {"plan": PLAN, "key": "main.F_primary_care", "value": "$0", "citations": [cite(2, "Primary care $0")]},
+              {"plan": PLAN, "key": "main.K_tests_labs", "value": "$0/$0", "citations": [cite(3, "$0 lab"), cite(3, "$0 tests")]},
+              {"plan": PLAN, "key": "main.I_outpatient_surgery", "value": "$0",
+               "citations": [cite(4, "Outpatient surgery and primary care $0")]},
+              {"plan": PLAN, "key": "main.J_outpatient_rehab", "value": "$0", "citations": [cite(5, "$0 copay")]},
+              {"plan": PLAN, "key": "dvha.H_hearing", "value": "exam $0", "citations": [cite(5, "Routine hearing exam $0")]},
+              {"plan": PLAN, "key": "main.V_massage", "value": "●", "citations": [cite(6, "Massage therapy")]}]
 
-    def test_bumps_two_values_and_gives_a_cell_another_cells_quotes(self):
-        claims = [{"key": "main.G_specialist", "value": "$40", "citations": [cite(1, "a")]},
-                  {"key": "main.F_primary_care", "value": "$0", "citations": [cite(2, "b")]},
-                  {"key": "main.V_massage", "value": "●", "citations": [cite(3, "c")]}]
-        got = filled.decoys(claims, random.Random(1))
-        self.assertEqual(sorted(d["value"] for d in got[:2]), ["$10", "$50"])
-        self.assertEqual(len(got), 3)
-        swapped = got[2]
-        self.assertNotEqual(swapped["citations"], next(c for c in claims if c["key"] == swapped["key"])["citations"])
+    def test_moves_a_cell_with_quotes_that_name_its_benefit_to_a_field_of_its_sheet_they_do_not_name(self):
+        moves = set()
+        for seed in range(50):
+            got = filled.decoys(self.claims, random.Random(seed))
+            self.assertEqual(len(got), 3)
+            for d in got:
+                source = next(c for c in self.claims if c["citations"] == d["citations"])
+                moves.add((source["key"], d["key"]))
+                self.assertEqual(d["plan"], PLAN)
+                self.assertEqual(d["value"], source["value"])
+                self.assertIsNone(filled.problem(d["key"], d["value"], d["citations"], ok_unless_bad))
+        sources = ("main.G_specialist", "main.F_primary_care", "main.K_tests_labs", "main.I_outpatient_surgery")
+        self.assertEqual(moves, {(a, b) for a in sources for b in sources + ("main.J_outpatient_rehab",) if a != b}
+                         - {("main.I_outpatient_surgery", "main.F_primary_care")})
 
-    def test_swaps_only_main_sheet_amounts_with_different_quotes(self):
-        claims = [{"key": "main.G_specialist", "value": "$40", "citations": [cite(1, "a")]},
-                  {"key": "main.K_tests_labs", "value": "$0/$0", "citations": [cite(1, "a")]},
-                  {"key": "dvha.F_dental", "value": "PREV $0", "citations": [cite(2, "b")]},
-                  {"key": "main.R_dental", "value": "●", "citations": [cite(3, "c")]}]
-        for seed in range(5):
-            got = filled.decoys(claims, random.Random(seed))
-            self.assertEqual(len(got), 2)
-            self.assertTrue(all(d["value"] != c["value"] for d in got for c in claims if c["key"] == d["key"]))
+
+class VerifyTest(unittest.TestCase):
+    def test_writes_shuffled_tasks_with_decoys_the_verifier_cannot_tell_apart(self):
+        other = "H3805-048-0"
+        quotes = ["Specialist $40", "Primary care $0", "Hearing aids $500"]
+        found = [{"plan": p, "key": k, "value": v, "citations": [cite(1, q)]} for p in (PLAN, other)
+                 for k, v, q in zip(("main.G_specialist", "main.F_primary_care", "main.Q_hearing"), ("$40", "$0", "●"), quotes)]
+        with tempfile.TemporaryDirectory() as tmp:
+            for plan in (PLAN, other):
+                work = fake_work(tmp, plan, "\n".join(quotes))
+            pathlib.Path(tmp, "claims.json").write_text(json.dumps(found))
+            quiet(filled.verify, str(work), f"{tmp}/claims.json", f"{tmp}/v")
+            items = filled.load(f"{tmp}/v/items.json")
+            tasks = {p: pathlib.Path(tmp, "v", f"v-{p}.md").read_text() for p in (PLAN, other)}
+        self.assertEqual(len(items), 10)
+        orders = []
+        for plan, task in tasks.items():
+            mine = [i for i, c in enumerate(items) if c["plan"] == plan]
+            self.assertEqual([c["decoy"] for c in items[mine[0]:mine[-1] + 1]].count(True), 2)
+            orders.append([items[i]["decoy"] for i in mine])
+            shown = [json.loads(line) for line in task.splitlines() if line.startswith("{")]
+            self.assertEqual([s["id"] for s in shown], mine)
+            self.assertEqual([{k: s[k] for k in ("value", "citations")} for s in shown],
+                             [{k: items[i][k] for k in ("value", "citations")} for i in mine])
+            self.assertTrue(all(set(s) == {"id", "field", "meaning", "value", "citations"} for s in shown))
+            self.assertIn(f"=====PAGE 1=====\n{quotes[0]}", task)
+            self.assertIn(f"{tmp}/v/ans-{plan}.json", task)
+            self.assertIn(f"plan year {filled.years.config(DATA)['year']}.", task)
+        self.assertNotEqual(orders, [[False] * 3 + [True] * 2] * 2)
 
 
 class AcceptedTest(unittest.TestCase):
@@ -195,11 +280,20 @@ class AcceptedTest(unittest.TestCase):
         with self.assertRaises(SystemExit):
             filled.accepted([dict(self.claim, decoy=False)] * 2, [{"id": 0, "ok": True}])
 
+    def test_accept_reads_every_verifier_answer(self):
+        with tempfile.TemporaryDirectory() as d:
+            pathlib.Path(d, "items.json").write_text(json.dumps([dict(self.claim, decoy=False)] * 2))
+            pathlib.Path(d, "ans-A.json").write_text(json.dumps([{"id": 0, "ok": True}]))
+            pathlib.Path(d, "ans-B.json").write_text(json.dumps([{"id": 1, "ok": True}]))
+            quiet(filled.accept, d, f"{d}/accepted.json")
+            self.assertEqual(filled.load(f"{d}/accepted.json"), [self.claim, self.claim])
+
 
 class LeadTest(unittest.TestCase):
-    def test_puts_quotes_with_amounts_other_than_zero_first_and_drops_quotes_without_amounts(self):
+    def test_puts_quotes_with_amounts_other_than_zero_first(self):
         cites = [cite(1, "$0 for labs"), cite(2, "Specialist"), cite(3, "$40 copay")]
-        self.assertEqual(filled.lead("main.G_specialist", "$0-$40", cites), [cite(3, "$40 copay"), cite(1, "$0 for labs")])
+        self.assertEqual(filled.lead("main.G_specialist", "$0-$40", cites),
+                         [cite(3, "$40 copay"), cite(1, "$0 for labs"), cite(2, "Specialist")])
 
     def test_puts_quotes_that_name_the_benefit_first_for_a_dot(self):
         cites = [cite(1, "Covered"), cite(2, "Massage therapy")]
@@ -222,13 +316,13 @@ class PublishTest(unittest.TestCase):
                                      "citations": [cite(7, "no amount"), cite(8, f"pay {self.value}, then")]}]))
         return path
 
-    def test_appends_the_quotes_that_show_the_value(self):
+    def test_appends_every_quote_with_those_that_show_the_value_first(self):
         filled.publish(self.accepted(self.value), data=self.data)
-        self.assertTrue((self.data / "eoc_citations.csv").read_bytes().endswith(f'"pay {self.value}, then"\r\n'.encode()))
-        last = list(csv.DictReader(open(self.data / "eoc_citations.csv")))[-1]
+        self.assertTrue((self.data / "eoc_citations.csv").read_bytes().endswith(b"no amount\r\n"))
+        rows = list(csv.DictReader(open(self.data / "eoc_citations.csv")))[-2:]
         sheet, column = self.key.split(".")
-        self.assertEqual((last["sheet"], last["plan_id"], last["column"], last["value"], last["pdf_page"]),
-                         (sheet, self.plan, column, self.value, "8"))
+        self.assertEqual([(r["sheet"], r["plan_id"], r["column"], r["value"], r["pdf_page"]) for r in rows],
+                         [(sheet, self.plan, column, self.value, page) for page in ("8", "7")])
         self.assertNotIn(self.key, filled.targets(filled.build.site_data(self.data)).get(self.plan, {}))
 
     def test_refuses_a_cell_whose_value_changed_or_that_an_eoc_now_cites(self):
@@ -245,7 +339,8 @@ class PublishTest(unittest.TestCase):
         filled.publish(self.accepted(self.value), out, data=self.data)
         filled.publish(self.accepted(self.value), out, data=self.data)
         rows = list(csv.DictReader(open(out)))
-        self.assertEqual([(r["plan_id"], r["value"], r["quote"]) for r in rows], [(self.plan, self.value, f"pay {self.value}, then")])
+        self.assertEqual([(r["plan_id"], r["value"], r["quote"]) for r in rows],
+                         [(self.plan, self.value, f"pay {self.value}, then"), (self.plan, self.value, "no amount")])
         self.assertEqual((self.data / "eoc_citations.csv").read_bytes(), before)
 
 

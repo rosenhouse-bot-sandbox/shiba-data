@@ -10,11 +10,11 @@ Each cell below gives the field's meaning, the cell's value on the sheet, and th
 For each cell choose one result:
 
 - `cite`: the passages show the cell's whole value for this plan.
-  - Every dollar amount and percentage in the value must appear in a quote. "$0" needs a quote too.
+  - Every dollar amount, percentage and other number in the value must appear in the quotes as often as in the value. "$0" needs a quote too.
   - A range often comes from several services in the same benefit, on different rows or pages. Quote each end where it appears. Both ends must be services the field covers. Do not use a service from another benefit, such as a mammogram for surgery.
   - Amounts must be in-network unless the field says out-of-network.
   - For a dot (● or ◐), quote text that names the benefit and shows the plan covers it as a routine (supplemental) benefit. Medicare-covered-only benefits, exclusions and optional paid packages do not count. ● is right when the plan covers the benefit itself, including from an allowance that names it. ◐ is right when only a general wellness fund pays.
-  - For a medical deductible of "$0", a quote saying the plan has no deductible for medical services works.
+  - Code rejects a dot unless one quote names the benefit without saying it is excluded, Medicare-covered or optional. "Not covered by Medicare" is fine.
 - `skip`: anything else, including when the EOC disagrees with the cell or you are unsure.
 
 A quote is text copied exactly from one passage: part of one table row, one sentence, or one table column read straight down and joined with single spaces. Never mix words from two columns. Keep the EOC's spelling, but leave out footnote marks such as ††.
@@ -26,7 +26,7 @@ Some cells show earlier quotes and why they failed that check. Fix them or skip 
 Write a JSON array to `{ANSWER}`, one object per cell, in order:
 
 ```json
-[{"key": "main.I_outpatient_surgery", "result": "cite", "citations": [{"page": 86, "quote": "$0 copay for a colonoscopy"}, {"page": 86, "quote": "$835 copay for outpatient surgery"}]},
+[{"key": "main.I_outpatient_surgery", "result": "cite", "citations": [{"page": 86, "quote": "$0 copay at an ambulatory surgical center"}, {"page": 86, "quote": "$835 copay at an outpatient hospital"}]},
  {"key": "main.K_tests_labs", "result": "skip"}]
 ```
 

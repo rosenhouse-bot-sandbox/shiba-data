@@ -2,17 +2,18 @@
 
 Needs what blanks.py needs, including the texts.py <work> directory.
 
-  filled.py bundle  <work> <dir> [every]          one task file per plan, <dir>/<plan>.md, for cells no EOC cites (every: all filled cells)
+  filled.py bundle  <work> <dir> [every]          one task file per plan, <dir>/<plan>.md, for dots and amounts no EOC cites (every: also those an EOC cites)
   filled.py claims  <work> <dir> <claims.json>    answers whose quotes pass the mechanical checks
   filled.py verify  <work> <claims.json> <vdir>   one verifier task file per plan, <vdir>/v-<plan>.md, with decoys
   filled.py accept  <vdir> <accepted.json>        claims the verifier accepted; fails if it accepted a decoy
   filled.py publish <accepted.json> [<out.csv>]   appends the citations to data/<year>/eoc_citations.csv, or writes them to out.csv
 
-Give each task file to a small model (a Haiku subagent): "Read <file> and do exactly the task it describes."
-It writes its answer where the file says. The first claims run writes a retry task, <dir>/<plan>.retry.md,
-for each plan with failed quotes. Run those, then run claims again.
+Give each task file to a subagent: "Read <file> and do exactly the task it describes."
+A small model (Haiku) can answer; verify with Sonnet or Opus. The subagent writes its answer where the file says.
+The first claims run writes a retry task, <dir>/<plan>.retry.md, for each plan with failed quotes.
+Run those, then run claims again. Before publishing, run verify and accept again on accepted.json with the other model.
 """
-import collections, csv, glob, io, json, os, pathlib, random, re, sys
+import collections, csv, glob, json, os, pathlib, random, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -23,14 +24,20 @@ from eoc import DATA, Doc, eoc
 from fields import FIELDS
 
 DOTS = ("●", "◐")
-AMOUNT = re.compile(r"\$(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?|\d+(?:\.\d+)?%")
+NUMBER = re.compile(r"\$?(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?%?")
+NOT_ROUTINE = re.compile(blanks.EXCLUSION.pattern + r"|medicare.covered|optional", re.I)
+SUPPLEMENTAL = re.compile(r"non.?medicare.covered|not covered by (?:original )?medicare", re.I)
 COLUMNS = ["sheet", "plan_id", "column", "value", "url", "pdf_page", "quote"]
 
 
+def numbers(s):
+    """How often each dollar amount, percentage and other number appears, with 0% read as $0."""
+    found = (re.sub(r"\.0+(?=%?$)", "", n.replace(",", "")) for n in NUMBER.findall(s))
+    return collections.Counter("$0" if n == "0%" else n for n in found)
+
+
 def money(s):
-    """Dollar amounts and percentages, with 0% read as $0."""
-    amounts = {re.sub(r"\.0+$", "", a.replace(",", "")) for a in AMOUNT.findall(s)}
-    return {"$0" if a == "0%" else a for a in amounts}
+    return {n for n in numbers(s) if n.startswith("$") or n.endswith("%")}
 
 
 def targets(site, every=False):
@@ -62,23 +69,39 @@ def problem(key, value, cites, quote_ok):
         return "no quotes"
     bad = [c for c in cites if not quote_ok(c["page"], c["quote"])]
     if bad:
-        return "not once on its page as running text or down one column: " + "; ".join(f'page {c["page"]} "{c["quote"]}"' for c in bad)
-    missing = money(value) - set().union(*(money(c["quote"]) for c in cites))
+        return ("not found exactly once on its page as running text or down one column: "
+                + "; ".join(f'page {c["page"]} "{c["quote"]}"' for c in bad))
+    wanted = numbers(value)
+    missing = wanted - sum((numbers(c["quote"]) for c in cites), collections.Counter())
     if missing:
-        return "no quote shows " + ", ".join(sorted(missing))
-    if value.strip() in DOTS and not any(names_benefit(key, c["quote"]) for c in cites):
-        return "no quote names the benefit"
+        return "no quote shows " + ", ".join(f"{n} {wanted[n]} times" if wanted[n] > 1 else n for n in sorted(missing))
+    if value.strip() in DOTS and not any(names_benefit(key, c["quote"]) and not NOT_ROUTINE.search(SUPPLEMENTAL.sub("", c["quote"]))
+                                         for c in cites):
+        return "no quote names the benefit without saying it is excluded, Medicare-covered or optional"
     return None
 
 
+def citations(answer):
+    """The answer's [{page, quote}], or None if one lacks a page number or a quote."""
+    try:
+        cites = [{"page": int(c["page"]), "quote": c["quote"]} for c in answer.get("citations") or []]
+    except (KeyError, TypeError, ValueError):
+        return None
+    return cites if all(isinstance(c["quote"], str) for c in cites) else None
+
+
 def gate(plan, values, answers, quote_ok):
-    """Claims from `cite` answers whose quotes pass, and {key: (citations, problem)} for the rest."""
+    """Claims from `cite` answers whose quotes pass, and {key: (citations, problem)} for the rest. Skips cells answered twice."""
+    times = collections.Counter(r.get("key") for r in answers)
     claims, failed = [], {}
     for r in answers:
         key = r.get("key")
-        if r.get("result") != "cite" or key not in values:
+        if r.get("result") != "cite" or key not in values or times[key] > 1:
             continue
-        cites = [{"page": int(c["page"]), "quote": c["quote"]} for c in r.get("citations") or []]
+        cites = citations(r)
+        if cites is None:
+            failed[key] = (r.get("citations"), "each citation needs one page number and a quote")
+            continue
         why = problem(key, values[key], cites, quote_ok)
         if why:
             failed[key] = (cites, why)
@@ -116,6 +139,8 @@ def task(plan, cells, layout, answer, failed=None):
 
 
 def bundle(work, out_dir, every=""):
+    if every not in ("", "every"):
+        raise SystemExit(__doc__)
     os.makedirs(out_dir, exist_ok=True)
     for plan, cells in sorted(targets(build.site_data(DATA), every == "every").items()):
         layout = Doc(work, plan).pages("layout")
@@ -139,26 +164,15 @@ def claims(work, answers_dir, out):
     print(len(found), "claims;", retries, "retry tasks")
 
 
-def bump(value):
-    """The value with its first amount raised by 10."""
-    m = re.search(r"\$([\d,]+)|(\d+)%", value)
-    if not m:
-        return None
-    raised = f"${int(m[1].replace(',', '')) + 10:,}" if m[1] else f"{int(m[2]) + 10}%"
-    return value[:m.start()] + raised + value[m.end():]
-
-
-def decoys(claims, rnd):
-    """Wrong claims for the verifier: two values with an amount raised, and one cell with another cell's quotes."""
-    bumpable = [c for c in claims if bump(c["value"])]
-    out = [dict(c, value=bump(c["value"])) for c in rnd.sample(bumpable, min(2, len(bumpable)))]
-    amounts = [c for c in claims if c["key"].startswith("main.") and money(c["value"])]
-    pairs = [(a, b) for a in amounts for b in amounts
-             if a is not b and not {q["quote"] for q in a["citations"]} & {q["quote"] for q in b["citations"]}]
-    if pairs:
-        a, b = rnd.choice(pairs)
-        out.append(dict(a, citations=b["citations"]))
-    return out
+def decoys(claims, rnd, n=3):
+    """Wrong claims that pass the mechanical checks: a cell's value and quotes, which name its benefit,
+    moved to another field of its sheet that the quotes do not name."""
+    amounts = [c for c in claims if c["value"].strip() not in DOTS]
+    moves = [(a["key"], b) for a in amounts for b in amounts
+             if a["key"].split(".")[0] == b["key"].split(".")[0]
+             and any(names_benefit(b["key"], q["quote"]) for q in b["citations"])
+             and not any(names_benefit(a["key"], q["quote"]) for q in b["citations"])]
+    return [dict(b, key=key) for key, b in rnd.sample(moves, min(n, len(moves)))]
 
 
 def verify(work, claims_path, out_dir):
@@ -208,7 +222,7 @@ def accept(verify_dir, out):
 
 
 def lead(key, value, cites):
-    """The quotes that show the value, best first: for a dot, those that name the benefit; else those with more amounts."""
+    """The quotes, best first: for a dot, those that name the benefit; else those that show more of the value's amounts."""
     if value.strip() in DOTS:
         return sorted(cites, key=lambda c: not names_benefit(key, c["quote"]))
 
@@ -216,7 +230,7 @@ def lead(key, value, cites):
         both = money(c["quote"]) & money(value)
         return len(both - {"$0"}), len(both)  # $0 is on most pages, so other amounts show the cell better
 
-    return [c for c in sorted(cites, key=shown, reverse=True) if any(shown(c))]
+    return sorted(cites, key=shown, reverse=True)
 
 
 def citation_rows(acc, url_of):
