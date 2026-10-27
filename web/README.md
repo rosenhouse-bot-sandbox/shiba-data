@@ -4,6 +4,8 @@ A static site for comparing the 2027 Multnomah/Clackamas plans in `repro/data`.
 Clicking a cell opens the plan document next to the sheet.
 A cell with a citation opens its page and highlights the quote.
 
+[`docs/pipeline.md`](../docs/pipeline.md) diagrams how the data is made.
+
 The plan PDFs come from the latest GitHub release.
 The `Documents` workflow downloads them from the carrier sites, cuts a new release, and redeploys the site.
 The `Site` workflow builds the site from that release, runs the tests, and deploys `main` to GitHub Pages.
