@@ -1,0 +1,39 @@
+name: Claude smoke test
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [.github/workflows/claude-smoke.yml]
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  haiku:
+    runs-on: ubuntu-latest
+    env:
+      ANTHROPIC_ORGANIZATION_ID: 3c97a8fb-8968-4ed9-aec7-f68b88683532
+      ANTHROPIC_SERVICE_ACCOUNT_ID: svac_0142UmsmTSG4RDAgtFvyHY9F
+      ANTHROPIC_FEDERATION_RULE_ID: fdrl_018f3jSg6eLJS1PxSPQQNxks
+      ANTHROPIC_WORKSPACE_ID: wrkspc_01N8SuSRdYhpdMd3U74NsPnv
+      ANTHROPIC_IDENTITY_TOKEN_FILE: /tmp/gha-jwt
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install anthropic
+      - run: |
+          curl -sSf -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+            "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=https://api.anthropic.com" \
+            | jq -r .value > "$ANTHROPIC_IDENTITY_TOKEN_FILE"
+      - shell: python3 -I {0}
+        run: |
+          import anthropic
+          message = anthropic.Anthropic().messages.create(
+              model="claude-haiku-5-5",
+              max_tokens=32,
+              messages=[{"role": "user", "content": "Reply with the word ok."}],
+          )
+          print(message.content[0].text)
