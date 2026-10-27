@@ -1,8 +1,9 @@
 """Generates the DVHA sheet (dental, vision, hearing, alternative care) from the CMS PBP Benefits files.
 
-Usage: python3 -I dvha.py <plans.csv> <pbp_dir> <out.csv>
+Usage: python3 -I dvha.py <plans.csv> <pbp_dir> <citations.csv> <out.csv> <diffs.csv>
 Cells summarize in-network supplemental benefits. Optional packages go in column E.
 Column J also lists SSBCI and targeted (UF/VBID) benefits.
+Citations whose column starts with "dvha." replace whole cells.
 """
 import csv
 import os
@@ -10,7 +11,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import pbp  # noqa: E402
-from main_chart import first, flag, money, num, pct, span  # noqa: E402
+from main_chart import first, flag, money, num, pct, sheet, span, write_csv  # noqa: E402
 
 DICTIONARY = {}
 COMPREHENSIVE = {"rs": "restorative", "end": "endodontics", "peri": "periodontics", "prm": "removable prosthodontics",
@@ -175,17 +176,15 @@ def dvha_row(landscape, plan):
     }
 
 
-def main(plans_csv, pbp_dir, out_csv):
+def main(plans_csv, pbp_dir, citations_csv, out_csv, diffs_csv):
     global DICTIONARY
     DICTIONARY = pbp.load_dictionary(os.path.join(pbp_dir, "PBP_Benefits_2027_dictionary.xlsx"))
     plans = list(csv.DictReader(open(plans_csv)))
+    citations = list(csv.DictReader(open(citations_csv)))
     data = pbp.load(pbp_dir, [p["plan_id"] for p in plans])
-    rows = [dvha_row(p, data[p["plan_id"]]) for p in plans]
-    with open(out_csv, "w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=list(rows[0]))
-        w.writeheader()
-        w.writerows(rows)
-
+    rows, diffs = sheet(plans, data, citations, dvha_row, dvha=True)
+    write_csv(out_csv, rows)
+    write_csv(diffs_csv, diffs)
 
 if __name__ == "__main__":
     main(*sys.argv[1:])

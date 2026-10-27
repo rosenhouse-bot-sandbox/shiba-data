@@ -33,14 +33,16 @@ Two UHC EOCs were re-issued on 2026-10-14 (`UHOR27HP0418842_001`, `AAOR27LP04187
 
 ### Main chart
 
-`scripts/main_chart.py` builds columns C to AA from the PBP file. Some PBP fields are too coarse, so `data/sb_facts.csv` replaces those cells with values quoted from the SB. `scripts/cite.py` then finds each quote's PDF page. A quote that it cannot find stops the build.
+`scripts/main_chart.py` builds columns C to AA from the PBP file. Some PBP fields are too coarse, so `data/sb_facts.csv` replaces those cells with values quoted from the SB or EOC. `scripts/cite.py` then finds each quote's PDF page. A quote that it cannot find stops the build.
 
 - PBP "diagnostic radiology" ranges start at $0 because they include diagnostic mammograms. Column L line 2 therefore comes from the SB's CT/MRI/PET amounts for all 39 plans.
 - The PBP has no naturopathy category. Column U is set when the SB or EOC mentions naturopathy outside the exclusions table. It is ◐ when a general wellness fund pays for it (Devoted 009).
 - For five Devoted plans the PBP gives X-ray "$0-$75", but the SB and EOC give $25 to $75.
 - UHC OR-1A inpatient care costs $0 or $1,980 per stay, depending on Medicaid status. The PBP gives only $0.
+- Six Humana plans cover acupuncture only for chronic low back pain, which Medicare covers. Column S is blank for them.
+- Devoted 009 pays for acupuncture and massage only from its Wellness Bucks, so columns S and V are ◐.
 
-`data/pbp_vs_documents.csv` lists all 50 cells where the documents override the PBP.
+`data/pbp_vs_documents.csv` lists all 58 cells where the documents override the PBP.
 
 Appendix B items that are reproduced: 1 (all four cells), 2, 3, 4, 5, 6, 7, 10, 11, 12, 13.
 These items are not reproduced:
@@ -53,6 +55,7 @@ For items 2 and 13 the generator prints "Part B deductible" instead of a dollar 
 ### DVHA sheet
 
 `scripts/dvha.py` writes short summaries of the mandatory supplemental benefits. Optional riders go in column E.
+`data/sb_facts.csv` rows whose column starts with `dvha.` replace whole DVHA cells with EOC values. `data/pbp_vs_documents_dvha.csv` lists those 23 cells.
 These DVHA items are reproduced: 1 (Wellcare comprehensive dental covers adjunctive services only), 2 (Kaiser Standard $100/2-year eyewear), 3 ($25,000 worldwide cap on all 7 Devoted rows), 6 (Regence routine podiatry, $0 for 6 visits a year, which the PBP files as a targeted benefit), and 7 (Humana MyOption $1,500 max).
 These items are not reproduced: 4 (Devoted rewards) and 5 (Regence virtual urgent care out of network). Rewards programs are not in the PBP, and the generator does not cover virtual care.
 
@@ -60,7 +63,7 @@ These items are not reproduced: 4 (Devoted rewards) and 5 (Regence virtual urgen
 
 - The PBP is bid data, not a citable document. Only the cells in `data/citations.csv` and `data/eoc_citations.csv` carry SB/EOC page citations.
 - `run.sh` does not produce `data/eoc_citations.csv`; see issue #8. A citation is kept only if the EOC value matches the cell, the quote highlights once on its page, and two models both confirm it.
-- DVHA cells leave out vendor names, frequency limits and rewards. Shared allowances (Devoted, ATRIO) show only as the services they cover.
+- DVHA cells leave out vendor names, frequency limits and rewards. ATRIO's shared allowance shows only as the services it covers.
 - Some PBP fields have no amount. DVHA then says "OTC covered", although the SB gives one (UHC $25/quarter, Humana 317 $175/month).
 - PBP ranges can start at $0 where the SB gives only the upper amount (UHC specialist "$0-$55").
 - The dot rules follow the methods doc's inferred policy R10 to R13: a dot means a mandatory supplemental benefit. SSBCI and targeted (UF/VBID) benefits are listed in DVHA column J. They do not get dots, except where the base PBP benefit sets one.

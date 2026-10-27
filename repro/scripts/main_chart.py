@@ -247,25 +247,32 @@ def write_csv(path, rows):
         w.writerows(rows)
 
 
+def sheet(plans, data, citations, make_row, dvha=False):
+    """Builds PBP rows and overrides them with this sheet's citations. DVHA citation columns start with "dvha."."""
+    mine = [dict(c, column=c["column"].removeprefix("dvha.")) for c in citations
+            if c["column"].startswith("dvha.") == dvha]
+    rows, diffs = [], []
+    for p in plans:
+        row = make_row(p, data[p["plan_id"]])
+        before = dict(row)
+        cites = [c for c in mine if c["plan_id"] == p["plan_id"]]
+        apply_citations(row, cites)
+        for col in row:
+            if row[col] != before[col]:
+                quotes = [c for c in cites if c["column"] == col]
+                diffs.append(dict(plan_id=p["plan_id"], column=col, pbp=before[col], documents=row[col],
+                                  citations=" / ".join(f'{c["kind"]} p{c["pdf_page"]}: "{c["quote"]}"' for c in quotes)))
+        rows.append(row)
+    return rows, diffs
+
+
 def main(plans_csv, pbp_dir, citations_csv, out_csv, diffs_csv):
     plans = list(csv.DictReader(open(plans_csv)))
     citations = list(csv.DictReader(open(citations_csv)))
     data = pbp.load(pbp_dir, [p["plan_id"] for p in plans])
-    rows, diffs = [], []
-    for p in plans:
-        row = chart_row(p, data[p["plan_id"]])
-        before = dict(row)
-        mine = [c for c in citations if c["plan_id"] == p["plan_id"]]
-        apply_citations(row, mine)
-        for col in row:
-            if row[col] != before[col]:
-                cites = [c for c in mine if c["column"] == col]
-                diffs.append(dict(plan_id=p["plan_id"], column=col, pbp=before[col], documents=row[col],
-                                  citations=" / ".join(f'{c["kind"]} p{c["pdf_page"]}: "{c["quote"]}"' for c in cites)))
-        rows.append(row)
+    rows, diffs = sheet(plans, data, citations, chart_row)
     write_csv(out_csv, rows)
     write_csv(diffs_csv, diffs)
-
 
 if __name__ == "__main__":
     main(*sys.argv[1:])

@@ -92,7 +92,9 @@ def site_data(data_dir=DATA):
     } for d in checked}
 
     cites = {"main": {}, "dvha": {}}
-    for c in [dict(c, sheet="main") for c in rows("citations.csv", data_dir)] + rows("eoc_citations.csv", data_dir):
+    documented = [dict(c, sheet="dvha", column=c["column"].removeprefix("dvha.")) if c["column"].startswith("dvha.")
+                  else dict(c, sheet="main") for c in rows("citations.csv", data_dir)]
+    for c in documented + rows("eoc_citations.csv", data_dir):
         cites[c["sheet"]].setdefault((c["plan_id"], c["column"]), []).append({
             "line": int(c["line"]) if c.get("line") else None,
             "value": c["value"],
@@ -100,7 +102,8 @@ def site_data(data_dir=DATA):
             "page": int(c["pdf_page"]),
             "quote": c["quote"],
         })
-    pbp = {(r["plan_id"], r["column"]): r["pbp"] for r in rows("pbp_vs_documents.csv", data_dir)}
+    pbp = {sheet: {(r["plan_id"], r["column"]): r["pbp"] for r in rows(name, data_dir)}
+           for sheet, name in (("main", "pbp_vs_documents.csv"), ("dvha", "pbp_vs_documents_dvha.csv"))}
 
     plans = rows("plans.csv", data_dir)
     for p in plans:
@@ -109,8 +112,8 @@ def site_data(data_dir=DATA):
     return {
         "plans": plans,
         "docs": docs,
-        "main": sheet(rows("main_chart.csv", data_dir), MAIN_LABELS, cites["main"], pbp),
-        "dvha": sheet(rows("dvha.csv", data_dir), DVHA_LABELS, cites["dvha"], {}),
+        "main": sheet(rows("main_chart.csv", data_dir), MAIN_LABELS, cites["main"], pbp["main"]),
+        "dvha": sheet(rows("dvha.csv", data_dir), DVHA_LABELS, cites["dvha"], pbp["dvha"]),
     }
 
 

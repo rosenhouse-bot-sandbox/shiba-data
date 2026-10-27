@@ -113,6 +113,25 @@ class EocCitationsTest(unittest.TestCase):
         self.assertEqual(self.cites("main", "C_premium"), [])
 
 
+class DvhaCitationsTest(unittest.TestCase):
+    def test_dvha_citation_and_pbp_value_go_to_dvha_cell(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            data = data_copy(tmp, [])
+            sb = next(d for d in build.rows("documents_checked.csv", DATA)
+                      if d["kind"] == "SB" and "H3805-048-0" in d["plan_ids"])
+            with open(data / "citations.csv", "a", newline="") as f:
+                csv.writer(f).writerow(["H3805-048-0", "dvha.F_dental", "", "fixed", "SB", sb["url"], 4, "dental quote"])
+            with open(data / "pbp_vs_documents_dvha.csv", "w", newline="") as f:
+                csv.writer(f).writerows([["plan_id", "column", "pbp", "documents", "citations"],
+                                         ["H3805-048-0", "F_dental", "", "fixed", "SB p4"]])
+            site = build.site_data(data)
+        row = next(r for r in site["dvha"]["rows"] if r["plan_id"] == "H3805-048-0")
+        cell = row["cells"]["F_dental"]
+        self.assertEqual(cell["pbp"], "")
+        self.assertEqual([(c["value"], c["page"], c["quote"]) for c in cell["cites"]], [("fixed", 4, "dental quote")])
+        self.assertNotIn("dvha.F_dental", str(site["main"]))
+
+
 class EocCitationsDataTest(unittest.TestCase):
     def test_each_cites_the_current_cell_value(self):
         sheets = {"main": ("main_chart.csv", build.MAIN_LABELS), "dvha": ("dvha.csv", build.DVHA_LABELS)}

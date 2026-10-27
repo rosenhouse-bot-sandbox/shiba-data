@@ -82,6 +82,19 @@ class MainChartTest(unittest.TestCase):
                                  {"column": "U_naturopath", "line": "", "value": "●"}])
         self.assertEqual(row, {"L_xray_imaging": "$0-$145 | $205-$345", "U_naturopath": "●"})
 
+    def test_sheets_take_their_own_citations(self):
+        plans = [{"plan_id": "P"}]
+        cite = {"plan_id": "P", "line": "", "kind": "EOC", "pdf_page": "9", "quote": "q"}
+        citations = [dict(cite, column="A", value="main"), dict(cite, column="dvha.A", value="dvha")]
+        make_row = lambda landscape, plan: {"A": "pbp"}
+        rows, diffs = mc.sheet(plans, {"P": {}}, citations, make_row)
+        self.assertEqual(rows, [{"A": "main"}])
+        self.assertEqual([d["column"] for d in diffs], ["A"])
+        rows, diffs = mc.sheet(plans, {"P": {}}, citations, make_row, dvha=True)
+        self.assertEqual(rows, [{"A": "dvha"}])
+        self.assertEqual(diffs, [{"plan_id": "P", "column": "A", "pbp": "pbp", "documents": "dvha",
+                                  "citations": 'EOC p9: "q"'}])
+
 
 class DocumentTest(unittest.TestCase):
     def test_id_patterns_match_printed_forms(self):
