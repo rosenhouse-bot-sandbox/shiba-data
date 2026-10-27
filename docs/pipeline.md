@@ -8,8 +8,8 @@ flowchart TB
   classDef state fill:#fff,stroke:#555,color:#000
 
   subgraph external [Internet]
-    cms[(CMS Landscape and<br>PBP Benefits files)]:::state
     carriers[(Carrier sites:<br>SB and EOC PDFs)]:::state
+    cms[(CMS Landscape and<br>PBP Benefits files)]:::state
   end
 
   subgraph git [Git source: repro/data]
@@ -31,14 +31,14 @@ flowchart TB
     site[(index.html, app.js,<br>data.json, PDFs)]:::state
   end
 
-  find[Find document URLs]:::heavy
+  findurls[Find document URLs]:::heavy
   universe[universe.py]:::det
   fetch[fetch_docs.py:<br>download, extract text,<br>check covers]:::det
   review[Read SBs and EOCs;<br>write overrides]:::heavy
   cite[cite.py: find quote pages]:::det
   gen[main_chart.py, dvha.py]:::det
 
-  carriers --> find --> documents
+  carriers --> findurls --> documents
   cms --> universe --> plans
   documents & plans --> fetch --> checked
   carriers --> fetch
@@ -47,21 +47,25 @@ flowchart TB
   cms & plans & citations --> gen --> sheets
 
   subgraph xref [EOC/SB cross-reference, run outside the repo]
-    retrieve[Retrieve pages per field]:::det
+    retrieve[Extract text; retrieve pages per field]:::det
     extract[Blind extract with quotes]:::cheap
     validate[Quote and amount checks;<br>compare with cell]:::det
-    judge[Judge disagreements]:::cheap
+    second[Second pass on uncited cells:<br>cite or explain]:::heavy
+    recheck[Quote and amount checks]:::det
     verify[Two verifiers:<br>Sonnet and Opus]:::heavy
-    write[Write and recheck comments]:::heavy
+    assemble[Drop decoys; pick lead quote]:::det
+    write[Recheck comments]:::heavy
   end
 
   tar & sheets --> retrieve --> extract --> validate
-  validate -- agree --> verify --> eoccites
-  validate -- disagree --> judge --> write --> comments
+  validate -- agree --> verify
+  validate -- no citation --> second --> recheck --> verify --> assemble --> eoccites
+  citations --> assemble
+  second -- EOC complicates cell --> write --> comments
   write -- EOC contradicts cell --> facts
 
   docwf[Documents workflow, manual:<br>build.py documents]:::det
-  sitewf[Site workflow, on push to main:<br>tests, build.py site, deploy]:::det
+  sitewf[Site workflow:<br>tests, build.py site,<br>deploy from main]:::det
 
   checked --> docwf
   carriers --> docwf --> tar
@@ -71,10 +75,10 @@ flowchart TB
 
 | Color | Step |
 |---|---|
-| Green | Deterministic code. |
-| Yellow | Cheap model (Haiku). |
-| Red | Heavier model (Sonnet or Opus), or an agent with a browser. |
+| Green | Deterministic code |
+| Yellow | Cheap model (Haiku) |
+| Red | Heavier model (Sonnet or Opus), or an agent with a browser |
 
-- Steps in `repro/run.sh` regenerate every CSV above except `documents.csv`, `sb_facts.csv`, `eoc_citations.csv` and `comments.csv`. Those are written by models and reviewed in pull requests.
+- Steps in `repro/run.sh` regenerate every CSV above except `documents.csv`, `sb_facts.csv`, `eoc_citations.csv` and `comments.csv`. Models write those four.
 - The cross-reference scripts are not in the repo. Issue #8 describes them. The models ran as Claude Code subagents, not through the API.
-- The Site workflow never contacts carriers. Only the Documents workflow downloads PDFs.
+- The Site workflow downloads PDFs from carriers only when no documents release exists.
