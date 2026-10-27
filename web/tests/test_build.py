@@ -30,6 +30,8 @@ def data_copy(tmp, eoc_rows):
     return data
 
 
+H6815_038_EOC = "https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf"
+
 class SiteDataTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -75,21 +77,32 @@ class SiteDataTest(unittest.TestCase):
         self.assertEqual((comment["doc"], comment["page"]), ("90a4efa6544175a2", 83))
         self.assertIn("EKGs", comment["quote"])
 
+    def test_comment_kind_says_whether_eoc_contradicts_cell(self):
+        self.assertEqual(self.cell("main", "H6815-038-0", "K_tests_labs")["comment"]["kind"], "contradicts")
+        self.assertEqual(self.cell("dvha", "H1036-306-0", "F_dental")["comment"]["kind"], "note")
+
+    def test_unknown_comment_kind_fails(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            data = data_copy(tmp, [])
+            (data / "comments.csv").write_text(
+                f"sheet,plan_id,column,kind,comment,url,pdf_page,quote\nmain,H6815-038-0,K_tests_labs,warning,x,{H6815_038_EOC},83,EKGs\n")
+            with self.assertRaisesRegex(ValueError, "warning"):
+                build.site_data(data)
+
     def test_comment_on_unknown_cell_fails(self):
         for plan_id, column in (("H6815-038-0", "K_tests"), ("H6815-999-0", "K_tests_labs")):
             with self.subTest(plan_id=plan_id, column=column), tempfile.TemporaryDirectory() as tmp:
                 data = data_copy(tmp, [])
-                (data / "comments.csv").write_text(f"sheet,plan_id,column,comment,url,pdf_page,quote\nmain,{plan_id},{column},typo,,,\n")
+                (data / "comments.csv").write_text(f"sheet,plan_id,column,kind,comment,url,pdf_page,quote\nmain,{plan_id},{column},note,typo,,,\n")
                 with self.assertRaisesRegex(ValueError, f"{plan_id} {column}"):
                     build.site_data(data)
 
     def test_comment_page_reference_must_name_one_document_page(self):
-        url = "https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf"
         for text in ("EOC page 9999 says so.", "Rider page 2 says so."):
             with self.subTest(text=text), tempfile.TemporaryDirectory() as tmp:
                 data = data_copy(tmp, [])
                 (data / "comments.csv").write_text(
-                    f"sheet,plan_id,column,comment,url,pdf_page,quote\nmain,H6815-038-0,K_tests_labs,{text},{url},83,EKGs\n")
+                    f"sheet,plan_id,column,kind,comment,url,pdf_page,quote\nmain,H6815-038-0,K_tests_labs,note,{text},{H6815_038_EOC},83,EKGs\n")
                 with self.assertRaisesRegex(ValueError, text.split(" says")[0]):
                     build.site_data(data)
 
