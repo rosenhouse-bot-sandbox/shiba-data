@@ -82,6 +82,16 @@ class SiteDataTest(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, f"{plan_id} {column}"):
                     build.site_data(data)
 
+    def test_comment_page_reference_must_name_one_document_page(self):
+        url = "https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf"
+        for text in ("EOC page 9999 says so.", "Rider page 2 says so."):
+            with self.subTest(text=text), tempfile.TemporaryDirectory() as tmp:
+                data = data_copy(tmp, [])
+                (data / "comments.csv").write_text(
+                    f"sheet,plan_id,column,comment,url,pdf_page,quote\nmain,H6815-038-0,K_tests_labs,{text},{url},83,EKGs\n")
+                with self.assertRaisesRegex(ValueError, text.split(" says")[0]):
+                    build.site_data(data)
+
     def test_second_comment_on_a_cell_fails(self):
         with tempfile.TemporaryDirectory() as tmp:
             data = data_copy(tmp, [])
@@ -130,10 +140,10 @@ class EocCitationsTest(unittest.TestCase):
     def cites(self, sheet, column):
         return next(r for r in self.site[sheet]["rows"] if r["plan_id"] == "H3805-048-0")["cells"][column]["cites"]
 
-    def test_eoc_cite_follows_existing_cites(self):
+    def test_eoc_cite_precedes_summary_of_benefits_cites(self):
         cites = self.cites("main", "L_xray_imaging")
-        self.assertEqual([(c["line"], c["quote"]) for c in cites], [(2, "$320 copay otherwise"), (None, "x-ray quote")])
-        self.assertEqual(cites[-1], {"line": None, "value": "$30 | $320", "doc": self.eoc_id, "page": 80, "quote": "x-ray quote"})
+        self.assertEqual([(c["line"], c["quote"]) for c in cites], [(None, "x-ray quote"), (2, "$320 copay otherwise")])
+        self.assertEqual(cites[0], {"line": None, "value": "$30 | $320", "doc": self.eoc_id, "page": 80, "quote": "x-ray quote"})
 
     def test_eoc_cite_goes_to_its_own_sheet(self):
         self.assertEqual([c["quote"] for c in self.cites("dvha", "C_premium")], ["premium quote"])

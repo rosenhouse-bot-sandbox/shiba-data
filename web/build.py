@@ -9,6 +9,7 @@ import datetime
 import hashlib
 import json
 import pathlib
+import re
 import shutil
 import sys
 import urllib.request
@@ -43,6 +44,9 @@ MAIN_LABELS = {
     "Z_part_b_reduction": "Pt B Reduction",
     "AA_opt_packages": "Opt Packages",
 }
+
+# Keep in sync with PAGE_REF in web/static/app.js.
+PAGE_REF = re.compile(r"\b(EOC|SB|rider) pages? (\d+)", re.IGNORECASE)
 
 DVHA_LABELS = {
     "C_premium": "Monthly Premium",
@@ -105,6 +109,9 @@ def site_data(data_dir=DATA):
             "page": int(c["pdf_page"]),
             "quote": c["quote"],
         })
+    for sheet_cites in cites.values():
+        for cell_cites in sheet_cites.values():
+            cell_cites.sort(key=lambda c: docs[c["doc"]]["kind"] == "SB")
     pbp = {sheet: {(r["plan_id"], r["column"]): r["pbp"] for r in rows(name, data_dir)}
            for sheet, name in (("main", "pbp_vs_documents.csv"), ("dvha", "pbp_vs_documents_dvha.csv"))}
 
@@ -120,6 +127,11 @@ def site_data(data_dir=DATA):
             raise ValueError(f"comments.csv names no cell: {c['sheet']} {c['plan_id']} {c['column']}")
         if (c["plan_id"], c["column"]) in comments[c["sheet"]]:
             raise ValueError(f"comments.csv names a cell twice: {c['sheet']} {c['plan_id']} {c['column']}")
+        for ref in PAGE_REF.finditer(c["comment"]):
+            kind, page = ref[1].upper(), int(ref[2])
+            matches = [d for d in docs.values() if d["kind"] == kind and c["plan_id"] in d["plan_ids"]]
+            if len(matches) != 1 or page > matches[0]["pages"]:
+                raise ValueError(f"comments.csv {c['plan_id']} {c['column']}: {ref[0]} names no single document page")
         comments[c["sheet"]][(c["plan_id"], c["column"])] = {
             "text": c["comment"], "doc": doc_by_url[c["url"]], "page": int(c["pdf_page"]), "quote": c["quote"]}
     return {

@@ -36,7 +36,17 @@ td { cursor: pointer; }
 td:hover { outline: 2px solid var(--accent); outline-offset: -2px; }
 td.dot { text-align: center; }
 td.commented { background: var(--comment); }
+tr.open-plan > :not(.commented) { background: #e1ecfb; }
 td.selected { outline: 3px solid var(--ink); outline-offset: -3px; }
+
+.ambiguities-page { padding: 8px 16px 24px; }
+.ambiguities-page h2 { margin: 8px 0; }
+.ambiguities tbody th { text-align: left; font-weight: normal; min-width: 180px; }
+.ambiguities tbody th small { display: block; color: var(--muted); }
+.ambiguities td.text { cursor: default; }
+.ambiguities td.text:hover { outline: none; }
+.ambiguities td.comment-text { min-width: 320px; width: 50%; }
+.ambiguities td[data-col] { width: 12%; overflow-wrap: anywhere; }
 
 .plan-page { padding: 8px 16px 24px; max-width: 900px; }
 .plan-page h2 { margin: 8px 0; }
