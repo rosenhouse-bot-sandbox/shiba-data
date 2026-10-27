@@ -130,11 +130,11 @@ test("yellow marks a comment, shown on hover and in the note", async () => {
   assert.equal(squash((await page.locator(".textLayer mark").allTextContents()).join("")), squash(quote));
 });
 
-test("picking a plan opens its summary of benefits, unless one of its documents is open", async () => {
+test("opening a plan shows its summary of benefits, unless one of its documents is open", async () => {
   await page.goto(`${base}#/main`);
   await row("H3805-048-0").locator(UNCITED).first().click();
   await shown(docOf("H3805-048-0", "SB"), 1);
-  await page.selectOption("#plan-picker", "H2923-001-0");
+  await page.locator("table.sheet th.plan a", { hasText: "DEVOTED CORE 001" }).click();
   await shown(docOf("H2923-001-0", "SB"), 1);
   await page.locator("table.docs a", { hasText: "Evidence of Coverage" }).click();
   await shown(docOf("H2923-001-0", "EOC"), 1);
@@ -142,6 +142,13 @@ test("picking a plan opens its summary of benefits, unless one of its documents 
   await page.locator("table.sheet th.plan a", { hasText: "DEVOTED CORE 001" }).click();
   await page.waitForSelector(".plan-page");
   assert.match(await page.textContent("#doc-title"), /^Evidence of Coverage/);
+});
+
+test("the page has no plan dropdown, citation corners or footer", async () => {
+  await page.goto(`${base}#/main`);
+  assert.equal(await page.locator("nav select, footer").count(), 0);
+  const corner = await page.locator("td.cited").first().evaluate((td) => getComputedStyle(td, "::after").content);
+  assert.equal(corner, "none");
 });
 
 test("plan page lists the plan's documents", async () => {
