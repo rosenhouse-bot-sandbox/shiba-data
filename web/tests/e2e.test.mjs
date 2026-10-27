@@ -422,6 +422,21 @@ test("a cited blank cell says the document shows why", async () => {
   assert.match(await page.textContent("#source-note"), /shows why this is blank/);
 });
 
+test("a cell's note restates the CMS plan data without our symbols", async () => {
+  const withPbp = (match) => ["main", "dvha"].flatMap((sheet) => site[sheet].rows.flatMap((r) =>
+    Object.entries(r.cells).filter(([, c]) => c.cites.length && match(c.pbp ?? null)).map(([col]) => `#/${sheet}/${r.plan_id}/${col}`)))[0];
+  for (const [hash, expected] of [
+    [withPbp((p) => p === "●"), /CMS plan data shows this benefit is covered\./],
+    [withPbp((p) => p === "20%"), /CMS plan data shows 20%\./],
+    [withPbp((p) => p === ""), /CMS plan data leaves this blank/],
+  ]) {
+    await page.goto(`${base}${hash}`);
+    const pbp = await page.locator("#source-note p.pbp").textContent();
+    assert.match(pbp, expected);
+    assert.doesNotMatch(pbp, /[●◐“]/);
+  }
+});
+
 test("closing the viewer hides it", async () => {
   await page.click("#close");
   assert.equal(await page.isHidden("#viewer"), true);

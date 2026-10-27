@@ -192,7 +192,8 @@ function citeNote(header, cell) {
   });
   if (cell.comment) note.append(commentSource(cell, note));
   if (cell.pbp != null) {
-    note.append(el("p", { class: "pbp" }, cell.pbp ? `CMS plan data says “${oneLine(cell.pbp)}”. The plan document overrides it.`
+    note.append(el("p", { class: "pbp" }, cell.pbp
+      ? `CMS plan data shows ${cell.pbp === "●" ? "this benefit is covered" : oneLine(cell.pbp)}. The plan document overrides it.`
       : "CMS plan data leaves this blank. The plan document fills it in."));
   }
   return note;
