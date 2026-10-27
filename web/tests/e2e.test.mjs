@@ -64,6 +64,10 @@ test("arrows and the page box move between pages", async () => {
   await shown(docOf("H3805-048-0", "SB"), 3);
   await page.click("#prev");
   await shown(docOf("H3805-048-0", "SB"), 2);
+  await page.focus("#page");
+  await page.$eval("#page-area", (area) => area.scrollBy(0, area.clientHeight * 2));
+  await page.waitForTimeout(300);
+  assert.equal(await page.inputValue("#page"), "2", "scrolling must not overwrite the page box while it has focus");
   await page.fill("#page", "5");
   await page.press("#page", "Enter");
   await shown(docOf("H3805-048-0", "SB"), 5);

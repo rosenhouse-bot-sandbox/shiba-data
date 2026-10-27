@@ -40,7 +40,7 @@ async function start() {
   pageObserver = new IntersectionObserver(onVisible, { root: area(), rootMargin: "1500px 0px" });
   area().addEventListener("scroll", () => {
     if (!holders().length) return;
-    $("#page").value = currentPage();
+    if (document.activeElement !== $("#page")) $("#page").value = currentPage();
     viewer.anchor = centerAnchor();
   });
   new ResizeObserver(() => {
