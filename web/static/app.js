@@ -38,12 +38,16 @@ async function start() {
   $("#close").addEventListener("click", closeViewer);
   window.addEventListener("hashchange", route);
   pageObserver = new IntersectionObserver(onVisible, { root: area(), rootMargin: "1500px 0px" });
-  area().addEventListener("scroll", () => ($("#page").value = currentPage()));
+  area().addEventListener("scroll", () => {
+    if (!holders().length) return;
+    $("#page").value = currentPage();
+    viewer.anchor = centerAnchor();
+  });
   new ResizeObserver(() => {
-    if (!viewer.pdf || !area().clientWidth || area().clientWidth === viewer.width) return;
-    const { n, toCite } = viewer.target || { n: currentPage(), toCite: false };
-    layoutPages();
-    goTo(n, toCite);
+    if (!viewer.pdf || !area().clientWidth) return;
+    if (area().clientWidth !== viewer.width) layoutPages();
+    if (viewer.target) goTo(viewer.target.n, viewer.target.toCite);
+    else if (viewer.anchor) restoreAnchor(viewer.anchor);
   }).observe(area());
   route();
 }
@@ -155,7 +159,7 @@ function benefitTable(title, sheet, plan) {
 
 const kindName = (k) => ({ SB: "Summary of Benefits", EOC: "Evidence of Coverage", RIDER: "Optional rider" })[k] || k;
 
-const viewer = { doc: null, loading: null, pdf: null, cite: null, target: null, width: 0 };
+const viewer = { doc: null, loading: null, pdf: null, sizes: [], cite: null, target: null, anchor: null, width: 0 };
 const area = () => $("#page-area");
 const holders = () => [...area().querySelectorAll(".page")];
 
@@ -177,6 +181,7 @@ async function openDoc(docId, page, quote, note) {
     viewer.doc = docId;
     viewer.pdf = null;
     area().replaceChildren(el("p", { class: "notice" }, "Loading…"));
+    $("#page-count").textContent = "";
     viewer.loading = loadSizes(doc.file);
   }
   const { pdf, sizes } = await viewer.loading;
@@ -201,6 +206,7 @@ async function loadSizes(file) {
 function layoutPages() {
   viewer.width = area().clientWidth;
   const width = viewer.width - 24;
+  pageObserver.disconnect();
   area().replaceChildren(...viewer.sizes.map((size, i) => {
     const holder = el("div", { class: "page", "data-page": i + 1 });
     holder.style.width = `${width}px`;
@@ -230,41 +236,60 @@ function currentPage() {
   return i < 0 ? all.length : i + 1;
 }
 
+// The point at the middle of the view, as a page and a fraction of its height, so a resize can keep it there.
+function centerAnchor() {
+  const line = area().scrollTop + area().clientHeight / 2;
+  const holder = holders().find((h) => h.offsetTop + h.offsetHeight > line) || holders().at(-1);
+  return { n: Number(holder.dataset.page), frac: (line - holder.offsetTop) / holder.offsetHeight };
+}
+
+function restoreAnchor({ n, frac }) {
+  const holder = holders()[n - 1];
+  if (holder) area().scrollTop = holder.offsetTop + frac * holder.offsetHeight - area().clientHeight / 2;
+}
+
 function onVisible(entries) {
   for (const { target: holder, isIntersecting } of entries) {
     if (isIntersecting) renderPage(holder);
     else {
       holder.generation = (holder.generation || 0) + 1;
-      holder.rendering = holder.text = null;
+      holder.task?.cancel();
+      holder.rendering = holder.text = holder.task = null;
       holder.replaceChildren();
     }
   }
 }
 
 function renderPage(holder) {
-  holder.rendering ||= (async () => {
-    const generation = holder.generation;
-    const n = Number(holder.dataset.page);
-    const page = await viewer.pdf.getPage(n);
-    const viewport = page.getViewport({ scale: holder.clientWidth / page.getViewport({ scale: 1 }).width });
-    const ratio = window.devicePixelRatio || 1;
-    const canvas = el("canvas");
-    canvas.width = Math.floor(viewport.width * ratio);
-    canvas.height = Math.floor(viewport.height * ratio);
-    canvas.style.width = `${viewport.width}px`;
-    canvas.style.height = `${viewport.height}px`;
-    const text = el("div", { class: "textLayer" });
-    holder.style.setProperty("--scale-factor", viewport.scale);
-    await page.render({ canvasContext: canvas.getContext("2d"), viewport, transform: ratio !== 1 ? [ratio, 0, 0, ratio, 0, 0] : null }).promise;
-    const content = await page.getTextContent();
-    const layer = new pdfjsLib.TextLayer({ textContentSource: content, container: text, viewport });
-    await layer.render();
-    if (generation !== holder.generation) return;
-    holder.replaceChildren(canvas, text);
-    holder.text = { divs: layer.textDivs, items: content.items.filter((i) => "str" in i) };
-    markPage(holder);
-    arrive(holder);
-  })();
+  const generation = holder.generation;
+  holder.rendering ||= drawPage(holder).catch(() => {
+    if (generation === holder.generation) holder.rendering = null;
+  });
+}
+
+async function drawPage(holder) {
+  const generation = holder.generation;
+  const n = Number(holder.dataset.page);
+  const page = await viewer.pdf.getPage(n);
+  const viewport = page.getViewport({ scale: holder.clientWidth / page.getViewport({ scale: 1 }).width });
+  const ratio = window.devicePixelRatio || 1;
+  const canvas = el("canvas");
+  canvas.width = Math.floor(viewport.width * ratio);
+  canvas.height = Math.floor(viewport.height * ratio);
+  canvas.style.width = `${viewport.width}px`;
+  canvas.style.height = `${viewport.height}px`;
+  const text = el("div", { class: "textLayer" });
+  holder.style.setProperty("--scale-factor", viewport.scale);
+  holder.task = page.render({ canvasContext: canvas.getContext("2d"), viewport, transform: ratio !== 1 ? [ratio, 0, 0, ratio, 0, 0] : null });
+  await holder.task.promise;
+  const content = await page.getTextContent();
+  const layer = new pdfjsLib.TextLayer({ textContentSource: content, container: text, viewport });
+  await layer.render();
+  if (generation !== holder.generation) return;
+  holder.replaceChildren(canvas, text);
+  holder.text = { divs: layer.textDivs, items: content.items.filter((i) => "str" in i) };
+  markPage(holder);
+  arrive(holder);
 }
 
 // Finishes a goTo once its page has rendered.
@@ -292,15 +317,11 @@ function closeViewer() {
 }
 
 function highlight(divs, items, quote) {
-  let first = null;
   for (const { item, start, end } of matchRanges(items.map((i) => i.str), quote)) {
     const div = divs[item];
     const s = items[item].str;
-    const mark = el("mark", {}, s.slice(start, end));
-    div.replaceChildren(s.slice(0, start), mark, s.slice(end));
-    first ||= mark;
+    div.replaceChildren(s.slice(0, start), el("mark", {}, s.slice(start, end)), s.slice(end));
   }
-  return first;
 }
 
 start();

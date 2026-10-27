@@ -59,6 +59,45 @@ test("scrolling the document moves to the next page", async () => {
   await page.waitForSelector('#page-area .page[data-page="2"] canvas');
 });
 
+test("arrows and the page box move between pages", async () => {
+  await page.click("#next");
+  await shown(docOf("H3805-048-0", "SB"), 3);
+  await page.click("#prev");
+  await shown(docOf("H3805-048-0", "SB"), 2);
+  await page.fill("#page", "5");
+  await page.press("#page", "Enter");
+  await shown(docOf("H3805-048-0", "SB"), 5);
+});
+
+test("only pages near the view keep a canvas", async () => {
+  const eoc = docOf("H2001-045-0", "EOC");
+  await page.goto(`${base}#/plan/H2001-045-0`);
+  await page.locator("table.docs a", { hasText: "Evidence of Coverage" }).click();
+  await shown(eoc, 1);
+  for (let i = 0; i < 20; i++) {
+    await page.$eval("#page-area", (area) => area.scrollBy(0, area.clientHeight * 2));
+    await page.waitForTimeout(50);
+  }
+  await page.waitForTimeout(1000);
+  assert.ok(await page.locator("#page-area canvas").count() <= 10);
+});
+
+test("resizing keeps the cited quote in view", async () => {
+  await page.goto(`${base}#/main`);
+  await row("H2923-009-0").locator("td.cited").last().click();
+  await page.locator("#source-note a", { hasText: "EOC" }).click();
+  await shown(docOf("H2923-009-0", "EOC"), 71);
+  await page.setViewportSize({ width: 1600, height: 600 });
+  await page.waitForTimeout(1500);
+  const visible = await page.$eval("#page-area", (area) => {
+    const a = area.getBoundingClientRect();
+    const m = area.querySelector("mark").getBoundingClientRect();
+    return m.top >= a.top && m.bottom <= a.bottom;
+  });
+  await page.setViewportSize({ width: 1600, height: 1000 });
+  assert.ok(visible);
+});
+
 test("plan page lists the plan's documents", async () => {
   await page.goto(`${base}#/plan/H2001-045-0`);
   const docs = await page.locator("table.docs").textContent();
