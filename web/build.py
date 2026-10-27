@@ -3,6 +3,7 @@
 Usage:
   python3 -I web/build.py documents <out_dir>
   python3 -I web/build.py site <out_dir> [<documents_dir>]
+  python3 -I web/build.py zip <documents_dir> <zip_file>
 """
 import csv
 import datetime
@@ -12,6 +13,7 @@ import pathlib
 import shutil
 import sys
 import urllib.request
+import zipfile
 
 HERE = pathlib.Path(__file__).resolve().parent
 DATA = HERE.parent / "repro" / "data"
@@ -176,7 +178,31 @@ def attach_documents(docs, release_dir, out_dir):
     return [i for i, d in docs.items() if not d["file"]]
 
 
+def plan_names(doc):
+    return zip(doc["plan_ids"].split(";"), doc["plan_names"].split("; "), strict=True)
+
+
+def zip_name(plan_id, plan_name, kind):
+    return f"{plan_name} ({plan_id}) {kind}.pdf"
+
+
+def zip_documents(release_dir, zip_path, data_dir=DATA):
+    manifest = json.loads((release_dir / "documents.json").read_text())
+    checked = {d["sha256"][:16]: d for d in rows("documents_checked.csv", data_dir)}
+    with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as z:
+        for doc_id, entry in manifest.items():
+            pdf = release_dir / entry["file"]
+            if doc_id not in checked:
+                z.write(pdf, entry["file"])
+                continue
+            for plan_id, name in plan_names(checked[doc_id]):
+                z.write(pdf, zip_name(plan_id, name, checked[doc_id]["kind"]))
+
+
 def main(command, out, release=None):
+    if command == "zip":
+        zip_documents(pathlib.Path(out), pathlib.Path(release))
+        return
     out_dir = pathlib.Path(out)
     site = site_data()
     if command == "documents":

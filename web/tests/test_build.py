@@ -8,6 +8,7 @@ import pathlib
 import sys
 import tempfile
 import unittest
+import zipfile
 from unittest import mock
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
@@ -253,6 +254,57 @@ class DocumentsTest(unittest.TestCase):
         self.assertEqual(data["docs"][self.id]["file"], f"pdfs/{self.id}.pdf")
         self.assertIn("::warning::", out.getvalue())
         self.assertIn("gone.pdf", out.getvalue())
+
+
+class ZipTest(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.dir = pathlib.Path(self.tmp.name)
+        self.data = self.dir / "data"
+        self.data.mkdir()
+        with open(self.data / "documents_checked.csv", "w", newline="") as f:
+            csv.writer(f).writerows([
+                ["plan_ids", "kind", "sha256", "plan_names"],
+                ["H1-001-0;H1-002-0", "EOC", "a" * 64, "Plan A (HMO); Plan B (PPO)"],
+                ["H1-001-0", "SB", "b" * 64, "Plan A (HMO)"],
+                ["H1-002-0", "SB", "c" * 64, "Plan B (PPO)"],
+            ])
+        self.release = self.dir / "release"
+        (self.release / "pdfs").mkdir(parents=True)
+        manifest = {}
+        for doc_id in ("a" * 16, "b" * 16, "d" * 16):
+            manifest[doc_id] = {"file": f"pdfs/{doc_id}.pdf"}
+            (self.release / f"pdfs/{doc_id}.pdf").write_bytes(f"%PDF {doc_id}".encode())
+        (self.release / "documents.json").write_text(json.dumps(manifest))
+        build.zip_documents(self.release, self.dir / "documents.zip", self.data)
+        self.zip = zipfile.ZipFile(self.dir / "documents.zip")
+
+    def tearDown(self):
+        self.zip.close()
+        self.tmp.cleanup()
+
+    def test_names_each_plans_copy_of_a_pdf_after_the_plan(self):
+        self.assertEqual(self.zip.read("Plan A (HMO) (H1-001-0) EOC.pdf"), b"%PDF " + b"a" * 16)
+        self.assertEqual(self.zip.read("Plan B (PPO) (H1-002-0) EOC.pdf"), b"%PDF " + b"a" * 16)
+        self.assertEqual(self.zip.read("Plan A (HMO) (H1-001-0) SB.pdf"), b"%PDF " + b"b" * 16)
+
+    def test_keeps_hash_name_for_pdf_missing_from_data(self):
+        self.assertEqual(self.zip.read(f"pdfs/{'d' * 16}.pdf"), b"%PDF " + b"d" * 16)
+
+    def test_holds_only_pdfs_in_release(self):
+        self.assertEqual(len(self.zip.namelist()), 4)
+
+    def test_zip_command_writes_zip(self):
+        build.main("zip", self.release, self.dir / "cli.zip")
+        self.assertIn(f"pdfs/{'d' * 16}.pdf", zipfile.ZipFile(self.dir / "cli.zip").namelist())
+
+
+class ZipDataTest(unittest.TestCase):
+    def test_each_plan_has_one_pdf_per_kind(self):
+        names = [build.zip_name(plan_id, name, d["kind"])
+                 for d in build.rows("documents_checked.csv", DATA)
+                 for plan_id, name in build.plan_names(d)]
+        self.assertEqual(len(names), len(set(names)))
 
 
 if __name__ == "__main__":
