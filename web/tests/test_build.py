@@ -82,6 +82,16 @@ class SiteDataTest(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, f"{plan_id} {column}"):
                     build.site_data(data)
 
+    def test_second_comment_on_a_cell_fails(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            data = data_copy(tmp, [])
+            with open(data / "comments.csv", newline="") as f:
+                first = list(csv.reader(f))[1]
+            with open(data / "comments.csv", "a", newline="") as f:
+                csv.writer(f).writerow(first)
+            with self.assertRaisesRegex(ValueError, f"{first[1]} {first[2]}"):
+                build.site_data(data)
+
     def test_every_plan_has_an_sb(self):
         for p in self.site["plans"]:
             kinds = [self.site["docs"][d]["kind"] for d in p["docs"]]
