@@ -63,3 +63,11 @@ H1036-323-0,dvha.I_alt_care_otc_travel,,Worldwide ER $115,EOC,Acupuncture Availa
 H5216-428-2,dvha.I_alt_care_otc_travel,,Worldwide ER $130,EOC,Acupuncture Available for people with chronic low back pain under certain circumstances
 H5216-427-2,dvha.I_alt_care_otc_travel,,OTC covered; Worldwide ER $115,EOC,Acupuncture Available for people with chronic low back pain under certain circumstances
 H5216-455-0,dvha.I_alt_care_otc_travel,,Worldwide ER $130,EOC,Acupuncture Available for people with chronic low back pain under certain circumstances
+H2001-045-0,J_outpatient_rehab,,0%-20%,SB,"Therapy Visit Medicaid eligibility, $0 copay or 20% coinsurance"
+H2001-045-0,K_tests_labs,,0%-20%/$0,SB,"Diagnostic tests and procedures2 Medicaid eligibility, $0 copay or 20% coinsurance"
+H2001-045-0,K_tests_labs,,0%-20%/$0,SB,Lab services2 $0 copay $0 copay
+H7199-002-0,G_specialist,1,$45,EOC,Services from a specialist: $45
+H1036-317-0,dvha.J_extra_benefits,,Fitness; Meals; Routine foot care 20% 12/year; SSBCI benefits for qualifying chronic conditions; Targeted (UF/VBID): Virtual Cardiac Recovery Program; Targeted (UF/VBID): Healthy Options Allowance,SB,20% of the cost for routine podiatry visits
+H7006-018-0,dvha.I_alt_care_otc_travel,,"Acup, Chiro, Naturopath from $50/six months allowance; OTC $30/three months; Worldwide ER $300, $250,000 max",EOC,$50 allowance every six
+H7006-021-0,dvha.I_alt_care_otc_travel,,"Acup, Chiro, Naturopath from $100/six months allowance; OTC $150/three months; Worldwide ER $120, $250,000 max",EOC,$100 allowance every six
+H9003-001-0;H9003-006-0;H9003-009-0,X_transportation,,,EOC,"Transportation by car, taxi, bus,"
