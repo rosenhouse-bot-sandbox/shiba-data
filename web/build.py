@@ -110,8 +110,9 @@ def site_data(data_dir=DATA):
             "quote": c["quote"],
         })
     for sheet_cites in cites.values():
-        for cell_cites in sheet_cites.values():
-            cell_cites.sort(key=lambda c: docs[c["doc"]]["kind"] == "SB")
+        for key, cell_cites in sheet_cites.items():
+            if any(docs[c["doc"]]["kind"] != "SB" for c in cell_cites):
+                sheet_cites[key] = [c for c in cell_cites if docs[c["doc"]]["kind"] != "SB"]
     pbp = {sheet: {(r["plan_id"], r["column"]): r["pbp"] for r in rows(name, data_dir)}
            for sheet, name in (("main", "pbp_vs_documents.csv"), ("dvha", "pbp_vs_documents_dvha.csv"))}
 

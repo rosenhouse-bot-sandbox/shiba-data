@@ -140,10 +140,9 @@ class EocCitationsTest(unittest.TestCase):
     def cites(self, sheet, column):
         return next(r for r in self.site[sheet]["rows"] if r["plan_id"] == "H3805-048-0")["cells"][column]["cites"]
 
-    def test_eoc_cite_precedes_summary_of_benefits_cites(self):
+    def test_eoc_cite_replaces_sb_cites(self):
         cites = self.cites("main", "L_xray_imaging")
-        self.assertEqual([(c["line"], c["quote"]) for c in cites], [(None, "x-ray quote"), (2, "$320 copay otherwise")])
-        self.assertEqual(cites[0], {"line": None, "value": "$30 | $320", "doc": self.eoc_id, "page": 80, "quote": "x-ray quote"})
+        self.assertEqual(cites, [{"line": None, "value": "$30 | $320", "doc": self.eoc_id, "page": 80, "quote": "x-ray quote"}])
 
     def test_eoc_cite_goes_to_its_own_sheet(self):
         self.assertEqual([c["quote"] for c in self.cites("dvha", "C_premium")], ["premium quote"])
