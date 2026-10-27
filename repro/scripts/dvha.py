@@ -11,7 +11,8 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import pbp  # noqa: E402
-from main_chart import first, flag, money, num, pct, sheet, span, write_csv  # noqa: E402
+import main_chart  # noqa: E402
+from main_chart import first, flag, money, num, pct, span, write_csv  # noqa: E402
 
 DICTIONARY = {}
 COMPREHENSIVE = {"rs": "restorative", "end": "endodontics", "peri": "periodontics", "prm": "removable prosthodontics",
@@ -176,15 +177,20 @@ def dvha_row(landscape, plan):
     }
 
 
+def sheet(plans, data, citations):
+    return main_chart.sheet(plans, data, citations, dvha_row, dvha=True)
+
+
 def main(plans_csv, pbp_dir, citations_csv, out_csv, diffs_csv):
     global DICTIONARY
     DICTIONARY = pbp.load_dictionary(os.path.join(pbp_dir, "PBP_Benefits_2027_dictionary.xlsx"))
     plans = list(csv.DictReader(open(plans_csv)))
     citations = list(csv.DictReader(open(citations_csv)))
     data = pbp.load(pbp_dir, [p["plan_id"] for p in plans])
-    rows, diffs = sheet(plans, data, citations, dvha_row, dvha=True)
+    rows, diffs = sheet(plans, data, citations)
     write_csv(out_csv, rows)
     write_csv(diffs_csv, diffs)
+
 
 if __name__ == "__main__":
     main(*sys.argv[1:])

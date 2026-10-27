@@ -55,7 +55,7 @@ For items 2 and 13 the generator prints "Part B deductible" instead of a dollar 
 ### DVHA sheet
 
 `scripts/dvha.py` writes short summaries of the mandatory supplemental benefits. Optional riders go in column E.
-`data/sb_facts.csv` rows whose column starts with `dvha.` replace whole DVHA cells with EOC values. `data/pbp_vs_documents_dvha.csv` lists those 23 cells.
+`data/sb_facts.csv` rows whose column starts with `dvha.` replace whole DVHA cells with EOC values. `data/pbp_vs_documents_dvha.csv` lists those 29 cells. Their PBP parts are copied by hand, so a PBP update needs a check against that file.
 These DVHA items are reproduced: 1 (Wellcare comprehensive dental covers adjunctive services only), 2 (Kaiser Standard $100/2-year eyewear), 3 ($25,000 worldwide cap on all 7 Devoted rows), 6 (Regence routine podiatry, $0 for 6 visits a year, which the PBP files as a targeted benefit), and 7 (Humana MyOption $1,500 max).
 These items are not reproduced: 4 (Devoted rewards) and 5 (Regence virtual urgent care out of network). Rewards programs are not in the PBP, and the generator does not cover virtual care.
 

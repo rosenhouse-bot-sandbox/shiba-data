@@ -274,5 +274,6 @@ def main(plans_csv, pbp_dir, citations_csv, out_csv, diffs_csv):
     write_csv(out_csv, rows)
     write_csv(diffs_csv, diffs)
 
+
 if __name__ == "__main__":
     main(*sys.argv[1:])

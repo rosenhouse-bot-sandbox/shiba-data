@@ -113,6 +113,10 @@ class DocumentTest(unittest.TestCase):
         self.assertEqual(cite.naturopathy_dot("use your Wellness Bucks towards office visits to a Naturopath"), "◐")
         self.assertEqual(cite.naturopathy_dot("$0 copay for naturopathy visits"), "●")
 
+    def test_naturopathy_judgment_call_in_one_document_applies_to_the_plan(self):
+        rows = [{"plan_id": "A", "value": "●"}, {"plan_id": "A", "value": "◐"}, {"plan_id": "B", "value": "●"}]
+        self.assertEqual([r["value"] for r in cite.plan_dots(rows)], ["◐", "◐", "●"])
+
     def test_find_page_collapses_whitespace(self):
         self.assertEqual(cite.find_page({7: "MRI, CT, and PET $150 per visit"}, "MRI, CT,\nand PET  $150"), 7)
 

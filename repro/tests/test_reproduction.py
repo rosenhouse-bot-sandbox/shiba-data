@@ -34,7 +34,7 @@ def generate():
     plans = [p for p in rows("plans.csv") if p["plan_id"] in fixture["plans"]]
     citations = rows("citations.csv")
     main, _ = mc.sheet(plans, fixture["plans"], citations, mc.chart_row)
-    extra, _ = mc.sheet(plans, fixture["plans"], citations, dvha.dvha_row, dvha=True)
+    extra, _ = dvha.sheet(plans, fixture["plans"], citations)
     return {r["plan_id"]: r for r in main}, {r["plan_id"]: r for r in extra}
 
 
@@ -63,6 +63,16 @@ class CommittedSheetsMatchGenerators(unittest.TestCase):
             for plan_id, row in generated.items():
                 with self.subTest(sheet=name, plan=plan_id):
                     self.assertEqual(committed[plan_id], row)
+
+
+class CommittedSheetsHoldEveryCitation(unittest.TestCase):
+    def test_values(self):
+        sheets = {"main": load("main_chart.csv"), "dvha": load("dvha.csv")}
+        for c in rows("citations.csv"):
+            name = "dvha" if c["column"].startswith("dvha.") else "main"
+            cell = sheets[name][c["plan_id"]][c["column"].removeprefix("dvha.")]
+            with self.subTest(**c):
+                self.assertEqual(cell.split(" | ")[int(c["line"]) - 1] if c["line"] else cell, c["value"])
 
 
 class DvhaReproducesCorrections(unittest.TestCase):
