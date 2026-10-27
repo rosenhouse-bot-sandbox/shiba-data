@@ -82,6 +82,19 @@ class MainChartTest(unittest.TestCase):
                                  {"column": "U_naturopath", "line": "", "value": "●"}])
         self.assertEqual(row, {"L_xray_imaging": "$0-$145 | $205-$345", "U_naturopath": "●"})
 
+    def test_sheets_take_their_own_citations(self):
+        plans = [{"plan_id": "P"}]
+        cite = {"plan_id": "P", "line": "", "kind": "EOC", "pdf_page": "9", "quote": "q"}
+        citations = [dict(cite, column="A", value="main"), dict(cite, column="dvha.A", value="dvha")]
+        make_row = lambda landscape, plan: {"A": "pbp"}
+        rows, diffs = mc.sheet(plans, {"P": {}}, citations, make_row)
+        self.assertEqual(rows, [{"A": "main"}])
+        self.assertEqual([d["column"] for d in diffs], ["A"])
+        rows, diffs = mc.sheet(plans, {"P": {}}, citations, make_row, dvha=True)
+        self.assertEqual(rows, [{"A": "dvha"}])
+        self.assertEqual(diffs, [{"plan_id": "P", "column": "A", "pbp": "pbp", "documents": "dvha",
+                                  "citations": 'EOC p9: "q"'}])
+
 
 class DocumentTest(unittest.TestCase):
     def test_id_patterns_match_printed_forms(self):
@@ -99,6 +112,10 @@ class DocumentTest(unittest.TestCase):
     def test_naturopathy_from_wellness_fund_is_a_judgment_call(self):
         self.assertEqual(cite.naturopathy_dot("use your Wellness Bucks towards office visits to a Naturopath"), "◐")
         self.assertEqual(cite.naturopathy_dot("$0 copay for naturopathy visits"), "●")
+
+    def test_naturopathy_judgment_call_in_one_document_applies_to_the_plan(self):
+        rows = [{"plan_id": "A", "value": "●"}, {"plan_id": "A", "value": "◐"}, {"plan_id": "B", "value": "●"}]
+        self.assertEqual([r["value"] for r in cite.plan_dots(rows)], ["◐", "◐", "●"])
 
     def test_find_page_collapses_whitespace(self):
         self.assertEqual(cite.find_page({7: "MRI, CT, and PET $150 per visit"}, "MRI, CT,\nand PET  $150"), 7)

@@ -116,25 +116,27 @@ test("plan page lists the plan's documents", async () => {
   assert.match(docs, /Evidence of Coverage/);
 });
 
-test("every citation's quote is highlighted in full on its page", { timeout: 600_000 }, async () => {
+test("every citation's quote is highlighted in full on its page", { timeout: 1_200_000 }, async () => {
   const squash = (t) => t.replace(/\s+/g, "").toLowerCase();
   const wrong = [];
-  await page.goto(`${base}#/main`);
-  for (const r of site.main.rows) {
-    for (const [col, cell] of Object.entries(r.cells)) {
-      if (!cell.cites.length) continue;
-      await row(r.plan_id).locator("td").nth(site.main.columns.findIndex((c) => c.key === col)).click();
-      for (const [i, c] of cell.cites.entries()) {
-        if (i) {
-          // Two cites can share a page, so clear the marker before the next render sets it.
-          await page.$eval("#page-area", (area) => delete area.dataset.shown);
-          await page.locator("#source-note a").nth(i).click();
+  for (const sheet of ["main", "dvha"]) {
+    await page.goto(`${base}#/${sheet}`);
+    for (const r of site[sheet].rows) {
+      for (const [col, cell] of Object.entries(r.cells)) {
+        if (!cell.cites.length) continue;
+        await row(r.plan_id).locator("td").nth(site[sheet].columns.findIndex((c) => c.key === col)).click();
+        for (const [i, c] of cell.cites.entries()) {
+          if (i) {
+            // Two cites can share a page, so clear the marker before the next render sets it.
+            await page.$eval("#page-area", (area) => delete area.dataset.shown);
+            await page.locator("#source-note a").nth(i).click();
+          }
+          await shown(c.doc, c.page);
+          // A re-issued PDF may have moved the quote; the viewer warns about it instead.
+          if (site.docs[c.doc].changed) continue;
+          const marked = (await page.locator(".textLayer mark").allTextContents()).join("");
+          if (squash(marked) !== squash(c.quote)) wrong.push(`${sheet} ${r.plan_id} ${col} ${c.doc} p${c.page}`);
         }
-        await shown(c.doc, c.page);
-        // A re-issued PDF may have moved the quote; the viewer warns about it instead.
-        if (site.docs[c.doc].changed) continue;
-        const marked = (await page.locator(".textLayer mark").allTextContents()).join("");
-        if (squash(marked) !== squash(c.quote)) wrong.push(`${r.plan_id} ${col} ${c.doc} p${c.page}`);
       }
     }
   }

@@ -30,6 +30,12 @@ def naturopathy_dot(context):
     return "◐" if re.search(r"wellness", context, re.I) else "●"
 
 
+def plan_dots(rows):
+    """A plan's naturopathy dot is ◐ when any of its documents makes it a judgment call."""
+    judged = {r["plan_id"] for r in rows if r["value"] == "◐"}
+    return [dict(r, value="◐" if r["plan_id"] in judged else r["value"]) for r in rows]
+
+
 def naturopathy_mentions(doc_pages):
     """Pages that mention naturopathy other than in an exclusions-table "not covered" entry."""
     found = []
@@ -53,14 +59,16 @@ def main(facts_csv, docs_csv, text_dir, out_csv):
                 continue
             out.append(dict(plan_id=plan, column=f["column"], line=f["line"], value=f["value"],
                             kind=f["kind"], url=doc["url"], pdf_page=page, quote=norm(f["quote"])))
+    naturopathy = []
     for doc in docs:
         mentions = naturopathy_mentions(text[doc["text_file"]])
         if mentions:
             page, ctx = mentions[0]
             value = naturopathy_dot(ctx)
             for plan in doc["plan_ids"].split(";"):
-                out.append(dict(plan_id=plan, column="U_naturopath", line="", value=value, kind=doc["kind"],
-                                url=doc["url"], pdf_page=page, quote=ctx))
+                naturopathy.append(dict(plan_id=plan, column="U_naturopath", line="", value=value, kind=doc["kind"],
+                                        url=doc["url"], pdf_page=page, quote=ctx))
+    out += plan_dots(naturopathy)
     with open(out_csv, "w", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=list(out[0]))
         w.writeheader()

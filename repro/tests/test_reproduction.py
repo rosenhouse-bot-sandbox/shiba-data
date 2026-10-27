@@ -31,14 +31,11 @@ def generate():
     with gzip.open(os.path.join(HERE, "fixtures", "pbp_appendix_b.json.gz"), "rt") as f:
         fixture = json.load(f)
     dvha.DICTIONARY = {(stem, field): {"codes": codes} for stem, field, codes in fixture["codes"]}
-    landscape = load("plans.csv")
+    plans = [p for p in rows("plans.csv") if p["plan_id"] in fixture["plans"]]
     citations = rows("citations.csv")
-    main, extra = {}, {}
-    for plan_id, plan in fixture["plans"].items():
-        main[plan_id] = mc.chart_row(landscape[plan_id], plan)
-        mc.apply_citations(main[plan_id], [c for c in citations if c["plan_id"] == plan_id])
-        extra[plan_id] = dvha.dvha_row(landscape[plan_id], plan)
-    return main, extra
+    main, _ = mc.sheet(plans, fixture["plans"], citations, mc.chart_row)
+    extra, _ = dvha.sheet(plans, fixture["plans"], citations)
+    return {r["plan_id"]: r for r in main}, {r["plan_id"]: r for r in extra}
 
 
 MAIN, DVHA = {}, {}
@@ -66,6 +63,16 @@ class CommittedSheetsMatchGenerators(unittest.TestCase):
             for plan_id, row in generated.items():
                 with self.subTest(sheet=name, plan=plan_id):
                     self.assertEqual(committed[plan_id], row)
+
+
+class CommittedSheetsHoldEveryCitation(unittest.TestCase):
+    def test_values(self):
+        sheets = {"main": load("main_chart.csv"), "dvha": load("dvha.csv")}
+        for c in rows("citations.csv"):
+            name = "dvha" if c["column"].startswith("dvha.") else "main"
+            cell = sheets[name][c["plan_id"]][c["column"].removeprefix("dvha.")]
+            with self.subTest(**c):
+                self.assertEqual(cell.split(" | ")[int(c["line"]) - 1] if c["line"] else cell, c["value"])
 
 
 class DvhaReproducesCorrections(unittest.TestCase):
