@@ -318,11 +318,12 @@ class PublishTest(unittest.TestCase):
 
     def test_appends_every_quote_with_those_that_show_the_value_first(self):
         filled.publish(self.accepted(self.value), data=self.data)
-        self.assertTrue((self.data / "eoc_citations.csv").read_bytes().endswith(b"no amount\r\n"))
-        rows = list(csv.DictReader(open(self.data / "eoc_citations.csv")))[-2:]
+        self.assertTrue((self.data / "machine/eoc_citations.csv").read_bytes().endswith(b"no amount\r\n"))
+        rows = list(csv.DictReader(open(self.data / "machine/eoc_citations.csv")))[-2:]
         sheet, column = self.key.split(".")
-        self.assertEqual([(r["sheet"], r["plan_id"], r["column"], r["value"], r["pdf_page"]) for r in rows],
-                         [(sheet, self.plan, column, self.value, page) for page in ("8", "7")])
+        prompt = filled.blanks.prompt_version("filled_prompt.md", "vfilled_prompt.md")
+        self.assertEqual([(r["step"], r["prompt"], r["sheet"], r["plan_id"], r["column"], r["line"], r["value"], r["pdf_page"])
+                          for r in rows], [("filled", prompt, sheet, self.plan, column, "", self.value, page) for page in ("8", "7")])
         self.assertNotIn(self.key, filled.targets(filled.build.site_data(self.data)).get(self.plan, {}))
 
     def test_refuses_a_cell_whose_value_changed_or_that_an_eoc_now_cites(self):
@@ -335,13 +336,13 @@ class PublishTest(unittest.TestCase):
     def test_writes_rows_to_another_file_even_for_cells_an_eoc_cites(self):
         out = self.data / "machine.csv"
         filled.publish(self.accepted(self.value), data=self.data)
-        before = (self.data / "eoc_citations.csv").read_bytes()
+        before = (self.data / "machine/eoc_citations.csv").read_bytes()
         filled.publish(self.accepted(self.value), out, data=self.data)
         filled.publish(self.accepted(self.value), out, data=self.data)
         rows = list(csv.DictReader(open(out)))
         self.assertEqual([(r["plan_id"], r["value"], r["quote"]) for r in rows],
                          [(self.plan, self.value, f"pay {self.value}, then"), (self.plan, self.value, "no amount")])
-        self.assertEqual((self.data / "eoc_citations.csv").read_bytes(), before)
+        self.assertEqual((self.data / "machine/eoc_citations.csv").read_bytes(), before)
 
 
 if __name__ == "__main__":

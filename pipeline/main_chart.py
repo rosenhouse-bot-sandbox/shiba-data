@@ -1,7 +1,6 @@
 """Generates the main MA chart (columns C..AA) from the CMS Landscape and PBP Benefits files.
 
-Usage: python3 -I main_chart.py <plans.csv> <pbp_dir> <citations.csv> <out.csv> <pbp_vs_documents.csv>
-Cells come from the PBP unless citations.csv (made by cite.py) supplies a quoted SB/EOC value.
+Usage: python3 -I main_chart.py <plans.csv> <pbp_dir> <out.csv>
 Each cell is in-network unless noted. Column rules are in fields.py.
 """
 import csv
@@ -232,18 +231,6 @@ def chart_row(landscape, plan):
     return row
 
 
-def apply_citations(row, citations):
-    """Overrides PBP cells with quoted document values."""
-    for c in citations:
-        col = c["column"]
-        if c["line"]:
-            lines = row[col].split(" | ")
-            lines[int(c["line"]) - 1] = c["value"]
-            row[col] = " | ".join(lines)
-        else:
-            row[col] = c["value"]
-
-
 def write_csv(path, rows):
     with open(path, "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(rows[0]))
@@ -251,36 +238,20 @@ def write_csv(path, rows):
         w.writerows(rows)
 
 
-def sheet(plans, data, citations, make_row, dvha=False):
-    """Builds PBP rows and overrides them with this sheet's citations. DVHA citation columns start with "dvha.".
-    Each row must have the columns of fields.py, in its order."""
+def sheet(plans, data, make_row, dvha=False):
+    """Builds a row per plan. Each row must have the columns of fields.py, in its order."""
     columns = ["section", "plan_id", "plan_name"] + list(fields.labels("dvha" if dvha else "main"))
-    mine = [dict(c, column=c["column"].removeprefix("dvha.")) for c in citations
-            if c["column"].startswith("dvha.") == dvha]
-    rows, diffs = [], []
-    for p in plans:
-        row = make_row(p, data[p["plan_id"]])
-        before = dict(row)
-        cites = [c for c in mine if c["plan_id"] == p["plan_id"]]
-        apply_citations(row, cites)
-        for col in row:
-            if row[col] != before[col]:
-                quotes = [c for c in cites if c["column"] == col]
-                diffs.append(dict(plan_id=p["plan_id"], column=col, pbp=before[col], documents=row[col],
-                                  citations=" / ".join(f'{c["kind"]} p{c["pdf_page"]}: "{c["quote"]}"' for c in quotes)))
+    rows = [make_row(p, data[p["plan_id"]]) for p in plans]
+    for p, row in zip(plans, rows):
         if list(row) != columns:
             raise ValueError(f"{p['plan_id']}: columns differ from pipeline/fields.py: {list(row)}")
-        rows.append(row)
-    return rows, diffs
+    return rows
 
 
-def main(plans_csv, pbp_dir, citations_csv, out_csv, diffs_csv):
+def main(plans_csv, pbp_dir, out_csv):
     plans = list(csv.DictReader(open(plans_csv)))
-    citations = list(csv.DictReader(open(citations_csv)))
     data = pbp.load(pbp_dir, [p["plan_id"] for p in plans])
-    rows, diffs = sheet(plans, data, citations, chart_row)
-    write_csv(out_csv, rows)
-    write_csv(diffs_csv, diffs)
+    write_csv(out_csv, sheet(plans, data, chart_row))
 
 
 if __name__ == "__main__":

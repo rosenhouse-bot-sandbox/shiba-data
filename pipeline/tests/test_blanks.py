@@ -1,4 +1,5 @@
 import csv, json, os, pathlib, shutil, sys, tempfile, unittest
+from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import blanks
@@ -48,6 +49,17 @@ class FillTest(unittest.TestCase):
             text = blanks.fill(template, PLAN_ID="H9003-001-0")
             self.assertIn(f"Seen in Kaiser Permanente EOCs: {fields.CARRIERS['Kaiser Permanente']}", text)
             self.assertNotIn("Seen in", blanks.fill(template, PLAN_ID="H2056-003-0"))
+
+    def test_prompt_version_changes_with_each_template_and_fields_py(self):
+        with tempfile.TemporaryDirectory() as tmp, mock.patch.object(blanks, "HERE", tmp):
+            for name in ("a.md", "b.md", "fields.py"):
+                pathlib.Path(tmp, name).write_text(name)
+            versions = [blanks.prompt_version("a.md", "b.md")]
+            for name in ("a.md", "b.md", "fields.py"):
+                pathlib.Path(tmp, name).write_text("changed " + name)
+                versions.append(blanks.prompt_version("a.md", "b.md"))
+        self.assertRegex(versions[0], r"^[0-9a-f]{12}$")
+        self.assertEqual(len(set(versions)), 4)
 
 
 class UncitedBlanksTest(unittest.TestCase):
@@ -157,11 +169,13 @@ class PublishTest(unittest.TestCase):
     def test_appends_a_blank_valued_citation(self):
         plan, key = self.blank
         blanks.publish(self.accepted(plan, key), self.data)
-        raw = (self.data / "eoc_citations.csv").read_bytes()
+        raw = (self.data / "machine/eoc_citations.csv").read_bytes()
         self.assertTrue(raw.endswith(b'"q, r"\r\n'))
-        last = list(csv.DictReader(open(self.data / "eoc_citations.csv")))[-1]
-        self.assertEqual((last["sheet"], last["plan_id"], last["column"], last["value"], last["pdf_page"]),
-                         (key.split(".")[0], plan, key.split(".")[1], "", "7"))
+        last = list(csv.DictReader(open(self.data / "machine/eoc_citations.csv")))[-1]
+        self.assertEqual((last["step"], last["prompt"], last["sheet"], last["plan_id"], last["column"], last["line"],
+                          last["value"], last["pdf_page"]),
+                         ("blanks", blanks.prompt_version("blank_prompt.md", "vblank_prompt.md"), key.split(".")[0], plan,
+                          key.split(".")[1], "", "", "7"))
         self.assertEqual(blanks.cells(self.data)[key][plan]["cites"][0]["quote"], "q, r")
 
     def test_refuses_a_cell_that_is_no_longer_an_uncited_blank(self):
@@ -178,7 +192,8 @@ class DocTest(unittest.TestCase):
         self.data, self.work = root / "data", root / "work"
         for d in (self.data, self.work / "text", self.work / "items"):
             d.mkdir(parents=True)
-        (self.data / "documents_checked.csv").write_text(
+        (self.data / "generated").mkdir()
+        (self.data / "generated/documents_checked.csv").write_text(
             "kind,url,sha256,pages,plan_ids\nSB,https://x/sb.pdf,0000000000000000ff,2,P-1;P-3\n"
             "EOC,https://x/eoc.pdf,abcdef0123456789ff,2,P-1;P-2\n")
         (self.work / "text" / "abcdef0123456789.txt").write_text(

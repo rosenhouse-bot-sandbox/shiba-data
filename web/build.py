@@ -20,6 +20,7 @@ import zipfile
 HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent / "pipeline"))
 import fields  # noqa: E402
+import layers  # noqa: E402
 import years  # noqa: E402
 
 DATA = years.data_dir()
@@ -58,7 +59,7 @@ def cell(value, cites, pbp, comment):
 def site_data(data_dir=DATA):
     config = years.config(data_dir)
     year = config["year"]
-    checked = rows("documents_checked.csv", data_dir)
+    checked = rows("generated/documents_checked.csv", data_dir)
     doc_by_url = {d["url"]: d["sha256"][:16] for d in checked}
     docs = {d["sha256"][:16]: {
         "kind": d["kind"],
@@ -68,12 +69,13 @@ def site_data(data_dir=DATA):
         "plan_ids": d["plan_ids"].split(";"),
     } for d in checked}
 
+    live, kept, _ = layers.live(data_dir)
     cites = {"main": {}, "dvha": {}}
-    documented = [dict(c, sheet="dvha", column=c["column"].removeprefix("dvha.")) if c["column"].startswith("dvha.")
-                  else dict(c, sheet="main") for c in rows("citations.csv", data_dir)]
-    for c in documented + rows("eoc_citations.csv", data_dir):
+    for c in kept:
+        if c["url"] not in doc_by_url:
+            raise ValueError(f"A citation names a document not in documents_checked.csv: {layers.where(c)} {c['url']}")
         cites[c["sheet"]].setdefault((c["plan_id"], c["column"]), []).append({
-            "line": int(c["line"]) if c.get("line") else None,
+            "line": int(c["line"]) if c["line"] else None,
             "value": c["value"],
             "doc": doc_by_url[c["url"]],
             "page": int(c["pdf_page"]),
@@ -83,15 +85,14 @@ def site_data(data_dir=DATA):
         for key, cell_cites in sheet_cites.items():
             if any(docs[c["doc"]]["kind"] != "SB" for c in cell_cites):
                 sheet_cites[key] = [c for c in cell_cites if docs[c["doc"]]["kind"] != "SB"]
-    pbp = {kind: {(r["plan_id"], r["column"]): r["pbp"] for r in rows(name, data_dir)}
-           for kind, name in (("main", "pbp_vs_documents.csv"), ("dvha", "pbp_vs_documents_dvha.csv"))}
+    pbp = {name: {(g["plan_id"], k): v for g, r in zip(generated, live[name]) for k, v in g.items() if r[k] != v}
+           for name, generated in layers.generated(data_dir).items()}
 
-    plans = rows("plans.csv", data_dir)
+    plans = rows("generated/plans.csv", data_dir)
     for p in plans:
         p["docs"] = [i for i, d in docs.items() if p["plan_id"] in d["plan_ids"]]
         p["plan_finder_url"] = f"https://www.medicare.gov/plan-compare/#/plan-details/{year}-{p['plan_id']}?year={year}&lang=en"
-    sheets = {"main": (rows("main_chart.csv", data_dir), fields.labels("main")),
-              "dvha": (rows("dvha.csv", data_dir), fields.labels("dvha"))}
+    sheets = {name: (live[name], fields.labels(name)) for name in ("main", "dvha")}
     comments = {"main": {}, "dvha": {}}
     for c in rows("comments.csv", data_dir):
         csv_rows, labels = sheets[c["sheet"]]
@@ -170,7 +171,7 @@ def zip_name(plan_id, plan_name, kind):
 
 def zip_documents(release_dir, zip_path, data_dir=DATA):
     manifest = json.loads((release_dir / "documents.json").read_text())
-    checked = {d["sha256"][:16]: d for d in rows("documents_checked.csv", data_dir)}
+    checked = {d["sha256"][:16]: d for d in rows("generated/documents_checked.csv", data_dir)}
     with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as z:
         for doc_id, entry in manifest.items():
             pdf = release_dir / entry["file"]
@@ -194,6 +195,8 @@ def main(command, out, release=None):
         return
     out_dir = pathlib.Path(out)
     site = site_data()
+    for c in layers.live(DATA)[2]:
+        print(f"::warning::Dropped a citation whose value is not the live cell's: {layers.where(c)} {c['value']}")
     if command == "documents":
         failed = save_documents(site["docs"], out_dir, datetime.date.today().isoformat())
         if failed:

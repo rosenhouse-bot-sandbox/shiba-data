@@ -7,18 +7,18 @@ where <documents> comes from `web/build.py documents` or the documents.tar relea
   blanks.py claims  <work> <dir> <claims.json>        answers whose quotes pass the mechanical checks
   blanks.py verify  <work> <claims.json> <vdir>       verifier task files <vdir>/v-NN.md, with decoys from cells plans fill
   blanks.py accept  <work> <vdir> <accepted.json>     claims the verifier accepted; fails if it accepted a decoy
-  blanks.py publish <accepted.json>                   appends the citations to data/<year>/eoc_citations.csv
+  blanks.py publish <accepted.json>                   appends the citations to data/<year>/machine/eoc_citations.csv
 
 Give each task file to a small model (a Haiku subagent): "Read <file> and do exactly the task it describes."
 It writes its answer where the file says: <dir>/a-<plan>.json or <vdir>/ans-NN.json.
 For a second, independent check, run verify and accept again on accepted.json before publishing.
 """
-import collections, csv, glob, io, json, os, pathlib, random, re, sys
+import collections, csv, glob, hashlib, io, json, os, pathlib, random, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(os.path.dirname(HERE), "web"))
-import fields, years
+import fields, layers, years
 from eoc import DATA, Doc, eoc, norm
 from fields import FIELDS
 
@@ -82,7 +82,7 @@ def passages(layout, key, keep=lambda snippet: True):
 
 
 def notes(plan_id):
-    with open(f"{DATA}/plans.csv") as f:
+    with open(f"{DATA}/generated/plans.csv") as f:
         org = next((r["organization"] for r in csv.DictReader(f) if r["plan_id"] == plan_id), None)
     return f"\nSeen in {org} EOCs: {fields.CARRIERS[org]}" if org in fields.CARRIERS else ""
 
@@ -98,9 +98,18 @@ def fill(template, **values):
     return text
 
 
+def prompt_version(*templates):
+    """Hashes the templates and fields.py, whose meanings and carrier notes the prompts show."""
+    h = hashlib.sha256()
+    for name in (*templates, "fields.py"):
+        with open(f"{HERE}/{name}", "rb") as f:
+            h.update(f.read())
+    return h.hexdigest()[:12]
+
+
 def bundle(work, out_dir):
     os.makedirs(out_dir, exist_ok=True)
-    names = {r["plan_id"]: r["plan_name"] for r in csv.DictReader(open(f"{DATA}/main_chart.csv"))}
+    names = {r["plan_id"]: r["plan_name"] for r in csv.DictReader(open(f"{DATA}/generated/plans.csv"))}
     for plan, keys in sorted(uncited_blanks(cells()).items()):
         layout = Doc(work, plan).pages("layout")
         head = fill("blank_prompt.md", PLAN_NAME=names[plan], PLAN_ID=plan, YEAR=str(years.config(DATA)["year"]),
@@ -232,7 +241,9 @@ def accept(work, verify_dir, out):
 
 
 def citation_rows(acc, url_of):
-    return [[c["key"].split(".")[0], c["plan"], c["key"].split(".")[1], "", url_of(c["plan"]), q["page"], q["quote"]]
+    prompt = prompt_version("blank_prompt.md", "vblank_prompt.md")
+    return [dict(step="blanks", prompt=prompt, sheet=c["key"].split(".")[0], plan_id=c["plan"], column=c["key"].split(".")[1],
+                 line="", value="", url=url_of(c["plan"]), pdf_page=q["page"], quote=q["quote"])
             for c in sorted(acc, key=lambda c: (c["key"], c["plan"])) for q in c["citations"]]
 
 
@@ -244,8 +255,9 @@ def publish(accepted_path, data=DATA):
     if stale:
         raise SystemExit(f"No longer uncited blanks: {stale}")
     buf = io.StringIO()
-    csv.writer(buf, lineterminator="\r\n").writerows(citation_rows(acc, lambda plan: eoc(plan, data)[1]))
-    with open(f"{data}/eoc_citations.csv", "a", newline="") as f:
+    csv.DictWriter(buf, fieldnames=layers.MACHINE_COLUMNS, lineterminator="\r\n").writerows(
+        citation_rows(acc, lambda plan: eoc(plan, data)[1]))
+    with open(f"{data}/machine/eoc_citations.csv", "a", newline="") as f:
         f.write(buf.getvalue())
 
 

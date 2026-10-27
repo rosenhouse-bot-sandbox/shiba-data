@@ -1,8 +1,7 @@
 """Generates the DVHA sheet (dental, vision, hearing, alternative care) from the CMS PBP Benefits files.
 
-Usage: python3 -I dvha.py <plans.csv> <pbp_dir> <citations.csv> <out.csv> <diffs.csv>
+Usage: python3 -I dvha.py <plans.csv> <pbp_dir> <out.csv>
 Cells summarize in-network supplemental benefits. Column rules are in fields.py.
-Citations whose column starts with "dvha." replace whole cells.
 """
 import csv
 import os
@@ -176,19 +175,16 @@ def dvha_row(landscape, plan):
     }
 
 
-def sheet(plans, data, citations):
-    return main_chart.sheet(plans, data, citations, dvha_row, dvha=True)
+def sheet(plans, data):
+    return main_chart.sheet(plans, data, dvha_row, dvha=True)
 
 
-def main(plans_csv, pbp_dir, citations_csv, out_csv, diffs_csv):
+def main(plans_csv, pbp_dir, out_csv):
     global DICTIONARY
     DICTIONARY = pbp.load_dictionary(pbp_dir)
     plans = list(csv.DictReader(open(plans_csv)))
-    citations = list(csv.DictReader(open(citations_csv)))
     data = pbp.load(pbp_dir, [p["plan_id"] for p in plans])
-    rows, diffs = sheet(plans, data, citations)
-    write_csv(out_csv, rows)
-    write_csv(diffs_csv, diffs)
+    write_csv(out_csv, sheet(plans, data))
 
 
 if __name__ == "__main__":

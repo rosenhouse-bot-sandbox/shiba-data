@@ -6,6 +6,7 @@ import io
 import json
 import os
 import pathlib
+import shutil
 import sys
 import tempfile
 import unittest
@@ -18,18 +19,19 @@ import build  # noqa: E402
 DATA = build.years.data_dir(2027)
 
 
-EOC_HEADER = ["sheet", "plan_id", "column", "value", "url", "pdf_page", "quote"]
-
-
-def data_copy(tmp, eoc_rows, year=2027):
-    """A copy of DATA, as data for `year`, whose eoc_citations.csv holds only eoc_rows."""
+def data_copy(tmp, machine_rows, year=2027):
+    """A copy of DATA, as data for `year`, whose machine layer holds only machine_rows."""
     data = pathlib.Path(tmp) / str(year)
-    data.mkdir()
-    for f in [*DATA.glob("*.csv"), DATA / "config.json"]:
-        (data / f.name).write_bytes(f.read_bytes())
-    with open(data / "eoc_citations.csv", "w", newline="") as f:
-        csv.writer(f).writerows([EOC_HEADER, *eoc_rows])
+    shutil.copytree(DATA, data)
+    with open(data / "machine/eoc_citations.csv", "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=build.layers.MACHINE_COLUMNS)
+        w.writeheader()
+        w.writerows(dict(step="test", prompt="", line="", **r) for r in machine_rows)
     return data
+
+
+def cite(sheet, column, value, url, page, quote, plan_id="H3805-048-0"):
+    return dict(sheet=sheet, plan_id=plan_id, column=column, value=value, url=url, pdf_page=page, quote=quote)
 
 
 H6815_038_EOC = "https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf"
@@ -165,12 +167,13 @@ class SiteDataTest(unittest.TestCase):
 class EocCitationsTest(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
-        eoc = next(d for d in build.rows("documents_checked.csv", DATA)
+        eoc = next(d for d in build.rows("generated/documents_checked.csv", DATA)
                    if d["kind"] == "EOC" and "H3805-048-0" in d["plan_ids"])
         self.eoc_id = eoc["sha256"][:16]
         self.site = build.site_data(data_copy(self.tmp.name, [
-            ["main", "H3805-048-0", "L_xray_imaging", "$30 | $320", eoc["url"], 80, "x-ray quote"],
-            ["dvha", "H3805-048-0", "C_premium", "$0", eoc["url"], 9, "premium quote"],
+            cite("main", "L_xray_imaging", "$30 | $320", eoc["url"], 80, "x-ray quote"),
+            cite("dvha", "C_premium", "$0", eoc["url"], 9, "premium quote"),
+            cite("main", "L_xray_imaging", "$30 | $0-$320", eoc["url"], 76, "stale quote"),
         ]))
 
     def tearDown(self):
@@ -184,36 +187,35 @@ class EocCitationsTest(unittest.TestCase):
         self.assertEqual(cites, [{"line": None, "value": "$30 | $320", "doc": self.eoc_id, "page": 80, "quote": "x-ray quote"}])
 
     def test_eoc_cite_goes_to_its_own_sheet(self):
-        self.assertEqual([c["quote"] for c in self.cites("dvha", "C_premium")], ["premium quote"])
-        self.assertEqual(self.cites("main", "C_premium"), [])
+        self.assertIn("premium quote", [c["quote"] for c in self.cites("dvha", "C_premium")])
+        self.assertNotIn("premium quote", [c["quote"] for c in self.cites("main", "C_premium")])
+
+    def test_a_cite_of_an_unknown_document_fails(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            data = data_copy(tmp, [cite("main", "E_moop", "$6,700", "https://x/reissued.pdf", 45, "q")])
+            with self.assertRaisesRegex(ValueError, "machine/eoc_citations.csv main H3805-048-0 E_moop.*reissued.pdf"):
+                build.site_data(data)
+
+    def test_drops_a_cite_whose_value_an_edit_changed(self):
+        self.assertNotIn("stale quote", [c["quote"] for c in self.cites("main", "L_xray_imaging")])
 
 
-class DvhaCitationsTest(unittest.TestCase):
-    def test_dvha_citation_and_pbp_value_go_to_dvha_cell(self):
+class EditsTest(unittest.TestCase):
+    def test_an_edit_sets_its_dvha_cell_and_keeps_the_pbp_value(self):
         with tempfile.TemporaryDirectory() as tmp:
             data = data_copy(tmp, [])
-            sb = next(d for d in build.rows("documents_checked.csv", DATA)
+            sb = next(d for d in build.rows("generated/documents_checked.csv", DATA)
                       if d["kind"] == "SB" and "H3805-048-0" in d["plan_ids"])
-            with open(data / "citations.csv", "a", newline="") as f:
-                csv.writer(f).writerow(["H3805-048-0", "dvha.F_dental", "", "fixed", "SB", sb["url"], 4, "dental quote"])
-            with open(data / "pbp_vs_documents_dvha.csv", "w", newline="") as f:
-                csv.writer(f).writerows([["plan_id", "column", "pbp", "documents", "citations"],
-                                         ["H3805-048-0", "F_dental", "", "fixed", "SB p4"]])
+            with open(data / "edits.csv", "a", newline="") as f:
+                csv.DictWriter(f, fieldnames=build.layers.COLUMNS).writerow(
+                    dict(cite("dvha", "F_dental", "fixed", sb["url"], 4, "dental quote"), line=""))
             site = build.site_data(data)
+        generated = next(r for r in build.rows("generated/dvha.csv", DATA) if r["plan_id"] == "H3805-048-0")
         row = next(r for r in site["dvha"]["rows"] if r["plan_id"] == "H3805-048-0")
         cell = row["cells"]["F_dental"]
-        self.assertEqual(cell["pbp"], "")
+        self.assertEqual((cell["value"], cell["pbp"]), ("fixed", generated["F_dental"]))
         self.assertEqual([(c["value"], c["page"], c["quote"]) for c in cell["cites"]], [("fixed", 4, "dental quote")])
-        self.assertNotIn("dvha.F_dental", str(site["main"]))
-
-
-class EocCitationsDataTest(unittest.TestCase):
-    def test_each_cites_the_current_cell_value(self):
-        names = {"main": "main_chart.csv", "dvha": "dvha.csv"}
-        for c in build.rows("eoc_citations.csv", DATA):
-            row = next(r for r in build.rows(names[c["sheet"]], DATA) if r["plan_id"] == c["plan_id"])
-            self.assertIn(c["column"], build.fields.labels(c["sheet"]))
-            self.assertEqual(c["value"], row[c["column"]], c)
+        self.assertNotIn("dental quote", str(site["main"]))
 
 
 class FetchPdfsTest(unittest.TestCase):
@@ -302,6 +304,15 @@ class DocumentsTest(unittest.TestCase):
         self.assertIn("::warning::", out.getvalue())
         self.assertIn("gone.pdf", out.getvalue())
 
+    def test_site_command_warns_of_dropped_cites(self):
+        dropped = dict(cite("main", "E_moop", "$6,800", "u", 45, "stale quote"), layer="edits.csv", line="")
+        out = io.StringIO()
+        with (mock.patch.object(build, "site_data", return_value={"docs": {}, "year": 2027, "area": "A"}),
+              mock.patch.object(build.layers, "live", return_value=({}, [], [dropped])), contextlib.redirect_stdout(out)):
+            build.main("site", self.dir / "site")
+        self.assertIn("::warning::", out.getvalue())
+        self.assertIn("edits.csv main H3805-048-0 E_moop", out.getvalue())
+
     def test_site_command_records_build_time_and_titles_the_page(self):
         with mock.patch.object(build, "site_data", return_value={"docs": {}, "year": 2099, "area": "A & B"}):
             build.main("site", self.dir / "site")
@@ -315,8 +326,8 @@ class ZipTest(unittest.TestCase):
         self.tmp = tempfile.TemporaryDirectory()
         self.dir = pathlib.Path(self.tmp.name)
         self.data = self.dir / "data"
-        self.data.mkdir()
-        with open(self.data / "documents_checked.csv", "w", newline="") as f:
+        (self.data / "generated").mkdir(parents=True)
+        with open(self.data / "generated/documents_checked.csv", "w", newline="") as f:
             csv.writer(f).writerows([
                 ["plan_ids", "kind", "sha256", "plan_names"],
                 ["H1-001-0;H1-002-0", "EOC", "a" * 64, "Plan A (HMO); Plan B (PPO)"],
@@ -365,12 +376,12 @@ class ZipTest(unittest.TestCase):
 class ZipDataTest(unittest.TestCase):
     def test_each_plan_has_one_pdf_per_kind(self):
         names = [build.zip_name(plan_id, name, d["kind"])
-                 for d in build.rows("documents_checked.csv", DATA)
+                 for d in build.rows("generated/documents_checked.csv", DATA)
                  for plan_id, name in build.plan_names(d)]
         self.assertEqual(len(names), len(set(names)))
 
     def test_names_are_valid_on_windows(self):
-        for d in build.rows("documents_checked.csv", DATA):
+        for d in build.rows("generated/documents_checked.csv", DATA):
             for plan_id, name in build.plan_names(d):
                 self.assertRegex(build.zip_name(plan_id, name, d["kind"]), r'^[^<>:"/\\|?*]+$')
 

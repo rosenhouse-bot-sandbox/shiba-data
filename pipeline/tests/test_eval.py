@@ -15,12 +15,13 @@ import years  # noqa: E402
 SPECIALIST, DENTAL = ("main", "H1-001-0", "G_specialist"), ("dvha", "H1-001-0", "F_dental")
 
 
-def row(cell, value, quote="q"):
+def row(cell, value, quote="q", line=""):
     sheet, plan_id, column = cell
-    return dict(sheet=sheet, plan_id=plan_id, column=column, value=value, url="u", pdf_page="1", quote=quote)
+    return dict(sheet=sheet, plan_id=plan_id, column=column, line=line, value=value, url="u", pdf_page="1", quote=quote)
 
 
 def write(path, rows):
+    path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(rows[0]))
         w.writeheader()
@@ -28,22 +29,13 @@ def write(path, rows):
 
 
 def write_layers(data):
-    """One plan whose specialist and dental cells sb_facts.csv overrides, and whose naturopathy dot code sets."""
-    data.mkdir(parents=True)
+    """One plan whose specialist and dental cells edits override, and whose naturopathy dot code sets."""
     plan = dict(section="", plan_id="H1-001-0", plan_name="A")
-    write(data / "main_chart.csv", [dict(plan, G_specialist="$40", U_naturopath="◐")])
-    write(data / "dvha.csv", [dict(plan, F_dental="PREV $0")])
-    write(data / "sb_facts.csv", [
-        dict(plan_ids="H1-002-0;H1-001-0", column="G_specialist", line="", value="$40", kind="SB", quote=""),
-        dict(plan_ids="H1-001-0", column="dvha.F_dental", line="", value="PREV $0", kind="EOC", quote="")])
-    write(data / "pbp_vs_documents.csv", [
-        dict(plan_id="H1-001-0", column="G_specialist", pbp="$0-$40", documents="$40", citations=""),
-        dict(plan_id="H1-001-0", column="U_naturopath", pbp="", documents="◐", citations="")])
-    write(data / "pbp_vs_documents_dvha.csv", [
-        dict(plan_id="H1-001-0", column="F_dental", pbp="Dental", documents="PREV $0", citations="")])
-    write(data / "citations.csv", [dict(plan_id="H1-001-0", column="dvha.F_dental", value="PREV $0"),
-                                   dict(plan_id="H1-001-0", column="U_naturopath", value="◐")])
-    write(data / "eoc_citations.csv", [row(SPECIALIST, "$40")])
+    write(data / "generated/main_chart.csv", [dict(plan, G_specialist="$0-$40", U_naturopath="")])
+    write(data / "generated/dvha.csv", [dict(plan, F_dental="Dental")])
+    write(data / "generated/citations.csv", [row(("main", "H1-001-0", "U_naturopath"), "◐")])
+    write(data / "machine/eoc_citations.csv", [dict(step="filled", prompt="p", **row(SPECIALIST, "$40"))])
+    write(data / "edits.csv", [row(SPECIALIST, "$40"), row(DENTAL, "PREV $0")])
 
 
 class ScoreTest(unittest.TestCase):
@@ -83,6 +75,10 @@ class ScoreTest(unittest.TestCase):
         self.assertEqual(got["citations"], (1, 2, [SPECIALIST]))
         self.assertEqual(got["correction precision"], (0, 1, [SPECIALIST]))
 
+    def test_fails_on_a_row_that_sets_one_line(self):
+        with self.assertRaisesRegex(SystemExit, "one line"):
+            self.score(row(SPECIALIST, "$40", line="1"))
+
     def test_fails_on_a_row_that_names_no_cell(self):
         with self.assertRaisesRegex(SystemExit, "H1-002-0"):
             self.score(row(("main", "H1-002-0", "G_specialist"), "$40"))
@@ -95,15 +91,14 @@ class LayersTest(unittest.TestCase):
         self.data = pathlib.Path(tmp.name, "data", "2099")
         write_layers(self.data)
 
-    def test_generated_cells_undo_only_hand_written_rows(self):
-        live = eval.live_cells(self.data)
+    def test_generated_cells_keep_code_made_cells(self):
+        live, generated, _ = eval.measured(self.data)
         self.assertEqual(live[("main", "H1-001-0", "U_naturopath")], "◐")
-        generated = eval.generated_cells(self.data, live)
         self.assertEqual({cell: v for cell, v in generated.items() if v != live[cell]},
                          {SPECIALIST: "$0-$40", DENTAL: "Dental"})
 
     def test_cited_cells_leave_out_cells_that_only_code_cites(self):
-        self.assertEqual(eval.cited_cells(self.data), {SPECIALIST, DENTAL})
+        self.assertEqual(eval.measured(self.data)[2], {SPECIALIST, DENTAL})
 
     def test_main_scores_a_machine_file(self):
         machine = self.data / "machine.csv"
@@ -124,10 +119,8 @@ class ReportTest(unittest.TestCase):
 
 class Data2027Test(unittest.TestCase):
     def test_the_live_data_as_machine_rows_scores_full_marks(self):
-        data = years.data_dir(2027)
-        live = eval.live_cells(data)
-        result = eval.score(live, eval.generated_cells(data, live), eval.cited_cells(data),
-                            [row(cell, value) for cell, value in live.items()])
+        live, generated, cited = eval.measured(years.data_dir(2027))
+        result = eval.score(live, generated, cited, [row(cell, value) for cell, value in live.items()])
         self.assertGreater(result["correction recall"][1], 0)
         for name, (hit, total, missed) in result.items():
             self.assertEqual((hit, missed), (total, []), name)

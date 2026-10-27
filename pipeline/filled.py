@@ -6,7 +6,7 @@ Needs what blanks.py needs, including the texts.py <work> directory.
   filled.py claims  <work> <dir> <claims.json>    answers whose quotes pass the mechanical checks
   filled.py verify  <work> <claims.json> <vdir>   one verifier task file per plan, <vdir>/v-<plan>.md, with decoys
   filled.py accept  <vdir> <accepted.json>        claims the verifier accepted; fails if it accepted a decoy
-  filled.py publish <accepted.json> [<out.csv>]   appends the citations to data/<year>/eoc_citations.csv, or writes them to out.csv
+  filled.py publish <accepted.json> [<out.csv>]   appends the citations to data/<year>/machine/eoc_citations.csv, or writes them to out.csv
 
 Give each task file to a subagent: "Read <file> and do exactly the task it describes."
 A small model (Haiku) can answer; verify with Sonnet or Opus. The subagent writes its answer where the file says.
@@ -18,7 +18,7 @@ import collections, csv, glob, json, os, pathlib, random, re, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(os.path.dirname(HERE), "web"))
-import blanks, build, years
+import blanks, build, layers, years
 from blanks import fill
 from eoc import DATA, Doc, eoc
 from fields import FIELDS
@@ -27,7 +27,6 @@ DOTS = ("●", "◐")
 NUMBER = re.compile(r"\$?(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?%?")
 NOT_ROUTINE = re.compile(blanks.EXCLUSION.pattern + r"|medicare.covered|optional", re.I)
 SUPPLEMENTAL = re.compile(r"non.?medicare.covered|not covered by (?:original )?medicare", re.I)
-COLUMNS = ["sheet", "plan_id", "column", "value", "url", "pdf_page", "quote"]
 
 
 def numbers(s):
@@ -131,7 +130,7 @@ def section(key, value, layout, earlier=None):
 
 
 def task(plan, cells, layout, answer, failed=None):
-    names = {r["plan_id"]: r["plan_name"] for r in csv.DictReader(open(f"{DATA}/main_chart.csv"))}
+    names = {r["plan_id"]: r["plan_name"] for r in csv.DictReader(open(f"{DATA}/generated/plans.csv"))}
     head = fill("filled_prompt.md", PLAN_NAME=names[plan], PLAN_ID=plan, YEAR=str(years.config(DATA)["year"]),
                 ANSWER=os.path.abspath(answer))
     body = [section(k, v, layout, (failed or {}).get(k)) for k, v in sorted(cells.items())]
@@ -180,7 +179,7 @@ def verify(work, claims_path, out_dir):
     by_plan = collections.defaultdict(list)
     for c in json.load(open(claims_path)):
         by_plan[c["plan"]].append(c)
-    names = {r["plan_id"]: r["plan_name"] for r in csv.DictReader(open(f"{DATA}/main_chart.csv"))}
+    names = {r["plan_id"]: r["plan_name"] for r in csv.DictReader(open(f"{DATA}/generated/plans.csv"))}
     items = []
     for plan, found in sorted(by_plan.items()):
         rnd = random.Random(plan)
@@ -234,10 +233,12 @@ def lead(key, value, cites):
 
 
 def citation_rows(acc, url_of):
+    prompt = blanks.prompt_version("filled_prompt.md", "vfilled_prompt.md")
     rows = []
     for c in sorted(acc, key=lambda c: (c["key"], c["plan"])):
         sheet, column = c["key"].split(".")
-        rows += [[sheet, c["plan"], column, c["value"], url_of(c["plan"]), q["page"], q["quote"]]
+        rows += [dict(step="filled", prompt=prompt, sheet=sheet, plan_id=c["plan"], column=column, line="", value=c["value"],
+                      url=url_of(c["plan"]), pdf_page=q["page"], quote=q["quote"])
                  for q in lead(c["key"], c["value"], c["citations"])]
     return rows
 
@@ -250,8 +251,11 @@ def publish(accepted_path, out=None, data=DATA):
     if stale:
         raise SystemExit(f"Changed, or already cited by an EOC: {stale}")
     rows = citation_rows(acc, lambda plan: eoc(plan, data)[1])
-    with open(out or f"{data}/eoc_citations.csv", "w" if out else "a", newline="") as f:
-        csv.writer(f, lineterminator="\r\n").writerows(([COLUMNS] if out else []) + rows)
+    with open(out or f"{data}/machine/eoc_citations.csv", "w" if out else "a", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=layers.MACHINE_COLUMNS, lineterminator="\r\n")
+        if out:
+            w.writeheader()
+        w.writerows(rows)
 
 
 COMMANDS = {"bundle": bundle, "claims": claims, "verify": verify, "accept": accept, "publish": publish}
