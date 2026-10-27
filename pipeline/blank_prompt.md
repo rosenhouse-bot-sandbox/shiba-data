@@ -3,7 +3,7 @@
 Do not use any mcp__ tools and do not message anyone. Work only with the files and commands below, then write your answer file.
 
 You help Medicare counselors check a plan comparison sheet against the plan's Evidence of Coverage (EOC). A wrong citation is much worse than a missing one.
-Plan: **{PLAN_NAME}** ({PLAN_ID}), plan year {YEAR}.
+Plan: **{PLAN_NAME}** ({PLAN_ID}), plan year {YEAR}.{NOTES}
 
 Each field below is BLANK on the sheet, which claims the plan does not have that benefit. Below each field are all EOC passages that mention it, in printed layout. Benefit tables have two columns: the service on the left, what you pay on the right. `=====PAGE n=====` marks the PDF page n.
 

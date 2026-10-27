@@ -19,51 +19,13 @@ import zipfile
 
 HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent / "pipeline"))
+import fields  # noqa: E402
 import years  # noqa: E402
 
 DATA = years.data_dir()
 
-MAIN_LABELS = {
-    "C_premium": "Premium",
-    "D_premium_full_extra_help": "Premium w/ Full Extra Help",
-    "E_moop": "MOOP In/Out of Network",
-    "F_primary_care": "Primary Care",
-    "G_specialist": "Specialist",
-    "H_inpatient": "Inpatient Hospital $/Day",
-    "I_outpatient_surgery": "Outpatient Surgery / ASC",
-    "J_outpatient_rehab": "Outpatient Rehab OT, PT, ST",
-    "K_tests_labs": "Diagnostic Tests / Labs",
-    "L_xray_imaging": "X-Ray / Diag Radiology",
-    "M_part_b_drugs": "Chemo / Part B Drugs",
-    "N_pharmacy_deductible": "Pharmacy Deductible",
-    "O_medical_deductible": "Medical Deductible",
-    "P_vision": "Vision",
-    "Q_hearing": "Hearing",
-    "R_dental": "Dental",
-    "S_acupuncture": "Acupuncture",
-    "T_chiropractic": "Chiropractic",
-    "U_naturopath": "Naturopath",
-    "V_massage": "Massage",
-    "W_fitness": "Fitness",
-    "X_transportation": "Transportation",
-    "Y_otc": "OTC",
-    "Z_part_b_reduction": "Pt B Reduction",
-    "AA_opt_packages": "Opt Packages",
-}
-
 # Keep in sync with PAGE_REF in web/static/app.js.
 PAGE_REF = re.compile(r"\b(EOC|SB|rider) pages? (\d+)", re.IGNORECASE)
-
-DVHA_LABELS = {
-    "C_premium": "Monthly Premium",
-    "D_premium_full_extra_help": "Premium w/ Full Extra Help",
-    "E_optional_packages": "Optional Packages",
-    "F_dental": "Included Dental",
-    "G_vision": "Vision",
-    "H_hearing": "Hearing",
-    "I_alt_care_otc_travel": "Alternative Care / OTC / Travel",
-    "J_extra_benefits": "Extra Benefits",
-}
 
 
 def rows(name, data_dir):
@@ -128,7 +90,8 @@ def site_data(data_dir=DATA):
     for p in plans:
         p["docs"] = [i for i, d in docs.items() if p["plan_id"] in d["plan_ids"]]
         p["plan_finder_url"] = f"https://www.medicare.gov/plan-compare/#/plan-details/{year}-{p['plan_id']}?year={year}&lang=en"
-    sheets = {"main": (rows("main_chart.csv", data_dir), MAIN_LABELS), "dvha": (rows("dvha.csv", data_dir), DVHA_LABELS)}
+    sheets = {"main": (rows("main_chart.csv", data_dir), fields.labels("main")),
+              "dvha": (rows("dvha.csv", data_dir), fields.labels("dvha"))}
     comments = {"main": {}, "dvha": {}}
     for c in rows("comments.csv", data_dir):
         csv_rows, labels = sheets[c["sheet"]]

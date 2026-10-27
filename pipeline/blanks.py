@@ -18,7 +18,7 @@ import collections, csv, glob, io, json, os, pathlib, random, re, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(os.path.dirname(HERE), "web"))
-import years
+import fields, years
 from eoc import DATA, Doc, eoc, norm
 from fields import FIELDS
 
@@ -81,7 +81,16 @@ def passages(layout, key, keep=lambda snippet: True):
     return "\n".join(parts) or "(No passage mentions it.)"
 
 
+def notes(plan_id):
+    with open(f"{DATA}/plans.csv") as f:
+        org = next((r["organization"] for r in csv.DictReader(f) if r["plan_id"] == plan_id), None)
+    return f"\nSeen in {org} EOCs: {fields.CARRIERS[org]}" if org in fields.CARRIERS else ""
+
+
 def fill(template, **values):
+    """The template with each {KEY} replaced. A PLAN_ID also fills {NOTES} with what the plan's carrier tends to do."""
+    if "PLAN_ID" in values:
+        values = {"NOTES": notes(values["PLAN_ID"]), **values}
     with open(f"{HERE}/{template}") as f:
         text = f.read()
     for k, v in values.items():

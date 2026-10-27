@@ -1,8 +1,7 @@
 """Generates the DVHA sheet (dental, vision, hearing, alternative care) from the CMS PBP Benefits files.
 
 Usage: python3 -I dvha.py <plans.csv> <pbp_dir> <citations.csv> <out.csv> <diffs.csv>
-Cells summarize in-network supplemental benefits. Optional packages go in column E.
-Column J also lists SSBCI and targeted (UF/VBID) benefits.
+Cells summarize in-network supplemental benefits. Column rules are in fields.py.
 Citations whose column starts with "dvha." replace whole cells.
 """
 import csv
