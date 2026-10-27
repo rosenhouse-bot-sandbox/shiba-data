@@ -100,15 +100,19 @@ function openCell(plan, column, cell) {
   const what = `${plan.plan_name}: ${column.label} = ${oneLine(cell.value)}`;
   if (cell.cites.length) {
     const cite = cell.cites[0];
-    openDoc(cite.doc, cite.page, cite.quote, citeNote(what, cell));
+    const note = citeNote(what, cell);
+    note.append(el("p", {}, planFinderLink(plan)));
+    openDoc(cite.doc, cite.page, cite.quote, note);
   } else {
     const sb = plan.docs.find((d) => site.docs[d].kind === "SB");
     openDoc(sb, 1, null, el("div", {}, el("b", {}, what), el("p", {},
       cell.value ? "This value comes from the CMS 2027 Plan Benefit Package data, which has no page to point to. "
         : "The CMS 2027 Plan Benefit Package data has no entry for this benefit. ",
-      "The plan's Summary of Benefits is shown for reference.")));
+      "The plan's Summary of Benefits is shown for reference."), el("p", {}, planFinderLink(plan))));
   }
 }
+
+const planFinderLink = (plan) => el("a", { href: plan.plan_finder_url, target: "_blank", rel: "noopener" }, "View this plan on Medicare.gov ↗");
 
 const oneLine = (value) => value.split(" | ").join("; ");
 
@@ -142,7 +146,7 @@ function planPage(plan) {
     ["Plan ID", plan.plan_id], ["Organization", plan.organization], ["Type", plan.plan_type],
     ["Star rating", plan.overall_star_rating], ["Part D deductible", plan.part_d_deductible],
     ["Chronic conditions (C-SNP)", plan.c_snp_conditions.replace(/([a-z])([A-Z])/g, "$1 $2").replaceAll(",", ", ")],
-    ["Medicare Plan Finder", el("a", { href: plan.plan_finder_url, target: "_blank", rel: "noopener" }, "View on Medicare.gov ↗")],
+    ["Medicare Plan Finder", planFinderLink(plan)],
   ];
   return el("div", { class: "plan-page" },
     el("h2", {}, plan.plan_name),
