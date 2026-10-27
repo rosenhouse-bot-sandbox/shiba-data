@@ -1,3 +1,4 @@
+import csv
 import json
 import os
 import pathlib
@@ -10,6 +11,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 import cite  # noqa: E402
 import dvha  # noqa: E402
 import fetch_docs  # noqa: E402
+import fields  # noqa: E402
 import main_chart as mc  # noqa: E402
 import pbp  # noqa: E402
 import universe  # noqa: E402
@@ -135,15 +137,34 @@ class MainChartTest(unittest.TestCase):
     def test_sheets_take_their_own_citations(self):
         plans = [{"plan_id": "P"}]
         cite = {"plan_id": "P", "line": "", "kind": "EOC", "pdf_page": "9", "quote": "q"}
-        citations = [dict(cite, column="A", value="main"), dict(cite, column="dvha.A", value="dvha")]
-        make_row = lambda landscape, plan: {"A": "pbp"}
-        rows, diffs = mc.sheet(plans, {"P": {}}, citations, make_row)
-        self.assertEqual(rows, [{"A": "main"}])
-        self.assertEqual([d["column"] for d in diffs], ["A"])
-        rows, diffs = mc.sheet(plans, {"P": {}}, citations, make_row, dvha=True)
-        self.assertEqual(rows, [{"A": "dvha"}])
-        self.assertEqual(diffs, [{"plan_id": "P", "column": "A", "pbp": "pbp", "documents": "dvha",
-                                  "citations": 'EOC p9: "q"'}])
+        citations = [dict(cite, column="C_premium", value="main"), dict(cite, column="dvha.C_premium", value="dvha")]
+        for dvha, value in ((False, "main"), (True, "dvha")):
+            columns = ["section", "plan_id", "plan_name"] + list(fields.labels("dvha" if dvha else "main"))
+            rows, diffs = mc.sheet(plans, {"P": {}}, citations, lambda landscape, plan: dict.fromkeys(columns, "pbp"), dvha=dvha)
+            self.assertEqual(rows, [dict(dict.fromkeys(columns, "pbp"), C_premium=value)])
+            self.assertEqual(diffs, [{"plan_id": "P", "column": "C_premium", "pbp": "pbp", "documents": value,
+                                      "citations": 'EOC p9: "q"'}])
+
+
+class SpecTest(unittest.TestCase):
+    def test_fields_are_the_columns_an_eoc_can_show(self):
+        every = {f"{c.sheet}.{c.key}" for c in fields.COLUMNS}
+        self.assertEqual(set(fields.FIELDS),
+                         every - {"main.D_premium_full_extra_help", "dvha.C_premium", "dvha.D_premium_full_extra_help"})
+
+    def test_sheet_rows_have_the_spec_columns_in_order(self):
+        columns = ["section", "plan_id", "plan_name"] + list(fields.labels("dvha"))
+        plans = [{"plan_id": "A"}]
+        build = lambda keys: mc.sheet(plans, {"A": {}}, [], lambda p, d: {k: "" for k in keys}, dvha=True)
+        self.assertEqual(list(build(columns)[0][0]), columns)
+        for keys in (columns[::-1], columns[:-1], columns + ["Z_extra"]):
+            with self.assertRaisesRegex(ValueError, "A: columns differ from pipeline/fields.py"):
+                build(keys)
+
+    def test_carriers_are_organizations_in_the_plans_file(self):
+        with open(f"{years.data_dir()}/plans.csv") as f:
+            organizations = {r["organization"] for r in csv.DictReader(f)}
+        self.assertLessEqual(set(fields.CARRIERS), organizations)
 
 
 class DocumentTest(unittest.TestCase):

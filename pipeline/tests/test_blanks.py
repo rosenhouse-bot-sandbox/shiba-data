@@ -2,6 +2,7 @@ import csv, json, os, pathlib, shutil, sys, tempfile, unittest
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import blanks
+import fields
 from eoc import DATA, Doc, eoc, norm
 
 PLAN = "H2056-003-0"
@@ -41,6 +42,12 @@ class FillTest(unittest.TestCase):
             text = blanks.fill(template, **{k: "VALUE" for k in values})
             self.assertNotRegex(text, r"\{[A-Z_]+\}")
             self.assertIn("VALUE", text)
+
+    def test_adds_what_the_plans_carrier_tends_to_do(self):
+        for template in ("blank_prompt.md", "filled_prompt.md", "vfilled_prompt.md"):
+            text = blanks.fill(template, PLAN_ID="H9003-001-0")
+            self.assertIn(f"Seen in Kaiser Permanente EOCs: {fields.CARRIERS['Kaiser Permanente']}", text)
+            self.assertNotIn("Seen in", blanks.fill(template, PLAN_ID="H2056-003-0"))
 
 
 class UncitedBlanksTest(unittest.TestCase):

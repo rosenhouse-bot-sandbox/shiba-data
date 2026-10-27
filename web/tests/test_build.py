@@ -151,11 +151,11 @@ class SiteDataTest(unittest.TestCase):
                          "<title>2099 Medicare Advantage plans: A &amp; B</title>"
                          "<h1>2099 Medicare Advantage plans <span>A &amp; B</span></h1>")
 
-    def test_columns_have_labels(self):
-        labels = {c["key"]: c["label"] for c in self.site["main"]["columns"]}
-        self.assertEqual(labels["L_xray_imaging"], "X-Ray / Diag Radiology")
-        labels = {c["key"]: c["label"] for c in self.site["dvha"]["columns"]}
-        self.assertEqual(labels["F_dental"], "Included Dental")
+    def test_columns_are_the_spec_columns_in_order(self):
+        for sheet in ("main", "dvha"):
+            self.assertEqual([(c["key"], c["label"]) for c in self.site[sheet]["columns"]],
+                             list(build.fields.labels(sheet).items()))
+        self.assertIn({"key": "L_xray_imaging", "label": "X-Ray / Diag Radiology"}, self.site["main"]["columns"])
 
     def test_doc_ids_are_sha_prefixes(self):
         for doc_id, doc in self.site["docs"].items():
@@ -209,11 +209,10 @@ class DvhaCitationsTest(unittest.TestCase):
 
 class EocCitationsDataTest(unittest.TestCase):
     def test_each_cites_the_current_cell_value(self):
-        sheets = {"main": ("main_chart.csv", build.MAIN_LABELS), "dvha": ("dvha.csv", build.DVHA_LABELS)}
+        names = {"main": "main_chart.csv", "dvha": "dvha.csv"}
         for c in build.rows("eoc_citations.csv", DATA):
-            name, labels = sheets[c["sheet"]]
-            row = next(r for r in build.rows(name, DATA) if r["plan_id"] == c["plan_id"])
-            self.assertIn(c["column"], labels)
+            row = next(r for r in build.rows(names[c["sheet"]], DATA) if r["plan_id"] == c["plan_id"])
+            self.assertIn(c["column"], build.fields.labels(c["sheet"]))
             self.assertEqual(c["value"], row[c["column"]], c)
 
 

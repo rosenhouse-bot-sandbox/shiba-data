@@ -2,17 +2,15 @@
 
 Usage: python3 -I main_chart.py <plans.csv> <pbp_dir> <citations.csv> <out.csv> <pbp_vs_documents.csv>
 Cells come from the PBP unless citations.csv (made by cite.py) supplies a quoted SB/EOC value.
-Each cell is in-network unless noted. Column conventions follow docs/2027-bootstrap/CLAUDE_ANALYSIS_METHODS.md section 6.5.
+Each cell is in-network unless noted. Column rules are in fields.py.
 """
 import csv
 import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import fields  # noqa: E402
 import pbp  # noqa: E402
-
-DOT_COLUMNS = ["P_vision", "Q_hearing", "R_dental", "S_acupuncture", "T_chiropractic", "U_naturopath",
-               "V_massage", "W_fitness", "X_transportation", "Y_otc", "Z_part_b_reduction", "AA_opt_packages"]
 
 
 def num(v):
@@ -254,7 +252,9 @@ def write_csv(path, rows):
 
 
 def sheet(plans, data, citations, make_row, dvha=False):
-    """Builds PBP rows and overrides them with this sheet's citations. DVHA citation columns start with "dvha."."""
+    """Builds PBP rows and overrides them with this sheet's citations. DVHA citation columns start with "dvha.".
+    Each row must have the columns of fields.py, in its order."""
+    columns = ["section", "plan_id", "plan_name"] + list(fields.labels("dvha" if dvha else "main"))
     mine = [dict(c, column=c["column"].removeprefix("dvha.")) for c in citations
             if c["column"].startswith("dvha.") == dvha]
     rows, diffs = [], []
@@ -268,6 +268,8 @@ def sheet(plans, data, citations, make_row, dvha=False):
                 quotes = [c for c in cites if c["column"] == col]
                 diffs.append(dict(plan_id=p["plan_id"], column=col, pbp=before[col], documents=row[col],
                                   citations=" / ".join(f'{c["kind"]} p{c["pdf_page"]}: "{c["quote"]}"' for c in quotes)))
+        if list(row) != columns:
+            raise ValueError(f"{p['plan_id']}: columns differ from pipeline/fields.py: {list(row)}")
         rows.append(row)
     return rows, diffs
 

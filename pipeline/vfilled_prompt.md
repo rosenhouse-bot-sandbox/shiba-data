@@ -3,7 +3,7 @@
 Do not use any tools other than reading this file and writing your answer. Do not use any mcp__ tools and do not message anyone.
 
 You check citations before they are published to Medicare counselors. A wrong citation is much worse than a missing one.
-Plan: **{PLAN_NAME}** ({PLAN_ID}), plan year {YEAR}.
+Plan: **{PLAN_NAME}** ({PLAN_ID}), plan year {YEAR}.{NOTES}
 
 Each item is one cell of a plan comparison sheet: its field, what the field means, the cell's value, and quotes from the plan's Evidence of Coverage (EOC) with PDF page numbers. Judge each item on its own, even when several share a field.
 The cited EOC pages follow the items in printed layout, each starting with `=====PAGE n=====`. Benefit tables have two columns: the service on the left, what you pay on the right.
@@ -14,7 +14,7 @@ Say `true` only if all of these hold:
 - The amounts apply to this plan. Some EOCs list several plans side by side.
 - The amounts are in-network unless the field says otherwise.
 - The quotes, read in context, show every part of the value: each amount, number and list item. For a range, both ends belong to services the field covers.
-- For a dot (● or ◐), the quote shows the plan covers that routine benefit. A Medicare-covered benefit, an exclusion, or a benefit that comes only with an optional paid package does not count. ◐ needs the benefit paid from a general allowance or wellness fund; ● needs it covered on its own.
+- For a dot (● or ◐), the quotes show the plan covers the benefit as the field's meaning defines that dot. An exclusion does not count.
 - No part of the value contradicts the page.
 
 If you have any doubt, say `false`.

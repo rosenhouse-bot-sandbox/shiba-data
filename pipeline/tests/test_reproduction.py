@@ -13,6 +13,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, ".."))
 sys.path.insert(0, HERE)
 import dvha  # noqa: E402
+import fields  # noqa: E402
 import main_chart as mc  # noqa: E402
 import years  # noqa: E402
 from appendix_b import DVHA_CASES, MAIN_CHART_CASES  # noqa: E402
@@ -47,6 +48,14 @@ def setUpModule():
     main, extra = generate()
     MAIN.update(main)
     DVHA.update(extra)
+
+
+class ColumnsTest(unittest.TestCase):
+    def test_generators_make_the_spec_columns(self):
+        for sheet, made in (("main", MAIN), ("dvha", DVHA)):
+            for row in made.values():
+                self.assertEqual(list(row), ["section", "plan_id", "plan_name"] + list(fields.labels(sheet)))
+
 
 class MainChartReproducesCorrections(unittest.TestCase):
     def test_cases(self):
