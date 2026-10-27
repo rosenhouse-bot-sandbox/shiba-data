@@ -33,12 +33,14 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           mkdir ../_documents
-          if gh release view >/dev/null 2>&1; then
-            gh release download --pattern documents.tar --dir ..
+          if gh release download --pattern documents.tar --dir .. 2> ../gh.err; then
             tar -xf ../documents.tar -C ../_documents
-          else
+          elif grep -q "release not found" ../gh.err; then
             echo "::warning::No documents release yet. Run the Documents workflow to cut one."
             python3 -I build.py documents ../_documents
+          else
+            cat ../gh.err
+            exit 1
           fi
       - run: python3 -I build.py site ../_site ../_documents
       - run: npm ci && npx playwright install --with-deps chromium

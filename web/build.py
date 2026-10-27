@@ -167,7 +167,8 @@ def main(command, out, release=None):
     if release:
         missing = attach_documents(site["docs"], pathlib.Path(release), out_dir)
         for doc_id in missing:
-            print(f"not in documents release: {site['docs'][doc_id]['url']}", file=sys.stderr)
+            print(f"::warning::Not in the documents release, so the site links to the carrier: "
+                  f"{site['docs'][doc_id]['url']}. Run the Documents workflow to add it.")
     (out_dir / "data.json").write_text(json.dumps(site))
 
 

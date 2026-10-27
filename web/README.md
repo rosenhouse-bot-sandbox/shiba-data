@@ -11,7 +11,7 @@ The `Site` workflow builds the site from that release, runs the tests, and deplo
 ## Local build
 
 ```sh
-gh release download --pattern documents.tar && mkdir _documents && tar -xf documents.tar -C _documents
+gh release download --pattern documents.tar && mkdir -p _documents && tar -xf documents.tar -C _documents
 python3 -I web/build.py site _site _documents
 python3 -m http.server -d _site
 ```

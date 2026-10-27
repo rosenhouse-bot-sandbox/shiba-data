@@ -1,10 +1,13 @@
+import contextlib
 import hashlib
+import io
 import json
 import os
 import pathlib
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 import build  # noqa: E402
@@ -130,6 +133,24 @@ class DocumentsTest(unittest.TestCase):
         self.assertEqual(site_docs[self.id]["retrieved"], "2026-10-27")
         self.assertIsNone(site_docs["0000000000000000"]["file"])
         self.assertEqual((self.dir / "site" / f"pdfs/{self.id}.pdf").read_bytes(), b"%PDF-1.4 test")
+
+
+    def test_documents_command_fails_when_a_download_fails(self):
+        with mock.patch.object(build, "site_data", return_value={"docs": self.docs}):
+            with self.assertRaises(SystemExit) as e:
+                build.main("documents", self.dir / "release")
+        self.assertIn("gone.pdf", str(e.exception.code))
+
+    def test_site_command_attaches_release(self):
+        build.save_documents(self.docs, self.dir / "release", "2026-10-27")
+        site = {"docs": {i: {"url": d["url"], "sha256": d["sha256"]} for i, d in self.docs.items()}}
+        out = io.StringIO()
+        with mock.patch.object(build, "site_data", return_value=site), contextlib.redirect_stdout(out):
+            build.main("site", self.dir / "site", self.dir / "release")
+        data = json.loads((self.dir / "site" / "data.json").read_text())
+        self.assertEqual(data["docs"][self.id]["file"], f"pdfs/{self.id}.pdf")
+        self.assertIn("::warning::", out.getvalue())
+        self.assertIn("gone.pdf", out.getvalue())
 
 
 if __name__ == "__main__":
