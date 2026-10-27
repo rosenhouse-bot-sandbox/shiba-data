@@ -92,8 +92,7 @@ def site_data(data_dir=DATA):
     } for d in checked}
 
     cites = {"main": {}, "dvha": {}}
-    eoc = rows("eoc_citations.csv", data_dir) if (data_dir / "eoc_citations.csv").exists() else []
-    for c in [dict(c, sheet="main") for c in rows("citations.csv", data_dir)] + eoc:
+    for c in [dict(c, sheet="main") for c in rows("citations.csv", data_dir)] + rows("eoc_citations.csv", data_dir):
         cites[c["sheet"]].setdefault((c["plan_id"], c["column"]), []).append({
             "line": int(c["line"]) if c.get("line") else None,
             "value": c["value"],
