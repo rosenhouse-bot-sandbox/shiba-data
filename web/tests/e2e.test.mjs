@@ -264,6 +264,53 @@ test("browser zoom enlarges the document pages", async () => {
   assert.ok(Math.abs(zoomed / plain - 1.5) < 0.05, `${zoomed / plain}`);
 });
 
+test("header says when the site was last updated", async () => {
+  const fresh = await browser.newPage({ timezoneId: "America/Los_Angeles" });
+  await fresh.route("**/data.json", (route) =>
+    route.fulfill({ json: { ...site, built: new Date(Date.now() - 3 * 3600000).toISOString() } }));
+  await fresh.clock.install();
+  await fresh.goto(`${base}#/main`);
+  const label = fresh.locator("header #updated");
+  assert.equal(await label.textContent(), "Last updated 3 hours ago");
+  assert.match(await label.getAttribute("title"), /\b(PDT|PST)\b/);
+  await fresh.clock.runFor(60 * 60000);
+  assert.equal(await label.textContent(), "Last updated 4 hours ago");
+  await fresh.close();
+});
+
+test("orange marks a comment that contradicts the cell", async () => {
+  const fresh = await browser.newPage({ viewport: { width: 1600, height: 1000 } });
+  const edited = structuredClone(site);
+  edited.main.rows.find((r) => r.plan_id === "H6815-038-0").cells.K_tests_labs.comment.kind = "contradicts";
+  await fresh.route("**/data.json", (route) => route.fulfill({ json: edited }));
+  await fresh.goto(`${base}#/main`);
+  const background = (locator) => locator.evaluate((e) => getComputedStyle(e).backgroundColor);
+  const contradicts = fresh.locator('table.sheet td[data-plan="H6815-038-0"][data-col="K_tests_labs"]');
+  const note = fresh.locator("table.sheet td.commented:not(.contradicts)").first();
+  const orange = await background(contradicts);
+  assert.notEqual(orange, await background(note));
+  await note.click();
+  assert.equal(await background(fresh.locator("#source-note .comment")), await background(note));
+  await contradicts.click();
+  assert.equal(await background(fresh.locator("#source-note .comment")), orange);
+  assert.equal(await background(contradicts), orange, "stays orange in the open plan's row");
+  await fresh.click("nav a[data-view=ambiguities]");
+  const rows = fresh.locator("table.ambiguities tbody tr");
+  await fresh.selectOption("#kind-filter", "contradicts");
+  const contradictions = ["main", "dvha"].flatMap((sheet) => edited[sheet].rows.flatMap((r) => Object.values(r.cells)))
+    .filter((c) => c.comment?.kind === "contradicts");
+  const shown = await rows.filter({ visible: true }).allTextContents();
+  assert.equal(shown.length, contradictions.length);
+  assert.ok(shown.every((t) => t.includes("Contradicts the EOC")));
+  await rows.filter({ visible: true }).first().locator("a", { hasText: "Show in" }).click();
+  await fresh.goBack();
+  assert.equal(await fresh.locator("#kind-filter").inputValue(), "contradicts");
+  assert.equal(await rows.filter({ visible: true }).count(), contradictions.length);
+  await fresh.selectOption("#kind-filter", "");
+  assert.equal(await rows.filter({ visible: true }).count(), await rows.count());
+  await fresh.close();
+});
+
 test("plan page lists the plan's documents", async () => {
   await page.goto(`${base}#/plan/H2001-045-0`);
   const docs = await page.locator("table.docs").textContent();
