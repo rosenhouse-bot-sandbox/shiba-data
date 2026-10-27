@@ -115,11 +115,18 @@ test("yellow marks a comment, shown on hover and in the note", async () => {
   const cell = row("H6815-038-0").locator("td").nth(index);
   assert.match(await cell.getAttribute("class"), /commented/);
   assert.match(await cell.getAttribute("title"), /EKG/);
-  assert.equal(await page.locator("td.commented").count(), 1);
+  assert.equal(await page.locator("td.commented").count(), site.main.rows.filter((r) => r.cells.K_tests_labs.comment).length);
   const background = (td) => td.evaluate((e) => getComputedStyle(e).backgroundColor);
   assert.notEqual(await background(row("H2001-045-0").locator("td.cited").first()), await background(cell));
   await cell.click();
   assert.match(await page.textContent("#source-note .comment"), /EKG/);
+  const { doc, page: n, quote } = site.main.rows.find((r) => r.plan_id === "H6815-038-0").cells.K_tests_labs.comment;
+  await shown(doc, n);
+  await page.$eval("#page-area", (area) => { area.scrollTop = 0; delete area.dataset.shown; });
+  await page.locator("#source-note a", { hasText: `EOC page ${n}` }).click();
+  await shown(doc, n);
+  const squash = (t) => t.replace(/\s+/g, "").toLowerCase();
+  assert.equal(squash((await page.locator(".textLayer mark").allTextContents()).join("")), squash(quote));
 });
 
 test("picking a plan opens its summary of benefits, unless one of its documents is open", async () => {
@@ -143,16 +150,17 @@ test("plan page lists the plan's documents", async () => {
   assert.match(docs, /Evidence of Coverage/);
 });
 
-test("every citation's quote is highlighted in full on its page", { timeout: 1_200_000 }, async () => {
+test("every citation's and comment's quote is highlighted in full on its page", { timeout: 1_200_000 }, async () => {
   const squash = (t) => t.replace(/\s+/g, "").toLowerCase();
   const wrong = [];
   for (const sheet of ["main", "dvha"]) {
     await page.goto(`${base}#/${sheet}`);
     for (const r of site[sheet].rows) {
       for (const [col, cell] of Object.entries(r.cells)) {
-        if (!cell.cites.length) continue;
+        const sources = cell.cites.length ? cell.cites : cell.comment ? [cell.comment] : [];
+        if (!sources.length) continue;
         await row(r.plan_id).locator("td").nth(site[sheet].columns.findIndex((c) => c.key === col)).click();
-        for (const [i, c] of cell.cites.entries()) {
+        for (const [i, c] of sources.entries()) {
           if (i) {
             // Two cites can share a page, so clear the marker before the next render sets it.
             await page.$eval("#page-area", (area) => delete area.dataset.shown);
