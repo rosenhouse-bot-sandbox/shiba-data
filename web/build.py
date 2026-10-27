@@ -1,4 +1,4 @@
-"""Builds the plan documents release, or the static site from repro/data.
+"""Builds the plan documents release, its zip, or the static site from repro/data.
 
 Usage:
   python3 -I web/build.py documents <out_dir>

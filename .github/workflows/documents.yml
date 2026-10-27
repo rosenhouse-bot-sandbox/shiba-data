@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: Add documents.zip to this existing release instead of cutting a new one. Off main, the zip is a run artifact instead.
+        description: Add documents.zip to this existing release instead of cutting a new one. Off main, upload the zip as a run artifact.
         required: false
 
 concurrency: documents

@@ -292,7 +292,16 @@ class ZipTest(unittest.TestCase):
         self.assertEqual(self.zip.read(f"pdfs/{'d' * 16}.pdf"), b"%PDF " + b"d" * 16)
 
     def test_holds_only_pdfs_in_release(self):
-        self.assertEqual(len(self.zip.namelist()), 4)
+        self.assertEqual(sorted(self.zip.namelist()), [
+            "Plan A (HMO) (H1-001-0) EOC.pdf",
+            "Plan A (HMO) (H1-001-0) SB.pdf",
+            "Plan B (PPO) (H1-002-0) EOC.pdf",
+            f"pdfs/{'d' * 16}.pdf",
+        ])
+
+    def test_fails_when_plan_names_and_ids_differ_in_count(self):
+        with self.assertRaises(ValueError):
+            list(build.plan_names({"plan_ids": "H1-001-0;H1-002-0", "plan_names": "Plan A (HMO)"}))
 
     def test_zip_command_writes_zip(self):
         build.main("zip", self.release, self.dir / "cli.zip")
@@ -305,6 +314,11 @@ class ZipDataTest(unittest.TestCase):
                  for d in build.rows("documents_checked.csv", DATA)
                  for plan_id, name in build.plan_names(d)]
         self.assertEqual(len(names), len(set(names)))
+
+    def test_names_are_valid_on_windows(self):
+        for d in build.rows("documents_checked.csv", DATA):
+            for plan_id, name in build.plan_names(d):
+                self.assertRegex(build.zip_name(plan_id, name, d["kind"]), r'^[^<>:"/\\|?*]+$')
 
 
 if __name__ == "__main__":
