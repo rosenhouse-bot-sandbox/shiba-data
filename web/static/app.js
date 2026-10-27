@@ -182,6 +182,7 @@ const oneLine = (value) => value.split(" | ").join("; ");
 
 function citeNote(header, cell) {
   const note = el("div", {}, header);
+  if (!cell.value.trim()) note.append(el("p", {}, "The plan document shows why this is blank:"));
   cell.cites.forEach((c, i) => {
     const doc = site.docs[c.doc];
     note.append(el("p", { class: "cite" },

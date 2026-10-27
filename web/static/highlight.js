@@ -2,7 +2,7 @@
 // Returns one character range per item that the quote touches, or nothing if the whole quote is absent.
 // Given each item's left edge, a quote may instead run down one column of a table whose columns alternate in
 // item order. Such a quote must occur in only one column.
-const squash = (s) => s.replace(/\s+/g, "").toLowerCase();
+export const squash = (s) => s.replace(/\s+/g, "").toLowerCase();
 
 export function matchRanges(items, quote, lefts = []) {
   const needle = squash(quote);
