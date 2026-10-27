@@ -91,10 +91,10 @@ def site_data(data_dir=DATA):
         "plan_ids": d["plan_ids"].split(";"),
     } for d in checked}
 
-    cites = {}
-    for c in rows("citations.csv", data_dir):
-        cites.setdefault((c["plan_id"], c["column"]), []).append({
-            "line": int(c["line"]) if c["line"] else None,
+    cites = {"main": {}, "dvha": {}}
+    for c in [dict(c, sheet="main") for c in rows("citations.csv", data_dir)] + rows("eoc_citations.csv", data_dir):
+        cites[c["sheet"]].setdefault((c["plan_id"], c["column"]), []).append({
+            "line": int(c["line"]) if c.get("line") else None,
             "value": c["value"],
             "doc": doc_by_url[c["url"]],
             "page": int(c["pdf_page"]),
@@ -109,8 +109,8 @@ def site_data(data_dir=DATA):
     return {
         "plans": plans,
         "docs": docs,
-        "main": sheet(rows("main_chart.csv", data_dir), MAIN_LABELS, cites, pbp),
-        "dvha": sheet(rows("dvha.csv", data_dir), DVHA_LABELS, {}, {}),
+        "main": sheet(rows("main_chart.csv", data_dir), MAIN_LABELS, cites["main"], pbp),
+        "dvha": sheet(rows("dvha.csv", data_dir), DVHA_LABELS, cites["dvha"], {}),
     }
 
 

@@ -1,4 +1,5 @@
 import contextlib
+import csv
 import hashlib
 import io
 import json
@@ -15,10 +16,24 @@ import build  # noqa: E402
 DATA = pathlib.Path(__file__).resolve().parents[2] / "repro" / "data"
 
 
+EOC_HEADER = ["sheet", "plan_id", "column", "value", "url", "pdf_page", "quote"]
+
+
+def data_copy(tmp, eoc_rows):
+    """A copy of DATA whose eoc_citations.csv holds only eoc_rows."""
+    data = pathlib.Path(tmp)
+    for f in DATA.glob("*.csv"):
+        (data / f.name).write_bytes(f.read_bytes())
+    with open(data / "eoc_citations.csv", "w", newline="") as f:
+        csv.writer(f).writerows([EOC_HEADER, *eoc_rows])
+    return data
+
+
 class SiteDataTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.site = build.site_data(DATA)
+        with tempfile.TemporaryDirectory() as tmp:
+            cls.site = build.site_data(data_copy(tmp, []))
 
     def cell(self, sheet, plan_id, column):
         row = next(r for r in self.site[sheet]["rows"] if r["plan_id"] == plan_id)
@@ -69,6 +84,43 @@ class SiteDataTest(unittest.TestCase):
     def test_doc_ids_are_sha_prefixes(self):
         for doc_id, doc in self.site["docs"].items():
             self.assertEqual(doc_id, doc["sha256"][:16])
+
+
+class EocCitationsTest(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        eoc = next(d for d in build.rows("documents_checked.csv", DATA)
+                   if d["kind"] == "EOC" and "H3805-048-0" in d["plan_ids"])
+        self.eoc_id = eoc["sha256"][:16]
+        self.site = build.site_data(data_copy(self.tmp.name, [
+            ["main", "H3805-048-0", "L_xray_imaging", "$30 | $320", eoc["url"], 80, "x-ray quote"],
+            ["dvha", "H3805-048-0", "C_premium", "$0", eoc["url"], 9, "premium quote"],
+        ]))
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def cites(self, sheet, column):
+        return next(r for r in self.site[sheet]["rows"] if r["plan_id"] == "H3805-048-0")["cells"][column]["cites"]
+
+    def test_eoc_cite_follows_existing_cites(self):
+        cites = self.cites("main", "L_xray_imaging")
+        self.assertEqual([(c["line"], c["quote"]) for c in cites], [(2, "$320 copay otherwise"), (None, "x-ray quote")])
+        self.assertEqual(cites[-1], {"line": None, "value": "$30 | $320", "doc": self.eoc_id, "page": 80, "quote": "x-ray quote"})
+
+    def test_eoc_cite_goes_to_its_own_sheet(self):
+        self.assertEqual([c["quote"] for c in self.cites("dvha", "C_premium")], ["premium quote"])
+        self.assertEqual(self.cites("main", "C_premium"), [])
+
+
+class EocCitationsDataTest(unittest.TestCase):
+    def test_each_cites_the_current_cell_value(self):
+        sheets = {"main": ("main_chart.csv", build.MAIN_LABELS), "dvha": ("dvha.csv", build.DVHA_LABELS)}
+        for c in build.rows("eoc_citations.csv", DATA):
+            name, labels = sheets[c["sheet"]]
+            row = next(r for r in build.rows(name, DATA) if r["plan_id"] == c["plan_id"])
+            self.assertIn(c["column"], labels)
+            self.assertEqual(c["value"], row[c["column"]], c)
 
 
 class FetchPdfsTest(unittest.TestCase):
