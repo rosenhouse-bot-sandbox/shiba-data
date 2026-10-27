@@ -115,7 +115,7 @@ test("yellow marks a comment, shown on hover and in the note", async () => {
   const cell = row("H6815-038-0").locator("td").nth(index);
   assert.match(await cell.getAttribute("class"), /commented/);
   assert.match(await cell.getAttribute("title"), /EKG/);
-  assert.equal(await page.locator("td.commented").count(), 1);
+  assert.equal(await page.locator("td.commented").count(), 5);
   const background = (td) => td.evaluate((e) => getComputedStyle(e).backgroundColor);
   assert.notEqual(await background(row("H2001-045-0").locator("td.cited").first()), await background(cell));
   await cell.click();

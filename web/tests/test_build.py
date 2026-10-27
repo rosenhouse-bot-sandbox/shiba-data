@@ -65,9 +65,9 @@ class SiteDataTest(unittest.TestCase):
         cell = self.cell("main", "H3805-048-0", "L_xray_imaging")
         self.assertEqual(cell["pbp"], "$30 | $0-$320")
 
-    def test_commented_cell_carries_comment(self):
-        cell = self.cell("main", "H6815-038-0", "K_tests_labs")
-        self.assertIn("EKG", cell["comment"])
+    def test_wellcare_tests_cells_carry_ekg_comment(self):
+        for plan_id in ("H6815-038-0", "H5439-015-0", "H5439-019-0", "H5439-011-0", "H5439-010-0"):
+            self.assertIn("EKG", self.cell("main", plan_id, "K_tests_labs").get("comment", ""), plan_id)
 
     def test_comment_on_unknown_cell_fails(self):
         for plan_id, column in (("H6815-038-0", "K_tests"), ("H6815-999-0", "K_tests_labs")):
