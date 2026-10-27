@@ -76,6 +76,13 @@ class MainChartTest(unittest.TestCase):
         self.assertEqual(mc.out_of_network(plan, "7a"), "")
         self.assertEqual(mc.out_of_network(plan, "17a"), "50%")
 
+    def test_part_b_reduction_shows_monthly_amount(self):
+        def plan(**d):
+            return {"pbp_Section_D": [d]}
+        self.assertEqual(mc.part_b_reduction(plan(pbp_d_mco_pay_reduct_yn="1", pbp_d_mco_pay_reduct_amt="154.20")), "$154.20")
+        self.assertEqual(mc.part_b_reduction(plan(pbp_d_mco_pay_reduct_yn="1")), "●")
+        self.assertEqual(mc.part_b_reduction(plan()), "")
+
     def test_apply_citations_replaces_one_line(self):
         row = {"L_xray_imaging": "$0-$145 | $0-$345", "U_naturopath": ""}
         mc.apply_citations(row, [{"column": "L_xray_imaging", "line": "2", "value": "$205-$345"},
@@ -134,6 +141,10 @@ class DvhaTest(unittest.TestCase):
     def test_dental_separate_comprehensive_max(self):
         plan = {"pbp_b16_dental": [{"pbp_b16b_bendesc_oe_amo": "2", "pbp_b16c_maxplan_cmp_amt": "1000.00"}]}
         self.assertEqual(dvha.dental(plan), "PREV $0; COMP max $1,000")
+
+    def test_targeted_package_says_who_qualifies(self):
+        plan = {"pbp_b19b_model_test_vbid_uf": [{"pbp_b19b_package_name": "Nutritional Benefit"}]}
+        self.assertEqual(dvha.extras(plan), "For qualifying members: Nutritional Benefit")
 
     def test_vision_per_item_allowance(self):
         plan = {"pbp_b17_eye_exams_wear": [{"pbp_b17b_indv_maxplan_amt_egf": "100.00"}]}

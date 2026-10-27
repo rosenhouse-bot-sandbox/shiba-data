@@ -179,12 +179,18 @@ def mandatory(row, prefix):
     return any(k.startswith(prefix) and "_amo" in k and v in ("2", "4") for k, v in row.items())
 
 
+def part_b_reduction(plan):
+    d = first(plan, "pbp_Section_D")
+    if d.get("pbp_d_mco_pay_reduct_yn") != "1":
+        return ""
+    return money(num(d["pbp_d_mco_pay_reduct_amt"])) if d.get("pbp_d_mco_pay_reduct_amt") else "●"
+
+
 def dots(plan):
     b7 = first(plan, "pbp_b7_health_prof")
     b13 = first(plan, "pbp_b13_other_services")
     b14 = first(plan, "pbp_b14_preventive")
     b14c = b14.get("pbp_b14c_bendesc_ehc", "").split(";")
-    d = first(plan, "pbp_Section_D")
     return {
         "P_vision": mandatory(first(plan, "pbp_b17_eye_exams_wear"), "pbp_b17"),
         "Q_hearing": mandatory(first(plan, "pbp_b18_hearing_exams_aids"), "pbp_b18"),
@@ -197,7 +203,7 @@ def dots(plan):
         "W_fitness": "14c4" in b14c,
         "X_transportation": first(plan, "pbp_b10_amb_trans").get("pbp_b10b_bendesc_yn") == "1",
         "Y_otc": b13.get("pbp_b13b_bendesc_otc") == "1",
-        "Z_part_b_reduction": d.get("pbp_d_mco_pay_reduct_yn") == "1",
+        "Z_part_b_reduction": part_b_reduction(plan),
         "AA_opt_packages": bool(plan.get("pbp_Section_D_opt")),
     }
 
@@ -224,7 +230,7 @@ def chart_row(landscape, plan):
         "N_pharmacy_deductible": pharmacy_deductible(plan, landscape),
         "O_medical_deductible": medical_deductible(plan),
     }
-    row.update({k: "●" if v else "" for k, v in dots(plan).items()})
+    row.update({k: "●" if v is True else v or "" for k, v in dots(plan).items()})
     return row
 
 
