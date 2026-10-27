@@ -126,8 +126,8 @@ H2406-042-0,I_outpatient_surgery,1,$550,SB,https://www.aarpmedicareplans.com/alp
 H2406-042-0,I_outpatient_surgery,2,$400,SB,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0412614_000,2,$400 copay otherwise
 H2406-070-0,I_outpatient_surgery,1,$835,SB,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0412631_000,2,$835 copay otherwise
 H2406-070-0,I_outpatient_surgery,2,$785,SB,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0412631_000,2,$785 copay otherwise
-H2406-073-0,I_outpatient_surgery,1,$610,SB,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0412634_000,2,including surgery colonoscopy will apply. $610 copay otherwise
-H2406-073-0,I_outpatient_surgery,2,$610,SB,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0412634_000,2,center (ASC) colonoscopy Cost-sharing for $610 copay otherwise
+H2406-073-0,I_outpatient_surgery,1,$610,SB,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0412634_000,2,$610 copay otherwise
+H2406-073-0,I_outpatient_surgery,2,$610,SB,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0412634_000,2,$610 copay otherwise
 H2001-045-0,I_outpatient_surgery,1,$0 or 20%,SB,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0412518_000,3,"Medicaid eligibility, $0 copay or 20% coinsurance otherwise"
 H2001-045-0,I_outpatient_surgery,2,$0 or 20%,SB,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0412518_000,3,"Medicaid eligibility, $0 copay or 20% coinsurance otherwise"
 H2056-003-0,I_outpatient_surgery,1,$500,SB,https://www.aetna.com/medicare/documents/individual/2027/sb/en/Y0001_H2056_003_HR01_SB2027_M.pdf,3,Outpatient hospital $500 copay after your plan deductible is met

@@ -83,8 +83,8 @@ H2406-042-0,I_outpatient_surgery,1,$550,SB,$550 copay otherwise
 H2406-042-0,I_outpatient_surgery,2,$400,SB,$400 copay otherwise
 H2406-070-0,I_outpatient_surgery,1,$835,SB,$835 copay otherwise
 H2406-070-0,I_outpatient_surgery,2,$785,SB,$785 copay otherwise
-H2406-073-0,I_outpatient_surgery,1,$610,SB,including surgery colonoscopy will apply. $610 copay otherwise
-H2406-073-0,I_outpatient_surgery,2,$610,SB,center (ASC) colonoscopy Cost-sharing for $610 copay otherwise
+H2406-073-0,I_outpatient_surgery,1,$610,SB,$610 copay otherwise
+H2406-073-0,I_outpatient_surgery,2,$610,SB,$610 copay otherwise
 H2001-045-0,I_outpatient_surgery,1,$0 or 20%,SB,"Medicaid eligibility, $0 copay or 20% coinsurance otherwise"
 H2001-045-0,I_outpatient_surgery,2,$0 or 20%,SB,"Medicaid eligibility, $0 copay or 20% coinsurance otherwise"
 H2056-003-0,I_outpatient_surgery,1,$500,SB,Outpatient hospital $500 copay after your plan deductible is met
