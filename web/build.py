@@ -105,6 +105,7 @@ def site_data(data_dir=DATA):
     plans = rows("plans.csv", data_dir)
     for p in plans:
         p["docs"] = [i for i, d in docs.items() if p["plan_id"] in d["plan_ids"]]
+        p["plan_finder_url"] = f"https://www.medicare.gov/plan-compare/#/plan-details/2027-{p['plan_id']}?year=2027&lang=en"
     return {
         "plans": plans,
         "docs": docs,

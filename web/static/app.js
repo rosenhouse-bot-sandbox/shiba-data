@@ -130,6 +130,7 @@ function planPage(plan) {
     ["Plan ID", plan.plan_id], ["Organization", plan.organization], ["Type", plan.plan_type],
     ["Star rating", plan.overall_star_rating], ["Part D deductible", plan.part_d_deductible],
     ["Chronic conditions (C-SNP)", plan.c_snp_conditions.replace(/([a-z])([A-Z])/g, "$1 $2").replaceAll(",", ", ")],
+    ["Medicare Plan Finder", el("a", { href: plan.plan_finder_url, target: "_blank", rel: "noopener" }, "View on Medicare.gov ↗")],
   ];
   return el("div", { class: "plan-page" },
     el("h2", {}, plan.plan_name),
