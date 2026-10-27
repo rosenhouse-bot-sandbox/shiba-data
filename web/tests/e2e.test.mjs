@@ -179,8 +179,18 @@ test("the viewer warns about changed and missing copies", async () => {
 test("a plan page links to its Medicare Plan Finder page", async () => {
   const plan = site.plans.find((p) => p.plan_id === "H3805-048-0");
   await page.goto(`${base}#/plan/${plan.plan_id}`);
-  const link = page.locator(".plan-page a", { hasText: "View on Medicare.gov" });
+  const link = page.locator(".plan-page a", { hasText: "View this plan on Medicare.gov" });
   assert.equal(await link.getAttribute("href"), plan.plan_finder_url);
+});
+
+test("a clicked cell's note links to the plan on Medicare.gov", async () => {
+  const plan = site.plans.find((p) => p.plan_id === "H2001-045-0");
+  await page.goto(`${base}#/main`);
+  for (const cell of [row(plan.plan_id).locator("td.cited").first(), row(plan.plan_id).locator("td:not(.cited)").first()]) {
+    await cell.click();
+    const link = page.locator("#source-note a", { hasText: "View this plan on Medicare.gov" });
+    assert.equal(await link.getAttribute("href"), plan.plan_finder_url);
+  }
 });
 
 test("a blank uncited cell says CMS data has no entry", async () => {
