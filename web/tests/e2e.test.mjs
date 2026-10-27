@@ -124,7 +124,7 @@ test("yellow marks a comment, shown on hover and in the note", async () => {
   const { doc, page: n, quote } = site.main.rows.find((r) => r.plan_id === "H6815-038-0").cells.K_tests_labs.comment;
   await shown(doc, n);
   await page.$eval("#page-area", (area) => { area.scrollTop = 0; delete area.dataset.shown; });
-  await page.locator("#source-note a", { hasText: `EOC page ${n}` }).click();
+  await page.locator("#source-note .comment-source a", { hasText: `EOC page ${n}` }).click();
   await shown(doc, n);
   const squash = (t) => t.replace(/\s+/g, "").toLowerCase();
   assert.equal(squash((await page.locator(".textLayer mark").allTextContents()).join("")), squash(quote));

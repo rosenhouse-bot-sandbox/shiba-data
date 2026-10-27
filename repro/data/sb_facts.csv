@@ -71,3 +71,13 @@ H1036-317-0,dvha.J_extra_benefits,,Fitness; Meals; Routine foot care 20% 12/year
 H7006-018-0,dvha.I_alt_care_otc_travel,,"Acup, Chiro, Naturopath from $50/six months allowance; OTC $30/three months; Worldwide ER $300, $250,000 max",EOC,"$50 allowance every six months, loaded to your Flex"
 H7006-021-0,dvha.I_alt_care_otc_travel,,"Acup, Chiro, Naturopath from $100/six months allowance; OTC $150/three months; Worldwide ER $120, $250,000 max",EOC,"$100 allowance every six months, loaded to your Flex"
 H9003-001-0;H9003-006-0;H9003-009-0,X_transportation,,,EOC,"Transportation by car, taxi, bus, gurney van, wheelchair van, and any other type of transportation (other than a licensed"
+H1036-153-0;H5216-048-0;H5216-428-2,dvha.G_vision,,exam $0/year; eyewear $50/year ($100 at PLUS providers),EOC,Any retail amount over $50 toward the purchase of frame
+H1036-153-0;H5216-048-0;H5216-428-2,dvha.G_vision,,exam $0/year; eyewear $50/year ($100 at PLUS providers),EOC,Any retail amount over $100 toward the purchase of frame
+H1036-306-0;H1036-317-0;H1036-323-0,dvha.G_vision,,exam $0/year; eyewear $150/year ($250 at PLUS providers),EOC,Any retail amount over $150 toward the purchase of frame
+H1036-306-0;H1036-317-0;H1036-323-0,dvha.G_vision,,exam $0/year; eyewear $150/year ($250 at PLUS providers),EOC,Any retail amount over $250 toward the purchase of frame
+H5216-427-2;H5216-455-0,dvha.G_vision,,exam $0/year; eyewear $75/year ($150 at PLUS providers),EOC,Any retail amount over $75 toward the purchase of frame
+H5216-427-2;H5216-455-0,dvha.G_vision,,exam $0/year; eyewear $75/year ($150 at PLUS providers),EOC,Any retail amount over $150 toward the purchase of frame
+H3817-008-1;H3817-010-0;H3817-011-1,dvha.G_vision,,exam $0/year; frames or contacts $100/year; lenses $0,EOC,$100 allowance every calendar
+H3817-009-1,dvha.G_vision,,exam $0/year; frames or contacts $150/year; lenses $0,EOC,$150 allowance every calendar
+H7006-018-0,dvha.F_dental,,PREV+COMP from $150/three months allowance,EOC,"$150 allowance every three months, loaded to your Flex"
+H7006-021-0,dvha.F_dental,,PREV+COMP from $400/three months allowance,EOC,"$400 allowance every three months, loaded to your Flex"

@@ -78,8 +78,15 @@ class SiteDataTest(unittest.TestCase):
         self.assertIn("EKGs", comment["quote"])
 
     def test_comment_kind_says_whether_eoc_contradicts_cell(self):
-        self.assertEqual(self.cell("main", "H6815-038-0", "K_tests_labs")["comment"]["kind"], "contradicts")
+        self.assertEqual(self.cell("main", "H6815-038-0", "K_tests_labs")["comment"]["kind"], "note")
         self.assertEqual(self.cell("dvha", "H1036-306-0", "F_dental")["comment"]["kind"], "note")
+        with tempfile.TemporaryDirectory() as tmp:
+            data = data_copy(tmp, [])
+            (data / "comments.csv").write_text(
+                f"sheet,plan_id,column,kind,comment,url,pdf_page,quote\nmain,H6815-038-0,K_tests_labs,contradicts,x,{H6815_038_EOC},83,EKGs\n")
+            rows = build.site_data(data)["main"]["rows"]
+        row = next(r for r in rows if r["plan_id"] == "H6815-038-0")
+        self.assertEqual(row["cells"]["K_tests_labs"]["comment"]["kind"], "contradicts")
 
     def test_unknown_comment_kind_fails(self):
         with tempfile.TemporaryDirectory() as tmp:
