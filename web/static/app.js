@@ -83,8 +83,8 @@ function sheetView(sheet) {
 
 function valueCell(plan, column, cell) {
   const td = el("td", {
-    class: [cell.cites.length ? "cited" : "", /^[●◐]$/.test(cell.value) ? "dot" : ""].join(" "),
-    title: cell.cites.length ? "Click to see the plan document page" : "From CMS plan data. Click to open the plan's Summary of Benefits.",
+    class: [cell.cites.length ? "cited" : "", cell.comment ? "commented" : "", /^[●◐]$/.test(cell.value) ? "dot" : ""].join(" "),
+    title: cell.comment || (cell.cites.length ? "Click to see the plan document page" : "From CMS plan data. Click to open the plan's Summary of Benefits."),
     onclick: () => {
       document.querySelectorAll(".selected").forEach((s) => s.classList.remove("selected"));
       td.classList.add("selected");
@@ -97,15 +97,16 @@ function valueCell(plan, column, cell) {
 }
 
 function openCell(plan, column, cell) {
-  const what = `${plan.plan_name}: ${column.label} = ${oneLine(cell.value)}`;
+  const header = el("div", {}, el("b", {}, `${plan.plan_name}: ${column.label} = ${oneLine(cell.value)}`),
+    cell.comment ? el("p", { class: "comment" }, cell.comment) : null);
   if (cell.cites.length) {
     const cite = cell.cites[0];
-    const note = citeNote(what, cell);
+    const note = citeNote(header, cell);
     note.append(el("p", {}, planFinderLink(plan)));
     openDoc(cite.doc, cite.page, cite.quote, note);
   } else {
     const sb = plan.docs.find((d) => site.docs[d].kind === "SB");
-    openDoc(sb, 1, null, el("div", {}, el("b", {}, what), el("p", {},
+    openDoc(sb, 1, null, el("div", {}, header, el("p", {},
       cell.value ? "This value comes from the CMS 2027 Plan Benefit Package data, which has no page to point to. "
         : "The CMS 2027 Plan Benefit Package data has no entry for this benefit. ",
       "The plan's Summary of Benefits is shown for reference."), el("p", {}, planFinderLink(plan))));
@@ -116,8 +117,8 @@ const planFinderLink = (plan) => el("a", { href: plan.plan_finder_url, target: "
 
 const oneLine = (value) => value.split(" | ").join("; ");
 
-function citeNote(what, cell) {
-  const note = el("div", {}, el("b", {}, what));
+function citeNote(header, cell) {
+  const note = el("div", {}, header);
   cell.cites.forEach((c, i) => {
     const doc = site.docs[c.doc];
     note.append(el("p", {},

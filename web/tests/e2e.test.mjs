@@ -109,6 +109,19 @@ test("resizing keeps the cited quote in view", async () => {
   assert.ok(visible);
 });
 
+test("yellow marks a comment, shown on hover and in the note", async () => {
+  await page.goto(`${base}#/main`);
+  const index = site.main.columns.findIndex((c) => c.key === "K_tests_labs");
+  const cell = row("H6815-038-0").locator("td").nth(index);
+  assert.match(await cell.getAttribute("class"), /commented/);
+  assert.match(await cell.getAttribute("title"), /EKG/);
+  assert.equal(await page.locator("td.commented").count(), 1);
+  const background = (td) => td.evaluate((e) => getComputedStyle(e).backgroundColor);
+  assert.notEqual(await background(row("H2001-045-0").locator("td.cited").first()), await background(cell));
+  await cell.click();
+  assert.match(await page.textContent("#source-note .comment"), /EKG/);
+});
+
 test("plan page lists the plan's documents", async () => {
   await page.goto(`${base}#/plan/H2001-045-0`);
   const docs = await page.locator("table.docs").textContent();

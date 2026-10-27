@@ -1,0 +1,2 @@
+sheet,plan_id,column,comment
+main,H6815-038-0,K_tests_labs,"EOC page 83 lists EKGs with CT, MRI and PET scans as diagnostic non-laboratory tests: $200 in an office or freestanding facility, $500 in an outpatient hospital. This cell keeps the CMS data's range for diagnostic tests, which is a judgment call."
