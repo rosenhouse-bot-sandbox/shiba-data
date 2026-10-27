@@ -1,5 +1,6 @@
 import contextlib
 import csv
+import datetime
 import hashlib
 import io
 import json
@@ -284,6 +285,12 @@ class DocumentsTest(unittest.TestCase):
         self.assertEqual(data["docs"][self.id]["file"], f"pdfs/{self.id}.pdf")
         self.assertIn("::warning::", out.getvalue())
         self.assertIn("gone.pdf", out.getvalue())
+
+    def test_site_command_records_build_time(self):
+        with mock.patch.object(build, "site_data", return_value={"docs": {}}):
+            build.main("site", self.dir / "site")
+        built = datetime.datetime.fromisoformat(json.loads((self.dir / "site" / "data.json").read_text())["built"])
+        self.assertLess(datetime.datetime.now(datetime.timezone.utc) - built, datetime.timedelta(minutes=1))
 
 
 class ZipTest(unittest.TestCase):

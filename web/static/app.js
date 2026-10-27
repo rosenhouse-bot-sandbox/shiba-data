@@ -1,9 +1,12 @@
 import * as pdfjsLib from "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.min.mjs";
 import { matchRanges } from "./highlight.js";
+import { ago } from "./ago.js";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.worker.min.mjs";
 
 const SHEET_NAMES = { main: "Main chart", dvha: "Dental, vision, hearing & extras" };
+const KIND_NAMES = { contradicts: "Contradicts the EOC", note: "Note" };
+let kindFilter = "";
 const SECTIONS = {
   "MA-PD": "Medicare Advantage with drug coverage",
   "NO-PART-D": "Medicare Advantage without drug coverage",
@@ -30,9 +33,19 @@ let plans;
 const scrollTops = {};
 let shownHash;
 
+function showUpdated(built) {
+  if (isNaN(built)) return;
+  const label = $("#updated");
+  label.title = built.toLocaleString(undefined, { dateStyle: "full", timeStyle: "long" });
+  const refresh = () => { label.textContent = `Last updated ${ago(built, new Date())}`; };
+  refresh();
+  setInterval(refresh, 60000);
+}
+
 async function start() {
   site = await (await fetch("data.json")).json();
   plans = Object.fromEntries(site.plans.map((p) => [p.plan_id, p]));
+  showUpdated(new Date(site.built));
   $("#prev").addEventListener("click", () => goTo(currentPage() - 1));
   $("#next").addEventListener("click", () => goTo(currentPage() + 1));
   $("#page").addEventListener("change", (e) => goTo(Number(e.target.value)));
@@ -94,7 +107,8 @@ function valueCell(plan, column, cell) {
   const td = el("td", {
     "data-plan": plan.plan_id,
     "data-col": column.key,
-    class: [cell.cites.length ? "cited" : "", cell.comment ? "commented" : "", /^[●◐]$/.test(cell.value) ? "dot" : ""].join(" "),
+    class: [cell.cites.length && "cited", cell.comment && "commented", cell.comment?.kind, /^[●◐]$/.test(cell.value) && "dot"]
+      .filter(Boolean).join(" "),
     title: cell.comment?.text || (cell.cites.length ? "Click to see the plan document page" : "From CMS plan data. Click to open the plan's Summary of Benefits."),
     onclick: () => {
       document.querySelectorAll(".selected").forEach((s) => s.classList.remove("selected"));
@@ -108,7 +122,7 @@ function valueCell(plan, column, cell) {
 }
 
 const cellHeader = (plan, column, cell) => el("div", {}, el("b", {}, `${plan.plan_name}: ${column.label} = ${oneLine(cell.value)}`),
-  cell.comment ? el("p", { class: "comment" }, ...commentText(plan, column, cell)) : null);
+  cell.comment ? el("p", { class: `comment ${cell.comment.kind}` }, ...commentText(plan, column, cell)) : null);
 
 // Links each "EOC page N" in a comment to page N of the plan's document of that kind.
 function commentText(plan, column, cell) {
@@ -186,19 +200,25 @@ function citeNote(header, cell) {
 function ambiguitiesView() {
   const rows = Object.keys(SHEET_NAMES).flatMap((sheet) => site[sheet].rows.flatMap((r) =>
     site[sheet].columns.filter((c) => r.cells[c.key].comment).map((c) => ambiguityRow(sheet, plans[r.plan_id], c, r.cells[c.key]))));
-  return el("div", { class: "ambiguities-page" }, el("h2", {}, "Ambiguities"),
+  const applyFilter = () => rows.forEach((r) => { r.hidden = Boolean(kindFilter) && r.dataset.kind !== kindFilter; });
+  const filter = el("select", { id: "kind-filter", onchange: () => { kindFilter = filter.value; applyFilter(); } },
+    el("option", { value: "" }, "All kinds"), ...Object.entries(KIND_NAMES).map(([k, name]) => el("option", { value: k }, name)));
+  filter.value = kindFilter;
+  applyFilter();
+  return el("div", { class: "ambiguities-page" }, el("h2", {}, "Ambiguities"), el("label", {}, "Show ", filter),
     el("table", { class: "sheet ambiguities" },
-      el("thead", {}, el("tr", {}, ...["Plan", "Benefit", "Value", "Comment", "Links"].map((h) => el("th", {}, h)))),
+      el("thead", {}, el("tr", {}, ...["Plan", "Benefit", "Value", "Kind", "Comment", "Links"].map((h) => el("th", {}, h)))),
       el("tbody", {}, ...rows)));
 }
 
 function ambiguityRow(sheet, plan, column, cell) {
-  const { doc, page } = cell.comment;
+  const { doc, page, kind } = cell.comment;
   const cellHash = `#/${sheet}/${plan.plan_id}/${column.key}`;
-  return el("tr", { "data-plan": plan.plan_id },
+  return el("tr", { "data-plan": plan.plan_id, "data-kind": kind },
     el("th", {}, el("a", { href: `#/plan/${plan.plan_id}` }, plan.plan_name), el("small", {}, plan.plan_id)),
     el("td", { class: "text" }, column.label),
     valueCell(plan, column, cell),
+    el("td", { class: "text" }, KIND_NAMES[kind]),
     el("td", { class: "text comment-text" }, ...commentText(plan, column, cell)),
     el("td", { class: "text links" },
       el("a", { href: "#", onclick: (e) => { e.preventDefault(); openComment(plan, column, cell); } }, `${site.docs[doc].kind} page ${page}`),
