@@ -58,7 +58,8 @@ These items are not reproduced: 4 (Devoted rewards) and 5 (Regence virtual urgen
 
 ## Limits
 
-- The PBP is bid data, not a citable document. Only the cells in `data/citations.csv` carry SB/EOC page citations.
+- The PBP is bid data, not a citable document. Only the cells in `data/citations.csv` and `data/eoc_citations.csv` carry SB/EOC page citations.
+- `data/eoc_citations.csv` comes from the issue #8 prototype, not from `run.sh`. A citation is kept only if the EOC value matches the cell, the quote highlights once on its page, and two models both confirm it.
 - DVHA cells leave out vendor names, frequency limits and rewards. Shared allowances (Devoted, ATRIO) show only as the services they cover.
 - Some PBP fields have no amount. DVHA then says "OTC covered", although the SB gives one (UHC $25/quarter, Humana 317 $175/month).
 - PBP ranges can start at $0 where the SB gives only the upper amount (UHC specialist "$0-$55").

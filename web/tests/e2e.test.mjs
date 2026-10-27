@@ -37,9 +37,16 @@ const row = (planId) => page.locator("table.sheet tr", { has: page.locator("smal
 
 test("clicking a cited cell highlights the quote on its page", async () => {
   await page.goto(`${base}#/main`);
-  await row("H2001-045-0").locator("td.cited").first().click();
+  await row("H2001-045-0").locator("td.cited", { hasText: "$1,980" }).click();
   await shown(docOf("H2001-045-0", "SB"), 6);
   assert.match((await page.locator(".textLayer mark").allTextContents()).join(" "), /\$1,980 copay per stay/);
+});
+
+test("clicking a DVHA cell with an EOC citation highlights the quote", async () => {
+  await page.goto(`${base}#/dvha`);
+  await row("H3805-048-0").locator("td.cited", { hasText: "Routine foot care" }).click();
+  await shown(docOf("H3805-048-0", "EOC"), 84);
+  assert.match((await page.locator(".textLayer mark").allTextContents()).join(" "), /\$45 copayment/);
 });
 
 test("clicking an uncited cell opens the summary of benefits with a note", async () => {

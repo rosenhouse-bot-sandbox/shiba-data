@@ -1,4 +1,5 @@
 import contextlib
+import csv
 import hashlib
 import io
 import json
@@ -41,10 +42,10 @@ class SiteDataTest(unittest.TestCase):
 
     def test_cite_keeps_line_number(self):
         cell = self.cell("main", "H3805-048-0", "L_xray_imaging")
-        self.assertEqual([c["line"] for c in cell["cites"]], [2])
+        self.assertEqual(cell["cites"][0]["line"], 2)
 
     def test_uncited_cell_has_no_cites(self):
-        self.assertEqual(self.cell("main", "H3805-048-0", "E_moop"), {"value": "$6,700", "cites": []})
+        self.assertEqual(self.cell("main", "H3805-048-0", "D_premium_full_extra_help"), {"value": "$0", "cites": []})
 
     def test_pbp_override_is_attached_to_cell(self):
         cell = self.cell("main", "H3805-048-0", "L_xray_imaging")
@@ -69,6 +70,39 @@ class SiteDataTest(unittest.TestCase):
     def test_doc_ids_are_sha_prefixes(self):
         for doc_id, doc in self.site["docs"].items():
             self.assertEqual(doc_id, doc["sha256"][:16])
+
+
+class EocCitationsTest(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.data = pathlib.Path(self.tmp.name)
+        for f in DATA.glob("*.csv"):
+            (self.data / f.name).write_bytes(f.read_bytes())
+        eoc = next(d["url"] for d in build.rows("documents_checked.csv", DATA)
+                   if d["kind"] == "EOC" and "H3805-048-0" in d["plan_ids"])
+        with open(self.data / "eoc_citations.csv", "w", newline="") as f:
+            w = csv.writer(f)
+            w.writerow(["sheet", "plan_id", "column", "value", "url", "pdf_page", "quote"])
+            w.writerow(["main", "H3805-048-0", "L_xray_imaging", "$30 | $320", eoc, 80, "x-ray quote"])
+            w.writerow(["dvha", "H3805-048-0", "C_premium", "$0", eoc, 9, "premium quote"])
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def cell(self, site, sheet, column):
+        return next(r for r in site[sheet]["rows"] if r["plan_id"] == "H3805-048-0")["cells"][column]
+
+    def test_eoc_cite_follows_existing_cites(self):
+        cell = self.cell(build.site_data(self.data), "main", "L_xray_imaging")
+        self.assertEqual([c["quote"] for c in cell["cites"]][-1], "x-ray quote")
+        self.assertEqual(cell["cites"][-1], {"line": None, "value": "$30 | $320", "doc": cell["cites"][-1]["doc"],
+                                             "page": 80, "quote": "x-ray quote"})
+        self.assertGreater(len(cell["cites"]), 1)
+
+    def test_eoc_cite_goes_to_its_own_sheet(self):
+        site = build.site_data(self.data)
+        self.assertEqual([c["quote"] for c in self.cell(site, "dvha", "C_premium")["cites"]], ["premium quote"])
+        self.assertEqual(self.cell(site, "main", "C_premium")["cites"], [])
 
 
 class FetchPdfsTest(unittest.TestCase):
