@@ -39,8 +39,8 @@ const UNCITED = "td:not(.cited):not(.commented)";
 test("clicking a cited cell highlights the quote on its page", async () => {
   await page.goto(`${base}#/main`);
   await row("H2001-045-0").locator("td.cited", { hasText: "$1,980" }).click();
-  await shown(docOf("H2001-045-0", "SB"), 6);
-  assert.match((await page.locator(".textLayer mark").allTextContents()).join(" "), /\$1,980 copay per stay/);
+  await shown(docOf("H2001-045-0", "EOC"), 77);
+  assert.match((await page.locator(".textLayer mark").allTextContents()).join(" "), /\$1,980 copayment/);
 });
 
 test("clicking a DVHA cell with an EOC citation highlights the quote", async () => {
