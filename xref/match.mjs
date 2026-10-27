@@ -1,12 +1,11 @@
 // Reads [{doc, page, quote}] on stdin and prints each one's ok: the site highlights the quote at one place on the page,
 // either as contiguous text or down one column.
 import fs from "node:fs";
-import { matchRanges } from "../web/static/highlight.js";
+import { matchRanges, squash } from "../web/static/highlight.js";
 
 const [itemsDir] = process.argv.slice(2);
 const docs = {};
-const squash = (s) => s.replace(/\s+/g, "").toLowerCase();
-const count = (text, needle) => text.split(needle).length - 1;
+const count = (text, needle) => { let n = 0; for (let at = text.indexOf(needle); at >= 0; at = text.indexOf(needle, at + 1)) n++; return n; };
 const cites = JSON.parse(fs.readFileSync(0, "utf8"));
 for (const c of cites) {
   docs[c.doc] ??= JSON.parse(fs.readFileSync(`${itemsDir}/${c.doc}.json`, "utf8"));

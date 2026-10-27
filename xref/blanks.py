@@ -1,12 +1,17 @@
 """Cites EOC quotes for blank cells: the plan lacks the benefit, covers only the Medicare part, or sells it as an option.
 
-  blanks.py bundle  <work> <dir>                     one task per plan for a small model, answers to <dir>/a-<plan>.json
+Needs pypdfium2, poppler's pdftotext and `npm ci` here. First run `texts.py <documents>/pdfs <work>`,
+where <documents> comes from `web/build.py documents` or the documents.tar release.
+
+  blanks.py bundle  <work> <dir>                     one task file per plan, <dir>/<plan>.md
   blanks.py claims  <work> <dir> <claims.json>        answers whose quotes pass the mechanical checks
-  blanks.py verify  <work> <claims.json> <dir>        verifier tasks, with decoys from cells the plan fills
-  blanks.py accept  <work> <dir> <accepted.json>      claims the verifier accepted; fails if it accepted a decoy
+  blanks.py verify  <work> <claims.json> <vdir>       verifier task files <vdir>/v-NN.md, with decoys from cells plans fill
+  blanks.py accept  <work> <vdir> <accepted.json>     claims the verifier accepted; fails if it accepted a decoy
   blanks.py publish <accepted.json>                   appends the citations to repro/data/eoc_citations.csv
 
-<work> holds the output of texts.py.
+Give each task file to a small model (a Haiku subagent): "Read <file> and do exactly the task it describes."
+It writes its answer where the file says: <dir>/a-<plan>.json or <vdir>/ans-NN.json.
+For a second, independent check, run verify and accept again on accepted.json before publishing.
 """
 import collections, csv, glob, io, json, os, pathlib, random, re, sys
 
@@ -16,10 +21,10 @@ sys.path.insert(0, os.path.join(os.path.dirname(HERE), "web"))
 from eoc import DATA, Doc, eoc, norm
 from fields import FIELDS
 
-BEFORE, AFTER = 4, 8
+LINES_BEFORE_HIT, LINES_AFTER_HIT = 4, 8
 CLAIMS = {"excluded", "medicare_only", "optional_only"}
 MEDICARE_ONLY_KEYS = {"main.S_acupuncture", "main.T_chiropractic"}
-NEGATION = re.compile(r"\bnot\b|exclu|n[’']t\b", re.I)
+EXCLUSION = re.compile(r"not covered|exclu|does(?: not|n[’']t) (?:cover|offer)|(?:are not|aren[’']t) included", re.I)
 CONDITION = re.compile(r"\b(if|when|unless)\b", re.I)
 EXCLUSION_ROW_ENDS = (" Not covered under any condition", " Not covered under any condition.")
 
@@ -54,7 +59,7 @@ def snippets(pages, regexes):
         spans = []
         for i, line in enumerate(lines):
             if any(re.search(rx, line, re.I) for rx in regexes):
-                a, b = max(0, i - BEFORE), min(len(lines), i + AFTER + 1)
+                a, b = max(0, i - LINES_BEFORE_HIT), min(len(lines), i + LINES_AFTER_HIT + 1)
                 if spans and a <= spans[-1][1]:
                     spans[-1][1] = max(spans[-1][1], b)
                 else:
@@ -74,7 +79,8 @@ def passages(layout, key):
 
 
 def fill(template, **values):
-    text = open(f"{HERE}/{template}").read()
+    with open(f"{HERE}/{template}") as f:
+        text = f.read()
     for k, v in values.items():
         text = text.replace("{" + k + "}", v)
     return text
@@ -87,7 +93,7 @@ def bundle(work, out_dir):
         layout = Doc(work, plan).pages("layout")
         head = fill("blank_prompt.md", PLAN_NAME=names[plan], PLAN_ID=plan,
                     ANSWER=os.path.abspath(f"{out_dir}/a-{plan}.json"),
-                    CHECK=f"python3 -I {HERE}/check.py {os.path.abspath(work)} {plan}")
+                    CHECK=f"python3 -I {HERE}/quote_check.py {os.path.abspath(work)} {plan}")
         body = [f"### {k}\n\n{FIELDS[k][0]}\n\n{passages(layout, k)}" for k in sorted(keys)]
         open(f"{out_dir}/{plan}.md", "w").write("\n\n".join([head] + body) + "\n")
 
@@ -138,19 +144,24 @@ def decoys(found, filled, doc_of, max_per_key=3, seed=8):
     return out
 
 
-def verify(work, claims_path, out_dir, per=6):
+def verifier_items(found, planted, seed=3):
+    items = found + planted
+    random.Random(seed).shuffle(items)
+    return items
+
+
+def verify(work, claims_path, out_dir, items_per_task=6):
     os.makedirs(out_dir, exist_ok=True)
     found = json.load(open(claims_path))
     filled = {k: [p for p, c in by_plan.items() if c["value"].strip()] for k, by_plan in cells().items()}
     docs = {}
     doc_of = lambda plan: docs.setdefault(plan, Doc(work, plan))
-    items = found + decoys(found, filled, doc_of)
-    random.Random(3).shuffle(items)
+    items = verifier_items(found, decoys(found, filled, doc_of))
     json.dump(items, open(f"{out_dir}/items.json", "w"), indent=1, ensure_ascii=False)
-    for b in range(0, len(items), per):
-        n = b // per
+    for b in range(0, len(items), items_per_task):
+        n = b // items_per_task
         parts = [fill("vblank_prompt.md", ANSWER=os.path.abspath(f"{out_dir}/ans-{n:02d}.json"))]
-        for i in range(b, min(b + per, len(items))):
+        for i in range(b, min(b + items_per_task, len(items))):
             c = items[i]
             shown = {"id": i, "plan": c["plan"], "field": c["key"], "meaning": FIELDS[c["key"]][0],
                      "claim": c["claim"], "citations": c["citations"]}
@@ -162,7 +173,7 @@ def verify(work, claims_path, out_dir, per=6):
 
 def states_exclusion(key, quote):
     names = any(re.search(rx, quote, re.I) for rx in FIELDS[key][1])
-    return bool(names and NEGATION.search(quote) and not CONDITION.search(quote))
+    return bool(names and EXCLUSION.search(quote) and not CONDITION.search(quote))
 
 
 def exclusion_cites(key, cites, quote_ok):
@@ -176,8 +187,15 @@ def exclusion_cites(key, cites, quote_ok):
     return out
 
 
+def missing_verdicts(items, verdicts):
+    return sorted(set(range(len(items))) - {v["id"] for v in verdicts})
+
+
 def accepted(items, verdicts, quote_ok_for):
-    ok = {v["id"] for v in verdicts if v["ok"]}
+    """Claims every verdict accepted, with the exclusion stated for `excluded` claims."""
+    if missing_verdicts(items, verdicts):
+        raise SystemExit(f"No verdict for items {missing_verdicts(items, verdicts)}")
+    ok = {v["id"] for v in verdicts} - {v["id"] for v in verdicts if v["ok"] is not True}
     decoys_ok = [i for i in ok if items[i].get("decoy")]
     if decoys_ok:
         raise SystemExit(f"The verifier accepted decoys {decoys_ok}. Use a stronger verifier.")
@@ -195,9 +213,6 @@ def accepted(items, verdicts, quote_ok_for):
 def accept(work, verify_dir, out):
     items = json.load(open(f"{verify_dir}/items.json"))
     verdicts = [v for f in sorted(glob.glob(f"{verify_dir}/ans-*.json")) for v in json.load(open(f))]
-    answered = {v["id"] for v in verdicts}
-    if answered != set(range(len(items))):
-        raise SystemExit(f"No verdict for items {sorted(set(range(len(items))) - answered)}")
     acc = accepted(items, verdicts, lambda plan: Doc(work, plan).quote_ok)
     json.dump([{k: v for k, v in c.items() if k != "decoy"} for c in acc], open(out, "w"), indent=1, ensure_ascii=False)
     print(len(acc), "of", sum(1 for c in items if not c.get("decoy")), "claims accepted;",
@@ -210,7 +225,8 @@ def citation_rows(acc, url_of):
 
 
 def publish(accepted_path, data=DATA):
-    acc = json.load(open(accepted_path))
+    with open(accepted_path) as f:
+        acc = json.load(f)
     all_cells = cells(data)
     stale = [(c["plan"], c["key"]) for c in acc if all_cells[c["key"]][c["plan"]]["value"].strip() or all_cells[c["key"]][c["plan"]]["cites"]]
     if stale:
@@ -221,5 +237,9 @@ def publish(accepted_path, data=DATA):
         f.write(buf.getvalue())
 
 
+COMMANDS = {"bundle": bundle, "claims": claims, "verify": verify, "accept": accept, "publish": publish}
+
 if __name__ == "__main__":
-    {"bundle": bundle, "claims": claims, "verify": verify, "accept": accept, "publish": publish}[sys.argv[1]](*sys.argv[2:])
+    if len(sys.argv) < 2 or sys.argv[1] not in COMMANDS:
+        raise SystemExit(__doc__)
+    COMMANDS[sys.argv[1]](*sys.argv[2:])

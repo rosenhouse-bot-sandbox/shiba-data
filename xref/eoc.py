@@ -3,28 +3,32 @@ import csv, json, os, re, subprocess
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(os.path.dirname(HERE), "repro", "data")
+PDFIUM_SOFT_HYPHEN = "￾"
 
 
 def norm(s):
-    return re.sub(r"\s+", " ", s.replace("￾", "")).strip()
+    return re.sub(r"\s+", " ", s.replace(PDFIUM_SOFT_HYPHEN, "")).strip()
 
 
 def load_pages(path):
-    parts = re.split(r"=====PAGE (\d+)=====\n", open(path).read())
+    with open(path) as f:
+        parts = re.split(r"=====PAGE (\d+)=====\n", f.read())
     return {int(parts[i]): parts[i + 1] for i in range(1, len(parts) - 1, 2)}
 
 
 def eoc(plan_id, data=DATA):
     """The plan's EOC: (doc id, url)."""
-    for d in csv.DictReader(open(f"{data}/documents_checked.csv")):
-        if d["kind"] == "EOC" and plan_id in d["plan_ids"].split(";"):
-            return d["sha256"][:16], d["url"]
+    with open(f"{data}/documents_checked.csv") as f:
+        for d in csv.DictReader(f):
+            if d["kind"] == "EOC" and plan_id in d["plan_ids"].split(";"):
+                return d["sha256"][:16], d["url"]
+    raise LookupError(f"No EOC for {plan_id}")
 
 
 class Doc:
     def __init__(self, work, plan_id, data=DATA):
-        self.work, self.plan_id = work, plan_id
-        self.id, self.url = eoc(plan_id, data)
+        self.work = work
+        self.id = eoc(plan_id, data)[0]
         self._flow = None
 
     def pages(self, kind):
@@ -38,8 +42,6 @@ class Doc:
 
     def highlights(self, cites):
         """Whether the site highlights each {page, quote} at exactly one place."""
-        if not cites:
-            return []
         r = subprocess.run(["node", f"{HERE}/match.mjs", f"{self.work}/items"], capture_output=True, text=True, check=True,
                            input=json.dumps([{"doc": self.id, "page": int(c["page"]), "quote": norm(c["quote"])} for c in cites]))
         return [c["ok"] for c in json.loads(r.stdout)]

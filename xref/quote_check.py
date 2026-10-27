@@ -1,4 +1,4 @@
-"""check.py <work> <plan_id> <page> <quote>...: prints OK for each quote that can be cited on that EOC page."""
+"""quote_check.py <work> <plan_id> <page> <quote>...: prints OK for each quote that can be cited on that EOC page."""
 import os, sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))

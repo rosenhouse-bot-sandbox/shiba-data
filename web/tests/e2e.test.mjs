@@ -368,11 +368,11 @@ test("a blank uncited cell says CMS data has no entry", async () => {
   assert.match(await page.textContent("#source-note"), /has no entry for this benefit/);
 });
 
-test("a cited blank cell says the plan lacks the benefit", async () => {
+test("a cited blank cell says the document shows why", async () => {
   await page.goto(`${base}#/main`);
   const index = site.main.columns.findIndex((c) => c.key === "U_naturopath");
   await row("H2056-003-0").locator("td").nth(index).click();
-  assert.match(await page.textContent("#source-note"), /does not cover this as a routine benefit/);
+  assert.match(await page.textContent("#source-note"), /shows why this is blank/);
 });
 
 test("closing the viewer hides it", async () => {
