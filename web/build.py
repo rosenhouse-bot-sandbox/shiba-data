@@ -61,22 +61,25 @@ def rows(name, data_dir):
         return list(csv.DictReader(f))
 
 
-def sheet(csv_rows, labels, cites, pbp):
+def sheet(csv_rows, labels, cites, pbp, comments):
     return {
         "columns": [{"key": k, "label": v} for k, v in labels.items()],
         "rows": [{
             "plan_id": r["plan_id"],
             "section": r["section"],
-            "cells": {k: cell(r[k], cites.get((r["plan_id"], k), []), pbp.get((r["plan_id"], k)))
+            "cells": {k: cell(r[k], cites.get((r["plan_id"], k), []), pbp.get((r["plan_id"], k)),
+                              comments.get((r["plan_id"], k)))
                       for k in labels},
         } for r in csv_rows],
     }
 
 
-def cell(value, cites, pbp):
+def cell(value, cites, pbp, comment):
     c = {"value": value, "cites": cites}
     if pbp is not None:
         c["pbp"] = pbp
+    if comment:
+        c["comment"] = comment
     return c
 
 
@@ -109,11 +112,18 @@ def site_data(data_dir=DATA):
     for p in plans:
         p["docs"] = [i for i, d in docs.items() if p["plan_id"] in d["plan_ids"]]
         p["plan_finder_url"] = f"https://www.medicare.gov/plan-compare/#/plan-details/2027-{p['plan_id']}?year=2027&lang=en"
+    sheets = {"main": (rows("main_chart.csv", data_dir), MAIN_LABELS), "dvha": (rows("dvha.csv", data_dir), DVHA_LABELS)}
+    comments = {"main": {}, "dvha": {}}
+    for c in rows("comments.csv", data_dir):
+        csv_rows, labels = sheets[c["sheet"]]
+        if c["column"] not in labels or c["plan_id"] not in {r["plan_id"] for r in csv_rows}:
+            raise ValueError(f"comments.csv names no cell: {c['sheet']} {c['plan_id']} {c['column']}")
+        comments[c["sheet"]][(c["plan_id"], c["column"])] = c["comment"]
     return {
         "plans": plans,
         "docs": docs,
-        "main": sheet(rows("main_chart.csv", data_dir), MAIN_LABELS, cites["main"], pbp["main"]),
-        "dvha": sheet(rows("dvha.csv", data_dir), DVHA_LABELS, cites["dvha"], pbp["dvha"]),
+        **{name: sheet(csv_rows, labels, cites[name], pbp[name], comments[name])
+           for name, (csv_rows, labels) in sheets.items()},
     }
 
 

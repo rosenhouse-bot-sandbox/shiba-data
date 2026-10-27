@@ -65,6 +65,18 @@ class SiteDataTest(unittest.TestCase):
         cell = self.cell("main", "H3805-048-0", "L_xray_imaging")
         self.assertEqual(cell["pbp"], "$30 | $0-$320")
 
+    def test_commented_cell_carries_comment(self):
+        cell = self.cell("main", "H6815-038-0", "K_tests_labs")
+        self.assertIn("EKG", cell["comment"])
+
+    def test_comment_on_unknown_cell_fails(self):
+        for plan_id, column in (("H6815-038-0", "K_tests"), ("H6815-999-0", "K_tests_labs")):
+            with self.subTest(plan_id=plan_id, column=column), tempfile.TemporaryDirectory() as tmp:
+                data = data_copy(tmp, [])
+                (data / "comments.csv").write_text(f"sheet,plan_id,column,comment\nmain,{plan_id},{column},typo\n")
+                with self.assertRaisesRegex(ValueError, f"{plan_id} {column}"):
+                    build.site_data(data)
+
     def test_every_plan_has_an_sb(self):
         for p in self.site["plans"]:
             kinds = [self.site["docs"][d]["kind"] for d in p["docs"]]
