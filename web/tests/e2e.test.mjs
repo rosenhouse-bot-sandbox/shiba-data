@@ -34,6 +34,7 @@ after(async () => {
 const shown = (doc, n) => page.waitForSelector(`#page-area[data-shown="${doc} ${n}"]`);
 const docOf = (planId, kind) => Object.entries(site.docs).find(([, d]) => d.kind === kind && d.plan_ids.includes(planId))[0];
 const row = (planId) => page.locator("table.sheet tr", { has: page.locator("small", { hasText: planId }) });
+const UNCITED = "td:not(.cited):not(.commented)";
 
 test("clicking a cited cell highlights the quote on its page", async () => {
   await page.goto(`${base}#/main`);
@@ -51,7 +52,7 @@ test("clicking a DVHA cell with an EOC citation highlights the quote", async () 
 
 test("clicking an uncited cell opens the summary of benefits with a note", async () => {
   await page.goto(`${base}#/main`);
-  await row("H3805-048-0").locator("td").first().click();
+  await row("H3805-048-0").locator(UNCITED).first().click();
   await shown(docOf("H3805-048-0", "SB"), 1);
   assert.match(await page.textContent("#source-note"), /CMS 2027 Plan Benefit Package/);
   assert.match(await page.textContent("#doc-title"), /^Summary of Benefits/);
@@ -59,7 +60,7 @@ test("clicking an uncited cell opens the summary of benefits with a note", async
 
 test("scrolling the document moves to the next page", async () => {
   await page.goto(`${base}#/main`);
-  await row("H3805-048-0").locator("td").first().click();
+  await row("H3805-048-0").locator(UNCITED).first().click();
   await shown(docOf("H3805-048-0", "SB"), 1);
   await page.$eval("#page-area", (area) => area.scrollBy(0, area.querySelector(".page").offsetHeight + 50));
   await page.waitForFunction(() => document.querySelector("#page").value === "2");
@@ -95,7 +96,7 @@ test("only pages near the view keep a canvas", async () => {
 
 test("resizing keeps the cited quote in view", async () => {
   await page.goto(`${base}#/main`);
-  await row("H2923-009-0").locator("td.cited").last().click();
+  await row("H2923-009-0").locator("td").nth(site.main.columns.findIndex((c) => c.key === "U_naturopath")).click();
   await page.locator("#source-note a", { hasText: "EOC" }).click();
   await shown(docOf("H2923-009-0", "EOC"), 71);
   await page.setViewportSize({ width: 1600, height: 600 });
@@ -131,7 +132,7 @@ test("yellow marks a comment, shown on hover and in the note", async () => {
 
 test("picking a plan opens its summary of benefits, unless one of its documents is open", async () => {
   await page.goto(`${base}#/main`);
-  await row("H3805-048-0").locator("td").first().click();
+  await row("H3805-048-0").locator(UNCITED).first().click();
   await shown(docOf("H3805-048-0", "SB"), 1);
   await page.selectOption("#plan-picker", "H2923-001-0");
   await shown(docOf("H2923-001-0", "SB"), 1);
@@ -187,9 +188,9 @@ test("a slow document never shows the previous document's pages", async () => {
   });
   await fresh.goto(`${base}#/main`);
   const rowIn = (p, planId) => p.locator("table.sheet tr", { has: p.locator("small", { hasText: planId }) });
-  await rowIn(fresh, "H3805-048-0").locator("td").first().click();
+  await rowIn(fresh, "H3805-048-0").locator(UNCITED).first().click();
   await fresh.waitForSelector(`#page-area[data-shown="${docOf("H3805-048-0", "SB")} 1"]`);
-  const slowCell = rowIn(fresh, "H7006-018-0").locator("td").first();
+  const slowCell = rowIn(fresh, "H7006-018-0").locator(UNCITED).first();
   await slowCell.evaluate((td) => {
     document.querySelector("#next").click();
     td.click();

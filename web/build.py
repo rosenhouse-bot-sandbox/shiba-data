@@ -118,6 +118,8 @@ def site_data(data_dir=DATA):
         csv_rows, labels = sheets[c["sheet"]]
         if c["column"] not in labels or c["plan_id"] not in {r["plan_id"] for r in csv_rows}:
             raise ValueError(f"comments.csv names no cell: {c['sheet']} {c['plan_id']} {c['column']}")
+        if (c["plan_id"], c["column"]) in comments[c["sheet"]]:
+            raise ValueError(f"comments.csv names a cell twice: {c['sheet']} {c['plan_id']} {c['column']}")
         comments[c["sheet"]][(c["plan_id"], c["column"])] = {
             "text": c["comment"], "doc": doc_by_url[c["url"]], "page": int(c["pdf_page"]), "quote": c["quote"]}
     return {
