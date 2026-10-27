@@ -69,9 +69,11 @@ def snippets(pages, regexes):
     return out
 
 
-def passages(layout, key):
+def passages(layout, key, keep=lambda snippet: True):
     parts, page = [], None
     for p, s in snippets(layout, FIELDS[key][1]):
+        if not keep(s):
+            continue
         if p != page:
             parts.append(f"=====PAGE {p}=====")
             page = p

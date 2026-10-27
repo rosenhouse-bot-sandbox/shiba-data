@@ -46,8 +46,8 @@ flowchart TB
   facts & checked --> cite --> citations
   cms & plans & citations --> gen --> sheets
 
-  extract[Read each EOC and SB blind;<br>quote values]:::cheap
-  verify[Verify citations;<br>write comments]:::heavy
+  extract[blanks.py, filled.py:<br>quote the EOC for each cell]:::cheap
+  verify[Verify quotes against decoys;<br>write comments]:::heavy
 
   tar & sheets --> extract --> verify --> eoccites & comments
 
@@ -67,5 +67,6 @@ flowchart TB
 | Red | Heavier model (Sonnet or Opus), or an agent with a browser |
 
 - Steps in `pipeline/run.py` regenerate every CSV above except `documents.csv`, `sb_facts.csv`, `eoc_citations.csv` and `comments.csv`. Models write those four.
+- `pipeline/blanks.py` and `pipeline/filled.py` turn small-model answers into `eoc_citations.csv` rows. Their docstrings list the steps.
 - `pipeline/eval.py <year> [<machine.csv>]` scores machine-written cells against the live data.
 - The Site workflow downloads PDFs from carriers only when no documents release exists.
