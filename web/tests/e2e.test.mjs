@@ -50,6 +50,15 @@ test("clicking an uncited cell opens the summary of benefits with a note", async
   assert.match(await page.textContent("#doc-title"), /^Summary of Benefits/);
 });
 
+test("scrolling the document moves to the next page", async () => {
+  await page.goto(`${base}#/main`);
+  await row("H3805-048-0").locator("td").first().click();
+  await shown(docOf("H3805-048-0", "SB"), 1);
+  await page.$eval("#page-area", (area) => area.scrollBy(0, area.querySelector(".page").offsetHeight + 50));
+  await page.waitForFunction(() => document.querySelector("#page").value === "2");
+  await page.waitForSelector('#page-area .page[data-page="2"] canvas');
+});
+
 test("plan page lists the plan's documents", async () => {
   await page.goto(`${base}#/plan/H2001-045-0`);
   const docs = await page.locator("table.docs").textContent();

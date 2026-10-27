@@ -21,6 +21,7 @@ const el = (tag, attrs = {}, ...kids) => {
 };
 
 let site;
+let pageObserver;
 let plans;
 
 async function start() {
@@ -31,12 +32,19 @@ async function start() {
   picker.addEventListener("change", () => {
     if (picker.value) location.hash = `#/plan/${picker.value}`;
   });
-  $("#prev").addEventListener("click", () => showPage(viewer.page - 1));
-  $("#next").addEventListener("click", () => showPage(viewer.page + 1));
-  $("#page").addEventListener("change", (e) => showPage(Number(e.target.value)));
+  $("#prev").addEventListener("click", () => goTo(currentPage() - 1));
+  $("#next").addEventListener("click", () => goTo(currentPage() + 1));
+  $("#page").addEventListener("change", (e) => goTo(Number(e.target.value)));
   $("#close").addEventListener("click", closeViewer);
   window.addEventListener("hashchange", route);
-  new ResizeObserver(() => viewer.pending ? showPage(...viewer.pending) : showPage(viewer.page)).observe($("#page-area"));
+  pageObserver = new IntersectionObserver(onVisible, { root: area(), rootMargin: "1500px 0px" });
+  area().addEventListener("scroll", () => ($("#page").value = currentPage()));
+  new ResizeObserver(() => {
+    if (!viewer.pdf || !area().clientWidth || area().clientWidth === viewer.width) return;
+    const { n, toCite } = viewer.target || { n: currentPage(), toCite: false };
+    layoutPages();
+    goTo(n, toCite);
+  }).observe(area());
   route();
 }
 
@@ -147,7 +155,9 @@ function benefitTable(title, sheet, plan) {
 
 const kindName = (k) => ({ SB: "Summary of Benefits", EOC: "Evidence of Coverage", RIDER: "Optional rider" })[k] || k;
 
-const viewer = { doc: null, loading: null, pdf: null, page: 1, cite: null, renderId: 0, pending: null };
+const viewer = { doc: null, loading: null, pdf: null, cite: null, target: null, width: 0 };
+const area = () => $("#page-area");
+const holders = () => [...area().querySelectorAll(".page")];
 
 async function openDoc(docId, page, quote, note) {
   const doc = site.docs[docId];
@@ -157,71 +167,128 @@ async function openDoc(docId, page, quote, note) {
   $("#source-note").replaceChildren(...[note, doc.changed ? el("p", { class: "warn" },
     "The carrier has changed this file since the data was extracted. Page numbers may be off.") : null].filter(Boolean));
   viewer.cite = quote ? { page, quote } : null;
-  viewer.renderId++;
   if (!doc.file) {
     viewer.doc = viewer.pdf = null;
-    $("#page-area").replaceChildren(el("p", { class: "notice" }, "No copy of this document is hosted here. ",
+    area().replaceChildren(el("p", { class: "notice" }, "No copy of this document is hosted here. ",
       el("a", { href: doc.url, target: "_blank", rel: "noopener" }, "Open the carrier's copy ↗")));
     return;
   }
   if (viewer.doc !== docId) {
     viewer.doc = docId;
     viewer.pdf = null;
-    $("#page-area").replaceChildren(el("p", { class: "notice" }, "Loading…"));
-    viewer.loading = pdfjsLib.getDocument(doc.file).promise;
+    area().replaceChildren(el("p", { class: "notice" }, "Loading…"));
+    viewer.loading = loadSizes(doc.file);
   }
-  const pdf = await viewer.loading;
+  const { pdf, sizes } = await viewer.loading;
   if (viewer.doc !== docId) return;
-  viewer.pdf = pdf;
-  $("#page-count").textContent = `of ${pdf.numPages}`;
-  showPage(page, true);
+  if (viewer.pdf !== pdf) {
+    viewer.pdf = pdf;
+    viewer.sizes = sizes;
+    layoutPages();
+  } else {
+    holders().forEach(markPage);
+  }
+  goTo(page, true);
+}
+
+async function loadSizes(file) {
+  const pdf = await pdfjsLib.getDocument(file).promise;
+  const pages = await Promise.all(Array.from({ length: pdf.numPages }, (_, i) => pdf.getPage(i + 1)));
+  return { pdf, sizes: pages.map((p) => p.getViewport({ scale: 1 })) };
+}
+
+// Each page gets an empty box of its final size, so scroll positions are stable while pages render.
+function layoutPages() {
+  viewer.width = area().clientWidth;
+  const width = viewer.width - 24;
+  area().replaceChildren(...viewer.sizes.map((size, i) => {
+    const holder = el("div", { class: "page", "data-page": i + 1 });
+    holder.style.width = `${width}px`;
+    holder.style.height = `${(size.height * width) / size.width}px`;
+    return holder;
+  }));
+  holders().forEach((h) => pageObserver.observe(h));
+  $("#page-count").textContent = `of ${viewer.sizes.length}`;
+}
+
+function goTo(n, toCite = false) {
+  const all = holders();
+  if (!viewer.pdf || !all.length) return;
+  n = Math.min(Math.max(1, n || 1), all.length);
+  viewer.target = { n, toCite };
+  const holder = all[n - 1];
+  area().scrollTop = holder.offsetTop - 12;
+  $("#page").value = n;
+  if (holder.text) arrive(holder);
+  else renderPage(holder);
+}
+
+function currentPage() {
+  const line = area().scrollTop + area().clientHeight / 3;
+  const all = holders();
+  const i = all.findIndex((h) => h.offsetTop + h.offsetHeight > line);
+  return i < 0 ? all.length : i + 1;
+}
+
+function onVisible(entries) {
+  for (const { target: holder, isIntersecting } of entries) {
+    if (isIntersecting) renderPage(holder);
+    else {
+      holder.generation = (holder.generation || 0) + 1;
+      holder.rendering = holder.text = null;
+      holder.replaceChildren();
+    }
+  }
+}
+
+function renderPage(holder) {
+  holder.rendering ||= (async () => {
+    const generation = holder.generation;
+    const n = Number(holder.dataset.page);
+    const page = await viewer.pdf.getPage(n);
+    const viewport = page.getViewport({ scale: holder.clientWidth / page.getViewport({ scale: 1 }).width });
+    const ratio = window.devicePixelRatio || 1;
+    const canvas = el("canvas");
+    canvas.width = Math.floor(viewport.width * ratio);
+    canvas.height = Math.floor(viewport.height * ratio);
+    canvas.style.width = `${viewport.width}px`;
+    canvas.style.height = `${viewport.height}px`;
+    const text = el("div", { class: "textLayer" });
+    holder.style.setProperty("--scale-factor", viewport.scale);
+    await page.render({ canvasContext: canvas.getContext("2d"), viewport, transform: ratio !== 1 ? [ratio, 0, 0, ratio, 0, 0] : null }).promise;
+    const content = await page.getTextContent();
+    const layer = new pdfjsLib.TextLayer({ textContentSource: content, container: text, viewport });
+    await layer.render();
+    if (generation !== holder.generation) return;
+    holder.replaceChildren(canvas, text);
+    holder.text = { divs: layer.textDivs, items: content.items.filter((i) => "str" in i) };
+    markPage(holder);
+    arrive(holder);
+  })();
+}
+
+// Finishes a goTo once its page has rendered.
+function arrive(holder) {
+  const target = viewer.target;
+  if (!holder.isConnected || target?.n !== Number(holder.dataset.page)) return;
+  viewer.target = null;
+  area().dataset.shown = `${viewer.doc} ${target.n}`;
+  if (!target.toCite || viewer.cite?.page !== target.n) return;
+  const mark = holder.querySelector("mark");
+  if (mark) mark.scrollIntoView({ block: "center" });
+  else $("#source-note").append(el("p", { class: "warn" }, "Could not find the quoted text on this page."));
+}
+
+function markPage(holder) {
+  if (!holder.text) return;
+  const { divs, items } = holder.text;
+  divs.forEach((d, i) => (d.textContent = items[i].str));
+  if (viewer.cite?.page === Number(holder.dataset.page)) highlight(divs, items, viewer.cite.quote);
 }
 
 function closeViewer() {
   $("#viewer").hidden = true;
   document.querySelectorAll(".selected").forEach((s) => s.classList.remove("selected"));
-}
-
-async function showPage(n, scrollToCite = false) {
-  const { pdf, doc } = viewer;
-  if (!pdf) return;
-  n = Math.min(Math.max(1, n || 1), pdf.numPages);
-  const id = ++viewer.renderId;
-  viewer.pending = [n, scrollToCite];
-  const page = await pdf.getPage(n);
-  const area = $("#page-area");
-  const base = page.getViewport({ scale: 1 });
-  const viewport = page.getViewport({ scale: (area.clientWidth - 24) / base.width });
-  const ratio = window.devicePixelRatio || 1;
-  const canvas = el("canvas");
-  canvas.width = Math.floor(viewport.width * ratio);
-  canvas.height = Math.floor(viewport.height * ratio);
-  canvas.style.width = `${viewport.width}px`;
-  canvas.style.height = `${viewport.height}px`;
-  const text = el("div", { class: "textLayer" });
-  const holder = el("div", { class: "page" }, canvas, text);
-  holder.style.setProperty("--scale-factor", viewport.scale);
-  holder.style.width = `${viewport.width}px`;
-  holder.style.height = `${viewport.height}px`;
-
-  await page.render({ canvasContext: canvas.getContext("2d"), viewport, transform: ratio !== 1 ? [ratio, 0, 0, ratio, 0, 0] : null }).promise;
-  const content = await page.getTextContent();
-  const layer = new pdfjsLib.TextLayer({ textContentSource: content, container: text, viewport });
-  await layer.render();
-  if (id !== viewer.renderId || pdf !== viewer.pdf) return;
-  viewer.pending = null;
-  viewer.page = n;
-  $("#page").value = n;
-  area.replaceChildren(holder);
-  area.dataset.shown = `${doc} ${n}`;
-  if (viewer.cite?.page === n) {
-    const mark = highlight(layer.textDivs, content.items.filter((i) => "str" in i), viewer.cite.quote);
-    if (!scrollToCite) return;
-    if (mark) mark.scrollIntoView({ block: "center" });
-    else $("#source-note").append(el("p", { class: "warn" }, "Could not find the quoted text on this page."));
-  } else if (scrollToCite) {
-    area.scrollTop = 0;
-  }
 }
 
 function highlight(divs, items, quote) {

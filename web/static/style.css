@@ -61,8 +61,8 @@ td.selected { background: var(--selected); }
 #source-note p { margin: 4px 0; }
 .pbp { color: var(--muted); }
 .warn { color: var(--warn); }
-#page-area { flex: 1; overflow: auto; padding: 12px; background: #e6e8ec; }
-.page { position: relative; margin: 0 auto; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3); background: #fff; }
+#page-area { flex: 1; overflow: auto; position: relative; padding: 12px; background: #e6e8ec; }
+.page { position: relative; margin: 0 auto 12px; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3); background: #fff; }
 .page canvas { display: block; }
 .textLayer mark { background: rgba(255, 196, 0, 0.5); color: transparent; border-radius: 2px; box-shadow: 0 0 0 2px rgba(230, 120, 0, 0.8); }
 .notice { background: #fff; padding: 16px; }
