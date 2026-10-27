@@ -24,3 +24,24 @@ test("returns nothing when only part of the quote matches", () => {
 test("returns nothing when the quote is absent", () => {
   assert.deepEqual(matchRanges(["something else"], "$320 copay otherwise"), []);
 });
+
+// Item order in a two-column table alternates between the columns.
+const columns = ["$0 copayment or a", "30% coinsurance or", "colonoscopy at an", "Medicare-covered", "outpatient hospital.", "surgery or other"];
+const lefts = [321.1, 447.1, 321.1, 447.1, 321.1, 447.1];
+
+test("finds a quote that runs down one column", () => {
+  assert.deepEqual(matchRanges(columns, "$0 copayment or a colonoscopy at an outpatient hospital", lefts), [
+    { item: 0, start: 0, end: 17 },
+    { item: 2, start: 0, end: 17 },
+    { item: 4, start: 0, end: 19 },
+  ]);
+});
+
+test("returns nothing for a column quote without item positions", () => {
+  assert.deepEqual(matchRanges(columns, "$0 copayment or a colonoscopy at an outpatient hospital"), []);
+});
+
+test("returns nothing when a column quote occurs in two columns", () => {
+  const twice = ["You pay these", "You pay these", "until", "amounts", "amounts"];
+  assert.deepEqual(matchRanges(twice, "You pay these amounts", [321, 447, 500, 321, 447]), []);
+});

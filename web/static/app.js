@@ -404,7 +404,7 @@ function markOpenPlans() {
 }
 
 function highlight(divs, items, quote) {
-  for (const { item, start, end } of matchRanges(items.map((i) => i.str), quote)) {
+  for (const { item, start, end } of matchRanges(items.map((i) => i.str), quote, items.map((i) => i.transform[4]))) {
     const div = divs[item];
     const s = items[item].str;
     div.replaceChildren(s.slice(0, start), el("mark", {}, s.slice(start, end)), s.slice(end));

@@ -217,6 +217,24 @@ test("the open document's plan row is highlighted until the viewer closes", asyn
   assert.equal(await page.locator("tr.open-plan").count(), 0);
 });
 
+test("a quote running down one column of a two-column table is highlighted", async () => {
+  const fresh = await browser.newPage({ viewport: { width: 1600, height: 1000 } });
+  const eoc = docOf("H2406-070-0", "EOC");
+  const quote = "$0 copayment or a colonoscopy at an outpatient hospital.";
+  await fresh.route("**/data.json", (route) => {
+    const edited = structuredClone(site);
+    const cell = edited.main.rows.find((r) => r.plan_id === "H2406-070-0").cells.C_premium;
+    cell.cites = [{ line: null, value: cell.value, doc: eoc, page: 86, quote }];
+    route.fulfill({ json: edited });
+  });
+  await fresh.goto(`${base}#/main`);
+  await fresh.locator('table.sheet td[data-plan="H2406-070-0"][data-col="C_premium"]').click();
+  await fresh.waitForSelector(`#page-area[data-shown="${eoc} 86"]`);
+  const squash = (t) => t.replace(/\s+/g, "").toLowerCase();
+  assert.equal(squash((await fresh.locator(".textLayer mark").allTextContents()).join("")), squash(quote));
+  await fresh.close();
+});
+
 test("plan page lists the plan's documents", async () => {
   await page.goto(`${base}#/plan/H2001-045-0`);
   const docs = await page.locator("table.docs").textContent();
