@@ -124,6 +124,13 @@ test("the viewer warns about changed and missing copies", async () => {
   await fresh.close();
 });
 
+test("a plan page links to its Medicare Plan Finder page", async () => {
+  const plan = site.plans.find((p) => p.plan_id === "H3805-048-0");
+  await page.goto(`${base}#/plan/${plan.plan_id}`);
+  const link = page.locator(".plan-page a", { hasText: "View on Medicare.gov" });
+  assert.equal(await link.getAttribute("href"), plan.plan_finder_url);
+});
+
 test("a blank uncited cell says CMS data has no entry", async () => {
   await page.goto(`${base}#/dvha`);
   const index = site.dvha.columns.findIndex((c) => c.key === "F_dental");

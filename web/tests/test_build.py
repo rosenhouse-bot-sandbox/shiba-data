@@ -55,6 +55,11 @@ class SiteDataTest(unittest.TestCase):
             kinds = [self.site["docs"][d]["kind"] for d in p["docs"]]
             self.assertIn("SB", kinds, p["plan_id"])
 
+    def test_plan_links_to_medicare_plan_finder(self):
+        plan = next(p for p in self.site["plans"] if p["plan_id"] == "H2923-028-3")
+        self.assertEqual(plan["plan_finder_url"],
+                         "https://www.medicare.gov/plan-compare/#/plan-details/2027-H2923-028-3?year=2027&lang=en")
+
     def test_columns_have_labels(self):
         labels = {c["key"]: c["label"] for c in self.site["main"]["columns"]}
         self.assertEqual(labels["L_xray_imaging"], "X-Ray / Diag Radiology")
