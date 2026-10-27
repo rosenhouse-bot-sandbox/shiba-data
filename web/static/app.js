@@ -150,7 +150,7 @@ function openCell(plan, column, cell) {
     const cite = cell.cites[0];
     const note = citeNote(header, cell);
     note.append(el("p", {}, planFinderLink(plan)));
-    openDoc(cite.doc, cite.page, cite.quote, note);
+    openDoc(cite.doc, cite.page, cite.quote, note, cell.cites);
   } else if (cell.comment) {
     openComment(plan, column, cell);
   } else {
@@ -171,7 +171,7 @@ function citeNote(header, cell) {
   cell.cites.forEach((c, i) => {
     const doc = site.docs[c.doc];
     note.append(el("p", { class: "cite" },
-      el("a", { href: "#", onclick: (e) => { e.preventDefault(); openDoc(c.doc, c.page, c.quote, note); } },
+      el("a", { href: "#", onclick: (e) => { e.preventDefault(); openDoc(c.doc, c.page, c.quote, note, cell.cites); } },
         `${doc.kind} page ${c.page}`),
       c.line ? ` (line ${c.line})` : "", `: “${c.quote}”`));
   });
@@ -238,11 +238,12 @@ function benefitTable(title, sheet, plan) {
 
 const kindName = (k) => ({ SB: "Summary of Benefits", EOC: "Evidence of Coverage", RIDER: "Optional rider" })[k] || k;
 
-const viewer = { showing: null, doc: null, loading: null, pdf: null, sizes: [], cite: null, target: null, anchor: null, width: 0 };
+const viewer = { showing: null, doc: null, loading: null, pdf: null, sizes: [], cite: null, quotes: [], target: null, anchor: null, width: 0 };
 const area = () => $("#page-area");
 const holders = () => [...area().querySelectorAll(".page")];
 
-async function openDoc(docId, page, quote, note) {
+// Scrolls to the quote on page, and highlights it along with any other quotes in the same document.
+async function openDoc(docId, page, quote, note, otherQuotes = []) {
   const doc = site.docs[docId];
   viewer.showing = docId;
   $("#viewer").hidden = false;
@@ -252,6 +253,7 @@ async function openDoc(docId, page, quote, note) {
   $("#source-note").replaceChildren(...[note, doc.changed ? el("p", { class: "warn" },
     "The carrier has changed this file since the data was extracted. Page numbers may be off.") : null].filter(Boolean));
   viewer.cite = quote ? { page, quote } : null;
+  viewer.quotes = [viewer.cite, ...otherQuotes.filter((q) => q.doc === docId)].filter(Boolean);
   if (!doc.file) {
     viewer.doc = viewer.pdf = null;
     area().replaceChildren(el("p", { class: "notice" }, "No copy of this document is hosted here. ",
@@ -393,7 +395,8 @@ function markPage(holder) {
   if (!holder.text) return;
   const { divs, items } = holder.text;
   divs.forEach((d, i) => (d.textContent = items[i].str));
-  if (viewer.cite?.page === Number(holder.dataset.page)) highlight(divs, items, viewer.cite.quote);
+  const quotes = viewer.quotes.filter((q) => q.page === Number(holder.dataset.page)).map((q) => q.quote);
+  highlight(divs, items, [...new Set(quotes)]);
 }
 
 function closeViewer() {
@@ -407,11 +410,23 @@ function markOpenPlans() {
   document.querySelectorAll("tr[data-plan]").forEach((tr) => tr.classList.toggle("open-plan", open.includes(tr.dataset.plan)));
 }
 
-function highlight(divs, items, quote) {
-  for (const { item, start, end } of matchRanges(items.map((i) => i.str), quote, items.map((i) => i.transform[4]))) {
-    const div = divs[item];
-    const s = items[item].str;
-    div.replaceChildren(s.slice(0, start), el("mark", {}, s.slice(start, end)), s.slice(end));
+function highlight(divs, items, quotes) {
+  const strs = items.map((i) => i.str);
+  const lefts = items.map((i) => i.transform[4]);
+  const byItem = new Map();
+  for (const quote of quotes) {
+    for (const r of matchRanges(strs, quote, lefts)) byItem.set(r.item, [...(byItem.get(r.item) ?? []), r]);
+  }
+  for (const [item, ranges] of byItem) {
+    const s = strs[item];
+    const parts = [];
+    let at = 0;
+    for (const { start, end } of ranges.sort((a, b) => a.start - b.start)) {
+      if (start < at) continue;
+      parts.push(s.slice(at, start), el("mark", {}, s.slice(start, end)));
+      at = end;
+    }
+    divs[item].replaceChildren(...parts, s.slice(at));
   }
 }
 

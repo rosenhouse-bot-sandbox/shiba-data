@@ -235,6 +235,17 @@ test("a quote running down one column of a two-column table is highlighted", asy
   await fresh.close();
 });
 
+test("every quote a cell cites on the shown page is highlighted", async () => {
+  const { cites } = site.main.rows.find((r) => r.plan_id === "H3805-048-0").cells.J_outpatient_rehab;
+  assert.equal(new Set(cites.map((c) => `${c.doc} ${c.page}`)).size, 1);
+  await page.goto(`${base}#/main`);
+  await page.locator('table.sheet td[data-plan="H3805-048-0"][data-col="J_outpatient_rehab"]').click();
+  await shown(cites[0].doc, cites[0].page);
+  const squash = (t) => t.replace(/\s+/g, "").toLowerCase();
+  const marked = squash((await page.locator(".textLayer mark").allTextContents()).join(""));
+  for (const c of cites) assert.ok(marked.includes(squash(c.quote)), `${c.quote} in ${marked}`);
+});
+
 test("browser zoom enlarges the document pages", async () => {
   const pageWidthRatio = async (zoom) => {
     const fresh = await browser.newPage({ viewport: { width: 1600, height: 1000 } });
@@ -280,7 +291,7 @@ test("every citation's and comment's quote is highlighted in full on its page", 
           // A re-issued PDF may have moved the quote; the viewer warns about it instead.
           if (site.docs[c.doc].changed) continue;
           const marked = (await page.locator(".textLayer mark").allTextContents()).join("");
-          if (squash(marked) !== squash(c.quote)) wrong.push(`${sheet} ${r.plan_id} ${col} ${c.doc} p${c.page}`);
+          if (!squash(marked).includes(squash(c.quote))) wrong.push(`${sheet} ${r.plan_id} ${col} ${c.doc} p${c.page}`);
         }
       }
     }
