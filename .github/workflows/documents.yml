@@ -1,0 +1,28 @@
+name: Documents
+
+on:
+  workflow_dispatch:
+
+concurrency: documents
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  release:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python3 -I web/build.py documents _documents
+      - run: tar -cf documents.tar -C _documents .
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag="documents-$(date -u +%Y-%m-%d-%H%M%S)"
+          gh release create "$tag" documents.tar --target "$GITHUB_SHA" --title "$tag" --notes "Plan documents from the carrier sites, listed in repro/data/documents.csv at ${{ github.sha }}."
+          gh workflow run pages.yml --ref main

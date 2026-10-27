@@ -1,9 +1,13 @@
+import contextlib
 import hashlib
+import io
+import json
 import os
 import pathlib
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 import build  # noqa: E402
@@ -98,6 +102,55 @@ class FetchPdfsTest(unittest.TestCase):
 
     def test_reports_no_failures(self):
         self.assertEqual(build.fetch_pdfs(self.docs, self.dir / "site", "2026-10-26"), [])
+
+
+class DocumentsTest(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.dir = pathlib.Path(self.tmp.name)
+        self.src = self.dir / "src.pdf"
+        self.src.write_bytes(b"%PDF-1.4 test")
+        sha = hashlib.sha256(self.src.read_bytes()).hexdigest()
+        self.id = sha[:16]
+        self.docs = {self.id: {"url": self.src.as_uri(), "sha256": sha},
+                     "0000000000000000": {"url": (self.dir / "gone.pdf").as_uri(), "sha256": "0" * 64}}
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def test_release_holds_downloaded_pdfs_and_manifest(self):
+        failed = build.save_documents(self.docs, self.dir / "release", "2026-10-27")
+        self.assertEqual(failed, [self.docs["0000000000000000"]["url"]])
+        manifest = json.loads((self.dir / "release" / "documents.json").read_text())
+        self.assertEqual(manifest, {self.id: {"file": f"pdfs/{self.id}.pdf", "retrieved": "2026-10-27", "changed": False}})
+        self.assertTrue((self.dir / "release" / f"pdfs/{self.id}.pdf").exists())
+
+    def test_site_uses_release_pdfs_and_marks_others_missing(self):
+        build.save_documents(self.docs, self.dir / "release", "2026-10-27")
+        site_docs = {i: {"url": d["url"], "sha256": d["sha256"]} for i, d in self.docs.items()}
+        missing = build.attach_documents(site_docs, self.dir / "release", self.dir / "site")
+        self.assertEqual(missing, ["0000000000000000"])
+        self.assertEqual(site_docs[self.id]["retrieved"], "2026-10-27")
+        self.assertIsNone(site_docs["0000000000000000"]["file"])
+        self.assertEqual((self.dir / "site" / f"pdfs/{self.id}.pdf").read_bytes(), b"%PDF-1.4 test")
+
+
+    def test_documents_command_fails_when_a_download_fails(self):
+        with mock.patch.object(build, "site_data", return_value={"docs": self.docs}):
+            with self.assertRaises(SystemExit) as e:
+                build.main("documents", self.dir / "release")
+        self.assertIn("gone.pdf", str(e.exception.code))
+
+    def test_site_command_attaches_release(self):
+        build.save_documents(self.docs, self.dir / "release", "2026-10-27")
+        site = {"docs": {i: {"url": d["url"], "sha256": d["sha256"]} for i, d in self.docs.items()}}
+        out = io.StringIO()
+        with mock.patch.object(build, "site_data", return_value=site), contextlib.redirect_stdout(out):
+            build.main("site", self.dir / "site", self.dir / "release")
+        data = json.loads((self.dir / "site" / "data.json").read_text())
+        self.assertEqual(data["docs"][self.id]["file"], f"pdfs/{self.id}.pdf")
+        self.assertIn("::warning::", out.getvalue())
+        self.assertIn("gone.pdf", out.getvalue())
 
 
 if __name__ == "__main__":

@@ -1,7 +1,8 @@
-"""Builds the static site from repro/data.
+"""Builds the plan documents release, or the static site from repro/data.
 
-Usage: python3 -I web/build.py <out_dir> [--pdfs]
---pdfs downloads each plan document into <out_dir>/pdfs/.
+Usage:
+  python3 -I web/build.py documents <out_dir>
+  python3 -I web/build.py site <out_dir> [<documents_dir>]
 """
 import csv
 import datetime
@@ -137,14 +138,38 @@ def fetch_pdfs(docs, out_dir, today):
     return failed
 
 
-def main(out, *flags):
+def save_documents(docs, out_dir, today):
+    failed = fetch_pdfs(docs, out_dir, today)
+    manifest = {i: {k: d[k] for k in ("file", "retrieved", "changed")} for i, d in docs.items() if d["file"]}
+    (out_dir / "documents.json").write_text(json.dumps(manifest, indent=1))
+    return failed
+
+
+def attach_documents(docs, release_dir, out_dir):
+    manifest = json.loads((release_dir / "documents.json").read_text())
+    (out_dir / "pdfs").mkdir(parents=True, exist_ok=True)
+    for doc_id, doc in docs.items():
+        doc.update(manifest.get(doc_id, {"file": None, "retrieved": None, "changed": None}))
+        if doc["file"]:
+            shutil.copyfile(release_dir / doc["file"], out_dir / doc["file"])
+    return [i for i, d in docs.items() if not d["file"]]
+
+
+def main(command, out, release=None):
     out_dir = pathlib.Path(out)
-    shutil.copytree(HERE / "static", out_dir, dirs_exist_ok=True)
     site = site_data()
-    failed = fetch_pdfs(site["docs"], out_dir, datetime.date.today().isoformat()) if "--pdfs" in flags else []
+    if command == "documents":
+        failed = save_documents(site["docs"], out_dir, datetime.date.today().isoformat())
+        if failed:
+            sys.exit("not a PDF:\n" + "\n".join(failed))
+        return
+    shutil.copytree(HERE / "static", out_dir, dirs_exist_ok=True)
+    if release:
+        missing = attach_documents(site["docs"], pathlib.Path(release), out_dir)
+        for doc_id in missing:
+            print(f"::warning::Not in the documents release, so the site links to the carrier: "
+                  f"{site['docs'][doc_id]['url']}. Run the Documents workflow to add it.")
     (out_dir / "data.json").write_text(json.dumps(site))
-    if failed:
-        sys.exit("not a PDF:\n" + "\n".join(failed))
 
 
 if __name__ == "__main__":
