@@ -1,4 +1,4 @@
-"""Rebuilds data/<year> from the sources in its config.json.
+"""Rebuilds data/<year>/generated from the sources in data/<year>/config.json and documents.csv.
 
 Usage: python3 -I pipeline/run.py <year> <work_dir>
 """
@@ -32,15 +32,15 @@ def main(year, work):
     subprocess.run(["unzip", "-oq", f"{work}/landscape.zip", "-d", work], check=True)
     subprocess.run(["unzip", "-oq", f"{work}/pbp.zip", "-d", f"{work}/pbp"], check=True)
 
-    py("universe.py", f"{work}/{config['landscape_csv']}", data / "plans.csv", config["state"], *config["counties"])
+    gen = data / "generated"
+    os.makedirs(gen, exist_ok=True)
+    py("universe.py", f"{work}/{config['landscape_csv']}", gen / "plans.csv", config["state"], *config["counties"])
     baseline = [years.REPO / config["baseline_manifest"]] if "baseline_manifest" in config else []
-    py("fetch_docs.py", data / "documents.csv", data / "plans.csv", f"{work}/docs", data / "documents_checked.csv",
+    py("fetch_docs.py", data / "documents.csv", gen / "plans.csv", f"{work}/docs", gen / "documents_checked.csv",
        config["year"], ",".join(config["counties"]), *baseline)
-    py("cite.py", data / "sb_facts.csv", data / "documents_checked.csv", f"{work}/docs/text", data / "citations.csv")
-    py("main_chart.py", data / "plans.csv", f"{work}/pbp", data / "citations.csv", data / "main_chart.csv",
-       data / "pbp_vs_documents.csv")
-    py("dvha.py", data / "plans.csv", f"{work}/pbp", data / "citations.csv", data / "dvha.csv",
-       data / "pbp_vs_documents_dvha.csv")
+    py("cite.py", gen / "documents_checked.csv", f"{work}/docs/text", gen / "citations.csv")
+    py("main_chart.py", gen / "plans.csv", f"{work}/pbp", gen / "main_chart.csv")
+    py("dvha.py", gen / "plans.csv", f"{work}/pbp", gen / "dvha.csv")
     if config["year"] == appendix_b.YEAR:
         py("tests/make_fixture.py", f"{work}/pbp")
     subprocess.run([sys.executable, "-I", "-m", "unittest", "discover", "-s", os.path.join(HERE, "tests")], check=True)

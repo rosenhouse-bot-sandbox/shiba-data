@@ -128,23 +128,6 @@ class MainChartTest(unittest.TestCase):
         self.assertEqual(mc.part_b_reduction(plan(pbp_d_mco_pay_reduct_yn="1")), "●")
         self.assertEqual(mc.part_b_reduction(plan()), "")
 
-    def test_apply_citations_replaces_one_line(self):
-        row = {"L_xray_imaging": "$0-$145 | $0-$345", "U_naturopath": ""}
-        mc.apply_citations(row, [{"column": "L_xray_imaging", "line": "2", "value": "$205-$345"},
-                                 {"column": "U_naturopath", "line": "", "value": "●"}])
-        self.assertEqual(row, {"L_xray_imaging": "$0-$145 | $205-$345", "U_naturopath": "●"})
-
-    def test_sheets_take_their_own_citations(self):
-        plans = [{"plan_id": "P"}]
-        cite = {"plan_id": "P", "line": "", "kind": "EOC", "pdf_page": "9", "quote": "q"}
-        citations = [dict(cite, column="C_premium", value="main"), dict(cite, column="dvha.C_premium", value="dvha")]
-        for dvha, value in ((False, "main"), (True, "dvha")):
-            columns = ["section", "plan_id", "plan_name"] + list(fields.labels("dvha" if dvha else "main"))
-            rows, diffs = mc.sheet(plans, {"P": {}}, citations, lambda landscape, plan: dict.fromkeys(columns, "pbp"), dvha=dvha)
-            self.assertEqual(rows, [dict(dict.fromkeys(columns, "pbp"), C_premium=value)])
-            self.assertEqual(diffs, [{"plan_id": "P", "column": "C_premium", "pbp": "pbp", "documents": value,
-                                      "citations": 'EOC p9: "q"'}])
-
 
 class SpecTest(unittest.TestCase):
     def test_fields_are_the_columns_an_eoc_can_show(self):
@@ -155,14 +138,14 @@ class SpecTest(unittest.TestCase):
     def test_sheet_rows_have_the_spec_columns_in_order(self):
         columns = ["section", "plan_id", "plan_name"] + list(fields.labels("dvha"))
         plans = [{"plan_id": "A"}]
-        build = lambda keys: mc.sheet(plans, {"A": {}}, [], lambda p, d: {k: "" for k in keys}, dvha=True)
-        self.assertEqual(list(build(columns)[0][0]), columns)
+        build = lambda keys: mc.sheet(plans, {"A": {}}, lambda p, d: {k: "" for k in keys}, dvha=True)
+        self.assertEqual(list(build(columns)[0]), columns)
         for keys in (columns[::-1], columns[:-1], columns + ["Z_extra"]):
             with self.assertRaisesRegex(ValueError, "A: columns differ from pipeline/fields.py"):
                 build(keys)
 
     def test_carriers_are_organizations_in_the_plans_file(self):
-        with open(f"{years.data_dir()}/plans.csv") as f:
+        with open(f"{years.data_dir()}/generated/plans.csv") as f:
             organizations = {r["organization"] for r in csv.DictReader(f)}
         self.assertLessEqual(set(fields.CARRIERS), organizations)
 
@@ -188,8 +171,17 @@ class DocumentTest(unittest.TestCase):
         rows = [{"plan_id": "A", "value": "●"}, {"plan_id": "A", "value": "◐"}, {"plan_id": "B", "value": "●"}]
         self.assertEqual([r["value"] for r in cite.plan_dots(rows)], ["◐", "◐", "●"])
 
-    def test_find_page_collapses_whitespace(self):
-        self.assertEqual(cite.find_page({7: "MRI, CT, and PET $150 per visit"}, "MRI, CT,\nand PET  $150"), 7)
+    def test_cites_each_plan_of_a_document_that_mentions_naturopathy(self):
+        docs = [{"text_file": "a.txt", "url": "u", "plan_ids": "A;B"}, {"text_file": "b.txt", "url": "v", "plan_ids": "C"}]
+        text = {"a.txt": {3: "$0 copay for naturopathy visits"}, "b.txt": {1: "acupuncture"}}
+        cited = dict(sheet="main", column="U_naturopath", line="", value="●", url="u", pdf_page=3,
+                     quote="$0 copay for naturopathy visits")
+        self.assertEqual(cite.citations(docs, text), [dict(cited, plan_id="A"), dict(cited, plan_id="B")])
+
+    def test_cites_a_plans_judgment_call_in_each_of_its_documents(self):
+        docs = [{"text_file": "sb.txt", "url": "u", "plan_ids": "A"}, {"text_file": "eoc.txt", "url": "v", "plan_ids": "A"}]
+        text = {"sb.txt": {1: "$0 copay for naturopathy visits"}, "eoc.txt": {2: "Wellness Bucks pay for a Naturopath"}}
+        self.assertEqual([c["value"] for c in cite.citations(docs, text)], ["◐", "◐"])
 
 
 class DvhaTest(unittest.TestCase):

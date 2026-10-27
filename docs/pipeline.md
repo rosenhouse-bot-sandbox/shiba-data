@@ -14,12 +14,14 @@ flowchart TB
 
   subgraph git [Git source: data/year]
     documents[documents.csv]:::state
-    plans[plans.csv]:::state
-    checked[documents_checked.csv]:::state
-    facts[sb_facts.csv]:::state
-    citations[citations.csv]:::state
-    sheets[main_chart.csv, dvha.csv,<br>pbp_vs_documents*.csv]:::state
-    eoccites[eoc_citations.csv]:::state
+    subgraph generated [generated/]
+      plans[plans.csv]:::state
+      checked[documents_checked.csv]:::state
+      citations[citations.csv]:::state
+      sheets[main_chart.csv, dvha.csv]:::state
+    end
+    eoccites[machine/eoc_citations.csv]:::state
+    edits[edits.csv]:::state
     comments[comments.csv]:::state
   end
 
@@ -34,17 +36,17 @@ flowchart TB
   findurls[Find document URLs]:::heavy
   universe[universe.py]:::det
   fetch[fetch_docs.py:<br>download, extract text,<br>check covers]:::det
-  review[Read SBs and EOCs;<br>write overrides]:::heavy
-  cite[cite.py: find quote pages]:::det
+  review[Read SBs and EOCs;<br>write edits]:::heavy
+  cite[cite.py: naturopathy]:::det
   gen[main_chart.py, dvha.py]:::det
 
   carriers --> findurls --> documents
   cms --> universe --> plans
   documents & plans --> fetch --> checked
   carriers --> fetch
-  checked --> review --> facts
-  facts & checked --> cite --> citations
-  cms & plans & citations --> gen --> sheets
+  checked --> review --> edits
+  checked --> cite --> citations
+  cms & plans --> gen --> sheets
 
   extract[blanks.py, filled.py:<br>quote the EOC for each cell]:::cheap
   verify[Verify quotes against decoys;<br>write comments]:::heavy
@@ -66,7 +68,8 @@ flowchart TB
 | Yellow | Cheap model (Haiku) |
 | Red | Heavier model (Sonnet or Opus), or an agent with a browser |
 
-- Steps in `pipeline/run.py` regenerate every CSV above except `documents.csv`, `sb_facts.csv`, `eoc_citations.csv` and `comments.csv`. Models write those four.
-- `pipeline/blanks.py` and `pipeline/filled.py` turn small-model answers into `eoc_citations.csv` rows. Their docstrings list the steps.
+- `pipeline/run.py` regenerates `generated/`. People and models write the other CSVs.
+- `pipeline/layers.py` applies `generated/citations.csv` and then `edits.csv` to the generated sheets. Rows in `machine/eoc_citations.csv` only cite values.
+- `pipeline/blanks.py` and `pipeline/filled.py` turn small-model answers into `machine/eoc_citations.csv` rows. Their docstrings list the steps.
 - `pipeline/eval.py <year> [<machine.csv>]` scores machine-written cells against the live data.
 - The Site workflow downloads PDFs from carriers only when no documents release exists.

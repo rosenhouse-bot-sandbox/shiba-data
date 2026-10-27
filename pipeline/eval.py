@@ -2,50 +2,30 @@
 
 Usage: python3 -I pipeline/eval.py <year> [<machine.csv>]
 
-The generated layer is the live data with every sb_facts.csv row undone. Code-made cells, such as naturopathy dots, stay.
-Machine rows have the eoc_citations.csv columns. A machine value that differs from the generated cell is a correction.
+The generated cells are the generated sheets with code-made cells, such as naturopathy dots.
+Machine rows have the machine/eoc_citations.csv columns and cite whole cells.
+A machine value that differs from the generated cell is a correction.
 """
 import collections
-import csv
 import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import layers  # noqa: E402
 import years  # noqa: E402
 
-SHEETS = {"main": ("main_chart.csv", "pbp_vs_documents.csv"), "dvha": ("dvha.csv", "pbp_vs_documents_dvha.csv")}
 
-
-def rows(path):
-    with open(path, newline="") as f:
-        return list(csv.DictReader(f))
-
-
-def citation_cell(plan_id, column):
-    """Citation files name DVHA columns as "dvha.<column>"."""
-    return ("dvha", plan_id, column[5:]) if column.startswith("dvha.") else ("main", plan_id, column)
-
-
-def live_cells(data):
-    return {(sheet, r["plan_id"], col): r[col] for sheet, (name, _) in SHEETS.items() for r in rows(data / name)
+def cells(sheets):
+    return {(sheet, r["plan_id"], col): r[col] for sheet, sheet_rows in sheets.items() for r in sheet_rows
             for col in r if col not in ("section", "plan_id", "plan_name")}
 
 
-def hand_written(data):
-    return {citation_cell(plan_id, f["column"]) for f in rows(data / "sb_facts.csv") for plan_id in f["plan_ids"].split(";")}
-
-
-def generated_cells(data, live):
-    hand = hand_written(data)
-    pbp = {(sheet, d["plan_id"], d["column"]): d["pbp"] for sheet, (_, diffs) in SHEETS.items() for d in rows(data / diffs)}
-    return {c: pbp[c] if c in hand and c in pbp else value for c, value in live.items()}
-
-
-def cited_cells(data):
-    """Cells that people or models cited. Code cites naturopathy dots itself."""
-    hand = hand_written(data)
-    return ({c for c in (citation_cell(r["plan_id"], r["column"]) for r in rows(data / "citations.csv")) if c in hand}
-            | {(r["sheet"], r["plan_id"], r["column"]) for r in rows(data / "eoc_citations.csv")})
+def measured(data):
+    """(live cells, generated cells, cells that people or models cited). Code cites naturopathy dots itself."""
+    live, kept, _ = layers.live(data)
+    generated = layers.live(data, layers.LAYERS[:1])[0]
+    cited = {(c["sheet"], c["plan_id"], c["column"]) for c in kept if c["layer"] != layers.LAYERS[0]}
+    return cells(live), cells(generated), cited
 
 
 def score(live, generated, cited, machine_rows):
@@ -55,6 +35,8 @@ def score(live, generated, cited, machine_rows):
         c = (r["sheet"], r["plan_id"], r["column"])
         if c not in live:
             raise SystemExit(f"A machine row names no cell: {r}")
+        if r["line"]:
+            raise SystemExit(f"A machine row sets one line of a cell: {r}")
         if r["quote"].strip():
             claims[c].add(r["value"])
     agreed = {c: values.pop() for c, values in claims.items() if len(values) == 1}
@@ -77,9 +59,7 @@ def report(result):
 
 
 def main(year, machine_csv=None):
-    data = years.data_dir(year)
-    live = live_cells(data)
-    print(report(score(live, generated_cells(data, live), cited_cells(data), rows(machine_csv) if machine_csv else [])))
+    print(report(score(*measured(years.data_dir(year)), layers.rows(machine_csv) if machine_csv else [])))
 
 
 if __name__ == "__main__":

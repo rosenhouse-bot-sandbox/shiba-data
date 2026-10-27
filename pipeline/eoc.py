@@ -20,7 +20,7 @@ def load_pages(path):
 
 def eoc(plan_id, data=DATA):
     """The plan's EOC: (doc id, url)."""
-    with open(f"{data}/documents_checked.csv") as f:
+    with open(f"{data}/generated/documents_checked.csv") as f:
         for d in csv.DictReader(f):
             if d["kind"] == "EOC" and plan_id in d["plan_ids"].split(";"):
                 return d["sha256"][:16], d["url"]
