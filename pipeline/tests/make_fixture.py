@@ -8,7 +8,7 @@ import os
 import sys
 
 here = os.path.dirname(os.path.abspath(__file__))
-sys.path[:0] = [here, os.path.join(here, "..", "scripts")]
+sys.path[:0] = [here, os.path.join(here, "..")]
 import pbp  # noqa: E402
 from appendix_b import PLAN_IDS  # noqa: E402
 
@@ -16,7 +16,7 @@ from appendix_b import PLAN_IDS  # noqa: E402
 def main(pbp_dir):
     plans = pbp.load(pbp_dir, PLAN_IDS)
     present = {(stem, field) for plan in plans.values() for stem, rows in plan.items() for r in rows for field in r}
-    dictionary = pbp.load_dictionary(os.path.join(pbp_dir, "PBP_Benefits_2027_dictionary.xlsx"))
+    dictionary = pbp.load_dictionary(pbp_dir)
     codes = [[stem, field, entry["codes"]] for (stem, field), entry in sorted(dictionary.items())
              if (stem, field) in present and entry["codes"]]
     data = json.dumps({"plans": plans, "codes": codes}, sort_keys=True).encode()

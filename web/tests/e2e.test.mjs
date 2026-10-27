@@ -36,6 +36,13 @@ const docOf = (planId, kind) => Object.entries(site.docs).find(([, d]) => d.kind
 const row = (planId) => page.locator("table.sheet tr", { has: page.locator("small", { hasText: planId }) });
 const UNCITED = "td:not(.cited):not(.commented)";
 
+test("the header names the plan year and counties", async () => {
+  await page.goto(`${base}#/main`);
+  await page.waitForSelector("table.sheet");
+  assert.equal(await page.title(), "2027 Medicare Advantage plans: Multnomah & Clackamas");
+  assert.equal(await page.textContent("h1"), "2027 Medicare Advantage plans Multnomah & Clackamas");
+});
+
 test("clicking a cited cell highlights the quote on its page", async () => {
   await page.goto(`${base}#/main`);
   await row("H2001-045-0").locator("td.cited", { hasText: "$1,980" }).click();

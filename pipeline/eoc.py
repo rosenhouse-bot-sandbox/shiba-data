@@ -1,8 +1,10 @@
 """A plan's EOC text, and whether a quote can be cited on a page."""
 import csv, json, os, re, subprocess
 
+import years
+
 HERE = os.path.dirname(os.path.abspath(__file__))
-DATA = os.path.join(os.path.dirname(HERE), "repro", "data")
+DATA = years.data_dir()
 PDFIUM_SOFT_HYPHEN = "￾"
 
 

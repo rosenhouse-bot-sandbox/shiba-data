@@ -15,7 +15,7 @@ from unittest import mock
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 import build  # noqa: E402
 
-DATA = pathlib.Path(__file__).resolve().parents[2] / "repro" / "data"
+DATA = build.years.data_dir(2027)
 
 
 EOC_HEADER = ["sheet", "plan_id", "column", "value", "url", "pdf_page", "quote"]
@@ -24,7 +24,7 @@ EOC_HEADER = ["sheet", "plan_id", "column", "value", "url", "pdf_page", "quote"]
 def data_copy(tmp, eoc_rows):
     """A copy of DATA whose eoc_citations.csv holds only eoc_rows."""
     data = pathlib.Path(tmp)
-    for f in DATA.glob("*.csv"):
+    for f in [*DATA.glob("*.csv"), DATA / "config.json"]:
         (data / f.name).write_bytes(f.read_bytes())
     with open(data / "eoc_citations.csv", "w", newline="") as f:
         csv.writer(f).writerows([EOC_HEADER, *eoc_rows])
@@ -133,6 +133,9 @@ class SiteDataTest(unittest.TestCase):
         plan = next(p for p in self.site["plans"] if p["plan_id"] == "H2923-028-3")
         self.assertEqual(plan["plan_finder_url"],
                          "https://www.medicare.gov/plan-compare/#/plan-details/2027-H2923-028-3?year=2027&lang=en")
+
+    def test_names_the_plan_year_and_counties(self):
+        self.assertEqual((self.site["year"], self.site["area"]), (2027, "Multnomah & Clackamas"))
 
     def test_columns_have_labels(self):
         labels = {c["key"]: c["label"] for c in self.site["main"]["columns"]}

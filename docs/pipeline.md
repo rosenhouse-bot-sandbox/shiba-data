@@ -12,7 +12,7 @@ flowchart TB
     cms[(CMS Landscape and<br>PBP Benefits files)]:::state
   end
 
-  subgraph git [Git source: repro/data]
+  subgraph git [Git source: data/year]
     documents[documents.csv]:::state
     plans[plans.csv]:::state
     checked[documents_checked.csv]:::state
@@ -66,5 +66,5 @@ flowchart TB
 | Yellow | Cheap model (Haiku) |
 | Red | Heavier model (Sonnet or Opus), or an agent with a browser |
 
-- Steps in `repro/run.sh` regenerate every CSV above except `documents.csv`, `sb_facts.csv`, `eoc_citations.csv` and `comments.csv`. Models write those four.
+- Steps in `pipeline/run.py` regenerate every CSV above except `documents.csv`, `sb_facts.csv`, `eoc_citations.csv` and `comments.csv`. Models write those four.
 - The Site workflow downloads PDFs from carriers only when no documents release exists.

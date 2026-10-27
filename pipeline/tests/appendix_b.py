@@ -1,4 +1,4 @@
-"""Corrected 2027 values from CLAUDE_ANALYSIS_METHODS.md Appendix B."""
+"""Corrected 2027 values from docs/2027-bootstrap/CLAUDE_ANALYSIS_METHODS.md Appendix B."""
 
 # (Appendix B item, plan, column, expected cell)
 MAIN_CHART_CASES = [

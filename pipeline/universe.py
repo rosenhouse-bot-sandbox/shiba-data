@@ -1,11 +1,10 @@
-"""Lists 2027 MA plans offered in both Multnomah and Clackamas, OR, from the CMS Landscape CSV.
+"""Lists the MA plans offered in every given county of a state, from the CMS Landscape CSV.
 
-Usage: python3 -I universe.py <CY2027_Landscape.csv> <out.csv>
+Usage: python3 -I universe.py <Landscape.csv> <out.csv> <state> <county>...
 """
 import csv
 import sys
 
-COUNTIES = ("Multnomah", "Clackamas")
 EXCLUDED_SNP_TYPES = ("Dual-Eligible", "Institutional")
 
 
@@ -19,16 +18,16 @@ def plan_id(row):
     return f'{row["Contract ID"]}-{row["Plan ID"]}-{row["Segment ID"]}'
 
 
-def select_plans(rows):
+def select_plans(rows, state, counties):
     by_plan = {}
     for r in rows:
-        if r["State Territory Abbreviation"] == "OR" and r["County Name"] in COUNTIES:
+        if r["State Territory Abbreviation"] == state and r["County Name"] in counties:
             by_plan.setdefault(plan_id(r), {})[r["County Name"]] = r
     plans = []
-    for counties in by_plan.values():
-        if len(counties) != len(COUNTIES):
+    for found in by_plan.values():
+        if len(found) != len(counties):
             continue
-        r = counties[COUNTIES[0]]
+        r = found[counties[0]]
         if r["Contract Category Type"].startswith("PDP") or r["SNP Type"] in EXCLUDED_SNP_TYPES:
             continue
         plans.append(r)
@@ -67,9 +66,9 @@ def to_record(row):
     }
 
 
-def main(src, out):
+def main(src, out, state, *counties):
     with open(src, encoding="utf-8-sig") as f:
-        records = [to_record(r) for r in select_plans(csv.DictReader(f))]
+        records = [to_record(r) for r in select_plans(csv.DictReader(f), state, counties)]
     with open(out, "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(records[0]))
         w.writeheader()

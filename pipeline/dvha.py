@@ -183,7 +183,7 @@ def sheet(plans, data, citations):
 
 def main(plans_csv, pbp_dir, citations_csv, out_csv, diffs_csv):
     global DICTIONARY
-    DICTIONARY = pbp.load_dictionary(os.path.join(pbp_dir, "PBP_Benefits_2027_dictionary.xlsx"))
+    DICTIONARY = pbp.load_dictionary(pbp_dir)
     plans = list(csv.DictReader(open(plans_csv)))
     citations = list(csv.DictReader(open(citations_csv)))
     data = pbp.load(pbp_dir, [p["plan_id"] for p in plans])

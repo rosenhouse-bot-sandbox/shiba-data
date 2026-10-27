@@ -3,7 +3,7 @@ import re
 import sys
 import unittest
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "scripts"))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 import cite  # noqa: E402
 import dvha  # noqa: E402
 import fetch_docs  # noqa: E402
@@ -25,7 +25,7 @@ class UniverseTest(unittest.TestCase):
                 landscape_row(**{"Plan ID": "002"}),
                 landscape_row(**{"Plan ID": "003", "SNP Type": "Dual-Eligible"}),
                 landscape_row(**{"Plan ID": "003", "SNP Type": "Dual-Eligible", "County Name": "Clackamas"})]
-        self.assertEqual([universe.plan_id(r) for r in universe.select_plans(rows)], ["H1111-001-0"])
+        self.assertEqual([universe.plan_id(r) for r in universe.select_plans(rows, "OR", ("Multnomah", "Clackamas"))], ["H1111-001-0"])
 
     def test_full_extra_help_premium_is_part_c_plus_lis_part_d(self):
         row = landscape_row(**{"Part C Premium": "$159.40 ", "Part D Low Income Beneficiary Premium Amount": "$40.30 "})

@@ -28,7 +28,7 @@ jobs:
         with:
           node-version: "22"
       - run: python3 -I -m unittest discover -s tests
-      - run: python3 -I -m unittest discover -s ../xref/tests
+      - run: python3 -I -m unittest discover -s ../pipeline/tests
       - run: node --test tests/highlight.test.mjs tests/ago.test.mjs
       - env:
           GH_TOKEN: ${{ github.token }}

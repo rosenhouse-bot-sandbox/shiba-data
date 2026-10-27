@@ -37,7 +37,7 @@ class SnippetsTest(unittest.TestCase):
 
 class FillTest(unittest.TestCase):
     def test_fills_every_placeholder(self):
-        for template, values in (("blank_prompt.md", ("PLAN_NAME", "PLAN_ID", "ANSWER", "CHECK")), ("vblank_prompt.md", ("ANSWER",))):
+        for template, values in (("blank_prompt.md", ("PLAN_NAME", "PLAN_ID", "YEAR", "ANSWER", "CHECK")), ("vblank_prompt.md", ("ANSWER",))):
             text = blanks.fill(template, **{k: "VALUE" for k in values})
             self.assertNotRegex(text, r"\{[A-Z_]+\}")
             self.assertIn("VALUE", text)
