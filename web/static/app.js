@@ -284,9 +284,13 @@ async function loadSizes(file) {
 }
 
 // Each page gets an empty box of its final size, so scroll positions are stable while pages render.
+// Pages fit the pane at 100% zoom and grow with browser zoom, like the page's text.
+// Chrome and Firefox report the zoom as the ratio of the window's width to the page's width.
+const browserZoom = () => Math.max(1, Math.round((window.outerWidth / window.innerWidth) * 20) / 20 || 1);
+
 function layoutPages() {
   viewer.width = area().clientWidth;
-  const width = viewer.width - 24;
+  const width = (viewer.width - 24) * browserZoom();
   pageObserver.disconnect();
   area().replaceChildren(...viewer.sizes.map((size, i) => {
     const holder = el("div", { class: "page", "data-page": i + 1 });

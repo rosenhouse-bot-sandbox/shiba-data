@@ -235,6 +235,24 @@ test("a quote running down one column of a two-column table is highlighted", asy
   await fresh.close();
 });
 
+test("browser zoom enlarges the document pages", async () => {
+  const pageWidthRatio = async (zoom) => {
+    const fresh = await browser.newPage({ viewport: { width: 1600, height: 1000 } });
+    // Chrome reports browser zoom as the ratio of the window's width to the page's width.
+    if (zoom) await fresh.addInitScript((z) => Object.defineProperty(window, "outerWidth", { get: () => window.innerWidth * z }), zoom);
+    await fresh.goto(`${base}#/main`);
+    await fresh.locator(`table.sheet tr:has(small:text("H3805-048-0")) ${UNCITED}`).first().click();
+    await fresh.waitForSelector(`#page-area[data-shown="${docOf("H3805-048-0", "SB")} 1"]`);
+    const ratio = await fresh.$eval("#page-area", (area) => area.querySelector(".page").offsetWidth / area.clientWidth);
+    await fresh.close();
+    return ratio;
+  };
+  const plain = await pageWidthRatio();
+  const zoomed = await pageWidthRatio(1.5);
+  assert.ok(plain < 1, `${plain}`);
+  assert.ok(Math.abs(zoomed / plain - 1.5) < 0.05, `${zoomed / plain}`);
+});
+
 test("plan page lists the plan's documents", async () => {
   await page.goto(`${base}#/plan/H2001-045-0`);
   const docs = await page.locator("table.docs").textContent();
