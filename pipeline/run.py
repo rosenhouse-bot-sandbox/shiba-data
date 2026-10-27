@@ -7,7 +7,8 @@ import subprocess
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, HERE)
+sys.path[:0] = [HERE, os.path.join(HERE, "tests")]
+import appendix_b  # noqa: E402
 import years  # noqa: E402
 
 
@@ -32,7 +33,7 @@ def main(year, work):
     subprocess.run(["unzip", "-oq", f"{work}/pbp.zip", "-d", f"{work}/pbp"], check=True)
 
     py("universe.py", f"{work}/{config['landscape_csv']}", data / "plans.csv", config["state"], *config["counties"])
-    baseline = [years.ROOT.parent / config["baseline_manifest"]] if "baseline_manifest" in config else []
+    baseline = [years.REPO / config["baseline_manifest"]] if "baseline_manifest" in config else []
     py("fetch_docs.py", data / "documents.csv", data / "plans.csv", f"{work}/docs", data / "documents_checked.csv",
        config["year"], ",".join(config["counties"]), *baseline)
     py("cite.py", data / "sb_facts.csv", data / "documents_checked.csv", f"{work}/docs/text", data / "citations.csv")
@@ -40,8 +41,12 @@ def main(year, work):
        data / "pbp_vs_documents.csv")
     py("dvha.py", data / "plans.csv", f"{work}/pbp", data / "citations.csv", data / "dvha.csv",
        data / "pbp_vs_documents_dvha.csv")
+    if config["year"] == appendix_b.YEAR:
+        py("tests/make_fixture.py", f"{work}/pbp")
     subprocess.run([sys.executable, "-I", "-m", "unittest", "discover", "-s", os.path.join(HERE, "tests")], check=True)
 
 
 if __name__ == "__main__":
+    if len(sys.argv) != 3:
+        raise SystemExit(__doc__)
     main(*sys.argv[1:])

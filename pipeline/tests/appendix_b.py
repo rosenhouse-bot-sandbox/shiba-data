@@ -1,5 +1,7 @@
 """Corrected 2027 values from docs/2027-bootstrap/CLAUDE_ANALYSIS_METHODS.md Appendix B."""
 
+YEAR = 2027
+
 # (Appendix B item, plan, column, expected cell)
 MAIN_CHART_CASES = [
     ("1", "H5216-048-0", "K_tests_labs", "$0-$100/$0"),

@@ -1,4 +1,4 @@
-"""Builds the plan documents release, its zip, or the static site from the newest data/<year>.
+"""Builds the plan documents release, its zip, or the static site from the live year's data.
 
 Usage:
   python3 -I web/build.py documents <out_dir>
@@ -8,6 +8,7 @@ Usage:
 import csv
 import datetime
 import hashlib
+import html
 import json
 import pathlib
 import re
@@ -120,8 +121,8 @@ def site_data(data_dir=DATA):
         for key, cell_cites in sheet_cites.items():
             if any(docs[c["doc"]]["kind"] != "SB" for c in cell_cites):
                 sheet_cites[key] = [c for c in cell_cites if docs[c["doc"]]["kind"] != "SB"]
-    pbp = {sheet: {(r["plan_id"], r["column"]): r["pbp"] for r in rows(name, data_dir)}
-           for sheet, name in (("main", "pbp_vs_documents.csv"), ("dvha", "pbp_vs_documents_dvha.csv"))}
+    pbp = {kind: {(r["plan_id"], r["column"]): r["pbp"] for r in rows(name, data_dir)}
+           for kind, name in (("main", "pbp_vs_documents.csv"), ("dvha", "pbp_vs_documents_dvha.csv"))}
 
     plans = rows("plans.csv", data_dir)
     for p in plans:
@@ -217,6 +218,13 @@ def zip_documents(release_dir, zip_path, data_dir=DATA):
                 z.write(pdf, zip_name(plan_id, name, checked[doc_id]["kind"]))
 
 
+def titled(index_html, site):
+    title = f"{site['year']} Medicare Advantage plans"
+    area = html.escape(site["area"])
+    return (index_html.replace("<title>Medicare Advantage plans</title>", f"<title>{title}: {area}</title>")
+            .replace("<h1>Medicare Advantage plans</h1>", f"<h1>{title} <span>{area}</span></h1>"))
+
+
 def main(command, out, release=None):
     if command == "zip":
         zip_documents(pathlib.Path(out), pathlib.Path(release))
@@ -229,6 +237,7 @@ def main(command, out, release=None):
             sys.exit("not a PDF:\n" + "\n".join(failed))
         return
     shutil.copytree(HERE / "static", out_dir, dirs_exist_ok=True)
+    (out_dir / "index.html").write_text(titled((HERE / "static" / "index.html").read_text(), site))
     if release:
         missing = attach_documents(site["docs"], pathlib.Path(release), out_dir)
         for doc_id in missing:

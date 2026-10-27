@@ -1,6 +1,6 @@
 # Volunteer web UI
 
-A static site for comparing the Multnomah/Clackamas plans in the newest `data/<year>`.
+A static site for comparing the plans in `data/<year>`, where `pipeline/years.py` names the live year.
 Clicking a cell opens the plan document next to the sheet.
 A cell with a citation opens its page and highlights the quote.
 

@@ -45,8 +45,6 @@ function showUpdated(built) {
 async function start() {
   site = await (await fetch("data.json")).json();
   plans = Object.fromEntries(site.plans.map((p) => [p.plan_id, p]));
-  document.title = `${site.year} Medicare Advantage plans: ${site.area}`;
-  $("h1").replaceChildren(`${site.year} Medicare Advantage plans `, el("span", {}, site.area));
   showUpdated(new Date(site.built));
   $("#prev").addEventListener("click", () => goTo(currentPage() - 1));
   $("#next").addEventListener("click", () => goTo(currentPage() + 1));

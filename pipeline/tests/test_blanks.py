@@ -131,8 +131,8 @@ class ExclusionTest(unittest.TestCase):
 class PublishTest(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
-        self.data = pathlib.Path(self.tmp.name)
-        shutil.copytree(DATA, self.data, dirs_exist_ok=True)
+        self.data = pathlib.Path(self.tmp.name) / DATA.name
+        shutil.copytree(DATA, self.data)
         self.blank = next((plan, key) for key, by_plan in blanks.cells(self.data).items()
                           for plan, c in by_plan.items() if not c["value"].strip() and not c["cites"])
 

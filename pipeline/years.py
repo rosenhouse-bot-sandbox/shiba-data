@@ -2,13 +2,19 @@
 import json
 import pathlib
 
-ROOT = pathlib.Path(__file__).resolve().parents[1] / "data"
+REPO = pathlib.Path(__file__).resolve().parents[1]
+LIVE = 2027  # The year the site shows.
 
 
-def data_dir(year=None):
-    """data/<year>, or the newest year's directory."""
-    return ROOT / str(year or max(p.name for p in ROOT.iterdir() if p.name.isdigit()))
+def data_dir(year=LIVE):
+    return REPO / "data" / str(year)
 
 
 def config(data):
-    return json.loads((pathlib.Path(data) / "config.json").read_text())
+    """config.json, plus the year that names the directory."""
+    data = pathlib.Path(data)
+    return {**json.loads((data / "config.json").read_text()), "year": int(data.name)}
+
+
+if __name__ == "__main__":
+    print(data_dir().relative_to(REPO))
