@@ -1297,3 +1297,50 @@ main,H2406-073-0,I_outpatient_surgery,$0-$610 | $0-$610,https://www.aarpmedicare
 main,H2406-073-0,I_outpatient_surgery,$0-$610 | $0-$610,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,74,$610 copayment or Medicare-covered surgery or other services provided to you at an ambulatory surgical center
 main,H2406-073-0,I_outpatient_surgery,$0-$610 | $0-$610,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,74,$0 copayment or a colonoscopy at an outpatient hospital.
 main,H2406-073-0,I_outpatient_surgery,$0-$610 | $0-$610,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,74,$0 copayment or a colonoscopy at an ambulatory surgical center.
+dvha,H3805-048-0,C_premium,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,11,Monthly plan premium* $0
+dvha,H3805-041-0,C_premium,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,11,Monthly plan premium* $0
+dvha,H2406-042-0,C_premium,$94,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,13,our plan is $94.
+dvha,H2406-070-0,C_premium,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,11,Monthly plan premium* $0
+dvha,H2056-003-0,C_premium,$0,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,7,Monthly plan premium* *Your premium can be higher than this amount. Go to Section 4.1 for details. $0
+dvha,H7006-018-0,C_premium,$0,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,10,Section 4.1 for details. $0
+dvha,H7199-002-0,C_premium,$28.50,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,13,for DEVOTED CHOICE PREMIUM 002 OR (PPO) is $28.50.
+dvha,H2923-001-0,C_premium,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,11,Monthly plan premium* *Your premium can be higher than this amount. Go to Section 4.1 for details. $0
+dvha,H2923-028-3,C_premium,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,11,Monthly plan premium* *Your premium can be higher than this amount. Go to Section 4.1 for details. $0
+dvha,H2923-025-0,C_premium,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,11,Monthly plan premium* *Your premium can be higher than this amount. Go to Section 4.1 for details. $0
+dvha,H2923-005-0,C_premium,$43,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,12,for DEVOTED PREMIUM 005 OR (HMO) is $43.
+dvha,H1036-323-0,C_premium,$0,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,12,Monthly plan premium* * Your premium can be higher than this amount. Please continue to review section 5 for details. $0
+dvha,H1036-153-0,C_premium,$0,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,12,Monthly plan premium* * Your premium can be higher than this amount. Please continue to review section 5 for details. $0
+dvha,H5216-428-2,C_premium,$0,https://assets.humana.com/is/content/humana/H5216428002SB27pdf,5,Monthly plan premium $0
+dvha,H5216-048-0,C_premium,$97,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,15,H5216-048 (PPO) is $97.
+dvha,H9003-001-0,C_premium,$134,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,14,Enhanced plan $134
+dvha,H9003-006-0,C_premium,$49,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,14,Standard plan $49
+dvha,H9003-009-0,C_premium,$0,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,14,Value plan $0
+dvha,H3817-008-1,C_premium,$130,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,9,Regence MedAdvantage + Rx Classic is $130.
+dvha,H3817-009-1,C_premium,$244,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,9,Regence MedAdvantage + Rx Enhanced is $244.
+dvha,H3817-011-1,C_premium,$88,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,9,Regence MedAdvantage + Rx Primary is $88.
+dvha,H6815-038-0,C_premium,$44.50,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,12,plan is $44.50.
+dvha,H5439-015-0,C_premium,$29,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,13,plan is $29.
+dvha,H5439-019-0,C_premium,$76.60,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,13,plan is $76.60.
+dvha,H5439-011-0,C_premium,$206,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,12,plan is $206.
+dvha,H1372-003-0,C_premium,$69,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,12,premium for AgeRight Advantage Premier Health Plan (HMO C-SNP) is $69.00.
+dvha,H2923-019-0,C_premium,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,14,Monthly plan premium* *Your premium can be higher than this amount. Go to Section 5.1 for details. $0
+dvha,H2923-009-0,C_premium,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,13,Monthly plan premium* *Your premium can be higher than this amount. Go to Section 5.1 for details. $0
+dvha,H1036-306-0,C_premium,$0,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,13,review section 6 for details. $0
+dvha,H1036-317-0,C_premium,$0,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,13,Monthly plan premium* * Your premium can be higher than this amount. Please continue to review section 6 for details. $0
+dvha,H3805-040-0,C_premium,$0,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,13,Monthly plan premium* $0
+dvha,H2001-045-0,C_premium,$0,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,13,Monthly plan premium* $0
+dvha,H2406-073-0,C_premium,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,10,Monthly plan premium $0
+dvha,H2056-018-0,C_premium,$0,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,6,*Your premium can be higher than this amount. Go to Section 4.1 for details. $0
+dvha,H7006-021-0,C_premium,$0,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,9,Section 4.1 for details. $0
+dvha,H5216-427-2,C_premium,$0,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,10,review section 5 for details. $0
+dvha,H5216-455-0,C_premium,$0,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,11,review section 5 for details. $0
+dvha,H3817-010-0,C_premium,$0,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,6,Monthly plan premium* * Your premium can be higher than this amount. (Go to Section 4.1 for details.) $0
+dvha,H5439-010-0,C_premium,$0,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,8,Monthly plan premium* * Your premium can be higher than this amount. Go to Section 4.1 for details. $0
+main,H2923-028-3,I_outpatient_surgery,$0-$590 | $0-$490,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,93,$590 copay for outpatient procedures/surgery at an Outpatient Hospital
+main,H2923-028-3,I_outpatient_surgery,$0-$590 | $0-$490,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,93,$490 copay for outpatient procedures/surgery at an ASC - facility
+main,H2923-028-3,I_outpatient_surgery,$0-$590 | $0-$490,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,93,At an Office or Freestanding location: $0 copay At an Outpatient hospital: $0 copay At an Ambulatory Surgical Center (ASC): $0 copay Outpatient Procedures
+main,H2923-025-0,I_outpatient_surgery,$0-$580 | $0-$480,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,95,$580 copay for outpatient procedures/surgery at an Outpatient Hospital
+main,H2923-025-0,I_outpatient_surgery,$0-$580 | $0-$480,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,95,$480 copay for outpatient procedures/surgery at an ASC - facility
+main,H2923-025-0,I_outpatient_surgery,$0-$580 | $0-$480,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,95,At an Office or Freestanding location: $0 copay At an Outpatient hospital: $0 copay At an Ambulatory Surgical Center (ASC): $0 copay Outpatient Procedures
+main,H5216-428-2,I_outpatient_surgery,$0-$450 | $0-$350,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,71,In-Network: Surgery Services $450 copayment – Outpatient Hospital $350 copayment – Ambulatory Surgical Center Diagnostic Colonoscopy $0 copayment – Ambulatory Surgical Center – Outpatient Hospital
+main,H5216-455-0,I_outpatient_surgery,$0-$450 | $0-$350,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,61,In-Network: Surgery Services $450 copayment – Outpatient Hospital $350 copayment – Ambulatory Surgical Center Diagnostic Colonoscopy $0 copayment – Ambulatory Surgical Center – Outpatient Hospital
