@@ -5,6 +5,7 @@
   --head: #eef1f6;
   --accent: #1f5fbf;
   --comment: #fff6d6;
+  --contradicts: #ffdcb8;
   --warn: #a33b00;
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
   font-size: 15px;
@@ -18,6 +19,7 @@ h1 span { color: var(--muted); font-weight: normal; }
 nav { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
 nav a { color: var(--accent); text-decoration: none; padding: 4px 8px; border-radius: 6px; }
 nav a.active { background: var(--head); color: var(--ink); font-weight: 600; }
+#updated { margin-left: auto; color: var(--muted); font-size: 13px; }
 a { color: var(--accent); }
 
 #layout { flex: 1; display: flex; min-height: 0; }
@@ -36,6 +38,7 @@ td { cursor: pointer; }
 td:hover { outline: 2px solid var(--accent); outline-offset: -2px; }
 td.dot { text-align: center; }
 td.commented { background: var(--comment); }
+td.commented.contradicts { background: var(--contradicts); }
 tr.open-plan > :not(.commented) { background: #e1ecfb; }
 td.selected { outline: 3px solid var(--ink); outline-offset: -3px; }
 
@@ -66,6 +69,7 @@ td.selected { outline: 3px solid var(--ink); outline-offset: -3px; }
 #source-note { padding: 4px 10px; font-size: 13px; border-bottom: 1px solid var(--line); max-height: 30vh; overflow: auto; }
 #source-note p { margin: 4px 0; }
 #source-note .comment { background: var(--comment); padding: 4px 6px; }
+#source-note .comment.contradicts { background: var(--contradicts); }
 .pbp { color: var(--muted); }
 .warn { color: var(--warn); }
 #page-area { flex: 1; overflow: auto; position: relative; padding: 12px; background: #e6e8ec; }

@@ -227,6 +227,7 @@ def main(command, out, release=None):
         for doc_id in missing:
             print(f"::warning::Not in the documents release, so the site links to the carrier: "
                   f"{site['docs'][doc_id]['url']}. Run the Documents workflow to add it.")
+    site["built"] = datetime.datetime.now(datetime.timezone.utc).isoformat()
     (out_dir / "data.json").write_text(json.dumps(site))
 
 

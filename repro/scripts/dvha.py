@@ -156,7 +156,7 @@ def extras(plan):
         parts.append("SSBCI benefits for qualifying chronic conditions")
     for package in plan.get("pbp_b19b_model_test_vbid_uf", []):
         if package.get("pbp_b19b_package_name"):
-            parts.append(f"Targeted (UF/VBID): {package['pbp_b19b_package_name']}")
+            parts.append(f"For qualifying members: {package['pbp_b19b_package_name']}")
     return "; ".join(parts)
 
 
