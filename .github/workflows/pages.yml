@@ -29,7 +29,18 @@ jobs:
           node-version: "22"
       - run: python3 -I -m unittest discover -s tests
       - run: node --test tests/highlight.test.mjs
-      - run: python3 -I build.py ../_site --pdfs
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir ../_documents
+          if gh release view >/dev/null 2>&1; then
+            gh release download --pattern documents.tar --dir ..
+            tar -xf ../documents.tar -C ../_documents
+          else
+            echo "::warning::No documents release yet. Run the Documents workflow to cut one."
+            python3 -I build.py documents ../_documents
+          fi
+      - run: python3 -I build.py site ../_site ../_documents
       - run: npm ci && npx playwright install --with-deps chromium
       - run: SITE=../_site node --test tests/e2e.test.mjs
       - uses: actions/upload-pages-artifact@v3

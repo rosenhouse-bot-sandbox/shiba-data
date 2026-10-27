@@ -1,4 +1,5 @@
 import hashlib
+import json
 import os
 import pathlib
 import sys
@@ -98,6 +99,37 @@ class FetchPdfsTest(unittest.TestCase):
 
     def test_reports_no_failures(self):
         self.assertEqual(build.fetch_pdfs(self.docs, self.dir / "site", "2026-10-26"), [])
+
+
+class DocumentsTest(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.dir = pathlib.Path(self.tmp.name)
+        self.src = self.dir / "src.pdf"
+        self.src.write_bytes(b"%PDF-1.4 test")
+        sha = hashlib.sha256(self.src.read_bytes()).hexdigest()
+        self.id = sha[:16]
+        self.docs = {self.id: {"url": self.src.as_uri(), "sha256": sha},
+                     "0000000000000000": {"url": (self.dir / "gone.pdf").as_uri(), "sha256": "0" * 64}}
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def test_release_holds_downloaded_pdfs_and_manifest(self):
+        failed = build.save_documents(self.docs, self.dir / "release", "2026-10-27")
+        self.assertEqual(failed, [self.docs["0000000000000000"]["url"]])
+        manifest = json.loads((self.dir / "release" / "documents.json").read_text())
+        self.assertEqual(manifest, {self.id: {"file": f"pdfs/{self.id}.pdf", "retrieved": "2026-10-27", "changed": False}})
+        self.assertTrue((self.dir / "release" / f"pdfs/{self.id}.pdf").exists())
+
+    def test_site_uses_release_pdfs_and_marks_others_missing(self):
+        build.save_documents(self.docs, self.dir / "release", "2026-10-27")
+        site_docs = {i: {"url": d["url"], "sha256": d["sha256"]} for i, d in self.docs.items()}
+        missing = build.attach_documents(site_docs, self.dir / "release", self.dir / "site")
+        self.assertEqual(missing, ["0000000000000000"])
+        self.assertEqual(site_docs[self.id]["retrieved"], "2026-10-27")
+        self.assertIsNone(site_docs["0000000000000000"]["file"])
+        self.assertEqual((self.dir / "site" / f"pdfs/{self.id}.pdf").read_bytes(), b"%PDF-1.4 test")
 
 
 if __name__ == "__main__":
