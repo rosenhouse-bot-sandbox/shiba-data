@@ -27,11 +27,6 @@ let plans;
 async function start() {
   site = await (await fetch("data.json")).json();
   plans = Object.fromEntries(site.plans.map((p) => [p.plan_id, p]));
-  const picker = $("#plan-picker");
-  for (const p of site.plans) picker.append(el("option", { value: p.plan_id }, p.plan_name));
-  picker.addEventListener("change", () => {
-    if (picker.value) location.hash = `#/plan/${picker.value}`;
-  });
   $("#prev").addEventListener("click", () => goTo(currentPage() - 1));
   $("#next").addEventListener("click", () => goTo(currentPage() + 1));
   $("#page").addEventListener("change", (e) => goTo(Number(e.target.value)));
@@ -55,7 +50,6 @@ async function start() {
 function route() {
   const [, view, id] = location.hash.split("/");
   document.querySelectorAll("nav a").forEach((a) => a.classList.toggle("active", a.dataset.view === (view || "main")));
-  $("#plan-picker").value = view === "plan" ? id : "";
   const content = $("#content");
   content.replaceChildren(view === "plan" && plans[id] ? planPage(plans[id]) : sheetView(site[view === "dvha" ? "dvha" : "main"]));
   content.scrollTop = 0;
