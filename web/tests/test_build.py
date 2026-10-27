@@ -67,13 +67,18 @@ class SiteDataTest(unittest.TestCase):
 
     def test_wellcare_tests_cells_carry_ekg_comment(self):
         for plan_id in ("H6815-038-0", "H5439-015-0", "H5439-019-0", "H5439-011-0", "H5439-010-0"):
-            self.assertIn("EKG", self.cell("main", plan_id, "K_tests_labs").get("comment", ""), plan_id)
+            self.assertIn("EKG", self.cell("main", plan_id, "K_tests_labs")["comment"]["text"], plan_id)
+
+    def test_comment_points_to_its_eoc_page(self):
+        comment = self.cell("main", "H6815-038-0", "K_tests_labs")["comment"]
+        self.assertEqual((comment["doc"], comment["page"]), ("90a4efa6544175a2", 83))
+        self.assertIn("EKGs", comment["quote"])
 
     def test_comment_on_unknown_cell_fails(self):
         for plan_id, column in (("H6815-038-0", "K_tests"), ("H6815-999-0", "K_tests_labs")):
             with self.subTest(plan_id=plan_id, column=column), tempfile.TemporaryDirectory() as tmp:
                 data = data_copy(tmp, [])
-                (data / "comments.csv").write_text(f"sheet,plan_id,column,comment\nmain,{plan_id},{column},typo\n")
+                (data / "comments.csv").write_text(f"sheet,plan_id,column,comment,url,pdf_page,quote\nmain,{plan_id},{column},typo,,,\n")
                 with self.assertRaisesRegex(ValueError, f"{plan_id} {column}"):
                     build.site_data(data)
 

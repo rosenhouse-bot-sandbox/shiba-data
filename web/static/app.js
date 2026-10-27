@@ -87,7 +87,7 @@ function sheetView(sheet) {
 function valueCell(plan, column, cell) {
   const td = el("td", {
     class: [cell.cites.length ? "cited" : "", cell.comment ? "commented" : "", /^[●◐]$/.test(cell.value) ? "dot" : ""].join(" "),
-    title: cell.comment || (cell.cites.length ? "Click to see the plan document page" : "From CMS plan data. Click to open the plan's Summary of Benefits."),
+    title: cell.comment?.text || (cell.cites.length ? "Click to see the plan document page" : "From CMS plan data. Click to open the plan's Summary of Benefits."),
     onclick: () => {
       document.querySelectorAll(".selected").forEach((s) => s.classList.remove("selected"));
       td.classList.add("selected");
@@ -101,12 +101,18 @@ function valueCell(plan, column, cell) {
 
 function openCell(plan, column, cell) {
   const header = el("div", {}, el("b", {}, `${plan.plan_name}: ${column.label} = ${oneLine(cell.value)}`),
-    cell.comment ? el("p", { class: "comment" }, cell.comment) : null);
+    cell.comment ? el("p", { class: "comment" }, cell.comment.text) : null);
   if (cell.cites.length) {
     const cite = cell.cites[0];
     const note = citeNote(header, cell);
     note.append(el("p", {}, planFinderLink(plan)));
     openDoc(cite.doc, cite.page, cite.quote, note);
+  } else if (cell.comment) {
+    const { doc, page, quote } = cell.comment;
+    const note = el("div", {}, header);
+    note.append(el("p", {}, el("a", { href: "#", onclick: (e) => { e.preventDefault(); openDoc(doc, page, quote, note); } },
+      `${site.docs[doc].kind} page ${page}`)), el("p", {}, planFinderLink(plan)));
+    openDoc(doc, page, quote, note);
   } else {
     const sb = plan.docs.find((d) => site.docs[d].kind === "SB");
     openDoc(sb, 1, null, el("div", {}, header, el("p", {},
