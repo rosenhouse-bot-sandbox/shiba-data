@@ -170,7 +170,7 @@ function citeNote(header, cell) {
   const note = el("div", {}, header);
   cell.cites.forEach((c, i) => {
     const doc = site.docs[c.doc];
-    note.append(el("p", {},
+    note.append(el("p", { class: "cite" },
       el("a", { href: "#", onclick: (e) => { e.preventDefault(); openDoc(c.doc, c.page, c.quote, note); } },
         `${doc.kind} page ${c.page}`),
       c.line ? ` (line ${c.line})` : "", `: “${c.quote}”`));

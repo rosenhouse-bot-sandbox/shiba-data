@@ -97,7 +97,7 @@ test("only pages near the view keep a canvas", async () => {
 test("resizing keeps the cited quote in view", async () => {
   await page.goto(`${base}#/main`);
   await row("H2923-009-0").locator("td").nth(site.main.columns.findIndex((c) => c.key === "U_naturopath")).click();
-  await page.locator("#source-note a", { hasText: "EOC" }).click();
+  await page.locator("#source-note p.cite a", { hasText: "EOC" }).click();
   await shown(docOf("H2923-009-0", "EOC"), 71);
   await page.setViewportSize({ width: 1600, height: 600 });
   await page.waitForTimeout(1500);
@@ -238,7 +238,7 @@ test("every citation's and comment's quote is highlighted in full on its page", 
           if (i) {
             // Two cites can share a page, so clear the marker before the next render sets it.
             await page.$eval("#page-area", (area) => delete area.dataset.shown);
-            await page.locator("#source-note a").nth(i).click();
+            await page.locator("#source-note p.cite a").nth(i).click();
           }
           await shown(c.doc, c.page);
           // A re-issued PDF may have moved the quote; the viewer warns about it instead.
