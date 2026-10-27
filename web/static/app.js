@@ -59,6 +59,9 @@ function route() {
   const content = $("#content");
   content.replaceChildren(view === "plan" && plans[id] ? planPage(plans[id]) : sheetView(site[view === "dvha" ? "dvha" : "main"]));
   content.scrollTop = 0;
+  if (view === "plan" && plans[id] && ($("#viewer").hidden || !site.docs[viewer.showing].plan_ids.includes(id))) {
+    openDoc(plans[id].docs.find((d) => site.docs[d].kind === "SB"), 1, null, null);
+  }
 }
 
 function sheetView(sheet) {
@@ -165,12 +168,13 @@ function benefitTable(title, sheet, plan) {
 
 const kindName = (k) => ({ SB: "Summary of Benefits", EOC: "Evidence of Coverage", RIDER: "Optional rider" })[k] || k;
 
-const viewer = { doc: null, loading: null, pdf: null, sizes: [], cite: null, target: null, anchor: null, width: 0 };
+const viewer = { showing: null, doc: null, loading: null, pdf: null, sizes: [], cite: null, target: null, anchor: null, width: 0 };
 const area = () => $("#page-area");
 const holders = () => [...area().querySelectorAll(".page")];
 
 async function openDoc(docId, page, quote, note) {
   const doc = site.docs[docId];
+  viewer.showing = docId;
   $("#viewer").hidden = false;
   $("#doc-title").textContent = `${kindName(doc.kind)} · ${doc.plan_ids.map((p) => plans[p]?.plan_name || p).join("; ")}`;
   $("#doc-source").href = doc.url;
