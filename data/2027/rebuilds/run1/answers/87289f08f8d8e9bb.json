@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2923-025-0.retry.md",
+ "reply": "```json\n[{\"key\": \"dvha.H_hearing\", \"result\": \"skip\"},\n {\"key\": \"dvha.I_alt_care_otc_travel\", \"result\": \"skip\"},\n {\"key\": \"main.C_premium\", \"result\": \"skip\"},\n {\"key\": \"main.E_moop\", \"result\": \"cite\", \"citations\": [{\"page\": 11, \"quote\": \"$7,700\"}, {\"page\": 50, \"quote\": \"If you reach the maximum out-of-pocket amount of $7,700, you\"}]},\n {\"key\": \"main.L_xray_imaging\", \"result\": \"cite\", \"citations\": [{\"page\": 90, \"quote\": \"Freestanding location: $25\"}, {\"page\": 90, \"quote\": \"Outpatient hospital: $75\"}, {\"page\": 88, \"quote\": \"Office or Freestanding location: $100 copay\"}, {\"page\": 89, \"quote\": \"PET Scans Office or Freestanding location: $200 copay Outpatient hospital: $300 copay\"}]},\n {\"key\": \"main.Y_otc\", \"result\": \"cite\", \"citations\": [{\"page\": 95, \"quote\": \"You get a $109 per quarter allowance to spend on plan-approved over-the-counter health and wellness products, such as pain relievers, eye drops, and toothpaste.\"}]}]\n```"
+}

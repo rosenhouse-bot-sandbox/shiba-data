@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H3817-010-0.retry.md",
+ "reply": "```json\n[{\"key\": \"dvha.H_hearing\", \"result\": \"skip\"},\n {\"key\": \"main.C_premium\", \"result\": \"skip\"},\n {\"key\": \"main.P_vision\", \"result\": \"cite\", \"citations\": [{\"page\": 60, \"quote\": \"Routine vision exam: In-network: $0 copay per visit\"}, {\"page\": 60, \"quote\": \"We cover 1 routine vision exam every calendar year\"}]},\n {\"key\": \"main.R_dental\", \"result\": \"cite\", \"citations\": [{\"page\": 34, \"quote\": \"Preventive dental services: In-network: $0 copay per provider per day\"}]}]\n```"
+}

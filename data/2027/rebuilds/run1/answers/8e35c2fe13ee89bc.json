@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H1036-323-0.retry.md",
+ "reply": "```json\n[{\"key\": \"dvha.E_optional_packages\", \"result\": \"cite\", \"citations\": [{\"page\": 15, \"quote\": \"MyOption DEN972: $50.90 additional monthly premium\"}, {\"page\": 81, \"quote\": \"the maximum plan benefit available to you is $1,500\"}]},\n {\"key\": \"main.AA_opt_packages\", \"result\": \"cite\", \"citations\": [{\"page\": 82, \"quote\": \"can be purchased for an additional monthly premium to replace any Mandatory Supplemental Dental Benefits (MSB) that are offered within your Medicare Advantage plan\"}]},\n {\"key\": \"main.C_premium\", \"result\": \"skip\"},\n {\"key\": \"main.E_moop\", \"result\": \"cite\", \"citations\": [{\"page\": 44, \"quote\": \"For calendar year 2027 the MOOP amount is $9,050\"}]}]\n```"
+}

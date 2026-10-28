@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H5439-015-0.retry.md",
+ "reply": "```json\n[{\"key\": \"main.Q_hearing\", \"result\": \"cite\", \"citations\": [{\"page\": 72, \"quote\": \"Our plan also covers the following supplemental (i.e., routine) hearing services:\"}, {\"page\": 72, \"quote\": \"$0 copay for 1 routine hearing exam every year.*\"}]}]\n```"
+}

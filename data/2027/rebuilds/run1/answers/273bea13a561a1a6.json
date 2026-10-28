@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2406-073-0.retry.md",
+ "reply": "```json\n[{\"key\": \"main.H_inpatient\", \"result\": \"cite\", \"citations\": [{\"page\": 58, \"quote\": \"$610 copayment each day or days 1-4 or Medicare-covered hospital care each time you are admitted.\"}]},\n {\"key\": \"main.Q_hearing\", \"result\": \"cite\", \"citations\": [{\"page\": 53, \"quote\": \"Hearing services - routine hearing exam\"}, {\"page\": 53, \"quote\": \"We cover 1 in or out-o -network hearing exam every year.\"}]}]\n```"
+}

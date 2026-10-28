@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H3805-041-0.retry.md",
+ "reply": "```json\n[{\"key\": \"dvha.G_vision\", \"result\": \"skip\"},\n {\"key\": \"main.Q_hearing\", \"result\": \"cite\", \"citations\": [{\"page\": 61, \"quote\": \"Hearing services - routine hearing exam\"}, {\"page\": 61, \"quote\": \"We cover 1 hearing exam every year.\"}]},\n {\"key\": \"main.W_fitness\", \"result\": \"cite\", \"citations\": [{\"page\": 60, \"quote\": \"Fitness program\"}, {\"page\": 60, \"quote\": \"Free gym membership at core and premium locations\"}]},\n {\"key\": \"main.Y_otc\", \"result\": \"cite\", \"citations\": [{\"page\": 80, \"quote\": \"Over-the-counter (OTC) credit\"}, {\"page\": 80, \"quote\": \"Quarterly credit is $25\"}]}]\n```"
+}

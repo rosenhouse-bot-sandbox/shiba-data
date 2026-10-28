@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2923-009-0.retry.md",
+ "reply": "```json\n[{\"key\": \"dvha.H_hearing\", \"result\": \"skip\"},\n {\"key\": \"dvha.I_alt_care_otc_travel\", \"result\": \"skip\"},\n {\"key\": \"dvha.J_extra_benefits\", \"result\": \"cite\", \"citations\": [{\"page\": 70, \"quote\": \"SilverSneakers can help you live a healthier, more active life through fitness and social connection.\"}, {\"page\": 100, \"quote\": \"Routine Foot Care* $0 copay\"}, {\"page\": 100, \"quote\": \"This benefit covers you for 4 visits per year.\"}, {\"page\": 106, \"quote\": \"Special supplemental benefits for the chronically ill — Food & Home Card\"}, {\"page\": 106, \"quote\": \"$289 per month\"}]},\n {\"key\": \"main.C_premium\", \"result\": \"cite\", \"citations\": [{\"page\": 13, \"quote\": \"Monthly plan premium* $0\"}]},\n {\"key\": \"main.E_moop\", \"result\": \"cite\", \"citations\": [{\"page\": 53, \"quote\": \"For calendar year 2027, the MOOP amount is $9,850.\"}]},\n {\"key\": \"main.H_inpatient\", \"result\": \"cite\", \"citations\": [{\"page\": 81, \"quote\": \"Inpatient hospital care $2,241 copay per stay\"}]}]\n```"
+}

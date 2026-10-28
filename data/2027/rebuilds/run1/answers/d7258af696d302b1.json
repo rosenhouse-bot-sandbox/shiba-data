@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H5216-428-2.retry.md",
+ "reply": "```json\n[{\"key\": \"dvha.G_vision\", \"result\": \"skip\"},\n {\"key\": \"main.AA_opt_packages\", \"result\": \"cite\", \"citations\": [{\"page\": 15, \"quote\": \"MyOption DEN972: $50.90 additional monthly premium\"}]},\n {\"key\": \"main.C_premium\", \"result\": \"cite\", \"citations\": [{\"page\": 12, \"quote\": \"$0\"}, {\"page\": 14, \"quote\": \"You don't pay a separate monthly plan premium for Humana Value Choice (PPO).\"}]},\n {\"key\": \"main.M_part_b_drugs\", \"result\": \"skip\"}]\n```"
+}

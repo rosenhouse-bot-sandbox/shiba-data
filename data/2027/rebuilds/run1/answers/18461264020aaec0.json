@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2056-018-0.retry.md",
+ "reply": "```json\n[{\"key\": \"main.C_premium\", \"result\": \"cite\", \"citations\": [{\"page\": 6, \"quote\": \"Monthly plan premium $0\"}]},\n {\"key\": \"main.E_moop\", \"result\": \"cite\", \"citations\": [{\"page\": 25, \"quote\": \"For calendar year 2027, the MOOP amount is $5,500.\"}]}]\n```"
+}
