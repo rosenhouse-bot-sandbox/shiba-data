@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H7199-002-0.md",
+ "reply": "[{\"id\":0,\"ok\":false,\"reason\":\"The EOC covers routine acupuncture through the $2,250 Dental & Alternative Therapy Allowance, so the plan is not Medicare-only.\"},{\"id\":1,\"ok\":false,\"reason\":\"The quote is from the allowance's list of items it does not pay for, which does not say the plan lacks an OTC benefit, and nothing else in the passages settles that.\"},{\"id\":2,\"ok\":false,\"reason\":\"Naturopath services are covered through the Dental & Alternative Therapy Allowance, which names them, so the benefit is not excluded.\"}]"
+}

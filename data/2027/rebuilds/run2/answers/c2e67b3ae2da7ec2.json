@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H5439-015-0.md",
+ "reply": "```json\n[\n{\"id\":0,\"ok\":true,\"reason\":\"The benefit table covers only Medicare-covered acupuncture for chronic low back pain, and page 122 lists acupuncture as covered only for chronic low back pain; no passage shows routine acupuncture.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Page 59 says the plan covers only manual manipulation of the spine for subluxation, and page 123 lists routine chiropractic care as limited to that same manipulation; no passage shows routine chiropractic coverage.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Page 123 lists naturopath services as 'Not covered under any condition', and no passage shows any allowance or package covering them.\"}\n]\n```"
+}

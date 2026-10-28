@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H3817-011-1.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"The exclusions table says naturopath services are not covered under any condition, and no passage shows any supplemental naturopathy coverage.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"The exclusions table lists therapeutic massage as not covered under any condition, and no passage shows massage coverage.\"},\n{\"id\":2,\"ok\":false,\"reason\":\"The quote is the Part D exclusion of non-prescription drugs, which is not an OTC allowance statement, and the other passages don't address an OTC allowance.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"The benefit table and exclusions list cover only manual spinal manipulation for subluxation, and no passage shows routine chiropractic coverage.\"},\n{\"id\":4,\"ok\":true,\"reason\":\"Acupuncture is covered only for chronic low back pain under the Medicare benefit, and the exclusions table limits it to those circumstances, with no supplemental acupuncture shown.\"}\n]"
+}

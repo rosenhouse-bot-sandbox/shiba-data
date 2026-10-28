@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2056-018-0.md",
+ "reply": "```json\n[\n{\"id\":0,\"ok\":true,\"reason\":\"The benefits chart lists only Medicare-covered acupuncture for chronic low back pain, and the page 74 table row for acupuncture says the same; the only supplemental item shown is the Extra Benefits Card, whose contents are cut off and do not name acupuncture.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"The EOC exclusions table lists naturopath services as 'Not covered under any condition.'\"},\n{\"id\":2,\"ok\":true,\"reason\":\"The EOC exclusions table lists therapeutic massage as 'Not covered under any condition.'\"},\n{\"id\":3,\"ok\":true,\"reason\":\"The chiropractic benefit covers only Medicare manual manipulation of the spine, and the exclusions table says routine chiropractic care and all other services are not covered.\"}\n]\n```"
+}

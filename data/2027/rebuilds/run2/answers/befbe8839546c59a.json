@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H5439-011-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The exclusions table on page 126 lists naturopath services as 'Not covered under any condition', and no passage shows any routine coverage.\"}]\n```"
+}

@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H7006-018-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Pages 46-47 show routine (non-Medicare) acupuncture covered through a $50 Flex Card allowance that names acupuncture, so the plan does not cover only the Medicare benefit.\"}]\n```"
+}

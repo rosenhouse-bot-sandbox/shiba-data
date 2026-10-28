@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H9003-001-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":false,\"reason\":\"The quoted exclusion carves out the optional Advantage Plus package, which covers routine dental for an extra premium, so 'excluded' is wrong; optional_only would fit better.\"},\n{\"id\":1,\"ok\":false,\"reason\":\"Page 54 shows the plan covers chiropractic care not covered by Medicare (up to 18 combined visits per year), so it is not Medicare-only.\"},\n{\"id\":2,\"ok\":false,\"reason\":\"The quote is a Part D rule on non-prescription drugs, not an OTC items allowance, and no passage shows the plan lacks an OTC benefit.\"}\n]"
+}

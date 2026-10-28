@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H3805-041-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":false,\"reason\":\"The field also covers OTC, and the plan has a $25 quarterly OTC credit (pp. 80-81), so the cell would not be blank; the quote only shows no worldwide emergency coverage.\"},\n{\"id\":1,\"ok\":false,\"reason\":\"The EOC lists a $25 quarterly OTC credit on the Ucard (pp. 80-81); the cited quote is a Part D drug exclusion, a different thing.\"},\n{\"id\":2,\"ok\":false,\"reason\":\"The quotes are a Medicare chiropractic exclusion and a fitness reimbursement's list of non-reimbursable items, and neither states that the plan lacks massage coverage.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"Chiropractic is only Medicare-covered spinal manual manipulation ($15 copay, pp. 54, 101), and no passage shows routine chiropractic.\"},\n{\"id\":4,\"ok\":true,\"reason\":\"Page 102 lists naturopath services as 'Not covered under any condition', and no passage shows any naturopath coverage.\"},\n{\"id\":5,\"ok\":true,\"reason\":\"Acupuncture appears only as the Medicare chronic low back pain benefit (pp. 49-51, 102), and no passage shows routine acupuncture.\"}\n]"
+}

@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H6815-038-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":false,\"reason\":\"The EOC on page 54 says the plan covers 24 supplemental (non-Medicare) acupuncture visits per year at $0 copay, so it is not Medicare-only.\"},\n{\"id\":1,\"ok\":false,\"reason\":\"The quotes are Part D drug exclusions (non-prescription drugs), not an OTC items allowance, and the passages do not show the plan lacks an OTC allowance.\"}\n]"
+}

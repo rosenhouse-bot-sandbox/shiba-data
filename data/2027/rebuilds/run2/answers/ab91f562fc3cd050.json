@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H3817-010-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"The exclusions table says naturopath services are 'Not covered under any condition', and no passage shows routine coverage.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"The exclusions table says therapeutic massage is 'Not covered under any condition', and the other massage mentions only say it is not covered when ordered by an acupuncturist or chiropractor.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Acupuncture appears only as the Medicare chronic low back pain benefit (12 visits in 90 days, up to 20 a year) and as 'covered only under specific conditions', with no routine acupuncture.\"},\n{\"id\":3,\"ok\":false,\"reason\":\"The cited quote is about non-transport ambulance calls, is truncated, and does not show routine non-emergency transportation is excluded, so the claim is unsupported.\"}\n]"
+}

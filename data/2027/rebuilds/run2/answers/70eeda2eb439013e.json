@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2923-025-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":false,\"reason\":\"Page 59 lists chiropractic as a supplemental benefit with a $15 copay for Medicare-covered visits only, and page 124's 'Routine chiropractic care' row is ambiguous; the evidence is not clear enough to confirm there is no routine benefit.\"},\n{\"id\":1,\"ok\":false,\"reason\":\"The plan covers therapeutic massage through a $2,000 Dental & Alternative Therapy Allowance that names massage, so the 'excluded' claim is contradicted.\"}\n]"
+}

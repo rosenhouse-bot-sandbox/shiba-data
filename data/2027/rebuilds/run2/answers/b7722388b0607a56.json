@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H5216-455-0.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 39 says only manual manipulation of the spine is covered and other chiropractor services are not; page 84 confirms routine chiropractic care is limited to manual manipulation; no supplemental chiropractic benefit appears.\"},{\"id\":1,\"ok\":true,\"reason\":\"Page 83 lists naturopath services as 'Not covered under any condition', an explicit exclusion, and no passage shows supplemental coverage.\"}]"
+}

@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H1036-306-0.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"The EOC exclusions list says naturopath services are 'Not covered under any condition', and no passage shows any covering benefit or allowance.\"},{\"id\":1,\"ok\":true,\"reason\":\"The EOC says it covers only manual manipulation of the spine for subluxation, other chiropractor services are not covered, and routine chiropractic care is excluded apart from that manipulation.\"}]"
+}

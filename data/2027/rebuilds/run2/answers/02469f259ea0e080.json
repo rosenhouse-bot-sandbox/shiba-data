@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H5439-011-0.md",
+ "reply": "[{\"id\":0,\"ok\":false,\"reason\":\"The quote is about Part D's statutory exclusion of non-prescription drugs, not an OTC items allowance, and no passage shows the plan lacks an OTC allowance.\"},{\"id\":1,\"ok\":true,\"reason\":\"The EOC's exclusions table says naturopath services are 'Not covered under any condition', and no passage shows any supplemental naturopathic coverage.\"}]"
+}

@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2406-073-0.md",
+ "reply": "[\n  {\"id\": 0, \"ok\": true, \"reason\": \"The EOC passages cover only Medicare-covered acupuncture for chronic low back pain, with extra acupuncture not covered, and no passage shows routine acupuncture.\"},\n  {\"id\": 1, \"ok\": false, \"reason\": \"The page 108 quote is an allowance's list of non-reimbursable items, and the page 45 quote only limits what Medicare chiropractic covers, so neither says the plan lacks massage coverage.\"},\n  {\"id\": 2, \"ok\": true, \"reason\": \"Chiropractic is described only as Medicare-covered manual manipulation of the spine, with other services excluded, and no passage shows routine chiropractic.\"}\n]"
+}
