@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H3817-009-1.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"Page 38 lists only the Medicare chronic low back pain acupuncture benefit, page 72 says acupuncture is covered only for chronic low back pain, and no passage shows routine acupuncture.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Pages 41 and 75 say the plan covers only manual manipulation of the spine for subluxation, and no routine chiropractic benefit appears.\"},\n{\"id\":2,\"ok\":false,\"reason\":\"The quote is the Part D exclusion of non-prescription drugs, which is not about an OTC items allowance and does not show the plan lacks one.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"Page 74 lists naturopath services as 'Not covered under any condition'.\"},\n{\"id\":4,\"ok\":true,\"reason\":\"Page 76 lists therapeutic massage as 'Not covered under any condition', and the other mentions only say massage is not covered when ordered by an acupuncturist or chiropractor.\"}\n]"
+}

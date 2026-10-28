@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2923-028-3.md",
+ "reply": "[{\"id\":0,\"ok\":false,\"reason\":\"The plan covers naturopath services through a $250 Dental & Alternative Therapy Allowance that names them, so the 'excluded' claim is wrong.\"},{\"id\":1,\"ok\":true,\"reason\":\"The EOC says only manual manipulation of the spine to correct a subluxation is covered, and routine chiropractic care appears under services not covered by Medicare. No chiropractic allowance is named in the passages.\"}]"
+}

@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H2001-045-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The EOC covers acupuncture only for Medicare chronic low back pain, the exclusions chart limits it to that benefit, and no passage shows routine acupuncture.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Chiropractic coverage is limited to Medicare manual manipulation of the spine, the exclusions chart excludes other services, and no passage shows routine chiropractic.\"}]\n```"
+}

@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H3805-048-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The exclusions chart on page 103 lists naturopath services as not covered under any condition, and no passage shows coverage.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Chiropractic is covered only as Medicare manual manipulation of the spine for subluxation, and other services are excluded, with no routine chiropractic shown.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Routine dental is not covered under any condition in the base plan, and preventive and comprehensive dental comes only through the Platinum Dental Rider for a $66 monthly premium.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Acupuncture is covered only as the Medicare chronic low back pain benefit, with no routine acupuncture shown.\"}]\n```"
+}

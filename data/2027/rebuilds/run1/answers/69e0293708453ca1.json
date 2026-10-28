@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H5439-015-0.md",
+ "reply": "```json\n[\n{\"id\":0,\"ok\":true,\"reason\":\"The benefit table lists only Medicare-covered acupuncture for chronic low back pain, and the page 122 'not covered by Medicare' table limits acupuncture to chronic low back pain; no routine acupuncture benefit appears.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"The chiropractic benefit is limited to manual manipulation of the spine for subluxation, priced as 'Medicare-covered chiropractic services', and the page 123 'routine chiropractic care' row allows only that same manipulation.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"The EOC lists naturopath services as 'Not covered under any condition', and no passage shows an allowance or other benefit covering them.\"}\n]\n```"
+}

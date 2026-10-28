@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H2406-042-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The exclusions chart on page 111 covers only Medicare manual manipulation of the spine and excludes all other chiropractic services, and no passage shows routine chiropractic coverage.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"The exclusions chart on page 112 limits acupuncture to the Medicare chronic low back pain benefit, and no passage shows routine acupuncture coverage.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"The exclusions chart on page 112 lists naturopath services as not covered under any condition.\"}]\n```"
+}

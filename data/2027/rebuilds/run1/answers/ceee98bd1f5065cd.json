@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2001-045-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"Every chiropractic passage, including page 123, describes only Medicare-covered spinal manipulation and excludes other services, and none shows a routine chiropractic benefit.\"},\n{\"id\":1,\"ok\":false,\"reason\":\"The page 63 quote only says massage is not part of a chiropractic visit, and the page 160 quote is an allowance's non-reimbursable list. Neither says the plan lacks massage coverage.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Acupuncture appears only as the Medicare-covered chronic low back pain benefit (pages 57-58, 124), and no passage shows routine acupuncture.\"}\n]"
+}

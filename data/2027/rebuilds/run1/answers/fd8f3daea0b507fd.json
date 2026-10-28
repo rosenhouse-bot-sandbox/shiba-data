@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H2923-028-3.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Pages 53, 54, 61 and 119 show routine acupuncture covered as a supplemental benefit through the Dental & Alternative Therapy Allowance, which names it, so the plan is not Medicare-only.\"},\n {\"id\": 1, \"ok\": true, \"reason\": \"Pages 59 and 121 state the plan covers only Medicare manual manipulation of the spine to correct a subluxation, and no passage shows routine chiropractic coverage.\"}]\n```"
+}

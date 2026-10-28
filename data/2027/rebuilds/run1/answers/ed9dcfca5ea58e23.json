@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H2056-018-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The only acupuncture coverage shown is the Medicare chronic low back pain benefit, and the exclusions chart limits acupuncture to that condition; no passage shows routine acupuncture or a card that names it.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"The plan's exclusions chart lists therapeutic massage as not covered under any condition.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"The plan covers only manual manipulation of the spine for subluxation, and its exclusions chart says routine chiropractic services beyond that are not covered.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"The plan's exclusions chart lists naturopath services as not covered under any condition.\"}]\n```"
+}

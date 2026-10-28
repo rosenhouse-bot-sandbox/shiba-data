@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2406-073-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"The EOC covers only Medicare acupuncture for chronic low back pain, with provider limits. The page 101 entry is for 'Acupuncture (Medicare-covered)', and no passage shows routine acupuncture.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Page 101 lists naturopath services as 'Not covered under any condition', and no passage shows any coverage.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Chiropractic is covered only as Medicare manual manipulation of the spine for subluxation, and other services are excluded. No supplemental chiropractic benefit appears.\"},\n{\"id\":3,\"ok\":false,\"reason\":\"The quote is from a fitness allowance's list of non-reimbursable items, and page 45 only excludes massage from Medicare chiropractic coverage. Neither states that the plan lacks massage coverage.\"}\n]"
+}
