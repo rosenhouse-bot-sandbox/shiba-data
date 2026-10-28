@@ -339,7 +339,8 @@ class PublishTest(unittest.TestCase):
         with self.assertRaises(SystemExit):
             filled.publish(self.accepted(self.value), data=self.data)
         filled.publish(self.accepted(self.value), data=self.data, every=True)
-        self.assertIn(self.plan, (self.data / "machine/filled.csv").read_text())
+        rows = csv.DictReader(open(self.data / "machine/filled.csv"))
+        self.assertIn((self.plan, self.key, self.value), {(r["plan_id"], f'{r["sheet"]}.{r["column"]}', r["value"]) for r in rows})
 
     def test_writes_rows_to_another_file_even_for_cells_an_eoc_cites(self):
         out = self.data / "machine.csv"
