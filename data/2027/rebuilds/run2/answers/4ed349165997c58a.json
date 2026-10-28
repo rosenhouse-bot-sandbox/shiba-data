@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H9003-006-0.retry.md",
+ "reply": "```json\n[{\"key\": \"main.AA_opt_packages\", \"result\": \"cite\", \"citations\": [{\"page\": 212, \"quote\": \"This supplemental benefits package includes dental, hearing aid, and eyewear benefits for an additional monthly premium that is added to your Senior Advantage plan premium\"}]},\n {\"key\": \"main.H_inpatient\", \"result\": \"cite\", \"citations\": [{\"page\": 11, \"quote\": \"• Standard - Per admission, $320 per day for days 1–6.\"}]},\n {\"key\": \"main.P_vision\", \"result\": \"cite\", \"citations\": [{\"page\": 100, \"quote\": \"Routine eye exams (eye refraction exams) to determine the need for vision correction and to provide a prescription for eyeglass lenses.\"}]}]\n```"
+}

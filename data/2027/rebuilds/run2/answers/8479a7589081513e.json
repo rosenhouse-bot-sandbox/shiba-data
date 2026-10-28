@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H3817-008-1.retry.md",
+ "reply": "```json\n[{\"key\": \"main.P_vision\", \"result\": \"cite\", \"citations\": [{\"page\": 70, \"quote\": \"Routine vision exam *\"}, {\"page\": 70, \"quote\": \"Routine vision hardware *\"}, {\"page\": 70, \"quote\": \"We cover 1 routine vision exam every calendar year\"}]}]\n```"
+}

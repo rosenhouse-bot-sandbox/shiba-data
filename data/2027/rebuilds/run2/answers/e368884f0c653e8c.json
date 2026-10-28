@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H3805-041-0.retry.md",
+ "reply": "```json\n[{\"key\": \"dvha.G_vision\", \"result\": \"cite\", \"citations\": [{\"page\": 94, \"quote\": \"We cover 1 routine eye exam every year.\"}, {\"page\": 94, \"quote\": \"Eye re raction is part o the routine eye exam $0 copayment\"}]},\n {\"key\": \"dvha.H_hearing\", \"result\": \"cite\", \"citations\": [{\"page\": 61, \"quote\": \"We cover 1 hearing exam every year.\"}, {\"page\": 61, \"quote\": \"Hearing services - routine hearing exam $0 copayment\"}]},\n {\"key\": \"main.Q_hearing\", \"result\": \"cite\", \"citations\": [{\"page\": 61, \"quote\": \"Hearing services - routine hearing exam $0 copayment\"}, {\"page\": 61, \"quote\": \"We cover 1 hearing exam every year.\"}]},\n {\"key\": \"main.Y_otc\", \"result\": \"cite\", \"citations\": [{\"page\": 80, \"quote\": \"Over-the-counter (OTC) credit\"}, {\"page\": 80, \"quote\": \"Covered items include brand name and generic OTC products, like vitamins, pain\"}]}]\n```"
+}

@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H1036-323-0.retry.md",
+ "reply": "```json\n[{\"key\": \"main.AA_opt_packages\", \"result\": \"cite\", \"citations\": [{\"page\": 15, \"quote\": \"MyOption DEN972: $50.90 additional monthly premium\"}, {\"page\": 82, \"quote\": \"MyOption DEN972 is an Optional Supplemental Benefit (OSB) package that can be purchased for an additional\"}]},\n {\"key\": \"main.C_premium\", \"result\": \"cite\", \"citations\": [{\"page\": 12, \"quote\": \"Monthly plan premium                    $0\"}, {\"page\": 14, \"quote\": \"You don't pay a separate monthly plan premium for Humana Essentials Plus Giveback (HMO).\"}]}]\n```"
+}
