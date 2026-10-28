@@ -72,6 +72,11 @@ def site_data(data_dir=DATA, layer_names=layers.LAYERS):
     live, kept, _ = layers.live(data_dir, layer_names)
     cites = {"main": {}, "dvha": {}}
     for c in kept:
+        if c["layer"] == layers.EDITS and c["url"] not in doc_by_url:
+            # An unknown document must not stop the build. The edit still sets its cell.
+            if c["url"]:
+                print(f"::warning::An edit cites a document not in documents_checked.csv: {layers.where(c)} {c['url']}")
+            continue
         if c["url"] not in doc_by_url:
             raise ValueError(f"A citation names a document not in documents_checked.csv: {layers.where(c)} {c['url']}")
         cites[c["sheet"]].setdefault((c["plan_id"], c["column"]), []).append({
@@ -195,8 +200,12 @@ def main(command, out, release=None):
         return
     out_dir = pathlib.Path(out)
     site = site_data()
-    for c in layers.live(DATA)[2]:
+    _, kept, dropped = layers.live(DATA)
+    for c in dropped:
         print(f"::warning::Dropped a citation whose value is not the live cell's: {layers.where(c)} {c['value']}")
+    for c in kept + dropped:
+        if "beneath" in c:
+            print(f"::warning::An edit's author saw {c['saw']}, but the cell beneath it is now {c['beneath']}: {layers.where(c)}")
     if command == "documents":
         failed = save_documents(site["docs"], out_dir, datetime.date.today().isoformat())
         if failed:

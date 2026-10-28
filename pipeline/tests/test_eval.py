@@ -20,6 +20,10 @@ def row(cell, value, quote="q", line=""):
     return dict(sheet=sheet, plan_id=plan_id, column=column, line=line, value=value, url="u", pdf_page="1", quote=quote)
 
 
+def edit(cell, value, saw):
+    return dict(row(cell, value), saw=saw, source="session", author="", note="")
+
+
 def write(path, rows):
     path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w", newline="") as f:
@@ -35,7 +39,8 @@ def write_layers(data):
     write(data / "generated/dvha.csv", [dict(plan, F_dental="Dental")])
     write(data / "generated/citations.csv", [row(("main", "H1-001-0", "U_naturopath"), "◐")])
     write(data / "machine/filled.csv", [dict(step="filled", prompt="p", **row(SPECIALIST, "$40"))])
-    write(data / "edits.csv", [row(SPECIALIST, "$40"), row(DENTAL, "PREV $0")])
+    write(data / "edits.csv", [edit(SPECIALIST, "$40", "$0-$40"), edit(DENTAL, "PREV $0", "Dental")])
+    write(data / "generated/plans.csv", [dict(plan_id="H1-001-0", organization="Carrier A")])
 
 
 class ScoreTest(unittest.TestCase):
@@ -99,6 +104,31 @@ class LayersTest(unittest.TestCase):
 
     def test_cited_cells_leave_out_cells_that_only_code_cites(self):
         self.assertEqual(eval.measured(self.data)[2], {SPECIALIST, DENTAL})
+
+    def test_overrides_are_edits_that_change_what_the_machine_layer_shows(self):
+        self.assertEqual(eval.overrides(self.data), [DENTAL])
+        write(self.data / "machine/filled.csv", [dict(step="filled", prompt="p", **row(SPECIALIST, "$45"))])
+        self.assertEqual(eval.overrides(self.data), [DENTAL, SPECIALIST])
+
+    def test_overrides_ignore_machine_rows_that_set_a_line_or_lack_a_quote(self):
+        write(self.data / "machine/eoc_citations.csv", [dict(step="xref", prompt="", **row(DENTAL, "PREV $0", line="1")),
+                                                         dict(step="xref", prompt="", **row(DENTAL, "PREV $0", quote=" "))])
+        self.assertEqual(eval.overrides(self.data), [DENTAL])
+        write(self.data / "machine/eoc_citations.csv", [dict(step="xref", prompt="", **row(DENTAL, "PREV $0"))])
+        self.assertEqual(eval.overrides(self.data), [])
+
+    def test_override_report_names_a_plan_without_a_carrier_by_its_id(self):
+        write(self.data / "generated/plans.csv", [dict(plan_id="H9-999-0", organization="Carrier B")])
+        self.assertEqual(eval.override_report(self.data, [DENTAL]),
+                         "edits that override the machine layer: 1\n  by column: dvha.F_dental 1\n  by carrier: H1-001-0 1")
+        self.assertEqual(eval.override_report(self.data, []), "edits that override the machine layer: 0")
+
+    def test_main_counts_overrides_by_column_and_carrier(self):
+        out = io.StringIO()
+        with mock.patch.object(years, "REPO", self.data.parent.parent), contextlib.redirect_stdout(out):
+            eval.main("2099")
+        self.assertIn("edits that override the machine layer: 1\n  by column: dvha.F_dental 1\n  by carrier: Carrier A 1",
+                      out.getvalue())
 
     def test_main_scores_a_machine_file(self):
         machine = self.data / "machine.csv"

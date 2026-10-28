@@ -201,21 +201,36 @@ class EocCitationsTest(unittest.TestCase):
 
 
 class EditsTest(unittest.TestCase):
-    def test_an_edit_sets_its_dvha_cell_and_keeps_the_pbp_value(self):
+    def dental(self, url, page="4", quote="dental quote"):
         with tempfile.TemporaryDirectory() as tmp:
             data = data_copy(tmp, [])
-            sb = next(d for d in build.rows("generated/documents_checked.csv", DATA)
-                      if d["kind"] == "SB" and "H3805-048-0" in d["plan_ids"])
             with open(data / "edits.csv", "a", newline="") as f:
-                csv.DictWriter(f, fieldnames=build.layers.COLUMNS).writerow(
-                    dict(cite("dvha", "F_dental", "fixed", sb["url"], 4, "dental quote"), line=""))
-            site = build.site_data(data)
+                csv.DictWriter(f, fieldnames=build.layers.EDIT_COLUMNS).writerow(
+                    dict(cite("dvha", "F_dental", "fixed", url, page, quote), line="", saw="", source="volunteer",
+                         author="v1", note=""))
+            out = io.StringIO()
+            with contextlib.redirect_stdout(out):
+                site = build.site_data(data)
+        return next(r for r in site["dvha"]["rows"] if r["plan_id"] == "H3805-048-0")["cells"]["F_dental"], site, out.getvalue()
+
+    def test_an_edit_sets_its_dvha_cell_and_keeps_the_pbp_value(self):
+        sb = next(d for d in build.rows("generated/documents_checked.csv", DATA)
+                  if d["kind"] == "SB" and "H3805-048-0" in d["plan_ids"])
+        cell, site, _ = self.dental(sb["url"])
         generated = next(r for r in build.rows("generated/dvha.csv", DATA) if r["plan_id"] == "H3805-048-0")
-        row = next(r for r in site["dvha"]["rows"] if r["plan_id"] == "H3805-048-0")
-        cell = row["cells"]["F_dental"]
         self.assertEqual((cell["value"], cell["pbp"]), ("fixed", generated["F_dental"]))
         self.assertEqual([(c["value"], c["page"], c["quote"]) for c in cell["cites"]], [("fixed", 4, "dental quote")])
         self.assertNotIn("dental quote", str(site["main"]))
+
+    def test_an_uncited_edit_sets_its_cell(self):
+        cell, _, out = self.dental("", "", "")
+        self.assertEqual((cell["value"], cell["cites"], out), ("fixed", [], ""))
+
+    def test_an_edit_of_an_unknown_document_sets_its_cell_and_warns(self):
+        cell, _, out = self.dental("https://x/unknown.pdf")
+        self.assertEqual((cell["value"], cell["cites"]), ("fixed", []))
+        self.assertIn("::warning::", out)
+        self.assertIn("edits.csv dvha H3805-048-0 F_dental https://x/unknown.pdf", out)
 
 
 class FetchPdfsTest(unittest.TestCase):
@@ -312,6 +327,15 @@ class DocumentsTest(unittest.TestCase):
             build.main("site", self.dir / "site")
         self.assertIn("::warning::", out.getvalue())
         self.assertIn("edits.csv main H3805-048-0 E_moop", out.getvalue())
+
+    def test_site_command_warns_of_an_edit_whose_cell_changed_beneath_it(self):
+        edit = dict(cite("main", "E_moop", "$6,800", "u", 45, "q"), layer="edits.csv", line="", saw="$6,700", beneath="$6,900")
+        out = io.StringIO()
+        with (mock.patch.object(build, "site_data", return_value={"docs": {}, "year": 2027, "area": "A"}),
+              mock.patch.object(build.layers, "live", return_value=({}, [], [edit])), contextlib.redirect_stdout(out)):
+            build.main("site", self.dir / "site")
+        self.assertIn("::warning::An edit's author saw $6,700, but the cell beneath it is now $6,900: "
+                      "edits.csv main H3805-048-0 E_moop", out.getvalue())
 
     def test_site_command_records_build_time_and_titles_the_page(self):
         with mock.patch.object(build, "site_data", return_value={"docs": {}, "year": 2099, "area": "A & B"}):
