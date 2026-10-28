@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2923-005-0.retry.md",
+ "reply": "```json\n[{\"key\": \"main.K_tests_labs\", \"result\": \"cite\", \"citations\": [{\"page\": 88, \"quote\": \"PCP's office: $0 copay\"}, {\"page\": 88, \"quote\": \"PCP or Specialist's office: $15 copay Freestanding location: $40 copay Outpatient hospital: $95 copay\"}, {\"page\": 89, \"quote\": \"Office or freestanding location: $0 copay\"}, {\"page\": 89, \"quote\": \"Outpatient hospital: $40 copay\"}]}]\n```"
+}

@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H9003-001-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Routine dental appears only in the Advantage Plus optional package; the base plan covers only Medicare dental, and the exclusions say routine dental is not covered unless you enroll in the optional package.\"},\n {\"id\": 1, \"ok\": false, \"reason\": \"Page 54 shows the plan covers chiropractic care not covered by Medicare (up to 18 combined visits per year), so the plan is not Medicare-only.\"}]\n```"
+}

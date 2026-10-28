@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2923-019-0.md",
+ "reply": "```json\n[{\"key\": \"main.I_outpatient_surgery\", \"result\": \"cite\", \"citations\": [{\"page\": 96, \"quote\": \"$580 copay for outpatient procedures/surgery at an Outpatient Hospital\"}, {\"page\": 96, \"quote\": \"$480 copay for outpatient procedures/surgery at an ASC - facility\"}]},\n {\"key\": \"main.R_dental\", \"result\": \"cite\", \"citations\": [{\"page\": 64, \"quote\": \"You have a $2,000 yearly allowance toward Preventive Dental and Comprehensive dental services,\"}, {\"page\": 111, \"quote\": \"You are covered for cleanings, routine exams, X-rays, and more.\"}]},\n {\"key\": \"main.S_acupuncture\", \"result\": \"cite\", \"citations\": [{\"page\": 57, \"quote\": \"Your plan covers routine acupuncture visits under the Dental & Alternative Therapy Allowance.\"}, {\"page\": 65, \"quote\": \"Acupuncture services for conditions other than chronic lower back pain\"}]},\n {\"key\": \"main.V_massage\", \"result\": \"cite\", \"citations\": [{\"page\": 65, \"quote\": \"Massage therapy rendered by a licensed massage therapist.\"}]}]\n```"
+}

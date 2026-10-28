@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2923-019-0.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 64 shows a $2,000 allowance toward preventive and comprehensive dental for all members. Page 111 lists the supplemental dental benefit (cleanings, exams, X-rays). Both support the ● dot.\"},{\"id\":1,\"ok\":true,\"reason\":\"Page 57 says routine acupuncture is a supplemental benefit covered under the Dental & Alternative Therapy Allowance. Pages 64 and 65 confirm acupuncture for conditions other than chronic low back pain is covered by the allowance.\"},{\"id\":2,\"ok\":true,\"reason\":\"Page 64 names therapeutic massage in the $2,000 allowance. Page 65 lists massage therapy by a licensed massage therapist as a covered alternative therapy. The allowance applies to all members, so the ● dot holds.\"},{\"id\":3,\"ok\":true,\"reason\":\"Page 96 shows $580 for outpatient hospital procedures/surgery and a $480 facility copay at an ASC with a $0 professional copay. The ASC facility copay is the center's cost. Colonoscopy rows are excluded, and the values are in the order the field specifies (hospital, then ASC).\"}]"
+}
