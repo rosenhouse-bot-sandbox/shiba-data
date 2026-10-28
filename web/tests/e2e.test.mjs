@@ -416,9 +416,11 @@ test("a clicked cell's note links to the plan on Medicare.gov", async () => {
 });
 
 test("a blank uncited cell says CMS data has no entry", async () => {
+  const [plan, col] = site.dvha.rows.flatMap((r) =>
+    Object.entries(r.cells).filter(([, c]) => c.value === "" && !c.cites.length).map(([col]) => [r.plan_id, col]))[0];
   await page.goto(`${base}#/dvha`);
-  const index = site.dvha.columns.findIndex((c) => c.key === "F_dental");
-  await row("H3805-048-0").locator("td").nth(index).click();
+  const index = site.dvha.columns.findIndex((c) => c.key === col);
+  await row(plan).locator("td").nth(index).click();
   assert.match(await page.textContent("#source-note"), /has no entry for this benefit/);
 });
 
