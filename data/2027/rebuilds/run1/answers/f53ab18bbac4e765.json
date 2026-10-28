@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H2923-019-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 62 limits chiropractic to Medicare-covered manual manipulation of the spine, page 125 lists routine chiropractic care as excluded apart from that manipulation, and no passage shows a supplemental chiropractic benefit.\"}]\n```"
+}

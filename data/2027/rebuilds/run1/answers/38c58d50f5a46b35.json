@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H1372-003-0.md",
+ "reply": "The quote comes from the plan's table of services that are not covered. The row \"Naturopath services (uses natural or alternative treatments)\" has the right-hand entry \"Not covered under any condition.\" This is an explicit exclusion of the benefit the field names, and the passage shows no contrary coverage through an allowance or an optional package.\n\n\n<invoke name=\"json\">\n</invoke>\n\n```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The EOC's not-covered table lists naturopath services as 'Not covered under any condition', and no passage shows supplemental coverage.\"}]\n```"
+}

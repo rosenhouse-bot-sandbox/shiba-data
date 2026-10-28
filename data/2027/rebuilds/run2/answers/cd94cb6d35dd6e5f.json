@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H7199-002-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"The EOC covers routine acupuncture as a supplemental benefit through the Dental & Alternative Therapy Allowance (pages 54-55, 62-64, 139), so the plan is not Medicare-only.\"}]\n```"
+}

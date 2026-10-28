@@ -33,7 +33,8 @@ class RebuildTest(unittest.TestCase):
 
     def test_scratch_copy_drops_model_work_and_adds_the_seeds_as_uncited_edits(self):
         copy = rebuild.scratch_copy(self.data, self.root / "work", SEEDS, self.root / "kept")
-        self.assertEqual(sorted(p.name for p in copy.iterdir()), ["answers", "edits.csv", "generated"])
+        self.assertEqual(sorted(p.name for p in copy.iterdir()), ["answers", "edits.csv", "generated", "machine"])
+        self.assertEqual(os.listdir(copy / "machine"), [])
         (copy / "answers" / "b.json").write_text("{}")
         self.assertEqual(os.listdir(self.root / "kept"), ["b.json"])
         sheets, kept, _ = layers.live(copy)

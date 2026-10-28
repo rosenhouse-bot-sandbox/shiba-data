@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H9003-009-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Routine dental appears only under the Advantage Plus optional package (p.105, p.108–111), and routine dental is excluded unless enrolled in it (p.116); the base plan has only Medicare dental (p.59).\"},\n {\"id\": 1, \"ok\": true, \"reason\": \"Preventive and comprehensive dental are offered only through the Advantage Plus optional package bought for an extra premium (p.105, p.212), with no base-plan routine dental or dental allowance.\"}]\n```"
+}

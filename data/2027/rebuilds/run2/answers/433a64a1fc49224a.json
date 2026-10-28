@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H1036-317-0.md",
+ "reply": "The quotes are about chiropractic care and say the plan covers only Medicare manual manipulation of the spine. Page 53 states that other chiropractor services are not covered. Page 90 lists \"Routine chiropractic care\" in the exclusions table, with the note that manual manipulation to correct a subluxation is covered. No passage shows routine chiropractic coverage, an allowance, or a card that names it. The claim \"medicare_only\" holds.\n\n```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"EOC pages 53 and 90 limit chiropractic to Medicare-covered spinal manipulation for subluxation, exclude other chiropractor services and routine chiropractic care, and no passage shows supplemental chiropractic coverage.\"}]\n```"
+}

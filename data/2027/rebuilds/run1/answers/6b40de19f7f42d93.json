@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H1036-323-0.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"The exclusions table lists naturopath services as 'Not covered under any condition', and no passage shows supplemental coverage.\"},{\"id\":1,\"ok\":true,\"reason\":\"The benefit chart says only manual manipulation of the spine for subluxation is covered and other chiropractor services are not, which matches Medicare-only coverage, and nothing shows routine chiropractic coverage.\"}]"
+}

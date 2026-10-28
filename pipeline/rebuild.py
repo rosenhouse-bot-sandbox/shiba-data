@@ -35,6 +35,7 @@ def scratch_copy(data, work, seeds, answers):
     copy = pathlib.Path(work) / "data" / data.name
     shutil.rmtree(copy, ignore_errors=True)
     shutil.copytree(data, copy, ignore=lambda d, names: {"answers", "machine", "rebuilds"} if pathlib.Path(d) == data else set())
+    (copy / "machine").mkdir()
     os.makedirs(answers, exist_ok=True)
     (copy / "answers").symlink_to(pathlib.Path(answers).resolve(), target_is_directory=True)
     with open(copy / layers.EDITS, "a", newline="") as f:

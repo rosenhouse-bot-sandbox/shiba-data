@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H5216-455-0.md",
+ "reply": "```json\n[\n{\"id\":0,\"ok\":true,\"reason\":\"Page 39 says only manual spine manipulation for subluxation is covered and other chiropractor services are not; page 84 'Routine chiropractic care' row says only manipulation to correct a subluxation is covered, and no passage shows routine chiropractic coverage.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Page 83 lists naturopath services as 'Not covered under any condition', and no passage shows any coverage.\"}\n]\n```"
+}

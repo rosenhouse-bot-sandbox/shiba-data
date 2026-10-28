@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H5216-048-0.md",
+ "reply": "```json\n[\n{\"id\":0,\"ok\":true,\"reason\":\"The chiropractic benefit covers only Medicare manual manipulation of the spine, other chiropractor services are stated as not covered, and no passage shows a routine chiropractic benefit.\"},\n{\"id\":1,\"ok\":false,\"reason\":\"The quotes are Part D drug exclusion rules about non-prescription drugs, not an OTC items allowance, so they do not show the plan lacks an OTC benefit.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"The exclusions table says naturopath services are 'Not covered under any condition', and no passage shows any coverage.\"}\n]\n```"
+}

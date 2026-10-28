@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H3817-010-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"The EOC lists naturopath services as 'Not covered under any condition', and no passage shows any supplemental naturopathy coverage.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"The EOC lists therapeutic massage as 'Not covered under any condition', and the other massage mentions only say it is not covered when ordered by an acupuncturist or chiropractor.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"The only acupuncture benefit shown is the Medicare chronic low back pain benefit (12 visits, up to 20 a year), with no routine acupuncture anywhere in the passages.\"},\n{\"id\":3,\"ok\":false,\"reason\":\"The quote is a truncated row about non-transport ambulance calls and wheelchair or stretcher transport, so it does not clearly state that routine non-emergency rides are excluded, and ambulance rules are not routine transportation.\"}\n]"
+}

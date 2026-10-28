@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H3805-040-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 107 lists chiropractic as Medicare-covered spinal manipulation only, and no passage shows routine chiropractic coverage.\"},\n {\"id\": 1, \"ok\": true, \"reason\": \"Page 108 limits acupuncture to the Medicare chronic low back pain benefit, and no passage shows routine acupuncture coverage.\"}]\n```"
+}

@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H7199-002-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"The EOC says routine acupuncture for other conditions is covered under the Dental & Alternative Therapy Allowance, which names it, so the plan is not Medicare-only.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"The EOC covers routine chiropractic visits at a $15 copay, up to 12 per year, as a supplemental benefit, and the cited page 141 row says some routine chiropractic is covered.\"}]\n```"
+}
