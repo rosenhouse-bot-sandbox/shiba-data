@@ -7,6 +7,9 @@ on:
         description: Plan year to rebuild
         required: true
         default: "2027"
+      rebuild:
+        description: Also rebuild the model steps from scratch into data/<year>/rebuilds/<this name> (issue #47)
+        required: false
 
 concurrency: pipeline
 
@@ -21,6 +24,7 @@ jobs:
     runs-on: ubuntu-24.04
     env:
       YEAR: ${{ inputs.year }}
+      REBUILD: ${{ inputs.rebuild }}
       ANTHROPIC_ORGANIZATION_ID: 3c97a8fb-8968-4ed9-aec7-f68b88683532
       ANTHROPIC_SERVICE_ACCOUNT_ID: svac_0142UmsmTSG4RDAgtFvyHY9F
       ANTHROPIC_FEDERATION_RULE_ID: fdrl_018f3jSg6eLJS1PxSPQQNxks
@@ -39,8 +43,12 @@ jobs:
       - run: pip install pypdfium2==5.13.0 openpyxl==3.1.5 anthropic==2.3.0
       - run: npm ci
         working-directory: pipeline
+      # GitHub stops a job after 360 minutes, so these leave time to commit.
       - run: python3 -I pipeline/run.py "$YEAR" _work api
-        timeout-minutes: 240
+        timeout-minutes: 120
+      - if: inputs.rebuild != ''
+        run: python3 -I pipeline/rebuild.py "$YEAR" _work "$REBUILD" api
+        timeout-minutes: 220
       # Saved answers are worth keeping even when a later step stops the run.
       - if: always()
         env:

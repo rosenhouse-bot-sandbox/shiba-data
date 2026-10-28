@@ -78,5 +78,6 @@ flowchart TB
 - `pipeline/layers.py` applies `generated/citations.csv` and then `edits.csv` to the generated sheets. Rows in `machine/` only cite values.
 - `pipeline/blanks.py` and `pipeline/filled.py` write model task files and turn the answers into `machine/` rows. Haiku reads, then Sonnet and Opus verify.
 - `pipeline/ask.py` answers task files with the Claude API. It saves each answer in `answers/`, keyed by the model and the task's text, so a rerun calls a model only for new tasks.
+- `pipeline/rebuild.py <year> <work> <name>` reruns the model steps with no saved answers or machine rows, on a copy with seeded errors. It saves the answers, rows and scores in `data/<year>/rebuilds/<name>`. The Pipeline workflow's `rebuild` input runs it.
 - `pipeline/eval.py <year> [<machine.csv>]` scores machine-written cells against the live data. It also counts the edits that override the machine layer, by column and carrier.
 - The Site workflow downloads PDFs from carriers only when no documents release exists.

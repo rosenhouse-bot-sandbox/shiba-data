@@ -1,0 +1,53 @@
+{
+ "H5216-048-0": {
+  "main.K_tests_labs": "50%/$0",
+  "main.L_xray_imaging": "$0-$145 | $330-$345",
+  "main.AA_opt_packages": "",
+  "main.O_medical_deductible": "$100 some"
+ },
+ "H2923-001-0": {
+  "main.K_tests_labs": "$0-$40/$0-$95",
+  "main.T_chiropractic": "",
+  "dvha.I_alt_care_otc_travel": "Acup $0; Chiro $15 12 visits/year; Massage; OTC $40/three months; Worldwide ER $130"
+ },
+ "H9003-009-0": {
+  "main.K_tests_labs": "$0-$45/$0",
+  "main.G_specialist": "$35"
+ },
+ "H1036-153-0": {
+  "main.L_xray_imaging": "$0-$145 | $205-$330",
+  "dvha.G_vision": "exam $0/year; eyewear $150/year"
+ },
+ "H5439-015-0": {
+  "dvha.F_dental": "PREV $0; COMP $0; no annual max",
+  "main.H_inpatient": "$475 | 1-6"
+ },
+ "H3805-048-0": {
+  "main.E_moop": "$6,500",
+  "main.W_fitness": "",
+  "dvha.H_hearing": "exam $0; aids allowance $1,000/year; 2 aids/year"
+ },
+ "H2056-003-0": {
+  "main.O_medical_deductible": "$0",
+  "dvha.H_hearing": "exam $0; aids allowance $1,000 per ear/year; 2 aids/year",
+  "main.P_vision": ""
+ },
+ "H7006-018-0": {
+  "main.H_inpatient": "$585 | 1-5",
+  "dvha.F_dental": "PREV $0; COMP $0; max $150/year PREV+COMP",
+  "main.T_chiropractic": ""
+ },
+ "H7199-002-0": {
+  "dvha.I_alt_care_otc_travel": "Acup $0; Chiro $15 12 visits/year; Massage; Worldwide ER $130",
+  "main.E_moop": "$6,000 | $10,100"
+ },
+ "H3817-008-1": {
+  "main.N_pharmacy_deductible": "$615 not tiers 1,2",
+  "main.X_transportation": "●",
+  "dvha.G_vision": "exam $0/year; eyewear $150/year per item type"
+ },
+ "H1372-003-0": {
+  "main.G_specialist": "$0-$40",
+  "dvha.F_dental": "PREV $0; COMP $0; max $1,500/year PREV+COMP"
+ }
+}

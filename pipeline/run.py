@@ -93,10 +93,10 @@ def blanks_step(texts, work, answer):
     blanks.publish(f"{work}/blanks/accepted.json")
 
 
-def filled_step(texts, work, answer):
+def filled_step(texts, work, answer, every=False):
     import filled
     read, check, recheck = (fresh(f"{work}/filled/{d}") for d in ("read", "check", "recheck"))
-    filled.bundle(texts, read)
+    filled.bundle(texts, read, "every" if every else "")
     answer(read, READER)
     filled.claims(texts, read, f"{work}/filled/claims.json")
     answer(read, READER)  # the retry tasks
