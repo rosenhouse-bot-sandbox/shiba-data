@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H3817-010-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The EOC covers acupuncture only for chronic low back pain, and the exclusions table limits it to that condition; no passage shows routine acupuncture.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"The exclusions table says naturopath services are not covered under any condition, and no passage shows coverage.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"The exclusions table says therapeutic massage is not covered under any condition, and no passage shows a supplemental massage benefit.\"}]\n```"
+}

@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H3817-010-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"The page 65 table lists naturopath services as 'Not covered under any condition', and no passage shows routine coverage.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Page 67 says 'Therapeutic massage: Not covered under any condition', and the other passages only say massage is not covered when ordered by an acupuncturist or chiropractor.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"The acupuncture passages on pages 29 and 63 describe only the Medicare chronic low back pain benefit, and none shows routine acupuncture coverage.\"},\n{\"id\":3,\"ok\":false,\"reason\":\"The quote is truncated and about non-transport ambulance, stretcher car and wheelchair transport. It is not a clear statement that routine non-emergency rides are excluded, and the supplied passages do not include page 65.\"}\n]"
+}

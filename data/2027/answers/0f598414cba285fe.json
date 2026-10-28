@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H2923-019-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 57 says routine acupuncture is a supplemental benefit covered under the Dental & Alternative Therapy Allowance. Page 65 lists acupuncture for conditions other than chronic low back pain under that allowance.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 65 lists massage therapy by a licensed massage therapist among the covered alternative therapies. Page 64 shows this shared allowance names therapeutic massage (methods R11).\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 96 outpatient surgery row: $580 copay for procedures/surgery at an Outpatient Hospital. It also shows a $480 ASC facility copay with a $0 professional copay.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 64 gives a $2,000 yearly allowance toward preventive and comprehensive dental. Page 111 supplemental dental says cleanings, routine exams and X-rays are covered.\"}]\n```"
+}
