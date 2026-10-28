@@ -114,17 +114,26 @@ def bundle(work, out_dir):
         open(f"{out_dir}/{plan}.md", "w").write("\n\n".join([head] + body) + "\n")
 
 
+def citations(answer):
+    """The answer's [{page, quote}], or None if one lacks a page number or a quote."""
+    try:
+        cites = [{"page": int(c["page"]), "quote": c["quote"]} for c in answer.get("citations") or []]
+    except (KeyError, TypeError, ValueError):
+        return None
+    return cites if all(isinstance(c["quote"], str) for c in cites) else None
+
+
 def gate_claims(plan, answers, quote_ok):
     """Claims whose every quote passes quote_ok(page, quote)."""
     out = []
     for r in answers:
-        if r.get("result") not in CLAIMS or not r.get("citations"):
+        cites = citations(r)
+        if r.get("result") not in CLAIMS or r.get("key") not in FIELDS or not cites:
             continue
         if r["result"] == "medicare_only" and r["key"] not in MEDICARE_ONLY_KEYS:
             continue
-        if all(quote_ok(int(c["page"]), c["quote"]) for c in r["citations"]):
-            out.append({"plan": plan, "key": r["key"], "claim": r["result"],
-                        "citations": [{"page": int(c["page"]), "quote": c["quote"]} for c in r["citations"]]})
+        if all(quote_ok(c["page"], c["quote"]) for c in cites):
+            out.append({"plan": plan, "key": r["key"], "claim": r["result"], "citations": cites})
     return out
 
 
@@ -161,13 +170,19 @@ def decoys(found, filled, doc_of, max_per_key=3, seed=8):
     return out
 
 
-def verifier_items(found, planted, seed=3):
-    items = found + planted
-    random.Random(seed).shuffle(items)
+def verifier_items(found, planted):
+    """Claims and decoys grouped by plan, shuffled within each plan. Each item's `task` is its plan's verifier task."""
+    by_plan = collections.defaultdict(list)
+    for c in found + planted:
+        by_plan[c["plan"]].append(dict(c, task=c["plan"]))
+    items = []
+    for plan, mine in sorted(by_plan.items()):
+        random.Random(plan).shuffle(mine)
+        items += mine
     return items
 
 
-def verify(work, claims_path, out_dir, items_per_task=6):
+def verify(work, claims_path, out_dir):
     os.makedirs(out_dir, exist_ok=True)
     found = json.load(open(claims_path))
     filled = {k: [p for p, c in by_plan.items() if c["value"].strip()] for k, by_plan in cells().items()}
@@ -175,16 +190,14 @@ def verify(work, claims_path, out_dir, items_per_task=6):
     doc_of = lambda plan: docs.setdefault(plan, Doc.of_plan(work, plan))
     items = verifier_items(found, decoys(found, filled, doc_of))
     json.dump(items, open(f"{out_dir}/items.json", "w"), indent=1, ensure_ascii=False)
-    for b in range(0, len(items), items_per_task):
-        n = b // items_per_task
+    for task in sorted({c["task"] for c in items}):
         parts = [fill("vblank_prompt.md")]
-        for i in range(b, min(b + items_per_task, len(items))):
-            c = items[i]
-            shown = {"id": i, "plan": c["plan"], "field": c["key"], "meaning": FIELDS[c["key"]][0],
+        for n, c in enumerate(c for c in items if c["task"] == task):
+            shown = {"id": n, "plan": c["plan"], "field": c["key"], "meaning": FIELDS[c["key"]][0],
                      "claim": c["claim"], "citations": c["citations"]}
-            parts.append(f"### Item {i}\n\n{json.dumps(shown, ensure_ascii=False)}\n\nPassages:\n\n"
+            parts.append(f"### Item {n}\n\n{json.dumps(shown, ensure_ascii=False)}\n\nPassages:\n\n"
                          f"{passages(doc_of(c['plan']).pages('layout'), c['key'])}")
-        open(f"{out_dir}/v-{n:02d}.md", "w").write("\n\n".join(parts) + "\n")
+        open(f"{out_dir}/v-{task}.md", "w").write("\n\n".join(parts) + "\n")
     print(len(found), "claims", len(items) - len(found), "decoys")
 
 
@@ -204,13 +217,23 @@ def exclusion_cites(key, cites, quote_ok):
     return out
 
 
+def verdicts(items, verify_dir):
+    """The verdicts in <verify_dir>/v-<task>.json, with each id, counted within its task, mapped to an index of items."""
+    out = []
+    for f in sorted(glob.glob(f"{verify_dir}/v-*.json")):
+        mine = [i for i, c in enumerate(items) if c["task"] == os.path.basename(f)[2:-5]]
+        out += [dict(v, id=mine[v["id"]]) for v in json.load(open(f))
+                if type(v.get("id")) is int and 0 <= v["id"] < len(mine)]
+    return out
+
+
 def missing_verdicts(items, verdicts):
     return sorted(set(range(len(items))) - {v["id"] for v in verdicts})
 
 
 def accepted(items, verdicts, quote_ok_for):
     """Claims every verdict accepted, with the exclusion stated for `excluded` claims. An item without a verdict is rejected."""
-    ok = {v["id"] for v in verdicts} - {v["id"] for v in verdicts if v["ok"] is not True}
+    ok = {v["id"] for v in verdicts} - {v["id"] for v in verdicts if v.get("ok") is not True}
     decoys_ok = [i for i in ok if items[i].get("decoy")]
     if decoys_ok:
         raise SystemExit(f"The verifier accepted decoys {decoys_ok}. Use a stronger verifier.")
@@ -227,11 +250,11 @@ def accepted(items, verdicts, quote_ok_for):
 
 def accept(work, verify_dir, out):
     items = json.load(open(f"{verify_dir}/items.json"))
-    verdicts = [v for f in sorted(glob.glob(f"{verify_dir}/v-*.json")) for v in json.load(open(f))]
-    acc = accepted(items, verdicts, lambda plan: Doc.of_plan(work, plan).quote_ok)
-    json.dump([{k: v for k, v in c.items() if k != "decoy"} for c in acc], open(out, "w"), indent=1, ensure_ascii=False)
+    found = verdicts(items, verify_dir)
+    acc = accepted(items, found, lambda plan: Doc.of_plan(work, plan).quote_ok)
+    json.dump([{k: v for k, v in c.items() if k not in ("decoy", "task")} for c in acc], open(out, "w"), indent=1, ensure_ascii=False)
     print(len(acc), "of", sum(1 for c in items if not c.get("decoy")), "claims accepted;",
-          sum(1 for c in items if c.get("decoy")), "decoys rejected;", len(missing_verdicts(items, verdicts)), "items without a verdict")
+          sum(1 for c in items if c.get("decoy")), "decoys rejected;", len(missing_verdicts(items, found)), "items without a verdict")
 
 
 def citation_rows(acc, url_of):

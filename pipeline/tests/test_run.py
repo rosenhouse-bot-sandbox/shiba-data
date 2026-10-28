@@ -1,4 +1,5 @@
 import contextlib, csv, io, json, os, pathlib, sys, tempfile, unittest
+from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import layers
@@ -36,6 +37,27 @@ class AnswersTest(unittest.TestCase):
                 run.Answers(pathlib.Path(tmp), None)(tmp, run.READER)
         self.assertIn(f"{tmp}/P-1.md", out.getvalue())
         self.assertIn("1 of 1 tasks", str(stop.exception))
+
+
+class StepsTest(unittest.TestCase):
+    def calls(self, step, name):
+        log = []
+        module = mock.Mock(**{f"{f}.side_effect": (lambda f: lambda *a: log.append(f))(f)
+                              for f in ("bundle", "claims", "verify", "accept", "publish")})
+        with tempfile.TemporaryDirectory() as work, mock.patch.dict(sys.modules, {name: module}):
+            step("texts", work, lambda d, model: log.append((os.path.relpath(d, work), model)))
+        return log
+
+    def test_blanks_reads_with_the_reader_and_verifies_twice(self):
+        self.assertEqual(self.calls(run.blanks_step, "blanks"), [
+            "bundle", ("blanks/read", run.READER), "claims", "verify", ("blanks/check", run.VERIFIER), "accept",
+            "verify", ("blanks/recheck", run.SECOND_VERIFIER), "accept", "publish"])
+
+    def test_filled_answers_one_retry_round_before_verifying_twice(self):
+        self.assertEqual(self.calls(run.filled_step, "filled"), [
+            "bundle", ("filled/read", run.READER), "claims", ("filled/read", run.READER), "claims",
+            "verify", ("filled/check", run.VERIFIER), "accept", "verify", ("filled/recheck", run.SECOND_VERIFIER), "accept",
+            "publish"])
 
 
 if __name__ == "__main__":

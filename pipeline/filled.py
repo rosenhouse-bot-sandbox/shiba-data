@@ -84,15 +84,6 @@ def problem(key, value, cites, quote_ok):
     return None
 
 
-def citations(answer):
-    """The answer's [{page, quote}], or None if one lacks a page number or a quote."""
-    try:
-        cites = [{"page": int(c["page"]), "quote": c["quote"]} for c in answer.get("citations") or []]
-    except (KeyError, TypeError, ValueError):
-        return None
-    return cites if all(isinstance(c["quote"], str) for c in cites) else None
-
-
 def gate(plan, values, answers, quote_ok):
     """Claims from `cite` answers whose quotes pass, and {key: (citations, problem)} for the rest. Skips cells answered twice."""
     times = collections.Counter(r.get("key") for r in answers)
@@ -101,7 +92,7 @@ def gate(plan, values, answers, quote_ok):
         key = r.get("key")
         if r.get("result") != "cite" or key not in values or times[key] > 1:
             continue
-        cites = citations(r)
+        cites = blanks.citations(r)
         if cites is None:
             failed[key] = (r.get("citations"), "each citation needs one page number and a quote")
             continue
@@ -121,7 +112,7 @@ def load(path):
 def answers(answers_dir, plan):
     """The plan's answers, with retry answers in place of first answers."""
     retry_path = f"{answers_dir}/{plan}.retry.json"
-    retry = {r["key"]: r for r in load(retry_path)} if os.path.exists(retry_path) else {}
+    retry = {r.get("key"): r for r in load(retry_path)} if os.path.exists(retry_path) else {}
     return [retry.get(r.get("key"), r) for r in load(f"{answers_dir}/{plan}.json")]
 
 
@@ -194,11 +185,11 @@ def verify(work, claims_path, out_dir):
         rnd.shuffle(mine)
         layout = Doc.of_plan(work, plan).pages("layout")
         parts = [fill("vfilled_prompt.md", PLAN_NAME=names[plan], PLAN_ID=plan, YEAR=str(years.config(DATA)["year"]))]
-        for c in mine:
-            shown = {"id": len(items), "field": c["key"], "meaning": FIELDS[c["key"]][0], "value": c["value"],
+        for n, c in enumerate(mine):
+            shown = {"id": n, "field": c["key"], "meaning": FIELDS[c["key"]][0], "value": c["value"],
                      "citations": c["citations"]}
             parts.append(json.dumps(shown, ensure_ascii=False))
-            items.append(c)
+            items.append(dict(c, task=plan))
         parts.append("## EOC pages")
         parts += [f"=====PAGE {p}=====\n{layout[p].rstrip()}" for p in sorted({q["page"] for c in mine for q in c["citations"]})]
         open(f"{out_dir}/v-{plan}.md", "w").write("\n\n".join(parts) + "\n")
@@ -208,16 +199,16 @@ def verify(work, claims_path, out_dir):
 
 def accepted(items, verdicts):
     """Claims every verdict accepted. An item without a verdict is rejected."""
-    ok = {v["id"] for v in verdicts} - {v["id"] for v in verdicts if v["ok"] is not True}
+    ok = {v["id"] for v in verdicts} - {v["id"] for v in verdicts if v.get("ok") is not True}
     decoys_ok = sorted(i for i in ok if items[i]["decoy"])
     if decoys_ok:
         raise SystemExit(f"The verifier accepted decoys {decoys_ok}. Use a stronger verifier.")
-    return [{k: v for k, v in items[i].items() if k != "decoy"} for i in sorted(ok)]
+    return [{k: v for k, v in items[i].items() if k not in ("decoy", "task")} for i in sorted(ok)]
 
 
 def accept(verify_dir, out):
     items = json.load(open(f"{verify_dir}/items.json"))
-    verdicts = [v for f in sorted(glob.glob(f"{verify_dir}/v-*.json")) for v in json.load(open(f))]
+    verdicts = blanks.verdicts(items, verify_dir)
     acc = accepted(items, verdicts)
     json.dump(acc, open(out, "w"), indent=1, ensure_ascii=False)
     print(len(acc), "of", sum(not c["decoy"] for c in items), "claims accepted;", sum(c["decoy"] for c in items), "decoys rejected;",

@@ -253,7 +253,8 @@ class VerifyTest(unittest.TestCase):
             self.assertEqual([c["decoy"] for c in items[mine[0]:mine[-1] + 1]].count(True), 2)
             orders.append([items[i]["decoy"] for i in mine])
             shown = [json.loads(line) for line in task.splitlines() if line.startswith("{")]
-            self.assertEqual([s["id"] for s in shown], mine)
+            self.assertEqual([s["id"] for s in shown], list(range(len(mine))))
+            self.assertEqual({items[i]["task"] for i in mine}, {plan})
             self.assertEqual([{k: s[k] for k in ("value", "citations")} for s in shown],
                              [{k: items[i][k] for k in ("value", "citations")} for i in mine])
             self.assertTrue(all(set(s) == {"id", "field", "meaning", "value", "citations"} for s in shown))
@@ -281,9 +282,9 @@ class AcceptedTest(unittest.TestCase):
 
     def test_accept_reads_every_verifier_answer(self):
         with tempfile.TemporaryDirectory() as d:
-            pathlib.Path(d, "items.json").write_text(json.dumps([dict(self.claim, decoy=False)] * 2))
+            pathlib.Path(d, "items.json").write_text(json.dumps([dict(self.claim, decoy=False, task=t) for t in "AB"]))
             pathlib.Path(d, "v-A.json").write_text(json.dumps([{"id": 0, "ok": True}]))
-            pathlib.Path(d, "v-B.json").write_text(json.dumps([{"id": 1, "ok": True}]))
+            pathlib.Path(d, "v-B.json").write_text(json.dumps([{"id": 0, "ok": True}]))
             quiet(filled.accept, d, f"{d}/accepted.json")
             self.assertEqual(filled.load(f"{d}/accepted.json"), [self.claim, self.claim])
 

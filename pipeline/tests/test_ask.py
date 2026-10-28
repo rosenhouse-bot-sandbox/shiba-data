@@ -53,7 +53,7 @@ class AnswerTest(unittest.TestCase):
         self.assertEqual(self.answer(reply='Here:\n```json\n[{"id": 0}]\n```')[0], [])
         self.assertEqual(json.loads(self.task.with_suffix(".json").read_text()), [{"id": 0}])
         self.task.write_text("Another task.")
-        for reply in ("Sorry, no.", '{"id": 0}'):
+        for reply in ("Sorry, no.", '{"id": 0}', '[{"id": 0}, 1]'):
             missing, _ = self.answer(reply=reply)
             self.assertEqual(missing, [self.task])
         self.assertEqual(len(list(self.saved.iterdir())), 1)

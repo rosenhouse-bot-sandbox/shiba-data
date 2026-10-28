@@ -77,6 +77,10 @@ class GateClaimsTest(unittest.TestCase):
             {"key": "main.V_massage", "result": "medicare_only", "citations": [{"page": 5, "quote": "good"}]},
             {"key": "main.X_transportation", "result": "unclear", "citations": [{"page": 5, "quote": "good"}]},
             {"key": "main.T_chiropractic", "result": "medicare_only", "citations": []},
+            {"key": "main.U_naturopath", "result": "excluded", "citations": [{"page": "p5", "quote": "good"}]},
+            {"key": "main.U_naturopath", "result": "excluded", "citations": [{"page": 5}]},
+            {"key": "main.Nope", "result": "excluded", "citations": [{"page": 5, "quote": "good"}]},
+            {"result": "excluded", "citations": [{"page": 5, "quote": "good"}]},
         ]
         got = blanks.gate_claims(PLAN, answers, lambda page, quote: quote == "good")
         self.assertEqual(got, [{"plan": PLAN, "key": "main.U_naturopath", "claim": "excluded",
@@ -105,12 +109,20 @@ class DecoysTest(unittest.TestCase):
 
 
 class VerifierItemsTest(unittest.TestCase):
-    def test_mixes_decoys_among_claims(self):
-        found = [{"n": i} for i in range(20)]
-        planted = [{"n": i, "decoy": True} for i in range(5)]
+    def test_groups_items_by_plan_and_mixes_decoys_among_claims(self):
+        found = [{"n": i, "plan": "B" if i % 2 else "A"} for i in range(20)]
+        planted = [{"n": i, "plan": "A", "decoy": True} for i in range(5)]
         items = blanks.verifier_items(found, planted)
-        self.assertCountEqual(items, found + planted)
-        self.assertNotEqual(items[-5:], planted)
+        self.assertCountEqual(items, [dict(c, task=c["plan"]) for c in found + planted])
+        self.assertEqual([c["task"] for c in items], ["A"] * 15 + ["B"] * 10)
+        self.assertNotEqual([c.get("decoy", False) for c in items[:15]], [False] * 10 + [True] * 5)
+
+    def test_verdicts_count_ids_within_each_task_and_drop_bad_ones(self):
+        items = [{"task": "A"}, {"task": "B"}, {"task": "A"}]
+        with tempfile.TemporaryDirectory() as d:
+            pathlib.Path(d, "v-A.json").write_text(json.dumps([{"id": 1, "ok": True}, {"id": 2, "ok": True}, {"ok": True}]))
+            pathlib.Path(d, "v-B.json").write_text(json.dumps([{"id": 0, "ok": False}, {"id": "0", "ok": True}]))
+            self.assertEqual(blanks.verdicts(items, d), [{"id": 2, "ok": True}, {"id": 1, "ok": False}])
 
     def test_accepted_rejects_an_item_without_a_verdict(self):
         other = dict(DecoysTest.claim, plan="P-2")

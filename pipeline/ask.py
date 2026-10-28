@@ -14,13 +14,21 @@ def key(model, text):
 
 
 def array(reply):
-    """The reply's JSON array, or None. Takes the last fenced block if there is one."""
+    """The reply's JSON array of objects, or None. Takes the last fenced block if there is one."""
     fenced = re.findall(r"```(?:json)?\n(.*?)```", reply, re.S)
     try:
         found = json.loads(fenced[-1] if fenced else reply)
     except json.JSONDecodeError:
         return None
-    return found if isinstance(found, list) else None
+    return found if isinstance(found, list) and all(isinstance(x, dict) for x in found) else None
+
+
+def write(path, value):
+    """Writes JSON whole or not at all, so a killed run leaves no truncated file."""
+    with open(path + ".tmp", "w") as f:
+        json.dump(value, f, indent=1, ensure_ascii=False)
+        f.write("\n")
+    os.replace(path + ".tmp", path)
 
 
 def answer(tasks, model, saved, asker):
@@ -39,13 +47,10 @@ def answer(tasks, model, saved, asker):
             if array(reply) is None:
                 print(f"{task}: {model} did not reply with a JSON array")
                 return task
-            with open(path, "w") as f:
-                json.dump({"model": model, "task": os.path.basename(task), "reply": reply}, f, indent=1, ensure_ascii=False)
-                f.write("\n")
+            write(path, {"model": model, "task": os.path.basename(task), "reply": reply})
         else:
             return task
-        with open(os.path.splitext(task)[0] + ".json", "w") as f:
-            json.dump(array(reply), f, indent=1, ensure_ascii=False)
+        write(os.path.splitext(task)[0] + ".json", array(reply))
         return None
 
     with concurrent.futures.ThreadPoolExecutor(WORKERS) as pool:

@@ -69,7 +69,7 @@ class Answers:
         if missing:
             print("\n".join(missing))
             raise SystemExit(f"{len(missing)} of {len(tasks)} tasks in {task_dir} have no answer from {model}. "
-                             "Rerun with `api` to ask the Claude API.")
+                             + ("Rerun to ask again." if self.asker else "Rerun with `api` to ask the Claude API."))
 
 
 def fresh(path):
@@ -141,8 +141,12 @@ def main(year, work, mode=""):
         raise SystemExit("The site cannot highlight these quotes:\n" + "\n".join(f"{layers.where(c)}: {c['quote']}" for c in lost))
     if config["year"] == years.LIVE:  # blanks.py and filled.py read the live year
         answer = Answers(data, ask.api() if mode == "api" else None)
+        before = {name: len(layers.layer(data, name)) for name in (layers.BLANKS, layers.FILLED)}
         blanks_step(f"{work}/texts", work, answer)
         filled_step(f"{work}/texts", work, answer)
+        for name, was in before.items():
+            now = len(layers.layer(data, name))
+            print(f"{'::warning::' if now < was / 2 else ''}{name} has {now} rows, and had {was}.")
     subprocess.run([sys.executable, "-I", "-m", "unittest", "discover", "-s", os.path.join(HERE, "tests")], check=True)
 
 
