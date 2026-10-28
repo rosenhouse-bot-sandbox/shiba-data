@@ -59,6 +59,12 @@ class StepsTest(unittest.TestCase):
             "verify", ("filled/check", run.VERIFIER), "accept", "verify", ("filled/recheck", run.SECOND_VERIFIER), "accept",
             "publish"])
 
+    def test_filled_can_bundle_every_filled_cell(self):
+        module = mock.Mock()
+        with tempfile.TemporaryDirectory() as work, mock.patch.dict(sys.modules, {"filled": module}):
+            run.filled_step("texts", work, lambda d, model: None, every=True)
+        self.assertEqual(module.bundle.call_args.args[2], "every")
+
 
 if __name__ == "__main__":
     unittest.main()

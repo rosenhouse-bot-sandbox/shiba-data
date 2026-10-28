@@ -1,5 +1,6 @@
 """Each plan year's data lives in data/<year>, with its sources listed in config.json."""
 import json
+import os
 import pathlib
 
 REPO = pathlib.Path(__file__).resolve().parents[1]
@@ -7,7 +8,9 @@ LIVE = 2027  # The year the site shows.
 
 
 def data_dir(year=LIVE):
-    return REPO / "data" / str(year)
+    """SHIBA_DATA names another data root, such as rebuild.py's copy."""
+    root = os.environ.get("SHIBA_DATA")
+    return (pathlib.Path(root) if root else REPO / "data") / str(year)
 
 
 def config(data):
