@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H3805-040-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":false,\"reason\":\"The massage therapy line sits in the chiropractic list of services excluded from Medicare coverage; it is not a plan statement that massage is not covered as a benefit.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Only Medicare-covered acupuncture for chronic low back pain appears, and no passage shows any routine acupuncture benefit.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"The exclusions table lists naturopath services as 'Not covered under any condition'.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"Chiropractic is covered only as Medicare-covered manual manipulation of the spine for subluxation, and no passage shows a routine chiropractic benefit.\"},\n{\"id\":4,\"ok\":false,\"reason\":\"The quote comes from the transplant travel and lodging reimbursement list of non-eligible items, which is not a statement that the plan lacks non-emergency transportation.\"},\n{\"id\":5,\"ok\":false,\"reason\":\"The quote covers only worldwide emergency care, but this field also covers OTC, and the plan has a $40 monthly OTC credit.\"}\n]"
+}

@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H5439-019-0.md",
+ "reply": "```json\n[\n  {\"id\": 0, \"ok\": true, \"reason\": \"Page 60 says the plan covers only manual manipulation of the spine for subluxation, and page 125 lists routine chiropractic care with the same manipulation as the only coverage; no passage shows a routine chiropractic benefit or allowance.\"},\n  {\"id\": 1, \"ok\": true, \"reason\": \"Pages 54-55 show only Medicare-covered acupuncture for chronic low back pain (12 visits, up to 20 per year), and page 123 says acupuncture is available only for chronic low back pain; no routine acupuncture benefit appears.\"}\n]\n```"
+}

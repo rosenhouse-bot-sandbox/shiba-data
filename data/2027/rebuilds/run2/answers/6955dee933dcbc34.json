@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H5439-019-0.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"The chiropractic benefit covers only manual manipulation of the spine for subluxation at Medicare-covered cost-sharing, and the exclusions table lists routine chiropractic care with only that manipulation covered; no supplemental chiropractic benefit appears.\"},{\"id\":1,\"ok\":true,\"reason\":\"Acupuncture is described only as the Medicare chronic low back pain benefit (12 visits in 90 days, up to 20 per year), and the exclusions table limits it to chronic low back pain; no routine acupuncture benefit appears.\"}]"
+}

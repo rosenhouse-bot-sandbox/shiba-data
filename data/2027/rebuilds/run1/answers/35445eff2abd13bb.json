@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2406-042-0.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"The exclusions table lists 'Naturopath services' as 'Not covered under any condition', and no passage shows any routine naturopathic coverage.\"},{\"id\":1,\"ok\":true,\"reason\":\"Acupuncture is covered only for chronic low back pain under Medicare rules, and the exclusions table lists only 'Acupuncture (Medicare-covered)'; no passage shows routine acupuncture.\"},{\"id\":2,\"ok\":false,\"reason\":\"The quotes are Part D drug exclusions, not an OTC items allowance, and the passages never say the plan lacks an OTC allowance.\"},{\"id\":3,\"ok\":false,\"reason\":\"The quote is a list of items a fitness reimbursement does not pay for, not a statement that the plan lacks massage coverage; the chiropractic exclusion also concerns only Medicare chiropractic.\"},{\"id\":4,\"ok\":true,\"reason\":\"The chiropractic benefit is described only as Medicare-covered manual manipulation of the spine, with other services excluded, and no passage shows routine chiropractic coverage.\"}]"
+}

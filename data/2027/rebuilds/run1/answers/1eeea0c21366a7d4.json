@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H3817-008-1.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"Page 76 lists therapeutic massage as 'Not covered under any condition', and no passage shows routine massage coverage.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Page 75 lists naturopath services as 'Not covered under any condition', and nothing contradicts it.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Acupuncture appears only as the Medicare chronic low back pain benefit (pages 38 and 73), with no routine acupuncture benefit shown.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"Chiropractic is limited to manual manipulation of the spine for subluxation (pages 41 and 75), with no routine chiropractic benefit shown.\"},\n{\"id\":4,\"ok\":false,\"reason\":\"The cited page 75 quote does not appear in the provided passages, and it concerns ambulance and transport exclusions rather than routine rides, so it cannot be verified as showing the plan lacks the benefit.\"}\n]"
+}

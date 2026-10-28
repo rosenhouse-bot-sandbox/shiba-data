@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H5439-019-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The benefits chart lists only Medicare-covered acupuncture for chronic low back pain, and the exclusions chart limits acupuncture to that condition, with no supplemental acupuncture shown.\"},\n {\"id\": 1, \"ok\": true, \"reason\": \"The chart covers only manual manipulation of the spine for subluxation, and the exclusions chart lists routine chiropractic care as covered only for that manipulation.\"}]\n```"
+}

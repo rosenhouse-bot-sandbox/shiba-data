@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H2923-019-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The benefits chart says the plan covers only manual manipulation of the spine (Medicare-covered visits), the exclusions table lists routine chiropractic care as excluded apart from that, and no passage shows any supplemental chiropractic benefit.\"}]\n```"
+}

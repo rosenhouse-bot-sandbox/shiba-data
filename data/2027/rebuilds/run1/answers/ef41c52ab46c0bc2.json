@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H6815-038-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":false,\"reason\":\"Page 54 shows the plan covers 24 supplemental (non-Medicare) acupuncture visits at $0, so it is not Medicare-only.\"},\n{\"id\":1,\"ok\":false,\"reason\":\"The quote is the Part D rule excluding non-prescription drugs, which is not an OTC allowance exclusion, and no passage shows the plan lacks an OTC benefit.\"}\n]"
+}

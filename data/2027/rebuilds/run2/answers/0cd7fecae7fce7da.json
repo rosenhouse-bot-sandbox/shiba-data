@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H7006-021-0.md",
+ "reply": "[{\"id\": 0, \"ok\": false, \"reason\": \"The quote is from an allowance's list of items it does not pay for, which is not a statement that the plan excludes massage therapy.\"}]"
+}

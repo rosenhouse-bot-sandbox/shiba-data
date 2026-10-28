@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H1036-317-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The EOC covers only manual manipulation of the spine to correct a subluxation, states other chiropractor services are not covered, and lists routine chiropractic care as an exclusion except manual manipulation, with no supplemental chiropractic benefit shown.\"}]\n```"
+}

@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H1036-317-0.md",
+ "reply": "The page 53 benefit table says the plan covers only manual manipulation of the spine for a vertebral subluxation and that other chiropractor services are not covered. The page 90 exclusions row, \"Routine chiropractic care: Manual manipulation of the spine to correct a subluxation is covered\", agrees. No passage shows a routine chiropractic benefit, an allowance, or an optional package that names chiropractic. The quotes are about chiropractic, and both support the claim that the plan covers only the Medicare benefit.\n\n```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The benefit table says only spinal manipulation for subluxation is covered and other chiropractor services are not, the exclusions row agrees, and no passage shows a routine chiropractic benefit.\"}]\n```"
+}

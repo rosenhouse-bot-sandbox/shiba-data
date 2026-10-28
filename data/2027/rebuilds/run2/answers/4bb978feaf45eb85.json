@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H9003-006-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The EOC says dental benefits come only with the Advantage Plus optional package bought for an extra premium; outside it there is only Medicare dental and an exclusion of routine dental.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"The $1,500 dental maximum sits inside the Advantage Plus optional table, and no passage shows routine dental in the base plan, so dental is optional-only.\"}]\n```"
+}

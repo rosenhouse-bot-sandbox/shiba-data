@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H5216-048-0.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 51 says only manual manipulation of the spine is covered and other chiropractor services are not; page 102 confirms routine chiropractic care is limited to manual manipulation; no passage shows supplemental chiropractic.\"},{\"id\":1,\"ok\":false,\"reason\":\"The quote is about Part D drug exclusions (non-prescription drugs), not an OTC items allowance, so it does not show the plan lacks the benefit.\"},{\"id\":2,\"ok\":true,\"reason\":\"The exclusions table states naturopath services are not covered under any condition, and no passage shows coverage.\"}]"
+}

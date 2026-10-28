@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2406-042-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"The EOC lists only Medicare-covered manual manipulation of the spine for chiropractic, with a copay, and no passage shows routine chiropractic.\"},\n{\"id\":1,\"ok\":false,\"reason\":\"The quote is only about worldwide emergency care, and this combined field also covers OTC and alternative care, which the quote does not address.\"},\n{\"id\":2,\"ok\":false,\"reason\":\"Page 150 is a fitness reimbursement's list of non-reimbursable items and page 56 is a Medicare chiropractic exclusion, so neither says the plan lacks massage.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"The EOC says naturopath services are 'Not covered under any condition'.\"},\n{\"id\":4,\"ok\":true,\"reason\":\"Acupuncture appears only as the Medicare-covered chronic low back pain benefit, and no routine acupuncture passage appears.\"}\n]"
+}

@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H9003-009-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"Routine dental (preventive and comprehensive) is offered only in the optional Advantage Plus package, which costs an extra premium; the base plan lists only Medicare-covered dental.\"},\n{\"id\":1,\"ok\":false,\"reason\":\"The quote is the Part D rule excluding non-prescription drugs, which is not about an OTC items allowance, and no passage states the plan lacks that benefit.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Routine dental is available only through the optional Advantage Plus package for an additional premium; the base benefit chart shows only Medicare-covered dental, so the blank is correct.\"}\n]"
+}

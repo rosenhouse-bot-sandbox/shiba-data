@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H2406-070-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The EOC lists acupuncture only as the Medicare-covered chronic low back pain benefit, and no passage shows routine acupuncture coverage.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"The exclusions chart states naturopath services are not covered under any condition.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"Pages 59 and 104-108 show routine dental (exams, cleanings, X-rays) included with the plan at $0, so dental is not optional-only.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Chiropractic is covered only as Medicare manual manipulation of the spine for subluxation, with other services excluded and no routine chiropractic benefit shown.\"}]\n```"
+}

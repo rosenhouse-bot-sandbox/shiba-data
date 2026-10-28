@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2056-018-0.md",
+ "reply": "```json\n[\n{\"id\":0,\"ok\":true,\"reason\":\"Acupuncture is shown only as the Medicare-covered chronic low back pain benefit, and page 74 says it is covered only for that condition; no passage shows routine acupuncture.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"The EOC lists naturopath services as 'Not covered under any condition,' and no passage shows any coverage.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"The EOC lists therapeutic massage as 'Not covered under any condition,' and no passage shows any coverage.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"The EOC says chiropractic covers only Medicare manual manipulation of the spine, and routine chiropractic care and other services are not covered.\"}\n]\n```"
+}

@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2056-003-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":false,\"reason\":\"The quote is a Part D exclusion of non-prescription drugs, which is not an OTC items allowance, and no passage says the plan lacks an OTC benefit.\"},\n{\"id\":1,\"ok\":false,\"reason\":\"The field bundles acupuncture, chiropractic, OTC and worldwide emergency; the naturopath exclusion covers only one part, and the plan does cover worldwide ER.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"The chiropractic benefit covers only manual manipulation of the spine for subluxation (Medicare-covered) and no routine chiropractic is shown.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"The EOC lists therapeutic massage as not covered under any condition, and no passage shows massage coverage.\"},\n{\"id\":4,\"ok\":true,\"reason\":\"The EOC lists naturopath services as not covered under any condition.\"},\n{\"id\":5,\"ok\":true,\"reason\":\"Acupuncture is covered only for chronic low back pain as the Medicare benefit, with no routine acupuncture shown.\"}\n]"
+}

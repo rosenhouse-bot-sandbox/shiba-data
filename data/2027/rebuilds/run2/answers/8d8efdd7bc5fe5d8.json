@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H5216-427-2.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The chiropractic benefit row covers only manual manipulation of the spine for subluxation and says other chiropractor services are not covered, and no passage shows routine chiropractic coverage.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"The exclusions chart lists naturopath services as not covered under any condition, and no passage shows any naturopathic coverage.\"}]\n```"
+}

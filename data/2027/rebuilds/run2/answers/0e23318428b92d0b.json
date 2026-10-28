@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H1372-003-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":false,\"reason\":\"The quoted page 41 text is about emergency services, which is not shown in the passages. The EOC covers OTC items through the Healthy Living Allowance, plus supplemental acupuncture and chiropractic, so the claim that the plan lacks these benefits is wrong.\"},\n{\"id\":1,\"ok\":false,\"reason\":\"The page 118 quote is about Part D drug exclusions, not an OTC allowance. The EOC shows OTC items covered through the $65 monthly Healthy Living Allowance.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"The exclusions table on page 104 says naturopath services are 'Not covered under any condition', and no passage shows naturopathic coverage.\"}\n]"
+}

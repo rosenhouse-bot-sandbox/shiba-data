@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H1372-003-0.md",
+ "reply": "```json\n[{\"key\": \"dvha.E_optional_packages\", \"result\": \"not_mentioned\", \"citations\": [], \"reason\": \"The passages cover premiums, LIS, and late-enrollment penalties, and none describe an optional supplemental package bought for an extra premium.\"},\n{\"key\": \"main.AA_opt_packages\", \"result\": \"not_mentioned\", \"citations\": [], \"reason\": \"The only reference to optional coverage is generic definition wording with no package or extra premium described.\"},\n{\"key\": \"main.U_naturopath\", \"result\": \"excluded\", \"citations\": [{\"page\": 104, \"quote\": \"Naturopath services (uses natural or alternative treatments)\"}], \"reason\": \"The page 104 exclusions table lists naturopath services as not covered under any condition.\"},\n{\"key\": \"main.V_massage\", \"result\": \"not_mentioned\", \"citations\": [], \"reason\": \"No passage mentions massage therapy.\"},\n{\"key\": \"main.Z_part_b_reduction\", \"result\": \"not_mentioned\", \"citations\": [], \"reason\": \"No passage mentions a Part B premium reduction or giveback.\"}]\n```"
+}

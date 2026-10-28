@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H5439-015-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The EOC covers acupuncture only for Medicare chronic low back pain, the exclusions table limits it to that, and no passage shows routine acupuncture.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"The EOC says it covers only manual manipulation of the spine for subluxation, the exclusions table lists routine chiropractic care, and no passage shows a supplemental benefit.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"The exclusions table lists naturopath services as not covered under any condition, and no passage shows coverage.\"}]\n```"
+}

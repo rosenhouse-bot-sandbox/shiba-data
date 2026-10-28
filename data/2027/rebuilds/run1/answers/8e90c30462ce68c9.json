@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H7199-002-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":false,\"reason\":\"The plan covers routine acupuncture through the $2,250 Dental & Alternative Therapy Allowance, which names acupuncture, so it is not Medicare-only.\"},\n{\"id\":1,\"ok\":false,\"reason\":\"The Dental & Alternative Therapy Allowance explicitly covers naturopath services, and the page 140 quote says it may be used for them, so the plan does cover the benefit.\"},\n{\"id\":2,\"ok\":false,\"reason\":\"The quote is from the allowance's list of items it does not pay for, which is not a statement that the plan lacks an OTC benefit; the passages are inconclusive on whether an OTC allowance exists.\"},\n{\"id\":3,\"ok\":false,\"reason\":\"The plan covers 12 routine chiropractic visits per year for a $15 copay beyond Medicare coverage, so it is not Medicare-only.\"}\n]"
+}
