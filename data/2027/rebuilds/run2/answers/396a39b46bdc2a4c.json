@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2406-042-0.retry.md",
+ "reply": "```json\n[{\"key\": \"main.Q_hearing\", \"result\": \"cite\", \"citations\": [{\"page\": 63, \"quote\": \"Hearing services - routine hearing exam\"}, {\"page\": 64, \"quote\": \"We cover 1 in or out-o -network hearing exam every year.\"}]}]\n```"
+}

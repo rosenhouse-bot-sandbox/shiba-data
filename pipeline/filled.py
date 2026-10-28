@@ -238,10 +238,10 @@ def citation_rows(acc, url_of):
     return rows
 
 
-def publish(accepted_path, out=None, data=DATA):
+def publish(accepted_path, out=None, data=DATA, every=False):
     with open(accepted_path) as f:
         acc = json.load(f)
-    current = targets(site_data(pathlib.Path(data)), every=out is not None)
+    current = targets(site_data(pathlib.Path(data)), every=every or out is not None)
     stale = [(c["plan"], c["key"]) for c in acc if current.get(c["plan"], {}).get(c["key"]) != c["value"]]
     if stale:
         raise SystemExit(f"Changed, or already cited by an EOC: {stale}")

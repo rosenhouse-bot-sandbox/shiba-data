@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H6815-038-0.retry.md",
+ "reply": "```json\n[{\"key\": \"main.R_dental\", \"result\": \"cite\", \"citations\": [{\"page\": 61, \"quote\": \"Diagnostic and Preventive Dental Care\"}, {\"page\": 63, \"quote\": \"Comprehensive Dental Care\"}]}]\n```"
+}

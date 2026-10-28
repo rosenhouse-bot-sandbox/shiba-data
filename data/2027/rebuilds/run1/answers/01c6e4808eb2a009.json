@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H9003-009-0.retry.md",
+ "reply": "```json\n[{\"key\": \"main.AA_opt_packages\", \"result\": \"cite\", \"citations\": [{\"page\": 105, \"quote\": \"You can enroll in Advantage Plus by selecting it when you complete your Senior Advantage\"}, {\"page\": 106, \"quote\": \"Additional monthly premium $54\"}]}]\n```"
+}

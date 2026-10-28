@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2001-045-0.retry.md",
+ "reply": "```json\n[{\"key\": \"dvha.F_dental\", \"result\": \"cite\", \"citations\": [{\"page\": 118, \"quote\": \"$0 copay on all covered dental services up to the plan’s annual dental maximum amount.\"}, {\"page\": 118, \"quote\": \"$0 cost-share or network dental care, speci ied services only.\"}, {\"page\": 118, \"quote\": \"Annual dental maximum: $2,000\"}]},\n{\"key\": \"dvha.G_vision\", \"result\": \"skip\"},\n{\"key\": \"main.Q_hearing\", \"result\": \"cite\", \"citations\": [{\"page\": 71, \"quote\": \"Hearing services - routine hearing exam We cover 1 in or out-o -network hearing exam every year.\"}]}]\n```"
+}

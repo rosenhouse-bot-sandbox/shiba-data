@@ -331,6 +331,17 @@ class PublishTest(unittest.TestCase):
         with self.assertRaises(SystemExit):
             filled.publish(self.accepted(self.value + "0"), data=self.data)
 
+    def test_publishes_every_cell_even_those_an_eoc_cites(self):
+        site = filled.build.site_data(self.data)
+        uncited = filled.targets(site)
+        self.plan, self.key, self.value = next((p, k, v) for p, c in filled.targets(site, every=True).items()
+                                               for k, v in c.items() if k not in uncited.get(p, {}) and filled.money(v))
+        with self.assertRaises(SystemExit):
+            filled.publish(self.accepted(self.value), data=self.data)
+        filled.publish(self.accepted(self.value), data=self.data, every=True)
+        rows = csv.DictReader(open(self.data / "machine/filled.csv"))
+        self.assertIn((self.plan, self.key, self.value), {(r["plan_id"], f'{r["sheet"]}.{r["column"]}', r["value"]) for r in rows})
+
     def test_writes_rows_to_another_file_even_for_cells_an_eoc_cites(self):
         out = self.data / "machine.csv"
         filled.publish(self.accepted(self.value), data=self.data)

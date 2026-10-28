@@ -42,7 +42,7 @@ class AnswersTest(unittest.TestCase):
 class StepsTest(unittest.TestCase):
     def calls(self, step, name):
         log = []
-        module = mock.Mock(**{f"{f}.side_effect": (lambda f: lambda *a: log.append(f))(f)
+        module = mock.Mock(**{f"{f}.side_effect": (lambda f: lambda *a, **kw: log.append((f, kw) if kw else f))(f)
                               for f in ("bundle", "claims", "verify", "accept", "publish")})
         with tempfile.TemporaryDirectory() as work, mock.patch.dict(sys.modules, {name: module}):
             step("texts", work, lambda d, model: log.append((os.path.relpath(d, work), model)))
@@ -57,13 +57,14 @@ class StepsTest(unittest.TestCase):
         self.assertEqual(self.calls(run.filled_step, "filled"), [
             "bundle", ("filled/read", run.READER), "claims", ("filled/read", run.READER), "claims",
             "verify", ("filled/check", run.VERIFIER), "accept", "verify", ("filled/recheck", run.SECOND_VERIFIER), "accept",
-            "publish"])
+            ("publish", {"every": False})])
 
-    def test_filled_can_bundle_every_filled_cell(self):
+    def test_filled_can_bundle_and_publish_every_filled_cell(self):
         module = mock.Mock()
         with tempfile.TemporaryDirectory() as work, mock.patch.dict(sys.modules, {"filled": module}):
             run.filled_step("texts", work, lambda d, model: None, every=True)
         self.assertEqual(module.bundle.call_args.args[2], "every")
+        self.assertEqual(module.publish.call_args.kwargs, {"every": True})
 
 
 if __name__ == "__main__":

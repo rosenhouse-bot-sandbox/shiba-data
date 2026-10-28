@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H7006-018-0.retry.md",
+ "reply": "```json\n[{\"key\": \"dvha.G_vision\", \"result\": \"skip\"},\n {\"key\": \"dvha.H_hearing\", \"result\": \"skip\"},\n {\"key\": \"dvha.I_alt_care_otc_travel\", \"result\": \"skip\"},\n {\"key\": \"main.C_premium\", \"result\": \"skip\"},\n {\"key\": \"main.J_outpatient_rehab\", \"result\": \"cite\", \"citations\": [{\"page\": 80, \"quote\": \"$20 copay for each Medicare-covered service. Prior Authorization may be\"}]},\n {\"key\": \"main.N_pharmacy_deductible\", \"result\": \"cite\", \"citations\": [{\"page\": 123, \"quote\": \"You will pay a yearly deductible of $400 on Tier 3, Tier 4, Tier 5 drugs.\"}, {\"page\": 123, \"quote\": \"For all other drugs, you won’t have to pay any deductible.\"}]}]\n```"
+}

@@ -107,7 +107,7 @@ def filled_step(texts, work, answer, every=False):
     filled.verify(texts, f"{work}/filled/checked.json", recheck)
     answer(recheck, SECOND_VERIFIER)
     filled.accept(recheck, f"{work}/filled/accepted.json")
-    filled.publish(f"{work}/filled/accepted.json")
+    filled.publish(f"{work}/filled/accepted.json", every=every)
 
 
 def main(year, work, mode=""):
