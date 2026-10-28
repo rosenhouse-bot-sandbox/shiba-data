@@ -21,6 +21,8 @@ XREF, BLANKS, FILLED, EDITS = "machine/eoc_citations.csv", "machine/blanks.csv",
 LAYERS = ("generated/citations.csv", XREF, BLANKS, FILLED, EDITS)
 # Model steps only cite, because a person reviews their corrections first (issue #48).
 CITE_ONLY = {XREF, BLANKS, FILLED}
+# A person strikes a machine quote that does not support its cell, so the site does not show it.
+STRUCK, STRUCK_COLUMNS = "struck.csv", ["sheet", "plan_id", "column", "quote", "note"]
 
 
 def rows(path):
@@ -42,6 +44,26 @@ def layer(data, name):
         if reader.fieldnames != columns:
             raise ValueError(f"{name} has columns {reader.fieldnames}, not {columns}")
         return [dict(r, layer=name) for r in reader]
+
+
+def strikes(data):
+    if not (data / STRUCK).exists():
+        return []
+    with open(data / STRUCK, newline="") as f:
+        reader = csv.DictReader(f)
+        if reader.fieldnames != STRUCK_COLUMNS:
+            raise ValueError(f"{STRUCK} has columns {reader.fieldnames}, not {STRUCK_COLUMNS}")
+        return list(reader)
+
+
+def strike_key(r):
+    return r["sheet"], r["plan_id"], r["column"], r["quote"]
+
+
+def stale_strikes(data):
+    """Lists strikes that match no machine row, such as after a rerun picked another quote."""
+    quoted = {strike_key(r) for name in CITE_ONLY for r in layer(data, name)}
+    return [s for s in strikes(data) if strike_key(s) not in quoted]
 
 
 def where(c):
@@ -90,6 +112,8 @@ def live(data, names=LAYERS):
                 row[c["column"]] = " | ".join(lines)
             else:
                 row[c["column"]] = c["value"]
-    cites = [c for layer_rows in reversed(by_layer) for c in layer_rows]
+    struck = {strike_key(s) for s in strikes(data)}
+    cites = [c for layer_rows in reversed(by_layer) for c in layer_rows
+             if not (c["layer"] in CITE_ONLY and strike_key(c) in struck)]
     matches = [shown(index[(c["sheet"], c["plan_id"])][c["column"]], c["line"]) == c["value"] for c in cites]
     return sheets, [c for c, ok in zip(cites, matches) if ok], [c for c, ok in zip(cites, matches) if not ok]

@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H7006-021-0.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 38 routine (non-Medicare) acupuncture row: $100 every six months on the Flex Card, shared with chiropractic and naturopathy. The card names acupuncture, so the dot applies (R11).\"},{\"id\":1,\"ok\":true,\"reason\":\"Page 43 routine chiropractic care row: $100 every six months on the Flex Card for non-Medicare-covered chiropractic, shared with acupuncture and naturopathy. The card names chiropractic, so the dot applies (R11).\"}]"
+}

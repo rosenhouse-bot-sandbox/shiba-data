@@ -1,0 +1,5 @@
+sheet,plan_id,column,quote,note
+main,H9003-001-0,R_dental,Dental coverage These services are provided when dentally necessary as determined by your dentist,Does not support the blank cell on its own.
+main,H3805-041-0,S_acupuncture,"Generally, Medicare-covered acupuncture services are not covered when provided by",Does not support the blank cell on its own.
+main,H3805-048-0,T_chiropractic,Excluded rom Medicare coverage is any,Does not support the blank cell on its own.
+main,H3817-010-0,T_chiropractic,"Other services (for example, massage therapy, office",Does not support the blank cell on its own.

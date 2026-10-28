@@ -337,6 +337,15 @@ class DocumentsTest(unittest.TestCase):
         self.assertIn("::warning::An edit's author saw $6,700, but the cell beneath it is now $6,900: "
                       "edits.csv main H3805-048-0 E_moop", out.getvalue())
 
+    def test_site_command_warns_of_a_strike_that_matches_no_machine_quote(self):
+        strike = dict(sheet="main", plan_id="H3805-048-0", column="E_moop", quote="gone", note="")
+        out = io.StringIO()
+        with (mock.patch.object(build, "site_data", return_value={"docs": {}, "year": 2027, "area": "A"}),
+              mock.patch.object(build.layers, "live", return_value=({}, [], [])),
+              mock.patch.object(build.layers, "stale_strikes", return_value=[strike]), contextlib.redirect_stdout(out)):
+            build.main("site", self.dir / "site")
+        self.assertIn("::warning::A strike matches no machine quote: main H3805-048-0 E_moop gone", out.getvalue())
+
     def test_site_command_records_build_time_and_titles_the_page(self):
         with mock.patch.object(build, "site_data", return_value={"docs": {}, "year": 2099, "area": "A & B"}):
             build.main("site", self.dir / "site")

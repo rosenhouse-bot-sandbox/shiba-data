@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2923-001-0.retry.md",
+ "reply": "```json\n[{\"key\": \"main.K_tests_labs\", \"result\": \"cite\", \"citations\": [{\"page\": 86, \"quote\": \"Home Sleep Studies: $0 copay\"}, {\"page\": 86, \"quote\": \"Specialist's office: $20 copay Freestanding location: $40 copay Outpatient hospital: $95 copay\"}, {\"page\": 87, \"quote\": \"Outpatient hospital: $0 copay\"}, {\"page\": 87, \"quote\": \"Outpatient hospital: $40 copay\"}]}]\n```"
+}

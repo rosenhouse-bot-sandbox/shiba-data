@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H5216-428-2.retry.md",
+ "reply": "```json\n[{\"key\": \"main.C_premium\", \"result\": \"cite\", \"citations\": [{\"page\": 12, \"quote\": \"Monthly plan premium* $0\"}]}]\n```"
+}

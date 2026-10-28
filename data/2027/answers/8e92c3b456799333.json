@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H1036-306-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 66 lists 'Surgery Services $395 copayment – Outpatient Hospital', and page 68's outpatient surgery row repeats it. Page 68's surgery services also list '$100 copayment – Ambulatory Surgical Center'. Both are in-network surgery amounts for this plan.\"}]\n```"
+}

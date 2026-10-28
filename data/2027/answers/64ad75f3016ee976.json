@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2056-018-0.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 47, Medicare Part B drugs row: 20% coinsurance for chemotherapy drugs and 20% for all other Part B drugs, each noted as the maximum cost-share. Antigens fall under the 20% 'all other drugs' line, so the low end is also 20%. The separate $35 insulin copay is a copay, not coinsurance, so it does not contradict a 20% coinsurance value.\"}]"
+}

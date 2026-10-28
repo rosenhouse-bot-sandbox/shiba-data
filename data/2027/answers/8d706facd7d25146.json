@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H1372-003-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"Page 86 has an OTC items row saying members may apply allowance funds to OTC health and wellness products, included in the Healthy Living Allowance. The row names the benefit, so the shared allowance counts and gets ●.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Page 63 has a Fitness benefit row saying members may apply the allowance to online fitness classes and gym membership, included in the Healthy Living Allowance. The row names fitness, so ● holds.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Page 85, outpatient hospital row: 20% coinsurance for surgery, with colonoscopy and other services listed separately. Ambulatory surgical center row: 20% coinsurance. This matches '20% | 20%'.\"}\n]"
+}

@@ -203,6 +203,8 @@ def main(command, out, release=None):
     _, kept, dropped = layers.live(DATA)
     for c in dropped:
         print(f"::warning::Dropped a citation whose value is not the live cell's: {layers.where(c)} {c['value']}")
+    for s in layers.stale_strikes(DATA):
+        print(f"::warning::A strike matches no machine quote: {s['sheet']} {s['plan_id']} {s['column']} {s['quote']}")
     for c in kept + dropped:
         if "beneath" in c:
             print(f"::warning::An edit's author saw {c['saw']}, but the cell beneath it is now {c['beneath']}: {layers.where(c)}")

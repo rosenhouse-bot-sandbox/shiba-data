@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H5216-428-2.md",
+ "reply": "```json\n[{\"key\": \"main.C_premium\", \"result\": \"cite\", \"citations\": [{\"page\": 12, \"quote\": \"$0\"}]},\n {\"key\": \"main.I_outpatient_surgery\", \"result\": \"cite\", \"citations\": [{\"page\": 71, \"quote\": \"Surgery Services $450 copayment – Outpatient Hospital\"}, {\"page\": 71, \"quote\": \"$350 copayment – Ambulatory Surgical Center\"}]},\n {\"key\": \"main.M_part_b_drugs\", \"result\": \"skip\"}]\n```"
+}

@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2406-073-0.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"The page 78 row 'Consultation, diagnosis, and treatment by a specialist' lists $60 in-network and $80 out-of-network. The header shows this is the AARP Patriot No Rx OR-MA01 (PPO) EOC. The hearing and balance exam row below is separate and is not counted in the value.\"}]"
+}

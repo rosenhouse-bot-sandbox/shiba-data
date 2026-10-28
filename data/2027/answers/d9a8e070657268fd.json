@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H3817-008-1.md",
+ "reply": "```json\n[{\"key\": \"main.M_part_b_drugs\", \"result\": \"skip\"},\n {\"key\": \"main.O_medical_deductible\", \"result\": \"skip\"}]\n```"
+}

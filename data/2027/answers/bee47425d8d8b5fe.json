@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H3805-048-0.retry.md",
+ "reply": "```json\n[{\"key\": \"dvha.H_hearing\", \"result\": \"cite\", \"citations\": [{\"page\": 61, \"quote\": \"routine hearing exam            $0 copayment\"}, {\"page\": 61, \"quote\": \"Hearing aid allowance is $700\"}, {\"page\": 61, \"quote\": \"is limited to 2 hearing aids every\"}]}]\n```"
+}

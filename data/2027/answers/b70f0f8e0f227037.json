@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2406-073-0.md",
+ "reply": "```json\n[{\"key\": \"main.G_specialist\", \"result\": \"cite\", \"citations\": [{\"page\": 78, \"quote\": \"$60 copayment or services rom a specialist or under certain circumstances, treatment by a nurse\"}, {\"page\": 78, \"quote\": \"$80 copayment or services rom a specialist or under certain circumstances, treatment by a nurse\"}]},\n{\"key\": \"main.I_outpatient_surgery\", \"result\": \"skip\"},\n{\"key\": \"main.M_part_b_drugs\", \"result\": \"cite\", \"citations\": [{\"page\": 63, \"quote\": \"$0 copayment or Medicare-covered Part B allergy antigens.\"}, {\"page\": 63, \"quote\": \"20% coinsurance or each Medicare- covered chemotherapy drug\"}]},\n{\"key\": \"main.O_medical_deductible\", \"result\": \"skip\"}]\n```"
+}

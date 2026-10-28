@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H2923-009-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 95: the outpatient hospital line (50%) is supported. The ASC row, however, lists 50% for the facility plus a separate 30% professional coinsurance, not $0. A bare '50%' for the ASC leaves out the 30% professional charge and could mislead, so there is doubt.\"}]\n```"
+}

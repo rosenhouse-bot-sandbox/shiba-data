@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H5439-010-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 88 outpatient surgery row: in-network outpatient hospital is a $500 copay for all other services (skin biopsies $0), and ASC is a $200 copay per visit.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 112: a $20 monthly Spendables card allowance names OTC items and lists the covered OTC products. This is a shared card that names the benefit, with no limit to some members.\"}]\n```"
+}

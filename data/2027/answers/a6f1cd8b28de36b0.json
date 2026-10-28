@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H3817-009-1.md",
+ "reply": "[{\"id\":0,\"ok\":false,\"reason\":\"The Part B drugs row on page 54 says 20% coinsurance, and certain drugs may be lower, but it never shows 0%. The 0% low end comes only from the page 50 home infusion drugs row, which is a different service. No quote shows a Part B drug at 0%, such as allergy shots.\"}]"
+}

@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H2406-042-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 12 'Specialist office visits' row shows a $50 copay per visit in-network and an $80 copay per visit out-of-network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 86 outpatient surgery row, in-network column: $550 for surgery at an outpatient hospital and $400 at an ambulatory surgical center. These are surgery amounts, not the $0 colonoscopy.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 63 shows a $0 in-network routine hearing exam. Page 64 shows a $700 hearing aid allowance, limited to 2 hearing aids every year. The out-of-network text ('first $700 for up to 2 hearing aids') supports a combined $700 allowance.\"},\n{\"id\": 3, \"ok\": false, \"reason\": \"The quotes are outpatient surgery costs (outpatient hospital and ambulatory surgical center), not specialist office visits. Page 12 shows the specialist copay is $50 in-network and $80 out-of-network.\"}]\n```"
+}

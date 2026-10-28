@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2923-005-0.retry.md",
+ "reply": "```json\n[{\"key\": \"main.L_xray_imaging\", \"result\": \"skip\"}]\n```"
+}

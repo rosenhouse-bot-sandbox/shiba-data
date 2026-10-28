@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H3805-048-0.md",
+ "reply": "```json\n[{\"key\": \"dvha.H_hearing\", \"result\": \"cite\", \"citations\": [{\"page\": 61, \"quote\": \"routine hearing exam            $0 copayment\"}, {\"page\": 61, \"quote\": \"Hearing aid allowance is $700\"}, {\"page\": 61, \"quote\": \"This benefit is limited to 2 hearing aids every year.\"}]},\n {\"key\": \"main.G_specialist\", \"result\": \"cite\", \"citations\": [{\"page\": 12, \"quote\": \"$55 copayment per visit.\"}]},\n {\"key\": \"main.I_outpatient_surgery\", \"result\": \"cite\", \"citations\": [{\"page\": 80, \"quote\": \"$550 copayment or Medicare-covered surgery\"}, {\"page\": 80, \"quote\": \"$500 copayment or Medicare-covered surgery\"}]},\n {\"key\": \"main.M_part_b_drugs\", \"result\": \"cite\", \"citations\": [{\"page\": 70, \"quote\": \"$0 copayment or Medicare-covered Part B allergy antigens.\"}, {\"page\": 71, \"quote\": \"20% coinsurance or all other Medicare-covered Part B drugs.\"}]},\n {\"key\": \"main.O_medical_deductible\", \"result\": \"skip\"}]\n```"
+}

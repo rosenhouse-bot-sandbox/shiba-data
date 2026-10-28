@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H1036-306-0.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 68 outpatient surgery row, In-Network: Surgery Services $395 copayment – Outpatient Hospital and $100 copayment – Ambulatory Surgical Center. Page 66 also lists Surgery Services at $395 in the outpatient hospital row. Colonoscopy and the other services billed in the same setting are left out, as the field requires.\"}]"
+}

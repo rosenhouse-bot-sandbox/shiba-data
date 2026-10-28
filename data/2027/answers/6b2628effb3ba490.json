@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H5439-019-0.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 98, outpatient surgery row, hospital outpatient, in-network: $0 for skin biopsies (excluded per the field) and $500 copay for all other services, which covers surgery. Page 99, ambulatory surgical center, in-network: $350 copay per visit. Both amounts match the value and apply to this plan. The out-of-network 20% is not required because the field defaults to in-network.\"}]"
+}

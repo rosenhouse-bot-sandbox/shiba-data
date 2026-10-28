@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2923-025-0.retry.md",
+ "reply": "```json\n[{\"key\": \"main.K_tests_labs\", \"result\": \"cite\", \"citations\": [{\"page\": 88, \"quote\": \"Diagnostic Procedures and Tests PCP's office: $0 copay Specialist's office: $20 copay Freestanding location: $40 copay Outpatient hospital: $95 copay Home Sleep Studies: $0 copay\"}, {\"page\": 89, \"quote\": \"Advanced Laboratory Services Office or freestanding location: $0 copay Dedicated testing laboratory: $0 copay Outpatient hospital: $45 copay\"}]}]\n```"
+}

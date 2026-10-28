@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2923-019-0.retry.md",
+ "reply": "```json\n[{\"key\": \"main.K_tests_labs\", \"result\": \"cite\", \"citations\": [{\"page\": 89, \"quote\": \"Home Sleep Studies: $0\"}, {\"page\": 89, \"quote\": \"Outpatient hospital: $95\"}, {\"page\": 90, \"quote\": \"Outpatient hospital: $0\"}, {\"page\": 90, \"quote\": \"Outpatient hospital: $45\"}]}]\n```"
+}
