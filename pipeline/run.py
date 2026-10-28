@@ -1,4 +1,4 @@
-"""Rebuilds data/<year>/generated from the sources in data/<year>/config.json and documents.csv,
+"""Rebuilds data/<year>/generated from the sources in data/<year>/config.json, found.csv and links.csv,
 then the live year's machine/blanks.csv and machine/filled.csv from model answers.
 
 Usage: python3 -I pipeline/run.py <year> <work_dir> [api]
@@ -126,7 +126,8 @@ def main(year, work, mode=""):
     os.makedirs(gen, exist_ok=True)
     py("universe.py", f"{work}/{config['landscape_csv']}", gen / "plans.csv", config["state"], *config["counties"])
     baseline = [years.REPO / config["baseline_manifest"]] if "baseline_manifest" in config else []
-    py("fetch_docs.py", data / "documents.csv", gen / "plans.csv", f"{work}/docs", gen / "documents_checked.csv",
+    py("find_docs.py", gen / "plans.csv", data / "found.csv", data / "links.csv", gen / "documents.csv", config["year"])
+    py("fetch_docs.py", gen / "documents.csv", gen / "plans.csv", f"{work}/docs", gen / "documents_checked.csv",
        config["year"], ",".join(config["counties"]), *baseline)
     py("cite.py", gen / "documents_checked.csv", f"{work}/docs/text", gen / "citations.csv")
     py("main_chart.py", gen / "plans.csv", f"{work}/pbp", gen / "main_chart.csv")
