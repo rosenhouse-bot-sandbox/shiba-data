@@ -13,9 +13,10 @@ flowchart TB
   end
 
   subgraph git [Git source: data/year]
-    documents[documents.csv]:::state
+    finds[found.csv, links.csv]:::state
     subgraph generated [generated/]
       plans[plans.csv]:::state
+      documents[documents.csv]:::state
       checked[documents_checked.csv]:::state
       citations[citations.csv]:::state
       sheets[main_chart.csv, dvha.csv]:::state
@@ -34,14 +35,16 @@ flowchart TB
     site[(index.html, app.js,<br>data.json, PDFs)]:::state
   end
 
-  findurls[Find document URLs]:::heavy
+  findurls[Find document URLs<br>in a browser or the Links sheet]:::heavy
+  finddocs[find_docs.py:<br>URL templates]:::det
   universe[universe.py]:::det
   fetch[fetch_docs.py:<br>download, extract text,<br>check covers]:::det
   review[Read SBs and EOCs;<br>write edits]:::heavy
   cite[cite.py: naturopathy]:::det
   gen[main_chart.py, dvha.py]:::det
 
-  carriers --> findurls --> documents
+  carriers --> findurls --> finds
+  finds & plans --> finddocs --> documents
   cms --> universe --> plans
   documents & plans --> fetch --> checked
   carriers --> fetch
@@ -69,6 +72,7 @@ flowchart TB
 | Yellow | Cheap model (Haiku) |
 | Red | Heavier model (Sonnet or Opus), or an agent with a browser |
 
+- `pipeline/find_docs.py` lists plan documents from browser finds (`found.csv`), the volunteers' Links sheet (`links.csv`), and carrier URL templates, in that order of preference.
 - `pipeline/run.py` regenerates `generated/`, `machine/blanks.csv` and `machine/filled.csv`. People and earlier Claude sessions wrote the other CSVs.
 - The Pipeline workflow runs `run.py <year> <work> api` on main and pushes the result to a new branch. Only people with write access can start it.
 - `pipeline/layers.py` applies `generated/citations.csv` and then `edits.csv` to the generated sheets. Rows in `machine/` only cite values.

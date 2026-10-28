@@ -4,7 +4,7 @@ This folder holds the 2027 Multnomah/Clackamas MA sheets, built without the volu
 They come only from the CMS Landscape and PBP Benefits files, carrier websites, and the plan documents those sites serve.
 The method follows `docs/2027-bootstrap/CLAUDE_ANALYSIS_METHODS.md` section 13.2 ("only this file and the internet").
 
-`python3 -I pipeline/run.py 2027 <work_dir>` downloads the sources named in `config.json` and `documents.csv` and regenerates `generated/`.
+`python3 -I pipeline/run.py 2027 <work_dir>` lists plan documents from `found.csv` and `links.csv`, downloads them and the sources named in `config.json`, and regenerates `generated/`.
 It then rebuilds `machine/blanks.csv` and `machine/filled.csv` from the model answers saved in `answers/`.
 
 ## Layers
@@ -37,12 +37,13 @@ An edit row also records `saw`, the value its author saw. The site build warns w
 ### Finding documents
 
 Web search did not index any 2027 plan document. The documents were found as follows.
+`found.csv` records the browser finds. `links.csv` transcribes the Links sheet from methods doc Appendix A. The documents themselves told which UHC links were SBs.
 
 | Carriers | How |
 |---|---|
 | UHC/AARP (7 plans) | Plan detail pages on aarpmedicareplans.com, rendered in headless Chromium. These pages label each link SB or EOC. They also list Platinum Dental rider PDFs. |
 | Wellcare (5), ATRIO (2) | The carrier's 2027 plan-materials page. |
-| Humana (8), Devoted (7), Kaiser (3) | The URL templates in methods doc section 5.2. |
+| Humana (8), Devoted (7), Kaiser (3) | The URL templates in `pipeline/find_docs.py`. The Links sheet has the same URLs, so `documents.csv` credits it. |
 | Aetna (2), Regence (4), AgeRight (1) | Appendix A URLs. Their sites hide the links behind scripts or show none. |
 
 Two UHC EOCs were re-issued on 2026-10-14 (`UHOR27HP0418842_001`, `AAOR27LP0418704_001`). Their dollar and percent amounts did not change.

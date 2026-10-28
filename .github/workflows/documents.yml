@@ -47,5 +47,5 @@ jobs:
       - if: inputs.tag == ''
         run: |
           tag="documents-$(date -u +%Y-%m-%d-%H%M%S)"
-          gh release create "$tag" documents.tar documents.zip --target "$GITHUB_SHA" --title "$tag" --notes "Plan documents from the carrier sites, listed in $(python3 -I pipeline/years.py)/documents.csv at ${{ github.sha }}."
+          gh release create "$tag" documents.tar documents.zip --target "$GITHUB_SHA" --title "$tag" --notes "Plan documents from the carrier sites, listed in $(python3 -I pipeline/years.py)/generated/documents.csv at ${{ github.sha }}."
           gh workflow run pages.yml --ref main
