@@ -1,7 +1,5 @@
 # Task
 
-Do not use any tools other than reading this file and writing your answer. Do not use any mcp__ tools and do not message anyone.
-
 You help Medicare counselors check a plan comparison sheet against the plan's Evidence of Coverage (EOC). A wrong citation is much worse than a missing one.
 Plan: **{PLAN_NAME}** ({PLAN_ID}), plan year {YEAR}.{NOTES}
 
@@ -23,13 +21,11 @@ Some cells show earlier quotes and why they failed that check. Fix them or skip 
 
 ## Output
 
-Write a JSON array to `{ANSWER}`, one object per cell, in order:
+Reply with only a JSON array, one object per cell, in order:
 
 ```json
 [{"key": "main.I_outpatient_surgery", "result": "cite", "citations": [{"page": 86, "quote": "$0 copay at an ambulatory surgical center"}, {"page": 86, "quote": "$835 copay at an outpatient hospital"}]},
  {"key": "main.K_tests_labs", "result": "skip"}]
 ```
-
-Then reply with one line: how many cells got each result.
 
 ## Cells

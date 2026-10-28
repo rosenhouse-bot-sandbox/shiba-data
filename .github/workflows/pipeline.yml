@@ -1,0 +1,56 @@
+name: Pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      year:
+        description: Plan year to rebuild
+        required: true
+        default: "2027"
+
+concurrency: pipeline
+
+permissions:
+  id-token: write
+  contents: write
+
+jobs:
+  run:
+    if: github.ref == 'refs/heads/main'
+    # A newer image can change pdftotext's layout text, and so every task's hash.
+    runs-on: ubuntu-24.04
+    env:
+      YEAR: ${{ inputs.year }}
+      ANTHROPIC_ORGANIZATION_ID: 3c97a8fb-8968-4ed9-aec7-f68b88683532
+      ANTHROPIC_SERVICE_ACCOUNT_ID: svac_0142UmsmTSG4RDAgtFvyHY9F
+      ANTHROPIC_FEDERATION_RULE_ID: fdrl_018f3jSg6eLJS1PxSPQQNxks
+      ANTHROPIC_WORKSPACE_ID: wrkspc_014bRyT8dH9LwG9fPmLukPT9
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: sudo apt-get update && sudo apt-get install -y poppler-utils
+      - run: pip install pypdfium2==5.13.0 anthropic==2.3.0
+      - run: npm ci
+        working-directory: pipeline
+      - run: python3 -I pipeline/run.py "$YEAR" _work api
+        timeout-minutes: 240
+      # Saved answers are worth keeping even when a later step stops the run.
+      - if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          branch="pipeline/$YEAR-$GITHUB_RUN_ID"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$branch"
+          git add "data/$YEAR"
+          git commit -m "Rebuild $YEAR in run $GITHUB_RUN_ID" || exit 0
+          git push "https://x-access-token:$GH_TOKEN@github.com/$GITHUB_REPOSITORY.git" "$branch"
+          echo "::notice::Pushed $branch. Open a pull request from it."

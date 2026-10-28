@@ -34,7 +34,7 @@ def write_layers(data):
     write(data / "generated/main_chart.csv", [dict(plan, G_specialist="$0-$40", U_naturopath="")])
     write(data / "generated/dvha.csv", [dict(plan, F_dental="Dental")])
     write(data / "generated/citations.csv", [row(("main", "H1-001-0", "U_naturopath"), "◐")])
-    write(data / "machine/eoc_citations.csv", [dict(step="filled", prompt="p", **row(SPECIALIST, "$40"))])
+    write(data / "machine/filled.csv", [dict(step="filled", prompt="p", **row(SPECIALIST, "$40"))])
     write(data / "edits.csv", [row(SPECIALIST, "$40"), row(DENTAL, "PREV $0")])
 
 

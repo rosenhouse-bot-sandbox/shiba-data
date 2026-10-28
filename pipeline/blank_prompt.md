@@ -1,7 +1,5 @@
 # Task
 
-Do not use any mcp__ tools and do not message anyone. Work only with the files and commands below, then write your answer file.
-
 You help Medicare counselors check a plan comparison sheet against the plan's Evidence of Coverage (EOC). A wrong citation is much worse than a missing one.
 Plan: **{PLAN_NAME}** ({PLAN_ID}), plan year {YEAR}.{NOTES}
 
@@ -18,18 +16,16 @@ For each field, read all of its passages and choose one result:
 
 For `covered`, `excluded`, `medicare_only` and `optional_only`, give 1 to 3 quotes that show it. A quote is text copied exactly from one passage: one table row, one sentence, or one column of a table read straight down, joined with single spaces. Never mix words from two columns. Keep the EOC's spelling.
 
-Check every quote before you answer:
-`{CHECK} <page> '<quote>' ['<quote>' ...]`
-It prints OK only when the PDF viewer can highlight the quote at exactly one place on that page. Use only quotes that print OK. If a quote fails, try a shorter part of the same line or row.
+Code drops a claim unless the PDF viewer can highlight each of its quotes at exactly one place on its page. A short quote often repeats, so add neighboring words from the same row or sentence.
 
 ## Output
 
-Write a JSON array to `{ANSWER}` with the Write tool, one object per field, in order:
+Reply with only a JSON array, one object per field, in order:
 
 ```json
 [{"key": "main.T_chiropractic", "result": "medicare_only", "citations": [{"page": 61, "quote": "Manual manipulation of the spine to correct subluxation"}], "reason": "Only Medicare spinal manipulation is listed."}]
 ```
 
-`reason` is one short sentence. Then reply with one line: how many fields got each result.
+`reason` is one short sentence.
 
 ## Fields
