@@ -60,6 +60,22 @@ class LiveTest(unittest.TestCase):
         self.assertEqual(sheets["main"][0]["L_xray_imaging"], "$0 | $0-$300")
         self.assertEqual([(c["column"], c["layer"]) for c in kept], [("U_naturopath", layers.LAYERS[0])])
 
+    def test_a_struck_machine_quote_is_no_citation(self):
+        write(self.data / "machine/eoc_citations.csv", machine(cite("L_xray_imaging", "$0 | $0-$300", quote="wrong"),
+                                                          cite("L_xray_imaging", "$0 | $0-$300", quote="right")),
+              layers.MACHINE_COLUMNS)
+        write_edits(self.data, edit("L_xray_imaging", "$0 | $0-$300", saw="", quote="wrong"))
+        write(self.data / layers.STRUCK, [dict(sheet="main", plan_id="H1-001-0", column="L_xray_imaging", quote="wrong",
+                                               note="")], layers.STRUCK_COLUMNS)
+        _, kept, dropped = self.live()
+        self.assertEqual([(c["quote"], c["layer"]) for c in kept + dropped if c["column"] == "L_xray_imaging"],
+                         [("wrong", layers.EDITS), ("right", layers.XREF)])
+
+    def test_lists_strikes_that_match_no_machine_row(self):
+        strike = dict(sheet="main", plan_id="H1-001-0", column="L_xray_imaging", note="")
+        write(self.data / layers.STRUCK, [dict(strike, quote="machine"), dict(strike, quote="gone")], layers.STRUCK_COLUMNS)
+        self.assertEqual([s["quote"] for s in layers.stale_strikes(self.data)], ["gone"])
+
     def test_machine_rows_only_cite(self):
         write_edits(self.data)
         sheets, kept, dropped = self.live()

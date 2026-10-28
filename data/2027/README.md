@@ -22,6 +22,8 @@ A later layer wins, and within `edits.csv` a later row wins. The site drops a ci
 
 An edit row also records `saw`, the value its author saw. The site build warns when the cell beneath an edit is no longer `saw`, and when an edit cites an unknown document.
 
+`struck.csv` lists machine quotes that do not support their cell, so the site leaves them out. The build warns when a strike matches no machine quote.
+
 ## Results
 
 | Step | Result |
