@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H5439-019-0.md",
+ "reply": "[\n  {\"id\": 0, \"ok\": true, \"reason\": \"Page 60 says the plan covers only manual manipulation of the spine for subluxation, priced as Medicare-covered chiropractic services. Page 125 lists the same coverage for routine chiropractic care, and no passage shows supplemental chiropractic.\"},\n  {\"id\": 1, \"ok\": true, \"reason\": \"The EOC covers acupuncture only for chronic low back pain (12 visits in 90 days, up to 20 per year), all priced as Medicare-covered. Page 123 confirms it is available only for chronic low back pain, and no routine acupuncture benefit appears.\"}\n]"
+}

@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2406-073-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"Page 101 lists Medicare-covered acupuncture only for chronic low back pain, pages 39-41 describe only that Medicare benefit, and no passage shows routine acupuncture.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Page 101 states naturopath services are 'Not covered under any condition', and no passage shows any coverage.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Pages 45 and 100 describe only Medicare-covered spinal manual manipulation for subluxation, with other chiropractic services excluded, and no supplemental chiropractic appears.\"},\n{\"id\":3,\"ok\":false,\"reason\":\"The page 45 quote is a Medicare chiropractic exclusion and the page 108 text is an allowance's non-reimbursable list, so neither says the plan lacks massage coverage.\"}\n]"
+}

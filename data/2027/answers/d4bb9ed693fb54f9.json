@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H7199-002-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":false,\"reason\":\"The plan covers routine acupuncture through the $2,250 Dental & Alternative Therapy Allowance, so it is not Medicare-only.\"},\n{\"id\":1,\"ok\":false,\"reason\":\"The cited page 140 says the allowance can be used for naturopath services, so the plan covers the benefit and the exclusion claim is wrong.\"},\n{\"id\":2,\"ok\":false,\"reason\":\"The page 77 quote is only a list of items the allowance does not pay for, which does not show the plan lacks an OTC benefit, so the exclusion claim is not supported.\"},\n{\"id\":3,\"ok\":false,\"reason\":\"The plan covers naturopath, acupuncture, chiropractic and massage under the allowance, so the exclusion claim is wrong, and the OTC and worldwide claims are not supported.\"}\n]"
+}

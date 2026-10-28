@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H1372-003-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The EOC exclusions table on page 104 lists naturopath services as 'Not covered under any condition', and no passage shows any routine naturopathy coverage.\"}]\n```"
+}

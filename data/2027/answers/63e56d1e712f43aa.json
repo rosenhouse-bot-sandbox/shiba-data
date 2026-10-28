@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H3817-008-1.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"Page 76 lists 'Therapeutic massage' as 'Not covered under any condition', and no passage shows routine massage coverage.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Page 75 lists naturopath services as 'Not covered under any condition', and no passage shows coverage.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Acupuncture is covered only for chronic low back pain (Medicare benefit) and page 73 says other uses are limited to those circumstances; no routine acupuncture is shown.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"Chiropractic coverage is limited to manual manipulation of the spine for subluxation, with other services not covered; no supplemental chiropractic is shown.\"},\n{\"id\":4,\"ok\":false,\"reason\":\"The quote is about Part D drug exclusions for non-prescription drugs, not an OTC items allowance, so it does not support the claim.\"}\n]"
+}

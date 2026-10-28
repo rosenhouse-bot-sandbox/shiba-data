@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2923-025-0.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"The benefit row (p.59) lists only Medicare-covered chiropractic visits and says only spinal manipulation for subluxation is covered. The exclusions table (p.124) lists routine chiropractic care with only that manipulation covered. No passage shows a routine chiropractic benefit, allowance, or card.\"}]"
+}

@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H9003-001-0.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Dental coverage (preventive, comprehensive) is available only through the optional Advantage Plus package for an extra premium; no passage shows included routine dental in the base plan, and Medicare-covered dental is limited.\"},{\"id\":1,\"ok\":false,\"reason\":\"Page 54 shows the plan covers chiropractic care not covered by Medicare (18 combined visits, copays by plan), so it is not Medicare-only.\"},{\"id\":2,\"ok\":true,\"reason\":\"Routine dental appears only in the optional Advantage Plus package (extra premium, stated on pages 105 and 212), and the base-plan dental passage covers only Medicare-covered dental.\"}]"
+}

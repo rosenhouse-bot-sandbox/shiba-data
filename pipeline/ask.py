@@ -7,6 +7,8 @@ import concurrent.futures, hashlib, json, os, re, urllib.request
 
 WORKERS = 8
 MAX_TOKENS = 64000
+# A model sometimes replies in prose, so a bad reply is asked again.
+ATTEMPTS = 3
 
 
 def key(model, text):
@@ -43,9 +45,12 @@ def answer(tasks, model, saved, asker):
             with open(path) as f:
                 reply = json.load(f)["reply"]
         elif asker:
-            reply = asker(model, text)
-            if array(reply) is None:
+            for _ in range(ATTEMPTS):
+                reply = asker(model, text)
+                if array(reply) is not None:
+                    break
                 print(f"{task}: {model} did not reply with a JSON array")
+            else:
                 return task
             write(path, {"model": model, "task": os.path.basename(task), "reply": reply})
         else:
