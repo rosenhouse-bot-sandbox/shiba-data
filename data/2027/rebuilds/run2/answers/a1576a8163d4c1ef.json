@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H9003-001-0.retry.md",
+ "reply": "```json\n[{\"key\": \"main.AA_opt_packages\", \"result\": \"cite\", \"citations\": [{\"page\": 105, \"quote\": \"You only receive the hearing aid, dental, and eyewear benefits described in this section if you are enrolled in Advantage Plus.\"}, {\"page\": 106, \"quote\": \"This additional monthly premium is added to your Senior Advantage plan premium (see Chapter 1, Section 4.3, for more premium information).\"}]},\n {\"key\": \"main.J_outpatient_rehab\", \"result\": \"cite\", \"citations\": [{\"page\": 86, \"quote\": \"$25 for Enhanced plan\"}]}]\n```"
+}

@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H5216-427-2.retry.md",
+ "reply": "```json\n[{\"key\": \"dvha.G_vision\", \"result\": \"skip\"},\n {\"key\": \"main.C_premium\", \"result\": \"skip\"}]\n```"
+}

@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H3805-048-0.retry.md",
+ "reply": "```json\n[{\"key\": \"dvha.G_vision\", \"result\": \"cite\", \"citations\": [{\"page\": 94, \"quote\": \"We cover 1 routine eye exam every year.\"}, {\"page\": 94, \"quote\": \"Eye re raction is part o the routine eye exam $0 copayment\"}, {\"page\": 94, \"quote\": \"1 pair o standard lenses and rames every 2 years\"}, {\"page\": 94, \"quote\": \"$0 copayment or 1 pair o eyeglasses (lenses/ rames) or contact lenses with a retail value o up to $150.\"}]}]\n```"
+}

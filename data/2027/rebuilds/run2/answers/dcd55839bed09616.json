@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2406-073-0.retry.md",
+ "reply": "```json\n[{\"key\": \"dvha.I_alt_care_otc_travel\", \"result\": \"cite\", \"citations\": [{\"page\": 76, \"quote\": \"Quarterly credit is $50\"}]},\n {\"key\": \"main.I_outpatient_surgery\", \"result\": \"skip\"}]\n```"
+}

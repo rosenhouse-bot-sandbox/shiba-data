@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H5439-010-0.retry.md",
+ "reply": "```json\n[{\"key\": \"main.C_premium\", \"result\": \"cite\", \"citations\": [{\"page\": 8, \"quote\": \"Monthly plan premium* $0\"}]},\n {\"key\": \"main.P_vision\", \"result\": \"cite\", \"citations\": [{\"page\": 109, \"quote\": \"Routine eye exam 1 routine eye exam every year.\"}]},\n {\"key\": \"main.Q_hearing\", \"result\": \"cite\", \"citations\": [{\"page\": 62, \"quote\": \"1 routine hearing exam every year.\"}]}]\n```"
+}

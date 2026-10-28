@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2923-001-0.retry.md",
+ "reply": "```json\n[{\"key\": \"dvha.H_hearing\", \"result\": \"skip\"},\n {\"key\": \"main.C_premium\", \"result\": \"cite\", \"citations\": [{\"page\": 11, \"quote\": \"Monthly plan premium*                                     $0\"}]},\n {\"key\": \"main.E_moop\", \"result\": \"cite\", \"citations\": [{\"page\": 48, \"quote\": \"For calendar year 2027, the MOOP amount is $6,700.\"}]},\n {\"key\": \"main.L_xray_imaging\", \"result\": \"cite\", \"citations\": [{\"page\": 88, \"quote\": \"X-rays PCP's office: $25 copay\"}, {\"page\": 88, \"quote\": \"Outpatient hospital: $75 copay\"}, {\"page\": 86, \"quote\": \"CT Scans Office or Freestanding location: $100 copay\"}, {\"page\": 87, \"quote\": \"PET Scans Office or Freestanding location: $200 copay Outpatient hospital: $300 copay\"}]}]\n```"
+}

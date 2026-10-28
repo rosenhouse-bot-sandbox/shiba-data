@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H9003-001-0.retry.md",
+ "reply": "```json\n[{\"key\": \"main.P_vision\", \"result\": \"cite\", \"citations\": [{\"page\": 100, \"quote\": \"• Routine eye exams (eye refraction exams) to determine the need for vision correction\"}]}]\n```"
+}

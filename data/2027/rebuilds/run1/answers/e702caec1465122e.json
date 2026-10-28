@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H5216-455-0.retry.md",
+ "reply": "```json\n[{\"key\": \"main.C_premium\", \"result\": \"skip\"}]\n```"
+}

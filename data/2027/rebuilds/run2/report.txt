@@ -1,0 +1,15 @@
+correction recall: 102 of 183
+correction precision: 102 of 102
+citations: 677 of 953
+corrections missed, by column:
+  dvha.J_extra_benefits: 18
+  dvha.G_vision: 11
+  main.L_xray_imaging: 11
+  dvha.I_alt_care_otc_travel: 10
+  dvha.F_dental: 10
+  main.I_outpatient_surgery: 9
+  main.S_acupuncture: 6
+  main.X_transportation: 3
+  main.K_tests_labs: 2
+  main.J_outpatient_rehab: 1
+seeded errors cited: 0 of 29

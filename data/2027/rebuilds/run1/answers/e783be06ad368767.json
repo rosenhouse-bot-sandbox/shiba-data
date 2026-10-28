@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H3817-008-1.retry.md",
+ "reply": "```json\n[{\"key\": \"dvha.H_hearing\", \"result\": \"skip\"},\n {\"key\": \"main.C_premium\", \"result\": \"cite\", \"citations\": [{\"page\": 9, \"quote\": \"For 2027, the monthly plan premium for Regence MedAdvantage + Rx Classic is $130.\"}]},\n {\"key\": \"main.P_vision\", \"result\": \"cite\", \"citations\": [{\"page\": 70, \"quote\": \"We cover 1 routine vision exam every calendar year\"}, {\"page\": 70, \"quote\": \"Routine vision hardware\"}]}]\n```"
+}

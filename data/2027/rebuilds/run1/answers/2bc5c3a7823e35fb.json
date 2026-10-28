@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2923-028-3.retry.md",
+ "reply": "```json\n[{\"key\": \"main.C_premium\", \"result\": \"cite\", \"citations\": [{\"page\": 11, \"quote\": \"Monthly plan premium*                                     $0\"}]},\n {\"key\": \"main.E_moop\", \"result\": \"cite\", \"citations\": [{\"page\": 11, \"quote\": \"Maximum out-of-pocket amount                              $8,900\"}]},\n {\"key\": \"main.L_xray_imaging\", \"result\": \"cite\", \"citations\": [{\"page\": 88, \"quote\": \"X-rays PCP's office: $25 copay Specialist's office: $25 copay Freestanding location: $25 copay Outpatient hospital: $75 copay\"}, {\"page\": 86, \"quote\": \"CT Scans Office or Freestanding location: $100 copay\"}, {\"page\": 87, \"quote\": \"PET Scans Office or Freestanding location: $200 copay Outpatient hospital: $300 copay\"}]}]\n```"
+}

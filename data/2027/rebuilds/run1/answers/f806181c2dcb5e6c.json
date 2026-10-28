@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H5439-019-0.retry.md",
+ "reply": "```json\n[{\"key\": \"main.P_vision\", \"result\": \"cite\", \"citations\": [{\"page\": 121, \"quote\": \"Routine eye exam\"}, {\"page\": 121, \"quote\": \"$0 copay for 1 routine eye exam every year\"}]},\n {\"key\": \"main.Q_hearing\", \"result\": \"cite\", \"citations\": [{\"page\": 73, \"quote\": \"1 routine hearing exam every year.\"}, {\"page\": 73, \"quote\": \"$0 copay for 1 routine hearing exam every year\"}]}]\n```"
+}

@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2056-003-0.retry.md",
+ "reply": "```json\n[{\"key\": \"main.C_premium\", \"result\": \"cite\", \"citations\": [{\"page\": 7, \"quote\": \"Monthly plan premium\"}, {\"page\": 7, \"quote\": \"$0\"}]},\n {\"key\": \"main.N_pharmacy_deductible\", \"result\": \"skip\"}]\n```"
+}

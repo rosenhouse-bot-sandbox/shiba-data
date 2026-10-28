@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H1372-003-0.retry.md",
+ "reply": "```json\n[{\"key\": \"dvha.J_extra_benefits\", \"result\": \"cite\", \"citations\": [{\"page\": 63, \"quote\": \"Fitness benefit\"}, {\"page\": 100, \"quote\": \"Transportation services (non-emergency)\"}, {\"page\": 91, \"quote\": \"Routine podiatry (foot care)\"}, {\"page\": 91, \"quote\": \"$0 copayment Limit 6 visits every year\"}]},\n {\"key\": \"main.N_pharmacy_deductible\", \"result\": \"skip\"},\n {\"key\": \"main.R_dental\", \"result\": \"cite\", \"citations\": [{\"page\": 58, \"quote\": \"Comprehensive dental services\"}, {\"page\": 59, \"quote\": \"Our plan partners with Liberty Dental to provide your supplemental dental benefits.\"}]},\n {\"key\": \"main.S_acupuncture\", \"result\": \"cite\", \"citations\": [{\"page\": 52, \"quote\": \"Additional acupuncture services\"}]},\n {\"key\": \"main.T_chiropractic\", \"result\": \"cite\", \"citations\": [{\"page\": 55, \"quote\": \"Routine chiropractic care\"}]}]\n```"
+}

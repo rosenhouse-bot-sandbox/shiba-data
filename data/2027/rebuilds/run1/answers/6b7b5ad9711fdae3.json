@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H1036-317-0.retry.md",
+ "reply": "```json\n[{\"key\": \"main.C_premium\", \"result\": \"skip\"},\n {\"key\": \"main.E_moop\", \"result\": \"cite\", \"citations\": [{\"page\": 46, \"quote\": \"For calendar year 2027 the MOOP amount is $9,850.\"}]},\n {\"key\": \"main.I_outpatient_surgery\", \"result\": \"cite\", \"citations\": [{\"page\": 69, \"quote\": \"Surgery Services 20% coinsurance\"}, {\"page\": 69, \"quote\": \"20% coinsurance – Outpatient Hospital – Ambulatory Surgical Center\"}]},\n {\"key\": \"main.R_dental\", \"result\": \"cite\", \"citations\": [{\"page\": 54, \"quote\": \"we cover Mandatory Supplemental Dental Benefits which include preventive and diagnostic services.\"}]},\n {\"key\": \"main.Y_otc\", \"result\": \"cite\", \"citations\": [{\"page\": 76, \"quote\": \"All members enrolled on the plan receive $175 monthly allowance automatically loaded on a limited-use prepaid debit card to use at participating retail locations to buy eligible products from these over-the-counter (OTC) categories\"}]}]\n```"
+}

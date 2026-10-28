@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H7199-002-0.retry.md",
+ "reply": "```json\n[{\"key\": \"main.C_premium\", \"result\": \"cite\", \"citations\": [{\"page\": 13, \"quote\": \"for DEVOTED CHOICE PREMIUM 002 OR (PPO) is $28.50.\"}]},\n {\"key\": \"main.V_massage\", \"result\": \"cite\", \"citations\": [{\"page\": 63, \"quote\": \"Massage therapy rendered by a licensed massage therapist.\"}, {\"page\": 64, \"quote\": \"To be eligible for reimbursement for alternative therapies (like acupuncture or massage),\"}]}]\n```"
+}
