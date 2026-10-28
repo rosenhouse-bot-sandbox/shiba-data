@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H9003-009-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"Routine dental appears only in the Advantage Plus package, which is bought for an extra premium; the base plan lists only Medicare-covered dental.\"},\n{\"id\":1,\"ok\":false,\"reason\":\"The quote says massage therapy is covered when ordered as part of a physical therapy program, so it does not show the plan excludes massage.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Routine preventive and comprehensive dental comes only with the optional Advantage Plus package at an added premium, and the base plan has only Medicare-limited dental.\"}\n]"
+}

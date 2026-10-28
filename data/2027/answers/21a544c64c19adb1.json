@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H3817-009-1.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"Both the benefit table and the exclusions chart show only the Medicare chronic low back pain acupuncture benefit, and no passage shows a routine acupuncture benefit.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"The benefit table and the exclusions chart both limit chiropractic to manual manipulation of the spine for subluxation, and no routine chiropractic benefit appears.\"},\n{\"id\":2,\"ok\":false,\"reason\":\"The quote is the Part D rule excluding non-prescription drugs, which is not about an OTC items allowance.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"The exclusions chart lists naturopath services as not covered under any condition, and no passage shows coverage.\"},\n{\"id\":4,\"ok\":true,\"reason\":\"The exclusions chart lists therapeutic massage as not covered under any condition, and no passage shows coverage.\"}\n]"
+}

@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H3817-010-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"Chiropractic benefit and the routine-care row both limit coverage to manual manipulation of the spine for subluxation, which is the Medicare benefit; no supplemental chiropractic is shown.\"},\n{\"id\":1,\"ok\":false,\"reason\":\"The cited row is truncated and names only non-transport ambulance calls, stretcher car and wheelchair transport; it does not clearly say the plan lacks routine non-emergency transportation.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"The table lists naturopath services as 'Not covered under any condition'.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"Acupuncture is covered only for chronic low back pain under Medicare rules, and the exclusions table says the same; no supplemental acupuncture appears.\"},\n{\"id\":4,\"ok\":true,\"reason\":\"The exclusions table lists therapeutic massage as 'Not covered under any condition', and no passage shows massage coverage.\"}\n]"
+}

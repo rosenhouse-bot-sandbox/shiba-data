@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H3805-041-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":false,\"reason\":\"The field also covers OTC, and the plan has a $25 quarterly OTC credit, so the field is not blank; the quote is only about worldwide emergency care.\"},\n{\"id\":1,\"ok\":false,\"reason\":\"The plan has a $25 quarterly OTC credit (pages 80-81), which contradicts the claim; the cited quote is about Part D drug exclusions.\"},\n{\"id\":2,\"ok\":false,\"reason\":\"The page 55 quote is a Medicare chiropractic exclusion, and the page 140 quote is a fitness reimbursement list of non-reimbursable items; neither says the plan lacks massage.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"Chiropractic is shown only as Medicare-covered spinal manipulation at a $15 copay, and no passage shows a routine chiropractic benefit.\"},\n{\"id\":4,\"ok\":true,\"reason\":\"The EOC table says naturopath services are 'Not covered under any condition', and no passage shows coverage.\"},\n{\"id\":5,\"ok\":true,\"reason\":\"Acupuncture appears only as the Medicare chronic low back pain benefit, and no passage shows routine acupuncture.\"}\n]"
+}

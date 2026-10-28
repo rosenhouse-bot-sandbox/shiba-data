@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H1036-153-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":false,\"reason\":\"The quote is the Part D rule excluding non-prescription drugs, not a statement about an OTC items allowance.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"The EOC lists naturopath services as 'Not covered under any condition', and no other passage shows coverage.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"The chiropractic benefit covers only Medicare manual manipulation of the spine for subluxation and says other chiropractor services are not covered, and the 'routine chiropractic care' line gives the same limit.\"}\n]"
+}
