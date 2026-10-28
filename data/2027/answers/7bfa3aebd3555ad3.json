@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H1036-323-0.md",
+ "reply": "```json\n[{\"key\": \"main.I_outpatient_surgery\", \"result\": \"cite\", \"citations\": [{\"page\": 66, \"quote\": \"Surgery Services $450 copayment – Outpatient Hospital\"}, {\"page\": 66, \"quote\": \"$350 copayment – Ambulatory Surgical Center\"}]},\n {\"key\": \"main.M_part_b_drugs\", \"result\": \"skip\"}]\n```"
+}

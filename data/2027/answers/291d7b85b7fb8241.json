@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H1036-317-0.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 69 outpatient surgery row (in-network): Surgery Services 20% coinsurance, listed under both Outpatient Hospital and Ambulatory Surgical Center. Page 67 also shows Surgery Services 20% – Outpatient Hospital. Colonoscopy ($0) is excluded from the value, and both settings are 20%.\"}]"
+}

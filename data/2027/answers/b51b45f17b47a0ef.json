@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2406-070-0.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 86 gives $835 for Medicare-covered surgery at an outpatient hospital (line 1). Page 85 gives $785 at an ambulatory surgical center (line 2). Both are in-network surgery amounts, not the colonoscopy $0 rows.\"},{\"id\":1,\"ok\":true,\"reason\":\"Page 12 specialist office visits row: $70 copayment in-network and $90 copayment out-of-network.\"},{\"id\":2,\"ok\":false,\"reason\":\"The $835 and $785 amounts are outpatient hospital and ambulatory surgical center surgery copays, not specialist office visits. The specialist copays on page 12 are $70 in-network and $90 out-of-network.\"}]"
+}

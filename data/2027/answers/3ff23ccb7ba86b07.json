@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H7006-018-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 46 has a row for routine (non-Medicare covered) acupuncture services: a $50 allowance every six months on the Flex Card. That is a supplemental benefit, so the full dot holds.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 52 has a routine chiropractic care row, separate from the Medicare spinal manipulation row: a $50 Flex Card allowance every six months. The allowance names chiropractic, so it counts under R11.\"}]\n```"
+}

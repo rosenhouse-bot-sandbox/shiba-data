@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H2406-070-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 12 'Specialist office visits' row shows a $70 copayment per visit in-network and $90 per visit out-of-network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"In-network column: $835 copayment for Medicare-covered surgery at an outpatient hospital (page 86) and $785 at an ambulatory surgical center (page 85). Both amounts match the two settings.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"The quotes come from the outpatient surgery rows, not the specialist office visit row. The page 12 specialist row shows $70 in-network and $90 out-of-network.\"}]\n```"
+}

@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H5439-019-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 98, outpatient surgery section, outpatient hospital row: in-network $500 copay for all services other than skin biopsies. Page 99 ASC row: in-network $350 copay per visit. Both lines are supported.\"}]\n```"
+}

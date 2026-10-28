@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2923-009-0.md",
+ "reply": "```json\n[{\"key\": \"main.I_outpatient_surgery\", \"result\": \"cite\", \"citations\": [{\"page\": 95, \"quote\": \"50% coinsurance for outpatient procedures/ surgery at an Outpatient Hospital\"}, {\"page\": 95, \"quote\": \"50% coinsurance for outpatient procedures/ surgery at an ASC - facility\"}]}]\n```"
+}

@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H5439-015-0.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 98 gives the in-network amounts for both settings. The outpatient hospital row has a $500 copay for all other Medicare-covered outpatient services, with only skin biopsies at $0. The ambulatory surgical center row has a $300 copay per visit. Both rows are for this plan. The value lists in-network amounts only, which is the default when the field does not ask for out-of-network.\"}]"
+}

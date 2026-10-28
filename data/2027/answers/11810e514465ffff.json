@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H7006-018-0.md",
+ "reply": "```json\n[{\"key\": \"main.K_tests_labs\", \"result\": \"skip\"},\n {\"key\": \"main.L_xray_imaging\", \"result\": \"skip\"},\n {\"key\": \"main.O_medical_deductible\", \"result\": \"skip\"},\n {\"key\": \"main.S_acupuncture\", \"result\": \"cite\", \"citations\": [{\"page\": 46, \"quote\": \"Routine (non-Medicare covered) acupuncture services\"}, {\"page\": 46, \"quote\": \"Benefit allowance loaded to your Flex Card for use on non-Medicare-covered acupuncture services.\"}]},\n {\"key\": \"main.T_chiropractic\", \"result\": \"cite\", \"citations\": [{\"page\": 52, \"quote\": \"Routine chiropractic care\"}, {\"page\": 52, \"quote\": \"Benefit allowance loaded to your Flex Card that can be used for non-Medicare-covered chiropractic services.\"}]}]\n```"
+}

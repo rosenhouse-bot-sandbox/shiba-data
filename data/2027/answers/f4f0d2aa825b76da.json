@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H5439-019-0.md",
+ "reply": "```json\n[{\"key\": \"dvha.F_dental\", \"result\": \"skip\"},\n {\"key\": \"main.I_outpatient_surgery\", \"result\": \"cite\", \"citations\": [{\"page\": 98, \"quote\": \"$500 copay for all other Medicare-covered outpatient services.\"}, {\"page\": 99, \"quote\": \"$350 copay for each Medicare-covered visit to an ambulatory surgical center.\"}]},\n {\"key\": \"main.K_tests_labs\", \"result\": \"skip\"}]\n```"
+}

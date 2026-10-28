@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H2406-073-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 78 specialist consultation/diagnosis/treatment row: $60 copayment in-network and $80 copayment out-of-network for services from a specialist. These are separate from the hearing exam row.\"}]\n```"
+}

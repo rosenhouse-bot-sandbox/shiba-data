@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H1372-003-0.md",
+ "reply": "```json\n[{\"key\": \"dvha.F_dental\", \"result\": \"skip\"},\n {\"key\": \"main.I_outpatient_surgery\", \"result\": \"cite\", \"citations\": [{\"page\": 85, \"quote\": \"20% coinsurance for surgery\"}, {\"page\": 85, \"quote\": \"Services provided at an ambulatory surgical center 20% coinsurance\"}]},\n {\"key\": \"main.O_medical_deductible\", \"result\": \"skip\"},\n {\"key\": \"main.W_fitness\", \"result\": \"cite\", \"citations\": [{\"page\": 63, \"quote\": \"Members may apply allowance towards online fitness classes and gym membership.\"}]},\n {\"key\": \"main.Y_otc\", \"result\": \"cite\", \"citations\": [{\"page\": 86, \"quote\": \"Members may apply allowance funds towards the purchase of over-the-counter health and wellness products.\"}]}]\n```"
+}

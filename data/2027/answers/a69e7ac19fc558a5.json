@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H5439-011-0.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 100, outpatient surgery row: the in-network outpatient hospital copay is $425 for all Medicare-covered services except skin biopsies, which are $0. The in-network ambulatory surgical center copay is $200 per visit. Both amounts match the value and apply to this plan. The value gives in-network amounts only and leaves out the 30% out-of-network hospital coinsurance, but nothing on the page contradicts it.\"}]"
+}

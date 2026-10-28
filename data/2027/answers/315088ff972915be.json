@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H1372-003-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 85 outpatient surgery row: the outpatient hospital line lists '20% coinsurance for surgery', separate from the colonoscopy and other-service amounts. The ambulatory surgical center line lists 20% coinsurance.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 63 has a Fitness benefit row: the allowance can go toward online fitness classes and gym membership through the Healthy Living Allowance. A shared allowance that names the benefit counts for the dot under R11. The page shows no member restriction.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 86 has an OTC items row: allowance funds can go toward over-the-counter health and wellness products through the Healthy Living Allowance card. A shared allowance that names the benefit counts for the dot under R11.\"}]\n```"
+}

@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H1036-153-0.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 64 outpatient surgery row, in-network: Surgery Services $395 copayment – Outpatient Hospital, and $350 copayment – Ambulatory Surgical Center. Both sit under Surgery Services, before the separate Diagnostic Colonoscopy line, which is correctly left out. The value matches.\"}]"
+}

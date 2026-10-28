@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H2056-003-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 8 summary row 'Specialist office visits' shows $65 per visit. HMO plan, so there is no out-of-network line.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 62 outpatient surgery row: $500 copay at an outpatient hospital facility and $450 copay at an ambulatory surgical center, both after the $750 plan deductible. This matches both lines.\"}]\n```"
+}

@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H1036-317-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 69 outpatient surgery row lists Surgery Services at 20% coinsurance in-network for both Outpatient Hospital and Ambulatory Surgical Center. The page 67 outpatient hospital row confirms 20% for surgery in the outpatient hospital setting.\"}]\n```"
+}

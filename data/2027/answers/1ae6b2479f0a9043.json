@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H5216-428-2.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 71 outpatient surgery row, In-Network: Surgery Services $450 copayment – Outpatient Hospital and $350 copayment – Ambulatory Surgical Center. The value matches line 1 = hospital and line 2 = ASC, and excludes the colonoscopy rows. The out-of-network amount (50% coinsurance) is not in the value, but in-network is the default and nothing in the value contradicts the page.\"}]"
+}

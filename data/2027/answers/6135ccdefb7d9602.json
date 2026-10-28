@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H1036-317-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 53 says the plan covers only manual manipulation of the spine and no other chiropractor services, and page 90 lists routine chiropractic care as excluded except that manipulation, which supports medicare_only.\"}]\n```"
+}

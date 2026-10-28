@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H3805-040-0.md",
+ "reply": "```json\n[{\"key\": \"dvha.F_dental\", \"result\": \"skip\"},\n {\"key\": \"main.G_specialist\", \"result\": \"cite\", \"citations\": [{\"page\": 13, \"quote\": \"$55 copayment per visit.\"}, {\"page\": 82, \"quote\": \"$55 copayment or services rom a specialist\"}]},\n {\"key\": \"main.I_outpatient_surgery\", \"result\": \"cite\", \"citations\": [{\"page\": 79, \"quote\": \"$685 copayment or Medicare-covered surgery\"}, {\"page\": 79, \"quote\": \"$635 copayment or Medicare-covered surgery\"}]},\n {\"key\": \"main.O_medical_deductible\", \"result\": \"skip\"}]\n```"
+}
