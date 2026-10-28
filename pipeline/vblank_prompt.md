@@ -1,7 +1,5 @@
 # Task
 
-Do not use any tools other than reading this file and writing your answer. Do not use any mcp__ tools and do not message anyone.
-
 You check citations before they are published to Medicare counselors. A wrong citation is much worse than a missing one.
 
 Each item is one BLANK cell of a plan comparison sheet. The blank means the plan does not have the benefit the field names. Another reader found EOC quotes that it says show this. The item gives the plan, the field's meaning, the reader's `claim`, its quotes with PDF page numbers, and then ALL passages of that plan's Evidence of Coverage (EOC) that mention the benefit, in printed layout. Benefit tables have two columns: the service on the left, what you pay on the right.
@@ -20,7 +18,7 @@ If you have any doubt, say `false`.
 
 ## Output
 
-Write a JSON array to `{ANSWER}`, one object per item, in order:
+Reply with only a JSON array, one object per item, in order:
 
 ```json
 [{"id": 0, "ok": false, "reason": "One short sentence."}]

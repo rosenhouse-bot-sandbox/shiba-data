@@ -20,7 +20,8 @@ flowchart TB
       citations[citations.csv]:::state
       sheets[main_chart.csv, dvha.csv]:::state
     end
-    eoccites[machine/eoc_citations.csv]:::state
+    eoccites[machine/*.csv]:::state
+    answers[answers/]:::state
     edits[edits.csv]:::state
     comments[comments.csv]:::state
   end
@@ -51,7 +52,7 @@ flowchart TB
   extract[blanks.py, filled.py:<br>quote the EOC for each cell]:::cheap
   verify[Verify quotes against decoys;<br>write comments]:::heavy
 
-  tar & sheets --> extract --> verify --> eoccites & comments
+  checked & sheets --> extract --> verify --> eoccites & answers
 
   docwf[Documents workflow, manual:<br>build.py documents]:::det
   sitewf[Site workflow:<br>tests, build.py site,<br>deploy from main]:::det
@@ -68,8 +69,10 @@ flowchart TB
 | Yellow | Cheap model (Haiku) |
 | Red | Heavier model (Sonnet or Opus), or an agent with a browser |
 
-- `pipeline/run.py` regenerates `generated/`. People and models write the other CSVs.
-- `pipeline/layers.py` applies `generated/citations.csv` and then `edits.csv` to the generated sheets. Rows in `machine/eoc_citations.csv` only cite values.
-- `pipeline/blanks.py` and `pipeline/filled.py` turn small-model answers into `machine/eoc_citations.csv` rows. Their docstrings list the steps.
+- `pipeline/run.py` regenerates `generated/`, `machine/blanks.csv` and `machine/filled.csv`. People and earlier Claude sessions wrote the other CSVs.
+- The Pipeline workflow runs `run.py <year> <work> api` on main and pushes the result to a new branch. Only people with write access can start it.
+- `pipeline/layers.py` applies `generated/citations.csv` and then `edits.csv` to the generated sheets. Rows in `machine/` only cite values.
+- `pipeline/blanks.py` and `pipeline/filled.py` write model task files and turn the answers into `machine/` rows. Haiku reads, then Sonnet and Opus verify.
+- `pipeline/ask.py` answers task files with the Claude API. It saves each answer in `answers/`, keyed by the model and the task's text, so a rerun calls a model only for new tasks.
 - `pipeline/eval.py <year> [<machine.csv>]` scores machine-written cells against the live data.
 - The Site workflow downloads PDFs from carriers only when no documents release exists.

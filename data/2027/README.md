@@ -5,6 +5,7 @@ They come only from the CMS Landscape and PBP Benefits files, carrier websites, 
 The method follows `docs/2027-bootstrap/CLAUDE_ANALYSIS_METHODS.md` section 13.2 ("only this file and the internet").
 
 `python3 -I pipeline/run.py 2027 <work_dir>` downloads the sources named in `config.json` and `documents.csv` and regenerates `generated/`.
+It then rebuilds `machine/blanks.csv` and `machine/filled.csv` from the model answers saved in `answers/`.
 
 ## Layers
 
@@ -13,7 +14,8 @@ The site shows the generated sheets with three layers applied in order. Each lay
 | File | Rows from | Sets the value |
 |---|---|---|
 | `generated/citations.csv` | `pipeline/cite.py`: naturopathy dots, which the PBP lacks | Yes |
-| `machine/eoc_citations.csv` | Model steps. `step` names the step, and `prompt` hashes its prompts where the step recorded them. | No, until people review model corrections (issue #48) |
+| `machine/eoc_citations.csv` | Model steps run by earlier Claude sessions, with `step` xref | No, until people review model corrections (issue #48) |
+| `machine/blanks.csv`, `machine/filled.csv` | `pipeline/blanks.py` and `pipeline/filled.py`. `prompt` hashes the step's prompts. | No |
 | `edits.csv` | People, and Claude sessions they steer | Yes |
 
 A later layer wins. The site drops a citation whose value is not the live cell's.

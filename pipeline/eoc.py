@@ -27,11 +27,23 @@ def eoc(plan_id, data=DATA):
     raise LookupError(f"No EOC for {plan_id}")
 
 
+def highlights(work, cites, result="ok"):
+    """Whether the site highlights each {doc, page, quote} at exactly one place, or with result="found", at any."""
+    r = subprocess.run(["node", f"{HERE}/match.mjs", f"{work}/items"], capture_output=True, text=True, check=True,
+                       input=json.dumps([{"doc": c["doc"], "page": int(c["page"]), "quote": norm(c["quote"])} for c in cites]))
+    return [c[result] for c in json.loads(r.stdout)]
+
+
 class Doc:
-    def __init__(self, work, plan_id, data=DATA):
+    def __init__(self, work, doc_id):
         self.work = work
-        self.id = eoc(plan_id, data)[0]
+        self.id = doc_id
         self._flow = None
+
+    @classmethod
+    def of_plan(cls, work, plan_id, data=DATA):
+        """The plan's EOC."""
+        return cls(work, eoc(plan_id, data)[0])
 
     def pages(self, kind):
         return load_pages(f"{self.work}/{kind}/{self.id}.txt")
@@ -44,9 +56,7 @@ class Doc:
 
     def highlights(self, cites):
         """Whether the site highlights each {page, quote} at exactly one place."""
-        r = subprocess.run(["node", f"{HERE}/match.mjs", f"{self.work}/items"], capture_output=True, text=True, check=True,
-                           input=json.dumps([{"doc": self.id, "page": int(c["page"]), "quote": norm(c["quote"])} for c in cites]))
-        return [c["ok"] for c in json.loads(r.stdout)]
+        return highlights(self.work, [dict(c, doc=self.id) for c in cites])
 
     def quote_ok(self, page, quote):
         """At most once in the flow text, and highlighted at one place. Flow text misses quotes read down a column."""

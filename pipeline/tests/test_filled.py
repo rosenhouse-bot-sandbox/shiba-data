@@ -137,9 +137,9 @@ class GateTest(unittest.TestCase):
 class AnswersTest(unittest.TestCase):
     def test_retry_answers_replace_first_answers(self):
         with tempfile.TemporaryDirectory() as d:
-            pathlib.Path(d, f"a-{PLAN}.json").write_text(json.dumps([{"key": "a", "result": "cite"}, {"key": "b"}]))
+            pathlib.Path(d, f"{PLAN}.json").write_text(json.dumps([{"key": "a", "result": "cite"}, {"key": "b"}]))
             self.assertEqual(filled.answers(d, PLAN), [{"key": "a", "result": "cite"}, {"key": "b"}])
-            pathlib.Path(d, f"r-{PLAN}.json").write_text(json.dumps([{"key": "a", "result": "skip"}]))
+            pathlib.Path(d, f"{PLAN}.retry.json").write_text(json.dumps([{"key": "a", "result": "skip"}]))
             self.assertEqual(filled.answers(d, PLAN), [{"key": "a", "result": "skip"}, {"key": "b"}])
 
 
@@ -152,7 +152,8 @@ class ClaimsTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             work, answers = fake_work(tmp, plan, quote), pathlib.Path(tmp, "answers")
             answers.mkdir()
-            (answers / f"a-{plan}.json").write_text(json.dumps([
+            (answers / f"{plan}.md").write_text("task")
+            (answers / f"{plan}.json").write_text(json.dumps([
                 {"key": one[0], "result": "cite", "citations": [cite(1, quote)]},
                 {"key": two[0], "result": "cite", "citations": [cite(1, "Missing text")]}]))
 
@@ -164,10 +165,9 @@ class ClaimsTest(unittest.TestCase):
             retry = (answers / f"{plan}.retry.md").read_text()
             self.assertEqual(retry.count("\n### "), 1)
             self.assertIn(f"### {two[0]}", retry)
-            self.assertIn(f"{answers}/r-{plan}.json", retry)
             self.assertIn('Earlier quotes: [{"page": 1, "quote": "Missing text"}]', retry)
             (answers / f"{plan}.retry.md").unlink()
-            (answers / f"r-{plan}.json").write_text(json.dumps([
+            (answers / f"{plan}.retry.json").write_text(json.dumps([
                 {"key": two[0], "result": "cite", "citations": [cite(1, "Still missing")]}]))
             self.assertEqual(run(), [one[0]])
             self.assertFalse((answers / f"{plan}.retry.md").exists())
@@ -182,7 +182,6 @@ class BundleTest(unittest.TestCase):
                 self.assertEqual(targets.call_args.args[1], want)
                 task = pathlib.Path(tmp, "out", f"{PLAN}.md").read_text()
             self.assertIn(f"({PLAN}), plan year {filled.years.config(DATA)['year']}.", task)
-            self.assertIn(f"{tmp}/out/a-{PLAN}.json", task)
             self.assertIn("### main.G_specialist", task)
 
     def test_refuses_an_unknown_mode(self):
@@ -204,7 +203,7 @@ class SectionTest(unittest.TestCase):
 class FillTest(unittest.TestCase):
     def test_fills_every_placeholder(self):
         for template in ("filled_prompt.md", "vfilled_prompt.md"):
-            text = filled.fill(template, PLAN_NAME="VALUE", PLAN_ID="VALUE", YEAR="VALUE", ANSWER="VALUE")
+            text = filled.fill(template, PLAN_NAME="VALUE", PLAN_ID="VALUE", YEAR="VALUE")
             self.assertNotRegex(text, r"\{[A-Z_]+\}")
 
 
@@ -259,7 +258,6 @@ class VerifyTest(unittest.TestCase):
                              [{k: items[i][k] for k in ("value", "citations")} for i in mine])
             self.assertTrue(all(set(s) == {"id", "field", "meaning", "value", "citations"} for s in shown))
             self.assertIn(f"=====PAGE 1=====\n{quotes[0]}", task)
-            self.assertIn(f"{tmp}/v/ans-{plan}.json", task)
             self.assertIn(f"plan year {filled.years.config(DATA)['year']}.", task)
         self.assertNotEqual(orders, [[False] * 3 + [True] * 2] * 2)
 
@@ -276,15 +274,16 @@ class AcceptedTest(unittest.TestCase):
         with self.assertRaises(SystemExit):
             filled.accepted([dict(self.claim, decoy=True)], [{"id": 0, "ok": True}])
 
-    def test_fails_when_a_verdict_is_missing(self):
-        with self.assertRaises(SystemExit):
-            filled.accepted([dict(self.claim, decoy=False)] * 2, [{"id": 0, "ok": True}])
+    def test_rejects_an_item_without_a_verdict(self):
+        other = dict(self.claim, value="$50")
+        self.assertEqual(filled.accepted([dict(self.claim, decoy=False), dict(other, decoy=False)], [{"id": 1, "ok": True}]),
+                         [other])
 
     def test_accept_reads_every_verifier_answer(self):
         with tempfile.TemporaryDirectory() as d:
             pathlib.Path(d, "items.json").write_text(json.dumps([dict(self.claim, decoy=False)] * 2))
-            pathlib.Path(d, "ans-A.json").write_text(json.dumps([{"id": 0, "ok": True}]))
-            pathlib.Path(d, "ans-B.json").write_text(json.dumps([{"id": 1, "ok": True}]))
+            pathlib.Path(d, "v-A.json").write_text(json.dumps([{"id": 0, "ok": True}]))
+            pathlib.Path(d, "v-B.json").write_text(json.dumps([{"id": 1, "ok": True}]))
             quiet(filled.accept, d, f"{d}/accepted.json")
             self.assertEqual(filled.load(f"{d}/accepted.json"), [self.claim, self.claim])
 
@@ -316,33 +315,31 @@ class PublishTest(unittest.TestCase):
                                      "citations": [cite(7, "no amount"), cite(8, f"pay {self.value}, then")]}]))
         return path
 
-    def test_appends_every_quote_with_those_that_show_the_value_first(self):
-        filled.publish(self.accepted(self.value), data=self.data)
-        self.assertTrue((self.data / "machine/eoc_citations.csv").read_bytes().endswith(b"no amount\r\n"))
-        rows = list(csv.DictReader(open(self.data / "machine/eoc_citations.csv")))[-2:]
+    def test_replaces_the_steps_rows_with_every_quote_with_those_that_show_the_value_first(self):
+        for _ in range(2):
+            filled.publish(self.accepted(self.value), data=self.data)
+        self.assertTrue((self.data / "machine/filled.csv").read_bytes().endswith(b"no amount\r\n"))
+        rows = list(csv.DictReader(open(self.data / "machine/filled.csv")))
         sheet, column = self.key.split(".")
         prompt = filled.blanks.prompt_version("filled_prompt.md", "vfilled_prompt.md")
         self.assertEqual([(r["step"], r["prompt"], r["sheet"], r["plan_id"], r["column"], r["line"], r["value"], r["pdf_page"])
                           for r in rows], [("filled", prompt, sheet, self.plan, column, "", self.value, page) for page in ("8", "7")])
         self.assertNotIn(self.key, filled.targets(filled.build.site_data(self.data)).get(self.plan, {}))
 
-    def test_refuses_a_cell_whose_value_changed_or_that_an_eoc_now_cites(self):
+    def test_refuses_a_cell_whose_value_changed(self):
         with self.assertRaises(SystemExit):
             filled.publish(self.accepted(self.value + "0"), data=self.data)
-        filled.publish(self.accepted(self.value), data=self.data)
-        with self.assertRaises(SystemExit):
-            filled.publish(self.accepted(self.value), data=self.data)
 
     def test_writes_rows_to_another_file_even_for_cells_an_eoc_cites(self):
         out = self.data / "machine.csv"
         filled.publish(self.accepted(self.value), data=self.data)
-        before = (self.data / "machine/eoc_citations.csv").read_bytes()
+        before = (self.data / "machine/filled.csv").read_bytes()
         filled.publish(self.accepted(self.value), out, data=self.data)
         filled.publish(self.accepted(self.value), out, data=self.data)
         rows = list(csv.DictReader(open(out)))
         self.assertEqual([(r["plan_id"], r["value"], r["quote"]) for r in rows],
                          [(self.plan, self.value, f"pay {self.value}, then"), (self.plan, self.value, "no amount")])
-        self.assertEqual((self.data / "machine/eoc_citations.csv").read_bytes(), before)
+        self.assertEqual((self.data / "machine/filled.csv").read_bytes(), before)
 
 
 if __name__ == "__main__":

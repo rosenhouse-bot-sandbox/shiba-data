@@ -11,10 +11,11 @@ SHEETS = {"main": "main_chart.csv", "dvha": "dvha.csv"}
 COLUMNS = ["sheet", "plan_id", "column", "line", "value", "url", "pdf_page", "quote"]
 # Machine rows also name the step that wrote them and a hash of its prompts, which is blank if not recorded.
 MACHINE_COLUMNS = ["step", "prompt"] + COLUMNS
+XREF, BLANKS, FILLED = "machine/eoc_citations.csv", "machine/blanks.csv", "machine/filled.csv"
 # Code-made cells come first, then model steps' rows, then edits by people or the Claude sessions they steer.
-LAYERS = ("generated/citations.csv", "machine/eoc_citations.csv", "edits.csv")
+LAYERS = ("generated/citations.csv", XREF, BLANKS, FILLED, "edits.csv")
 # Model steps only cite, because a person reviews their corrections first (issue #48).
-CITE_ONLY = {"machine/eoc_citations.csv"}
+CITE_ONLY = {XREF, BLANKS, FILLED}
 
 
 def rows(path):
@@ -48,6 +49,10 @@ def shown(cell, line):
         return cell
     lines = cell.split(" | ")
     return lines[int(line) - 1] if 1 <= int(line) <= len(lines) else None
+
+
+def without(name):
+    return tuple(n for n in LAYERS if n != name)
 
 
 def live(data, names=LAYERS):

@@ -1,5 +1,5 @@
 // Reads [{doc, page, quote}] on stdin and prints each one's ok: the site highlights the quote at one place on the page,
-// either as contiguous text or down one column.
+// either as contiguous text or down one column. found: the site highlights it at one place or more.
 import fs from "node:fs";
 import { matchRanges, squash } from "../web/static/highlight.js";
 
@@ -12,5 +12,6 @@ for (const c of cites) {
   const { strs = [], lefts = [] } = docs[c.doc][c.page] || {};
   const n = count(squash(strs.join("")), squash(c.quote));
   c.ok = n === 1 || (n === 0 && matchRanges(strs, c.quote, lefts).length > 0);
+  c.found = n > 1 || c.ok;
 }
 console.log(JSON.stringify(cites));

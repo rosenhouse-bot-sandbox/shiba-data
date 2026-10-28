@@ -3,6 +3,7 @@ from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import blanks
+import build
 import fields
 from eoc import DATA, Doc, eoc, norm
 
@@ -39,10 +40,10 @@ class SnippetsTest(unittest.TestCase):
 
 class FillTest(unittest.TestCase):
     def test_fills_every_placeholder(self):
-        for template, values in (("blank_prompt.md", ("PLAN_NAME", "PLAN_ID", "YEAR", "ANSWER", "CHECK")), ("vblank_prompt.md", ("ANSWER",))):
-            text = blanks.fill(template, **{k: "VALUE" for k in values})
+        text = blanks.fill("blank_prompt.md", PLAN_NAME="VALUE", PLAN_ID="VALUE", YEAR="VALUE")
+        self.assertIn("VALUE", text)
+        for text in (text, blanks.fill("vblank_prompt.md")):
             self.assertNotRegex(text, r"\{[A-Z_]+\}")
-            self.assertIn("VALUE", text)
 
     def test_adds_what_the_plans_carrier_tends_to_do(self):
         for template in ("blank_prompt.md", "filled_prompt.md", "vfilled_prompt.md"):
@@ -111,9 +112,9 @@ class VerifierItemsTest(unittest.TestCase):
         self.assertCountEqual(items, found + planted)
         self.assertNotEqual(items[-5:], planted)
 
-    def test_accepted_needs_a_verdict_for_every_item(self):
-        with self.assertRaises(SystemExit):
-            blanks.accepted([DecoysTest.claim, DecoysTest.claim], [{"id": 1, "ok": True}], lambda plan: None)
+    def test_accepted_rejects_an_item_without_a_verdict(self):
+        other = dict(DecoysTest.claim, plan="P-2")
+        self.assertEqual(blanks.accepted([DecoysTest.claim, other], [{"id": 1, "ok": True}], lambda plan: None), [other])
 
 
 class ExclusionTest(unittest.TestCase):
@@ -166,21 +167,24 @@ class PublishTest(unittest.TestCase):
     def test_cells_holds_only_fields_an_eoc_can_show(self):
         self.assertLessEqual(set(blanks.cells(self.data)), set(blanks.FIELDS))
 
-    def test_appends_a_blank_valued_citation(self):
+    def test_replaces_the_steps_rows_with_a_blank_valued_citation(self):
         plan, key = self.blank
-        blanks.publish(self.accepted(plan, key), self.data)
-        raw = (self.data / "machine/eoc_citations.csv").read_bytes()
+        for _ in range(2):
+            blanks.publish(self.accepted(plan, key), self.data)
+        raw = (self.data / "machine/blanks.csv").read_bytes()
         self.assertTrue(raw.endswith(b'"q, r"\r\n'))
-        last = list(csv.DictReader(open(self.data / "machine/eoc_citations.csv")))[-1]
-        self.assertEqual((last["step"], last["prompt"], last["sheet"], last["plan_id"], last["column"], last["line"],
-                          last["value"], last["pdf_page"]),
-                         ("blanks", blanks.prompt_version("blank_prompt.md", "vblank_prompt.md"), key.split(".")[0], plan,
-                          key.split(".")[1], "", "", "7"))
-        self.assertEqual(blanks.cells(self.data)[key][plan]["cites"][0]["quote"], "q, r")
+        rows = list(csv.DictReader(open(self.data / "machine/blanks.csv")))
+        self.assertEqual([(r["step"], r["prompt"], r["sheet"], r["plan_id"], r["column"], r["line"], r["value"], r["pdf_page"])
+                          for r in rows],
+                         [("blanks", blanks.prompt_version("blank_prompt.md", "vblank_prompt.md"), key.split(".")[0], plan,
+                           key.split(".")[1], "", "", "7")])
+        site = build.site_data(self.data)
+        row = next(r for r in site[key.split(".")[0]]["rows"] if r["plan_id"] == plan)
+        self.assertEqual(row["cells"][key.split(".")[1]]["cites"][0]["quote"], "q, r")
 
-    def test_refuses_a_cell_that_is_no_longer_an_uncited_blank(self):
-        plan, key = self.blank
-        blanks.publish(self.accepted(plan, key), self.data)
+    def test_refuses_a_cell_that_is_not_an_uncited_blank(self):
+        plan, key = next((plan, key) for key, by_plan in blanks.cells(self.data).items()
+                         for plan, c in by_plan.items() if c["value"].strip())
         with self.assertRaises(SystemExit):
             blanks.publish(self.accepted(plan, key), self.data)
 
@@ -202,7 +206,7 @@ class DocTest(unittest.TestCase):
                  ("Itemstwice", 10), ("LOUD", 10), ("Acupuncture", 10), ("$0", 300), ("covered", 10), ("copay", 300)]
         (self.work / "items" / "abcdef0123456789.json").write_text(json.dumps({
             "1": {"strs": [s for s, _ in items], "lefts": [x for _, x in items]}}))
-        self.doc = Doc(str(self.work), "P-1", self.data)
+        self.doc = Doc.of_plan(str(self.work), "P-1", self.data)
 
     def tearDown(self):
         self.tmp.cleanup()

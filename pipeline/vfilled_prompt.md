@@ -1,7 +1,5 @@
 # Task
 
-Do not use any tools other than reading this file and writing your answer. Do not use any mcp__ tools and do not message anyone.
-
 You check citations before they are published to Medicare counselors. A wrong citation is much worse than a missing one.
 Plan: **{PLAN_NAME}** ({PLAN_ID}), plan year {YEAR}.{NOTES}
 
@@ -21,7 +19,7 @@ If you have any doubt, say `false`.
 
 ## Output
 
-Write a JSON array to `{ANSWER}`, one object per item, in order. Copy each item's `id`.
+Reply with only a JSON array, one object per item, in order. Copy each item's `id`.
 
 ```json
 [{"id": 0, "ok": true, "reason": "Page 74 specialist row: $40 copay."}]
