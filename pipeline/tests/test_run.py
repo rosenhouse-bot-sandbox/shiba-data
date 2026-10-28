@@ -19,11 +19,11 @@ class LostQuotesTest(unittest.TestCase):
             page = {"strs": ["Specialist $40 copay", "Specialist $40 copay"], "lefts": [0, 0]}
             (texts / "items" / f"{'a' * 16}.json").write_text(json.dumps({"2": page}))
             with open(data / "edits.csv", "w", newline="") as f:
-                w = csv.DictWriter(f, fieldnames=layers.COLUMNS)
+                w = csv.DictWriter(f, fieldnames=layers.EDIT_COLUMNS)
                 w.writeheader()
                 for quote in ("Specialist $40", "Specialist $50", ""):
                     w.writerow(dict(sheet="main", plan_id="P", column="G_specialist", line="", value="$40", url=URL,
-                                    pdf_page="2", quote=quote))
+                                    pdf_page="2", quote=quote, saw="$40", source="session", author="", note=""))
             lost = run.lost_quotes(data, texts)
         self.assertEqual([c["quote"] for c in lost], ["Specialist $50"])
 

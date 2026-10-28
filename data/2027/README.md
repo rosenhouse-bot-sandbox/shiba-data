@@ -18,7 +18,9 @@ The site shows the generated sheets with three layers applied in order. Each lay
 | `machine/blanks.csv`, `machine/filled.csv` | `pipeline/blanks.py` and `pipeline/filled.py`. `prompt` hashes the step's prompts. | No |
 | `edits.csv` | People, and Claude sessions they steer | Yes |
 
-A later layer wins. The site drops a citation whose value is not the live cell's.
+A later layer wins, and within `edits.csv` a later row wins. The site drops a citation whose value is not the live cell's.
+
+An edit row also records `saw`, the value its author saw. The site build warns when the cell beneath an edit is no longer `saw`, and when an edit cites an unknown document.
 
 ## Results
 

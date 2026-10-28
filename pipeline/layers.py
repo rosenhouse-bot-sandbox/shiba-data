@@ -1,7 +1,8 @@
 """Builds a year's live sheets by applying layers to its generated sheets, in order.
 
 A layer row cites a value for a cell, or for one line of it. Rows of the code and edits layers also set that value,
-and a later layer wins. The live sheets drop a citation whose value is not the live cell's.
+and a later layer wins. Within the edits layer, a later row wins. The live sheets drop a citation whose value is not
+the live cell's.
 """
 import csv
 
@@ -11,9 +12,13 @@ SHEETS = {"main": "main_chart.csv", "dvha": "dvha.csv"}
 COLUMNS = ["sheet", "plan_id", "column", "line", "value", "url", "pdf_page", "quote"]
 # Machine rows also name the step that wrote them and a hash of its prompts, which is blank if not recorded.
 MACHINE_COLUMNS = ["step", "prompt"] + COLUMNS
-XREF, BLANKS, FILLED = "machine/eoc_citations.csv", "machine/blanks.csv", "machine/filled.csv"
+# An edit also records the value its author saw, who wrote it, and why.
+# source is "session" for a Claude session a person steered, or "volunteer" or "manager" for issue #11 users.
+# author is an ID that the issue #11 Worker maps to a person, never a name or email.
+EDIT_COLUMNS = COLUMNS + ["saw", "source", "author", "note"]
+XREF, BLANKS, FILLED, EDITS = "machine/eoc_citations.csv", "machine/blanks.csv", "machine/filled.csv", "edits.csv"
 # Code-made cells come first, then model steps' rows, then edits by people or the Claude sessions they steer.
-LAYERS = ("generated/citations.csv", XREF, BLANKS, FILLED, "edits.csv")
+LAYERS = ("generated/citations.csv", XREF, BLANKS, FILLED, EDITS)
 # Model steps only cite, because a person reviews their corrections first (issue #48).
 CITE_ONLY = {XREF, BLANKS, FILLED}
 
@@ -33,7 +38,7 @@ def layer(data, name):
         return []
     with open(data / name, newline="") as f:
         reader = csv.DictReader(f)
-        columns = MACHINE_COLUMNS if name in CITE_ONLY else COLUMNS
+        columns = MACHINE_COLUMNS if name in CITE_ONLY else EDIT_COLUMNS if name == EDITS else COLUMNS
         if reader.fieldnames != columns:
             raise ValueError(f"{name} has columns {reader.fieldnames}, not {columns}")
         return [dict(r, layer=name) for r in reader]
@@ -57,7 +62,9 @@ def without(name):
 
 def live(data, names=LAYERS):
     """Returns (sheets, kept, dropped): the sheets after the layers, and the layer rows whose value they show or not.
-    Kept rows from the latest layer come first, so a cell's first citation is from the layer that set its value."""
+    Kept rows from the latest layer come first, so a cell's first citation is from the layer that set its value.
+    An edit whose cell has changed since its author saw it gets `beneath`, the value it now replaces.
+    A blank `saw` means the author's view is unknown."""
     sheets = generated(data)
     index = {(sheet, r["plan_id"]): r for sheet, sheet_rows in sheets.items() for r in sheet_rows}
     by_layer = [layer(data, name) for name in names]
@@ -69,10 +76,14 @@ def live(data, names=LAYERS):
                 raise ValueError(f"A layer row names no cell: {where(c)}")
             if c["layer"] in CITE_ONLY:
                 continue
-            if values.setdefault((c["sheet"], c["plan_id"], c["column"], c["line"]), c["value"]) != c["value"]:
-                raise ValueError(f"Rows of one layer set different values: {where(c)}")
-            if shown(row[c["column"]], c["line"]) is None:
+            before = shown(row[c["column"]], c["line"])
+            if before is None:
                 raise ValueError(f"A layer row names no line: {where(c)}")
+            if c["layer"] == EDITS:
+                if c["saw"] and before not in (c["saw"], c["value"]):
+                    c["beneath"] = before
+            elif values.setdefault((c["sheet"], c["plan_id"], c["column"], c["line"]), c["value"]) != c["value"]:
+                raise ValueError(f"Rows of one layer set different values: {where(c)}")
             if c["line"]:
                 lines = row[c["column"]].split(" | ")
                 lines[int(c["line"]) - 1] = c["value"]
