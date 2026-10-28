@@ -1,5 +1,7 @@
 # Data pipeline
 
+[pipeline-slides.md](pipeline-slides.md) walks through the same steps one slide at a time.
+
 ```mermaid
 flowchart TB
   classDef det fill:#d9f2d9,stroke:#2e7d32,color:#000
