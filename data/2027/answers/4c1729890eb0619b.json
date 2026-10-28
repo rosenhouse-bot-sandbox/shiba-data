@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H5439-015-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 98 outpatient surgery row, in-network: $500 copay for all other outpatient hospital services (skin biopsies excluded as the field directs) and $300 copay per ambulatory surgical center visit. Both match the value.\"}]\n```"
+}

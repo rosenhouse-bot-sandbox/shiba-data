@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H5439-010-0.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 88 shows in-network outpatient hospital surgery at a $500 copay (the $0 applies only to skin biopsies) and ASC at a $200 copay. The out-of-network lines are separate, so $500 | $200 is correct.\"},{\"id\":1,\"ok\":true,\"reason\":\"Page 112 shows a $20 monthly Wellcare Spendables card allowance that names OTC items, covered as a plan benefit. A shared allowance that names the benefit counts, so ● is correct.\"}]"
+}

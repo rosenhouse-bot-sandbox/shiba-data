@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H2001-045-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 86 X-rays row, in-network: '$0 copayment or 20% coinsurance for each Medicare-covered' X-ray service, depending on Medicaid level. Page 89 in-network: '$0 copayment or 20% coinsurance' for radiological diagnostic services not including X-rays, with CT, PET and MRI listed as examples. Both lines match.\"}]\n```"
+}

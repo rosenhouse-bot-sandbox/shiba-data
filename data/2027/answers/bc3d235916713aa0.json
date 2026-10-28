@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H3805-041-0.md",
+ "reply": "[\n  {\"id\": 0, \"ok\": true, \"reason\": \"Page 80 gives $685 for outpatient hospital surgery and page 79 gives $635 for ambulatory surgical center surgery. Both match the value, in the right order.\"},\n  {\"id\": 1, \"ok\": false, \"reason\": \"The value $70 is the specialist office visit copay, not outpatient surgery. The surgery amounts are $685 for hospital and $635 for ASC.\"},\n  {\"id\": 2, \"ok\": false, \"reason\": \"The value 0%-20% and the quotes are about Part B drugs, not specialist visits. The specialist copay is $70.\"},\n  {\"id\": 3, \"ok\": true, \"reason\": \"Page 70 shows $0 for Part B allergy antigens and 20% coinsurance for chemotherapy and other Part B drugs. That matches the 0%-20% range.\"},\n  {\"id\": 4, \"ok\": true, \"reason\": \"Page 12 (network providers) and page 82 both show a $70 copay for specialist office visits.\"},\n  {\"id\": 5, \"ok\": false, \"reason\": \"The value and quotes are outpatient surgery amounts ($685 hospital, $635 ASC), not the specialist office visit copay of $70.\"}\n]"
+}

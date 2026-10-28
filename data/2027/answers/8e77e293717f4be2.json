@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2406-042-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"Page 86: outpatient hospital surgery is $550 in-network and ambulatory surgical center surgery is $400 in-network. The order matches the field: hospital first, then ASC. The $0 colonoscopy is correctly left out.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Page 63: routine hearing exam is $0 in-network. Page 64: hearing aid allowance is $700, limited to 2 hearing aids every year. This matches the value.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Page 12 specialist office visits row: $50 in-network and $80 out-of-network per visit.\"},\n{\"id\":3,\"ok\":false,\"reason\":\"The quotes are for outpatient hospital and ambulatory surgical center surgery on page 86, not specialist office visits. The specialist copays are $50 in-network and $80 out-of-network, so $550 | $400 is wrong for this field.\"}\n]"
+}

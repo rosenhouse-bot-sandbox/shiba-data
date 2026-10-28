@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H3805-040-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 13 lists specialist office visits at a $55 copayment per visit. Page 82's specialist row matches with $55 for services from a specialist.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 79 outpatient surgery row: $685 for Medicare-covered surgery at an outpatient hospital and $635 at an ambulatory surgical center. Both match the line order.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"The quotes are the specialist office visit copay, not outpatient surgery. Page 79 shows outpatient surgery at $685 (hospital) and $635 (ASC), which contradicts $55.\"}]\n```"
+}

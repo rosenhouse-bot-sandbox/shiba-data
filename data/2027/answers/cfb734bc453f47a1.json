@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H5216-428-2.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The EOC covers only Medicare manual manipulation of the spine, says other chiropractor services are not covered, and lists routine chiropractic care as limited to that, with no supplemental benefit shown.\"}]\n```"
+}

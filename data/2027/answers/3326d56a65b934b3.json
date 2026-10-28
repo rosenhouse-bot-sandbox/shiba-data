@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2001-045-0.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 86 X-rays row, in-network: $0 copayment or 20% coinsurance depending on Medicaid level. Page 89 radiological diagnostic services row, in-network: $0 or 20%. The row's examples name CT, PET and MRI, so the second value is shown, though the quote itself does not name them. The $0 mammogram and vascular screening lines in the same cell are separate and do not change the 'other radiological' amount.\"}]"
+}

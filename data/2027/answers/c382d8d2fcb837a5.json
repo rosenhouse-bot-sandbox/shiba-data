@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H2056-018-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The Part B drugs row on page 47 shows 20% coinsurance for chemotherapy drugs and 20% for all other Part B drugs. The insulin amount is a $35 copay, not coinsurance, so it does not change the range.\"}]\n```"
+}

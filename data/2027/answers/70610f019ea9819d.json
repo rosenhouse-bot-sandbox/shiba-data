@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2923-009-0.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 95 lists 50% coinsurance for outpatient procedures/surgery at an Outpatient Hospital. It lists 50% for the ASC facility charge, which is the center's cost, and a separate 30% professional charge. The colonoscopy rows (15%) are correctly left out. This is an HMO, so the amounts are in-network.\"}]"
+}

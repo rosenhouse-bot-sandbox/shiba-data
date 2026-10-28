@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2406-042-0.retry.md",
+ "reply": "```json\n[{\"key\": \"main.G_specialist\", \"result\": \"cite\", \"citations\": [{\"page\": 12, \"quote\": \"$50 copayment per visit (in- network).\"}, {\"page\": 12, \"quote\": \"$80 copayment per visit (out-o - network).\"}]}]\n```"
+}

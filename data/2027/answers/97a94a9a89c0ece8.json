@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2923-019-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"Page 64 shows a $2,000 allowance toward preventive and comprehensive dental for all members. Page 111 lists mandatory supplemental dental covering cleanings, exams and X-rays.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Page 57 says routine acupuncture is covered under the Dental & Alternative Therapy Allowance. Page 65 lists acupuncture for conditions other than chronic low back pain, so it goes beyond the Medicare benefit.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Page 65 lists massage therapy among the alternative therapies reimbursed under the Dental & Alternative Therapy Allowance. Page 64 names therapeutic massage in that allowance, and it is a supplemental benefit for all members.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"Page 96 shows $580 for outpatient hospital surgery. For the ASC it shows $480 facility and $0 professional, and the facility copay is the center's cost, so $480. Colonoscopy rows are excluded.\"}\n]"
+}

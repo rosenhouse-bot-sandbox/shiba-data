@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2406-070-0.retry.md",
+ "reply": "```json\n[{\"key\": \"main.I_outpatient_surgery\", \"result\": \"cite\", \"citations\": [{\"page\": 86, \"quote\": \"$835 copayment or Medicare-covered surgery or other services provided to you at an outpatient hospital\"}, {\"page\": 85, \"quote\": \"$785 copayment or Medicare-covered surgery or other services provided to you at an ambulatory surgical center\"}]}]\n```"
+}

@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H7006-021-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 38, under 'Routine (non-Medicare covered) acupuncture services': a Flex Card allowance covers non-Medicare-covered acupuncture. It is a $100 allowance every six months shared by chiropractic, acupuncture and naturopathy, so it names the benefit and earns a full dot (R11).\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 43, 'Routine chiropractic care' row: a Flex Card allowance covers non-Medicare-covered chiropractic services. It is a $100 allowance every six months shared by chiropractic, acupuncture and naturopathy, so it names the benefit and earns a full dot (R11).\"}]\n```"
+}

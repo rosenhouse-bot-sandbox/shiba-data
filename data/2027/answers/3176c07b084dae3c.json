@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2406-042-0.md",
+ "reply": "```json\n[{\"key\": \"dvha.H_hearing\", \"result\": \"cite\", \"citations\": [{\"page\": 63, \"quote\": \"Hearing services - routine hearing exam $0 copayment\"}, {\"page\": 64, \"quote\": \"Hearing aid allowance is $700\"}, {\"page\": 64, \"quote\": \"This bene it is limited to 2 hearing aids every\"}]},\n {\"key\": \"main.G_specialist\", \"result\": \"cite\", \"citations\": [{\"page\": 12, \"quote\": \"$50 copayment per visit (in-network).\"}, {\"page\": 12, \"quote\": \"$80 copayment per visit (out-of-network).\"}]},\n {\"key\": \"main.I_outpatient_surgery\", \"result\": \"cite\", \"citations\": [{\"page\": 86, \"quote\": \"$400 copayment or Medicare-covered surgery or other services provided to you at an ambulatory surgical center\"}, {\"page\": 86, \"quote\": \"$550 copayment or Medicare-covered surgery or other services provided to you at an outpatient hospital\"}]},\n {\"key\": \"main.O_medical_deductible\", \"result\": \"skip\"}]\n```"
+}

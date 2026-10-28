@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2056-003-0.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 62 outpatient surgery row: $500 copay at an outpatient hospital facility and $450 at an ambulatory surgical center, in that order. Both are after the $750 deductible, and the value gives the amounts only.\"},{\"id\":1,\"ok\":true,\"reason\":\"Page 8 'Your costs in 2027' table, specialist office visits row: $65 per visit. This is an HMO, so the single in-network amount is the right value.\"}]"
+}
