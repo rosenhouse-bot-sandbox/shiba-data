@@ -150,8 +150,8 @@ class SiteDataTest(unittest.TestCase):
     def test_titles_the_page_with_the_year_and_counties(self):
         html = "<title>Medicare Advantage plans</title><h1>Medicare Advantage plans</h1>"
         self.assertEqual(build.titled(html, {"year": 2099, "area": "A & B"}),
-                         "<title>2099 Medicare Advantage plans: A &amp; B</title>"
-                         "<h1>2099 Medicare Advantage plans <span>A &amp; B</span></h1>")
+                         "<title>shibasheets.org – 2099 Medicare Advantage plans</title>"
+                         "<h1>shibasheets.org – 2099 Medicare Advantage plans <span>for A &amp; B</span></h1>")
 
     def test_columns_are_the_spec_columns_in_order(self):
         for sheet in ("main", "dvha"):
@@ -342,7 +342,7 @@ class DocumentsTest(unittest.TestCase):
             build.main("site", self.dir / "site")
         built = datetime.datetime.fromisoformat(json.loads((self.dir / "site" / "data.json").read_text())["built"])
         self.assertLess(datetime.datetime.now(datetime.timezone.utc) - built, datetime.timedelta(minutes=1))
-        self.assertIn("<title>2099 Medicare Advantage plans: A &amp; B</title>", (self.dir / "site" / "index.html").read_text())
+        self.assertIn("<title>shibasheets.org – 2099 Medicare Advantage plans</title>", (self.dir / "site" / "index.html").read_text())
 
 
 class ZipTest(unittest.TestCase):
