@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2923-005-0.md",
+ "reply": "```json\n[{\"key\": \"dvha.E_optional_packages\", \"result\": \"not_mentioned\", \"citations\": [], \"reason\": \"None of the passages mention optional supplemental packages or their premiums; they cover unrelated topics such as Part D penalties and definitions.\"}, {\"key\": \"main.AA_opt_packages\", \"result\": \"not_mentioned\", \"citations\": [], \"reason\": \"None of the passages mention optional supplemental benefit packages bought for an extra premium.\"}, {\"key\": \"main.X_transportation\", \"result\": \"covered\", \"citations\": [{\"page\": 55, \"quote\": \"Self-directed ambulance services when there is no longer an emergency\"}], \"reason\": \"Listed under the plan's supplemental (extra) benefits, the plan pays for non-emergency self-directed ambulance transport, a routine benefit beyond Medicare.\"}, {\"key\": \"main.Z_part_b_reduction\", \"result\": \"not_mentioned\", \"citations\": [], \"reason\": \"No passage mentions a Part B premium reduction or giveback amount.\"}]\n```"
+}

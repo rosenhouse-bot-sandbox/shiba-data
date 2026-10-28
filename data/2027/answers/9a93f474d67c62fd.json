@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H5216-427-2.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"The chiropractic benefit covers only manual spinal manipulation for subluxation, other chiropractor services are stated as not covered, and the exclusions table lists routine chiropractic care as only manipulation; no passage shows routine coverage.\"},{\"id\":1,\"ok\":true,\"reason\":\"The exclusions table states naturopath services are not covered under any condition, and no passage shows any coverage.\"}]"
+}

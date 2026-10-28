@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H3817-011-1.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"The 'Services not covered' table lists naturopath services as 'Not covered under any condition', and no passage shows any supplemental coverage.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Therapeutic massage is listed as 'Not covered under any condition' in the exclusions table, and nothing shows routine massage coverage.\"},\n{\"id\":2,\"ok\":false,\"reason\":\"The quote is the Part D exclusion of non-prescription drugs, which is not about an OTC items allowance, so it does not show the plan lacks that benefit.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"The chiropractic benefit and the exclusions table cover only manual manipulation of the spine for subluxation, with no routine chiropractic benefit shown.\"},\n{\"id\":4,\"ok\":true,\"reason\":\"Acupuncture is covered only for chronic low back pain under the Medicare criteria, and no routine acupuncture benefit appears.\"}\n]"
+}

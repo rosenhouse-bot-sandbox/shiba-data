@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H1036-317-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The EOC chiropractic benefit covers only Medicare manual manipulation of the spine ($15 copay) and says other chiropractor services are not covered; no passage shows a routine chiropractic benefit, allowance, or card.\"}]\n```"
+}

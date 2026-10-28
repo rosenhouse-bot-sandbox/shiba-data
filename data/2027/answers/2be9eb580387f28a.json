@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2056-018-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"Page 29 gives only a copay for Medicare-covered acupuncture for chronic low back pain, and page 74 limits acupuncture to that condition; no passage shows routine acupuncture, though the Extra Benefits Card's list is cut off.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Page 74 lists naturopath services as 'Not covered under any condition'.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Page 76 lists therapeutic massage as 'Not covered under any condition'.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"Pages 33 and 75 limit chiropractic to Medicare manual manipulation of the spine, with all other services, including maintenance therapy, not covered.\"}\n]"
+}

@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H3805-040-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":false,\"reason\":\"The quote only lists extra charges excluded from Medicare chiropractic coverage; it is not a plan-wide statement that massage therapy is not covered.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Acupuncture is covered only as the Medicare chronic low back pain benefit (pp. 50-51, 108), and no passage shows routine acupuncture.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"The exclusions chart lists naturopath services as 'Not covered under any condition'.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"Chiropractic is covered only as Medicare-covered spinal manipulation for subluxation ($15 copay), with other services excluded and no supplemental chiropractic benefit shown.\"}\n]"
+}
