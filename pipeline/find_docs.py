@@ -40,12 +40,27 @@ def templated(plans, year):
     return [dict(r, found_via="URL template in pipeline/find_docs.py") for r in rows]
 
 
+def warn_where_links_differ(found, links):
+    found_url = {}
+    for r in found:
+        for i in r["plan_ids"].split(";"):
+            found_url.setdefault((i, r["kind"]), r["url"])
+    warned = set()
+    for r in links:
+        for i in r["plan_ids"].split(";"):
+            url = found_url.get((i, r["kind"]))
+            if url and url != r["url"] and (i, r["kind"]) not in warned:
+                print(f"::warning::The Links sheet's {r['kind']} for {i} is {r['url']}, but found.csv has {url}")
+                warned.add((i, r["kind"]))
+
+
 def documents(plans, found, links, year):
     """Prints a warning for each plan left without an SB or EOC."""
     ids = {p["plan_id"] for p in plans}
     for r in found + links:
         if r["kind"] not in KINDS + ("RIDER",) or not set(r["plan_ids"].split(";")) <= ids:
             raise SystemExit(f"A row names an unknown kind or plan: {r}")
+    warn_where_links_differ(found, links)
     rows, have = [], set()
     for r in found + links + templated(plans, year):
         missing = [i for i in r["plan_ids"].split(";") if (i, r["kind"]) not in have]
