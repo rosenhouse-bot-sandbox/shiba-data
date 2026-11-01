@@ -15,7 +15,6 @@ DOT = ("A dot means the plan covers the routine (supplemental) benefit, not only
        "A benefit only in an optional package gets the Opt Packages dot instead (methods R13). "
        "A benefit only for some members, such as SSBCI, gets no dot unless the plan also covers it for all members.")
 
-# A key keeps its column's letter on the volunteers' sheet. A new column takes the next free letter.
 COLUMNS = [
     Column("main", "C_premium", "Premium",
            "Monthly plan premium (not counting the Part B premium).",
@@ -32,12 +31,6 @@ COLUMNS = [
            "Specialist office visit copay. Line 1 in-network, line 2 out-of-network. "
            "Office visits only: leave out hearing exams, telehealth and nursing-home visits (#31 section 2.2).",
            [r"specialist"]),
-    Column("main", "AB_ambulance", "Ambulance",
-           "Ambulance cost range per trip or date of service, over ground and air trips. "
-           "Line 1 = within the U.S.: emergency or not, including facility transfers and trips outside the service area. "
-           "Line 2 = emergency ambulance outside the U.S. \"not covered\" = the EOC excludes it. "
-           "\"EOC unclear\" = the EOC covers emergency care abroad but never mentions ambulance there.",
-           [r"ambulance"]),
     Column("main", "H_inpatient", "Inpatient Hospital $/Day",
            "Inpatient hospital (acute) cost. \"$395 | 1-5\" = $395 per day for days 1-5, then $0. \"per stay\" = per admission.",
            [r"inpatient hospital care", r"per day", r"days? \d+.\d+"]),
@@ -105,6 +98,12 @@ COLUMNS = [
     Column("main", "AA_opt_packages", "Opt Packages",
            "Dot if optional supplemental benefit packages can be bought for an extra monthly premium (methods R13).",
            [r"optional supplemental", r"additional premium", r"rider"]),
+    Column("main", "AB_ambulance", "Ambulance",
+           "Ambulance cost range per trip or date of service, over ground and air trips. "
+           "Line 1 = within the U.S.: emergency or not, including facility transfers and trips outside the service area. "
+           "Line 2 = emergency ambulance outside the U.S. \"not covered\" = the EOC excludes it. "
+           "\"EOC unclear\" = the EOC covers emergency care abroad but never mentions ambulance there.",
+           [r"ambulance"]),
     Column("dvha", "C_premium", "Monthly Premium",
            "Monthly plan premium (not counting the Part B premium)."),
     Column("dvha", "D_premium_full_extra_help", "Premium w/ Full Extra Help",
