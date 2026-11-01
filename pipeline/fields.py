@@ -4,6 +4,7 @@ Also what carriers' EOCs tend to do.
 The generators, the model prompts and the site all read this spec.
 A rule's source, when known, is in parentheses: "#31 section n" is issue #31, and
 "methods Rn" or "methods 6.5" is docs/2027-bootstrap/CLAUDE_ANALYSIS_METHODS.md.
+"expert" is a SHIBA Medicare expert's review.
 """
 import collections
 
@@ -11,9 +12,11 @@ Column = collections.namedtuple("Column", "sheet key label meaning find", defaul
 
 DOT = ("A dot means the plan covers the routine (supplemental) benefit, not only a Medicare-covered one (methods R10). "
        "A shared allowance or card that names the benefit counts (methods R11). "
-       "A general wellness fund that names the benefit counts too (SHIBA expert, 2026-11-01). "
+       "A general wellness fund that names the benefit counts too (expert). "
        "A benefit only in an optional package gets the Opt Packages dot instead (methods R13). "
        "A benefit only for some members, such as SSBCI, gets no dot unless the plan also covers it for all members.")
+
+OFFICE = "When the SB prices settings separately, use office and freestanding prices, not outpatient hospital (expert)."
 
 COLUMNS = [
     Column("main", "C_premium", "Premium",
@@ -36,20 +39,23 @@ COLUMNS = [
            [r"inpatient hospital care", r"per day", r"days? \d+.\d+"]),
     Column("main", "I_outpatient_surgery", "Outpatient Surgery / ASC",
            "Line 1 = outpatient hospital surgery; line 2 = ambulatory surgical center (ASC). \"a/b\" inside a line = in/out-of-network. "
-           "Give the surgery amount in each setting. Leave out colonoscopy, biopsies, wound care and other services "
-           "billed in the same setting (#31 sections 1.3 and 2.1).",
+           "Give the surgery amount in each setting. Start the range at $0 when that setting charges $0 for a diagnostic "
+           "colonoscopy or skin biopsy (expert). Leave out wound care and other services billed in the same setting (#31 section 1.3).",
            [r"ambulatory surgical", r"outpatient hospital", r"outpatient surgery"]),
     Column("main", "J_outpatient_rehab", "Outpatient Rehab OT, PT, ST",
            "Outpatient rehabilitation (occupational, physical, speech therapy) visit copay or range. "
-           "Leave out re-evaluations (#31 section 2.3).",
+           f"Leave out re-evaluations (#31 section 2.3). {OFFICE}",
            [r"outpatient rehabilitation", r"physical therapy", r"occupational therapy", r"speech"]),
     Column("main", "K_tests_labs", "Diagnostic Tests / Labs",
            "\"tests/labs\", e.g. \"$35/$0\". Tests = non-radiological diagnostic tests (EKG, sleep studies, stress tests). "
-           "Labs = outpatient lab services. Leave out X-rays, imaging and genetic testing (#31 section 2.4).",
+           "Labs = outpatient lab services. Leave out X-rays, imaging and genetic testing (#31 section 2.4). "
+           "For AgeRight and Regence, a $0 diagnostic colonoscopy or mammogram also counts as a test (expert). "
+           f"{OFFICE} Humana H1036-306 keeps its $140 sleep study, which only outpatient hospitals offer (expert).",
            [r"diagnostic (tests|procedures)", r"lab(oratory)? services", r"\blab\b"]),
     Column("main", "L_xray_imaging", "X-Ray / Diag Radiology",
            "Line 1 = X-rays. Line 2 = advanced imaging: CT, MRI and PET scans only (methods 6.5). "
-           "Leave out mammograms, ultrasounds and other tests.",
+           "Start line 2 at $0 when the plan charges $0 for a diagnostic mammogram, except for Kaiser and Humana (expert). "
+           f"Leave out ultrasounds and other tests. {OFFICE} Humana X-rays use PCP and specialist office prices (expert).",
            [r"x-ray", r"radiolog", r"\bMRI\b", r"\bCT\b", r"\bPET\b"]),
     Column("main", "M_part_b_drugs", "Chemo / Part B Drugs",
            "Medicare Part B prescription drugs (incl. chemotherapy) coinsurance range. "
@@ -60,7 +66,8 @@ COLUMNS = [
            [r"deductible stage", r"part d deductible", r"drug deductible", r"tier"]),
     Column("main", "O_medical_deductible", "Medical Deductible",
            "Medical (Part A/B services) deductible. \"$750 some\" = applies to some services only (methods R4). "
-           "\"$100 out-of-network only\" = applies only out of network. \"$0\" = no medical deductible.",
+           "\"$100 out-of-network only\" = applies only out of network. \"$100 some out-of-network services\" is the same, "
+           "for some services only (expert). \"$0\" = no medical deductible.",
            [r"medical deductible", r"\bdeductible\b"]),
     Column("main", "P_vision", "Vision",
            f"Dot (●) if the plan covers routine vision: eye exam and/or eyewear. Blank if not. {DOT}",
@@ -144,11 +151,12 @@ COLUMNS = [
 CARRIERS = {
     "UnitedHealthcare": "Tables print in-network and out-of-network costs side by side, so one text line can mix both. "
                         "The text drops some f's, as in \"or services rom a specialist\". "
-                        "Some plans give a cost as \"$0 copayment or 20% coinsurance\", depending on the member's Medicaid level.",
+                        "Some plans give a cost as \"$0 copayment or 20% coinsurance\", depending on the member's Medicaid level. "
+                        "The $0 is for members with QMB or full Medicaid, so give the other amount (expert).",
     "Humana": "A benefit row lists each setting's cost on its own line, as in \"$450 copayment – Outpatient Hospital\".",
     "Devoted Health": "Surgery center rows give a facility copay and a $0 professional copay; the facility copay is the center's cost. "
                       "The Dental & Alternative Therapy Allowance names dental, acupuncture, massage and naturopathy, "
-                      "so it counts toward each of their dots (methods R11). Wellness Bucks names acupuncture, massage and naturopathy, so it counts toward their dots too.",
+                      "so it counts toward each of their dots (methods R11). Wellness Bucks names acupuncture, massage and naturopathy, so it counts toward their dots too (expert).",
     "Wellcare": "Outpatient hospital rows give $0 for skin biopsies and one copay for all other services.",
     "ATRIO Health Plans": "One Flex Card allowance names acupuncture, chiropractic and naturopathy, "
                           "so it counts toward each of their dots (methods R11).",
