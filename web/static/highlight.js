@@ -15,6 +15,12 @@ export function matchRanges(items, quote, lefts = []) {
   return hits.length === 1 ? hits[0] : [];
 }
 
+// Finds every occurrence of a search query, ignoring whitespace and case.
+export function findAll(items, query) {
+  const needle = squash(query);
+  return needle ? occurrences(items, items.map((s, i) => i), needle) : [];
+}
+
 function occurrences(items, order, needle) {
   let text = "";
   const pos = [];

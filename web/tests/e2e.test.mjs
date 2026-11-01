@@ -446,6 +446,61 @@ test("a cell's note restates the CMS plan data without our symbols", async () =>
   }
 });
 
+const openEoc = async (planId) => {
+  await page.goto(`${base}#/plan/${planId}`);
+  await page.locator("table.docs a", { hasText: "Evidence of Coverage" }).click();
+  await shown(docOf(planId, "EOC"), 1);
+};
+const findCount = (text) => page.waitForFunction((t) => document.querySelector("#find-count").textContent === t, text);
+const currentMark = () => page.locator(".textLayer mark.found.current").first().textContent();
+
+test("Ctrl+F finds text on a page that has not rendered yet", async () => {
+  await openEoc("H2001-045-0");
+  await page.keyboard.press("Control+f");
+  assert.equal(await page.evaluate(() => document.activeElement.id), "find-query");
+  await page.keyboard.type("Naturopath");
+  await findCount("1 of 1");
+  await shown(docOf("H2001-045-0", "EOC"), 124);
+  assert.match(await currentMark(), /naturopath/i);
+});
+
+test("Enter and Shift+Enter step through matches from the current page, wrapping at the ends", async () => {
+  const eoc = docOf("H2001-045-0", "EOC");
+  await page.keyboard.press("Escape");
+  assert.equal(await page.isHidden("#find"), true);
+  assert.equal(await page.locator(".textLayer mark.found").count(), 0);
+  await page.fill("#page", "50");
+  await page.press("#page", "Enter");
+  await shown(eoc, 50);
+  await page.keyboard.press("Meta+f");
+  assert.equal(await page.inputValue("#find-query"), "Naturopath");
+  await page.keyboard.type("acupuncture");
+  await shown(eoc, 55);
+  const total = Number((await page.textContent("#find-count")).match(/^\d+ of (\d+)$/)[1]);
+  await findCount(`2 of ${total}`);
+  await page.keyboard.press("Enter");
+  await shown(eoc, 57);
+  await findCount(`3 of ${total}`);
+  await page.keyboard.press("Shift+Enter");
+  await page.keyboard.press("Shift+Enter");
+  await page.keyboard.press("Shift+Enter");
+  await shown(eoc, 124);
+  await findCount(`${total} of ${total}`);
+  assert.match(await currentMark(), /acupuncture/i);
+});
+
+test("the find box says when nothing matches", async () => {
+  await page.fill("#find-query", "zzqxv");
+  await findCount("No matches");
+});
+
+test("opening another document closes the find box", async () => {
+  await page.goto(`${base}#/main`);
+  await row("H3805-048-0").locator(UNCITED).first().click();
+  await shown(docOf("H3805-048-0", "SB"), 1);
+  assert.equal(await page.isHidden("#find"), true);
+});
+
 test("closing the viewer hides it", async () => {
   await page.click("#close");
   assert.equal(await page.isHidden("#viewer"), true);

@@ -66,6 +66,10 @@ td.selected { outline: 3px solid var(--ink); outline-offset: -3px; }
 .toolbar strong { flex: 1 1 100%; font-size: 13px; }
 .toolbar input { width: 56px; }
 .toolbar #close { margin-left: auto; }
+#find { display: flex; gap: 6px; align-items: center; padding: 4px 8px; background: var(--head); border-top: 1px solid var(--line); }
+#find[hidden] { display: none; }
+#find-query { flex: 0 1 240px; }
+#find-count { color: var(--muted); font-size: 13px; min-width: 70px; }
 #source-note { padding: 4px 10px; font-size: 13px; border-bottom: 1px solid var(--line); max-height: 30vh; overflow: auto; }
 #source-note p { margin: 4px 0; }
 #source-note .comment { background: var(--comment); padding: 4px 6px; }
@@ -76,4 +80,6 @@ td.selected { outline: 3px solid var(--ink); outline-offset: -3px; }
 .page { position: relative; margin: 0 auto 12px; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3); background: #fff; }
 .page canvas { display: block; }
 .textLayer mark { background: rgba(255, 196, 0, 0.5); color: transparent; border-radius: 2px; box-shadow: 0 0 0 2px rgba(230, 120, 0, 0.8); }
+.textLayer mark.found { background: rgba(80, 160, 255, 0.35); box-shadow: none; }
+.textLayer mark.found.current { background: rgba(255, 90, 0, 0.45); box-shadow: 0 0 0 2px rgba(200, 60, 0, 0.9); }
 .notice { background: #fff; padding: 16px; }

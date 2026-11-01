@@ -1,5 +1,5 @@
 import * as pdfjsLib from "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.min.mjs";
-import { matchRanges } from "./highlight.js";
+import { findAll, matchRanges, squash } from "./highlight.js";
 import { ago } from "./ago.js";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.worker.min.mjs";
@@ -50,6 +50,25 @@ async function start() {
   $("#next").addEventListener("click", () => goTo(currentPage() + 1));
   $("#page").addEventListener("change", (e) => goTo(Number(e.target.value)));
   $("#close").addEventListener("click", closeViewer);
+  $("#find-open").addEventListener("click", openFind);
+  $("#find-query").addEventListener("input", search);
+  $("#find-query").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") step(e.shiftKey ? -1 : 1);
+    else if (e.key === "Escape") {
+      e.preventDefault();
+      closeFind();
+    }
+  });
+  $("#find-prev").addEventListener("click", () => step(-1));
+  $("#find-next").addEventListener("click", () => step(1));
+  $("#find-close").addEventListener("click", closeFind);
+  // A second Ctrl+F, from the find box, falls through to the browser's own find.
+  document.addEventListener("keydown", (e) => {
+    if (e.key.toLowerCase() !== "f" || !(e.ctrlKey || e.metaKey) || e.altKey || e.shiftKey) return;
+    if ($("#viewer").hidden || !viewer.pdf || document.activeElement === $("#find-query")) return;
+    e.preventDefault();
+    openFind();
+  });
   window.addEventListener("hashchange", route);
   pageObserver = new IntersectionObserver(onVisible, { root: area(), rootMargin: "1500px 0px" });
   area().addEventListener("scroll", () => {
@@ -60,7 +79,7 @@ async function start() {
   new ResizeObserver(() => {
     if (!viewer.pdf || !area().clientWidth) return;
     if (area().clientWidth !== viewer.width) layoutPages();
-    if (viewer.target) goTo(viewer.target.n, viewer.target.toCite);
+    if (viewer.target) goTo(viewer.target.n, viewer.target.focus);
     else if (viewer.anchor) restoreAnchor(viewer.anchor);
   }).observe(area());
   route();
@@ -260,7 +279,10 @@ function benefitTable(title, sheet, plan) {
 
 const kindName = (k) => ({ SB: "Summary of Benefits", EOC: "Evidence of Coverage", RIDER: "Optional rider" })[k] || k;
 
-const viewer = { showing: null, doc: null, loading: null, pdf: null, sizes: [], cite: null, quotes: [], target: null, anchor: null, width: 0 };
+const viewer = {
+  showing: null, doc: null, loading: null, pdf: null, sizes: [], cite: null, quotes: [], target: null, anchor: null, width: 0,
+  texts: null, search: null, hits: [], hit: -1,
+};
 const area = () => $("#page-area");
 const holders = () => [...area().querySelectorAll(".page")];
 
@@ -283,6 +305,7 @@ async function openDoc(docId, page, quote, note, otherQuotes = []) {
     return;
   }
   if (viewer.doc !== docId) {
+    closeFind();
     viewer.doc = docId;
     viewer.pdf = null;
     area().replaceChildren(el("p", { class: "notice" }, "Loading…"));
@@ -298,7 +321,7 @@ async function openDoc(docId, page, quote, note, otherQuotes = []) {
   } else {
     holders().forEach(markPage);
   }
-  goTo(page, true);
+  goTo(page, "cite");
 }
 
 async function loadSizes(file) {
@@ -326,11 +349,12 @@ function layoutPages() {
   $("#page-count").textContent = `of ${viewer.sizes.length}`;
 }
 
-function goTo(n, toCite = false) {
+// focus is "cite" or "find" to scroll to the cited quote or the current search match once the page renders.
+function goTo(n, focus = null) {
   const all = holders();
   if (!viewer.pdf || !all.length) return;
   n = Math.min(Math.max(1, n || 1), all.length);
-  viewer.target = { n, toCite };
+  viewer.target = { n, focus };
   const holder = all[n - 1];
   area().scrollTop = holder.offsetTop - 12;
   $("#page").value = n;
@@ -407,7 +431,8 @@ function arrive(holder) {
   if (!holder.isConnected || target?.n !== Number(holder.dataset.page)) return;
   viewer.target = null;
   area().dataset.shown = `${viewer.doc} ${target.n}`;
-  if (!target.toCite || viewer.cite?.page !== target.n) return;
+  if (target.focus === "find") holder.querySelector("mark.current")?.scrollIntoView({ block: "center" });
+  if (target.focus !== "cite" || viewer.cite?.page !== target.n) return;
   const mark = holder.querySelector("mark");
   if (mark) mark.scrollIntoView({ block: "center" });
   else $("#source-note").append(el("p", { class: "warn" }, "Could not find the quoted text on this page."));
@@ -416,13 +441,86 @@ function arrive(holder) {
 function markPage(holder) {
   if (!holder.text) return;
   const { divs, items } = holder.text;
-  divs.forEach((d, i) => (d.textContent = items[i].str));
-  const quotes = viewer.quotes.filter((q) => q.page === Number(holder.dataset.page)).map((q) => q.quote);
-  highlight(divs, items, [...new Set(quotes)]);
+  const n = Number(holder.dataset.page);
+  const strs = items.map((i) => i.str);
+  const lefts = items.map((i) => i.transform[4]);
+  const quotes = new Set(viewer.quotes.filter((q) => q.page === n).map((q) => q.quote));
+  const marks = [...quotes].flatMap((q) => matchRanges(strs, q, lefts).map((r) => ({ ...r, cls: "" })));
+  viewer.hits.forEach((h, i) => {
+    if (h.page === n) marks.push(...h.ranges.map((r) => ({ ...r, cls: i === viewer.hit ? "found current" : "found" })));
+  });
+  divs.forEach((d, i) => d.replaceChildren(...markText(strs[i], marks.filter((m) => m.item === i))));
+}
+
+// Splits s at every mark's edges, wrapping each piece that a mark covers in a <mark> with the covering marks' classes.
+function markText(s, marks) {
+  const cuts = [...new Set([0, s.length, ...marks.flatMap((m) => [m.start, m.end])])].sort((a, b) => a - b);
+  return cuts.slice(1).map((end, i) => {
+    const start = cuts[i];
+    const over = marks.filter((m) => m.start < end && m.end > start);
+    return over.length ? el("mark", { class: over.map((m) => m.cls).join(" ").trim() }, s.slice(start, end)) : s.slice(start, end);
+  });
+}
+
+function openFind() {
+  if (!viewer.pdf) return;
+  $("#find").hidden = false;
+  $("#find-query").select();
+  $("#find-query").focus();
+}
+
+function closeFind() {
+  $("#find").hidden = true;
+  viewer.search = null;
+  viewer.hits = [];
+  viewer.hit = -1;
+  holders().forEach(markPage);
+}
+
+function pageTexts() {
+  const pdf = viewer.pdf;
+  if (viewer.texts?.pdf !== pdf) {
+    viewer.texts = { pdf, items: Promise.all(Array.from({ length: pdf.numPages }, async (_, i) => {
+      const content = await (await pdf.getPage(i + 1)).getTextContent();
+      return content.items.filter((item) => "str" in item).map((item) => item.str);
+    })) };
+  }
+  return viewer.texts.items;
+}
+
+// Finds the query on every page and moves to the first match at or after the current match's page, or else the shown page.
+async function search() {
+  const query = $("#find-query").value;
+  const run = (viewer.search = {});
+  let hits = [];
+  if (squash(query)) {
+    $("#find-count").textContent = "Searching…";
+    const texts = await pageTexts();
+    if (viewer.search !== run) return;
+    hits = texts.flatMap((strs, i) => findAll(strs, query).map((ranges) => ({ page: i + 1, ranges })));
+  }
+  const from = viewer.hits[viewer.hit]?.page ?? currentPage();
+  viewer.hits = hits;
+  viewer.hit = hits.length ? Math.max(0, hits.findIndex((h) => h.page >= from)) : -1;
+  showHit();
+}
+
+function step(by) {
+  if (!viewer.hits.length) return search();
+  viewer.hit = (viewer.hit + by + viewer.hits.length) % viewer.hits.length;
+  showHit();
+}
+
+function showHit() {
+  const { hits, hit } = viewer;
+  $("#find-count").textContent = hits.length ? `${hit + 1} of ${hits.length}` : squash($("#find-query").value) ? "No matches" : "";
+  holders().forEach(markPage);
+  if (hit >= 0) goTo(hits[hit].page, "find");
 }
 
 function closeViewer() {
   $("#viewer").hidden = true;
+  closeFind();
   document.querySelectorAll(".selected").forEach((s) => s.classList.remove("selected"));
   markOpenPlans();
 }
@@ -430,26 +528,6 @@ function closeViewer() {
 function markOpenPlans() {
   const open = $("#viewer").hidden || !viewer.showing ? [] : site.docs[viewer.showing].plan_ids;
   document.querySelectorAll("tr[data-plan]").forEach((tr) => tr.classList.toggle("open-plan", open.includes(tr.dataset.plan)));
-}
-
-function highlight(divs, items, quotes) {
-  const strs = items.map((i) => i.str);
-  const lefts = items.map((i) => i.transform[4]);
-  const byItem = new Map();
-  for (const quote of quotes) {
-    for (const r of matchRanges(strs, quote, lefts)) byItem.set(r.item, [...(byItem.get(r.item) ?? []), r]);
-  }
-  for (const [item, ranges] of byItem) {
-    const s = strs[item];
-    const parts = [];
-    let at = 0;
-    for (const { start, end } of ranges.sort((a, b) => a.start - b.start)) {
-      if (start < at) continue;
-      parts.push(s.slice(at, start), el("mark", {}, s.slice(start, end)));
-      at = end;
-    }
-    divs[item].replaceChildren(...parts, s.slice(at));
-  }
 }
 
 start();
