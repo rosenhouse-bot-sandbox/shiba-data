@@ -1,0 +1,168 @@
+import pathlib
+import sys
+import tempfile
+import unittest
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
+import build  # noqa: E402
+import sheet_sync  # noqa: E402
+from sheet_layout import FILLS, SITE, TABS, Cell, Row, rows  # noqa: E402
+from test_build import data_copy  # noqa: E402
+
+
+def layout(*plans, columns=("A", "B")):
+    return [Row("header", "", [Cell(h) for h in ["Plan", "Plan ID", *columns]]),
+            Row("section", "Sec", [Cell("Sec")] + [Cell() for _ in range(len(columns) + 1)]),
+            *(Row("plan", p, [Cell(f"name {p}"), Cell(p), *(Cell(f"{p}{c}") for c in columns)]) for p in plans)]
+
+
+def grid(header, keys, rows=1000, cols=26):
+    return sheet_sync.Existing(sheet_id=7, header=header, keys=keys, row_count=rows, column_count=cols)
+
+
+def placed(requests):
+    """Maps (row, column) to the value each updateCells request writes there."""
+    out = {}
+    for r in requests:
+        if "updateCells" not in r:
+            continue
+        start = r["updateCells"]["start"]
+        for i, row in enumerate(r["updateCells"]["rows"]):
+            for j, cell in enumerate(row["values"]):
+                out[(start["rowIndex"] + i, start["columnIndex"] + j)] = cell["userEnteredValue"]["stringValue"]
+    return out
+
+
+class PlanTest(unittest.TestCase):
+    def test_fills_an_empty_sheet_from_the_top_left(self):
+        cells = placed(sheet_sync.plan(grid([], []), layout("P1", "P2")))
+        self.assertEqual(cells[(0, 0)], "Plan")
+        self.assertEqual(cells[(1, 0)], "Sec")
+        self.assertEqual(cells[(3, 1)], "P2")
+        self.assertEqual(cells[(3, 3)], "P2B")
+
+    def test_writes_each_value_onto_its_plans_row_and_columns_header(self):
+        existing = grid(["Plan", "Plan ID", "B", "A"], ["", "P2", "Sec", "P1"])
+        cells = placed(sheet_sync.plan(existing, layout("P1", "P2")))
+        self.assertEqual(cells[(3, 2)], "P1B")
+        self.assertEqual(cells[(3, 3)], "P1A")
+        self.assertEqual(cells[(1, 3)], "P2A")
+        self.assertEqual(cells[(2, 0)], "Sec")
+
+    def test_leaves_unknown_rows_and_columns_alone(self):
+        existing = grid(["Plan", "Plan ID", "Old", "A", "B"], ["", "Sec", "Gone", "P1"])
+        cells = placed(sheet_sync.plan(existing, layout("P1")))
+        self.assertFalse({(r, c) for r, c in cells if r == 2 or c == 2})
+        self.assertEqual(cells[(3, 4)], "P1B")
+
+    def test_appends_new_plans_and_columns_after_the_last_ones(self):
+        existing = grid(["Plan", "Plan ID", "A"], ["", "Sec", "P1", "", ""])
+        cells = placed(sheet_sync.plan(existing, layout("P1", "P2")))
+        self.assertEqual(cells[(0, 3)], "B")
+        self.assertEqual(cells[(1, 3)], "")
+        self.assertEqual(cells[(2, 3)], "P1B")
+        self.assertEqual(cells[(5, 1)], "P2")
+
+    def test_grows_a_grid_too_small_for_the_data(self):
+        requests = sheet_sync.plan(grid([], [], rows=2, cols=3), layout("P1", "P2"))
+        appends = {r["appendDimension"]["dimension"]: r["appendDimension"]["length"] for r in requests if "appendDimension" in r}
+        self.assertEqual(appends, {"ROWS": 2, "COLUMNS": 1})
+        self.assertLess(requests.index(next(r for r in requests if "appendDimension" in r)),
+                        requests.index(next(r for r in requests if "updateCells" in r)))
+
+    def test_keeps_header_and_plan_columns_in_view(self):
+        [props] = [r["updateSheetProperties"] for r in sheet_sync.plan(grid([], []), layout("P1")) if "updateSheetProperties" in r]
+        self.assertEqual(props["properties"]["gridProperties"], {"frozenRowCount": 1, "frozenColumnCount": 2})
+
+    def test_sizes_columns_where_they_land(self):
+        existing = grid(["Plan", "Plan ID", "B", "A"], ["", "Sec", "P1"])
+        requests = sheet_sync.plan(existing, layout("P1"), widths=[40, 14, 5, 9])
+        sizes = {r["updateDimensionProperties"]["range"]["startIndex"]: r["updateDimensionProperties"]["properties"]["pixelSize"]
+                 for r in requests if "updateDimensionProperties" in r}
+        self.assertEqual(sizes[3], sheet_sync.pixels(5))
+        self.assertEqual(sizes[2], sheet_sync.pixels(9))
+
+
+class CellDataTest(unittest.TestCase):
+    def test_value_stays_text(self):
+        self.assertEqual(sheet_sync.cell_data(Cell("$0"), "plan")["userEnteredValue"], {"stringValue": "$0"})
+
+    def test_link_note_and_fill(self):
+        data = sheet_sync.cell_data(Cell("x", link="https://l", note="n", fill="FFF6D6"), "plan")
+        self.assertEqual(data["userEnteredFormat"]["textFormat"]["link"], {"uri": "https://l"})
+        self.assertEqual(data["note"], "n")
+        self.assertEqual(data["userEnteredFormat"]["backgroundColor"], {"red": 1.0, "green": 0xF6 / 255, "blue": 0xD6 / 255})
+
+    def test_plain_cell_clears_an_old_note_link_and_fill(self):
+        data = sheet_sync.cell_data(Cell("x"), "plan")
+        self.assertEqual(data["note"], "")
+        self.assertNotIn("link", data["userEnteredFormat"]["textFormat"])
+        self.assertEqual(data["userEnteredFormat"]["backgroundColor"], {"red": 1.0, "green": 1.0, "blue": 1.0})
+
+    def test_header_and_section_rows_are_bold(self):
+        self.assertTrue(sheet_sync.cell_data(Cell("h"), "header")["userEnteredFormat"]["textFormat"]["bold"])
+        section = sheet_sync.cell_data(Cell("s"), "section")["userEnteredFormat"]
+        self.assertTrue(section["textFormat"]["bold"])
+        self.assertEqual(section["textFormat"]["foregroundColor"], {"red": 1.0, "green": 1.0, "blue": 1.0})
+
+
+class FakeApi:
+    def __init__(self, tabs):
+        self.tabs = dict(tabs)
+        self.batches = []
+
+    def sheets(self):
+        return [{"sheetId": i, "title": t, "gridProperties": {"rowCount": 1000, "columnCount": 26}} for i, t in enumerate(self.tabs)]
+
+    def values(self, ranges):
+        out = []
+        for r in ranges:
+            title, cells = r.rsplit("!", 1)
+            data = self.tabs[title.strip("'").replace("''", "'")]
+            out.append(data[:1] if cells == "1:1" else [row[:2] for row in data])
+        return out
+
+    def batch_update(self, requests):
+        self.batches.append(requests)
+        for r in requests:
+            if "addSheet" in r:
+                self.tabs[r["addSheet"]["properties"]["title"]] = []
+
+
+class SyncTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        with tempfile.TemporaryDirectory() as tmp:
+            cls.site = build.site_data(data_copy(tmp, []))
+
+    def test_adds_missing_tabs_then_fills_them(self):
+        api = FakeApi({"Sheet1": []})
+        sheet_sync.sync(api, self.site)
+        self.assertEqual([r["addSheet"]["properties"]["title"] for r in api.batches[0]], list(TABS.values()))
+        cells = placed(api.batches[1])
+        self.assertEqual(cells[(0, 0)], "Plan")
+        self.assertEqual(len([1 for (r, c), v in cells.items() if c == 1 and v.startswith("H")]),
+                         len(self.site["plans"]))
+
+    def test_rewrites_a_filled_sheet_in_place(self):
+        tabs = {tab: [[c.value for c in row.cells] for row in rows(self.site, name)] for name, tab in TABS.items()}
+        api = FakeApi(tabs)
+        sheet_sync.sync(api, self.site)
+        self.assertEqual(len(api.batches), len(TABS))
+        cells = placed(api.batches[0])
+        main = [[c.value for c in row.cells] for row in rows(self.site, "main")]
+        self.assertEqual(cells[(len(main) - 1, len(main[0]) - 1)], main[-1][-1])
+
+    def test_cited_cell_links_to_the_site(self):
+        api = FakeApi({})
+        sheet_sync.sync(api, self.site)
+        links = [c["userEnteredFormat"]["textFormat"].get("link", {}).get("uri")
+                 for r in api.batches[1] if "updateCells" in r for row in r["updateCells"]["rows"] for c in row["values"]]
+        self.assertIn(f"{SITE}#/main/H2001-045-0/H_inpatient", links)
+        fills = [c["userEnteredFormat"]["backgroundColor"]
+                 for r in api.batches[1] if "updateCells" in r for row in r["updateCells"]["rows"] for c in row["values"]]
+        self.assertIn(sheet_sync.color(FILLS["note"]), fills)
+
+
+if __name__ == "__main__":
+    unittest.main()

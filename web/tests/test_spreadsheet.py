@@ -8,6 +8,7 @@ import openpyxl
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 import build  # noqa: E402
+import sheet_layout  # noqa: E402
 import spreadsheet  # noqa: E402
 from test_build import data_copy  # noqa: E402
 
@@ -78,13 +79,13 @@ class WorkbookTest(unittest.TestCase):
     def test_columns_fit_their_longest_line_up_to_a_cap(self):
         ws = self.book["Dental, vision, hearing, extras"]
         widths = [ws.column_dimensions[c[0].column_letter].width for c in ws.iter_cols(min_col=3, max_row=1)]
-        self.assertEqual(max(widths), spreadsheet.MAX_WIDTH)
+        self.assertEqual(max(widths), sheet_layout.MAX_WIDTH)
         self.assertGreater(min(widths), len("Premium"))
 
     def test_commented_cell_carries_comment_and_color(self):
         cell = self.cell(self.book["Main chart"], "H6815-038-0", build.fields.labels("main")["K_tests_labs"])
         self.assertIn("EKG", cell.comment.text)
-        self.assertEqual(cell.fill.fgColor.rgb, "00" + spreadsheet.FILLS["note"])
+        self.assertEqual(cell.fill.fgColor.rgb, "00" + sheet_layout.FILLS["note"])
 
     def test_commented_cell_links_to_its_cell_on_the_site(self):
         cell = self.cell(self.book["Main chart"], "H6815-038-0", build.fields.labels("main")["K_tests_labs"])
@@ -95,7 +96,7 @@ class WorkbookTest(unittest.TestCase):
         row = next(r for r in site["main"]["rows"] if r["plan_id"] == "H6815-038-0")
         row["cells"]["K_tests_labs"]["comment"]["kind"] = "contradicts"
         cell = self.cell(book(site)["Main chart"], "H6815-038-0", build.fields.labels("main")["K_tests_labs"])
-        self.assertEqual(cell.fill.fgColor.rgb, "00" + spreadsheet.FILLS["contradicts"])
+        self.assertEqual(cell.fill.fgColor.rgb, "00" + sheet_layout.FILLS["contradicts"])
 
 
 if __name__ == "__main__":

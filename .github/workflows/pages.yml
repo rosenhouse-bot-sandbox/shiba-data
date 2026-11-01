@@ -64,3 +64,27 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  sheet:
+    if: github.ref == 'refs/heads/main' && vars.SHIBA_SHEET_ID != ''
+    needs: deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - id: google
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ vars.GCP_SERVICE_ACCOUNT }}
+          token_format: access_token
+          access_token_scopes: https://www.googleapis.com/auth/spreadsheets
+      - env:
+          SHEETS_TOKEN: ${{ steps.google.outputs.access_token }}
+          SHIBA_SHEET_ID: ${{ vars.SHIBA_SHEET_ID }}
+        run: python3 -I web/sheet_sync.py

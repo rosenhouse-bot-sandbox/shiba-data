@@ -2,56 +2,38 @@
 import openpyxl
 from openpyxl.comments import Comment
 from openpyxl.styles import Alignment, Font, PatternFill
+from openpyxl.utils import get_column_letter
 
-SITE = "https://shibasheets.org/"
-TABS = {"main": "Main chart", "dvha": "Dental, vision, hearing, extras"}
-# Keep in sync with --comment and --contradicts in web/static/style.css.
-FILLS = {"note": "FFF6D6", "contradicts": "FFDCB8"}
-HEAD = PatternFill("solid", fgColor="EEF1F6")
-SECTION = PatternFill("solid", fgColor="1D2433")
+from sheet_layout import HEAD, SECTION, TABS, rows, widths
+
 TOP = Alignment(vertical="top", wrap_text=True)
-MAX_WIDTH = 40
 
 
 def write(site, path):
     book = openpyxl.Workbook()
     book.remove(book.active)
-    plans = {p["plan_id"]: p for p in site["plans"]}
     for name, tab in TABS.items():
-        add_tab(book.create_sheet(tab), name, site[name], plans, site["sections"])
+        add_tab(book.create_sheet(tab), site, name)
     book.save(path)
 
 
-def add_tab(ws, name, sheet, plans, sections):
-    ws.append(["Plan", "Plan ID", *(c["label"] for c in sheet["columns"])])
-    for c in ws[1]:
-        c.font = Font(bold=True)
-        c.fill = HEAD
-        c.alignment = TOP
+def add_tab(ws, site, name):
     ws.freeze_panes = "C2"
-    ws.column_dimensions["A"].width = MAX_WIDTH
-    ws.column_dimensions["B"].width = 14
-    for col, xl in zip(sheet["columns"], ws[1][2:]):
-        lines = [line for r in sheet["rows"] for line in r["cells"][col["key"]]["value"].split(" | ")]
-        ws.column_dimensions[xl.column_letter].width = min(MAX_WIDTH, 2 + max(map(len, lines + col["label"].split())))
-    section = None
-    for row in sheet["rows"]:
-        if row["section"] != section:
-            section = row["section"]
-            ws.append([sections.get(section, section)] + [None] * (len(sheet["columns"]) + 1))
-            for c in ws[ws.max_row]:
-                c.font = Font(bold=True, color="FFFFFF")
-                c.fill = SECTION
-        plan_id = row["plan_id"]
-        ws.append([plans[plan_id]["plan_name"], plan_id,
-                   *(row["cells"][c["key"]]["value"].replace(" | ", "\n") for c in sheet["columns"])])
-        xl_row = ws[ws.max_row]
-        xl_row[0].hyperlink = f"{SITE}#/plan/{plan_id}"
-        for col, xl in zip(sheet["columns"], xl_row[2:]):
+    for i, width in enumerate(widths(site[name]), 1):
+        ws.column_dimensions[get_column_letter(i)].width = width
+    for row in rows(site, name):
+        ws.append([c.value or None for c in row.cells])
+        for cell, xl in zip(row.cells, ws[ws.max_row]):
             xl.alignment = TOP
-            cell = row["cells"][col["key"]]
-            if cell["value"] and (cell["cites"] or "comment" in cell):
-                xl.hyperlink = f"{SITE}#/{name}/{plan_id}/{col['key']}"
-            if "comment" in cell:
-                xl.comment = Comment(cell["comment"]["text"], "shibasheets.org", width=300, height=150)
-                xl.fill = PatternFill("solid", fgColor=FILLS[cell["comment"]["kind"]])
+            if row.kind == "header":
+                xl.font = Font(bold=True)
+                xl.fill = PatternFill("solid", fgColor=HEAD)
+            elif row.kind == "section":
+                xl.font = Font(bold=True, color="FFFFFF")
+                xl.fill = PatternFill("solid", fgColor=SECTION)
+            if cell.link:
+                xl.hyperlink = cell.link
+            if cell.note:
+                xl.comment = Comment(cell.note, "shibasheets.org", width=300, height=150)
+            if cell.fill:
+                xl.fill = PatternFill("solid", fgColor=cell.fill)
