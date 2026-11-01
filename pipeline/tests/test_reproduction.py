@@ -72,7 +72,7 @@ class MainChartReproducesCorrections(unittest.TestCase):
                 self.assertEqual(LIVE["main"][plan][col], expected)
 
     def test_devoted_core_keeps_tests_before_labs(self):
-        self.assertTrue(LIVE["main"]["H2923-001-0"]["K_tests_labs"].startswith("$0-$95/$0-$40"))
+        self.assertTrue(GENERATED["main"]["H2923-001-0"]["K_tests_labs"].startswith("$0-$95/$0-$40"))
 
 
 class DvhaReproducesCorrections(unittest.TestCase):

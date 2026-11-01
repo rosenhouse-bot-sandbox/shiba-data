@@ -74,8 +74,8 @@ class SiteDataTest(unittest.TestCase):
         self.assertEqual(self.cell("main", "H3805-048-0", "E_moop"), {"value": "$6,700", "cites": []})
 
     def test_pbp_override_is_attached_to_cell(self):
-        cell = self.cell("main", "H3805-048-0", "L_xray_imaging")
-        self.assertEqual(cell["pbp"], "$30 | $0-$320")
+        cell = self.cell("main", "H3805-048-0", "G_specialist")
+        self.assertEqual(cell["pbp"], "$0-$55")
 
     def test_wellcare_tests_cells_carry_ekg_comment(self):
         for plan_id in ("H6815-038-0", "H5439-015-0", "H5439-019-0", "H5439-011-0", "H5439-010-0"):
@@ -176,9 +176,9 @@ class EocCitationsTest(unittest.TestCase):
                    if d["kind"] == "EOC" and "H3805-048-0" in d["plan_ids"])
         self.eoc_id = eoc["sha256"][:16]
         self.site = build.site_data(data_copy(self.tmp.name, [
-            cite("main", "L_xray_imaging", "$30 | $320", eoc["url"], 80, "x-ray quote"),
+            cite("main", "G_specialist", "$55", eoc["url"], 80, "specialist quote"),
             cite("dvha", "C_premium", "$0", eoc["url"], 9, "premium quote"),
-            cite("main", "L_xray_imaging", "$30 | $0-$320", eoc["url"], 76, "stale quote"),
+            cite("main", "G_specialist", "$0-$55", eoc["url"], 76, "stale quote"),
         ]))
 
     def tearDown(self):
@@ -188,8 +188,9 @@ class EocCitationsTest(unittest.TestCase):
         return next(r for r in self.site[sheet]["rows"] if r["plan_id"] == "H3805-048-0")["cells"][column]["cites"]
 
     def test_eoc_cite_replaces_sb_cites(self):
-        cites = self.cites("main", "L_xray_imaging")
-        self.assertEqual(cites, [{"line": None, "value": "$30 | $320", "doc": self.eoc_id, "page": 80, "quote": "x-ray quote"}])
+        cites = self.cites("main", "G_specialist")
+        self.assertIn({"line": None, "value": "$55", "doc": self.eoc_id, "page": 80, "quote": "specialist quote"}, cites)
+        self.assertEqual({c["doc"] for c in cites}, {self.eoc_id})
 
     def test_eoc_cite_goes_to_its_own_sheet(self):
         self.assertIn("premium quote", [c["quote"] for c in self.cites("dvha", "C_premium")])
@@ -202,7 +203,7 @@ class EocCitationsTest(unittest.TestCase):
                 build.site_data(data)
 
     def test_drops_a_cite_whose_value_an_edit_changed(self):
-        self.assertNotIn("stale quote", [c["quote"] for c in self.cites("main", "L_xray_imaging")])
+        self.assertNotIn("stale quote", [c["quote"] for c in self.cites("main", "G_specialist")])
 
 
 class EditsTest(unittest.TestCase):

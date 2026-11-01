@@ -454,7 +454,7 @@ test("a cell's note restates the CMS plan data without our symbols", async () =>
     Object.entries(r.cells).filter(([, c]) => c.cites.length && match(c.pbp ?? null)).map(([col]) => `#/${sheet}/${r.plan_id}/${col}`)))[0];
   for (const [hash, expected] of [
     [withPbp((p) => p === "●"), /CMS plan data shows this benefit is covered\./],
-    [withPbp((p) => p === "20%"), /CMS plan data shows 20%\./],
+    [withPbp((p) => p === "0%-20%"), /CMS plan data shows 0%-20%\./],
     [withPbp((p) => p === ""), /CMS plan data leaves this blank/],
   ]) {
     await page.goto(`${base}${hash}`);
