@@ -79,7 +79,7 @@ test("clicking an uncited cell opens the summary of benefits with a note", async
   await page.goto(`${base}#/main`);
   await row("H3805-048-0").locator(UNCITED).first().click();
   await shown(docOf("H3805-048-0", "SB"), 1);
-  assert.match(await page.textContent("#source-note"), /CMS 2027 Plan Benefit Package/);
+  assert.match(await page.textContent("#source-note"), /CMS 2027 plan data/);
   assert.match(await page.textContent("#doc-title"), /^Summary of Benefits/);
 });
 
@@ -431,6 +431,24 @@ test("a clicked cell's note links to the plan on Medicare.gov", async () => {
     const link = page.locator("#source-note a", { hasText: "View this plan on Medicare.gov" });
     assert.equal(await link.getAttribute("href"), plan.plan_finder_url);
   }
+});
+
+test("an uncited cell lists the CMS fields behind it and where Medicare.gov shows it", async () => {
+  for (const plan of ["H3805-048-0", "H7006-018-0"]) {  // without and with a comment
+    await page.goto(`${base}#/main/${plan}/O_medical_deductible`);
+    const note = page.locator("#source-note");
+    assert.match(await note.textContent(), /\(pbp_d_(inn|ann)_deduct_yn\) = 2 \(No\)/);
+    assert.match(await note.textContent(), /View this plan on Medicare\.gov ↗ It shows this as “Health deductible”\./);
+    assert.equal(await note.locator("a", { hasText: "pbp_Section_D" }).getAttribute("href"), site.cms_files.PBP);
+  }
+});
+
+test("the Extra Help premium lists its Landscape columns", async () => {
+  await page.goto(`${base}#/dvha/H3805-048-0/D_premium_full_extra_help`);
+  const note = page.locator("#source-note");
+  assert.match(await note.textContent(), /Part D Low Income Beneficiary Premium Amount = \$0\.00/);
+  assert.equal(await note.locator("a", { hasText: "CMS Landscape file" }).getAttribute("href"), site.cms_files.Landscape);
+  assert.match(await note.textContent(), /choose “Extra Help \(with drug costs\)”\. The search results then show this as the “Monthly Premium”\./);
 });
 
 test("a blank uncited cell says CMS data has no entry", async () => {

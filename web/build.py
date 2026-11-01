@@ -19,6 +19,7 @@ import zipfile
 
 HERE = pathlib.Path(__file__).resolve().parent
 sys.path[:0] = [str(HERE), str(HERE.parent / "pipeline")]
+import cms_sources  # noqa: E402
 import fields  # noqa: E402
 import layers  # noqa: E402
 import years  # noqa: E402
@@ -39,23 +40,32 @@ def rows(name, data_dir):
         return list(csv.DictReader(f))
 
 
-def sheet(csv_rows, labels, cites, pbp, comments):
+def sheet(csv_rows, labels, cites, pbp, comments, cms):
     return {
-        "columns": [{"key": k, "label": v} for k, v in labels.items()],
+        "columns": [column(k, v) for k, v in labels.items()],
         "rows": [{
             "plan_id": r["plan_id"],
             "section": r["section"],
             "cells": {k: cell(r[k], cites.get((r["plan_id"], k), []), pbp.get((r["plan_id"], k)),
-                              comments.get((r["plan_id"], k)))
+                              comments.get((r["plan_id"], k)), cms.get((r["plan_id"], k)))
                       for k in labels},
         } for r in csv_rows],
     }
 
 
-def cell(value, cites, pbp, comment):
+def column(key, label):
+    c = {"key": key, "label": label}
+    if key in cms_sources.MEDICARE_GOV:
+        c["medicare_gov"] = cms_sources.MEDICARE_GOV[key]
+    return c
+
+
+def cell(value, cites, pbp, comment, cms):
     c = {"value": value, "cites": cites}
     if pbp is not None:
         c["pbp"] = pbp
+    elif cms and not cites:
+        c["cms"] = cms
     if comment:
         c["comment"] = comment
     return c
@@ -99,6 +109,10 @@ def site_data(data_dir=DATA, layer_names=layers.LAYERS):
            for name, generated in layers.generated(data_dir).items()}
 
     plans = rows("generated/plans.csv", data_dir)
+    cms = {}
+    for r in rows("generated/cms_sources.csv", data_dir):
+        cms.setdefault((r["plan_id"], r["column"]), []).append(
+            {k: r[k] for k in ("file", "field", "title", "value", "meaning")})
     for p in plans:
         p["docs"] = [i for i, d in docs.items() if p["plan_id"] in d["plan_ids"]]
         p["plan_finder_url"] = f"https://www.medicare.gov/plan-compare/#/plan-details/{year}-{p['plan_id']}?year={year}&lang=en"
@@ -125,7 +139,8 @@ def site_data(data_dir=DATA, layer_names=layers.LAYERS):
         "sections": SECTIONS,
         "plans": plans,
         "docs": docs,
-        **{name: sheet(csv_rows, labels, cites[name], pbp[name], comments[name])
+        "cms_files": {"Landscape": config["landscape_zip"], "PBP": config["pbp_zip"]},
+        **{name: sheet(csv_rows, labels, cites[name], pbp[name], comments[name], cms)
            for name, (csv_rows, labels) in sheets.items()},
     }
 

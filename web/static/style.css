@@ -72,6 +72,7 @@ td.selected { outline: 3px solid var(--ink); outline-offset: -3px; }
 #find-count { color: var(--muted); font-size: 13px; min-width: 70px; }
 #source-note { padding: 4px 10px; font-size: 13px; border-bottom: 1px solid var(--line); max-height: 30vh; overflow: auto; }
 #source-note p { margin: 4px 0; }
+#source-note .cms ul { margin: 0; padding-left: 20px; }
 #source-note .comment { background: var(--comment); padding: 4px 6px; }
 #source-note .comment.contradicts { background: var(--contradicts); }
 .pbp { color: var(--muted); }

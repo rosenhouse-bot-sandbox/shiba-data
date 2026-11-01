@@ -171,7 +171,7 @@ const commentSource = (cell, note) => {
 
 function openComment(plan, column, cell) {
   const note = el("div", {}, cellHeader(plan, column, cell));
-  note.append(commentSource(cell, note), el("p", {}, planFinderLink(plan)));
+  note.append(commentSource(cell, note), ...cmsFields(cell), medicareGov(plan, column));
   openDoc(cell.comment.doc, cell.comment.page, cell.comment.quote, note);
 }
 
@@ -180,20 +180,33 @@ function openCell(plan, column, cell) {
   if (cell.cites.length) {
     const cite = cell.cites[0];
     const note = citeNote(header, cell);
-    note.append(el("p", {}, planFinderLink(plan)));
+    note.append(medicareGov(plan, column));
     openDoc(cite.doc, cite.page, cite.quote, note, cell.cites);
   } else if (cell.comment) {
     openComment(plan, column, cell);
   } else {
     const sb = plan.docs.find((d) => site.docs[d].kind === "SB");
     openDoc(sb, 1, null, el("div", {}, header, el("p", {},
-      cell.value ? `This value comes from the CMS ${site.year} Plan Benefit Package data, which has no page to point to. `
+      cell.value ? `This value comes from CMS ${site.year} plan data, which has no page to point to. `
         : `The CMS ${site.year} Plan Benefit Package data has no entry for this benefit. `,
-      "The plan's Summary of Benefits is shown for reference."), el("p", {}, planFinderLink(plan))));
+      "The plan's Summary of Benefits is shown for reference."), ...cmsFields(cell), medicareGov(plan, column)));
   }
 }
 
-const planFinderLink = (plan) => el("a", { href: plan.plan_finder_url, target: "_blank", rel: "noopener" }, "View this plan on Medicare.gov ↗");
+const newTab = (href, text) => el("a", { href, target: "_blank", rel: "noopener" }, text);
+
+const medicareGov = (plan, column) => el("p", {}, newTab(plan.plan_finder_url, "View this plan on Medicare.gov ↗"),
+  column.medicare_gov ? ` ${column.medicare_gov}` : null);
+
+function cmsFields(cell) {
+  if (!cell.cms) return [];
+  const byFile = Map.groupBy(cell.cms, (f) => f.file);
+  return [...byFile].map(([file, fields]) => el("div", { class: "cms" },
+    file === "Landscape" ? newTab(site.cms_files.Landscape, "CMS Landscape file ↗")
+      : newTab(site.cms_files.PBP, `CMS Plan Benefit Package file, ${file} ↗`),
+    el("ul", {}, ...fields.map((f) => el("li", {}, f.title ? `${f.title} (${f.field})` : f.field,
+      ` = ${f.value}`, f.meaning ? ` (${f.meaning})` : "")))));
+}
 
 const oneLine = (value) => value.split(" | ").join("; ");
 
@@ -260,7 +273,7 @@ function planPage(plan) {
     ["Plan ID", plan.plan_id], ["Organization", plan.organization], ["Type", plan.plan_type],
     ["Star rating", plan.overall_star_rating], ["Part D deductible", plan.part_d_deductible],
     ["Chronic conditions (C-SNP)", plan.c_snp_conditions.replace(/([a-z])([A-Z])/g, "$1 $2").replaceAll(",", ", ")],
-    ["Medicare Plan Finder", planFinderLink(plan)],
+    ["Medicare Plan Finder", newTab(plan.plan_finder_url, "View this plan on Medicare.gov ↗")],
   ];
   return el("div", { class: "plan-page" },
     el("h2", {}, plan.plan_name),
