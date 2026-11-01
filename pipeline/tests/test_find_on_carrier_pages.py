@@ -38,15 +38,24 @@ class DocumentsTest(unittest.TestCase):
         self.assertEqual(rows(AGERIGHT, ["H1372-003-0"]), [
             ("H1372-003-0", "SB", base + "09/H1372_003_0_SB_v07.pdf"),
             ("H1372-003-0", "EOC", base + "10/H1372_003_0_EOC_v03_508.pdf")])
-        self.assertEqual(rows(AGERIGHT, ["H1372-003-1"]), [])
+        with self.assertRaisesRegex(SystemExit, "links 0 SBs for H1372-003-1"):
+            rows(AGERIGHT, ["H1372-003-0", "H1372-003-1"])
 
     def test_rows_cite_the_page(self):
         self.assertEqual({r["found_via"] for r in fc.documents(fetch(WELLCARE), WELLCARE, ["H6815-038-0"], "/aep/2027/")},
                          {"carrier page (wellcareor.com/plan-benefit-materials.html)"})
 
     def test_rejects_two_documents_of_one_kind_for_a_plan(self):
-        with self.assertRaisesRegex(SystemExit, "several EOCs for H6815-038-0"):
+        with self.assertRaisesRegex(SystemExit, "links 2 EOCs for H6815-038-0"):
             rows(WELLCARE, ["H6815-038-0"])
+
+    def test_rejects_a_plan_without_an_sb_or_eoc(self):
+        with self.assertRaisesRegex(SystemExit, "links 0 EOCs for H6815-040-0"):
+            rows(WELLCARE, ["H6815-040-0"], "/aep/2027/")
+
+    def test_a_plan_code_must_stand_apart_in_the_filename(self):
+        self.assertEqual(fc.named_plans("/H6815_038_5star.pdf", ["H6815-038-0"]), {"H6815-038-0"})
+        self.assertIsNone(fc.named_plans("/XH6815_038.pdf", ["H6815-038-0"]))
 
 
 class MainTest(unittest.TestCase):
@@ -58,15 +67,18 @@ class MainTest(unittest.TestCase):
                 w = csv.DictWriter(f, fieldnames=["plan_id", "organization"])
                 w.writeheader()
                 w.writerows([dict(plan_id="H1036-153-0", organization="Humana"),
+                             dict(plan_id="H6815-038-0", organization="Wellcare"),
                              dict(plan_id="H1372-003-0", organization="AgeRight Advantage")])
             (data / "found.csv").write_text("plan_ids,kind,url,found_via\n"
                                             "H1036-153-0,SB,humana-sb,browser\n"
                                             "H1372-003-0,SB,stale-sb,browser\n")
             fc.main("2027", fetch=fetch)
-            base = "https://agerightadvantage.com/wp-content/uploads/2026/"
-            self.assertEqual([(r["plan_ids"], r["kind"], r["url"]) for r in fc.read(data / "found.csv")], [
-                ("H1036-153-0", "SB", "humana-sb"), ("H1372-003-0", "SB", base + "09/H1372_003_0_SB_v07.pdf"),
-                ("H1372-003-0", "EOC", base + "10/H1372_003_0_EOC_v03_508.pdf")])
+            self.assertEqual([(r["plan_ids"], r["kind"], r["url"].rsplit("/", 1)[-1])
+                              for r in fc.read(data / "found.csv")], [
+                ("H1036-153-0", "SB", "humana-sb"),
+                ("H6815-038-0", "SB", "H6815_038_2027_OR_SB_HMAPD_7017558ENG_M.pdf"),
+                ("H6815-038-0", "EOC", "H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf"),
+                ("H1372-003-0", "SB", "H1372_003_0_SB_v07.pdf"), ("H1372-003-0", "EOC", "H1372_003_0_EOC_v03_508.pdf")])
 
 
 if __name__ == "__main__":
