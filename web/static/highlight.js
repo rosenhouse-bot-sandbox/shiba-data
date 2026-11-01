@@ -9,10 +9,23 @@ export function matchRanges(items, quote, lefts = []) {
   if (!needle) return [];
   const [first] = occurrences(items, items.map((s, i) => i), needle);
   if (first) return first;
+  const hits = columnOrders(lefts).flatMap((order) => occurrences(items, order, needle));
+  return hits.length === 1 ? hits[0] : [];
+}
+
+// Finds every occurrence of a search query, ignoring whitespace and case, in item order or down a column.
+export function findAll(items, query, lefts = []) {
+  const needle = squash(query);
+  if (!needle) return [];
+  const orders = [items.map((s, i) => i), ...columnOrders(lefts)];
+  const found = new Map(orders.flatMap((order) => occurrences(items, order, needle)).map((r) => [JSON.stringify(r), r]));
+  return [...found.values()].sort((a, b) => a[0].item - b[0].item || a[0].start - b[0].start);
+}
+
+function columnOrders(lefts) {
   const columns = new Map();
   lefts.forEach((x, i) => columns.set(Math.round(x), [...(columns.get(Math.round(x)) ?? []), i]));
-  const hits = [...columns.values()].flatMap((order) => occurrences(items, order, needle));
-  return hits.length === 1 ? hits[0] : [];
+  return [...columns.values()];
 }
 
 function occurrences(items, order, needle) {

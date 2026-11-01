@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { matchRanges } from "../static/highlight.js";
+import { findAll, matchRanges } from "../static/highlight.js";
 
 test("finds a quote split across items and whitespace", () => {
   const items = ["you pay $0 copay per", "stay, or $1,980", "copay  per stay", "next"];
@@ -44,4 +44,22 @@ test("returns nothing for a column quote without item positions", () => {
 test("returns nothing when a column quote occurs in two columns", () => {
   const twice = ["You pay these", "You pay these", "until", "amounts", "amounts"];
   assert.deepEqual(matchRanges(twice, "You pay these amounts", [321, 447, 500, 321, 447]), []);
+});
+
+test("findAll returns every occurrence, across items, ignoring case and whitespace", () => {
+  assert.deepEqual(findAll(["Copay per", "stay; COPAY per stay"], "copay per stay"), [
+    [{ item: 0, start: 0, end: 9 }, { item: 1, start: 0, end: 4 }],
+    [{ item: 1, start: 6, end: 20 }],
+  ]);
+});
+
+test("findAll finds nothing for a blank query", () => {
+  assert.deepEqual(findAll(["some text"], "  "), []);
+});
+
+test("findAll finds text that runs down one column of a table, once", () => {
+  assert.deepEqual(findAll(columns, "colonoscopy at an outpatient", lefts), [
+    [{ item: 2, start: 0, end: 17 }, { item: 4, start: 0, end: 10 }],
+  ]);
+  assert.deepEqual(findAll(columns, "copayment", lefts), [[{ item: 0, start: 3, end: 12 }]]);
 });
