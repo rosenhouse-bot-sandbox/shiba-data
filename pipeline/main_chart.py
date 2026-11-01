@@ -1,4 +1,4 @@
-"""Generates the main MA chart (columns C..AA) from the CMS Landscape and PBP Benefits files.
+"""Generates the main MA chart (columns C..AB) from the CMS Landscape and PBP Benefits files.
 
 Usage: python3 -I main_chart.py <plans.csv> <pbp_dir> <out.csv>
 Each cell is in-network unless noted. Column rules are in fields.py.
@@ -94,6 +94,25 @@ def inpatient(plan):
     if coins:
         return pct(float(coins))
     return "$0" if r.get("pbp_b1a_copay_yn") == "1" else ""
+
+
+def cost_range(row, copays, coinsurances):
+    """Spans the copay fields, then the coinsurance fields, as "$a-$b or c%"; "$0" if none is set."""
+    def joined(names, fmt):
+        amounts = [num(row[n]) for n in names if row.get(n)]
+        return span(min(amounts), max(amounts), fmt) if amounts else ""
+    return join_costs(joined(copays, money), joined(coinsurances, pct)) or "$0"
+
+
+def ambulance(plan):
+    b10 = first(plan, "pbp_b10_amb_trans")
+    domestic = cost_range(b10, [f"pbp_b10a_copay_{k}_amt_{m}" for k in ("gas", "aas") for m in ("min", "max")],
+                          [f"pbp_b10a_coins_{k}_pct_{m}" for k in ("gas", "aas") for m in ("min", "max")])
+    b4 = first(plan, "pbp_b4_emerg_urgent")
+    worldwide = cost_range(b4, ["pbp_b4c_copay_amt_wet_min", "pbp_b4c_copay_amt_wet_max"],
+                           ["pbp_b4c_coins_pct_wet_min", "pbp_b4c_coins_pct_wet_max"]
+                           ) if flag(b4, "pbp_b4c_bendesc_ehc", 1) else "not covered"
+    return f"{domestic} | {worldwide}"
 
 
 def outpatient_surgery(plan):
@@ -218,6 +237,7 @@ def chart_row(landscape, plan):
                                                       "pbp_b7a_coins_pct_mc_min", "pbp_b7a_coins_pct_mc_max"), "7a"),
         "G_specialist": in_out(plan, copay_or_coins(b7, "pbp_b7d_copay_amt_mc_min", "pbp_b7d_copay_amt_mc_max",
                                                     "pbp_b7d_coins_pct_mc_min", "pbp_b7d_coins_pct_mc_max"), "7d"),
+        "AB_ambulance": ambulance(plan),
         "H_inpatient": inpatient(plan),
         "I_outpatient_surgery": outpatient_surgery(plan),
         "J_outpatient_rehab": rehab(plan),

@@ -128,6 +128,23 @@ class MainChartTest(unittest.TestCase):
         self.assertEqual(mc.part_b_reduction(plan(pbp_d_mco_pay_reduct_yn="1")), "●")
         self.assertEqual(mc.part_b_reduction(plan()), "")
 
+    def test_ambulance_spans_ground_and_air_then_worldwide(self):
+        plan = {"pbp_b10_amb_trans": [{"pbp_b10a_copay_gas_amt_min": "0.00", "pbp_b10a_copay_gas_amt_max": "325.00",
+                                       "pbp_b10a_coins_aas_pct_min": "20", "pbp_b10a_coins_aas_pct_max": "20"}],
+                "pbp_b4_emerg_urgent": [{"pbp_b4c_bendesc_ehc": "111", "pbp_b4c_copay_amt_wet_min": "325.00",
+                                         "pbp_b4c_copay_amt_wet_max": "325.00", "pbp_b4c_coins_pct_wet_min": "20",
+                                         "pbp_b4c_coins_pct_wet_max": "20"}]}
+        self.assertEqual(mc.ambulance(plan), "$0-$325 or 20% | $325 or 20%")
+
+    def test_ambulance_copays_of_both_kinds_make_one_range(self):
+        plan = {"pbp_b10_amb_trans": [{"pbp_b10a_copay_gas_amt_min": "250.00", "pbp_b10a_copay_gas_amt_max": "250.00",
+                                       "pbp_b10a_copay_aas_amt_min": "300.00", "pbp_b10a_copay_aas_amt_max": "300.00"}]}
+        self.assertEqual(mc.ambulance(plan), "$250-$300 | not covered")
+
+    def test_ambulance_worldwide_without_cost_sharing(self):
+        plan = {"pbp_b4_emerg_urgent": [{"pbp_b4c_bendesc_ehc": "111"}]}
+        self.assertEqual(mc.ambulance(plan), "$0 | $0")
+
 
 class SpecTest(unittest.TestCase):
     def test_fields_are_the_columns_an_eoc_can_show(self):

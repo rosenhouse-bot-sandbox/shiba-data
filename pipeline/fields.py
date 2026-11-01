@@ -15,6 +15,7 @@ DOT = ("A dot means the plan covers the routine (supplemental) benefit, not only
        "A benefit only in an optional package gets the Opt Packages dot instead (methods R13). "
        "A benefit only for some members, such as SSBCI, gets no dot unless the plan also covers it for all members.")
 
+# A key keeps its column's letter on the volunteers' sheet. A new column takes the next free letter.
 COLUMNS = [
     Column("main", "C_premium", "Premium",
            "Monthly plan premium (not counting the Part B premium).",
@@ -31,6 +32,11 @@ COLUMNS = [
            "Specialist office visit copay. Line 1 in-network, line 2 out-of-network. "
            "Office visits only: leave out hearing exams, telehealth and nursing-home visits (#31 section 2.2).",
            [r"specialist"]),
+    Column("main", "AB_ambulance", "Ambulance",
+           "Ambulance trip cost range: line 1 within the U.S., line 2 outside it (worldwide emergency ambulance). "
+           "Each line spans ground and air trips, emergency or not, including facility transfers and trips outside the service area. "
+           "\"not covered\" = the plan does not cover ambulance outside the U.S.",
+           [r"ambulance"]),
     Column("main", "H_inpatient", "Inpatient Hospital $/Day",
            "Inpatient hospital (acute) cost. \"$395 | 1-5\" = $395 per day for days 1-5, then $0. \"per stay\" = per admission.",
            [r"inpatient hospital care", r"per day", r"days? \d+.\d+"]),
