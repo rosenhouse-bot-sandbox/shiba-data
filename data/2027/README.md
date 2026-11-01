@@ -82,6 +82,7 @@ These items are not reproduced: 4 (Devoted rewards) and 5 (Regence virtual urgen
 ## Limits
 
 - The PBP is bid data, not a citable document. Only the cells that a layer cites carry SB/EOC page citations.
+- `pipeline/cms_sources.py` lists the CMS fields behind columns D, K, M, N and O in `generated/cms_sources.csv`. The site shows them for a cell no layer cites or changes.
 - `run.py` does not run the model steps (issue #46). A model step publishes a citation only if the EOC value matches the cell, the quote highlights once on its page, and two models both confirm it.
 - DVHA cells leave out vendor names, frequency limits and rewards. ATRIO's shared allowance shows only as the services it covers.
 - PBP ranges can start at $0 for a service other than the one the column names. `edits.csv` corrects the cases issue #31 found.

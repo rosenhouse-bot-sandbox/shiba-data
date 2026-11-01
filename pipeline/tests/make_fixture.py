@@ -1,4 +1,4 @@
-"""Writes the PBP rows and dictionary codes for the Appendix B plans to fixtures/pbp_appendix_b.json.gz.
+"""Writes the PBP rows and dictionary codes and titles for the Appendix B plans to fixtures/pbp_appendix_b.json.gz.
 
 Usage: python3 -I make_fixture.py <pbp_dir>
 """
@@ -19,7 +19,8 @@ def main(pbp_dir):
     dictionary = pbp.load_dictionary(pbp_dir)
     codes = [[stem, field, entry["codes"]] for (stem, field), entry in sorted(dictionary.items())
              if (stem, field) in present and entry["codes"]]
-    data = json.dumps({"plans": plans, "codes": codes}, sort_keys=True).encode()
+    titles = [[stem, field, entry["title"]] for (stem, field), entry in sorted(dictionary.items()) if (stem, field) in present]
+    data = json.dumps({"plans": plans, "codes": codes, "titles": titles}, sort_keys=True).encode()
     with open(os.path.join(here, "fixtures", "pbp_appendix_b.json.gz"), "wb") as f:
         f.write(gzip.compress(data, mtime=0))
 

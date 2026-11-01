@@ -141,7 +141,7 @@ class SiteDataTest(unittest.TestCase):
         self.assertEqual((self.site["year"], self.site["area"]), (2027, "Multnomah & Clackamas"))
         with tempfile.TemporaryDirectory() as tmp:
             data = data_copy(tmp, [], year=2099)
-            (data / "config.json").write_text(json.dumps({"counties": ["A", "B"]}))
+            (data / "config.json").write_text(json.dumps({"counties": ["A", "B"], "landscape_zip": "l", "pbp_zip": "p"}))
             site = build.site_data(data)
         self.assertEqual((site["year"], site["area"]), (2099, "A & B"))
         self.assertTrue(site["plans"][0]["plan_finder_url"].startswith(
@@ -159,6 +159,24 @@ class SiteDataTest(unittest.TestCase):
                              list(build.fields.labels(sheet).items()))
         self.assertIn({"key": "L_xray_imaging", "label": "X-Ray / Diag Radiology"}, self.site["main"]["columns"])
 
+    def test_uncited_cell_lists_the_cms_fields_behind_it(self):
+        self.assertEqual(self.cell("main", "H3805-048-0", "O_medical_deductible")["cms"],
+                         [{"file": "pbp_Section_D", "field": "pbp_d_inn_deduct_yn", "title": "In-Ntwk Plan Deductible YN",
+                           "value": "2", "meaning": "No"}])
+
+    def test_extra_help_premium_lists_its_landscape_columns_on_both_sheets(self):
+        for sheet in ("main", "dvha"):
+            self.assertEqual([(f["file"], f["field"], f["value"])
+                              for f in self.cell(sheet, "H3805-048-0", "D_premium_full_extra_help")["cms"]],
+                             [("Landscape", "Part D Coverage Indicator", "Yes"), ("Landscape", "Part C Premium", "$0.00"),
+                              ("Landscape", "Part D Low Income Beneficiary Premium Amount", "$0.00")])
+
+    def test_links_the_cms_files_and_names_the_column_on_medicare_gov(self):
+        self.assertEqual(self.site["cms_files"], {"Landscape": "https://www.cms.gov/files/zip/cy2027-landscape-202610.zip",
+                                                  "PBP": "https://www.cms.gov/files/zip/pbp-benefits-2027.zip"})
+        self.assertIn({"key": "O_medical_deductible", "label": "Medical Deductible", "medicare_gov": "Health deductible"},
+                      self.site["main"]["columns"])
+
     def test_doc_ids_are_sha_prefixes(self):
         for doc_id, doc in self.site["docs"].items():
             self.assertEqual(doc_id, doc["sha256"][:16])
@@ -174,6 +192,7 @@ class EocCitationsTest(unittest.TestCase):
             cite("main", "L_xray_imaging", "$30 | $320", eoc["url"], 80, "x-ray quote"),
             cite("dvha", "C_premium", "$0", eoc["url"], 9, "premium quote"),
             cite("main", "L_xray_imaging", "$30 | $0-$320", eoc["url"], 76, "stale quote"),
+            cite("main", "O_medical_deductible", "$0", eoc["url"], 9, "deductible quote"),
         ]))
 
     def tearDown(self):
@@ -195,6 +214,10 @@ class EocCitationsTest(unittest.TestCase):
             data = data_copy(tmp, [cite("main", "E_moop", "$6,700", "https://x/reissued.pdf", 45, "q")])
             with self.assertRaisesRegex(ValueError, "machine/eoc_citations.csv main H3805-048-0 E_moop.*reissued.pdf"):
                 build.site_data(data)
+
+    def test_cited_cell_lists_no_cms_fields(self):
+        cell = next(r for r in self.site["main"]["rows"] if r["plan_id"] == "H3805-048-0")["cells"]["O_medical_deductible"]
+        self.assertNotIn("cms", cell)
 
     def test_drops_a_cite_whose_value_an_edit_changed(self):
         self.assertNotIn("stale quote", [c["quote"] for c in self.cites("main", "L_xray_imaging")])
@@ -225,6 +248,17 @@ class EditsTest(unittest.TestCase):
     def test_an_uncited_edit_sets_its_cell(self):
         cell, _, out = self.dental("", "", "")
         self.assertEqual((cell["value"], cell["cites"], out), ("fixed", [], ""))
+
+    def test_an_uncited_edit_lists_no_cms_fields(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            data = data_copy(tmp, [])
+            with open(data / "edits.csv", "a", newline="") as f:
+                csv.DictWriter(f, fieldnames=build.layers.EDIT_COLUMNS).writerow(
+                    dict(cite("main", "O_medical_deductible", "$100", "", "", ""), line="", saw="", source="volunteer",
+                         author="v1", note=""))
+            site = build.site_data(data)
+        cell = next(r for r in site["main"]["rows"] if r["plan_id"] == "H3805-048-0")["cells"]["O_medical_deductible"]
+        self.assertEqual((cell["value"], "cms" in cell), ("$100", False))
 
     def test_an_edit_of_an_unknown_document_sets_its_cell_and_warns(self):
         cell, _, out = self.dental("https://x/unknown.pdf")

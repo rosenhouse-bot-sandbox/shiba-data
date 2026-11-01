@@ -32,13 +32,17 @@ def by_plan(sheet_rows):
     return {r["plan_id"]: r for r in sheet_rows}
 
 
-def generate():
+def fixture():
     with gzip.open(os.path.join(HERE, "fixtures", "pbp_appendix_b.json.gz"), "rt") as f:
-        fixture = json.load(f)
-    dvha.DICTIONARY = {(stem, field): {"codes": codes} for stem, field, codes in fixture["codes"]}
-    plans = [p for p in rows("generated/plans.csv") if p["plan_id"] in fixture["plans"]]
-    return {"main": by_plan(mc.sheet(plans, fixture["plans"], mc.chart_row)),
-            "dvha": by_plan(dvha.sheet(plans, fixture["plans"]))}
+        return json.load(f)
+
+
+def generate():
+    pbp = fixture()
+    dvha.DICTIONARY = {(stem, field): {"codes": codes} for stem, field, codes in pbp["codes"]}
+    plans = [p for p in rows("generated/plans.csv") if p["plan_id"] in pbp["plans"]]
+    return {"main": by_plan(mc.sheet(plans, pbp["plans"], mc.chart_row)),
+            "dvha": by_plan(dvha.sheet(plans, pbp["plans"]))}
 
 
 GENERATED, LIVE = {}, {}
