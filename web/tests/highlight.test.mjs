@@ -56,3 +56,10 @@ test("findAll returns every occurrence, across items, ignoring case and whitespa
 test("findAll finds nothing for a blank query", () => {
   assert.deepEqual(findAll(["some text"], "  "), []);
 });
+
+test("findAll finds text that runs down one column of a table, once", () => {
+  assert.deepEqual(findAll(columns, "colonoscopy at an outpatient", lefts), [
+    [{ item: 2, start: 0, end: 17 }, { item: 4, start: 0, end: 10 }],
+  ]);
+  assert.deepEqual(findAll(columns, "copayment", lefts), [[{ item: 0, start: 3, end: 12 }]]);
+});

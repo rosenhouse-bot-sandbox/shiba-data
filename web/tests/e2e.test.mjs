@@ -494,6 +494,36 @@ test("the find box says when nothing matches", async () => {
   await findCount("No matches");
 });
 
+test("a cited quote still scrolls into view and keeps its highlight while find is open", async () => {
+  await page.goto(`${base}#/main`);
+  const cell = row("H2001-045-0").locator("td.cited", { hasText: "$1,980" });
+  await cell.click();
+  const eoc = docOf("H2001-045-0", "EOC");
+  await shown(eoc, 77);
+  await page.keyboard.press("Control+f");
+  await page.keyboard.type("1,980 copayment");
+  await page.waitForSelector('.page[data-page="77"] mark.cite.found');
+  await page.fill("#find-query", "the");
+  await page.$eval("#page-area", (area) => (area.scrollTop = 0));
+  await cell.click();
+  await shown(eoc, 77);
+  const visible = await page.$eval("#page-area", (area) => {
+    const a = area.getBoundingClientRect();
+    const m = area.querySelector("mark.cite").getBoundingClientRect();
+    return m.top >= a.top && m.bottom <= a.bottom;
+  });
+  assert.ok(visible);
+});
+
+test("reopening find keeps the query but shows no stale count", async () => {
+  await page.click("#find-next");
+  await page.keyboard.press("Escape");
+  await page.keyboard.press("Control+f");
+  assert.equal(await page.isVisible("#find"), true);
+  assert.equal(await page.textContent("#find-count"), "");
+  assert.equal(await page.inputValue("#find-query"), "the");
+});
+
 test("opening another document closes the find box", async () => {
   await page.goto(`${base}#/main`);
   await row("H3805-048-0").locator(UNCITED).first().click();

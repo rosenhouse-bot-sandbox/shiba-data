@@ -54,7 +54,9 @@ async function start() {
   $("#find-query").addEventListener("input", search);
   $("#find-query").addEventListener("keydown", (e) => {
     if (e.key === "Enter") step(e.shiftKey ? -1 : 1);
-    else if (e.key === "Escape") {
+  });
+  $("#find").addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
       e.preventDefault();
       closeFind();
     }
@@ -65,7 +67,7 @@ async function start() {
   // A second Ctrl+F, from the find box, falls through to the browser's own find.
   document.addEventListener("keydown", (e) => {
     if (e.key.toLowerCase() !== "f" || !(e.ctrlKey || e.metaKey) || e.altKey || e.shiftKey) return;
-    if ($("#viewer").hidden || !viewer.pdf || document.activeElement === $("#find-query")) return;
+    if ($("#viewer").hidden || !viewer.pdf || (!$("#find").hidden && $("#find").contains(document.activeElement))) return;
     e.preventDefault();
     openFind();
   });
@@ -281,7 +283,7 @@ const kindName = (k) => ({ SB: "Summary of Benefits", EOC: "Evidence of Coverage
 
 const viewer = {
   showing: null, doc: null, loading: null, pdf: null, sizes: [], cite: null, quotes: [], target: null, anchor: null, width: 0,
-  texts: null, search: null, hits: [], hit: -1,
+  texts: null, searchRun: null, hits: [], hit: -1,
 };
 const area = () => $("#page-area");
 const holders = () => [...area().querySelectorAll(".page")];
@@ -289,6 +291,7 @@ const holders = () => [...area().querySelectorAll(".page")];
 // Scrolls to the quote on page, and highlights it along with any other quotes in the same document.
 async function openDoc(docId, page, quote, note, otherQuotes = []) {
   const doc = site.docs[docId];
+  if (viewer.doc !== docId) closeFind();
   viewer.showing = docId;
   $("#viewer").hidden = false;
   markOpenPlans();
@@ -305,7 +308,6 @@ async function openDoc(docId, page, quote, note, otherQuotes = []) {
     return;
   }
   if (viewer.doc !== docId) {
-    closeFind();
     viewer.doc = docId;
     viewer.pdf = null;
     area().replaceChildren(el("p", { class: "notice" }, "Loading…"));
@@ -433,7 +435,7 @@ function arrive(holder) {
   area().dataset.shown = `${viewer.doc} ${target.n}`;
   if (target.focus === "find") holder.querySelector("mark.current")?.scrollIntoView({ block: "center" });
   if (target.focus !== "cite" || viewer.cite?.page !== target.n) return;
-  const mark = holder.querySelector("mark");
+  const mark = holder.querySelector("mark.cite");
   if (mark) mark.scrollIntoView({ block: "center" });
   else $("#source-note").append(el("p", { class: "warn" }, "Could not find the quoted text on this page."));
 }
@@ -445,7 +447,7 @@ function markPage(holder) {
   const strs = items.map((i) => i.str);
   const lefts = items.map((i) => i.transform[4]);
   const quotes = new Set(viewer.quotes.filter((q) => q.page === n).map((q) => q.quote));
-  const marks = [...quotes].flatMap((q) => matchRanges(strs, q, lefts).map((r) => ({ ...r, cls: "" })));
+  const marks = [...quotes].flatMap((q) => matchRanges(strs, q, lefts).map((r) => ({ ...r, cls: "cite" })));
   viewer.hits.forEach((h, i) => {
     if (h.page === n) marks.push(...h.ranges.map((r) => ({ ...r, cls: i === viewer.hit ? "found current" : "found" })));
   });
@@ -458,7 +460,7 @@ function markText(s, marks) {
   return cuts.slice(1).map((end, i) => {
     const start = cuts[i];
     const over = marks.filter((m) => m.start < end && m.end > start);
-    return over.length ? el("mark", { class: over.map((m) => m.cls).join(" ").trim() }, s.slice(start, end)) : s.slice(start, end);
+    return over.length ? el("mark", { class: over.map((m) => m.cls).join(" ") }, s.slice(start, end)) : s.slice(start, end);
   });
 }
 
@@ -471,7 +473,9 @@ function openFind() {
 
 function closeFind() {
   $("#find").hidden = true;
-  viewer.search = null;
+  $("#find").contains(document.activeElement) && document.activeElement.blur();
+  $("#find-count").textContent = "";
+  viewer.searchRun = null;
   viewer.hits = [];
   viewer.hit = -1;
   holders().forEach(markPage);
@@ -481,9 +485,10 @@ function pageTexts() {
   const pdf = viewer.pdf;
   if (viewer.texts?.pdf !== pdf) {
     viewer.texts = { pdf, items: Promise.all(Array.from({ length: pdf.numPages }, async (_, i) => {
-      const content = await (await pdf.getPage(i + 1)).getTextContent();
-      return content.items.filter((item) => "str" in item).map((item) => item.str);
+      const items = (await (await pdf.getPage(i + 1)).getTextContent()).items.filter((item) => "str" in item);
+      return { strs: items.map((item) => item.str), lefts: items.map((item) => item.transform[4]) };
     })) };
+    viewer.texts.items.catch(() => (viewer.texts = null));
   }
   return viewer.texts.items;
 }
@@ -491,13 +496,17 @@ function pageTexts() {
 // Finds the query on every page and moves to the first match at or after the current match's page, or else the shown page.
 async function search() {
   const query = $("#find-query").value;
-  const run = (viewer.search = {});
+  const run = (viewer.searchRun = {});
   let hits = [];
   if (squash(query)) {
     $("#find-count").textContent = "Searching…";
-    const texts = await pageTexts();
-    if (viewer.search !== run) return;
-    hits = texts.flatMap((strs, i) => findAll(strs, query).map((ranges) => ({ page: i + 1, ranges })));
+    const texts = await pageTexts().catch(() => null);
+    if (viewer.searchRun !== run) return;
+    if (!texts) {
+      $("#find-count").textContent = "Search failed";
+      return;
+    }
+    hits = texts.flatMap(({ strs, lefts }, i) => findAll(strs, query, lefts).map((ranges) => ({ page: i + 1, ranges })));
   }
   const from = viewer.hits[viewer.hit]?.page ?? currentPage();
   viewer.hits = hits;
