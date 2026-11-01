@@ -1,0 +1,536 @@
+plan_id,column,file,field,title,value,meaning
+H3805-048-0,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,Yes,
+H3805-048-0,D_premium_full_extra_help,Landscape,Part C Premium,,$0.00,
+H3805-048-0,D_premium_full_extra_help,Landscape,Part D Low Income Beneficiary Premium Amount,,$0.00,
+H3805-048-0,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,Yes,
+H3805-048-0,N_pharmacy_deductible,Landscape,Annual Part D Deductible Amount,,$685.00,
+H3805-048-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_min_dmc_amt,Outpnt Diag Min MC Copay Amt,35.00,
+H3805-048-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_max_dmc_amt,Outpnt Diag Max MC Copay Amt,35.00,
+H3805-048-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt,Outpnt LabSvc Min MC Copay Amt,0.00,
+H3805-048-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt_max,Outpnt LabSvc Max MC Copay Amt,0.00,
+H3805-048-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H3805-048-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H3805-048-0,N_pharmacy_deductible,pbp_mrx,mrx_alt_no_ded_tier,MRx Alt Non-Deductible Tiers,0110000,Tier 1; Tier 2
+H3805-048-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_yn,In-Ntwk Plan Deductible YN,2,No
+H3805-041-0,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,Yes,
+H3805-041-0,D_premium_full_extra_help,Landscape,Part C Premium,,$0.00,
+H3805-041-0,D_premium_full_extra_help,Landscape,Part D Low Income Beneficiary Premium Amount,,$0.00,
+H3805-041-0,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,Yes,
+H3805-041-0,N_pharmacy_deductible,Landscape,Annual Part D Deductible Amount,,$685.00,
+H3805-041-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_min_dmc_amt,Outpnt Diag Min MC Copay Amt,60.00,
+H3805-041-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_max_dmc_amt,Outpnt Diag Max MC Copay Amt,60.00,
+H3805-041-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt,Outpnt LabSvc Min MC Copay Amt,0.00,
+H3805-041-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt_max,Outpnt LabSvc Max MC Copay Amt,0.00,
+H3805-041-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H3805-041-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H3805-041-0,N_pharmacy_deductible,pbp_mrx,mrx_alt_no_ded_tier,MRx Alt Non-Deductible Tiers,0110000,Tier 1; Tier 2
+H3805-041-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_yn,In-Ntwk Plan Deductible YN,2,No
+H2406-042-0,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,Yes,
+H2406-042-0,D_premium_full_extra_help,Landscape,Part C Premium,,$0.00,
+H2406-042-0,D_premium_full_extra_help,Landscape,Part D Low Income Beneficiary Premium Amount,,$87.70,
+H2406-042-0,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,Yes,
+H2406-042-0,N_pharmacy_deductible,Landscape,Annual Part D Deductible Amount,,$595.00,
+H2406-042-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_min_dmc_amt,Outpnt Diag Min MC Copay Amt,10.00,
+H2406-042-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_max_dmc_amt,Outpnt Diag Max MC Copay Amt,10.00,
+H2406-042-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt,Outpnt LabSvc Min MC Copay Amt,0.00,
+H2406-042-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt_max,Outpnt LabSvc Max MC Copay Amt,0.00,
+H2406-042-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H2406-042-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H2406-042-0,N_pharmacy_deductible,pbp_mrx,mrx_alt_no_ded_tier,MRx Alt Non-Deductible Tiers,0110000,Tier 1; Tier 2
+H2406-042-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_yn,Deductible YN?,2,No
+H2406-070-0,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,Yes,
+H2406-070-0,D_premium_full_extra_help,Landscape,Part C Premium,,$0.00,
+H2406-070-0,D_premium_full_extra_help,Landscape,Part D Low Income Beneficiary Premium Amount,,$0.00,
+H2406-070-0,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,Yes,
+H2406-070-0,N_pharmacy_deductible,Landscape,Annual Part D Deductible Amount,,$685.00,
+H2406-070-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_min_dmc_amt,Outpnt Diag Min MC Copay Amt,50.00,
+H2406-070-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_max_dmc_amt,Outpnt Diag Max MC Copay Amt,50.00,
+H2406-070-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt,Outpnt LabSvc Min MC Copay Amt,0.00,
+H2406-070-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt_max,Outpnt LabSvc Max MC Copay Amt,0.00,
+H2406-070-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H2406-070-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H2406-070-0,N_pharmacy_deductible,pbp_mrx,mrx_alt_no_ded_tier,MRx Alt Non-Deductible Tiers,0110000,Tier 1; Tier 2
+H2406-070-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_yn,Deductible YN?,2,No
+H2056-003-0,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,Yes,
+H2056-003-0,D_premium_full_extra_help,Landscape,Part C Premium,,$0.00,
+H2056-003-0,D_premium_full_extra_help,Landscape,Part D Low Income Beneficiary Premium Amount,,$0.00,
+H2056-003-0,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,Yes,
+H2056-003-0,N_pharmacy_deductible,Landscape,Annual Part D Deductible Amount,,$700.00,
+H2056-003-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_min_dmc_amt,Outpnt Diag Min MC Copay Amt,0.00,
+H2056-003-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_max_dmc_amt,Outpnt Diag Max MC Copay Amt,35.00,
+H2056-003-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt,Outpnt LabSvc Min MC Copay Amt,0.00,
+H2056-003-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt_max,Outpnt LabSvc Max MC Copay Amt,35.00,
+H2056-003-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H2056-003-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H2056-003-0,N_pharmacy_deductible,pbp_mrx,mrx_alt_no_ded_tier,MRx Alt Non-Deductible Tiers,0110000,Tier 1; Tier 2
+H2056-003-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_yn,In-Ntwk Plan Deductible YN,1,Yes
+H2056-003-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_amt,In-Ntwk Ded Amt,750.00,
+H2056-003-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_partb_yn,In-Ntwk Ded Mdcr PartB YN,2,No
+H2056-003-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_m_yn,In-Ntwk Ded All Inn Mdcr YN,2,No
+H7006-018-0,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,Yes,
+H7006-018-0,D_premium_full_extra_help,Landscape,Part C Premium,,$0.00,
+H7006-018-0,D_premium_full_extra_help,Landscape,Part D Low Income Beneficiary Premium Amount,,$0.00,
+H7006-018-0,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,Yes,
+H7006-018-0,N_pharmacy_deductible,Landscape,Annual Part D Deductible Amount,,$400.00,
+H7006-018-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_min_dmc_amt,Outpnt Diag Min MC Copay Amt,0.00,
+H7006-018-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_max_dmc_amt,Outpnt Diag Max MC Copay Amt,20.00,
+H7006-018-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H7006-018-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H7006-018-0,N_pharmacy_deductible,pbp_mrx,mrx_alt_no_ded_tier,MRx Alt Non-Deductible Tiers,0110001,Tier 1; Tier 2; Tier 6
+H7006-018-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_yn,Deductible YN?,2,No
+H7199-002-0,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,Yes,
+H7199-002-0,D_premium_full_extra_help,Landscape,Part C Premium,,$28.50,
+H7199-002-0,D_premium_full_extra_help,Landscape,Part D Low Income Beneficiary Premium Amount,,$0.00,
+H7199-002-0,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,Yes,
+H7199-002-0,N_pharmacy_deductible,Landscape,Annual Part D Deductible Amount,,$650.00,
+H7199-002-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_min_dmc_amt,Outpnt Diag Min MC Copay Amt,0.00,
+H7199-002-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_max_dmc_amt,Outpnt Diag Max MC Copay Amt,95.00,
+H7199-002-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt,Outpnt LabSvc Min MC Copay Amt,0.00,
+H7199-002-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt_max,Outpnt LabSvc Max MC Copay Amt,60.00,
+H7199-002-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H7199-002-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H7199-002-0,N_pharmacy_deductible,pbp_mrx,mrx_alt_no_ded_tier,MRx Alt Non-Deductible Tiers,0110000,Tier 1; Tier 2
+H7199-002-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_yn,Deductible YN?,1,Yes
+H7199-002-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_amt,Deduct Amt,250.00,
+H7199-002-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_amt_type,Deduct Amt Type,4,"Other, Indicate amount"
+H7199-002-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_bens,Deduct Ben Cats,010,In-Network Medicare-covered benefits
+H7199-002-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_inn_mc_yn,Deduct Annual INN MC YN,2,No
+H2923-001-0,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,Yes,
+H2923-001-0,D_premium_full_extra_help,Landscape,Part C Premium,,$0.00,
+H2923-001-0,D_premium_full_extra_help,Landscape,Part D Low Income Beneficiary Premium Amount,,$0.00,
+H2923-001-0,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,Yes,
+H2923-001-0,N_pharmacy_deductible,Landscape,Annual Part D Deductible Amount,,$461.00,
+H2923-001-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_min_dmc_amt,Outpnt Diag Min MC Copay Amt,0.00,
+H2923-001-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_max_dmc_amt,Outpnt Diag Max MC Copay Amt,95.00,
+H2923-001-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt,Outpnt LabSvc Min MC Copay Amt,0.00,
+H2923-001-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt_max,Outpnt LabSvc Max MC Copay Amt,40.00,
+H2923-001-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_coins_pct_lab,Outpnt Lab Svcs Min Coins Pct,20,
+H2923-001-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_coins_pct_lab_max,Outpnt Lab Svcs Max Coins Pct,20,
+H2923-001-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H2923-001-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H2923-001-0,N_pharmacy_deductible,pbp_mrx,mrx_alt_no_ded_tier,MRx Alt Non-Deductible Tiers,0110000,Tier 1; Tier 2
+H2923-001-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_yn,In-Ntwk Plan Deductible YN,2,No
+H2923-028-3,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,Yes,
+H2923-028-3,D_premium_full_extra_help,Landscape,Part C Premium,,$0.00,
+H2923-028-3,D_premium_full_extra_help,Landscape,Part D Low Income Beneficiary Premium Amount,,$0.00,
+H2923-028-3,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,Yes,
+H2923-028-3,N_pharmacy_deductible,Landscape,Annual Part D Deductible Amount,,$461.00,
+H2923-028-3,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_min_dmc_amt,Outpnt Diag Min MC Copay Amt,0.00,
+H2923-028-3,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_max_dmc_amt,Outpnt Diag Max MC Copay Amt,95.00,
+H2923-028-3,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt,Outpnt LabSvc Min MC Copay Amt,0.00,
+H2923-028-3,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt_max,Outpnt LabSvc Max MC Copay Amt,50.00,
+H2923-028-3,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_coins_pct_lab,Outpnt Lab Svcs Min Coins Pct,20,
+H2923-028-3,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_coins_pct_lab_max,Outpnt Lab Svcs Max Coins Pct,20,
+H2923-028-3,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H2923-028-3,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H2923-028-3,N_pharmacy_deductible,pbp_mrx,mrx_alt_no_ded_tier,MRx Alt Non-Deductible Tiers,0110000,Tier 1; Tier 2
+H2923-028-3,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_yn,In-Ntwk Plan Deductible YN,1,Yes
+H2923-028-3,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_amt,In-Ntwk Ded Amt,200.00,
+H2923-028-3,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_partb_yn,In-Ntwk Ded Mdcr PartB YN,2,No
+H2923-028-3,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_m_yn,In-Ntwk Ded All Inn Mdcr YN,2,No
+H2923-025-0,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,Yes,
+H2923-025-0,D_premium_full_extra_help,Landscape,Part C Premium,,$0.00,
+H2923-025-0,D_premium_full_extra_help,Landscape,Part D Low Income Beneficiary Premium Amount,,$0.00,
+H2923-025-0,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,Yes,
+H2923-025-0,N_pharmacy_deductible,Landscape,Annual Part D Deductible Amount,,$700.00,
+H2923-025-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_min_dmc_amt,Outpnt Diag Min MC Copay Amt,0.00,
+H2923-025-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_max_dmc_amt,Outpnt Diag Max MC Copay Amt,95.00,
+H2923-025-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt,Outpnt LabSvc Min MC Copay Amt,0.00,
+H2923-025-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt_max,Outpnt LabSvc Max MC Copay Amt,45.00,
+H2923-025-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_coins_pct_lab,Outpnt Lab Svcs Min Coins Pct,20,
+H2923-025-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_coins_pct_lab_max,Outpnt Lab Svcs Max Coins Pct,20,
+H2923-025-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H2923-025-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H2923-025-0,N_pharmacy_deductible,pbp_mrx,mrx_alt_no_ded_tier,MRx Alt Non-Deductible Tiers,0110000,Tier 1; Tier 2
+H2923-025-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_yn,In-Ntwk Plan Deductible YN,1,Yes
+H2923-025-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_amt,In-Ntwk Ded Amt,150.00,
+H2923-025-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_partb_yn,In-Ntwk Ded Mdcr PartB YN,2,No
+H2923-025-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_m_yn,In-Ntwk Ded All Inn Mdcr YN,2,No
+H2923-005-0,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,Yes,
+H2923-005-0,D_premium_full_extra_help,Landscape,Part C Premium,,$43.00,
+H2923-005-0,D_premium_full_extra_help,Landscape,Part D Low Income Beneficiary Premium Amount,,$0.00,
+H2923-005-0,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,Yes,
+H2923-005-0,N_pharmacy_deductible,Landscape,Annual Part D Deductible Amount,,$650.00,
+H2923-005-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_min_dmc_amt,Outpnt Diag Min MC Copay Amt,0.00,
+H2923-005-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_max_dmc_amt,Outpnt Diag Max MC Copay Amt,95.00,
+H2923-005-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt,Outpnt LabSvc Min MC Copay Amt,0.00,
+H2923-005-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt_max,Outpnt LabSvc Max MC Copay Amt,40.00,
+H2923-005-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_coins_pct_lab,Outpnt Lab Svcs Min Coins Pct,20,
+H2923-005-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_coins_pct_lab_max,Outpnt Lab Svcs Max Coins Pct,20,
+H2923-005-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H2923-005-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H2923-005-0,N_pharmacy_deductible,pbp_mrx,mrx_alt_no_ded_tier,MRx Alt Non-Deductible Tiers,0110000,Tier 1; Tier 2
+H2923-005-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_yn,In-Ntwk Plan Deductible YN,1,Yes
+H2923-005-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_amt,In-Ntwk Ded Amt,200.00,
+H2923-005-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_partb_yn,In-Ntwk Ded Mdcr PartB YN,2,No
+H2923-005-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_m_yn,In-Ntwk Ded All Inn Mdcr YN,2,No
+H1036-323-0,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,Yes,
+H1036-323-0,D_premium_full_extra_help,Landscape,Part C Premium,,$0.00,
+H1036-323-0,D_premium_full_extra_help,Landscape,Part D Low Income Beneficiary Premium Amount,,$0.00,
+H1036-323-0,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,Yes,
+H1036-323-0,N_pharmacy_deductible,Landscape,Annual Part D Deductible Amount,,$700.00,
+H1036-323-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_min_dmc_amt,Outpnt Diag Min MC Copay Amt,0.00,
+H1036-323-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_max_dmc_amt,Outpnt Diag Max MC Copay Amt,100.00,
+H1036-323-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt,Outpnt LabSvc Min MC Copay Amt,0.00,
+H1036-323-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt_max,Outpnt LabSvc Max MC Copay Amt,0.00,
+H1036-323-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H1036-323-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H1036-323-0,N_pharmacy_deductible,pbp_mrx,mrx_alt_no_ded_tier,MRx Alt Non-Deductible Tiers,0111000,Tier 1; Tier 2; Tier 3
+H1036-323-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_yn,In-Ntwk Plan Deductible YN,1,Yes
+H1036-323-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_amt,In-Ntwk Ded Amt,700.00,
+H1036-323-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_partb_yn,In-Ntwk Ded Mdcr PartB YN,2,No
+H1036-323-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_m_yn,In-Ntwk Ded All Inn Mdcr YN,2,No
+H1036-153-0,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,Yes,
+H1036-153-0,D_premium_full_extra_help,Landscape,Part C Premium,,$0.00,
+H1036-153-0,D_premium_full_extra_help,Landscape,Part D Low Income Beneficiary Premium Amount,,$0.00,
+H1036-153-0,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,Yes,
+H1036-153-0,N_pharmacy_deductible,Landscape,Annual Part D Deductible Amount,,$700.00,
+H1036-153-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_min_dmc_amt,Outpnt Diag Min MC Copay Amt,0.00,
+H1036-153-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_max_dmc_amt,Outpnt Diag Max MC Copay Amt,100.00,
+H1036-153-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt,Outpnt LabSvc Min MC Copay Amt,0.00,
+H1036-153-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt_max,Outpnt LabSvc Max MC Copay Amt,0.00,
+H1036-153-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H1036-153-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H1036-153-0,N_pharmacy_deductible,pbp_mrx,mrx_alt_no_ded_tier,MRx Alt Non-Deductible Tiers,0111000,Tier 1; Tier 2; Tier 3
+H1036-153-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_yn,In-Ntwk Plan Deductible YN,2,No
+H5216-428-2,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,Yes,
+H5216-428-2,D_premium_full_extra_help,Landscape,Part C Premium,,$0.00,
+H5216-428-2,D_premium_full_extra_help,Landscape,Part D Low Income Beneficiary Premium Amount,,$0.00,
+H5216-428-2,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,Yes,
+H5216-428-2,N_pharmacy_deductible,Landscape,Annual Part D Deductible Amount,,$700.00,
+H5216-428-2,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_min_dmc_amt,Outpnt Diag Min MC Copay Amt,0.00,
+H5216-428-2,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_max_dmc_amt,Outpnt Diag Max MC Copay Amt,100.00,
+H5216-428-2,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt,Outpnt LabSvc Min MC Copay Amt,0.00,
+H5216-428-2,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt_max,Outpnt LabSvc Max MC Copay Amt,0.00,
+H5216-428-2,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H5216-428-2,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H5216-428-2,N_pharmacy_deductible,pbp_mrx,mrx_alt_no_ded_tier,MRx Alt Non-Deductible Tiers,0110000,Tier 1; Tier 2
+H5216-428-2,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_yn,Deductible YN?,1,Yes
+H5216-428-2,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_amt,Deduct Amt,80.00,
+H5216-428-2,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_amt_type,Deduct Amt Type,4,"Other, Indicate amount"
+H5216-428-2,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_bens,Deduct Ben Cats,010,In-Network Medicare-covered benefits
+H5216-428-2,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_inn_mc_yn,Deduct Annual INN MC YN,2,No
+H5216-048-0,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,Yes,
+H5216-048-0,D_premium_full_extra_help,Landscape,Part C Premium,,$0.00,
+H5216-048-0,D_premium_full_extra_help,Landscape,Part D Low Income Beneficiary Premium Amount,,$82.60,
+H5216-048-0,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,Yes,
+H5216-048-0,N_pharmacy_deductible,Landscape,Annual Part D Deductible Amount,,$700.00,
+H5216-048-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_min_dmc_amt,Outpnt Diag Min MC Copay Amt,0.00,
+H5216-048-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_max_dmc_amt,Outpnt Diag Max MC Copay Amt,100.00,
+H5216-048-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt,Outpnt LabSvc Min MC Copay Amt,0.00,
+H5216-048-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt_max,Outpnt LabSvc Max MC Copay Amt,0.00,
+H5216-048-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H5216-048-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H5216-048-0,N_pharmacy_deductible,pbp_mrx,mrx_alt_no_ded_tier,MRx Alt Non-Deductible Tiers,0110000,Tier 1; Tier 2
+H5216-048-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_yn,Deductible YN?,1,Yes
+H5216-048-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_amt,Deduct Amt,100.00,
+H5216-048-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_amt_type,Deduct Amt Type,4,"Other, Indicate amount"
+H9003-001-0,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,Yes,
+H9003-001-0,D_premium_full_extra_help,Landscape,Part C Premium,,$134.00,
+H9003-001-0,D_premium_full_extra_help,Landscape,Part D Low Income Beneficiary Premium Amount,,$0.00,
+H9003-001-0,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,Yes,
+H9003-001-0,N_pharmacy_deductible,Landscape,Annual Part D Deductible Amount,,$0.00,
+H9003-001-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_min_dmc_amt,Outpnt Diag Min MC Copay Amt,0.00,
+H9003-001-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_max_dmc_amt,Outpnt Diag Max MC Copay Amt,35.00,
+H9003-001-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt,Outpnt LabSvc Min MC Copay Amt,0.00,
+H9003-001-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt_max,Outpnt LabSvc Max MC Copay Amt,0.00,
+H9003-001-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H9003-001-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H9003-001-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_yn,In-Ntwk Plan Deductible YN,2,No
+H9003-006-0,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,Yes,
+H9003-006-0,D_premium_full_extra_help,Landscape,Part C Premium,,$49.00,
+H9003-006-0,D_premium_full_extra_help,Landscape,Part D Low Income Beneficiary Premium Amount,,$0.00,
+H9003-006-0,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,Yes,
+H9003-006-0,N_pharmacy_deductible,Landscape,Annual Part D Deductible Amount,,$0.00,
+H9003-006-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_min_dmc_amt,Outpnt Diag Min MC Copay Amt,0.00,
+H9003-006-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_max_dmc_amt,Outpnt Diag Max MC Copay Amt,40.00,
+H9003-006-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt,Outpnt LabSvc Min MC Copay Amt,0.00,
+H9003-006-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt_max,Outpnt LabSvc Max MC Copay Amt,0.00,
+H9003-006-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H9003-006-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H9003-006-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_yn,In-Ntwk Plan Deductible YN,2,No
+H9003-009-0,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,Yes,
+H9003-009-0,D_premium_full_extra_help,Landscape,Part C Premium,,$0.00,
+H9003-009-0,D_premium_full_extra_help,Landscape,Part D Low Income Beneficiary Premium Amount,,$0.00,
+H9003-009-0,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,Yes,
+H9003-009-0,N_pharmacy_deductible,Landscape,Annual Part D Deductible Amount,,$0.00,
+H9003-009-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_min_dmc_amt,Outpnt Diag Min MC Copay Amt,15.00,
+H9003-009-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_max_dmc_amt,Outpnt Diag Max MC Copay Amt,45.00,
+H9003-009-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt,Outpnt LabSvc Min MC Copay Amt,0.00,
+H9003-009-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt_max,Outpnt LabSvc Max MC Copay Amt,0.00,
+H9003-009-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H9003-009-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H9003-009-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_yn,In-Ntwk Plan Deductible YN,2,No
+H3817-008-1,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,Yes,
+H3817-008-1,D_premium_full_extra_help,Landscape,Part C Premium,,$76.30,
+H3817-008-1,D_premium_full_extra_help,Landscape,Part D Low Income Beneficiary Premium Amount,,$47.40,
+H3817-008-1,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,Yes,
+H3817-008-1,N_pharmacy_deductible,Landscape,Annual Part D Deductible Amount,,$590.00,
+H3817-008-1,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_min_dmc_amt,Outpnt Diag Min MC Copay Amt,20.00,
+H3817-008-1,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_max_dmc_amt,Outpnt Diag Max MC Copay Amt,20.00,
+H3817-008-1,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt,Outpnt LabSvc Min MC Copay Amt,0.00,
+H3817-008-1,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt_max,Outpnt LabSvc Max MC Copay Amt,20.00,
+H3817-008-1,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H3817-008-1,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H3817-008-1,N_pharmacy_deductible,pbp_mrx,mrx_alt_no_ded_tier,MRx Alt Non-Deductible Tiers,0110000,Tier 1; Tier 2
+H3817-008-1,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_yn,Deductible YN?,2,No
+H3817-009-1,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,Yes,
+H3817-009-1,D_premium_full_extra_help,Landscape,Part C Premium,,$160.90,
+H3817-009-1,D_premium_full_extra_help,Landscape,Part D Low Income Beneficiary Premium Amount,,$76.80,
+H3817-009-1,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,Yes,
+H3817-009-1,N_pharmacy_deductible,Landscape,Annual Part D Deductible Amount,,$305.00,
+H3817-009-1,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_min_dmc_amt,Outpnt Diag Min MC Copay Amt,10.00,
+H3817-009-1,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_max_dmc_amt,Outpnt Diag Max MC Copay Amt,10.00,
+H3817-009-1,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt,Outpnt LabSvc Min MC Copay Amt,0.00,
+H3817-009-1,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt_max,Outpnt LabSvc Max MC Copay Amt,10.00,
+H3817-009-1,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H3817-009-1,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H3817-009-1,N_pharmacy_deductible,pbp_mrx,mrx_alt_no_ded_tier,MRx Alt Non-Deductible Tiers,0110000,Tier 1; Tier 2
+H3817-009-1,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_yn,Deductible YN?,2,No
+H3817-011-1,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,Yes,
+H3817-011-1,D_premium_full_extra_help,Landscape,Part C Premium,,$72.50,
+H3817-011-1,D_premium_full_extra_help,Landscape,Part D Low Income Beneficiary Premium Amount,,$9.20,
+H3817-011-1,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,Yes,
+H3817-011-1,N_pharmacy_deductible,Landscape,Annual Part D Deductible Amount,,$700.00,
+H3817-011-1,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_min_dmc_amt,Outpnt Diag Min MC Copay Amt,40.00,
+H3817-011-1,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_max_dmc_amt,Outpnt Diag Max MC Copay Amt,40.00,
+H3817-011-1,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt,Outpnt LabSvc Min MC Copay Amt,0.00,
+H3817-011-1,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt_max,Outpnt LabSvc Max MC Copay Amt,30.00,
+H3817-011-1,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H3817-011-1,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H3817-011-1,N_pharmacy_deductible,pbp_mrx,mrx_alt_no_ded_tier,MRx Alt Non-Deductible Tiers,0110000,Tier 1; Tier 2
+H3817-011-1,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_yn,Deductible YN?,2,No
+H6815-038-0,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,Yes,
+H6815-038-0,D_premium_full_extra_help,Landscape,Part C Premium,,$44.50,
+H6815-038-0,D_premium_full_extra_help,Landscape,Part D Low Income Beneficiary Premium Amount,,$0.00,
+H6815-038-0,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,Yes,
+H6815-038-0,N_pharmacy_deductible,Landscape,Annual Part D Deductible Amount,,$700.00,
+H6815-038-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_coins_pct_dmc,Outpnt Diag MC Min Coins Pct,0,
+H6815-038-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_coins_pct_dmc_max,Outpnt Diag MC Max Coins Pct,20,
+H6815-038-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt,Outpnt LabSvc Min MC Copay Amt,0.00,
+H6815-038-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt_max,Outpnt LabSvc Max MC Copay Amt,50.00,
+H6815-038-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H6815-038-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H6815-038-0,N_pharmacy_deductible,pbp_mrx,mrx_alt_no_ded_tier,MRx Alt Non-Deductible Tiers,0100001,Tier 1; Tier 6
+H6815-038-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_yn,In-Ntwk Plan Deductible YN,1,Yes
+H6815-038-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_amt,In-Ntwk Ded Amt,150.00,
+H6815-038-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_partb_yn,In-Ntwk Ded Mdcr PartB YN,2,No
+H6815-038-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_m_yn,In-Ntwk Ded All Inn Mdcr YN,2,No
+H5439-015-0,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,Yes,
+H5439-015-0,D_premium_full_extra_help,Landscape,Part C Premium,,$29.00,
+H5439-015-0,D_premium_full_extra_help,Landscape,Part D Low Income Beneficiary Premium Amount,,$0.00,
+H5439-015-0,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,Yes,
+H5439-015-0,N_pharmacy_deductible,Landscape,Annual Part D Deductible Amount,,$700.00,
+H5439-015-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_coins_pct_dmc,Outpnt Diag MC Min Coins Pct,0,
+H5439-015-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_coins_pct_dmc_max,Outpnt Diag MC Max Coins Pct,20,
+H5439-015-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt,Outpnt LabSvc Min MC Copay Amt,0.00,
+H5439-015-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt_max,Outpnt LabSvc Max MC Copay Amt,50.00,
+H5439-015-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H5439-015-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H5439-015-0,N_pharmacy_deductible,pbp_mrx,mrx_alt_no_ded_tier,MRx Alt Non-Deductible Tiers,0100001,Tier 1; Tier 6
+H5439-015-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_yn,Deductible YN?,1,Yes
+H5439-015-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_amt,Deduct Amt,250.00,
+H5439-015-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_amt_type,Deduct Amt Type,4,"Other, Indicate amount"
+H5439-015-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_bens,Deduct Ben Cats,010,In-Network Medicare-covered benefits
+H5439-015-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_inn_mc_yn,Deduct Annual INN MC YN,2,No
+H5439-019-0,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,Yes,
+H5439-019-0,D_premium_full_extra_help,Landscape,Part C Premium,,$76.60,
+H5439-019-0,D_premium_full_extra_help,Landscape,Part D Low Income Beneficiary Premium Amount,,$0.00,
+H5439-019-0,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,Yes,
+H5439-019-0,N_pharmacy_deductible,Landscape,Annual Part D Deductible Amount,,$700.00,
+H5439-019-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_coins_pct_dmc,Outpnt Diag MC Min Coins Pct,0,
+H5439-019-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_coins_pct_dmc_max,Outpnt Diag MC Max Coins Pct,20,
+H5439-019-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt,Outpnt LabSvc Min MC Copay Amt,0.00,
+H5439-019-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt_max,Outpnt LabSvc Max MC Copay Amt,50.00,
+H5439-019-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H5439-019-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H5439-019-0,N_pharmacy_deductible,pbp_mrx,mrx_alt_no_ded_tier,MRx Alt Non-Deductible Tiers,0100001,Tier 1; Tier 6
+H5439-019-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_yn,Deductible YN?,1,Yes
+H5439-019-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_amt,Deduct Amt,250.00,
+H5439-019-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_amt_type,Deduct Amt Type,4,"Other, Indicate amount"
+H5439-019-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_bens,Deduct Ben Cats,010,In-Network Medicare-covered benefits
+H5439-019-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_inn_mc_yn,Deduct Annual INN MC YN,2,No
+H5439-011-0,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,Yes,
+H5439-011-0,D_premium_full_extra_help,Landscape,Part C Premium,,$159.40,
+H5439-011-0,D_premium_full_extra_help,Landscape,Part D Low Income Beneficiary Premium Amount,,$40.30,
+H5439-011-0,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,Yes,
+H5439-011-0,N_pharmacy_deductible,Landscape,Annual Part D Deductible Amount,,$700.00,
+H5439-011-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_coins_pct_dmc,Outpnt Diag MC Min Coins Pct,0,
+H5439-011-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_coins_pct_dmc_max,Outpnt Diag MC Max Coins Pct,20,
+H5439-011-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt,Outpnt LabSvc Min MC Copay Amt,0.00,
+H5439-011-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt_max,Outpnt LabSvc Max MC Copay Amt,50.00,
+H5439-011-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H5439-011-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H5439-011-0,N_pharmacy_deductible,pbp_mrx,mrx_alt_no_ded_tier,MRx Alt Non-Deductible Tiers,0100001,Tier 1; Tier 6
+H5439-011-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_yn,Deductible YN?,1,Yes
+H5439-011-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_amt,Deduct Amt,250.00,
+H5439-011-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_amt_type,Deduct Amt Type,4,"Other, Indicate amount"
+H5439-011-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_bens,Deduct Ben Cats,010,In-Network Medicare-covered benefits
+H5439-011-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_inn_mc_yn,Deduct Annual INN MC YN,2,No
+H1372-003-0,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,Yes,
+H1372-003-0,D_premium_full_extra_help,Landscape,Part C Premium,,$25.70,
+H1372-003-0,D_premium_full_extra_help,Landscape,Part D Low Income Beneficiary Premium Amount,,$43.30,
+H1372-003-0,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,Yes,
+H1372-003-0,N_pharmacy_deductible,Landscape,Annual Part D Deductible Amount,,$400.00,
+H1372-003-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_coins_pct_dmc,Outpnt Diag MC Min Coins Pct,20,
+H1372-003-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_coins_pct_dmc_max,Outpnt Diag MC Max Coins Pct,20,
+H1372-003-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H1372-003-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H1372-003-0,N_pharmacy_deductible,pbp_mrx,mrx_alt_no_ded_tier,MRx Alt Non-Deductible Tiers,0100000,Tier 1
+H1372-003-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_yn,In-Ntwk Plan Deductible YN,2,No
+H2923-019-0,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,Yes,
+H2923-019-0,D_premium_full_extra_help,Landscape,Part C Premium,,$0.00,
+H2923-019-0,D_premium_full_extra_help,Landscape,Part D Low Income Beneficiary Premium Amount,,$0.00,
+H2923-019-0,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,Yes,
+H2923-019-0,N_pharmacy_deductible,Landscape,Annual Part D Deductible Amount,,$700.00,
+H2923-019-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_min_dmc_amt,Outpnt Diag Min MC Copay Amt,0.00,
+H2923-019-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_max_dmc_amt,Outpnt Diag Max MC Copay Amt,95.00,
+H2923-019-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt,Outpnt LabSvc Min MC Copay Amt,0.00,
+H2923-019-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt_max,Outpnt LabSvc Max MC Copay Amt,45.00,
+H2923-019-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_coins_pct_lab,Outpnt Lab Svcs Min Coins Pct,20,
+H2923-019-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_coins_pct_lab_max,Outpnt Lab Svcs Max Coins Pct,20,
+H2923-019-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H2923-019-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H2923-019-0,N_pharmacy_deductible,pbp_mrx,mrx_alt_no_ded_tier,MRx Alt Non-Deductible Tiers,0110000,Tier 1; Tier 2
+H2923-019-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_yn,In-Ntwk Plan Deductible YN,1,Yes
+H2923-019-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_amt,In-Ntwk Ded Amt,150.00,
+H2923-019-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_partb_yn,In-Ntwk Ded Mdcr PartB YN,2,No
+H2923-019-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_m_yn,In-Ntwk Ded All Inn Mdcr YN,2,No
+H2923-009-0,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,Yes,
+H2923-009-0,D_premium_full_extra_help,Landscape,Part C Premium,,$0.00,
+H2923-009-0,D_premium_full_extra_help,Landscape,Part D Low Income Beneficiary Premium Amount,,$0.00,
+H2923-009-0,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,Yes,
+H2923-009-0,N_pharmacy_deductible,Landscape,Annual Part D Deductible Amount,,$461.00,
+H2923-009-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_coins_pct_dmc,Outpnt Diag MC Min Coins Pct,0,
+H2923-009-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_coins_pct_dmc_max,Outpnt Diag MC Max Coins Pct,50,
+H2923-009-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_coins_pct_lab,Outpnt Lab Svcs Min Coins Pct,0,
+H2923-009-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_coins_pct_lab_max,Outpnt Lab Svcs Max Coins Pct,50,
+H2923-009-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H2923-009-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H2923-009-0,N_pharmacy_deductible,pbp_mrx,mrx_alt_no_ded_tier,MRx Alt Non-Deductible Tiers,0110000,Tier 1; Tier 2
+H2923-009-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_yn,In-Ntwk Plan Deductible YN,1,Yes
+H2923-009-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_amt,In-Ntwk Ded Amt,990.00,
+H2923-009-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_partb_yn,In-Ntwk Ded Mdcr PartB YN,2,No
+H2923-009-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_m_yn,In-Ntwk Ded All Inn Mdcr YN,2,No
+H1036-306-0,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,Yes,
+H1036-306-0,D_premium_full_extra_help,Landscape,Part C Premium,,$0.00,
+H1036-306-0,D_premium_full_extra_help,Landscape,Part D Low Income Beneficiary Premium Amount,,$0.00,
+H1036-306-0,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,Yes,
+H1036-306-0,N_pharmacy_deductible,Landscape,Annual Part D Deductible Amount,,$500.00,
+H1036-306-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_min_dmc_amt,Outpnt Diag Min MC Copay Amt,0.00,
+H1036-306-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_max_dmc_amt,Outpnt Diag Max MC Copay Amt,140.00,
+H1036-306-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt,Outpnt LabSvc Min MC Copay Amt,0.00,
+H1036-306-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt_max,Outpnt LabSvc Max MC Copay Amt,0.00,
+H1036-306-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H1036-306-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H1036-306-0,N_pharmacy_deductible,pbp_mrx,mrx_alt_no_ded_tier,MRx Alt Non-Deductible Tiers,0110001,Tier 1; Tier 2; Tier 6
+H1036-306-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_yn,In-Ntwk Plan Deductible YN,2,No
+H1036-317-0,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,Yes,
+H1036-317-0,D_premium_full_extra_help,Landscape,Part C Premium,,$0.00,
+H1036-317-0,D_premium_full_extra_help,Landscape,Part D Low Income Beneficiary Premium Amount,,$0.00,
+H1036-317-0,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,Yes,
+H1036-317-0,N_pharmacy_deductible,Landscape,Annual Part D Deductible Amount,,$700.00,
+H1036-317-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_min_dmc_amt,Outpnt Diag Min MC Copay Amt,0.00,
+H1036-317-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_max_dmc_amt,Outpnt Diag Max MC Copay Amt,40.00,
+H1036-317-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_coins_pct_dmc,Outpnt Diag MC Min Coins Pct,20,
+H1036-317-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_coins_pct_dmc_max,Outpnt Diag MC Max Coins Pct,20,
+H1036-317-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt,Outpnt LabSvc Min MC Copay Amt,0.00,
+H1036-317-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt_max,Outpnt LabSvc Max MC Copay Amt,0.00,
+H1036-317-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H1036-317-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H1036-317-0,N_pharmacy_deductible,pbp_mrx,mrx_alt_no_ded_tier,MRx Alt Non-Deductible Tiers,0111001,Tier 1; Tier 2; Tier 3; Tier 6
+H1036-317-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_yn,In-Ntwk Plan Deductible YN,1,Yes
+H1036-317-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_partb_yn,In-Ntwk Ded Mdcr PartB YN,1,Yes
+H1036-317-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_m_yn,In-Ntwk Ded All Inn Mdcr YN,2,No
+H3805-040-0,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,Yes,
+H3805-040-0,D_premium_full_extra_help,Landscape,Part C Premium,,$0.00,
+H3805-040-0,D_premium_full_extra_help,Landscape,Part D Low Income Beneficiary Premium Amount,,$0.00,
+H3805-040-0,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,Yes,
+H3805-040-0,N_pharmacy_deductible,Landscape,Annual Part D Deductible Amount,,$685.00,
+H3805-040-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_min_dmc_amt,Outpnt Diag Min MC Copay Amt,60.00,
+H3805-040-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_max_dmc_amt,Outpnt Diag Max MC Copay Amt,60.00,
+H3805-040-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt,Outpnt LabSvc Min MC Copay Amt,0.00,
+H3805-040-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt_max,Outpnt LabSvc Max MC Copay Amt,0.00,
+H3805-040-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H3805-040-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H3805-040-0,N_pharmacy_deductible,pbp_mrx,mrx_alt_no_ded_tier,MRx Alt Non-Deductible Tiers,0110000,Tier 1; Tier 2
+H3805-040-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_yn,In-Ntwk Plan Deductible YN,2,No
+H2001-045-0,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,Yes,
+H2001-045-0,D_premium_full_extra_help,Landscape,Part C Premium,,$0.00,
+H2001-045-0,D_premium_full_extra_help,Landscape,Part D Low Income Beneficiary Premium Amount,,$0.00,
+H2001-045-0,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,Yes,
+H2001-045-0,N_pharmacy_deductible,Landscape,Annual Part D Deductible Amount,,$700.00,
+H2001-045-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_coins_pct_dmc,Outpnt Diag MC Min Coins Pct,20,
+H2001-045-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_coins_pct_dmc_max,Outpnt Diag MC Max Coins Pct,20,
+H2001-045-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt,Outpnt LabSvc Min MC Copay Amt,0.00,
+H2001-045-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt_max,Outpnt LabSvc Max MC Copay Amt,0.00,
+H2001-045-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H2001-045-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H2001-045-0,N_pharmacy_deductible,pbp_mrx,mrx_alt_no_ded_tier,MRx Alt Non-Deductible Tiers,0110000,Tier 1; Tier 2
+H2001-045-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_yn,Deductible YN?,1,Yes
+H2001-045-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_amt_type,Deduct Amt Type,2,Medicare-Defined Part B Deductible amount
+H2001-045-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_bens,Deduct Ben Cats,010,In-Network Medicare-covered benefits
+H2001-045-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_inn_mc_yn,Deduct Annual INN MC YN,2,No
+H2406-073-0,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,No,
+H2406-073-0,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,No,
+H2406-073-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_min_dmc_amt,Outpnt Diag Min MC Copay Amt,50.00,
+H2406-073-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_max_dmc_amt,Outpnt Diag Max MC Copay Amt,50.00,
+H2406-073-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt,Outpnt LabSvc Min MC Copay Amt,0.00,
+H2406-073-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt_max,Outpnt LabSvc Max MC Copay Amt,0.00,
+H2406-073-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H2406-073-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H2406-073-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_yn,Deductible YN?,2,No
+H2056-018-0,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,No,
+H2056-018-0,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,No,
+H2056-018-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_min_dmc_amt,Outpnt Diag Min MC Copay Amt,0.00,
+H2056-018-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_max_dmc_amt,Outpnt Diag Max MC Copay Amt,20.00,
+H2056-018-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt,Outpnt LabSvc Min MC Copay Amt,0.00,
+H2056-018-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt_max,Outpnt LabSvc Max MC Copay Amt,0.00,
+H2056-018-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H2056-018-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H2056-018-0,O_medical_deductible,pbp_Section_D,pbp_d_inn_deduct_yn,In-Ntwk Plan Deductible YN,2,No
+H7006-021-0,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,No,
+H7006-021-0,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,No,
+H7006-021-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H7006-021-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H7006-021-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_yn,Deductible YN?,2,No
+H5216-427-2,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,No,
+H5216-427-2,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,No,
+H5216-427-2,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_min_dmc_amt,Outpnt Diag Min MC Copay Amt,0.00,
+H5216-427-2,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_max_dmc_amt,Outpnt Diag Max MC Copay Amt,100.00,
+H5216-427-2,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt,Outpnt LabSvc Min MC Copay Amt,0.00,
+H5216-427-2,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt_max,Outpnt LabSvc Max MC Copay Amt,0.00,
+H5216-427-2,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H5216-427-2,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H5216-427-2,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_yn,Deductible YN?,2,No
+H5216-455-0,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,No,
+H5216-455-0,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,No,
+H5216-455-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_min_dmc_amt,Outpnt Diag Min MC Copay Amt,0.00,
+H5216-455-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_max_dmc_amt,Outpnt Diag Max MC Copay Amt,100.00,
+H5216-455-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt,Outpnt LabSvc Min MC Copay Amt,0.00,
+H5216-455-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt_max,Outpnt LabSvc Max MC Copay Amt,0.00,
+H5216-455-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H5216-455-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H5216-455-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_yn,Deductible YN?,2,No
+H3817-010-0,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,No,
+H3817-010-0,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,No,
+H3817-010-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_min_dmc_amt,Outpnt Diag Min MC Copay Amt,10.00,
+H3817-010-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_copay_max_dmc_amt,Outpnt Diag Max MC Copay Amt,10.00,
+H3817-010-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt,Outpnt LabSvc Min MC Copay Amt,0.00,
+H3817-010-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt_max,Outpnt LabSvc Max MC Copay Amt,10.00,
+H3817-010-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H3817-010-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H3817-010-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_yn,Deductible YN?,2,No
+H5439-010-0,D_premium_full_extra_help,Landscape,Part D Coverage Indicator,,No,
+H5439-010-0,N_pharmacy_deductible,Landscape,Part D Coverage Indicator,,No,
+H5439-010-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_coins_pct_dmc,Outpnt Diag MC Min Coins Pct,0,
+H5439-010-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_coins_pct_dmc_max,Outpnt Diag MC Max Coins Pct,20,
+H5439-010-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt,Outpnt LabSvc Min MC Copay Amt,0.00,
+H5439-010-0,K_tests_labs,pbp_b8_clin_diag_ther,pbp_b8a_lab_copay_amt_max,Outpnt LabSvc Max MC Copay Amt,50.00,
+H5439-010-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_min_pct,15 Chemo Min Coinsurance Pct,0,
+H5439-010-0,M_part_b_drugs,pbp_b15_partb_rx_drugs,mrx_b_chemo_coins_max_pct,15 Chemo Max Coinsurance Pct,20,
+H5439-010-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_yn,Deductible YN?,1,Yes
+H5439-010-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_amt,Deduct Amt,200.00,
+H5439-010-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_amt_type,Deduct Amt Type,4,"Other, Indicate amount"
+H5439-010-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_bens,Deduct Ben Cats,010,In-Network Medicare-covered benefits
+H5439-010-0,O_medical_deductible,pbp_Section_D,pbp_d_ann_deduct_inn_mc_yn,Deduct Annual INN MC YN,2,No
