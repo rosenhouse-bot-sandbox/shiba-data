@@ -1,12 +1,13 @@
-"""Corrected 2027 values from docs/2027-bootstrap/CLAUDE_ANALYSIS_METHODS.md Appendix B."""
+"""Corrected 2027 values from docs/2027-bootstrap/CLAUDE_ANALYSIS_METHODS.md Appendix B.
+A SHIBA expert later changed the format of some cells (see data/2027/README.md)."""
 
 YEAR = 2027
 
 # (Appendix B item, plan, column, expected cell)
 MAIN_CHART_CASES = [
-    ("1", "H5216-048-0", "K_tests_labs", "$0-$100/$0"),
-    ("1", "H5216-048-0", "L_xray_imaging", "$0-$145 | $205-$345"),
-    ("1", "H5216-048-0", "O_medical_deductible", "$100 out-of-network only"),
+    ("1", "H5216-048-0", "K_tests_labs", "$0-$45/$0"),
+    ("1", "H5216-048-0", "L_xray_imaging", "$0-$45 | $205-$330"),
+    ("1", "H5216-048-0", "O_medical_deductible", "$100 some out-of-network services"),
     ("1", "H5216-048-0", "AA_opt_packages", "●"),
     ("2", "H2001-045-0", "O_medical_deductible", "Part B deductible some"),
     ("2", "H2001-045-0", "T_chiropractic", ""),
@@ -21,7 +22,7 @@ MAIN_CHART_CASES = [
     ("10", "H6815-038-0", "K_tests_labs", "0%-20%/$0-$50"),
     ("11", "H1372-003-0", "S_acupuncture", "●"),
     ("11", "H1372-003-0", "T_chiropractic", "●"),
-    ("12", "H1036-153-0", "L_xray_imaging", "$0-$145 | $205-$345"),
+    ("12", "H1036-153-0", "L_xray_imaging", "$0-$30 | $205-$330"),
     ("13", "H1036-317-0", "Y_otc", "●"),
     ("13", "H1036-317-0", "O_medical_deductible", "Part B deductible some"),
 ]

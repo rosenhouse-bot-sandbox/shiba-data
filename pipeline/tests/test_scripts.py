@@ -108,6 +108,9 @@ class MainChartTest(unittest.TestCase):
                                         "pbp_b1a_copay_mcs_amt_int2_t1": "0.00"}]}
         self.assertEqual(mc.inpatient(plan), "$465 | 1-5")
 
+    def test_inpatient_copay_per_admission(self):
+        self.assertEqual(mc.inpatient({"pbp_b1a_inpat_hosp": [{"pbp_b1a_copay_mcs_amt_t1": "2241.00"}]}), "$2,241 per admission")
+
     def test_inpatient_without_cost_sharing(self):
         self.assertEqual(mc.inpatient({"pbp_b1a_inpat_hosp": [{"pbp_b1a_copay_yn": "1"}]}), "$0")
         self.assertEqual(mc.inpatient({}), "")
@@ -187,14 +190,6 @@ class DocumentTest(unittest.TestCase):
         self.assertEqual(cite.naturopathy_mentions(excluded), [])
         self.assertEqual(cite.naturopathy_mentions(covered)[0][0], 2)
 
-    def test_naturopathy_from_wellness_fund_is_a_judgment_call(self):
-        self.assertEqual(cite.naturopathy_dot("use your Wellness Bucks towards office visits to a Naturopath"), "◐")
-        self.assertEqual(cite.naturopathy_dot("$0 copay for naturopathy visits"), "●")
-
-    def test_naturopathy_judgment_call_in_one_document_applies_to_the_plan(self):
-        rows = [{"plan_id": "A", "value": "●"}, {"plan_id": "A", "value": "◐"}, {"plan_id": "B", "value": "●"}]
-        self.assertEqual([r["value"] for r in cite.plan_dots(rows)], ["◐", "◐", "●"])
-
     def test_cites_each_plan_of_a_document_that_mentions_naturopathy(self):
         docs = [{"text_file": "a.txt", "url": "u", "plan_ids": "A;B"}, {"text_file": "b.txt", "url": "v", "plan_ids": "C"}]
         text = {"a.txt": {3: "$0 copay for naturopathy visits"}, "b.txt": {1: "acupuncture"}}
@@ -202,10 +197,10 @@ class DocumentTest(unittest.TestCase):
                      quote="$0 copay for naturopathy visits")
         self.assertEqual(cite.citations(docs, text), [dict(cited, plan_id="A"), dict(cited, plan_id="B")])
 
-    def test_cites_a_plans_judgment_call_in_each_of_its_documents(self):
-        docs = [{"text_file": "sb.txt", "url": "u", "plan_ids": "A"}, {"text_file": "eoc.txt", "url": "v", "plan_ids": "A"}]
-        text = {"sb.txt": {1: "$0 copay for naturopathy visits"}, "eoc.txt": {2: "Wellness Bucks pay for a Naturopath"}}
-        self.assertEqual([c["value"] for c in cite.citations(docs, text)], ["◐", "◐"])
+    def test_naturopathy_from_wellness_fund_earns_a_dot(self):
+        docs = [{"text_file": "eoc.txt", "url": "v", "plan_ids": "A"}]
+        text = {"eoc.txt": {2: "Wellness Bucks pay for a Naturopath"}}
+        self.assertEqual([c["value"] for c in cite.citations(docs, text)], ["●"])
 
 
 class DvhaTest(unittest.TestCase):

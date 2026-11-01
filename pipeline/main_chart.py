@@ -89,7 +89,7 @@ def inpatient(plan):
         return "; ".join(days)
     stay = num(r.get("pbp_b1a_copay_mcs_amt_t1"))
     if stay:
-        return f"{money(stay)} per stay"
+        return f"{money(stay)} per admission"
     coins = r.get("pbp_b1a_coins_mcs_pct_t1")
     if coins:
         return pct(float(coins))

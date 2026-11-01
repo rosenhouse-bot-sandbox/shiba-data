@@ -23,17 +23,6 @@ def pages(text):
     return {int(parts[i]): norm(parts[i + 1]) for i in range(1, len(parts) - 1, 2)}
 
 
-def naturopathy_dot(context):
-    """A naturopathy benefit paid from a general wellness fund is a judgment call (◐)."""
-    return "◐" if re.search(r"wellness", context, re.I) else "●"
-
-
-def plan_dots(rows):
-    """A plan's naturopathy dot is ◐ when any of its documents makes it a judgment call."""
-    judged = {r["plan_id"] for r in rows if r["value"] == "◐"}
-    return [dict(r, value="◐" if r["plan_id"] in judged else r["value"]) for r in rows]
-
-
 def naturopathy_mentions(doc_pages):
     """Pages that mention naturopathy other than in an exclusions-table "not covered" entry."""
     found = []
@@ -51,9 +40,9 @@ def citations(docs, text):
         mentions = naturopathy_mentions(text[doc["text_file"]])
         if mentions:
             page, ctx = mentions[0]
-            found += [dict(sheet="main", plan_id=plan, column="U_naturopath", line="", value=naturopathy_dot(ctx),
+            found += [dict(sheet="main", plan_id=plan, column="U_naturopath", line="", value="●",
                            url=doc["url"], pdf_page=page, quote=ctx) for plan in doc["plan_ids"].split(";")]
-    return plan_dots(found)
+    return found
 
 
 def main(docs_csv, text_dir, out_csv):
