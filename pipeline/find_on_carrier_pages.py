@@ -21,6 +21,8 @@ from find_docs import COLUMNS, KINDS, read  # noqa: E402
 PAGES = {"Wellcare": ("https://www.wellcareor.com/plan-benefit-materials.html", "/aep/{year}/"),
          "ATRIO Health Plans": ("https://atriohp.com/oregon/members/{year}-benefit-plans/", ""),
          "AgeRight Advantage": ("https://agerightadvantage.com/for-members/plan-documents/", "")}
+# Pages whose links carry no year. They show their documents for the year chosen in a menu.
+YEAR_MENU = {"AgeRight Advantage"}
 KIND_BY_TEXT = {"Summary of Benefits": "SB", "Summary of Benefits - English (PDF)": "SB",
                 "Evidence of Coverage": "EOC", "Evidence of Coverage - English (PDF)": "EOC"}
 PLAN_IN_FILENAME = re.compile(r"(?<![a-z0-9])(H\d{4})_(\d{3})(?:_(\d)(?![a-z0-9]))?", re.I)
@@ -30,6 +32,7 @@ const { chromium } = require("playwright");
   const browser = await chromium.launch();
   const page = await browser.newPage();
   await page.goto(process.argv[1], { waitUntil: "networkidle", timeout: 90000 });
+  await page.$$eval("select", (selects) => selects.forEach((s) => s.selectedOptions[0]?.setAttribute("selected", "")));
   process.stdout.write(await page.content());
   await browser.close();
 })();
@@ -37,21 +40,27 @@ const { chromium } = require("playwright");
 
 
 class Links(html.parser.HTMLParser):
-    """Collects (href, text, index of the enclosing <ul>) for each link."""
+    """Collects (href, text, index of the enclosing <ul>) for each link, and the text of each selected option."""
 
     def __init__(self):
         super().__init__()
         self.links, self.uls, self.ul_count, self.href, self.text = [], [], 0, None, ""
+        self.selected, self.in_selected = [], False
 
     def handle_starttag(self, tag, attrs):
-        if tag == "ul":
+        if tag == "option" and "selected" in dict(attrs):
+            self.selected.append("")
+            self.in_selected = True
+        elif tag == "ul":
             self.ul_count += 1
             self.uls.append(self.ul_count)
         elif tag == "a":
             self.href, self.text = dict(attrs).get("href"), ""
 
     def handle_endtag(self, tag):
-        if tag == "ul" and self.uls:
+        if tag == "option":
+            self.in_selected = False
+        elif tag == "ul" and self.uls:
             self.uls.pop()
         elif tag == "a" and self.href:
             self.links.append((self.href, " ".join(self.text.split()), self.uls[-1] if self.uls else None))
@@ -59,6 +68,8 @@ class Links(html.parser.HTMLParser):
 
     def handle_data(self, data):
         self.text += data
+        if self.in_selected:
+            self.selected[-1] += data.strip()
 
 
 def named_plans(href, plans):
@@ -79,12 +90,15 @@ def found_via(page_url):
     return f"carrier page ({u.netloc.removeprefix('www.')}{u.path})"
 
 
-def documents(page_html, page_url, plans, year_mark=""):
+def documents(page_html, page_url, plans, year_mark="", year_selected=None):
     """Returns found.csv rows for the SB and EOC links that contain `year_mark` and name a plan in `plans`.
 
-    A link whose filename names no plan, like ATRIO's shared SB, belongs to the plans its list names."""
+    A link whose filename names no plan, like ATRIO's shared SB, belongs to the plans its list names.
+    With `year_selected`, the page must show that year selected in a menu."""
     parser = Links()
     parser.feed(page_html)
+    if year_selected and year_selected not in parser.selected:
+        raise SystemExit(f"{page_url} does not show {year_selected} selected: {parser.selected}")
     plans_in_list = {}
     for href, _, ul in parser.links:
         plans_in_list.setdefault(ul, set()).update(named_plans(href, plans) or ())
@@ -119,7 +133,8 @@ def main(year, fetch=render):
     for org, (page, year_mark) in PAGES.items():
         url = page.format(year=year)
         ids = [p["plan_id"] for p in plans if p["organization"] == org]
-        found += documents(fetch(url), url, ids, year_mark.format(year=year))
+        found += documents(fetch(url), url, ids, year_mark.format(year=year),
+                           str(year) if org in YEAR_MENU else None)
     ours = {p["plan_id"] for p in plans if p["organization"] in PAGES}
     kept = [r for r in read(data / "found.csv") if not set(r["plan_ids"].split(";")) & ours]
     with open(data / "found.csv", "w", newline="") as f:

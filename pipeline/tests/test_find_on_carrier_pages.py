@@ -41,6 +41,11 @@ class DocumentsTest(unittest.TestCase):
         with self.assertRaisesRegex(SystemExit, "links 0 SBs for H1372-003-1"):
             rows(AGERIGHT, ["H1372-003-0", "H1372-003-1"])
 
+    def test_ageright_needs_the_year_selected(self):
+        self.assertEqual(len(fc.documents(fetch(AGERIGHT), AGERIGHT, ["H1372-003-0"], year_selected="2027")), 2)
+        with self.assertRaisesRegex(SystemExit, "does not show 2028"):
+            fc.documents(fetch(AGERIGHT), AGERIGHT, ["H1372-003-0"], year_selected="2028")
+
     def test_rows_cite_the_page(self):
         self.assertEqual({r["found_via"] for r in fc.documents(fetch(WELLCARE), WELLCARE, ["H6815-038-0"], "/aep/2027/")},
                          {"carrier page (wellcareor.com/plan-benefit-materials.html)"})
@@ -79,6 +84,9 @@ class MainTest(unittest.TestCase):
                 ("H6815-038-0", "SB", "H6815_038_2027_OR_SB_HMAPD_7017558ENG_M.pdf"),
                 ("H6815-038-0", "EOC", "H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf"),
                 ("H1372-003-0", "SB", "H1372_003_0_SB_v07.pdf"), ("H1372-003-0", "EOC", "H1372_003_0_EOC_v03_508.pdf")])
+            other_year = lambda url: fetch(url).replace('value="2027" selected=""', 'value="2027"')
+            with self.assertRaisesRegex(SystemExit, "does not show 2027"):
+                fc.main("2027", fetch=other_year)
 
 
 if __name__ == "__main__":
