@@ -11,7 +11,7 @@ Column = collections.namedtuple("Column", "sheet key label meaning find", defaul
 
 DOT = ("A dot means the plan covers the routine (supplemental) benefit, not only a Medicare-covered one (methods R10). "
        "A shared allowance or card that names the benefit counts (methods R11). "
-       "◐ means only a general wellness fund pays for it (methods R12). "
+       "A general wellness fund that names the benefit counts too (SHIBA expert, 2026-11-01). "
        "A benefit only in an optional package gets the Opt Packages dot instead (methods R13). "
        "A benefit only for some members, such as SSBCI, gets no dot unless the plan also covers it for all members.")
 
@@ -149,7 +149,7 @@ CARRIERS = {
     "Humana": "A benefit row lists each setting's cost on its own line, as in \"$450 copayment – Outpatient Hospital\".",
     "Devoted Health": "Surgery center rows give a facility copay and a $0 professional copay; the facility copay is the center's cost. "
                       "The Dental & Alternative Therapy Allowance names dental, acupuncture, massage and naturopathy, "
-                      "so it counts toward each of their dots (methods R11). Wellness Bucks is a general wellness fund (methods R12).",
+                      "so it counts toward each of their dots (methods R11). Wellness Bucks names acupuncture, massage and naturopathy, so it counts toward their dots too.",
     "Wellcare": "Outpatient hospital rows give $0 for skin biopsies and one copay for all other services.",
     "ATRIO Health Plans": "One Flex Card allowance names acupuncture, chiropractic and naturopathy, "
                           "so it counts toward each of their dots (methods R11).",

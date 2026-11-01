@@ -56,7 +56,7 @@ Two UHC EOCs were re-issued on 2026-10-14 (`UHOR27HP0418842_001`, `AAOR27LP04187
 `pipeline/fields.py` gives each column's rules.
 
 - PBP "diagnostic radiology" ranges start at $0 because they include diagnostic mammograms. Column L line 2 therefore comes from the SB's CT/MRI/PET amounts for all 39 plans.
-- The PBP has no naturopathy category. Column U is set when the SB or EOC mentions naturopathy outside the exclusions table. `cite.py` makes it ◐ when a general wellness fund pays for it, and `edits.csv` makes that ● (below).
+- The PBP has no naturopathy category. Column U is set when the SB or EOC mentions naturopathy outside the exclusions table.
 - For five Devoted plans the PBP gives X-ray "$0-$75", but the SB and EOC give $25 to $75.
 - UHC OR-1A charges $0 to members with QMB or full Medicaid. Columns F, G and H show what other members pay.
 - Six Humana plans cover acupuncture only for chronic low back pain, which Medicare covers. Column S is blank for them.
