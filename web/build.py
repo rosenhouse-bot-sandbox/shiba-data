@@ -18,15 +18,21 @@ import urllib.request
 import zipfile
 
 HERE = pathlib.Path(__file__).resolve().parent
-sys.path.insert(0, str(HERE.parent / "pipeline"))
+sys.path[:0] = [str(HERE), str(HERE.parent / "pipeline")]
 import fields  # noqa: E402
 import layers  # noqa: E402
+import spreadsheet  # noqa: E402
 import years  # noqa: E402
 
 DATA = years.data_dir()
 
 # Keep in sync with PAGE_REF in web/static/app.js.
 PAGE_REF = re.compile(r"\b(EOC|SB|rider) pages? (\d+)", re.IGNORECASE)
+SECTIONS = {
+    "MA-PD": "Medicare Advantage with drug coverage",
+    "NO-PART-D": "Medicare Advantage without drug coverage",
+    "C-SNP": "Chronic condition special needs plans",
+}
 
 
 def rows(name, data_dir):
@@ -117,6 +123,7 @@ def site_data(data_dir=DATA, layer_names=layers.LAYERS):
     return {
         "year": year,
         "area": " & ".join(config["counties"]),
+        "sections": SECTIONS,
         "plans": plans,
         "docs": docs,
         **{name: sheet(csv_rows, labels, cites[name], pbp[name], comments[name])
@@ -220,6 +227,7 @@ def main(command, out, release=None):
         for doc_id in missing:
             print(f"::warning::Not in the documents release, so the site links to the carrier: "
                   f"{site['docs'][doc_id]['url']}. Run the Documents workflow to add it.")
+    spreadsheet.write(site, out_dir / f"shibasheets-{site['year']}.xlsx")
     site["built"] = datetime.datetime.now(datetime.timezone.utc).isoformat()
     (out_dir / "data.json").write_text(json.dumps(site))
 

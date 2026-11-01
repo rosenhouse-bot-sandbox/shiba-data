@@ -43,6 +43,24 @@ test("the header names the plan year and counties", async () => {
   assert.equal(await page.textContent("h1"), "shibasheets.org – 2027 Medicare Advantage plans for Multnomah & Clackamas");
 });
 
+test("the download link saves the spreadsheet", async () => {
+  await page.goto(`${base}#/main`);
+  await page.waitForSelector("table.sheet");
+  const [download] = await Promise.all([page.waitForEvent("download"), page.click("#download")]);
+  assert.equal(download.suggestedFilename(), "shibasheets-2027.xlsx");
+});
+
+test("sheets are grouped under named sections", async () => {
+  await page.goto(`${base}#/main`);
+  assert.equal(await page.textContent("tr.section th"), "Medicare Advantage with drug coverage");
+});
+
+test("a spreadsheet link to a cited cell opens its quote", async () => {
+  await page.goto(`${base}#/main/H2001-045-0/H_inpatient`);
+  await shown(docOf("H2001-045-0", "EOC"), 77);
+  assert.match((await page.locator(".textLayer mark").allTextContents()).join(" "), /\$1,980 copayment/);
+});
+
 test("clicking a cited cell highlights the quote on its page", async () => {
   await page.goto(`${base}#/main`);
   await row("H2001-045-0").locator("td.cited", { hasText: "$1,980" }).click();
