@@ -26,9 +26,13 @@ const { chromium } = require("playwright");
   const pages = [];
   for (const url of JSON.parse(process.argv[1])) {
     const page = await browser.newPage();
-    await page.goto(url, { waitUntil: "domcontentloaded", timeout: 90000 });
-    await page.waitForFunction(() => [...document.querySelectorAll("a[href]")].some(
-      a => /^(View \\d{4} )?Evidence of Coverage/.test(a.textContent.trim())), null, { timeout: 60000 }).catch(() => {});
+    try {
+      await page.goto(url, { waitUntil: "domcontentloaded", timeout: 90000 });
+      await page.waitForFunction(() => [...document.querySelectorAll("a[href]")].some(
+        a => /^(View \\d{4} )?Evidence of Coverage/.test(a.textContent.trim())), null, { timeout: 60000 });
+    } catch (e) {
+      console.error(`${url}: ${e.message}`);
+    }
     pages.push(await page.content());
     await page.close();
   }
@@ -93,27 +97,28 @@ def links(page, url):
 
 def render(urls):
     root = subprocess.run(["npm", "root", "-g"], capture_output=True, text=True, check=True).stdout.strip()
-    out = subprocess.run(["node", "-e", RENDER, json.dumps(urls)], capture_output=True, text=True, check=True,
+    out = subprocess.run(["node", "-e", RENDER, json.dumps(urls)], stdout=subprocess.PIPE, text=True, check=True,
                          env=dict(os.environ, NODE_PATH=root))
     return json.loads(out.stdout)
 
 
 def main(year, render=render):
+    """Keeps the old rows of a plan whose page lacks its SB or EOC."""
     data = years.data_dir(year)
     county = years.config(data)["counties"][0]
-    plans = [p for p in find_docs.read(data / "generated/plans.csv") if page_url(p, year, county)]
-    urls = [page_url(p, year, county) for p in plans]
-    rows = []
-    for p, url, page in zip(plans, urls, render(urls)):
+    pages = [(p, url) for p in find_docs.read(data / "generated/plans.csv") if (url := page_url(p, year, county))]
+    rows, done = [], set()
+    for (p, url), page in zip(pages, render([url for _, url in pages])):
         found = links(page, url)
-        for kind in find_docs.KINDS:
-            if kind not in {k for k, _, _ in found}:
-                print(f"::warning::No {kind} on {url}")
-        rows += [dict(plan_ids=p["plan_id"], kind=kind, url=doc,
-                      found_via=f"carrier plan page {url}" + (f', "{label}"' if label else ""))
-                 for kind, doc, label in found]
-    ours = {p["plan_id"] for p in plans}
-    rows += [r for r in find_docs.read(data / "found.csv") if not set(r["plan_ids"].split(";")) <= ours]
+        missing = [kind for kind in find_docs.KINDS if kind not in {k for k, _, _ in found}]
+        for kind in missing:
+            print(f"::warning::No {kind} on {url}")
+        if not missing:
+            done.add(p["plan_id"])
+            rows += [dict(plan_ids=p["plan_id"], kind=kind, url=doc,
+                          found_via=f"carrier plan page {url}" + (f', "{label}"' if label else ""))
+                     for kind, doc, label in found]
+    rows += [r for r in find_docs.read(data / "found.csv") if not set(r["plan_ids"].split(";")) <= done]
     with open(data / "found.csv", "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=find_docs.COLUMNS)
         w.writeheader()
