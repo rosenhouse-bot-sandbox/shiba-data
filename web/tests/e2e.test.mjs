@@ -503,8 +503,13 @@ test("a cited quote still scrolls into view and keeps its highlight while find i
   await page.keyboard.press("Control+f");
   await page.keyboard.type("1,980 copayment");
   await page.waitForSelector('.page[data-page="77"] mark.cite.found');
-  await page.fill("#find-query", "the");
-  await page.$eval("#page-area", (area) => (area.scrollTop = 0));
+  await page.fill("#find-query", "Medical Benefits Chart");
+  await page.waitForSelector('.page[data-page="77"] mark.found.current');
+  await page.$eval("#page-area", (area) => {
+    area.scrollTop = 0;
+    delete area.dataset.shown;
+  });
+  await page.setViewportSize({ width: 1600, height: 500 });
   await cell.click();
   await shown(eoc, 77);
   const visible = await page.$eval("#page-area", (area) => {
@@ -512,6 +517,7 @@ test("a cited quote still scrolls into view and keeps its highlight while find i
     const m = area.querySelector("mark.cite").getBoundingClientRect();
     return m.top >= a.top && m.bottom <= a.bottom;
   });
+  await page.setViewportSize({ width: 1600, height: 1000 });
   assert.ok(visible);
 });
 
@@ -521,7 +527,7 @@ test("reopening find keeps the query but shows no stale count", async () => {
   await page.keyboard.press("Control+f");
   assert.equal(await page.isVisible("#find"), true);
   assert.equal(await page.textContent("#find-count"), "");
-  assert.equal(await page.inputValue("#find-query"), "the");
+  assert.equal(await page.inputValue("#find-query"), "Medical Benefits Chart");
 });
 
 test("opening another document closes the find box", async () => {
