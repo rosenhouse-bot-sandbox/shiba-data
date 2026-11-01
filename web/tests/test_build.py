@@ -34,6 +34,11 @@ def cite(sheet, column, value, url, page, quote, plan_id="H3805-048-0"):
     return dict(sheet=sheet, plan_id=plan_id, column=column, value=value, url=url, pdf_page=page, quote=quote)
 
 
+def bare_site(**kw):
+    empty = {"columns": [], "rows": []}
+    return {"docs": {}, "year": 2027, "area": "A", "sections": {}, "plans": [], "main": empty, "dvha": empty, **kw}
+
+
 H6815_038_EOC = "https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf"
 
 class SiteDataTest(unittest.TestCase):
@@ -174,7 +179,7 @@ class SiteDataTest(unittest.TestCase):
     def test_links_the_cms_files_and_names_the_column_on_medicare_gov(self):
         self.assertEqual(self.site["cms_files"], {"Landscape": "https://www.cms.gov/files/zip/cy2027-landscape-202610.zip",
                                                   "PBP": "https://www.cms.gov/files/zip/pbp-benefits-2027.zip"})
-        self.assertIn({"key": "O_medical_deductible", "label": "Medical Deductible", "medicare_gov": "Health deductible"},
+        self.assertIn({"key": "O_medical_deductible", "label": "Medical Deductible", "medicare_gov": "It shows this as “Health deductible”."},
                       self.site["main"]["columns"])
 
     def test_doc_ids_are_sha_prefixes(self):
@@ -344,7 +349,7 @@ class DocumentsTest(unittest.TestCase):
 
     def test_site_command_attaches_release(self):
         build.save_documents(self.docs, self.dir / "release", "2026-10-27")
-        site = {"docs": {i: {"url": d["url"], "sha256": d["sha256"]} for i, d in self.docs.items()}, "year": 2027, "area": "A"}
+        site = bare_site(docs={i: {"url": d["url"], "sha256": d["sha256"]} for i, d in self.docs.items()})
         out = io.StringIO()
         with mock.patch.object(build, "site_data", return_value=site), contextlib.redirect_stdout(out):
             build.main("site", self.dir / "site", self.dir / "release")
@@ -356,7 +361,7 @@ class DocumentsTest(unittest.TestCase):
     def test_site_command_warns_of_dropped_cites(self):
         dropped = dict(cite("main", "E_moop", "$6,800", "u", 45, "stale quote"), layer="edits.csv", line="")
         out = io.StringIO()
-        with (mock.patch.object(build, "site_data", return_value={"docs": {}, "year": 2027, "area": "A"}),
+        with (mock.patch.object(build, "site_data", return_value=bare_site()),
               mock.patch.object(build.layers, "live", return_value=({}, [], [dropped])), contextlib.redirect_stdout(out)):
             build.main("site", self.dir / "site")
         self.assertIn("::warning::", out.getvalue())
@@ -365,7 +370,7 @@ class DocumentsTest(unittest.TestCase):
     def test_site_command_warns_of_an_edit_whose_cell_changed_beneath_it(self):
         edit = dict(cite("main", "E_moop", "$6,800", "u", 45, "q"), layer="edits.csv", line="", saw="$6,700", beneath="$6,900")
         out = io.StringIO()
-        with (mock.patch.object(build, "site_data", return_value={"docs": {}, "year": 2027, "area": "A"}),
+        with (mock.patch.object(build, "site_data", return_value=bare_site()),
               mock.patch.object(build.layers, "live", return_value=({}, [], [edit])), contextlib.redirect_stdout(out)):
             build.main("site", self.dir / "site")
         self.assertIn("::warning::An edit's author saw $6,700, but the cell beneath it is now $6,900: "
@@ -374,18 +379,23 @@ class DocumentsTest(unittest.TestCase):
     def test_site_command_warns_of_a_strike_that_matches_no_machine_quote(self):
         strike = dict(sheet="main", plan_id="H3805-048-0", column="E_moop", quote="gone", note="")
         out = io.StringIO()
-        with (mock.patch.object(build, "site_data", return_value={"docs": {}, "year": 2027, "area": "A"}),
+        with (mock.patch.object(build, "site_data", return_value=bare_site()),
               mock.patch.object(build.layers, "live", return_value=({}, [], [])),
               mock.patch.object(build.layers, "stale_strikes", return_value=[strike]), contextlib.redirect_stdout(out)):
             build.main("site", self.dir / "site")
         self.assertIn("::warning::A strike matches no machine quote: main H3805-048-0 E_moop gone", out.getvalue())
 
     def test_site_command_records_build_time_and_titles_the_page(self):
-        with mock.patch.object(build, "site_data", return_value={"docs": {}, "year": 2099, "area": "A & B"}):
+        with mock.patch.object(build, "site_data", return_value=bare_site(year=2099, area="A & B")):
             build.main("site", self.dir / "site")
         built = datetime.datetime.fromisoformat(json.loads((self.dir / "site" / "data.json").read_text())["built"])
         self.assertLess(datetime.datetime.now(datetime.timezone.utc) - built, datetime.timedelta(minutes=1))
         self.assertIn("<title>shibasheets.org – 2099 Medicare Advantage plans</title>", (self.dir / "site" / "index.html").read_text())
+
+    def test_site_command_writes_the_years_spreadsheet(self):
+        with mock.patch.object(build, "site_data", return_value=bare_site(year=2099)):
+            build.main("site", self.dir / "site")
+        self.assertTrue(zipfile.is_zipfile(self.dir / "site" / "shibasheets-2099.xlsx"))
 
 
 class ZipTest(unittest.TestCase):

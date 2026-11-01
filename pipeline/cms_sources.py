@@ -33,12 +33,15 @@ LANDSCAPE_FIELDS = {
     "N_pharmacy_deductible": (PART_D, "Annual Part D Deductible Amount"),
 }
 
-# What Medicare.gov's plan page probably calls each column. Nobody has checked these by hand.
+# Where Medicare.gov's Plan Finder shows each column.
 MEDICARE_GOV = {
-    "K_tests_labs": "Diagnostic tests and procedures, and Lab services",
-    "M_part_b_drugs": "Chemotherapy drugs and Other Part B drugs",
-    "N_pharmacy_deductible": "Drug deductible",
-    "O_medical_deductible": "Health deductible",
+    "D_premium_full_extra_help": "When it asks “Do you get help with your Medicare health or drug costs?”, "
+                                 "choose “Extra Help (with drug costs)”. The search results then show this as "
+                                 "the “Monthly Premium”.",
+    "K_tests_labs": "It shows this as “Diagnostic tests & procedures” and “Lab services”.",
+    "M_part_b_drugs": "It shows this as “Chemotherapy drugs” and “Other Part B drugs”.",
+    "N_pharmacy_deductible": "It shows this as “Drug deductible”.",
+    "O_medical_deductible": "It shows this as “Health deductible”.",
 }
 
 COLUMNS = ["plan_id", "column", "file", "field", "title", "value", "meaning"]

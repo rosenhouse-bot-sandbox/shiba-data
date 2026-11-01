@@ -1,4 +1,4 @@
-"""Generates the main MA chart (columns C..AA) from the CMS Landscape and PBP Benefits files.
+"""Generates the main MA chart (columns C..AB) from the CMS Landscape and PBP Benefits files.
 
 Usage: python3 -I main_chart.py <plans.csv> <pbp_dir> <out.csv>
 Each cell is in-network unless noted. Column rules are in fields.py.
@@ -94,6 +94,29 @@ def inpatient(plan):
     if coins:
         return pct(float(coins))
     return "$0" if r.get("pbp_b1a_copay_yn") == "1" else ""
+
+
+def cost_range(row, copays, coinsurances):
+    """Spans the copay fields, then the coinsurance fields, as "$a-$b or c%"; "$0" if none is set."""
+    def joined(names, fmt):
+        amounts = [num(row[n]) for n in names if row.get(n)]
+        return span(min(amounts), max(amounts), fmt) if amounts else ""
+    return join_costs(joined(copays, money), joined(coinsurances, pct)) or "$0"
+
+
+WORLDWIDE_EMERGENCY_TRANSPORTATION = 1  # position in pbp_b4c_bendesc_ehc
+
+
+def ambulance(plan):
+    b10 = first(plan, "pbp_b10_amb_trans")
+    domestic = cost_range(b10, [f"pbp_b10a_copay_{k}_amt_{m}" for k in ("gas", "aas") for m in ("min", "max")],
+                          [f"pbp_b10a_coins_{k}_pct_{m}" for k in ("gas", "aas") for m in ("min", "max")]) if b10 else ""
+    b4 = first(plan, "pbp_b4_emerg_urgent")
+    worldwide = "not covered"
+    if flag(b4, "pbp_b4c_bendesc_ehc", WORLDWIDE_EMERGENCY_TRANSPORTATION):
+        worldwide = cost_range(b4, ["pbp_b4c_copay_amt_wet_min", "pbp_b4c_copay_amt_wet_max"],
+                               ["pbp_b4c_coins_pct_wet_min", "pbp_b4c_coins_pct_wet_max"])
+    return f"{domestic} | {worldwide}"
 
 
 def outpatient_surgery(plan):
@@ -228,6 +251,7 @@ def chart_row(landscape, plan):
         "O_medical_deductible": medical_deductible(plan),
     }
     row.update({k: "●" if v is True else v or "" for k, v in dots(plan).items()})
+    row["AB_ambulance"] = ambulance(plan)
     return row
 
 

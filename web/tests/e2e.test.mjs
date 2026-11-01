@@ -43,6 +43,24 @@ test("the header names the plan year and counties", async () => {
   assert.equal(await page.textContent("h1"), "shibasheets.org – 2027 Medicare Advantage plans for Multnomah & Clackamas");
 });
 
+test("the download link saves the spreadsheet", async () => {
+  await page.goto(`${base}#/main`);
+  await page.waitForSelector("table.sheet");
+  const [download] = await Promise.all([page.waitForEvent("download"), page.click("#download")]);
+  assert.equal(download.suggestedFilename(), "shibasheets-2027.xlsx");
+});
+
+test("sheets are grouped under named sections", async () => {
+  await page.goto(`${base}#/main`);
+  assert.equal(await page.textContent("tr.section th"), "Medicare Advantage with drug coverage");
+});
+
+test("a spreadsheet link to a cited cell opens its quote", async () => {
+  await page.goto(`${base}#/main/H2001-045-0/H_inpatient`);
+  await shown(docOf("H2001-045-0", "EOC"), 77);
+  assert.match((await page.locator(".textLayer mark").allTextContents()).join(" "), /\$1,980 copayment/);
+});
+
 test("clicking a cited cell highlights the quote on its page", async () => {
   await page.goto(`${base}#/main`);
   await row("H2001-045-0").locator("td.cited", { hasText: "$1,980" }).click();
@@ -63,23 +81,6 @@ test("clicking an uncited cell opens the summary of benefits with a note", async
   await shown(docOf("H3805-048-0", "SB"), 1);
   assert.match(await page.textContent("#source-note"), /CMS 2027 plan data/);
   assert.match(await page.textContent("#doc-title"), /^Summary of Benefits/);
-});
-
-test("an uncited cell lists the CMS fields behind it and where Medicare.gov shows it", async () => {
-  for (const plan of ["H3805-048-0", "H7006-018-0"]) {  // without and with a comment
-    await page.goto(`${base}#/main/${plan}/O_medical_deductible`);
-    const note = page.locator("#source-note");
-    assert.match(await note.textContent(), /\(pbp_d_(inn|ann)_deduct_yn\) = 2 \(No\)/);
-    assert.match(await note.textContent(), /View this plan on Medicare\.gov ↗ It probably shows this as “Health deductible”\./);
-    assert.equal(await note.locator("a", { hasText: "pbp_Section_D" }).getAttribute("href"), site.cms_files.PBP);
-  }
-});
-
-test("the Extra Help premium lists its Landscape columns", async () => {
-  await page.goto(`${base}#/dvha/H3805-048-0/D_premium_full_extra_help`);
-  const note = page.locator("#source-note");
-  assert.match(await note.textContent(), /Part D Low Income Beneficiary Premium Amount = \$0\.00/);
-  assert.equal(await note.locator("a", { hasText: "CMS Landscape file" }).getAttribute("href"), site.cms_files.Landscape);
 });
 
 test("scrolling the document moves to the next page", async () => {
@@ -432,6 +433,24 @@ test("a clicked cell's note links to the plan on Medicare.gov", async () => {
   }
 });
 
+test("an uncited cell lists the CMS fields behind it and where Medicare.gov shows it", async () => {
+  for (const plan of ["H3805-048-0", "H7006-018-0"]) {  // without and with a comment
+    await page.goto(`${base}#/main/${plan}/O_medical_deductible`);
+    const note = page.locator("#source-note");
+    assert.match(await note.textContent(), /\(pbp_d_(inn|ann)_deduct_yn\) = 2 \(No\)/);
+    assert.match(await note.textContent(), /View this plan on Medicare\.gov ↗ It shows this as “Health deductible”\./);
+    assert.equal(await note.locator("a", { hasText: "pbp_Section_D" }).getAttribute("href"), site.cms_files.PBP);
+  }
+});
+
+test("the Extra Help premium lists its Landscape columns", async () => {
+  await page.goto(`${base}#/dvha/H3805-048-0/D_premium_full_extra_help`);
+  const note = page.locator("#source-note");
+  assert.match(await note.textContent(), /Part D Low Income Beneficiary Premium Amount = \$0\.00/);
+  assert.equal(await note.locator("a", { hasText: "CMS Landscape file" }).getAttribute("href"), site.cms_files.Landscape);
+  assert.match(await note.textContent(), /choose “Extra Help \(with drug costs\)”\. The search results then show this as the “Monthly Premium”\./);
+});
+
 test("a blank uncited cell says CMS data has no entry", async () => {
   const [plan, col] = site.dvha.rows.flatMap((r) =>
     Object.entries(r.cells).filter(([, c]) => c.value === "" && !c.cites.length).map(([col]) => [r.plan_id, col]))[0];
@@ -461,6 +480,97 @@ test("a cell's note restates the CMS plan data without our symbols", async () =>
     assert.match(pbp, expected);
     assert.doesNotMatch(pbp, /[●◐“]/);
   }
+});
+
+const openEoc = async (planId) => {
+  await page.goto(`${base}#/plan/${planId}`);
+  await page.locator("table.docs a", { hasText: "Evidence of Coverage" }).click();
+  await shown(docOf(planId, "EOC"), 1);
+};
+const findCount = (text) => page.waitForFunction((t) => document.querySelector("#find-count").textContent === t, text);
+const currentMark = () => page.locator(".textLayer mark.found.current").first().textContent();
+
+test("Ctrl+F finds text on a page that has not rendered yet", async () => {
+  await openEoc("H2001-045-0");
+  await page.keyboard.press("Control+f");
+  assert.equal(await page.evaluate(() => document.activeElement.id), "find-query");
+  await page.keyboard.type("Naturopath");
+  await findCount("1 of 1");
+  await shown(docOf("H2001-045-0", "EOC"), 124);
+  assert.match(await currentMark(), /naturopath/i);
+});
+
+test("Enter and Shift+Enter step through matches from the current page, wrapping at the ends", async () => {
+  const eoc = docOf("H2001-045-0", "EOC");
+  await page.keyboard.press("Escape");
+  assert.equal(await page.isHidden("#find"), true);
+  assert.equal(await page.locator(".textLayer mark.found").count(), 0);
+  await page.fill("#page", "50");
+  await page.press("#page", "Enter");
+  await shown(eoc, 50);
+  await page.keyboard.press("Meta+f");
+  assert.equal(await page.inputValue("#find-query"), "Naturopath");
+  await page.keyboard.type("acupuncture");
+  await shown(eoc, 55);
+  const total = Number((await page.textContent("#find-count")).match(/^\d+ of (\d+)$/)[1]);
+  await findCount(`2 of ${total}`);
+  await page.keyboard.press("Enter");
+  await shown(eoc, 57);
+  await findCount(`3 of ${total}`);
+  await page.keyboard.press("Shift+Enter");
+  await page.keyboard.press("Shift+Enter");
+  await page.keyboard.press("Shift+Enter");
+  await shown(eoc, 124);
+  await findCount(`${total} of ${total}`);
+  assert.match(await currentMark(), /acupuncture/i);
+});
+
+test("the find box says when nothing matches", async () => {
+  await page.fill("#find-query", "zzqxv");
+  await findCount("No matches");
+});
+
+test("a cited quote still scrolls into view and keeps its highlight while find is open", async () => {
+  await page.goto(`${base}#/main`);
+  const cell = row("H2001-045-0").locator("td.cited", { hasText: "$1,980" });
+  await cell.click();
+  const eoc = docOf("H2001-045-0", "EOC");
+  await shown(eoc, 77);
+  await page.keyboard.press("Control+f");
+  await page.keyboard.type("1,980 copayment");
+  await page.waitForSelector('.page[data-page="77"] mark.cite.found');
+  await page.fill("#find-query", "Medical Benefits Chart");
+  await page.waitForSelector('.page[data-page="77"] mark.found.current');
+  await page.$eval("#page-area", (area) => {
+    area.scrollTop = 0;
+    delete area.dataset.shown;
+  });
+  await page.setViewportSize({ width: 1600, height: 500 });
+  await cell.click();
+  await shown(eoc, 77);
+  const visible = await page.$eval("#page-area", (area) => {
+    const a = area.getBoundingClientRect();
+    const m = area.querySelector("mark.cite").getBoundingClientRect();
+    return m.top >= a.top && m.bottom <= a.bottom;
+  });
+  await page.setViewportSize({ width: 1600, height: 1000 });
+  assert.ok(visible);
+});
+
+test("reopening find keeps the query but shows no stale count", async () => {
+  await page.click("#find-next");
+  await page.keyboard.press("Escape");
+  await page.keyboard.press("Control+f");
+  assert.equal(await page.isVisible("#find"), true);
+  assert.equal(await page.textContent("#find-count"), "");
+  assert.equal(await page.inputValue("#find-query"), "Medical Benefits Chart");
+});
+
+test("opening another document closes the find box", async () => {
+  await page.goto(`${base}#/main`);
+  await row("H3805-048-0").locator(UNCITED).first().click();
+  await shown(docOf("H3805-048-0", "SB"), 1);
+  assert.equal(await page.isHidden("#find"), true);
 });
 
 test("closing the viewer hides it", async () => {

@@ -17,6 +17,7 @@
       <a href="#/ambiguities" data-view="ambiguities">Ambiguities</a>
     </nav>
     <span id="updated"></span>
+    <a id="download" download title="Opens in Google Sheets (File, Import) or Excel">Download spreadsheet</a>
   </header>
   <div id="layout">
     <main id="content">Loading…</main>
@@ -26,8 +27,16 @@
         <button id="prev" title="Previous page">‹</button>
         <input id="page" type="number" min="1" aria-label="Page"> <span id="page-count"></span>
         <button id="next" title="Next page">›</button>
+        <button id="find-open" title="Find in document (Ctrl+F)">Find</button>
         <a id="doc-source" target="_blank" rel="noopener">Carrier's copy ↗</a>
         <button id="close" title="Close">✕</button>
+      </div>
+      <div id="find" hidden>
+        <input id="find-query" type="search" placeholder="Find in document" aria-label="Find in document">
+        <span id="find-count"></span>
+        <button id="find-prev" title="Previous match (Shift+Enter)">↑</button>
+        <button id="find-next" title="Next match (Enter)">↓</button>
+        <button id="find-close" title="Close (Esc)">✕</button>
       </div>
       <div id="source-note"></div>
       <div id="page-area"></div>
