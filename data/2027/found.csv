@@ -1,21 +1,39 @@
 plan_ids,kind,url,found_via
-H3805-048-0,SB,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0412776_000,carrier plan page (aarpmedicareplans.com/health-plans/details.html)
-H3805-048-0,EOC,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,carrier plan page (aarpmedicareplans.com/health-plans/details.html)
-H3805-041-0,SB,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0412773_000,carrier plan page (aarpmedicareplans.com/health-plans/details.html)
-H3805-041-0,EOC,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,carrier plan page (aarpmedicareplans.com/health-plans/details.html)
-H2406-042-0,SB,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0412614_000,carrier plan page (aarpmedicareplans.com/health-plans/details.html)
-H2406-042-0,EOC,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,carrier plan page (aarpmedicareplans.com/health-plans/details.html)
-H2406-070-0,SB,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0412631_000,carrier plan page (aarpmedicareplans.com/health-plans/details.html)
-H2406-070-0,EOC,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,carrier plan page (aarpmedicareplans.com/health-plans/details.html)
-H3805-040-0,SB,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0412772_000,carrier plan page (aarpmedicareplans.com/health-plans/details.html)
-H3805-040-0,EOC,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,carrier plan page (aarpmedicareplans.com/health-plans/details.html)
-H2001-045-0,SB,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0412518_000,carrier plan page (aarpmedicareplans.com/health-plans/details.html)
-H2001-045-0,EOC,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,carrier plan page (aarpmedicareplans.com/health-plans/details.html)
-H2406-073-0,SB,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0412634_000,carrier plan page (aarpmedicareplans.com/health-plans/details.html)
-H2406-073-0,EOC,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,carrier plan page (aarpmedicareplans.com/health-plans/details.html)
-H3805-048-0,RIDER,https://www.aarpmedicareplans.com/alphadog/AAEX27HM0432520_000,"carrier plan page (aarpmedicareplans.com/health-plans/details.html), ""Platinum Dental"""
-H2406-070-0,RIDER,https://www.aarpmedicareplans.com/alphadog/AAEX27HM0432519_000,"carrier plan page (aarpmedicareplans.com/health-plans/details.html), ""Platinum Dental"""
-H3805-040-0,RIDER,https://www.aarpmedicareplans.com/alphadog/UHEX27HM0432523_000,"carrier plan page (aarpmedicareplans.com/health-plans/details.html), ""Platinum Dental"""
+H3805-048-0,RIDER,https://www.aarpmedicareplans.com/alphadog/AAEX27HM0432520_000,"carrier plan page https://www.aarpmedicareplans.com/health-plans/details.html/97201/051/H3805048000/2027, ""Platinum Dental"""
+H3805-048-0,EOC,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,carrier plan page https://www.aarpmedicareplans.com/health-plans/details.html/97201/051/H3805048000/2027
+H3805-048-0,SB,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0412776_000,carrier plan page https://www.aarpmedicareplans.com/health-plans/details.html/97201/051/H3805048000/2027
+H3805-041-0,EOC,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,carrier plan page https://www.aarpmedicareplans.com/health-plans/details.html/97201/051/H3805041000/2027
+H3805-041-0,SB,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0412773_000,carrier plan page https://www.aarpmedicareplans.com/health-plans/details.html/97201/051/H3805041000/2027
+H2406-042-0,EOC,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,carrier plan page https://www.aarpmedicareplans.com/health-plans/details.html/97201/051/H2406042000/2027
+H2406-042-0,SB,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0412614_000,carrier plan page https://www.aarpmedicareplans.com/health-plans/details.html/97201/051/H2406042000/2027
+H2406-070-0,RIDER,https://www.aarpmedicareplans.com/alphadog/AAEX27HM0432519_000,"carrier plan page https://www.aarpmedicareplans.com/health-plans/details.html/97201/051/H2406070000/2027, ""Platinum Dental"""
+H2406-070-0,EOC,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,carrier plan page https://www.aarpmedicareplans.com/health-plans/details.html/97201/051/H2406070000/2027
+H2406-070-0,SB,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0412631_000,carrier plan page https://www.aarpmedicareplans.com/health-plans/details.html/97201/051/H2406070000/2027
+H2056-003-0,SB,https://www.aetna.com/medicare/documents/individual/2027/sb/en/Y0001_H2056_003_HR01_SB2027_M.pdf,carrier plan page https://www.aetna.com/medicare/plan.H2056.003.html
+H2056-003-0,EOC,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,carrier plan page https://www.aetna.com/medicare/plan.H2056.003.html
+H7199-002-0,SB,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-SB-H7199-002-ENG.pdf,carrier plan page https://www.devoted.com/plan-documents/benefit-and-coverage-details/H7199-002-000-2027/
+H7199-002-0,EOC,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,carrier plan page https://www.devoted.com/plan-documents/benefit-and-coverage-details/H7199-002-000-2027/
+H2923-001-0,SB,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-SB-H2923-001-ENG.pdf,carrier plan page https://www.devoted.com/plan-documents/benefit-and-coverage-details/H2923-001-000-2027/
+H2923-001-0,EOC,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,carrier plan page https://www.devoted.com/plan-documents/benefit-and-coverage-details/H2923-001-000-2027/
+H2923-028-3,SB,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-SB-H2923-028-003-ENG.pdf,carrier plan page https://www.devoted.com/plan-documents/benefit-and-coverage-details/H2923-028-003-2027/
+H2923-028-3,EOC,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,carrier plan page https://www.devoted.com/plan-documents/benefit-and-coverage-details/H2923-028-003-2027/
+H2923-025-0,SB,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-SB-H2923-025-ENG.pdf,carrier plan page https://www.devoted.com/plan-documents/benefit-and-coverage-details/H2923-025-000-2027/
+H2923-025-0,EOC,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,carrier plan page https://www.devoted.com/plan-documents/benefit-and-coverage-details/H2923-025-000-2027/
+H2923-005-0,SB,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-SB-H2923-005-ENG.pdf,carrier plan page https://www.devoted.com/plan-documents/benefit-and-coverage-details/H2923-005-000-2027/
+H2923-005-0,EOC,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,carrier plan page https://www.devoted.com/plan-documents/benefit-and-coverage-details/H2923-005-000-2027/
+H2923-019-0,SB,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-SB-H2923-019-ENG.pdf,carrier plan page https://www.devoted.com/plan-documents/benefit-and-coverage-details/H2923-019-000-2027/
+H2923-019-0,EOC,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,carrier plan page https://www.devoted.com/plan-documents/benefit-and-coverage-details/H2923-019-000-2027/
+H2923-009-0,SB,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-SB-H2923-009-ENG.pdf,carrier plan page https://www.devoted.com/plan-documents/benefit-and-coverage-details/H2923-009-000-2027/
+H2923-009-0,EOC,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,carrier plan page https://www.devoted.com/plan-documents/benefit-and-coverage-details/H2923-009-000-2027/
+H3805-040-0,RIDER,https://www.aarpmedicareplans.com/alphadog/UHEX27HM0432523_000,"carrier plan page https://www.aarpmedicareplans.com/health-plans/details.html/97201/051/H3805040000/2027, ""Platinum Dental"""
+H3805-040-0,EOC,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,carrier plan page https://www.aarpmedicareplans.com/health-plans/details.html/97201/051/H3805040000/2027
+H3805-040-0,SB,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0412772_000,carrier plan page https://www.aarpmedicareplans.com/health-plans/details.html/97201/051/H3805040000/2027
+H2001-045-0,EOC,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,carrier plan page https://www.aarpmedicareplans.com/health-plans/details.html/97201/051/H2001045000/2027
+H2001-045-0,SB,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0412518_000,carrier plan page https://www.aarpmedicareplans.com/health-plans/details.html/97201/051/H2001045000/2027
+H2406-073-0,EOC,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,carrier plan page https://www.aarpmedicareplans.com/health-plans/details.html/97201/051/H2406073000/2027
+H2406-073-0,SB,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0412634_000,carrier plan page https://www.aarpmedicareplans.com/health-plans/details.html/97201/051/H2406073000/2027
+H2056-018-0,SB,https://www.aetna.com/medicare/documents/individual/2027/sb/en/Y0001_H2056_018_NS45_SB2027_M.pdf,carrier plan page https://www.aetna.com/medicare/plan.H2056.018.html
+H2056-018-0,EOC,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,carrier plan page https://www.aetna.com/medicare/plan.H2056.018.html
 H6815-038-0,SB,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H6815_038_2027_OR_SB_HMAPD_7017558ENG_M.pdf,carrier page (wellcareor.com/plan-benefit-materials.html)
 H6815-038-0,EOC,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,carrier page (wellcareor.com/plan-benefit-materials.html)
 H5439-015-0,SB,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H5439_015_2027_OR_SB_PPO_7017569ENG_M.pdf,carrier page (wellcareor.com/plan-benefit-materials.html)
