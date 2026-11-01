@@ -11,7 +11,10 @@ EOC_COVER = "Evidence of Coverage for 2027: Your Medicare Health Benefits and Se
 
 
 def fake_fetch(texts):
-    return lambda url: ("bynder/" + url.rsplit("/", 1)[1], texts.get(url, ""))
+    def fetch(url):
+        name = url.rsplit("/", 1)[1]
+        return f"bynder/{name[:-4]}/{name}", texts.get(url, "")
+    return fetch
 
 
 class DetailsTest(unittest.TestCase):
@@ -20,23 +23,30 @@ class DetailsTest(unittest.TestCase):
 
 
 class FoundRowsTest(unittest.TestCase):
-    def rows(self, eoc_text, known=()):
+    def rows(self, eoc_text, known=(), plans=(VALIANCE,)):
         out = io.StringIO()
         with contextlib.redirect_stdout(out):
-            rows = find_regence.found_rows([(DETAILS_URL, DETAILS)], [VALIANCE],
+            rows = find_regence.found_rows([(DETAILS_URL, DETAILS)], list(plans),
                                            fake_fetch({GO + "eoc-valiance.pdf": eoc_text}), known)
         return [(r["plan_ids"], r["kind"], r["url"]) for r in rows], rows, out.getvalue()
 
     def test_records_the_redirect_targets_of_the_sb_and_a_checked_eoc(self):
         got, rows, warned = self.rows(EOC_COVER)
-        self.assertEqual(got, [("H3817-010-0", "SB", "bynder/summary-valiance.pdf"),
-                               ("H3817-010-0", "EOC", "bynder/eoc-valiance.pdf")])
+        self.assertEqual(got, [("H3817-010-0", "SB", "bynder/summary-valiance/summary-valiance.pdf"),
+                               ("H3817-010-0", "EOC", "bynder/eoc-valiance/eoc-valiance.pdf")])
         self.assertEqual(rows[0]["found_via"], f"carrier plan page ({DETAILS_URL})")
         self.assertEqual(warned, "")
 
-    def test_keeps_a_known_url_that_the_found_one_extends(self):
-        got, _, _ = self.rows(EOC_COVER, known=["bynder/eoc-", "bynder/summary-valiance.pdf/x"])
-        self.assertEqual([u for _, _, u in got], ["bynder/summary-valiance.pdf", "bynder/eoc-"])
+    def test_keeps_a_known_url_that_ends_at_the_found_ones_folder(self):
+        got, _, _ = self.rows(EOC_COVER, known=["bynder/", "bynder/eoc-valiance/"])
+        self.assertEqual([u for _, _, u in got], ["bynder/summary-valiance/summary-valiance.pdf", "bynder/eoc-valiance/"])
+
+    def test_warns_about_a_plan_the_site_lists_but_plans_csv_lacks_and_one_it_omits(self):
+        other = dict(VALIANCE, plan_id="H3817-008-1")
+        got, _, warned = self.rows(EOC_COVER, plans=[other])
+        self.assertEqual(got, [])
+        self.assertEqual(warned.splitlines(), ["::warning::The site lists H3817-010-0, which plans.csv lacks",
+                                               "::warning::The site does not list H3817-008-1"])
 
     def test_drops_a_guessed_eoc_that_does_not_name_the_plan_or_say_evidence_of_coverage(self):
         for text in (EOC_COVER.replace("Valiance", "Primary"), EOC_COVER.replace("Evidence", "Summary"), ""):
@@ -44,6 +54,12 @@ class FoundRowsTest(unittest.TestCase):
                 got, _, warned = self.rows(text)
                 self.assertEqual([k for _, k, _ in got], ["SB"])
                 self.assertEqual(warned, f"::warning::{GO}eoc-valiance.pdf is not the EOC of H3817-010-0\n")
+
+
+class FetchTest(unittest.TestCase):
+    def test_a_url_that_fails_has_no_text(self):
+        url = pathlib.Path(__file__).with_name("no-such.pdf").as_uri()
+        self.assertEqual(find_regence.fetch(url), (url, ""))
 
 
 class MergeTest(unittest.TestCase):

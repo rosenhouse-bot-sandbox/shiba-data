@@ -10,6 +10,7 @@ import os
 import re
 import subprocess
 import sys
+import urllib.error
 import urllib.request
 
 # The ZIP and county pick Multnomah. The list opens on Medicare Supplement plans, so each tab needs a click.
@@ -50,9 +51,12 @@ def render(year):
 
 
 def fetch(url):
-    """Returns the URL after redirects and the text of the PDF's first page."""
-    with urllib.request.urlopen(url, timeout=180) as r:
-        final, pdf = r.url, r.read()
+    """Returns the URL after redirects and the text of the PDF's first page, which is empty when the URL fails."""
+    try:
+        with urllib.request.urlopen(url, timeout=180) as r:
+            final, pdf = r.url, r.read()
+    except urllib.error.URLError:
+        return url, ""
     return final, subprocess.run(["pdftotext", "-l", "1", "-", "-"], input=pdf, capture_output=True).stdout.decode()
 
 
@@ -65,16 +69,21 @@ def details(html):
 def found_rows(pages, plans, fetch, known):
     """Prints a warning for each guessed EOC that does not name its plan or say Evidence of Coverage.
 
-    A known URL that the found one extends is kept, because citations name documents by URL.
+    A known URL that ends at the found one's folder is kept, because citations name documents by URL.
     """
     def fetch_known(url):
         url, text = fetch(url)
-        return next((k for k in known if url.startswith(k)), url), text
+        folder = url[:url.rindex("/") + 1]
+        return folder if folder in known else url, text
 
     names = {p["plan_id"]: p["plan_name"] for p in plans}
-    rows = []
+    rows, listed = [], set()
     for page_url, html in pages:
         plan_id, sb = details(html)
+        if plan_id not in names:
+            print(f"::warning::The site lists {plan_id}, which plans.csv lacks")
+            continue
+        listed.add(plan_id)
         source = f"carrier plan page ({page_url})"
         rows.append(dict(plan_ids=plan_id, kind="SB", url=fetch_known(sb)[0], found_via=source))
         eoc = sb.replace("/summary-", "/eoc-")
@@ -85,6 +94,8 @@ def found_rows(pages, plans, fetch, known):
                              found_via=f"SB link from {source} with summary- changed to eoc-, checked against the cover"))
         else:
             print(f"::warning::{eoc} is not the EOC of {plan_id}")
+    for plan_id in sorted(names.keys() - listed):
+        print(f"::warning::The site does not list {plan_id}")
     return rows
 
 
@@ -92,12 +103,16 @@ def merge(found, new, plan_ids):
     return [r for r in found if not set(r["plan_ids"].split(";")) & plan_ids] + new
 
 
+def read(path):
+    with open(path, newline="") as f:
+        return list(csv.DictReader(f))
+
+
 def main(plans_csv, found_csv, links_csv, year):
-    plans = [p for p in csv.DictReader(open(plans_csv)) if p["organization"].startswith("Regence")]
-    with open(found_csv, newline="") as f:
-        found = csv.DictReader(f)
-        columns, found = found.fieldnames, list(found)
-    known = [r["url"] for r in csv.DictReader(open(links_csv))]
+    plans = [p for p in read(plans_csv) if p["organization"].startswith("Regence")]
+    found = read(found_csv)
+    columns = list(found[0])
+    known = {r["url"] for r in read(links_csv)}
     rows = merge(found, found_rows(render(year), plans, fetch, known), {p["plan_id"] for p in plans})
     with open(found_csv, "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=columns)
