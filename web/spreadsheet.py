@@ -4,12 +4,13 @@ from openpyxl.comments import Comment
 from openpyxl.styles import Alignment, Font, PatternFill
 
 SITE = "https://shibasheets.org/"
-TABS = {"main": "Main chart", "dvha": "Dental, vision, hearing & more"}
+TABS = {"main": "Main chart", "dvha": "Dental, vision, hearing, extras"}
 # Keep in sync with --comment and --contradicts in web/static/style.css.
 FILLS = {"note": "FFF6D6", "contradicts": "FFDCB8"}
 HEAD = PatternFill("solid", fgColor="EEF1F6")
 SECTION = PatternFill("solid", fgColor="1D2433")
 TOP = Alignment(vertical="top", wrap_text=True)
+MAX_WIDTH = 40
 
 
 def write(site, path):
@@ -28,8 +29,11 @@ def add_tab(ws, name, sheet, plans, sections):
         c.fill = HEAD
         c.alignment = TOP
     ws.freeze_panes = "C2"
-    ws.column_dimensions["A"].width = 40
+    ws.column_dimensions["A"].width = MAX_WIDTH
     ws.column_dimensions["B"].width = 14
+    for col, xl in zip(sheet["columns"], ws[1][2:]):
+        lines = [line for r in sheet["rows"] for line in r["cells"][col["key"]]["value"].split(" | ")]
+        ws.column_dimensions[xl.column_letter].width = min(MAX_WIDTH, 2 + max(map(len, lines + col["label"].split())))
     section = None
     for row in sheet["rows"]:
         if row["section"] != section:
@@ -46,7 +50,7 @@ def add_tab(ws, name, sheet, plans, sections):
         for col, xl in zip(sheet["columns"], xl_row[2:]):
             xl.alignment = TOP
             cell = row["cells"][col["key"]]
-            if cell["cites"] or "comment" in cell:
+            if cell["value"] and (cell["cites"] or "comment" in cell):
                 xl.hyperlink = f"{SITE}#/{name}/{plan_id}/{col['key']}"
             if "comment" in cell:
                 xl.comment = Comment(cell["comment"]["text"], "shibasheets.org", width=300, height=150)

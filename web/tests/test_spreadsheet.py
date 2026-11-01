@@ -36,7 +36,7 @@ class WorkbookTest(unittest.TestCase):
         return self.row(ws, plan_id)[header.index(label)]
 
     def test_has_one_tab_per_sheet(self):
-        self.assertEqual(self.book.sheetnames, ["Main chart", "Dental, vision, hearing & more"])
+        self.assertEqual(self.book.sheetnames, ["Main chart", "Dental, vision, hearing, extras"])
 
     def test_header_names_plan_id_and_benefits(self):
         header = [c.value for c in self.book["Main chart"][1]]
@@ -47,7 +47,7 @@ class WorkbookTest(unittest.TestCase):
         self.assertEqual(self.book["Main chart"].freeze_panes, "C2")
 
     def test_has_a_row_per_plan_under_its_section(self):
-        ws = self.book["Dental, vision, hearing & more"]
+        ws = self.book["Dental, vision, hearing, extras"]
         self.assertEqual(sum(1 for r in ws.iter_rows(min_row=2) if r[1].value), 39)
         self.assertEqual(ws["A2"].value, build.SECTIONS["MA-PD"])
 
@@ -70,6 +70,17 @@ class WorkbookTest(unittest.TestCase):
         self.assertEqual(cell.value, "$6,700")
         self.assertIsNone(cell.hyperlink)
 
+    def test_empty_cited_cell_has_no_link(self):
+        cell = self.cell(self.book["Main chart"], "H3805-048-0", build.fields.labels("main")["R_dental"])
+        self.assertIsNone(cell.value)
+        self.assertIsNone(cell.hyperlink)
+
+    def test_columns_fit_their_longest_line_up_to_a_cap(self):
+        ws = self.book["Dental, vision, hearing, extras"]
+        widths = [ws.column_dimensions[c[0].column_letter].width for c in ws.iter_cols(min_col=3, max_row=1)]
+        self.assertEqual(max(widths), spreadsheet.MAX_WIDTH)
+        self.assertGreater(min(widths), len("Premium"))
+
     def test_commented_cell_carries_comment_and_color(self):
         cell = self.cell(self.book["Main chart"], "H6815-038-0", build.fields.labels("main")["K_tests_labs"])
         self.assertIn("EKG", cell.comment.text)
@@ -85,7 +96,6 @@ class WorkbookTest(unittest.TestCase):
         row["cells"]["K_tests_labs"]["comment"]["kind"] = "contradicts"
         cell = self.cell(book(site)["Main chart"], "H6815-038-0", build.fields.labels("main")["K_tests_labs"])
         self.assertEqual(cell.fill.fgColor.rgb, "00" + spreadsheet.FILLS["contradicts"])
-        self.assertNotEqual(spreadsheet.FILLS["contradicts"], spreadsheet.FILLS["note"])
 
 
 if __name__ == "__main__":

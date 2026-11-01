@@ -21,7 +21,6 @@ HERE = pathlib.Path(__file__).resolve().parent
 sys.path[:0] = [str(HERE), str(HERE.parent / "pipeline")]
 import fields  # noqa: E402
 import layers  # noqa: E402
-import spreadsheet  # noqa: E402
 import years  # noqa: E402
 
 DATA = years.data_dir()
@@ -227,6 +226,7 @@ def main(command, out, release=None):
         for doc_id in missing:
             print(f"::warning::Not in the documents release, so the site links to the carrier: "
                   f"{site['docs'][doc_id]['url']}. Run the Documents workflow to add it.")
+    import spreadsheet  # Only the site needs openpyxl.
     spreadsheet.write(site, out_dir / f"shibasheets-{site['year']}.xlsx")
     site["built"] = datetime.datetime.now(datetime.timezone.utc).isoformat()
     (out_dir / "data.json").write_text(json.dumps(site))
