@@ -60,11 +60,11 @@ class SiteDataTest(unittest.TestCase):
         cell = self.cell("main", "H2001-045-0", "H_inpatient")
         self.assertEqual(cell["value"], "$1,980 per admission")
         [cite] = cell["cites"]
-        self.assertEqual(cite["page"], 3)
-        self.assertIn("$1,980 copay per stay", cite["quote"])
+        self.assertEqual(cite["page"], 77)
+        self.assertIn("$1,980 copayment", cite["quote"])
         doc = self.site["docs"][cite["doc"]]
-        self.assertEqual(doc["url"], "https://www.aarpmedicareplans.com/alphadog/UHOR27LP0412518_000")
-        self.assertEqual(doc["kind"], "SB")
+        self.assertEqual(doc["url"], "https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000")
+        self.assertEqual(doc["kind"], "EOC")
 
     def test_cite_keeps_line_number(self):
         cell = self.cell("main", "H3805-048-0", "L_xray_imaging")
