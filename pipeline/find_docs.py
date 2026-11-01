@@ -55,7 +55,7 @@ def warn_where_links_differ(found, links):
 
 
 def documents(plans, found, links, year):
-    """Prints a warning for each plan left without an SB or EOC."""
+    """Prints a warning for each plan left without an SB or EOC, and where the Links sheet differs from found.csv."""
     ids = {p["plan_id"] for p in plans}
     for r in found + links:
         if r["kind"] not in KINDS + ("RIDER",) or not set(r["plan_ids"].split(";")) <= ids:

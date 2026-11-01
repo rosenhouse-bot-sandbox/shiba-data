@@ -63,7 +63,7 @@ class DocumentsTest(unittest.TestCase):
         self.assertEqual([u for _, _, u in docs], [
             "found-sb", "found-rider", "aetna-sb", "aetna-eoc", "atrio-sb", "atrio-eoc-018", "atrio-eoc-021",
             "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf"])
-        self.assertNotIn("::warning::No ", warned)
+        self.assertEqual(warned, "::warning::The Links sheet's SB for H1036-153-0 is link-sb, but found.csv has found-sb\n")
         docs, _ = self.documents([], [doc("H1036-153-0", "EOC", "link-eoc")])
         self.assertIn(("H1036-153-0", "EOC", "link-eoc"), docs)
         self.assertNotIn("H1036153000EOC27pdf", str(docs))
@@ -85,10 +85,10 @@ class DocumentsTest(unittest.TestCase):
             "::warning::No SB for H7006-021-0", "::warning::No EOC for H7006-021-0"])
 
     def test_warns_once_for_each_plan_and_kind_where_the_links_sheet_differs_from_a_find(self):
-        found = [doc("H7006-018-0", "SB", "found-sb"), doc("H7006-018-0;H7006-021-0", "EOC", "found-eoc"),
-                 doc("H2056-003-0", "SB", "aetna-sb"), doc("H2056-003-0", "EOC", "aetna-eoc")]
+        found = [doc("H7006-018-0", "SB", "found-sb"), doc("H7006-018-0", "SB", "found-sb-later"),
+                 doc("H7006-018-0;H7006-021-0", "EOC", "found-eoc")]
         links = [doc("H7006-018-0;H7006-021-0", "SB", "atrio-sb"), doc("H7006-018-0", "SB", "atrio-sb-again"),
-                 doc("H7006-018-0;H7006-021-0", "EOC", "found-eoc"), doc("H2056-003-0", "SB", "aetna-sb")]
+                 doc("H7006-018-0;H7006-021-0", "EOC", "found-eoc")]
         _, warned = self.documents(found, links)
         self.assertEqual([w for w in warned.splitlines() if "Links sheet" in w], [
             "::warning::The Links sheet's SB for H7006-018-0 is atrio-sb, but found.csv has found-sb"])
