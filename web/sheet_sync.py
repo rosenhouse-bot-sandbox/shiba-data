@@ -1,7 +1,8 @@
 """Updates the live Google Sheet in place to match the site's data.
 
 Rows are matched by plan ID (or section name) and columns by header, so cells keep their comments.
-Rows and columns the data no longer has are left alone. New ones go after the last row or column.
+Rows and columns the data no longer has are left alone. A new row goes after the row above it in the data,
+and a new column after the last column.
 
 Usage: SHEETS_TOKEN=<OAuth access token> SHIBA_SHEET_ID=<id> python3 -I web/sheet_sync.py
 """
@@ -9,6 +10,7 @@ import json
 import os
 import pathlib
 import sys
+import urllib.error
 import urllib.parse
 import urllib.request
 from dataclasses import dataclass
@@ -18,7 +20,8 @@ sys.path[:0] = [str(HERE), str(HERE.parent / "pipeline")]
 from sheet_layout import HEAD, SECTION, TABS, rows, widths  # noqa: E402
 
 WHITE = "FFFFFF"
-FIELDS = "userEnteredValue,note,userEnteredFormat"
+FIELDS = "userEnteredValue,note,userEnteredFormat,textFormatRuns"
+HEADER = "\0header"
 
 
 @dataclass
@@ -53,9 +56,9 @@ def cell_data(cell, kind):
     }
 
 
-def place(wanted, have):
+def place_columns(wanted, have):
     """Index in `have` of each item of `wanted`, or the next index after `have` for items it lacks."""
-    at = {k: i for i, k in enumerate(have) if k}
+    at = {k: i for i, k in enumerate(have)}
     out, end = [], len(have)
     for k in wanted:
         if k not in at:
@@ -64,20 +67,41 @@ def place(wanted, have):
     return out
 
 
-def plan(existing, layout, widths=None):
+def place_rows(wanted, have):
+    """Final index of each of `wanted`'s rows, and where to insert rows.
+
+    A row `have` lacks goes right after the previous wanted row, which keeps a new plan under its section.
+    The header is always row 0.
+    """
+    sheet = [HEADER] + have[1:]
+    inserts = []
+    at = 0
+    for k in wanted[1:]:
+        if k in sheet:
+            at = sheet.index(k)
+            continue
+        at += 1
+        if at < len(sheet):
+            inserts.append(at)
+        sheet.insert(at, k)
+    return [0] + [sheet.index(k) for k in wanted[1:]], inserts
+
+
+def plan(existing, layout, column_widths=()):
     """The batchUpdate requests that write `layout` into `existing`."""
     sheet_id = existing.sheet_id
-    columns = place([c.value for c in layout[0].cells], existing.header)
-    row_at = place(["\0header"] + [r.key for r in layout[1:]], ["\0header"] + existing.keys[1:])
-    requests = []
-    for dimension, need, have in (("ROWS", max(row_at) + 1, existing.row_count),
+    columns = place_columns([c.value for c in layout[0].cells], existing.header)
+    row_at, inserts = place_rows([r.key for r in layout], existing.keys)
+    requests = [{"insertDimension": {"range": {"sheetId": sheet_id, "dimension": "ROWS", "startIndex": i, "endIndex": i + 1}}}
+                for i in inserts]
+    for dimension, need, have in (("ROWS", max(row_at) + 1, existing.row_count + len(inserts)),
                                   ("COLUMNS", max(columns) + 1, existing.column_count)):
         if need > have:
             requests.append({"appendDimension": {"sheetId": sheet_id, "dimension": dimension, "length": need - have}})
     requests.append({"updateSheetProperties": {
         "properties": {"sheetId": sheet_id, "gridProperties": {"frozenRowCount": 1, "frozenColumnCount": 2}},
         "fields": "gridProperties.frozenRowCount,gridProperties.frozenColumnCount"}})
-    for col, chars in zip(columns, widths or []):
+    for col, chars in zip(columns, column_widths):
         requests.append({"updateDimensionProperties": {
             "range": {"sheetId": sheet_id, "dimension": "COLUMNS", "startIndex": col, "endIndex": col + 1},
             "properties": {"pixelSize": pixels(chars)}, "fields": "pixelSize"}})
@@ -128,8 +152,11 @@ class Api:
     def call(self, path, body=None):
         req = urllib.request.Request(self.base + path, data=body and json.dumps(body).encode(),
                                      headers={"Authorization": f"Bearer {self.token}", "Content-Type": "application/json"})
-        with urllib.request.urlopen(req, timeout=60) as r:
-            return json.load(r)
+        try:
+            with urllib.request.urlopen(req, timeout=60) as r:
+                return json.load(r)
+        except urllib.error.HTTPError as e:
+            sys.exit(f"{e}: {e.read().decode()}")
 
     def sheets(self):
         return [s["properties"] for s in self.call("?fields=sheets.properties")["sheets"]]

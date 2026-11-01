@@ -16,8 +16,12 @@ def layout(*plans, columns=("A", "B")):
             *(Row("plan", p, [Cell(f"name {p}"), Cell(p), *(Cell(f"{p}{c}") for c in columns)]) for p in plans)]
 
 
-def grid(header, keys, rows=1000, cols=26):
-    return sheet_sync.Existing(sheet_id=7, header=header, keys=keys, row_count=rows, column_count=cols)
+def grid(header, keys, n_rows=1000, n_cols=26):
+    return sheet_sync.Existing(sheet_id=7, header=header, keys=keys, row_count=n_rows, column_count=n_cols)
+
+
+def inserted(requests):
+    return [r["insertDimension"]["range"]["startIndex"] for r in requests if "insertDimension" in r]
 
 
 def placed(requests):
@@ -56,15 +60,29 @@ class PlanTest(unittest.TestCase):
         self.assertEqual(cells[(3, 4)], "P1B")
 
     def test_appends_new_plans_and_columns_after_the_last_ones(self):
-        existing = grid(["Plan", "Plan ID", "A"], ["", "Sec", "P1", "", ""])
-        cells = placed(sheet_sync.plan(existing, layout("P1", "P2")))
+        existing = grid(["Plan", "Plan ID", "A"], ["", "Sec", "P1"])
+        requests = sheet_sync.plan(existing, layout("P1", "P2"))
+        cells = placed(requests)
         self.assertEqual(cells[(0, 3)], "B")
         self.assertEqual(cells[(1, 3)], "")
         self.assertEqual(cells[(2, 3)], "P1B")
-        self.assertEqual(cells[(5, 1)], "P2")
+        self.assertEqual(cells[(3, 1)], "P2")
+        self.assertEqual(inserted(requests), [])
+
+    def test_inserts_a_new_plan_under_its_section(self):
+        two_sections = layout("P1", "P2") + [Row("section", "Sec2", [Cell("Sec2")]), Row("plan", "P3", [Cell("n"), Cell("P3")])]
+        existing = grid(["Plan", "Plan ID", "A", "B"], ["", "Sec", "P1", "Sec2", "P3"])
+        requests = sheet_sync.plan(existing, two_sections)
+        self.assertEqual(inserted(requests), [3])
+        cells = placed(requests)
+        self.assertEqual(cells[(3, 1)], "P2")
+        self.assertEqual(cells[(4, 0)], "Sec2")
+        self.assertEqual(cells[(5, 1)], "P3")
+        self.assertLess(requests.index(next(r for r in requests if "insertDimension" in r)),
+                        requests.index(next(r for r in requests if "updateCells" in r)))
 
     def test_grows_a_grid_too_small_for_the_data(self):
-        requests = sheet_sync.plan(grid([], [], rows=2, cols=3), layout("P1", "P2"))
+        requests = sheet_sync.plan(grid([], [], n_rows=2, n_cols=3), layout("P1", "P2"))
         appends = {r["appendDimension"]["dimension"]: r["appendDimension"]["length"] for r in requests if "appendDimension" in r}
         self.assertEqual(appends, {"ROWS": 2, "COLUMNS": 1})
         self.assertLess(requests.index(next(r for r in requests if "appendDimension" in r)),
@@ -76,7 +94,7 @@ class PlanTest(unittest.TestCase):
 
     def test_sizes_columns_where_they_land(self):
         existing = grid(["Plan", "Plan ID", "B", "A"], ["", "Sec", "P1"])
-        requests = sheet_sync.plan(existing, layout("P1"), widths=[40, 14, 5, 9])
+        requests = sheet_sync.plan(existing, layout("P1"), column_widths=[40, 14, 5, 9])
         sizes = {r["updateDimensionProperties"]["range"]["startIndex"]: r["updateDimensionProperties"]["properties"]["pixelSize"]
                  for r in requests if "updateDimensionProperties" in r}
         self.assertEqual(sizes[3], sheet_sync.pixels(5))
@@ -84,6 +102,13 @@ class PlanTest(unittest.TestCase):
 
 
 class CellDataTest(unittest.TestCase):
+    def test_each_write_replaces_value_note_format_and_links(self):
+        [update, *_] = [r["updateCells"] for r in sheet_sync.plan(grid([], []), layout("P1")) if "updateCells" in r]
+        self.assertEqual(set(update["fields"].split(",")), {"userEnteredValue", "note", "userEnteredFormat", "textFormatRuns"})
+
+    def test_tab_title_is_quoted_for_a_range(self):
+        self.assertEqual(sheet_sync.quoted("Dental, vision & Bob's"), "'Dental, vision & Bob''s'")
+
     def test_value_stays_text(self):
         self.assertEqual(sheet_sync.cell_data(Cell("$0"), "plan")["userEnteredValue"], {"stringValue": "$0"})
 
@@ -152,6 +177,9 @@ class SyncTest(unittest.TestCase):
         cells = placed(api.batches[0])
         main = [[c.value for c in row.cells] for row in rows(self.site, "main")]
         self.assertEqual(cells[(len(main) - 1, len(main[0]) - 1)], main[-1][-1])
+        self.assertLess(max(r for r, _ in cells), len(main))
+        self.assertFalse([r for r in api.batches[0] if "insertDimension" in r or "appendDimension" in r and
+                          r["appendDimension"]["dimension"] == "ROWS"])
 
     def test_cited_cell_links_to_the_site(self):
         api = FakeApi({})
