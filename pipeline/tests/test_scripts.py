@@ -141,9 +141,16 @@ class MainChartTest(unittest.TestCase):
                                        "pbp_b10a_copay_aas_amt_min": "300.00", "pbp_b10a_copay_aas_amt_max": "300.00"}]}
         self.assertEqual(mc.ambulance(plan), "$250-$300 | not covered")
 
-    def test_ambulance_worldwide_without_cost_sharing(self):
-        plan = {"pbp_b4_emerg_urgent": [{"pbp_b4c_bendesc_ehc": "111"}]}
+    def test_ambulance_without_cost_sharing(self):
+        plan = {"pbp_b10_amb_trans": [{"pbp_b10a_copay_yn": "2"}], "pbp_b4_emerg_urgent": [{"pbp_b4c_bendesc_ehc": "111"}]}
         self.assertEqual(mc.ambulance(plan), "$0 | $0")
+
+    def test_ambulance_worldwide_needs_the_transportation_flag(self):
+        plan = {"pbp_b10_amb_trans": [{"pbp_b10a_copay_yn": "2"}], "pbp_b4_emerg_urgent": [{"pbp_b4c_bendesc_ehc": "011"}]}
+        self.assertEqual(mc.ambulance(plan), "$0 | not covered")
+
+    def test_ambulance_without_a_pbp_row_is_blank(self):
+        self.assertEqual(mc.ambulance({}), " | not covered")
 
 
 class SpecTest(unittest.TestCase):

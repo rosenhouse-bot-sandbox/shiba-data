@@ -33,9 +33,10 @@ COLUMNS = [
            "Office visits only: leave out hearing exams, telehealth and nursing-home visits (#31 section 2.2).",
            [r"specialist"]),
     Column("main", "AB_ambulance", "Ambulance",
-           "Ambulance trip cost range: line 1 within the U.S., line 2 outside it (worldwide emergency ambulance). "
-           "Each line spans ground and air trips, emergency or not, including facility transfers and trips outside the service area. "
-           "\"not covered\" = the plan does not cover ambulance outside the U.S.",
+           "Ambulance cost range per trip or date of service, over ground and air trips. "
+           "Line 1 = within the U.S.: emergency or not, including facility transfers and trips outside the service area. "
+           "Line 2 = emergency ambulance outside the U.S. \"not covered\" = the EOC excludes it. "
+           "\"EOC unclear\" = the EOC covers emergency care abroad but never mentions ambulance there.",
            [r"ambulance"]),
     Column("main", "H_inpatient", "Inpatient Hospital $/Day",
            "Inpatient hospital (acute) cost. \"$395 | 1-5\" = $395 per day for days 1-5, then $0. \"per stay\" = per admission.",

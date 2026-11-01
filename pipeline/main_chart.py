@@ -104,14 +104,18 @@ def cost_range(row, copays, coinsurances):
     return join_costs(joined(copays, money), joined(coinsurances, pct)) or "$0"
 
 
+WORLDWIDE_EMERGENCY_TRANSPORTATION = 1  # position in pbp_b4c_bendesc_ehc
+
+
 def ambulance(plan):
     b10 = first(plan, "pbp_b10_amb_trans")
     domestic = cost_range(b10, [f"pbp_b10a_copay_{k}_amt_{m}" for k in ("gas", "aas") for m in ("min", "max")],
-                          [f"pbp_b10a_coins_{k}_pct_{m}" for k in ("gas", "aas") for m in ("min", "max")])
+                          [f"pbp_b10a_coins_{k}_pct_{m}" for k in ("gas", "aas") for m in ("min", "max")]) if b10 else ""
     b4 = first(plan, "pbp_b4_emerg_urgent")
-    worldwide = cost_range(b4, ["pbp_b4c_copay_amt_wet_min", "pbp_b4c_copay_amt_wet_max"],
-                           ["pbp_b4c_coins_pct_wet_min", "pbp_b4c_coins_pct_wet_max"]
-                           ) if flag(b4, "pbp_b4c_bendesc_ehc", 1) else "not covered"
+    worldwide = "not covered"
+    if flag(b4, "pbp_b4c_bendesc_ehc", WORLDWIDE_EMERGENCY_TRANSPORTATION):
+        worldwide = cost_range(b4, ["pbp_b4c_copay_amt_wet_min", "pbp_b4c_copay_amt_wet_max"],
+                               ["pbp_b4c_coins_pct_wet_min", "pbp_b4c_coins_pct_wet_max"])
     return f"{domestic} | {worldwide}"
 
 
