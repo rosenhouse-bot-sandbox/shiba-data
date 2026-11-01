@@ -241,7 +241,6 @@ def chart_row(landscape, plan):
                                                       "pbp_b7a_coins_pct_mc_min", "pbp_b7a_coins_pct_mc_max"), "7a"),
         "G_specialist": in_out(plan, copay_or_coins(b7, "pbp_b7d_copay_amt_mc_min", "pbp_b7d_copay_amt_mc_max",
                                                     "pbp_b7d_coins_pct_mc_min", "pbp_b7d_coins_pct_mc_max"), "7d"),
-        "AB_ambulance": ambulance(plan),
         "H_inpatient": inpatient(plan),
         "I_outpatient_surgery": outpatient_surgery(plan),
         "J_outpatient_rehab": rehab(plan),
@@ -252,6 +251,7 @@ def chart_row(landscape, plan):
         "O_medical_deductible": medical_deductible(plan),
     }
     row.update({k: "●" if v is True else v or "" for k, v in dots(plan).items()})
+    row["AB_ambulance"] = ambulance(plan)
     return row
 
 
