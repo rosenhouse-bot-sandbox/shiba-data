@@ -39,7 +39,7 @@ COLUMNS = [
            "\"EOC unclear\" = the EOC covers emergency care abroad but never mentions ambulance there.",
            [r"ambulance"]),
     Column("main", "H_inpatient", "Inpatient Hospital $/Day",
-           "Inpatient hospital (acute) cost. \"$395 | 1-5\" = $395 per day for days 1-5, then $0. \"per stay\" = per admission.",
+           "Inpatient hospital (acute) cost. \"$395 | 1-5\" = $395 per day for days 1-5, then $0. \"per admission\" = one copay per admission, however long the stay.",
            [r"inpatient hospital care", r"per day", r"days? \d+.\d+"]),
     Column("main", "I_outpatient_surgery", "Outpatient Surgery / ASC",
            "Line 1 = outpatient hospital surgery; line 2 = ambulatory surgical center (ASC). \"a/b\" inside a line = in/out-of-network. "

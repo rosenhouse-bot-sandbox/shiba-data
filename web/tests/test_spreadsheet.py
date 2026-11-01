@@ -62,7 +62,7 @@ class WorkbookTest(unittest.TestCase):
 
     def test_cited_cell_links_to_its_cell_on_the_site(self):
         cell = self.cell(self.book["Main chart"], "H2001-045-0", build.fields.labels("main")["H_inpatient"])
-        self.assertEqual(cell.value, "$0 or $1,980 per stay")
+        self.assertEqual(cell.value, "$1,980 per admission")
         self.assertEqual(cell.hyperlink.target, f"{SITE}#/main/H2001-045-0/H_inpatient")
 
     def test_uncited_cell_has_no_link(self):

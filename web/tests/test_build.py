@@ -58,9 +58,9 @@ class SiteDataTest(unittest.TestCase):
 
     def test_cited_cell_points_to_document_page_and_quote(self):
         cell = self.cell("main", "H2001-045-0", "H_inpatient")
-        self.assertEqual(cell["value"], "$0 or $1,980 per stay")
+        self.assertEqual(cell["value"], "$1,980 per admission")
         [cite] = cell["cites"]
-        self.assertEqual(cite["page"], 6)
+        self.assertEqual(cite["page"], 3)
         self.assertIn("$1,980 copay per stay", cite["quote"])
         doc = self.site["docs"][cite["doc"]]
         self.assertEqual(doc["url"], "https://www.aarpmedicareplans.com/alphadog/UHOR27LP0412518_000")

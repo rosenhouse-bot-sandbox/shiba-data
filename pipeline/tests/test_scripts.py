@@ -108,6 +108,9 @@ class MainChartTest(unittest.TestCase):
                                         "pbp_b1a_copay_mcs_amt_int2_t1": "0.00"}]}
         self.assertEqual(mc.inpatient(plan), "$465 | 1-5")
 
+    def test_inpatient_copay_per_admission(self):
+        self.assertEqual(mc.inpatient({"pbp_b1a_inpat_hosp": [{"pbp_b1a_copay_mcs_amt_t1": "2241.00"}]}), "$2,241 per admission")
+
     def test_inpatient_without_cost_sharing(self):
         self.assertEqual(mc.inpatient({"pbp_b1a_inpat_hosp": [{"pbp_b1a_copay_yn": "1"}]}), "$0")
         self.assertEqual(mc.inpatient({}), "")
