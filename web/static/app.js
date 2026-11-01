@@ -7,11 +7,6 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dis
 const SHEET_NAMES = { main: "Main chart", dvha: "Dental, vision, hearing & extras" };
 const KIND_NAMES = { contradicts: "Contradicts the EOC", note: "Note" };
 let kindFilter = "";
-const SECTIONS = {
-  "MA-PD": "Medicare Advantage with drug coverage",
-  "NO-PART-D": "Medicare Advantage without drug coverage",
-  "C-SNP": "Chronic condition special needs plans",
-};
 const $ = (sel) => document.querySelector(sel);
 const el = (tag, attrs = {}, ...kids) => {
   const e = document.createElement(tag);
@@ -46,6 +41,7 @@ async function start() {
   site = await (await fetch("data.json")).json();
   plans = Object.fromEntries(site.plans.map((p) => [p.plan_id, p]));
   showUpdated(new Date(site.built));
+  $("#download").href = `shibasheets-${site.year}.xlsx`;
   $("#prev").addEventListener("click", () => goTo(currentPage() - 1));
   $("#next").addEventListener("click", () => goTo(currentPage() + 1));
   $("#page").addEventListener("change", (e) => goTo(Number(e.target.value)));
@@ -113,7 +109,7 @@ function sheetView(sheet) {
   for (const row of sheet.rows) {
     if (row.section !== section) {
       section = row.section;
-      body.append(el("tr", { class: "section" }, el("th", { colspan: sheet.columns.length + 1 }, SECTIONS[section] || section)));
+      body.append(el("tr", { class: "section" }, el("th", { colspan: sheet.columns.length + 1 }, site.sections[section] || section)));
     }
     const plan = plans[row.plan_id];
     body.append(el("tr", { "data-plan": row.plan_id },
