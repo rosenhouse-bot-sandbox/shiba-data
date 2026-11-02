@@ -16,8 +16,13 @@ def layout(*plans, columns=("A", "B")):
             *(Row("plan", p, [Cell(f"name {p}"), Cell(p), *(Cell(f"{p}{c}") for c in columns)]) for p in plans)]
 
 
-def grid(header, keys, n_rows=1000, n_cols=26):
-    return sheet_sync.Existing(sheet_id=7, header=header, keys=keys, row_count=n_rows, column_count=n_cols)
+def grid(header, keys, n_rows=1000, n_cols=26, used_columns=None):
+    return sheet_sync.Existing(sheet_id=7, header=header, keys=keys, row_count=n_rows, column_count=n_cols,
+                               used_columns=len(header) if used_columns is None else used_columns)
+
+
+def trims(requests):
+    return {r["deleteDimension"]["range"]["dimension"]: r["deleteDimension"]["range"] for r in requests if "deleteDimension" in r}
 
 
 def inserted(requests):
@@ -91,13 +96,29 @@ class PlanTest(unittest.TestCase):
 
     def test_trims_empty_rows_below_the_data(self):
         requests = sheet_sync.plan(grid([], [], n_rows=1000), layout("P1", "P2"))
-        [trim] = [r["deleteDimension"]["range"] for r in requests if "deleteDimension" in r]
-        self.assertEqual(trim, {"sheetId": 7, "dimension": "ROWS", "startIndex": 4, "endIndex": 1000})
+        self.assertEqual(trims(requests)["ROWS"], {"sheetId": 7, "dimension": "ROWS", "startIndex": 4, "endIndex": 1000})
 
     def test_keeps_rows_the_data_no_longer_has(self):
         requests = sheet_sync.plan(grid(["Plan", "Plan ID", "A", "B"], ["", "Sec", "Gone", "P1"], n_rows=5), layout("P1"))
-        [trim] = [r["deleteDimension"]["range"] for r in requests if "deleteDimension" in r]
+        trim = trims(requests)["ROWS"]
         self.assertEqual((trim["startIndex"], trim["endIndex"]), (4, 5))
+
+    def test_trims_empty_columns_right_of_the_data(self):
+        requests = sheet_sync.plan(grid([], [], n_cols=26), layout("P1"))
+        self.assertEqual(trims(requests)["COLUMNS"], {"sheetId": 7, "dimension": "COLUMNS", "startIndex": 4, "endIndex": 26})
+
+    def test_keeps_columns_that_hold_values(self):
+        existing = grid(["Plan", "Plan ID", "Old", "A", "B"], ["", "Sec", "P1"], n_cols=10, used_columns=7)
+        trim = trims(sheet_sync.plan(existing, layout("P1")))["COLUMNS"]
+        self.assertEqual((trim["startIndex"], trim["endIndex"]), (7, 10))
+
+    def test_leaves_a_grid_that_fits_the_data_alone(self):
+        requests = sheet_sync.plan(grid(["Plan", "Plan ID", "A", "B"], ["", "Sec", "P1"], n_rows=3, n_cols=4), layout("P1"))
+        self.assertEqual(trims(requests), {})
+
+    def test_appends_a_new_column_after_values_without_a_header(self):
+        existing = grid(["Plan", "Plan ID", "A"], ["", "Sec", "P1"], used_columns=5)
+        self.assertEqual(placed(sheet_sync.plan(existing, layout("P1")))[(0, 5)], "B")
 
     def test_grows_a_grid_too_small_for_the_data(self):
         requests = sheet_sync.plan(grid([], [], n_rows=2, n_cols=3), layout("P1", "P2"))
@@ -158,12 +179,7 @@ class FakeApi:
         return [{"sheetId": i, "title": t, "gridProperties": {"rowCount": 1000, "columnCount": 26}} for i, t in enumerate(self.tabs)]
 
     def values(self, ranges):
-        out = []
-        for r in ranges:
-            title, cells = r.rsplit("!", 1)
-            data = self.tabs[title.strip("'").replace("''", "'")]
-            out.append(data[:1] if cells == "1:1" else [row[:2] for row in data])
-        return out
+        return [self.tabs[r[1:-1].replace("''", "'")] for r in ranges]
 
     def batch_update(self, requests):
         self.batches.append(requests)
@@ -198,6 +214,10 @@ class SyncTest(unittest.TestCase):
         self.assertLess(max(r for r, _ in cells), len(main))
         self.assertFalse([r for r in api.batches[0] if "insertDimension" in r or "appendDimension" in r and
                           r["appendDimension"]["dimension"] == "ROWS"])
+
+    def test_measures_used_columns_from_the_widest_row(self):
+        api = FakeApi({"t": [["Plan", "Plan ID"], [], ["", "", "", "", "x"]]})
+        self.assertEqual(sheet_sync.existing_tab(api, api.sheets()[0]).used_columns, 5)
 
     def test_cited_cell_links_to_the_site(self):
         api = FakeApi({})
