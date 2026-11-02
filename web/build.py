@@ -135,6 +135,7 @@ def site_data(data_dir=DATA, layer_names=layers.LAYERS):
             "kind": c["kind"], "text": c["comment"], "doc": doc_by_url[c["url"]], "page": int(c["pdf_page"]), "quote": c["quote"]}
     return {
         "year": year,
+        "sheet_id": config.get("sheet_id"),
         "area": " & ".join(config["counties"]),
         "sections": SECTIONS,
         "plans": plans,
@@ -241,8 +242,6 @@ def main(command, out, release=None):
         for doc_id in missing:
             print(f"::warning::Not in the documents release, so the site links to the carrier: "
                   f"{site['docs'][doc_id]['url']}. Run the Documents workflow to add it.")
-    import spreadsheet  # Only the site needs openpyxl.
-    spreadsheet.write(site, out_dir / f"pdxplans-{site['year']}.xlsx")
     site["built"] = datetime.datetime.now(datetime.timezone.utc).isoformat()
     (out_dir / "data.json").write_text(json.dumps(site))
 

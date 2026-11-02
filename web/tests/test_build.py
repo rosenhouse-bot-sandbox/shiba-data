@@ -51,6 +51,9 @@ class SiteDataTest(unittest.TestCase):
         row = next(r for r in self.site[sheet]["rows"] if r["plan_id"] == plan_id)
         return row["cells"][column]
 
+    def test_names_the_years_google_sheet(self):
+        self.assertEqual(self.site["sheet_id"], build.years.config(DATA)["sheet_id"])
+
     def test_has_all_39_plans_in_each_sheet(self):
         self.assertEqual(len(self.site["plans"]), 39)
         self.assertEqual(len(self.site["main"]["rows"]), 39)
@@ -393,10 +396,6 @@ class DocumentsTest(unittest.TestCase):
         self.assertLess(datetime.datetime.now(datetime.timezone.utc) - built, datetime.timedelta(minutes=1))
         self.assertIn("<title>pdxplans.org – 2099 Medicare Advantage plans</title>", (self.dir / "site" / "index.html").read_text())
 
-    def test_site_command_writes_the_years_spreadsheet(self):
-        with mock.patch.object(build, "site_data", return_value=bare_site(year=2099)):
-            build.main("site", self.dir / "site")
-        self.assertTrue(zipfile.is_zipfile(self.dir / "site" / "pdxplans-2099.xlsx"))
 
 
 class ZipTest(unittest.TestCase):

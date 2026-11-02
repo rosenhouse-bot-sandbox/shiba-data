@@ -4,7 +4,7 @@ Rows are matched by plan ID (or section name) and columns by header, so cells ke
 Rows and columns the data no longer has are left alone. A new row goes after the row above it in the data,
 and a new column after the last column.
 
-Usage: SHEETS_TOKEN=<OAuth access token> SHIBA_SHEET_ID=<id> python3 -I web/sheet_sync.py
+Usage: SHEETS_TOKEN=<OAuth access token> python3 -I web/sheet_sync.py
 """
 import json
 import os
@@ -172,4 +172,5 @@ class Api:
 
 if __name__ == "__main__":
     import build
-    sync(Api(os.environ["SHIBA_SHEET_ID"], os.environ["SHEETS_TOKEN"]), build.site_data())
+    site = build.site_data()
+    sync(Api(site["sheet_id"], os.environ["SHEETS_TOKEN"]), site)

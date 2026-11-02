@@ -1,4 +1,4 @@
-"""Lays out the site's plan sheets as spreadsheet rows, for the .xlsx download and the live Google Sheet."""
+"""Lays out the site's plan sheets as rows of the live Google Sheet."""
 from dataclasses import dataclass
 
 SITE = "https://pdxplans.org/"

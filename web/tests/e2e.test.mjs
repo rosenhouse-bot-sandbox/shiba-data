@@ -43,11 +43,14 @@ test("the header names the plan year and counties", async () => {
   assert.equal(await page.textContent("h1"), "pdxplans.org – 2027 Medicare Advantage plans for Multnomah & Clackamas");
 });
 
-test("the download link saves the spreadsheet", async () => {
+test("the header links to the Google Sheet in a new tab", async () => {
   await page.goto(`${base}#/main`);
   await page.waitForSelector("table.sheet");
-  const [download] = await Promise.all([page.waitForEvent("download"), page.click("#download")]);
-  assert.equal(download.suggestedFilename(), "pdxplans-2027.xlsx");
+  const link = page.locator("#sheet-link");
+  assert.equal(await link.getAttribute("href"), `https://docs.google.com/spreadsheets/d/${site.sheet_id}/edit`);
+  assert.equal(await link.getAttribute("target"), "_blank");
+  assert.equal((await link.textContent()).trim(), "View in Google Sheets ↗");
+  assert.ok(await link.locator("svg").isVisible());
 });
 
 test("sheets are grouped under named sections", async () => {
