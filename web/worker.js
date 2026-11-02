@@ -1,5 +1,6 @@
 // Serves each plan PDF from the R2 bucket, where the Pipeline workflow stores it as blobs/<sha256>.
 // The static site comes from the assets directory.
+// CI downloads every blob through this route too, so it needs no R2 credentials.
 export default {
   async fetch(request, env) {
     const sha = new URL(request.url).pathname.match(/^\/docs\/([0-9a-f]{64})\.pdf$/)?.[1];
