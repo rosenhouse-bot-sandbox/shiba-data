@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-7dcf10accd77535d.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 7 Diagnostic Radiology row: $425 in-network copay for all other diagnostic radiology services in an outpatient hospital setting.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 7 Diagnostic Radiology row: out-of-network 30% coinsurance, with no setting named.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"The $125 copay applies to all other locations. Outpatient hospital is $425.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 7 Diagnostic Radiology row: $0 in-network copay for a diagnostic mammogram.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"A freestanding facility is one of the 'all other locations', which carry a $125 in-network copay.\"},\n{\"id\": 5, \"ok\": false, \"reason\": \"The $125 copay applies to all other locations. Outpatient hospital is $425.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"An office is one of the 'all other locations', which carry a $125 in-network copay.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 7 Outpatient X-rays row: $50 in-network copay.\"},\n{\"id\": 8, \"ok\": false, \"reason\": \"The $425 copay applies only to outpatient hospital. Freestanding falls under all other locations at $125.\"},\n{\"id\": 9, \"ok\": true, \"reason\": \"Page 7 Outpatient X-rays row: out-of-network 30% coinsurance.\"}]\n```",
+ "usage": {
+  "input_tokens": 3162,
+  "output_tokens": 863,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
