@@ -60,10 +60,28 @@ test("sheets are grouped under named sections", async () => {
   assert.equal(await page.textContent("tr.section th"), "Medicare Advantage with drug coverage");
 });
 
+test("section labels stay in view when the sheet scrolls sideways", async () => {
+  const narrow = await browser.newPage({ viewport: { width: 400, height: 800 } });
+  await narrow.goto(`${base}#/main`);
+  await narrow.waitForSelector("table.sheet");
+  await narrow.evaluate(() => { document.querySelector("#content").scrollLeft = 1000; });
+  const plan = await narrow.locator("tbody th.plan a").first().boundingBox();
+  const label = await narrow.locator("tr.section th > *").first().boundingBox();
+  assert.equal(label.x, plan.x);
+  await narrow.close();
+});
+
 test("a spreadsheet link to a cited cell opens its quote", async () => {
   await page.goto(`${base}#/main/H2001-045-0/H_inpatient`);
   await shown(docOf("H2001-045-0", "EOC"), 77);
   assert.match((await page.locator(".textLayer mark").allTextContents()).join(" "), /\$1,980 copayment/);
+});
+
+test("hiding the viewer forgets the shown page", async () => {
+  await page.goto(`${base}#/main/H2001-045-0/H_inpatient`);
+  await shown(docOf("H2001-045-0", "EOC"), 77);
+  await page.goto(`${base}#/main`);
+  assert.equal(await page.locator("#page-area[data-shown]").count(), 0);
 });
 
 test("clicking a cited cell highlights the quote on its page", async () => {
