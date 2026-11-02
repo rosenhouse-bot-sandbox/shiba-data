@@ -9,6 +9,7 @@ VERSIONS = {
     # evaluate.py picked these models.
     1: dict(groups=("imaging",), reader=("claude-opus-5-5", "high"), verifier=("claude-opus-5-5", "medium")),
 }
+VERSIONS[2] = dict(VERSIONS[1], groups=("imaging", "ambulance"))
 
 
 def fresh(path):

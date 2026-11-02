@@ -22,10 +22,14 @@ BENEFITS = {
     "imaging.diagnostic.ultrasound": "Ultrasounds",
     "imaging.diagnostic.mammogram": "Diagnostic mammograms, not screening mammograms",
     "radiation_therapy": "Therapeutic radiology (radiation therapy)",
+    "ambulance": "Ambulance services, ground and air, priced together",
+    "ambulance.ground": "Ground ambulance",
+    "ambulance.air": "Air ambulance, by airplane or helicopter",
 }
 # Regexes that find the pages about each benefit group
 FIND = {"imaging": [r"x.ray", r"radiolog", r"\bMRI\b", r"\bCT\b", r"\bPET\b", r"ultrasound", r"mammogra",
-                    r"nuclear medicine", r"imaging"]}
+                    r"nuclear medicine", r"imaging"],
+        "ambulance": [r"ambulance"]}
 SETTINGS = {
     "any": "The document names no setting, or one cost covers every setting",
     "office": "A physician's office, of any kind",
@@ -34,6 +38,12 @@ SETTINGS = {
     "freestanding": "A freestanding facility, such as a radiology center",
     "outpatient_hospital": "An outpatient hospital",
     "urgent_care": "An urgent care center",
+    "outside_us": "Outside the United States and its territories",
+}
+# The settings a group's readers may use
+GROUP_SETTINGS = {
+    "imaging": ("any", "office", "office.pcp", "office.specialist", "freestanding", "outpatient_hospital", "urgent_care"),
+    "ambulance": ("any", "outside_us"),
 }
 NETWORKS = {"any": "In and out of network, as the document says", "in": "In network", "out": "Out of network"}
 COVERED_BY = {"medicare": "A Medicare-covered benefit", "supplemental": "A routine (supplemental) benefit"}
@@ -159,5 +169,6 @@ def describe(group):
     def table(words):
         return "\n".join(f"- `{k}`: {v}" for k, v in words.items())
 
-    vocabularies = dict(VOCABULARIES, benefit={k: v for k, v in BENEFITS.items() if covers(group, k)})
+    vocabularies = dict(VOCABULARIES, benefit={k: v for k, v in BENEFITS.items() if covers(group, k)},
+                        setting={k: v for k, v in SETTINGS.items() if k in GROUP_SETTINGS[group]})
     return "\n\n".join([f"{column}:\n{table(words)}" for column, words in vocabularies.items()] + [AMOUNT_RULES])
