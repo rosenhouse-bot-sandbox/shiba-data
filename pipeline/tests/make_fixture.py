@@ -13,6 +13,14 @@ import pbp  # noqa: E402
 from appendix_b import PLAN_IDS  # noqa: E402
 
 
+def write(path, data):
+    """Keeps a file whose JSON is unchanged, because zlib versions compress the same JSON differently."""
+    if os.path.exists(path) and gzip.decompress(open(path, "rb").read()) == data:
+        return
+    with open(path, "wb") as f:
+        f.write(gzip.compress(data, mtime=0))
+
+
 def main(pbp_dir):
     plans = pbp.load(pbp_dir, PLAN_IDS)
     present = {(stem, field) for plan in plans.values() for stem, rows in plan.items() for r in rows for field in r}
@@ -21,8 +29,7 @@ def main(pbp_dir):
              if (stem, field) in present and entry["codes"]]
     titles = [[stem, field, entry["title"]] for (stem, field), entry in sorted(dictionary.items()) if (stem, field) in present]
     data = json.dumps({"plans": plans, "codes": codes, "titles": titles}, sort_keys=True).encode()
-    with open(os.path.join(here, "fixtures", "pbp_appendix_b.json.gz"), "wb") as f:
-        f.write(gzip.compress(data, mtime=0))
+    write(os.path.join(here, "fixtures", "pbp_appendix_b.json.gz"), data)
 
 
 if __name__ == "__main__":
