@@ -55,11 +55,14 @@ class BlobsTest(unittest.TestCase):
             self.assertEqual(list(csv.DictReader(f)), [{"pdf": sha(PDF), "text": sha(b"text of sb"),
                                                         "layout": sha(b"layout of sb"), "items": sha(b"items of sb")}])
 
+    def expected(self):
+        return [f"blobs/{sha(PDF)} {blobs.pdf_path(self.work, sha(PDF))}", f"blobs/{sha(ZIP)} {self.work / 'landscape.zip'}",
+                *(f"blobs/{sha(f'{k} of sb'.encode())} {blobs.text_path(self.work, k, sha(PDF))}" for k in blobs.TEXT_KINDS)]
+
     def test_lists_texts_with_the_pdfs(self):
         blobs.record_cms(["landscape"], self.work, self.data / "generated" / blobs.CMS_FILES)
         self.write_texts()
-        self.assertEqual(self.lines()[2:], [f"blobs/{sha(f'{k} of sb'.encode())} {blobs.text_path(self.work, k, sha(PDF))}"
-                                            for k in blobs.TEXT_KINDS])
+        self.assertEqual(self.lines(), self.expected())
 
     def test_names_where_recorded_texts_go_before_a_run(self):
         self.write_texts()
@@ -68,6 +71,15 @@ class BlobsTest(unittest.TestCase):
             blobs.main("texts", str(self.data), str(self.work))
         self.assertEqual(out.getvalue().splitlines(), [f"{sha(f'{k} of sb'.encode())} {blobs.text_path(self.work, k, sha(PDF))}"
                                                        for k in blobs.TEXT_KINDS])
+
+    def test_names_every_input_a_replay_reads(self):
+        blobs.record_cms(["landscape"], self.work, self.data / "generated" / blobs.CMS_FILES)
+        self.write_texts()
+        (self.work / "landscape.zip").unlink()
+        out = io.StringIO()
+        with redirect_stdout(out):
+            blobs.main("inputs", str(self.data), str(self.work))
+        self.assertEqual(out.getvalue().splitlines(), [line.removeprefix("blobs/") for line in self.expected()])
 
     def test_names_no_texts_before_the_first_record(self):
         out = io.StringIO()

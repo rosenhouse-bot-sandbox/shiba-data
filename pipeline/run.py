@@ -1,10 +1,12 @@
 """Rebuilds data/<year>/generated from the sources in data/<year>/config.json, found.csv and links.csv,
 then the live year's machine/blanks.csv and machine/filled.csv from model answers.
 
-Usage: python3 -I pipeline/run.py <year> <work_dir> [api]
+Usage: python3 -I pipeline/run.py <year> <work_dir> [api|replay]
 
 Saved answers in data/<year>/answers are reused. Without `api`, the run stops at the first model step
 with tasks that have no saved answer, and lists them. With `api`, the Claude API answers them.
+`replay` reads nothing from the web. It needs the committed run's PDFs, texts and CMS zips in <work_dir>,
+where blobs.py names them, and keeps the committed documents lists.
 Needs pypdfium2, poppler's pdftotext and `npm ci` here, and the anthropic package for `api`.
 """
 import csv
@@ -113,14 +115,16 @@ def filled_step(texts, work, answer, every=False):
 
 
 def main(year, work, mode=""):
-    if mode not in ("", "api"):
+    if mode not in ("", "api", "replay"):
         raise SystemExit(__doc__)
     data = years.data_dir(year)
     config = years.config(data)
     work = os.path.abspath(work)
     os.makedirs(work, exist_ok=True)
+    web = mode != "replay"
     for name in CMS:
-        get(config[f"{name}_zip"], blobs.cms_path(work, name))
+        if web:
+            get(config[f"{name}_zip"], blobs.cms_path(work, name))
     subprocess.run(["unzip", "-oq", blobs.cms_path(work, "landscape"), "-d", work], check=True)
     subprocess.run(["unzip", "-oq", blobs.cms_path(work, "pbp"), "-d", f"{work}/pbp"], check=True)
 
@@ -129,10 +133,15 @@ def main(year, work, mode=""):
     blobs.record_cms(CMS, work, gen / blobs.CMS_FILES)
     py("universe.py", f"{work}/{config['landscape_csv']}", gen / "plans.csv", config["state"], *config["counties"])
     baseline = [years.REPO / config["baseline_manifest"]] if "baseline_manifest" in config else []
-    py("find_docs.py", gen / "plans.csv", data / "found.csv", data / "links.csv", gen / "documents.csv", config["year"])
-    py("fetch_docs.py", gen / "documents.csv", gen / "plans.csv", f"{work}/docs", gen / "documents_checked.csv",
-       config["year"], ",".join(config["counties"]), *baseline)
-    py("cite.py", gen / "documents_checked.csv", f"{work}/docs/text", gen / "citations.csv")
+    if web:
+        py("find_docs.py", gen / "plans.csv", data / "found.csv", data / "links.csv", gen / "documents.csv",
+           config["year"])
+        py("fetch_docs.py", gen / "documents.csv", gen / "plans.csv", f"{work}/docs", gen / "documents_checked.csv",
+           config["year"], ",".join(config["counties"]), *baseline)
+        pdfs(gen, work)
+    py("texts.py", f"{work}/pdfs", f"{work}/texts")
+    blobs.record_texts(gen, work)
+    py("cite.py", gen / "documents_checked.csv", f"{work}/texts/text", gen / "citations.csv")
     py("main_chart.py", gen / "plans.csv", f"{work}/pbp", gen / "main_chart.csv")
     py("dvha.py", gen / "plans.csv", f"{work}/pbp", gen / "dvha.csv")
     py("cms_sources.py", f"{work}/{config['landscape_csv']}", gen / "plans.csv", f"{work}/pbp", gen / "cms_sources.csv",
@@ -140,9 +149,6 @@ def main(year, work, mode=""):
     if config["year"] == appendix_b.YEAR:
         py("tests/make_fixture.py", f"{work}/pbp")
 
-    pdfs(gen, work)
-    py("texts.py", f"{work}/pdfs", f"{work}/texts")
-    blobs.record_texts(gen, work)
     lost = lost_quotes(data, f"{work}/texts")
     if lost:
         raise SystemExit("The site cannot highlight these quotes:\n" + "\n".join(f"{layers.where(c)}: {c['quote']}" for c in lost))

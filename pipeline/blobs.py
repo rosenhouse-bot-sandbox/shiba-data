@@ -1,8 +1,9 @@
 """Lists a run's raw inputs for the R2 bucket, which keeps each one as blobs/<sha256>.
 
-Usage: python3 -I pipeline/blobs.py upload|texts <data_dir> <work_dir>
+Usage: python3 -I pipeline/blobs.py upload|texts|inputs <data_dir> <work_dir>
 upload: prints "<key> <path>" for each fetched PDF, CMS file and PDF text. The Pipeline workflow uploads each line.
 texts: prints "<sha256> <path>" for each recorded PDF text. The workflow downloads each line before a run.
+inputs: prints "<sha256> <path>" for each PDF, CMS file and text that `run.py replay` reads.
 """
 import csv
 import hashlib
@@ -65,7 +66,7 @@ def record_cms(names, work, out):
             w.writerow([name, sha256(cms_path(work, name))])
 
 
-def listed(data, work):
+def inputs(data, work):
     gen, work = pathlib.Path(data, "generated"), pathlib.Path(work)
     files = [(digest, pdf_path(work, digest)) for digest in checked_pdfs(gen)]
     with open(gen / CMS_FILES, newline="") as f:
@@ -73,7 +74,11 @@ def listed(data, work):
     texts = recorded_texts(gen, work)
     if texts and {path.stem for _, path in texts} != {digest[:16] for digest in checked_pdfs(gen)}:
         raise ValueError(f"{gen / TEXTS} records texts for other PDFs than documents_checked.csv")
-    files += texts
+    return files + texts
+
+
+def listed(data, work):
+    files = inputs(data, work)
     for digest, path in files:
         if sha256(path) != digest:
             raise ValueError(f"{path} does not hash to {digest}")
@@ -84,8 +89,9 @@ def main(command, data, work):
     if command == "upload":
         for digest, path in listed(data, work):
             print(f"blobs/{digest} {path}")
-    elif command == "texts":
-        for digest, path in recorded_texts(pathlib.Path(data, "generated"), work):
+    elif command in ("texts", "inputs"):
+        files = recorded_texts(pathlib.Path(data, "generated"), work) if command == "texts" else inputs(data, work)
+        for digest, path in files:
             print(f"{digest} {path}")
     else:
         raise SystemExit(__doc__)
