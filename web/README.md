@@ -8,7 +8,7 @@ A cell with a citation opens its page and highlights the quote.
 
 The plan PDFs come from the latest GitHub release.
 The `Documents` workflow downloads them from the carrier sites, cuts a new release, and redeploys the site.
-The `Site` workflow builds the site from that release, runs the tests, and deploys `main` to GitHub Pages.
+The `Site` workflow builds the site from that release, runs the tests, and deploys `main` to a Cloudflare Worker (`wrangler.toml`).
 
 ## Local build
 
