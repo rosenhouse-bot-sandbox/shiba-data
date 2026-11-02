@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "medium",
+ "task": "05d56d5f782708e7.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2056-003-0\", \"benefit\": \"imaging.diagnostic.advanced.ct\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$350\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"$350 copay\"], \"note\": \"The row reads 'Diagnostic radiology services, such as CT/CAT scan and MRI' with one cost. 'Such as' is not an exhaustive list, so CT and MRI are stated separately.\"},\n{\"plan_id\": \"H2056-003-0\", \"benefit\": \"imaging.diagnostic.advanced.mri\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$350\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"$350 copay\"], \"note\": \"The row reads 'Diagnostic radiology services, such as CT/CAT scan and MRI' with one cost. 'Such as' is not an exhaustive list, so CT and MRI are stated separately.\"},\n{\"plan_id\": \"H2056-003-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$15\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"Outpatient x‑rays $15 copay\"], \"note\": \"The document says only 'outpatient' and does not name a setting.\"}]\n```",
+ "usage": {
+  "input_tokens": 3935,
+  "output_tokens": 1937,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

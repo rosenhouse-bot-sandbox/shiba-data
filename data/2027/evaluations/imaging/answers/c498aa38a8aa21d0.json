@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "high",
+ "task": "28e22b4acec7d885.md",
+ "reply": "```json\n[{\"plan_id\": \"H2406-073-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per mammogram\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"$0 copay for each diagnostic mammogram\"], \"note\": \"\"},\n{\"plan_id\": \"H2406-073-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$320\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"$320 copay otherwise\"], \"note\": \"\"},\n{\"plan_id\": \"H2406-073-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$30\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"$30 copay\"], \"note\": \"\"},\n{\"plan_id\": \"H2406-073-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$35\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"$35 copay\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 4146,
+  "output_tokens": 6030,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "task": "28e22b4acec7d885.retry.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H2406-073-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$30\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"$30 copay\"], \"note\": \"\"},\n  {\"plan_id\": \"H2406-073-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$35\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"$35 copay\"], \"note\": \"\"}\n]\n```",
+ "usage": {
+  "input_tokens": 4527,
+  "output_tokens": 810,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

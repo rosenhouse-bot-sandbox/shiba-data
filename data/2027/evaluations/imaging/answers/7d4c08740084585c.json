@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "high",
+ "task": "61de2101267140ce.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H1372-003-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"unit\": \"\", \"limit\": \"\", \"page\": 3, \"quotes\": [\"Diagnostic radiology services   20% coinsurance\"], \"note\": \"The service name is followed by examples (e.g., MRI, CAT scan); the row names the diagnostic radiology category, so the broader benefit is used.\"},\n{\"plan_id\": \"H1372-003-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"unit\": \"\", \"limit\": \"\", \"page\": 3, \"quotes\": [\"Outpatient x-rays               20% coinsurance\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 2939,
+  "output_tokens": 2832,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

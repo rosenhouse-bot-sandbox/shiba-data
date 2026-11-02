@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "task": "50159487a52ccddf.md",
+ "reply": "```json\n[\n{\"plan_id\":\"H7006-018-0\",\"benefit\":\"imaging.diagnostic\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$0-$300\",\"page\":7,\"quotes\":[\"$0 - $300 copay\"]},\n{\"plan_id\":\"H7006-018-0\",\"benefit\":\"imaging.diagnostic\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"50%\",\"page\":7,\"quotes\":[\"Out-of-Network Out-of-Network 50% coinsurance 50% coinsurance Outpatient X-rays\"]},\n{\"plan_id\":\"H7006-021-0\",\"benefit\":\"imaging.diagnostic\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$0-$60\",\"page\":7,\"quotes\":[\"$0 - $60 copay\"]},\n{\"plan_id\":\"H7006-021-0\",\"benefit\":\"imaging.diagnostic\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"50%\",\"page\":7,\"quotes\":[\"Out-of-Network Out-of-Network 50% coinsurance 50% coinsurance Outpatient X-rays\"]},\n{\"plan_id\":\"H7006-018-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$0\",\"page\":7,\"quotes\":[\"Outpatient X-rays In-Network In-Network $0 copay\"]},\n{\"plan_id\":\"H7006-018-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"50%\",\"page\":7,\"quotes\":[\"Out-of-Network Out-of-Network 50% coinsurance 50% coinsurance Therapeutic Radiology\"]},\n{\"plan_id\":\"H7006-021-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$0\",\"page\":7,\"quotes\":[\"Outpatient X-rays In-Network In-Network $0 copay\"]},\n{\"plan_id\":\"H7006-021-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"50%\",\"page\":7,\"quotes\":[\"Out-of-Network Out-of-Network 50% coinsurance 50% coinsurance Therapeutic Radiology\"]}\n]\n```",
+ "usage": {
+  "input_tokens": 2621,
+  "output_tokens": 2860,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

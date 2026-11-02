@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "low",
+ "task": "50159487a52ccddf.md",
+ "reply": "```json\n[{\"plan_id\": \"H7006-018-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 7, \"quotes\": [\"Outpatient X-rays In-Network $0 copay*\"], \"note\": \"Quote spans the service name and the Choice Rx in-network column; the amount is read from that column.\"},\n{\"plan_id\": \"H7006-021-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 7, \"quotes\": [\"Outpatient X-rays In-Network $0 copay*\"], \"note\": \"Quote spans the service name and the Freedom in-network column; the amount is read from that column.\"},\n{\"plan_id\": \"H7006-018-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0-$300\", \"unit\": \"\", \"limit\": \"\", \"page\": 7, \"quotes\": [\"$0 - $300 copay*\"], \"note\": \"Row is 'Diagnostic radiology services (e.g. MRI, CAT Scan)'; the examples are not an exhaustive list, so it is treated as the broader diagnostic benefit.\"},\n{\"plan_id\": \"H7006-021-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0-$60\", \"unit\": \"\", \"limit\": \"\", \"page\": 7, \"quotes\": [\"$0 - $60 copay*\"], \"note\": \"Row is 'Diagnostic radiology services (e.g. MRI, CAT Scan)'; the examples are not an exhaustive list, so it is treated as the broader diagnostic benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2621,
+  "output_tokens": 3040,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

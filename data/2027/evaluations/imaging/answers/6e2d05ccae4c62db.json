@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "task": "v-4ec81cd0d2695486.md",
+ "reply": "Every item is judged on one plan (H1372-003-0), in network, Medicare-covered, setting \"any\". The page 78 table shows X-rays at 20% coinsurance. The page 79 table shows \"Diagnostic non-laboratory tests such as CT scans, MRIs, EKGs, and PET scans\" at 20% coinsurance.\n\n**X-ray items (0, 2, 11):** The row reads \"X-rays 20% coinsurance\", and the setting is not specified. The row is under \"Outpatient diagnostic tests and therapeutic services and supplies\" and has a prior authorization note that mentions Nursing Facility or Physician Office. Setting \"any\" fits, so all three are true. Item 0's quote has the same text with different spacing.\n\n**Advanced imaging items (1, 3, 4, 5, 6, 7, 8, 9, 10):** One 20% coinsurance covers CT, MRI and PET together, so each is true at the individual level.\n\nSome quotes are fragmentary. Items 3 and 7 quote \"Diagnostic non-laboratory tests such as CT scans, MRIs,\" and \"pocket maximum. 20% coinsurance\". Item 9 quotes \"EKGs, and PET scans when your doctor or other health\" and \"pocket maximum. 20% coinsurance\". These are pieces of the same row, and the page supports the facts.\n\nAll items are true.\n\n```json\n[\n{\"id\":0,\"ok\":true,\"reason\":\"Page 78 X-ray row: 20% coinsurance.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Page 79 row lists MRIs at 20% coinsurance.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Page 78 X-ray row: 20% coinsurance.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"Page 79 row lists CT scans at 20% coinsurance.\"},\n{\"id\":4,\"ok\":true,\"reason\":\"Page 79 row lists MRIs at 20% coinsurance.\"},\n{\"id\":5,\"ok\":true,\"reason\":\"Page 79 row lists PET scans at 20% coinsurance.\"},\n{\"id\":6,\"ok\":true,\"reason\":\"Page 79 row lists PET scans at 20% coinsurance.\"},\n{\"id\":7,\"ok\":true,\"reason\":\"Page 79 row lists MRIs at 20% coinsurance.\"},\n{\"id\":8,\"ok\":true,\"reason\":\"Page 79 row lists CT scans at 20% coinsurance.\"},\n{\"id\":9,\"ok\":true,\"reason\":\"Page 79 row lists PET scans at 20% coinsurance.\"},\n{\"id\":10,\"ok\":true,\"reason\":\"Page 79 row lists CT scans at 20% coinsurance.\"},\n{\"id\":11,\"ok\":true,\"reason\":\"Page 78 X-ray row: 20% coinsurance until out-of-pocket maximum.\"}\n]\n```",
+ "usage": {
+  "input_tokens": 8958,
+  "output_tokens": 1841,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

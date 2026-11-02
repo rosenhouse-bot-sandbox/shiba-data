@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "low",
+ "task": "28e22b4acec7d885.md",
+ "reply": "```json\n[\n{\"plan_id\":\"H2406-073-0\",\"benefit\":\"imaging.diagnostic.advanced\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$320\",\"unit\":\"\",\"limit\":\"\",\"page\":4,\"quotes\":[\"Diagnostic radiology services (e.g. MRI, CT scan)2 $320 copay otherwise\"],\"note\":\"Quote may not match exactly; row text is split across columns.\",\"condition\":\"other than diagnostic mammogram\"},\n{\"plan_id\":\"H2406-073-0\",\"benefit\":\"imaging.diagnostic.advanced\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"30%\",\"unit\":\"\",\"limit\":\"\",\"page\":4,\"quotes\":[\"30% coinsurance\"],\"note\":\"Quote repeats on page; uncertain.\"},\n{\"plan_id\":\"H2406-073-0\",\"benefit\":\"imaging.diagnostic.mammogram\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$0\",\"unit\":\"per diagnostic mammogram\",\"limit\":\"\",\"page\":4,\"quotes\":[\"$0 copay for each diagnostic mammogram\"]},\n{\"plan_id\":\"H2406-073-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$30\",\"unit\":\"\",\"limit\":\"\",\"page\":4,\"quotes\":[\"Outpatient X-rays2 $30 copay\"]},\n{\"plan_id\":\"H2406-073-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$35\",\"unit\":\"\",\"limit\":\"\",\"page\":4,\"quotes\":[\"$35 copay\"]}\n]\n```",
+ "usage": {
+  "input_tokens": 4146,
+  "output_tokens": 631,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

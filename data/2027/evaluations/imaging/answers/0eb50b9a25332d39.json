@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "medium",
+ "task": "2eb4caa23079d78f.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H5439-019-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$50\", \"unit\": \"\", \"limit\": \"\", \"page\": 7, \"quotes\": [\"Outpatient X-rays In-Network $50 copay\"], \"note\": \"The document does not name a setting for outpatient X-rays beyond the word 'Outpatient'.\"},\n  {\"plan_id\": \"H5439-019-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"unit\": \"\", \"limit\": \"\", \"page\": 7, \"quotes\": [\"$50 copay * Out-of-Network 20% coinsurance\"], \"note\": \"The document does not name a setting for outpatient X-rays beyond the word 'Outpatient'.\"},\n  {\"plan_id\": \"H5439-019-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$500\", \"unit\": \"\", \"limit\": \"\", \"page\": 7, \"quotes\": [\"$500 copay for all other diagnostic radiology services received in an outpatient hospital setting.\"], \"note\": \"The row says 'all other' diagnostic radiology services, excluding diagnostic mammograms. The listed examples are only e.g., so the services are not exactly listed.\"},\n  {\"plan_id\": \"H5439-019-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"unit\": \"\", \"limit\": \"\", \"page\": 7, \"quotes\": [\"all other locations. * Out-of-Network 20% coinsurance\"], \"note\": \"The out-of-network coinsurance is in the same Diagnostic Radiology Services row and is read from the row's column.\"},\n  {\"plan_id\": \"H5439-019-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 7, \"quotes\": [\"$0 copay for a diagnostic mammogram.\"], \"note\": \"\"}\n]\n```",
+ "usage": {
+  "input_tokens": 3679,
+  "output_tokens": 3883,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

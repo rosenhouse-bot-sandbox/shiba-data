@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "task": "2eb4caa23079d78f.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-019-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"unit\": \"\", \"limit\": \"\", \"page\": 7, \"quotes\": [\"$50 copay * Out-of-Network 20% coinsurance\"], \"note\": \"The plain quote 'Out-of-Network 20% coinsurance' repeats on the page, so this quote includes the preceding '$50 copay *' from the same Outpatient X-rays row to make it unique.\"}]\n```",
+ "usage": {
+  "input_tokens": 3909,
+  "output_tokens": 657,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "low",
+ "task": "557f08e61a7e8f42.md",
+ "reply": "[\n{\"plan_id\":\"H9003-001-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$0\",\"unit\":\"per visit\",\"limit\":\"\",\"page\":83,\"quotes\":[\"X-rays You pay the following per visit: • $0 for Enhanced plan members.\"],\"note\":\"Outpatient hospital X-rays; quote is approximate across column lines\",\"condition\":\"\"},\n{\"plan_id\":\"H9003-001-0\",\"benefit\":\"imaging.diagnostic.advanced\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$150\",\"unit\":\"per visit, per department\",\"limit\":\"\",\"page\":85,\"quotes\":[\"MRI, CT, and PET You pay the following per visit, per department, depending upon the plan in which you are enrolled: • $150 for Enhanced plan\"],\"note\":\"Quote may not match exactly\"},\n{\"plan_id\":\"H9003-006-0\",\"benefit\":\"imaging.diagnostic.advanced\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$225\",\"unit\":\"per visit, per department\",\"limit\":\"\",\"page\":85,\"quotes\":[\"$225 for Standard plan\"],\"note\":\"\"},\n{\"plan_id\":\"H9003-009-0\",\"benefit\":\"imaging.diagnostic.advanced\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$350\",\"unit\":\"per visit, per department\",\"limit\":\"\",\"page\":85,\"quotes\":[\"$350 for Value plan members.\"],\"note\":\"\"}\n]",
+ "usage": {
+  "input_tokens": 14955,
+  "output_tokens": 555,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

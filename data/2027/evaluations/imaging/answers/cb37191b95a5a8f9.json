@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "task": "4ec81cd0d2695486.retry.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H1372-003-0\", \"benefit\": \"imaging.diagnostic.advanced.ct\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 79, \"quotes\": [\"Diagnostic non-laboratory tests such as CT scans, MRIs, 20% coinsurance\"], \"note\": \"The row also covers EKGs and says 'such as', so the list is not exact. One fact is stated per imaging service. The quote spans both columns on one line because the right-column text is repeated in the next row.\"},\n  {\"plan_id\": \"H1372-003-0\", \"benefit\": \"imaging.diagnostic.advanced.mri\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 79, \"quotes\": [\"Diagnostic non-laboratory tests such as CT scans, MRIs, 20% coinsurance\"], \"note\": \"The row also covers EKGs and says 'such as', so the list is not exact. One fact is stated per imaging service. The quote spans both columns on one line because the right-column text is repeated in the next row.\"},\n  {\"plan_id\": \"H1372-003-0\", \"benefit\": \"imaging.diagnostic.advanced.pet\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 79, \"quotes\": [\"Diagnostic non-laboratory tests such as CT scans, MRIs, 20% coinsurance\"], \"note\": \"The row also covers EKGs and says 'such as', so the list is not exact. One fact is stated per imaging service. The quote spans both columns on one line because the right-column text is repeated in the next row.\"}\n]\n```",
+ "usage": {
+  "input_tokens": 10853,
+  "output_tokens": 1412,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
