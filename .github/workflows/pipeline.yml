@@ -7,10 +7,6 @@ on:
         description: Plan year to rebuild
         required: true
         default: "2027"
-      code:
-        description: Branch whose code runs, so a PR's new model tasks get answers before reproduce checks it
-        required: true
-        default: main
       rebuild:
         description: Also rebuild the model steps from scratch into data/<year>/rebuilds/<this name> (issue #47)
         required: false
@@ -42,7 +38,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ inputs.code }}
           persist-credentials: false
       - uses: actions/setup-python@v5
         with:
