@@ -1,4 +1,5 @@
 import csv, hashlib, io, os, pathlib, sys, tempfile, unittest
+from unittest import mock
 from contextlib import redirect_stdout
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -115,6 +116,32 @@ class RunTest(unittest.TestCase):
             (gen / blobs.CMS_FILES).write_text("name,sha256\n")
             run.pdfs(gen, work)
             self.assertEqual(blobs.listed(gen.parent, work), [(sha(PDF), blobs.pdf_path(work, sha(PDF)))])
+
+
+class ReplayTest(unittest.TestCase):
+    def scripts(self, mode):
+        config = {"year": 1999, "state": "OR", "counties": ["Multnomah"], "landscape_csv": "landscape.csv",
+                  "landscape_zip": "https://example.org/l.zip", "pbp_zip": "https://example.org/p.zip"}
+        with tempfile.TemporaryDirectory() as tmp, \
+                mock.patch.object(run.years, "data_dir", return_value=pathlib.Path(tmp)), \
+                mock.patch.object(run.years, "config", return_value=config), \
+                mock.patch.object(run, "get") as get, mock.patch.object(run, "py") as py, \
+                mock.patch.object(run, "pdfs"), mock.patch.object(run, "lost_quotes", return_value=[]), \
+                mock.patch.object(run.subprocess, "run"), \
+                mock.patch.object(run.blobs, "record_cms"), mock.patch.object(run.blobs, "record_texts"):
+            run.main("1999", os.path.join(tmp, "work"), mode)
+        return get.call_count, [c.args[0] for c in py.call_args_list]
+
+    def test_a_run_reads_the_web(self):
+        downloads, scripts = self.scripts("")
+        self.assertEqual(downloads, 2)
+        self.assertIn("fetch_docs.py", scripts)
+
+    def test_a_replay_reads_nothing_from_the_web(self):
+        downloads, scripts = self.scripts("replay")
+        self.assertEqual(downloads, 0)
+        self.assertFalse({"find_docs.py", "fetch_docs.py"} & set(scripts))
+        self.assertIn("cite.py", scripts)
 
 
 if __name__ == "__main__":

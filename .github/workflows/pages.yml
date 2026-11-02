@@ -54,9 +54,9 @@ jobs:
           name: site
           path: _site
 
-  # Reruns the pipeline from the committed run's blobs and saved answers, and fails on any change to data/.
+  # Reruns the pipeline from the committed run's blobs and saved answers, and fails on any change to tracked files.
   reproduce:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     env:
       AWS_ACCESS_KEY_ID: ${{ vars.CLOUDFLARE_API_TOKEN_ID }}
       AWS_DEFAULT_REGION: auto
@@ -71,6 +71,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
+      - run: sudo apt-get update && sudo apt-get install -y poppler-utils
       - run: pip install pypdfium2==5.13.0 openpyxl==3.1.5
       - run: npm ci
         working-directory: pipeline
@@ -79,16 +80,15 @@ jobs:
         run: |
           export AWS_SECRET_ACCESS_KEY=$(printf %s "$CLOUDFLARE_API_TOKEN" | sha256sum | cut -c1-64)
           echo "::add-mask::$AWS_SECRET_ACCESS_KEY"
-          python3 -I pipeline/blobs.py inputs "$(python3 -I pipeline/years.py)" _work > _inputs.txt
-          while read -r digest path; do
-            mkdir -p "$(dirname "$path")"
-            aws s3 cp "s3://pdxplans/blobs/$digest" "$path" --only-show-errors < /dev/null
-          done < _inputs.txt
-          sed 's/ /  /' _inputs.txt | sha256sum -c --quiet
+          mkdir _work
+          python3 -I pipeline/blobs.py inputs "$(python3 -I pipeline/years.py)" _work > _work/inputs.txt
+          xargs -P 8 -n 2 sh -c 'mkdir -p "$(dirname "$2")" && aws s3 cp "s3://pdxplans/blobs/$1" "$2" --only-show-errors' _ \
+            < _work/inputs.txt
+          sed 's/ /  /' _work/inputs.txt | sha256sum -c --quiet
       - run: python3 -I pipeline/run.py "$(basename "$(python3 -I pipeline/years.py)")" _work replay
       - run: |
-          git status --porcelain data
-          test -z "$(git status --porcelain data)"
+          git status --porcelain -- . ':!_work'
+          test -z "$(git status --porcelain -- . ':!_work')"
 
   deploy:
     if: github.ref == 'refs/heads/main'
