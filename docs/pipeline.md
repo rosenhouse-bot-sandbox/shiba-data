@@ -84,3 +84,4 @@ flowchart TB
 - The Pipeline workflow uploads each fetched PDF, its texts and each CMS zip to R2 as `blobs/<sha256>` before it commits data that names them. `generated/texts.csv` records the texts' hashes. The next run downloads them, so a new pdftotext or pypdfium2 changes no text that models already read.
 - The Site build's e2e tests fail if R2 lacks a PDF in `documents_checked.csv`.
 - The Site workflow's `reproduce` job reruns `run.py replay` from those blobs and the saved answers, with no web or API access. It fails if any tracked file changes. It keeps the committed `documents.csv` and `documents_checked.csv`, so it does not check the steps that find and fetch documents.
+- `pipeline/extract.py` turns documents into benefit facts (#113). `pipeline/evaluate.py`, run by the Evaluate workflow, measures each reader and verifier model and effort against an Opus reviewer and the expected cells.
