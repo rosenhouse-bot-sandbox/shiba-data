@@ -182,7 +182,7 @@ test("the page has no plan dropdown, citation corners or footer", async () => {
 });
 
 const allCells = (sheet) => site[sheet].rows.flatMap((r) => Object.entries(r.cells).map(([col, cell]) => ({ plan_id: r.plan_id, col, cell })));
-const cellTd = (planId, col) => page.locator(`table.sheet td[data-plan="${planId}"][data-col="${col}"]`);
+const cellTd = (planId, col) => page.locator(`.sheet-wrap td[data-plan="${planId}"][data-col="${col}"]`);
 
 test("Ambiguities lists every comment with links to its document page and cell", async () => {
   const comments = ["main", "dvha"].flatMap(allCells).filter(({ cell }) => cell.comment);
@@ -196,7 +196,7 @@ test("Ambiguities lists every comment with links to its document page and cell",
   await wellcare.locator("td.links a", { hasText: "EOC page 83" }).click();
   await shown(docOf("H6815-038-0", "EOC"), 83);
   await wellcare.locator("td.links a", { hasText: "Show in Main chart" }).click();
-  await page.waitForSelector("table.sheet td.selected");
+  await page.waitForSelector(".sheet-wrap td.selected");
   assert.match(await cellTd("H6815-038-0", "K_tests_labs").getAttribute("class"), /selected/);
 });
 
@@ -207,7 +207,7 @@ test("going back to Ambiguities keeps the scroll position", async () => {
   const before = await page.$eval("#content", (c) => c.scrollTop);
   assert.ok(before > 0);
   await target.locator("td.links a", { hasText: "Show in" }).click();
-  await page.waitForSelector("table.sheet td.selected");
+  await page.waitForSelector(".sheet-wrap td.selected");
   await page.goBack();
   await page.waitForSelector("table.ambiguities");
   assert.equal(await page.$eval("#content", (c) => c.scrollTop), before);
