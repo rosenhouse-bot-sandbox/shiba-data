@@ -28,9 +28,9 @@ def score(role, dollars, precision, recall, unanswered=0):
             "precision": evaluate.share(*precision), "recall": evaluate.share(*recall)}
 
 
-def verifier(role, dollars, decoys, agrees, unanswered=0):
-    return {"role": role, "dollars": dollars, "unanswered": unanswered,
-            "decoys_accepted": evaluate.share(*decoys), "agrees_accepted": evaluate.share(*agrees)}
+def verifier(role, dollars, decoys, agrees, unanswered=0, rejects=(8, 10)):
+    return {"role": role, "dollars": dollars, "unanswered": unanswered, "decoys_accepted": evaluate.share(*decoys),
+            "agrees_accepted": evaluate.share(*agrees), "agrees_rejected": evaluate.share(*rejects)}
 
 
 REVIEW = {"decoys_accepted": evaluate.share(0, 5)}
@@ -82,12 +82,13 @@ class PicksTest(unittest.TestCase):
                score("unanswered", 0.5, (9, 10), (9, 10), unanswered=1)]
     verifiers = [verifier("decoy", 1, (1, 5), (10, 10)), verifier("strict", 2, (0, 5), (5, 10)),
                  verifier("good", 3, (0, 5), (9, 10)), verifier("unanswered", 0.5, (0, 5), (10, 10), unanswered=1),
-                 verifier("no-decoys", 0.1, (0, 0), (10, 10))]
+                 verifier("no-decoys", 0.1, (0, 0), (10, 10)),
+                 verifier("lenient", 0.2, (0, 5), (10, 10), rejects=(6, 10))]
 
     def test_cheapest_reader_whose_intervals_reach_the_reviewers_model(self):
         self.assertEqual(evaluate.picks(self.readers, self.verifiers, REVIEW)["reader"], "fine")
 
-    def test_cheapest_verifier_that_rejects_decoys_and_agrees(self):
+    def test_cheapest_verifier_that_rejects_decoys_and_agrees_on_accepts_and_rejects(self):
         self.assertEqual(evaluate.picks(self.readers, self.verifiers, REVIEW)["verifier"], "good")
 
     def test_no_picks_when_the_yardstick_fails(self):
