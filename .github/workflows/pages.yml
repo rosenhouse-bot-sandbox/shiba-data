@@ -21,6 +21,8 @@ jobs:
         working-directory: web
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -31,21 +33,11 @@ jobs:
       - run: python3 -I -m unittest discover -s ../pipeline/tests
       - run: node --test tests/highlight.test.mjs tests/ago.test.mjs tests/permalink.test.mjs tests/worker.test.mjs
       - run: python3 -I build.py site ../_site
-      # The e2e tests open each PDF the site links, from the R2 bucket the Worker serves.
-      # The token's bucket-scoped permission works through R2's S3 API, where its ID and hash are the key pair.
-      - env:
-          AWS_ACCESS_KEY_ID: ${{ vars.CLOUDFLARE_API_TOKEN_ID }}
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          AWS_DEFAULT_REGION: auto
-          AWS_ENDPOINT_URL: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
-          AWS_REQUEST_CHECKSUM_CALCULATION: when_required
-          AWS_RESPONSE_CHECKSUM_VALIDATION: when_required
-        run: |
-          export AWS_SECRET_ACCESS_KEY=$(printf %s "$CLOUDFLARE_API_TOKEN" | sha256sum | cut -c1-64)
-          echo "::add-mask::$AWS_SECRET_ACCESS_KEY"
+      # The e2e tests open each PDF the site links. The public site serves every blob, so pull requests need no secret.
+      - run: |
           mkdir ../_docs
           python3 -I build.py docs > ../_docs.txt
-          xargs -P 8 -I{} aws s3 cp "s3://pdxplans/blobs/{}" "../_docs/{}.pdf" --only-show-errors < ../_docs.txt
+          xargs -P 8 -I{} curl -sSfL --retry 3 --max-time 300 -o "../_docs/{}.pdf" "https://pdxplans.org/docs/{}.pdf" < ../_docs.txt
           sed 's|.*|&  ../_docs/&.pdf|' ../_docs.txt | sha256sum -c --quiet
       - run: npm ci && npx playwright install --with-deps chromium
       - run: SITE=../_site DOCS=../_docs node --test tests/e2e.test.mjs
@@ -57,14 +49,10 @@ jobs:
   # Reruns the pipeline from the committed run's blobs and saved answers, and fails on any change to tracked files.
   reproduce:
     runs-on: ubuntu-24.04
-    env:
-      AWS_ACCESS_KEY_ID: ${{ vars.CLOUDFLARE_API_TOKEN_ID }}
-      AWS_DEFAULT_REGION: auto
-      AWS_ENDPOINT_URL: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
-      AWS_REQUEST_CHECKSUM_CALCULATION: when_required
-      AWS_RESPONSE_CHECKSUM_VALIDATION: when_required
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -75,14 +63,10 @@ jobs:
       - run: pip install pypdfium2==5.13.0 openpyxl==3.1.5
       - run: npm ci
         working-directory: pipeline
-      - env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-        run: |
-          export AWS_SECRET_ACCESS_KEY=$(printf %s "$CLOUDFLARE_API_TOKEN" | sha256sum | cut -c1-64)
-          echo "::add-mask::$AWS_SECRET_ACCESS_KEY"
+      - run: |
           mkdir _work
           python3 -I pipeline/blobs.py inputs "$(python3 -I pipeline/years.py)" _work > _work/inputs.txt
-          xargs -P 8 -n 2 sh -c 'mkdir -p "$(dirname "$2")" && aws s3 cp "s3://pdxplans/blobs/$1" "$2" --only-show-errors' _ \
+          xargs -P 8 -n 2 sh -c 'mkdir -p "$(dirname "$2")" && curl -sSfL --retry 3 --max-time 300 -o "$2" "https://pdxplans.org/docs/$1.pdf"' _ \
             < _work/inputs.txt
           sed 's/ /  /' _work/inputs.txt | sha256sum -c --quiet
       - run: python3 -I pipeline/run.py "$(basename "$(python3 -I pipeline/years.py)")" _work replay
@@ -100,7 +84,7 @@ jobs:
         with:
           name: site
           path: _site
-      - uses: cloudflare/wrangler-action@v3
+      - uses: cloudflare/wrangler-action@9acf94ace14e7dc412b076f2c5c20b8ce93c79cd # v3.15.0
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
@@ -116,11 +100,13 @@ jobs:
       id-token: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - id: google
-        uses: google-github-actions/auth@v2
+        uses: google-github-actions/auth@c200f3691d83b41bf9bbd8638997a462592937ed # v2.1.13
         with:
           workload_identity_provider: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ vars.GCP_SERVICE_ACCOUNT }}
