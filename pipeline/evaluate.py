@@ -28,6 +28,7 @@ PRICES = {"claude-haiku-5-5": (0.10, 0.50, 0.01, 0.125), "claude-sonnet-5-5": (2
 COLUMN = {"imaging": ("main", "L_xray_imaging")}
 # A verifier must accept this share of the facts the reviewer accepts.
 AGREEMENT = 0.9
+REJECT_AGREEMENT = 0.75
 Z = 1.96
 
 
@@ -178,7 +179,7 @@ def upper(s):
 
 def picks(readers, verifiers, reviewer):
     """The cheapest reader whose precision and recall could match the reviewer's model as a reader,
-    and the cheapest verifier that rejects every decoy and accepts what the reviewer accepts."""
+    and the cheapest verifier that rejects every decoy and mostly agrees with the reviewer."""
     decoys = reviewer["decoys_accepted"]
     best = next((s for s in readers if s["role"] == name(REVIEWER)), None)
     if not decoys["n"] or decoys["hits"] or not best or not best["precision"]["n"]:
@@ -194,7 +195,8 @@ def picks(readers, verifiers, reviewer):
                            and upper(s["recall"]) >= best["recall"]["share"]),
         "verifier": cheapest(verifiers, lambda s: not s["unanswered"] and s["decoys_accepted"]["n"]
                              and not s["decoys_accepted"]["hits"]
-                             and (s["agrees_accepted"]["share"] or 0) >= AGREEMENT),
+                             and (s["agrees_accepted"]["share"] or 0) >= AGREEMENT
+                             and (s["agrees_rejected"]["share"] or 0) >= REJECT_AGREEMENT),
     }
 
 
@@ -215,8 +217,8 @@ def report(readers, verifiers, reviewer, chosen):
               f"{shown(s['agrees_rejected'])} | {s['unanswered']} | {s['dollars']:.2f} |" for s in verifiers]
     lines += ["", "Intervals are 95% Wilson intervals.",
               f"Cheapest reader whose intervals reach {name(REVIEWER)}'s precision and recall: {chosen['reader']}.",
-              f"Cheapest verifier that accepts no decoy and at least {AGREEMENT:.0%} of the reviewer's accepts: "
-              f"{chosen['verifier']}."]
+              f"Cheapest verifier that accepts no decoy and at least {AGREEMENT:.0%} of the reviewer's accepts "
+              f"and {REJECT_AGREEMENT:.0%} of its rejects: {chosen['verifier']}."]
     return "\n".join(lines) + "\n"
 
 
