@@ -269,14 +269,13 @@ flowchart LR
   merge[Merge to main] --> site[Site workflow:<br>tests, build, deploy]
   docwf[Documents workflow, manual:<br>download PDFs, cut a release] --> tar[(documents.tar)]
   tar --> site
-  docwf -- starts --> site
   site --> worker[pdxplans.org]
   site --> sheet[Google Sheet]
 ```
 
-The Site workflow takes PDFs from the latest release.
-It downloads from carriers only when no release exists.
-Run the Documents workflow when `documents_checked.csv` or `LIVE` changes.
+The Site workflow takes PDFs from the release that `documents_release` in `config.json` names.
+Its build fails if that release lacks a document in `documents_checked.csv`.
+When a carrier re-issues a PDF, run the Documents workflow on `main`, then adopt the new release and hashes in one PR.
 After deploying, it updates the Google Sheet in place, so volunteers' comments stay on their cells.
 
 ---
@@ -285,8 +284,8 @@ After deploying, it updates the Google Sheet in place, so volunteers' comments s
 
 1. Write `data/2028/config.json`, `links.csv` and `found.csv`.
 2. Run the Pipeline workflow with year 2028. It builds `generated/` only.
-3. Merge that branch, and change `LIVE` to 2028 in `pipeline/years.py`.
-4. Run the Documents workflow. It also redeploys the site.
+3. Merge that branch.
+4. Cut a 2028 documents release. Then, in one PR, change `LIVE` to 2028 in `pipeline/years.py` and name the release in `data/2028/config.json`.
 5. Run the Pipeline workflow again. Now the model steps run.
 6. Review that branch, and merge it.
 

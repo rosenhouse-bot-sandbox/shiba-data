@@ -269,8 +269,7 @@ function planPage(plan) {
       el("td", {}, el("a", { href: "#", onclick: (e) => { e.preventDefault(); openDoc(id, 1, null, null); } }, kindName(d.kind))),
       el("td", {}, `${d.pages} pages`),
       el("td", {}, d.retrieved ? `copied ${d.retrieved}` : "not copied"),
-      el("td", {}, el("a", { href: d.url, target: "_blank", rel: "noopener" }, "carrier's copy ↗")),
-      el("td", { class: "warn" }, d.changed ? "The carrier has changed this file since the data was extracted." : ""));
+      el("td", {}, el("a", { href: d.url, target: "_blank", rel: "noopener" }, "carrier's copy ↗")));
   });
   const facts = [
     ["Plan ID", plan.plan_id], ["Organization", plan.organization], ["Type", plan.plan_type],
@@ -309,8 +308,7 @@ async function openDoc(docId, page, quote, note, otherQuotes = []) {
   markOpenPlans();
   $("#doc-title").textContent = `${kindName(doc.kind)} · ${doc.plan_ids.map((p) => plans[p]?.plan_name || p).join("; ")}`;
   $("#doc-source").href = doc.url;
-  $("#source-note").replaceChildren(...[note, doc.changed ? el("p", { class: "warn" },
-    "The carrier has changed this file since the data was extracted. Page numbers may be off.") : null].filter(Boolean));
+  $("#source-note").replaceChildren(...(note ? [note] : []));
   viewer.cite = quote ? { page, quote } : null;
   viewer.quotes = [viewer.cite, ...otherQuotes.filter((q) => q.doc === docId)].filter(Boolean);
   if (!doc.file) {

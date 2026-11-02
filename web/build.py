@@ -157,24 +157,24 @@ def download(url):
 
 def fetch_pdfs(docs, out_dir, today):
     (out_dir / "pdfs").mkdir(parents=True, exist_ok=True)
-    failed = []
-    for doc_id, doc in docs.items():
+    manifest, failed = {}, []
+    for doc in docs.values():
         raw = download(doc["url"])
         if not raw.startswith(b"%PDF"):
-            doc.update(file=None, retrieved=None, changed=None)
             failed.append(doc["url"])
             continue
-        doc["file"] = f"pdfs/{doc_id}.pdf"
-        doc["retrieved"] = today
-        doc["changed"] = hashlib.sha256(raw).hexdigest() != doc["sha256"]
-        (out_dir / doc["file"]).write_bytes(raw)
-    return failed
+        doc_id = hashlib.sha256(raw).hexdigest()[:16]
+        manifest[doc_id] = {"file": f"pdfs/{doc_id}.pdf", "url": doc["url"], "retrieved": today}
+        (out_dir / manifest[doc_id]["file"]).write_bytes(raw)
+    return manifest, failed
 
 
 def save_documents(docs, out_dir, today):
-    failed = fetch_pdfs(docs, out_dir, today)
-    manifest = {i: {k: d[k] for k in ("file", "retrieved", "changed")} for i, d in docs.items() if d["file"]}
+    manifest, failed = fetch_pdfs(docs, out_dir, today)
     (out_dir / "documents.json").write_text(json.dumps(manifest, indent=1))
+    for doc_id, entry in manifest.items():
+        if doc_id not in docs:
+            print(f"::notice::The carrier re-issued {entry['url']}. Adopt it in documents_checked.csv.")
     return failed
 
 
@@ -182,7 +182,8 @@ def attach_documents(docs, release_dir, out_dir):
     manifest = json.loads((release_dir / "documents.json").read_text())
     (out_dir / "pdfs").mkdir(parents=True, exist_ok=True)
     for doc_id, doc in docs.items():
-        doc.update(manifest.get(doc_id, {"file": None, "retrieved": None, "changed": None}))
+        entry = manifest.get(doc_id, {})
+        doc.update(file=entry.get("file"), retrieved=entry.get("retrieved"))
         if doc["file"]:
             shutil.copyfile(release_dir / doc["file"], out_dir / doc["file"])
     return [i for i, d in docs.items() if not d["file"]]
@@ -239,9 +240,8 @@ def main(command, out, release=None):
     (out_dir / "index.html").write_text(titled((HERE / "static" / "index.html").read_text(), site))
     if release:
         missing = attach_documents(site["docs"], pathlib.Path(release), out_dir)
-        for doc_id in missing:
-            print(f"::warning::Not in the documents release, so the site links to the carrier: "
-                  f"{site['docs'][doc_id]['url']}. Run the Documents workflow to add it.")
+        if missing:
+            sys.exit("Not in the documents release:\n" + "\n".join(site["docs"][i]["url"] for i in missing))
     site["built"] = datetime.datetime.now(datetime.timezone.utc).isoformat()
     (out_dir / "data.json").write_text(json.dumps(site))
 

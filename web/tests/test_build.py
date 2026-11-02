@@ -288,30 +288,35 @@ class FetchPdfsTest(unittest.TestCase):
     def tearDown(self):
         self.tmp.cleanup()
 
-    def test_saves_matching_pdf_and_records_date(self):
-        build.fetch_pdfs(self.docs, self.dir / "site", "2026-10-26")
-        [doc] = self.docs.values()
-        self.assertEqual(doc["file"], f"pdfs/{doc['sha256'][:16]}.pdf")
-        self.assertEqual(doc["retrieved"], "2026-10-26")
-        self.assertFalse(doc["changed"])
-        self.assertEqual((self.dir / "site" / doc["file"]).read_bytes(), b"%PDF-1.4 test")
+    def test_names_each_pdf_by_its_own_hash(self):
+        manifest, _ = build.fetch_pdfs(self.docs, self.dir / "release", "2026-10-26")
+        [(doc_id, entry)] = manifest.items()
+        self.assertEqual(doc_id, next(iter(self.docs)))
+        self.assertEqual(entry, {"file": f"pdfs/{doc_id}.pdf", "url": self.src.as_uri(), "retrieved": "2026-10-26"})
+        self.assertEqual((self.dir / "release" / entry["file"]).read_bytes(), b"%PDF-1.4 test")
 
-    def test_flags_changed_pdf(self):
+    def test_names_a_reissued_pdf_by_its_new_hash(self):
         self.src.write_bytes(b"%PDF-1.4 reissued")
-        build.fetch_pdfs(self.docs, self.dir / "site", "2026-10-26")
-        [doc] = self.docs.values()
-        self.assertTrue(doc["changed"])
-        self.assertTrue(os.path.exists(self.dir / "site" / doc["file"]))
+        manifest, _ = build.fetch_pdfs(self.docs, self.dir / "release", "2026-10-26")
+        self.assertEqual(list(manifest), [hashlib.sha256(b"%PDF-1.4 reissued").hexdigest()[:16]])
+
+    def test_save_documents_names_reissued_urls(self):
+        self.src.write_bytes(b"%PDF-1.4 reissued")
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out):
+            build.save_documents(self.docs, self.dir / "release", "2026-10-26")
+        self.assertIn(f"re-issued {self.src.as_uri()}", out.getvalue())
+
+    def test_save_documents_is_quiet_about_unchanged_pdfs(self):
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out):
+            build.save_documents(self.docs, self.dir / "release", "2026-10-26")
+        self.assertNotIn("re-issued", out.getvalue())
 
     def test_reports_failed_download(self):
         self.src.write_bytes(b"<html>not found</html>")
-        failed = build.fetch_pdfs(self.docs, self.dir / "site", "2026-10-26")
-        [doc] = self.docs.values()
-        self.assertIsNone(doc["file"])
-        self.assertEqual(failed, [doc["url"]])
-
-    def test_reports_no_failures(self):
-        self.assertEqual(build.fetch_pdfs(self.docs, self.dir / "site", "2026-10-26"), [])
+        manifest, failed = build.fetch_pdfs(self.docs, self.dir / "release", "2026-10-26")
+        self.assertEqual((manifest, failed), ({}, [self.src.as_uri()]))
 
 
 class DocumentsTest(unittest.TestCase):
@@ -332,7 +337,7 @@ class DocumentsTest(unittest.TestCase):
         failed = build.save_documents(self.docs, self.dir / "release", "2026-10-27")
         self.assertEqual(failed, [self.docs["0000000000000000"]["url"]])
         manifest = json.loads((self.dir / "release" / "documents.json").read_text())
-        self.assertEqual(manifest, {self.id: {"file": f"pdfs/{self.id}.pdf", "retrieved": "2026-10-27", "changed": False}})
+        self.assertEqual(manifest, {self.id: {"file": f"pdfs/{self.id}.pdf", "url": self.src.as_uri(), "retrieved": "2026-10-27"}})
         self.assertTrue((self.dir / "release" / f"pdfs/{self.id}.pdf").exists())
 
     def test_site_uses_release_pdfs_and_marks_others_missing(self):
@@ -340,7 +345,8 @@ class DocumentsTest(unittest.TestCase):
         site_docs = {i: {"url": d["url"], "sha256": d["sha256"]} for i, d in self.docs.items()}
         missing = build.attach_documents(site_docs, self.dir / "release", self.dir / "site")
         self.assertEqual(missing, ["0000000000000000"])
-        self.assertEqual(site_docs[self.id]["retrieved"], "2026-10-27")
+        self.assertEqual(site_docs[self.id], {"url": self.src.as_uri(), "sha256": self.docs[self.id]["sha256"],
+                                              "file": f"pdfs/{self.id}.pdf", "retrieved": "2026-10-27"})
         self.assertIsNone(site_docs["0000000000000000"]["file"])
         self.assertEqual((self.dir / "site" / f"pdfs/{self.id}.pdf").read_bytes(), b"%PDF-1.4 test")
 
@@ -353,14 +359,18 @@ class DocumentsTest(unittest.TestCase):
 
     def test_site_command_attaches_release(self):
         build.save_documents(self.docs, self.dir / "release", "2026-10-27")
-        site = bare_site(docs={i: {"url": d["url"], "sha256": d["sha256"]} for i, d in self.docs.items()})
-        out = io.StringIO()
-        with mock.patch.object(build, "site_data", return_value=site), contextlib.redirect_stdout(out):
+        site = bare_site(docs={self.id: {"url": self.src.as_uri(), "sha256": self.docs[self.id]["sha256"]}})
+        with mock.patch.object(build, "site_data", return_value=site):
             build.main("site", self.dir / "site", self.dir / "release")
         data = json.loads((self.dir / "site" / "data.json").read_text())
         self.assertEqual(data["docs"][self.id]["file"], f"pdfs/{self.id}.pdf")
-        self.assertIn("::warning::", out.getvalue())
-        self.assertIn("gone.pdf", out.getvalue())
+
+    def test_site_command_fails_when_the_release_lacks_a_document(self):
+        build.save_documents(self.docs, self.dir / "release", "2026-10-27")
+        site = bare_site(docs={i: {"url": d["url"], "sha256": d["sha256"]} for i, d in self.docs.items()})
+        with mock.patch.object(build, "site_data", return_value=site), self.assertRaises(SystemExit) as e:
+            build.main("site", self.dir / "site", self.dir / "release")
+        self.assertIn("gone.pdf", str(e.exception.code))
 
     def test_site_command_warns_of_dropped_cites(self):
         dropped = dict(cite("main", "E_moop", "$6,800", "u", 45, "stale quote"), layer="edits.csv", line="")

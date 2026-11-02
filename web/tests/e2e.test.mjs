@@ -363,8 +363,6 @@ test("every citation's and comment's quote is highlighted in full on its page", 
             await page.locator("#source-note p.cite a").nth(i).click();
           }
           await shown(c.doc, c.page);
-          // A re-issued PDF may have moved the quote; the viewer warns about it instead.
-          if (site.docs[c.doc].changed) continue;
           // Quotes running down neighbouring columns interleave in page order, so also join each column alone.
           const marks = await page.$$eval(".textLayer mark", (ms) => ms.map((m) => [m.parentElement.style.left, m.textContent]));
           const columns = Object.values(Object.groupBy(marks, ([left]) => left));
@@ -400,19 +398,15 @@ test("a slow document never shows the previous document's pages", async () => {
   await fresh.close();
 });
 
-test("the viewer warns about changed and missing copies", async () => {
+test("the viewer links to the carrier when no copy is hosted", async () => {
   const fresh = await browser.newPage({ viewport: { width: 1600, height: 1000 } });
-  const [changed, missing] = site.plans.find((p) => p.plan_id === "H2001-045-0").docs;
+  const [missing] = site.plans.find((p) => p.plan_id === "H2001-045-0").docs;
   await fresh.route("**/data.json", (route) => {
     const edited = structuredClone(site);
-    edited.docs[changed].changed = true;
     edited.docs[missing].file = null;
     route.fulfill({ json: edited });
   });
   await fresh.goto(`${base}#/plan/H2001-045-0`);
-  await fresh.locator("table.docs a", { hasText: kindName(site.docs[changed].kind) }).click();
-  await fresh.waitForSelector(`#page-area[data-shown="${changed} 1"]`);
-  assert.match(await fresh.textContent("#source-note"), /carrier has changed this file/);
   await fresh.locator("table.docs a", { hasText: kindName(site.docs[missing].kind) }).click();
   assert.match(await fresh.textContent("#page-area"), /No copy of this document is hosted here/);
   assert.equal(await fresh.getAttribute("#viewer a#doc-source", "href"), site.docs[missing].url);

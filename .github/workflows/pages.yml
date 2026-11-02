@@ -33,16 +33,10 @@ jobs:
       - env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          tag=$(jq -er .documents_release "../$(python3 -I ../pipeline/years.py)/config.json")
+          gh release download "$tag" --pattern documents.tar --dir ..
           mkdir ../_documents
-          if gh release download --pattern documents.tar --dir .. 2> ../gh.err; then
-            tar -xf ../documents.tar -C ../_documents
-          elif grep -q "release not found" ../gh.err; then
-            echo "::warning::No documents release yet. Run the Documents workflow to cut one."
-            python3 -I build.py documents ../_documents
-          else
-            cat ../gh.err
-            exit 1
-          fi
+          tar -xf ../documents.tar -C ../_documents
       - run: python3 -I build.py site ../_site ../_documents
       - run: npm ci && npx playwright install --with-deps chromium
       - run: SITE=../_site node --test tests/e2e.test.mjs
