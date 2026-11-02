@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "low",
+ "task": "fd314311528d4668.md",
+ "reply": "[{\"plan_id\":\"H9003-001-0\",\"benefit\":\"imaging.diagnostic.advanced\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$150\",\"unit\":\"per visit\",\"page\":5,\"quotes\":[\"• MRI, CT, and PET            $150 per visit\"]},\n{\"plan_id\":\"H9003-006-0\",\"benefit\":\"imaging.diagnostic.advanced\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$225\",\"unit\":\"per visit\",\"page\":5,\"quotes\":[\"$225 per visit\"]},\n{\"plan_id\":\"H9003-009-0\",\"benefit\":\"imaging.diagnostic.advanced\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$350\",\"unit\":\"per visit\",\"page\":5,\"quotes\":[\"$350 per visit\"]},\n{\"plan_id\":\"H9003-009-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$15\",\"unit\":\"per visit\",\"page\":5,\"quotes\":[\"• X-rays and ultrasounds      $0                       $0                       $15 per visit\"]},\n{\"plan_id\":\"H9003-009-0\",\"benefit\":\"imaging.diagnostic.ultrasound\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$15\",\"unit\":\"per visit\",\"page\":5,\"quotes\":[\"• X-rays and ultrasounds      $0                       $0                       $15 per visit\"]}]",
+ "usage": {
+  "input_tokens": 4556,
+  "output_tokens": 557,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

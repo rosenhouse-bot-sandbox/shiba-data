@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "low",
+ "task": "0050f865534f41bb.md",
+ "reply": "```json\n[\n{\"plan_id\":\"H1036-323-0\",\"benefit\":\"imaging.diagnostic.advanced\",\"setting\":\"office.pcp\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$330\",\"page\":62,\"quotes\":[\"Advanced Imaging Services $330 copayment – PCP's Office – Specialist's Office\"],\"note\":\"Quote built from the row as read; the table columns interleave.\"},\n{\"plan_id\":\"H1036-323-0\",\"benefit\":\"imaging.diagnostic.advanced\",\"setting\":\"office.specialist\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$330\",\"page\":62,\"quotes\":[\"Advanced Imaging Services $330 copayment – PCP's Office – Specialist's Office\"],\"note\":\"Same caveat as above.\"},\n{\"plan_id\":\"H1036-323-0\",\"benefit\":\"imaging.diagnostic.advanced\",\"setting\":\"outpatient_hospital\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$345\",\"page\":64,\"quotes\":[\"Advanced Imaging Services $345 copayment – Outpatient Hospital\"]},\n{\"plan_id\":\"H1036-323-0\",\"benefit\":\"imaging.diagnostic.nuclear\",\"setting\":\"outpatient_hospital\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$325\",\"page\":64,\"quotes\":[\"Nuclear Medicine Services $325 copayment – Outpatient Hospital\"]},\n{\"plan_id\":\"H1036-323-0\",\"benefit\":\"imaging.diagnostic.nuclear\",\"setting\":\"freestanding\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$325\",\"page\":63,\"quotes\":[\"Nuclear Medicine Services $325 copayment – Outpatient Hospital – Freestanding Radiological Facility\"]},\n{\"plan_id\":\"H1036-323-0\",\"benefit\":\"imaging.diagnostic.mammogram\",\"setting\":\"outpatient_hospital\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$0\",\"page\":64,\"quotes\":[\"Diagnostic Mammography $0 copayment – Outpatient Hospital\"]},\n{\"plan_id\":\"H1036-323-0\",\"benefit\":\"imaging.xray\",\"setting\":\"outpatient_hospital\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$145\",\"page\":64,\"quotes\":[\"Basic Radiological Services $145 copayment – Outpatient Hospital\"],\"note\":\"Basic Radiological Services assumed to be X-rays\"}\n]\n```",
+ "usage": {
+  "input_tokens": 35115,
+  "output_tokens": 917,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

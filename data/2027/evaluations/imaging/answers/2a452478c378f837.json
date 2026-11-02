@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "low",
+ "task": "61de2101267140ce.md",
+ "reply": "```json\n[{\"plan_id\": \"H1372-003-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"unit\": \"\", \"limit\": \"\", \"page\": 3, \"quotes\": [\"Outpatient x-rays 20% coinsurance\"], \"note\": \"The row names no setting. Prior authorization is not required in a Nursing Facility or Physician Office, but no different cost is stated there.\"},\n{\"plan_id\": \"H1372-003-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"unit\": \"\", \"limit\": \"\", \"page\": 3, \"quotes\": [\"Diagnostic radiology services (e.g., MRI, CAT scan) 20% coinsurance\"], \"note\": \"The MRI and CAT scan examples are listed with 'e.g.', so they may not be the complete list of services. The row is still mapped to the general diagnostic radiology benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2650,
+  "output_tokens": 1387,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

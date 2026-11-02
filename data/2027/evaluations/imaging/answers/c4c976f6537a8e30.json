@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "task": "61de2101267140ce.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H1372-003-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"unit\": \"\", \"limit\": \"\", \"page\": 3, \"quotes\": [\"Diagnostic radiology services 20% coinsurance Yes, prior authorization is\"], \"note\": \"The service name wraps onto a second line, '(e.g., MRI, CAT scan)'. The quote is the first line of the row, which I made longer so it appears only once on the page.\"}]\n```",
+ "usage": {
+  "input_tokens": 2850,
+  "output_tokens": 2111,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

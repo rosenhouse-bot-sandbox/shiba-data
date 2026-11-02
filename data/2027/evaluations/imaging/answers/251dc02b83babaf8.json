@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "task": "v-4ec81cd0d2695486.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 78 X-rays row: 20% coinsurance, no setting named, in network.\"},{\"id\":1,\"ok\":true,\"reason\":\"Page 79 row names MRIs among the diagnostic non-laboratory tests at 20% coinsurance.\"},{\"id\":2,\"ok\":true,\"reason\":\"Page 78 X-rays row: 20% coinsurance.\"},{\"id\":3,\"ok\":true,\"reason\":\"Page 79 row names CT scans, 20% coinsurance.\"},{\"id\":4,\"ok\":true,\"reason\":\"Page 79 row names MRIs, 20% coinsurance up to the out-of-pocket maximum.\"},{\"id\":5,\"ok\":true,\"reason\":\"Page 79 row names PET scans, 20% coinsurance.\"},{\"id\":6,\"ok\":true,\"reason\":\"Page 79 row names PET scans, 20% coinsurance up to the out-of-pocket maximum.\"},{\"id\":7,\"ok\":true,\"reason\":\"Page 79 row names MRIs, 20% coinsurance.\"},{\"id\":8,\"ok\":true,\"reason\":\"Page 79 row names CT scans, 20% coinsurance.\"},{\"id\":9,\"ok\":true,\"reason\":\"Page 79 row names PET scans, 20% coinsurance.\"},{\"id\":10,\"ok\":true,\"reason\":\"Page 79 row names CT scans, 20% coinsurance up to the out-of-pocket maximum.\"},{\"id\":11,\"ok\":true,\"reason\":\"Page 78 X-rays row: 20% coinsurance up to the out-of-pocket maximum. Prior authorization is a condition on the row, not a different cost.\"}]",
+ "usage": {
+  "input_tokens": 4479,
+  "output_tokens": 1026,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

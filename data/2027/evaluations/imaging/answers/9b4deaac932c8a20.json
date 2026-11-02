@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "task": "05d56d5f782708e7.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2056-003-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$350\", \"page\": 4, \"quotes\": [\"Diagnostic radiology services, such as CT/ CAT scan and MRI\", \"$350 copay\"], \"note\": \"The row says 'such as CT/CAT scan and MRI', which is not an exact list of services, so I mapped it to the broader diagnostic radiology benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 3791,
+  "output_tokens": 841,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

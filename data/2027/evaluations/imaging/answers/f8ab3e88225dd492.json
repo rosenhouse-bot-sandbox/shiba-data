@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "high",
+ "task": "4ec81cd0d2695486.md",
+ "reply": "```json\n[{\"plan_id\": \"H1372-003-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"unit\": \"\", \"limit\": \"\", \"page\": 78, \"quotes\": [\"X-rays 20% coinsurance\"], \"note\": \"\"},\n{\"plan_id\": \"H1372-003-0\", \"benefit\": \"imaging.diagnostic.advanced.ct\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"unit\": \"\", \"limit\": \"\", \"page\": 79, \"quotes\": [\"Diagnostic non-laboratory tests such as CT scans, MRIs, 20% coinsurance\"], \"note\": \"Same cost row as the MRI and PET facts; the row also lists EKGs, so it is split by service.\"},\n{\"plan_id\": \"H1372-003-0\", \"benefit\": \"imaging.diagnostic.advanced.mri\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"unit\": \"\", \"limit\": \"\", \"page\": 79, \"quotes\": [\"Diagnostic non-laboratory tests such as CT scans, MRIs, 20% coinsurance\"], \"note\": \"Same cost row as the CT and PET facts; the row also lists EKGs, so it is split by service.\"},\n{\"plan_id\": \"H1372-003-0\", \"benefit\": \"imaging.diagnostic.advanced.pet\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"unit\": \"\", \"limit\": \"\", \"page\": 79, \"quotes\": [\"Diagnostic non-laboratory tests such as CT scans, MRIs, 20% coinsurance\"], \"note\": \"Same cost row as the CT and MRI facts; the row also lists EKGs, so it is split by service.\"}]\n```",
+ "usage": {
+  "input_tokens": 9867,
+  "output_tokens": 6139,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

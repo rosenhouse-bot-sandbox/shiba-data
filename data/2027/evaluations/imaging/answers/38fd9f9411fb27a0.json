@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "task": "28e22b4acec7d885.retry.md",
+ "reply": "```json\n[\n{\"plan_id\":\"H2406-073-0\",\"benefit\":\"imaging.diagnostic\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$320\",\"page\":4,\"quotes\":[\"$320 copay otherwise\"],\"note\":\"Row is 'e.g. MRI, CT scan', so the $320 may cover diagnostic radiology other than mammograms.\"},\n{\"plan_id\":\"H2406-073-0\",\"benefit\":\"imaging.diagnostic.mammogram\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$0\",\"page\":4,\"quotes\":[\"$0 copay for each diagnostic mammogram\"],\"note\":\"\"},\n{\"plan_id\":\"H2406-073-0\",\"benefit\":\"imaging.diagnostic\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"30%\",\"page\":4,\"quotes\":[\"Diagnostic $0 copay for each 30% coinsurance\"],\"note\":\"Out-of-network column for the diagnostic radiology row.\"},\n{\"plan_id\":\"H2406-073-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$30\",\"page\":4,\"quotes\":[\"$30 copay\"],\"note\":\"\"},\n{\"plan_id\":\"H2406-073-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$35\",\"page\":4,\"quotes\":[\"$35 copay\"],\"note\":\"\"}\n]\n```",
+ "usage": {
+  "input_tokens": 4954,
+  "output_tokens": 1421,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

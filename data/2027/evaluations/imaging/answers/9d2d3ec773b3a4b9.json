@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "medium",
+ "task": "28e22b4acec7d885.md",
+ "reply": "```json\n[{\"plan_id\": \"H2406-073-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$30\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"Outpatient X-rays $30 copay $35 copay\"], \"note\": \"The row gives in-network and out-of-network costs together; the setting is not named beyond 'outpatient'.\"},\n{\"plan_id\": \"H2406-073-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$35\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"Outpatient X-rays $30 copay $35 copay\"], \"note\": \"The row gives in-network and out-of-network costs together; the setting is not named beyond 'outpatient'.\"},\n{\"plan_id\": \"H2406-073-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$320\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"$320 copay otherwise\"], \"note\": \"Applies to diagnostic radiology services other than diagnostic mammograms, which have a separate $0 copay. The document gives only examples (e.g. MRI, CT scan), so the broad benefit is used.\"},\n{\"plan_id\": \"H2406-073-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per diagnostic mammogram\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"$0 copay for each diagnostic mammogram\"], \"note\": \"\"},\n{\"plan_id\": \"H2406-073-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"$0 copay for each diagnostic mammogram 30% coinsurance\"], \"note\": \"The out-of-network 30% coinsurance sits in the same row as the mammogram copay. The text layout splits the cell, so the quote joins two lines.\"}]\n```",
+ "usage": {
+  "input_tokens": 4146,
+  "output_tokens": 4463,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

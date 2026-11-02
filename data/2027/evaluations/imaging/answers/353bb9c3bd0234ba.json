@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "task": "50159487a52ccddf.retry.md",
+ "reply": "```json\n[\n{\"plan_id\":\"H7006-018-0\",\"benefit\":\"imaging.diagnostic\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"50%\",\"page\":7,\"quotes\":[\"$0 - $60 copay* Out-of-Network Out-of-Network 50% coinsurance 50% coinsurance\"]},\n{\"plan_id\":\"H7006-021-0\",\"benefit\":\"imaging.diagnostic\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"50%\",\"page\":7,\"quotes\":[\"$0 - $60 copay* Out-of-Network Out-of-Network 50% coinsurance 50% coinsurance\"]},\n{\"plan_id\":\"H7006-018-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$0\",\"page\":7,\"quotes\":[\"Outpatient X-rays In-Network In-Network $0 copay* $0 copay*\"]},\n{\"plan_id\":\"H7006-018-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"50%\",\"page\":7,\"quotes\":[\"Outpatient X-rays In-Network In-Network $0 copay* $0 copay* Out-of-Network Out-of-Network 50% coinsurance 50% coinsurance\"]},\n{\"plan_id\":\"H7006-021-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$0\",\"page\":7,\"quotes\":[\"Outpatient X-rays In-Network In-Network $0 copay* $0 copay*\"]},\n{\"plan_id\":\"H7006-021-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"50%\",\"page\":7,\"quotes\":[\"Outpatient X-rays In-Network In-Network $0 copay* $0 copay* Out-of-Network Out-of-Network 50% coinsurance 50% coinsurance\"]}\n]\n```",
+ "usage": {
+  "input_tokens": 3726,
+  "output_tokens": 4875,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

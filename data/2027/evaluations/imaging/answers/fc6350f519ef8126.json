@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "task": "d594b0a1d3772214.md",
+ "reply": "```json\n[\n{\"plan_id\":\"H2056-003-0\",\"benefit\":\"imaging.diagnostic.mammogram\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$0\",\"unit\":\"per diagnostic mammogram\",\"page\":41,\"quotes\":[\"$0 copay for each diagnostic mammogram.\"]},\n{\"plan_id\":\"H2056-003-0\",\"benefit\":\"imaging.diagnostic.advanced.ct\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$350\",\"unit\":\"per scan\",\"page\":58,\"quotes\":[\"$350 copay for each Medicare‑covered CT scan.\"]},\n{\"plan_id\":\"H2056-003-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$15\",\"unit\":\"per x-ray\",\"page\":58,\"quotes\":[\"$15 copay for each Medicare‑covered x‑ray.\"]},\n{\"plan_id\":\"H2056-003-0\",\"benefit\":\"imaging.diagnostic.advanced.ct\",\"setting\":\"outpatient_hospital\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$350\",\"unit\":\"per scan\",\"page\":60,\"quotes\":[\"$350 copay for each Medicare‑covered CT scan.\"]},\n{\"plan_id\":\"H2056-003-0\",\"benefit\":\"imaging.xray\",\"setting\":\"outpatient_hospital\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$15\",\"unit\":\"per x-ray\",\"page\":60,\"quotes\":[\"$15 copay for each Medicare‑covered x‑ray.\"]}\n]\n```",
+ "usage": {
+  "input_tokens": 18289,
+  "output_tokens": 597,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "low",
+ "task": "61de2101267140ce.md",
+ "reply": "[\n{\"plan_id\":\"H1372-003-0\",\"benefit\":\"imaging.diagnostic\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"20%\",\"unit\":\"\",\"limit\":\"\",\"page\":3,\"quotes\":[\"Diagnostic tests and procedures 20% coinsurance\"],\"note\":\"Row 'Diagnostic tests and procedures' is a general diagnostic row; may include more than radiology.\"},\n{\"plan_id\":\"H1372-003-0\",\"benefit\":\"imaging.diagnostic.advanced\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"20%\",\"unit\":\"\",\"limit\":\"\",\"page\":3,\"quotes\":[\"Diagnostic radiology services 20% coinsurance\"],\"note\":\"Row says 'e.g., MRI, CAT scan', so it is diagnostic radiology generally; mapped to the advanced level cautiously.\"},\n{\"plan_id\":\"H1372-003-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"20%\",\"unit\":\"\",\"limit\":\"\",\"page\":3,\"quotes\":[\"Outpatient x-rays 20% coinsurance\"],\"note\":\"\"}\n]",
+ "usage": {
+  "input_tokens": 2650,
+  "output_tokens": 443,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "medium",
+ "task": "034e045a83e5b49d.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3817-008-1\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$10\", \"unit\": \"\", \"limit\": \"\", \"page\": 5, \"quotes\": [\"Outpatient x-rays $10 50%\"], \"note\": \"\"},\n{\"plan_id\": \"H3817-008-1\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"\", \"limit\": \"\", \"page\": 5, \"quotes\": [\"Outpatient x-rays $10 50%\"], \"note\": \"\"},\n{\"plan_id\": \"H3817-008-1\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$300\", \"unit\": \"\", \"limit\": \"\", \"page\": 5, \"quotes\": [\"Diagnostic radiology (MRI, CT, etc.) $300 50%\"], \"note\": \"\"},\n{\"plan_id\": \"H3817-008-1\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"\", \"limit\": \"\", \"page\": 5, \"quotes\": [\"Diagnostic radiology (MRI, CT, etc.) $300 50%\"], \"note\": \"\"},\n{\"plan_id\": \"H3817-008-1\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 5, \"quotes\": [\"Diagnostic mammography $0 50%\"], \"note\": \"\"},\n{\"plan_id\": \"H3817-008-1\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"\", \"limit\": \"\", \"page\": 5, \"quotes\": [\"Diagnostic mammography $0 50%\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 3937,
+  "output_tokens": 2034,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

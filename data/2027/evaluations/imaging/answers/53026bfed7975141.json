@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "task": "61de2101267140ce.md",
+ "reply": "```json\n[\n  {\n    \"plan_id\": \"H1372-003-0\",\n    \"benefit\": \"imaging.diagnostic\",\n    \"setting\": \"any\",\n    \"network\": \"in\",\n    \"covered_by\": \"medicare\",\n    \"cost_kind\": \"coinsurance\",\n    \"amount\": \"20%\",\n    \"page\": 3,\n    \"quotes\": [\"Diagnostic radiology services 20% coinsurance\"]\n  },\n  {\n    \"plan_id\": \"H1372-003-0\",\n    \"benefit\": \"imaging.xray\",\n    \"setting\": \"any\",\n    \"network\": \"in\",\n    \"covered_by\": \"medicare\",\n    \"cost_kind\": \"coinsurance\",\n    \"amount\": \"20%\",\n    \"page\": 3,\n    \"quotes\": [\"Outpatient x-rays 20% coinsurance\"]\n  }\n]\n```",
+ "usage": {
+  "input_tokens": 2650,
+  "output_tokens": 1014,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

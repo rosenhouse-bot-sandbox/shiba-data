@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "medium",
+ "task": "28e22b4acec7d885.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2406-073-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"$0 copay for each            30% coinsurance\"], \"note\": \"The out-of-network 30% coinsurance is in the row for the diagnostic mammogram. The layout places it on the same line as the in-network $0 copay, and the quote uses that line as printed.\"}]\n```",
+ "usage": {
+  "input_tokens": 4428,
+  "output_tokens": 1230,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

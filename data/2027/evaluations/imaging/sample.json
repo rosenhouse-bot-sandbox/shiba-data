@@ -1,0 +1,510 @@
+{
+ "documents": [
+  "0050f865534f41bb",
+  "034e045a83e5b49d",
+  "05d56d5f782708e7",
+  "161c63c8abccc6dc",
+  "28e22b4acec7d885",
+  "29166053e638f7e6",
+  "2a970381e331a34a",
+  "2aa68f4230962abc",
+  "2c828c1ac1616719",
+  "2eb4caa23079d78f",
+  "37b0122461ea99ed",
+  "4ec81cd0d2695486",
+  "50159487a52ccddf",
+  "557f08e61a7e8f42",
+  "61de2101267140ce",
+  "bee1858e7e963c62",
+  "d594b0a1d3772214",
+  "fd314311528d4668"
+ ],
+ "readers": [
+  {
+   "role": "claude-haiku-5-5-low",
+   "unanswered": 0,
+   "dollars": 0.07868750000000001,
+   "expected": {
+    "hits": 16,
+    "n": 19,
+    "share": 0.842,
+    "interval": [
+     0.624,
+     0.945
+    ]
+   },
+   "precision": {
+    "hits": 135,
+    "n": 147,
+    "share": 0.918,
+    "interval": [
+     0.863,
+     0.953
+    ]
+   },
+   "recall": {
+    "hits": 135,
+    "n": 204,
+    "share": 0.662,
+    "interval": [
+     0.594,
+     0.723
+    ]
+   }
+  },
+  {
+   "role": "claude-haiku-5-5-medium",
+   "unanswered": 0,
+   "dollars": 0.0958153,
+   "expected": {
+    "hits": 15,
+    "n": 19,
+    "share": 0.789,
+    "interval": [
+     0.567,
+     0.915
+    ]
+   },
+   "precision": {
+    "hits": 143,
+    "n": 145,
+    "share": 0.986,
+    "interval": [
+     0.951,
+     0.996
+    ]
+   },
+   "recall": {
+    "hits": 143,
+    "n": 204,
+    "share": 0.701,
+    "interval": [
+     0.635,
+     0.76
+    ]
+   }
+  },
+  {
+   "role": "claude-haiku-5-5-high",
+   "unanswered": 0,
+   "dollars": 0.161399,
+   "expected": {
+    "hits": 16,
+    "n": 19,
+    "share": 0.842,
+    "interval": [
+     0.624,
+     0.945
+    ]
+   },
+   "precision": {
+    "hits": 129,
+    "n": 145,
+    "share": 0.89,
+    "interval": [
+     0.828,
+     0.931
+    ]
+   },
+   "recall": {
+    "hits": 129,
+    "n": 204,
+    "share": 0.632,
+    "interval": [
+     0.564,
+     0.696
+    ]
+   }
+  },
+  {
+   "role": "claude-sonnet-5-5-low",
+   "unanswered": 1,
+   "dollars": 0.7841880000000001,
+   "expected": {
+    "hits": 15,
+    "n": 19,
+    "share": 0.789,
+    "interval": [
+     0.567,
+     0.915
+    ]
+   },
+   "precision": {
+    "hits": 92,
+    "n": 101,
+    "share": 0.911,
+    "interval": [
+     0.839,
+     0.952
+    ]
+   },
+   "recall": {
+    "hits": 92,
+    "n": 204,
+    "share": 0.451,
+    "interval": [
+     0.384,
+     0.52
+    ]
+   }
+  },
+  {
+   "role": "claude-sonnet-5-5-medium",
+   "unanswered": 0,
+   "dollars": 0.789948,
+   "expected": {
+    "hits": 16,
+    "n": 19,
+    "share": 0.842,
+    "interval": [
+     0.624,
+     0.945
+    ]
+   },
+   "precision": {
+    "hits": 112,
+    "n": 129,
+    "share": 0.868,
+    "interval": [
+     0.799,
+     0.916
+    ]
+   },
+   "recall": {
+    "hits": 112,
+    "n": 204,
+    "share": 0.549,
+    "interval": [
+     0.48,
+     0.616
+    ]
+   }
+  },
+  {
+   "role": "claude-sonnet-5-5-high",
+   "unanswered": 0,
+   "dollars": 1.1749500000000002,
+   "expected": {
+    "hits": 18,
+    "n": 19,
+    "share": 0.947,
+    "interval": [
+     0.754,
+     0.991
+    ]
+   },
+   "precision": {
+    "hits": 144,
+    "n": 151,
+    "share": 0.954,
+    "interval": [
+     0.907,
+     0.977
+    ]
+   },
+   "recall": {
+    "hits": 144,
+    "n": 204,
+    "share": 0.706,
+    "interval": [
+     0.64,
+     0.764
+    ]
+   }
+  },
+  {
+   "role": "claude-opus-5-5-low",
+   "unanswered": 0,
+   "dollars": 1.857132,
+   "expected": {
+    "hits": 18,
+    "n": 19,
+    "share": 0.947,
+    "interval": [
+     0.754,
+     0.991
+    ]
+   },
+   "precision": {
+    "hits": 110,
+    "n": 118,
+    "share": 0.932,
+    "interval": [
+     0.872,
+     0.965
+    ]
+   },
+   "recall": {
+    "hits": 110,
+    "n": 204,
+    "share": 0.539,
+    "interval": [
+     0.471,
+     0.606
+    ]
+   }
+  },
+  {
+   "role": "claude-opus-5-5-medium",
+   "unanswered": 0,
+   "dollars": 2.050532,
+   "expected": {
+    "hits": 19,
+    "n": 19,
+    "share": 1.0,
+    "interval": [
+     0.832,
+     1.0
+    ]
+   },
+   "precision": {
+    "hits": 135,
+    "n": 178,
+    "share": 0.758,
+    "interval": [
+     0.691,
+     0.815
+    ]
+   },
+   "recall": {
+    "hits": 135,
+    "n": 204,
+    "share": 0.662,
+    "interval": [
+     0.594,
+     0.723
+    ]
+   }
+  },
+  {
+   "role": "claude-opus-5-5-high",
+   "unanswered": 0,
+   "dollars": 2.28724,
+   "expected": {
+    "hits": 19,
+    "n": 19,
+    "share": 1.0,
+    "interval": [
+     0.832,
+     1.0
+    ]
+   },
+   "precision": {
+    "hits": 173,
+    "n": 177,
+    "share": 0.977,
+    "interval": [
+     0.943,
+     0.991
+    ]
+   },
+   "recall": {
+    "hits": 173,
+    "n": 204,
+    "share": 0.848,
+    "interval": [
+     0.792,
+     0.891
+    ]
+   }
+  }
+ ],
+ "verifiers": [
+  {
+   "role": "claude-sonnet-5-5-low",
+   "unanswered": 4,
+   "dollars": 0.8482459999999998,
+   "decoys_accepted": {
+    "hits": 0,
+    "n": 33,
+    "share": 0.0,
+    "interval": [
+     0.0,
+     0.104
+    ]
+   },
+   "agrees_accepted": {
+    "hits": 387,
+    "n": 562,
+    "share": 0.689,
+    "interval": [
+     0.649,
+     0.726
+    ]
+   },
+   "agrees_rejected": {
+    "hits": 78,
+    "n": 102,
+    "share": 0.765,
+    "interval": [
+     0.674,
+     0.836
+    ]
+   }
+  },
+  {
+   "role": "claude-sonnet-5-5-medium",
+   "unanswered": 3,
+   "dollars": 0.661416,
+   "decoys_accepted": {
+    "hits": 0,
+    "n": 33,
+    "share": 0.0,
+    "interval": [
+     0.0,
+     0.104
+    ]
+   },
+   "agrees_accepted": {
+    "hits": 449,
+    "n": 562,
+    "share": 0.799,
+    "interval": [
+     0.764,
+     0.83
+    ]
+   },
+   "agrees_rejected": {
+    "hits": 77,
+    "n": 102,
+    "share": 0.755,
+    "interval": [
+     0.663,
+     0.828
+    ]
+   }
+  },
+  {
+   "role": "claude-sonnet-5-5-high",
+   "unanswered": 0,
+   "dollars": 0.8329739999999999,
+   "decoys_accepted": {
+    "hits": 0,
+    "n": 33,
+    "share": 0.0,
+    "interval": [
+     0.0,
+     0.104
+    ]
+   },
+   "agrees_accepted": {
+    "hits": 549,
+    "n": 562,
+    "share": 0.977,
+    "interval": [
+     0.961,
+     0.986
+    ]
+   },
+   "agrees_rejected": {
+    "hits": 62,
+    "n": 102,
+    "share": 0.608,
+    "interval": [
+     0.511,
+     0.697
+    ]
+   }
+  },
+  {
+   "role": "claude-opus-5-5-low",
+   "unanswered": 0,
+   "dollars": 1.4440480000000004,
+   "decoys_accepted": {
+    "hits": 0,
+    "n": 33,
+    "share": 0.0,
+    "interval": [
+     0.0,
+     0.104
+    ]
+   },
+   "agrees_accepted": {
+    "hits": 528,
+    "n": 562,
+    "share": 0.94,
+    "interval": [
+     0.917,
+     0.956
+    ]
+   },
+   "agrees_rejected": {
+    "hits": 81,
+    "n": 102,
+    "share": 0.794,
+    "interval": [
+     0.706,
+     0.861
+    ]
+   }
+  },
+  {
+   "role": "claude-opus-5-5-medium",
+   "unanswered": 0,
+   "dollars": 1.6375680000000004,
+   "decoys_accepted": {
+    "hits": 0,
+    "n": 33,
+    "share": 0.0,
+    "interval": [
+     0.0,
+     0.104
+    ]
+   },
+   "agrees_accepted": {
+    "hits": 549,
+    "n": 562,
+    "share": 0.977,
+    "interval": [
+     0.961,
+     0.986
+    ]
+   },
+   "agrees_rejected": {
+    "hits": 79,
+    "n": 102,
+    "share": 0.775,
+    "interval": [
+     0.684,
+     0.845
+    ]
+   }
+  }
+ ],
+ "reviewer": {
+  "role": "claude-opus-5-5-high",
+  "unanswered": 0,
+  "dollars": 1.7367480000000002,
+  "decoys_accepted": {
+   "hits": 0,
+   "n": 33,
+   "share": 0.0,
+   "interval": [
+    0.0,
+    0.104
+   ]
+  },
+  "agrees_accepted": {
+   "hits": 562,
+   "n": 562,
+   "share": 1.0,
+   "interval": [
+    0.993,
+    1.0
+   ]
+  },
+  "agrees_rejected": {
+   "hits": 102,
+   "n": 102,
+   "share": 1.0,
+   "interval": [
+    0.964,
+    1.0
+   ]
+  }
+ },
+ "picks": {
+  "reader": "claude-opus-5-5-high",
+  "verifier": "claude-sonnet-5-5-high"
+ }
+}
