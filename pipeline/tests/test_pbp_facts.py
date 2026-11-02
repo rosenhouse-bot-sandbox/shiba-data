@@ -1,4 +1,4 @@
-import csv, json, os, sys, tempfile, unittest
+import json, os, sys, tempfile, unittest
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import expected
@@ -60,10 +60,11 @@ class FactsTest(unittest.TestCase):
         self.assertEqual(xray, [("coinsurance", "20%"), ("copay", "$5")])
 
     def test_a_service_with_no_cost_sharing_has_a_zero_copay(self):
-        plan = b8b(pbp_b8b_copay_yn="1", pbp_b8b_copay_ehc="010", pbp_b8b_copay_amt_drs="10.00")
+        plan = b8b(pbp_b8b_copay_yn="1", pbp_b8b_copay_ehc="010", pbp_b8b_copay_amt_drs="10.00",
+                   pbp_b8b_coins_yn="1", pbp_b8b_coins_ehc="001", pbp_b8b_coins_pct_tmc="20")
         xray = [t for t in terms(pbp_facts.facts_for(PLAN, plan)) if t[0] == "imaging.xray"]
         self.assertEqual(xray, [("imaging.xray", "in", "copay", "$0",
-                                 ("pbp_b8b_copay_yn", "pbp_b8b_copay_ehc", "pbp_b8b_coins_yn"))])
+                                 ("pbp_b8b_copay_yn", "pbp_b8b_copay_ehc", "pbp_b8b_coins_yn", "pbp_b8b_coins_ehc"))])
 
     def test_reads_out_of_network_groups_by_category(self):
         plan = dict(b8b(), pbp_Section_C_OON=[
@@ -83,6 +84,23 @@ class FactsTest(unittest.TestCase):
              ("pbp_c_oon_outpt_copay_min_amt", "pbp_c_oon_outpt_copay_max_amt")),
             ("radiation_therapy", "out", "copay", "$0", ("pbp_c_oon_outpt_copay_yn", "pbp_c_oon_outpt_coins_yn")),
         ])
+
+    def test_reads_point_of_service_groups_as_out_of_network(self):
+        plan = dict(b8b(), pbp_Section_C_POS=[dict(
+            pbp_c_pos_outpt_mc_bencats="8a1;8b1;8b3;14e5;", pbp_c_pos_outpt_copay_yn="1",
+            pbp_c_pos_outpt_copay_min_amt="25.00", pbp_c_pos_outpt_copay_max_amt="25.00",
+            pbp_c_pos_outpt_coins_yn="2")])
+        out = [t for t in terms(pbp_facts.facts_for(PLAN, plan)) if t[1] == "out"]
+        fields = ("pbp_c_pos_outpt_copay_min_amt", "pbp_c_pos_outpt_copay_max_amt")
+        self.assertEqual(out, [("imaging.diagnostic", "out", "copay", "$25", fields),
+                               ("imaging.xray", "out", "copay", "$25", fields)])
+
+    def test_refuses_a_plan_with_out_of_network_benefits_that_do_not_price_a_service(self):
+        plan = dict(b8b(), pbp_Section_C=[dict(pbp_c_oon_yn="1")], pbp_Section_C_OON=[oon("8b1;"), oon("8b3;")])
+        with self.assertRaises(ValueError):
+            pbp_facts.facts_for(PLAN, plan)
+        plan["pbp_Section_C_OON"].append(oon("8b2;"))
+        self.assertEqual(len(pbp_facts.facts_for(PLAN, plan)), 6)
 
     def test_every_row_is_a_medicare_pbp_fact_for_any_setting(self):
         plan = dict(b8b(pbp_b8b_coins_yn="1", pbp_b8b_coins_ehc="001", pbp_b8b_coins_pct_tmc="20"),
@@ -104,7 +122,9 @@ class FactsTest(unittest.TestCase):
     def test_refuses_terms_it_does_not_turn_into_facts(self):
         for plan in (b8b(pbp_b8b_ded_yn="1"), b8b(pbp_b8b_maxenr_yn="1"),
                      dict(b8b(), pbp_Section_C_OON=[oon("8b1;", pbp_c_oon_outpt_ded_yn="1")]),
-                     dict(b8b(), pbp_Section_C_OON=[oon("8b1;", pbp_c_oon_outpt_maxplan_yn="1")])):
+                     dict(b8b(), pbp_Section_C_OON=[oon("8b1;", pbp_c_oon_outpt_maxplan_yn="1")]),
+                     dict(b8b(), pbp_Section_C_POS=[dict(pbp_c_pos_outpt_mc_bencats="8b1;",
+                                                         pbp_c_pos_outpt_deduct_yn="1")])):
             with self.subTest(plan), self.assertRaises(ValueError):
                 pbp_facts.facts_for(PLAN, plan)
 

@@ -1,7 +1,7 @@
 """Turns each plan's PBP section 8b fields into facts with source PBP.
 
 Usage: python3 -I pbp_facts.py <plans.csv> <pbp_dir> <out.csv>
-Section 8b prices the plan's network. Section C's out-of-network groups price the rest.
+Section 8b prices the plan's network. Section C's out-of-network and point-of-service groups price the rest.
 """
 import csv
 import json
@@ -13,8 +13,7 @@ import facts  # noqa: E402
 import pbp  # noqa: E402
 
 B8 = "pbp_b8_clin_diag_ther"
-OON = "pbp_Section_C_OON"
-# benefit: (position in the 8b service bits, copay fields, coinsurance fields, out-of-network category)
+# Each benefit maps to its position in the 8b service bits, its copay and coinsurance fields, and its Section C category.
 SERVICES = {
     "imaging.xray": (1, ("pbp_b8b_copay_mc_amt", "pbp_b8b_copay_mc_amt_max"),
                      ("pbp_b8b_coins_pct_cmc", "pbp_b8b_coins_pct_cmc_max"), "8b3"),
@@ -23,9 +22,19 @@ SERVICES = {
     "radiation_therapy": (3, ("pbp_b8b_copay_amt_tmc", "pbp_b8b_copay_amt_tmc_max"),
                           ("pbp_b8b_coins_pct_tmc", "pbp_b8b_coins_pct_tmc_max"), "8b2"),
 }
-OON_COPAY = ("pbp_c_oon_outpt_copay_min_amt", "pbp_c_oon_outpt_copay_max_amt")
-OON_COINS = ("pbp_c_oon_outpt_coins_min_pct", "pbp_c_oon_outpt_coins_max_pct")
-UNMODELED = ("pbp_b8b_ded_yn", "pbp_b8b_maxenr_yn", "pbp_c_oon_outpt_ded_yn", "pbp_c_oon_outpt_maxplan_yn")
+# Each Section C file maps to its categories field, copay fields, coinsurance fields and the yes-no fields for them.
+GROUPS = {
+    "pbp_Section_C_OON": ("pbp_c_oon_out_mc_bendesc_cats",
+                          ("pbp_c_oon_outpt_copay_min_amt", "pbp_c_oon_outpt_copay_max_amt"),
+                          ("pbp_c_oon_outpt_coins_min_pct", "pbp_c_oon_outpt_coins_max_pct"),
+                          ("pbp_c_oon_outpt_copay_yn", "pbp_c_oon_outpt_coins_yn")),
+    "pbp_Section_C_POS": ("pbp_c_pos_outpt_mc_bencats",
+                          ("pbp_c_pos_outpt_copay_min_amt", "pbp_c_pos_outpt_copay_max_amt"),
+                          ("pbp_c_pos_outpt_coins_min_pct", "pbp_c_pos_outpt_coins_max_pct"),
+                          ("pbp_c_pos_outpt_copay_yn", "pbp_c_pos_outpt_coins_yn")),
+}
+UNMODELED = ("pbp_b8b_ded_yn", "pbp_b8b_maxenr_yn", "pbp_c_oon_outpt_ded_yn", "pbp_c_oon_outpt_maxplan_yn",
+             "pbp_c_pos_outpt_deduct_yn", "pbp_c_pos_outpt_maxplan_yn")
 
 
 def money(x):
@@ -37,7 +46,7 @@ def percent(x):
 
 
 def amount(row, names, fmt):
-    """The min and max fields as one amount or a range, or "" if neither is set."""
+    """Returns one amount, a range of the min and max fields, or "" if neither is set."""
     values = sorted({float(row[n]) for n in names if row.get(n)})
     if not values:
         return ""
@@ -52,7 +61,7 @@ def fact(plan_id, benefit, network, cost_kind, value, fields):
 
 
 def cost_sharing(plan_id, benefit, network, row, copay, coins, free):
-    """Copay and coinsurance facts, or a $0 copay quoting the free fields when the row sets neither."""
+    """Returns copay and coinsurance facts. A row with neither gets a $0 copay that quotes the free fields."""
     found = [fact(plan_id, benefit, network, kind, value, [n for n in names if row.get(n)])
              for kind, names, value in (("copay", copay, amount(row, copay, money)),
                                         ("coinsurance", coins, amount(row, coins, percent))) if value]
@@ -76,16 +85,24 @@ def in_network(plan_id, row):
     return found
 
 
-def out_of_network(plan_id, groups):
+def out_of_network(plan_id, plan):
     found = []
-    for group in groups:
-        categories = group.get("pbp_c_oon_out_mc_bendesc_cats", "").split(";")
-        for benefit, (*_, category) in SERVICES.items():
-            if category in categories:
-                refuse_unmodeled(plan_id, group)
-                free = ("pbp_c_oon_outpt_copay_yn", "pbp_c_oon_outpt_coins_yn")
-                found += cost_sharing(plan_id, benefit, "out", group, OON_COPAY, OON_COINS, free)
+    for stem, (cats, copay, coins, free) in GROUPS.items():
+        for group in plan.get(stem, []):
+            categories = group.get(cats, "").split(";")
+            for benefit, (*_, category) in SERVICES.items():
+                if category in categories:
+                    refuse_unmodeled(plan_id, group)
+                    found += cost_sharing(plan_id, benefit, "out", group, copay, coins, free)
+    if first(plan, "pbp_Section_C").get("pbp_c_oon_yn") == "1":
+        missing = set(SERVICES) - {r["benefit"] for r in found}
+        if missing:
+            raise ValueError(f"{plan_id}: pbp_c_oon_yn is 1, but no out-of-network group prices {sorted(missing)}")
     return found
+
+
+def first(plan, stem):
+    return (plan.get(stem) or [{}])[0]
 
 
 def facts_for(plan_id, plan):
@@ -93,7 +110,7 @@ def facts_for(plan_id, plan):
     if len(rows) != 1:
         raise ValueError(f"{plan_id}: {len(rows)} rows in {B8}, not 1")
     refuse_unmodeled(plan_id, rows[0])
-    return in_network(plan_id, rows[0]) + out_of_network(plan_id, plan.get(OON, []))
+    return in_network(plan_id, rows[0]) + out_of_network(plan_id, plan)
 
 
 def main(plans_csv, pbp_dir, out_csv):
