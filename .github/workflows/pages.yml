@@ -33,7 +33,7 @@ jobs:
       - env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          tag=$(jq -r .documents_release "../$(python3 -I ../pipeline/years.py)/config.json")
+          tag=$(jq -er .documents_release "../$(python3 -I ../pipeline/years.py)/config.json")
           gh release download "$tag" --pattern documents.tar --dir ..
           mkdir ../_documents
           tar -xf ../documents.tar -C ../_documents

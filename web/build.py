@@ -156,7 +156,6 @@ def download(url):
 
 
 def fetch_pdfs(docs, out_dir, today):
-    """Saves each document's PDF as pdfs/<its own sha256[:16]>.pdf, so a re-issued PDF gets a new name."""
     (out_dir / "pdfs").mkdir(parents=True, exist_ok=True)
     manifest, failed = {}, []
     for doc in docs.values():
@@ -183,7 +182,8 @@ def attach_documents(docs, release_dir, out_dir):
     manifest = json.loads((release_dir / "documents.json").read_text())
     (out_dir / "pdfs").mkdir(parents=True, exist_ok=True)
     for doc_id, doc in docs.items():
-        doc.update(manifest.get(doc_id, {"file": None, "retrieved": None}))
+        entry = manifest.get(doc_id, {})
+        doc.update(file=entry.get("file"), retrieved=entry.get("retrieved"))
         if doc["file"]:
             shutil.copyfile(release_dir / doc["file"], out_dir / doc["file"])
     return [i for i, d in docs.items() if not d["file"]]

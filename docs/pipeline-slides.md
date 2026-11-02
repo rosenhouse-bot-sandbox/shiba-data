@@ -285,7 +285,7 @@ After deploying, it updates the Google Sheet in place, so volunteers' comments s
 1. Write `data/2028/config.json`, `links.csv` and `found.csv`.
 2. Run the Pipeline workflow with year 2028. It builds `generated/` only.
 3. Merge that branch.
-4. Cut a 2028 documents release. Then, in one PR, change `LIVE` to 2028 in `pipeline/years.py` and name the release in `data/2028/config.json`. The Documents workflow reads only `LIVE`, so it needs a year input first.
+4. Cut a 2028 documents release. Then, in one PR, change `LIVE` to 2028 in `pipeline/years.py` and name the release in `data/2028/config.json`.
 5. Run the Pipeline workflow again. Now the model steps run.
 6. Review that branch, and merge it.
 

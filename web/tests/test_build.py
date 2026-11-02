@@ -307,6 +307,12 @@ class FetchPdfsTest(unittest.TestCase):
             build.save_documents(self.docs, self.dir / "release", "2026-10-26")
         self.assertIn(f"re-issued {self.src.as_uri()}", out.getvalue())
 
+    def test_save_documents_is_quiet_about_unchanged_pdfs(self):
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out):
+            build.save_documents(self.docs, self.dir / "release", "2026-10-26")
+        self.assertNotIn("re-issued", out.getvalue())
+
     def test_reports_failed_download(self):
         self.src.write_bytes(b"<html>not found</html>")
         manifest, failed = build.fetch_pdfs(self.docs, self.dir / "release", "2026-10-26")
@@ -339,7 +345,8 @@ class DocumentsTest(unittest.TestCase):
         site_docs = {i: {"url": d["url"], "sha256": d["sha256"]} for i, d in self.docs.items()}
         missing = build.attach_documents(site_docs, self.dir / "release", self.dir / "site")
         self.assertEqual(missing, ["0000000000000000"])
-        self.assertEqual(site_docs[self.id]["retrieved"], "2026-10-27")
+        self.assertEqual(site_docs[self.id], {"url": self.src.as_uri(), "sha256": self.docs[self.id]["sha256"],
+                                              "file": f"pdfs/{self.id}.pdf", "retrieved": "2026-10-27"})
         self.assertIsNone(site_docs["0000000000000000"]["file"])
         self.assertEqual((self.dir / "site" / f"pdfs/{self.id}.pdf").read_bytes(), b"%PDF-1.4 test")
 
