@@ -81,6 +81,16 @@ class PlanTest(unittest.TestCase):
         self.assertLess(requests.index(next(r for r in requests if "insertDimension" in r)),
                         requests.index(next(r for r in requests if "updateCells" in r)))
 
+    def test_trims_empty_rows_below_the_data(self):
+        requests = sheet_sync.plan(grid([], [], n_rows=1000), layout("P1", "P2"))
+        [trim] = [r["deleteDimension"]["range"] for r in requests if "deleteDimension" in r]
+        self.assertEqual(trim, {"sheetId": 7, "dimension": "ROWS", "startIndex": 4, "endIndex": 1000})
+
+    def test_keeps_rows_the_data_no_longer_has(self):
+        requests = sheet_sync.plan(grid(["Plan", "Plan ID", "A", "B"], ["", "Sec", "Gone", "P1"], n_rows=5), layout("P1"))
+        [trim] = [r["deleteDimension"]["range"] for r in requests if "deleteDimension" in r]
+        self.assertEqual((trim["startIndex"], trim["endIndex"]), (4, 5))
+
     def test_grows_a_grid_too_small_for_the_data(self):
         requests = sheet_sync.plan(grid([], [], n_rows=2, n_cols=3), layout("P1", "P2"))
         appends = {r["appendDimension"]["dimension"]: r["appendDimension"]["length"] for r in requests if "appendDimension" in r}

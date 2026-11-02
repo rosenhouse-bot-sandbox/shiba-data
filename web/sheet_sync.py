@@ -1,7 +1,7 @@
 """Updates the live Google Sheet in place to match the site's data.
 
 Rows are matched by plan ID (or section name) and columns by header, so cells keep their comments.
-Rows and columns the data no longer has are left alone. A new row goes after the row above it in the data,
+Rows and columns the data no longer has are left alone. Empty rows below them are deleted. A new row goes after the row above it in the data,
 and a new column after the last column.
 
 Usage: SHEETS_TOKEN=<OAuth access token> python3 -I web/sheet_sync.py
@@ -99,6 +99,10 @@ def plan(existing, layout, column_widths=()):
                                   ("COLUMNS", max(columns) + 1, existing.column_count)):
         if need > have:
             requests.append({"appendDimension": {"sheetId": sheet_id, "dimension": dimension, "length": need - have}})
+    used_rows = max(max(row_at) + 1, len(existing.keys) + len(inserts))
+    if existing.row_count + len(inserts) > used_rows:
+        requests.append({"deleteDimension": {"range": {"sheetId": sheet_id, "dimension": "ROWS", "startIndex": used_rows,
+                                                       "endIndex": existing.row_count + len(inserts)}}})
     requests.append({"updateSheetProperties": {
         "properties": {"sheetId": sheet_id, "gridProperties": {"frozenRowCount": 1, "frozenColumnCount": 2}},
         "fields": "gridProperties.frozenRowCount,gridProperties.frozenColumnCount"}})
