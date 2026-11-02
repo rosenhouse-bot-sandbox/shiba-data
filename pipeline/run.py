@@ -67,9 +67,9 @@ class Answers:
     def __init__(self, data, asker):
         self.saved, self.asker = data / "answers", asker
 
-    def __call__(self, task_dir, model):
+    def __call__(self, task_dir, model, effort=None):
         tasks = sorted(glob.glob(f"{task_dir}/*.md"))
-        missing = ask.answer(tasks, model, self.saved, self.asker)
+        missing = ask.answer(tasks, model, self.saved, self.asker, effort)
         if missing:
             print("\n".join(missing))
             raise SystemExit(f"{len(missing)} of {len(tasks)} tasks in {task_dir} have no answer from {model}. "
