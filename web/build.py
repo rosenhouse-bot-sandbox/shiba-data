@@ -209,7 +209,7 @@ def zip_documents(release_dir, zip_path, data_dir=DATA):
 
 
 def titled(index_html, site):
-    title = f"shibasheets.org – {site['year']} Medicare Advantage plans"
+    title = f"pdxplans.org – {site['year']} Medicare Advantage plans"
     area = html.escape(site["area"])
     return (index_html.replace("<title>Medicare Advantage plans</title>", f"<title>{title}</title>")
             .replace("<h1>Medicare Advantage plans</h1>", f"<h1>{title} <span>for {area}</span></h1>"))
@@ -242,7 +242,7 @@ def main(command, out, release=None):
             print(f"::warning::Not in the documents release, so the site links to the carrier: "
                   f"{site['docs'][doc_id]['url']}. Run the Documents workflow to add it.")
     import spreadsheet  # Only the site needs openpyxl.
-    spreadsheet.write(site, out_dir / f"shibasheets-{site['year']}.xlsx")
+    spreadsheet.write(site, out_dir / f"pdxplans-{site['year']}.xlsx")
     site["built"] = datetime.datetime.now(datetime.timezone.utc).isoformat()
     (out_dir / "data.json").write_text(json.dumps(site))
 
