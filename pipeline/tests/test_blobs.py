@@ -1,4 +1,5 @@
 import csv, hashlib, io, os, pathlib, sys, tempfile, unittest
+from unittest import mock
 from contextlib import redirect_stdout
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -55,11 +56,14 @@ class BlobsTest(unittest.TestCase):
             self.assertEqual(list(csv.DictReader(f)), [{"pdf": sha(PDF), "text": sha(b"text of sb"),
                                                         "layout": sha(b"layout of sb"), "items": sha(b"items of sb")}])
 
+    def expected(self):
+        return [f"blobs/{sha(PDF)} {blobs.pdf_path(self.work, sha(PDF))}", f"blobs/{sha(ZIP)} {self.work / 'landscape.zip'}",
+                *(f"blobs/{sha(f'{k} of sb'.encode())} {blobs.text_path(self.work, k, sha(PDF))}" for k in blobs.TEXT_KINDS)]
+
     def test_lists_texts_with_the_pdfs(self):
         blobs.record_cms(["landscape"], self.work, self.data / "generated" / blobs.CMS_FILES)
         self.write_texts()
-        self.assertEqual(self.lines()[2:], [f"blobs/{sha(f'{k} of sb'.encode())} {blobs.text_path(self.work, k, sha(PDF))}"
-                                            for k in blobs.TEXT_KINDS])
+        self.assertEqual(self.lines(), self.expected())
 
     def test_names_where_recorded_texts_go_before_a_run(self):
         self.write_texts()
@@ -68,6 +72,15 @@ class BlobsTest(unittest.TestCase):
             blobs.main("texts", str(self.data), str(self.work))
         self.assertEqual(out.getvalue().splitlines(), [f"{sha(f'{k} of sb'.encode())} {blobs.text_path(self.work, k, sha(PDF))}"
                                                        for k in blobs.TEXT_KINDS])
+
+    def test_names_every_input_a_replay_reads(self):
+        blobs.record_cms(["landscape"], self.work, self.data / "generated" / blobs.CMS_FILES)
+        self.write_texts()
+        (self.work / "landscape.zip").unlink()
+        out = io.StringIO()
+        with redirect_stdout(out):
+            blobs.main("inputs", str(self.data), str(self.work))
+        self.assertEqual(out.getvalue().splitlines(), [line.removeprefix("blobs/") for line in self.expected()])
 
     def test_names_no_texts_before_the_first_record(self):
         out = io.StringIO()
@@ -103,6 +116,32 @@ class RunTest(unittest.TestCase):
             (gen / blobs.CMS_FILES).write_text("name,sha256\n")
             run.pdfs(gen, work)
             self.assertEqual(blobs.listed(gen.parent, work), [(sha(PDF), blobs.pdf_path(work, sha(PDF)))])
+
+
+class ReplayTest(unittest.TestCase):
+    def scripts(self, mode):
+        config = {"year": 1999, "state": "OR", "counties": ["Multnomah"], "landscape_csv": "landscape.csv",
+                  "landscape_zip": "https://example.org/l.zip", "pbp_zip": "https://example.org/p.zip"}
+        with tempfile.TemporaryDirectory() as tmp, \
+                mock.patch.object(run.years, "data_dir", return_value=pathlib.Path(tmp)), \
+                mock.patch.object(run.years, "config", return_value=config), \
+                mock.patch.object(run, "get") as get, mock.patch.object(run, "py") as py, \
+                mock.patch.object(run, "pdfs"), mock.patch.object(run, "lost_quotes", return_value=[]), \
+                mock.patch.object(run.subprocess, "run"), \
+                mock.patch.object(run.blobs, "record_cms"), mock.patch.object(run.blobs, "record_texts"):
+            run.main("1999", os.path.join(tmp, "work"), mode)
+        return get.call_count, [c.args[0] for c in py.call_args_list]
+
+    def test_a_run_reads_the_web(self):
+        downloads, scripts = self.scripts("")
+        self.assertEqual(downloads, 2)
+        self.assertIn("fetch_docs.py", scripts)
+
+    def test_a_replay_reads_nothing_from_the_web(self):
+        downloads, scripts = self.scripts("replay")
+        self.assertEqual(downloads, 0)
+        self.assertFalse({"find_docs.py", "fetch_docs.py"} & set(scripts))
+        self.assertIn("cite.py", scripts)
 
 
 if __name__ == "__main__":
