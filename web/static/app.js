@@ -653,6 +653,7 @@ function closeViewer() {
 
 function hideViewer() {
   $("#viewer").hidden = true;
+  delete area().dataset.shown;
   closeFind();
   unpick();
   markOpenPlans();
