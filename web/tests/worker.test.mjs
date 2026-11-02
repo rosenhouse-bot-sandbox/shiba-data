@@ -5,13 +5,13 @@ import worker from "../worker.js";
 const SHA = "a".repeat(64);
 const PDF = "%PDF-1.4 0123456789";
 
-// Mimics R2's get: options.range and options.onlyIf are request headers.
+// Mimics R2's get: options.range and options.onlyIf are request headers, and a whole object still has a range.
 async function get(key, { range, onlyIf }) {
   if (key !== `blobs/${SHA}`) return null;
   const meta = { size: PDF.length, httpEtag: '"e"' };
   if (onlyIf.get("If-None-Match") === '"e"') return meta;
   const m = range.get("Range")?.match(/^bytes=(\d+)-(\d+)$/);
-  if (!m) return { ...meta, body: PDF };
+  if (!m) return { ...meta, body: PDF, range: { offset: 0, length: PDF.length } };
   const [offset, end] = [Number(m[1]), Number(m[2])];
   return { ...meta, body: PDF.slice(offset, end + 1), range: { offset, length: end - offset + 1 } };
 }

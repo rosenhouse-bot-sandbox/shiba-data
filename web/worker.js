@@ -15,7 +15,7 @@ export default {
     });
     if (!("body" in blob)) return new Response(null, { status: 304, headers });
     let status = 200;
-    if (blob.range) {
+    if (blob.range && request.headers.has("Range")) {
       const offset = blob.range.offset ?? blob.size - blob.range.suffix;
       const length = blob.range.length ?? blob.size - offset;
       headers.set("Content-Range", `bytes ${offset}-${offset + length - 1}/${blob.size}`);
