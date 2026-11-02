@@ -74,7 +74,7 @@ class SiteDataTest(unittest.TestCase):
 
     def test_cite_keeps_line_number(self):
         cell = self.cell("main", "H3805-041-0", "L_xray_imaging")
-        self.assertEqual([c["line"] for c in cell["cites"]], [2])
+        self.assertEqual([c["line"] for c in cell["cites"]], [1, 2, 2])
 
     def test_uncited_cell_has_no_cites(self):
         self.assertEqual(self.cell("main", "H3805-048-0", "E_moop"), {"value": "$6,700", "cites": []})

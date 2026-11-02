@@ -17,8 +17,10 @@ MACHINE_COLUMNS = ["step", "prompt"] + COLUMNS
 # author is an ID that the issue #11 Worker maps to a person, never a name or email.
 EDIT_COLUMNS = COLUMNS + ["saw", "source", "author", "note"]
 XREF, BLANKS, FILLED, EDITS = "machine/eoc_citations.csv", "machine/blanks.csv", "machine/filled.csv", "edits.csv"
-# Code-made cells come first, then model steps' rows, then edits by people or the Claude sessions they steer.
-LAYERS = ("generated/citations.csv", XREF, BLANKS, FILLED, EDITS)
+PRESENTED = "generated/presented.csv"
+# Code-made cells come first, then model steps' rows, then columns presented from facts,
+# then edits by people or the Claude sessions they steer.
+LAYERS = ("generated/citations.csv", XREF, BLANKS, FILLED, PRESENTED, EDITS)
 # Model steps only cite, because a person reviews their corrections first (issue #48).
 CITE_ONLY = {XREF, BLANKS, FILLED}
 # A person strikes a machine quote that does not support its cell, so the site does not show it.
@@ -78,18 +80,19 @@ def shown(cell, line):
     return lines[int(line) - 1] if 1 <= int(line) <= len(lines) else None
 
 
-def without(name):
-    return tuple(n for n in LAYERS if n != name)
+def without(*names):
+    return tuple(n for n in LAYERS if n not in names)
 
 
-def live(data, names=LAYERS):
+def live(data, names=LAYERS, ignore=None):
     """Returns (sheets, kept, dropped): the sheets after the layers, and the layer rows whose value they show or not.
+    Rows for which ignore(row) is true are skipped.
     Kept rows from the latest layer come first, so a cell's first citation is from the layer that set its value.
     An edit whose cell has changed since its author saw it gets `beneath`, the value it now replaces.
     A blank `saw` means the author's view is unknown."""
     sheets = generated(data)
     index = {(sheet, r["plan_id"]): r for sheet, sheet_rows in sheets.items() for r in sheet_rows}
-    by_layer = [layer(data, name) for name in names]
+    by_layer = [[r for r in layer(data, name) if not (ignore and ignore(r))] for name in names]
     for layer_rows in by_layer:
         values = {}
         for c in layer_rows:

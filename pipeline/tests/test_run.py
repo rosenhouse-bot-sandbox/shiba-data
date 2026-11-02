@@ -63,24 +63,33 @@ class StepsTest(unittest.TestCase):
 
     def test_filled_answers_one_retry_round_before_verifying_twice(self):
         self.assertEqual(self.calls(run.filled_step, "filled"), [
-            "bundle", ("filled/read", run.READER), "claims", ("filled/read", run.READER), "claims",
+            ("bundle", {"version": None}), ("filled/read", run.READER), ("claims", {"version": None}),
+            ("filled/read", run.READER), ("claims", {"version": None}),
             "verify", ("filled/check", run.VERIFIER), "accept", "verify", ("filled/recheck", run.SECOND_VERIFIER), "accept",
-            ("publish", {"every": False})])
+            ("publish", {"every": False, "version": None})])
 
     def test_filled_can_bundle_and_publish_every_filled_cell(self):
         module = mock.Mock()
         with tempfile.TemporaryDirectory() as work, mock.patch.dict(sys.modules, {"filled": module}):
             run.filled_step("texts", work, lambda d, model: None, every=True)
         self.assertEqual(module.bundle.call_args.args[2], "every")
-        self.assertEqual(module.publish.call_args.kwargs, {"every": True})
+        self.assertEqual(module.publish.call_args.kwargs, {"every": True, "version": None})
 
-    def test_model_steps_end_with_document_facts(self):
+    def test_filled_runs_the_version_asked_for(self):
+        module = mock.Mock()
+        with tempfile.TemporaryDirectory() as work, mock.patch.dict(sys.modules, {"filled": module}):
+            run.filled_step("texts", work, lambda d, model: None, version=2)
+        for f in (module.bundle, module.claims, module.publish):
+            self.assertEqual(f.call_args.kwargs.get("version"), 2, f)
+
+    def test_filled_sees_the_columns_presented_from_document_facts(self):
         order = []
         with mock.patch.multiple(run, blanks_step=lambda *a: order.append("blanks"),
-                                 filled_step=lambda *a: order.append("filled")), \
-             mock.patch.object(run.document_facts, "step", lambda data, texts, work, answer: order.append(work)):
-            run.model_steps("data", "texts", "work", None)
-        self.assertEqual(order, ["blanks", "filled", "work/facts"])
+                                 filled_step=lambda *a, **kw: order.append(("filled", kw))), \
+             mock.patch.object(run.document_facts, "step", lambda data, texts, work, answer: order.append(work)), \
+             mock.patch.object(run.present, "write", lambda data: order.append("present")):
+            run.model_steps("data", "texts", "work", None, {"filled": 2})
+        self.assertEqual(order, ["blanks", "work/facts", "present", ("filled", {"version": 2})])
 
 
 if __name__ == "__main__":

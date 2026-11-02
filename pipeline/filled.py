@@ -17,7 +17,7 @@ import collections, csv, glob, json, os, pathlib, random, re, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(os.path.dirname(HERE), "web"))
-import blanks, build, layers, years
+import blanks, build, layers, present, steps, years
 from blanks import fill
 from eoc import DATA, Doc, eoc
 from fields import FIELDS
@@ -52,9 +52,26 @@ def targets(site, every=False):
     return dict(out)
 
 
-def site_data(data):
-    """The site's data without this step's citations."""
-    return build.site_data(data, layers.without(layers.FILLED))
+def presented_edit(row):
+    return row["layer"] == layers.EDITS and row["column"] == present.COLUMN
+
+
+# Each version names the layers it sees and the rows it ignores. No version sees this step's own rows.
+VERSIONS = {
+    1: (layers.without(layers.FILLED, layers.PRESENTED), None),
+    # Version 2 ignores edits to presented columns, so retiring them leaves its tasks unchanged.
+    # It also misses later edits to those columns.
+    2: (layers.without(layers.FILLED), presented_edit),
+}
+
+
+def resolve(version, data=DATA):
+    """The version asked for, or else the pinned one."""
+    return version or steps.versions(data, {"filled": VERSIONS})["filled"]
+
+
+def site_data(data, version):
+    return build.site_data(data, *VERSIONS[version])
 
 
 def passages(layout, key, value):
@@ -137,17 +154,17 @@ def task(plan, cells, layout, failed=None):
     return "\n\n".join([head] + body) + "\n"
 
 
-def bundle(work, out_dir, every=""):
+def bundle(work, out_dir, every="", version=None):
     if every not in ("", "every"):
         raise SystemExit(__doc__)
     os.makedirs(out_dir, exist_ok=True)
-    for plan, cells in sorted(targets(site_data(DATA), every == "every").items()):
+    for plan, cells in sorted(targets(site_data(DATA, resolve(version)), every == "every").items()):
         layout = Doc.of_plan(work, plan).pages("layout")
         open(f"{out_dir}/{plan}.md", "w").write(task(plan, cells, layout))
 
 
-def claims(work, answers_dir, out):
-    values = targets(site_data(DATA), every=True)
+def claims(work, answers_dir, out, version=None):
+    values = targets(site_data(DATA, resolve(version)), every=True)
     found, retries = [], 0
     for plan in answered(answers_dir):
         doc = Doc.of_plan(work, plan)
@@ -238,10 +255,10 @@ def citation_rows(acc, url_of):
     return rows
 
 
-def publish(accepted_path, out=None, data=DATA, every=False):
+def publish(accepted_path, out=None, data=DATA, every=False, version=None):
     with open(accepted_path) as f:
         acc = json.load(f)
-    current = targets(site_data(pathlib.Path(data)), every=every or out is not None)
+    current = targets(site_data(pathlib.Path(data), resolve(version, data)), every=every or out is not None)
     stale = [(c["plan"], c["key"]) for c in acc if current.get(c["plan"], {}).get(c["key"]) != c["value"]]
     if stale:
         raise SystemExit(f"Changed, or already cited by an EOC: {stale}")
