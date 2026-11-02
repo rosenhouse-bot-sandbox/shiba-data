@@ -77,6 +77,13 @@ test("a spreadsheet link to a cited cell opens its quote", async () => {
   assert.match((await page.locator(".textLayer mark").allTextContents()).join(" "), /\$1,980 copayment/);
 });
 
+test("hiding the viewer forgets the shown page", async () => {
+  await page.goto(`${base}#/main/H2001-045-0/H_inpatient`);
+  await shown(docOf("H2001-045-0", "EOC"), 77);
+  await page.goto(`${base}#/main`);
+  assert.equal(await page.locator("#page-area[data-shown]").count(), 0);
+});
+
 test("clicking a cited cell highlights the quote on its page", async () => {
   await page.goto(`${base}#/main`);
   await row("H2001-045-0").locator("td.cited", { hasText: "$1,980" }).click();
