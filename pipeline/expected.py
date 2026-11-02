@@ -21,16 +21,22 @@ def miss(want, got):
         return f"no line {want['line']}"
     if value != want["value"]:
         return f"value {value}, not {want['value']}"
-    uncited = [p for p in want["eoc_pages"] if (want["eoc_url"], p) not in got["cites"]]
+    cites = {(url, int(page)) for url, page in got["cites"]}
+    uncited = [p for p in want["eoc_pages"] if (want["eoc_url"], p) not in cites]
     if uncited:
         return f"cites no {want['eoc_url']} page " + " ".join(map(str, uncited))
 
 
 def score(cells, columns, expected=None):
-    """Maps each (sheet, column) to its matched and missed expected cell lines.
-    cells maps (sheet, plan_id, column) to a dict of its value and the set of (url, page) it cites."""
+    """Maps each (sheet, column) to its matched lines and (line, reason) misses.
+    cells maps (sheet, plan_id, column) to a dict of its value and the (url, page) pairs it cites.
+    Any line of a cell may satisfy a page that the cell cites."""
+    expected = load() if expected is None else expected
+    unknown = set(columns) - {(want["sheet"], want["column"]) for want in expected}
+    if unknown:
+        raise ValueError(f"No expected cells for {sorted(unknown)}")
     result = {column: dict(matches=[], misses=[]) for column in columns}
-    for want in load() if expected is None else expected:
+    for want in expected:
         scored = result.get((want["sheet"], want["column"]))
         if scored is None:
             continue

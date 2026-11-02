@@ -28,14 +28,15 @@ class FreezeTest(unittest.TestCase):
                dict(plan_ids="H1-001-0", kind="SB", url=SB, found_via="")],
               ["plan_ids", "kind", "url", "found_via"])
         write(self.data / "machine/eoc_citations.csv",
-              [dict(cite("G_specialist", "$30"), step="xref", prompt="")], layers.MACHINE_COLUMNS)
+              [dict(at(cite("F_dental", "PREV $0", sheet="dvha"), EOC, "60"), step="xref", prompt="")],
+              layers.MACHINE_COLUMNS)
         write_edits(self.data,
+                    at(edit("G_specialist", "$40", "$40"), SB, "2"),
                     at(edit("L_xray_imaging", "$0-$250", "$0-$300", line="2"), EOC, "9"),
                     at(edit("L_xray_imaging", "$0-$200", "$0-$300", line="2"), EOC, "7"),
                     at(edit("L_xray_imaging", "$0-$200", "$0-$300", line="2"), SB, "3"),
                     at(edit("F_dental", "PREV $0", "Dental", sheet="dvha"), EOC, "111"),
-                    at(edit("F_dental", "PREV $0", "Dental", sheet="dvha"), EOC, "52"),
-                    at(edit("G_specialist", "$40", "$40"), SB, "2"))
+                    at(edit("F_dental", "PREV $0", "Dental", sheet="dvha"), EOC, "52"))
 
     def test_freezes_each_edited_line_with_its_live_value_and_eoc_pages(self):
         self.assertEqual(freeze_expected.freeze(self.data), [
