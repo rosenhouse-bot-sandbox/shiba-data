@@ -74,6 +74,14 @@ class StepsTest(unittest.TestCase):
         self.assertEqual(module.bundle.call_args.args[2], "every")
         self.assertEqual(module.publish.call_args.kwargs, {"every": True})
 
+    def test_model_steps_end_with_document_facts(self):
+        order = []
+        with mock.patch.multiple(run, blanks_step=lambda *a: order.append("blanks"),
+                                 filled_step=lambda *a: order.append("filled")), \
+             mock.patch.object(run.document_facts, "step", lambda data, texts, work, answer: order.append(work)):
+            run.model_steps("data", "texts", "work", None)
+        self.assertEqual(order, ["blanks", "filled", "work/facts"])
+
 
 if __name__ == "__main__":
     unittest.main()

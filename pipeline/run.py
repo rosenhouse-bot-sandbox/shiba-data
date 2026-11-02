@@ -1,5 +1,5 @@
 """Rebuilds data/<year>/generated from the sources in data/<year>/config.json, found.csv and links.csv,
-then the live year's machine/blanks.csv and machine/filled.csv from model answers.
+then the live year's machine/blanks.csv, machine/filled.csv and machine/document_facts.csv from model answers.
 
 Usage: python3 -I pipeline/run.py <year> <work_dir> [api|replay]
 
@@ -22,6 +22,7 @@ sys.path[:0] = [HERE, os.path.join(HERE, "tests")]
 import appendix_b  # noqa: E402
 import ask  # noqa: E402
 import blobs  # noqa: E402
+import document_facts  # noqa: E402
 import eoc  # noqa: E402
 import layers  # noqa: E402
 import years  # noqa: E402
@@ -114,6 +115,12 @@ def filled_step(texts, work, answer, every=False):
     filled.publish(f"{work}/filled/accepted.json", every=every)
 
 
+def model_steps(data, texts, work, answer):
+    blanks_step(texts, work, answer)
+    filled_step(texts, work, answer)
+    document_facts.step(data, texts, f"{work}/facts", answer)
+
+
 def main(year, work, mode=""):
     if mode not in ("", "api", "replay"):
         raise SystemExit(__doc__)
@@ -156,8 +163,7 @@ def main(year, work, mode=""):
     if config["year"] == years.LIVE:  # blanks.py and filled.py read the live year
         answer = Answers(data, ask.api() if mode == "api" else None)
         before = {name: len(layers.layer(data, name)) for name in (layers.BLANKS, layers.FILLED)}
-        blanks_step(f"{work}/texts", work, answer)
-        filled_step(f"{work}/texts", work, answer)
+        model_steps(data, f"{work}/texts", work, answer)
         for name, was in before.items():
             now = len(layers.layer(data, name))
             print(f"{'::warning::' if now < was / 2 else ''}{name} has {now} rows, and had {was}.")
