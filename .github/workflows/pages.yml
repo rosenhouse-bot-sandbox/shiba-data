@@ -29,7 +29,7 @@ jobs:
           node-version: "22"
       - run: python3 -I -m unittest discover -s tests
       - run: python3 -I -m unittest discover -s ../pipeline/tests
-      - run: node --test tests/highlight.test.mjs tests/ago.test.mjs tests/worker.test.mjs
+      - run: node --test tests/highlight.test.mjs tests/ago.test.mjs tests/permalink.test.mjs tests/worker.test.mjs
       - run: python3 -I build.py site ../_site
       # The e2e tests open each PDF the site links, from the R2 bucket the Worker serves.
       # The token's bucket-scoped permission works through R2's S3 API, where its ID and hash are the key pair.

@@ -52,7 +52,7 @@ def sheet(csv_rows, labels, cites, pbp, comments, cms):
 
 
 def column(key, label):
-    c = {"key": key, "label": label}
+    c = {"key": key, "id": re.sub(r"^[A-Z]+_", "", key), "label": label}
     if key in cms_sources.MEDICARE_GOV:
         c["medicare_gov"] = cms_sources.MEDICARE_GOV[key]
     return c

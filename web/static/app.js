@@ -1,6 +1,7 @@
 import * as pdfjsLib from "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.min.mjs";
 import { findAll, matchRanges, squash } from "./highlight.js";
 import { ago } from "./ago.js";
+import { parse, format } from "./permalink.js";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.worker.min.mjs";
 
@@ -26,7 +27,11 @@ let site;
 let pageObserver;
 let plans;
 const scrollTops = {};
-let shownHash;
+// The view that route() last rendered, and the cell picked in it.
+let here;
+let selection = null;
+// Set by a click, so the URL change it makes adds a history entry.
+let pushNext = false;
 
 function showUpdated(built) {
   if (isNaN(built)) return;
@@ -74,8 +79,10 @@ async function start() {
   pageObserver = new IntersectionObserver(onVisible, { root: area(), rootMargin: "1500px 0px" });
   area().addEventListener("scroll", () => {
     if (!holders().length) return;
-    if (document.activeElement !== $("#page")) $("#page").value = currentPage();
+    viewer.page = currentPage();
+    if (document.activeElement !== $("#page")) $("#page").value = viewer.page;
     viewer.anchor = centerAnchor();
+    updateUrl();
   });
   new ResizeObserver(() => {
     if (!viewer.pdf || !area().clientWidth) return;
@@ -87,23 +94,91 @@ async function start() {
 }
 
 function route() {
-  const [, view, id, col] = location.hash.split("/");
-  document.querySelectorAll("nav a").forEach((a) => a.classList.toggle("active", a.dataset.view === (view || "main")));
+  const state = parse(location.hash, site.year);
+  const { view } = state;
+  const plan = plans[state.plan];
+  const key = `${state.year}/${view}/${view === "plan" ? state.plan : ""}`;
+  document.querySelectorAll("nav a").forEach((a) => a.classList.toggle("active", a.dataset.view === view));
   const content = $("#content");
-  if (shownHash !== undefined) scrollTops[shownHash] = content.scrollTop;
-  shownHash = location.hash;
-  if (view === "ambiguities") content.replaceChildren(ambiguitiesView());
-  else if (view === "plan" && plans[id]) content.replaceChildren(planPage(plans[id]));
-  else content.replaceChildren(sheetView(site[view === "dvha" ? "dvha" : "main"]));
-  content.scrollTop = scrollTops[location.hash] ?? 0;
-  markOpenPlans();
-  if (view !== "plan" && id) content.querySelector(`td[data-plan="${CSS.escape(id)}"][data-col="${CSS.escape(col ?? "")}"]`)?.click();
-  if (view === "plan" && plans[id] && ($("#viewer").hidden || !site.docs[viewer.showing].plan_ids.includes(id))) {
-    openDoc(plans[id].docs.find((d) => site.docs[d].kind === "SB"), 1, null, null);
+  const sameView = key === here?.key;
+  if (!sameView) {
+    if (here) scrollTops[here.key] = content.scrollTop;
+    if (state.year !== site.year) {
+      content.replaceChildren(el("p", { class: "warn" }, `This link is for ${state.year} plans. This site shows ${site.year} plans.`),
+        sheetView("main"));
+    } else if (view === "ambiguities") content.replaceChildren(ambiguitiesView());
+    else if (view === "plan" && plan) content.replaceChildren(planPage(plan));
+    else content.replaceChildren(sheetView(view === "dvha" ? "dvha" : "main"));
+    content.scrollTop = scrollTops[key] ?? 0;
   }
+  here = { key, view: plan || view !== "plan" ? view : "main", plan: state.plan };
+  markOpenPlans();
+  if (state.year !== site.year) return;
+  const at = state.kind && { kind: state.kind, page: state.page };
+  const column = site[state.sheet]?.columns.find((c) => c.id === state.column || c.key === state.column);
+  const td = column && content.querySelector(
+    `td[data-sheet="${state.sheet}"][data-plan="${CSS.escape(state.plan)}"][data-col="${CSS.escape(column.key)}"]`);
+  if (td) {
+    pick(td);
+    openCell(plans[td.dataset.plan], column, site[state.sheet].rows.find((r) => r.plan_id === td.dataset.plan).cells[column.key], at);
+  } else if (view === "plan" && plan) {
+    unpick();
+    const doc = plan.docs.find((d) => site.docs[d].kind === at?.kind);
+    if (doc) openDoc(doc, at.page, null, null);
+    else if ($("#viewer").hidden || !site.docs[viewer.showing].plan_ids.includes(state.plan)) openDoc(planSb(plan), 1, null, null);
+  } else if (sameView && selection) {
+    closeViewer();
+  } else {
+    unpick();
+  }
+  updateUrl();
 }
 
-function sheetView(sheet) {
+const planSb = (plan) => plan.docs.find((d) => site.docs[d].kind === "SB");
+
+function pick(td) {
+  unpick();
+  td.classList.add("selected");
+  selection = td;
+  td.scrollIntoView({ block: "nearest", inline: "nearest" });
+}
+
+function unpick() {
+  document.querySelectorAll(".selected").forEach((s) => s.classList.remove("selected"));
+  selection = null;
+}
+
+// The document and page that opening the selected cell, or the plan page, shows first.
+function defaultDoc() {
+  if (selection) {
+    const { plan, sheet, col } = selection.dataset;
+    const cell = site[sheet].rows.find((r) => r.plan_id === plan).cells[col];
+    const first = cell.cites[0] || cell.comment;
+    return first ? { doc: first.doc, page: first.page } : { doc: planSb(plans[plan]), page: 1 };
+  }
+  return here.view === "plan" ? { doc: planSb(plans[here.plan]), page: 1 } : null;
+}
+
+// Points the URL at the selected cell and the shown page.
+function updateUrl() {
+  const push = pushNext;
+  pushNext = false;
+  if (!here) return;
+  const state = { year: site.year, view: here.view, plan: here.plan };
+  if (selection) {
+    const { plan, sheet, col } = selection.dataset;
+    Object.assign(state, { plan, sheet, column: site[sheet].columns.find((c) => c.key === col).id });
+  }
+  const fallback = defaultDoc();
+  if (!$("#viewer").hidden && viewer.showing && (viewer.showing !== fallback?.doc || viewer.page !== fallback?.page)) {
+    Object.assign(state, { kind: site.docs[viewer.showing].kind, page: viewer.page });
+  }
+  const hash = format(state);
+  if (hash !== location.hash) history[push ? "pushState" : "replaceState"](null, "", hash);
+}
+
+function sheetView(name) {
+  const sheet = site[name];
   const table = el("table", { class: "sheet" });
   table.append(el("thead", {}, el("tr", {}, el("th", { class: "plan" }, "Plan"),
     ...sheet.columns.map((c) => el("th", {}, c.label)))));
@@ -117,24 +192,24 @@ function sheetView(sheet) {
     const plan = plans[row.plan_id];
     body.append(el("tr", { "data-plan": row.plan_id },
       el("th", { class: "plan" }, el("a", { href: `#/plan/${row.plan_id}` }, plan.plan_name), el("small", {}, row.plan_id)),
-      ...sheet.columns.map((c) => valueCell(plan, c, row.cells[c.key]))));
+      ...sheet.columns.map((c) => valueCell(name, plan, c, row.cells[c.key]))));
   }
   table.append(body);
   return el("div", { class: "sheet-wrap" }, table);
 }
 
-function valueCell(plan, column, cell) {
+function valueCell(sheet, plan, column, cell) {
   const td = el("td", {
+    "data-sheet": sheet,
     "data-plan": plan.plan_id,
     "data-col": column.key,
     class: [cell.cites.length && "cited", cell.comment && "commented", cell.comment?.kind, /^[●◐]$/.test(cell.value) && "dot"]
       .filter(Boolean).join(" "),
     title: cell.comment?.text || (cell.cites.length ? "Click to see the plan document page" : "From CMS plan data. Click to open the plan's Summary of Benefits."),
     onclick: () => {
-      document.querySelectorAll(".selected").forEach((s) => s.classList.remove("selected"));
-      td.classList.add("selected");
+      pick(td);
+      pushNext = true;
       openCell(plan, column, cell);
-      td.scrollIntoView({ block: "nearest", inline: "nearest" });
     },
   });
   cell.value.split(" | ").forEach((line, i) => td.append(i ? el("br") : "", line));
@@ -172,28 +247,28 @@ const commentSource = (cell, note) => {
     `: “${quote}”`);
 };
 
-function openComment(plan, column, cell) {
-  const note = el("div", {}, cellHeader(plan, column, cell));
-  note.append(commentSource(cell, note), ...cmsFields(cell), medicareGov(plan, column));
-  openDoc(cell.comment.doc, cell.comment.page, cell.comment.quote, note);
-}
-
-function openCell(plan, column, cell) {
+// Opens the cell's first citation, or else its comment's source, or else the plan's SB.
+// at ({ kind, page }) opens that page of the plan's document of that kind instead.
+function openCell(plan, column, cell, at = null) {
   const header = cellHeader(plan, column, cell);
+  let note;
   if (cell.cites.length) {
-    const cite = cell.cites[0];
-    const note = citeNote(header, cell);
+    note = citeNote(header, cell);
     note.append(medicareGov(plan, column));
-    openDoc(cite.doc, cite.page, cite.quote, note, cell.cites);
   } else if (cell.comment) {
-    openComment(plan, column, cell);
+    note = el("div", {}, header);
+    note.append(commentSource(cell, note), ...cmsFields(cell), medicareGov(plan, column));
   } else {
-    const sb = plan.docs.find((d) => site.docs[d].kind === "SB");
-    openDoc(sb, 1, null, el("div", {}, header, el("p", {},
+    note = el("div", {}, header, el("p", {},
       cell.value ? `This value comes from CMS ${site.year} plan data, which has no page to point to. `
         : `The CMS ${site.year} Plan Benefit Package data has no entry for this benefit. `,
-      "The plan's Summary of Benefits is shown for reference."), ...cmsFields(cell), medicareGov(plan, column)));
+      "The plan's Summary of Benefits is shown for reference."), ...cmsFields(cell), medicareGov(plan, column));
   }
+  const first = cell.cites[0] || cell.comment || { doc: planSb(plan), page: 1, quote: null };
+  const doc = plan.docs.find((d) => site.docs[d].kind === at?.kind);
+  if (!doc) return openDoc(first.doc, first.page, first.quote, note, cell.cites);
+  const quote = [...cell.cites, cell.comment].find((q) => q?.doc === doc && q.page === at.page)?.quote ?? null;
+  openDoc(doc, at.page, quote, note, cell.cites);
 }
 
 const newTab = (href, text) => el("a", { href, target: "_blank", rel: "noopener" }, text);
@@ -248,15 +323,21 @@ function ambiguitiesView() {
 
 function ambiguityRow(sheet, plan, column, cell) {
   const { doc, page, kind } = cell.comment;
-  const cellHash = `#/${sheet}/${plan.plan_id}/${column.key}`;
+  const cellHash = format({ year: site.year, view: sheet, plan: plan.plan_id, sheet, column: column.id });
+  const value = valueCell(sheet, plan, column, cell);
   return el("tr", { "data-plan": plan.plan_id, "data-kind": kind },
     el("th", {}, el("a", { href: `#/plan/${plan.plan_id}` }, plan.plan_name), el("small", {}, plan.plan_id)),
     el("td", { class: "text" }, column.label),
-    valueCell(plan, column, cell),
+    value,
     el("td", { class: "text" }, KIND_NAMES[kind]),
     el("td", { class: "text comment-text" }, ...commentText(plan, column, cell)),
     el("td", { class: "text links" },
-      el("a", { href: "#", onclick: (e) => { e.preventDefault(); openComment(plan, column, cell); } }, `${site.docs[doc].kind} page ${page}`),
+      el("a", { href: "#", onclick: (e) => {
+        e.preventDefault();
+        pick(value);
+        pushNext = true;
+        openCell(plan, column, cell, { kind: site.docs[doc].kind, page });
+      } }, `${site.docs[doc].kind} page ${page}`),
       el("br"),
       el("a", { href: cellHash, onclick: (e) => { if (location.hash === cellHash) { e.preventDefault(); route(); } } },
         `Show in ${SHEET_NAMES[sheet]}`)));
@@ -266,7 +347,7 @@ function planPage(plan) {
   const docRows = plan.docs.map((id) => {
     const d = site.docs[id];
     return el("tr", {},
-      el("td", {}, el("a", { href: "#", onclick: (e) => { e.preventDefault(); openDoc(id, 1, null, null); } }, kindName(d.kind))),
+      el("td", {}, el("a", { href: "#", onclick: (e) => { e.preventDefault(); unpick(); openDoc(id, 1, null, null); } }, kindName(d.kind))),
       el("td", {}, `${d.pages} pages`),
       el("td", {}, el("a", { href: d.url, target: "_blank", rel: "noopener" }, "carrier's copy ↗")));
   });
@@ -280,19 +361,20 @@ function planPage(plan) {
     el("h2", {}, plan.plan_name),
     el("dl", {}, ...facts.flatMap(([k, v]) => [el("dt", {}, k), el("dd", {}, v)])),
     el("h3", {}, "Plan documents"), el("table", { class: "docs" }, el("tbody", {}, ...docRows)),
-    ...Object.keys(SHEET_NAMES).map((sheet) => benefitTable(SHEET_NAMES[sheet], site[sheet], plan)));
+    ...Object.keys(SHEET_NAMES).map((sheet) => benefitTable(sheet, plan)));
 }
 
-function benefitTable(title, sheet, plan) {
+function benefitTable(name, plan) {
+  const sheet = site[name];
   const row = sheet.rows.find((r) => r.plan_id === plan.plan_id);
-  return el("section", {}, el("h3", {}, title), el("table", { class: "benefits" }, el("tbody", {},
-    ...sheet.columns.map((c) => el("tr", {}, el("th", {}, c.label), valueCell(plan, c, row.cells[c.key]))))));
+  return el("section", {}, el("h3", {}, SHEET_NAMES[name]), el("table", { class: "benefits" }, el("tbody", {},
+    ...sheet.columns.map((c) => el("tr", {}, el("th", {}, c.label), valueCell(name, plan, c, row.cells[c.key]))))));
 }
 
 const kindName = (k) => ({ SB: "Summary of Benefits", EOC: "Evidence of Coverage", RIDER: "Optional rider" })[k] || k;
 
 const viewer = {
-  showing: null, doc: null, loading: null, pdf: null, sizes: [], cite: null, quotes: [], target: null, anchor: null, width: 0,
+  showing: null, page: null, doc: null, loading: null, pdf: null, sizes: [], cite: null, quotes: [], target: null, anchor: null, width: 0,
   texts: null, searchRun: null, hits: [], hit: -1,
 };
 const area = () => $("#page-area");
@@ -303,7 +385,9 @@ async function openDoc(docId, page, quote, note, otherQuotes = []) {
   const doc = site.docs[docId];
   if (viewer.doc !== docId) closeFind();
   viewer.showing = docId;
+  viewer.page = page;
   $("#viewer").hidden = false;
+  updateUrl();
   markOpenPlans();
   $("#doc-title").textContent = `${kindName(doc.kind)} · ${doc.plan_ids.map((p) => plans[p]?.plan_name || p).join("; ")}`;
   $("#doc-source").href = doc.url;
@@ -370,6 +454,8 @@ function goTo(n, focus = null) {
   if (!viewer.pdf || !all.length) return;
   n = Math.min(Math.max(1, n || 1), all.length);
   viewer.target = { n, focus };
+  viewer.page = n;
+  updateUrl();
   const holder = all[n - 1];
   area().scrollTop = holder.offsetTop - 12;
   $("#page").value = n;
@@ -543,8 +629,9 @@ function showHit() {
 function closeViewer() {
   $("#viewer").hidden = true;
   closeFind();
-  document.querySelectorAll(".selected").forEach((s) => s.classList.remove("selected"));
+  unpick();
   markOpenPlans();
+  updateUrl();
 }
 
 function markOpenPlans() {

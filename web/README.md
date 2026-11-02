@@ -3,6 +3,7 @@
 A static site for comparing the plans in `data/<year>`, where `pipeline/years.py` names the live year.
 Clicking a cell opens the plan document next to the sheet.
 A cell with a citation opens its page and highlights the quote.
+The URL is a permalink to the open cell and page; `static/permalink.js` describes its form.
 
 [`docs/pipeline.md`](../docs/pipeline.md) diagrams how the data is made.
 
@@ -26,6 +27,6 @@ npx wrangler dev --remote
 ```sh
 cd web
 python3 -I -m unittest discover -s tests
-node --test tests/highlight.test.mjs tests/ago.test.mjs tests/worker.test.mjs
+node --test tests/highlight.test.mjs tests/ago.test.mjs tests/permalink.test.mjs tests/worker.test.mjs
 npm ci && SITE=../_site DOCS=<dir of <sha256>.pdf> node --test tests/e2e.test.mjs
 ```

@@ -574,3 +574,93 @@ test("closing the viewer hides it", async () => {
 });
 
 const kindName = (k) => ({ SB: "Summary of Benefits", EOC: "Evidence of Coverage" })[k];
+
+const hash = () => page.evaluate(() => location.hash);
+const hashIs = (h) => page.waitForFunction((h) => location.hash === h, h);
+
+test("permalink: clicking a cell puts it in the URL, and the URL reopens it", async () => {
+  await page.goto(`${base}#/main`);
+  await cellTd("H3805-041-0", "F_primary_care").click();
+  await shown(docOf("H3805-041-0", "EOC"), 12);
+  assert.equal(await hash(), "#/2027/main/H3805-041-0/primary_care");
+  await page.goto(`${base}#/dvha`);
+  await page.goto(`${base}#/2027/main/H3805-041-0/primary_care`);
+  await shown(docOf("H3805-041-0", "EOC"), 12);
+  assert.equal(await page.locator("td.selected").getAttribute("data-col"), "F_primary_care");
+  assert.match((await page.locator(".textLayer mark.cite").allTextContents()).join(" "), /\$0 copayment/);
+});
+
+test("permalink: another citation's page goes in the URL and reopens with its quote", async () => {
+  await page.goto(`${base}#/main`);
+  await cellTd("H3805-041-0", "F_primary_care").click();
+  await page.locator("#source-note p.cite a", { hasText: "EOC page 82" }).click();
+  await shown(docOf("H3805-041-0", "EOC"), 82);
+  await hashIs("#/2027/main/H3805-041-0/primary_care/EOC/82");
+  await page.goto(`${base}#/dvha`);
+  await page.goto(`${base}#/2027/main/H3805-041-0/primary_care/EOC/82`);
+  await shown(docOf("H3805-041-0", "EOC"), 82);
+  assert.equal(await page.locator("td.selected").getAttribute("data-col"), "F_primary_care");
+  assert.match((await page.locator('.page[data-page="82"] mark.cite').allTextContents()).join(" "), /\$0 copayment/);
+});
+
+test("permalink: scrolling the document updates the page in the URL", async () => {
+  await page.goto(`${base}#/2027/main/H3805-041-0/primary_care`);
+  await shown(docOf("H3805-041-0", "EOC"), 12);
+  await page.click("#next");
+  await hashIs("#/2027/main/H3805-041-0/primary_care/EOC/13");
+  await page.click("#prev");
+  await hashIs("#/2027/main/H3805-041-0/primary_care");
+});
+
+test("permalink: Back returns to the previous cell", async () => {
+  await page.goto(`${base}#/main`);
+  await cellTd("H3805-041-0", "F_primary_care").click();
+  await cellTd("H3805-041-0", "G_specialist").click();
+  await hashIs("#/2027/main/H3805-041-0/specialist");
+  await page.goBack();
+  await hashIs("#/2027/main/H3805-041-0/primary_care");
+  await page.waitForSelector('td.selected[data-col="F_primary_care"]');
+  await shown(docOf("H3805-041-0", "EOC"), 12);
+});
+
+test("permalink: closing the viewer drops the cell from the URL", async () => {
+  await page.goto(`${base}#/2027/main/H3805-041-0/primary_care`);
+  await shown(docOf("H3805-041-0", "EOC"), 12);
+  await page.click("#close");
+  await hashIs("#/2027/main");
+});
+
+test("permalink: a plan page cell keeps the plan page", async () => {
+  await page.goto(`${base}#/plan/H3805-041-0`);
+  await page.locator('table.benefits td[data-col="F_primary_care"]').first().click();
+  await hashIs("#/2027/plan/H3805-041-0/main/primary_care");
+  await page.goto(`${base}#/main`);
+  await page.goto(`${base}#/2027/plan/H3805-041-0/main/primary_care`);
+  await shown(docOf("H3805-041-0", "EOC"), 12);
+  assert.ok(await page.isVisible("div.plan-page"));
+  assert.equal(await page.locator("td.selected").getAttribute("data-col"), "F_primary_care");
+});
+
+test("permalink: a plan page document link puts the page in the URL", async () => {
+  await page.goto(`${base}#/2027/plan/H3805-041-0/EOC/5`);
+  await shown(docOf("H3805-041-0", "EOC"), 5);
+  await page.locator("table.docs a", { hasText: "Summary of Benefits" }).click();
+  await hashIs("#/2027/plan/H3805-041-0");
+});
+
+test("permalink: an Ambiguities cell keeps the Ambiguities page and links to the sheet", async () => {
+  const { plan_id, col } = allCells("dvha").find(({ cell }) => cell.comment);
+  const id = col.replace(/^[A-Z]+_/, "");
+  await page.goto(`${base}#/ambiguities`);
+  const tr = page.locator("table.ambiguities tr", { has: page.locator(`td[data-col="${col}"]`) }).filter({ hasText: plan_id }).first();
+  await tr.locator(`td[data-col="${col}"]`).click();
+  await hashIs(`#/2027/ambiguities/dvha/${plan_id}/${id}`);
+  assert.equal(await tr.locator("td.links a", { hasText: "Show in" }).getAttribute("href"), `#/2027/dvha/${plan_id}/${id}`);
+});
+
+test("permalink: a link to another year says so and opens no cell", async () => {
+  await page.goto(`${base}#/2026/main/H3805-041-0/primary_care`);
+  await page.waitForSelector("table.sheet");
+  assert.match(await page.textContent("#content"), /This link is for 2026 plans\. This site shows 2027 plans\./);
+  assert.equal(await page.locator("td.selected").count(), 0);
+});
