@@ -36,7 +36,8 @@ a { color: var(--accent); }
 .sheet th.plan { position: sticky; left: 0; background: #fff; z-index: 1; text-align: left; font-weight: normal; min-width: 240px; max-width: 280px; }
 .sheet thead th.plan { z-index: 3; background: var(--head); }
 .sheet th.plan small { display: block; color: var(--muted); }
-.sheet tr.section th { position: sticky; left: 0; background: var(--ink); color: #fff; text-align: left; font-size: 13px; }
+.sheet tr.section th { background: var(--ink); color: #fff; text-align: left; font-size: 13px; }
+.sheet tr.section th span { position: sticky; left: 6px; }
 td { cursor: pointer; }
 td:hover { outline: 2px solid var(--accent); outline-offset: -2px; }
 td.dot { text-align: center; }
