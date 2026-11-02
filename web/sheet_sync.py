@@ -1,8 +1,8 @@
 """Updates the live Google Sheet in place to match the site's data.
 
 Rows are matched by plan ID (or section name) and columns by header, so cells keep their comments.
-Rows and columns the data no longer has are left alone. Empty rows below them are deleted. A new row goes after the row above it in the data,
-and a new column after the last column.
+Rows and columns the data no longer has are left alone. Empty rows and columns past them are deleted.
+A new row goes after the row above it in the data, and a new column after the last used column.
 
 Usage: SHEETS_TOKEN=<OAuth access token> python3 -I web/sheet_sync.py
 """
@@ -33,6 +33,7 @@ class Existing:
     keys: list  # one per row: the plan ID, else the section name, else ""
     row_count: int
     column_count: int
+    used_columns: int
 
 
 def pixels(chars):
@@ -93,7 +94,8 @@ def place_rows(wanted, have):
 def plan(existing, layout, column_widths=()):
     """The batchUpdate requests that write `layout` into `existing`."""
     sheet_id = existing.sheet_id
-    columns = place_columns([c.value for c in layout[0].cells], [RENAMED.get(h, h) for h in existing.header])
+    header = [RENAMED.get(h, h) for h in existing.header]
+    columns = place_columns([c.value for c in layout[0].cells], header + [None] * (existing.used_columns - len(header)))
     row_at, inserts = place_rows([r.key for r in layout], existing.keys)
     requests = [{"insertDimension": {"range": {"sheetId": sheet_id, "dimension": "ROWS", "startIndex": i, "endIndex": i + 1}}}
                 for i in inserts]
@@ -102,9 +104,12 @@ def plan(existing, layout, column_widths=()):
         if need > have:
             requests.append({"appendDimension": {"sheetId": sheet_id, "dimension": dimension, "length": need - have}})
     used_rows = max(max(row_at) + 1, len(existing.keys) + len(inserts))
-    if existing.row_count + len(inserts) > used_rows:
-        requests.append({"deleteDimension": {"range": {"sheetId": sheet_id, "dimension": "ROWS", "startIndex": used_rows,
-                                                       "endIndex": existing.row_count + len(inserts)}}})
+    used_columns = max(max(columns) + 1, existing.used_columns)
+    for dimension, used, have in (("ROWS", used_rows, existing.row_count + len(inserts)),
+                                  ("COLUMNS", used_columns, existing.column_count)):
+        if have > used:
+            requests.append({"deleteDimension": {"range": {"sheetId": sheet_id, "dimension": dimension, "startIndex": used,
+                                                           "endIndex": have}}})
     requests.append({"updateSheetProperties": {
         "properties": {"sheetId": sheet_id, "gridProperties": {"frozenRowCount": 1, "frozenColumnCount": 2}},
         "fields": "gridProperties.frozenRowCount,gridProperties.frozenColumnCount"}})
@@ -136,10 +141,11 @@ def quoted(title):
 
 
 def existing_tab(api, props):
-    header, ab = api.values([f"{quoted(props['title'])}!1:1", f"{quoted(props['title'])}!A:B"])
-    keys = [(r[1] if len(r) > 1 and r[1] else r[0] if r else "") for r in ab]
+    [values] = api.values([quoted(props["title"])])
+    keys = [(r[1] if len(r) > 1 and r[1] else r[0] if r else "") for r in values]
     grid = props["gridProperties"]
-    return Existing(props["sheetId"], header[0] if header else [], keys, grid["rowCount"], grid["columnCount"])
+    return Existing(props["sheetId"], values[0] if values else [], keys, grid["rowCount"], grid["columnCount"],
+                    max(map(len, values), default=0))
 
 
 def sync(api, site):
@@ -169,7 +175,7 @@ class Api:
         return [s["properties"] for s in self.call("?fields=sheets.properties")["sheets"]]
 
     def values(self, ranges):
-        query = urllib.parse.urlencode([("ranges", r) for r in ranges])
+        query = urllib.parse.urlencode([("ranges", r) for r in ranges] + [("valueRenderOption", "FORMULA")])
         return [v.get("values", []) for v in self.call(f"/values:batchGet?{query}")["valueRanges"]]
 
     def batch_update(self, requests):
