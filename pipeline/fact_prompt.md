@@ -7,6 +7,7 @@ The document covers these plans:
 {NOTES}
 
 A fact is one cost or coverage term for one plan: one benefit, setting, network and cost kind. When a row gives costs for several settings, networks or plans, state one fact for each. When one cost covers several services, use a broader benefit only if the document lists exactly the services it covers, as "CT, MRI and PET" is `imaging.diagnostic.advanced`. Otherwise state one fact for each service, with the same quotes. Leave out a cost whose setting is not in the list.
+Costs are in network unless the document says otherwise. An HMO chart without network columns gives in-network costs.
 Use `covered_by` `medicare` unless the document says the benefit is routine or supplemental.
 
 {VOCABULARY}
@@ -22,9 +23,9 @@ Some documents show earlier answers that failed a check. Fix them or leave them 
 Reply with only a JSON array, one object per fact:
 
 ```json
-[{"plan_id": "H1036-306-0", "benefit": "imaging.diagnostic.advanced", "setting": "outpatient_hospital", "network": "in",
+[{"plan_id": "H1036-306-0", "benefit": "imaging.diagnostic", "setting": "outpatient_hospital", "network": "in",
   "covered_by": "medicare", "cost_kind": "copay", "amount": "$0-$300", "unit": "per day", "limit": "", "page": 61,
   "quotes": ["Diagnostic radiology services (such as MRIs, CT scans) $0 - $300 copay"], "note": ""}]
 ```
 
-`provider_tier`, `condition`, `package`, `pool`, `unit`, `limit` and `note` may be left out. Use `note` only when you are unsure, and say why.
+`provider_tier`, `condition`, `package`, `pool`, `amount`, `unit`, `limit` and `note` may be left out. Give every field as text, except `page` and `quotes`. Use `note` only when you are unsure, and say why.

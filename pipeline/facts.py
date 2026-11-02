@@ -35,7 +35,7 @@ SETTINGS = {
     "outpatient_hospital": "An outpatient hospital",
     "urgent_care": "An urgent care center",
 }
-NETWORKS = {"any": "Both, or the plan has no network", "in": "In network", "out": "Out of network"}
+NETWORKS = {"any": "In and out of network, as the document says", "in": "In network", "out": "Out of network"}
 COVERED_BY = {"medicare": "A Medicare-covered benefit", "supplemental": "A routine (supplemental) benefit"}
 COST_KINDS = {
     "copay": "Dollar copayment",

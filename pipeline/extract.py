@@ -11,18 +11,19 @@ Needs the texts.py <work> directory. One reader task covers one document and one
 The first facts run writes a retry task, <dir>/<doc>.retry.md, for each document with failed answers.
 Answer those, then run facts again.
 """
-import collections, csv, glob, json, os, random, re, sys
+import collections, csv, json, os, random, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import blanks, facts, years
 from eoc import DATA, Doc
 from fields import CARRIERS
-from filled import numbers
+from filled import accepted, numbers
 
 ANSWER_FIELDS = set(facts.KEY) | {"amount", "unit", "limit", "page", "quotes", "note"}
-FREE_TEXT = ("provider_tier", "condition", "package", "pool", "unit", "limit", "note")
+OPTIONAL = {"provider_tier", "condition", "package", "pool", "amount", "unit", "limit", "note"}
 DECOY_FIELDS = ("plan_id", "network", "setting")
+TREES = ("benefit", "setting", "network")
 
 
 def documents(data=DATA):
@@ -49,35 +50,51 @@ def page_text(pages):
     return "\n\n".join(f"=====PAGE {p}=====\n{pages[p].rstrip()}" for p in sorted(pages))
 
 
-def fill(template, doc, plan_rows, **values):
+def fill(template, doc, plan_rows, data, **values):
     names = "\n".join(f"- {p}: {plan_rows.get(p, {}).get('plan_name', '')}" for p in doc["plan_ids"])
     orgs = sorted({plan_rows[p]["organization"] for p in doc["plan_ids"] if p in plan_rows} & set(CARRIERS))
     notes = "".join(f"\nSeen in {o} documents: {CARRIERS[o]}" for o in orgs)
     return blanks.fill(template, KIND=doc["kind"], PLANS=names, NOTES=notes,
-                       YEAR=str(years.config(DATA)["year"]), **values)
+                       YEAR=str(years.config(data)["year"]), **values)
 
 
-def task(doc, plan_rows, pages, group, failed=()):
-    parts = [fill("fact_prompt.md", doc, plan_rows, VOCABULARY=facts.describe(group))]
+def printable(answer):
+    return json.dumps(answer, ensure_ascii=False).encode("utf-8", "backslashreplace").decode()
+
+
+def task(doc, plan_rows, pages, group, data, failed=()):
+    parts = [fill("fact_prompt.md", doc, plan_rows, data, VOCABULARY=facts.describe(group))]
     if failed:
-        parts.append("## Earlier answers that failed a check\n\nFix each or leave it out.\n\n"
-                     + "\n".join(f"- {json.dumps(a, ensure_ascii=False)}: {why}" for a, why in failed))
+        parts.append("## Earlier answers that failed a check\n\n"
+                     "Code keeps the facts that passed. Reply with fixed versions of only these answers, "
+                     "and leave out any you cannot fix.\n\n"
+                     + "\n".join(f"- {printable(a)}: {why}" for a, why in failed))
     parts.append("## Pages\n\n" + page_text(relevant(pages, group)))
     return "\n\n".join(parts) + "\n"
 
 
-def problem(doc, group, a, quote_ok):
+def problem(doc, group, a, pages, quote_ok):
     """Why the answer cannot be a fact, or None, and the fact."""
     if not isinstance(a, dict):
         return "not an object", None
-    if set(a) - ANSWER_FIELDS or not ANSWER_FIELDS - set(FREE_TEXT) <= set(a):
-        return f"fields: {sorted(set(a) ^ ANSWER_FIELDS)}", None
+    unknown, missing = set(a) - ANSWER_FIELDS, ANSWER_FIELDS - OPTIONAL - set(a)
+    if unknown or missing:
+        return "; ".join(f"{what} fields: {', '.join(sorted(f))}" for what, f in
+                         [("unknown", unknown), ("missing", missing)] if f), None
+    texts = [k for k in a if k not in ("page", "quotes") and not isinstance(a[k], str)]
+    if texts:
+        return f"give {', '.join(sorted(texts))} as text", None
     if type(a["page"]) is not int:
-        return "page: give the PDF page number as a number", None
-    if not isinstance(a["quotes"], list):
-        return "quotes: give a list of quotes", None
-    row = {c: str(a.get(c, "")) for c in facts.COLUMNS if c not in ("quotes", "fact_id")}
-    row.update(source=doc["kind"], doc_sha=doc["sha256"], quotes=json.dumps(a["quotes"], ensure_ascii=False))
+        return "page: give the PDF page as a whole number", None
+    if a["page"] not in pages:
+        return f"page: the document has no page {a['page']}", None
+    try:
+        json.dumps(a, ensure_ascii=False).encode()
+    except UnicodeEncodeError:
+        return "text: not valid Unicode", None
+    row = {c: a.get(c, "") for c in facts.COLUMNS if c not in ("quotes", "fact_id")}
+    row.update(page=str(a["page"]), source=doc["kind"], doc_sha=doc["sha256"],
+               quotes=json.dumps(a["quotes"], ensure_ascii=False))
     row["fact_id"] = facts.fact_id(row)
     bad = facts.check(row)
     if bad:
@@ -95,11 +112,11 @@ def problem(doc, group, a, quote_ok):
     return None, row
 
 
-def gate(doc, group, answers, quote_ok):
+def gate(doc, group, answers, pages, quote_ok):
     """The facts whose answers pass the code checks, and [(answer, why)] for the rest."""
     passed, failed = [], []
     for a in answers:
-        why, row = problem(doc, group, a, quote_ok)
+        why, row = problem(doc, group, a, pages, quote_ok)
         if why:
             failed.append((a, why))
         else:
@@ -111,83 +128,93 @@ def gate(doc, group, answers, quote_ok):
     return list(unique.values()), failed
 
 
+def overlaps(f, g):
+    """Whether the two facts could be about the same thing: their keys match, or one's words cover the other's."""
+    return all(f[k] == g[k] or k in TREES and (facts.covers(f[k], g[k]) or facts.covers(g[k], f[k])) for k in facts.KEY)
+
+
 def decoys(found, rnd, n=3):
     """Wrong facts that pass the code checks: a fact's amount and quotes under the key of another fact,
-    which differs only in plan, network or setting and has another amount."""
+    which differs only in plan, network or setting and has another amount. No fact that overlaps it has that amount."""
     def rest(f, field):
         return tuple(f[k] for k in facts.KEY if k != field)
 
-    moves = [dict(a, **{field: b[field]}, fact_id=b["fact_id"]) for a in found for b in found for field in DECOY_FIELDS
-             if a[field] != b[field] and rest(a, field) == rest(b, field) and a["amount"] != b["amount"]]
-    return rnd.sample(moves, min(n, len(moves)))
+    moves = {}
+    for a in found:
+        for b in found:
+            for field in DECOY_FIELDS:
+                if rest(a, field) == rest(b, field) and a[field] != b[field]:
+                    d = dict(a, **{field: b[field]}, fact_id=b["fact_id"])
+                    if not any(overlaps(d, f) and f["amount"] == d["amount"] for f in found):
+                        moves[tuple(d[c] for c in facts.COLUMNS)] = d
+    return rnd.sample(sorted(moves.values(), key=lambda d: tuple(d[c] for c in facts.COLUMNS)), min(n, len(moves)))
 
 
 def shown(fact):
-    return {k: v for k, v in fact.items() if k in ANSWER_FIELDS and k != "quotes" and v} | {"quotes": json.loads(fact["quotes"])}
+    return ({k: v for k, v in fact.items() if k in ANSWER_FIELDS - {"quotes", "note"} and v}
+            | {"quotes": json.loads(fact["quotes"])})
 
 
-def verifier_task(doc, plan_rows, pages, items):
+def verifier_task(doc, plan_rows, pages, items, data):
     groups = sorted({c["benefit"].split(".")[0] for c in items})
-    parts = [fill("vfact_prompt.md", doc, plan_rows, VOCABULARY="\n\n".join(facts.describe(g) for g in groups))]
+    parts = [fill("vfact_prompt.md", doc, plan_rows, data, VOCABULARY="\n\n".join(facts.describe(g) for g in groups))]
     parts += [json.dumps({"id": n, **shown(c)}, ensure_ascii=False) for n, c in enumerate(items)]
     parts.append("## Pages\n\n" + page_text({p: pages[p] for p in {int(c["page"]) for c in items}}))
     return "\n\n".join(parts) + "\n"
 
 
-def accepted(items, verdicts):
-    """Facts every verdict accepted. An item without a verdict is rejected."""
-    ok = {v["id"] for v in verdicts} - {v["id"] for v in verdicts if v.get("ok") is not True}
-    decoys_ok = sorted(i for i in ok if items[i]["decoy"])
-    if decoys_ok:
-        raise SystemExit(f"The verifier accepted decoys {decoys_ok}. Use a stronger verifier.")
-    return [{k: v for k, v in items[i].items() if k not in ("decoy", "task")} for i in sorted(ok)]
-
-
 def answers(path):
-    """A task's answers, or [] when the model answered with something other than a list."""
-    with open(path) as f:
-        found = json.load(f)
-    return found if isinstance(found, list) else []
+    """A task's answers. A reply that is not a JSON array is one bad answer."""
+    try:
+        with open(path) as f:
+            found = json.load(f)
+    except json.JSONDecodeError:
+        return ["(not JSON)"]
+    return found if isinstance(found, list) else [found]
 
 
-def read(work, out_dir, group):
+def doc_facts(doc, group, first, retry, pages, quote_ok):
+    """The document's facts from its first answers and any retry answers, and the failures to retry, if it needs a retry."""
+    found, failed = gate(doc, group, first + (retry or []), pages, quote_ok)
+    return found, (failed if retry is None else [])
+
+
+def read(work, out_dir, group, data=DATA):
     os.makedirs(out_dir, exist_ok=True)
-    plan_rows = plans()
-    for doc in documents():
+    plan_rows = plans(data)
+    for doc in documents(data):
         pages = Doc(work, doc["id"]).pages("layout")
         if relevant(pages, group):
             with open(f"{out_dir}/{doc['id']}.md", "w") as f:
-                f.write(task(doc, plan_rows, pages, group))
+                f.write(task(doc, plan_rows, pages, group, data))
 
 
-def extract_facts(work, answers_dir, group, out):
-    plan_rows, found, retries = plans(), [], 0
-    for doc in documents():
+def extract_facts(work, answers_dir, group, out, data=DATA):
+    plan_rows, found, retries = plans(data), [], 0
+    for doc in documents(data):
         first = f"{answers_dir}/{doc['id']}.json"
         if not os.path.exists(first):
             continue
-        d = Doc(work, doc["id"])
-        got, failed = gate(doc, group, answers(first), d.quote_ok)
-        retry = f"{answers_dir}/{doc['id']}.retry.json"
-        if os.path.exists(retry):
-            again, failed = gate(doc, group, answers(retry), d.quote_ok)
-            got += again
-        elif failed:
+        d, retry = Doc(work, doc["id"]), f"{answers_dir}/{doc['id']}.retry.json"
+        pages = d.pages("layout")
+        got, failed = doc_facts(doc, group, answers(first), answers(retry) if os.path.exists(retry) else None,
+                                pages, d.quote_ok)
+        if failed:
             with open(f"{answers_dir}/{doc['id']}.retry.md", "w") as f:
-                f.write(task(doc, plan_rows, d.pages("layout"), group, failed))
+                f.write(task(doc, plan_rows, pages, group, data, failed))
             retries += 1
         found += got
     with open(out, "w") as f:
-        json.dump(found, f, indent=1, ensure_ascii=False)
+        json.dump(found, f, indent=1)
     print(len(found), "facts;", retries, "retry tasks")
 
 
-def verify(work, facts_path, out_dir):
+def verify(work, facts_path, out_dir, data=DATA):
     os.makedirs(out_dir, exist_ok=True)
     with open(facts_path) as f:
         found = json.load(f)
-    plan_rows, items = plans(), []
-    for doc in documents():
+    plan_rows, items = plans(data), []
+    for doc in documents(data):
         mine = [f for f in found if f["doc_sha"] == doc["sha256"]]
         if not mine:
             continue
@@ -195,10 +222,10 @@ def verify(work, facts_path, out_dir):
         mixed = [dict(f, decoy=False) for f in mine] + [dict(f, decoy=True) for f in decoys(mine, rnd)]
         rnd.shuffle(mixed)
         with open(f"{out_dir}/v-{doc['id']}.md", "w") as f:
-            f.write(verifier_task(doc, plan_rows, Doc(work, doc["id"]).pages("layout"), mixed))
+            f.write(verifier_task(doc, plan_rows, Doc(work, doc["id"]).pages("layout"), mixed, data))
         items += [dict(c, task=doc["id"]) for c in mixed]
     with open(f"{out_dir}/items.json", "w") as f:
-        json.dump(items, f, indent=1, ensure_ascii=False)
+        json.dump(items, f, indent=1)
     print(sum(not c["decoy"] for c in items), "facts", sum(c["decoy"] for c in items), "decoys")
 
 

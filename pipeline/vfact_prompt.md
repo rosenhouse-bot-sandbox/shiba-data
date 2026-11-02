@@ -15,7 +15,7 @@ Say `true` only if a counselor who reads the quotes on their page would agree wi
 - The network: in-network unless the item says otherwise.
 - The cost kind and amount, each end of a range, and any condition, provider tier, package, unit and limit.
 
-The fields use this vocabulary. A network of `any` means the cost applies in and out of network, or the plan has no network.
+The fields use this vocabulary. Costs are in network unless the document says otherwise.
 
 {VOCABULARY}
 
