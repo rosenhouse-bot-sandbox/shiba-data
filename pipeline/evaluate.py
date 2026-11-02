@@ -1,14 +1,14 @@
 """Measures fact readers and verifiers at each model and effort on one benefit group.
 
-Usage: python3 -I pipeline/evaluate.py <year> <work> <dir> <group> <all|sample> [api]
-
-<dir> holds the task files. data/<year>/evaluations/<group> holds the saved answers and the report.
+Usage: python3 -I pipeline/evaluate.py <year> <work> <dir> <group> <all|sample> <dollars> [api]
 
 Every reader extracts facts from the same documents: all of them, or one per carrier and kind.
-The reviewer judges every reader's facts, mixed with decoys, and each verifier judges the same items.
+The reviewer judges each reader's facts, mixed with decoys, and each verifier judges the same items.
+<dir> holds the task files. data/<year>/evaluations/<group> holds the saved answers and the report.
 A rerun asks only new tasks. Without `api`, the run stops at the first step with unanswered tasks.
+With `api`, a task left unanswered counts against its role, and no role starts once the saved answers cost <dollars>.
 """
-import collections, csv, glob, json, os, shutil, sys
+import collections, contextlib, glob, io, json, math, os, shutil, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -18,12 +18,17 @@ from filled import numbers
 
 MODELS = ("claude-haiku-5-5", "claude-sonnet-5-5", "claude-opus-5-5")
 EFFORTS = ("low", "medium", "high")
-GRID = [(m, e) for m in MODELS for e in EFFORTS]
+READERS = [(m, e) for m in MODELS for e in EFFORTS]
 REVIEWER = ("claude-opus-5-5", "high")
-# Dollars per million input and output tokens. Cache tokens are priced as input.
-PRICES = {"claude-haiku-5-5": (0.10, 0.50), "claude-sonnet-5-5": (2.00, 10.00), "claude-opus-5-5": (4.00, 20.00)}
+# Haiku never judges a fact.
+VERIFIERS = [r for r in READERS if r[0] != "claude-haiku-5-5" and r != REVIEWER]
+# Dollars per million tokens: input, output, cache read, cache write.
+PRICES = {"claude-haiku-5-5": (0.10, 0.50, 0.01, 0.125), "claude-sonnet-5-5": (2.00, 10.00, 0.20, 2.50),
+          "claude-opus-5-5": (4.00, 20.00, 0.20, 5.00)}
 COLUMN = {"imaging": ("main", "L_xray_imaging")}
-AGREE, DISAGREE = "accepts the reviewer's accepts", "accepts the reviewer's rejects"
+# A verifier must accept this share of the facts the reviewer accepts.
+AGREEMENT = 0.9
+Z = 1.96
 
 
 def name(role):
@@ -40,19 +45,30 @@ def sample(docs, plan_rows):
 
 
 def cost(model, usage):
-    price_in, price_out = PRICES[model]
-    tokens_in = sum(usage.get(k, 0) for k in ask.USAGE_FIELDS if k != "output_tokens")
-    return (tokens_in * price_in + usage.get("output_tokens", 0) * price_out) / 1e6
+    prices = PRICES[model]
+    tokens = [usage.get(k, 0) for k in ("input_tokens", "output_tokens", "cache_read_input_tokens",
+                                         "cache_creation_input_tokens")]
+    return sum(t * p for t, p in zip(tokens, prices)) / 1e6
 
 
 def spent(tasks, role, saved):
-    """Dollars the saved answers to these tasks cost."""
+    """Dollars the saved answers to these tasks cost. A task whose replies never parsed has no saved answer."""
     total = 0.0
     for t in tasks:
         with open(t) as f:
             path = os.path.join(saved, ask.key(role[0], f.read(), role[1]) + ".json")
+        if os.path.exists(path):
+            with open(path) as f:
+                total += cost(role[0], json.load(f).get("usage", {}))
+    return total
+
+
+def all_spent(saved):
+    total = 0.0
+    for path in glob.glob(f"{saved}/*.json"):
         with open(path) as f:
-            total += cost(role[0], json.load(f).get("usage", {}))
+            a = json.load(f)
+        total += cost(a["model"], a.get("usage", {}))
     return total
 
 
@@ -60,36 +76,42 @@ class Unanswered(Exception):
     pass
 
 
-def answer(tasks, role, saved, asker):
-    left = ask.answer(tasks, role[0], saved, asker, role[1])
-    if left:
-        raise Unanswered(f"{len(left)} tasks for {name(role)} have no answer, such as {left[0]}")
+class Runner:
+    def __init__(self, saved, asker, budget):
+        self.saved, self.asker, self.budget = saved, asker, budget
+
+    def affordable(self):
+        return all_spent(self.saved) < self.budget
+
+    def answer(self, tasks, role):
+        """The tasks left unanswered."""
+        left = ask.answer(tasks, role[0], self.saved, self.asker, role[1])
+        if left and not self.asker:
+            raise Unanswered(f"{len(left)} tasks for {name(role)} have no answer, such as {left[0]}")
+        return left
 
 
-def read(work, data, root, group, role, docs, saved, asker):
-    """The reader's facts and the dollars its answers cost."""
+def quiet(f, *args, **kwargs):
+    with contextlib.redirect_stdout(io.StringIO()):
+        f(*args, **kwargs)
+
+
+def read(work, data, root, group, role, docs, runner):
+    """The reader's facts, its count of unanswered tasks, and the dollars its answers cost."""
     d = f"{root}/read/{name(role)}"
-    extract.read(work, d, group, data)
-    keep = {f"{doc['id']}.md" for doc in docs}
-    for t in glob.glob(f"{d}/*.md"):
-        if os.path.basename(t) not in keep:
-            os.remove(t)
-    answer(sorted(glob.glob(f"{d}/*.md")), role, saved, asker)
+    shutil.rmtree(d, ignore_errors=True)
+    extract.read(work, d, group, data, ids={doc["id"] for doc in docs})
+    left = runner.answer(sorted(glob.glob(f"{d}/*.md")), role)
     quiet(extract.extract_facts, work, d, group, f"{d}/facts.json", data)
-    answer(sorted(glob.glob(f"{d}/*.retry.md")), role, saved, asker)
+    left += runner.answer(sorted(glob.glob(f"{d}/*.retry.md")), role)
     quiet(extract.extract_facts, work, d, group, f"{d}/facts.json", data)
     with open(f"{d}/facts.json") as f:
-        return json.load(f), spent(sorted(glob.glob(f"{d}/*.md")), role, saved)
+        return json.load(f), len(left), spent(sorted(glob.glob(f"{d}/*.md")), role, runner.saved)
 
 
-def quiet(f, *args):
-    import contextlib, io
-    with contextlib.redirect_stdout(io.StringIO()):
-        f(*args)
-
-
-def row(fact):
-    return tuple(fact[c] for c in facts.COLUMNS)
+def seen(fact):
+    """The fields a verifier sees."""
+    return tuple(fact[c] for c in facts.COLUMNS if c != "note")
 
 
 def claim(fact):
@@ -97,8 +119,8 @@ def claim(fact):
 
 
 def pool(by_reader):
-    """Every reader's facts once each."""
-    return sorted({row(f): f for found in by_reader.values() for f in found}.values(), key=row)
+    """Every reader's facts, once for each way a verifier would see them."""
+    return sorted({seen(f): f for found in by_reader.values() for f in found}.values(), key=seen)
 
 
 def judged(items, verdicts):
@@ -109,112 +131,149 @@ def judged(items, verdicts):
     return {i: i in ok and ok[i] for i in range(len(items))}
 
 
-def accepted_claims(items, verdict):
-    return {claim(items[i]) for i, ok in verdict.items() if ok and not items[i]["decoy"]}
+def wilson(hits, n):
+    """The 95% interval of a share, or None for no trials."""
+    if not n:
+        return None
+    p = hits / n
+    mid, half = p + Z * Z / (2 * n), Z * math.sqrt(p * (1 - p) / n + Z * Z / (4 * n * n))
+    scale = 1 + Z * Z / n
+    return round((mid - half) / scale, 3), round((mid + half) / scale, 3)
 
 
-def score_reader(found, truth):
-    claims = {claim(f) for f in found}
-    good = claims & truth
-    return {"facts": len(claims), "accepted": len(good), "precision": ratio(len(good), len(claims)),
-            "recall": ratio(len(good), len(truth))}
+def share(hits, n):
+    return {"hits": hits, "n": n, "share": round(hits / n, 3) if n else None, "interval": wilson(hits, n)}
+
+
+def score_reader(found, verdict_of, truth):
+    """Precision by the verdict on the reader's own items; recall over the claims the reviewer accepted from any reader."""
+    good = [f for f in found if verdict_of[seen(f)]]
+    return {"precision": share(len(good), len(found)), "recall": share(len({claim(f) for f in good} & truth), len(truth))}
 
 
 def score_verifier(items, verdict, reviewer):
     real = [i for i, c in enumerate(items) if not c["decoy"]]
     decoys = [i for i, c in enumerate(items) if c["decoy"]]
-    good = [i for i in real if reviewer[i]]
-    bad = [i for i in real if not reviewer[i]]
-    return {"decoys accepted": sum(verdict[i] for i in decoys), "decoys": len(decoys),
-            AGREE: ratio(sum(verdict[i] for i in good), len(good)), DISAGREE: ratio(sum(verdict[i] for i in bad), len(bad))}
+    return {"decoys_accepted": share(sum(verdict[i] for i in decoys), len(decoys)),
+            "agrees_accepted": share(sum(verdict[i] for i in real if reviewer[i]), sum(reviewer[i] for i in real)),
+            "agrees_rejected": share(sum(not verdict[i] for i in real if not reviewer[i]),
+                                     sum(not reviewer[i] for i in real))}
 
 
-def score_expected(found, truth, wanted, docs, plan_rows):
-    """The share of expected cell lines whose numbers all appear in the plan's accepted facts,
-    and the share of expected EOC pages with an accepted fact."""
-    good = [f for f in found if claim(f) in truth]
+def score_expected(found, wanted, docs, group):
+    """The share of expected cell lines whose numbers all appear in in-network facts of the group that passed the code checks.
+    It does not use the reviewer, so it checks the reviewer too."""
     amounts = collections.defaultdict(collections.Counter)
-    pages = {(f["plan_id"], f["source"], int(f["page"])) for f in good}
-    for f in good:
-        amounts[f["plan_id"]] |= numbers(f["amount"])
+    for f in found:
+        if facts.covers(group, f["benefit"]) and f["network"] in ("in", "any"):
+            amounts[f["plan_id"]] |= numbers(f["amount"])
     covered = {p for d in docs for p in d["plan_ids"]}
     lines = [w for w in wanted if w["plan_id"] in covered]
-    shown = sum(not numbers(w["value"]) - amounts[w["plan_id"]] for w in lines)
-    eoc = [(w["plan_id"], p) for w in lines for p in w["eoc_pages"]
-           if any(d["kind"] == "EOC" and w["plan_id"] in d["plan_ids"] for d in docs)]
-    return {"expected lines shown": ratio(shown, len(lines)), "expected lines": len(lines),
-            "expected EOC pages cited": ratio(sum((p, "EOC", n) in pages for p, n in eoc), len(eoc))}
+    return share(sum(not numbers(w["value"]) - amounts[w["plan_id"]] for w in lines), len(lines))
 
 
-def ratio(a, b):
-    return round(a / b, 3) if b else None
+def upper(s):
+    return s["interval"][1] if s["interval"] else 0
 
 
-def cheapest(scores, ok):
-    fits = [s for s in scores if ok(s)]
-    return min(fits, key=lambda s: s["dollars"])["role"] if fits else None
+def picks(readers, verifiers, reviewer):
+    """The cheapest reader whose precision and recall could match the reviewer's model as a reader,
+    and the cheapest verifier that rejects every decoy and accepts what the reviewer accepts."""
+    decoys = reviewer["decoys_accepted"]
+    best = next((s for s in readers if s["role"] == name(REVIEWER)), None)
+    if not decoys["n"] or decoys["hits"] or not best or not best["precision"]["n"]:
+        return {"reader": None, "verifier": None}
+
+    def cheapest(scores, ok):
+        fits = [s for s in scores if ok(s)]
+        return min(fits, key=lambda s: s["dollars"])["role"] if fits else None
+
+    return {
+        "reader": cheapest(readers, lambda s: not s["unanswered"]
+                           and upper(s["precision"]) >= best["precision"]["share"]
+                           and upper(s["recall"]) >= best["recall"]["share"]),
+        "verifier": cheapest(verifiers, lambda s: not s["unanswered"] and s["decoys_accepted"]["n"]
+                             and not s["decoys_accepted"]["hits"]
+                             and (s["agrees_accepted"]["share"] or 0) >= AGREEMENT),
+    }
 
 
-def report(readers, verifiers, reviewer):
-    best = next(s for s in readers if s["role"] == name(REVIEWER))
-    reader = cheapest(readers, lambda s: (s["precision"] or 0) >= (best["precision"] or 0))
-    verifier = cheapest(verifiers, lambda s: s["decoys accepted"] == 0 and not s[DISAGREE])
-    lines = [f"Reviewer {name(REVIEWER)}: {reviewer['decoys accepted']} of {reviewer['decoys']} decoys accepted.", "",
-             "| Reader | Facts | Accepted | Precision | Recall | Expected lines shown | Expected EOC pages cited | $ |",
-             "|---|---|---|---|---|---|---|---|"]
-    lines += [f"| {s['role']} | {s['facts']} | {s['accepted']} | {s['precision']} | {s['recall']} | "
-              f"{s['expected lines shown']} | {s['expected EOC pages cited']} | {s['dollars']:.2f} |" for s in readers]
-    lines += ["", "| Verifier | Decoys accepted | Accepts reviewer's accepts | Accepts reviewer's rejects | $ |",
-              "|---|---|---|---|---|"]
-    lines += [f"| {s['role']} | {s['decoys accepted']} of {s['decoys']} | {s[AGREE]} | {s[DISAGREE]} | {s['dollars']:.2f} |"
-              for s in verifiers]
-    lines += ["", f"Cheapest reader as precise as {name(REVIEWER)}: {reader}.",
-              f"Cheapest verifier that accepts no decoy and nothing the reviewer rejects: {verifier}."]
-    return "\n".join(lines) + "\n", {"reader": reader, "verifier": verifier}
+def shown(s):
+    return "n/a" if s["share"] is None else f"{s['hits']}/{s['n']} ({s['interval'][0]}-{s['interval'][1]})"
 
 
-def main(year, work, root, group, which, mode=""):
+def report(readers, verifiers, reviewer, chosen):
+    lines = [f"Reviewer {name(REVIEWER)} accepted {shown(reviewer['decoys_accepted'])} decoys "
+             f"and cost ${reviewer['dollars']:.2f}.",
+             "The reviewer is the same model as one reader and some verifiers, so it may favor them.", "",
+             "| Reader | Precision | Recall | Expected lines shown | Unanswered | $ |", "|---|---|---|---|---|---|"]
+    lines += [f"| {s['role']} | {shown(s['precision'])} | {shown(s['recall'])} | {shown(s['expected'])} | "
+              f"{s['unanswered']} | {s['dollars']:.2f} |" for s in readers]
+    lines += ["", "| Verifier | Decoys accepted | Accepts the reviewer's accepts | Rejects the reviewer's rejects "
+              "| Unanswered | $ |", "|---|---|---|---|---|---|"]
+    lines += [f"| {s['role']} | {shown(s['decoys_accepted'])} | {shown(s['agrees_accepted'])} | "
+              f"{shown(s['agrees_rejected'])} | {s['unanswered']} | {s['dollars']:.2f} |" for s in verifiers]
+    lines += ["", "Intervals are 95% Wilson intervals.",
+              f"Cheapest reader whose intervals reach {name(REVIEWER)}'s precision and recall: {chosen['reader']}.",
+              f"Cheapest verifier that accepts no decoy and at least {AGREEMENT:.0%} of the reviewer's accepts: "
+              f"{chosen['verifier']}."]
+    return "\n".join(lines) + "\n"
+
+
+def main(year, work, root, group, which, budget, mode=""):
     data = years.data_dir(int(year))
-    asker = ask.api() if mode == "api" else None
+    sheet, column = COLUMN[group]
+    wanted = [w for w in expected.load() if (w["sheet"], w["column"]) == (sheet, column)]
     out = data / "evaluations" / group
-    saved = out / "answers"
+    runner = Runner(out / "answers", ask.api() if mode == "api" else None, float(budget))
     docs = [d for d in extract.documents(data) if extract.relevant(Doc(work, d["id"]).pages("layout"), group)]
-    plan_rows = extract.plans(data)
-    docs = docs if which == "all" else sample(docs, plan_rows)
-    by_reader, dollars = {}, {}
-    for role in GRID:
-        by_reader[name(role)], dollars[name(role)] = read(work, data, root, group, role, docs, saved, asker)
+    docs = docs if which == "all" else sample(docs, extract.plans(data))
 
-    with open(f"{root}/pool.json", "w") as f:
-        json.dump(pool(by_reader), f, indent=1)
+    by_reader, readers = {}, []
+    for role in READERS:
+        if not runner.affordable():
+            print(f"Over budget before {name(role)}")
+            break
+        found, left, dollars = read(work, data, root, group, role, docs, runner)
+        by_reader[name(role)] = found
+        readers.append({"role": name(role), "unanswered": left, "dollars": dollars,
+                        "expected": score_expected(found, wanted, docs, group)})
+
     check = f"{root}/check"
-    quiet(extract.verify, work, f"{root}/pool.json", check, data)
+    shutil.rmtree(check, ignore_errors=True)
+    os.makedirs(check)
+    with open(f"{check}/pool.json", "w") as f:
+        json.dump(pool(by_reader), f, indent=1)
+    quiet(extract.verify, work, f"{check}/pool.json", check, data)
     with open(f"{check}/items.json") as f:
         items = json.load(f)
-    verdicts, verifier_dollars = {}, {}
-    for role in [REVIEWER] + [r for r in GRID if r != REVIEWER]:
+    verdicts, scores = {}, []
+    for role in [REVIEWER] + VERIFIERS:
+        if role != REVIEWER and not runner.affordable():
+            print(f"Over budget before {name(role)}")
+            break
         d = f"{check}/{name(role)}"
-        os.makedirs(d, exist_ok=True)
+        os.makedirs(d)
         for t in glob.glob(f"{check}/v-*.md"):
             shutil.copy(t, d)
         tasks = sorted(glob.glob(f"{d}/v-*.md"))
-        answer(tasks, role, saved, asker)
+        left = runner.answer(tasks, role)
         verdicts[name(role)] = judged(items, blanks.verdicts(items, d))
-        verifier_dollars[name(role)] = spent(tasks, role, saved)
+        scores.append({"role": name(role), "unanswered": len(left), "dollars": spent(tasks, role, runner.saved)})
 
     reviewer = verdicts[name(REVIEWER)]
-    truth = accepted_claims(items, reviewer)
-    sheet, column = COLUMN[group]
-    wanted = [w for w in expected.load() if (w["sheet"], w["column"]) == (sheet, column)]
-    readers = [dict(role=n, dollars=dollars[n], **score_reader(found, truth),
-                    **score_expected(found, truth, wanted, docs, plan_rows)) for n, found in by_reader.items()]
-    verifiers = [dict(role=n, dollars=verifier_dollars[n], **score_verifier(items, v, reviewer))
-                 for n, v in verdicts.items() if n != name(REVIEWER)]
-    review = score_verifier(items, reviewer, reviewer)
-    text, picks = report(readers, verifiers, review)
+    verdict_of = {seen(c): reviewer[i] for i, c in enumerate(items) if not c["decoy"]}
+    truth = {claim(c) for i, c in enumerate(items) if reviewer[i] and not c["decoy"]}
+    for s in readers:
+        s.update(score_reader(by_reader[s["role"]], verdict_of, truth))
+    for s in scores:
+        s.update(score_verifier(items, verdicts[s["role"]], reviewer))
+    review, verifiers = scores[0], scores[1:]
+    chosen = picks(readers, verifiers, review)
+    text = report(readers, verifiers, review, chosen)
     with open(out / f"{which}.json", "w") as f:
         json.dump({"documents": [d["id"] for d in docs], "readers": readers, "verifiers": verifiers,
-                   "reviewer": review, "picks": picks}, f, indent=1)
+                   "reviewer": review, "picks": chosen}, f, indent=1)
         f.write("\n")
     with open(out / f"{which}.md", "w") as f:
         f.write(text)
@@ -222,7 +281,7 @@ def main(year, work, root, group, which, mode=""):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) not in (6, 7) or sys.argv[5] not in ("all", "sample"):
+    if len(sys.argv) not in (7, 8) or sys.argv[5] not in ("all", "sample"):
         raise SystemExit(__doc__)
     try:
         main(*sys.argv[1:])

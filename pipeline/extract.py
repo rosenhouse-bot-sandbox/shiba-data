@@ -179,10 +179,13 @@ def doc_facts(doc, group, first, retry, pages, quote_ok):
     return found, (failed if retry is None else [])
 
 
-def read(work, out_dir, group, data=DATA):
+def read(work, out_dir, group, data=DATA, ids=None):
+    """Writes a task for each document that mentions the group, or for those of them named in ids."""
     os.makedirs(out_dir, exist_ok=True)
     plan_rows = plans(data)
     for doc in documents(data):
+        if ids is not None and doc["id"] not in ids:
+            continue
         pages = Doc(work, doc["id"]).pages("layout")
         if relevant(pages, group):
             with open(f"{out_dir}/{doc['id']}.md", "w") as f:
