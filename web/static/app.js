@@ -41,7 +41,10 @@ async function start() {
   site = await (await fetch("data.json")).json();
   plans = Object.fromEntries(site.plans.map((p) => [p.plan_id, p]));
   showUpdated(new Date(site.built));
-  $("#download").href = `shibasheets-${site.year}.xlsx`;
+  if (site.sheet_id) {
+    $("#sheet-link").href = `https://docs.google.com/spreadsheets/d/${site.sheet_id}/edit`;
+    $("#sheet-link").hidden = false;
+  }
   $("#prev").addEventListener("click", () => goTo(currentPage() - 1));
   $("#next").addEventListener("click", () => goTo(currentPage() + 1));
   $("#page").addEventListener("change", (e) => goTo(Number(e.target.value)));

@@ -19,7 +19,10 @@ h1 span { color: var(--muted); font-weight: normal; }
 nav { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
 nav a { color: var(--accent); text-decoration: none; padding: 4px 8px; border-radius: 6px; }
 nav a.active { background: var(--head); color: var(--ink); font-weight: 600; }
-#updated { margin-left: auto; color: var(--muted); font-size: 13px; }
+#meta { margin-left: auto; display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+#updated { color: var(--muted); font-size: 13px; }
+#sheet-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; text-decoration: none; }
+#sheet-link[hidden] { display: none; }
 a { color: var(--accent); }
 
 #layout { flex: 1; display: flex; min-height: 0; }
