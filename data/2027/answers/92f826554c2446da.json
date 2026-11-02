@@ -1,0 +1,11 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H5439-019-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"In-network rows for this plan: page 98 outpatient hospital shows $0 for skin biopsies and $500 for all other services; page 99 ASC shows $350 per visit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2098,
+  "output_tokens": 233,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

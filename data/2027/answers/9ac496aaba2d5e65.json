@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H5216-427-2.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 61 in-network outpatient surgery row: Surgery Services $450 at Outpatient Hospital and $350 at Ambulatory Surgical Center. Diagnostic Colonoscopy is $0 at both settings, so each range starts at $0. Page 58 also shows the in-network $0 hospital colonoscopy. The out-of-network 50% rows are correctly left out.\"}]",
+ "usage": {
+  "input_tokens": 2740,
+  "output_tokens": 591,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

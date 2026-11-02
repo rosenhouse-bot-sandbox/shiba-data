@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2923-025-0.md",
+ "reply": "```json\n[{\"key\": \"main.I_outpatient_surgery\", \"result\": \"cite\", \"citations\": [{\"page\": 92, \"quote\": \"Diagnostic Colonoscopies At an Office or Freestanding location: $0 copay At an Outpatient hospital: $0 copay At an Ambulatory Surgical Center (ASC): $0 copay\"}, {\"page\": 95, \"quote\": \"$580 copay for outpatient procedures/surgery at an Outpatient Hospital\"}, {\"page\": 95, \"quote\": \"$480 copay for outpatient procedures/surgery at an ASC - facility\"}]},\n{\"key\": \"main.J_outpatient_rehab\", \"result\": \"cite\", \"citations\": [{\"page\": 94, \"quote\": \"Occupational Therapy Office location: $35 copay\"}, {\"page\": 93, \"quote\": \"Physical Therapy Home or Office location: $45 copay\"}, {\"page\": 94, \"quote\": \"Speech Therapy Office location: $45 copay\"}]},\n{\"key\": \"main.K_tests_labs\", \"result\": \"cite\", \"citations\": [{\"page\": 88, \"quote\": \"Diagnostic Procedures and Tests PCP's office: $0 copay\"}, {\"page\": 88, \"quote\": \"Specialist's office: $20 copay Freestanding location: $40 copay\"}, {\"page\": 89, \"quote\": \"Office or freestanding location: $0 copay Dedicated testing laboratory: $0 copay Outpatient hospital: $0 copay\"}]},\n{\"key\": \"main.R_dental\", \"result\": \"cite\", \"citations\": [{\"page\": 62, \"quote\": \"You have a $2,000 yearly allowance toward Preventive Dental and Comprehensive dental services,\"}, {\"page\": 110, \"quote\": \"You are covered for cleanings, routine exams, X-rays, and more.\"}]},\n{\"key\": \"main.S_acupuncture\", \"result\": \"cite\", \"citations\": [{\"page\": 55, \"quote\": \"Your plan covers routine acupuncture visits under the Dental & Alternative Therapy Allowance.\"}, {\"page\": 63, \"quote\": \"Acupuncture services for conditions other than chronic lower back pain\"}]},\n{\"key\": \"main.V_massage\", \"result\": \"cite\", \"citations\": [{\"page\": 62, \"quote\": \"Massage therapy rendered by a licensed massage therapist.\"}, {\"page\": 62, \"quote\": \"Therapeutic Massage, Routine Acupuncture, and/or Naturopath Services: You will\"}]}]\n```",
+ "usage": {
+  "input_tokens": 21341,
+  "output_tokens": 14436,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

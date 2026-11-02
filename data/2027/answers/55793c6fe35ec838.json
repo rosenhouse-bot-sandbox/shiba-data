@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2001-045-0.md",
+ "reply": "```json\n[{\"key\": \"dvha.G_vision\", \"result\": \"cite\", \"citations\": [{\"page\": 115, \"quote\": \"We cover 1 in or out-of-network routine eye exam every year.\"}, {\"page\": 115, \"quote\": \"$0 copayment 30% coinsurance*\"}, {\"page\": 116, \"quote\": \"1 pair o standard lenses and rames every year\"}, {\"page\": 116, \"quote\": \"retail value o up to $200. You are\"}]},\n{\"key\": \"dvha.H_hearing\", \"result\": \"skip\"},\n{\"key\": \"main.F_primary_care\", \"result\": \"cite\", \"citations\": [{\"page\": 13, \"quote\": \"or 20% coinsurance per visit (in-\"}, {\"page\": 13, \"quote\": \"30% coinsurance per visit (out-o -\"}]},\n{\"key\": \"main.G_specialist\", \"result\": \"cite\", \"citations\": [{\"page\": 100, \"quote\": \"copayment or 20% coinsurance or services rom a\"}, {\"page\": 100, \"quote\": \"30% coinsurance or services rom a\"}]},\n{\"key\": \"main.I_outpatient_surgery\", \"result\": \"cite\", \"citations\": [{\"page\": 95, \"quote\": \"$0 copayment or a colonoscopy at an outpatient hospital.\"}, {\"page\": 95, \"quote\": \"eligibility, $0 copayment or 20% coinsurance or\"}, {\"page\": 94, \"quote\": \"$0 copayment or a colonoscopy at an\"}, {\"page\": 95, \"quote\": \"eligibility,$0 copayment or 20%\"}]},\n{\"key\": \"main.J_outpatient_rehab\", \"result\": \"skip\"},\n{\"key\": \"main.K_tests_labs\", \"result\": \"cite\", \"citations\": [{\"page\": 88, \"quote\": \"copayment or 20% coinsurance or Medicare-covered non-radiological\"}, {\"page\": 87, \"quote\": \"Laboratory tests $0 copayment or\"}]}]\n```",
+ "usage": {
+  "input_tokens": 13611,
+  "output_tokens": 15244,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

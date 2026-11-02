@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2923-025-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"Office-setting rehab copays: OT $35 (p.94), PT $45 (p.93), speech $45 (p.94). Range $35-$45 is correct and leaves out re-evaluations and hospital prices.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Page 62: the Dental & Alternative Therapy Allowance names massage therapy, reimbursed at 50% up to $2,000 for all members.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Page 55 states routine acupuncture is covered under the Dental & Alternative Therapy Allowance. Page 63 lists acupuncture for conditions other than chronic low back pain.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"Page 88: diagnostic tests are $0 at a PCP office, $20 at a specialist office and $40 freestanding, giving $0-$40. Page 89: labs are $0 at office or freestanding locations.\"},\n{\"id\":4,\"ok\":true,\"reason\":\"Page 95: outpatient hospital surgery is $580 and ASC facility is $480 (professional $0). Diagnostic colonoscopies are $0 in each setting, so the ranges $0-$580 and $0-$480 are correct.\"},\n{\"id\":5,\"ok\":false,\"reason\":\"The value is the outpatient surgery range, but the field is tests/labs. The quotes are about surgery and colonoscopies, not tests or labs.\"},\n{\"id\":6,\"ok\":true,\"reason\":\"Page 62 gives a $2,000 allowance for preventive and comprehensive dental. Page 110 confirms mandatory supplemental dental coverage.\"},\n{\"id\":7,\"ok\":false,\"reason\":\"The value is the outpatient surgery range, but the field is outpatient rehab. The quotes are about surgery and colonoscopies, not rehab.\"},\n{\"id\":8,\"ok\":false,\"reason\":\"The value is the rehab copay range, but the field is tests/labs. The quotes are about therapy services, not tests or labs.\"}\n]",
+ "usage": {
+  "input_tokens": 11859,
+  "output_tokens": 1396,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

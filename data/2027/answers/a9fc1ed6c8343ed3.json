@@ -1,0 +1,11 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H2923-025-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 62: the Dental & Alternative Therapy Allowance names therapeutic massage and reimburses 50% up to $2,000, so the shared allowance counts.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 62 gives a $2,000 allowance for preventive and comprehensive dental. Page 110 covers cleanings, exams and X-rays as supplemental benefits.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 92: diagnostic colonoscopy is $0 at outpatient hospital and ASC. Page 95: surgery is $580 at outpatient hospital and $480 at the ASC facility, with a $0 professional copay.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Pages 55 and 63: routine acupuncture for conditions other than chronic low back pain is covered under the Dental & Alternative Therapy Allowance.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Pages 93-94 office prices: occupational therapy $35, physical therapy $45, speech therapy $45.\"},\n{\"id\": 5, \"ok\": false, \"reason\": \"The value and quotes are outpatient surgery and colonoscopy amounts, not diagnostic tests or labs.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 88: diagnostic tests are $0 at the PCP office, $20 at a specialist office and $40 at a freestanding location. Page 89: labs are $0 at office or freestanding locations.\"},\n{\"id\": 7, \"ok\": false, \"reason\": \"The value and quotes are surgery and colonoscopy amounts, not outpatient rehabilitation.\"},\n{\"id\": 8, \"ok\": false, \"reason\": \"The value and quotes are rehabilitation therapy copays, not outpatient surgery.\"}]\n```",
+ "usage": {
+  "input_tokens": 11794,
+  "output_tokens": 943,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

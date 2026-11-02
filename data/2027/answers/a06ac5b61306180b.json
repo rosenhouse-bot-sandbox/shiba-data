@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H3817-010-0.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 51, outpatient surgery row, in-network. Hospital outpatient: $0 for diagnostic colonoscopy and 20% for all other services, so the range is $0-20%. ASC: $0 for diagnostic colonoscopy and $360 for all other services, so the range is $0-$360. The $40 wound care copay is correctly left out. The value omits the 50% out-of-network amount, but the default is in-network, so I don't treat that as an error.\"}]",
+ "usage": {
+  "input_tokens": 1826,
+  "output_tokens": 706,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

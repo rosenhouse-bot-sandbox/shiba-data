@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H7199-002-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":false,\"reason\":\"The field is outpatient rehab, but the quotes are the outpatient surgery and colonoscopy rows on page 108. Rehab is priced on page 106 at $40 in office and CORF settings.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Page 62 says the $2,250 Dental & Alternative Therapy Allowance covers therapeutic massage for all members. Page 63 lists massage therapy by a licensed massage therapist as covered.\"},\n{\"id\":2,\"ok\":false,\"reason\":\"The field is tests/labs, but the quotes are the outpatient surgery and colonoscopy rows on page 108, not the diagnostic test or lab rows.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"Page 106 shows $40 for physical therapy in a home or office location. The same page shows $40 for occupational and speech therapy in the office and at a CORF. The $50 outpatient hospital rate and the re-evaluations are correctly left out.\"},\n{\"id\":4,\"ok\":true,\"reason\":\"Pages 94-95 show diagnostic tests at $0 (PCP office, home sleep study) up to $40 (freestanding), with the specialist office at $20 and EKGs at $15 in between. Routine labs are $0 at an office or freestanding location.\"},\n{\"id\":5,\"ok\":true,\"reason\":\"Page 108 shows outpatient hospital surgery at $500 and ASC facility surgery at $400, with diagnostic colonoscopies at $0 in each setting. That gives $0-$500 for the hospital and $0-$400 for the ASC.\"},\n{\"id\":6,\"ok\":true,\"reason\":\"Page 55 says routine acupuncture is a supplemental benefit covered under the allowance. Page 62 confirms the $2,250 allowance covers routine acupuncture.\"},\n{\"id\":7,\"ok\":false,\"reason\":\"The field is outpatient surgery, but the quotes are diagnostic test and lab rows from pages 94-95. The surgery amounts are on page 108 ($500 hospital, $400 ASC).\"}\n]",
+ "usage": {
+  "input_tokens": 8887,
+  "output_tokens": 1335,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
