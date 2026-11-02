@@ -44,7 +44,7 @@ def answer(tasks, model, saved, asker, effort=None):
     def one(task):
         with open(task) as f:
             text = f.read()
-        path = os.path.join(saved, key(model, text) + ".json")
+        path = os.path.join(saved, key(model, text, effort) + ".json")
         if os.path.exists(path):
             with open(path) as f:
                 reply = json.load(f)["reply"]
