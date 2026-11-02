@@ -224,7 +224,8 @@ class SyncTest(unittest.TestCase):
         sheet_sync.sync(api, self.site)
         links = [c["textFormatRuns"][0]["format"]["link"]["uri"] if "textFormatRuns" in c else None
                  for r in api.batches[1] if "updateCells" in r for row in r["updateCells"]["rows"] for c in row["values"]]
-        self.assertIn(f"{SITE}#/main/H2001-045-0/H_inpatient", links)
+        self.assertIn(f"{SITE}#/2027/main/H2001-045-0/inpatient", links)
+        self.assertIn(f"{SITE}#/2027/plan/H2001-045-0", links)
         fills = [c["userEnteredFormat"]["backgroundColor"]
                  for r in api.batches[1] if "updateCells" in r for row in r["updateCells"]["rows"] for c in row["values"]]
         self.assertIn(sheet_sync.color(FILLS["note"]), fills)

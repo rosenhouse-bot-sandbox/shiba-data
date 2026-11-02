@@ -5,6 +5,7 @@ import io
 import json
 import os
 import pathlib
+import re
 import shutil
 import sys
 import tempfile
@@ -167,7 +168,13 @@ class SiteDataTest(unittest.TestCase):
         for sheet in ("main", "dvha"):
             self.assertEqual([(c["key"], c["label"]) for c in self.site[sheet]["columns"]],
                              list(build.fields.labels(sheet).items()))
-        self.assertIn({"key": "L_xray_imaging", "label": "X-Ray / Diag Radiology"}, self.site["main"]["columns"])
+        self.assertIn({"key": "L_xray_imaging", "id": "xray_imaging", "label": "X-Ray / Diag Radiology"}, self.site["main"]["columns"])
+
+    def test_column_ids_drop_the_sheet_letter_and_are_unique(self):
+        for sheet in ("main", "dvha"):
+            ids = [c["id"] for c in self.site[sheet]["columns"]]
+            self.assertEqual(len(set(ids)), len(ids))
+            self.assertFalse([i for i in ids if re.match(r"[A-Z]+_", i)])
 
     def test_uncited_cell_lists_the_cms_fields_behind_it(self):
         self.assertEqual(self.cell("main", "H3805-048-0", "O_medical_deductible")["cms"],
@@ -184,7 +191,7 @@ class SiteDataTest(unittest.TestCase):
     def test_links_the_cms_files_and_names_the_column_on_medicare_gov(self):
         self.assertEqual(self.site["cms_files"], {"Landscape": "https://www.cms.gov/files/zip/cy2027-landscape-202610.zip",
                                                   "PBP": "https://www.cms.gov/files/zip/pbp-benefits-2027.zip"})
-        self.assertIn({"key": "O_medical_deductible", "label": "Medical Deductible", "medicare_gov": "It shows this as “Health deductible”."},
+        self.assertIn({"key": "O_medical_deductible", "id": "medical_deductible", "label": "Medical Deductible", "medicare_gov": "It shows this as “Health deductible”."},
                       self.site["main"]["columns"])
 
     def test_doc_ids_are_sha_prefixes(self):

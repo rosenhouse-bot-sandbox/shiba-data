@@ -38,15 +38,15 @@ def rows(site, name):
             label = site["sections"].get(section, section)
             out.append(Row("section", label, [Cell(label)] + [Cell() for _ in range(width - 1)]))
         plan_id = row["plan_id"]
-        out.append(Row("plan", plan_id, [Cell(plans[plan_id]["plan_name"], link=f"{SITE}#/plan/{plan_id}"), Cell(plan_id),
-                                         *(value_cell(name, plan_id, c["key"], row["cells"][c["key"]]) for c in sheet["columns"])]))
+        out.append(Row("plan", plan_id, [Cell(plans[plan_id]["plan_name"], link=f"{SITE}#/{site['year']}/plan/{plan_id}"), Cell(plan_id),
+                                         *(value_cell(site["year"], name, plan_id, c, row["cells"][c["key"]]) for c in sheet["columns"])]))
     return out
 
 
-def value_cell(name, plan_id, key, cell):
+def value_cell(year, name, plan_id, column, cell):
     out = Cell(cell["value"].replace(" | ", "\n"))
     if cell["value"] and (cell["cites"] or "comment" in cell):
-        out.link = f"{SITE}#/{name}/{plan_id}/{key}"
+        out.link = f"{SITE}#/{year}/{name}/{plan_id}/{column['id']}"
     if "comment" in cell:
         out.note = cell["comment"]["text"]
         out.fill = FILLS[cell["comment"]["kind"]]
