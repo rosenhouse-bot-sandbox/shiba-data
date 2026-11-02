@@ -17,11 +17,15 @@ BENEFITS = {
     "imaging.diagnostic.advanced.ct": "CT (CAT) scans",
     "imaging.diagnostic.advanced.mri": "MRI and MRA",
     "imaging.diagnostic.advanced.pet": "PET scans",
+    "imaging.diagnostic.advanced.other": "Advanced imaging the document does not name, such as \"all other advanced imaging\"",
     "imaging.diagnostic.nuclear": "Nuclear medicine",
     "imaging.diagnostic.ultrasound": "Ultrasounds",
     "imaging.diagnostic.mammogram": "Diagnostic mammograms, not screening mammograms",
     "radiation_therapy": "Therapeutic radiology (radiation therapy)",
 }
+# Regexes that find the pages about each benefit group
+FIND = {"imaging": [r"x.ray", r"radiolog", r"\bMRI\b", r"\bCT\b", r"\bPET\b", r"ultrasound", r"mammogra",
+                    r"nuclear medicine", r"imaging"]}
 SETTINGS = {
     "any": "The document names no setting, or one cost covers every setting",
     "office": "A physician's office, of any kind",
@@ -29,6 +33,7 @@ SETTINGS = {
     "office.specialist": "A specialist's office",
     "freestanding": "A freestanding facility, such as a radiology center",
     "outpatient_hospital": "An outpatient hospital",
+    "urgent_care": "An urgent care center",
 }
 NETWORKS = {"any": "Both, or the plan has no network", "in": "In network", "out": "Out of network"}
 COVERED_BY = {"medicare": "A Medicare-covered benefit", "supplemental": "A routine (supplemental) benefit"}
