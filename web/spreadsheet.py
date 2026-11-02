@@ -34,6 +34,6 @@ def add_tab(ws, site, name):
             if cell.link:
                 xl.hyperlink = cell.link
             if cell.note:
-                xl.comment = Comment(cell.note, "shibasheets.org", width=300, height=150)
+                xl.comment = Comment(cell.note, "pdxplans.org", width=300, height=150)
             if cell.fill:
                 xl.fill = PatternFill("solid", fgColor=cell.fill)

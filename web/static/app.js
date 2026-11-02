@@ -41,7 +41,7 @@ async function start() {
   site = await (await fetch("data.json")).json();
   plans = Object.fromEntries(site.plans.map((p) => [p.plan_id, p]));
   showUpdated(new Date(site.built));
-  $("#download").href = `shibasheets-${site.year}.xlsx`;
+  $("#download").href = `pdxplans-${site.year}.xlsx`;
   $("#prev").addEventListener("click", () => goTo(currentPage() - 1));
   $("#next").addEventListener("click", () => goTo(currentPage() + 1));
   $("#page").addEventListener("change", (e) => goTo(Number(e.target.value)));

@@ -39,15 +39,15 @@ const UNCITED = "td:not(.cited):not(.commented)";
 test("the header names the plan year and counties", async () => {
   await page.goto(`${base}#/main`);
   await page.waitForSelector("table.sheet");
-  assert.equal(await page.title(), "shibasheets.org – 2027 Medicare Advantage plans");
-  assert.equal(await page.textContent("h1"), "shibasheets.org – 2027 Medicare Advantage plans for Multnomah & Clackamas");
+  assert.equal(await page.title(), "pdxplans.org – 2027 Medicare Advantage plans");
+  assert.equal(await page.textContent("h1"), "pdxplans.org – 2027 Medicare Advantage plans for Multnomah & Clackamas");
 });
 
 test("the download link saves the spreadsheet", async () => {
   await page.goto(`${base}#/main`);
   await page.waitForSelector("table.sheet");
   const [download] = await Promise.all([page.waitForEvent("download"), page.click("#download")]);
-  assert.equal(download.suggestedFilename(), "shibasheets-2027.xlsx");
+  assert.equal(download.suggestedFilename(), "pdxplans-2027.xlsx");
 });
 
 test("sheets are grouped under named sections", async () => {
