@@ -1,0 +1,11 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H2001-045-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 13, primary care office visits row: 20% coinsurance per visit in-network (the $0 applies to QMB/full Medicaid members) and 30% out-of-network.\"}, {\"id\": 1, \"ok\": true, \"reason\": \"Page 88, other outpatient non-radiological diagnostic tests row (EKG, sleep studies, stress tests): 20% in-network. Page 87, laboratory tests row: $0 in-network.\"}, {\"id\": 2, \"ok\": true, \"reason\": \"Page 100, consultation, diagnosis, and treatment by a specialist row: 20% coinsurance in-network and 30% out-of-network.\"}]\n```",
+ "usage": {
+  "input_tokens": 4794,
+  "output_tokens": 412,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H3817-009-1.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"Page 57 lab row: $0 for HbA1C and $10 for all other tests. Page 58 other outpatient diagnostic tests: $10. Page 60 diagnostic colonoscopy: $0, which counts as a test for Regence. So tests are $0-$10 and labs are $0-$10, all in-network.\"},\n{\"id\":1,\"ok\":false,\"reason\":\"The Part B drugs row on page 54 says 20% coinsurance, with some drugs 'lower than 20%', and never states 0%. The 0%-20% range on page 50 is the home infusion drugs row, a different service. No Part B drug at 0% is shown, so the 0% low end is unsupported.\"}\n]",
+ "usage": {
+  "input_tokens": 5939,
+  "output_tokens": 816,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

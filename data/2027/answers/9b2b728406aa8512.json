@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H5439-015-0.md",
+ "reply": "```json\n[{\"key\": \"main.I_outpatient_surgery\", \"result\": \"cite\", \"citations\": [{\"page\": 98, \"quote\": \"$0 copay for Medicare-covered skin biopsies.\"}, {\"page\": 98, \"quote\": \"$500 copay for all other Medicare-covered outpatient services.\"}, {\"page\": 98, \"quote\": \"$300 copay for each Medicare-covered visit to an ambulatory surgical center.\"}]},\n {\"key\": \"main.K_tests_labs\", \"result\": \"skip\"}]\n```",
+ "usage": {
+  "input_tokens": 2756,
+  "output_tokens": 905,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

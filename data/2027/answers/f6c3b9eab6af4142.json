@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2923-019-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"Page 95 lists office-location prices of $35 for occupational therapy and $45 for physical and speech therapy. That gives $35-$45 and excludes the outpatient hospital prices.\"},\n{\"id\":1,\"ok\":false,\"reason\":\"The value $0-$580 | $0-$480 is the outpatient surgery value. The quotes are surgery and colonoscopy rows, not tests/labs. Tests/labs would be about $0-$40/$0.\"},\n{\"id\":2,\"ok\":false,\"reason\":\"The value and quotes are diagnostic tests and labs (pages 89-90), not outpatient rehab. Page 95 gives rehab as $35-$45.\"},\n{\"id\":3,\"ok\":false,\"reason\":\"The value $0-$40/$0 and its quotes are for tests and labs, not outpatient surgery. Page 96 gives surgery as $580 at an outpatient hospital and $480 facility at an ASC.\"},\n{\"id\":4,\"ok\":true,\"reason\":\"Page 96 shows $0 colonoscopies in every setting, $580 for outpatient hospital surgery, and $480 facility ($0 professional) at an ASC. That matches line 1 of $0-$580 and line 2 of $0-$480.\"},\n{\"id\":5,\"ok\":true,\"reason\":\"Page 57 says routine acupuncture is a supplemental benefit covered under the Dental & Alternative Therapy Allowance, which counts for the dot.\"},\n{\"id\":6,\"ok\":true,\"reason\":\"Page 65 lists massage therapy among the alternative therapies reimbursed at 50% under the Dental & Alternative Therapy Allowance, a supplemental benefit that counts for the dot.\"},\n{\"id\":7,\"ok\":true,\"reason\":\"Page 111 shows mandatory supplemental dental coverage of up to $2,000 per year, including cleanings, routine exams and X-rays.\"},\n{\"id\":8,\"ok\":true,\"reason\":\"Page 89 gives diagnostic tests at $0 in a PCP office, $20 in a specialist office and $40 freestanding. Page 90 gives routine labs at $0 in an office or freestanding location. That matches $0-$40/$0.\"}\n]",
+ "usage": {
+  "input_tokens": 8602,
+  "output_tokens": 1425,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

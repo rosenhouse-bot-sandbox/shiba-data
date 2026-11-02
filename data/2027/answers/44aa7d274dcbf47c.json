@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2001-045-0.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 100 specialist consultation row: in-network $0 or 20% (Medicaid-dependent, so 20% is the non-QMB amount); out-of-network 30%. Hearing exams and telehealth are separate rows and are not used.\"},{\"id\":1,\"ok\":true,\"reason\":\"Page 13 primary care office visits: $0 or 20% in-network (20% is the non-QMB amount); 30% out-of-network.\"},{\"id\":2,\"ok\":true,\"reason\":\"Page 88 non-radiological diagnostic tests: in-network $0 or 20% (20% applies); page 87 laboratory tests: $0 in-network. Value 20%/$0 matches.\"},{\"id\":3,\"ok\":false,\"reason\":\"Page 115 exam is $0 once a year, and page 116 eyewear is $200 retail value every year. But one allowance covers either eyeglasses or contact lenses, and the value does not say 'frames or contacts' as the field requires. Also the $0 depends on UnitedHealthcare Vision, which the value omits.\"}]",
+ "usage": {
+  "input_tokens": 7011,
+  "output_tokens": 988,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

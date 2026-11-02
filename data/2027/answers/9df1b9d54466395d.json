@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2923-019-0.md",
+ "reply": "```json\n[{\"key\": \"main.I_outpatient_surgery\", \"result\": \"cite\", \"citations\": [{\"page\": 96, \"quote\": \"Diagnostic Colonoscopies At an Office or Freestanding location: $0 copay At an Outpatient hospital: $0 copay At an Ambulatory Surgical Center (ASC): $0 copay\"}, {\"page\": 96, \"quote\": \"$580 copay for outpatient procedures/surgery at an Outpatient Hospital\"}, {\"page\": 96, \"quote\": \"$480 copay for outpatient procedures/surgery at an ASC - facility\"}]},\n{\"key\": \"main.J_outpatient_rehab\", \"result\": \"cite\", \"citations\": [{\"page\": 95, \"quote\": \"Office location: $35 copay\"}, {\"page\": 95, \"quote\": \"Home or Office location: $45 copay\"}]},\n{\"key\": \"main.K_tests_labs\", \"result\": \"cite\", \"citations\": [{\"page\": 89, \"quote\": \"Diagnostic Procedures and Tests PCP's office: $0 copay Specialist's office: $20 copay Freestanding location: $40 copay\"}, {\"page\": 90, \"quote\": \"Routine Laboratory Services Office or freestanding location: $0 copay\"}]},\n{\"key\": \"main.R_dental\", \"result\": \"cite\", \"citations\": [{\"page\": 111, \"quote\": \"Devoted Health will pay as much as $2,000 per year for covered dental services listed below.\"}, {\"page\": 111, \"quote\": \"You are covered for cleanings, routine exams, X-rays, and more.\"}]},\n{\"key\": \"main.S_acupuncture\", \"result\": \"cite\", \"citations\": [{\"page\": 57, \"quote\": \"Routine acupuncture is a supplemental benefit offered\"}, {\"page\": 57, \"quote\": \"Your plan covers routine acupuncture visits under the Dental & Alternative Therapy Allowance.\"}]},\n{\"key\": \"main.V_massage\", \"result\": \"cite\", \"citations\": [{\"page\": 65, \"quote\": \"Massage therapy rendered by a licensed massage therapist.\"}]}]\n```",
+ "usage": {
+  "input_tokens": 21077,
+  "output_tokens": 10642,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
