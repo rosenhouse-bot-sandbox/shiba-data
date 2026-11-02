@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H7006-018-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"Page 73 X-rays row shows in-network $0. Page 74 CT/MRI/PET row shows $0 for diagnostic mammograms and $300 for all other tests, which supports $0-$300 for line 2.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Page 47 shows routine (non-Medicare) acupuncture covered through a $50 allowance every six months on the Flex Card, shared with chiropractic and naturopathy, and usable at any approved acupuncture provider.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Page 52 shows a routine chiropractic care row with a $50 Flex Card allowance every six months for non-Medicare-covered chiropractic services, beyond the Medicare spinal manipulation row.\"}\n]"
+}

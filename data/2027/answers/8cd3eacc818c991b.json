@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2406-073-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"The passages show only Medicare-covered acupuncture for chronic low back pain, with no supplemental acupuncture benefit anywhere.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"The page 101 chart lists naturopath services as 'Not covered under any condition', and no passage shows any coverage.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"The chiropractic benefit is Medicare-covered spinal manipulation only, with other services excluded and no supplemental chiropractic passage.\"},\n{\"id\":3,\"ok\":false,\"reason\":\"The quote is from a fitness allowance's list of non-reimbursable items, which does not say the plan lacks massage coverage, and the chiropractic massage exclusion is only about Medicare chiropractic.\"}\n]"
+}

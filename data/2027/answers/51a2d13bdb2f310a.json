@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H5439-011-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 100 outpatient surgery row, in-network: outpatient hospital shows $0 for skin biopsies and $425 for all other services, and ASC shows a $200 copay per visit. This matches $0-$425 | $200.\"}]\n```"
+}

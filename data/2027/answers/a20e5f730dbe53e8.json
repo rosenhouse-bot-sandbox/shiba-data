@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H5216-455-0.md",
+ "reply": "[{\"id\":0,\"ok\":false,\"reason\":\"The field is X-rays/advanced imaging, but the quotes are outpatient surgery and colonoscopy rows. The value $0-$450 | $0-$350 is the surgery value, not imaging.\"},{\"id\":1,\"ok\":true,\"reason\":\"Page 61 in-network: surgery is $450 at Outpatient Hospital and $350 at ASC, and diagnostic colonoscopy is $0 in both settings. That gives $0-$450 for the hospital and $0-$350 for the ASC.\"},{\"id\":2,\"ok\":true,\"reason\":\"Page 53: basic radiological is $0 at the PCP office and $40 at the specialist office (and freestanding), giving $0-$40. Advanced imaging is $330 at PCP/specialist offices and $205 freestanding, giving $205-$330. The $345 outpatient hospital price is correctly left out, and the line does not start at $0 because the plan is Humana.\"}]"
+}

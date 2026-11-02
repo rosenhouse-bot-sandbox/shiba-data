@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H2406-070-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"The field is Part B drugs, but the quotes are X-ray, mammogram and radiology imaging rows, not Part B drug cost-sharing.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 88 specialist row: $70 copayment in-network, $90 copayment out-of-network.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 86 outpatient hospital: $0 colonoscopy, $835 surgery. Page 85 ASC: $0 colonoscopy, $785 surgery. All in-network.\"},\n{\"id\": 3, \"ok\": false, \"reason\": \"The field is X-ray/imaging, but the quotes and value are outpatient surgery and colonoscopy amounts.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 78 standard X-ray: $30. Page 80 row covering CT, MRI and PET: $0 diagnostic mammogram, $320 other radiological diagnostic services. All in-network.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 74 Part B drugs in-network: $0 for allergy antigens, 20% for chemotherapy and all other Part B drugs.\"},\n{\"id\": 6, \"ok\": false, \"reason\": \"The field is outpatient surgery, but the quotes are the specialist office visit copays.\"}]\n```"
+}

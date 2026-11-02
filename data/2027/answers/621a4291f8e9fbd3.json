@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H5439-019-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":false,\"reason\":\"This is the X-ray/imaging field, but the quotes are the outpatient surgery rows (skin biopsy, outpatient hospital, ASC). They do not support X-ray or CT/MRI/PET amounts.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Page 98 outpatient hospital row: $0 for skin biopsies, $500 for all other services, so $0-$500. Page 99 ASC row: $350 in-network. Both match the value.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Page 89: $50 in-network copay for X-rays. Page 91 CT/MRI/PET row: $0 diagnostic mammogram and $250 in physician office or freestanding settings, so $0-$250. The $500 outpatient hospital price is correctly left out.\"},\n{\"id\":3,\"ok\":false,\"reason\":\"This is the outpatient surgery field, but the quotes are X-ray and diagnostic imaging rows. They do not show hospital or ASC surgery copays, which are $0-$500 and $350 on pages 98-99.\"}\n]"
+}

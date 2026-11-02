@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H1036-306-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 68 outpatient surgery row shows Surgery Services at $395 (Outpatient Hospital) and $100 (Ambulatory Surgical Center). It also shows Diagnostic Colonoscopy at $0 in both the ASC and Outpatient Hospital settings. Page 66 (outpatient hospital services, which includes outpatient surgery) confirms $0 colonoscopy and $395 surgery. All in-network amounts support $0-$395 | $0-$100.\"}]\n```"
+}

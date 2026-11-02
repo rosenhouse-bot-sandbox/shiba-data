@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H7006-018-0.md",
+ "reply": "[{\"id\":0,\"ok\":false,\"reason\":\"The quote is from an allowance's list of things it does not pay for, which is not a statement that the plan lacks massage coverage.\"},{\"id\":1,\"ok\":false,\"reason\":\"The EOC shows a $50 Flex Card allowance for routine non-Medicare acupuncture, so the plan covers more than the Medicare benefit.\"},{\"id\":2,\"ok\":false,\"reason\":\"The plan has a $30 quarterly OTC allowance on the Flex Card, and the quote is about Part D drug exclusions.\"}]"
+}

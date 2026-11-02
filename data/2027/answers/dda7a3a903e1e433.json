@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H1036-306-0.md",
+ "reply": "[{\"id\":0,\"ok\":false,\"reason\":\"The value is for outpatient surgery, but the quotes are all imaging and diagnostic rows on page 63. The surgery rows are on pages 66 and 68 ($395 hospital, $100 ASC), so the cited quotes don't support the value.\"},{\"id\":1,\"ok\":false,\"reason\":\"Line 2 ($205-$330) matches advanced imaging in the office and freestanding settings. Line 1's $15 comes from the Diagnostic Procedures and Tests row, not from Basic Radiological Services. The only X-ray quote shows $0 at the PCP's office, and the quotes show no specialist-office X-ray price.\"},{\"id\":2,\"ok\":false,\"reason\":\"The value and quotes are about outpatient surgery and colonoscopy, not X-rays or advanced imaging. The field is X-ray/imaging, so the quotes don't support the value.\"},{\"id\":3,\"ok\":true,\"reason\":\"Page 68 gives outpatient hospital surgery as $395 and ASC surgery as $100. The $0 diagnostic colonoscopy is shown for both settings on pages 66 and 68, so each range starts at $0 and the value $0-$395 | $0-$100 is supported.\"}]"
+}

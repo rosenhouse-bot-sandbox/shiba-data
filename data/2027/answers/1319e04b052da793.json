@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H7006-018-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 73 X-rays row: $0 copay in-network. Page 74 diagnostic non-laboratory tests row (CT, MRI, PET): $0 for diagnostic mammograms and $300 for all other tests. That supports $0-$300.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 47 routine (non-Medicare covered) acupuncture row: a $50 Flex Card allowance every six months for combined routine chiropractic, acupuncture and naturopathy. It is usable at approved acupuncture providers, so it is a supplemental benefit that names acupuncture.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 52 routine chiropractic care row: Flex Card allowance for non-Medicare-covered chiropractic services, usable at any U.S. chiropractic provider. This is a supplemental benefit.\"}]\n```"
+}

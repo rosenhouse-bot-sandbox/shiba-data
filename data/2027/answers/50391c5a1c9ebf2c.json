@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H5216-048-0.retry.md",
+ "reply": "```json\n[{\"key\": \"main.I_outpatient_surgery\", \"result\": \"cite\", \"citations\": [{\"page\": 73, \"quote\": \"Surgery Services $450 copayment – Outpatient Hospital\"}, {\"page\": 73, \"quote\": \"$350 copayment – Ambulatory Surgical Center Diagnostic Colonoscopy $0 copayment\"}, {\"page\": 73, \"quote\": \"Diagnostic Colonoscopy $0 copayment – Ambulatory Surgical Center – Outpatient Hospital Out-of-Network:\"}]}]\n```"
+}

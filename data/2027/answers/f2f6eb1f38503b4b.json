@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H6815-038-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 82 X-ray row shows a $50 copay. Page 83 diagnostic non-lab row (CT, MRI, PET) shows $0 for diagnostic mammogram, which sets the low end. In context, the $200 copay applies to physician office or freestanding settings, which the field says to use.\"}]\n```"
+}

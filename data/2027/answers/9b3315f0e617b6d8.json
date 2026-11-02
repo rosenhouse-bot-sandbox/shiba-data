@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2923-019-0.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"The benefits chart (p.62) says the plan covers only manual manipulation of the spine for subluxation, at a $15 copay for Medicare-covered visits. The exclusions table (p.125) lists routine chiropractic care with only that manipulation covered. No passage shows a supplemental chiropractic benefit, allowance, or card that names it.\"}]"
+}

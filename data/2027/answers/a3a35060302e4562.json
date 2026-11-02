@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H5439-019-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"These quotes come from the outpatient surgery rows on pages 98-99, not from the X-ray or CT/MRI/PET imaging rows, so they do not support an imaging value.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 98 outpatient hospital row: $0 for skin biopsies and $500 for all other services. Page 99 ASC row: $350 per visit. Both are in-network.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 89: $50 in-network copay for X-rays. Page 91 CT/MRI/PET row: $0 for diagnostic mammogram and $250 in office or freestanding settings.\"},\n{\"id\": 3, \"ok\": false, \"reason\": \"These quotes cover X-rays and diagnostic imaging, not outpatient hospital or ASC surgery.\"}]\n```"
+}

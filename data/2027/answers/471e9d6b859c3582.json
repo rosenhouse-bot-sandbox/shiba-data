@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H5216-048-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"The page 65 quotes are radiology rows (basic radiological and advanced imaging), not outpatient surgery. They do not support a surgery cell.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 73 in-network surgery costs $450 at outpatient hospital and $350 at ASC. Diagnostic colonoscopy is $0 in both settings, so both ranges start at $0.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 65 basic radiological services cost $0 at the PCP's office and $45 at the specialist's office. Advanced imaging costs $330 in an office and $205 at a freestanding facility; the outpatient hospital price is excluded.\"},\n{\"id\": 3, \"ok\": false, \"reason\": \"The page 73 quotes are outpatient surgery and colonoscopy rows, not X-ray or advanced imaging. Page 65 shows different imaging amounts.\"}]\n```"
+}

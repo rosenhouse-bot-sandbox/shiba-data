@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H5439-011-0.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 100 shows the in-network outpatient hospital row at $0 for skin biopsies and $425 for all other services, so the range $0-$425 fits. The ASC row shows a $200 copay in-network. All amounts are for this plan. The deductible note and the out-of-network 30% hospital coinsurance are not part of the in-network value.\"}]"
+}

@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H1372-003-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"Page 86 has an OTC items row: members may apply allowance funds to OTC health and wellness products, included in the Healthy Living Allowance. This is a supplemental benefit that names OTC.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Page 63 has a Fitness benefit row: allowance may be applied to online fitness classes and gym membership, included in the Healthy Living Allowance. This is a supplemental benefit that names fitness.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Page 85 outpatient hospital row: $0 for diagnostic colonoscopy and polyp removal, 20% for surgery. The $225 for other services is left out as the field instructs. The ASC row shows 20% coinsurance. Value $0-20% | 20% matches.\"}\n]"
+}

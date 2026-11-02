@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H1036-153-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"The value is right: page 64 shows $395 Outpatient Hospital, $350 ASC, and $0 diagnostic colonoscopy in both settings. But the page 63 quote comes from the neighboring outpatient hospital services row, not the outpatient surgery row.\"}]\n```"
+}

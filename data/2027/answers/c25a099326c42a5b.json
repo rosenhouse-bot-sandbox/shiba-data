@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H3817-011-1.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 57 X-rays: $25 in-network. Page 58 diagnostic radiology: $0 for diagnostic mammography, which starts the range per the field rule, and $300 for other complex imaging (CT, MRI, PET).\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Outpatient hospital (p61): $0 diagnostic colonoscopy and 20% for all other services. ASC (p60-61): $0 diagnostic colonoscopy and $395 for all other services. The p61 $395 line continues the ASC block before the outpatient hospital heading. Wound care is correctly left out.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Tests: $0 diagnostic mammography (counts as a test for Regence) and $40 for other outpatient diagnostic tests (p58). Labs: $0 HbA1C and $30 for all other lab tests (p57).\"}]\n```"
+}
