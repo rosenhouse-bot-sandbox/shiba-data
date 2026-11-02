@@ -192,7 +192,7 @@ function sheetView(name) {
   for (const row of sheet.rows) {
     if (row.section !== section) {
       section = row.section;
-      body.append(el("tr", { class: "section" }, el("th", { colspan: sheet.columns.length + 1 }, site.sections[section] || section)));
+      body.append(el("tr", { class: "section" }, el("th", { colspan: sheet.columns.length + 1 }, el("span", {}, site.sections[section] || section))));
     }
     const plan = plans[row.plan_id];
     body.append(el("tr", { "data-plan": row.plan_id },
