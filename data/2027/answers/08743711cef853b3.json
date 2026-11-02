@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "362ee075ea5896d4.md",
+ "reply": "```json\n[{\"plan_id\": \"H2001-045-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 4, \"quotes\": [\"Diagnostic radiology services (e.g. MRI, CT scan)\", \"copay or 20% coinsurance otherwise\"], \"note\": \"Members with QMB or full Medicaid pay $0 instead. The plan deductible applies, except to diagnostic mammograms.\"},\n {\"plan_id\": \"H2001-045-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"page\": 4, \"quotes\": [\"Diagnostic radiology services (e.g. MRI, CT scan)\", \"Diagnostic $0 copay for each 30% coinsurance\"], \"note\": \"The second quote is one printed text line that mixes the in-network and out-of-network columns.\"},\n {\"plan_id\": \"H2001-045-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per mammogram\", \"page\": 4, \"quotes\": [\"$0 copay for each diagnostic mammogram\"], \"note\": \"\"},\n {\"plan_id\": \"H2001-045-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 4, \"quotes\": [\"Outpatient X-rays Depending on your level of 30% coinsurance Medicaid eligibility, $0 copay or 20% coinsurance\"], \"note\": \"Members with QMB or full Medicaid pay $0 instead. The quote is the row's printed lines joined, so it mixes the in-network and out-of-network columns.\"},\n {\"plan_id\": \"H2001-045-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"page\": 4, \"quotes\": [\"Outpatient X-rays Depending on your level of 30% coinsurance\"], \"note\": \"The quote is one printed text line that mixes the in-network and out-of-network columns.\"}]\n```",
+ "usage": {
+  "input_tokens": 4630,
+  "output_tokens": 3477,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

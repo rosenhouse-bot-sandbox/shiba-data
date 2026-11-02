@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "5d52bb731683d536.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3817-009-1\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"\", \"limit\": \"\", \"page\": 58, \"quotes\": [\"What you pay Out-of-network: 50% coinsurance\"], \"note\": \"The out-of-network cost for the diagnostic radiology row on page 57 continues at the top of page 58.\"},\n {\"plan_id\": \"H3817-009-1\", \"benefit\": \"imaging.diagnostic.advanced.ct\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"\", \"limit\": \"\", \"page\": 58, \"quotes\": [\"What you pay Out-of-network: 50% coinsurance\"], \"note\": \"The out-of-network cost for the diagnostic radiology row on page 57 continues at the top of page 58.\"},\n {\"plan_id\": \"H3817-009-1\", \"benefit\": \"imaging.diagnostic.advanced.mri\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"\", \"limit\": \"\", \"page\": 58, \"quotes\": [\"What you pay Out-of-network: 50% coinsurance\"], \"note\": \"The out-of-network cost for the diagnostic radiology row on page 57 continues at the top of page 58.\"},\n {\"plan_id\": \"H3817-009-1\", \"benefit\": \"imaging.diagnostic.advanced.pet\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"\", \"limit\": \"\", \"page\": 58, \"quotes\": [\"What you pay Out-of-network: 50% coinsurance\"], \"note\": \"The out-of-network cost for the diagnostic radiology row on page 57 continues at the top of page 58.\"}]\n```",
+ "usage": {
+  "input_tokens": 16895,
+  "output_tokens": 1630,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -3,7 +3,7 @@ from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import layers
-import run
+import ask, run
 
 URL = "https://example.org/sb.pdf"
 
@@ -37,6 +37,14 @@ class AnswersTest(unittest.TestCase):
                 run.Answers(pathlib.Path(tmp), None)(tmp, run.READER)
         self.assertIn(f"{tmp}/P-1.md", out.getvalue())
         self.assertIn("1 of 1 tasks", str(stop.exception))
+
+    def test_finds_answers_saved_with_an_effort(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            pathlib.Path(tmp, "P-1.md").write_text("task")
+            os.makedirs(f"{tmp}/answers")
+            ask.write(f"{tmp}/answers/{ask.key(run.READER, 'task', 'high')}.json", {"reply": "[]"})
+            run.Answers(pathlib.Path(tmp), None)(tmp, run.READER, "high")
+            self.assertEqual(pathlib.Path(tmp, "P-1.json").read_text(), "[]\n")
 
 
 class StepsTest(unittest.TestCase):

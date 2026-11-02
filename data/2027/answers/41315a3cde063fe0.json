@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "8acbaf3993261220.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-040-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per diagnostic mammogram\", \"limit\": \"\", \"page\": 3,\n  \"quotes\": [\"$0 copay for each diagnostic mammogram\"], \"note\": \"\"},\n {\"plan_id\": \"H3805-040-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$285\", \"unit\": \"\", \"limit\": \"\", \"page\": 3,\n  \"quotes\": [\"$285 copay otherwise\"], \"note\": \"The row lists MRI and CT only as examples (e.g.), so the cost is recorded for all diagnostic radiology.\"},\n {\"plan_id\": \"H3805-040-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$25\", \"unit\": \"\", \"limit\": \"\", \"page\": 3,\n  \"quotes\": [\"Outpatient X-rays\", \"$25 copay\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 3504,
+  "output_tokens": 1019,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
