@@ -38,3 +38,7 @@ test("document kinds are case-insensitive and a missing page is page 1", () => {
 test("an unknown view falls back to the main sheet", () => {
   assert.deepEqual(parse("#/2027/nope", 2027), { year: 2027, view: "main" });
 });
+
+test("a malformed escape is read as it is", () => {
+  assert.deepEqual(parse("#/2027/main/%/x", 2027), { year: 2027, view: "main", plan: "%", sheet: "main", column: "x" });
+});

@@ -53,7 +53,10 @@ async function start() {
   $("#prev").addEventListener("click", () => goTo(currentPage() - 1));
   $("#next").addEventListener("click", () => goTo(currentPage() + 1));
   $("#page").addEventListener("change", (e) => goTo(Number(e.target.value)));
-  $("#close").addEventListener("click", closeViewer);
+  $("#close").addEventListener("click", () => {
+    pushNext = true;
+    closeViewer();
+  });
   $("#find-open").addEventListener("click", openFind);
   $("#find-query").addEventListener("input", search);
   $("#find-query").addEventListener("keydown", (e) => {
@@ -94,39 +97,41 @@ async function start() {
 }
 
 function route() {
-  const state = parse(location.hash, site.year);
+  let state = parse(location.hash, site.year);
+  const otherYear = state.year !== site.year && state.year;
+  if (otherYear || (state.view === "plan" && !plans[state.plan])) {
+    state = { year: site.year, view: "main" };
+    history.replaceState(null, "", format(state));
+  }
+  if (otherYear) hideViewer();
   const { view } = state;
-  const plan = plans[state.plan];
-  const key = `${state.year}/${view}/${view === "plan" ? state.plan : ""}`;
+  const plan = view === "plan" && plans[state.plan];
+  const key = `${view}/${plan ? plan.plan_id : ""}`;
   document.querySelectorAll("nav a").forEach((a) => a.classList.toggle("active", a.dataset.view === view));
   const content = $("#content");
-  const sameView = key === here?.key;
+  const sameView = key === here?.key && !otherYear;
   if (!sameView) {
     if (here) scrollTops[here.key] = content.scrollTop;
-    if (state.year !== site.year) {
-      content.replaceChildren(el("p", { class: "warn" }, `This link is for ${state.year} plans. This site shows ${site.year} plans.`),
-        sheetView("main"));
-    } else if (view === "ambiguities") content.replaceChildren(ambiguitiesView());
-    else if (view === "plan" && plan) content.replaceChildren(planPage(plan));
-    else content.replaceChildren(sheetView(view === "dvha" ? "dvha" : "main"));
+    content.replaceChildren(view === "ambiguities" ? ambiguitiesView() : plan ? planPage(plan) : sheetView(view));
+    if (otherYear) content.prepend(el("p", { class: "warn" }, `That link was for ${otherYear} plans. This site shows ${site.year} plans.`));
     content.scrollTop = scrollTops[key] ?? 0;
   }
-  here = { key, view: plan || view !== "plan" ? view : "main", plan: state.plan };
+  here = { key, view, plan: state.plan };
   markOpenPlans();
-  if (state.year !== site.year) return;
   const at = state.kind && { kind: state.kind, page: state.page };
+  // Links from before column ids name the column by its key.
   const column = site[state.sheet]?.columns.find((c) => c.id === state.column || c.key === state.column);
   const td = column && content.querySelector(
     `td[data-sheet="${state.sheet}"][data-plan="${CSS.escape(state.plan)}"][data-col="${CSS.escape(column.key)}"]`);
   if (td) {
     pick(td);
     openCell(plans[td.dataset.plan], column, site[state.sheet].rows.find((r) => r.plan_id === td.dataset.plan).cells[column.key], at);
-  } else if (view === "plan" && plan) {
+  } else if (plan) {
     unpick();
     const doc = plan.docs.find((d) => site.docs[d].kind === at?.kind);
-    if (doc) openDoc(doc, at.page, null, null);
-    else if ($("#viewer").hidden || !site.docs[viewer.showing].plan_ids.includes(state.plan)) openDoc(planSb(plan), 1, null, null);
+    openDoc(doc || planSb(plan), doc ? at.page : 1, null, null);
   } else if (sameView && selection) {
+    // Back from a cell to its view with no cell picked.
     closeViewer();
   } else {
     unpick();
@@ -191,12 +196,29 @@ function sheetView(name) {
     }
     const plan = plans[row.plan_id];
     body.append(el("tr", { "data-plan": row.plan_id },
-      el("th", { class: "plan" }, el("a", { href: `#/plan/${row.plan_id}` }, plan.plan_name), el("small", {}, row.plan_id)),
+      el("th", { class: "plan" }, planLink(plan), el("small", {}, row.plan_id)),
       ...sheet.columns.map((c) => valueCell(name, plan, c, row.cells[c.key]))));
   }
   table.append(body);
   return el("div", { class: "sheet-wrap" }, table);
 }
+
+// Links to the plan's page, keeping the page of its document that the viewer shows.
+function planLink(plan) {
+  const hash = () => {
+    const open = !$("#viewer").hidden && site.docs[viewer.showing]?.plan_ids.includes(plan.plan_id);
+    return format({ year: site.year, view: "plan", plan: plan.plan_id, ...(open && { kind: site.docs[viewer.showing].kind, page: viewer.page }) });
+  };
+  const a = el("a", { href: format({ year: site.year, view: "plan", plan: plan.plan_id }), onclick: () => { a.href = hash(); } }, plan.plan_name);
+  return a;
+}
+
+// Runs a link's action as a click that adds a history entry.
+const clicked = (action) => (e) => {
+  e.preventDefault();
+  pushNext = true;
+  action(e);
+};
 
 function valueCell(sheet, plan, column, cell) {
   const td = el("td", {
@@ -228,11 +250,11 @@ function commentText(plan, column, cell) {
     const doc = plan.docs.find((d) => site.docs[d].kind === ref[1].toUpperCase());
     parts.push(text.slice(at, ref.index), el("a", {
       href: "#",
-      onclick: (e) => {
-        e.preventDefault();
-        const note = e.target.closest("#source-note") ? $("#source-note").firstElementChild : el("div", {}, cellHeader(plan, column, cell));
-        openDoc(doc, Number(ref[2]), null, note);
-      },
+      onclick: clicked((e) => {
+        if (e.target.closest("#source-note")) return openDoc(doc, Number(ref[2]), null, $("#source-note").firstElementChild);
+        pick(e.target.closest("tr").querySelector("td[data-col]"));
+        openCell(plan, column, cell, { kind: ref[1].toUpperCase(), page: Number(ref[2]) });
+      }),
     }, ref[0]));
     at = ref.index + ref[0].length;
   }
@@ -243,7 +265,7 @@ function commentText(plan, column, cell) {
 const commentSource = (cell, note) => {
   const { doc, page, quote } = cell.comment;
   return el("p", { class: "comment-source" }, "Comment source: ",
-    el("a", { href: "#", onclick: (e) => { e.preventDefault(); openDoc(doc, page, quote, note); } }, `${site.docs[doc].kind} page ${page}`),
+    el("a", { href: "#", onclick: clicked(() => openDoc(doc, page, quote, note)) }, `${site.docs[doc].kind} page ${page}`),
     `: “${quote}”`);
 };
 
@@ -294,7 +316,7 @@ function citeNote(header, cell) {
   cell.cites.forEach((c, i) => {
     const doc = site.docs[c.doc];
     note.append(el("p", { class: "cite" },
-      el("a", { href: "#", onclick: (e) => { e.preventDefault(); openDoc(c.doc, c.page, c.quote, note, cell.cites); } },
+      el("a", { href: "#", onclick: clicked(() => openDoc(c.doc, c.page, c.quote, note, cell.cites)) },
         `${doc.kind} page ${c.page}`),
       c.line ? ` (line ${c.line})` : "", `: “${c.quote}”`));
   });
@@ -326,18 +348,16 @@ function ambiguityRow(sheet, plan, column, cell) {
   const cellHash = format({ year: site.year, view: sheet, plan: plan.plan_id, sheet, column: column.id });
   const value = valueCell(sheet, plan, column, cell);
   return el("tr", { "data-plan": plan.plan_id, "data-kind": kind },
-    el("th", {}, el("a", { href: `#/plan/${plan.plan_id}` }, plan.plan_name), el("small", {}, plan.plan_id)),
+    el("th", {}, planLink(plan), el("small", {}, plan.plan_id)),
     el("td", { class: "text" }, column.label),
     value,
     el("td", { class: "text" }, KIND_NAMES[kind]),
     el("td", { class: "text comment-text" }, ...commentText(plan, column, cell)),
     el("td", { class: "text links" },
-      el("a", { href: "#", onclick: (e) => {
-        e.preventDefault();
+      el("a", { href: "#", onclick: clicked(() => {
         pick(value);
-        pushNext = true;
         openCell(plan, column, cell, { kind: site.docs[doc].kind, page });
-      } }, `${site.docs[doc].kind} page ${page}`),
+      }) }, `${site.docs[doc].kind} page ${page}`),
       el("br"),
       el("a", { href: cellHash, onclick: (e) => { if (location.hash === cellHash) { e.preventDefault(); route(); } } },
         `Show in ${SHEET_NAMES[sheet]}`)));
@@ -347,7 +367,7 @@ function planPage(plan) {
   const docRows = plan.docs.map((id) => {
     const d = site.docs[id];
     return el("tr", {},
-      el("td", {}, el("a", { href: "#", onclick: (e) => { e.preventDefault(); unpick(); openDoc(id, 1, null, null); } }, kindName(d.kind))),
+      el("td", {}, el("a", { href: "#", onclick: clicked(() => { unpick(); openDoc(id, 1, null, null); }) }, kindName(d.kind))),
       el("td", {}, `${d.pages} pages`),
       el("td", {}, el("a", { href: d.url, target: "_blank", rel: "noopener" }, "carrier's copy ↗")));
   });
@@ -627,11 +647,15 @@ function showHit() {
 }
 
 function closeViewer() {
+  hideViewer();
+  updateUrl();
+}
+
+function hideViewer() {
   $("#viewer").hidden = true;
   closeFind();
   unpick();
   markOpenPlans();
-  updateUrl();
 }
 
 function markOpenPlans() {

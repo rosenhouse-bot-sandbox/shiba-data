@@ -4,8 +4,16 @@
 const SHEETS = ["main", "dvha"];
 const VIEWS = [...SHEETS, "plan", "ambiguities"];
 
+const decode = (s) => {
+  try {
+    return decodeURIComponent(s);
+  } catch {
+    return s;
+  }
+};
+
 export function parse(hash, liveYear) {
-  const parts = hash.replace(/^#\/?/, "").split("/").filter(Boolean).map(decodeURIComponent);
+  const parts = hash.replace(/^#\/?/, "").split("/").filter(Boolean).map(decode);
   const year = /^\d{4}$/.test(parts[0]) ? Number(parts.shift()) : liveYear;
   const view = VIEWS.includes(parts[0]) ? parts.shift() : "main";
   const state = { year, view };
