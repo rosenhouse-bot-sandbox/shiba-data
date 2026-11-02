@@ -33,9 +33,11 @@ flowchart TB
     tar[(documents.tar:<br>PDFs, documents.json)]:::state
   end
 
-  subgraph web [GitHub Pages]
+  subgraph web [Cloudflare Worker: pdxplans.org]
     site[(index.html, app.js,<br>data.json, PDFs)]:::state
   end
+
+  sheet[(Google Sheet:<br>volunteers comment)]:::state
 
   findurls[Find document URLs<br>in a browser or the Links sheet]:::heavy
   finddocs[find_docs.py:<br>URL templates]:::det
@@ -60,12 +62,12 @@ flowchart TB
   checked & sheets --> extract --> verify --> eoccites & answers
 
   docwf[Documents workflow, manual:<br>build.py documents]:::det
-  sitewf[Site workflow:<br>tests, build.py site,<br>deploy from main]:::det
+  sitewf[Site workflow:<br>tests, build.py site,<br>deploy from main,<br>sheet_sync.py]:::det
 
   checked --> docwf
   carriers --> docwf --> tar
   docwf -. triggers .-> sitewf
-  tar & git --> sitewf --> site
+  tar & git --> sitewf --> site & sheet
 ```
 
 | Color | Step |
