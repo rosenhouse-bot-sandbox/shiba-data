@@ -35,6 +35,7 @@ permissions:
 jobs:
   run:
     if: github.ref == 'refs/heads/main'
+    environment: cloudflare
     runs-on: ubuntu-24.04
     env:
       STEP: ${{ inputs.step }}

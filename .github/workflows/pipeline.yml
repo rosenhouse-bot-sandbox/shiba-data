@@ -23,6 +23,7 @@ permissions:
 jobs:
   run:
     if: github.ref == 'refs/heads/main'
+    environment: cloudflare
     # A newer image can change pdftotext's layout text, and so every task's hash.
     runs-on: ubuntu-24.04
     env:
