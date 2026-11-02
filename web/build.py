@@ -1,19 +1,21 @@
-"""Builds the static site from the live year's data, or lists the hashes of the PDFs it links.
+"""Builds the plan documents release, its zip, or the static site from the live year's data.
 
 Usage:
-  python3 -I web/build.py site <out_dir>
-  python3 -I web/build.py docs
-
-The pdxplans Worker serves each PDF from R2 as docs/<sha256>.pdf.
+  python3 -I web/build.py documents <out_dir>
+  python3 -I web/build.py site <out_dir> [<documents_dir>]
+  python3 -I web/build.py zip <documents_dir> <zip_file>
 """
 import csv
 import datetime
+import hashlib
 import html
 import json
 import pathlib
 import re
 import shutil
 import sys
+import urllib.request
+import zipfile
 
 HERE = pathlib.Path(__file__).resolve().parent
 sys.path[:0] = [str(HERE), str(HERE.parent / "pipeline")]
@@ -78,7 +80,6 @@ def site_data(data_dir=DATA, layer_names=layers.LAYERS):
         "kind": d["kind"],
         "url": d["url"],
         "sha256": d["sha256"],
-        "file": f"docs/{d['sha256']}.pdf",
         "pages": int(d["pages"]),
         "plan_ids": d["plan_ids"].split(";"),
     } for d in checked}
@@ -145,6 +146,70 @@ def site_data(data_dir=DATA, layer_names=layers.LAYERS):
     }
 
 
+def download(url):
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+    try:
+        with urllib.request.urlopen(req, timeout=180) as r:
+            return r.read()
+    except OSError:
+        return b""
+
+
+def fetch_pdfs(docs, out_dir, today):
+    (out_dir / "pdfs").mkdir(parents=True, exist_ok=True)
+    manifest, failed = {}, []
+    for doc in docs.values():
+        raw = download(doc["url"])
+        if not raw.startswith(b"%PDF"):
+            failed.append(doc["url"])
+            continue
+        doc_id = hashlib.sha256(raw).hexdigest()[:16]
+        manifest[doc_id] = {"file": f"pdfs/{doc_id}.pdf", "url": doc["url"], "retrieved": today}
+        (out_dir / manifest[doc_id]["file"]).write_bytes(raw)
+    return manifest, failed
+
+
+def save_documents(docs, out_dir, today):
+    manifest, failed = fetch_pdfs(docs, out_dir, today)
+    (out_dir / "documents.json").write_text(json.dumps(manifest, indent=1))
+    for doc_id, entry in manifest.items():
+        if doc_id not in docs:
+            print(f"::notice::The carrier re-issued {entry['url']}. Adopt it in documents_checked.csv.")
+    return failed
+
+
+def attach_documents(docs, release_dir, out_dir):
+    manifest = json.loads((release_dir / "documents.json").read_text())
+    (out_dir / "pdfs").mkdir(parents=True, exist_ok=True)
+    for doc_id, doc in docs.items():
+        entry = manifest.get(doc_id, {})
+        doc.update(file=entry.get("file"), retrieved=entry.get("retrieved"))
+        if doc["file"]:
+            shutil.copyfile(release_dir / doc["file"], out_dir / doc["file"])
+    return [i for i, d in docs.items() if not d["file"]]
+
+
+def plan_names(doc):
+    return zip(doc["plan_ids"].split(";"), doc["plan_names"].split("; "), strict=True)
+
+
+def zip_name(plan_id, plan_name, kind):
+    return f"{plan_name} ({plan_id}) {kind}.pdf"
+
+
+def zip_documents(release_dir, zip_path, data_dir=DATA):
+    manifest = json.loads((release_dir / "documents.json").read_text())
+    checked = {d["sha256"][:16]: d for d in rows("generated/documents_checked.csv", data_dir)}
+    with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as z:
+        for doc_id, entry in manifest.items():
+            pdf = release_dir / entry["file"]
+            if doc_id not in checked:
+                z.write(pdf, entry["file"])
+                continue
+            for plan_id, name in plan_names(checked[doc_id]):
+                z.write(pdf, zip_name(plan_id, name, checked[doc_id]["kind"]))
+
+
 def titled(index_html, site):
     title = f"pdxplans.org – {site['year']} Medicare Advantage plans"
     area = html.escape(site["area"])
@@ -152,12 +217,12 @@ def titled(index_html, site):
             .replace("<h1>Medicare Advantage plans</h1>", f"<h1>{title} <span>for {area}</span></h1>"))
 
 
-def main(command, out=None):
-    site = site_data()
-    if command == "docs":
-        print("\n".join(d["sha256"] for d in site["docs"].values()))
+def main(command, out, release=None):
+    if command == "zip":
+        zip_documents(pathlib.Path(out), pathlib.Path(release))
         return
     out_dir = pathlib.Path(out)
+    site = site_data()
     _, kept, dropped = layers.live(DATA)
     for c in dropped:
         print(f"::warning::Dropped a citation whose value is not the live cell's: {layers.where(c)} {c['value']}")
@@ -166,8 +231,17 @@ def main(command, out=None):
     for c in kept + dropped:
         if "beneath" in c:
             print(f"::warning::An edit's author saw {c['saw']}, but the cell beneath it is now {c['beneath']}: {layers.where(c)}")
+    if command == "documents":
+        failed = save_documents(site["docs"], out_dir, datetime.date.today().isoformat())
+        if failed:
+            sys.exit("not a PDF:\n" + "\n".join(failed))
+        return
     shutil.copytree(HERE / "static", out_dir, dirs_exist_ok=True)
     (out_dir / "index.html").write_text(titled((HERE / "static" / "index.html").read_text(), site))
+    if release:
+        missing = attach_documents(site["docs"], pathlib.Path(release), out_dir)
+        if missing:
+            sys.exit("Not in the documents release:\n" + "\n".join(site["docs"][i]["url"] for i in missing))
     site["built"] = datetime.datetime.now(datetime.timezone.utc).isoformat()
     (out_dir / "data.json").write_text(json.dumps(site))
 

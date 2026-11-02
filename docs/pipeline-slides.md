@@ -267,13 +267,15 @@ Each 2027 rebuild cites about 680 of 953 cells, and none of 29 seeded errors.
 ```mermaid
 flowchart LR
   merge[Merge to main] --> site[Site workflow:<br>tests, build, deploy]
-  r2[(R2 bucket:<br>PDFs by hash)] --> site
+  docwf[Documents workflow, manual:<br>download PDFs, cut a release] --> tar[(documents.tar)]
+  tar --> site
   site --> worker[pdxplans.org]
   site --> sheet[Google Sheet]
 ```
 
-The Pipeline workflow stores each PDF in R2 as `blobs/<sha256>`, and the Worker serves it from there.
-The Site build fails if R2 lacks a PDF in `documents_checked.csv`.
+The Site workflow takes PDFs from the release that `documents_release` in `config.json` names.
+Its build fails if that release lacks a document in `documents_checked.csv`.
+When a carrier re-issues a PDF, run the Documents workflow on `main`, then adopt the new release and hashes in one PR.
 After deploying, it updates the Google Sheet in place, so volunteers' comments stay on their cells.
 
 ---
@@ -283,7 +285,7 @@ After deploying, it updates the Google Sheet in place, so volunteers' comments s
 1. Write `data/2028/config.json`, `links.csv` and `found.csv`.
 2. Run the Pipeline workflow with year 2028. It builds `generated/` only.
 3. Merge that branch.
-4. Change `LIVE` to 2028 in `pipeline/years.py`.
+4. Cut a 2028 documents release. Then, in one PR, change `LIVE` to 2028 in `pipeline/years.py` and name the release in `data/2028/config.json`.
 5. Run the Pipeline workflow again. Now the model steps run.
 6. Review that branch, and merge it.
 
