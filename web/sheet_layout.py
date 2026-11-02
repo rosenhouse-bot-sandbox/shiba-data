@@ -1,7 +1,7 @@
 """Lays out the site's plan sheets as rows of the live Google Sheet."""
 from dataclasses import dataclass
 
-SITE = "https://shibasheets.org/"
+SITE = "https://pdxplans.org/"
 TABS = {"main": "Main chart", "dvha": "Dental, vision, hearing, extras"}
 # Keep in sync with --comment and --contradicts in web/static/style.css.
 FILLS = {"note": "FFF6D6", "contradicts": "FFDCB8"}

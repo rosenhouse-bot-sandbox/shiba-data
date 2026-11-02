@@ -210,7 +210,7 @@ def zip_documents(release_dir, zip_path, data_dir=DATA):
 
 
 def titled(index_html, site):
-    title = f"shibasheets.org – {site['year']} Medicare Advantage plans"
+    title = f"pdxplans.org – {site['year']} Medicare Advantage plans"
     area = html.escape(site["area"])
     return (index_html.replace("<title>Medicare Advantage plans</title>", f"<title>{title}</title>")
             .replace("<h1>Medicare Advantage plans</h1>", f"<h1>{title} <span>for {area}</span></h1>"))
