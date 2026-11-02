@@ -30,7 +30,7 @@ EXCLUSION_ROW_ENDS = (" Not covered under any condition", " Not covered under an
 def cells(data=DATA):
     """{sheet.key: {plan_id: cell}} for the fields an EOC can show, without this step's citations."""
     import build
-    site = build.site_data(pathlib.Path(data), layers.without(layers.BLANKS))
+    site = build.site_data(pathlib.Path(data), layers.without(layers.BLANKS, layers.PRESENTED))
     out = collections.defaultdict(dict)
     for sheet in ("main", "dvha"):
         for r in site[sheet]["rows"]:

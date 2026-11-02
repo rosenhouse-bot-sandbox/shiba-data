@@ -2,7 +2,7 @@ import contextlib, csv, io, json, os, pathlib, random, shutil, sys, tempfile, un
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-import filled
+import filled, layers, present
 from eoc import DATA, eoc
 
 PLAN = "H2056-003-0"
@@ -61,6 +61,42 @@ class TargetsTest(unittest.TestCase):
     def test_every_includes_eoc_cited_cells(self):
         self.assertEqual(filled.targets(self.site, every=True)["A"],
                          {"main.G_specialist": "$40", "main.F_primary_care": "$0", "main.V_massage": "●"})
+
+
+class VersionsTest(unittest.TestCase):
+    def test_version_1_sees_neither_its_own_rows_nor_presented_columns(self):
+        names, ignore = filled.VERSIONS[1]
+        self.assertEqual(names, tuple(n for n in layers.LAYERS if n not in (layers.FILLED, layers.PRESENTED)))
+        self.assertIsNone(ignore)
+
+    def test_version_2_sees_presented_columns_instead_of_their_edits(self):
+        names, ignore = filled.VERSIONS[2]
+        self.assertEqual(names, layers.without(layers.FILLED))
+        self.assertTrue(ignore(dict(layer=layers.EDITS, column=present.COLUMN)))
+        self.assertFalse(ignore(dict(layer=layers.EDITS, column="G_specialist")))
+        self.assertFalse(ignore(dict(layer=layers.PRESENTED, column=present.COLUMN)))
+
+    def test_site_data_shows_what_the_version_sees(self):
+        with mock.patch.object(filled.build, "site_data") as site_data:
+            filled.site_data(DATA, 2)
+        site_data.assert_called_once_with(DATA, *filled.VERSIONS[2])
+
+    def test_steps_default_to_the_pinned_version(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            pathlib.Path(tmp, "steps.json").write_text('{"filled": 2}')
+            self.assertEqual(filled.resolve(None, tmp), 2)
+            self.assertEqual(filled.resolve(1, tmp), 1)
+
+    def test_bundle_claims_and_publish_see_the_version_asked_for(self):
+        seen = []
+        with tempfile.TemporaryDirectory() as tmp, \
+             mock.patch.object(filled, "site_data", lambda data, version: seen.append(version) or {}), \
+             mock.patch.object(filled, "targets", lambda site, every=False: {}):
+            pathlib.Path(tmp, "accepted.json").write_text("[]")
+            filled.bundle("work", tmp, version=2)
+            quiet(lambda: filled.claims("work", tmp, f"{tmp}/claims.json", version=2))
+            filled.publish(f"{tmp}/accepted.json", f"{tmp}/out.csv", version=2)
+        self.assertEqual(seen, [2, 2, 2])
 
 
 class PassagesTest(unittest.TestCase):

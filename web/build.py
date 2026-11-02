@@ -69,7 +69,7 @@ def cell(value, cites, pbp, comment, cms):
     return c
 
 
-def site_data(data_dir=DATA, layer_names=layers.LAYERS):
+def site_data(data_dir=DATA, layer_names=layers.LAYERS, ignore=None):
     config = years.config(data_dir)
     year = config["year"]
     checked = rows("generated/documents_checked.csv", data_dir)
@@ -83,7 +83,7 @@ def site_data(data_dir=DATA, layer_names=layers.LAYERS):
         "plan_ids": d["plan_ids"].split(";"),
     } for d in checked}
 
-    live, kept, _ = layers.live(data_dir, layer_names)
+    live, kept, _ = layers.live(data_dir, layer_names, ignore)
     cites = {"main": {}, "dvha": {}}
     for c in kept:
         if c["layer"] == layers.EDITS and c["url"] not in doc_by_url:

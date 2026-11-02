@@ -60,6 +60,15 @@ class LiveTest(unittest.TestCase):
         self.assertEqual(sheets["main"][0]["L_xray_imaging"], "$0 | $0-$300")
         self.assertEqual([(c["column"], c["layer"]) for c in kept], [("U_naturopath", layers.LAYERS[0])])
 
+    def test_skips_the_rows_asked_for(self):
+        def xray_edit(r):
+            return r["layer"] == layers.EDITS and r["column"] == "L_xray_imaging"
+
+        sheets, kept, dropped = layers.live(self.data, layers.LAYERS, ignore=xray_edit)
+        self.assertEqual(sheets["main"][0]["L_xray_imaging"], "$0 | $0-$300")
+        self.assertEqual(sheets["dvha"][0]["F_dental"], "PREV $0")
+        self.assertFalse(any(map(xray_edit, kept + dropped)))
+
     def test_a_struck_machine_quote_is_no_citation(self):
         write(self.data / "machine/eoc_citations.csv", machine(cite("L_xray_imaging", "$0 | $0-$300", quote="wrong"),
                                                           cite("L_xray_imaging", "$0 | $0-$300", quote="right")),
