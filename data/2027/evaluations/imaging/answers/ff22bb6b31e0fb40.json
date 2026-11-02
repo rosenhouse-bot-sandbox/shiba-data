@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "low",
+ "task": "e41fce2e65cf35f2.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-428-2\", \"benefit\": \"imaging.xray\", \"setting\": \"freestanding\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$40\", \"page\": 9, \"quotes\": [\"Basic radiological services\", \"$40 copay                               50% of the cost\"]}]\n```",
+ "usage": {
+  "input_tokens": 6547,
+  "output_tokens": 641,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "low",
+ "task": "da2974c756f3eedc.md",
+ "reply": "```json\n[\n{\"plan_id\":\"H2923-009-0\",\"benefit\":\"imaging.xray\",\"setting\":\"office\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"40%\",\"unit\":\"\",\"limit\":\"\",\"page\":6,\"quotes\":[\"Outpatient X-rays and Ultrasounds Office or freestanding location: 40% coinsurance\"],\"note\":\"Quote may not be contiguous in the source layout; the row spans columns\"},\n{\"plan_id\":\"H2923-009-0\",\"benefit\":\"imaging.xray\",\"setting\":\"outpatient_hospital\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"40%\",\"unit\":\"\",\"limit\":\"\",\"page\":6,\"quotes\":[\"Outpatient hospital: 40% coinsurance\"],\"note\":\"\"},\n{\"plan_id\":\"H2923-009-0\",\"benefit\":\"imaging.diagnostic.ultrasound\",\"setting\":\"outpatient_hospital\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"40%\",\"unit\":\"\",\"limit\":\"\",\"page\":6,\"quotes\":[\"Outpatient hospital: 40% coinsurance\"],\"note\":\"\"},\n{\"plan_id\":\"H2923-009-0\",\"benefit\":\"imaging.diagnostic.advanced.ct\",\"setting\":\"outpatient_hospital\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"50%\",\"unit\":\"\",\"limit\":\"\",\"page\":6,\"quotes\":[\"Outpatient Hospital: 50% coinsurance\"],\"note\":\"\"},\n{\"plan_id\":\"H2923-009-0\",\"benefit\":\"imaging.diagnostic.advanced.pet\",\"setting\":\"outpatient_hospital\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"50%\",\"unit\":\"\",\"limit\":\"\",\"page\":6,\"quotes\":[\"Outpatient Hospital: 50% coinsurance\"],\"note\":\"\"}\n]\n```",
+ "usage": {
+  "input_tokens": 4113,
+  "output_tokens": 679,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

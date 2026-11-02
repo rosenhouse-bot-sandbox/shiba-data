@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "medium",
+ "task": "362ee075ea5896d4.md",
+ "reply": "```json\n[{\"plan_id\": \"H2001-045-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"unit\": \"\", \"limit\": \"\", \"condition\": \"Depending on your level of Medicaid eligibility\", \"page\": 4, \"quotes\": [\"Diagnostic radiology services (e.g. MRI, CT scan)2 Depending on your level of Medicaid eligibility, $0 copay or 20% coinsurance otherwise\"], \"note\": \"Table gives $0 copay for members with QMB or full Medicaid; the other amount is listed. Out-of-network cost for diagnostic radiology other than mammograms is not stated.\"},\n{\"plan_id\": \"H2001-045-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"each\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"$0 copay for each diagnostic mammogram\"], \"note\": \"\"},\n{\"plan_id\": \"H2001-045-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"$0 copay for each diagnostic mammogram 30% coinsurance\"], \"note\": \"\"},\n{\"plan_id\": \"H2001-045-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"unit\": \"\", \"limit\": \"\", \"condition\": \"Depending on your level of Medicaid eligibility\", \"page\": 4, \"quotes\": [\"Outpatient X-rays2 Depending on your level of 30% coinsurance Medicaid eligibility, $0 copay or 20% coinsurance\"], \"note\": \"Table gives $0 copay for members with QMB or full Medicaid; the other amount is listed.\"},\n{\"plan_id\": \"H2001-045-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"Outpatient X-rays2 Depending on your level of 30% coinsurance Medicaid eligibility, $0 copay or 20% coinsurance\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 4630,
+  "output_tokens": 5326,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

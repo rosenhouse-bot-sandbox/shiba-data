@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "low",
+ "task": "5f6896f5c437eeed.retry.md",
+ "reply": "[]",
+ "usage": {
+  "input_tokens": 9663,
+  "output_tokens": 1649,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

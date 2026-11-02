@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "medium",
+ "task": "9f4d4557fa78f8b3.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-048-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$30\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 3, \"quotes\": [\"Outpatient X-rays2   $30 copay\"], \"note\": \"The table does not name a setting for outpatient X-rays, so setting is 'any'. The unit is taken from the plan's copay-per-visit convention; the row itself does not state it.\"},\n{\"plan_id\": \"H3805-048-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$320\", \"unit\": \"\", \"limit\": \"\", \"page\": 3, \"quotes\": [\"$320 copay otherwise\"], \"note\": \"Applies to diagnostic radiology services other than diagnostic mammograms; the row gives examples (MRI, CT scan) without a stated setting. The examples are not listed exhaustively, so the broader imaging.diagnostic benefit is used.\"},\n{\"plan_id\": \"H3805-048-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per mammogram\", \"limit\": \"\", \"page\": 3, \"quotes\": [\"$0 copay for each diagnostic mammogram\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 3556,
+  "output_tokens": 1755,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

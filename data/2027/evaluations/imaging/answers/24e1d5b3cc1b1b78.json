@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "high",
+ "task": "d1ca3a965cb15437.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-041-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$30\", \"unit\": \"per service\", \"limit\": \"\", \"page\": 74, \"quotes\": [\"$30 copayment or each Medicare-covered standard X-ray service.\"], \"note\": \"The cost is listed under 'Outpatient diagnostic tests and therapeutic services and supplies' with no setting named. The quote is the right-hand column read down, since the left-hand 'X-rays' label sits on a different line.\"},\n{\"plan_id\": \"H3805-041-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$320\", \"unit\": \"\", \"limit\": \"\", \"page\": 76, \"quotes\": [\"$320 copayment or other Medicare-covered radiological diagnostic services, not including X-rays.\"], \"note\": \"The document does not state a unit. The cost covers radiological diagnostic services other than X-rays as a group, so it is stated once at the group level.\"},\n{\"plan_id\": \"H3805-041-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per service\", \"limit\": \"\", \"page\": 76, \"quotes\": [\"$0 copayment or each diagnostic mammogram.\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 30318,
+  "output_tokens": 4707,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

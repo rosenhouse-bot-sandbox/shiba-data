@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "low",
+ "task": "cd39f32cdbd73e52.md",
+ "reply": "[{\"plan_id\":\"H2406-042-0\",\"benefit\":\"imaging.diagnostic.mammogram\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$0\",\"page\":4,\"quotes\":[\"$0 copay for each\",\"diagnostic mammogram\"]},\n{\"plan_id\":\"H2406-042-0\",\"benefit\":\"imaging.diagnostic\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$320\",\"page\":4,\"quotes\":[\"$320 copay otherwise\"],\"note\":\"Applies to diagnostic radiology services other than diagnostic mammograms; the examples given are MRI and CT.\"},\n{\"plan_id\":\"H2406-042-0\",\"benefit\":\"imaging.diagnostic\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"30%\",\"page\":4,\"quotes\":[\"Diagnostic radiology services diagnostic mammogram 30% coinsurance\"],\"note\":\"Out-of-network coinsurance shown on the diagnostic radiology row; it appears to apply to diagnostic mammograms as well.\"},\n{\"plan_id\":\"H2406-042-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$15\",\"page\":4,\"quotes\":[\"Outpatient X-rays2   $15 copay\"]},\n{\"plan_id\":\"H2406-042-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$30\",\"page\":4,\"quotes\":[\"$15 copay                    $30 copay\"]}]",
+ "usage": {
+  "input_tokens": 4141,
+  "output_tokens": 590,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

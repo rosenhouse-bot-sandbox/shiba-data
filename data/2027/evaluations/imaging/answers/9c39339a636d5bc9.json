@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "task": "d4758cd5b94a2266.md",
+ "reply": "```json\n[\n{\"plan_id\":\"H2406-070-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$30\",\"unit\":\"per visit\",\"limit\":\"\",\"page\":4,\"quotes\":[\"$30 copay\"],\"note\":\"Row is Outpatient X-rays; no unit stated in the document.\"},\n{\"plan_id\":\"H2406-070-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$45\",\"unit\":\"\",\"limit\":\"\",\"page\":4,\"quotes\":[\"$45 copay\"],\"note\":\"\"},\n{\"plan_id\":\"H2406-070-0\",\"benefit\":\"imaging.diagnostic.mammogram\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$0\",\"unit\":\"\",\"limit\":\"\",\"page\":4,\"quotes\":[\"$0 copay for each diagnostic mammogram\"],\"note\":\"\"},\n{\"plan_id\":\"H2406-070-0\",\"benefit\":\"imaging.diagnostic\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$320\",\"unit\":\"\",\"limit\":\"\",\"page\":4,\"quotes\":[\"$320 copay otherwise\"],\"note\":\"Applies to diagnostic radiology services other than diagnostic mammograms.\"},\n{\"plan_id\":\"H2406-070-0\",\"benefit\":\"imaging.diagnostic\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"30%\",\"unit\":\"\",\"limit\":\"\",\"page\":4,\"quotes\":[\"$0 copay for each 30% coinsurance\"],\"note\":\"Out-of-network column for the diagnostic radiology row.\"}\n]\n```",
+ "usage": {
+  "input_tokens": 4309,
+  "output_tokens": 1866,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

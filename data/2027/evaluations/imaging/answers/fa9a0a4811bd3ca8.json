@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "task": "8acbaf3993261220.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H3805-040-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per diagnostic mammogram\", \"limit\": \"\", \"page\": 3, \"quotes\": [\"$0 copay for each diagnostic mammogram\"], \"note\": \"\"},\n  {\"plan_id\": \"H3805-040-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$285\", \"unit\": \"\", \"limit\": \"\", \"page\": 3, \"quotes\": [\"$285 copay otherwise\"], \"note\": \"Row is 'Diagnostic radiology services (e.g. MRI, CT scan)'; $285 applies to everything other than diagnostic mammograms, which are $0.\"},\n  {\"plan_id\": \"H3805-040-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$25\", \"unit\": \"\", \"limit\": \"\", \"page\": 3, \"quotes\": [\"$25 copay\"], \"note\": \"\"}\n]\n```",
+ "usage": {
+  "input_tokens": 3504,
+  "output_tokens": 1077,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

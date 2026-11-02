@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "medium",
+ "task": "9f4d4557fa78f8b3.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-048-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$30\", \"unit\": \"\", \"limit\": \"\", \"page\": 3, \"quotes\": [\"Outpatient X-rays\", \"$30 copay\"], \"note\": \"The table names no setting for outpatient X-rays, so setting is 'any'. The row does not state a per-visit unit, so unit is left blank.\"}]\n```",
+ "usage": {
+  "input_tokens": 3822,
+  "output_tokens": 1294,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

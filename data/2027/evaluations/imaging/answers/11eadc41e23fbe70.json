@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "task": "362ee075ea5896d4.md",
+ "reply": "```json\n[\n{\"plan_id\":\"H2001-045-0\",\"benefit\":\"imaging.diagnostic.mammogram\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$0\",\"unit\":\"per diagnostic mammogram\",\"limit\":\"\",\"page\":4,\"quotes\":[\"$0 copay for each diagnostic mammogram\"],\"note\":\"\"},\n{\"plan_id\":\"H2001-045-0\",\"benefit\":\"imaging.diagnostic\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"20%\",\"condition\":\"Depending on your level of Medicaid eligibility; 20% coinsurance otherwise (not QMB/full Medicaid)\",\"page\":4,\"quotes\":[\"Depending on your level of Medicaid eligibility, $0 copay or 20% coinsurance otherwise\"],\"note\":\"Row is 'Diagnostic radiology services (e.g. MRI, CT scan)'; examples only\"},\n{\"plan_id\":\"H2001-045-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"20%\",\"condition\":\"Depending on your level of Medicaid eligibility; 20% coinsurance otherwise (not QMB/full Medicaid)\",\"page\":4,\"quotes\":[\"Outpatient X-rays2 Depending on your level of 30% coinsurance Medicaid eligibility, $0 copay or 20% coinsurance\"],\"note\":\"\"},\n{\"plan_id\":\"H2001-045-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"30%\",\"page\":4,\"quotes\":[\"Outpatient X-rays2 Depending on your level of 30% coinsurance Medicaid eligibility, $0 copay or 20% coinsurance\"],\"note\":\"\"}\n]\n```",
+ "usage": {
+  "input_tokens": 4630,
+  "output_tokens": 2049,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

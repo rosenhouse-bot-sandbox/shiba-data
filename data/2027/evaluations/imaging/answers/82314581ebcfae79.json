@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "task": "v-8980c5c5d9008083.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"Page 90: $500 copay for all other diagnostic radiology in an outpatient setting, which is the outpatient hospital row, in network. The $0 diagnostic mammogram is a separate line.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Page 91: $225 copay for other settings, and a freestanding facility is named.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Page 88: out-of-network X-rays are 30% coinsurance.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"Page 90: $0 copay for a Medicare-covered diagnostic mammogram, in network.\"},\n{\"id\":4,\"ok\":true,\"reason\":\"Page 91: out-of-network diagnostic radiology is 30% coinsurance.\"},\n{\"id\":5,\"ok\":true,\"reason\":\"Page 88: in-network X-rays are a $50 copay, and the deductible applies.\"},\n{\"id\":6,\"ok\":false,\"reason\":\"The $500 copay applies to the outpatient setting. A physician office is in the 'other settings' row at $225.\"},\n{\"id\":7,\"ok\":true,\"reason\":\"Page 91: $225 copay for other settings, and a physician office is named.\"},\n{\"id\":8,\"ok\":false,\"reason\":\"The outpatient hospital setting is $500. The $225 is for other settings such as a physician office or freestanding facility.\"},\n{\"id\":9,\"ok\":false,\"reason\":\"A freestanding facility is in the $225 'other settings' row, not the $500 outpatient setting.\"}\n]",
+ "usage": {
+  "input_tokens": 4226,
+  "output_tokens": 1108,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

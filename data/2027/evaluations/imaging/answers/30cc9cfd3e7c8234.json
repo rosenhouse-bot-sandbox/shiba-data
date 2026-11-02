@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "low",
+ "task": "d1ca3a965cb15437.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-041-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$30\", \"unit\": \"per service\", \"limit\": \"\", \"page\": 74, \"quotes\": [\"$30 copayment or each Medicare-covered standard X-ray service.\"], \"note\": \"The document names no setting for this outpatient diagnostic row. The member's Medicaid level (QMB or full Medicaid) may lower this cost, which is not stated here.\"}]\n```",
+ "usage": {
+  "input_tokens": 30371,
+  "output_tokens": 764,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

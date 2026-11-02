@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "low",
+ "task": "d4758cd5b94a2266.md",
+ "reply": "```json\n[{\"plan_id\": \"H2406-070-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$30\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"Outpatient X-rays2   $30 copay\"], \"note\": \"\"},\n{\"plan_id\": \"H2406-070-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$45\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"Outpatient X-rays2   $30 copay                   $45 copay\"], \"note\": \"\"},\n{\"plan_id\": \"H2406-070-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"$0 copay for each diagnostic mammogram\"], \"note\": \"\"},\n{\"plan_id\": \"H2406-070-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$320\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"(e.g. MRI, CT scan)2 $320 copay otherwise\"], \"note\": \"Row lists MRI and CT only as examples (e.g.), so the broader diagnostic benefit is used. The $320 applies to diagnostic radiology other than the $0 diagnostic mammogram.\"},\n{\"plan_id\": \"H2406-070-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"for each diagnostic mammogram 30% coinsurance\"], \"note\": \"Out-of-network 30% cell is aligned with the diagnostic radiology row; the quote is taken from that row's text and may need checking against the layout.\"}]\n```",
+ "usage": {
+  "input_tokens": 4309,
+  "output_tokens": 2873,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

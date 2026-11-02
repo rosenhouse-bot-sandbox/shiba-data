@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "low",
+ "task": "v-8acbaf3993261220.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"Page 3: $0 copay for each diagnostic mammogram; in-network, unit matches.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Page 3: Outpatient X-rays $25 copay.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Page 3: $0 copay for each diagnostic mammogram.\"},\n{\"id\":3,\"ok\":false,\"reason\":\"The $285 copay applies to diagnostic radiology (MRI, CT) 'otherwise', not to all imaging.diagnostic. Mammograms are $0 and the row is described as MRI and CT, so the benefit is too broad.\"},\n{\"id\":4,\"ok\":false,\"reason\":\"Same benefit-scope problem as item 3, and network 'any' is unsupported because the document does not state out-of-network costs here.\"},\n{\"id\":5,\"ok\":true,\"reason\":\"Page 3: $0 copay for each diagnostic mammogram, in network.\"},\n{\"id\":6,\"ok\":true,\"reason\":\"Page 3: Outpatient X-rays $25 copay.\"},\n{\"id\":7,\"ok\":true,\"reason\":\"Page 3: Outpatient X-rays $25 copay.\"},\n{\"id\":8,\"ok\":false,\"reason\":\"Network 'any' is not supported; the page does not state out-of-network costs.\"},\n{\"id\":9,\"ok\":true,\"reason\":\"Page 3: $0 copay for each diagnostic mammogram; unit matches.\"}\n]",
+ "usage": {
+  "input_tokens": 3550,
+  "output_tokens": 502,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

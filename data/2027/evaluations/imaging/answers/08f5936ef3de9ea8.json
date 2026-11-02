@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "high",
+ "task": "e306f120395b6260.md",
+ "reply": "```json\n[{\"plan_id\": \"H2406-073-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$30\", \"unit\": \"each Medicare-covered standard X-ray service\", \"limit\": \"\", \"page\": 67, \"quotes\": [\"X-rays $30 copayment or each Medicare-covered standard X-ray service.\"], \"note\": \"\"},\n{\"plan_id\": \"H2406-073-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$35\", \"unit\": \"each Medicare-covered standard X-ray service\", \"limit\": \"\", \"page\": 67, \"quotes\": [\"X-rays $35 copayment or each Medicare-covered standard X-ray service.\"], \"note\": \"\"},\n{\"plan_id\": \"H2406-073-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$320\", \"unit\": \"other Medicare-covered radiological diagnostic services, not including X-rays\", \"limit\": \"\", \"page\": 69, \"quotes\": [\"$320 copayment or other Medicare-covered radiological diagnostic services, not including X-rays.\"], \"note\": \"\"},\n{\"plan_id\": \"H2406-073-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"unit\": \"\", \"limit\": \"\", \"page\": 69, \"quotes\": [\"30% coinsurance or Medicare-covered diagnostic services, not including X-rays.\"], \"note\": \"The out-of-network cost is written as diagnostic services not including X-rays; the same row's text describes these as diagnostic radiology services.\"},\n{\"plan_id\": \"H2406-073-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"each diagnostic mammogram\", \"limit\": \"\", \"page\": 69, \"quotes\": [\"$0 copayment or each diagnostic mammogram.\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 26830,
+  "output_tokens": 10531,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

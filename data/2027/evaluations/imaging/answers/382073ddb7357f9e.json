@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "medium",
+ "task": "7a95606e4d0c87d0.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-048-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"office.specialist\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 67, \"quotes\": [\"Diagnostic Mammography $0 copayment – Specialist's Office – Outpatient Hospital – Freestanding Radiological Facility\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 35054,
+  "output_tokens": 2033,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

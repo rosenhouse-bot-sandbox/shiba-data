@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "high",
+ "task": "9f4d4557fa78f8b3.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-048-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$320\", \"unit\": \"\", \"limit\": \"\", \"page\": 3, \"quotes\": [\"radiology services $320 copay otherwise\"], \"note\": \"The row gives a $320 copay for diagnostic radiology other than mammograms. The document names no setting and the plan has no network columns.\"},\n{\"plan_id\": \"H3805-048-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 3, \"quotes\": [\"$0 copay for each diagnostic mammogram\"], \"note\": \"\"},\n{\"plan_id\": \"H3805-048-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$30\", \"unit\": \"\", \"limit\": \"\", \"page\": 3, \"quotes\": [\"Outpatient X-rays $30 copay\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 3556,
+  "output_tokens": 3497,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

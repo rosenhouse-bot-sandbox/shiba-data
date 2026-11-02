@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "high",
+ "task": "5d52bb731683d536.md",
+ "reply": "```json\n[{\"plan_id\": \"H3817-009-1\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$5\", \"unit\": \"per provider per day\", \"limit\": \"\", \"page\": 56, \"quotes\": [\"X-rays: In-network: $5 copay per provider per day Out-of-network: 50% coinsurance\"], \"note\": \"\"},\n{\"plan_id\": \"H3817-009-1\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"\", \"limit\": \"\", \"page\": 56, \"quotes\": [\"X-rays: In-network: $5 copay per provider per day Out-of-network: 50% coinsurance\"], \"note\": \"\"},\n{\"plan_id\": \"H3817-009-1\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per provider per day\", \"limit\": \"\", \"page\": 57, \"quotes\": [\"$0 copay per provider per day for diagnostic mammography\"], \"note\": \"\"},\n{\"plan_id\": \"H3817-009-1\", \"benefit\": \"imaging.diagnostic.advanced.other\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$300\", \"unit\": \"per provider per day\", \"limit\": \"\", \"page\": 57, \"quotes\": [\"$300 copay per provider per day for all other complex imaging\"], \"note\": \"The document calls these 'all other complex imaging' after listing CT, MRI and PET scans, but the listed row also includes EKGs, so the cost is mapped to the 'other advanced imaging' benefit rather than the CT, MRI and PET group.\"}]\n```",
+ "usage": {
+  "input_tokens": 15968,
+  "output_tokens": 6790,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "low",
+ "task": "5ab489f7c419b042.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-041-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$30\", \"unit\": \"\", \"limit\": \"\", \"page\": 3, \"quotes\": [\"Outpatient X-rays2   $30 copay\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 3633,
+  "output_tokens": 623,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

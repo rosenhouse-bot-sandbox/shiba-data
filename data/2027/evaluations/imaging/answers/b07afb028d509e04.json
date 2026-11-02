@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "low",
+ "task": "64e05773e847b56e.md",
+ "reply": "[{\"plan_id\":\"H1036-153-0\",\"benefit\":\"imaging.diagnostic.advanced\",\"setting\":\"office\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$330\",\"page\":60,\"quotes\":[\"Advanced Imaging Services $330 copayment – PCP's Office – Specialist's Office\"],\"note\":\"Advanced imaging as defined includes CT, MRI, MRA, PET or similar; a single price for the group\"},{\"plan_id\":\"H1036-153-0\",\"benefit\":\"imaging.diagnostic.advanced\",\"setting\":\"outpatient_hospital\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$345\",\"page\":62,\"quotes\":[\"Advanced Imaging Services $345 copayment – Outpatient Hospital\"]},{\"plan_id\":\"H1036-153-0\",\"benefit\":\"imaging.diagnostic.nuclear\",\"setting\":\"outpatient_hospital\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$325\",\"page\":62,\"quotes\":[\"Nuclear Medicine Services $325 copayment – Outpatient Hospital\"]},{\"plan_id\":\"H1036-153-0\",\"benefit\":\"imaging.xray\",\"setting\":\"outpatient_hospital\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$145\",\"page\":62,\"quotes\":[\"Basic Radiological Services $145 copayment – Outpatient Hospital\"],\"note\":\"Basic Radiological Services assumed to be X-rays\"},{\"plan_id\":\"H1036-153-0\",\"benefit\":\"imaging.diagnostic.mammogram\",\"setting\":\"outpatient_hospital\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$0\",\"page\":62,\"quotes\":[\"Diagnostic Mammography $0 copayment – Outpatient Hospital\"]}]",
+ "usage": {
+  "input_tokens": 30689,
+  "output_tokens": 655,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

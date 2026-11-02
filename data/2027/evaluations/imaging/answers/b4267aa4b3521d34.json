@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "task": "4a0ee31be3437c35.retry.md",
+ "reply": "[\n{\"plan_id\":\"H1036-306-0\",\"benefit\":\"imaging.diagnostic.advanced\",\"setting\":\"freestanding\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$205\",\"unit\":\"\",\"limit\":\"\",\"page\":7,\"quotes\":[\"Freestanding radiological facility: $205 copay\"],\"note\":\"\"},\n{\"plan_id\":\"H1036-306-0\",\"benefit\":\"imaging.xray\",\"setting\":\"office.specialist\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$15\",\"unit\":\"\",\"limit\":\"\",\"page\":7,\"quotes\":[\"Outpatient hospital: $145 copay • PCP's office: $0 copay • Specialist's office: $15 copay\"],\"note\":\"\"},\n{\"plan_id\":\"H1036-306-0\",\"benefit\":\"imaging.xray\",\"setting\":\"urgent_care\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$45\",\"unit\":\"\",\"limit\":\"\",\"page\":7,\"quotes\":[\"Freestanding radiological facility: $40 copay • Outpatient hospital: $145 copay • PCP's office: $0 copay • Specialist's office: $15 copay • Urgent care center: $45 copay\"],\"note\":\"\"},\n{\"plan_id\":\"H1036-306-0\",\"benefit\":\"imaging.diagnostic.mammogram\",\"setting\":\"office.specialist\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$0\",\"unit\":\"\",\"limit\":\"\",\"page\":7,\"quotes\":[\"Freestanding radiological facility: $0 copay • Specialist's office: $0 copay\"],\"note\":\"\"}\n]",
+ "usage": {
+  "input_tokens": 6246,
+  "output_tokens": 1524,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

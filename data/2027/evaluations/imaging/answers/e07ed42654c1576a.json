@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "b4be2a8a3e57d86a.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-427-2\", \"benefit\": \"imaging.diagnostic.advanced\", \"setting\": \"freestanding\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$205\", \"page\": 8, \"quotes\": [\"(MRI, MRA, PET and CT scans)\", \"$205 copay\"]},\n {\"plan_id\": \"H5216-427-2\", \"benefit\": \"imaging.diagnostic.nuclear\", \"setting\": \"freestanding\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$270\", \"page\": 9, \"quotes\": [\"Nuclear medicine and services\", \"$270 copay\"]}]\n```",
+ "usage": {
+  "input_tokens": 8702,
+  "output_tokens": 1099,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "low",
+ "task": "0e1831fb00cf2a95.md",
+ "reply": "The imaging facts in this document are two: the diagnostic radiology row and the outpatient x-ray row.\n\nThe diagnostic radiology row reads \"such as CT/CAT scan and MRI\", which is not an exact list of the services it covers. I therefore state it as `imaging.diagnostic` (diagnostic radiology other than X-rays), in the any-setting category. The row is not limited to CT and MRI, so I did not use `imaging.diagnostic.advanced`.\n\nThe page 3 \"Diagnostic tests and procedures\" row is not an imaging benefit in the list, so I left it out. The dental x-rays are a supplemental dental benefit, not outpatient X-rays, so I also left them out.\n\n```json\n[{\"plan_id\":\"H2056-018-0\",\"benefit\":\"imaging.diagnostic\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$275\",\"unit\":\"\",\"limit\":\"\",\"page\":4,\"quotes\":[\"Diagnostic radiology services, such as CT/ $275 copay\"],\"note\":\"Row says 'such as CT/CAT scan and MRI', so it may not be an exhaustive list of services.\"},\n{\"plan_id\":\"H2056-018-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$10\",\"unit\":\"\",\"limit\":\"\",\"page\":4,\"quotes\":[\"Outpatient x‑rays $10 copay\"],\"note\":\"\"}]\n```",
+ "usage": {
+  "input_tokens": 3162,
+  "output_tokens": 502,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

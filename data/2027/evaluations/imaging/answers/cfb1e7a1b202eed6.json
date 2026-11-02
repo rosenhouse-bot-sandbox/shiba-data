@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "task": "77d83ba821336370.md",
+ "reply": "```json\n[\n  {\"plan_id\":\"H2001-045-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"20%\",\"unit\":\"per service\",\"limit\":\"\",\"page\":86,\"quotes\":[\"Depending on your level o Medicaid eligibility,$0 copayment or 20% coinsurance or each Medicare-covered\"],\"note\":\"Plan shows $0 copayment or 20% coinsurance depending on Medicaid level; 20% is the non-QMB/non-full-Medicaid amount.\"},\n  {\"plan_id\":\"H2001-045-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"30%\",\"unit\":\"per service\",\"limit\":\"\",\"page\":86,\"quotes\":[\"30% coinsurance or each Medicare- covered standard X-\"],\"note\":\"\"},\n  {\"plan_id\":\"H2001-045-0\",\"benefit\":\"imaging.diagnostic\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"20%\",\"unit\":\"per service\",\"limit\":\"\",\"page\":89,\"quotes\":[\"Depending on your level o Medicaid eligibility, $0 copayment or 20% coinsurance or other Medicare-covered radiological diagnostic services, not including X-rays.\"],\"note\":\"Plan shows $0 copayment or 20% coinsurance depending on Medicaid level; 20% is the non-QMB/non-full-Medicaid amount.\"},\n  {\"plan_id\":\"H2001-045-0\",\"benefit\":\"imaging.diagnostic\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"30%\",\"unit\":\"\",\"limit\":\"\",\"page\":89,\"quotes\":[\"30% coinsurance or Medicare-covered diagnostic services, not including X-rays.\"],\"note\":\"\"},\n  {\"plan_id\":\"H2001-045-0\",\"benefit\":\"imaging.diagnostic.mammogram\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$0\",\"unit\":\"per service\",\"limit\":\"\",\"page\":89,\"quotes\":[\"$0 copayment or each diagnostic mammogram.\"],\"note\":\"\"}\n]\n```",
+ "usage": {
+  "input_tokens": 34677,
+  "output_tokens": 2923,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

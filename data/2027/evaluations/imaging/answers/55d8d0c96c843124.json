@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "low",
+ "task": "dbc45a45d9843dd0.md",
+ "reply": "```json\n[\n{\"plan_id\":\"H3817-008-1\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$10\",\"unit\":\"per provider per day\",\"limit\":\"\",\"page\":57,\"quotes\":[\"X-rays: In-network: $10 copay per provider per day\"],\"note\":\"\"},\n{\"plan_id\":\"H3817-008-1\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"50%\",\"unit\":\"\",\"limit\":\"\",\"page\":57,\"quotes\":[\"Out-of-network: 50% coinsurance\"],\"note\":\"\"},\n{\"plan_id\":\"H3817-008-1\",\"benefit\":\"imaging.diagnostic.mammogram\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$0\",\"unit\":\"per provider per day\",\"limit\":\"\",\"page\":58,\"quotes\":[\"$0 copay per provider per day for diagnostic mammography\"],\"note\":\"\"},\n{\"plan_id\":\"H3817-008-1\",\"benefit\":\"imaging.diagnostic.advanced.other\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$300\",\"unit\":\"per provider per day\",\"limit\":\"\",\"page\":58,\"quotes\":[\"$300 copay per provider per day for all other complex imaging\"],\"note\":\"Applies to complex imaging such as CT, MRI, PET; the document does not list exactly those services.\"}\n]\n```",
+ "usage": {
+  "input_tokens": 15645,
+  "output_tokens": 524,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "low",
+ "task": "6c89db5198e7a3b2.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3817-010-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$5\", \"unit\": \"\", \"limit\": \"\", \"page\": 5, \"quotes\": [\"Outpatient x-rays $5\"], \"note\": \"\"},\n{\"plan_id\": \"H3817-010-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"\", \"limit\": \"\", \"page\": 5, \"quotes\": [\"Outpatient x-rays $5 50%\"], \"note\": \"\"},\n{\"plan_id\": \"H3817-010-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 5, \"quotes\": [\"Diagnostic mammography $0 50%\"], \"note\": \"\"},\n{\"plan_id\": \"H3817-010-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"\", \"limit\": \"\", \"page\": 5, \"quotes\": [\"Diagnostic mammography $0 50%\"], \"note\": \"\"},\n{\"plan_id\": \"H3817-010-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$300\", \"unit\": \"\", \"limit\": \"\", \"page\": 5, \"quotes\": [\"Diagnostic radiology (MRI, CT, etc.)\", \"$300\"], \"note\": \"Row lists MRI and CT followed by 'etc.', so it is stated as general diagnostic radiology rather than as advanced imaging. The footnote mark after 'etc.)' is left out of the quote.\"}]\n```",
+ "usage": {
+  "input_tokens": 3740,
+  "output_tokens": 2471,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

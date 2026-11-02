@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "task": "v-0e1831fb00cf2a95.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"Page 4: Outpatient x-rays $10 copay, in network.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Page 4 row 'Diagnostic radiology services, such as CT/CAT scan and MRI' is a $275 copay, so MRI is $275.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Page 4: Outpatient x-rays $10 copay.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"Page 4 row names CT/CAT scan and MRI at a $275 copay.\"},\n{\"id\":4,\"ok\":true,\"reason\":\"Page 4 row names CT/CAT scan and MRI at a $275 copay.\"},\n{\"id\":5,\"ok\":true,\"reason\":\"Page 4 diagnostic radiology services row is a $275 copay, priced together.\"},\n{\"id\":6,\"ok\":true,\"reason\":\"The page row names MRI and shows a $275 copay. The quote is truncated, but the fact is correct.\"},\n{\"id\":7,\"ok\":true,\"reason\":\"Page 4 diagnostic radiology services row is a $275 copay.\"},\n{\"id\":8,\"ok\":true,\"reason\":\"Page 4 row names CT/CAT scan and MRI at a $275 copay.\"},\n{\"id\":9,\"ok\":true,\"reason\":\"Page 4: Outpatient x-rays $10 copay.\"},\n{\"id\":10,\"ok\":true,\"reason\":\"Page 4 row names CT at a $275 copay.\"}\n]",
+ "usage": {
+  "input_tokens": 3444,
+  "output_tokens": 1431,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "task": "362ee075ea5896d4.md",
+ "reply": "```json\n[\n{\"plan_id\":\"H2001-045-0\",\"benefit\":\"imaging.diagnostic\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"20%\",\"unit\":\"\",\"limit\":\"\",\"page\":4,\"quotes\":[\"Medicaid eligibility, $0 copay or 20% coinsurance otherwise\"],\"condition\":\"members without QMB or full Medicaid (depending on level of Medicaid eligibility)\",\"note\":\"Row is 'Diagnostic radiology services (e.g. MRI, CT scan)'; the examples are not a full list, so the broader advanced benefit is not used.\"},\n{\"plan_id\":\"H2001-045-0\",\"benefit\":\"imaging.diagnostic\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"30%\",\"unit\":\"\",\"limit\":\"\",\"page\":4,\"quotes\":[\"Diagnostic tests, Diagnostic $0 copay for each 30% coinsurance\"],\"note\":\"\"},\n{\"plan_id\":\"H2001-045-0\",\"benefit\":\"imaging.diagnostic.mammogram\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$0\",\"unit\":\"per diagnostic mammogram\",\"limit\":\"\",\"page\":4,\"quotes\":[\"$0 copay for each\",\"diagnostic mammogram\"],\"note\":\"\"},\n{\"plan_id\":\"H2001-045-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"20%\",\"unit\":\"\",\"limit\":\"\",\"page\":4,\"quotes\":[\"Outpatient X-rays Depending on your level of 30% coinsurance Medicaid eligibility, $0 copay or 20% coinsurance\"],\"condition\":\"members without QMB or full Medicaid (depending on level of Medicaid eligibility)\",\"note\":\"\"},\n{\"plan_id\":\"H2001-045-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"30%\",\"unit\":\"\",\"limit\":\"\",\"page\":4,\"quotes\":[\"Outpatient X-rays Depending on your level of 30% coinsurance\"],\"note\":\"\"}\n]\n```",
+ "usage": {
+  "input_tokens": 4630,
+  "output_tokens": 4211,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "medium",
+ "task": "362ee075ea5896d4.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2001-045-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"unit\": \"\", \"limit\": \"\", \"condition\": \"Depending on your level of Medicaid eligibility\", \"page\": 4, \"quotes\": [\"Diagnostic radiology services (e.g. MRI, CT scan)\", \"Depending on your level of Medicaid eligibility, $0 copay or 20% coinsurance otherwise\"], \"note\": \"Table gives $0 copay for members with QMB or full Medicaid; only the other amount (20% coinsurance) is listed. The document says 'e.g.' for the MRI and CT examples, so this is not a fixed list and the broader benefit is used. No out-of-network cost for this row is stated.\"}, {\"plan_id\": \"H2001-045-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"condition\": \"\", \"page\": 4, \"quotes\": [\"$0 copay for each diagnostic mammogram\"], \"note\": \"Out-of-network cost (30% coinsurance) omitted because the text fragment is not unique on the page.\"}]\n```",
+ "usage": {
+  "input_tokens": 5696,
+  "output_tokens": 5082,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

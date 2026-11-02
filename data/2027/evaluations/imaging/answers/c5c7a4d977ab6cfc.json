@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "low",
+ "task": "dca4e04d7b6dc26b.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H7006-021-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per service\", \"limit\": \"\", \"page\": 64, \"quotes\": [\"X-rays In-Network $0 copay for each Medicare-covered service. Prior Authorization may be required.\"], \"note\": \"\"},\n{\"plan_id\": \"H7006-021-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"per service\", \"limit\": \"\", \"page\": 64, \"quotes\": [\"X-rays In-Network $0 copay for each Medicare-covered service. Prior Authorization may be required. Out-of-Network 50% coinsurance for each Medicare-covered service.\"], \"note\": \"\"},\n{\"plan_id\": \"H7006-021-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$60\", \"unit\": \"per service\", \"limit\": \"\", \"page\": 66, \"quotes\": [\"$0 copay applies to diagnostic mammograms; $60 copay applies to all other tests.\"], \"note\": \"Priced for all radiological diagnostic services other than X-rays, except diagnostic mammograms, which are $0.\"},\n{\"plan_id\": \"H7006-021-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 66, \"quotes\": [\"$0 copay applies to diagnostic mammograms; $60 copay applies to all other tests.\"], \"note\": \"\"},\n{\"plan_id\": \"H7006-021-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"per service\", \"limit\": \"\", \"page\": 66, \"quotes\": [\"Other outpatient diagnostic tests - Radiological diagnostic services, not including x-rays In-Network $0 copay applies to diagnostic mammograms; $60 copay applies to all other tests. Prior Authorization may be required. Out-of-Network 50% coinsurance for each Medicare-covered service.\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 12057,
+  "output_tokens": 4870,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

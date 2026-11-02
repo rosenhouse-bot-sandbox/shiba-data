@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "high",
+ "task": "d370b4b5b3950077.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-005-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$200 or $300\", \"unit\": \"\", \"limit\": \"\", \"page\": 6, \"quotes\": [\"Diagnostic Radiology (such as CT, PET Scan, etc.)\", \"Outpatient Hospital: $200 or $300 copay\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 4484,
+  "output_tokens": 3055,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

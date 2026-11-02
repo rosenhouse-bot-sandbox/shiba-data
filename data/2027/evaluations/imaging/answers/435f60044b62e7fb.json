@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "high",
+ "task": "cd39f32cdbd73e52.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2406-042-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$320\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"$320 copay otherwise\"], \"note\": \"The in-network cell splits diagnostic mammograms ($0) from other diagnostic radiology ($320). The setting is not named.\"},\n{\"plan_id\": \"H2406-042-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"for each diagnostic mammogram\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"$0 copay for each diagnostic mammogram\"], \"note\": \"\"},\n{\"plan_id\": \"H2406-042-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$15\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"Outpatient X-rays $15 copay\"], \"note\": \"Footnote mark removed from the service name in the quote.\"},\n{\"plan_id\": \"H2406-042-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$30\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"Outpatient X-rays $15 copay $30 copay\"], \"note\": \"Footnote mark removed from the service name in the quote.\"}]\n```",
+ "usage": {
+  "input_tokens": 4912,
+  "output_tokens": 6816,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

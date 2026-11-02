@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "low",
+ "task": "cd39f32cdbd73e52.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2406-042-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$15\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"Outpatient X-rays2 $15 copay\"], \"note\": \"\"},\n{\"plan_id\": \"H2406-042-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$30\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"Outpatient X-rays2 $15 copay $30 copay\"], \"note\": \"\"},\n{\"plan_id\": \"H2406-042-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$320\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"Diagnostic radiology services (e.g. MRI, CT scan)2 $320 copay otherwise\"], \"note\": \"Applies to diagnostic radiology other than diagnostic mammograms.\"},\n{\"plan_id\": \"H2406-042-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"$0 copay for each diagnostic mammogram 30% coinsurance\"], \"note\": \"The 30% coinsurance is in the out-of-network column on the diagnostic radiology row; the cell is aligned with the mammogram line, so the scope is uncertain.\"},\n{\"plan_id\": \"H2406-042-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"$0 copay for each diagnostic mammogram\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 4944,
+  "output_tokens": 2689,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

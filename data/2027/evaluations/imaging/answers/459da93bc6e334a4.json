@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "low",
+ "task": "d4758cd5b94a2266.md",
+ "reply": "[{\"plan_id\": \"H2406-070-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 4, \"quotes\": [\"$0 copay for each\"]},\n{\"plan_id\": \"H2406-070-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$320\", \"page\": 4, \"quotes\": [\"$320 copay otherwise\"], \"note\": \"Applies to diagnostic radiology other than diagnostic mammograms.\"},\n{\"plan_id\": \"H2406-070-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"page\": 4, \"quotes\": [\"diagnostic mammogram 30% coinsurance\"]},\n{\"plan_id\": \"H2406-070-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$30\", \"page\": 4, \"quotes\": [\"Outpatient X-rays2   $30 copay\"]},\n{\"plan_id\": \"H2406-070-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$45\", \"page\": 4, \"quotes\": [\"$30 copay                   $45 copay\"]}]",
+ "usage": {
+  "input_tokens": 4309,
+  "output_tokens": 554,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

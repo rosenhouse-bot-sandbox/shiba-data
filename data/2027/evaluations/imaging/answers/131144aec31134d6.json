@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "low",
+ "task": "e306f120395b6260.md",
+ "reply": "```json\n[{\"plan_id\":\"H2406-073-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$30\",\"unit\":\"per service\",\"page\":67,\"quotes\":[\"$30 copayment or\"]},\n{\"plan_id\":\"H2406-073-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$35\",\"unit\":\"per service\",\"page\":67,\"quotes\":[\"$35 copayment or\"]},\n{\"plan_id\":\"H2406-073-0\",\"benefit\":\"imaging.diagnostic.mammogram\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$0\",\"unit\":\"per mammogram\",\"page\":69,\"quotes\":[\"each diagnostic\"]},\n{\"plan_id\":\"H2406-073-0\",\"benefit\":\"imaging.diagnostic\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$320\",\"page\":69,\"quotes\":[\"$320 copayment or\"]},\n{\"plan_id\":\"H2406-073-0\",\"benefit\":\"imaging.diagnostic\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"30%\",\"page\":69,\"quotes\":[\"30% coinsurance or Medicare-covered diagnostic services, not including X-rays.\"],\"note\":\"Quote reads the out-of-network column straight down.\"}]\n```",
+ "usage": {
+  "input_tokens": 26830,
+  "output_tokens": 524,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

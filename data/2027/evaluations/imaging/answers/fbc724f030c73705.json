@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "low",
+ "task": "808ccc78793ded84.md",
+ "reply": "```json\n[\n{\"plan_id\":\"H7199-002-0\",\"benefit\":\"imaging.diagnostic.advanced.ct\",\"setting\":\"office\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$100\",\"unit\":\"\",\"limit\":\"\",\"page\":94,\"quotes\":[\"CT Scans Office or Freestanding location: $100 copay\"],\"note\":\"Quote may not match exactly due to column layout\"},\n{\"plan_id\":\"H7199-002-0\",\"benefit\":\"imaging.diagnostic.advanced.mri\",\"setting\":\"outpatient_hospital\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$200\",\"unit\":\"\",\"limit\":\"\",\"page\":95,\"quotes\":[\"MRIs Office or Freestanding location: $100 copay Outpatient hospital: $200 copay\"],\"note\":\"Quote may not match exactly due to column layout\"},\n{\"plan_id\":\"H7199-002-0\",\"benefit\":\"imaging.diagnostic.nuclear\",\"setting\":\"outpatient_hospital\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$300\",\"unit\":\"\",\"limit\":\"\",\"page\":96,\"quotes\":[\"Nuclear Medicine Office or Freestanding location: $200 copay Outpatient hospital: $300 copay\"],\"note\":\"Quote may not match exactly due to column layout\"},\n{\"plan_id\":\"H7199-002-0\",\"benefit\":\"imaging.diagnostic.advanced.pet\",\"setting\":\"outpatient_hospital\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$300\",\"unit\":\"\",\"limit\":\"\",\"page\":96,\"quotes\":[\"PET Scans Office or Freestanding location: $200 copay Outpatient hospital: $300 copay\"],\"note\":\"Quote may not match exactly due to column layout\"},\n{\"plan_id\":\"H7199-002-0\",\"benefit\":\"imaging.xray\",\"setting\":\"outpatient_hospital\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$75\",\"unit\":\"\",\"limit\":\"\",\"page\":96,\"quotes\":[\"X-rays PCP's office: $25 copay Specialist's office: $25 copay Freestanding location: $25 copay Outpatient hospital: $75 copay\"],\"note\":\"Quote may not match exactly due to column layout\"}\n]\n```",
+ "usage": {
+  "input_tokens": 18484,
+  "output_tokens": 799,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

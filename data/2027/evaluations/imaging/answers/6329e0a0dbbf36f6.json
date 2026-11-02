@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "task": "f73d19eeaaf3a08a.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-428-2\", \"benefit\": \"imaging.xray\", \"setting\": \"office.specialist\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$45\", \"unit\": \"\", \"limit\": \"\", \"page\": 63, \"quotes\": [\"$45 copayment – Specialist's Office\"], \"note\": \"The row is titled Basic Radiological Services and I mapped it to X-rays. The document does not use the word X-rays for this row.\"}]\n```",
+ "usage": {
+  "input_tokens": 35969,
+  "output_tokens": 882,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "task": "1ed5fdb720cabd03.md",
+ "reply": "```json\n[\n{\"plan_id\":\"H2406-042-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$15\",\"unit\":\"per service\",\"limit\":\"\",\"page\":79,\"quotes\":[\"$15 copayment or\"],\"note\":\"\"},\n{\"plan_id\":\"H2406-042-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$30\",\"unit\":\"per service\",\"limit\":\"\",\"page\":79,\"quotes\":[\"$30 copayment or\"],\"note\":\"\"},\n{\"plan_id\":\"H2406-042-0\",\"benefit\":\"imaging.diagnostic.mammogram\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$0\",\"unit\":\"per mammogram\",\"limit\":\"\",\"page\":80,\"quotes\":[\"$0 copayment or each diagnostic mammogram.\"],\"note\":\"\"},\n{\"plan_id\":\"H2406-042-0\",\"benefit\":\"imaging.diagnostic\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$320\",\"unit\":\"per service\",\"limit\":\"\",\"page\":81,\"quotes\":[\"$320 copayment or other Medicare-\"],\"note\":\"Other radiological diagnostic services, not including X-rays\"},\n{\"plan_id\":\"H2406-042-0\",\"benefit\":\"imaging.diagnostic\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"30%\",\"unit\":\"\",\"limit\":\"\",\"page\":80,\"quotes\":[\"30% coinsurance or Medicare-covered diagnostic services, not including X-rays.\"],\"note\":\"\"}\n]\n```",
+ "usage": {
+  "input_tokens": 30240,
+  "output_tokens": 2369,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

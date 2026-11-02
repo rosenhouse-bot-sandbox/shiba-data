@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "task": "a4bc20077fb4a2cf.md",
+ "reply": "```json\n[\n{\"plan_id\":\"H3817-011-1\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$25\",\"unit\":\"per provider per day\",\"limit\":\"\",\"page\":57,\"quotes\":[\"X-rays: In-network: $25 copay per provider per day\"],\"note\":\"\"},\n{\"plan_id\":\"H3817-011-1\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"50%\",\"unit\":\"\",\"limit\":\"\",\"page\":57,\"quotes\":[\"Out-of-network: 50% coinsurance\"],\"note\":\"\"},\n{\"plan_id\":\"H3817-011-1\",\"benefit\":\"imaging.diagnostic.mammogram\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$0\",\"unit\":\"per provider per day\",\"limit\":\"\",\"page\":58,\"quotes\":[\"$0 copay per provider per day for diagnostic mammography\"],\"note\":\"\"},\n{\"plan_id\":\"H3817-011-1\",\"benefit\":\"imaging.diagnostic.advanced\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$300\",\"unit\":\"per provider per day\",\"limit\":\"\",\"page\":58,\"quotes\":[\"$300 copay per provider per day for all other complex imaging\"],\"note\":\"Described as 'all other complex imaging' under CT scans, MRIs, PET scans diagnostic radiology row.\"},\n{\"plan_id\":\"H3817-011-1\",\"benefit\":\"imaging.diagnostic\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"50%\",\"unit\":\"\",\"limit\":\"\",\"page\":58,\"quotes\":[\"Diagnostic radiology: In-network: $0 copay per provider per day for diagnostic mammography $300 copay per provider per day for all other complex imaging Out-of-network: 50% coinsurance\"],\"note\":\"Out-of-network 50% applies to diagnostic radiology row.\"}\n]\n```",
+ "usage": {
+  "input_tokens": 15588,
+  "output_tokens": 716,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

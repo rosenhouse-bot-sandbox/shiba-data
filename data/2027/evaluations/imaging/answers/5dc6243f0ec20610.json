@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "high",
+ "task": "8acbaf3993261220.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-040-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$25\", \"unit\": \"\", \"limit\": \"\", \"page\": 3, \"quotes\": [\"Outpatient X-rays $25 copay\"], \"note\": \"\"},\n{\"plan_id\": \"H3805-040-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$285\", \"unit\": \"\", \"limit\": \"\", \"page\": 3, \"quotes\": [\"$285 copay otherwise\"], \"note\": \"Row names diagnostic radiology services (e.g. MRI, CT scan), so examples are not an exact list. The $285 applies to all diagnostic radiology except diagnostic mammograms, which have a separate $0 copay.\"},\n{\"plan_id\": \"H3805-040-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"each diagnostic mammogram\", \"limit\": \"\", \"page\": 3, \"quotes\": [\"$0 copay for each diagnostic mammogram\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 3504,
+  "output_tokens": 4530,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

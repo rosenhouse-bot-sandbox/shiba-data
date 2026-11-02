@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "low",
+ "task": "dca4e04d7b6dc26b.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H7006-021-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 66, \"quotes\": [\"Other outpatient diagnostic tests - Radiological diagnostic\", \"$0 copay applies to diagnostic mammograms; $60 copay applies to all other tests.\"]}]\n```",
+ "usage": {
+  "input_tokens": 12052,
+  "output_tokens": 499,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

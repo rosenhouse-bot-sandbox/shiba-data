@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "medium",
+ "task": "5ab489f7c419b042.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-041-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$30\", \"unit\": \"\", \"limit\": \"\", \"page\": 3, \"quotes\": [\"Outpatient X-rays $30 copay\"], \"note\": \"Document does not name a setting. Footnote mark removed from quote.\"},\n{\"plan_id\": \"H3805-041-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$320\", \"unit\": \"\", \"limit\": \"\", \"page\": 3, \"quotes\": [\"$320 copay otherwise\"], \"note\": \"Row applies to diagnostic radiology services (e.g. MRI, CT scan) other than diagnostic mammograms; the list is an example list, so the cost is stated for the broader benefit with the setting unnamed.\"},\n{\"plan_id\": \"H3805-041-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 3, \"quotes\": [\"$0 copay for each diagnostic mammogram\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 3641,
+  "output_tokens": 2269,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

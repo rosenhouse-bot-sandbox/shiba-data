@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "task": "cd39f32cdbd73e52.md",
+ "reply": "```json\n[\n{\"plan_id\":\"H2406-042-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$15\",\"unit\":\"per visit\",\"page\":4,\"quotes\":[\"$15 copay $30 copay\"],\"note\":\"Unit is not stated in the document; 'per visit' is assumed.\"},\n{\"plan_id\":\"H2406-042-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$30\",\"unit\":\"per visit\",\"page\":4,\"quotes\":[\"$15 copay $30 copay\"],\"note\":\"Unit is not stated in the document; 'per visit' is assumed.\"},\n{\"plan_id\":\"H2406-042-0\",\"benefit\":\"imaging.diagnostic.mammogram\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$0\",\"condition\":\"for each diagnostic mammogram\",\"page\":4,\"quotes\":[\"$0 copay for each diagnostic mammogram\"]},\n{\"plan_id\":\"H2406-042-0\",\"benefit\":\"imaging.diagnostic\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$320\",\"condition\":\"otherwise\",\"page\":4,\"quotes\":[\"$320 copay otherwise\"],\"note\":\"Row is 'Diagnostic radiology services (e.g. MRI, CT scan)'; the examples are not an exhaustive list.\"},\n{\"plan_id\":\"H2406-042-0\",\"benefit\":\"imaging.diagnostic\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"30%\",\"page\":4,\"quotes\":[\"$0 copay for each 30% coinsurance\"],\"note\":\"Row is 'Diagnostic radiology services (e.g. MRI, CT scan)'; the quote mixes in-network text from the same row.\"}\n]\n```",
+ "usage": {
+  "input_tokens": 4141,
+  "output_tokens": 2288,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

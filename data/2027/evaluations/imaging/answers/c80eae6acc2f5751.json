@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "low",
+ "task": "faf9b5f14f8f128e.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-015-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$50\", \"unit\": \"\", \"limit\": \"\", \"page\": 7, \"quotes\": [\"Outpatient X-rays In-Network $50 copay\"], \"note\": \"The row names no setting.\"},\n{\"plan_id\": \"H5439-015-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"unit\": \"\", \"limit\": \"\", \"page\": 7, \"quotes\": [\"$50 copay * Out-of-Network 30% coinsurance\"], \"note\": \"\"},\n{\"plan_id\": \"H5439-015-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 7, \"quotes\": [\"$0 copay for a diagnostic mammogram.\"], \"note\": \"\"},\n{\"plan_id\": \"H5439-015-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$500\", \"unit\": \"\", \"limit\": \"\", \"page\": 7, \"quotes\": [\"$500 copay for all other diagnostic radiology services received in an outpatient hospital setting.\"], \"note\": \"\"},\n{\"plan_id\": \"H5439-015-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$225\", \"unit\": \"\", \"limit\": \"\", \"page\": 7, \"quotes\": [\"$225 copay for all other services received in all other locations.\"], \"note\": \"The document names the setting only as all other locations, so setting is recorded as any.\"},\n{\"plan_id\": \"H5439-015-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"unit\": \"\", \"limit\": \"\", \"page\": 7, \"quotes\": [\"$225 copay for all other services received in all other locations. * Out-of-Network 30% coinsurance\"], \"note\": \"The out-of-network 30% applies to the diagnostic radiology row without a stated setting.\"}]\n```",
+ "usage": {
+  "input_tokens": 3666,
+  "output_tokens": 3295,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

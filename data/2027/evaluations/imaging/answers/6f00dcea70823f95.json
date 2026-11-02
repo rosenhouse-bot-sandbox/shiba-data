@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "low",
+ "task": "b4be2a8a3e57d86a.retry.md",
+ "reply": "```json\n[\n{\"plan_id\":\"H5216-427-2\",\"benefit\":\"imaging.diagnostic.advanced\",\"setting\":\"freestanding\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$205\",\"page\":8,\"quotes\":[\"$205 copay\"],\"note\":\"Row covers MRI, MRA, PET and CT scans\"},\n{\"plan_id\":\"H5216-427-2\",\"benefit\":\"imaging.xray\",\"setting\":\"freestanding\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$40\",\"page\":8,\"quotes\":[\"$40 copay $145 copay $0 copay $45 copay $40 copay\"]},\n{\"plan_id\":\"H5216-427-2\",\"benefit\":\"imaging.xray\",\"setting\":\"office.pcp\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$0\",\"page\":8,\"quotes\":[\"$40 copay $145 copay $0 copay $45 copay $40 copay\"]},\n{\"plan_id\":\"H5216-427-2\",\"benefit\":\"imaging.xray\",\"setting\":\"office.specialist\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$45\",\"page\":8,\"quotes\":[\"$40 copay $145 copay $0 copay $45 copay $40 copay\"]},\n{\"plan_id\":\"H5216-427-2\",\"benefit\":\"imaging.xray\",\"setting\":\"urgent_care\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$40\",\"page\":8,\"quotes\":[\"$40 copay $145 copay $0 copay $45 copay $40 copay\"]},\n{\"plan_id\":\"H5216-427-2\",\"benefit\":\"imaging.diagnostic.nuclear\",\"setting\":\"freestanding\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$270\",\"page\":9,\"quotes\":[\"$270 copay\"]},\n{\"plan_id\":\"H5216-427-2\",\"benefit\":\"imaging.diagnostic.mammogram\",\"setting\":\"freestanding\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$0\",\"page\":8,\"quotes\":[\"$0 copay $0 copay\"],\"note\":\"Quote may repeat; in-network column of mammography rows\"}\n]\n```",
+ "usage": {
+  "input_tokens": 9052,
+  "output_tokens": 1827,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "task": "5d52bb731683d536.retry.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H3817-009-1\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"\", \"limit\": \"\", \"page\": 58, \"quotes\": [\"What you pay Out-of-network: 50% coinsurance\"], \"note\": \"The out-of-network 50% continues the Diagnostic radiology row from the previous page. The row's in-network costs name diagnostic mammography separately.\"},\n  {\"plan_id\": \"H3817-009-1\", \"benefit\": \"imaging.diagnostic.advanced.ct\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"\", \"limit\": \"\", \"page\": 58, \"quotes\": [\"What you pay Out-of-network: 50% coinsurance\"], \"note\": \"The out-of-network 50% continues the Diagnostic radiology row from the previous page, which names CT scans.\"},\n  {\"plan_id\": \"H3817-009-1\", \"benefit\": \"imaging.diagnostic.advanced.mri\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"\", \"limit\": \"\", \"page\": 58, \"quotes\": [\"What you pay Out-of-network: 50% coinsurance\"], \"note\": \"The out-of-network 50% continues the Diagnostic radiology row from the previous page, which names MRIs.\"},\n  {\"plan_id\": \"H3817-009-1\", \"benefit\": \"imaging.diagnostic.advanced.pet\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"\", \"limit\": \"\", \"page\": 58, \"quotes\": [\"What you pay Out-of-network: 50% coinsurance\"], \"note\": \"The out-of-network 50% continues the Diagnostic radiology row from the previous page, which names PET scans.\"}\n]\n```",
+ "usage": {
+  "input_tokens": 16891,
+  "output_tokens": 1867,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

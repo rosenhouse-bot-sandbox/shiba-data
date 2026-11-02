@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "low",
+ "task": "362ee075ea5896d4.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2001-045-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"condition\": \"\", \"page\": 4, \"quotes\": [\"$0 copay for each\"], \"note\": \"The quote is one column fragment. The same row's out-of-network 30% coinsurance is a separate fact.\"},\n{\"plan_id\": \"H2001-045-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"unit\": \"\", \"limit\": \"\", \"condition\": \"\", \"page\": 4, \"quotes\": [\"$0 copay for each          30% coinsurance\"], \"note\": \"Out-of-network amount sits on the same table line as the in-network copay. Spacing of the quote may need checking.\"},\n{\"plan_id\": \"H2001-045-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"unit\": \"\", \"limit\": \"\", \"condition\": \"\", \"page\": 4, \"quotes\": [\"Outpatient X-rays2   Depending on your level of 30% coinsurance\"], \"note\": \"Out-of-network amount is on the same line as the in-network Medicaid-dependent cost. Quote spacing may need checking.\"}]\n```",
+ "usage": {
+  "input_tokens": 5679,
+  "output_tokens": 3815,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

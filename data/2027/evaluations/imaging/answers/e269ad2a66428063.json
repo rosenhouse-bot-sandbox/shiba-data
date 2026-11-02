@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "task": "f751937f09316ed1.retry.md",
+ "reply": "[{\"plan_id\":\"H2923-009-0\",\"benefit\":\"imaging.xray\",\"setting\":\"office.specialist\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"40%\",\"unit\":\"\",\"limit\":\"\",\"page\":90,\"quotes\":[\"Specialist's office: 40% coinsurance Freestanding location: 40% coinsurance Outpatient hospital: 40% coinsurance Bone Age Studies\"],\"note\":\"\"},{\"plan_id\":\"H2923-009-0\",\"benefit\":\"imaging.xray\",\"setting\":\"freestanding\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"40%\",\"unit\":\"\",\"limit\":\"\",\"page\":90,\"quotes\":[\"Freestanding location: 40% coinsurance Outpatient hospital: 40% coinsurance Bone Age Studies\"],\"note\":\"\"},{\"plan_id\":\"H2923-009-0\",\"benefit\":\"imaging.xray\",\"setting\":\"outpatient_hospital\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"40%\",\"unit\":\"\",\"limit\":\"\",\"page\":90,\"quotes\":[\"Outpatient hospital: 40% coinsurance Bone Age Studies\"],\"note\":\"\"}]",
+ "usage": {
+  "input_tokens": 16369,
+  "output_tokens": 1031,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

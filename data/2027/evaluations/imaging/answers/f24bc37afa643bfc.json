@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "task": "7ac7300e6ca40ac7.md",
+ "reply": "```json\n[\n{\"plan_id\":\"H3805-040-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$25\",\"unit\":\"per service\",\"limit\":\"\",\"page\":74,\"quotes\":[\"$25 copayment or each Medicare-covered standard X-ray service.††\"],\"note\":\"\"},\n{\"plan_id\":\"H3805-040-0\",\"benefit\":\"imaging.diagnostic.mammogram\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$0\",\"unit\":\"per mammogram\",\"limit\":\"\",\"page\":76,\"quotes\":[\"$0 copayment or each diagnostic mammogram.††\"],\"note\":\"\"},\n{\"plan_id\":\"H3805-040-0\",\"benefit\":\"imaging.diagnostic\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$285\",\"unit\":\"per service\",\"limit\":\"\",\"page\":76,\"quotes\":[\"$285 copayment or other Medicare-covered radiological diagnostic services, not including X-rays.††\"],\"note\":\"Applies to other radiological diagnostic services, not including X-rays; the examples listed include CT, PET, MRI, nuclear, ultrasound.\"}\n]\n```",
+ "usage": {
+  "input_tokens": 31759,
+  "output_tokens": 437,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

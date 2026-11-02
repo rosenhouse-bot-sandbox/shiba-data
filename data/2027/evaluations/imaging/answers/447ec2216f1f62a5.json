@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "low",
+ "task": "8acbaf3993261220.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-040-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$25\", \"unit\": \"\", \"limit\": \"\", \"page\": 3, \"quotes\": [\"Outpatient X-rays $25 copay\"], \"note\": \"Document gives no setting. HMO chart without network columns gives in-network costs. Footnote mark removed from quote.\"}]\n```",
+ "usage": {
+  "input_tokens": 3721,
+  "output_tokens": 791,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

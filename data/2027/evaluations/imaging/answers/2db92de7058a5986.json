@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "medium",
+ "task": "d1ca3a965cb15437.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-041-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$30\", \"unit\": \"per service\", \"limit\": \"\", \"page\": 74, \"quotes\": [\"$30 copayment or each Medicare-covered\"], \"note\": \"Listed under outpatient diagnostic tests with no setting named; in-network assumed for an HMO chart.\"},\n{\"plan_id\": \"H3805-041-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$320\", \"unit\": \"\", \"limit\": \"\", \"page\": 76, \"quotes\": [\"$320 copayment or other Medicare-covered radiological diagnostic services, not including X-rays.\"], \"note\": \"Listed under outpatient diagnostic tests with no setting named; in-network assumed for an HMO chart.\"},\n{\"plan_id\": \"H3805-041-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per service\", \"limit\": \"\", \"page\": 76, \"quotes\": [\"$0 copayment or each diagnostic mammogram.\"], \"note\": \"Listed under outpatient diagnostic tests with no setting named; in-network assumed for an HMO chart.\"}]\n```",
+ "usage": {
+  "input_tokens": 30352,
+  "output_tokens": 2871,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

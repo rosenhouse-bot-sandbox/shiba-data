@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "high",
+ "task": "5ab489f7c419b042.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-041-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$320\", \"unit\": \"\", \"limit\": \"\", \"page\": 3, \"quotes\": [\"radiology services $320 copay otherwise\"], \"note\": \"The row lists 'Diagnostic radiology services (e.g. MRI, CT scan)'. 'Otherwise' means this copay applies to diagnostic radiology other than diagnostic mammograms. The plan has no network columns, so in-network is assumed.\"},\n{\"plan_id\": \"H3805-041-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per mammogram\", \"limit\": \"\", \"page\": 3, \"quotes\": [\"$0 copay for each diagnostic mammogram\"], \"note\": \"The plan has no network columns, so in-network is assumed.\"},\n{\"plan_id\": \"H3805-041-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$30\", \"unit\": \"\", \"limit\": \"\", \"page\": 3, \"quotes\": [\"$30 copay\"], \"note\": \"The plan has no network columns, so in-network is assumed.\"}]\n```",
+ "usage": {
+  "input_tokens": 3426,
+  "output_tokens": 4715,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
