@@ -13,6 +13,7 @@ permissions:
 jobs:
   haiku:
     runs-on: ubuntu-latest
+    environment: cloudflare
     env:
       ANTHROPIC_ORGANIZATION_ID: 3c97a8fb-8968-4ed9-aec7-f68b88683532
       ANTHROPIC_SERVICE_ACCOUNT_ID: svac_0142UmsmTSG4RDAgtFvyHY9F

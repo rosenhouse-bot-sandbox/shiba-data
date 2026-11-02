@@ -37,7 +37,7 @@ jobs:
       - run: |
           mkdir ../_docs
           python3 -I build.py docs > ../_docs.txt
-          xargs -P 8 -I{} curl -sSfL --retry 3 --max-time 300 -o "../_docs/{}.pdf" "https://pdxplans.org/docs/{}.pdf" < ../_docs.txt
+          xargs -P 8 -I{} curl -sSfL --retry 5 --retry-all-errors --max-time 300 -o "../_docs/{}.pdf" "https://pdxplans.org/docs/{}.pdf" < ../_docs.txt
           sed 's|.*|&  ../_docs/&.pdf|' ../_docs.txt | sha256sum -c --quiet
       - run: npm ci && npx playwright install --with-deps chromium
       - run: SITE=../_site DOCS=../_docs node --test tests/e2e.test.mjs
@@ -66,7 +66,7 @@ jobs:
       - run: |
           mkdir _work
           python3 -I pipeline/blobs.py inputs "$(python3 -I pipeline/years.py)" _work > _work/inputs.txt
-          xargs -P 8 -n 2 sh -c 'mkdir -p "$(dirname "$2")" && curl -sSfL --retry 3 --max-time 300 -o "$2" "https://pdxplans.org/docs/$1.pdf"' _ \
+          xargs -P 8 -n 2 sh -c 'mkdir -p "$(dirname "$2")" && curl -sSfL --retry 5 --retry-all-errors --max-time 300 -o "$2" "https://pdxplans.org/docs/$1.pdf"' _ \
             < _work/inputs.txt
           sed 's/ /  /' _work/inputs.txt | sha256sum -c --quiet
       - run: python3 -I pipeline/run.py "$(basename "$(python3 -I pipeline/years.py)")" _work replay
