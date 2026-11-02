@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H3805-048-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 12 'Specialist office visits' row: $55 copayment per visit.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"The quotes are outpatient surgery and colonoscopy costs from page 80, not specialist office visit copays.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 75: $30 per standard X-ray. Page 76: $0 per diagnostic mammogram, and $320 for radiological diagnostic services, which include CT, MRI and PET.\"},\n{\"id\": 3, \"ok\": false, \"reason\": \"The quotes are X-ray, mammogram and imaging costs, not outpatient surgery costs.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 80 outpatient surgery row: outpatient hospital $0 colonoscopy and $550 surgery; ASC $0 colonoscopy and $500 surgery.\"},\n{\"id\": 5, \"ok\": false, \"reason\": \"The quotes are outpatient surgery costs, not X-ray or advanced imaging costs.\"}]\n```"
+}

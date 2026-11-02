@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H2056-003-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"The quotes are from the page 62 outpatient surgery row, not specialist office visits. $450 is the ambulatory surgical center amount, not an out-of-network specialist copay.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 8 lists specialist office visits at $65 per visit.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 62 outpatient surgery row: $500 copay at an outpatient hospital facility and $450 copay at an ambulatory surgical center.\"},\n{\"id\": 3, \"ok\": false, \"reason\": \"The quote is the specialist office visit row, not outpatient surgery. Page 62 shows outpatient surgery at $500 and $450.\"}]\n```"
+}

@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H3817-008-1.md",
+ "reply": "[\n{\"id\":0,\"ok\":false,\"reason\":\"The page 50 quote of 0%-20% is for home infusion drugs, a different row. The Part B drugs row on page 54 says 20% (certain drugs may be lower) and never shows a 0% amount, so the 0% low end is not supported.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Page 57 shows X-rays at $10 in-network. Page 58 shows diagnostic mammography at $0 and all other complex imaging at $300, which gives $0-$300 for line 2.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Page 61 outpatient hospital: $0 for diagnostic colonoscopy and 20% for all other services, which gives $0-20%. Pages 60-61 ASC: $0 for diagnostic colonoscopy and $375 for all other services, which gives $0-$375. The $40 wound care amount is correctly left out.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"Tests: the $0 diagnostic colonoscopy (page 60) counts as a test for Regence, and other outpatient diagnostic tests are $20 (page 58), which gives $0-$20. Labs: page 57 shows $0 for HbA1C and $20 for all other tests, which gives $0-$20.\"}\n]"
+}

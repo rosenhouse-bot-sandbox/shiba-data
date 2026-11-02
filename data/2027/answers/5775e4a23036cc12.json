@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H5216-455-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"The field is X-rays and imaging. The quotes are from the outpatient surgery and colonoscopy rows, not radiology.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 61 outpatient surgery row: $450 outpatient hospital and $350 ASC. Diagnostic colonoscopy is $0 in both the ASC and the outpatient hospital, so each range starts at $0.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 53 Basic Radiological: $0 PCP office and $40 specialist office. Advanced Imaging: $330 PCP/specialist office and $205 freestanding facility. Humana is excepted from the $0 mammogram start.\"}]\n```"
+}

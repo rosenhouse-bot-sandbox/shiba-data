@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2406-073-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"Page 78 specialist consultation row: $60 in-network, $80 out-of-network. This is the office-visit row, not the hearing exam row.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Page 67 X-ray row: $30 in-network. Page 69: $0 diagnostic mammogram sets the start of the range at $0, and the $320 radiological diagnostic services row lists CT, PET and MRI as examples. Range $0-$320 matches.\"},\n{\"id\":2,\"ok\":false,\"reason\":\"The value and quotes are for X-rays and imaging, not specialist office visits. The specialist copay is $60 | $80 on page 78.\"},\n{\"id\":3,\"ok\":false,\"reason\":\"The value and quotes are the specialist visit copays, not X-ray or advanced imaging costs. The X-ray copay is $30 on page 67.\"}\n]"
+}

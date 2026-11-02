@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H6815-038-0.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 82 X-ray row: $50 copay. Page 83 diagnostic non-laboratory tests row (CT, MRI, PET): $0 for a diagnostic mammogram, which sets the low end, and $200 in other settings such as a physician office or freestanding facility. The $500 outpatient hospital price is correctly left out, so the range $0-$200 matches the field's rules.\"}]"
+}

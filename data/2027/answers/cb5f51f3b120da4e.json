@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H9003-001-0.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"The EOC says dental is available only through the optional Advantage Plus package, bought for an extra premium, and routine dental is excluded otherwise; no passage shows base-plan routine dental.\"},{\"id\":1,\"ok\":false,\"reason\":\"Page 54 covers chiropractic care not covered by Medicare (shared 18-visit limit with acupuncture and naturopathy) for a copay, so the plan covers routine chiropractic and the claim is wrong.\"}]"
+}

@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H2923-009-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 81, Inpatient hospital care row (includes inpatient acute): \\\"$2,241 copay per stay\\\" for this plan, with unlimited days. One copay per stay matches \\\"per admission.\\\"\"}]\n```"
+}

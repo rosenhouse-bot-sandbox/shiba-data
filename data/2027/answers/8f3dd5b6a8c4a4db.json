@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H3817-009-1.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 56 lists X-rays at $5 in-network. Page 57 diagnostic radiology (CT, MRI, PET) is $0 for diagnostic mammography and $300 for other complex imaging. The $0 start is allowed for Regence.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Tests: page 60 shows a $0 diagnostic colonoscopy (counts as a test for Regence) and page 58 shows $10 for other outpatient diagnostic tests. Labs: page 57 shows $0 for HbA1C and $10 for all other lab tests.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"The value and quotes are tests/labs amounts (colonoscopy, diagnostic tests, lab tests), not X-ray and advanced imaging. They do not support this field.\"},\n{\"id\": 3, \"ok\": false, \"reason\": \"The value and quotes are X-ray and imaging amounts, not non-radiological tests and labs. They do not support this field.\"}]\n```"
+}

@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H5439-015-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 98 outpatient surgery rows for this plan, in-network: the outpatient hospital row gives $0 for skin biopsies and $500 for all other services, and the ASC row gives $300 per visit. This matches $0-$500 | $300.\"}]\n```"
+}

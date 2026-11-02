@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H3817-010-0.md",
+ "reply": "```json\n[{\"key\": \"main.I_outpatient_surgery\", \"result\": \"cite\", \"citations\": [{\"page\": 51, \"quote\": \"Outpatient hospital services: In-network: $0 copay for diagnostic colonoscopy\"}, {\"page\": 51, \"quote\": \"20% coinsurance for all other services (including associated professional fees)\"}, {\"page\": 51, \"quote\": \"Ambulatory Surgical Center: In-network: $0 copay for diagnostic colonoscopy\"}, {\"page\": 51, \"quote\": \"$360 copay for all other services\"}]},\n {\"key\": \"main.L_xray_imaging\", \"result\": \"cite\", \"citations\": [{\"page\": 47, \"quote\": \"X-rays: In-network: $5 copay per provider per day\"}, {\"page\": 48, \"quote\": \"$0 copay per provider per day for diagnostic mammography\"}, {\"page\": 48, \"quote\": \"$300 copay per provider per day for all other complex imaging\"}]},\n {\"key\": \"main.O_medical_deductible\", \"result\": \"skip\"}]\n```"
+}

@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H7006-021-0.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 64 X-ray row shows $0 in-network. Page 65 CT/MRI/PET row shows $60 for these tests and $0 for diagnostic mammograms, so line 2 starts at $0 as the field's rule requires: $0-$60.\"},{\"id\":1,\"ok\":true,\"reason\":\"Page 43 lists routine (non-Medicare) chiropractic with a $100 Flex Card allowance that names chiropractic. This is a supplemental benefit for all members.\"},{\"id\":2,\"ok\":true,\"reason\":\"Page 38 lists routine (non-Medicare) acupuncture with a $100 Flex Card allowance that names acupuncture. This is a supplemental benefit for all members.\"}]"
+}

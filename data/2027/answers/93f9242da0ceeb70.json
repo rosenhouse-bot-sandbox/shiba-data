@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2923-009-0.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 81, Inpatient hospital care row of this plan's EOC: '$2,241 copay per stay' with unlimited days. A per-stay copay is one copay per admission, so it matches the value.\"}]"
+}

@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H3817-010-0.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 47 X-rays: $5 copay. Page 48 diagnostic mammography is $0 and other complex imaging (CT, MRI, PET) is $300, so line 2 is $0-$300. All amounts are in-network.\"},{\"id\":1,\"ok\":false,\"reason\":\"The value and quotes are X-ray and imaging amounts (pages 47-48), not outpatient surgery. The quotes do not support an outpatient surgery cell.\"},{\"id\":2,\"ok\":false,\"reason\":\"The value and quotes are outpatient surgery amounts (page 51), not X-ray and imaging. The quotes do not support an X-ray/imaging cell.\"},{\"id\":3,\"ok\":true,\"reason\":\"Page 51 outpatient hospital: $0 diagnostic colonoscopy to 20% coinsurance for other services. ASC: $0 diagnostic colonoscopy to $360 for other services. The $40 wound care copay is correctly left out, and the amounts are in-network.\"}]"
+}

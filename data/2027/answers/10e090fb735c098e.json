@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H7006-018-0.md",
+ "reply": "```json\n[{\"key\": \"main.K_tests_labs\", \"result\": \"skip\"},\n {\"key\": \"main.L_xray_imaging\", \"result\": \"cite\", \"citations\": [{\"page\": 73, \"quote\": \"$0 copay for each Medicare-covered service.\"}, {\"page\": 74, \"quote\": \"$0 copay applies to diagnostic mammograms; $300 copay\"}, {\"page\": 74, \"quote\": \"$300 copay applies to all other tests.\"}]},\n {\"key\": \"main.O_medical_deductible\", \"result\": \"skip\"},\n {\"key\": \"main.S_acupuncture\", \"result\": \"cite\", \"citations\": [{\"page\": 47, \"quote\": \"Alternative therapies (Acupuncture, chiropractic, and naturopathy services)\"}, {\"page\": 47, \"quote\": \"You may use your benefit allowance at any approved acupuncture provider located in the U.S.\"}]},\n {\"key\": \"main.T_chiropractic\", \"result\": \"cite\", \"citations\": [{\"page\": 52, \"quote\": \"Routine chiropractic care\"}, {\"page\": 52, \"quote\": \"You may use your benefit allowance at any chiropractic provider located in the U.S.\"}]}]\n```"
+}

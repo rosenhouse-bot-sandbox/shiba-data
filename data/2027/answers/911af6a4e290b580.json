@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H3817-011-1.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Tests: $0 diagnostic mammography (counts for Regence) to $40 other outpatient diagnostic tests (p58). Labs: $0 HbA1C to $30 other tests (p57). All in-network.\"},{\"id\":1,\"ok\":false,\"reason\":\"The 0%-20% range takes its 0% low end from the home infusion drugs row on p50, which is a different row. The actual Part B drugs row (p54) says 20%, with some drugs lower than 20%, and never says 0%.\"},{\"id\":2,\"ok\":true,\"reason\":\"X-rays $25 (p57). Advanced imaging: $0 diagnostic mammography start and $300 other complex imaging (p58), in-network.\"},{\"id\":3,\"ok\":true,\"reason\":\"Hospital outpatient: $0 colonoscopy to 20% coinsurance (p61). ASC: $0 colonoscopy (p60) to $395 other services (p61). The $45 wound care copay is correctly left out.\"}]"
+}

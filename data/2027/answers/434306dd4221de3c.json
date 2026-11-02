@@ -1,0 +1,5 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H5216-428-2.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 63: Basic Radiological is $0 at the PCP's office and $45 at the specialist's office. Advanced Imaging is $330 at the office and $205 at a freestanding facility. Outpatient hospital is excluded, as the field directs.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 71: Surgery Services cost $450 at an outpatient hospital and $350 at an ASC. Diagnostic colonoscopy is $0 in both settings (pages 64, 68 and 71), which starts each range at $0.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"The quotes are X-ray and advanced imaging prices. The field excludes X-rays and imaging.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 63: Diagnostic Procedures and Tests are $0 at the PCP's office and $50 at the specialist's office. Page 64: the facility-based sleep study is $50 at the specialist's office, and labs are $0.\"},\n{\"id\": 4, \"ok\": false, \"reason\": \"The quotes are imaging prices, not outpatient surgery.\"},\n{\"id\": 5, \"ok\": false, \"reason\": \"The quotes are surgery and colonoscopy prices, not X-rays or imaging.\"}]\n```"
+}

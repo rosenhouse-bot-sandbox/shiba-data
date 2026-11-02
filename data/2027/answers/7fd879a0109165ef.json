@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2001-045-0.retry.md",
+ "reply": "```json\n[{\"key\": \"main.I_outpatient_surgery\", \"result\": \"cite\", \"citations\": [{\"page\": 95, \"quote\": \"$0 copayment or a colonoscopy at an outpatient hospital.\"}, {\"page\": 95, \"quote\": \"eligibility, $0 copayment or 20%\"}, {\"page\": 94, \"quote\": \"$0 copayment or a colonoscopy at an\"}, {\"page\": 95, \"quote\": \"ambulatory surgical center.\"}, {\"page\": 95, \"quote\": \"eligibility,$0 copayment or 20%\"}]}]\n```"
+}

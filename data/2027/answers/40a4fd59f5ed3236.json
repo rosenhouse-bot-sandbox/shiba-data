@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2923-009-0.md",
+ "reply": "```json\n[{\"key\": \"main.H_inpatient\", \"result\": \"cite\", \"citations\": [{\"page\": 81, \"quote\": \"$2,241 copay per stay\"}]},\n {\"key\": \"main.I_outpatient_surgery\", \"result\": \"skip\"}]\n```"
+}

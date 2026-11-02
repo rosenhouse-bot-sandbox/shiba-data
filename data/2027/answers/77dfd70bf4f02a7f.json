@@ -1,0 +1,5 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H1036-317-0.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 53 says the plan covers only manual manipulation of the spine for subluxation, at a $15 copay under 'Medicare Covered Chiropractic Services', and that other chiropractor services are not covered. Page 90 repeats this under routine chiropractic care. No passage shows a supplemental chiropractic benefit, allowance, or package.\"}]"
+}

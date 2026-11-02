@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2056-003-0.md",
+ "reply": "```json\n[{\"key\": \"main.G_specialist\", \"result\": \"cite\", \"citations\": [{\"page\": 8, \"quote\": \"Specialist office visits $65 per visit\"}]},\n {\"key\": \"main.I_outpatient_surgery\", \"result\": \"cite\", \"citations\": [{\"page\": 62, \"quote\": \"$500 copay, after your $750 plan deductible, for each Medicare‑covered outpatient surgery at an outpatient hospital facility.\"}, {\"page\": 62, \"quote\": \"$450 copay, after your $750 plan deductible, for each Medicare‑covered outpatient surgery at an ambulatory surgical center.\"}]}]\n```"
+}

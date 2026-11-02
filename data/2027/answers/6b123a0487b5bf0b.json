@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2056-018-0.md",
+ "reply": "```json\n[{\"key\": \"main.I_outpatient_surgery\", \"result\": \"skip\"},\n {\"key\": \"main.O_medical_deductible\", \"result\": \"skip\"}]\n```"
+}
