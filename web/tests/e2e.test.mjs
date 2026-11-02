@@ -1,4 +1,4 @@
-// Drives the built site in Chromium. Usage: SITE=<build dir with --pdfs> node --test web/tests/e2e.test.mjs
+// Drives the built site in Chromium. Usage: SITE=<build dir> DOCS=<dir of <sha256>.pdf> node --test web/tests/e2e.test.mjs
 import { test, before, after } from "node:test";
 import assert from "node:assert/strict";
 import http from "node:http";
@@ -6,14 +6,16 @@ import fs from "node:fs";
 import path from "node:path";
 import { chromium } from "playwright";
 
-const SITE = process.env.SITE;
+const { SITE, DOCS } = process.env;
 const TYPES = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css", ".json": "application/json", ".pdf": "application/pdf" };
 let server, browser, page, base;
 const site = JSON.parse(fs.readFileSync(path.join(SITE, "data.json")));
 
 before(async () => {
   server = http.createServer((req, res) => {
-    const file = path.join(SITE, decodeURIComponent(new URL(req.url, "http://x").pathname).replace(/\/$/, "/index.html"));
+    const name = decodeURIComponent(new URL(req.url, "http://x").pathname);
+    // Like the pdxplans Worker, which serves docs/ from R2.
+    const file = name.startsWith("/docs/") ? path.join(DOCS, path.basename(name)) : path.join(SITE, name.replace(/\/$/, "/index.html"));
     fs.readFile(file, (err, body) => {
       res.writeHead(err ? 404 : 200, { "Content-Type": TYPES[path.extname(file)] || "application/octet-stream" });
       res.end(body);
@@ -378,7 +380,7 @@ test("every citation's and comment's quote is highlighted in full on its page", 
 test("a slow document never shows the previous document's pages", async () => {
   const fresh = await browser.newPage({ viewport: { width: 1600, height: 1000 } });
   const slow = docOf("H7006-018-0", "SB");
-  await fresh.route(`**/pdfs/${slow}.pdf`, async (route) => {
+  await fresh.route(`**/${site.docs[slow].file}`, async (route) => {
     await new Promise((r) => setTimeout(r, 2000));
     await route.continue();
   });
@@ -398,18 +400,14 @@ test("a slow document never shows the previous document's pages", async () => {
   await fresh.close();
 });
 
-test("the viewer links to the carrier when no copy is hosted", async () => {
+test("the viewer links to the carrier when a document fails to load", async () => {
   const fresh = await browser.newPage({ viewport: { width: 1600, height: 1000 } });
   const [missing] = site.plans.find((p) => p.plan_id === "H2001-045-0").docs;
-  await fresh.route("**/data.json", (route) => {
-    const edited = structuredClone(site);
-    edited.docs[missing].file = null;
-    route.fulfill({ json: edited });
-  });
+  await fresh.route(`**/${site.docs[missing].file}`, (route) => route.fulfill({ status: 404, body: "Not found" }));
   await fresh.goto(`${base}#/plan/H2001-045-0`);
   await fresh.locator("table.docs a", { hasText: kindName(site.docs[missing].kind) }).click();
-  assert.match(await fresh.textContent("#page-area"), /No copy of this document is hosted here/);
-  assert.equal(await fresh.getAttribute("#viewer a#doc-source", "href"), site.docs[missing].url);
+  await fresh.waitForFunction(() => /failed to load/.test(document.querySelector("#page-area").textContent));
+  assert.equal(await fresh.getAttribute("#page-area a", "href"), site.docs[missing].url);
   await fresh.close();
 });
 
