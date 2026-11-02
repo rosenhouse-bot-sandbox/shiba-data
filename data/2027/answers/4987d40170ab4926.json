@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-d1ca3a965cb15437.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 74 X-rays row: $30 copayment for each Medicare-covered standard X-ray service, in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 76 row for other outpatient diagnostic tests: $320 copayment for other Medicare-covered radiological diagnostic services, not including X-rays.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 76 diagnostic non-laboratory tests row: $0 copayment for each diagnostic mammogram.\"}]\n```",
+ "usage": {
+  "input_tokens": 3645,
+  "output_tokens": 583,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
