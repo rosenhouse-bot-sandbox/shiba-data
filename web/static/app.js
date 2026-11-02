@@ -268,7 +268,6 @@ function planPage(plan) {
     return el("tr", {},
       el("td", {}, el("a", { href: "#", onclick: (e) => { e.preventDefault(); openDoc(id, 1, null, null); } }, kindName(d.kind))),
       el("td", {}, `${d.pages} pages`),
-      el("td", {}, d.retrieved ? `copied ${d.retrieved}` : "not copied"),
       el("td", {}, el("a", { href: d.url, target: "_blank", rel: "noopener" }, "carrier's copy ↗")));
   });
   const facts = [
@@ -311,12 +310,6 @@ async function openDoc(docId, page, quote, note, otherQuotes = []) {
   $("#source-note").replaceChildren(...(note ? [note] : []));
   viewer.cite = quote ? { page, quote } : null;
   viewer.quotes = [viewer.cite, ...otherQuotes.filter((q) => q.doc === docId)].filter(Boolean);
-  if (!doc.file) {
-    viewer.doc = viewer.pdf = null;
-    area().replaceChildren(el("p", { class: "notice" }, "No copy of this document is hosted here. ",
-      el("a", { href: doc.url, target: "_blank", rel: "noopener" }, "Open the carrier's copy ↗")));
-    return;
-  }
   if (viewer.doc !== docId) {
     viewer.doc = docId;
     viewer.pdf = null;
@@ -324,7 +317,17 @@ async function openDoc(docId, page, quote, note, otherQuotes = []) {
     $("#page-count").textContent = "";
     viewer.loading = loadSizes(doc.file);
   }
-  const { pdf, sizes } = await viewer.loading;
+  let loaded;
+  try {
+    loaded = await viewer.loading;
+  } catch {
+    if (viewer.doc !== docId) return;
+    viewer.doc = null;
+    area().replaceChildren(el("p", { class: "notice" }, "This document failed to load. ",
+      el("a", { href: doc.url, target: "_blank", rel: "noopener" }, "Open the carrier's copy ↗")));
+    return;
+  }
+  const { pdf, sizes } = loaded;
   if (viewer.doc !== docId) return;
   if (viewer.pdf !== pdf) {
     viewer.pdf = pdf;

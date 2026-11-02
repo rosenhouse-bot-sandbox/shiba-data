@@ -1,7 +1,6 @@
 import contextlib
 import csv
 import datetime
-import hashlib
 import io
 import json
 import os
@@ -10,7 +9,6 @@ import shutil
 import sys
 import tempfile
 import unittest
-import zipfile
 from unittest import mock
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
@@ -53,6 +51,10 @@ class SiteDataTest(unittest.TestCase):
 
     def test_names_the_years_google_sheet(self):
         self.assertEqual(self.site["sheet_id"], build.years.config(DATA)["sheet_id"])
+
+    def test_links_each_pdf_by_its_full_hash(self):
+        self.assertEqual({d["file"] for d in self.site["docs"].values()},
+                         {f"docs/{d['sha256']}.pdf" for d in self.site["docs"].values()})
 
     def test_has_all_39_plans_in_each_sheet(self):
         self.assertEqual(len(self.site["plans"]), 39)
@@ -276,101 +278,20 @@ class EditsTest(unittest.TestCase):
         self.assertIn("edits.csv dvha H3805-048-0 F_dental https://x/unknown.pdf", out)
 
 
-class FetchPdfsTest(unittest.TestCase):
+class SiteCommandTest(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.dir = pathlib.Path(self.tmp.name)
-        self.src = self.dir / "src.pdf"
-        self.src.write_bytes(b"%PDF-1.4 test")
-        sha = hashlib.sha256(self.src.read_bytes()).hexdigest()
-        self.docs = {sha[:16]: {"url": self.src.as_uri(), "sha256": sha}}
 
     def tearDown(self):
         self.tmp.cleanup()
 
-    def test_names_each_pdf_by_its_own_hash(self):
-        manifest, _ = build.fetch_pdfs(self.docs, self.dir / "release", "2026-10-26")
-        [(doc_id, entry)] = manifest.items()
-        self.assertEqual(doc_id, next(iter(self.docs)))
-        self.assertEqual(entry, {"file": f"pdfs/{doc_id}.pdf", "url": self.src.as_uri(), "retrieved": "2026-10-26"})
-        self.assertEqual((self.dir / "release" / entry["file"]).read_bytes(), b"%PDF-1.4 test")
-
-    def test_names_a_reissued_pdf_by_its_new_hash(self):
-        self.src.write_bytes(b"%PDF-1.4 reissued")
-        manifest, _ = build.fetch_pdfs(self.docs, self.dir / "release", "2026-10-26")
-        self.assertEqual(list(manifest), [hashlib.sha256(b"%PDF-1.4 reissued").hexdigest()[:16]])
-
-    def test_save_documents_names_reissued_urls(self):
-        self.src.write_bytes(b"%PDF-1.4 reissued")
+    def test_docs_command_lists_each_linked_pdfs_hash(self):
+        site = bare_site(docs={"a" * 16: {"sha256": "a" * 64}, "b" * 16: {"sha256": "b" * 64}})
         out = io.StringIO()
-        with contextlib.redirect_stdout(out):
-            build.save_documents(self.docs, self.dir / "release", "2026-10-26")
-        self.assertIn(f"re-issued {self.src.as_uri()}", out.getvalue())
-
-    def test_save_documents_is_quiet_about_unchanged_pdfs(self):
-        out = io.StringIO()
-        with contextlib.redirect_stdout(out):
-            build.save_documents(self.docs, self.dir / "release", "2026-10-26")
-        self.assertNotIn("re-issued", out.getvalue())
-
-    def test_reports_failed_download(self):
-        self.src.write_bytes(b"<html>not found</html>")
-        manifest, failed = build.fetch_pdfs(self.docs, self.dir / "release", "2026-10-26")
-        self.assertEqual((manifest, failed), ({}, [self.src.as_uri()]))
-
-
-class DocumentsTest(unittest.TestCase):
-    def setUp(self):
-        self.tmp = tempfile.TemporaryDirectory()
-        self.dir = pathlib.Path(self.tmp.name)
-        self.src = self.dir / "src.pdf"
-        self.src.write_bytes(b"%PDF-1.4 test")
-        sha = hashlib.sha256(self.src.read_bytes()).hexdigest()
-        self.id = sha[:16]
-        self.docs = {self.id: {"url": self.src.as_uri(), "sha256": sha},
-                     "0000000000000000": {"url": (self.dir / "gone.pdf").as_uri(), "sha256": "0" * 64}}
-
-    def tearDown(self):
-        self.tmp.cleanup()
-
-    def test_release_holds_downloaded_pdfs_and_manifest(self):
-        failed = build.save_documents(self.docs, self.dir / "release", "2026-10-27")
-        self.assertEqual(failed, [self.docs["0000000000000000"]["url"]])
-        manifest = json.loads((self.dir / "release" / "documents.json").read_text())
-        self.assertEqual(manifest, {self.id: {"file": f"pdfs/{self.id}.pdf", "url": self.src.as_uri(), "retrieved": "2026-10-27"}})
-        self.assertTrue((self.dir / "release" / f"pdfs/{self.id}.pdf").exists())
-
-    def test_site_uses_release_pdfs_and_marks_others_missing(self):
-        build.save_documents(self.docs, self.dir / "release", "2026-10-27")
-        site_docs = {i: {"url": d["url"], "sha256": d["sha256"]} for i, d in self.docs.items()}
-        missing = build.attach_documents(site_docs, self.dir / "release", self.dir / "site")
-        self.assertEqual(missing, ["0000000000000000"])
-        self.assertEqual(site_docs[self.id], {"url": self.src.as_uri(), "sha256": self.docs[self.id]["sha256"],
-                                              "file": f"pdfs/{self.id}.pdf", "retrieved": "2026-10-27"})
-        self.assertIsNone(site_docs["0000000000000000"]["file"])
-        self.assertEqual((self.dir / "site" / f"pdfs/{self.id}.pdf").read_bytes(), b"%PDF-1.4 test")
-
-
-    def test_documents_command_fails_when_a_download_fails(self):
-        with mock.patch.object(build, "site_data", return_value={"docs": self.docs}):
-            with self.assertRaises(SystemExit) as e:
-                build.main("documents", self.dir / "release")
-        self.assertIn("gone.pdf", str(e.exception.code))
-
-    def test_site_command_attaches_release(self):
-        build.save_documents(self.docs, self.dir / "release", "2026-10-27")
-        site = bare_site(docs={self.id: {"url": self.src.as_uri(), "sha256": self.docs[self.id]["sha256"]}})
-        with mock.patch.object(build, "site_data", return_value=site):
-            build.main("site", self.dir / "site", self.dir / "release")
-        data = json.loads((self.dir / "site" / "data.json").read_text())
-        self.assertEqual(data["docs"][self.id]["file"], f"pdfs/{self.id}.pdf")
-
-    def test_site_command_fails_when_the_release_lacks_a_document(self):
-        build.save_documents(self.docs, self.dir / "release", "2026-10-27")
-        site = bare_site(docs={i: {"url": d["url"], "sha256": d["sha256"]} for i, d in self.docs.items()})
-        with mock.patch.object(build, "site_data", return_value=site), self.assertRaises(SystemExit) as e:
-            build.main("site", self.dir / "site", self.dir / "release")
-        self.assertIn("gone.pdf", str(e.exception.code))
+        with mock.patch.object(build, "site_data", return_value=site), contextlib.redirect_stdout(out):
+            build.main("docs")
+        self.assertEqual(out.getvalue(), f"{'a' * 64}\n{'b' * 64}\n")
 
     def test_site_command_warns_of_dropped_cites(self):
         dropped = dict(cite("main", "E_moop", "$6,800", "u", 45, "stale quote"), layer="edits.csv", line="")
@@ -405,73 +326,3 @@ class DocumentsTest(unittest.TestCase):
         built = datetime.datetime.fromisoformat(json.loads((self.dir / "site" / "data.json").read_text())["built"])
         self.assertLess(datetime.datetime.now(datetime.timezone.utc) - built, datetime.timedelta(minutes=1))
         self.assertIn("<title>pdxplans.org – 2099 Medicare Advantage plans</title>", (self.dir / "site" / "index.html").read_text())
-
-
-
-class ZipTest(unittest.TestCase):
-    def setUp(self):
-        self.tmp = tempfile.TemporaryDirectory()
-        self.dir = pathlib.Path(self.tmp.name)
-        self.data = self.dir / "data"
-        (self.data / "generated").mkdir(parents=True)
-        with open(self.data / "generated/documents_checked.csv", "w", newline="") as f:
-            csv.writer(f).writerows([
-                ["plan_ids", "kind", "sha256", "plan_names"],
-                ["H1-001-0;H1-002-0", "EOC", "a" * 64, "Plan A (HMO); Plan B (PPO)"],
-                ["H1-001-0", "SB", "b" * 64, "Plan A (HMO)"],
-                ["H1-002-0", "SB", "c" * 64, "Plan B (PPO)"],
-            ])
-        self.release = self.dir / "release"
-        (self.release / "pdfs").mkdir(parents=True)
-        manifest = {}
-        for doc_id in ("a" * 16, "b" * 16, "d" * 16):
-            manifest[doc_id] = {"file": f"pdfs/{doc_id}.pdf"}
-            (self.release / f"pdfs/{doc_id}.pdf").write_bytes(f"%PDF {doc_id}".encode())
-        (self.release / "documents.json").write_text(json.dumps(manifest))
-        build.zip_documents(self.release, self.dir / "documents.zip", self.data)
-        self.zip = zipfile.ZipFile(self.dir / "documents.zip")
-
-    def tearDown(self):
-        self.zip.close()
-        self.tmp.cleanup()
-
-    def test_names_each_plans_copy_of_a_pdf_after_the_plan(self):
-        self.assertEqual(self.zip.read("Plan A (HMO) (H1-001-0) EOC.pdf"), b"%PDF " + b"a" * 16)
-        self.assertEqual(self.zip.read("Plan B (PPO) (H1-002-0) EOC.pdf"), b"%PDF " + b"a" * 16)
-        self.assertEqual(self.zip.read("Plan A (HMO) (H1-001-0) SB.pdf"), b"%PDF " + b"b" * 16)
-
-    def test_keeps_hash_name_for_pdf_missing_from_data(self):
-        self.assertEqual(self.zip.read(f"pdfs/{'d' * 16}.pdf"), b"%PDF " + b"d" * 16)
-
-    def test_holds_only_pdfs_in_release(self):
-        self.assertEqual(sorted(self.zip.namelist()), [
-            "Plan A (HMO) (H1-001-0) EOC.pdf",
-            "Plan A (HMO) (H1-001-0) SB.pdf",
-            "Plan B (PPO) (H1-002-0) EOC.pdf",
-            f"pdfs/{'d' * 16}.pdf",
-        ])
-
-    def test_fails_when_plan_names_and_ids_differ_in_count(self):
-        with self.assertRaises(ValueError):
-            list(build.plan_names({"plan_ids": "H1-001-0;H1-002-0", "plan_names": "Plan A (HMO)"}))
-
-    def test_zip_command_writes_zip(self):
-        build.main("zip", self.release, self.dir / "cli.zip")
-        self.assertIn(f"pdfs/{'d' * 16}.pdf", zipfile.ZipFile(self.dir / "cli.zip").namelist())
-
-
-class ZipDataTest(unittest.TestCase):
-    def test_each_plan_has_one_pdf_per_kind(self):
-        names = [build.zip_name(plan_id, name, d["kind"])
-                 for d in build.rows("generated/documents_checked.csv", DATA)
-                 for plan_id, name in build.plan_names(d)]
-        self.assertEqual(len(names), len(set(names)))
-
-    def test_names_are_valid_on_windows(self):
-        for d in build.rows("generated/documents_checked.csv", DATA):
-            for plan_id, name in build.plan_names(d):
-                self.assertRegex(build.zip_name(plan_id, name, d["kind"]), r'^[^<>:"/\\|?*]+$')
-
-
-if __name__ == "__main__":
-    unittest.main()
