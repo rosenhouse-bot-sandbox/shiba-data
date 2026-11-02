@@ -22,12 +22,13 @@ class BlobsTest(unittest.TestCase):
         (self.work / "pdfs" / f"{sha(PDF)[:16]}.pdf").write_bytes(PDF)
         (self.work / "landscape.zip").write_bytes(ZIP)
         with open(self.data / "generated" / "documents_checked.csv", "w") as f:
-            f.write(f"url,sha256\nhttps://example.org/sb.pdf,{sha(PDF)}\nhttps://example.org/gone.pdf,\n")
+            f.write(f"url,sha256\nhttps://example.org/sb.pdf,{sha(PDF)}\nhttps://example.org/sb-copy.pdf,{sha(PDF)}\n"
+                    "https://example.org/gone.pdf,\n")
 
     def lines(self):
         out = io.StringIO()
         with redirect_stdout(out):
-            blobs.main(str(self.data), str(self.work))
+            blobs.main("upload", str(self.data), str(self.work))
         return out.getvalue().splitlines()
 
     def test_lists_each_fetched_pdf_and_recorded_cms_file_by_hash(self):
@@ -39,6 +40,50 @@ class BlobsTest(unittest.TestCase):
         blobs.record_cms(["landscape"], self.work, self.data / "generated" / blobs.CMS_FILES)
         (self.work / "landscape.zip").write_bytes(b"PK replaced")
         with self.assertRaisesRegex(ValueError, "landscape.zip"):
+            self.lines()
+
+    def write_texts(self):
+        for kind in blobs.TEXT_KINDS:
+            path = blobs.text_path(self.work, kind, sha(PDF))
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(f"{kind} of sb")
+        blobs.record_texts(self.data / "generated", self.work)
+
+    def test_records_each_pdf_texts_by_hash(self):
+        self.write_texts()
+        with open(self.data / "generated" / blobs.TEXTS) as f:
+            self.assertEqual(list(csv.DictReader(f)), [{"pdf": sha(PDF), "text": sha(b"text of sb"),
+                                                        "layout": sha(b"layout of sb"), "items": sha(b"items of sb")}])
+
+    def test_lists_texts_with_the_pdfs(self):
+        blobs.record_cms(["landscape"], self.work, self.data / "generated" / blobs.CMS_FILES)
+        self.write_texts()
+        self.assertEqual(self.lines()[2:], [f"blobs/{sha(f'{k} of sb'.encode())} {blobs.text_path(self.work, k, sha(PDF))}"
+                                            for k in blobs.TEXT_KINDS])
+
+    def test_names_where_recorded_texts_go_before_a_run(self):
+        self.write_texts()
+        out = io.StringIO()
+        with redirect_stdout(out):
+            blobs.main("texts", str(self.data), str(self.work))
+        self.assertEqual(out.getvalue().splitlines(), [f"{sha(f'{k} of sb'.encode())} {blobs.text_path(self.work, k, sha(PDF))}"
+                                                       for k in blobs.TEXT_KINDS])
+
+    def test_names_no_texts_before_the_first_record(self):
+        out = io.StringIO()
+        with redirect_stdout(out):
+            blobs.main("texts", str(self.data), str(self.work))
+        self.assertEqual(out.getvalue(), "")
+
+    def test_lists_no_texts_before_the_first_record(self):
+        blobs.record_cms(["landscape"], self.work, self.data / "generated" / blobs.CMS_FILES)
+        self.assertEqual(len(self.lines()), 2)
+
+    def test_refuses_texts_recorded_for_other_pdfs(self):
+        blobs.record_cms(["landscape"], self.work, self.data / "generated" / blobs.CMS_FILES)
+        self.write_texts()
+        (self.data / "generated" / "documents_checked.csv").write_text("url,sha256\n")
+        with self.assertRaisesRegex(ValueError, "other PDFs"):
             self.lines()
 
     def test_needs_the_cms_hashes(self):

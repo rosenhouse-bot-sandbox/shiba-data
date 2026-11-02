@@ -29,6 +29,12 @@ jobs:
       ANTHROPIC_SERVICE_ACCOUNT_ID: svac_0142UmsmTSG4RDAgtFvyHY9F
       ANTHROPIC_FEDERATION_RULE_ID: fdrl_018f3jSg6eLJS1PxSPQQNxks
       ANTHROPIC_WORKSPACE_ID: wrkspc_014bRyT8dH9LwG9fPmLukPT9
+      # The token's bucket-scoped permission works through R2's S3 API, where its ID and hash are the key pair.
+      AWS_ACCESS_KEY_ID: ${{ vars.CLOUDFLARE_API_TOKEN_ID }}
+      AWS_DEFAULT_REGION: auto
+      AWS_ENDPOINT_URL: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+      AWS_REQUEST_CHECKSUM_CALCULATION: when_required
+      AWS_RESPONSE_CHECKSUM_VALIDATION: when_required
     steps:
       - uses: actions/checkout@v4
         with:
@@ -43,6 +49,20 @@ jobs:
       - run: pip install pypdfium2==5.13.0 openpyxl==3.1.5 anthropic==2.3.0
       - run: npm ci
         working-directory: pipeline
+      # texts.py keeps these texts instead of extracting them again.
+      - name: Download the recorded PDF texts
+        timeout-minutes: 20
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          export AWS_SECRET_ACCESS_KEY=$(printf %s "$CLOUDFLARE_API_TOKEN" | sha256sum | cut -c1-64)
+          echo "::add-mask::$AWS_SECRET_ACCESS_KEY"
+          python3 -I pipeline/blobs.py texts "data/$YEAR" _work > _texts.txt
+          while read -r digest path; do
+            mkdir -p "$(dirname "$path")"
+            aws s3 cp "s3://pdxplans/blobs/$digest" "$path" --only-show-errors < /dev/null
+          done < _texts.txt
+          if [ -s _texts.txt ]; then sed 's/ /  /' _texts.txt | sha256sum -c --quiet; fi
       # GitHub stops a job after 360 minutes, so these leave time to commit.
       - run: python3 -I pipeline/run.py "$YEAR" _work api
         timeout-minutes: 120
@@ -51,17 +71,11 @@ jobs:
         if: always()
         timeout-minutes: 20
         env:
-          # The token's bucket-scoped permission works through R2's S3 API, where its ID and hash are the key pair.
-          AWS_ACCESS_KEY_ID: ${{ vars.CLOUDFLARE_API_TOKEN_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          AWS_DEFAULT_REGION: auto
-          AWS_ENDPOINT_URL: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
-          AWS_REQUEST_CHECKSUM_CALCULATION: when_required
-          AWS_RESPONSE_CHECKSUM_VALIDATION: when_required
         run: |
           export AWS_SECRET_ACCESS_KEY=$(printf %s "$CLOUDFLARE_API_TOKEN" | sha256sum | cut -c1-64)
           echo "::add-mask::$AWS_SECRET_ACCESS_KEY"
-          python3 -I pipeline/blobs.py "data/$YEAR" _work > _blobs.txt
+          python3 -I pipeline/blobs.py upload "data/$YEAR" _work > _blobs.txt
           while read -r key path; do
             aws s3 cp "$path" "s3://pdxplans/$key" --only-show-errors < /dev/null
           done < _blobs.txt

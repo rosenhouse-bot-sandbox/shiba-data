@@ -142,6 +142,7 @@ def main(year, work, mode=""):
 
     pdfs(gen, work)
     py("texts.py", f"{work}/pdfs", f"{work}/texts")
+    blobs.record_texts(gen, work)
     lost = lost_quotes(data, f"{work}/texts")
     if lost:
         raise SystemExit("The site cannot highlight these quotes:\n" + "\n".join(f"{layers.where(c)}: {c['quote']}" for c in lost))
