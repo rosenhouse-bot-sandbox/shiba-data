@@ -59,6 +59,14 @@ class PlanTest(unittest.TestCase):
         self.assertFalse({(r, c) for r, c in cells if r == 2 or c == 2})
         self.assertEqual(cells[(3, 4)], "P1B")
 
+    def test_a_renamed_column_keeps_its_place(self):
+        old, new = next(iter(sheet_sync.RENAMED.items()))
+        existing = grid(["Plan", "Plan ID", old, "A"], ["", "Sec", "P1"])
+        cells = placed(sheet_sync.plan(existing, layout("P1", columns=("A", new))))
+        self.assertEqual(cells[(0, 2)], new)
+        self.assertEqual(cells[(2, 2)], f"P1{new}")
+        self.assertNotIn((0, 4), cells)
+
     def test_appends_new_plans_and_columns_after_the_last_ones(self):
         existing = grid(["Plan", "Plan ID", "A"], ["", "Sec", "P1"])
         requests = sheet_sync.plan(existing, layout("P1", "P2"))

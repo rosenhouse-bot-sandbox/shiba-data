@@ -105,7 +105,7 @@ COLUMNS = [
     Column("main", "AA_opt_packages", "Opt Packages",
            "Dot if optional supplemental benefit packages can be bought for an extra monthly premium (methods R13).",
            [r"optional supplemental", r"additional premium", r"rider"]),
-    Column("main", "AB_ambulance", "Ambulance",
+    Column("main", "AB_ambulance", "Ambulance Domestic/International",
            "Ambulance cost range per trip or date of service, over ground and air trips. "
            "Line 1 = within the U.S.: emergency or not, including facility transfers and trips outside the service area. "
            "Line 2 = emergency ambulance outside the U.S. \"not covered\" = the EOC excludes it. "
