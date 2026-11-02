@@ -270,12 +270,14 @@ flowchart LR
   docwf[Documents workflow, manual:<br>download PDFs, cut a release] --> tar[(documents.tar)]
   tar --> site
   docwf -- starts --> site
-  site --> pages[shibasheets.org]
+  site --> worker[pdxplans.org]
+  site --> sheet[Google Sheet]
 ```
 
 The Site workflow takes PDFs from the latest release.
 It downloads from carriers only when no release exists.
 Run the Documents workflow when `documents_checked.csv` or `LIVE` changes.
+After deploying, it updates the Google Sheet in place, so volunteers' comments stay on their cells.
 
 ---
 
@@ -304,7 +306,7 @@ Nobody has started a new year yet. A trial found these gaps:
 ## 22. What is still missing
 
 - Model corrections should go to managers as suggestions (issue #48).
-- Volunteers should edit cells on the site, which appends to `edits.csv` (issue #11).
+- Volunteers comment in the Google Sheet, but nothing turns those comments into `edits.csv` rows yet (issue #74).
 - The site should switch between years.
 
-No SHIBA volunteer has reviewed the data yet.
+One SHIBA volunteer's corrections have landed as edits.

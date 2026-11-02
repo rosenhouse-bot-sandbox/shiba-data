@@ -9,6 +9,9 @@ A cell with a citation opens its page and highlights the quote.
 The plan PDFs come from the latest GitHub release.
 The `Documents` workflow downloads them from the carrier sites, cuts a new release, and redeploys the site.
 The `Site` workflow builds the site from that release, runs the tests, and deploys `main` to a Cloudflare Worker (`wrangler.toml`).
+Then `sheet_sync.py` updates the Google Sheet named by `sheet_id` in `data/<year>/config.json`.
+It matches rows by plan ID and columns by header, so volunteers' comments stay on their cells.
+It signs in as the `sheets-sync` service account through Workload Identity Federation.
 
 ## Local build
 
