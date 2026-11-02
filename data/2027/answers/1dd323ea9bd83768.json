@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2406-070-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"Pages 85-86 outpatient surgery row, in-network: hospital $0 colonoscopy to $835 surgery, and ASC $0 colonoscopy to $785 surgery. Each quote matches its setting.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Page 12 specialist office visits: $70 in-network and $90 out-of-network per visit.\"},\n{\"id\":2,\"ok\":false,\"reason\":\"The value and quotes are for outpatient surgery (hospital and ASC), not specialist office visits. The page 12 specialist cost is $70 in-network and $90 out-of-network.\"}\n]",
+ "usage": {
+  "input_tokens": 4218,
+  "output_tokens": 680,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

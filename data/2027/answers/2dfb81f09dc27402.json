@@ -1,0 +1,11 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H1036-306-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 68 outpatient surgery row: $395 copay at Outpatient Hospital and $100 at Ambulatory Surgical Center. The Diagnostic Colonoscopy $0 copay covers both ASC and Outpatient Hospital, so each range correctly starts at $0.\"}]\n```",
+ "usage": {
+  "input_tokens": 2128,
+  "output_tokens": 289,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

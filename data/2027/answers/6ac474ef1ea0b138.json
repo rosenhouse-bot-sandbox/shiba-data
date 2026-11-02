@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H3805-040-0.md",
+ "reply": "```json\n[{\"key\": \"dvha.F_dental\", \"result\": \"skip\"},\n {\"key\": \"main.G_specialist\", \"result\": \"cite\", \"citations\": [{\"page\": 13, \"quote\": \"Specialist office visits $55 copayment per visit.\"}]},\n {\"key\": \"main.I_outpatient_surgery\", \"result\": \"cite\", \"citations\": [{\"page\": 79, \"quote\": \"$0 copayment or a colonoscopy at an outpatient hospital.\"}, {\"page\": 79, \"quote\": \"$685 copayment or Medicare-covered surgery\"}, {\"page\": 79, \"quote\": \"$0 copayment or a colonoscopy at an ambulatory surgical center.\"}, {\"page\": 79, \"quote\": \"$635 copayment or Medicare-covered surgery\"}]},\n {\"key\": \"main.O_medical_deductible\", \"result\": \"skip\"}]\n```",
+ "usage": {
+  "input_tokens": 10999,
+  "output_tokens": 2498,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2001-045-0.retry.md",
+ "reply": "```json\n[{\"key\": \"dvha.G_vision\", \"result\": \"cite\", \"citations\": [{\"page\": 115, \"quote\": \"exam every year.\"}, {\"page\": 115, \"quote\": \"$0 copayment 30% coinsurance*\"}, {\"page\": 116, \"quote\": \"retail value o up to $200. You are\"}]},\n {\"key\": \"main.I_outpatient_surgery\", \"result\": \"skip\"}]\n```",
+ "usage": {
+  "input_tokens": 6015,
+  "output_tokens": 9364,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

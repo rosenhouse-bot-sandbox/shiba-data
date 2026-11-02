@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H5216-048-0.md",
+ "reply": "```json\n[{\"key\": \"main.I_outpatient_surgery\", \"result\": \"cite\", \"citations\": [{\"page\": 73, \"quote\": \"Surgery Services $450 copayment – Outpatient Hospital $350 copayment – Ambulatory Surgical Center Diagnostic Colonoscopy $0 copayment – Ambulatory Surgical Center – Outpatient Hospital\"}]},\n {\"key\": \"main.K_tests_labs\", \"result\": \"cite\", \"citations\": [{\"page\": 64, \"quote\": \"Diagnostic Procedures and Tests $0 copayment – PCP's Office $45 copayment – Specialist's Office\"}, {\"page\": 66, \"quote\": \"Lab Services $0 copayment – PCP's Office – Specialist's Office – Urgent Care Center – Outpatient Hospital – Freestanding Laboratory\"}]},\n {\"key\": \"main.M_part_b_drugs\", \"result\": \"skip\"},\n {\"key\": \"main.O_medical_deductible\", \"result\": \"skip\"}]\n```",
+ "usage": {
+  "input_tokens": 16494,
+  "output_tokens": 4107,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

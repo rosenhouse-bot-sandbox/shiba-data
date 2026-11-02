@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2923-005-0.md",
+ "reply": "```json\n[{\"key\": \"main.I_outpatient_surgery\", \"result\": \"cite\", \"citations\": [{\"page\": 92, \"quote\": \"Diagnostic Colonoscopies At an Office or Freestanding location: $0 copay At an Outpatient hospital: $0 copay At an Ambulatory Surgical Center (ASC): $0 copay\"}, {\"page\": 95, \"quote\": \"$475 copay for outpatient procedures/surgery at an Outpatient Hospital\"}, {\"page\": 95, \"quote\": \"$375 copay for outpatient procedures/surgery at an ASC - facility\"}]},\n{\"key\": \"main.J_outpatient_rehab\", \"result\": \"cite\", \"citations\": [{\"page\": 93, \"quote\": \"Physical Therapy Home or Office location: $40 copay\"}]},\n{\"key\": \"main.K_tests_labs\", \"result\": \"cite\", \"citations\": [{\"page\": 88, \"quote\": \"Diagnostic Procedures and Tests PCP's office: $0 copay Specialist's office: $20 copay Freestanding location: $40 copay\"}, {\"page\": 89, \"quote\": \"Advanced Laboratory Services Office or freestanding location: $0 copay\"}]},\n{\"key\": \"main.M_part_b_drugs\", \"result\": \"cite\", \"citations\": [{\"page\": 84, \"quote\": \"Allergy Serum: $0 copay at:\"}, {\"page\": 85, \"quote\": \"Chemotherapy Drugs: 20% coinsurance at:\"}, {\"page\": 85, \"quote\": \"All Other Part B Drugs: 20% coinsurance at:\"}]},\n{\"key\": \"main.R_dental\", \"result\": \"cite\", \"citations\": [{\"page\": 62, \"quote\": \"You have a $1,500 yearly allowance toward Preventive Dental and Comprehensive dental services,\"}, {\"page\": 61, \"quote\": \"In addition, we cover: Dental & Alternative Therapy Allowance.\"}]},\n{\"key\": \"main.S_acupuncture\", \"result\": \"cite\", \"citations\": [{\"page\": 54, \"quote\": \"Routine acupuncture is a supplemental benefit offered by Devoted Health. Your plan covers routine acupuncture visits under the Dental & Alternative Therapy Allowance.\"}, {\"page\": 63, \"quote\": \"Acupuncture services for conditions other than chronic lower back pain\"}]},\n{\"key\": \"main.V_massage\", \"result\": \"cite\", \"citations\": [{\"page\": 62, \"quote\": \"Massage therapy rendered by a licensed massage therapist.\"}]}]\n```",
+ "usage": {
+  "input_tokens": 21863,
+  "output_tokens": 10603,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

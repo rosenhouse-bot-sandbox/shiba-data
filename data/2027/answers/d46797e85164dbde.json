@@ -1,0 +1,11 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H2406-073-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 10, Summary of Important Costs, Specialist office visits row: $60 copayment per visit in-network and $80 copayment per visit out-of-network.\"}]\n```",
+ "usage": {
+  "input_tokens": 1597,
+  "output_tokens": 80,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

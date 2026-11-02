@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H5439-019-0.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 98 hospital outpatient row, in-network: $0 for skin biopsies and $500 for all other outpatient services, so the range $0-$500 follows the field's rule. Page 99 ASC row, in-network: $350 per visit. Both rows are in the Outpatient surgery section of this plan's EOC.\"}]",
+ "usage": {
+  "input_tokens": 2098,
+  "output_tokens": 528,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

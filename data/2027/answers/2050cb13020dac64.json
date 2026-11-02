@@ -1,0 +1,11 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H5439-010-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 88 outpatient surgery row, outpatient hospital block (followed by its out-of-network outpatient hospital facility line): $0 for skin biopsies and $500 for all other services. The ASC block shows in-network $200 per visit.\"},\n {\"id\": 1, \"ok\": true, \"reason\": \"Page 112: the Wellcare Spendables card gives all members a $20 monthly allowance shared across OTC items, dental, vision and hearing. OTC items are named and listed, with no SSBCI or optional-package restriction.\"}]\n```",
+ "usage": {
+  "input_tokens": 2419,
+  "output_tokens": 440,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

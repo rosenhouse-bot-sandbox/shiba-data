@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H1036-317-0.retry.md",
+ "reply": "```json\n[{\"key\": \"main.I_outpatient_surgery\", \"result\": \"cite\", \"citations\": [{\"page\": 67, \"quote\": \"Surgery Services 20% coinsurance – Outpatient Hospital\"}, {\"page\": 66, \"quote\": \"Diagnostic Colonoscopy $0 copayment – Ambulatory Surgical Center – Outpatient Hospital\"}, {\"page\": 69, \"quote\": \"Surgery Services 20% coinsurance – Outpatient Hospital – Ambulatory Surgical Center\"}, {\"page\": 69, \"quote\": \"Diagnostic Colonoscopy $0 copayment – Ambulatory Surgical Center – Outpatient Hospital\"}]}]\n```",
+ "usage": {
+  "input_tokens": 8381,
+  "output_tokens": 4460,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

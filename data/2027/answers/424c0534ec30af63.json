@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2406-042-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"Page 89 specialist consultation row: $50 in-network, $80 out-of-network. Matches the value.\"},\n{\"id\":1,\"ok\":false,\"reason\":\"The quotes are the specialist office visit row, not outpatient surgery. Surgery costs are $0-$550 at the hospital and $0-$400 at the ASC, so $50 | $80 is wrong.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Pages 85-86 outpatient surgery row. Hospital in-network: $0 colonoscopy, $550 surgery. ASC in-network: $0 colonoscopy (the row starts on p.85 and continues on p.86), $400 surgery. This gives $0-$550 | $0-$400.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"Page 63 routine hearing exam is $0 in-network. Page 64 hearing aid allowance is $700, limited to 2 aids per year.\"},\n{\"id\":4,\"ok\":false,\"reason\":\"The quotes are the outpatient surgery and colonoscopy rows, not the specialist office visit. The specialist copay on p.89 is $50 | $80.\"}\n]",
+ "usage": {
+  "input_tokens": 6791,
+  "output_tokens": 1185,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

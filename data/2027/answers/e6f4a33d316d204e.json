@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H5216-048-0.md",
+ "reply": "[\n  {\"id\": 0, \"ok\": true, \"reason\": \"Page 73 in-network: surgery is $450 at an outpatient hospital and $350 at an ASC. Diagnostic colonoscopy is $0 in both settings, so both ranges start at $0. Page 70 also shows $0 at the outpatient hospital.\"},\n  {\"id\": 1, \"ok\": false, \"reason\": \"Page 64 gives diagnostic tests $0 at the PCP and $45 at the specialist, and page 66 gives labs $0. But page 66 also lists a facility-based sleep study at $50 at the specialist's office (and $100 at the outpatient hospital). Sleep studies count as tests, so the $0-$45 range misses the $50 sleep study and contradicts the page. The quotes do not cover the sleep study.\"},\n  {\"id\": 2, \"ok\": false, \"reason\": \"The value is the outpatient surgery range, not tests/labs. The cited quotes are about surgery and colonoscopy, so they do not support a tests/labs value.\"}\n]",
+ "usage": {
+  "input_tokens": 5286,
+  "output_tokens": 818,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2406-042-0.md",
+ "reply": "```json\n[{\"key\": \"dvha.H_hearing\", \"result\": \"cite\", \"citations\": [{\"page\": 63, \"quote\": \"Hearing services - routine hearing exam $0 copayment\"}, {\"page\": 64, \"quote\": \"Hearing aid allowance is $700\"}, {\"page\": 64, \"quote\": \"This bene it is limited to 2 hearing aids every year.\"}]},\n {\"key\": \"main.G_specialist\", \"result\": \"cite\", \"citations\": [{\"page\": 89, \"quote\": \"$50 copayment or services rom a specialist\"}, {\"page\": 89, \"quote\": \"$80 copayment or services rom a specialist\"}]},\n {\"key\": \"main.I_outpatient_surgery\", \"result\": \"cite\", \"citations\": [{\"page\": 86, \"quote\": \"$0 copayment or a colonoscopy at an outpatient hospital.\"}, {\"page\": 86, \"quote\": \"$550 copayment or Medicare-covered surgery or other services provided to you at an outpatient hospital\"}, {\"page\": 85, \"quote\": \"$0 copayment or a colonoscopy at an\"}, {\"page\": 86, \"quote\": \"$400 copayment or Medicare-covered surgery or other services provided to you at an ambulatory surgical center,\"}]},\n {\"key\": \"main.O_medical_deductible\", \"result\": \"skip\"}]\n```",
+ "usage": {
+  "input_tokens": 7273,
+  "output_tokens": 7589,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
