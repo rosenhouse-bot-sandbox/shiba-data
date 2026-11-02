@@ -65,6 +65,23 @@ jobs:
       - id: deployment
         uses: actions/deploy-pages@v4
 
+  cloudflare:
+    if: github.ref == 'refs/heads/main' && vars.CLOUDFLARE_ACCOUNT_ID != ''
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: github-pages
+      - run: mkdir _site && tar -xf artifact.tar -C _site
+      - uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: "4.156.1"
+          command: deploy
+
   sheet:
     if: github.ref == 'refs/heads/main' && vars.SHIBA_SHEET_ID != ''
     needs: deploy
