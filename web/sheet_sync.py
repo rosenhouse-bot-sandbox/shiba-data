@@ -22,6 +22,8 @@ from sheet_layout import HEAD, SECTION, TABS, rows, widths  # noqa: E402
 WHITE = "FFFFFF"
 FIELDS = "userEnteredValue,note,userEnteredFormat,textFormatRuns"
 HEADER = "\0header"
+# Old header: new header, so a renamed column keeps its place and comments.
+RENAMED = {"Ambulance": "Ambulance Domestic/International"}
 
 
 @dataclass
@@ -91,7 +93,7 @@ def place_rows(wanted, have):
 def plan(existing, layout, column_widths=()):
     """The batchUpdate requests that write `layout` into `existing`."""
     sheet_id = existing.sheet_id
-    columns = place_columns([c.value for c in layout[0].cells], existing.header)
+    columns = place_columns([c.value for c in layout[0].cells], [RENAMED.get(h, h) for h in existing.header])
     row_at, inserts = place_rows([r.key for r in layout], existing.keys)
     requests = [{"insertDimension": {"range": {"sheetId": sheet_id, "dimension": "ROWS", "startIndex": i, "endIndex": i + 1}}}
                 for i in inserts]
