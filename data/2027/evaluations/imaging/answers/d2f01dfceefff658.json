@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "medium",
+ "task": "64e05773e847b56e.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-153-0\", \"benefit\": \"imaging\", \"setting\": \"office.pcp\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 60, \"quotes\": [\"Basic Radiological Services $0 copayment – PCP's Office\"], \"note\": \"\"},\n{\"plan_id\": \"H1036-153-0\", \"benefit\": \"imaging\", \"setting\": \"office.specialist\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$30\", \"unit\": \"\", \"limit\": \"\", \"page\": 60, \"quotes\": [\"Basic Radiological Services $0 copayment – PCP's Office $30 copayment – Specialist's Office\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 31032,
+  "output_tokens": 4028,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

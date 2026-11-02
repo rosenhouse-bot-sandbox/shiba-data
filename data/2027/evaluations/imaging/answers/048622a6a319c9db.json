@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "high",
+ "task": "0e1831fb00cf2a95.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2056-018-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$275\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"Diagnostic radiology services, such as CT/ CAT scan and MRI\", \"$275 copay\"], \"note\": \"The row says 'such as CT/CAT scan and MRI', which is not an exact list of services, so this is stated only as the broader diagnostic radiology category.\"},\n{\"plan_id\": \"H2056-018-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$10\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"Outpatient x‑rays $10 copay\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 3445,
+  "output_tokens": 2775,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

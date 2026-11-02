@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-8acbaf3993261220.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 3, Diagnostic radiology row: $0 copay for each diagnostic mammogram, in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 3, Outpatient X-rays row: $25 copay, in network.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 3, Diagnostic radiology row: $0 copay for each diagnostic mammogram.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 3, Diagnostic radiology services (e.g. MRI, CT scan) row: $285 copay for services other than diagnostic mammograms.\"},\n{\"id\": 4, \"ok\": false, \"reason\": \"Page 3 gives no out-of-network cost, so network 'any' is not supported.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 3, Diagnostic radiology row: $0 copay for each diagnostic mammogram.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 3, Outpatient X-rays row: $25 copay.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 3, Outpatient X-rays row: $25 copay.\"},\n{\"id\": 8, \"ok\": false, \"reason\": \"Page 3 gives no out-of-network cost, so network 'any' is not supported.\"},\n{\"id\": 9, \"ok\": true, \"reason\": \"Page 3, Diagnostic radiology row: $0 copay for each diagnostic mammogram.\"}]\n```",
+ "usage": {
+  "input_tokens": 3550,
+  "output_tokens": 1032,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

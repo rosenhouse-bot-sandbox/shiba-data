@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "task": "faebfcb17c1abba1.retry.md",
+ "reply": "```json\n[\n{\"plan_id\":\"H5216-048-0\",\"benefit\":\"imaging.diagnostic.advanced\",\"setting\":\"freestanding\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$205\",\"page\":8,\"quotes\":[\"$205 copay\"]},\n{\"plan_id\":\"H5216-048-0\",\"benefit\":\"imaging.diagnostic.advanced\",\"setting\":\"freestanding\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"50%\",\"page\":8,\"quotes\":[\"$50 copay 50% of the cost 50% of the cost 50% of the cost 50% of the cost\"],\"note\":\"Quote is the out-of-network column read down; the first 50% is the freestanding row.\"},\n{\"plan_id\":\"H5216-048-0\",\"benefit\":\"imaging.xray\",\"setting\":\"freestanding\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$40\",\"page\":8,\"quotes\":[\"$40 copay\"]},\n{\"plan_id\":\"H5216-048-0\",\"benefit\":\"imaging.xray\",\"setting\":\"freestanding\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"50%\",\"page\":8,\"quotes\":[\"50% of the cost 50% of the cost 50% of the cost 50% of the cost $50 copay\"],\"note\":\"Quote is the out-of-network column read down; the first 50% is the freestanding row.\"},\n{\"plan_id\":\"H5216-048-0\",\"benefit\":\"imaging.diagnostic.mammogram\",\"setting\":\"freestanding\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$0\",\"page\":9,\"quotes\":[\"$0 copay $0 copay $100 copay\"]},\n{\"plan_id\":\"H5216-048-0\",\"benefit\":\"imaging.diagnostic.mammogram\",\"setting\":\"freestanding\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$0\",\"page\":9,\"quotes\":[\"$0 copay $0 copay 50% of the cost\"]},\n{\"plan_id\":\"H5216-048-0\",\"benefit\":\"imaging.diagnostic.nuclear\",\"setting\":\"freestanding\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$270\",\"page\":9,\"quotes\":[\"$270 copay\"]}\n]\n```",
+ "usage": {
+  "input_tokens": 7485,
+  "output_tokens": 6689,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

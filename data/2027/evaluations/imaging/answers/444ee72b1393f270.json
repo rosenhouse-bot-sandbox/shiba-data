@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "task": "cd39f32cdbd73e52.retry.md",
+ "reply": "```json\n[\n{\"plan_id\":\"H2406-042-0\",\"benefit\":\"imaging.diagnostic\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$320\",\"condition\":\"otherwise (not a diagnostic mammogram)\",\"page\":4,\"quotes\":[\"$320 copay otherwise\"],\"note\":\"Row gives e.g. MRI, CT scan, which is not an exhaustive list, so I used the broader diagnostic benefit.\"},\n{\"plan_id\":\"H2406-042-0\",\"benefit\":\"imaging.diagnostic\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"30%\",\"page\":4,\"quotes\":[\"$0 copay for each 30% coinsurance\"],\"note\":\"The out-of-network column shows 30% for the diagnostic radiology row.\"},\n{\"plan_id\":\"H2406-042-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$15\",\"page\":4,\"quotes\":[\"$15 copay $30 copay\"]},\n{\"plan_id\":\"H2406-042-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$30\",\"page\":4,\"quotes\":[\"$15 copay $30 copay\"]}\n]\n```",
+ "usage": {
+  "input_tokens": 4958,
+  "output_tokens": 1494,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

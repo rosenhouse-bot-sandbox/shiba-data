@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "task": "v-8acbaf3993261220.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"Page 3 diagnostic radiology row: $0 copay for each diagnostic mammogram; the page names no network, so in-network applies.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Page 3: Outpatient X-rays $25 copay, in network.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Page 3: $0 copay for each diagnostic mammogram.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"Page 3 diagnostic radiology services (e.g. MRI, CT scan): $285 copay for everything other than diagnostic mammograms, in network.\"},\n{\"id\":4,\"ok\":false,\"reason\":\"The page gives no out-of-network cost, so network 'any' is not supported.\"},\n{\"id\":5,\"ok\":true,\"reason\":\"Page 3: $0 copay for each diagnostic mammogram, in network.\"},\n{\"id\":6,\"ok\":true,\"reason\":\"Page 3: Outpatient X-rays $25 copay.\"},\n{\"id\":7,\"ok\":true,\"reason\":\"Page 3: Outpatient X-rays $25 copay.\"},\n{\"id\":8,\"ok\":false,\"reason\":\"The page gives no out-of-network cost, so network 'any' is not supported.\"},\n{\"id\":9,\"ok\":true,\"reason\":\"Page 3: $0 copay for each diagnostic mammogram; the unit 'per mammogram' matches.\"}\n]",
+ "usage": {
+  "input_tokens": 3550,
+  "output_tokens": 1146,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

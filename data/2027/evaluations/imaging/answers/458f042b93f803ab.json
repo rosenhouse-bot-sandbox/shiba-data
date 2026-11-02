@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "low",
+ "task": "77d83ba821336370.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2001-045-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"unit\": \"\", \"limit\": \"\", \"condition\": \"Depending on your level of Medicaid eligibility\", \"page\": 86, \"quotes\": [\"Depending on your level o Medicaid eligibility,$0 copayment or 20% coinsurance or each Medicare-covered\"], \"note\": \"Depends on Medicaid level. The $0 copayment applies to QMB or full Medicaid members and is omitted. Quote is limited to the text on page 86; the rest of the service name continues on page 87.\"}]\n```",
+ "usage": {
+  "input_tokens": 35038,
+  "output_tokens": 1297,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

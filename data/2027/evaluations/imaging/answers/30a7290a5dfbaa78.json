@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "low",
+ "task": "bf93677641b9fa6f.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-001-0\", \"benefit\": \"imaging.xray\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$75\", \"unit\": \"\", \"limit\": \"\", \"page\": 5, \"quotes\": [\"Outpatient X-rays and Ultrasounds\", \"Outpatient hospital: $75 copay\"], \"note\": \"\"},\n{\"plan_id\": \"H2923-001-0\", \"benefit\": \"imaging.diagnostic.ultrasound\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$75\", \"unit\": \"\", \"limit\": \"\", \"page\": 5, \"quotes\": [\"Outpatient X-rays and Ultrasounds\", \"Outpatient hospital: $75 copay\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 4323,
+  "output_tokens": 1110,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "6c89db5198e7a3b2.md",
+ "reply": "```json\n[{\"plan_id\":\"H3817-010-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$5\",\"page\":5,\"quotes\":[\"Outpatient x-rays $5 50%\"]},\n{\"plan_id\":\"H3817-010-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"50%\",\"page\":5,\"quotes\":[\"Outpatient x-rays $5 50%\"]},\n{\"plan_id\":\"H3817-010-0\",\"benefit\":\"imaging.diagnostic.mammogram\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$0\",\"page\":5,\"quotes\":[\"Diagnostic mammography $0 50%\"]},\n{\"plan_id\":\"H3817-010-0\",\"benefit\":\"imaging.diagnostic.mammogram\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"50%\",\"page\":5,\"quotes\":[\"Diagnostic mammography $0 50%\"]},\n{\"plan_id\":\"H3817-010-0\",\"benefit\":\"imaging.diagnostic.advanced.mri\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$300\",\"page\":5,\"quotes\":[\"Diagnostic radiology (MRI, CT, etc.) $300 50%\"]},\n{\"plan_id\":\"H3817-010-0\",\"benefit\":\"imaging.diagnostic.advanced.mri\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"50%\",\"page\":5,\"quotes\":[\"Diagnostic radiology (MRI, CT, etc.) $300 50%\"]},\n{\"plan_id\":\"H3817-010-0\",\"benefit\":\"imaging.diagnostic.advanced.ct\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$300\",\"page\":5,\"quotes\":[\"Diagnostic radiology (MRI, CT, etc.) $300 50%\"]},\n{\"plan_id\":\"H3817-010-0\",\"benefit\":\"imaging.diagnostic.advanced.ct\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"50%\",\"page\":5,\"quotes\":[\"Diagnostic radiology (MRI, CT, etc.) $300 50%\"]}]\n```",
+ "usage": {
+  "input_tokens": 3246,
+  "output_tokens": 1287,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

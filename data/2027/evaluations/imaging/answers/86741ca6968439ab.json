@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "high",
+ "task": "d4758cd5b94a2266.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2406-070-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$320\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"$0 copay for each diagnostic mammogram $320 copay otherwise\"], \"note\": \"The row lists 'e.g. MRI, CT scan' as examples, so the broader diagnostic benefit is used. The $320 applies to diagnostic radiology other than diagnostic mammograms.\"},\n{\"plan_id\": \"H2406-070-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"$0 copay for each diagnostic mammogram $320 copay otherwise\"], \"note\": \"\"},\n{\"plan_id\": \"H2406-070-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$30\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"$30 copay\"], \"note\": \"The document says only 'Outpatient', not a specific setting, so setting is recorded as any.\"},\n{\"plan_id\": \"H2406-070-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$45\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"$45 copay\"], \"note\": \"The document says only 'Outpatient', not a specific setting, so setting is recorded as any.\"}]\n```",
+ "usage": {
+  "input_tokens": 4946,
+  "output_tokens": 7222,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

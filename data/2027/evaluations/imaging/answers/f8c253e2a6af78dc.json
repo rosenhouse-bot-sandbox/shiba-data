@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "medium",
+ "task": "cd39f32cdbd73e52.md",
+ "reply": "```json\n[{\"plan_id\": \"H2406-042-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$15\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"Outpatient X-rays\", \"$15 copay\"], \"note\": \"\"},\n{\"plan_id\": \"H2406-042-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$30\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"Outpatient X-rays\", \"$30 copay\"], \"note\": \"\"},\n{\"plan_id\": \"H2406-042-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"$0 copay for each diagnostic mammogram\"], \"note\": \"\"},\n{\"plan_id\": \"H2406-042-0\", \"benefit\": \"imaging.diagnostic.advanced.mri\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$320\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"Diagnostic radiology services\", \"(e.g. MRI, CT scan)\", \"$320 copay otherwise\"], \"note\": \"Document lists MRI and CT only as examples; the in-network $320 copay applies to diagnostic radiology other than the mammogram copay above.\"},\n{\"plan_id\": \"H2406-042-0\", \"benefit\": \"imaging.diagnostic.advanced.ct\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$320\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"Diagnostic radiology services\", \"(e.g. MRI, CT scan)\", \"$320 copay otherwise\"], \"note\": \"Document lists MRI and CT only as examples; the in-network $320 copay applies to diagnostic radiology other than the mammogram copay above.\"}]\n```",
+ "usage": {
+  "input_tokens": 4141,
+  "output_tokens": 3475,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

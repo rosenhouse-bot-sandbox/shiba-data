@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "medium",
+ "task": "0e1831fb00cf2a95.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2056-018-0\", \"benefit\": \"imaging.diagnostic.advanced.ct\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$275\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"Diagnostic radiology services,\", \"$275 copay\", \"CAT scan and MRI\"], \"note\": \"The row lists CT and MRI as examples ('such as'), so the cost is stated separately for each service.\"},\n{\"plan_id\": \"H2056-018-0\", \"benefit\": \"imaging.diagnostic.advanced.mri\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$275\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"Diagnostic radiology services,\", \"$275 copay\", \"CAT scan and MRI\"], \"note\": \"The row lists CT and MRI as examples ('such as'), so the cost is stated separately for each service.\"},\n{\"plan_id\": \"H2056-018-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$10\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"Outpatient x‑rays\", \"$10 copay\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 3651,
+  "output_tokens": 2829,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "362ee075ea5896d4.md",
+ "reply": "```json\n[{\"plan_id\": \"H2001-045-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per diagnostic mammogram\", \"page\": 4,\n  \"quotes\": [\"$0 copay for each diagnostic mammogram\"], \"note\": \"\"},\n {\"plan_id\": \"H2001-045-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"condition\": \"Depending on your level of Medicaid eligibility\", \"page\": 4,\n  \"quotes\": [\"Depending on your level of Medicaid eligibility, $0 copay or 20% coinsurance otherwise\"], \"note\": \"The row lists MRI and CT scan only as examples. Diagnostic mammograms are priced separately at $0. The deductible applies.\"},\n {\"plan_id\": \"H2001-045-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"out\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"page\": 4,\n  \"quotes\": [\"Diagnostic           $0 copay for each          30% coinsurance\"], \"note\": \"The quote is a printed line that holds both the in-network and out-of-network columns. 30% is the out-of-network column.\"},\n {\"plan_id\": \"H2001-045-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"out\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"page\": 4,\n  \"quotes\": [\"Outpatient X-rays Depending on your level of 30% coinsurance\"], \"note\": \"The quote leaves out the footnote mark 2 after X-rays. 30% is the out-of-network column.\"}]\n```",
+ "usage": {
+  "input_tokens": 4630,
+  "output_tokens": 2756,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

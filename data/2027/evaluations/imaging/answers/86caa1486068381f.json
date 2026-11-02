@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "low",
+ "task": "dbc45a45d9843dd0.md",
+ "reply": "[{\"plan_id\": \"H3817-008-1\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$10\", \"unit\": \"per day\", \"limit\": \"\", \"page\": 57,\n  \"quotes\": [\"$10 copay per provider per day\"], \"note\": \"\"},\n {\"plan_id\": \"H3817-008-1\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 57,\n  \"quotes\": [\"X-rays: In-network: $10 copay per provider per day Out-of-network: 50% coinsurance\"], \"note\": \"\"},\n {\"plan_id\": \"H3817-008-1\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"page\": 58,\n  \"quotes\": [\"$0 copay per provider per day for diagnostic mammography\"], \"note\": \"\"},\n {\"plan_id\": \"H3817-008-1\", \"benefit\": \"imaging.diagnostic.advanced.ct\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$300\", \"unit\": \"per day\", \"page\": 58,\n  \"quotes\": [\"Diagnostic non-laboratory tests such as CT scans, MRIs, EKGs, and\", \"$300 copay per provider per\"], \"note\": \"\"},\n {\"plan_id\": \"H3817-008-1\", \"benefit\": \"imaging.diagnostic.advanced.mri\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$300\", \"unit\": \"per day\", \"page\": 58,\n  \"quotes\": [\"Diagnostic non-laboratory tests such as CT scans, MRIs, EKGs, and\", \"$300 copay per provider per\"], \"note\": \"\"},\n {\"plan_id\": \"H3817-008-1\", \"benefit\": \"imaging.diagnostic.advanced.pet\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$300\", \"unit\": \"per day\", \"page\": 58,\n  \"quotes\": [\"PET scans when your doctor or other health care provider orders\", \"$300 copay per provider per\"], \"note\": \"\"}]",
+ "usage": {
+  "input_tokens": 15645,
+  "output_tokens": 848,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

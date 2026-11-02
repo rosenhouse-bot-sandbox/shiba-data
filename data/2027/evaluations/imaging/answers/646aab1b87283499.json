@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "high",
+ "task": "cd39f32cdbd73e52.md",
+ "reply": "```json\n[{\"plan_id\": \"H2406-042-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$15\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"Outpatient X-rays $15 copay $30 copay\"], \"note\": \"\"},\n{\"plan_id\": \"H2406-042-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$30\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"Outpatient X-rays $15 copay $30 copay\"], \"note\": \"\"},\n{\"plan_id\": \"H2406-042-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"for each diagnostic mammogram\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"Diagnostic radiology services (e.g. MRI, CT scan) $0 copay for each diagnostic mammogram\"], \"note\": \"\"},\n{\"plan_id\": \"H2406-042-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$320\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"$320 copay otherwise\"], \"note\": \"Applies to diagnostic radiology other than diagnostic mammograms, which have a separate $0 copay.\"},\n{\"plan_id\": \"H2406-042-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"Diagnostic radiology services (e.g. MRI, CT scan) $0 copay for each diagnostic mammogram 30% coinsurance\"], \"note\": \"\"},\n{\"plan_id\": \"H2406-042-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"Diagnostic radiology services (e.g. MRI, CT scan) $0 copay for each diagnostic mammogram 30% coinsurance\"], \"note\": \"The out-of-network cell is not split by mammogram, so this assumes the 30% applies to the whole row, including diagnostic mammograms.\"}]\n```",
+ "usage": {
+  "input_tokens": 4141,
+  "output_tokens": 8291,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

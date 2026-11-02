@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "low",
+ "task": "e2d6e1e199a3b8a9.md",
+ "reply": "```json\n[{\"plan_id\":\"H2056-018-0\",\"benefit\":\"imaging.diagnostic.mammogram\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$0\",\"unit\":\"per visit\",\"page\":32,\"quotes\":[\"$0 copay for each diagnostic mammogram.\"]},\n{\"plan_id\":\"H2056-018-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$10\",\"unit\":\"per visit\",\"page\":49,\"quotes\":[\"$10 copay for each Medicare‑covered x‑ray.\"]},\n{\"plan_id\":\"H2056-018-0\",\"benefit\":\"imaging.diagnostic.advanced.ct\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$275\",\"unit\":\"per visit\",\"page\":49,\"quotes\":[\"$275 copay for each Medicare‑covered CT scan.\"]},\n{\"plan_id\":\"H2056-018-0\",\"benefit\":\"imaging.diagnostic\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$275\",\"unit\":\"per visit\",\"page\":49,\"quotes\":[\"$275 copay for each Medicare‑covered diagnostic radiology service other than CT scans.\"],\"note\":\"Applies to diagnostic radiology other than CT scans; CT is priced separately at the same amount.\"},\n{\"plan_id\":\"H2056-018-0\",\"benefit\":\"imaging.diagnostic.advanced.ct\",\"setting\":\"outpatient_hospital\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$275\",\"unit\":\"per visit\",\"page\":50,\"quotes\":[\"$275 copay for each Medicare‑covered CT scan.\"]},\n{\"plan_id\":\"H2056-018-0\",\"benefit\":\"imaging.diagnostic\",\"setting\":\"outpatient_hospital\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$275\",\"unit\":\"per visit\",\"page\":50,\"quotes\":[\"$275 copay for each Medicare‑covered diagnostic radiology service other than CT\"],\"note\":\"Applies to diagnostic radiology other than CT scans; CT is priced separately at the same amount.\"},\n{\"plan_id\":\"H2056-018-0\",\"benefit\":\"imaging.xray\",\"setting\":\"outpatient_hospital\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$10\",\"unit\":\"per visit\",\"page\":51,\"quotes\":[\"$10 copay for each Medicare‑covered x‑ray.\"]}]\n```",
+ "usage": {
+  "input_tokens": 17098,
+  "output_tokens": 1537,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

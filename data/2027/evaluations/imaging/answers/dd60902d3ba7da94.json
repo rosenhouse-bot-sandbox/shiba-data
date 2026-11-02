@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "low",
+ "task": "faf9b5f14f8f128e.md",
+ "reply": "```json\n[\n{\"plan_id\":\"H5439-015-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$50\",\"unit\":\"\",\"limit\":\"\",\"page\":7,\"quotes\":[\"Outpatient X-rays In-Network $50 copay\"],\"note\":\"\"},\n{\"plan_id\":\"H5439-015-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"30%\",\"unit\":\"\",\"limit\":\"\",\"page\":7,\"quotes\":[\"Out-of-Network 30% coinsurance\"],\"note\":\"Quote may repeat on page; see row\"},\n{\"plan_id\":\"H5439-015-0\",\"benefit\":\"imaging.diagnostic.mammogram\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$0\",\"unit\":\"\",\"limit\":\"\",\"page\":7,\"quotes\":[\"$0 copay for a diagnostic mammogram.\"],\"note\":\"\"},\n{\"plan_id\":\"H5439-015-0\",\"benefit\":\"imaging.diagnostic\",\"setting\":\"outpatient_hospital\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$500\",\"unit\":\"\",\"limit\":\"\",\"page\":7,\"quotes\":[\"$500 copay for all other diagnostic radiology services received in an outpatient hospital setting.\"],\"note\":\"Applies to diagnostic radiology other than diagnostic mammogram\"},\n{\"plan_id\":\"H5439-015-0\",\"benefit\":\"imaging.diagnostic\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$225\",\"unit\":\"\",\"limit\":\"\",\"page\":7,\"quotes\":[\"$225 copay for all other services received in all other locations.\"],\"note\":\"Other locations than outpatient hospital; excludes diagnostic mammogram\"}\n]\n```",
+ "usage": {
+  "input_tokens": 3666,
+  "output_tokens": 660,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

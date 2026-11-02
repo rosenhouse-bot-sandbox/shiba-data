@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "high",
+ "task": "7ac7300e6ca40ac7.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-040-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$25\", \"unit\": \"per standard X-ray service\", \"limit\": \"\", \"page\": 74, \"quotes\": [\"$25 copayment or each Medicare-covered standard X-ray service.\"], \"note\": \"The row does not name a setting. The copay applies until the out-of-pocket maximum is reached.\"},\n{\"plan_id\": \"H3805-040-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$285\", \"unit\": \"\", \"limit\": \"\", \"page\": 76, \"quotes\": [\"$285 copayment or other Medicare-covered radiological diagnostic services, not including X-rays.\"], \"note\": \"The row does not name a setting. Its examples include mammograms, which also have a separate $0 row. The document does not state a unit.\"},\n{\"plan_id\": \"H3805-040-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per diagnostic mammogram\", \"limit\": \"\", \"page\": 76, \"quotes\": [\"$0 copayment or each diagnostic mammogram.\"], \"note\": \"The document does not name a setting. The $285 diagnostic radiology row also lists diagnostic mammograms as examples, so the two rows overlap.\"}]\n```",
+ "usage": {
+  "input_tokens": 31759,
+  "output_tokens": 5280,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

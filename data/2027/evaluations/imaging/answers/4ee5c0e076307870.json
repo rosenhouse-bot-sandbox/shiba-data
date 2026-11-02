@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "low",
+ "task": "90a4efa6544175a2.md",
+ "reply": "[\n {\"plan_id\":\"H6815-038-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$50\",\"unit\":\"\",\"limit\":\"\",\"page\":82,\"quotes\":[\"$50 copay for Medicare-covered X-rays.\"],\"note\":\"\"},\n {\"plan_id\":\"H6815-038-0\",\"benefit\":\"imaging.diagnostic.mammogram\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$0\",\"unit\":\"\",\"limit\":\"\",\"page\":83,\"quotes\":[\"$0 copay for Medicare-covered diagnostic mammogram.\"],\"note\":\"\"},\n {\"plan_id\":\"H6815-038-0\",\"benefit\":\"imaging.diagnostic\",\"setting\":\"outpatient_hospital\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$500\",\"unit\":\"\",\"limit\":\"\",\"page\":83,\"quotes\":[\"$500 copay for all other Medicare-covered diagnostic radiology services received in an outpatient setting.\"],\"note\":\"Row applies to diagnostic radiology services other than diagnostic mammogram; includes CT, MRI, PET.\"}\n]",
+ "usage": {
+  "input_tokens": 13317,
+  "output_tokens": 418,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

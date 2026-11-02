@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "medium",
+ "task": "e306f120395b6260.md",
+ "reply": "```json\n[{\"plan_id\": \"H2406-073-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$30\", \"unit\": \"per service\", \"limit\": \"\", \"page\": 67, \"quotes\": [\"$30 copayment or each Medicare-covered standard X-ray service.\"], \"note\": \"\"},\n{\"plan_id\": \"H2406-073-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$35\", \"unit\": \"per service\", \"limit\": \"\", \"page\": 67, \"quotes\": [\"$35 copayment or each Medicare-covered standard X-ray service.\"], \"note\": \"\"},\n{\"plan_id\": \"H2406-073-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per mammogram\", \"limit\": \"\", \"page\": 69, \"quotes\": [\"$0 copayment or each diagnostic mammogram.\"], \"note\": \"\"},\n{\"plan_id\": \"H2406-073-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$320\", \"unit\": \"\", \"limit\": \"\", \"page\": 69, \"quotes\": [\"$320 copayment or other Medicare-covered radiological diagnostic services, not including X-rays.\"], \"note\": \"\"},\n{\"plan_id\": \"H2406-073-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"unit\": \"\", \"limit\": \"\", \"page\": 69, \"quotes\": [\"30% coinsurance or Medicare-covered diagnostic services, not including X-rays.\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 26830,
+  "output_tokens": 4708,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

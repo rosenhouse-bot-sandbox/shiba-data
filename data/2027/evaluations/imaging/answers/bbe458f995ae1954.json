@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "task": "8865a3a5b2f4fcad.md",
+ "reply": "```json\n[\n  {\n    \"plan_id\": \"H6815-038-0\",\n    \"benefit\": \"imaging.xray\",\n    \"setting\": \"any\",\n    \"network\": \"in\",\n    \"covered_by\": \"medicare\",\n    \"cost_kind\": \"copay\",\n    \"amount\": \"$50\",\n    \"unit\": \"\",\n    \"limit\": \"\",\n    \"page\": 6,\n    \"quotes\": [\"Outpatient X-rays $50 copay\"],\n    \"note\": \"\"\n  },\n  {\n    \"plan_id\": \"H6815-038-0\",\n    \"benefit\": \"imaging.diagnostic.mammogram\",\n    \"setting\": \"any\",\n    \"network\": \"in\",\n    \"covered_by\": \"medicare\",\n    \"cost_kind\": \"copay\",\n    \"amount\": \"$0\",\n    \"unit\": \"\",\n    \"limit\": \"\",\n    \"page\": 6,\n    \"quotes\": [\"$0 copay for a diagnostic mammogram.\"],\n    \"note\": \"\"\n  },\n  {\n    \"plan_id\": \"H6815-038-0\",\n    \"benefit\": \"imaging.diagnostic\",\n    \"setting\": \"outpatient_hospital\",\n    \"network\": \"in\",\n    \"covered_by\": \"medicare\",\n    \"cost_kind\": \"copay\",\n    \"amount\": \"$500\",\n    \"unit\": \"\",\n    \"limit\": \"\",\n    \"page\": 6,\n    \"quotes\": [\"$500 copay for all other diagnostic radiology services received in an outpatient hospital setting.\"],\n    \"note\": \"Applies to diagnostic radiology services other than diagnostic mammograms.\"\n  }\n]\n```\n\nI left out the $200 copay for \"all other services received in all other locations\". That wording does not name a setting from the list, and setting `any` would be wrong because the cost does not apply everywhere.",
+ "usage": {
+  "input_tokens": 3306,
+  "output_tokens": 1410,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "high",
+ "task": "6c89db5198e7a3b2.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3817-010-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$5\", \"unit\": \"\", \"limit\": \"\", \"page\": 5, \"quotes\": [\"Outpatient x-rays $5 50%\"], \"note\": \"\"},\n{\"plan_id\": \"H3817-010-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"\", \"limit\": \"\", \"page\": 5, \"quotes\": [\"Outpatient x-rays $5 50%\"], \"note\": \"\"},\n{\"plan_id\": \"H3817-010-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 5, \"quotes\": [\"Diagnostic mammography $0 50%\"], \"note\": \"\"},\n{\"plan_id\": \"H3817-010-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"\", \"limit\": \"\", \"page\": 5, \"quotes\": [\"Diagnostic mammography $0 50%\"], \"note\": \"\"},\n{\"plan_id\": \"H3817-010-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$300\", \"unit\": \"\", \"limit\": \"\", \"page\": 5, \"quotes\": [\"$300 50%\"], \"note\": \"Row is labeled 'Diagnostic radiology (MRI, CT, etc.)'; MRI and CT are listed only as examples, so it is mapped to imaging.diagnostic as priced together.\"},\n{\"plan_id\": \"H3817-010-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"\", \"limit\": \"\", \"page\": 5, \"quotes\": [\"$300 50%\"], \"note\": \"Row is labeled 'Diagnostic radiology (MRI, CT, etc.)'; MRI and CT are listed only as examples, so it is mapped to imaging.diagnostic as priced together.\"}]\n```",
+ "usage": {
+  "input_tokens": 4060,
+  "output_tokens": 5379,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

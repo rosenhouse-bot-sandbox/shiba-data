@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "low",
+ "task": "b4be2a8a3e57d86a.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-427-2\", \"benefit\": \"imaging.diagnostic.advanced\", \"setting\": \"freestanding\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$205\", \"page\": 8, \"quotes\": [\"$205 copay\"]},\n{\"plan_id\": \"H5216-427-2\", \"benefit\": \"imaging.diagnostic.advanced\", \"setting\": \"freestanding\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 8, \"quotes\": [\"$205 copay                              50% of the cost\"]},\n{\"plan_id\": \"H5216-427-2\", \"benefit\": \"imaging.xray\", \"setting\": \"freestanding\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$40\", \"page\": 8, \"quotes\": [\"$40 copay                               35% of the cost\"]},\n{\"plan_id\": \"H5216-427-2\", \"benefit\": \"imaging.xray\", \"setting\": \"freestanding\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"35%\", \"page\": 8, \"quotes\": [\"$40 copay                               35% of the cost\"]},\n{\"plan_id\": \"H5216-427-2\", \"benefit\": \"imaging.diagnostic.nuclear\", \"setting\": \"freestanding\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$270\", \"page\": 9, \"quotes\": [\"$270 copay\"]},\n{\"plan_id\": \"H5216-427-2\", \"benefit\": \"imaging.diagnostic.nuclear\", \"setting\": \"freestanding\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 9, \"quotes\": [\"$270 copay                              50% of the cost\"]}]\n```",
+ "usage": {
+  "input_tokens": 9172,
+  "output_tokens": 1187,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

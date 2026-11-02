@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "low",
+ "task": "v-4a3883a20d17f740.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Diagnostic radiology row: $0 copay for a diagnostic mammogram in network.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Outpatient X-rays in network $50 copay.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"$500 copay for other diagnostic radiology in outpatient hospital, in network.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"Out-of-network X-rays 20% coinsurance.\"},\n{\"id\":4,\"ok\":false,\"reason\":\"The $125 copay applies to 'all other locations', not specifically an office setting; the setting does not match.\"},\n{\"id\":5,\"ok\":true,\"reason\":\"Out-of-network X-rays 20% coinsurance.\"},\n{\"id\":6,\"ok\":false,\"reason\":\"The $500 copay is for outpatient hospital, not freestanding.\"},\n{\"id\":7,\"ok\":true,\"reason\":\"Exact quote: $500 in outpatient hospital.\"},\n{\"id\":8,\"ok\":true,\"reason\":\"Out-of-network X-rays 20% coinsurance.\"},\n{\"id\":9,\"ok\":false,\"reason\":\"'All other locations' is not clearly a freestanding facility; the setting is a mismatch.\"},\n{\"id\":10,\"ok\":false,\"reason\":\"The $125 copay applies only to other locations, not to every setting (any), so the setting is wrong.\"},\n{\"id\":11,\"ok\":false,\"reason\":\"The $500 copay is for outpatient hospital, not freestanding.\"},\n{\"id\":12,\"ok\":true,\"reason\":\"Outpatient X-rays in network $50 copay.\"},\n{\"id\":13,\"ok\":false,\"reason\":\"The out-of-network 20% covers the whole row, but the mammogram is not separately stated out of network; uncertain, so false.\"},\n{\"id\":14,\"ok\":true,\"reason\":\"Out-of-network 20% coinsurance applies to the diagnostic radiology row.\"},\n{\"id\":15,\"ok\":true,\"reason\":\"Out-of-network X-rays 20% coinsurance.\"},\n{\"id\":16,\"ok\":true,\"reason\":\"Diagnostic radiology out-of-network 20% coinsurance.\"},\n{\"id\":17,\"ok\":false,\"reason\":\"The $500 copay is for outpatient hospital, not office.\"},\n{\"id\":18,\"ok\":true,\"reason\":\"In-network X-rays $50 copay.\"},\n{\"id\":19,\"ok\":true,\"reason\":\"Out-of-network X-rays 20% coinsurance.\"},\n{\"id\":20,\"ok\":false,\"reason\":\"Urgent care is not named; 'all other locations' is not specific enough.\"}]",
+ "usage": {
+  "input_tokens": 4545,
+  "output_tokens": 888,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

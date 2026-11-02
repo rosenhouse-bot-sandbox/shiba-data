@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "medium",
+ "task": "90a4efa6544175a2.md",
+ "reply": "```json\n[{\"plan_id\": \"H6815-038-0\", \"benefit\": \"imaging.xray\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$50\", \"unit\": \"\", \"limit\": \"\", \"page\": 82, \"quotes\": [\"$50 copay for Medicare-covered X-rays.\"], \"note\": \"The row names no setting and no network column is given, so this is treated as an in-network cost for any setting.\"},\n{\"plan_id\": \"H6815-038-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 83, \"quotes\": [\"$0 copay for Medicare-covered diagnostic mammogram.\"], \"note\": \"The row names no setting and no network column is given, so this is treated as an in-network cost for any setting.\"},\n{\"plan_id\": \"H6815-038-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$500\", \"unit\": \"\", \"limit\": \"\", \"page\": 83, \"quotes\": [\"$500 copay for all other Medicare-covered diagnostic radiology services received in an outpatient setting.\"], \"note\": \"The row says 'outpatient setting' without saying 'hospital'; it is mapped to outpatient_hospital because it appears in the outpatient diagnostic section and contrasts with physician office and freestanding settings. The row's services are listed as 'such as' examples, so the services are not an exact list.\"}]\n```",
+ "usage": {
+  "input_tokens": 13317,
+  "output_tokens": 3239,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

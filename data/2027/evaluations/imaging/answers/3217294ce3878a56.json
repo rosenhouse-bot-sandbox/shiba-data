@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "low",
+ "task": "e306f120395b6260.md",
+ "reply": "```json\n[\n{\"plan_id\":\"H2406-073-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$30\",\"unit\":\"per service\",\"limit\":\"\",\"page\":67,\"quotes\":[\"$30 copayment or each Medicare- covered standard X- ray service.\"],\"note\":\"\"},\n{\"plan_id\":\"H2406-073-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$35\",\"unit\":\"per service\",\"limit\":\"\",\"page\":67,\"quotes\":[\"$35 copayment or each Medicare- covered standard X- ray service.\"],\"note\":\"\"}\n]\n```",
+ "usage": {
+  "input_tokens": 26830,
+  "output_tokens": 246,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

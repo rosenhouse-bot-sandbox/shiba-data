@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "low",
+ "task": "23e2bdae59ea8981.md",
+ "reply": "```json\n[\n{\"plan_id\":\"H3817-011-1\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$25\",\"unit\":\"\",\"limit\":\"\",\"page\":5,\"quotes\":[\"Outpatient x-rays $25\"],\"note\":\"\"},\n{\"plan_id\":\"H3817-011-1\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"50%\",\"unit\":\"\",\"limit\":\"\",\"page\":5,\"quotes\":[\"Outpatient x-rays $25 50%\"],\"note\":\"\"},\n{\"plan_id\":\"H3817-011-1\",\"benefit\":\"imaging.diagnostic.mammogram\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$0\",\"unit\":\"\",\"limit\":\"\",\"page\":5,\"quotes\":[\"Diagnostic mammography $0\"],\"note\":\"\"},\n{\"plan_id\":\"H3817-011-1\",\"benefit\":\"imaging.diagnostic.mammogram\",\"setting\":\"any\",\"network\":\"out\",\"covered_by\":\"medicare\",\"cost_kind\":\"coinsurance\",\"amount\":\"50%\",\"unit\":\"\",\"limit\":\"\",\"page\":5,\"quotes\":[\"Diagnostic mammography $0 50%\"],\"note\":\"\"}\n]\n```",
+ "usage": {
+  "input_tokens": 3231,
+  "output_tokens": 458,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

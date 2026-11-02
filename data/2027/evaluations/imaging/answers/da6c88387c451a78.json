@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "task": "5e11cf20cec995f3.md",
+ "reply": "```json\n[\n{\"plan_id\":\"H3805-048-0\",\"benefit\":\"imaging.xray\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$30\",\"unit\":\"per service\",\"limit\":\"\",\"page\":75,\"quotes\":[\"$30 copayment or each Medicare-covered standard X-ray service.\"],\"note\":\"\"},\n{\"plan_id\":\"H3805-048-0\",\"benefit\":\"imaging.diagnostic.mammogram\",\"setting\":\"any\",\"network\":\"in\",\"covered_by\":\"medicare\",\"cost_kind\":\"copay\",\"amount\":\"$0\",\"unit\":\"per mammogram\",\"limit\":\"\",\"page\":76,\"quotes\":[\"$0 copayment or each diagnostic mammogram.\"],\"note\":\"\"}\n]\n```",
+ "usage": {
+  "input_tokens": 30726,
+  "output_tokens": 252,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

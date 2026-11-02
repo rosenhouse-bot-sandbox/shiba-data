@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "task": "v-23e2bdae59ea8981.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"Diagnostic mammography row: 50% out-of-network.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Outpatient x-rays row: $25 in-network.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"The row 'Diagnostic radiology (MRI, CT, etc.)' names MRI; in-network is $300.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"Diagnostic radiology row: 50% out-of-network.\"},\n{\"id\":4,\"ok\":true,\"reason\":\"Outpatient x-rays: $25 in-network.\"},\n{\"id\":5,\"ok\":true,\"reason\":\"Diagnostic radiology: $300 in-network.\"},\n{\"id\":6,\"ok\":true,\"reason\":\"Outpatient x-rays: 50% out-of-network.\"},\n{\"id\":7,\"ok\":true,\"reason\":\"Diagnostic radiology: 50% out-of-network.\"},\n{\"id\":8,\"ok\":true,\"reason\":\"The row names CT; out-of-network is 50%.\"},\n{\"id\":9,\"ok\":true,\"reason\":\"Diagnostic radiology: $300 in-network.\"},\n{\"id\":10,\"ok\":true,\"reason\":\"Outpatient x-rays: 50% out-of-network.\"},\n{\"id\":11,\"ok\":true,\"reason\":\"Diagnostic mammography: $0 in-network.\"},\n{\"id\":12,\"ok\":true,\"reason\":\"The row names CT; in-network is $300.\"},\n{\"id\":13,\"ok\":true,\"reason\":\"Diagnostic mammography: 50% out-of-network.\"},\n{\"id\":14,\"ok\":true,\"reason\":\"Diagnostic radiology: $300 in-network.\"},\n{\"id\":15,\"ok\":true,\"reason\":\"Diagnostic mammography: $0 in-network.\"},\n{\"id\":16,\"ok\":true,\"reason\":\"The row names MRI; out-of-network is 50%.\"},\n{\"id\":17,\"ok\":true,\"reason\":\"Outpatient x-rays: $25 in-network.\"},\n{\"id\":18,\"ok\":true,\"reason\":\"Diagnostic radiology row: 50% out-of-network.\"},\n{\"id\":19,\"ok\":true,\"reason\":\"Diagnostic mammography: $0 in-network.\"},\n{\"id\":20,\"ok\":true,\"reason\":\"Diagnostic radiology: $300 in-network.\"},\n{\"id\":21,\"ok\":true,\"reason\":\"Diagnostic radiology: 50% out-of-network.\"}\n]",
+ "usage": {
+  "input_tokens": 4865,
+  "output_tokens": 1680,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
