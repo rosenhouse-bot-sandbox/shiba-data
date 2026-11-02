@@ -25,6 +25,7 @@ import ask  # noqa: E402
 import blobs  # noqa: E402
 import document_facts  # noqa: E402
 import eoc  # noqa: E402
+import filled  # noqa: E402
 import layers  # noqa: E402
 import present  # noqa: E402
 import steps  # noqa: E402
@@ -32,6 +33,7 @@ import years  # noqa: E402
 
 CMS = ("landscape", "pbp")
 READER, VERIFIER, SECOND_VERIFIER = "claude-haiku-5-5", "claude-sonnet-5-5", "claude-opus-5-5"
+STEPS = {"filled": filled.VERSIONS, "document_facts": document_facts.VERSIONS}
 
 
 def get(url, path):
@@ -126,7 +128,7 @@ def filled_step(texts, work, answer, every=False, version=None):
 
 def model_steps(data, texts, work, answer, versions):
     blanks_step(texts, work, answer)
-    document_facts.step(data, texts, f"{work}/facts", answer)
+    document_facts.step(data, texts, f"{work}/facts", answer, versions["document_facts"])
     present.write(data)
     filled_step(texts, work, answer, version=versions["filled"])
 
@@ -171,8 +173,7 @@ def main(year, work, mode="", candidate=""):
 
     check_quotes(data, f"{work}/texts")
     if config["year"] == years.LIVE:  # blanks.py and filled.py read the live year
-        import filled
-        versions = steps.versions(data, {"filled": filled.VERSIONS}, candidate)
+        versions = steps.versions(data, STEPS, candidate)
         answer = Answers(data, ask.api() if mode == "api" else None)
         before = {name: len(layers.layer(data, name)) for name in (layers.BLANKS, layers.FILLED)}
         model_steps(data, f"{work}/texts", work, answer, versions)

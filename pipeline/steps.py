@@ -13,8 +13,10 @@ def versions(data, known, candidate=""):
         out = json.load(f)
     if candidate:
         step, _, version = candidate.partition("@")
+        if step not in known:
+            raise SystemExit(f"No versioned step {step}")
         out[step] = int(version) if version.isdigit() else version
-    bad = {s: out.get(s) for s in set(out) | set(known) if out.get(s) not in known.get(s, {})}
+    bad = {s: out.get(s) for s in known if out.get(s) not in known[s]}
     if bad:
         raise SystemExit(f"No such step versions: {bad}")
     return out

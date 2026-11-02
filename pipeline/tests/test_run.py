@@ -3,7 +3,7 @@ from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import layers
-import ask, run
+import ask, run, years
 
 URL = "https://example.org/sb.pdf"
 
@@ -86,10 +86,14 @@ class StepsTest(unittest.TestCase):
         order = []
         with mock.patch.multiple(run, blanks_step=lambda *a: order.append("blanks"),
                                  filled_step=lambda *a, **kw: order.append(("filled", kw))), \
-             mock.patch.object(run.document_facts, "step", lambda data, texts, work, answer: order.append(work)), \
+             mock.patch.object(run.document_facts, "step",
+                               lambda data, texts, work, answer, version: order.append((work, version))), \
              mock.patch.object(run.present, "write", lambda data: order.append("present")):
-            run.model_steps("data", "texts", "work", None, {"filled": 2})
-        self.assertEqual(order, ["blanks", "work/facts", "present", ("filled", {"version": 2})])
+            run.model_steps("data", "texts", "work", None, {"filled": 2, "document_facts": 3})
+        self.assertEqual(order, ["blanks", ("work/facts", 3), "present", ("filled", {"version": 2})])
+
+    def test_knows_every_pinned_step(self):
+        self.assertEqual(set(run.STEPS), set(json.load(open(years.data_dir(years.LIVE) / "steps.json"))))
 
 
 if __name__ == "__main__":

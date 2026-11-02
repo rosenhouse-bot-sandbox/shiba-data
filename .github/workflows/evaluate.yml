@@ -3,22 +3,16 @@ name: Evaluate
 on:
   workflow_dispatch:
     inputs:
-      step:
-        description: Evaluate models, or write document facts with the picked ones
-        required: true
-        default: evaluate
-        type: choice
-        options: [evaluate, facts]
       year:
         description: Plan year
         required: true
         default: "2027"
       group:
-        description: Benefit group (evaluate only)
+        description: Benefit group
         type: choice
         options: [imaging]
       documents:
-        description: Every document, or one per carrier and kind (evaluate only)
+        description: Every document, or one per carrier and kind
         type: choice
         options: [sample, all]
       dollars:
@@ -38,7 +32,6 @@ jobs:
     environment: cloudflare
     runs-on: ubuntu-24.04
     env:
-      STEP: ${{ inputs.step }}
       YEAR: ${{ inputs.year }}
       GROUP: ${{ inputs.group }}
       DOCUMENTS: ${{ inputs.documents }}
@@ -67,26 +60,18 @@ jobs:
           xargs -P 8 -n 2 sh -c 'mkdir -p "$(dirname "$2")" && curl -sSfL --retry 5 --retry-all-errors --max-time 300 -o "$2" "https://pdxplans.org/docs/$1.pdf"' _ \
             < _texts.txt
           sed 's/ /  /' _texts.txt | sha256sum -c --quiet
-      - if: inputs.step == 'evaluate'
-        run: python3 -I pipeline/evaluate.py "$YEAR" _work/texts _eval "$GROUP" "$DOCUMENTS" "$DOLLARS" api
+      - run: python3 -I pipeline/evaluate.py "$YEAR" _work/texts _eval "$GROUP" "$DOCUMENTS" "$DOLLARS" api
         timeout-minutes: 300
-      - if: inputs.step == 'facts'
-        run: python3 -I pipeline/document_facts.py "$YEAR" _work api
-        timeout-minutes: 120
       # Saved answers are worth keeping even when the run stops early.
       - if: always()
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          branch="$STEP/$YEAR-$GITHUB_RUN_ID"
+          branch="evaluate/$YEAR-$GITHUB_RUN_ID"
           git config user.name "github-actions[bot]"
           git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
           git checkout -b "$branch"
-          if [ "$STEP" = facts ]; then
-            git add "data/$YEAR/answers" "data/$YEAR/machine/document_facts.csv"
-          else
-            git add "data/$YEAR/evaluations"
-          fi
-          git commit -m "Save the $STEP answers of run $GITHUB_RUN_ID" || exit 0
+          git add "data/$YEAR/evaluations"
+          git commit -m "Save the evaluation answers of run $GITHUB_RUN_ID" || exit 0
           git push "https://x-access-token:$GH_TOKEN@github.com/$GITHUB_REPOSITORY.git" "$branch"
           echo "::notice::Pushed $branch. Merge it so a rerun reuses its answers."
