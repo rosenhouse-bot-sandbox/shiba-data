@@ -19,6 +19,10 @@ class VersionsTest(unittest.TestCase):
     def test_a_candidate_replaces_its_steps_pin(self):
         self.assertEqual(steps.versions(self.data, KNOWN, "filled@2"), {"filled": 2})
 
+    def test_checks_only_the_steps_it_knows(self):
+        (self.data / "steps.json").write_text(json.dumps({"filled": 1, "other": 5}))
+        self.assertEqual(steps.versions(self.data, KNOWN)["filled"], 1)
+
     def test_rejects_an_unknown_candidate(self):
         for candidate in ("blanks@2", "filled@3", "filled", "filled@two"):
             with self.assertRaises(SystemExit, msg=candidate):

@@ -74,8 +74,9 @@ flowchart TB
 | Red | Heavier model (Sonnet or Opus), or an agent with a browser |
 
 - `pipeline/find_docs.py` lists plan documents from browser finds (`found.csv`), the volunteers' Links sheet (`links.csv`), and carrier URL templates, in that order of preference.
-- `pipeline/run.py` regenerates `generated/`, `machine/blanks.csv` and `machine/filled.csv`. People and earlier Claude sessions wrote the other CSVs.
+- `pipeline/run.py` regenerates `generated/` and `machine/`. People and earlier Claude sessions wrote the other CSVs.
 - The Pipeline workflow runs `run.py <year> <work> api` on main and pushes the result to a new branch. Only people with write access can start it.
+- `data/<year>/steps.json` pins a version of each versioned model step (#129). A new version merges unpinned. The Pipeline workflow's `candidate` input, such as `filled@2`, runs it on main to save its answers. A later PR pins it.
 - `pipeline/layers.py` applies `generated/citations.csv` and then `edits.csv` to the generated sheets. Rows in `machine/` only cite values.
 - `pipeline/blanks.py` and `pipeline/filled.py` write model task files and turn the answers into `machine/` rows. Haiku reads, then Sonnet and Opus verify.
 - `pipeline/ask.py` answers task files with the Claude API. It saves each answer in `answers/`, keyed by the model and the task's text, so a rerun calls a model only for new tasks.
@@ -84,4 +85,4 @@ flowchart TB
 - The Pipeline workflow uploads each fetched PDF, its texts and each CMS zip to R2 as `blobs/<sha256>` before it commits data that names them. `generated/texts.csv` records the texts' hashes. The next run downloads them, so a new pdftotext or pypdfium2 changes no text that models already read.
 - The Site build's e2e tests fail if R2 lacks a PDF in `documents_checked.csv`.
 - The Site workflow's `reproduce` job reruns `run.py replay` from those blobs and the saved answers, with no web or API access. It fails if any tracked file changes. It keeps the committed `documents.csv` and `documents_checked.csv`, so it does not check the steps that find and fetch documents.
-- `pipeline/extract.py` turns documents into benefit facts (#113). `pipeline/evaluate.py`, run by the Evaluate workflow, measures each reader and verifier model and effort against an Opus reviewer and the expected cells. `pipeline/document_facts.py`, the Evaluate workflow's `facts` step, writes `machine/document_facts.csv` with the picked models.
+- `pipeline/extract.py` turns documents into benefit facts (#113). `pipeline/evaluate.py`, run by the Evaluate workflow, measures each reader and verifier model and effort against an Opus reviewer and the expected cells. `pipeline/document_facts.py` writes `machine/document_facts.csv` with the models its version names.

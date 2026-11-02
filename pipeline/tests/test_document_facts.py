@@ -1,4 +1,5 @@
 import glob, json, os, sys, unittest
+from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import document_facts, facts
@@ -6,8 +7,9 @@ from test_extract import StepsTest, answer
 
 
 class StepTest(StepsTest):
-    def test_writes_the_facts_the_picked_verifier_accepts(self):
+    def test_writes_the_facts_the_versions_verifier_accepts(self):
         asked = []
+        version = dict(groups=("imaging",), reader=("r", "high"), verifier=("v", "low"))
 
         def fake(task_dir, model, effort):
             asked.append((os.path.basename(task_dir), model, effort))
@@ -21,12 +23,16 @@ class StepTest(StepsTest):
                 with open(task[:-3] + ".json", "w") as f:
                     json.dump(reply, f)
 
-        document_facts.step(self.data, self.work, self.dir, fake)
+        with mock.patch.dict(document_facts.VERSIONS, {9: version}):
+            document_facts.step(self.data, self.work, self.dir, fake, 9)
         rows = facts.read(self.data / "machine" / "document_facts.csv")
         self.assertEqual(sorted((r["cost_kind"], r["amount"], r["source"]) for r in rows),
                          [("copay", "$0-$40", "EOC"), ("covered", "", "EOC")])
-        self.assertEqual(asked, [("read", *document_facts.READER), ("read", *document_facts.READER),
-                                 ("check", *document_facts.VERIFIER)])
+        self.assertEqual(asked, [("read", "r", "high"), ("read", "r", "high"), ("check", "v", "low")])
+
+    def test_version_1_uses_the_models_the_evaluation_picked(self):
+        self.assertEqual(document_facts.VERSIONS[1], dict(groups=("imaging",), reader=("claude-opus-5-5", "high"),
+                                                          verifier=("claude-opus-5-5", "medium")))
 
 
 del StepsTest
