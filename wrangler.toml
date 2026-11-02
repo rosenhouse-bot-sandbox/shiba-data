@@ -1,4 +1,5 @@
 name = "pdxplans"
+main = "web/worker.js"
 compatibility_date = "2026-10-01"
 workers_dev = false
 preview_urls = false
@@ -9,3 +10,8 @@ routes = [
 
 [assets]
 directory = "_site"
+binding = "ASSETS"
+
+[[r2_buckets]]
+binding = "BLOBS"
+bucket_name = "pdxplans"
