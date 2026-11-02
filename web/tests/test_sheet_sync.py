@@ -114,14 +114,14 @@ class CellDataTest(unittest.TestCase):
 
     def test_link_note_and_fill(self):
         data = sheet_sync.cell_data(Cell("x", link="https://l", note="n", fill="FFF6D6"), "plan")
-        self.assertEqual(data["userEnteredFormat"]["textFormat"]["link"], {"uri": "https://l"})
+        self.assertEqual(data["textFormatRuns"], [{"startIndex": 0, "format": {"link": {"uri": "https://l"}}}])
         self.assertEqual(data["note"], "n")
         self.assertEqual(data["userEnteredFormat"]["backgroundColor"], {"red": 1.0, "green": 0xF6 / 255, "blue": 0xD6 / 255})
 
     def test_plain_cell_clears_an_old_note_link_and_fill(self):
         data = sheet_sync.cell_data(Cell("x"), "plan")
         self.assertEqual(data["note"], "")
-        self.assertNotIn("link", data["userEnteredFormat"]["textFormat"])
+        self.assertNotIn("textFormatRuns", data)
         self.assertEqual(data["userEnteredFormat"]["backgroundColor"], {"red": 1.0, "green": 1.0, "blue": 1.0})
 
     def test_header_and_section_rows_are_bold(self):
@@ -184,7 +184,7 @@ class SyncTest(unittest.TestCase):
     def test_cited_cell_links_to_the_site(self):
         api = FakeApi({})
         sheet_sync.sync(api, self.site)
-        links = [c["userEnteredFormat"]["textFormat"].get("link", {}).get("uri")
+        links = [c["textFormatRuns"][0]["format"]["link"]["uri"] if "textFormatRuns" in c else None
                  for r in api.batches[1] if "updateCells" in r for row in r["updateCells"]["rows"] for c in row["values"]]
         self.assertIn(f"{SITE}#/main/H2001-045-0/H_inpatient", links)
         fills = [c["userEnteredFormat"]["backgroundColor"]

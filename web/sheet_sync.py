@@ -45,15 +45,16 @@ def cell_data(cell, kind):
     text = {"bold": kind != "plan"}
     if kind == "section":
         text["foregroundColor"] = color(WHITE)
-    if cell.link:
-        text["link"] = {"uri": cell.link}
     fill = cell.fill or {"header": HEAD, "section": SECTION}.get(kind, WHITE)
-    return {
+    data = {
         "userEnteredValue": {"stringValue": cell.value},
         "note": cell.note or "",
         "userEnteredFormat": {"wrapStrategy": "WRAP", "verticalAlignment": "TOP", "textFormat": text,
                               "backgroundColor": color(fill)},
     }
+    if cell.link:
+        data["textFormatRuns"] = [{"startIndex": 0, "format": {"link": {"uri": cell.link}}}]
+    return data
 
 
 def place_columns(wanted, have):
