@@ -143,6 +143,7 @@ def main(year, work, mode=""):
     blobs.record_texts(gen, work)
     py("cite.py", gen / "documents_checked.csv", f"{work}/texts/text", gen / "citations.csv")
     py("main_chart.py", gen / "plans.csv", f"{work}/pbp", gen / "main_chart.csv")
+    py("pbp_facts.py", gen / "plans.csv", f"{work}/pbp", gen / "pbp_facts.csv")
     py("dvha.py", gen / "plans.csv", f"{work}/pbp", gen / "dvha.csv")
     py("cms_sources.py", f"{work}/{config['landscape_csv']}", gen / "plans.csv", f"{work}/pbp", gen / "cms_sources.csv",
        config["state"])
