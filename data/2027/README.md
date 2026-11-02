@@ -55,10 +55,6 @@ Two UHC EOCs were re-issued on 2026-10-14 (`UHOR27HP0418842_001`, `AAOR27LP04187
 `pipeline/main_chart.py` builds columns C to AA from the PBP file. Some PBP fields are too coarse, so `edits.csv` replaces those cells with values quoted from the SB or EOC.
 `pipeline/fields.py` gives each column's rules.
 
-- `edits.csv` applies a SHIBA expert's rules, which `fields.py` does not state:
-  - A range starts at $0 when the SB's benefit row lists a $0 diagnostic colonoscopy, skin biopsy or mammogram. Kaiser and Humana imaging keep no $0.
-  - For AgeRight and Regence, column K tests also count that $0.
-  - Humana, Devoted and Wellcare tests, X-rays, imaging and rehab leave out outpatient hospital prices.
 - The PBP has no naturopathy category. Column U is set when the SB or EOC mentions naturopathy outside the exclusions table.
 - UHC OR-1A charges $0 to members with QMB or full Medicaid. The sheet shows what other members pay.
 - Six Humana plans cover acupuncture only for chronic low back pain, which Medicare covers. Column S is blank for them.
