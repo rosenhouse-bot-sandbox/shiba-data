@@ -46,9 +46,21 @@ jobs:
       # GitHub stops a job after 360 minutes, so these leave time to commit.
       - run: python3 -I pipeline/run.py "$YEAR" _work api
         timeout-minutes: 120
+      # Upload before committing any data that names these blobs. Keys are content hashes, so a re-upload changes nothing.
+      - id: upload
+        if: always()
+        timeout-minutes: 20
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          python3 -I pipeline/blobs.py "data/$YEAR" _work > _blobs.txt
+          while read -r key path; do
+            npx --yes wrangler@4.156.1 r2 object put "pdxplans/$key" --file "$path" --remote < /dev/null
+          done < _blobs.txt
       - if: inputs.rebuild != ''
         run: python3 -I pipeline/rebuild.py "$YEAR" _work "$REBUILD" api
-        timeout-minutes: 220
+        timeout-minutes: 210
       # Saved answers are worth keeping even when a later step stops the run.
       - if: always()
         env:
@@ -58,7 +70,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
           git checkout -b "$branch"
-          git add "data/$YEAR"
+          # Without every blob, keep only the saved answers.
+          if [ "${{ steps.upload.outcome }}" = success ]; then git add "data/$YEAR"; else git add "data/$YEAR/answers"; fi
           git commit -m "Rebuild $YEAR in run $GITHUB_RUN_ID" || exit 0
           git push "https://x-access-token:$GH_TOKEN@github.com/$GITHUB_REPOSITORY.git" "$branch"
           echo "::notice::Pushed $branch. Open a pull request from it."

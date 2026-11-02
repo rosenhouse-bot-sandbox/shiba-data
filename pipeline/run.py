@@ -19,10 +19,12 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path[:0] = [HERE, os.path.join(HERE, "tests")]
 import appendix_b  # noqa: E402
 import ask  # noqa: E402
+import blobs  # noqa: E402
 import eoc  # noqa: E402
 import layers  # noqa: E402
 import years  # noqa: E402
 
+CMS = ("landscape", "pbp")
 READER, VERIFIER, SECOND_VERIFIER = "claude-haiku-5-5", "claude-sonnet-5-5", "claude-opus-5-5"
 
 
@@ -43,7 +45,7 @@ def pdfs(gen, work):
         for d in csv.DictReader(f):
             if d["sha256"]:
                 src = f"{work}/docs/pdf/{hashlib.sha256(d['url'].encode()).hexdigest()[:16]}.pdf"
-                dst = f"{work}/pdfs/{d['sha256'][:16]}.pdf"
+                dst = blobs.pdf_path(work, d["sha256"])
                 if not os.path.exists(dst):
                     os.link(src, dst)
 
@@ -117,13 +119,14 @@ def main(year, work, mode=""):
     config = years.config(data)
     work = os.path.abspath(work)
     os.makedirs(work, exist_ok=True)
-    get(config["landscape_zip"], f"{work}/landscape.zip")
-    get(config["pbp_zip"], f"{work}/pbp.zip")
-    subprocess.run(["unzip", "-oq", f"{work}/landscape.zip", "-d", work], check=True)
-    subprocess.run(["unzip", "-oq", f"{work}/pbp.zip", "-d", f"{work}/pbp"], check=True)
+    for name in CMS:
+        get(config[f"{name}_zip"], blobs.cms_path(work, name))
+    subprocess.run(["unzip", "-oq", blobs.cms_path(work, "landscape"), "-d", work], check=True)
+    subprocess.run(["unzip", "-oq", blobs.cms_path(work, "pbp"), "-d", f"{work}/pbp"], check=True)
 
     gen = data / "generated"
     os.makedirs(gen, exist_ok=True)
+    blobs.record_cms(CMS, work, gen / blobs.CMS_FILES)
     py("universe.py", f"{work}/{config['landscape_csv']}", gen / "plans.csv", config["state"], *config["counties"])
     baseline = [years.REPO / config["baseline_manifest"]] if "baseline_manifest" in config else []
     py("find_docs.py", gen / "plans.csv", data / "found.csv", data / "links.csv", gen / "documents.csv", config["year"])
