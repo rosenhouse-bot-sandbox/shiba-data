@@ -180,14 +180,18 @@ class StepsTest(unittest.TestCase):
                 (self.work / sub / f"{doc}.txt").write_text(f"=====PAGE 1=====\n{text}\n")
             (self.work / "items" / f"{doc}.json").write_text(json.dumps({"1": {"strs": [text], "lefts": [0]}}))
 
-    def step(self, f, *args):
+    def step(self, f, *args, **kwargs):
         with contextlib.redirect_stdout(io.StringIO()) as out:
-            f(*map(str, args), data=self.data)
+            f(*map(str, args), data=self.data, **kwargs)
         return out.getvalue()
 
     def test_read_writes_tasks_for_documents_that_mention_the_group(self):
         self.step(extract.read, self.work, self.dir, "imaging")
         self.assertEqual(os.listdir(self.dir), [f"{SHA[:16]}.md"])
+
+    def test_read_can_skip_documents(self):
+        self.step(extract.read, self.work, self.dir, "imaging", ids=set())
+        self.assertEqual(os.listdir(self.dir), [])
 
     def test_facts_retries_once_then_verify_writes_tasks_and_items(self):
         self.step(extract.read, self.work, self.dir, "imaging")
