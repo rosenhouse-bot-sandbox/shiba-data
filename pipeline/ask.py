@@ -1,6 +1,6 @@
 """Answers model task files: <dir>/<name>.md gets its answer, a JSON array, in <dir>/<name>.json.
 
-Each answer is saved in data/<year>/answers, keyed by a hash of the model and the task's text.
+Each answer is saved in data/<year>/answers, keyed by a hash of the model, the effort if any, and the task's text.
 A rerun reuses saved answers, so only new or changed tasks call a model.
 """
 import concurrent.futures, hashlib, json, os, re, urllib.request
@@ -9,10 +9,13 @@ WORKERS = 8
 MAX_TOKENS = 64000
 # A model sometimes replies in prose, so a bad reply is asked again.
 ATTEMPTS = 3
+USAGE_FIELDS = ("input_tokens", "output_tokens", "cache_read_input_tokens", "cache_creation_input_tokens")
 
 
-def key(model, text):
-    return hashlib.sha256(f"{model}\n{text}".encode()).hexdigest()[:16]
+def key(model, text, effort=None):
+    # Without an effort, the key has its original format.
+    named = f"{model}\n{text}" if effort is None else json.dumps([model, effort, text])
+    return hashlib.sha256(named.encode()).hexdigest()[:16]
 
 
 def array(reply):
@@ -33,26 +36,30 @@ def write(path, value):
     os.replace(path + ".tmp", path)
 
 
-def answer(tasks, model, saved, asker):
-    """Writes each task's answer. Returns the tasks left without one: no saved answer and no asker, or a bad reply."""
+def answer(tasks, model, saved, asker, effort=None):
+    """Writes each task's answer. Returns the tasks left without one: no saved answer and no asker, or a bad reply.
+    A new answer saves the token usage of all its attempts."""
     os.makedirs(saved, exist_ok=True)
 
     def one(task):
         with open(task) as f:
             text = f.read()
-        path = os.path.join(saved, key(model, text) + ".json")
+        path = os.path.join(saved, key(model, text, effort) + ".json")
         if os.path.exists(path):
             with open(path) as f:
                 reply = json.load(f)["reply"]
         elif asker:
+            usage = {}
             for _ in range(ATTEMPTS):
-                reply = asker(model, text)
+                reply, used = asker(model, text, effort)
+                usage = {k: usage.get(k, 0) + v for k, v in used.items()}
                 if array(reply) is not None:
                     break
                 print(f"{task}: {model} did not reply with a JSON array")
             else:
                 return task
-            write(path, {"model": model, "task": os.path.basename(task), "reply": reply})
+            write(path, {"model": model} | ({"effort": effort} if effort is not None else {})
+                  | {"task": os.path.basename(task), "reply": reply, "usage": usage})
         else:
             return task
         write(os.path.splitext(task)[0] + ".json", array(reply))
@@ -85,12 +92,14 @@ def api():
     else:
         client = anthropic.Anthropic(max_retries=5)
 
-    def asker(model, text):
-        with client.messages.stream(model=model, max_tokens=MAX_TOKENS,
-                                    messages=[{"role": "user", "content": text}]) as stream:
+    def asker(model, text, effort):
+        """Returns the reply's text and its token usage."""
+        with client.messages.stream(model=model, max_tokens=MAX_TOKENS, messages=[{"role": "user", "content": text}],
+                                    **({"output_config": {"effort": effort}} if effort is not None else {})) as stream:
             message = stream.get_final_message()
+        usage = {k: getattr(message.usage, k) or 0 for k in USAGE_FIELDS}
         if message.stop_reason != "end_turn":
-            return f"(stopped: {message.stop_reason})"
-        return "".join(b.text for b in message.content if b.type == "text")
+            return f"(stopped: {message.stop_reason})", usage
+        return "".join(b.text for b in message.content if b.type == "text"), usage
 
     return asker
