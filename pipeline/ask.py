@@ -9,11 +9,11 @@ WORKERS = 8
 MAX_TOKENS = 64000
 # A model sometimes replies in prose, so a bad reply is asked again.
 ATTEMPTS = 3
-USAGE = ("input_tokens", "output_tokens", "cache_read_input_tokens", "cache_creation_input_tokens")
+USAGE_FIELDS = ("input_tokens", "output_tokens", "cache_read_input_tokens", "cache_creation_input_tokens")
 
 
 def key(model, text, effort=None):
-    # Answers saved before efforts existed keep their keys.
+    # Without an effort, the key has its original format.
     named = f"{model}\n{text}" if effort is None else json.dumps([model, effort, text])
     return hashlib.sha256(named.encode()).hexdigest()[:16]
 
@@ -44,7 +44,7 @@ def answer(tasks, model, saved, asker, effort=None):
     def one(task):
         with open(task) as f:
             text = f.read()
-        path = os.path.join(saved, key(model, text, effort) + ".json")
+        path = os.path.join(saved, key(model, text) + ".json")
         if os.path.exists(path):
             with open(path) as f:
                 reply = json.load(f)["reply"]
@@ -58,7 +58,7 @@ def answer(tasks, model, saved, asker, effort=None):
                 print(f"{task}: {model} did not reply with a JSON array")
             else:
                 return task
-            write(path, {"model": model} | ({"effort": effort} if effort else {})
+            write(path, {"model": model} | ({"effort": effort} if effort is not None else {})
                   | {"task": os.path.basename(task), "reply": reply, "usage": usage})
         else:
             return task
@@ -95,9 +95,9 @@ def api():
     def asker(model, text, effort):
         """Returns the reply's text and its token usage."""
         with client.messages.stream(model=model, max_tokens=MAX_TOKENS, messages=[{"role": "user", "content": text}],
-                                    **({"output_config": {"effort": effort}} if effort else {})) as stream:
+                                    **({"output_config": {"effort": effort}} if effort is not None else {})) as stream:
             message = stream.get_final_message()
-        usage = {k: getattr(message.usage, k) or 0 for k in USAGE}
+        usage = {k: getattr(message.usage, k) or 0 for k in USAGE_FIELDS}
         if message.stop_reason != "end_turn":
             return f"(stopped: {message.stop_reason})", usage
         return "".join(b.text for b in message.content if b.type == "text"), usage

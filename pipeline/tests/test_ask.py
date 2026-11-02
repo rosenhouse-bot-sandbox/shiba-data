@@ -45,13 +45,15 @@ class AnswerTest(unittest.TestCase):
     def test_without_an_effort_the_key_is_unchanged(self):
         self.assertEqual(ask.key(MODEL, "Read this."), "b841d88300394ed2")
 
-    def test_sends_the_effort_and_saves_it_under_its_own_key(self):
+    def test_sends_the_effort_and_saves_each_effort_under_its_own_key(self):
         self.answer()
-        missing, fake = self.answer(effort="low")
-        self.assertEqual((missing, fake.asked), ([], [(MODEL, "Read this.", "low")]))
-        self.assertEqual(len(self.answer(effort="high")[1].asked), 1)
-        self.assertEqual(self.answer(effort="low")[1].asked, [])
+        self.assertEqual(self.answer(effort="low")[1].asked, [(MODEL, "Read this.", "low")])
+        self.assertEqual(self.answer(effort="high")[1].asked, [(MODEL, "Read this.", "high")])
         self.assertEqual(sorted(a.get("effort", "") for a in self.saved_answers()), ["", "high", "low"])
+
+    def test_reuses_the_answer_saved_at_the_same_effort(self):
+        self.answer(effort="low")
+        self.assertEqual(self.answer(effort="low")[1].asked, [])
 
     def test_asks_again_when_the_model_or_task_changes(self):
         self.answer()
@@ -90,7 +92,7 @@ class Message:
         self.stop_reason = stop_reason
         self.content = [types.SimpleNamespace(type="thinking"), types.SimpleNamespace(type="text", text=text)]
         self.usage = types.SimpleNamespace(input_tokens=100, output_tokens=20, cache_read_input_tokens=None,
-                                           cache_creation_input_tokens=5, server_tool_use=None)
+                                           cache_creation_input_tokens=5)
 
 
 class ApiTest(unittest.TestCase):
@@ -109,8 +111,8 @@ class ApiTest(unittest.TestCase):
 
         client = types.SimpleNamespace(messages=types.SimpleNamespace(stream=Stream))
         sdk = types.SimpleNamespace(Anthropic=lambda **_: client)
-        environ = {k: v for k, v in os.environ.items() if k != "ACTIONS_ID_TOKEN_REQUEST_URL"}
-        with mock.patch.dict(sys.modules, anthropic=sdk), mock.patch.dict(os.environ, environ, clear=True):
+        with mock.patch.dict(sys.modules, anthropic=sdk), mock.patch.dict(os.environ):
+            os.environ.pop("ACTIONS_ID_TOKEN_REQUEST_URL", None)
             return ask.api(), sent
 
     def test_sends_the_effort_only_when_given_and_returns_the_text_and_usage(self):
@@ -118,9 +120,9 @@ class ApiTest(unittest.TestCase):
         self.assertEqual(asker(MODEL, "Read this.", None), ("[]", {
             "input_tokens": 100, "output_tokens": 20, "cache_read_input_tokens": 0, "cache_creation_input_tokens": 5}))
         asker(MODEL, "Read this.", "low")
-        self.assertNotIn("output_config", sent[0])
-        self.assertEqual(sent[1]["output_config"], {"effort": "low"})
-        self.assertEqual(sent[1]["messages"], [{"role": "user", "content": "Read this."}])
+        self.assertEqual(sent[0], {"model": MODEL, "max_tokens": ask.MAX_TOKENS,
+                                   "messages": [{"role": "user", "content": "Read this."}]})
+        self.assertEqual(sent[1], sent[0] | {"output_config": {"effort": "low"}})
 
     def test_a_reply_that_did_not_end_its_turn_says_why_and_keeps_its_usage(self):
         asker, _ = self.asker(Message("max_tokens", "[{"))
