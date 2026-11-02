@@ -56,15 +56,11 @@ jobs:
       # texts.py keeps these texts instead of extracting them again.
       - name: Download the recorded PDF texts
         timeout-minutes: 20
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: |
-          export AWS_SECRET_ACCESS_KEY=$(printf %s "$CLOUDFLARE_API_TOKEN" | sha256sum | cut -c1-64)
-          echo "::add-mask::$AWS_SECRET_ACCESS_KEY"
           python3 -I pipeline/blobs.py texts "data/$YEAR" _work > _texts.txt
           while read -r digest path; do
             mkdir -p "$(dirname "$path")"
-            aws s3 cp "s3://pdxplans/blobs/$digest" "$path" --only-show-errors < /dev/null
+            curl -sSfL --retry 3 --max-time 300 -o "$path" "https://pdxplans.org/docs/$digest.pdf" < /dev/null
           done < _texts.txt
           if [ -s _texts.txt ]; then sed 's/ /  /' _texts.txt | sha256sum -c --quiet; fi
       # GitHub stops a job after 360 minutes, so these leave time to commit.

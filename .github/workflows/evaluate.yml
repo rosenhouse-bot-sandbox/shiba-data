@@ -46,11 +46,6 @@ jobs:
       ANTHROPIC_SERVICE_ACCOUNT_ID: svac_0142UmsmTSG4RDAgtFvyHY9F
       ANTHROPIC_FEDERATION_RULE_ID: fdrl_018f3jSg6eLJS1PxSPQQNxks
       ANTHROPIC_WORKSPACE_ID: wrkspc_014bRyT8dH9LwG9fPmLukPT9
-      AWS_ACCESS_KEY_ID: ${{ vars.CLOUDFLARE_API_TOKEN_ID }}
-      AWS_DEFAULT_REGION: auto
-      AWS_ENDPOINT_URL: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
-      AWS_REQUEST_CHECKSUM_CALCULATION: when_required
-      AWS_RESPONSE_CHECKSUM_VALIDATION: when_required
     steps:
       - uses: actions/checkout@v4
         with:
@@ -66,13 +61,9 @@ jobs:
         working-directory: pipeline
       - name: Download the recorded PDF texts
         timeout-minutes: 20
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: |
-          export AWS_SECRET_ACCESS_KEY=$(printf %s "$CLOUDFLARE_API_TOKEN" | sha256sum | cut -c1-64)
-          echo "::add-mask::$AWS_SECRET_ACCESS_KEY"
           python3 -I pipeline/blobs.py texts "data/$YEAR" _work > _texts.txt
-          xargs -P 8 -n 2 sh -c 'mkdir -p "$(dirname "$2")" && aws s3 cp "s3://pdxplans/blobs/$1" "$2" --only-show-errors' _ \
+          xargs -P 8 -n 2 sh -c 'mkdir -p "$(dirname "$2")" && curl -sSfL --retry 3 --max-time 300 -o "$2" "https://pdxplans.org/docs/$1.pdf"' _ \
             < _texts.txt
           sed 's/ /  /' _texts.txt | sha256sum -c --quiet
       - if: inputs.step == 'evaluate'
