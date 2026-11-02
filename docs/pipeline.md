@@ -66,7 +66,6 @@ flowchart TB
 
   checked --> docwf
   carriers --> docwf --> tar
-  docwf -. triggers .-> sitewf
   tar & git --> sitewf --> site & sheet
 ```
 
