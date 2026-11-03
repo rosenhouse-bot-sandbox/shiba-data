@@ -175,6 +175,17 @@ class VocabularyTest(unittest.TestCase):
             self.assertTrue(any(re.search(rx, text, re.I) for rx in facts.FIND[group]), (group, text))
         self.assertFalse(any(re.search(rx, "Part D drug coverage deductible $0", re.I) for rx in facts.FIND["medical_deductible"]))
 
+    def test_vision_hearing_fitness_otc_and_package_groups(self):
+        for b in ("vision.exam", "vision.eyewear", "hearing.exam", "hearing.aids", "fitness", "otc", "packages"):
+            self.assertIn(b, facts.BENEFITS)
+        for group, text in (("vision", "Routine eye exam: $0"), ("vision", "Eyewear allowance $200"),
+                            ("vision", "contact lenses"), ("hearing", "Hearing aids $699 copay"),
+                            ("hearing", "Routine hearing exam"), ("fitness", "SilverSneakers fitness program"),
+                            ("fitness", "Renew Active"), ("otc", "Over-the-Counter (OTC) items"),
+                            ("packages", "Optional supplemental benefits"), ("packages", "Advantage Plus"),
+                            ("packages", "Optional Dental Rider")):
+            self.assertTrue(any(re.search(rx, text, re.I) for rx in facts.FIND[group]), (group, text))
+
     def test_describe_lists_one_group(self):
         text = facts.describe("imaging")
         for b in facts.BENEFITS:
