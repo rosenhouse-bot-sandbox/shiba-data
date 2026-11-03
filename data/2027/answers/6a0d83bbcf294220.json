@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "d649ac2bebc0321d.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H2923-028-3\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$490\", \"unit\": \"per day\", \"limit\": \"days 1-5\",\n   \"condition\": \"days 1-5\", \"page\": 79,\n   \"quotes\": [\"You pay $490 per day for days 1 through 5\"], \"note\": \"\"},\n  {\"plan_id\": \"H2923-028-3\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"days 6+\",\n   \"condition\": \"days 6+\", \"page\": 79,\n   \"quotes\": [\"You pay $0 for day(s) 6+\"], \"note\": \"\"},\n  {\"plan_id\": \"H2923-028-3\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$490\", \"unit\": \"per day\", \"limit\": \"days 1-4\",\n   \"condition\": \"days 1-4\", \"page\": 81,\n   \"quotes\": [\"You pay $490 per day for days 1 through 4\"], \"note\": \"\"},\n  {\"plan_id\": \"H2923-028-3\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"days 5-90\",\n   \"condition\": \"days 5-90\", \"page\": 81,\n   \"quotes\": [\"You pay $0 per day for days 5 through 90\"], \"note\": \"\"},\n  {\"plan_id\": \"H2923-028-3\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"visit_limit\", \"amount\": \"90\", \"unit\": \"days\", \"limit\": \"per benefit period\",\n   \"page\": 81,\n   \"quotes\": [\"You are covered for up to 90 days each benefit period for inpatient services in an inpatient psychiatric hospital\"], \"note\": \"\"},\n  {\"plan_id\": \"H2923-028-3\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"visit_limit\", \"amount\": \"190\", \"unit\": \"days\", \"limit\": \"per lifetime\",\n   \"page\": 81,\n   \"quotes\": [\"at a psychiatric hospital for a total of 190 days over\"], \"note\": \"\"}\n]\n```",
+ "usage": {
+  "input_tokens": 13852,
+  "output_tokens": 1992,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

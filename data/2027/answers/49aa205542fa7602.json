@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "cbcaa238a8c713a4.retry.md",
+ "reply": "```json\n[]\n```\n\nThe out-of-network 50% inpatient coinsurance is left out because it can't be quoted reliably. On page 3 it sits on the same printed line as the in-network \"$315 per day: days 1-5\" text. \"50%\" alone appears many times on the page. Any longer quote would mix the two columns or still fail the exact-match check.",
+ "usage": {
+  "input_tokens": 3192,
+  "output_tokens": 848,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2001-045-0.retry.md",
+ "reply": "```json\n[{\"key\": \"main.K_tests_labs\", \"result\": \"cite\", \"citations\": [{\"page\": 88, \"quote\": \"copayment or 20%\"}, {\"page\": 87, \"quote\": \"Laboratory tests $0 copayment or\"}]}]\n```",
+ "usage": {
+  "input_tokens": 3519,
+  "output_tokens": 2924,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

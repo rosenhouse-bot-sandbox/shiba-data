@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-05d56d5f782708e7.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 5 inpatient psychiatric row: the $0 per day for days 6-90 applies \\\"after your plan deductible is met\\\". The item leaves that condition out.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Page 5 inpatient psychiatric row: $470 per day for days 1-5 is in the same clause that ends \\\"after your plan deductible is met\\\". The deductible condition probably applies here too, and the item omits it, so this is doubtful.\"}]\n```",
+ "usage": {
+  "input_tokens": 2144,
+  "output_tokens": 448,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

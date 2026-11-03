@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-cbcaa238a8c713a4.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 6, Inpatient psychiatric hospital row, in-network column: $315 per day for days 1-5.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 3, Inpatient hospital coverage row, in-network column: $315 per day for days 1-5.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 6, Inpatient psychiatric hospital row, out-of-network column: 50% for days 1-190.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 3, Inpatient hospital coverage row, in-network column: $0 per day for days 6 and beyond.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 6, Inpatient psychiatric hospital row, in-network column: $0 per day for days 6-190.\"}]\n```",
+ "usage": {
+  "input_tokens": 3295,
+  "output_tokens": 455,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

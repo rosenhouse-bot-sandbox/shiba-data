@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-da2974c756f3eedc.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 Inpatient Hospital Coverage row: $2,241 copay per stay in network. Psychiatric stays are priced separately on page 7, so this is acute inpatient.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 7 Mental Health Services row, Inpatient Mental Health Care: $2,091 copay per stay in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3028,
+  "output_tokens": 266,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

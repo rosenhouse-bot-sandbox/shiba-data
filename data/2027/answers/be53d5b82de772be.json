@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2001-045-0.md",
+ "reply": "```json\n[{\"key\": \"dvha.G_vision\", \"result\": \"cite\", \"citations\": [{\"page\": 115, \"quote\": \"$0 copayment            30% coinsurance*\"}, {\"page\": 116, \"quote\": \"$0 copayment or 1 pair o eyeglasses (lenses/ rames) or contact lenses with a retail value o up to $200.\"}]},\n{\"key\": \"dvha.H_hearing\", \"result\": \"skip\"},\n{\"key\": \"main.F_primary_care\", \"result\": \"cite\", \"citations\": [{\"page\": 13, \"quote\": \"or 20% coinsurance per visit (in-\"}, {\"page\": 13, \"quote\": \"30% coinsurance per visit (out-o -\"}]},\n{\"key\": \"main.G_specialist\", \"result\": \"cite\", \"citations\": [{\"page\": 100, \"quote\": \"copayment or 20% coinsurance or services rom a specialist or under\"}, {\"page\": 100, \"quote\": \"30% coinsurance or services rom a specialist or under\"}]},\n{\"key\": \"main.J_outpatient_rehab\", \"result\": \"cite\", \"citations\": [{\"page\": 93, \"quote\": \"copayment or 20% coinsurance or each Medicare-covered physical therapy and\"}]},\n{\"key\": \"main.K_tests_labs\", \"result\": \"cite\", \"citations\": [{\"page\": 88, \"quote\": \"copayment or 20% coinsurance or\"}, {\"page\": 87, \"quote\": \"Laboratory tests $0 copayment or Medicare-covered lab services.\"}]}]\n```",
+ "usage": {
+  "input_tokens": 10560,
+  "output_tokens": 11466,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

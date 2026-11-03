@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H5216-048-0.md",
+ "reply": "[{\"id\":0,\"ok\":false,\"reason\":\"The $0-$45 range comes from the Diagnostic Procedures and Tests row (page 64: $0 PCP, $45 specialist). Page 66 also lists a Facility Based Sleep Study at $50 in the Specialist's Office, a non-hospital setting. The field counts sleep studies as tests, so the range would run to $50, and $45 contradicts the page. Lab Services at $0 is correct. Page 65, which would complete the tests row, is not provided.\"}]",
+ "usage": {
+  "input_tokens": 2727,
+  "output_tokens": 612,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

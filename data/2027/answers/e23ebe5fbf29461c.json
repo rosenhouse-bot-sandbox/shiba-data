@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-0e1831fb00cf2a95.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5 Inpatient psychiatric hospital stay row: $0 per day, days 6-90, in network, for Aetna Medicare Eagle (HMO).\"}, {\"id\": 1, \"ok\": true, \"reason\": \"Page 5 Inpatient psychiatric hospital stay row: $470 per day, days 1-5, in network, for Aetna Medicare Eagle (HMO).\"}]\n```",
+ "usage": {
+  "input_tokens": 2236,
+  "output_tokens": 160,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

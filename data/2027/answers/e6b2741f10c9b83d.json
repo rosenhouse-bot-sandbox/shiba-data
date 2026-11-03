@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H5216-428-2.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 63 Diagnostic Procedures and Tests: $0 at the PCP's office and $50 at the specialist's office. The $40 urgent care price falls inside that range, and the $100 outpatient hospital price is correctly left out. Page 64 Lab Services: $0 at the PCP's and specialist's offices. Both quotes are in-network and match this plan.\"}]",
+ "usage": {
+  "input_tokens": 2409,
+  "output_tokens": 613,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

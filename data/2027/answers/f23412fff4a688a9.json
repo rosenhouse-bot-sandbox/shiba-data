@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-5d52bb731683d536.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 52, Inpatient hospital care row, in-network: Days 1–5 are a $315 copay per day.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 52, Inpatient hospital care row, in-network: Days 6 and beyond are a $0 copay per day.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 53, Inpatient services in a psychiatric hospital row, in-network: Days 1–5 are a $315 copay per day.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 52, Inpatient hospital care row, out-of-network: 50% coinsurance.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 53, psychiatric hospital row, out-of-network: Days 1–190 are 50% coinsurance.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 53, psychiatric hospital row, in-network: Days 6–190 are a $0 copay per day.\"}]\n```",
+ "usage": {
+  "input_tokens": 4109,
+  "output_tokens": 530,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

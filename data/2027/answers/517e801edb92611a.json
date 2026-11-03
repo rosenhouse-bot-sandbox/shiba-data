@@ -1,0 +1,11 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H2923-025-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Pages 93-94 outpatient rehab row: physical therapy home or office $45, occupational therapy office $35, speech office $45. The $35-$45 range uses office prices only.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 88 Diagnostic Procedures and Tests: PCP $0, specialist $20, freestanding $40. Page 89 advanced labs office or freestanding $0, and routine labs are also $0.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 110 Mandatory Supplemental Dental Benefits: up to $2,000 a year covering cleanings, routine exams and X-rays. This is a routine benefit for all members.\"},\n{\"id\": 3, \"ok\": false, \"reason\": \"The value and quotes are diagnostic test and lab prices from pages 88-89, not outpatient rehabilitation.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 55 says routine acupuncture is a supplemental benefit under the Dental & Alternative Therapy Allowance. Page 63 confirms it covers conditions other than chronic low back pain.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 62 allowance row covers massage by a licensed massage therapist, and page 54 names Therapeutic Massage in the shared allowance.\"}]\n```",
+ "usage": {
+  "input_tokens": 9507,
+  "output_tokens": 835,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

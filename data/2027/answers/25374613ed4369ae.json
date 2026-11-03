@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2001-045-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":false,\"reason\":\"Page 93 quote is the outpatient rehabilitation row, not primary care office visits.\"},\n{\"id\":1,\"ok\":false,\"reason\":\"Page 100 quote is the specialist row, not primary care.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Page 115 routine eye exam is $0 in-network, once a year. Page 116 routine eyewear is $0 copay up to a $200 retail value, every year.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"Page 93 outpatient rehab row: in-network is $0 or 20% depending on Medicaid level, so the non-$0 amount is 20%.\"},\n{\"id\":4,\"ok\":true,\"reason\":\"Page 100 specialist consultation row: in-network $0 or 20%, out-of-network 30%.\"},\n{\"id\":5,\"ok\":true,\"reason\":\"Page 13 primary care office visits: $0 or 20% in-network, 30% out-of-network.\"},\n{\"id\":6,\"ok\":false,\"reason\":\"Page 100 quote is the specialist row, not outpatient rehabilitation (page 93).\"}\n]",
+ "usage": {
+  "input_tokens": 6607,
+  "output_tokens": 1032,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

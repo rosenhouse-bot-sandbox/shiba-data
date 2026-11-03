@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H1036-317-0.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 60 inpatient hospital care row, In-Network: \\\"$2241 copayment per admission for each inpatient stay – Inpatient Hospital\\\". This matches the value and is for this plan. The separate $0 professional services line does not change the facility cost.\"}]",
+ "usage": {
+  "input_tokens": 1959,
+  "output_tokens": 211,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

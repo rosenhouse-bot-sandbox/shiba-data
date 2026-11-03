@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "77d83ba821336370.md",
+ "reply": "```json\n[{\"plan_id\": \"H2001-045-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$1,980\", \"unit\": \"per stay\", \"limit\": \"\", \"page\": 77,\n  \"quotes\": [\"copayment or $1,980\"], \"note\": \"\"},\n {\"plan_id\": \"H2001-045-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"out\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"unit\": \"per stay\", \"limit\": \"\", \"page\": 77,\n  \"quotes\": [\"30% coinsurance or\"], \"note\": \"\"},\n {\"plan_id\": \"H2001-045-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$1,980\", \"unit\": \"per stay\", \"limit\": \"\", \"page\": 14,\n  \"quotes\": [\"$1,980 copayment or each\"], \"note\": \"\"},\n {\"plan_id\": \"H2001-045-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"out\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"unit\": \"per stay\", \"limit\": \"\", \"page\": 14,\n  \"quotes\": [\"30% coinsurance or each\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 15719,
+  "output_tokens": 1766,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
