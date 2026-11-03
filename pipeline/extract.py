@@ -73,6 +73,11 @@ def task(doc, plan_rows, pages, group, data, failed=()):
     return "\n\n".join(parts) + "\n"
 
 
+# These groups' documents state some $0 amounts in words.
+ZERO_GROUPS = ("part_b_drugs", "medical_deductible")
+NO_COST = re.compile(r"\bno (?:coinsurance|copay|deductible)|does not have a (?:medical )?deductible|no deductible for medical", re.I)
+
+
 def problem(doc, group, a, pages, quote_ok):
     """Why the answer cannot be a fact, or None, and the fact."""
     if not isinstance(a, dict):
@@ -107,6 +112,8 @@ def problem(doc, group, a, pages, quote_ok):
     if failing:
         return "quote not found exactly once on its page: " + "; ".join(json.dumps(q) for q in failing), None
     missing = numbers(row["amount"]) - sum((numbers(q) for q in a["quotes"]), collections.Counter())
+    if group in ZERO_GROUPS and missing == collections.Counter({"$0": 1}) and any(NO_COST.search(q) for q in a["quotes"]):
+        missing = None
     if missing:
         return "no quote shows " + ", ".join(sorted(missing)), None
     return None, row

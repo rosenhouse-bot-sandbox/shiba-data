@@ -153,6 +153,28 @@ class VocabularyTest(unittest.TestCase):
             self.assertIn(b, facts.BENEFITS)
         self.assertIn("telehealth", facts.GROUP_SETTINGS["visits"])
 
+    def test_words_for_part_b_deductible_dental_and_extras(self):
+        for b in ("giveback", "part_b_drugs.chemotherapy", "part_b_drugs.insulin", "part_b_drugs.allergy",
+                  "part_b_drugs.vaccine", "medical_deductible.some", "medical_deductible.part_b", "dental.preventive",
+                  "dental.comprehensive", "extras.acupuncture", "extras.chiropractic", "extras.massage",
+                  "extras.naturopathy", "extras.transportation"):
+            self.assertIn(b, facts.BENEFITS)
+        self.assertIn("pharmacy", facts.GROUP_SETTINGS["part_b_drugs"])
+
+    def test_new_groups_find_the_pages_edits_cite(self):
+        for group, text in (("giveback", "$170 reduction o your monthly Medicare Part B premium"),
+                            ("giveback", "reduce your monthly Medicare Part B Premium by $90"),
+                            ("part_b_drugs", "Immunizations\nThere is no coinsurance, copayment, or deductible"),
+                            ("part_b_drugs", "Chemotherapy drugs 20% coinsurance"),
+                            ("medical_deductible", "Medical deductible $100 combined deductible"),
+                            ("dental", "Routine dental benefits"), ("extras", "12 one-way trips"),
+                            ("extras", "You can use your Wellness Bucks towards therapeutic massage"),
+                            ("dental", "Routine\ndental\nbenefits: 2 cleanings per year"),
+                            ("dental", "Optional supplemental benefits"), ("dental", "Spendables card"),
+                            ("extras", "Flex Card"), ("extras", "Naturopathic services")):
+            self.assertTrue(any(re.search(rx, text, re.I) for rx in facts.FIND[group]), (group, text))
+        self.assertFalse(any(re.search(rx, "Part D drug coverage deductible $0", re.I) for rx in facts.FIND["medical_deductible"]))
+
     def test_describe_lists_one_group(self):
         text = facts.describe("imaging")
         for b in facts.BENEFITS:
