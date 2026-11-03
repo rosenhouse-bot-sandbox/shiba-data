@@ -18,11 +18,12 @@ VERSIONS[7] = dict(VERSIONS[6], groups=VERSIONS[6]["groups"] + ("giveback", "par
 VERSIONS[8] = dict(VERSIONS[7], groups=tuple(g for g in VERSIONS[7]["groups"] if g != "dental"))
 VERSIONS[9] = dict(VERSIONS[7], groups=VERSIONS[7]["groups"] + ("vision", "hearing", "fitness", "otc", "packages"))
 # A second reader looks again at the documents of plans whose cells the first readers left short.
+# It can only add facts, so cells with wrong facts are not here. Surgery covers the Kaiser and H3817-008-1 edits.
 KAISER = ("H9003-001-0", "H9003-006-0", "H9003-009-0")
 VERSIONS[10] = dict(VERSIONS[9], recheck={
     "tests": ("H2406-070-0", "H2923-009-0", "H3817-008-1", "H5439-010-0", "H5439-011-0", "H5439-015-0", "H5439-019-0",
-              "H6815-038-0", "H7006-021-0"),
-    "part_b_drugs": KAISER, "medical_deductible": ("H1036-317-0",), "hearing": ("H9003-009-0",),
+              "H7006-021-0"),
+    "part_b_drugs": KAISER, "hearing": ("H9003-009-0",),
     "surgery": KAISER + ("H3817-008-1",)})
 
 
@@ -56,12 +57,12 @@ def second_facts(texts, work, group, answer, v, data, plan_ids, known):
     for _ in range(2):
         answer(read, *v["reader"])
         extract.extract_facts(texts, read, group, found, data)
-    seen = {tuple(f[c] for c in facts.IDENTITY) for f in known}
+    seen = {tuple(f[c] for c in facts.KEY) for f in known}
     with open(found) as f:
-        new = [r for r in json.load(f) if r["plan_id"] in plan_ids and tuple(r[c] for c in facts.IDENTITY) not in seen]
+        new = [r for r in json.load(f) if r["plan_id"] in plan_ids and tuple(r[c] for c in facts.KEY) not in seen]
     with open(found, "w") as f:
         json.dump(new, f, indent=1)
-    extract.verify(texts, found, check, data)
+    extract.verify(texts, found, check, data, known)
     answer(check, *v["verifier"])
     extract.accept(check, f"{check}/accepted.csv")
     return facts.read(f"{check}/accepted.csv")

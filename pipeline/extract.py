@@ -62,16 +62,18 @@ def printable(answer):
     return json.dumps(answer, ensure_ascii=False).encode("utf-8", "backslashreplace").decode()
 
 
-RECHECK = ("## Facts already found\n\n"
-           "Earlier readers found these facts for {plans}, and missed others. Read every page again, including the "
-           "pages just before and after each benefit's row. Reply with only the facts for these plans that the list "
-           "lacks, or `[]` if it lacks none.\n\n")
+RECHECK = ("Earlier readers may have missed some facts. Read every page again, including the pages just before and after "
+           "each benefit's row. Reply with only the facts for {plans} that {lacks}, or `[]` if there are none.")
 
 
 def task(doc, plan_rows, pages, group, data, failed=(), known=None, plan_ids=()):
     parts = [fill("fact_prompt.md", doc, plan_rows, data, VOCABULARY=facts.describe(group))]
     if known is not None:
-        parts.append(RECHECK.format(plans=", ".join(plan_ids)) + "\n".join(f"- {printable(shown(f))}" for f in known))
+        plans_text = ", ".join(sorted(plan_ids))
+        found = (f"Earlier readers found these facts for {plans_text}:\n\n" + "\n".join(
+            f"- {printable(shown(f))}" for f in known) if known else f"Earlier readers found no facts for {plans_text}.")
+        parts.append("## Facts already found\n\n" + found + "\n\n"
+                     + RECHECK.format(plans=plans_text, lacks="the list lacks" if known else "the pages state"))
     if failed:
         parts.append("## Earlier answers that failed a check\n\n"
                      "Code keeps the facts that passed. Reply with fixed versions of only these answers, "
@@ -208,8 +210,8 @@ def read(work, out_dir, group, data=DATA, ids=None):
 
 
 def reread(work, out_dir, group, plan_ids, known, data=DATA):
-    """Writes a task for each document that mentions the group and covers one of plan_ids, which lists the known facts
-    for those plans and asks for the facts it lacks."""
+    """Writes a task for each relevant document covering plan_ids. It lists the facts known for those plans and asks
+    for the rest."""
     os.makedirs(out_dir, exist_ok=True)
     plan_rows = plans(data)
     for doc in documents(data):
@@ -241,7 +243,8 @@ def extract_facts(work, answers_dir, group, out, data=DATA):
     print(len(found), "facts;", retries, "retry tasks")
 
 
-def verify(work, facts_path, out_dir, data=DATA):
+def verify(work, facts_path, out_dir, data=DATA, known=()):
+    """Known facts are not checked again, but help make decoys."""
     os.makedirs(out_dir, exist_ok=True)
     with open(facts_path) as f:
         found = json.load(f)
@@ -251,7 +254,8 @@ def verify(work, facts_path, out_dir, data=DATA):
         if not mine:
             continue
         rnd = random.Random(doc["sha256"])
-        mixed = [dict(f, decoy=False) for f in mine] + [dict(f, decoy=True) for f in decoys(mine, rnd)]
+        theirs = [f for f in known if f["doc_sha"] == doc["sha256"]]
+        mixed = [dict(f, decoy=False) for f in mine] + [dict(f, decoy=True) for f in decoys(mine + theirs, rnd)]
         rnd.shuffle(mixed)
         with open(f"{out_dir}/v-{doc['id']}.md", "w") as f:
             f.write(verifier_task(doc, plan_rows, Doc(work, doc["id"]).pages("layout"), mixed, data))
