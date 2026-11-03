@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "50159487a52ccddf.md",
+ "reply": "```json\n[{\"plan_id\": \"H7006-018-0\", \"benefit\": \"medical_deductible\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"deductible\", \"amount\": \"$0\", \"page\": 5, \"quotes\": [\"No deductible for medical. See prescription drug coverage for Part D deductible.\"], \"note\": \"\"},\n {\"plan_id\": \"H7006-021-0\", \"benefit\": \"medical_deductible\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"deductible\", \"amount\": \"$0\", \"page\": 5, \"quotes\": [\"Deductible No deductible for medical.\"], \"note\": \"Both plan columns say 'No deductible for medical.', so that text appears twice on the page. This quote takes the row label and the first matching cell, which reads the same as this plan's cell.\"}]\n```",
+ "usage": {
+  "input_tokens": 3164,
+  "output_tokens": 1108,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "batch": true,
+ "task": "H2001-045-0.md",
+ "reply": "```json\n[{\"key\": \"dvha.E_optional_packages\", \"result\": \"not_mentioned\", \"citations\": [], \"reason\": \"The passages only mention generic 'optional coverage selected' in the EOC definition, not optional packages bought for a premium.\"},\n{\"key\": \"main.AA_opt_packages\", \"result\": \"not_mentioned\", \"citations\": [], \"reason\": \"No passage describes optional supplemental benefit packages bought for an extra monthly premium.\"},\n{\"key\": \"main.S_acupuncture\", \"result\": \"medicare_only\", \"citations\": [{\"page\": 124, \"quote\": \"Acupuncture (Medicare-covered)\"}, {\"page\": 57, \"quote\": \"Acupuncture for chronic low back pain\"}], \"reason\": \"Acupuncture is listed only as the Medicare-covered chronic low back pain benefit, with no routine coverage shown.\"},\n{\"key\": \"main.T_chiropractic\", \"result\": \"medicare_only\", \"citations\": [{\"page\": 123, \"quote\": \"Chiropractic services (Medicare-covered)\"}, {\"page\": 123, \"quote\": \"Excluded rom Medicare coverage is any service other than\"}], \"reason\": \"Only Medicare manual manipulation of the spine is covered; other chiropractic services are excluded.\"},\n{\"key\": \"main.U_naturopath\", \"result\": \"excluded\", \"citations\": [{\"page\": 124, \"quote\": \"Naturopath services (uses natural or alternative\"}], \"reason\": \"The benefit chart lists naturopath services as 'Not covered under any condition'.\"},\n{\"key\": \"main.V_massage\", \"result\": \"excluded\", \"citations\": [{\"page\": 63, \"quote\": \"X-rays, massage therapy, and\"}, {\"page\": 160, \"quote\": \"Spa, wellness, or recovery services such as massage, sauna, cryotherapy, or similar services\"}], \"reason\": \"Massage therapy is excluded from chiropractic coverage and listed as not reimbursable under wellness spending.\"},\n{\"key\": \"main.Z_part_b_reduction\", \"result\": \"not_mentioned\", \"citations\": [], \"reason\": \"No passage mentions a Part B premium reduction or giveback amount.\"}]\n```",
+ "usage": {
+  "input_tokens": 9107,
+  "output_tokens": 2430,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

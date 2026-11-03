@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "1ed5fdb720cabd03.md",
+ "reply": "```json\n[{\"plan_id\": \"H2406-042-0\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"visit_limit\", \"amount\": \"12\", \"limit\": \"in 90 days\", \"condition\": \"chronic low back pain\", \"page\": 50, \"quotes\": [\"Up to 12 visits in 90 days\"], \"note\": \"\"},\n{\"plan_id\": \"H2406-042-0\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"visit_limit\", \"amount\": \"20\", \"limit\": \"per year\", \"condition\": \"chronic low back pain\", \"page\": 51, \"quotes\": [\"more than 20 acupuncture treatments may be\"], \"note\": \"\"},\n{\"plan_id\": \"H2406-042-0\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"covered\", \"condition\": \"Available or people with chronic low back pain under certain circumstances.\", \"page\": 112, \"quotes\": [\"Acupuncture (Medicare-covered)\", \"Available or people with chronic low back\"], \"note\": \"\"},\n{\"plan_id\": \"H2406-042-0\", \"benefit\": \"extras.chiropractic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$15\", \"unit\": \"per visit\", \"page\": 55, \"quotes\": [\"$15 copayment\"], \"note\": \"\"},\n{\"plan_id\": \"H2406-042-0\", \"benefit\": \"extras.chiropractic\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$80\", \"unit\": \"per visit\", \"page\": 55, \"quotes\": [\"$80 copayment\"], \"note\": \"\"},\n{\"plan_id\": \"H2406-042-0\", \"benefit\": \"extras.chiropractic\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"covered\", \"condition\": \"Manual manipulation o the spine to correct a subluxation\", \"page\": 111, \"quotes\": [\"Chiropractic services (Medicare-covered)\"], \"note\": \"\"},\n{\"plan_id\": \"H2406-042-0\", \"benefit\": \"extras.naturopathy\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"not_covered\", \"page\": 112, \"quotes\": [\"Naturopath services (uses natural or alternative\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 11251,
+  "output_tokens": 1966,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "4a3883a20d17f740.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-010-0\", \"benefit\": \"extras.chiropractic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$15\", \"page\": 17, \"quotes\": [\"Chiropractic Services Medicare-covered\", \"In-Network $15 copay * Out-of-Network 20% coinsurance In-Network $15 copay\"]},\n {\"plan_id\": \"H5439-010-0\", \"benefit\": \"extras.chiropractic\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 17, \"quotes\": [\"Chiropractic Services Medicare-covered\", \"In-Network $15 copay * Out-of-Network 20% coinsurance In-Network $15 copay\"]}]\n```",
+ "usage": {
+  "input_tokens": 3418,
+  "output_tokens": 872,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

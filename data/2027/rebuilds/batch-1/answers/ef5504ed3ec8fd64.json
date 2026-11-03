@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-2af2a9f1fd104b7f.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5 Part B premium reduction row: the plan reduces the monthly Part B premium by up to $43. Recorded as a $43 per-month reduction with no condition, as the giveback rule requires. Network any fits a plan-level reduction.\"}]\n```",
+ "usage": {
+  "input_tokens": 2102,
+  "output_tokens": 416,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

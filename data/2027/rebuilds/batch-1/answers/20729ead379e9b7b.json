@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "2af2a9f1fd104b7f.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-455-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 5, \"quotes\": [\"OUT-OF-NETWORK 50% of the cost\"], \"note\": \"The quote reads the out-of-network column straight down from its header to the inpatient hospital row, because \\\"50% of the cost\\\" alone appears many times on the page.\"},\n {\"plan_id\": \"H5216-455-0\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 14, \"quotes\": [\"OUT-OF-NETWORK 50% of the cost\"], \"note\": \"The quote reads the out-of-network column straight down from its header to the mental health inpatient row, because \\\"50% of the cost\\\" alone appears many times on the page.\"}]\n```",
+ "usage": {
+  "input_tokens": 3685,
+  "output_tokens": 1055,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

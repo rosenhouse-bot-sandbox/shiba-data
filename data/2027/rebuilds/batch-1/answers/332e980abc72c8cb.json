@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-362ee075ea5896d4.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 7: 30% coinsurance is the out-of-network cost for physical and speech therapy. In network it is $0 copay or 20% coinsurance.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 7 physical therapy and speech-language therapy visit row: 30% coinsurance out of network.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"Page 7: 20% coinsurance is the in-network cost. Out of network, physical therapy is 30% coinsurance.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 7 physical and speech-language therapy row: in network $0 copay or 20% coinsurance by Medicaid level. The non-$0 amount is 20%.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 7 occupational therapy visit row: 30% coinsurance out of network.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 7 physical therapy and speech-language therapy visit row: 30% coinsurance out of network.\"},\n{\"id\": 6, \"ok\": false, \"reason\": \"Page 7: 20% coinsurance is the in-network cost. Out of network, speech therapy is 30% coinsurance.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 7 physical and speech-language therapy row: in network $0 copay or 20% coinsurance by Medicaid level. The non-$0 amount is 20%.\"}]\n```",
+ "usage": {
+  "input_tokens": 3167,
+  "output_tokens": 800,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

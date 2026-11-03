@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-be9deec855112c1d.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 61 Dental services row: Medicare-covered dental is a $40 copay.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 112 Mandatory Supplemental Dental chart: Comprehensive services are 50% coinsurance. The page names no network, so the in-network default holds.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 62: the Dental & Alternative Therapy Allowance is $1,500 per year and covers dental, with any licensed dentist, so network is any.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 110 Mandatory Supplemental Dental Benefits: the plan pays as much as $1,500 per year for covered dental services.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 110 chart: Preventive services are 0% coinsurance.\"}]\n```",
+ "usage": {
+  "input_tokens": 5191,
+  "output_tokens": 841,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

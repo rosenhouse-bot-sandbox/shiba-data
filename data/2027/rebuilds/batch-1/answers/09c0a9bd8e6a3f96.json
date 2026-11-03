@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "2aa68f4230962abc.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-025-0\", \"benefit\": \"rehab.reevaluation\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$35 or $45\", \"page\": 94, \"quotes\": [\"Re-evaluation: $45 copay\", \"Re-evaluation: $35 copay\"], \"note\": \"Physical therapy re-evaluation is $45 and occupational therapy re-evaluation is $35. Both share one key, so they are combined as alternatives. No speech therapy re-evaluation is listed.\"}]\n```",
+ "usage": {
+  "input_tokens": 17538,
+  "output_tokens": 641,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

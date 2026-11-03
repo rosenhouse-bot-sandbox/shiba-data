@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-2af2a9f1fd104b7f.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 14 TRANSPORTATION row: Not Covered both in network and out of network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 15 Chiropractic services (Medicare-covered) row: $15 copay in network.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 15 Acupuncture services (Medicare-covered) row: $40 copay for chronic low back pain visits, both in and out of network.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 15 Acupuncture services (Medicare-covered) row: up to 20 visits per year for chronic low back pain, both in and out of network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3707,
+  "output_tokens": 488,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

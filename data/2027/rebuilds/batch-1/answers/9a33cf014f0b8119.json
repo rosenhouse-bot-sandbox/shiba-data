@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-05d56d5f782708e7.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 6: the 'Routine, non-emergency transportation' row says 'Not Covered', a supplemental not-covered fact.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Page 8 shows a $15 copay for Medicare-covered chiropractic visits. However, the page also states 'Medicare coverage is limited to fixing a subluxation', and the item leaves condition blank. When in doubt, mark false.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 7 acupuncture row: 'Non-Medicare covered acupuncture services are not covered.'\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 8 chiropractic row: 'Non-Medicare covered chiropractic services are not covered.'\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 7 acupuncture row: $65 copay for Medicare-covered visits, limited to services to treat chronic low back pain.\"}]\n```",
+ "usage": {
+  "input_tokens": 4654,
+  "output_tokens": 805,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

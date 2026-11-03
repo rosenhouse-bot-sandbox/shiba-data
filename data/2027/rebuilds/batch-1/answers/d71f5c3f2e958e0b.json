@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-29166053e638f7e6.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 15 Occupational therapy row: Outpatient hospital is 20% of the cost.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 15 Speech therapy row: Outpatient hospital is 20% of the cost.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 15 Physical therapy row: Specialist's office is 20% of the cost.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 15 Physical therapy row: Outpatient hospital is 20% of the cost.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 15 Occupational therapy row: Specialist's office is 20% of the cost.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 15 Speech therapy row: Specialist's office is 20% of the cost.\"}]\n```",
+ "usage": {
+  "input_tokens": 2698,
+  "output_tokens": 304,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

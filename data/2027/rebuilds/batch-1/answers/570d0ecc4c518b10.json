@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-8acbaf3993261220.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 5 Ambulance row shows a $400 copay for ground. No out-of-network column appears, so this is the in-network Medicare-covered cost.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"The page 5 Ambulance row shows a $400 copay for air. No out-of-network column appears, so this is the in-network Medicare-covered cost.\"}]\n```",
+ "usage": {
+  "input_tokens": 2276,
+  "output_tokens": 258,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

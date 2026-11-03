@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "batch": true,
+ "task": "v-H3805-040-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"The EOC chiropractic entries (pp. 55, 107) cover only Medicare manual manipulation of the spine and exclude other services, and no passage shows routine chiropractic.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Acupuncture is covered only for chronic low back pain under Medicare rules (pp. 50-51, 108), and no passage shows routine acupuncture.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"The exclusions list says naturopath services are 'Not covered under any condition', and no passage shows coverage.\"}\n]",
+ "usage": {
+  "input_tokens": 4271,
+  "output_tokens": 206,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

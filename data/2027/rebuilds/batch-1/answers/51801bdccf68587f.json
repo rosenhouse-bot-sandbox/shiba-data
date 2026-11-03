@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-cabbc3b82885b498.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 Medical Deductible row: $150, which does not apply to Part B insulin via a pump, preventive services and some Medicare-covered services, so it covers only some services. The plan is an HMO, so in-network fits.\"}]\n```",
+ "usage": {
+  "input_tokens": 2222,
+  "output_tokens": 342,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

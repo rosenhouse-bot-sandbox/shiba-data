@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "d649ac2bebc0321d.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-028-3\", \"benefit\": \"rehab.reevaluation\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$50\", \"unit\": \"\", \"limit\": \"\", \"condition\": \"Physical Therapy\", \"page\": 92, \"quotes\": [\"Re-evaluation: $50 copay\"], \"note\": \"Listed under Physical Therapy. The condition field names the therapy so this fact is kept apart from the occupational therapy re-evaluation.\"},\n {\"plan_id\": \"H2923-028-3\", \"benefit\": \"rehab.reevaluation\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$35\", \"unit\": \"\", \"limit\": \"\", \"condition\": \"Occupational Therapy\", \"page\": 92, \"quotes\": [\"Re-evaluation: $35 copay\"], \"note\": \"Listed under Occupational Therapy. The condition field names the therapy so this fact is kept apart from the physical therapy re-evaluation.\"}]\n```",
+ "usage": {
+  "input_tokens": 17343,
+  "output_tokens": 777,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "batch": true,
+ "task": "H2923-005-0.md",
+ "reply": "```json\n[{\"key\": \"main.R_dental\", \"result\": \"cite\", \"citations\": [{\"page\": 62, \"quote\": \"You have a $1,500 yearly allowance toward Preventive Dental and Comprehensive dental services, therapeutic massage, routine acupuncture, and/or naturopath services combined.\"}, {\"page\": 110, \"quote\": \"You are covered for cleanings, routine exams, X-rays, and more.\"}]}]\n```",
+ "usage": {
+  "input_tokens": 8874,
+  "output_tokens": 1376,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

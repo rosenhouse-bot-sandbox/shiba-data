@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "d4758cd5b94a2266.md",
+ "reply": "```json\n[{\"plan_id\": \"H2406-070-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 4, \"quotes\": [\"Preventive services $0 copay for covered preventive services like oral\"], \"note\": \"The cost is printed across both network columns, and the row says \\\"Freedom to see any dentist\\\". It may also apply out of network, but the page does not say so outright.\"},\n{\"plan_id\": \"H2406-070-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"premium\", \"amount\": \"$54\", \"unit\": \"per month\", \"package\": \"Platinum Dental Rider\", \"page\": 9, \"quotes\": [\"Platinum Dental Rider premium             Additional $54 per month\"]},\n{\"plan_id\": \"H2406-070-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"max\", \"amount\": \"$1,500\", \"limit\": \"per year\", \"package\": \"Platinum Dental Rider\", \"page\": 5, \"quotes\": [\"$1,500 per year for covered dental services\"]},\n{\"plan_id\": \"H2406-070-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"package\": \"Platinum Dental Rider\", \"page\": 5, \"quotes\": [\"$0 copay for covered network preventative\"]},\n{\"plan_id\": \"H2406-070-0\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"package\": \"Platinum Dental Rider\", \"page\": 5, \"quotes\": [\"50% coinsurance for all covered network\"]}]\n```",
+ "usage": {
+  "input_tokens": 4771,
+  "output_tokens": 1681,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

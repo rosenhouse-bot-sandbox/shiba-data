@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-bf93677641b9fa6f.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4, Outpatient Surgery and Procedures: the ASC row shows a $465 copay in network.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"The $565 copay is on the Outpatient Hospital row, not the ASC row. The ASC copay is $465.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 4, Diagnostic Colonoscopies: the Outpatient Hospital row shows a $0 copay.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 4, Diagnostic Colonoscopies: the ASC row shows a $0 copay.\"},\n{\"id\": 4, \"ok\": false, \"reason\": \"The $465 copay is on the ASC row, not the outpatient hospital row. The outpatient hospital copay is $565.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 4, Outpatient Surgery and Procedures: the Outpatient Hospital row shows a $565 copay.\"}]\n```",
+ "usage": {
+  "input_tokens": 2788,
+  "output_tokens": 352,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "161c63c8abccc6dc.md",
+ "reply": "```json\n[{\"plan_id\": \"H2406-070-0\", \"benefit\": \"tests.lab\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 79,\n  \"quotes\": [\"Laboratory tests $0 copayment\"], \"note\": \"The out-of-network column also shows a $0 copayment for lab services. It is left out because its text matches the in-network column word for word, so no quote occurs only once on the page.\"},\n {\"plan_id\": \"H2406-070-0\", \"benefit\": \"tests.diagnostic\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$50\", \"page\": 79,\n  \"quotes\": [\"Other outpatient diagnostic tests - non-\", \"$50 copayment or Medicare-covered non-radiological\"], \"note\": \"\"},\n {\"plan_id\": \"H2406-070-0\", \"benefit\": \"tests.diagnostic\", \"setting\": \"any\", \"network\": \"out\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"page\": 79,\n  \"quotes\": [\"Other outpatient diagnostic tests - non-\", \"30% coinsurance or Medicare-covered\"], \"note\": \"The rest of the out-of-network cell, naming non-radiological diagnostic services, continues on page 80.\"}]\n```",
+ "usage": {
+  "input_tokens": 12500,
+  "output_tokens": 2448,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

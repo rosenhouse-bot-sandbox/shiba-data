@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-dbc45a45d9843dd0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 60 Outpatient rehabilitation row (physical, occupational and speech therapy): in-office visits in network cost a $40 copay per provider per day.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 60 Outpatient rehabilitation row: in-office visits out of network cost 50% coinsurance.\"}]\n```",
+ "usage": {
+  "input_tokens": 2399,
+  "output_tokens": 257,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

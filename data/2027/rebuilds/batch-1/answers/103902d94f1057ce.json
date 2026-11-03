@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "batch": true,
+ "task": "H7006-021-0.md",
+ "reply": "```json\n[{\"key\": \"dvha.E_optional_packages\", \"result\": \"not_mentioned\", \"citations\": [], \"reason\": \"The passages only mention riders and optional coverage generically, with no optional supplemental package bought for a premium.\"}, {\"key\": \"main.AA_opt_packages\", \"result\": \"not_mentioned\", \"citations\": [], \"reason\": \"The passages do not state that optional supplemental benefit packages can be bought for an extra monthly premium.\"}, {\"key\": \"main.V_massage\", \"result\": \"excluded\", \"citations\": [{\"page\": 50, \"quote\": \"limited to, physical therapy, chiropractic, acupuncture or massage therapy services\"}], \"reason\": \"Massage therapy appears only as a Medicare-covered service listed among the allowance's exclusions, with no routine coverage shown.\"}, {\"key\": \"main.X_transportation\", \"result\": \"covered\", \"citations\": [{\"page\": 39, \"quote\": \"Only non-emergency medical transportation (NEMT) requires prior authorization.\"}], \"reason\": \"The plan's cost-sharing table treats NEMT as a plan benefit that needs prior authorization, implying coverage in the base plan.\"}, {\"key\": \"main.Z_part_b_reduction\", \"result\": \"not_mentioned\", \"citations\": [], \"reason\": \"No passage mentions a Part B premium reduction or giveback amount.\"}]\n```",
+ "usage": {
+  "input_tokens": 3754,
+  "output_tokens": 2119,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

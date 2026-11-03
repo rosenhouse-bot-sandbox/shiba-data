@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "362ee075ea5896d4.md",
+ "reply": "```json\n[{\"plan_id\": \"H2001-045-0\", \"benefit\": \"surgery.colonoscopy\", \"setting\": \"asc\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 3, \"quotes\": [\"Ambulatory surgical $0 copay for a\"], \"note\": \"The in-network cell reads '$0 copay for a colonoscopy'. Page 12 excludes diagnostic colonoscopy from the deductible, which suggests this is the diagnostic colonoscopy cost.\"},\n {\"plan_id\": \"H2001-045-0\", \"benefit\": \"surgery.colonoscopy\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 3, \"quotes\": [\"Outpatient hospital, $0 copay for a\"], \"note\": \"The in-network cell reads '$0 copay for a colonoscopy'. Page 12 excludes diagnostic colonoscopy from the deductible, which suggests this is the diagnostic colonoscopy cost.\"},\n {\"plan_id\": \"H2001-045-0\", \"benefit\": \"surgery\", \"setting\": \"asc\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 3, \"quotes\": [\"Ambulatory surgical $0 copay for a\", \"covered services copay or 20% coinsurance\"], \"note\": \"The cell reads 'Depending on your level of Medicaid eligibility, $0 copay or 20% coinsurance otherwise'. The $0 is for QMB or full Medicaid members, so 20% is given. The second quote joins the row's label-column text with the in-network cost on the same line.\"}]\n```",
+ "usage": {
+  "input_tokens": 3381,
+  "output_tokens": 4020,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

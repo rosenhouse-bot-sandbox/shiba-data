@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "50159487a52ccddf.md",
+ "reply": "```json\n[{\"plan_id\": \"H7006-018-0\", \"benefit\": \"surgery\", \"setting\": \"asc\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$250\", \"page\": 6, \"quotes\": [\"(ASC) $250 copay $250 copay\"]},\n {\"plan_id\": \"H7006-018-0\", \"benefit\": \"surgery\", \"setting\": \"asc\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 6, \"quotes\": [\"Ambulatory Surgical Center In-Network In-Network (ASC) $250 copay $250 copay Out-of-Network Out-of-Network 50% coinsurance 50% coinsurance\"]},\n {\"plan_id\": \"H7006-021-0\", \"benefit\": \"surgery\", \"setting\": \"asc\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$250\", \"page\": 6, \"quotes\": [\"(ASC) $250 copay $250 copay\"]},\n {\"plan_id\": \"H7006-021-0\", \"benefit\": \"surgery\", \"setting\": \"asc\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 6, \"quotes\": [\"Ambulatory Surgical Center In-Network In-Network (ASC) $250 copay $250 copay Out-of-Network Out-of-Network 50% coinsurance 50% coinsurance\"]}]\n```",
+ "usage": {
+  "input_tokens": 2265,
+  "output_tokens": 1813,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

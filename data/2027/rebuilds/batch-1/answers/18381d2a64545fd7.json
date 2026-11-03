@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "batch": true,
+ "task": "v-H2056-018-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"The $40 copay row is for Medicare-covered acupuncture for chronic low back pain, the page 74 exclusions row limits acupuncture to that condition, and no passage shows routine acupuncture, though the card's list on page 30 is cut off.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Page 74 says naturopath services are not covered under any condition, and no passage shows an allowance or card that names them.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Page 76 says therapeutic massage is not covered under any condition, and no passage shows any coverage.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"Page 33 covers only manual manipulation of the spine for subluxation, and page 75 says routine chiropractic care and other services are not covered.\"}\n]",
+ "usage": {
+  "input_tokens": 3357,
+  "output_tokens": 684,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

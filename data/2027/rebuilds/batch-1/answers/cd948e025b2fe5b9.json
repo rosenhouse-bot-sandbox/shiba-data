@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "557f08e61a7e8f42.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H9003-001-0\", \"benefit\": \"rehab\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$55\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 103, \"quotes\": [\"Physical therapy, speech therapy, and occupational therapy visits\", \"$55 per visit $55 per visit $55 per visit\"], \"note\": \"Medicare Explorer point-of-service benefit, for care outside any Kaiser Permanente service area. It is subject to a $1,200 annual coverage amount. The amount quote is the right column read down across three rows that each cost $55 per visit; the therapy row is the second of these.\"},\n {\"plan_id\": \"H9003-006-0\", \"benefit\": \"rehab\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$55\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 103, \"quotes\": [\"Physical therapy, speech therapy, and occupational therapy visits\", \"$55 per visit $55 per visit $55 per visit\"], \"note\": \"Medicare Explorer point-of-service benefit, for care outside any Kaiser Permanente service area. It is subject to a $1,200 annual coverage amount. The amount quote is the right column read down across three rows that each cost $55 per visit; the therapy row is the second of these.\"},\n {\"plan_id\": \"H9003-009-0\", \"benefit\": \"rehab\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$55\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 103, \"quotes\": [\"Physical therapy, speech therapy, and occupational therapy visits\", \"$55 per visit $55 per visit $55 per visit\"], \"note\": \"Medicare Explorer point-of-service benefit, for care outside any Kaiser Permanente service area. It is subject to a $1,200 annual coverage amount. The amount quote is the right column read down across three rows that each cost $55 per visit; the therapy row is the second of these.\"}]\n```",
+ "usage": {
+  "input_tokens": 16276,
+  "output_tokens": 1737,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

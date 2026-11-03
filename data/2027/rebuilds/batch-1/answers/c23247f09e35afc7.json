@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-2947683a555fc83c.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 10 Mental Health Inpatient row: the plan covers up to 190 days in a lifetime for inpatient care in a psychiatric hospital.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 5 Inpatient Hospital Coverage row: $515 copay per day for days 1-4.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 5 Inpatient Hospital Coverage row: $0 copay per day for days 5-90.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 10 Mental Health Inpatient row: $0 copay per day for days 5-90.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 10 Mental Health Inpatient row: $515 copay per day for days 1-4.\"}]\n```",
+ "usage": {
+  "input_tokens": 3253,
+  "output_tokens": 289,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

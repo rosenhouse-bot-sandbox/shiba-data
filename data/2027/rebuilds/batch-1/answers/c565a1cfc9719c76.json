@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-f73d19eeaaf3a08a.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 47: the blocks before 'Out-of-Network:' are in-network. They list 20% coinsurance for Air Ambulance, the same for emergency and non-emergency.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 47 Out-of-Network section: 20% coinsurance for Air Ambulance, the same for emergency and non-emergency.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 47: the in-network blocks list a $325 copayment per date of service for Ground Ambulance, the same for emergency and non-emergency.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 47 Worldwide Coverage: $325 copayment per date of service for Emergency Ambulance outside the U.S.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 47 Out-of-Network section: $325 copayment per date of service for Ground Ambulance, the same for emergency and non-emergency.\"}]\n```",
+ "usage": {
+  "input_tokens": 3248,
+  "output_tokens": 615,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

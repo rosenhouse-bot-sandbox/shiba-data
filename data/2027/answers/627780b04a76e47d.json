@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "batch": true,
+ "task": "v-H2923-025-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 62 Dental & Alternative Therapy Allowance row: a $2,000 yearly allowance toward preventive and comprehensive dental. Page 110 Mandatory Supplemental Dental Benefits lists routine supplemental dental (cleanings, exams, X-rays) for all members, not an optional package or SSBCI.\"}]\n```",
+ "usage": {
+  "input_tokens": 2873,
+  "output_tokens": 139,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

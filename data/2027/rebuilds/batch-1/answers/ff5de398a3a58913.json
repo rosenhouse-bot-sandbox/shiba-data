@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-64e05773e847b56e.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 65, physician/practitioner services row, under Telehealth Services: $30 copayment for Specialist Virtual, in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 65, physician/practitioner services row: $30 copayment in a Specialist's Office, in network.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"The $0 copayment is for the PCP's Office. The specialist's office costs $30.\"},\n{\"id\": 3, \"ok\": false, \"reason\": \"The $30 copayment is for the Specialist's Office. The PCP's office costs $0.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 65, physician/practitioner services row: $0 copayment in the PCP's Office, in network.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 65, physician/practitioner services row, under Telehealth Services: $0 copayment for PCP Virtual, in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3106,
+  "output_tokens": 519,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

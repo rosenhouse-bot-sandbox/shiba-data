@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "cabbc3b82885b498.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H2923-025-0\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"any\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$2,000\", \"limit\": \"per year\",\n   \"pool\": \"Dental and Alternative Therapy Allowance\", \"page\": 7,\n   \"quotes\": [\"You have a $2,000 yearly allowance toward Preventive Dental, Comprehensive Dental,\", \"Therapeutic Massage, Routine Acupuncture, and/or Naturopath Services combined\"],\n   \"note\": \"Network set to any because the page says you can see any licensed provider in the United States.\"},\n  {\"plan_id\": \"H2923-025-0\", \"benefit\": \"extras.massage\", \"setting\": \"any\", \"network\": \"any\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$2,000\", \"limit\": \"per year\",\n   \"pool\": \"Dental and Alternative Therapy Allowance\", \"page\": 7,\n   \"quotes\": [\"You have a $2,000 yearly allowance toward Preventive Dental, Comprehensive Dental,\", \"Therapeutic Massage, Routine Acupuncture, and/or Naturopath Services combined\"],\n   \"note\": \"Network set to any because the page says you can see any licensed provider in the United States.\"},\n  {\"plan_id\": \"H2923-025-0\", \"benefit\": \"extras.naturopathy\", \"setting\": \"any\", \"network\": \"any\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$2,000\", \"limit\": \"per year\",\n   \"pool\": \"Dental and Alternative Therapy Allowance\", \"page\": 7,\n   \"quotes\": [\"You have a $2,000 yearly allowance toward Preventive Dental, Comprehensive Dental,\", \"Therapeutic Massage, Routine Acupuncture, and/or Naturopath Services combined\"],\n   \"note\": \"Network set to any because the page says you can see any licensed provider in the United States.\"},\n  {\"plan_id\": \"H2923-025-0\", \"benefit\": \"extras.transportation\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"not_covered\", \"page\": 8,\n   \"quotes\": [\"Transportation Not covered\"]},\n  {\"plan_id\": \"H2923-025-0\", \"benefit\": \"extras.chiropractic\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$15\", \"page\": 10,\n   \"quotes\": [\"Medicare-Covered Chiropractic Services: $15 copay\"]}\n]\n```",
+ "usage": {
+  "input_tokens": 5784,
+  "output_tokens": 1973,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

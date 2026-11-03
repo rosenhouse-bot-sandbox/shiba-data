@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-dca4e04d7b6dc26b.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 39 Out-of-Network: $300 copay for each Medicare-covered Air Ambulance service. Cost sharing applies to each one-way trip.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 39 In-Network: $300 copay for each Medicare-covered Ground Ambulance service. The one-way-trip note closes the in-network block and covers both ambulance types.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 39 Out-of-Network: $300 copay for each Medicare-covered Ground Ambulance service. The block ends with the one-way-trip note.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 39 In-Network: $300 copay for each Medicare-covered Air Ambulance service. Cost sharing applies to each one-way trip.\"}]\n```",
+ "usage": {
+  "input_tokens": 2513,
+  "output_tokens": 647,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

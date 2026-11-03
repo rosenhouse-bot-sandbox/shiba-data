@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "034e045a83e5b49d.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3817-008-1\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"max\", \"amount\": \"$1,250\", \"unit\": \"\", \"limit\": \"every calendar year\", \"page\": 5, \"quotes\": [\"Routine dental services - All routine dental\", \"$1,250\"], \"note\": \"The combined routine dental maximum appears only in the in-network column. It may also apply out of network.\"},\n{\"plan_id\": \"H3817-008-1\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 5, \"quotes\": [\"Preventive services2 (Class I) $0\"], \"note\": \"\"},\n{\"plan_id\": \"H3817-008-1\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"\", \"limit\": \"\", \"page\": 5, \"quotes\": [\"Preventive services2 (Class I) $0 50%\"], \"note\": \"\"},\n{\"plan_id\": \"H3817-008-1\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"\", \"limit\": \"\", \"page\": 5, \"quotes\": [\"Basic comprehensive services2 (Class II) 50%\", \"Major comprehensive services2 (Class III) 50%\"], \"note\": \"\"},\n{\"plan_id\": \"H3817-008-1\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"\", \"limit\": \"\", \"page\": 5, \"quotes\": [\"Basic comprehensive services2 (Class II) 50% 50%\", \"Major comprehensive services2 (Class III) 50% 50%\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 4094,
+  "output_tokens": 2381,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

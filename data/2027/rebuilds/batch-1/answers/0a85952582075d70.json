@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-50159487a52ccddf.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5 Inpatient Hospital row, ATRIO Freedom column, In-Network: $250 copay each day for days 1 to 5.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 5 Inpatient Hospital row, ATRIO Choice Rx column, In-Network: $585 copay each day for days 1 to 4.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 5 Inpatient Hospital row, ATRIO Freedom column, Out-of-Network: 50% coinsurance for each Medicare-covered hospital stay.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 5 Inpatient Hospital row, ATRIO Choice Rx column, Out-of-Network: $0 copay each day for days 5 to 90.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 5 Inpatient Hospital row, ATRIO Freedom column, In-Network: $0 copay each day for days 6 to 90.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 5 Inpatient Hospital row, ATRIO Choice Rx column, Out-of-Network: $585 copay each day for days 1 to 4.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 5 Inpatient Hospital row, ATRIO Choice Rx column, In-Network: $0 copay each day for days 5 to 90.\"}]\n```",
+ "usage": {
+  "input_tokens": 3134,
+  "output_tokens": 799,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

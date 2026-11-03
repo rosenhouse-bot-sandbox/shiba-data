@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "da2974c756f3eedc.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-009-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"max\", \"amount\": \"$3,000\", \"limit\": \"per year\", \"page\": 7, \"quotes\": [\"Devoted Health will pay as much as $3,000 per year for covered dental services.\"], \"note\": \"The page does not call this benefit routine or supplemental, so covered_by follows the default rule. It covers exams, cleanings and dentures, so it is likely supplemental. In network because services must come from a participating dental provider.\"},\n{\"plan_id\": \"H2923-009-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 7, \"quotes\": [\"You pay $0\"], \"note\": \"$0 applies until the $3,000 dollar limit is reached. covered_by follows the default rule; the benefit is likely supplemental.\"},\n{\"plan_id\": \"H2923-009-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"covered\", \"page\": 7, \"quotes\": [\"periodic oral exams, dental evaluations,\"], \"note\": \"Listed as a covered dental service. covered_by follows the default rule; the benefit is likely supplemental.\"},\n{\"plan_id\": \"H2923-009-0\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"covered\", \"page\": 7, \"quotes\": [\"cleanings, X-rays, fillings, deep cleanings, extractions, dentures, root canals, crowns, and\"], \"note\": \"Listed as covered dental services. covered_by follows the default rule; the benefit is likely supplemental.\"}]\n```",
+ "usage": {
+  "input_tokens": 2522,
+  "output_tokens": 1410,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

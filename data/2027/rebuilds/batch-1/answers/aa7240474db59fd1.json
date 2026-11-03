@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-29166053e638f7e6.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 11 Mental Health Services, Inpatient row: $2,091 copay per admit. The page states coverage of up to 190 days in a lifetime in a psychiatric hospital.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 6 Inpatient Hospital Coverage row: $2,241 copay per admit, with unlimited days. Psychiatric stays are priced separately on page 11, so this row is acute inpatient.\"}]\n```",
+ "usage": {
+  "input_tokens": 2805,
+  "output_tokens": 411,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

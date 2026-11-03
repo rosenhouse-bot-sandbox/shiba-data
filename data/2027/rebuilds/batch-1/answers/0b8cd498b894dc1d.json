@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-faf9b5f14f8f128e.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 7 Diagnostic Radiology row: outpatient hospital is $500. The $225 copay applies to all other locations.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 7 Diagnostic Radiology row: 30% coinsurance out of network.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"Page 7 Diagnostic Radiology row: outpatient hospital is $500. The $225 copay applies to all other locations.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 7 Diagnostic Radiology row: $500 copay for other diagnostic radiology in an outpatient hospital, in network.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 7 Outpatient X-rays row: $50 copay in network.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 7 Diagnostic Radiology row: $0 copay for a diagnostic mammogram, in network.\"},\n{\"id\": 6, \"ok\": false, \"reason\": \"Page 7: $500 applies only in an outpatient hospital. An office falls under the $225 copay for all other locations.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 7 Diagnostic Radiology row: $225 copay for all other locations, which covers an office.\"},\n{\"id\": 8, \"ok\": true, \"reason\": \"Page 7 Diagnostic Radiology row: $225 copay for all other locations, which covers a freestanding facility.\"},\n{\"id\": 9, \"ok\": true, \"reason\": \"Page 7 Outpatient X-rays row: 30% coinsurance out of network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3203,
+  "output_tokens": 830,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

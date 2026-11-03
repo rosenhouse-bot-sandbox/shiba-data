@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "23e2bdae59ea8981.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3817-011-1\", \"benefit\": \"surgery\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 3, \"quotes\": [\"Outpatient hospital services\", \"20% 50%\"], \"note\": \"The 'All other services' row under Outpatient hospital services is read as outpatient surgery and procedures.\"},\n{\"plan_id\": \"H3817-011-1\", \"benefit\": \"surgery\", \"setting\": \"outpatient_hospital\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 3, \"quotes\": [\"Outpatient hospital services\", \"20% 50%\"], \"note\": \"The 'All other services' row under Outpatient hospital services is read as outpatient surgery and procedures.\"},\n{\"plan_id\": \"H3817-011-1\", \"benefit\": \"surgery\", \"setting\": \"asc\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$395\", \"page\": 3, \"quotes\": [\"Ambulatory surgery center services\", \"$395 50%\"], \"note\": \"The 'All other services' row under Ambulatory surgery center services is read as outpatient surgery and procedures.\"},\n{\"plan_id\": \"H3817-011-1\", \"benefit\": \"surgery\", \"setting\": \"asc\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 3, \"quotes\": [\"Ambulatory surgery center services\", \"$395 50%\"], \"note\": \"The 'All other services' row under Ambulatory surgery center services is read as outpatient surgery and procedures.\"}]\n```",
+ "usage": {
+  "input_tokens": 2881,
+  "output_tokens": 1084,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

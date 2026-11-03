@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "cd39f32cdbd73e52.md",
+ "reply": "```json\n[{\"plan_id\": \"H2406-042-0\", \"benefit\": \"tests.lab\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 4,\n  \"quotes\": [\"Lab services $0 copay\"]},\n {\"plan_id\": \"H2406-042-0\", \"benefit\": \"tests.lab\", \"setting\": \"any\", \"network\": \"out\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 4,\n  \"quotes\": [\"Lab services $0 copay $0 copay\"]},\n {\"plan_id\": \"H2406-042-0\", \"benefit\": \"tests.diagnostic\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$10\", \"page\": 4,\n  \"quotes\": [\"Diagnostic tests $10 copay\"]},\n {\"plan_id\": \"H2406-042-0\", \"benefit\": \"tests.diagnostic\", \"setting\": \"any\", \"network\": \"out\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"page\": 4,\n  \"quotes\": [\"Diagnostic tests $10 copay 30% coinsurance\"]}]\n```",
+ "usage": {
+  "input_tokens": 2458,
+  "output_tokens": 1105,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

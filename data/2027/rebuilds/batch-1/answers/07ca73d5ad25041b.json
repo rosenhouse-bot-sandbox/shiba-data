@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-557f08e61a7e8f42.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 74 psychiatric hospital row: Enhanced pays $250 per day for days 1–6.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 74 psychiatric hospital row: Value pays $390 for days 1–6, then $0 for the rest of the covered stay.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"Page 72: $320 per day is the Standard plan's amount. Value pays $455 per day for days 1–6.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 72 inpatient row: Standard pays $320 for days 1–6, then $0 for the rest of the covered stay.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 72 inpatient row: Standard pays $320 per day for days 1–6.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 74 psychiatric hospital row: Value pays $390 per day for days 1–6.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 74 psychiatric hospital row: Enhanced pays $250 for days 1–6, then $0 for the rest of the covered stay.\"},\n{\"id\": 7, \"ok\": false, \"reason\": \"Page 74: $390 is the Value plan's amount. Standard pays $290 per day for days 1–6.\"},\n{\"id\": 8, \"ok\": true, \"reason\": \"Page 74 psychiatric hospital row: Standard pays $290 for days 1–6, then $0 for the rest of the covered stay.\"},\n{\"id\": 9, \"ok\": false, \"reason\": \"Page 72: $455 is the Value plan's amount. Standard pays $320 per day for days 1–6.\"},\n{\"id\": 10, \"ok\": true, \"reason\": \"Page 72 inpatient row: Enhanced pays $250 for days 1–6, then $0 for the rest of the covered stay.\"},\n{\"id\": 11, \"ok\": true, \"reason\": \"Page 72 inpatient row: Value pays $455 for days 1–6, then $0 for the rest of the covered stay.\"},\n{\"id\": 12, \"ok\": true, \"reason\": \"Page 72 inpatient row: Enhanced pays $250 per day for days 1–6.\"},\n{\"id\": 13, \"ok\": true, \"reason\": \"Page 74 psychiatric hospital row: Standard pays $290 per day for days 1–6.\"},\n{\"id\": 14, \"ok\": true, \"reason\": \"Page 72 inpatient row: Value pays $455 per day for days 1–6.\"}]\n```",
+ "usage": {
+  "input_tokens": 5519,
+  "output_tokens": 1146,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

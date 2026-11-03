@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "f73d19eeaaf3a08a.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-428-2\", \"benefit\": \"medical_deductible.some\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"deductible\", \"amount\": \"$80\", \"unit\": \"\", \"limit\": \"\", \"page\": 41, \"quotes\": [\"Your deductible is $80.\", \"The deductible doesn't apply to some services, including certain preventive services received both in-network and out of network.\", \"The following services listed are excluded from the combined in-network and out-of-network deductible:\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 4389,
+  "output_tokens": 714,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

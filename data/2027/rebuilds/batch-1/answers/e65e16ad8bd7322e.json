@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "7dcf10accd77535d.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-011-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$350\", \"page\": 15, \"quotes\": [\"Ground Ambulance In-Network\", \"30% coinsurance In-Network $350 copay\"], \"note\": \"The ambulance copays are not stated per trip or per day.\"},\n{\"plan_id\": \"H5439-011-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$350\", \"page\": 15, \"quotes\": [\"Ground Ambulance In-Network\", \"Out-of-Network $350 copay In-Network $350 copay\"], \"note\": \"The amount quote is read down the cost column, from the ground ambulance out-of-network cost into the air ambulance in-network cost.\"},\n{\"plan_id\": \"H5439-011-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$350\", \"page\": 15, \"quotes\": [\"Air Ambulance In-Network\", \"Out-of-Network $350 copay In-Network $350 copay\"], \"note\": \"The amount quote is read down the cost column, from the ground ambulance out-of-network cost into the air ambulance in-network cost.\"},\n{\"plan_id\": \"H5439-011-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$350\", \"page\": 15, \"quotes\": [\"Air Ambulance In-Network\", \"Out-of-Network $350 copay In-Network Not covered\"], \"note\": \"The amount quote is read down the cost column, from the air ambulance out-of-network cost into the transportation row.\"}]\n```",
+ "usage": {
+  "input_tokens": 2580,
+  "output_tokens": 2386,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

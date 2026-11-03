@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "4ec81cd0d2695486.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H1372-003-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 57,\n   \"quotes\": [\"20% coinsurance\"]},\n  {\"plan_id\": \"H1372-003-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"max\", \"amount\": \"$1,000\", \"page\": 57,\n   \"quotes\": [\"Maximum: $1,000 for preventive services and comprehensive services\"],\n   \"note\": \"The page does not state the period for this maximum.\"},\n  {\"plan_id\": \"H1372-003-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"2\", \"limit\": \"per year\", \"page\": 57,\n   \"quotes\": [\"Plan will only cover 2 of periodic, limited, periodontal\", \"Limit 2 visits every year\"],\n   \"note\": \"The limit is 2 oral evaluations every calendar year and 2 cleanings every year.\"},\n  {\"plan_id\": \"H1372-003-0\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"page\": 58,\n   \"quotes\": [\"Comprehensive dental services\"]},\n  {\"plan_id\": \"H1372-003-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"out\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"not_covered\", \"page\": 60,\n   \"quotes\": [\"you choose to use a provider outside of the network, the\"]}\n]\n```",
+ "usage": {
+  "input_tokens": 4515,
+  "output_tokens": 2084,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

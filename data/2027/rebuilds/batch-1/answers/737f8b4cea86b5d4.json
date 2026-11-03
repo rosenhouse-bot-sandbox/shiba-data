@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-61de2101267140ce.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5, preventive and comprehensive dental (additional benefits) row: $0 copay for oral exams, cleanings and fluoride, in network.\"}, {\"id\": 1, \"ok\": true, \"reason\": \"Page 5, Medicare-covered dental services row: 20% coinsurance.\"}, {\"id\": 2, \"ok\": true, \"reason\": \"Page 5, additional dental benefits row: up to $1,000 allowance every year for preventive and comprehensive services.\"}]\n```",
+ "usage": {
+  "input_tokens": 2023,
+  "output_tokens": 380,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

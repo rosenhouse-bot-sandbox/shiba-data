@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-2947683a555fc83c.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5 Doctor Visits, PCP row: Telehealth $0 copay in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 5 Doctor Visits, Specialist row: Specialist's office $50 copay.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"The $50 copay is for the specialist's office. The PCP's office copay is $0.\"},\n{\"id\": 3, \"ok\": false, \"reason\": \"The $0 copay is for the PCP's office. The specialist's office copay is $50.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 5 Doctor Visits, PCP row: PCP's office $0 copay.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 5 Doctor Visits, Specialist row: Telehealth $50 copay.\"}]\n```",
+ "usage": {
+  "input_tokens": 2310,
+  "output_tokens": 303,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

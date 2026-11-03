@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "1ed5fdb720cabd03.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H2406-042-0\", \"benefit\": \"visits\", \"setting\": \"office.pcp\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 12, \"quotes\": [\"Primary care office visits\", \"$0 copayment per visit (in-\"]},\n  {\"plan_id\": \"H2406-042-0\", \"benefit\": \"visits\", \"setting\": \"office.pcp\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$25\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 12, \"quotes\": [\"Primary care office visits\", \"$25 copayment per visit (out-o -\"]},\n  {\"plan_id\": \"H2406-042-0\", \"benefit\": \"visits\", \"setting\": \"office.specialist\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$50\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 12, \"quotes\": [\"Specialist office visits\", \"$50 copayment per visit (in-\"]},\n  {\"plan_id\": \"H2406-042-0\", \"benefit\": \"visits\", \"setting\": \"office.specialist\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$80\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 12, \"quotes\": [\"Specialist office visits\", \"$80 copayment per visit (out-o -\"]},\n  {\"plan_id\": \"H2406-042-0\", \"benefit\": \"visits\", \"setting\": \"office.pcp\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 88, \"quotes\": [\"$0 copayment or services rom a primary care physician\"]},\n  {\"plan_id\": \"H2406-042-0\", \"benefit\": \"visits\", \"setting\": \"office.pcp\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$25\", \"page\": 88, \"quotes\": [\"$25 copayment or services rom a primary care physician\"]},\n  {\"plan_id\": \"H2406-042-0\", \"benefit\": \"visits\", \"setting\": \"office.specialist\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$50\", \"page\": 89, \"quotes\": [\"$50 copayment or services rom a specialist\"]},\n  {\"plan_id\": \"H2406-042-0\", \"benefit\": \"visits\", \"setting\": \"office.specialist\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$80\", \"page\": 89, \"quotes\": [\"$80 copayment or services rom a specialist\"]}\n]\n```",
+ "usage": {
+  "input_tokens": 6020,
+  "output_tokens": 1684,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

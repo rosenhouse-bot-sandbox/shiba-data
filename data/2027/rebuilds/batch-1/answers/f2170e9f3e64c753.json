@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "29166053e638f7e6.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-317-0\", \"benefit\": \"imaging.diagnostic.nuclear\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 8, \"quotes\": [\"Nuclear medicine and services • Freestanding radiological facility: 20% of the cost\", \"Outpatient hospital: 20% of the cost • Member\"], \"note\": \"The outpatient line of the Nuclear medicine row has the same text as lines in other rows. To make it unique, the second quote reads down the cost column into the start of the Sleep study row's first line. It stops before the apostrophe in \\\"Member's\\\" in case that caused the earlier failure.\"}]\n```",
+ "usage": {
+  "input_tokens": 6152,
+  "output_tokens": 1769,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

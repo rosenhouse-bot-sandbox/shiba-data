@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "batch": true,
+ "task": "v-H1036-153-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":false,\"reason\":\"The quotes concern Part D exclusion of non-prescription drugs, not an OTC items allowance, so they do not show the plan lacks an OTC benefit.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"The exclusions table says naturopath services are 'Not covered under any condition', and no passage shows any supplemental naturopathy coverage.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"The EOC says only manual spine manipulation is covered and other chiropractor services are not, and the exclusions list says routine chiropractic care covers only manual manipulation for subluxation.\"}\n]",
+ "usage": {
+  "input_tokens": 3198,
+  "output_tokens": 217,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

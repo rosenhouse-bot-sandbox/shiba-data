@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "fd314311528d4668.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H9003-001-0\", \"benefit\": \"part_b_drugs\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"0%-20%\", \"unit\": \"\", \"limit\": \"\", \"page\": 7, \"quotes\": [\"Medicare Part B drugs† 0%–20% coinsurance\"], \"note\": \"Kept the † mark in the quote. The row label carries it, and the quote without it failed the match check.\"},\n {\"plan_id\": \"H9003-006-0\", \"benefit\": \"part_b_drugs\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"0%-20%\", \"unit\": \"\", \"limit\": \"\", \"page\": 7, \"quotes\": [\"Medicare Part B drugs† 0%–20% coinsurance\"], \"note\": \"All three plan columns show the same 0%–20% coinsurance. Kept the † mark in the quote because the quote without it failed the match check.\"},\n {\"plan_id\": \"H9003-009-0\", \"benefit\": \"part_b_drugs\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"0%-20%\", \"unit\": \"\", \"limit\": \"\", \"page\": 7, \"quotes\": [\"Medicare Part B drugs† 0%–20% coinsurance\"], \"note\": \"All three plan columns show the same 0%–20% coinsurance. Kept the † mark in the quote because the quote without it failed the match check.\"}]\n```",
+ "usage": {
+  "input_tokens": 4652,
+  "output_tokens": 1417,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

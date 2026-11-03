@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "batch": true,
+ "task": "v-H2923-025-0.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 62 shows a $2,000 yearly allowance for preventive and comprehensive dental. Page 110 (Mandatory Supplemental Dental Benefits) says the plan covers cleanings, routine exams and X-rays. This is a supplemental benefit for all members, so the ● is correct.\"}]",
+ "usage": {
+  "input_tokens": 2873,
+  "output_tokens": 122,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

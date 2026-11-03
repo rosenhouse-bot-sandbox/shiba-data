@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-bee1858e7e963c62.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 52: $20 copay is the out-of-network cost for Medicare-covered chiropractic. In-network is $15.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 46: routine acupuncture gets a $50 allowance every six months, loaded to the Flex Card.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 47: naturopathy gets a $50 allowance every six months, loaded to the Flex Card.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 45: acupuncture for chronic low back pain is a $45 copay for each Medicare-covered service in network.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 52: Medicare-covered chiropractic is a $20 copay for each service out of network.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 46: no more than 20 acupuncture treatments may be given annually.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 45: up to 12 visits in 90 days are covered for chronic low back pain.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 52: routine chiropractic care gets a $50 allowance every six months on the Flex Card.\"},\n{\"id\": 8, \"ok\": true, \"reason\": \"Page 52: Medicare-covered chiropractic is a $15 copay for each service in network.\"},\n{\"id\": 9, \"ok\": false, \"reason\": \"Page 52: $15 is the in-network copay. Out of network is $20.\"},\n{\"id\": 10, \"ok\": true, \"reason\": \"Page 45: acupuncture for chronic low back pain is 50% coinsurance for each Medicare-covered service out of network.\"}]\n```",
+ "usage": {
+  "input_tokens": 6105,
+  "output_tokens": 828,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-28e22b4acec7d885.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 6 Ambulance row shows a $350 copay for ground in both the in-network and out-of-network columns, so network 'any' holds.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 6 Ambulance row shows a $350 copay for air in network. The prior-authorization text on the same line is the left-column note, not part of the cost.\"}]\n```",
+ "usage": {
+  "input_tokens": 2128,
+  "output_tokens": 144,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

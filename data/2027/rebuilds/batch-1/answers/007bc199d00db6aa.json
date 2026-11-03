@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-5f6896f5c437eeed.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 Medical Deductible row for this plan: $250. It excludes Part B insulin via a pump, preventive services and some Medicare-covered services, and the EOC lists where it applies, so it covers some services only. The row is not split by network, so in-network is correct, and per year is the yearly deductible.\"}]\n```",
+ "usage": {
+  "input_tokens": 2357,
+  "output_tokens": 393,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,19 @@
+correction recall: 74 of 168
+correction precision: 74 of 75
+citations: 696 of 1050
+corrections missed, by column:
+  dvha.J_extra_benefits: 16
+  main.L_xray_imaging: 13
+  dvha.I_alt_care_otc_travel: 12
+  dvha.G_vision: 10
+  dvha.F_dental: 10
+  main.AB_ambulance: 10
+  main.K_tests_labs: 6
+  main.S_acupuncture: 6
+  main.I_outpatient_surgery: 4
+  main.X_transportation: 3
+  main.M_part_b_drugs: 1
+  main.G_specialist: 1
+  main.J_outpatient_rehab: 1
+  main.O_medical_deductible: 1
+seeded errors cited: 0 of 29

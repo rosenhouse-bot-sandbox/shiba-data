@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "7dcf10accd77535d.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-011-0\", \"benefit\": \"tests.lab\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"condition\": \"labs related to A1C and kidney health evaluation\", \"page\": 7, \"quotes\": [\"$0 copay for labs related to A1C and kidney health evaluation.\"]},\n {\"plan_id\": \"H5439-011-0\", \"benefit\": \"tests.lab\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$10\", \"condition\": \"all other labs\", \"page\": 7, \"quotes\": [\"$10 copay for all other labs.\"]}]\n```",
+ "usage": {
+  "input_tokens": 2539,
+  "output_tokens": 338,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

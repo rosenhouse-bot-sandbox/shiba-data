@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-f73d19eeaaf3a08a.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 59 psychiatric row: in network, $0 copay per day for days 5 to 90 in both the Inpatient Hospital and Inpatient Psychiatric Facility settings, so setting 'any' holds.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Page 59: the $520 per day for days 1 to 4 applies only to the Inpatient Psychiatric Facility. The Inpatient Hospital setting charges $689, so setting 'any' is wrong.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 58 inpatient hospital row: in network, $689 copay per day for days 1 to 4.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 58 inpatient hospital row: in network, $0 copay per day for days 5 to 90.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 59: out of network, inpatient mental health care is 50% coinsurance for both the Inpatient Hospital and Inpatient Psychiatric Facility settings.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 58: out of network, inpatient care is 50% coinsurance for Inpatient Hospital.\"}]\n```",
+ "usage": {
+  "input_tokens": 4400,
+  "output_tokens": 816,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

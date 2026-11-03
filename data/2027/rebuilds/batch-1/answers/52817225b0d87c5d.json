@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-cbcaa238a8c713a4.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 7 Transportation row lists Not covered under the In-network column. This matches supplemental not_covered in network.\"}, {\"id\": 1, \"ok\": true, \"reason\": \"Page 7 Transportation row lists Not covered under the Out-of-network column. This matches supplemental not_covered out of network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2395,
+  "output_tokens": 126,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

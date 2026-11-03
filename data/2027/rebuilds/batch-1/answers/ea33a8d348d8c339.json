@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "dca4e04d7b6dc26b.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H7006-021-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$300\", \"unit\": \"per one-way trip\", \"limit\": \"\", \"page\": 39, \"quotes\": [\"In-Network $300 copay for each Medicare-covered Ground Ambulance service.\", \"prior authorization. Cost sharing applies to each one-way trip.\"], \"note\": \"The one-way trip sentence follows the air ambulance line in the in-network block. It is read here as applying to all ambulance cost sharing in that block.\"}]\n```",
+ "usage": {
+  "input_tokens": 6824,
+  "output_tokens": 781,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

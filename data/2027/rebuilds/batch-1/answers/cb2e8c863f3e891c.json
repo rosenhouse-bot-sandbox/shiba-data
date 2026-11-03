@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "2eb4caa23079d78f.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-019-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$475\", \"unit\": \"per day\", \"limit\": \"days 1-5\", \"condition\": \"days 1-5\", \"page\": 4,\n  \"quotes\": [\"$475 copay per day for days 1 through 5\"], \"note\": \"\"},\n {\"plan_id\": \"H5439-019-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"days 6-90\", \"condition\": \"days 6-90\", \"page\": 4,\n  \"quotes\": [\"$0 copay per day for days 6 through 90\"], \"note\": \"\"},\n {\"plan_id\": \"H5439-019-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"out\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"40%\", \"unit\": \"per stay\", \"limit\": \"days 1-90\", \"page\": 4,\n  \"quotes\": [\"Days 1-90:\", \"40% coinsurance for each Medicare-covered hospital stay.\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 2140,
+  "output_tokens": 883,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

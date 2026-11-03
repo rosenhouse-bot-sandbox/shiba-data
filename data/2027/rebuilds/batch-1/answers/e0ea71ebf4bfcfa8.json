@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-dbc45a45d9843dd0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 61: the outpatient hospital 50% coinsurance is the out-of-network cost. In network, all other services are 20% coinsurance.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 61, outpatient hospital services: $0 copay for diagnostic colonoscopy in network.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 61, Ambulatory Surgical Center section continued from page 60: 50% coinsurance out of network.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 60, Ambulatory Surgical Center: $0 copay for diagnostic colonoscopy in network.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 61, ASC in-network: $375 copay for all other services, apart from colonoscopy and wound care.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 61, outpatient hospital in-network: 20% coinsurance for all other services, including professional fees.\"},\n{\"id\": 6, \"ok\": false, \"reason\": \"Page 61: 20% coinsurance is the in-network cost. Out of network at an outpatient hospital is 50% coinsurance.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 61, outpatient hospital services: 50% coinsurance out of network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3841,
+  "output_tokens": 734,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

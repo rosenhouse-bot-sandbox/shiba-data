@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-4a3883a20d17f740.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 7, Diagnostic Tests and Procedures row: in network, 20% coinsurance for all other services.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 7, Diagnostic Tests and Procedures row: out of network, 20% coinsurance.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 7, Lab Services row: out of network, 20% coinsurance.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 7, Lab Services row: in network, $10 copay for all other labs.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 7, Lab Services row lists genetic testing; its single out-of-network cost is 20% coinsurance.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 7, Diagnostic Tests and Procedures row: in network, $0 copay for diagnostic colonoscopy, spirometry and specified testing related services.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 7, Lab Services row: in network, $50 copay for genetic testing.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 7, Lab Services row: in network, $0 copay for labs related to A1C and kidney health evaluation.\"}]\n```",
+ "usage": {
+  "input_tokens": 2839,
+  "output_tokens": 667,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

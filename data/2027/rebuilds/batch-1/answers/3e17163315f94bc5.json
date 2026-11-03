@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-8980c5c5d9008083.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 100 PCP office row, in network: $0 copay for each Medicare-covered PCP office visit.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 100 PCP office row, out of network: 30% coinsurance for each Medicare-covered PCP office visit.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"The quote is the PCP office row, not the specialist row. The specialist in-network copay is $55 on page 101.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 101 specialist row, in network: $55 copay for each Medicare-covered specialist visit (deductible applies).\"},\n{\"id\": 4, \"ok\": false, \"reason\": \"The quote is the specialist row. The PCP office in-network copay is $0 on page 100.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 101 specialist row, out of network: 30% coinsurance for each Medicare-covered specialist visit.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 102 telehealth row covers PCP and specialist visits: $0 copay in network for virtual visit services through the plan's virtual visit provider(s).\"}]\n```",
+ "usage": {
+  "input_tokens": 3720,
+  "output_tokens": 714,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

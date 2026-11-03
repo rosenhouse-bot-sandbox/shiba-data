@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "5ab489f7c419b042.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-041-0\", \"benefit\": \"visits\", \"setting\": \"office.pcp\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 2, \"quotes\": [\"Primary care $0 copay\"], \"note\": \"The quote uses single spaces. On the page this text sits in a wide-spaced table row, so the match assumes the check treats runs of spaces as one.\"}]\n```",
+ "usage": {
+  "input_tokens": 2580,
+  "output_tokens": 969,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "bee1858e7e963c62.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H7006-018-0\", \"benefit\": \"imaging.diagnostic.advanced.ct\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"per service\", \"page\": 75, \"quotes\": [\"Out-of-Network 50% coinsurance for each Medicare-covered service. In-Network $0 copay is for diagnostic colonoscopies\"], \"note\": \"This out-of-network cost continues the diagnostic non-laboratory tests row (CT scans, MRIs, PET scans) from page 74. The quote runs down the What you pay column into the next row only so it occurs once on the page.\"},\n {\"plan_id\": \"H7006-018-0\", \"benefit\": \"imaging.diagnostic.advanced.mri\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"per service\", \"page\": 75, \"quotes\": [\"Out-of-Network 50% coinsurance for each Medicare-covered service. In-Network $0 copay is for diagnostic colonoscopies\"], \"note\": \"This out-of-network cost continues the diagnostic non-laboratory tests row (CT scans, MRIs, PET scans) from page 74. The quote runs down the What you pay column into the next row only so it occurs once on the page.\"},\n {\"plan_id\": \"H7006-018-0\", \"benefit\": \"imaging.diagnostic.advanced.pet\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"per service\", \"page\": 75, \"quotes\": [\"Out-of-Network 50% coinsurance for each Medicare-covered service. In-Network $0 copay is for diagnostic colonoscopies\"], \"note\": \"This out-of-network cost continues the diagnostic non-laboratory tests row (CT scans, MRIs, PET scans) from page 74. The quote runs down the What you pay column into the next row only so it occurs once on the page.\"}]\n```",
+ "usage": {
+  "input_tokens": 12655,
+  "output_tokens": 1493,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

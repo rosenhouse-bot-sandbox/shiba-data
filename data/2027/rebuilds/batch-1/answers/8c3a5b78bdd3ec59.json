@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "90a4efa6544175a2.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H6815-038-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 61, \"quotes\": [\"$0 copay for each oral exam.\", \"$0 copay for each cleaning.\", \"$0 copay for each fluoride treatment.\"], \"note\": \"Periodic oral exams, cleanings and fluoride treatment are each $0 per service\"},\n{\"plan_id\": \"H6815-038-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"25%\", \"page\": 61, \"quotes\": [\"25% coinsurance for each oral exam.\", \"25% coinsurance for each cleaning.\"], \"note\": \"Periodic oral exams and cleanings are each 25% per service\"},\n{\"plan_id\": \"H6815-038-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"2\", \"limit\": \"per year\", \"page\": 61, \"quotes\": [\"Periodic Oral exams - 2 every year\", \"Cleanings (prophylaxis) - 2 every year\"], \"note\": \"Oral exams and cleanings are 2 each per year. Fluoride treatment is 1 per year and is left out to avoid a duplicate fact.\"},\n{\"plan_id\": \"H6815-038-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per visit\", \"page\": 62, \"quotes\": [\"$0 copay for dental x-rays per visit.\", \"$0 copay for other diagnostic dental services per visit.\"], \"note\": \"Dental x-rays and other diagnostic dental services\"},\n{\"plan_id\": \"H6815-038-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"25%\", \"page\": 62, \"quotes\": [\"25% coinsurance for each fluoride treatment.\", \"25% coinsurance for dental x-rays per visit.\", \"25% coinsurance for other diagnostic dental services per visit.\"], \"note\": \"Fluoride treatment, dental x-rays and other diagnostic dental services\"}]\n```",
+ "usage": {
+  "input_tokens": 8998,
+  "output_tokens": 1725,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "2eb4caa23079d78f.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-019-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"page\": 14, \"quotes\": [\"Ground Ambulance\", \"Out-of-Network $325 copay In-Network $325 copay\"], \"note\": \"The second quote reads the right column straight down. It starts at the Ground Ambulance out-of-network cost and runs into the Air Ambulance in-network line.\"},\n {\"plan_id\": \"H5439-019-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"page\": 14, \"quotes\": [\"Air Ambulance\", \"Out-of-Network $325 copay In-Network Not covered\"], \"note\": \"The second quote reads the right column straight down. It starts at the Air Ambulance out-of-network cost and runs into the Transportation Services line.\"}]\n```",
+ "usage": {
+  "input_tokens": 2961,
+  "output_tokens": 1410,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

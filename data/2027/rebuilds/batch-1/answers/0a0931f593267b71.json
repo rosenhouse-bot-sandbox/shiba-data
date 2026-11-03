@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "f961eb582c1534d5.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-010-0\", \"benefit\": \"giveback\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"part_b_reduction\", \"amount\": \"$10\", \"unit\": \"per month\", \"limit\": \"\", \"page\": 9, \"quotes\": [\"We will reduce your monthly Medicare Part B premium by $10.\"], \"note\": \"The document does not tie the Part B premium reduction to a network. Network is set to in network, the default rule.\"}]\n```",
+ "usage": {
+  "input_tokens": 2284,
+  "output_tokens": 492,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

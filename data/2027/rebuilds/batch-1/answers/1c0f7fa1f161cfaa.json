@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "5f6896f5c437eeed.md",
+ "reply": "```json\n[{\"plan_id\": \"H7199-002-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per one-way trip\", \"limit\": \"\", \"page\": 9, \"quotes\": [\"$325 copay per one-way trip\"], \"note\": \"The ambulance row has no separate out-of-network column, so this is treated as the in-network cost.\"},\n {\"plan_id\": \"H7199-002-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"unit\": \"per one-way trip\", \"limit\": \"\", \"page\": 9, \"quotes\": [\"Air Ambulance: 20% coinsurance per one-way trip\"], \"note\": \"The ambulance row has no separate out-of-network column, so this is treated as the in-network cost.\"}]\n```",
+ "usage": {
+  "input_tokens": 3397,
+  "output_tokens": 707,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

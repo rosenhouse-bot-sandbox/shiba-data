@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-28e22b4acec7d885.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 Outpatient X-rays row: the out-of-network column shows a $35 copay.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 4 Diagnostic radiology row: in network, $0 copay for each diagnostic mammogram.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 4 Diagnostic radiology services (e.g. MRI, CT scan) row: in network, $320 copay for services other than the diagnostic mammogram, which is listed separately.\"},\n{\"id\": 3, \"ok\": false, \"reason\": \"Page 4 Outpatient X-rays row: $30 is the in-network copay. The out-of-network copay is $35.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 4 Outpatient X-rays row: the in-network column shows a $30 copay.\"},\n{\"id\": 5, \"ok\": false, \"reason\": \"Page 4 Outpatient X-rays row: $35 is the out-of-network copay. The in-network copay is $30.\"}]\n```",
+ "usage": {
+  "input_tokens": 2834,
+  "output_tokens": 813,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
