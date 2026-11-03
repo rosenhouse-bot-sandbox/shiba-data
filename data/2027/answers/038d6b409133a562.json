@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-7e45f25357b792a7.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 72 SilverSneakers row: $0 membership, and Devoted covers the full cost of the gym membership. This is a supplemental fitness benefit with a $0 copay.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 73 Wellness Bucks row: Devoted reimburses up to $150 per year. The fund names fitness classes and fitness trackers, so it is a fitness allowance in the Devoted Health Wellness Bucks pool.\"}]\n```",
+ "usage": {
+  "input_tokens": 3106,
+  "output_tokens": 490,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-e2d6e1e199a3b8a9.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 40 Hearing services row: $0 copay for each non-Medicare covered routine hearing exam, one exam every year.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 40 Hearing services row: hearing aids have an annual allowance of $1,000 per ear, every year.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 40 Hearing services row: hearing aids are $0 copay per ear, per year (two hearing aids every year).\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 40 Hearing services row: $0 copay for each Medicare-covered hearing exam.\"}]\n```",
+ "usage": {
+  "input_tokens": 2953,
+  "output_tokens": 383,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "bf93677641b9fa6f.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-001-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0 or $40\", \"unit\": \"per visit\", \"page\": 6, \"quotes\": [\"Medicare-Covered Diagnostic Eye Exam: $40 copay\", \"Diabetic Retinopathy Exam: $0 copay\"], \"note\": \"Merged because both failed as one fact: the Medicare-covered diagnostic eye exam is a $40 copay and the diabetic retinopathy exam is a $0 copay\"}]\n```",
+ "usage": {
+  "input_tokens": 3244,
+  "output_tokens": 595,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

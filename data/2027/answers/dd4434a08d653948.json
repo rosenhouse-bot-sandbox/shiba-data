@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "7e45f25357b792a7.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-019-0\", \"benefit\": \"otc\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$106\", \"unit\": \"\", \"limit\": \"per quarter\", \"page\": 97, \"quotes\": [\"You get a $106 per quarter allowance to spend\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 6667,
+  "output_tokens": 528,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

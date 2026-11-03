@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "b4be2a8a3e57d86a.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-427-2\", \"benefit\": \"fitness\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 18, \"quotes\": [\"$0 copayment for SilverSneakers®.\"]},\n {\"plan_id\": \"H5216-427-2\", \"benefit\": \"fitness\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"95%\", \"page\": 18, \"quotes\": [\"Out-of-network: 95% coinsurance for\"]}]\n```",
+ "usage": {
+  "input_tokens": 2267,
+  "output_tokens": 474,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

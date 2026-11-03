@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "362ee075ea5896d4.md",
+ "reply": "```json\n[{\"plan_id\": \"H2001-045-0\", \"benefit\": \"otc\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$196\", \"limit\": \"per month\", \"pool\": \"OTC and food credit\", \"page\": 11, \"quotes\": [\"OTC and food credit\", \"$196 credit every month\"]},\n{\"plan_id\": \"H2001-045-0\", \"benefit\": \"otc\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"90%\", \"pool\": \"OTC and food credit\", \"page\": 11, \"quotes\": [\"OTC and food credit\", \"90% of the total cost\"], \"note\": \"The page says that at an out-of-network store you pay 90% of the total cost.\"}]\n```",
+ "usage": {
+  "input_tokens": 2348,
+  "output_tokens": 751,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

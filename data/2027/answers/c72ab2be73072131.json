@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-5e11cf20cec995f3.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 61 routine hearing exam row: $0 copayment in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 61 hearing aids row: the hearing aid allowance is $700.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 61 routine hearing exam row: the plan covers 1 hearing exam every year.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 61 hearing aids row: the benefit is limited to 2 hearing aids every year.\"}]\n```",
+ "usage": {
+  "input_tokens": 2892,
+  "output_tokens": 323,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

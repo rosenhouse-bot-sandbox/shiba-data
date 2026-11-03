@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-2eb4caa23079d78f.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 8 Medicare-covered Hearing Exam row: $60 copay out of network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 9 Hearing Aid Allowance row: limited to 2 hearing aids every year.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"Page 8 Medicare-covered Hearing Exam row: out of network is $60 copay; $30 is the in-network copay.\"},\n{\"id\": 3, \"ok\": false, \"reason\": \"Page 8 Medicare-covered Hearing Exam row: in network is $30 copay; $60 is the out-of-network copay.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 9 Hearing Aid (All Types) row: $0 copay in network.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 9 Hearing Aid (All Types) row: 40% coinsurance out of network.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 9 Hearing Aid Allowance row: up to $350 allowance per ear every year.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 8 Medicare-covered Hearing Exam row: $30 copay in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3062,
+  "output_tokens": 776,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

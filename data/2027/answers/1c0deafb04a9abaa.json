@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-2a970381e331a34a.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 11 Over-the-Counter Items (OTC) row: $106 per quarter toward eligible OTC items at participating locations. This is a supplemental allowance with no member condition.\"}]\n```",
+ "usage": {
+  "input_tokens": 2377,
+  "output_tokens": 88,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

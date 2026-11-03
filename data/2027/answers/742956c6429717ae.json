@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "0e1831fb00cf2a95.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2056-018-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 5, \"quotes\": [\"Diagnostic eye exam (includes diabetic      $0 copay\"], \"note\": \"Diagnostic eye exam, including diabetic eye exams. The quote keeps the page's spacing between the two columns of the row.\"}]\n```\n\nI left out the routine eye exam visit-limit fact. The page says \"one exam every year\" only in words, so no quote can show the number 1.",
+ "usage": {
+  "input_tokens": 2930,
+  "output_tokens": 926,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

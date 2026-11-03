@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-f961eb582c1534d5.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 112 Wellcare Spendables® row: $20 is preloaded monthly on the card. It can be spent on OTC items, so it is a shared allowance with that pool name, per month, with no network restriction.\"}]\n```",
+ "usage": {
+  "input_tokens": 2203,
+  "output_tokens": 201,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

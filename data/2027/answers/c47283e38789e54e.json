@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-1ed5fdb720cabd03.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 103, routine eye exam row: $80 copay out of network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 103, routine eyewear row: in network, 1 pair of eyeglasses or contacts with a retail value of up to $200, every 2 years.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 102, eyewear after cataract surgery (Medicare-covered): 30% coinsurance out of network.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 103, routine eyewear row: $0 copayment in network for 1 pair every 2 years.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 103: 1 in- or out-of-network routine eye exam every year.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 102, eyewear after cataract surgery (Medicare-covered): $0 copayment in network.\"},\n{\"id\": 6, \"ok\": false, \"reason\": \"Page 103: the 90% coinsurance applies only to the first $200 of retail value, and the member pays all costs over $200. The item leaves out that limit, which misstates the cost.\"}]\n```",
+ "usage": {
+  "input_tokens": 4372,
+  "output_tokens": 927,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

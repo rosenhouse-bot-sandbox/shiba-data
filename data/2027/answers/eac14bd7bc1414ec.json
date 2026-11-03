@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "b4be2a8a3e57d86a.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-427-2\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 12, \"quotes\": [\"Medicare-covered diabetic eye          $0 copay\"]},\n{\"plan_id\": \"H5216-427-2\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 12, \"quotes\": [\"Medicare-covered diabetic eye          $0 copay                                $0 copay\"]},\n{\"plan_id\": \"H5216-427-2\", \"benefit\": \"vision\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$45\", \"page\": 13, \"quotes\": [\"Medicare-covered vision                $45 copay\"]},\n{\"plan_id\": \"H5216-427-2\", \"benefit\": \"vision\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"35%\", \"page\": 13, \"quotes\": [\"Medicare-covered vision                $45 copay                               35% of the cost\"]}]\n```",
+ "usage": {
+  "input_tokens": 4692,
+  "output_tokens": 1279,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

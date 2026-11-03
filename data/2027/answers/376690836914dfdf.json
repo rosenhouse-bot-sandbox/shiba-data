@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "cd39f32cdbd73e52.md",
+ "reply": "```json\n[{\"plan_id\": \"H2406-042-0\", \"benefit\": \"hearing.exam\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 4,\n  \"quotes\": [\"Exam to diagnose $0 copay\"], \"note\": \"Diagnostic exam to diagnose and treat hearing and balance issues.\"},\n {\"plan_id\": \"H2406-042-0\", \"benefit\": \"hearing.exam\", \"setting\": \"any\", \"network\": \"out\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$80\", \"page\": 4,\n  \"quotes\": [\"Exam to diagnose $0 copay                         $80 copay\"], \"note\": \"Diagnostic exam to diagnose and treat hearing and balance issues. The quote is the whole table row, which includes both the in-network and out-of-network cost. It is used because the out-of-network $80 cost does not appear alone anywhere else on the page.\"},\n {\"plan_id\": \"H2406-042-0\", \"benefit\": \"hearing.exam\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 4,\n  \"quotes\": [\"$0 copay for a routine\"]},\n {\"plan_id\": \"H2406-042-0\", \"benefit\": \"hearing.exam\", \"setting\": \"any\", \"network\": \"out\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$80\", \"page\": 4,\n  \"quotes\": [\"$80 copay for a routine\"]},\n {\"plan_id\": \"H2406-042-0\", \"benefit\": \"hearing.aids\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$700\", \"unit\": \"for 2 hearing aids\", \"limit\": \"every year\", \"page\": 4,\n  \"quotes\": [\"$700 allowance for 2\", \"hearing aids every year\"]}]\n```",
+ "usage": {
+  "input_tokens": 4119,
+  "output_tokens": 2645,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

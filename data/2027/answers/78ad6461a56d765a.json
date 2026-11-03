@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-0050f865534f41bb.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 78 in-network hearing aid row: $575 per Level 1 Aid OR $750 per Level 2 Aid. These are aid levels combined as one fact.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 97 hearing supplemental exclusions: any fees for any services by a non-network hearing aid provider are excluded. The page 78 benefit is in-network only.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 78 routine hearing exam (1 per year): $0 in network under the mandatory supplemental hearing benefit.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 78 states the routine hearing exam is limited to 1 per year.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 78: up to 2 prescription hearing aids every year (1 per ear per year).\"}]\n```",
+ "usage": {
+  "input_tokens": 3984,
+  "output_tokens": 669,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

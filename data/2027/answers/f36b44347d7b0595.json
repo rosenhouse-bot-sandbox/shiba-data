@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-a744eaa24232bb11.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 77: Eyewear (Post Cataract Surgery) is a Medicare-covered benefit with a $0 copayment for All Places of Treatment, in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 82: the supplemental Routine Eye Exam including refraction, 1 per calendar year, costs $0 in network.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 83: the supplemental Eyewear Benefit is limited to 1 per calendar year at a Humana Medicare Insight Network provider.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 82: the supplemental Routine Eye Exam is limited to 1 per calendar year.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 76: the Medicare-covered Diabetic Eye Exam has a $0 copayment for All Places of Treatment, in network.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 83: the member pays any retail amount over $250 toward eyewear from a PLUS** Provider, 1 per calendar year, so the plan pays up to $250.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 83: the member pays any retail amount over $150 toward eyewear at a Humana Medicare Insight Network provider, 1 per calendar year, so the plan pays up to $150.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 90: the vision supplemental benefit exclusions list any benefits received at a non-network optical provider.\"}]\n```",
+ "usage": {
+  "input_tokens": 7271,
+  "output_tokens": 940,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

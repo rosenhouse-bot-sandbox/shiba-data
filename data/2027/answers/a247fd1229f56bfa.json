@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "f961eb582c1534d5.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-010-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$30\", \"unit\": \"per visit\", \"page\": 108, \"quotes\": [\"$30 copay for all other eye\"]},\n{\"plan_id\": \"H5439-010-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"condition\": \"people who are at high risk for glaucoma\", \"limit\": \"one each year\", \"page\": 108, \"quotes\": [\"$0 copay for a Medicare-covered glaucoma screening.\", \"For people who are at high risk for glaucoma, we cover one\"], \"note\": \"Glaucoma screening; condition added to tell it apart from the $30 eye-disease exam copay\"}]\n```",
+ "usage": {
+  "input_tokens": 11880,
+  "output_tokens": 958,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

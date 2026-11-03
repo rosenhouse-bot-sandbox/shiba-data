@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-4a3883a20d17f740.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 22 Wellcare Spendables® row says $20 is preloaded monthly on the card to spend on OTC items, Dental, Vision and Hearing. That is a shared allowance naming OTC, so it is an allowance of $20 per month with that pool.\"}]\n```",
+ "usage": {
+  "input_tokens": 2119,
+  "output_tokens": 236,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

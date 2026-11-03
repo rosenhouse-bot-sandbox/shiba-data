@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-0bd982dc589e8cba.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 61 OTC Allowance row says members get $50 quarterly on the Humana Spending Account Card for OTC items. This matches a supplemental in-network allowance of $50 per quarter. The card is described only for OTC, so no pool applies.\"}]\n```",
+ "usage": {
+  "input_tokens": 2574,
+  "output_tokens": 408,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

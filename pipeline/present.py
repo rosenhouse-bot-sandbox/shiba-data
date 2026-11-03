@@ -291,6 +291,14 @@ def dot(*leaves):
     return rule
 
 
+def packages(organization, found):
+    """Shows ● when a member may buy an optional package. A document that says there is none cites a blank."""
+    mine = [f for f in found if f["network"] in ("in", "any") and f["covered_by"] == "supplemental"]
+    sold = [f for f in mine if f["cost_kind"] == "premium" and f["package"]]
+    none = [f for f in mine if facts.covers(f["benefit"], "packages")]
+    return [("●", top(sold))] if sold else [("", top(none) if none else [])]
+
+
 def plan_facts(data):
     by_plan = collections.defaultdict(list)
     for name in ("machine/document_facts.csv", "generated/pbp_facts.csv"):
@@ -306,7 +314,9 @@ COLUMNS = {"L_xray_imaging": xray_imaging, "AB_ambulance": ambulance, "I_outpati
            "M_part_b_drugs": part_b_drugs, "O_medical_deductible": medical_deductible,
            "S_acupuncture": dot("extras.acupuncture"), "T_chiropractic": dot("extras.chiropractic"),
            "V_massage": dot("extras.massage"), "X_transportation": dot("extras.transportation"),
-           "R_dental": dot("dental.preventive", "dental.comprehensive"), "U_naturopath": dot("extras.naturopathy")}
+           "R_dental": dot("dental.preventive", "dental.comprehensive"), "U_naturopath": dot("extras.naturopathy"),
+           "P_vision": dot("vision.exam", "vision.eyewear"), "Q_hearing": dot("hearing.exam", "hearing.aids"),
+           "W_fitness": dot("fitness"), "Y_otc": dot("otc"), "AA_opt_packages": packages}
 
 
 def lines(data, column):
@@ -332,6 +342,7 @@ HELD = {
     ("M_part_b_drugs", "H9003-006-0"): "readers missed the 20% for Part B drugs",
     ("M_part_b_drugs", "H9003-009-0"): "readers missed the 20% for Part B drugs",
     ("O_medical_deductible", "H1036-317-0"): "readers missed that the $283 is Original Medicare's Part B deductible",
+    ("Q_hearing", "H9003-009-0"): "readers missed the $0 routine hearing exam for Value plan members",
 }
 
 

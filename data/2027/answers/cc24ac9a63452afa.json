@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-05d56d5f782708e7.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 8 Fitness benefit row: at-home fitness kits are available, and you may order one fitness kit per year through SilverSneakers. No separate kit cost is stated, so 'covered' fits.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 8 Fitness benefit row: Basic SilverSneakers fitness membership has a $0 copay for H2056-003.\"}]\n```",
+ "usage": {
+  "input_tokens": 2193,
+  "output_tokens": 353,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

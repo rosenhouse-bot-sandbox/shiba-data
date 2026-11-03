@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "2947683a555fc83c.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-323-0\", \"benefit\": \"vision\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$50\", \"page\": 9, \"quotes\": [\"Medicare-covered vision services\", \"$50 copay\"]}]\n```",
+ "usage": {
+  "input_tokens": 3020,
+  "output_tokens": 612,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

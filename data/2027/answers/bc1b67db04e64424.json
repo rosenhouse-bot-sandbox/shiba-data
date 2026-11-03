@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-808ccc78793ded84.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 79, out-of-network section: 'Hearing services covered by Medicare' is a $40 copay.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 79, out-of-network section: balance exams, which are Medicare-covered, are a $45 copay.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 80 continues the out-of-network column: hearing aid fitting is a $35 copay. This is a supplemental fitting, which counts under hearing.exam.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 79: 1 routine hearing exam each year from in- or out-of-network providers.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 79, in-network: $399 per ear for Advanced and $699 per ear for Premium hearing aids.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 80, out-of-network: 90% coinsurance per ear per hearing aid.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 79, out-of-network: routine hearing exam is a $35 copay. The same page limits it to 1 exam each year.\"}]\n```",
+ "usage": {
+  "input_tokens": 4066,
+  "output_tokens": 893,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

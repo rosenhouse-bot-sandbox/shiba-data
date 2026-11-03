@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-b4be2a8a3e57d86a.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 18 SilverSneakers fitness program row: out-of-network members pay 95% coinsurance for out-of-network fitness centers.\"}, {\"id\": 1, \"ok\": true, \"reason\": \"Page 18 SilverSneakers fitness program row: $0 copayment for SilverSneakers, with no network stated, so in network applies.\"}]\n```",
+ "usage": {
+  "input_tokens": 2068,
+  "output_tokens": 139,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
