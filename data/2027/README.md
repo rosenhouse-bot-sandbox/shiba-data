@@ -44,9 +44,9 @@ Web search did not index any 2027 plan document. The documents were found as fol
 | Carriers | How |
 |---|---|
 | UHC/AARP (7 plans) | Plan detail pages on aarpmedicareplans.com, rendered in headless Chromium. These pages label each link SB or EOC. They also list Platinum Dental rider PDFs. |
-| Wellcare (5), ATRIO (2) | The carrier's 2027 plan-materials page. |
+| Wellcare (5), ATRIO (2), AgeRight (1) | `pipeline/find_on_carrier_pages.py` reads each carrier's plan-materials page, rendered in headless Chromium. |
 | Humana (8), Devoted (7), Kaiser (3) | The URL templates in `pipeline/find_docs.py`. The Links sheet has the same URLs, so `documents.csv` credits it. |
-| Aetna (2), Regence (4), AgeRight (1) | Appendix A URLs. Their sites hide the links behind scripts or show none. |
+| Aetna (2), Regence (4) | Appendix A URLs. Their sites hide the links behind scripts or show none. |
 
 Two UHC EOCs were re-issued on 2026-10-14 (`UHOR27HP0418842_001`, `AAOR27LP0418704_001`). Their dollar and percent amounts did not change.
 
