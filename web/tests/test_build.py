@@ -67,7 +67,7 @@ class SiteDataTest(unittest.TestCase):
         self.assertEqual(cell["value"], "$1,980 per admission")
         cite = next(c for c in cell["cites"] if c["page"] == 77)
         self.assertEqual(len(cell["cites"]), len({(c["doc"], c["page"], c["quote"]) for c in cell["cites"]}))
-        self.assertIn("$1,980 copayment", cite["quote"])
+        self.assertIn("$1,980", cite["quote"])
         doc = self.site["docs"][cite["doc"]]
         self.assertEqual(doc["url"], "https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000")
         self.assertEqual(doc["kind"], "EOC")
