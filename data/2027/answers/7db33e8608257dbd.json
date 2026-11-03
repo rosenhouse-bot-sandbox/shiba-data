@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-557f08e61a7e8f42.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 54 Ambulance services row: the Standard plan pays $300 per one-way trip for fixed wing, rotary wing and ground ambulance.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"H9003-009-0 is the Value plan, but the quote gives the Standard plan's $300. Page 55 shows $350 for Value plan members.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 55: all plans cover licensed ambulance services anywhere in the world without prior authorization.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 55: worldwide licensed ambulance coverage applies to all plans, including Value.\"},\n{\"id\": 4, \"ok\": false, \"reason\": \"H9003-001-0 is the Enhanced plan, which pays $250 per one-way trip. $300 is the Standard plan amount.\"},\n{\"id\": 5, \"ok\": false, \"reason\": \"H9003-001-0 is the Enhanced plan, which pays $250. $350 is the Value plan amount.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 55: $350 per one-way trip for Value plan members. This is separate from the Value Lane plan's $400.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 54 Ambulance services row: $250 per one-way trip for Enhanced plan members.\"},\n{\"id\": 8, \"ok\": true, \"reason\": \"Page 55: worldwide licensed ambulance coverage applies to all plans, including Standard.\"}]\n```",
+ "usage": {
+  "input_tokens": 3903,
+  "output_tokens": 733,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

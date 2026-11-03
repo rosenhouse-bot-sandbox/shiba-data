@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-da2974c756f3eedc.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 8 Ambulance Services row, for this single-plan document: Ground Ambulance is 50% coinsurance per one-way trip, in network and Medicare-covered.\"}, {\"id\": 1, \"ok\": true, \"reason\": \"Page 8 Ambulance Services row: Air Ambulance is 50% coinsurance per one-way trip, in network and Medicare-covered.\"}]\n```",
+ "usage": {
+  "input_tokens": 2412,
+  "output_tokens": 324,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

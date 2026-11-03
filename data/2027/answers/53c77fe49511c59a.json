@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "64e05773e847b56e.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-153-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per date of service\",\n  \"condition\": \"Emergency Ambulance\", \"page\": 46,\n  \"quotes\": [\"In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance\"]},\n {\"plan_id\": \"H1036-153-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\",\n  \"condition\": \"Emergency Ambulance\", \"page\": 46,\n  \"quotes\": [\"In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance\"]},\n {\"plan_id\": \"H1036-153-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per date of service\",\n  \"condition\": \"Non-Emergency Ambulance\", \"page\": 46,\n  \"quotes\": [\"Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance\"]},\n {\"plan_id\": \"H1036-153-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\",\n  \"condition\": \"Non-Emergency Ambulance\", \"page\": 46,\n  \"quotes\": [\"Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance\"]},\n {\"plan_id\": \"H1036-153-0\", \"benefit\": \"ambulance\", \"setting\": \"outside_us\", \"network\": \"out\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per date of service\",\n  \"condition\": \"Emergency Ambulance\", \"page\": 46,\n  \"quotes\": [\"Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance\"],\n  \"note\": \"Worldwide emergency coverage is described as a supplemental benefit on page 36.\"}]\n```",
+ "usage": {
+  "input_tokens": 10272,
+  "output_tokens": 2481,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

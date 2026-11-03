@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "bee1858e7e963c62.md",
+ "reply": "```json\n[{\"plan_id\": \"H7006-018-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$250\", \"unit\": \"per one-way trip\", \"limit\": \"\", \"page\": 47, \"quotes\": [\"$250 copay for each Medicare-covered Ground Ambulance service.\", \"Cost sharing applies to each one-way trip.\"], \"note\": \"\"},\n{\"plan_id\": \"H7006-018-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$250\", \"unit\": \"per one-way trip\", \"limit\": \"\", \"page\": 47, \"quotes\": [\"$250 copay for each Medicare-covered Air Ambulance service.\", \"Cost sharing applies to each one-way trip.\"], \"note\": \"\"},\n{\"plan_id\": \"H7006-018-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$250\", \"unit\": \"per one-way trip\", \"limit\": \"\", \"page\": 48, \"quotes\": [\"$250 copay for each Medicare-covered Ground Ambulance service.\", \"Cost sharing applies to each one-way trip.\"], \"note\": \"\"},\n{\"plan_id\": \"H7006-018-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$250\", \"unit\": \"per one-way trip\", \"limit\": \"\", \"page\": 48, \"quotes\": [\"$250 copay for each Medicare-covered Air Ambulance service.\", \"Cost sharing applies to each one-way trip.\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 8075,
+  "output_tokens": 1106,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-2af2a9f1fd104b7f.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 14 Ambulance, Ground row: the out-of-network column shows a $325 copay per date of service.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 8 Worldwide Coverage: Emergency ambulance is a $325 copay per date of service, shown in the out-of-network column. This is a supplemental benefit outside the U.S.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 14 Ambulance, Ground row: the in-network column shows a $325 copay per date of service.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 14 Ambulance, Air row: the in-network column shows 20% of the cost.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 14 Ambulance, Air row: the out-of-network column shows 20% of the cost.\"}]\n```",
+ "usage": {
+  "input_tokens": 3322,
+  "output_tokens": 457,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "37b0122461ea99ed.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-011-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$350\", \"unit\": \"per one-way trip\", \"limit\": \"\", \"page\": 54, \"quotes\": [\"$350 copay per one-way trip for Medicare-covered ground ambulance services.\"], \"note\": \"\"},\n {\"plan_id\": \"H5439-011-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$350\", \"unit\": \"per one-way trip\", \"limit\": \"\", \"page\": 55, \"quotes\": [\"$350 copay per one-way trip for Medicare-covered air ambulance services.\"], \"note\": \"\"},\n {\"plan_id\": \"H5439-011-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$350\", \"unit\": \"per one-way trip\", \"limit\": \"\", \"page\": 55, \"quotes\": [\"$350 copay per one-way trip for Medicare-covered ground ambulance services.\"], \"note\": \"\"},\n {\"plan_id\": \"H5439-011-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$350\", \"unit\": \"per one-way trip\", \"limit\": \"\", \"page\": 55, \"quotes\": [\"$350 copay per one way trip for Medicare-covered air ambulance services.\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 10526,
+  "output_tokens": 1037,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

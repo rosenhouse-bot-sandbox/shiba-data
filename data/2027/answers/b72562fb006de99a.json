@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "8865a3a5b2f4fcad.md",
+ "reply": "```json\n[{\"plan_id\": \"H6815-038-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$310\", \"page\": 11,\n  \"quotes\": [\"Ground Ambulance $310 copay\"]},\n {\"plan_id\": \"H6815-038-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$310\", \"page\": 11,\n  \"quotes\": [\"Air Ambulance $310 copay\"]}]\n```",
+ "usage": {
+  "input_tokens": 3159,
+  "output_tokens": 485,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

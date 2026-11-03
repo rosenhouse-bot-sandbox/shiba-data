@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-4ec81cd0d2695486.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 52 Ambulance services row: 20% coinsurance for each Medicare-covered Air Ambulance service, in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 52 Ambulance services row: $250 copayment for each Medicare-covered Ground Ambulance service, in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2198,
+  "output_tokens": 131,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-8acbaf3993261220.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5 Ambulance row: $400 copay for ground ambulance, Medicare-covered, in network.\"},\n {\"id\": 1, \"ok\": true, \"reason\": \"Page 5 Ambulance row: $400 copay for air ambulance, Medicare-covered, in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2276,
+  "output_tokens": 229,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-49912316cc55d9c5.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 54 ambulance row: $0 copay for facility-to-facility transfers between hospitals via ground ambulance.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 55 Worldwide Ambulance Services: Air Ambulance 20% coinsurance per one-way trip outside the U.S.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"Page 55: the $25,000 lifetime limit is shared by worldwide emergency, urgent care and ambulance. The item gives no pool, so it reads as an ambulance-only cap.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 54 ambulance row: Air Ambulance 20% coinsurance per one-way trip.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 54 ambulance row: Ground Ambulance $315 copay per one-way trip.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 54 Worldwide Ambulance Services: Ground Ambulance $315 copay per one-way trip outside the U.S.\"}]\n```",
+ "usage": {
+  "input_tokens": 3632,
+  "output_tokens": 796,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

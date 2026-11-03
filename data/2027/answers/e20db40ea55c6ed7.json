@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-034e045a83e5b49d.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 6 Ambulance section: the Air ambulance row shows a $300 in-network copay per each one-way Medicare-covered transport.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 6 Ambulance section: the Ground ambulance row shows a $300 in-network copay per each one-way Medicare-covered transport.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 6 Ambulance section: the Air ambulance row shows a $300 out-of-network copay per each one-way Medicare-covered transport.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 6 Ambulance section: the Ground ambulance row shows a $300 out-of-network copay per each one-way Medicare-covered transport.\"},\n{\"id\": 4, \"ok\": false, \"reason\": \"Page 6 shows $300 out of network for worldwide ground or air ambulance. Original Medicare generally does not cover care outside the U.S., so this is likely a supplemental benefit. The section header's 'Medicare-covered' wording leaves covered_by 'medicare' in doubt.\"},\n{\"id\": 5, \"ok\": false, \"reason\": \"Page 6 shows $300 in network for worldwide ground or air ambulance. Worldwide coverage is likely supplemental rather than Medicare-covered, so covered_by 'medicare' is doubtful.\"}]\n```",
+ "usage": {
+  "input_tokens": 2676,
+  "output_tokens": 827,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "e41fce2e65cf35f2.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-428-2\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 15,\n  \"quotes\": [\"Air 20% of the cost\"]},\n {\"plan_id\": \"H5216-428-2\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"out\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 15,\n  \"quotes\": [\"Air 20% of the cost\"]},\n {\"plan_id\": \"H5216-428-2\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per date of service\", \"page\": 15,\n  \"quotes\": [\"Ground $325 copay per date of service\"]},\n {\"plan_id\": \"H5216-428-2\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"out\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per date of service\", \"page\": 15,\n  \"quotes\": [\"Ground $325 copay per date of service\"]},\n {\"plan_id\": \"H5216-428-2\", \"benefit\": \"ambulance\", \"setting\": \"outside_us\", \"network\": \"out\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per date of service\", \"page\": 8,\n  \"quotes\": [\"Emergency ambulance $325 copay per date of service\"],\n  \"note\": \"Worldwide coverage cost is shown only in the out-of-network column.\"}]\n```",
+ "usage": {
+  "input_tokens": 3633,
+  "output_tokens": 1201,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-05d56d5f782708e7.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 3 row for emergency and urgent care including emergency ambulance outside the U.S.: $295 copay for ambulance.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Page 3: the $250,000 maximum is a combined cap for emergency care, urgent care and emergency ambulance outside the U.S. The item lists it as an ambulance-only maximum and leaves the shared pool blank.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 6 Ambulance row (ground or air, one-way trip): $295 copay for ground ambulance services.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 6 Ambulance row (ground or air, one-way trip): 20% coinsurance for air ambulance services.\"}]\n```",
+ "usage": {
+  "input_tokens": 3114,
+  "output_tokens": 758,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

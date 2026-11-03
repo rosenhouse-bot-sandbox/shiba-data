@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-7e45f25357b792a7.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 57 Ambulance Services row shows Ground Ambulance at a $330 copay per one-way trip, in network and Medicare-covered.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"The page 58 Air Ambulance row shows 20% coinsurance per one-way trip for the Medicare-covered benefit.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 57 says you pay a $0 copay for facility-to-facility transfers between hospitals via ground ambulance. The condition matches.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"The page 58 Worldwide Ambulance Services section, a supplemental benefit for care outside the U.S., lists Air Ambulance at 20% coinsurance per one-way trip.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"The page 58 Worldwide Ambulance Services section lists Ground Ambulance at a $330 copay per one-way trip outside the U.S.\"},\n{\"id\": 5, \"ok\": false, \"reason\": \"Page 59 says the $25,000 lifetime limit is one combined limit for worldwide emergency, urgent care and ambulance services. The item presents it as an ambulance-only maximum with no pool, which could mislead a counselor.\"}]\n```",
+ "usage": {
+  "input_tokens": 4414,
+  "output_tokens": 861,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
