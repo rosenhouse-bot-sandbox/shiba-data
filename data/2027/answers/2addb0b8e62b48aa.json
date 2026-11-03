@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-8acbaf3993261220.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 7 'OTC and food credit' row: $40 credit every month for OTC products, plus healthy food for qualifying members. Per the rules, this counts as an OTC allowance for every member, with pool 'OTC and food credit' and limit per month.\"}]\n```",
+ "usage": {
+  "input_tokens": 2251,
+  "output_tokens": 110,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

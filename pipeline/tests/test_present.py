@@ -480,6 +480,20 @@ class DotTest(unittest.TestCase):
         self.assertEqual(column(dental, medicare), [("", [medicare])])
 
 
+class PackagesTest(unittest.TestCase):
+    def test_a_package_premium_gets_a_dot(self):
+        for benefit in ("packages", "dental"):
+            sold = extra(benefit, cost_kind="premium", amount="$54", package="Advantage Plus")
+            self.assertEqual(column(present.packages, sold, extra("packages", cost_kind="not_covered", source="SB")),
+                             [("●", [sold])], benefit)
+
+    def test_none_for_sale_cites_a_blank(self):
+        none = extra("packages", cost_kind="not_covered")
+        self.assertEqual(column(present.packages, none, extra("dental", cost_kind="premium", amount="$5")), [("", [none])])
+        self.assertEqual(column(present.packages, extra("packages", cost_kind="premium", amount="$54", package="Plus",
+                                                        network="out")), [("", [])])
+
+
 def presented_cells(data, column):
     return {p: [value for value, _ in got] for p, got in present.lines(data, column).items()}
 

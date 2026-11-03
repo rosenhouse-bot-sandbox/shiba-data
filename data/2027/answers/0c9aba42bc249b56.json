@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "d4758cd5b94a2266.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2406-070-0\", \"benefit\": \"hearing.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"Exam to diagnose and treat hearing and balance issues\", \"$0 copay $0 copay for a routine\"], \"note\": \"This is the Medicare-covered exam to diagnose and treat hearing and balance issues. The second quote reads the in-network column straight down across this row and the next one, because this row's cell is only \\\"$0 copay\\\", which repeats on the page. The out-of-network $90 copay is left out.\"},\n {\"plan_id\": \"H2406-070-0\", \"benefit\": \"hearing.aids\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"responsible for 90% of the\"], \"note\": \"The page says an out-of-network member is \\\"responsible for 90% of the allowance amount\\\". It is unclear whether this is what the member pays or a reduced allowance, so it is recorded only as covered.\"}]\n```",
+ "usage": {
+  "input_tokens": 4396,
+  "output_tokens": 1914,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

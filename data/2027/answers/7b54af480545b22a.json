@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "dca4e04d7b6dc26b.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H7006-021-0\", \"benefit\": \"vision.eyewear\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"80%\", \"page\": 90, \"quotes\": [\"Out-of-Network 80% coinsurance In-Network $0 copay up to the allowance amount\"], \"note\": \"Out-of-network 80% coinsurance applies to both contact lenses and eyeglasses (lenses and frames); combined into one fact.\"}]\n```",
+ "usage": {
+  "input_tokens": 5397,
+  "output_tokens": 633,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

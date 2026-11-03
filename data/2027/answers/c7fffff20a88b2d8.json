@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "2c101bd739d45a62.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H2923-028-3\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 7,\n   \"quotes\": [\"Routine Eye Exam: $0 copay — 1 visit per year\"]},\n  {\"plan_id\": \"H2923-028-3\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"1\", \"limit\": \"per year\", \"page\": 7,\n   \"quotes\": [\"Routine Eye Exam: $0 copay — 1 visit per year\"]},\n  {\"plan_id\": \"H2923-028-3\", \"benefit\": \"vision.eyewear\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"max\", \"amount\": \"$200\", \"limit\": \"per year\", \"page\": 7,\n   \"quotes\": [\"Up to $200 each year for eyeglasses and/or contacts\"]},\n  {\"plan_id\": \"H2923-028-3\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$50\", \"page\": 7,\n   \"quotes\": [\"Medicare-Covered Diagnostic Eye Exam: $50 copay\"]},\n  {\"plan_id\": \"H2923-028-3\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 7,\n   \"quotes\": [\"Diabetic Retinopathy Exam: $0 copay\"], \"note\": \"Diabetic retinopathy exam\"}\n]\n```",
+ "usage": {
+  "input_tokens": 2714,
+  "output_tokens": 1034,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

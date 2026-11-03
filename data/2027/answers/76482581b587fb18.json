@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "a4bc20077fb4a2cf.md",
+ "reply": "```json\n[{\"plan_id\": \"H3817-011-1\", \"benefit\": \"fitness\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"page\": 46, \"quotes\": [\"The Silver&Fit® Healthy Aging and Exercise Program\", \"There is no coinsurance, copayment, or deductible for the health and wellness education programs.\"], \"note\": \"The in-network row says there is no coinsurance, copayment or deductible, which suggests a $0 copay. It is recorded as covered because the quotes state no dollar amount.\"},\n {\"plan_id\": \"H3817-011-1\", \"benefit\": \"fitness\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"80%\", \"page\": 46, \"quotes\": [\"80% coinsurance (based on\"], \"note\": \"The full row reads 80% coinsurance based on billed charges. Page 74 describes out-of-network fitness facility reimbursement after coinsurance.\"}]\n```",
+ "usage": {
+  "input_tokens": 5359,
+  "output_tokens": 1223,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

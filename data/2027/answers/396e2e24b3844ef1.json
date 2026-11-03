@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "5e11cf20cec995f3.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-048-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 94, \"quotes\": [\"Eye re raction is part o the routine eye exam     $0 copayment\"], \"note\": \"\"},\n{\"plan_id\": \"H3805-048-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 93, \"quotes\": [\"$0 copayment or each Medicare-covered glaucoma screening.\", \"$0 copayment or Medicare-covered eye exams to evaluate or eye disease.\"], \"note\": \"Covers Medicare-covered glaucoma screening and eye exams to evaluate for eye disease\"}]\n```",
+ "usage": {
+  "input_tokens": 6261,
+  "output_tokens": 1349,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

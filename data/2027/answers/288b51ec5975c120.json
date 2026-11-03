@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "1ed5fdb720cabd03.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2406-042-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 102, \"quotes\": [\"$0 copayment or each Medicare- covered exam.\", \"$0 copayment or each Medicare- covered glaucoma screening.\", \"$0 copayment or Medicare-covered eye exams to evaluate or eye disease.\"], \"note\": \"Covers Medicare-covered eye exams for eye diseases and injuries, the yearly glaucoma screening for people at high risk, and eye exams for people with diabetes or signs of eye disease\"},\n {\"plan_id\": \"H2406-042-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$80\", \"page\": 102, \"quotes\": [\"$80 copayment or each Medicare- covered exam.\", \"$80 copayment or each Medicare- covered glaucoma screening.\", \"$80 copayment or Medicare-covered eye exams to evaluate or eye disease.\"], \"note\": \"Covers Medicare-covered eye exams for eye diseases and injuries, the yearly glaucoma screening for people at high risk, and eye exams for people with diabetes or signs of eye disease\"}]\n```",
+ "usage": {
+  "input_tokens": 7589,
+  "output_tokens": 803,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

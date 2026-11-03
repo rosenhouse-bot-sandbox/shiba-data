@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "05d56d5f782708e7.md",
+ "reply": "```json\n[{\"plan_id\": \"H2056-003-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 5,\n  \"quotes\": [\"Diagnostic eye exam (includes diabetic $0 copay\"], \"note\": \"Diagnostic eye exam, includes diabetic eye exams\"},\n {\"plan_id\": \"H2056-003-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 5,\n  \"quotes\": [\"Glaucoma screening $0 copay\"], \"note\": \"Glaucoma screening\"},\n {\"plan_id\": \"H2056-003-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"limit\": \"one exam every year\", \"page\": 5,\n  \"quotes\": [\"Routine eye exam (one exam every year) $0 copay with an EyeMed network provider\"]},\n {\"plan_id\": \"H2056-003-0\", \"benefit\": \"vision.eyewear\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$100\", \"limit\": \"per year\", \"page\": 5,\n  \"quotes\": [\"You get an annual benefit amount (allowance) of $100\"]}]\n```",
+ "usage": {
+  "input_tokens": 2476,
+  "output_tokens": 1272,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

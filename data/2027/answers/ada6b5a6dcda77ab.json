@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-7ac7300e6ca40ac7.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 80 OTC credit row says 'Monthly credit is $40', limited to in-network locations. It is a supplemental OTC allowance for every member.\"}]\n```",
+ "usage": {
+  "input_tokens": 2512,
+  "output_tokens": 303,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

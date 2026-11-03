@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "f73d19eeaaf3a08a.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-428-2\", \"benefit\": \"fitness\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 77, \"quotes\": [\"In-Network: $0 copayment\"], \"note\": \"SilverSneakers fitness program. The out-of-network terms are left out: members pay the full cost and Humana reimburses 5% of the allowed amount, which does not fit a cost kind cleanly.\"}]\n```",
+ "usage": {
+  "input_tokens": 3032,
+  "output_tokens": 469,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

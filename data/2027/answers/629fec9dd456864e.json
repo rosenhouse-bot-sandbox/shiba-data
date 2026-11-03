@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-e306f120395b6260.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 76 OTC credit row, in-network column: 'Quarterly credit is $50', loaded each quarter. This is a supplemental allowance of $50 per quarter.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 76 OTC credit row, out-of-network column: 'You pay 90% coinsurance of the approved purchase amount' when buying from an out-of-network store or provider.\"}]\n```",
+ "usage": {
+  "input_tokens": 2729,
+  "output_tokens": 367,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

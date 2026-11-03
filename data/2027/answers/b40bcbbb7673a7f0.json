@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "808ccc78793ded84.md",
+ "reply": "```json\n[{\"plan_id\": \"H7199-002-0\", \"benefit\": \"fitness\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 73, \"quotes\": [\"$0 membership\"], \"note\": \"SilverSneakers membership\"},\n{\"plan_id\": \"H7199-002-0\", \"benefit\": \"fitness\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"90%\", \"unit\": \"\", \"limit\": \"\", \"page\": 73, \"quotes\": [\"90% coinsurance\"], \"note\": \"Non-participating fitness facility\"},\n{\"plan_id\": \"H7199-002-0\", \"benefit\": \"fitness\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$150\", \"unit\": \"\", \"limit\": \"per year\", \"pool\": \"Wellness Bucks\", \"page\": 74, \"quotes\": [\"Devoted Health will reimburse you up to $150 per year for participation in or purchase of one or more of the following\"], \"note\": \"Reimbursement covers fitness classes, home fitness equipment and health club membership\"}]\n```",
+ "usage": {
+  "input_tokens": 6160,
+  "output_tokens": 1612,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

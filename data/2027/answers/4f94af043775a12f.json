@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-5e11cf20cec995f3.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 92 Vision services row: $0 copayment for each Medicare-covered exam by an ophthalmologist or optometrist, in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 93: $0 copayment for one pair of Medicare-covered standard glasses or contact lenses after each cataract surgery.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 94 routine eye exam row: the plan covers 1 routine eye exam every year.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 94 routine eyewear row: eyewear with a retail value of up to $150 every 2 years; the member pays costs over $150.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 94 routine eyewear row: $0 copayment for 1 pair of eyeglasses or contact lenses every 2 years, in network (UnitedHealthcare Vision).\"}]\n```",
+ "usage": {
+  "input_tokens": 4372,
+  "output_tokens": 616,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

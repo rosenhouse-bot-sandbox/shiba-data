@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-7e45f25357b792a7.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 97 Over-the-counter allowance row: $106 per quarter allowance for plan-approved OTC products, a supplemental benefit for all members, in network at participating CVS stores or by home delivery.\"}]\n```",
+ "usage": {
+  "input_tokens": 2380,
+  "output_tokens": 95,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

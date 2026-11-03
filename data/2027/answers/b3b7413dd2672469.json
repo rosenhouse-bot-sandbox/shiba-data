@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-dca4e04d7b6dc26b.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The Fitness program row on page 50 shows a $100 allowance every three months, paid through reimbursement for gym membership and fitness class fees. This is a supplemental fitness allowance with no network stated, so it defaults to in network. It is not a shared pool.\"}]\n```",
+ "usage": {
+  "input_tokens": 2063,
+  "output_tokens": 345,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

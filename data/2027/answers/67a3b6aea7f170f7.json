@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "f73d19eeaaf3a08a.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-428-2\", \"benefit\": \"packages\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"premium\", \"amount\": \"$50.90\", \"unit\": \"per month\", \"limit\": \"\", \"package\": \"MyOption DEN972\", \"page\": 15, \"quotes\": [\"MyOption DEN972: $50.90 additional monthly premium\"]}]\n```",
+ "usage": {
+  "input_tokens": 8733,
+  "output_tokens": 462,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

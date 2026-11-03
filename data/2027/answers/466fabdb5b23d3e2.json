@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-bee1858e7e963c62.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 99 contact lens and eyeglasses rows: in network, $0 copay up to the allowance amount.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 98 cataract eyewear row: out of network, 50% coinsurance for each Medicare-covered service.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 98 cataract eyewear row: in network, $0 copay for each Medicare-covered service.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 98 routine eye exam row: limited to 1 visit every year.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 98 routine eye exam row: in network $0 copay, limited to 1 visit every year. The second quote is from the Medicare rows, but the page supports the fact.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 99 contact lens and eyeglasses rows: out of network, 80% coinsurance.\"},\n{\"id\": 6, \"ok\": false, \"reason\": \"Page 98 glaucoma screening is only for people at high risk for glaucoma, and the item leaves condition blank.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Top of page 99 continues the routine eye exam row from page 98: out of network, 80% coinsurance.\"},\n{\"id\": 8, \"ok\": true, \"reason\": \"Page 99: $150 allowance every year for all additional eyewear, used in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 4202,
+  "output_tokens": 1355,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

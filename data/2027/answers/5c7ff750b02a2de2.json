@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-e41fce2e65cf35f2.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 13 'Medicare-covered vision services' row: $50 copay in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 14 in-network column: $100 maximum benefit coverage amount per year at PLUS Provider for contact lenses or eyeglasses (lenses and frames), offered as an alternative ('OR') to the $50 maximum.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 13 'Eyewear (post cataract surgery)' row: $0 copay in network. This is Medicare-covered eyewear.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 13 'Eyewear (post cataract surgery)' row: out-of-network column shows 50% of the cost.\"}]\n```",
+ "usage": {
+  "input_tokens": 3820,
+  "output_tokens": 549,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

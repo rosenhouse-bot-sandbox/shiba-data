@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-77d83ba821336370.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 97 OTC credit row, in-network column: 'Monthly credit is $196'. It is a monthly OTC allowance for every member, with healthy food added only for SSBCI-qualifying members.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 97 OTC credit row, out-of-network column: you pay 90% coinsurance of the approved purchase amount at an out-of-network store or provider.\"}]\n```",
+ "usage": {
+  "input_tokens": 2669,
+  "output_tokens": 381,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
