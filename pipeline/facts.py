@@ -29,7 +29,7 @@ BENEFITS = {
 # Regexes that find the pages about each benefit group
 FIND = {"imaging": [r"x.ray", r"radiolog", r"\bMRI\b", r"\bCT\b", r"\bPET\b", r"ultrasound", r"mammogra",
                     r"nuclear medicine", r"imaging"],
-        "ambulance": [r"ambulance"]}
+        "ambulance": [r"ambulance", r"outside (?:of )?the United States", r"worldwide", r"anywhere in the world"]}
 SETTINGS = {
     "any": "The document names no setting, or one cost covers every setting",
     "office": "A physician's office, of any kind",
@@ -38,7 +38,8 @@ SETTINGS = {
     "freestanding": "A freestanding facility, such as a radiology center",
     "outpatient_hospital": "An outpatient hospital",
     "urgent_care": "An urgent care center",
-    "outside_us": "Outside the United States and its territories",
+    "outside_us": "Outside the United States and its territories, as in a worldwide emergency benefit, "
+                  "or an exclusion of all care outside the U.S.",
 }
 # The settings a group's readers may use
 GROUP_SETTINGS = {
