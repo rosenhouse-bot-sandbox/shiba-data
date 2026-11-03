@@ -3,6 +3,7 @@
 Rows are matched by plan ID (or section name) and columns by header, so cells keep their comments.
 Rows and columns the data no longer has are left alone. Empty rows and columns past them are deleted.
 A new row goes after the row above it in the data, and a new column after the last used column.
+The Details tab, which nobody edits, is overwritten instead. A failed write leaves it partly written until the next sync.
 
 Usage: SHEETS_TOKEN=<OAuth access token> python3 -I web/sheet_sync.py
 """
@@ -17,11 +18,14 @@ from dataclasses import dataclass
 
 HERE = pathlib.Path(__file__).resolve().parent
 sys.path[:0] = [str(HERE), str(HERE.parent / "pipeline")]
-from sheet_layout import HEAD, SECTION, TABS, rows, widths  # noqa: E402
+from sheet_layout import DETAILS, HEAD, SECTION, TABS, details, rows, widths  # noqa: E402
+import years  # noqa: E402
 
 WHITE = "FFFFFF"
 FIELDS = "userEnteredValue,note,userEnteredFormat,textFormatRuns"
 HEADER = "\0header"
+# Keeps each Details write under the API's recommended 2MB request size.
+ROWS_PER_WRITE = 200
 # Old header: new header, so a renamed column keeps its place and comments.
 RENAMED = {"Ambulance": "Ambulance Domestic/International"}
 
@@ -125,6 +129,27 @@ def plan(existing, layout, column_widths=()):
     return requests
 
 
+def replace(existing, layout):
+    """The batchUpdate requests that overwrite `existing` with `layout`, for a tab nobody edits."""
+    sheet_id = existing.sheet_id
+    n_rows, n_cols = len(layout), max(len(r.cells) for r in layout)
+    requests = []
+    for dimension, need, have in (("ROWS", n_rows, existing.row_count), ("COLUMNS", n_cols, existing.column_count)):
+        if need > have:
+            requests.append({"appendDimension": {"sheetId": sheet_id, "dimension": dimension, "length": need - have}})
+        elif have > need:
+            requests.append({"deleteDimension": {"range": {"sheetId": sheet_id, "dimension": dimension, "startIndex": need,
+                                                           "endIndex": have}}})
+    requests.append({"updateSheetProperties": {"properties": {"sheetId": sheet_id, "gridProperties": {"frozenRowCount": 1}},
+                                               "fields": "gridProperties.frozenRowCount"}})
+    for start in range(0, n_rows, ROWS_PER_WRITE):
+        requests.append({"updateCells": {
+            "start": {"sheetId": sheet_id, "rowIndex": start, "columnIndex": 0},
+            "rows": [{"values": [cell_data(c, r.kind) for c in r.cells]} for r in layout[start:start + ROWS_PER_WRITE]],
+            "fields": FIELDS}})
+    return requests
+
+
 def runs(columns, cells):
     """Splits cells into (first column, cells) runs of adjacent columns."""
     out = []
@@ -148,13 +173,20 @@ def existing_tab(api, props):
                     max(map(len, values), default=0))
 
 
-def sync(api, site):
-    missing = [t for t in TABS.values() if t not in {s["title"] for s in api.sheets()}]
+def sync(api, site, data_dir=None):
+    missing = [t for t in (*TABS.values(), DETAILS) if t not in {s["title"] for s in api.sheets()}]
     if missing:
         api.batch_update([{"addSheet": {"properties": {"title": t}}} for t in missing])
     tabs = {s["title"]: s for s in api.sheets()}
     for name, title in TABS.items():
         api.batch_update(plan(existing_tab(api, tabs[title]), rows(site, name), widths(site[name])))
+    grid = tabs[DETAILS]["gridProperties"]
+    existing = Existing(tabs[DETAILS]["sheetId"], [], [], grid["rowCount"], grid["columnCount"], 0)
+    requests = replace(existing, details(site, data_dir or years.data_dir(site["year"])))
+    api.batch_update([r for r in requests if "updateCells" not in r])
+    for r in requests:
+        if "updateCells" in r:
+            api.batch_update([r])
 
 
 class Api:
