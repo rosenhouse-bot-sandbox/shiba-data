@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-50159487a52ccddf.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 6 ASC row, ATRIO Choice Rx (H7006018) column: In-Network $250 copay (the * only marks prior authorization).\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 6 ASC row, ATRIO Freedom (H7006021) column: In-Network $250 copay (the * only marks prior authorization).\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 6 ASC row, ATRIO Freedom column: Out-of-Network 50% coinsurance.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 6 ASC row, ATRIO Choice Rx column: Out-of-Network 50% coinsurance.\"}]\n```",
+ "usage": {
+  "input_tokens": 2434,
+  "output_tokens": 399,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

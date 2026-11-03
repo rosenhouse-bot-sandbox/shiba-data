@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "7e45f25357b792a7.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H2923-019-0\", \"benefit\": \"surgery.colonoscopy\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 96,\n   \"quotes\": [\"Diagnostic Colonoscopies At an Office or Freestanding location: $0 copay At an Outpatient hospital: $0 copay\"]},\n  {\"plan_id\": \"H2923-019-0\", \"benefit\": \"surgery.colonoscopy\", \"setting\": \"asc\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 96,\n   \"quotes\": [\"Diagnostic Colonoscopies At an Office or Freestanding location: $0 copay At an Outpatient hospital: $0 copay At an Ambulatory Surgical Center (ASC): $0 copay\"]},\n  {\"plan_id\": \"H2923-019-0\", \"benefit\": \"surgery\", \"setting\": \"asc\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$480\", \"page\": 96,\n   \"quotes\": [\"$480 copay for outpatient procedures/surgery at an ASC - facility\"]},\n  {\"plan_id\": \"H2923-019-0\", \"benefit\": \"surgery\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$580\", \"page\": 96,\n   \"quotes\": [\"$580 copay for outpatient procedures/surgery at an Outpatient Hospital\"]},\n  {\"plan_id\": \"H2923-019-0\", \"benefit\": \"surgery\", \"setting\": \"asc\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"deductible\", \"amount\": \"$150\", \"limit\": \"per year\", \"page\": 52,\n   \"quotes\": [\"Your deductible is $150.\", \"Ambulatory Surgical Center (ASC) services\"],\n   \"note\": \"The plan-wide $150 deductible is listed as applying to ASC services; the page does not say which specific ASC services it applies to.\"}\n]\n```",
+ "usage": {
+  "input_tokens": 9747,
+  "output_tokens": 1768,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

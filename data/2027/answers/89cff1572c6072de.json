@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "50159487a52ccddf.md",
+ "reply": "```json\n[{\"plan_id\": \"H7006-018-0\", \"benefit\": \"surgery\", \"setting\": \"asc\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$250\", \"page\": 6, \"quotes\": [\"Ambulatory Surgical Center\", \"(ASC) $250 copay*\"], \"note\": \"\"},\n {\"plan_id\": \"H7006-018-0\", \"benefit\": \"surgery\", \"setting\": \"asc\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 6, \"quotes\": [\"Ambulatory Surgical Center\", \"$450 copay per day* Out-of-Network 50% coinsurance In-Network $250 copay* Out-of-Network 50% coinsurance\"], \"note\": \"The second quote reads the ATRIO Choice Rx column straight down. It starts at the observation row because the ASC text by itself repeats on the page. The last 50% in the quote is the ASC out-of-network cost.\"},\n {\"plan_id\": \"H7006-021-0\", \"benefit\": \"surgery\", \"setting\": \"asc\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$250\", \"page\": 6, \"quotes\": [\"Ambulatory Surgical Center\", \"$100 copay per day* Out-of-Network 50% coinsurance In-Network $250 copay*\"], \"note\": \"The second quote reads the ATRIO Freedom column straight down. It starts at the observation row because the ASC text by itself repeats on the page.\"},\n {\"plan_id\": \"H7006-021-0\", \"benefit\": \"surgery\", \"setting\": \"asc\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 6, \"quotes\": [\"Ambulatory Surgical Center\", \"$100 copay per day* Out-of-Network 50% coinsurance In-Network $250 copay* Out-of-Network 50% coinsurance\"], \"note\": \"The second quote reads the ATRIO Freedom column straight down. It starts at the observation row because the ASC text by itself repeats on the page. The last 50% in the quote is the ASC out-of-network cost.\"}]\n```",
+ "usage": {
+  "input_tokens": 2265,
+  "output_tokens": 3190,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

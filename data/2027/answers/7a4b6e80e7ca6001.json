@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-77d83ba821336370.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 95, out-of-network column: 30% coinsurance for Medicare-covered surgery or other services at an outpatient hospital.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"The page 94 quote is cut off before any setting is named. The ASC wording only appears on page 95, so this page alone does not support the setting.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"The $0 or 20% Medicaid-level wording is in the in-network column. Out of network for outpatient hospital is 30%.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 95, in-network column: $0 or 20% coinsurance by Medicaid level for outpatient hospital surgery; 20% is the non-$0 amount.\"},\n{\"id\": 4, \"ok\": false, \"reason\": \"The 30% is the out-of-network amount. In network it is $0 or 20% by Medicaid level.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 95, in-network column: $0 copayment for a colonoscopy at an outpatient hospital.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 95, in-network column: $0 or 20% coinsurance by Medicaid level for surgery at an ambulatory surgical center; 20% is the non-$0 amount.\"},\n{\"id\": 7, \"ok\": false, \"reason\": \"The 30% is in the out-of-network column. In network for ASC it is $0 or 20%.\"},\n{\"id\": 8, \"ok\": false, \"reason\": \"The page 94 quote is cut off ('at an') and names no setting. The ASC wording is only on page 95.\"}]\n```",
+ "usage": {
+  "input_tokens": 4369,
+  "output_tokens": 1119,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

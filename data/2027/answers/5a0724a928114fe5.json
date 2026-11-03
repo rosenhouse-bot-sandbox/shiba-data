@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "e306f120395b6260.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2406-073-0\", \"benefit\": \"surgery.colonoscopy\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"covered\", \"page\": 47, \"quotes\": [\"There is no coinsurance, copayment, or deductible or each Medicare-covered diagnostic colonoscopy.\"], \"note\": \"Row is 'Outpatient diagnostic colonoscopy'. The document says there is no coinsurance, copayment or deductible, but prints no dollar figure, so this is given as covered rather than a $0 copay. Out-of-network cost depends on where the service is received and is not stated here.\"}]\n```",
+ "usage": {
+  "input_tokens": 12169,
+  "output_tokens": 803,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

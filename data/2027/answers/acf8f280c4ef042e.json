@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "630e49b10e7ad131.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-317-0\", \"benefit\": \"surgery\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 69, \"quotes\": [\"Surgery Services 20% coinsurance – Outpatient Hospital\"]},\n {\"plan_id\": \"H1036-317-0\", \"benefit\": \"surgery\", \"setting\": \"asc\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 69, \"quotes\": [\"Surgery Services 20% coinsurance – Outpatient Hospital – Ambulatory Surgical Center\"]},\n {\"plan_id\": \"H1036-317-0\", \"benefit\": \"surgery.colonoscopy\", \"setting\": \"asc\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 69, \"quotes\": [\"Diagnostic Colonoscopy $0 copayment – Ambulatory Surgical Center\"]},\n {\"plan_id\": \"H1036-317-0\", \"benefit\": \"surgery.colonoscopy\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 69, \"quotes\": [\"Diagnostic Colonoscopy $0 copayment – Ambulatory Surgical Center – Outpatient Hospital\"]}]\n```",
+ "usage": {
+  "input_tokens": 11037,
+  "output_tokens": 1182,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

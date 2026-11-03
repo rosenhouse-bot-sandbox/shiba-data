@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-557f08e61a7e8f42.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 83 outpatient surgery: the $350 per-visit copay is for Standard plan members. Enhanced (H9003-001-0) pays $250.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Page 83 outpatient surgery: the $350 per-visit copay is for Standard plan members. Value (H9003-009-0) pays $400.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 83 outpatient hospital services, outpatient surgery: $350 per visit for Standard plan members.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 83 outpatient hospital services, outpatient surgery: $250 per visit for Enhanced plan members.\"},\n{\"id\": 4, \"ok\": false, \"reason\": \"Page 83 outpatient surgery: the $400 per-visit copay is for Value plan members. Enhanced (H9003-001-0) pays $250.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 83 outpatient hospital services, outpatient surgery: $400 per visit for Value plan members. This is distinct from Value Lane, which pays $550.\"}]\n```",
+ "usage": {
+  "input_tokens": 2556,
+  "output_tokens": 709,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

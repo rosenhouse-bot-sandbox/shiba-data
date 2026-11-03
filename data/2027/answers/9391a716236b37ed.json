@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "0e1831fb00cf2a95.md",
+ "reply": "```json\n[{\"plan_id\": \"H2056-018-0\", \"benefit\": \"surgery\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"page\": 3, \"quotes\": [\"Outpatient hospital $325 copay\"], \"note\": \"The row is labeled only 'Outpatient hospital' under Hospital coverage, so I read it as outpatient surgery and procedures.\"},\n {\"plan_id\": \"H2056-018-0\", \"benefit\": \"surgery\", \"setting\": \"asc\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$275\", \"page\": 3, \"quotes\": [\"Ambulatory surgical center $275 copay\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 2195,
+  "output_tokens": 660,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
