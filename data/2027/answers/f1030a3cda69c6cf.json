@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2923-025-0.md",
+ "reply": "```json\n[{\"key\": \"main.R_dental\", \"result\": \"cite\", \"citations\": [{\"page\": 110, \"quote\": \"Devoted Health will pay as much as $2,000 per year for covered dental services listed below.\"}, {\"page\": 110, \"quote\": \"You are covered for cleanings, routine exams, X-rays, and more.\"}]},\n {\"key\": \"main.S_acupuncture\", \"result\": \"cite\", \"citations\": [{\"page\": 63, \"quote\": \"Acupuncture services for conditions other than chronic lower back pain\"}, {\"page\": 55, \"quote\": \"Your plan covers routine acupuncture visits under the Dental & Alternative\"}]},\n {\"key\": \"main.V_massage\", \"result\": \"cite\", \"citations\": [{\"page\": 62, \"quote\": \"Massage therapy rendered by a licensed massage therapist.\"}, {\"page\": 63, \"quote\": \"Swedish massage, deep tissue massage, and\"}]}]\n```",
+ "usage": {
+  "input_tokens": 14046,
+  "output_tokens": 3519,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,11 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H2001-045-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 115, routine eye exam row: 1 exam every year, $0 copayment in-network. Page 116, routine eyewear row: 1 pair of eyeglasses or contact lenses every year, retail value up to $200.\"}]\n```",
+ "usage": {
+  "input_tokens": 2943,
+  "output_tokens": 404,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

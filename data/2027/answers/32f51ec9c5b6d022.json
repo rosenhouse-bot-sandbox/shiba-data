@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H7199-002-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"Pages 62-63 Dental & Alternative Therapy Allowance row names therapeutic massage by a licensed massage therapist, reimbursed 50% up to $2,250 per year. This is a supplemental benefit for all members.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Page 91 in-network Part B drugs: allergy serum $0 copay (the 0% end), chemotherapy 20% and all other Part B drugs 20%. No higher cost share appears on the page.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Page 55 says routine acupuncture is a supplemental benefit covered under the Dental & Alternative Therapy Allowance. Page 62 names Routine Acupuncture in the $2,250 allowance.\"}\n]",
+ "usage": {
+  "input_tokens": 5468,
+  "output_tokens": 519,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
