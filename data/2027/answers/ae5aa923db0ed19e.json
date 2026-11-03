@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-0e1831fb00cf2a95.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 3: the $325 copay is on the Outpatient hospital row. The ambulatory surgical center row shows $275.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 3 Ambulatory surgical center row: $275 copay in network.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"Page 3: the $275 copay is on the ASC row. The Outpatient hospital row shows $325.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 3 Outpatient hospital row: $325 copay in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2216,
+  "output_tokens": 210,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

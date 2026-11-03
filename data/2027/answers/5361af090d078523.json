@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-5d52bb731683d536.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 60, Outpatient surgery row, Ambulatory Surgical Center, in-network: \\\"$0 copay for diagnostic colonoscopy\\\".\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 60, Outpatient surgery row, Ambulatory Surgical Center, in-network: \\\"$300 copay for all other services\\\". This is the general surgery copay at an ASC.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 60, Outpatient surgery row, Ambulatory Surgical Center: out-of-network is a single 50% coinsurance with no exceptions listed. It therefore covers diagnostic colonoscopy at an ASC.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 60, Outpatient surgery row, Ambulatory Surgical Center, out-of-network: 50% coinsurance.\"}]\n```",
+ "usage": {
+  "input_tokens": 2489,
+  "output_tokens": 570,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

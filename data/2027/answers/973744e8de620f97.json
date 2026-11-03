@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "034e045a83e5b49d.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3817-008-1\", \"benefit\": \"surgery\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 3, \"quotes\": [\"All other services1 20% 50%\"], \"note\": \"From the 'All other services' row under Outpatient hospital services, which is not specifically labeled as surgery. The quote keeps the footnote mark '1' because the text has it attached to the word; it means services may require prior authorization.\"},\n{\"plan_id\": \"H3817-008-1\", \"benefit\": \"surgery\", \"setting\": \"outpatient_hospital\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 3, \"quotes\": [\"All other services1 20% 50%\"], \"note\": \"From the 'All other services' row under Outpatient hospital services, which is not specifically labeled as surgery.\"},\n{\"plan_id\": \"H3817-008-1\", \"benefit\": \"surgery\", \"setting\": \"asc\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$375\", \"page\": 3, \"quotes\": [\"All other services1 $375 50%\"], \"note\": \"From the 'All other services' row under Ambulatory surgery center services. Footnote 1 means services may require prior authorization.\"},\n{\"plan_id\": \"H3817-008-1\", \"benefit\": \"surgery\", \"setting\": \"asc\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 3, \"quotes\": [\"All other services1 $375 50%\"], \"note\": \"From the 'All other services' row under Ambulatory surgery center services.\"}]\n```",
+ "usage": {
+  "input_tokens": 2861,
+  "output_tokens": 1148,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

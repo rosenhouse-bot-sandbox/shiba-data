@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "2aa68f4230962abc.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H2923-025-0\", \"benefit\": \"surgery\", \"setting\": \"asc\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$480\", \"page\": 95, \"quotes\": [\"$480 copay for outpatient procedures/surgery at an ASC - facility\"], \"note\": \"Facility copay; professional copay at an ASC is $0.\"},\n  {\"plan_id\": \"H2923-025-0\", \"benefit\": \"surgery\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$580\", \"page\": 95, \"quotes\": [\"$580 copay for outpatient procedures/surgery at an Outpatient Hospital\"]},\n  {\"plan_id\": \"H2923-025-0\", \"benefit\": \"surgery\", \"setting\": \"asc\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"deductible\", \"amount\": \"$150\", \"page\": 49, \"quotes\": [\"Your deductible is $150.\", \"Ambulatory Surgical Center (ASC) services\"]},\n  {\"plan_id\": \"H2923-025-0\", \"benefit\": \"surgery.colonoscopy\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 92, \"quotes\": [\"Diagnostic Colonoscopies At an Office or Freestanding location: $0 copay At an Outpatient hospital: $0 copay\"]},\n  {\"plan_id\": \"H2923-025-0\", \"benefit\": \"surgery.colonoscopy\", \"setting\": \"asc\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 92, \"quotes\": [\"Diagnostic Colonoscopies At an Office or Freestanding location: $0 copay At an Outpatient hospital: $0 copay At an Ambulatory Surgical Center (ASC): $0 copay\"]}\n]\n```",
+ "usage": {
+  "input_tokens": 9058,
+  "output_tokens": 1800,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

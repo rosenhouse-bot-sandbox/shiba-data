@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-dca4e04d7b6dc26b.md",
+ "reply": "Page 72 lists outpatient hospital surgery at $350 in network and ambulatory surgical center surgery at $250 in network. Both settings charge 50% coinsurance out of network.\n\n```json\n[{\"id\":0,\"ok\":true,\"reason\":\"Page 72 outpatient hospital row: 50% coinsurance per Medicare-covered service out of network.\"},\n{\"id\":1,\"ok\":false,\"reason\":\"$350 is the outpatient hospital copay. The ASC in-network copay is $250.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Page 72 ASC row: 50% coinsurance per Medicare-covered service out of network.\"},\n{\"id\":3,\"ok\":false,\"reason\":\"$250 is the ASC copay. The outpatient hospital in-network copay is $350.\"},\n{\"id\":4,\"ok\":true,\"reason\":\"Page 72 ASC row: $250 copay per Medicare-covered service in network.\"},\n{\"id\":5,\"ok\":true,\"reason\":\"Page 72 outpatient hospital row: $350 copay per Medicare-covered service in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2546,
+  "output_tokens": 364,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-4ec81cd0d2695486.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 85, outpatient hospital row: 20% coinsurance for surgery. Other services there are separate ($0 colonoscopy, $225 for all other services).\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 85, outpatient hospital row: $0 copayment for diagnostic colonoscopy and polyp removal.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 85, ambulatory surgical center row: 20% coinsurance.\"}]\n```",
+ "usage": {
+  "input_tokens": 2078,
+  "output_tokens": 473,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
