@@ -3,16 +3,14 @@
 Each answer is saved in data/<year>/answers, keyed by a hash of the model, the effort if any, and the task's text.
 A rerun reuses saved answers, so only new or changed tasks call a model.
 """
-import concurrent.futures, hashlib, json, os, re, threading, urllib.request
+import datetime, hashlib, json, os, re, threading, time, urllib.request
 
-WORKERS = 8
-# Model calls in flight across every answer() call, which stays under the organization's concurrency limit.
-REQUESTS = 16
-IN_FLIGHT = threading.BoundedSemaphore(REQUESTS)
 MAX_TOKENS = 64000
 # A model sometimes replies in prose, so a bad reply is asked again.
 ATTEMPTS = 3
 USAGE_FIELDS = ("input_tokens", "output_tokens", "cache_read_input_tokens", "cache_creation_input_tokens")
+POLL_SECONDS = 30
+REUSE = datetime.timedelta(days=7)
 
 
 def key(model, text, effort=None):
@@ -41,36 +39,41 @@ def write(path, value):
 
 def answer(tasks, model, saved, asker, effort=None):
     """Writes each task's answer. Returns the tasks left without one: no saved answer and no asker, or a bad reply.
+    asker(model, effort, {key: text}) returns {key: (reply, usage)} and gets every unasked task at once.
     A new answer saves the token usage of all its attempts."""
     os.makedirs(saved, exist_ok=True)
-
-    def one(task):
+    keys, texts, names = {}, {}, {}
+    for task in tasks:
         with open(task) as f:
             text = f.read()
-        path = os.path.join(saved, key(model, text, effort) + ".json")
+        keys[task] = k = key(model, text, effort)
+        if not os.path.exists(os.path.join(saved, k + ".json")):
+            texts[k] = text
+            names.setdefault(k, os.path.basename(task))
+    if asker and texts:
+        usage = {k: {} for k in texts}
+        for _ in range(ATTEMPTS):
+            for k, (reply, used) in asker(model, effort, texts).items():
+                usage[k] = {f: usage[k].get(f, 0) + n for f, n in used.items()}
+                if array(reply) is None:
+                    print(f"{names[k]}: {model} did not reply with a JSON array")
+                    continue
+                write(os.path.join(saved, k + ".json"), {"model": model}
+                      | ({"effort": effort} if effort is not None else {})
+                      | ({"batch": True} if getattr(asker, "batch", False) else {})
+                      | {"task": names[k], "reply": reply, "usage": usage[k]})
+                del texts[k]
+            if not texts:
+                break
+    missing = []
+    for task in tasks:
+        path = os.path.join(saved, keys[task] + ".json")
         if os.path.exists(path):
             with open(path) as f:
-                reply = json.load(f)["reply"]
-        elif asker:
-            usage = {}
-            for _ in range(ATTEMPTS):
-                with IN_FLIGHT:
-                    reply, used = asker(model, text, effort)
-                usage = {k: usage.get(k, 0) + v for k, v in used.items()}
-                if array(reply) is not None:
-                    break
-                print(f"{task}: {model} did not reply with a JSON array")
-            else:
-                return task
-            write(path, {"model": model} | ({"effort": effort} if effort is not None else {})
-                  | {"task": os.path.basename(task), "reply": reply, "usage": usage})
+                write(os.path.splitext(task)[0] + ".json", array(json.load(f)["reply"]))
         else:
-            return task
-        write(os.path.splitext(task)[0] + ".json", array(reply))
-        return None
-
-    with concurrent.futures.ThreadPoolExecutor(WORKERS) as pool:
-        return [t for t in pool.map(one, tasks) if t]
+            missing.append(task)
+    return missing
 
 
 def github_identity_token():
@@ -82,7 +85,7 @@ def github_identity_token():
 
 
 def api():
-    """An asker that calls the Claude API. In GitHub Actions it signs in through workload identity federation."""
+    """An asker that sends Message Batches to the Claude API. In GitHub Actions it signs in through workload identity federation."""
     import anthropic
 
     if "ACTIONS_ID_TOKEN_REQUEST_URL" in os.environ:
@@ -95,15 +98,57 @@ def api():
             workspace_id=os.environ["ANTHROPIC_WORKSPACE_ID"]))
     else:
         client = anthropic.Anthropic(max_retries=5)
+    return Batches(client)
 
-    def asker(model, text, effort):
-        """Returns the reply's text and its token usage."""
-        with client.messages.stream(model=model, max_tokens=MAX_TOKENS, messages=[{"role": "user", "content": text}],
-                                    **({"output_config": {"effort": effort}} if effort is not None else {})) as stream:
-            message = stream.get_final_message()
-        usage = {k: getattr(message.usage, k) or 0 for k in USAGE_FIELDS}
-        if message.stop_reason != "end_turn":
-            return f"(stopped: {message.stop_reason})", usage
-        return "".join(b.text for b in message.content if b.type == "text"), usage
 
-    return asker
+def reply(message):
+    """The message's text and its token usage."""
+    usage = {k: getattr(message.usage, k) or 0 for k in USAGE_FIELDS}
+    if message.stop_reason != "end_turn":
+        return f"(stopped: {message.stop_reason})", usage
+    return "".join(b.text for b in message.content if b.type == "text"), usage
+
+
+class Batches:
+    """An asker that sends each round of tasks as one Message Batch, at half the price of single requests.
+    A rerun after a timeout reuses each succeeded result of this week's batches once, instead of paying again."""
+    batch = True
+
+    def __init__(self, client):
+        self.batches, self.lock, self.earlier = client.messages.batches, threading.Lock(), None
+
+    def ended(self, batch):
+        while batch.processing_status != "ended":
+            time.sleep(POLL_SECONDS)
+            batch = self.batches.retrieve(batch.id)
+        return batch
+
+    def results(self, batch_id):
+        found = {}
+        for r in self.batches.results(batch_id):
+            if r.result.type == "succeeded":
+                found[r.custom_id] = r.result
+            else:
+                print(f"{r.custom_id}: {r.result.type} {getattr(r.result, 'error', '')}")
+        return found
+
+    def reuse(self, keys):
+        with self.lock:
+            if self.earlier is None:
+                self.earlier, since = {}, datetime.datetime.now(datetime.timezone.utc) - REUSE
+                for b in self.batches.list(limit=100):
+                    if b.created_at < since:
+                        break
+                    # The list starts with the newest batch, whose results win.
+                    self.earlier = self.results(self.ended(b).id) | self.earlier
+            return {k: self.earlier.pop(k) for k in keys if k in self.earlier}
+
+    def __call__(self, model, effort, texts):
+        found = self.reuse(texts)
+        asked = [{"custom_id": k, "params": {"model": model, "max_tokens": MAX_TOKENS,
+                                             "messages": [{"role": "user", "content": t}]}
+                  | ({"output_config": {"effort": effort}} if effort is not None else {})}
+                 for k, t in texts.items() if k not in found]
+        if asked:
+            found |= self.results(self.ended(self.batches.create(requests=asked)).id)
+        return {k: reply(r.message) for k, r in found.items()}

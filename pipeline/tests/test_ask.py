@@ -1,4 +1,4 @@
-import concurrent.futures, json, os, pathlib, sys, tempfile, threading, time, types, unittest
+import datetime, json, os, pathlib, sys, tempfile, types, unittest
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -8,11 +8,22 @@ MODEL = "claude-haiku-5-5"
 USAGE = {"input_tokens": 100, "output_tokens": 20, "cache_read_input_tokens": 0, "cache_creation_input_tokens": 0}
 
 
+def each(ask_one):
+    """An asker that answers each task with ask_one(model, text, effort)."""
+    def asker(model, effort, texts):
+        return {k: ask_one(model, t, effort) for k, t in texts.items()}
+    return asker
+
+
 class Fake:
     def __init__(self, *replies):
-        self.replies, self.asked = replies, []
+        self.replies, self.asked, self.rounds = replies, [], []
 
-    def __call__(self, model, text, effort):
+    def __call__(self, model, effort, texts):
+        self.rounds.append(sorted(texts.values()))
+        return {k: self.one(model, t, effort) for k, t in texts.items()}
+
+    def one(self, model, text, effort):
         self.asked.append((model, text, effort))
         return self.replies[min(len(self.asked), len(self.replies)) - 1], USAGE
 
@@ -42,26 +53,30 @@ class AnswerTest(unittest.TestCase):
         self.assertEqual(json.loads(self.task.with_suffix(".json").read_text()), [{"key": "a"}])
         self.assertEqual(self.saved_answers(), [{"model": MODEL, "task": "P-1.md", "reply": '[{"key": "a"}]', "usage": USAGE}])
 
-    def test_calls_at_the_same_time_share_one_limit_on_requests(self):
-        lock, flying, most = threading.Lock(), [0], [0]
+    def test_asks_for_every_unanswered_task_at_once_and_once_per_text(self):
+        twin, other = self.root / "tasks" / "P-2.md", self.root / "tasks" / "P-3.md"
+        twin.write_text("Read this.")
+        other.write_text("Read that.")
+        fake = Fake("[]")
+        self.assertEqual(ask.answer([self.task, twin, other], MODEL, self.saved, fake), [])
+        self.assertEqual(fake.rounds, [["Read that.", "Read this."]])
+        self.assertEqual(json.loads(twin.with_suffix(".json").read_text()), [])
+        self.assertEqual(sorted(a["task"] for a in self.saved_answers()), ["P-1.md", "P-3.md"])
 
-        def slow(model, text, effort):
-            with lock:
-                flying[0] += 1
-                most[0] = max(most[0], flying[0])
-            time.sleep(0.02)
-            with lock:
-                flying[0] -= 1
-            return "[]", USAGE
+    def test_asks_again_only_for_the_replies_that_were_not_arrays(self):
+        good = self.root / "tasks" / "P-2.md"
+        good.write_text("Read that.")
+        fake = each(lambda model, text, effort: ("[]" if text == "Read that." else "Sorry, no.", USAGE))
+        rounds = []
+        asker = lambda model, effort, texts: rounds.append(sorted(texts.values())) or fake(model, effort, texts)
+        self.assertEqual(ask.answer([self.task, good], MODEL, self.saved, asker), [self.task])
+        self.assertEqual(rounds, [["Read that.", "Read this."]] + [["Read this."]] * (ask.ATTEMPTS - 1))
 
-        dirs = [self.root / f"group{n}" for n in range(3)]
-        for d in dirs:
-            d.mkdir()
-            for i in range(ask.WORKERS):
-                (d / f"t{i}.md").write_text(f"{d.name} task {i}")
-        with concurrent.futures.ThreadPoolExecutor(len(dirs)) as pool:
-            list(pool.map(lambda d: ask.answer(sorted(d.glob("*.md")), MODEL, self.saved, slow), dirs))
-        self.assertEqual(most[0], ask.REQUESTS)
+    def test_saves_that_a_batch_answered(self):
+        fake = Fake("[]")
+        fake.batch = True
+        ask.answer([self.task], MODEL, self.saved, fake)
+        self.assertTrue(self.saved_answers()[0]["batch"])
 
     def test_without_an_effort_the_key_is_unchanged(self):
         self.assertEqual(ask.key(MODEL, "Read this."), "b841d88300394ed2")
@@ -116,39 +131,109 @@ class Message:
                                            cache_creation_input_tokens=5)
 
 
-class ApiTest(unittest.TestCase):
-    def asker(self, message):
-        sent = []
+def result(custom_id, kind="succeeded", message=None):
+    return types.SimpleNamespace(custom_id=custom_id, result=types.SimpleNamespace(type=kind, message=message))
 
-        class Stream:
-            def __init__(self, **kwargs):
-                sent.append(kwargs)
 
-            def __enter__(self):
-                return types.SimpleNamespace(get_final_message=lambda: message)
+class Client:
+    """Fake Message Batches. Each batch ends after one poll, with message_for(params) for each request."""
 
-            def __exit__(self, *_):
-                pass
+    def __init__(self, message_for, earlier=(), kind="succeeded", age=datetime.timedelta(days=1), unfinished=False):
+        """earlier lists the results of earlier batches, newest first."""
+        self.message_for, self.kind, self.created, self.polls = message_for, kind, [], 0
+        self.batches = {f"old{i}": ("in_progress" if unfinished else "ended", rs) for i, rs in enumerate(earlier)}
+        self.created_at = datetime.datetime.now(datetime.timezone.utc) - age
+        self.messages = types.SimpleNamespace(batches=self)
 
-        client = types.SimpleNamespace(messages=types.SimpleNamespace(stream=Stream))
-        sdk = types.SimpleNamespace(Anthropic=lambda **_: client)
-        with mock.patch.dict(sys.modules, anthropic=sdk), mock.patch.dict(os.environ):
+    def create(self, requests):
+        self.created.append(requests)
+        batch_id = f"new{len(self.created)}"
+        self.batches[batch_id] = ("in_progress", [result(r["custom_id"], self.kind, self.message_for(r["params"]))
+                                                   for r in requests])
+        return types.SimpleNamespace(id=batch_id, processing_status="in_progress")
+
+    def retrieve(self, batch_id):
+        self.polls += 1
+        self.batches[batch_id] = ("ended", self.batches[batch_id][1])
+        return types.SimpleNamespace(id=batch_id, processing_status="ended")
+
+    def results(self, batch_id):
+        status, rs = self.batches[batch_id]
+        assert status == "ended"
+        return iter(rs)
+
+    def list(self, limit):
+        return [types.SimpleNamespace(id=i, processing_status=s, created_at=self.created_at)
+                for i, (s, _) in self.batches.items()]
+
+
+class BatchesTest(unittest.TestCase):
+    def asker(self, client):
+        with mock.patch.dict(sys.modules, anthropic=types.SimpleNamespace(Anthropic=lambda **_: client)), \
+                mock.patch.dict(os.environ), mock.patch.object(ask.time, "sleep"):
             os.environ.pop("ACTIONS_ID_TOKEN_REQUEST_URL", None)
-            return ask.api(), sent
+            return ask.api()
 
-    def test_sends_the_effort_only_when_given_and_returns_the_text_and_usage(self):
-        asker, sent = self.asker(Message("end_turn", "[]"))
-        self.assertEqual(asker(MODEL, "Read this.", None), ("[]", {
-            "input_tokens": 100, "output_tokens": 20, "cache_read_input_tokens": 0, "cache_creation_input_tokens": 5}))
-        asker(MODEL, "Read this.", "low")
-        self.assertEqual(sent[0], {"model": MODEL, "max_tokens": ask.MAX_TOKENS,
-                                   "messages": [{"role": "user", "content": "Read this."}]})
-        self.assertEqual(sent[1], sent[0] | {"output_config": {"effort": "low"}})
+    def ask(self, asker, *args):
+        with mock.patch.object(ask.time, "sleep"):
+            return asker(*args)
+
+    def test_sends_one_batch_with_the_effort_only_when_given_and_returns_text_and_usage(self):
+        client = Client(lambda params: Message("end_turn", "[]"))
+        asker = self.asker(client)
+        self.assertTrue(asker.batch)
+        usage = {"input_tokens": 100, "output_tokens": 20, "cache_read_input_tokens": 0, "cache_creation_input_tokens": 5}
+        self.assertEqual(self.ask(asker, MODEL, None, {"a": "Read this.", "b": "Read that."}),
+                         {"a": ("[]", usage), "b": ("[]", usage)})
+        self.ask(asker, MODEL, "low", {"c": "Read this."})
+        first, second = client.created
+        self.assertEqual(first, [{"custom_id": "a", "params": {"model": MODEL, "max_tokens": ask.MAX_TOKENS,
+                                  "messages": [{"role": "user", "content": "Read this."}]}},
+                                 {"custom_id": "b", "params": {"model": MODEL, "max_tokens": ask.MAX_TOKENS,
+                                  "messages": [{"role": "user", "content": "Read that."}]}}])
+        self.assertEqual(second[0]["params"]["output_config"], {"effort": "low"})
+        self.assertEqual(client.polls, 2)
 
     def test_a_reply_that_did_not_end_its_turn_says_why_and_keeps_its_usage(self):
-        asker, _ = self.asker(Message("max_tokens", "[{"))
-        reply, usage = asker(MODEL, "Read this.", None)
+        asker = self.asker(Client(lambda params: Message("max_tokens", "[{")))
+        reply, usage = self.ask(asker, MODEL, None, {"a": "Read this."})["a"]
         self.assertEqual((reply, usage["output_tokens"]), ("(stopped: max_tokens)", 20))
+
+    def test_leaves_out_requests_that_did_not_succeed(self):
+        asker = self.asker(Client(lambda params: None, kind="errored"))
+        self.assertEqual(self.ask(asker, MODEL, None, {"a": "Read this."}), {})
+
+    def test_reuses_each_earlier_succeeded_result_once_instead_of_asking_again(self):
+        old = [result("a", message=Message("end_turn", "[1]")), result("b", "errored")]
+        client = Client(lambda params: Message("end_turn", "[2]"), earlier=[old])
+        asker = self.asker(client)
+        got = self.ask(asker, MODEL, None, {"a": "Read this.", "b": "Read that."})
+        self.assertEqual({k: r for k, (r, _) in got.items()}, {"a": "[1]", "b": "[2]"})
+        self.assertEqual([[r["custom_id"] for r in rs] for rs in client.created], [["b"]])
+        got = self.ask(asker, MODEL, None, {"a": "Read this."})
+        self.assertEqual(got["a"][0], "[2]")
+
+    def test_does_not_reuse_results_of_batches_older_than_a_week(self):
+        old = [result("a", message=Message("end_turn", "[1]"))]
+        client = Client(lambda params: Message("end_turn", "[2]"), earlier=[old], age=datetime.timedelta(days=8))
+        self.assertEqual(self.ask(self.asker(client), MODEL, None, {"a": "Read this."})["a"][0], "[2]")
+
+    def test_waits_for_an_unfinished_earlier_batch_and_reuses_its_results(self):
+        old = [result("a", message=Message("end_turn", "[1]"))]
+        client = Client(lambda params: Message("end_turn", "[2]"), earlier=[old], unfinished=True)
+        self.assertEqual(self.ask(self.asker(client), MODEL, None, {"a": "Read this."})["a"][0], "[1]")
+        self.assertEqual((client.created, client.polls), ([], 1))
+
+    def test_reuses_the_newest_earlier_result(self):
+        newer, older = [result("a", message=Message("end_turn", "[new]"))], [result("a", message=Message("end_turn", "[old]"))]
+        client = Client(lambda params: None, earlier=[newer, older])
+        self.assertEqual(self.ask(self.asker(client), MODEL, None, {"a": "Read this."})["a"][0], "[new]")
+
+    def test_says_why_a_request_did_not_succeed(self):
+        client = Client(lambda params: None, kind="errored")
+        with mock.patch("builtins.print") as printed:
+            self.ask(self.asker(client), MODEL, None, {"a": "Read this."})
+        self.assertIn("a: errored", printed.call_args[0][0])
 
 
 if __name__ == "__main__":

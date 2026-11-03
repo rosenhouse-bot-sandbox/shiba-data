@@ -3,6 +3,7 @@ from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import evaluate
+from test_ask import each
 from test_extract import SHA, StepsTest, answer
 
 OPUS_HIGH = "claude-opus-5-5-high"
@@ -39,7 +40,11 @@ REVIEW = {"decoys_accepted": evaluate.share(0, 5)}
 class FunctionsTest(unittest.TestCase):
     def test_cost_prices_each_kind_of_token(self):
         usage = {"input_tokens": 1e6, "output_tokens": 1e6, "cache_read_input_tokens": 1e6, "cache_creation_input_tokens": 1e6}
-        self.assertAlmostEqual(evaluate.cost("claude-opus-5-5", usage), 4 + 20 + 0.2 + 5)
+        self.assertAlmostEqual(evaluate.cost({"model": "claude-opus-5-5", "usage": usage}), 4 + 20 + 0.2 + 5)
+
+    def test_a_batch_costs_half(self):
+        usage = {"input_tokens": 1e6, "output_tokens": 1e6}
+        self.assertAlmostEqual(evaluate.cost({"model": "claude-opus-5-5", "usage": usage, "batch": True}), 12)
 
     def test_haiku_never_verifies(self):
         self.assertFalse([r for r in evaluate.VERIFIERS if "haiku" in r[0]])
@@ -108,7 +113,7 @@ class RunTest(StepsTest):
         return json.loads((self.data / "evaluations" / "imaging" / f"{which}.json").read_text())
 
     def test_scores_every_role_against_the_reviewer(self):
-        got = self.evaluate(fake_asker)
+        got = self.evaluate(each(fake_asker))
         readers = {s["role"]: s for s in got["readers"]}
         self.assertEqual(len(readers), 9)
         self.assertEqual(readers[OPUS_HIGH]["precision"]["share"], 1.0)
@@ -123,7 +128,7 @@ class RunTest(StepsTest):
         self.assertIn(f"| {OPUS_HIGH} | 1/1 (0.207-1.0) | 1/1", report)
 
     def test_rerun_asks_nothing(self):
-        first = self.evaluate(fake_asker)
+        first = self.evaluate(each(fake_asker))
 
         def refuse(*args):
             raise AssertionError("asked again")
@@ -134,12 +139,12 @@ class RunTest(StepsTest):
         def prose_from_haiku(model, text, effort):
             return ("I think", MILLION) if "haiku" in model else fake_asker(model, text, effort)
 
-        got = self.evaluate(prose_from_haiku)
+        got = self.evaluate(each(prose_from_haiku))
         self.assertEqual([s["unanswered"] for s in got["readers"][:3]], [1, 1, 1])
         self.assertEqual(len(got["readers"]), 9)
 
     def test_stops_starting_roles_over_budget(self):
-        got = self.evaluate(fake_asker, budget="0.25")
+        got = self.evaluate(each(fake_asker), budget="0.25")
         self.assertEqual([s["role"] for s in got["readers"]], ["claude-haiku-5-5-low", "claude-haiku-5-5-medium",
                                                                "claude-haiku-5-5-high"])
         self.assertEqual(got["verifiers"], [])
