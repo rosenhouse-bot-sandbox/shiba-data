@@ -284,7 +284,8 @@ def offers(f):
 def dot(*leaves):
     """Shows ● for a routine benefit. Facts for only a Medicare, package, conditional or uncovered benefit cite a blank."""
     def rule(organization, found):
-        mine = [f for f in found if any(facts.covers(f["benefit"], leaf) for leaf in leaves) and f["network"] in ("in", "any")]
+        mine = [f for f in found if f["network"] in ("in", "any")
+                and any(facts.covers(f["benefit"], leaf) for leaf in leaves)]
         yes = [f for f in mine if offers(f)]
         return [("●", top(yes))] if yes else [("", top(mine) if mine else [])]
     return rule

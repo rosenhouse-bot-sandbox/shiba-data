@@ -475,6 +475,8 @@ class DotTest(unittest.TestCase):
         medicare, cleaning = extra("dental", "medicare", "copay", "$50"), extra("dental.preventive", cost_kind="copay", amount="$0")
         dental = present.dot("dental.preventive", "dental.comprehensive")
         self.assertEqual(column(dental, medicare, cleaning), [("●", [cleaning])])
+        crown = extra("dental.comprehensive", cost_kind="coinsurance", amount="50%")
+        self.assertEqual(column(dental, medicare, crown), [("●", [crown])])
         self.assertEqual(column(dental, medicare), [("", [medicare])])
 
 
