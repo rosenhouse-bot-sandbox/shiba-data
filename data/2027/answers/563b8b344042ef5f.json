@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-28e22b4acec7d885.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 6 Ambulance row: $350 copay for air both in-network and out-of-network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 6 Ambulance row: $350 copay for ground both in-network and out-of-network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2096,
+  "output_tokens": 160,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

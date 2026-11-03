@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "a744eaa24232bb11.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-306-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per date of service\", \"condition\": \"Emergency Ambulance\", \"page\": 49, \"quotes\": [\"In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance\"]},\n{\"plan_id\": \"H1036-306-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"condition\": \"Emergency Ambulance\", \"page\": 49, \"quotes\": [\"20% coinsurance regardless of the number of trips – Air Ambulance Non-Emergency Ambulance\"]},\n{\"plan_id\": \"H1036-306-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per date of service\", \"condition\": \"Non-Emergency Ambulance\", \"page\": 49, \"quotes\": [\"Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance\"]},\n{\"plan_id\": \"H1036-306-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"condition\": \"Non-Emergency Ambulance\", \"page\": 49, \"quotes\": [\"– Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance Out-of-Network:\"]},\n{\"plan_id\": \"H1036-306-0\", \"benefit\": \"ambulance\", \"setting\": \"outside_us\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per date of service\", \"condition\": \"Emergency Ambulance\", \"page\": 49, \"quotes\": [\"Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance\"]}]\n```",
+ "usage": {
+  "input_tokens": 3717,
+  "output_tokens": 2616,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

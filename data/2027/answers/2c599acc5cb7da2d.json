@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-64e05773e847b56e.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 46: under In-Network, the Non-Emergency Ambulance group lists 20% coinsurance regardless of the number of trips for Air Ambulance.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 46: under Out-of-Network, Worldwide Coverage lists a $325 copayment per date of service for Emergency Ambulance. The benefit text says emergency ambulance is covered world-wide, including outside the U.S.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 46: under In-Network, the Emergency Ambulance group lists 20% coinsurance regardless of the number of trips for Air Ambulance.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 46: under In-Network, the Non-Emergency Ambulance group lists a $325 copayment per date of service for Ground Ambulance.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 46: under In-Network, the Emergency Ambulance group lists a $325 copayment per date of service for Ground Ambulance.\"}]\n```",
+ "usage": {
+  "input_tokens": 3117,
+  "output_tokens": 687,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

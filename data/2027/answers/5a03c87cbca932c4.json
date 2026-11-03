@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "7dcf10accd77535d.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-011-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$350\", \"page\": 15, \"quotes\": [\"Ground Ambulance In-Network $350 copay * Out-of-Network $350 copay\"], \"note\": \"The quote keeps the '*' mark. Without it the text did not match the page, and the out-of-network '$350 copay' alone repeats on the page.\"},\n {\"plan_id\": \"H5439-011-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$350\", \"page\": 15, \"quotes\": [\"Air Ambulance In-Network $350 copay * Out-of-Network $350 copay\"], \"note\": \"The quote keeps the '*' mark. Without it the text did not match the page, and the out-of-network '$350 copay' alone repeats on the page.\"}]\n```",
+ "usage": {
+  "input_tokens": 2393,
+  "output_tokens": 1000,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

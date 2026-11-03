@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-77d83ba821336370.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 59 Ambulance services row says ambulance transportation outside the United States or its territories is not covered under any circumstances.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 59 Ambulance row gives $0 copayment or 20% coinsurance for each one-way Medicare-covered ground trip (in-network). The $0 applies to QMB/full Medicaid members, so 20% is the amount to give.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 59 Ambulance row gives $0 copayment or 20% coinsurance for each one-way Medicare-covered air trip. The line spans both network columns, so it covers in-network; the $0 is the QMB/full Medicaid amount.\"}]\n```",
+ "usage": {
+  "input_tokens": 2560,
+  "output_tokens": 592,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

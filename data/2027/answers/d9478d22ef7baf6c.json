@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-2af2a9f1fd104b7f.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 14 Ambulance, Ground row, out-of-network column: $325 copay per date of service.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Page 8 Worldwide Coverage shows emergency ambulance at $325 copay per date of service, but the amount sits only in the out-of-network column. The layout does not clearly support network 'any'.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 14 Ambulance, Ground row, in-network column: $325 copay per date of service.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 14 Ambulance, Air row, in-network column: 20% of the cost.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 14 Ambulance, Air row, out-of-network column: 20% of the cost.\"}]\n```",
+ "usage": {
+  "input_tokens": 3274,
+  "output_tokens": 643,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

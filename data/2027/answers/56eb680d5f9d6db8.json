@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "faebfcb17c1abba1.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H5216-048-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 14, \"quotes\": [\"Air 20% of the cost 20% of the cost\"]},\n  {\"plan_id\": \"H5216-048-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per date of service\", \"page\": 14, \"quotes\": [\"Ground $325 copay per date of service $325 copay per date of service\"]},\n  {\"plan_id\": \"H5216-048-0\", \"benefit\": \"ambulance\", \"setting\": \"outside_us\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per date of service\", \"page\": 8, \"quotes\": [\"Emergency ambulance $325 copay per date of service\"], \"note\": \"The Worldwide Coverage cost is printed under the out-of-network column. The page does not say whether it applies only out of network.\"}\n]\n```",
+ "usage": {
+  "input_tokens": 3101,
+  "output_tokens": 1133,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

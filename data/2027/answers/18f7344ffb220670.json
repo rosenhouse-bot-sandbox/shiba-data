@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-aca9d3510177adcd.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 37 Worldwide Coverage row: $325 copay per date of service for Emergency Ambulance outside the U.S. One cost is given, not split by ground and air.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 37 Out-of-Network: Air Ambulance is 20% coinsurance for both emergency and non-emergency.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 36 In-Network Emergency: Air Ambulance is 20% coinsurance. The non-emergency air row continuing on page 37 is also 20%.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 37 Out-of-Network: Ground Ambulance is a $325 copay per date of service for both emergency and non-emergency.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 36 In-Network Emergency: Ground Ambulance is a $325 copay per date of service. The non-emergency ground row continuing on page 37 is also $325.\"}]\n```",
+ "usage": {
+  "input_tokens": 3887,
+  "output_tokens": 776,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

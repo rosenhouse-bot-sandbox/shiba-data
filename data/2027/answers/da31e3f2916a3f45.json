@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-cbcaa238a8c713a4.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 6 Ambulance section: the header reads 'Copay per each one-way Medicare-covered transport'. The Air ambulance row shows $300 in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 6 Ambulance section: per one-way Medicare-covered transport, the Ground ambulance row shows $300 in network.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"Page 6 does show $300 out of network for the Worldwide ground or air ambulance row. But the row says 'Worldwide', not outside the US. Ambulance care outside the US is normally a supplemental benefit, not Medicare-covered, so the setting and covered_by fields are in doubt.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 6 Ambulance section: per one-way transport, the Ground ambulance row shows $300 out of network.\"},\n{\"id\": 4, \"ok\": false, \"reason\": \"Page 6 does show $300 in network for the Worldwide ground or air ambulance row. But the setting outside_us and covered_by medicare are in doubt: worldwide ambulance is normally a supplemental benefit.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 6 Ambulance section: per one-way transport, the Air ambulance row shows $300 out of network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2542,
+  "output_tokens": 1060,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

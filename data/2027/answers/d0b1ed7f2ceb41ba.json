@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-161c63c8abccc6dc.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 52 Ambulance services row: $350 copayment for each one-way Medicare-covered air trip. The text spans both columns, so it applies in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 52 Ambulance services row: $350 copayment for each one-way Medicare-covered ground trip (in-network).\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 52 Ambulance services row: outside the United States or its territories, ambulance transportation is not covered under any circumstances.\"}]\n```",
+ "usage": {
+  "input_tokens": 2458,
+  "output_tokens": 454,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

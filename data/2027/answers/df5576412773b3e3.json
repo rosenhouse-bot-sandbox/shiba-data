@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-5f6896f5c437eeed.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 9 Ambulance Services row shows Ground Ambulance at a $325 copay per one-way trip, in the in-network column.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 9 Ambulance Services row shows Air Ambulance at 20% coinsurance per one-way trip, in the in-network column.\"}]\n```",
+ "usage": {
+  "input_tokens": 2333,
+  "output_tokens": 277,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

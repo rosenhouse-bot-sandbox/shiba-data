@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "161c63c8abccc6dc.md",
+ "reply": "```json\n[{\"plan_id\": \"H2406-070-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$350\", \"unit\": \"per one-way trip\", \"limit\": \"\", \"page\": 52, \"quotes\": [\"$350 copayment or each one-way Medicare- covered ground trip (in-network).\"], \"note\": \"\"},\n{\"plan_id\": \"H2406-070-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$350\", \"unit\": \"per one-way trip\", \"limit\": \"\", \"page\": 52, \"quotes\": [\"$350 copayment or each one-way Medicare- covered air trip.\"], \"note\": \"The air trip line names no network. The text runs across both network columns, so it may apply out of network too.\"},\n{\"plan_id\": \"H2406-070-0\", \"benefit\": \"ambulance\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"not_covered\", \"page\": 52, \"quotes\": [\"Outside o the United States or its territories, ambulance transportation is not covered under any circumstances.\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 5737,
+  "output_tokens": 1274,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "5f6896f5c437eeed.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H7199-002-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per one-way trip\", \"limit\": \"\", \"page\": 9,\n   \"quotes\": [\"Ground Ambulance: $325 copay per one-way trip\"],\n   \"note\": \"The ambulance row has no separate out-of-network column, so this is stated as in network only.\"},\n  {\"plan_id\": \"H7199-002-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"unit\": \"per one-way trip\", \"limit\": \"\", \"page\": 9,\n   \"quotes\": [\"Air Ambulance: 20% coinsurance per one-way trip\"],\n   \"note\": \"The ambulance row has no separate out-of-network column, so this is stated as in network only.\"}\n]\n```",
+ "usage": {
+  "input_tokens": 2492,
+  "output_tokens": 631,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

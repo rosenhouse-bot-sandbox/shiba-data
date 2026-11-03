@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "d4758cd5b94a2266.md",
+ "reply": "```json\n[{\"plan_id\": \"H2406-070-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$350\", \"page\": 5, \"quotes\": [\"Ambulance $350 copay for ground\"], \"note\": \"The ambulance row is cut off at the bottom of the page, so any air ambulance cost is not shown. The out-of-network column also says $350 copay for ground, but that text cannot be quoted uniquely without mixing columns, so it is left out.\"}]\n```",
+ "usage": {
+  "input_tokens": 2417,
+  "output_tokens": 1061,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

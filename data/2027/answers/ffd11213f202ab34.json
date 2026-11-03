@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "4a0ee31be3437c35.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-306-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 10,\n  \"quotes\": [\"20% of the cost\"]},\n {\"plan_id\": \"H1036-306-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per date of service\", \"page\": 10,\n  \"quotes\": [\"$325 copay per date of service\"]},\n {\"plan_id\": \"H1036-306-0\", \"benefit\": \"ambulance\", \"setting\": \"outside_us\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per date of service\", \"page\": 7,\n  \"quotes\": [\"Emergency ambulance: $325 copay per date of\"],\n  \"note\": \"Worldwide emergency ambulance. The document does not say ground or air, so the general ambulance benefit is used. Network is set to the in-network default because the document states none.\"}]\n```",
+ "usage": {
+  "input_tokens": 3666,
+  "output_tokens": 948,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

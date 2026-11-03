@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "2af2a9f1fd104b7f.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H5216-455-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 14,\n   \"quotes\": [\"Air 20% of the cost\"]},\n  {\"plan_id\": \"H5216-455-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"out\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 14,\n   \"quotes\": [\"Air 20% of the cost\"]},\n  {\"plan_id\": \"H5216-455-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per date of service\", \"page\": 14,\n   \"quotes\": [\"Ground $325 copay per date of service\"]},\n  {\"plan_id\": \"H5216-455-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"out\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per date of service\", \"page\": 14,\n   \"quotes\": [\"Ground $325 copay per date of service\"]},\n  {\"plan_id\": \"H5216-455-0\", \"benefit\": \"ambulance\", \"setting\": \"outside_us\", \"network\": \"any\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per date of service\", \"page\": 8,\n   \"quotes\": [\"Emergency ambulance $325 copay per date of service\"],\n   \"note\": \"Worldwide coverage row. The cost is printed under the out-of-network column, but this may be a layout artifact. The network was set to any because networks do not apply outside the U.S. Ground or air is not specified.\"}\n]\n```",
+ "usage": {
+  "input_tokens": 3120,
+  "output_tokens": 1464,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

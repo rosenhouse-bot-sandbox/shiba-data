@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-61de2101267140ce.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 7 Ambulance section, Air ambulance row: 20% coinsurance. No network or setting qualifier, so in-network Medicare-covered applies.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 7 Ambulance section, Ground ambulance row: $250 copay. No network or setting qualifier, so in-network Medicare-covered applies.\"}]\n```",
+ "usage": {
+  "input_tokens": 1891,
+  "output_tokens": 152,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

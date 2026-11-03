@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-50159487a52ccddf.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 11 Air Ambulance row, ATRIO Freedom column: out-of-network $300 copay.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 11 Ground Ambulance row, ATRIO Choice Rx column: in-network $250 copay.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 11 Air Ambulance row, ATRIO Choice Rx column: in-network $250 copay.\"},\n{\"id\": 3, \"ok\": false, \"reason\": \"Page 11 Ground Ambulance row: Choice Rx out-of-network is a $250 copay. The $300 belongs to the Freedom column.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 11 Air Ambulance row, ATRIO Choice Rx column: out-of-network $250 copay.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 11 Ground Ambulance row, ATRIO Choice Rx column: out-of-network $250 copay.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 11 Ground Ambulance row, ATRIO Freedom column: out-of-network $300 copay.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 11 Ground Ambulance row, ATRIO Freedom column: in-network $300 copay.\"},\n{\"id\": 8, \"ok\": true, \"reason\": \"Page 11 Air Ambulance row, ATRIO Freedom column: in-network $300 copay.\"},\n{\"id\": 9, \"ok\": false, \"reason\": \"Page 11 Air Ambulance row: Choice Rx in-network is a $250 copay. The $300 belongs to the Freedom column.\"},\n{\"id\": 10, \"ok\": false, \"reason\": \"Page 11 Air Ambulance row: Freedom out-of-network is a $300 copay. The $250 belongs to the Choice Rx column.\"}]\n```",
+ "usage": {
+  "input_tokens": 3419,
+  "output_tokens": 913,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

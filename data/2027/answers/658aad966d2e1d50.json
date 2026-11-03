@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "50159487a52ccddf.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H7006-021-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$300\", \"page\": 11, \"quotes\": [\"Ground Ambulance\", \"50% coinsurance In-Network $300 copay\"], \"note\": \"The second quote reads the ATRIO Freedom (PPO) column straight down from the Physical Therapy out-of-network cell into the Ground Ambulance in-network cell.\"},\n{\"plan_id\": \"H7006-021-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$300\", \"page\": 11, \"quotes\": [\"Ground Ambulance\", \"50% coinsurance In-Network $300 copay Prior Authorization required for non-emergent transportation. Out-of-Network $300 copay\"], \"note\": \"The second quote reads the ATRIO Freedom (PPO) column straight down through the Ground Ambulance cells.\"},\n{\"plan_id\": \"H7006-021-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$300\", \"page\": 11, \"quotes\": [\"Air Ambulance\", \"Out-of-Network $300 copay In-Network $300 copay\"], \"note\": \"The second quote reads the ATRIO Freedom (PPO) column straight down from the Ground Ambulance out-of-network cell into the Air Ambulance in-network cell.\"},\n{\"plan_id\": \"H7006-021-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$300\", \"page\": 11, \"quotes\": [\"Air Ambulance\", \"Out-of-Network $300 copay In-Network $300 copay Prior Authorization required for non-emergent transportation. Out-of-Network $300 copay\"], \"note\": \"The second quote reads the ATRIO Freedom (PPO) column straight down through the Air Ambulance cells.\"}]\n```",
+ "usage": {
+  "input_tokens": 3371,
+  "output_tokens": 1813,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

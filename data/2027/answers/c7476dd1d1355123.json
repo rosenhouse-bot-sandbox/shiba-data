@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-d370b4b5b3950077.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 8 Ambulance Services row, under Ground Ambulance: $315 copay per one-way trip. This is a Medicare-covered service and in network by default for this single plan.\"}, {\"id\": 1, \"ok\": true, \"reason\": \"Page 8 Ambulance Services row: Air Ambulance is 20% coinsurance per one-way trip, in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2312,
+  "output_tokens": 146,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
