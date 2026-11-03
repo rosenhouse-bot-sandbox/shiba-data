@@ -1,0 +1,11 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H2406-070-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 74, Medicare Part B Drugs row, in-network column: $0 copayment for Medicare-covered Part B allergy antigens (the low end) and 20% coinsurance for chemotherapy and all other Part B drugs (the high end). Here 'or' is a dropped-f 'for', not the Medicaid-level wording, and the 30% amount is out-of-network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2021,
+  "output_tokens": 415,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

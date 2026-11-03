@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H3817-009-1.md",
+ "reply": "[{\"id\":0,\"ok\":false,\"reason\":\"The 0% low end is supported only by the page 50 home infusion row, which is a different service from the general Part B drug row. The Part B drugs row on page 54 says 20% coinsurance, with certain drugs possibly lower, and never states 0%. The quotes do not show the 0%-20% range for Part B drugs.\"}]",
+ "usage": {
+  "input_tokens": 2929,
+  "output_tokens": 355,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

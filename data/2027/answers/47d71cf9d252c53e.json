@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2923-001-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"Page 53 says routine acupuncture is a supplemental benefit covered under the Dental & Alternative Therapy Allowance. Page 61 shows the $1,750 allowance names Routine Acupuncture, and nothing limits it to some members.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Page 61 lists massage therapy by a licensed massage therapist as a covered alternative therapy. It is reimbursed at 50% under the $1,750 shared allowance, so the plan covers supplemental massage.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Page 61 shows the $1,750 allowance covers preventive dental (100% reimbursed) and comprehensive dental (50% reimbursed). Page 111 confirms $1,750 per year for covered dental under Mandatory Supplemental Dental Benefits.\"}\n]",
+ "usage": {
+  "input_tokens": 4029,
+  "output_tokens": 410,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
