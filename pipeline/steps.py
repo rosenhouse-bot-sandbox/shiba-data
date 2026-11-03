@@ -7,15 +7,17 @@ import json
 
 
 def versions(data, known, candidate=""):
-    """{step: version} as pinned, with a candidate such as "filled@2" in place of its step's pin.
-    known maps each step to its versions."""
+    """{step: version} as pinned, with each candidate in place of its step's pin.
+    candidate is like "filled@2", or several joined by commas. known maps each step to its versions."""
     with open(f"{data}/steps.json") as f:
         out = json.load(f)
-    if candidate:
-        step, _, version = candidate.partition("@")
+    candidates = [c.partition("@") for c in candidate.split(",")] if candidate else []
+    for step, _, version in candidates:
         if step not in known:
             raise SystemExit(f"No versioned step {step}")
         out[step] = int(version) if version.isdigit() else version
+    if len({step for step, _, _ in candidates}) < len(candidates):
+        raise SystemExit(f"Two candidates for one step: {candidate}")
     bad = {s: out.get(s) for s in known if out.get(s) not in known[s]}
     if bad:
         raise SystemExit(f"No such step versions: {bad}")

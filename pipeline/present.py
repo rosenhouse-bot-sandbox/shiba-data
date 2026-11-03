@@ -121,6 +121,19 @@ def ambulance(organization, found):
     return [(show_or(here), here), line2]
 
 
+def outpatient_surgery(organization, found):
+    """Line 1 is outpatient hospital surgery and line 2 is surgical center surgery, each as (value, cited facts).
+    A $0 diagnostic colonoscopy or skin biopsy priced in that setting starts its line at $0 (fields.py)."""
+    def line(setting):
+        cost = best(found, "surgery", setting)
+        zeros = [f for leaf in ("surgery.colonoscopy", "surgery.skin_biopsy")
+                 for f in best(found, leaf, setting, lambda f: usable(f) and f["benefit"] == leaf and f["setting"] == setting)
+                 if f["cost_kind"] == "copay" and f["amount"] == "$0"]
+        cited = unique(cost + zeros) if cost else []
+        return show(cited), cited
+    return [line("outpatient_hospital"), line("asc")]
+
+
 def unique(found):
     return list({id(f): f for f in found}.values())
 
@@ -134,7 +147,7 @@ def plan_facts(data):
 
 
 # A rule returns the lines of its column.
-COLUMNS = {"L_xray_imaging": xray_imaging, "AB_ambulance": ambulance}
+COLUMNS = {"L_xray_imaging": xray_imaging, "AB_ambulance": ambulance, "I_outpatient_surgery": outpatient_surgery}
 
 
 def lines(data, column):

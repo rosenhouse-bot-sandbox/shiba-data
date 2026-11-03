@@ -76,7 +76,7 @@ flowchart TB
 - `pipeline/find_docs.py` lists plan documents from browser finds (`found.csv`), the volunteers' Links sheet (`links.csv`), and carrier URL templates, in that order of preference.
 - `pipeline/run.py` regenerates `generated/` and `machine/`. People and earlier Claude sessions wrote the other CSVs.
 - The Pipeline workflow runs `run.py <year> <work> api` on main and pushes the result to a new branch. Only people with write access can start it.
-- `data/<year>/steps.json` pins a version of each versioned model step (#129). A new version merges unpinned. The Pipeline workflow's `candidate` input, such as `filled@2`, runs it on main to save its answers. A later PR pins it.
+- `data/<year>/steps.json` pins a version of each versioned model step (#129). A new version merges unpinned. The Pipeline workflow's `candidate` input, such as `filled@2` or `filled@2,document_facts@5`, runs those versions on main to save their answers. A later PR pins them.
 - `pipeline/layers.py` applies `generated/citations.csv` and then `edits.csv` to the generated sheets. Rows in `machine/` only cite values.
 - `pipeline/blanks.py` and `pipeline/filled.py` write model task files and turn the answers into `machine/` rows. Haiku reads, then Sonnet and Opus verify.
 - `pipeline/ask.py` answers task files with the Claude API. It saves each answer in `answers/`, keyed by the model and the task's text, so a rerun calls a model only for new tasks.

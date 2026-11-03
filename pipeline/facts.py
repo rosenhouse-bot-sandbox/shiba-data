@@ -28,13 +28,40 @@ BENEFITS = {
     "surgery": "Outpatient surgery and procedures, priced together",
     "surgery.colonoscopy": "Diagnostic colonoscopies, not screening colonoscopies",
     "surgery.skin_biopsy": "Skin biopsies",
+    "tests": "Outpatient diagnostic tests and lab services, priced together",
+    "tests.diagnostic": "Non-radiological diagnostic tests and procedures, such as EKGs and stress tests",
+    "tests.diagnostic.sleep_study": "Sleep studies, in a facility or at home",
+    "tests.lab": "Outpatient lab services and lab tests, such as HbA1c tests",
+    "tests.genetic": "Genetic and molecular diagnostic testing",
+    "visits": "Office visits to a primary care provider or specialist (physician/practitioner services). Not preventive "
+              "or wellness visits, hearing exams, remote patient monitoring, mental health, podiatry, chiropractic, "
+              "vision, or other health care professionals. A visit in a nursing home or at home has that `condition`",
+    "rehab": "Outpatient physical, occupational and speech therapy, priced together. Not cardiac or pulmonary rehabilitation",
+    "rehab.physical": "Physical therapy",
+    "rehab.occupational": "Occupational therapy",
+    "rehab.speech": "Speech-language therapy",
+    "rehab.reevaluation": "Therapy re-evaluations, priced apart from visits",
+    "inpatient": "Inpatient hospital stays of every kind, priced together",
+    "inpatient.acute": "Inpatient hospital care, which may include rehabilitation and long-term care hospitals. "
+                       "A cost for some days of a stay has `unit` `per day` and the days in `limit`, as `days 1-5`, "
+                       "or `days 6+` from day 6 on. A cost for a whole stay has `unit` `per stay`",
+    "inpatient.psychiatric": "Inpatient psychiatric hospital stays",
 }
 # Regexes that find the pages about each benefit group
 FIND = {"imaging": [r"x.ray", r"radiolog", r"\bMRI\b", r"\bCT\b", r"\bPET\b", r"ultrasound", r"mammogra",
                     r"nuclear medicine", r"imaging"],
         "ambulance": [r"ambulance", r"outside (?:of )?the United States", r"worldwide", r"anywhere in the world"],
         "surgery": [r"outpatient surg", r"ambulatory surg", r"surgical cent", r"surgery cent", r"diagnostic colonoscop",
-                    r"skin biops"]}
+                    r"skin biops"],
+        "tests": [r"diagnostic (?:tests|procedures)", r"lab(?:oratory)? (?:services|tests)", r"non.?radiolog",
+                  r"sleep stud"],
+        "visits": [r"physician/practitioner services, including",
+                   r"(?:primary care|\bPCP|specialist|specialty care)[^\n]{0,60}(?:\$\d|\d%)",
+                   r"(?:\$\d|\d%)[^\n]{0,60}(?:primary care|\bPCP|specialist)",
+                   r"(?:primary care|specialist|specialty care) (?:office )?visit", r"provider and professional services",
+                   r"by a specialist", r"doctor visits"],
+        "rehab": [r"outpatient rehab", r"physical therap", r"occupational therap"],
+        "inpatient": [r"inpatient hospital"]}
 SETTINGS = {
     "any": "The document names no setting, or one cost covers every setting",
     "office": "A physician's office, of any kind",
@@ -44,6 +71,7 @@ SETTINGS = {
     "outpatient_hospital": "An outpatient hospital",
     "urgent_care": "An urgent care center",
     "asc": "An ambulatory surgical center (ASC)",
+    "telehealth": "Virtual visits by phone or video (telehealth)",
     "outside_us": "Outside the United States and its territories, as in a worldwide emergency benefit, "
                   "or an exclusion of all care outside the U.S.",
 }
@@ -52,6 +80,10 @@ GROUP_SETTINGS = {
     "imaging": ("any", "office", "office.pcp", "office.specialist", "freestanding", "outpatient_hospital", "urgent_care"),
     "ambulance": ("any", "outside_us"),
     "surgery": ("any", "outpatient_hospital", "asc"),
+    "tests": ("any", "office", "office.pcp", "office.specialist", "freestanding", "outpatient_hospital", "urgent_care", "asc"),
+    "visits": ("any", "office", "office.pcp", "office.specialist", "telehealth"),
+    "rehab": ("any", "office", "office.specialist", "freestanding", "outpatient_hospital"),
+    "inpatient": ("any",),
 }
 NETWORKS = {"any": "In and out of network, as the document says", "in": "In network", "out": "Out of network"}
 COVERED_BY = {"medicare": "A Medicare-covered benefit", "supplemental": "A routine (supplemental) benefit"}
