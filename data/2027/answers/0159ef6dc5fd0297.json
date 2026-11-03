@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-dca4e04d7b6dc26b.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 56 Inpatient hospital care, In-Network: $0 copay each day for days 6 to 90 for Medicare-covered hospital care.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 58 Inpatient services in a psychiatric hospital, In-Network: $250 copay each day for days 1 to 5.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 57 Inpatient hospital care continued, Out-of-Network: 50% coinsurance for each Medicare-covered hospital stay.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 58 psychiatric hospital row, In-Network: $0 copay each day for days 6 to 90.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 58 psychiatric hospital row, Out-of-Network: 50% coinsurance for each Medicare-covered hospital stay.\"},\n{\"id\": 5, \"ok\": false, \"reason\": \"Page 58 does state a 190-day lifetime limit, but it also says the limit does not apply to a psychiatric unit of a general hospital. The item leaves that exception out of its condition. The page also states no network for the limit, so network 'any' is not shown.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 56 In-Network: after reaching the Medicare-covered benefit limit, $0 copay for days 91 and beyond.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 56 Inpatient hospital care, In-Network: $250 copay each day for days 1 to 5.\"}]\n```",
+ "usage": {
+  "input_tokens": 4773,
+  "output_tokens": 1142,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

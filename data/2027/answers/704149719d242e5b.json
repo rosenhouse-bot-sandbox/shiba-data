@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "d4758cd5b94a2266.md",
+ "reply": "```json\n[{\"plan_id\": \"H2406-070-0\", \"benefit\": \"visits\", \"setting\": \"office.pcp\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 3, \"quotes\": [\"Primary care        $0 copay\"]},\n{\"plan_id\": \"H2406-070-0\", \"benefit\": \"visits\", \"setting\": \"office.pcp\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$25\", \"page\": 3, \"quotes\": [\"$25 copay\"]},\n{\"plan_id\": \"H2406-070-0\", \"benefit\": \"visits\", \"setting\": \"office.specialist\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$70\", \"page\": 3, \"quotes\": [\"$70 copay\"]},\n{\"plan_id\": \"H2406-070-0\", \"benefit\": \"visits\", \"setting\": \"office.specialist\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$90\", \"page\": 3, \"quotes\": [\"$90 copay\"]},\n{\"plan_id\": \"H2406-070-0\", \"benefit\": \"visits\", \"setting\": \"telehealth\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 3, \"quotes\": [\"Virtual medical     $0 copay\"]}]\n```",
+ "usage": {
+  "input_tokens": 2543,
+  "output_tokens": 1189,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

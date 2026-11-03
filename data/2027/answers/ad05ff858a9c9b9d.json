@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2923-005-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"Page 62 allowance row lists massage therapy by a licensed massage therapist as covered under the $1,500 Dental & Alternative Therapy Allowance, which counts toward the dot.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Pages 84-85 Part B drugs row: allergy serum is $0 copay and other Part B drugs and chemotherapy are 20% coinsurance, which gives 0%-20%.\"},\n{\"id\":2,\"ok\":false,\"reason\":\"The quotes are from the Part B drugs row, not outpatient rehabilitation, so they do not support a 0%-20% rehab value.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"Page 54 says routine acupuncture is a supplemental benefit covered under the Dental & Alternative Therapy Allowance. Page 122 confirms the allowance can be used for acupuncture.\"},\n{\"id\":4,\"ok\":false,\"reason\":\"Page 93 shows $40 only under Physical Therapy (home or office). The occupational and speech therapy prices are cut off, so the page does not show $40 for all rehab services.\"},\n{\"id\":5,\"ok\":true,\"reason\":\"Page 110 Mandatory Supplemental Dental Benefits: the plan pays up to $1,500 per year for cleanings, exams and X-rays, with preventive services at 0% coinsurance.\"}\n]",
+ "usage": {
+  "input_tokens": 7959,
+  "output_tokens": 993,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

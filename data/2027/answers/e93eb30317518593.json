@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "516ff586a12c8288.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-019-0\", \"benefit\": \"visits\", \"setting\": \"office.pcp\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per visit\", \"page\": 100, \"quotes\": [\"$0 copay for each Medicare-covered PCP office visit.\"]},\n{\"plan_id\": \"H5439-019-0\", \"benefit\": \"visits\", \"setting\": \"office.pcp\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$30\", \"unit\": \"per visit\", \"page\": 101, \"quotes\": [\"$30 copay for each Medicare-covered PCP office visit.\"]},\n{\"plan_id\": \"H5439-019-0\", \"benefit\": \"visits\", \"setting\": \"office.specialist\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$30\", \"unit\": \"per visit\", \"page\": 101, \"quotes\": [\"Consultation, diagnosis, and treatment by a specialist\", \"$30 copay for each Medicare-covered specialist visit.\"]},\n{\"plan_id\": \"H5439-019-0\", \"benefit\": \"visits\", \"setting\": \"office.specialist\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$60\", \"unit\": \"per visit\", \"page\": 102, \"quotes\": [\"$60 copay for each Medicare-covered specialist visit.\"]},\n{\"plan_id\": \"H5439-019-0\", \"benefit\": \"visits\", \"setting\": \"telehealth\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"condition\": \"services performed through your plan's virtual visit provider(s)\", \"page\": 103, \"quotes\": [\"$0 copay for virtual visit\", \"Primary Care Physician\"], \"note\": \"The $0 applies only through the plan's virtual visit providers. Telehealth from other network providers costs the same as that provider's office visit.\"}]\n```",
+ "usage": {
+  "input_tokens": 7906,
+  "output_tokens": 2113,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

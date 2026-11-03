@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2923-019-0.retry.md",
+ "reply": "```json\n[{\"key\": \"main.K_tests_labs\", \"result\": \"cite\", \"citations\": [{\"page\": 89, \"quote\": \"Home Sleep Studies: $0\"}, {\"page\": 89, \"quote\": \"Freestanding location: $40\"}, {\"page\": 90, \"quote\": \"Routine Laboratory Services Office or freestanding location: $0 copay\"}]}]\n```",
+ "usage": {
+  "input_tokens": 2829,
+  "output_tokens": 2615,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

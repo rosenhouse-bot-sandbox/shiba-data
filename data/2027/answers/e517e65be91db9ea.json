@@ -1,0 +1,11 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H2923-028-3.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 86 Diagnostic Procedures and Tests row: specialist $20, freestanding $40, home sleep studies $0. EKGs at $15/$40 fall within that range. Page 87 Routine Laboratory Services: $0 at office/freestanding.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"The quotes are from the Part B drugs row, not tests/labs. A coinsurance range does not match this field.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Pages 82-83 Part B drugs row: allergy serum $0 copay, all other Part B drugs 20% coinsurance, giving 0%-20%.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Pages 106-107: mandatory supplemental dental with a $250 annual maximum, covering cleanings, routine exams and X-rays for all members.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 54: routine acupuncture is a supplemental benefit under the Dental & Alternative Therapy Allowance. Page 62 lists acupuncture for conditions other than chronic low back pain.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 62: the Dental & Alternative Therapy Allowance lists massage therapy by a licensed massage therapist among covered Alternative Therapies.\"}]\n```",
+ "usage": {
+  "input_tokens": 8710,
+  "output_tokens": 932,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

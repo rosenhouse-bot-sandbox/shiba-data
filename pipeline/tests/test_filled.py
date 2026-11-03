@@ -2,7 +2,7 @@ import contextlib, csv, io, json, os, pathlib, random, shutil, sys, tempfile, un
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-import filled, layers
+import filled, layers, present
 from eoc import DATA, eoc
 
 PLAN = "H2056-003-0"
@@ -71,13 +71,15 @@ class VersionsTest(unittest.TestCase):
 
     def test_later_versions_see_their_presented_columns_instead_of_their_edits(self):
         for version, columns in ((2, ["L_xray_imaging"]), (3, ["L_xray_imaging", "AB_ambulance"]),
-                                 (4, ["L_xray_imaging", "AB_ambulance", "I_outpatient_surgery"])):
+                                 (4, ["L_xray_imaging", "AB_ambulance", "I_outpatient_surgery"]),
+                                 (5, list(present.COLUMNS))):
             names, ignore = filled.VERSIONS[version]
             self.assertEqual(names, layers.without(layers.FILLED))
             for column in columns:
                 self.assertTrue(ignore(dict(layer=layers.EDITS, column=column)), (version, column))
                 self.assertFalse(ignore(dict(layer=layers.PRESENTED, column=column)), (version, column))
-            self.assertFalse(ignore(dict(layer=layers.EDITS, column="G_specialist")))
+            for column in set(present.COLUMNS) - set(columns) | {"C_premium"}:
+                self.assertFalse(ignore(dict(layer=layers.EDITS, column=column)), (version, column))
         _, ignore = filled.VERSIONS[3]
         self.assertTrue(ignore(dict(layer=layers.PRESENTED, column="I_outpatient_surgery")))
         _, ignore = filled.VERSIONS[2]

@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-2c828c1ac1616719.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 6 summary table, Primary care office visits row: out-of-network is 50% coinsurance.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"The quote is the PCP visit row. It does not support a specialist office visit cost, which is $40 in network.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 52, In-office PCP visits: out-of-network is 50% coinsurance.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 6, Primary care office visits: $0 per provider per day in network.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 6, Specialist office visits: out-of-network is 50% coinsurance.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 6, Specialist office visits: $40 per provider per day in network.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 53, Virtual specialist visits: $35 copay per provider per day in network.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 52, In-office PCP visits: $0 copay per provider per day in network.\"},\n{\"id\": 8, \"ok\": true, \"reason\": \"Page 53, In-office specialist visits: out-of-network is 50% coinsurance.\"},\n{\"id\": 9, \"ok\": true, \"reason\": \"Page 53, Virtual specialist visits: out-of-network is 50% coinsurance.\"},\n{\"id\": 10, \"ok\": true, \"reason\": \"Page 53, Virtual PCP visits: $0 copay per provider per day in network.\"},\n{\"id\": 11, \"ok\": true, \"reason\": \"Page 53, In-office specialist visits: $40 copay per provider per day in network.\"},\n{\"id\": 12, \"ok\": true, \"reason\": \"Page 53, Virtual PCP visits: out-of-network is 50% coinsurance.\"},\n{\"id\": 13, \"ok\": false, \"reason\": \"$40 is the specialist row. The PCP office visit is $0 in network.\"},\n{\"id\": 14, \"ok\": false, \"reason\": \"$40 is the specialist row on page 6. The PCP office visit is $0 in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 6281,
+  "output_tokens": 1028,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

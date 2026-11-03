@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2923-001-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"Page 61: the allowance covers massage therapy by a licensed massage therapist, and the allowance is available to all members.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Pages 61 and 111: a $1,750 yearly allowance covers preventive and comprehensive dental.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Page 53: routine acupuncture is a supplemental benefit covered under the Dental & Alternative Therapy Allowance (also on page 61).\"},\n{\"id\":3,\"ok\":true,\"reason\":\"Page 86 tests: PCP office and home sleep study $0, specialist office $20, freestanding $40 (outpatient hospital excluded). Page 87 labs: routine and advanced lab at office or freestanding $0. The lab quote is a truncated tail, but the page shows the $0 office rows.\"},\n{\"id\":4,\"ok\":true,\"reason\":\"Pages 82-83: allergy serum is $0, and other Part B drugs and chemotherapy are 20% coinsurance, so 0%-20% fits.\"},\n{\"id\":5,\"ok\":false,\"reason\":\"The value 0%-20% is the Part B drug range, not a tests/labs value. The quotes are about Part B drugs, not tests or labs.\"},\n{\"id\":6,\"ok\":false,\"reason\":\"The value 0%-20% is a Part B drug coinsurance range, not an outpatient rehab copay. The quotes are about drugs, not rehab.\"},\n{\"id\":7,\"ok\":true,\"reason\":\"Page 91: physical therapy at home or office is $20. Page 92: occupational therapy at an office is $40, and speech therapy is $20, so the range is $20-$40.\"}\n]",
+ "usage": {
+  "input_tokens": 9963,
+  "output_tokens": 1476,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

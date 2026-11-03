@@ -1,0 +1,11 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H2406-042-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 63: routine hearing exam is a $0 copay in-network. Page 64: the hearing aid allowance is $700, limited to 2 aids every year. The out-of-network column ('first $700 for up to 2 hearing aids') indicates the $700 is a combined allowance.\"}, {\"id\": 1, \"ok\": true, \"reason\": \"Page 12, specialist office visits row: $50 copay per visit in-network and $80 copay per visit out-of-network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3762,
+  "output_tokens": 681,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

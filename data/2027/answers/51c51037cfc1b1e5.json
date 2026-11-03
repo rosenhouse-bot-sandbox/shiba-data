@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H7199-002-0.md",
+ "reply": "```json\n[{\"key\": \"main.J_outpatient_rehab\", \"result\": \"cite\", \"citations\": [{\"page\": 106, \"quote\": \"Home or Office location: $40\"}]},\n {\"key\": \"main.K_tests_labs\", \"result\": \"cite\", \"citations\": [{\"page\": 94, \"quote\": \"Diagnostic Procedures and Tests PCP's office: $0 copay\"}, {\"page\": 94, \"quote\": \"Freestanding location: $40 copay\"}, {\"page\": 95, \"quote\": \"Routine Laboratory Services Office or freestanding location: $0 copay\"}]},\n {\"key\": \"main.M_part_b_drugs\", \"result\": \"cite\", \"citations\": [{\"page\": 91, \"quote\": \"Allergy Serum: $0 copay at:\"}, {\"page\": 91, \"quote\": \"Chemotherapy Drugs: 20% coinsurance at:\"}, {\"page\": 91, \"quote\": \"All Other Part B Drugs: 20% coinsurance at:\"}]},\n {\"key\": \"main.S_acupuncture\", \"result\": \"cite\", \"citations\": [{\"page\": 62, \"quote\": \"You can be reimbursed up to $2,250 per year for covered dental services, Therapeutic Massage, Routine Acupuncture, and/or Naturopath Services.\"}, {\"page\": 64, \"quote\": \"Acupuncture services for conditions other than chronic lower back pain\"}]},\n {\"key\": \"main.V_massage\", \"result\": \"cite\", \"citations\": [{\"page\": 62, \"quote\": \"You can be reimbursed up to $2,250 per year for covered dental services, Therapeutic Massage, Routine Acupuncture, and/or Naturopath Services.\"}, {\"page\": 63, \"quote\": \"Massage therapy rendered by a licensed massage therapist.\"}]}]\n```",
+ "usage": {
+  "input_tokens": 10627,
+  "output_tokens": 6990,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

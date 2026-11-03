@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2056-003-0.md",
+ "reply": "```json\n[{\"key\": \"main.G_specialist\", \"result\": \"cite\", \"citations\": [{\"page\": 8, \"quote\": \"Specialist office visits $65 per visit\"}, {\"page\": 63, \"quote\": \"$65 copay for Medicare‑covered physician specialist services\"}]}]\n```",
+ "usage": {
+  "input_tokens": 2519,
+  "output_tokens": 1391,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

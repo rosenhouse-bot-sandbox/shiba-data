@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-da2974c756f3eedc.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5 Doctor Visits row: Primary Care Provider (PCP) $0 copay. HMO plan, so in network is the default.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 5 Doctor Visits row: Specialist 30% coinsurance. The row says telehealth costs the same as an in-person office visit.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 5 Doctor Visits row: Specialist 30% coinsurance in network.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 5 Doctor Visits row: PCP $0 copay. The row says telehealth costs the same as an in-person office visit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2427,
+  "output_tokens": 403,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

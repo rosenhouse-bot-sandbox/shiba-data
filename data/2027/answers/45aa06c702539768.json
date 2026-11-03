@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "f751937f09316ed1.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-009-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$2,241\", \"unit\": \"per stay\", \"limit\": \"\", \"page\": 81,\n  \"quotes\": [\"Inpatient hospital care $2,241 copay per stay\"], \"note\": \"\"},\n {\"plan_id\": \"H2923-009-0\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$2,091\", \"unit\": \"per stay\", \"limit\": \"\", \"page\": 82,\n  \"quotes\": [\"Inpatient services in a psychiatric hospital $2,091 copay per stay\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 13755,
+  "output_tokens": 1143,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "0bd982dc589e8cba.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H5216-427-2\", \"benefit\": \"visits\", \"setting\": \"office.pcp\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 63, \"quotes\": [\"Provider and Professional Services $0 copayment – PCP's Office $45 copayment – Specialist's Office\"]},\n  {\"plan_id\": \"H5216-427-2\", \"benefit\": \"visits\", \"setting\": \"office.specialist\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$45\", \"page\": 63, \"quotes\": [\"Provider and Professional Services $0 copayment – PCP's Office $45 copayment – Specialist's Office\"]},\n  {\"plan_id\": \"H5216-427-2\", \"benefit\": \"visits\", \"setting\": \"telehealth\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 63, \"quotes\": [\"Telehealth Services $0 copayment – PCP Virtual\"], \"note\": \"Applies to PCP virtual visits; specialist virtual visits are $45.\"},\n  {\"plan_id\": \"H5216-427-2\", \"benefit\": \"visits\", \"setting\": \"telehealth\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$45\", \"page\": 63, \"quotes\": [\"$45 copayment – Specialist Virtual\"], \"note\": \"Applies to specialist virtual visits; PCP virtual visits are $0.\"},\n  {\"plan_id\": \"H5216-427-2\", \"benefit\": \"visits\", \"setting\": \"office.pcp\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"35%\", \"page\": 64, \"quotes\": [\"Provider and Professional Services 35% coinsurance – PCP's Office – Specialist's Office\"]},\n  {\"plan_id\": \"H5216-427-2\", \"benefit\": \"visits\", \"setting\": \"office.specialist\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"35%\", \"page\": 64, \"quotes\": [\"Provider and Professional Services 35% coinsurance – PCP's Office – Specialist's Office\"]}\n]\n```",
+ "usage": {
+  "input_tokens": 13661,
+  "output_tokens": 2311,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

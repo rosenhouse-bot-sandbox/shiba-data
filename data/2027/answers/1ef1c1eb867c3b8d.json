@@ -1,0 +1,11 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H5216-428-2.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 63 Diagnostic Procedures and Tests row: $0 at the PCP's office and $50 at the specialist's office, giving $0-$50; the outpatient hospital price is excluded per the field's meaning. Page 64 Lab Services row: $0 at both the PCP's and the specialist's office.\"}]\n```",
+ "usage": {
+  "input_tokens": 2409,
+  "output_tokens": 284,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

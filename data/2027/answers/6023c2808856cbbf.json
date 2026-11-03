@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-d4758cd5b94a2266.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 2 Inpatient hospital care row: $0 copay per day for days 13 and beyond, out-of-network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 5 Mental health inpatient row: $910 copay per day for days 1-12, out-of-network.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 5 Mental health inpatient row: $835 copay per day for days 1-2, in-network.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 2 Inpatient hospital care row: $910 copay per day for days 1-12, out-of-network.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 2 Inpatient hospital care row: $0 copay per day for days 4 and beyond, in-network.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 2 Inpatient hospital care row: $835 copay per day for days 1-3, in-network.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 5 Mental health inpatient row: $0 copay per day for days 13-90, out-of-network.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 5 Mental health inpatient row: $0 copay per day for days 3-90, in-network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3922,
+  "output_tokens": 685,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

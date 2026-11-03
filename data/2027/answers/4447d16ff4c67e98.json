@@ -1,0 +1,11 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H2056-003-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 8 lists 'Specialist office visits $65 per visit'. Page 63 shows a $65 copay for Medicare-covered physician specialist services, which is the in-network office visit amount, separate from the nursing-home, hearing-exam and telehealth rows.\"}]\n```",
+ "usage": {
+  "input_tokens": 2271,
+  "output_tokens": 116,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

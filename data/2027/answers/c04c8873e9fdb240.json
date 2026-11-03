@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-90a4efa6544175a2.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 74 inpatient hospital care row: $0 copay per day for days 5 to 90 of each stay, Medicare-covered admissions.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 76 psychiatric hospital row: $400 copay per day for days 1 to 5, Medicare-covered admissions.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 74 inpatient hospital care row: $0 copay per day for days 91 to 95 for additional days.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 76 psychiatric hospital row: Lifetime Reserve Days $0 copay per day.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 74 inpatient hospital care row: Lifetime Reserve Days $0 copay per day.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 74 inpatient hospital care row: $600 copay per day for days 1 to 4, Medicare-covered admissions.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 76 psychiatric hospital row: $0 copay per day for days 6 to 90 for mental health care.\"}]\n```",
+ "usage": {
+  "input_tokens": 3988,
+  "output_tokens": 716,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

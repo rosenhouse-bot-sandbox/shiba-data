@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2923-025-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"Office-setting rehab copays: PT $45 (p.93), OT $35 (p.94), speech $45 (p.94). The range $35-$45 matches, and re-evaluations and outpatient hospital prices are excluded.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Page 110 says the plan pays up to $2,000 per year for supplemental dental, including cleanings, exams and X-rays. This is a routine supplemental benefit for all members.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Diagnostic tests (p.88): $0 at PCP office, $20 at specialist office and $40 freestanding, so $0-$40. Labs (p.89): $0 at office or freestanding. The value matches.\"},\n{\"id\":3,\"ok\":false,\"reason\":\"The value '$0-$40/$0' is a tests/labs value and does not fit the outpatient rehab field. The quotes cover diagnostic tests and labs, not rehab. Rehab copays are $35-$45 (pp.93-94).\"},\n{\"id\":4,\"ok\":true,\"reason\":\"Page 62 lists therapeutic massage under the $2,000 Dental & Alternative Therapy Allowance, and p.54 names massage in the allowance. This is a supplemental benefit.\"},\n{\"id\":5,\"ok\":true,\"reason\":\"Page 55 states routine acupuncture is a supplemental benefit covered under the Dental & Alternative Therapy Allowance. Page 63 confirms it covers acupuncture for conditions other than chronic low back pain.\"}\n]",
+ "usage": {
+  "input_tokens": 9507,
+  "output_tokens": 1258,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

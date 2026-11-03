@@ -1,0 +1,11 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H2406-070-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 12 Specialist office visits row: $70 copayment per visit in-network and $90 copayment per visit out-of-network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 74 Part B drugs, in-network column: $0 for Medicare-covered Part B allergy antigens is a separate line, not the Medicaid split. Chemotherapy and all other Part B drugs are 20%, so 0%-20% holds.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"The value and quotes come from the Part B drugs row on page 74, not specialist office visits. Page 12 shows specialist visits are $70 and $90 copays.\"}]\n```",
+ "usage": {
+  "input_tokens": 3154,
+  "output_tokens": 481,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

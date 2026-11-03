@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "90a4efa6544175a2.md",
+ "reply": "```json\n[{\"plan_id\": \"H6815-038-0\", \"benefit\": \"visits\", \"setting\": \"office.pcp\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per visit\", \"page\": 90, \"quotes\": [\"$0 copay for each Medicare-covered PCP office visit.\"]},\n{\"plan_id\": \"H6815-038-0\", \"benefit\": \"visits\", \"setting\": \"office.specialist\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$25\", \"unit\": \"per visit\", \"page\": 91, \"quotes\": [\"$25 copay for each Medicare-covered specialist visit.\"]},\n{\"plan_id\": \"H6815-038-0\", \"benefit\": \"visits\", \"setting\": \"telehealth\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"condition\": \"performed through your plan's virtual visit provider(s)\", \"page\": 92, \"quotes\": [\"$0 copay for virtual visit services performed through your plan's virtual visit provider(s).\"], \"note\": \"This copay covers virtual visits for many services, including Primary Care Physician and Specialist visits, but only from the plan's virtual visit providers. Telehealth from other network providers pays those providers' cost shares.\"}]\n```",
+ "usage": {
+  "input_tokens": 5796,
+  "output_tokens": 1079,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

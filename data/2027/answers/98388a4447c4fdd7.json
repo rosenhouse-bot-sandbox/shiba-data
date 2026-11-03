@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-28e22b4acec7d885.md",
+ "reply": "```json\n[\n{\"id\": 0, \"ok\": false, \"reason\": \"Page 3: the $25 out-of-network copay is in the Primary care provider row. The specialist out-of-network copay is $80.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Page 3: in-network virtual medical visits are a $0 copay. The $60 copay is the in-network specialist cost.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 3 Primary care provider row: $25 copay out of network.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 3 Virtual medical visits row: $0 copay in network.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 3 Primary care provider row: $0 copay in network.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 3 Specialists row: $80 copay out of network.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 3 Specialists row: $60 copay in network.\"},\n{\"id\": 7, \"ok\": false, \"reason\": \"Page 3: in-network primary care is a $0 copay. The $25 copay is the out-of-network cost.\"}\n]\n```",
+ "usage": {
+  "input_tokens": 2921,
+  "output_tokens": 392,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

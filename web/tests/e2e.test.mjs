@@ -623,7 +623,7 @@ test("permalink: clicking a cell puts it in the URL, and the URL reopens it", as
 test("permalink: another citation's page goes in the URL and reopens with its quote", async () => {
   await page.goto(`${base}#/main`);
   await cellTd("H3805-041-0", "F_primary_care").click();
-  await page.locator("#source-note p.cite a", { hasText: "EOC page 82" }).click();
+  await page.locator("#source-note p.cite a", { hasText: "EOC page 82" }).first().click();
   await shown(docOf("H3805-041-0", "EOC"), 82);
   await hashIs("#/2027/main/H3805-041-0/primary_care/EOC/82");
   await page.goto(`${base}#/dvha`);
