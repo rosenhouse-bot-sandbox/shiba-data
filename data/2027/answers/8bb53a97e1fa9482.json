@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "f73d19eeaaf3a08a.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-428-2\", \"benefit\": \"hearing.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"1 per year\", \"page\": 84, \"quotes\": [\"Routine hearing exam (1 per year) $0\"], \"note\": \"\"},\n {\"plan_id\": \"H5216-428-2\", \"benefit\": \"hearing.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"1\", \"unit\": \"\", \"limit\": \"per year\", \"page\": 84, \"quotes\": [\"Routine hearing exam (1 per year)\"], \"note\": \"\"},\n {\"plan_id\": \"H5216-428-2\", \"benefit\": \"hearing.aids\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$575 or $750\", \"unit\": \"per aid\", \"limit\": \"1 per ear per year\", \"page\": 85, \"quotes\": [\"$575 per Level 1 Aid\", \"$750 per Level 2 Aid\"], \"note\": \"\"},\n {\"plan_id\": \"H5216-428-2\", \"benefit\": \"hearing.aids\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"2\", \"unit\": \"\", \"limit\": \"per year\", \"page\": 85, \"quotes\": [\"Up to 2 prescription hearing aids every year (1 per ear per year).\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 5716,
+  "output_tokens": 2289,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

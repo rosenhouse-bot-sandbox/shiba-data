@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-9f4d4557fa78f8b3.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 Routine eye exam row: $0 copay for a routine eye exam each year, in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 4 Routine eyewear row: $150 allowance every 2 years for 1 pair of eyeglasses (lenses and frames) or contacts.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 4 Eyewear after cataract surgery row: $0 copay. This is the Medicare-covered eyewear benefit.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 4 Routine eyewear row: the allowance covers 1 pair of eyeglasses or contacts every 2 years, so the limit is 1 pair every 2 years.\"}]\n```",
+ "usage": {
+  "input_tokens": 2747,
+  "output_tokens": 771,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

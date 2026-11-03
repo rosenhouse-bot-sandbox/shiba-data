@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "5e11cf20cec995f3.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-048-0\", \"benefit\": \"packages\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"premium\", \"amount\": \"$66\", \"unit\": \"per month\", \"limit\": \"\", \"package\": \"Platinum Dental Rider\", \"page\": 14, \"quotes\": [\"The premium amount or the Platinum Dental Rider is $66.\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 11547,
+  "output_tokens": 403,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-7dcf10accd77535d.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 26 Fitness row in Additional Benefits shows a $0 copay. No network split is given, so in-network applies by default.\"}]\n```",
+ "usage": {
+  "input_tokens": 1891,
+  "output_tokens": 149,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

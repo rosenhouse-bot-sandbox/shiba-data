@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "d1ca3a965cb15437.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-041-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"limit\": \"1 per year\", \"page\": 94, \"quotes\": [\"We cover 1 routine eye exam every year.\", \"a ter cataract surgery. $0 copayment\"], \"note\": \"Routine eye exam, including refraction. The second quote reads the right column straight down. It ends with this row's $0 copayment, because \\\"$0 copayment\\\" alone appears twice on the page.\"}]\n```",
+ "usage": {
+  "input_tokens": 5460,
+  "output_tokens": 1349,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

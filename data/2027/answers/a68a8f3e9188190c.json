@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-557f08e61a7e8f42.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 63 Fitness benefit (One Pass®) row: you pay $0. The chart has one cost column that applies to all plans in this EOC, including Enhanced.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 63 Fitness benefit (One Pass®) row: you pay $0. The chart has one cost column that applies to all plans in this EOC, including Standard.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 63 Fitness benefit (One Pass®) row: you pay $0. The chart has one cost column that applies to all plans in this EOC, including Value.\"}]\n```",
+ "usage": {
+  "input_tokens": 2405,
+  "output_tokens": 367,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

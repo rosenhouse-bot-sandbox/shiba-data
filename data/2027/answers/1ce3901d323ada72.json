@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "516ff586a12c8288.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-019-0\", \"benefit\": \"fitness\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 72,\n  \"quotes\": [\"$0 copay for the fitness benefit.\"], \"note\": \"\"},\n {\"plan_id\": \"H5439-019-0\", \"benefit\": \"fitness\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"1\", \"unit\": \"kit\", \"limit\": \"per benefit year\", \"page\": 72,\n  \"quotes\": [\"You can receive up to 1 kit per benefit year.\"], \"note\": \"Limit applies to the home fitness kits within the fitness benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 3902,
+  "output_tokens": 837,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

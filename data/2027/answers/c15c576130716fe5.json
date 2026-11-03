@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "8acbaf3993261220.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-040-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 4, \"quotes\": [\"Vision        Exam to diagnose     $0 copay\", \"Exam to diagnose and treat diseases and conditions of the eye\"], \"note\": \"The first quote keeps the page's exact spacing so it differs from the hearing exam line, which reads \\\"Exam to diagnose $0 copay\\\".\"}]\n```",
+ "usage": {
+  "input_tokens": 3048,
+  "output_tokens": 1529,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

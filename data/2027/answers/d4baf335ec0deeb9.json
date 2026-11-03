@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-0e1831fb00cf2a95.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 Hearing aids row: annual allowance of $1,000 per ear through NationsHearing network providers.\"}, {\"id\": 1, \"ok\": true, \"reason\": \"Page 4 Routine hearing exam row: $0 copay, one routine exam every year with a NationsHearing network provider.\"}, {\"id\": 2, \"ok\": true, \"reason\": \"Page 4 Diagnostic hearing exam row: $0 copay; diagnostic hearing exams are Medicare-covered.\"}]\n```",
+ "usage": {
+  "input_tokens": 2422,
+  "output_tokens": 189,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

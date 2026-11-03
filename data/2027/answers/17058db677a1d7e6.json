@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-5f6896f5c437eeed.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 14 Fitness row: SilverSneakers $0 membership at participating locations, which supports a $0 in-network supplemental fitness copay.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 14 Fitness row: at a non-participating fitness facility you pay a 90% coinsurance and are reimbursed up to 10%. This matches a 90% out-of-network coinsurance.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 14 Fitness row: Devoted Health Wellness Bucks gives $150 per year toward fitness items and activities, with no network restriction stated. Pool name, amount and limit match.\"}]\n```",
+ "usage": {
+  "input_tokens": 2396,
+  "output_tokens": 515,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

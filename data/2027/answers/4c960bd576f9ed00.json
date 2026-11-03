@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "5ab489f7c419b042.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-041-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 4,\n  \"quotes\": [\"Vision Exam to diagnose $0 copay\", \"Exam to diagnose and treat diseases and conditions of the eye\"], \"note\": \"\"},\n {\"plan_id\": \"H3805-041-0\", \"benefit\": \"vision.eyewear\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 4,\n  \"quotes\": [\"Eyewear after $0 copay\", \"Eyewear after cataract surgery\"], \"note\": \"\"},\n {\"plan_id\": \"H3805-041-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"per year\", \"page\": 4,\n  \"quotes\": [\"$0 copay for a routine eye exam each year\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 2701,
+  "output_tokens": 1194,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

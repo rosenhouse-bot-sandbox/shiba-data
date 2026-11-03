@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "d4758cd5b94a2266.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2406-070-0\", \"benefit\": \"vision.eyewear\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"page\": 5, \"quotes\": [\"Eyewear after\", \"30% coinsurance\"], \"note\": \"Row is eyewear after cataract surgery, out-of-network column.\"},\n {\"plan_id\": \"H2406-070-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"limit\": \"per year\", \"page\": 5, \"quotes\": [\"$0 copay for a routine eye\"]}]\n```",
+ "usage": {
+  "input_tokens": 3692,
+  "output_tokens": 2130,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

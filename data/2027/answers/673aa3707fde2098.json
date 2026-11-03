@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "f961eb582c1534d5.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-010-0\", \"benefit\": \"otc\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$20\", \"limit\": \"per month\", \"pool\": \"Wellcare Spendables®\", \"page\": 112, \"quotes\": [\"You will receive a total of $20 monthly preloaded on your\", \"Wellcare Spendables® card to spend on OTC items, Dental, Vision,\"], \"note\": \"The allowance is shared with dental, vision and hearing, and unused amounts roll over to the next month until the end of the plan year. Network is set to any because OTC Items appear in both the in-network list (page 36) and the out-of-network list (page 37).\"}]\n```",
+ "usage": {
+  "input_tokens": 5012,
+  "output_tokens": 799,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-d594b0a1d3772214.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 47 'Fitness: Basic SilverSneakers membership' row: $0 copay for the fitness benefit. The 'use SilverSneakers' wording is a vendor note, not a member condition.\"}]\n```",
+ "usage": {
+  "input_tokens": 2405,
+  "output_tokens": 205,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

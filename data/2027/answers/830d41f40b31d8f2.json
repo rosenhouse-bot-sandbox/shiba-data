@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "05d56d5f782708e7.md",
+ "reply": "```json\n[{\"plan_id\": \"H2056-003-0\", \"benefit\": \"fitness\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 8,\n  \"quotes\": [\"Basic SilverSneakers® fitness membership $0 copay\"], \"note\": \"\"},\n {\"plan_id\": \"H2056-003-0\", \"benefit\": \"fitness\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"unit\": \"\", \"limit\": \"one fitness kit per year\", \"page\": 8,\n  \"quotes\": [\"You may order one fitness kit per year\"], \"note\": \"At-home fitness kit through SilverSneakers; no cost is stated for the kit itself.\"}]\n```",
+ "usage": {
+  "input_tokens": 3587,
+  "output_tokens": 677,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
