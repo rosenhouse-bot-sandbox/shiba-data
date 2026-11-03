@@ -17,7 +17,7 @@ import collections, csv, glob, json, os, pathlib, random, re, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(os.path.dirname(HERE), "web"))
-import blanks, build, layers, present, steps, years
+import blanks, build, layers, steps, years
 from blanks import fill
 from eoc import DATA, Doc, eoc
 from fields import FIELDS
@@ -52,16 +52,22 @@ def targets(site, every=False):
     return dict(out)
 
 
-def presented_edit(row):
-    return row["layer"] == layers.EDITS and row["column"] == present.COLUMN
+def presented(*columns):
+    """Ignores edits to the columns, and presented rows of other columns."""
+    def ignore(row):
+        if row["layer"] == layers.EDITS:
+            return row["column"] in columns
+        return row["layer"] == layers.PRESENTED and row["column"] not in columns
+    return ignore
 
 
 # Each version names the layers it sees and the rows it ignores. No version sees this step's own rows.
+# Versions 2 and 3 ignore edits to their presented columns, so retiring them leaves the tasks unchanged.
+# They also miss later edits to those columns, and version 3 misses the Ambulance edits that TRIAGED keeps.
 VERSIONS = {
     1: (layers.without(layers.FILLED, layers.PRESENTED), None),
-    # Version 2 ignores edits to presented columns, so retiring them leaves its tasks unchanged.
-    # It also misses later edits to those columns.
-    2: (layers.without(layers.FILLED), presented_edit),
+    2: (layers.without(layers.FILLED), presented("L_xray_imaging")),
+    3: (layers.without(layers.FILLED), presented("L_xray_imaging", "AB_ambulance")),
 }
 
 

@@ -2,7 +2,7 @@ import contextlib, csv, io, json, os, pathlib, random, shutil, sys, tempfile, un
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-import filled, layers, present
+import filled, layers
 from eoc import DATA, eoc
 
 PLAN = "H2056-003-0"
@@ -69,12 +69,17 @@ class VersionsTest(unittest.TestCase):
         self.assertEqual(names, tuple(n for n in layers.LAYERS if n not in (layers.FILLED, layers.PRESENTED)))
         self.assertIsNone(ignore)
 
-    def test_version_2_sees_presented_columns_instead_of_their_edits(self):
-        names, ignore = filled.VERSIONS[2]
-        self.assertEqual(names, layers.without(layers.FILLED))
-        self.assertTrue(ignore(dict(layer=layers.EDITS, column=present.COLUMN)))
-        self.assertFalse(ignore(dict(layer=layers.EDITS, column="G_specialist")))
-        self.assertFalse(ignore(dict(layer=layers.PRESENTED, column=present.COLUMN)))
+    def test_versions_2_and_3_see_their_presented_columns_instead_of_their_edits(self):
+        for version, columns in ((2, ["L_xray_imaging"]), (3, ["L_xray_imaging", "AB_ambulance"])):
+            names, ignore = filled.VERSIONS[version]
+            self.assertEqual(names, layers.without(layers.FILLED))
+            for column in columns:
+                self.assertTrue(ignore(dict(layer=layers.EDITS, column=column)), (version, column))
+                self.assertFalse(ignore(dict(layer=layers.PRESENTED, column=column)), (version, column))
+            self.assertFalse(ignore(dict(layer=layers.EDITS, column="G_specialist")))
+        _, ignore = filled.VERSIONS[2]
+        self.assertTrue(ignore(dict(layer=layers.PRESENTED, column="AB_ambulance")))
+        self.assertFalse(ignore(dict(layer=layers.EDITS, column="AB_ambulance")))
 
     def test_site_data_shows_what_the_version_sees(self):
         with mock.patch.object(filled.build, "site_data") as site_data:

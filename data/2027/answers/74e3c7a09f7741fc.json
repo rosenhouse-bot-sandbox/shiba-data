@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "0e1831fb00cf2a95.md",
+ "reply": "```json\n[{\"plan_id\": \"H2056-018-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$245\", \"unit\": \"per one-way trip\", \"limit\": \"\", \"page\": 5, \"quotes\": [\"$245 copay for ground ambulance services\"], \"note\": \"\"},\n{\"plan_id\": \"H2056-018-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"unit\": \"per one-way trip\", \"limit\": \"\", \"page\": 5, \"quotes\": [\"20% coinsurance for air ambulance services\"], \"note\": \"\"},\n{\"plan_id\": \"H2056-018-0\", \"benefit\": \"ambulance\", \"setting\": \"outside_us\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$245\", \"page\": 3, \"quotes\": [\"$245 copay for ambulance\"], \"note\": \"\"},\n{\"plan_id\": \"H2056-018-0\", \"benefit\": \"ambulance\", \"setting\": \"outside_us\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"max\", \"amount\": \"$250,000\", \"pool\": \"combined cost of emergency care, urgent care, and emergency ambulance services received outside of the U.S.\", \"page\": 3, \"quotes\": [\"Maximum coverage: $250,000.\"], \"note\": \"The $250,000 maximum is shared by emergency care, urgent care and emergency ambulance services outside the U.S.\"}]\n```",
+ "usage": {
+  "input_tokens": 3006,
+  "output_tokens": 1108,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "a4bc20077fb4a2cf.md",
+ "reply": "```json\n[{\"plan_id\": \"H3817-011-1\", \"benefit\": \"ambulance\", \"setting\": \"any\", \"network\": \"any\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$300\", \"unit\": \"per one-way transport\", \"limit\": \"\", \"page\": 39,\n  \"quotes\": [\"In- and Out-of-network: $300 copay per Medicare covered one-way transport\"], \"note\": \"\"},\n {\"plan_id\": \"H3817-011-1\", \"benefit\": \"ambulance\", \"setting\": \"outside_us\", \"network\": \"any\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$300\", \"unit\": \"per one-way transport\", \"limit\": \"\", \"page\": 71,\n  \"quotes\": [\"Ambulance services: In- and Out-of-network: $300 copay per covered one-\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 11998,
+  "output_tokens": 897,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

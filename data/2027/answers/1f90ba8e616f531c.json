@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "28e22b4acec7d885.md",
+ "reply": "```json\n[{\"plan_id\": \"H2406-073-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$350\", \"page\": 6, \"quotes\": [\"Ambulance $350 copay for ground\"], \"note\": \"In-network and out-of-network columns both show $350 copay for ground. The quote reads the service name with the in-network column.\"},\n {\"plan_id\": \"H2406-073-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$350\", \"page\": 6, \"quotes\": [\"Your provider must obtain prior $350 copay for air\"], \"note\": \"In-network and out-of-network columns both show $350 copay for air. The quote reads the row text with the in-network column.\"}]\n```",
+ "usage": {
+  "input_tokens": 2323,
+  "output_tokens": 1646,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

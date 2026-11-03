@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-61de2101267140ce.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 7 Ambulance section, Air ambulance row: 20% coinsurance. This is the single-plan document for H1372-003-0, Medicare-covered, in network.\"}, {\"id\": 1, \"ok\": true, \"reason\": \"Page 7 Ambulance section, Ground ambulance row: $250 copay. This is the single-plan document for H1372-003-0, Medicare-covered, in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 1921,
+  "output_tokens": 160,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

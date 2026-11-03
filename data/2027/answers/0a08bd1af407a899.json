@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-fd314311528d4668.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 6 Ambulance row: the Value Plan pays $350 per one-way trip, not $300. The $300 is the Standard Plan.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 6 Ambulance row: the Standard Plan copay is $300 per one-way trip.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"Page 6 Ambulance row: the Enhanced Plan pays $250 per one-way trip, not $300. The $300 is the Standard Plan.\"},\n{\"id\": 3, \"ok\": false, \"reason\": \"Page 6 Ambulance row: the Standard Plan pays $300 per one-way trip, not $250. The $250 is the Enhanced Plan.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 6 Ambulance row: the Value Plan copay is $350 per one-way trip.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 6 Ambulance row: the Enhanced Plan copay is $250 per one-way trip.\"}]\n```",
+ "usage": {
+  "input_tokens": 2846,
+  "output_tokens": 372,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

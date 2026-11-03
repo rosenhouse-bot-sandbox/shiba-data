@@ -87,8 +87,59 @@ class RuleTest(unittest.TestCase):
         self.assertEqual(cited, [winner])
 
 
-def presented_cells(data):
-    return {p: [value for value, _ in got] for p, got in present.lines(data).items()}
+def ambulance(*found):
+    return [value for value, _ in present.ambulance("Aetna", list(found))]
+
+
+def trip(benefit="ambulance.ground", amount="$300", **more):
+    return fact(benefit, amount=amount, **{"cost_kind": "coinsurance" if amount.endswith("%") else "copay", **more})
+
+
+class AmbulanceTest(unittest.TestCase):
+    def test_line_1_spans_ground_and_air_trips_of_every_kind(self):
+        self.assertEqual(ambulance(trip(amount="$250", condition="Emergency"), trip(amount="$0", condition="home treatment"),
+                                   trip("ambulance.air", "20%"))[0], "$0-$250 or 20%")
+
+    def test_line_1_skips_other_networks_supplemental_benefits_tiers_packages_and_deductibles(self):
+        skipped = [trip(amount="$500", network="out"), trip(amount="$400", covered_by="supplemental"),
+                   trip(amount="$0", provider_tier="PLUS"), trip(amount="$0", package="Rider"),
+                   trip(amount="$990", cost_kind="deductible")]
+        self.assertEqual(ambulance(trip(), *skipped)[0], "$300")
+
+    def test_line_1_leaves_trips_abroad_to_line_2(self):
+        self.assertEqual(ambulance(trip(), trip(amount="$500", setting="outside_us")), ["$300", "$500"])
+
+    def test_the_best_source_wins_for_each_kind_of_trip(self):
+        self.assertEqual(ambulance(trip(), trip(amount="$100", source="SB"), trip("ambulance.air", "$400", source="SB"))[0],
+                         "$300-$400")
+
+    def test_line_2_prices_trips_abroad_in_or_out_of_network(self):
+        self.assertEqual(ambulance(trip(), trip("ambulance", "$325", setting="outside_us", network="out"))[1], "$325")
+
+    def test_line_2_covered_abroad_costs_what_unconditional_trips_cost_here(self):
+        self.assertEqual(ambulance(trip(), trip(amount="$0", condition="home treatment"),
+                                   trip("ambulance", "", setting="outside_us", cost_kind="covered")), ["$0-$300", "$300"])
+
+    def test_line_2_says_not_covered_when_the_document_excludes_care_abroad(self):
+        self.assertEqual(ambulance(trip(), trip("ambulance", "", setting="outside_us", cost_kind="not_covered"))[1],
+                         "not covered")
+
+    def test_line_2_takes_the_best_source_whatever_it_says(self):
+        self.assertEqual(ambulance(trip(), trip("ambulance", "", setting="outside_us", cost_kind="not_covered"),
+                                   trip("ambulance", "$500", setting="outside_us", source="SB"))[1], "not covered")
+
+    def test_no_fact_leaves_a_line_blank(self):
+        self.assertEqual(ambulance(trip()), ["$300", ""])
+        self.assertEqual(ambulance(), ["", ""])
+
+    def test_cites_the_facts_behind_each_line(self):
+        here, abroad = trip(), trip("ambulance", "", setting="outside_us", cost_kind="covered")
+        (_, line1), (_, line2) = present.ambulance("Aetna", [here, abroad])
+        self.assertEqual((line1, line2), ([here], [abroad, here]))
+
+
+def presented_cells(data, column):
+    return {p: [value for value, _ in got] for p, got in present.lines(data, column).items()}
 
 
 def shown(lines, line):
@@ -104,11 +155,23 @@ class WriteTest(unittest.TestCase):
             self.assertEqual(layers.rows(pathlib.Path(tmp, layers.PRESENTED)), [row])
 
 
-# Lines where the rule and an edit disagree, and why the rule wins. Issue #127 has the evidence.
+# Lines where the rule and an edit disagree. The rule wins on X-ray lines (#127 has the evidence).
+# Edits stay on the Ambulance lines until document facts support them.
 TRIAGED = {
-    ("H2056-003-0", "2"): "the expert's $0 mammogram rule covers Aetna",
-    ("H2056-018-0", "2"): "the expert's $0 mammogram rule covers Aetna",
-    ("H7199-002-0", ""): "the EOC prices X-rays at $25; the SB's $0 is for ultrasounds",
+    ("L_xray_imaging", "H2056-003-0", "2"): "the expert's $0 mammogram rule covers Aetna",
+    ("L_xray_imaging", "H2056-018-0", "2"): "the expert's $0 mammogram rule covers Aetna",
+    ("L_xray_imaging", "H7199-002-0", ""): "the EOC prices X-rays at $25; the SB's $0 is for ultrasounds",
+    ("AB_ambulance", "H1372-003-0", "2"): "the EOC excludes all care abroad without naming ambulances",
+    ("AB_ambulance", "H5439-010-0", "2"): "the EOC covers emergencies abroad but never prices ambulances there",
+    ("AB_ambulance", "H5439-011-0", "2"): "the EOC covers emergencies abroad but never prices ambulances there",
+    ("AB_ambulance", "H5439-015-0", "2"): "the EOC covers emergencies abroad but never prices ambulances there",
+    ("AB_ambulance", "H5439-019-0", "2"): "the EOC covers emergencies abroad but never prices ambulances there",
+    ("AB_ambulance", "H6815-038-0", "2"): "the EOC covers emergencies abroad but never prices ambulances there",
+    ("AB_ambulance", "H7006-018-0", "2"): "the EOC covers emergencies abroad but never prices ambulances there",
+    ("AB_ambulance", "H7006-021-0", "2"): "the EOC covers emergencies abroad but never prices ambulances there",
+    ("AB_ambulance", "H9003-001-0", "1"): "the $0 for a home treatment plan is on the page before the ambulance",
+    ("AB_ambulance", "H9003-006-0", "1"): "the $0 for a home treatment plan is on the page before the ambulance",
+    ("AB_ambulance", "H9003-009-0", "1"): "the $0 for a home treatment plan is on the page before the ambulance",
 }
 
 
@@ -119,24 +182,22 @@ class ExpectedTest(unittest.TestCase):
 
     def test_presents_every_expected_line(self):
         data = years.data_dir(YEAR)
-        cells = presented_cells(data)
-        wanted = [w for w in expected.load() if w["column"] == present.COLUMN]
-        missed = [(w["plan_id"], w["line"], w["value"], cells.get(w["plan_id"])) for w in wanted
-                  if (w["plan_id"], w["line"]) not in TRIAGED
-                  and shown(cells.get(w["plan_id"], ["", ""]), w["line"]) != w["value"]]
-        self.assertEqual(missed, [])
-        self.assertTrue(all(shown(cells[p], line) != wanted_value(wanted, p, line) for p, line in TRIAGED))
+        for column in present.COLUMNS:
+            cells = presented_cells(data, column)
+            wanted = {(w["plan_id"], w["line"]): w["value"] for w in expected.load() if w["column"] == column}
+            missed = [(p, line, value, cells.get(p)) for (p, line), value in wanted.items()
+                      if (column, p, line) not in TRIAGED and shown(cells.get(p, ["", ""]), line) != value]
+            self.assertEqual(missed, [], column)
+            self.assertTrue(all(shown(cells[p], line) != wanted[p, line] for c, p, line in TRIAGED if c == column))
 
     def test_every_nonblank_line_cites_a_document(self):
         data = years.data_dir(YEAR)
-        rows, cells = present.layer_rows(data), presented_cells(data)
+        rows = present.layer_rows(data)
         self.assertTrue(rows and all(r["url"] and r["quote"] for r in rows))
-        self.assertEqual({(r["plan_id"], r["line"]) for r in rows},
-                         {(p, str(n)) for p, lines in cells.items() for n, v in enumerate(lines, 1) if v})
-
-
-def wanted_value(wanted, plan_id, line):
-    return next(w["value"] for w in wanted if (w["plan_id"], w["line"]) == (plan_id, line))
+        for column in present.COLUMNS:
+            self.assertEqual({(r["plan_id"], r["line"]) for r in rows if r["column"] == column},
+                             {(p, str(n)) for p, lines in presented_cells(data, column).items()
+                              for n, v in enumerate(lines, 1) if v})
 
 
 if __name__ == "__main__":

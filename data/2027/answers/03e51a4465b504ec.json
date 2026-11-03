@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-f751937f09316ed1.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 59 Worldwide Ambulance Services: Air Ambulance $0 copay per one-way trip outside the U.S.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Page 59: the $25,000 per lifetime limit is shared by worldwide emergency, urgent care and ambulance services. The item presents it as an ambulance-only max with no pool stated.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 51: the plan deductible of $990 (annual) applies to Ambulance (Ground and Air/Water).\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 58 Ambulance Services row: Air Ambulance 50% coinsurance per one-way trip.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 59 Worldwide Ambulance Services: Ground Ambulance $0 copay per one-way trip outside the U.S.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 58 Ambulance Services row: Ground Ambulance 50% coinsurance per one-way trip.\"}]\n```",
+ "usage": {
+  "input_tokens": 4629,
+  "output_tokens": 697,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

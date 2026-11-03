@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-5e11cf20cec995f3.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 51 Ambulance services row: $370 copayment for each one-way Medicare-covered ground trip, in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 51 Ambulance services row: non-emergency ambulance services are not covered out-of-network.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 51 Ambulance services row: $370 copayment for each one-way Medicare-covered air trip, in network.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 51 Ambulance services row: outside the United States or its territories, ambulance transportation is not covered under any circumstances, which applies regardless of network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2600,
+  "output_tokens": 398,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

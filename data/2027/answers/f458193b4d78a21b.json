@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-0bd982dc589e8cba.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 37, Out-of-Network: 20% coinsurance regardless of the number of trips for Air Ambulance. The same applies to emergency and non-emergency, so setting 'any' fits.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 36, In-Network: $325 copayment per date of service for Ground Ambulance. Emergency and non-emergency are the same.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 37, Out-of-Network: $325 copayment per date of service for Ground Ambulance. Emergency and non-emergency are the same.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 36, In-Network: 20% coinsurance regardless of the number of trips for Air Ambulance. Non-emergency air on page 37 is also 20%.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 37, Worldwide Coverage: $325 copayment per date of service for Emergency Ambulance. This is a single price outside the U.S., which is a supplemental worldwide benefit. It is listed under the Out-of-Network heading, but care outside the U.S. has no network, so 'any' fits.\"}]\n```",
+ "usage": {
+  "input_tokens": 3918,
+  "output_tokens": 989,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

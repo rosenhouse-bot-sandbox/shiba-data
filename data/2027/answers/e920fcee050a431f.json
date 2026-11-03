@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "ce13e925c0384896.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-153-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 9, \"quotes\": [\"20% of the cost\"]},\n{\"plan_id\": \"H1036-153-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per date of service\", \"page\": 9, \"quotes\": [\"$325 copay per date of service\"]},\n{\"plan_id\": \"H1036-153-0\", \"benefit\": \"ambulance\", \"setting\": \"outside_us\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per date of service\", \"page\": 6, \"quotes\": [\"Emergency ambulance: $325 copay per date of\"], \"note\": \"Worldwide coverage row. The network is not stated, so the in-network default is used. Members pay upfront and can request reimbursement.\"}]\n```",
+ "usage": {
+  "input_tokens": 3479,
+  "output_tokens": 954,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

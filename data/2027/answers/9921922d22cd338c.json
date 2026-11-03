@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-aca9d3510177adcd.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 37 out-of-network Emergency Ambulance section lists 20% coinsurance for Air Ambulance.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 36 in-network Non-Emergency Ambulance: $325 copayment per date of service. The Ground Ambulance label continues at the top of page 37.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 36 in-network Emergency Ambulance: $325 copayment per date of service for Ground Ambulance.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 37 Worldwide Coverage: $325 copayment per date of service for Emergency Ambulance outside the U.S.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 37 out-of-network Non-Emergency Ambulance: $325 copayment per date of service for Ground Ambulance.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 37 out-of-network Non-Emergency Ambulance lists 20% coinsurance for Air Ambulance.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Top of page 37 continues the in-network Non-Emergency section: 20% coinsurance for Air Ambulance, before the Out-of-Network heading.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 37 out-of-network Emergency Ambulance: $325 copayment per date of service for Ground Ambulance.\"},\n{\"id\": 8, \"ok\": true, \"reason\": \"Page 36 in-network Emergency Ambulance: 20% coinsurance for Air Ambulance.\"}]\n```",
+ "usage": {
+  "input_tokens": 4453,
+  "output_tokens": 1057,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
