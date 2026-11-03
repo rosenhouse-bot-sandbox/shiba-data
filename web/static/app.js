@@ -29,6 +29,8 @@ let plans;
 const scrollTops = {};
 // The view that route() last rendered, and the cell picked in it.
 let here;
+// The hash that route() last showed or updateUrl() last wrote.
+let routed;
 let selection = null;
 // Set by a click, so the URL change it makes adds a history entry.
 let pushNext = false;
@@ -97,11 +99,13 @@ async function start() {
 }
 
 function route() {
+  routed = location.hash;
   let state = parse(location.hash, site.year);
   const otherYear = state.year !== site.year && state.year;
   if (otherYear || (state.view === "plan" && !plans[state.plan])) {
     state = { year: site.year, view: "main" };
     history.replaceState(null, "", format(state));
+    routed = location.hash;
   }
   if (otherYear) hideViewer();
   const { view } = state;
@@ -168,7 +172,8 @@ function defaultDoc() {
 function updateUrl() {
   const push = pushNext;
   pushNext = false;
-  if (!here) return;
+  // A link changed the hash, and its hashchange event has not yet run route().
+  if (!here || location.hash !== routed) return;
   const state = { year: site.year, view: here.view, plan: here.plan };
   if (selection) {
     const { plan, sheet, col } = selection.dataset;
@@ -180,6 +185,7 @@ function updateUrl() {
   }
   const hash = format(state);
   if (hash !== location.hash) history[push ? "pushState" : "replaceState"](null, "", hash);
+  routed = location.hash;
 }
 
 function sheetView(name) {

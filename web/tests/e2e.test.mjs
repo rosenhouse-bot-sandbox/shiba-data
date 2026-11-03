@@ -480,6 +480,18 @@ test("a cited blank cell says the document shows why", async () => {
   assert.match(await page.textContent("#source-note"), /shows why this is blank/);
 });
 
+test("a link followed while the document scrolls still opens its sheet", async () => {
+  await page.goto(`${base}#/dvha`);
+  await row("H3805-048-0").locator("td.cited", { hasText: "Routine foot care" }).click();
+  await shown(docOf("H3805-048-0", "EOC"), 84);
+  await page.evaluate(() => {
+    location.hash = "#/main";
+    document.querySelector("#page-area").dispatchEvent(new Event("scroll"));
+  });
+  await page.waitForFunction(() => document.querySelector("nav a.active")?.dataset.view === "main");
+  assert.doesNotMatch(await page.evaluate(() => location.hash), /dvha/);
+});
+
 test("a cell's note restates the CMS plan data without our symbols", async () => {
   const withPbp = (match) => ["main", "dvha"].flatMap((sheet) => site[sheet].rows.flatMap((r) =>
     Object.entries(r.cells).filter(([, c]) => c.cites.length && match(c.pbp ?? null)).map(([col]) => `#/${sheet}/${r.plan_id}/${col}`)))[0];
