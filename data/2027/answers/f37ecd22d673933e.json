@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-630e49b10e7ad131.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 76: all members get a $175 monthly Healthy Options Allowance, and it can be used for OTC hearing aids.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 84 in-network hearing table: $0 per Level 2 aid, 1 per ear per year.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 84: up to 2 prescription hearing aids every year (1 per ear per year).\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 84 in-network hearing table: routine hearing exam (1 per year) is $0.\"}]\n```",
+ "usage": {
+  "input_tokens": 3743,
+  "output_tokens": 506,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

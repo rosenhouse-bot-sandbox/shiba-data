@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-aca9d3510177adcd.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 78 hearing aid row says up to 2 prescription hearing aids every year (1 per ear per year). This is an in-network supplemental limit.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 78 in-network column: $575 per Level 1 Aid OR $750 per Level 2 Aid. These aid levels make one copay fact.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 77 lists a routine hearing exam, 1 per year. This is a supplemental visit limit.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 77 routine hearing exam (1 per year): $0 in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3421,
+  "output_tokens": 382,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

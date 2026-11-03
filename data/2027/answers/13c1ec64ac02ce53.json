@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "0bd982dc589e8cba.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-427-2\", \"benefit\": \"otc\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$50\", \"unit\": \"\", \"limit\": \"per quarter\", \"page\": 61, \"quotes\": [\"You get $50 quarterly on a special debit card called the Humana Spending\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 5834,
+  "output_tokens": 769,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

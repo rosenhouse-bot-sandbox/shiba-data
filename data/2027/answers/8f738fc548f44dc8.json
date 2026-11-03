@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-d370b4b5b3950077.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 6 Hearing Care row: Medicare-Covered Hearing Care is a $40 copay, which is the Medicare-covered diagnostic hearing exam in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 6 Hearing Aids row: $399 or $699 copay per aid for up to 2 TruHearing Advanced or Premium aids, a supplemental benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2581,
+  "output_tokens": 467,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

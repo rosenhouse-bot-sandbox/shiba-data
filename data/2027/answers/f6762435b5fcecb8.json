@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "cabbc3b82885b498.md",
+ "reply": "[{\"plan_id\": \"H2923-025-0\", \"benefit\": \"otc\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$109\", \"unit\": \"\", \"limit\": \"per quarter\", \"page\": 10, \"quotes\": [\"$109 per quarter to use toward the purchase of eligible\"], \"note\": \"\"}]",
+ "usage": {
+  "input_tokens": 2703,
+  "output_tokens": 130,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

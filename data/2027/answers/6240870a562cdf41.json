@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "557f08e61a7e8f42.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H9003-001-0\", \"benefit\": \"vision.eyewear\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$60 or $90\", \"condition\": \"if your prescription changes 0.5 diopter or more within 12 months of the initial exam\", \"package\": \"Advantage Plus\", \"page\": 106, \"quotes\": [\"$60 allowance for single vision eyeglass or contact lenses.\", \"$90 allowance for multi-focal eyeglass or contact lenses.\"], \"note\": \"Replacement lenses: $60 is for single vision and $90 is for multi-focal.\"},\n{\"plan_id\": \"H9003-006-0\", \"benefit\": \"vision.eyewear\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$60 or $90\", \"condition\": \"if your prescription changes 0.5 diopter or more within 12 months of the initial exam\", \"package\": \"Advantage Plus\", \"page\": 106, \"quotes\": [\"$60 allowance for single vision eyeglass or contact lenses.\", \"$90 allowance for multi-focal eyeglass or contact lenses.\"], \"note\": \"Replacement lenses: $60 is for single vision and $90 is for multi-focal.\"},\n{\"plan_id\": \"H9003-009-0\", \"benefit\": \"vision.eyewear\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$60 or $90\", \"condition\": \"if your prescription changes 0.5 diopter or more within 12 months of the initial exam\", \"package\": \"Advantage Plus\", \"page\": 106, \"quotes\": [\"$60 allowance for single vision eyeglass or contact lenses.\", \"$90 allowance for multi-focal eyeglass or contact lenses.\"], \"note\": \"Replacement lenses: $60 is for single vision and $90 is for multi-focal.\"}]\n```",
+ "usage": {
+  "input_tokens": 10645,
+  "output_tokens": 1125,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

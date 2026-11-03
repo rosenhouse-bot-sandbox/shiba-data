@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "2c101bd739d45a62.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-028-3\", \"benefit\": \"hearing.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per visit\", \"limit\": \"1 visit per year\", \"page\": 6, \"quotes\": [\"$0 copay — 1 visit per year\"], \"note\": \"Quote is from the Routine Hearing Exam row; the service name was left out of the quote because of its footnote mark.\"},\n {\"plan_id\": \"H2923-028-3\", \"benefit\": \"hearing.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 6, \"quotes\": [\"Hearing Aid Fitting and Evaluation*: $0 copay\"], \"note\": \"The asterisk is kept because the quote without it failed the match check.\"}]\n```",
+ "usage": {
+  "input_tokens": 3128,
+  "output_tokens": 962,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

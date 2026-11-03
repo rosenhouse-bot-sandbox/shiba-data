@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "61de2101267140ce.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H1372-003-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 6, \"quotes\": [\"Eye exams to diagnose and $0 copay\"]},\n  {\"plan_id\": \"H1372-003-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"limit\": \"1 screening per year\", \"condition\": \"members with diabetes\", \"page\": 6, \"quotes\": [\"Diabetic retinopathy screening $0 copay for 1 screening per year for\", \"members with diabetes\"], \"note\": \"This is diabetic retinopathy screening. I classed it as an eye exam.\"},\n  {\"plan_id\": \"H1372-003-0\", \"benefit\": \"vision.eyewear\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 6, \"quotes\": [\"Eyewear following cataract $0 copay\"]},\n  {\"plan_id\": \"H1372-003-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 6, \"quotes\": [\"Glaucoma screening $0 copay\"], \"note\": \"This is glaucoma screening. I classed it as an eye exam.\"},\n  {\"plan_id\": \"H1372-003-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"limit\": \"every year\", \"page\": 6, \"quotes\": [\"Routine vision exam $0 copay for up to 1 visit every year\"]},\n  {\"plan_id\": \"H1372-003-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"1\", \"limit\": \"every year\", \"page\": 6, \"quotes\": [\"Routine vision exam $0 copay for up to 1 visit every year\"]},\n  {\"plan_id\": \"H1372-003-0\", \"benefit\": \"vision.eyewear\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$330\", \"limit\": \"per year\", \"page\": 6, \"quotes\": [\"Up to $330 per year for lenses, frames,\"], \"note\": \"The page says \\\"Up to $330\\\" and also calls it an allowance, so this could be cost_kind max instead.\"}\n]\n```",
+ "usage": {
+  "input_tokens": 2426,
+  "output_tokens": 1870,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

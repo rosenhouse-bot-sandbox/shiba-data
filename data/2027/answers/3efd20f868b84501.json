@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-2eb4caa23079d78f.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 24 Fitness row under Wellcare Premium Enhanced Open (PPO): $0 copay. It is a supplemental fitness program with no network split, so the in-network default holds.\"}]\n```",
+ "usage": {
+  "input_tokens": 1895,
+  "output_tokens": 188,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

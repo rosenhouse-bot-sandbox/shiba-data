@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-61de2101267140ce.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 11 Healthy Living Allowance row: $65 allowance every month covers Over-the-Counter (OTC) items. Only Groceries and Personal hygiene carry the SSBCI asterisk, so OTC applies to all members and no condition is needed.\"}]\n```",
+ "usage": {
+  "input_tokens": 1965,
+  "output_tokens": 242,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

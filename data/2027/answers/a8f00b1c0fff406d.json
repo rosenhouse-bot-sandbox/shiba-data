@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-362ee075ea5896d4.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5 Routine eye exam row: out-of-network is 30% coinsurance for a routine eye exam each year.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 5 Eyewear after cataract surgery row: out-of-network is 30% coinsurance. This is a Medicare-covered benefit.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 5 row for exams to diagnose and treat eye diseases: in-network is $0 copay. This is a Medicare-covered benefit.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 6 Routine eyewear row: in-network is a $200 allowance every year for 1 pair of eyeglasses or contacts.\"},\n{\"id\": 4, \"ok\": false, \"reason\": \"Page 6 says the member is responsible for 90% of the allowance amount out of network. That is not a standard coinsurance on the cost of service, so labeling it 90% coinsurance is doubtful.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 5 row for exams to diagnose and treat eye diseases: out-of-network is 30% coinsurance.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 5 Routine eye exam row: in-network is $0 copay for a routine eye exam each year.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 5 Eyewear after cataract surgery row: in-network is $0 copay. This is a Medicare-covered benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 3921,
+  "output_tokens": 848,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

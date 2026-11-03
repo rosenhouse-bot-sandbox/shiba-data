@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-faebfcb17c1abba1.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 9, Mandatory supplemental hearing benefit, in-network: $0 copay for fitting and routine hearing exams, up to 1 per year.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 9, out-of-network column: 95% of the cost for routine hearing exams and for fitting, each up to 1 per year.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 9, out-of-network column: 95% of the cost for follow-up provider visits, up to 3 per year.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 10, in-network: $575 copay for each Level 1 and $750 copay for each Level 2 prescription hearing aid, up to 1 per ear per year.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 10, out-of-network: 95% of the cost for each prescription hearing aid, up to 1 per ear per year.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 9, in-network: $0 copay for follow-up provider visits, up to 3 per year.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 9, Medicare-covered hearing row, out-of-network column: 50% of the cost.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 9, Medicare-covered hearing row, in-network column: $45 copay.\"}]\n```",
+ "usage": {
+  "input_tokens": 4660,
+  "output_tokens": 728,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

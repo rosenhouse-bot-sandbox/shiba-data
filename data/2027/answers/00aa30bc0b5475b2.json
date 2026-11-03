@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-64e05773e847b56e.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 69 SilverSneakers fitness program row: In-Network $0 copayment. This is a supplemental fitness benefit with no setting named.\"}]\n```",
+ "usage": {
+  "input_tokens": 2586,
+  "output_tokens": 76,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

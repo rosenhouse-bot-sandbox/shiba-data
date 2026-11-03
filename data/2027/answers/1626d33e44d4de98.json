@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-be9deec855112c1d.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 95 Over-the-counter allowance row: $40 per quarter supplemental allowance for plan-approved OTC items, with no condition stated, for this plan.\"}]\n```",
+ "usage": {
+  "input_tokens": 2375,
+  "output_tokens": 161,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

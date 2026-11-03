@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-630e49b10e7ad131.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 76, Humana Healthy Options Allowance® OTC section: all members receive a $175 monthly allowance on a prepaid card for OTC items, in network, with no condition.\"}]\n```",
+ "usage": {
+  "input_tokens": 2396,
+  "output_tokens": 272,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

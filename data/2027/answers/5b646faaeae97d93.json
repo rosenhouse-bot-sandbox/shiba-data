@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-cbcaa238a8c713a4.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5 Hearing aids row: in network $499, $699, or $999 per aid, 1 per ear per calendar year, through TruHearing.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 5 Hearing aids row: out-of-network column shows a $1,000 deductible.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 5 row for the exam to diagnose and treat hearing and balance issues (Medicare-covered): out of network 50%.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 5 Hearing aids row: out of network $1,000 deductible then 80%, 1 per ear per calendar year.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 5 row for the exam to diagnose and treat hearing and balance issues: in network $30 copay.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 5 Routine hearing exam row: 1 per calendar year, out of network 80%.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 5 Routine hearing exam row: 1 per calendar year, in network $0 through TruHearing.\"}]\n```",
+ "usage": {
+  "input_tokens": 3026,
+  "output_tokens": 754,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

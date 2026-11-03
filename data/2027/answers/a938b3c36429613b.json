@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "61de2101267140ce.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H1372-003-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 6, \"quotes\": [\"Eye exams to diagnose and treat eye diseases and conditions $0 copay\"], \"note\": \"The quote joins the service cell, which wraps over three lines, with its cost cell. It may not match if the check reads the layout line by line.\"},\n {\"plan_id\": \"H1372-003-0\", \"benefit\": \"vision.eyewear\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 6, \"quotes\": [\"Eyewear following cataract surgery $0 copay\"], \"note\": \"The quote joins the service cell, which wraps over two lines, with its cost cell. It may not match if the check reads the layout line by line.\"}]\n```",
+ "usage": {
+  "input_tokens": 2749,
+  "output_tokens": 784,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

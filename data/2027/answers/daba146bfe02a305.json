@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-bf93677641b9fa6f.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 11 Fitness row: Devoted Health Wellness Bucks gives $150 per year toward fitness and wellness-related items. This is a supplemental allowance from a named pool.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 11 Fitness row: SilverSneakers membership is $0, a supplemental fitness benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 1850,
+  "output_tokens": 272,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-a744eaa24232bb11.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 73 SilverSneakers fitness program row: In-Network $0 copayment. It is marked * and not Medicare-covered, so it is supplemental.\"}]\n```",
+ "usage": {
+  "input_tokens": 2603,
+  "output_tokens": 80,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

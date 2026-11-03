@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "90a4efa6544175a2.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H6815-038-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"each year\", \"condition\": \"people who are at high risk for glaucoma\", \"page\": 104, \"quotes\": [\"$0 copay for a Medicare-covered glaucoma screening.\"], \"note\": \"Medicare glaucoma screening\"},\n{\"plan_id\": \"H6815-038-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"once per year\", \"condition\": \"people with diabetes\", \"page\": 104, \"quotes\": [\"$0 copay for Medicare-covered retinal exam for diabetic members or diabetic eye exam.\"], \"note\": \"Diabetic retinopathy screening\"},\n{\"plan_id\": \"H6815-038-0\", \"benefit\": \"vision.eyewear\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"every year\", \"page\": 104, \"quotes\": [\"$0 copay for eyewear.\", \"$0 copay for 1 eyewear fitting visit every year.\"], \"note\": \"Routine eyewear and 1 eyewear fitting visit every year, both $0\"}]\n```",
+ "usage": {
+  "input_tokens": 8448,
+  "output_tokens": 1591,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

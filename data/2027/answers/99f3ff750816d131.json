@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "a4bc20077fb4a2cf.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3817-011-1\", \"benefit\": \"hearing.aids\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$499 or $699 or $999\", \"unit\": \"per aid\", \"limit\": \"one per ear, per year\", \"page\": 48, \"quotes\": [\"$499 copay per aid for\", \"$699 copay per aid for\", \"$999 copay per aid for\"], \"note\": \"Standard, Advanced and Premium TruHearing aids respectively\"}]\n```",
+ "usage": {
+  "input_tokens": 5016,
+  "output_tokens": 474,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

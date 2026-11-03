@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-4ec81cd0d2695486.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 102: the Medicare row for diagnosing and treating eye disease shows a $0 copayment.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 102: the supplemental routine eye exam row says 'Limit 1 visit every year'.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 102: supplemental eyewear has $330 every year for lenses, frames, contacts or eyewear upgrades.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 102: for people at high risk for glaucoma, one glaucoma screening each year at a $0 copayment.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 102: the supplemental routine eye exam has a $0 copayment.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 102: one pair of eyeglasses or contact lenses after each cataract surgery at a $0 copayment.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 102: for people with diabetes, diabetic retinopathy screening is covered once per year at a $0 copayment.\"}]\n```",
+ "usage": {
+  "input_tokens": 3050,
+  "output_tokens": 659,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
