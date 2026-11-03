@@ -11,7 +11,7 @@ on:
         description: Run these unpinned step versions, such as filled@2 or filled@2,document_facts@5, in place of their pins (pipeline/steps.py)
         required: false
       rebuild:
-        description: Also rebuild the model steps from scratch into data/<year>/rebuilds/<this name> (issue #47)
+        description: Also rebuild the model steps from scratch, at the candidate versions if any, into data/<year>/rebuilds/<this name> (issue #47)
         required: false
 
 concurrency: pipeline
@@ -66,8 +66,9 @@ jobs:
           if [ -s _texts.txt ]; then sed 's/ /  /' _texts.txt | sha256sum -c --quiet; fi
       # GitHub stops a job after 360 minutes, so these leave time to commit.
       # A rerun after a timeout reuses the results of the batches this run sent.
-      - run: python3 -I pipeline/run.py "$YEAR" _work api "$CANDIDATE"
-        timeout-minutes: ${{ inputs.rebuild != '' && inputs.candidate == '' && 120 || 290 }}
+      # A rebuild runs the candidate instead, so this run asks only for what the pins lack.
+      - run: python3 -I pipeline/run.py "$YEAR" _work api "${{ inputs.rebuild == '' && inputs.candidate || '' }}"
+        timeout-minutes: ${{ inputs.rebuild != '' && 60 || 290 }}
       # Upload before committing any data that names these blobs. Keys are content hashes, so a re-upload changes nothing.
       - id: upload
         if: always()
@@ -82,10 +83,9 @@ jobs:
           while read -r key path; do
             aws s3 cp "$path" "s3://pdxplans/$key" --only-show-errors < /dev/null
           done < _blobs.txt
-      # A rebuild runs the pinned versions, so it skips a candidate run.
-      - if: inputs.rebuild != '' && inputs.candidate == ''
-        run: python3 -I pipeline/rebuild.py "$YEAR" _work "$REBUILD" api
-        timeout-minutes: 210
+      - if: inputs.rebuild != ''
+        run: python3 -I pipeline/rebuild.py "$YEAR" _work "$REBUILD" api "$CANDIDATE"
+        timeout-minutes: 230
       # Saved answers are worth keeping even when a later step stops the run.
       - if: always()
         env:
