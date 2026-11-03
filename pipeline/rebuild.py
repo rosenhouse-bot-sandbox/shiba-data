@@ -1,10 +1,11 @@
 """Rebuilds a year's model-step rows from scratch, with no saved answers or machine rows, and scores them.
 
-Usage: python3 -I pipeline/rebuild.py <year> <work> <name> [api]
+Usage: python3 -I pipeline/rebuild.py <year> <work> <name> [api] [<candidate>]
        python3 -I pipeline/rebuild.py compare <year> <name> <name>
 
 <work> must hold the texts that run.py made. The rebuild reads a copy of data/<year> in <work>,
 with the seeded errors in tests/fixtures/seeded_errors.json applied as uncited edits.
+Every model step runs at its pinned version, or at a candidate version as in run.py.
 The filled step covers every filled cell. The run's answers, machine rows and report go to data/<year>/rebuilds/<name>.
 """
 import collections
@@ -20,13 +21,17 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import ask  # noqa: E402
+import document_facts  # noqa: E402
 import eval  # noqa: E402
 import layers  # noqa: E402
+import present  # noqa: E402
 import run  # noqa: E402
+import steps as pins  # noqa: E402
 import years  # noqa: E402
 
 SEEDS = os.path.join(HERE, "tests", "fixtures", "seeded_errors.json")
 STEPS = (layers.BLANKS, layers.FILLED)
+DOCUMENT_FACTS = "machine/document_facts.csv"
 
 
 def scratch_copy(data, work, seeds, answers):
@@ -63,7 +68,7 @@ def report(data, machine_rows, seeds):
 
 
 def save(copy, out, data, seeds):
-    for step in STEPS:
+    for step in STEPS + (DOCUMENT_FACTS, layers.PRESENTED):
         if (copy / step).exists():
             shutil.copy(copy / step, out / os.path.basename(step))
     (out / "report.txt").write_text(report(data, rows(out), seeds))
@@ -79,15 +84,22 @@ def compare(data, a, b):
                       f"cells only {a} cites: {len(runs[0].keys() - both)}", f"cells only {b} cites: {len(runs[1].keys() - both)}"])
 
 
-def steps(work, mode):
+def steps(work, mode, candidate=""):
     """Runs the model steps on the data root that SHIBA_DATA names."""
-    answer = run.Answers(years.data_dir(years.LIVE), ask.api() if mode == "api" else None)
+    data = years.data_dir(years.LIVE)
+    versions = pins.versions(data, run.STEPS, candidate)
+    answer = run.Answers(data, ask.api() if mode == "api" else None)
     texts, step_work = f"{work}/texts", f"{work}/rebuild"
     run.blanks_step(texts, step_work, answer)
-    run.filled_step(texts, step_work, answer, every=True)
+    document_facts.step(data, texts, f"{step_work}/facts", answer, versions["document_facts"])
+    try:
+        present.write(data)
+    except ValueError as e:  # Fresh facts can break a presentation rule. Filled then sees the copied live layer.
+        print(f"::warning::Cannot present the rebuilt facts: {e}")
+    run.filled_step(texts, step_work, answer, every=True, version=versions["filled"])
 
 
-def main(year, work, name, mode=""):
+def main(year, work, name, mode="", candidate=""):
     """Without `api`, saves the run in <work>/rebuilds, so a trial run leaves the repository as it was.
     A rebuild that stopped resumes under the same name, with the answers it saved."""
     if mode not in ("", "api") or not re.fullmatch(r"[\w-]+", name):
@@ -100,7 +112,7 @@ def main(year, work, name, mode=""):
         raise SystemExit(f"{out} is done. Name the rebuild something else.")
     seeds = json.load(open(SEEDS))
     copy = scratch_copy(data, work, seeds, out / "answers")
-    subprocess.run([sys.executable, "-I", __file__, "steps", work, mode], check=True,
+    subprocess.run([sys.executable, "-I", __file__, "steps", work, mode, candidate], check=True,
                    env=dict(os.environ, SHIBA_DATA=str(copy.parent)))
     save(copy, out, data, seeds)
 
@@ -110,7 +122,7 @@ if __name__ == "__main__":
         steps(*sys.argv[2:])
     elif sys.argv[1:2] == ["compare"] and len(sys.argv) == 5:
         print(compare(years.data_dir(sys.argv[2]), *sys.argv[3:]))
-    elif len(sys.argv) in (4, 5):
+    elif len(sys.argv) in (4, 5, 6):
         main(*sys.argv[1:])
     else:
         raise SystemExit(__doc__)

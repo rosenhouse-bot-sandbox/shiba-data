@@ -53,28 +53,36 @@ class RebuildTest(unittest.TestCase):
         out = self.data / "rebuilds" / "run1"
         copy = rebuild.scratch_copy(self.data, self.root / "work", SEEDS, out / "answers")
         write(copy / layers.FILLED, [machine_row(SPECIALIST, "$40")])
+        (copy / rebuild.DOCUMENT_FACTS).write_text("facts")
+        (copy / layers.PRESENTED).write_text("presented")
         with contextlib.redirect_stdout(io.StringIO()):
             rebuild.save(copy, out, self.data, SEEDS)
-        self.assertEqual(sorted(p.name for p in out.iterdir()), ["answers", "filled.csv", "report.txt"])
+        self.assertEqual(sorted(p.name for p in out.iterdir()),
+                         ["answers", "document_facts.csv", "filled.csv", "presented.csv", "report.txt"])
         self.assertIn("seeded errors cited: 0 of 2", (out / "report.txt").read_text())
 
-    def main(self, name="run1", mode="api"):
+    def main(self, name="run1", mode="api", candidate=""):
         calls = []
         with (mock.patch.object(years, "REPO", self.root), mock.patch.object(rebuild, "SEEDS", self.root / "seeds.json"),
               mock.patch.object(rebuild.subprocess, "run", lambda args, **kw: calls.append((args, kw["env"]))),
               contextlib.redirect_stdout(io.StringIO())):
             (self.root / "seeds.json").write_text(json.dumps(SEEDS))
-            rebuild.main("2099", self.root / "work", name, mode)
+            rebuild.main("2099", self.root / "work", name, mode, candidate)
         return calls
 
     def test_main_runs_the_steps_on_the_copy_and_keeps_answers_in_the_repository(self):
         with mock.patch.object(years, "LIVE", 2099):
             [(args, env)] = self.main()
-        self.assertEqual(args[-3:], ["steps", str(self.root / "work"), "api"])
+        self.assertEqual(args[-4:], ["steps", str(self.root / "work"), "api", ""])
         self.assertEqual(env["SHIBA_DATA"], str(self.root / "work" / "data"))
         self.assertEqual((self.root / "work/data/2099/answers").resolve(), self.data / "rebuilds/run1/answers")
         self.assertTrue((self.data / "rebuilds/run1/report.txt").exists())
         self.assertEqual(len(layers.layer(self.data, layers.FILLED)), 1)
+
+    def test_main_passes_the_candidate_versions_to_the_steps(self):
+        with mock.patch.object(years, "LIVE", 2099):
+            [(args, _)] = self.main(candidate="filled@6")
+        self.assertEqual(args[-1], "filled@6")
 
     def test_main_keeps_a_trial_run_s_answers_out_of_the_repository(self):
         with mock.patch.object(years, "LIVE", 2099):
@@ -95,12 +103,29 @@ class RebuildTest(unittest.TestCase):
         with self.assertRaisesRegex(SystemExit, "Only"):
             self.main()
 
-    def test_steps_bundle_every_filled_cell_of_the_data_root_given(self):
+    def test_steps_run_every_model_step_at_the_pinned_or_candidate_versions_on_the_data_root_given(self):
+        (self.data / "steps.json").write_text(json.dumps({"filled": 5, "document_facts": 8}))
+        order = []
         with (mock.patch.dict(os.environ, {"SHIBA_DATA": str(self.root / "data")}), mock.patch.object(years, "LIVE", 2099),
-              mock.patch.object(rebuild.run, "blanks_step") as blanks, mock.patch.object(rebuild.run, "filled_step") as filled):
-            rebuild.steps("w", "")
+              mock.patch.object(rebuild.run, "blanks_step", side_effect=lambda *a: order.append("blanks")) as blanks,
+              mock.patch.object(rebuild.document_facts, "step", side_effect=lambda *a: order.append("facts")) as found,
+              mock.patch.object(rebuild.present, "write", side_effect=lambda *a: order.append("present")),
+              mock.patch.object(rebuild.run, "filled_step", side_effect=lambda *a, **k: order.append("filled")) as filled):
+            rebuild.steps("w", "", "document_facts@7")
+        self.assertEqual(order, ["blanks", "facts", "present", "filled"])
         self.assertEqual(blanks.call_args.args[2].saved, self.data / "answers")
-        self.assertEqual(filled.call_args.kwargs, {"every": True})
+        self.assertEqual((found.call_args.args[0], found.call_args.args[-1]), (self.data, 7))
+        self.assertEqual(filled.call_args.kwargs, {"every": True, "version": 5})
+
+    def test_steps_go_on_to_filled_when_facts_cannot_be_presented(self):
+        (self.data / "steps.json").write_text(json.dumps({"filled": 5, "document_facts": 8}))
+        with (mock.patch.dict(os.environ, {"SHIBA_DATA": str(self.root / "data")}), mock.patch.object(years, "LIVE", 2099),
+              mock.patch.object(rebuild.run, "blanks_step"), mock.patch.object(rebuild.document_facts, "step"),
+              mock.patch.object(rebuild.present, "write", side_effect=ValueError("two lines")),
+              mock.patch.object(rebuild.run, "filled_step") as filled, mock.patch("builtins.print") as printed):
+            rebuild.steps("w", "")
+        self.assertTrue(filled.called)
+        self.assertIn("two lines", printed.call_args[0][0])
 
     def test_compare_counts_cells_by_whether_both_runs_cite_them_alike(self):
         other = ("main", "H1-001-0", "U_naturopath")
