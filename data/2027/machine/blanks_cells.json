@@ -1,0 +1,4900 @@
+{
+ "dvha.E_optional_packages": {
+  "H1036-153-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H1036-306-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H1036-317-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H1036-323-0": {
+   "cited": true,
+   "value": "MyOption DEN972 $50.90/mo, max $1,500"
+  },
+  "H1372-003-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2001-045-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2056-003-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2056-018-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2406-042-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2406-070-0": {
+   "cited": true,
+   "value": "Dental Platinum Rider $54/mo, max $1,500, replaces plan dental"
+  },
+  "H2406-073-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2923-001-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2923-005-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2923-009-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2923-019-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2923-025-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2923-028-3": {
+   "cited": false,
+   "value": ""
+  },
+  "H3805-040-0": {
+   "cited": true,
+   "value": "Dental Platinum Rider $54/mo, max $1,500, replaces plan dental"
+  },
+  "H3805-041-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H3805-048-0": {
+   "cited": true,
+   "value": "Dental Platinum Rider $66/mo, max $1,500, replaces plan dental"
+  },
+  "H3817-008-1": {
+   "cited": false,
+   "value": ""
+  },
+  "H3817-009-1": {
+   "cited": false,
+   "value": ""
+  },
+  "H3817-010-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H3817-011-1": {
+   "cited": false,
+   "value": ""
+  },
+  "H5216-048-0": {
+   "cited": true,
+   "value": "MyOption DEN972 $52.10/mo, max $1,500"
+  },
+  "H5216-427-2": {
+   "cited": false,
+   "value": ""
+  },
+  "H5216-428-2": {
+   "cited": true,
+   "value": "MyOption DEN972 $50.90/mo, max $1,500"
+  },
+  "H5216-455-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H5439-010-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H5439-011-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H5439-015-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H5439-019-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H6815-038-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H7006-018-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H7006-021-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H7199-002-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H9003-001-0": {
+   "cited": true,
+   "value": "Advantage Plus $54/mo, dental max $1,500"
+  },
+  "H9003-006-0": {
+   "cited": true,
+   "value": "Advantage Plus $54/mo, dental max $1,500"
+  },
+  "H9003-009-0": {
+   "cited": true,
+   "value": "Advantage Plus $54/mo, dental max $1,500"
+  }
+ },
+ "dvha.F_dental": {
+  "H1036-153-0": {
+   "cited": true,
+   "value": "PREV $0; COMP $0; max $1,500/year PREV+COMP"
+  },
+  "H1036-306-0": {
+   "cited": true,
+   "value": "PREV $0; COMP 0%-50%; max $4,000/year PREV+COMP"
+  },
+  "H1036-317-0": {
+   "cited": false,
+   "value": "PREV $0; COMP $0; max $1,000/year PREV+COMP"
+  },
+  "H1036-323-0": {
+   "cited": true,
+   "value": "PREV $0; COMP $0 (periodontal maintenance 4/year only); annual max not stated"
+  },
+  "H1372-003-0": {
+   "cited": false,
+   "value": "PREV $0; COMP $0; max $1,000/year PREV+COMP"
+  },
+  "H2001-045-0": {
+   "cited": true,
+   "value": "PREV $0; COMP $0; max $2,000/year PREV+COMP"
+  },
+  "H2056-003-0": {
+   "cited": true,
+   "value": "PREV $0; no annual max"
+  },
+  "H2056-018-0": {
+   "cited": true,
+   "value": "PREV $0; COMP 50%; COMP max $1,500/year"
+  },
+  "H2406-042-0": {
+   "cited": true,
+   "value": "PREV $0; COMP 50%; max $1,000/year PREV+COMP"
+  },
+  "H2406-070-0": {
+   "cited": false,
+   "value": "PREV $0; no annual max"
+  },
+  "H2406-073-0": {
+   "cited": true,
+   "value": "PREV $0; COMP 50%; max $4,000/year PREV+COMP"
+  },
+  "H2923-001-0": {
+   "cited": true,
+   "value": "PREV $0; COMP 50%; max $1,750/year shared by PREV+COMP, acupuncture, massage, naturopath"
+  },
+  "H2923-005-0": {
+   "cited": true,
+   "value": "PREV $0; COMP 50%; max $1,500/year shared by PREV+COMP, acupuncture, massage, naturopath"
+  },
+  "H2923-009-0": {
+   "cited": true,
+   "value": "PREV $0; COMP $0; max $3,000/year PREV+COMP"
+  },
+  "H2923-019-0": {
+   "cited": true,
+   "value": "PREV $0; COMP 50%; max $2,000/year shared by PREV+COMP, acupuncture, massage, naturopath"
+  },
+  "H2923-025-0": {
+   "cited": true,
+   "value": "PREV $0; COMP 50%; max $2,000/year shared by PREV+COMP, acupuncture, massage, naturopath"
+  },
+  "H2923-028-3": {
+   "cited": true,
+   "value": "PREV $0; COMP $0; max $250/year shared by PREV+COMP, acupuncture, massage, naturopath"
+  },
+  "H3805-040-0": {
+   "cited": false,
+   "value": "PREV $0; no annual max"
+  },
+  "H3805-041-0": {
+   "cited": true,
+   "value": "PREV $0; COMP 50%; max $1,250/year PREV+COMP"
+  },
+  "H3805-048-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H3817-008-1": {
+   "cited": true,
+   "value": "PREV $0; COMP 50%; max $1,250/year PREV+COMP"
+  },
+  "H3817-009-1": {
+   "cited": true,
+   "value": "PREV $0; COMP 50%; max $1,500/year PREV+COMP"
+  },
+  "H3817-010-0": {
+   "cited": true,
+   "value": "PREV $0; COMP 50%; max $1,500/year PREV+COMP"
+  },
+  "H3817-011-1": {
+   "cited": true,
+   "value": "PREV $0; COMP 50%; max $1,000/year PREV+COMP"
+  },
+  "H5216-048-0": {
+   "cited": true,
+   "value": "PREV $0; COMP $0 (periodontal maintenance 4/year only); annual max not stated"
+  },
+  "H5216-427-2": {
+   "cited": true,
+   "value": "PREV $0; COMP 0%-30%; max $1,500/year PREV+COMP"
+  },
+  "H5216-428-2": {
+   "cited": true,
+   "value": "PREV $0; COMP $0 (periodontal maintenance 4/year only); annual max not stated"
+  },
+  "H5216-455-0": {
+   "cited": true,
+   "value": "PREV $0; COMP $0; max $2,500/year PREV+COMP"
+  },
+  "H5439-010-0": {
+   "cited": true,
+   "value": "PREV $0; COMP $0; COMP max $1,000/year"
+  },
+  "H5439-011-0": {
+   "cited": true,
+   "value": "PREV $0; COMP $0; COMP max $1,000/year"
+  },
+  "H5439-015-0": {
+   "cited": true,
+   "value": "PREV $0; COMP $0 (adjunctive general services only); no annual max"
+  },
+  "H5439-019-0": {
+   "cited": false,
+   "value": "PREV $0; COMP $0 (adjunctive general services only); no annual max"
+  },
+  "H6815-038-0": {
+   "cited": true,
+   "value": "PREV $0; COMP $0 (adjunctive general services only); no annual max"
+  },
+  "H7006-018-0": {
+   "cited": true,
+   "value": "PREV+COMP from $150/three months allowance"
+  },
+  "H7006-021-0": {
+   "cited": true,
+   "value": "PREV+COMP from $400/three months allowance"
+  },
+  "H7199-002-0": {
+   "cited": true,
+   "value": "PREV $0; COMP 50%; max $2,250/year shared by PREV+COMP, acupuncture, massage, naturopath"
+  },
+  "H9003-001-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H9003-006-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H9003-009-0": {
+   "cited": false,
+   "value": ""
+  }
+ },
+ "dvha.G_vision": {
+  "H1036-153-0": {
+   "cited": true,
+   "value": "exam $0/year; eyewear $50/year ($100 at PLUS providers)"
+  },
+  "H1036-306-0": {
+   "cited": true,
+   "value": "exam $0/year; eyewear $150/year ($250 at PLUS providers)"
+  },
+  "H1036-317-0": {
+   "cited": true,
+   "value": "exam $0/year; eyewear $150/year ($250 at PLUS providers)"
+  },
+  "H1036-323-0": {
+   "cited": true,
+   "value": "exam $0/year; eyewear $150/year ($250 at PLUS providers)"
+  },
+  "H1372-003-0": {
+   "cited": true,
+   "value": "exam $0/year; eyewear $330/year"
+  },
+  "H2001-045-0": {
+   "cited": true,
+   "value": "exam $0/year; eyewear $200/year"
+  },
+  "H2056-003-0": {
+   "cited": true,
+   "value": "exam $0/year; eyewear $100/year"
+  },
+  "H2056-018-0": {
+   "cited": true,
+   "value": "exam $0/year; eyewear $200/year"
+  },
+  "H2406-042-0": {
+   "cited": true,
+   "value": "exam $0/year; eyewear $200/two years"
+  },
+  "H2406-070-0": {
+   "cited": true,
+   "value": "exam $0/year"
+  },
+  "H2406-073-0": {
+   "cited": true,
+   "value": "exam $0/year; eyewear $250/two years"
+  },
+  "H2923-001-0": {
+   "cited": true,
+   "value": "exam $0/year; eyewear $400/year"
+  },
+  "H2923-005-0": {
+   "cited": true,
+   "value": "exam $0/year; eyewear $400/year"
+  },
+  "H2923-009-0": {
+   "cited": true,
+   "value": "exam $0/year; eyewear $300/year"
+  },
+  "H2923-019-0": {
+   "cited": true,
+   "value": "exam $0/year; eyewear $400/year"
+  },
+  "H2923-025-0": {
+   "cited": true,
+   "value": "exam $0/year; eyewear $400/year"
+  },
+  "H2923-028-3": {
+   "cited": true,
+   "value": "exam $0/year; eyewear $200/year"
+  },
+  "H3805-040-0": {
+   "cited": true,
+   "value": "exam $0/year"
+  },
+  "H3805-041-0": {
+   "cited": true,
+   "value": "exam $0/year"
+  },
+  "H3805-048-0": {
+   "cited": true,
+   "value": "exam $0/year; eyewear $150/two years"
+  },
+  "H3817-008-1": {
+   "cited": true,
+   "value": "exam $0/year; frames or contacts $100/year; lenses $0"
+  },
+  "H3817-009-1": {
+   "cited": true,
+   "value": "exam $0/year; frames or contacts $150/year; lenses $0"
+  },
+  "H3817-010-0": {
+   "cited": true,
+   "value": "exam $0/year; frames or contacts $100/year; lenses $0"
+  },
+  "H3817-011-1": {
+   "cited": true,
+   "value": "exam $0/year; frames or contacts $100/year; lenses $0"
+  },
+  "H5216-048-0": {
+   "cited": true,
+   "value": "exam $0/year; eyewear $50/year ($100 at PLUS providers)"
+  },
+  "H5216-427-2": {
+   "cited": true,
+   "value": "exam $0/year; eyewear $75/year ($150 at PLUS providers)"
+  },
+  "H5216-428-2": {
+   "cited": true,
+   "value": "exam $0/year; eyewear $50/year ($100 at PLUS providers)"
+  },
+  "H5216-455-0": {
+   "cited": true,
+   "value": "exam $0/year; eyewear $75/year ($150 at PLUS providers)"
+  },
+  "H5439-010-0": {
+   "cited": true,
+   "value": "exam $0/year; eyewear $100/year"
+  },
+  "H5439-011-0": {
+   "cited": true,
+   "value": "exam $0/year; eyewear $200/year"
+  },
+  "H5439-015-0": {
+   "cited": true,
+   "value": "exam $0/year"
+  },
+  "H5439-019-0": {
+   "cited": true,
+   "value": "exam $0/year; eyewear $100/year"
+  },
+  "H6815-038-0": {
+   "cited": true,
+   "value": "exam $0/year; eyewear $100/year"
+  },
+  "H7006-018-0": {
+   "cited": true,
+   "value": "exam $0/year; eyewear $150/year"
+  },
+  "H7006-021-0": {
+   "cited": true,
+   "value": "exam $0/year; eyewear $200/year"
+  },
+  "H7199-002-0": {
+   "cited": true,
+   "value": "exam $0/year; eyewear $200/year"
+  },
+  "H9003-001-0": {
+   "cited": true,
+   "value": "exam $0; eyewear $150/two years"
+  },
+  "H9003-006-0": {
+   "cited": true,
+   "value": "exam $0; eyewear $100/two years"
+  },
+  "H9003-009-0": {
+   "cited": true,
+   "value": "exam $15"
+  }
+ },
+ "dvha.H_hearing": {
+  "H1036-153-0": {
+   "cited": true,
+   "value": "exam $0; aids $575-$750; 2 aids/year"
+  },
+  "H1036-306-0": {
+   "cited": true,
+   "value": "exam $0; aids $575-$750; 2 aids/year"
+  },
+  "H1036-317-0": {
+   "cited": true,
+   "value": "exam $0; aids $0; 2 aids/year"
+  },
+  "H1036-323-0": {
+   "cited": true,
+   "value": "exam $0; aids $575-$750; 2 aids/year"
+  },
+  "H1372-003-0": {
+   "cited": true,
+   "value": "exam $0; aids allowance $1,600/two years"
+  },
+  "H2001-045-0": {
+   "cited": true,
+   "value": "exam $0; aids allowance $2,200/two years; 2 aids/two years"
+  },
+  "H2056-003-0": {
+   "cited": true,
+   "value": "exam $0; aids allowance $500 per ear/year; 2 aids/year"
+  },
+  "H2056-018-0": {
+   "cited": true,
+   "value": "exam $0; aids allowance $1,000 per ear/year; 2 aids/year"
+  },
+  "H2406-042-0": {
+   "cited": true,
+   "value": "exam $0; aids allowance $700/year; 2 aids/year"
+  },
+  "H2406-070-0": {
+   "cited": true,
+   "value": "exam $0; aids allowance $700/year; 2 aids/year"
+  },
+  "H2406-073-0": {
+   "cited": true,
+   "value": "exam $0; aids allowance $700/year; 2 aids/year"
+  },
+  "H2923-001-0": {
+   "cited": true,
+   "value": "exam $0; aids $399-$699; 2 aids/year"
+  },
+  "H2923-005-0": {
+   "cited": true,
+   "value": "exam $0; aids $399-$699; 2 aids/year"
+  },
+  "H2923-009-0": {
+   "cited": true,
+   "value": "exam $0; aids $399-$699; 2 aids/year"
+  },
+  "H2923-019-0": {
+   "cited": true,
+   "value": "exam $0; aids $599-$899; 2 aids/year"
+  },
+  "H2923-025-0": {
+   "cited": true,
+   "value": "exam $0; aids $599-$899; 2 aids/year"
+  },
+  "H2923-028-3": {
+   "cited": true,
+   "value": "exam $0; aids $599-$899; 2 aids/year"
+  },
+  "H3805-040-0": {
+   "cited": true,
+   "value": "exam $0"
+  },
+  "H3805-041-0": {
+   "cited": true,
+   "value": "exam $0"
+  },
+  "H3805-048-0": {
+   "cited": true,
+   "value": "exam $0; aids allowance $700/year; 2 aids/year"
+  },
+  "H3817-008-1": {
+   "cited": true,
+   "value": "exam $0; aids $499-$999; 2 aids/year"
+  },
+  "H3817-009-1": {
+   "cited": true,
+   "value": "exam $0; aids $499-$999; 2 aids/year"
+  },
+  "H3817-010-0": {
+   "cited": true,
+   "value": "exam $0; aids $499-$999; 2 aids/year"
+  },
+  "H3817-011-1": {
+   "cited": true,
+   "value": "exam $0; aids $499-$999; 2 aids/year"
+  },
+  "H5216-048-0": {
+   "cited": true,
+   "value": "exam $0; aids $575-$750; 2 aids/year"
+  },
+  "H5216-427-2": {
+   "cited": true,
+   "value": "exam $0; aids $575-$750; 2 aids/year"
+  },
+  "H5216-428-2": {
+   "cited": true,
+   "value": "exam $0; aids $575-$750; 2 aids/year"
+  },
+  "H5216-455-0": {
+   "cited": true,
+   "value": "exam $0; aids $575-$750; 2 aids/year"
+  },
+  "H5439-010-0": {
+   "cited": true,
+   "value": "exam $0; aids allowance $350 per ear/year; 2 aids/year"
+  },
+  "H5439-011-0": {
+   "cited": true,
+   "value": "exam $0; aids allowance $350 per ear/year; 2 aids/year"
+  },
+  "H5439-015-0": {
+   "cited": true,
+   "value": "exam $0; aids allowance $350 per ear/year; 2 aids/year"
+  },
+  "H5439-019-0": {
+   "cited": true,
+   "value": "exam $0; aids allowance $350 per ear/year; 2 aids/year"
+  },
+  "H6815-038-0": {
+   "cited": true,
+   "value": "exam $0; aids allowance $500 per ear/year; 2 aids/year"
+  },
+  "H7006-018-0": {
+   "cited": true,
+   "value": "exam $0; aids $699-$999; 2 aids/year"
+  },
+  "H7006-021-0": {
+   "cited": true,
+   "value": "exam $0; aids $699-$999; 2 aids/year"
+  },
+  "H7199-002-0": {
+   "cited": true,
+   "value": "exam $0; aids $399-$699; 2 aids/year"
+  },
+  "H9003-001-0": {
+   "cited": false,
+   "value": "exam $0; aids allowance $500 per ear/three years; 2 aids/three years"
+  },
+  "H9003-006-0": {
+   "cited": true,
+   "value": "exam $0"
+  },
+  "H9003-009-0": {
+   "cited": true,
+   "value": "exam $0"
+  }
+ },
+ "dvha.I_alt_care_otc_travel": {
+  "H1036-153-0": {
+   "cited": true,
+   "value": "Worldwide ER $115"
+  },
+  "H1036-306-0": {
+   "cited": true,
+   "value": "Acup $0 25 visits/year; Worldwide ER $115"
+  },
+  "H1036-317-0": {
+   "cited": true,
+   "value": "Acup $0 25 visits/year; Naturopath $20 25 visits/year; OTC $175/month, also groceries, utilities, rent for members who qualify; Worldwide ER $115"
+  },
+  "H1036-323-0": {
+   "cited": true,
+   "value": "Worldwide ER $115"
+  },
+  "H1372-003-0": {
+   "cited": true,
+   "value": "Acup $25 12 visits/year; Chiro $25 12 visits/year; OTC from $65/month allowance shared with fitness, and with groceries and hygiene items for members who qualify"
+  },
+  "H2001-045-0": {
+   "cited": true,
+   "value": "OTC $196/month, also healthy food for members who qualify"
+  },
+  "H2056-003-0": {
+   "cited": true,
+   "value": "Worldwide ER $130, $250,000 max"
+  },
+  "H2056-018-0": {
+   "cited": true,
+   "value": "OTC $45/three months; Worldwide ER $130, $250,000 max"
+  },
+  "H2406-042-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2406-070-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2406-073-0": {
+   "cited": true,
+   "value": "OTC $50/three months"
+  },
+  "H2923-001-0": {
+   "cited": true,
+   "value": "Acup, Massage, Naturopath from dental allowance; Chiro $15 12 visits/year; OTC $40/three months; Worldwide ER $130, $25,000 max"
+  },
+  "H2923-005-0": {
+   "cited": true,
+   "value": "Acup, Massage, Naturopath from dental allowance; Chiro $15 12 visits/year; OTC $40/three months; Worldwide ER $130, $25,000 max"
+  },
+  "H2923-009-0": {
+   "cited": true,
+   "value": "Acup, Massage, Naturopath from $150/year Wellness Bucks; Chiro $0 12 visits/year; OTC $50/three months; Worldwide ER $0, $25,000 max"
+  },
+  "H2923-019-0": {
+   "cited": true,
+   "value": "Acup, Massage, Naturopath from dental allowance; OTC $106/three months; Worldwide ER $115, $25,000 max"
+  },
+  "H2923-025-0": {
+   "cited": true,
+   "value": "Acup, Massage, Naturopath from dental allowance; OTC $109/three months; Worldwide ER $115, $25,000 max"
+  },
+  "H2923-028-3": {
+   "cited": true,
+   "value": "Acup, Massage, Naturopath from dental allowance; Worldwide ER $115, $25,000 max"
+  },
+  "H3805-040-0": {
+   "cited": true,
+   "value": "OTC $40/month, also healthy food for members who qualify"
+  },
+  "H3805-041-0": {
+   "cited": true,
+   "value": "OTC $25/three months"
+  },
+  "H3805-048-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H3817-008-1": {
+   "cited": true,
+   "value": "Worldwide ER $130"
+  },
+  "H3817-009-1": {
+   "cited": true,
+   "value": "Worldwide ER $130"
+  },
+  "H3817-010-0": {
+   "cited": true,
+   "value": "Worldwide ER $130"
+  },
+  "H3817-011-1": {
+   "cited": true,
+   "value": "Worldwide ER $130"
+  },
+  "H5216-048-0": {
+   "cited": true,
+   "value": "Worldwide ER $130"
+  },
+  "H5216-427-2": {
+   "cited": true,
+   "value": "OTC $50/three months; Worldwide ER $115"
+  },
+  "H5216-428-2": {
+   "cited": true,
+   "value": "Worldwide ER $130"
+  },
+  "H5216-455-0": {
+   "cited": true,
+   "value": "Worldwide ER $130"
+  },
+  "H5439-010-0": {
+   "cited": true,
+   "value": "Acup $0 24 visits/year; Chiro $15 24 visits/year; OTC from $20/month card shared with dental, vision, hearing; Worldwide ER $130, $50,000 max"
+  },
+  "H5439-011-0": {
+   "cited": true,
+   "value": "Acup $0 24 visits/year; Chiro $15 24 visits/year; Worldwide ER $130, $50,000 max"
+  },
+  "H5439-015-0": {
+   "cited": true,
+   "value": "Worldwide ER $115, $50,000 max"
+  },
+  "H5439-019-0": {
+   "cited": true,
+   "value": "Worldwide ER $130, $50,000 max"
+  },
+  "H6815-038-0": {
+   "cited": true,
+   "value": "Acup $0 24 visits/year; Chiro $15 24 visits/year; Worldwide ER $115, $50,000 max"
+  },
+  "H7006-018-0": {
+   "cited": true,
+   "value": "Acup, Chiro, Naturopath from $50/six months allowance; OTC $30/three months; Worldwide ER $300, $250,000 max"
+  },
+  "H7006-021-0": {
+   "cited": true,
+   "value": "Acup, Chiro, Naturopath from $100/six months allowance; OTC $150/three months; Worldwide ER $120, $250,000 max"
+  },
+  "H7199-002-0": {
+   "cited": true,
+   "value": "Acup, Massage, Naturopath from dental allowance; Chiro $15 12 visits/year; Worldwide ER $130, $25,000 max"
+  },
+  "H9003-001-0": {
+   "cited": true,
+   "value": "Acup $10; Chiro $10; Naturopath $10; 18 visits/year combined; Worldwide ER $150; out-of-network care while traveling in the U.S., $1,200/year max"
+  },
+  "H9003-006-0": {
+   "cited": true,
+   "value": "Acup $15; Chiro $15; Naturopath $15; 18 visits/year combined; Worldwide ER $130; out-of-network care while traveling in the U.S., $1,200/year max"
+  },
+  "H9003-009-0": {
+   "cited": true,
+   "value": "Acup $20; Chiro $20; Naturopath $20; 18 visits/year combined; Worldwide ER $130; out-of-network care while traveling in the U.S., $1,200/year max"
+  }
+ },
+ "dvha.J_extra_benefits": {
+  "H1036-153-0": {
+   "cited": true,
+   "value": "Fitness; Meals; After a heart-failure hospital stay: Virtual Cardiac Recovery Program"
+  },
+  "H1036-306-0": {
+   "cited": true,
+   "value": "Fitness; Meals; Routine foot care $15; After a heart-failure hospital stay: Virtual Cardiac Recovery Program"
+  },
+  "H1036-317-0": {
+   "cited": true,
+   "value": "Fitness; Meals; Routine foot care 20% 12/year; After a heart-failure hospital stay: Virtual Cardiac Recovery Program"
+  },
+  "H1036-323-0": {
+   "cited": true,
+   "value": "Fitness; Meals; After a heart-failure hospital stay: Virtual Cardiac Recovery Program"
+  },
+  "H1372-003-0": {
+   "cited": true,
+   "value": "Fitness; Transportation; Routine foot care $0 6/year"
+  },
+  "H2001-045-0": {
+   "cited": true,
+   "value": "Fitness; Transportation; Routine foot care $0 4/year"
+  },
+  "H2056-003-0": {
+   "cited": false,
+   "value": "Fitness"
+  },
+  "H2056-018-0": {
+   "cited": false,
+   "value": "Fitness"
+  },
+  "H2406-042-0": {
+   "cited": true,
+   "value": "Fitness; Routine foot care $45 6/year"
+  },
+  "H2406-070-0": {
+   "cited": true,
+   "value": "Routine foot care $55 6/year"
+  },
+  "H2406-073-0": {
+   "cited": true,
+   "value": "Fitness; Routine foot care $45 6/year"
+  },
+  "H2923-001-0": {
+   "cited": true,
+   "value": "Fitness; Wellness Bucks $150/year for fitness classes, trackers or gym; For members with certain chronic conditions: Food & Home Card $30/month"
+  },
+  "H2923-005-0": {
+   "cited": true,
+   "value": "Fitness; Wellness Bucks $150/year for fitness classes, trackers or gym"
+  },
+  "H2923-009-0": {
+   "cited": true,
+   "value": "Fitness; Routine foot care $0 4/year; For members with certain chronic conditions: Food & Home Card $289/month"
+  },
+  "H2923-019-0": {
+   "cited": true,
+   "value": "Fitness; Routine foot care $45 4/year; Wellness Bucks $150/year for fitness classes, trackers or gym"
+  },
+  "H2923-025-0": {
+   "cited": true,
+   "value": "Fitness; Wellness Bucks $150/year for fitness classes, trackers or gym"
+  },
+  "H2923-028-3": {
+   "cited": true,
+   "value": "Fitness; Wellness Bucks $150/year for fitness classes, trackers or gym"
+  },
+  "H3805-040-0": {
+   "cited": true,
+   "value": "Meals; Routine foot care $45 6/year"
+  },
+  "H3805-041-0": {
+   "cited": true,
+   "value": "Fitness; Meals; Routine foot care $45 6/year"
+  },
+  "H3805-048-0": {
+   "cited": true,
+   "value": "Fitness; Meals; Routine foot care $45 6/year"
+  },
+  "H3817-008-1": {
+   "cited": true,
+   "value": "Fitness; Routine foot care $0 6/year for members with diabetes"
+  },
+  "H3817-009-1": {
+   "cited": true,
+   "value": "Fitness; Routine foot care $0 6/year for members with diabetes"
+  },
+  "H3817-010-0": {
+   "cited": true,
+   "value": "Fitness; Routine foot care $0 6/year for members with diabetes"
+  },
+  "H3817-011-1": {
+   "cited": true,
+   "value": "Fitness; Routine foot care $0 6/year for members with diabetes"
+  },
+  "H5216-048-0": {
+   "cited": true,
+   "value": "Meals; After a heart-failure hospital stay: Virtual Cardiac Recovery Program, home-delivered meals"
+  },
+  "H5216-427-2": {
+   "cited": true,
+   "value": "Fitness; Meals; After a heart-failure hospital stay: Virtual Cardiac Recovery Program, home-delivered meals"
+  },
+  "H5216-428-2": {
+   "cited": true,
+   "value": "Fitness; After a heart-failure hospital stay: Virtual Cardiac Recovery Program, home-delivered meals"
+  },
+  "H5216-455-0": {
+   "cited": true,
+   "value": "Fitness; Meals; After a heart-failure hospital stay: Virtual Cardiac Recovery Program, home-delivered meals"
+  },
+  "H5439-010-0": {
+   "cited": false,
+   "value": "Fitness"
+  },
+  "H5439-011-0": {
+   "cited": false,
+   "value": "Fitness"
+  },
+  "H5439-015-0": {
+   "cited": true,
+   "value": "Fitness"
+  },
+  "H5439-019-0": {
+   "cited": false,
+   "value": "Fitness"
+  },
+  "H6815-038-0": {
+   "cited": true,
+   "value": "Fitness"
+  },
+  "H7006-018-0": {
+   "cited": false,
+   "value": "Fitness; Meals"
+  },
+  "H7006-021-0": {
+   "cited": false,
+   "value": "Fitness; Meals"
+  },
+  "H7199-002-0": {
+   "cited": true,
+   "value": "Fitness; Wellness Bucks $150/year for fitness classes, trackers or gym"
+  },
+  "H9003-001-0": {
+   "cited": true,
+   "value": "Fitness; Transportation $0 by stretcher or wheelchair van after a hospital or ER visit only; Hospital care at home $0 if a network hospitalist prescribes it"
+  },
+  "H9003-006-0": {
+   "cited": true,
+   "value": "Fitness; Transportation $0 by stretcher or wheelchair van after a hospital or ER visit only; Hospital care at home $0 if a network hospitalist prescribes it"
+  },
+  "H9003-009-0": {
+   "cited": true,
+   "value": "Fitness; Transportation $0 by stretcher or wheelchair van after a hospital or ER visit only; Hospital care at home $0 if a network hospitalist prescribes it"
+  }
+ },
+ "main.AA_opt_packages": {
+  "H1036-153-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H1036-306-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H1036-317-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H1036-323-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H1372-003-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2001-045-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2056-003-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2056-018-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2406-042-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2406-070-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2406-073-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2923-001-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2923-005-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2923-009-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2923-019-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2923-025-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2923-028-3": {
+   "cited": false,
+   "value": ""
+  },
+  "H3805-040-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H3805-041-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H3805-048-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H3817-008-1": {
+   "cited": false,
+   "value": ""
+  },
+  "H3817-009-1": {
+   "cited": false,
+   "value": ""
+  },
+  "H3817-010-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H3817-011-1": {
+   "cited": false,
+   "value": ""
+  },
+  "H5216-048-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5216-427-2": {
+   "cited": false,
+   "value": ""
+  },
+  "H5216-428-2": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5216-455-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H5439-010-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H5439-011-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H5439-015-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H5439-019-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H6815-038-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H7006-018-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H7006-021-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H7199-002-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H9003-001-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H9003-006-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H9003-009-0": {
+   "cited": true,
+   "value": "●"
+  }
+ },
+ "main.AB_ambulance": {
+  "H1036-153-0": {
+   "cited": false,
+   "value": "$325 or 20% | $325"
+  },
+  "H1036-306-0": {
+   "cited": false,
+   "value": "$325 or 20% | $325"
+  },
+  "H1036-317-0": {
+   "cited": false,
+   "value": "$325 or 20% | $325"
+  },
+  "H1036-323-0": {
+   "cited": false,
+   "value": "$325 or 20% | $325"
+  },
+  "H1372-003-0": {
+   "cited": true,
+   "value": "$250 or 20% | not covered"
+  },
+  "H2001-045-0": {
+   "cited": false,
+   "value": "20% | not covered"
+  },
+  "H2056-003-0": {
+   "cited": false,
+   "value": "$295 or 20% | $295"
+  },
+  "H2056-018-0": {
+   "cited": false,
+   "value": "$245 or 20% | $245"
+  },
+  "H2406-042-0": {
+   "cited": false,
+   "value": "$290 | not covered"
+  },
+  "H2406-070-0": {
+   "cited": false,
+   "value": "$350 | not covered"
+  },
+  "H2406-073-0": {
+   "cited": false,
+   "value": "$350 | not covered"
+  },
+  "H2923-001-0": {
+   "cited": false,
+   "value": "$0-$315 or 20% | $315 or 20%"
+  },
+  "H2923-005-0": {
+   "cited": false,
+   "value": "$0-$315 or 20% | $315 or 20%"
+  },
+  "H2923-009-0": {
+   "cited": false,
+   "value": "50% | $0"
+  },
+  "H2923-019-0": {
+   "cited": false,
+   "value": "$0-$330 or 20% | $330 or 20%"
+  },
+  "H2923-025-0": {
+   "cited": false,
+   "value": "$0-$330 or 20% | $330 or 20%"
+  },
+  "H2923-028-3": {
+   "cited": false,
+   "value": "$0-$345 or 20% | $345 or 20%"
+  },
+  "H3805-040-0": {
+   "cited": false,
+   "value": "$400 | not covered"
+  },
+  "H3805-041-0": {
+   "cited": false,
+   "value": "$350 | not covered"
+  },
+  "H3805-048-0": {
+   "cited": false,
+   "value": "$370 | not covered"
+  },
+  "H3817-008-1": {
+   "cited": false,
+   "value": "$300 | $300"
+  },
+  "H3817-009-1": {
+   "cited": false,
+   "value": "$300 | $300"
+  },
+  "H3817-010-0": {
+   "cited": false,
+   "value": "$300 | $300"
+  },
+  "H3817-011-1": {
+   "cited": false,
+   "value": "$300 | $300"
+  },
+  "H5216-048-0": {
+   "cited": false,
+   "value": "$325 or 20% | $325"
+  },
+  "H5216-427-2": {
+   "cited": false,
+   "value": "$325 or 20% | $325"
+  },
+  "H5216-428-2": {
+   "cited": false,
+   "value": "$325 or 20% | $325"
+  },
+  "H5216-455-0": {
+   "cited": false,
+   "value": "$325 or 20% | $325"
+  },
+  "H5439-010-0": {
+   "cited": true,
+   "value": "$175 | EOC unclear"
+  },
+  "H5439-011-0": {
+   "cited": true,
+   "value": "$350 | EOC unclear"
+  },
+  "H5439-015-0": {
+   "cited": true,
+   "value": "$335 | EOC unclear"
+  },
+  "H5439-019-0": {
+   "cited": true,
+   "value": "$325 | EOC unclear"
+  },
+  "H6815-038-0": {
+   "cited": true,
+   "value": "$310 | EOC unclear"
+  },
+  "H7006-018-0": {
+   "cited": true,
+   "value": "$250 | EOC unclear"
+  },
+  "H7006-021-0": {
+   "cited": true,
+   "value": "$300 | EOC unclear"
+  },
+  "H7199-002-0": {
+   "cited": false,
+   "value": "$0-$325 or 20% | $325 or 20%"
+  },
+  "H9003-001-0": {
+   "cited": true,
+   "value": "$0-$250 | $250"
+  },
+  "H9003-006-0": {
+   "cited": true,
+   "value": "$0-$300 | $300"
+  },
+  "H9003-009-0": {
+   "cited": true,
+   "value": "$0-$350 | $350"
+  }
+ },
+ "main.C_premium": {
+  "H1036-153-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H1036-306-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H1036-317-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H1036-323-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H1372-003-0": {
+   "cited": true,
+   "value": "$69"
+  },
+  "H2001-045-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H2056-003-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H2056-018-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H2406-042-0": {
+   "cited": true,
+   "value": "$94"
+  },
+  "H2406-070-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H2406-073-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H2923-001-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H2923-005-0": {
+   "cited": true,
+   "value": "$43"
+  },
+  "H2923-009-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H2923-019-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H2923-025-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H2923-028-3": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H3805-040-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H3805-041-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H3805-048-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H3817-008-1": {
+   "cited": true,
+   "value": "$130"
+  },
+  "H3817-009-1": {
+   "cited": true,
+   "value": "$244"
+  },
+  "H3817-010-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H3817-011-1": {
+   "cited": true,
+   "value": "$88"
+  },
+  "H5216-048-0": {
+   "cited": true,
+   "value": "$97"
+  },
+  "H5216-427-2": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H5216-428-2": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H5216-455-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H5439-010-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H5439-011-0": {
+   "cited": true,
+   "value": "$206"
+  },
+  "H5439-015-0": {
+   "cited": true,
+   "value": "$29"
+  },
+  "H5439-019-0": {
+   "cited": true,
+   "value": "$76.60"
+  },
+  "H6815-038-0": {
+   "cited": true,
+   "value": "$44.50"
+  },
+  "H7006-018-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H7006-021-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H7199-002-0": {
+   "cited": true,
+   "value": "$28.50"
+  },
+  "H9003-001-0": {
+   "cited": true,
+   "value": "$134"
+  },
+  "H9003-006-0": {
+   "cited": true,
+   "value": "$49"
+  },
+  "H9003-009-0": {
+   "cited": true,
+   "value": "$0"
+  }
+ },
+ "main.E_moop": {
+  "H1036-153-0": {
+   "cited": true,
+   "value": "$5,150"
+  },
+  "H1036-306-0": {
+   "cited": true,
+   "value": "$4,550"
+  },
+  "H1036-317-0": {
+   "cited": true,
+   "value": "$9,850"
+  },
+  "H1036-323-0": {
+   "cited": true,
+   "value": "$9,050"
+  },
+  "H1372-003-0": {
+   "cited": true,
+   "value": "$6,500"
+  },
+  "H2001-045-0": {
+   "cited": true,
+   "value": "$9,850 | $14,800"
+  },
+  "H2056-003-0": {
+   "cited": true,
+   "value": "$7,150"
+  },
+  "H2056-018-0": {
+   "cited": true,
+   "value": "$5,500"
+  },
+  "H2406-042-0": {
+   "cited": true,
+   "value": "$6,700 | $10,750"
+  },
+  "H2406-070-0": {
+   "cited": true,
+   "value": "$7,150 | $10,750"
+  },
+  "H2406-073-0": {
+   "cited": true,
+   "value": "$7,150 | $10,750"
+  },
+  "H2923-001-0": {
+   "cited": true,
+   "value": "$6,700"
+  },
+  "H2923-005-0": {
+   "cited": true,
+   "value": "$5,900"
+  },
+  "H2923-009-0": {
+   "cited": true,
+   "value": "$9,850"
+  },
+  "H2923-019-0": {
+   "cited": true,
+   "value": "$7,700"
+  },
+  "H2923-025-0": {
+   "cited": true,
+   "value": "$7,700"
+  },
+  "H2923-028-3": {
+   "cited": true,
+   "value": "$8,900"
+  },
+  "H3805-040-0": {
+   "cited": true,
+   "value": "$7,150"
+  },
+  "H3805-041-0": {
+   "cited": true,
+   "value": "$7,150"
+  },
+  "H3805-048-0": {
+   "cited": true,
+   "value": "$6,700"
+  },
+  "H3817-008-1": {
+   "cited": true,
+   "value": "$6,700 | $10,100"
+  },
+  "H3817-009-1": {
+   "cited": true,
+   "value": "$5,900 | $9,550"
+  },
+  "H3817-010-0": {
+   "cited": true,
+   "value": "$5,300 | $9,550"
+  },
+  "H3817-011-1": {
+   "cited": true,
+   "value": "$7,150 | $10,100"
+  },
+  "H5216-048-0": {
+   "cited": true,
+   "value": "$7,000 | $10,100"
+  },
+  "H5216-427-2": {
+   "cited": true,
+   "value": "$9,150 | $13,900"
+  },
+  "H5216-428-2": {
+   "cited": true,
+   "value": "$6,950 | $10,750"
+  },
+  "H5216-455-0": {
+   "cited": true,
+   "value": "$5,100 | $10,100"
+  },
+  "H5439-010-0": {
+   "cited": true,
+   "value": "$6,750 | $9,200"
+  },
+  "H5439-011-0": {
+   "cited": true,
+   "value": "$6,500 | $8,700"
+  },
+  "H5439-015-0": {
+   "cited": true,
+   "value": "$9,250 | $13,700"
+  },
+  "H5439-019-0": {
+   "cited": true,
+   "value": "$7,000 | $10,700"
+  },
+  "H6815-038-0": {
+   "cited": true,
+   "value": "$7,900"
+  },
+  "H7006-018-0": {
+   "cited": true,
+   "value": "$5,900 | $5,900"
+  },
+  "H7006-021-0": {
+   "cited": true,
+   "value": "$4,450 | $4,450"
+  },
+  "H7199-002-0": {
+   "cited": true,
+   "value": "$6,000 | $10,750"
+  },
+  "H9003-001-0": {
+   "cited": true,
+   "value": "$4,000"
+  },
+  "H9003-006-0": {
+   "cited": true,
+   "value": "$5,250"
+  },
+  "H9003-009-0": {
+   "cited": true,
+   "value": "$6,750"
+  }
+ },
+ "main.F_primary_care": {
+  "H1036-153-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H1036-306-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H1036-317-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H1036-323-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H1372-003-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H2001-045-0": {
+   "cited": false,
+   "value": "0%-20% | 30%"
+  },
+  "H2056-003-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H2056-018-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H2406-042-0": {
+   "cited": true,
+   "value": "$0 | $25"
+  },
+  "H2406-070-0": {
+   "cited": true,
+   "value": "$0 | $25"
+  },
+  "H2406-073-0": {
+   "cited": true,
+   "value": "$0 | $25"
+  },
+  "H2923-001-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H2923-005-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H2923-009-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H2923-019-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H2923-025-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H2923-028-3": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H3805-040-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H3805-041-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H3805-048-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H3817-008-1": {
+   "cited": true,
+   "value": "$0 | 50%"
+  },
+  "H3817-009-1": {
+   "cited": true,
+   "value": "$0 | 50%"
+  },
+  "H3817-010-0": {
+   "cited": true,
+   "value": "$0 | 50%"
+  },
+  "H3817-011-1": {
+   "cited": true,
+   "value": "$0 | 50%"
+  },
+  "H5216-048-0": {
+   "cited": true,
+   "value": "$0 | 50%"
+  },
+  "H5216-427-2": {
+   "cited": true,
+   "value": "$0 | 35%"
+  },
+  "H5216-428-2": {
+   "cited": true,
+   "value": "$0 | 50%"
+  },
+  "H5216-455-0": {
+   "cited": true,
+   "value": "$0 | 50%"
+  },
+  "H5439-010-0": {
+   "cited": true,
+   "value": "$0 | $30"
+  },
+  "H5439-011-0": {
+   "cited": true,
+   "value": "$0 | 30%"
+  },
+  "H5439-015-0": {
+   "cited": true,
+   "value": "$0 | 30%"
+  },
+  "H5439-019-0": {
+   "cited": true,
+   "value": "$0 | $30"
+  },
+  "H6815-038-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H7006-018-0": {
+   "cited": true,
+   "value": "$0 | $50"
+  },
+  "H7006-021-0": {
+   "cited": true,
+   "value": "$0 | $50"
+  },
+  "H7199-002-0": {
+   "cited": true,
+   "value": "$0 | $10"
+  },
+  "H9003-001-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H9003-006-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H9003-009-0": {
+   "cited": true,
+   "value": "$0"
+  }
+ },
+ "main.G_specialist": {
+  "H1036-153-0": {
+   "cited": true,
+   "value": "$30"
+  },
+  "H1036-306-0": {
+   "cited": true,
+   "value": "$15"
+  },
+  "H1036-317-0": {
+   "cited": true,
+   "value": "20%"
+  },
+  "H1036-323-0": {
+   "cited": true,
+   "value": "$50"
+  },
+  "H1372-003-0": {
+   "cited": true,
+   "value": "$0-$20"
+  },
+  "H2001-045-0": {
+   "cited": false,
+   "value": "0%-20% | 30%"
+  },
+  "H2056-003-0": {
+   "cited": false,
+   "value": "$0-$65"
+  },
+  "H2056-018-0": {
+   "cited": true,
+   "value": "$40"
+  },
+  "H2406-042-0": {
+   "cited": false,
+   "value": "$0-$50 | $80"
+  },
+  "H2406-070-0": {
+   "cited": false,
+   "value": "$0-$70 | $90"
+  },
+  "H2406-073-0": {
+   "cited": false,
+   "value": "$0-$60 | $80"
+  },
+  "H2923-001-0": {
+   "cited": true,
+   "value": "$40"
+  },
+  "H2923-005-0": {
+   "cited": true,
+   "value": "$40"
+  },
+  "H2923-009-0": {
+   "cited": true,
+   "value": "30%"
+  },
+  "H2923-019-0": {
+   "cited": true,
+   "value": "$45"
+  },
+  "H2923-025-0": {
+   "cited": true,
+   "value": "$45"
+  },
+  "H2923-028-3": {
+   "cited": true,
+   "value": "$50"
+  },
+  "H3805-040-0": {
+   "cited": false,
+   "value": "$0-$55"
+  },
+  "H3805-041-0": {
+   "cited": false,
+   "value": "$0-$70"
+  },
+  "H3805-048-0": {
+   "cited": false,
+   "value": "$0-$55"
+  },
+  "H3817-008-1": {
+   "cited": true,
+   "value": "$40 | 50%"
+  },
+  "H3817-009-1": {
+   "cited": true,
+   "value": "$30 | 50%"
+  },
+  "H3817-010-0": {
+   "cited": true,
+   "value": "$40 | 50%"
+  },
+  "H3817-011-1": {
+   "cited": true,
+   "value": "$45 | 50%"
+  },
+  "H5216-048-0": {
+   "cited": true,
+   "value": "$45 | 50%"
+  },
+  "H5216-427-2": {
+   "cited": true,
+   "value": "$45 | 35%"
+  },
+  "H5216-428-2": {
+   "cited": true,
+   "value": "$50 | 50%"
+  },
+  "H5216-455-0": {
+   "cited": true,
+   "value": "$40 | 50%"
+  },
+  "H5439-010-0": {
+   "cited": true,
+   "value": "$30 | $60"
+  },
+  "H5439-011-0": {
+   "cited": true,
+   "value": "$30 | 30%"
+  },
+  "H5439-015-0": {
+   "cited": true,
+   "value": "$55 | 30%"
+  },
+  "H5439-019-0": {
+   "cited": true,
+   "value": "$30 | $60"
+  },
+  "H6815-038-0": {
+   "cited": true,
+   "value": "$25"
+  },
+  "H7006-018-0": {
+   "cited": true,
+   "value": "$45 | $45"
+  },
+  "H7006-021-0": {
+   "cited": true,
+   "value": "$40 | $50"
+  },
+  "H7199-002-0": {
+   "cited": false,
+   "value": "$15-$45 | $45"
+  },
+  "H9003-001-0": {
+   "cited": true,
+   "value": "$35"
+  },
+  "H9003-006-0": {
+   "cited": true,
+   "value": "$40"
+  },
+  "H9003-009-0": {
+   "cited": true,
+   "value": "$45"
+  }
+ },
+ "main.H_inpatient": {
+  "H1036-153-0": {
+   "cited": true,
+   "value": "$420 | 1-4"
+  },
+  "H1036-306-0": {
+   "cited": true,
+   "value": "$290 | 1-4"
+  },
+  "H1036-317-0": {
+   "cited": false,
+   "value": "$2,241 per admission"
+  },
+  "H1036-323-0": {
+   "cited": true,
+   "value": "$515 | 1-4"
+  },
+  "H1372-003-0": {
+   "cited": true,
+   "value": "$325 | 1-7"
+  },
+  "H2001-045-0": {
+   "cited": false,
+   "value": "$1,980 per admission"
+  },
+  "H2056-003-0": {
+   "cited": true,
+   "value": "$550 | 1-5"
+  },
+  "H2056-018-0": {
+   "cited": true,
+   "value": "$325 | 1-5"
+  },
+  "H2406-042-0": {
+   "cited": true,
+   "value": "$550 | 1-5"
+  },
+  "H2406-070-0": {
+   "cited": true,
+   "value": "$835 | 1-3"
+  },
+  "H2406-073-0": {
+   "cited": true,
+   "value": "$610 | 1-4"
+  },
+  "H2923-001-0": {
+   "cited": true,
+   "value": "$465 | 1-5"
+  },
+  "H2923-005-0": {
+   "cited": true,
+   "value": "$445 | 1-5"
+  },
+  "H2923-009-0": {
+   "cited": false,
+   "value": "$2,241 per admission"
+  },
+  "H2923-019-0": {
+   "cited": true,
+   "value": "$490 | 1-5"
+  },
+  "H2923-025-0": {
+   "cited": true,
+   "value": "$490 | 1-5"
+  },
+  "H2923-028-3": {
+   "cited": true,
+   "value": "$490 | 1-5"
+  },
+  "H3805-040-0": {
+   "cited": true,
+   "value": "$685 | 1-4"
+  },
+  "H3805-041-0": {
+   "cited": true,
+   "value": "$685 | 1-4"
+  },
+  "H3805-048-0": {
+   "cited": true,
+   "value": "$550 | 1-5"
+  },
+  "H3817-008-1": {
+   "cited": true,
+   "value": "$395 | 1-5"
+  },
+  "H3817-009-1": {
+   "cited": true,
+   "value": "$315 | 1-5"
+  },
+  "H3817-010-0": {
+   "cited": true,
+   "value": "$370 | 1-4"
+  },
+  "H3817-011-1": {
+   "cited": true,
+   "value": "$450 | 1-5"
+  },
+  "H5216-048-0": {
+   "cited": true,
+   "value": "$610 | 1-4"
+  },
+  "H5216-427-2": {
+   "cited": true,
+   "value": "$610 | 1-4"
+  },
+  "H5216-428-2": {
+   "cited": true,
+   "value": "$689 | 1-4"
+  },
+  "H5216-455-0": {
+   "cited": true,
+   "value": "$480 | 1-4"
+  },
+  "H5439-010-0": {
+   "cited": true,
+   "value": "$525 | 1-5"
+  },
+  "H5439-011-0": {
+   "cited": true,
+   "value": "$425 | 1-7"
+  },
+  "H5439-015-0": {
+   "cited": true,
+   "value": "$475 | 1-5"
+  },
+  "H5439-019-0": {
+   "cited": true,
+   "value": "$475 | 1-5"
+  },
+  "H6815-038-0": {
+   "cited": true,
+   "value": "$600 | 1-4"
+  },
+  "H7006-018-0": {
+   "cited": true,
+   "value": "$585 | 1-4"
+  },
+  "H7006-021-0": {
+   "cited": true,
+   "value": "$250 | 1-5"
+  },
+  "H7199-002-0": {
+   "cited": true,
+   "value": "$400 | 1-5"
+  },
+  "H9003-001-0": {
+   "cited": true,
+   "value": "$250 | 1-6"
+  },
+  "H9003-006-0": {
+   "cited": true,
+   "value": "$320 | 1-6"
+  },
+  "H9003-009-0": {
+   "cited": true,
+   "value": "$455 | 1-6"
+  }
+ },
+ "main.I_outpatient_surgery": {
+  "H1036-153-0": {
+   "cited": false,
+   "value": "$0-$395 | $0-$350"
+  },
+  "H1036-306-0": {
+   "cited": false,
+   "value": "$0-$395 | $0-$100"
+  },
+  "H1036-317-0": {
+   "cited": false,
+   "value": "$0-$35 or 20% | $0 or 20%"
+  },
+  "H1036-323-0": {
+   "cited": false,
+   "value": "$0-$450 | $0-$350"
+  },
+  "H1372-003-0": {
+   "cited": false,
+   "value": "$0-$225 or 20% | 20%"
+  },
+  "H2001-045-0": {
+   "cited": false,
+   "value": "0%-20% | 0%-20%"
+  },
+  "H2056-003-0": {
+   "cited": false,
+   "value": "$0-$500 | $0-$450"
+  },
+  "H2056-018-0": {
+   "cited": false,
+   "value": "$0-$325 | $0-$275"
+  },
+  "H2406-042-0": {
+   "cited": false,
+   "value": "$0-$550 | $0-$400"
+  },
+  "H2406-070-0": {
+   "cited": false,
+   "value": "$0-$835 | $0-$785"
+  },
+  "H2406-073-0": {
+   "cited": false,
+   "value": "$0-$610 | $0-$610"
+  },
+  "H2923-001-0": {
+   "cited": false,
+   "value": "$0-$565 | $0-$465"
+  },
+  "H2923-005-0": {
+   "cited": false,
+   "value": "$0-$475 | $0-$375"
+  },
+  "H2923-009-0": {
+   "cited": false,
+   "value": "15%-50% | 15%-50%"
+  },
+  "H2923-019-0": {
+   "cited": false,
+   "value": "$0-$580 | $0-$480"
+  },
+  "H2923-025-0": {
+   "cited": false,
+   "value": "$0-$580 | $0-$480"
+  },
+  "H2923-028-3": {
+   "cited": false,
+   "value": "$0-$590 | $0-$490"
+  },
+  "H3805-040-0": {
+   "cited": false,
+   "value": "$0-$685 | $0-$635"
+  },
+  "H3805-041-0": {
+   "cited": false,
+   "value": "$0-$685 | $0-$635"
+  },
+  "H3805-048-0": {
+   "cited": false,
+   "value": "$0-$550 | $0-$500"
+  },
+  "H3817-008-1": {
+   "cited": false,
+   "value": "$0-$40 or 20% | $0-$375"
+  },
+  "H3817-009-1": {
+   "cited": false,
+   "value": "$0-$30 or 20% | $0-$300"
+  },
+  "H3817-010-0": {
+   "cited": false,
+   "value": "$0-$40 or 20% | $0-$360"
+  },
+  "H3817-011-1": {
+   "cited": false,
+   "value": "$0-$45 or 20% | $0-$395"
+  },
+  "H5216-048-0": {
+   "cited": false,
+   "value": "$0-$450 | $0-$350"
+  },
+  "H5216-427-2": {
+   "cited": false,
+   "value": "$0-$450 | $0-$350"
+  },
+  "H5216-428-2": {
+   "cited": false,
+   "value": "$0-$450 | $0-$350"
+  },
+  "H5216-455-0": {
+   "cited": false,
+   "value": "$0-$450 | $0-$350"
+  },
+  "H5439-010-0": {
+   "cited": false,
+   "value": "$0-$500 | $200"
+  },
+  "H5439-011-0": {
+   "cited": false,
+   "value": "$0-$425 | $200"
+  },
+  "H5439-015-0": {
+   "cited": false,
+   "value": "$0-$500 | $300"
+  },
+  "H5439-019-0": {
+   "cited": false,
+   "value": "$0-$500 | $350"
+  },
+  "H6815-038-0": {
+   "cited": false,
+   "value": "$0-$500 or 20% | $300"
+  },
+  "H7006-018-0": {
+   "cited": true,
+   "value": "$0-$400 | $250"
+  },
+  "H7006-021-0": {
+   "cited": true,
+   "value": "$350 | $250"
+  },
+  "H7199-002-0": {
+   "cited": false,
+   "value": "$0-$500 | $0-$400"
+  },
+  "H9003-001-0": {
+   "cited": true,
+   "value": "$0-$250 | $250"
+  },
+  "H9003-006-0": {
+   "cited": true,
+   "value": "$0-$350 | $350"
+  },
+  "H9003-009-0": {
+   "cited": true,
+   "value": "$0-$400 | $400"
+  }
+ },
+ "main.J_outpatient_rehab": {
+  "H1036-153-0": {
+   "cited": true,
+   "value": "$35"
+  },
+  "H1036-306-0": {
+   "cited": true,
+   "value": "$35"
+  },
+  "H1036-317-0": {
+   "cited": true,
+   "value": "20%"
+  },
+  "H1036-323-0": {
+   "cited": true,
+   "value": "$35"
+  },
+  "H1372-003-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H2001-045-0": {
+   "cited": false,
+   "value": "20%"
+  },
+  "H2056-003-0": {
+   "cited": true,
+   "value": "$50-$65"
+  },
+  "H2056-018-0": {
+   "cited": true,
+   "value": "$40"
+  },
+  "H2406-042-0": {
+   "cited": true,
+   "value": "$50"
+  },
+  "H2406-070-0": {
+   "cited": true,
+   "value": "$50-$60"
+  },
+  "H2406-073-0": {
+   "cited": true,
+   "value": "$50-$60"
+  },
+  "H2923-001-0": {
+   "cited": false,
+   "value": "$20-$50"
+  },
+  "H2923-005-0": {
+   "cited": false,
+   "value": "$40-$50"
+  },
+  "H2923-009-0": {
+   "cited": true,
+   "value": "30%"
+  },
+  "H2923-019-0": {
+   "cited": false,
+   "value": "$35-$50"
+  },
+  "H2923-025-0": {
+   "cited": false,
+   "value": "$35-$50"
+  },
+  "H2923-028-3": {
+   "cited": true,
+   "value": "$35-$50"
+  },
+  "H3805-040-0": {
+   "cited": true,
+   "value": "$50-$55"
+  },
+  "H3805-041-0": {
+   "cited": true,
+   "value": "$50-$70"
+  },
+  "H3805-048-0": {
+   "cited": true,
+   "value": "$50-$55"
+  },
+  "H3817-008-1": {
+   "cited": true,
+   "value": "$40"
+  },
+  "H3817-009-1": {
+   "cited": true,
+   "value": "$30"
+  },
+  "H3817-010-0": {
+   "cited": true,
+   "value": "$40"
+  },
+  "H3817-011-1": {
+   "cited": true,
+   "value": "$45"
+  },
+  "H5216-048-0": {
+   "cited": true,
+   "value": "$45"
+  },
+  "H5216-427-2": {
+   "cited": true,
+   "value": "$35"
+  },
+  "H5216-428-2": {
+   "cited": true,
+   "value": "$45"
+  },
+  "H5216-455-0": {
+   "cited": true,
+   "value": "$45"
+  },
+  "H5439-010-0": {
+   "cited": true,
+   "value": "$25"
+  },
+  "H5439-011-0": {
+   "cited": true,
+   "value": "$25"
+  },
+  "H5439-015-0": {
+   "cited": true,
+   "value": "$35"
+  },
+  "H5439-019-0": {
+   "cited": true,
+   "value": "$30"
+  },
+  "H6815-038-0": {
+   "cited": true,
+   "value": "$25"
+  },
+  "H7006-018-0": {
+   "cited": true,
+   "value": "$20"
+  },
+  "H7006-021-0": {
+   "cited": true,
+   "value": "$20"
+  },
+  "H7199-002-0": {
+   "cited": false,
+   "value": "$0-$50"
+  },
+  "H9003-001-0": {
+   "cited": true,
+   "value": "$25"
+  },
+  "H9003-006-0": {
+   "cited": true,
+   "value": "$35"
+  },
+  "H9003-009-0": {
+   "cited": true,
+   "value": "$50"
+  }
+ },
+ "main.K_tests_labs": {
+  "H1036-153-0": {
+   "cited": false,
+   "value": "$0-$100/$0"
+  },
+  "H1036-306-0": {
+   "cited": true,
+   "value": "$0-$140/$0"
+  },
+  "H1036-317-0": {
+   "cited": false,
+   "value": "$0-$40 or 20%/$0"
+  },
+  "H1036-323-0": {
+   "cited": false,
+   "value": "$0-$100/$0"
+  },
+  "H1372-003-0": {
+   "cited": false,
+   "value": "20%/$0"
+  },
+  "H2001-045-0": {
+   "cited": false,
+   "value": "20%/$0"
+  },
+  "H2056-003-0": {
+   "cited": true,
+   "value": "$0-$35/$0-$35"
+  },
+  "H2056-018-0": {
+   "cited": true,
+   "value": "$0-$20/$0"
+  },
+  "H2406-042-0": {
+   "cited": true,
+   "value": "$10/$0"
+  },
+  "H2406-070-0": {
+   "cited": true,
+   "value": "$50/$0"
+  },
+  "H2406-073-0": {
+   "cited": true,
+   "value": "$50/$0"
+  },
+  "H2923-001-0": {
+   "cited": false,
+   "value": "$0-$95/$0-$40 or 20%"
+  },
+  "H2923-005-0": {
+   "cited": false,
+   "value": "$0-$95/$0-$40 or 20%"
+  },
+  "H2923-009-0": {
+   "cited": true,
+   "value": "0%-50%/0%-50%"
+  },
+  "H2923-019-0": {
+   "cited": false,
+   "value": "$0-$95/$0-$45 or 20%"
+  },
+  "H2923-025-0": {
+   "cited": false,
+   "value": "$0-$95/$0-$45 or 20%"
+  },
+  "H2923-028-3": {
+   "cited": false,
+   "value": "$0-$95/$0-$50 or 20%"
+  },
+  "H3805-040-0": {
+   "cited": true,
+   "value": "$60/$0"
+  },
+  "H3805-041-0": {
+   "cited": true,
+   "value": "$60/$0"
+  },
+  "H3805-048-0": {
+   "cited": true,
+   "value": "$35/$0"
+  },
+  "H3817-008-1": {
+   "cited": true,
+   "value": "$0-$20/$0-$20"
+  },
+  "H3817-009-1": {
+   "cited": false,
+   "value": "$10/$0-$10"
+  },
+  "H3817-010-0": {
+   "cited": false,
+   "value": "$10/$0-$10"
+  },
+  "H3817-011-1": {
+   "cited": false,
+   "value": "$40/$0-$30"
+  },
+  "H5216-048-0": {
+   "cited": false,
+   "value": "$0-$100/$0"
+  },
+  "H5216-427-2": {
+   "cited": false,
+   "value": "$0-$100/$0"
+  },
+  "H5216-428-2": {
+   "cited": false,
+   "value": "$0-$100/$0"
+  },
+  "H5216-455-0": {
+   "cited": false,
+   "value": "$0-$100/$0"
+  },
+  "H5439-010-0": {
+   "cited": false,
+   "value": "0%-20%/$0-$50"
+  },
+  "H5439-011-0": {
+   "cited": true,
+   "value": "0%-20%/$0-$50"
+  },
+  "H5439-015-0": {
+   "cited": false,
+   "value": "0%-20%/$0-$50"
+  },
+  "H5439-019-0": {
+   "cited": false,
+   "value": "0%-20%/$0-$50"
+  },
+  "H6815-038-0": {
+   "cited": false,
+   "value": "0%-20%/$0-$50"
+  },
+  "H7006-018-0": {
+   "cited": true,
+   "value": "$0-$20/$0"
+  },
+  "H7006-021-0": {
+   "cited": true,
+   "value": "$0/$0"
+  },
+  "H7199-002-0": {
+   "cited": false,
+   "value": "$0-$95/$0-$60"
+  },
+  "H9003-001-0": {
+   "cited": true,
+   "value": "$0-$35/$0"
+  },
+  "H9003-006-0": {
+   "cited": true,
+   "value": "$0-$40/$0"
+  },
+  "H9003-009-0": {
+   "cited": true,
+   "value": "$15-$45/$0"
+  }
+ },
+ "main.L_xray_imaging": {
+  "H1036-153-0": {
+   "cited": false,
+   "value": "$0-$145 | $0-$345"
+  },
+  "H1036-306-0": {
+   "cited": false,
+   "value": "$0-$145 | $0-$345"
+  },
+  "H1036-317-0": {
+   "cited": false,
+   "value": "$0-$40 or 20% | $0-$345 or 20%"
+  },
+  "H1036-323-0": {
+   "cited": false,
+   "value": "$0-$145 | $0-$345"
+  },
+  "H1372-003-0": {
+   "cited": true,
+   "value": "20% | 20%"
+  },
+  "H2001-045-0": {
+   "cited": false,
+   "value": "20% | 0%-20%"
+  },
+  "H2056-003-0": {
+   "cited": false,
+   "value": "$15 | $0-$350"
+  },
+  "H2056-018-0": {
+   "cited": false,
+   "value": "$10 | $0-$275"
+  },
+  "H2406-042-0": {
+   "cited": false,
+   "value": "$15 | $0-$320"
+  },
+  "H2406-070-0": {
+   "cited": false,
+   "value": "$30 | $0-$320"
+  },
+  "H2406-073-0": {
+   "cited": false,
+   "value": "$30 | $0-$320"
+  },
+  "H2923-001-0": {
+   "cited": false,
+   "value": "$0-$75 | $25-$300"
+  },
+  "H2923-005-0": {
+   "cited": false,
+   "value": "$0-$75 | $25-$300"
+  },
+  "H2923-009-0": {
+   "cited": false,
+   "value": "40% | 40%-50%"
+  },
+  "H2923-019-0": {
+   "cited": false,
+   "value": "$0-$75 | $25-$300"
+  },
+  "H2923-025-0": {
+   "cited": false,
+   "value": "$0-$75 | $25-$300"
+  },
+  "H2923-028-3": {
+   "cited": false,
+   "value": "$0-$75 | $25-$300"
+  },
+  "H3805-040-0": {
+   "cited": false,
+   "value": "$25 | $0-$285"
+  },
+  "H3805-041-0": {
+   "cited": false,
+   "value": "$30 | $0-$320"
+  },
+  "H3805-048-0": {
+   "cited": false,
+   "value": "$30 | $0-$320"
+  },
+  "H3817-008-1": {
+   "cited": false,
+   "value": "$10 | $0-$300"
+  },
+  "H3817-009-1": {
+   "cited": false,
+   "value": "$5 | $0-$300"
+  },
+  "H3817-010-0": {
+   "cited": false,
+   "value": "$5 | $0-$300"
+  },
+  "H3817-011-1": {
+   "cited": false,
+   "value": "$25 | $0-$300"
+  },
+  "H5216-048-0": {
+   "cited": false,
+   "value": "$0-$145 | $0-$345"
+  },
+  "H5216-427-2": {
+   "cited": false,
+   "value": "$0-$145 | $0-$345"
+  },
+  "H5216-428-2": {
+   "cited": false,
+   "value": "$0-$145 | $0-$345"
+  },
+  "H5216-455-0": {
+   "cited": false,
+   "value": "$0-$145 | $0-$345"
+  },
+  "H5439-010-0": {
+   "cited": false,
+   "value": "$50 | $0-$500"
+  },
+  "H5439-011-0": {
+   "cited": false,
+   "value": "$50 | $0-$425"
+  },
+  "H5439-015-0": {
+   "cited": false,
+   "value": "$50 | $0-$500"
+  },
+  "H5439-019-0": {
+   "cited": false,
+   "value": "$50 | $0-$500"
+  },
+  "H6815-038-0": {
+   "cited": false,
+   "value": "$50 | $0-$500"
+  },
+  "H7006-018-0": {
+   "cited": false,
+   "value": "$0 | $0-$300"
+  },
+  "H7006-021-0": {
+   "cited": false,
+   "value": "$0 | $0-$60"
+  },
+  "H7199-002-0": {
+   "cited": false,
+   "value": "$0-$75 | $25-$300"
+  },
+  "H9003-001-0": {
+   "cited": false,
+   "value": "$0 | $0-$150"
+  },
+  "H9003-006-0": {
+   "cited": false,
+   "value": "$0 | $0-$225"
+  },
+  "H9003-009-0": {
+   "cited": false,
+   "value": "$15 | $15-$350"
+  }
+ },
+ "main.M_part_b_drugs": {
+  "H1036-153-0": {
+   "cited": false,
+   "value": "0%-20%"
+  },
+  "H1036-306-0": {
+   "cited": false,
+   "value": "0%-20%"
+  },
+  "H1036-317-0": {
+   "cited": false,
+   "value": "0%-20%"
+  },
+  "H1036-323-0": {
+   "cited": false,
+   "value": "0%-20%"
+  },
+  "H1372-003-0": {
+   "cited": true,
+   "value": "0%-20%"
+  },
+  "H2001-045-0": {
+   "cited": true,
+   "value": "0%-20%"
+  },
+  "H2056-003-0": {
+   "cited": true,
+   "value": "20%"
+  },
+  "H2056-018-0": {
+   "cited": false,
+   "value": "0%-20%"
+  },
+  "H2406-042-0": {
+   "cited": true,
+   "value": "0%-20%"
+  },
+  "H2406-070-0": {
+   "cited": false,
+   "value": "0%-20%"
+  },
+  "H2406-073-0": {
+   "cited": false,
+   "value": "0%-20%"
+  },
+  "H2923-001-0": {
+   "cited": false,
+   "value": "0%-20%"
+  },
+  "H2923-005-0": {
+   "cited": false,
+   "value": "0%-20%"
+  },
+  "H2923-009-0": {
+   "cited": true,
+   "value": "0%-20%"
+  },
+  "H2923-019-0": {
+   "cited": true,
+   "value": "0%-20%"
+  },
+  "H2923-025-0": {
+   "cited": true,
+   "value": "0%-20%"
+  },
+  "H2923-028-3": {
+   "cited": false,
+   "value": "0%-20%"
+  },
+  "H3805-040-0": {
+   "cited": true,
+   "value": "0%-20%"
+  },
+  "H3805-041-0": {
+   "cited": false,
+   "value": "0%-20%"
+  },
+  "H3805-048-0": {
+   "cited": false,
+   "value": "0%-20%"
+  },
+  "H3817-008-1": {
+   "cited": false,
+   "value": "0%-20%"
+  },
+  "H3817-009-1": {
+   "cited": false,
+   "value": "0%-20%"
+  },
+  "H3817-010-0": {
+   "cited": true,
+   "value": "0%-20%"
+  },
+  "H3817-011-1": {
+   "cited": false,
+   "value": "0%-20%"
+  },
+  "H5216-048-0": {
+   "cited": false,
+   "value": "0%-20%"
+  },
+  "H5216-427-2": {
+   "cited": false,
+   "value": "0%-20%"
+  },
+  "H5216-428-2": {
+   "cited": false,
+   "value": "0%-20%"
+  },
+  "H5216-455-0": {
+   "cited": false,
+   "value": "0%-20%"
+  },
+  "H5439-010-0": {
+   "cited": true,
+   "value": "0%-20%"
+  },
+  "H5439-011-0": {
+   "cited": true,
+   "value": "0%-20%"
+  },
+  "H5439-015-0": {
+   "cited": true,
+   "value": "0%-20%"
+  },
+  "H5439-019-0": {
+   "cited": true,
+   "value": "0%-20%"
+  },
+  "H6815-038-0": {
+   "cited": true,
+   "value": "0%-20%"
+  },
+  "H7006-018-0": {
+   "cited": true,
+   "value": "0%-20%"
+  },
+  "H7006-021-0": {
+   "cited": true,
+   "value": "0%-20%"
+  },
+  "H7199-002-0": {
+   "cited": false,
+   "value": "0%-20%"
+  },
+  "H9003-001-0": {
+   "cited": true,
+   "value": "0%-20%"
+  },
+  "H9003-006-0": {
+   "cited": true,
+   "value": "0%-20%"
+  },
+  "H9003-009-0": {
+   "cited": true,
+   "value": "0%-20%"
+  }
+ },
+ "main.N_pharmacy_deductible": {
+  "H1036-153-0": {
+   "cited": true,
+   "value": "$700 not tiers 1,2,3"
+  },
+  "H1036-306-0": {
+   "cited": true,
+   "value": "$500 not tiers 1,2,6"
+  },
+  "H1036-317-0": {
+   "cited": true,
+   "value": "$700 not tiers 1,2,3,6"
+  },
+  "H1036-323-0": {
+   "cited": true,
+   "value": "$700 not tiers 1,2,3"
+  },
+  "H1372-003-0": {
+   "cited": true,
+   "value": "$400 not tiers 1"
+  },
+  "H2001-045-0": {
+   "cited": true,
+   "value": "$700 not tiers 1,2"
+  },
+  "H2056-003-0": {
+   "cited": true,
+   "value": "$700 not tiers 1,2"
+  },
+  "H2056-018-0": {
+   "cited": false,
+   "value": "n/a"
+  },
+  "H2406-042-0": {
+   "cited": true,
+   "value": "$595 not tiers 1,2"
+  },
+  "H2406-070-0": {
+   "cited": true,
+   "value": "$685 not tiers 1,2"
+  },
+  "H2406-073-0": {
+   "cited": false,
+   "value": "n/a"
+  },
+  "H2923-001-0": {
+   "cited": true,
+   "value": "$461 not tiers 1,2"
+  },
+  "H2923-005-0": {
+   "cited": true,
+   "value": "$650 not tiers 1,2"
+  },
+  "H2923-009-0": {
+   "cited": true,
+   "value": "$461 not tiers 1,2"
+  },
+  "H2923-019-0": {
+   "cited": true,
+   "value": "$700 not tiers 1,2"
+  },
+  "H2923-025-0": {
+   "cited": true,
+   "value": "$700 not tiers 1,2"
+  },
+  "H2923-028-3": {
+   "cited": true,
+   "value": "$461 not tiers 1,2"
+  },
+  "H3805-040-0": {
+   "cited": true,
+   "value": "$685 not tiers 1,2"
+  },
+  "H3805-041-0": {
+   "cited": true,
+   "value": "$685 not tiers 1,2"
+  },
+  "H3805-048-0": {
+   "cited": true,
+   "value": "$685 not tiers 1,2"
+  },
+  "H3817-008-1": {
+   "cited": true,
+   "value": "$590 not tiers 1,2"
+  },
+  "H3817-009-1": {
+   "cited": true,
+   "value": "$305 not tiers 1,2"
+  },
+  "H3817-010-0": {
+   "cited": false,
+   "value": "n/a"
+  },
+  "H3817-011-1": {
+   "cited": true,
+   "value": "$700 not tiers 1,2"
+  },
+  "H5216-048-0": {
+   "cited": true,
+   "value": "$700 not tiers 1,2"
+  },
+  "H5216-427-2": {
+   "cited": false,
+   "value": "n/a"
+  },
+  "H5216-428-2": {
+   "cited": true,
+   "value": "$700 not tiers 1,2"
+  },
+  "H5216-455-0": {
+   "cited": false,
+   "value": "n/a"
+  },
+  "H5439-010-0": {
+   "cited": false,
+   "value": "n/a"
+  },
+  "H5439-011-0": {
+   "cited": true,
+   "value": "$700 not tiers 1,6"
+  },
+  "H5439-015-0": {
+   "cited": true,
+   "value": "$700 not tiers 1,6"
+  },
+  "H5439-019-0": {
+   "cited": true,
+   "value": "$700 not tiers 1,6"
+  },
+  "H6815-038-0": {
+   "cited": true,
+   "value": "$700 not tiers 1,6"
+  },
+  "H7006-018-0": {
+   "cited": true,
+   "value": "$400 not tiers 1,2,6"
+  },
+  "H7006-021-0": {
+   "cited": false,
+   "value": "n/a"
+  },
+  "H7199-002-0": {
+   "cited": true,
+   "value": "$650 not tiers 1,2"
+  },
+  "H9003-001-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H9003-006-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H9003-009-0": {
+   "cited": true,
+   "value": "$0"
+  }
+ },
+ "main.O_medical_deductible": {
+  "H1036-153-0": {
+   "cited": false,
+   "value": "$0"
+  },
+  "H1036-306-0": {
+   "cited": false,
+   "value": "$0"
+  },
+  "H1036-317-0": {
+   "cited": false,
+   "value": "Part B deductible some"
+  },
+  "H1036-323-0": {
+   "cited": true,
+   "value": "$700 some"
+  },
+  "H1372-003-0": {
+   "cited": false,
+   "value": "$0"
+  },
+  "H2001-045-0": {
+   "cited": false,
+   "value": "Part B deductible some"
+  },
+  "H2056-003-0": {
+   "cited": true,
+   "value": "$750 some"
+  },
+  "H2056-018-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H2406-042-0": {
+   "cited": false,
+   "value": "$0"
+  },
+  "H2406-070-0": {
+   "cited": false,
+   "value": "$0"
+  },
+  "H2406-073-0": {
+   "cited": false,
+   "value": "$0"
+  },
+  "H2923-001-0": {
+   "cited": false,
+   "value": "$0"
+  },
+  "H2923-005-0": {
+   "cited": true,
+   "value": "$200 some"
+  },
+  "H2923-009-0": {
+   "cited": true,
+   "value": "$990 some"
+  },
+  "H2923-019-0": {
+   "cited": true,
+   "value": "$150 some"
+  },
+  "H2923-025-0": {
+   "cited": true,
+   "value": "$150 some"
+  },
+  "H2923-028-3": {
+   "cited": true,
+   "value": "$200 some"
+  },
+  "H3805-040-0": {
+   "cited": false,
+   "value": "$0"
+  },
+  "H3805-041-0": {
+   "cited": false,
+   "value": "$0"
+  },
+  "H3805-048-0": {
+   "cited": false,
+   "value": "$0"
+  },
+  "H3817-008-1": {
+   "cited": false,
+   "value": "$0"
+  },
+  "H3817-009-1": {
+   "cited": false,
+   "value": "$0"
+  },
+  "H3817-010-0": {
+   "cited": false,
+   "value": "$0"
+  },
+  "H3817-011-1": {
+   "cited": false,
+   "value": "$0"
+  },
+  "H5216-048-0": {
+   "cited": false,
+   "value": "$100 out-of-network only"
+  },
+  "H5216-427-2": {
+   "cited": false,
+   "value": "$0"
+  },
+  "H5216-428-2": {
+   "cited": true,
+   "value": "$80 some"
+  },
+  "H5216-455-0": {
+   "cited": false,
+   "value": "$0"
+  },
+  "H5439-010-0": {
+   "cited": true,
+   "value": "$200 some"
+  },
+  "H5439-011-0": {
+   "cited": true,
+   "value": "$250 some"
+  },
+  "H5439-015-0": {
+   "cited": true,
+   "value": "$250 some"
+  },
+  "H5439-019-0": {
+   "cited": true,
+   "value": "$250 some"
+  },
+  "H6815-038-0": {
+   "cited": true,
+   "value": "$150 some"
+  },
+  "H7006-018-0": {
+   "cited": false,
+   "value": "$0"
+  },
+  "H7006-021-0": {
+   "cited": false,
+   "value": "$0"
+  },
+  "H7199-002-0": {
+   "cited": true,
+   "value": "$250 some"
+  },
+  "H9003-001-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H9003-006-0": {
+   "cited": true,
+   "value": "$0"
+  },
+  "H9003-009-0": {
+   "cited": true,
+   "value": "$0"
+  }
+ },
+ "main.P_vision": {
+  "H1036-153-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H1036-306-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H1036-317-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H1036-323-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H1372-003-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2001-045-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2056-003-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2056-018-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2406-042-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2406-070-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2406-073-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-001-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-005-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-009-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-019-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-025-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-028-3": {
+   "cited": true,
+   "value": "●"
+  },
+  "H3805-040-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H3805-041-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H3805-048-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H3817-008-1": {
+   "cited": true,
+   "value": "●"
+  },
+  "H3817-009-1": {
+   "cited": true,
+   "value": "●"
+  },
+  "H3817-010-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H3817-011-1": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5216-048-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5216-427-2": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5216-428-2": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5216-455-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5439-010-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5439-011-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5439-015-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5439-019-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H6815-038-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H7006-018-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H7006-021-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H7199-002-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H9003-001-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H9003-006-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H9003-009-0": {
+   "cited": true,
+   "value": "●"
+  }
+ },
+ "main.Q_hearing": {
+  "H1036-153-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H1036-306-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H1036-317-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H1036-323-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H1372-003-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2001-045-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2056-003-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2056-018-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2406-042-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2406-070-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2406-073-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-001-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-005-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-009-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-019-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-025-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-028-3": {
+   "cited": true,
+   "value": "●"
+  },
+  "H3805-040-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H3805-041-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H3805-048-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H3817-008-1": {
+   "cited": true,
+   "value": "●"
+  },
+  "H3817-009-1": {
+   "cited": true,
+   "value": "●"
+  },
+  "H3817-010-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H3817-011-1": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5216-048-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5216-427-2": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5216-428-2": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5216-455-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5439-010-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5439-011-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5439-015-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5439-019-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H6815-038-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H7006-018-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H7006-021-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H7199-002-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H9003-001-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H9003-006-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H9003-009-0": {
+   "cited": true,
+   "value": "●"
+  }
+ },
+ "main.R_dental": {
+  "H1036-153-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H1036-306-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H1036-317-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H1036-323-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H1372-003-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2001-045-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2056-003-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2056-018-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2406-042-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2406-070-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2406-073-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-001-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-005-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-009-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-019-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-025-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-028-3": {
+   "cited": true,
+   "value": "●"
+  },
+  "H3805-040-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H3805-041-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H3805-048-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H3817-008-1": {
+   "cited": true,
+   "value": "●"
+  },
+  "H3817-009-1": {
+   "cited": true,
+   "value": "●"
+  },
+  "H3817-010-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H3817-011-1": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5216-048-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5216-427-2": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5216-428-2": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5216-455-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5439-010-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5439-011-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5439-015-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5439-019-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H6815-038-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H7006-018-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H7006-021-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H7199-002-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H9003-001-0": {
+   "cited": true,
+   "value": ""
+  },
+  "H9003-006-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H9003-009-0": {
+   "cited": false,
+   "value": ""
+  }
+ },
+ "main.S_acupuncture": {
+  "H1036-153-0": {
+   "cited": true,
+   "value": ""
+  },
+  "H1036-306-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H1036-317-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H1036-323-0": {
+   "cited": true,
+   "value": ""
+  },
+  "H1372-003-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2001-045-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2056-003-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2056-018-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2406-042-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2406-070-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2406-073-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2923-001-0": {
+   "cited": false,
+   "value": "●"
+  },
+  "H2923-005-0": {
+   "cited": false,
+   "value": "●"
+  },
+  "H2923-009-0": {
+   "cited": false,
+   "value": "●"
+  },
+  "H2923-019-0": {
+   "cited": false,
+   "value": "●"
+  },
+  "H2923-025-0": {
+   "cited": false,
+   "value": "●"
+  },
+  "H2923-028-3": {
+   "cited": false,
+   "value": "●"
+  },
+  "H3805-040-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H3805-041-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H3805-048-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H3817-008-1": {
+   "cited": false,
+   "value": ""
+  },
+  "H3817-009-1": {
+   "cited": false,
+   "value": ""
+  },
+  "H3817-010-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H3817-011-1": {
+   "cited": false,
+   "value": ""
+  },
+  "H5216-048-0": {
+   "cited": true,
+   "value": ""
+  },
+  "H5216-427-2": {
+   "cited": true,
+   "value": ""
+  },
+  "H5216-428-2": {
+   "cited": true,
+   "value": ""
+  },
+  "H5216-455-0": {
+   "cited": true,
+   "value": ""
+  },
+  "H5439-010-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5439-011-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5439-015-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H5439-019-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H6815-038-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H7006-018-0": {
+   "cited": false,
+   "value": "●"
+  },
+  "H7006-021-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H7199-002-0": {
+   "cited": false,
+   "value": "●"
+  },
+  "H9003-001-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H9003-006-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H9003-009-0": {
+   "cited": true,
+   "value": "●"
+  }
+ },
+ "main.T_chiropractic": {
+  "H1036-153-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H1036-306-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H1036-317-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H1036-323-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H1372-003-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2001-045-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2056-003-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2056-018-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2406-042-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2406-070-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2406-073-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2923-001-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-005-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-009-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-019-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2923-025-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2923-028-3": {
+   "cited": false,
+   "value": ""
+  },
+  "H3805-040-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H3805-041-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H3805-048-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H3817-008-1": {
+   "cited": false,
+   "value": ""
+  },
+  "H3817-009-1": {
+   "cited": false,
+   "value": ""
+  },
+  "H3817-010-0": {
+   "cited": true,
+   "value": ""
+  },
+  "H3817-011-1": {
+   "cited": false,
+   "value": ""
+  },
+  "H5216-048-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H5216-427-2": {
+   "cited": false,
+   "value": ""
+  },
+  "H5216-428-2": {
+   "cited": false,
+   "value": ""
+  },
+  "H5216-455-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H5439-010-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5439-011-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5439-015-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H5439-019-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H6815-038-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H7006-018-0": {
+   "cited": false,
+   "value": "●"
+  },
+  "H7006-021-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H7199-002-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H9003-001-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H9003-006-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H9003-009-0": {
+   "cited": true,
+   "value": "●"
+  }
+ },
+ "main.U_naturopath": {
+  "H1036-153-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H1036-306-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H1036-317-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H1036-323-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H1372-003-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2001-045-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2056-003-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2056-018-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2406-042-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2406-070-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2406-073-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2923-001-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-005-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-009-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-019-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-025-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-028-3": {
+   "cited": true,
+   "value": "●"
+  },
+  "H3805-040-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H3805-041-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H3805-048-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H3817-008-1": {
+   "cited": false,
+   "value": ""
+  },
+  "H3817-009-1": {
+   "cited": false,
+   "value": ""
+  },
+  "H3817-010-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H3817-011-1": {
+   "cited": false,
+   "value": ""
+  },
+  "H5216-048-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H5216-427-2": {
+   "cited": false,
+   "value": ""
+  },
+  "H5216-428-2": {
+   "cited": false,
+   "value": ""
+  },
+  "H5216-455-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H5439-010-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H5439-011-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H5439-015-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H5439-019-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H6815-038-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H7006-018-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H7006-021-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H7199-002-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H9003-001-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H9003-006-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H9003-009-0": {
+   "cited": true,
+   "value": "●"
+  }
+ },
+ "main.V_massage": {
+  "H1036-153-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H1036-306-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H1036-317-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H1036-323-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H1372-003-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2001-045-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2056-003-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2056-018-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2406-042-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2406-070-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2406-073-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2923-001-0": {
+   "cited": false,
+   "value": "●"
+  },
+  "H2923-005-0": {
+   "cited": false,
+   "value": "●"
+  },
+  "H2923-009-0": {
+   "cited": false,
+   "value": "●"
+  },
+  "H2923-019-0": {
+   "cited": false,
+   "value": "●"
+  },
+  "H2923-025-0": {
+   "cited": false,
+   "value": "●"
+  },
+  "H2923-028-3": {
+   "cited": false,
+   "value": "●"
+  },
+  "H3805-040-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H3805-041-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H3805-048-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H3817-008-1": {
+   "cited": false,
+   "value": ""
+  },
+  "H3817-009-1": {
+   "cited": false,
+   "value": ""
+  },
+  "H3817-010-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H3817-011-1": {
+   "cited": false,
+   "value": ""
+  },
+  "H5216-048-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H5216-427-2": {
+   "cited": false,
+   "value": ""
+  },
+  "H5216-428-2": {
+   "cited": false,
+   "value": ""
+  },
+  "H5216-455-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H5439-010-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H5439-011-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H5439-015-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H5439-019-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H6815-038-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H7006-018-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H7006-021-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H7199-002-0": {
+   "cited": false,
+   "value": "●"
+  },
+  "H9003-001-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H9003-006-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H9003-009-0": {
+   "cited": false,
+   "value": ""
+  }
+ },
+ "main.W_fitness": {
+  "H1036-153-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H1036-306-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H1036-317-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H1036-323-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H1372-003-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2001-045-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2056-003-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2056-018-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2406-042-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2406-070-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2406-073-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-001-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-005-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-009-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-019-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-025-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-028-3": {
+   "cited": true,
+   "value": "●"
+  },
+  "H3805-040-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H3805-041-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H3805-048-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H3817-008-1": {
+   "cited": true,
+   "value": "●"
+  },
+  "H3817-009-1": {
+   "cited": true,
+   "value": "●"
+  },
+  "H3817-010-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H3817-011-1": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5216-048-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H5216-427-2": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5216-428-2": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5216-455-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5439-010-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5439-011-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5439-015-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5439-019-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H6815-038-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H7006-018-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H7006-021-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H7199-002-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H9003-001-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H9003-006-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H9003-009-0": {
+   "cited": true,
+   "value": "●"
+  }
+ },
+ "main.X_transportation": {
+  "H1036-153-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H1036-306-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H1036-317-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H1036-323-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H1372-003-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2001-045-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2056-003-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2056-018-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2406-042-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2406-070-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2406-073-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2923-001-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2923-005-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2923-009-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2923-019-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2923-025-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2923-028-3": {
+   "cited": false,
+   "value": ""
+  },
+  "H3805-040-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H3805-041-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H3805-048-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H3817-008-1": {
+   "cited": false,
+   "value": ""
+  },
+  "H3817-009-1": {
+   "cited": false,
+   "value": ""
+  },
+  "H3817-010-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H3817-011-1": {
+   "cited": false,
+   "value": ""
+  },
+  "H5216-048-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H5216-427-2": {
+   "cited": false,
+   "value": ""
+  },
+  "H5216-428-2": {
+   "cited": false,
+   "value": ""
+  },
+  "H5216-455-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H5439-010-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H5439-011-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H5439-015-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H5439-019-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H6815-038-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H7006-018-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H7006-021-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H7199-002-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H9003-001-0": {
+   "cited": true,
+   "value": ""
+  },
+  "H9003-006-0": {
+   "cited": true,
+   "value": ""
+  },
+  "H9003-009-0": {
+   "cited": true,
+   "value": ""
+  }
+ },
+ "main.Y_otc": {
+  "H1036-153-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H1036-306-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H1036-317-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H1036-323-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H1372-003-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2001-045-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2056-003-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2056-018-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2406-042-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2406-070-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2406-073-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-001-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-005-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-009-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-019-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-025-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H2923-028-3": {
+   "cited": false,
+   "value": ""
+  },
+  "H3805-040-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H3805-041-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H3805-048-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H3817-008-1": {
+   "cited": false,
+   "value": ""
+  },
+  "H3817-009-1": {
+   "cited": false,
+   "value": ""
+  },
+  "H3817-010-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H3817-011-1": {
+   "cited": false,
+   "value": ""
+  },
+  "H5216-048-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H5216-427-2": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5216-428-2": {
+   "cited": false,
+   "value": ""
+  },
+  "H5216-455-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H5439-010-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H5439-011-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H5439-015-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H5439-019-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H6815-038-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H7006-018-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H7006-021-0": {
+   "cited": true,
+   "value": "●"
+  },
+  "H7199-002-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H9003-001-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H9003-006-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H9003-009-0": {
+   "cited": false,
+   "value": ""
+  }
+ },
+ "main.Z_part_b_reduction": {
+  "H1036-153-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H1036-306-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H1036-317-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H1036-323-0": {
+   "cited": false,
+   "value": "$56"
+  },
+  "H1372-003-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2001-045-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2056-003-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2056-018-0": {
+   "cited": false,
+   "value": "$50"
+  },
+  "H2406-042-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2406-070-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2406-073-0": {
+   "cited": false,
+   "value": "$170"
+  },
+  "H2923-001-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2923-005-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2923-009-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H2923-019-0": {
+   "cited": false,
+   "value": "$90"
+  },
+  "H2923-025-0": {
+   "cited": false,
+   "value": "$70"
+  },
+  "H2923-028-3": {
+   "cited": false,
+   "value": "$154.20"
+  },
+  "H3805-040-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H3805-041-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H3805-048-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H3817-008-1": {
+   "cited": false,
+   "value": ""
+  },
+  "H3817-009-1": {
+   "cited": false,
+   "value": ""
+  },
+  "H3817-010-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H3817-011-1": {
+   "cited": false,
+   "value": ""
+  },
+  "H5216-048-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H5216-427-2": {
+   "cited": false,
+   "value": "$150"
+  },
+  "H5216-428-2": {
+   "cited": false,
+   "value": ""
+  },
+  "H5216-455-0": {
+   "cited": false,
+   "value": "$43"
+  },
+  "H5439-010-0": {
+   "cited": false,
+   "value": "$10"
+  },
+  "H5439-011-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H5439-015-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H5439-019-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H6815-038-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H7006-018-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H7006-021-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H7199-002-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H9003-001-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H9003-006-0": {
+   "cited": false,
+   "value": ""
+  },
+  "H9003-009-0": {
+   "cited": false,
+   "value": ""
+  }
+ }
+}

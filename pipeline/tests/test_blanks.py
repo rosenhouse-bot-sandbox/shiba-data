@@ -3,6 +3,7 @@ from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import blanks
+import layers
 import build
 import fields
 import present
@@ -66,7 +67,8 @@ class FillTest(unittest.TestCase):
 
 class UncitedBlanksTest(unittest.TestCase):
     def test_lists_blank_cells_without_cites(self):
-        cells = {"main.V_massage": {"A": {"value": "", "cites": []}, "B": {"value": " ", "cites": [{}]}, "C": {"value": "●", "cites": []}}}
+        cells = {"main.V_massage": {"A": {"value": "", "cited": False}, "B": {"value": " ", "cited": True},
+                                    "C": {"value": "●", "cited": False}}}
         self.assertEqual(dict(blanks.uncited_blanks(cells)), {"A": ["main.V_massage"]})
 
 
@@ -167,7 +169,7 @@ class PublishTest(unittest.TestCase):
         self.data = pathlib.Path(self.tmp.name) / DATA.name
         shutil.copytree(DATA, self.data)
         self.blank = next((plan, key) for key, by_plan in blanks.cells(self.data).items()
-                          for plan, c in by_plan.items() if not c["value"].strip() and not c["cites"]
+                          for plan, c in by_plan.items() if not c["value"].strip() and not c["cited"]
                           and key.split(".")[1] not in present.COLUMNS)
 
     def tearDown(self):
@@ -177,6 +179,17 @@ class PublishTest(unittest.TestCase):
         path = self.data / "accepted.json"
         path.write_text(json.dumps([{"plan": plan, "key": key, "claim": "excluded", "citations": [{"page": 7, "quote": "q, r"}]}]))
         return path
+
+    def test_cells_ignore_later_edits(self):
+        before = blanks.cells(self.data)
+        (self.data / layers.EDITS).write_text(",".join(layers.EDIT_COLUMNS) + "\n")
+        self.assertEqual(blanks.cells(self.data), before)
+
+    def test_freeze_writes_the_cells_that_the_layers_show(self):
+        (self.data / blanks.FROZEN).unlink()
+        blanks.freeze(self.data)
+        plan, key = self.blank
+        self.assertEqual(blanks.cells(self.data)[key][plan], {"value": "", "cited": False})
 
     def test_cells_holds_only_fields_an_eoc_can_show(self):
         self.assertLessEqual(set(blanks.cells(self.data)), set(blanks.FIELDS))
