@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "61de2101267140ce.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H1372-003-0\", \"benefit\": \"part_b_drugs.chemotherapy\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"0%-20%\", \"page\": 8, \"quotes\": [\"Chemotherapy/Radiation drugs 0%-20% coinsurance depending on the drug you receive\"], \"note\": \"The row label spans two printed lines, so this quote joins the cell text as one table row.\"}]\n```",
+ "usage": {
+  "input_tokens": 2286,
+  "output_tokens": 856,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

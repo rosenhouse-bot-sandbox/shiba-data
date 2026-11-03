@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "808ccc78793ded84.md",
+ "reply": "```json\n[{\"plan_id\": \"H7199-002-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$45\", \"page\": 61, \"quotes\": [\"Dental services covered by Medicare $45 copay\"]},\n{\"plan_id\": \"H7199-002-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$45\", \"page\": 62, \"quotes\": [\"Dental services covered by Medicare $45 copay\"]},\n{\"plan_id\": \"H7199-002-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$2,250\", \"limit\": \"per year\", \"pool\": \"Dental & Alternative Therapy Allowance\", \"page\": 62, \"quotes\": [\"You can be reimbursed up to $2,250 per year for covered dental services\"]},\n{\"plan_id\": \"H7199-002-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"max\", \"amount\": \"$2,250\", \"limit\": \"per year\", \"pool\": \"Dental & Alternative Therapy Allowance\", \"page\": 127, \"quotes\": [\"Devoted Health will pay as much as $2,250 per year for covered dental services listed below.\"]},\n{\"plan_id\": \"H7199-002-0\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"pool\": \"Dental & Alternative Therapy Allowance\", \"page\": 63, \"quotes\": [\"You will be reimbursed 50% for your out-of-pocket costs, up to the $2,250 annual allowance for comprehensive dental service categories\"], \"note\": \"The page states the plan reimburses 50% of costs up to the allowance. The 50% member share is inferred from that wording.\"}]\n```",
+ "usage": {
+  "input_tokens": 11857,
+  "output_tokens": 2974,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

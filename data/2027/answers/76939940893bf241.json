@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "2aa68f4230962abc.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-025-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$2,000\", \"limit\": \"per year\", \"pool\": \"Dental & Alternative Therapy Allowance\", \"page\": 62, \"quotes\": [\"You have a $2,000 yearly allowance toward Preventive\", \"can see any licensed dentist, licensed massage\"], \"note\": \"Network 'any' rests on members being able to see any licensed dentist; page 63 adds that the allowance has no network restrictions.\"}]\n```",
+ "usage": {
+  "input_tokens": 11896,
+  "output_tokens": 772,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

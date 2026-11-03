@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "4a0ee31be3437c35.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-306-0\", \"benefit\": \"medical_deductible\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"deductible\", \"amount\": \"$0\", \"page\": 5,\n  \"quotes\": [\"This plan does not have a deductible.\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 3320,
+  "output_tokens": 117,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

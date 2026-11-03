@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-d4758cd5b94a2266.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 2, Annual medical deductible row for the OR-0002 PPO: 'This plan does not have a medical deductible.' The statement covers the whole plan, so $0 with network any holds.\"}]\n```",
+ "usage": {
+  "input_tokens": 2231,
+  "output_tokens": 193,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

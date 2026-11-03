@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "da2974c756f3eedc.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-009-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"max\", \"amount\": \"$3,000\", \"limit\": \"per year\", \"page\": 7, \"quotes\": [\"Devoted Health will pay as much as $3,000 per year for covered dental services.\"], \"note\": \"The document does not call this dental benefit routine or supplemental. I marked it supplemental because it covers cleanings, fillings, dentures and similar services under a plan dollar limit, which is not Medicare-covered dental.\"},\n {\"plan_id\": \"H2923-009-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 7, \"quotes\": [\"You pay $0\"], \"note\": \"This $0 applies until the $3,000 yearly plan limit is reached. After that the member pays the full cost. The page also says to use a participating dental provider.\"}]\n```",
+ "usage": {
+  "input_tokens": 2522,
+  "output_tokens": 1275,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

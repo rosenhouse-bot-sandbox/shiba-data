@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "5f6896f5c437eeed.md",
+ "reply": "```json\n[{\"plan_id\": \"H7199-002-0\", \"benefit\": \"part_b_drugs.chemotherapy\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 10,\n  \"quotes\": [\"Chemotherapy Drugs: 20% coinsurance\"]},\n {\"plan_id\": \"H7199-002-0\", \"benefit\": \"part_b_drugs.chemotherapy\", \"setting\": \"any\", \"network\": \"out\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"40%\", \"page\": 10,\n  \"quotes\": [\"Chemotherapy Drugs: 40% coinsurance\"]},\n {\"plan_id\": \"H7199-002-0\", \"benefit\": \"part_b_drugs\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 10,\n  \"quotes\": [\"Other Part B Drugs: 20%\"],\n  \"note\": \"The document prices chemotherapy separately; this cost is for 'Other Part B Drugs'.\"},\n {\"plan_id\": \"H7199-002-0\", \"benefit\": \"part_b_drugs\", \"setting\": \"any\", \"network\": \"out\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"40%\", \"page\": 10,\n  \"quotes\": [\"Other Part B Drugs: 40%\"],\n  \"note\": \"The document prices chemotherapy separately; this cost is for 'Other Part B Drugs'.\"}]\n```",
+ "usage": {
+  "input_tokens": 2710,
+  "output_tokens": 1093,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

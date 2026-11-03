@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-2c101bd739d45a62.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 Part B Buydown row for DEVOTED GIVEBACK 028 OR (HMO): the Part B premium is reduced by $154.20 per month. The Medicaid eligibility limit is correctly left out of condition.\"}]\n```",
+ "usage": {
+  "input_tokens": 2053,
+  "output_tokens": 366,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

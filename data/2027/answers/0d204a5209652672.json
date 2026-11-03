@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "7e45f25357b792a7.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-019-0\", \"benefit\": \"medical_deductible.some\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"deductible\", \"amount\": \"$150\", \"limit\": \"per year\", \"page\": 52, \"quotes\": [\"Your deductible is $150.\", \"The deductible applies to some services.\"], \"note\": \"\"},\n {\"plan_id\": \"H2923-019-0\", \"benefit\": \"medical_deductible.some\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"deductible\", \"amount\": \"$150\", \"page\": 14, \"quotes\": [\"$150 except for insulin furnished\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 3305,
+  "output_tokens": 621,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "faebfcb17c1abba1.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-048-0\", \"benefit\": \"medical_deductible.some\", \"setting\": \"any\", \"network\": \"out\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"deductible\", \"amount\": \"$100\", \"limit\": \"per year\", \"page\": 5,\n  \"quotes\": [\"$100 combined deductible\", \"The following services listed are excluded from the combined\", \"All Services received from In-Network Providers\"],\n  \"note\": \"Combined deductible excludes all in-network services, so network is out. It also excludes the listed services (emergency room, preventive, Part B insulin, urgent care, supplemental), so it is classed as applying to some services.\"}]\n```",
+ "usage": {
+  "input_tokens": 4083,
+  "output_tokens": 698,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

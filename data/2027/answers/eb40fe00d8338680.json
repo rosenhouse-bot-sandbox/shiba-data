@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-cabbc3b82885b498.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 Part B Buydown row: 'Your Part B premium is reduced by $70 per month.' Only one plan is in the document. The Medicaid eligibility limit is left blank, as the giveback rules require.\"}]\n```",
+ "usage": {
+  "input_tokens": 2057,
+  "output_tokens": 291,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

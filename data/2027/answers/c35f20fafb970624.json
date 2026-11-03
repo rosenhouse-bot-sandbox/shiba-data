@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "05d56d5f782708e7.md",
+ "reply": "```json\n[{\"plan_id\": \"H2056-003-0\", \"benefit\": \"extras.transportation\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"not_covered\", \"page\": 6, \"quotes\": [\"Routine, non‑emergency transportation\"]},\n{\"plan_id\": \"H2056-003-0\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$65\", \"unit\": \"per visit\", \"page\": 7, \"quotes\": [\"$65 copay for Medicare‑covered acupuncture visits\"]},\n{\"plan_id\": \"H2056-003-0\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"not_covered\", \"page\": 7, \"quotes\": [\"Non‑Medicare covered acupuncture\"]},\n{\"plan_id\": \"H2056-003-0\", \"benefit\": \"extras.chiropractic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$15\", \"unit\": \"per visit\", \"page\": 8, \"quotes\": [\"$15 copay for Medicare‑covered chiropractic visits\"]},\n{\"plan_id\": \"H2056-003-0\", \"benefit\": \"extras.chiropractic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"not_covered\", \"page\": 8, \"quotes\": [\"Non‑Medicare covered chiropractic services are not\"]}]\n```",
+ "usage": {
+  "input_tokens": 5075,
+  "output_tokens": 1202,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

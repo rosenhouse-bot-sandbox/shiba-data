@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-5f6896f5c437eeed.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 lists a $250 Medical Deductible for this plan. It excludes Part B insulin via pump, preventive services and some other Medicare-covered services, so it applies to some services only. No network is stated, so in-network is the default.\"}]\n```",
+ "usage": {
+  "input_tokens": 2355,
+  "output_tokens": 400,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

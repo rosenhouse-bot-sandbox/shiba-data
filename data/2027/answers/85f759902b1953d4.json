@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-da2974c756f3eedc.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 Medical Deductible row shows $990. It excludes Part B insulin via pump, preventive services and some Medicare-covered services, so it applies to some services only.\"}]\n```",
+ "usage": {
+  "input_tokens": 2294,
+  "output_tokens": 279,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

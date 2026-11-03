@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-a4bc20077fb4a2cf.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 38 acupuncture for chronic low back pain row: out-of-network 50% coinsurance.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 75 exclusions chart: naturopath services are not covered under any condition.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"Page 75 excludes ambulance-type and convenience transport (non-transport ambulance calls, stretcher car, wheelchair transport). That is not clearly the same as non-emergency rides to medical appointments, so the item may not match the benefit.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 41 chiropractic services row: out-of-network 50% coinsurance.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 76 exclusions chart: therapeutic massage is not covered under any condition.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 38 acupuncture for chronic low back pain row: in-network $20 copay per provider per day.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 73 exclusions chart acupuncture row: available for people with chronic low back pain under certain circumstances.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 75 exclusions chart chiropractic row: manual manipulation of the spine to correct a subluxation is covered.\"},\n{\"id\": 8, \"ok\": true, \"reason\": \"Page 41 chiropractic services row: in-network $15 copay per provider per day.\"}]\n```",
+ "usage": {
+  "input_tokens": 7040,
+  "output_tokens": 1100,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

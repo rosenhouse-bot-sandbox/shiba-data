@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-0e1831fb00cf2a95.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 dental (non-Medicare covered) row gives an annual $1,500 allowance for covered comprehensive services.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 4 dental (non-Medicare covered) row says services from providers outside the Aetna Dental PPO Network will not be covered.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 4 dental (non-Medicare covered) row: 50% coinsurance for comprehensive services.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 4 dental (non-Medicare covered) row: $0 copay for preventive services (exams, cleanings, x-rays).\"}]\n```",
+ "usage": {
+  "input_tokens": 2334,
+  "output_tokens": 404,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

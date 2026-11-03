@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-2aa68f4230962abc.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 62 Dental & Alternative Therapy Allowance row: $2,000 yearly allowance that includes therapeutic massage. Any licensed massage therapist may be used.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 54 acupuncture for chronic low back pain: $0 copay.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 62 Dental & Alternative Therapy Allowance row: $2,000 yearly allowance that includes routine acupuncture.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 124 exclusions chart, routine chiropractic care row: manual manipulation of the spine to correct a subluxation is covered.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 59 chiropractic services row: Medicare-covered chiropractic visits have a $15 copay.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 49 states the plan deductible is $150 and lists Medicare-covered chiropractic services among the services it applies to. The page calls it the annual deductible.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 62 Dental & Alternative Therapy Allowance row: $2,000 yearly allowance that includes naturopath services.\"}]\n```",
+ "usage": {
+  "input_tokens": 6703,
+  "output_tokens": 752,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

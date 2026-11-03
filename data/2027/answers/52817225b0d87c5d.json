@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-cbcaa238a8c713a4.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 7 Transportation row: 'Not covered' in the in-network column. The document covers only this plan.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 7 Transportation row: 'Not covered' in the out-of-network column.\"}]\n```",
+ "usage": {
+  "input_tokens": 2395,
+  "output_tokens": 181,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

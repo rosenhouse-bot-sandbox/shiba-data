@@ -15,6 +15,11 @@ ADVANCED = ("imaging.diagnostic.advanced.ct", "imaging.diagnostic.advanced.mri",
 NO_MAMMOGRAM_ZERO = ("Kaiser", "Humana", "Devoted")
 
 
+def top(found):
+    """The facts from the best source among them."""
+    return [f for f in found if RANK[f["source"]] == min(RANK[g["source"]] for g in found)]
+
+
 def usable(f):
     return (f["network"] in ("in", "any") and f["covered_by"] == "medicare" and f["cost_kind"] in ("copay", "coinsurance")
             and not (f["condition"] or f["provider_tier"] or f["package"]))
@@ -25,8 +30,7 @@ def best(found, leaf, setting, ok=usable):
     fits = [f for f in found if ok(f) and facts.covers(f["benefit"], leaf) and facts.covers(f["setting"], setting)]
     if not fits:
         return []
-    top = min(RANK[f["source"]] for f in fits)
-    fits = [f for f in fits if RANK[f["source"]] == top]
+    fits = top(fits)
 
     def depth(f):
         return f["benefit"].count("."), f["setting"] != "any", f["setting"].count(".")
@@ -217,6 +221,75 @@ def unique(found):
     return list({id(f): f for f in found}.values())
 
 
+def giveback(organization, found):
+    """Shows the monthly Part B premium reduction."""
+    got = best(found, "giveback", "any", lambda f: f["cost_kind"] in ("part_b_reduction", "covered")
+               and not (f["package"] or f["provider_tier"]))
+    got = [f for f in got if not f["condition"]] or got
+    paid = [f for f in got if f["cost_kind"] == "part_b_reduction"]
+    return [(show(paid), paid)] if paid else [("●", got)] if got else [("", [])]
+
+
+def drug_price(f):
+    return (priced(f) and not f["provider_tier"] and facts.covers("part_b_drugs", f["benefit"])
+            and (f["cost_kind"] == "coinsurance" or f["amount"] == "$0"))
+
+
+def part_b_drugs(organization, found):
+    """Shows the range of Part B drug coinsurance, from each kind of drug's best source.
+    A $0 copay, such as for vaccines, counts as 0%."""
+    ok = [f for f in found if drug_price(f)]
+    got = [f for leaf in sorted({f["benefit"] for f in ok}) for f in top([g for g in ok if g["benefit"] == leaf])]
+    percents = sorted(facts.number(n) for n in amounts(got))
+    return [(span(f"{percents[0]:g}%", f"{percents[-1]:g}%") if got else "", got)]
+
+
+def deductible_ok(f):
+    return (f["cost_kind"] == "deductible" and f["covered_by"] == "medicare"
+            and not (f["condition"] or f["provider_tier"] or f["package"]))
+
+
+def medical_deductible(organization, found):
+    """Shows the in-network deductible, or else the out-of-network one, and says if it applies to some services only.
+    A $0 in-network deductible shows as $0, whatever the out-of-network one is."""
+    for networks in (("in", "any"), ("out",)):
+        def ok(f):
+            return deductible_ok(f) and f["network"] in networks
+        got = best(found, "medical_deductible.some", "any", ok)
+        if got:
+            break
+    else:
+        return [("", [])]
+    if show(got) == "$0":
+        return [("$0", got)]
+    some = [f for f in found if f["benefit"] == "medical_deductible.some" and ok(f)]
+    part_b = [f for f in found if f["benefit"] == "medical_deductible.part_b" and f["cost_kind"] == "covered"]
+    value = "Part B deductible" if part_b else show(got)
+    if networks == ("out",):
+        value += " some out-of-network services" if some else " out-of-network only"
+    elif some:
+        value += " some"
+    return [(value, unique(got + some + part_b))]
+
+
+DOT_KINDS = ("copay", "coinsurance", "allowance", "max", "visit_limit", "covered")
+
+
+def offers(f):
+    """Says if the fact is a routine benefit for every member, with no package to buy."""
+    return (f["covered_by"] == "supplemental" and f["cost_kind"] in DOT_KINDS
+            and not (f["package"] or f["condition"] or f["provider_tier"]))
+
+
+def dot(leaf):
+    """Shows ● for a routine benefit. Facts for only a Medicare, package, conditional or uncovered benefit cite a blank."""
+    def rule(organization, found):
+        mine = [f for f in found if facts.covers(f["benefit"], leaf) and f["network"] in ("in", "any")]
+        yes = [f for f in mine if offers(f)]
+        return [("●", top(yes))] if yes else [("", top(mine) if mine else [])]
+    return rule
+
+
 def plan_facts(data):
     by_plan = collections.defaultdict(list)
     for name in ("machine/document_facts.csv", "generated/pbp_facts.csv"):
@@ -228,7 +301,10 @@ def plan_facts(data):
 # A rule returns the lines of its column.
 COLUMNS = {"L_xray_imaging": xray_imaging, "AB_ambulance": ambulance, "I_outpatient_surgery": outpatient_surgery,
            "F_primary_care": visits("office.pcp"), "G_specialist": visits("office.specialist"), "H_inpatient": inpatient,
-           "J_outpatient_rehab": outpatient_rehab, "K_tests_labs": tests_labs}
+           "J_outpatient_rehab": outpatient_rehab, "K_tests_labs": tests_labs, "Z_part_b_reduction": giveback,
+           "M_part_b_drugs": part_b_drugs, "O_medical_deductible": medical_deductible,
+           "S_acupuncture": dot("extras.acupuncture"), "T_chiropractic": dot("extras.chiropractic"),
+           "V_massage": dot("extras.massage"), "X_transportation": dot("extras.transportation")}
 
 
 def lines(data, column):
@@ -250,11 +326,16 @@ HELD = {
     ("K_tests_labs", "H5439-019-0"): "readers missed the 0% and $0 test prices",
     ("K_tests_labs", "H6815-038-0"): "readers took a $200 price for tests that is not a diagnostic test",
     ("K_tests_labs", "H7006-021-0"): "readers found no diagnostic test price",
+    ("M_part_b_drugs", "H9003-001-0"): "readers missed the 20% for Part B drugs",
+    ("M_part_b_drugs", "H9003-006-0"): "readers missed the 20% for Part B drugs",
+    ("M_part_b_drugs", "H9003-009-0"): "readers missed the 20% for Part B drugs",
+    ("O_medical_deductible", "H1036-317-0"): "readers missed that the $283 is Original Medicare's Part B deductible",
 }
 
 
 def layer_rows(data):
-    """Writes one row per line and cited document quote. A blank line writes no row, so the line keeps its other layers' value.
+    """Writes one row per line and cited document quote. A blank line with no cited fact writes no row, so the line keeps
+    its other layers' value.
     Rows for a cell that the generated sheet gives one line name no line."""
     url = {d["sha256"]: d["url"] for d in layers.rows(data / "generated" / "documents_checked.csv") if d["sha256"]}
     generated = {r["plan_id"]: r for r in layers.generated(data)["main"]}
@@ -270,7 +351,7 @@ def layer_rows(data):
                 row = dict(sheet="main", plan_id=plan_id, column=column, line="" if one_line else str(n), value=value)
                 cites = [(url[f["doc_sha"]], f["page"], q) for f in cited if f["source"] in facts.DOCUMENTS
                          for q in json.loads(f["quotes"])]
-                for cite in cites if value else []:
+                for cite in cites:
                     full = dict(row, **dict(zip(("url", "pdf_page", "quote"), cite)))
                     out[tuple(full.values())] = full
     return sorted(out.values(), key=lambda r: tuple(r.values()))

@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "2c828c1ac1616719.md",
+ "reply": "```json\n[{\"plan_id\": \"H3817-010-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$40\", \"unit\": \"per provider per day\", \"limit\": \"\", \"page\": 33, \"quotes\": [\"$40 copay per provider per day\"]},\n{\"plan_id\": \"H3817-010-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 33, \"quotes\": [\"$40 copay per provider per day Out-of-network: 50% coinsurance\"]},\n{\"plan_id\": \"H3817-010-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per provider per day\", \"page\": 34, \"quotes\": [\"$0 copay per provider per day\"]},\n{\"plan_id\": \"H3817-010-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 34, \"quotes\": [\"$0 copay per provider per day Out-of-network: 50% coinsurance\"]},\n{\"plan_id\": \"H3817-010-0\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 34, \"quotes\": [\"Basic comprehensive dental services: In- and Out-of-network: 50% coinsurance\", \"Major comprehensive dental services: In- and Out-of-network: 50% coinsurance\"]},\n{\"plan_id\": \"H3817-010-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"max\", \"amount\": \"$1,500\", \"limit\": \"every calendar year\", \"page\": 34, \"quotes\": [\"$1,500 benefit limit every calendar year.\"], \"note\": \"Combined limit for preventive, basic and major dental services.\"}]\n```",
+ "usage": {
+  "input_tokens": 9043,
+  "output_tokens": 1962,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

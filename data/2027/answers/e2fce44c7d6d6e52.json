@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-5f6896f5c437eeed.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 8: the Dental and Alternative Therapy Allowance is $2,250 per year and names Routine Acupuncture. Any licensed US provider qualifies, so network is any.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 8: the same $2,250 yearly allowance names Therapeutic Massage. Any licensed provider qualifies.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 9: the Transportation row reads 'Not covered' with no network split, so the in-network default holds.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 14: the out-of-network column lists Medicare-Covered Chiropractic Services at a $15 copay. The quote is reassembled from the columns, but the fact matches the page.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 8: the same $2,250 yearly allowance names Naturopath Services.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 14: routine chiropractic is covered for 12 visits per year from in- or out-of-network providers.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 14: the in-network column lists Medicare-Covered Chiropractic Services at a $15 copay.\"}]\n```",
+ "usage": {
+  "input_tokens": 5206,
+  "output_tokens": 832,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

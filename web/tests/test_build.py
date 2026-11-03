@@ -177,8 +177,8 @@ class SiteDataTest(unittest.TestCase):
             self.assertFalse([i for i in ids if re.match(r"[A-Z]+_", i)])
 
     def test_uncited_cell_lists_the_cms_fields_behind_it(self):
-        self.assertEqual(self.cell("main", "H3805-048-0", "O_medical_deductible")["cms"],
-                         [{"file": "pbp_Section_D", "field": "pbp_d_inn_deduct_yn", "title": "In-Ntwk Plan Deductible YN",
+        self.assertEqual(self.cell("main", "H7006-021-0", "O_medical_deductible")["cms"],
+                         [{"file": "pbp_Section_D", "field": "pbp_d_ann_deduct_yn", "title": "Deductible YN?",
                            "value": "2", "meaning": "No"}])
 
     def test_extra_help_premium_lists_its_landscape_columns_on_both_sheets(self):

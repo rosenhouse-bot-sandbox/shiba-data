@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "da2974c756f3eedc.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-009-0\", \"benefit\": \"extras.chiropractic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 10, \"quotes\": [\"Routine Chiropractic Care\", \"$0 copay — 12 visits per\"], \"note\": \"\"},\n{\"plan_id\": \"H2923-009-0\", \"benefit\": \"extras.chiropractic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"12\", \"limit\": \"per year\", \"page\": 10, \"quotes\": [\"Routine Chiropractic Care\", \"$0 copay — 12 visits per\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 5406,
+  "output_tokens": 551,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

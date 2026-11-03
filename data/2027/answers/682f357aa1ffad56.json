@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-f751937f09316ed1.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 71 Wellness Bucks row: reimburses up to $150 per year and names Supplemental Acupuncture services.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 62 Chiropractic row: routine chiropractic is covered for 12 visits per year.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 56 Acupuncture for chronic low back pain: 30% coinsurance.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 71 Wellness Bucks row: $150 per year and names Therapeutic Massage services.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 62 Chiropractic row: Medicare-covered chiropractic visits are 30% coinsurance.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 57 Medicare acupuncture for chronic low back pain: no more than 20 treatments annually.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 71 Wellness Bucks row: $150 per year and names Naturopathy.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 51: the annual plan deductible is $990 and applies to Medicare-covered acupuncture.\"},\n{\"id\": 8, \"ok\": true, \"reason\": \"Page 62 Chiropractic row: routine chiropractic visits are a $0 copay.\"},\n{\"id\": 9, \"ok\": true, \"reason\": \"Page 56 Acupuncture for chronic low back pain: up to 12 visits in 90 days are covered.\"}]\n```",
+ "usage": {
+  "input_tokens": 6944,
+  "output_tokens": 952,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

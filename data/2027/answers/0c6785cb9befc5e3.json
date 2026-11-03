@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-f751937f09316ed1.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 51 Section 1.2 for this plan: the deductible is $990 and applies to some services, listed as dialysis, imaging, Part B drugs and others. It is an annual amount, and the plan is an HMO, so in network fits.\"}]\n```",
+ "usage": {
+  "input_tokens": 2342,
+  "output_tokens": 200,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

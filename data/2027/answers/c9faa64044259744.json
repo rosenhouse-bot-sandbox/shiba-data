@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-a744eaa24232bb11.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 77 Mandatory Supplemental Dental Benefit DENH61 plan overview: Deductible $0. Out-of-network dental is not covered, so the deductible applies in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 88 Dental Mandatory Supplemental Benefit Exclusions: services from an out-of-network dentist are not covered benefits.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 77 DENH61 plan overview: Annual Maximum $4,000, the most the plan pays per year for supplemental dental.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 52 Dental services row, in-network: 'You are covered for Mandatory Supplemental Dental Benefit.' No amount is given there.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 78 preventive rows: periodic exam D0120, cleaning D1110 and bitewing x-rays are each 0% in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 6147,
+  "output_tokens": 536,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

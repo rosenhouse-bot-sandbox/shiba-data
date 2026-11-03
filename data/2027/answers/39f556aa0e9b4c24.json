@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "f751937f09316ed1.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-009-0\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"condition\": \"chronic low back pain\", \"page\": 56, \"quotes\": [\"30% coinsurance\"]}]\n```",
+ "usage": {
+  "input_tokens": 14226,
+  "output_tokens": 742,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

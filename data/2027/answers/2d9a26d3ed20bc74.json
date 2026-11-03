@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "1ed5fdb720cabd03.md",
+ "reply": "```json\n[{\"plan_id\": \"H2406-042-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 58, \"quotes\": [\"20% coinsurance\"], \"note\": \"In-network cost for Medicare-covered dental services.\"},\n{\"plan_id\": \"H2406-042-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"page\": 58, \"quotes\": [\"30% coinsurance\"], \"note\": \"Out-of-network cost for Medicare-covered dental services.\"},\n{\"plan_id\": \"H2406-042-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"page\": 59, \"quotes\": [\"You are covered or routine dental bene its.\"], \"note\": \"The statement spans both the in-network and out-of-network columns.\"},\n{\"plan_id\": \"H2406-042-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"max\", \"amount\": \"$1,000\", \"limit\": \"per year\", \"page\": 106, \"quotes\": [\"Annual dental maximum: $1,000\"], \"note\": \"Page 107 says out-of-network benefits are subject to the in-network benefit maximums.\"},\n{\"plan_id\": \"H2406-042-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 106, \"quotes\": [\"$0 copay or covered preventive and diagnostic dental care such as exams, routine\"]},\n{\"plan_id\": \"H2406-042-0\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 106, \"quotes\": [\"A 50% coinsurance on all covered comprehensive services such as illings, crowns,\"], \"note\": \"The page names no network. In-network is the default here.\"}]\n```",
+ "usage": {
+  "input_tokens": 7740,
+  "output_tokens": 1724,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

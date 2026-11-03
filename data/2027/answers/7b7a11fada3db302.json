@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-2eb4caa23079d78f.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 14, Medicare Part B Drugs, 'Chemotherapy Drugs and Other Part B Drugs' row: 20% coinsurance in network for this plan.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 14: one row covers chemotherapy and other Part B drugs together, at 20% coinsurance in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2025,
+  "output_tokens": 324,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

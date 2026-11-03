@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "90a4efa6544175a2.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H6815-038-0\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"visit_limit\", \"amount\": \"12\", \"limit\": \"in 90 days\", \"page\": 53, \"quotes\": [\"Up to 12 visits in 90 days are covered under the following\"], \"note\": \"The same row also says an additional 8 sessions are covered for patients demonstrating an improvement, with no more than 20 acupuncture treatments annually. Only one visit limit can be kept for this fact, so the 20-per-year cap is left out.\"}]\n```",
+ "usage": {
+  "input_tokens": 9376,
+  "output_tokens": 753,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

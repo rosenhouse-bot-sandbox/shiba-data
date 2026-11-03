@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "516ff586a12c8288.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-019-0\", \"benefit\": \"extras.naturopathy\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"not_covered\", \"page\": 124, \"quotes\": [\"Naturopath services (uses natural or alternative treatments)\"], \"note\": \"The exclusions chart row gives 'Not covered under any condition' for this service, but that phrase repeats on the page and cannot be quoted uniquely.\"}]\n```",
+ "usage": {
+  "input_tokens": 9188,
+  "output_tokens": 535,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

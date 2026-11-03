@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-2947683a555fc83c.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 'Part B premium reduction' row for H1036-323-0: the plan reduces the monthly Part B premium by up to $56. Stated as $56 per month without 'up to', and the condition is left blank as the vocabulary instructs.\"}]\n```",
+ "usage": {
+  "input_tokens": 2063,
+  "output_tokens": 202,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

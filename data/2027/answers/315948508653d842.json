@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "d649ac2bebc0321d.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-028-3\", \"benefit\": \"medical_deductible.some\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"deductible\", \"amount\": \"$200\", \"limit\": \"per year\", \"page\": 49,\n  \"quotes\": [\"Your deductible is $200.\", \"The deductible applies to some services.\"], \"note\": \"\"},\n {\"plan_id\": \"H2923-028-3\", \"benefit\": \"medical_deductible.some\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"deductible\", \"amount\": \"$200\", \"page\": 11,\n  \"quotes\": [\"$200 except for insulin furnished\"], \"note\": \"Page 49 says this $200 deductible applies only to listed services, so it is classed as .some.\"}]\n```",
+ "usage": {
+  "input_tokens": 3046,
+  "output_tokens": 793,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

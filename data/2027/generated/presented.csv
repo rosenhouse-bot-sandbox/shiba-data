@@ -27,6 +27,28 @@ main,H1036-153-0,L_xray_imaging,1,$0-$30,https://assets.humana.com/is/content/hu
 main,H1036-153-0,L_xray_imaging,1,$0-$30,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,60,Basic Radiological Services $0 copayment – PCP's Office $30 copayment – Specialist's Office
 main,H1036-153-0,L_xray_imaging,2,$205-$330,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,60,$205 copayment – Freestanding Radiological Facility
 main,H1036-153-0,L_xray_imaging,2,$205-$330,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,60,Advanced Imaging Services $330 copayment – PCP's Office – Specialist's Office
+main,H1036-153-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,54,"There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines."
+main,H1036-153-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,57,20% coinsurance
+main,H1036-153-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,57,Chemotherapy Drugs
+main,H1036-153-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,57,– Outpatient Hospital
+main,H1036-153-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,57,– Specialist's Office
+main,H1036-153-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,58,Medicare Part B Insulin Drugs 20% coinsurance – PCP's Office
+main,H1036-153-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,58,Medicare Part B Insulin Drugs 20% coinsurance – PCP's Office – Specialist's Office
+main,H1036-153-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,58,Medicare Part B Insulin Drugs 20% coinsurance – PCP's Office – Specialist's Office – Outpatient Hospital
+main,H1036-153-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,58,Medicare Part B Insulin Drugs 20% coinsurance – PCP's Office – Specialist's Office – Outpatient Hospital – Pharmacy
+main,H1036-153-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,58,Other Medicare Part B Drugs 20% coinsurance – PCP's Office
+main,H1036-153-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,58,Other Medicare Part B Drugs 20% coinsurance – PCP's Office – Specialist's Office
+main,H1036-153-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,58,Other Medicare Part B Drugs 20% coinsurance – PCP's Office – Specialist's Office – Outpatient Hospital
+main,H1036-153-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,58,Other Medicare Part B Drugs 20% coinsurance – PCP's Office – Specialist's Office – Outpatient Hospital – Pharmacy
+main,H1036-153-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036153000SB27pdf,10,Allergy shots and serum • PCP's office: $0 copay
+main,H1036-153-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036153000SB27pdf,10,Allergy shots and serum • PCP's office: $0 copay • Specialist's office: $0 copay
+main,H1036-153-0,O_medical_deductible,,$0,https://assets.humana.com/is/content/humana/H1036153000SB27pdf,4,Medical deductible                     This plan does not have a deductible.
+main,H1036-153-0,S_acupuncture,,,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,45,$30 copayment
+main,H1036-153-0,S_acupuncture,,,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,45,Up to 20 visits per calendar year under the following circumstances:
+main,H1036-153-0,S_acupuncture,,,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,82,Available for people with chronic low back pain under certain
+main,H1036-153-0,T_chiropractic,,,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,48,$15 copayment
+main,H1036-153-0,T_chiropractic,,,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,85,Manual manipulation of the spine to correct a subluxation is
+main,H1036-153-0,X_transportation,,,https://assets.humana.com/is/content/humana/H1036153000SB27pdf,9,TRANSPORTATION Not Covered
 main,H1036-306-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,49,20% coinsurance regardless of the number of trips – Air Ambulance Non-Emergency Ambulance
 main,H1036-306-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,49,20% coinsurance regardless of the number of trips – Air Ambulance Out-of-Network:
 main,H1036-306-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,49,In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance
@@ -56,6 +78,21 @@ main,H1036-306-0,L_xray_imaging,1,$0-$15,https://assets.humana.com/is/content/hu
 main,H1036-306-0,L_xray_imaging,2,$205-$330,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,63,$205 copayment – Freestanding Radiological Facility
 main,H1036-306-0,L_xray_imaging,2,$205-$330,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,63,$330 copayment – PCP's Office – Specialist's Office
 main,H1036-306-0,L_xray_imaging,2,$205-$330,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,63,Advanced Imaging Services $330 copayment – PCP's Office
+main,H1036-306-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,58,"There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines."
+main,H1036-306-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,61,Chemotherapy Drugs 20% coinsurance – Specialist's Office – Outpatient Hospital
+main,H1036-306-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,61,Medicare Part B Insulin Drugs 20% coinsurance – PCP's Office – Specialist's Office – Outpatient Hospital – Pharmacy
+main,H1036-306-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,61,Other Medicare Part B Drugs 20% coinsurance – PCP's Office – Specialist's Office – Outpatient Hospital – Pharmacy
+main,H1036-306-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036306000SB27pdf,11,Allergy shots and serum
+main,H1036-306-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036306000SB27pdf,11,PCP's office: $0 copay
+main,H1036-306-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036306000SB27pdf,11,Specialist's office: $0 copay
+main,H1036-306-0,O_medical_deductible,,$0,https://assets.humana.com/is/content/humana/H1036306000SB27pdf,5,This plan does not have a deductible.
+main,H1036-306-0,S_acupuncture,,●,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,49,Routine acupuncture $0 copayment – Specialist's Office
+main,H1036-306-0,S_acupuncture,,●,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,49,You are covered for up to 25 visits per calendar year.
+main,H1036-306-0,T_chiropractic,,,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,51,Medicare Covered Chiropractic Services $15 copayment – Specialist's Office
+main,H1036-306-0,T_chiropractic,,,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,87,Manual manipulation of the spine to correct a subluxation is
+main,H1036-306-0,T_chiropractic,,,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,87,Routine chiropractic care
+main,H1036-306-0,X_transportation,,,https://assets.humana.com/is/content/humana/H1036306000SB27pdf,11,Not Covered
+main,H1036-306-0,X_transportation,,,https://assets.humana.com/is/content/humana/H1036306000SB27pdf,11,TRANSPORTATION
 main,H1036-317-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,51,In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance
 main,H1036-317-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,51,In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance
 main,H1036-317-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,51,Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance
@@ -80,6 +117,26 @@ main,H1036-317-0,L_xray_imaging,1,$0-20%,https://assets.humana.com/is/content/hu
 main,H1036-317-0,L_xray_imaging,1,$0-20%,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,65,Basic Radiological Services $0 copayment – PCP's Office 20% coinsurance – Specialist's Office – Outpatient Hospital – Freestanding Radiological Facility
 main,H1036-317-0,L_xray_imaging,2,$205-$330,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,65,$205 copayment – Freestanding Radiological Facility
 main,H1036-317-0,L_xray_imaging,2,$205-$330,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,65,Advanced Imaging Services $330 copayment – PCP's Office – Specialist's Office
+main,H1036-317-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,59,"There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines."
+main,H1036-317-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,62,$0 copayment
+main,H1036-317-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,62,Chemotherapy Drugs 20% coinsurance – Specialist's Office
+main,H1036-317-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,62,Chemotherapy Drugs 20% coinsurance – Specialist's Office – Outpatient Hospital
+main,H1036-317-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,62,Medicare Part B Insulin Drugs 20% coinsurance – PCP's Office
+main,H1036-317-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,62,Medicare Part B Insulin Drugs 20% coinsurance – PCP's Office – Specialist's Office
+main,H1036-317-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,62,Medicare Part B Insulin Drugs 20% coinsurance – PCP's Office – Specialist's Office – Outpatient Hospital
+main,H1036-317-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,63,$0 copayment – Pharmacy
+main,H1036-317-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,63,Other Medicare Part B Drugs 20% coinsurance – PCP's Office
+main,H1036-317-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,63,Other Medicare Part B Drugs 20% coinsurance – PCP's Office – Specialist's Office
+main,H1036-317-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,63,Other Medicare Part B Drugs 20% coinsurance – PCP's Office – Specialist's Office – Outpatient Hospital
+main,H1036-317-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036317000SB27pdf,11,Allergy shots and serum • PCP's office: $0 copay
+main,H1036-317-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036317000SB27pdf,11,Specialist's office: $0 copay
+main,H1036-317-0,S_acupuncture,,●,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,50,Routine acupuncture $0 copayment – Specialist's Office
+main,H1036-317-0,S_acupuncture,,●,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,51,You are covered for up to 25 visits per calendar year.
+main,H1036-317-0,T_chiropractic,,,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,53,In-Network: Medicare Covered Chiropractic Services $15 copayment – Specialist's Office
+main,H1036-317-0,T_chiropractic,,,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,90,Manual manipulation of the spine to correct a subluxation is
+main,H1036-317-0,T_chiropractic,,,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,90,Routine chiropractic care
+main,H1036-317-0,X_transportation,,,https://assets.humana.com/is/content/humana/H1036317000SB27pdf,11,Not Covered
+main,H1036-317-0,X_transportation,,,https://assets.humana.com/is/content/humana/H1036317000SB27pdf,11,TRANSPORTATION
 main,H1036-323-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,48,20% coinsurance regardless of the number of trips – Air Ambulance Non-Emergency Ambulance
 main,H1036-323-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,48,20% coinsurance regardless of the number of trips – Air Ambulance Out-of-Network:
 main,H1036-323-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,48,In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance
@@ -107,6 +164,27 @@ main,H1036-323-0,L_xray_imaging,1,$0-$50,https://assets.humana.com/is/content/hu
 main,H1036-323-0,L_xray_imaging,1,$0-$50,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,62,Basic Radiological Services $0 copayment – PCP's Office $50 copayment – Specialist's Office
 main,H1036-323-0,L_xray_imaging,2,$205-$330,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,62,$205 copayment – Freestanding Radiological Facility
 main,H1036-323-0,L_xray_imaging,2,$205-$330,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,62,Advanced Imaging Services $330 copayment – PCP's Office – Specialist's Office
+main,H1036-323-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,56,"There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines."
+main,H1036-323-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,59,Chemotherapy Drugs 20% coinsurance – Specialist's Office
+main,H1036-323-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,60,Medicare Part B Insulin Drugs 20% coinsurance – PCP's Office – Specialist's Office – Outpatient Hospital – Pharmacy
+main,H1036-323-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,60,Other Medicare Part B Drugs 20% coinsurance – PCP's Office – Specialist's Office – Outpatient Hospital – Pharmacy
+main,H1036-323-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036323000SB27pdf,10,Allergy shots and serum • PCP's office: $0 copay
+main,H1036-323-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036323000SB27pdf,10,PCP's office: $0 copay • Specialist's office: $0 copay
+main,H1036-323-0,O_medical_deductible,,$700 some,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,12,$700 except for insulin furnished through an item of durable medical equipment.
+main,H1036-323-0,O_medical_deductible,,$700 some,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,43,The following services listed are excluded from the in-network deductible:
+main,H1036-323-0,O_medical_deductible,,$700 some,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,43,Your deductible is $700.
+main,H1036-323-0,O_medical_deductible,,$700 some,https://assets.humana.com/is/content/humana/H1036323000SB27pdf,4,Medical deductible $700 in-network deductible
+main,H1036-323-0,O_medical_deductible,,$700 some,https://assets.humana.com/is/content/humana/H1036323000SB27pdf,4,The following services listed are excluded from the in-network
+main,H1036-323-0,S_acupuncture,,,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,47,$50 copayment
+main,H1036-323-0,S_acupuncture,,,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,47,Acupuncture for chronic low back pain
+main,H1036-323-0,S_acupuncture,,,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,47,Up to 20 visits per calendar year under the following circumstances:
+main,H1036-323-0,S_acupuncture,,,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,91,Available for people with chronic low back pain under certain circumstances
+main,H1036-323-0,T_chiropractic,,,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,50,$15 copayment
+main,H1036-323-0,T_chiropractic,,,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,94,Manual manipulation of the spine to correct a subluxation is
+main,H1036-323-0,T_chiropractic,,,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,94,Routine chiropractic care
+main,H1036-323-0,X_transportation,,,https://assets.humana.com/is/content/humana/H1036323000SB27pdf,10,Not Covered
+main,H1036-323-0,X_transportation,,,https://assets.humana.com/is/content/humana/H1036323000SB27pdf,10,TRANSPORTATION
+main,H1036-323-0,Z_part_b_reduction,,$56,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,14,Humana will pay up to $56 of your Medicare Part B premium
 main,H1372-003-0,AB_ambulance,1,$250 or 20%,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,52,$250 copayment for each Medicare-covered Ground Ambulance service.
 main,H1372-003-0,AB_ambulance,1,$250 or 20%,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,52,20% coinsurance for each Medicare-covered Air Ambulance service.
 main,H1372-003-0,F_primary_care,,$0,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,10,Primary care office visits $0 copayment
@@ -130,6 +208,16 @@ main,H1372-003-0,K_tests_labs,,$0-20%/$0,https://agerightadvantage.com/wp-conten
 main,H1372-003-0,L_xray_imaging,1,20%,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,78,X-rays 20% coinsurance
 main,H1372-003-0,L_xray_imaging,2,20%,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,79,"Diagnostic non-laboratory tests such as CT scans, MRIs, EKGs, and PET scans when your doctor or other health care provider orders them to treat a medical problem."
 main,H1372-003-0,L_xray_imaging,2,20%,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,79,pocket maximum. 20% coinsurance You pay these amounts
+main,H1372-003-0,M_part_b_drugs,,0%-20%,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,68,"There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines."
+main,H1372-003-0,M_part_b_drugs,,0%-20%,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,74,0%-20% coinsurance Cost-sharing is dependent on the drug administered.
+main,H1372-003-0,M_part_b_drugs,,0%-20%,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,74,Medicare-covered Part B
+main,H1372-003-0,M_part_b_drugs,,0%-20%,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,75,All Other Medicare- covered Part B Drugs: 0%-20% coinsurance
+main,H1372-003-0,O_medical_deductible,,$0,https://agerightadvantage.com/wp-content/uploads/2026/09/H1372_003_0_SB_v07.pdf,1,This plan does not have a medical deductible.
+main,H1372-003-0,S_acupuncture,,●,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,52,Limited to 12 visits every year
+main,H1372-003-0,T_chiropractic,,●,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,55,$25 copayment
+main,H1372-003-0,T_chiropractic,,●,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,55,Limit 12 visits every year
+main,H1372-003-0,X_transportation,,●,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,100,$0 copayment
+main,H1372-003-0,X_transportation,,●,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,100,Limit 12 one-way trips every year
 main,H2001-045-0,AB_ambulance,1,20%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,59,$0 copayment or 20% coinsurance or each one-way Medicare-covered air trip
 main,H2001-045-0,AB_ambulance,1,20%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,59,$0 copayment or 20% coinsurance or each one-way Medicare-covered ground trip
 main,H2001-045-0,AB_ambulance,2,not covered,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,59,ambulance transportation is not covered under any circumstances
@@ -154,6 +242,18 @@ main,H2001-045-0,K_tests_labs,,20%/$0,https://www.aarpmedicareplans.com/alphadog
 main,H2001-045-0,L_xray_imaging,1,20%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,86,"eligibility,$0 copayment or 20% coinsurance or each Medicare-covered"
 main,H2001-045-0,L_xray_imaging,2,$0-20%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,89,$0 copayment or each diagnostic mammogram
 main,H2001-045-0,L_xray_imaging,2,$0-20%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,89,"copayment or 20% coinsurance or other Medicare-covered radiological diagnostic services, not including X-rays."
+main,H2001-045-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0412518_000,7,"Depending on your level of Medicaid eligibility, $0 copay or 20% coinsurance; up to $35"
+main,H2001-045-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,82,$0 copayment or Medicare-covered Part B allergy antigens. Depending on your
+main,H2001-045-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,82,"Depending on your level o Medicaid eligibility, $0 copayment or 20% coinsurance or each Medicare-covered chemotherapy drug and the administration o that drug."
+main,H2001-045-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,83,"Depending on your level o Medicaid eligibility, $0 copayment or 20% coinsurance or all other Medicare- covered Part B drugs."
+main,H2001-045-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,124,Available or people with chronic low back
+main,H2001-045-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,57,"Up to 12 visits in 90 days per ormed by, or"
+main,H2001-045-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,58,No more than 20 acupuncture treatments may be administered annually.
+main,H2001-045-0,T_chiropractic,,,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,123,Chiropractic services (Medicare-covered)
+main,H2001-045-0,T_chiropractic,,,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,63,"Depending on your level o Medicaid eligibility, $0 copayment or 20% coinsurance or each Medicare-covered visit."
+main,H2001-045-0,X_transportation,,●,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,112,$0 copayment
+main,H2001-045-0,X_transportation,,●,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,112,Routine transportation
+main,H2001-045-0,X_transportation,,●,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,112,"Up to 24 one-way trips, combined in and out-o -network, are covered each year"
 main,H2056-003-0,AB_ambulance,1,$295 or 20%,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,40,$295 copay for each Medicare‑covered
 main,H2056-003-0,AB_ambulance,1,$295 or 20%,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,40,20% coinsurance for each
 main,H2056-003-0,AB_ambulance,2,$295,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,47,$295 copay for one‑way emergency
@@ -175,6 +275,24 @@ main,H2056-003-0,L_xray_imaging,1,$15,https://www.aetna.com/medicare/documents/i
 main,H2056-003-0,L_xray_imaging,2,$0-$350,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,41,$0 copay for each diagnostic mammogram.
 main,H2056-003-0,L_xray_imaging,2,$0-$350,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,58,$350 copay for each Medicare‑covered CT scan.
 main,H2056-003-0,L_xray_imaging,2,$0-$350,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,58,$350 copay for each Medicare‑covered diagnostic radiology service other than CT scans.
+main,H2056-003-0,M_part_b_drugs,,0%-20%,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,52,20% coinsurance for all other vaccines
+main,H2056-003-0,M_part_b_drugs,,0%-20%,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,52,"There is no coinsurance, copayment, or deductible for the pneumonia, flu/ influenza, Hepatitis B, and COVID‑19 vaccines."
+main,H2056-003-0,M_part_b_drugs,,0%-20%,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,55,20% coinsurance for chemotherapy drugs.
+main,H2056-003-0,M_part_b_drugs,,0%-20%,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,56,20% coinsurance for all other drugs
+main,H2056-003-0,M_part_b_drugs,,0%-20%,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,61,20% coinsurance for all other drugs
+main,H2056-003-0,M_part_b_drugs,,0%-20%,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,61,20% coinsurance for chemotherapy drugs.
+main,H2056-003-0,O_medical_deductible,,$750 some,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,35,The deductible applies to the following in‑network services:
+main,H2056-003-0,O_medical_deductible,,$750 some,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,35,The deductible doesn't apply to some services.
+main,H2056-003-0,O_medical_deductible,,$750 some,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,35,Your deductible is $750.
+main,H2056-003-0,O_medical_deductible,,$750 some,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,7,$750 for certain in‑network services except for
+main,H2056-003-0,O_medical_deductible,,$750 some,https://www.aetna.com/medicare/documents/individual/2027/sb/en/Y0001_H2056_003_HR01_SB2027_M.pdf,2,$750 for certain in‑network services.
+main,H2056-003-0,O_medical_deductible,,$750 some,https://www.aetna.com/medicare/documents/individual/2027/sb/en/Y0001_H2056_003_HR01_SB2027_M.pdf,2,The plan deductible applies to the following services provided by an in‑network provider:
+main,H2056-003-0,S_acupuncture,,,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,39,$65 copay for each Medicare‑covered
+main,H2056-003-0,S_acupuncture,,,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,76,Available for people with chronic low back pain under certain
+main,H2056-003-0,T_chiropractic,,,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,42,$15 copay for each Medicare‑covered
+main,H2056-003-0,T_chiropractic,,,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,78,Manual manipulation of the spine to correct a subluxation (when
+main,H2056-003-0,V_massage,,,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,78,Therapeutic Massage
+main,H2056-003-0,X_transportation,,,https://www.aetna.com/medicare/documents/individual/2027/sb/en/Y0001_H2056_003_HR01_SB2027_M.pdf,6,"Routine, non‑emergency transportation"
 main,H2056-018-0,AB_ambulance,1,$245 or 20%,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,31,$245 copay for each Medicare‑covered
 main,H2056-018-0,AB_ambulance,1,$245 or 20%,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,31,20% coinsurance for each
 main,H2056-018-0,AB_ambulance,1,$245 or 20%,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,31,Medicare‑covered one‑way trip via air
@@ -200,6 +318,21 @@ main,H2056-018-0,L_xray_imaging,1,$10,https://www.aetna.com/medicare/documents/i
 main,H2056-018-0,L_xray_imaging,2,$0-$275,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,32,$0 copay for each diagnostic mammogram.
 main,H2056-018-0,L_xray_imaging,2,$0-$275,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,49,$275 copay for each Medicare‑covered CT
 main,H2056-018-0,L_xray_imaging,2,$0-$275,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,49,$275 copay for each Medicare‑covered diagnostic radiology service other than CT scans.
+main,H2056-018-0,M_part_b_drugs,,0%-20%,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,43,20% coinsurance for all other vaccines
+main,H2056-018-0,M_part_b_drugs,,0%-20%,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,43,"There is no coinsurance, copayment, or deductible for the pneumonia, flu/ influenza, Hepatitis B, and COVID‑19 vaccines."
+main,H2056-018-0,M_part_b_drugs,,0%-20%,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,47,20% coinsurance for all other drugs
+main,H2056-018-0,M_part_b_drugs,,0%-20%,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,47,20% coinsurance for chemotherapy drugs.
+main,H2056-018-0,M_part_b_drugs,,0%-20%,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,51,20% coinsurance for all other drugs
+main,H2056-018-0,M_part_b_drugs,,0%-20%,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,51,20% coinsurance for chemotherapy drugs.
+main,H2056-018-0,O_medical_deductible,,$0,https://www.aetna.com/medicare/documents/individual/2027/sb/en/Y0001_H2056_018_NS45_SB2027_M.pdf,2,Plan deductible $0
+main,H2056-018-0,S_acupuncture,,,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,29,$40 copay for each Medicare‑covered
+main,H2056-018-0,S_acupuncture,,,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,74,Available for people with chronic low back pain under certain
+main,H2056-018-0,T_chiropractic,,,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,33,$15 copay for each Medicare‑covered
+main,H2056-018-0,T_chiropractic,,,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,75,Manual manipulation of the spine to correct a subluxation (when
+main,H2056-018-0,V_massage,,,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,76,Therapeutic Massage
+main,H2056-018-0,X_transportation,,,https://www.aetna.com/medicare/documents/individual/2027/sb/en/Y0001_H2056_018_NS45_SB2027_M.pdf,6,Not Covered
+main,H2056-018-0,X_transportation,,,https://www.aetna.com/medicare/documents/individual/2027/sb/en/Y0001_H2056_018_NS45_SB2027_M.pdf,6,"Routine, non‑emergency transportation"
+main,H2056-018-0,Z_part_b_reduction,,$50,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,7,"In 2027, we will reduce the Part B premium that you pay to the Social Security Administration by $50 per"
 main,H2406-042-0,AB_ambulance,1,$290,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,52,$290 copayment or each one-way Medicare- covered air trip.
 main,H2406-042-0,AB_ambulance,1,$290,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,52,$290 copayment or each one-way Medicare- covered ground trip (in-network).
 main,H2406-042-0,AB_ambulance,2,not covered,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,52,"Outside o the United States or its territories, ambulance transportation is not covered under any circumstances."
@@ -228,6 +361,15 @@ main,H2406-042-0,K_tests_labs,,$10/$0,https://www.aarpmedicareplans.com/alphadog
 main,H2406-042-0,L_xray_imaging,1,$15,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,79,$15 copayment or each Medicare- covered standard X- ray service.
 main,H2406-042-0,L_xray_imaging,2,$0-$320,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,80,$0 copayment or each diagnostic mammogram.
 main,H2406-042-0,L_xray_imaging,2,$0-$320,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,81,"$320 copayment or other Medicare- covered radiological diagnostic services, not including X-rays."
+main,H2406-042-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0412614_000,6,20% coinsurance; up to
+main,H2406-042-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0412614_000,6,Other Part B drugs $0 copay for allergy
+main,H2406-042-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,74,20% coinsurance or each Medicare- covered chemotherapy drug and the administration
+main,H2406-042-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,75,20% coinsurance or all other Medicare- covered Part B drugs.
+main,H2406-042-0,O_medical_deductible,,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0412614_000,2,This plan does not have a medical deductible.
+main,H2406-042-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,50,Acupuncture for chronic low back pain
+main,H2406-042-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,50,Up to 12 visits in 90 days
+main,H2406-042-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,51,more than 20 acupuncture treatments may be administered annually
+main,H2406-042-0,T_chiropractic,,,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,55,$15 copayment or
 main,H2406-070-0,AB_ambulance,1,$350,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,52,$350 copayment or each one-way Medicare- covered air trip.
 main,H2406-070-0,AB_ambulance,1,$350,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,52,$350 copayment or each one-way Medicare- covered ground trip (in-network).
 main,H2406-070-0,AB_ambulance,2,not covered,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,52,"Outside o the United States or its territories, ambulance transportation is not covered under any circumstances."
@@ -258,6 +400,15 @@ main,H2406-070-0,J_outpatient_rehab,,$50-$60,https://www.aarpmedicareplans.com/a
 main,H2406-070-0,L_xray_imaging,1,$30,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,78,$30 copayment or each Medicare- covered standard X- ray service
 main,H2406-070-0,L_xray_imaging,2,$0-$320,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,80,$0 copayment or each diagnostic mammogram
 main,H2406-070-0,L_xray_imaging,2,$0-$320,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,80,"$320 copayment or other Medicare- covered radiological diagnostic services, not including X-rays"
+main,H2406-070-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0412631_000,6,20% coinsurance; up to $35
+main,H2406-070-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,74,$0 copayment or Medicare-covered Part B allergy antigens. 20% coinsurance
+main,H2406-070-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,74,20% coinsurance or all other Medicare- covered Part B drugs.
+main,H2406-070-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,74,20% coinsurance or each Medicare- covered chemotherapy drug and the administration o that drug.
+main,H2406-070-0,O_medical_deductible,,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0412631_000,2,This plan does not have a medical deductible.
+main,H2406-070-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,50,Acupuncture for chronic low back pain
+main,H2406-070-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,50,Up to 12 visits in 90 days
+main,H2406-070-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,51,No more than 20 acupuncture treatments may be administered annually.
+main,H2406-070-0,T_chiropractic,,,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,55,$15 copayment or
 main,H2406-073-0,AB_ambulance,1,$350,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,41,$350 copayment or each one-way Medicare- covered air trip.
 main,H2406-073-0,AB_ambulance,1,$350,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,41,$350 copayment or each one-way Medicare- covered ground trip (in-network).
 main,H2406-073-0,AB_ambulance,2,not covered,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,41,"Outside o the United States or its territories, ambulance transportation is not covered under any circumstances."
@@ -285,6 +436,19 @@ main,H2406-073-0,K_tests_labs,,$50/$0,https://www.aarpmedicareplans.com/alphadog
 main,H2406-073-0,L_xray_imaging,1,$30,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,67,$30 copayment or each Medicare- covered standard X- ray service.
 main,H2406-073-0,L_xray_imaging,2,$0-$320,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,69,$0 copayment or each diagnostic mammogram.
 main,H2406-073-0,L_xray_imaging,2,$0-$320,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,69,"$320 copayment or other Medicare- covered radiological diagnostic services, not including X-rays."
+main,H2406-073-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0412634_000,6,20% coinsurance; up to
+main,H2406-073-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,57,"pay in- network There is no coinsurance, copayment, or deductible or the pneumonia, lu, Hepatitis B, or COVID- 19 vaccines."
+main,H2406-073-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,63,$0 copayment or Medicare-covered Part B allergy antigens. 20% coinsurance
+main,H2406-073-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,63,20% coinsurance or all other Medicare- covered Part B drugs.
+main,H2406-073-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,63,20% coinsurance or each Medicare- covered chemotherapy drug and the administration o that drug.
+main,H2406-073-0,O_medical_deductible,,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0412634_000,2,This plan does not have a medical deductible.
+main,H2406-073-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,101,Acupuncture (Medicare-covered)
+main,H2406-073-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,101,Available or people with chronic low back
+main,H2406-073-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,39,Up to 12 visits in 90 days
+main,H2406-073-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,40,No more than 20 acupuncture treatments may be administered annually.
+main,H2406-073-0,T_chiropractic,,,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,100,Chiropractic services (Medicare-covered)
+main,H2406-073-0,T_chiropractic,,,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,45,$15 copayment or
+main,H2406-073-0,Z_part_b_reduction,,$170,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,11,$170 reduction o your monthly Medicare Part B premium
 main,H2923-001-0,AB_ambulance,1,$0-$315 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,54,Air Ambulance 20% coinsurance per one-way trip
 main,H2923-001-0,AB_ambulance,1,$0-$315 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,54,Ground Ambulance $315 copay per one-way trip
 main,H2923-001-0,AB_ambulance,1,$0-$315 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,54,You pay $0 copay for facility-to-
@@ -315,6 +479,26 @@ main,H2923-001-0,L_xray_imaging,1,$25,https://assets.devoted.com/plan-documents/
 main,H2923-001-0,L_xray_imaging,2,$100-$200,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,86,CT Scans Office or Freestanding location: $100 copay Outpatient hospital: $200 copay
 main,H2923-001-0,L_xray_imaging,2,$100-$200,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,87,MRIs Office or Freestanding location: $100 copay Outpatient hospital: $200 copay
 main,H2923-001-0,L_xray_imaging,2,$100-$200,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,87,PET Scans Office or Freestanding location: $200 copay Outpatient hospital: $300 copay
+main,H2923-001-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,78,"There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines."
+main,H2923-001-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,82,Allergy Serum: $0 copay at: A PCP's office
+main,H2923-001-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,82,Allergy Serum: $0 copay at: A PCP's office A specialist's office
+main,H2923-001-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,82,Allergy Serum: $0 copay at: A PCP's office A specialist's office An outpatient hospital setting
+main,H2923-001-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,83,All Other Part B Drugs: 20% coinsurance at: A PCP's office
+main,H2923-001-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,83,All Other Part B Drugs: 20% coinsurance at: A PCP's office A specialist's office
+main,H2923-001-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,83,All Other Part B Drugs: 20% coinsurance at: A PCP's office A specialist's office In the home An outpatient hospital setting
+main,H2923-001-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,83,All Other Part B Drugs: 20% coinsurance at: A PCP's office A specialist's office In the home An outpatient hospital setting An Ambulatory Surgical Center (ASC)
+main,H2923-001-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,83,Chemotherapy Drugs: 20% coinsurance at: A PCP's office
+main,H2923-001-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,83,Chemotherapy Drugs: 20% coinsurance at: A PCP's office A specialist's office
+main,H2923-001-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,83,Chemotherapy Drugs: 20% coinsurance at: A PCP's office A specialist's office In the home An outpatient hospital setting
+main,H2923-001-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,83,Chemotherapy Drugs: 20% coinsurance at: A PCP's office A specialist's office In the home An outpatient hospital setting An Ambulatory Surgical Center (ASC)
+main,H2923-001-0,O_medical_deductible,,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-SB-H2923-001-ENG.pdf,4,This plan does not have a medical deductible.
+main,H2923-001-0,S_acupuncture,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,61,"You have a $1,750 yearly allowance"
+main,H2923-001-0,T_chiropractic,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,58,$15 copay You are covered for up to 12 visits per year.
+main,H2923-001-0,T_chiropractic,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,58,Routine chiropractic visits
+main,H2923-001-0,T_chiropractic,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,58,You are covered for up to 12 visits
+main,H2923-001-0,V_massage,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,61,"You have a $1,750 yearly allowance"
+main,H2923-001-0,X_transportation,,,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-SB-H2923-001-ENG.pdf,7,Not covered
+main,H2923-001-0,X_transportation,,,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-SB-H2923-001-ENG.pdf,7,Transportation
 main,H2923-005-0,AB_ambulance,1,$0-$315 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,55,Air Ambulance 20% coinsurance per one-way trip
 main,H2923-005-0,AB_ambulance,1,$0-$315 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,55,Ground Ambulance $315 copay per one-way trip
 main,H2923-005-0,AB_ambulance,1,$0-$315 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,55,You pay $0 copay for facility-to-
@@ -344,6 +528,21 @@ main,H2923-005-0,L_xray_imaging,1,$25,https://assets.devoted.com/plan-documents/
 main,H2923-005-0,L_xray_imaging,2,$100-$200,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,88,CT Scans Office or Freestanding location: $100 copay
 main,H2923-005-0,L_xray_imaging,2,$100-$200,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,89,MRIs Office or Freestanding location: $100 copay
 main,H2923-005-0,L_xray_imaging,2,$100-$200,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,89,PET Scans Office or Freestanding location: $200 copay
+main,H2923-005-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,80,"There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines."
+main,H2923-005-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,84,Allergy Serum: $0 copay at: A PCP's office A specialist's office An outpatient hospital setting
+main,H2923-005-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,85,All Other Part B Drugs: 20% coinsurance at: A PCP's office A specialist's office In the home An outpatient hospital setting An Ambulatory Surgical Center (ASC)
+main,H2923-005-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,85,Chemotherapy Drugs: 20% coinsurance at: A PCP's office A specialist's office In the home An outpatient hospital setting An Ambulatory Surgical Center (ASC)
+main,H2923-005-0,O_medical_deductible,,$200 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,11,$200 except for insulin furnished
+main,H2923-005-0,O_medical_deductible,,$200 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,49,The deductible applies to some services.
+main,H2923-005-0,O_medical_deductible,,$200 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,49,Your deductible is $200.
+main,H2923-005-0,O_medical_deductible,,$200 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-SB-H2923-005-ENG.pdf,4,Medical Deductible $200
+main,H2923-005-0,O_medical_deductible,,$200 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-SB-H2923-005-ENG.pdf,4,"covered preventive services, and some Medicare-covered services."
+main,H2923-005-0,S_acupuncture,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,62,"You can be reimbursed up to $1,500 per year for covered dental services, Therapeutic Massage, Routine Acupuncture, and/or Naturopath Services."
+main,H2923-005-0,T_chiropractic,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,59,$15 copay You are covered for up to 12 visits per year.
+main,H2923-005-0,T_chiropractic,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,59,Routine chiropractic is a supplemental benefit offered
+main,H2923-005-0,T_chiropractic,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,59,You are covered for 12 visits per year for routine
+main,H2923-005-0,V_massage,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,62,"You can be reimbursed up to $1,500 per year for covered dental services, Therapeutic Massage, Routine Acupuncture, and/or Naturopath Services."
+main,H2923-005-0,X_transportation,,,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-SB-H2923-005-ENG.pdf,8,Transportation Not covered
 main,H2923-009-0,AB_ambulance,1,50%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,58,Air Ambulance 50% coinsurance per one-way trip
 main,H2923-009-0,AB_ambulance,1,50%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,58,Ground Ambulance 50% coinsurance per one-way trip
 main,H2923-009-0,AB_ambulance,2,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,59,Air Ambulance: $0 copay per one-way trip
@@ -363,6 +562,25 @@ main,H2923-009-0,L_xray_imaging,2,50%,https://assets.devoted.com/plan-documents/
 main,H2923-009-0,L_xray_imaging,2,50%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,87,Office or Freestanding location: 50% coinsurance
 main,H2923-009-0,L_xray_imaging,2,50%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,89,MRIs Office or Freestanding location: 50% coinsurance
 main,H2923-009-0,L_xray_imaging,2,50%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,89,PET Scans Office or Freestanding location: 50% coinsurance
+main,H2923-009-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,80,20% coinsurance
+main,H2923-009-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,80,Medicare-covered vaccines (not including $0 preventive vaccines)
+main,H2923-009-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,80,"There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines."
+main,H2923-009-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,84,Allergy Serum: 20% coinsurance at:
+main,H2923-009-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,84,Chemotherapy Drugs: 20% coinsurance at:
+main,H2923-009-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,85,20% coinsurance at:
+main,H2923-009-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,85,All Other Part B Drugs:
+main,H2923-009-0,O_medical_deductible,,$990 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,51,The deductible applies to some services.
+main,H2923-009-0,O_medical_deductible,,$990 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,51,Your deductible is $990.
+main,H2923-009-0,O_medical_deductible,,$990 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-SB-H2923-009-ENG.pdf,4,$990
+main,H2923-009-0,O_medical_deductible,,$990 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-SB-H2923-009-ENG.pdf,4,The deductible does not apply to Medicare Part B-covered
+main,H2923-009-0,S_acupuncture,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,71,Devoted Health Wellness Bucks $150 per year
+main,H2923-009-0,S_acupuncture,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,71,Supplemental Acupuncture services:
+main,H2923-009-0,T_chiropractic,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,62,$0 copay
+main,H2923-009-0,T_chiropractic,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,62,You are covered for 12 visits per year for routine chiropractic care.
+main,H2923-009-0,V_massage,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,71,Devoted Health Wellness Bucks $150 per year
+main,H2923-009-0,V_massage,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,71,Therapeutic Massage services:
+main,H2923-009-0,X_transportation,,,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-SB-H2923-009-ENG.pdf,8,Not covered
+main,H2923-009-0,X_transportation,,,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-SB-H2923-009-ENG.pdf,8,Transportation
 main,H2923-019-0,AB_ambulance,1,$0-$330 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,57,Ground Ambulance $330 copay per one-way trip
 main,H2923-019-0,AB_ambulance,1,$0-$330 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,57,You pay $0 copay for facility-to-
 main,H2923-019-0,AB_ambulance,1,$0-$330 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,58,Air Ambulance 20% coinsurance per one-way trip
@@ -393,6 +611,35 @@ main,H2923-019-0,L_xray_imaging,1,$25,https://assets.devoted.com/plan-documents/
 main,H2923-019-0,L_xray_imaging,2,$100-$200,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,89,CT Scans Office or Freestanding location: $100 copay
 main,H2923-019-0,L_xray_imaging,2,$100-$200,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,90,MRIs Office or Freestanding location: $100 copay
 main,H2923-019-0,L_xray_imaging,2,$100-$200,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,91,PET Scans Office or Freestanding location: $200 copay
+main,H2923-019-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,81,"There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines."
+main,H2923-019-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,82,Medicare-covered vaccines (not including $0 preventive vaccines) $0 copay
+main,H2923-019-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,86,All Other Part B Drugs: 20% coinsurance at: A PCP's office
+main,H2923-019-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,86,All Other Part B Drugs: 20% coinsurance at: A PCP's office A specialist's office
+main,H2923-019-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,86,All Other Part B Drugs: 20% coinsurance at: A PCP's office A specialist's office In the home An outpatient hospital setting
+main,H2923-019-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,86,All Other Part B Drugs: 20% coinsurance at: A PCP's office A specialist's office In the home An outpatient hospital setting An Ambulatory Surgical Center (ASC)
+main,H2923-019-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,86,Allergy Serum: $0 copay at: A PCP's office
+main,H2923-019-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,86,Allergy Serum: $0 copay at: A PCP's office A specialist's office
+main,H2923-019-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,86,Allergy Serum: $0 copay at: A PCP's office A specialist's office An outpatient hospital setting
+main,H2923-019-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,86,Chemotherapy Drugs: 20% coinsurance at: A PCP's office
+main,H2923-019-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,86,Chemotherapy Drugs: 20% coinsurance at: A PCP's office A specialist's office
+main,H2923-019-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,86,Chemotherapy Drugs: 20% coinsurance at: A PCP's office A specialist's office In the home An outpatient hospital setting
+main,H2923-019-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,86,Chemotherapy Drugs: 20% coinsurance at: A PCP's office A specialist's office In the home An outpatient hospital setting An Ambulatory Surgical Center (ASC)
+main,H2923-019-0,O_medical_deductible,,$150 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,14,$150 except for insulin furnished
+main,H2923-019-0,O_medical_deductible,,$150 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,52,The deductible applies to some services.
+main,H2923-019-0,O_medical_deductible,,$150 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,52,Your deductible is $150.
+main,H2923-019-0,O_medical_deductible,,$150 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-SB-H2923-019-ENG.pdf,4,$150
+main,H2923-019-0,O_medical_deductible,,$150 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-SB-H2923-019-ENG.pdf,4,"For a list of services for which the deductible applies, see"
+main,H2923-019-0,S_acupuncture,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,64,"You have a $2,000 yearly allowance toward Preventive"
+main,H2923-019-0,S_acupuncture,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,65,You will be reimbursed for 50% for your out-of-pocket
+main,H2923-019-0,T_chiropractic,,,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,125,Manual manipulation of the spine to correct a
+main,H2923-019-0,T_chiropractic,,,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,125,subluxation is covered
+main,H2923-019-0,T_chiropractic,,,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,52,Medicare-covered chiropractic services
+main,H2923-019-0,T_chiropractic,,,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,52,Your deductible is $150.
+main,H2923-019-0,T_chiropractic,,,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,62,$15 copay
+main,H2923-019-0,V_massage,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,64,"You have a $2,000 yearly allowance toward Preventive"
+main,H2923-019-0,V_massage,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,65,You will be reimbursed for 50% for your out-of-pocket
+main,H2923-019-0,X_transportation,,,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-SB-H2923-019-ENG.pdf,8,Transportation Not covered
+main,H2923-019-0,Z_part_b_reduction,,$90,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,16,Devoted Health will reduce your monthly Medicare Part B Premium by $90.
 main,H2923-025-0,AB_ambulance,1,$0-$330 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,55,Air Ambulance 20% coinsurance per one-way trip
 main,H2923-025-0,AB_ambulance,1,$0-$330 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,55,Ground Ambulance $330 copay per one-way trip
 main,H2923-025-0,AB_ambulance,1,$0-$330 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,55,You pay $0 copay for facility-to-
@@ -426,6 +673,32 @@ main,H2923-025-0,L_xray_imaging,1,$25,https://assets.devoted.com/plan-documents/
 main,H2923-025-0,L_xray_imaging,2,$100-$200,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,88,CT Scans Office or Freestanding location: $100 copay
 main,H2923-025-0,L_xray_imaging,2,$100-$200,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,89,MRIs Office or Freestanding location: $100 copay
 main,H2923-025-0,L_xray_imaging,2,$100-$200,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,89,PET Scans Office or Freestanding location: $200 copay
+main,H2923-025-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,80,"There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines."
+main,H2923-025-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,81,Medicare-covered vaccines (not including $0 preventive vaccines) $0 copay
+main,H2923-025-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,84,Allergy Serum: $0 copay at: A PCP's office
+main,H2923-025-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,84,Allergy Serum: $0 copay at: A PCP's office A specialist's office
+main,H2923-025-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,84,Allergy Serum: $0 copay at: A PCP's office A specialist's office An outpatient hospital setting
+main,H2923-025-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,85,All Other Part B Drugs: 20% coinsurance at: A PCP's office
+main,H2923-025-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,85,All Other Part B Drugs: 20% coinsurance at: A PCP's office A specialist's office
+main,H2923-025-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,85,All Other Part B Drugs: 20% coinsurance at: A PCP's office A specialist's office In the home An outpatient hospital setting
+main,H2923-025-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,85,All Other Part B Drugs: 20% coinsurance at: A PCP's office A specialist's office In the home An outpatient hospital setting An Ambulatory Surgical Center (ASC)
+main,H2923-025-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,85,Chemotherapy Drugs: 20% coinsurance at: A PCP's office
+main,H2923-025-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,85,Chemotherapy Drugs: 20% coinsurance at: A PCP's office A specialist's office
+main,H2923-025-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,85,Chemotherapy Drugs: 20% coinsurance at: A PCP's office A specialist's office In the home An outpatient hospital setting
+main,H2923-025-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,85,Chemotherapy Drugs: 20% coinsurance at: A PCP's office A specialist's office In the home An outpatient hospital setting An Ambulatory Surgical Center (ASC)
+main,H2923-025-0,O_medical_deductible,,$150 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,49,The deductible applies to some services.
+main,H2923-025-0,O_medical_deductible,,$150 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,49,Your deductible is $150.
+main,H2923-025-0,O_medical_deductible,,$150 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-SB-H2923-025-ENG.pdf,4,$150
+main,H2923-025-0,O_medical_deductible,,$150 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-SB-H2923-025-ENG.pdf,4,"For a list of services for which the deductible applies, see"
+main,H2923-025-0,S_acupuncture,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,62,"You have a $2,000 yearly allowance toward Preventive"
+main,H2923-025-0,T_chiropractic,,,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,124,Manual manipulation of the spine to correct a subluxation is covered
+main,H2923-025-0,T_chiropractic,,,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,49,Medicare-covered chiropractic services
+main,H2923-025-0,T_chiropractic,,,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,49,Your deductible is $150.
+main,H2923-025-0,T_chiropractic,,,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,59,$15 copay
+main,H2923-025-0,V_massage,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,62,"You have a $2,000 yearly allowance toward Preventive"
+main,H2923-025-0,X_transportation,,,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-SB-H2923-025-ENG.pdf,8,Not covered
+main,H2923-025-0,X_transportation,,,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-SB-H2923-025-ENG.pdf,8,Transportation
+main,H2923-025-0,Z_part_b_reduction,,$70,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,13,Devoted Health will reduce your monthly Medicare Part B Premium by $70
 main,H2923-028-3,AB_ambulance,1,$0-$345 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,55,Air Ambulance 20% coinsurance per one-way trip
 main,H2923-028-3,AB_ambulance,1,$0-$345 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,55,Ground Ambulance $345 copay per one-way trip
 main,H2923-028-3,AB_ambulance,1,$0-$345 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,55,You pay $0 copay for facility-to- facility transfers between hospitals via ground ambulance
@@ -454,6 +727,24 @@ main,H2923-028-3,L_xray_imaging,1,$25,https://assets.devoted.com/plan-documents/
 main,H2923-028-3,L_xray_imaging,2,$100-$200,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,86,Office or Freestanding location: $100 copay
 main,H2923-028-3,L_xray_imaging,2,$100-$200,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,87,Office or Freestanding location: $100 copay
 main,H2923-028-3,L_xray_imaging,2,$100-$200,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,87,PET Scans Office or Freestanding location: $200 copay
+main,H2923-028-3,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,78,"There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines."
+main,H2923-028-3,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,82,Allergy Serum: $0 copay at: A PCP's office A specialist's office An outpatient hospital setting
+main,H2923-028-3,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,83,All Other Part B Drugs: 20% coinsurance at: A PCP's office A specialist's office In the home An outpatient hospital setting An Ambulatory Surgical Center (ASC)
+main,H2923-028-3,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,83,Chemotherapy Drugs: 20% coinsurance at: A PCP's office A specialist's office In the home An outpatient hospital setting An Ambulatory Surgical Center (ASC)
+main,H2923-028-3,O_medical_deductible,,$200 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,11,$200 except for insulin furnished
+main,H2923-028-3,O_medical_deductible,,$200 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,49,The deductible applies to some services.
+main,H2923-028-3,O_medical_deductible,,$200 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,49,Your deductible is $200.
+main,H2923-028-3,O_medical_deductible,,$200 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-SB-H2923-028-003-ENG.pdf,4,$200
+main,H2923-028-3,O_medical_deductible,,$200 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-SB-H2923-028-003-ENG.pdf,4,"For a list of services for which the deductible applies, see"
+main,H2923-028-3,O_medical_deductible,,$200 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-SB-H2923-028-003-ENG.pdf,4,The deductible does not apply to Medicare Part B-covered
+main,H2923-028-3,S_acupuncture,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,61,"You have a $250 yearly allowance toward Preventive Dental and Comprehensive Dental services, therapeutic massage, routine acupuncture, and/or naturopath services combined."
+main,H2923-028-3,T_chiropractic,,,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,49,Medicare-covered chiropractic services
+main,H2923-028-3,T_chiropractic,,,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,49,Your deductible is $200.
+main,H2923-028-3,T_chiropractic,,,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,59,$15 copay
+main,H2923-028-3,V_massage,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,61,"You have a $250 yearly allowance toward Preventive Dental and Comprehensive Dental services, therapeutic massage, routine acupuncture, and/or naturopath services combined."
+main,H2923-028-3,X_transportation,,,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-SB-H2923-028-003-ENG.pdf,8,Not covered
+main,H2923-028-3,X_transportation,,,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-SB-H2923-028-003-ENG.pdf,8,Transportation
+main,H2923-028-3,Z_part_b_reduction,,$154.20,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,13,Devoted Health will reduce your monthly Medicare Part B Premium by $154.20
 main,H3805-040-0,AB_ambulance,1,$400,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,52,$400 copayment or each one-way Medicare- covered air trip.
 main,H3805-040-0,AB_ambulance,1,$400,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,52,$400 copayment or each one-way Medicare- covered ground trip.
 main,H3805-040-0,AB_ambulance,2,not covered,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,52,ambulance transportation is not covered under
@@ -476,6 +767,21 @@ main,H3805-040-0,K_tests_labs,,$60/$0,https://www.aarpmedicareplans.com/alphadog
 main,H3805-040-0,L_xray_imaging,1,$25,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,74,$25 copayment or each Medicare-covered standard X-ray service.
 main,H3805-040-0,L_xray_imaging,2,$0-$285,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,76,$0 copayment or each diagnostic mammogram.
 main,H3805-040-0,L_xray_imaging,2,$0-$285,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,76,"$285 copayment or other Medicare-covered radiological diagnostic services, not including X-rays."
+main,H3805-040-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0412772_000,5,20% coinsurance; up to $35
+main,H3805-040-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0412772_000,5,Part B covered
+main,H3805-040-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,65,"There is no coinsurance, copayment, or deductible or the pneumonia, lu, Hepatitis B, or COVID-19 vaccines."
+main,H3805-040-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,70,$0 copayment or Medicare-covered Part B allergy antigens.
+main,H3805-040-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,70,20% coinsurance or all other Medicare-
+main,H3805-040-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,70,20% coinsurance or each Medicare-covered chemotherapy drug and the administration o that drug.
+main,H3805-040-0,O_medical_deductible,,$0,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0412772_000,2,This plan does not have a medical deductible.
+main,H3805-040-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,108,Acupuncture (Medicare-covered)
+main,H3805-040-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,108,Available or people with chronic low back
+main,H3805-040-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,50,Acupuncture for chronic low back pain
+main,H3805-040-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,50,"Up to 12 visits in 90 days per ormed by, or"
+main,H3805-040-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,51,more than 20 acupuncture treatments may be
+main,H3805-040-0,T_chiropractic,,,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,107,Chiropractic services (Medicare-covered)
+main,H3805-040-0,T_chiropractic,,,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,107,Manual manipulation o the spine to correct a
+main,H3805-040-0,T_chiropractic,,,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,55,$15 copayment or each Medicare-covered
 main,H3805-041-0,AB_ambulance,1,$350,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,51,$350 copayment or each one-way Medicare- covered air trip.
 main,H3805-041-0,AB_ambulance,1,$350,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,51,$350 copayment or each one-way Medicare- covered ground trip.
 main,H3805-041-0,AB_ambulance,2,not covered,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,51,"Outside o the United States or its territories, ambulance transportation is not covered under any circumstances."
@@ -496,6 +802,15 @@ main,H3805-041-0,K_tests_labs,,$60/$0,https://www.aarpmedicareplans.com/alphadog
 main,H3805-041-0,L_xray_imaging,1,$30,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,74,$30 copayment or each Medicare-covered standard X-ray service.
 main,H3805-041-0,L_xray_imaging,2,$0-$320,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,76,$0 copayment or each diagnostic mammogram.
 main,H3805-041-0,L_xray_imaging,2,$0-$320,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,76,"$320 copayment or other Medicare-covered radiological diagnostic services, not including X-rays."
+main,H3805-041-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,64,"There is no coinsurance, copayment, or deductible or the pneumonia, lu, Hepatitis B, or COVID-19 vaccines."
+main,H3805-041-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,70,$0 copayment or Medicare-covered Part B allergy antigens.
+main,H3805-041-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,70,20% coinsurance or all other Medicare-
+main,H3805-041-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,70,20% coinsurance or each Medicare-covered chemotherapy drug and the administration o that drug.
+main,H3805-041-0,O_medical_deductible,,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0412773_000,2,This plan does not have a medical deductible.
+main,H3805-041-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,102,Available or people with chronic low back
+main,H3805-041-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,49,"Up to 12 visits in 90 days per ormed by, or"
+main,H3805-041-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,50,more than 20 acupuncture treatments may be administered annually.
+main,H3805-041-0,T_chiropractic,,,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,54,$15 copayment or each Medicare-covered
 main,H3805-048-0,AB_ambulance,1,$370,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,51,$370 copayment or each one-way Medicare- covered air trip.
 main,H3805-048-0,AB_ambulance,1,$370,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,51,$370 copayment or each one-way Medicare- covered ground trip.
 main,H3805-048-0,AB_ambulance,2,not covered,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,51,"Outside o the United States or its territories, ambulance transportation is not covered under any circumstances."
@@ -522,6 +837,21 @@ main,H3805-048-0,K_tests_labs,,$35/$0,https://www.aarpmedicareplans.com/alphadog
 main,H3805-048-0,L_xray_imaging,1,$30,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,75,$30 copayment or each Medicare-covered
 main,H3805-048-0,L_xray_imaging,2,$0-$320,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,76,$0 copayment or each diagnostic
 main,H3805-048-0,L_xray_imaging,2,$0-$320,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,76,$320 copayment or other Medicare-covered
+main,H3805-048-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0412776_000,5,20% coinsurance; up to $35
+main,H3805-048-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,65,"There is no coinsurance, copayment, or deductible or all other Medicare-covered immunizations."
+main,H3805-048-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,65,"There is no coinsurance, copayment, or deductible or the pneumonia, lu, Hepatitis B, or COVID-19 vaccines."
+main,H3805-048-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,70,$0 copayment or Medicare-covered Part B allergy antigens.
+main,H3805-048-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,71,20% coinsurance or all other Medicare-
+main,H3805-048-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,71,20% coinsurance or each Medicare-covered chemotherapy drug and the administration o that drug.
+main,H3805-048-0,O_medical_deductible,,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0412776_000,2,This plan does not have a medical deductible.
+main,H3805-048-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,103,Acupuncture (Medicare-covered)
+main,H3805-048-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,103,Available or people with chronic low back pain under certain circumstances.
+main,H3805-048-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,49,Acupuncture for chronic low back pain
+main,H3805-048-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,49,"Up to 12 visits in 90 days per ormed by, or"
+main,H3805-048-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,50,No more than 20 acupuncture treatments may be administered annually.
+main,H3805-048-0,T_chiropractic,,,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,102,Chiropractic services (Medicare-covered)
+main,H3805-048-0,T_chiropractic,,,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,102,Manual manipulation o the spine to correct a subluxation is covered.
+main,H3805-048-0,T_chiropractic,,,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,54,$15 copayment or each Medicare-covered
 main,H3817-008-1,AB_ambulance,1,$300,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,39,In- and Out-of-network: $300 copay per Medicare covered one-way transport
 main,H3817-008-1,AB_ambulance,2,$300,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,71,Ambulance services: In- and Out-of-network: $300 copay per covered one-
 main,H3817-008-1,F_primary_care,1,$0,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,62,In-office primary care provider (PCP) visits: In-network: $0 copay per provider per day Out-of-network: 50% coinsurance
@@ -548,6 +878,18 @@ main,H3817-008-1,L_xray_imaging,2,$0-$300,https://beonbrand.getbynder.com/asset/
 main,H3817-008-1,L_xray_imaging,2,$0-$300,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,58,"Diagnostic non-laboratory tests such as CT scans, MRIs, EKGs, and"
 main,H3817-008-1,L_xray_imaging,2,$0-$300,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,58,"Diagnostic non-laboratory tests such as CT scans, MRIs, EKGs, and PET scans"
 main,H3817-008-1,L_xray_imaging,2,$0-$300,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,58,Diagnostic radiology: In-network: $0 copay per provider per day for diagnostic mammography
+main,H3817-008-1,M_part_b_drugs,,0%-20%,https://beonbrand.getbynder.com/asset/509b7b1f-c03e-498d-9107-158cc9783b71/Summary-of-Benefits-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,7,Chemotherapy drugs 0%-20% (depending on
+main,H3817-008-1,M_part_b_drugs,,0%-20%,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,51,"There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines."
+main,H3817-008-1,M_part_b_drugs,,0%-20%,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,52,0%-20% coinsurance (includes administration)
+main,H3817-008-1,M_part_b_drugs,,0%-20%,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,52,Other Part B immunizations:
+main,H3817-008-1,M_part_b_drugs,,0%-20%,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,54,20% coinsurance (certain drugs may have a coinsurance lower than 20%)
+main,H3817-008-1,S_acupuncture,,,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,38,$20 copay per provider per day
+main,H3817-008-1,S_acupuncture,,,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,38,No more than 20 acupuncture treatments may be administered annually.
+main,H3817-008-1,S_acupuncture,,,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,73,Available for people with chronic low back pain under certain
+main,H3817-008-1,T_chiropractic,,,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,41,$15 copay per provider per day
+main,H3817-008-1,T_chiropractic,,,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,75,Manual manipulation of the spine to correct a subluxation is
+main,H3817-008-1,V_massage,,,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,76,Therapeutic massage
+main,H3817-008-1,X_transportation,,,https://beonbrand.getbynder.com/asset/509b7b1f-c03e-498d-9107-158cc9783b71/Summary-of-Benefits-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,7,Transportation Not covered Not covered
 main,H3817-009-1,AB_ambulance,1,$300,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,39,$300 copay per Medicare
 main,H3817-009-1,AB_ambulance,2,$300,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,71,$300 copay per covered one-
 main,H3817-009-1,F_primary_care,1,$0,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,8,Primary care office visits                                  In-network: $0 per provider per day
@@ -576,6 +918,17 @@ main,H3817-009-1,L_xray_imaging,2,$0-$300,https://beonbrand.getbynder.com/asset/
 main,H3817-009-1,L_xray_imaging,2,$0-$300,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,57,$300 copay per provider per day for all other complex imaging
 main,H3817-009-1,L_xray_imaging,2,$0-$300,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,57,"Diagnostic non-laboratory tests such as CT scans, MRIs, EKGs, and"
 main,H3817-009-1,L_xray_imaging,2,$0-$300,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,57,PET scans when your doctor or other health care provider orders
+main,H3817-009-1,M_part_b_drugs,,0%-20%,https://beonbrand.getbynder.com/asset/0231d9b3-b90f-4080-82e8-9213fa8a7464/Summary-of-Benefits-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,7,Chemotherapy drugs 0%-20% (depending on
+main,H3817-009-1,M_part_b_drugs,,0%-20%,https://beonbrand.getbynder.com/asset/0231d9b3-b90f-4080-82e8-9213fa8a7464/Summary-of-Benefits-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,7,Part B insulin 20% up to $35
+main,H3817-009-1,M_part_b_drugs,,0%-20%,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,51,Other Part B immunizations: In-network: 0%-20% coinsurance (includes administration)
+main,H3817-009-1,M_part_b_drugs,,0%-20%,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,51,"There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines."
+main,H3817-009-1,M_part_b_drugs,,0%-20%,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,54,20% coinsurance (certain drugs may have a coinsurance lower than 20%)
+main,H3817-009-1,S_acupuncture,,,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,38,$20 copay per provider per day
+main,H3817-009-1,S_acupuncture,,,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,72,Available for people with chronic low back pain under certain
+main,H3817-009-1,T_chiropractic,,,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,41,$15 copay per provider per day
+main,H3817-009-1,T_chiropractic,,,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,75,Manual manipulation of the spine to correct a subluxation is
+main,H3817-009-1,V_massage,,,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,76,Therapeutic massage                         Not covered under any condition
+main,H3817-009-1,X_transportation,,,https://beonbrand.getbynder.com/asset/0231d9b3-b90f-4080-82e8-9213fa8a7464/Summary-of-Benefits-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,7,Transportation Not covered Not covered
 main,H3817-010-0,AB_ambulance,1,$300,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,30,$300 copay per Medicare covered one-way transport
 main,H3817-010-0,AB_ambulance,2,$300,https://beonbrand.getbynder.com/asset/04a8c0a0-9d0b-4085-a9c5-657b68a53d5a/Summary-of-Benefits-Medicare-Regence-Valiance-PPO-no-Rx-2027-OR.pdf,6,Copay per each one-way Medicare-covered transport
 main,H3817-010-0,AB_ambulance,2,$300,https://beonbrand.getbynder.com/asset/04a8c0a0-9d0b-4085-a9c5-657b68a53d5a/Summary-of-Benefits-Medicare-Regence-Valiance-PPO-no-Rx-2027-OR.pdf,6,Worldwide ground or air ambulance $300 $300
@@ -606,6 +959,17 @@ main,H3817-010-0,L_xray_imaging,1,$5,https://beonbrand.getbynder.com/asset/5b106
 main,H3817-010-0,L_xray_imaging,2,$0-$300,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,48,$300 copay per provider per day for all other complex imaging
 main,H3817-010-0,L_xray_imaging,2,$0-$300,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,48,"Diagnostic non-laboratory tests such as CT scans, MRIs, EKGs, and PET scans"
 main,H3817-010-0,L_xray_imaging,2,$0-$300,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,48,Diagnostic radiology: In-network: $0 copay per provider per day for diagnostic mammography
+main,H3817-010-0,M_part_b_drugs,,0%-20%,https://beonbrand.getbynder.com/asset/04a8c0a0-9d0b-4085-a9c5-657b68a53d5a/Summary-of-Benefits-Medicare-Regence-Valiance-PPO-no-Rx-2027-OR.pdf,7,Chemotherapy drugs 0%-20% (depending on
+main,H3817-010-0,M_part_b_drugs,,0%-20%,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,42,0%-20% coinsurance (includes administration)
+main,H3817-010-0,M_part_b_drugs,,0%-20%,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,42,"There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines."
+main,H3817-010-0,M_part_b_drugs,,0%-20%,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,45,20% coinsurance (certain drugs may have a coinsurance lower than 20%)
+main,H3817-010-0,M_part_b_drugs,,0%-20%,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,45,Part B insulin drugs: In-network: 20% coinsurance up to a $35 copay for a one-month supply
+main,H3817-010-0,S_acupuncture,,,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,29,$20 copay per provider per day
+main,H3817-010-0,S_acupuncture,,,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,63,Available for people with chronic low back pain under certain
+main,H3817-010-0,T_chiropractic,,,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,32,$15 copay per provider per day
+main,H3817-010-0,T_chiropractic,,,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,66,Manual manipulation of the spine to correct a subluxation is
+main,H3817-010-0,V_massage,,,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,67,Therapeutic massage
+main,H3817-010-0,X_transportation,,,https://beonbrand.getbynder.com/asset/04a8c0a0-9d0b-4085-a9c5-657b68a53d5a/Summary-of-Benefits-Medicare-Regence-Valiance-PPO-no-Rx-2027-OR.pdf,6,Transportation Not covered Not covered
 main,H3817-011-1,AB_ambulance,1,$300,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,39,In- and Out-of-network: $300 copay per Medicare covered one-way transport
 main,H3817-011-1,AB_ambulance,2,$300,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,71,Ambulance services: In- and Out-of-network: $300 copay per covered one-
 main,H3817-011-1,F_primary_care,1,$0,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,62,In-office primary care provider (PCP) visits: In-network: $0 copay per provider per day
@@ -638,6 +1002,17 @@ main,H3817-011-1,L_xray_imaging,1,$25,https://beonbrand.getbynder.com/asset/78bd
 main,H3817-011-1,L_xray_imaging,2,$0-$300,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,58,$0 copay per provider per day for diagnostic mammography
 main,H3817-011-1,L_xray_imaging,2,$0-$300,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,58,$300 copay per provider per day for all other complex imaging
 main,H3817-011-1,L_xray_imaging,2,$0-$300,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,58,"Diagnostic non-laboratory tests such as CT scans, MRIs, EKGs, and PET scans"
+main,H3817-011-1,M_part_b_drugs,,0%-20%,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,51,Other Part B immunizations: In-network: 0%-20% coinsurance (includes
+main,H3817-011-1,M_part_b_drugs,,0%-20%,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,51,"There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines."
+main,H3817-011-1,M_part_b_drugs,,0%-20%,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,54,20% coinsurance (certain drugs may have a coinsurance lower than 20%)
+main,H3817-011-1,M_part_b_drugs,,0%-20%,https://beonbrand.getbynder.com/asset/e02efc92-b5dc-44f5-97ed-68489555c3df/Summary-of-Benefits-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,7,Chemotherapy drugs 0%-20% (depending on
+main,H3817-011-1,S_acupuncture,,,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,38,$20 copay per provider per day
+main,H3817-011-1,S_acupuncture,,,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,38,Acupuncture for chronic low back pain
+main,H3817-011-1,S_acupuncture,,,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,73,Available for people with chronic low back pain under certain
+main,H3817-011-1,T_chiropractic,,,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,41,$15 copay per provider per day
+main,H3817-011-1,T_chiropractic,,,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,75,Manual manipulation of the spine to correct a subluxation is
+main,H3817-011-1,V_massage,,,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,76,Therapeutic massage
+main,H3817-011-1,X_transportation,,,https://beonbrand.getbynder.com/asset/e02efc92-b5dc-44f5-97ed-68489555c3df/Summary-of-Benefits-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,7,Transportation Not covered Not covered
 main,H5216-048-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,48,In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance
 main,H5216-048-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,48,In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance
 main,H5216-048-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,48,Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance
@@ -667,6 +1042,25 @@ main,H5216-048-0,L_xray_imaging,1,$0-$45,https://assets.humana.com/is/content/hu
 main,H5216-048-0,L_xray_imaging,1,$0-$45,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,65,Basic Radiological Services $0 copayment – PCP's Office $45 copayment – Specialist's Office
 main,H5216-048-0,L_xray_imaging,2,$205-$330,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,65,$205 copayment – Freestanding Radiological Facility
 main,H5216-048-0,L_xray_imaging,2,$205-$330,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,65,Advanced Imaging Services $330 copayment – PCP's Office – Specialist's Office
+main,H5216-048-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,59,"There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines."
+main,H5216-048-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,62,Chemotherapy Drugs 20% coinsurance
+main,H5216-048-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,62,Medicare Part B Insulin Drugs 20% coinsurance
+main,H5216-048-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,63,20% coinsurance
+main,H5216-048-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H5216048000SB27pdf,15,PCP's office $0 copay 50% of the cost
+main,H5216-048-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H5216048000SB27pdf,15,Specialist's office $0 copay 50% of the cost
+main,H5216-048-0,O_medical_deductible,,$100 some out-of-network services,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,43,All Services received from In-Network Providers
+main,H5216-048-0,O_medical_deductible,,$100 some out-of-network services,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,43,The following services listed are excluded from the combined in-network and out-of-network deductible:
+main,H5216-048-0,O_medical_deductible,,$100 some out-of-network services,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,43,Your deductible is $100.
+main,H5216-048-0,O_medical_deductible,,$100 some out-of-network services,https://assets.humana.com/is/content/humana/H5216048000SB27pdf,5,$100 combined deductible
+main,H5216-048-0,O_medical_deductible,,$100 some out-of-network services,https://assets.humana.com/is/content/humana/H5216048000SB27pdf,5,All Services received from In-Network Providers
+main,H5216-048-0,O_medical_deductible,,$100 some out-of-network services,https://assets.humana.com/is/content/humana/H5216048000SB27pdf,5,The following services listed are excluded from the combined
+main,H5216-048-0,S_acupuncture,,,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,100,Available for people with chronic low back pain under certain circumstances
+main,H5216-048-0,S_acupuncture,,,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,47,Acupuncture for chronic low back pain
+main,H5216-048-0,S_acupuncture,,,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,47,In-Network: $45 copayment – Specialist’s Office
+main,H5216-048-0,S_acupuncture,,,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,47,Up to 20 visits per calendar year under the following circumstances:
+main,H5216-048-0,T_chiropractic,,,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,102,Manual manipulation of the spine to correct a subluxation is covered
+main,H5216-048-0,T_chiropractic,,,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,51,Medicare Covered Chiropractic Services $15 copayment – Specialist's Office
+main,H5216-048-0,X_transportation,,,https://assets.humana.com/is/content/humana/H5216048000SB27pdf,14,TRANSPORTATION
 main,H5216-427-2,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,36,In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance
 main,H5216-427-2,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,36,In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance
 main,H5216-427-2,AB_ambulance,2,$325,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,37,Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance
@@ -690,6 +1084,22 @@ main,H5216-427-2,L_xray_imaging,1,$0-$45,https://assets.humana.com/is/content/hu
 main,H5216-427-2,L_xray_imaging,1,$0-$45,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,53,Basic Radiological Services $0 copayment – PCP's Office $45 copayment – Specialist's Office
 main,H5216-427-2,L_xray_imaging,2,$205-$330,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,53,$205 copayment – Freestanding Radiological Facility
 main,H5216-427-2,L_xray_imaging,2,$205-$330,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,53,Advanced Imaging Services $330 copayment – PCP's Office – Specialist's Office
+main,H5216-427-2,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,47,"There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines."
+main,H5216-427-2,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,50,Chemotherapy Drugs 20% coinsurance
+main,H5216-427-2,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,51,Medicare Part B Insulin Drugs 20% coinsurance
+main,H5216-427-2,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,51,Other Medicare Part B Drugs 20% coinsurance
+main,H5216-427-2,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H5216427002SB27pdf,14,PCP's office $0 copay 50% of the cost
+main,H5216-427-2,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H5216427002SB27pdf,14,Specialist's office $0 copay 50% of the cost
+main,H5216-427-2,O_medical_deductible,,$0,https://assets.humana.com/is/content/humana/H5216427002SB27pdf,5,Medical deductible This plan does not have a deductible.
+main,H5216-427-2,S_acupuncture,,,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,36,Acupuncture for chronic low back pain
+main,H5216-427-2,S_acupuncture,,,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,36,In-Network: $45 copayment
+main,H5216-427-2,S_acupuncture,,,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,36,Up to 20 visits per calendar year under the following circumstances:
+main,H5216-427-2,S_acupuncture,,,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,82,Available for people with chronic low back pain under certain
+main,H5216-427-2,T_chiropractic,,,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,39,Medicare Covered Chiropractic Services $15 copayment
+main,H5216-427-2,T_chiropractic,,,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,85,Manual manipulation of the spine to correct a subluxation is
+main,H5216-427-2,X_transportation,,,https://assets.humana.com/is/content/humana/H5216427002SB27pdf,14,Not Covered Not Covered
+main,H5216-427-2,X_transportation,,,https://assets.humana.com/is/content/humana/H5216427002SB27pdf,14,TRANSPORTATION
+main,H5216-427-2,Z_part_b_reduction,,$150,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,11,"While you are enrolled in this plan, Humana will pay up to $150 of your Medicare Part B premium."
 main,H5216-428-2,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,47,$325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance Out-of-Network:
 main,H5216-428-2,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,47,Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance Out-of-Network:
 main,H5216-428-2,AB_ambulance,2,$325,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,47,Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance
@@ -719,6 +1129,22 @@ main,H5216-428-2,L_xray_imaging,1,$0-$45,https://assets.humana.com/is/content/hu
 main,H5216-428-2,L_xray_imaging,1,$0-$45,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,63,Basic Radiological Services $0 copayment – PCP's Office
 main,H5216-428-2,L_xray_imaging,2,$205-$330,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,63,$205 copayment – Freestanding Radiological Facility
 main,H5216-428-2,L_xray_imaging,2,$205-$330,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,63,Advanced Imaging Services $330 copayment – PCP's Office – Specialist's Office
+main,H5216-428-2,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,57,"There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines."
+main,H5216-428-2,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,61,Chemotherapy Drugs 20% coinsurance
+main,H5216-428-2,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,61,Medicare Part B Insulin Drugs 20% coinsurance
+main,H5216-428-2,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,61,Other Medicare Part B Drugs 20% coinsurance
+main,H5216-428-2,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H5216428002SB27pdf,15,• PCP's office $0 copay 50% of the cost
+main,H5216-428-2,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H5216428002SB27pdf,15,• Specialist's office $0 copay 50% of the cost
+main,H5216-428-2,O_medical_deductible,,$80 some,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,41,The following services listed are excluded from the combined in-network and out-of-network deductible:
+main,H5216-428-2,O_medical_deductible,,$80 some,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,41,"Until you’ve paid the deductible amount, you must pay the full cost for most of your covered services."
+main,H5216-428-2,O_medical_deductible,,$80 some,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,41,Your deductible is $80.
+main,H5216-428-2,O_medical_deductible,,$80 some,https://assets.humana.com/is/content/humana/H5216428002SB27pdf,5,$80 combined deductible
+main,H5216-428-2,O_medical_deductible,,$80 some,https://assets.humana.com/is/content/humana/H5216428002SB27pdf,5,The following services listed are excluded from the combined
+main,H5216-428-2,S_acupuncture,,,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,46,In-Network: $50 copayment – Specialist’s Office
+main,H5216-428-2,S_acupuncture,,,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,46,Up to 20 visits per calendar year under the following circumstances:
+main,H5216-428-2,S_acupuncture,,,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,98,Available for people with chronic low back pain under certain
+main,H5216-428-2,T_chiropractic,,,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,101,Manual manipulation of the spine to correct a subluxation is
+main,H5216-428-2,X_transportation,,,https://assets.humana.com/is/content/humana/H5216428002SB27pdf,15,Not Covered Not Covered
 main,H5216-455-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,36,20% coinsurance regardless of the
 main,H5216-455-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,36,In-Network: Emergency Ambulance $325 copayment
 main,H5216-455-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,36,Non-Emergency Ambulance $325 copayment per date of
@@ -749,6 +1175,21 @@ main,H5216-455-0,L_xray_imaging,2,$205-$330,https://assets.humana.com/is/content
 main,H5216-455-0,L_xray_imaging,2,$205-$330,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,53,Advanced Imaging Services
 main,H5216-455-0,L_xray_imaging,2,$205-$330,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,53,Advanced Imaging Services $330 copayment – PCP's Office
 main,H5216-455-0,L_xray_imaging,2,$205-$330,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,53,Advanced Imaging Services $330 copayment – PCP's Office – Specialist's Office
+main,H5216-455-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,47,"There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines."
+main,H5216-455-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,50,Chemotherapy Drugs 20% coinsurance
+main,H5216-455-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,51,Medicare Part B Insulin Drugs 20% coinsurance
+main,H5216-455-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,51,Other Medicare Part B Drugs 20% coinsurance
+main,H5216-455-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H5216455000SB27pdf,14,• PCP's office $0 copay 50% of the cost
+main,H5216-455-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H5216455000SB27pdf,14,• PCP's office $0 copay 50% of the cost • Specialist's office $0 copay 50% of the cost
+main,H5216-455-0,O_medical_deductible,,$0,https://assets.humana.com/is/content/humana/H5216455000SB27pdf,5,Medical deductible This plan does not have a deductible.
+main,H5216-455-0,S_acupuncture,,,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,36,In-Network: $40 copayment – Specialist’s Office
+main,H5216-455-0,S_acupuncture,,,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,36,Up to 20 visits per calendar year under the following circumstances:
+main,H5216-455-0,S_acupuncture,,,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,81,Available for people with chronic low back pain under certain
+main,H5216-455-0,T_chiropractic,,,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,39,Medicare Covered Chiropractic Services $15 copayment
+main,H5216-455-0,T_chiropractic,,,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,84,Manual manipulation of the spine to correct a subluxation is covered
+main,H5216-455-0,X_transportation,,,https://assets.humana.com/is/content/humana/H5216455000SB27pdf,14,Not Covered Not Covered
+main,H5216-455-0,X_transportation,,,https://assets.humana.com/is/content/humana/H5216455000SB27pdf,14,TRANSPORTATION
+main,H5216-455-0,Z_part_b_reduction,,$43,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,11,Humana will pay up to $43 of your Medicare Part B premium
 main,H5439-010-0,AB_ambulance,1,$175,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,42,$175 copay per one-way trip for Medicare-covered ground ambulance services.
 main,H5439-010-0,AB_ambulance,1,$175,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,43,$175 copay per one-way trip for Medicare-covered air ambulance services.
 main,H5439-010-0,F_primary_care,1,$0,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,90,$0 copay for each Medicare-covered PCP office visit.
@@ -766,6 +1207,21 @@ main,H5439-010-0,J_outpatient_rehab,,$25,https://www.wellcareor.com/content/dam/
 main,H5439-010-0,L_xray_imaging,1,$50,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,78,$50 copay for Medicare-covered X-rays.
 main,H5439-010-0,L_xray_imaging,2,$0-$125,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,80,$0 copay for Medicare-covered diagnostic mammogram.
 main,H5439-010-0,L_xray_imaging,2,$0-$125,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,80,$125 copay for all other Medicare-covered services received in other settings (such as a physician office or freestanding facility).
+main,H5439-010-0,M_part_b_drugs,,0%-20%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,67,"There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines."
+main,H5439-010-0,M_part_b_drugs,,0%-20%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,75,20% coinsurance for all other Medicare-covered Part B drugs. Prior Authorization may be required.
+main,H5439-010-0,M_part_b_drugs,,0%-20%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,75,In-Network 0% coinsurance for Medicare-covered Part B allergy antigens.
+main,H5439-010-0,M_part_b_drugs,,0%-20%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,76,In-Network 20% coinsurance for Medicare-covered Part B chemotherapy drugs.
+main,H5439-010-0,O_medical_deductible,,$200 some,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,34,Your deductible is $200.
+main,H5439-010-0,O_medical_deductible,,$200 some,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,34,you must pay the full cost for most of your covered services
+main,H5439-010-0,O_medical_deductible,,$200 some,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,8,$200 except for insulin furnished
+main,H5439-010-0,O_medical_deductible,,$200 some,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H5439_010_2027_OR_SB_PMAO_7017600ENG_M.pdf,4,$200 deductible for select Part B services.
+main,H5439-010-0,S_acupuncture,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,42,$0 copay for each supplemental (Non-Medicare covered) acupuncture visit.
+main,H5439-010-0,S_acupuncture,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,42,acupuncture services up to a total of 24 visits every year.
+main,H5439-010-0,T_chiropractic,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,48,$15 copay for each supplemental (Non-Medicare -covered) chiropractor visit.
+main,H5439-010-0,T_chiropractic,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,48,chiropractic visits up to a total of 24 visits every year.
+main,H5439-010-0,X_transportation,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H5439_010_2027_OR_SB_PMAO_7017600ENG_M.pdf,15,In-Network Not covered
+main,H5439-010-0,X_transportation,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H5439_010_2027_OR_SB_PMAO_7017600ENG_M.pdf,15,Transportation Services
+main,H5439-010-0,Z_part_b_reduction,,$10,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,9,We will reduce your monthly Medicare Part B premium by $10.
 main,H5439-011-0,AB_ambulance,1,$350,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,54,$350 copay per one-way trip for Medicare-covered ground ambulance services.
 main,H5439-011-0,AB_ambulance,1,$350,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,55,$350 copay per one-way trip for Medicare-covered air ambulance services.
 main,H5439-011-0,F_primary_care,1,$0,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,10,$0 copay per visit
@@ -787,6 +1243,17 @@ main,H5439-011-0,J_outpatient_rehab,,$25,https://www.wellcareor.com/content/dam/
 main,H5439-011-0,L_xray_imaging,1,$50,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,90,$50 copay for Medicare-covered X-rays.
 main,H5439-011-0,L_xray_imaging,2,$0-$125,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,92,$0 copay for Medicare-covered diagnostic mammogram.
 main,H5439-011-0,L_xray_imaging,2,$0-$125,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,93,$125 copay for all other Medicare-covered services received in other settings (such as a physician office or freestanding facility).
+main,H5439-011-0,M_part_b_drugs,,0%-20%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,79,"There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines."
+main,H5439-011-0,M_part_b_drugs,,0%-20%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,87,20% coinsurance for all other Medicare-covered Part B drugs.
+main,H5439-011-0,M_part_b_drugs,,0%-20%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,87,In-Network 0% coinsurance for Medicare-covered Part B allergy antigens.
+main,H5439-011-0,M_part_b_drugs,,0%-20%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,88,20% coinsurance for Medicare-covered Part B chemotherapy drugs.
+main,H5439-011-0,O_medical_deductible,,$250 some,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H5439_011_2027_OR_SB_PPO_7017601ENG_M.pdf,4,$250 deductible for select Part B services.
+main,H5439-011-0,S_acupuncture,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,54,$0 copay for each supplemental (Non-Medicare covered) acupuncture visit.
+main,H5439-011-0,S_acupuncture,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,54,acupuncture services up to a total of 24 visits every year.
+main,H5439-011-0,T_chiropractic,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,60,$15 copay for each supplemental (Non-Medicare -covered) chiropractor visit.
+main,H5439-011-0,T_chiropractic,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,60,chiropractic visits up to a total of 24 visits every year.
+main,H5439-011-0,X_transportation,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H5439_011_2027_OR_SB_PPO_7017601ENG_M.pdf,15,In-Network Not covered
+main,H5439-011-0,X_transportation,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H5439_011_2027_OR_SB_PPO_7017601ENG_M.pdf,15,Transportation Services (Non-emergency medical transportation)
 main,H5439-015-0,AB_ambulance,1,$335,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,55,Deductible applies. $335 copay per one-way trip for Medicare-covered air
 main,H5439-015-0,AB_ambulance,1,$335,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,55,Deductible applies. $335 copay per one-way trip for Medicare-covered ground
 main,H5439-015-0,F_primary_care,1,$0,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,100,$0 copay for each Medicare-covered PCP office visit.
@@ -804,6 +1271,21 @@ main,H5439-015-0,J_outpatient_rehab,,$35,https://www.wellcareor.com/content/dam/
 main,H5439-015-0,L_xray_imaging,1,$50,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,88,$50 copay for Medicare-covered X-rays.
 main,H5439-015-0,L_xray_imaging,2,$0-$225,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,90,$0 copay for Medicare-covered diagnostic mammogram.
 main,H5439-015-0,L_xray_imaging,2,$0-$225,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,91,$225 copay for all other Medicare-covered services received in other settings (such as a physician office or freestanding facility).
+main,H5439-015-0,M_part_b_drugs,,0%-20%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,77,"There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines."
+main,H5439-015-0,M_part_b_drugs,,0%-20%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,85,20% coinsurance for all other Medicare-covered Part B drugs.
+main,H5439-015-0,M_part_b_drugs,,0%-20%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,85,In-Network 0% coinsurance for Medicare-covered Part B allergy antigens.
+main,H5439-015-0,M_part_b_drugs,,0%-20%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,86,20% coinsurance for Medicare-covered Part B chemotherapy drugs.
+main,H5439-015-0,O_medical_deductible,,$250 some,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H5439_015_2027_OR_SB_PPO_7017569ENG_M.pdf,4,$250 deductible for select Part B services.
+main,H5439-015-0,S_acupuncture,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,122,Available for people with chronic low back pain under certain circumstances
+main,H5439-015-0,S_acupuncture,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,53,$0 copay for Medicare-covered acupuncture received in a PCP office.
+main,H5439-015-0,S_acupuncture,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,53,Up to 12 visits in 90 days are covered under the following
+main,H5439-015-0,S_acupuncture,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,54,$15 copay for Medicare-covered acupuncture received in a Chiropractor office.
+main,H5439-015-0,S_acupuncture,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,54,$55 copay for Medicare-covered acupuncture received in a Specialist office.
+main,H5439-015-0,S_acupuncture,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,54,No more than 20 acupuncture treatments may be administered annually.
+main,H5439-015-0,T_chiropractic,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,123,Manual manipulation of the spine to correct a subluxation is covered
+main,H5439-015-0,T_chiropractic,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,59,$15 copay for Medicare-covered chiropractic services.
+main,H5439-015-0,X_transportation,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H5439_015_2027_OR_SB_PPO_7017569ENG_M.pdf,14,In-Network Not covered Out-of-Network Not covered
+main,H5439-015-0,X_transportation,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H5439_015_2027_OR_SB_PPO_7017569ENG_M.pdf,14,Transportation Services
 main,H5439-019-0,AB_ambulance,1,$325,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,56,Deductible applies. $325 copay per one-way trip for Medicare-covered air
 main,H5439-019-0,AB_ambulance,1,$325,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,56,Deductible applies. $325 copay per one-way trip for Medicare-covered ground
 main,H5439-019-0,F_primary_care,1,$0,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,100,$0 copay for each Medicare-covered PCP office visit.
@@ -822,6 +1304,23 @@ main,H5439-019-0,J_outpatient_rehab,,$30,https://www.wellcareor.com/content/dam/
 main,H5439-019-0,L_xray_imaging,1,$50,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,89,$50 copay for Medicare-covered X-rays.
 main,H5439-019-0,L_xray_imaging,2,$0-$250,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,91,$0 copay for Medicare-covered diagnostic mammogram.
 main,H5439-019-0,L_xray_imaging,2,$0-$250,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,91,$250 copay for all other Medicare-covered services received in other settings (such as a physician office or freestanding facility).
+main,H5439-019-0,M_part_b_drugs,,0%-20%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,78,"There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines."
+main,H5439-019-0,M_part_b_drugs,,0%-20%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,86,0% coinsurance for Medicare-covered Part B allergy antigens. 20% coinsurance for all other Medicare-covered Part B drugs. Prior Authorization may be required.
+main,H5439-019-0,M_part_b_drugs,,0%-20%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,86,20% coinsurance for all other Medicare-covered Part B drugs. Prior Authorization may be required.
+main,H5439-019-0,M_part_b_drugs,,0%-20%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,86,In-Network 20% coinsurance for Medicare-covered Part B chemotherapy drugs.
+main,H5439-019-0,O_medical_deductible,,$250 some,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,48,"Until you’ve paid the deductible amount, you must pay the full cost for most of your covered services."
+main,H5439-019-0,O_medical_deductible,,$250 some,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,48,Your deductible is $250.
+main,H5439-019-0,O_medical_deductible,,$250 some,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H5439_019_2027_OR_SB_PPO_7017570ENG_M.pdf,4,$250 deductible for select Part B services.
+main,H5439-019-0,S_acupuncture,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,123,Available for people with chronic low back pain under
+main,H5439-019-0,S_acupuncture,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,54,$0 copay for Medicare-covered acupuncture received in a PCP office.
+main,H5439-019-0,S_acupuncture,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,54,Up to 12 visits in 90 days are covered under the following
+main,H5439-019-0,S_acupuncture,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,55,$15 copay for Medicare-covered acupuncture received in a Chiropractor office.
+main,H5439-019-0,S_acupuncture,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,55,$30 copay for Medicare-covered acupuncture received in a Specialist office.
+main,H5439-019-0,S_acupuncture,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,55,No more than 20 acupuncture treatments may be administered annually.
+main,H5439-019-0,T_chiropractic,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,125,Routine chiropractic care                      Manual manipulation of the spine to correct a
+main,H5439-019-0,T_chiropractic,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,60,$15 copay for Medicare-covered chiropractic services.
+main,H5439-019-0,X_transportation,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H5439_019_2027_OR_SB_PPO_7017570ENG_M.pdf,14,In-Network Not covered
+main,H5439-019-0,X_transportation,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H5439_019_2027_OR_SB_PPO_7017570ENG_M.pdf,14,Transportation Services
 main,H6815-038-0,AB_ambulance,1,$310,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,54,$310 copay per one-way trip for Medicare-covered ground
 main,H6815-038-0,AB_ambulance,1,$310,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,55,$310 copay per one-way trip for Medicare-covered air
 main,H6815-038-0,F_primary_care,,$0,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,90,$0 copay for each Medicare-covered PCP office visit.
@@ -837,6 +1336,18 @@ main,H6815-038-0,J_outpatient_rehab,,$25,https://www.wellcareor.com/content/dam/
 main,H6815-038-0,L_xray_imaging,1,$50,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,82,$50 copay for Medicare-covered X-rays.
 main,H6815-038-0,L_xray_imaging,2,$0-$200,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,83,$0 copay for Medicare-covered diagnostic mammogram.
 main,H6815-038-0,L_xray_imaging,2,$0-$200,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,83,$200 copay for all other Medicare-covered services received in other settings (such as a physician office or freestanding facility).
+main,H6815-038-0,M_part_b_drugs,,0%-20%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,74,"There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines."
+main,H6815-038-0,M_part_b_drugs,,0%-20%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,79,20% coinsurance for all other Medicare-covered Part B drugs.
+main,H6815-038-0,M_part_b_drugs,,0%-20%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,79,Other Medicare Part B Drugs 0% coinsurance for Medicare-covered Part B allergy antigens.
+main,H6815-038-0,M_part_b_drugs,,0%-20%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,80,20% coinsurance for Medicare-covered Part B chemotherapy drugs.
+main,H6815-038-0,O_medical_deductible,,$150 some,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,10,$150 in-network except for insulin
+main,H6815-038-0,O_medical_deductible,,$150 some,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H6815_038_2027_OR_SB_HMAPD_7017558ENG_M.pdf,4,$150 in-network deductible for select Part B services
+main,H6815-038-0,S_acupuncture,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,54,$0 copay for each supplemental (Non-Medicare covered) acupuncture visit
+main,H6815-038-0,S_acupuncture,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,54,acupuncture services up to a total of 24 visits every year.
+main,H6815-038-0,T_chiropractic,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,58,$15 copay for each supplemental (Non-Medicare -covered) chiropractor visit
+main,H6815-038-0,T_chiropractic,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,58,chiropractic visits up to a total of 24 visits every year.
+main,H6815-038-0,X_transportation,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H6815_038_2027_OR_SB_HMAPD_7017558ENG_M.pdf,11,Not covered
+main,H6815-038-0,X_transportation,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H6815_038_2027_OR_SB_HMAPD_7017558ENG_M.pdf,11,Transportation Services
 main,H7006-018-0,AB_ambulance,1,$250,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,47,$250 copay for each Medicare-covered Air Ambulance service.
 main,H7006-018-0,AB_ambulance,1,$250,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,47,$250 copay for each Medicare-covered Ground Ambulance service.
 main,H7006-018-0,AB_ambulance,1,$250,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,47,Cost sharing applies to each one-way trip.
@@ -872,6 +1383,16 @@ main,H7006-018-0,L_xray_imaging,2,$0-$300,https://atriohp.com/media/qzyffvwm/h70
 main,H7006-018-0,L_xray_imaging,2,$0-$300,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,74,"EKGs, and PET scans when your doctor or other health care"
 main,H7006-018-0,L_xray_imaging,2,$0-$300,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,75,In-Network $0 copay applies to diagnostic mammograms; $300 copay applies to all other tests. Prior Authorization may be required. Out-of-Network 50% coinsurance for each Medicare-covered service.
 main,H7006-018-0,L_xray_imaging,2,$0-$300,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,75,Other outpatient diagnostic tests - Radiological diagnostic
+main,H7006-018-0,M_part_b_drugs,,0%-20%,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,64,"There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines."
+main,H7006-018-0,M_part_b_drugs,,0%-20%,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,70,Medicare Part B Insulin Drugs In-Network 0% - 20% coinsurance
+main,H7006-018-0,M_part_b_drugs,,0%-20%,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,70,Other Medicare Part B Drugs In-Network 0% - 20% coinsurance
+main,H7006-018-0,M_part_b_drugs,,0%-20%,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,71,Medicare Part B Chemotherapy/Radiation Drugs In-Network 0% - 20% coinsurance
+main,H7006-018-0,O_medical_deductible,,$0,https://atriohp.com/media/254ghvxu/2027-portland-sb_final-v2.pdf,5,No deductible for medical. See prescription drug coverage for Part D deductible.
+main,H7006-018-0,S_acupuncture,,●,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,46,$50 allowance every six
+main,H7006-018-0,S_acupuncture,,●,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,46,Routine (non-Medicare covered) acupuncture services
+main,H7006-018-0,T_chiropractic,,●,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,52,$50 allowance every six
+main,H7006-018-0,T_chiropractic,,●,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,52,Routine chiropractic care
+main,H7006-018-0,X_transportation,,,https://atriohp.com/media/254ghvxu/2027-portland-sb_final-v2.pdf,12,Transportation (additional
 main,H7006-021-0,AB_ambulance,1,$300,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,39,In-Network $300 copay for each Medicare-covered Ground Ambulance service.
 main,H7006-021-0,AB_ambulance,1,$300,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,39,prior authorization. $300 copay for each Medicare-covered Air Ambulance service.
 main,H7006-021-0,F_primary_care,1,$0,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,9,$0 copay per visit
@@ -897,6 +1418,15 @@ main,H7006-021-0,L_xray_imaging,2,$0-$60,https://atriohp.com/media/qyfpfa50/h700
 main,H7006-021-0,L_xray_imaging,2,$0-$60,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,65,"EKGs, and PET scans when your doctor or other health care"
 main,H7006-021-0,L_xray_imaging,2,$0-$60,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,66,$0 copay applies to diagnostic mammograms;
 main,H7006-021-0,L_xray_imaging,2,$0-$60,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,66,"Other outpatient diagnostic tests - Radiological diagnostic services, not including x-rays"
+main,H7006-021-0,M_part_b_drugs,,0%-20%,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,55,"There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza,"
+main,H7006-021-0,M_part_b_drugs,,0%-20%,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,61,Medicare Part B Insulin Drugs In-Network 0% - 20% coinsurance
+main,H7006-021-0,M_part_b_drugs,,0%-20%,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,62,Medicare Part B Chemotherapy/Radiation Drugs In-Network 0% - 20% coinsurance
+main,H7006-021-0,M_part_b_drugs,,0%-20%,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,62,Other Medicare Part B Drugs In-Network 0% - 20% coinsurance
+main,H7006-021-0,S_acupuncture,,●,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,38,"$100 allowance every six months, loaded to your Flex Card, for combined routine chiropractic, acupuncture and naturopathy services."
+main,H7006-021-0,S_acupuncture,,●,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,38,Routine (non-Medicare covered) acupuncture services
+main,H7006-021-0,T_chiropractic,,●,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,43,"$100 allowance every six months, loaded to your Flex Card, for combined routine chiropractic, acupuncture and naturopathy services."
+main,H7006-021-0,T_chiropractic,,●,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,43,Routine chiropractic care
+main,H7006-021-0,X_transportation,,,https://atriohp.com/media/254ghvxu/2027-portland-sb_final-v2.pdf,12,Transportation (additional
 main,H7199-002-0,AB_ambulance,1,$0-$325 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,55,Air Ambulance 20% coinsurance per one-way trip
 main,H7199-002-0,AB_ambulance,1,$0-$325 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,55,Ground Ambulance $325 copay per one-way trip
 main,H7199-002-0,AB_ambulance,1,$0-$325 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,55,You pay $0 copay for facility-to-
@@ -925,6 +1455,24 @@ main,H7199-002-0,L_xray_imaging,1,$25,https://assets.devoted.com/plan-documents/
 main,H7199-002-0,L_xray_imaging,2,$100-$200,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,94,CT Scans Office or Freestanding location: $100 copay
 main,H7199-002-0,L_xray_imaging,2,$100-$200,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,95,MRIs Office or Freestanding location: $100 copay
 main,H7199-002-0,L_xray_imaging,2,$100-$200,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,96,PET Scans Office or Freestanding location: $200 copay
+main,H7199-002-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,85,In-network: $0 copay
+main,H7199-002-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,85,"There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines."
+main,H7199-002-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,91,All Other Part B Drugs: 20% coinsurance at:
+main,H7199-002-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,91,Allergy Serum: $0 copay at:
+main,H7199-002-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,91,Chemotherapy Drugs: 20% coinsurance at:
+main,H7199-002-0,O_medical_deductible,,$250 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,11,$250 except for insulin furnished through an item of durable medical equipment.
+main,H7199-002-0,O_medical_deductible,,$250 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,49,The deductible applies to some services.
+main,H7199-002-0,O_medical_deductible,,$250 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,49,The deductible applies to the following in-network services:
+main,H7199-002-0,O_medical_deductible,,$250 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,49,Your deductible is $250.
+main,H7199-002-0,O_medical_deductible,,$250 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-SB-H7199-002-ENG.pdf,4,Medical Deductible $250
+main,H7199-002-0,O_medical_deductible,,$250 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-SB-H7199-002-ENG.pdf,4,"The deductible does not apply to Medicare Part B-covered insulin (when you use insulin via a pump) or Medicare-covered preventive services, and some Medicare-covered services."
+main,H7199-002-0,S_acupuncture,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,62,"You have a $2,250 yearly allowance toward Preventive Dental and Comprehensive dental services, therapeutic massage, routine acupuncture, and/or naturopath services combined."
+main,H7199-002-0,S_acupuncture,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,63,You will be reimbursed for 50% for your out-of-pocket costs for covered alternative therapies.
+main,H7199-002-0,T_chiropractic,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,59,$15 copay You are covered for up to 12 visits per year.
+main,H7199-002-0,T_chiropractic,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,60,You are covered for 12 visits per year (combined) from in- or out-of-network providers for routine chiropractic care.
+main,H7199-002-0,V_massage,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,62,"You have a $2,250 yearly allowance toward Preventive Dental and Comprehensive dental services, therapeutic massage, routine acupuncture, and/or naturopath services combined."
+main,H7199-002-0,V_massage,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,63,You will be reimbursed for 50% for your out-of-pocket costs for covered alternative therapies.
+main,H7199-002-0,X_transportation,,,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-SB-H7199-002-ENG.pdf,9,Transportation                       Not covered
 main,H9003-001-0,AB_ambulance,1,$250,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,54,$250 for Enhanced plan
 main,H9003-001-0,AB_ambulance,1,$250,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,54,"fixed wing, rotary wing, and ground ambulance"
 main,H9003-001-0,AB_ambulance,2,$250,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,54,$250 for Enhanced plan
@@ -949,6 +1497,14 @@ main,H9003-001-0,L_xray_imaging,1,$0,https://healthy.kaiserpermanente.org/conten
 main,H9003-001-0,L_xray_imaging,2,$150,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,81,"Diagnostic non-laboratory tests such as magnetic resonance imaging (MRI), computed tomography (CT), and positron emission tomography (PET)"
 main,H9003-001-0,L_xray_imaging,2,$150,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,81,"You pay the following per visit, per department depending upon the plan in which you are enrolled:"
 main,H9003-001-0,L_xray_imaging,2,$150,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,81,• $150 for Enhanced plan members.
+main,H9003-001-0,O_medical_deductible,,$0,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/summary-of-benefits/medicare/2027/summary-of-benefits-nw.pdf,4,Deductible $0 $0 $0
+main,H9003-001-0,S_acupuncture,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,54,$10 for Enhanced plan
+main,H9003-001-0,S_acupuncture,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,54,"Acupuncture, alternative therapy (naturopathy),"
+main,H9003-001-0,T_chiropractic,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,54,$10 for Enhanced plan
+main,H9003-001-0,T_chiropractic,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,54,and chiropractic care not covered by Medicare
+main,H9003-001-0,V_massage,,,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,114,Massage therapy                           Covered when ordered as part of physical therapy
+main,H9003-001-0,X_transportation,,,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,99,$0
+main,H9003-001-0,X_transportation,,,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,99,Transportation services—Non-emergency medical
 main,H9003-006-0,AB_ambulance,1,$300,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,54,$300 for Standard plan
 main,H9003-006-0,AB_ambulance,1,$300,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,54,"fixed wing, rotary wing, and ground ambulance"
 main,H9003-006-0,AB_ambulance,2,$300,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,54,$300 for Standard plan
@@ -971,6 +1527,14 @@ main,H9003-006-0,L_xray_imaging,1,$0,https://healthy.kaiserpermanente.org/conten
 main,H9003-006-0,L_xray_imaging,2,$225,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,81,"Diagnostic non-laboratory tests such as magnetic resonance imaging (MRI), computed tomography (CT), and positron emission tomography (PET)"
 main,H9003-006-0,L_xray_imaging,2,$225,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,81,"You pay the following per visit, per department depending upon the plan in which you are enrolled:"
 main,H9003-006-0,L_xray_imaging,2,$225,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,81,• $225 for Standard plan members.
+main,H9003-006-0,O_medical_deductible,,$0,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/summary-of-benefits/medicare/2027/summary-of-benefits-nw.pdf,4,Deductible $0 $0 $0
+main,H9003-006-0,S_acupuncture,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,54,$15 for Standard plan members.
+main,H9003-006-0,S_acupuncture,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,54,"Acupuncture, alternative therapy (naturopathy),"
+main,H9003-006-0,T_chiropractic,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,54,$15 for Standard plan members.
+main,H9003-006-0,T_chiropractic,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,54,and chiropractic care not covered by Medicare
+main,H9003-006-0,V_massage,,,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,114,Massage therapy                           Covered when ordered as part of physical therapy
+main,H9003-006-0,X_transportation,,,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,99,$0
+main,H9003-006-0,X_transportation,,,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,99,Transportation services—Non-emergency medical
 main,H9003-009-0,AB_ambulance,1,$350,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,55,$350 for Value plan members.
 main,H9003-009-0,AB_ambulance,2,$350,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,55,$350 for Value plan members.
 main,H9003-009-0,AB_ambulance,2,$350,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,55,We also cover the services of a licensed ambulance
@@ -991,3 +1555,11 @@ main,H9003-009-0,L_xray_imaging,1,$15,https://healthy.kaiserpermanente.org/conte
 main,H9003-009-0,L_xray_imaging,2,$350,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,81,"Diagnostic non-laboratory tests such as magnetic resonance imaging (MRI), computed tomography (CT), and positron emission tomography (PET)"
 main,H9003-009-0,L_xray_imaging,2,$350,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,81,"You pay the following per visit, per department depending upon the plan in which you are enrolled:"
 main,H9003-009-0,L_xray_imaging,2,$350,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,81,• $350 for Value plan members.
+main,H9003-009-0,O_medical_deductible,,$0,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/summary-of-benefits/medicare/2027/summary-of-benefits-nw.pdf,4,Deductible $0 $0 $0
+main,H9003-009-0,S_acupuncture,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,54,$20 for Value plan members.
+main,H9003-009-0,S_acupuncture,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,54,"Acupuncture, alternative therapy (naturopathy),"
+main,H9003-009-0,T_chiropractic,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,54,$20 for Value plan members.
+main,H9003-009-0,T_chiropractic,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,54,and chiropractic care not covered by Medicare
+main,H9003-009-0,V_massage,,,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,114,Massage therapy                           Covered when ordered as part of physical therapy
+main,H9003-009-0,X_transportation,,,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,99,$0
+main,H9003-009-0,X_transportation,,,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,99,Transportation services—Non-emergency medical

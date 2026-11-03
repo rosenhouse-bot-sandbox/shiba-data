@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-2a970381e331a34a.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 7 Dental and Alternative Therapy Allowance: $2,000 yearly allowance shared by preventive and comprehensive dental and the alternative therapies. It is usable with any licensed US provider, so network any fits.\"}]\n```",
+ "usage": {
+  "input_tokens": 2423,
+  "output_tokens": 264,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

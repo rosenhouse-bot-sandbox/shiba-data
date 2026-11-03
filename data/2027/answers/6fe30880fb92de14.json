@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "4ec81cd0d2695486.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H1372-003-0\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$25\", \"page\": 52, \"quotes\": [\"Additional acupuncture services $25 copayment\"]},\n{\"plan_id\": \"H1372-003-0\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"visit_limit\", \"amount\": \"12\", \"unit\": \"visits\", \"limit\": \"in 90 days\", \"condition\": \"chronic low back pain\", \"page\": 51, \"quotes\": [\"Up to 12 visits in 90 days are covered under the following\"]}]\n```",
+ "usage": {
+  "input_tokens": 7332,
+  "output_tokens": 1144,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -72,7 +72,7 @@ class VersionsTest(unittest.TestCase):
     def test_later_versions_see_their_presented_columns_instead_of_their_edits(self):
         for version, columns in ((2, ["L_xray_imaging"]), (3, ["L_xray_imaging", "AB_ambulance"]),
                                  (4, ["L_xray_imaging", "AB_ambulance", "I_outpatient_surgery"]),
-                                 (5, list(present.COLUMNS))):
+                                 (5, filled.V5_COLUMNS), (6, list(present.COLUMNS))):
             names, ignore = filled.VERSIONS[version]
             self.assertEqual(names, layers.without(layers.FILLED))
             for column in columns:

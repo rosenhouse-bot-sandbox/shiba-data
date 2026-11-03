@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "ce13e925c0384896.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H1036-153-0\", \"benefit\": \"extras.transportation\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"not_covered\", \"page\": 9,\n   \"quotes\": [\"TRANSPORTATION\", \"Not Covered\"], \"note\": \"\"},\n  {\"plan_id\": \"H1036-153-0\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$30\", \"condition\": \"chronic low back pain\", \"page\": 12,\n   \"quotes\": [\"Acupuncture services (Medicare-covered)\", \"$30 copay for acupuncture for chronic low back pain\"], \"note\": \"\"},\n  {\"plan_id\": \"H1036-153-0\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"visit_limit\", \"amount\": \"20\", \"limit\": \"per year\", \"condition\": \"chronic low back pain\", \"page\": 12,\n   \"quotes\": [\"Acupuncture services (Medicare-covered)\", \"visits up to 20 visit(s) per year.\"], \"note\": \"\"},\n  {\"plan_id\": \"H1036-153-0\", \"benefit\": \"extras.chiropractic\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$15\", \"page\": 12,\n   \"quotes\": [\"Chiropractic services (Medicare-covered)\", \"$15 copay\"], \"note\": \"\"}\n]\n```",
+ "usage": {
+  "input_tokens": 3877,
+  "output_tokens": 1173,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

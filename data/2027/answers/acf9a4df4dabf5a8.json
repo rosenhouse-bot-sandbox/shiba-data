@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-0e1831fb00cf2a95.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 6 Part B drugs table, Other Part B drugs row: 20% coinsurance. No setting is named, and this is the only plan.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 6 Part B drugs table, Part B Insulin row: $35 copay. No setting is named.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 6 Part B drugs table, Chemotherapy drugs row: 20% coinsurance. No setting is named.\"}]\n```",
+ "usage": {
+  "input_tokens": 2490,
+  "output_tokens": 315,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

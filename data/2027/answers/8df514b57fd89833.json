@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "23e2bdae59ea8981.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3817-011-1\", \"benefit\": \"part_b_drugs.chemotherapy\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 7, \"quotes\": [\"Chemotherapy drugs\", \"(depending on 50%\"], \"note\": \"The 50% out-of-network value is printed on the same line as the end of the in-network text in the Chemotherapy drugs row.\"}]\n```",
+ "usage": {
+  "input_tokens": 2864,
+  "output_tokens": 1081,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "2aa68f4230962abc.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-025-0\", \"benefit\": \"medical_deductible.some\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"deductible\", \"amount\": \"$150\", \"unit\": \"\", \"limit\": \"per year\", \"page\": 49,\n  \"quotes\": [\"Your deductible is $150.\", \"The deductible applies to some services.\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 3342,
+  "output_tokens": 594,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

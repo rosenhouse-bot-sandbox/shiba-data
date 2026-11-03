@@ -15,6 +15,7 @@ VERSIONS[4] = dict(VERSIONS[1], groups=("imaging", "ambulance", "surgery"))
 # part of a fact's identity.
 VERSIONS[6] = dict(VERSIONS[4], groups=VERSIONS[4]["groups"] + ("tests", "visits", "rehab", "inpatient"))
 VERSIONS[7] = dict(VERSIONS[6], groups=VERSIONS[6]["groups"] + ("giveback", "part_b_drugs", "medical_deductible", "dental", "extras"))
+VERSIONS[8] = dict(VERSIONS[7], groups=tuple(g for g in VERSIONS[7]["groups"] if g != "dental"))
 
 
 def fresh(path):

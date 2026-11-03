@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "29166053e638f7e6.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-317-0\", \"benefit\": \"part_b_drugs.insulin\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 11, \"quotes\": [\"Part B Insulin                                            •   Outpatient hospital: 20% of the cost\"], \"note\": \"The quote keeps the page's original spacing between the service name and the cost. The single-space version failed the check. The other settings in this row (PCP's office, Pharmacy, Specialist's office) are not included. Their lines match the Other Part B drugs row word for word and do not share a printed line with the 'Part B Insulin' label, so no unique quote can be made.\"}]\n```",
+ "usage": {
+  "input_tokens": 3011,
+  "output_tokens": 1549,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

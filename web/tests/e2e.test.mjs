@@ -447,7 +447,7 @@ test("a clicked cell's note links to the plan on Medicare.gov", async () => {
 });
 
 test("an uncited cell lists the CMS fields behind it and where Medicare.gov shows it", async () => {
-  for (const plan of ["H3805-048-0", "H7006-018-0"]) {  // without and with a comment
+  for (const plan of ["H7006-021-0", "H3817-008-1"]) {  // without and with a comment
     await page.goto(`${base}#/main/${plan}/O_medical_deductible`);
     const note = page.locator("#source-note");
     assert.match(await note.textContent(), /\(pbp_d_(inn|ann)_deduct_yn\) = 2 \(No\)/);

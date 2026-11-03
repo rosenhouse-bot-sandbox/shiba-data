@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "2eb4caa23079d78f.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-019-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 9, \"quotes\": [\"Out-of-Network 50% coinsurance\"], \"note\": \"Cleanings\"},\n{\"plan_id\": \"H5439-019-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 10, \"quotes\": [\"Oral exams In-Network $0 copay * Out-of-Network 50% coinsurance\"], \"note\": \"Dental X-rays, oral exams, fluoride treatment and other diagnostic and preventive dental services each list 50% coinsurance out of network\"},\n{\"plan_id\": \"H5439-019-0\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 11, \"quotes\": [\"Out-of-Network 50% coinsurance\"], \"note\": \"Adjunctive General Services\"}]\n```",
+ "usage": {
+  "input_tokens": 4325,
+  "output_tokens": 2945,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

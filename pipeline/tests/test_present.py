@@ -357,6 +357,121 @@ class InpatientTest(unittest.TestCase):
         self.assertEqual(inpatient(), ["", ""])
 
 
+def column(rule, *found):
+    return rule("Aetna", list(found))
+
+
+class GivebackTest(unittest.TestCase):
+    def test_the_best_source_gives_the_reduction(self):
+        eoc, sb = (priced("giveback", amount="$154.20", cost_kind="part_b_reduction", source=s) for s in ("EOC", "SB"))
+        self.assertEqual(column(present.giveback, sb, eoc), [("$154.20", [eoc])])
+
+    def test_an_unconditioned_reduction_wins(self):
+        found = [priced("giveback", amount="$90", cost_kind="part_b_reduction"),
+                 priced("giveback", amount="$0", cost_kind="part_b_reduction", condition="if Medicaid pays your premium")]
+        self.assertEqual(column(present.giveback, *found)[0][0], "$90")
+
+    def test_a_reduction_without_an_amount_is_a_dot(self):
+        self.assertEqual(column(present.giveback, priced("giveback", amount="", cost_kind="covered"))[0][0], "●")
+
+    def test_skips_packages_and_other_benefits(self):
+        found = [priced("giveback", amount="$50", cost_kind="part_b_reduction", package="Rider"),
+                 priced("giveback", amount="$50", cost_kind="part_b_reduction", provider_tier="preferred"), priced("visits")]
+        self.assertEqual(column(present.giveback, *found), [("", [])])
+
+
+class PartBDrugsTest(unittest.TestCase):
+    def test_a_0_vaccine_starts_the_range_at_0(self):
+        found = [priced("part_b_drugs.vaccine"), priced("part_b_drugs.chemotherapy", amount="20%"),
+                 priced("part_b_drugs", amount="20%"), priced("part_b_drugs.insulin", amount="$35")]
+        self.assertEqual(column(present.part_b_drugs, *found)[0][0], "0%-20%")
+        self.assertEqual(column(present.part_b_drugs, *found[1:])[0][0], "20%")
+
+    def test_each_kind_of_drug_takes_its_best_source(self):
+        found = [priced("part_b_drugs", amount="20%"), priced("part_b_drugs", amount="30%", source="SB"),
+                 priced("part_b_drugs.allergy", source="SB")]
+        self.assertEqual(column(present.part_b_drugs, *found), [("0%-20%", [found[0], found[2]])])
+
+    def test_keeps_conditions_but_skips_other_networks_tiers_and_supplements(self):
+        found = [priced("part_b_drugs", amount="20%", condition="Depending on your level of Medicaid eligibility"),
+                 priced("part_b_drugs", amount="50%", network="out"), priced("part_b_drugs", provider_tier="preferred"),
+                 priced("part_b_drugs", covered_by="supplemental"), priced("part_b_drugs", amount="0%-20%", package="A")]
+        self.assertEqual(column(present.part_b_drugs, *found)[0][0], "20%")
+
+    def test_ranges_and_no_facts(self):
+        self.assertEqual(column(present.part_b_drugs, priced("part_b_drugs", amount="0%-20%"))[0][0], "0%-20%")
+        self.assertEqual(column(present.part_b_drugs, priced("part_b_drugs.insulin", amount="$35")), [("", [])])
+
+
+def deductible(amount, benefit="medical_deductible", **more):
+    return priced(benefit, amount=amount, cost_kind="deductible", **more)
+
+
+class MedicalDeductibleTest(unittest.TestCase):
+    def test_none_shows_0(self):
+        self.assertEqual(column(present.medical_deductible, deductible("$0"),
+                                deductible("$0", condition="If you receive Extra Help"))[0][0], "$0")
+
+    def test_some_services_from_any_source(self):
+        self.assertEqual(column(present.medical_deductible, deductible("$250", "medical_deductible.some"))[0][0], "$250 some")
+        self.assertEqual(column(present.medical_deductible, deductible("$250"))[0][0], "$250")
+        found = [deductible("$200"), deductible("$200", "medical_deductible.some", source="SB")]
+        self.assertEqual(column(present.medical_deductible, *found), [("$200 some", found)])
+
+    def test_original_medicares_part_b_deductible(self):
+        found = [deductible("$283", "medical_deductible.some"),
+                 priced("medical_deductible.part_b", amount="", cost_kind="covered", source="SB")]
+        self.assertEqual(column(present.medical_deductible, *found), [("Part B deductible some", found)])
+        uncovered = dict(found[1], cost_kind="not_covered")
+        self.assertEqual(column(present.medical_deductible, found[0], uncovered), [("$283 some", [found[0]])])
+
+    def test_out_of_network_only_when_none_in_network(self):
+        self.assertEqual(column(present.medical_deductible, deductible("$100", "medical_deductible.some", network="out"))[0][0],
+                         "$100 some out-of-network services")
+        self.assertEqual(column(present.medical_deductible, deductible("$100", network="out"))[0][0], "$100 out-of-network only")
+        self.assertEqual(column(present.medical_deductible, deductible("$700", "medical_deductible.some"),
+                                deductible("$1,000", "medical_deductible.some", network="out"))[0][0], "$700 some")
+
+    def test_0_in_network_hides_an_out_of_network_deductible(self):
+        self.assertEqual(column(present.medical_deductible, deductible("$0"), deductible("$100", network="out"))[0][0], "$0")
+
+    def test_skips_supplemental_conditional_tiered_and_packaged_deductibles(self):
+        for more in (dict(covered_by="supplemental"), dict(condition="for Extra Help members"),
+                     dict(provider_tier="preferred"), dict(package="Rider")):
+            self.assertEqual(column(present.medical_deductible, deductible("$500", "medical_deductible.some", **more),
+                                    deductible("$250"))[0][0], "$250", more)
+
+    def test_other_benefits_deductibles_and_no_facts(self):
+        self.assertEqual(column(present.medical_deductible, deductible("$200", "tests.diagnostic")), [("", [])])
+
+
+def extra(benefit, covered_by="supplemental", cost_kind="covered", amount="", **more):
+    return priced(benefit, amount=amount, covered_by=covered_by, cost_kind=cost_kind, **more)
+
+
+class DotTest(unittest.TestCase):
+    def test_a_routine_benefit_or_fund_gets_a_dot(self):
+        for f in (extra("extras.acupuncture", cost_kind="copay", amount="$0"), extra("extras.acupuncture", pool="Wellness Bucks"),
+                  extra("extras.acupuncture", cost_kind="allowance", amount="$150", pool="Flex Card"),
+                  extra("extras", cost_kind="visit_limit", amount="12"),
+                  extra("extras.acupuncture", cost_kind="max", amount="$500")):
+            self.assertEqual(column(present.dot("extras.acupuncture"), f), [("●", [f])], f)
+
+    def test_a_medicare_package_conditional_or_uncovered_benefit_cites_a_blank(self):
+        for f in (extra("extras.acupuncture", "medicare", condition="chronic low back pain"),
+                  extra("extras.acupuncture", package="Advantage Plus"),
+                  extra("extras.transportation", condition="immediately following an inpatient hospitalization"),
+                  extra("extras.chiropractic", cost_kind="not_covered", source="SB"),
+                  extra("extras.chiropractic", cost_kind="copay", amount="$20", provider_tier="preferred")):
+            self.assertEqual(column(present.dot(f["benefit"]), f), [("", [f])], f)
+
+    def test_takes_the_best_source_and_its_own_benefit(self):
+        eoc, sb = extra("extras.massage", "medicare"), extra("extras.massage", cost_kind="not_covered", source="SB")
+        self.assertEqual(column(present.dot("extras.massage"), eoc, sb), [("", [eoc])])
+        self.assertEqual(column(present.dot("extras.acupuncture"), extra("extras.massage")), [("", [])])
+        self.assertEqual(column(present.dot("extras.chiropractic"), extra("extras.chiropractic", network="out")), [("", [])])
+
+
 def presented_cells(data, column):
     return {p: [value for value, _ in got] for p, got in present.lines(data, column).items()}
 
@@ -372,6 +487,15 @@ class WriteTest(unittest.TestCase):
             os.makedirs(f"{tmp}/generated")
             present.write(pathlib.Path(tmp))
             self.assertEqual(layers.rows(pathlib.Path(tmp, layers.PRESENTED)), [row])
+
+    def test_a_blank_with_cited_facts_writes_rows(self):
+        data = years.data_dir(YEAR)
+        f = facts.read(data / "machine/document_facts.csv")[0]
+        plan = f["plan_id"]
+        with mock.patch.object(present, "lines", lambda data, column: {plan: [("", [f])]}), \
+                mock.patch.object(present, "COLUMNS", {"S_acupuncture": None}):
+            rows = present.layer_rows(data)
+        self.assertEqual({(r["plan_id"], r["column"], r["value"]) for r in rows}, {(plan, "S_acupuncture", "")})
 
     def test_refuses_a_second_line_for_a_one_line_cell(self):
         data = years.data_dir(YEAR)
@@ -404,6 +528,7 @@ TRIAGED = {
     ("I_outpatient_surgery", "H9003-006-0", "2"): "the EOC gives one outpatient surgery price, which readers file under outpatient hospitals",
     ("I_outpatient_surgery", "H9003-009-0", "1"): "the reader missed the SB's $0 low end",
     ("I_outpatient_surgery", "H9003-009-0", "2"): "the EOC gives one outpatient surgery price, which readers file under outpatient hospitals",
+    ("M_part_b_drugs", "H2056-003-0", ""): "the EOC prices vaccines at $0 in the words the expert cited for H2056-018-0's 0%",
 }
 
 
@@ -423,7 +548,7 @@ class ExpectedTest(unittest.TestCase):
             self.assertEqual(missed, [], column)
             self.assertTrue(all(shown(cells[p], line) != wanted[p, line] for c, p, line in TRIAGED if c == column))
 
-    def test_every_nonblank_line_cites_a_document(self):
+    def test_every_nonblank_or_cited_line_cites_a_document(self):
         data = years.data_dir(YEAR)
         rows = present.layer_rows(data)
         self.assertTrue(rows and all(r["url"] and r["quote"] for r in rows))
@@ -431,8 +556,8 @@ class ExpectedTest(unittest.TestCase):
         for column in present.COLUMNS:
             self.assertEqual({(r["plan_id"], r["line"]) for r in rows if r["column"] == column},
                              {(p, str(n) if " | " in generated[p][column] else "")
-                              for p, lines in presented_cells(data, column).items()
-                              if (column, p) not in present.HELD for n, v in enumerate(lines, 1) if v})
+                              for p, got in present.lines(data, column).items() if (column, p) not in present.HELD
+                              for n, (v, cited) in enumerate(got, 1) if v or cited})
 
 
 if __name__ == "__main__":

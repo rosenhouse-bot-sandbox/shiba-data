@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "cd39f32cdbd73e52.md",
+ "reply": "```json\n[{\"plan_id\": \"H2406-042-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"any\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$1,000\", \"page\": 5,\n  \"quotes\": [\"$1,000 allowance for all covered dental services\"],\n  \"note\": \"The dental row spans both the in-network and out-of-network columns and says 'Freedom to see any dentist', so I read it as applying in and out of network.\"},\n {\"plan_id\": \"H2406-042-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"any\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 5,\n  \"quotes\": [\"$0 copay for covered preventive services like oral\"],\n  \"note\": \"The dental row spans both the in-network and out-of-network columns and says 'Freedom to see any dentist', so I read it as applying in and out of network.\"},\n {\"plan_id\": \"H2406-042-0\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"any\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 5,\n  \"quotes\": [\"50% coinsurance for covered comprehensive services\"],\n  \"note\": \"The dental row spans both the in-network and out-of-network columns and says 'Freedom to see any dentist', so I read it as applying in and out of network.\"}]\n```",
+ "usage": {
+  "input_tokens": 4010,
+  "output_tokens": 1131,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

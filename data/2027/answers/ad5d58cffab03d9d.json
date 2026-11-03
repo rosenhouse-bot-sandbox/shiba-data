@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "a4bc20077fb4a2cf.md",
+ "reply": "```json\n[{\"plan_id\": \"H3817-011-1\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$45\", \"unit\": \"per provider per day\", \"limit\": \"\", \"page\": 42, \"quotes\": [\"$45 copay per provider per day\"], \"note\": \"\"},\n{\"plan_id\": \"H3817-011-1\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"\", \"limit\": \"\", \"page\": 42, \"quotes\": [\"In-network: $45 copay per provider per day Out-of-network: 50% coinsurance\"], \"note\": \"\"},\n{\"plan_id\": \"H3817-011-1\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per provider per day\", \"limit\": \"\", \"page\": 43, \"quotes\": [\"$0 copay per provider per day\"], \"note\": \"\"},\n{\"plan_id\": \"H3817-011-1\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"\", \"limit\": \"\", \"page\": 43, \"quotes\": [\"$0 copay per provider per day Out-of-network: 50% coinsurance\"], \"note\": \"\"},\n{\"plan_id\": \"H3817-011-1\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"\", \"limit\": \"\", \"page\": 43, \"quotes\": [\"Basic comprehensive dental services: In- and Out-of-network: 50% coinsurance\", \"Major comprehensive dental services: In- and Out-of-network: 50% coinsurance\"], \"note\": \"Both basic (Class II) and major (Class III) comprehensive dental services have the same 50% coinsurance.\"},\n{\"plan_id\": \"H3817-011-1\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"max\", \"amount\": \"$1,000\", \"unit\": \"\", \"limit\": \"per year\", \"page\": 43, \"quotes\": [\"Preventive, basic, and major dental services have a combined $1,000 benefit limit every calendar year.\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 7494,
+  "output_tokens": 2432,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
