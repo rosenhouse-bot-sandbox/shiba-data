@@ -1,8 +1,16 @@
 """Lays out the site's plan sheets as rows of the live Google Sheet."""
+import json
 from dataclasses import dataclass
+
+import facts
 
 SITE = "https://pdxplans.org/"
 TABS = {"main": "Main chart", "dvha": "Dental, vision, hearing, extras"}
+DETAILS = "Details"
+FACT_COLUMNS = {"Plan ID": "plan_id", "Plan": None, "Benefit": "benefit", "Setting": "setting", "Network": "network",
+                "Covered by": "covered_by", "Cost kind": "cost_kind", "Amount": "amount", "Unit": "unit", "Limit": "limit",
+                "Condition": "condition", "Package": "package", "Pool": "pool", "Provider tier": "provider_tier",
+                "Source": "source", "Page": "page", "Quote": None}
 # Keep in sync with --comment and --contradicts in web/static/style.css.
 FILLS = {"note": "FFF6D6", "contradicts": "FFDCB8"}
 HEAD = "EEF1F6"
@@ -60,3 +68,20 @@ def widths(sheet):
 
 def lines(sheet, column):
     return [line for r in sheet["rows"] for line in r["cells"][column["key"]]["value"].split(" | ")] + column["label"].split()
+
+
+def details(site, data_dir):
+    """One row per fact, with its page linked to the PDF."""
+    names = {p["plan_id"]: p["plan_name"] for p in site["plans"]}
+    found = facts.read(data_dir / "machine/document_facts.csv") + facts.read(data_dir / "generated/pbp_facts.csv")
+
+    def cells(f):
+        out = [Cell(f[key] if key else "") for key in FACT_COLUMNS.values()]
+        out[1].value = names.get(f["plan_id"], "")
+        out[-1].value = "\n".join(json.loads(f["quotes"])) if f["quotes"] else ""
+        if f["doc_sha"]:
+            out[list(FACT_COLUMNS).index("Page")].link = f"{SITE}docs/{f['doc_sha']}.pdf#page={f['page']}"
+        return out
+
+    rows_ = sorted((Row("plan", f["plan_id"], cells(f)) for f in found), key=lambda r: [c.value for c in r.cells[:3]])
+    return [Row("header", "", [Cell(h) for h in FACT_COLUMNS])] + rows_

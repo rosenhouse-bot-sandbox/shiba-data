@@ -6,7 +6,8 @@ import unittest
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 import build  # noqa: E402
 import sheet_sync  # noqa: E402
-from sheet_layout import FILLS, SITE, TABS, Cell, Row, rows  # noqa: E402
+from sheet_layout import DETAILS, FILLS, SITE, TABS, Cell, Row, details, rows  # noqa: E402
+import facts  # noqa: E402
 from test_build import data_copy  # noqa: E402
 
 
@@ -170,6 +171,50 @@ class CellDataTest(unittest.TestCase):
         self.assertEqual(section["textFormat"]["foregroundColor"], {"red": 1.0, "green": 1.0, "blue": 1.0})
 
 
+class DetailsTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.site = build.site_data()
+        cls.rows = details(cls.site, build.DATA)
+
+    def test_one_row_per_fact_under_a_header(self):
+        found = facts.read(build.DATA / "machine/document_facts.csv") + facts.read(build.DATA / "generated/pbp_facts.csv")
+        self.assertEqual(self.rows[0].kind, "header")
+        self.assertEqual([c.value for c in self.rows[0].cells][:3], ["Plan ID", "Plan", "Benefit"])
+        self.assertEqual(len(self.rows), len(found) + 1)
+        self.assertEqual(self.rows[1:], sorted(self.rows[1:], key=lambda r: [c.value for c in r.cells[:3]]))
+
+    def test_a_document_facts_page_links_to_its_pdf_page(self):
+        header = [c.value for c in self.rows[0].cells]
+        f = facts.read(build.DATA / "machine/document_facts.csv")[0]
+        row = next(r for r in self.rows if r.key == f["plan_id"] and r.cells[header.index("Quote")].value == "\n".join(
+            __import__("json").loads(f["quotes"])) and r.cells[header.index("Page")].value == f["page"])
+        self.assertEqual(row.cells[header.index("Page")].link, f"{SITE}docs/{f['doc_sha']}.pdf#page={f['page']}")
+        self.assertEqual(row.cells[header.index("Source")].value, f["source"])
+
+    def test_a_pbp_fact_has_no_page_link(self):
+        header = [c.value for c in self.rows[0].cells]
+        pbp = [r for r in self.rows[1:] if r.cells[header.index("Source")].value == "PBP"]
+        self.assertTrue(pbp)
+        self.assertTrue(all(r.cells[header.index("Page")].link is None for r in pbp))
+
+
+class ReplaceTest(unittest.TestCase):
+    def test_writes_every_row_from_the_top_and_trims_the_rest(self):
+        layout = [Row("header", "", [Cell("a"), Cell("b")]), Row("plan", "p", [Cell("1"), Cell("2")])]
+        requests = sheet_sync.replace(grid(["old"], ["", "x", "y", "z"]), layout)
+        self.assertEqual(placed(requests), {(0, 0): "a", (0, 1): "b", (1, 0): "1", (1, 1): "2"})
+        self.assertEqual(trims(requests)["ROWS"]["startIndex"], 2)
+        self.assertEqual(trims(requests)["COLUMNS"]["startIndex"], 2)
+
+    def test_grows_a_small_grid(self):
+        layout = [Row("plan", "p", [Cell(str(i)) for i in range(3)]) for _ in range(5)]
+        requests = sheet_sync.replace(grid([], [], n_rows=2, n_cols=1), layout)
+        grown = {r["appendDimension"]["dimension"]: r["appendDimension"]["length"] for r in requests if "appendDimension" in r}
+        self.assertEqual(grown, {"ROWS": 3, "COLUMNS": 2})
+        self.assertEqual(len(placed(requests)), 15)
+
+
 class FakeApi:
     def __init__(self, tabs):
         self.tabs = dict(tabs)
@@ -197,7 +242,7 @@ class SyncTest(unittest.TestCase):
     def test_adds_missing_tabs_then_fills_them(self):
         api = FakeApi({"Sheet1": []})
         sheet_sync.sync(api, self.site)
-        self.assertEqual([r["addSheet"]["properties"]["title"] for r in api.batches[0]], list(TABS.values()))
+        self.assertEqual([r["addSheet"]["properties"]["title"] for r in api.batches[0]], [*TABS.values(), DETAILS])
         cells = placed(api.batches[1])
         self.assertEqual(cells[(0, 0)], "Plan")
         self.assertEqual(len([1 for (r, c), v in cells.items() if c == 1 and v.startswith("H")]),
@@ -205,15 +250,22 @@ class SyncTest(unittest.TestCase):
 
     def test_rewrites_a_filled_sheet_in_place(self):
         tabs = {tab: [[c.value for c in row.cells] for row in rows(self.site, name)] for name, tab in TABS.items()}
-        api = FakeApi(tabs)
+        api = FakeApi(dict(tabs, **{DETAILS: []}))
         sheet_sync.sync(api, self.site)
-        self.assertEqual(len(api.batches), len(TABS))
+        self.assertFalse([r for batch in api.batches for r in batch if "addSheet" in r])
         cells = placed(api.batches[0])
         main = [[c.value for c in row.cells] for row in rows(self.site, "main")]
         self.assertEqual(cells[(len(main) - 1, len(main[0]) - 1)], main[-1][-1])
         self.assertLess(max(r for r, _ in cells), len(main))
         self.assertFalse([r for r in api.batches[0] if "insertDimension" in r or "appendDimension" in r and
                           r["appendDimension"]["dimension"] == "ROWS"])
+
+    def test_writes_the_details_tab_in_requests_of_a_few_hundred_rows(self):
+        api = FakeApi(dict.fromkeys([*TABS.values(), DETAILS], []))
+        sheet_sync.sync(api, self.site)
+        writes = [batch for batch in api.batches[len(TABS) + 1:]]
+        self.assertTrue(all(len(b) == 1 and len(b[0]["updateCells"]["rows"]) <= sheet_sync.ROWS_PER_WRITE for b in writes))
+        self.assertEqual(sum(len(b[0]["updateCells"]["rows"]) for b in writes), len(details(self.site, build.DATA)))
 
     def test_measures_used_columns_from_the_widest_row(self):
         api = FakeApi({"t": [["Plan", "Plan ID"], [], ["", "", "", "", "x"]]})
