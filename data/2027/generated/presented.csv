@@ -4,10 +4,25 @@ main,H1036-153-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content
 main,H1036-153-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,46,Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance
 main,H1036-153-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,46,Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance
 main,H1036-153-0,AB_ambulance,2,$325,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,46,Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance
+main,H1036-153-0,F_primary_care,,$0,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,12,$0 copayment per visit
+main,H1036-153-0,F_primary_care,,$0,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,12,Primary care office visits
+main,H1036-153-0,F_primary_care,,$0,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,65,"Physician/practitioner services, including doctor's office visits"
+main,H1036-153-0,F_primary_care,,$0,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,65,Provider and Professional Services $0 copayment – PCP's Office
+main,H1036-153-0,G_specialist,,$30,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,12,$30 copayment per visit
+main,H1036-153-0,G_specialist,,$30,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,12,Specialist office visits
+main,H1036-153-0,G_specialist,,$30,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,65,$30 copayment – Specialist's Office
+main,H1036-153-0,G_specialist,,$30,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,65,"Physician/practitioner services, including doctor's office visits"
+main,H1036-153-0,H_inpatient,1,$420,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,55,"$420 copayment per day, days 1 to 4"
+main,H1036-153-0,H_inpatient,2,1-4,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,55,"$420 copayment per day, days 1 to 4"
 main,H1036-153-0,I_outpatient_surgery,1,$0-$395,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,64,Diagnostic Colonoscopy $0 copayment – Ambulatory Surgical Center – Outpatient Hospital
 main,H1036-153-0,I_outpatient_surgery,1,$0-$395,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,64,Surgery Services $395 copayment – Outpatient Hospital
 main,H1036-153-0,I_outpatient_surgery,2,$0-$350,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,64,$350 copayment – Ambulatory Surgical Center
 main,H1036-153-0,I_outpatient_surgery,2,$0-$350,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,64,Diagnostic Colonoscopy $0 copayment – Ambulatory Surgical Center – Outpatient Hospital
+main,H1036-153-0,J_outpatient_rehab,,$35,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,64,Occupational Therapy $35 copayment – Specialist's Office
+main,H1036-153-0,J_outpatient_rehab,,$35,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,64,Physical Therapy $35 copayment – Specialist's Office
+main,H1036-153-0,J_outpatient_rehab,,$35,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,64,Speech Therapy $35 copayment – Specialist's Office
+main,H1036-153-0,K_tests_labs,,$0-$30/$0,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,60,$0 copayment – PCP's Office $30 copayment – Specialist's Office $40 copayment – Urgent Care Center $100 copayment – Outpatient Hospital
+main,H1036-153-0,K_tests_labs,,$0-$30/$0,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,61,Lab Services $0 copayment – PCP's Office – Specialist's Office – Urgent Care Center – Outpatient Hospital – Freestanding Laboratory
 main,H1036-153-0,L_xray_imaging,1,$0-$30,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,60,Basic Radiological Services $0 copayment – PCP's Office
 main,H1036-153-0,L_xray_imaging,1,$0-$30,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,60,Basic Radiological Services $0 copayment – PCP's Office $30 copayment – Specialist's Office
 main,H1036-153-0,L_xray_imaging,2,$205-$330,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,60,$205 copayment – Freestanding Radiological Facility
@@ -17,10 +32,25 @@ main,H1036-306-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content
 main,H1036-306-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,49,In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance
 main,H1036-306-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,49,Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance
 main,H1036-306-0,AB_ambulance,2,$325,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,49,Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance
+main,H1036-306-0,F_primary_care,,$0,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,13,Primary care office visits $0 copayment per visit
+main,H1036-306-0,F_primary_care,,$0,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,69,Provider and Professional Services $0 copayment – PCP's Office
+main,H1036-306-0,G_specialist,,$15,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,13,Specialist office visits $15 copayment per visit
+main,H1036-306-0,G_specialist,,$15,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,69,Provider and Professional Services $0 copayment – PCP's Office $15 copayment – Specialist's Office
+main,H1036-306-0,H_inpatient,1,$290,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,14,$290 copayment per day for days 1 – 4
+main,H1036-306-0,H_inpatient,1,$290,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,58,"$290 copayment per day,"
+main,H1036-306-0,H_inpatient,2,1-4,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,14,$290 copayment per day for days 1 – 4
+main,H1036-306-0,H_inpatient,2,1-4,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,58,"$290 copayment per day,"
 main,H1036-306-0,I_outpatient_surgery,1,$0-$395,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,68,Diagnostic Colonoscopy $0 copayment – Ambulatory Surgical Center – Outpatient Hospital
 main,H1036-306-0,I_outpatient_surgery,1,$0-$395,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,68,Surgery Services $395 copayment – Outpatient Hospital
 main,H1036-306-0,I_outpatient_surgery,2,$0-$100,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,68,$100 copayment – Ambulatory Surgical Center
 main,H1036-306-0,I_outpatient_surgery,2,$0-$100,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,68,Diagnostic Colonoscopy $0 copayment – Ambulatory Surgical Center
+main,H1036-306-0,J_outpatient_rehab,,$35,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,67,Occupational Therapy $35 copayment – Specialist's Office
+main,H1036-306-0,J_outpatient_rehab,,$35,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,67,Physical Therapy $35 copayment – Specialist's Office
+main,H1036-306-0,J_outpatient_rehab,,$35,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,67,Speech Therapy $35 copayment – Specialist's Office
+main,H1036-306-0,K_tests_labs,,$0-$140/$0,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,63,Diagnostic Procedures and Tests $0 copayment – PCP's Office
+main,H1036-306-0,K_tests_labs,,$0-$140/$0,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,63,Diagnostic Procedures and Tests $0 copayment – PCP's Office $15 copayment – Specialist's Office
+main,H1036-306-0,K_tests_labs,,$0-$140/$0,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,64,$140 copayment – Outpatient Hospital
+main,H1036-306-0,K_tests_labs,,$0-$140/$0,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,65,Lab Services $0 copayment – PCP's Office – Specialist's Office – Urgent Care Center – Outpatient Hospital – Freestanding Laboratory
 main,H1036-306-0,L_xray_imaging,1,$0-$15,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,63,Basic Radiological Services $0 copayment – PCP's Office
 main,H1036-306-0,L_xray_imaging,1,$0-$15,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,64,$15 copayment – Specialist's Office $45 copayment
 main,H1036-306-0,L_xray_imaging,2,$205-$330,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,63,$205 copayment – Freestanding Radiological Facility
@@ -31,10 +61,21 @@ main,H1036-317-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content
 main,H1036-317-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,51,Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance
 main,H1036-317-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,51,Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance
 main,H1036-317-0,AB_ambulance,2,$325,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,51,Out-of-Network: Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance
+main,H1036-317-0,F_primary_care,,$0,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,13,Primary care office visits $0 copayment per visit
+main,H1036-317-0,F_primary_care,,$0,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,70,Provider and Professional Services $0 copayment – PCP's Office
+main,H1036-317-0,G_specialist,,20%,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,13,Specialist office visits 20% of the total cost per visit
+main,H1036-317-0,G_specialist,,20%,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,70,20% coinsurance – Specialist's Office
+main,H1036-317-0,H_inpatient,,"$2,241 per admission",https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,14,"$2,241 copayment per stay"
+main,H1036-317-0,H_inpatient,,"$2,241 per admission",https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,60,$2241 copayment per admission
 main,H1036-317-0,I_outpatient_surgery,1,$0-20%,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,69,Diagnostic Colonoscopy $0 copayment – Ambulatory Surgical Center – Outpatient Hospital
 main,H1036-317-0,I_outpatient_surgery,1,$0-20%,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,69,Surgery Services 20% coinsurance – Outpatient Hospital
 main,H1036-317-0,I_outpatient_surgery,2,$0-20%,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,69,Diagnostic Colonoscopy $0 copayment – Ambulatory Surgical Center
 main,H1036-317-0,I_outpatient_surgery,2,$0-20%,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,69,Surgery Services 20% coinsurance – Outpatient Hospital – Ambulatory Surgical Center
+main,H1036-317-0,J_outpatient_rehab,,20%,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,68,Physical Therapy 20% coinsurance – Specialist's Office
+main,H1036-317-0,J_outpatient_rehab,,20%,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,68,Speech Therapy 20% coinsurance – Specialist's Office
+main,H1036-317-0,J_outpatient_rehab,,20%,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,69,Occupational Therapy 20% coinsurance – Specialist's Office
+main,H1036-317-0,K_tests_labs,,$0-20%/$0,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,65,$0 copayment – PCP's Office 20% coinsurance – Specialist's Office – Outpatient Hospital $40 copayment
+main,H1036-317-0,K_tests_labs,,$0-20%/$0,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,66,Lab Services $0 copayment – PCP's Office – Specialist's Office – Urgent Care Center – Outpatient Hospital – Freestanding Laboratory
 main,H1036-317-0,L_xray_imaging,1,$0-20%,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,65,Basic Radiological Services $0 copayment – PCP's Office
 main,H1036-317-0,L_xray_imaging,1,$0-20%,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,65,Basic Radiological Services $0 copayment – PCP's Office 20% coinsurance – Specialist's Office – Outpatient Hospital – Freestanding Radiological Facility
 main,H1036-317-0,L_xray_imaging,2,$205-$330,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,65,$205 copayment – Freestanding Radiological Facility
@@ -44,37 +85,92 @@ main,H1036-323-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content
 main,H1036-323-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,48,In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance
 main,H1036-323-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,48,Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance
 main,H1036-323-0,AB_ambulance,2,$325,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,48,Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance
+main,H1036-323-0,F_primary_care,,$0,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,12,Primary care office visits $0 copayment per visit
+main,H1036-323-0,F_primary_care,,$0,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,67,Provider and Professional Services $0 copayment – PCP's Office
+main,H1036-323-0,G_specialist,,$50,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,12,Specialist office visits $50 copayment per visit
+main,H1036-323-0,G_specialist,,$50,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,67,$50 copayment – Specialist's Office
+main,H1036-323-0,H_inpatient,1,$515,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,12,$515 copayment per day for days 1 – 4
+main,H1036-323-0,H_inpatient,1,$515,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,57,"$515 copayment per day,"
+main,H1036-323-0,H_inpatient,2,1-4,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,12,$515 copayment per day for days 1 – 4
+main,H1036-323-0,H_inpatient,2,1-4,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,57,"$515 copayment per day,"
 main,H1036-323-0,I_outpatient_surgery,1,$0-$450,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,66,Diagnostic Colonoscopy $0 copayment – Ambulatory Surgical Center – Outpatient Hospital
 main,H1036-323-0,I_outpatient_surgery,1,$0-$450,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,66,Surgery Services $450 copayment – Outpatient Hospital
 main,H1036-323-0,I_outpatient_surgery,2,$0-$350,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,66,$350 copayment – Ambulatory Surgical Center
 main,H1036-323-0,I_outpatient_surgery,2,$0-$350,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,66,Diagnostic Colonoscopy $0 copayment – Ambulatory Surgical Center – Outpatient Hospital
+main,H1036-323-0,J_outpatient_rehab,,$35,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,66,Occupational Therapy $35 copayment – Specialist's Office
+main,H1036-323-0,J_outpatient_rehab,,$35,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,66,Physical Therapy $35 copayment – Specialist's Office
+main,H1036-323-0,J_outpatient_rehab,,$35,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,66,Speech Therapy $35 copayment – Specialist's Office
+main,H1036-323-0,K_tests_labs,,$0-$50/$0,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,62,Diagnostic Procedures and Tests $0 copayment – PCP's Office
+main,H1036-323-0,K_tests_labs,,$0-$50/$0,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,62,Diagnostic Procedures and Tests $0 copayment – PCP's Office $50 copayment – Specialist's Office
+main,H1036-323-0,K_tests_labs,,$0-$50/$0,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,63,Lab Services $0 copayment – PCP's Office – Specialist's Office – Urgent Care Center – Outpatient Hospital – Freestanding Laboratory
 main,H1036-323-0,L_xray_imaging,1,$0-$50,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,62,Basic Radiological Services $0 copayment – PCP's Office
 main,H1036-323-0,L_xray_imaging,1,$0-$50,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,62,Basic Radiological Services $0 copayment – PCP's Office $50 copayment – Specialist's Office
 main,H1036-323-0,L_xray_imaging,2,$205-$330,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,62,$205 copayment – Freestanding Radiological Facility
 main,H1036-323-0,L_xray_imaging,2,$205-$330,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,62,Advanced Imaging Services $330 copayment – PCP's Office – Specialist's Office
 main,H1372-003-0,AB_ambulance,1,$250 or 20%,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,52,$250 copayment for each Medicare-covered Ground Ambulance service.
 main,H1372-003-0,AB_ambulance,1,$250 or 20%,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,52,20% coinsurance for each Medicare-covered Air Ambulance service.
+main,H1372-003-0,F_primary_care,,$0,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,10,Primary care office visits $0 copayment
+main,H1372-003-0,G_specialist,,$0-$20,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,10,"$0 copayment for cardiologist, endocrinologist, vascular surgery consultation, or cardiothoracic surgery consultation"
+main,H1372-003-0,G_specialist,,$0-$20,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,10,$20 copayment for all other services
+main,H1372-003-0,G_specialist,,$0-$20,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,10,Specialist office visits $0-$20 copayment
+main,H1372-003-0,G_specialist,,$0-$20,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,87,"$0 copayment for cardiologist, endocrinologist, vascular surgery consultation, or cardiothoracic surgery consultation"
+main,H1372-003-0,G_specialist,,$0-$20,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,87,$20 copayment for all other services
+main,H1372-003-0,G_specialist,,$0-$20,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,87,"Consultation, diagnosis, and treatment by a specialist $0-$20 copayment"
+main,H1372-003-0,H_inpatient,1,$325,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,69,$325 copayment per day for days 1-7
+main,H1372-003-0,H_inpatient,2,1-7,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,69,$325 copayment per day for days 1-7
 main,H1372-003-0,I_outpatient_surgery,1,$0-20%,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,85,$0 copayment for diagnostic colonoscopy and polyp removal
 main,H1372-003-0,I_outpatient_surgery,1,$0-20%,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,85,20% coinsurance for surgery
 main,H1372-003-0,I_outpatient_surgery,2,20%,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,85,Services provided at an ambulatory surgical center 20% coinsurance
+main,H1372-003-0,J_outpatient_rehab,,$0,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,84,$0 copayment $0 copayment
+main,H1372-003-0,J_outpatient_rehab,,$0,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,84,Services provided by a physical therapist or speech language therapist
+main,H1372-003-0,J_outpatient_rehab,,$0,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,84,Services provided by an occupational therapist $0 copayment
+main,H1372-003-0,K_tests_labs,,$0-20%/$0,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,78,Laboratory tests $0 copayment
+main,H1372-003-0,K_tests_labs,,$0-20%/$0,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,79,Diagnostic tests and procedures (non-radiological services) 20% coinsurance
+main,H1372-003-0,K_tests_labs,,$0-20%/$0,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,85,$0 copayment for diagnostic colonoscopy and polyp removal
 main,H1372-003-0,L_xray_imaging,1,20%,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,78,X-rays 20% coinsurance
 main,H1372-003-0,L_xray_imaging,2,20%,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,79,"Diagnostic non-laboratory tests such as CT scans, MRIs, EKGs, and PET scans when your doctor or other health care provider orders them to treat a medical problem."
 main,H1372-003-0,L_xray_imaging,2,20%,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,79,pocket maximum. 20% coinsurance You pay these amounts
 main,H2001-045-0,AB_ambulance,1,20%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,59,$0 copayment or 20% coinsurance or each one-way Medicare-covered air trip
 main,H2001-045-0,AB_ambulance,1,20%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,59,$0 copayment or 20% coinsurance or each one-way Medicare-covered ground trip
 main,H2001-045-0,AB_ambulance,2,not covered,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,59,ambulance transportation is not covered under any circumstances
+main,H2001-045-0,F_primary_care,1,20%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,13,Primary care office visits
+main,H2001-045-0,F_primary_care,1,20%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,13,or 20% coinsurance per visit (in-
+main,H2001-045-0,F_primary_care,1,20%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,99,"Depending on your level o Medicaid eligibility, $0 copayment or 20% coinsurance or services rom a primary care physician"
+main,H2001-045-0,F_primary_care,2,30%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,13,30% coinsurance per visit (out-o -
+main,H2001-045-0,F_primary_care,2,30%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,13,Primary care office visits
+main,H2001-045-0,F_primary_care,2,30%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,99,30% coinsurance or services rom a primary care physician
+main,H2001-045-0,G_specialist,1,20%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,100,"Depending on your level o Medicaid eligibility, $0 copayment or 20% coinsurance or services rom a specialist"
+main,H2001-045-0,G_specialist,2,30%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,100,30% coinsurance or services rom a specialist
+main,H2001-045-0,H_inpatient,,"$1,980 per admission",https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,14,"$1,980 copayment or each"
+main,H2001-045-0,H_inpatient,,"$1,980 per admission",https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,77,"copayment or $1,980"
 main,H2001-045-0,I_outpatient_surgery,1,$0-20%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,95,$0 copayment or a colonoscopy at an outpatient hospital.
 main,H2001-045-0,I_outpatient_surgery,1,$0-20%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,95,"Depending on your level o Medicaid eligibility, $0 copayment or 20% coinsurance or Medicare-covered surgery or other services provided to you at an outpatient hospital,"
 main,H2001-045-0,I_outpatient_surgery,2,$0-20%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0412518_000,3,Ambulatory surgical $0 copay for a
 main,H2001-045-0,I_outpatient_surgery,2,$0-20%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,95,"Depending on your level o Medicaid eligibility,$0 copayment or 20% coinsurance or Medicare-covered surgery or other services provided to you at an ambulatory surgical center,"
+main,H2001-045-0,J_outpatient_rehab,,20%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,93,copayment or 20% coinsurance or each Medicare-covered physical therapy and speech-language therapy visit.
+main,H2001-045-0,J_outpatient_rehab,,20%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,94,copayment or 20% coinsurance or each Medicare-covered occupational therapy visit.
+main,H2001-045-0,K_tests_labs,,20%/$0,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,87,Laboratory tests $0 copayment or
+main,H2001-045-0,K_tests_labs,,20%/$0,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,88,"Depending on your level o Medicaid eligibility, $0 copayment or 20% coinsurance or Medicare-covered non-radiological diagnostic services."
 main,H2001-045-0,L_xray_imaging,1,20%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,86,"eligibility,$0 copayment or 20% coinsurance or each Medicare-covered"
 main,H2001-045-0,L_xray_imaging,2,$0-20%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,89,$0 copayment or each diagnostic mammogram
 main,H2001-045-0,L_xray_imaging,2,$0-20%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,89,"copayment or 20% coinsurance or other Medicare-covered radiological diagnostic services, not including X-rays."
 main,H2056-003-0,AB_ambulance,1,$295 or 20%,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,40,$295 copay for each Medicare‑covered
 main,H2056-003-0,AB_ambulance,1,$295 or 20%,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,40,20% coinsurance for each
 main,H2056-003-0,AB_ambulance,2,$295,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,47,$295 copay for one‑way emergency
+main,H2056-003-0,F_primary_care,,$0,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,62,$0 copay for Medicare‑covered primary care provider (PCP) services
+main,H2056-003-0,F_primary_care,,$0,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,7,Primary care office visits $0 per visit
+main,H2056-003-0,G_specialist,,$65,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,63,$65 copay for Medicare‑covered physician specialist services (including surgery
+main,H2056-003-0,G_specialist,,$65,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,8,Specialist office visits $65 per visit
+main,H2056-003-0,H_inpatient,1,$550,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,52,"$550 per day, days 1‑5"
+main,H2056-003-0,H_inpatient,2,1-5,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,52,"$550 per day, days 1‑5"
 main,H2056-003-0,I_outpatient_surgery,1,$500,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,62,"$500 copay, after your $750 plan deductible"
 main,H2056-003-0,I_outpatient_surgery,2,$450,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,62,"$450 copay, after your $750 plan deductible"
+main,H2056-003-0,J_outpatient_rehab,,$50-$65,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,61,$50 copay for each Medicare‑covered occupational therapy service.
+main,H2056-003-0,J_outpatient_rehab,,$50-$65,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,61,$65 copay for each Medicare‑covered physical and speech therapy service.
+main,H2056-003-0,K_tests_labs,,$0-$35/$0-$35,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,58,$0 copay for certain Medicare‑covered diagnostic tests and services
+main,H2056-003-0,K_tests_labs,,$0-$35/$0-$35,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,58,$0 copay for certain Medicare‑covered lab services
+main,H2056-003-0,K_tests_labs,,$0-$35/$0-$35,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,58,$35 copay for each Medicare‑covered diagnostic procedure and test.
+main,H2056-003-0,K_tests_labs,,$0-$35/$0-$35,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,58,$35 copay for each Medicare‑covered lab service.
 main,H2056-003-0,L_xray_imaging,1,$15,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,58,$15 copay for each Medicare‑covered x‑ray.
 main,H2056-003-0,L_xray_imaging,2,$0-$350,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,41,$0 copay for each diagnostic mammogram.
 main,H2056-003-0,L_xray_imaging,2,$0-$350,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,58,$350 copay for each Medicare‑covered CT scan.
@@ -85,8 +181,21 @@ main,H2056-018-0,AB_ambulance,1,$245 or 20%,https://www.aetna.com/medicare/docum
 main,H2056-018-0,AB_ambulance,1,$245 or 20%,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,31,one‑way trip via ground ambulance.
 main,H2056-018-0,AB_ambulance,2,$245,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,39,$245 copay for one‑way emergency
 main,H2056-018-0,AB_ambulance,2,$245,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,39,"ambulance services worldwide (i.e.,"
+main,H2056-018-0,F_primary_care,,$0,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,53,$0 copay for Medicare‑covered primary
+main,H2056-018-0,F_primary_care,,$0,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,6,$0 per visit
+main,H2056-018-0,F_primary_care,,$0,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,6,Primary care office visits
+main,H2056-018-0,G_specialist,,$40,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,53,$40 copay for Medicare‑covered
+main,H2056-018-0,G_specialist,,$40,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,6,$40 per visit
+main,H2056-018-0,G_specialist,,$40,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,6,Specialist office visits
+main,H2056-018-0,H_inpatient,1,$325,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,43,"$325 per day, days 1‑5"
+main,H2056-018-0,H_inpatient,2,1-5,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,43,"$325 per day, days 1‑5"
 main,H2056-018-0,I_outpatient_surgery,1,$325,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,52,$325 copay for each Medicare‑covered outpatient surgery at an outpatient hospital facility.
 main,H2056-018-0,I_outpatient_surgery,2,$275,https://www.aetna.com/medicare/documents/individual/2027/sb/en/Y0001_H2056_018_NS45_SB2027_M.pdf,3,Ambulatory surgical center $275 copay
+main,H2056-018-0,J_outpatient_rehab,,$40,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,52,$40 copay for each Medicare‑covered occupational therapy service.
+main,H2056-018-0,J_outpatient_rehab,,$40,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,52,$40 copay for each Medicare‑covered physical and speech therapy service.
+main,H2056-018-0,K_tests_labs,,$0-$20/$0,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,49,"$0 copay for certain Medicare‑covered diagnostic tests and services including retinal fundus, spirometry, and peripheral arterial disease (PAD) testing."
+main,H2056-018-0,K_tests_labs,,$0-$20/$0,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,49,$0 copay for each Medicare‑covered lab service.
+main,H2056-018-0,K_tests_labs,,$0-$20/$0,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,49,$20 copay for each Medicare‑covered diagnostic procedure and test.
 main,H2056-018-0,L_xray_imaging,1,$10,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,49,$10 copay for each Medicare‑covered x‑ray.
 main,H2056-018-0,L_xray_imaging,2,$0-$275,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,32,$0 copay for each diagnostic mammogram.
 main,H2056-018-0,L_xray_imaging,2,$0-$275,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,49,$275 copay for each Medicare‑covered CT
@@ -94,30 +203,85 @@ main,H2056-018-0,L_xray_imaging,2,$0-$275,https://www.aetna.com/medicare/documen
 main,H2406-042-0,AB_ambulance,1,$290,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,52,$290 copayment or each one-way Medicare- covered air trip.
 main,H2406-042-0,AB_ambulance,1,$290,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,52,$290 copayment or each one-way Medicare- covered ground trip (in-network).
 main,H2406-042-0,AB_ambulance,2,not covered,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,52,"Outside o the United States or its territories, ambulance transportation is not covered under any circumstances."
+main,H2406-042-0,F_primary_care,1,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,12,$0 copayment per visit (in-
+main,H2406-042-0,F_primary_care,1,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,12,Primary care office visits
+main,H2406-042-0,F_primary_care,1,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,88,$0 copayment or services rom a primary care physician
+main,H2406-042-0,F_primary_care,2,$25,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,12,$25 copayment per visit (out-o -
+main,H2406-042-0,F_primary_care,2,$25,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,12,Primary care office visits
+main,H2406-042-0,F_primary_care,2,$25,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,88,$25 copayment or services rom a primary care physician
+main,H2406-042-0,G_specialist,1,$50,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,12,$50 copayment per visit (in-
+main,H2406-042-0,G_specialist,1,$50,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,12,Specialist office visits
+main,H2406-042-0,G_specialist,1,$50,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,89,$50 copayment or services rom a specialist
+main,H2406-042-0,G_specialist,2,$80,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,12,$80 copayment per visit (out-o -
+main,H2406-042-0,G_specialist,2,$80,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,12,Specialist office visits
+main,H2406-042-0,G_specialist,2,$80,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,89,$80 copayment or services rom a specialist
+main,H2406-042-0,H_inpatient,1,$550,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,12,$550 copayment each day or days 1 to 5 (in-network).
+main,H2406-042-0,H_inpatient,2,1-5,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,12,$550 copayment each day or days 1 to 5 (in-network).
 main,H2406-042-0,I_outpatient_surgery,1,$0-$550,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,86,$0 copayment or a colonoscopy at an outpatient hospital.
 main,H2406-042-0,I_outpatient_surgery,1,$0-$550,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,86,$550 copayment or Medicare-covered surgery or other services provided to you at an outpatient hospital
 main,H2406-042-0,I_outpatient_surgery,2,$0-$400,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,85,$0 copayment or a colonoscopy at an
 main,H2406-042-0,I_outpatient_surgery,2,$0-$400,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,86,$400 copayment or Medicare-covered surgery or other services provided to you at an ambulatory surgical center
+main,H2406-042-0,J_outpatient_rehab,,$50,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,85,$50 copayment or each Medicare- covered occupational therapy visit.
+main,H2406-042-0,J_outpatient_rehab,,$50,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,85,$50 copayment or each Medicare- covered physical therapy and speech- language therapy visit.
+main,H2406-042-0,K_tests_labs,,$10/$0,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,79,Laboratory tests $0 copayment or
+main,H2406-042-0,K_tests_labs,,$10/$0,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,80,$10 copayment or Medicare-covered non-radiological diagnostic
 main,H2406-042-0,L_xray_imaging,1,$15,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,79,$15 copayment or each Medicare- covered standard X- ray service.
 main,H2406-042-0,L_xray_imaging,2,$0-$320,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,80,$0 copayment or each diagnostic mammogram.
 main,H2406-042-0,L_xray_imaging,2,$0-$320,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,81,"$320 copayment or other Medicare- covered radiological diagnostic services, not including X-rays."
 main,H2406-070-0,AB_ambulance,1,$350,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,52,$350 copayment or each one-way Medicare- covered air trip.
 main,H2406-070-0,AB_ambulance,1,$350,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,52,$350 copayment or each one-way Medicare- covered ground trip (in-network).
 main,H2406-070-0,AB_ambulance,2,not covered,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,52,"Outside o the United States or its territories, ambulance transportation is not covered under any circumstances."
+main,H2406-070-0,F_primary_care,1,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,12,$0 copayment per visit (in-
+main,H2406-070-0,F_primary_care,1,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,12,Primary care office visits
+main,H2406-070-0,F_primary_care,1,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,88,$0 copayment or
+main,H2406-070-0,F_primary_care,1,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,88,Medically-necessary medical or surgical services you get in a physician’s office.
+main,H2406-070-0,F_primary_care,2,$25,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,12,$25 copayment per visit (out-o -
+main,H2406-070-0,F_primary_care,2,$25,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,12,Primary care office visits
+main,H2406-070-0,F_primary_care,2,$25,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,88,$25 copayment or
+main,H2406-070-0,F_primary_care,2,$25,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,88,Medically-necessary medical or surgical services you get in a physician’s office.
+main,H2406-070-0,G_specialist,1,$70,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,12,$70 copayment per visit (in-
+main,H2406-070-0,G_specialist,1,$70,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,12,Specialist office visits
+main,H2406-070-0,G_specialist,1,$70,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,88,$70 copayment or
+main,H2406-070-0,G_specialist,1,$70,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,88,"Consultation, diagnosis, and treatment by a specialist."
+main,H2406-070-0,G_specialist,2,$90,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,12,$90 copayment per visit (out-o -
+main,H2406-070-0,G_specialist,2,$90,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,12,Specialist office visits
+main,H2406-070-0,G_specialist,2,$90,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,88,$90 copayment or
+main,H2406-070-0,G_specialist,2,$90,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,88,"Consultation, diagnosis, and treatment by a specialist."
+main,H2406-070-0,H_inpatient,1,$835,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,12,$835 copayment each day or days 1 to 3 (in-network).
+main,H2406-070-0,H_inpatient,2,1-3,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,12,$835 copayment each day or days 1 to 3 (in-network).
 main,H2406-070-0,I_outpatient_surgery,1,$0-$835,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,86,$0 copayment or a colonoscopy at an outpatient hospital.
 main,H2406-070-0,I_outpatient_surgery,1,$0-$835,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,86,$835 copayment or Medicare-covered surgery or other services provided to you at an outpatient hospital
 main,H2406-070-0,I_outpatient_surgery,2,$0-$785,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,85,$0 copayment or a colonoscopy at an ambulatory surgical center.
 main,H2406-070-0,I_outpatient_surgery,2,$0-$785,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,85,$785 copayment or Medicare-covered surgery or other services provided to you at an ambulatory surgical center
+main,H2406-070-0,J_outpatient_rehab,,$50-$60,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,84,$50 copayment or each Medicare- covered occupational therapy visit.
+main,H2406-070-0,J_outpatient_rehab,,$50-$60,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,84,$60 copayment or each Medicare- covered physical therapy and speech- language therapy visit.
 main,H2406-070-0,L_xray_imaging,1,$30,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,78,$30 copayment or each Medicare- covered standard X- ray service
 main,H2406-070-0,L_xray_imaging,2,$0-$320,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,80,$0 copayment or each diagnostic mammogram
 main,H2406-070-0,L_xray_imaging,2,$0-$320,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,80,"$320 copayment or other Medicare- covered radiological diagnostic services, not including X-rays"
 main,H2406-073-0,AB_ambulance,1,$350,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,41,$350 copayment or each one-way Medicare- covered air trip.
 main,H2406-073-0,AB_ambulance,1,$350,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,41,$350 copayment or each one-way Medicare- covered ground trip (in-network).
 main,H2406-073-0,AB_ambulance,2,not covered,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,41,"Outside o the United States or its territories, ambulance transportation is not covered under any circumstances."
+main,H2406-073-0,F_primary_care,1,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,10,$0 copayment per visit (in-
+main,H2406-073-0,F_primary_care,1,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,10,Primary care office visits
+main,H2406-073-0,F_primary_care,2,$25,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,10,$25 copayment per visit (out-o -
+main,H2406-073-0,F_primary_care,2,$25,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,10,Primary care office visits
+main,H2406-073-0,G_specialist,1,$60,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,10,$60 copayment per visit (in-
+main,H2406-073-0,G_specialist,1,$60,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,10,Specialist office visits
+main,H2406-073-0,G_specialist,2,$80,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,10,$80 copayment per visit (out-o -
+main,H2406-073-0,G_specialist,2,$80,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,10,Specialist office visits
+main,H2406-073-0,H_inpatient,1,$610,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,58,$610 copayment each
+main,H2406-073-0,H_inpatient,1,$610,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,58,day or days 1-4 or
+main,H2406-073-0,H_inpatient,2,1-4,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,58,$610 copayment each
+main,H2406-073-0,H_inpatient,2,1-4,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,58,day or days 1-4 or
 main,H2406-073-0,I_outpatient_surgery,1,$0-$610,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,74,$0 copayment or a colonoscopy at an outpatient hospital.
 main,H2406-073-0,I_outpatient_surgery,1,$0-$610,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,75,$610 copayment or Medicare-covered surgery or other services provided to you at an outpatient hospital
 main,H2406-073-0,I_outpatient_surgery,2,$0-$610,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,74,$0 copayment or a colonoscopy at an ambulatory surgical center.
 main,H2406-073-0,I_outpatient_surgery,2,$0-$610,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,74,$610 copayment or Medicare-covered surgery or other services provided to you at an ambulatory surgical center
+main,H2406-073-0,J_outpatient_rehab,,$50-$60,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,73,$50 copayment or each Medicare- covered occupational therapy visit.
+main,H2406-073-0,J_outpatient_rehab,,$50-$60,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,73,$60 copayment or each Medicare- covered physical therapy and speech- language therapy visit.
+main,H2406-073-0,K_tests_labs,,$50/$0,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,68,$50 copayment or Medicare-covered non-radiological diagnostic services.
+main,H2406-073-0,K_tests_labs,,$50/$0,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,68,Laboratory tests $0 copayment or
+main,H2406-073-0,K_tests_labs,,$50/$0,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,68,Other outpatient diagnostic tests - non- $50 copayment or
 main,H2406-073-0,L_xray_imaging,1,$30,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,67,$30 copayment or each Medicare- covered standard X- ray service.
 main,H2406-073-0,L_xray_imaging,2,$0-$320,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,69,$0 copayment or each diagnostic mammogram.
 main,H2406-073-0,L_xray_imaging,2,$0-$320,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,69,"$320 copayment or other Medicare- covered radiological diagnostic services, not including X-rays."
@@ -126,10 +290,27 @@ main,H2923-001-0,AB_ambulance,1,$0-$315 or 20%,https://assets.devoted.com/plan-d
 main,H2923-001-0,AB_ambulance,1,$0-$315 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,54,You pay $0 copay for facility-to-
 main,H2923-001-0,AB_ambulance,2,$315 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,54,Ground Ambulance: $315 copay per one-way trip
 main,H2923-001-0,AB_ambulance,2,$315 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,55,Air Ambulance: 20% coinsurance per one-way trip
+main,H2923-001-0,F_primary_care,,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,11,Primary care office visits $0 copay per visit
+main,H2923-001-0,F_primary_care,,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,96,Services from a primary care physician (PCP): $0 copay
+main,H2923-001-0,G_specialist,,$40,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,11,Specialist office visits $40 copay per visit
+main,H2923-001-0,G_specialist,,$40,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,96,Services from a specialist: $40 copay
+main,H2923-001-0,H_inpatient,1,$465,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,11,You pay $465 per day for days 1
+main,H2923-001-0,H_inpatient,1,$465,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,79,You pay $465 per day for days 1
+main,H2923-001-0,H_inpatient,2,1-5,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,11,You pay $465 per day for days 1
+main,H2923-001-0,H_inpatient,2,1-5,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,79,You pay $465 per day for days 1
 main,H2923-001-0,I_outpatient_surgery,1,$0-$565,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,90,Diagnostic Colonoscopies At an Office or Freestanding location: $0 copay At an Outpatient hospital: $0 copay
 main,H2923-001-0,I_outpatient_surgery,1,$0-$565,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,93,$565 copay for outpatient procedures/surgery at an Outpatient Hospital
 main,H2923-001-0,I_outpatient_surgery,2,$0-$465,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,90,Diagnostic Colonoscopies At an Office or Freestanding location: $0 copay At an Outpatient hospital: $0 copay At an Ambulatory Surgical Center (ASC): $0 copay
 main,H2923-001-0,I_outpatient_surgery,2,$0-$465,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,93,$465 copay for outpatient procedures/surgery at an ASC - facility
+main,H2923-001-0,J_outpatient_rehab,,$20-$40,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,91,Home or Office location: $20
+main,H2923-001-0,J_outpatient_rehab,,$20-$40,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,92,Office location: $20 copay
+main,H2923-001-0,J_outpatient_rehab,,$20-$40,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,92,Office location: $40 copay
+main,H2923-001-0,K_tests_labs,,$0-$40/$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,86,Diagnostic Procedures and Tests PCP's office: $0 copay
+main,H2923-001-0,K_tests_labs,,$0-$40/$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,86,Specialist's office: $20 copay
+main,H2923-001-0,K_tests_labs,,$0-$40/$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,87,Advanced Laboratory Services Office or freestanding location: $0 copay
+main,H2923-001-0,K_tests_labs,,$0-$40/$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,87,Office or freestanding location: $0 copay Dedicated testing laboratory: $0 copay Outpatient hospital: $0 copay
+main,H2923-001-0,K_tests_labs,,$0-$40/$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-SB-H2923-001-ENG.pdf,5,Diagnostic Tests and Procedures (such as a stress
+main,H2923-001-0,K_tests_labs,,$0-$40/$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-SB-H2923-001-ENG.pdf,5,Office or freestanding location: $0 - $40 copay
 main,H2923-001-0,L_xray_imaging,1,$25,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,88,X-rays PCP's office: $25 copay Specialist's office: $25 copay Freestanding location: $25 copay Outpatient hospital: $75 copay
 main,H2923-001-0,L_xray_imaging,2,$100-$200,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,86,CT Scans Office or Freestanding location: $100 copay Outpatient hospital: $200 copay
 main,H2923-001-0,L_xray_imaging,2,$100-$200,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,87,MRIs Office or Freestanding location: $100 copay Outpatient hospital: $200 copay
@@ -139,10 +320,24 @@ main,H2923-005-0,AB_ambulance,1,$0-$315 or 20%,https://assets.devoted.com/plan-d
 main,H2923-005-0,AB_ambulance,1,$0-$315 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,55,You pay $0 copay for facility-to-
 main,H2923-005-0,AB_ambulance,2,$315 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,55,Ground Ambulance: $315 copay per one-way trip
 main,H2923-005-0,AB_ambulance,2,$315 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,56,Air Ambulance: 20%
+main,H2923-005-0,F_primary_care,,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,98,Services from a primary care physician (PCP): $0 copay
+main,H2923-005-0,G_specialist,,$40,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,98,Services from a specialist: $40 copay
+main,H2923-005-0,H_inpatient,1,$445,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,11,You pay $445 per day for days 1
+main,H2923-005-0,H_inpatient,1,$445,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,81,You pay $445 per day for days 1
+main,H2923-005-0,H_inpatient,2,1-5,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,11,You pay $445 per day for days 1
+main,H2923-005-0,H_inpatient,2,1-5,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,81,You pay $445 per day for days 1
 main,H2923-005-0,I_outpatient_surgery,1,$0-$475,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,92,Diagnostic Colonoscopies At an Office or Freestanding location: $0 copay At an Outpatient hospital: $0 copay
 main,H2923-005-0,I_outpatient_surgery,1,$0-$475,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,95,$475 copay for outpatient procedures/surgery at an Outpatient Hospital
 main,H2923-005-0,I_outpatient_surgery,2,$0-$375,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,92,Diagnostic Colonoscopies At an Office or Freestanding location: $0 copay At an Outpatient hospital: $0 copay At an Ambulatory Surgical Center (ASC): $0 copay
 main,H2923-005-0,I_outpatient_surgery,2,$0-$375,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,95,$375 copay for outpatient procedures/surgery at an ASC - facility
+main,H2923-005-0,J_outpatient_rehab,,$40,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,93,Home or Office location: $40
+main,H2923-005-0,J_outpatient_rehab,,$40,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,94,Occupational Therapy Office location: $40 copay
+main,H2923-005-0,J_outpatient_rehab,,$40,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,94,Speech Therapy Office location: $40 copay
+main,H2923-005-0,K_tests_labs,,$0-$40/$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,88,Diagnostic Procedures and Tests PCP's office: $0 copay
+main,H2923-005-0,K_tests_labs,,$0-$40/$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,88,Specialist's office: $20 copay
+main,H2923-005-0,K_tests_labs,,$0-$40/$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,88,Specialist's office: $20 copay Freestanding location: $40 copay
+main,H2923-005-0,K_tests_labs,,$0-$40/$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,89,Advanced Laboratory Services Office or freestanding location: $0 copay
+main,H2923-005-0,K_tests_labs,,$0-$40/$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,89,Office or freestanding location: $0 copay Dedicated testing laboratory: $0 copay Outpatient hospital: $0 copay
 main,H2923-005-0,L_xray_imaging,1,$25,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,90,X-rays PCP's office: $25 copay
 main,H2923-005-0,L_xray_imaging,1,$25,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,90,X-rays PCP's office: $25 copay Specialist's office: $25 copay
 main,H2923-005-0,L_xray_imaging,1,$25,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,90,X-rays PCP's office: $25 copay Specialist's office: $25 copay Freestanding location: $25 copay
@@ -153,8 +348,14 @@ main,H2923-009-0,AB_ambulance,1,50%,https://assets.devoted.com/plan-documents/20
 main,H2923-009-0,AB_ambulance,1,50%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,58,Ground Ambulance 50% coinsurance per one-way trip
 main,H2923-009-0,AB_ambulance,2,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,59,Air Ambulance: $0 copay per one-way trip
 main,H2923-009-0,AB_ambulance,2,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,59,Ground Ambulance: $0 copay per one-way trip
+main,H2923-009-0,F_primary_care,,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,98,Services from a primary care physician (PCP): $0 copay
+main,H2923-009-0,G_specialist,,30%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,98,Services from a specialist: 30% coinsurance
+main,H2923-009-0,H_inpatient,,"$2,241 per admission",https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,81,"$2,241 copay per stay"
 main,H2923-009-0,I_outpatient_surgery,1,50%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,95,50% coinsurance for outpatient procedures/ surgery at an Outpatient Hospital
 main,H2923-009-0,I_outpatient_surgery,2,50%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-SB-H2923-009-ENG.pdf,4,Ambulatory Surgical Center (ASC): 50% coinsurance
+main,H2923-009-0,J_outpatient_rehab,,30%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,93,Home or Office location: 30% coinsurance
+main,H2923-009-0,J_outpatient_rehab,,30%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-SB-H2923-009-ENG.pdf,8,Occupational Therapy Office location: 30% coinsurance
+main,H2923-009-0,J_outpatient_rehab,,30%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-SB-H2923-009-ENG.pdf,8,Speech Therapy Office location: 30% coinsurance
 main,H2923-009-0,L_xray_imaging,1,40%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,89,X-rays PCP's office: 40% coinsurance
 main,H2923-009-0,L_xray_imaging,1,40%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,90,Freestanding location: 40% coinsurance Outpatient hospital: 40% coinsurance Bone Age Studies
 main,H2923-009-0,L_xray_imaging,1,40%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,90,Specialist's office: 40% coinsurance Freestanding location: 40% coinsurance Outpatient hospital: 40% coinsurance Bone Age Studies
@@ -167,10 +368,25 @@ main,H2923-019-0,AB_ambulance,1,$0-$330 or 20%,https://assets.devoted.com/plan-d
 main,H2923-019-0,AB_ambulance,1,$0-$330 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,58,Air Ambulance 20% coinsurance per one-way trip
 main,H2923-019-0,AB_ambulance,2,$330 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,58,Air Ambulance: 20%
 main,H2923-019-0,AB_ambulance,2,$330 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,58,Ground Ambulance: $330
+main,H2923-019-0,F_primary_care,,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,14,Primary care office visits $0 copay per visit
+main,H2923-019-0,F_primary_care,,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,99,Services from a primary care physician (PCP): $0 copay
+main,H2923-019-0,G_specialist,,$45,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,14,Specialist office visits $45 copay per visit
+main,H2923-019-0,G_specialist,,$45,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,99,Services from a specialist: $45 copay
+main,H2923-019-0,H_inpatient,1,$490,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,82,You pay $490 per day for days 1 through 5
+main,H2923-019-0,H_inpatient,2,1-5,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,82,You pay $490 per day for days 1 through 5
 main,H2923-019-0,I_outpatient_surgery,1,$0-$580,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,96,$580 copay for outpatient procedures/surgery at an Outpatient Hospital
 main,H2923-019-0,I_outpatient_surgery,1,$0-$580,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,96,Diagnostic Colonoscopies At an Office or Freestanding location: $0 copay At an Outpatient hospital: $0 copay
 main,H2923-019-0,I_outpatient_surgery,2,$0-$480,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,96,$480 copay for outpatient procedures/surgery at an ASC - facility
 main,H2923-019-0,I_outpatient_surgery,2,$0-$480,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,96,Diagnostic Colonoscopies At an Office or Freestanding location: $0 copay At an Outpatient hospital: $0 copay At an Ambulatory Surgical Center (ASC): $0 copay
+main,H2923-019-0,J_outpatient_rehab,,$35-$45,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,95,Home or Office location: $45 copay
+main,H2923-019-0,J_outpatient_rehab,,$35-$45,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,95,Office location: $35 copay
+main,H2923-019-0,J_outpatient_rehab,,$35-$45,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,95,Speech Therapy Office location: $45 copay
+main,H2923-019-0,K_tests_labs,,$0-$40/$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,89,Diagnostic Procedures and Tests PCP's office: $0 copay
+main,H2923-019-0,K_tests_labs,,$0-$40/$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,89,Freestanding location: $40 copay
+main,H2923-019-0,K_tests_labs,,$0-$40/$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,89,Specialist's office: $20 copay
+main,H2923-019-0,K_tests_labs,,$0-$40/$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,90,Advanced Laboratory Services Office or freestanding location: $0 copay
+main,H2923-019-0,K_tests_labs,,$0-$40/$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,90,Freestanding location: $40 copay
+main,H2923-019-0,K_tests_labs,,$0-$40/$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,90,Routine Laboratory Services Office or freestanding location: $0 copay
 main,H2923-019-0,L_xray_imaging,1,$25,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,91,X-rays PCP's office: $25 copay
 main,H2923-019-0,L_xray_imaging,1,$25,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,91,X-rays PCP's office: $25 copay Specialist's office: $25 copay
 main,H2923-019-0,L_xray_imaging,1,$25,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,91,X-rays PCP's office: $25 copay Specialist's office: $25 copay Freestanding location: $25 copay
@@ -182,10 +398,28 @@ main,H2923-025-0,AB_ambulance,1,$0-$330 or 20%,https://assets.devoted.com/plan-d
 main,H2923-025-0,AB_ambulance,1,$0-$330 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,55,You pay $0 copay for facility-to-
 main,H2923-025-0,AB_ambulance,2,$330 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,56,Air Ambulance: 20%
 main,H2923-025-0,AB_ambulance,2,$330 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,56,Ground Ambulance: $330
+main,H2923-025-0,F_primary_care,,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,11,Primary care office visits $0 copay per visit
+main,H2923-025-0,F_primary_care,,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,98,Services from a primary care physician (PCP): $0 copay
+main,H2923-025-0,G_specialist,,$45,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,11,Specialist office visits $45 copay per visit
+main,H2923-025-0,G_specialist,,$45,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,98,Services from a specialist: $45 copay
+main,H2923-025-0,H_inpatient,1,$490,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,11,You pay $490 per day for days 1
+main,H2923-025-0,H_inpatient,1,$490,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,81,You pay $490 per day for days 1
+main,H2923-025-0,H_inpatient,2,1-5,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,11,You pay $490 per day for days 1
+main,H2923-025-0,H_inpatient,2,1-5,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,81,You pay $490 per day for days 1
 main,H2923-025-0,I_outpatient_surgery,1,$0-$580,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,92,Diagnostic Colonoscopies At an Office or Freestanding location: $0 copay At an Outpatient hospital: $0 copay
 main,H2923-025-0,I_outpatient_surgery,1,$0-$580,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,95,$580 copay for outpatient procedures/surgery at an Outpatient Hospital
 main,H2923-025-0,I_outpatient_surgery,2,$0-$480,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,92,Diagnostic Colonoscopies At an Office or Freestanding location: $0 copay At an Outpatient hospital: $0 copay At an Ambulatory Surgical Center (ASC): $0 copay
 main,H2923-025-0,I_outpatient_surgery,2,$0-$480,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,95,$480 copay for outpatient procedures/surgery at an ASC - facility
+main,H2923-025-0,J_outpatient_rehab,,$35-$45,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,93,Home or Office location: $45
+main,H2923-025-0,J_outpatient_rehab,,$35-$45,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,94,Office location: $35 copay
+main,H2923-025-0,J_outpatient_rehab,,$35-$45,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,94,Office location: $45 copay
+main,H2923-025-0,K_tests_labs,,$0-$40/$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,88,Diagnostic Procedures and Tests
+main,H2923-025-0,K_tests_labs,,$0-$40/$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,88,PCP's office: $0 copay Specialist's office: $20 copay
+main,H2923-025-0,K_tests_labs,,$0-$40/$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,88,Specialist's office: $20 copay
+main,H2923-025-0,K_tests_labs,,$0-$40/$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-SB-H2923-025-ENG.pdf,6,Diagnostic Tests and Procedures (such as a stress
+main,H2923-025-0,K_tests_labs,,$0-$40/$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-SB-H2923-025-ENG.pdf,6,Lab Services
+main,H2923-025-0,K_tests_labs,,$0-$40/$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-SB-H2923-025-ENG.pdf,6,Office or Freestanding location: $0 copay
+main,H2923-025-0,K_tests_labs,,$0-$40/$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-SB-H2923-025-ENG.pdf,6,Office or freestanding location: $0 - $40 copay
 main,H2923-025-0,L_xray_imaging,1,$25,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,90,X-rays PCP's office: $25 copay
 main,H2923-025-0,L_xray_imaging,1,$25,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,90,X-rays PCP's office: $25 copay Specialist's office: $25 copay
 main,H2923-025-0,L_xray_imaging,1,$25,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,90,X-rays PCP's office: $25 copay Specialist's office: $25 copay Freestanding location: $25 copay
@@ -197,10 +431,23 @@ main,H2923-028-3,AB_ambulance,1,$0-$345 or 20%,https://assets.devoted.com/plan-d
 main,H2923-028-3,AB_ambulance,1,$0-$345 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,55,You pay $0 copay for facility-to- facility transfers between hospitals via ground ambulance
 main,H2923-028-3,AB_ambulance,2,$345 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,55,Ground Ambulance: $345 copay per one-way trip
 main,H2923-028-3,AB_ambulance,2,$345 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,56,Air Ambulance: 20% coinsurance per one-way trip
+main,H2923-028-3,F_primary_care,,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,11,Primary care office visits $0 copay per visit
+main,H2923-028-3,F_primary_care,,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,94,Services from a primary care physician (PCP): $0 copay
+main,H2923-028-3,G_specialist,,$50,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,11,Specialist office visits $50 copay per visit
+main,H2923-028-3,G_specialist,,$50,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,94,Services from a specialist: $50 copay
+main,H2923-028-3,H_inpatient,1,$490,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,79,You pay $490 per day for days 1 through 5
+main,H2923-028-3,H_inpatient,2,1-5,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,79,You pay $490 per day for days 1 through 5
 main,H2923-028-3,I_outpatient_surgery,1,$0-$590,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,90,Diagnostic Colonoscopies At an Office or Freestanding location: $0 copay At an Outpatient hospital: $0 copay
 main,H2923-028-3,I_outpatient_surgery,1,$0-$590,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,93,$590 copay for outpatient procedures/surgery at an Outpatient Hospital
 main,H2923-028-3,I_outpatient_surgery,2,$0-$490,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,90,Diagnostic Colonoscopies At an Office or Freestanding location: $0 copay At an Outpatient hospital: $0 copay At an Ambulatory Surgical Center (ASC): $0 copay
 main,H2923-028-3,I_outpatient_surgery,2,$0-$490,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,93,$490 copay for outpatient procedures/surgery at an ASC - facility
+main,H2923-028-3,J_outpatient_rehab,,$35-$50,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,91,Home or Office location: $50 copay
+main,H2923-028-3,J_outpatient_rehab,,$35-$50,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,92,Office location: $35 copay
+main,H2923-028-3,J_outpatient_rehab,,$35-$50,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,92,Office location: $50 copay
+main,H2923-028-3,K_tests_labs,,$0-$40/$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,86,PCP's office: $0 copay Specialist's office: $20 copay
+main,H2923-028-3,K_tests_labs,,$0-$40/$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,86,Specialist's office: $20 copay Freestanding location: $40 copay
+main,H2923-028-3,K_tests_labs,,$0-$40/$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,87,Advanced Laboratory Services Office or freestanding location: $0 copay
+main,H2923-028-3,K_tests_labs,,$0-$40/$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,87,Office or freestanding location: $0 copay Dedicated testing laboratory: $0 copay Outpatient hospital: $0 copay
 main,H2923-028-3,L_xray_imaging,1,$25,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,88,X-rays PCP's office: $25 copay
 main,H2923-028-3,L_xray_imaging,1,$25,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,88,X-rays PCP's office: $25 copay Specialist's office: $25 copay
 main,H2923-028-3,L_xray_imaging,1,$25,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,88,X-rays PCP's office: $25 copay Specialist's office: $25 copay Freestanding location: $25 copay
@@ -210,39 +457,92 @@ main,H2923-028-3,L_xray_imaging,2,$100-$200,https://assets.devoted.com/plan-docu
 main,H3805-040-0,AB_ambulance,1,$400,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,52,$400 copayment or each one-way Medicare- covered air trip.
 main,H3805-040-0,AB_ambulance,1,$400,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,52,$400 copayment or each one-way Medicare- covered ground trip.
 main,H3805-040-0,AB_ambulance,2,not covered,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,52,ambulance transportation is not covered under
+main,H3805-040-0,F_primary_care,,$0,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,13,$0 copayment per visit.
+main,H3805-040-0,F_primary_care,,$0,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,82,$0 copayment or services rom a primary care
+main,H3805-040-0,G_specialist,,$55,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,13,$55 copayment per visit.
+main,H3805-040-0,G_specialist,,$55,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,82,$55 copayment or services rom a specialist
+main,H3805-040-0,H_inpatient,1,$685,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,13,$685 copayment each day or days 1 to 4.
+main,H3805-040-0,H_inpatient,1,$685,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,65,$685 copayment each day or days 1-4
+main,H3805-040-0,H_inpatient,2,1-4,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,13,$685 copayment each day or days 1 to 4.
+main,H3805-040-0,H_inpatient,2,1-4,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,65,$685 copayment each day or days 1-4
 main,H3805-040-0,I_outpatient_surgery,1,$0-$685,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,79,$0 copayment or a colonoscopy at an outpatient hospital.
 main,H3805-040-0,I_outpatient_surgery,1,$0-$685,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,79,$685 copayment or Medicare-covered surgery or other services provided to you at an outpatient hospital
 main,H3805-040-0,I_outpatient_surgery,2,$0-$635,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,79,$0 copayment or a colonoscopy at an ambulatory surgical center.
 main,H3805-040-0,I_outpatient_surgery,2,$0-$635,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,79,$635 copayment or Medicare-covered surgery or other services provided to you at an ambulatory surgical center
+main,H3805-040-0,J_outpatient_rehab,,$50-$55,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,79,$50 copayment or each Medicare-covered occupational therapy visit.
+main,H3805-040-0,J_outpatient_rehab,,$50-$55,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,79,$55 copayment or each Medicare-covered physical therapy and speech-language therapy visit.
+main,H3805-040-0,K_tests_labs,,$60/$0,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,75,$0 copayment or Medicare-covered lab
+main,H3805-040-0,K_tests_labs,,$60/$0,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,75,$60 copayment or Medicare-covered non-
 main,H3805-040-0,L_xray_imaging,1,$25,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,74,$25 copayment or each Medicare-covered standard X-ray service.
 main,H3805-040-0,L_xray_imaging,2,$0-$285,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,76,$0 copayment or each diagnostic mammogram.
 main,H3805-040-0,L_xray_imaging,2,$0-$285,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,76,"$285 copayment or other Medicare-covered radiological diagnostic services, not including X-rays."
 main,H3805-041-0,AB_ambulance,1,$350,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,51,$350 copayment or each one-way Medicare- covered air trip.
 main,H3805-041-0,AB_ambulance,1,$350,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,51,$350 copayment or each one-way Medicare- covered ground trip.
 main,H3805-041-0,AB_ambulance,2,not covered,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,51,"Outside o the United States or its territories, ambulance transportation is not covered under any circumstances."
+main,H3805-041-0,F_primary_care,,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,12,Primary care office visits $0 copayment per visit.
+main,H3805-041-0,F_primary_care,,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,82,$0 copayment or services rom a primary care
+main,H3805-041-0,G_specialist,,$70,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,12,Specialist office visits $70 copayment per visit.
+main,H3805-041-0,G_specialist,,$70,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,82,$70 copayment or services rom a specialist
+main,H3805-041-0,H_inpatient,1,$685,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,65,$685 copayment each day or days 1-4 or
+main,H3805-041-0,H_inpatient,2,1-4,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,65,$685 copayment each day or days 1-4 or
 main,H3805-041-0,I_outpatient_surgery,1,$0-$685,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,80,$0 copayment or a colonoscopy at an outpatient hospital.
 main,H3805-041-0,I_outpatient_surgery,1,$0-$685,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,80,$685 copayment or Medicare-covered surgery or other services provided to you at an outpatient hospital
 main,H3805-041-0,I_outpatient_surgery,2,$0-$635,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,79,$0 copayment or a colonoscopy at an ambulatory surgical center.
 main,H3805-041-0,I_outpatient_surgery,2,$0-$635,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,79,$635 copayment or Medicare-covered surgery or other services provided to you at an ambulatory surgical center
+main,H3805-041-0,J_outpatient_rehab,,$50-$70,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,79,$50 copayment or each Medicare-covered occupational therapy visit.
+main,H3805-041-0,J_outpatient_rehab,,$50-$70,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,79,$70 copayment or each Medicare-covered physical therapy and speech-language therapy visit.
+main,H3805-041-0,K_tests_labs,,$60/$0,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,75,$0 copayment or Medicare-covered lab
+main,H3805-041-0,K_tests_labs,,$60/$0,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,75,$60 copayment or Medicare-covered non-
 main,H3805-041-0,L_xray_imaging,1,$30,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,74,$30 copayment or each Medicare-covered standard X-ray service.
 main,H3805-041-0,L_xray_imaging,2,$0-$320,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,76,$0 copayment or each diagnostic mammogram.
 main,H3805-041-0,L_xray_imaging,2,$0-$320,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,76,"$320 copayment or other Medicare-covered radiological diagnostic services, not including X-rays."
 main,H3805-048-0,AB_ambulance,1,$370,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,51,$370 copayment or each one-way Medicare- covered air trip.
 main,H3805-048-0,AB_ambulance,1,$370,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,51,$370 copayment or each one-way Medicare- covered ground trip.
 main,H3805-048-0,AB_ambulance,2,not covered,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,51,"Outside o the United States or its territories, ambulance transportation is not covered under any circumstances."
+main,H3805-048-0,F_primary_care,,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,12,$0 copayment per visit.
+main,H3805-048-0,F_primary_care,,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,12,Primary care office visits
+main,H3805-048-0,F_primary_care,,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,81,$0 copayment or services rom a primary care
+main,H3805-048-0,G_specialist,,$55,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,12,$55 copayment per visit.
+main,H3805-048-0,G_specialist,,$55,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,12,Specialist office visits
+main,H3805-048-0,G_specialist,,$55,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,82,$55 copayment or services rom a specialist
+main,H3805-048-0,H_inpatient,1,$550,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,12,$550 copayment each day or
+main,H3805-048-0,H_inpatient,1,$550,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,12,days 1 to 5.
+main,H3805-048-0,H_inpatient,1,$550,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,65,$550 copayment each day or days 1-5 or
+main,H3805-048-0,H_inpatient,2,1-5,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,12,$550 copayment each day or
+main,H3805-048-0,H_inpatient,2,1-5,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,12,days 1 to 5.
+main,H3805-048-0,H_inpatient,2,1-5,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,65,$550 copayment each day or days 1-5 or
 main,H3805-048-0,I_outpatient_surgery,1,$0-$550,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,80,$0 copayment or a colonoscopy at an outpatient hospital.
 main,H3805-048-0,I_outpatient_surgery,1,$0-$550,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,80,$550 copayment or Medicare-covered surgery or other services provided to you at an outpatient hospital
 main,H3805-048-0,I_outpatient_surgery,2,$0-$500,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,80,$0 copayment or a colonoscopy at an ambulatory surgical center.
 main,H3805-048-0,I_outpatient_surgery,2,$0-$500,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,80,$500 copayment or Medicare-covered surgery or other services provided to you at an ambulatory surgical center
+main,H3805-048-0,J_outpatient_rehab,,$50-$55,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,79,$50 copayment or each Medicare-covered occupational therapy visit.
+main,H3805-048-0,J_outpatient_rehab,,$50-$55,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,79,$55 copayment or each Medicare-covered physical therapy and speech-language therapy visit.
+main,H3805-048-0,K_tests_labs,,$35/$0,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,75,$0 copayment or Medicare-covered lab
+main,H3805-048-0,K_tests_labs,,$35/$0,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,76,$35 copayment or Medicare-covered non-
 main,H3805-048-0,L_xray_imaging,1,$30,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,75,$30 copayment or each Medicare-covered
 main,H3805-048-0,L_xray_imaging,2,$0-$320,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,76,$0 copayment or each diagnostic
 main,H3805-048-0,L_xray_imaging,2,$0-$320,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,76,$320 copayment or other Medicare-covered
 main,H3817-008-1,AB_ambulance,1,$300,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,39,In- and Out-of-network: $300 copay per Medicare covered one-way transport
 main,H3817-008-1,AB_ambulance,2,$300,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,71,Ambulance services: In- and Out-of-network: $300 copay per covered one-
+main,H3817-008-1,F_primary_care,1,$0,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,62,In-office primary care provider (PCP) visits: In-network: $0 copay per provider per day Out-of-network: 50% coinsurance
+main,H3817-008-1,F_primary_care,1,$0,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,8,Primary care office visits In-network: $0 per provider per day
+main,H3817-008-1,F_primary_care,2,50%,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,62,In-office primary care provider (PCP) visits: In-network: $0 copay per provider per day Out-of-network: 50% coinsurance
+main,H3817-008-1,F_primary_care,2,50%,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,8,In-network: $0 per provider per day Out-of-network: 50% coinsurance
+main,H3817-008-1,G_specialist,1,$40,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,62,In-office specialist visits: In-network: $40 copay per provider per day Out-of-network: 50% coinsurance
+main,H3817-008-1,G_specialist,1,$40,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,8,Specialist office visits In-network: $40 per provider per day
+main,H3817-008-1,G_specialist,2,50%,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,62,In-office specialist visits: In-network: $40 copay per provider per day Out-of-network: 50% coinsurance
+main,H3817-008-1,G_specialist,2,50%,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,8,In-network: $40 per provider per day Out-of-network: 50% coinsurance
+main,H3817-008-1,H_inpatient,1,$395,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,52,Days 1–5: $395 copay per day
+main,H3817-008-1,H_inpatient,1,$395,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,8,Days 1–5: $395 copay per day
+main,H3817-008-1,H_inpatient,2,1-5,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,52,Days 1–5: $395 copay per day
+main,H3817-008-1,H_inpatient,2,1-5,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,8,Days 1–5: $395 copay per day
 main,H3817-008-1,I_outpatient_surgery,1,$0-20%,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,61,20% coinsurance for all other services (including associated professional fees)
 main,H3817-008-1,I_outpatient_surgery,1,$0-20%,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,61,Outpatient hospital services: In-network: $0 copay for diagnostic colonoscopy
 main,H3817-008-1,I_outpatient_surgery,2,$0-$375,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,60,Ambulatory Surgical Center: In-network: $0 copay for diagnostic colonoscopy
 main,H3817-008-1,I_outpatient_surgery,2,$0-$375,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,61,$375 copay for all other services
+main,H3817-008-1,J_outpatient_rehab,,$40,https://beonbrand.getbynder.com/asset/509b7b1f-c03e-498d-9107-158cc9783b71/Summary-of-Benefits-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,6,Occupational therapy $40
+main,H3817-008-1,J_outpatient_rehab,,$40,https://beonbrand.getbynder.com/asset/509b7b1f-c03e-498d-9107-158cc9783b71/Summary-of-Benefits-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,6,Physical and speech language therapy $40
+main,H3817-008-1,J_outpatient_rehab,,$40,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,60,In-office visits: In-network: $40 copay per provider per day
 main,H3817-008-1,L_xray_imaging,1,$10,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,57,X-rays: In-network: $10 copay per provider per day
 main,H3817-008-1,L_xray_imaging,2,$0-$300,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,58,$300 copay per provider per day for all other complex imaging
 main,H3817-008-1,L_xray_imaging,2,$0-$300,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,58,"Diagnostic non-laboratory tests such as CT scans, MRIs, EKGs, and"
@@ -250,11 +550,27 @@ main,H3817-008-1,L_xray_imaging,2,$0-$300,https://beonbrand.getbynder.com/asset/
 main,H3817-008-1,L_xray_imaging,2,$0-$300,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,58,Diagnostic radiology: In-network: $0 copay per provider per day for diagnostic mammography
 main,H3817-009-1,AB_ambulance,1,$300,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,39,$300 copay per Medicare
 main,H3817-009-1,AB_ambulance,2,$300,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,71,$300 copay per covered one-
+main,H3817-009-1,F_primary_care,1,$0,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,8,Primary care office visits                                  In-network: $0 per provider per day
+main,H3817-009-1,F_primary_care,2,50%,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,8,In-network: $0 per provider per day Out-of-network: 50% coinsurance
+main,H3817-009-1,G_specialist,1,$30,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,8,Specialist office visits                                    In-network: $30 per provider per day
+main,H3817-009-1,G_specialist,2,50%,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,8,In-network: $30 per provider per day Out-of-network: 50% coinsurance
+main,H3817-009-1,H_inpatient,1,$315,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,52,Days 1–5: $315 copay per day
+main,H3817-009-1,H_inpatient,2,1-5,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,52,Days 1–5: $315 copay per day
 main,H3817-009-1,I_outpatient_surgery,1,$0-20%,https://beonbrand.getbynder.com/asset/0231d9b3-b90f-4080-82e8-9213fa8a7464/Summary-of-Benefits-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,3,$0 $30 20% $400
 main,H3817-009-1,I_outpatient_surgery,1,$0-20%,https://beonbrand.getbynder.com/asset/0231d9b3-b90f-4080-82e8-9213fa8a7464/Summary-of-Benefits-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,3,All other services1 20% 50%
 main,H3817-009-1,I_outpatient_surgery,1,$0-20%,https://beonbrand.getbynder.com/asset/0231d9b3-b90f-4080-82e8-9213fa8a7464/Summary-of-Benefits-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,3,Outpatient hospital services Diagnostic colonoscopy
 main,H3817-009-1,I_outpatient_surgery,2,$0-$300,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,60,$300 copay for all other services
 main,H3817-009-1,I_outpatient_surgery,2,$0-$300,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,60,Ambulatory Surgical Center: In-network: $0 copay for diagnostic colonoscopy
+main,H3817-009-1,J_outpatient_rehab,,$30,https://beonbrand.getbynder.com/asset/0231d9b3-b90f-4080-82e8-9213fa8a7464/Summary-of-Benefits-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,6,Occupational therapy $30
+main,H3817-009-1,J_outpatient_rehab,,$30,https://beonbrand.getbynder.com/asset/0231d9b3-b90f-4080-82e8-9213fa8a7464/Summary-of-Benefits-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,6,Physical and speech language therapy $30
+main,H3817-009-1,J_outpatient_rehab,,$30,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,59,In-office visits: In-network: $30 copay per provider per day
+main,H3817-009-1,K_tests_labs,,$0-$10/$0-$10,https://beonbrand.getbynder.com/asset/0231d9b3-b90f-4080-82e8-9213fa8a7464/Summary-of-Benefits-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,3,$0 $30 20% $400
+main,H3817-009-1,K_tests_labs,,$0-$10/$0-$10,https://beonbrand.getbynder.com/asset/0231d9b3-b90f-4080-82e8-9213fa8a7464/Summary-of-Benefits-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,3,Outpatient hospital services Diagnostic colonoscopy
+main,H3817-009-1,K_tests_labs,,$0-$10/$0-$10,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,57,$0 copay per provider per day for HbA1C testing
+main,H3817-009-1,K_tests_labs,,$0-$10/$0-$10,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,57,$0 copay per provider per day for diagnostic mammography
+main,H3817-009-1,K_tests_labs,,$0-$10/$0-$10,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,57,$10 copay per provider per day for all other tests
+main,H3817-009-1,K_tests_labs,,$0-$10/$0-$10,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,58,Outpatient diagnostic tests: In-network: $10 copay per provider per day
+main,H3817-009-1,K_tests_labs,,$0-$10/$0-$10,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,60,Ambulatory Surgical Center: In-network: $0 copay for diagnostic colonoscopy
 main,H3817-009-1,L_xray_imaging,1,$5,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,56,X-rays: In-network: $5 copay per provider per day
 main,H3817-009-1,L_xray_imaging,2,$0-$300,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,57,$0 copay per provider per day for diagnostic mammography
 main,H3817-009-1,L_xray_imaging,2,$0-$300,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,57,$300 copay per provider per day for all other complex imaging
@@ -263,20 +579,61 @@ main,H3817-009-1,L_xray_imaging,2,$0-$300,https://beonbrand.getbynder.com/asset/
 main,H3817-010-0,AB_ambulance,1,$300,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,30,$300 copay per Medicare covered one-way transport
 main,H3817-010-0,AB_ambulance,2,$300,https://beonbrand.getbynder.com/asset/04a8c0a0-9d0b-4085-a9c5-657b68a53d5a/Summary-of-Benefits-Medicare-Regence-Valiance-PPO-no-Rx-2027-OR.pdf,6,Copay per each one-way Medicare-covered transport
 main,H3817-010-0,AB_ambulance,2,$300,https://beonbrand.getbynder.com/asset/04a8c0a0-9d0b-4085-a9c5-657b68a53d5a/Summary-of-Benefits-Medicare-Regence-Valiance-PPO-no-Rx-2027-OR.pdf,6,Worldwide ground or air ambulance $300 $300
+main,H3817-010-0,F_primary_care,1,$0,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,52,In-office primary care provider (PCP) visits: In-network: $0 copay per provider per day
+main,H3817-010-0,F_primary_care,1,$0,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,6,Primary care office visits In-network: $0 per provider per day
+main,H3817-010-0,F_primary_care,2,50%,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,52,In-office primary care provider (PCP) visits: In-network: $0 copay per provider per day Out-of-network: 50% coinsurance
+main,H3817-010-0,F_primary_care,2,50%,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,6,Primary care office visits In-network: $0 per provider per day Out-of-network: 50% coinsurance
+main,H3817-010-0,G_specialist,1,$40,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,53,In-office specialist visits: In-network: $40 copay per provider per day
+main,H3817-010-0,G_specialist,1,$40,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,6,Specialist office visits In-network: $40 per provider per day
+main,H3817-010-0,G_specialist,2,50%,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,53,In-office specialist visits: In-network: $40 copay per provider per day Out-of-network: 50% coinsurance
+main,H3817-010-0,G_specialist,2,50%,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,6,Specialist office visits In-network: $40 per provider per day Out-of-network: 50% coinsurance
+main,H3817-010-0,H_inpatient,1,$370,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,42,Days 1–4: $370 copay per day
+main,H3817-010-0,H_inpatient,2,1-4,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,42,Days 1–4: $370 copay per day
 main,H3817-010-0,I_outpatient_surgery,1,$0-20%,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,51,20% coinsurance for all other services (including associated professional fees)
 main,H3817-010-0,I_outpatient_surgery,1,$0-20%,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,51,Outpatient hospital services: In-network: $0 copay for diagnostic colonoscopy
 main,H3817-010-0,I_outpatient_surgery,2,$0-$360,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,51,$360 copay for all other services
 main,H3817-010-0,I_outpatient_surgery,2,$0-$360,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,51,Ambulatory Surgical Center: In-network: $0 copay for diagnostic colonoscopy
+main,H3817-010-0,J_outpatient_rehab,,$40,https://beonbrand.getbynder.com/asset/04a8c0a0-9d0b-4085-a9c5-657b68a53d5a/Summary-of-Benefits-Medicare-Regence-Valiance-PPO-no-Rx-2027-OR.pdf,6,Occupational therapy $40 50%
+main,H3817-010-0,J_outpatient_rehab,,$40,https://beonbrand.getbynder.com/asset/04a8c0a0-9d0b-4085-a9c5-657b68a53d5a/Summary-of-Benefits-Medicare-Regence-Valiance-PPO-no-Rx-2027-OR.pdf,6,Physical and speech language therapy $40 50%
+main,H3817-010-0,J_outpatient_rehab,,$40,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,50,In-office visits: In-network: $40 copay per provider per day
+main,H3817-010-0,K_tests_labs,,$0-$10/$0-$10,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,48,$0 copay per provider per day for HbA1C testing
+main,H3817-010-0,K_tests_labs,,$0-$10/$0-$10,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,48,$10 copay per provider per day for all other tests
+main,H3817-010-0,K_tests_labs,,$0-$10/$0-$10,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,48,Diagnostic radiology: In-network: $0 copay per provider per day for diagnostic mammography
+main,H3817-010-0,K_tests_labs,,$0-$10/$0-$10,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,48,Outpatient diagnostic tests: In-network: $10 copay per provider per day
+main,H3817-010-0,K_tests_labs,,$0-$10/$0-$10,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,51,Ambulatory Surgical Center: In-network: $0 copay for diagnostic colonoscopy
+main,H3817-010-0,K_tests_labs,,$0-$10/$0-$10,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,51,Outpatient hospital services: In-network: $0 copay for diagnostic colonoscopy
 main,H3817-010-0,L_xray_imaging,1,$5,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,47,X-rays: In-network: $5 copay per provider per day
 main,H3817-010-0,L_xray_imaging,2,$0-$300,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,48,$300 copay per provider per day for all other complex imaging
 main,H3817-010-0,L_xray_imaging,2,$0-$300,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,48,"Diagnostic non-laboratory tests such as CT scans, MRIs, EKGs, and PET scans"
 main,H3817-010-0,L_xray_imaging,2,$0-$300,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,48,Diagnostic radiology: In-network: $0 copay per provider per day for diagnostic mammography
 main,H3817-011-1,AB_ambulance,1,$300,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,39,In- and Out-of-network: $300 copay per Medicare covered one-way transport
 main,H3817-011-1,AB_ambulance,2,$300,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,71,Ambulance services: In- and Out-of-network: $300 copay per covered one-
+main,H3817-011-1,F_primary_care,1,$0,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,62,In-office primary care provider (PCP) visits: In-network: $0 copay per provider per day
+main,H3817-011-1,F_primary_care,1,$0,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,8,Primary care office visits In-network: $0 per provider per day
+main,H3817-011-1,F_primary_care,2,50%,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,62,In-office primary care provider (PCP) visits: In-network: $0 copay per provider per day Out-of-network: 50% coinsurance
+main,H3817-011-1,F_primary_care,2,50%,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,8,$0 per provider per day Out-of-network: 50% coinsurance
+main,H3817-011-1,G_specialist,1,$45,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,62,$45 copay per provider per day
+main,H3817-011-1,G_specialist,1,$45,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,8,Specialist office visits In-network: $45 per provider per day
+main,H3817-011-1,G_specialist,2,50%,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,62,In-office specialist visits: In-network: $45 copay per provider per day Out-of-network: 50% coinsurance
+main,H3817-011-1,G_specialist,2,50%,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,8,$45 per provider per day Out-of-network: 50% coinsurance
+main,H3817-011-1,H_inpatient,1,$450,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,52,Days 1–5: $450 copay per day
+main,H3817-011-1,H_inpatient,1,$450,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,8,Days 1–5: $450 copay per day
+main,H3817-011-1,H_inpatient,2,1-5,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,52,Days 1–5: $450 copay per day
+main,H3817-011-1,H_inpatient,2,1-5,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,8,Days 1–5: $450 copay per day
 main,H3817-011-1,I_outpatient_surgery,1,$0-20%,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,61,20% coinsurance for all other services (including associated professional fees)
 main,H3817-011-1,I_outpatient_surgery,1,$0-20%,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,61,Outpatient hospital services: In-network: $0 copay for diagnostic colonoscopy
 main,H3817-011-1,I_outpatient_surgery,2,$0-$395,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,60,Ambulatory Surgical Center: In-network: $0 copay for diagnostic colonoscopy
 main,H3817-011-1,I_outpatient_surgery,2,$0-$395,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,61,$395 copay for all other services
+main,H3817-011-1,J_outpatient_rehab,,$45,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,60,"Covered services include physical therapy, occupational therapy, and"
+main,H3817-011-1,J_outpatient_rehab,,$45,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,60,In-office visits: In-network: $45 copay per provider per day
+main,H3817-011-1,J_outpatient_rehab,,$45,https://beonbrand.getbynder.com/asset/e02efc92-b5dc-44f5-97ed-68489555c3df/Summary-of-Benefits-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,6,Occupational therapy $45
+main,H3817-011-1,J_outpatient_rehab,,$45,https://beonbrand.getbynder.com/asset/e02efc92-b5dc-44f5-97ed-68489555c3df/Summary-of-Benefits-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,6,Physical and speech language therapy $45
+main,H3817-011-1,K_tests_labs,,$0-$40/$0-$30,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,57,$0 copay per provider per day for HbA1C testing
+main,H3817-011-1,K_tests_labs,,$0-$40/$0-$30,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,57,$30 copay per provider per day for all other tests
+main,H3817-011-1,K_tests_labs,,$0-$40/$0-$30,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,58,$0 copay per provider per day for diagnostic mammography
+main,H3817-011-1,K_tests_labs,,$0-$40/$0-$30,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,58,Outpatient diagnostic tests: In-network: $40 copay per provider per day Out-of-network: 50% coinsurance
+main,H3817-011-1,K_tests_labs,,$0-$40/$0-$30,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,60,Ambulatory Surgical Center: In-network: $0 copay for diagnostic colonoscopy
+main,H3817-011-1,K_tests_labs,,$0-$40/$0-$30,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,61,Outpatient hospital services: In-network: $0 copay for diagnostic colonoscopy
 main,H3817-011-1,L_xray_imaging,1,$25,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,57,X-rays: In-network: $25 copay per provider per day
 main,H3817-011-1,L_xray_imaging,2,$0-$300,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,58,$0 copay per provider per day for diagnostic mammography
 main,H3817-011-1,L_xray_imaging,2,$0-$300,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,58,$300 copay per provider per day for all other complex imaging
@@ -286,10 +643,26 @@ main,H5216-048-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content
 main,H5216-048-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,48,Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance
 main,H5216-048-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,48,Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance
 main,H5216-048-0,AB_ambulance,2,$325,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,49,Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance
+main,H5216-048-0,F_primary_care,1,$0,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,12,Primary care office visits $0 copayment per visit
+main,H5216-048-0,F_primary_care,1,$0,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,74,Provider and Professional Services $0 copayment – PCP's Office
+main,H5216-048-0,F_primary_care,2,50%,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,12,Primary care office visits $0 copayment per visit 50% of the total cost per visit
+main,H5216-048-0,F_primary_care,2,50%,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,75,Out-of-Network: Provider and Professional Services 50% coinsurance – PCP's Office – Specialist's Office
+main,H5216-048-0,G_specialist,1,$45,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,12,Specialist office visits $45 copayment per visit
+main,H5216-048-0,G_specialist,1,$45,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,74,Provider and Professional Services $0 copayment – PCP's Office $45 copayment – Specialist's Office
+main,H5216-048-0,G_specialist,2,50%,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,12,Specialist office visits $45 copayment per visit 50% of the total cost per visit
+main,H5216-048-0,G_specialist,2,50%,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,75,Out-of-Network: Provider and Professional Services 50% coinsurance – PCP's Office – Specialist's Office
+main,H5216-048-0,H_inpatient,1,$610,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,59,"Inpatient Hospital – $610 copayment per day, days 1 to 4"
+main,H5216-048-0,H_inpatient,2,1-4,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,59,"Inpatient Hospital – $610 copayment per day, days 1 to 4"
 main,H5216-048-0,I_outpatient_surgery,1,$0-$450,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,66,Diagnostic Colonoscopy $0 copayment – Ambulatory Surgical Center – Outpatient Hospital
 main,H5216-048-0,I_outpatient_surgery,1,$0-$450,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,73,Surgery Services $450 copayment – Outpatient Hospital
 main,H5216-048-0,I_outpatient_surgery,2,$0-$350,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,66,Diagnostic Colonoscopy $0 copayment – Ambulatory Surgical Center – Outpatient Hospital
 main,H5216-048-0,I_outpatient_surgery,2,$0-$350,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,73,$350 copayment – Ambulatory Surgical Center
+main,H5216-048-0,J_outpatient_rehab,,$45,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,71,Physical Therapy $45 copayment – Specialist's Office
+main,H5216-048-0,J_outpatient_rehab,,$45,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,72,Occupational Therapy $45 copayment – Specialist's Office
+main,H5216-048-0,J_outpatient_rehab,,$45,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,72,Speech Therapy $45 copayment – Specialist's Office
+main,H5216-048-0,K_tests_labs,,$0-$45/$0,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,64,Diagnostic Procedures and Tests $0 copayment – PCP's Office
+main,H5216-048-0,K_tests_labs,,$0-$45/$0,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,64,Diagnostic Procedures and Tests $0 copayment – PCP's Office $45 copayment – Specialist's Office
+main,H5216-048-0,K_tests_labs,,$0-$45/$0,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,66,Lab Services $0 copayment – PCP's Office – Specialist's Office – Urgent Care Center – Outpatient Hospital – Freestanding Laboratory
 main,H5216-048-0,L_xray_imaging,1,$0-$45,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,65,Basic Radiological Services $0 copayment – PCP's Office
 main,H5216-048-0,L_xray_imaging,1,$0-$45,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,65,Basic Radiological Services $0 copayment – PCP's Office $45 copayment – Specialist's Office
 main,H5216-048-0,L_xray_imaging,2,$205-$330,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,65,$205 copayment – Freestanding Radiological Facility
@@ -297,10 +670,22 @@ main,H5216-048-0,L_xray_imaging,2,$205-$330,https://assets.humana.com/is/content
 main,H5216-427-2,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,36,In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance
 main,H5216-427-2,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,36,In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance
 main,H5216-427-2,AB_ambulance,2,$325,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,37,Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance
+main,H5216-427-2,F_primary_care,1,$0,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,63,Provider and Professional Services $0 copayment – PCP's Office $45 copayment – Specialist's Office
+main,H5216-427-2,F_primary_care,2,35%,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,64,Provider and Professional Services 35% coinsurance – PCP's Office – Specialist's Office
+main,H5216-427-2,G_specialist,1,$45,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,63,Provider and Professional Services $0 copayment – PCP's Office $45 copayment – Specialist's Office
+main,H5216-427-2,G_specialist,2,35%,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,64,Provider and Professional Services 35% coinsurance – PCP's Office – Specialist's Office
+main,H5216-427-2,H_inpatient,1,$610,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,48,"$610 copayment per day, days 1 to 4"
+main,H5216-427-2,H_inpatient,2,1-4,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,48,"$610 copayment per day, days 1 to 4"
 main,H5216-427-2,I_outpatient_surgery,1,$0-$450,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,54,Diagnostic Colonoscopy $0 copayment
 main,H5216-427-2,I_outpatient_surgery,1,$0-$450,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,57,Surgery Services $450 copayment
 main,H5216-427-2,I_outpatient_surgery,2,$0-$350,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,54,Diagnostic Colonoscopy $0 copayment
 main,H5216-427-2,I_outpatient_surgery,2,$0-$350,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,61,$350 copayment
+main,H5216-427-2,J_outpatient_rehab,,$35,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,59,In-Network: Physical Therapy $35 copayment
+main,H5216-427-2,J_outpatient_rehab,,$35,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,60,Occupational Therapy $35 copayment – Specialist's Office
+main,H5216-427-2,J_outpatient_rehab,,$35,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,60,Speech Therapy $35 copayment – Specialist's Office
+main,H5216-427-2,K_tests_labs,,$0-$45/$0,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,52,Diagnostic Procedures and Tests $0 copayment
+main,H5216-427-2,K_tests_labs,,$0-$45/$0,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,53,$45 copayment – Specialist's Office $40 copayment – Urgent Care Center $100 copayment – Outpatient Hospital
+main,H5216-427-2,K_tests_labs,,$0-$45/$0,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,54,Lab Services $0 copayment – PCP's Office – Specialist's Office – Urgent Care Center – Outpatient Hospital – Freestanding Laboratory
 main,H5216-427-2,L_xray_imaging,1,$0-$45,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,53,Basic Radiological Services $0 copayment – PCP's Office
 main,H5216-427-2,L_xray_imaging,1,$0-$45,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,53,Basic Radiological Services $0 copayment – PCP's Office $45 copayment – Specialist's Office
 main,H5216-427-2,L_xray_imaging,2,$205-$330,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,53,$205 copayment – Freestanding Radiological Facility
@@ -308,10 +693,28 @@ main,H5216-427-2,L_xray_imaging,2,$205-$330,https://assets.humana.com/is/content
 main,H5216-428-2,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,47,$325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance Out-of-Network:
 main,H5216-428-2,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,47,Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance Out-of-Network:
 main,H5216-428-2,AB_ambulance,2,$325,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,47,Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance
+main,H5216-428-2,F_primary_care,1,$0,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,12,Primary care office visits $0 copayment per visit
+main,H5216-428-2,F_primary_care,1,$0,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,72,Provider and Professional Services $0 copayment – PCP's Office
+main,H5216-428-2,F_primary_care,2,50%,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,12,Primary care office visits $0 copayment per visit 50% of the total cost per visit
+main,H5216-428-2,F_primary_care,2,50%,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,73,Provider and Professional Services 50% coinsurance – PCP's Office
+main,H5216-428-2,G_specialist,1,$50,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,12,Specialist office visits $50 copayment per visit
+main,H5216-428-2,G_specialist,1,$50,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,72,Provider and Professional Services $0 copayment – PCP's Office $50 copayment – Specialist's Office
+main,H5216-428-2,G_specialist,2,50%,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,12,Specialist office visits $50 copayment per visit 50% of the total cost per visit
+main,H5216-428-2,G_specialist,2,50%,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,73,Provider and Professional Services 50% coinsurance – PCP's Office – Specialist's Office
+main,H5216-428-2,H_inpatient,1,$689,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,58,"$689 copayment per day, days 1 to 4"
+main,H5216-428-2,H_inpatient,2,1-4,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,58,"$689 copayment per day, days 1 to 4"
 main,H5216-428-2,I_outpatient_surgery,1,$0-$450,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,71,Diagnostic Colonoscopy $0 copayment – Ambulatory Surgical Center – Outpatient Hospital Out-of-Network:
 main,H5216-428-2,I_outpatient_surgery,1,$0-$450,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,71,Surgery Services $450 copayment – Outpatient Hospital
 main,H5216-428-2,I_outpatient_surgery,2,$0-$350,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,71,$350 copayment – Ambulatory Surgical Center
 main,H5216-428-2,I_outpatient_surgery,2,$0-$350,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,71,Diagnostic Colonoscopy $0 copayment – Ambulatory Surgical Center – Outpatient Hospital Out-of-Network:
+main,H5216-428-2,J_outpatient_rehab,,$45,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,70,Occupational Therapy $45 copayment
+main,H5216-428-2,J_outpatient_rehab,,$45,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,70,Physical Therapy $45 copayment
+main,H5216-428-2,J_outpatient_rehab,,$45,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,70,Speech Therapy $45 copayment
+main,H5216-428-2,K_tests_labs,,$0-$50/$0,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,63,Diagnostic Procedures and Tests $0 copayment – PCP's Office
+main,H5216-428-2,K_tests_labs,,$0-$50/$0,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,63,Diagnostic Procedures and Tests $0 copayment – PCP's Office $50 copayment – Specialist's Office
+main,H5216-428-2,K_tests_labs,,$0-$50/$0,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,64,Lab Services $0 copayment – PCP's Office
+main,H5216-428-2,K_tests_labs,,$0-$50/$0,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,64,Lab Services $0 copayment – PCP's Office – Specialist's Office
+main,H5216-428-2,K_tests_labs,,$0-$50/$0,https://assets.humana.com/is/content/humana/H5216428002SB27pdf,9,Freestanding laboratory $0 copay 50% of the cost
 main,H5216-428-2,L_xray_imaging,1,$0-$45,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,63,$45 copayment – Specialist's Office
 main,H5216-428-2,L_xray_imaging,1,$0-$45,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,63,Basic Radiological Services $0 copayment – PCP's Office
 main,H5216-428-2,L_xray_imaging,2,$205-$330,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,63,$205 copayment – Freestanding Radiological Facility
@@ -321,10 +724,24 @@ main,H5216-455-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content
 main,H5216-455-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,36,Non-Emergency Ambulance $325 copayment per date of
 main,H5216-455-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,37,20% coinsurance regardless of the number of trips – Air Ambulance Out-of-Network:
 main,H5216-455-0,AB_ambulance,2,$325,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,37,Worldwide Coverage $325 copayment
+main,H5216-455-0,F_primary_care,1,$0,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,62,Provider and Professional Services $0 copayment – PCP's Office
+main,H5216-455-0,F_primary_care,2,50%,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,63,Provider and Professional Services 50% coinsurance – PCP's Office
+main,H5216-455-0,G_specialist,1,$40,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,62,Provider and Professional Services $0 copayment – PCP's Office $40 copayment – Specialist's Office
+main,H5216-455-0,G_specialist,2,50%,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,63,Provider and Professional Services 50% coinsurance – PCP's Office – Specialist's Office
+main,H5216-455-0,H_inpatient,1,$480,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,48,"– $480 copayment per day, days 1 to 4"
+main,H5216-455-0,H_inpatient,2,1-4,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,48,"– $480 copayment per day, days 1 to 4"
 main,H5216-455-0,I_outpatient_surgery,1,$0-$450,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,61,$350 copayment – Ambulatory Surgical Center Diagnostic Colonoscopy $0 copayment
 main,H5216-455-0,I_outpatient_surgery,1,$0-$450,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,61,Surgery Services $450 copayment – Outpatient Hospital
 main,H5216-455-0,I_outpatient_surgery,2,$0-$350,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,61,$350 copayment – Ambulatory Surgical Center
 main,H5216-455-0,I_outpatient_surgery,2,$0-$350,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,61,$350 copayment – Ambulatory Surgical Center Diagnostic Colonoscopy $0 copayment
+main,H5216-455-0,J_outpatient_rehab,,$45,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,59,In-Network: Physical Therapy $45 copayment – Specialist's Office – Outpatient Hospital
+main,H5216-455-0,J_outpatient_rehab,,$45,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,60,Occupational Therapy $45 copayment – Specialist's Office – Outpatient Hospital
+main,H5216-455-0,J_outpatient_rehab,,$45,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,60,Speech Therapy $45 copayment – Specialist's Office – Outpatient Hospital
+main,H5216-455-0,K_tests_labs,,$0-$40/$0,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,52,Diagnostic Procedures and Tests $0 copayment
+main,H5216-455-0,K_tests_labs,,$0-$40/$0,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,53,– PCP's Office $40 copayment – Specialist's Office $50 copayment
+main,H5216-455-0,K_tests_labs,,$0-$40/$0,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,54,Lab Services $0 copayment – PCP's Office
+main,H5216-455-0,K_tests_labs,,$0-$40/$0,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,54,Lab Services $0 copayment – PCP's Office – Specialist's Office
+main,H5216-455-0,K_tests_labs,,$0-$40/$0,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,54,Lab Services $0 copayment – PCP's Office – Specialist's Office – Urgent Care Center – Outpatient Hospital – Freestanding Laboratory
 main,H5216-455-0,L_xray_imaging,1,$0-$40,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,53,$40 copayment – Specialist's Office – Freestanding Radiological Facility
 main,H5216-455-0,L_xray_imaging,1,$0-$40,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,53,Basic Radiological Services
 main,H5216-455-0,L_xray_imaging,1,$0-$40,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,53,Basic Radiological Services $0 copayment – PCP's Office
@@ -334,51 +751,121 @@ main,H5216-455-0,L_xray_imaging,2,$205-$330,https://assets.humana.com/is/content
 main,H5216-455-0,L_xray_imaging,2,$205-$330,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,53,Advanced Imaging Services $330 copayment – PCP's Office – Specialist's Office
 main,H5439-010-0,AB_ambulance,1,$175,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,42,$175 copay per one-way trip for Medicare-covered ground ambulance services.
 main,H5439-010-0,AB_ambulance,1,$175,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,43,$175 copay per one-way trip for Medicare-covered air ambulance services.
+main,H5439-010-0,F_primary_care,1,$0,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,90,$0 copay for each Medicare-covered PCP office visit.
+main,H5439-010-0,F_primary_care,2,$30,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,90,$30 copay for each Medicare-covered PCP office visit.
+main,H5439-010-0,G_specialist,1,$30,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,90,$30 copay for each Medicare-covered specialist visit.
+main,H5439-010-0,G_specialist,2,$60,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,91,$60 copay for each Medicare-covered specialist visit.
+main,H5439-010-0,H_inpatient,1,$525,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,68,"$525 copay per day, for days 1 to 5"
+main,H5439-010-0,H_inpatient,2,1-5,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,68,"$525 copay per day, for days 1 to 5"
 main,H5439-010-0,I_outpatient_surgery,1,$0-$500,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,88,$0 copay for Medicare-covered skin biopsies.
 main,H5439-010-0,I_outpatient_surgery,1,$0-$500,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,88,$500 copay for all other Medicare-covered outpatient services.
 main,H5439-010-0,I_outpatient_surgery,2,$200,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,88,$200 copay for each Medicare-covered visit to an ambulatory surgical center.
+main,H5439-010-0,J_outpatient_rehab,,$25,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,85,$25 copay for each Medicare-covered physical therapy visit.
+main,H5439-010-0,J_outpatient_rehab,,$25,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,86,$25 copay for each Medicare-covered occupational therapy visit.
+main,H5439-010-0,J_outpatient_rehab,,$25,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,86,$25 copay for each Medicare-covered speech language therapy visit.
 main,H5439-010-0,L_xray_imaging,1,$50,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,78,$50 copay for Medicare-covered X-rays.
 main,H5439-010-0,L_xray_imaging,2,$0-$125,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,80,$0 copay for Medicare-covered diagnostic mammogram.
 main,H5439-010-0,L_xray_imaging,2,$0-$125,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,80,$125 copay for all other Medicare-covered services received in other settings (such as a physician office or freestanding facility).
 main,H5439-011-0,AB_ambulance,1,$350,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,54,$350 copay per one-way trip for Medicare-covered ground ambulance services.
 main,H5439-011-0,AB_ambulance,1,$350,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,55,$350 copay per one-way trip for Medicare-covered air ambulance services.
+main,H5439-011-0,F_primary_care,1,$0,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,10,$0 copay per visit
+main,H5439-011-0,F_primary_care,1,$0,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,102,$0 copay for each Medicare-covered PCP office visit.
+main,H5439-011-0,F_primary_care,2,30%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,10,"30% coinsurance, for each Medicare-covered PCP office visit."
+main,H5439-011-0,F_primary_care,2,30%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,102,30% coinsurance for each Medicare-covered PCP office visit.
+main,H5439-011-0,G_specialist,1,$30,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,10,$30 copay per visit
+main,H5439-011-0,G_specialist,1,$30,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,103,$30 copay for each Medicare-covered specialist visit.
+main,H5439-011-0,G_specialist,2,30%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,10,"30% coinsurance, for each Medicare-covered specialist visit."
+main,H5439-011-0,G_specialist,2,30%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,103,30% coinsurance for each Medicare-covered specialist visit.
+main,H5439-011-0,H_inpatient,1,$425,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,80,"$425 copay per day, for days 1 to 7"
+main,H5439-011-0,H_inpatient,2,1-7,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,80,"$425 copay per day, for days 1 to 7"
 main,H5439-011-0,I_outpatient_surgery,1,$0-$425,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,100,$0 copay for Medicare-covered skin biopsies.
 main,H5439-011-0,I_outpatient_surgery,1,$0-$425,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,100,$425 copay for all other Medicare-covered outpatient services.
 main,H5439-011-0,I_outpatient_surgery,2,$200,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,100,$200 copay for each Medicare-covered visit to an ambulatory surgical center.
+main,H5439-011-0,J_outpatient_rehab,,$25,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,98,$25 copay for each Medicare-covered occupational therapy visit.
+main,H5439-011-0,J_outpatient_rehab,,$25,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,98,$25 copay for each Medicare-covered physical therapy visit.
+main,H5439-011-0,J_outpatient_rehab,,$25,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,98,$25 copay for each Medicare-covered speech language therapy visit.
 main,H5439-011-0,L_xray_imaging,1,$50,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,90,$50 copay for Medicare-covered X-rays.
 main,H5439-011-0,L_xray_imaging,2,$0-$125,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,92,$0 copay for Medicare-covered diagnostic mammogram.
 main,H5439-011-0,L_xray_imaging,2,$0-$125,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,93,$125 copay for all other Medicare-covered services received in other settings (such as a physician office or freestanding facility).
 main,H5439-015-0,AB_ambulance,1,$335,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,55,Deductible applies. $335 copay per one-way trip for Medicare-covered air
 main,H5439-015-0,AB_ambulance,1,$335,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,55,Deductible applies. $335 copay per one-way trip for Medicare-covered ground
+main,H5439-015-0,F_primary_care,1,$0,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,100,$0 copay for each Medicare-covered PCP office visit.
+main,H5439-015-0,F_primary_care,2,30%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,100,30% coinsurance for each Medicare-covered PCP office visit.
+main,H5439-015-0,G_specialist,1,$55,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,101,$55 copay for each Medicare-covered specialist visit.
+main,H5439-015-0,G_specialist,2,30%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,101,30% coinsurance for each Medicare-covered specialist visit.
+main,H5439-015-0,H_inpatient,1,$475,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,78,"$475 copay per day, for days 1 to 5, and $0 copay per day, for days 6 to 90 for each hospital stay."
+main,H5439-015-0,H_inpatient,2,1-5,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,78,"$475 copay per day, for days 1 to 5, and $0 copay per day, for days 6 to 90 for each hospital stay."
 main,H5439-015-0,I_outpatient_surgery,1,$0-$500,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,98,$0 copay for Medicare-covered skin biopsies.
 main,H5439-015-0,I_outpatient_surgery,1,$0-$500,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,98,$500 copay for all other Medicare-covered outpatient services.
 main,H5439-015-0,I_outpatient_surgery,2,$300,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,98,$300 copay for each Medicare-covered visit to an ambulatory surgical center.
+main,H5439-015-0,J_outpatient_rehab,,$35,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,96,$35 copay for each Medicare-covered occupational therapy visit.
+main,H5439-015-0,J_outpatient_rehab,,$35,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,96,$35 copay for each Medicare-covered physical therapy visit.
+main,H5439-015-0,J_outpatient_rehab,,$35,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,96,$35 copay for each Medicare-covered speech language therapy visit.
 main,H5439-015-0,L_xray_imaging,1,$50,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,88,$50 copay for Medicare-covered X-rays.
 main,H5439-015-0,L_xray_imaging,2,$0-$225,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,90,$0 copay for Medicare-covered diagnostic mammogram.
 main,H5439-015-0,L_xray_imaging,2,$0-$225,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,91,$225 copay for all other Medicare-covered services received in other settings (such as a physician office or freestanding facility).
 main,H5439-019-0,AB_ambulance,1,$325,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,56,Deductible applies. $325 copay per one-way trip for Medicare-covered air
 main,H5439-019-0,AB_ambulance,1,$325,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,56,Deductible applies. $325 copay per one-way trip for Medicare-covered ground
+main,H5439-019-0,F_primary_care,1,$0,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,100,$0 copay for each Medicare-covered PCP office visit.
+main,H5439-019-0,F_primary_care,2,$30,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,101,$30 copay for each Medicare-covered PCP office visit.
+main,H5439-019-0,G_specialist,1,$30,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,101,$30 copay for each Medicare-covered specialist visit.
+main,H5439-019-0,G_specialist,1,$30,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,101,"Consultation, diagnosis, and treatment by a specialist"
+main,H5439-019-0,G_specialist,2,$60,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,102,$60 copay for each Medicare-covered specialist visit.
+main,H5439-019-0,H_inpatient,1,$475,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,79,"$475 copay per day, for days 1 to 5"
+main,H5439-019-0,H_inpatient,2,1-5,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,79,"$475 copay per day, for days 1 to 5"
 main,H5439-019-0,I_outpatient_surgery,1,$0-$500,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,98,$0 copay for Medicare-covered skin biopsies.
 main,H5439-019-0,I_outpatient_surgery,1,$0-$500,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,98,$500 copay for all other Medicare-covered outpatient services.
 main,H5439-019-0,I_outpatient_surgery,2,$350,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,99,$350 copay for each Medicare-covered visit to an ambulatory surgical center.
+main,H5439-019-0,J_outpatient_rehab,,$30,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,96,$30 copay for each Medicare-covered occupational therapy visit.
+main,H5439-019-0,J_outpatient_rehab,,$30,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,96,$30 copay for each Medicare-covered physical therapy visit.
+main,H5439-019-0,J_outpatient_rehab,,$30,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,97,$30 copay for each Medicare-covered speech language therapy visit.
 main,H5439-019-0,L_xray_imaging,1,$50,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,89,$50 copay for Medicare-covered X-rays.
 main,H5439-019-0,L_xray_imaging,2,$0-$250,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,91,$0 copay for Medicare-covered diagnostic mammogram.
 main,H5439-019-0,L_xray_imaging,2,$0-$250,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,91,$250 copay for all other Medicare-covered services received in other settings (such as a physician office or freestanding facility).
 main,H6815-038-0,AB_ambulance,1,$310,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,54,$310 copay per one-way trip for Medicare-covered ground
 main,H6815-038-0,AB_ambulance,1,$310,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,55,$310 copay per one-way trip for Medicare-covered air
+main,H6815-038-0,F_primary_care,,$0,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,90,$0 copay for each Medicare-covered PCP office visit.
+main,H6815-038-0,G_specialist,,$25,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,91,$25 copay for each Medicare-covered specialist visit.
+main,H6815-038-0,H_inpatient,1,$600,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,74,"$600 copay per day, for days 1 to 4"
+main,H6815-038-0,H_inpatient,2,1-4,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,74,"$600 copay per day, for days 1 to 4"
 main,H6815-038-0,I_outpatient_surgery,1,$0-20%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,89,$0 copay for Medicare-covered skin biopsies.
 main,H6815-038-0,I_outpatient_surgery,1,$0-20%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,89,20% coinsurance for each Medicare-covered outpatient surgical service.
 main,H6815-038-0,I_outpatient_surgery,2,$300,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,89,$300 copay for each Medicare-covered visit to an ambulatory surgical center.
+main,H6815-038-0,J_outpatient_rehab,,$25,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,87,$25 copay for each Medicare-covered physical therapy visit.
+main,H6815-038-0,J_outpatient_rehab,,$25,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,88,$25 copay for each Medicare-covered occupational therapy visit.
+main,H6815-038-0,J_outpatient_rehab,,$25,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,88,$25 copay for each Medicare-covered speech language therapy visit.
 main,H6815-038-0,L_xray_imaging,1,$50,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,82,$50 copay for Medicare-covered X-rays.
 main,H6815-038-0,L_xray_imaging,2,$0-$200,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,83,$0 copay for Medicare-covered diagnostic mammogram.
 main,H6815-038-0,L_xray_imaging,2,$0-$200,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,83,$200 copay for all other Medicare-covered services received in other settings (such as a physician office or freestanding facility).
 main,H7006-018-0,AB_ambulance,1,$250,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,47,$250 copay for each Medicare-covered Air Ambulance service.
 main,H7006-018-0,AB_ambulance,1,$250,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,47,$250 copay for each Medicare-covered Ground Ambulance service.
 main,H7006-018-0,AB_ambulance,1,$250,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,47,Cost sharing applies to each one-way trip.
+main,H7006-018-0,F_primary_care,1,$0,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,10,$0 copay per visit
+main,H7006-018-0,F_primary_care,1,$0,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,10,Primary care office visits
+main,H7006-018-0,F_primary_care,1,$0,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,84,$0 copay for each
+main,H7006-018-0,F_primary_care,1,$0,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,84,get in a physician’s office by a primary care provider
+main,H7006-018-0,F_primary_care,2,$50,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,10,$50 copay per visit
+main,H7006-018-0,F_primary_care,2,$50,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,10,Primary care office visits
+main,H7006-018-0,F_primary_care,2,$50,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,84,$50 copay for each
+main,H7006-018-0,F_primary_care,2,$50,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,84,get in a physician’s office by a primary care provider
+main,H7006-018-0,G_specialist,1,$45,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,10,$45 copay per visit
+main,H7006-018-0,G_specialist,1,$45,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,10,Specialist office visits
+main,H7006-018-0,G_specialist,1,$45,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,84,"Consultation, diagnosis, and treatment by a specialist"
+main,H7006-018-0,G_specialist,1,$45,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,84,In-Network $45 copay for each
+main,H7006-018-0,G_specialist,2,$45,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,84,"Consultation, diagnosis, and treatment by a specialist"
+main,H7006-018-0,G_specialist,2,$45,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,84,Out-of-Network $45 copay for each
+main,H7006-018-0,H_inpatient,1,$585,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,65,In-Network $585 copay each day for days 1 to 4
+main,H7006-018-0,H_inpatient,2,1-4,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,65,In-Network $585 copay each day for days 1 to 4
 main,H7006-018-0,I_outpatient_surgery,1,$0-$400,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,81,$0 - $400 copay depending on the Medicare-covered service.
 main,H7006-018-0,I_outpatient_surgery,1,$0-$400,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,81,Services provided at an outpatient hospital
 main,H7006-018-0,I_outpatient_surgery,2,$250,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,81,$250 copay for each Medicare-covered service.
 main,H7006-018-0,I_outpatient_surgery,2,$250,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,81,Services provided at an ambulatory surgical center
+main,H7006-018-0,J_outpatient_rehab,,$20,https://atriohp.com/media/254ghvxu/2027-portland-sb_final-v2.pdf,11,In-Network $20 copay* Out-of-Network $20 copay
+main,H7006-018-0,J_outpatient_rehab,,$20,https://atriohp.com/media/254ghvxu/2027-portland-sb_final-v2.pdf,11,Physical Therapy
+main,H7006-018-0,J_outpatient_rehab,,$20,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,80,Services provided by an occupational therapist In-Network $20 copay for each
+main,H7006-018-0,K_tests_labs,,$0-$20/$0,https://atriohp.com/media/254ghvxu/2027-portland-sb_final-v2.pdf,7,$0 - $20 copay
+main,H7006-018-0,K_tests_labs,,$0-$20/$0,https://atriohp.com/media/254ghvxu/2027-portland-sb_final-v2.pdf,7,Diagnostic tests and
+main,H7006-018-0,K_tests_labs,,$0-$20/$0,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,74,$0 copay for each Medicare-covered service. Prior Authorization may be required.
 main,H7006-018-0,L_xray_imaging,1,$0,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,73,In-Network $0 copay for each Medicare-covered service.
 main,H7006-018-0,L_xray_imaging,2,$0-$300,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,74,$0 copay applies to diagnostic mammograms; $300 copay applies to all other tests.
 main,H7006-018-0,L_xray_imaging,2,$0-$300,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,74,"Diagnostic non-laboratory tests such as CT scans, MRIs,"
@@ -387,8 +874,22 @@ main,H7006-018-0,L_xray_imaging,2,$0-$300,https://atriohp.com/media/qzyffvwm/h70
 main,H7006-018-0,L_xray_imaging,2,$0-$300,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,75,Other outpatient diagnostic tests - Radiological diagnostic
 main,H7006-021-0,AB_ambulance,1,$300,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,39,In-Network $300 copay for each Medicare-covered Ground Ambulance service.
 main,H7006-021-0,AB_ambulance,1,$300,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,39,prior authorization. $300 copay for each Medicare-covered Air Ambulance service.
+main,H7006-021-0,F_primary_care,1,$0,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,9,$0 copay per visit
+main,H7006-021-0,F_primary_care,1,$0,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,9,Primary care office visits
+main,H7006-021-0,F_primary_care,2,$50,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,9,In-Network: $0 copay per visit Out-of-Network: $50 copay per visit
+main,H7006-021-0,F_primary_care,2,$50,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,9,Primary care office visits
+main,H7006-021-0,G_specialist,1,$40,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,9,$40 copay per visit
+main,H7006-021-0,G_specialist,1,$40,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,9,Specialist office visits
+main,H7006-021-0,G_specialist,2,$50,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,9,In-Network: $40 copay per visit Out-of-Network: $50 copay per visit
+main,H7006-021-0,G_specialist,2,$50,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,9,Specialist office visits
+main,H7006-021-0,H_inpatient,1,$250,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,56,$250 copay each day for days 1 to 5 and $0 copay each day for days 6 to 90 for Medicare-covered hospital care.
+main,H7006-021-0,H_inpatient,2,1-5,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,56,$250 copay each day for days 1 to 5 and $0 copay each day for days 6 to 90 for Medicare-covered hospital care.
 main,H7006-021-0,I_outpatient_surgery,1,$350,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,72,$350 copay for each Medicare-covered service.
 main,H7006-021-0,I_outpatient_surgery,2,$250,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,72,$250 copay for each Medicare-covered service.
+main,H7006-021-0,J_outpatient_rehab,,$20,https://atriohp.com/media/254ghvxu/2027-portland-sb_final-v2.pdf,11,In-Network $20 copay* Out-of-Network 50% coinsurance
+main,H7006-021-0,J_outpatient_rehab,,$20,https://atriohp.com/media/254ghvxu/2027-portland-sb_final-v2.pdf,11,Physical Therapy
+main,H7006-021-0,J_outpatient_rehab,,$20,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,71,50% coinsurance for each Medicare-covered service. In-Network $20 copay for each Medicare-covered service.
+main,H7006-021-0,J_outpatient_rehab,,$20,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,71,Services provided by an occupational therapist
 main,H7006-021-0,L_xray_imaging,1,$0,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,64,$0 copay for each Medicare-covered service.
 main,H7006-021-0,L_xray_imaging,1,$0,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,64,X-rays
 main,H7006-021-0,L_xray_imaging,2,$0-$60,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,65,$0 copay applies to diagnostic mammograms; $60 copay applies to all other tests.
@@ -401,10 +902,23 @@ main,H7199-002-0,AB_ambulance,1,$0-$325 or 20%,https://assets.devoted.com/plan-d
 main,H7199-002-0,AB_ambulance,1,$0-$325 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,55,You pay $0 copay for facility-to-
 main,H7199-002-0,AB_ambulance,2,$325 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,56,Air Ambulance: 20%
 main,H7199-002-0,AB_ambulance,2,$325 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,56,Ground Ambulance: $325
+main,H7199-002-0,F_primary_care,1,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,111,Services from a primary care physician (PCP): $0 copay
+main,H7199-002-0,F_primary_care,2,$10,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,112,Services from a primary care physician (PCP): $10 copay
+main,H7199-002-0,G_specialist,1,$45,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,111,Services from a specialist: $45 copay
+main,H7199-002-0,G_specialist,2,$45,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,112,Services from a specialist: $45 copay
+main,H7199-002-0,H_inpatient,1,$400,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,85,You pay $400 per day for days 1
+main,H7199-002-0,H_inpatient,2,1-5,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,85,You pay $400 per day for days 1
 main,H7199-002-0,I_outpatient_surgery,1,$0-$500,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,108,$500 copay for outpatient procedures/surgery at an
 main,H7199-002-0,I_outpatient_surgery,1,$0-$500,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,108,Diagnostic Colonoscopies At an Office or Freestanding location: $0 copay At an Outpatient hospital: $0 copay
 main,H7199-002-0,I_outpatient_surgery,2,$0-$400,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,108,$400 copay for outpatient procedures/surgery at an ASC
 main,H7199-002-0,I_outpatient_surgery,2,$0-$400,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,108,Diagnostic Colonoscopies At an Office or Freestanding location: $0 copay At an Outpatient hospital: $0 copay At an Ambulatory Surgical Center (ASC): $0 copay
+main,H7199-002-0,J_outpatient_rehab,,$40,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,106,Home or Office location: $40 copay
+main,H7199-002-0,J_outpatient_rehab,,$40,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,106,Occupational Therapy Office location: $40 copay
+main,H7199-002-0,J_outpatient_rehab,,$40,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,106,Speech Therapy Office location: $40 copay
+main,H7199-002-0,K_tests_labs,,$0-$40/$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,94,Freestanding location: $40 copay
+main,H7199-002-0,K_tests_labs,,$0-$40/$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,95,Advanced Laboratory Services Office or freestanding location: $0 copay
+main,H7199-002-0,K_tests_labs,,$0-$40/$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,95,Routine Laboratory Services Office or freestanding location: $0 copay
+main,H7199-002-0,K_tests_labs,,$0-$40/$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-SB-H7199-002-ENG.pdf,6,"Diagnostic Tests and Procedures (such as a stress test, etc.) Office or freestanding location: $0 - $40 copay Outpatient hospital: $95 copay Radiation Therapy Office or freestanding location: 20% coinsurance"
 main,H7199-002-0,L_xray_imaging,1,$25,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,96,X-rays PCP's office: $25 copay
 main,H7199-002-0,L_xray_imaging,1,$25,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,96,X-rays PCP's office: $25 copay Specialist's office: $25 copay
 main,H7199-002-0,L_xray_imaging,1,$25,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,96,X-rays PCP's office: $25 copay Specialist's office: $25 copay Freestanding location: $25 copay
@@ -417,7 +931,18 @@ main,H9003-001-0,AB_ambulance,2,$250,https://healthy.kaiserpermanente.org/conten
 main,H9003-001-0,AB_ambulance,2,$250,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,54,"fixed wing, rotary wing, and ground ambulance"
 main,H9003-001-0,AB_ambulance,2,$250,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,55,We also cover the services of a licensed ambulance
 main,H9003-001-0,AB_ambulance,2,$250,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,55,anywhere in the world without prior authorization
+main,H9003-001-0,F_primary_care,,$0,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,88,Primary care office visits $0
+main,H9003-001-0,G_specialist,,$35,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,88,$35 for Enhanced plan members.
+main,H9003-001-0,G_specialist,,$35,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,88,Specialist office visits
+main,H9003-001-0,H_inpatient,1,$250,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,72,$250 per day for days 1–6 of a hospital stay for Enhanced plan members.
+main,H9003-001-0,H_inpatient,2,1-6,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,72,$250 per day for days 1–6 of a hospital stay for Enhanced plan members.
 main,H9003-001-0,I_outpatient_surgery,1,$250,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,83,$250 for Enhanced plan members.
+main,H9003-001-0,J_outpatient_rehab,,$25,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,86,$25 for Enhanced plan
+main,H9003-001-0,J_outpatient_rehab,,$25,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,86,"Covered services include physical therapy,"
+main,H9003-001-0,K_tests_labs,,$0-$35/$0,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,80,"$0 You pay the following per visit, per"
+main,H9003-001-0,K_tests_labs,,$0-$35/$0,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,80,• Laboratory tests
+main,H9003-001-0,K_tests_labs,,$0-$35/$0,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/summary-of-benefits/medicare/2027/summary-of-benefits-nw.pdf,5,$0 or $35 per visit
+main,H9003-001-0,K_tests_labs,,$0-$35/$0,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/summary-of-benefits/medicare/2027/summary-of-benefits-nw.pdf,5,Diagnostic tests and
 main,H9003-001-0,L_xray_imaging,1,$0,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,80,X-rays
 main,H9003-001-0,L_xray_imaging,1,$0,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,80,"You pay the following per visit, per department depending upon the plan in which you are enrolled:"
 main,H9003-001-0,L_xray_imaging,1,$0,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,80,• $0 for Enhanced plan members.
@@ -430,7 +955,16 @@ main,H9003-006-0,AB_ambulance,2,$300,https://healthy.kaiserpermanente.org/conten
 main,H9003-006-0,AB_ambulance,2,$300,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,54,"fixed wing, rotary wing, and ground ambulance"
 main,H9003-006-0,AB_ambulance,2,$300,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,55,We also cover the services of a licensed ambulance
 main,H9003-006-0,AB_ambulance,2,$300,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,55,anywhere in the world without prior authorization
+main,H9003-006-0,F_primary_care,,$0,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,88,Primary care office visits $0
+main,H9003-006-0,G_specialist,,$40,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,88,$40 for Standard plan members.
+main,H9003-006-0,G_specialist,,$40,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,88,Specialist office visits
+main,H9003-006-0,H_inpatient,1,$320,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,72,$320 per day for days 1–6 of a hospital stay for Standard plan members.
+main,H9003-006-0,H_inpatient,2,1-6,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,72,$320 per day for days 1–6 of a hospital stay for Standard plan members.
 main,H9003-006-0,I_outpatient_surgery,1,$350,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,83,$350 for Standard plan members.
+main,H9003-006-0,J_outpatient_rehab,,$35,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,86,$35 for Standard plan members.
+main,H9003-006-0,K_tests_labs,,$0-$40/$0,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,80,"$0 You pay the following per visit, per"
+main,H9003-006-0,K_tests_labs,,$0-$40/$0,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,80,• Laboratory tests
+main,H9003-006-0,K_tests_labs,,$0-$40/$0,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/summary-of-benefits/medicare/2027/summary-of-benefits-nw.pdf,5,$0 or $40 per visit
 main,H9003-006-0,L_xray_imaging,1,$0,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,80,X-rays
 main,H9003-006-0,L_xray_imaging,1,$0,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,80,"You pay the following per visit, per department depending upon the plan in which you are enrolled:"
 main,H9003-006-0,L_xray_imaging,1,$0,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,80,• $0 for Standard plan members.
@@ -441,7 +975,16 @@ main,H9003-009-0,AB_ambulance,1,$350,https://healthy.kaiserpermanente.org/conten
 main,H9003-009-0,AB_ambulance,2,$350,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,55,$350 for Value plan members.
 main,H9003-009-0,AB_ambulance,2,$350,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,55,We also cover the services of a licensed ambulance
 main,H9003-009-0,AB_ambulance,2,$350,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,55,anywhere in the world without prior authorization
+main,H9003-009-0,F_primary_care,,$0,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,88,Primary care office visits $0
+main,H9003-009-0,G_specialist,,$45,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,88,$45 for Value plan members.
+main,H9003-009-0,G_specialist,,$45,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,88,Specialist office visits
+main,H9003-009-0,H_inpatient,1,$455,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,72,$455 per day for days 1–6 of a hospital stay for Value plan members.
+main,H9003-009-0,H_inpatient,2,1-6,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,72,$455 per day for days 1–6 of a hospital stay for Value plan members.
 main,H9003-009-0,I_outpatient_surgery,1,$400,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,83,$400 for Value plan members.
+main,H9003-009-0,J_outpatient_rehab,,$50,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,86,$50 for Value plan
+main,H9003-009-0,K_tests_labs,,$15-$45/$0,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,80,"$0 You pay the following per visit, per"
+main,H9003-009-0,K_tests_labs,,$15-$45/$0,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,80,• Laboratory tests
+main,H9003-009-0,K_tests_labs,,$15-$45/$0,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/summary-of-benefits/medicare/2027/summary-of-benefits-nw.pdf,5,$15 or $45 per visit
 main,H9003-009-0,L_xray_imaging,1,$15,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,80,X-rays
 main,H9003-009-0,L_xray_imaging,1,$15,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,80,"You pay the following per visit, per department depending upon the plan in which you are enrolled:"
 main,H9003-009-0,L_xray_imaging,1,$15,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,80,• $15 for Value plan members.

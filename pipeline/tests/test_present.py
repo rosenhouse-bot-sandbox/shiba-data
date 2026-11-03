@@ -192,12 +192,143 @@ class OutpatientSurgeryTest(unittest.TestCase):
         self.assertEqual([cited for _, cited in present.outpatient_surgery("Aetna", [cost, zero])], [[], [cost, zero]])
 
 
+def priced(benefit, setting="any", amount="$0", **more):
+    return fact(benefit, setting, amount, **{"cost_kind": "coinsurance" if amount.endswith("%") else "copay", **more})
+
+
+def tests_labs(organization, *found):
+    return present.tests_labs(organization, list(found))[0][0]
+
+
+class TestsLabsTest(unittest.TestCase):
+    def test_office_prices_only(self):
+        found = [priced("tests.diagnostic", "office.pcp"), priced("tests.diagnostic", "office.specialist", "$30"),
+                 priced("tests.diagnostic", "urgent_care", "$40"), priced("tests.diagnostic", "outpatient_hospital", "$100"),
+                 priced("tests.lab", "freestanding")]
+        self.assertEqual(tests_labs("Aetna", *found), "$0-$30/$0")
+
+    def test_one_plan_keeps_its_hospital_sleep_study(self):
+        found = [priced("tests.diagnostic", "office.pcp"), priced("tests.lab", "freestanding"),
+                 priced("tests.diagnostic.sleep_study", "outpatient_hospital", "$140")]
+        self.assertEqual(tests_labs("Humana", *found), "$0/$0")
+        self.assertEqual(tests_labs("Humana", *[dict(f, plan_id="H1036-306-0") for f in found]), "$0-$140/$0")
+
+    def test_a_0_colonoscopy_or_mammogram_counts_as_a_test_for_some_carriers(self):
+        for zero in (priced("surgery.colonoscopy", "outpatient_hospital"), priced("imaging.diagnostic.mammogram")):
+            found = [priced("tests.diagnostic", amount="20%"), zero, priced("tests.lab")]
+            self.assertEqual(tests_labs("AgeRight Advantage", *found), "$0-20%/$0")
+            self.assertEqual(tests_labs("UnitedHealthcare", *found), "20%/$0")
+        self.assertEqual(tests_labs("Regence", priced("tests.diagnostic", amount="$10"),
+                                    priced("imaging.diagnostic.mammogram", amount="$20")), "$10/")
+
+    def test_a_price_for_some_tests_counts_but_one_for_some_members_does_not(self):
+        found = [priced("tests.diagnostic", amount="$35"), priced("tests.diagnostic", condition="certain tests"),
+                 priced("tests.lab", amount="20%"), priced("tests.lab", condition="QMB members")]
+        self.assertEqual(tests_labs("Aetna", *found), "$0-$35/20%")
+
+    def test_leaves_out_genetic_testing(self):
+        found = [priced("tests.lab"), priced("tests.lab", amount="$10", setting="freestanding"),
+                 priced("tests.genetic", amount="$50"), priced("tests.diagnostic")]
+        self.assertEqual(tests_labs("Wellcare", *found), "$0/$0-$10")
+
+    def test_falls_back_to_outpatient_hospital_prices(self):
+        self.assertEqual(tests_labs("Aetna", priced("tests.lab", "outpatient_hospital", "$0 or $40")), "/$0-$40")
+
+    def test_no_facts_leave_the_line_blank(self):
+        self.assertEqual(present.tests_labs("Aetna", []), [("", [])])
+
+
+def visits(setting, *found):
+    return [value for value, _ in present.visits(setting)("Aetna", list(found))]
+
+
+class VisitsTest(unittest.TestCase):
+    def test_line_2_is_out_of_network_when_the_plan_prices_it(self):
+        self.assertEqual(visits("office.pcp", priced("visits", "office.pcp")), ["$0", ""])
+        self.assertEqual(visits("office.pcp", priced("visits", "office.pcp"),
+                                priced("visits", "office.pcp", "50%", network="out")), ["$0", "50%"])
+
+    def test_each_column_takes_its_own_office(self):
+        found = [priced("visits", "office.pcp", "$5"), priced("visits", "office.specialist", "$45")]
+        self.assertEqual((visits("office.pcp", *found), visits("office.specialist", *found)), (["$5", ""], ["$45", ""]))
+        self.assertEqual(visits("office.specialist", priced("visits", "office", "$35")), ["$35", ""])
+
+    def test_telehealth_and_conditional_prices_give_way(self):
+        found = [priced("visits", "office.specialist", "$65"), priced("visits", "telehealth", "$0-$65"),
+                 priced("visits", "office.specialist", condition="received in a nursing home")]
+        self.assertEqual(visits("office.specialist", *found), ["$65", ""])
+
+    def test_a_cost_for_every_network_fills_both_lines(self):
+        self.assertEqual(visits("office.specialist", priced("visits", amount="$45", network="any"),
+                                priced("visits", "office.pcp", "$10", network="out")), ["$45", "$45"])
+
+    def test_keeps_specialist_tiers_and_skips_packages(self):
+        self.assertEqual(visits("office.specialist", priced("visits", "office.specialist", provider_tier="cardiologist"),
+                                priced("visits", "office.specialist", "$20", provider_tier="all other")), ["$0-$20", ""])
+        self.assertEqual(visits("office.specialist", priced("visits", "office.specialist", "$45", package="A")), ["", ""])
+
+
+def rehab(*found):
+    return present.outpatient_rehab("Aetna", list(found))[0][0]
+
+
+class OutpatientRehabTest(unittest.TestCase):
+    def test_office_and_freestanding_prices_over_ground_and_speech_therapy(self):
+        self.assertEqual(rehab(priced("rehab.physical", "office.specialist", "$20"),
+                               priced("rehab.physical", "outpatient_hospital", "$50"),
+                               priced("rehab.occupational", "freestanding", "$40"),
+                               priced("rehab.speech", "office.specialist", "$20")), "$20-$40")
+
+    def test_leaves_out_reevaluations(self):
+        self.assertEqual(rehab(priced("rehab.physical", amount="$40"), priced("rehab.reevaluation")), "$40")
+
+    def test_falls_back_to_outpatient_hospital_prices(self):
+        self.assertEqual(rehab(priced("rehab.physical", "outpatient_hospital", "$50")), "$50")
+
+    def test_one_cost_for_all_therapy(self):
+        self.assertEqual(rehab(priced("rehab", amount="30%"), priced("rehab", amount="$0", condition="QMB")), "30%")
+
+
+def stay(amount, limit="", unit="per day", benefit="inpatient.acute", **more):
+    return priced(benefit, amount=amount, unit=unit, limit=limit, **{"condition": limit, **more})
+
+
+def inpatient(*found):
+    return [value for value, _ in present.inpatient("Aetna", list(found))]
+
+
+class InpatientTest(unittest.TestCase):
+    def test_a_daily_cost_and_its_days(self):
+        self.assertEqual(inpatient(stay("$465", "days 1-5"), stay("$0", "days 6+")), ["$465", "1-5"])
+        self.assertEqual(inpatient(stay("$600", "days 1-4"), stay("$0", "days 5-90")), ["$600", "1-4"])
+
+    def test_two_paid_tiers_span_their_days(self):
+        self.assertEqual(inpatient(stay("$300", "days 1-3"), stay("$100", "days 4-6"), stay("$0", "days 7+")),
+                         ["$100-$300", "1-6"])
+
+    def test_a_cost_per_stay_is_per_admission(self):
+        self.assertEqual(inpatient(stay("$2,241", unit="per stay")), ["$2,241 per admission", ""])
+
+    def test_skips_out_of_network_and_psychiatric_stays(self):
+        self.assertEqual(inpatient(stay("$550", "days 1-5"), stay("$680", "days 1-16", network="out"),
+                                   stay("$300", "days 1-3", benefit="inpatient.psychiatric")), ["$550", "1-5"])
+
+    def test_skips_a_stay_for_some_members(self):
+        self.assertEqual(inpatient(stay("$1,980", unit="per stay"), stay("$0", unit="per stay", condition="full Medicaid")),
+                         ["$1,980 per admission", ""])
+
+    def test_a_cost_without_days(self):
+        self.assertEqual(inpatient(stay("$0", unit="per stay")), ["$0 per admission", ""])
+        self.assertEqual(inpatient(stay("$250", unit="")), ["$250", ""])
+        self.assertEqual(inpatient(), ["", ""])
+
+
 def presented_cells(data, column):
     return {p: [value for value, _ in got] for p, got in present.lines(data, column).items()}
 
 
 def shown(lines, line):
-    return " | ".join(lines) if not line else lines[int(line) - 1]
+    return " | ".join(lines).removesuffix(" | ") if not line else lines[int(line) - 1]
 
 
 class WriteTest(unittest.TestCase):
@@ -246,7 +377,8 @@ class ExpectedTest(unittest.TestCase):
             cells = presented_cells(data, column)
             wanted = {(w["plan_id"], w["line"]): w["value"] for w in expected.load() if w["column"] == column}
             missed = [(p, line, value, cells.get(p)) for (p, line), value in wanted.items()
-                      if (column, p, line) not in TRIAGED and shown(cells.get(p, ["", ""]), line) != value]
+                      if (column, p, line) not in TRIAGED and (column, p) not in present.HELD
+                      and shown(cells.get(p, ["", ""]), line) != value]
             self.assertEqual(missed, [], column)
             self.assertTrue(all(shown(cells[p], line) != wanted[p, line] for c, p, line in TRIAGED if c == column))
 
@@ -254,10 +386,12 @@ class ExpectedTest(unittest.TestCase):
         data = years.data_dir(YEAR)
         rows = present.layer_rows(data)
         self.assertTrue(rows and all(r["url"] and r["quote"] for r in rows))
+        generated = {r["plan_id"]: r for r in layers.generated(data)["main"]}
         for column in present.COLUMNS:
             self.assertEqual({(r["plan_id"], r["line"]) for r in rows if r["column"] == column},
-                             {(p, str(n)) for p, lines in presented_cells(data, column).items()
-                              for n, v in enumerate(lines, 1) if v})
+                             {(p, str(n) if " | " in generated[p][column] else "")
+                              for p, lines in presented_cells(data, column).items()
+                              if (column, p) not in present.HELD for n, v in enumerate(lines, 1) if v})
 
 
 if __name__ == "__main__":
