@@ -45,11 +45,12 @@ def sample(docs, plan_rows):
     return sorted(first.values(), key=lambda d: d["id"])
 
 
-def cost(model, usage):
-    prices = PRICES[model]
+def cost(answer):
+    """Dollars a saved answer cost."""
+    prices, usage = PRICES[answer["model"]], answer.get("usage", {})
     tokens = [usage.get(k, 0) for k in ("input_tokens", "output_tokens", "cache_read_input_tokens",
                                          "cache_creation_input_tokens")]
-    return sum(t * p for t, p in zip(tokens, prices)) / 1e6
+    return sum(t * p for t, p in zip(tokens, prices)) / 1e6 / (2 if answer.get("batch") else 1)
 
 
 def spent(tasks, role, saved):
@@ -60,7 +61,7 @@ def spent(tasks, role, saved):
             path = os.path.join(saved, ask.key(role[0], f.read(), role[1]) + ".json")
         if os.path.exists(path):
             with open(path) as f:
-                total += cost(role[0], json.load(f).get("usage", {}))
+                total += cost(json.load(f))
     return total
 
 
@@ -68,8 +69,7 @@ def all_spent(saved):
     total = 0.0
     for path in glob.glob(f"{saved}/*.json"):
         with open(path) as f:
-            a = json.load(f)
-        total += cost(a["model"], a.get("usage", {}))
+            total += cost(json.load(f))
     return total
 
 
