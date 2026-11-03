@@ -6,7 +6,7 @@ Do not file issues or PRs against any other repos.
 ## Planning
 
 Keep design notes, plans, requirements and open questions in GitHub issues,
-not in repo files. Issue #1 describes the project.
+not in repo files.
 
 
 ## Attribution of GitHub posts
@@ -20,6 +20,7 @@ review, and review comment that Claude writes must begin with the line
 as its first line, before any other text. This applies without exception,
 including edits of earlier posts.
 
+
 ## Testing
 
 Default to red/green TDD for most work: write a failing test first, then
@@ -29,11 +30,16 @@ If I were to mutate or remove the production code, then a test ought to fail!
 
 
 ## Writing style
+
 This applies to code comments, commit messages, issues, markdown docs, etc.
 - Write as little as possible.  Clean code and tests should be largely self-documenting through variable and function names.
   Aggressively remove prose that doesn't add significant value beyond the code itself.
 - Prune historical context that isn't immediately necessary to understand current behavior.
 - Prefer short, complete sentences with a clear subject and verb.  A noun phrase is not a sentence.
+- Use idiomatic conversational English.  When writing a proposal or change summary, lead with a clear goal.  For example, in a PR description that introduces a linter:
+  - Awkward: CI runs no linter.
+  - Better: CI does not run a linter.
+  - Best (clear goal): CI should run a linter.
 
 
 ## Adversarial review
