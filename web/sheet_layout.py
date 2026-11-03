@@ -10,7 +10,7 @@ DETAILS = "Details"
 FACT_COLUMNS = {"Plan ID": "plan_id", "Plan": None, "Benefit": "benefit", "Setting": "setting", "Network": "network",
                 "Covered by": "covered_by", "Cost kind": "cost_kind", "Amount": "amount", "Unit": "unit", "Limit": "limit",
                 "Condition": "condition", "Package": "package", "Pool": "pool", "Provider tier": "provider_tier",
-                "Source": "source", "Page": "page", "Quote": None}
+                "Source": "source", "Page": "page", "Quote or CMS field": None, "Note": "note"}
 # Keep in sync with --comment and --contradicts in web/static/style.css.
 FILLS = {"note": "FFF6D6", "contradicts": "FFDCB8"}
 HEAD = "EEF1F6"
@@ -78,10 +78,11 @@ def details(site, data_dir):
     def cells(f):
         out = [Cell(f[key] if key else "") for key in FACT_COLUMNS.values()]
         out[1].value = names.get(f["plan_id"], "")
-        out[-1].value = "\n".join(json.loads(f["quotes"])) if f["quotes"] else ""
+        out[list(FACT_COLUMNS).index("Quote or CMS field")].value = "\n".join(json.loads(f["quotes"] or "[]"))
         if f["doc_sha"]:
             out[list(FACT_COLUMNS).index("Page")].link = f"{SITE}docs/{f['doc_sha']}.pdf#page={f['page']}"
         return out
 
-    rows_ = sorted((Row("plan", f["plan_id"], cells(f)) for f in found), key=lambda r: [c.value for c in r.cells[:3]])
-    return [Row("header", "", [Cell(h) for h in FACT_COLUMNS])] + rows_
+    order = [*facts.KEY, "source", "doc_sha", "page"]
+    found = sorted(found, key=lambda f: [f[k] for k in order])
+    return [Row("header", "", [Cell(h) for h in FACT_COLUMNS])] + [Row("plan", f["plan_id"], cells(f)) for f in found]

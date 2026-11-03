@@ -3,6 +3,7 @@
 Rows are matched by plan ID (or section name) and columns by header, so cells keep their comments.
 Rows and columns the data no longer has are left alone. Empty rows and columns past them are deleted.
 A new row goes after the row above it in the data, and a new column after the last used column.
+The Details tab, which nobody edits, is overwritten instead. A failed write leaves it partly written until the next sync.
 
 Usage: SHEETS_TOKEN=<OAuth access token> python3 -I web/sheet_sync.py
 """
@@ -23,8 +24,8 @@ import years  # noqa: E402
 WHITE = "FFFFFF"
 FIELDS = "userEnteredValue,note,userEnteredFormat,textFormatRuns"
 HEADER = "\0header"
-# Keeps each Details write well under the API's request size limit.
-ROWS_PER_WRITE = 500
+# Keeps each Details write under the API's recommended 2MB request size.
+ROWS_PER_WRITE = 200
 # Old header: new header, so a renamed column keeps its place and comments.
 RENAMED = {"Ambulance": "Ambulance Domestic/International"}
 
@@ -172,14 +173,16 @@ def existing_tab(api, props):
                     max(map(len, values), default=0))
 
 
-def sync(api, site):
+def sync(api, site, data_dir=None):
     missing = [t for t in (*TABS.values(), DETAILS) if t not in {s["title"] for s in api.sheets()}]
     if missing:
         api.batch_update([{"addSheet": {"properties": {"title": t}}} for t in missing])
     tabs = {s["title"]: s for s in api.sheets()}
     for name, title in TABS.items():
         api.batch_update(plan(existing_tab(api, tabs[title]), rows(site, name), widths(site[name])))
-    requests = replace(existing_tab(api, tabs[DETAILS]), details(site, years.data_dir(site["year"])))
+    grid = tabs[DETAILS]["gridProperties"]
+    existing = Existing(tabs[DETAILS]["sheetId"], [], [], grid["rowCount"], grid["columnCount"], 0)
+    requests = replace(existing, details(site, data_dir or years.data_dir(site["year"])))
     api.batch_update([r for r in requests if "updateCells" not in r])
     for r in requests:
         if "updateCells" in r:
