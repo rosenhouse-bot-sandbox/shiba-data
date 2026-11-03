@@ -302,7 +302,7 @@ def packages(organization, found):
     return [("●", top(sold))] if sold else [("", top(none) if none else [])]
 
 
-# Hand-written facts for what readers miss. Each says why in its note. Cost kind "unclear" is for these alone.
+# Hand-written facts fill in what readers miss, and each note says why. Only they use cost kind "unclear".
 OVERRIDES = "override_facts.csv"
 
 

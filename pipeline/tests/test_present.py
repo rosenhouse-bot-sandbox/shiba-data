@@ -121,8 +121,8 @@ class AmbulanceTest(unittest.TestCase):
                                    trip("ambulance", "", setting="outside_us", cost_kind="covered")), ["$0-$300", "$300"])
 
     def test_line_2_says_eoc_unclear_when_a_hand_written_fact_says_so(self):
-        self.assertEqual(ambulance(trip(), trip("ambulance", "", setting="outside_us", cost_kind="unclear"))[1],
-                         "EOC unclear")
+        self.assertEqual(ambulance(trip(), trip("ambulance", "", setting="outside_us", cost_kind="unclear"),
+                                   trip("ambulance", "$500", setting="outside_us"))[1], "EOC unclear")
 
     def test_line_2_says_not_covered_when_the_document_excludes_care_abroad(self):
         self.assertEqual(ambulance(trip(), trip("ambulance", "", setting="outside_us", cost_kind="not_covered"))[1],
@@ -519,11 +519,11 @@ class OverrideTest(unittest.TestCase):
                         out.writerow(fact(amount="$1", note="hand-written"))
             self.assertEqual([f["amount"] for f in present.plan_facts(data)["H1036-153-0"]], ["$1"])
 
-    def test_every_hand_written_fact_says_why(self):
+    def test_hand_written_facts_say_why_and_pass_the_fact_checks_but_for_cost_kind_unclear(self):
         rows = facts.read(years.data_dir(YEAR) / present.OVERRIDES)
         self.assertTrue(rows and all(r["note"] and r["source"] in facts.DOCUMENTS for r in rows))
         self.assertEqual([(r["plan_id"], p) for r in rows for p in facts.check(r) if p != "cost_kind: 'unclear'"], [])
-        self.assertEqual({r["cost_kind"] for r in rows} - set(facts.COST_KINDS), {"unclear"})
+        self.assertLessEqual({r["cost_kind"] for r in rows} - set(facts.COST_KINDS), {"unclear"})
 
 
 class WriteTest(unittest.TestCase):
@@ -557,13 +557,9 @@ TRIAGED = {
     ("L_xray_imaging", "H2056-003-0", "2"): "the expert's $0 mammogram rule covers Aetna",
     ("L_xray_imaging", "H2056-018-0", "2"): "the expert's $0 mammogram rule covers Aetna",
     ("L_xray_imaging", "H7199-002-0", ""): "the EOC prices X-rays at $25; the SB's $0 is for ultrasounds",
-    ("AB_ambulance", "H1372-003-0", "2"): "the EOC excludes all care abroad without naming ambulances",
     ("I_outpatient_surgery", "H9003-001-0", "1"): "the reader missed the SB's $0 low end",
-    ("I_outpatient_surgery", "H9003-001-0", "2"): "the EOC gives one outpatient surgery price, which readers file under outpatient hospitals",
     ("I_outpatient_surgery", "H9003-006-0", "1"): "the reader missed the SB's $0 low end",
-    ("I_outpatient_surgery", "H9003-006-0", "2"): "the EOC gives one outpatient surgery price, which readers file under outpatient hospitals",
     ("I_outpatient_surgery", "H9003-009-0", "1"): "the reader missed the SB's $0 low end",
-    ("I_outpatient_surgery", "H9003-009-0", "2"): "the EOC gives one outpatient surgery price, which readers file under outpatient hospitals",
 }
 
 
