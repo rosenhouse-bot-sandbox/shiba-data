@@ -1,0 +1,11 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H1036-323-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 62 Diagnostic Procedures and Tests row shows $0 in the PCP's office and $50 in the specialist's office. The other non-hospital setting ($40 urgent care) falls within that range, and outpatient hospital is excluded by the field's rule. Page 63 Lab Services row shows $0 in every setting.\"}]\n```",
+ "usage": {
+  "input_tokens": 2408,
+  "output_tokens": 287,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

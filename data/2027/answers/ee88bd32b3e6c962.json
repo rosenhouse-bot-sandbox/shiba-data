@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2406-042-0.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 12 specialist office visits row: $50 copayment in-network and $80 out-of-network. The row covers office visits only and matches the value.\"},{\"id\":1,\"ok\":true,\"reason\":\"Page 63 routine hearing exam is $0 in-network. Page 64 hearing aids row gives an in-network allowance of $700 and a limit of 2 hearing aids every year. The out-of-network line ('first $700 for up to 2 hearing aids') shows the $700 covers both aids in total, which fits the value. The page does not say 'per year' next to the allowance itself, but the 2-aids-every-year limit applies to the same benefit.\"}]",
+ "usage": {
+  "input_tokens": 3762,
+  "output_tokens": 692,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

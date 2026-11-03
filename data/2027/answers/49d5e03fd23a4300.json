@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-61de2101267140ce.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 2, Specialists row: $0 copay for cardiologist, endocrinologist, vascular surgery consultation, or cardiothoracic surgery consultation. The condition matches the document's words.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 2, Doctor visits, Primary Care Providers (PCP) row: $0 copay.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 2, Specialists row: $20 copay for all other services. The condition is copied from the document.\"}]\n```",
+ "usage": {
+  "input_tokens": 2137,
+  "output_tokens": 316,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

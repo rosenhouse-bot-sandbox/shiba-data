@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-64e05773e847b56e.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 56, in-network Inpatient Mental Health Care: $0 copay per day for days 5 to 90. The cost is the same for Inpatient Hospital and Inpatient Psychiatric Facility, so setting any fits.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 55, in-network Inpatient Hospital care: $0 copay per day for days 5 to 90.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 56, in-network Inpatient Mental Health Care: $420 copay per day for days 1 to 4. The cost is the same for both listed settings.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 55, in-network Inpatient Hospital care: $420 copay per day for days 1 to 4.\"}]\n```",
+ "usage": {
+  "input_tokens": 4140,
+  "output_tokens": 554,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

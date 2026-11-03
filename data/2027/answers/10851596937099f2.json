@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2406-070-0.retry.md",
+ "reply": "```json\n[{\"key\": \"main.M_part_b_drugs\", \"result\": \"cite\", \"citations\": [{\"page\": 74, \"quote\": \"Medicare Part B Drugs $0 copayment or\"}, {\"page\": 74, \"quote\": \"20% coinsurance or all other Medicare-covered Part B drugs.\"}]}]\n```",
+ "usage": {
+  "input_tokens": 2312,
+  "output_tokens": 3790,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

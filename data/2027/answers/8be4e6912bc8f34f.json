@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "2af2a9f1fd104b7f.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-455-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 5, \"quotes\": [\"$480 copay per day for days 1-4         50% of the cost\"], \"note\": \"The 50% is in the out-of-network column of the inpatient hospital row. The quote keeps the page's original spacing because '50% of the cost' alone repeats on the page. The document gives no unit.\"},\n {\"plan_id\": \"H5216-455-0\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$480\", \"unit\": \"per day\", \"limit\": \"days 1-4\", \"condition\": \"days 1-4\", \"page\": 14, \"quotes\": [\"$480 copay per day for days 1-4\"]},\n {\"plan_id\": \"H5216-455-0\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 14, \"quotes\": [\"$480 copay per day for days 1-4         50% of the cost\"], \"note\": \"The 50% is in the out-of-network column of the mental health inpatient row. The quote keeps the page's original spacing because '50% of the cost' alone repeats on the page. The document gives no unit.\"}]\n```",
+ "usage": {
+  "input_tokens": 3844,
+  "output_tokens": 1703,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2923-025-0.md",
+ "reply": "```json\n[{\"key\": \"main.J_outpatient_rehab\", \"result\": \"cite\", \"citations\": [{\"page\": 93, \"quote\": \"Home or Office location: $45 copay\"}, {\"page\": 94, \"quote\": \"Office location: $35 copay\"}]},\n {\"key\": \"main.K_tests_labs\", \"result\": \"cite\", \"citations\": [{\"page\": 88, \"quote\": \"PCP's office: $0 copay Specialist's office: $20 copay Freestanding location: $40 copay\"}, {\"page\": 89, \"quote\": \"Advanced Laboratory Services Office or freestanding location: $0 copay\"}]},\n {\"key\": \"main.R_dental\", \"result\": \"cite\", \"citations\": [{\"page\": 110, \"quote\": \"Devoted Health will pay as much as $2,000 per year for covered dental services listed below.\"}, {\"page\": 110, \"quote\": \"You are covered for cleanings, routine exams, X-Rays, and more.\"}]},\n {\"key\": \"main.S_acupuncture\", \"result\": \"cite\", \"citations\": [{\"page\": 55, \"quote\": \"Your plan covers routine acupuncture visits under the Dental & Alternative Therapy Allowance.\"}, {\"page\": 63, \"quote\": \"Acupuncture services for conditions other than\"}]},\n {\"key\": \"main.V_massage\", \"result\": \"cite\", \"citations\": [{\"page\": 62, \"quote\": \"Massage therapy rendered by a licensed massage therapist. Coverage for clinic-based\"}, {\"page\": 62, \"quote\": \"therapeutic massage, routine acupuncture, and/or\"}]}]\n```",
+ "usage": {
+  "input_tokens": 16442,
+  "output_tokens": 6523,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

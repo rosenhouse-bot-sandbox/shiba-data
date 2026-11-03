@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "e2d6e1e199a3b8a9.md",
+ "reply": "```json\n[{\"plan_id\": \"H2056-018-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per day\", \"limit\": \"days 1-5\",\n  \"condition\": \"days 1-5\", \"page\": 43,\n  \"quotes\": [\"Inpatient hospital care\", \"$325 per day, days 1‑5\"]},\n {\"plan_id\": \"H2056-018-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"days 6-90\",\n  \"condition\": \"days 6-90\", \"page\": 43,\n  \"quotes\": [\"Inpatient hospital care\", \"$0 per day, days 6‑90\"]},\n {\"plan_id\": \"H2056-018-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"days 91+\",\n  \"condition\": \"days 91+\", \"page\": 43,\n  \"quotes\": [\"Inpatient hospital care\", \"6‑90; $0 copay for additional days for each\"],\n  \"note\": \"Document says $0 copay for additional days after day 90; days 91+ inferred from the days 6-90 tier\"},\n {\"plan_id\": \"H2056-018-0\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$470\", \"unit\": \"per day\", \"limit\": \"days 1-5\",\n  \"condition\": \"days 1-5\", \"page\": 45,\n  \"quotes\": [\"Inpatient services in a psychiatric hospital\", \"$470 per day, days 1‑5\"]},\n {\"plan_id\": \"H2056-018-0\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"days 6-90\",\n  \"condition\": \"days 6-90\", \"page\": 45,\n  \"quotes\": [\"Inpatient services in a psychiatric hospital\", \"$0 per day, days 6‑90\"]}]\n```",
+ "usage": {
+  "input_tokens": 17884,
+  "output_tokens": 2088,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-0bd982dc589e8cba.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 48 inpatient hospital row, out-of-network: Inpatient Care is 50% coinsurance.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 49 psychiatric hospital row, out-of-network: Inpatient Mental Health Care is 50% coinsurance for both Inpatient Hospital and Inpatient Psychiatric Facility.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 48 inpatient hospital row, in-network: $610 copayment per day, days 1 to 4.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 48 inpatient hospital row, in-network: $0 copayment per day, days 5 to 90.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 49 psychiatric row, in-network Inpatient Psychiatric Facility: $0 copayment per day, days 5 to 90.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 49 psychiatric row, in-network Inpatient Psychiatric Facility: $520 copayment per day, days 1 to 4.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 49 psychiatric row, in-network Inpatient Hospital: $0 copayment per day, days 5 to 90.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 49 psychiatric row, in-network Inpatient Hospital: $610 copayment per day, days 1 to 4.\"}]\n```",
+ "usage": {
+  "input_tokens": 4648,
+  "output_tokens": 881,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

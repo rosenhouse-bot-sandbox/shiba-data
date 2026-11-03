@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "5ab489f7c419b042.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-041-0\", \"benefit\": \"visits\", \"setting\": \"office.pcp\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 2,\n  \"quotes\": [\"Primary care $0 copay\"]},\n {\"plan_id\": \"H3805-041-0\", \"benefit\": \"visits\", \"setting\": \"office.specialist\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$70\", \"page\": 2,\n  \"quotes\": [\"$70 copay\"]},\n {\"plan_id\": \"H3805-041-0\", \"benefit\": \"visits\", \"setting\": \"telehealth\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 2,\n  \"quotes\": [\"Virtual medical $0 copay\"]}]\n```",
+ "usage": {
+  "input_tokens": 2388,
+  "output_tokens": 891,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

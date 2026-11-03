@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "faebfcb17c1abba1.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-048-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"per stay\", \"page\": 5, \"quotes\": [\"This plan covers an unlimited $610 copay per day for days 1-4 50% of the cost\"], \"note\": \"The out-of-network 50% sits alone in its column with no days stated, so it is read as covering the whole stay. The quote uses single spaces and spans the row, so it also includes in-network text.\"},\n {\"plan_id\": \"H5216-048-0\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"per stay\", \"page\": 14, \"quotes\": [\"Inpatient $520 copay per day for days 1-4 50% of the cost\"], \"note\": \"The out-of-network 50% sits alone in its column with no days stated, so it is read as covering the whole stay. The quote uses single spaces and spans the row, so it also includes in-network text.\"}]\n```",
+ "usage": {
+  "input_tokens": 3696,
+  "output_tokens": 1169,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

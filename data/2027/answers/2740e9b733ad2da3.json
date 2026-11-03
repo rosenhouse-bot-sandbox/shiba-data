@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "362ee075ea5896d4.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2001-045-0\", \"benefit\": \"visits\", \"setting\": \"office.pcp\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"page\": 3, \"quotes\": [\"Primary care Depending on your level of 30% coinsurance\"]},\n {\"plan_id\": \"H2001-045-0\", \"benefit\": \"visits\", \"setting\": \"office.specialist\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"page\": 3, \"quotes\": [\"Specialists Depending on your level of 30% coinsurance\"]},\n {\"plan_id\": \"H2001-045-0\", \"benefit\": \"visits\", \"setting\": \"office.specialist\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 3, \"quotes\": [\"Depending on your level of Medicaid eligibility, $0 copay or 20% coinsurance $0 copay\"], \"note\": \"The $0 copay is for members with QMB or full Medicaid, so the 20% coinsurance is given. The in-network column text repeats on this page, so the quote continues into the start of the next row (Virtual medical visits, $0 copay) to make it unique. That trailing $0 copay is not part of the specialist cost.\"}]\n```",
+ "usage": {
+  "input_tokens": 4190,
+  "output_tokens": 3531,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

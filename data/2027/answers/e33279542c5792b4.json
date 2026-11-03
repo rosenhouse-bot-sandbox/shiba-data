@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "49912316cc55d9c5.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-001-0\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"visit_limit\", \"amount\": \"90\", \"unit\": \"days\", \"limit\": \"per benefit period\", \"page\": 81, \"quotes\": [\"You are covered for up to 90\"], \"note\": \"The page also states a 190-day lifetime limit at a psychiatric hospital, which does not include psychiatric units of general hospitals. It also states an additional 60 lifetime reserve days. Only the per-benefit-period limit is given here, to avoid two answers for one fact.\"}]\n```",
+ "usage": {
+  "input_tokens": 13294,
+  "output_tokens": 530,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,11 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H2001-045-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"The page 93 quote is from the outpatient rehabilitation (physical/speech therapy) row, not the specialist office visit row.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"The page 100 quotes are from the specialist consultation row, not the outpatient rehabilitation row.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 115: routine eye exam, 1 per year, $0 copay in-network. Page 116: 1 pair of eyeglasses or contact lenses every year, retail value up to $200.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 13 primary care office visits row: 20% coinsurance per visit in-network (non-QMB amount) and 30% out-of-network.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 100 specialist row: 20% coinsurance in-network (non-QMB amount) and 30% out-of-network for specialist services.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 93 outpatient rehabilitation row: 20% coinsurance in-network (non-QMB amount) per physical therapy and speech-language therapy visit.\"},\n{\"id\": 6, \"ok\": false, \"reason\": \"The page 100 quotes are from the specialist row, not the primary care office visit row.\"}]\n```",
+ "usage": {
+  "input_tokens": 6632,
+  "output_tokens": 1014,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

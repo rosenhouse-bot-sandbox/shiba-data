@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-630e49b10e7ad131.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 13 summary row for specialist office visits: 20% of the total cost per visit, in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 70 physician/practitioner services row: 20% coinsurance in a specialist's office, in network.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 70 physician/practitioner services row, under Telehealth Services: 20% coinsurance for Specialist Virtual, in network.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 70 physician/practitioner services row, under Provider and Professional Services: $0 copayment in a PCP's office, in network.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 70 physician/practitioner services row, under Telehealth Services: $0 copayment for PCP Virtual, in network.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 13 summary row for primary care office visits: $0 copayment per visit, in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 4001,
+  "output_tokens": 520,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

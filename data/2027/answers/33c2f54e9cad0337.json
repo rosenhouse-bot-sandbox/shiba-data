@@ -1,0 +1,11 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H3805-040-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 13 summary shows specialist office visits at a $55 copayment per visit. The page 82 physician services row shows a $55 copayment for services from a specialist. Both are in-network amounts for this plan.\"}]\n```",
+ "usage": {
+  "input_tokens": 2581,
+  "output_tokens": 95,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

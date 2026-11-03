@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H5439-015-0.md",
+ "reply": "```json\n[{\"key\": \"main.K_tests_labs\", \"result\": \"skip\"}]\n```",
+ "usage": {
+  "input_tokens": 1633,
+  "output_tokens": 467,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

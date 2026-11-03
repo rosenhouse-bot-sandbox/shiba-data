@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-e2d6e1e199a3b8a9.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 43, Inpatient hospital care row: $0 per day for days 6-90 in network. The row covers acute, rehab and long-term care hospitals, which matches inpatient.acute.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 43, Inpatient hospital care row: after days 6-90, $0 copay for additional days of each medically necessary covered stay, so days 91+ are $0 per day.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 45, Inpatient services in a psychiatric hospital row: $470 per day for days 1-5.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 45, psychiatric hospital row: $0 per day for days 6-90 for each covered stay.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 43, Inpatient hospital care row: $325 per day for days 1-5 in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 4058,
+  "output_tokens": 562,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

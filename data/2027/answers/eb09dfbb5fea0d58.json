@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-f751937f09316ed1.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 82 row 'Inpatient services in a psychiatric hospital' shows a $2,091 copay per stay for this plan.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"The page 81 row 'Inpatient hospital care' shows a $2,241 copay per stay. It covers acute, rehabilitation and long-term care hospitals, which fits inpatient.acute.\"}]\n```",
+ "usage": {
+  "input_tokens": 3233,
+  "output_tokens": 297,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

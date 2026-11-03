@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-516ff586a12c8288.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 81 psychiatric hospital row, in network: Lifetime Reserve Days $0 copay per day.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 80 inpatient hospital care row, out of network: Lifetime Reserve Days $0 copay per day.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 81 psychiatric hospital row, in network: $400 copay per day for days 1 to 5.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 80 inpatient hospital care row, out of network: 40% coinsurance per day for days 1 to 90 of each stay.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 79 inpatient hospital care row, in network: Lifetime Reserve Days $0 copay per day.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 79 inpatient hospital care row, in network: $475 copay per day for days 1 to 5.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 81 psychiatric hospital row, in network: $0 copay per day for days 6 to 90.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 79 inpatient hospital care row, in network: $0 copay per day for days 6 to 90.\"}]\n```",
+ "usage": {
+  "input_tokens": 4855,
+  "output_tokens": 712,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2923-019-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"Page 57 says routine acupuncture is a supplemental benefit covered under the Dental & Alternative Therapy Allowance, and page 123 confirms the allowance can be used for acupuncture. This supports the dot.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Page 95 shows occupational therapy at $35 (office) and physical and speech therapy at $45 (home or office). The $35-$45 range uses office prices and both ends are covered by the quotes.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Page 111 shows mandatory supplemental dental benefits that cover cleanings, routine exams and X-rays, up to $2,000 per year.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"Page 65 lists massage therapy as an alternative therapy reimbursed at 50% under the Dental & Alternative Therapy Allowance, which counts as a supplemental benefit.\"},\n{\"id\":4,\"ok\":false,\"reason\":\"The quotes are about diagnostic tests and labs (home sleep studies, freestanding tests, routine labs), not outpatient rehabilitation. The value does not match the field; rehab on page 95 is $35-$45.\"},\n{\"id\":5,\"ok\":true,\"reason\":\"On pages 89-90, tests run from $0 (home sleep study, PCP office) to $40 (freestanding), and the $20 specialist and $15 EKG office copays fall inside that range. Routine labs in an office or freestanding location are $0. The value $0-$40/$0 is supported.\"}\n]",
+ "usage": {
+  "input_tokens": 7501,
+  "output_tokens": 1188,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

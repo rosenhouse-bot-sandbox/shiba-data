@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2056-003-0.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 8 gives specialist office visits as $65 per visit. The page 63 physician/practitioner row for this HMO gives a $65 copay for Medicare-covered physician specialist services. The $0 nursing-home, hearing-exam and telehealth lines on that page are separate and don't change the $65 office-visit amount. The plan is an HMO, so there is no out-of-network line to report.\"}]",
+ "usage": {
+  "input_tokens": 2271,
+  "output_tokens": 385,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

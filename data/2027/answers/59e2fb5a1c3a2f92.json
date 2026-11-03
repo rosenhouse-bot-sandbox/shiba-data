@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2406-073-0.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 78, 'Consultation, diagnosis, and treatment by a specialist' row: $60 copay in-network and $80 out-of-network. The separate hearing and balance exam row ($0 / $80) is correctly left out. The page is this plan's own EOC.\"}]",
+ "usage": {
+  "input_tokens": 1778,
+  "output_tokens": 309,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

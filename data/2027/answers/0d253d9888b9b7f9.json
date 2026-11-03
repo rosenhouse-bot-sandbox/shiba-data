@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2923-028-3.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"Page 82 Part B drugs row: allergy serum is $0 copay. Page 83: chemotherapy and all other Part B drugs are 20% coinsurance. That supports 0%-20%.\"},\n{\"id\":1,\"ok\":false,\"reason\":\"The quotes are the Part B drug rows, not tests or labs, and a 0%-20% drug range is not a tests/labs value. Tests and labs are priced on pages 86-87.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Page 86 diagnostic tests: PCP office $0, specialist $20, freestanding $40; home sleep study $0. Pages 86-87: routine and advanced labs are $0 at office or freestanding sites. Outpatient hospital prices are excluded. Tests $0-$40, labs $0.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"Page 62 lists massage therapy by a licensed massage therapist as covered under the Dental & Alternative Therapy Allowance, a supplemental benefit that applies to all members.\"},\n{\"id\":4,\"ok\":true,\"reason\":\"Page 54 says routine acupuncture is a supplemental benefit covered under the Dental & Alternative Therapy Allowance. Page 62 covers acupuncture for conditions other than chronic low back pain.\"},\n{\"id\":5,\"ok\":true,\"reason\":\"Pages 106-107: mandatory supplemental dental pays up to $250 per year. Preventive services such as cleanings, exams and X-rays are covered at 0% coinsurance.\"}\n]",
+ "usage": {
+  "input_tokens": 8710,
+  "output_tokens": 1272,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

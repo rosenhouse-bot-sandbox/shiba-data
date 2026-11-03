@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-d594b0a1d3772214.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 52 Inpatient hospital care row: $550 per day, days 1-5, in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 52 Inpatient hospital care row says cost sharing applies after your $750 plan deductible.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 52 Inpatient hospital care row: $0 per day, days 6-90.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 53 Inpatient services in a psychiatric hospital row: $0 per day, days 6-90.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 52 Inpatient hospital care row: $0 copay for additional days beyond day 90. The plan has no day limit.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 53 psychiatric hospital row says cost sharing applies after your $750 plan deductible.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 53 psychiatric hospital row: $470 per day, days 1-5.\"}]\n```",
+ "usage": {
+  "input_tokens": 4198,
+  "output_tokens": 736,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
