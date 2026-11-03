@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "0e1831fb00cf2a95.md",
+ "reply": "[{\"plan_id\": \"H2056-018-0\", \"benefit\": \"medical_deductible\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"deductible\", \"amount\": \"$0\", \"page\": 2, \"quotes\": [\"Plan deductible $0\"], \"note\": \"\"}]",
+ "usage": {
+  "input_tokens": 2607,
+  "output_tokens": 106,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

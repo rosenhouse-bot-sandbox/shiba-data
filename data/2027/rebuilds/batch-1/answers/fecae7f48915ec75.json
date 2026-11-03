@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-b4be2a8a3e57d86a.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 14, allergy shots and serum, PCP's office row: $0 copay in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 14, chemotherapy drugs, outpatient hospital row: 20% of the cost in network.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 14, chemotherapy drugs, specialist's office row: 50% of the cost out of network.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 14, chemotherapy drugs, specialist's office row: 20% of the cost in network.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 14, allergy shots and serum, PCP's office row: 50% of the cost out of network.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 14, allergy shots and serum, specialist's office row: $0 copay in network.\"},\n{\"id\": 6, \"ok\": false, \"reason\": \"Page 14, chemotherapy outpatient hospital row: 50% is the out-of-network cost. In network is 20%.\"},\n{\"id\": 7, \"ok\": false, \"reason\": \"Page 14, chemotherapy outpatient hospital row: 20% is the in-network cost. Out of network is 50%.\"},\n{\"id\": 8, \"ok\": false, \"reason\": \"Page 14, chemotherapy specialist's office row: 20% is the in-network cost. Out of network is 50%.\"},\n{\"id\": 9, \"ok\": true, \"reason\": \"Page 14, chemotherapy drugs, outpatient hospital row: 50% of the cost out of network.\"},\n{\"id\": 10, \"ok\": true, \"reason\": \"Page 14, allergy shots and serum, specialist's office row: 50% of the cost out of network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3583,
+  "output_tokens": 602,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-d594b0a1d3772214.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 40 Ambulance services row: $295 copay for each Medicare-covered one-way trip via ground ambulance.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 40 Ambulance services row: 20% coinsurance for each Medicare-covered one-way trip via air ambulance.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 47 Emergency care row: $250,000 annual maximum benefit shared by worldwide emergency, emergency ambulance, and urgently needed care, offered in addition to Medicare-covered benefits.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 47 Emergency care row: $295 copay for one-way emergency ambulance services worldwide (outside the United States), one price with no ground or air split; a supplemental worldwide benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 3695,
+  "output_tokens": 485,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

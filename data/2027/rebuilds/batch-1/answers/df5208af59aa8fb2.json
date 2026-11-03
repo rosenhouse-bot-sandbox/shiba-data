@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "d594b0a1d3772214.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H2056-003-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$295\", \"unit\": \"per one-way trip\", \"limit\": \"\", \"page\": 40,\n   \"quotes\": [\"$295 copay for each Medicare‑covered\", \"one‑way trip via ground ambulance.\"], \"note\": \"\"},\n  {\"plan_id\": \"H2056-003-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"unit\": \"per one-way trip\", \"limit\": \"\", \"page\": 40,\n   \"quotes\": [\"20% coinsurance for each\", \"Medicare‑covered one‑way trip via air\"], \"note\": \"\"},\n  {\"plan_id\": \"H2056-003-0\", \"benefit\": \"ambulance\", \"setting\": \"outside_us\", \"network\": \"any\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$295\", \"unit\": \"per one-way trip\", \"limit\": \"\", \"page\": 47,\n   \"quotes\": [\"$295 copay for one‑way emergency\", \"ambulance services worldwide (i.e.,\"], \"note\": \"\"},\n  {\"plan_id\": \"H2056-003-0\", \"benefit\": \"ambulance\", \"setting\": \"outside_us\", \"network\": \"any\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"max\", \"amount\": \"$250,000\", \"unit\": \"\", \"limit\": \"per year\",\n   \"pool\": \"worldwide emergency, emergency ambulance, and urgently needed care\", \"page\": 47,\n   \"quotes\": [\"$250,000 annual maximum benefit for worldwide\"], \"note\": \"One annual maximum is shared by worldwide emergency care, emergency ambulance and urgently needed care.\"}\n]\n```",
+ "usage": {
+  "input_tokens": 9063,
+  "output_tokens": 1844,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

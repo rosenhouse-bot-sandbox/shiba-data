@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "batch": true,
+ "task": "v-H2406-042-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"The chiropractic benefit is only Medicare-covered manual manipulation of the spine (pp. 55-56, 111), and no passage shows a routine chiropractic benefit or an allowance naming it.\"},\n{\"id\":1,\"ok\":false,\"reason\":\"The quotes only cover worldwide emergency care and naturopathy, and this composite field also covers OTC, acupuncture, chiropractic and massage, so the quotes do not support the claim for the whole field.\"},\n{\"id\":2,\"ok\":false,\"reason\":\"The cited quote is a list of things the fitness reimbursement does not pay for, which is not a statement that the plan excludes massage.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"The EOC says naturopath services are 'Not covered under any condition', and no passage shows any supplemental naturopathic coverage.\"},\n{\"id\":4,\"ok\":true,\"reason\":\"Acupuncture is covered only for chronic low back pain under the Medicare rules (pp. 50-52, 112), and no passage shows routine acupuncture.\"}\n]",
+ "usage": {
+  "input_tokens": 9682,
+  "output_tokens": 1443,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

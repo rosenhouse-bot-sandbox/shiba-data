@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-f961eb582c1534d5.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 88 ambulatory surgical center row, In-Network: $200 copay for each Medicare-covered visit.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 81 Other outpatient diagnostic tests row, In-Network: $0 copay for Medicare-covered diagnostic colonoscopy. No setting is named.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"The quote is the $200 copay for the ambulatory surgical center, not the outpatient hospital. The outpatient hospital copay is $500.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 88 outpatient hospital section, Out-of-Network: 20% coinsurance for each Medicare-covered visit to an outpatient hospital facility.\"},\n{\"id\": 4, \"ok\": false, \"reason\": \"The $500 copay is in the outpatient hospital section. The in-network ASC copay is $200.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 88 outpatient hospital section continued, before the Out-of-Network label: $500 copay for all other Medicare-covered outpatient services.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 88 ambulatory surgical center row, Out-of-Network: 20% coinsurance for each Medicare-covered visit.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 88 outpatient hospital section, in-network: $0 copay for Medicare-covered skin biopsies.\"}]\n```",
+ "usage": {
+  "input_tokens": 3182,
+  "output_tokens": 801,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

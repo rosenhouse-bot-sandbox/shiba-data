@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "49912316cc55d9c5.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-001-0\", \"benefit\": \"extras.chiropractic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$15\", \"page\": 58, \"quotes\": [\"$15 copay You are covered for up to 12 visits per year.\"], \"note\": \"This quote is from the 'Routine chiropractic visits' cell. That label carries a * footnote mark, so the quote starts after the label.\"},\n {\"plan_id\": \"H2923-001-0\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"visit_limit\", \"amount\": \"20\", \"limit\": \"per year\", \"condition\": \"chronic low back pain\", \"page\": 52, \"quotes\": [\"No more than 20 acupuncture treatments may be administered annually.\"], \"note\": \"The page allows up to 12 visits in 90 days, plus 8 more for patients who improve, capped at 20 a year. Only the 20-per-year cap is given here, to avoid two answers for one fact.\"}]\n```",
+ "usage": {
+  "input_tokens": 14146,
+  "output_tokens": 1341,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

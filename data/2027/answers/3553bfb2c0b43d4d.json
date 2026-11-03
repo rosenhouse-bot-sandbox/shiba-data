@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-d649ac2bebc0321d.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 61 dental row: Medicare-covered dental services are a $50 copay.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Page 106 says the plan pays up to $250 per year for dental. Page 61 shows this $250 is the shared Dental & Alternative Therapy Allowance, also used for massage, acupuncture and naturopathy. Stated without the pool, it reads as a separate dental-only maximum.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 61: a $250 yearly allowance toward preventive and comprehensive dental, massage, acupuncture and naturopath services combined. Any licensed dentist may be used.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 107 dental code grid: under Preventive, 'What you pay: 0% coinsurance'.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 109 dental code grid: under Comprehensive, 'What you pay: 0% coinsurance'.\"}]\n```",
+ "usage": {
+  "input_tokens": 5213,
+  "output_tokens": 811,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

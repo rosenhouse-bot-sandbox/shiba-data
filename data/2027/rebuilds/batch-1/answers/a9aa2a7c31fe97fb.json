@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "2c828c1ac1616719.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H3817-010-0\", \"benefit\": \"part_b_drugs\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 45, \"quotes\": [\"20% coinsurance (certain\"], \"note\": \"The document says certain drugs may have a coinsurance lower than 20%.\"},\n  {\"plan_id\": \"H3817-010-0\", \"benefit\": \"part_b_drugs\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 45, \"quotes\": [\"Out-of-network: 50% coinsurance Benefit includes administration of drugs.\"], \"note\": \"Quote is read down the right column.\"},\n  {\"plan_id\": \"H3817-010-0\", \"benefit\": \"part_b_drugs.insulin\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"unit\": \"per one-month supply\", \"page\": 45, \"quotes\": [\"20% coinsurance up to a $35\"], \"note\": \"The coinsurance is capped at a $35 copay for a one-month supply.\"},\n  {\"plan_id\": \"H3817-010-0\", \"benefit\": \"part_b_drugs.vaccine\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"condition\": \"pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines\", \"page\": 42, \"quotes\": [\"There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines.\"], \"note\": \"Quote is read down the right column.\"},\n  {\"plan_id\": \"H3817-010-0\", \"benefit\": \"part_b_drugs.vaccine\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"0%-20%\", \"condition\": \"Other Part B immunizations\", \"page\": 42, \"quotes\": [\"0%-20% coinsurance (includes\"]},\n  {\"plan_id\": \"H3817-010-0\", \"benefit\": \"part_b_drugs.vaccine\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 42, \"quotes\": [\"Out-of-network: 50% coinsurance Other Part B immunizations:\"], \"note\": \"Quote is read down the right column. Out-of-network coinsurance is 50% for both the named vaccines and other Part B immunizations.\"}\n]\n```",
+ "usage": {
+  "input_tokens": 6294,
+  "output_tokens": 3028,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

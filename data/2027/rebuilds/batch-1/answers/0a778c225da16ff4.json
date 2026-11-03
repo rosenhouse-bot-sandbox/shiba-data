@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "batch": true,
+ "task": "v-H2406-070-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 111 shows the Platinum Dental Rider: an optional package for $54 a month with a $1,500 annual maximum, bought to replace any plan dental. The value's 'Dental Platinum Rider' reverses the name's word order but clearly means this rider.\"}]\n```",
+ "usage": {
+  "input_tokens": 1605,
+  "output_tokens": 492,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

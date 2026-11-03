@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-d370b4b5b3950077.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 Inpatient Hospital Coverage row: Days 1-5 $445 copay per day in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 7 Mental Health Services, Inpatient Mental Health Care: Days 1-5 $375 copay per day.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 4 Inpatient Hospital Coverage row: Day 6+ $0 copay per day.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 7 Inpatient Mental Health Care: Days 6-90 $0 copay per day.\"}]\n```",
+ "usage": {
+  "input_tokens": 3451,
+  "output_tokens": 369,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

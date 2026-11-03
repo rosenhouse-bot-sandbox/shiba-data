@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "b4be2a8a3e57d86a.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-427-2\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$45\", \"condition\": \"chronic low back pain\", \"page\": 15, \"quotes\": [\"Acupuncture services                   $45 copay for acupuncture for\"], \"note\": \"The quote keeps the page's exact spacing because the cell text alone repeats in the out-of-network column. The 20 visits per year limit in the same cell is left out.\"},\n {\"plan_id\": \"H5216-427-2\", \"benefit\": \"extras.chiropractic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$15\", \"page\": 15, \"quotes\": [\"Chiropractic services                  $15 copay\"]},\n {\"plan_id\": \"H5216-427-2\", \"benefit\": \"extras.chiropractic\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"35%\", \"page\": 15, \"quotes\": [\"Chiropractic services                  $15 copay                               35% of the cost\"]}]\n```",
+ "usage": {
+  "input_tokens": 4121,
+  "output_tokens": 1456,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

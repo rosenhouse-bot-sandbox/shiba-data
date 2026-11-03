@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "batch": true,
+ "task": "v-H1036-306-0.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"The EOC exclusions table lists naturopath services as 'Not covered under any condition', and no passage shows any naturopathic coverage.\"},{\"id\":1,\"ok\":true,\"reason\":\"The EOC says only Medicare manual manipulation of the spine is covered and other chiropractor services are not, and the exclusions table agrees; no routine chiropractic benefit appears.\"}]",
+ "usage": {
+  "input_tokens": 1857,
+  "output_tokens": 143,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

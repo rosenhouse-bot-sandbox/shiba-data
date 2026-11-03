@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-516ff586a12c8288.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 55, in-network section continued from page 54: $30 copay for Medicare-covered acupuncture in a Specialist office.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 55: no more than 20 acupuncture treatments may be given annually.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 124 exclusions chart: Naturopath services are not covered under any condition.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 55 out-of-network: $60 copay for acupuncture in a Specialist office.\"},\n{\"id\": 4, \"ok\": false, \"reason\": \"The quote is the PCP office row, not the Specialist office row. The in-network Specialist copay on page 55 is $30.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 123 exclusions chart: acupuncture is available for people with chronic low back pain under certain circumstances.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 61 out-of-network: 20% coinsurance for Medicare-covered chiropractic services.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 55 out-of-network: 20% coinsurance for acupuncture in a Chiropractor office.\"},\n{\"id\": 8, \"ok\": true, \"reason\": \"Page 54 in-network: $0 copay for acupuncture in a PCP office.\"},\n{\"id\": 9, \"ok\": true, \"reason\": \"Page 54 out-of-network: $30 copay for acupuncture in a PCP office.\"},\n{\"id\": 10, \"ok\": false, \"reason\": \"The out-of-network PCP office copay on page 54 is $30. The $0 is the in-network amount.\"},\n{\"id\": 11, \"ok\": false, \"reason\": \"The in-network Specialist office copay on page 55 is $30. The $60 is the out-of-network amount.\"},\n{\"id\": 12, \"ok\": true, \"reason\": \"Page 125 exclusions chart: for routine chiropractic care, manual manipulation of the spine to correct a subluxation is covered.\"},\n{\"id\": 13, \"ok\": true, \"reason\": \"Page 54: up to 12 visits in 90 days are covered for chronic low back pain.\"},\n{\"id\": 14, \"ok\": true, \"reason\": \"Page 55 in-network: $15 copay for acupuncture in a Chiropractor office.\"},\n{\"id\": 15, \"ok\": true, \"reason\": \"Page 60 in-network: $15 copay for Medicare-covered chiropractic services.\"}]\n```",
+ "usage": {
+  "input_tokens": 8267,
+  "output_tokens": 1263,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

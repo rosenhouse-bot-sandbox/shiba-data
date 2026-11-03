@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "034e045a83e5b49d.md",
+ "reply": "```json\n[{\"plan_id\": \"H3817-008-1\", \"benefit\": \"part_b_drugs.chemotherapy\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"0%-20%\", \"condition\": \"depending on the drug\", \"page\": 7,\n  \"quotes\": [\"Chemotherapy drugs 0%-20% (depending on\"], \"note\": \"\"},\n {\"plan_id\": \"H3817-008-1\", \"benefit\": \"part_b_drugs.chemotherapy\", \"setting\": \"any\", \"network\": \"out\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 7,\n  \"quotes\": [\"Chemotherapy drugs 0%-20% (depending on 50%\"], \"note\": \"\"},\n {\"plan_id\": \"H3817-008-1\", \"benefit\": \"part_b_drugs\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"0%-20%\", \"condition\": \"depending on the drug\", \"page\": 7,\n  \"quotes\": [\"Other Part B drugs 0%-20% (depending on\"], \"note\": \"Row is labeled 'Other Part B drugs', meaning Part B drugs other than chemotherapy and insulin.\"},\n {\"plan_id\": \"H3817-008-1\", \"benefit\": \"part_b_drugs.insulin\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"limit\": \"up to $35\", \"page\": 7,\n  \"quotes\": [\"Part B insulin 20% up to $35\"], \"note\": \"The $35 is a cap on what the member pays.\"},\n {\"plan_id\": \"H3817-008-1\", \"benefit\": \"part_b_drugs.insulin\", \"setting\": \"any\", \"network\": \"out\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 7,\n  \"quotes\": [\"Part B insulin 20% up to $35 50%\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 2456,
+  "output_tokens": 1600,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

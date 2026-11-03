@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-7dcf10accd77535d.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5 Primary Care Providers row: 30% coinsurance out of network.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"The $0 in-network copay is in the Primary Care Providers row. Specialists pay a $30 copay in network.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 5 Specialists row: $30 copay in network.\"},\n{\"id\": 3, \"ok\": false, \"reason\": \"The $30 copay is in the Specialists row. Primary care pays a $0 copay in network.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 5 Specialists row: 30% coinsurance out of network.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 5 Primary Care Providers row: $0 copay in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2290,
+  "output_tokens": 287,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

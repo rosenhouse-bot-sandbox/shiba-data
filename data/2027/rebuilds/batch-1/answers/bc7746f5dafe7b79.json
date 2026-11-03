@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-d594b0a1d3772214.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 61, Outpatient rehabilitation services row: $50 copay for each Medicare-covered occupational therapy service. One cost applies across the listed outpatient settings.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 61, Outpatient rehabilitation services row: $65 copay for each Medicare-covered physical and speech therapy service, so physical therapy is $65.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 61, Outpatient rehabilitation services row: $65 copay for each Medicare-covered physical and speech therapy service, so speech therapy is $65.\"}]\n```",
+ "usage": {
+  "input_tokens": 2619,
+  "output_tokens": 340,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

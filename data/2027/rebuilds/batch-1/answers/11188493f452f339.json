@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "ce13e925c0384896.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-153-0\", \"benefit\": \"surgery.colonoscopy\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 4, \"quotes\": [\"OUTPATIENT HOSPITAL COVERAGE Diagnostic colonoscopy $0 copay\"], \"note\": \"The row 'Diagnostic colonoscopy $0 copay' appears twice on the page, so the quote includes the Outpatient Hospital Coverage heading above it to make it unique.\"},\n {\"plan_id\": \"H1036-153-0\", \"benefit\": \"surgery.colonoscopy\", \"setting\": \"asc\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 4, \"quotes\": [\"AMBULATORY SURGERY CENTER Diagnostic colonoscopy $0 copay\"], \"note\": \"The row 'Diagnostic colonoscopy $0 copay' appears twice on the page, so the quote includes the Ambulatory Surgery Center heading above it to make it unique.\"}]\n```",
+ "usage": {
+  "input_tokens": 2731,
+  "output_tokens": 1124,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

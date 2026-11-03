@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "ce13e925c0384896.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-153-0\", \"benefit\": \"surgery\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$395\", \"page\": 4, \"quotes\": [\"Surgery services                                          $395 copay\"]},\n{\"plan_id\": \"H1036-153-0\", \"benefit\": \"surgery\", \"setting\": \"asc\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$350\", \"page\": 4, \"quotes\": [\"Surgery services                                          $350 copay\"]},\n{\"plan_id\": \"H1036-153-0\", \"benefit\": \"surgery.colonoscopy\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 4, \"quotes\": [\"OUTPATIENT HOSPITAL COVERAGE Diagnostic colonoscopy Diagnostic mammography Surgery services\", \"$0 copay $0 copay $395 copay\"], \"note\": \"The row 'Diagnostic colonoscopy $0 copay' appears twice on the page, so these quotes read the left and right columns straight down within the Outpatient Hospital section.\"},\n{\"plan_id\": \"H1036-153-0\", \"benefit\": \"surgery.colonoscopy\", \"setting\": \"asc\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 4, \"quotes\": [\"AMBULATORY SURGERY CENTER Diagnostic colonoscopy Surgery services\", \"$0 copay $350 copay\"], \"note\": \"The row 'Diagnostic colonoscopy $0 copay' appears twice on the page, so these quotes read the left and right columns straight down within the Ambulatory Surgery Center section.\"}]\n```",
+ "usage": {
+  "input_tokens": 2191,
+  "output_tokens": 1609,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

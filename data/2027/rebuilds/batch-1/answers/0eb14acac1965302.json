@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "034e045a83e5b49d.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3817-008-1\", \"benefit\": \"part_b_drugs.chemotherapy\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 7, \"quotes\": [\"Chemotherapy drugs\", \"Out-of-network Not covered 50%\"], \"note\": \"The second quote reads the out-of-network column straight down from the header to the chemotherapy row, because that row's 50% cannot be quoted alone without mixing columns.\"}]\n```",
+ "usage": {
+  "input_tokens": 2676,
+  "output_tokens": 883,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "2c828c1ac1616719.md",
+ "reply": "```json\n[{\"plan_id\": \"H3817-010-0\", \"benefit\": \"rehab\", \"setting\": \"office\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$40\", \"unit\": \"per provider per day\", \"limit\": \"\", \"page\": 50, \"quotes\": [\"In-office visits: In-network: $40 copay per provider per day\", \"Covered services include physical therapy, occupational therapy, and speech language therapy.\"], \"note\": \"\"},\n{\"plan_id\": \"H3817-010-0\", \"benefit\": \"rehab\", \"setting\": \"office\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"\", \"limit\": \"\", \"page\": 50, \"quotes\": [\"In-office visits: In-network: $40 copay per provider per day Out-of-network: 50% coinsurance Virtual-office visits:\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 15186,
+  "output_tokens": 1391,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-5e11cf20cec995f3.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 80 outpatient surgery row: $500 copay for Medicare-covered surgery at an ambulatory surgical center.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 80 outpatient surgery row: $550 copay for Medicare-covered surgery at an outpatient hospital.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 80 outpatient surgery row: $0 copay for a colonoscopy at an ambulatory surgical center.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 80 outpatient surgery row: $0 copay for a colonoscopy at an outpatient hospital.\"},\n{\"id\": 4, \"ok\": false, \"reason\": \"Wrong setting. The $550 copay is for an outpatient hospital; the ASC copay is $500.\"},\n{\"id\": 5, \"ok\": false, \"reason\": \"Wrong setting. The $500 copay is for an ambulatory surgical center; the outpatient hospital copay is $550.\"}]\n```",
+ "usage": {
+  "input_tokens": 3130,
+  "output_tokens": 769,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

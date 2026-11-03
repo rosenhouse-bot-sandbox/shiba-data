@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "batch": true,
+ "task": "v-H5439-019-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"Pages 60 and 125 limit chiropractic to manual manipulation of the spine for subluxation, the Medicare benefit, and no passage shows routine chiropractic coverage.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Pages 54-55 and 123 show acupuncture only for chronic low back pain at Medicare-covered cost shares, with no supplemental acupuncture anywhere.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Page 124 lists naturopath services as 'Not covered under any condition', which matches the field.\"}\n]",
+ "usage": {
+  "input_tokens": 3747,
+  "output_tokens": 455,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

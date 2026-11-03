@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "516ff586a12c8288.md",
+ "reply": "```json\n[\n{\"plan_id\": \"H5439-019-0\", \"benefit\": \"rehab.physical\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$30\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 96, \"quotes\": [\"$30 copay for each Medicare-covered physical therapy visit.\"]},\n{\"plan_id\": \"H5439-019-0\", \"benefit\": \"rehab.physical\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 96, \"quotes\": [\"20% coinsurance for each Medicare-covered physical therapy visit.\"]},\n{\"plan_id\": \"H5439-019-0\", \"benefit\": \"rehab.occupational\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$30\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 96, \"quotes\": [\"$30 copay for each Medicare-covered occupational therapy visit.\"]},\n{\"plan_id\": \"H5439-019-0\", \"benefit\": \"rehab.occupational\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 97, \"quotes\": [\"20% coinsurance for each Medicare-covered occupational therapy visit.\"]},\n{\"plan_id\": \"H5439-019-0\", \"benefit\": \"rehab.speech\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$30\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 97, \"quotes\": [\"$30 copay for each Medicare-covered speech language therapy visit.\"]},\n{\"plan_id\": \"H5439-019-0\", \"benefit\": \"rehab.speech\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 97, \"quotes\": [\"20% coinsurance for each Medicare-covered speech language therapy visit.\"]}\n]\n```",
+ "usage": {
+  "input_tokens": 13109,
+  "output_tokens": 1266,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

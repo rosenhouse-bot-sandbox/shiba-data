@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "batch": true,
+ "task": "H5216-455-0.retry.md",
+ "reply": "```json\n[{\"key\": \"main.AB_ambulance\", \"result\": \"skip\"},\n {\"key\": \"main.C_premium\", \"result\": \"cite\", \"citations\": [{\"page\": 11, \"quote\": \"Monthly plan premium $0\"}]},\n {\"key\": \"main.I_outpatient_surgery\", \"result\": \"cite\", \"citations\": [{\"page\": 61, \"quote\": \"Surgery Services $450 copayment\"}, {\"page\": 61, \"quote\": \"Diagnostic Colonoscopy $0 copayment – Ambulatory Surgical Center – Outpatient Hospital Out-of-Network:\"}, {\"page\": 61, \"quote\": \"$350 copayment – Ambulatory Surgical Center Diagnostic Colonoscopy $0 copayment\"}]}]\n```",
+ "usage": {
+  "input_tokens": 14779,
+  "output_tokens": 8507,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

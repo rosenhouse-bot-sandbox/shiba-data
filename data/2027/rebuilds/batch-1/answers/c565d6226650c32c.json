@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-d594b0a1d3772214.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 43 Dental services row: $65 copay for each Medicare-covered dental service, in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 44 says comprehensive dental services (non-Medicare covered) are not covered.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 74 preventive-only dental schedule says you will not have coverage if you go to an out-of-network dentist.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 74 preventive services table: D0270 bitewing single image is $0 in network. Every listed preventive service is $0.\"}]\n```",
+ "usage": {
+  "input_tokens": 4524,
+  "output_tokens": 459,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

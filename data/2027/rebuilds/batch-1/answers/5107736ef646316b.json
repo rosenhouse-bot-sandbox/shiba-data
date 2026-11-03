@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "64e05773e847b56e.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-153-0\", \"benefit\": \"rehab.physical\", \"setting\": \"office.specialist\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$35\", \"page\": 64, \"quotes\": [\"Physical Therapy $35 copayment – Specialist's Office\"]},\n{\"plan_id\": \"H1036-153-0\", \"benefit\": \"rehab.physical\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$35\", \"page\": 64, \"quotes\": [\"Physical Therapy $35 copayment – Specialist's Office – Outpatient Hospital\"]},\n{\"plan_id\": \"H1036-153-0\", \"benefit\": \"rehab.speech\", \"setting\": \"office.specialist\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$35\", \"page\": 64, \"quotes\": [\"Speech Therapy $35 copayment – Specialist's Office\"]},\n{\"plan_id\": \"H1036-153-0\", \"benefit\": \"rehab.speech\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$35\", \"page\": 64, \"quotes\": [\"Speech Therapy $35 copayment – Specialist's Office – Outpatient Hospital\"]},\n{\"plan_id\": \"H1036-153-0\", \"benefit\": \"rehab.occupational\", \"setting\": \"office.specialist\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$35\", \"page\": 64, \"quotes\": [\"Occupational Therapy $35 copayment – Specialist's Office\"]},\n{\"plan_id\": \"H1036-153-0\", \"benefit\": \"rehab.occupational\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$35\", \"page\": 64, \"quotes\": [\"Occupational Therapy $35 copayment – Specialist's Office – Outpatient Hospital\"]}]\n```",
+ "usage": {
+  "input_tokens": 15621,
+  "output_tokens": 1275,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

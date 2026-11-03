@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "ce13e925c0384896.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-153-0\", \"benefit\": \"extras.transportation\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"not_covered\", \"page\": 9, \"quotes\": [\"TRANSPORTATION\", \"date of service Not Covered\"], \"note\": \"The words 'Not Covered' alone also match 'not covered' elsewhere on the page. This quote reads the right-hand column straight down, joining the end of the ground ambulance row with the transportation row.\"}]\n```",
+ "usage": {
+  "input_tokens": 4056,
+  "output_tokens": 644,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

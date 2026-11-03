@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "29166053e638f7e6.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-317-0\", \"benefit\": \"medical_deductible.some\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"deductible\", \"amount\": \"$283\", \"limit\": \"per year\", \"page\": 5, \"quotes\": [\"$283\", \"The following services listed are excluded from the in-network deductible:\"], \"note\": \"The page lists services excluded from the in-network deductible, so it applies to some services only. It says you pay the same amount as with Original Medicare but does not name the Part B deductible, so no medical_deductible.part_b fact is given. The limit 'per year' is inferred from it being the yearly deductible and is not quoted.\"}]\n```",
+ "usage": {
+  "input_tokens": 3193,
+  "output_tokens": 829,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "61de2101267140ce.md",
+ "reply": "```json\n[{\"plan_id\": \"H1372-003-0\", \"benefit\": \"rehab.physical\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 7,\n  \"quotes\": [\"Physical therapy $0 copay\"], \"note\": \"The service name and the copay sit on separate lines of the same row, so this quote only matches if line breaks are read as single spaces.\"},\n {\"plan_id\": \"H1372-003-0\", \"benefit\": \"rehab.occupational\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 11,\n  \"quotes\": [\"Occupational therapy       $0 copay\"]},\n {\"plan_id\": \"H1372-003-0\", \"benefit\": \"rehab.speech\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 11,\n  \"quotes\": [\"Speech therapy             $0 copay\"]}]\n```",
+ "usage": {
+  "input_tokens": 2692,
+  "output_tokens": 1015,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

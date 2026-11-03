@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "dca4e04d7b6dc26b.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H7006-021-0\", \"benefit\": \"imaging.diagnostic.mammogram\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 66, \"quotes\": [\"Radiological diagnostic services, not including x-rays\", \"$0 copay applies to diagnostic mammograms; $60 copay applies to all other tests.\"], \"note\": \"\"},\n{\"plan_id\": \"H7006-021-0\", \"benefit\": \"imaging.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$60\", \"unit\": \"\", \"limit\": \"\", \"page\": 66, \"quotes\": [\"Radiological diagnostic services, not including x-rays\", \"$0 copay applies to diagnostic mammograms; $60 copay applies to all other tests.\"], \"note\": \"The $60 copay applies to radiological diagnostic services other than X-rays and diagnostic mammograms. Diagnostic mammograms are $0.\"}]\n```",
+ "usage": {
+  "input_tokens": 12292,
+  "output_tokens": 1073,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

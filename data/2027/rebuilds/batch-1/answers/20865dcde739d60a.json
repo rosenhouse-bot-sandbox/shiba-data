@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "2c101bd739d45a62.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-028-3\", \"benefit\": \"tests.lab\", \"setting\": \"office\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 6, \"quotes\": [\"Lab Services\", \"Office or Freestanding location: $0 copay\"]},\n{\"plan_id\": \"H2923-028-3\", \"benefit\": \"tests.lab\", \"setting\": \"freestanding\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 6, \"quotes\": [\"Lab Services\", \"Office or Freestanding location: $0 copay\"]},\n{\"plan_id\": \"H2923-028-3\", \"benefit\": \"tests.lab\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0 or $50\", \"page\": 6, \"quotes\": [\"Lab Services\", \"Outpatient hospital: $0 or $50 copay\"]},\n{\"plan_id\": \"H2923-028-3\", \"benefit\": \"tests.diagnostic\", \"setting\": \"office\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0-$40\", \"page\": 6, \"quotes\": [\"Diagnostic Tests and Procedures (such as a stress\", \"Office or freestanding location: $0 - $40 copay\"]},\n{\"plan_id\": \"H2923-028-3\", \"benefit\": \"tests.diagnostic\", \"setting\": \"freestanding\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0-$40\", \"page\": 6, \"quotes\": [\"Diagnostic Tests and Procedures (such as a stress\", \"Office or freestanding location: $0 - $40 copay\"]},\n{\"plan_id\": \"H2923-028-3\", \"benefit\": \"tests.diagnostic\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$95\", \"page\": 6, \"quotes\": [\"Diagnostic Tests and Procedures (such as a stress\", \"Outpatient hospital: $95 copay\"]},\n{\"plan_id\": \"H2923-028-3\", \"benefit\": \"tests.genetic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 6, \"quotes\": [\"Genetic Testing 20% coinsurance\"]}]\n```",
+ "usage": {
+  "input_tokens": 2597,
+  "output_tokens": 1522,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

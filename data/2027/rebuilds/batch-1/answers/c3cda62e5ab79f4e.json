@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-cabbc3b82885b498.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 7 Dental and Alternative Therapy Allowance: covered comprehensive dental services are reimbursed (50%) from the allowance, at any licensed provider in the US.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 7: a $2,000 yearly allowance toward preventive and comprehensive dental (shared with massage, acupuncture and naturopath services), at any licensed provider in the US.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 7: covered preventive dental services, like exams and cleanings, are reimbursed 100% up to the yearly allowance, at any licensed provider in the US.\"}]\n```",
+ "usage": {
+  "input_tokens": 2692,
+  "output_tokens": 627,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

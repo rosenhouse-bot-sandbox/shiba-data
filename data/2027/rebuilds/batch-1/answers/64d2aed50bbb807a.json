@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-7ac7300e6ca40ac7.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 68 psychiatric row: $0 applies to additional Medicare-covered days, up to 90 per benefit period, plus 60 lifetime reserve days. The cost-sharing resets each admission, while the 90 days count per benefit period. So 'days 4-90' does not clearly match, and the reserve days may also cost $0.\"}, {\"id\": 1, \"ok\": true, \"reason\": \"Page 65 inpatient hospital care row: $685 copayment each day for days 1-4, in network.\"}, {\"id\": 2, \"ok\": true, \"reason\": \"Page 68 psychiatric hospital row: $685 copayment each day for days 1-3, in network.\"}, {\"id\": 3, \"ok\": true, \"reason\": \"Page 65 inpatient hospital care row: $0 copayment for additional Medicare-covered days after days 1-4, so day 5 on.\"}]\n```",
+ "usage": {
+  "input_tokens": 3750,
+  "output_tokens": 750,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

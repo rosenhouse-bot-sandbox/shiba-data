@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-d370b4b5b3950077.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 8 Speech Therapy row: Outpatient hospital $50 copay.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 8 Occupational Therapy row: Outpatient hospital $50 copay.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 8 Occupational Therapy row: Office location $40 copay.\"},\n{\"id\": 3, \"ok\": false, \"reason\": \"Page 8 Speech Therapy row: $40 is the office location copay. The outpatient hospital copay is $50.\"},\n{\"id\": 4, \"ok\": false, \"reason\": \"Page 8 Physical Therapy row: $50 is the outpatient hospital copay. The office location copay is $40.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 8 Physical Therapy row: Outpatient hospital $50 copay.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 8 Speech Therapy row: Office location $40 copay.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 8 Physical Therapy row: Office location $40 copay.\"},\n{\"id\": 8, \"ok\": false, \"reason\": \"Page 8 Physical Therapy row: $40 is the office location copay. The outpatient hospital copay is $50.\"}]\n```",
+ "usage": {
+  "input_tokens": 3278,
+  "output_tokens": 457,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

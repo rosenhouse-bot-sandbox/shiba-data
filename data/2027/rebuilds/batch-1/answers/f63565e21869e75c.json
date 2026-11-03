@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-0e1831fb00cf2a95.md",
+ "reply": "All five items match their cited rows for Aetna Medicare Eagle (HMO) H2056-018.\n\n```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 7 Acupuncture row says non-Medicare covered acupuncture services are not covered.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 7 Acupuncture row: $40 copay for Medicare-covered acupuncture visits, limited to chronic low back pain.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 7 Chiropractic row says non-Medicare covered chiropractic services are not covered.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 7 Chiropractic row: $15 copay for Medicare-covered chiropractic visits, limited to fixing a subluxation.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 6 row: Routine, non-emergency transportation is Not Covered.\"}]\n```",
+ "usage": {
+  "input_tokens": 3750,
+  "output_tokens": 323,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

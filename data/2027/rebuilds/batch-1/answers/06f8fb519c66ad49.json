@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-8980c5c5d9008083.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 10 Summary of Important Costs for 2027: deductible $250 except for insulin furnished through DME. The exclusion means it applies to some services only.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 47 Section 1.2: deductible is $250, paid before the plan pays for most covered services, for the calendar year.\"}]\n```",
+ "usage": {
+  "input_tokens": 3030,
+  "output_tokens": 439,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

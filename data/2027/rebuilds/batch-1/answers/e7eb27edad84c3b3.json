@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-d649ac2bebc0321d.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 55 Ambulance Services row: Ground Ambulance is a $345 copay per one-way trip, a Medicare-covered service.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 55 Ambulance Services row: Air Ambulance is 20% coinsurance per one-way trip.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 55: $0 copay for facility-to-facility transfers between hospitals via ground ambulance.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 55 Worldwide Ambulance Services (outside the U.S.), a supplemental benefit: Ground Ambulance is a $345 copay per one-way trip.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 56, continuing the worldwide ambulance cost-shares: Air Ambulance is 20% coinsurance per one-way trip outside the U.S.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 56: worldwide emergency, urgent care, and ambulance services are covered up to $25,000 per lifetime, outside the U.S. only.\"}]\n```",
+ "usage": {
+  "input_tokens": 3679,
+  "output_tokens": 614,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "e41fce2e65cf35f2.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-428-2\", \"benefit\": \"extras.transportation\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"not_covered\", \"page\": 15, \"quotes\": [\"TRANSPORTATION\"], \"note\": \"Row under TRANSPORTATION reads Not Covered for both in-network and out-of-network\"},\n {\"plan_id\": \"H5216-428-2\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$50\", \"unit\": \"per visit\", \"condition\": \"chronic low back pain\", \"page\": 19, \"quotes\": [\"Acupuncture services $50 copay for acupuncture for\"]},\n {\"plan_id\": \"H5216-428-2\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"visit_limit\", \"amount\": \"20\", \"limit\": \"per year\", \"condition\": \"chronic low back pain\", \"page\": 19, \"quotes\": [\"$50 copay for acupuncture for chronic low back pain visits up to 20 visit(s) per year. Benefits received out-of-network\"]},\n {\"plan_id\": \"H5216-428-2\", \"benefit\": \"extras.chiropractic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$15\", \"page\": 19, \"quotes\": [\"Chiropractic services $15 copay\"]},\n {\"plan_id\": \"H5216-428-2\", \"benefit\": \"extras.chiropractic\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 19, \"quotes\": [\"Chiropractic services $15 copay 50% of the cost\"]}]\n```",
+ "usage": {
+  "input_tokens": 3566,
+  "output_tokens": 2270,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

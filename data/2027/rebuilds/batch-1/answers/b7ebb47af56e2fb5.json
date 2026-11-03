@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "77d83ba821336370.md",
+ "reply": "```json\n[{\"plan_id\": \"H2001-045-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"unit\": \"per one-way trip\", \"limit\": \"\", \"page\": 59, \"quotes\": [\"$0 copayment or 20% coinsurance or each one-way Medicare-covered ground trip (in- network).\"], \"note\": \"The $0 option applies to QMB or full Medicaid members, so 20% is given.\"},\n {\"plan_id\": \"H2001-045-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"unit\": \"per one-way trip\", \"limit\": \"\", \"page\": 59, \"quotes\": [\"$0 copayment or 20% coinsurance or each one-way Medicare-covered air trip.\"], \"note\": \"The air trip line does not name a network, so it is treated as in network by default. The $0 option applies to QMB or full Medicaid members.\"},\n {\"plan_id\": \"H2001-045-0\", \"benefit\": \"ambulance\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"not_covered\", \"page\": 59, \"quotes\": [\"Outside o the United States or its territories, ambulance transportation is not covered under any circumstances.\"]}]\n```",
+ "usage": {
+  "input_tokens": 11123,
+  "output_tokens": 1363,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

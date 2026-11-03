@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-7a95606e4d0c87d0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 61: $520 per day for days 1-4 applies only to the Inpatient Psychiatric Facility setting. The Inpatient Hospital setting under the same benefit is $610, so setting 'any' is wrong.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 61: in network, both the Inpatient Hospital and Inpatient Psychiatric Facility settings are a $0 copayment per day for days 5 to 90.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 60: out of network, Inpatient Care is 50% coinsurance for Inpatient Hospital.\"},\n{\"id\": 3, \"ok\": false, \"reason\": \"Page 59 states dollar copays for in-network inpatient care, so 'covered' with no amount misstates the cost. The 'unlimited days' line is a coverage limit, not a cost.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 61: out of network, Inpatient Mental Health Care is 50% coinsurance for both Inpatient Hospital and Inpatient Psychiatric Facility.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 59: in network, Inpatient Hospital is a $0 copayment per day for days 5 to 90.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 59: in network, Inpatient Hospital is a $610 copayment per day for days 1 to 4.\"}]\n```",
+ "usage": {
+  "input_tokens": 5728,
+  "output_tokens": 1000,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

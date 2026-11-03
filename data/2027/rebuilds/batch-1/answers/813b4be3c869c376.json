@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "a744eaa24232bb11.md",
+ "reply": "```json\n[\n{\"plan_id\": \"H1036-306-0\", \"benefit\": \"rehab.physical\", \"setting\": \"office.specialist\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$35\", \"page\": 67, \"quotes\": [\"Physical Therapy $35 copayment – Specialist's Office\"]},\n{\"plan_id\": \"H1036-306-0\", \"benefit\": \"rehab.physical\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$35\", \"page\": 67, \"quotes\": [\"Physical Therapy $35 copayment – Specialist's Office – Outpatient Hospital\"]},\n{\"plan_id\": \"H1036-306-0\", \"benefit\": \"rehab.speech\", \"setting\": \"office.specialist\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$35\", \"page\": 67, \"quotes\": [\"Speech Therapy $35 copayment – Specialist's Office\"]},\n{\"plan_id\": \"H1036-306-0\", \"benefit\": \"rehab.speech\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$35\", \"page\": 67, \"quotes\": [\"Speech Therapy $35 copayment – Specialist's Office – Outpatient Hospital\"]},\n{\"plan_id\": \"H1036-306-0\", \"benefit\": \"rehab.occupational\", \"setting\": \"office.specialist\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$35\", \"page\": 67, \"quotes\": [\"Occupational Therapy $35 copayment – Specialist's Office\"]},\n{\"plan_id\": \"H1036-306-0\", \"benefit\": \"rehab.occupational\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$35\", \"page\": 67, \"quotes\": [\"Occupational Therapy $35 copayment – Specialist's Office – Outpatient Hospital\"]}\n]\n```",
+ "usage": {
+  "input_tokens": 14704,
+  "output_tokens": 1336,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

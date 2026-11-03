@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-64e05773e847b56e.md",
+ "reply": "On page 64, the In-Network part of the Outpatient rehabilitation services row lists each therapy separately. Physical, speech and occupational therapy each show a $35 copayment for Specialist's Office, Outpatient Hospital and Comprehensive Outpatient Rehab Facility. So every item matches its row.\n\n```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 64 Outpatient rehabilitation, In-Network: Speech Therapy $35 copayment listed for Outpatient Hospital.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 64 Outpatient rehabilitation, In-Network: Occupational Therapy $35 copayment listed for Specialist's Office.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 64 Outpatient rehabilitation, In-Network: Physical Therapy $35 copayment listed for Outpatient Hospital.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 64 Outpatient rehabilitation, In-Network: Speech Therapy $35 copayment listed for Specialist's Office.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 64 Outpatient rehabilitation, In-Network: Physical Therapy $35 copayment listed for Specialist's Office.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 64 Outpatient rehabilitation, In-Network: Occupational Therapy $35 copayment listed for Outpatient Hospital.\"}]\n```",
+ "usage": {
+  "input_tokens": 3094,
+  "output_tokens": 516,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

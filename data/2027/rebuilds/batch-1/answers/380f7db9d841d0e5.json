@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "batch": true,
+ "task": "H2001-045-0.retry.md",
+ "reply": "```json\n[{\"key\": \"dvha.F_dental\", \"result\": \"cite\", \"citations\": [{\"page\": 118, \"quote\": \"Annual dental maximum: $2,000\"}, {\"page\": 118, \"quote\": \"$0 copay on all covered dental services up to the plan’s annual dental maximum amount.\"}, {\"page\": 118, \"quote\": \"$0 cost-share or network dental care, specified services only.\"}]},\n {\"key\": \"main.Q_hearing\", \"result\": \"cite\", \"citations\": [{\"page\": 71, \"quote\": \"Hearing services - routine hearing exam\"}, {\"page\": 71, \"quote\": \"We cover 1 in or out-o -network hearing exam every year.\"}]},\n {\"key\": \"main.W_fitness\", \"result\": \"cite\", \"citations\": [{\"page\": 70, \"quote\": \"Fitness program\"}, {\"page\": 71, \"quote\": \"Free gym membership at core and premium locations\"}]}]\n```",
+ "usage": {
+  "input_tokens": 11466,
+  "output_tokens": 4134,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

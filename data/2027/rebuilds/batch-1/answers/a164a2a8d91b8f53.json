@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-61de2101267140ce.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 2 Inpatient hospital coverage row: $0 copay per day for days 8-90 in network.\"}, {\"id\": 1, \"ok\": true, \"reason\": \"Page 2 Inpatient hospital coverage row: $325 copay per day for days 1-7 in network.\"}, {\"id\": 2, \"ok\": true, \"reason\": \"Page 2 Inpatient hospital coverage row: $0 copay per day for up to 60 additional days over your lifetime, in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2192,
+  "output_tokens": 478,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

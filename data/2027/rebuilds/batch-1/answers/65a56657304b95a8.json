@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "37b0122461ea99ed.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H5439-011-0\", \"benefit\": \"surgery.skin_biopsy\", \"setting\": \"outpatient_hospital\", \"network\": \"in\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 100,\n   \"quotes\": [\"$0 copay for Medicare-covered skin biopsies.\"], \"note\": \"\"},\n  {\"plan_id\": \"H5439-011-0\", \"benefit\": \"surgery\", \"setting\": \"outpatient_hospital\", \"network\": \"in\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$425\", \"unit\": \"\", \"limit\": \"\", \"page\": 100,\n   \"quotes\": [\"$425 copay for all other Medicare-covered outpatient services.\"], \"note\": \"\"},\n  {\"plan_id\": \"H5439-011-0\", \"benefit\": \"surgery\", \"setting\": \"outpatient_hospital\", \"network\": \"out\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 100,\n   \"quotes\": [\"30% coinsurance for each Medicare-covered visit to an outpatient hospital facility.\"], \"note\": \"\"},\n  {\"plan_id\": \"H5439-011-0\", \"benefit\": \"surgery\", \"setting\": \"asc\", \"network\": \"in\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$200\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 100,\n   \"quotes\": [\"$200 copay for each Medicare-covered visit to an ambulatory surgical center.\"], \"note\": \"\"},\n  {\"plan_id\": \"H5439-011-0\", \"benefit\": \"surgery\", \"setting\": \"asc\", \"network\": \"out\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 101,\n   \"quotes\": [\"30% coinsurance for each Medicare-covered visit to an ambulatory surgical center.\"], \"note\": \"\"},\n  {\"plan_id\": \"H5439-011-0\", \"benefit\": \"surgery.colonoscopy\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 93,\n   \"quotes\": [\"$0 copay for Medicare-covered diagnostic colonoscopy and specified testing-related services.\"], \"note\": \"\"}\n]\n```",
+ "usage": {
+  "input_tokens": 7912,
+  "output_tokens": 1529,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

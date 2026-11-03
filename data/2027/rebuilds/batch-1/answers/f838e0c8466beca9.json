@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-f751937f09316ed1.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 82 psychiatric hospital row: $2,091 copay per stay, covered for up to 90 days each benefit period.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 81 inpatient hospital care row (acute, rehabilitation, long-term care): $2,241 copay per stay.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 13 summary: inpatient hospital stays (acute, rehabilitation, long-term care) are a $2,241 copay per stay. Psychiatric stays are priced separately, so this row is acute care.\"}]\n```",
+ "usage": {
+  "input_tokens": 4071,
+  "output_tokens": 528,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

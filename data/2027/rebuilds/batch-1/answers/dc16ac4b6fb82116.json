@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-2eb4caa23079d78f.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 Inpatient Hospital Coverage, in network: $0 copay per day for days 6 through 90.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 4 Inpatient Hospital Coverage, in network: $475 copay per day for days 1 through 5.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 4 Inpatient Hospital Coverage, out of network: Days 1-90, 40% coinsurance for each Medicare-covered hospital stay.\"}]\n```",
+ "usage": {
+  "input_tokens": 2152,
+  "output_tokens": 492,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "0e1831fb00cf2a95.md",
+ "reply": "```json\n[{\"plan_id\": \"H2056-018-0\", \"benefit\": \"part_b_drugs.chemotherapy\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 6, \"quotes\": [\"Chemotherapy drugs                         20% coinsurance\"]},\n{\"plan_id\": \"H2056-018-0\", \"benefit\": \"part_b_drugs.insulin\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$35\", \"page\": 6, \"quotes\": [\"Part B Insulin                             $35 copay\"]},\n{\"plan_id\": \"H2056-018-0\", \"benefit\": \"part_b_drugs\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 6, \"quotes\": [\"Other Part B drugs                         20% coinsurance\"], \"note\": \"The row is labeled 'Other Part B drugs' (Part B drugs other than chemotherapy and insulin), so it is mapped to the general part_b_drugs benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2558,
+  "output_tokens": 633,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

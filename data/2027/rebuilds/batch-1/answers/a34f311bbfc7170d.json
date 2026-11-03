@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "dbc45a45d9843dd0.md",
+ "reply": "```json\n[{\"plan_id\": \"H3817-008-1\", \"benefit\": \"part_b_drugs\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 54, \"quotes\": [\"20% coinsurance (certain\"], \"note\": \"Document says certain drugs may have a coinsurance lower than 20%.\"},\n{\"plan_id\": \"H3817-008-1\", \"benefit\": \"part_b_drugs.vaccine\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 51, \"quotes\": [\"There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines.\"]},\n{\"plan_id\": \"H3817-008-1\", \"benefit\": \"part_b_drugs.vaccine\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 51, \"quotes\": [\"Out-of-network: 50% coinsurance\"]},\n{\"plan_id\": \"H3817-008-1\", \"benefit\": \"part_b_drugs.vaccine\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"0%-20%\", \"condition\": \"Other Part B immunizations\", \"page\": 52, \"quotes\": [\"Other Part B immunizations: In-network: 0%-20% coinsurance (includes administration)\"]},\n{\"plan_id\": \"H3817-008-1\", \"benefit\": \"part_b_drugs.vaccine\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"condition\": \"Other Part B immunizations\", \"page\": 52, \"quotes\": [\"0%-20% coinsurance (includes administration) Out-of-network: 50% coinsurance\"]}]\n```",
+ "usage": {
+  "input_tokens": 7093,
+  "output_tokens": 2305,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

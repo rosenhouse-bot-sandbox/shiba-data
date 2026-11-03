@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "da2974c756f3eedc.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-009-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$2,241\", \"unit\": \"per stay\", \"limit\": \"\", \"page\": 4,\n  \"quotes\": [\"$2,241 copay per stay\"], \"note\": \"\"},\n {\"plan_id\": \"H2923-009-0\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$2,091\", \"unit\": \"per stay\", \"limit\": \"\", \"page\": 7,\n  \"quotes\": [\"$2,091 copay per stay\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 3210,
+  "output_tokens": 581,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-5d52bb731683d536.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 53 psychiatric hospital row, out-of-network: Days 1–190 at 50% coinsurance.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 53 psychiatric hospital row, in-network: Days 6–190 at $0 copay per day.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 52 inpatient hospital care row, in-network: Days 1–5 at $315 copay per day.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 52 inpatient hospital care row, out-of-network: 50% coinsurance.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 52 inpatient hospital care row, in-network: Days 6 and beyond at $0 copay per day.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 8 inpatient hospital stays row covers acute care, rehabilitation and long-term care. In-network: Days 1–5 at $315 copay per day.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 53 psychiatric hospital row, in-network: Days 1–5 at $315 copay per day.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 8 inpatient hospital stays row, in-network: Days 6 and beyond at $0 copay per day.\"}]\n```",
+ "usage": {
+  "input_tokens": 5274,
+  "output_tokens": 838,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

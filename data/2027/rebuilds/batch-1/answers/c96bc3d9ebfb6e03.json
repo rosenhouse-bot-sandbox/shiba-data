@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "d649ac2bebc0321d.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-028-3\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$250\", \"limit\": \"per year\", \"pool\": \"Dental & Alternative Therapy Allowance\", \"page\": 61, \"quotes\": [\"You can be reimbursed up to $250 per year for covered dental services, Therapeutic Massage, Routine Acupuncture, and/or Naturopath Services.\"], \"note\": \"Shared allowance with dental, massage and naturopathy; page 62 says there are no network restrictions\"},\n{\"plan_id\": \"H2923-028-3\", \"benefit\": \"extras.massage\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$250\", \"limit\": \"per year\", \"pool\": \"Dental & Alternative Therapy Allowance\", \"page\": 61, \"quotes\": [\"You can be reimbursed up to $250 per year for covered dental services, Therapeutic Massage, Routine Acupuncture, and/or Naturopath Services.\"], \"note\": \"Shared allowance with dental, acupuncture and naturopathy; page 62 says there are no network restrictions\"},\n{\"plan_id\": \"H2923-028-3\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"visit_limit\", \"amount\": \"20\", \"limit\": \"annually\", \"condition\": \"chronic low back pain\", \"page\": 53, \"quotes\": [\"No more than 20 acupuncture treatments may be administered annually\"], \"note\": \"Page also says up to 12 visits in 90 days, plus 8 more for patients showing improvement; only the annual maximum is given here\"}]\n```",
+ "usage": {
+  "input_tokens": 14979,
+  "output_tokens": 1850,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

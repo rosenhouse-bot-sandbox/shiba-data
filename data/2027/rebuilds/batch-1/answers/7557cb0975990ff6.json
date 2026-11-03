@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-161c63c8abccc6dc.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 12 Inpatient hospital stays row: $835 a day for days 1 to 3, then a $0 copayment for additional Medicare-covered days, in network. That makes days 4+ $0 per day.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 68 Inpatient hospital care row, out-of-network column: $910 copayment each day for days 1-12.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 12 Inpatient hospital stays row: $910 a day for days 1 to 12 out of network, then a $0 copayment for additional Medicare-covered days out of network. That makes days 13+ $0 per day.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 68 Inpatient hospital care row, in-network column: $835 copayment each day for days 1-3.\"}]\n```",
+ "usage": {
+  "input_tokens": 3572,
+  "output_tokens": 582,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

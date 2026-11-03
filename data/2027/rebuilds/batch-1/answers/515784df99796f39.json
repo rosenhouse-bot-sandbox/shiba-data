@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-5e11cf20cec995f3.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 65 Immunizations row: no coinsurance, copayment, or deductible for pneumonia, flu, Hepatitis B, or COVID-19 vaccines, which is a $0 copay.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 70 Medicare Part B Drugs row: $0 copayment for Medicare-covered Part B allergy antigens.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 71 Part B drugs row: 20% coinsurance for each Medicare-covered chemotherapy drug and the administration of that drug.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 71 Part B drugs row: you pay a maximum of $35 for each 1-month supply of Part B covered insulin.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 71 Part B drugs row: 20% coinsurance for all other Medicare-covered Part B drugs.\"}]\n```",
+ "usage": {
+  "input_tokens": 4747,
+  "output_tokens": 732,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

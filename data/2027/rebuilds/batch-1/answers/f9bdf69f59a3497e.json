@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-630e49b10e7ad131.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 51, In-Network, under Emergency Ambulance: 20% coinsurance regardless of the number of trips for Air Ambulance.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 51, In-Network, under Non-Emergency Ambulance: 20% coinsurance regardless of the number of trips for Air Ambulance.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 51, Out-of-Network, Worldwide Coverage: $325 copayment per date of service for Emergency Ambulance. Care outside the U.S. is not Medicare-covered, so supplemental fits.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 51, In-Network, under Non-Emergency Ambulance: $325 copayment per date of service for Ground Ambulance.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 51, In-Network, under Emergency Ambulance: $325 copayment per date of service for Ground Ambulance.\"}]\n```",
+ "usage": {
+  "input_tokens": 3100,
+  "output_tokens": 658,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "5e11cf20cec995f3.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-048-0\", \"benefit\": \"tests.lab\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 75, \"quotes\": [\"$0 copayment or Medicare-covered lab\"], \"note\": \"\"},\n{\"plan_id\": \"H3805-048-0\", \"benefit\": \"tests.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$35\", \"unit\": \"\", \"limit\": \"\", \"page\": 76, \"quotes\": [\"$35 copayment or Medicare-covered non-\"], \"note\": \"\"},\n{\"plan_id\": \"H3805-048-0\", \"benefit\": \"tests.diagnostic.sleep_study\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$35\", \"unit\": \"\", \"limit\": \"\", \"page\": 76, \"quotes\": [\"$35 copayment or Medicare-covered non-\", \"sleep studies, and treadmill stress tests.\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 11190,
+  "output_tokens": 937,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "batch": true,
+ "task": "v-H2923-019-0.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 64 shows a $2,000 yearly Dental & Alternative Therapy Allowance covering preventive and comprehensive dental. Page 111 confirms mandatory supplemental dental benefits (cleanings, exams, X-rays) for all members, so the plan covers routine dental and the ● is correct.\"}]",
+ "usage": {
+  "input_tokens": 2857,
+  "output_tokens": 126,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

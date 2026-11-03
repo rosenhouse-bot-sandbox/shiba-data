@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-bf93677641b9fa6f.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 7, Medicare Part B Drugs row: Other Part B Drugs is 20% coinsurance. Chemotherapy is also 20%, so all Part B drugs share 20%. No setting is named.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 7, Medicare Part B Drugs row: Chemotherapy Drugs is 20% coinsurance in network. No setting is named.\"}]\n```",
+ "usage": {
+  "input_tokens": 2383,
+  "output_tokens": 337,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

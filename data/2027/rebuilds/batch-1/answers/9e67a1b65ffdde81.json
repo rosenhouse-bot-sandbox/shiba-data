@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "5f6896f5c437eeed.md",
+ "reply": "```json\n[{\"plan_id\": \"H7199-002-0\", \"benefit\": \"part_b_drugs.chemotherapy\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"unit\": \"\", \"limit\": \"\", \"page\": 10, \"quotes\": [\"Chemotherapy Drugs: 20% coinsurance\"], \"note\": \"\"},\n{\"plan_id\": \"H7199-002-0\", \"benefit\": \"part_b_drugs.chemotherapy\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"40%\", \"unit\": \"\", \"limit\": \"\", \"page\": 10, \"quotes\": [\"Chemotherapy Drugs: 40% coinsurance\"], \"note\": \"\"},\n{\"plan_id\": \"H7199-002-0\", \"benefit\": \"part_b_drugs\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"unit\": \"\", \"limit\": \"\", \"page\": 10, \"quotes\": [\"Other Part B Drugs: 20%\"], \"note\": \"\"},\n{\"plan_id\": \"H7199-002-0\", \"benefit\": \"part_b_drugs\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"40%\", \"unit\": \"\", \"limit\": \"\", \"page\": 10, \"quotes\": [\"Other Part B Drugs: 40%\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 2710,
+  "output_tokens": 1297,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

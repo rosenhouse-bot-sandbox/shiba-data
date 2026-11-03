@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-bee1858e7e963c62.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 81: the $250 copay is in the ambulatory surgical center row. The outpatient hospital row is $0 - $400.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 81 outpatient hospital row: 50% coinsurance out of network for each Medicare-covered service.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 81 ambulatory surgical center row: $250 copay in network for each Medicare-covered service.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 82 continues the ambulatory surgical center row: 50% coinsurance out of network for each Medicare-covered service.\"},\n{\"id\": 4, \"ok\": false, \"reason\": \"Page 81: the $0 - $400 copay is in the outpatient hospital row. The ambulatory surgical center row is $250.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 81 outpatient hospital row: $0 - $400 copay in network, depending on the Medicare-covered service.\"}]\n```",
+ "usage": {
+  "input_tokens": 3236,
+  "output_tokens": 545,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

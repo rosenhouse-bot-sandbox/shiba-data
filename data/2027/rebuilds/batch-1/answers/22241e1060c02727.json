@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "a744eaa24232bb11.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-306-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per date of service\", \"limit\": \"\", \"page\": 49,\n  \"quotes\": [\"In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance\", \"Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance\"], \"note\": \"Same cost for emergency and non-emergency ground ambulance, regardless of the number of trips\"},\n {\"plan_id\": \"H1036-306-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"unit\": \"\", \"limit\": \"\", \"page\": 49,\n  \"quotes\": [\"In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance\", \"Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance\"], \"note\": \"Same cost for emergency and non-emergency air ambulance\"},\n {\"plan_id\": \"H1036-306-0\", \"benefit\": \"ambulance\", \"setting\": \"outside_us\", \"network\": \"out\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per date of service\", \"limit\": \"\", \"page\": 49,\n  \"quotes\": [\"Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance\"], \"note\": \"Worldwide emergency ambulance, paid upfront and reimbursed. Treated as supplemental because page 39 calls worldwide emergency coverage a supplemental benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 10429,
+  "output_tokens": 2478,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

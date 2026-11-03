@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-61de2101267140ce.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 3 row 'Diagnostic tests and procedures' shows 20% coinsurance. It is in network, lists no setting, and is a Medicare-covered service.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 3 row 'Lab services' shows a $0 copay in network with no setting named. The genetic testing exception in that row is about prior authorization, not cost.\"}]\n```",
+ "usage": {
+  "input_tokens": 1895,
+  "output_tokens": 155,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

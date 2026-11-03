@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "362ee075ea5896d4.md",
+ "reply": "```json\n[{\"plan_id\": \"H2001-045-0\", \"benefit\": \"extras.transportation\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per one-way trip\", \"page\": 7, \"quotes\": [\"Routine transportation\", \"$0 copayment for 24 one-\"]},\n {\"plan_id\": \"H2001-045-0\", \"benefit\": \"extras.transportation\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"24\", \"unit\": \"one-way trips\", \"page\": 7, \"quotes\": [\"Routine transportation\", \"$0 copayment for 24 one-\"]},\n {\"plan_id\": \"H2001-045-0\", \"benefit\": \"extras.transportation\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"75%\", \"page\": 7, \"quotes\": [\"Routine transportation\", \"75% coinsurance\"]},\n {\"plan_id\": \"H2001-045-0\", \"benefit\": \"extras.chiropractic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 9, \"quotes\": [\"Medicare-covered chiropractic care (manual manipulation of the spine to correct subluxation)\", \"Depending on your level of Medicaid eligibility, $0 copay or 20% coinsurance $0 copay We only cover\"], \"note\": \"The second quote is the in-network column read straight down. It runs into the next row because the chiropractic text alone repeats in the therapeutic shoes row.\"}]\n```",
+ "usage": {
+  "input_tokens": 4443,
+  "output_tokens": 2879,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

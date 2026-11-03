@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "batch": true,
+ "task": "v-H2056-003-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":false,\"reason\":\"The field also covers worldwide emergency care, which the EOC shows the plan covers ($130 copay, $250,000 maximum). The naturopath exclusion supports only one part of the field.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"The EOC says Therapeutic Massage is 'Not covered under any condition,' and no passage shows massage as a supplemental benefit.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"The EOC says it covers only manual manipulation of the spine for chiropractic, at a Medicare-covered visit copay. Page 78 says all other chiropractic services are not covered.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"The EOC says naturopath services are 'Not covered under any condition,' and no passage shows otherwise.\"},\n{\"id\":4,\"ok\":true,\"reason\":\"The EOC covers acupuncture only for chronic low back pain as a Medicare-covered benefit, and no routine acupuncture benefit appears.\"}\n]",
+ "usage": {
+  "input_tokens": 17622,
+  "output_tokens": 1558,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

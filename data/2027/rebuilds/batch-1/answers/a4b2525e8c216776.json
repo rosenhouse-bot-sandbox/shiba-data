@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-e2d6e1e199a3b8a9.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 36 Dental services (continued): annual benefit amount (allowance) of $1,500 for covered comprehensive (non-Medicare covered) dental services, Aetna Dental PPO Network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 36: the supplemental dental benefit uses the Aetna Dental PPO Network, and services from providers outside that network will not be covered.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 35 Dental services row: $40 copay for each Medicare-covered dental service.\"}]\n```",
+ "usage": {
+  "input_tokens": 3554,
+  "output_tokens": 397,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "batch": true,
+ "task": "H2923-019-0.md",
+ "reply": "```json\n[{\"key\": \"dvha.E_optional_packages\", \"result\": \"not_mentioned\", \"citations\": [], \"reason\": \"The passages cover Part D penalties, the LIS rider and definitions, and name no optional package bought for a premium.\"}, {\"key\": \"main.AA_opt_packages\", \"result\": \"not_mentioned\", \"citations\": [], \"reason\": \"The passages mention only riders, amendments and generic 'optional coverage selected', with no supplemental package sold for an extra premium.\"}, {\"key\": \"main.T_chiropractic\", \"result\": \"medicare_only\", \"citations\": [{\"page\": 62, \"quote\": \"We cover only manual manipulation of the spine to correct a vertebral subluxation\"}, {\"page\": 125, \"quote\": \"Manual manipulation of the spine to correct a subluxation is covered\"}], \"reason\": \"Only the Medicare-covered chiropractic manipulation is listed, and routine chiropractic care appears in the not-covered table beyond that.\"}, {\"key\": \"main.X_transportation\", \"result\": \"not_mentioned\", \"citations\": [], \"reason\": \"The passages cover Medicare ambulance rules, worldwide emergency ambulance and transplant-related lodging, with no routine non-emergency transportation benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 6904,
+  "output_tokens": 2539,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

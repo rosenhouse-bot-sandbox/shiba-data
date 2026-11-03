@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "362ee075ea5896d4.md",
+ "reply": "```json\n[{\"plan_id\": \"H2001-045-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 7, \"quotes\": [\"Medicaid eligibility, $0 copay or 20% coinsurance for ground\"]},\n{\"plan_id\": \"H2001-045-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 7, \"quotes\": [\"Medicaid eligibility, $0 copay or 20% coinsurance for air\"]},\n{\"plan_id\": \"H2001-045-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 7, \"quotes\": [\"20% coinsurance for ground 20% coinsurance for air\"]},\n{\"plan_id\": \"H2001-045-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 7, \"quotes\": [\"20% coinsurance for ground 20% coinsurance for air\"]}]\n```",
+ "usage": {
+  "input_tokens": 3317,
+  "output_tokens": 1537,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
