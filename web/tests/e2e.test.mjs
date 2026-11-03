@@ -145,7 +145,7 @@ test("only pages near the view keep a canvas", async () => {
 test("resizing keeps the cited quote in view", async () => {
   await page.goto(`${base}#/main`);
   await row("H2923-009-0").locator("td").nth(site.main.columns.findIndex((c) => c.key === "U_naturopath")).click();
-  await page.locator("#source-note p.cite a", { hasText: "EOC" }).click();
+  await page.locator("#source-note p.cite a", { hasText: "EOC" }).first().click();
   await shown(docOf("H2923-009-0", "EOC"), 71);
   await page.setViewportSize({ width: 1600, height: 600 });
   await page.waitForTimeout(1500);

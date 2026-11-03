@@ -471,6 +471,14 @@ class DotTest(unittest.TestCase):
         self.assertEqual(column(present.dot("extras.acupuncture"), extra("extras.massage")), [("", [])])
         self.assertEqual(column(present.dot("extras.chiropractic"), extra("extras.chiropractic", network="out")), [("", [])])
 
+    def test_any_of_several_benefits_gets_a_dot(self):
+        medicare, cleaning = extra("dental", "medicare", "copay", "$50"), extra("dental.preventive", cost_kind="copay", amount="$0")
+        dental = present.dot("dental.preventive", "dental.comprehensive")
+        self.assertEqual(column(dental, medicare, cleaning), [("●", [cleaning])])
+        crown = extra("dental.comprehensive", cost_kind="coinsurance", amount="50%")
+        self.assertEqual(column(dental, medicare, crown), [("●", [crown])])
+        self.assertEqual(column(dental, medicare), [("", [medicare])])
+
 
 def presented_cells(data, column):
     return {p: [value for value, _ in got] for p, got in present.lines(data, column).items()}

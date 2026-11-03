@@ -281,10 +281,11 @@ def offers(f):
             and not (f["package"] or f["condition"] or f["provider_tier"]))
 
 
-def dot(leaf):
+def dot(*leaves):
     """Shows ● for a routine benefit. Facts for only a Medicare, package, conditional or uncovered benefit cite a blank."""
     def rule(organization, found):
-        mine = [f for f in found if facts.covers(f["benefit"], leaf) and f["network"] in ("in", "any")]
+        mine = [f for f in found if f["network"] in ("in", "any")
+                and any(facts.covers(f["benefit"], leaf) for leaf in leaves)]
         yes = [f for f in mine if offers(f)]
         return [("●", top(yes))] if yes else [("", top(mine) if mine else [])]
     return rule
@@ -304,7 +305,8 @@ COLUMNS = {"L_xray_imaging": xray_imaging, "AB_ambulance": ambulance, "I_outpati
            "J_outpatient_rehab": outpatient_rehab, "K_tests_labs": tests_labs, "Z_part_b_reduction": giveback,
            "M_part_b_drugs": part_b_drugs, "O_medical_deductible": medical_deductible,
            "S_acupuncture": dot("extras.acupuncture"), "T_chiropractic": dot("extras.chiropractic"),
-           "V_massage": dot("extras.massage"), "X_transportation": dot("extras.transportation")}
+           "V_massage": dot("extras.massage"), "X_transportation": dot("extras.transportation"),
+           "R_dental": dot("dental.preventive", "dental.comprehensive"), "U_naturopath": dot("extras.naturopathy")}
 
 
 def lines(data, column):
