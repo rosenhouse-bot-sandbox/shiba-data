@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-bf93677641b9fa6f.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 Medical Deductible row: 'This plan does not have a medical deductible.' This page covers only the one HMO plan, so a $0 in-network deductible is correct.\"}]\n```",
+ "usage": {
+  "input_tokens": 2245,
+  "output_tokens": 86,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

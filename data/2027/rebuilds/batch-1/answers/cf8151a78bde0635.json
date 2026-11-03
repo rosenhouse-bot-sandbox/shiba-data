@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "8980c5c5d9008083.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-015-0\", \"benefit\": \"medical_deductible.some\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"deductible\", \"amount\": \"$250\", \"unit\": \"\", \"limit\": \"per year\", \"page\": 47, \"quotes\": [\"Your deductible is $250.\", \"you must pay the full cost for most of your covered services\"], \"note\": \"The network is unclear. Page 48 lists in-network services the deductible does not apply to, so it may also apply out of network. The document states no network for the deductible itself, so 'in' is the default.\"},\n {\"plan_id\": \"H5439-015-0\", \"benefit\": \"medical_deductible.some\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"deductible\", \"amount\": \"$250\", \"unit\": \"\", \"limit\": \"per year\", \"page\": 10, \"quotes\": [\"$250 except for insulin furnished\"], \"note\": \"This summary row excludes insulin furnished through durable medical equipment. Page 48 lists other excluded in-network services.\"}]\n```",
+ "usage": {
+  "input_tokens": 3952,
+  "output_tokens": 1405,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

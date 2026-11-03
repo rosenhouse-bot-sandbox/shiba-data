@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-cbcaa238a8c713a4.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 7 Part B insulin row: the 50% is the out-of-network column. In network the cost is 20% up to $35.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 7 Part B insulin row: 20% up to $35 in the in-network column.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 7 Other Part B drugs row: 0%-20% (depending on the drug) in the in-network column.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 7 Chemotherapy drugs row: 0%-20% (depending on the drug) in the in-network column.\"},\n{\"id\": 4, \"ok\": false, \"reason\": \"Page 7 Part B insulin row: out of network is 50%. The 20% up to $35 is the in-network cost.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 7 Part B insulin row: 50% in the out-of-network column.\"}]\n```",
+ "usage": {
+  "input_tokens": 2802,
+  "output_tokens": 558,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

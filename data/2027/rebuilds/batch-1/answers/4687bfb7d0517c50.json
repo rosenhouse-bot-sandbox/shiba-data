@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "4ec81cd0d2695486.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H1372-003-0\", \"benefit\": \"tests.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"unit\": \"\", \"limit\": \"\", \"page\": 79, \"quotes\": [\"Diagnostic tests and procedures (non-radiological services)\", \"Prior authorization is required. 20% coinsurance\"], \"note\": \"The amount quote reads the right column straight down across the row boundary, because \\\"20% coinsurance\\\" alone repeats three times on this page.\"}]\n```",
+ "usage": {
+  "input_tokens": 7150,
+  "output_tokens": 1060,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

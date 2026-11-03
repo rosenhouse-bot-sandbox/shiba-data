@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "batch": true,
+ "task": "H2923-025-0.md",
+ "reply": "```json\n[\n  {\"key\": \"dvha.E_optional_packages\", \"result\": \"not_mentioned\", \"citations\": [], \"reason\": \"The passages cover the Part D late enrollment penalty, the LIS Rider, and general definitions, with no optional supplemental package bought for a premium.\"},\n  {\"key\": \"main.AA_opt_packages\", \"result\": \"not_mentioned\", \"citations\": [], \"reason\": \"The passages cover the contract period, late enrollment penalty, and definitions; none describes an optional package sold for an extra premium.\"},\n  {\"key\": \"main.T_chiropractic\", \"result\": \"medicare_only\", \"citations\": [{\"page\": 59, \"quote\": \"We cover only manual manipulation of the spine to correct a vertebral subluxation\"}, {\"page\": 124, \"quote\": \"Manual manipulation of the spine to correct a subluxation is covered\"}], \"reason\": \"Only the Medicare-covered spinal manipulation is listed, and no routine chiropractic benefit or allowance appears.\"},\n  {\"key\": \"main.X_transportation\", \"result\": \"unclear\", \"citations\": [], \"reason\": \"The passages show Medicare-level non-emergency ambulance, worldwide emergency ambulance, and transplant-only lodging and transportation, but no routine non-emergency transportation benefit.\"}\n]\n```",
+ "usage": {
+  "input_tokens": 6791,
+  "output_tokens": 2283,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

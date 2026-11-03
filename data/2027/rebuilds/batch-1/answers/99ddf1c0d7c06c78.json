@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-64e05773e847b56e.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 56 psychiatric hospital row, Inpatient Psychiatric Facility: $420 copay per day, days 1 to 4, in network. The Inpatient Hospital setting has the same cost, so setting any holds.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 56 psychiatric hospital row, Inpatient Psychiatric Facility: $0 copay per day, days 5 to 90, in network. Same cost in both listed settings.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 55 inpatient hospital care row, Inpatient Hospital: $420 copay per day, days 1 to 4, in network.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 55 inpatient hospital care row: $0 copay per day, days 5 to 90, in network.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 12 summary, inpatient hospital stays (acute, rehabilitation and long-term care): $0 copay per day for days 5 to 90, in network.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 12 summary, inpatient hospital stays: $420 copay per day for days 1 to 4, in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 5136,
+  "output_tokens": 770,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

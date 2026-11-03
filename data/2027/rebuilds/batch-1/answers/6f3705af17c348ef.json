@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "batch": true,
+ "task": "H7006-018-0.md",
+ "reply": "```json\n[{\"key\": \"dvha.E_optional_packages\", \"result\": \"not_mentioned\", \"citations\": [], \"reason\": \"The passages cover the Part D late enrollment penalty, LIS rider, and definitions, with no optional packages.\"},\n{\"key\": \"main.AA_opt_packages\", \"result\": \"not_mentioned\", \"citations\": [], \"reason\": \"The passages do not mention optional supplemental benefit packages bought for an extra premium.\"},\n{\"key\": \"main.T_chiropractic\", \"result\": \"covered\", \"citations\": [{\"page\": 52, \"quote\": \"Benefit allowance loaded to your Flex Card that can be used for non-Medicare-covered chiropractic services.\"}, {\"page\": 52, \"quote\": \"$50 allowance every six months, loaded to your Flex Card, for combined routine chiropractic, acupuncture and naturopathy services.\"}], \"reason\": \"A Flex Card allowance covers non-Medicare routine chiropractic services in the base plan.\"},\n{\"key\": \"main.V_massage\", \"result\": \"excluded\", \"citations\": [{\"page\": 59, \"quote\": \"Services covered by Original Medicare including but not limited to, physical therapy, chiropractic, acupuncture or massage therapy services\"}], \"reason\": \"The Flex Card allowance list excludes massage therapy, so no routine massage benefit is shown.\"},\n{\"key\": \"main.X_transportation\", \"result\": \"unclear\", \"citations\": [], \"reason\": \"Non-emergency transportation is referenced with prior authorization, but no routine benefit or cost-sharing for it is shown.\"},\n{\"key\": \"main.Z_part_b_reduction\", \"result\": \"not_mentioned\", \"citations\": [], \"reason\": \"No passage mentions a Part B giveback or premium reduction.\"}]\n```",
+ "usage": {
+  "input_tokens": 6622,
+  "output_tokens": 2481,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

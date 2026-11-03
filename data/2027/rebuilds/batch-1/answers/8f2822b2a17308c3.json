@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-8acbaf3993261220.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 2, 'Outpatient hospital, including surgery' row: $0 copay for a colonoscopy, in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 2, 'Outpatient hospital, including surgery' row: $685 copay otherwise.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"Page 2: $635 is the ambulatory surgical center (ASC) amount. The outpatient hospital surgery amount is $685.\"},\n{\"id\": 3, \"ok\": false, \"reason\": \"Page 2: the ASC row says $635 copay otherwise. $685 is the outpatient hospital amount.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 2, ambulatory surgical center (ASC) row: $0 copay for a colonoscopy.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 2, ambulatory surgical center (ASC) row: $635 copay otherwise.\"}]\n```",
+ "usage": {
+  "input_tokens": 2576,
+  "output_tokens": 541,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

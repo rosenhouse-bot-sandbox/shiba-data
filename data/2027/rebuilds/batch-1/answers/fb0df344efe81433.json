@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-0e1831fb00cf2a95.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 2, Part B premium reduction row for Aetna Medicare Eagle (HMO) H2056-018: the monthly premium paid to SSA is reduced by $50, which matches a $50 per month Part B reduction.\"}]\n```",
+ "usage": {
+  "input_tokens": 2154,
+  "output_tokens": 400,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

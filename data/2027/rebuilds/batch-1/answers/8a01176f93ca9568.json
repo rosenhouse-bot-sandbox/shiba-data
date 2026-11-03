@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "4a3883a20d17f740.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-010-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$175\", \"page\": 15, \"quotes\": [\"Ground Ambulance In-Network $175 copay * Out-of-Network $175 copay\"], \"note\": \"Quote keeps the * mark between the in-network and out-of-network costs because the version without it failed the exact-match check.\"},\n{\"plan_id\": \"H5439-010-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$175\", \"page\": 15, \"quotes\": [\"Air Ambulance In-Network $175 copay * Out-of-Network $175 copay\"], \"note\": \"Quote keeps the * mark between the in-network and out-of-network costs because the version without it failed the exact-match check.\"}]\n```",
+ "usage": {
+  "input_tokens": 2961,
+  "output_tokens": 1272,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

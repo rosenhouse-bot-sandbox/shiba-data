@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "77d83ba821336370.md",
+ "reply": "```json\n[{\"plan_id\": \"H2001-045-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$1,980\", \"unit\": \"per stay\", \"limit\": \"\", \"page\": 14,\n  \"quotes\": [\"$1,980 copayment or each\", \"Medicare-covered hospital stay\"], \"note\": \"Members with QMB or full Medicaid pay $0. The stay covers unlimited days.\"},\n {\"plan_id\": \"H2001-045-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"out\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"unit\": \"per stay\", \"limit\": \"\", \"page\": 14,\n  \"quotes\": [\"30% coinsurance or each\"], \"note\": \"The stay covers unlimited days.\"},\n {\"plan_id\": \"H2001-045-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$1,980\", \"unit\": \"per stay\", \"limit\": \"\", \"page\": 77,\n  \"quotes\": [\"copayment or $1,980\"], \"note\": \"Members with QMB or full Medicaid pay $0. The cost applies each time you are admitted, and the stay covers unlimited days.\"},\n {\"plan_id\": \"H2001-045-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"out\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"unit\": \"per stay\", \"limit\": \"\", \"page\": 77,\n  \"quotes\": [\"30% coinsurance or\"], \"note\": \"The cost applies each time you are admitted, and the stay covers unlimited days.\"}]\n```",
+ "usage": {
+  "input_tokens": 15719,
+  "output_tokens": 1814,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

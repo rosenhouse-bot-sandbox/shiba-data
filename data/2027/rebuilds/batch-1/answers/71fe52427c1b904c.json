@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "batch": true,
+ "task": "H9003-009-0.retry.md",
+ "reply": "```json\n[{\"key\": \"main.AA_opt_packages\", \"result\": \"cite\", \"citations\": [{\"page\": 212, \"quote\": \"This supplemental benefits package includes dental, hearing aid, and eyewear benefits for an additional monthly premium that is added to your Senior Advantage plan premium\"}]},\n {\"key\": \"main.AB_ambulance\", \"result\": \"skip\"}]\n```",
+ "usage": {
+  "input_tokens": 7387,
+  "output_tokens": 1841,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

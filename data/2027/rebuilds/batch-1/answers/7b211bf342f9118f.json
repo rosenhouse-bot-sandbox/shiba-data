@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "50159487a52ccddf.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H7006-018-0\", \"benefit\": \"surgery\", \"setting\": \"asc\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$250\", \"page\": 6, \"quotes\": [\"(ASC) $250 copay* $250 copay*\"], \"note\": \"Row lists the in-network copay for both plans; the first $250 copay is the ATRIO Choice Rx column.\"},\n {\"plan_id\": \"H7006-021-0\", \"benefit\": \"surgery\", \"setting\": \"asc\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$250\", \"page\": 6, \"quotes\": [\"(ASC) $250 copay* $250 copay*\"], \"note\": \"Row lists the in-network copay for both plans; the second $250 copay is the ATRIO Freedom column.\"},\n {\"plan_id\": \"H7006-018-0\", \"benefit\": \"surgery\", \"setting\": \"asc\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 6, \"quotes\": [\"$250 copay* Out-of-Network 50% coinsurance\"], \"note\": \"Quote is the ATRIO Choice Rx column read down. The Freedom column has the same words, so this quote may not be unique on the page.\"},\n {\"plan_id\": \"H7006-021-0\", \"benefit\": \"surgery\", \"setting\": \"asc\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 6, \"quotes\": [\"$250 copay* Out-of-Network 50% coinsurance\"], \"note\": \"Quote is the ATRIO Freedom column read down. The Choice Rx column has the same words, so this quote may not be unique on the page.\"}]\n```",
+ "usage": {
+  "input_tokens": 3056,
+  "output_tokens": 1671,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

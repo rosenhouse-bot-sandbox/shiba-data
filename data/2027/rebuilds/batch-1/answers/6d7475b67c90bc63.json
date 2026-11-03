@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "516ff586a12c8288.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H5439-019-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per one-way trip\", \"limit\": \"\", \"page\": 56,\n   \"quotes\": [\"Deductible applies. $325 copay per one-way trip for Medicare-covered ground ambulance services.\"], \"note\": \"\"},\n  {\"plan_id\": \"H5439-019-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per one-way trip\", \"limit\": \"\", \"page\": 56,\n   \"quotes\": [\"Deductible applies. $325 copay per one-way trip for Medicare-covered air ambulance services.\"], \"note\": \"\"},\n  {\"plan_id\": \"H5439-019-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"out\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per one-way trip\", \"limit\": \"\", \"page\": 56,\n   \"quotes\": [\"Deductible may apply. $325 copay per one-way trip for Medicare-covered ground ambulance services.\"], \"note\": \"\"},\n  {\"plan_id\": \"H5439-019-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"out\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per one-way trip\", \"limit\": \"\", \"page\": 56,\n   \"quotes\": [\"$325 copay per one way trip for Medicare-covered air ambulance services.\"], \"note\": \"\"}\n]\n```",
+ "usage": {
+  "input_tokens": 10921,
+  "output_tokens": 1461,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

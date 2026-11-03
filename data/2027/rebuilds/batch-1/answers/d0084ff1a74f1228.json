@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-0e1831fb00cf2a95.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 non-Medicare dental row: an annual allowance of $1,500 for covered comprehensive services, in the Aetna Dental PPO Network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 4 non-Medicare dental row: services from providers outside the Aetna Dental PPO Network will not be covered.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 4 non-Medicare dental row: 50% coinsurance for comprehensive services.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 4 non-Medicare dental row: $0 copay for preventive services such as oral exams, cleanings and x-rays.\"}]\n```",
+ "usage": {
+  "input_tokens": 2319,
+  "output_tokens": 359,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-cbcaa238a8c713a4.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 3, Ambulatory surgery center services, Diagnostic colonoscopy row: $0 in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 3, Ambulatory surgery center services, All other services row: 50% out of network.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"Page 3, Outpatient hospital All other services row: 20% is the in-network cost. Out of network is 50%.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 3, Outpatient hospital services, All other services row: 20% in network.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 3, Outpatient hospital services, All other services row: 50% out of network.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 3, Outpatient hospital services, Diagnostic colonoscopy row: $0 in network.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 3, Ambulatory surgery center services, All other services row: $300 in network.\"},\n{\"id\": 7, \"ok\": false, \"reason\": \"Page 3, Outpatient hospital All other services row: 50% is the out-of-network cost. In network is 20%.\"}]\n```",
+ "usage": {
+  "input_tokens": 2708,
+  "output_tokens": 731,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

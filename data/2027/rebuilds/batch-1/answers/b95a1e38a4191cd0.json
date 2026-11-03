@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "batch": true,
+ "task": "H3805-040-0.retry.md",
+ "reply": "```json\n[{\"key\": \"dvha.H_hearing\", \"result\": \"cite\", \"citations\": [{\"page\": 61, \"quote\": \"Hearing services - routine hearing exam $0 copayment\"}]},\n {\"key\": \"main.Q_hearing\", \"result\": \"cite\", \"citations\": [{\"page\": 61, \"quote\": \"Hearing services - routine hearing exam $0 copayment\"}, {\"page\": 61, \"quote\": \"We cover 1 hearing exam every year.\"}]}]\n```",
+ "usage": {
+  "input_tokens": 1902,
+  "output_tokens": 1696,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

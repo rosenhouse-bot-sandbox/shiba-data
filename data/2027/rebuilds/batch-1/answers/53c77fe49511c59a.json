@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "64e05773e847b56e.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H1036-153-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per date of service\", \"limit\": \"\", \"page\": 46, \"quotes\": [\"In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance\", \"Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance\"], \"note\": \"The same cost applies to emergency and non-emergency ground ambulance.\"},\n  {\"plan_id\": \"H1036-153-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 46, \"quotes\": [\"In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance\", \"Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance\"], \"note\": \"The same cost applies to emergency and non-emergency air ambulance.\"},\n  {\"plan_id\": \"H1036-153-0\", \"benefit\": \"ambulance\", \"setting\": \"outside_us\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per date of service\", \"limit\": \"\", \"page\": 46, \"quotes\": [\"Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance\"], \"note\": \"Treated as supplemental because page 36 calls worldwide emergency coverage a supplemental benefit.\"}\n]\n```",
+ "usage": {
+  "input_tokens": 10272,
+  "output_tokens": 2194,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

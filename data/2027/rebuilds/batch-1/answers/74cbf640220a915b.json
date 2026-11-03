@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-0e1831fb00cf2a95.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 'Diagnostic radiology services, such as CT/CAT scan and MRI' row shows a $275 copay for the plan. No setting is named.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 4 'Outpatient x-rays' row shows a $10 copay for the plan. No setting is named.\"}]\n```",
+ "usage": {
+  "input_tokens": 2289,
+  "output_tokens": 297,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

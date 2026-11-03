@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "61de2101267140ce.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H1372-003-0\", \"benefit\": \"part_b_drugs.chemotherapy\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"0%-20%\", \"unit\": \"\", \"limit\": \"\", \"page\": 8, \"quotes\": [\"Chemotherapy/Radiation drugs\", \"0%-20% coinsurance depending on the drug you receive 0%-20% coinsurance depending on the drug\"], \"note\": \"The cost text repeats in the Other Part B drugs row, so the quote reads down the cost column across both rows. The first 0%-20% belongs to the Chemotherapy/Radiation drugs row.\"}]\n```",
+ "usage": {
+  "input_tokens": 2310,
+  "output_tokens": 1158,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

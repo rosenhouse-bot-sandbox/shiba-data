@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "da2974c756f3eedc.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-009-0\", \"benefit\": \"surgery.colonoscopy\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"15% or 50%\", \"page\": 4, \"quotes\": [\"Diagnostic Colonoscopies:\", \"Outpatient Hospital: 15% or 50% coinsurance\"], \"note\": \"The document does not say when 15% or 50% applies.\"},\n {\"plan_id\": \"H2923-009-0\", \"benefit\": \"surgery.colonoscopy\", \"setting\": \"asc\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"15% or 50%\", \"page\": 4, \"quotes\": [\"Diagnostic Colonoscopies:\", \"Ambulatory Surgical Center (ASC): 15% or 50%\"], \"note\": \"The document does not say when 15% or 50% applies.\"},\n {\"plan_id\": \"H2923-009-0\", \"benefit\": \"surgery\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 4, \"quotes\": [\"Outpatient Surgery and Procedures:\", \"Outpatient Hospital: 50% coinsurance\"]},\n {\"plan_id\": \"H2923-009-0\", \"benefit\": \"surgery\", \"setting\": \"asc\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 4, \"quotes\": [\"Outpatient Surgery and Procedures:\", \"Ambulatory Surgical Center (ASC): 50% coinsurance\"]}]\n```",
+ "usage": {
+  "input_tokens": 2434,
+  "output_tokens": 1038,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

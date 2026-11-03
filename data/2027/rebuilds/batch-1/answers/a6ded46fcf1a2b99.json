@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-f751937f09316ed1.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 85 All Other Part B Drugs: 20% coinsurance, and the list includes an Ambulatory Surgical Center (ASC).\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Page 86 says you pay 'no more than $35' per 30-day supply. That is a cap, not a fixed $35 copay.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 85 All Other Part B Drugs: 20% coinsurance, and the list includes an outpatient hospital setting.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 84 Allergy Serum: 20% coinsurance, and the list includes an outpatient hospital setting.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Chemotherapy Drugs: 20% coinsurance at: (page 84). The settings list continues at the top of page 85 and includes a PCP's office.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 80 Immunizations: Medicare-covered vaccines (not including $0 preventive vaccines) have 20% coinsurance.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Chemotherapy Drugs: 20% coinsurance. The list continuing on page 85 includes a specialist's office.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 84 Allergy Serum: 20% coinsurance, and the list includes a specialist's office.\"},\n{\"id\": 8, \"ok\": true, \"reason\": \"Page 84 Allergy Serum: 20% coinsurance, and the list includes a PCP's office.\"},\n{\"id\": 9, \"ok\": true, \"reason\": \"Page 85 All Other Part B Drugs: 20% coinsurance, and the list includes a PCP's office.\"},\n{\"id\": 10, \"ok\": true, \"reason\": \"Page 85 All Other Part B Drugs: 20% coinsurance, and the list includes a specialist's office.\"},\n{\"id\": 11, \"ok\": true, \"reason\": \"Chemotherapy Drugs: 20% coinsurance. The list continuing on page 85 includes an Ambulatory Surgical Center (ASC).\"},\n{\"id\": 12, \"ok\": true, \"reason\": \"Chemotherapy Drugs: 20% coinsurance. The list continuing on page 85 includes an outpatient hospital setting.\"},\n{\"id\": 13, \"ok\": true, \"reason\": \"Page 80: no coinsurance, copayment, or deductible for pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines, which is a $0 copay.\"}]\n```",
+ "usage": {
+  "input_tokens": 6994,
+  "output_tokens": 1502,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

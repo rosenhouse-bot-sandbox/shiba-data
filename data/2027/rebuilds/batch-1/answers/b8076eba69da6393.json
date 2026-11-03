@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-37b0122461ea99ed.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 93: the 30% coinsurance for diagnostic procedures and tests is the out-of-network cost. In network, other diagnostic tests are 20% coinsurance.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Page 93: the 20% coinsurance for all other services is the in-network cost. Out of network it is 30% coinsurance.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 91 Laboratory tests row, in network: $50 copay for Medicare-covered genetic testing.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 93 Other outpatient diagnostic tests row, out of network: 30% coinsurance for Medicare-covered diagnostic procedures and tests.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 92, in network: $10 copay for all other Medicare-covered lab services. A1C and kidney health labs are $0 on page 91.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 93 Other outpatient diagnostic tests row, in network: 20% coinsurance for all other Medicare-covered services. Diagnostic colonoscopy is $0.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 92 lab row, out of network: 30% coinsurance for each Medicare-covered lab service.\"}]\n```",
+ "usage": {
+  "input_tokens": 3738,
+  "output_tokens": 932,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

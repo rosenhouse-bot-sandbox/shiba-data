@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "aca9d3510177adcd.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-455-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"any\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"page\": 40,\n  \"quotes\": [\"You are covered for Mandatory Supplemental Dental Benefit.\"], \"note\": \"\"},\n {\"plan_id\": \"H5216-455-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"any\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"max\", \"amount\": \"$2,500\", \"limit\": \"per year\", \"page\": 71,\n  \"quotes\": [\"Annual Maximum: $2,500\"], \"note\": \"\"},\n {\"plan_id\": \"H5216-455-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"any\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"deductible\", \"amount\": \"$0\", \"page\": 71,\n  \"quotes\": [\"Deductible: $0\"], \"note\": \"\"},\n {\"plan_id\": \"H5216-455-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"0%\", \"page\": 71,\n  \"quotes\": [\"Periodic oral exam – D0120 0% 0%\"], \"note\": \"Cost shown for periodic oral exam (D0120) only; other preventive services are on pages not provided.\"},\n {\"plan_id\": \"H5216-455-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"out\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"0%\", \"page\": 71,\n  \"quotes\": [\"Periodic oral exam – D0120 0% 0%\"], \"note\": \"Cost shown for periodic oral exam (D0120) only; other preventive services are on pages not provided.\"}]\n```",
+ "usage": {
+  "input_tokens": 11028,
+  "output_tokens": 2005,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

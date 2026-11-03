@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "batch": true,
+ "task": "v-H3817-008-1.md",
+ "reply": "[\n{\"id\":0,\"ok\":false,\"reason\":\"The quoted page 75 text is not among the passages, and ambulance or stretcher-car exclusions would not show that routine non-emergency rides are excluded.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Page 76 lists therapeutic massage as 'Not covered under any condition', and no passage shows routine massage coverage.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Page 75 lists naturopath services as 'Not covered under any condition', and no passage shows any coverage.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"Acupuncture is covered only for chronic low back pain under the Medicare benefit (pages 38 and 73), and no routine acupuncture benefit appears.\"},\n{\"id\":4,\"ok\":true,\"reason\":\"The plan covers only manual manipulation of the spine to correct a subluxation (pages 41 and 75), and no routine chiropractic benefit appears.\"},\n{\"id\":5,\"ok\":false,\"reason\":\"The quote is about Part D drug exclusions for over-the-counter drugs, not an OTC items allowance, so it does not show the plan lacks that benefit.\"}\n]",
+ "usage": {
+  "input_tokens": 7851,
+  "output_tokens": 880,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

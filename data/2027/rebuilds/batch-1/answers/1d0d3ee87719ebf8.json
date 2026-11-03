@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-dca4e04d7b6dc26b.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 57, Inpatient hospital care row (continued): out of network, 50% coinsurance for each Medicare-covered hospital stay.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 56, Inpatient hospital care row: in network, $0 copay each day for days 6 to 90.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 58, Inpatient psychiatric hospital row: in network, $250 copay each day for days 1 to 5.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 58, Inpatient psychiatric hospital row: out of network, 50% coinsurance for each Medicare-covered hospital stay.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 56, Inpatient hospital care row: in network, after reaching the Medicare-covered benefit limit you pay $0 copay for days 91 and beyond.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 56, Inpatient hospital care row: in network, $250 copay each day for days 1 to 5.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 58, Inpatient psychiatric hospital row: in network, $0 copay each day for days 6 to 90.\"}]\n```",
+ "usage": {
+  "input_tokens": 4470,
+  "output_tokens": 731,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

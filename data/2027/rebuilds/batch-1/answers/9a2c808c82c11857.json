@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "5e11cf20cec995f3.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-048-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$370\", \"unit\": \"per one-way trip\", \"limit\": \"\", \"page\": 51, \"quotes\": [\"$370 copayment or each one-way Medicare- covered ground trip.\"], \"note\": \"\"},\n{\"plan_id\": \"H3805-048-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$370\", \"unit\": \"per one-way trip\", \"limit\": \"\", \"page\": 51, \"quotes\": [\"$370 copayment or each one-way Medicare- covered air trip.\"], \"note\": \"\"},\n{\"plan_id\": \"H3805-048-0\", \"benefit\": \"ambulance\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"not_covered\", \"condition\": \"Non-emergency ambulance services\", \"page\": 51, \"quotes\": [\"Non-emergency ambulance services are not covered out-o -network.\"], \"note\": \"\"},\n{\"plan_id\": \"H3805-048-0\", \"benefit\": \"ambulance\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"not_covered\", \"page\": 51, \"quotes\": [\"Outside o the United States or its territories, ambulance transportation is not covered under any circumstances.\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 8613,
+  "output_tokens": 1292,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-cd39f32cdbd73e52.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 7 Chiropractic services row (Medicare-covered chiropractic care): $15 copay in network, $80 copay out of network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2627,
+  "output_tokens": 197,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

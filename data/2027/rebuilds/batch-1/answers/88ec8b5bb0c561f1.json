@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-dbc45a45d9843dd0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 62 'Virtual specialist visits' row lists out-of-network 50% coinsurance.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 62 'Virtual primary care provider (PCP) visits' row lists out-of-network 50% coinsurance.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 62 'In-office PCP visits' row lists in-network $0 copay per provider per day.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 8 'Specialist office visits' row lists out-of-network 50% coinsurance.\"},\n{\"id\": 4, \"ok\": false, \"reason\": \"The $0 quote is from the Primary care office visits row. Page 8 shows specialist office visits at $40 in network.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 62 'In-office PCP visits' row lists out-of-network 50% coinsurance.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 62 'Virtual specialist visits' row lists in-network $35 copay per provider per day.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 62 'Virtual PCP visits' row lists in-network $0 copay per provider per day.\"},\n{\"id\": 8, \"ok\": true, \"reason\": \"Page 62 'In-office specialist visits' row lists out-of-network 50% coinsurance.\"},\n{\"id\": 9, \"ok\": true, \"reason\": \"Page 8 'Primary care office visits' row lists in-network $0 per provider per day.\"},\n{\"id\": 10, \"ok\": false, \"reason\": \"The $0 quote is from the PCP row. Page 62 shows in-office specialist visits at a $40 copay in network.\"},\n{\"id\": 11, \"ok\": true, \"reason\": \"Page 8 'Primary care office visits' row lists out-of-network 50% coinsurance.\"},\n{\"id\": 12, \"ok\": true, \"reason\": \"Page 8 'Specialist office visits' row lists in-network $40 per provider per day.\"},\n{\"id\": 13, \"ok\": true, \"reason\": \"Page 62 'In-office specialist visits' row lists in-network $40 copay per provider per day.\"},\n{\"id\": 14, \"ok\": false, \"reason\": \"The $40 quote is from the specialist row. Page 62 shows in-office PCP visits at $0 in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 5335,
+  "output_tokens": 1004,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

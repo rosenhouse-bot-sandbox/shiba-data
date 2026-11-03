@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "23e2bdae59ea8981.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3817-011-1\", \"benefit\": \"part_b_drugs.chemotherapy\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 7, \"quotes\": [\"Chemotherapy drugs                                 0%-20% (depending on 50%\"], \"note\": \"The 50% out-of-network value is on the same printed line as the chemotherapy row. This quote copies that line's exact spacing, because the single-space version failed the check.\"}]\n```",
+ "usage": {
+  "input_tokens": 2675,
+  "output_tokens": 893,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

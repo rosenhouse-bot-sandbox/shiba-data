@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "7ac7300e6ca40ac7.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-040-0\", \"benefit\": \"visits\", \"setting\": \"office.pcp\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 13, \"quotes\": [\"Primary care office visits $0 copayment per visit.\"], \"note\": \"\"},\n{\"plan_id\": \"H3805-040-0\", \"benefit\": \"visits\", \"setting\": \"office.specialist\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$55\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 13, \"quotes\": [\"Specialist office visits $55 copayment per visit.\"], \"note\": \"\"},\n{\"plan_id\": \"H3805-040-0\", \"benefit\": \"visits\", \"setting\": \"office.pcp\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 82, \"quotes\": [\"$0 copayment or services rom a primary care\"], \"note\": \"\"},\n{\"plan_id\": \"H3805-040-0\", \"benefit\": \"visits\", \"setting\": \"office.specialist\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$55\", \"unit\": \"\", \"limit\": \"\", \"page\": 82, \"quotes\": [\"$55 copayment or services rom a specialist\"], \"note\": \"\"},\n{\"plan_id\": \"H3805-040-0\", \"benefit\": \"visits\", \"setting\": \"telehealth\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 82, \"quotes\": [\"$0 copayment or each Medicare-covered visit.\", \"Telehealth or Medicare-covered\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 7190,
+  "output_tokens": 1612,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

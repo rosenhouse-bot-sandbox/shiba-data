@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-8acbaf3993261220.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5 Part B covered insulin row: 20% coinsurance in network, capped at $35 ('up to $35').\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 5 Other Part B drugs row: $0 copay for allergy antigens.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 5 Other Part B drugs row: 20% coinsurance for all other Part B drugs, in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2636,
+  "output_tokens": 605,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

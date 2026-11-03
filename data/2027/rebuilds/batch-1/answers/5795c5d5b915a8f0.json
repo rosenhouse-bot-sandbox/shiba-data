@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-2a970381e331a34a.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 11 Chiropractic Care row: Medicare-covered chiropractic services cost a $15 copay.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 7: the $2,000 yearly Dental and Alternative Therapy Allowance names Naturopath Services.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 7: the $2,000 yearly Dental and Alternative Therapy Allowance names Routine Acupuncture.\"},\n{\"id\": 3, \"ok\": false, \"reason\": \"Page 11 Wellness Bucks lists fitness and wellness items (devices, equipment, classes, apps). It does not name therapeutic massage.\"},\n{\"id\": 4, \"ok\": false, \"reason\": \"Page 11 Wellness Bucks lists fitness and wellness items. It does not name acupuncture.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 8 Transportation row: Not covered.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 7: the $2,000 yearly Dental and Alternative Therapy Allowance names Therapeutic Massage.\"},\n{\"id\": 7, \"ok\": false, \"reason\": \"Page 11 Wellness Bucks lists fitness and wellness items. It does not name naturopathy.\"}]\n```",
+ "usage": {
+  "input_tokens": 5451,
+  "output_tokens": 851,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

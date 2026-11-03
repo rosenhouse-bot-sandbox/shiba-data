@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-5d52bb731683d536.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 60, Outpatient surgery row, ambulatory surgical center, in network: $0 copay for diagnostic colonoscopy.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 60, Outpatient surgery row, ambulatory surgical center, in network: $300 copay for all other services. This is the general surgery cost; colonoscopy and wound care are carved out separately.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 60, Outpatient surgery row, ambulatory surgical center, out of network: 50% coinsurance. It appears just before the separate outpatient hospital heading.\"}]\n```",
+ "usage": {
+  "input_tokens": 2338,
+  "output_tokens": 570,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

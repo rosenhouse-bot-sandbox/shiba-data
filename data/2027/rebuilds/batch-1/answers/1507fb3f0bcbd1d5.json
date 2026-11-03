@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "batch": true,
+ "task": "v-H5216-455-0.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Both the benefit chart (p.39) and the exclusions table (p.84) limit chiropractic coverage to manual manipulation of the spine for subluxation, and say other chiropractor services are not covered; no passage shows a routine chiropractic benefit.\"},{\"id\":1,\"ok\":true,\"reason\":\"The EOC exclusions table says naturopath services are 'Not covered under any condition', which directly supports the claim, and no passage shows any naturopathic coverage.\"}]",
+ "usage": {
+  "input_tokens": 1931,
+  "output_tokens": 175,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

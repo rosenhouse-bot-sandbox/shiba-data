@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "batch": true,
+ "task": "H3817-010-0.retry.md",
+ "reply": "```json\n[{\"key\": \"dvha.H_hearing\", \"result\": \"skip\"},\n {\"key\": \"main.C_premium\", \"result\": \"skip\"},\n {\"key\": \"main.P_vision\", \"result\": \"cite\", \"citations\": [{\"page\": 60, \"quote\": \"Routine vision exam: In-network: $0 copay per visit\"}, {\"page\": 61, \"quote\": \"Elective contact lenses – Limited to the allowance every calendar year.\"}]}]\n```",
+ "usage": {
+  "input_tokens": 4411,
+  "output_tokens": 3718,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

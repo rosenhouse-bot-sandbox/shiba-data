@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-f751937f09316ed1.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 95 ASC rows split the cost: 50% coinsurance for the facility plus a separate 30% coinsurance for the professional. The 50% alone is not the whole ASC cost, so the fact is incomplete and could mislead.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 95 Outpatient Procedures/Surgery at an Outpatient Hospital row: 50% coinsurance, in network.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 94 Diagnostic Colonoscopies row: At an Ambulatory Surgical Center (ASC), 50% coinsurance.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 94 Diagnostic Colonoscopies row: At an Outpatient hospital, 50% coinsurance.\"}]\n```",
+ "usage": {
+  "input_tokens": 3301,
+  "output_tokens": 564,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

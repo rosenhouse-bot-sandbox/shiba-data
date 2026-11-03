@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-b4be2a8a3e57d86a.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 14 Ambulance, Ground row: in-network $325 copay per date of service.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Page 8 Worldwide Coverage emergency ambulance is $325 copay per date of service. But care outside the U.S. is a supplemental benefit, not Medicare-covered, so covered_by is wrong. The single value printed under the out-of-network column also leaves the network field in doubt.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 14 Ambulance, Ground row: out-of-network $325 copay per date of service.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 14 Ambulance, Air row: in-network 20% of the cost.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 14 Ambulance, Air row: out-of-network 20% of the cost.\"}]\n```",
+ "usage": {
+  "input_tokens": 3337,
+  "output_tokens": 608,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

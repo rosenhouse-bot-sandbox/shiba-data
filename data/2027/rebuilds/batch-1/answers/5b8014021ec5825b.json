@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-e41fce2e65cf35f2.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 6 Doctor Visits, PCP Telehealth row: $0 copay in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 6 Doctor Visits, Specialist Telehealth row: Not Covered out of network.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"Page 6: the $50 copay is the Specialist's office row. The PCP's office copay is $0.\"},\n{\"id\": 3, \"ok\": false, \"reason\": \"Page 6: the $0 copay is the PCP's office row. The Specialist's office copay is $50.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 6 Specialist's office row: 50% of the cost out of network.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 6 PCP's office row: $0 copay in network.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 6 Specialist Telehealth row: $50 copay in network.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 6 Specialist's office row: $50 copay in network.\"},\n{\"id\": 8, \"ok\": true, \"reason\": \"Page 6 PCP Telehealth row: Not Covered out of network.\"},\n{\"id\": 9, \"ok\": true, \"reason\": \"Page 6 PCP's office row: 50% of the cost out of network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3035,
+  "output_tokens": 474,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

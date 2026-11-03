@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "batch": true,
+ "task": "v-H2923-001-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 61: the Dental & Alternative Therapy Allowance gives a $1,750 yearly allowance toward Preventive Dental and Comprehensive dental services, which are non-Medicare (supplemental) services. Page 111 lists them under Mandatory Supplemental Dental Benefits, so the dental dot holds for all members.\"}]\n```",
+ "usage": {
+  "input_tokens": 2778,
+  "output_tokens": 139,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

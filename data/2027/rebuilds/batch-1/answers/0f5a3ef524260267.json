@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "batch": true,
+ "task": "H1036-306-0.retry.md",
+ "reply": "```json\n[{\"key\": \"dvha.G_vision\", \"result\": \"cite\", \"citations\": [{\"page\": 82, \"quote\": \"$0\"}, {\"page\": 83, \"quote\": \"Any retail amount over $150 toward the purchase of frame and pair\"}, {\"page\": 83, \"quote\": \"Any retail amount over $250 toward the purchase of frame and pair\"}]},\n {\"key\": \"main.AB_ambulance\", \"result\": \"skip\"},\n {\"key\": \"main.C_premium\", \"result\": \"cite\", \"citations\": [{\"page\": 13, \"quote\": \"Monthly plan premium $0\"}]},\n {\"key\": \"main.E_moop\", \"result\": \"cite\", \"citations\": [{\"page\": 45, \"quote\": \"For calendar year 2027 the MOOP amount is $4,550.\"}]},\n {\"key\": \"main.H_inpatient\", \"result\": \"cite\", \"citations\": [{\"page\": 14, \"quote\": \"$290 copayment per day for days 1 – 4\"}, {\"page\": 14, \"quote\": \"$0 copayment per day for days 5 – 90\"}]}]\n```",
+ "usage": {
+  "input_tokens": 6240,
+  "output_tokens": 8998,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

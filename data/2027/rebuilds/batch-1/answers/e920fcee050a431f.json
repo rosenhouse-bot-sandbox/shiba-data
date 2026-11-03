@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "ce13e925c0384896.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-153-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 9, \"quotes\": [\"20% of the cost\"], \"note\": \"\"},\n{\"plan_id\": \"H1036-153-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per date of service\", \"page\": 9, \"quotes\": [\"$325 copay per date of service\"], \"note\": \"\"},\n{\"plan_id\": \"H1036-153-0\", \"benefit\": \"ambulance\", \"setting\": \"outside_us\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per date of service\", \"page\": 6, \"quotes\": [\"Emergency ambulance: $325 copay per date of\"], \"note\": \"Listed under Worldwide Coverage for care outside the U.S. The document does not say whether network applies, so in-network is assumed by default.\"}]\n```",
+ "usage": {
+  "input_tokens": 3479,
+  "output_tokens": 1010,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

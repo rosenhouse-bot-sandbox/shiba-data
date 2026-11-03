@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "d4758cd5b94a2266.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2406-070-0\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$835\", \"unit\": \"per day\", \"limit\": \"days 1-2\", \"condition\": \"days 1-2\", \"page\": 5, \"quotes\": [\"$835 copay per day: days\"]},\n{\"plan_id\": \"H2406-070-0\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"days 3-90\", \"condition\": \"days 3-90\", \"page\": 5, \"quotes\": [\"$0 copay per day: days 3-\"]},\n{\"plan_id\": \"H2406-070-0\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$910\", \"unit\": \"per day\", \"limit\": \"days 1-12\", \"condition\": \"days 1-12\", \"page\": 5, \"quotes\": [\"$910 copay per day: days\"]},\n{\"plan_id\": \"H2406-070-0\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"days 13-90\", \"condition\": \"days 13-90\", \"page\": 5, \"quotes\": [\"$0 copay per day: days 13-\"]}]\n```",
+ "usage": {
+  "input_tokens": 4802,
+  "output_tokens": 1235,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

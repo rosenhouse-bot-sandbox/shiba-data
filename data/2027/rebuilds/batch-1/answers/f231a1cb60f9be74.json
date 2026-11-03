@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-5d52bb731683d536.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 56 X-rays row: in network, $5 copay per provider per day.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 56 X-rays row: out of network, 50% coinsurance.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 57 Diagnostic radiology row names CT scans on the left: in network, $300 copay per provider per day for all other complex imaging.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 57 Diagnostic radiology row: in network, $0 copay per provider per day for diagnostic mammography.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 57 Diagnostic radiology row names PET scans on the left: in network, $300 copay per provider per day for all other complex imaging.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 57 Diagnostic radiology row names MRIs on the left: in network, $300 copay per provider per day for all other complex imaging.\"}]\n```",
+ "usage": {
+  "input_tokens": 4222,
+  "output_tokens": 663,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

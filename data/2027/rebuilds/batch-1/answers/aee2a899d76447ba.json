@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-4ec81cd0d2695486.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 79, row 'Diagnostic tests and procedures (non-radiological services)': 20% coinsurance in network, prior authorization required. It is a Medicare-covered service in the benefits chart.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 78, row 'Laboratory tests': $0 copayment, with prior authorization required only for genetic testing. It is Medicare-covered and no setting is named.\"}]\n```",
+ "usage": {
+  "input_tokens": 2643,
+  "output_tokens": 300,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

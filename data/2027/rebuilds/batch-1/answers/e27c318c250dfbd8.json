@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-557f08e61a7e8f42.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 83 Outpatient surgery: $350 is the Standard plan's copay. H9003-001-0 is Enhanced, which pays $250 per visit.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Page 83 Outpatient surgery: $350 is the Standard plan's copay. H9003-009-0 is Value, which pays $400 per visit.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 83 Outpatient surgery row (outpatient hospital services): $350 per visit for Standard plan members (H9003-006-0).\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 83 Outpatient surgery row (outpatient hospital services): $250 per visit for Enhanced plan members (H9003-001-0).\"},\n{\"id\": 4, \"ok\": false, \"reason\": \"Page 83 Outpatient surgery: $400 is the Value plan's copay. H9003-001-0 is Enhanced, which pays $250 per visit.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 83 Outpatient surgery row (outpatient hospital services): $400 per visit for Value plan members (H9003-009-0).\"}]\n```",
+ "usage": {
+  "input_tokens": 2664,
+  "output_tokens": 665,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

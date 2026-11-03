@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "batch": true,
+ "task": "H2923-001-0.retry.md",
+ "reply": "```json\n[{\"key\": \"dvha.H_hearing\", \"result\": \"skip\"},\n {\"key\": \"main.AB_ambulance\", \"result\": \"cite\", \"citations\": [{\"page\": 54, \"quote\": \"$315 copay per one-way trip You pay $0 copay for facility-to-\"}, {\"page\": 54, \"quote\": \"20% coinsurance per one-way trip\"}, {\"page\": 54, \"quote\": \"Ground Ambulance: $315 copay per one-way trip\"}, {\"page\": 55, \"quote\": \"Air Ambulance: 20%\"}]},\n {\"key\": \"main.C_premium\", \"result\": \"cite\", \"citations\": [{\"page\": 11, \"quote\": \"Monthly plan premium $0\"}]},\n {\"key\": \"main.N_pharmacy_deductible\", \"result\": \"skip\"},\n {\"key\": \"main.Y_otc\", \"result\": \"cite\", \"citations\": [{\"page\": 93, \"quote\": \"You get a $40 per quarter allowance to spend on plan-approved over-the-counter health and wellness products, such as pain relievers, eye drops, and toothpaste.\"}]}]\n```",
+ "usage": {
+  "input_tokens": 7116,
+  "output_tokens": 8748,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

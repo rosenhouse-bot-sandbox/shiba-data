@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-8980c5c5d9008083.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 61 Dental services row: in network, $55 copay for each Medicare-covered dental service.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 64 Dental services continued: out of network, 50% coinsurance for other preventive dental services per visit.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"Page 64 gives a $0 in-network copay for adjunctive general services under Comprehensive Dental Care, but the row states a limit of 1 every date of service that the item omits.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 61 Dental services row: out of network, 30% coinsurance for each Medicare-covered dental service (deductible may apply).\"},\n{\"id\": 4, \"ok\": false, \"reason\": \"Page 64 gives 50% out-of-network coinsurance for adjunctive general services, but the row states a limit of 1 every date of service that the item omits.\"}]\n```",
+ "usage": {
+  "input_tokens": 3239,
+  "output_tokens": 701,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

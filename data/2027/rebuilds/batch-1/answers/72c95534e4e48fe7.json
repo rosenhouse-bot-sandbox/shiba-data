@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-61de2101267140ce.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 8 'Other Part B drugs' row: 0%-20% coinsurance depending on the drug you receive, in network. Chemotherapy is priced in its own row.\"}]\n```",
+ "usage": {
+  "input_tokens": 1771,
+  "output_tokens": 346,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

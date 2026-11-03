@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "05d56d5f782708e7.md",
+ "reply": "```json\n[{\"plan_id\": \"H2056-003-0\", \"benefit\": \"surgery\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$500\", \"condition\": \"after your plan deductible is met\", \"page\": 3, \"quotes\": [\"Outpatient hospital $500 copay after your plan deductible is met\"], \"note\": \"The row is labeled 'Outpatient hospital' under Hospital coverage. It is read as outpatient surgery and procedures.\"},\n{\"plan_id\": \"H2056-003-0\", \"benefit\": \"surgery\", \"setting\": \"asc\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$450\", \"condition\": \"after your plan deductible is met\", \"page\": 3, \"quotes\": [\"Ambulatory surgical center $450 copay after your plan deductible is met\"], \"note\": \"\"},\n{\"plan_id\": \"H2056-003-0\", \"benefit\": \"surgery\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"deductible\", \"amount\": \"$750\", \"page\": 2, \"quotes\": [\"$750 for certain in‑network services.\", \"outpatient hospital services (including observation), ambulatory surgical center and dialysis\"], \"note\": \"The plan deductible is listed as applying to outpatient hospital services.\"},\n{\"plan_id\": \"H2056-003-0\", \"benefit\": \"surgery\", \"setting\": \"asc\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"deductible\", \"amount\": \"$750\", \"page\": 2, \"quotes\": [\"$750 for certain in‑network services.\", \"outpatient hospital services (including observation), ambulatory surgical center and dialysis\"], \"note\": \"The plan deductible is listed as applying to the ambulatory surgical center.\"}]\n```",
+ "usage": {
+  "input_tokens": 3153,
+  "output_tokens": 1341,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

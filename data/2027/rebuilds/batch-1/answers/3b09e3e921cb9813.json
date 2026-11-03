@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "batch": true,
+ "task": "H2406-073-0.md",
+ "reply": "```json\n[{\"key\": \"dvha.E_optional_packages\", \"result\": \"unclear\", \"citations\": [], \"reason\": \"The passages only mention 'other optional coverage selected' in a generic definition and name no optional supplemental packages or premiums.\"}, {\"key\": \"main.AA_opt_packages\", \"result\": \"unclear\", \"citations\": [], \"reason\": \"The passages only mention 'other optional coverage selected' in a generic definition and show no optional package bought for an extra premium.\"}, {\"key\": \"main.S_acupuncture\", \"result\": \"medicare_only\", \"citations\": [{\"page\": 101, \"quote\": \"Acupuncture (Medicare-covered)\"}, {\"page\": 101, \"quote\": \"Available or people with chronic low back pain under certain circumstances.\"}], \"reason\": \"Acupuncture is listed only as the Medicare chronic-low-back-pain benefit, and no routine acupuncture coverage appears.\"}, {\"key\": \"main.T_chiropractic\", \"result\": \"medicare_only\", \"citations\": [{\"page\": 100, \"quote\": \"Chiropractic services (Medicare-covered)\"}, {\"page\": 100, \"quote\": \"Manual manipulation o the spine to correct a subluxation is covered.\"}], \"reason\": \"Only Medicare-covered manual manipulation of the spine is covered, and other chiropractic services are excluded.\"}, {\"key\": \"main.U_naturopath\", \"result\": \"excluded\", \"citations\": [{\"page\": 101, \"quote\": \"Naturopath services (uses natural or alternative treatments)\"}], \"reason\": \"The chart states naturopath services are 'Not covered under any condition'.\"}, {\"key\": \"main.V_massage\", \"result\": \"excluded\", \"citations\": [{\"page\": 108, \"quote\": \"Spa, wellness, or recovery services such as massage, sauna, cryotherapy, or similar services are not reimbursable.\"}], \"reason\": \"The wellness fund states that massage services are not reimbursable.\"}, {\"key\": \"main.X_transportation\", \"result\": \"unclear\", \"citations\": [], \"reason\": \"The only non-emergency transportation text is tied to Medicare-covered ambulance trips with prior authorization, and no routine supplemental transport benefit is shown or excluded.\"}]\n```",
+ "usage": {
+  "input_tokens": 8634,
+  "output_tokens": 4254,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

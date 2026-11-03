@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "batch": true,
+ "task": "v-H7006-018-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":false,\"reason\":\"The quote is an exclusion list within an allowance, saying Original Medicare-covered services are not paid by it; it does not say the plan lacks massage therapy.\"},\n{\"id\":1,\"ok\":false,\"reason\":\"The plan covers routine acupuncture through a $50 Flex Card allowance every six months, so it is not Medicare-only.\"},\n{\"id\":2,\"ok\":false,\"reason\":\"The plan has a $30 quarterly OTC allowance on the Flex Card, and the quote is a Part D exclusion about non-prescription drugs.\"}\n]",
+ "usage": {
+  "input_tokens": 4530,
+  "output_tokens": 202,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

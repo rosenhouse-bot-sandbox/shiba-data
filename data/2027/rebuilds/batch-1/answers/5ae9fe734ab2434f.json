@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-aca9d3510177adcd.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 11, Section 4.2 (Medicare Part B Premium Reduction): Humana will pay up to $43 of your Medicare Part B premium. Recorded as a $43 per-month Part B reduction for H5216-455-0. The plan, amount and unit match the page.\"}]\n```",
+ "usage": {
+  "input_tokens": 2004,
+  "output_tokens": 486,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-29166053e638f7e6.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 11 Ambulance row: Ground is a $325 copay per date of service.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 11 Ambulance row: Air is 20% of the cost.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"Page 8 Worldwide Coverage lists emergency ambulance outside the U.S. at a $325 copay per date of service. Medicare generally does not cover care outside the U.S., so this is a supplemental benefit, not a Medicare-covered one.\"}]\n```",
+ "usage": {
+  "input_tokens": 3400,
+  "output_tokens": 408,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

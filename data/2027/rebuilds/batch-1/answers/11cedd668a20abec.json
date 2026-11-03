@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-0bd982dc589e8cba.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 64, out-of-network Provider and Professional Services row: 35% coinsurance in the Specialist's Office.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"The quote is the primary care office visit row ($0). Page 10 shows specialist office visits at $45 per visit.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"The quote is the specialist office visit row ($45). Page 10 shows primary care office visits at $0 per visit.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 10, in-network primary care office visits: $0 copayment per visit.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 64, out-of-network Provider and Professional Services row: 35% coinsurance in the PCP's Office.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 63, in-network Telehealth Services: $45 copayment for Specialist Virtual.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 63, in-network Telehealth Services: $0 copayment for PCP Virtual.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 10, in-network specialist office visits: $45 copayment per visit.\"}]\n```",
+ "usage": {
+  "input_tokens": 5628,
+  "output_tokens": 673,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

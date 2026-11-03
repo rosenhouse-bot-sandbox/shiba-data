@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "faebfcb17c1abba1.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-048-0\", \"benefit\": \"extras.transportation\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"not_covered\", \"page\": 14, \"quotes\": [\"TRANSPORTATION\", \"Not Covered Not Covered\"]},\n{\"plan_id\": \"H5216-048-0\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$45\", \"unit\": \"per visit\", \"condition\": \"chronic low back pain\", \"page\": 18, \"quotes\": [\"Acupuncture services $45 copay for acupuncture for $45 copay for acupuncture for\"]},\n{\"plan_id\": \"H5216-048-0\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"visit_limit\", \"amount\": \"20\", \"limit\": \"per year\", \"condition\": \"chronic low back pain\", \"page\": 18, \"quotes\": [\"Acupuncture services\", \"20 visit(s) per year. 20 visit(s) per year.\"]},\n{\"plan_id\": \"H5216-048-0\", \"benefit\": \"extras.chiropractic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$15\", \"page\": 18, \"quotes\": [\"Chiropractic services $15 copay\"]},\n{\"plan_id\": \"H5216-048-0\", \"benefit\": \"extras.chiropractic\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 18, \"quotes\": [\"Chiropractic services $15 copay 50% of the cost\"]}]\n```",
+ "usage": {
+  "input_tokens": 3678,
+  "output_tokens": 2321,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

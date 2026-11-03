@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-0bd982dc589e8cba.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 72 Mandatory Supplemental Dental table: the periodic oral exam (D0120), a preventive service, is 0% in-network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 40 Dental services row says you are covered for the Mandatory Supplemental Dental Benefit, with details at the end of the chart.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 72 Mandatory Supplemental Dental plan overview: Deductible $0. No network split is shown, and out-of-network care follows in-network rules.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 72 plan overview: Annual Maximum $1,500. Out-of-network benefits are subject to the in-network maximums.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 72 table: the periodic oral exam (D0120) is 0% in the Out-of-Network You Pay column.\"}]\n```",
+ "usage": {
+  "input_tokens": 3941,
+  "output_tokens": 856,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

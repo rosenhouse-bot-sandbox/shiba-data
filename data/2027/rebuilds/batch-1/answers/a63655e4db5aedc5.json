@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "batch": true,
+ "task": "v-H2406-070-0.md",
+ "reply": "```json\n[\n{\"id\":0,\"ok\":true,\"reason\":\"The chiropractic passages (pp. 55, 56, 116) show only Medicare-covered manual manipulation of the spine, and none shows a routine chiropractic benefit.\"},\n{\"id\":1,\"ok\":false,\"reason\":\"Pages 59 and 104-108 show routine dental is included in the base plan at $0 copay, so the claim that dental is optional-only is wrong.\"},\n{\"id\":2,\"ok\":false,\"reason\":\"The plan covers routine dental in the base benefit (pp. 59, 104-108), so the blank is wrong and the optional-only claim fails.\"},\n{\"id\":3,\"ok\":false,\"reason\":\"The massage quote is part of the list of what Medicare excludes from chiropractic coverage, not a plan statement that massage is not covered.\"},\n{\"id\":4,\"ok\":true,\"reason\":\"Only Medicare-covered acupuncture for chronic low back pain appears (pp. 50-52, 117), and no supplemental acupuncture is shown.\"},\n{\"id\":5,\"ok\":false,\"reason\":\"The quote is about Part D drug exclusions for over-the-counter drugs, not an OTC items allowance.\"},\n{\"id\":6,\"ok\":true,\"reason\":\"The EOC lists naturopath services as 'Not covered under any condition' (p. 117), and no passage shows coverage.\"}\n]\n```",
+ "usage": {
+  "input_tokens": 28197,
+  "output_tokens": 1131,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

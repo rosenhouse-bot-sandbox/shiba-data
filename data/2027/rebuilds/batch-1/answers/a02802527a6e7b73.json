@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-4a0ee31be3437c35.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 10, Ambulance section, Air row: 20% of the cost.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Page 7 does list $325 per date of service for emergency ambulance under Worldwide Coverage. But care outside the U.S. is generally a supplemental benefit, not Medicare-covered, so the 'medicare' field is doubtful.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 10, Ambulance section, Ground row: $325 copay per date of service.\"}]\n```",
+ "usage": {
+  "input_tokens": 3620,
+  "output_tokens": 503,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

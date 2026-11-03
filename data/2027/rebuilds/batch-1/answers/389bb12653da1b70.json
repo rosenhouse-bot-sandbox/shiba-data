@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-8865a3a5b2f4fcad.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 6 Diagnostic Radiology row: $200 copay in all other locations, which covers a freestanding facility.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 6 Diagnostic Radiology row: $0 copay for a diagnostic mammogram, with no setting named.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"The $500 copay applies only in an outpatient hospital. An office falls under all other locations, at $200.\"},\n{\"id\": 3, \"ok\": false, \"reason\": \"The $500 copay applies only in an outpatient hospital. A freestanding facility falls under all other locations, at $200.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 6 Diagnostic Radiology row: $200 copay in all other locations, which covers an office.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 6 Diagnostic Radiology row: $500 copay for all other diagnostic radiology in an outpatient hospital setting.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 6 Outpatient X-rays row: $50 copay, with no setting named.\"},\n{\"id\": 7, \"ok\": false, \"reason\": \"The outpatient hospital copay is $500. The $200 copay applies to all other locations.\"}]\n```",
+ "usage": {
+  "input_tokens": 2992,
+  "output_tokens": 674,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

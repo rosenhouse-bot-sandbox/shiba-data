@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "batch": true,
+ "task": "v-H3817-008-1.md",
+ "reply": "[{\"id\": 0, \"ok\": false, \"reason\": \"The labs part ($0 for HbA1C, $20 for other tests, page 57) and the $20 other outpatient diagnostic tests row (page 58) are supported. But the field rule says a $0 diagnostic mammogram counts as a test for Regence, and page 58 shows $0 for diagnostic mammography, so the tests part would be $0-$20, not $20. The EKG is also listed in the diagnostic radiology row with the $300 imaging copay, so it is unclear it falls under the $20 row. With that doubt the value cannot be confirmed.\"}]",
+ "usage": {
+  "input_tokens": 2717,
+  "output_tokens": 813,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

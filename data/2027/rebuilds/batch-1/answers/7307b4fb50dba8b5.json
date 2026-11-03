@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "d1ca3a965cb15437.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-041-0\", \"benefit\": \"visits\", \"setting\": \"office.pcp\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per visit\", \"page\": 12, \"quotes\": [\"Primary care office visits\", \"$0 copayment per visit.\"]},\n{\"plan_id\": \"H3805-041-0\", \"benefit\": \"visits\", \"setting\": \"office.specialist\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$70\", \"unit\": \"per visit\", \"page\": 12, \"quotes\": [\"Specialist office visits\", \"$70 copayment per visit.\"]},\n{\"plan_id\": \"H3805-041-0\", \"benefit\": \"visits\", \"setting\": \"office.pcp\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 82, \"quotes\": [\"$0 copayment or services rom a primary care\"]},\n{\"plan_id\": \"H3805-041-0\", \"benefit\": \"visits\", \"setting\": \"office.specialist\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$70\", \"page\": 82, \"quotes\": [\"$70 copayment or services rom a specialist\"]},\n{\"plan_id\": \"H3805-041-0\", \"benefit\": \"visits\", \"setting\": \"telehealth\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per visit\", \"page\": 82, \"quotes\": [\"$0 copayment or each Medicare-covered visit.\", \"-Telehealth or Medicare-covered\"]},\n{\"plan_id\": \"H3805-041-0\", \"benefit\": \"visits\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"condition\": \"in your home or a nursing home in which you reside\", \"page\": 84, \"quotes\": [\"$0 copayment or nurse practitioner,\", \"home or a nursing home in which you reside.\"], \"note\": \"The $0 applies to services from a nurse practitioner, physician's assistant or other non-physician professional. Primary care and specialist services at home pay the office cost-sharing.\"}]\n```",
+ "usage": {
+  "input_tokens": 7077,
+  "output_tokens": 1610,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

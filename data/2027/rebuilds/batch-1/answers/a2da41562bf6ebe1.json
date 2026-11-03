@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "2aa68f4230962abc.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-025-0\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"visit_limit\", \"amount\": \"12\", \"limit\": \"in 90 days\", \"condition\": \"chronic low back pain\", \"page\": 54, \"quotes\": [\"Up to 12 visits in 90 days are covered\"]},\n{\"plan_id\": \"H2923-025-0\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"visit_limit\", \"amount\": \"20\", \"limit\": \"per year\", \"condition\": \"chronic low back pain; patients demonstrating an improvement\", \"page\": 54, \"quotes\": [\"An additional 8 sessions will be covered for patients demonstrating an improvement.\", \"No more than 20 acupuncture treatments may be administered annually.\"], \"note\": \"Annual maximum of 20 treatments includes 8 extra sessions for patients who improve. The condition differs from the 12-visit fact to separate the two.\"}]\n```",
+ "usage": {
+  "input_tokens": 14527,
+  "output_tokens": 1056,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

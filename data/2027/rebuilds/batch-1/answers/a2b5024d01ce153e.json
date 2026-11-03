@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "8865a3a5b2f4fcad.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H6815-038-0\", \"benefit\": \"rehab.physical\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$25\", \"unit\": \"\", \"limit\": \"\", \"page\": 11, \"quotes\": [\"Physical Therapy\", \"through 100 ▪ * $25 copay\"], \"note\": \"The second quote reads the cost column straight down. It starts at the end of the Skilled Nursing Facility row so that it is unique, and the $25 copay in it is the Physical Therapy amount.\"},\n {\"plan_id\": \"H6815-038-0\", \"benefit\": \"rehab.occupational\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$25\", \"unit\": \"\", \"limit\": \"\", \"page\": 11, \"quotes\": [\"Outpatient Rehabilitation Services Provided by an Occupational Therapist\", \"$25 copay ▪ * $25 copay ▪ $310 copay\"], \"note\": \"The second quote reads the cost column straight down. Its first $25 copay is the Occupational Therapist amount. It runs on into the Pulmonary Rehabilitation and Ground Ambulance amounts only so that it is unique.\"}]\n```",
+ "usage": {
+  "input_tokens": 2511,
+  "output_tokens": 1824,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

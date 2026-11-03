@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-5d52bb731683d536.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 39 Ambulance services row covers fixed-wing, rotary-wing and ground ambulance together. It states 'In- and Out-of-network: $300 copay per Medicare covered one-way transport', which matches the plan, benefit, network, cost kind, amount and unit.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 71 Worldwide emergency and urgent care row covers care outside the United States and its territories, which Medicare does not cover, so it is a supplemental benefit. Its ambulance line states 'In- and Out-of-network: $300 copay per covered one-way transport', which matches the setting, network, amount and unit.\"}]\n```",
+ "usage": {
+  "input_tokens": 3502,
+  "output_tokens": 479,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

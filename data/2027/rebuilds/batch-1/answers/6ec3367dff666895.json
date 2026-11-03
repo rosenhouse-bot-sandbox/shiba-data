@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "fd314311528d4668.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H9003-001-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"package\": \"Advantage Plus\", \"page\": 9, \"quotes\": [\"Preventive dental:                                 $0\"], \"note\": \"The page has many spaces between 'Preventive dental:' and '$0'. This quote copies that spacing exactly.\"},\n{\"plan_id\": \"H9003-006-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"package\": \"Advantage Plus\", \"page\": 9, \"quotes\": [\"Preventive dental:                                 $0\"], \"note\": \"The page has many spaces between 'Preventive dental:' and '$0'. This quote copies that spacing exactly.\"},\n{\"plan_id\": \"H9003-009-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"package\": \"Advantage Plus\", \"page\": 9, \"quotes\": [\"Preventive dental:                                 $0\"], \"note\": \"The page has many spaces between 'Preventive dental:' and '$0'. This quote copies that spacing exactly.\"}]\n```",
+ "usage": {
+  "input_tokens": 6964,
+  "output_tokens": 1706,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

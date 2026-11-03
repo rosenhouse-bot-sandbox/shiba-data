@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-da2974c756f3eedc.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 8 Occupational Therapy row: outpatient hospital 30% coinsurance.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 8 Physical Therapy row: office location 30% coinsurance.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 8 Physical Therapy row: outpatient hospital 30% coinsurance.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 8 Speech Therapy row: outpatient hospital 30% coinsurance.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 8 Occupational Therapy row: office location 30% coinsurance.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 8 Speech Therapy row: office location 30% coinsurance.\"}]\n```",
+ "usage": {
+  "input_tokens": 3016,
+  "output_tokens": 342,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

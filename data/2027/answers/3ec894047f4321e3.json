@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-f961eb582c1534d5.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 112: $20 monthly preloaded on the Wellcare Spendables® card, usable for Dental among other services.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 50: supplemental Periodic Oral exams, 2 every year, listed under In-Network.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"Page 50: the $60 copay for Medicare-covered dental is the Out-of-Network cost. The In-Network copay is $30.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 50: $1,000 plan benefit allowance every year for all in-network and out-of-network Comprehensive Dental services. The member pays amounts beyond it.\"},\n{\"id\": 4, \"ok\": false, \"reason\": \"Page 50: the $30 copay is In-Network. The Out-of-Network copay is $60.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 50: Out-of-Network $60 copay for each Medicare-covered dental service.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 50: In-Network $0 copay for each oral exam (supplemental).\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 50: In-Network $30 copay for each Medicare-covered dental service.\"}]\n```",
+ "usage": {
+  "input_tokens": 3605,
+  "output_tokens": 730,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

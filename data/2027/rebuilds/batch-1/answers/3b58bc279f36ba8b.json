@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "2af2a9f1fd104b7f.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-455-0\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$40\", \"unit\": \"per visit\", \"condition\": \"chronic low back pain\", \"page\": 15, \"quotes\": [\"$40 copay for acupuncture for chronic low back pain visits up to 20 visit(s) per year. Benefits received out-of-network\"], \"note\": \"The in-network and out-of-network columns show the same $40 copay. The quote comes from the out-of-network column because the in-network text is repeated word for word in that column.\"},\n {\"plan_id\": \"H5216-455-0\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"visit_limit\", \"amount\": \"20\", \"limit\": \"per year\", \"condition\": \"chronic low back pain\", \"page\": 15, \"quotes\": [\"$40 copay for acupuncture for chronic low back pain visits up to 20 visit(s) per year. Benefits received out-of-network\"], \"note\": \"Both network columns show the same 20-visit limit.\"},\n {\"plan_id\": \"H5216-455-0\", \"benefit\": \"extras.chiropractic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$15\", \"page\": 15, \"quotes\": [\"Chiropractic services $15 copay\"]},\n {\"plan_id\": \"H5216-455-0\", \"benefit\": \"extras.transportation\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"not_covered\", \"page\": 14, \"quotes\": [\"TRANSPORTATION\"], \"note\": \"The row shows Not Covered in both network columns.\"}]\n```",
+ "usage": {
+  "input_tokens": 3589,
+  "output_tokens": 2231,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

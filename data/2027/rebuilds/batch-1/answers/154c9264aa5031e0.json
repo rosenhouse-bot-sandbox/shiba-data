@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-cd39f32cdbd73e52.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 2 Inpatient hospital care row: $0 copay per day for days 6 and beyond, in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 5 Mental health inpatient visit row: $0 copay per day for days 5-90, in network.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 5 Mental health inpatient visit row: $680 copay per day for days 1-16, out of network.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 2 Inpatient hospital care row: $680 copay per day for days 1-16, out of network.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 5 Mental health inpatient visit row: $0 copay per day for days 17-90, out of network.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 5 Mental health inpatient visit row: $550 copay per day for days 1-4, in network.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 2 Inpatient hospital care row: $550 copay per day for days 1-5, in network.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 2 Inpatient hospital care row: $0 copay per day for days 17 and beyond, out of network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3793,
+  "output_tokens": 657,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
