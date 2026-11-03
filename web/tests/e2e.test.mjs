@@ -220,7 +220,7 @@ test("Ambiguities lists every comment with links to its document page and cell",
 
 test("going back to Ambiguities keeps the scroll position", async () => {
   await page.goto(`${base}#/ambiguities`);
-  const target = page.locator("table.ambiguities tbody tr").nth(60);
+  const target = page.locator("table.ambiguities tbody tr").nth(35);
   await target.scrollIntoViewIfNeeded();
   const before = await page.$eval("#content", (c) => c.scrollTop);
   assert.ok(before > 0);
@@ -447,7 +447,7 @@ test("a clicked cell's note links to the plan on Medicare.gov", async () => {
 });
 
 test("an uncited cell lists the CMS fields behind it and where Medicare.gov shows it", async () => {
-  for (const plan of ["H7006-021-0", "H3817-008-1"]) {  // without and with a comment
+  for (const plan of ["H7006-021-0", "H3817-008-1"]) {
     await page.goto(`${base}#/main/${plan}/O_medical_deductible`);
     const note = page.locator("#source-note");
     assert.match(await note.textContent(), /\(pbp_d_(inn|ann)_deduct_yn\) = 2 \(No\)/);
@@ -735,7 +735,7 @@ test("permalink: a page link in an Ambiguities comment points the URL at its row
     edited.main.rows.find((r) => r.plan_id === "H6815-038-0").cells.K_tests_labs.comment.text = "See EOC page 82 for EKGs.";
     route.fulfill({ json: edited });
   });
-  await fresh.goto(`${base}#/2027/ambiguities/main/H3805-048-0/part_b_drugs`);
+  await fresh.goto(`${base}#/2027/ambiguities/main/H2001-045-0/part_b_drugs`);
   await fresh.waitForSelector("td.selected");
   await fresh.locator('tr:has(td[data-plan="H6815-038-0"][data-col="K_tests_labs"]) td.comment-text a').click();
   await fresh.waitForSelector(`#page-area[data-shown="${docOf("H6815-038-0", "EOC")} 82"]`);
