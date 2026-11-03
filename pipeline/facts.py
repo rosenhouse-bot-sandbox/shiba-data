@@ -25,11 +25,16 @@ BENEFITS = {
     "ambulance": "Ambulance services, ground and air, priced together",
     "ambulance.ground": "Ground ambulance",
     "ambulance.air": "Air ambulance, by airplane or helicopter",
+    "surgery": "Outpatient surgery and procedures, priced together",
+    "surgery.colonoscopy": "Diagnostic colonoscopies, not screening colonoscopies",
+    "surgery.skin_biopsy": "Skin biopsies",
 }
 # Regexes that find the pages about each benefit group
 FIND = {"imaging": [r"x.ray", r"radiolog", r"\bMRI\b", r"\bCT\b", r"\bPET\b", r"ultrasound", r"mammogra",
                     r"nuclear medicine", r"imaging"],
-        "ambulance": [r"ambulance", r"outside (?:of )?the United States", r"worldwide", r"anywhere in the world"]}
+        "ambulance": [r"ambulance", r"outside (?:of )?the United States", r"worldwide", r"anywhere in the world"],
+        "surgery": [r"outpatient surg", r"ambulatory surg", r"surgical cent", r"surgery cent", r"diagnostic colonoscop",
+                    r"skin biops"]}
 SETTINGS = {
     "any": "The document names no setting, or one cost covers every setting",
     "office": "A physician's office, of any kind",
@@ -38,6 +43,7 @@ SETTINGS = {
     "freestanding": "A freestanding facility, such as a radiology center",
     "outpatient_hospital": "An outpatient hospital",
     "urgent_care": "An urgent care center",
+    "asc": "An ambulatory surgical center (ASC)",
     "outside_us": "Outside the United States and its territories, as in a worldwide emergency benefit, "
                   "or an exclusion of all care outside the U.S.",
 }
@@ -45,6 +51,7 @@ SETTINGS = {
 GROUP_SETTINGS = {
     "imaging": ("any", "office", "office.pcp", "office.specialist", "freestanding", "outpatient_hospital", "urgent_care"),
     "ambulance": ("any", "outside_us"),
+    "surgery": ("any", "outpatient_hospital", "asc"),
 }
 NETWORKS = {"any": "In and out of network, as the document says", "in": "In network", "out": "Out of network"}
 COVERED_BY = {"medicare": "A Medicare-covered benefit", "supplemental": "A routine (supplemental) benefit"}
