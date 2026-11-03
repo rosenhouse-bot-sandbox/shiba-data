@@ -5,6 +5,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import blanks
 import build
 import fields
+import present
 from eoc import DATA, Doc, eoc, norm
 
 PLAN = "H2056-003-0"
@@ -166,7 +167,8 @@ class PublishTest(unittest.TestCase):
         self.data = pathlib.Path(self.tmp.name) / DATA.name
         shutil.copytree(DATA, self.data)
         self.blank = next((plan, key) for key, by_plan in blanks.cells(self.data).items()
-                          for plan, c in by_plan.items() if not c["value"].strip() and not c["cites"])
+                          for plan, c in by_plan.items() if not c["value"].strip() and not c["cites"]
+                          and key.split(".")[1] not in present.COLUMNS)
 
     def tearDown(self):
         self.tmp.cleanup()
