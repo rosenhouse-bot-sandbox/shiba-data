@@ -89,6 +89,35 @@ BENEFITS = {
     "extras.transportation": "Non-emergency rides to medical appointments or pharmacies, not ambulance. "
                              "A ride only after a hospital stay or emergency visit has that `condition`",
 }
+ROUTINE = ("Routine and \"non-Medicare covered\" benefits are `supplemental`, and \"not covered\" is `supplemental` "
+           "`not_covered`. A benefit only in an optional package has `package` set to its name. A shared allowance, "
+           "card or wellness fund that names the benefit is an `allowance` fact with `pool` set to its name, or "
+           "`covered` with that `pool` if the page gives no amount. `condition` names who qualifies when only some "
+           "members do, such as members with certain chronic conditions (SSBCI). Frequency goes in `limit`. Leave "
+           "`condition` blank for notes such as \"prior authorization may be required\" or \"you must use TruHearing\"")
+NOT_MEDICARE = "Medicare does not cover these, so they are `supplemental`"
+BENEFITS.update({
+    "vision": f"Vision care, priced together. {ROUTINE}. Medicare covers only exams to diagnose and treat eye disease, "
+              "glaucoma screening, diabetic retinopathy exams, and eyewear after cataract surgery; these are "
+              "`covered_by` `medicare`. Other eye exams and eyewear are `supplemental`",
+    "vision.exam": "Eye exams, such as a routine eye exam or refraction",
+    "vision.eyewear": "Eyeglasses, lenses, frames and contact lenses",
+    "hearing": f"Hearing care, priced together. {ROUTINE}. Medicare covers only diagnostic hearing and balance exams; "
+               "these are `covered_by` `medicare`. Routine hearing exams, hearing aid fittings and hearing aids are "
+               "`supplemental`",
+    "hearing.exam": "Hearing exams, such as a routine hearing exam or hearing aid fitting evaluation",
+    "hearing.aids": "Hearing aids. Prices for aid levels, such as \"$599 copay per ear for Advanced\" and \"$899 copay "
+                    "per ear for Premium\", are one fact with amount `$599 or $899`. A vendor such as TruHearing or "
+                    "NationsHearing is not a `provider_tier`",
+    "fitness": f"Fitness benefits, such as a gym membership, SilverSneakers, Renew Active, One Pass, Silver&Fit or a "
+               f"home fitness kit. {NOT_MEDICARE}. {ROUTINE}",
+    "otc": f"An allowance for over-the-counter (OTC) health and wellness items. A rewards program is not an OTC "
+           f"allowance. A credit for OTC items that also pays for healthy food for qualifying members is an OTC "
+           f"allowance for every member. {NOT_MEDICARE}. {ROUTINE}",
+    "packages": "An optional supplemental benefit package that a member may buy. Give its monthly premium as a "
+                "`packages` `supplemental` `premium` fact with `package` set to its name. A document that says the "
+                "plan offers no optional supplemental benefits gives `packages` `supplemental` `not_covered`",
+})
 # Regexes that find the pages about each benefit group
 FIND = {"imaging": [r"x.ray", r"radiolog", r"\bMRI\b", r"\bCT\b", r"\bPET\b", r"ultrasound", r"mammogra",
                     r"nuclear medicine", r"imaging"],
@@ -118,7 +147,14 @@ FIND = {"imaging": [r"x.ray", r"radiolog", r"\bMRI\b", r"\bCT\b", r"\bPET\b", r"
         "dental": [r"dental (?:services|benefit|exam)", r"(?:preventive|comprehensive|routine) dental",
                    r"dental (?:&|and) alternative", r"cleanings", r"optional supplemental", r"spendables"],
         "extras": [r"acupunct", r"chiropract", r"massage", r"naturopath", r"transportation", r"one.way trips?",
-                   r"wellness bucks", r"flex ?card"]}
+                   r"wellness bucks", r"flex ?card"],
+        "vision": [r"routine eye exam", r"eye ?wear", r"eyeglass", r"contact lens", r"vision (?:services|care|benefit|exam)",
+                   r"spendables"],
+        "hearing": [r"hearing aid", r"routine hearing", r"hearing exam", r"spendables"],
+        "fitness": [r"fitness", r"silver ?sneakers", r"renew active", r"\bgym\b", r"one pass"],
+        "otc": [r"over.the.counter", r"\bOTC\b"],
+        "packages": [r"optional supplemental", r"advantage plus", r"optional (?:dental|vision|hearing|benefits?)\b",
+                     r"(?:dental|vision|hearing) rider"]}
 SETTINGS = {
     "any": "The document names no setting, or one cost covers every setting",
     "office": "A physician's office, of any kind",
@@ -147,6 +183,11 @@ GROUP_SETTINGS = {
     "medical_deductible": ("any",),
     "dental": ("any",),
     "extras": ("any", "office", "office.pcp", "office.specialist"),
+    "vision": ("any",),
+    "hearing": ("any",),
+    "fitness": ("any",),
+    "otc": ("any",),
+    "packages": ("any",),
 }
 NETWORKS = {"any": "In and out of network, as the document says", "in": "In network", "out": "Out of network"}
 COVERED_BY = {"medicare": "A Medicare-covered benefit", "supplemental": "A routine (supplemental) benefit"}

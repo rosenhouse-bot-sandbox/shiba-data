@@ -63,6 +63,10 @@ class StepTest(StepsTest):
         self.assertEqual(document_facts.VERSIONS[8], dict(document_facts.VERSIONS[7], groups=tuple(
             g for g in document_facts.VERSIONS[7]["groups"] if g != "dental")))
 
+    def test_version_9_adds_vision_hearing_fitness_otc_and_packages_to_7(self):
+        self.assertEqual(document_facts.VERSIONS[9], dict(document_facts.VERSIONS[7], groups=document_facts.VERSIONS[7]["groups"]
+                                                          + ("vision", "hearing", "fitness", "otc", "packages")))
+
     def test_version_1_uses_the_models_the_evaluation_picked(self):
         self.assertEqual(document_facts.VERSIONS[1], dict(groups=("imaging",), reader=("claude-opus-5-5", "high"),
                                                           verifier=("claude-opus-5-5", "medium")))
