@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "d594b0a1d3772214.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2056-003-0\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"visit_limit\", \"amount\": \"20\", \"limit\": \"per year\", \"condition\": \"chronic low back pain\", \"page\": 39, \"quotes\": [\"No more than 20 acupuncture treatments may be administered annually.\"], \"note\": \"The document also states up to 12 visits in 90 days. I kept only the annual maximum to avoid two answers for one fact.\"}]\n```",
+ "usage": {
+  "input_tokens": 10542,
+  "output_tokens": 542,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

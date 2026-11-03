@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "faf9b5f14f8f128e.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-015-0\", \"benefit\": \"medical_deductible.some\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"deductible\", \"amount\": \"$250\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"$250 deductible for select Part B services.\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 2792,
+  "output_tokens": 350,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

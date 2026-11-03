@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-28e22b4acec7d885.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 2, Annual medical deductible row for this plan: 'This plan does not have a medical deductible.' The line is not split into in-network and out-of-network columns, so $0 for any network is supported.\"}]\n```",
+ "usage": {
+  "input_tokens": 2207,
+  "output_tokens": 174,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

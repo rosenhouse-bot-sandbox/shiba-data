@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "557f08e61a7e8f42.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H9003-001-0\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"visit_limit\", \"amount\": \"20\", \"limit\": \"annually\", \"condition\": \"chronic low back pain\", \"page\": 53, \"quotes\": [\"No more than 20-\"], \"note\": \"Up to 12 visits in 90 days, plus 8 more sessions for patients demonstrating an improvement; 20 is the annual maximum.\"},\n{\"plan_id\": \"H9003-006-0\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"visit_limit\", \"amount\": \"20\", \"limit\": \"annually\", \"condition\": \"chronic low back pain\", \"page\": 53, \"quotes\": [\"No more than 20-\"], \"note\": \"Up to 12 visits in 90 days, plus 8 more sessions for patients demonstrating an improvement; 20 is the annual maximum.\"},\n{\"plan_id\": \"H9003-009-0\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"visit_limit\", \"amount\": \"20\", \"limit\": \"annually\", \"condition\": \"chronic low back pain\", \"page\": 53, \"quotes\": [\"No more than 20-\"], \"note\": \"Up to 12 visits in 90 days, plus 8 more sessions for patients demonstrating an improvement; 20 is the annual maximum.\"}]\n```",
+ "usage": {
+  "input_tokens": 11003,
+  "output_tokens": 914,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

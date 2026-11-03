@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "d594b0a1d3772214.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2056-003-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 74, \"quotes\": [\"prophylaxis ‑ adult two procedures per $0\"], \"note\": \"Every preventive service listed in the Dental Schedule of Benefits shows $0 in network. This quote is one example row. Whitespace in the quote is reduced to single spaces.\"}]\n```",
+ "usage": {
+  "input_tokens": 8472,
+  "output_tokens": 1335,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

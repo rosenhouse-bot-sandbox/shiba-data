@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "034e045a83e5b49d.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3817-008-1\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"max\", \"amount\": \"$1,250\", \"limit\": \"every calendar year\", \"page\": 5, \"quotes\": [\"Routine dental services - All routine dental       $1,250\", \"maximum every calendar year\"], \"note\": \"The combined routine dental maximum is shown only in the in-network column. It may also apply out of network.\"},\n{\"plan_id\": \"H3817-008-1\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 5, \"quotes\": [\"(Class I)                     $0\"]},\n{\"plan_id\": \"H3817-008-1\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 5, \"quotes\": [\"(Class I)                     $0                     50%\"]},\n{\"plan_id\": \"H3817-008-1\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 5, \"quotes\": [\"(Class II)           50%\", \"(Class III)          50%\"]},\n{\"plan_id\": \"H3817-008-1\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 5, \"quotes\": [\"(Class II)           50%                    50%\", \"(Class III)          50%                    50%\"]}]\n```",
+ "usage": {
+  "input_tokens": 3935,
+  "output_tokens": 1962,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

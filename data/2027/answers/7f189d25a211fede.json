@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "2aa68f4230962abc.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H2923-025-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$45\", \"page\": 61, \"quotes\": [\"Dental services covered by Medicare $45 copay\"]},\n  {\"plan_id\": \"H2923-025-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$2,000\", \"limit\": \"per year\", \"pool\": \"Dental & Alternative Therapy Allowance\", \"page\": 62, \"quotes\": [\"You have a $2,000 yearly allowance toward Preventive\", \"There are no network restrictions to use this benefit.\"], \"note\": \"Network 'any' rests on page 63's statement that the allowance has no network restrictions; that sentence is on page 63, not page 62, so the second quote may fail the page check.\"},\n  {\"plan_id\": \"H2923-025-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"0%\", \"page\": 110, \"quotes\": [\"What you pay: 0% coinsurance\"], \"note\": \"Network 'any' rests on page 63's statement that the allowance has no network restrictions.\"},\n  {\"plan_id\": \"H2923-025-0\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 112, \"quotes\": [\"What you pay: 50% coinsurance\"], \"note\": \"Network 'any' rests on page 63's statement that the allowance has no network restrictions.\"}\n]\n```",
+ "usage": {
+  "input_tokens": 11599,
+  "output_tokens": 2233,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

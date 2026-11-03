@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "8acbaf3993261220.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-040-0\", \"benefit\": \"part_b_drugs.chemotherapy\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 5,\n  \"quotes\": [\"Chemotherapy 20% coinsurance\"]},\n {\"plan_id\": \"H3805-040-0\", \"benefit\": \"part_b_drugs.insulin\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"limit\": \"up to $35\", \"page\": 5,\n  \"quotes\": [\"Part B covered\", \"20% coinsurance; up to $35\"],\n  \"note\": \"The member's insulin cost is capped at $35. The document does not state the period (e.g., per month).\"},\n {\"plan_id\": \"H3805-040-0\", \"benefit\": \"part_b_drugs.allergy\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 5,\n  \"quotes\": [\"$0 copay for allergy antigens\"]},\n {\"plan_id\": \"H3805-040-0\", \"benefit\": \"part_b_drugs\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 5,\n  \"quotes\": [\"Other Part B drugs\", \"20% coinsurance for all others\"],\n  \"note\": \"The document gives this cost for 'Other Part B drugs', meaning drugs other than chemotherapy, insulin and allergy antigens.\"}]\n```",
+ "usage": {
+  "input_tokens": 2719,
+  "output_tokens": 1322,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

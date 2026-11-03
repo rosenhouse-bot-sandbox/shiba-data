@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-cabbc3b82885b498.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 7, Dental and Alternative Therapy Allowance: $2,000 yearly allowance toward Preventive and Comprehensive Dental and other services combined. The pool name matches the heading. Any licensed provider in the US can be used, so network any is correct. It is routine supplemental dental, limit per year.\"}]\n```",
+ "usage": {
+  "input_tokens": 2397,
+  "output_tokens": 257,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

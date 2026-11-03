@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "362ee075ea5896d4.md",
+ "reply": "```json\n[{\"plan_id\": \"H2001-045-0\", \"benefit\": \"extras.transportation\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per one-way trip\", \"page\": 7, \"quotes\": [\"$0 copayment for 24 one-\"]},\n{\"plan_id\": \"H2001-045-0\", \"benefit\": \"extras.transportation\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"24\", \"unit\": \"one-way trips\", \"page\": 7, \"quotes\": [\"$0 copayment for 24 one-\"]},\n{\"plan_id\": \"H2001-045-0\", \"benefit\": \"extras.transportation\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"75%\", \"page\": 7, \"quotes\": [\"75% coinsurance\"]},\n{\"plan_id\": \"H2001-045-0\", \"benefit\": \"extras.chiropractic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 9, \"quotes\": [\"(manual             copay or 20% coinsurance\"], \"note\": \"Row gives $0 copay or 20% coinsurance depending on Medicaid level; the 20% is for members without QMB or full Medicaid. The quote spans the service and in-network columns of one row because the in-network cost text alone repeats on this page. The out-of-network 30% coinsurance is left out because no unique quote of it avoids mixing columns.\"}]\n```",
+ "usage": {
+  "input_tokens": 4443,
+  "output_tokens": 2368,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

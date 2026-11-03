@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "2c101bd739d45a62.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-028-3\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$250\", \"limit\": \"per year\", \"pool\": \"Dental and Alternative Therapy Allowance\", \"page\": 7, \"quotes\": [\"You have a $250 yearly allowance toward Preventive Dental, Comprehensive Dental,\", \"You can see any licensed provider in the United States.\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 2604,
+  "output_tokens": 603,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

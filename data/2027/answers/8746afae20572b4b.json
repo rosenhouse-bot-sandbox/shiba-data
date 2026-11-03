@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "7e45f25357b792a7.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-019-0\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"visit_limit\", \"amount\": \"20\", \"limit\": \"per year\", \"condition\": \"chronic low back pain\", \"page\": 56, \"quotes\": [\"No more than 20\"], \"note\": \"The page also says 12 visits in 90 days are covered, plus 8 more sessions for patients who show improvement. Only the annual cap of 20 is kept, to avoid two answers for one fact.\"}]\n```",
+ "usage": {
+  "input_tokens": 15350,
+  "output_tokens": 756,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-d4758cd5b94a2266.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 7 Chiropractic services row: Medicare-covered chiropractic care (manual manipulation of the spine to correct subluxation) costs $90 copay out of network, next to $15 in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2518,
+  "output_tokens": 93,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

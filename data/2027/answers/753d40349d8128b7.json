@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "2aa68f4230962abc.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-025-0\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"visit_limit\", \"amount\": \"20\", \"limit\": \"per year\", \"condition\": \"chronic low back pain\", \"page\": 54, \"quotes\": [\"No more than 20\"], \"note\": \"Page 54 also covers up to 12 visits in 90 days. Only the annual cap of 20 is kept, because two visit limits on the same page failed the check.\"}]\n```",
+ "usage": {
+  "input_tokens": 14509,
+  "output_tokens": 797,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

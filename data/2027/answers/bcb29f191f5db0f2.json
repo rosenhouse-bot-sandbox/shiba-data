@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "2947683a555fc83c.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-323-0\", \"benefit\": \"part_b_drugs.insulin\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 10, \"quotes\": [\"Part B Insulin\", \"Pharmacy: 20% of the cost • Specialist's office: 20% of the cost • Outpatient hospital: 20% of the cost\"], \"note\": \"The cost column is quoted down from the Other Part B drugs row so the text is unique on the page. The first Outpatient hospital line after that row is the Part B Insulin row.\"},\n {\"plan_id\": \"H1036-323-0\", \"benefit\": \"part_b_drugs.insulin\", \"setting\": \"office.pcp\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 10, \"quotes\": [\"Part B Insulin\", \"Pharmacy: 20% of the cost • Specialist's office: 20% of the cost • Outpatient hospital: 20% of the cost • PCP's office: 20% of the cost\"], \"note\": \"The cost column is quoted down from the Other Part B drugs row so the text is unique on the page. The page also says you won't pay more than $35 for a one-month supply of each insulin product.\"},\n {\"plan_id\": \"H1036-323-0\", \"benefit\": \"part_b_drugs.insulin\", \"setting\": \"pharmacy\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 10, \"quotes\": [\"Part B Insulin\", \"Pharmacy: 20% of the cost • Specialist's office: 20% of the cost • Outpatient hospital: 20% of the cost • PCP's office: 20% of the cost • Pharmacy: 20% of the cost\"], \"note\": \"The cost column is quoted down from the Other Part B drugs row so the text is unique on the page.\"},\n {\"plan_id\": \"H1036-323-0\", \"benefit\": \"part_b_drugs.insulin\", \"setting\": \"office.specialist\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 10, \"quotes\": [\"Part B Insulin\", \"Pharmacy: 20% of the cost • Specialist's office: 20% of the cost • Outpatient hospital: 20% of the cost • PCP's office: 20% of the cost • Pharmacy: 20% of the cost • Specialist's office: 20% of the cost\"], \"note\": \"The cost column is quoted down from the Other Part B drugs row so the text is unique on the page.\"}]\n```",
+ "usage": {
+  "input_tokens": 3496,
+  "output_tokens": 3239,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

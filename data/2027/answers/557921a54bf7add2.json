@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "4ec81cd0d2695486.md",
+ "reply": "```json\n[{\"plan_id\": \"H1372-003-0\", \"benefit\": \"part_b_drugs.vaccine\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 68, \"quotes\": [\"There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines.\"], \"note\": \"\"},\n{\"plan_id\": \"H1372-003-0\", \"benefit\": \"part_b_drugs.chemotherapy\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"0%-20%\", \"page\": 74, \"quotes\": [\"Medicare-covered Part B\", \"0%-20% coinsurance Cost-sharing is dependent on the drug administered.\"], \"note\": \"The chart row is labeled Chemotherapy/Radiation Drugs.\"},\n{\"plan_id\": \"H1372-003-0\", \"benefit\": \"part_b_drugs\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"0%-20%\", \"page\": 75, \"quotes\": [\"All Other Medicare- covered Part B Drugs: 0%-20% coinsurance\"], \"note\": \"\"},\n{\"plan_id\": \"H1372-003-0\", \"benefit\": \"part_b_drugs.insulin\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$35\", \"unit\": \"per one-month supply\", \"page\": 75, \"quotes\": [\"Your cost for a one- month’s supply of insulin will not exceed $35.\"], \"note\": \"$35 is a cap on what the member pays (\\\"will not exceed\\\"), not a fixed copay.\"}]\n```",
+ "usage": {
+  "input_tokens": 4639,
+  "output_tokens": 2235,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

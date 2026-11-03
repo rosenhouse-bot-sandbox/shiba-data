@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-6c89db5198e7a3b2.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 7 Acupuncture row: $20 in network, Medicare-covered services only, limited to treatment of chronic low back pain.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 6 Transportation row: Not covered in the out-of-network column.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 6 Transportation row: Not covered in the in-network column.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 7 Chiropractic row: $15 in network, Medicare-covered services only, limited to manipulation of the spine to correct a subluxation.\"}]\n```",
+ "usage": {
+  "input_tokens": 3335,
+  "output_tokens": 360,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

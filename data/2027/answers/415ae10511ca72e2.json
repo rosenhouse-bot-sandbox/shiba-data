@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-aca9d3510177adcd.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 11, Section 4.2 (Medicare Part B Premium Reduction): Humana pays up to $43 of the member's Part B premium, raising the monthly Social Security check by that amount. So $43 per month, no setting or network split. The Medicaid limit is correctly left out of condition.\"}]\n```",
+ "usage": {
+  "input_tokens": 2004,
+  "output_tokens": 477,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

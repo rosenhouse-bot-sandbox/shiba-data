@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-a744eaa24232bb11.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Pages 48-49, routine acupuncture row (supplemental, marked *): in-network $0 copayment at the Specialist's Office.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 51 chiropractic services row: Medicare-covered chiropractic services cost a $15 copayment at the Specialist's Office, in network.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 48, acupuncture for chronic low back pain row: up to 20 visits per calendar year. No setting is tied to the limit.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 48, acupuncture for chronic low back pain row (Medicare-covered): in-network $0 copayment at the Specialist's Office.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 49, routine acupuncture row: covered for up to 25 visits per calendar year.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 86 exclusions chart: naturopath services are 'Not covered under any condition', which maps to supplemental not_covered.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 87 exclusions chart: the routine chiropractic care row says manual manipulation of the spine to correct a subluxation is covered. Per the rule this is medicare covered with that condition.\"}]\n```",
+ "usage": {
+  "input_tokens": 7336,
+  "output_tokens": 813,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-bf93677641b9fa6f.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 6 Dental and Alternative Therapy Allowance: $1,750 yearly allowance toward preventive and comprehensive dental (with massage, acupuncture and naturopath). It is usable at any licensed US provider, so network any fits. Single plan.\"}]\n```",
+ "usage": {
+  "input_tokens": 2519,
+  "output_tokens": 248,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

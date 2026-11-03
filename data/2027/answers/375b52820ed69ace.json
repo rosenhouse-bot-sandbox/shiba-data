@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "e2d6e1e199a3b8a9.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2056-018-0\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"visit_limit\", \"amount\": \"20\", \"unit\": \"\", \"limit\": \"per year\", \"page\": 29, \"quotes\": [\"demonstrating an improvement. No more than 20\", \"acupuncture treatments may be administered annually.\"], \"note\": \"Page 29 also allows up to 12 visits in 90 days. Only the annual maximum of 20 is kept, because both limits share one fact key.\"}]\n```",
+ "usage": {
+  "input_tokens": 10809,
+  "output_tokens": 491,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

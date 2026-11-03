@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "faebfcb17c1abba1.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-048-0\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$45\", \"unit\": \"per visit\", \"condition\": \"chronic low back pain\", \"page\": 18, \"quotes\": [\"Acupuncture services (Medicare-covered) $45 copay for acupuncture for chronic low back pain visits\"], \"note\": \"Quote assumes the service cell and the in-network cell are joined as one row; the in-network column text alone also appears in the out-of-network column.\"},\n {\"plan_id\": \"H5216-048-0\", \"benefit\": \"extras.chiropractic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$15\", \"page\": 18, \"quotes\": [\"Chiropractic services (Medicare-covered) $15 copay\"], \"note\": \"Quote assumes the service cell and the in-network cell are joined as one row.\"},\n {\"plan_id\": \"H5216-048-0\", \"benefit\": \"extras.chiropractic\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 18, \"quotes\": [\"Chiropractic services (Medicare-covered) $15 copay 50% of the cost\"], \"note\": \"Quote assumes the service cell and both network cells are joined as one row.\"}]\n```",
+ "usage": {
+  "input_tokens": 4163,
+  "output_tokens": 1777,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

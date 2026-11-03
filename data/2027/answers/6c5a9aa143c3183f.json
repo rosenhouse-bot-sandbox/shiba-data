@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "7ac7300e6ca40ac7.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-040-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 98, \"quotes\": [\"Standard adult     2 procedures per Covers adult                  $0*\"], \"note\": \"The $0 is from the standard adult dental cleaning row. Other routine preventive services on this page, such as X-rays and fluoride, are also listed at $0.\"}]\n```",
+ "usage": {
+  "input_tokens": 17741,
+  "output_tokens": 890,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

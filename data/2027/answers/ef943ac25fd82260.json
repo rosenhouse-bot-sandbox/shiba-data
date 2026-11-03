@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "bf93677641b9fa6f.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-001-0\", \"benefit\": \"medical_deductible\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"deductible\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 4, \"quotes\": [\"This plan does not have a medical deductible.\"], \"note\": \"The document states the plan has no medical deductible, so the amount is $0. The quote shows no number.\"}]\n```",
+ "usage": {
+  "input_tokens": 3301,
+  "output_tokens": 428,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "bee1858e7e963c62.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H7006-018-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per service\", \"limit\": \"\", \"page\": 53,\n   \"quotes\": [\"$0 copay for each Medicare-covered service.\"], \"note\": \"\"},\n  {\"plan_id\": \"H7006-018-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"out\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"per service\", \"limit\": \"\", \"page\": 54,\n   \"quotes\": [\"50% coinsurance for each Medicare-covered service.\"], \"note\": \"\"},\n  {\"plan_id\": \"H7006-018-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"any\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$150\", \"unit\": \"\", \"limit\": \"every three months\", \"page\": 54,\n   \"quotes\": [\"$150 allowance every three months, loaded to your Flex Card, for comprehensive and preventive dental services.\", \"You may receive services from any approved dental provider\"],\n   \"note\": \"Network set to any because members may use any approved dental provider in the U.S. Pool left blank because these pages show this as a dental-only allowance loaded to the Flex Card, not a shared pool.\"}\n]\n```",
+ "usage": {
+  "input_tokens": 3359,
+  "output_tokens": 1732,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

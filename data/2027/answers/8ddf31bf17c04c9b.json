@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-5e11cf20cec995f3.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 103 exclusions chart: 'Acupuncture (Medicare-covered)' is available for people with chronic low back pain under certain circumstances. The row is Medicare covered with that condition.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 49 'Acupuncture for chronic low back pain' row: up to 12 visits in 90 days are covered.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 50, continuing the chronic low back pain acupuncture row: no more than 20 acupuncture treatments may be given annually.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 102 exclusions chart: 'Chiropractic services (Medicare-covered)'. Manual manipulation of the spine to correct a subluxation is covered.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 103 exclusions chart: 'Naturopath services' row says 'Not covered under any condition'.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 54 Chiropractic services row: $15 copayment for each Medicare-covered visit, in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 6100,
+  "output_tokens": 680,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-0bd982dc589e8cba.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 11, Section 4.2 (Monthly Medicare Part B Premium): Humana will pay up to $150 of the Part B premium, and the monthly Social Security check increases by that amount. This supports a $150 per month Part B reduction, with condition left blank per the rules.\"}]\n```",
+ "usage": {
+  "input_tokens": 2077,
+  "output_tokens": 224,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

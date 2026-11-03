@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-faebfcb17c1abba1.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5 Medical deductible row: $100 combined deductible. It excludes all services from in-network providers, so it applies out of network. It also excludes emergency room, preventive and other listed services, so it covers only some services.\"}]\n```",
+ "usage": {
+  "input_tokens": 2249,
+  "output_tokens": 244,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-516ff586a12c8288.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 48, Section 1.2: the deductible is $250 and applies to 'most of your covered services', so it covers only some services. It runs for the calendar year, matching 'per year'. No network is stated, so in-network is the default.\"}]\n```",
+ "usage": {
+  "input_tokens": 2113,
+  "output_tokens": 258,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

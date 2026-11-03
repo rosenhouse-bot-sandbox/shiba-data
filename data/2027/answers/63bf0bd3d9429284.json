@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "d4758cd5b94a2266.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2406-070-0\", \"benefit\": \"extras.chiropractic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$15\", \"page\": 7, \"quotes\": [\"Medicare-covered $15 copay\", \"chiropractic care\"]},\n {\"plan_id\": \"H2406-070-0\", \"benefit\": \"extras.chiropractic\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$90\", \"page\": 7, \"quotes\": [\"$90 copay\", \"chiropractic care\"]}]\n```",
+ "usage": {
+  "input_tokens": 4147,
+  "output_tokens": 932,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

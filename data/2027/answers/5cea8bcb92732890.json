@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "0bd982dc589e8cba.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-427-2\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"max\", \"amount\": \"$1,500\", \"limit\": \"per year\", \"page\": 72, \"quotes\": [\"Annual Maximum: $1,500\", \"Benefits received out-of-network are subject to any in-network benefit maximums, limitations and/or exclusions.\"], \"note\": \"\"},\n{\"plan_id\": \"H5216-427-2\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"deductible\", \"amount\": \"$0\", \"page\": 72, \"quotes\": [\"Deductible: $0\"], \"note\": \"\"},\n{\"plan_id\": \"H5216-427-2\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"0%\", \"page\": 72, \"quotes\": [\"Periodic oral exam – D0120 0% 0%\"], \"note\": \"Applies to periodic oral exam (D0120); other preventive services not shown on these pages.\"},\n{\"plan_id\": \"H5216-427-2\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"0%\", \"page\": 72, \"quotes\": [\"Periodic oral exam – D0120 0% 0%\"], \"note\": \"Applies to periodic oral exam (D0120); out-of-network dentists may balance bill.\"}]\n```",
+ "usage": {
+  "input_tokens": 11154,
+  "output_tokens": 1637,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

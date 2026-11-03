@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-4a3883a20d17f740.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4, Wellcare Patriot Giveback Open (PPO) H5439-010-000, Part B Premium Reduction row: $10 give back every month, which matches a $10 per month Part B reduction.\"}]\n```",
+ "usage": {
+  "input_tokens": 1833,
+  "output_tokens": 163,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

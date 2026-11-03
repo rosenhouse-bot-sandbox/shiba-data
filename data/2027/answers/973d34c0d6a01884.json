@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "61de2101267140ce.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H1372-003-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 5, \"quotes\": [\"$0 copay for:\"], \"note\": \"The $0 copay applies to oral exams, cleanings and fluoride treatments, which are all preventive services.\"}]\n```",
+ "usage": {
+  "input_tokens": 2343,
+  "output_tokens": 437,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

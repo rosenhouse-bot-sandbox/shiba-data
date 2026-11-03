@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "5d52bb731683d536.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3817-009-1\", \"benefit\": \"extras.naturopathy\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"not_covered\", \"page\": 74, \"quotes\": [\"Naturopath services (uses natural or alternative treatments)\"], \"note\": \"Exclusions chart row; the right column reads 'Not covered under any condition', but that phrase repeats on the page, so only the left column is quoted.\"},\n{\"plan_id\": \"H3817-009-1\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"visit_limit\", \"amount\": \"20\", \"limit\": \"per year\", \"condition\": \"chronic low back pain\", \"page\": 38, \"quotes\": [\"No more than 20 acupuncture treatments may be administered annually.\"], \"note\": \"Page also states up to 12 visits in 90 days, plus 8 more sessions for patients showing improvement. The annual cap of 20 is given as the single visit-limit fact.\"}]\n```",
+ "usage": {
+  "input_tokens": 12105,
+  "output_tokens": 885,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

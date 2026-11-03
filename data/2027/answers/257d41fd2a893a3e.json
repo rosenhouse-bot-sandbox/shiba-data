@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "2eb4caa23079d78f.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-019-0\", \"benefit\": \"medical_deductible.some\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"deductible\", \"amount\": \"$250\", \"unit\": \"\", \"limit\": \"per year\", \"page\": 4, \"quotes\": [\"$250 deductible for select Part B services.\"], \"note\": \"The document does not say whether the deductible also applies out of network, so the in-network default is used.\"}]\n```",
+ "usage": {
+  "input_tokens": 2783,
+  "output_tokens": 405,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

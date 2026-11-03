@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "5f6896f5c437eeed.md",
+ "reply": "```json\n[{\"plan_id\": \"H7199-002-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$2,250\", \"limit\": \"per year\", \"pool\": \"Dental and Alternative Therapy Allowance\", \"page\": 8, \"quotes\": [\"You have a $2,250 yearly allowance toward Preventive Dental, Comprehensive Dental,\", \"see any licensed provider in the United States.\"], \"note\": \"Shared yearly allowance that also covers therapeutic massage, routine acupuncture and naturopath services; the member pays first and then requests reimbursement.\"},\n {\"plan_id\": \"H7199-002-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"pool\": \"Dental and Alternative Therapy Allowance\", \"page\": 8, \"quotes\": [\"For all covered preventive dental services, like exams and routine cleanings, you will receive\", \"100% reimbursement up to the yearly allowance.\"], \"note\": \"Reimbursed at 100% up to the shared yearly allowance.\"},\n {\"plan_id\": \"H7199-002-0\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"pool\": \"Dental and Alternative Therapy Allowance\", \"page\": 8, \"quotes\": [\"For all covered comprehensive dental services, Therapeutic Massage, Routine Acupuncture,\", \"and/or Naturopath services, you will receive 50% reimbursement up to the yearly allowance.\"], \"note\": \"Reimbursed at 50% up to the shared yearly allowance. Implants, cosmetic and elective procedures are not covered.\"}]\n```",
+ "usage": {
+  "input_tokens": 2803,
+  "output_tokens": 1254,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

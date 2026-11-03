@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "cabbc3b82885b498.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-025-0\", \"benefit\": \"part_b_drugs.chemotherapy\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 8,\n  \"quotes\": [\"Chemotherapy Drugs: 20% coinsurance\"]},\n {\"plan_id\": \"H2923-025-0\", \"benefit\": \"part_b_drugs\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 8,\n  \"quotes\": [\"Other Part B Drugs: 20% coinsurance\"]}]\n```",
+ "usage": {
+  "input_tokens": 2755,
+  "output_tokens": 551,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

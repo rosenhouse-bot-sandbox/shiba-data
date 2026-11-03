@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "5f6896f5c437eeed.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H7199-002-0\", \"benefit\": \"extras.chiropractic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$15\", \"page\": 14, \"quotes\": [\"In-network Medicare-Covered Chiropractic Services: $15 copay\"], \"note\": \"\"},\n{\"plan_id\": \"H7199-002-0\", \"benefit\": \"extras.chiropractic\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$15\", \"page\": 14, \"quotes\": [\"Out-of-network Medicare-Covered Chiropractic Services: $15 copay\"], \"note\": \"\"},\n{\"plan_id\": \"H7199-002-0\", \"benefit\": \"extras.chiropractic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$15\", \"page\": 14, \"quotes\": [\"In-network Medicare-Covered Chiropractic Services: $15 copay Routine Chiropractic Care: $15 copay — 12 visits per year\"], \"note\": \"\"},\n{\"plan_id\": \"H7199-002-0\", \"benefit\": \"extras.chiropractic\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$15\", \"page\": 14, \"quotes\": [\"Out-of-network Medicare-Covered Chiropractic Services: $15 copay Routine Chiropractic Care: $15 copay — 12 visits per year\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 5762,
+  "output_tokens": 2106,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

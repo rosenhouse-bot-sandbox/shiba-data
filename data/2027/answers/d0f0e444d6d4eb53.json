@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-90a4efa6544175a2.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 10 Deductible row: $150 in-network, except for insulin furnished through durable medical equipment. Because it lists an exclusion, it is a deductible for some services, separate from the $700 Part D deductible.\"}]\n```",
+ "usage": {
+  "input_tokens": 1987,
+  "output_tokens": 305,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

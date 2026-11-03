@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-2947683a555fc83c.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 10 has its own TRANSPORTATION heading, separate from the Ambulance rows, marked 'Not Covered'. This makes it supplemental not_covered.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 13 Additional Benefits: 'Chiropractic services (Medicare-covered)' is a $15 copay, with no setting named.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 13: 'Acupuncture services (Medicare-covered)' is a $50 copay for acupuncture for chronic low back pain.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 13: the Medicare-covered acupuncture row for chronic low back pain says 'visits up to 20 visit(s) per year.'\"}]\n```",
+ "usage": {
+  "input_tokens": 4047,
+  "output_tokens": 409,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

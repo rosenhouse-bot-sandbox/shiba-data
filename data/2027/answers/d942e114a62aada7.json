@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-f73d19eeaaf3a08a.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 50 chiropractic row: out-of-network Medicare-covered chiropractic is 50% coinsurance at the Specialist's Office.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Page 49 shows the in-network $15 copayment, but the Specialist's Office setting only appears on page 50, so the cited page alone does not support the setting.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 101 exclusions chart: Routine chiropractic care row says manual manipulation of the spine to correct a subluxation is covered.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 101 exclusions chart: Naturopath services are not covered under any condition.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 46 acupuncture for chronic low back pain: in-network $50 copayment at the Specialist's Office.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 46 acupuncture row: out-of-network $50 copayment at the Specialist's Office.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 46 acupuncture row: up to 20 visits per calendar year, stated for the benefit with no network split.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 98 exclusions chart: Acupuncture is available for people with chronic low back pain under certain circumstances.\"}]\n```",
+ "usage": {
+  "input_tokens": 7289,
+  "output_tokens": 941,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

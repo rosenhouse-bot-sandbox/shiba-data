@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "29166053e638f7e6.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-317-0\", \"benefit\": \"medical_deductible.some\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"deductible\", \"amount\": \"$283\", \"unit\": \"\", \"limit\": \"per year\", \"page\": 5, \"quotes\": [\"Medical deductible $283 in-network deductible\", \"The following services listed are excluded from the in-network deductible:\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 3193,
+  "output_tokens": 621,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
