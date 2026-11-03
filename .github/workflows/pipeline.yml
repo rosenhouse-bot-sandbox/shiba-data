@@ -65,8 +65,9 @@ jobs:
           done < _texts.txt
           if [ -s _texts.txt ]; then sed 's/ /  /' _texts.txt | sha256sum -c --quiet; fi
       # GitHub stops a job after 360 minutes, so these leave time to commit.
+      # A rerun after a timeout reuses the results of the batches this run sent.
       - run: python3 -I pipeline/run.py "$YEAR" _work api "$CANDIDATE"
-        timeout-minutes: 120
+        timeout-minutes: ${{ inputs.rebuild != '' && inputs.candidate == '' && 120 || 290 }}
       # Upload before committing any data that names these blobs. Keys are content hashes, so a re-upload changes nothing.
       - id: upload
         if: always()

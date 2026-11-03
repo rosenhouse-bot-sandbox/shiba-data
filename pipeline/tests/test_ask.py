@@ -61,6 +61,7 @@ class AnswerTest(unittest.TestCase):
         self.assertEqual(ask.answer([self.task, twin, other], MODEL, self.saved, fake), [])
         self.assertEqual(fake.rounds, [["Read that.", "Read this."]])
         self.assertEqual(json.loads(twin.with_suffix(".json").read_text()), [])
+        self.assertEqual(sorted(a["task"] for a in self.saved_answers()), ["P-1.md", "P-3.md"])
 
     def test_asks_again_only_for_the_replies_that_were_not_arrays(self):
         good = self.root / "tasks" / "P-2.md"
@@ -137,9 +138,10 @@ def result(custom_id, kind="succeeded", message=None):
 class Client:
     """Fake Message Batches. Each batch ends after one poll, with message_for(params) for each request."""
 
-    def __init__(self, message_for, earlier=(), kind="succeeded", age=datetime.timedelta(days=1)):
+    def __init__(self, message_for, earlier=(), kind="succeeded", age=datetime.timedelta(days=1), unfinished=False):
+        """earlier lists the results of earlier batches, newest first."""
         self.message_for, self.kind, self.created, self.polls = message_for, kind, [], 0
-        self.batches = {f"old{i}": ("ended", rs) for i, rs in enumerate(earlier)}
+        self.batches = {f"old{i}": ("in_progress" if unfinished else "ended", rs) for i, rs in enumerate(earlier)}
         self.created_at = datetime.datetime.now(datetime.timezone.utc) - age
         self.messages = types.SimpleNamespace(batches=self)
 
@@ -215,6 +217,23 @@ class BatchesTest(unittest.TestCase):
         old = [result("a", message=Message("end_turn", "[1]"))]
         client = Client(lambda params: Message("end_turn", "[2]"), earlier=[old], age=datetime.timedelta(days=8))
         self.assertEqual(self.ask(self.asker(client), MODEL, None, {"a": "Read this."})["a"][0], "[2]")
+
+    def test_waits_for_an_unfinished_earlier_batch_and_reuses_its_results(self):
+        old = [result("a", message=Message("end_turn", "[1]"))]
+        client = Client(lambda params: Message("end_turn", "[2]"), earlier=[old], unfinished=True)
+        self.assertEqual(self.ask(self.asker(client), MODEL, None, {"a": "Read this."})["a"][0], "[1]")
+        self.assertEqual((client.created, client.polls), ([], 1))
+
+    def test_reuses_the_newest_earlier_result(self):
+        newer, older = [result("a", message=Message("end_turn", "[new]"))], [result("a", message=Message("end_turn", "[old]"))]
+        client = Client(lambda params: None, earlier=[newer, older])
+        self.assertEqual(self.ask(self.asker(client), MODEL, None, {"a": "Read this."})["a"][0], "[new]")
+
+    def test_says_why_a_request_did_not_succeed(self):
+        client = Client(lambda params: None, kind="errored")
+        with mock.patch("builtins.print") as printed:
+            self.ask(self.asker(client), MODEL, None, {"a": "Read this."})
+        self.assertIn("a: errored", printed.call_args[0][0])
 
 
 if __name__ == "__main__":

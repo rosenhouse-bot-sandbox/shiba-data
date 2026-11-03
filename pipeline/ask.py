@@ -111,24 +111,36 @@ def reply(message):
 
 class Batches:
     """An asker that sends each round of tasks as one Message Batch, at half the price of single requests.
-    A rerun after a timeout reuses each succeeded result of a batch that ended this week once, instead of paying again."""
+    A rerun after a timeout reuses each succeeded result of this week's batches once, instead of paying again."""
     batch = True
 
     def __init__(self, client):
         self.batches, self.lock, self.earlier = client.messages.batches, threading.Lock(), None
 
+    def ended(self, batch):
+        while batch.processing_status != "ended":
+            time.sleep(POLL_SECONDS)
+            batch = self.batches.retrieve(batch.id)
+        return batch
+
     def results(self, batch_id):
-        return {r.custom_id: r.result for r in self.batches.results(batch_id) if r.result.type == "succeeded"}
+        found = {}
+        for r in self.batches.results(batch_id):
+            if r.result.type == "succeeded":
+                found[r.custom_id] = r.result
+            else:
+                print(f"{r.custom_id}: {r.result.type} {getattr(r.result, 'error', '')}")
+        return found
 
     def reuse(self, keys):
         with self.lock:
             if self.earlier is None:
                 self.earlier, since = {}, datetime.datetime.now(datetime.timezone.utc) - REUSE
-                for b in self.batches.list(limit=100):  # newest first
+                for b in self.batches.list(limit=100):
                     if b.created_at < since:
                         break
-                    if b.processing_status == "ended":
-                        self.earlier |= self.results(b.id)
+                    # The list starts with the newest batch, whose results win.
+                    self.earlier = self.results(self.ended(b).id) | self.earlier
             return {k: self.earlier.pop(k) for k in keys if k in self.earlier}
 
     def __call__(self, model, effort, texts):
@@ -138,9 +150,5 @@ class Batches:
                   | ({"output_config": {"effort": effort}} if effort is not None else {})}
                  for k, t in texts.items() if k not in found]
         if asked:
-            batch = self.batches.create(requests=asked)
-            while batch.processing_status != "ended":
-                time.sleep(POLL_SECONDS)
-                batch = self.batches.retrieve(batch.id)
-            found |= self.results(batch.id)
+            found |= self.results(self.ended(self.batches.create(requests=asked)).id)
         return {k: reply(r.message) for k, r in found.items()}
