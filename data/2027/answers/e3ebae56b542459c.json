@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-64e05773e847b56e.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 80 eyewear row: the plan pays up to $100 toward frame and lenses or contacts from a PLUS Provider, 1 per calendar year, in the Insight Network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 88 vision exclusions list any benefits received at a non-network optical provider, so out-of-network supplemental vision is not covered.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 73 Eyewear (Post Cataract Surgery) row: $0 copayment, All Places of Treatment, one pair after each cataract surgery. This is a Medicare benefit.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 80 eyewear row: up to $50 toward frame and lenses or contacts at a Humana Medicare Insight Network provider, 1 per calendar year. The $50 is the non-PLUS amount, so a blank provider tier is right.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 73 Diabetic Eye Exam row: $0 copayment, All Places of Treatment. Diabetic retinopathy screening is covered once per year as a Medicare benefit. The benefit name itself limits it to people with diabetes.\"}]\n```",
+ "usage": {
+  "input_tokens": 5278,
+  "output_tokens": 940,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

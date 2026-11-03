@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "161c63c8abccc6dc.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H2406-070-0\", \"benefit\": \"hearing.exam\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per exam\", \"limit\": \"\", \"page\": 63,\n   \"quotes\": [\"$0 copayment or each Medicare- covered exam.\"], \"note\": \"Diagnostic hearing and balance evaluations\"},\n  {\"plan_id\": \"H2406-070-0\", \"benefit\": \"hearing.exam\", \"setting\": \"any\", \"network\": \"out\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$90\", \"unit\": \"per exam\", \"limit\": \"\", \"page\": 63,\n   \"quotes\": [\"$90 copayment or each Medicare- covered exam.\"], \"note\": \"Diagnostic hearing and balance evaluations\"},\n  {\"plan_id\": \"H2406-070-0\", \"benefit\": \"hearing.exam\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"1 per year\", \"page\": 63,\n   \"quotes\": [\"Hearing services - routine hearing exam $0 copayment\", \"We cover 1 in or out-o -network hearing exam every year.\"], \"note\": \"Routine hearing exam\"},\n  {\"plan_id\": \"H2406-070-0\", \"benefit\": \"hearing.exam\", \"setting\": \"any\", \"network\": \"out\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$90\", \"unit\": \"\", \"limit\": \"1 per year\", \"page\": 63,\n   \"quotes\": [\"$90 copayment*\", \"We cover 1 in or out-o -network hearing exam every year.\"], \"note\": \"Routine hearing exam\"},\n  {\"plan_id\": \"H2406-070-0\", \"benefit\": \"hearing.aids\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$700\", \"unit\": \"\", \"limit\": \"2 hearing aids every year\", \"page\": 63,\n   \"quotes\": [\"Hearing aid allowance is $700\", \"This bene it is limited to 2 hearing aids every year.\"], \"note\": \"\"},\n  {\"plan_id\": \"H2406-070-0\", \"benefit\": \"hearing.aids\", \"setting\": \"any\", \"network\": \"out\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"90%\", \"unit\": \"\", \"limit\": \"on the first $700 for up to 2 hearing aids\", \"page\": 63,\n   \"quotes\": [\"90% coinsurance on the irst $700 or up to 2 hearing aids.\"], \"note\": \"Out-of-network hearing aids are reimbursed. The member pays all costs over $700. The 90% coinsurance figure is printed as shown, and it is unusual.\"}\n]\n```",
+ "usage": {
+  "input_tokens": 5306,
+  "output_tokens": 2365,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

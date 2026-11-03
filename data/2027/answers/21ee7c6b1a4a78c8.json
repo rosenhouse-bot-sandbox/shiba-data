@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "0e1831fb00cf2a95.md",
+ "reply": "```json\n[{\"plan_id\": \"H2056-018-0\", \"benefit\": \"otc\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$45\", \"limit\": \"per quarter\", \"pool\": \"Aetna® Medicare Extra Benefits Card\", \"page\": 6, \"quotes\": [\"CVS Over‑the‑Counter (OTC) Wallet\", \"You get a $45 quarterly benefit amount (allowance) on\"], \"note\": \"The $45 quarterly amount is for the CVS OTC Wallet on the Aetna Medicare Extra Benefits Card. The pool is set to the card name, but this page shows no other benefits sharing that amount.\"}]\n```",
+ "usage": {
+  "input_tokens": 2513,
+  "output_tokens": 676,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

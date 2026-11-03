@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "d649ac2bebc0321d.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-028-3\", \"benefit\": \"hearing.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 74, \"quotes\": [\"Routine hearing exam $0 copay\", \"Hearing aid fitting $0 copay\"], \"note\": \"The routine hearing exam and the hearing aid fitting each have a $0 copay, so they are given as one fact.\"}]\n```",
+ "usage": {
+  "input_tokens": 3919,
+  "output_tokens": 631,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

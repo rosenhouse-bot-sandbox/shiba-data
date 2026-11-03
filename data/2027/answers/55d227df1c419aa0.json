@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "9f4d4557fa78f8b3.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-048-0\", \"benefit\": \"fitness\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 7, \"quotes\": [\"Fitness program $0 copay\"], \"note\": \"The quote joins the row label and its cost, which are separated by wide spacing in the layout. The row says the fitness program includes a free gym membership at core and premium locations.\"}]\n```",
+ "usage": {
+  "input_tokens": 3644,
+  "output_tokens": 577,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

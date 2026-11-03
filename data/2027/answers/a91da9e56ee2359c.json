@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-d649ac2bebc0321d.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 69 SilverSneakers row: '$0 membership'. The plan covers the full cost with no copayment at participating locations, so a $0 in-network fitness copay is correct.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 70 Wellness Bucks row: '$150 per year', and the plan reimburses up to $150 per year for fitness classes and trackers. This is a supplemental fitness allowance with the pool named Devoted Health Wellness Bucks and a per-year limit.\"}]\n```",
+ "usage": {
+  "input_tokens": 3038,
+  "output_tokens": 493,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "29166053e638f7e6.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-317-0\", \"benefit\": \"otc\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$175\", \"limit\": \"per month\", \"pool\": \"Humana Healthy Options Allowance\", \"page\": 16, \"quotes\": [\"$175 monthly allowance on a prepaid\", \"buy approved over the counter (OTC) health\"], \"note\": \"All plan members get this amount for approved OTC items. Members with qualifying chronic conditions may also use it for groceries, utilities and rent. Unused amounts roll over each month and expire at the end of the plan year.\"}]\n```",
+ "usage": {
+  "input_tokens": 2633,
+  "output_tokens": 689,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

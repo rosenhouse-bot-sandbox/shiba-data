@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "50159487a52ccddf.md",
+ "reply": "```json\n[{\"plan_id\": \"H7006-018-0\", \"benefit\": \"otc\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$30\", \"unit\": \"\", \"limit\": \"every three months\", \"page\": 14, \"quotes\": [\"$30 every three months\"], \"note\": \"\"},\n {\"plan_id\": \"H7006-021-0\", \"benefit\": \"otc\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$150\", \"unit\": \"\", \"limit\": \"every three months\", \"page\": 14, \"quotes\": [\"$150 every three months\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 3368,
+  "output_tokens": 882,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

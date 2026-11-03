@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-630e49b10e7ad131.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 85 eyewear benefit, 1 per calendar year: the member pays any retail amount over $250 from a PLUS Provider, so the allowance is $250 at that tier.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 85: refraction exam, 1 per calendar year, is $0 when done at the same appointment as a Medicare-covered comprehensive eye exam. The medical specialist cost-share is separate.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 93 vision supplemental exclusions list any benefits received at a non-network optical provider, so out-of-network supplemental vision is not covered.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 80: post-cataract eyewear is a $0 copay in all places of treatment, limited to one pair after each cataract surgery. This is Medicare-covered.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 85: routine eye exam including refraction, 1 per calendar year, is $0 at a Humana Medicare Insight Network provider.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 85 eyewear benefit, 1 per calendar year: the member pays any retail amount over $150, so the allowance is $150 at standard network providers.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 80: diabetic eye exam is a $0 copay in all places of treatment. Diabetic retinopathy screening is covered once per year by Medicare.\"}]\n```",
+ "usage": {
+  "input_tokens": 5619,
+  "output_tokens": 827,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-d1ca3a965cb15437.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 80 OTC credit row: quarterly credit is $25, loaded to the Ucard each quarter, and coverage is limited to in-network locations. Supplemental allowance of $25 per quarter, in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2616,
+  "output_tokens": 98,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

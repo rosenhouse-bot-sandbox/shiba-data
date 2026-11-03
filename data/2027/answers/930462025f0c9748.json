@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "d1ca3a965cb15437.md",
+ "reply": "```json\n[\n  {\n    \"plan_id\": \"H3805-041-0\",\n    \"benefit\": \"hearing.exam\",\n    \"setting\": \"any\",\n    \"network\": \"in\",\n    \"covered_by\": \"medicare\",\n    \"cost_kind\": \"copay\",\n    \"amount\": \"$0\",\n    \"unit\": \"per exam\",\n    \"limit\": \"\",\n    \"page\": 61,\n    \"quotes\": [\"$0 copayment or each Medicare-covered\"],\n    \"note\": \"Diagnostic hearing and balance evaluations\"\n  },\n  {\n    \"plan_id\": \"H3805-041-0\",\n    \"benefit\": \"hearing.exam\",\n    \"setting\": \"any\",\n    \"network\": \"in\",\n    \"covered_by\": \"supplemental\",\n    \"cost_kind\": \"copay\",\n    \"amount\": \"$0\",\n    \"unit\": \"\",\n    \"limit\": \"1 per year\",\n    \"page\": 61,\n    \"quotes\": [\"Hearing services - routine hearing exam $0 copayment\", \"We cover 1 hearing exam every year.\"],\n    \"note\": \"\"\n  },\n  {\n    \"plan_id\": \"H3805-041-0\",\n    \"benefit\": \"hearing.exam\",\n    \"setting\": \"any\",\n    \"network\": \"in\",\n    \"covered_by\": \"supplemental\",\n    \"cost_kind\": \"visit_limit\",\n    \"amount\": \"1\",\n    \"unit\": \"\",\n    \"limit\": \"per year\",\n    \"page\": 61,\n    \"quotes\": [\"We cover 1 hearing exam every year.\"],\n    \"note\": \"\"\n  }\n]\n```",
+ "usage": {
+  "input_tokens": 2707,
+  "output_tokens": 982,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-6e580cd7ccb0ff20.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 1 names the Platinum Dental Rider as an optional supplemental benefit costing $66 a month, added to the plan premium.\"}]\n```",
+ "usage": {
+  "input_tokens": 2111,
+  "output_tokens": 72,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

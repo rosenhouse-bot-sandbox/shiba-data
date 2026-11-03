@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "7e45f25357b792a7.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-019-0\", \"benefit\": \"fitness\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 72,\n  \"quotes\": [\"$0 membership\", \"Devoted Health covers the full cost of this benefit.\"], \"note\": \"SilverSneakers membership\"},\n {\"plan_id\": \"H2923-019-0\", \"benefit\": \"fitness\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$150\", \"unit\": \"\", \"limit\": \"per year\", \"pool\": \"Devoted Health Wellness Bucks\", \"page\": 73,\n  \"quotes\": [\"Devoted Health will reimburse you up to $150 per year for participation in or purchase of one or more of the following:\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 5536,
+  "output_tokens": 981,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

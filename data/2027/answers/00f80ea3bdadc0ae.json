@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-7e45f25357b792a7.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 77: Medicare-covered diagnostic hearing and balance exams each cost a $45 copay in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 77: the plan covers 1 routine hearing exam each year.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 77: the routine hearing exam and the hearing aid fitting each cost a $0 copay.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 77: hearing aids cost a $599 copay per ear for Advanced or an $899 copay per ear for Premium.\"}]\n```",
+ "usage": {
+  "input_tokens": 2978,
+  "output_tokens": 429,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

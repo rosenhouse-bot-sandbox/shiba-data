@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-5e11cf20cec995f3.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 60 Fitness program row: $0 copayment, and coverage is limited to in-network locations. It is a routine (supplemental) benefit with no setting named.\"}]\n```",
+ "usage": {
+  "input_tokens": 2352,
+  "output_tokens": 142,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "49912316cc55d9c5.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H2923-001-0\", \"benefit\": \"fitness\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 69,\n   \"quotes\": [\"$0 membership\", \"There is no coinsurance, copayment, or deductible for covered gym membership.\"],\n   \"note\": \"SilverSneakers membership\"},\n  {\"plan_id\": \"H2923-001-0\", \"benefit\": \"fitness\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$150\", \"limit\": \"per year\",\n   \"pool\": \"Devoted Health Wellness Bucks\", \"page\": 70,\n   \"quotes\": [\"Devoted Health will reimburse you up to $150 per year for participation in or purchase of one or more of the following:\"],\n   \"note\": \"Reimbursement covers items such as fitness classes, home fitness equipment and health club membership\"}\n]\n```",
+ "usage": {
+  "input_tokens": 5402,
+  "output_tokens": 1183,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

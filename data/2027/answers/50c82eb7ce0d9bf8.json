@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-29166053e638f7e6.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 10 supplemental vision, in network: routine exam up to 1 per year.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 10: Medicare-covered vision services, 20% of the cost.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 10: Eyewear (post cataract surgery) is a $0 copay, which Medicare covers.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 10: $150 maximum benefit per year for contact lenses or eyeglasses at in-network providers that are not PLUS providers.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 10 supplemental vision, in network: $0 copay for routine exam up to 1 per year.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 10: Medicare-covered diabetic eye exam is a $0 copay.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 10: $250 maximum benefit per year at PLUS Provider for contact lenses or eyeglasses.\"}]\n```",
+ "usage": {
+  "input_tokens": 3321,
+  "output_tokens": 626,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

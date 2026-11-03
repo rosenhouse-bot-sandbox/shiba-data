@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-29166053e638f7e6.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 16: the Humana Healthy Options Allowance is $175 a month on a prepaid card, and all plan members receive it for approved OTC items. The extra grocery and rent uses for qualifying members do not limit the OTC allowance.\"}]\n```",
+ "usage": {
+  "input_tokens": 2365,
+  "output_tokens": 282,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

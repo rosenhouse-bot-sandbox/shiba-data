@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "8acbaf3993261220.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-040-0\", \"benefit\": \"otc\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$40\", \"limit\": \"per month\",\n  \"pool\": \"OTC and food credit\", \"page\": 7,\n  \"quotes\": [\"OTC and food credit\", \"$40 credit every month for over-the-counter (OTC)\"]}]\n```",
+ "usage": {
+  "input_tokens": 3475,
+  "output_tokens": 418,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

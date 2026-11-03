@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-dca4e04d7b6dc26b.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 73 OTC Benefit row: $150 allowance every three months, loaded to the Flex Card, for select OTC items. This is a dedicated OTC allowance, not a shared pool.\"}]\n```",
+ "usage": {
+  "input_tokens": 2134,
+  "output_tokens": 432,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

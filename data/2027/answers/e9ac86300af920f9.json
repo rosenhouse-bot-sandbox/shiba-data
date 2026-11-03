@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-28e22b4acec7d885.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 Routine hearing exam row: $0 copay in network.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Page 4: the $80 routine hearing exam copay is the out-of-network amount. In network it is $0.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 4 'Exam to diagnose and treat hearing and balance issues' row: $80 copay out of network.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 4 Hearing aids row: $700 allowance for 2 hearing aids every year in network.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 4 'Exam to diagnose and treat hearing and balance issues' row: $0 copay in network.\"},\n{\"id\": 5, \"ok\": false, \"reason\": \"Page 4: the out-of-network routine hearing exam is an $80 copay. $0 is the in-network amount.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 4 Routine hearing exam row: $80 copay out of network.\"},\n{\"id\": 7, \"ok\": false, \"reason\": \"Page 4: the out-of-network diagnostic hearing exam is an $80 copay. $0 is the in-network amount.\"}]\n```",
+ "usage": {
+  "input_tokens": 3116,
+  "output_tokens": 433,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

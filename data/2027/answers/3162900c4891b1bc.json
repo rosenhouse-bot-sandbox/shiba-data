@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-cbcaa238a8c713a4.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 7 Fitness program row (Silver&Fit membership): $0 in the in-network column.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 7 Fitness program row (Silver&Fit membership): 80% in the out-of-network column.\"}]\n```",
+ "usage": {
+  "input_tokens": 2222,
+  "output_tokens": 265,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

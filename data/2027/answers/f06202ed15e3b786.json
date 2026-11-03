@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-e306f120395b6260.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 52 Fitness program row shows a $0 copayment in the in-network column for this plan.\"}, {\"id\": 1, \"ok\": true, \"reason\": \"Page 52 Fitness program row shows 90% coinsurance in the out-of-network column, 'if you use an out-of-network provider'.\"}]\n```",
+ "usage": {
+  "input_tokens": 2605,
+  "output_tokens": 251,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

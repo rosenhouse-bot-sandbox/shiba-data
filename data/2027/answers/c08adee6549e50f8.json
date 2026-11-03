@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "d370b4b5b3950077.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-005-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$40\", \"unit\": \"per visit\", \"page\": 7, \"quotes\": [\"Medicare-Covered Diagnostic Eye Exam: $40 copay\"], \"note\": \"The page also lists a Diabetic Retinopathy Exam at a $0 copay. That fact was left out because it has the same benefit, setting, network and cost kind as this one, and the page gives no separate condition to tell them apart.\"}]\n```",
+ "usage": {
+  "input_tokens": 3078,
+  "output_tokens": 614,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

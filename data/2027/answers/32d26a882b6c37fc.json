@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-7dcf10accd77535d.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 13 Routine Eye Exam (Refraction) row: in-network $0 copay, 1 exam(s) every year.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 13 Eyewear Allowance row: up to a $200 combined allowance towards contacts and glasses every year.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 13 Routine Eyewear (contact lenses/eyeglasses) row: in-network $0 copay.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 13 Glaucoma Screening row (a Medicare-covered eye exam): out-of-network 30% coinsurance.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 13 Routine Eye Exam row: 1 exam(s) every year applies to the routine exam benefit.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 12 Medicare-covered Eye Exam row: out-of-network $0 copay for each diabetic retinopathy screening or diabetic eye exam.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 13 Glaucoma Screening row: in-network $0 copay for each Medicare-covered service.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 13 Medicare-covered Eyewear row: in-network $0 copay.\"},\n{\"id\": 8, \"ok\": true, \"reason\": \"Page 13 Routine Eyewear row: out-of-network 40% coinsurance.\"},\n{\"id\": 9, \"ok\": true, \"reason\": \"Page 13 Routine Eye Exam row: out-of-network 40% coinsurance, 1 exam(s) every year.\"},\n{\"id\": 10, \"ok\": true, \"reason\": \"Page 12 Medicare-covered Eye Exam row: out-of-network 30% coinsurance for all other Medicare-covered eye exams.\"},\n{\"id\": 11, \"ok\": true, \"reason\": \"Page 13 Medicare-covered Eyewear row: out-of-network 30% coinsurance.\"}]\n```",
+ "usage": {
+  "input_tokens": 3942,
+  "output_tokens": 1277,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

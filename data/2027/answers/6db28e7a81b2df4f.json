@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-034e045a83e5b49d.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5 hearing aids row (1 per ear per calendar year): the out-of-network column shows 80% coinsurance after the $1,000 deductible.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 5 hearing aids row (1 per ear per calendar year): the out-of-network column shows a $1,000 deductible, followed by 80%.\"}]\n```",
+ "usage": {
+  "input_tokens": 2437,
+  "output_tokens": 413,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
