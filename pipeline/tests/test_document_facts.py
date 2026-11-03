@@ -1,4 +1,4 @@
-import glob, json, os, sys, unittest
+import glob, json, os, sys, threading, unittest
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -29,6 +29,20 @@ class StepTest(StepsTest):
         self.assertEqual(sorted((r["cost_kind"], r["amount"], r["source"]) for r in rows),
                          [("copay", "$0-$40", "EOC"), ("covered", "", "EOC")])
         self.assertEqual(asked, [("read", "r", "high"), ("read", "r", "high"), ("check", "v", "low")])
+
+    def test_groups_run_at_the_same_time(self):
+        both_reading = threading.Barrier(2, timeout=10)
+
+        def fake(task_dir, model, effort):
+            if task_dir.endswith("read"):
+                both_reading.wait()
+            for task in glob.glob(f"{task_dir}/*.md"):
+                with open(task[:-3] + ".json", "w") as f:
+                    json.dump([], f)
+
+        version = dict(groups=("imaging", "ambulance"), reader=("r", "high"), verifier=("v", "low"))
+        with mock.patch.dict(document_facts.VERSIONS, {9: version}):
+            document_facts.step(self.data, self.work, self.dir, fake, 9)
 
     def test_version_3_adds_ambulance_with_the_same_models(self):
         self.assertEqual(document_facts.VERSIONS[3], dict(document_facts.VERSIONS[1], groups=("imaging", "ambulance")))
