@@ -51,8 +51,8 @@ class StepTest(StepsTest):
         self.assertEqual(document_facts.VERSIONS[4],
                          dict(document_facts.VERSIONS[1], groups=("imaging", "ambulance", "surgery")))
 
-    def test_version_5_adds_tests_visits_rehab_and_inpatient(self):
-        self.assertEqual(document_facts.VERSIONS[5], dict(document_facts.VERSIONS[4], groups=document_facts.VERSIONS[4]["groups"]
+    def test_version_6_adds_tests_visits_rehab_and_inpatient(self):
+        self.assertEqual(document_facts.VERSIONS[6], dict(document_facts.VERSIONS[4], groups=document_facts.VERSIONS[4]["groups"]
                                                           + ("tests", "visits", "rehab", "inpatient")))
 
     def test_version_1_uses_the_models_the_evaluation_picked(self):

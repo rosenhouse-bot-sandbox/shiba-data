@@ -43,8 +43,8 @@ BENEFITS = {
     "rehab.reevaluation": "Therapy re-evaluations, priced apart from visits",
     "inpatient": "Inpatient hospital stays of every kind, priced together",
     "inpatient.acute": "Inpatient hospital care, which may include rehabilitation and long-term care hospitals. "
-                       "A cost for some days of a stay has `unit` `per day` and the days in `limit`, as `days 1-5`, "
-                       "or `days 6+` from day 6 on. A cost for a whole stay has `unit` `per stay`",
+                       "A cost for some days of a stay has `unit` `per day` and the days in both `limit` and `condition`, "
+                       "as `days 1-5`, or `days 6+` from day 6 on. A cost for a whole stay has `unit` `per stay`",
     "inpatient.psychiatric": "Inpatient psychiatric hospital stays",
 }
 # Regexes that find the pages about each benefit group
