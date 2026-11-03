@@ -11,7 +11,7 @@ def versions(data, known, candidate=""):
     candidate is like "filled@2", or several joined by commas. known maps each step to its versions."""
     with open(f"{data}/steps.json") as f:
         out = json.load(f)
-    candidates = [c.partition("@") for c in candidate.split(",")] if candidate else []
+    candidates = [c.strip().partition("@") for c in candidate.split(",")] if candidate else []
     for step, _, version in candidates:
         if step not in known:
             raise SystemExit(f"No versioned step {step}")

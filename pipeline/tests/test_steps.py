@@ -20,7 +20,7 @@ class VersionsTest(unittest.TestCase):
         self.assertEqual(steps.versions(self.data, KNOWN, "filled@2"), {"filled": 2, "facts": 1})
 
     def test_candidates_for_several_steps_run_together(self):
-        self.assertEqual(steps.versions(self.data, KNOWN, "filled@2,facts@2"), {"filled": 2, "facts": 2})
+        self.assertEqual(steps.versions(self.data, KNOWN, "filled@2, facts@2"), {"filled": 2, "facts": 2})
 
     def test_checks_only_the_steps_it_knows(self):
         (self.data / "steps.json").write_text(json.dumps({"filled": 1, "facts": 1, "other": 5}))

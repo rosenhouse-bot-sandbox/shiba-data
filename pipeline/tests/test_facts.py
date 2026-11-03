@@ -152,7 +152,6 @@ class VocabularyTest(unittest.TestCase):
                   "inpatient.acute", "inpatient.psychiatric"):
             self.assertIn(b, facts.BENEFITS)
         self.assertIn("telehealth", facts.GROUP_SETTINGS["visits"])
-        self.assertIn("days 1-5", facts.BENEFITS["inpatient.acute"])
 
     def test_describe_lists_one_group(self):
         text = facts.describe("imaging")

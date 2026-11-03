@@ -53,15 +53,15 @@ FIND = {"imaging": [r"x.ray", r"radiolog", r"\bMRI\b", r"\bCT\b", r"\bPET\b", r"
         "ambulance": [r"ambulance", r"outside (?:of )?the United States", r"worldwide", r"anywhere in the world"],
         "surgery": [r"outpatient surg", r"ambulatory surg", r"surgical cent", r"surgery cent", r"diagnostic colonoscop",
                     r"skin biops"],
-        "tests": [r"diagnostic (?:tests|procedures)", r"lab(?:oratory)? (?:services|tests)", r"non.?radiolog",
+        "tests": [r"diagnostic (?:test|procedure)", r"\bEKG", r"lab(?:oratory)? (?:services|tests)", r"non.?radiolog",
                   r"sleep stud"],
         "visits": [r"physician/practitioner services, including",
                    r"(?:primary care|\bPCP|specialist|specialty care)[^\n]{0,60}(?:\$\d|\d%)",
                    r"(?:\$\d|\d%)[^\n]{0,60}(?:primary care|\bPCP|specialist)",
-                   r"(?:primary care|specialist|specialty care) (?:office )?visit", r"provider and professional services",
+                   r"(?:primary care|primary care physician|specialist|specialty care) (?:office )?visit", r"provider and professional services",
                    r"by a specialist", r"doctor visits"],
-        "rehab": [r"outpatient rehab", r"physical therap", r"occupational therap"],
-        "inpatient": [r"inpatient hospital"]}
+        "rehab": [r"outpatient rehab", r"physical therap", r"occupational therap", r"speech.language"],
+        "inpatient": [r"inpatient hospital", r"inpatient (?:psychiatric|mental)"]}
 SETTINGS = {
     "any": "The document names no setting, or one cost covers every setting",
     "office": "A physician's office, of any kind",

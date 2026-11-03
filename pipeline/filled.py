@@ -62,7 +62,7 @@ def presented(*columns):
 
 
 # Each version names the layers it sees and the rows it ignores. No version sees this step's own rows.
-# Versions 2 and 3 ignore edits to their presented columns, so retiring them leaves the tasks unchanged.
+# Versions 2 to 4 ignore edits to their presented columns, so retiring them leaves the tasks unchanged.
 # They also miss later edits to those columns, and versions 3 and 4 miss the edits that TRIAGED keeps.
 VERSIONS = {
     1: (layers.without(layers.FILLED, layers.PRESENTED), None),

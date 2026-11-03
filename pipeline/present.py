@@ -128,8 +128,8 @@ def outpatient_surgery(organization, found):
         cost = best(found, "surgery", setting)
         zeros = [f for leaf in ("surgery.colonoscopy", "surgery.skin_biopsy")
                  for f in best(found, leaf, setting, lambda f: usable(f) and f["benefit"] == leaf and f["setting"] == setting)
-                 if f["cost_kind"] == "copay" and f["amount"] == "$0"]
-        cited = unique(cost + zeros) if cost else []
+                 if f["amount"] == "$0"]
+        cited = cost + zeros if cost else []
         return show(cited), cited
     return [line("outpatient_hospital"), line("asc")]
 

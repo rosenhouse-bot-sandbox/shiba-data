@@ -171,6 +171,13 @@ class OutpatientSurgeryTest(unittest.TestCase):
         self.assertEqual(surgery(op(setting="asc", amount="20%"), op("surgery.colonoscopy", "asc", "$0", source="SB")),
                          ["", "$0-20%"])
 
+    def test_an_out_of_network_0_colonoscopy_does_not_count(self):
+        self.assertEqual(surgery(op(), op("surgery.colonoscopy", amount="$0", network="out")), ["$500", ""])
+
+    def test_a_better_sources_colonoscopy_price_beats_a_0(self):
+        self.assertEqual(surgery(op(), op("surgery.colonoscopy", amount="$100"),
+                                 op("surgery.colonoscopy", amount="$0", source="SB")), ["$500", ""])
+
     def test_skips_other_networks_supplemental_benefits_tiers_packages_conditions_and_deductibles(self):
         skipped = [op(amount="$900", network="out"), op(amount="$800", covered_by="supplemental"),
                    op(amount="$0", provider_tier="PLUS"), op(amount="$0", package="Rider"), op(amount="$0", condition="x"),
