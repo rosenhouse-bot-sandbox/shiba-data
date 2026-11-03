@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2923-025-0.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 110 'Mandatory Supplemental Dental Benefits' says the plan pays up to $2,000 per year for covered dental services, including cleanings, exams and X-rays. This is a routine supplemental benefit, so the dot is correct.\"},{\"id\":1,\"ok\":true,\"reason\":\"Page 55 says routine acupuncture is a supplemental benefit covered under the Dental & Alternative Therapy Allowance. Page 63 lists acupuncture for conditions other than chronic low back pain as covered under that allowance.\"},{\"id\":2,\"ok\":true,\"reason\":\"Page 62 lists massage therapy by a licensed massage therapist as covered under the $2,000 Dental & Alternative Therapy Allowance, reimbursed at 50%. Page 63 continues the list of covered massage types. This is supplemental coverage, so the dot is correct.\"}]",
+ "usage": {
+  "input_tokens": 5069,
+  "output_tokens": 515,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

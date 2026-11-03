@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2923-005-0.md",
+ "reply": "```json\n[{\"key\": \"main.M_part_b_drugs\", \"result\": \"cite\", \"citations\": [{\"page\": 84, \"quote\": \"Allergy Serum: $0 copay at:\"}, {\"page\": 85, \"quote\": \"Chemotherapy Drugs: 20% coinsurance at:\"}]},\n {\"key\": \"main.R_dental\", \"result\": \"cite\", \"citations\": [{\"page\": 62, \"quote\": \"Examples of covered dental services include Cleanings, Oral Exams, X-Rays, and Fluoride Treatment.\"}, {\"page\": 62, \"quote\": \"You can be reimbursed up to $1,500 per year for covered dental services, Therapeutic Massage, Routine Acupuncture, and/or Naturopath Services.\"}]},\n {\"key\": \"main.S_acupuncture\", \"result\": \"cite\", \"citations\": [{\"page\": 62, \"quote\": \"You can be reimbursed up to $1,500 per year for covered dental services, Therapeutic Massage, Routine Acupuncture, and/or Naturopath Services.\"}, {\"page\": 63, \"quote\": \"Acupuncture services for conditions other than\"}]},\n {\"key\": \"main.V_massage\", \"result\": \"cite\", \"citations\": [{\"page\": 62, \"quote\": \"You can be reimbursed up to $1,500 per year for covered dental services, Therapeutic Massage, Routine Acupuncture, and/or Naturopath Services.\"}, {\"page\": 63, \"quote\": \"naturopathic doctor.\"}]}]\n```",
+ "usage": {
+  "input_tokens": 14814,
+  "output_tokens": 5878,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

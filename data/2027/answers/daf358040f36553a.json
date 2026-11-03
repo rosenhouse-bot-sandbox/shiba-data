@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2406-073-0.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 63 Medicare Part B Drugs row, in-network column: $0 copayment for Part B allergy antigens (a Part B drug that costs nothing) and 20% coinsurance for chemotherapy and all other Part B drugs. This supports 0%-20%. The out-of-network 30% is correctly not used. The $0 is a separate allergy-antigen line, not a Medicaid-level alternative.\"}]",
+ "usage": {
+  "input_tokens": 1979,
+  "output_tokens": 525,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

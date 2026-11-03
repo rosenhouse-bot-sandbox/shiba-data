@@ -1,0 +1,11 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H2406-073-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 63, Medicare Part B Drugs row, in-network column: $0 for Part B allergy antigens and 20% coinsurance for chemotherapy drugs. Here \\\"or\\\" is \\\"for\\\" with the f dropped, not a Medicaid split. The 30% is out-of-network.\"}]\n```",
+ "usage": {
+  "input_tokens": 1979,
+  "output_tokens": 318,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2923-019-0.md",
+ "reply": "```json\n[{\"key\": \"main.R_dental\", \"result\": \"cite\", \"citations\": [{\"page\": 111, \"quote\": \"Devoted Health will pay as much as $2,000 per year for covered dental services listed below.\"}, {\"page\": 64, \"quote\": \"You have a $2,000 yearly allowance toward Preventive Dental and Comprehensive dental services,\"}]},\n {\"key\": \"main.S_acupuncture\", \"result\": \"cite\", \"citations\": [{\"page\": 64, \"quote\": \"You can be reimbursed up to $2,000 per year for covered dental services, Therapeutic Massage, Routine Acupuncture, and/or Naturopath Services.\"}, {\"page\": 123, \"quote\": \"You may use your Dental & Alternative Therapy Allowance toward the cost of acupuncture services.\"}]},\n {\"key\": \"main.V_massage\", \"result\": \"cite\", \"citations\": [{\"page\": 65, \"quote\": \"Massage therapy rendered by a licensed massage therapist.\"}, {\"page\": 64, \"quote\": \"You can be reimbursed up to $2,000 per year for covered dental services, Therapeutic Massage, Routine Acupuncture, and/or Naturopath Services.\"}]}]\n```",
+ "usage": {
+  "input_tokens": 13995,
+  "output_tokens": 4128,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

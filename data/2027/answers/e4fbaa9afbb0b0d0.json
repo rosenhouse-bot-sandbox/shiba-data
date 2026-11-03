@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2923-019-0.md",
+ "reply": "[\n  {\"id\": 0, \"ok\": true, \"reason\": \"Page 64 allowance row names Routine Acupuncture within the $2,000 yearly allowance. Page 123 confirms the allowance can be used toward acupuncture. Page 65 limits it to acupuncture other than chronic low back pain. This is supplemental coverage for all members.\"},\n  {\"id\": 1, \"ok\": true, \"reason\": \"Page 111 says the plan pays up to $2,000 per year for covered supplemental dental (cleanings, exams, X-rays). Page 64 says the allowance covers preventive and comprehensive dental. Both are mandatory supplemental benefits, so the dot is supported.\"},\n  {\"id\": 2, \"ok\": true, \"reason\": \"Page 64 names therapeutic massage in the $2,000 Dental & Alternative Therapy Allowance. Page 65 lists massage therapy by a licensed massage therapist as a covered alternative therapy, reimbursed at 50%. This is a supplemental benefit for all members.\"}\n]",
+ "usage": {
+  "input_tokens": 5086,
+  "output_tokens": 345,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

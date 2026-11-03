@@ -1,0 +1,11 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H3805-041-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 70, Medicare Part B Drugs row: $0 copayment for Part B allergy antigens (the 0% low end) and 20% coinsurance for all other Part B drugs (the high end).\"}]\n```",
+ "usage": {
+  "input_tokens": 1856,
+  "output_tokens": 273,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "task": "H2001-045-0.md",
+ "reply": "```json\n[{\"key\": \"dvha.G_vision\", \"result\": \"cite\", \"citations\": [{\"page\": 115, \"quote\": \"$0 copayment            30% coinsurance*\"}, {\"page\": 116, \"quote\": \"$0 copayment or 1 pair o eyeglasses (lenses/ rames) or contact lenses with a retail value o up to $200.\"}]},\n {\"key\": \"dvha.H_hearing\", \"result\": \"skip\"}]\n```",
+ "usage": {
+  "input_tokens": 3162,
+  "output_tokens": 7773,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

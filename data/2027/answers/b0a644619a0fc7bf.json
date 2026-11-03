@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H2923-005-0.md",
+ "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"Page 62: the $1,500 Dental & Alternative Therapy Allowance names Routine Acupuncture and is available to all members. Page 63 confirms acupuncture for conditions other than chronic low back pain is covered by it.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"Page 84: Allergy Serum is $0 copay, which supports the 0% low end. Page 85: Chemotherapy and all other Part B drugs are 20% coinsurance, which supports the 20% high end.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Page 62: the allowance names Therapeutic Massage, reimbursed at 50% up to $1,500, and applies to all members. The page 63 quote is weak support, but the page 62 quote carries the dot.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"Page 62: the allowance covers preventive dental (cleanings, exams, X-rays, fluoride, reimbursed at 100%) and comprehensive dental (reimbursed at 50%), up to $1,500 a year.\"}\n]",
+ "usage": {
+  "input_tokens": 5696,
+  "output_tokens": 710,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

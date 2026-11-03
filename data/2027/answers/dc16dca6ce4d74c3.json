@@ -1,0 +1,11 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H2406-042-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 63: the routine hearing exam is a $0 in-network copay. Page 64: the hearing aid allowance is $700, and the out-of-network text ('first $700 for up to 2 hearing aids') shows it is a combined amount, not per ear. Page 64 also limits the benefit to 2 hearing aids every year.\"}]\n```",
+ "usage": {
+  "input_tokens": 2805,
+  "output_tokens": 524,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

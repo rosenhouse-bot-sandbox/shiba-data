@@ -1,0 +1,11 @@
+{
+ "model": "claude-sonnet-5-5",
+ "task": "v-H3817-008-1.md",
+ "reply": "[{\"id\":0,\"ok\":false,\"reason\":\"The $20 tests copay (page 58) and the labs range of $0 for HbA1C to $20 for other tests (page 57) are supported. But the field says that for Regence a $0 diagnostic mammogram also counts as a test. Page 58 shows $0 for diagnostic mammography, so the tests part would be $0-$20, not $20, and no quote covers that. EKGs also sit in the imaging row with the $300 complex imaging copay, so the $20 is not clearly the price for every non-radiological test.\"}]",
+ "usage": {
+  "input_tokens": 2734,
+  "output_tokens": 846,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

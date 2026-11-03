@@ -73,13 +73,13 @@ test("section labels stay in view when the sheet scrolls sideways", async () => 
 
 test("a spreadsheet link to a cited cell opens its quote", async () => {
   await page.goto(`${base}#/main/H2001-045-0/H_inpatient`);
-  await shown(docOf("H2001-045-0", "EOC"), 77);
+  await shown(docOf("H2001-045-0", "EOC"), 14);
   assert.match((await page.locator(".textLayer mark").allTextContents()).join(" "), /\$1,980 copayment/);
 });
 
 test("hiding the viewer forgets the shown page", async () => {
   await page.goto(`${base}#/main/H2001-045-0/H_inpatient`);
-  await shown(docOf("H2001-045-0", "EOC"), 77);
+  await shown(docOf("H2001-045-0", "EOC"), 14);
   await page.goto(`${base}#/main`);
   assert.equal(await page.locator("#page-area[data-shown]").count(), 0);
 });
@@ -87,7 +87,7 @@ test("hiding the viewer forgets the shown page", async () => {
 test("clicking a cited cell highlights the quote on its page", async () => {
   await page.goto(`${base}#/main`);
   await row("H2001-045-0").locator("td.cited", { hasText: "$1,980" }).click();
-  await shown(docOf("H2001-045-0", "EOC"), 77);
+  await shown(docOf("H2001-045-0", "EOC"), 14);
   assert.match((await page.locator(".textLayer mark").allTextContents()).join(" "), /\$1,980 copayment/);
 });
 
@@ -560,19 +560,19 @@ test("a cited quote still scrolls into view and keeps its highlight while find i
   const cell = row("H2001-045-0").locator("td.cited", { hasText: "$1,980" });
   await cell.click();
   const eoc = docOf("H2001-045-0", "EOC");
-  await shown(eoc, 77);
+  await shown(eoc, 14);
   await page.keyboard.press("Control+f");
   await page.keyboard.type("1,980 copayment");
-  await page.waitForSelector('.page[data-page="77"] mark.cite.found');
-  await page.fill("#find-query", "Medical Benefits Chart");
-  await page.waitForSelector('.page[data-page="77"] mark.found.current');
+  await page.waitForSelector('.page[data-page="14"] mark.cite.found');
+  await page.fill("#find-query", "Your costs in 2027");
+  await page.waitForSelector('.page[data-page="14"] mark.found.current');
   await page.$eval("#page-area", (area) => {
     area.scrollTop = 0;
     delete area.dataset.shown;
   });
   await page.setViewportSize({ width: 1600, height: 500 });
   await cell.click();
-  await shown(eoc, 77);
+  await shown(eoc, 14);
   const visible = await page.$eval("#page-area", (area) => {
     const a = area.getBoundingClientRect();
     const m = area.querySelector("mark.cite").getBoundingClientRect();
@@ -588,7 +588,7 @@ test("reopening find keeps the query but shows no stale count", async () => {
   await page.keyboard.press("Control+f");
   assert.equal(await page.isVisible("#find"), true);
   assert.equal(await page.textContent("#find-count"), "");
-  assert.equal(await page.inputValue("#find-query"), "Medical Benefits Chart");
+  assert.equal(await page.inputValue("#find-query"), "Your costs in 2027");
 });
 
 test("opening another document closes the find box", async () => {

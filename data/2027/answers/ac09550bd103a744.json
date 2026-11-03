@@ -1,0 +1,11 @@
+{
+ "model": "claude-opus-5-5",
+ "task": "v-H7006-021-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 38 'Routine (non-Medicare covered) acupuncture services' row: Flex Card allowance for non-Medicare-covered acupuncture, $100 every six months combined with chiropractic and naturopathy. This is a supplemental benefit for all members.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 43 'Routine chiropractic care' row: Flex Card allowance for non-Medicare-covered chiropractic services, $100 every six months combined with acupuncture and naturopathy. This is a supplemental benefit beyond Medicare spinal manipulation.\"}]\n```",
+ "usage": {
+  "input_tokens": 2551,
+  "output_tokens": 224,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
