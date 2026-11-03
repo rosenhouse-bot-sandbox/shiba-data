@@ -136,17 +136,35 @@ class VocabularyTest(unittest.TestCase):
         for s in ("office.pcp", "office.specialist", "freestanding", "outpatient_hospital"):
             self.assertIn(s, facts.SETTINGS)
 
+    def test_ambulance_words_the_column_rules_need(self):
+        for b in ("ambulance.ground", "ambulance.air"):
+            self.assertIn(b, facts.BENEFITS)
+        self.assertIn("outside_us", facts.SETTINGS)
+
     def test_describe_lists_one_group(self):
         text = facts.describe("imaging")
         for b in facts.BENEFITS:
             self.assertEqual(f"`{b}`" in text, b == "imaging" or b.startswith("imaging."))
-        for words in facts.VOCABULARIES.values():
+        for column, words in facts.VOCABULARIES.items():
             for word in words:
-                if words is not facts.BENEFITS:
+                if column not in ("benefit", "setting"):
                     self.assertIn(f"`{word}`", text)
         self.assertIn(facts.AMOUNT_RULES, text)
         with self.assertRaises(KeyError):
             facts.describe("imagin")
+
+    def test_describe_lists_the_groups_settings(self):
+        for group, settings in facts.GROUP_SETTINGS.items():
+            text = facts.describe(group)
+            for s in facts.SETTINGS:
+                self.assertEqual(f"`{s}`" in text, s in settings, (group, s))
+        self.assertNotIn("outside_us", facts.GROUP_SETTINGS["imaging"])
+        self.assertNotIn("office", facts.GROUP_SETTINGS["ambulance"])
+
+    def test_every_group_has_settings_and_pages_to_find(self):
+        groups = {b for b in facts.BENEFITS if "." not in b} - {"radiation_therapy"}
+        self.assertEqual(set(facts.GROUP_SETTINGS), groups)
+        self.assertEqual(set(facts.FIND), groups)
 
     def test_amount_rules_examples_pass(self):
         for example in re.findall(r"`(\$[^`]*|\d+%?)`", facts.AMOUNT_RULES):
