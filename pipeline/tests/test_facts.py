@@ -141,6 +141,11 @@ class VocabularyTest(unittest.TestCase):
             self.assertIn(b, facts.BENEFITS)
         self.assertIn("outside_us", facts.SETTINGS)
 
+    def test_surgery_words_the_column_rules_need(self):
+        for b in ("surgery", "surgery.colonoscopy", "surgery.skin_biopsy"):
+            self.assertIn(b, facts.BENEFITS)
+        self.assertEqual(facts.GROUP_SETTINGS["surgery"], ("any", "outpatient_hospital", "asc"))
+
     def test_describe_lists_one_group(self):
         text = facts.describe("imaging")
         for b in facts.BENEFITS:

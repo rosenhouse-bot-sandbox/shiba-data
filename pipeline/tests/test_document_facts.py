@@ -33,6 +33,10 @@ class StepTest(StepsTest):
     def test_version_3_adds_ambulance_with_the_same_models(self):
         self.assertEqual(document_facts.VERSIONS[3], dict(document_facts.VERSIONS[1], groups=("imaging", "ambulance")))
 
+    def test_version_4_adds_surgery_with_the_same_models(self):
+        self.assertEqual(document_facts.VERSIONS[4],
+                         dict(document_facts.VERSIONS[1], groups=("imaging", "ambulance", "surgery")))
+
     def test_version_1_uses_the_models_the_evaluation_picked(self):
         self.assertEqual(document_facts.VERSIONS[1], dict(groups=("imaging",), reader=("claude-opus-5-5", "high"),
                                                           verifier=("claude-opus-5-5", "medium")))

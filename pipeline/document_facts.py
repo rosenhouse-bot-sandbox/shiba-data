@@ -10,6 +10,7 @@ VERSIONS = {
     1: dict(groups=("imaging",), reader=("claude-opus-5-5", "high"), verifier=("claude-opus-5-5", "medium")),
 }
 VERSIONS[3] = dict(VERSIONS[1], groups=("imaging", "ambulance"))
+VERSIONS[4] = dict(VERSIONS[1], groups=("imaging", "ambulance", "surgery"))
 
 
 def fresh(path):
