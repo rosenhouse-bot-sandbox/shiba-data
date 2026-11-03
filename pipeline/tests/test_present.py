@@ -550,7 +550,6 @@ TRIAGED = {
     ("I_outpatient_surgery", "H9003-006-0", "2"): "the EOC gives one outpatient surgery price, which readers file under outpatient hospitals",
     ("I_outpatient_surgery", "H9003-009-0", "1"): "the reader missed the SB's $0 low end",
     ("I_outpatient_surgery", "H9003-009-0", "2"): "the EOC gives one outpatient surgery price, which readers file under outpatient hospitals",
-    ("M_part_b_drugs", "H2056-003-0", ""): "the EOC prices vaccines at $0 in the words the expert cited for H2056-018-0's 0%",
 }
 
 
