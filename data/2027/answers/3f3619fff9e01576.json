@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "f73d19eeaaf3a08a.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-428-2\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$689\", \"unit\": \"per day\", \"limit\": \"days 1-4\", \"page\": 58, \"quotes\": [\"Inpatient Hospital – $689 copayment per day, days 1 to 4\"]},\n{\"plan_id\": \"H5216-428-2\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"days 5-90\", \"page\": 12, \"quotes\": [\"$0 copayment per day for days 5 –\"]},\n{\"plan_id\": \"H5216-428-2\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$520\", \"unit\": \"per day\", \"limit\": \"days 1-4\", \"condition\": \"Inpatient Psychiatric Facility\", \"page\": 59, \"quotes\": [\"Inpatient Psychiatric Facility – $520 copayment per day, days 1 to 4\"]},\n{\"plan_id\": \"H5216-428-2\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$689\", \"unit\": \"per day\", \"limit\": \"days 1-4\", \"condition\": \"Inpatient Hospital\", \"page\": 59, \"quotes\": [\"Inpatient Hospital – $689 copayment per day, days 1 to 4\"], \"note\": \"Inpatient mental health care at an inpatient hospital, as opposed to a psychiatric facility.\"},\n{\"plan_id\": \"H5216-428-2\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"days 5-90\", \"page\": 59, \"quotes\": [\"Inpatient Hospital – $689 copayment per day, days 1 to 4 – $0 copayment per day, days 5 to 90\", \"Inpatient Psychiatric Facility – $520 copayment per day, days 1 to 4 – $0 copayment per day, days 5 to 90\"], \"note\": \"Same $0 cost for days 5-90 at both an inpatient hospital and a psychiatric facility.\"}]\n```",
+ "usage": {
+  "input_tokens": 16427,
+  "output_tokens": 3842,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

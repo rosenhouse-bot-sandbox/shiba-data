@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "2947683a555fc83c.md",
+ "reply": "```json\n[\n{\"plan_id\": \"H1036-323-0\", \"benefit\": \"rehab.occupational\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$35\", \"page\": 14, \"quotes\": [\"Occupational therapy • Comprehensive outpatient rehab facility: $35 copay • Outpatient hospital: $35 copay\"]},\n{\"plan_id\": \"H1036-323-0\", \"benefit\": \"rehab.occupational\", \"setting\": \"office.specialist\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$35\", \"page\": 14, \"quotes\": [\"Occupational therapy • Comprehensive outpatient rehab facility: $35 copay • Outpatient hospital: $35 copay • Specialist's office: $35 copay\"]},\n{\"plan_id\": \"H1036-323-0\", \"benefit\": \"rehab.physical\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$35\", \"page\": 14, \"quotes\": [\"Physical therapy • Comprehensive outpatient rehab facility: $35 copay • Outpatient hospital: $35 copay\"]},\n{\"plan_id\": \"H1036-323-0\", \"benefit\": \"rehab.physical\", \"setting\": \"office.specialist\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$35\", \"page\": 14, \"quotes\": [\"Physical therapy • Comprehensive outpatient rehab facility: $35 copay • Outpatient hospital: $35 copay • Specialist's office: $35 copay\"]},\n{\"plan_id\": \"H1036-323-0\", \"benefit\": \"rehab.speech\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$35\", \"page\": 14, \"quotes\": [\"Speech therapy • Comprehensive outpatient rehab facility: $35 copay • Outpatient hospital: $35 copay\"]},\n{\"plan_id\": \"H1036-323-0\", \"benefit\": \"rehab.speech\", \"setting\": \"office.specialist\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$35\", \"page\": 14, \"quotes\": [\"Speech therapy • Comprehensive outpatient rehab facility: $35 copay • Outpatient hospital: $35 copay • Specialist's office: $35 copay\"]}\n]\n```",
+ "usage": {
+  "input_tokens": 2113,
+  "output_tokens": 1651,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

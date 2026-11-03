@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-6c89db5198e7a3b2.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 6, Inpatient psychiatric hospital row: the out-of-network column shows 50%: days 1-190, matching the coinsurance and day limit.\"}]\n```",
+ "usage": {
+  "input_tokens": 1986,
+  "output_tokens": 187,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

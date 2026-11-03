@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-5d52bb731683d536.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 52, Inpatient hospital care row (which covers acute, rehab and LTCH): the out-of-network cost is 50% coinsurance.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 52, Inpatient hospital care row states 'You are covered for unlimited days per stay.' This applies to in-network coverage.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 53, Inpatient services in a psychiatric hospital row: the out-of-network cost is Days 1–190: 50% coinsurance.\"}]\n```",
+ "usage": {
+  "input_tokens": 3642,
+  "output_tokens": 456,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

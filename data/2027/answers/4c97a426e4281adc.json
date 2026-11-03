@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "e2d6e1e199a3b8a9.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2056-018-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per day\", \"limit\": \"days 1-5\", \"page\": 43, \"quotes\": [\"$325 per day, days 1‑5; $0 per day, days 6‑90; $0 copay for additional days for each medically necessary covered inpatient stay.\"]},\n{\"plan_id\": \"H2056-018-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"days 6-90\", \"page\": 43, \"quotes\": [\"$325 per day, days 1‑5; $0 per day, days 6‑90; $0 copay for additional days for each medically necessary covered inpatient stay.\"]},\n{\"plan_id\": \"H2056-018-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"days 91+\", \"page\": 43, \"quotes\": [\"$325 per day, days 1‑5; $0 per day, days 6‑90; $0 copay for additional days for each medically necessary covered inpatient stay.\"]},\n{\"plan_id\": \"H2056-018-0\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$470\", \"unit\": \"per day\", \"limit\": \"days 1-5\", \"page\": 45, \"quotes\": [\"$470 per day, days 1‑5; $0 per day, days 6‑90 for each medically necessary covered inpatient stay.\"]},\n{\"plan_id\": \"H2056-018-0\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"days 6-90\", \"page\": 45, \"quotes\": [\"$470 per day, days 1‑5; $0 per day, days 6‑90 for each medically necessary covered inpatient stay.\"]}]\n```",
+ "usage": {
+  "input_tokens": 18761,
+  "output_tokens": 1658,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

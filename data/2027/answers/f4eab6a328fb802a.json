@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-516ff586a12c8288.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 80, Inpatient hospital care row, Out-of-Network section: for Medicare-covered admissions, 40% coinsurance per day for days 1 to 90 of each hospital stay. This matches the benefit, network, amount, unit and limit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2261,
+  "output_tokens": 362,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

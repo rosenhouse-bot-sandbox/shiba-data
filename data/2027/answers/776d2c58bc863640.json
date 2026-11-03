@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "f751937f09316ed1.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-009-0\", \"benefit\": \"rehab.physical\", \"setting\": \"office\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"page\": 93, \"quotes\": [\"Home or Office location: 30% coinsurance\"], \"note\": \"The row reads 'Home or Office location', so this cost covers the home as well as the office.\"},\n {\"plan_id\": \"H2923-009-0\", \"benefit\": \"rehab.physical\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"page\": 93, \"quotes\": [\"Outpatient Hospital: 30% coinsurance\"]},\n {\"plan_id\": \"H2923-009-0\", \"benefit\": \"rehab.reevaluation\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"page\": 93, \"quotes\": [\"Re-evaluation: 30% coinsurance\"], \"note\": \"Listed under Physical Therapy; occupational and speech therapy re-evaluation costs are on a page not provided.\"}]\n```",
+ "usage": {
+  "input_tokens": 16290,
+  "output_tokens": 1019,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

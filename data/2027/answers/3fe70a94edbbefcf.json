@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-4ec81cd0d2695486.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 79, 'Diagnostic tests and procedures (non-radiological services)' row: 20% coinsurance in network, no setting named.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 78, 'Laboratory tests' row: $0 copayment in network, no setting named. The prior-authorization note does not change the cost.\"}]\n```",
+ "usage": {
+  "input_tokens": 2632,
+  "output_tokens": 233,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

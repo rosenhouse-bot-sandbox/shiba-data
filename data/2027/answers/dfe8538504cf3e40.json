@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-cbcaa238a8c713a4.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 6 Inpatient psychiatric hospital row shows '50%: days 1-190' in the out-of-network column. That matches 50% coinsurance out of network for days 1-190, under the 190-day lifetime maximum.\"}]\n```",
+ "usage": {
+  "input_tokens": 2014,
+  "output_tokens": 242,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-f73d19eeaaf3a08a.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 59, inpatient psychiatric hospital row, in network: both settings (Inpatient Hospital and Inpatient Psychiatric Facility) show a $0 copay per day for days 5 to 90. One cost covers every setting, so setting 'any' holds.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 58, inpatient hospital care row, out of network: 50% coinsurance. Inpatient Hospital is the only setting listed.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 59, inpatient psychiatric row, out of network: 50% coinsurance. It applies to both the Inpatient Hospital and Inpatient Psychiatric Facility settings.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 12 summary, inpatient hospital stays (acute care included), in network: $0 copay per day for days 5-90. The quote is cut off at 'days 5 –', but the page continues '90'.\"}]\n```",
+ "usage": {
+  "input_tokens": 4929,
+  "output_tokens": 629,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

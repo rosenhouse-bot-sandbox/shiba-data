@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "7ac7300e6ca40ac7.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-040-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$685\", \"unit\": \"per day\", \"limit\": \"days 1-4\", \"page\": 65, \"quotes\": [\"$685 copayment each day or days 1-4 or Medicare-covered hospital care each time you are admitted.\"], \"note\": \"\"},\n{\"plan_id\": \"H3805-040-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"days 5+\", \"page\": 65, \"quotes\": [\"$0 copayment or additional Medicare-covered days.\"], \"note\": \"\"},\n{\"plan_id\": \"H3805-040-0\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$685\", \"unit\": \"per day\", \"limit\": \"days 1-3\", \"page\": 68, \"quotes\": [\"$685 copayment each day or days 1-3 or Medicare-covered hospital care each time you are admitted.\"], \"note\": \"\"},\n{\"plan_id\": \"H3805-040-0\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"days 4-90\", \"page\": 68, \"quotes\": [\"$0 copayment or additional Medicare-covered days, up to 90 days per\"], \"note\": \"The limit days 4-90 is inferred. The document says $0 for additional days up to 90 days per benefit period, plus 60 lifetime reserve days.\"}]\n```",
+ "usage": {
+  "input_tokens": 16864,
+  "output_tokens": 1789,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

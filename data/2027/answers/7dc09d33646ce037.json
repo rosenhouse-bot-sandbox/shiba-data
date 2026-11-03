@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-7a95606e4d0c87d0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 61 inpatient psychiatric row, out of network: Inpatient Mental Health Care is 50% coinsurance. One cost covers both the Inpatient Hospital and Inpatient Psychiatric Facility settings.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 60 inpatient hospital care row, out of network: Inpatient Care is 50% coinsurance (Inpatient Hospital).\"}]\n```",
+ "usage": {
+  "input_tokens": 3677,
+  "output_tokens": 404,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

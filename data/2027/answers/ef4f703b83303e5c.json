@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "7dcf10accd77535d.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-011-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$425\", \"unit\": \"per day\", \"limit\": \"days 1-7\", \"page\": 4, \"quotes\": [\"$425 copay per day for days 1 through 7\"], \"note\": \"The earlier check flagged a duplicate. This is one answer for this fact. The row's heading, \\\"Inpatient Hospital Coverage\\\", was taken as acute inpatient care because these pages show no psychiatric row.\"},\n {\"plan_id\": \"H5439-011-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"days 8-90\", \"page\": 4, \"quotes\": [\"$0 copay per day for days 8 through 90\"]},\n {\"plan_id\": \"H5439-011-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"days 91-95\", \"page\": 4, \"quotes\": [\"$0 copay per day for days 91 through 95\"]}]\n```",
+ "usage": {
+  "input_tokens": 2611,
+  "output_tokens": 1264,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "f751937f09316ed1.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-009-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$2,241\", \"unit\": \"per stay\", \"limit\": \"\", \"page\": 81, \"quotes\": [\"$2,241 copay per stay\"], \"note\": \"\"},\n {\"plan_id\": \"H2923-009-0\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$2,091\", \"unit\": \"per stay\", \"limit\": \"\", \"page\": 82, \"quotes\": [\"$2,091 copay per stay\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 13749,
+  "output_tokens": 1243,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

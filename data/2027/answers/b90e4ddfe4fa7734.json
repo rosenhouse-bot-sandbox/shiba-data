@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "0e1831fb00cf2a95.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2056-018-0\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$470\", \"unit\": \"per day\", \"limit\": \"days 1-5\", \"page\": 5, \"quotes\": [\"Inpatient psychiatric hospital stay $470 per day, days 1‑5\"]},\n {\"plan_id\": \"H2056-018-0\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"days 6-90\", \"page\": 5, \"quotes\": [\"$0 per day, days 6‑90\"]}]\n```",
+ "usage": {
+  "input_tokens": 2692,
+  "output_tokens": 893,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

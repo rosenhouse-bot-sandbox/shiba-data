@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "dbc45a45d9843dd0.md",
+ "reply": "```json\n[{\"plan_id\": \"H3817-008-1\", \"benefit\": \"tests.lab\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"condition\": \"for HbA1C testing\", \"page\": 57,\n  \"quotes\": [\"Lab tests: In-network: $0 copay per provider per day for HbA1C testing\"], \"note\": \"The document states $0 copay per provider per day for HbA1C testing.\"},\n {\"plan_id\": \"H3817-008-1\", \"benefit\": \"tests.lab\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$20\", \"unit\": \"per day\", \"condition\": \"for all other tests\", \"page\": 57,\n  \"quotes\": [\"$20 copay per provider per day for all other tests\"], \"note\": \"The document states $20 copay per provider per day for lab tests other than HbA1C.\"},\n {\"plan_id\": \"H3817-008-1\", \"benefit\": \"tests.lab\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 57,\n  \"quotes\": [\"for all other tests Out-of-network: 50% coinsurance\"]},\n {\"plan_id\": \"H3817-008-1\", \"benefit\": \"tests.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$20\", \"unit\": \"per day\", \"page\": 58,\n  \"quotes\": [\"Outpatient diagnostic tests: In-network: $20 copay per provider per day\"], \"note\": \"Applies to other outpatient diagnostic tests; the document states $20 copay per provider per day.\"},\n {\"plan_id\": \"H3817-008-1\", \"benefit\": \"tests.diagnostic\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 58,\n  \"quotes\": [\"Outpatient diagnostic tests: In-network: $20 copay per provider per day Out-of-network: 50% coinsurance\"]}]\n```",
+ "usage": {
+  "input_tokens": 10219,
+  "output_tokens": 1813,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

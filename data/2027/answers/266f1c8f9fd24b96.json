@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-90a4efa6544175a2.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 83 Laboratory tests row: $0 copay for all other Medicare-covered lab services (genetic testing is priced separately).\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 83 diagnostic non-laboratory tests row (includes EKGs): $200 copay for services received in other settings such as a physician office.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 84 Other outpatient diagnostic tests row: 20% coinsurance for all other Medicare-covered services, with no setting named.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 83 diagnostic non-laboratory tests row (includes EKGs): $200 copay for services received in other settings such as a freestanding facility.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 83 Laboratory tests row: $50 copay for Medicare-covered genetic testing.\"}]\n```",
+ "usage": {
+  "input_tokens": 3154,
+  "output_tokens": 751,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

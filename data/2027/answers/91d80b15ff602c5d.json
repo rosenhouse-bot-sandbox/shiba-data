@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-05d56d5f782708e7.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5 'Physical and speech therapy' row shows a $65 copay for this single-plan HMO. No setting is named, so 'any' fits.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 5 'Occupational therapy' row shows a $50 copay in network for H2056-003.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 5 'Physical and speech therapy' row shows a $65 copay for physical therapy in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2226,
+  "output_tokens": 311,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

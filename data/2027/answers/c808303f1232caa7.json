@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "4a3883a20d17f740.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-010-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$525\", \"unit\": \"per day\", \"limit\": \"days 1-5\", \"page\": 4, \"quotes\": [\"$525 copay per day for days 1 through 5\"], \"note\": \"\"},\n{\"plan_id\": \"H5439-010-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"days 6-95\", \"page\": 4, \"quotes\": [\"$0 copay per day for days 6 through 90\", \"$0 copay per day for days 91 through 95\"], \"note\": \"The document gives $0 per day separately for days 6-90 and days 91-95. These are combined here as days 6-95.\"}]\n```",
+ "usage": {
+  "input_tokens": 2655,
+  "output_tokens": 1244,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

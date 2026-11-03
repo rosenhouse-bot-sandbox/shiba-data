@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-77d83ba821336370.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 14 Inpatient hospital stays row, which covers acute, rehabilitation and long-term care: $1,980 copay per Medicare-covered stay in network. This is the non-$0 amount by Medicaid level.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 14 Inpatient hospital stays row: 30% coinsurance per Medicare-covered stay out of network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2338,
+  "output_tokens": 431,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

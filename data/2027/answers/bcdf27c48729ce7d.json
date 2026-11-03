@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-a4bc20077fb4a2cf.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 60, Outpatient rehabilitation services row (PT, OT and speech therapy priced together). Under In-office visits, Out-of-network is 50% coinsurance.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 60, Outpatient rehabilitation services row. Under In-office visits, In-network is a $45 copay per provider per day.\"}]\n```",
+ "usage": {
+  "input_tokens": 2380,
+  "output_tokens": 287,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

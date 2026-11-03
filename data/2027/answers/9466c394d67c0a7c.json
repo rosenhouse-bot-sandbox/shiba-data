@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "5e11cf20cec995f3.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H3805-048-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$550\", \"unit\": \"per day\", \"limit\": \"days 1-5\", \"page\": 65,\n   \"quotes\": [\"$550 copayment each day or days 1-5 or\"], \"note\": \"\"},\n  {\"plan_id\": \"H3805-048-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"days 6+\", \"page\": 65,\n   \"quotes\": [\"$0 copayment or additional\"], \"note\": \"\"},\n  {\"plan_id\": \"H3805-048-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$550\", \"unit\": \"per day\", \"limit\": \"days 1-5\", \"page\": 12,\n   \"quotes\": [\"$550 copayment each day or\", \"days 1 to 5.\"], \"note\": \"\"},\n  {\"plan_id\": \"H3805-048-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"days 6+\", \"page\": 12,\n   \"quotes\": [\"$0 copayment or additional\"], \"note\": \"\"},\n  {\"plan_id\": \"H3805-048-0\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$550\", \"unit\": \"per day\", \"limit\": \"days 1-4\", \"page\": 68,\n   \"quotes\": [\"$550 copayment each day or days 1-4 or\"], \"note\": \"\"},\n  {\"plan_id\": \"H3805-048-0\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"days 5-90\", \"page\": 68,\n   \"quotes\": [\"$0 copayment or additional\", \"Medicare-covered days, up to 90 days per\"], \"note\": \"The $0 copay applies to additional days up to 90 days per benefit period. The document also lists 60 lifetime reserve days, so the upper day limit is uncertain.\"}\n]\n```",
+ "usage": {
+  "input_tokens": 17037,
+  "output_tokens": 2357,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

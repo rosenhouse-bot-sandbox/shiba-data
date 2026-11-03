@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "2c101bd739d45a62.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-028-3\", \"benefit\": \"visits\", \"setting\": \"office.pcp\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 5, \"quotes\": [\"Primary Care Provider (PCP): $0 copay\"]},\n{\"plan_id\": \"H2923-028-3\", \"benefit\": \"visits\", \"setting\": \"office.specialist\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$50\", \"page\": 5, \"quotes\": [\"Specialist: $50 copay\"]}]\n```",
+ "usage": {
+  "input_tokens": 2457,
+  "output_tokens": 674,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

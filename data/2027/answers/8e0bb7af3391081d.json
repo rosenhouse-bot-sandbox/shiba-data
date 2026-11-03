@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-d594b0a1d3772214.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 52 Inpatient hospital care row: the cost sharing applies after the $750 plan deductible. The row covers inpatient acute care, and no network is named, so it is in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 53 Inpatient services in a psychiatric hospital row: the cost sharing applies after the $750 plan deductible for each medically necessary covered inpatient stay.\"}]\n```",
+ "usage": {
+  "input_tokens": 3477,
+  "output_tokens": 333,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
