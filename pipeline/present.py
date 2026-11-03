@@ -342,6 +342,7 @@ HELD = {
     ("M_part_b_drugs", "H9003-006-0"): "readers missed the 20% for Part B drugs",
     ("M_part_b_drugs", "H9003-009-0"): "readers missed the 20% for Part B drugs",
     ("O_medical_deductible", "H1036-317-0"): "readers missed that the $283 is Original Medicare's Part B deductible",
+    ("Q_hearing", "H9003-009-0"): "readers missed the $0 routine hearing exam for Value plan members",
 }
 
 

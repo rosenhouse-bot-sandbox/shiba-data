@@ -43,6 +43,13 @@ main,H1036-153-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/hum
 main,H1036-153-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036153000SB27pdf,10,Allergy shots and serum • PCP's office: $0 copay
 main,H1036-153-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036153000SB27pdf,10,Allergy shots and serum • PCP's office: $0 copay • Specialist's office: $0 copay
 main,H1036-153-0,O_medical_deductible,,$0,https://assets.humana.com/is/content/humana/H1036153000SB27pdf,4,Medical deductible                     This plan does not have a deductible.
+main,H1036-153-0,P_vision,,●,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,80,Any retail amount over $50 toward the purchase of frame and pair of
+main,H1036-153-0,P_vision,,●,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,80,Eyewear Benefit (1 per calendar year) at a Humana Medicare Insight
+main,H1036-153-0,Q_hearing,,●,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,79,$575 per Level 1 Aid
+main,H1036-153-0,Q_hearing,,●,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,79,$750 per Level 2 Aid
+main,H1036-153-0,Q_hearing,,●,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,79,Routine hearing exam (1 per year)
+main,H1036-153-0,Q_hearing,,●,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,79,Routine hearing exam (1 per year) $0
+main,H1036-153-0,Q_hearing,,●,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,79,Up to 2 prescription hearing aids every year (1 per ear per year).
 main,H1036-153-0,R_dental,,●,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,49,*You are covered for Mandatory
 main,H1036-153-0,R_dental,,●,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,74,"Annual Maximum: $1,500"
 main,H1036-153-0,R_dental,,●,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,74,"Bitewing x-rays – D0270, D0272, D0273, D0274 0%"
@@ -54,6 +61,8 @@ main,H1036-153-0,S_acupuncture,,,https://assets.humana.com/is/content/humana/H10
 main,H1036-153-0,T_chiropractic,,,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,48,$15 copayment
 main,H1036-153-0,T_chiropractic,,,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,85,Manual manipulation of the spine to correct a subluxation is
 main,H1036-153-0,U_naturopath,,,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,84,Naturopath services (uses natural or
+main,H1036-153-0,W_fitness,,●,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,69,In-Network: $0 copayment
+main,H1036-153-0,W_fitness,,●,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,69,SilverSneakers® fitness program
 main,H1036-153-0,X_transportation,,,https://assets.humana.com/is/content/humana/H1036153000SB27pdf,9,TRANSPORTATION Not Covered
 main,H1036-306-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,49,20% coinsurance regardless of the number of trips – Air Ambulance Non-Emergency Ambulance
 main,H1036-306-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,49,20% coinsurance regardless of the number of trips – Air Ambulance Out-of-Network:
@@ -92,6 +101,15 @@ main,H1036-306-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/hum
 main,H1036-306-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036306000SB27pdf,11,PCP's office: $0 copay
 main,H1036-306-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036306000SB27pdf,11,Specialist's office: $0 copay
 main,H1036-306-0,O_medical_deductible,,$0,https://assets.humana.com/is/content/humana/H1036306000SB27pdf,5,This plan does not have a deductible.
+main,H1036-306-0,P_vision,,●,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,82,$0
+main,H1036-306-0,P_vision,,●,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,82,Routine Eye Exam including refraction (1 per calendar year)
+main,H1036-306-0,P_vision,,●,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,83,Any retail amount over $150 toward the purchase of frame and pair
+main,H1036-306-0,P_vision,,●,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,83,Eyewear Benefit (1 per calendar year) at a Humana Medicare Insight
+main,H1036-306-0,Q_hearing,,●,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,81,Routine hearing exam (1 per year)
+main,H1036-306-0,Q_hearing,,●,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,81,Routine hearing exam (1 per year) $0
+main,H1036-306-0,Q_hearing,,●,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,82,$575 per Level 1 Aid
+main,H1036-306-0,Q_hearing,,●,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,82,$750 per Level 2 Aid
+main,H1036-306-0,Q_hearing,,●,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,82,Up to 2 prescription hearing aids every year (1 per ear per year).
 main,H1036-306-0,R_dental,,●,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,52,*You are covered for Mandatory Supplemental Dental Benefit.
 main,H1036-306-0,R_dental,,●,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,77,"Annual Maximum: $4,000"
 main,H1036-306-0,R_dental,,●,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,78,"Bitewing x-rays – D0270, D0272, D0273, D0274 0%"
@@ -103,6 +121,8 @@ main,H1036-306-0,T_chiropractic,,,https://assets.humana.com/is/content/humana/H1
 main,H1036-306-0,T_chiropractic,,,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,87,Manual manipulation of the spine to correct a subluxation is
 main,H1036-306-0,T_chiropractic,,,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,87,Routine chiropractic care
 main,H1036-306-0,U_naturopath,,,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,86,Naturopath services (uses natural or
+main,H1036-306-0,W_fitness,,●,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,73,In-Network: $0 copayment
+main,H1036-306-0,W_fitness,,●,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,73,SilverSneakers® fitness program
 main,H1036-306-0,X_transportation,,,https://assets.humana.com/is/content/humana/H1036306000SB27pdf,11,Not Covered
 main,H1036-306-0,X_transportation,,,https://assets.humana.com/is/content/humana/H1036306000SB27pdf,11,TRANSPORTATION
 main,H1036-317-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,51,In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance
@@ -142,6 +162,15 @@ main,H1036-317-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/hum
 main,H1036-317-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,63,Other Medicare Part B Drugs 20% coinsurance – PCP's Office – Specialist's Office – Outpatient Hospital
 main,H1036-317-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036317000SB27pdf,11,Allergy shots and serum • PCP's office: $0 copay
 main,H1036-317-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036317000SB27pdf,11,Specialist's office: $0 copay
+main,H1036-317-0,P_vision,,●,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,85,Any retail amount over $150 toward the purchase of frame and pair
+main,H1036-317-0,P_vision,,●,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,85,Eyewear Benefit (1 per calendar year) at a Humana Medicare Insight
+main,H1036-317-0,P_vision,,●,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,85,Routine Eye Exam including refraction (1 per calendar year) by a
+main,H1036-317-0,P_vision,,●,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,85,Your routine exam charge will not exceed $0 at a Humana Medicare Insight Network optical provider.
+main,H1036-317-0,Q_hearing,,●,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,76,All members enrolled on the plan receive $175 monthly allowance
+main,H1036-317-0,Q_hearing,,●,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,76,Hearing aids you can buy without a prescription
+main,H1036-317-0,Q_hearing,,●,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,84,$0 per Level 2 Aid
+main,H1036-317-0,Q_hearing,,●,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,84,Routine hearing exam (1 per year) $0
+main,H1036-317-0,Q_hearing,,●,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,84,Up to 2 prescription hearing aids every year (1 per ear per year)
 main,H1036-317-0,R_dental,,●,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,54,You are covered for Mandatory Supplemental Dental Benefit.
 main,H1036-317-0,R_dental,,●,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,81,"Annual Maximum: $1,000"
 main,H1036-317-0,S_acupuncture,,●,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,50,Routine acupuncture $0 copayment – Specialist's Office
@@ -152,8 +181,12 @@ main,H1036-317-0,T_chiropractic,,,https://assets.humana.com/is/content/humana/H1
 main,H1036-317-0,U_naturopath,,●,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,64,$20 copayment
 main,H1036-317-0,U_naturopath,,●,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,64,Naturopathy
 main,H1036-317-0,U_naturopath,,●,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,64,You are covered for up to 25 visits per calendar year.
+main,H1036-317-0,W_fitness,,●,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,74,In-Network: $0 copayment
+main,H1036-317-0,W_fitness,,●,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,74,SilverSneakers® fitness program
 main,H1036-317-0,X_transportation,,,https://assets.humana.com/is/content/humana/H1036317000SB27pdf,11,Not Covered
 main,H1036-317-0,X_transportation,,,https://assets.humana.com/is/content/humana/H1036317000SB27pdf,11,TRANSPORTATION
+main,H1036-317-0,Y_otc,,●,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,76,All members enrolled on the plan receive $175 monthly allowance
+main,H1036-323-0,AA_opt_packages,,●,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,15,MyOption DEN972: $50.90 additional monthly premium
 main,H1036-323-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,48,20% coinsurance regardless of the number of trips – Air Ambulance Non-Emergency Ambulance
 main,H1036-323-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,48,20% coinsurance regardless of the number of trips – Air Ambulance Out-of-Network:
 main,H1036-323-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,48,In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance
@@ -192,6 +225,15 @@ main,H1036-323-0,O_medical_deductible,,$700 some,https://assets.humana.com/is/co
 main,H1036-323-0,O_medical_deductible,,$700 some,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,43,Your deductible is $700.
 main,H1036-323-0,O_medical_deductible,,$700 some,https://assets.humana.com/is/content/humana/H1036323000SB27pdf,4,Medical deductible $700 in-network deductible
 main,H1036-323-0,O_medical_deductible,,$700 some,https://assets.humana.com/is/content/humana/H1036323000SB27pdf,4,The following services listed are excluded from the in-network
+main,H1036-323-0,P_vision,,●,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,79,Eyewear Benefit (1 per calendar year) at a Humana Medicare Insight
+main,H1036-323-0,P_vision,,●,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,79,Routine Eye Exam including refraction (1 per calendar year) by a
+main,H1036-323-0,P_vision,,●,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,79,Your routine exam charge will not exceed $0 at a Humana Medicare Insight Network optical provider.
+main,H1036-323-0,P_vision,,●,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,79,– Any retail amount over $150 toward the purchase of frame and pair
+main,H1036-323-0,Q_hearing,,●,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,78,$0
+main,H1036-323-0,Q_hearing,,●,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,78,$575 per Level 1 Aid
+main,H1036-323-0,Q_hearing,,●,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,78,$750 per Level 2 Aid
+main,H1036-323-0,Q_hearing,,●,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,78,Routine hearing exam (1 per year)
+main,H1036-323-0,Q_hearing,,●,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,78,Up to 2 prescription hearing aids every year (1 per ear per year).
 main,H1036-323-0,R_dental,,●,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,51,"In addition, we cover Mandatory Supplemental Dental Benefits which include preventive and diagnostic services."
 main,H1036-323-0,R_dental,,●,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,76,Periodic oral exam – D0120 0%
 main,H1036-323-0,R_dental,,●,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,76,Periodontal maintenance following periodontal therapy – D4910 0%
@@ -204,6 +246,7 @@ main,H1036-323-0,T_chiropractic,,,https://assets.humana.com/is/content/humana/H1
 main,H1036-323-0,T_chiropractic,,,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,94,Manual manipulation of the spine to correct a subluxation is
 main,H1036-323-0,T_chiropractic,,,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,94,Routine chiropractic care
 main,H1036-323-0,U_naturopath,,,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,93,Naturopath services (uses natural or
+main,H1036-323-0,W_fitness,,●,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,71,In-Network: $0 copayment
 main,H1036-323-0,X_transportation,,,https://assets.humana.com/is/content/humana/H1036323000SB27pdf,10,Not Covered
 main,H1036-323-0,X_transportation,,,https://assets.humana.com/is/content/humana/H1036323000SB27pdf,10,TRANSPORTATION
 main,H1036-323-0,Z_part_b_reduction,,$56,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,14,Humana will pay up to $56 of your Medicare Part B premium
@@ -235,14 +278,29 @@ main,H1372-003-0,M_part_b_drugs,,0%-20%,https://agerightadvantage.com/wp-content
 main,H1372-003-0,M_part_b_drugs,,0%-20%,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,74,Medicare-covered Part B
 main,H1372-003-0,M_part_b_drugs,,0%-20%,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,75,All Other Medicare- covered Part B Drugs: 0%-20% coinsurance
 main,H1372-003-0,O_medical_deductible,,$0,https://agerightadvantage.com/wp-content/uploads/2026/09/H1372_003_0_SB_v07.pdf,1,This plan does not have a medical deductible.
+main,H1372-003-0,P_vision,,●,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,102,"Eyewear (or other vision hardware) $330 every year for lenses,"
+main,H1372-003-0,P_vision,,●,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,102,Limit 1 visit every year
+main,H1372-003-0,P_vision,,●,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,102,Routine eye exam $0 copayment
+main,H1372-003-0,Q_hearing,,●,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,65,$0 copayment Limit 1 visit every year
+main,H1372-003-0,Q_hearing,,●,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,65,"$1,600 every 2 years for both ears combined"
+main,H1372-003-0,Q_hearing,,●,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,65,Prescription hearing aids
+main,H1372-003-0,Q_hearing,,●,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,65,Routine hearing exam
 main,H1372-003-0,R_dental,,●,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,57,"Maximum: $1,000 for preventive services and comprehensive services"
 main,H1372-003-0,R_dental,,●,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,58,Comprehensive dental services
 main,H1372-003-0,S_acupuncture,,●,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,52,Limited to 12 visits every year
 main,H1372-003-0,T_chiropractic,,●,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,55,$25 copayment
 main,H1372-003-0,T_chiropractic,,●,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,55,Limit 12 visits every year
 main,H1372-003-0,U_naturopath,,,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,104,Naturopath services (uses natural
+main,H1372-003-0,W_fitness,,●,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,63,Included as part of your Healthy Living Allowance.
+main,H1372-003-0,W_fitness,,●,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,63,Members may apply allowance towards online fitness classes and gym membership.
+main,H1372-003-0,W_fitness,,●,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,64,$65 every month
+main,H1372-003-0,W_fitness,,●,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,64,Fitness
 main,H1372-003-0,X_transportation,,●,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,100,$0 copayment
 main,H1372-003-0,X_transportation,,●,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,100,Limit 12 one-way trips every year
+main,H1372-003-0,Y_otc,,●,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,64,$65 every month
+main,H1372-003-0,Y_otc,,●,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,64,Over-The-Counter (OTC) items
+main,H1372-003-0,Y_otc,,●,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,86,Included as part of your Healthy Living Allowance.
+main,H1372-003-0,Y_otc,,●,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,86,Members may apply allowance funds towards the purchase of
 main,H2001-045-0,AB_ambulance,1,20%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,59,$0 copayment or 20% coinsurance or each one-way Medicare-covered air trip
 main,H2001-045-0,AB_ambulance,1,20%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,59,$0 copayment or 20% coinsurance or each one-way Medicare-covered ground trip
 main,H2001-045-0,AB_ambulance,2,not covered,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,59,ambulance transportation is not covered under any circumstances
@@ -271,6 +329,13 @@ main,H2001-045-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphad
 main,H2001-045-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,82,$0 copayment or Medicare-covered Part B allergy antigens. Depending on your
 main,H2001-045-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,82,"Depending on your level o Medicaid eligibility, $0 copayment or 20% coinsurance or each Medicare-covered chemotherapy drug and the administration o that drug."
 main,H2001-045-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,83,"Depending on your level o Medicaid eligibility, $0 copayment or 20% coinsurance or all other Medicare- covered Part B drugs."
+main,H2001-045-0,P_vision,,●,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,115,We cover 1 in or out-o -network routine eye exam every year.
+main,H2001-045-0,P_vision,,●,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,116,$0 copayment or 1 pair o eyeglasses (lenses/ rames) or contact lenses with a retail value o up to $200.
+main,H2001-045-0,P_vision,,●,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,116,1 pair o standard lenses and rames every year
+main,H2001-045-0,Q_hearing,,●,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,71,"Hearing aid allowance is $2,200"
+main,H2001-045-0,Q_hearing,,●,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,71,Hearing services - routine hearing exam $0 copayment
+main,H2001-045-0,Q_hearing,,●,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,71,We cover 1 in or out-o -network hearing exam every year.
+main,H2001-045-0,Q_hearing,,●,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,72,This bene it is limited to 2 hearing aids every 2 years.
 main,H2001-045-0,R_dental,,●,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,118,$0 copay on all covered dental services up to the plan’s annual dental maximum amount.
 main,H2001-045-0,R_dental,,●,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,118,"Annual dental maximum: $2,000"
 main,H2001-045-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,124,Available or people with chronic low back
@@ -279,9 +344,11 @@ main,H2001-045-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/UHOR
 main,H2001-045-0,T_chiropractic,,,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,123,Chiropractic services (Medicare-covered)
 main,H2001-045-0,T_chiropractic,,,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,63,"Depending on your level o Medicaid eligibility, $0 copayment or 20% coinsurance or each Medicare-covered visit."
 main,H2001-045-0,U_naturopath,,,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,124,Naturopath services (uses natural or alternative
+main,H2001-045-0,W_fitness,,●,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,70,Fitness program $0 copayment
 main,H2001-045-0,X_transportation,,●,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,112,$0 copayment
 main,H2001-045-0,X_transportation,,●,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,112,Routine transportation
 main,H2001-045-0,X_transportation,,●,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,112,"Up to 24 one-way trips, combined in and out-o -network, are covered each year"
+main,H2001-045-0,Y_otc,,●,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,97,Monthly credit is $196
 main,H2056-003-0,AB_ambulance,1,$295 or 20%,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,40,$295 copay for each Medicare‑covered
 main,H2056-003-0,AB_ambulance,1,$295 or 20%,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,40,20% coinsurance for each
 main,H2056-003-0,AB_ambulance,2,$295,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,47,$295 copay for one‑way emergency
@@ -315,6 +382,16 @@ main,H2056-003-0,O_medical_deductible,,$750 some,https://www.aetna.com/medicare/
 main,H2056-003-0,O_medical_deductible,,$750 some,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,7,$750 for certain in‑network services except for
 main,H2056-003-0,O_medical_deductible,,$750 some,https://www.aetna.com/medicare/documents/individual/2027/sb/en/Y0001_H2056_003_HR01_SB2027_M.pdf,2,$750 for certain in‑network services.
 main,H2056-003-0,O_medical_deductible,,$750 some,https://www.aetna.com/medicare/documents/individual/2027/sb/en/Y0001_H2056_003_HR01_SB2027_M.pdf,2,The plan deductible applies to the following services provided by an in‑network provider:
+main,H2056-003-0,P_vision,,●,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,70,$0 copay for each follow‑up diabetic eye
+main,H2056-003-0,P_vision,,●,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,71,$0 copay for one non‑Medicare covered
+main,H2056-003-0,P_vision,,●,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,71,refraction: one exam every year
+main,H2056-003-0,P_vision,,●,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,72,Contact lenses: $0 copay
+main,H2056-003-0,P_vision,,●,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,72,Eyeglass frames: $0 copay
+main,H2056-003-0,P_vision,,●,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,72,Eyeglass lenses: $0 copay
+main,H2056-003-0,P_vision,,●,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,72,of $100 every year for prescription eyewear including
+main,H2056-003-0,Q_hearing,,●,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,49,$0 copay for each non‑Medicare covered hearing aid fitting/evaluation.
+main,H2056-003-0,Q_hearing,,●,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,49,"$0 copay per ear, per year (two hearing aids every year)."
+main,H2056-003-0,Q_hearing,,●,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,49,"(allowance) of $500 per ear, every year."
 main,H2056-003-0,R_dental,,●,https://www.aetna.com/medicare/documents/individual/2027/sb/en/Y0001_H2056_003_HR01_SB2027_M.pdf,4,Dental services (non‑Medicare covered)      $0 copay for preventive services
 main,H2056-003-0,S_acupuncture,,,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,39,$65 copay for each Medicare‑covered
 main,H2056-003-0,S_acupuncture,,,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,76,Available for people with chronic low back pain under certain
@@ -322,6 +399,7 @@ main,H2056-003-0,T_chiropractic,,,https://www.aetna.com/medicare/documents/indiv
 main,H2056-003-0,T_chiropractic,,,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,78,Manual manipulation of the spine to correct a subluxation (when
 main,H2056-003-0,U_naturopath,,,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,77,Naturopath services (uses
 main,H2056-003-0,V_massage,,,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,78,Therapeutic Massage
+main,H2056-003-0,W_fitness,,●,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,47,$0 copay for the fitness benefit
 main,H2056-003-0,X_transportation,,,https://www.aetna.com/medicare/documents/individual/2027/sb/en/Y0001_H2056_003_HR01_SB2027_M.pdf,6,"Routine, non‑emergency transportation"
 main,H2056-018-0,AB_ambulance,1,$245 or 20%,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,31,$245 copay for each Medicare‑covered
 main,H2056-018-0,AB_ambulance,1,$245 or 20%,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,31,20% coinsurance for each
@@ -355,6 +433,14 @@ main,H2056-018-0,M_part_b_drugs,,0%-20%,https://www.aetna.com/medicare/documents
 main,H2056-018-0,M_part_b_drugs,,0%-20%,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,51,20% coinsurance for all other drugs
 main,H2056-018-0,M_part_b_drugs,,0%-20%,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,51,20% coinsurance for chemotherapy drugs.
 main,H2056-018-0,O_medical_deductible,,$0,https://www.aetna.com/medicare/documents/individual/2027/sb/en/Y0001_H2056_018_NS45_SB2027_M.pdf,2,Plan deductible $0
+main,H2056-018-0,P_vision,,●,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,62,Contact lenses: $0 copay
+main,H2056-018-0,P_vision,,●,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,62,Eyeglass frames: $0 copay
+main,H2056-018-0,P_vision,,●,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,62,Eyeglass lenses: $0 copay
+main,H2056-018-0,P_vision,,●,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,62,of $200 every year for prescription eyewear including:
+main,H2056-018-0,Q_hearing,,●,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,40,$0 copay for each non‑Medicare covered routine hearing exam.
+main,H2056-018-0,Q_hearing,,●,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,40,"$0 copay per ear, per year (two hearing aids every year)."
+main,H2056-018-0,Q_hearing,,●,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,40,"(allowance) of $1,000 per ear, every year."
+main,H2056-018-0,Q_hearing,,●,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,40,Routine hearing exams: one exam every year
 main,H2056-018-0,R_dental,,●,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,36,"You get an annual benefit amount (allowance) of $1,500 for covered comprehensive dental services."
 main,H2056-018-0,S_acupuncture,,,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,29,$40 copay for each Medicare‑covered
 main,H2056-018-0,S_acupuncture,,,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,74,Available for people with chronic low back pain under certain
@@ -362,8 +448,10 @@ main,H2056-018-0,T_chiropractic,,,https://www.aetna.com/medicare/documents/indiv
 main,H2056-018-0,T_chiropractic,,,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,75,Manual manipulation of the spine to correct a subluxation (when
 main,H2056-018-0,U_naturopath,,,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,74,Naturopath services (uses
 main,H2056-018-0,V_massage,,,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,76,Therapeutic Massage
+main,H2056-018-0,W_fitness,,●,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,39,$0 copay for the fitness benefit when you
 main,H2056-018-0,X_transportation,,,https://www.aetna.com/medicare/documents/individual/2027/sb/en/Y0001_H2056_018_NS45_SB2027_M.pdf,6,Not Covered
 main,H2056-018-0,X_transportation,,,https://www.aetna.com/medicare/documents/individual/2027/sb/en/Y0001_H2056_018_NS45_SB2027_M.pdf,6,"Routine, non‑emergency transportation"
+main,H2056-018-0,Y_otc,,●,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,35,You get a CVS Over‑the‑Counter (OTC) Wallet with a $45 quarterly benefit amount (allowance)
 main,H2056-018-0,Z_part_b_reduction,,$50,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,7,"In 2027, we will reduce the Part B premium that you pay to the Social Security Administration by $50 per"
 main,H2406-042-0,AB_ambulance,1,$290,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,52,$290 copayment or each one-way Medicare- covered air trip.
 main,H2406-042-0,AB_ambulance,1,$290,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,52,$290 copayment or each one-way Medicare- covered ground trip (in-network).
@@ -398,6 +486,13 @@ main,H2406-042-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphad
 main,H2406-042-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,74,20% coinsurance or each Medicare- covered chemotherapy drug and the administration
 main,H2406-042-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,75,20% coinsurance or all other Medicare- covered Part B drugs.
 main,H2406-042-0,O_medical_deductible,,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0412614_000,2,This plan does not have a medical deductible.
+main,H2406-042-0,P_vision,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,103,$0 copayment or 1 pair o eyeglasses (lenses/ rames) or contact lenses with a retail value o up to $200.
+main,H2406-042-0,P_vision,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,103,1 pair o standard lenses and rames every 2 years
+main,H2406-042-0,P_vision,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,103,We cover 1 in or out-o -network routine eye exam every year.
+main,H2406-042-0,Q_hearing,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,63,Hearing services - routine hearing exam $0 copayment
+main,H2406-042-0,Q_hearing,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,64,Hearing aid allowance is $700
+main,H2406-042-0,Q_hearing,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,64,This bene it is limited to 2 hearing aids every
+main,H2406-042-0,Q_hearing,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,64,We cover 1 in or out-o -network hearing exam
 main,H2406-042-0,R_dental,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,106,"$0 copay or covered preventive and diagnostic dental care such as exams, routine"
 main,H2406-042-0,R_dental,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,106,"A 50% coinsurance on all covered comprehensive services such as illings, crowns,"
 main,H2406-042-0,R_dental,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,59,You are covered or routine dental bene its.
@@ -406,6 +501,8 @@ main,H2406-042-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/AAOR
 main,H2406-042-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,51,more than 20 acupuncture treatments may be administered annually
 main,H2406-042-0,T_chiropractic,,,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,55,$15 copayment or
 main,H2406-042-0,U_naturopath,,,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,112,Naturopath services (uses natural or alternative
+main,H2406-042-0,W_fitness,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,63,Fitness program $0 copayment
+main,H2406-070-0,AA_opt_packages,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,111,It is offered to you for a monthly premium of $54.
 main,H2406-070-0,AB_ambulance,1,$350,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,52,$350 copayment or each one-way Medicare- covered air trip.
 main,H2406-070-0,AB_ambulance,1,$350,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,52,$350 copayment or each one-way Medicare- covered ground trip (in-network).
 main,H2406-070-0,AB_ambulance,2,not covered,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,52,"Outside o the United States or its territories, ambulance transportation is not covered under any circumstances."
@@ -441,6 +538,12 @@ main,H2406-070-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphad
 main,H2406-070-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,74,20% coinsurance or all other Medicare- covered Part B drugs.
 main,H2406-070-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,74,20% coinsurance or each Medicare- covered chemotherapy drug and the administration o that drug.
 main,H2406-070-0,O_medical_deductible,,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0412631_000,2,This plan does not have a medical deductible.
+main,H2406-070-0,P_vision,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,102,$0 copayment $90 copay*
+main,H2406-070-0,P_vision,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,102,We cover 1 in or out-o -network routine eye exam every year.
+main,H2406-070-0,Q_hearing,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,63,Hearing aid allowance is $700
+main,H2406-070-0,Q_hearing,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,63,Hearing services - routine hearing exam $0 copayment
+main,H2406-070-0,Q_hearing,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,63,This bene it is limited to 2 hearing aids every year.
+main,H2406-070-0,Q_hearing,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,63,We cover 1 in or out-o -network hearing exam every year.
 main,H2406-070-0,R_dental,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,104,"This dental plan o ers both in-network and out-o -network dental coverage, and all"
 main,H2406-070-0,R_dental,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,104,covered services have a $0 copayment.
 main,H2406-070-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,50,Acupuncture for chronic low back pain
@@ -481,6 +584,15 @@ main,H2406-073-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphad
 main,H2406-073-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,63,20% coinsurance or all other Medicare- covered Part B drugs.
 main,H2406-073-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,63,20% coinsurance or each Medicare- covered chemotherapy drug and the administration o that drug.
 main,H2406-073-0,O_medical_deductible,,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0412634_000,2,This plan does not have a medical deductible.
+main,H2406-073-0,P_vision,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,92,$0 copayment or 1 pair o eyeglasses (lenses/ rames) or contact lenses with a retail value o up to $250.
+main,H2406-073-0,P_vision,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,92,1 pair o standard lenses and rames every 2 years
+main,H2406-073-0,P_vision,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,92,We cover 1 in or out-o -network routine eye exam every year.
+main,H2406-073-0,P_vision,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,92,surgery. $0 copayment
+main,H2406-073-0,Q_hearing,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,53,$0 copayment
+main,H2406-073-0,Q_hearing,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,53,Hearing aid allowance is $700
+main,H2406-073-0,Q_hearing,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,53,Hearing services - routine hearing exam
+main,H2406-073-0,Q_hearing,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,53,We cover 1 in or out-o -network hearing exam
+main,H2406-073-0,Q_hearing,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,53,limited to 2 hearing aids every
 main,H2406-073-0,R_dental,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,95,$0 copay or covered preventive and diagnostic dental care
 main,H2406-073-0,R_dental,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,95,A 50% coinsurance on all covered comprehensive services
 main,H2406-073-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,101,Acupuncture (Medicare-covered)
@@ -490,6 +602,8 @@ main,H2406-073-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/AAOR
 main,H2406-073-0,T_chiropractic,,,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,100,Chiropractic services (Medicare-covered)
 main,H2406-073-0,T_chiropractic,,,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,45,$15 copayment or
 main,H2406-073-0,U_naturopath,,,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,101,Naturopath services (uses natural or alternative
+main,H2406-073-0,W_fitness,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,52,Fitness program $0 copayment
+main,H2406-073-0,Y_otc,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,76,Quarterly credit is $50
 main,H2406-073-0,Z_part_b_reduction,,$170,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,11,$170 reduction o your monthly Medicare Part B premium
 main,H2923-001-0,AB_ambulance,1,$0-$315 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,54,Air Ambulance 20% coinsurance per one-way trip
 main,H2923-001-0,AB_ambulance,1,$0-$315 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,54,Ground Ambulance $315 copay per one-way trip
@@ -534,6 +648,12 @@ main,H2923-001-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-document
 main,H2923-001-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,83,Chemotherapy Drugs: 20% coinsurance at: A PCP's office A specialist's office In the home An outpatient hospital setting
 main,H2923-001-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,83,Chemotherapy Drugs: 20% coinsurance at: A PCP's office A specialist's office In the home An outpatient hospital setting An Ambulatory Surgical Center (ASC)
 main,H2923-001-0,O_medical_deductible,,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-SB-H2923-001-ENG.pdf,4,This plan does not have a medical deductible.
+main,H2923-001-0,P_vision,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,110,Routine eye exam $0 copay
+main,H2923-001-0,P_vision,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,110,"You are covered for 1 routine vision exam (including refraction, if needed) each year."
+main,H2923-001-0,P_vision,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,110,Your plan pays up to $400 per year
+main,H2923-001-0,Q_hearing,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,74,$399 copay per ear for Advanced hearing aid
+main,H2923-001-0,Q_hearing,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,74,$699 copay per ear for Premium hearing aid
+main,H2923-001-0,Q_hearing,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,74,You are covered for 1 routine hearing exam each year.
 main,H2923-001-0,R_dental,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,112,What you pay: 0% coinsurance
 main,H2923-001-0,R_dental,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,114,What you pay: 50% coinsurance
 main,H2923-001-0,R_dental,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,61,"You have a $1,750 yearly allowance toward Preventive"
@@ -543,8 +663,12 @@ main,H2923-001-0,T_chiropractic,,●,https://assets.devoted.com/plan-documents/2
 main,H2923-001-0,T_chiropractic,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,58,You are covered for up to 12 visits
 main,H2923-001-0,U_naturopath,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,61,"You have a $1,750 yearly allowance"
 main,H2923-001-0,V_massage,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,61,"You have a $1,750 yearly allowance"
+main,H2923-001-0,W_fitness,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,69,$0 membership
+main,H2923-001-0,W_fitness,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,69,"There is no coinsurance, copayment, or deductible for covered gym membership."
+main,H2923-001-0,W_fitness,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,70,Devoted Health will reimburse you up to $150 per year for participation in or purchase of one or more of the following:
 main,H2923-001-0,X_transportation,,,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-SB-H2923-001-ENG.pdf,7,Not covered
 main,H2923-001-0,X_transportation,,,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-SB-H2923-001-ENG.pdf,7,Transportation
+main,H2923-001-0,Y_otc,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,93,You get a $40 per quarter allowance to spend on
 main,H2923-005-0,AB_ambulance,1,$0-$315 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,55,Air Ambulance 20% coinsurance per one-way trip
 main,H2923-005-0,AB_ambulance,1,$0-$315 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,55,Ground Ambulance $315 copay per one-way trip
 main,H2923-005-0,AB_ambulance,1,$0-$315 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,55,You pay $0 copay for facility-to-
@@ -583,6 +707,11 @@ main,H2923-005-0,O_medical_deductible,,$200 some,https://assets.devoted.com/plan
 main,H2923-005-0,O_medical_deductible,,$200 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,49,Your deductible is $200.
 main,H2923-005-0,O_medical_deductible,,$200 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-SB-H2923-005-ENG.pdf,4,Medical Deductible $200
 main,H2923-005-0,O_medical_deductible,,$200 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-SB-H2923-005-ENG.pdf,4,"covered preventive services, and some Medicare-covered services."
+main,H2923-005-0,P_vision,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,108,Routine eye exam $0 copay
+main,H2923-005-0,P_vision,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,108,You are covered for 1 routine
+main,H2923-005-0,P_vision,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,109,Your plan pays up to $400 per year
+main,H2923-005-0,Q_hearing,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,76,$399 copay per ear for Advanced hearing aid
+main,H2923-005-0,Q_hearing,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,76,$699 copay per ear for Premium hearing aid
 main,H2923-005-0,R_dental,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,110,What you pay: 0% coinsurance
 main,H2923-005-0,R_dental,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,112,What you pay: 50% coinsurance
 main,H2923-005-0,R_dental,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,62,"You have a $1,500 yearly allowance toward Preventive"
@@ -592,7 +721,10 @@ main,H2923-005-0,T_chiropractic,,●,https://assets.devoted.com/plan-documents/2
 main,H2923-005-0,T_chiropractic,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,59,You are covered for 12 visits per year for routine
 main,H2923-005-0,U_naturopath,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,62,"You can be reimbursed up to $1,500 per year for covered dental services, Therapeutic Massage, Routine Acupuncture, and/or Naturopath Services."
 main,H2923-005-0,V_massage,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,62,"You can be reimbursed up to $1,500 per year for covered dental services, Therapeutic Massage, Routine Acupuncture, and/or Naturopath Services."
+main,H2923-005-0,W_fitness,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,70,$0 membership
+main,H2923-005-0,W_fitness,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,71,Devoted Health will reimburse you up to $150 per year
 main,H2923-005-0,X_transportation,,,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-SB-H2923-005-ENG.pdf,8,Transportation Not covered
+main,H2923-005-0,Y_otc,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,95,You get a $40 per quarter allowance
 main,H2923-009-0,AB_ambulance,1,50%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,58,Air Ambulance 50% coinsurance per one-way trip
 main,H2923-009-0,AB_ambulance,1,50%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,58,Ground Ambulance 50% coinsurance per one-way trip
 main,H2923-009-0,AB_ambulance,2,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,59,Air Ambulance: $0 copay per one-way trip
@@ -623,6 +755,12 @@ main,H2923-009-0,O_medical_deductible,,$990 some,https://assets.devoted.com/plan
 main,H2923-009-0,O_medical_deductible,,$990 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,51,Your deductible is $990.
 main,H2923-009-0,O_medical_deductible,,$990 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-SB-H2923-009-ENG.pdf,4,$990
 main,H2923-009-0,O_medical_deductible,,$990 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-SB-H2923-009-ENG.pdf,4,The deductible does not apply to Medicare Part B-covered
+main,H2923-009-0,P_vision,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,112,Routine eye exam $0 copay
+main,H2923-009-0,P_vision,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,112,"You are covered for 1 routine vision exam (including refraction, if needed) each year."
+main,H2923-009-0,P_vision,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,112,Your plan pays up to $300 per year
+main,H2923-009-0,Q_hearing,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,76,$399 copay per ear for Advanced
+main,H2923-009-0,Q_hearing,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,76,$699 copay per ear for Premium
+main,H2923-009-0,Q_hearing,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,76,You are covered for 1 routine hearing exam each year.
 main,H2923-009-0,R_dental,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,113,"Devoted Health will pay as much as $3,000 per year for covered dental services listed below."
 main,H2923-009-0,R_dental,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,114,What you pay: 0% coinsurance
 main,H2923-009-0,R_dental,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,116,What you pay: 0% coinsurance
@@ -634,8 +772,12 @@ main,H2923-009-0,U_naturopath,,●,https://assets.devoted.com/plan-documents/202
 main,H2923-009-0,U_naturopath,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,71,Naturopathy:
 main,H2923-009-0,V_massage,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,71,Devoted Health Wellness Bucks $150 per year
 main,H2923-009-0,V_massage,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,71,Therapeutic Massage services:
+main,H2923-009-0,W_fitness,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,70,$0 membership
+main,H2923-009-0,W_fitness,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,73,Devoted Health will reimburse you up to $150 per year towards your cost for any of the above programs
+main,H2923-009-0,W_fitness,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,73,There are no network restrictions to use this benefit.
 main,H2923-009-0,X_transportation,,,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-SB-H2923-009-ENG.pdf,8,Not covered
 main,H2923-009-0,X_transportation,,,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-SB-H2923-009-ENG.pdf,8,Transportation
+main,H2923-009-0,Y_otc,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,95,You get a $50 per quarter allowance to spend on
 main,H2923-019-0,AB_ambulance,1,$0-$330 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,57,Ground Ambulance $330 copay per one-way trip
 main,H2923-019-0,AB_ambulance,1,$0-$330 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,57,You pay $0 copay for facility-to-
 main,H2923-019-0,AB_ambulance,1,$0-$330 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,58,Air Ambulance 20% coinsurance per one-way trip
@@ -684,6 +826,14 @@ main,H2923-019-0,O_medical_deductible,,$150 some,https://assets.devoted.com/plan
 main,H2923-019-0,O_medical_deductible,,$150 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,52,Your deductible is $150.
 main,H2923-019-0,O_medical_deductible,,$150 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-SB-H2923-019-ENG.pdf,4,$150
 main,H2923-019-0,O_medical_deductible,,$150 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-SB-H2923-019-ENG.pdf,4,"For a list of services for which the deductible applies, see"
+main,H2923-019-0,P_vision,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,110,Routine eye exam $0 copay
+main,H2923-019-0,P_vision,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,110,"You are covered for 1 routine vision exam (including refraction, if needed) each year."
+main,H2923-019-0,P_vision,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,110,Your plan pays up to $400 per year
+main,H2923-019-0,Q_hearing,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,77,$599 copay per ear for Advanced
+main,H2923-019-0,Q_hearing,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,77,$899 copay per ear for Premium
+main,H2923-019-0,Q_hearing,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,77,Hearing aid fitting $0 copay
+main,H2923-019-0,Q_hearing,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,77,Routine hearing exam $0 copay
+main,H2923-019-0,Q_hearing,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,77,You are covered for 1 routine hearing exam each year.
 main,H2923-019-0,R_dental,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,112,What you pay: 0% coinsurance
 main,H2923-019-0,R_dental,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,64,"You have a $2,000 yearly allowance toward Preventive"
 main,H2923-019-0,R_dental,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,64,You will be reimbursed 50% for your out-of-pocket
@@ -698,7 +848,11 @@ main,H2923-019-0,U_naturopath,,●,https://assets.devoted.com/plan-documents/202
 main,H2923-019-0,U_naturopath,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,65,You will be reimbursed for 50% for your out-of-pocket
 main,H2923-019-0,V_massage,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,64,"You have a $2,000 yearly allowance toward Preventive"
 main,H2923-019-0,V_massage,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,65,You will be reimbursed for 50% for your out-of-pocket
+main,H2923-019-0,W_fitness,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,72,$0 membership
+main,H2923-019-0,W_fitness,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,72,Devoted Health covers the full cost of this benefit.
+main,H2923-019-0,W_fitness,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,73,Devoted Health will reimburse you up to $150 per year for participation in or purchase of one or more of the following:
 main,H2923-019-0,X_transportation,,,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-SB-H2923-019-ENG.pdf,8,Transportation Not covered
+main,H2923-019-0,Y_otc,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,97,You get a $106 per quarter allowance to spend
 main,H2923-019-0,Z_part_b_reduction,,$90,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,16,Devoted Health will reduce your monthly Medicare Part B Premium by $90.
 main,H2923-025-0,AB_ambulance,1,$0-$330 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,55,Air Ambulance 20% coinsurance per one-way trip
 main,H2923-025-0,AB_ambulance,1,$0-$330 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,55,Ground Ambulance $330 copay per one-way trip
@@ -750,6 +904,12 @@ main,H2923-025-0,O_medical_deductible,,$150 some,https://assets.devoted.com/plan
 main,H2923-025-0,O_medical_deductible,,$150 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,49,Your deductible is $150.
 main,H2923-025-0,O_medical_deductible,,$150 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-SB-H2923-025-ENG.pdf,4,$150
 main,H2923-025-0,O_medical_deductible,,$150 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-SB-H2923-025-ENG.pdf,4,"For a list of services for which the deductible applies, see"
+main,H2923-025-0,P_vision,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,108,Routine eye exam $0 copay
+main,H2923-025-0,P_vision,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,108,You are covered for 1 routine
+main,H2923-025-0,P_vision,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,109,Your plan pays up to $400 per year
+main,H2923-025-0,Q_hearing,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,76,$599 copay per ear for Advanced
+main,H2923-025-0,Q_hearing,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,76,$899 copay per ear for Premium
+main,H2923-025-0,Q_hearing,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,76,You are covered for 1 routine hearing exam each year.
 main,H2923-025-0,R_dental,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,62,"You have a $2,000 yearly allowance toward Preventive"
 main,H2923-025-0,R_dental,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,62,"can see any licensed dentist, licensed massage"
 main,H2923-025-0,S_acupuncture,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,62,"You have a $2,000 yearly allowance toward Preventive"
@@ -759,8 +919,11 @@ main,H2923-025-0,T_chiropractic,,,https://assets.devoted.com/plan-documents/2027
 main,H2923-025-0,T_chiropractic,,,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,59,$15 copay
 main,H2923-025-0,U_naturopath,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,62,"You have a $2,000 yearly allowance toward Preventive"
 main,H2923-025-0,V_massage,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,62,"You have a $2,000 yearly allowance toward Preventive"
+main,H2923-025-0,W_fitness,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,70,SilverSneakers® Membership $0 membership
+main,H2923-025-0,W_fitness,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,71,Devoted Health will reimburse you up to $150 per year for participation in or purchase of one or more of the following
 main,H2923-025-0,X_transportation,,,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-SB-H2923-025-ENG.pdf,8,Not covered
 main,H2923-025-0,X_transportation,,,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-SB-H2923-025-ENG.pdf,8,Transportation
+main,H2923-025-0,Y_otc,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,95,You get a $109 per quarter allowance to spend
 main,H2923-025-0,Z_part_b_reduction,,$70,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,13,Devoted Health will reduce your monthly Medicare Part B Premium by $70
 main,H2923-028-3,AB_ambulance,1,$0-$345 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,55,Air Ambulance 20% coinsurance per one-way trip
 main,H2923-028-3,AB_ambulance,1,$0-$345 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,55,Ground Ambulance $345 copay per one-way trip
@@ -800,6 +963,12 @@ main,H2923-028-3,O_medical_deductible,,$200 some,https://assets.devoted.com/plan
 main,H2923-028-3,O_medical_deductible,,$200 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-SB-H2923-028-003-ENG.pdf,4,$200
 main,H2923-028-3,O_medical_deductible,,$200 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-SB-H2923-028-003-ENG.pdf,4,"For a list of services for which the deductible applies, see"
 main,H2923-028-3,O_medical_deductible,,$200 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-SB-H2923-028-003-ENG.pdf,4,The deductible does not apply to Medicare Part B-covered
+main,H2923-028-3,P_vision,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,105,Routine eye exam $0 copay
+main,H2923-028-3,P_vision,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,105,You are covered for 1 routine
+main,H2923-028-3,P_vision,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,105,Your plan pays up to $200 per year
+main,H2923-028-3,Q_hearing,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,74,$599 copay per ear for Advanced
+main,H2923-028-3,Q_hearing,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,74,$899 copay per ear for Premium
+main,H2923-028-3,Q_hearing,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,74,You are covered for 1 routine hearing exam each year.
 main,H2923-028-3,R_dental,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,107,What you pay: 0% coinsurance
 main,H2923-028-3,R_dental,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,109,What you pay: 0% coinsurance
 main,H2923-028-3,R_dental,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,61,You have a $250 yearly allowance toward Preventive
@@ -809,9 +978,13 @@ main,H2923-028-3,T_chiropractic,,,https://assets.devoted.com/plan-documents/2027
 main,H2923-028-3,T_chiropractic,,,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,59,$15 copay
 main,H2923-028-3,U_naturopath,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,61,"You have a $250 yearly allowance toward Preventive Dental and Comprehensive Dental services, therapeutic massage, routine acupuncture, and/or naturopath services combined."
 main,H2923-028-3,V_massage,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,61,"You have a $250 yearly allowance toward Preventive Dental and Comprehensive Dental services, therapeutic massage, routine acupuncture, and/or naturopath services combined."
+main,H2923-028-3,W_fitness,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,69,$0 membership
+main,H2923-028-3,W_fitness,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,70,Devoted Health will reimburse you up to $150 per year
 main,H2923-028-3,X_transportation,,,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-SB-H2923-028-003-ENG.pdf,8,Not covered
 main,H2923-028-3,X_transportation,,,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-SB-H2923-028-003-ENG.pdf,8,Transportation
 main,H2923-028-3,Z_part_b_reduction,,$154.20,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,13,Devoted Health will reduce your monthly Medicare Part B Premium by $154.20
+main,H3805-040-0,AA_opt_packages,,●,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,102,It is offered to you for a monthly premium of $54.
+main,H3805-040-0,AA_opt_packages,,●,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,102,The Platinum Dental Rider is an optional supplemental bene it package
 main,H3805-040-0,AB_ambulance,1,$400,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,52,$400 copayment or each one-way Medicare- covered air trip.
 main,H3805-040-0,AB_ambulance,1,$400,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,52,$400 copayment or each one-way Medicare- covered ground trip.
 main,H3805-040-0,AB_ambulance,2,not covered,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,52,ambulance transportation is not covered under
@@ -841,6 +1014,10 @@ main,H3805-040-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphad
 main,H3805-040-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,70,20% coinsurance or all other Medicare-
 main,H3805-040-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,70,20% coinsurance or each Medicare-covered chemotherapy drug and the administration o that drug.
 main,H3805-040-0,O_medical_deductible,,$0,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0412772_000,2,This plan does not have a medical deductible.
+main,H3805-040-0,P_vision,,●,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,94,$0 copayment
+main,H3805-040-0,P_vision,,●,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,94,We cover 1 routine eye exam every year.
+main,H3805-040-0,Q_hearing,,●,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,61,Hearing services - routine hearing exam             $0 copayment
+main,H3805-040-0,Q_hearing,,●,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,61,We cover 1 hearing exam every year.
 main,H3805-040-0,R_dental,,●,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,58,You are covered or routine dental bene its.
 main,H3805-040-0,R_dental,,●,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,95,"This dental plan o ers both in-network and out-o -network dental coverage, and all covered services have a $0 copayment."
 main,H3805-040-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,108,Acupuncture (Medicare-covered)
@@ -852,6 +1029,7 @@ main,H3805-040-0,T_chiropractic,,,https://www.aarpmedicareplans.com/alphadog/UHO
 main,H3805-040-0,T_chiropractic,,,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,107,Manual manipulation o the spine to correct a
 main,H3805-040-0,T_chiropractic,,,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,55,$15 copayment or each Medicare-covered
 main,H3805-040-0,U_naturopath,,,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,108,Naturopath services (uses natural or alternative
+main,H3805-040-0,Y_otc,,●,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,80,Monthly credit is $40
 main,H3805-041-0,AB_ambulance,1,$350,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,51,$350 copayment or each one-way Medicare- covered air trip.
 main,H3805-041-0,AB_ambulance,1,$350,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,51,$350 copayment or each one-way Medicare- covered ground trip.
 main,H3805-041-0,AB_ambulance,2,not covered,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,51,"Outside o the United States or its territories, ambulance transportation is not covered under any circumstances."
@@ -877,6 +1055,10 @@ main,H3805-041-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphad
 main,H3805-041-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,70,20% coinsurance or all other Medicare-
 main,H3805-041-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,70,20% coinsurance or each Medicare-covered chemotherapy drug and the administration o that drug.
 main,H3805-041-0,O_medical_deductible,,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0412773_000,2,This plan does not have a medical deductible.
+main,H3805-041-0,P_vision,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,94,We cover 1 routine eye exam every year.
+main,H3805-041-0,P_vision,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,94,a ter cataract surgery. $0 copayment
+main,H3805-041-0,Q_hearing,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,61,Hearing services - routine hearing exam $0 copayment
+main,H3805-041-0,Q_hearing,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,61,We cover 1 hearing exam every year.
 main,H3805-041-0,R_dental,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,57,You are covered or routine dental bene its.
 main,H3805-041-0,R_dental,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,96,"$0 copay or covered preventive and diagnostic dental care such as exams, routine"
 main,H3805-041-0,R_dental,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,96,"A 50% coinsurance on all covered comprehensive services such as illings, crowns,"
@@ -885,6 +1067,11 @@ main,H3805-041-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/AAOR
 main,H3805-041-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,50,more than 20 acupuncture treatments may be administered annually.
 main,H3805-041-0,T_chiropractic,,,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,54,$15 copayment or each Medicare-covered
 main,H3805-041-0,U_naturopath,,,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,102,Naturopath services (uses natural or alternative
+main,H3805-041-0,W_fitness,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,60,$0 copayment
+main,H3805-041-0,W_fitness,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,60,Coverage is limited to in-network locations
+main,H3805-041-0,Y_otc,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,80,Coverage is limited to in-network locations
+main,H3805-041-0,Y_otc,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,80,Quarterly credit is $25
+main,H3805-048-0,AA_opt_packages,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,14,The premium amount or the Platinum Dental Rider is $66.
 main,H3805-048-0,AB_ambulance,1,$370,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,51,$370 copayment or each one-way Medicare- covered air trip.
 main,H3805-048-0,AB_ambulance,1,$370,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,51,$370 copayment or each one-way Medicare- covered ground trip.
 main,H3805-048-0,AB_ambulance,2,not covered,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,51,"Outside o the United States or its territories, ambulance transportation is not covered under any circumstances."
@@ -918,6 +1105,13 @@ main,H3805-048-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphad
 main,H3805-048-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,71,20% coinsurance or all other Medicare-
 main,H3805-048-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,71,20% coinsurance or each Medicare-covered chemotherapy drug and the administration o that drug.
 main,H3805-048-0,O_medical_deductible,,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0412776_000,2,This plan does not have a medical deductible.
+main,H3805-048-0,P_vision,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,94,$0 copayment or 1 pair o eyeglasses
+main,H3805-048-0,P_vision,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,94,We cover 1 routine eye exam every year.
+main,H3805-048-0,P_vision,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,94,costs over the retail value o $150.
+main,H3805-048-0,Q_hearing,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,61,Hearing aid allowance is $700
+main,H3805-048-0,Q_hearing,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,61,Hearing services - routine hearing exam $0 copayment
+main,H3805-048-0,Q_hearing,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,61,This bene it is limited to 2 hearing aids every
+main,H3805-048-0,Q_hearing,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,61,We cover 1 hearing exam every year.
 main,H3805-048-0,R_dental,,,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,102,"Routine dental care, such as cleanings, exams"
 main,H3805-048-0,R_dental,,,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,14,The premium amount or the Platinum Dental Rider is $66.
 main,H3805-048-0,R_dental,,,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,57,20% coinsurance or Medicare-covered dental
@@ -933,6 +1127,8 @@ main,H3805-048-0,T_chiropractic,,,https://www.aarpmedicareplans.com/alphadog/AAO
 main,H3805-048-0,T_chiropractic,,,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,102,Manual manipulation o the spine to correct a subluxation is covered.
 main,H3805-048-0,T_chiropractic,,,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,54,$15 copayment or each Medicare-covered
 main,H3805-048-0,U_naturopath,,,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,103,Naturopath services (uses natural or alternative
+main,H3805-048-0,W_fitness,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,60,Coverage is limited to in-network locations
+main,H3805-048-0,W_fitness,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,60,Fitness program                                     $0 copayment
 main,H3817-008-1,AB_ambulance,1,$300,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,39,In- and Out-of-network: $300 copay per Medicare covered one-way transport
 main,H3817-008-1,AB_ambulance,2,$300,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,71,Ambulance services: In- and Out-of-network: $300 copay per covered one-
 main,H3817-008-1,F_primary_care,1,$0,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,62,In-office primary care provider (PCP) visits: In-network: $0 copay per provider per day Out-of-network: 50% coinsurance
@@ -964,6 +1160,16 @@ main,H3817-008-1,M_part_b_drugs,,0%-20%,https://beonbrand.getbynder.com/asset/85
 main,H3817-008-1,M_part_b_drugs,,0%-20%,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,52,0%-20% coinsurance (includes administration)
 main,H3817-008-1,M_part_b_drugs,,0%-20%,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,52,Other Part B immunizations:
 main,H3817-008-1,M_part_b_drugs,,0%-20%,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,54,20% coinsurance (certain drugs may have a coinsurance lower than 20%)
+main,H3817-008-1,P_vision,,●,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,70,Frames OR Elective contact lenses (in lieu of glasses): In- and Out-of-network: $100 allowance every calendar year
+main,H3817-008-1,P_vision,,●,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,70,Lenses: In-network: $0 copay
+main,H3817-008-1,P_vision,,●,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,70,Routine vision exam: In-network: $0 copay per visit
+main,H3817-008-1,P_vision,,●,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,70,We cover 1 routine vision exam every calendar year
+main,H3817-008-1,Q_hearing,,●,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,48,$0 copay
+main,H3817-008-1,Q_hearing,,●,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,48,$499 copay per aid for
+main,H3817-008-1,Q_hearing,,●,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,48,$699 copay per aid for
+main,H3817-008-1,Q_hearing,,●,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,48,$999 copay per aid for
+main,H3817-008-1,Q_hearing,,●,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,48,We cover 1 routine hearing exam every calendar year
+main,H3817-008-1,Q_hearing,,●,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,49,Fitting and evaluation: In-network: $0 copay
 main,H3817-008-1,R_dental,,●,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,43,$0 copay per provider per day
 main,H3817-008-1,R_dental,,●,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,43,"$1,250 benefit limit every calendar year"
 main,H3817-008-1,R_dental,,●,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,43,Basic comprehensive dental services: In- and Out-of-network: 50% coinsurance
@@ -975,6 +1181,8 @@ main,H3817-008-1,T_chiropractic,,,https://beonbrand.getbynder.com/asset/85039f9f
 main,H3817-008-1,T_chiropractic,,,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,75,Manual manipulation of the spine to correct a subluxation is
 main,H3817-008-1,U_naturopath,,,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,75,Naturopath services (uses natural or
 main,H3817-008-1,V_massage,,,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,76,Therapeutic massage
+main,H3817-008-1,W_fitness,,●,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,46,"In-network: There is no coinsurance, copayment, or deductible for the health and wellness education programs."
+main,H3817-008-1,W_fitness,,●,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,46,The Silver&Fit® Healthy Aging and Exercise Program
 main,H3817-008-1,X_transportation,,,https://beonbrand.getbynder.com/asset/509b7b1f-c03e-498d-9107-158cc9783b71/Summary-of-Benefits-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,7,Transportation Not covered Not covered
 main,H3817-009-1,AB_ambulance,1,$300,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,39,$300 copay per Medicare
 main,H3817-009-1,AB_ambulance,2,$300,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,71,$300 copay per covered one-
@@ -1009,6 +1217,16 @@ main,H3817-009-1,M_part_b_drugs,,0%-20%,https://beonbrand.getbynder.com/asset/02
 main,H3817-009-1,M_part_b_drugs,,0%-20%,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,51,Other Part B immunizations: In-network: 0%-20% coinsurance (includes administration)
 main,H3817-009-1,M_part_b_drugs,,0%-20%,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,51,"There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines."
 main,H3817-009-1,M_part_b_drugs,,0%-20%,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,54,20% coinsurance (certain drugs may have a coinsurance lower than 20%)
+main,H3817-009-1,P_vision,,●,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,69,Routine vision exam: In-network: $0 copay per visit
+main,H3817-009-1,P_vision,,●,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,69,We cover 1 routine vision exam every calendar year
+main,H3817-009-1,P_vision,,●,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,70,Frames OR Elective contact lenses (in lieu of glasses): In- and Out-of-network: $150 allowance every calendar year
+main,H3817-009-1,P_vision,,●,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,70,Lenses – 1 set every calendar year
+main,H3817-009-1,P_vision,,●,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,70,Lenses: In-network: $0 copay
+main,H3817-009-1,Q_hearing,,●,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,48,$0 copay
+main,H3817-009-1,Q_hearing,,●,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,48,$499 copay per aid for
+main,H3817-009-1,Q_hearing,,●,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,48,$699 copay per aid for
+main,H3817-009-1,Q_hearing,,●,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,48,$999 copay per aid for
+main,H3817-009-1,Q_hearing,,●,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,48,We cover 1 routine hearing exam every calendar year
 main,H3817-009-1,R_dental,,●,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,43,Basic comprehensive dental services: In- and Out-of-network: 50% coinsurance
 main,H3817-009-1,R_dental,,●,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,43,Major comprehensive dental services: In- and Out-of-network: 50% coinsurance
 main,H3817-009-1,R_dental,,●,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,43,Preventive dental services: In-network: $0 copay per provider per day Out-of-network: 50% coinsurance
@@ -1019,6 +1237,8 @@ main,H3817-009-1,T_chiropractic,,,https://beonbrand.getbynder.com/asset/84960024
 main,H3817-009-1,T_chiropractic,,,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,75,Manual manipulation of the spine to correct a subluxation is
 main,H3817-009-1,U_naturopath,,,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,74,Naturopath services (uses natural or alternative treatments)
 main,H3817-009-1,V_massage,,,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,76,Therapeutic massage                         Not covered under any condition
+main,H3817-009-1,W_fitness,,●,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,46,The Silver&Fit® Healthy Aging and Exercise Program
+main,H3817-009-1,W_fitness,,●,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,46,"There is no coinsurance, copayment, or deductible for the health and wellness education programs."
 main,H3817-009-1,X_transportation,,,https://beonbrand.getbynder.com/asset/0231d9b3-b90f-4080-82e8-9213fa8a7464/Summary-of-Benefits-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,7,Transportation Not covered Not covered
 main,H3817-010-0,AB_ambulance,1,$300,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,30,$300 copay per Medicare covered one-way transport
 main,H3817-010-0,AB_ambulance,2,$300,https://beonbrand.getbynder.com/asset/04a8c0a0-9d0b-4085-a9c5-657b68a53d5a/Summary-of-Benefits-Medicare-Regence-Valiance-PPO-no-Rx-2027-OR.pdf,6,Copay per each one-way Medicare-covered transport
@@ -1055,6 +1275,18 @@ main,H3817-010-0,M_part_b_drugs,,0%-20%,https://beonbrand.getbynder.com/asset/5b
 main,H3817-010-0,M_part_b_drugs,,0%-20%,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,42,"There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines."
 main,H3817-010-0,M_part_b_drugs,,0%-20%,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,45,20% coinsurance (certain drugs may have a coinsurance lower than 20%)
 main,H3817-010-0,M_part_b_drugs,,0%-20%,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,45,Part B insulin drugs: In-network: 20% coinsurance up to a $35 copay for a one-month supply
+main,H3817-010-0,P_vision,,●,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,60,$0 copay per visit
+main,H3817-010-0,P_vision,,●,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,60,$100 allowance every calendar
+main,H3817-010-0,P_vision,,●,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,60,We cover 1 routine vision exam every calendar year
+main,H3817-010-0,P_vision,,●,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,61,Lenses: In-network: $0 copay
+main,H3817-010-0,Q_hearing,,●,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,39,$0 copay
+main,H3817-010-0,Q_hearing,,●,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,39,$499 copay per aid for
+main,H3817-010-0,Q_hearing,,●,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,39,$699 copay per aid for
+main,H3817-010-0,Q_hearing,,●,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,39,$999 copay per aid for
+main,H3817-010-0,Q_hearing,,●,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,39,Up to two TruHearing-branded hearing aids every year
+main,H3817-010-0,Q_hearing,,●,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,39,We cover 1 routine hearing exam every calendar year
+main,H3817-010-0,Q_hearing,,●,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,40,Fitting and evaluation: In-network: $0 copay
+main,H3817-010-0,Q_hearing,,●,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,40,Unlimited visits for the first 12
 main,H3817-010-0,R_dental,,●,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,34,$0 copay per provider per day
 main,H3817-010-0,R_dental,,●,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,34,"$1,500 benefit limit every calendar year."
 main,H3817-010-0,R_dental,,●,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,34,Basic comprehensive dental services: In- and Out-of-network: 50% coinsurance
@@ -1065,6 +1297,8 @@ main,H3817-010-0,T_chiropractic,,,https://beonbrand.getbynder.com/asset/5b106892
 main,H3817-010-0,T_chiropractic,,,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,66,Manual manipulation of the spine to correct a subluxation is
 main,H3817-010-0,U_naturopath,,,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,65,Naturopath services (uses natural or alternative treatments)
 main,H3817-010-0,V_massage,,,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,67,Therapeutic massage
+main,H3817-010-0,W_fitness,,●,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,37,The Silver&Fit® Healthy Aging and Exercise Program
+main,H3817-010-0,W_fitness,,●,https://beonbrand.getbynder.com/asset/5b106892-e6c7-4c40-864b-6477ed6bd1b7/,37,"There is no coinsurance, copayment, or deductible for the health and wellness education programs."
 main,H3817-010-0,X_transportation,,,https://beonbrand.getbynder.com/asset/04a8c0a0-9d0b-4085-a9c5-657b68a53d5a/Summary-of-Benefits-Medicare-Regence-Valiance-PPO-no-Rx-2027-OR.pdf,6,Transportation Not covered Not covered
 main,H3817-011-1,AB_ambulance,1,$300,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,39,In- and Out-of-network: $300 copay per Medicare covered one-way transport
 main,H3817-011-1,AB_ambulance,2,$300,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,71,Ambulance services: In- and Out-of-network: $300 copay per covered one-
@@ -1102,6 +1336,18 @@ main,H3817-011-1,M_part_b_drugs,,0%-20%,https://beonbrand.getbynder.com/asset/78
 main,H3817-011-1,M_part_b_drugs,,0%-20%,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,51,"There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines."
 main,H3817-011-1,M_part_b_drugs,,0%-20%,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,54,20% coinsurance (certain drugs may have a coinsurance lower than 20%)
 main,H3817-011-1,M_part_b_drugs,,0%-20%,https://beonbrand.getbynder.com/asset/e02efc92-b5dc-44f5-97ed-68489555c3df/Summary-of-Benefits-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,7,Chemotherapy drugs 0%-20% (depending on
+main,H3817-011-1,P_vision,,●,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,70,Frames OR Elective contact lenses (in lieu of glasses): In- and Out-of-network: $100 allowance every calendar year
+main,H3817-011-1,P_vision,,●,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,70,Frames – 1 set of frames every calendar year up to the allowance
+main,H3817-011-1,P_vision,,●,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,70,Lenses – 1 set every calendar year
+main,H3817-011-1,P_vision,,●,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,70,Lenses: In-network: $0 copay
+main,H3817-011-1,P_vision,,●,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,70,Routine vision exam: In-network: $0 copay per visit
+main,H3817-011-1,P_vision,,●,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,70,We cover 1 routine vision exam every calendar year
+main,H3817-011-1,Q_hearing,,●,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,48,$0 copay
+main,H3817-011-1,Q_hearing,,●,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,48,$499 copay per aid for
+main,H3817-011-1,Q_hearing,,●,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,48,$699 copay per aid for
+main,H3817-011-1,Q_hearing,,●,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,48,$999 copay per aid for
+main,H3817-011-1,Q_hearing,,●,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,48,We cover 1 routine hearing exam every calendar year
+main,H3817-011-1,Q_hearing,,●,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,49,Fitting and evaluation: In-network: $0 copay
 main,H3817-011-1,R_dental,,●,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,43,$0 copay per provider per day
 main,H3817-011-1,R_dental,,●,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,43,Basic comprehensive dental services: In- and Out-of-network: 50% coinsurance
 main,H3817-011-1,R_dental,,●,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,43,Major comprehensive dental services: In- and Out-of-network: 50% coinsurance
@@ -1113,7 +1359,10 @@ main,H3817-011-1,T_chiropractic,,,https://beonbrand.getbynder.com/asset/78bdf8d9
 main,H3817-011-1,T_chiropractic,,,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,75,Manual manipulation of the spine to correct a subluxation is
 main,H3817-011-1,U_naturopath,,,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,75,Naturopath services (uses natural or
 main,H3817-011-1,V_massage,,,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,76,Therapeutic massage
+main,H3817-011-1,W_fitness,,●,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,46,The Silver&Fit® Healthy Aging and Exercise Program
+main,H3817-011-1,W_fitness,,●,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,46,"There is no coinsurance, copayment, or deductible for the health and wellness education programs."
 main,H3817-011-1,X_transportation,,,https://beonbrand.getbynder.com/asset/e02efc92-b5dc-44f5-97ed-68489555c3df/Summary-of-Benefits-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,7,Transportation Not covered Not covered
+main,H5216-048-0,AA_opt_packages,,●,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,16,MyOption DEN972: $52.10 additional monthly premium
 main,H5216-048-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,48,In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance
 main,H5216-048-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,48,In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance
 main,H5216-048-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,48,Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance
@@ -1155,6 +1404,15 @@ main,H5216-048-0,O_medical_deductible,,$100 some out-of-network services,https:/
 main,H5216-048-0,O_medical_deductible,,$100 some out-of-network services,https://assets.humana.com/is/content/humana/H5216048000SB27pdf,5,$100 combined deductible
 main,H5216-048-0,O_medical_deductible,,$100 some out-of-network services,https://assets.humana.com/is/content/humana/H5216048000SB27pdf,5,All Services received from In-Network Providers
 main,H5216-048-0,O_medical_deductible,,$100 some out-of-network services,https://assets.humana.com/is/content/humana/H5216048000SB27pdf,5,The following services listed are excluded from the combined
+main,H5216-048-0,P_vision,,●,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,86,$0
+main,H5216-048-0,P_vision,,●,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,86,Routine Eye Exam including refraction (1 per calendar year) by
+main,H5216-048-0,P_vision,,●,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,87,Any retail amount over $50 toward the purchase of frame
+main,H5216-048-0,P_vision,,●,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,87,Eyewear Benefit (1 per calendar year) at a Humana Medicare
+main,H5216-048-0,Q_hearing,,●,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,85,Routine hearing exam (1 per year)
+main,H5216-048-0,Q_hearing,,●,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,85,Routine hearing exam (1 per year) $0
+main,H5216-048-0,Q_hearing,,●,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,86,$575 per Level 1 Aid
+main,H5216-048-0,Q_hearing,,●,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,86,$750 per Level 2 Aid
+main,H5216-048-0,Q_hearing,,●,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,86,Up to 2 prescription hearing aids every year (1 per ear per year).
 main,H5216-048-0,R_dental,,●,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,52,You are covered for Mandatory
 main,H5216-048-0,R_dental,,●,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,83,Periodic oral exam – D0120 0% 0%
 main,H5216-048-0,R_dental,,●,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,83,Prophylaxis (cleaning) – D1110 0% 0%
@@ -1197,6 +1455,18 @@ main,H5216-427-2,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/hum
 main,H5216-427-2,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H5216427002SB27pdf,14,PCP's office $0 copay 50% of the cost
 main,H5216-427-2,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H5216427002SB27pdf,14,Specialist's office $0 copay 50% of the cost
 main,H5216-427-2,O_medical_deductible,,$0,https://assets.humana.com/is/content/humana/H5216427002SB27pdf,5,Medical deductible This plan does not have a deductible.
+main,H5216-427-2,P_vision,,●,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,79,$0
+main,H5216-427-2,P_vision,,●,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,79,Routine Eye Exam including refraction (1 per calendar year) by
+main,H5216-427-2,P_vision,,●,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,80,$0 for refraction exam
+main,H5216-427-2,P_vision,,●,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,80,"A refraction exam (1 per calendar year), instead of a routine"
+main,H5216-427-2,P_vision,,●,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,80,Any retail amount over $75 toward the purchase of frame
+main,H5216-427-2,P_vision,,●,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,80,Eyewear Benefit (1 per calendar year) at a Humana Medicare
+main,H5216-427-2,Q_hearing,,●,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,61,Hearing aids you can buy without a prescription
+main,H5216-427-2,Q_hearing,,●,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,61,You get $50 quarterly on a special debit card called the Humana Spending
+main,H5216-427-2,Q_hearing,,●,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,78,Routine hearing exam (1 per year) $0
+main,H5216-427-2,Q_hearing,,●,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,79,$575 per Level 1 Aid
+main,H5216-427-2,Q_hearing,,●,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,79,$750 per Level 2 Aid
+main,H5216-427-2,Q_hearing,,●,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,79,Up to 2 prescription hearing aids every year (1 per ear per year).
 main,H5216-427-2,R_dental,,●,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,72,"Annual Maximum: $1,500"
 main,H5216-427-2,R_dental,,●,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,72,"Benefits received out-of-network are subject to any in-network benefit maximums, limitations and/or exclusions."
 main,H5216-427-2,R_dental,,●,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,72,Periodic oral exam – D0120 0% 0%
@@ -1207,9 +1477,12 @@ main,H5216-427-2,S_acupuncture,,,https://assets.humana.com/is/content/humana/H52
 main,H5216-427-2,T_chiropractic,,,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,39,Medicare Covered Chiropractic Services $15 copayment
 main,H5216-427-2,T_chiropractic,,,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,85,Manual manipulation of the spine to correct a subluxation is
 main,H5216-427-2,U_naturopath,,,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,84,Naturopath services (uses natural or
+main,H5216-427-2,W_fitness,,●,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,67,In-Network: $0 copayment
 main,H5216-427-2,X_transportation,,,https://assets.humana.com/is/content/humana/H5216427002SB27pdf,14,Not Covered Not Covered
 main,H5216-427-2,X_transportation,,,https://assets.humana.com/is/content/humana/H5216427002SB27pdf,14,TRANSPORTATION
+main,H5216-427-2,Y_otc,,●,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,61,You get $50 quarterly on a special debit card called the Humana Spending
 main,H5216-427-2,Z_part_b_reduction,,$150,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,11,"While you are enrolled in this plan, Humana will pay up to $150 of your Medicare Part B premium."
+main,H5216-428-2,AA_opt_packages,,●,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,15,MyOption DEN972: $50.90 additional monthly premium
 main,H5216-428-2,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,47,$325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance Out-of-Network:
 main,H5216-428-2,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,47,Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance Out-of-Network:
 main,H5216-428-2,AB_ambulance,2,$325,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,47,Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance
@@ -1250,6 +1523,17 @@ main,H5216-428-2,O_medical_deductible,,$80 some,https://assets.humana.com/is/con
 main,H5216-428-2,O_medical_deductible,,$80 some,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,41,Your deductible is $80.
 main,H5216-428-2,O_medical_deductible,,$80 some,https://assets.humana.com/is/content/humana/H5216428002SB27pdf,5,$80 combined deductible
 main,H5216-428-2,O_medical_deductible,,$80 some,https://assets.humana.com/is/content/humana/H5216428002SB27pdf,5,The following services listed are excluded from the combined
+main,H5216-428-2,P_vision,,●,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,85,$0
+main,H5216-428-2,P_vision,,●,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,85,Routine Eye Exam including refraction (1 per calendar year) by
+main,H5216-428-2,P_vision,,●,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,86,$0 for refraction exam
+main,H5216-428-2,P_vision,,●,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,86,"A refraction exam (1 per calendar year), instead of a routine"
+main,H5216-428-2,P_vision,,●,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,86,Any retail amount over $50 toward the purchase of frame
+main,H5216-428-2,P_vision,,●,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,86,Eyewear Benefit (1 per calendar year) at a Humana Medicare
+main,H5216-428-2,Q_hearing,,●,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,84,Routine hearing exam (1 per year)
+main,H5216-428-2,Q_hearing,,●,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,84,Routine hearing exam (1 per year) $0
+main,H5216-428-2,Q_hearing,,●,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,85,$575 per Level 1 Aid
+main,H5216-428-2,Q_hearing,,●,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,85,$750 per Level 2 Aid
+main,H5216-428-2,Q_hearing,,●,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,85,Up to 2 prescription hearing aids every year (1 per ear per year).
 main,H5216-428-2,R_dental,,●,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,82,Periodic oral exam – D0120 0%
 main,H5216-428-2,R_dental,,●,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,83,Periodontal maintenance following periodontal therapy – D4910 0%
 main,H5216-428-2,S_acupuncture,,,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,46,In-Network: $50 copayment – Specialist’s Office
@@ -1257,6 +1541,7 @@ main,H5216-428-2,S_acupuncture,,,https://assets.humana.com/is/content/humana/H52
 main,H5216-428-2,S_acupuncture,,,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,98,Available for people with chronic low back pain under certain
 main,H5216-428-2,T_chiropractic,,,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,101,Manual manipulation of the spine to correct a subluxation is
 main,H5216-428-2,U_naturopath,,,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,101,Naturopath services (uses natural or
+main,H5216-428-2,W_fitness,,●,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,77,In-Network: $0 copayment
 main,H5216-428-2,X_transportation,,,https://assets.humana.com/is/content/humana/H5216428002SB27pdf,15,Not Covered Not Covered
 main,H5216-455-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,36,20% coinsurance regardless of the
 main,H5216-455-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,36,In-Network: Emergency Ambulance $325 copayment
@@ -1295,6 +1580,16 @@ main,H5216-455-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/hum
 main,H5216-455-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H5216455000SB27pdf,14,• PCP's office $0 copay 50% of the cost
 main,H5216-455-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H5216455000SB27pdf,14,• PCP's office $0 copay 50% of the cost • Specialist's office $0 copay 50% of the cost
 main,H5216-455-0,O_medical_deductible,,$0,https://assets.humana.com/is/content/humana/H5216455000SB27pdf,5,Medical deductible This plan does not have a deductible.
+main,H5216-455-0,P_vision,,●,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,78,$0
+main,H5216-455-0,P_vision,,●,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,78,Routine Eye Exam including refraction (1 per calendar year) by
+main,H5216-455-0,P_vision,,●,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,79,$0 for refraction exam
+main,H5216-455-0,P_vision,,●,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,79,Any retail amount over $75 toward the purchase of frame
+main,H5216-455-0,P_vision,,●,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,79,Eyewear Benefit (1 per calendar year) at a Humana Medicare
+main,H5216-455-0,Q_hearing,,●,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,77,$0
+main,H5216-455-0,Q_hearing,,●,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,77,Routine hearing exam (1 per year)
+main,H5216-455-0,Q_hearing,,●,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,78,$575 per Level 1 Aid
+main,H5216-455-0,Q_hearing,,●,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,78,$750 per Level 2 Aid
+main,H5216-455-0,Q_hearing,,●,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,78,Up to 2 prescription hearing aids every year (1 per ear per year).
 main,H5216-455-0,R_dental,,●,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,40,You are covered for Mandatory
 main,H5216-455-0,R_dental,,●,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,71,"Annual Maximum: $2,500"
 main,H5216-455-0,R_dental,,●,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,71,Periodic oral exam – D0120 0% 0%
@@ -1304,6 +1599,8 @@ main,H5216-455-0,S_acupuncture,,,https://assets.humana.com/is/content/humana/H52
 main,H5216-455-0,T_chiropractic,,,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,39,Medicare Covered Chiropractic Services $15 copayment
 main,H5216-455-0,T_chiropractic,,,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,84,Manual manipulation of the spine to correct a subluxation is covered
 main,H5216-455-0,U_naturopath,,,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,83,Naturopath services (uses natural or alternative treatments)
+main,H5216-455-0,W_fitness,,●,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,66,In-Network: $0 copayment
+main,H5216-455-0,W_fitness,,●,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,66,SilverSneakers® fitness program
 main,H5216-455-0,X_transportation,,,https://assets.humana.com/is/content/humana/H5216455000SB27pdf,14,Not Covered Not Covered
 main,H5216-455-0,X_transportation,,,https://assets.humana.com/is/content/humana/H5216455000SB27pdf,14,TRANSPORTATION
 main,H5216-455-0,Z_part_b_reduction,,$43,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,11,Humana will pay up to $43 of your Medicare Part B premium
@@ -1332,6 +1629,14 @@ main,H5439-010-0,O_medical_deductible,,$200 some,https://www.wellcareor.com/cont
 main,H5439-010-0,O_medical_deductible,,$200 some,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,34,you must pay the full cost for most of your covered services
 main,H5439-010-0,O_medical_deductible,,$200 some,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,8,$200 except for insulin furnished
 main,H5439-010-0,O_medical_deductible,,$200 some,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H5439_010_2027_OR_SB_PMAO_7017600ENG_M.pdf,4,$200 deductible for select Part B services.
+main,H5439-010-0,P_vision,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,109,$0 copay for 1 routine eye exam every year.
+main,H5439-010-0,P_vision,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,110,$0 copay for eyewear.
+main,H5439-010-0,P_vision,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,110,Maximum plan benefit coverage amount of $100 every year
+main,H5439-010-0,P_vision,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,112,You will receive a total of $20 monthly preloaded on your
+main,H5439-010-0,Q_hearing,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,112,You will receive a total of $20 monthly preloaded on your
+main,H5439-010-0,Q_hearing,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,63,$0 copay for 2 hearing aid(s) every year
+main,H5439-010-0,Q_hearing,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,63,Limited to 2 non-implantable hearing aids every year.
+main,H5439-010-0,Q_hearing,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,63,hearing aid up to $350 per ear
 main,H5439-010-0,R_dental,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,112,You will receive a total of $20 monthly preloaded on your
 main,H5439-010-0,R_dental,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,50,$0 copay for each oral exam
 main,H5439-010-0,R_dental,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,50,Periodic Oral exams - 2 every year
@@ -1341,8 +1646,11 @@ main,H5439-010-0,S_acupuncture,,●,https://www.wellcareor.com/content/dam/cente
 main,H5439-010-0,T_chiropractic,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,48,$15 copay for each supplemental (Non-Medicare -covered) chiropractor visit.
 main,H5439-010-0,T_chiropractic,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,48,chiropractic visits up to a total of 24 visits every year.
 main,H5439-010-0,U_naturopath,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,117,Naturopath services (uses natural or alternative treatments)
+main,H5439-010-0,W_fitness,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,61,$0 copay for the fitness
 main,H5439-010-0,X_transportation,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H5439_010_2027_OR_SB_PMAO_7017600ENG_M.pdf,15,In-Network Not covered
 main,H5439-010-0,X_transportation,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H5439_010_2027_OR_SB_PMAO_7017600ENG_M.pdf,15,Transportation Services
+main,H5439-010-0,Y_otc,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,112,"Wellcare Spendables® card to spend on OTC items, Dental, Vision,"
+main,H5439-010-0,Y_otc,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,112,You will receive a total of $20 monthly preloaded on your
 main,H5439-010-0,Z_part_b_reduction,,$10,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,9,We will reduce your monthly Medicare Part B premium by $10.
 main,H5439-011-0,AB_ambulance,1,$350,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,54,$350 copay per one-way trip for Medicare-covered ground ambulance services.
 main,H5439-011-0,AB_ambulance,1,$350,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,55,$350 copay per one-way trip for Medicare-covered air ambulance services.
@@ -1370,6 +1678,13 @@ main,H5439-011-0,M_part_b_drugs,,0%-20%,https://www.wellcareor.com/content/dam/c
 main,H5439-011-0,M_part_b_drugs,,0%-20%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,87,In-Network 0% coinsurance for Medicare-covered Part B allergy antigens.
 main,H5439-011-0,M_part_b_drugs,,0%-20%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,88,20% coinsurance for Medicare-covered Part B chemotherapy drugs.
 main,H5439-011-0,O_medical_deductible,,$250 some,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H5439_011_2027_OR_SB_PPO_7017601ENG_M.pdf,4,$250 deductible for select Part B services.
+main,H5439-011-0,P_vision,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,122,$0 copay for 1 routine eye exam every year.
+main,H5439-011-0,P_vision,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,122,$0 copay for eyewear.
+main,H5439-011-0,P_vision,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,122,1 routine eye exam every year. The routine eye exam
+main,H5439-011-0,P_vision,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,122,maximum benefit of $200 every year
+main,H5439-011-0,Q_hearing,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,75,$0 copay for 2 hearing aid(s) every year.
+main,H5439-011-0,Q_hearing,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,75,1 non-implantable hearing aid up to $350 per ear every year.
+main,H5439-011-0,Q_hearing,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,75,Limited to 2 non-implantable hearing aids every year.
 main,H5439-011-0,R_dental,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,62,$0 copay for each oral exam.
 main,H5439-011-0,R_dental,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,62,Periodic Oral exams - 2 every year
 main,H5439-011-0,R_dental,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,62,"There is a plan benefit allowance of $1,000 every year for all in-network and out-of-network covered Comprehensive Dental services."
@@ -1378,6 +1693,8 @@ main,H5439-011-0,S_acupuncture,,●,https://www.wellcareor.com/content/dam/cente
 main,H5439-011-0,T_chiropractic,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,60,$15 copay for each supplemental (Non-Medicare -covered) chiropractor visit.
 main,H5439-011-0,T_chiropractic,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,60,chiropractic visits up to a total of 24 visits every year.
 main,H5439-011-0,U_naturopath,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,126,Naturopath services (uses natural or
+main,H5439-011-0,W_fitness,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,73,$0 copay for the fitness
+main,H5439-011-0,W_fitness,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,73,You can receive up to 1 kit per benefit year.
 main,H5439-011-0,X_transportation,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H5439_011_2027_OR_SB_PPO_7017601ENG_M.pdf,15,In-Network Not covered
 main,H5439-011-0,X_transportation,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H5439_011_2027_OR_SB_PPO_7017601ENG_M.pdf,15,Transportation Services (Non-emergency medical transportation)
 main,H5439-015-0,AB_ambulance,1,$335,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,55,Deductible applies. $335 copay per one-way trip for Medicare-covered air
@@ -1402,6 +1719,13 @@ main,H5439-015-0,M_part_b_drugs,,0%-20%,https://www.wellcareor.com/content/dam/c
 main,H5439-015-0,M_part_b_drugs,,0%-20%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,85,In-Network 0% coinsurance for Medicare-covered Part B allergy antigens.
 main,H5439-015-0,M_part_b_drugs,,0%-20%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,86,20% coinsurance for Medicare-covered Part B chemotherapy drugs.
 main,H5439-015-0,O_medical_deductible,,$250 some,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H5439_015_2027_OR_SB_PPO_7017569ENG_M.pdf,4,$250 deductible for select Part B services.
+main,H5439-015-0,P_vision,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,120,$0 copay for 1 eyewear fitting visit every year.
+main,H5439-015-0,P_vision,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,120,$0 copay for 1 routine eye exam every year.
+main,H5439-015-0,P_vision,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,120,1 routine eye exam every year. The routine eye exam includes a glaucoma test
+main,H5439-015-0,P_vision,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,120,Limited to 1 visit(s) every year.
+main,H5439-015-0,Q_hearing,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,73,$0 copay for 2 hearing aid(s) every year.
+main,H5439-015-0,Q_hearing,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,73,Limited to 2 non-implantable hearing aids every year.
+main,H5439-015-0,Q_hearing,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,73,hearing aid up to $350 per ear every
 main,H5439-015-0,R_dental,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,64,$0 copay for each adjunctive general service.
 main,H5439-015-0,S_acupuncture,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,122,Available for people with chronic low back pain under certain circumstances
 main,H5439-015-0,S_acupuncture,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,53,$0 copay for Medicare-covered acupuncture received in a PCP office.
@@ -1412,6 +1736,8 @@ main,H5439-015-0,S_acupuncture,,,https://www.wellcareor.com/content/dam/centene/
 main,H5439-015-0,T_chiropractic,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,123,Manual manipulation of the spine to correct a subluxation is covered
 main,H5439-015-0,T_chiropractic,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,59,$15 copay for Medicare-covered chiropractic services.
 main,H5439-015-0,U_naturopath,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,123,Naturopath services (uses natural or
+main,H5439-015-0,W_fitness,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,71,$0 copay for the fitness
+main,H5439-015-0,W_fitness,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,71,You can receive up to 1 kit per benefit year.
 main,H5439-015-0,X_transportation,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H5439_015_2027_OR_SB_PPO_7017569ENG_M.pdf,14,In-Network Not covered Out-of-Network Not covered
 main,H5439-015-0,X_transportation,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H5439_015_2027_OR_SB_PPO_7017569ENG_M.pdf,14,Transportation Services
 main,H5439-019-0,AB_ambulance,1,$325,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,56,Deductible applies. $325 copay per one-way trip for Medicare-covered air
@@ -1439,6 +1765,13 @@ main,H5439-019-0,M_part_b_drugs,,0%-20%,https://www.wellcareor.com/content/dam/c
 main,H5439-019-0,O_medical_deductible,,$250 some,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,48,"Until you’ve paid the deductible amount, you must pay the full cost for most of your covered services."
 main,H5439-019-0,O_medical_deductible,,$250 some,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,48,Your deductible is $250.
 main,H5439-019-0,O_medical_deductible,,$250 some,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H5439_019_2027_OR_SB_PPO_7017570ENG_M.pdf,4,$250 deductible for select Part B services.
+main,H5439-019-0,P_vision,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,121,$0 copay for 1 routine eye
+main,H5439-019-0,P_vision,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,121,$0 copay for eyewear.
+main,H5439-019-0,P_vision,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,121,1 routine eye exam every year. The
+main,H5439-019-0,P_vision,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,121,maximum benefit of $100 every year
+main,H5439-019-0,Q_hearing,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,74,$0 copay for 2 hearing aid(s) every year.
+main,H5439-019-0,Q_hearing,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,74,1 non-implantable hearing aid up to $350 per ear every
+main,H5439-019-0,Q_hearing,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,74,Limited to 2 non-implantable hearing aids every year.
 main,H5439-019-0,R_dental,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,65,$0 copay for each adjunctive general service.
 main,H5439-019-0,S_acupuncture,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,123,Available for people with chronic low back pain under
 main,H5439-019-0,S_acupuncture,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,54,$0 copay for Medicare-covered acupuncture received in a PCP office.
@@ -1449,6 +1782,8 @@ main,H5439-019-0,S_acupuncture,,,https://www.wellcareor.com/content/dam/centene/
 main,H5439-019-0,T_chiropractic,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,125,Routine chiropractic care                      Manual manipulation of the spine to correct a
 main,H5439-019-0,T_chiropractic,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,60,$15 copay for Medicare-covered chiropractic services.
 main,H5439-019-0,U_naturopath,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,124,Naturopath services (uses natural or alternative treatments)
+main,H5439-019-0,W_fitness,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,72,$0 copay for the fitness benefit.
+main,H5439-019-0,W_fitness,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,72,You can receive up to 1 kit per benefit year.
 main,H5439-019-0,X_transportation,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H5439_019_2027_OR_SB_PPO_7017570ENG_M.pdf,14,In-Network Not covered
 main,H5439-019-0,X_transportation,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H5439_019_2027_OR_SB_PPO_7017570ENG_M.pdf,14,Transportation Services
 main,H6815-038-0,AB_ambulance,1,$310,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,54,$310 copay per one-way trip for Medicare-covered ground
@@ -1472,6 +1807,12 @@ main,H6815-038-0,M_part_b_drugs,,0%-20%,https://www.wellcareor.com/content/dam/c
 main,H6815-038-0,M_part_b_drugs,,0%-20%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,80,20% coinsurance for Medicare-covered Part B chemotherapy drugs.
 main,H6815-038-0,O_medical_deductible,,$150 some,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,10,$150 in-network except for insulin
 main,H6815-038-0,O_medical_deductible,,$150 some,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H6815_038_2027_OR_SB_HMAPD_7017558ENG_M.pdf,4,$150 in-network deductible for select Part B services
+main,H6815-038-0,P_vision,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,104,$0 copay for 1 routine eye exam every year.
+main,H6815-038-0,P_vision,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,104,1 routine eye exam every year. The routine eye exam
+main,H6815-038-0,P_vision,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,104,maximum benefit of $100 every year
+main,H6815-038-0,Q_hearing,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,70,$0 copay for 2 hearing aid(s) every year
+main,H6815-038-0,Q_hearing,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,70,Limited to 2 non-implantable hearing aids every year.
+main,H6815-038-0,Q_hearing,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,70,non-implantable hearing aid up to $500 per ear
 main,H6815-038-0,R_dental,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,63,$0 copay for each adjunctive general service
 main,H6815-038-0,R_dental,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,63,$0 copay for other preventive dental services per visit
 main,H6815-038-0,S_acupuncture,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,54,$0 copay for each supplemental (Non-Medicare covered) acupuncture visit
@@ -1479,6 +1820,7 @@ main,H6815-038-0,S_acupuncture,,●,https://www.wellcareor.com/content/dam/cente
 main,H6815-038-0,T_chiropractic,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,58,$15 copay for each supplemental (Non-Medicare -covered) chiropractor visit
 main,H6815-038-0,T_chiropractic,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,58,chiropractic visits up to a total of 24 visits every year.
 main,H6815-038-0,U_naturopath,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,107,Naturopath services (uses natural or
+main,H6815-038-0,W_fitness,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,68,$0 copay for the fitness
 main,H6815-038-0,X_transportation,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H6815_038_2027_OR_SB_HMAPD_7017558ENG_M.pdf,11,Not covered
 main,H6815-038-0,X_transportation,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H6815_038_2027_OR_SB_HMAPD_7017558ENG_M.pdf,11,Transportation Services
 main,H7006-018-0,AB_ambulance,1,$250,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,47,$250 copay for each Medicare-covered Air Ambulance service.
@@ -1521,6 +1863,15 @@ main,H7006-018-0,M_part_b_drugs,,0%-20%,https://atriohp.com/media/qzyffvwm/h7006
 main,H7006-018-0,M_part_b_drugs,,0%-20%,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,70,Other Medicare Part B Drugs In-Network 0% - 20% coinsurance
 main,H7006-018-0,M_part_b_drugs,,0%-20%,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,71,Medicare Part B Chemotherapy/Radiation Drugs In-Network 0% - 20% coinsurance
 main,H7006-018-0,O_medical_deductible,,$0,https://atriohp.com/media/254ghvxu/2027-portland-sb_final-v2.pdf,5,No deductible for medical. See prescription drug coverage for Part D deductible.
+main,H7006-018-0,P_vision,,●,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,98,Out-of-Network 50% coinsurance for each Medicare-covered service. In-Network $0 copay for each Medicare-covered service. Out-of-Network 50% coinsurance for each Medicare-covered service. In-Network $0 copay
+main,H7006-018-0,P_vision,,●,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,98,Routine eye exam Limited to 1 visit(s) every year
+main,H7006-018-0,P_vision,,●,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,99,$150 allowance every year for all additional eyewear.
+main,H7006-018-0,P_vision,,●,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,99,In-Network $0 copay up to the allowance amount Out-of-Network 80% coinsurance In-Network $0 copay
+main,H7006-018-0,Q_hearing,,●,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,59,Additional routine hearing exams
+main,H7006-018-0,Q_hearing,,●,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,59,Limited to 1 visit(s) every year
+main,H7006-018-0,Q_hearing,,●,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,60,$699 copay per aid for Advanced Aids
+main,H7006-018-0,Q_hearing,,●,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,60,$999 copay per aid for Premium Aids
+main,H7006-018-0,Q_hearing,,●,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,60,Up to 2 TruHearing-branded hearing aids every year
 main,H7006-018-0,R_dental,,●,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,54,"$150 allowance every three months, loaded to your Flex Card, for comprehensive and preventive dental services."
 main,H7006-018-0,R_dental,,●,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,54,You may receive services from any approved dental provider
 main,H7006-018-0,S_acupuncture,,●,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,46,$50 allowance every six
@@ -1529,7 +1880,9 @@ main,H7006-018-0,T_chiropractic,,●,https://atriohp.com/media/qzyffvwm/h7006_01
 main,H7006-018-0,T_chiropractic,,●,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,52,Routine chiropractic care
 main,H7006-018-0,U_naturopath,,●,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,47,$50 allowance every six
 main,H7006-018-0,U_naturopath,,●,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,47,Benefit allowance loaded to your Flex Card for naturopathy
+main,H7006-018-0,W_fitness,,●,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,58,$120 allowance every six
 main,H7006-018-0,X_transportation,,,https://atriohp.com/media/254ghvxu/2027-portland-sb_final-v2.pdf,12,Transportation (additional
+main,H7006-018-0,Y_otc,,●,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,82,"$30 allowance every three months, loaded to your Flex Card, for select OTC items."
 main,H7006-021-0,AB_ambulance,1,$300,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,39,In-Network $300 copay for each Medicare-covered Ground Ambulance service.
 main,H7006-021-0,AB_ambulance,1,$300,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,39,prior authorization. $300 copay for each Medicare-covered Air Ambulance service.
 main,H7006-021-0,F_primary_care,1,$0,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,9,$0 copay per visit
@@ -1559,13 +1912,26 @@ main,H7006-021-0,M_part_b_drugs,,0%-20%,https://atriohp.com/media/qyfpfa50/h7006
 main,H7006-021-0,M_part_b_drugs,,0%-20%,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,61,Medicare Part B Insulin Drugs In-Network 0% - 20% coinsurance
 main,H7006-021-0,M_part_b_drugs,,0%-20%,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,62,Medicare Part B Chemotherapy/Radiation Drugs In-Network 0% - 20% coinsurance
 main,H7006-021-0,M_part_b_drugs,,0%-20%,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,62,Other Medicare Part B Drugs In-Network 0% - 20% coinsurance
+main,H7006-021-0,P_vision,,●,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,89,$0 copay up to the allowance
+main,H7006-021-0,P_vision,,●,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,89,$200 allowance every year for all additional eyewear.
+main,H7006-021-0,P_vision,,●,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,89,In-Network $0 copay Out-of-Network 80% coinsurance
+main,H7006-021-0,P_vision,,●,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,89,Limited to 1 box of contact lenses every year.
+main,H7006-021-0,P_vision,,●,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,89,Limited to 1 visit(s) every year
+main,H7006-021-0,P_vision,,●,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,90,$0 copay up to the allowance
+main,H7006-021-0,P_vision,,●,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,90,Limited to 1 pair of eyeglasses (lenses and frames) every year.
+main,H7006-021-0,Q_hearing,,●,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,51,$699 copay per aid for
+main,H7006-021-0,Q_hearing,,●,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,51,$999 copay per
+main,H7006-021-0,Q_hearing,,●,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,51,Limited to 1 visit(s) every year
+main,H7006-021-0,Q_hearing,,●,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,51,Up to 2 TruHearing-branded hearing aids every year
 main,H7006-021-0,R_dental,,●,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,45,"$400 allowance every three months, loaded to your Flex Card, for comprehensive and preventive dental services."
 main,H7006-021-0,S_acupuncture,,●,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,38,"$100 allowance every six months, loaded to your Flex Card, for combined routine chiropractic, acupuncture and naturopathy services."
 main,H7006-021-0,S_acupuncture,,●,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,38,Routine (non-Medicare covered) acupuncture services
 main,H7006-021-0,T_chiropractic,,●,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,43,"$100 allowance every six months, loaded to your Flex Card, for combined routine chiropractic, acupuncture and naturopathy services."
 main,H7006-021-0,T_chiropractic,,●,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,43,Routine chiropractic care
 main,H7006-021-0,U_naturopath,,●,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,39,"$100 allowance every six months, loaded to your Flex Card, for combined routine chiropractic, acupuncture and naturopathy services."
+main,H7006-021-0,W_fitness,,●,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,50,$100 allowance every three
 main,H7006-021-0,X_transportation,,,https://atriohp.com/media/254ghvxu/2027-portland-sb_final-v2.pdf,12,Transportation (additional
+main,H7006-021-0,Y_otc,,●,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,73,"$150 allowance every three months, loaded to your Flex Card, for select OTC items."
 main,H7199-002-0,AB_ambulance,1,$0-$325 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,55,Air Ambulance 20% coinsurance per one-way trip
 main,H7199-002-0,AB_ambulance,1,$0-$325 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,55,Ground Ambulance $325 copay per one-way trip
 main,H7199-002-0,AB_ambulance,1,$0-$325 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,55,You pay $0 copay for facility-to-
@@ -1605,6 +1971,12 @@ main,H7199-002-0,O_medical_deductible,,$250 some,https://assets.devoted.com/plan
 main,H7199-002-0,O_medical_deductible,,$250 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,49,Your deductible is $250.
 main,H7199-002-0,O_medical_deductible,,$250 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-SB-H7199-002-ENG.pdf,4,Medical Deductible $250
 main,H7199-002-0,O_medical_deductible,,$250 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-SB-H7199-002-ENG.pdf,4,"The deductible does not apply to Medicare Part B-covered insulin (when you use insulin via a pump) or Medicare-covered preventive services, and some Medicare-covered services."
+main,H7199-002-0,P_vision,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,125,Routine eye exam $0 copay
+main,H7199-002-0,P_vision,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,125,"You are covered for 1 routine vision exam (including refraction, if needed)"
+main,H7199-002-0,P_vision,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,126,Your plan pays up to $200 per year
+main,H7199-002-0,Q_hearing,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,79,$399 copay per ear for Advanced hearing aid
+main,H7199-002-0,Q_hearing,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,79,$699 copay per ear for Premium hearing aid
+main,H7199-002-0,Q_hearing,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,79,You are covered for 1 routine hearing exam from in- or out- of-network providers each year.
 main,H7199-002-0,R_dental,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,62,"You can be reimbursed up to $2,250 per year for covered dental services"
 main,H7199-002-0,R_dental,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,63,"You will be reimbursed 50% for your out-of-pocket costs, up to the $2,250 annual allowance for comprehensive dental service categories"
 main,H7199-002-0,S_acupuncture,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,62,"You have a $2,250 yearly allowance toward Preventive Dental and Comprehensive dental services, therapeutic massage, routine acupuncture, and/or naturopath services combined."
@@ -1615,7 +1987,9 @@ main,H7199-002-0,U_naturopath,,●,https://assets.devoted.com/plan-documents/202
 main,H7199-002-0,U_naturopath,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,63,You will be reimbursed for 50% for your out-of-pocket costs for covered alternative therapies.
 main,H7199-002-0,V_massage,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,62,"You have a $2,250 yearly allowance toward Preventive Dental and Comprehensive dental services, therapeutic massage, routine acupuncture, and/or naturopath services combined."
 main,H7199-002-0,V_massage,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,63,You will be reimbursed for 50% for your out-of-pocket costs for covered alternative therapies.
+main,H7199-002-0,W_fitness,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,73,$0 membership
 main,H7199-002-0,X_transportation,,,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-SB-H7199-002-ENG.pdf,9,Transportation                       Not covered
+main,H9003-001-0,AA_opt_packages,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,15,The monthly premium for optional supplemental benefits (Advantage Plus) is $54.
 main,H9003-001-0,AB_ambulance,1,$250,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,54,$250 for Enhanced plan
 main,H9003-001-0,AB_ambulance,1,$250,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,54,"fixed wing, rotary wing, and ground ambulance"
 main,H9003-001-0,AB_ambulance,2,$250,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,54,$250 for Enhanced plan
@@ -1641,6 +2015,15 @@ main,H9003-001-0,L_xray_imaging,2,$150,https://healthy.kaiserpermanente.org/cont
 main,H9003-001-0,L_xray_imaging,2,$150,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,81,"You pay the following per visit, per department depending upon the plan in which you are enrolled:"
 main,H9003-001-0,L_xray_imaging,2,$150,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,81,• $150 for Enhanced plan members.
 main,H9003-001-0,O_medical_deductible,,$0,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/summary-of-benefits/medicare/2027/summary-of-benefits-nw.pdf,4,Deductible $0 $0 $0
+main,H9003-001-0,P_vision,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,100,$0 for Enhanced plan members.
+main,H9003-001-0,P_vision,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,100,Routine eye exams (eye refraction exams) to
+main,H9003-001-0,P_vision,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,101,$150 for Enhanced plan
+main,H9003-001-0,P_vision,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,101,"Every 2 calendar years, we provide Enhanced and"
+main,H9003-001-0,Q_hearing,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,64,$0 for Enhanced plan members.
+main,H9003-001-0,Q_hearing,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,64,Routine hearing exams.
+main,H9003-001-0,Q_hearing,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,64,"You pay the following per visit,"
+main,H9003-001-0,Q_hearing,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,65,$500 for Enhanced plan
+main,H9003-001-0,Q_hearing,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,65,"Every 3 calendar years, we provide an allowance to"
 main,H9003-001-0,R_dental,,,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,108,"$0 up to the $1,500 annual dental benefit maximum."
 main,H9003-001-0,R_dental,,,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,108,Preventive and diagnostic services:
 main,H9003-001-0,R_dental,,,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,108,"The annual dental benefit maximum is $1,500 for dental care except for nitrous oxide and night guards."
@@ -1654,8 +2037,11 @@ main,H9003-001-0,T_chiropractic,,●,https://healthy.kaiserpermanente.org/conten
 main,H9003-001-0,U_naturopath,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,54,$10 for Enhanced plan
 main,H9003-001-0,U_naturopath,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,54,"Acupuncture, alternative therapy (naturopathy),"
 main,H9003-001-0,V_massage,,,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,114,Massage therapy                           Covered when ordered as part of physical therapy
+main,H9003-001-0,W_fitness,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,63,$0
+main,H9003-001-0,W_fitness,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,63,Fitness benefit (One Pass®)
 main,H9003-001-0,X_transportation,,,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,99,$0
 main,H9003-001-0,X_transportation,,,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,99,Transportation services—Non-emergency medical
+main,H9003-006-0,AA_opt_packages,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,15,The monthly premium for optional supplemental benefits (Advantage Plus) is $54.
 main,H9003-006-0,AB_ambulance,1,$300,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,54,$300 for Standard plan
 main,H9003-006-0,AB_ambulance,1,$300,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,54,"fixed wing, rotary wing, and ground ambulance"
 main,H9003-006-0,AB_ambulance,2,$300,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,54,$300 for Standard plan
@@ -1679,6 +2065,12 @@ main,H9003-006-0,L_xray_imaging,2,$225,https://healthy.kaiserpermanente.org/cont
 main,H9003-006-0,L_xray_imaging,2,$225,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,81,"You pay the following per visit, per department depending upon the plan in which you are enrolled:"
 main,H9003-006-0,L_xray_imaging,2,$225,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,81,• $225 for Standard plan members.
 main,H9003-006-0,O_medical_deductible,,$0,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/summary-of-benefits/medicare/2027/summary-of-benefits-nw.pdf,4,Deductible $0 $0 $0
+main,H9003-006-0,P_vision,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,100,$0 for Standard plan members.
+main,H9003-006-0,P_vision,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,100,Routine eye exams (eye refraction exams) to
+main,H9003-006-0,P_vision,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,102,$100 for Standard plan
+main,H9003-006-0,Q_hearing,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,64,$0 for Standard plan members.
+main,H9003-006-0,Q_hearing,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,64,Routine hearing exams.
+main,H9003-006-0,Q_hearing,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,64,"You pay the following per visit,"
 main,H9003-006-0,R_dental,,,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,108,"$0 up to the $1,500 annual dental benefit maximum."
 main,H9003-006-0,R_dental,,,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,108,Preventive and diagnostic services:
 main,H9003-006-0,R_dental,,,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,108,"The annual dental benefit maximum is $1,500 for dental care except for nitrous oxide and night guards."
@@ -1692,8 +2084,11 @@ main,H9003-006-0,T_chiropractic,,●,https://healthy.kaiserpermanente.org/conten
 main,H9003-006-0,U_naturopath,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,54,$15 for Standard plan members.
 main,H9003-006-0,U_naturopath,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,54,"Acupuncture, alternative therapy (naturopathy),"
 main,H9003-006-0,V_massage,,,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,114,Massage therapy                           Covered when ordered as part of physical therapy
+main,H9003-006-0,W_fitness,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,63,$0
+main,H9003-006-0,W_fitness,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,63,Fitness benefit (One Pass®)
 main,H9003-006-0,X_transportation,,,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,99,$0
 main,H9003-006-0,X_transportation,,,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,99,Transportation services—Non-emergency medical
+main,H9003-009-0,AA_opt_packages,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,15,The monthly premium for optional supplemental benefits (Advantage Plus) is $54.
 main,H9003-009-0,AB_ambulance,1,$350,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,55,$350 for Value plan members.
 main,H9003-009-0,AB_ambulance,2,$350,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,55,$350 for Value plan members.
 main,H9003-009-0,AB_ambulance,2,$350,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,55,We also cover the services of a licensed ambulance
@@ -1715,6 +2110,8 @@ main,H9003-009-0,L_xray_imaging,2,$350,https://healthy.kaiserpermanente.org/cont
 main,H9003-009-0,L_xray_imaging,2,$350,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,81,"You pay the following per visit, per department depending upon the plan in which you are enrolled:"
 main,H9003-009-0,L_xray_imaging,2,$350,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,81,• $350 for Value plan members.
 main,H9003-009-0,O_medical_deductible,,$0,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/summary-of-benefits/medicare/2027/summary-of-benefits-nw.pdf,4,Deductible $0 $0 $0
+main,H9003-009-0,P_vision,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,100,$15 for Value plan members.
+main,H9003-009-0,P_vision,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,100,Routine eye exams (eye refraction exams) to
 main,H9003-009-0,R_dental,,,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,108,"$0 up to the $1,500 annual dental benefit maximum."
 main,H9003-009-0,R_dental,,,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,108,Preventive and diagnostic services:
 main,H9003-009-0,R_dental,,,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,108,"The annual dental benefit maximum is $1,500 for dental care except for nitrous oxide and night guards."
@@ -1728,5 +2125,7 @@ main,H9003-009-0,T_chiropractic,,●,https://healthy.kaiserpermanente.org/conten
 main,H9003-009-0,U_naturopath,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,54,$20 for Value plan members.
 main,H9003-009-0,U_naturopath,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,54,"Acupuncture, alternative therapy (naturopathy),"
 main,H9003-009-0,V_massage,,,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,114,Massage therapy                           Covered when ordered as part of physical therapy
+main,H9003-009-0,W_fitness,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,63,$0
+main,H9003-009-0,W_fitness,,●,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,63,Fitness benefit (One Pass®)
 main,H9003-009-0,X_transportation,,,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,99,$0
 main,H9003-009-0,X_transportation,,,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,99,Transportation services—Non-emergency medical
