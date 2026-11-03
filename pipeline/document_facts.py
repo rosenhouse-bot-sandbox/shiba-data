@@ -14,6 +14,7 @@ VERSIONS[4] = dict(VERSIONS[1], groups=("imaging", "ambulance", "surgery"))
 # Version 6 replaced 5, whose inpatient readers had to drop day tiers: tiers differ only in `limit`, which is not
 # part of a fact's identity.
 VERSIONS[6] = dict(VERSIONS[4], groups=VERSIONS[4]["groups"] + ("tests", "visits", "rehab", "inpatient"))
+VERSIONS[7] = dict(VERSIONS[6], groups=VERSIONS[6]["groups"] + ("giveback", "part_b_drugs", "medical_deductible", "dental", "extras"))
 
 
 def fresh(path):
