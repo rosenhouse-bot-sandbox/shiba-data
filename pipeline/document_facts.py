@@ -11,6 +11,7 @@ VERSIONS = {
 }
 VERSIONS[3] = dict(VERSIONS[1], groups=("imaging", "ambulance"))
 VERSIONS[4] = dict(VERSIONS[1], groups=("imaging", "ambulance", "surgery"))
+VERSIONS[5] = dict(VERSIONS[4], groups=VERSIONS[4]["groups"] + ("tests", "visits", "rehab", "inpatient"))
 
 
 def fresh(path):

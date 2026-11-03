@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-61de2101267140ce.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 2, Outpatient hospital services row: 20% coinsurance for surgery in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 2, Outpatient hospital services row: $0 copay for diagnostic colonoscopy and polyp removal.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 2, Ambulatory Surgical Center (ASC) services row: 20% coinsurance.\"}]\n```",
+ "usage": {
+  "input_tokens": 2058,
+  "output_tokens": 431,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

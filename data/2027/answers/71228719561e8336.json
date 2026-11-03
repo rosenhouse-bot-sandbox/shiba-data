@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "d594b0a1d3772214.md",
+ "reply": "```json\n[{\"plan_id\": \"H2056-003-0\", \"benefit\": \"surgery\", \"setting\": \"outpatient_hospital\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$500\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 62,\n  \"quotes\": [\"$500 copay, after your $750 plan deductible\"], \"note\": \"Applies after the $750 plan deductible.\"},\n {\"plan_id\": \"H2056-003-0\", \"benefit\": \"surgery\", \"setting\": \"asc\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$450\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 62,\n  \"quotes\": [\"$450 copay, after your $750 plan deductible\"], \"note\": \"Applies after the $750 plan deductible.\"},\n {\"plan_id\": \"H2056-003-0\", \"benefit\": \"surgery.colonoscopy\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 42,\n  \"quotes\": [\"Diagnostic colonoscopy: $0 copay\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 9878,
+  "output_tokens": 1441,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

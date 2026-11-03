@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "29166053e638f7e6.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-317-0\", \"benefit\": \"surgery\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 6, \"quotes\": [\"Diagnostic mammography $0 copay Surgery services 20% of the cost\"], \"note\": \"The quote joins two adjacent rows because 'Surgery services 20% of the cost' appears twice on the page.\"},\n{\"plan_id\": \"H1036-317-0\", \"benefit\": \"surgery\", \"setting\": \"asc\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 6, \"quotes\": [\"AMBULATORY SURGERY CENTER Diagnostic colonoscopy $0 copay Surgery services 20% of the cost\"], \"note\": \"The quote joins the section header with the following rows because the row text repeats on the page.\"},\n{\"plan_id\": \"H1036-317-0\", \"benefit\": \"surgery.colonoscopy\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 6, \"quotes\": [\"OUTPATIENT HOSPITAL COVERAGE Diagnostic colonoscopy $0 copay\"], \"note\": \"The quote includes the section header because 'Diagnostic colonoscopy $0 copay' appears twice on the page.\"},\n{\"plan_id\": \"H1036-317-0\", \"benefit\": \"surgery.colonoscopy\", \"setting\": \"asc\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 6, \"quotes\": [\"AMBULATORY SURGERY CENTER Diagnostic colonoscopy $0 copay\"], \"note\": \"The quote includes the section header because 'Diagnostic colonoscopy $0 copay' appears twice on the page.\"}]\n```",
+ "usage": {
+  "input_tokens": 2643,
+  "output_tokens": 1711,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

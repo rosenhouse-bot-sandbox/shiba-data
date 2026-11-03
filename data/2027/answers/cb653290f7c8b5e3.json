@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "2947683a555fc83c.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-323-0\", \"benefit\": \"surgery\", \"setting\": \"outpatient_hospital\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$450\", \"page\": 5,\n  \"quotes\": [\"Surgery services $450 copay\"]},\n {\"plan_id\": \"H1036-323-0\", \"benefit\": \"surgery\", \"setting\": \"asc\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$350\", \"page\": 5,\n  \"quotes\": [\"Surgery services $350 copay\"]},\n {\"plan_id\": \"H1036-323-0\", \"benefit\": \"surgery.colonoscopy\", \"setting\": \"outpatient_hospital\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 5,\n  \"quotes\": [\"OUTPATIENT HOSPITAL COVERAGE Diagnostic colonoscopy $0 copay\"],\n  \"note\": \"The row text 'Diagnostic colonoscopy $0 copay' appears twice on the page. The quote adds the section header line above it so it occurs once.\"},\n {\"plan_id\": \"H1036-323-0\", \"benefit\": \"surgery.colonoscopy\", \"setting\": \"asc\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 5,\n  \"quotes\": [\"AMBULATORY SURGERY CENTER Diagnostic colonoscopy $0 copay\"],\n  \"note\": \"The row text 'Diagnostic colonoscopy $0 copay' appears twice on the page. The quote adds the section header line above it so it occurs once.\"}]\n```",
+ "usage": {
+  "input_tokens": 2797,
+  "output_tokens": 1770,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

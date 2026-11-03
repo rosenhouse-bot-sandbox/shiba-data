@@ -8,7 +8,7 @@ on:
         required: true
         default: "2027"
       candidate:
-        description: Run this unpinned step version, such as filled@2, in place of its pin (pipeline/steps.py)
+        description: Run these unpinned step versions, such as filled@2 or filled@2,document_facts@5, in place of their pins (pipeline/steps.py)
         required: false
       rebuild:
         description: Also rebuild the model steps from scratch into data/<year>/rebuilds/<this name> (issue #47)

@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "f751937f09316ed1.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-009-0\", \"benefit\": \"surgery.colonoscopy\", \"setting\": \"outpatient_hospital\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"\", \"limit\": \"\", \"page\": 94,\n  \"quotes\": [\"Diagnostic Colonoscopies\", \"At an Outpatient hospital: 50% coinsurance\"], \"note\": \"\"},\n {\"plan_id\": \"H2923-009-0\", \"benefit\": \"surgery.colonoscopy\", \"setting\": \"asc\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"\", \"limit\": \"\", \"page\": 94,\n  \"quotes\": [\"Diagnostic Colonoscopies\", \"At an Ambulatory Surgical Center (ASC): 50% coinsurance\"], \"note\": \"\"},\n {\"plan_id\": \"H2923-009-0\", \"benefit\": \"surgery\", \"setting\": \"asc\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"\", \"limit\": \"\", \"page\": 95,\n  \"quotes\": [\"50% coinsurance for outpatient procedures/ surgery at an ASC - facility\"], \"note\": \"This is the facility cost. The professional cost at an ASC is listed separately as 30% coinsurance.\"},\n {\"plan_id\": \"H2923-009-0\", \"benefit\": \"surgery\", \"setting\": \"outpatient_hospital\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"\", \"limit\": \"\", \"page\": 95,\n  \"quotes\": [\"50% coinsurance for outpatient procedures/ surgery at an Outpatient Hospital\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 10507,
+  "output_tokens": 1823,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

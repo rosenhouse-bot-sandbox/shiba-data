@@ -138,6 +138,60 @@ class AmbulanceTest(unittest.TestCase):
         self.assertEqual((line1, line2), ([here], [abroad, here]))
 
 
+def surgery(*found):
+    return [value for value, _ in present.outpatient_surgery("Aetna", list(found))]
+
+
+def op(benefit="surgery", setting="outpatient_hospital", amount="$500", **more):
+    return fact(benefit, setting, amount, **{"cost_kind": "coinsurance" if amount.endswith("%") else "copay", **more})
+
+
+class OutpatientSurgeryTest(unittest.TestCase):
+    def test_line_1_is_the_outpatient_hospital_and_line_2_the_surgical_center(self):
+        self.assertEqual(surgery(op(), op(setting="asc", amount="20%")), ["$500", "20%"])
+
+    def test_a_cost_for_any_setting_fills_both_lines(self):
+        self.assertEqual(surgery(op(setting="any")), ["$500", "$500"])
+
+    def test_a_0_diagnostic_colonoscopy_or_skin_biopsy_starts_its_settings_line_at_0(self):
+        self.assertEqual(surgery(op(), op(setting="asc", amount="$400"), op("surgery.colonoscopy", "asc", "$0")),
+                         ["$500", "$0-$400"])
+        self.assertEqual(surgery(op(amount="20%"), op("surgery.skin_biopsy", amount="$0")), ["$0-20%", ""])
+
+    def test_only_a_0_copay_starts_a_line_at_0_and_only_with_a_surgery_cost(self):
+        self.assertEqual(surgery(op(), op("surgery.colonoscopy", amount="$100"), op("surgery.skin_biopsy", amount="0%")),
+                         ["$500", ""])
+        self.assertEqual(surgery(op("surgery.colonoscopy", amount="$0")), ["", ""])
+
+    def test_a_0_colonoscopy_counts_only_where_the_document_prices_that_setting(self):
+        self.assertEqual(surgery(op(), op(setting="asc", amount="$400"), op("surgery.colonoscopy", "any", "$0")),
+                         ["$500", "$400"])
+
+    def test_a_0_colonoscopy_from_a_lesser_source_still_counts(self):
+        self.assertEqual(surgery(op(setting="asc", amount="20%"), op("surgery.colonoscopy", "asc", "$0", source="SB")),
+                         ["", "$0-20%"])
+
+    def test_an_out_of_network_0_colonoscopy_does_not_count(self):
+        self.assertEqual(surgery(op(), op("surgery.colonoscopy", amount="$0", network="out")), ["$500", ""])
+
+    def test_a_better_sources_colonoscopy_price_beats_a_0(self):
+        self.assertEqual(surgery(op(), op("surgery.colonoscopy", amount="$100"),
+                                 op("surgery.colonoscopy", amount="$0", source="SB")), ["$500", ""])
+
+    def test_skips_other_networks_supplemental_benefits_tiers_packages_conditions_and_deductibles(self):
+        skipped = [op(amount="$900", network="out"), op(amount="$800", covered_by="supplemental"),
+                   op(amount="$0", provider_tier="PLUS"), op(amount="$0", package="Rider"), op(amount="$0", condition="x"),
+                   op(amount="$990", cost_kind="deductible")]
+        self.assertEqual(surgery(op(), *skipped), ["$500", ""])
+
+    def test_the_best_source_wins(self):
+        self.assertEqual(surgery(op(), op(amount="$100", source="SB")), ["$500", ""])
+
+    def test_cites_the_facts_behind_each_line(self):
+        cost, zero = op(setting="asc"), op("surgery.colonoscopy", "asc", "$0")
+        self.assertEqual([cited for _, cited in present.outpatient_surgery("Aetna", [cost, zero])], [[], [cost, zero]])
+
+
 def presented_cells(data, column):
     return {p: [value for value, _ in got] for p, got in present.lines(data, column).items()}
 
@@ -156,7 +210,7 @@ class WriteTest(unittest.TestCase):
 
 
 # Lines where the rule and an edit disagree. The rule wins on X-ray lines (#127 has the evidence).
-# Edits stay on the Ambulance lines until document facts support them.
+# Edits stay on the other lines until document facts support them.
 TRIAGED = {
     ("L_xray_imaging", "H2056-003-0", "2"): "the expert's $0 mammogram rule covers Aetna",
     ("L_xray_imaging", "H2056-018-0", "2"): "the expert's $0 mammogram rule covers Aetna",
@@ -172,6 +226,12 @@ TRIAGED = {
     ("AB_ambulance", "H9003-001-0", "1"): "the $0 for a home treatment plan is on the page before the ambulance",
     ("AB_ambulance", "H9003-006-0", "1"): "the $0 for a home treatment plan is on the page before the ambulance",
     ("AB_ambulance", "H9003-009-0", "1"): "the $0 for a home treatment plan is on the page before the ambulance",
+    ("I_outpatient_surgery", "H9003-001-0", "1"): "the reader missed the SB's $0 low end",
+    ("I_outpatient_surgery", "H9003-001-0", "2"): "the EOC gives one outpatient surgery price, which readers file under outpatient hospitals",
+    ("I_outpatient_surgery", "H9003-006-0", "1"): "the reader missed the SB's $0 low end",
+    ("I_outpatient_surgery", "H9003-006-0", "2"): "the EOC gives one outpatient surgery price, which readers file under outpatient hospitals",
+    ("I_outpatient_surgery", "H9003-009-0", "1"): "the reader missed the SB's $0 low end",
+    ("I_outpatient_surgery", "H9003-009-0", "2"): "the EOC gives one outpatient surgery price, which readers file under outpatient hospitals",
 }
 
 

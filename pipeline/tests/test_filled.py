@@ -69,14 +69,17 @@ class VersionsTest(unittest.TestCase):
         self.assertEqual(names, tuple(n for n in layers.LAYERS if n not in (layers.FILLED, layers.PRESENTED)))
         self.assertIsNone(ignore)
 
-    def test_versions_2_and_3_see_their_presented_columns_instead_of_their_edits(self):
-        for version, columns in ((2, ["L_xray_imaging"]), (3, ["L_xray_imaging", "AB_ambulance"])):
+    def test_later_versions_see_their_presented_columns_instead_of_their_edits(self):
+        for version, columns in ((2, ["L_xray_imaging"]), (3, ["L_xray_imaging", "AB_ambulance"]),
+                                 (4, ["L_xray_imaging", "AB_ambulance", "I_outpatient_surgery"])):
             names, ignore = filled.VERSIONS[version]
             self.assertEqual(names, layers.without(layers.FILLED))
             for column in columns:
                 self.assertTrue(ignore(dict(layer=layers.EDITS, column=column)), (version, column))
                 self.assertFalse(ignore(dict(layer=layers.PRESENTED, column=column)), (version, column))
             self.assertFalse(ignore(dict(layer=layers.EDITS, column="G_specialist")))
+        _, ignore = filled.VERSIONS[3]
+        self.assertTrue(ignore(dict(layer=layers.PRESENTED, column="I_outpatient_surgery")))
         _, ignore = filled.VERSIONS[2]
         self.assertTrue(ignore(dict(layer=layers.PRESENTED, column="AB_ambulance")))
         self.assertFalse(ignore(dict(layer=layers.EDITS, column="AB_ambulance")))

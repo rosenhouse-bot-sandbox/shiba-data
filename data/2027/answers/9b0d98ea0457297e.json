@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "7ac7300e6ca40ac7.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-040-0\", \"benefit\": \"surgery.colonoscopy\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"covered\", \"page\": 58, \"quotes\": [\"There is no coinsurance, copayment, or deductible or each Medicare-covered diagnostic colonoscopy.\"], \"note\": \"The document says there is no copayment, coinsurance or deductible, which in effect means $0. It is listed as covered because the quote shows no number.\"},\n {\"plan_id\": \"H3805-040-0\", \"benefit\": \"surgery.colonoscopy\", \"setting\": \"asc\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 79, \"quotes\": [\"$0 copayment or a colonoscopy at an ambulatory surgical center.\"]},\n {\"plan_id\": \"H3805-040-0\", \"benefit\": \"surgery.colonoscopy\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 79, \"quotes\": [\"$0 copayment or a colonoscopy at an outpatient hospital.\"]},\n {\"plan_id\": \"H3805-040-0\", \"benefit\": \"surgery\", \"setting\": \"asc\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$635\", \"page\": 79, \"quotes\": [\"$635 copayment or Medicare-covered surgery or other services provided to you at an ambulatory surgical center\"]},\n {\"plan_id\": \"H3805-040-0\", \"benefit\": \"surgery\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$685\", \"page\": 79, \"quotes\": [\"$685 copayment or Medicare-covered surgery or other services provided to you at an outpatient hospital\"]}]\n```",
+ "usage": {
+  "input_tokens": 14295,
+  "output_tokens": 1703,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

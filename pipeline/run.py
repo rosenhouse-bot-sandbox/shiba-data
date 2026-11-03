@@ -1,11 +1,11 @@
 """Rebuilds data/<year>/generated from the sources in data/<year>/config.json, found.csv and links.csv,
 then the live year's machine/blanks.csv, machine/document_facts.csv, generated/presented.csv and machine/filled.csv.
 
-Usage: python3 -I pipeline/run.py <year> <work_dir> [api|replay] [<step>@<version>]
+Usage: python3 -I pipeline/run.py <year> <work_dir> [api|replay] [<step>@<version>[,...]]
 
 Saved answers in data/<year>/answers are reused. Without `api`, the run stops at the first model step
 with tasks that have no saved answer, and lists them. With `api`, the Claude API answers them.
-A <step>@<version> candidate runs in place of that step's pinned version (see steps.py).
+Each <step>@<version> candidate runs in place of that step's pinned version (see steps.py).
 `replay` reads nothing from the web. It needs the committed run's PDFs, texts and CMS zips in <work_dir>,
 where blobs.py names them, and keeps the committed documents lists.
 Needs pypdfium2, poppler's pdftotext and `npm ci` here, and the anthropic package for `api`.

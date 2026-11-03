@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "e2d6e1e199a3b8a9.md",
+ "reply": "```json\n[{\"plan_id\": \"H2056-018-0\", \"benefit\": \"surgery.colonoscopy\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 34, \"quotes\": [\"Diagnostic colonoscopy: $0 copay\"]},\n {\"plan_id\": \"H2056-018-0\", \"benefit\": \"surgery\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per surgery\", \"page\": 52, \"quotes\": [\"$325 copay for each Medicare‑covered outpatient surgery at an outpatient hospital facility.\"]},\n {\"plan_id\": \"H2056-018-0\", \"benefit\": \"surgery\", \"setting\": \"asc\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$275\", \"unit\": \"per surgery\", \"page\": 52, \"quotes\": [\"$275 copay for each Medicare‑covered\"], \"note\": \"The row breaks across pages. The $275 amount is on page 52, and 'outpatient surgery at an ambulatory surgical center' continues on page 53.\"}]\n```",
+ "usage": {
+  "input_tokens": 8745,
+  "output_tokens": 1687,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

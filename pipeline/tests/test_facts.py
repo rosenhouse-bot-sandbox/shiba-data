@@ -146,6 +146,13 @@ class VocabularyTest(unittest.TestCase):
             self.assertIn(b, facts.BENEFITS)
         self.assertEqual(facts.GROUP_SETTINGS["surgery"], ("any", "outpatient_hospital", "asc"))
 
+    def test_words_for_tests_visits_rehab_and_inpatient(self):
+        for b in ("tests.diagnostic", "tests.diagnostic.sleep_study", "tests.lab", "tests.genetic", "visits",
+                  "rehab.physical", "rehab.occupational", "rehab.speech", "rehab.reevaluation",
+                  "inpatient.acute", "inpatient.psychiatric"):
+            self.assertIn(b, facts.BENEFITS)
+        self.assertIn("telehealth", facts.GROUP_SETTINGS["visits"])
+
     def test_describe_lists_one_group(self):
         text = facts.describe("imaging")
         for b in facts.BENEFITS:
