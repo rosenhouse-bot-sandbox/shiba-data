@@ -3,9 +3,12 @@
 Each answer is saved in data/<year>/answers, keyed by a hash of the model, the effort if any, and the task's text.
 A rerun reuses saved answers, so only new or changed tasks call a model.
 """
-import concurrent.futures, hashlib, json, os, re, urllib.request
+import concurrent.futures, hashlib, json, os, re, threading, urllib.request
 
 WORKERS = 8
+# Model calls in flight across every answer() call, which stays under the organization's concurrency limit.
+REQUESTS = 16
+IN_FLIGHT = threading.BoundedSemaphore(REQUESTS)
 MAX_TOKENS = 64000
 # A model sometimes replies in prose, so a bad reply is asked again.
 ATTEMPTS = 3
@@ -51,7 +54,8 @@ def answer(tasks, model, saved, asker, effort=None):
         elif asker:
             usage = {}
             for _ in range(ATTEMPTS):
-                reply, used = asker(model, text, effort)
+                with IN_FLIGHT:
+                    reply, used = asker(model, text, effort)
                 usage = {k: usage.get(k, 0) + v for k, v in used.items()}
                 if array(reply) is not None:
                     break

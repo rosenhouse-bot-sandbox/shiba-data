@@ -1,4 +1,4 @@
-import json, os, pathlib, sys, tempfile, types, unittest
+import concurrent.futures, json, os, pathlib, sys, tempfile, threading, time, types, unittest
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -41,6 +41,27 @@ class AnswerTest(unittest.TestCase):
         self.assertEqual((missing, fake.asked), ([], []))
         self.assertEqual(json.loads(self.task.with_suffix(".json").read_text()), [{"key": "a"}])
         self.assertEqual(self.saved_answers(), [{"model": MODEL, "task": "P-1.md", "reply": '[{"key": "a"}]', "usage": USAGE}])
+
+    def test_calls_at_the_same_time_share_one_limit_on_requests(self):
+        lock, flying, most = threading.Lock(), [0], [0]
+
+        def slow(model, text, effort):
+            with lock:
+                flying[0] += 1
+                most[0] = max(most[0], flying[0])
+            time.sleep(0.02)
+            with lock:
+                flying[0] -= 1
+            return "[]", USAGE
+
+        dirs = [self.root / f"group{n}" for n in range(3)]
+        for d in dirs:
+            d.mkdir()
+            for i in range(ask.WORKERS):
+                (d / f"t{i}.md").write_text(f"{d.name} task {i}")
+        with concurrent.futures.ThreadPoolExecutor(len(dirs)) as pool:
+            list(pool.map(lambda d: ask.answer(sorted(d.glob("*.md")), MODEL, self.saved, slow), dirs))
+        self.assertEqual(most[0], ask.REQUESTS)
 
     def test_without_an_effort_the_key_is_unchanged(self):
         self.assertEqual(ask.key(MODEL, "Read this."), "b841d88300394ed2")
