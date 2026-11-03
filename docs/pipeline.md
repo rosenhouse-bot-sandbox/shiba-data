@@ -8,7 +8,7 @@ Each plan year builds through a linear chain of steps. Only steps 1 to 3 read th
 | 2 Locate documents | `find_docs.py`, with `find_on_carrier_pages.py`, `find_by_plan_page.py` and `find_regence.py` | Carrier sites, URL templates, `found.csv`, `links.csv` | `generated/documents.csv` |
 | 3 Snapshot | `fetch_docs.py`, `texts.py` | `documents.csv` | PDFs and texts in R2, `generated/documents_checked.csv`, `generated/texts.csv` |
 | 4 Extract facts | `document_facts.py`, `pbp_facts.py` | Texts, CMS PBP zip, saved answers | `machine/document_facts.csv`, `generated/pbp_facts.csv` |
-| 5 Present | `present.py` | Facts, column rules in code | `generated/presented.csv` |
+| 5 Present | `present.py` | Facts, `override_facts.csv`, column rules in code | `generated/presented.csv` |
 | 6 Publish | `web/build.py`, `web/sheet_sync.py` | Committed data, R2 | pdxplans.org and the Google Sheet |
 
 Older steps still fill the columns that step 5 does not present yet: `main_chart.py` and `dvha.py` from CMS data, `blanks.py` and `filled.py` from the EOC, and people's `edits.csv` and `comments.csv`. `pipeline/layers.py` stacks these layers. `presented.csv` wins over the older steps, and `edits.csv` wins over everything.
@@ -19,6 +19,7 @@ Older steps still fill the columns that step 5 does not present yet: `main_chart
 - An EOC fact beats an SB fact, and an SB fact beats a PBP fact.
 - `extract.py` sends a reader model each document's pages about one benefit group. A verifier model then accepts or rejects each fact against decoys that change one field. Every quote must appear exactly once on its page.
 - `present.py` holds one rule per column. A cell cites the facts its rule used. `present.HELD` lists cells whose readers missed part of the value, so other layers keep them.
+- `override_facts.csv` holds hand-written facts for what readers miss. Each has a note, and its cell has a yellow note in `comments.csv`.
 
 ## Model steps
 
