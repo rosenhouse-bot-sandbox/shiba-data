@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "cabbc3b82885b498.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-025-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$490\", \"unit\": \"per day\", \"limit\": \"days 1-5\", \"page\": 4, \"quotes\": [\"Days 1 - 5 $490 copay per day\"], \"note\": \"Left out the Day 6+ $0 copay per day fact because the check reported it as conflicting with this one.\"},\n {\"plan_id\": \"H2923-025-0\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$480\", \"unit\": \"per day\", \"limit\": \"days 1-4\", \"page\": 7, \"quotes\": [\"Days 1 - 4 $480 copay per day\"], \"note\": \"Left out the Days 5 - 90 $0 copay per day fact because the check reported it as conflicting with this one.\"}]\n```",
+ "usage": {
+  "input_tokens": 3872,
+  "output_tokens": 973,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

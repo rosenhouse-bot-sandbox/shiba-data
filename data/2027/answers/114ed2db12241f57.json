@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "5e11cf20cec995f3.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-048-0\", \"benefit\": \"rehab.physical\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$55\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 79, \"quotes\": [\"$55 copayment or each Medicare-covered physical therapy and speech-language therapy visit.\"]},\n{\"plan_id\": \"H3805-048-0\", \"benefit\": \"rehab.speech\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$55\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 79, \"quotes\": [\"$55 copayment or each Medicare-covered physical therapy and speech-language therapy visit.\"]},\n{\"plan_id\": \"H3805-048-0\", \"benefit\": \"rehab.occupational\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$50\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 79, \"quotes\": [\"$50 copayment or each Medicare-covered occupational therapy visit.\"]}]\n```",
+ "usage": {
+  "input_tokens": 12102,
+  "output_tokens": 740,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

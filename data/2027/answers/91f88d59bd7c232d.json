@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-37b0122461ea99ed.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 83, psychiatric hospital out-of-network: 30% coinsurance per day for days 1 to 90 for Medicare-covered admissions.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 81, inpatient hospital out-of-network section: Lifetime Reserve Days $0 copay per day.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 81, inpatient hospital out-of-network: 30% coinsurance per day for days 1 to 90 for each hospital stay.\"}]\n```",
+ "usage": {
+  "input_tokens": 3377,
+  "output_tokens": 455,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

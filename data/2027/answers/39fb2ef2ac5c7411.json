@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "2af2a9f1fd104b7f.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-455-0\", \"benefit\": \"rehab.occupational\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$45\", \"page\": 16, \"quotes\": [\"Occupational therapy • Comprehensive outpatient $45 copay 50% of the cost rehab facility • Outpatient hospital $45 copay 50% of the cost • Specialist's office $45 copay 50% of the cost\"], \"note\": \"The same $45 in-network copay is listed for every setting shown: comprehensive outpatient rehab facility, outpatient hospital and specialist's office.\"},\n{\"plan_id\": \"H5216-455-0\", \"benefit\": \"rehab.physical\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$45\", \"page\": 16, \"quotes\": [\"Physical therapy • Comprehensive outpatient $45 copay 50% of the cost rehab facility • Outpatient hospital $45 copay 50% of the cost • Specialist's office $45 copay 50% of the cost\"], \"note\": \"The same $45 in-network copay is listed for every setting shown: comprehensive outpatient rehab facility, outpatient hospital and specialist's office.\"},\n{\"plan_id\": \"H5216-455-0\", \"benefit\": \"rehab.speech\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$45\", \"page\": 16, \"quotes\": [\"Speech therapy • Comprehensive outpatient $45 copay 50% of the cost rehab facility • Outpatient hospital $45 copay 50% of the cost • Specialist's office $45 copay 50% of the cost\"], \"note\": \"The same $45 in-network copay is listed for every setting shown: comprehensive outpatient rehab facility, outpatient hospital and specialist's office.\"}]\n```",
+ "usage": {
+  "input_tokens": 3539,
+  "output_tokens": 2951,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

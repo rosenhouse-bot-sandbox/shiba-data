@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-7dcf10accd77535d.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 7 Lab Services row: $50 copay for genetic testing in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 7 Lab Services row: $10 in-network copay for all other labs. A1C and kidney health labs are $0.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 7 Diagnostic Tests and Procedures row: 20% in-network coinsurance for all other services. Colonoscopy, spirometry and specified related testing are $0.\"}]\n```",
+ "usage": {
+  "input_tokens": 2118,
+  "output_tokens": 633,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

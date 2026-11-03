@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "5e11cf20cec995f3.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-048-0\", \"benefit\": \"inpatient\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$550\", \"unit\": \"per day\", \"limit\": \"days 1-5\", \"page\": 65, \"quotes\": [\"$550 copayment each day or days 1-5 or\"], \"note\": \"The row covers inpatient acute, rehabilitation, long-term care hospitals and other inpatient stays, priced together. The page also gives $0 for additional Medicare-covered days, which I left out to avoid a duplicate fact.\"},\n {\"plan_id\": \"H3805-048-0\", \"benefit\": \"inpatient\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$550\", \"unit\": \"per day\", \"limit\": \"days 1-5\", \"page\": 12, \"quotes\": [\"$550 copayment each day or\", \"days 1 to 5.\"], \"note\": \"The row covers acute care, rehabilitation and long-term care stays, priced together. The page also gives $0 for additional Medicare-covered days, which I left out to avoid a duplicate fact.\"},\n {\"plan_id\": \"H3805-048-0\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$550\", \"unit\": \"per day\", \"limit\": \"days 1-4\", \"page\": 68, \"quotes\": [\"$550 copayment each day or days 1-4 or\"], \"note\": \"The page also gives $0 for additional Medicare-covered days, up to 90 days per benefit period. I left that out to avoid a duplicate fact.\"}]\n```",
+ "usage": {
+  "input_tokens": 17998,
+  "output_tokens": 1876,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

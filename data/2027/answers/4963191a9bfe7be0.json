@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-dca4e04d7b6dc26b.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 58, Inpatient services in a psychiatric hospital row, Out-of-Network: 50% coinsurance for each Medicare-covered hospital stay.\"}, {\"id\": 1, \"ok\": true, \"reason\": \"Page 57, Inpatient hospital care (continued) row, Out-of-Network: 50% coinsurance for each Medicare-covered hospital stay.\"}]\n```",
+ "usage": {
+  "input_tokens": 2904,
+  "output_tokens": 153,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

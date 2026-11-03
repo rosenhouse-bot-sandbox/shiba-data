@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "f751937f09316ed1.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-009-0\", \"benefit\": \"tests.diagnostic\", \"setting\": \"office.specialist\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 88, \"quotes\": [\"Specialist's office: 50% coinsurance Freestanding location: 50% coinsurance Outpatient hospital: 50% coinsurance Home Sleep Studies\"]},\n {\"plan_id\": \"H2923-009-0\", \"benefit\": \"tests.diagnostic\", \"setting\": \"freestanding\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 88, \"quotes\": [\"Specialist's office: 50% coinsurance Freestanding location: 50% coinsurance Outpatient hospital: 50% coinsurance Home Sleep Studies\"]}]\n```",
+ "usage": {
+  "input_tokens": 12772,
+  "output_tokens": 1053,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

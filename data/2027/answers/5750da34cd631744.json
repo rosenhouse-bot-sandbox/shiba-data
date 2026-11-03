@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-0e1831fb00cf2a95.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5, 'Skilled nursing facility (SNF) and therapy' table: the Occupational therapy row shows a $40 copay. This is the only plan, the cost is in network, and no setting is named.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 5, same table: the 'Physical and speech therapy' row shows a $40 copay, which covers speech therapy. The cost is in network and no setting is named.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 5, same table: the 'Physical and speech therapy' row shows a $40 copay, which covers physical therapy. The cost is in network and no setting is named.\"}]\n```",
+ "usage": {
+  "input_tokens": 2318,
+  "output_tokens": 422,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

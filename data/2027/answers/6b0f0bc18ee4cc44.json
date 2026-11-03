@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-f961eb582c1534d5.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 9 inpatient hospital stays row (acute, rehab, long-term care), out-of-network: 30% coinsurance per day for days 1 to 90 for each hospital stay.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 71 psychiatric hospital row, out-of-network: 30% coinsurance per day for days 1 to 90 for mental health care.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 69 inpatient hospital care row, out-of-network section: Lifetime Reserve Days $0 copay per day.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 69 inpatient hospital care row, out-of-network section: 30% coinsurance per day for days 1 to 90 for each hospital stay.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 71 psychiatric row, out-of-network section: 'days 1 to 90' quote matches that section (in-network reads days 6 to 90). Lifetime Reserve Days $0 copay per day.\"}]\n```",
+ "usage": {
+  "input_tokens": 4301,
+  "output_tokens": 754,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

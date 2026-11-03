@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "808ccc78793ded84.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H7199-002-0\", \"benefit\": \"tests.lab\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0 or $40\", \"page\": 95, \"quotes\": [\"Dedicated testing laboratory: $0 copay Outpatient hospital: $0 copay\", \"Outpatient hospital: $40 copay\"], \"note\": \"Routine Laboratory Services are $0 and Advanced Laboratory Services are $40 at an outpatient hospital. I merged them into one fact as alternatives because two separate facts for the same setting failed the check.\"}]\n```",
+ "usage": {
+  "input_tokens": 16185,
+  "output_tokens": 923,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "2aa68f4230962abc.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-025-0\", \"benefit\": \"rehab.reevaluation\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$45\", \"condition\": \"Physical Therapy\", \"page\": 94, \"quotes\": [\"Re-evaluation: $45 copay\"], \"note\": \"This re-evaluation copay is listed under the Physical Therapy heading. The condition field separates it from the Occupational Therapy re-evaluation.\"},\n {\"plan_id\": \"H2923-025-0\", \"benefit\": \"rehab.reevaluation\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$35\", \"condition\": \"Occupational Therapy\", \"page\": 94, \"quotes\": [\"Re-evaluation: $35 copay\"], \"note\": \"This re-evaluation copay is listed under the Occupational Therapy heading. The condition field separates it from the Physical Therapy re-evaluation.\"}]\n```",
+ "usage": {
+  "input_tokens": 17538,
+  "output_tokens": 689,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

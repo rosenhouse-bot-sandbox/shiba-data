@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-7ac7300e6ca40ac7.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 75 'Other outpatient diagnostic tests - non-radiological diagnostic services' row: $60 copayment for Medicare-covered non-radiological diagnostic services, in network, no setting named.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 75 non-radiological diagnostic row: $60 copayment, and its examples include home or lab-based sleep studies.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 75 'Laboratory tests' row: $0 copayment for Medicare-covered lab services, in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2542,
+  "output_tokens": 455,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

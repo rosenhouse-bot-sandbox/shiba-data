@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "f961eb582c1534d5.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-010-0\", \"benefit\": \"tests.lab\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$10\", \"page\": 79, \"quotes\": [\"$10 copay for all other Medicare-covered lab services.\"], \"note\": \"Labs related to A1C and kidney health evaluation are $0 copay instead: \\\"$0 copay for labs related to A1C and kidney health evaluation.\\\"\"},\n {\"plan_id\": \"H5439-010-0\", \"benefit\": \"tests.genetic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$50\", \"page\": 79, \"quotes\": [\"$50 copay for Medicare-covered genetic testing.\"]},\n {\"plan_id\": \"H5439-010-0\", \"benefit\": \"tests.lab\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 79, \"quotes\": [\"20% coinsurance for each Medicare-covered lab service.\"]},\n {\"plan_id\": \"H5439-010-0\", \"benefit\": \"tests.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 81, \"quotes\": [\"20% coinsurance for all other Medicare-covered services.\"]},\n {\"plan_id\": \"H5439-010-0\", \"benefit\": \"tests.diagnostic\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 81, \"quotes\": [\"20% coinsurance for Medicare-covered diagnostic procedures and tests.\"]}]\n```",
+ "usage": {
+  "input_tokens": 13369,
+  "output_tokens": 2348,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

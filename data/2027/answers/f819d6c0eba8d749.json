@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-4ec81cd0d2695486.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 84 Outpatient rehabilitation row: physical therapist or speech language therapist services cost a $0 copayment, one cost across all outpatient settings.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 84 Outpatient rehabilitation row: occupational therapist services cost a $0 copayment.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 84 Outpatient rehabilitation row: physical therapist or speech language therapist services cost a $0 copayment, one cost across all outpatient settings.\"}]\n```",
+ "usage": {
+  "input_tokens": 2097,
+  "output_tokens": 356,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

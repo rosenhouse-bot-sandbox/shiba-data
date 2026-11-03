@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-a744eaa24232bb11.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 67 Outpatient rehabilitation, Speech Therapy: $35 copayment in network, Specialist's Office listed.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 67 Outpatient rehabilitation, Occupational Therapy: $35 copayment in network, Specialist's Office listed.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 67 Outpatient rehabilitation, Physical Therapy: $35 copayment in network, Outpatient Hospital listed.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 67 Outpatient rehabilitation, Physical Therapy: $35 copayment in network, Specialist's Office listed.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 67 Outpatient rehabilitation, Speech Therapy: $35 copayment in network, Outpatient Hospital listed.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 67 Outpatient rehabilitation, Occupational Therapy: $35 copayment in network, Outpatient Hospital listed.\"}]\n```",
+ "usage": {
+  "input_tokens": 3002,
+  "output_tokens": 400,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

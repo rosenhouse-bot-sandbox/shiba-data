@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-faf9b5f14f8f128e.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4, Inpatient Hospital Coverage, Out-of-Network: 'Days 1-90: 30% coinsurance for each Medicare-covered hospital stay.' The plan, setting, network, coinsurance amount, per-stay unit and days 1-90 limit all match.\"}]\n```",
+ "usage": {
+  "input_tokens": 1876,
+  "output_tokens": 422,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

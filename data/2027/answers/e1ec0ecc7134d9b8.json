@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "5e11cf20cec995f3.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-048-0\", \"benefit\": \"tests.lab\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 75, \"quotes\": [\"$0 copayment or Medicare-covered lab\"]},\n {\"plan_id\": \"H3805-048-0\", \"benefit\": \"tests.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$35\", \"page\": 76, \"quotes\": [\"$35 copayment or Medicare-covered non-\"]},\n {\"plan_id\": \"H3805-048-0\", \"benefit\": \"tests.diagnostic.sleep_study\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$35\", \"page\": 76, \"quotes\": [\"$35 copayment or Medicare-covered non-\", \"home or lab-based\"], \"note\": \"Sleep studies are listed as examples of non-radiological diagnostic services at this copay.\"}]\n```",
+ "usage": {
+  "input_tokens": 11190,
+  "output_tokens": 1207,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

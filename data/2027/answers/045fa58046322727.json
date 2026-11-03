@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "0bd982dc589e8cba.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-427-2\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$610\", \"unit\": \"per day\", \"limit\": \"days 1-4\", \"page\": 48, \"quotes\": [\"$610 copayment per day,\"], \"note\": \"\"},\n{\"plan_id\": \"H5216-427-2\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"days 5-90\", \"page\": 48, \"quotes\": [\"$0 copayment per day, days\"], \"note\": \"\"},\n{\"plan_id\": \"H5216-427-2\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 48, \"quotes\": [\"Inpatient Care 50% coinsurance\"], \"note\": \"\"},\n{\"plan_id\": \"H5216-427-2\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$520\", \"unit\": \"per day\", \"limit\": \"days 1-4\", \"page\": 49, \"quotes\": [\"Inpatient Psychiatric Facility – $520 copayment per day, days 1 to 4 – $0 copayment per day, days 5 to 90\"], \"note\": \"This is the cost for an Inpatient Psychiatric Facility. Mental health care in a general inpatient hospital is $610 per day for days 1-4.\"},\n{\"plan_id\": \"H5216-427-2\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"days 5-90\", \"page\": 49, \"quotes\": [\"Inpatient Psychiatric Facility – $520 copayment per day, days 1 to 4 – $0 copayment per day, days 5 to 90\"], \"note\": \"\"},\n{\"plan_id\": \"H5216-427-2\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 49, \"quotes\": [\"Inpatient Mental Health Care 50% coinsurance\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 13719,
+  "output_tokens": 3148,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

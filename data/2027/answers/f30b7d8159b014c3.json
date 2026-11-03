@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "d1ca3a965cb15437.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-041-0\", \"benefit\": \"inpatient\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$685\", \"unit\": \"per day\", \"limit\": \"days 1-4\", \"page\": 65, \"quotes\": [\"$685 copayment each day or days 1-4 or\", \"Includes inpatient acute, inpatient\"], \"note\": \"The row says it includes acute, rehabilitation, long-term care and other inpatient stays priced together, so this uses the broader inpatient benefit.\"},\n {\"plan_id\": \"H3805-041-0\", \"benefit\": \"inpatient\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"days 5+\", \"page\": 65, \"quotes\": [\"$0 copayment or additional\"], \"note\": \"The row says it includes acute, rehabilitation, long-term care and other inpatient stays priced together, so this uses the broader inpatient benefit.\"},\n {\"plan_id\": \"H3805-041-0\", \"benefit\": \"inpatient\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$685\", \"unit\": \"per day\", \"limit\": \"days 1-4\", \"page\": 12, \"quotes\": [\"$685 copayment each day or\", \"days 1 to 4.\"], \"note\": \"The page says it includes various inpatient stays such as acute care, rehabilitation and long-term care, so this uses the broader inpatient benefit.\"},\n {\"plan_id\": \"H3805-041-0\", \"benefit\": \"inpatient\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"days 5+\", \"page\": 12, \"quotes\": [\"$0 copayment or additional\", \"Medicare covered days.\"], \"note\": \"The page says it includes various inpatient stays such as acute care, rehabilitation and long-term care, so this uses the broader inpatient benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 16665,
+  "output_tokens": 1518,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
