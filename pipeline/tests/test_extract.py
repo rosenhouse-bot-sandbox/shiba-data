@@ -87,6 +87,20 @@ class GateTest(unittest.TestCase):
         self.assertEqual(len(gate({k: v for k, v in answer(cost_kind="covered").items() if k != "amount"})[0]), 1)
         self.assertEqual(len(gate(answer(cost_kind="visit_limit", amount="4"))[1]), 1)
 
+    def test_words_for_no_cost_show_0_in_groups_that_price_zeros(self):
+        pages = {5: "This plan does not have a deductible.", 52: "There is no coinsurance, copayment, or deductible for flu vaccines"}
+        deductible = dict(benefit="medical_deductible", cost_kind="deductible", amount="$0", page=5,
+                          quotes=["This plan does not have a deductible."])
+        vaccine = dict(benefit="part_b_drugs.vaccine", amount="$0", page=52,
+                       quotes=["no coinsurance, copayment, or deductible for flu vaccines"])
+        for group, a in (("medical_deductible", deductible), ("part_b_drugs", vaccine)):
+            found, failed = extract.gate(DOC, group, [answer(**a)], pages, ok_unless_bad)
+            self.assertEqual((len(found), failed), (1, []), group)
+            found, ((_, why),) = extract.gate(DOC, group, [answer(**dict(a, amount="$5"))], pages, ok_unless_bad)
+            self.assertEqual(why, "no quote shows $5")
+        imaging = answer(amount="$0", page=52, quotes=["no coinsurance, copayment, or deductible for flu vaccines"])
+        self.assertEqual(len(extract.gate(DOC, "imaging", [imaging], pages, ok_unless_bad)[1]), 1)
+
     def test_rejects_both_copies_of_a_conflict(self):
         found, failed = gate(answer(), answer(quotes=["MRI and CT scans $250 copay"], amount="$250"))
         self.assertEqual(found, [])

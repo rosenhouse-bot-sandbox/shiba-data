@@ -168,8 +168,12 @@ class VocabularyTest(unittest.TestCase):
                             ("part_b_drugs", "Chemotherapy drugs 20% coinsurance"),
                             ("medical_deductible", "Medical deductible $100 combined deductible"),
                             ("dental", "Routine dental benefits"), ("extras", "12 one-way trips"),
-                            ("extras", "You can use your Wellness Bucks towards therapeutic massage")):
+                            ("extras", "You can use your Wellness Bucks towards therapeutic massage"),
+                            ("dental", "Routine\ndental\nbenefits: 2 cleanings per year"),
+                            ("dental", "Optional supplemental benefits"), ("dental", "Spendables card"),
+                            ("extras", "Flex Card"), ("extras", "Naturopathic services")):
             self.assertTrue(any(re.search(rx, text, re.I) for rx in facts.FIND[group]), (group, text))
+        self.assertFalse(any(re.search(rx, "Part D drug coverage deductible $0", re.I) for rx in facts.FIND["medical_deductible"]))
 
     def test_describe_lists_one_group(self):
         text = facts.describe("imaging")

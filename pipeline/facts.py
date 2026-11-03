@@ -47,35 +47,41 @@ BENEFITS = {
                        "as `days 1-5`, or `days 6+` from day 6 on. A cost for a whole stay has `unit` `per stay`",
     "inpatient.psychiatric": "Inpatient psychiatric hospital stays",
     "giveback": "The plan's monthly reduction of the member's Part B premium (Part B giveback or buydown). "
-                        "Use `cost_kind` `part_b_reduction`, the amount without \"up to\", and `unit` `per month`. "
-                        "Leave `condition` blank for terms that apply to everyone, such as \"if Medicaid pays your Part B premium\"",
+                "Use `cost_kind` `part_b_reduction`, the amount without \"up to\", and `unit` `per month`. Leave "
+                "`condition` blank even for limits such as \"if Medicaid pays your Part B premium\" or \"no more than "
+                "your Part B premium\"",
     "part_b_drugs": "Medicare Part B drugs, priced together. Not Part D drugs, home infusion therapy or dialysis services",
     "part_b_drugs.chemotherapy": "Chemotherapy and other cancer drugs, with their administration",
     "part_b_drugs.insulin": "Part B insulin, such as insulin used in a pump",
     "part_b_drugs.allergy": "Allergy antigens, allergy serum and allergy shots",
     "part_b_drugs.vaccine": "Part B vaccines, such as flu, pneumonia, Hepatitis B and COVID-19 shots. "
-                            "\"No coinsurance, copayment, or deductible\" is a $0 copay",
-    "medical_deductible": "The plan's yearly medical deductible for Medicare-covered services, which applies to all of them. Not a "
-                  "Part D, dental or hearing aid deductible. A plan with none has amount `$0`. `network` is where it applies: "
-                  "a combined deductible that excludes all in-network services is `out`. Quote the amount and the line that "
-                  "says which services it applies to",
-    "medical_deductible.some": "A yearly medical deductible that applies to some Medicare-covered services only, as when the "
-                       "document lists the services it applies to or excludes, or says \"select\", \"certain\" or \"most\" services",
-    "medical_deductible.part_b": "The document says the deductible is Original Medicare's Part B deductible. `cost_kind` is `covered`",
+                            "\"No coinsurance, copayment, or deductible\" is a `$0` copay",
+    "medical_deductible": "The plan's yearly medical deductible for Medicare-covered services, which applies to all of them. "
+                          "Not a Part D, dental or hearing aid deductible. A plan with none has `cost_kind` `deductible` "
+                          "and amount `$0`. `network` is where it applies: a combined deductible that excludes all "
+                          "in-network services is `out`. Quote the amount and, if it is on the same page, the line that "
+                          "says which services it applies to",
+    "medical_deductible.some": "A yearly medical deductible that applies to some Medicare-covered services only, as when "
+                               "the document lists the services it applies to or excludes, or says \"select\", "
+                               "\"certain\" or \"most\" services",
+    "medical_deductible.part_b": "The document says the deductible is Original Medicare's Part B deductible. This fact "
+                                 "has `cost_kind` `covered`, and the amount is a separate `deductible` fact",
     "dental": "Dental services, priced together. Medicare-covered dental is `covered_by` `medicare`. Routine, "
               "\"non-Medicare covered\" and mandatory supplemental dental is `supplemental`, and \"not covered\" is "
               "`supplemental` `not_covered`. Dental only in an optional package has `package` set to its name, and the "
-              "package premium is a `premium` fact. A shared allowance or card that names dental is an `allowance` fact "
-              "with `pool` set to its name",
+              "package premium is a `dental` `premium` fact with that `package`. A shared allowance or card that names "
+              "dental is an `allowance` fact with `pool` set to its name, or `covered` with that `pool` if the page "
+              "gives no amount",
     "dental.preventive": "Preventive dental care, such as oral exams, cleanings and dental X-rays",
     "dental.comprehensive": "Comprehensive dental care, such as fillings, extractions, crowns and dentures",
     "extras": "Acupuncture, chiropractic, massage, naturopathy and non-emergency transportation, priced together. "
               "A Medicare-covered version is `covered_by` `medicare`; an exclusions-chart row such as \"Acupuncture | "
-              "Available for people with chronic low back pain\" is `medicare` `covered` with that `condition`. Routine and "
-              "\"non-Medicare covered\" benefits are `supplemental`, and \"not covered\" is `supplemental` `not_covered`. "
-              "A benefit only in an optional package has `package` set to its name. A shared allowance, card or wellness "
-              "fund (such as Wellness Bucks or a Flex Card) is one `allowance` fact per benefit it names, with `pool` set "
-              "to its name. `condition` says who qualifies or when the benefit applies",
+              "Available for people with chronic low back pain\" is `medicare` `covered` with that `condition`. "
+              "Routine and \"non-Medicare covered\" benefits are `supplemental`, and \"not covered\" is "
+              "`supplemental` `not_covered`. A benefit only in an optional package has `package` set to its name. "
+              "A shared allowance, card or wellness fund (such as Wellness Bucks or a Flex Card) gives one fact per "
+              "benefit it names, with `pool` set to its name: an `allowance`, or `covered` if the page gives no amount. "
+              "`condition` says who qualifies or when the benefit applies",
     "extras.acupuncture": "Acupuncture. Medicare covers it only for chronic low back pain",
     "extras.chiropractic": "Chiropractic care. Medicare covers only manual manipulation of the spine to correct a subluxation",
     "extras.massage": "Therapeutic massage",
@@ -98,16 +104,17 @@ FIND = {"imaging": [r"x.ray", r"radiolog", r"\bMRI\b", r"\bCT\b", r"\bPET\b", r"
                    r"by a specialist", r"doctor visits"],
         "rehab": [r"outpatient rehab", r"physical therap", r"occupational therap", r"speech.language"],
         "inpatient": [r"inpatient hospital", r"inpatient (?:psychiatric|mental)"],
-        "giveback": [r"part\s*b premium reduction", r"reduc\w*\s+(?:\w+\s+){0,4}(?:medicare\s+)?part\s*b\s+premium",
-                             r"part\s*b\s+premium\s+is\s+reduced", r"part\s*b (?:buydown|give ?back)"],
-        "part_b_drugs": [r"part b (?:prescription )?drugs?[\s\S]{0,400}?(?:\$\d|\d%)",
-                         r"(?:\$\d|\d%)[\s\S]{0,200}?part b (?:prescription )?drugs?",
+        "giveback": [r"part\s*b\s+premium\s+reduction", r"reduc\w*\s+(?:\w+\s+){0,4}(?:medicare\s+)?part\s*b\s+premium",
+                     r"part\s*b\s+premium\s+is\s+reduced", r"part\s*b\s+(?:buydown|give ?back)"],
+        "part_b_drugs": [r"part\s*b\s+(?:prescription\s+)?drugs?[\s\S]{0,400}?(?:\$\d|\d%)",
+                         r"(?:\$\d|\d%)[\s\S]{0,200}?part\s*b\s+(?:prescription\s+)?drugs?",
                          r"chemotherap[\s\S]{0,300}?(?:\$\d|\d%)", r"immunizations[\s\S]{0,600}?(?:\bno\b|\$0|\b0%)"],
         "medical_deductible": [r"(?:medical|combined|in.network) deductible", r"our plan deductible",
-                       r"does not have a (?:medical )?deductible", r"no deductible for medical", r"your (?:medical )?deductible is",
-                       r"deductible for (?:select|certain)", r"\bdeductible\s+\$\d",
-                       r"deductible (?:applies|doesn.t apply|does not apply) to (?:some|the following)",
-                       r"excluded from the (?:combined |in.network )*deductible"],
+                               r"does not have a (?:medical )?deductible", r"no deductible for medical",
+                               r"your (?:medical )?deductible is", r"deductible for (?:select|certain)",
+                               r"(?<!drug coverage )(?<!part d )\bdeductible\s+\$\d",
+                               r"deductible (?:applies|doesn.t apply|does not apply) to (?:some|the following)",
+                               r"excluded from the (?:combined |in.network )*deductible"],
         "dental": [r"dental (?:services|benefit|exam)", r"(?:preventive|comprehensive|routine) dental",
                    r"dental (?:&|and) alternative", r"cleanings", r"optional supplemental", r"spendables"],
         "extras": [r"acupunct", r"chiropract", r"massage", r"naturopath", r"transportation", r"one.way trips?",
@@ -123,7 +130,8 @@ SETTINGS = {
     "asc": "An ambulatory surgical center (ASC)",
     "telehealth": "Virtual visits by phone or video (telehealth)",
     "outside_us": "Outside the United States and its territories, as in a worldwide emergency benefit, "
-                  "or an exclusion of all care outside the U.S.",    "pharmacy": "A retail or mail-order pharmacy",
+                  "or an exclusion of all care outside the U.S.",
+    "pharmacy": "A retail or mail-order pharmacy",
 }
 # The settings a group's readers may use
 GROUP_SETTINGS = {
