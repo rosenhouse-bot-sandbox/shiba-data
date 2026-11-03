@@ -82,9 +82,13 @@ TRIPS = ("ambulance.ground", "ambulance.air")
 PRICED = ("copay", "coinsurance")
 
 
+def priced(f, network="in"):
+    return (f["network"] in (network, "any") and f["covered_by"] == "medicare" and f["cost_kind"] in PRICED
+            and not f["package"])
+
+
 def trip_here(f):
-    return (f["network"] in ("in", "any") and f["covered_by"] == "medicare" and f["cost_kind"] in PRICED
-            and not (f["provider_tier"] or f["package"]))
+    return priced(f) and not f["provider_tier"]
 
 
 def trip_abroad(f):
@@ -144,12 +148,11 @@ ELIGIBILITY = re.compile(r"medicaid|\bQMB|extra help|eligib", re.I)
 
 def any_test(f):
     """A price for some of the tests, such as "certain lab services", but not one for some members only."""
-    return (f["network"] in ("in", "any") and f["covered_by"] == "medicare" and f["cost_kind"] in PRICED
-            and not (f["provider_tier"] or f["package"] or ELIGIBILITY.search(f["condition"])))
+    return priced(f) and not (f["provider_tier"] or ELIGIBILITY.search(f["condition"]))
 
 
 def tests_labs(organization, found):
-    """One line, "tests/labs". Each side is office and freestanding prices, or outpatient hospital ones if none."""
+    """Shows "tests/labs". Each side uses office and freestanding prices, or outpatient hospital ones if there are none."""
     tests = winners(found, ["tests.diagnostic"], OFFICES, any_test)
     if any(f["plan_id"] in HOSPITAL_SLEEP_STUDY for f in found):
         tests += best(found, "tests.diagnostic.sleep_study", "outpatient_hospital")
@@ -161,13 +164,8 @@ def tests_labs(organization, found):
     return [(f"{show(tests)}/{show(labs)}" if tests or labs else "", tests + labs)]
 
 
-def visit_ok(network):
-    return lambda f: (f["network"] in (network, "any") and f["covered_by"] == "medicare" and f["cost_kind"] in PRICED
-                      and not f["package"])
-
-
 def visit_line(found, setting, network):
-    got = best(found, "visits", setting, visit_ok(network))
+    got = best(found, "visits", setting, lambda f: priced(f, network))
     got = [f for f in got if f["network"] == network] or got
     got = [f for f in got if not f["condition"]] or got
     return show(got), got
@@ -176,7 +174,7 @@ def visit_line(found, setting, network):
 def visits(setting):
     """Line 1 is in network and line 2 out of network, if the plan prices any visit out of network."""
     def rule(organization, found):
-        out = any(f["benefit"] == "visits" and f["network"] == "out" and visit_ok("out")(f) for f in found)
+        out = any(f["benefit"] == "visits" and f["network"] == "out" and priced(f, "out") for f in found)
         return [visit_line(found, setting, "in"), visit_line(found, setting, "out") if out else ("", [])]
     return rule
 
@@ -185,7 +183,7 @@ THERAPIES = ("rehab.physical", "rehab.occupational", "rehab.speech")
 
 
 def outpatient_rehab(organization, found):
-    """One line: therapy visits at offices and freestanding facilities, or outpatient hospitals if none."""
+    """Shows therapy visit prices at offices and freestanding facilities, or at outpatient hospitals if there are none."""
     got = unique(winners(found, THERAPIES, OFFICES))
     return [(show(got), got)]
 
@@ -208,7 +206,7 @@ def inpatient(organization, found):
     if paid:
         first = min(days(f)[0] for f in paid)
         last = [days(f)[1] for f in paid]
-        return [(show(paid), paid), (span(str(first), str(max(last)) if all(last) else f"{first}+"), paid)]
+        return [(show(paid), paid), (span(str(first), str(max(last))) if all(last) else f"{first}+", paid)]
     stays = [f for f in got if f["unit"] == "per stay"]
     if stays:
         return [(f"{show(stays)} per admission", stays), ("", [])]
@@ -256,7 +254,8 @@ HELD = {
 
 
 def layer_rows(data):
-    """One row per line and cited document quote. Rows for a cell that the generated sheet gives one line name no line."""
+    """Writes one row per line and cited document quote. A blank line writes no row, so the line keeps its other layers' value.
+    Rows for a cell that the generated sheet gives one line name no line."""
     url = {d["sha256"]: d["url"] for d in layers.rows(data / "generated" / "documents_checked.csv") if d["sha256"]}
     generated = {r["plan_id"]: r for r in layers.generated(data)["main"]}
     out = {}

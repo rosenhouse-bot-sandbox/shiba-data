@@ -63,7 +63,8 @@ def presented(*columns):
 
 # Each version names the layers it sees and the rows it ignores. No version sees this step's own rows.
 # Versions 2 to 5 ignore edits to their presented columns, so retiring them leaves the tasks unchanged.
-# They also miss later edits to those columns, and versions 3 to 5 miss the edits kept on lines in TRIAGED and present.HELD.
+# They also miss later edits to those columns, and versions 3 to 5 miss the edits that TRIAGED keeps,
+# and version 5 also misses those on present.HELD cells.
 VERSIONS = {
     1: (layers.without(layers.FILLED, layers.PRESENTED), None),
     2: (layers.without(layers.FILLED), presented("L_xray_imaging")),

@@ -78,7 +78,8 @@ class VersionsTest(unittest.TestCase):
             for column in columns:
                 self.assertTrue(ignore(dict(layer=layers.EDITS, column=column)), (version, column))
                 self.assertFalse(ignore(dict(layer=layers.PRESENTED, column=column)), (version, column))
-            self.assertFalse(ignore(dict(layer=layers.EDITS, column="C_premium")))
+            for column in set(present.COLUMNS) - set(columns) | {"C_premium"}:
+                self.assertFalse(ignore(dict(layer=layers.EDITS, column=column)), (version, column))
         _, ignore = filled.VERSIONS[3]
         self.assertTrue(ignore(dict(layer=layers.PRESENTED, column="I_outpatient_surgery")))
         _, ignore = filled.VERSIONS[2]

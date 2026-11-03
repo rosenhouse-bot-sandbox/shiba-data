@@ -225,6 +225,16 @@ class TestsLabsTest(unittest.TestCase):
         found = [priced("tests.diagnostic", amount="$35"), priced("tests.diagnostic", condition="certain tests"),
                  priced("tests.lab", amount="20%"), priced("tests.lab", condition="QMB members")]
         self.assertEqual(tests_labs("Aetna", *found), "$0-$35/20%")
+        for condition in ("full Medicaid", "Extra Help", "members who are eligible", "dual-eligible"):
+            self.assertEqual(tests_labs("Aetna", priced("tests.lab", amount="20%"), priced("tests.lab", condition=condition)),
+                             "/20%", condition)
+
+    def test_skips_supplemental_tiered_and_packaged_prices(self):
+        for more in (dict(covered_by="supplemental"), dict(provider_tier="preferred"), dict(package="Rider")):
+            self.assertEqual(tests_labs("Aetna", priced("tests.lab", amount="20%"), priced("tests.lab", **more)), "/20%", more)
+
+    def test_a_0_colonoscopy_adds_nothing_without_a_test_price(self):
+        self.assertEqual(tests_labs("Regence", priced("imaging.diagnostic.mammogram"), priced("tests.lab", amount="$5")), "/$5")
 
     def test_leaves_out_genetic_testing(self):
         found = [priced("tests.lab"), priced("tests.lab", amount="$10", setting="freestanding"),
@@ -267,6 +277,18 @@ class VisitsTest(unittest.TestCase):
                                 priced("visits", "office.specialist", "$20", provider_tier="all other")), ["$0-$20", ""])
         self.assertEqual(visits("office.specialist", priced("visits", "office.specialist", "$45", package="A")), ["", ""])
 
+    def test_only_a_priced_out_of_network_visit_adds_line_2(self):
+        for other in (priced("rehab.physical", "office.pcp", "50%", network="out"),
+                      priced("visits", "office.pcp", "50%", network="out", package="A"),
+                      priced("visits", "office.pcp", "", network="out", cost_kind="covered"),
+                      priced("visits", "office.pcp", "50%", network="out", covered_by="supplemental")):
+            self.assertEqual(visits("office.pcp", priced("visits", "office.pcp"), other), ["$0", ""], other)
+
+    def test_each_line_prefers_its_own_network_over_any(self):
+        found = [priced("visits", "office.pcp", "$10", network="any"), priced("visits", "office.pcp", "$5"),
+                 priced("visits", "office.pcp", "40%", network="out")]
+        self.assertEqual(visits("office.pcp", *found), ["$5", "40%"])
+
 
 def rehab(*found):
     return present.outpatient_rehab("Aetna", list(found))[0][0]
@@ -288,6 +310,10 @@ class OutpatientRehabTest(unittest.TestCase):
     def test_one_cost_for_all_therapy(self):
         self.assertEqual(rehab(priced("rehab", amount="30%"), priced("rehab", amount="$0", condition="QMB")), "30%")
 
+    def test_cites_a_fact_once_however_many_settings_it_fills(self):
+        therapy = priced("rehab.physical", amount="$40")
+        self.assertEqual(present.outpatient_rehab("Aetna", [therapy]), [("$40", [therapy])])
+
 
 def stay(amount, limit="", unit="per day", benefit="inpatient.acute", **more):
     return priced(benefit, amount=amount, unit=unit, limit=limit, **{"condition": limit, **more})
@@ -301,6 +327,14 @@ class InpatientTest(unittest.TestCase):
     def test_a_daily_cost_and_its_days(self):
         self.assertEqual(inpatient(stay("$465", "days 1-5"), stay("$0", "days 6+")), ["$465", "1-5"])
         self.assertEqual(inpatient(stay("$600", "days 1-4"), stay("$0", "days 5-90")), ["$600", "1-4"])
+        self.assertEqual(inpatient(stay("$0-$100", "days 1-5")), ["$0-$100", "1-5"])
+
+    def test_a_paid_tier_without_an_end_runs_on(self):
+        self.assertEqual(inpatient(stay("$300", "days 1-3"), stay("$100", "days 4+")), ["$100-$300", "1+"])
+
+    def test_days_need_a_daily_cost_and_a_whole_range(self):
+        for more in (dict(unit="per stay"), dict(limit="days 0-5"), dict(limit="days 1"), dict(limit="up to days 1-5")):
+            self.assertIsNone(present.days(stay("$300", **{"limit": "days 1-5", **more})), more)
 
     def test_two_paid_tiers_span_their_days(self):
         self.assertEqual(inpatient(stay("$300", "days 1-3"), stay("$100", "days 4-6"), stay("$0", "days 7+")),
@@ -338,6 +372,13 @@ class WriteTest(unittest.TestCase):
             os.makedirs(f"{tmp}/generated")
             present.write(pathlib.Path(tmp))
             self.assertEqual(layers.rows(pathlib.Path(tmp, layers.PRESENTED)), [row])
+
+    def test_refuses_a_second_line_for_a_one_line_cell(self):
+        data = years.data_dir(YEAR)
+        plan = layers.generated(data)["main"][0]["plan_id"]
+        with mock.patch.object(present, "lines", lambda data, column: {plan: [("$1", []), ("$2", [])]}):
+            with self.assertRaisesRegex(ValueError, f"{plan} .* has one line"):
+                present.layer_rows(data)
 
 
 # Lines where the rule and an edit disagree. The rule wins on X-ray lines (#127 has the evidence).
