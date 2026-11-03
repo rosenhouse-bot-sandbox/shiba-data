@@ -30,6 +30,30 @@ class StepTest(StepsTest):
                          [("copay", "$0-$40", "EOC"), ("covered", "", "EOC")])
         self.assertEqual(asked, [("read", "r", "high"), ("read", "r", "high"), ("check", "v", "low")])
 
+    def test_a_second_reader_adds_facts_for_the_plans_it_rechecks(self):
+        asked = []
+        version = dict(groups=("imaging",), reader=("r", "high"), verifier=("v", "low"),
+                       recheck={"imaging": ("H1036-306-0",)})
+
+        def fake(task_dir, model, effort):
+            asked.append(os.path.basename(task_dir))
+            for task in glob.glob(f"{task_dir}/*.md"):
+                text = open(task).read()
+                if os.path.basename(task).startswith("v-"):
+                    reply = [{"id": n, "ok": True} for n in range(text.count('{"id": '))]
+                elif "## Facts already found" in text:
+                    reply = [answer(page=1), answer(page=1, setting="office")]
+                else:
+                    reply = [answer(page=1)]
+                with open(task[:-3] + ".json", "w") as f:
+                    json.dump(reply, f)
+
+        with mock.patch.dict(document_facts.VERSIONS, {9: version}):
+            document_facts.step(self.data, self.work, self.dir, fake, 9)
+        rows = facts.read(self.data / "machine" / "document_facts.csv")
+        self.assertEqual(sorted(r["setting"] for r in rows), ["any", "office"])
+        self.assertEqual(asked, ["read", "read", "check", "reread", "reread", "recheck"])
+
     def test_groups_run_at_the_same_time(self):
         both_reading = threading.Barrier(2, timeout=10)
 
@@ -66,6 +90,12 @@ class StepTest(StepsTest):
     def test_version_9_adds_vision_hearing_fitness_otc_and_packages_to_7(self):
         self.assertEqual(document_facts.VERSIONS[9], dict(document_facts.VERSIONS[7], groups=document_facts.VERSIONS[7]["groups"]
                                                           + ("vision", "hearing", "fitness", "otc", "packages")))
+
+    def test_version_10_rechecks_the_cells_whose_readers_missed_a_price(self):
+        v = document_facts.VERSIONS[10]
+        self.assertEqual(dict(v, recheck=None), dict(document_facts.VERSIONS[9], recheck=None))
+        self.assertEqual(set(v["recheck"]) - set(v["groups"]), set())
+        self.assertIn("H9003-009-0", v["recheck"]["hearing"])
 
     def test_version_1_uses_the_models_the_evaluation_picked(self):
         self.assertEqual(document_facts.VERSIONS[1], dict(groups=("imaging",), reader=("claude-opus-5-5", "high"),

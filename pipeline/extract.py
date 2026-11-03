@@ -62,8 +62,16 @@ def printable(answer):
     return json.dumps(answer, ensure_ascii=False).encode("utf-8", "backslashreplace").decode()
 
 
-def task(doc, plan_rows, pages, group, data, failed=()):
+RECHECK = ("## Facts already found\n\n"
+           "Earlier readers found these facts for {plans}, and missed others. Read every page again, including the "
+           "pages just before and after each benefit's row. Reply with only the facts for these plans that the list "
+           "lacks, or `[]` if it lacks none.\n\n")
+
+
+def task(doc, plan_rows, pages, group, data, failed=(), known=None, plan_ids=()):
     parts = [fill("fact_prompt.md", doc, plan_rows, data, VOCABULARY=facts.describe(group))]
+    if known is not None:
+        parts.append(RECHECK.format(plans=", ".join(plan_ids)) + "\n".join(f"- {printable(shown(f))}" for f in known))
     if failed:
         parts.append("## Earlier answers that failed a check\n\n"
                      "Code keeps the facts that passed. Reply with fixed versions of only these answers, "
@@ -197,6 +205,20 @@ def read(work, out_dir, group, data=DATA, ids=None):
         if relevant(pages, group):
             with open(f"{out_dir}/{doc['id']}.md", "w") as f:
                 f.write(task(doc, plan_rows, pages, group, data))
+
+
+def reread(work, out_dir, group, plan_ids, known, data=DATA):
+    """Writes a task for each document that mentions the group and covers one of plan_ids, which lists the known facts
+    for those plans and asks for the facts it lacks."""
+    os.makedirs(out_dir, exist_ok=True)
+    plan_rows = plans(data)
+    for doc in documents(data):
+        mine = [p for p in doc["plan_ids"] if p in plan_ids]
+        pages = Doc(work, doc["id"]).pages("layout") if mine else {}
+        if mine and relevant(pages, group):
+            theirs = [f for f in known if f["doc_sha"] == doc["sha256"] and f["plan_id"] in mine]
+            with open(f"{out_dir}/{doc['id']}.md", "w") as f:
+                f.write(task(doc, plan_rows, pages, group, data, known=theirs, plan_ids=mine))
 
 
 def extract_facts(work, answers_dir, group, out, data=DATA):

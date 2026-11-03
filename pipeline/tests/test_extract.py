@@ -207,6 +207,28 @@ class StepsTest(unittest.TestCase):
         self.step(extract.read, self.work, self.dir, "imaging", ids=set())
         self.assertEqual(os.listdir(self.dir), [])
 
+    def known(self, **changes):
+        row = {c: "" for c in facts.COLUMNS}
+        row.update(plan_id="H1036-306-0", benefit="imaging.xray", setting="any", network="in", covered_by="medicare",
+                   cost_kind="copay", amount="$0-$40", source="EOC", doc_sha=SHA, page="1", quotes=json.dumps([X_RAYS]))
+        row.update(changes)
+        return row
+
+    def test_reread_shows_the_facts_found_and_asks_for_the_rest(self):
+        found = self.known()
+        other_doc = self.known(doc_sha="ef" * 32, amount="$9")
+        self.step(extract.reread, self.work, self.dir, "imaging", plan_ids={"H1036-306-0"}, known=[found, other_doc])
+        self.assertEqual(os.listdir(self.dir), [f"{SHA[:16]}.md"])
+        text = (self.dir / f"{SHA[:16]}.md").read_text()
+        self.assertIn("## Facts already found", text)
+        self.assertIn(extract.printable(extract.shown(found)), text)
+        self.assertNotIn("$9", text)
+        self.assertLess(text.index("## Facts already found"), text.index("## Pages"))
+
+    def test_reread_skips_documents_for_other_plans(self):
+        self.step(extract.reread, self.work, self.dir, "imaging", plan_ids={"H0000-000-0"}, known=[])
+        self.assertEqual(os.listdir(self.dir), [])
+
     def test_facts_retries_once_then_verify_writes_tasks_and_items(self):
         self.step(extract.read, self.work, self.dir, "imaging")
         good, bad = answer(page=1), answer(page=1, amount="$5")
