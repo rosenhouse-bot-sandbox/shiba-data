@@ -92,7 +92,10 @@ def steps(work, mode, candidate=""):
     texts, step_work = f"{work}/texts", f"{work}/rebuild"
     run.blanks_step(texts, step_work, answer)
     document_facts.step(data, texts, f"{step_work}/facts", answer, versions["document_facts"])
-    present.write(data)
+    try:
+        present.write(data)
+    except ValueError as e:  # Fresh facts can break a presentation rule. Filled then sees the copied live layer.
+        print(f"::warning::Cannot present the rebuilt facts: {e}")
     run.filled_step(texts, step_work, answer, every=True, version=versions["filled"])
 
 

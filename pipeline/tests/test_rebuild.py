@@ -117,6 +117,16 @@ class RebuildTest(unittest.TestCase):
         self.assertEqual((found.call_args.args[0], found.call_args.args[-1]), (self.data, 7))
         self.assertEqual(filled.call_args.kwargs, {"every": True, "version": 5})
 
+    def test_steps_go_on_to_filled_when_facts_cannot_be_presented(self):
+        (self.data / "steps.json").write_text(json.dumps({"filled": 5, "document_facts": 8}))
+        with (mock.patch.dict(os.environ, {"SHIBA_DATA": str(self.root / "data")}), mock.patch.object(years, "LIVE", 2099),
+              mock.patch.object(rebuild.run, "blanks_step"), mock.patch.object(rebuild.document_facts, "step"),
+              mock.patch.object(rebuild.present, "write", side_effect=ValueError("two lines")),
+              mock.patch.object(rebuild.run, "filled_step") as filled, mock.patch("builtins.print") as printed):
+            rebuild.steps("w", "")
+        self.assertTrue(filled.called)
+        self.assertIn("two lines", printed.call_args[0][0])
+
     def test_compare_counts_cells_by_whether_both_runs_cite_them_alike(self):
         other = ("main", "H1-001-0", "U_naturopath")
         for name, rows in (("a", [machine_row(SPECIALIST, "$40"), machine_row(DENTAL, "PREV $0")]),
