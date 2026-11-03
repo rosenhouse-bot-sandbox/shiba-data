@@ -42,7 +42,7 @@ def freeze(data=DATA):
                 if f"{sheet}.{k}" in FIELDS:
                     out[f"{sheet}.{k}"][r["plan_id"]] = {"value": c["value"], "cited": bool(c["cites"])}
     with open(pathlib.Path(data) / FROZEN, "w") as f:
-        json.dump(out, f, indent=1, sort_keys=True, ensure_ascii=False)
+        json.dump(out, f, indent=1, ensure_ascii=False)
         f.write("\n")
 
 
