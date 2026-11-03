@@ -8,7 +8,6 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import facts, layers, years
 
-COLUMN = "L_xray_imaging"
 RANK = {s: i for i, s in enumerate(facts.SOURCES_BEST_FIRST)}
 OFFICES = ("office.pcp", "office.specialist", "freestanding")
 ADVANCED = ("imaging.diagnostic.advanced.ct", "imaging.diagnostic.advanced.mri", "imaging.diagnostic.advanced.pet")
@@ -21,9 +20,9 @@ def usable(f):
             and not (f["condition"] or f["provider_tier"] or f["package"]))
 
 
-def best(found, leaf, setting):
-    """The facts for leaf and setting from the best source, and within it the most specific."""
-    fits = [f for f in found if usable(f) and facts.covers(f["benefit"], leaf) and facts.covers(f["setting"], setting)]
+def best(found, leaf, setting, ok=usable):
+    """The ok facts for leaf and setting from the best source, and within it the most specific."""
+    fits = [f for f in found if ok(f) and facts.covers(f["benefit"], leaf) and facts.covers(f["setting"], setting)]
     if not fits:
         return []
     top = min(RANK[f["source"]] for f in fits)
@@ -79,6 +78,49 @@ def xray_imaging(organization, found):
     return [(show(xrays), unique(xrays)), (line2, unique(advanced))]
 
 
+TRIPS = ("ambulance.ground", "ambulance.air")
+PRICED = ("copay", "coinsurance")
+
+
+def trip_here(f):
+    return (f["network"] in ("in", "any") and f["covered_by"] == "medicare" and f["cost_kind"] in PRICED
+            and not (f["provider_tier"] or f["package"]))
+
+
+def trip_abroad(f):
+    return (f["setting"] == "outside_us" and f["cost_kind"] in PRICED + ("covered", "not_covered")
+            and not (f["provider_tier"] or f["package"]))
+
+
+def show_or(found):
+    """The dollar range, or the percent range, or both joined by "or"."""
+    dollars = sorted(facts.number(a) for a in amounts(found) if a.startswith("$"))
+    percents = sorted(facts.number(a) for a in amounts(found) if a.endswith("%"))
+    shown = [span(money(dollars[0]), money(dollars[-1]))] if dollars else []
+    shown += [span(f"{percents[0]:g}%", f"{percents[-1]:g}%")] if percents else []
+    return " or ".join(shown)
+
+
+def ambulance(organization, found):
+    """Line 1 is trips within the U.S. and line 2 is emergency trips abroad, each as (value, cited facts).
+    See the expert's rules in #99."""
+    here = unique([f for leaf in TRIPS for f in best(found, leaf, "any", trip_here)])
+    abroad = unique([f for leaf in TRIPS for f in best(found, leaf, "outside_us", trip_abroad)])
+    priced = [f for f in abroad if f["cost_kind"] in PRICED]
+    covered = [f for f in abroad if f["cost_kind"] == "covered"]
+    excluded = [f for f in abroad if f["cost_kind"] == "not_covered"]
+    if priced:
+        line2 = (show_or(priced), priced)
+    elif covered:
+        plain = [f for f in here if not f["condition"]]
+        line2 = (show_or(plain), covered + plain)
+    elif excluded:
+        line2 = ("not covered", excluded)
+    else:
+        line2 = ("", [])
+    return [(show_or(here), here), line2]
+
+
 def unique(found):
     return list({id(f): f for f in found}.values())
 
@@ -91,26 +133,31 @@ def plan_facts(data):
     return by_plan
 
 
-def lines(data):
+# A rule returns the lines of its column.
+COLUMNS = {"L_xray_imaging": xray_imaging, "AB_ambulance": ambulance}
+
+
+def lines(data, column):
     """{plan_id: [(value, cited facts), ...]} for each plan on the main sheet."""
     organization = {r["plan_id"]: r["organization"] for r in layers.rows(data / "generated" / "plans.csv")}
     found = plan_facts(data)
-    return {r["plan_id"]: xray_imaging(organization[r["plan_id"]], found[r["plan_id"]])
+    return {r["plan_id"]: COLUMNS[column](organization[r["plan_id"]], found[r["plan_id"]])
             for r in layers.generated(data)["main"]}
 
 
 def layer_rows(data):
-    """One row per line and cited document quote. A line with no document fact keeps its generated value."""
+    """One row per line and cited document quote."""
     url = {d["sha256"]: d["url"] for d in layers.rows(data / "generated" / "documents_checked.csv") if d["sha256"]}
     out = {}
-    for plan_id, got in lines(data).items():
-        for n, (value, cited) in enumerate(got, 1):
-            for f in cited:
-                if value and f["source"] in facts.DOCUMENTS:
-                    for quote in json.loads(f["quotes"]):
-                        row = dict(sheet="main", plan_id=plan_id, column=COLUMN, line=str(n), value=value,
-                                   url=url[f["doc_sha"]], pdf_page=f["page"], quote=quote)
-                        out[tuple(row.values())] = row
+    for column in COLUMNS:
+        for plan_id, got in lines(data, column).items():
+            for n, (value, cited) in enumerate(got, 1):
+                row = dict(sheet="main", plan_id=plan_id, column=column, line=str(n), value=value)
+                cites = [(url[f["doc_sha"]], f["page"], q) for f in cited if f["source"] in facts.DOCUMENTS
+                         for q in json.loads(f["quotes"])]
+                for cite in cites if value else []:
+                    full = dict(row, **dict(zip(("url", "pdf_page", "quote"), cite)))
+                    out[tuple(full.values())] = full
     return sorted(out.values(), key=lambda r: tuple(r.values()))
 
 
