@@ -59,6 +59,10 @@ class StepTest(StepsTest):
         self.assertEqual(document_facts.VERSIONS[7], dict(document_facts.VERSIONS[6], groups=document_facts.VERSIONS[6]["groups"]
                                                           + ("giveback", "part_b_drugs", "medical_deductible", "dental", "extras")))
 
+    def test_version_8_is_7_without_dental(self):
+        self.assertEqual(document_facts.VERSIONS[8], dict(document_facts.VERSIONS[7], groups=tuple(
+            g for g in document_facts.VERSIONS[7]["groups"] if g != "dental")))
+
     def test_version_1_uses_the_models_the_evaluation_picked(self):
         self.assertEqual(document_facts.VERSIONS[1], dict(groups=("imaging",), reader=("claude-opus-5-5", "high"),
                                                           verifier=("claude-opus-5-5", "medium")))

@@ -62,16 +62,19 @@ def presented(*columns):
 
 
 # Each version names the layers it sees and the rows it ignores. No version sees this step's own rows.
-# Versions 2 to 5 ignore edits to their presented columns, so retiring them leaves the tasks unchanged.
-# They also miss later edits to those columns, and versions 3 to 5 miss the edits that TRIAGED keeps,
-# and version 5 also misses those on present.HELD cells.
+# Versions 2 on ignore edits to their presented columns, so retiring them leaves the tasks unchanged.
+# They also miss later edits to those columns, including the edits that TRIAGED and present.HELD keep.
+V5_COLUMNS = ("L_xray_imaging", "AB_ambulance", "I_outpatient_surgery", "F_primary_care", "G_specialist", "H_inpatient",
+        "J_outpatient_rehab", "K_tests_labs")
+V6_COLUMNS = V5_COLUMNS + ("Z_part_b_reduction", "M_part_b_drugs", "O_medical_deductible", "S_acupuncture", "T_chiropractic",
+              "V_massage", "X_transportation")
 VERSIONS = {
     1: (layers.without(layers.FILLED, layers.PRESENTED), None),
     2: (layers.without(layers.FILLED), presented("L_xray_imaging")),
     3: (layers.without(layers.FILLED), presented("L_xray_imaging", "AB_ambulance")),
     4: (layers.without(layers.FILLED), presented("L_xray_imaging", "AB_ambulance", "I_outpatient_surgery")),
-    5: (layers.without(layers.FILLED), presented("L_xray_imaging", "AB_ambulance", "I_outpatient_surgery", "F_primary_care",
-                                                 "G_specialist", "H_inpatient", "J_outpatient_rehab", "K_tests_labs")),
+    5: (layers.without(layers.FILLED), presented(*V5_COLUMNS)),
+    6: (layers.without(layers.FILLED), presented(*V6_COLUMNS)),
 }
 
 
