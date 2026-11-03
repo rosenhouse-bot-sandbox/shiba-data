@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "d649ac2bebc0321d.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-028-3\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$490\", \"unit\": \"per day\", \"limit\": \"days 1-5\", \"page\": 11,\n  \"quotes\": [\"You pay $490 per day for days 1\"], \"note\": \"\"},\n {\"plan_id\": \"H2923-028-3\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"days 6+\", \"page\": 11,\n  \"quotes\": [\"You pay $0 for day(s) 6+\"], \"note\": \"\"},\n {\"plan_id\": \"H2923-028-3\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$490\", \"unit\": \"per day\", \"limit\": \"days 1-5\", \"page\": 79,\n  \"quotes\": [\"You pay $490 per day for days 1\"], \"note\": \"\"},\n {\"plan_id\": \"H2923-028-3\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"days 6+\", \"page\": 79,\n  \"quotes\": [\"You pay $0 for day(s) 6+\"], \"note\": \"\"},\n {\"plan_id\": \"H2923-028-3\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"covered\", \"limit\": \"unlimited days\", \"page\": 46,\n  \"quotes\": [\"You are covered for an unlimited number of medically necessary inpatient hospital days.\"], \"note\": \"\"},\n {\"plan_id\": \"H2923-028-3\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$490\", \"unit\": \"per day\", \"limit\": \"days 1-4\", \"page\": 81,\n  \"quotes\": [\"You pay $490 per day for days 1\"], \"note\": \"\"},\n {\"plan_id\": \"H2923-028-3\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"days 5-90\", \"page\": 81,\n  \"quotes\": [\"You pay $0 per day for days 5 through 90\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 13846,
+  "output_tokens": 2145,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

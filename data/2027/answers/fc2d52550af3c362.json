@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "61de2101267140ce.md",
+ "reply": "```json\n[{\"plan_id\": \"H1372-003-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per day\", \"limit\": \"days 1-7\", \"page\": 2,\n  \"quotes\": [\"$325 copay per day for days 1-7\"]},\n {\"plan_id\": \"H1372-003-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"days 8-90\", \"page\": 2,\n  \"quotes\": [\"$0 copay per day for days 8-90\"]},\n {\"plan_id\": \"H1372-003-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"up to 60 additional days over your lifetime\", \"page\": 2,\n  \"quotes\": [\"$0 copay per day for up to 60 additional\"],\n  \"note\": \"Lifetime reserve days. The phrase continues on the next printed line ('days over your lifetime'), so the quote uses only the first line.\"}]\n```",
+ "usage": {
+  "input_tokens": 2159,
+  "output_tokens": 872,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

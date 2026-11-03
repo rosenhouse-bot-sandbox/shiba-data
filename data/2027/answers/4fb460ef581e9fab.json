@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "dca4e04d7b6dc26b.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H7006-021-0\", \"benefit\": \"tests.lab\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per service\", \"limit\": \"\", \"page\": 65, \"quotes\": [\"$0 copay for each Medicare-covered service. Prior Authorization may be required.\"], \"note\": \"The service name 'Laboratory tests' was dropped from the quotes because it also matches inside 'non-laboratory tests' on this page. This copay is from the In-Network column of the Laboratory tests row.\"}]\n```",
+ "usage": {
+  "input_tokens": 11520,
+  "output_tokens": 911,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

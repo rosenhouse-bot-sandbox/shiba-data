@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "8865a3a5b2f4fcad.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H6815-038-0\", \"benefit\": \"rehab.physical\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$25\", \"unit\": \"\", \"limit\": \"\", \"page\": 11, \"quotes\": [\"Physical Therapy\", \"through 100 $25 copay\"], \"note\": \"The $25 copay sits in the Physical Therapy row, the first entry under Therapy and Rehabilitation Services. The cost quote reads the right column straight down from the end of the SNF row, leaving out footnote marks, because '$25 copay' alone repeats on the page.\"},\n{\"plan_id\": \"H6815-038-0\", \"benefit\": \"rehab.occupational\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$25\", \"unit\": \"\", \"limit\": \"\", \"page\": 11, \"quotes\": [\"Outpatient Rehabilitation Services Provided by an Occupational Therapist\", \"$25 copay $25 copay $25 copay\"], \"note\": \"The occupational therapy row shows a $25 copay. The cost quote reads the right column straight down through the three therapy rows, leaving out footnote marks, because '$25 copay' alone repeats on the page.\"}]\n```",
+ "usage": {
+  "input_tokens": 2504,
+  "output_tokens": 3958,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

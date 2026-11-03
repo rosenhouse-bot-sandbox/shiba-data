@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "8acbaf3993261220.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-040-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$685\", \"unit\": \"per day\", \"limit\": \"days 1-4\", \"page\": 2, \"quotes\": [\"$685 copay per day: days 1-4\"], \"note\": \"Inpatient hospital care; first-days copay, separate from the days 5+ fact\"},\n {\"plan_id\": \"H3805-040-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"days 5+\", \"page\": 2, \"quotes\": [\"$0 copay per day: days 5 and beyond\"], \"note\": \"Inpatient hospital care; later-days copay, separate from the days 1-4 fact\"},\n {\"plan_id\": \"H3805-040-0\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$685\", \"unit\": \"per day\", \"limit\": \"days 1-3\", \"page\": 4, \"quotes\": [\"$685 copay per day: days 1-3\"], \"note\": \"Mental health inpatient visit; first-days copay, separate from the days 4-90 fact\"},\n {\"plan_id\": \"H3805-040-0\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"days 4-90\", \"page\": 4, \"quotes\": [\"$0 copay per day: days 4-90\"], \"note\": \"Mental health inpatient visit; later-days copay, separate from the days 1-3 fact\"}]\n```",
+ "usage": {
+  "input_tokens": 5197,
+  "output_tokens": 1385,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-1ed5fdb720cabd03.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 85 outpatient rehabilitation row, in-network column: $50 copay for each Medicare-covered physical therapy and speech-language therapy visit.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 85 outpatient rehabilitation row, out-of-network column: $80 copay for each Medicare-covered occupational therapy visit.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 85 outpatient rehabilitation row, in-network column: $50 copay for each Medicare-covered occupational therapy visit.\"},\n{\"id\": 3, \"ok\": false, \"reason\": \"Page 85: $50 is the in-network amount. Out of network, speech therapy is $80 per visit.\"},\n{\"id\": 4, \"ok\": false, \"reason\": \"Page 85: $50 is the in-network amount. Out of network, occupational therapy is $80 per visit.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 85 outpatient rehabilitation row, out-of-network column: $80 copay for each physical therapy and speech-language therapy visit.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 85 outpatient rehabilitation row, out-of-network column: $80 copay for each physical therapy and speech-language therapy visit.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 85 outpatient rehabilitation row, in-network column: $50 copay for each physical therapy and speech-language therapy visit.\"},\n{\"id\": 8, \"ok\": false, \"reason\": \"Page 85: $80 is the out-of-network amount. In network, speech therapy is $50 per visit.\"}]\n```",
+ "usage": {
+  "input_tokens": 3553,
+  "output_tokens": 805,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

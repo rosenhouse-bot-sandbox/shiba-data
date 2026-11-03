@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-d370b4b5b3950077.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 8 Speech Therapy: Outpatient hospital $50 copay.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 8 Occupational Therapy: Outpatient hospital $50 copay.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 8 Occupational Therapy: Office location $40 copay.\"},\n{\"id\": 3, \"ok\": false, \"reason\": \"Page 8 Speech Therapy: $40 is the office copay. Outpatient hospital is $50.\"},\n{\"id\": 4, \"ok\": false, \"reason\": \"Page 8 Physical Therapy: office copay is $40, not $50. $50 is the outpatient hospital copay.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 8 Physical Therapy: Outpatient hospital $50 copay.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 8 Speech Therapy: Office location $40 copay.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 8 Physical Therapy: Office location $40 copay.\"},\n{\"id\": 8, \"ok\": false, \"reason\": \"Page 8 Physical Therapy: $40 is the office copay. Outpatient hospital is $50.\"}]\n```",
+ "usage": {
+  "input_tokens": 3278,
+  "output_tokens": 444,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

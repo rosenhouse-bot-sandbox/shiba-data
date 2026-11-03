@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "dca4e04d7b6dc26b.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H7006-021-0\", \"benefit\": \"rehab.physical\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$20\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 71, \"quotes\": [\"Services provided by a physical therapist or speech\", \"language therapist $20 copay for each\"], \"note\": \"The OT row on this page has the same $20 copay text, so the $20 quote is taken from the physical/speech therapist row line. That line spans both the service and cost columns.\"},\n {\"plan_id\": \"H7006-021-0\", \"benefit\": \"rehab.speech\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$20\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 71, \"quotes\": [\"Services provided by a physical therapist or speech\", \"language therapist $20 copay for each\"], \"note\": \"The OT row on this page has the same $20 copay text, so the $20 quote is taken from the physical/speech therapist row line. That line spans both the service and cost columns.\"}]\n```",
+ "usage": {
+  "input_tokens": 13086,
+  "output_tokens": 2039,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

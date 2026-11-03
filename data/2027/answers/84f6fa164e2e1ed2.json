@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "61de2101267140ce.md",
+ "reply": "```json\n[{\"plan_id\": \"H1372-003-0\", \"benefit\": \"rehab.physical\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 7, \"quotes\": [\"Physical therapy $0 copay\"]},\n {\"plan_id\": \"H1372-003-0\", \"benefit\": \"rehab.occupational\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 11, \"quotes\": [\"Occupational therapy $0 copay\"]},\n {\"plan_id\": \"H1372-003-0\", \"benefit\": \"rehab.speech\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 11, \"quotes\": [\"Speech therapy $0 copay\"]}]\n```",
+ "usage": {
+  "input_tokens": 2692,
+  "output_tokens": 804,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

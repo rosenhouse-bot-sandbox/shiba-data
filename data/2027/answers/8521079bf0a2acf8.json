@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "a4bc20077fb4a2cf.md",
+ "reply": "```json\n[{\"plan_id\": \"H3817-011-1\", \"benefit\": \"tests.lab\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"\",\n  \"condition\": \"for HbA1C testing\", \"page\": 57,\n  \"quotes\": [\"$0 copay per provider per day for HbA1C testing\"], \"note\": \"The copay is per provider per day. The $0 applies only to HbA1C testing.\"},\n {\"plan_id\": \"H3817-011-1\", \"benefit\": \"tests.lab\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$30\", \"unit\": \"per day\", \"limit\": \"\",\n  \"condition\": \"for all other tests\", \"page\": 57,\n  \"quotes\": [\"$30 copay per provider per day for all other tests\"], \"note\": \"The copay is per provider per day. It applies to all lab tests other than HbA1C.\"},\n {\"plan_id\": \"H3817-011-1\", \"benefit\": \"tests.lab\", \"setting\": \"any\", \"network\": \"out\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 57,\n  \"quotes\": [\"Lab tests: In-network: $0 copay per provider per day for HbA1C testing $30 copay per provider per day for all other tests Out-of-network: 50% coinsurance\"]},\n {\"plan_id\": \"H3817-011-1\", \"benefit\": \"tests.diagnostic\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$40\", \"unit\": \"per day\", \"page\": 58,\n  \"quotes\": [\"Outpatient diagnostic tests: In-network: $40 copay per provider per day Out-of-network: 50% coinsurance\"], \"note\": \"The copay is per provider per day. It applies to 'Other outpatient diagnostic tests'.\"},\n {\"plan_id\": \"H3817-011-1\", \"benefit\": \"tests.diagnostic\", \"setting\": \"any\", \"network\": \"out\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 58,\n  \"quotes\": [\"Outpatient diagnostic tests: In-network: $40 copay per provider per day Out-of-network: 50% coinsurance\"]}]\n```",
+ "usage": {
+  "input_tokens": 10197,
+  "output_tokens": 1785,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

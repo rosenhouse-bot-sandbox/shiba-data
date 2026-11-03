@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-1ed5fdb720cabd03.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 80: the non-radiological diagnostic row lists home or lab-based sleep studies as examples in the out-of-network column, at 30% coinsurance.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 80: the in-network column of the non-radiological diagnostic row lists home or lab-based sleep studies as examples, at a $10 copayment.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 80: the other outpatient non-radiological diagnostic services row shows a $10 copayment in network.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 80: the non-radiological diagnostic services row shows 30% coinsurance out of network.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 79: the laboratory tests row shows a $0 copayment in both the in-network and out-of-network columns. Here 'or' is 'for' with the f dropped, not a Medicaid alternative.\"}]\n```",
+ "usage": {
+  "input_tokens": 3817,
+  "output_tokens": 523,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

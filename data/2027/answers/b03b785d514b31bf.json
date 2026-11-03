@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "23e2bdae59ea8981.md",
+ "reply": "```json\n[{\"plan_id\": \"H3817-011-1\", \"benefit\": \"rehab.occupational\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$45\", \"page\": 6, \"quotes\": [\"Occupational therapy $45\"]},\n{\"plan_id\": \"H3817-011-1\", \"benefit\": \"rehab.occupational\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 6, \"quotes\": [\"Occupational therapy $45 50%\"]},\n{\"plan_id\": \"H3817-011-1\", \"benefit\": \"rehab.physical\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$45\", \"page\": 6, \"quotes\": [\"Physical and speech language therapy $45\"]},\n{\"plan_id\": \"H3817-011-1\", \"benefit\": \"rehab.physical\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 6, \"quotes\": [\"Physical and speech language therapy $45 50%\"]},\n{\"plan_id\": \"H3817-011-1\", \"benefit\": \"rehab.speech\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$45\", \"page\": 6, \"quotes\": [\"Physical and speech language therapy $45\"]},\n{\"plan_id\": \"H3817-011-1\", \"benefit\": \"rehab.speech\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 6, \"quotes\": [\"Physical and speech language therapy $45 50%\"]}]\n```",
+ "usage": {
+  "input_tokens": 2354,
+  "output_tokens": 1026,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

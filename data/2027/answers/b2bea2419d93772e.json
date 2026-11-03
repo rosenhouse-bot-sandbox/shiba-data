@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "49912316cc55d9c5.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-001-0\", \"benefit\": \"tests.diagnostic\", \"setting\": \"freestanding\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$40\", \"page\": 86, \"quotes\": [\"Specialist's office: $20 copay Freestanding location: $40 copay\", \"$15 copay Freestanding location: $40 copay\"], \"note\": \"Diagnostic Procedures and Tests and EKGs/ECGs, EEGs both have a $40 freestanding copay.\"},\n{\"plan_id\": \"H2923-001-0\", \"benefit\": \"tests.diagnostic\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$95\", \"page\": 86, \"quotes\": [\"Outpatient hospital: $95 copay Home Sleep Studies\", \"Outpatient hospital: $95 copay Genetic Testing\"], \"note\": \"Diagnostic Procedures and Tests and EKGs/ECGs, EEGs both have a $95 outpatient hospital copay.\"},\n{\"plan_id\": \"H2923-001-0\", \"benefit\": \"tests.lab\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0 or $40\", \"page\": 87, \"quotes\": [\"Outpatient hospital: $0 copay Advanced Laboratory Services\", \"Outpatient hospital: $40 copay\"], \"note\": \"Routine Laboratory Services are $0 and Advanced Laboratory Services are $40 at an outpatient hospital.\"}]\n```",
+ "usage": {
+  "input_tokens": 11998,
+  "output_tokens": 1647,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

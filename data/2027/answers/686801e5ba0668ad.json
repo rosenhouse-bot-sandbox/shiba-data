@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-161c63c8abccc6dc.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 222 does say each inpatient hospital stay is covered for unlimited days per stay. But it never mentions out-of-network care, so the network 'any' is not supported by the quote.\"}]\n```",
+ "usage": {
+  "input_tokens": 2469,
+  "output_tokens": 455,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

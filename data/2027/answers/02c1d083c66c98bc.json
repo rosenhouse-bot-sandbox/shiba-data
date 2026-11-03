@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "task": "v-5e11cf20cec995f3.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 65 'Inpatient hospital care' row lists inpatient acute, rehabilitation and long-term care hospitals. That matches inpatient.acute, not the all-inpatient benefit. Psychiatric stays have their own row.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 12 summary 'Inpatient hospital stays' row covers various inpatient stays together: $550 copayment each day for days 1 to 5, in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3158,
+  "output_tokens": 570,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

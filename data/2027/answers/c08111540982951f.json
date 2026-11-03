@@ -1,0 +1,12 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "task": "d1ca3a965cb15437.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-041-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$685\", \"unit\": \"per day\", \"limit\": \"days 1-4\", \"page\": 65,\n  \"quotes\": [\"$685 copayment each day or days 1-4 or\"], \"note\": \"\"},\n {\"plan_id\": \"H3805-041-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"days 5+\", \"page\": 65,\n  \"quotes\": [\"$0 copayment or additional\"], \"note\": \"\"},\n {\"plan_id\": \"H3805-041-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$685\", \"unit\": \"per day\", \"limit\": \"days 1-4\", \"page\": 12,\n  \"quotes\": [\"$685 copayment each day or\", \"days 1 to 4.\"], \"note\": \"\"},\n {\"plan_id\": \"H3805-041-0\", \"benefit\": \"inpatient.acute\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"days 5+\", \"page\": 12,\n  \"quotes\": [\"$0 copayment or additional\", \"Medicare covered days.\"], \"note\": \"\"},\n {\"plan_id\": \"H3805-041-0\", \"benefit\": \"inpatient.psychiatric\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"additional days, up to 90 days per benefit period\", \"page\": 68,\n  \"quotes\": [\"$0 copayment or additional\", \"Medicare-covered days, up to 90 days per\"], \"note\": \"The copay for the first days of the stay is on the previous page, which is not shown, so the day on which the $0 copay starts is unknown.\"}]\n```",
+ "usage": {
+  "input_tokens": 16049,
+  "output_tokens": 2108,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
