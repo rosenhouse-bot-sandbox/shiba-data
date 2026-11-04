@@ -182,6 +182,15 @@ class OutpatientSurgeryTest(unittest.TestCase):
         self.assertEqual(surgery(op(setting="any", amount="$250"), op(amount="$50-$300", source="SB"),
                                  op(setting="any", amount="$0-$300", source="SB")), ["$250", "$250"])
 
+    def test_a_flat_0_out_of_network_0_low_end_or_0_low_end_for_a_procedure_does_not_count(self):
+        self.assertEqual(surgery(op(setting="any", amount="$250"), op(amount="$0", source="SB"),
+                                 op(amount="$0-$300", source="SB", network="out"),
+                                 op("surgery.colonoscopy", amount="$0-$300", source="SB")), ["$250", "$250"])
+
+    def test_cites_a_low_end_once(self):
+        cost = op(amount="$0-$250")
+        self.assertEqual([cited for _, cited in present.outpatient_surgery("Aetna", [cost])], [[cost], []])
+
     def test_an_out_of_network_0_colonoscopy_does_not_count(self):
         self.assertEqual(surgery(op(), op("surgery.colonoscopy", amount="$0", network="out")), ["$500", ""])
 

@@ -135,17 +135,17 @@ def ambulance(organization, found):
 def outpatient_surgery(organization, found):
     """Line 1 is outpatient hospital surgery and line 2 is surgical center surgery, each as (value, cited facts).
     A $0 diagnostic colonoscopy or skin biopsy priced in that setting starts its line at $0 (fields.py).
-    So does a $0 low end that any source gives surgery in that setting (the expert's rule in #99)."""
+    So does a $0 low end that any source gives surgery in that setting, even one for other services (the expert's rule in #99)."""
     def line(setting):
         cost = best(found, "surgery", setting)
+        if not cost:
+            return "", []
         zeros = [f for leaf in ("surgery.colonoscopy", "surgery.skin_biopsy")
                  for f in best(found, leaf, setting, lambda f: usable(f) and f["benefit"] == leaf and f["setting"] == setting)
                  if f["amount"] == "$0"]
         low_ends = [f for f in found if usable(f) and f["benefit"] == "surgery" and f["setting"] == setting
-                    and f not in cost and f["amount"].startswith("$0-")]
-        if not cost:
-            return "", []
-        return show(cost + zeros + [dict(f, amount="$0") for f in low_ends[:1]]), cost + zeros + low_ends
+                    and f["amount"].startswith("$0-")]
+        return show(cost + zeros + [dict(f, amount="$0") for f in low_ends]), unique(cost + zeros + low_ends)
     return [line("outpatient_hospital"), line("asc")]
 
 
