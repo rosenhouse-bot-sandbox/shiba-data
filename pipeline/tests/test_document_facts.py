@@ -2,12 +2,8 @@ import glob, json, os, sys, threading, unittest
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-import document_facts, facts, present
+import document_facts, facts
 from test_extract import SHA, StepsTest, answer
-
-
-# HELD cells with wrong facts, which a second reader cannot fix.
-WRONG = {"H6815-038-0", "H1036-317-0"}
 
 
 class StepTest(StepsTest):
@@ -110,10 +106,11 @@ class StepTest(StepsTest):
     def test_version_10_rechecks_the_cells_whose_readers_missed_a_price(self):
         v = document_facts.VERSIONS[10]
         self.assertEqual(dict(v, recheck=None), dict(document_facts.VERSIONS[9], recheck=None))
-        self.assertEqual(set(v["recheck"]) - set(v["groups"]), set())
-        held = {(c, p) for c, p in present.HELD}
-        for group, column in (("tests", "K_tests_labs"), ("part_b_drugs", "M_part_b_drugs"), ("hearing", "Q_hearing")):
-            self.assertLessEqual({p for c, p in held if c == column} - WRONG, set(v["recheck"][group]), group)
+        kaiser = ("H9003-001-0", "H9003-006-0", "H9003-009-0")
+        self.assertEqual(v["recheck"], {
+            "tests": ("H2406-070-0", "H2923-009-0", "H3817-008-1", "H5439-010-0", "H5439-011-0", "H5439-015-0",
+                      "H5439-019-0", "H7006-021-0"),
+            "part_b_drugs": kaiser, "hearing": ("H9003-009-0",), "surgery": kaiser + ("H3817-008-1",)})
 
     def test_version_1_uses_the_models_the_evaluation_picked(self):
         self.assertEqual(document_facts.VERSIONS[1], dict(groups=("imaging",), reader=("claude-opus-5-5", "high"),

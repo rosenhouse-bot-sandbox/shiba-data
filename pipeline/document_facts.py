@@ -18,7 +18,7 @@ VERSIONS[7] = dict(VERSIONS[6], groups=VERSIONS[6]["groups"] + ("giveback", "par
 VERSIONS[8] = dict(VERSIONS[7], groups=tuple(g for g in VERSIONS[7]["groups"] if g != "dental"))
 VERSIONS[9] = dict(VERSIONS[7], groups=VERSIONS[7]["groups"] + ("vision", "hearing", "fitness", "otc", "packages"))
 # A second reader looks again at the documents of plans whose cells the first readers left short.
-# It can only add facts, so cells with wrong facts are not here. Surgery covers the Kaiser and H3817-008-1 edits.
+# It can only add facts, so cells with wrong facts are not here.
 KAISER = ("H9003-001-0", "H9003-006-0", "H9003-009-0")
 VERSIONS[10] = dict(VERSIONS[9], recheck={
     "tests": ("H2406-070-0", "H2923-009-0", "H3817-008-1", "H5439-010-0", "H5439-011-0", "H5439-015-0", "H5439-019-0",
