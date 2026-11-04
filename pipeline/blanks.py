@@ -27,8 +27,12 @@ CONDITION = re.compile(r"\b(if|when|unless)\b", re.I)
 EXCLUSION_ROW_ENDS = (" Not covered under any condition", " Not covered under any condition.")
 
 
-def cells(data=DATA):
-    """{sheet.key: {plan_id: cell}} for the fields an EOC can show, without this step's citations."""
+# The cells this step's saved answers were asked about, so retiring edits leaves its tasks unchanged.
+FROZEN = "machine/blanks_cells.json"
+
+
+def freeze(data=DATA):
+    """Writes {sheet.key: {plan_id: {value, cited}}} for the fields an EOC can show, as the other layers show them."""
     import build
     site = build.site_data(pathlib.Path(data), layers.without(layers.BLANKS, layers.PRESENTED))
     out = collections.defaultdict(dict)
@@ -36,15 +40,22 @@ def cells(data=DATA):
         for r in site[sheet]["rows"]:
             for k, c in r["cells"].items():
                 if f"{sheet}.{k}" in FIELDS:
-                    out[f"{sheet}.{k}"][r["plan_id"]] = c
-    return out
+                    out[f"{sheet}.{k}"][r["plan_id"]] = {"value": c["value"], "cited": bool(c["cites"])}
+    with open(pathlib.Path(data) / FROZEN, "w") as f:
+        json.dump(out, f, indent=1, ensure_ascii=False)
+        f.write("\n")
+
+
+def cells(data=DATA):
+    with open(pathlib.Path(data) / FROZEN) as f:
+        return json.load(f)
 
 
 def uncited_blanks(all_cells):
     out = collections.defaultdict(list)
     for key, by_plan in all_cells.items():
         for plan, c in by_plan.items():
-            if not c["value"].strip() and not c["cites"]:
+            if not c["value"].strip() and not c["cited"]:
                 out[plan].append(key)
     return out
 
@@ -268,7 +279,7 @@ def publish(accepted_path, data=DATA):
     with open(accepted_path) as f:
         acc = json.load(f)
     all_cells = cells(data)
-    stale = [(c["plan"], c["key"]) for c in acc if all_cells[c["key"]][c["plan"]]["value"].strip() or all_cells[c["key"]][c["plan"]]["cites"]]
+    stale = [(c["plan"], c["key"]) for c in acc if all_cells[c["key"]][c["plan"]]["value"].strip() or all_cells[c["key"]][c["plan"]]["cited"]]
     if stale:
         raise SystemExit(f"No longer uncited blanks: {stale}")
     with open(f"{data}/{layers.BLANKS}", "w", newline="") as f:
@@ -277,7 +288,7 @@ def publish(accepted_path, data=DATA):
         w.writerows(citation_rows(acc, lambda plan: eoc(plan, data)[1]))
 
 
-COMMANDS = {"bundle": bundle, "claims": claims, "verify": verify, "accept": accept, "publish": publish}
+COMMANDS = {"freeze": freeze, "bundle": bundle, "claims": claims, "verify": verify, "accept": accept, "publish": publish}
 
 if __name__ == "__main__":
     if len(sys.argv) < 2 or sys.argv[1] not in COMMANDS:
