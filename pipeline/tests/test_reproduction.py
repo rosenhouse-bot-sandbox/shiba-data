@@ -1,4 +1,4 @@
-"""Runs the generators on the Appendix B plans and checks the corrected 2027 values in docs/2027-bootstrap/CLAUDE_ANALYSIS_METHODS.md Appendix B.
+"""Runs the generators on the Appendix B plans and checks the corrected 2027 values in appendix_b.py.
 The generators must reproduce the committed generated sheets. The corrections must hold once the layers apply.
 
 fixtures/pbp_appendix_b.json.gz holds those plans' PBP rows. make_fixture.py regenerates it.
