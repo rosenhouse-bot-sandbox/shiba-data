@@ -347,7 +347,6 @@ HELD = {
     ("K_tests_labs", "H5439-019-0"): "the rule leaves out the $50 genetic test",
     ("K_tests_labs", "H6815-038-0"): "readers took a $200 price for tests that is not a diagnostic test",
     ("O_medical_deductible", "H1036-317-0"): "readers missed that the $283 is Original Medicare's Part B deductible",
-    ("Q_hearing", "H9003-009-0"): "readers missed the $0 routine hearing exam for Value plan members",
 }
 
 
