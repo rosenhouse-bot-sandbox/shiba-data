@@ -96,7 +96,7 @@ def trip_here(f):
 
 
 def trip_abroad(f):
-    return (f["setting"] == "outside_us" and f["cost_kind"] in PRICED + ("covered", "not_covered")
+    return (f["setting"] == "outside_us" and f["cost_kind"] in PRICED + ("covered", "not_covered", "unclear")
             and not (f["provider_tier"] or f["package"]))
 
 
@@ -117,7 +117,10 @@ def ambulance(organization, found):
     priced = [f for f in abroad if f["cost_kind"] in PRICED]
     covered = [f for f in abroad if f["cost_kind"] == "covered"]
     excluded = [f for f in abroad if f["cost_kind"] == "not_covered"]
-    if priced:
+    unclear = [f for f in abroad if f["cost_kind"] == "unclear"]
+    if unclear:
+        line2 = ("EOC unclear", unclear)
+    elif priced:
         line2 = (show_or(priced), priced)
     elif covered:
         plain = [f for f in here if not f["condition"]]
@@ -299,9 +302,13 @@ def packages(organization, found):
     return [("●", top(sold))] if sold else [("", top(none) if none else [])]
 
 
+# Hand-written facts fill in what readers miss, and each note says why. Only they use cost kind "unclear".
+OVERRIDES = "override_facts.csv"
+
+
 def plan_facts(data):
     by_plan = collections.defaultdict(list)
-    for name in ("machine/document_facts.csv", "generated/pbp_facts.csv"):
+    for name in ("machine/document_facts.csv", "generated/pbp_facts.csv", OVERRIDES):
         for f in facts.read(data / name):
             by_plan[f["plan_id"]].append(f)
     return by_plan

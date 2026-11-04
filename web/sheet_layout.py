@@ -3,6 +3,7 @@ import json
 from dataclasses import dataclass
 
 import facts
+import present
 
 SITE = "https://pdxplans.org/"
 TABS = {"main": "Main chart", "dvha": "Dental, vision, hearing, extras"}
@@ -73,7 +74,7 @@ def lines(sheet, column):
 def details(site, data_dir):
     """One row per fact, with its page linked to the PDF."""
     names = {p["plan_id"]: p["plan_name"] for p in site["plans"]}
-    found = facts.read(data_dir / "machine/document_facts.csv") + facts.read(data_dir / "generated/pbp_facts.csv")
+    found = [f for plan in present.plan_facts(data_dir).values() for f in plan]
 
     def cells(f):
         out = [Cell(f[key] if key else "") for key in FACT_COLUMNS.values()]

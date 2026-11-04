@@ -183,7 +183,8 @@ class DetailsTest(unittest.TestCase):
         return row.cells[self.header.index(column)]
 
     def test_one_row_per_fact_under_a_header(self):
-        found = facts.read(build.DATA / "machine/document_facts.csv") + facts.read(build.DATA / "generated/pbp_facts.csv")
+        found = (facts.read(build.DATA / "machine/document_facts.csv") + facts.read(build.DATA / "generated/pbp_facts.csv")
+                 + facts.read(build.DATA / "override_facts.csv"))
         self.assertEqual(self.rows[0].kind, "header")
         self.assertEqual(self.header[:3], ["Plan ID", "Plan", "Benefit"])
         self.assertEqual(len(self.rows), len(found) + 1)

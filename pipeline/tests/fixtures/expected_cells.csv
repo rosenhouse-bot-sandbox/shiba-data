@@ -167,7 +167,7 @@ main,H2056-003-0,G_specialist,1,$65,,
 main,H2056-003-0,I_outpatient_surgery,1,$500,,
 main,H2056-003-0,I_outpatient_surgery,2,$450,,
 main,H2056-003-0,L_xray_imaging,2,$350,,
-main,H2056-003-0,M_part_b_drugs,,20%,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,55 56
+main,H2056-003-0,M_part_b_drugs,,0%-20%,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,52 55 56
 main,H2056-018-0,AB_ambulance,1,$245 or 20%,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,31
 main,H2056-018-0,AB_ambulance,2,$245,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,39
 main,H2056-018-0,I_outpatient_surgery,1,$325,,
