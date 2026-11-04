@@ -2,7 +2,7 @@
 
 This folder holds the 2027 Multnomah/Clackamas MA sheets, built without the volunteers' PDFs or summary tables.
 They come only from the CMS Landscape and PBP Benefits files, carrier websites, and the plan documents those sites serve.
-The method follows `docs/2027-bootstrap/CLAUDE_ANALYSIS_METHODS.md` section 13.2 ("only this file and the internet").
+The methods doc and Appendix B below are the 2027 bootstrap's, which git history keeps.
 
 `python3 -I pipeline/run.py 2027 <work_dir>` lists plan documents from `found.csv` and `links.csv`, downloads them and the sources named in `config.json`, and regenerates `generated/`.
 It then rebuilds `machine/blanks.csv` and `machine/filled.csv` from the model answers saved in `answers/`.
@@ -30,7 +30,7 @@ An edit row also records `saw`, the value its author saw. The site build warns w
 |---|---|
 | Plan universe | The Landscape file gives the same 39 plans as the methods doc, after dropping 2 D-SNPs and 4 I-SNPs. |
 | Premium and Extra Help premium | All 39 premiums match the section 4 table. Extra Help premiums match wherever section 4 lists one. |
-| Plan documents | All 73 SBs and EOCs were found. 71 are byte-identical to `docs/2027-bootstrap/SOURCES_MANIFEST.json`. |
+| Plan documents | All 73 SBs and EOCs were found. 71 were byte-identical to the bootstrap's manifest. |
 | Main chart | 11 of the 13 Appendix B items are reproduced. The other 2 are not errors a generator can make or avoid. |
 | DVHA sheet | 5 of the 7 significant DVHA findings are reproduced. |
 

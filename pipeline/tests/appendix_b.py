@@ -1,5 +1,5 @@
-"""Corrected 2027 values from docs/2027-bootstrap/CLAUDE_ANALYSIS_METHODS.md Appendix B.
-A SHIBA expert later changed the format of some cells (see data/2027/README.md)."""
+"""Corrected 2027 values from Appendix B of the 2027 bootstrap methods doc, which git history keeps.
+A SHIBA expert later changed the format of some cells."""
 
 YEAR = 2027
 
