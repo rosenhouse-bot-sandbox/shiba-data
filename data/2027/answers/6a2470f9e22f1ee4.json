@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-034e045a83e5b49d.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 3 outpatient hospital 'All other services' row: 20% is the in-network amount. Out-of-network is 50%, not 20%.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 3 ambulatory surgery center Diagnostic colonoscopy row: out-of-network 50% coinsurance.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"Page 3 outpatient hospital 'All other services' row: in-network is 20%. 50% is the out-of-network amount.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 3 outpatient hospital Diagnostic colonoscopy row: out-of-network 50% coinsurance.\"}]\n```",
+ "usage": {
+  "input_tokens": 2306,
+  "output_tokens": 413,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

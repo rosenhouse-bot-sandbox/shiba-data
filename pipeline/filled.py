@@ -52,12 +52,13 @@ def targets(site, every=False):
     return dict(out)
 
 
-def presented(*columns):
-    """Ignores edits to the columns, and presented rows of other columns."""
+def presented(*columns, held=()):
+    """Ignores edits to the columns, and presented rows of other columns or of held cells."""
     def ignore(row):
         if row["layer"] == layers.EDITS:
             return row["column"] in columns
-        return row["layer"] == layers.PRESENTED and row["column"] not in columns
+        return row["layer"] == layers.PRESENTED and (row["column"] not in columns
+                                                     or (row["column"], row.get("plan_id")) in held)
     return ignore
 
 
@@ -68,13 +69,17 @@ V5_COLUMNS = ("L_xray_imaging", "AB_ambulance", "I_outpatient_surgery", "F_prima
         "J_outpatient_rehab", "K_tests_labs")
 V6_COLUMNS = V5_COLUMNS + ("Z_part_b_reduction", "M_part_b_drugs", "O_medical_deductible", "S_acupuncture", "T_chiropractic",
               "V_massage", "X_transportation")
+# Cells that present.HELD kept when version 6 was pinned, and released later. Version 6 saw neither their edits nor their
+# presented rows.
+V6_HELD = {("K_tests_labs", p) for p in ("H2406-070-0", "H3817-008-1", "H7006-021-0")} | {
+    ("M_part_b_drugs", p) for p in ("H9003-001-0", "H9003-006-0", "H9003-009-0")}
 VERSIONS = {
     1: (layers.without(layers.FILLED, layers.PRESENTED), None),
     2: (layers.without(layers.FILLED), presented("L_xray_imaging")),
     3: (layers.without(layers.FILLED), presented("L_xray_imaging", "AB_ambulance")),
     4: (layers.without(layers.FILLED), presented("L_xray_imaging", "AB_ambulance", "I_outpatient_surgery")),
     5: (layers.without(layers.FILLED), presented(*V5_COLUMNS)),
-    6: (layers.without(layers.FILLED), presented(*V6_COLUMNS)),
+    6: (layers.without(layers.FILLED), presented(*V6_COLUMNS, held=V6_HELD)),
 }
 
 

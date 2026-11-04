@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-fd314311528d4668.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 11 Medicare Explorer row (point-of-service supplemental, out-of-network): you pay 0%-20% of allowed charges for Part B drugs given in an office or clinic. The page names no single plan, so it applies to all.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 11 Medicare Explorer row (point-of-service supplemental, out-of-network): you pay 0%-20% of allowed charges for Part B drugs given in an office or clinic. The page names no single plan, so it applies to all.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 11 Medicare Explorer row (point-of-service supplemental, out-of-network): you pay 0%-20% of allowed charges for Part B drugs given in an office or clinic. The page names no single plan, so it applies to all.\"}]\n```",
+ "usage": {
+  "input_tokens": 2998,
+  "output_tokens": 807,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

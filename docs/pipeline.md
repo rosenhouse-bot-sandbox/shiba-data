@@ -179,7 +179,7 @@ flowchart LR
 
 `document_facts.py` works through one benefit group at a time, such as imaging or ambulance. A reader model gets each document's pages that mention the group. Code checks each fact: its quote must appear exactly once on its page and show the amount. A fact that fails goes back to the reader once, and code drops it if it fails again. A verifier then checks the rest.
 
-Version 10 of `document_facts.py`, not yet pinned, adds a second reader for plans whose readers missed a price. It sees the facts already found and lists only the missing ones.
+Version 10 of `document_facts.py` adds a second reader for plans whose readers missed a price. It sees the facts already found and lists only the missing ones.
 
 Readers still miss some prices. `override_facts.csv` holds hand-written facts for those. Each has a note that says why, and the person who writes one also adds a yellow note to its cell in `comments.csv`.
 

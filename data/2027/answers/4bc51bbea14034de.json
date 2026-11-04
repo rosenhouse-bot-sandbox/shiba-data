@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-50159487a52ccddf.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 7, Lab services row, ATRIO Freedom (H7006021) column: 50% coinsurance out of network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 7, Diagnostic tests and procedures row, ATRIO Freedom column: $0 copay in network.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 7, Diagnostic tests and procedures row, ATRIO Freedom column: 50% coinsurance out of network.\"},\n{\"id\": 3, \"ok\": false, \"reason\": \"The $0 - $20 copay is in the Choice Rx (H7006018) column. ATRIO Freedom shows $0 copay in network.\"},\n{\"id\": 4, \"ok\": false, \"reason\": \"Choice Rx (H7006018) diagnostic tests are $0 - $20 copay in network. The $0 copay is in the Freedom column.\"},\n{\"id\": 5, \"ok\": false, \"reason\": \"Choice Rx out-of-network lab services are a $15 copay. $0 is the in-network amount.\"}]\n```",
+ "usage": {
+  "input_tokens": 2854,
+  "output_tokens": 602,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

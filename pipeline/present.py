@@ -336,18 +336,12 @@ def lines(data, column):
 
 # Plans whose cell keeps its other layers' value, because the facts miss part of it.
 HELD = {
-    ("K_tests_labs", "H2406-070-0"): "readers found no diagnostic test price",
     ("K_tests_labs", "H2923-009-0"): "readers found a 50% lab price but no 0%",
-    ("K_tests_labs", "H3817-008-1"): "readers missed the $0 HbA1c lab price",
-    ("K_tests_labs", "H5439-010-0"): "readers missed the 0% and $0 test prices",
-    ("K_tests_labs", "H5439-011-0"): "readers missed the 0% and $0 test prices",
-    ("K_tests_labs", "H5439-015-0"): "readers missed the 0% and $0 test prices",
-    ("K_tests_labs", "H5439-019-0"): "readers missed the 0% and $0 test prices",
+    ("K_tests_labs", "H5439-010-0"): "the rule leaves out the SB's $0 tests and the $50 genetic test",
+    ("K_tests_labs", "H5439-011-0"): "the rule leaves out the $50 genetic test",
+    ("K_tests_labs", "H5439-015-0"): "the rule leaves out the SB's $0 tests and the $50 genetic test",
+    ("K_tests_labs", "H5439-019-0"): "the rule leaves out the $50 genetic test",
     ("K_tests_labs", "H6815-038-0"): "readers took a $200 price for tests that is not a diagnostic test",
-    ("K_tests_labs", "H7006-021-0"): "readers found no diagnostic test price",
-    ("M_part_b_drugs", "H9003-001-0"): "readers missed the 20% for Part B drugs",
-    ("M_part_b_drugs", "H9003-006-0"): "readers missed the 20% for Part B drugs",
-    ("M_part_b_drugs", "H9003-009-0"): "readers missed the 20% for Part B drugs",
     ("O_medical_deductible", "H1036-317-0"): "readers missed that the $283 is Original Medicare's Part B deductible",
     ("Q_hearing", "H9003-009-0"): "readers missed the $0 routine hearing exam for Value plan members",
 }
