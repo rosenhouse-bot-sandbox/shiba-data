@@ -1,59 +1,77 @@
-"""A reviewer checks each new fact that a presented cell cites, before the facts are written.
+"""A reviewer checks each fact that a presented cell cites, unless an earlier run trusted it.
 
-A fact that no cell cites changes nothing on the sheet, so it goes unreviewed. Each review task holds one fact, so a
-rerun asks again only for facts it has not seen. Facts the reviewer rejects are dropped. Dropping one can let a cell
-cite another new fact, so the review repeats until every cited new fact has a verdict.
+Each review task holds one fact, so a rerun asks again only for facts it has not seen.
 """
-import json, os, shutil
+import os, shutil
 
 import ask, blanks, extract, facts, present
 from eoc import Doc
+
+REVIEWED = "machine/reviewed_facts.csv"
 
 
 def row(f):
     return tuple(f[c] for c in facts.COLUMNS)
 
 
-def to_review(data, old, new):
-    """The facts in new and not in old that a presented cell cites."""
-    known = {row(f) for f in old}
-    cited = {row(f) for column in present.COLUMNS
-             for plan_id, got in present.lines(data, column, new).items() if (column, plan_id) not in present.HELD
-             for _, used in got for f in used}
-    return [f for f in new if row(f) in cited and row(f) not in known]
+def cited(data, document):
+    """The rows of the facts in document that a presented cell cites."""
+    return {row(f) for column in present.COLUMNS
+            for plan_id, got in present.lines(data, column, document).items() if (column, plan_id) not in present.HELD
+            for _, used in got for f in used}
 
 
-def task(data, work):
+def trusted(data, old):
+    """The rows an earlier run reviewed. Before the first review, the cited rows of the old facts."""
+    path = data / REVIEWED
+    return {row(f) for f in facts.read(path)} if path.exists() else cited(data, old)
+
+
+def to_review(data, trusted_rows, new):
+    """The facts in new, once each, that a presented cell cites and that are not trusted."""
+    rows = cited(data, new) - trusted_rows
+    return list({row(f): f for f in new if row(f) in rows}.values())
+
+
+def task(data, texts):
     docs = {d["sha256"]: d for d in extract.documents(data)}
     plan_rows = extract.plans(data)
 
     def of(f):
         doc = docs[f["doc_sha"]]
-        return extract.verifier_task(doc, plan_rows, Doc(work, doc["id"]).pages("layout"), [f], data)
+        return extract.verifier_task(doc, plan_rows, Doc(texts, doc["id"]).pages("layout"), [f], data)
     return of
 
 
-def gate(data, texts, work, answer, old, new, version, task_of=None):
-    """new without the facts the reviewer rejects. Stops if more facts than version["review_cap"] lack a saved answer."""
+def saved(data, model, text, effort):
+    return (data / "answers" / f"{ask.key(model, text, effort)}.json").exists()
+
+
+def gate(data, texts, work, answer, trusted_rows, new, version, task_of=None):
+    """new without the facts the reviewer rejects, and the kept facts that are cited or trusted, which a later run trusts.
+    Stops if more facts than version["review_cap"] lack a saved answer."""
     task_of = task_of or task(data, texts)
     model, effort = version["reviewer"]
-    verdict = {}
+    verdict, unsaved = {}, 0
     while True:
-        pending = [f for f in to_review(data, old, [f for f in new if verdict.get(row(f)) is not False])
-                   if row(f) not in verdict]
+        kept = [f for f in new if verdict.get(row(f)) is not False]
+        pending = [f for f in to_review(data, trusted_rows, kept) if row(f) not in verdict]
         if not pending:
-            return [f for f in new if verdict.get(row(f)) is not False]
-        texts_of = {f["fact_id"] + f["doc_sha"][:8] + f["page"]: task_of(f) for f in pending}
-        unsaved = [t for t in texts_of.values() if not os.path.exists(data / "answers" / f"{ask.key(model, t, effort)}.json")]
-        if len(unsaved) > version["review_cap"]:
-            raise SystemExit(f"{len(unsaved)} facts need review, more than the cap of {version['review_cap']}.")
+            rows = cited(data, kept) | trusted_rows
+            return kept, [f for f in kept if row(f) in rows]
+        texts_of = [task_of(f) for f in pending]
+        unsaved += sum(not saved(data, model, t, effort) for t in texts_of)
+        if unsaved > version["review_cap"]:
+            raise SystemExit(f"The review needs {unsaved} new answers, more than the cap of {version['review_cap']}.")
         out = f"{work}/review"
         shutil.rmtree(out, ignore_errors=True)
         os.makedirs(out)
-        for name, text in texts_of.items():
-            with open(f"{out}/v-{name}.md", "w") as f:
+        for n, text in enumerate(texts_of):
+            with open(f"{out}/v-{n}.md", "w") as f:
                 f.write(text)
         answer(out, model, effort)
-        items = [dict(f, task=name) for name, f in zip(texts_of, pending)]
-        ok = {v["id"] for v in blanks.verdicts(items, out) if v.get("ok") is True}
-        verdict.update({row(f): i in ok for i, f in enumerate(pending)})
+        got = {v["id"]: v for v in blanks.verdicts([dict(task=str(n)) for n in range(len(pending))], out)}
+        for n, f in enumerate(pending):
+            verdict[row(f)] = got.get(n, {}).get("ok") is True
+            if not verdict[row(f)]:
+                print(f"Reviewer rejected {f['plan_id']} {f['benefit']} {f['amount']}: {got.get(n, {}).get('reason', 'no verdict')}")

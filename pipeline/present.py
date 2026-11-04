@@ -312,9 +312,10 @@ OVERRIDES = "override_facts.csv"
 
 def plan_facts(data, document=None):
     """Each plan's facts. document replaces machine/document_facts.csv if given."""
+    if document is None:
+        document = facts.read(data / "machine/document_facts.csv")
     by_plan = collections.defaultdict(list)
-    for f in (facts.read(data / "machine/document_facts.csv") if document is None else document) + [
-            f for name in ("generated/pbp_facts.csv", OVERRIDES) for f in facts.read(data / name)]:
+    for f in document + facts.read(data / "generated/pbp_facts.csv") + facts.read(data / OVERRIDES):
         by_plan[f["plan_id"]].append(f)
     return by_plan
 
