@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-f961eb582c1534d5.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 79 Laboratory tests row, In-Network: $0 copay for labs related to A1C and kidney health evaluation. The condition matches the quote.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 79 Laboratory tests row, In-Network: $10 copay for all other Medicare-covered lab services. The condition matches the quote.\"}]\n```",
+ "usage": {
+  "input_tokens": 2085,
+  "output_tokens": 255,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "37b0122461ea99ed.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-011-0\", \"benefit\": \"tests.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"0%\", \"condition\": \"Spirometry\", \"page\": 94, \"quotes\": [\"Deductible may apply. 0% coinsurance for Spirometry.\"], \"note\": \"Spirometry is listed as its own diagnostic test with its own cost share. That cost differs from the 20% for all other diagnostic tests.\"},\n {\"plan_id\": \"H5439-011-0\", \"benefit\": \"tests.diagnostic\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"condition\": \"Spirometry\", \"page\": 94, \"quotes\": [\"30% coinsurance for Spirometry.\"]}]\n```",
+ "usage": {
+  "input_tokens": 14331,
+  "output_tokens": 1186,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
