@@ -207,6 +207,48 @@ class StepsTest(unittest.TestCase):
         self.step(extract.read, self.work, self.dir, "imaging", ids=set())
         self.assertEqual(os.listdir(self.dir), [])
 
+    def known(self, **changes):
+        row = {c: "" for c in facts.COLUMNS}
+        row.update(plan_id="H1036-306-0", benefit="imaging.xray", setting="any", network="in", covered_by="medicare",
+                   cost_kind="copay", amount="$0-$40", source="EOC", doc_sha=SHA, page="1", quotes=json.dumps([X_RAYS]))
+        row.update(changes)
+        return row
+
+    def test_reread_shows_the_facts_found_and_asks_for_the_rest(self):
+        with open(self.data / "generated" / "documents_checked.csv", "w") as f:
+            f.write(f"plan_ids,kind,sha256\nH1036-306-0;H1036-307-0,EOC,{SHA}\n")
+        found = self.known()
+        other_doc = self.known(doc_sha="ef" * 32, amount="$9")
+        other_plan = self.known(plan_id="H1036-307-0", amount="$7")
+        self.step(extract.reread, self.work, self.dir, "imaging", plan_ids={"H1036-306-0"},
+                  known=[found, other_doc, other_plan])
+        self.assertEqual(os.listdir(self.dir), [f"{SHA[:16]}.md"])
+        text = (self.dir / f"{SHA[:16]}.md").read_text()
+        self.assertIn("Earlier readers found these facts for H1036-306-0:\n\n- "
+                      + extract.printable(extract.shown(found)) + "\n\nEarlier readers may have missed", text)
+        self.assertIn("only the facts for H1036-306-0 that the list lacks", text)
+        self.assertNotIn("$9", text)
+        self.assertNotIn("$7", text)
+        self.assertLess(text.index("## Facts already found"), text.index("## Pages"))
+
+    def test_reread_says_when_no_facts_were_found(self):
+        self.step(extract.reread, self.work, self.dir, "imaging", plan_ids={"H1036-306-0"}, known=[])
+        text = (self.dir / f"{SHA[:16]}.md").read_text()
+        self.assertIn("Earlier readers found no facts for H1036-306-0.\n\nEarlier readers may have missed", text)
+        self.assertIn("only the facts for H1036-306-0 that the pages state", text)
+
+    def test_verify_makes_decoys_from_known_facts_without_checking_them_again(self):
+        with open(self.dir.parent / "new.json", "w") as f:
+            json.dump([self.known(network="out", amount="$0", quotes=json.dumps(["Outpatient X-rays $0"]))], f)
+        self.step(extract.verify, self.work, self.dir.parent / "new.json", self.dir, known=[self.known()])
+        items = json.load(open(self.dir / "items.json"))
+        self.assertEqual([c["network"] for c in items if not c["decoy"]], ["out"])
+        self.assertTrue(any(c["decoy"] for c in items))
+
+    def test_reread_skips_documents_for_other_plans(self):
+        self.step(extract.reread, self.work, self.dir, "imaging", plan_ids={"H0000-000-0"}, known=[])
+        self.assertEqual(os.listdir(self.dir), [])
+
     def test_facts_retries_once_then_verify_writes_tasks_and_items(self):
         self.step(extract.read, self.work, self.dir, "imaging")
         good, bad = answer(page=1), answer(page=1, amount="$5")
