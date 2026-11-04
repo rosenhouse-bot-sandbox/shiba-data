@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "5e11cf20cec995f3.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-048-0\", \"benefit\": \"fitness\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 60, \"quotes\": [\"Fitness program                                     $0 copayment\", \"Coverage is limited to in-network locations\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 7469,
+  "output_tokens": 766,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "4ec81cd0d2695486.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H1372-003-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 102, \"quotes\": [\"Outpatient physician services for the diagnosis and\", \"$0 copayment $0 copayment $0 copayment $0 copayment $0 copayment Limit 1 visit every year\"], \"note\": \"Medicare-covered exam to diagnose and treat eye disease; first $0 copayment in the What you pay column\"},\n{\"plan_id\": \"H1372-003-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"1 per year\", \"condition\": \"people who are at high risk for glaucoma\", \"page\": 102, \"quotes\": [\"For people who are at high risk for glaucoma, we cover\", \"one glaucoma screening each year\", \"$0 copayment $0 copayment $0 copayment $0 copayment $0 copayment Limit 1 visit every year\"], \"note\": \"Glaucoma screening; second $0 copayment in the What you pay column\"},\n{\"plan_id\": \"H1372-003-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"once per year\", \"condition\": \"people with diabetes\", \"page\": 102, \"quotes\": [\"For people with diabetes, screening for diabetic\", \"retinopathy is covered once per year\", \"$0 copayment $0 copayment $0 copayment $0 copayment $0 copayment Limit 1 visit every year\"], \"note\": \"Diabetic retinopathy screening; third $0 copayment in the What you pay column\"},\n{\"plan_id\": \"H1372-003-0\", \"benefit\": \"vision.eyewear\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"one pair after each cataract surgery\", \"page\": 102, \"quotes\": [\"One pair of eyeglasses or contact lenses after each\", \"$0 copayment $0 copayment $0 copayment $0 copayment $0 copayment Limit 1 visit every year\"], \"note\": \"Eyewear after cataract surgery; fourth $0 copayment in the What you pay column\"}]\n```",
+ "usage": {
+  "input_tokens": 4777,
+  "output_tokens": 2028,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

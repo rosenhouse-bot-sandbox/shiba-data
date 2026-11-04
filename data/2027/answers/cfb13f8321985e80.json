@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-4ec81cd0d2695486.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 65 Supplemental benefits, Routine hearing exam row: $0 copayment with a limit of 1 visit every year, in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 65 Hearing services row: Medicare-covered diagnostic hearing and balance evaluations cost 20% coinsurance in network.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 65 Supplemental benefits, Prescription hearing aids row: $1,600 every 2 years for both ears combined. The page calls this an allowance (administered by NationsHearing).\"}]\n```",
+ "usage": {
+  "input_tokens": 2544,
+  "output_tokens": 458,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

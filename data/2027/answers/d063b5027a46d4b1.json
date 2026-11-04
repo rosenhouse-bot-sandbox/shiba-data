@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-d1ca3a965cb15437.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 61 Hearing services row for diagnostic hearing and balance evaluations: $0 copayment for each Medicare-covered exam. The 'or' is 'for' with the f dropped, not a Medicaid-level alternative.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 61 routine hearing exam row: 'We cover 1 hearing exam every year.' This is a supplemental limit of 1 per year.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 61 'Hearing services - routine hearing exam' row: $0 copayment, limited to 1 exam every year.\"}]\n```",
+ "usage": {
+  "input_tokens": 2666,
+  "output_tokens": 362,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

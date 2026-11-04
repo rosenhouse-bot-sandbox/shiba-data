@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-5f6896f5c437eeed.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 8 Routine Vision row: a total of 1 routine eye exam per year from in- or out-of-network providers. This supports a supplemental visit limit of 1 per year for any network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 8 Eyewear row: up to $200 each year for eyeglasses and/or contacts, from any eyewear provider in or out of network. This supports a $200 yearly eyewear allowance for any network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2779,
+  "output_tokens": 425,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

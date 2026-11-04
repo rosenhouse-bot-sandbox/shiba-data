@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "49912316cc55d9c5.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-001-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$40\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 110, \"quotes\": [\"Vision services covered by Medicare $40 copay\"], \"note\": \"Medicare-covered vision services, including specialist visits for diagnostic vision services and follow-up visits after cataract surgery\"},\n{\"plan_id\": \"H2923-001-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"limit\": \"per year\", \"condition\": \"people who are at high risk for glaucoma\", \"page\": 110, \"quotes\": [\"Annual Glaucoma Screening $0 copay\", \"For people who are at high risk for glaucoma, we\"], \"note\": \"Glaucoma screening\"},\n{\"plan_id\": \"H2923-001-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"limit\": \"per year\", \"condition\": \"people with diabetes\", \"page\": 110, \"quotes\": [\"Annual Diabetic Retinopathy Screening $0 copay\", \"For people with diabetes, screening for diabetic\"], \"note\": \"Diabetic retinopathy screening\"}]\n```",
+ "usage": {
+  "input_tokens": 6233,
+  "output_tokens": 1378,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

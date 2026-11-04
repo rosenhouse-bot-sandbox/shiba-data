@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "d594b0a1d3772214.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2056-003-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per exam\", \"limit\": \"\", \"page\": 70, \"quotes\": [\"$0 copay for each Medicare‑covered eye\", \"$0 copay for one Medicare‑covered\", \"$0 copay for the Medicare‑covered initial\"], \"note\": \"Merged into one fact: the Medicare-covered eye exam, the glaucoma screening (people at high risk, one each year) and the initial diabetic eye exam (each year) all have a $0 copay.\"}]\n```",
+ "usage": {
+  "input_tokens": 7022,
+  "output_tokens": 675,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

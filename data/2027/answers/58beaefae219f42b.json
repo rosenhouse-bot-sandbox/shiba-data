@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "4ec81cd0d2695486.md",
+ "reply": "```json\n[{\"plan_id\": \"H1372-003-0\", \"benefit\": \"fitness\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$65\", \"unit\": \"\", \"limit\": \"per month\",\n  \"pool\": \"Healthy Living Allowance\", \"page\": 64,\n  \"quotes\": [\"$65 every month\", \"Fitness\"], \"note\": \"\"},\n {\"plan_id\": \"H1372-003-0\", \"benefit\": \"fitness\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\",\n  \"pool\": \"Healthy Living Allowance\", \"page\": 63,\n  \"quotes\": [\"Members may apply allowance towards online fitness classes and gym membership.\", \"Included as part of your Healthy Living Allowance.\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 2875,
+  "output_tokens": 834,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

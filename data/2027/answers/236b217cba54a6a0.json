@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-8980c5c5d9008083.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 71, Fitness benefit, Home Fitness Kits: 'You can receive up to 1 kit per benefit year.' This is a supplemental fitness benefit, and the visit limit of 1 kit per benefit year matches.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 71, Fitness benefit row: '$0 copay for the fitness benefit.' This is a supplemental fitness benefit with no setting named, so the default in-network reading applies.\"}]\n```",
+ "usage": {
+  "input_tokens": 2160,
+  "output_tokens": 338,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

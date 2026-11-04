@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "d649ac2bebc0321d.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-028-3\", \"benefit\": \"fitness\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 69,\n  \"quotes\": [\"$0 membership\"], \"note\": \"SilverSneakers membership at participating locations\"},\n {\"plan_id\": \"H2923-028-3\", \"benefit\": \"fitness\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$150\", \"unit\": \"\", \"limit\": \"per year\", \"pool\": \"Devoted Health Wellness Bucks\", \"page\": 70,\n  \"quotes\": [\"Devoted Health will reimburse you up to $150 per year\"], \"note\": \"Reimbursement; covers fitness classes, fitness trackers, home fitness equipment and health club membership\"}]\n```",
+ "usage": {
+  "input_tokens": 5423,
+  "output_tokens": 1108,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

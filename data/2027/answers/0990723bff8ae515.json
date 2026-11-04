@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "5e11cf20cec995f3.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H3805-048-0\", \"benefit\": \"hearing.exam\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 61,\n   \"quotes\": [\"Hearing services - routine hearing exam $0 copayment\"], \"note\": \"\"},\n  {\"plan_id\": \"H3805-048-0\", \"benefit\": \"hearing.exam\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"1\", \"unit\": \"\", \"limit\": \"every year\", \"page\": 61,\n   \"quotes\": [\"We cover 1 hearing exam every year.\"], \"note\": \"\"},\n  {\"plan_id\": \"H3805-048-0\", \"benefit\": \"hearing.aids\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$700\", \"unit\": \"\", \"limit\": \"\", \"page\": 61,\n   \"quotes\": [\"Hearing aid allowance is $700\"], \"note\": \"\"},\n  {\"plan_id\": \"H3805-048-0\", \"benefit\": \"hearing.aids\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"2\", \"unit\": \"hearing aids\", \"limit\": \"every year\", \"page\": 61,\n   \"quotes\": [\"This bene it is limited to 2 hearing aids every\"], \"note\": \"\"}\n]\n```",
+ "usage": {
+  "input_tokens": 4409,
+  "output_tokens": 1128,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

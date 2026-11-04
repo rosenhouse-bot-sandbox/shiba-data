@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "77d83ba821336370.md",
+ "reply": "```json\n[{\"plan_id\": \"H2001-045-0\", \"benefit\": \"otc\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$196\", \"unit\": \"\", \"limit\": \"per month\", \"page\": 97, \"quotes\": [\"Monthly credit is $196\"], \"note\": \"\"},\n{\"plan_id\": \"H2001-045-0\", \"benefit\": \"otc\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"90%\", \"unit\": \"\", \"limit\": \"\", \"page\": 97, \"quotes\": [\"You pay 90% coinsurance o the approved purchase amount when you buy covered items\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 9053,
+  "output_tokens": 772,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

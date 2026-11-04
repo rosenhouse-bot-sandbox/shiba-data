@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-a4bc20077fb4a2cf.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 46: the Health and wellness education programs row covers the Silver&Fit fitness program and shows out-of-network 80% coinsurance (based on billed charges).\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 46: Silver&Fit is in the Health and wellness education programs row. In network there is no coinsurance, copayment, or deductible, so it is covered.\"}]\n```",
+ "usage": {
+  "input_tokens": 2545,
+  "output_tokens": 393,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

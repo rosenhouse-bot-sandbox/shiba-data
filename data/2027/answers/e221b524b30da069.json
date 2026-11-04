@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-d4758cd5b94a2266.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 4 routine hearing exam row: $90 is the out-of-network copay. In network it is $0.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 4 row 'Exam to diagnose and treat hearing and balance issues': $0 copay in network. This is the Medicare-covered diagnostic exam.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 4 routine hearing exam row: $0 copay in network.\"},\n{\"id\": 3, \"ok\": false, \"reason\": \"Page 4 out-of-network hearing aid text says the member is 'responsible for 90% of the allowance amount'. It is unclear whether or how aids are covered out of network, so 'covered' cannot be confirmed.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 4 hearing aids row: $700 allowance for 2 hearing aids every year, in network.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 4 routine hearing exam row: $90 copay out of network.\"},\n{\"id\": 6, \"ok\": false, \"reason\": \"Page 4 routine hearing exam row: $0 is the in-network copay. Out of network it is $90.\"}]\n```",
+ "usage": {
+  "input_tokens": 3061,
+  "output_tokens": 738,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

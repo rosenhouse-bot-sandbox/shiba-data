@@ -1,8 +1,17 @@
 """Lays out the site's plan sheets as rows of the live Google Sheet."""
+import json
 from dataclasses import dataclass
+
+import facts
+import present
 
 SITE = "https://pdxplans.org/"
 TABS = {"main": "Main chart", "dvha": "Dental, vision, hearing, extras"}
+DETAILS = "Details"
+FACT_COLUMNS = {"Plan ID": "plan_id", "Plan": None, "Benefit": "benefit", "Setting": "setting", "Network": "network",
+                "Covered by": "covered_by", "Cost kind": "cost_kind", "Amount": "amount", "Unit": "unit", "Limit": "limit",
+                "Condition": "condition", "Package": "package", "Pool": "pool", "Provider tier": "provider_tier",
+                "Source": "source", "Page": "page", "Quote or CMS field": None, "Note": "note"}
 # Keep in sync with --comment and --contradicts in web/static/style.css.
 FILLS = {"note": "FFF6D6", "contradicts": "FFDCB8"}
 HEAD = "EEF1F6"
@@ -60,3 +69,21 @@ def widths(sheet):
 
 def lines(sheet, column):
     return [line for r in sheet["rows"] for line in r["cells"][column["key"]]["value"].split(" | ")] + column["label"].split()
+
+
+def details(site, data_dir):
+    """One row per fact, with its page linked to the PDF."""
+    names = {p["plan_id"]: p["plan_name"] for p in site["plans"]}
+    found = [f for plan in present.plan_facts(data_dir).values() for f in plan]
+
+    def cells(f):
+        out = [Cell(f[key] if key else "") for key in FACT_COLUMNS.values()]
+        out[1].value = names.get(f["plan_id"], "")
+        out[list(FACT_COLUMNS).index("Quote or CMS field")].value = "\n".join(json.loads(f["quotes"] or "[]"))
+        if f["doc_sha"]:
+            out[list(FACT_COLUMNS).index("Page")].link = f"{SITE}docs/{f['doc_sha']}.pdf#page={f['page']}"
+        return out
+
+    order = [*facts.KEY, "source", "doc_sha", "page"]
+    found = sorted(found, key=lambda f: [f[k] for k in order])
+    return [Row("header", "", [Cell(h) for h in FACT_COLUMNS])] + [Row("plan", f["plan_id"], cells(f)) for f in found]

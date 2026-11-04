@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "8980c5c5d9008083.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-015-0\", \"benefit\": \"fitness\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 71,\n  \"quotes\": [\"$0 copay for the fitness\"], \"note\": \"The row has no network label, so in-network is assumed. The deductible exemption list on page 49 also names the Fitness Benefit out of network, but no out-of-network cost is stated.\"},\n {\"plan_id\": \"H5439-015-0\", \"benefit\": \"fitness\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"1\", \"unit\": \"home fitness kit\", \"limit\": \"per benefit year\", \"page\": 71,\n  \"quotes\": [\"You can receive up to 1 kit per benefit year.\"], \"note\": \"This limit applies to the home fitness kits within the fitness benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 3912,
+  "output_tokens": 753,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

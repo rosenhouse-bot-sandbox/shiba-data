@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "e306f120395b6260.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2406-073-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 91, \"quotes\": [\"$0 copayment or each Medicare- covered exam.\", \"$0 copayment or each Medicare- covered glaucoma screening.\", \"$0 copayment or Medicare-covered eye exams to evaluate or eye disease.\"], \"note\": \"One fact covers three Medicare-covered services, each with the same $0 in-network copay: exams to diagnose and treat eye disease, glaucoma screening for people at high risk, and eye exams for people with diabetes or signs of eye disease.\"},\n {\"plan_id\": \"H2406-073-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$80\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 91, \"quotes\": [\"$80 copayment or each Medicare- covered exam.\", \"$80 copayment or each Medicare- covered glaucoma screening.\", \"$80 copayment or Medicare-covered eye exams to evaluate or eye disease.\"], \"note\": \"One fact covers three Medicare-covered services, each with the same $80 out-of-network copay: exams to diagnose and treat eye disease, glaucoma screening for people at high risk, and eye exams for people with diabetes or signs of eye disease.\"}]\n```",
+ "usage": {
+  "input_tokens": 7659,
+  "output_tokens": 1203,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

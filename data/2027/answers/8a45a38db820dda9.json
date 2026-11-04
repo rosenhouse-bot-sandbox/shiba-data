@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "2a970381e331a34a.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-019-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$45\", \"page\": 7, \"quotes\": [\"Medicare-Covered Diagnostic Eye Exam: $45 copay\"]}]\n```",
+ "usage": {
+  "input_tokens": 3077,
+  "output_tokens": 609,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

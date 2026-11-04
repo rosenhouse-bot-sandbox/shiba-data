@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "da2974c756f3eedc.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-009-0\", \"benefit\": \"fitness\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 11,\n  \"quotes\": [\"SilverSneakers®: $0 membership\"], \"note\": \"The page gives a $0 membership; I recorded it as a $0 copay.\"},\n {\"plan_id\": \"H2923-009-0\", \"benefit\": \"fitness\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$150\", \"limit\": \"per year\",\n  \"pool\": \"Devoted Health Wellness Bucks\", \"page\": 11,\n  \"quotes\": [\"Devoted Health Wellness Bucks: $150 per year toward\"]}]\n```",
+ "usage": {
+  "input_tokens": 2944,
+  "output_tokens": 517,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
