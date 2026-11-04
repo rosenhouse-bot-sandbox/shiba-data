@@ -319,6 +319,7 @@ test("header says when the site was last updated", async () => {
   await fresh.clock.install();
   await fresh.goto(`${base}#/main`);
   const label = fresh.locator("header #updated");
+  await label.filter({ hasText: "Last updated" }).waitFor();
   assert.equal(await label.textContent(), "Last updated 3 hours ago");
   assert.match(await label.getAttribute("title"), /\b(PDT|PST)\b/);
   await fresh.clock.runFor(60 * 60000);

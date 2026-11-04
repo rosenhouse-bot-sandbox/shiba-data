@@ -108,13 +108,14 @@ class RebuildTest(unittest.TestCase):
         order = []
         with (mock.patch.dict(os.environ, {"SHIBA_DATA": str(self.root / "data")}), mock.patch.object(years, "LIVE", 2099),
               mock.patch.object(rebuild.run, "blanks_step", side_effect=lambda *a: order.append("blanks")) as blanks,
-              mock.patch.object(rebuild.document_facts, "step", side_effect=lambda *a: order.append("facts")) as found,
+              mock.patch.object(rebuild.document_facts, "step", side_effect=lambda *a, **k: order.append("facts")) as found,
               mock.patch.object(rebuild.present, "write", side_effect=lambda *a: order.append("present")),
               mock.patch.object(rebuild.run, "filled_step", side_effect=lambda *a, **k: order.append("filled")) as filled):
             rebuild.steps("w", "", "document_facts@7")
         self.assertEqual(order, ["blanks", "facts", "present", "filled"])
         self.assertEqual(blanks.call_args.args[2].saved, self.data / "answers")
         self.assertEqual((found.call_args.args[0], found.call_args.args[-1]), (self.data, 7))
+        self.assertEqual(found.call_args.kwargs, {"reviewed": False})
         self.assertEqual(filled.call_args.kwargs, {"every": True, "version": 5})
 
     def test_steps_go_on_to_filled_when_facts_cannot_be_presented(self):

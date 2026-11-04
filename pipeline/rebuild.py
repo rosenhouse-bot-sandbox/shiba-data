@@ -6,7 +6,7 @@ Usage: python3 -I pipeline/rebuild.py <year> <work> <name> [api] [<candidate>]
 <work> must hold the texts that run.py made. The rebuild reads a copy of data/<year> in <work>,
 with the seeded errors in tests/fixtures/seeded_errors.json applied as uncited edits.
 Every model step runs at its pinned version, or at a candidate version as in run.py.
-The filled step covers every filled cell. The run's answers, machine rows and report go to data/<year>/rebuilds/<name>.
+Every model step skips its reviewer. The filled step covers every filled cell. The run's answers, machine rows and report go to data/<year>/rebuilds/<name>.
 """
 import collections
 import csv
@@ -91,7 +91,7 @@ def steps(work, mode, candidate=""):
     answer = run.Answers(data, ask.api() if mode == "api" else None)
     texts, step_work = f"{work}/texts", f"{work}/rebuild"
     run.blanks_step(texts, step_work, answer)
-    document_facts.step(data, texts, f"{step_work}/facts", answer, versions["document_facts"])
+    document_facts.step(data, texts, f"{step_work}/facts", answer, versions["document_facts"], reviewed=False)
     try:
         present.write(data)
     except ValueError as e:  # Fresh facts can break a presentation rule. Filled then sees the copied live layer.

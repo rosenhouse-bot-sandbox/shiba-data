@@ -1,9 +1,9 @@
 """Writes data/<year>/machine/document_facts.csv: the facts a version's reader states and its verifier accepts."""
-import concurrent.futures, json, os, shutil, sys
+import concurrent.futures, json, os, pathlib, shutil, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-import extract, facts
+import extract, facts, review
 
 VERSIONS = {
     # evaluate.py picked these models.
@@ -25,6 +25,8 @@ VERSIONS[10] = dict(VERSIONS[9], recheck={
               "H7006-021-0"),
     "part_b_drugs": KAISER, "hearing": ("H9003-009-0",),
     "surgery": KAISER + ("H3817-008-1",)})
+# A reviewer checks each untrusted fact that a cell cites (review.py). The cap stops a run that would ask about too many.
+VERSIONS[11] = dict(VERSIONS[10], reviewer=("claude-opus-5-5", "high"), review_cap=100)
 
 
 def fresh(path):
@@ -68,10 +70,18 @@ def second_facts(texts, work, group, answer, v, data, plan_ids, known):
     return facts.read(f"{check}/accepted.csv")
 
 
-def step(data, texts, work, answer, version):
-    """answer(task_dir, model, effort) answers every task file in task_dir. The groups run at the same time."""
+def step(data, texts, work, answer, version, reviewed=True):
+    """answer(task_dir, model, effort) answers every task file in task_dir. The groups run at the same time.
+    reviewed=False skips the version's reviewer."""
     v = VERSIONS[version]
     with concurrent.futures.ThreadPoolExecutor(len(v["groups"])) as pool:
         found = list(pool.map(lambda group: group_facts(texts, work, group, answer, v, data), v["groups"]))
-    os.makedirs(f"{data}/machine", exist_ok=True)
-    facts.write(f"{data}/machine/document_facts.csv", [row for rows in found for row in rows])
+    rows = [row for rows in found for row in rows]
+    data = pathlib.Path(data)
+    path = data / "machine/document_facts.csv"
+    os.makedirs(data / "machine", exist_ok=True)
+    if reviewed and "reviewer" in v:
+        old = facts.read(path) if path.exists() else []
+        rows, trusted = review.gate(data, texts, work, answer, review.trusted(data, old), rows, v)
+        facts.write(str(data / review.REVIEWED), trusted)
+    facts.write(str(path), rows)

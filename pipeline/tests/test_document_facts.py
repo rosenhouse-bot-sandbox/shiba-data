@@ -2,7 +2,7 @@ import glob, json, os, sys, threading, unittest
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-import document_facts, facts
+import document_facts, facts, review
 from test_extract import SHA, StepsTest, answer
 
 
@@ -65,6 +65,28 @@ class StepTest(StepsTest):
         self.assertEqual(asked, ["read", "read", "check", "reread", "reread", "recheck"])
         self.assertEqual([c["network"] for c in rechecked if not c["decoy"]], ["out"])
         self.assertTrue(any(c["decoy"] for c in rechecked))
+
+    def test_a_reviewer_keeps_what_it_accepts_and_saves_what_a_later_run_trusts(self):
+        def fake(task_dir, model, effort):
+            for task in glob.glob(f"{task_dir}/*.md"):
+                text = open(task).read()
+                reply = ([{"id": n, "ok": True} for n in range(text.count('{"id": '))] if os.path.basename(task).startswith("v-")
+                         else [] if "## Earlier answers" in text else [answer(page=1), answer(page=1, amount="$5")])
+                with open(task[:-3] + ".json", "w") as f:
+                    json.dump(reply, f)
+
+        def gate(data, texts, work, answer_, trusted, rows, v):
+            self.assertEqual(trusted, {"old"})
+            return rows[:0], rows
+
+        version = dict(groups=("imaging",), reader=("r", "high"), verifier=("v", "low"), reviewer=("m", "e"))
+        with mock.patch.dict(document_facts.VERSIONS, {9: version}), \
+                mock.patch.object(review, "trusted", lambda data, old: {"old"}), mock.patch.object(review, "gate", gate):
+            document_facts.step(self.data, self.work, self.dir, fake, 9)
+            self.assertEqual(facts.read(self.data / "machine" / "document_facts.csv"), [])
+            self.assertEqual(len(facts.read(self.data / review.REVIEWED)), 1)
+            document_facts.step(self.data, self.work, self.dir, fake, 9, reviewed=False)
+            self.assertEqual(len(facts.read(self.data / "machine" / "document_facts.csv")), 1)
 
     def test_groups_run_at_the_same_time(self):
         both_reading = threading.Barrier(2, timeout=10)
