@@ -86,6 +86,13 @@ class VersionsTest(unittest.TestCase):
         self.assertTrue(ignore(dict(layer=layers.PRESENTED, column="AB_ambulance")))
         self.assertFalse(ignore(dict(layer=layers.EDITS, column="AB_ambulance")))
 
+    def test_version_6_ignores_the_presented_rows_of_cells_held_when_it_was_pinned(self):
+        _, ignore = filled.VERSIONS[6]
+        for column, plan_id in filled.V6_HELD:
+            self.assertTrue(ignore(dict(layer=layers.PRESENTED, column=column, plan_id=plan_id)))
+        self.assertFalse(ignore(dict(layer=layers.PRESENTED, column="K_tests_labs", plan_id="H2923-009-0")))
+        self.assertIn(("K_tests_labs", "H7006-021-0"), filled.V6_HELD)
+
     def test_site_data_shows_what_the_version_sees(self):
         with mock.patch.object(filled.build, "site_data") as site_data:
             filled.site_data(DATA, 2)
