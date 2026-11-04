@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-161c63c8abccc6dc.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 79, 'Other outpatient diagnostic tests - non-radiological diagnostic services' row: the out-of-network column shows 30% coinsurance for Medicare-covered non-radiological services.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 79, 'Other outpatient diagnostic tests - non-radiological diagnostic services' row: the in-network column shows a $50 copayment for Medicare-covered non-radiological services.\"}]\n```",
+ "usage": {
+  "input_tokens": 2491,
+  "output_tokens": 436,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

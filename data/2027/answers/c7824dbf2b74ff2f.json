@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-dbc45a45d9843dd0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 61, outpatient hospital services section: out-of-network is 50% coinsurance. This covers all services in that section, including diagnostic colonoscopy.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"The upper block on page 61 ($40 wound care, $375 all other, out-of-network 50%) has no visible setting heading on this page. It cannot be confirmed as ASC or as covering diagnostic colonoscopy.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"The 50% coinsurance for outpatient hospital services is out-of-network. In-network is 20% coinsurance for all other services, not 50%.\"},\n{\"id\": 3, \"ok\": false, \"reason\": \"The 20% coinsurance for outpatient hospital services is in-network. Out-of-network is 50% coinsurance.\"}]\n```",
+ "usage": {
+  "input_tokens": 2481,
+  "output_tokens": 727,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

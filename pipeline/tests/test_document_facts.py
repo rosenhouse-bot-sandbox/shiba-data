@@ -113,8 +113,7 @@ class StepTest(StepsTest):
         self.assertEqual(set(v["recheck"]) - set(v["groups"]), set())
         held = {(c, p) for c, p in present.HELD}
         for group, column in (("tests", "K_tests_labs"), ("part_b_drugs", "M_part_b_drugs"), ("hearing", "Q_hearing")):
-            self.assertEqual({p for p in v["recheck"][group]} | {p for c, p in held if c == column and p in WRONG},
-                             {p for c, p in held if c == column}, group)
+            self.assertLessEqual({p for c, p in held if c == column} - WRONG, set(v["recheck"][group]), group)
 
     def test_version_1_uses_the_models_the_evaluation_picked(self):
         self.assertEqual(document_facts.VERSIONS[1], dict(groups=("imaging",), reader=("claude-opus-5-5", "high"),

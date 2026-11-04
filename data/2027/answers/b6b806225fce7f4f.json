@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-7dcf10accd77535d.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 7 Diagnostic Tests and Procedures row: $0 copay in network for Medicare-covered spirometry testing and specified testing related services.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 7 Lab Services row lists genetic testing. Its single out-of-network cost is 30% coinsurance, which applies to the whole row, genetic testing included.\"}]\n```",
+ "usage": {
+  "input_tokens": 2076,
+  "output_tokens": 576,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

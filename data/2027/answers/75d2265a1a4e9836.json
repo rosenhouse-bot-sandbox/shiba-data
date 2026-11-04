@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "4a3883a20d17f740.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-010-0\", \"benefit\": \"tests.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"condition\": \"for all other services\", \"page\": 7, \"quotes\": [\"20% coinsurance for all other services.\"], \"note\": \"\"},\n {\"plan_id\": \"H5439-010-0\", \"benefit\": \"tests.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"condition\": \"for Medicare-covered diagnostic colonoscopy, spirometry testing and specified testing related services\", \"page\": 7, \"quotes\": [\"$0 copay for Medicare-covered diagnostic colonoscopy,\"], \"note\": \"The $0 copay applies only to the services the document names. All other diagnostic tests carry 20% coinsurance.\"}]\n```",
+ "usage": {
+  "input_tokens": 2906,
+  "output_tokens": 957,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
