@@ -310,11 +310,12 @@ def packages(organization, found):
 OVERRIDES = "override_facts.csv"
 
 
-def plan_facts(data):
+def plan_facts(data, document=None):
+    """Each plan's facts. document replaces machine/document_facts.csv if given."""
     by_plan = collections.defaultdict(list)
-    for name in ("machine/document_facts.csv", "generated/pbp_facts.csv", OVERRIDES):
-        for f in facts.read(data / name):
-            by_plan[f["plan_id"]].append(f)
+    for f in (facts.read(data / "machine/document_facts.csv") if document is None else document) + [
+            f for name in ("generated/pbp_facts.csv", OVERRIDES) for f in facts.read(data / name)]:
+        by_plan[f["plan_id"]].append(f)
     return by_plan
 
 
@@ -330,10 +331,10 @@ COLUMNS = {"L_xray_imaging": xray_imaging, "AB_ambulance": ambulance, "I_outpati
            "W_fitness": dot("fitness"), "Y_otc": dot("otc"), "AA_opt_packages": packages}
 
 
-def lines(data, column):
-    """{plan_id: [(value, cited facts), ...]} for each plan on the main sheet."""
+def lines(data, column, document=None):
+    """{plan_id: [(value, cited facts), ...]} for each plan on the main sheet. See plan_facts for document."""
     organization = {r["plan_id"]: r["organization"] for r in layers.rows(data / "generated" / "plans.csv")}
-    found = plan_facts(data)
+    found = plan_facts(data, document)
     return {r["plan_id"]: COLUMNS[column](organization[r["plan_id"]], found[r["plan_id"]])
             for r in layers.generated(data)["main"]}
 

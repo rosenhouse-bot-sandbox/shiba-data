@@ -3,7 +3,7 @@ import concurrent.futures, json, os, shutil, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-import extract, facts
+import extract, facts, review
 
 VERSIONS = {
     # evaluate.py picked these models.
@@ -25,6 +25,8 @@ VERSIONS[10] = dict(VERSIONS[9], recheck={
               "H7006-021-0"),
     "part_b_drugs": KAISER, "hearing": ("H9003-009-0",),
     "surgery": KAISER + ("H3817-008-1",)})
+# A reviewer checks each new fact that a cell cites (review.py). The cap stops a run that would ask about too many.
+VERSIONS[11] = dict(VERSIONS[10], reviewer=("claude-opus-5-5", "high"), review_cap=100)
 
 
 def fresh(path):
@@ -73,5 +75,9 @@ def step(data, texts, work, answer, version):
     v = VERSIONS[version]
     with concurrent.futures.ThreadPoolExecutor(len(v["groups"])) as pool:
         found = list(pool.map(lambda group: group_facts(texts, work, group, answer, v, data), v["groups"]))
+    rows = [row for rows in found for row in rows]
+    path = f"{data}/machine/document_facts.csv"
+    if "reviewer" in v:
+        rows = review.gate(data, texts, work, answer, facts.read(path) if os.path.exists(path) else [], rows, v)
     os.makedirs(f"{data}/machine", exist_ok=True)
-    facts.write(f"{data}/machine/document_facts.csv", [row for rows in found for row in rows])
+    facts.write(path, rows)

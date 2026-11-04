@@ -181,6 +181,8 @@ flowchart LR
 
 Version 10 of `document_facts.py` adds a second reader for plans whose readers missed a price. It sees the facts already found and lists only the missing ones.
 
+Version 11, not yet pinned, adds a reviewer (`review.py`). Opus at high effort checks each new fact that a presented cell cites, one fact per task, and the step drops the facts it rejects. A fact no cell cites goes unreviewed, so a run that changes no cell asks nothing. A run stops if more than 100 facts need a new answer.
+
 Readers still miss some prices. `override_facts.csv` holds hand-written facts for those. Each has a note that says why, and the person who writes one also adds a yellow note to its cell in `comments.csv`.
 
 ## 9. Present the facts as cells
