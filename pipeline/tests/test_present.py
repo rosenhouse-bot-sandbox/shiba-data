@@ -1,4 +1,4 @@
-import csv, os, pathlib, sys, tempfile, unittest
+import csv, json, os, pathlib, sys, tempfile, unittest
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -541,6 +541,19 @@ class OverrideTest(unittest.TestCase):
         self.assertEqual([(r["plan_id"], p) for r in rows for p in facts.check(r) if p != "cost_kind: 'unclear'"], [])
         self.assertLessEqual({r["cost_kind"] for r in rows} - set(facts.COST_KINDS), {"unclear"})
 
+
+    def test_a_cell_has_a_hand_written_fact_note_exactly_when_it_cites_a_hand_written_fact(self):
+        data = years.data_dir(YEAR)
+        url = {d["sha256"]: d["url"] for d in layers.rows(data / "generated" / "documents_checked.csv") if d["sha256"]}
+        hand_written = {(f["plan_id"], url[f["doc_sha"]], f["page"], q)
+                        for f in facts.read(data / present.OVERRIDES) for q in json.loads(f["quotes"])}
+        citing = {(r["plan_id"], r["column"]) for r in layers.rows(data / layers.PRESENTED)
+                  if (r["plan_id"], r["url"], r["pdf_page"], r["quote"]) in hand_written}
+        noted = {(c["plan_id"], c["column"]) for c in layers.rows(data / "comments.csv")
+                 if c["sheet"] == "main" and "Hand-written fact" in c["comment"]}
+        self.assertTrue(citing)
+        self.assertEqual(sorted(citing - noted), [], "cells that cite a hand-written fact but have no note")
+        self.assertEqual(sorted(noted - citing), [], "notes about a hand-written fact that the cell no longer cites")
 
 class WriteTest(unittest.TestCase):
     def test_writes_the_layer_rows(self):
