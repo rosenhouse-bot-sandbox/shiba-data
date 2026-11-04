@@ -11,7 +11,7 @@ Each plan year builds through a linear chain of steps. Only steps 1 to 3 read th
 | 5 Present | `present.py` | Facts, `override_facts.csv`, column rules in code | `generated/presented.csv` |
 | 6 Publish | `web/build.py`, `web/sheet_sync.py` | Committed data, R2 | pdxplans.org and the Google Sheet |
 
-Older steps still fill the columns that step 5 does not present yet: `main_chart.py` and `dvha.py` from CMS data, `blanks.py` and `filled.py` from the EOC, and people's `edits.csv` and `comments.csv`. `pipeline/layers.py` stacks these layers. `presented.csv` wins over the older steps, and `edits.csv` wins over everything.
+Older steps still fill the columns that step 5 does not present yet: `main_chart.py` and `dvha.py` from CMS data, `blanks.py` and `filled.py` from the EOC, and people's `edits.csv` and `comments.csv`. `pipeline/layers.py` stacks these layers. `presented.csv` wins over the older steps, and `edits.csv` wins over everything. `blanks.py` asks about the cells frozen in `machine/blanks_cells.json`, so retiring edits leaves its tasks unchanged.
 
 ## Facts
 
