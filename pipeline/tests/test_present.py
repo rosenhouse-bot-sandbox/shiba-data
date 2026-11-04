@@ -175,6 +175,13 @@ class OutpatientSurgeryTest(unittest.TestCase):
         self.assertEqual(surgery(op(setting="asc", amount="20%"), op("surgery.colonoscopy", "asc", "$0", source="SB")),
                          ["", "$0-20%"])
 
+    def test_a_lesser_sources_0_low_end_at_the_setting_starts_its_line_at_0(self):
+        self.assertEqual(surgery(op(setting="any", amount="$250"), op(amount="$0-$300", source="SB")), ["$0-$250", "$250"])
+
+    def test_only_a_0_low_end_at_that_very_setting_counts(self):
+        self.assertEqual(surgery(op(setting="any", amount="$250"), op(amount="$50-$300", source="SB"),
+                                 op(setting="any", amount="$0-$300", source="SB")), ["$250", "$250"])
+
     def test_an_out_of_network_0_colonoscopy_does_not_count(self):
         self.assertEqual(surgery(op(), op("surgery.colonoscopy", amount="$0", network="out")), ["$500", ""])
 
@@ -557,9 +564,6 @@ TRIAGED = {
     ("L_xray_imaging", "H2056-003-0", "2"): "the expert's $0 mammogram rule covers Aetna",
     ("L_xray_imaging", "H2056-018-0", "2"): "the expert's $0 mammogram rule covers Aetna",
     ("L_xray_imaging", "H7199-002-0", ""): "the EOC prices X-rays at $25; the SB's $0 is for ultrasounds",
-    ("I_outpatient_surgery", "H9003-001-0", "1"): "the reader missed the SB's $0 low end",
-    ("I_outpatient_surgery", "H9003-006-0", "1"): "the reader missed the SB's $0 low end",
-    ("I_outpatient_surgery", "H9003-009-0", "1"): "the reader missed the SB's $0 low end",
 }
 
 
