@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-4.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 89 does show 50% coinsurance for an office or freestanding location, but only under 'Advanced Laboratory Services.' That is a separate category, possibly genetic or molecular testing, and not the general outpatient lab row that tests.lab describes. The page also does not confirm the network context. Publishing it as a 50% lab coinsurance could mislead counselors.\"}]\n```",
+ "usage": {
+  "input_tokens": 2082,
+  "output_tokens": 901,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

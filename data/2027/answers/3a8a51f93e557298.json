@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-3.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 88, Routine Laboratory Services row: 'Office or freestanding location: 50% coinsurance', so a freestanding location costs 50% coinsurance in network. The $0 copay applies only to a dedicated testing laboratory, which is a different setting.\"}]\n```",
+ "usage": {
+  "input_tokens": 2412,
+  "output_tokens": 553,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-5.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"On page 88, the Routine Laboratory Services row gives 50% coinsurance for an office or freestanding location. These are the routine lab tests listed among Medicare-covered outpatient diagnostic tests, and in-network labs are required.\"}]\n```",
+ "usage": {
+  "input_tokens": 2409,
+  "output_tokens": 423,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
