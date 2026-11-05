@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 6, Diagnostic Tests and Procedures row: office or freestanding cost is '$0 or 50% coinsurance'. Reporting only a $0 copay leaves out the 50% coinsurance alternative, and the page does not say when $0 applies.\"}]\n```",
+ "usage": {
+  "input_tokens": 2335,
+  "output_tokens": 421,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 87, Outpatient diagnostic tests row: under 'Diagnostic Procedures and Tests' it lists 'PCP's office: $0 copay'. This is the in-network Medicare benefit, and it matches the benefit, setting, cost kind and amount.\"}]\n```",
+ "usage": {
+  "input_tokens": 2236,
+  "output_tokens": 282,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

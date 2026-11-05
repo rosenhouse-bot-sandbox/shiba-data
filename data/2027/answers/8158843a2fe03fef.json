@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"The quoted 50% lines on page 88 continue a heading from the previous page that we cannot see. They lead straight into 'Home Sleep Studies', so they likely price facility sleep studies, not general diagnostic tests. The EKG/EEG section on the page does show 50% at a freestanding location, but the item does not quote it.\"}]\n```",
+ "usage": {
+  "input_tokens": 2444,
+  "output_tokens": 515,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
