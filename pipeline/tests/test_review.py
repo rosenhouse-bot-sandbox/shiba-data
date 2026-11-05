@@ -94,8 +94,8 @@ class GateTest(unittest.TestCase):
     def test_trusts_the_facts_a_released_cell_cites_once_reviewed(self):
         asked = []
         _, trusted = self.gate(TRUSTED, COMMITTED, answering((), asked), held=present.held(DATA, 2))
-        self.assertEqual(len(asked), 8)
         released = review.to_review(DATA, TRUSTED, COMMITTED, present.held(DATA, 2))
+        self.assertEqual(len(asked), len(released))
         self.assertLessEqual({review.row(f) for f in released}, {review.row(f) for f in trusted})
 
     def test_gives_each_verdict_to_its_own_fact(self):
