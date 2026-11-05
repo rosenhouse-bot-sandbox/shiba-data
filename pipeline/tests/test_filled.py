@@ -90,7 +90,7 @@ class VersionsTest(unittest.TestCase):
         _, ignore = filled.VERSIONS[6]
         for column, plan_id in filled.V6_HELD:
             self.assertTrue(ignore(dict(layer=layers.PRESENTED, column=column, plan_id=plan_id)))
-        self.assertFalse(ignore(dict(layer=layers.PRESENTED, column="K_tests_labs", plan_id="H2923-009-0")))
+        self.assertFalse(ignore(dict(layer=layers.PRESENTED, column="K_tests_labs", plan_id="H5439-010-0")))
         self.assertIn(("K_tests_labs", "H7006-021-0"), filled.V6_HELD)
 
     def test_site_data_shows_what_the_version_sees(self):

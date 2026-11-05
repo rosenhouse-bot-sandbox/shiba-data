@@ -71,7 +71,7 @@ V6_COLUMNS = V5_COLUMNS + ("Z_part_b_reduction", "M_part_b_drugs", "O_medical_de
               "V_massage", "X_transportation")
 # Cells that present.HELD kept when version 6 was pinned, and released later. Version 6 saw neither their edits nor their
 # presented rows.
-V6_HELD = {("K_tests_labs", p) for p in ("H2406-070-0", "H3817-008-1", "H7006-021-0")} | {
+V6_HELD = {("K_tests_labs", p) for p in ("H2406-070-0", "H2923-009-0", "H3817-008-1", "H7006-021-0")} | {
     ("M_part_b_drugs", p) for p in ("H9003-001-0", "H9003-006-0", "H9003-009-0")}
 VERSIONS = {
     1: (layers.without(layers.FILLED, layers.PRESENTED), None),

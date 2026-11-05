@@ -342,7 +342,6 @@ def lines(data, column, document=None):
 
 # Plans whose cell keeps its other layers' value, because the facts miss part of it.
 HELD = {
-    ("K_tests_labs", "H2923-009-0"): "readers found a 50% lab price but no 0%",
     ("K_tests_labs", "H5439-010-0"): "the rule leaves out the SB's $0 tests and the $50 genetic test",
     ("K_tests_labs", "H5439-011-0"): "the rule leaves out the $50 genetic test",
     ("K_tests_labs", "H5439-015-0"): "the rule leaves out the SB's $0 tests and the $50 genetic test",
