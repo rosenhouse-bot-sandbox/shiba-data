@@ -197,7 +197,7 @@ flowchart LR
 
 `present.py` holds one rule per column. A rule picks the facts it needs and shows a value, such as "$0-$250" or a dot. A rule uses facts from the best source: the EOC, then a rider, then the SB, then CMS data. The cell cites the quotes of the document facts the rule used. PBP facts have no page to cite, so a line that only they support keeps its CMS value.
 
-`present.HELD` lists cells whose facts are incomplete. Those cells keep the value from the layers beneath (section 12).
+Each version of `present.py` lists cells whose facts are incomplete. Those cells keep the value from the layers beneath (section 12).
 
 Most main-sheet columns have rules. Every DVHA column keeps its CMS value, and so do the main sheet's two premium columns, out-of-pocket maximum and pharmacy deductible.
 
@@ -229,7 +229,7 @@ Among the layers that set values, a later one wins. The cite-only layers add cit
 
 ## 13. Versioned model steps
 
-A new prompt asks many tasks again, and that costs money. So `steps.json` pins a version of each versioned step, such as `{"filled": 6, "document_facts": 9}`. A version fixes which tasks its step writes. A **candidate** is an unpinned version that a run uses in place of the pin. Only workflows on main can sign in to the Claude API, so code on an unreviewed branch can't call it. A new version goes live in three stages:
+A new prompt asks many tasks again, and that costs money. So `steps.json` pins a version of each versioned step, such as `{"filled": 6, "document_facts": 11, "present": 1}`. A version fixes which tasks its step writes. A **candidate** is an unpinned version that a run uses in place of the pin. Only workflows on main can sign in to the Claude API, so code on an unreviewed branch can't call it. A new version goes live in three stages:
 
 ```mermaid
 flowchart LR
@@ -237,6 +237,8 @@ flowchart LR
   run --> branch[Branch pipeline/2027-run id<br>with the new answers]
   branch --> pr2[3. Pin the version<br>in a pull request from that branch]
 ```
+
+`present.py` is versioned too. It asks no model, but the reviewer checks the facts that its cells cite, so a version that makes cells cite new facts deploys in the same three stages. A run's unit tests see its candidate.
 
 ## 14. Checks on every pull request
 

@@ -64,14 +64,13 @@ def presented(*columns, held=()):
 
 # Each version names the layers it sees and the rows it ignores. No version sees this step's own rows.
 # Versions 2 on ignore edits to their presented columns, so retiring them leaves the tasks unchanged.
-# They also miss later edits to those columns, including the edits that TRIAGED and present.HELD keep.
+# They also miss later edits to those columns, including the edits that TRIAGED and present's held cells keep.
 V5_COLUMNS = ("L_xray_imaging", "AB_ambulance", "I_outpatient_surgery", "F_primary_care", "G_specialist", "H_inpatient",
         "J_outpatient_rehab", "K_tests_labs")
 V6_COLUMNS = V5_COLUMNS + ("Z_part_b_reduction", "M_part_b_drugs", "O_medical_deductible", "S_acupuncture", "T_chiropractic",
               "V_massage", "X_transportation")
-# Cells that present.HELD kept when version 6 was pinned, and released later. Version 6 saw neither their edits nor their
-# presented rows.
-V6_HELD = {("K_tests_labs", p) for p in ("H2406-070-0", "H3817-008-1", "H7006-021-0")} | {
+# Cells that present held when version 6 was pinned. Version 6 sees neither their edits nor their presented rows.
+V6_HELD = {("K_tests_labs", p) for p in ("H2406-070-0", "H2923-009-0", "H3817-008-1", "H7006-021-0")} | {
     ("M_part_b_drugs", p) for p in ("H9003-001-0", "H9003-006-0", "H9003-009-0")}
 VERSIONS = {
     1: (layers.without(layers.FILLED, layers.PRESENTED), None),

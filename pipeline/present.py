@@ -6,7 +6,7 @@ import collections, csv, json, os, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-import facts, layers, years
+import facts, layers, steps, years
 
 RANK = {s: i for i, s in enumerate(facts.SOURCES_BEST_FIRST)}
 OFFICES = ("office.pcp", "office.specialist", "freestanding")
@@ -340,8 +340,8 @@ def lines(data, column, document=None):
             for r in layers.generated(data)["main"]}
 
 
-# Plans whose cell keeps its other layers' value, because the facts miss part of it.
-HELD = {
+# Each version names the cells that keep their other layers' value, because the facts miss part of them.
+HELD_1 = {
     ("K_tests_labs", "H2923-009-0"): "readers found a 50% lab price but no 0%",
     ("K_tests_labs", "H5439-010-0"): "the rule leaves out the SB's $0 tests and the $50 genetic test",
     ("K_tests_labs", "H5439-011-0"): "the rule leaves out the $50 genetic test",
@@ -350,18 +350,26 @@ HELD = {
     ("K_tests_labs", "H6815-038-0"): "readers took a $200 price for tests that is not a diagnostic test",
     ("O_medical_deductible", "H1036-317-0"): "readers missed that the $283 is Original Medicare's Part B deductible",
 }
+CANDIDATE = "SHIBA_CANDIDATE"
+VERSIONS = {1: HELD_1, 2: {cell: why for cell, why in HELD_1.items() if cell != ("K_tests_labs", "H2923-009-0")}}
 
 
-def layer_rows(data):
+def held(data, version=None):
+    """The cells that a version holds, by default the run's candidate or else the pinned one."""
+    candidate = ",".join(c for c in os.environ.get(CANDIDATE, "").split(",") if c.strip().startswith("present@"))
+    return VERSIONS[version or steps.versions(data, {"present": VERSIONS}, candidate)["present"]]
+
+
+def layer_rows(data, version=None):
     """Writes one row per line and cited document quote. A blank line with no cited fact writes no row, so the line keeps
     its other layers' value.
     Rows for a cell that the generated sheet gives one line name no line."""
     url = {d["sha256"]: d["url"] for d in layers.rows(data / "generated" / "documents_checked.csv") if d["sha256"]}
     generated = {r["plan_id"]: r for r in layers.generated(data)["main"]}
-    out = {}
+    out, held_cells = {}, held(data, version)
     for column in COLUMNS:
         for plan_id, got in lines(data, column).items():
-            if (column, plan_id) in HELD:
+            if (column, plan_id) in held_cells:
                 continue
             one_line = " | " not in generated[plan_id][column]
             if one_line and any(value for value, _ in got[1:]):
@@ -376,11 +384,11 @@ def layer_rows(data):
     return sorted(out.values(), key=lambda r: tuple(r.values()))
 
 
-def write(data):
+def write(data, version=None):
     with open(data / layers.PRESENTED, "w", newline="") as f:
         out = csv.DictWriter(f, layers.COLUMNS, lineterminator="\n")
         out.writeheader()
-        out.writerows(layer_rows(data))
+        out.writerows(layer_rows(data, version))
 
 
 if __name__ == "__main__":

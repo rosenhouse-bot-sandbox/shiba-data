@@ -87,10 +87,10 @@ class StepsTest(unittest.TestCase):
         with mock.patch.multiple(run, blanks_step=lambda *a: order.append("blanks"),
                                  filled_step=lambda *a, **kw: order.append(("filled", kw))), \
              mock.patch.object(run.document_facts, "step",
-                               lambda data, texts, work, answer, version: order.append((work, version))), \
-             mock.patch.object(run.present, "write", lambda data: order.append("present")):
-            run.model_steps("data", "texts", "work", None, {"filled": 2, "document_facts": 3})
-        self.assertEqual(order, ["blanks", ("work/facts", 3), "present", ("filled", {"version": 2})])
+                               lambda data, texts, work, answer, version, present_version: order.append((work, version, present_version))), \
+             mock.patch.object(run.present, "write", lambda data, version: order.append(("present", version))):
+            run.model_steps("data", "texts", "work", None, {"filled": 2, "document_facts": 3, "present": 4})
+        self.assertEqual(order, ["blanks", ("work/facts", 3, 4), ("present", 4), ("filled", {"version": 2})])
 
     def test_knows_every_pinned_step(self):
         self.assertEqual(set(run.STEPS), set(json.load(open(years.data_dir(years.LIVE) / "steps.json"))))
