@@ -35,24 +35,29 @@ def answering(rejected=(), asked=None):
     return answer
 
 
-TRUSTED = review.cited(DATA, COMMITTED)
+HELD = present.VERSIONS[1]
+TRUSTED = review.cited(DATA, COMMITTED, HELD)
 
 
 class ToReviewTest(unittest.TestCase):
     def test_reviews_only_untrusted_facts_that_a_cell_cites(self):
         cited, uncited = fact(), fact(benefit="radiation_therapy", amount="$2")
-        self.assertEqual(review.to_review(DATA, TRUSTED, COMMITTED + [cited, uncited]), [cited])
+        self.assertEqual(review.to_review(DATA, TRUSTED, COMMITTED + [cited, uncited], HELD), [cited])
 
     def test_reviews_a_duplicated_fact_once(self):
-        self.assertEqual(review.to_review(DATA, TRUSTED, COMMITTED + [fact(), fact()]), [fact()])
+        self.assertEqual(review.to_review(DATA, TRUSTED, COMMITTED + [fact(), fact()], HELD), [fact()])
 
     def test_skips_facts_that_only_a_held_cell_cites(self):
         held = fact(plan_id="H6815-038-0", benefit="tests.diagnostic", setting="office.pcp", amount="$9")
-        self.assertIn(("K_tests_labs", "H6815-038-0"), present.HELD)
-        self.assertEqual(review.to_review(DATA, TRUSTED, COMMITTED + [held]), [])
+        self.assertIn(("K_tests_labs", "H6815-038-0"), HELD)
+        self.assertEqual(review.to_review(DATA, TRUSTED, COMMITTED + [held], HELD), [])
+
+    def test_reviews_the_facts_that_a_released_cell_cites(self):
+        released = review.to_review(DATA, TRUSTED, COMMITTED, present.held(DATA, 2))
+        self.assertEqual({(f["plan_id"], f["benefit"].split(".")[0]) for f in released}, {("H2923-009-0", "tests")})
 
     def test_an_unchanged_fact_set_needs_no_review(self):
-        self.assertEqual(review.to_review(DATA, TRUSTED, COMMITTED), [])
+        self.assertEqual(review.to_review(DATA, TRUSTED, COMMITTED, HELD), [])
 
 
 class TrustedTest(unittest.TestCase):
@@ -60,16 +65,16 @@ class TrustedTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             data = pathlib.Path(d)
             (data / "machine").mkdir()
-            with mock.patch.object(review, "cited", lambda data, document: {review.row(document[0])}):
-                self.assertEqual(review.trusted(data, [fact(), fact(amount="$2")]), {review.row(fact())})
+            with mock.patch.object(review, "cited", lambda data, document, held: {review.row(document[0])} if held is HELD else set()):
+                self.assertEqual(review.trusted(data, [fact(), fact(amount="$2")], HELD), {review.row(fact())})
             facts.write(str(data / review.REVIEWED), [fact(amount="$3")])
-            self.assertEqual(review.trusted(data, [fact()]), {review.row(fact(amount="$3"))})
+            self.assertEqual(review.trusted(data, [fact()], HELD), {review.row(fact(amount="$3"))})
 
 
 class GateTest(unittest.TestCase):
-    def gate(self, trusted, new, answer, cap=10):
+    def gate(self, trusted, new, answer, cap=10, held=HELD):
         with tempfile.TemporaryDirectory() as work:
-            return review.gate(DATA, None, work, answer, trusted, new, dict(reviewer=("m", "e"), review_cap=cap),
+            return review.gate(DATA, None, work, answer, trusted, new, dict(reviewer=("m", "e"), review_cap=cap), held,
                                task_of=lambda f: json.dumps(f))
 
     def test_drops_the_facts_the_reviewer_rejects_and_keeps_the_rest(self):
@@ -85,6 +90,13 @@ class GateTest(unittest.TestCase):
         uncited = fact(benefit="radiation_therapy")
         _, trusted = self.gate(TRUSTED | {review.row(uncited)}, COMMITTED + [uncited], answering())
         self.assertIn(uncited, trusted)
+
+    def test_trusts_the_facts_a_released_cell_cites_once_reviewed(self):
+        asked = []
+        _, trusted = self.gate(TRUSTED, COMMITTED, answering((), asked), held=present.held(DATA, 2))
+        self.assertEqual(len(asked), 8)
+        released = review.to_review(DATA, TRUSTED, COMMITTED, present.held(DATA, 2))
+        self.assertLessEqual({review.row(f) for f in released}, {review.row(f) for f in trusted})
 
     def test_gives_each_verdict_to_its_own_fact(self):
         a, b = fact(amount="$1"), fact(amount="$4")

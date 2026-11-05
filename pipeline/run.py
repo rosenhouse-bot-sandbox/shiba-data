@@ -33,7 +33,7 @@ import years  # noqa: E402
 
 CMS = ("landscape", "pbp")
 READER, VERIFIER, SECOND_VERIFIER = "claude-haiku-5-5", "claude-sonnet-5-5", "claude-opus-5-5"
-STEPS = {"filled": filled.VERSIONS, "document_facts": document_facts.VERSIONS}
+STEPS = {"filled": filled.VERSIONS, "document_facts": document_facts.VERSIONS, "present": present.VERSIONS}
 
 
 def get(url, path):
@@ -128,8 +128,8 @@ def filled_step(texts, work, answer, every=False, version=None):
 
 def model_steps(data, texts, work, answer, versions):
     blanks_step(texts, work, answer)
-    document_facts.step(data, texts, f"{work}/facts", answer, versions["document_facts"])
-    present.write(data)
+    document_facts.step(data, texts, f"{work}/facts", answer, versions["document_facts"], present_version=versions["present"])
+    present.write(data, versions["present"])
     filled_step(texts, work, answer, version=versions["filled"])
 
 
@@ -181,7 +181,8 @@ def main(year, work, mode="", candidate=""):
         for name, was in before.items():
             now = len(layers.layer(data, name))
             print(f"{'::warning::' if now < was / 2 else ''}{name} has {now} rows, and had {was}.")
-    subprocess.run([sys.executable, "-I", "-m", "unittest", "discover", "-s", os.path.join(HERE, "tests")], check=True)
+    subprocess.run([sys.executable, "-I", "-m", "unittest", "discover", "-s", os.path.join(HERE, "tests")], check=True,
+                   env=dict(os.environ, **{present.CANDIDATE: candidate}))
 
 
 if __name__ == "__main__":

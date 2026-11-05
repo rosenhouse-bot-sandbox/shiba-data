@@ -3,7 +3,7 @@ import concurrent.futures, json, os, pathlib, shutil, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-import extract, facts, review
+import extract, facts, present, review
 
 VERSIONS = {
     # evaluate.py picked these models.
@@ -70,9 +70,9 @@ def second_facts(texts, work, group, answer, v, data, plan_ids, known):
     return facts.read(f"{check}/accepted.csv")
 
 
-def step(data, texts, work, answer, version, reviewed=True):
+def step(data, texts, work, answer, version, reviewed=True, present_version=None):
     """answer(task_dir, model, effort) answers every task file in task_dir. The groups run at the same time.
-    reviewed=False skips the version's reviewer."""
+    reviewed=False skips the version's reviewer. The reviewer sees the cells that present_version presents."""
     v = VERSIONS[version]
     with concurrent.futures.ThreadPoolExecutor(len(v["groups"])) as pool:
         found = list(pool.map(lambda group: group_facts(texts, work, group, answer, v, data), v["groups"]))
@@ -82,6 +82,7 @@ def step(data, texts, work, answer, version, reviewed=True):
     os.makedirs(data / "machine", exist_ok=True)
     if reviewed and "reviewer" in v:
         old = facts.read(path) if path.exists() else []
-        rows, trusted = review.gate(data, texts, work, answer, review.trusted(data, old), rows, v)
+        held = present.held(data, present_version)
+        rows, trusted = review.gate(data, texts, work, answer, review.trusted(data, old, held), rows, v, held)
         facts.write(str(data / review.REVIEWED), trusted)
     facts.write(str(path), rows)

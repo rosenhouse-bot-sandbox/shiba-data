@@ -75,14 +75,15 @@ class StepTest(StepsTest):
                 with open(task[:-3] + ".json", "w") as f:
                     json.dump(reply, f)
 
-        def gate(data, texts, work, answer_, trusted, rows, v):
-            self.assertEqual(trusted, {"old"})
+        def gate(data, texts, work, answer_, trusted, rows, v, held):
+            self.assertEqual((trusted, held), ({"old"}, {"held 2"}))
             return rows[:0], rows
 
         version = dict(groups=("imaging",), reader=("r", "high"), verifier=("v", "low"), reviewer=("m", "e"))
         with mock.patch.dict(document_facts.VERSIONS, {9: version}), \
-                mock.patch.object(review, "trusted", lambda data, old: {"old"}), mock.patch.object(review, "gate", gate):
-            document_facts.step(self.data, self.work, self.dir, fake, 9)
+                mock.patch.object(review, "trusted", lambda data, old, held: {"old"}), mock.patch.object(review, "gate", gate), \
+                mock.patch.object(document_facts.present, "held", lambda data, version: {f"held {version}"}):
+            document_facts.step(self.data, self.work, self.dir, fake, 9, present_version=2)
             self.assertEqual(facts.read(self.data / "machine" / "document_facts.csv"), [])
             self.assertEqual(len(facts.read(self.data / review.REVIEWED)), 1)
             document_facts.step(self.data, self.work, self.dir, fake, 9, reviewed=False)

@@ -550,7 +550,8 @@ class OverrideTest(unittest.TestCase):
         citing = {(r["plan_id"], r["column"]) for r in layers.rows(data / layers.PRESENTED)
                   if (r["plan_id"], r["url"], r["pdf_page"], r["quote"]) in hand_written}
         noted = {(c["plan_id"], c["column"]) for c in layers.rows(data / "comments.csv")
-                 if c["sheet"] == "main" and "Hand-written fact" in c["comment"]}
+                 if c["sheet"] == "main" and "Hand-written fact" in c["comment"]
+                 and (c["column"], c["plan_id"]) not in present.held(data)}
         self.assertTrue(citing)
         self.assertEqual(sorted(citing - noted), [], "cells that cite a hand-written fact but have no note")
         self.assertEqual(sorted(noted - citing), [], "notes about a hand-written fact that the cell no longer cites")
@@ -558,9 +559,9 @@ class OverrideTest(unittest.TestCase):
 class WriteTest(unittest.TestCase):
     def test_writes_the_layer_rows(self):
         row = dict.fromkeys(layers.COLUMNS, "x")
-        with tempfile.TemporaryDirectory() as tmp, mock.patch.object(present, "layer_rows", lambda data: [row]):
+        with tempfile.TemporaryDirectory() as tmp, mock.patch.object(present, "layer_rows", lambda data, version: [row] * version):
             os.makedirs(f"{tmp}/generated")
-            present.write(pathlib.Path(tmp))
+            present.write(pathlib.Path(tmp), 1)
             self.assertEqual(layers.rows(pathlib.Path(tmp, layers.PRESENTED)), [row])
 
     def test_a_blank_with_cited_facts_writes_rows(self):
@@ -571,6 +572,20 @@ class WriteTest(unittest.TestCase):
                 mock.patch.object(present, "COLUMNS", {"S_acupuncture": None}):
             rows = present.layer_rows(data)
         self.assertEqual({(r["plan_id"], r["column"], r["value"]) for r in rows}, {(plan, "S_acupuncture", "")})
+
+    def test_a_version_skips_the_cells_it_holds(self):
+        data = years.data_dir(YEAR)
+        cell = ("K_tests_labs", "H2923-009-0")
+        cells = {v: {(r["column"], r["plan_id"]) for r in present.layer_rows(data, v)} for v in (1, 2)}
+        self.assertEqual(cells[2] - cells[1], {cell})
+
+    @mock.patch.dict(os.environ, {present.CANDIDATE: ""})
+    def test_the_pinned_version_holds_its_cells(self):
+        data = years.data_dir(YEAR)
+        self.assertEqual(present.held(data), present.VERSIONS[json.load(open(data / "steps.json"))["present"]])
+        self.assertEqual(present.held(data, 2), present.VERSIONS[2])
+        with mock.patch.dict(os.environ, {present.CANDIDATE: "filled@6, present@2"}):
+            self.assertEqual(present.held(data), present.VERSIONS[2])
 
     def test_refuses_a_second_line_for_a_one_line_cell(self):
         data = years.data_dir(YEAR)
@@ -600,7 +615,7 @@ class ExpectedTest(unittest.TestCase):
             cells = presented_cells(data, column)
             wanted = {(w["plan_id"], w["line"]): w["value"] for w in expected.load() if w["column"] == column}
             missed = [(p, line, value, cells.get(p)) for (p, line), value in wanted.items()
-                      if (column, p, line) not in TRIAGED and (column, p) not in present.HELD
+                      if (column, p, line) not in TRIAGED and (column, p) not in present.held(data)
                       and shown(cells.get(p, ["", ""]), line) != value]
             self.assertEqual(missed, [], column)
             self.assertTrue(all(shown(cells[p], line) != wanted[p, line] for c, p, line in TRIAGED if c == column))
@@ -613,7 +628,7 @@ class ExpectedTest(unittest.TestCase):
         for column in present.COLUMNS:
             self.assertEqual({(r["plan_id"], r["line"]) for r in rows if r["column"] == column},
                              {(p, str(n) if " | " in generated[p][column] else "")
-                              for p, got in present.lines(data, column).items() if (column, p) not in present.HELD
+                              for p, got in present.lines(data, column).items() if (column, p) not in present.held(data)
                               for n, (v, cited) in enumerate(got, 1) if v or cited})
 
 
