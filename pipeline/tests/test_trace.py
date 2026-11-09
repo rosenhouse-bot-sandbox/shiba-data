@@ -1,9 +1,9 @@
-import csv, os, shutil, sqlite3, subprocess, sys, tempfile, unittest
+import csv, json, os, shutil, sqlite3, subprocess, sys, tempfile, unittest
 from unittest import mock
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path[:0] = [os.path.dirname(HERE), os.path.join(os.path.dirname(os.path.dirname(HERE)), "web")]
-import ask, blobs, build, fields, layers, present, reads, run, trace, years
+import ask, blobs, build, extract, fields, layers, present, reads, run, trace, years
 
 SHA = "0" * 40
 AMBULANCE = ("main", "H1036-153-0", "AB_ambulance")
@@ -107,10 +107,7 @@ class TraceTest(unittest.TestCase):
         self.assertEqual(records["struck_quotes"]["status"], trace.NONE)
 
     def test_says_not_traced_yet_for_records_later_milestones_fill(self):
-        records = self.cell(*AMBULANCE)
-        self.assertEqual(records["model_citations"]["status"], trace.NOT_YET)
-        for name in ("answers", "fact_checks"):
-            self.assertEqual(records[name]["status"], trace.NOT_YET, name)
+        self.assertEqual(self.cell(*AMBULANCE)["model_citations"]["status"], trace.NOT_YET)
 
     def test_lists_the_facts_each_line_used_and_why_the_rule_set_others_aside(self):
         rule = self.cell(*AMBULANCE)["rule"]
@@ -254,6 +251,83 @@ class AnswersTest(unittest.TestCase):
             f.write("changed")
         with self.assertRaisesRegex(ValueError, "does not hash to the key of facts/ambulance/read/doc.md"):
             self.build()
+
+    def test_without_a_run_the_checks_are_not_recorded(self):
+        with mock.patch.dict(os.environ, {"SHIBA_DATA": self.root}):
+            path = os.path.join(self.work, "plain.sqlite")
+            trace.build(years.LIVE, path, SHA)
+        db = sqlite3.connect(path)
+        self.addCleanup(db.close)
+        records = trace.cell(db, *AMBULANCE)
+        self.assertEqual((records["answers"]["status"], records["fact_checks"]["status"]),
+                         (trace.NOT_RECORDED, trace.NOT_RECORDED))
+
+
+EOC = "64e05773e847b56e0eeb5425979d54996c5f1975307c9ae186f5af4fecafc44c"
+STATED = dict(plan_id="H1036-153-0", benefit="ambulance", amount="$325")
+CHECKED = dict(fact_id="dcc6a0f01e6c0594", source="EOC", doc_sha=EOC, page="46")
+
+
+class FactChecksTest(AnswersTest):
+    """A run whose reader stated a fact the Ambulance rule uses, and three answers it rejected."""
+
+    def setUp(self):
+        super().setUp()
+        self.prompt = ask.sha("Read the facts.")
+        outcomes = {
+            "facts/ambulance/read": [
+                dict(prompt=self.prompt, item=0, doc_sha=EOC, stated=STATED, problem=None, fact=CHECKED),
+                dict(prompt=self.prompt, item=1, doc_sha=EOC, stated=dict(STATED, benefit="ambulance.air", amount="$9"),
+                     problem="no quote shows $9", fact=None),
+                dict(prompt=self.prompt, item=2, doc_sha=EOC, stated=dict(STATED, plan_id="H0000-000-0"),
+                     problem="plan_id: this document covers H1036-153-0", fact=None),
+                dict(prompt=self.prompt, item=3, doc_sha=EOC, stated="(not JSON)", problem="not an object", fact=None)],
+            "facts/ambulance/check": [
+                dict(prompt="c" * 64, item=0, decoy=True, shown=dict(STATED, network="in"), fact=None, ok=False,
+                     reason="wrong network"),
+                dict(prompt="c" * 64, item=1, decoy=False, shown=STATED, fact=CHECKED, ok=True, reason="page 46 says so")],
+            "facts/review": []}
+        for folder, rows in outcomes.items():
+            os.makedirs(os.path.join(self.work, folder), exist_ok=True)
+            with open(os.path.join(self.work, folder, extract.OUTCOMES), "w") as f:
+                json.dump(rows, f)
+        self.records = trace.cell(self.build(), *AMBULANCE)
+
+    def test_lists_each_answer_behind_the_cells_checks_with_its_prompts(self):
+        answers = self.records["answers"]
+        self.assertEqual(answers["status"], trace.TRACED)
+        (a,) = answers["rows"]
+        self.assertEqual((a["key"], a["model"], a["effort"], a["reply"]), (self.key, run.READER, "high", "[]"))
+        self.assertEqual(a["prompts"], [dict(prompt=self.prompt, dir="facts/ambulance/read", task="doc.md",
+                                             url=trace.PROMPT_URL.format(self.prompt))])
+
+    def test_follows_a_used_fact_through_each_check(self):
+        (checked,) = [r for r in self.records["fact_checks"]["rows"] if r["fact"] == CHECKED]
+        self.assertEqual(checked["stated_by"], [dict(prompt=self.prompt, item=0, answer_key=self.key, stated=STATED)])
+        self.assertEqual(checked["code_check"], "passed")
+        self.assertEqual(checked["verifier"], [dict(prompt="c" * 64, item=1, answer_key=None, ok=True, reason="page 46 says so",
+                                                    decoys=[dict(item=0, shown=dict(STATED, network="in"), ok=False,
+                                                                 reason="wrong network")])])
+        self.assertEqual(checked["reviewer"], {"status": trace.NOT_RECORDED, "note": trace.TRUSTED_WITHOUT_REVIEW})
+        self.assertTrue(checked["kept"])
+
+    def test_lists_a_rejected_answer_for_the_cells_plan_and_benefit(self):
+        rejected = [r for r in self.records["fact_checks"]["rows"] if r["fact"] is None]
+        self.assertEqual(rejected, [dict(fact=None, code_check="no quote shows $9", stated_by=[dict(
+            prompt=self.prompt, item=1, answer_key=self.key, stated=dict(STATED, benefit="ambulance.air", amount="$9"))],
+            verifier=[], reviewer={"status": trace.NONE}, kept=False)])
+
+    def test_lists_an_answer_with_no_valid_plan_or_benefit_under_its_document(self):
+        (eoc,) = [d for d in self.records["documents"]["documents"] if d["sha256"] == EOC]
+        self.assertEqual([(r["item"], r["problem"]) for r in eoc["unlinked_answers"]["rows"]],
+                         [(2, "plan_id: this document covers H1036-153-0"), (3, "not an object")])
+
+    def test_a_fact_the_reviewer_checked_has_its_verdict(self):
+        with open(os.path.join(self.work, "facts/review", extract.OUTCOMES), "w") as f:
+            json.dump([dict(prompt="d" * 64, item=0, fact=CHECKED, ok=True, reason="fine", earlier=True)], f)
+        (checked,) = [r for r in trace.cell(self.build(), *AMBULANCE)["fact_checks"]["rows"] if r["fact"] == CHECKED]
+        self.assertEqual(checked["reviewer"], dict(status=trace.TRACED, prompt="d" * 64, answer_key=None, ok=True,
+                                                   reason="fine", earlier=True))
 
 
 if __name__ == "__main__":

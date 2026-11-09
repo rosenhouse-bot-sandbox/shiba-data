@@ -107,7 +107,7 @@ class Answers:
             for task in tasks:
                 with open(task) as t:  # as ask.answer reads it
                     text = t.read()
-                prompt = hashlib.sha256(text.encode()).hexdigest()
+                prompt = ask.sha(text)
                 with open(f"{self.work}/{blobs.PROMPTS}/{prompt}", "wb") as out:
                     out.write(text.encode())
                 w.writerow(dict(dir=os.path.relpath(task_dir, self.work), task=os.path.basename(task), model=model,

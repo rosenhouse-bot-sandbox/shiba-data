@@ -13,6 +13,11 @@ POLL_SECONDS = 30
 REUSE = datetime.timedelta(days=7)
 
 
+def sha(text):
+    """A task text's sha256, which names its prompt in a run's ledger and in R2."""
+    return hashlib.sha256(text.encode()).hexdigest()
+
+
 def key(model, text, effort=None):
     # Without an effort, the key has its original format.
     named = f"{model}\n{text}" if effort is None else json.dumps([model, effort, text])

@@ -1,7 +1,7 @@
 import contextlib, io, json, os, pathlib, random, shutil, sys, tempfile, unittest
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-import extract, facts
+import ask, extract, facts
 from eoc import DATA
 
 SHA = "cd" * 32
@@ -106,13 +106,17 @@ class GateTest(unittest.TestCase):
         self.assertEqual(found, [])
         self.assertEqual([why for _, why in failed], ["two answers for one fact on one page"] * 2)
 
+    def test_lists_check_failures_before_clashes(self):
+        found, failed = gate(answer(), answer(amount="$5"), answer(quotes=["MRI and CT scans $250 copay"], amount="$250"))
+        self.assertEqual([why for _, why in failed], ["no quote shows $5"] + ["two answers for one fact on one page"] * 2)
+
     def test_keeps_one_copy_of_a_repeat(self):
         self.assertEqual(len(gate(answer(), answer())[0]), 1)
 
 
 class DocFactsTest(unittest.TestCase):
     def run_it(self, first, retry):
-        return extract.doc_facts(DOC, "imaging", first, retry, PAGES, ok_unless_bad)
+        return extract.doc_facts(DOC, "imaging", first, retry, PAGES, ok_unless_bad)[:2]
 
     def test_first_answers_ask_for_a_retry(self):
         found, failed = self.run_it([answer(), answer(amount="$5")], None)
@@ -266,6 +270,39 @@ class StepsTest(unittest.TestCase):
         items = json.loads((check / "items.json").read_text())
         self.assertEqual([(i["task"], i["decoy"], i["amount"]) for i in items], [(SHA[:16], False, "$0-$40")])
         self.assertIn(X_RAYS, (check / f"v-{SHA[:16]}.md").read_text())
+
+    def test_facts_records_each_answers_outcome(self):
+        self.step(extract.read, self.work, self.dir, "imaging")
+        good, bad = answer(page=1), answer(page=1, amount="$5")
+        (self.dir / f"{SHA[:16]}.json").write_text(json.dumps([good, bad]))
+        out = self.dir / "facts.json"
+        self.step(extract.extract_facts, self.work, self.dir, "imaging", out)
+        (self.dir / f"{SHA[:16]}.retry.json").write_text(json.dumps([good]))
+        self.step(extract.extract_facts, self.work, self.dir, "imaging", out)
+        (found,) = json.loads(out.read_text())
+        prompt, retry = (ask.sha((self.dir / f"{SHA[:16]}{end}").read_text()) for end in (".md", ".retry.md"))
+        self.assertEqual(json.loads((self.dir / extract.OUTCOMES).read_text()), [
+            dict(prompt=prompt, item=0, doc_sha=SHA, stated=good, problem=None, fact=extract.named(found)),
+            dict(prompt=prompt, item=1, doc_sha=SHA, stated=bad, problem="no quote shows $5", fact=None),
+            dict(prompt=retry, item=0, doc_sha=SHA, stated=good, problem=None, fact=extract.named(found))])
+
+    def test_accept_records_each_verdict(self):
+        new = self.known(network="out", amount="$0", quotes=json.dumps(["Outpatient X-rays $0"]))
+        with open(self.dir.parent / "new.json", "w") as f:
+            json.dump([dict(new, fact_id=facts.fact_id(new))], f)
+        self.step(extract.verify, self.work, self.dir.parent / "new.json", self.dir, known=[self.known()])
+        items = json.load(open(self.dir / "items.json"))
+        real = next(n for n, c in enumerate(items) if not c["decoy"])
+        (self.dir / f"v-{SHA[:16]}.json").write_text(json.dumps(
+            [{"id": n, "ok": n == real, "reason": f"r{n}"} for n in range(len(items) - 1)]))
+        with contextlib.redirect_stdout(io.StringIO()):
+            extract.accept(str(self.dir), str(self.dir / "accepted.csv"))
+        prompt = ask.sha((self.dir / f"v-{SHA[:16]}.md").read_text())
+        self.assertEqual(json.loads((self.dir / extract.OUTCOMES).read_text()), [
+            dict(prompt=prompt, item=n, decoy=c["decoy"], shown=extract.shown(c),
+                 fact=None if c["decoy"] else extract.named(c),
+                 ok=n == real if n < len(items) - 1 else None, reason=f"r{n}" if n < len(items) - 1 else "")
+            for n, c in enumerate(items)])
 
 
 if __name__ == "__main__":
