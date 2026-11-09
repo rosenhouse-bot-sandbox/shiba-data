@@ -96,5 +96,24 @@ class StepsTest(unittest.TestCase):
         self.assertEqual(set(run.STEPS), set(json.load(open(years.data_dir(years.LIVE) / "steps.json"))))
 
 
+class MainTest(unittest.TestCase):
+    def test_runs_the_unit_tests_before_any_download_or_model_call(self):
+        order = []
+
+        class Stop(Exception):
+            pass
+
+        def unit_tests(candidate):
+            order.append(("unit_tests", candidate))
+            raise Stop
+
+        with tempfile.TemporaryDirectory() as work, \
+             mock.patch.multiple(run, unit_tests=unit_tests, get=lambda *a: order.append("get"),
+                                 model_steps=lambda *a: order.append("model_steps")), \
+             self.assertRaises(Stop):
+            run.main(str(years.LIVE), work, "api", "present@2")
+        self.assertEqual(order, [("unit_tests", "present@2")])
+
+
 if __name__ == "__main__":
     unittest.main()
