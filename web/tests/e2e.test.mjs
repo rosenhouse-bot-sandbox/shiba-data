@@ -327,7 +327,7 @@ test("header says when the site was last updated", async () => {
   await fresh.close();
 });
 
-test("each note kind has its own color, and the Notes filter shows hand-written facts", async () => {
+test("each note kind has its own color, and the Notes filter shows added facts", async () => {
   const fresh = await browser.newPage({ viewport: { width: 1600, height: 1000 } });
   await fresh.goto(`${base}#/main`);
   const background = (locator) => locator.evaluate((e) => getComputedStyle(e).backgroundColor);
@@ -339,13 +339,13 @@ test("each note kind has its own color, and the Notes filter shows hand-written 
   assert.match(await caveat.getAttribute("title"), /^Caveat: /);
   await caveat.click();
   assert.equal(await background(fresh.locator("#source-note .comment")), await background(caveat));
-  assert.match(await handWritten.getAttribute("title"), /^Hand-written fact: /);
+  assert.match(await handWritten.getAttribute("title"), /^Added fact: /);
   await question.click();
   assert.equal(await background(fresh.locator("#source-note .comment")), await background(question));
   assert.match(await fresh.textContent("#source-note .comment"), /^Open question: /);
   await handWritten.click();
   assert.equal(await background(fresh.locator("#source-note .comment")), green);
-  assert.match(await fresh.textContent("#source-note .comment"), /^Hand-written fact: /);
+  assert.match(await fresh.textContent("#source-note .comment"), /^Added fact: /);
   assert.equal(await background(handWritten), green, "stays green in the open plan's row");
   await fresh.click("nav a[data-view=notes]");
   const rows = fresh.locator("table.notes tbody tr");
@@ -355,7 +355,7 @@ test("each note kind has its own color, and the Notes filter shows hand-written 
   const shown = await rows.filter({ visible: true }).allTextContents();
   assert.ok(notes.length > 0);
   assert.equal(shown.length, notes.length);
-  assert.ok(shown.every((t) => t.includes("Hand-written fact")));
+  assert.ok(shown.every((t) => t.includes("Added fact")));
   await rows.filter({ visible: true }).first().locator("a", { hasText: "Show in" }).click();
   await fresh.goBack();
   assert.equal(await fresh.locator("#kind-filter").inputValue(), "hand_written");

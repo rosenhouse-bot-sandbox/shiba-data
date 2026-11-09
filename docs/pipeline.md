@@ -332,7 +332,7 @@ main,H1036-153-0,AB_ambulance,1,$325 or 20%,…H1036153000EOC27pdf,46,Non-Emerge
 main,H1036-153-0,AB_ambulance,2,$325,…H1036153000EOC27pdf,46,Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance
 ```
 
-Rules also read the hand-written facts from step 9. Most main-sheet columns have rules. Columns without one, including every DVHA column, keep their draft value or an edit from step 9.
+Rules also read the added facts from step 9. Most main-sheet columns have rules. Columns without one, including every DVHA column, keep their draft value or an edit from step 9.
 
 ## 8. Claude cites blank cells and uncited values
 
@@ -379,7 +379,7 @@ In both steps, code checks each quote, and Claude Sonnet and then Claude Opus ve
 
 Some cells need judgment that no rule or reader handles. Claude sessions make those calls in pull requests and record them in four tables.
 
-A **hand-written fact** adds a fact the readers missed, with a note saying why. Step 7's rules read it like any other fact. `override_facts.csv`, selected columns:
+An **added fact** adds a fact the readers missed, with a note saying why. Step 7's rules read it like any other fact. `override_facts.csv`, selected columns:
 
 ```
 plan_id,benefit,setting,cost_kind,source,page,quotes,note
@@ -390,7 +390,7 @@ H1372-003-0,ambulance,outside_us,not_covered,EOC,41,"[""Our plan doesn’t cover
 
 That fact makes line 2 of the AgeRight plan's Ambulance cell read `not covered`.
 
-A **note** explains a cell to volunteers. A `hand_written` note, in green, marks a value that uses a hand-written fact. A `caveat`, in lavender, gives a settled detail the value leaves out. A `question`, in yellow, flags a value that needs a domain expert's check. `comments.csv`, selected columns:
+A **note** explains a cell to volunteers. A `hand_written` note, in green, marks a value that uses an added fact. A `caveat`, in lavender, gives a settled detail the value leaves out. A `question`, in yellow, flags a value that needs a domain expert's check. `comments.csv`, selected columns:
 
 ```
 sheet,plan_id,column,kind,comment,pdf_page,quote
