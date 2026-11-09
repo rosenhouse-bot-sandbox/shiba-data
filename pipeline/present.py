@@ -440,6 +440,112 @@ def plan_premium(organization, found):
     return [(show(got), got)]
 
 
+YEARS = {"2": "two", "two": "two", "3": "three", "three": "three"}
+SEVERAL_YEARS = re.compile(r"\b(?:every|per|each|during an?)\s+(2|two|3|three)[ -](?:calendar[ -])?years?\b", re.I)
+ONE_YEAR = re.compile(r"\b(?:every|per|each)\s+(?:calendar\s+)?year\b", re.I)
+
+
+def period(f):
+    """How often the fact's limit renews, such as "year" or "two years", or "" if it does not say."""
+    several = SEVERAL_YEARS.search(f["limit"])
+    return f"{YEARS[several[1].lower()]} years" if several else "year" if ONE_YEAR.search(f["limit"]) else ""
+
+
+def renewal(found, leaf):
+    """The best source's routine facts for leaf that say how often it renews."""
+    return top([f for f in found if f["benefit"] == leaf and routine(f) and not f["provider_tier"] and period(f)])
+
+
+def per(found):
+    """"/year" or the like when the facts agree on how often they renew."""
+    periods = {period(f) for f in found}
+    return f"/{periods.pop()}" if len(periods) == 1 else ""
+
+
+def routine(f):
+    return (f["network"] in ("in", "any") and f["covered_by"] == "supplemental"
+            and not (f["condition"] or f["package"] or f["pool"]))
+
+
+@unless("it is not a routine exam copay")
+def exam_ok(f):
+    return routine(f) and f["cost_kind"] == "copay" and not f["provider_tier"]
+
+
+# These carriers give one allowance for frames or contacts.
+FRAMES_OR_CONTACTS = ("Regence",)
+
+
+def vision(organization, found):
+    """Shows the routine eye exam copay and the eyewear allowance, with a higher allowance at a named tier of providers.
+    Each part says how often it renews when its best source says so."""
+    @unless("it is not a routine eyewear allowance")
+    def eyewear_ok(f):
+        return routine(f) and f["cost_kind"] in ("allowance", "max")
+
+    exams = best(found, "vision.exam", "any", exam_ok)
+    eyewear = best(found, "vision.eyewear", "any", eyewear_ok)
+    standard = [f for f in eyewear if not f["provider_tier"]]
+    tiers = [f for f in eyewear if f["provider_tier"]]
+    parts, cited = [], []
+    if exams:
+        renews = renewal(found, "vision.exam")
+        parts.append(f"exam {show(exams)}{per(renews)}")
+        cited += exams + renews
+    if standard:
+        regence = any(name in organization for name in FRAMES_OR_CONTACTS)
+        renews = renewal(found, "vision.eyewear")
+        part = f"{'frames or contacts' if regence else 'eyewear'} {show(standard)}{per(renews)}"
+        cited += standard + renews
+        if tiers:
+            names = {re.sub(r"\W*providers?\W*$", "", f["provider_tier"], flags=re.I).strip("* ") for f in tiers}
+            part += f" ({show(tiers)} at {' or '.join(sorted(names))} providers)"
+            cited += tiers
+        parts.append(part)
+        lenses = [f for f in found if f["benefit"] == "vision.eyewear" and routine(f) and f["cost_kind"] == "copay"
+                  and f["amount"] == "$0" and not f["provider_tier"]] if regence else []
+        if lenses:
+            parts.append("lenses $0")
+            cited += top(lenses)
+    else:
+        keep(tiers, lambda f: False, lambda f: "a tier's allowance shows only beside the standard one")
+    return [("; ".join(parts), unique(cited))]
+
+
+PAIR = re.compile(r"per ear|\b(?:2|two) hearing aids?\b", re.I)
+
+
+def hearing(organization, found):
+    """Shows the routine hearing exam copay, then a hearing aid allowance or else copays, and how many aids.
+    The count comes from a visit limit, or is 2 when the best source prices or limits aids per ear."""
+    @unless("it is not a routine hearing aid allowance")
+    def allowance_ok(f):
+        return routine(f) and f["cost_kind"] in ("allowance", "max") and not f["provider_tier"]
+
+    @unless("it is not a routine hearing aid copay")
+    def copay_ok(f):
+        return routine(f) and f["cost_kind"] == "copay" and not f["provider_tier"]
+
+    exams = best(found, "hearing.exam", "any", exam_ok)
+    allowance = best(found, "hearing.aids", "any", allowance_ok)
+    copays = keep(best(found, "hearing.aids", "any", copay_ok), lambda f: not allowance, lambda f: "an allowance won")
+    priced = allowance or copays
+    renews = renewal(found, "hearing.aids") if priced else []
+    parts = [f"exam {show(exams)}"] if exams else []
+    if allowance:
+        ear = " per ear" if any(f["unit"] == "per ear" for f in allowance) else ""
+        parts.append(f"aids allowance {show(allowance)}{ear}{per(renews)}")
+    elif copays:
+        parts.append(f"aids {show(copays)}")
+    limits = top([f for f in found if f["benefit"] == "hearing.aids" and routine(f) and not f["provider_tier"]
+                  and f["cost_kind"] == "visit_limit"]) if priced else []
+    pairs = [f for f in priced + renews if PAIR.search(f["unit"] + " " + f["limit"])]
+    counted = limits or pairs
+    if counted:
+        parts.append(f"{min(int(f['amount']) for f in limits) if limits else 2} aids{per(renews)}")
+    return [("; ".join(parts), unique(exams + priced + renews + counted))]
+
+
 # Added facts fill in what readers miss, and each note says why. Only they use cost kind "unclear".
 ADDED = "added_facts.csv"
 
@@ -477,8 +583,8 @@ LEAVES = {"L_xray_imaging": ("imaging",), "AB_ambulance": ("ambulance",), "I_out
           "Q_hearing": ("hearing",), "W_fitness": ("fitness",), "Y_otc": ("otc",), "AA_opt_packages": ("packages",)}
 
 
-DVHA = {"C_premium": plan_premium}
-DVHA_LEAVES = {"C_premium": ("plan_premium",)}
+DVHA = {"C_premium": plan_premium, "G_vision": vision, "H_hearing": hearing}
+DVHA_LEAVES = {"C_premium": ("plan_premium",), "G_vision": ("vision",), "H_hearing": ("hearing",)}
 SHEETS = {"main": (COLUMNS, LEAVES), "dvha": (DVHA, DVHA_LEAVES)}
 
 
@@ -540,8 +646,15 @@ HELD_1 = {
 CANDIDATE = "SHIBA_CANDIDATE"
 VERSIONS = {1: HELD_1, 2: {cell: why for cell, why in HELD_1.items() if cell != ("K_tests_labs", "H2923-009-0")}}
 VERSIONS[3] = VERSIONS[2]
+NO_EXAM = "the facts give no in-network routine hearing exam price"
+NO_RENEWAL = "the facts do not say how often the hearing aids renew"
+VERSIONS[4] = VERSIONS[3] | {("dvha.H_hearing", p): NO_EXAM for p in (
+    "H7006-018-0", "H6815-038-0", "H5439-019-0", "H5439-011-0", "H1372-003-0", "H7006-021-0", "H5439-010-0")} | {
+    ("dvha.H_hearing", p): f"{NO_EXAM}, and {NO_RENEWAL}" for p in (
+        "H7199-002-0", "H2923-001-0", "H2923-028-3", "H2923-025-0", "H2923-005-0", "H2923-009-0")} | {
+    ("dvha.H_hearing", "H2923-019-0"): NO_RENEWAL}
 # The version that first presents each DVHA column. Earlier versions hold its cells.
-DVHA_SINCE = {"C_premium": 3}
+DVHA_SINCE = {"C_premium": 3, "G_vision": 4, "H_hearing": 4}
 
 
 def held(data, version=None):
