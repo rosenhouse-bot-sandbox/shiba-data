@@ -75,7 +75,8 @@ def resolve(repo, commit, year):
             code, start, end = locate(repo, ref)
             url, where = f"{base}#L{start}-L{end}", ref.replace(":", ": ")
         else:
-            if not (repo / ref).exists():
+            # A year's data may not be in this checkout, as in tests.
+            if "{year}" not in t["ref"] and not (repo / ref).exists():
                 raise ValueError(f"{ref} does not exist")
             code, url, where = "", base, ref
         out[term] = {"title": t["title"], "text": t["text"], "code": code, "url": url, "where": where}
