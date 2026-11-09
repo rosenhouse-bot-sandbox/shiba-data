@@ -1,4 +1,4 @@
-import csv, json, os, shutil, sqlite3, subprocess, sys, tempfile, unittest
+import csv, hashlib, json, os, shutil, sqlite3, subprocess, sys, tempfile, unittest
 from unittest import mock
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -198,21 +198,23 @@ class TraceTest(unittest.TestCase):
         self.assertEqual(self.cell(*AMBULANCE)["draft"]["code"]["url"],
                          f"{trace.REPO_URL}/blob/{SHA}/pipeline/main_chart.py")
 
-    def test_exports_each_main_cells_records_in_parts_with_a_manifest(self):
+    def test_exports_each_main_cells_records_once_by_content_without_the_commit(self):
         with tempfile.TemporaryDirectory() as out:
             trace.export(self.db, out)
-            with open(os.path.join(out, "manifest.json")) as f:
+            with open(os.path.join(out, f"{SHA}.json")) as f:
                 manifest = json.load(f)
-            parts = []
-            for n in range(manifest["parts"]):
-                with open(os.path.join(out, f"{n}.json")) as f:
-                    parts.append(json.load(f))
+            texts = {}
+            for name in os.listdir(os.path.join(out, "cells")):
+                with open(os.path.join(out, "cells", name), encoding="utf-8") as f:
+                    texts[name] = f.read()
         main = self.db.execute("SELECT count(*) FROM draft_cell WHERE sheet = 'main'").fetchone()[0]
-        cells = [c for part in parts for c in part]
-        self.assertEqual((manifest["sha"], manifest["year"], manifest["cells"], len(cells)), (SHA, years.LIVE, main, main))
-        self.assertEqual({len(part) for part in parts[:-1]}, {trace.PART})
-        (text,) = [t for plan_id, col, t in cells if (plan_id, col) == AMBULANCE[1:]]
-        self.assertEqual(json.loads(text), self.cell(*AMBULANCE))
+        self.assertEqual((manifest["sha"], manifest["year"], len(manifest["cells"])), (SHA, years.LIVE, main))
+        self.assertEqual(set(texts), {f"{h}.json" for h in manifest["cells"].values()})
+        for name, text in texts.items():
+            self.assertEqual(name, hashlib.sha256(text.encode()).hexdigest() + ".json")
+            self.assertNotIn(SHA, text)
+        text = texts[manifest["cells"]["/".join(AMBULANCE[1:])] + ".json"]
+        self.assertEqual(json.loads(text.replace(trace.COMMIT, SHA)), self.cell(*AMBULANCE))
 
     def test_rejects_an_unknown_cell(self):
         with self.assertRaises(LookupError):

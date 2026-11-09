@@ -11,10 +11,10 @@ Usage:
 "not_traced_yet" when the trace does not cover it yet, as for some DVHA cells, or "not_recorded" when nothing kept
 the record. With a work_dir from a run, `build` adds the run's prompts, their saved answers and the checks' outcomes.
 `check` fails if a main cell has a record left not traced yet.
-`export` writes every main cell's records in parts, which web/worker.js loads into D1.
+`export` writes every main cell's records once by content, which web/worker.js loads into D1.
 `page` prints a page's layout text from a run's <work_dir>/texts, where blobs.py puts it.
 """
-import csv, glob, json, os, sqlite3, sys
+import csv, glob, hashlib, json, os, sqlite3, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -412,22 +412,22 @@ def check(db):
         raise SystemExit("These records are not traced yet:\n" + "\n".join(left))
 
 
-# The Worker loads each part of PART cells in one short request.
-PART = 10
+# An exported cell names its build's commit as COMMIT, so a cell that did not change keeps its file and hash.
+COMMIT = "${commit}"
 
 
 def export(db, out):
-    """Writes each main cell's records to <out>/<n>.json in parts of PART cells, and <out>/manifest.json."""
+    """Writes each main cell's records to <out>/cells/<sha256>.json, and <out>/<commit>.json, which names each cell's file."""
     sha, year = db.execute("SELECT sha, year FROM build").fetchone()
-    cells = [[plan_id, col, json.dumps(cell(db, "main", plan_id, col), ensure_ascii=False)] for plan_id, col in db.execute(
-        "SELECT plan_id, col FROM draft_cell WHERE sheet = 'main' ORDER BY plan_id, col").fetchall()]
-    parts = [cells[n:n + PART] for n in range(0, len(cells), PART)]
-    os.makedirs(out, exist_ok=True)
-    for n, part in enumerate(parts):
-        with open(os.path.join(out, f"{n}.json"), "w", encoding="utf-8") as f:
-            json.dump(part, f, ensure_ascii=False)
-    with open(os.path.join(out, "manifest.json"), "w") as f:
-        json.dump(dict(sha=sha, year=year, cells=len(cells), parts=len(parts)), f)
+    os.makedirs(os.path.join(out, "cells"), exist_ok=True)
+    cells = {}
+    for plan_id, col in db.execute("SELECT plan_id, col FROM draft_cell WHERE sheet = 'main' ORDER BY plan_id, col").fetchall():
+        text = json.dumps(cell(db, "main", plan_id, col), ensure_ascii=False).replace(sha, COMMIT)
+        digest = cells[f"{plan_id}/{col}"] = hashlib.sha256(text.encode()).hexdigest()
+        with open(os.path.join(out, "cells", f"{digest}.json"), "w", encoding="utf-8") as f:
+            f.write(text)
+    with open(os.path.join(out, f"{sha}.json"), "w") as f:
+        json.dump(dict(sha=sha, year=year, cells=cells), f)
 
 
 def not_yet(records, path=""):

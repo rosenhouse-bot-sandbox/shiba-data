@@ -83,7 +83,7 @@ jobs:
           year=$(basename "$(python3 -I pipeline/years.py)")
           python3 -I pipeline/trace.py build "$year" "_work/trace/$year.sqlite" "$SHA" _work
           python3 -I pipeline/trace.py check "_work/trace/$year.sqlite"
-          python3 -I pipeline/trace.py export "_work/trace/$year.sqlite" "_work/trace/$year/$SHA"
+          python3 -I pipeline/trace.py export "_work/trace/$year.sqlite" "_work/trace/$year"
         env:
           SHA: ${{ github.event.pull_request.head.sha || github.sha }}
       - uses: actions/upload-artifact@v4
@@ -125,7 +125,8 @@ jobs:
 
   # R2 keeps each prompt the replay sent, so a trace can show it. Keys are content hashes, so sync adds only new ones.
   # R2 also keeps the latest main build's trace as trace/<year>.sqlite.
-  # The Worker loads the build's cells into D1 from trace/<year>/<sha>/, part by part, then serves them.
+  # Each cell's trace goes to trace/<year>/cells/ by content hash, so sync uploads only cells that changed.
+  # The Worker then loads into D1 the cells it lacks, a few per request, and adds the build.
   trace:
     if: github.ref == 'refs/heads/main'
     needs: [build, reproduce, deploy]
@@ -156,15 +157,18 @@ jobs:
           for db in trace/*.sqlite; do aws s3 cp "$db" "s3://pdxplans/$db" --only-show-errors; done
           LOAD_TOKEN=$(printf 'pdxplans trace load %s' "$CLOUDFLARE_API_TOKEN" | sha256sum | cut -c1-64)
           echo "::add-mask::$LOAD_TOKEN"
-          load() { curl -sS --fail-with-body --max-time 60 --retry 3 -X POST -w "\n" -H "Authorization: Bearer $LOAD_TOKEN" "$1"; }
-          for manifest in trace/*/*/manifest.json; do
-            build=$(dirname "$manifest")
-            year=$(jq -e .year "$manifest")
-            sha=$(jq -er .sha "$manifest")
-            parts=$(jq -e .parts "$manifest")
-            aws s3 cp "$build" "s3://pdxplans/$build/" --recursive --only-show-errors
-            for n in $(seq 0 $((parts - 1))); do load "https://pdxplans.org/trace/$year/load/$sha/$n"; done
-            load "https://pdxplans.org/trace/$year/load/$sha"
+          for manifest in trace/*/*.json; do
+            year=$(basename "$(dirname "$manifest")")
+            aws s3 sync "trace/$year/cells" "s3://pdxplans/trace/$year/cells/" --size-only --only-show-errors
+            aws s3 cp "$manifest" "s3://pdxplans/$manifest" --only-show-errors
+            url="https://pdxplans.org/trace/$year/load/$(jq -er .sha "$manifest")"
+            for _ in $(seq 200); do
+              status=$(curl -sS --max-time 60 --retry 3 -X POST -o response.txt -w "%{http_code}" \
+                -H "Authorization: Bearer $LOAD_TOKEN" "$url")
+              cat response.txt; echo
+              [ "$status" = 409 ] || break
+            done
+            test "$status" = 200
           done
 
   sheet:
