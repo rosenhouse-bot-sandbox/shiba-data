@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-5e11cf20cec995f3.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 69 Meal benefit row shows a $0 copayment in network. This is a routine (supplemental) benefit.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 69 Meal benefit row says you receive up to 28 home-delivered meals for up to 14 days, used immediately following a covered inpatient hospital or SNF stay. The quoted 'or up to 14 days' is 'for' with the f dropped.\"}]\n```",
+ "usage": {
+  "input_tokens": 2534,
+  "output_tokens": 420,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

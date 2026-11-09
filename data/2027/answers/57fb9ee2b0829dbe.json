@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "da2974c756f3eedc.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-009-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"page\": 9,\n  \"quotes\": [\"Medicare-Covered Foot Care: 30% coinsurance\"]},\n {\"plan_id\": \"H2923-009-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per visit\", \"page\": 9,\n  \"quotes\": [\"$0 copay — 4 visits per year\"]},\n {\"plan_id\": \"H2923-009-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"4\", \"limit\": \"per year\", \"page\": 9,\n  \"quotes\": [\"$0 copay — 4 visits per year\"]}]\n```",
+ "usage": {
+  "input_tokens": 2515,
+  "output_tokens": 696,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

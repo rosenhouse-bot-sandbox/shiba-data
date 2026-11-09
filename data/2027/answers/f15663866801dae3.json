@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-bf93677641b9fa6f.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 Monthly Premium row shows $0 for DEVOTED CORE 001 OR (HMO), the only plan in the document. The Part B premium is noted separately and is not included.\"}]\n```",
+ "usage": {
+  "input_tokens": 2049,
+  "output_tokens": 210,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-2947683a555fc83c.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 7 Worldwide Coverage section does state $0 for emergency care if admitted to the same hospital within 24 hours. But care outside the U.S. is a supplemental benefit, not Medicare-covered, and an in-network label does not fit care outside the U.S. Too doubtful to publish.\"}, {\"id\": 1, \"ok\": false, \"reason\": \"Page 7 Worldwide Coverage lists 'Urgent care center: $40 copay'. But worldwide coverage is a supplemental benefit, not Medicare-covered, and in-network does not apply outside the U.S.\"}, {\"id\": 2, \"ok\": false, \"reason\": \"Page 7 Worldwide Coverage lists 'Emergency room - Hospital: $115 copay'. But worldwide coverage is a supplemental benefit, not Medicare-covered, and in-network does not apply outside the U.S.\"}]\n```",
+ "usage": {
+  "input_tokens": 2548,
+  "output_tokens": 604,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

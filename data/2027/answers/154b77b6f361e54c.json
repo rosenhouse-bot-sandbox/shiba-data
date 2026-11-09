@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "5e11cf20cec995f3.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-048-0\", \"benefit\": \"meals\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 69,\n  \"quotes\": [\"Meal benefit\", \"$0 copayment\"], \"note\": \"\"},\n {\"plan_id\": \"H3805-048-0\", \"benefit\": \"meals\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"28\", \"unit\": \"meals\", \"limit\": \"for up to 14 days following a covered inpatient hospital or skilled nursing facility (SNF) stay\", \"page\": 69,\n  \"quotes\": [\"Receive up to 28 home-delivered meals\", \"or up to 14 days\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 4094,
+  "output_tokens": 974,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

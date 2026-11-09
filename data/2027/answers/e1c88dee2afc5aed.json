@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "a4bc20077fb4a2cf.md",
+ "reply": "```json\n[{\"plan_id\": \"H3817-011-1\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$45\", \"unit\": \"per provider per day\", \"limit\": \"\", \"page\": 63, \"quotes\": [\"Medicare-covered podiatry: In-network: $45 copay per provider per day\"], \"note\": \"Medicare-covered podiatry row includes routine foot care for members with certain medical conditions affecting the lower limbs\"},\n{\"plan_id\": \"H3817-011-1\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"\", \"limit\": \"\", \"page\": 63, \"quotes\": [\"Medicare-covered podiatry: In-network: $45 copay per provider per day Out-of-network: 50% coinsurance\"], \"note\": \"\"},\n{\"plan_id\": \"H3817-011-1\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per provider per day\", \"limit\": \"6 visits every calendar year\", \"condition\": \"members with a diabetes diagnosis\", \"page\": 63, \"quotes\": [\"Routine podiatry: In-network: $0 copay per provider per day\", \"Additional routine foot care is covered for members with a diabetes\", \"6 visits every calendar year\"], \"note\": \"\"},\n{\"plan_id\": \"H3817-011-1\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"\", \"limit\": \"6 visits every calendar year\", \"condition\": \"members with a diabetes diagnosis\", \"page\": 63, \"quotes\": [\"Routine podiatry: In-network: $0 copay per provider per day Out-of-network: 50% coinsurance\", \"Additional routine foot care is covered for members with a diabetes\", \"6 visits every calendar year\"], \"note\": \"\"},\n{\"plan_id\": \"H3817-011-1\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"6\", \"unit\": \"visits\", \"limit\": \"every calendar year\", \"condition\": \"members with a diabetes diagnosis\", \"page\": 63, \"quotes\": [\"6 visits every calendar year\", \"Additional routine foot care is covered for members with a diabetes\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 3587,
+  "output_tokens": 1633,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

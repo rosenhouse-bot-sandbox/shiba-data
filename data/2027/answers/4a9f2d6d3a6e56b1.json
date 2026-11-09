@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-d649ac2bebc0321d.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 97 Podiatry services row: 'Medicare-Covered Foot Care $50 copay', the amount paid for podiatry visits covered by Medicare criteria. This includes routine foot care for members with certain conditions affecting the lower limbs. In network, no setting named.\"}]\n```",
+ "usage": {
+  "input_tokens": 2237,
+  "output_tokens": 322,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

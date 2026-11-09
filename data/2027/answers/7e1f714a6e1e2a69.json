@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-a744eaa24232bb11.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 70 does show supplemental routine foot care with unlimited self-referred visits per calendar year. But the routine podiatry row gives a $15 copayment at the Specialist's Office. So 'covered' with no amount and setting 'any' misstate the cost and setting.\"}]\n```",
+ "usage": {
+  "input_tokens": 2497,
+  "output_tokens": 259,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

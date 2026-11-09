@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-bf93677641b9fa6f.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 10 Food & Home Card row, a Special Supplemental Benefit for the Chronically Ill: $30 per month for qualifying members toward food, utilities and rent or mortgage. It is limited to chronically ill members with conditions like diabetes and chronic heart failure. The pool, condition, amount and limit all match the quoted text.\"}]\n```",
+ "usage": {
+  "input_tokens": 2734,
+  "output_tokens": 284,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

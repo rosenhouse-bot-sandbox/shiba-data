@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "557f08e61a7e8f42.md",
+ "reply": "```json\n[{\"plan_id\": \"H9003-001-0\", \"benefit\": \"meals\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"condition\": \"limited situations as described in the Medical Benefits Chart\", \"page\": 114, \"quotes\": [\"Home-delivered meals\", \"Covered in limited situations as described in the Medical Benefits Chart\"], \"note\": \"This page is the exclusions list. The qualifying situations are described elsewhere in the Medical Benefits Chart and are not on this page.\"},\n{\"plan_id\": \"H9003-006-0\", \"benefit\": \"meals\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"condition\": \"limited situations as described in the Medical Benefits Chart\", \"page\": 114, \"quotes\": [\"Home-delivered meals\", \"Covered in limited situations as described in the Medical Benefits Chart\"], \"note\": \"This page is the exclusions list. The qualifying situations are described elsewhere in the Medical Benefits Chart and are not on this page.\"},\n{\"plan_id\": \"H9003-009-0\", \"benefit\": \"meals\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"condition\": \"limited situations as described in the Medical Benefits Chart\", \"page\": 114, \"quotes\": [\"Home-delivered meals\", \"Covered in limited situations as described in the Medical Benefits Chart\"], \"note\": \"This page is the exclusions list. The qualifying situations are described elsewhere in the Medical Benefits Chart and are not on this page.\"}]\n```",
+ "usage": {
+  "input_tokens": 2433,
+  "output_tokens": 962,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

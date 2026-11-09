@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "0e1831fb00cf2a95.md",
+ "reply": "```json\n[{\"plan_id\": \"H2056-018-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$40\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 8,\n  \"quotes\": [\"$40 copay for Medicare‑covered podiatry visits\"], \"note\": \"\"},\n {\"plan_id\": \"H2056-018-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"not_covered\", \"page\": 8,\n  \"quotes\": [\"Non‑Medicare covered podiatry services are not covered.\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 2298,
+  "output_tokens": 506,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

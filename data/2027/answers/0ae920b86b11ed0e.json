@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "4a0ee31be3437c35.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-306-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$15\", \"unit\": \"\", \"limit\": \"\", \"page\": 14,\n  \"quotes\": [\"Podiatry services (Medicare-covered) $15 copay\"], \"note\": \"\"},\n {\"plan_id\": \"H1036-306-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$15\", \"unit\": \"per visit\", \"limit\": \"unlimited visits per year\", \"page\": 16,\n  \"quotes\": [\"$15 copay for routine podiatry visits up to\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 3653,
+  "output_tokens": 789,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

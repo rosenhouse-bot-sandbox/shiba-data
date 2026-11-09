@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-2c828c1ac1616719.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 54 Routine podiatry row: 50% coinsurance out of network. The benefit is for members with a diabetes diagnosis and is limited to 6 visits every calendar year.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 54 Routine podiatry row: $0 copay per provider per day in network. The benefit is for members with a diabetes diagnosis and is limited to 6 visits every calendar year.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 53 Podiatry services row, Medicare-covered podiatry: 50% coinsurance out of network.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 53 Podiatry services row, Medicare-covered podiatry: $40 copay per provider per day in network.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 54 Routine podiatry services: additional routine foot care for members with a diabetes diagnosis is limited to 6 visits every calendar year. The limit is stated for the benefit as a whole, not for one network.\"}]\n```",
+ "usage": {
+  "input_tokens": 4297,
+  "output_tokens": 603,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

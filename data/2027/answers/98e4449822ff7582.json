@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-be9deec855112c1d.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 69 Emergency care row: $130 per visit copay. In-network matches the stated cost, and the Medicare-covered emergency benefit applies in any setting.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 70 Worldwide Emergency Care: the plan covers worldwide emergency, urgent care and ambulance up to $25,000 per lifetime outside the U.S. This is a supplemental benefit.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 70 Worldwide Emergency Care (services outside the United States): the cost-share for emergency services worldwide is a $130 copay.\"}]\n```",
+ "usage": {
+  "input_tokens": 3401,
+  "output_tokens": 365,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

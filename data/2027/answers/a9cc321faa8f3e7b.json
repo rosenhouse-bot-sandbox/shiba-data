@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-f961eb582c1534d5.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 96 Podiatry row covers routine foot care for members with certain medical conditions (Medicare). Out-of-network cost is 20% coinsurance for Medicare-covered podiatry services.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 96 Podiatry row covers routine foot care for members with certain medical conditions (Medicare). In-network cost is a $30 copay for Medicare-covered podiatry services.\"}]\n```",
+ "usage": {
+  "input_tokens": 2194,
+  "output_tokens": 313,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

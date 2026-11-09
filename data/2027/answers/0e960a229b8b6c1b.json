@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "d594b0a1d3772214.md",
+ "reply": "```json\n[{\"plan_id\": \"H2056-003-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$65\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 64,\n  \"quotes\": [\"$65 copay for each Medicare‑covered\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 4394,
+  "output_tokens": 811,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

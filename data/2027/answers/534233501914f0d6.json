@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "29166053e638f7e6.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-317-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 14, \"quotes\": [\"Podiatry services (Medicare-covered) 20% of the cost\"]},\n{\"plan_id\": \"H1036-317-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"unit\": \"per visit\", \"page\": 17, \"quotes\": [\"20% of the cost for routine podiatry visits up to 12 visit(s) per year.\"]},\n{\"plan_id\": \"H1036-317-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"12\", \"limit\": \"per year\", \"page\": 17, \"quotes\": [\"20% of the cost for routine podiatry visits up to 12 visit(s) per year.\"]}]\n```",
+ "usage": {
+  "input_tokens": 3387,
+  "output_tokens": 728,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-aca9d3510177adcd.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 69 does support up to 36 sessions per episode. But the condition leaves out a required criterion: members must also have HFrEF or heart failure with an additional qualifying condition. As written, it overstates who qualifies.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Page 69 does show a $0 in-network copayment. But the condition leaves out the required HFrEF or additional-condition criterion, so it overstates who qualifies.\"}]\n```",
+ "usage": {
+  "input_tokens": 2939,
+  "output_tokens": 513,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

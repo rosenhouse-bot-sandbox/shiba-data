@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "557f08e61a7e8f42.md",
+ "reply": "```json\n[{\"plan_id\": \"H9003-001-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$35\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 91, \"quotes\": [\"Podiatry services\", \"Routine foot care for members with certain medical conditions affecting the lower limbs\", \"$35 for Enhanced plan\"], \"note\": \"This is the per-visit copay with no setting named. A separate outpatient hospital or surgical center cost is listed but left out because that setting is not in the list.\"},\n {\"plan_id\": \"H9003-006-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$40\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 91, \"quotes\": [\"Podiatry services\", \"Routine foot care for members with certain medical conditions affecting the lower limbs\", \"$40 for Standard plan members.\"], \"note\": \"This is the per-visit copay with no setting named. A separate outpatient hospital or surgical center cost is listed but left out because that setting is not in the list.\"},\n {\"plan_id\": \"H9003-009-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$45\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 91, \"quotes\": [\"Podiatry services\", \"Routine foot care for members with certain medical conditions affecting the lower limbs\", \"$45 for Value plan members.\"], \"note\": \"This is the per-visit copay with no setting named. A separate outpatient hospital or surgical center cost is listed but left out because that setting is not in the list.\"}]\n```",
+ "usage": {
+  "input_tokens": 3828,
+  "output_tokens": 1571,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

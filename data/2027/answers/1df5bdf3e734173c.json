@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-0bd982dc589e8cba.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 43 Emergency care row: Worldwide Coverage $115 copayment (Emergency Room); worldwide emergency is a supplemental benefit outside the U.S.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 69 Urgently needed services row: In-Network $40 copayment (Urgent Care Center), the only setting listed.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 43 Emergency care row: In-Network Emergency Services $115 copayment (Emergency Room), the only setting listed.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 69 Urgently needed services row: Worldwide Coverage $40 copayment (Urgent Care Center).\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 43 Emergency care row: Out-of-Network Emergency Services $115 copayment, the same as in network.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 69 Urgently needed services row: Out-of-Network $40 copayment (Urgent Care Center).\"}]\n```",
+ "usage": {
+  "input_tokens": 4035,
+  "output_tokens": 903,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

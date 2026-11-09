@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "f961eb582c1534d5.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-010-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$30\", \"page\": 96,\n  \"quotes\": [\"Routine foot care for members with certain medical\", \"$30 copay for Medicare-covered podiatry services.\"],\n  \"note\": \"Same copay covers all Medicare-covered podiatry services, including routine foot care for members with certain medical conditions affecting the lower limbs; deductible applies.\"},\n {\"plan_id\": \"H5439-010-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"out\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 96,\n  \"quotes\": [\"Routine foot care for members with certain medical\", \"20% coinsurance for Medicare-covered podiatry services.\"],\n  \"note\": \"Same coinsurance covers all Medicare-covered podiatry services, including routine foot care for members with certain medical conditions affecting the lower limbs; deductible may apply.\"}]\n```",
+ "usage": {
+  "input_tokens": 3869,
+  "output_tokens": 989,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

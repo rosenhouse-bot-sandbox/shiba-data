@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "2eb4caa23079d78f.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-019-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$30\", \"page\": 21,\n  \"quotes\": [\"$30 copay\"]},\n {\"plan_id\": \"H5439-019-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"out\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 21,\n  \"quotes\": [\"20% coinsurance\"]}]\n```",
+ "usage": {
+  "input_tokens": 2332,
+  "output_tokens": 346,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-61de2101267140ce.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 1, Monthly plan premium row for H1372 Plan 003: $69.00, which covers medical and drug coverage. The Part B premium is separate.\"}]\n```",
+ "usage": {
+  "input_tokens": 1712,
+  "output_tokens": 165,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

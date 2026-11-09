@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "28e22b4acec7d885.md",
+ "reply": "```json\n[{\"plan_id\": \"H2406-073-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$45\", \"page\": 8, \"quotes\": [\"Foot care Foot exams and $45 copay $80 copay\"], \"note\": \"Foot exams and treatment\"},\n {\"plan_id\": \"H2406-073-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$80\", \"page\": 8, \"quotes\": [\"Foot care Foot exams and $45 copay $80 copay\"], \"note\": \"Foot exams and treatment\"},\n {\"plan_id\": \"H2406-073-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$45\", \"page\": 8, \"quotes\": [\"Routine foot care $45 copay, 6 visits per\"]},\n {\"plan_id\": \"H2406-073-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"6\", \"limit\": \"per year\", \"page\": 8, \"quotes\": [\"Routine foot care $45 copay, 6 visits per\"]},\n {\"plan_id\": \"H2406-073-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$80\", \"page\": 8, \"quotes\": [\"$80 copay, 6 visits per\"]},\n {\"plan_id\": \"H2406-073-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"6\", \"limit\": \"per year\", \"page\": 8, \"quotes\": [\"$80 copay, 6 visits per\"]}]\n```",
+ "usage": {
+  "input_tokens": 2327,
+  "output_tokens": 1412,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-362ee075ea5896d4.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 10 Routine foot care row, out-of-network column: 30% coinsurance, 4 visits per year.\"}, {\"id\": 1, \"ok\": true, \"reason\": \"Page 10 Routine foot care row, in-network column: 4 visits per year.\"}, {\"id\": 2, \"ok\": true, \"reason\": \"Page 10 Routine foot care row, in-network column: $0 copay, 4 visits per year.\"}, {\"id\": 3, \"ok\": true, \"reason\": \"Page 10 Routine foot care row, out-of-network column: 4 visits per year.\"}]\n```",
+ "usage": {
+  "input_tokens": 2607,
+  "output_tokens": 365,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

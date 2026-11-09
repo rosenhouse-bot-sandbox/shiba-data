@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-808ccc78793ded84.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 140, Services not covered by Medicare table, for this plan: the Home-delivered meals row reads 'Not covered under any condition'. That matches supplemental not_covered with no amount, any setting and any network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2183,
+  "output_tokens": 265,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

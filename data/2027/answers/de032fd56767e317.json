@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "e41fce2e65cf35f2.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-428-2\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$130\", \"page\": 8, \"quotes\": [\"Emergency services at $130 copay $130 copay\"], \"note\": \"The in-network and out-of-network columns both show $130 copay, so this is one fact for both networks.\"},\n {\"plan_id\": \"H5216-428-2\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$130\", \"page\": 8, \"quotes\": [\"Emergency room - Hospital $130 copay\"], \"note\": \"Worldwide coverage is listed in the out-of-network column. The network could also be read as any.\"}]\n```",
+ "usage": {
+  "input_tokens": 2153,
+  "output_tokens": 1605,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

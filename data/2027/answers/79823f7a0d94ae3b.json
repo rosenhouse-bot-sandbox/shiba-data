@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "50159487a52ccddf.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H7006-018-0\", \"benefit\": \"plan_premium\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"premium\", \"amount\": \"$0\", \"unit\": \"per month\", \"limit\": \"\", \"page\": 5, \"quotes\": [\"Monthly Plan Premium (includes both medical and drugs) $0\"], \"note\": \"The row label wraps onto two lines, so the quote joins the full label with the first plan column's $0.\"},\n {\"plan_id\": \"H7006-021-0\", \"benefit\": \"plan_premium\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"premium\", \"amount\": \"$0\", \"unit\": \"per month\", \"limit\": \"\", \"page\": 5, \"quotes\": [\"Monthly Plan Premium (includes both medical and drugs) $0 $0\"], \"note\": \"The ATRIO Freedom (PPO) premium is the second $0 in this row. The quote takes the whole row, including the wrapped label, because $0 alone is not unique on the page. Both plan columns show $0, so the amount is the same either way.\"}]\n```",
+ "usage": {
+  "input_tokens": 3262,
+  "output_tokens": 1217,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

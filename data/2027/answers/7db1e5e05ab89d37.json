@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-cabbc3b82885b498.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 Monthly Premium row shows $0 for this single plan (DEVOTED GIVEBACK EXTRAS 025 OR). The Part B premium is separate and the $70 buydown is its own row.\"}]\n```",
+ "usage": {
+  "input_tokens": 2007,
+  "output_tokens": 232,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

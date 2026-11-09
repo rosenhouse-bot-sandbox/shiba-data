@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "dbc45a45d9843dd0.md",
+ "reply": "```json\n[{\"plan_id\": \"H3817-008-1\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"any\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$130\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 46,\n  \"quotes\": [\"In- and Out-of-network: $130 copay per visit\"], \"note\": \"Emergency care within the U.S. and its territories. The copay is waived if you are admitted to the hospital within 48 hours for the same condition.\"},\n {\"plan_id\": \"H3817-008-1\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"any\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$50\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 69,\n  \"quotes\": [\"Urgent care center office visit: In- and Out-of-network: $50 copay per visit\"], \"note\": \"Urgently needed services at an urgent care center office visit. The document names this setting, and 'any' is the closest available setting.\"},\n {\"plan_id\": \"H3817-008-1\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$130\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 71,\n  \"quotes\": [\"Emergency or urgent care: In- and Out-of-network: $130 copay per visit\"], \"note\": \"Worldwide emergency and urgent care. Page 30 calls it a supplemental benefit. No maximum plan payment is stated.\"}]\n```",
+ "usage": {
+  "input_tokens": 10161,
+  "output_tokens": 1597,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

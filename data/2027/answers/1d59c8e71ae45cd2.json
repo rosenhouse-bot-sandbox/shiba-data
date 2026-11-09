@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-4a3883a20d17f740.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 18, Podiatry Services (Foot Care) Medicare-covered row: Out-of-Network 20% coinsurance.\"}, {\"id\": 1, \"ok\": true, \"reason\": \"Page 18, Podiatry Services (Foot Care) Medicare-covered row: In-Network $30 copay.\"}]\n```",
+ "usage": {
+  "input_tokens": 1731,
+  "output_tokens": 130,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

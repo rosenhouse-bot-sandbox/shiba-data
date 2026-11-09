@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-2947683a555fc83c.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 'Monthly plan premium' row shows $0 per month for H1036-323-0. This is separate from the Part B premium reduction row.\"}]\n```",
+ "usage": {
+  "input_tokens": 2003,
+  "output_tokens": 76,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

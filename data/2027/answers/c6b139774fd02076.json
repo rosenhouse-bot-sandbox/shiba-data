@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "2947683a555fc83c.md",
+ "reply": "[{\"plan_id\": \"H1036-323-0\", \"benefit\": \"plan_premium\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"premium\", \"amount\": \"$0\", \"unit\": \"per month\", \"page\": 4, \"quotes\": [\"Monthly plan premium $0\"]}]",
+ "usage": {
+  "input_tokens": 3066,
+  "output_tokens": 109,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "557f08e61a7e8f42.md",
+ "reply": "```json\n[{\"plan_id\": \"H9003-001-0\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$150\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 62, \"quotes\": [\"$150 for Enhanced plan\", \"Cost-sharing for necessary emergency services you\"], \"note\": \"Copay is per Emergency Department visit. The chart says out-of-network emergency cost-sharing is the same as in-network.\"},\n {\"plan_id\": \"H9003-006-0\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$130\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 62, \"quotes\": [\"$130 for Standard plan\", \"Cost-sharing for necessary emergency services you\"], \"note\": \"Copay is per Emergency Department visit. The chart says out-of-network emergency cost-sharing is the same as in-network.\"},\n {\"plan_id\": \"H9003-009-0\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$130\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 62, \"quotes\": [\"$130 for Value plan members.\", \"Cost-sharing for necessary emergency services you\"], \"note\": \"Copay is per Emergency Department visit. The chart says out-of-network emergency cost-sharing is the same as in-network.\"},\n {\"plan_id\": \"H9003-001-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"covered\", \"page\": 62, \"quotes\": [\"You have worldwide emergency care coverage.\"]},\n {\"plan_id\": \"H9003-006-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"covered\", \"page\": 62, \"quotes\": [\"You have worldwide emergency care coverage.\"]},\n {\"plan_id\": \"H9003-009-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"covered\", \"page\": 62, \"quotes\": [\"You have worldwide emergency care coverage.\"]}]\n```",
+ "usage": {
+  "input_tokens": 6893,
+  "output_tokens": 2395,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

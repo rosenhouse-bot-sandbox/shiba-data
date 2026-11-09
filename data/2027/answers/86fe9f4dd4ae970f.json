@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "7dcf10accd77535d.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-011-0\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$130\", \"page\": 6, \"quotes\": [\"Emergency Care $130 copay\"], \"note\": \"Emergency care. The copay is waived if admitted to a hospital within 24 hours.\"},\n{\"plan_id\": \"H5439-011-0\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$50\", \"page\": 6, \"quotes\": [\"Urgently Needed Services $50 copay\"], \"note\": \"Urgently needed services. The copay is waived if admitted to a hospital within 24 hours.\"},\n{\"plan_id\": \"H5439-011-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$130\", \"page\": 6, \"quotes\": [\"Worldwide Emergency $130 copay\"], \"note\": \"Worldwide emergency coverage. The copay is not waived if admitted.\"},\n{\"plan_id\": \"H5439-011-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$130\", \"page\": 6, \"quotes\": [\"Worldwide Urgent Care $130 copay\"], \"note\": \"Worldwide urgent care coverage. The copay is not waived if admitted.\"},\n{\"plan_id\": \"H5439-011-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"max\", \"amount\": \"$50,000\", \"page\": 6, \"quotes\": [\"$50,000 maximum plan coverage. There is no worldwide coverage\"], \"note\": \"The document gives no time period for the $50,000 maximum, so limit is left blank. Network is set to any because worldwide care has no network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2197,
+  "output_tokens": 1949,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

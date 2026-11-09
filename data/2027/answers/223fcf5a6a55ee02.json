@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-be9deec855112c1d.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 100 Podiatry services row: 'Medicare-Covered Foot Care $40 copay' for podiatry services and visits covered by Medicare criteria. This matches medicare foot_care with a $40 in-network copay per visit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2214,
+  "output_tokens": 269,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

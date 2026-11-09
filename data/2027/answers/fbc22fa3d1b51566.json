@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "557f08e61a7e8f42.md",
+ "reply": "```json\n[{\"plan_id\": \"H9003-001-0\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"pool\": \"Kaiser Permanente at Home\", \"page\": 67, \"quotes\": [\"Home medical care not covered by Medicare for Enhanced, Standard, or Value plan members\", \"(Kaiser Permanente at Home)\", \"We cover medical care in your home that is not $0\"]},\n {\"plan_id\": \"H9003-006-0\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"pool\": \"Kaiser Permanente at Home\", \"page\": 67, \"quotes\": [\"Home medical care not covered by Medicare for Enhanced, Standard, or Value plan members\", \"(Kaiser Permanente at Home)\", \"We cover medical care in your home that is not $0\"]},\n {\"plan_id\": \"H9003-009-0\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"pool\": \"Kaiser Permanente at Home\", \"page\": 67, \"quotes\": [\"Home medical care not covered by Medicare for Enhanced, Standard, or Value plan members\", \"(Kaiser Permanente at Home)\", \"We cover medical care in your home that is not $0\"]}]\n```",
+ "usage": {
+  "input_tokens": 3553,
+  "output_tokens": 1235,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "aca9d3510177adcd.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-455-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"not_covered\", \"page\": 84, \"quotes\": [\"Routine foot care Some limited coverage provided according to Medicare guidelines,\"], \"note\": \"From the exclusions chart. Routine foot care is covered only under Medicare guidelines (e.g., diabetes), so supplemental routine foot care is read as not covered. The Medicare podiatry costs on page 63 ($40 copay in network, 50% coinsurance out of network) are left out because they apply only to the Specialist's Office setting, which is not in the setting list.\"}]\n```",
+ "usage": {
+  "input_tokens": 3740,
+  "output_tokens": 1140,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

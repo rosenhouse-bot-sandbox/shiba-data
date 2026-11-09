@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-808ccc78793ded84.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 73 worldwide emergency text says the plan covers worldwide emergency, urgent care and ambulance services up to $25,000 per lifetime, outside the U.S. and its territories. This matches a supplemental outside_us max of $25,000 per lifetime.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"The page 72 Worldwide Emergency Care row (services outside the United States) lists a $130 copay for emergency services worldwide. It sits under the supplemental benefits text and matches the item.\"}]\n```",
+ "usage": {
+  "input_tokens": 3250,
+  "output_tokens": 360,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

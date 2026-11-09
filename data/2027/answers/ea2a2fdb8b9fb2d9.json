@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "630e49b10e7ad131.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-317-0\", \"benefit\": \"meals\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"2 meals per day for 7 days, 4 times per calendar year\", \"page\": 59, \"quotes\": [\"$0 copayment\", \"you are eligible to receive 2 meals per day for 7 days at no extra cost to you\", \"Meal program limited to 4 times per calendar year.\"], \"note\": \"\"},\n {\"plan_id\": \"H1036-317-0\", \"benefit\": \"meals\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"14\", \"unit\": \"meals\", \"limit\": \"per inpatient stay, up to 4 times per calendar year\", \"page\": 59, \"quotes\": [\"14 nutritious meals will be delivered to your home.\", \"Meal program limited to 4 times per calendar year.\"], \"note\": \"The 14 meals are for each discharge from an inpatient stay. Meals must be requested within 30 days of discharge.\"}]\n```",
+ "usage": {
+  "input_tokens": 2718,
+  "output_tokens": 895,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

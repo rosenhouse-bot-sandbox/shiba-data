@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "dca4e04d7b6dc26b.md",
+ "reply": "```json\n[{\"plan_id\": \"H7006-021-0\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$150\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 49, \"quotes\": [\"$150 copay for each\"], \"note\": \"\"},\n{\"plan_id\": \"H7006-021-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$120\", \"unit\": \"\", \"limit\": \"\", \"page\": 49, \"quotes\": [\"$120 copay\"], \"note\": \"\"},\n{\"plan_id\": \"H7006-021-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"max\", \"amount\": \"$250,000\", \"unit\": \"\", \"limit\": \"per year\", \"page\": 49, \"quotes\": [\"$250,000 allowance every year for all covered worldwide services.\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 4757,
+  "output_tokens": 1477,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

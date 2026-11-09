@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-5f6896f5c437eeed.md",
+ "reply": "Both items match the Foot Care (Podiatry Services) row on page 11.\n\n```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 11 Foot Care (Podiatry Services) row: Medicare-Covered Foot Care $40 copay in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 11 Foot Care (Podiatry Services) row: Medicare-Covered Foot Care $40 copay out of network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2285,
+  "output_tokens": 159,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

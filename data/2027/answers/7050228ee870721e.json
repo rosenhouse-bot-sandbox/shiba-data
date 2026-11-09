@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "49912316cc55d9c5.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-001-0\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$30\", \"unit\": \"\", \"limit\": \"per month\", \"condition\": \"medically complex chronic condition\", \"pool\": \"Food & Home Card\", \"page\": 104, \"quotes\": [\"$30 per month\", \"The Food & Home Card is a benefit card with an\"], \"note\": \"Special supplemental benefit for the chronically ill (SSBCI). The card buys healthy foods and pays eligible utility, rent or mortgage costs. Unused allowance does not roll over to the next month.\"}]\n```",
+ "usage": {
+  "input_tokens": 5895,
+  "output_tokens": 793,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

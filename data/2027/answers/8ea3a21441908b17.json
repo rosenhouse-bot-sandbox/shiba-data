@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-77d83ba821336370.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 41, Section 3.2, says the plan doesn't cover emergency or urgently needed services outside the United States and its territories under any circumstances. That supports not_covered for emergency outside_us, applying to any network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2080,
+  "output_tokens": 200,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-f73d19eeaaf3a08a.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 57 Humana Well Dine row: $0 in-network copayment after a CHF inpatient stay in a hospital or SNF. The limit is up to two home-delivered meals per day for 30 days (up to 60 meals).\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"The page 100 exclusions list says home-delivered meals are not covered under any condition. But page 57 covers home-delivered meals after a CHF stay through Well Dine, so a blanket not-covered fact would mislead.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 57 Well Dine row: up to 60 meals over 30 days, in network, for members after a CHF inpatient stay.\"}]\n```",
+ "usage": {
+  "input_tokens": 3586,
+  "output_tokens": 578,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
