@@ -120,10 +120,11 @@ def record(found, **more):
 
 def layer_rows(db, sheet, plan_id, col):
     """The cell's layer rows in the site's order, without the columns their layer lacks."""
-    return [{k: v for k, v in r.items() if v is not None} for r in rows(db, """SELECT r.id, r.layer, r.step, r.prompt, r.line, r.value, r.url, r.pdf_page, r.quote,
-                              r.saw, r.source, r.author, r.note, c.hidden
-                       FROM layer_row r JOIN live_citation c ON c.layer_row = r.id
-                       WHERE r.sheet = ? AND r.plan_id = ? AND r.col = ? ORDER BY c.position""", sheet, plan_id, col)]
+    found = rows(db, """SELECT r.id, r.layer, r.step, r.prompt, r.line, r.value, r.url, r.pdf_page, r.quote,
+                               r.saw, r.source, r.author, r.note, c.hidden
+                        FROM layer_row r JOIN live_citation c ON c.layer_row = r.id
+                        WHERE r.sheet = ? AND r.plan_id = ? AND r.col = ? ORDER BY c.position""", sheet, plan_id, col)
+    return [{k: v for k, v in r.items() if v is not None} for r in found]
 
 
 def cell(db, sheet, plan_id, col):
@@ -146,7 +147,7 @@ def cell(db, sheet, plan_id, col):
     cms = rows(db, "SELECT file, field, title, value, meaning FROM cms_source WHERE plan_id = ? AND col = ?", plan_id, col)
     file, function = DRAFT_CODE[sheet]
     has_rule = sheet == "main" and col in present.COLUMNS
-    model = [r for r in cited if r["step"] in MODEL_STEPS + ("xref",)]
+    model = [r for r in cited if r.get("step") in MODEL_STEPS + ("xref",)]
     for r in model:
         r["answers"] = {"status": NOT_RECORDED if r["step"] == "xref" else NOT_YET}
     return {
