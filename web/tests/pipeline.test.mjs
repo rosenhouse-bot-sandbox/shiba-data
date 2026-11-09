@@ -59,7 +59,7 @@ test("neighbouring steps share a table", () => {
 const trace = ({ value = "$5", rule = "none", blanks = false, cited = false, presented = false } = {}) => ({
   cell: { value },
   rule: { status: rule },
-  model_citations: blanks ? { status: "traced", rows: [{ step: "blanks" }] } : { status: "not_traced_yet" },
+  model_citations: blanks ? { status: "traced", rows: [{ step: "blanks" }] } : { status: "not_recorded" },
   layers: { status: "traced", applied: [{ layer: "machine/blanks.csv", rows: cited ? [{}] : [] },
     { layer: "generated/presented.csv", rows: presented ? [{}] : [] }] },
 });
@@ -70,14 +70,14 @@ test("a CMS-only cell's chain is the plan, the draft and the live sheet", () => 
 });
 
 test("a cell with a rule reads facts from the documents but skips blank-cell citations", () => {
-  const steps = ids(trace({ rule: "not_traced_yet" }));
+  const steps = ids(trace({ rule: "not_recorded" }));
   for (const id of ["find-pdfs", "read-facts", "check-facts", "column-rules", "added-facts"]) assert.ok(steps.includes(id), id);
   assert.ok(!steps.includes("cite-blanks"));
 });
 
 test("only a cell the presented layer cites stacks it", () => {
-  assert.ok(!ids(trace({ rule: "not_traced_yet" })).includes("stack-presented"));
-  assert.ok(ids(trace({ rule: "not_traced_yet", presented: true })).includes("stack-presented"));
+  assert.ok(!ids(trace({ rule: "not_recorded" })).includes("stack-presented"));
+  assert.ok(ids(trace({ rule: "not_recorded", presented: true })).includes("stack-presented"));
 });
 
 test("a blank cell, or one with a blank-cell citation, goes through the blanks step and its documents", () => {
@@ -122,11 +122,17 @@ test("each step's strip reads the cell's own records", () => {
 });
 
 test("a strip says when the trace has no fields or quotes to name", () => {
-  const bare = { ...full, draft: { status: "traced", value: "$0", cms_fields: { status: "not_traced_yet" } },
+  const bare = { ...full, draft: { status: "traced", value: "$0", cms_fields: { status: "not_recorded" } },
     layers: { ...full.layers, live: { value: "$0", citations: [] } } };
   assert.deepEqual(stripOf("draft", bare), ["the plan's CMS fields", "$0"]);
   assert.deepEqual(stripOf("stack-draft", bare), ["draft $0", "live $0"]);
   assert.deepEqual(stripOf("publish", bare), ["live $0", "site cell $0 with no quotes"]);
+});
+
+test("a draft strip names its first six fields and counts the rest", () => {
+  const rows = Array.from({ length: 9 }, (_, i) => ({ field: `f${i}`, value: String(i) }));
+  const many = { ...full, draft: { ...full.draft, cms_fields: { status: "traced", rows } } };
+  assert.deepEqual(stripOf("draft", many), ["f0 = 0, f1 = 1, f2 = 2, f3 = 3, f4 = 4, f5 = 5 and 3 more fields", "$0"]);
 });
 
 test("a step whose record the trace lacks, or that has no strip, gets none", () => {

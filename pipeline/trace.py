@@ -3,14 +3,12 @@
 Usage:
   python3 -I pipeline/trace.py build <year> <out.sqlite> <commit sha> [<work_dir>]
   python3 -I pipeline/trace.py cell <db> <sheet> <plan_id> <col>
-  python3 -I pipeline/trace.py check <db>
   python3 -I pipeline/trace.py export <db> <out_dir>
   python3 -I pipeline/trace.py page <work_dir> <pdf sha256> <page>
 
-`cell` prints JSON. Each record has a status: "traced", "none" when no step touched the cell,
-"not_traced_yet" when the trace does not cover it yet, as for some DVHA cells, or "not_recorded" when nothing kept
-the record. With a work_dir from a run, `build` adds the run's prompts, their saved answers and the checks' outcomes.
-`check` fails if a main cell has a record left not traced yet.
+`cell` prints JSON. Each record has a status: "traced", "none" when no step touched the cell, or "not_recorded" when
+nothing kept the record. With a work_dir from a run, `build` adds the run's prompts, their saved answers and the
+checks' outcomes.
 `export` writes every cell's records once by content, which web/worker.js loads into D1.
 `page` prints a page's layout text from a run's <work_dir>/texts, where blobs.py puts it.
 """
@@ -23,11 +21,12 @@ import ask, blobs, eoc, extract, facts, fields, layers, present, steps, years
 REPO_URL = "https://github.com/rosenhouse-bot-sandbox/shiba-data"
 PROMPT_URL = "https://pdxplans.org/blobs/{}.txt"
 TRUSTED_WITHOUT_REVIEW = "trusted without review (#170)"
-TRACED, NONE, NOT_YET, NOT_RECORDED = "traced", "none", "not_traced_yet", "not_recorded"
+TRACED, NONE, NOT_RECORDED = "traced", "none", "not_recorded"
 MODEL_STEPS = ("blanks", "filled")
 FACT_FILES = {"document": "machine/document_facts.csv", "pbp": "generated/pbp_facts.csv", "added": present.ADDED}
 FACT_COLUMNS = ", ".join(f'f."{c}"' for c in facts.COLUMNS)
 DRAFT_CODE = {"main": ("pipeline/main_chart.py", "chart_row"), "dvha": ("pipeline/dvha.py", "dvha_row")}
+CMS_READS = {"main": "cms_reads.csv", "dvha": "dvha_reads.csv"}
 
 
 def read(path):
@@ -78,8 +77,8 @@ def build(year, out, sha, work=None):
         insert(db, "text", (dict(pdf=t["pdf"], plain=t["text"], layout=t["layout"], items=t["items"])
                             for t in read(data / "generated" / blobs.TEXTS)))
         insert(db, "draft_cell", sheet_cells(layers.generated(data)))
-        insert(db, "cms_source", (renamed(r) for r in read(data / "generated/cms_sources.csv")))
-        insert(db, "cms_read", (dict(renamed(r), position=n) for n, r in enumerate(read(data / "generated/cms_reads.csv"))))
+        insert(db, "cms_read", (dict(renamed(r), sheet=sheet, position=n) for sheet, file in CMS_READS.items()
+                                for n, r in enumerate(read(data / "generated" / file))))
         insert(db, "landscape_read", (dict(r, position=n) for n, r in enumerate(read(data / "generated/landscape_reads.csv"))))
         load_layers(db, data, checked)
         reviewed = {facts.identity(f) for f in read(data / "machine/reviewed_facts.csv")}
@@ -350,17 +349,12 @@ def cell(db, sheet, plan_id, col):
         d["text"] = {k: d.pop(k) for k in ("plain", "layout", "items")}
         d["unlinked_answers"] = unlinked(db, d["sha256"]) if build_row["checked"] else {"status": NOT_RECORDED}
     landscape = rows(db, "SELECT plan_field, field, value FROM landscape_read WHERE plan_id = ? ORDER BY position", plan_id)
-    if sheet == "main":
-        cms = rows(db, "SELECT file, field, value, title, meaning FROM cms_read WHERE plan_id = ? AND col = ? ORDER BY position",
-                   plan_id, col)
-        for r in cms:
-            if r["file"] == "plans.csv":
-                r["landscape"] = [dict(field=n["field"], value=n["value"]) for n in landscape if n["plan_field"] == r["field"]]
-        cms_fields = record(cms, rows=cms)
-    else:
-        # cms_sources.csv covers some DVHA columns.
-        cms = rows(db, "SELECT file, field, title, value, meaning FROM cms_source WHERE plan_id = ? AND col = ?", plan_id, col)
-        cms_fields = record(cms, rows=cms) if cms else {"status": NOT_YET}
+    cms = rows(db, "SELECT file, field, value, title, meaning FROM cms_read WHERE sheet = ? AND plan_id = ? AND col = ? "
+                   "ORDER BY position", sheet, plan_id, col)
+    for r in cms:
+        if r["file"] == "plans.csv":
+            r["landscape"] = [dict(field=n["field"], value=n["value"]) for n in landscape if n["plan_field"] == r["field"]]
+    cms_fields = record(cms, rows=cms)
     landscape_row = list({(n["field"], n["value"]): dict(field=n["field"], value=n["value"]) for n in landscape}.values())
     file, function = DRAFT_CODE[sheet]
     has_rule = col in present.SHEETS[sheet][0]
@@ -407,15 +401,6 @@ def cell(db, sheet, plan_id, col):
     }
 
 
-def check(db):
-    """Fails if any main cell has a record left not traced yet."""
-    left = [f"{plan_id} {col}: {path}" for plan_id, col in db.execute(
-        "SELECT plan_id, col FROM draft_cell WHERE sheet = 'main' ORDER BY plan_id, col")
-            for path in not_yet(cell(db, "main", plan_id, col))]
-    if left:
-        raise SystemExit("These records are not traced yet:\n" + "\n".join(left))
-
-
 # An exported cell names its build's commit as COMMIT, so a cell that did not change keeps its file and hash.
 COMMIT = "${commit}"
 
@@ -435,16 +420,6 @@ def export(db, out):
         json.dump(dict(sha=sha, year=year, cells=cells), f)
 
 
-def not_yet(records, path=""):
-    """The paths of the records whose status is not traced yet."""
-    if isinstance(records, list):
-        return [p for r in records for p in not_yet(r, path)]
-    if not isinstance(records, dict):
-        return []
-    here = [path.strip("/")] if records.get("status") == NOT_YET else []
-    return here + [p for k, v in records.items() for p in not_yet(v, f"{path}/{k}")]
-
-
 def page(work, sha256, n):
     return eoc.load_pages(blobs.text_path(work, "layout", sha256))[int(n)]
 
@@ -455,8 +430,6 @@ def main(command=None, *args):
     elif command == "cell" and len(args) == 4:
         db = sqlite3.connect(f"file:{args[0]}?mode=ro", uri=True)
         print(json.dumps(cell(db, *args[1:]), indent=1, ensure_ascii=False))
-    elif command == "check" and len(args) == 1:
-        check(sqlite3.connect(f"file:{args[0]}?mode=ro", uri=True))
     elif command == "export" and len(args) == 2:
         export(sqlite3.connect(f"file:{args[0]}?mode=ro", uri=True), args[1])
     elif command == "page" and len(args) == 3:

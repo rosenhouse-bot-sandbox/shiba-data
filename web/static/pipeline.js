@@ -210,6 +210,8 @@ function quotes(rows, trace) {
 const layer = (trace, name) => trace.layers.applied.find((l) => l.layer === name);
 const live = (t) => `live ${shownValue(t.layers.live.value)}`;
 
+const SHOWN_FIELDS = 6;
+
 // What each step took in and gave out for a cell, read from its trace.
 const STRIPS = {
   "list-plans": (t) => [`${t.plan.row.plan_id} in the Landscape file`, `plans.csv: ${t.plan.row.plan_name}`],
@@ -227,7 +229,8 @@ const STRIPS = {
     t.rule.held ? `held: ${t.rule.held}` : t.rule.lines.map((l) => `line ${l.line} ${shownValue(l.value)}`).join("; ")],
   "draft": (t) => {
     const fields = t.draft.cms_fields?.status === "traced" ? t.draft.cms_fields.rows.map((f) => `${f.field} = ${f.value}`) : [];
-    return [fields.length ? fields.join(", ") : "the plan's CMS fields", shownValue(t.draft.value)];
+    const more = fields.length > SHOWN_FIELDS ? ` and ${plural(fields.length - SHOWN_FIELDS, "more field")}` : "";
+    return [fields.length ? fields.slice(0, SHOWN_FIELDS).join(", ") + more : "the plan's CMS fields", shownValue(t.draft.value)];
   },
   "cite-blanks": (t) => [`${kinds(t)} page text`, quotes(t.model_citations.rows.filter((r) => r.step === "blanks"), t)],
   "stack-draft": (t) => [`draft ${shownValue(t.layers.draft)}`,

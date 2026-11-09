@@ -65,18 +65,6 @@ CREATE TABLE draft_cell (
   PRIMARY KEY (sheet, plan_id, col)
 );
 
--- generated/cms_sources.csv: the CMS fields behind some columns.
-CREATE TABLE cms_source (
-  plan_id TEXT NOT NULL REFERENCES plan,
-  col     TEXT NOT NULL,
-  file    TEXT NOT NULL,
-  field   TEXT NOT NULL,
-  title   TEXT NOT NULL,
-  value   TEXT NOT NULL,
-  meaning TEXT NOT NULL,
-  PRIMARY KEY (plan_id, col, file, field)
-);
-
 -- One row of a layer file. position is the row's place in its file, where a later edit wins.
 -- line is NULL for a whole cell.
 CREATE TABLE layer_row (
@@ -200,8 +188,9 @@ CREATE TABLE rule_fact (
 );
 CREATE INDEX rule_fact_cell ON rule_fact (sheet, plan_id, col);
 
--- Each plans.csv or PBP field a main-sheet cell read (main_chart.py).
+-- Each plans.csv or PBP field a cell's draft read (main_chart.py, dvha.py).
 CREATE TABLE cms_read (
+  sheet    TEXT NOT NULL,
   plan_id  TEXT NOT NULL REFERENCES plan,
   col      TEXT NOT NULL,
   position INTEGER NOT NULL,
@@ -210,7 +199,7 @@ CREATE TABLE cms_read (
   value    TEXT NOT NULL,
   title    TEXT NOT NULL,
   meaning  TEXT NOT NULL,
-  PRIMARY KEY (plan_id, col, position)
+  PRIMARY KEY (sheet, plan_id, col, position)
 );
 
 -- Each Landscape field a plans.csv column read (universe.py).
