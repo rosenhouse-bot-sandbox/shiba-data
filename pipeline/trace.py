@@ -68,6 +68,8 @@ def build(year, out, sha):
                         for t in read(data / "generated" / blobs.TEXTS)))
     insert(db, "draft_cell", sheet_cells(layers.generated(data)))
     insert(db, "cms_source", (renamed(r) for r in read(data / "generated/cms_sources.csv")))
+    insert(db, "cms_read", (dict(renamed(r), position=n) for n, r in enumerate(read(data / "generated/cms_reads.csv"))))
+    insert(db, "landscape_read", (dict(r, position=n) for n, r in enumerate(read(data / "generated/landscape_reads.csv"))))
     load_layers(db, data, checked)
     reviewed = {facts.identity(f) for f in read(data / "machine/reviewed_facts.csv")}
     insert(db, "fact", (dict(f, origin=origin, reviewed=int(facts.identity(f) in reviewed))
@@ -175,7 +177,19 @@ def cell(db, sheet, plan_id, col):
                             LEFT JOIN text t ON t.pdf = w.sha256 WHERE p.plan_id = ? ORDER BY d.position""", plan_id)
     for d in documents:
         d["text"] = {k: d.pop(k) for k in ("plain", "layout", "items")}
-    cms = rows(db, "SELECT file, field, title, value, meaning FROM cms_source WHERE plan_id = ? AND col = ?", plan_id, col)
+    landscape = rows(db, "SELECT plan_field, field, value FROM landscape_read WHERE plan_id = ? ORDER BY position", plan_id)
+    if sheet == "main":
+        cms = rows(db, "SELECT file, field, value, title, meaning FROM cms_read WHERE plan_id = ? AND col = ? ORDER BY position",
+                   plan_id, col)
+        for r in cms:
+            if r["file"] == "plans.csv":
+                r["landscape"] = [dict(field=n["field"], value=n["value"]) for n in landscape if n["plan_field"] == r["field"]]
+        cms_fields = record(cms, rows=cms)
+    else:
+        # cms_sources.csv covers some DVHA columns.
+        cms = rows(db, "SELECT file, field, title, value, meaning FROM cms_source WHERE plan_id = ? AND col = ?", plan_id, col)
+        cms_fields = record(cms, rows=cms) if cms else {"status": NOT_YET}
+    landscape_row = list({(n["field"], n["value"]): dict(field=n["field"], value=n["value"]) for n in landscape}.values())
     file, function = DRAFT_CODE[sheet]
     has_rule = sheet == "main" and col in present.COLUMNS
     considered, rule_record = rule(db, plan_id, col, code) if has_rule else ([], {"status": NONE})
@@ -186,11 +200,10 @@ def cell(db, sheet, plan_id, col):
         "cell": dict(year=build_row["year"], sheet=sheet, plan_id=plan_id, col=col, label=fields.labels(sheet)[col],
                      value=values[-1]["value"]),
         "plan": record(True, row=rows(db, "SELECT * FROM plan WHERE plan_id = ?", plan_id)[0],
-                       landscape_row={"status": NOT_YET}),
+                       landscape_row=record(landscape_row, fields=landscape_row)),
         "documents": record(documents, documents=documents),
         "draft": record(True, value=found[0]["value"], code=dict(file=file, function=function, url=code + file),
-                        # cms_sources.csv covers some columns. Milestone 3 covers the rest.
-                        cms_fields=record(cms, rows=cms) if cms else {"status": NOT_YET}),
+                        cms_fields=cms_fields),
         "answers": {"status": NOT_YET if has_rule else NONE},
         "fact_checks": {"status": NOT_YET if has_rule else NONE},
         "rule": rule_record,

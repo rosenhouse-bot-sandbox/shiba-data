@@ -1,11 +1,17 @@
 """Lists the MA plans offered in every given county of a state, from the CMS Landscape CSV.
 
-Usage: python3 -I universe.py <Landscape.csv> <out.csv> <state> <county>...
+Usage: python3 -I universe.py <Landscape.csv> <out.csv> <reads.csv> <state> <county>...
+reads.csv lists the Landscape fields behind each plan's columns.
 """
 import csv
+import os
 import sys
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from reads import logged  # noqa: E402
+
 EXCLUDED_SNP_TYPES = ("Dual-Eligible", "Institutional")
+LANDSCAPE = "Landscape"
 
 
 def section(row):
@@ -48,31 +54,51 @@ def full_extra_help_premium(row):
     return f"${total:,.2f}".replace(".00", "")
 
 
+def has_d(row):
+    return row["Part D Coverage Indicator"] == "Yes"
+
+
+# Each plans.csv column, computed from the plan's Landscape row.
+FIELDS = {
+    "section": section,
+    "plan_id": plan_id,
+    "plan_name": lambda row: row["Plan Name"],
+    "plan_type": lambda row: row["Plan Type"],
+    "organization": lambda row: row["Organization Marketing Name"],
+    "premium": lambda row: money(row["Monthly Consolidated Premium (Part C + D)"] if has_d(row) else row["Part C Premium"]),
+    "premium_full_extra_help": full_extra_help_premium,
+    "moop_in_network": lambda row: money(row["In-Network Maximum Out-of-Pocket (MOOP) Amount"]),
+    "part_d_deductible": lambda row: money(row["Annual Part D Deductible Amount"]) if has_d(row) else "n/a",
+    "tier_without_part_d_deductible": lambda row: row["Offers Drug Tier with No Part D Deductible"] if has_d(row) else "n/a",
+    "c_snp_conditions": lambda row: row["Chronic or Disabling Condition SNP (C-SNP) Condition Type"],
+    "overall_star_rating": lambda row: row["Overall Star Rating"],
+}
+READS = ["plan_id", "plan_field", "field", "value"]
+
+
 def to_record(row):
-    has_d = row["Part D Coverage Indicator"] == "Yes"
-    return {
-        "section": section(row),
-        "plan_id": plan_id(row),
-        "plan_name": row["Plan Name"],
-        "plan_type": row["Plan Type"],
-        "organization": row["Organization Marketing Name"],
-        "premium": money(row["Monthly Consolidated Premium (Part C + D)"] if has_d else row["Part C Premium"]),
-        "premium_full_extra_help": full_extra_help_premium(row),
-        "moop_in_network": money(row["In-Network Maximum Out-of-Pocket (MOOP) Amount"]),
-        "part_d_deductible": money(row["Annual Part D Deductible Amount"]) if has_d else "n/a",
-        "tier_without_part_d_deductible": row["Offers Drug Tier with No Part D Deductible"] if has_d else "n/a",
-        "c_snp_conditions": row["Chronic or Disabling Condition SNP (C-SNP) Condition Type"],
-        "overall_star_rating": row["Overall Star Rating"],
-    }
+    return {k: f(row) for k, f in FIELDS.items()}
 
 
-def main(src, out, state, *counties):
-    with open(src, encoding="utf-8-sig") as f:
-        records = [to_record(r) for r in select_plans(csv.DictReader(f), state, counties)]
-    with open(out, "w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=list(records[0]))
+def reads(row):
+    """The Landscape fields each plans.csv column read: {plan_id, plan_field, field, value} rows."""
+    return [dict(plan_id=plan_id(row), plan_field=k, field=field, value=value)
+            for k, f in FIELDS.items() for _, field, value in logged(f, (LANDSCAPE, row))[1]]
+
+
+def write(path, columns, rows):
+    with open(path, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=columns)
         w.writeheader()
-        w.writerows(records)
+        w.writerows(rows)
+
+
+def main(src, out, reads_out, state, *counties):
+    with open(src, encoding="utf-8-sig") as f:
+        selected = select_plans(csv.DictReader(f), state, counties)
+    records = [to_record(r) for r in selected]
+    write(out, list(records[0]), records)
+    write(reads_out, READS, [r for row in selected for r in reads(row)])
     print(f"{len(records)} plans -> {out}")
 
 

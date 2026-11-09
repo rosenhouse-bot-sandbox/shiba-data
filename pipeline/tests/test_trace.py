@@ -2,7 +2,7 @@ import os, sqlite3, sys, tempfile, unittest
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path[:0] = [os.path.dirname(HERE), os.path.join(os.path.dirname(os.path.dirname(HERE)), "web")]
-import blobs, build, fields, layers, present, trace, years
+import blobs, build, fields, layers, present, reads, trace, years
 
 SHA = "0" * 40
 AMBULANCE = ("main", "H1036-153-0", "AB_ambulance")
@@ -110,8 +110,6 @@ class TraceTest(unittest.TestCase):
         self.assertEqual(records["model_citations"]["status"], trace.NOT_YET)
         for name in ("answers", "fact_checks"):
             self.assertEqual(records[name]["status"], trace.NOT_YET, name)
-        self.assertEqual(records["draft"]["cms_fields"]["status"], trace.NOT_YET)
-        self.assertEqual(records["plan"]["landscape_row"]["status"], trace.NOT_YET)
 
     def test_lists_the_facts_each_line_used_and_why_the_rule_set_others_aside(self):
         rule = self.cell(*AMBULANCE)["rule"]
@@ -143,8 +141,26 @@ class TraceTest(unittest.TestCase):
         self.assertNotIn("C_premium", present.COLUMNS)
         self.assertEqual(self.cell("main", "H1036-153-0", "C_premium")["rule"]["status"], trace.NONE)
 
-    def test_lists_the_cms_fields_where_cms_sources_has_them(self):
+    def test_lists_the_pbp_fields_a_cell_read(self):
+        cms = self.cell(*AMBULANCE)["draft"]["cms_fields"]
+        self.assertIn(("pbp_b10_amb_trans", "pbp_b10a_copay_gas_amt_min", "325.00"),
+                      [(r["file"], r["field"], r["value"]) for r in cms["rows"]])
+        self.assertIn(("pbp_b10_amb_trans", reads.ROWS, "1"), [(r["file"], r["field"], r["value"]) for r in cms["rows"]])
+
+    def test_lists_the_landscape_fields_behind_a_plans_csv_field(self):
         cms = self.cell("main", "H3805-048-0", "D_premium_full_extra_help")["draft"]["cms_fields"]
+        self.assertEqual([r["field"] for r in cms["rows"]], ["premium_full_extra_help"])
+        self.assertIn("Part C Premium", [n["field"] for n in cms["rows"][0]["landscape"]])
+
+    def test_says_none_for_a_cell_that_read_no_cms_field(self):
+        self.assertEqual(self.cell("main", "H3805-048-0", "U_naturopath")["draft"]["cms_fields"]["status"], trace.NONE)
+
+    def test_lists_the_landscape_fields_behind_the_plan(self):
+        fields = self.cell(*AMBULANCE)["plan"]["landscape_row"]["fields"]
+        self.assertIn(("Plan Name", "Humana Total Complete (HMO)"), [(f["field"], f["value"]) for f in fields])
+
+    def test_lists_the_cms_fields_where_cms_sources_has_them_on_dvha(self):
+        cms = self.cell("dvha", "H3805-048-0", "D_premium_full_extra_help")["draft"]["cms_fields"]
         self.assertEqual(cms["status"], trace.TRACED)
         self.assertIn("Part C Premium", [r["field"] for r in cms["rows"]])
 

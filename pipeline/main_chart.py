@@ -1,6 +1,7 @@
 """Generates the main MA chart (columns C..AB) from the CMS Landscape and PBP Benefits files.
 
-Usage: python3 -I main_chart.py <plans.csv> <pbp_dir> <out.csv>
+Usage: python3 -I main_chart.py <plans.csv> <pbp_dir> <out.csv> <reads.csv>
+reads.csv lists the plans.csv and PBP fields behind each cell.
 Each cell is in-network unless noted. Column rules are in fields.py.
 """
 import csv
@@ -8,8 +9,10 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import cms_sources  # noqa: E402
 import fields  # noqa: E402
 import pbp  # noqa: E402
+from reads import ROWS, logged  # noqa: E402
 
 
 def num(v):
@@ -196,7 +199,7 @@ def medical_deductible(plan):
 
 def mandatory(row, prefix):
     """True when any benefit-description AMO field under prefix is Mandatory (2) or Both (4)."""
-    return any(k.startswith(prefix) and "_amo" in k and v in ("2", "4") for k, v in row.items())
+    return any(row.get(k) in ("2", "4") for k in list(row) if k.startswith(prefix) and "_amo" in k)
 
 
 def part_b_reduction(plan):
@@ -206,53 +209,67 @@ def part_b_reduction(plan):
     return money(num(d["pbp_d_mco_pay_reduct_amt"])) if d.get("pbp_d_mco_pay_reduct_amt") else "●"
 
 
-def dots(plan):
-    b7 = first(plan, "pbp_b7_health_prof")
-    b13 = first(plan, "pbp_b13_other_services")
-    b14 = first(plan, "pbp_b14_preventive")
-    b14c = b14.get("pbp_b14c_bendesc_ehc", "").split(";")
-    return {
-        "P_vision": mandatory(first(plan, "pbp_b17_eye_exams_wear"), "pbp_b17"),
-        "Q_hearing": mandatory(first(plan, "pbp_b18_hearing_exams_aids"), "pbp_b18"),
-        "R_dental": mandatory(first(plan, "pbp_b16_dental"), "pbp_b16b") or
-                    mandatory(first(plan, "pbp_b16_dental"), "pbp_b16c"),
-        "S_acupuncture": b13.get("pbp_b13a_bendesc_yn") == "1" and mandatory(b13, "pbp_b13a"),
-        "T_chiropractic": flag(b7, "pbp_b7b_bendesc_ehc", 2) and b7.get("pbp_b7b_bendesc_amo_rc") in ("2", "4"),
-        "U_naturopath": False,
-        "V_massage": "14c18" in b14c,
-        "W_fitness": "14c4" in b14c,
-        "X_transportation": first(plan, "pbp_b10_amb_trans").get("pbp_b10b_bendesc_yn") == "1",
-        "Y_otc": b13.get("pbp_b13b_bendesc_otc") == "1",
-        "Z_part_b_reduction": part_b_reduction(plan),
-        "AA_opt_packages": bool(plan.get("pbp_Section_D_opt")),
-    }
+def b14c(plan):
+    return first(plan, "pbp_b14_preventive").get("pbp_b14c_bendesc_ehc", "").split(";")
+
+
+def dot(present):
+    return "●" if present is True else present or ""
+
+
+# Each column of the main chart, from the plan's plans.csv row and its PBP files.
+COLUMNS = {
+    "C_premium": lambda landscape, plan: landscape["premium"],
+    "D_premium_full_extra_help": lambda landscape, plan: landscape["premium_full_extra_help"],
+    "E_moop": lambda landscape, plan: moop(plan),
+    "F_primary_care": lambda landscape, plan: in_out(plan, copay_or_coins(
+        first(plan, "pbp_b7_health_prof"), "pbp_b7a_copay_amt_mc_min", "pbp_b7a_copay_amt_mc_max",
+        "pbp_b7a_coins_pct_mc_min", "pbp_b7a_coins_pct_mc_max"), "7a"),
+    "G_specialist": lambda landscape, plan: in_out(plan, copay_or_coins(
+        first(plan, "pbp_b7_health_prof"), "pbp_b7d_copay_amt_mc_min", "pbp_b7d_copay_amt_mc_max",
+        "pbp_b7d_coins_pct_mc_min", "pbp_b7d_coins_pct_mc_max"), "7d"),
+    "H_inpatient": lambda landscape, plan: inpatient(plan),
+    "I_outpatient_surgery": lambda landscape, plan: outpatient_surgery(plan),
+    "J_outpatient_rehab": lambda landscape, plan: rehab(plan),
+    "K_tests_labs": lambda landscape, plan: tests_labs(plan),
+    "L_xray_imaging": lambda landscape, plan: imaging(plan),
+    "M_part_b_drugs": lambda landscape, plan: part_b_drugs(plan),
+    "N_pharmacy_deductible": lambda landscape, plan: pharmacy_deductible(plan, landscape),
+    "O_medical_deductible": lambda landscape, plan: medical_deductible(plan),
+    "P_vision": lambda landscape, plan: dot(mandatory(first(plan, "pbp_b17_eye_exams_wear"), "pbp_b17")),
+    "Q_hearing": lambda landscape, plan: dot(mandatory(first(plan, "pbp_b18_hearing_exams_aids"), "pbp_b18")),
+    "R_dental": lambda landscape, plan: dot(mandatory(first(plan, "pbp_b16_dental"), "pbp_b16b")
+                                            or mandatory(first(plan, "pbp_b16_dental"), "pbp_b16c")),
+    "S_acupuncture": lambda landscape, plan: dot(first(plan, "pbp_b13_other_services").get("pbp_b13a_bendesc_yn") == "1"
+                                                 and mandatory(first(plan, "pbp_b13_other_services"), "pbp_b13a")),
+    "T_chiropractic": lambda landscape, plan: dot(flag(first(plan, "pbp_b7_health_prof"), "pbp_b7b_bendesc_ehc", 2)
+                                                  and first(plan, "pbp_b7_health_prof").get("pbp_b7b_bendesc_amo_rc")
+                                                  in ("2", "4")),
+    "U_naturopath": lambda landscape, plan: "",
+    "V_massage": lambda landscape, plan: dot("14c18" in b14c(plan)),
+    "W_fitness": lambda landscape, plan: dot("14c4" in b14c(plan)),
+    "X_transportation": lambda landscape, plan: dot(first(plan, "pbp_b10_amb_trans").get("pbp_b10b_bendesc_yn") == "1"),
+    "Y_otc": lambda landscape, plan: dot(first(plan, "pbp_b13_other_services").get("pbp_b13b_bendesc_otc") == "1"),
+    "Z_part_b_reduction": lambda landscape, plan: dot(part_b_reduction(plan)),
+    "AA_opt_packages": lambda landscape, plan: dot(bool(plan.get("pbp_Section_D_opt"))),
+    "AB_ambulance": lambda landscape, plan: ambulance(plan),
+}
+PLANS = "plans.csv"
+READS = ["plan_id", "column", "file", "field", "value", "title", "meaning"]
 
 
 def chart_row(landscape, plan):
-    b7 = first(plan, "pbp_b7_health_prof")
-    row = {
-        "section": landscape["section"],
-        "plan_id": landscape["plan_id"],
-        "plan_name": landscape["plan_name"],
-        "C_premium": landscape["premium"],
-        "D_premium_full_extra_help": landscape["premium_full_extra_help"],
-        "E_moop": moop(plan),
-        "F_primary_care": in_out(plan, copay_or_coins(b7, "pbp_b7a_copay_amt_mc_min", "pbp_b7a_copay_amt_mc_max",
-                                                      "pbp_b7a_coins_pct_mc_min", "pbp_b7a_coins_pct_mc_max"), "7a"),
-        "G_specialist": in_out(plan, copay_or_coins(b7, "pbp_b7d_copay_amt_mc_min", "pbp_b7d_copay_amt_mc_max",
-                                                    "pbp_b7d_coins_pct_mc_min", "pbp_b7d_coins_pct_mc_max"), "7d"),
-        "H_inpatient": inpatient(plan),
-        "I_outpatient_surgery": outpatient_surgery(plan),
-        "J_outpatient_rehab": rehab(plan),
-        "K_tests_labs": tests_labs(plan),
-        "L_xray_imaging": imaging(plan),
-        "M_part_b_drugs": part_b_drugs(plan),
-        "N_pharmacy_deductible": pharmacy_deductible(plan, landscape),
-        "O_medical_deductible": medical_deductible(plan),
-    }
-    row.update({k: "●" if v is True else v or "" for k, v in dots(plan).items()})
-    row["AB_ambulance"] = ambulance(plan)
-    return row
+    return {"section": landscape["section"], "plan_id": landscape["plan_id"], "plan_name": landscape["plan_name"]} | {
+        column: compute(landscape, plan) for column, compute in COLUMNS.items()}
+
+
+def reads(landscape, plan, dictionary):
+    """The plans.csv and PBP fields each column read, with each PBP field's title and decoded value."""
+    return [dict(plan_id=landscape["plan_id"], column=column, file=file, field=field, value=value,
+                 title=dictionary.get((file, field), {}).get("title", "") if field != ROWS else "",
+                 meaning=cms_sources.meaning(dictionary, file, field, value) if field != ROWS else "")
+            for column, compute in COLUMNS.items()
+            for file, field, value in logged(compute, (PLANS, landscape), ("plan", plan))[1]]
 
 
 def write_csv(path, rows):
@@ -272,10 +289,15 @@ def sheet(plans, data, make_row, dvha=False):
     return rows
 
 
-def main(plans_csv, pbp_dir, out_csv):
+def main(plans_csv, pbp_dir, out_csv, reads_csv):
     plans = list(csv.DictReader(open(plans_csv)))
     data = pbp.load(pbp_dir, [p["plan_id"] for p in plans])
     write_csv(out_csv, sheet(plans, data, chart_row))
+    dictionary = pbp.load_dictionary(pbp_dir)
+    with open(reads_csv, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=READS)
+        w.writeheader()
+        w.writerows(r for p in plans for r in reads(p, data[p["plan_id"]], dictionary))
 
 
 if __name__ == "__main__":
