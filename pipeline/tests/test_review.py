@@ -35,7 +35,7 @@ def answering(rejected=(), asked=None):
     return answer
 
 
-HELD = present.VERSIONS[1]
+HELD = present.held(DATA, 1)
 TRUSTED = review.cited(DATA, COMMITTED, HELD)
 
 
@@ -55,6 +55,11 @@ class ToReviewTest(unittest.TestCase):
     def test_reviews_the_facts_that_a_released_cell_cites(self):
         released = review.to_review(DATA, TRUSTED, COMMITTED, present.held(DATA, 2))
         self.assertEqual({(f["plan_id"], f["benefit"].split(".")[0]) for f in released}, {("H2923-009-0", "tests")})
+
+    def test_reviews_the_facts_that_a_dvha_cell_cites(self):
+        released = review.to_review(DATA, review.cited(DATA, COMMITTED, present.held(DATA, 2)), COMMITTED,
+                                    present.held(DATA, 3))
+        self.assertEqual({f["benefit"] for f in released}, {"plan_premium"})
 
     def test_an_unchanged_fact_set_needs_no_review(self):
         self.assertEqual(review.to_review(DATA, TRUSTED, COMMITTED, HELD), [])

@@ -514,6 +514,24 @@ class PackagesTest(unittest.TestCase):
                                                         network="out")), [("", [])])
 
 
+class PlanPremiumTest(unittest.TestCase):
+    def test_the_best_source_gives_the_premium_in_dollars(self):
+        eoc, sb = (priced("plan_premium", amount="$69.00", cost_kind="premium", source=s) for s in ("EOC", "SB"))
+        self.assertEqual(column(present.plan_premium, sb, eoc), [("$69", [eoc])])
+        self.assertEqual(column(present.plan_premium, eoc, dict(eoc, amount="$69")), [("$69", [eoc, dict(eoc, amount="$69")])])
+
+    def test_skips_conditional_package_tiered_and_other_kinds_of_premiums(self):
+        found = [priced("plan_premium", amount="$5", cost_kind="copay"),
+                 priced("plan_premium", amount="$7", cost_kind="premium", provider_tier="Tier 1"),
+                 priced("plan_premium", amount="$0", cost_kind="premium", condition="with Extra Help"),
+                 priced("plan_premium", amount="$9", cost_kind="premium", package="Rider")]
+        self.assertEqual(column(present.plan_premium, *found), [("", [])])
+
+    def test_two_premiums_from_the_best_source_present_nothing(self):
+        found = [priced("plan_premium", amount=a, cost_kind="premium") for a in ("$10", "$20")]
+        self.assertEqual(column(present.plan_premium, *found), [("", [])])
+
+
 def presented_cells(data, column):
     return {p: [value for value, _ in got] for p, got in present.lines(data, column).items()}
 
@@ -568,8 +586,8 @@ class WriteTest(unittest.TestCase):
         data = years.data_dir(YEAR)
         f = facts.read(data / "machine/document_facts.csv")[0]
         plan = f["plan_id"]
-        with mock.patch.object(present, "lines", lambda data, column: {plan: [("", [f])]}), \
-                mock.patch.object(present, "COLUMNS", {"S_acupuncture": None}):
+        with mock.patch.object(present, "lines", lambda data, column, sheet: {plan: [("", [f])]}), \
+                mock.patch.dict(present.SHEETS, {"main": ({"S_acupuncture": None}, {}), "dvha": ({}, {})}):
             rows = present.layer_rows(data)
         self.assertEqual({(r["plan_id"], r["column"], r["value"]) for r in rows}, {(plan, "S_acupuncture", "")})
 
@@ -579,13 +597,21 @@ class WriteTest(unittest.TestCase):
         cells = {v: {(r["column"], r["plan_id"]) for r in present.layer_rows(data, v)} for v in (1, 2)}
         self.assertEqual(cells[2] - cells[1], {cell})
 
+    def test_a_held_main_cell_does_not_hold_the_dvha_cell_of_the_same_name(self):
+        self.assertNotEqual(present.cell("main", "C_premium", "H1"), present.cell("dvha", "C_premium", "H1"))
+
+    def test_version_3_presents_the_dvha_premium(self):
+        data = years.data_dir(YEAR)
+        cells = {v: {(r["sheet"], r["column"]) for r in present.layer_rows(data, v)} for v in (2, 3)}
+        self.assertEqual(cells[3] - cells[2], {("dvha", "C_premium")})
+
     @mock.patch.dict(os.environ, {present.CANDIDATE: ""})
     def test_the_pinned_version_holds_its_cells(self):
         data = years.data_dir(YEAR)
-        self.assertEqual(present.held(data), present.VERSIONS[json.load(open(data / "steps.json"))["present"]])
-        self.assertEqual(present.held(data, 2), present.VERSIONS[2])
-        with mock.patch.dict(os.environ, {present.CANDIDATE: "filled@6, present@2"}):
-            self.assertEqual(present.held(data), present.VERSIONS[2])
+        self.assertEqual(present.held(data), present.held(data, json.load(open(data / "steps.json"))["present"]))
+        self.assertEqual(present.held(data, 3), present.VERSIONS[3])
+        with mock.patch.dict(os.environ, {present.CANDIDATE: "filled@6, present@3"}):
+            self.assertEqual(present.held(data), present.VERSIONS[3])
 
     def test_a_held_reason_does_not_imply_that_people_read_the_documents(self):
         for why in present.HELD_1.values():
@@ -594,7 +620,7 @@ class WriteTest(unittest.TestCase):
     def test_refuses_a_second_line_for_a_one_line_cell(self):
         data = years.data_dir(YEAR)
         plan = layers.generated(data)["main"][0]["plan_id"]
-        with mock.patch.object(present, "lines", lambda data, column: {plan: [("$1", []), ("$2", [])]}):
+        with mock.patch.object(present, "lines", lambda data, column, sheet: {plan: [("$1", []), ("$2", [])]}):
             with self.assertRaisesRegex(ValueError, f"{plan} .* has one line"):
                 present.layer_rows(data)
 
@@ -611,7 +637,8 @@ TRIAGED = {
 class ExpectedTest(unittest.TestCase):
     def test_the_committed_layer_is_current(self):
         data = years.data_dir(YEAR)
-        self.assertEqual(layers.rows(data / layers.PRESENTED), present.layer_rows(data))
+        pinned = json.load(open(data / "steps.json"))["present"]
+        self.assertEqual(layers.rows(data / layers.PRESENTED), present.layer_rows(data, pinned))
 
     def test_presents_every_expected_line(self):
         data = years.data_dir(YEAR)
@@ -634,6 +661,18 @@ class ExpectedTest(unittest.TestCase):
                              {(p, str(n) if " | " in generated[p][column] else "")
                               for p, got in present.lines(data, column).items() if (column, p) not in present.held(data)
                               for n, (v, cited) in enumerate(got, 1) if v or cited})
+
+
+class DvhaTest(unittest.TestCase):
+    def test_presents_the_live_value_of_each_cell_it_does_not_hold(self):
+        data = years.data_dir(YEAR)
+        live = {r["plan_id"]: r for r in layers.live(data)[0]["dvha"]}
+        held = present.held(data, max(present.VERSIONS))
+        for column in present.DVHA:
+            got = {p: v for p, ((v, cited),) in present.lines(data, column, sheet="dvha").items()
+                   if present.cell("dvha", column, p) not in held and cited}
+            self.assertTrue(got, column)
+            self.assertEqual({p: v for p, v in got.items() if v != live[p][column]}, {}, column)
 
 
 class ExplainTest(unittest.TestCase):
@@ -769,9 +808,9 @@ class ExplainTest(unittest.TestCase):
         found = present.plan_facts(data)
         unused_benefits, noted_benefits = {}, {}
         for plan_id, name in organization.items():
-            for column in present.COLUMNS:
+            for sheet, column in ((s, c) for s, (rules, _) in present.SHEETS.items() for c in rules):
                 with self.subTest(plan_id=plan_id, column=column):
-                    for identity, reasons in present.explain(name, found[plan_id], column)[1].items():
+                    for identity, reasons in present.explain(name, found[plan_id], column, sheet)[1].items():
                         self.assertNotIn(present.UNNOTED, reasons)
                         self.assertTrue(all(isinstance(r, str) and r for r in reasons), reasons)
                         benefit = next(f["benefit"] for f in found[plan_id] if facts.identity(f) == identity)
@@ -802,8 +841,9 @@ class ExplainTest(unittest.TestCase):
         self.assertIsNone(present._reasons.get())
 
     def test_every_rule_names_its_benefits(self):
-        self.assertEqual(set(present.LEAVES), set(present.COLUMNS))
-        self.assertLessEqual({leaf for leaves in present.LEAVES.values() for leaf in leaves}, set(facts.BENEFITS))
+        for rules, leaves in present.SHEETS.values():
+            self.assertEqual(set(leaves), set(rules))
+            self.assertLessEqual({leaf for benefits in leaves.values() for leaf in benefits}, set(facts.BENEFITS))
 
 
 if __name__ == "__main__":

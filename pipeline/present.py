@@ -428,6 +428,18 @@ def packages(organization, found):
     return [("●", top(sold))] if sold else [("", top(none) if none else [])]
 
 
+def plan_premium(organization, found):
+    """Shows the monthly plan premium. Two premiums from the best source show nothing."""
+    @unless("it is not a monthly plan premium")
+    def ok(f):
+        return f["cost_kind"] == "premium" and not (f["condition"] or f["package"] or f["provider_tier"])
+
+    got = best(found, "plan_premium", "any", ok)
+    one = len({facts.number(a) for a in amounts(got)}) == 1
+    got = keep(got, lambda f: one, lambda f: "the best source gives more than one premium")
+    return [(show(got), got)]
+
+
 # Added facts fill in what readers miss, and each note says why. Only they use cost kind "unclear".
 ADDED = "added_facts.csv"
 
@@ -465,6 +477,16 @@ LEAVES = {"L_xray_imaging": ("imaging",), "AB_ambulance": ("ambulance",), "I_out
           "Q_hearing": ("hearing",), "W_fitness": ("fitness",), "Y_otc": ("otc",), "AA_opt_packages": ("packages",)}
 
 
+DVHA = {"C_premium": plan_premium}
+DVHA_LEAVES = {"C_premium": ("plan_premium",)}
+SHEETS = {"main": (COLUMNS, LEAVES), "dvha": (DVHA, DVHA_LEAVES)}
+
+
+def cell(sheet, column, plan_id):
+    """A cell's key in a version's held cells."""
+    return (column if sheet == "main" else f"{sheet}.{column}", plan_id)
+
+
 def related(f, leaves):
     return any(facts.covers(f["benefit"], leaf) or facts.covers(leaf, f["benefit"]) for leaf in leaves)
 
@@ -473,12 +495,12 @@ def related(f, leaves):
 UNNOTED = "no filter recorded a reason"
 
 
-def explain(organization, found, column):
+def explain(organization, found, column, sheet="main"):
     """(lines, set_aside): the rule's lines, and {identity: reasons} for each fact for a benefit in LEAVES that the
     rule did not use."""
     token = _reasons.set({})
     try:
-        got = COLUMNS[column](organization, found)
+        got = SHEETS[sheet][0][column](organization, found)
         reasons = _reasons.get()
     finally:
         _reasons.reset(token)
@@ -489,7 +511,7 @@ def explain(organization, found, column):
             return [f"the column does not use {f['benefit']}"]
         return sorted(set(reasons[facts.identity(f)])) or [UNNOTED]
     return got, {facts.identity(f): why(f) for f in found
-                 if related(f, LEAVES[column]) and facts.identity(f) not in used}
+                 if related(f, SHEETS[sheet][1][column]) and facts.identity(f) not in used}
 
 
 def presents(cited):
@@ -497,12 +519,12 @@ def presents(cited):
     return any(f["source"] in facts.DOCUMENTS for f in cited)
 
 
-def lines(data, column, document=None):
-    """{plan_id: [(value, cited facts), ...]} for each plan on the main sheet. See plan_facts for document."""
+def lines(data, column, document=None, sheet="main"):
+    """{plan_id: [(value, cited facts), ...]} for each plan on the sheet. See plan_facts for document."""
     organization = {r["plan_id"]: r["organization"] for r in layers.rows(data / "generated" / "plans.csv")}
     found = plan_facts(data, document)
-    return {r["plan_id"]: COLUMNS[column](organization[r["plan_id"]], found[r["plan_id"]])
-            for r in layers.generated(data)["main"]}
+    return {r["plan_id"]: SHEETS[sheet][0][column](organization[r["plan_id"]], found[r["plan_id"]])
+            for r in layers.generated(data)[sheet]}
 
 
 # Each version names the cells that keep their other layers' value, because the facts miss part of them.
@@ -517,12 +539,18 @@ HELD_1 = {
 }
 CANDIDATE = "SHIBA_CANDIDATE"
 VERSIONS = {1: HELD_1, 2: {cell: why for cell, why in HELD_1.items() if cell != ("K_tests_labs", "H2923-009-0")}}
+VERSIONS[3] = VERSIONS[2]
+# The version that first presents each DVHA column. Earlier versions hold its cells.
+DVHA_SINCE = {"C_premium": 3}
 
 
 def held(data, version=None):
     """The cells that a version holds, by default the run's candidate or else the pinned one."""
     candidate = ",".join(c for c in os.environ.get(CANDIDATE, "").split(",") if c.strip().startswith("present@"))
-    return VERSIONS[version or steps.versions(data, {"present": VERSIONS}, candidate)["present"]]
+    version = version or steps.versions(data, {"present": VERSIONS}, candidate)["present"]
+    return VERSIONS[version] | {cell("dvha", column, r["plan_id"]): f"present {version} does not present this column"
+                                for column, since in DVHA_SINCE.items() if version < since
+                                for r in layers.generated(data)["dvha"]}
 
 
 def layer_rows(data, version=None):
@@ -530,22 +558,23 @@ def layer_rows(data, version=None):
     its other layers' value.
     Rows for a cell that the generated sheet gives one line name no line."""
     url = {d["sha256"]: d["url"] for d in layers.rows(data / "generated" / "documents_checked.csv") if d["sha256"]}
-    generated = {r["plan_id"]: r for r in layers.generated(data)["main"]}
     out, held_cells = {}, held(data, version)
-    for column in COLUMNS:
-        for plan_id, got in lines(data, column).items():
-            if (column, plan_id) in held_cells:
-                continue
-            one_line = " | " not in generated[plan_id][column]
-            if one_line and any(value for value, _ in got[1:]):
-                raise ValueError(f"{plan_id} {column} has one line, not {[value for value, _ in got]}")
-            for n, (value, cited) in enumerate(got, 1):
-                row = dict(sheet="main", plan_id=plan_id, column=column, line="" if one_line else str(n), value=value)
-                cites = [(url[f["doc_sha"]], f["page"], q) for f in cited if presents([f])
-                         for q in json.loads(f["quotes"])]
-                for cite in cites:
-                    full = dict(row, **dict(zip(("url", "pdf_page", "quote"), cite)))
-                    out[tuple(full.values())] = full
+    for sheet, (rules, _) in SHEETS.items():
+        generated = {r["plan_id"]: r for r in layers.generated(data)[sheet]}
+        for column in rules:
+            for plan_id, got in lines(data, column, sheet=sheet).items():
+                if cell(sheet, column, plan_id) in held_cells:
+                    continue
+                one_line = " | " not in generated[plan_id][column]
+                if one_line and any(value for value, _ in got[1:]):
+                    raise ValueError(f"{plan_id} {column} has one line, not {[value for value, _ in got]}")
+                for n, (value, cited) in enumerate(got, 1):
+                    row = dict(sheet=sheet, plan_id=plan_id, column=column, line="" if one_line else str(n), value=value)
+                    cites = [(url[f["doc_sha"]], f["page"], q) for f in cited if presents([f])
+                             for q in json.loads(f["quotes"])]
+                    for cite in cites:
+                        full = dict(row, **dict(zip(("url", "pdf_page", "quote"), cite)))
+                        out[tuple(full.values())] = full
     return sorted(out.values(), key=lambda r: tuple(r.values()))
 
 
