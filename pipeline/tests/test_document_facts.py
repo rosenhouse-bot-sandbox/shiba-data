@@ -149,6 +149,10 @@ class StepTest(StepsTest):
                       "H5439-019-0", "H7006-021-0"),
             "part_b_drugs": kaiser, "hearing": ("H9003-009-0",), "surgery": kaiser + ("H3817-008-1",)})
 
+    def test_version_12_adds_the_dvha_groups_to_11(self):
+        self.assertEqual(document_facts.VERSIONS[12], dict(document_facts.VERSIONS[11], groups=document_facts.VERSIONS[11]["groups"]
+                         + ("plan_premium", "emergency", "foot_care", "meals", "other_supplemental")))
+
     def test_version_1_uses_the_models_the_evaluation_picked(self):
         self.assertEqual(document_facts.VERSIONS[1], dict(groups=("imaging",), reader=("claude-opus-5-5", "high"),
                                                           verifier=("claude-opus-5-5", "medium")))
