@@ -129,8 +129,9 @@ test("a strip says when the trace has no fields or quotes to name", () => {
   assert.deepEqual(stripOf("publish", bare), ["live $0", "site cell $0 with no quotes"]);
 });
 
-test("a draft strip names its first six fields and counts the rest", () => {
-  const rows = Array.from({ length: 9 }, (_, i) => ({ field: `f${i}`, value: String(i) }));
+test("a draft strip names its first six filled fields and counts the rest", () => {
+  const rows = [{ field: "(rows)", value: "1" }, { field: "blank", value: "" },
+    ...Array.from({ length: 9 }, (_, i) => ({ field: `f${i}`, value: String(i) }))];
   const many = { ...full, draft: { ...full.draft, cms_fields: { status: "traced", rows } } };
   assert.deepEqual(stripOf("draft", many), ["f0 = 0, f1 = 1, f2 = 2, f3 = 3, f4 = 4, f5 = 5 and 3 more fields", "$0"]);
 });

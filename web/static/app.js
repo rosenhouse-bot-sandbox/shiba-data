@@ -4,7 +4,7 @@ import { ago } from "./ago.js";
 import { parse, format } from "./permalink.js";
 import { el } from "./dom.js";
 import { howView, howLink, traceUrl } from "./how.js";
-import { EXAMPLE, chain } from "./pipeline.js";
+import { EXAMPLE, STEPS, chain } from "./pipeline.js";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.worker.min.mjs";
 
@@ -203,7 +203,7 @@ function unpick() {
 // The ? beside a cell's note and the header's "How it's made" open the last step of the selected cell's pipeline view.
 function linkHow() {
   const { sheet, plan, col } = selection?.dataset ?? {};
-  const href = selection ? format({ year: site.year, view: "how", sheet, plan, column: site[sheet].columns.find((c) => c.key === col).id, step: "publish" }) : "#/how";
+  const href = selection ? format({ year: site.year, view: "how", sheet, plan, column: site[sheet].columns.find((c) => c.key === col).id, step: STEPS.at(-1).id }) : "#/how";
   $("#how-this").hidden = !selection;
   $("#how-this").href = href;
   $("header nav a[data-view=how]").href = href;

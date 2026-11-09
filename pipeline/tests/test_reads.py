@@ -34,13 +34,14 @@ class LoggedTest(unittest.TestCase):
 
 class MainChartReadsTest(unittest.TestCase):
     def test_each_cell_comes_from_the_fields_it_read(self):
-        for landscape in PLANS:
-            plan = FIXTURE["plans"][landscape["plan_id"]]
-            whole = main_chart.chart_row(landscape, plan)
-            for column, compute in main_chart.COLUMNS.items():
-                with self.subTest(plan=landscape["plan_id"], column=column):
-                    found = reads.logged(compute, (main_chart.PLANS, landscape), ("plan", plan))[1]
-                    self.assertEqual(compute(*reversed(keep(plan, landscape, found))), whole[column])
+        for make_row, columns in ((main_chart.chart_row, main_chart.COLUMNS), (dvha.dvha_row, dvha.COLUMNS)):
+            for landscape in PLANS:
+                plan = FIXTURE["plans"][landscape["plan_id"]]
+                whole = make_row(landscape, plan)
+                for column, compute in columns.items():
+                    with self.subTest(plan=landscape["plan_id"], column=column):
+                        found = reads.logged(compute, (main_chart.PLANS, landscape), ("plan", plan))[1]
+                        self.assertEqual(compute(*reversed(keep(plan, landscape, found))), whole[column])
 
     def test_reads_cover_the_fields_cms_sources_lists(self):
         for landscape in PLANS:
@@ -59,15 +60,6 @@ class MainChartReadsTest(unittest.TestCase):
 
 
 class DvhaReadsTest(unittest.TestCase):
-    def test_each_cell_comes_from_the_fields_it_read(self):
-        for landscape in PLANS:
-            plan = FIXTURE["plans"][landscape["plan_id"]]
-            whole = dvha.dvha_row(landscape, plan)
-            for column, compute in dvha.COLUMNS.items():
-                with self.subTest(plan=landscape["plan_id"], column=column):
-                    found = reads.logged(compute, (main_chart.PLANS, landscape), ("plan", plan))[1]
-                    self.assertEqual(compute(*reversed(keep(plan, landscape, found))), whole[column])
-
     def test_lists_the_reads_of_every_column(self):
         rows = dvha.reads(PLANS[0], FIXTURE["plans"][PLANS[0]["plan_id"]], DICTIONARY)
         self.assertEqual({r["column"] for r in rows}, set(dvha.COLUMNS))
