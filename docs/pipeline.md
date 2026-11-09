@@ -34,10 +34,12 @@ The plan's documents are the source of truth. CMS data gives a draft of each val
 
 ## Who does what
 
-- **A SHIBA domain expert** decided what each column should show, such as "line 2 of Ambulance is trips outside the U.S."
-- **Claude Code sessions** wrote the code and prompts, found the PDFs on carrier websites, checked model answers, and wrote the corrections in [step 9](#9-claude-sessions-correct-what-is-left).
-- **Claude models**, called through the Claude API from GitHub Actions, read the PDFs during each pipeline run.
-- **SHIBA volunteers** kept a Links sheet of PDF URLs, which is one input.
+- **A SHIBA domain expert** decided what information should go into which columns of the sheets
+- **SHIBA volunteers** found plan document PDFs and curated draft of the sheets
+- **Claude** AI was used in several ways, including:
+  - locating the official sources for the PDFs on carrier websites
+  - writing all code in this source repo, including code to download PDFs, and render the website and sheets
+  - Some of that code calls other Claude models through the API to extract and review facts from the PDFs
 
 ## Steps
 
