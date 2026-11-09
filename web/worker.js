@@ -4,9 +4,20 @@
 // CI downloads every blob through this route too, so it needs no R2 credentials.
 // /trace/2027/main/<plan_id>/<col> serves a cell's trace from D1 once every cell of the deployed commit's build has
 // loaded. Until then, and for other years, it serves the static file that web/build.py writes.
+// Only a trace load may change anything, so every other request must be a GET or HEAD.
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    const [, build] = url.pathname.match(LOAD) ?? [];
+    if (build && request.method === "POST") {
+      if (!env.LOAD_TOKEN || request.headers.get("Authorization") !== `Bearer ${env.LOAD_TOKEN}`) {
+        return new Response("Unauthorized", { status: 401 });
+      }
+      return load(env, build);
+    }
+    if (!["GET", "HEAD"].includes(request.method)) {
+      return new Response("Method not allowed", { status: 405, headers: { Allow: "GET, HEAD" } });
+    }
     const [, year, plan, col] = url.pathname.match(/^\/trace\/(\d+)\/main\/([^/]+)\/([^/.]+)$/) ?? [];
     if (year) {
       const row = year === D1_YEAR && env.COMMIT && await env.TRACE.prepare(
@@ -16,13 +27,6 @@ export default {
         return new Response(row.json.replaceAll(COMMIT, env.COMMIT), { headers: { "Content-Type": "application/json; charset=utf-8" } });
       }
       return env.ASSETS.fetch(new Request(new URL(`${url.pathname}.json`, url), request));
-    }
-    const [, build] = url.pathname.match(LOAD) ?? [];
-    if (build && request.method === "POST") {
-      if (!env.LOAD_TOKEN || request.headers.get("Authorization") !== `Bearer ${env.LOAD_TOKEN}`) {
-        return new Response("Unauthorized", { status: 401 });
-      }
-      return load(env, build);
     }
     const [, pdf, text] = url.pathname.match(/^\/(?:docs\/([0-9a-f]{64})\.pdf|blobs\/([0-9a-f]{64})\.txt)$/) ?? [];
     const sha = pdf ?? text;

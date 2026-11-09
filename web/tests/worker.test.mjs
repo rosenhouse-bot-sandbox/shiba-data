@@ -67,6 +67,15 @@ test("serves everything else from the site's assets", async () => {
   }
 });
 
+test("answers 405 to a method other than GET or HEAD, except for a load", async () => {
+  for (const [method, path] of [["POST", DOC], ["POST", TRACE], ["POST", "/data.json"], ["PUT", `/blobs/${SHA}.txt`],
+                                ["DELETE", "/"], ["PUT", `/trace/2027/load/${"1".repeat(40)}`]]) {
+    const response = await fetchPath(path, { method });
+    assert.equal(response.status, 405, `${method} ${path}`);
+    assert.equal(response.headers.get("Allow"), "GET, HEAD");
+  }
+});
+
 test("serves a cell's trace from its static file", async () => {
   assert.equal(await (await fetchPath(TRACE)).text(), `asset ${TRACE}.json`);
 });
