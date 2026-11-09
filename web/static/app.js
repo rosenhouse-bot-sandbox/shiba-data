@@ -188,11 +188,22 @@ function pick(td) {
   td.classList.add("selected");
   selection = td;
   td.scrollIntoView({ block: "nearest", inline: "nearest" });
+  linkHow();
 }
 
 function unpick() {
   document.querySelectorAll(".selected").forEach((s) => s.classList.remove("selected"));
   selection = null;
+  linkHow();
+}
+
+// The ? beside a cell's note and the header's "How it's made" open the selected cell's pipeline view.
+function linkHow() {
+  const { sheet, plan, col } = selection?.dataset ?? {};
+  const href = selection ? format({ year: site.year, view: "how", sheet, plan, column: site[sheet].columns.find((c) => c.key === col).id }) : "#/how";
+  $("#how-this").hidden = !selection;
+  $("#how-this").href = href;
+  $("header nav a[data-view=how]").href = href;
 }
 
 // The document and page that opening the selected cell, or the plan page, shows first.
@@ -331,9 +342,6 @@ function openCell(plan, column, cell, at = null) {
         : `The CMS ${site.year} Plan Benefit Package data has no entry for this benefit. `,
       "The plan's Summary of Benefits is shown for reference."), ...cmsFields(cell), medicareGov(plan, column));
   }
-  const sheet = Object.keys(SHEET_NAMES).find((s) => site[s].columns.includes(column));
-  note.append(el("p", { class: "how-link" },
-    el("a", { href: format({ year: site.year, view: "how", sheet, plan: plan.plan_id, column: column.id }) }, "How the pipeline made this cell →")));
   const first = cell.cites[0] || cell.comment || { doc: planSb(plan), page: 1, quote: null };
   const doc = plan.docs.find((d) => site.docs[d].kind === at?.kind);
   if (!doc) return openDoc(first.doc, first.page, first.quote, note, cell.cites);
