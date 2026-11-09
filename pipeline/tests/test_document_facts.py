@@ -2,7 +2,7 @@ import glob, json, os, sys, threading, unittest
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-import document_facts, facts, review
+import document_facts, extract, facts, review
 from test_extract import SHA, StepsTest, answer
 
 
@@ -63,6 +63,9 @@ class StepTest(StepsTest):
                          [("H1036-306-0", "in", "$0-$40"), ("H1036-306-0", "out", "$0"),
                           ("H1036-307-0", "in", "$0-$40")])
         self.assertEqual(asked, ["read", "read", "check", "reread", "reread", "recheck"])
+        with open(self.dir / "imaging/reread" / extract.OUTCOMES) as f:
+            self.assertEqual([o.get("skipped") for o in json.load(f)][:4],
+                             [document_facts.FOUND_BEFORE, None, None, document_facts.NOT_RECHECKED])
         self.assertEqual([c["network"] for c in rechecked if not c["decoy"]], ["out"])
         self.assertTrue(any(c["decoy"] for c in rechecked))
 

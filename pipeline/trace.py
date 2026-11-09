@@ -60,7 +60,9 @@ def build(year, out, sha, work=None):
     try:
         with open(os.path.join(HERE, "trace.sql")) as f:
             db.executescript(f.read())
-        db.execute("INSERT INTO build VALUES (?, ?, ?, ?)", (sha, year, (data / "steps.json").read_text(), int(bool(work))))
+        ledger = bool(work) and os.path.exists(os.path.join(work, blobs.LEDGER))
+        outcomes = ledger and bool(outcome_files(work))
+        db.execute("INSERT INTO build VALUES (?, ?, ?, ?, ?)", (sha, year, (data / "steps.json").read_text(), ledger, outcomes))
         insert(db, "plan", (dict(p, position=n) for n, p in enumerate(read(data / "generated/plans.csv"))))
         documents = read(data / "generated/documents.csv")
         insert(db, "document", (dict(url=d["url"], position=n, kind=d["kind"], found_via=d["found_via"])
@@ -81,14 +83,19 @@ def build(year, out, sha, work=None):
         insert(db, "fact", (dict(f, origin=origin, reviewed=int(facts.identity(f) in reviewed))
                             for origin, path in FACT_FILES.items() for f in read(data / path)))
         load_rules(db, data)
-        if work:
+        if ledger:
             load_answers(db, data, work)
+        if outcomes:
             load_checks(db, work)
         insert(db, "comment", (dict(renamed(c), pdf_page=number(c["pdf_page"])) for c in read(data / "comments.csv")))
         insert(db, "struck_quote", (renamed(s) for s in layers.strikes(data)))
         db.commit()
     finally:
         db.close()
+
+
+def outcome_files(work):
+    return sorted(glob.glob(os.path.join(work, "facts", "**", extract.OUTCOMES), recursive=True))
 
 
 def number(text):
@@ -134,7 +141,7 @@ def load_answers(db, data, work):
 def load_checks(db, work):
     """Loads the outcomes that extract.py and review.py wrote in the run's facts folders."""
     stated, verdicts = {}, {}
-    for path in sorted(glob.glob(os.path.join(work, "facts", "**", extract.OUTCOMES), recursive=True)):
+    for path in outcome_files(work):
         with open(path, encoding="utf-8") as f:
             for o in json.load(f):
                 fact = o["fact"] or dict.fromkeys(facts.IDENTITY)
@@ -143,7 +150,7 @@ def load_checks(db, work):
                     stated[o["prompt"], o["item"]] = dict(
                         prompt_sha=o["prompt"], item=o["item"], doc_sha=o["doc_sha"], plan_id=text(a, "plan_id"),
                         benefit=text(a, "benefit"), answer=json.dumps(a, ensure_ascii=False), problem=o["problem"],
-                        fact_id=fact["fact_id"], source=fact["source"], page=fact["page"])
+                        fact_id=fact["fact_id"], source=fact["source"], page=fact["page"], skipped=o.get("skipped"))
                 else:
                     verdicts[o["prompt"], o["item"]] = dict(
                         step="reviewer" if "earlier" in o else "verifier", prompt_sha=o["prompt"], item=o["item"],
@@ -211,10 +218,11 @@ def checks(db, plan_id, col, considered):
                 by_fact[identity] = fact_check(db, identity, prompts)
                 out.append(by_fact[identity])
             by_fact[identity]["stated_by"].append(ref)
+            by_fact[identity]["skipped"] = by_fact[identity]["skipped"] or s["skipped"]
         else:
             out.append(dict(fact=None, code_check=s["problem"], stated_by=[ref], verifier=[], reviewer={"status": NONE},
-                            kept=False))
-    out += [fact_check(db, identity, prompts) for identity in identities if identity not in by_fact]
+                            kept=False, skipped=None))
+    out += [dict(fact_check(db, identity, prompts), code_check=NOT_RECORDED) for identity in identities if identity not in by_fact]
     return prompts, record(out, rows=out)
 
 
@@ -276,7 +284,7 @@ def fact_check(db, identity, prompts):
         reviewer = {"status": NONE}
     kept = db.execute("SELECT 1 FROM fact WHERE fact_id = ? AND source = ? AND doc_sha = ? AND page = ? AND origin = 'document'",
                       identity).fetchone()
-    return dict(fact=named, code_check="passed", stated_by=[], verifier=verifier, reviewer=reviewer, kept=bool(kept))
+    return dict(fact=named, code_check="passed", stated_by=[], verifier=verifier, reviewer=reviewer, kept=bool(kept), skipped=None)
 
 
 def verdict_ok(v):
@@ -319,7 +327,7 @@ def cell(db, sheet, plan_id, col):
     found = rows(db, "SELECT value FROM draft_cell WHERE sheet = ? AND plan_id = ? AND col = ?", sheet, plan_id, col)
     if not found:
         raise LookupError(f"No cell {sheet} {plan_id} {col}")
-    build_row = rows(db, "SELECT sha, year, steps, replayed FROM build")[0]
+    build_row = rows(db, "SELECT sha, year, steps, replayed, checked FROM build")[0]
     code = f"{REPO_URL}/blob/{build_row['sha']}/"
     values = rows(db, "SELECT layer, value FROM layer_value WHERE sheet = ? AND plan_id = ? AND col = ? ORDER BY step",
                   sheet, plan_id, col)
@@ -331,7 +339,7 @@ def cell(db, sheet, plan_id, col):
                             LEFT JOIN text t ON t.pdf = w.sha256 WHERE p.plan_id = ? ORDER BY d.position""", plan_id)
     for d in documents:
         d["text"] = {k: d.pop(k) for k in ("plain", "layout", "items")}
-        d["unlinked_answers"] = unlinked(db, d["sha256"]) if build_row["replayed"] else {"status": NOT_RECORDED}
+        d["unlinked_answers"] = unlinked(db, d["sha256"]) if build_row["checked"] else {"status": NOT_RECORDED}
     landscape = rows(db, "SELECT plan_field, field, value FROM landscape_read WHERE plan_id = ? ORDER BY position", plan_id)
     if sheet == "main":
         cms = rows(db, "SELECT file, field, value, title, meaning FROM cms_read WHERE plan_id = ? AND col = ? ORDER BY position",
@@ -353,15 +361,17 @@ def cell(db, sheet, plan_id, col):
                   else {"status": NOT_RECORDED}) for r in cited if r.get("step") in MODEL_STEPS + ("xref",)]
     if not has_rule:
         prompts, fact_checks = [], {"status": NONE}
-    elif build_row["replayed"]:
+    elif build_row["checked"]:
         prompts, fact_checks = checks(db, plan_id, col, considered)
     else:
         prompts, fact_checks = [], {"status": NOT_RECORDED}
     prompts += [t["prompt"] for r in model for t in r["answers"].get("rows", [])]
-    if build_row["replayed"]:
-        answers = answers_of(db, prompts)
-    else:
+    if not build_row["replayed"]:
         answers = {"status": NOT_RECORDED if has_rule or any(r["step"] in MODEL_STEPS for r in model) else NONE}
+    else:
+        answers = answers_of(db, prompts)
+        if answers["status"] == NONE and fact_checks["status"] == NOT_RECORDED:
+            answers = {"status": NOT_RECORDED}
     return {
         "cell": dict(year=build_row["year"], sheet=sheet, plan_id=plan_id, col=col, label=fields.labels(sheet)[col],
                      value=values[-1]["value"]),

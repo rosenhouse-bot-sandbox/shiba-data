@@ -98,6 +98,11 @@ class GateTest(unittest.TestCase):
                                     earlier=True)])
         self.assertEqual(asked, ["v-0.md"])
 
+    def test_gives_saved_verdicts_only_for_trusted_facts(self):
+        uncited = fact(benefit="radiation_therapy", amount="$2")
+        got = self.outcomes(COMMITTED + [uncited], answering(), saved=lambda data, model, text, effort: text == json.dumps(uncited))
+        self.assertEqual(got, [])
+
     def test_drops_the_facts_the_reviewer_rejects_and_keeps_the_rest(self):
         good, bad, uncited = fact(), fact(amount="$3", setting="office.specialist"), fact(benefit="radiation_therapy")
         kept, trusted = self.gate(TRUSTED, COMMITTED + [good, bad, uncited], answering(["$3"]))

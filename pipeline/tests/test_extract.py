@@ -286,6 +286,12 @@ class StepsTest(unittest.TestCase):
             dict(prompt=prompt, item=1, doc_sha=SHA, stated=bad, problem="no quote shows $5", fact=None),
             dict(prompt=retry, item=0, doc_sha=SHA, stated=good, problem=None, fact=extract.named(found))])
 
+    def test_numbers_each_verdict_within_its_task(self):
+        items = [dict(answer(), page="1", quotes="[]", fact_id="a", source="EOC", doc_sha=SHA, task=t, decoy=False)
+                 for t in ("x", "y", "x")]
+        got = extract.outcomes(str(self.dir), items, [dict(id=2, ok=True)])
+        self.assertEqual([(o["item"], o["ok"]) for o in got], [(0, None), (0, None), (1, True)])
+
     def test_accept_records_each_verdict(self):
         new = self.known(network="out", amount="$0", quotes=json.dumps(["Outpatient X-rays $0"]))
         with open(self.dir.parent / "new.json", "w") as f:
