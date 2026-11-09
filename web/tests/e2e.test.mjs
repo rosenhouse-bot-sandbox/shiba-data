@@ -202,11 +202,11 @@ test("the page has no plan dropdown, citation corners or footer", async () => {
 const allCells = (sheet) => site[sheet].rows.flatMap((r) => Object.entries(r.cells).map(([col, cell]) => ({ plan_id: r.plan_id, col, cell })));
 const cellTd = (planId, col) => page.locator(`.sheet-wrap td[data-plan="${planId}"][data-col="${col}"]`);
 
-test("Ambiguities lists every comment with links to its document page and cell", async () => {
+test("Notes lists every comment with links to its document page and cell", async () => {
   const comments = ["main", "dvha"].flatMap(allCells).filter(({ cell }) => cell.comment);
   await page.goto(`${base}#/main`);
-  await page.click("nav a[data-view=ambiguities]");
-  const rows = page.locator("table.ambiguities tbody tr");
+  await page.click("nav a[data-view=notes]");
+  const rows = page.locator("table.notes tbody tr");
   await rows.first().waitFor();
   assert.equal(await rows.count(), comments.length);
   const wellcare = rows.filter({ has: page.locator('td[data-plan="H6815-038-0"][data-col="K_tests_labs"]') });
@@ -218,16 +218,16 @@ test("Ambiguities lists every comment with links to its document page and cell",
   assert.match(await cellTd("H6815-038-0", "K_tests_labs").getAttribute("class"), /selected/);
 });
 
-test("going back to Ambiguities keeps the scroll position", async () => {
-  await page.goto(`${base}#/ambiguities`);
-  const target = page.locator("table.ambiguities tbody tr").nth(35);
+test("going back to Notes keeps the scroll position", async () => {
+  await page.goto(`${base}#/notes`);
+  const target = page.locator("table.notes tbody tr").last();
   await target.scrollIntoViewIfNeeded();
   const before = await page.$eval("#content", (c) => c.scrollTop);
   assert.ok(before > 0);
   await target.locator("td.links a", { hasText: "Show in" }).click();
   await page.waitForSelector(".sheet-wrap td.selected");
   await page.goBack();
-  await page.waitForSelector("table.ambiguities");
+  await page.waitForSelector("table.notes");
   assert.equal(await page.$eval("#content", (c) => c.scrollTop), before);
 });
 
@@ -327,34 +327,35 @@ test("header says when the site was last updated", async () => {
   await fresh.close();
 });
 
-test("orange marks a comment that contradicts the cell", async () => {
+test("green marks a hand-written fact, and the Notes filter shows those notes", async () => {
   const fresh = await browser.newPage({ viewport: { width: 1600, height: 1000 } });
-  const edited = structuredClone(site);
-  edited.main.rows.find((r) => r.plan_id === "H6815-038-0").cells.K_tests_labs.comment.kind = "contradicts";
-  await fresh.route("**/data.json", (route) => route.fulfill({ json: edited }));
   await fresh.goto(`${base}#/main`);
   const background = (locator) => locator.evaluate((e) => getComputedStyle(e).backgroundColor);
-  const contradicts = fresh.locator('table.sheet td[data-plan="H6815-038-0"][data-col="K_tests_labs"]');
-  const note = fresh.locator("table.sheet td.commented:not(.contradicts)").first();
-  const orange = await background(contradicts);
-  assert.notEqual(orange, await background(note));
-  await note.click();
-  assert.equal(await background(fresh.locator("#source-note .comment")), await background(note));
-  await contradicts.click();
-  assert.equal(await background(fresh.locator("#source-note .comment")), orange);
-  assert.equal(await background(contradicts), orange, "stays orange in the open plan's row");
-  await fresh.click("nav a[data-view=ambiguities]");
-  const rows = fresh.locator("table.ambiguities tbody tr");
-  await fresh.selectOption("#kind-filter", "contradicts");
-  const contradictions = ["main", "dvha"].flatMap((sheet) => edited[sheet].rows.flatMap((r) => Object.values(r.cells)))
-    .filter((c) => c.comment?.kind === "contradicts");
+  const handWritten = fresh.locator("table.sheet td.commented.hand_written").first();
+  const question = fresh.locator("table.sheet td.commented.question").first();
+  const green = await background(handWritten);
+  assert.notEqual(green, await background(question));
+  assert.match(await handWritten.getAttribute("title"), /^Hand-written fact: /);
+  await question.click();
+  assert.equal(await background(fresh.locator("#source-note .comment")), await background(question));
+  assert.match(await fresh.textContent("#source-note .comment"), /^Open question: /);
+  await handWritten.click();
+  assert.equal(await background(fresh.locator("#source-note .comment")), green);
+  assert.match(await fresh.textContent("#source-note .comment"), /^Hand-written fact: /);
+  assert.equal(await background(handWritten), green, "stays green in the open plan's row");
+  await fresh.click("nav a[data-view=notes]");
+  const rows = fresh.locator("table.notes tbody tr");
+  await fresh.selectOption("#kind-filter", "hand_written");
+  const notes = ["main", "dvha"].flatMap((sheet) => site[sheet].rows.flatMap((r) => Object.values(r.cells)))
+    .filter((c) => c.comment?.kind === "hand_written");
   const shown = await rows.filter({ visible: true }).allTextContents();
-  assert.equal(shown.length, contradictions.length);
-  assert.ok(shown.every((t) => t.includes("Contradicts the EOC")));
+  assert.ok(notes.length > 0);
+  assert.equal(shown.length, notes.length);
+  assert.ok(shown.every((t) => t.includes("Hand-written fact")));
   await rows.filter({ visible: true }).first().locator("a", { hasText: "Show in" }).click();
   await fresh.goBack();
-  assert.equal(await fresh.locator("#kind-filter").inputValue(), "contradicts");
-  assert.equal(await rows.filter({ visible: true }).count(), contradictions.length);
+  assert.equal(await fresh.locator("#kind-filter").inputValue(), "hand_written");
+  assert.equal(await rows.filter({ visible: true }).count(), notes.length);
   await fresh.selectOption("#kind-filter", "");
   assert.equal(await rows.filter({ visible: true }).count(), await rows.count());
   await fresh.close();
@@ -679,13 +680,13 @@ test("permalink: a plan page document link puts the page in the URL", async () =
   await hashIs("#/2027/plan/H3805-041-0");
 });
 
-test("permalink: an Ambiguities cell keeps the Ambiguities page and links to the sheet", async () => {
+test("permalink: a Notes cell keeps the Notes page and links to the sheet", async () => {
   const { plan_id, col } = allCells("dvha").find(({ cell }) => cell.comment);
   const id = col.replace(/^[A-Z]+_/, "");
-  await page.goto(`${base}#/ambiguities`);
-  const tr = page.locator("table.ambiguities tr", { has: page.locator(`td[data-col="${col}"]`) }).filter({ hasText: plan_id }).first();
+  await page.goto(`${base}#/notes`);
+  const tr = page.locator("table.notes tr", { has: page.locator(`td[data-col="${col}"]`) }).filter({ hasText: plan_id }).first();
   await tr.locator(`td[data-col="${col}"]`).click();
-  await hashIs(`#/2027/ambiguities/dvha/${plan_id}/${id}`);
+  await hashIs(`#/2027/notes/dvha/${plan_id}/${id}`);
   assert.equal(await tr.locator("td.links a", { hasText: "Show in" }).getAttribute("href"), `#/2027/dvha/${plan_id}/${id}`);
 });
 
@@ -729,7 +730,7 @@ test("permalink: Back to a plan page shows its summary of benefits", async () =>
   assert.equal(await hash(), "#/2027/plan/H3805-041-0");
 });
 
-test("permalink: a page link in an Ambiguities comment points the URL at its row's cell", async () => {
+test("permalink: an old Ambiguities link opens Notes, and a page link in a note points the URL at its row's cell", async () => {
   const fresh = await browser.newPage({ viewport: { width: 1600, height: 1000 } });
   await fresh.route("**/data.json", (route) => {
     const edited = structuredClone(site);
@@ -740,6 +741,6 @@ test("permalink: a page link in an Ambiguities comment points the URL at its row
   await fresh.waitForSelector("td.selected");
   await fresh.locator('tr:has(td[data-plan="H6815-038-0"][data-col="K_tests_labs"]) td.comment-text a').click();
   await fresh.waitForSelector(`#page-area[data-shown="${docOf("H6815-038-0", "EOC")} 82"]`);
-  await fresh.waitForFunction(() => location.hash === "#/2027/ambiguities/main/H6815-038-0/tests_labs/EOC/82");
+  await fresh.waitForFunction(() => location.hash === "#/2027/notes/main/H6815-038-0/tests_labs/EOC/82");
   await fresh.close();
 });

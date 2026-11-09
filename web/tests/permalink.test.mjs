@@ -11,9 +11,9 @@ const cases = [
   ["#/2027/plan/H3805-048-0/EOC/4", { year: 2027, view: "plan", plan: "H3805-048-0", kind: "EOC", page: 4 }],
   ["#/2027/plan/H3805-048-0/dvha/dental/SB/3",
     { year: 2027, view: "plan", plan: "H3805-048-0", sheet: "dvha", column: "dental", kind: "SB", page: 3 }],
-  ["#/2027/ambiguities", { year: 2027, view: "ambiguities" }],
-  ["#/2027/ambiguities/main/H3805-048-0/ambulance/RIDER/2",
-    { year: 2027, view: "ambiguities", plan: "H3805-048-0", sheet: "main", column: "ambulance", kind: "RIDER", page: 2 }],
+  ["#/2027/notes", { year: 2027, view: "notes" }],
+  ["#/2027/notes/main/H3805-048-0/ambulance/RIDER/2",
+    { year: 2027, view: "notes", plan: "H3805-048-0", sheet: "main", column: "ambulance", kind: "RIDER", page: 2 }],
 ];
 
 test("format and parse round-trip", () => {
@@ -33,6 +33,11 @@ test("links without a year are for the live year", () => {
 
 test("document kinds are case-insensitive and a missing page is page 1", () => {
   assert.deepEqual(parse("#/2027/plan/H1/eoc", 2027), { year: 2027, view: "plan", plan: "H1", kind: "EOC", page: 1 });
+});
+
+test("links to Ambiguities open Notes", () => {
+  assert.deepEqual(parse("#/2027/ambiguities/main/H1/ambulance", 2027),
+    { year: 2027, view: "notes", plan: "H1", sheet: "main", column: "ambulance" });
 });
 
 test("an unknown view falls back to the main sheet", () => {

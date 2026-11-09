@@ -12,8 +12,10 @@ FACT_COLUMNS = {"Plan ID": "plan_id", "Plan": None, "Benefit": "benefit", "Setti
                 "Covered by": "covered_by", "Cost kind": "cost_kind", "Amount": "amount", "Unit": "unit", "Limit": "limit",
                 "Condition": "condition", "Package": "package", "Pool": "pool", "Provider tier": "provider_tier",
                 "Source": "source", "Page": "page", "Quote or CMS field": None, "Note": "note"}
-# Keep in sync with --comment and --contradicts in web/static/style.css.
-FILLS = {"note": "FFF6D6", "contradicts": "FFDCB8"}
+# Keep in sync with --comment and --hand-written in web/static/style.css.
+FILLS = {"question": "FFF6D6", "hand_written": "E3F1E0"}
+# Keep in sync with KIND_NAMES in web/static/app.js.
+KIND_NAMES = {"question": "Open question", "hand_written": "Hand-written fact"}
 HEAD = "EEF1F6"
 SECTION = "1D2433"
 MAX_WIDTH = 40
@@ -57,7 +59,7 @@ def value_cell(year, name, plan_id, column, cell):
     if cell["value"] and (cell["cites"] or "comment" in cell):
         out.link = f"{SITE}#/{year}/{name}/{plan_id}/{column['id']}"
     if "comment" in cell:
-        out.note = cell["comment"]["text"]
+        out.note = f"{KIND_NAMES[cell['comment']['kind']]}: {cell['comment']['text']}"
         out.fill = FILLS[cell["comment"]["kind"]]
     return out
 

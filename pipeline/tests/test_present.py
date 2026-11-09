@@ -550,7 +550,7 @@ class OverrideTest(unittest.TestCase):
         citing = {(r["plan_id"], r["column"]) for r in layers.rows(data / layers.PRESENTED)
                   if (r["plan_id"], r["url"], r["pdf_page"], r["quote"]) in hand_written}
         noted = {(c["plan_id"], c["column"]) for c in layers.rows(data / "comments.csv")
-                 if c["sheet"] == "main" and "Hand-written fact" in c["comment"]
+                 if c["sheet"] == "main" and c["kind"] == "hand_written"
                  and (c["column"], c["plan_id"]) not in present.held(data)}
         self.assertTrue(citing)
         self.assertEqual(sorted(citing - noted), [], "cells that cite a hand-written fact but have no note")
