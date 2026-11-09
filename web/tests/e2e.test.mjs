@@ -1004,12 +1004,23 @@ test("pipeline view: says it is loading, and a cell picked meanwhile stays", asy
   assert.match(fresh.url(), /#\/2027\/main$/);
 });
 
+test("a Notes link that names no sheet shows Notes", async () => {
+  const fresh = await newPage();
+  const errors = [];
+  fresh.on("pageerror", (e) => errors.push(e.message));
+  await fresh.goto(`${base}#/2027/notes/docs/H1036-153-0/ambulance`);
+  await fresh.waitForSelector(".notes-page");
+  assert.deepEqual(errors, []);
+});
+
 test("pipeline view: a link to no cell shows the example cell and says so", async () => {
   await openHow(page, "main/NOPE/ambulance/draft");
   assert.match(await page.textContent(".warn"), /names no cell/);
   assert.match(page.url(), /H1036-153-0\/ambulance\/draft$/);
   await openHow(page, "dvha/H1036-153-0/ambulance/draft");
   assert.match(page.url(), /how\/main\/H1036-153-0\/ambulance\/draft$/);
+  await openHow(page, "docs/H1036-153-0/ambulance/draft");
+  assert.match(await page.textContent(".warn"), /names no cell/);
 });
 
 test("pipeline view: a link may name the column by its key", async () => {

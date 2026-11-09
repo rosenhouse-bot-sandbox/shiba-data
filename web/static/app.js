@@ -120,7 +120,7 @@ function route() {
   markOpenPlans();
   const at = state.kind && { kind: state.kind, page: state.page };
   // Links from before column ids name the column by its key.
-  const column = site[state.sheet]?.columns.find((c) => c.id === state.column || c.key === state.column);
+  const column = sheetOf(state)?.columns.find((c) => c.id === state.column || c.key === state.column);
   const td = column && content.querySelector(
     `td[data-sheet="${state.sheet}"][data-plan="${CSS.escape(state.plan)}"][data-col="${CSS.escape(column.key)}"]`);
   if (td) {
@@ -139,13 +139,16 @@ function route() {
   updateUrl();
 }
 
+// A link may name any sheet, but only a sheet the site shows has cells.
+const sheetOf = (state) => Object.hasOwn(SHEET_NAMES, state.sheet) ? site[state.sheet] : null;
+
 // An unknown cell opens the example cell, and a step the cell skips opens its first step.
 let howTicket = 0;
 async function routeHow(state) {
   hideViewer();
   const ticket = ++howTicket, asked = location.hash;
   // Links from before column ids name the column by its key.
-  const asColumn = site[state.sheet]?.columns.find((c) => c.id === state.column || c.key === state.column);
+  const asColumn = sheetOf(state)?.columns.find((c) => c.id === state.column || c.key === state.column);
   const known = asColumn && site[state.sheet].rows.some((r) => r.plan_id === state.plan);
   const { sheet, plan } = known ? state : EXAMPLE;
   const column = known ? asColumn : site.main.columns.find((c) => c.id === EXAMPLE.column);

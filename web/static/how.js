@@ -13,7 +13,6 @@ const SCALE = RAIL_W / MAP_W;
 export const howLink = (year, cell, step) => format({ year, view: "how", sheet: cell.sheet, plan: cell.plan, column: cell.column, step: step.id });
 export const traceUrl = (year, sheet, plan, columnKey) => `trace/${year}/${sheet}/${plan}/${columnKey}`;
 const shown = (id) => NODES[id].table ?? NODES[id].text;
-// Each sheet has its own draft file.
 const label = (id, sheet) => id === "draft" ? DRAFT_FILES[sheet] : NODES[id].label;
 const isExample = (cell) => cell.sheet === EXAMPLE.sheet && cell.plan === EXAMPLE.plan && cell.column === EXAMPLE.column;
 

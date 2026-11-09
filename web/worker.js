@@ -53,8 +53,8 @@ export default {
 };
 
 // CI loads each main build into D1 from R2: trace/<year>/<sha>.json names the file in trace/<year>/cells/ that holds
-// each cell's trace, by <sheet>/<plan_id>/<col>. CI repeats the load while it answers 409. Each load adds a few cells that D1 lacks, so a cell that
-// did not change since an earlier build costs no writes. Once D1 has every cell, the load adds the build.
+// each cell's trace, by <sheet>/<plan_id>/<col>. CI repeats the load while it answers 409. Each load adds a few cells
+// that D1 lacks, so a cell that did not change since an earlier build costs no writes. Once D1 has every cell, the load adds the build.
 // LOAD_TOKEN is a secret that the deploy job gives the Worker and the trace job derives the same way.
 const D1_YEAR = "2027";
 const COMMIT = "${commit}";
