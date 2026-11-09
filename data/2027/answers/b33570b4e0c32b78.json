@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "7a95606e4d0c87d0.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-048-0\", \"benefit\": \"plan_premium\", \"setting\": \"any\", \"network\": \"any\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"premium\", \"amount\": \"$97\", \"unit\": \"per month\", \"limit\": \"\", \"page\": 15,\n  \"quotes\": [\"For 2027, the monthly premium for HumanaChoice H5216-048 (PPO) is $97.\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 23352,
+  "output_tokens": 360,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

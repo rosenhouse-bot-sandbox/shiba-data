@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-0bd982dc589e8cba.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 47 Uniformity flexibility nutritional benefit (Well Dine) row: in-network $0 copayment. It applies after an inpatient stay for CHF, with up to two home delivered meals per day for 30 days (up to 60 meals). The condition and limit match the page.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 46 Humana Well Dine meal program row: in-network $0 copayment. The limit is 2 meals per day for 7 days after an inpatient stay, up to 4 times per calendar year, and it applies to all members.\"}]\n```",
+ "usage": {
+  "input_tokens": 4046,
+  "output_tokens": 442,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

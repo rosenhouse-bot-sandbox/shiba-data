@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-0050f865534f41bb.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 56 Humana Well Dine meal program (marked * as a supplemental benefit): In-Network $0 copayment, limited to 4 times per calendar year.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 56 Well Dine: after an inpatient stay, members get 2 meals per day for 7 days, so 14 meals are delivered for each eligible inpatient stay.\"}]\n```",
+ "usage": {
+  "input_tokens": 2611,
+  "output_tokens": 535,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

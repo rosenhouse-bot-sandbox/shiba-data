@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "dca4e04d7b6dc26b.md",
+ "reply": "```json\n[]\n```\n\nPage 28 states nothing that counts as `other_supplemental`. It covers emergency follow-up care, urgently needed services, and worldwide emergency and urgent care outside the United States. These are emergency and urgent-care benefits, not supplemental benefits that no other benefit word names. The page also gives no cost or allowance for any of them.",
+ "usage": {
+  "input_tokens": 2724,
+  "output_tokens": 265,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

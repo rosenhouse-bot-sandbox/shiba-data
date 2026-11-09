@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-49912316cc55d9c5.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 104: the SSBCI Food & Home Card is a $30-per-month allowance for members diagnosed with a medically complex chronic condition. It is a food, utility and rent card, so it fits other_supplemental.\"}]\n```",
+ "usage": {
+  "input_tokens": 2499,
+  "output_tokens": 214,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

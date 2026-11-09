@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-faebfcb17c1abba1.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 8, Worldwide Coverage: the Emergency room - Hospital row shows a $130 copay for care outside the U.S. But the item marks it as Medicare-covered. Original Medicare generally does not cover care outside the U.S., so worldwide emergency coverage is a supplemental benefit. The $130 also sits only under the out-of-network column, so network 'any' is unclear.\"}]\n```",
+ "usage": {
+  "input_tokens": 2029,
+  "output_tokens": 405,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

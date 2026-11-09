@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "05d56d5f782708e7.md",
+ "reply": "```json\n[{\"plan_id\": \"H2056-003-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$65\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 8,\n  \"quotes\": [\"Foot exams and treatment                $65 copay for Medicare‑covered podiatry visits\"], \"note\": \"\"},\n {\"plan_id\": \"H2056-003-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"not_covered\", \"page\": 8,\n  \"quotes\": [\"Non‑Medicare covered podiatry services are not covered.\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 2398,
+  "output_tokens": 593,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

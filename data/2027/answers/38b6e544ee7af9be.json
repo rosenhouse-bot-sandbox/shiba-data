@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-8acbaf3993261220.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 7 Routine foot care row: $45 copay. This is a supplemental routine benefit, in network by default.\"}, {\"id\": 1, \"ok\": true, \"reason\": \"Page 7 Routine foot care row: 6 visits per year.\"}]\n```",
+ "usage": {
+  "input_tokens": 2334,
+  "output_tokens": 106,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

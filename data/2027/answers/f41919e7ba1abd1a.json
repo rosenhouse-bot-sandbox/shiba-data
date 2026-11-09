@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "7e45f25357b792a7.md",
+ "reply": "```json\n[\n  {\n    \"plan_id\": \"H2923-019-0\",\n    \"benefit\": \"foot_care\",\n    \"setting\": \"any\",\n    \"network\": \"in\",\n    \"covered_by\": \"medicare\",\n    \"cost_kind\": \"copay\",\n    \"amount\": \"$45\",\n    \"unit\": \"per visit\",\n    \"limit\": \"\",\n    \"page\": 101,\n    \"quotes\": [\n      \"Medicare-Covered Foot Care $45 copay\"\n    ],\n    \"note\": \"\"\n  },\n  {\n    \"plan_id\": \"H2923-019-0\",\n    \"benefit\": \"foot_care\",\n    \"setting\": \"any\",\n    \"network\": \"in\",\n    \"covered_by\": \"supplemental\",\n    \"cost_kind\": \"copay\",\n    \"amount\": \"$45\",\n    \"unit\": \"per visit\",\n    \"limit\": \"\",\n    \"page\": 102,\n    \"quotes\": [\n      \"$45 copay\",\n      \"This is the amount you will pay for routine foot care.\"\n    ],\n    \"note\": \"\"\n  },\n  {\n    \"plan_id\": \"H2923-019-0\",\n    \"benefit\": \"foot_care\",\n    \"setting\": \"any\",\n    \"network\": \"in\",\n    \"covered_by\": \"supplemental\",\n    \"cost_kind\": \"visit_limit\",\n    \"amount\": \"4\",\n    \"unit\": \"\",\n    \"limit\": \"per year\",\n    \"page\": 102,\n    \"quotes\": [\n      \"This benefit covers you for 4 visits per year.\"\n    ],\n    \"note\": \"\"\n  }\n]\n```",
+ "usage": {
+  "input_tokens": 4175,
+  "output_tokens": 1404,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

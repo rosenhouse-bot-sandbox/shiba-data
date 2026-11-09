@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-bf93677641b9fa6f.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5 Emergency Care row: $130 per visit. Covered in network by default. The waiver if admitted within 24 hours is a separate fact, not a condition on the $130.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 5 Emergency Care row states the plan also covers emergency services worldwide as a supplemental benefit. No amount is stated, so covered fits.\"}]\n```",
+ "usage": {
+  "input_tokens": 2345,
+  "output_tokens": 380,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

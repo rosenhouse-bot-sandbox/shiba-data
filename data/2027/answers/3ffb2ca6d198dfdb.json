@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-e41fce2e65cf35f2.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5 Plan Costs row: monthly plan premium is $0, separate from the Part B premium. The page header H5216428002 matches plan H5216-428-2.\"}]\n```",
+ "usage": {
+  "input_tokens": 1918,
+  "output_tokens": 83,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-da2974c756f3eedc.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 9 Foot Care (Podiatry Services) row: Medicare-Covered Foot Care is 30% coinsurance in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 9 Foot Care row: Routine Foot Care* is a $0 copay, a supplemental benefit with 4 visits per year.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 9 Foot Care row: Routine Foot Care* is limited to 4 visits per year.\"}]\n```",
+ "usage": {
+  "input_tokens": 2447,
+  "output_tokens": 410,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

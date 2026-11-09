@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "0bd982dc589e8cba.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-427-2\", \"benefit\": \"meals\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"limit\": \"2 meals per day for 7 days after inpatient stay; limited to 4 times per calendar year\", \"page\": 46, \"quotes\": [\"In-Network: $0 copayment\", \"After your inpatient stay in either the hospital or a nursing facility, you are eligible to receive 2 meals per day for 7 days at no extra cost to you.\", \"Meal program limited to 4 times per calendar year.\"], \"note\": \"\"},\n {\"plan_id\": \"H5216-427-2\", \"benefit\": \"meals\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"condition\": \"After your inpatient stay for Congestive Heart Failure (CHF)\", \"limit\": \"up to two home delivered meals per day for 30 days (up to 60 meals)\", \"page\": 47, \"quotes\": [\"In-Network: $0 copayment\", \"Uniformity flexibility nutritional benefit - Humana Well Dine® meal program\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 4059,
+  "output_tokens": 1503,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

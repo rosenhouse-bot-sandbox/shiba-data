@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-05d56d5f782708e7.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 2 out-of-pocket costs table for Aetna Medicare Elite (HMO): monthly plan premium is $0, and the Part B premium is noted separately.\"}]\n```",
+ "usage": {
+  "input_tokens": 2126,
+  "output_tokens": 84,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

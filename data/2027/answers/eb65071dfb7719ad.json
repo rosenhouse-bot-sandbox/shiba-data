@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "e306f120395b6260.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H2406-073-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$45\", \"unit\": \"per visit\", \"limit\": \"\",\n   \"condition\": \"members with certain medical conditions a ecting the lower limbs\", \"page\": 81,\n   \"quotes\": [\"$45 copayment or each Medicare- covered visit in an o ice or home setting.\"],\n   \"note\": \"The Podiatry services row covers both diagnosis and treatment of foot problems and routine foot care for members with certain conditions. The cost applies in an office or home setting.\"},\n  {\"plan_id\": \"H2406-073-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"out\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$80\", \"unit\": \"per visit\", \"limit\": \"\",\n   \"condition\": \"members with certain medical conditions a ecting the lower limbs\", \"page\": 81,\n   \"quotes\": [\"$80 copayment or each Medicare- covered visit in an o ice or home setting.\"],\n   \"note\": \"The Podiatry services row covers both diagnosis and treatment of foot problems and routine foot care for members with certain conditions. The cost applies in an office or home setting.\"},\n  {\"plan_id\": \"H2406-073-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$45\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 82,\n   \"quotes\": [\"$45 copayment or each routine visit\"], \"note\": \"\"},\n  {\"plan_id\": \"H2406-073-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"out\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$80\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 82,\n   \"quotes\": [\"$80 copayment or each routine visit\"], \"note\": \"\"},\n  {\"plan_id\": \"H2406-073-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"any\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"6\", \"unit\": \"\", \"limit\": \"per year\", \"page\": 82,\n   \"quotes\": [\"We cover 6 in and out-o -network routine oot care visits every year.\"], \"note\": \"\"}\n]\n```",
+ "usage": {
+  "input_tokens": 3488,
+  "output_tokens": 1892,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

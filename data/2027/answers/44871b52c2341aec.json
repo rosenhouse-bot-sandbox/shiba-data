@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "8acbaf3993261220.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-040-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$45\", \"page\": 7, \"quotes\": [\"Foot exams and $45 copay\"], \"note\": \"\"},\n{\"plan_id\": \"H3805-040-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$45\", \"page\": 7, \"quotes\": [\"Routine foot care $45 copay, 6 visits per year\"], \"note\": \"\"},\n{\"plan_id\": \"H3805-040-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"6\", \"limit\": \"per year\", \"page\": 7, \"quotes\": [\"Routine foot care $45 copay, 6 visits per year\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 2517,
+  "output_tokens": 895,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

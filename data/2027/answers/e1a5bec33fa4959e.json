@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "7ac7300e6ca40ac7.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-040-0\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$40\", \"unit\": \"\", \"limit\": \"per month\",\n  \"pool\": \"Over-the-counter (OTC) credit\", \"page\": 80,\n  \"quotes\": [\"Monthly credit is $40\", \"Home and bathroom sa ety devices and Healthy ood - Special Supplemental Bene its or the Chronically Ill (SSBCI) are combined with the OTC credit amount\", \"Coverage is limited to in-network locations only.\"],\n  \"note\": \"Home and bath safety devices; shares the $40 monthly OTC credit\"},\n {\"plan_id\": \"H3805-040-0\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$40\", \"unit\": \"\", \"limit\": \"per month\",\n  \"pool\": \"Over-the-counter (OTC) credit\", \"condition\": \"Special Supplemental Benefits for the Chronically Ill (SSBCI)\", \"page\": 80,\n  \"quotes\": [\"Monthly credit is $40\", \"Home and bathroom sa ety devices and Healthy ood - Special Supplemental Bene its or the Chronically Ill (SSBCI) are combined with the OTC credit amount\", \"I you quali y, healthy ood will be included as part o your OTC credit expiring monthly.\"],\n  \"note\": \"Healthy food (SSBCI); shares the $40 monthly OTC credit. Counts as a food card for members with chronic conditions, not as the OTC allowance itself.\"}]\n```",
+ "usage": {
+  "input_tokens": 3823,
+  "output_tokens": 2075,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

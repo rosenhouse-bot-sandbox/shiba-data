@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-2947683a555fc83c.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 15 Humana Well Dine row: $0 copayment for the meal program after an inpatient stay in a hospital or nursing facility, limited to 4 times per year.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 15 Humana Well Dine row: 2 home-delivered meals per day for 7 days (up to 14 meals) after an inpatient stay, limited to 4 times per year.\"}]\n```",
+ "usage": {
+  "input_tokens": 2287,
+  "output_tokens": 426,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

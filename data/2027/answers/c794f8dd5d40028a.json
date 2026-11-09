@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-4a0ee31be3437c35.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5, Monthly Premium, Deductible and Limits table for plan H1036306000: \\\"Monthly plan premium $0\\\". This is the plan's own premium, separate from the Part B premium noted below it.\"}]\n```",
+ "usage": {
+  "input_tokens": 1858,
+  "output_tokens": 97,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

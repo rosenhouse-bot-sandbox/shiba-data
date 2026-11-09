@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "8acbaf3993261220.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-040-0\", \"benefit\": \"meals\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"28 home-delivered meals immediately after an inpatient hospitalization or skilled nursing facility (SNF) stay\", \"page\": 7, \"quotes\": [\"$0 copay for 28 home-delivered meals immediately\"]},\n {\"plan_id\": \"H3805-040-0\", \"benefit\": \"meals\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"28\", \"unit\": \"home-delivered meals\", \"limit\": \"immediately after an inpatient hospitalization or skilled nursing facility (SNF) stay\", \"page\": 7, \"quotes\": [\"$0 copay for 28 home-delivered meals immediately\"]}]\n```",
+ "usage": {
+  "input_tokens": 2476,
+  "output_tokens": 745,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "4ec81cd0d2695486.md",
+ "reply": "```json\n[{\"plan_id\": \"H1372-003-0\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$65\", \"unit\": \"\", \"limit\": \"every month\",\n  \"pool\": \"Healthy Living Allowance\", \"condition\": \"Only members who qualify will receive this additional benefit (Special Supplemental Benefits for the Chronically Ill (SSBCI))\",\n  \"page\": 64,\n  \"quotes\": [\"Healthy Living Allowance\", \"$65 every month\", \"Groceries*\", \"This additional benefit is part of the Special Supplemental Benefits for the Chronically Ill (SSBCI).\"],\n  \"note\": \"Groceries are paid from the shared Healthy Living Allowance, which also covers OTC items, fitness and personal hygiene items. The $65 a month is that shared allowance, not an amount just for groceries.\"},\n {\"plan_id\": \"H1372-003-0\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\",\n  \"pool\": \"Healthy Living Allowance\", \"condition\": \"Eligible members (Special supplemental benefits for the chronically ill)\",\n  \"page\": 98,\n  \"quotes\": [\"Eligible members may purchase covered grocery items with a debit card provided by the Plan\", \"Included as part of your Healthy Living Allowance.\"],\n  \"note\": \"This is the Groceries* row in the SSBCI section.\"}]\n```",
+ "usage": {
+  "input_tokens": 4283,
+  "output_tokens": 1885,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

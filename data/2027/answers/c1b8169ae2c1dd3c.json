@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "faebfcb17c1abba1.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-048-0\", \"benefit\": \"meals\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"limit\": \"4 times per year\", \"page\": 20,\n  \"quotes\": [\"$0 copayment for Humana Well Dine® meal program\", \"Limited to 4 times per year.\"], \"note\": \"\"},\n {\"plan_id\": \"H5216-048-0\", \"benefit\": \"meals\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"14\", \"unit\": \"meals\", \"limit\": \"per inpatient stay, 4 times per year\", \"page\": 20,\n  \"quotes\": [\"receive 2 home delivered meals per day for 7 days (up to 14 meals)\", \"Limited to 4 times per year.\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 2357,
+  "output_tokens": 921,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

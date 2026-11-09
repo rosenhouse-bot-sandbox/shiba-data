@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "29166053e638f7e6.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-317-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$115\", \"unit\": \"\", \"limit\": \"\", \"page\": 8, \"quotes\": [\"Emergency room - Hospital: $115 copay\"], \"note\": \"From the WORLDWIDE COVERAGE section for emergencies outside the U.S. and its territories. The page gives no network wording, so this uses the in-network default. Left out: the $40 urgent care copay, because its quote also appears in other rows on the page; and the $0 cost if admitted within 24 hours.\"}]\n```",
+ "usage": {
+  "input_tokens": 2570,
+  "output_tokens": 999,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

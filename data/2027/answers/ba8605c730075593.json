@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "808ccc78793ded84.md",
+ "reply": "```json\n[{\"plan_id\": \"H7199-002-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$40\", \"unit\": \"\", \"limit\": \"\", \"page\": 114,\n  \"quotes\": [\"In-network Medicare-Covered Foot Care $40 copay\"], \"note\": \"\"},\n {\"plan_id\": \"H7199-002-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"out\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$40\", \"unit\": \"\", \"limit\": \"\", \"page\": 114,\n  \"quotes\": [\"Out-of-network Medicare-Covered Foot Care $40 copay\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 4212,
+  "output_tokens": 918,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

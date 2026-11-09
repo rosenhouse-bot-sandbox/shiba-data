@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "0e1831fb00cf2a95.md",
+ "reply": "```json\n[{\"plan_id\": \"H2056-018-0\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"limit\": \"up to 12 months\", \"pool\": \"Travel Advantage\", \"page\": 9,\n  \"quotes\": [\"Travel Advantage\", \"This benefit allows you to remain in your plan for up to 12\"], \"note\": \"\"},\n {\"plan_id\": \"H2056-018-0\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"pool\": \"24‑Hour Nurse Line\", \"page\": 9,\n  \"quotes\": [\"24‑Hour Nurse Line $0\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 2320,
+  "output_tokens": 875,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

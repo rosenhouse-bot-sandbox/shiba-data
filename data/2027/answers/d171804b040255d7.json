@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-64e05773e847b56e.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 54 Humana Well Dine meal program row (marked * as supplemental): In-Network $0 copayment. The text says 2 meals per day for 7 days after an inpatient stay, and the meal program is limited to 4 times per calendar year.\"}]\n```",
+ "usage": {
+  "input_tokens": 2466,
+  "output_tokens": 293,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

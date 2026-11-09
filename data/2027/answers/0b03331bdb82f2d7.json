@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-516ff586a12c8288.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 107 Podiatry services row lists routine foot care for members with certain medical conditions affecting the lower limbs. Out-of-Network: 20% coinsurance for Medicare-covered podiatry services.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 107 Podiatry services row lists routine foot care for members with certain medical conditions affecting the lower limbs. In-Network: $30 copay for Medicare-covered podiatry services.\"}]\n```",
+ "usage": {
+  "input_tokens": 2256,
+  "output_tokens": 368,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

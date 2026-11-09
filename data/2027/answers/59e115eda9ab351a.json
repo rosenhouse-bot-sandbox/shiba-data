@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-5d52bb731683d536.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 9, Section 4.1: the monthly plan premium for Regence MedAdvantage + Rx Enhanced is $244 for 2027.\"}]\n```",
+ "usage": {
+  "input_tokens": 2393,
+  "output_tokens": 77,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

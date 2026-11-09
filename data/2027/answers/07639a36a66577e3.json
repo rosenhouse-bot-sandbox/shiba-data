@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-faf9b5f14f8f128e.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 lists the Monthly Plan Premium for Wellcare Low Premium Open (PPO), H5439 Plan 015, as $29. It includes both medical and drug coverage and is separate from the Part B premium.\"}]\n```",
+ "usage": {
+  "input_tokens": 1753,
+  "output_tokens": 102,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

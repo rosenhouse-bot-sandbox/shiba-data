@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "516ff586a12c8288.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-019-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$130\", \"unit\": \"\", \"limit\": \"\", \"page\": 71, \"quotes\": [\"$130 copay for emergency services outside of the United States\"], \"note\": \"Marked supplemental because page 42 says Medicare does not cover emergency care outside the U.S.\"},\n {\"plan_id\": \"H5439-019-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"max\", \"amount\": \"$50,000\", \"unit\": \"\", \"limit\": \"every year\", \"page\": 71, \"quotes\": [\"You are covered for up to $50,000 every year for emergency or urgently needed services outside the United States.\"], \"note\": \"Marked supplemental because page 42 says Medicare does not cover emergency care outside the U.S.\"},\n {\"plan_id\": \"H5439-019-0\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$40\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 118, \"quotes\": [\"$40 copay for Medicare-covered urgently needed service visits.\"], \"note\": \"Urgently needed services. Network is given as in network to be safe, although the row says the plan charges only in-network cost sharing.\"},\n {\"plan_id\": \"H5439-019-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$130\", \"unit\": \"\", \"limit\": \"\", \"page\": 118, \"quotes\": [\"$130 copay for urgently needed services outside of the United States\"], \"note\": \"Urgently needed services outside the U.S. Marked supplemental because Medicare does not cover care outside the U.S.\"}]\n```",
+ "usage": {
+  "input_tokens": 9408,
+  "output_tokens": 1756,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

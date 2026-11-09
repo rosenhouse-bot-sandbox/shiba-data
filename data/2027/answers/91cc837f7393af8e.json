@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "64e05773e847b56e.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-153-0\", \"benefit\": \"plan_premium\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"premium\", \"amount\": \"$0\", \"unit\": \"per month\", \"limit\": \"\", \"page\": 12, \"quotes\": [\"Monthly plan premium* $0\"], \"note\": \"Page 12 says the premium can be higher than this amount (see section 5). Page 14 says there is no separate monthly plan premium.\"}]\n```",
+ "usage": {
+  "input_tokens": 12912,
+  "output_tokens": 572,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

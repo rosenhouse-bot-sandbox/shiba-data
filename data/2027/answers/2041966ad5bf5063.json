@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-da2974c756f3eedc.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 11 Food & Home Card row: $289 per month for qualifying members to use toward food, utilities and rent or mortgage. The row says it is available only to chronically ill members (SSBCI), so this is a supplemental allowance with that condition.\"}]\n```",
+ "usage": {
+  "input_tokens": 2282,
+  "output_tokens": 244,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

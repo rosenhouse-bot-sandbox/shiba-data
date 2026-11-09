@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "2af2a9f1fd104b7f.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-455-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$130\", \"condition\": \"Emergency room - Hospital\", \"page\": 8, \"quotes\": [\"Emergency room - Hospital $130 copay\"], \"note\": \"Listed under WORLDWIDE COVERAGE. The cost is in the out-of-network column, but the worldwide row seems to cover both networks, so network is any. The condition separates the emergency room cost from the urgent care cost.\"},\n {\"plan_id\": \"H5216-455-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$50\", \"condition\": \"Urgent care center\", \"page\": 8, \"quotes\": [\"Emergency room - Hospital $130 copay • Urgent care center $50 copay\"], \"note\": \"Urgent care center cost under WORLDWIDE COVERAGE. The quote includes the line above it so that it occurs only once on the page. The condition separates this cost from the emergency room cost.\"}]\n```",
+ "usage": {
+  "input_tokens": 2792,
+  "output_tokens": 870,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

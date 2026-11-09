@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "cabbc3b82885b498.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-025-0\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$50\", \"limit\": \"per year\", \"pool\": \"Devoted Dollars\", \"page\": 11, \"quotes\": [\"Earn grocery and gas reward cards\", \"$50 for completing your yearly check-up\"], \"note\": \"Reward card for completing the yearly PCP check-up. You must opt in to the Devoted Dollars program. This is a rewards program, so it may not count as a supplemental benefit.\"},\n {\"plan_id\": \"H2923-025-0\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$20\", \"limit\": \"per year\", \"pool\": \"Devoted Dollars\", \"page\": 11, \"quotes\": [\"Earn grocery and gas reward cards\", \"$20 for getting your yearly flu vaccine\"], \"note\": \"Reward card for getting the yearly flu vaccine. You must opt in to the Devoted Dollars program. This is a rewards program, so it may not count as a supplemental benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2275,
+  "output_tokens": 1194,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

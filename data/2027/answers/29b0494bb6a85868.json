@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-161c63c8abccc6dc.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 39, Section 3.2, says emergency and urgently needed services outside the U.S. are not covered under any circumstances. That supports not_covered for emergency care with setting outside_us across all networks. The page does not state whether the benefit is Medicare or supplemental, so the medicare label is a categorization rather than a quoted fact.\"}]\n```",
+ "usage": {
+  "input_tokens": 2084,
+  "output_tokens": 584,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

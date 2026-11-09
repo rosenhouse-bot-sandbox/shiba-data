@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "d594b0a1d3772214.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H2056-003-0\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$130\", \"unit\": \"\", \"limit\": \"\", \"page\": 47,\n   \"quotes\": [\"$130 copay for emergency care. Cost\"], \"note\": \"\"},\n  {\"plan_id\": \"H2056-003-0\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"out\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$130\", \"unit\": \"\", \"limit\": \"\", \"page\": 47,\n   \"quotes\": [\"$130 copay for emergency care. Cost\", \"Cost sharing for necessary emergency services you get\"], \"note\": \"Out-of-network emergency cost sharing is stated to be the same as in-network.\"},\n  {\"plan_id\": \"H2056-003-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$130\", \"unit\": \"\", \"limit\": \"\", \"page\": 47,\n   \"quotes\": [\"$130 copay for emergency care worldwide\"], \"note\": \"\"},\n  {\"plan_id\": \"H2056-003-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"max\", \"amount\": \"$250,000\", \"unit\": \"\", \"limit\": \"per year\", \"page\": 47,\n   \"quotes\": [\"$250,000 annual maximum benefit for worldwide\"], \"note\": \"Combined maximum for worldwide emergency, emergency ambulance, and urgently needed care.\"},\n  {\"plan_id\": \"H2056-003-0\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$50\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 70,\n   \"quotes\": [\"$50 copay for each Medicare‑covered\"], \"note\": \"Urgently needed services, urgent care facility visit.\"},\n  {\"plan_id\": \"H2056-003-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$130\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 70,\n   \"quotes\": [\"$130 copay for each urgent care visit\"], \"note\": \"Worldwide urgent care visit.\"}\n]\n```",
+ "usage": {
+  "input_tokens": 8078,
+  "output_tokens": 1807,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

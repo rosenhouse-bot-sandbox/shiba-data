@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "0bd982dc589e8cba.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H5216-427-2\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$115\", \"page\": 43, \"quotes\": [\"In-Network: Emergency Services $115 copayment\"], \"note\": \"Emergency room copay; the document lists the setting as Emergency Room.\"},\n  {\"plan_id\": \"H5216-427-2\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$115\", \"page\": 43, \"quotes\": [\"Out-of-Network: Emergency Services $115 copayment\"], \"note\": \"Emergency room copay; the document lists the setting as Emergency Room.\"},\n  {\"plan_id\": \"H5216-427-2\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$115\", \"page\": 43, \"quotes\": [\"Worldwide Coverage $115 copayment\"], \"note\": \"Page 26 calls worldwide emergency care a supplemental benefit.\"},\n  {\"plan_id\": \"H5216-427-2\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$40\", \"page\": 69, \"quotes\": [\"In-Network: Urgently Needed Services $40 copayment\"], \"note\": \"Urgently needed services; the document lists the setting as Urgent Care Center.\"},\n  {\"plan_id\": \"H5216-427-2\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$40\", \"page\": 69, \"quotes\": [\"Out-of-Network: Urgently Needed Services $40 copayment\"], \"note\": \"Urgently needed services; the document lists the setting as Urgent Care Center.\"},\n  {\"plan_id\": \"H5216-427-2\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$40\", \"page\": 69, \"quotes\": [\"Worldwide Coverage $40 copayment\"], \"note\": \"Worldwide urgent care; page 26 calls it a supplemental benefit.\"}\n]\n```",
+ "usage": {
+  "input_tokens": 8017,
+  "output_tokens": 2446,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

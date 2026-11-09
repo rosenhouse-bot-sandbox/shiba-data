@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-faebfcb17c1abba1.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5 Plan Costs: monthly plan premium is $97 for H5216-048, matching every field.\"}]\n```",
+ "usage": {
+  "input_tokens": 2021,
+  "output_tokens": 63,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

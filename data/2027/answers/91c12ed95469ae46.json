@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-a744eaa24232bb11.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 57 shows only the Well Dine meal program heading with a $0 in-network copay. The stated condition (after an inpatient stay in a hospital or nursing facility) and the limit (2 meals per day for 7 days) do not appear on this page, so they cannot be verified.\"}]\n```",
+ "usage": {
+  "input_tokens": 2444,
+  "output_tokens": 176,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

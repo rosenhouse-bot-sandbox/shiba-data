@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "faebfcb17c1abba1.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-048-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$130\", \"page\": 8,\n  \"quotes\": [\"Emergency room - Hospital\", \"$130 copay\"],\n  \"note\": \"This is the worldwide emergency room cost. The page layout puts it under the out-of-network column, but I read it as one cost for any network. I left out the $50 worldwide urgent care copay because no quote for it occurs only once on the page.\"}]\n```",
+ "usage": {
+  "input_tokens": 2336,
+  "output_tokens": 1363,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

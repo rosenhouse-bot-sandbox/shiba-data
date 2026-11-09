@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "7ac7300e6ca40ac7.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-040-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$45\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 85,\n  \"quotes\": [\"Additional routine foot care\", \"$45 copayment or each routine visit.\"], \"note\": \"\"},\n {\"plan_id\": \"H3805-040-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"6\", \"unit\": \"\", \"limit\": \"per year\", \"page\": 85,\n  \"quotes\": [\"We cover 6 routine oot care visits every year.\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 3502,
+  "output_tokens": 810,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

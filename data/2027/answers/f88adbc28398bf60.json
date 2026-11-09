@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "f751937f09316ed1.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-009-0\", \"benefit\": \"meals\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"not_covered\", \"page\": 127, \"quotes\": [\"Home-delivered meals Not covered under any condition\"], \"note\": \"From the 'Services not covered by Medicare' exclusions table. Other sections of the EOC may describe a supplemental meal benefit that is not on this page.\"}]\n```",
+ "usage": {
+  "input_tokens": 2460,
+  "output_tokens": 619,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

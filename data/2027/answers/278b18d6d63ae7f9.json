@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "2af2a9f1fd104b7f.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-455-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$130\", \"page\": 8,\n  \"quotes\": [\"Emergency room - Hospital $130 copay\"],\n  \"note\": \"Listed under WORLDWIDE COVERAGE. The cost sits in the out-of-network column position, but the worldwide row appears to span both columns, so network is set to any.\"},\n {\"plan_id\": \"H5216-455-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$50\", \"page\": 8,\n  \"quotes\": [\"Emergency room - Hospital $130 copay • Urgent care center $50 copay\"],\n  \"note\": \"Urgent care center cost under WORLDWIDE COVERAGE. The quote includes the preceding line so it occurs only once on the page.\"},\n {\"plan_id\": \"H5216-455-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\",\n  \"condition\": \"If you are admitted to the same hospital within 24 hours for the same condition\", \"page\": 8,\n  \"quotes\": [\"If you are admitted to the same hospital within 24 hours for the same condition, you pay $0 for the emergency care you received.\"],\n  \"note\": \"The sentence appears within the WORLDWIDE COVERAGE section. It may also apply to emergency care in the U.S.\"}]\n```",
+ "usage": {
+  "input_tokens": 2386,
+  "output_tokens": 1454,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

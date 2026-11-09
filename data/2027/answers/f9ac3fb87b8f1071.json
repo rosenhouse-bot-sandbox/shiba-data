@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "dca4e04d7b6dc26b.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H7006-021-0\", \"benefit\": \"plan_premium\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"premium\", \"amount\": \"$0\", \"unit\": \"per month\", \"limit\": \"\", \"page\": 9, \"quotes\": [\"Monthly plan premium* $0\"], \"note\": \"The quote keeps the asterisk because it is part of the row text on page 9. Page 10 also says the plan has no separate monthly premium, but that sentence shows no dollar amount.\"}]\n```",
+ "usage": {
+  "input_tokens": 4405,
+  "output_tokens": 541,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "557f08e61a7e8f42.md",
+ "reply": "```json\n[{\"plan_id\": \"H9003-001-0\", \"benefit\": \"plan_premium\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"premium\", \"amount\": \"$134\", \"unit\": \"per month\", \"limit\": \"\", \"page\": 14, \"quotes\": [\"Enhanced plan $134\"], \"note\": \"\"},\n{\"plan_id\": \"H9003-006-0\", \"benefit\": \"plan_premium\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"premium\", \"amount\": \"$49\", \"unit\": \"per month\", \"limit\": \"\", \"page\": 14, \"quotes\": [\"Standard plan $49\"], \"note\": \"\"},\n{\"plan_id\": \"H9003-009-0\", \"benefit\": \"plan_premium\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"premium\", \"amount\": \"$0\", \"unit\": \"per month\", \"limit\": \"\", \"page\": 14, \"quotes\": [\"Value plan $0\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 17580,
+  "output_tokens": 745,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

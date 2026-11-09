@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-49912316cc55d9c5.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 125 exclusions chart for DEVOTED CORE 001 OR (HMO): the Home-delivered meals row reads 'Not covered under any condition', which is supplemental not_covered.\"}]\n```",
+ "usage": {
+  "input_tokens": 2134,
+  "output_tokens": 301,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

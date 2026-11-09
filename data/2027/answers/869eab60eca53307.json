@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "630e49b10e7ad131.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-317-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"12\", \"unit\": \"\", \"limit\": \"per calendar year\", \"page\": 71, \"quotes\": [\"You may self-refer for 12 visits per calendar year to a network specialist.\"], \"note\": \"The 20% coinsurance rows for podiatry (Medicare and routine) are left out because their setting, Specialist's Office, is not in the setting list.\"}]\n```",
+ "usage": {
+  "input_tokens": 2831,
+  "output_tokens": 670,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

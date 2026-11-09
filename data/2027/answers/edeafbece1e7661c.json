@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-2947683a555fc83c.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 13 Additional Benefits row 'Podiatry services (Medicare-covered)' shows a $50 copay with no setting split, for the only plan in the document.\"}]\n```",
+ "usage": {
+  "input_tokens": 2495,
+  "output_tokens": 157,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

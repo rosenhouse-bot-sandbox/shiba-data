@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "516ff586a12c8288.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-019-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$30\", \"condition\": \"members with certain medical conditions affecting the lower limbs\", \"page\": 107, \"quotes\": [\"Routine foot care for members with certain medical\", \"$30 copay for Medicare-covered podiatry services.\"]},\n {\"plan_id\": \"H5439-019-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"condition\": \"members with certain medical conditions affecting the lower limbs\", \"page\": 107, \"quotes\": [\"Routine foot care for members with certain medical\", \"20% coinsurance for Medicare-covered podiatry services.\"]}]\n```",
+ "usage": {
+  "input_tokens": 3842,
+  "output_tokens": 931,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

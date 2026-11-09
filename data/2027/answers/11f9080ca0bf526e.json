@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-6c89db5198e7a3b2.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4, Emergency care, Emergency room visit row: $130 copay in the in-network column for the only plan in the document.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 4, Emergency room visit row: $130 copay in the out-of-network column, matching the in-network amount.\"}]\n```",
+ "usage": {
+  "input_tokens": 1978,
+  "output_tokens": 303,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "d649ac2bebc0321d.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-028-3\", \"benefit\": \"plan_premium\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"premium\", \"amount\": \"$0\", \"unit\": \"per month\", \"limit\": \"\", \"page\": 11, \"quotes\": [\"Monthly plan premium* $0\"], \"note\": \"The quote keeps the asterisk as printed. The earlier quote without it did not match the page. Page 13 confirms there is no separate monthly plan premium.\"}]\n```",
+ "usage": {
+  "input_tokens": 10741,
+  "output_tokens": 596,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

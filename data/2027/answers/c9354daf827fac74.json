@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-d1ca3a965cb15437.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 69 Meal benefit row shows a $0 copayment. This is a supplemental benefit and in network by default.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Page 69 says 'up to 28 home-delivered meals or up to 14 days'. The 14 days is an alternative, not a time limit on the 28 meals. Putting 'up to 14 days' in limit misstates how the two relate, and the per-stay basis (after an inpatient or SNF stay) is missing.\"}]\n```",
+ "usage": {
+  "input_tokens": 2425,
+  "output_tokens": 623,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

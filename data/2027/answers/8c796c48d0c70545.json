@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "2c101bd739d45a62.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-028-3\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$50\", \"limit\": \"\", \"pool\": \"Devoted Dollars\", \"page\": 10, \"quotes\": [\"to the Devoted Dollars program to receive the rewards.\", \"steps to care for your health: $50 for completing your\"], \"note\": \"Grocery and gas reward card earned for completing the yearly check-up with your PCP. Members must opt in to the program.\"},\n {\"plan_id\": \"H2923-028-3\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$20\", \"limit\": \"\", \"pool\": \"Devoted Dollars\", \"page\": 10, \"quotes\": [\"to the Devoted Dollars program to receive the rewards.\", \"and $20 for getting your yearly flu vaccine.\"], \"note\": \"Grocery and gas reward card earned for getting the yearly flu vaccine. Members must opt in to the program.\"}]\n```",
+ "usage": {
+  "input_tokens": 3273,
+  "output_tokens": 601,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

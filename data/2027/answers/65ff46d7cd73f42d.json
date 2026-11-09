@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "aca9d3510177adcd.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-455-0\", \"benefit\": \"meals\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"2 meals per day for 7 days after inpatient stay; limited to 4 times per calendar year\", \"page\": 46, \"quotes\": [\"Humana Well Dine® meal program\", \"In-Network: $0 copayment\", \"Meal program limited to 4 times per calendar year.\"], \"note\": \"\"},\n{\"plan_id\": \"H5216-455-0\", \"benefit\": \"meals\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"14\", \"unit\": \"meals\", \"limit\": \"per inpatient stay; up to 4 times per calendar year\", \"page\": 46, \"quotes\": [\"14 nutritious meals will be delivered to your home.\", \"Meal program limited to 4 times per calendar year.\"], \"note\": \"\"},\n{\"plan_id\": \"H5216-455-0\", \"benefit\": \"meals\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"up to two meals per day for 30 days\", \"condition\": \"After your inpatient stay for Congestive Heart Failure (CHF)\", \"page\": 47, \"quotes\": [\"Uniformity flexibility nutritional benefit\", \"In-Network: $0 copayment\", \"After your inpatient stay for Congestive Heart Failure (CHF)\"], \"note\": \"\"},\n{\"plan_id\": \"H5216-455-0\", \"benefit\": \"meals\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"60\", \"unit\": \"meals\", \"limit\": \"for 30 days\", \"condition\": \"After your inpatient stay for Congestive Heart Failure (CHF)\", \"page\": 47, \"quotes\": [\"home delivered meals per day for 30 days (up to 60 meals)\", \"After your inpatient stay for Congestive Heart Failure (CHF)\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 4059,
+  "output_tokens": 2381,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

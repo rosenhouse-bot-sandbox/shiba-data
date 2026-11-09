@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-7dcf10accd77535d.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 6 Worldwide Emergency row does give a $130 copay. But care outside the U.S. is not Medicare-covered, so this is a supplemental benefit and covered_by 'medicare' is doubtful.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Page 6 does state a $50,000 maximum plan coverage for worldwide emergency and urgent care. But worldwide coverage is a supplemental benefit, not Medicare-covered, so covered_by 'medicare' is doubtful.\"}]\n```",
+ "usage": {
+  "input_tokens": 2118,
+  "output_tokens": 612,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

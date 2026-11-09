@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "0050f865534f41bb.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H1036-323-0\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$115\", \"page\": 53,\n   \"quotes\": [\"Emergency Services $115 copayment – Emergency Room\"],\n   \"note\": \"Emergency room copay. The setting list has no emergency room option, so 'any' is used.\"},\n  {\"plan_id\": \"H1036-323-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"out\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$115\", \"page\": 53,\n   \"quotes\": [\"Worldwide Coverage $115 copayment – Emergency Room\"],\n   \"note\": \"Listed under Out-of-Network as worldwide coverage. Page 37 calls worldwide emergency and urgent care a supplemental benefit.\"},\n  {\"plan_id\": \"H1036-323-0\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$40\", \"page\": 73,\n   \"quotes\": [\"Urgently Needed Services $40 copayment – Urgent Care Center\"],\n   \"note\": \"Urgently needed services copay at an urgent care center. The setting list has no urgent care center option, so 'any' is used.\"},\n  {\"plan_id\": \"H1036-323-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"out\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$40\", \"page\": 73,\n   \"quotes\": [\"Worldwide Coverage $40 copayment – Urgent Care Center\"],\n   \"note\": \"Worldwide urgently needed services copay. Page 37 calls worldwide emergency and urgent care a supplemental benefit.\"}\n]\n```",
+ "usage": {
+  "input_tokens": 9302,
+  "output_tokens": 1960,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

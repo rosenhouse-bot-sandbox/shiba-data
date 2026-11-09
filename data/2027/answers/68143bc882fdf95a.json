@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-4ec81cd0d2695486.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 91, Supplemental benefits, Routine podiatry (foot care) row: $0 copayment in network. The 6-visit yearly limit is captured as its own fact in item 1.\"},\n {\"id\": 1, \"ok\": true, \"reason\": \"Page 91, Supplemental benefits, Routine podiatry (foot care) row: limit 6 visits every year.\"}]\n```",
+ "usage": {
+  "input_tokens": 2226,
+  "output_tokens": 395,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

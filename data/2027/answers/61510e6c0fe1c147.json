@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "161c63c8abccc6dc.md",
+ "reply": "```json\n[{\"plan_id\": \"H2406-070-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$55\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 92,\n  \"quotes\": [\"Additional routine foot care\", \"$55 copayment or each routine visit.\"], \"note\": \"\"},\n {\"plan_id\": \"H2406-070-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"out\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$90\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 92,\n  \"quotes\": [\"Additional routine foot care\", \"$90 copayment or each routine visit.\"], \"note\": \"\"},\n {\"plan_id\": \"H2406-070-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"any\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"6\", \"unit\": \"\", \"limit\": \"per year\", \"page\": 92,\n  \"quotes\": [\"We cover 6 in and out-o -network routine oot care visits every year.\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 2726,
+  "output_tokens": 1087,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

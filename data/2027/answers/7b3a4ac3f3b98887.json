@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "630e49b10e7ad131.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-317-0\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 79,\n  \"pool\": \"Virtual Cardiac Recovery Program\",\n  \"condition\": \"members with recent heart failure-related hospitalization\",\n  \"quotes\": [\"Virtual Cardiac Recovery Program\", \"$0 copayment\"], \"note\": \"\"},\n {\"plan_id\": \"H1036-317-0\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"page\": 87,\n  \"pool\": \"HMO Travel Benefit\",\n  \"quotes\": [\"when traveling within the United States, the HMO Travel Benefit enables you to get plan covered services, including preventive care\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 7588,
+  "output_tokens": 1364,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-b4be2a8a3e57d86a.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 17 Humana Well Dine: after an inpatient stay, 2 home-delivered meals per day for 7 days (up to 14 meals). The in-network supplemental limit of 14 meals per stay matches.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 17 Humana Well Dine: $0 copayment for the meal program after an inpatient stay, limited to 4 times per year. The in-network supplemental copay matches.\"}]\n```",
+ "usage": {
+  "input_tokens": 2392,
+  "output_tokens": 332,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
