@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-95.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 57, Humana Well Dine meal program row: $0 copayment in network after an inpatient stay for CHF in a hospital or skilled nursing facility. Limit is up to two home delivered meals per day for 30 days (up to 60 meals). This is a supplemental benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2635,
+  "output_tokens": 257,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

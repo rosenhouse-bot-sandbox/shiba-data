@@ -983,7 +983,10 @@ VERSIONS[6] = VERSIONS[5] | {
     ("dvha.I_alt_care_otc_travel", p): "the facts give no worldwide emergency maximum" for p in ("H7006-018-0", "H7006-021-0")} | {
     ("dvha.J_extra_benefits", p): "the facts miss the Virtual Cardiac Recovery Program"
     for p in ("H1036-323-0", "H1036-317-0", "H5216-455-0")} | {
-    ("dvha.J_extra_benefits", "H1036-306-0"): "the facts miss the meals for every member"}
+    ("dvha.J_extra_benefits", "H1036-306-0"): "the facts miss the meals for every member"} | {
+    ("dvha.J_extra_benefits", p): "the reviewer found that the facts understate who qualifies for the Virtual Cardiac "
+                                  "Recovery Program"
+    for p in ("H1036-153-0", "H5216-428-2", "H5216-048-0", "H5216-427-2")}
 # The version that first presents each DVHA column. Earlier versions hold its cells.
 DVHA_SINCE = {"C_premium": 3, "G_vision": 4, "H_hearing": 4, "E_optional_packages": 5, "F_dental": 6,
               "I_alt_care_otc_travel": 6, "J_extra_benefits": 6}

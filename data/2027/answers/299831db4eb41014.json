@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-8.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 78 dental table, In-Network column: D9222, D9239/D9246 and D9230 are each 0% (out-of-network 100%). These are adjunctive anesthesia services in a coded routine dental schedule with an annual maximum, so supplemental comprehensive dental at 0% coinsurance fits.\"}]\n```",
+ "usage": {
+  "input_tokens": 2469,
+  "output_tokens": 664,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-96.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 69 Meal benefit row: in network, $0 copay for up to 2 meals per day for 14 days (28 meals per episode). The plan, the benefit, the cost and the limit all match.\"}]\n```",
+ "usage": {
+  "input_tokens": 2207,
+  "output_tokens": 335,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

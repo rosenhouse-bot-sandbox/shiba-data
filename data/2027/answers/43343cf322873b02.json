@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-11.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 57 says there is no coinsurance or copayment for supplemental dental, which is a $0 cost share, and it gives a $1,000 maximum. The page states amounts, so cost_kind `covered` (no amount stated) does not fit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2163,
+  "output_tokens": 718,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

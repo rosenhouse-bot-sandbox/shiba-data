@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "cabbc3b82885b498.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-025-0\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"any\", \"pool\": \"Dental and Alternative Therapy Allowance\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"limit\": \"up to the yearly allowance\", \"page\": 7, \"quotes\": [\"you will receive 50% reimbursement up to the yearly allowance\"], \"note\": \"The page says the plan reimburses 50% of comprehensive dental costs up to the allowance, so the member pays 50%.\"},\n {\"plan_id\": \"H2923-025-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"any\", \"pool\": \"Dental and Alternative Therapy Allowance\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"0%\", \"limit\": \"up to the yearly allowance\", \"page\": 7, \"quotes\": [\"100% reimbursement up to the yearly allowance\"], \"note\": \"The page says the plan reimburses 100% of preventive dental costs up to the allowance, so the member pays 0%. The quote shows 100% rather than 0%, so it may fail the number check.\"}]\n```",
+ "usage": {
+  "input_tokens": 2908,
+  "output_tokens": 1814,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

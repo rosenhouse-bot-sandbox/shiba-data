@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-630e49b10e7ad131.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 54 Dental services row: the plan covers Mandatory Supplemental Dental Benefits, which include preventive services. The In-Network column points to a description at the end of the chart and gives no amount on this page, so covered is correct.\"}]\n```",
+ "usage": {
+  "input_tokens": 2584,
+  "output_tokens": 282,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

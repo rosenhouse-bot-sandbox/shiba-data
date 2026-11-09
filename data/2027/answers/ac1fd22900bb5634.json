@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-86.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 69 Meal benefit row for H3805-040-0 shows a $0 copayment for home-delivered meals after a covered inpatient or SNF stay. Medicare does not cover meals, so supplemental is right. The page states no separate out-of-network amount, so in-network $0 copay matches.\"}]\n```",
+ "usage": {
+  "input_tokens": 2323,
+  "output_tokens": 587,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

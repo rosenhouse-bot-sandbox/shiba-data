@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "630e49b10e7ad131.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-317-0\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\", \"pool\": \"Virtual Cardiac Recovery Program\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"condition\": \"members with recent heart failure-related hospitalization\", \"page\": 79, \"quotes\": [\"Virtual Cardiac Recovery Program\", \"$0 copayment\"], \"note\": \"Condition wording is copied from page 48. Page 79 says eligible members must have had an inpatient or observation hospitalization within the past 30 days related to a heart failure diagnosis.\"}]\n```",
+ "usage": {
+  "input_tokens": 7820,
+  "output_tokens": 934,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

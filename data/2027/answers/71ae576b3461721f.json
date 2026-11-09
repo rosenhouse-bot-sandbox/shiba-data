@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "0bd982dc589e8cba.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-427-2\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"2\", \"unit\": \"procedure codes\", \"limit\": \"per calendar year\", \"page\": 72, \"quotes\": [\"Frequency/Limits – 2 procedure codes per calendar year\"], \"note\": \"Limit is stated under the Exams heading, so it may apply only to oral exams.\"}]\n```",
+ "usage": {
+  "input_tokens": 11715,
+  "output_tokens": 793,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

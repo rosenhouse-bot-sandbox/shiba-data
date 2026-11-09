@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-74.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 85 'Additional routine foot care' row says the plan covers 6 routine foot care visits every year. This is a supplemental benefit added to Medicare podiatry, and the item's 6 per year matches.\"}]\n```",
+ "usage": {
+  "input_tokens": 2193,
+  "output_tokens": 218,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-21.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 39 emergency care row lists a $130 copay for emergency care worldwide (outside the United States). The same row lists worldwide emergency care as a supplemental benefit offered in addition to Medicare. The copay amount, benefit and setting match. 'Per visit' is not written on the page but is the usual unit for an emergency copay.\"}]\n```",
+ "usage": {
+  "input_tokens": 2347,
+  "output_tokens": 470,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

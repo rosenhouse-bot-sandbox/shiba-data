@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-49.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 72 Emergency care row: '$130 copay for emergency services outside of the United States.' This is a supplemental worldwide benefit. The page says out-of-network emergency cost sharing equals in-network, so the in-network default holds. The copay applies per emergency encounter, even if you are admitted.\"}]\n```",
+ "usage": {
+  "input_tokens": 2041,
+  "output_tokens": 615,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

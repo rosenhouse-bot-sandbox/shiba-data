@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-34.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 71, Worldwide Emergency Care (services outside the United States), listed under supplemental benefits: the plan covers worldwide emergency, urgent care and ambulance services up to $25,000 per lifetime.\"}]\n```",
+ "usage": {
+  "input_tokens": 2293,
+  "output_tokens": 404,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

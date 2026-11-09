@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-18.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 53 Emergency care row, Out-of-Network: 'Worldwide Coverage $115 copayment – Emergency Room'. This matches a worldwide (outside the U.S.) emergency benefit with a $115 copay. The page does not label it supplemental, but worldwide emergency coverage is the plan's routine add-on to Medicare emergency care.\"}]\n```",
+ "usage": {
+  "input_tokens": 2404,
+  "output_tokens": 687,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

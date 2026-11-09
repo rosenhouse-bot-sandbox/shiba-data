@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-75.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 84, 'Additional routine foot care' row (supplemental, added on top of the Medicare podiatry benefit): $45 copayment for each routine visit. No out-of-network amount appears on this line.\"}]\n```",
+ "usage": {
+  "input_tokens": 2456,
+  "output_tokens": 228,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
