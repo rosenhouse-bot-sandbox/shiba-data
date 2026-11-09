@@ -34,6 +34,21 @@ class StepTest(StepsTest):
                          [("copay", "$0-$40", "EOC"), ("covered", "", "EOC")])
         self.assertEqual(asked, [("read", "r", "high"), ("read", "r", "high"), ("check", "v", "low")])
 
+    def test_a_merge_version_keeps_answers_that_differ_only_in_notes(self):
+        def fake(task_dir, model, effort):
+            for task in glob.glob(f"{task_dir}/*.md"):
+                text = pathlib.Path(task).read_text()
+                reply = ([{"id": n, "ok": True} for n in range(text.count('{"id": '))] if os.path.basename(task).startswith("v-")
+                         else [answer(page=1, note="a"), answer(page=1, note="b")])
+                with open(task[:-3] + ".json", "w") as f:
+                    json.dump(reply, f)
+
+        for merge, count in ((False, 0), (True, 1)):
+            version = dict(groups=("imaging",), reader=("r", "high"), verifier=("v", "low"), merge=merge)
+            with mock.patch.dict(document_facts.VERSIONS, {9: version}):
+                document_facts.step(self.data, self.work, self.dir, fake, 9)
+            self.assertEqual(len(facts.read(self.data / "machine" / "document_facts.csv")), count, merge)
+
     def test_a_second_reader_adds_new_facts_for_the_plans_it_rechecks(self):
         with open(self.data / "generated" / "documents_checked.csv", "w") as f:
             f.write(f"plan_ids,kind,sha256\nH1036-306-0;H1036-307-0,EOC,{SHA}\n")
@@ -145,6 +160,9 @@ class StepTest(StepsTest):
         self.assertEqual(dict(v14, recheck=v13["recheck"]), v13)
         self.assertIn("H6815-038-0", v14["recheck"]["hearing"])
         self.assertIn("H9003-009-0", v14["recheck"]["hearing"])
+
+    def test_version_15_merges_answers_that_differ_only_in_quotes(self):
+        self.assertEqual(document_facts.VERSIONS[15], dict(document_facts.VERSIONS[14], merge=True))
 
     def test_version_9_adds_vision_hearing_fitness_otc_and_packages_to_7(self):
         self.assertEqual(document_facts.VERSIONS[9], dict(document_facts.VERSIONS[7], groups=document_facts.VERSIONS[7]["groups"]
