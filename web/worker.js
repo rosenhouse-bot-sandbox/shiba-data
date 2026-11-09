@@ -2,7 +2,7 @@
 // /blobs/<sha256>.txt serves a model prompt, which the Pipeline workflow stores the same way.
 // The static site comes from the assets directory.
 // CI downloads every blob through this route too, so it needs no R2 credentials.
-// /trace/2027/main/<plan_id>/<col> serves a cell's trace from D1 once every cell of the deployed commit's build has
+// /trace/2027/<sheet>/<plan_id>/<col> serves a cell's trace from D1 once every cell of the deployed commit's build has
 // loaded. Until then, and for other years, it serves the static file that web/build.py writes.
 // Only a trace load may change anything, so every other request must be a GET or HEAD.
 export default {
@@ -18,11 +18,11 @@ export default {
     if (!["GET", "HEAD"].includes(request.method)) {
       return new Response("Method not allowed", { status: 405, headers: { Allow: "GET, HEAD" } });
     }
-    const [, year, plan, col] = url.pathname.match(/^\/trace\/(\d+)\/main\/([^/]+)\/([^/.]+)$/) ?? [];
+    const [, year, cell] = url.pathname.match(/^\/trace\/(\d+)\/((?:main|dvha)\/[^/]+\/[^/.]+)$/) ?? [];
     if (year) {
       const row = year === D1_YEAR && env.COMMIT && await env.TRACE.prepare(
         "SELECT json FROM cell_json WHERE hash = (SELECT cells ->> ? FROM build WHERE sha = ?)")
-        .bind(`$."${plan}/${col}"`, env.COMMIT).first().catch(() => null);
+        .bind(`$."${cell}"`, env.COMMIT).first().catch(() => null);
       if (row) {
         return new Response(row.json.replaceAll(COMMIT, env.COMMIT), { headers: { "Content-Type": "application/json; charset=utf-8" } });
       }
@@ -53,8 +53,8 @@ export default {
 };
 
 // CI loads each main build into D1 from R2: trace/<year>/<sha>.json names the file in trace/<year>/cells/ that holds
-// each cell's trace. CI repeats the load while it answers 409. Each load adds a few cells that D1 lacks, so a cell that
-// did not change since an earlier build costs no writes. Once D1 has every cell, the load adds the build.
+// each cell's trace, by <sheet>/<plan_id>/<col>. CI repeats the load while it answers 409. Each load adds a few cells
+// that D1 lacks, so a cell that did not change since an earlier build costs no writes. Once D1 has every cell, the load adds the build.
 // LOAD_TOKEN is a secret that the deploy job gives the Worker and the trace job derives the same way.
 const D1_YEAR = "2027";
 const COMMIT = "${commit}";

@@ -120,7 +120,7 @@ function route() {
   markOpenPlans();
   const at = state.kind && { kind: state.kind, page: state.page };
   // Links from before column ids name the column by its key.
-  const column = site[state.sheet]?.columns.find((c) => c.id === state.column || c.key === state.column);
+  const column = sheetOf(state)?.columns.find((c) => c.id === state.column || c.key === state.column);
   const td = column && content.querySelector(
     `td[data-sheet="${state.sheet}"][data-plan="${CSS.escape(state.plan)}"][data-col="${CSS.escape(column.key)}"]`);
   if (td) {
@@ -139,15 +139,18 @@ function route() {
   updateUrl();
 }
 
+// A link may name any sheet, but only a sheet the site shows has cells.
+const sheetOf = (state) => Object.hasOwn(SHEET_NAMES, state.sheet) ? site[state.sheet] : null;
+
 // An unknown cell opens the example cell, and a step the cell skips opens its first step.
 let howTicket = 0;
 async function routeHow(state) {
   hideViewer();
   const ticket = ++howTicket, asked = location.hash;
   // Links from before column ids name the column by its key.
-  const asColumn = site.main.columns.find((c) => c.id === state.column || c.key === state.column);
-  const known = state.sheet === "main" && asColumn && site.main.rows.some((r) => r.plan_id === state.plan);
-  const plan = known ? state.plan : EXAMPLE.plan;
+  const asColumn = sheetOf(state)?.columns.find((c) => c.id === state.column || c.key === state.column);
+  const known = asColumn && site[state.sheet].rows.some((r) => r.plan_id === state.plan);
+  const { sheet, plan } = known ? state : EXAMPLE;
   const column = known ? asColumn : site.main.columns.find((c) => c.id === EXAMPLE.column);
   document.querySelectorAll("header nav a").forEach((a) => a.classList.toggle("active", a.dataset.view === "how"));
   const content = $("#content");
@@ -158,25 +161,25 @@ async function routeHow(state) {
     content.replaceChildren(el("p", { class: "how-loading" }, "Loading the cell's trace…"));
   }
   here = { key: "how", view: "how" };
-  const trace = await traceOf(plan, column.key);
+  const trace = await traceOf(sheet, plan, column.key);
   if (ticket !== howTicket || location.hash !== asked) return;
   const steps = chain(trace);
   const step = steps.find((s) => s.id === state.step) ?? steps[0];
-  const value = site.main.rows.find((r) => r.plan_id === plan).cells[column.key].value;
-  const cell = { plan, column: column.id, label: `${plans[plan].plan_name} · ${column.label}`, value };
+  const value = site[sheet].rows.find((r) => r.plan_id === plan).cells[column.key].value;
+  const cell = { sheet, plan, column: column.id, label: `${plans[plan].plan_name} · ${column.label}`, value };
   const hash = howLink(site.year, cell, step);
   if (location.hash !== hash) history.replaceState(null, "", hash);
   routed = location.hash;
   content.replaceChildren(howView({ year: site.year, cell, step, steps, terms: site.terms, trace }));
-  if (state.plan && !known) content.prepend(el("p", { class: "warn" }, "That link names no main-sheet cell, so this shows the example cell."));
+  if (state.plan && !known) content.prepend(el("p", { class: "warn" }, "That link names no cell, so this shows the example cell."));
   content.querySelector(".how-map").scrollTop = mapTop;
   if (map) content.querySelector(".how-step").focus({ preventScroll: true });
 }
 
 // A failed load is not kept, so the next visit tries again.
 const traces = {};
-const traceOf = (plan, columnKey) => {
-  const url = traceUrl(site.year, plan, columnKey);
+const traceOf = (sheet, plan, columnKey) => {
+  const url = traceUrl(site.year, sheet, plan, columnKey);
   return traces[url] ??= fetch(url).then((r) => r.ok ? r.json() : null).catch(() => null)
     .then((trace) => trace ?? (delete traces[url], null));
 };
@@ -188,11 +191,22 @@ function pick(td) {
   td.classList.add("selected");
   selection = td;
   td.scrollIntoView({ block: "nearest", inline: "nearest" });
+  linkHow();
 }
 
 function unpick() {
   document.querySelectorAll(".selected").forEach((s) => s.classList.remove("selected"));
   selection = null;
+  linkHow();
+}
+
+// The ? beside a cell's note and the header's "How it's made" open the selected cell's pipeline view.
+function linkHow() {
+  const { sheet, plan, col } = selection?.dataset ?? {};
+  const href = selection ? format({ year: site.year, view: "how", sheet, plan, column: site[sheet].columns.find((c) => c.key === col).id }) : "#/how";
+  $("#how-this").hidden = !selection;
+  $("#how-this").href = href;
+  $("header nav a[data-view=how]").href = href;
 }
 
 // The document and page that opening the selected cell, or the plan page, shows first.
@@ -330,10 +344,6 @@ function openCell(plan, column, cell, at = null) {
       cell.value ? `This value comes from CMS ${site.year} plan data, which has no page to point to. `
         : `The CMS ${site.year} Plan Benefit Package data has no entry for this benefit. `,
       "The plan's Summary of Benefits is shown for reference."), ...cmsFields(cell), medicareGov(plan, column));
-  }
-  if (site.main.columns.includes(column)) {
-    note.append(el("p", { class: "how-link" },
-      el("a", { href: format({ year: site.year, view: "how", sheet: "main", plan: plan.plan_id, column: column.id }) }, "How the pipeline made this cell →")));
   }
   const first = cell.cites[0] || cell.comment || { doc: planSb(plan), page: 1, quote: null };
   const doc = plan.docs.find((d) => site.docs[d].kind === at?.kind);

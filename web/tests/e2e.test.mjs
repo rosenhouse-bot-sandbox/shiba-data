@@ -938,13 +938,52 @@ test("pipeline view: a blank cell with a blank-cell citation shows the blanks st
   assert.equal(await page.textContent(".how-strip"), "SB and EOC page text becomes 2 quotes from EOC pages 51, 102");
 });
 
-test("pipeline view: a main-sheet cell's detail links to its pipeline view", async () => {
+test("pipeline view: a main-sheet cell's detail links to its pipeline view from a ? in its corner", async () => {
   await page.goto("about:blank");
   await page.goto(`${base}#/2027/main/H5216-048-0/premium`);
-  await page.click("a:text('How the pipeline made this cell')");
+  const link = page.locator("#how-this");
+  assert.equal(await link.textContent(), "?");
+  assert.equal(await link.getAttribute("title"), "How was this cell computed?");
+  const [note, q] = [await page.locator("#source-note").boundingBox(), await link.boundingBox()];
+  assert.ok(q.x + q.width <= note.x + note.width && q.x + q.width > note.x + note.width - 30, JSON.stringify([note, q]));
+  assert.ok(q.y + q.height <= note.y + note.height && q.y + q.height > note.y + note.height - 30, JSON.stringify([note, q]));
+  await link.click();
   await page.waitForSelector(".how-lens");
   assert.match(page.url(), /#\/2027\/how\/main\/H5216-048-0\/premium\/list-plans$/);
   assert.match(await page.textContent(".how-cell"), /Premium/);
+});
+
+test("pipeline view: a DVHA cell's detail links to its pipeline view, which shows the DVHA draft and rule", async () => {
+  await page.goto("about:blank");
+  await page.goto(`${base}#/2027/dvha/H1036-153-0/vision`);
+  await page.click("#how-this");
+  await page.waitForSelector(".how-lens");
+  assert.match(page.url(), /#\/2027\/how\/dvha\/H1036-153-0\/vision\/list-plans$/);
+  assert.match(await page.textContent(".how-cell"), /Vision/);
+  assert.ok((await chainOf(page)).includes("Column rules"));
+  await openHow(page, "dvha/H1036-153-0/vision/draft");
+  assert.deepEqual(await page.locator(".how-end code").allTextContents(), ["PBP tables", "dvha.csv"]);
+  await page.click(".how-trace summary");
+  assert.match(await page.textContent(".how-trace pre"), /pipeline\/dvha\.py/);
+  await openHow(page, "dvha/H1036-153-0/vision/column-rules");
+  assert.match(await page.textContent(".how-strip"), /becomes line 1 /);
+});
+
+test("pipeline view: How it's made opens the selected cell, or the example cell when none is selected", async () => {
+  await page.goto("about:blank");
+  await page.goto(`${base}#/2027/dvha/H1036-153-0/vision`);
+  await page.click("nav a[data-view=how]");
+  await page.waitForSelector(".how-lens");
+  assert.match(page.url(), /#\/2027\/how\/dvha\/H1036-153-0\/vision\/list-plans$/);
+  await page.goto(`${base}#/2027/main`);
+  await page.waitForSelector("td[data-col]");
+  assert.equal(await page.getAttribute("nav a[data-view=how]", "href"), "#/how");
+});
+
+test("pipeline view: a plan's page, which has no cell, has no ? link", async () => {
+  await page.goto(`${base}#/2027/plan/H1036-153-0`);
+  await page.waitForSelector("#viewer:not([hidden])");
+  assert.ok(!(await page.locator("#how-this").isVisible()));
 });
 
 test("pipeline view: says it is loading, and a cell picked meanwhile stays", async () => {
@@ -965,10 +1004,23 @@ test("pipeline view: says it is loading, and a cell picked meanwhile stays", asy
   assert.match(fresh.url(), /#\/2027\/main$/);
 });
 
-test("pipeline view: a link to no main-sheet cell shows the example cell and says so", async () => {
+test("a Notes link that names no sheet shows Notes", async () => {
+  const fresh = await newPage();
+  const errors = [];
+  fresh.on("pageerror", (e) => errors.push(e.message));
+  await fresh.goto(`${base}#/2027/notes/docs/H1036-153-0/ambulance`);
+  await fresh.waitForSelector(".notes-page");
+  assert.deepEqual(errors, []);
+});
+
+test("pipeline view: a link to no cell shows the example cell and says so", async () => {
   await openHow(page, "main/NOPE/ambulance/draft");
-  assert.match(await page.textContent(".warn"), /names no main-sheet cell/);
+  assert.match(await page.textContent(".warn"), /names no cell/);
   assert.match(page.url(), /H1036-153-0\/ambulance\/draft$/);
+  await openHow(page, "dvha/H1036-153-0/ambulance/draft");
+  assert.match(page.url(), /how\/main\/H1036-153-0\/ambulance\/draft$/);
+  await openHow(page, "docs/H1036-153-0/ambulance/draft");
+  assert.match(await page.textContent(".warn"), /names no cell/);
 });
 
 test("pipeline view: a link may name the column by its key", async () => {

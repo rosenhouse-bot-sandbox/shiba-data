@@ -73,6 +73,8 @@ export const NODES = {
         '   of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance"'] } },
 };
 
+export const DRAFT_FILES = { main: "main_chart.csv", dvha: "dvha.csv" };
+
 // A paragraph is a list of segments: a string, or [term, text] for a term in web/terms.py.
 // record names the key of the cell's trace (#181) that shows the step.
 // paras hold for any cell. example holds only for the example cell, on the steps that touched it: highlight lists the example rows

@@ -2,7 +2,7 @@
 import { el, svg } from "./dom.js";
 import { format } from "./permalink.js";
 import {
-  EXAMPLE, NODES, STEPS, LINKS, NODE_W, NODE_H, MAP_W, MAP_H,
+  EXAMPLE, NODES, STEPS, DRAFT_FILES, LINKS, NODE_W, NODE_H, MAP_W, MAP_H,
   nodeBox, pillBox, edge, before, after, strip, details,
 } from "./pipeline.js";
 
@@ -10,12 +10,13 @@ import {
 const RAIL_W = 492;
 const SCALE = RAIL_W / MAP_W;
 
-export const howLink = (year, cell, step) => format({ year, view: "how", sheet: "main", plan: cell.plan, column: cell.column, step: step.id });
-export const traceUrl = (year, plan, columnKey) => `trace/${year}/main/${plan}/${columnKey}`;
+export const howLink = (year, cell, step) => format({ year, view: "how", sheet: cell.sheet, plan: cell.plan, column: cell.column, step: step.id });
+export const traceUrl = (year, sheet, plan, columnKey) => `trace/${year}/${sheet}/${plan}/${columnKey}`;
 const shown = (id) => NODES[id].table ?? NODES[id].text;
-const isExample = (cell) => cell.plan === EXAMPLE.plan && cell.column === EXAMPLE.column;
+const label = (id, sheet) => id === "draft" ? DRAFT_FILES[sheet] : NODES[id].label;
+const isExample = (cell) => cell.sheet === EXAMPLE.sheet && cell.plan === EXAMPLE.plan && cell.column === EXAMPLE.column;
 
-// cell is { plan, column, label, value }. steps are the ones that touched it, from chain().
+// cell is { sheet, plan, column, label, value }. steps are the ones that touched it, from chain().
 export function howView({ year, cell, step, steps, terms, trace }) {
   const at = steps.indexOf(step);
   const link = (s) => howLink(year, cell, s);
@@ -29,11 +30,11 @@ export function howView({ year, cell, step, steps, terms, trace }) {
       prev ? el("a", { class: "how-nav", href: link(prev), rel: "prev" }, "← Prev") : el("span", { class: "how-nav off" }, "← Prev"),
       el("span", { class: "how-count" }, `${at + 1} of ${steps.length}`),
       next ? el("a", { class: "how-nav primary", href: link(next), rel: "next" }, "Next →") : el("span", { class: "how-nav primary off" }, "Next →")),
-    el("div", { class: "how-body" }, map(step, steps, link),
-      lens(step, steps, link, terms, isExample(cell) ? step.example : null, trace)));
+    el("div", { class: "how-body" }, map(step, steps, link, cell.sheet),
+      lens(step, steps, link, terms, isExample(cell) ? step.example : null, trace, cell.sheet)));
 }
 
-function map(step, steps, link) {
+function map(step, steps, link, sheet) {
   const on = new Set([step.from, step.to]);
   const skip = (s) => s.extra || steps.includes(s) ? "" : " skip";
   const lines = svg("svg", { width: MAP_W, height: MAP_H, "aria-hidden": "true" },
@@ -49,8 +50,8 @@ function map(step, steps, link) {
     return el("div", {
       class: `how-node${on.has(id) ? " on" : ""}${n.source ? " source" : ""}`,
       style: `left:${b.x}px;top:${b.y}px;width:${NODE_W}px;height:${NODE_H}px`,
-      title: `${n.kind}: ${n.label}`,
-    }, el("small", {}, n.kind), el("code", {}, n.label));
+      title: `${n.kind}: ${label(id, sheet)}`,
+    }, el("small", {}, n.kind), el("code", {}, label(id, sheet)));
   });
   const pills = STEPS.map((s) => {
     const b = pillBox(s);
@@ -67,11 +68,11 @@ function map(step, steps, link) {
       el("span", { class: "source" }, "■"), " source ", el("span", {}, "■"), " table the pipeline writes"));
 }
 
-function lens(step, steps, link, terms, example, trace) {
+function lens(step, steps, link, terms, example, trace, sheet) {
   const chips = (near, cls, text) => near.length ? el("div", { class: `how-chips ${cls}` },
     ...near.map((s) => el("a", { href: link(s) }, text(s.label)))) : null;
   const end = (id) => el("div", { class: `how-end${NODES[id].source ? " source" : ""}` },
-    el("small", {}, NODES[id].kind), el("code", {}, example ? shown(id).name : NODES[id].label));
+    el("small", {}, NODES[id].kind), el("code", {}, example ? shown(id).name : label(id, sheet)));
   const fromTo = example ? [example.before, example.after] : strip(step, trace);
   const para = (p) => el("p", {}, ...p.map((s) => typeof s === "string" ? s : term(terms[s[0]], s[1])));
   return el("section", { class: "how-lens" },
