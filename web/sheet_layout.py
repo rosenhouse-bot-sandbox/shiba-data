@@ -14,6 +14,7 @@ FACT_COLUMNS = {"Plan ID": "plan_id", "Plan": None, "Benefit": "benefit", "Setti
                 "Source": "source", "Page": "page", "Quote or CMS field": None, "Note": "note"}
 # Keep in sync with --comment and --hand-written in web/static/style.css.
 FILLS = {"question": "FFF6D6", "hand_written": "E3F1E0"}
+# Keep in sync with KIND_NAMES in web/static/app.js.
 KIND_NAMES = {"question": "Open question", "hand_written": "Hand-written fact"}
 HEAD = "EEF1F6"
 SECTION = "1D2433"

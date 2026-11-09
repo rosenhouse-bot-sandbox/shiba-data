@@ -1,6 +1,6 @@
 // A permalink is #/<year>/<view>[/<cell>][/<document kind>/<PDF page>], where the cell is
 // <plan>/<column> on a sheet, <sheet>/<plan>/<column> on Notes, and <sheet>/<column> on a plan's page.
-// Links from before the year was added start at the view. Notes was called Ambiguities.
+// Links from before the year was added start at the view.
 const SHEETS = ["main", "dvha"];
 const VIEWS = [...SHEETS, "plan", "notes"];
 

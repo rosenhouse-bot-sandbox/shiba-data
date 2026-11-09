@@ -6,6 +6,7 @@ import { parse, format } from "./permalink.js";
 pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.worker.min.mjs";
 
 const SHEET_NAMES = { main: "Main chart", dvha: "Dental, vision, hearing & extras" };
+// Keep in sync with KIND_NAMES in web/sheet_layout.py.
 const KIND_NAMES = { question: "Open question", hand_written: "Hand-written fact" };
 let kindFilter = "";
 const $ = (sel) => document.querySelector(sel);
@@ -233,7 +234,7 @@ function valueCell(sheet, plan, column, cell) {
     "data-col": column.key,
     class: [cell.cites.length && "cited", cell.comment && "commented", cell.comment?.kind, /^[●◐]$/.test(cell.value) && "dot"]
       .filter(Boolean).join(" "),
-    title: cell.comment?.text || (cell.cites.length ? "Click to see the plan document page" : "From CMS plan data. Click to open the plan's Summary of Benefits."),
+    title: (cell.comment && `${KIND_NAMES[cell.comment.kind]}: ${cell.comment.text}`) || (cell.cites.length ? "Click to see the plan document page" : "From CMS plan data. Click to open the plan's Summary of Benefits."),
     onclick: () => {
       pick(td);
       pushNext = true;
