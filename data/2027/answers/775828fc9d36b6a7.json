@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "batch": true,
+ "task": "H5216-048-0.md",
+ "reply": "```json\n[{\"key\": \"dvha.F_dental\", \"result\": \"skip\"},\n {\"key\": \"dvha.I_alt_care_otc_travel\", \"result\": \"cite\", \"citations\": [{\"page\": 47, \"quote\": \"Up to 20 visits per calendar year\"}, {\"page\": 47, \"quote\": \"In-Network: $45 copayment\"}, {\"page\": 54, \"quote\": \"Worldwide Coverage $130 copayment\"}]}]\n```",
+ "usage": {
+  "input_tokens": 4252,
+  "output_tokens": 1560,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
