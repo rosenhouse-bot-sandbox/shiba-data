@@ -140,7 +140,7 @@ td.selected { outline: 3px solid var(--ink); outline-offset: -3px; }
 .how-step { margin: 0; padding: 10px 18px; border-radius: 22px; background: var(--accent); color: #fff; font-size: 15px; white-space: nowrap; }
 .how-card { padding: 14px 18px; background: #fff; border: 1px solid var(--line); border-radius: 12px; margin-bottom: 16px; }
 .how-card p { margin: 0 0 8px; line-height: 1.6; max-width: 820px; }
-.how-strip code { padding: 3px 8px; border-radius: 6px; font-size: 12px; }
+.how-strip code { padding: 3px 8px; border-radius: 6px; font-size: 12px; overflow-wrap: anywhere; }
 .how-strip .from { background: var(--hi-in); }
 .how-strip .to { background: var(--hi-out); }
 .how-term { background: none; border: 0; padding: 0; font: inherit; color: inherit; cursor: help; border-bottom: 1.5px dotted var(--accent); }

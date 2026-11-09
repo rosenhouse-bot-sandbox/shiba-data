@@ -933,7 +933,7 @@ test("pipeline view: a blank cell with a blank-cell citation shows the blanks st
   assert.equal(await page.textContent(".how-value"), "blank");
   assert.match(await page.textContent(".how-trace-head"), /model_citations\s*Traced/);
   assert.match(await page.textContent(".how-trace pre"), /"step": "blanks"/);
-  assert.equal(await page.textContent(".how-strip"), "blank becomes 2 quotes from EOC page 102, EOC page 51");
+  assert.equal(await page.textContent(".how-strip"), "SB and EOC page text becomes 2 quotes from EOC pages 51, 102");
 });
 
 test("pipeline view: a main-sheet cell's detail links to its pipeline view", async () => {
