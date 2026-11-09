@@ -1,273 +1,460 @@
 # How the plan sheets are made
 
-This page follows a plan year from public sources to the published sheets.
+SHIBA volunteers help people in Multnomah and Clackamas counties pick a Medicare Advantage plan.
+They compare plans on two sheets: the **main sheet** (premiums, copays and benefits) and the **DVHA sheet** (dental, vision, hearing and other extras).
+Each sheet has one row per plan and one column per benefit. A cell can hold several lines, separated by ` | `.
+
+This page shows how those sheets are built from public sources.
+Every example is real 2027 data, and most follow one cell.
 
 ## Terms
 
-- SHIBA (Oregon's Senior Health Insurance Benefits Assistance) volunteers help people choose Medicare plans. They read two sheets that compare the plans sold in the counties that `config.json` lists.
-- The **main sheet** shows premiums, copays and benefits, one row per plan. A dot (●) means the plan covers the benefit.
-- The **DVHA sheet** shows dental, vision, hearing and other extras.
-- A **cell** is one plan's value in one column. A cell can have several **lines**, shown with ` | ` between them.
-- CMS (the Centers for Medicare & Medicaid Services) publishes two files each year:
-  - The **Landscape** file lists the plans and their premiums.
-  - The **PBP** (plan benefit package) file holds what each plan told CMS it will cover, benefit by benefit.
-- Each plan publishes two PDFs:
-  - The **SB** (Summary of Benefits) is a short summary.
-  - The **EOC** (Evidence of Coverage) is the plan's full legal terms.
-  - Some plans also publish a **rider**, which describes optional benefits sold for an extra premium.
-- A **citation** is a quote from a page of a PDF that supports a cell. A volunteer can open the page and see the quote.
-- A **fact** is one cost or coverage term that a document states for one plan, such as "ground ambulance, in network, $250 copay".
+- **Medicare Advantage** plans are private plans that replace Original Medicare. Each sets its own copays and extra benefits, which is why volunteers need to compare them.
+- **CMS** (the Centers for Medicare & Medicaid Services) publishes two files each year. The **Landscape** file lists plans and premiums. The **PBP** (plan benefit package) file holds what each plan told CMS it covers.
+- Each plan publishes a **SB** (Summary of Benefits, about 10 to 25 pages) and an **EOC** (Evidence of Coverage, the full legal terms, about 200 pages). Some also publish a **rider** for optional benefits.
+- A **fact** is one cost that a document states for one plan, such as "ground ambulance, in network, $325 copay".
+- A **citation** is a quote and a PDF page that supports a cell.
 
-The EOC is the source of truth. When CMS data and the EOC disagree, the EOC wins.
+## One cell, start to finish
 
-## Where things live
+The cell is the Ambulance column of **Humana Total Complete (HMO)**, plan `H1036-153-0`, which ends up as:
 
 ```
-pipeline/                       code, prompts and tests
-pipeline/years.py               LIVE = 2027: the year the site shows
-data/2027/                      every input and output for plan year 2027
-data/2027/generated/            what code writes from the sources
-data/2027/machine/              what model steps write
-web/                            the site and the Google Sheet sync
-.github/workflows/pipeline.yml  the Pipeline workflow, which runs the pipeline on GitHub
-.github/workflows/pages.yml     the Site workflow, which checks, builds and publishes
+Ambulance:  $325 or 20% | $325
+            └─ in the U.S.  └─ outside the U.S.
 ```
 
-Bare `.py` names are in `pipeline/`. Other paths are relative to `data/<year>/`.
+On [pdxplans.org](https://pdxplans.org), a volunteer who clicks the cell sees the plan's own Evidence of Coverage open beside the sheet, with this quote highlighted:
 
-`run.py` runs sections 2 to 10, except the finder scripts in section 3, then the unit tests:
+> **EOC page 46:** "In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance"
 
-```
-python3 -I pipeline/run.py <year> <work_dir> [api|replay] [<step>@<version>]
-```
+The rule behind every cell: **the plan's own documents are the source of truth.** CMS data drafts the sheets quickly, but a volunteer can't check it, so the pipeline replaces or confirms each value with a quote from a PDF.
 
-`<work_dir>` holds downloads and scratch files, outside git. `api` lets model steps call the Claude API (section 6). `replay` reads the snapshot instead of the web (section 4). `<step>@<version>` runs a candidate version (section 13).
+## Who does what
+
+- **Gabe**, the engineer, directs the work and reviews pull requests. Commits appear under his GitHub account.
+- **A SHIBA domain expert** decided what each column should show, such as "line 2 of Ambulance is trips outside the U.S."
+- **Claude Code sessions** wrote the code and prompts, found the PDFs on carrier websites, checked model output, and wrote the hand-written facts and notes in [step 9](#9-claude-sessions-fix-what-is-left).
+- **Claude models**, called through the Claude API from GitHub Actions, read the PDFs during each pipeline run.
+- **SHIBA volunteers** kept a Links sheet of PDF URLs, which is one input.
 
 ## The whole picture
 
 ```mermaid
 flowchart TD
-  person[1. A person writes config.json, links.csv, found.csv] --> plans[2. List the plans]
-  person --> find
-  landscape[(CMS Landscape)] --> plans
-  plans --> find[3. Find each plan's SB and EOC]
-  carriers[(Carrier sites)] --> find
-  find --> snap[4. Download and snapshot the PDFs]
-  snap --> draft[5. Draft the sheets from CMS data]
-  pbp[(CMS PBP)] --> draft
-  snap --> models[6-10. Model steps read the PDFs]
-  models --> layers[12. Stack the layers]
-  draft --> layers
-  people[11. People's edits and comments] --> layers
-  layers --> publish[15. Publish the site and the Google Sheet]
+  cms[(CMS Landscape and PBP files)] --> plans[1. List the plans]
+  carriers[(Carrier websites)] --> find[2. Find each plan's PDFs]
+  plans --> find
+  find --> text[3. Download PDFs, extract page text]
+  cms --> draft[4. Draft every cell from CMS data]
+  text --> read[5. Claude reads facts from the PDFs]
+  read --> check[6. Code and a second Claude check each fact]
+  check --> present[7. Rules turn facts into cells]
+  text --> blanks[8. Claude explains blank cells, cites the rest]
+  draft --> stack[10. Stack the layers]
+  present --> stack
+  blanks --> stack
+  fix[9. Claude sessions fix what is left] --> present
+  fix --> stack
+  stack --> publish[11. Publish the site and Google Sheet]
 ```
 
-## 1. A person starts the year
+## 1. List the plans
 
-A person writes these small inputs:
+The CMS Landscape file has one row per plan per county, with about 50 fields. Here is part of our plan's Multnomah row:
 
-- `config.json` names the CMS file URLs, the state, the counties and the Google Sheet.
-- `links.csv` copies the volunteers' list of PDF links.
-- `found.csv` records PDF links that a person found, by hand or with a finder script (section 3).
-- `steps.json` pins the version of each versioned model step (section 13).
-
-## 2. List the plans
-
-```mermaid
-flowchart LR
-  landscape[(Landscape file)] --> universe[universe.py] --> plans[generated/plans.csv]
+```
+Contract Plan Segment ID          = H1036_153_0
+Plan Name                         = Humana Total Complete (HMO)
+Organization Marketing Name       = Humana
+Plan Type                         = HMO
+Special Needs Plan (SNP) Indicator = No
+Part C Premium                    = $0.00
+In-Network Maximum Out-of-Pocket (MOOP) Amount = $5,150.00
+Annual Part D Deductible Amount   = $700.00
+Overall Star Rating               = 4.5
 ```
 
-`universe.py` keeps the Medicare Advantage plans sold in every listed county. It drops plans for people with Medicaid or in institutions. For 2027 that leaves 39 plans.
+The pipeline keeps plans sold in both counties, drops plans only for people with Medicaid or in institutions, and writes one row per plan. 39 plans remain for 2027.
 
-A rerun rewrites `generated/` and `machine/`.
+`data/2027/generated/plans.csv`, selected columns:
 
-## 3. Find each plan's SB and EOC
-
-```mermaid
-flowchart LR
-  finders[Finder scripts<br>run by a person] --> found[found.csv]
-  found --> fd[find_docs.py]
-  links[links.csv] --> fd
-  templates[URL templates] --> fd
-  fd --> docs[generated/documents.csv]
+```
+plan_id,plan_name,plan_type,organization,premium,moop_in_network,part_d_deductible,...
+H1036-153-0,Humana Total Complete (HMO),HMO,Humana,$0,"$5,150",$700,...
 ```
 
-`find_docs.py` writes each plan's SB and EOC URLs to `generated/documents.csv`. For each plan and kind of document, it takes the first URL in `found.csv`, then in `links.csv`, then from URL templates for carriers whose URLs follow a pattern.
+## 2. Find each plan's PDFs
 
-Three finder scripts read carrier sites with a headless browser and write `found.csv`: `find_on_carrier_pages.py`, `find_by_plan_page.py` and `find_regence.py`. A person runs them. `run.py` does not.
+CMS doesn't link the PDFs, so the URLs come from three places:
 
-## 4. Download and snapshot the PDFs
+1. Carrier websites. Claude sessions drove a headless browser over each carrier's plan pages and recorded what they found in `found.csv`:
+   This row is for a UnitedHealthcare plan, because Humana's URLs come from the third source:
+   ```
+   plan_ids,kind,url,found_via
+   H3805-048-0,EOC,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,carrier plan page https://www.aarpmedicareplans.com/health-plans/details.html/97201/051/H3805048000/2027
+   ```
+2. The volunteers' Links sheet, copied to `links.csv`.
+3. URL patterns for carriers whose URLs are predictable, such as Humana's `H1036153000EOC27pdf`.
 
-```mermaid
-flowchart LR
-  docs[documents.csv] --> fetch[fetch_docs.py] --> checked[generated/documents_checked.csv]
-  fetch --> pdfs[PDFs] --> texts[texts.py] --> pagetext[Page texts]
-  pdfs --> r2[(R2 bucket, by hash)]
-  pagetext --> r2
-  pagetext --> tcsv[generated/texts.csv]
-  cms[(CMS files)] --> r2
+The pipeline takes the first URL it finds, in that order, for each plan and kind of document:
+
+```
+plan_ids,kind,url,found_via
+H1036-153-0,SB,https://assets.humana.com/is/content/humana/H1036153000SB27pdf,volunteers' Links sheet
+H1036-153-0,EOC,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,volunteers' Links sheet
 ```
 
-`fetch_docs.py` downloads each PDF and checks that its cover names the plan and says SB or EOC. It records each file's SHA-256 hash in `generated/documents_checked.csv`. `texts.py` extracts each page's text, and `generated/texts.csv` records the text files' hashes.
+## 3. Download the PDFs and extract their text
 
-The PDFs, texts and CMS files are too big for git. The Pipeline workflow stores them in a Cloudflare R2 bucket, named by hash. So the committed hashes pin the exact bytes that every later step reads.
+The pipeline downloads each PDF, and code checks that its cover names the plan and says SB or EOC. Its SHA-256 hash pins the exact bytes:
 
-`run.py ... replay` downloads nothing. It skips `find_docs.py` and `fetch_docs.py`, and reads the CMS files, PDFs and texts from the snapshot.
-
-## 5. Draft the sheets from CMS data
-
-```mermaid
-flowchart LR
-  pbp[(PBP file)] --> mc[main_chart.py] --> main[generated/main_chart.csv]
-  pbp --> dv[dvha.py] --> dvha[generated/dvha.csv]
-  pbp --> pf[pbp_facts.py] --> facts[generated/pbp_facts.csv]
-  texts[Page texts] --> cite[cite.py] --> cit[generated/citations.csv]
+```
+plan_ids,kind,...,sha256,pages,...
+H1036-153-0,SB,...,ce13e925c0384896d725da85a06c14dfbd268b422134b85b58640c8d7c494220,24,...
+H1036-153-0,EOC,...,64e05773e847b56e0eeb5425979d54996c5f1975307c9ae186f5af4fecafc44c,188,...
 ```
 
-`main_chart.py` and `dvha.py` fill every cell of both sheets from the PBP file. `pipeline/fields.py` holds each column's rules. `pbp_facts.py` writes the PBP's terms as facts (section 8).
+Then each page becomes text that keeps the page's columns, which is what models read. Here is part of SB page 9:
 
-CMS data is quick to parse, but nobody can cite it, so later sections cite its values from the PDFs or replace them. The PBP has no naturopathy category, so `cite.py` finds naturopathy in the PDFs and writes `generated/citations.csv`.
-
-## 6. Model steps and saved answers
-
-A **model step** asks a Claude model to read the PDFs. Each one writes a prompt file, a **task**, per plan or document, and a model answers it. The model steps run only for the `LIVE` year, in this order: `blanks.py`, `document_facts.py`, then `present.py`, which uses no model but reads the facts, then `filled.py`.
-
-```mermaid
-flowchart LR
-  task[Task text + model + effort] --> key{Saved in<br>answers/?}
-  key -- yes --> reuse[Reuse it]
-  key -- no --> api[Ask the Claude API] --> save[Save it]
+```
+=====PAGE 9=====
+ SKILLED NURSING FACILITY (SNF)
+ This plan covers up to 100 days in a SNF                  $10 copay per day for days 1-20
+                                                           $221 copay per day for days 21-100
+ AMBULANCE
+ Air                                                       20% of the cost
+ Ground                                                    $325 copay per date of service
+ TRANSPORTATION
+                                                           Not Covered
 ```
 
-`ask.py` sends tasks through the Claude API's Message Batches, at half price. It saves each answer in `answers/`, keyed by a hash of the model, the effort and the task's text. A rerun with the same inputs asks nothing and costs nothing. A change to a prompt or to the facts' vocabulary changes the task text, so the next run asks those tasks again.
+PDFs and texts are too big for git. They are stored in a Cloudflare R2 bucket, named by hash, so any later run reads the same bytes.
 
-Without `api`, `run.py` stops at the first model step with unanswered tasks, and lists them. With `api`, the Claude API answers them.
+## 4. Draft every cell from CMS data
 
-Each model step checks its answers the same way:
+The PBP file fills every cell of both sheets in seconds. Our plan's ambulance fields:
 
-```mermaid
-flowchart LR
-  reader[A reader model answers] --> code[Code checks each quote<br>against its page]
-  code --> verifier[A verifier model accepts or rejects,<br>with decoys mixed in]
-  verifier --> second[blanks.py and filled.py only:<br>a second verifier]
-  second --> kept[Accepted rows]
-  verifier --> kept
+```
+pbp_b10a_copay_gas_amt_min = 325.00    # ground ambulance copay
+pbp_b10a_copay_gas_amt_max = 325.00
+pbp_b10a_coins_aas_pct_min = 20        # air ambulance coinsurance
+pbp_b10a_coins_aas_pct_max = 20
+pbp_b4c_bendesc_ehc        = 111       # 2nd flag: worldwide emergency coverage
+pbp_b4c_copay_amt_wet_min  = 325.00    # worldwide emergency transportation copay
 ```
 
-A **decoy** is a real answer moved to the wrong plan, setting or column. If a verifier accepts a decoy, the run fails.
+These fields become the draft cell `$325 or 20% | $325`.
 
-## 7. Explain blank cells
+For ambulance, CMS data happens to match the EOC. For other columns it does not. The same plan's X-ray column:
 
-`blanks.py` explains why a cell is blank: the plan excludes the benefit, covers only the Medicare part, or sells it as an option. It writes `machine/blanks.csv`.
-
-It asks about the cells frozen in `machine/blanks_cells.json`, so later changes to the sheets leave its tasks unchanged. `python3 -I pipeline/blanks.py freeze` rewrites the file from the current layers.
-
-## 8. Read facts from the PDFs
-
-`pipeline/facts.py` defines a fact's fields and the words each field may use. Each fact keeps its quotes and page.
-
-```mermaid
-flowchart LR
-  pages[Pages that mention<br>the benefit group] --> reader[Reader lists facts]
-  reader --> code{Code checks}
-  code -- fails --> retry[Reader tries once more]
-  retry --> code
-  code -- passes --> verifier[Verifier, with decoys]
-  verifier --> csv[machine/document_facts.csv]
+```
+                  X-rays      CT, MRI, PET
+CMS draft         $0-$145     $0-$345       one range over every setting, including hospitals
+Published         $0-$30      $205-$330     the expert's rule: office prices only (EOC page 60)
 ```
 
-`document_facts.py` works through one benefit group at a time, such as imaging or ambulance. A reader model gets each document's pages that mention the group. Code checks each fact: its quote must appear exactly once on its page and show the amount. A fact that fails goes back to the reader once, and code drops it if it fails again. A verifier then checks the rest.
+CMS data also has no page a volunteer can open. So steps 5 to 9 replace or confirm each value with a quote.
 
-Version 10 of `document_facts.py` adds a second reader for plans whose readers missed a price. It sees the facts already found and lists only the missing ones.
+## 5. Claude reads facts from the PDFs
 
-Version 11 adds a reviewer (`review.py`). Opus at high effort checks each fact that a presented cell cites, one fact per task, and the step drops the facts it rejects. `machine/reviewed_facts.csv` lists the facts a run reviewed or trusted, and later runs trust them. Before the first review, the step trusts the cited facts of the committed version. A fact no cell cites goes unreviewed until a cell cites it. A run stops if more facts need a new answer than the version's `review_cap`. A rebuild skips the reviewer.
+For each document and each benefit group (ambulance, imaging, tests, and so on), the pipeline sends Claude one prompt. It holds:
 
-Readers still miss some prices. `override_facts.csv` holds hand-written facts for those. Each has a note that says why, and the person who writes one also adds a yellow note to its cell in `comments.csv`.
+- the task and the rules for quoting,
+- the words each field may use,
+- only the pages that mention the group.
 
-## 9. Present the facts as cells
+Here is the real prompt for our plan's SB and the ambulance group, shortened where marked `…`:
 
-```mermaid
-flowchart LR
-  doc[machine/document_facts.csv] --> rule[present.py:<br>one rule per column]
-  pbpf[generated/pbp_facts.csv] --> rule
-  over[override_facts.csv] --> rule
-  rule --> presented[generated/presented.csv]
+```markdown
+# Task
+
+You help Medicare counselors compare plans. Read the pages below from a plan's SB for plan year 2027, and list every
+benefit fact they state about the benefits named below. A wrong fact is much worse than a missing one.
+
+The document covers these plans:
+- H1036-153-0: Humana Total Complete (HMO)
+
+Seen in Humana documents: A benefit row lists each setting's cost on its own line, as in "$450 copayment – Outpatient Hospital".
+…
+benefit:
+- `ambulance`: Ambulance services, ground and air, priced together
+- `ambulance.ground`: Ground ambulance
+- `ambulance.air`: Air ambulance, by airplane or helicopter
+
+setting:
+- `any`: The document names no setting, or one cost covers every setting
+- `outside_us`: Outside the United States and its territories, as in a worldwide emergency benefit, …
+…
+A quote is text copied exactly from one page … Code checks that each quote occurs exactly once on its page, and that
+the quotes show every number in the amount.
+…
+## Pages
+
+=====PAGE 6=====
+ WORLDWIDE COVERAGE
+ If you have an emergency or urgently needed                • Emergency ambulance: $325 copay per date of
+ service outside of the U.S and its territories, you will     service
+…
+=====PAGE 9=====
+…
+ AMBULANCE
+ Air                                                       20% of the cost
+ Ground                                                    $325 copay per date of service
 ```
 
-`present.py` holds one rule per column. A rule picks the facts it needs and shows a value, such as "$0-$250" or a dot. A rule uses facts from the best source: the EOC, then a rider, then the SB, then CMS data. The cell cites the quotes of the document facts the rule used. PBP facts have no page to cite, so a line that only they support keeps its CMS value.
+Claude Opus (high effort) replied, using 3,479 input and 954 output tokens:
 
-Each version of `present.py` lists cells whose facts are incomplete. Those cells keep the value from the layers beneath (section 12).
-
-Most main-sheet columns have rules. Every DVHA column keeps its CMS value, and so do the main sheet's two premium columns, out-of-pocket maximum and pharmacy deductible.
-
-## 10. Cite the filled cells
-
-`filled.py` finds an EOC quote for each dot or amount that no EOC or rider cites. A quote must show every amount in the cell. It writes `machine/filled.csv`.
-
-## 11. People correct what is left
-
-- `edits.csv` sets a cell's value. Each row records `saw`, the value it replaced. The site build warns when the value beneath an edit changes, so a person can check the edit. Most edits are on the DVHA sheet, whose columns have no rules yet.
-- `comments.csv` adds a note to a cell, shown in yellow.
-- `struck.csv` hides a model's quote that does not support its cell.
-
-## 12. Stack the layers
-
-Each file that can set or cite a cell is a **layer**. `pipeline/layers.py` stacks them in this order:
-
-```mermaid
-flowchart BT
-  gen["generated/main_chart.csv, dvha.csv, citations.csv<br>(sets values)"] --> xref["machine/eoc_citations.csv<br>(cites only)"]
-  xref --> blanks["machine/blanks.csv<br>(cites only)"]
-  blanks --> filled["machine/filled.csv<br>(cites only)"]
-  filled --> presented["generated/presented.csv<br>(sets values)"]
-  presented --> edits["edits.csv<br>(sets values)"]
-  edits --> live[Live sheets]
+```json
+[{"plan_id": "H1036-153-0", "benefit": "ambulance.air", "setting": "any", "network": "in", "covered_by": "medicare",
+  "cost_kind": "coinsurance", "amount": "20%", "page": 9, "quotes": ["20% of the cost"]},
+ {"plan_id": "H1036-153-0", "benefit": "ambulance.ground", "setting": "any", "network": "in", "covered_by": "medicare",
+  "cost_kind": "copay", "amount": "$325", "unit": "per date of service", "page": 9,
+  "quotes": ["$325 copay per date of service"]},
+ {"plan_id": "H1036-153-0", "benefit": "ambulance", "setting": "outside_us", "network": "in", "covered_by": "medicare",
+  "cost_kind": "copay", "amount": "$325", "unit": "per date of service", "page": 6,
+  "quotes": ["Emergency ambulance: $325 copay per date of"],
+  "note": "Worldwide coverage row. The network is not stated, so the in-network default is used. ..."}]
 ```
 
-Among the layers that set values, a later one wins. The cite-only layers add citations: `machine/eoc_citations.csv` holds citations from earlier Claude sessions. `struck.csv` hides quotes from the cite-only layers. A citation whose value isn't the cell's final value is dropped.
+The same group from the 188-page EOC gives five facts, including:
 
-## 13. Versioned model steps
-
-A new prompt asks many tasks again, and that costs money. So `steps.json` pins a version of each versioned step, such as `{"filled": 6, "document_facts": 11, "present": 1}`. A version fixes which tasks its step writes. A **candidate** is an unpinned version that a run uses in place of the pin. Only workflows on main can sign in to the Claude API, so code on an unreviewed branch can't call it. A new version goes live in three stages:
-
-```mermaid
-flowchart LR
-  pr1[1. Merge the new version<br>unpinned] --> run[2. Run the Pipeline workflow on main<br>with candidate document_facts@10]
-  run --> branch[Branch pipeline/2027-run id<br>with the new answers]
-  branch --> pr2[3. Pin the version<br>in a pull request from that branch]
+```json
+{"plan_id": "H1036-153-0", "benefit": "ambulance.ground", "setting": "any", "network": "in", "covered_by": "medicare",
+ "cost_kind": "copay", "amount": "$325", "unit": "per date of service", "condition": "Emergency Ambulance", "page": 46,
+ "quotes": ["In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance"]}
 ```
 
-`present.py` is versioned too. It asks no model, but the reviewer checks the facts that its cells cite, so a version that makes cells cite new facts deploys in the same three stages. A run's unit tests see its candidate.
+One reader misses about a quarter of the facts. So for a few plans whose cells came out incomplete, a second reader sees the facts already found and lists only the missing ones.
 
-## 14. Checks on every pull request
+## 6. Code and a second Claude check each fact
 
-The Site workflow checks every pull request with two jobs:
+**Code checks** each fact: the quote must occur exactly once on its page, so the site can highlight it, and must show every number in the amount.
+A fact that fails goes back to the reader once, with the reason. Our plan's facts all passed, so this retry is from a UnitedHealthcare SB:
 
-- `reproduce` runs `run.py ... replay` from the R2 snapshot and the saved answers, with no API access. It fails if any tracked file changes. So a change that would ask a model something new fails here, and needs the three stages above.
-- `build` runs the site's and the pipeline's unit tests, builds the site, and opens each PDF the site links in a headless browser.
-
-## 15. Publish
-
-```mermaid
-flowchart LR
-  merge[Merge to main] --> site[Site workflow:<br>checks, build, deploy]
-  r2[(R2 bucket)] --> worker
-  site --> worker[pdxplans.org,<br>a Cloudflare Worker]
-  site --> sheet[Google Sheet]
+```
+Failed:  {"benefit": "extras.chiropractic", "amount": "$15", "page": 6, "quotes": ["Medicare-covered $15 copay"]}
+         -> quote not found exactly once on its page: "Medicare-covered $15 copay"
+Retry:   {"benefit": "extras.chiropractic", "amount": "$15", "page": 6,
+          "quotes": ["$15 copay", "manual manipulation of the spine to correct"]}
 ```
 
-The Site workflow deploys pdxplans.org to a Cloudflare Worker, which serves the PDFs from R2. It then updates the Google Sheet in place, so volunteers' own comments stay on their cells. The Sheet's Details tab lists every fact.
+The page lays the words out on one line, but the PDF's own text stores them apart, so the viewer could not highlight that quote.
 
-## 16. Measuring the models
+**A verifier** (Claude Opus, medium effort) then judges every fact against its pages. Code mixes in **decoys**: real facts with one field moved to the wrong plan, network or setting. If the verifier accepts a decoy, the run fails.
+Our plan's ambulance facts got no decoys, so here are items 3 and 12 of 14 from the same SB's lab and test facts:
 
-- `evaluate.py`, run by the Evaluate workflow, scores the fact readers and verifiers against an Opus reviewer and the expected cells in `pipeline/tests/fixtures/expected_cells.csv`.
-- The Pipeline workflow's `rebuild` input reruns every model step from scratch into `rebuilds/<name>`. A full rebuild costs about $50.
+```json
+{"id": 3,  "benefit": "tests.diagnostic", "setting": "office.specialist", "amount": "$30", "page": "6", "quotes": ["… Specialist's office: $30 copay • Urgent care center: $40 …"]}
+{"id": 12, "benefit": "tests.diagnostic", "setting": "office.specialist", "amount": "$40", "page": "6", "quotes": ["… Specialist's office: $30 copay • Urgent care center: $ …"]}
+```
 
-## 17. Starting 2028
+Item 12 is a decoy, made from the urgent care fact. The verifier replied:
 
-1. Write `data/2028/config.json`, `links.csv`, `found.csv` and `steps.json`.
-2. Run the Pipeline workflow with year 2028. It builds `generated/` only, because 2028 isn't `LIVE`. Merge that branch.
-3. Change `LIVE` to 2028 in `pipeline/years.py`, so the model steps run for 2028.
+```json
+{"id": 3,  "ok": true,  "reason": "Page 6 Diagnostic procedures and tests row: specialist's office $30 copay."},
+{"id": 12, "ok": false, "reason": "Page 6 Diagnostic procedures and tests row: specialist's office is $30. The $40 is the urgent care center."}
+```
 
-Step 3 has a known gap. Its pull request's `reproduce` check fails, because 2028 has no saved answers yet, and the Pipeline workflow can't answer them before the switch merges.
+The verifier also rejects real facts it doubts. For the SB's worldwide ambulance fact above:
+
+```json
+{"id": 1, "ok": false, "reason": "The page 6 Worldwide Coverage section does list emergency ambulance at $325 per date of service.
+  However, Medicare does not cover care outside the U.S., so this is a supplemental benefit, not 'medicare'. ..."}
+```
+
+So that fact is dropped. The EOC's version, marked supplemental, survives.
+
+**A reviewer** (Claude Opus, high effort) is the last gate. The pipeline runs step 7's rules on the accepted facts, and the reviewer checks each fact a cell would cite, one fact per prompt. It skips facts an earlier run reviewed. A real rejection, from another plan:
+
+```json
+{"id": 0, "ok": false, "reason": "Page 6, Diagnostic Tests and Procedures row: office or freestanding cost is '$0 or 50% coinsurance'.
+  Reporting only a $0 copay leaves out the 50% coinsurance alternative, and the page does not say when $0 applies."}
+```
+
+The accepted facts for our plan's ambulance, in `data/2027/machine/document_facts.csv`, selected columns:
+
+```
+benefit           setting     network  condition                covered_by    cost_kind    amount  source  page
+ambulance.ground  any         in       Emergency Ambulance      medicare      copay        $325    EOC     46
+ambulance.ground  any         in       Non-Emergency Ambulance  medicare      copay        $325    EOC     46
+ambulance.air     any         in       Emergency Ambulance      medicare      coinsurance  20%     EOC     46
+ambulance.air     any         in       Non-Emergency Ambulance  medicare      coinsurance  20%     EOC     46
+ambulance         outside_us  out      Emergency Ambulance      supplemental  copay        $325    EOC     46
+ambulance.ground  any         in                                medicare      copay        $325    SB      9
+ambulance.air     any         in                                medicare      coinsurance  20%     SB      9
+```
+
+2027 has about 5,800 facts for 39 plans.
+
+## 7. Rules turn facts into cells
+
+Each column has a rule, written in code from the domain expert's instructions. The Ambulance rule, in pseudocode:
+
+```
+line 1 (in the U.S.):
+  facts = ground and air trips, in network, Medicare-covered, priced
+  keep the facts from the best source: EOC, then rider, then SB, then CMS
+  show the dollar range, "or", the percent range        -> "$325 or 20%"
+
+line 2 (outside the U.S.), first match wins:
+  facts = trips with setting outside_us, from the best source
+  unclear      -> "EOC unclear"
+  priced       -> show the range                        -> "$325"
+  covered      -> line 1's price
+  not_covered  -> "not covered"
+```
+
+The output cell cites the quotes of the facts it used. `data/2027/generated/presented.csv`:
+
+```
+sheet,plan_id,column,line,value,url,pdf_page,quote
+main,H1036-153-0,AB_ambulance,1,$325 or 20%,…H1036153000EOC27pdf,46,In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance
+main,H1036-153-0,AB_ambulance,1,$325 or 20%,…H1036153000EOC27pdf,46,Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance
+…
+main,H1036-153-0,AB_ambulance,2,$325,…H1036153000EOC27pdf,46,Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance
+```
+
+Rules also read the hand-written facts from step 9. Most main-sheet columns have rules. Columns without one, including every DVHA column, keep their CMS value or a correction from step 9.
+
+## 8. Claude explains blank cells and cites the rest
+
+Two more model steps cover cells that step 7 doesn't.
+
+**Blank cells.** A blank cell claims the plan lacks the benefit. Claude Haiku reads the EOC passages that mention it and says why. The prompt, shortened:
+
+```markdown
+Each field below is BLANK on the sheet, which claims the plan does not have that benefit. Below each field are all EOC
+passages that mention it, in printed layout. …
+- `covered`: the plan itself covers the benefit, as the field defines it, in the base premium. The blank is wrong.
+- `excluded`: a passage states the plan does not cover it, …
+- `medicare_only`: only for acupuncture and chiropractic. …
+- `not_mentioned`: the passages are about something else …
+```
+
+For our plan's Naturopath cell, Haiku replied:
+
+```json
+{"key": "main.U_naturopath", "result": "excluded",
+ "citations": [{"page": 84, "quote": "Naturopath services (uses natural or alternative treatments) Not covered under any condition"}],
+ "reason": "The exclusions table lists naturopath services as not covered under any condition."}
+```
+
+The volunteer then sees the blank cell with that quote.
+
+**Filled cells.** Claude Haiku finds an EOC quote for a value that has none yet. Our plan needed none, so this row is for a DVHA vision cell of a UnitedHealthcare plan:
+
+```
+sheet,plan_id,column,value,pdf_page,quote
+dvha,H2001-045-0,G_vision,exam $0/year; eyewear $200/year,116,$0 copayment or 1 pair o eyeglasses (lenses/ rames) or contact lenses with a retail value o up to $200.
+```
+
+The quote is missing its f's because the PDF draws that letter as a separate glyph. Quotes keep the PDF's own text, so the viewer can highlight them.
+
+In both steps, code checks each quote, and Claude Sonnet and then Claude Opus verify it, with decoys, as in step 6.
+
+## 9. Claude sessions fix what is left
+
+Some cells need judgment that no rule or reader handles. Claude sessions make those calls, Gabe reviews them in pull requests, and they land in four files.
+
+A **hand-written fact** fills a gap the readers can't, with a note saying why. Step 7's rules read it like any other fact:
+
+```
+plan_id,benefit,setting,cost_kind,source,page,quotes,note
+H1372-003-0,ambulance,outside_us,not_covered,EOC,41,"[""Our plan doesn’t cover emergency services, urgently needed services,
+  or any other services you get outside of the United States and its territories.""]",
+  "The EOC excludes all care abroad, so it excludes ambulances there."
+```
+
+That fact makes the AgeRight plan's Ambulance line 2 read `not covered`.
+
+A **yellow note** flags uncertainty on a cell for volunteers:
+
+```
+sheet,plan_id,column,kind,comment,pdf_page,quote
+main,H1372-003-0,AB_ambulance,note,"Hand-written fact: The EOC excludes all care abroad, so it excludes ambulances there.",41,"Our plan doesn’t cover …"
+```
+
+An **edit** sets a cell's value directly. Edits remain only on the DVHA sheet, whose columns have no rules yet. Each records `saw`, the value it replaced, so the build warns if the value beneath it later changes:
+
+```
+sheet,plan_id,column,value,pdf_page,quote,saw,source
+dvha,H3805-048-0,E_optional_packages,"Dental Platinum Rider $66/mo, max $1,500, replaces plan dental",97,It is offered to you for a monthly premium of $66,Dental Platinum Rider $66/mo,session
+```
+
+`source` is `session` on every edit: a Claude session wrote it.
+
+A **strike** hides a model's quote that doesn't support its cell:
+
+```
+sheet,plan_id,column,quote,note
+main,H3805-048-0,T_chiropractic,Excluded rom Medicare coverage is any,Does not support the blank cell on its own.
+```
+
+## 10. Stack the layers
+
+Each output that sets or cites cells is a **layer**. Layers stack from the CMS draft up, and a later layer that sets a value wins. Step 7 sits above step 8, so a presented value replaces the value step 8 cited:
+
+```
+layer                           sets values?  H1036-153-0 X-ray cell
+CMS draft (step 4)              yes           $0-$145 | $0-$345
+earlier sessions' cites         no            (cites only)
+blank and filled cites (step 8) no            (cites only)
+presented facts (step 7)        yes           $0-$30 | $205-$330     ← cites EOC page 60
+edits (step 9)                  yes           (none)
+─────────────────────────────────────────────
+live sheet                                    $0-$30 | $205-$330
+```
+
+A citation whose value differs from the cell's final value is dropped, so a quote never supports a value it doesn't show. The second layer holds citations that Claude sessions made by hand.
+
+## 11. Publish
+
+Merging to main rebuilds and deploys [pdxplans.org](https://pdxplans.org), a Cloudflare Worker that also serves the PDFs from R2. The same build updates the volunteers' Google Sheet in place, so their own comments stay on their cells. The Sheet's Details tab lists every fact.
+
+## How a run stays reproducible and cheap
+
+- **Saved answers.** Every model reply is saved under a hash of its model, effort and prompt (`data/2027/answers/`). A saved answer looks like:
+  ```json
+  {"model": "claude-opus-5-5", "effort": "high", "task": "ce13e925c0384896.md",
+   "reply": "```json\n[{\"plan_id\": \"H1036-153-0\", \"benefit\": \"ambulance.air\", ...}]\n```",
+   "usage": {"input_tokens": 3479, "output_tokens": 954}}
+  ```
+  A rerun with the same inputs asks nothing and costs nothing. Changing a prompt changes its hash, so only the changed prompts are asked again.
+- **Pinned versions.** A new prompt can re-ask hundreds of tasks. So `steps.json` pins each model step's version, such as `{"filled": 6, "document_facts": 11, "present": 2}`.
+- **Three-stage deploys.** Only workflows on main can call the Claude API, so code on an unreviewed branch can't spend money. A new version (1) merges unpinned, (2) runs on main and saves its answers to a branch, then (3) is pinned in a pull request from that branch.
+- **Pull request checks.** `reproduce` reruns the whole pipeline from R2 and saved answers, with no API access, and fails if any output changes. `build` runs the tests, builds the site, and opens each linked PDF.
+
+## Measuring the models
+
+The Evaluate workflow scores candidate readers and verifiers against an Opus reviewer and a set of expected cells. On imaging in November 2026, one Opus reader found 882 facts, and the reviewer accepted 862. All readers together found 1,123 accepted facts, so one reader misses about a quarter.
+
+## Starting 2028
+
+1. Write `data/2028/config.json` (CMS file URLs, state, counties), `links.csv`, `found.csv` and `steps.json`.
+2. Run the Pipeline workflow for 2028. It builds the CMS draft only. Merge that branch.
+3. Set `LIVE = 2028` in `pipeline/years.py`. The site then shows 2028, and the model steps run for it.
+
+Step 3 has a known gap: its pull request's `reproduce` check fails, because 2028 has no saved answers yet.
+
+## Where the code lives
+
+All paths are in `pipeline/` unless noted. Data paths are in `data/<year>/`.
+
+| Step | Code | Output |
+|---|---|---|
+| Run everything | `run.py <year> <work_dir> [api\|replay] [<step>@<version>]` | |
+| 1. List the plans | `universe.py` | `generated/plans.csv` |
+| 2. Find PDFs | `find_docs.py`; finders `find_on_carrier_pages.py`, `find_by_plan_page.py`, `find_regence.py` (run by hand) | `generated/documents.csv` |
+| 3. Download, extract text | `fetch_docs.py`, `texts.py` | `generated/documents_checked.csv`, `generated/texts.csv` |
+| 4. CMS draft | `main_chart.py`, `dvha.py`, `pbp_facts.py`, `cite.py`; column rules in `fields.py` | `generated/main_chart.csv`, `dvha.csv`, `pbp_facts.csv`, `citations.csv` |
+| 5-6. Facts | `document_facts.py`, `extract.py`, `review.py`, `ask.py`; vocabulary in `facts.py`; prompts `fact_prompt.md`, `vfact_prompt.md` | `machine/document_facts.csv`, `machine/reviewed_facts.csv` |
+| 7. Present | `present.py` | `generated/presented.csv` |
+| 8. Blanks, filled | `blanks.py`, `filled.py`; prompts `blank_prompt.md`, `filled_prompt.md` and their `v*` verifiers | `machine/blanks.csv`, `machine/filled.csv` |
+| 9. Fixes | | `override_facts.csv`, `comments.csv`, `edits.csv`, `struck.csv` |
+| 10. Layers | `layers.py` | |
+| 11. Publish | `web/build.py`, `web/sheet_sync.py`; `.github/workflows/pages.yml` | |
+| Versions | `steps.py` | `steps.json` |
+| Evaluate | `evaluate.py`, `.github/workflows/evaluate.yml` | `evaluations/` |
+
+Layer files, in order: `generated/main_chart.csv` and `dvha.csv` with `generated/citations.csv`, `machine/eoc_citations.csv`, `machine/blanks.csv`, `machine/filled.csv`, `generated/presented.csv`, `edits.csv`. Page text uses `pdftotext -layout`.
