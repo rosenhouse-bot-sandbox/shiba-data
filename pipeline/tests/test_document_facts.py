@@ -140,6 +140,12 @@ class StepTest(StepsTest):
         self.assertEqual(document_facts.VERSIONS[8], dict(document_facts.VERSIONS[7], groups=tuple(
             g for g in document_facts.VERSIONS[7]["groups"] if g != "dental")))
 
+    def test_version_14_rechecks_hearing_for_plans_with_no_routine_exam_price(self):
+        v13, v14 = document_facts.VERSIONS[13], document_facts.VERSIONS[14]
+        self.assertEqual(dict(v14, recheck=v13["recheck"]), v13)
+        self.assertIn("H6815-038-0", v14["recheck"]["hearing"])
+        self.assertIn("H9003-009-0", v14["recheck"]["hearing"])
+
     def test_version_9_adds_vision_hearing_fitness_otc_and_packages_to_7(self):
         self.assertEqual(document_facts.VERSIONS[9], dict(document_facts.VERSIONS[7], groups=document_facts.VERSIONS[7]["groups"]
                                                           + ("vision", "hearing", "fitness", "otc", "packages")))

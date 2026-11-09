@@ -106,3 +106,6 @@ VERSIONS[13] = dict(VERSIONS[12], review_cap=200, recheck=VERSIONS[12]["recheck"
                "H1036-306-0", "H1036-317-0", "H5216-427-2", "H5216-455-0"),
     "emergency": ("H7006-018-0", "H7006-021-0"), "meals": ("H1036-306-0",),
     "other_supplemental": ("H1036-323-0", "H1036-317-0", "H5216-455-0")})
+HEARING_EXAM = ("H7006-018-0", "H6815-038-0", "H5439-019-0", "H5439-011-0", "H1372-003-0", "H7006-021-0", "H5439-010-0",
+                "H7199-002-0", "H2923-001-0", "H2923-028-3", "H2923-025-0", "H2923-005-0", "H2923-009-0", "H2923-019-0")
+VERSIONS[14] = dict(VERSIONS[13], recheck=VERSIONS[13]["recheck"] | {"hearing": VERSIONS[13]["recheck"]["hearing"] + HEARING_EXAM})

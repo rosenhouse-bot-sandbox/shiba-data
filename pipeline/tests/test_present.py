@@ -855,6 +855,15 @@ class WriteTest(unittest.TestCase):
         cells = {v: {(r["sheet"], r["column"]) for r in present.layer_rows(data, v)} for v in (4, 5)}
         self.assertEqual(cells[5] - cells[4], {("dvha", "E_optional_packages")})
 
+    def test_version_7_releases_dvha_cells_whose_rule_only_leaves_details_out(self):
+        released = set(present.VERSIONS[6]) - set(present.VERSIONS[7])
+        self.assertIn(("dvha.H_hearing", "H6815-038-0"), released)
+        self.assertIn(("dvha.J_extra_benefits", "H2923-001-0"), released)
+        self.assertIn(("dvha.F_dental", "H2056-003-0"), released)
+        self.assertIn(("dvha.F_dental", "H6815-038-0"), present.VERSIONS[7])
+        self.assertIn(("dvha.I_alt_care_otc_travel", "H9003-001-0"), present.VERSIONS[7])
+        self.assertLessEqual(set(present.VERSIONS[7]), set(present.VERSIONS[6]))
+
     def test_a_held_main_cell_does_not_hold_the_dvha_cell_of_the_same_name(self):
         self.assertNotEqual(present.cell("main", "C_premium", "H1"), present.cell("dvha", "C_premium", "H1"))
 
@@ -924,9 +933,10 @@ class ExpectedTest(unittest.TestCase):
 
 class DvhaTest(unittest.TestCase):
     def test_presents_the_live_value_of_each_cell_it_does_not_hold(self):
+        """Except cells that version 7 releases on purpose, whose values change when their edits retire."""
         data = years.data_dir(YEAR)
         live = {r["plan_id"]: r for r in layers.live(data)[0]["dvha"]}
-        held = present.held(data, max(present.VERSIONS))
+        held = present.held(data, max(present.VERSIONS)) | dict.fromkeys(present.RELEASED_7)
         for column in present.DVHA:
             got = {p: v for p, ((v, cited),) in present.lines(data, column, sheet="dvha").items()
                    if present.cell("dvha", column, p) not in held and cited}
