@@ -3,11 +3,13 @@
 Usage:
   python3 -I pipeline/trace.py build <year> <out.sqlite> <commit sha> [<work_dir>]
   python3 -I pipeline/trace.py cell <db> <sheet> <plan_id> <col>
+  python3 -I pipeline/trace.py check <db>
   python3 -I pipeline/trace.py page <work_dir> <pdf sha256> <page>
 
 `cell` prints JSON. Each record has a status: "traced", "none" when no step touched the cell,
-"not_traced_yet" when a later milestone of #181 fills it, or "not_recorded" when nothing kept the record.
-With a work_dir from a run, `build` adds the run's prompts and the saved answers they got.
+"not_traced_yet" when the trace does not cover it yet, as for some DVHA cells, or "not_recorded" when nothing kept
+the record. With a work_dir from a run, `build` adds the run's prompts, their saved answers and the checks' outcomes.
+`check` fails if a main cell has a record left not traced yet.
 `page` prints a page's layout text from a run's <work_dir>/texts, where blobs.py puts it.
 """
 import csv, glob, json, os, sqlite3, sys
@@ -386,6 +388,25 @@ def cell(db, sheet, plan_id, col):
     }
 
 
+def check(db):
+    """Fails if any main cell has a record left not traced yet."""
+    left = [f"{plan_id} {col}: {path}" for plan_id, col in db.execute(
+        "SELECT plan_id, col FROM draft_cell WHERE sheet = 'main' ORDER BY plan_id, col")
+            for path in not_yet(cell(db, "main", plan_id, col))]
+    if left:
+        raise SystemExit("These records are not traced yet:\n" + "\n".join(left))
+
+
+def not_yet(records, path=""):
+    """The paths of the records whose status is not traced yet."""
+    if isinstance(records, list):
+        return [p for r in records for p in not_yet(r, path)]
+    if not isinstance(records, dict):
+        return []
+    here = [path.strip("/")] if records.get("status") == NOT_YET else []
+    return here + [p for k, v in records.items() for p in not_yet(v, f"{path}/{k}")]
+
+
 def page(work, sha256, n):
     return eoc.load_pages(blobs.text_path(work, "layout", sha256))[int(n)]
 
@@ -396,6 +417,8 @@ def main(command=None, *args):
     elif command == "cell" and len(args) == 4:
         db = sqlite3.connect(f"file:{args[0]}?mode=ro", uri=True)
         print(json.dumps(cell(db, *args[1:]), indent=1, ensure_ascii=False))
+    elif command == "check" and len(args) == 1:
+        check(sqlite3.connect(f"file:{args[0]}?mode=ro", uri=True))
     elif command == "page" and len(args) == 3:
         print(page(*args))
     else:

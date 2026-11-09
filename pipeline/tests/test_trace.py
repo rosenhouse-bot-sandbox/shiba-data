@@ -106,6 +106,15 @@ class TraceTest(unittest.TestCase):
         self.assertEqual(records["notes"], {"status": trace.NONE, "rows": []})
         self.assertEqual(records["struck_quotes"]["status"], trace.NONE)
 
+    def test_check_passes_when_every_main_cell_is_traced(self):
+        trace.check(self.db)
+
+    def test_check_names_each_record_left_not_traced_yet(self):
+        def cell(db, sheet, plan_id, col):
+            return {"draft": {"status": trace.TRACED, "cms_fields": {"status": trace.NOT_YET}}}
+        with mock.patch.object(trace, "cell", cell), self.assertRaisesRegex(SystemExit, "H1036-153-0 AB_ambulance: draft/cms_fields"):
+            trace.check(self.db)
+
     def test_says_none_when_no_model_step_cited_the_cell(self):
         self.assertEqual(self.cell(*AMBULANCE)["model_citations"], {"status": trace.NONE, "rows": []})
 
