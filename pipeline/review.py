@@ -87,8 +87,6 @@ def ask_each(out, answer, model, effort, texts):
     """The verdict on each text, asked as its own task in a fresh out."""
     shutil.rmtree(out, ignore_errors=True)
     os.makedirs(out)
-    if not texts:
-        return []
     for n, text in enumerate(texts):
         with open(f"{out}/v-{n}.md", "w") as f:
             f.write(text)
@@ -98,5 +96,5 @@ def ask_each(out, answer, model, effort, texts):
 
 
 def outcome(f, text, v, earlier):
-    return dict(prompt=ask.sha(text), item=0, fact=extract.named(f), ok=v.get("ok") if v else None,
+    return dict(prompt=ask.sha(text), item=0, fact=extract.named(f), ok=v.get("ok"),
                 reason=v.get("reason", ""), earlier=earlier)

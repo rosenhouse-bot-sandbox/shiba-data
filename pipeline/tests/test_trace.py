@@ -146,7 +146,8 @@ class TraceTest(unittest.TestCase):
 
     def test_a_column_without_a_rule_has_no_rule_record(self):
         self.assertNotIn("C_premium", present.COLUMNS)
-        self.assertEqual(self.cell("main", "H1036-153-0", "C_premium")["rule"]["status"], trace.NONE)
+        records = self.cell("main", "H1036-153-0", "C_premium")
+        self.assertEqual((records["rule"]["status"], records["answers"]["status"]), (trace.NONE, trace.NONE))
 
     def test_lists_the_pbp_fields_a_cell_read(self):
         cms = self.cell(*AMBULANCE)["draft"]["cms_fields"]
@@ -275,6 +276,11 @@ class AnswersTest(RunTest):
                          (trace.NOT_RECORDED, trace.NOT_RECORDED))
         self.assertEqual({d["unlinked_answers"]["status"] for d in records["documents"]["documents"]}, {trace.NOT_RECORDED})
 
+    def test_a_run_without_check_outcomes_records_no_answers_for_a_rule(self):
+        records = trace.cell(self.build(), *AMBULANCE)
+        self.assertEqual((records["answers"]["status"], records["fact_checks"]["status"]),
+                         (trace.NOT_RECORDED, trace.NOT_RECORDED))
+
 
 EOC = "64e05773e847b56e0eeb5425979d54996c5f1975307c9ae186f5af4fecafc44c"
 STATED = dict(plan_id="H1036-153-0", benefit="ambulance", amount="$325")
@@ -332,7 +338,8 @@ class FactChecksTest(RunTest):
 
     def test_follows_a_used_fact_through_each_check(self):
         (checked,) = [r for r in self.records["fact_checks"]["rows"] if r["fact"] == CHECKED]
-        self.assertEqual(checked["stated_by"], [dict(prompt=self.prompt, item=0, answer_key=self.key, stated=STATED)])
+        self.assertEqual(checked["stated_by"], [dict(prompt=self.prompt, item=0, answer_key=self.key, stated=STATED,
+                                                     skipped=None)])
         self.assertEqual(checked["code_check"], "passed")
         self.assertIs(checked["verifier"][0]["ok"], True)
         self.assertIs(checked["verifier"][0]["decoys"][0]["ok"], False)
@@ -346,8 +353,8 @@ class FactChecksTest(RunTest):
     def test_lists_a_rejected_answer_for_the_cells_plan_and_benefit(self):
         rejected = [r for r in self.records["fact_checks"]["rows"] if r["fact"] is None]
         self.assertEqual(rejected, [dict(fact=None, code_check="no quote shows $9", stated_by=[dict(
-            prompt=self.prompt, item=1, answer_key=self.key, stated=dict(STATED, benefit="ambulance.air", amount="$9"))],
-            verifier=[], reviewer={"status": trace.NONE}, kept=False, skipped=None)])
+            prompt=self.prompt, item=1, answer_key=self.key, stated=dict(STATED, benefit="ambulance.air", amount="$9"),
+            skipped=None)], verifier=[], reviewer={"status": trace.NONE}, kept=False)])
 
     def test_lists_an_answer_with_no_valid_plan_or_benefit_under_its_document(self):
         (eoc,) = [d for d in self.records["documents"]["documents"] if d["sha256"] == EOC]
@@ -374,16 +381,48 @@ class FactChecksTest(RunTest):
         records = trace.cell(db, *AMBULANCE)
         self.assertEqual({records[k]["status"] for k in ("answers", "fact_checks")}, {trace.NOT_RECORDED})
 
-    def test_says_why_the_verifier_skipped_a_fact(self):
+    def read_outcomes(self, change):
         path = os.path.join(self.work, "facts/ambulance/read", extract.OUTCOMES)
         with open(path) as f:
             outcomes = json.load(f)
-        outcomes[0]["skipped"] = document_facts.FOUND_BEFORE
+        change(outcomes)
         with open(path, "w") as f:
             json.dump(outcomes, f)
+
+    def test_says_why_the_verifier_skipped_one_statement_of_a_fact(self):
+        self.read_outcomes(lambda o: o.append(dict(o[0], item=6, skipped=document_facts.FOUND_BEFORE)))
         (checked,) = [r for r in trace.cell(self.build(), *AMBULANCE)["fact_checks"]["rows"] if r["fact"] == CHECKED]
-        self.assertEqual(checked["skipped"], document_facts.FOUND_BEFORE)
-        self.assertIsNone(next(r for r in self.records["fact_checks"]["rows"] if r["fact"] == CHECKED)["skipped"])
+        self.assertEqual([(s["item"], s["skipped"]) for s in checked["stated_by"]], [(0, None), (6, document_facts.FOUND_BEFORE)])
+
+    def test_keeps_a_stated_plan_or_benefit_only_if_it_is_text(self):
+        self.read_outcomes(lambda o: o.append(dict(o[0], item=6, stated=dict(STATED, plan_id=7, benefit=["ambulance"]),
+                                                   problem="plan_id: not text", fact=None)))
+        self.assertEqual(self.build().execute("SELECT plan_id, benefit FROM stated WHERE item = 6").fetchall(), [(None, None)])
+
+    def test_a_work_dir_with_outcomes_but_no_ledger_records_no_checks(self):
+        os.remove(os.path.join(self.work, blobs.LEDGER))
+        self.assertEqual(trace.cell(self.build(), *AMBULANCE)["fact_checks"]["status"], trace.NOT_RECORDED)
+
+    def test_checks_only_the_document_facts_a_rule_considered(self):
+        records = trace.cell(self.build(), "main", "H1036-153-0", "L_xray_imaging")
+        self.assertIn("pbp", {f["origin"] for f in records["rule"]["set_aside"] + records["rule"]["lines"][0]["facts"]})
+        self.assertNotIn("PBP", {r["fact"]["source"] for r in records["fact_checks"]["rows"] if r["fact"]})
+
+    def test_a_review_that_repeats_a_verifier_prompt_keeps_both_verdicts(self):
+        review = os.path.join(self.work, "facts/review")
+        with open(os.path.join(review, "v-0.md"), "w") as f:
+            f.write("Check the facts.")
+        review_key = ask.key(run.SECOND_VERIFIER, "Check the facts.", "high")
+        ask.write(os.path.join(self.data, "answers", f"{review_key}.json"),
+                  {"model": run.SECOND_VERIFIER, "effort": "high", "task": "v-0.md", "reply": "[]", "usage": {}})
+        with mock.patch.dict(os.environ, {"SHIBA_DATA": self.root}):
+            run.Answers(years.data_dir(), None, self.work)(review, run.SECOND_VERIFIER, "high")
+        with open(os.path.join(review, extract.OUTCOMES), "w") as f:
+            json.dump([dict(prompt=self.check, item=0, fact=CHECKED, ok=False, reason="too vague", earlier=False)], f)
+        (checked,) = [r for r in trace.cell(self.build(), *AMBULANCE)["fact_checks"]["rows"] if r["fact"] == CHECKED]
+        self.assertEqual([(v["answer_key"], [d["reason"] for d in v["decoys"]]) for v in checked["verifier"]],
+                         [(self.check_key, ["wrong network"])])
+        self.assertEqual((checked["reviewer"]["answer_key"], checked["reviewer"]["reason"]), (review_key, "too vague"))
 
     def test_a_fact_the_reviewer_checked_has_its_verdict(self):
         with open(os.path.join(self.work, "facts/review", extract.OUTCOMES), "w") as f:
@@ -408,6 +447,22 @@ class ModelAnswersTest(RunTest):
         with mock.patch.dict(os.environ, {"SHIBA_DATA": self.root}):
             run.Answers(years.data_dir(), None, self.work)(os.path.join(self.work, "blanks/read"), run.READER)
         self.records = trace.cell(self.build(), "main", "H1036-153-0", "U_naturopath")
+
+    def test_names_the_plans_retry_and_verifier_tasks_but_not_another_plans(self):
+        tasks = {"blanks/read": {"H1036-153-0.retry.md": "Find them again."},
+                 "blanks/check": {"v-H1036-153-0.md": "Check them.", "v-H1036-306-0.md": "Check another plan."}}
+        for folder, texts in tasks.items():
+            os.makedirs(os.path.join(self.work, folder), exist_ok=True)
+            for name, text in texts.items():
+                with open(os.path.join(self.work, folder, name), "w") as f:
+                    f.write(text)
+                ask.write(os.path.join(self.data, "answers", f"{ask.key(run.READER, text)}.json"),
+                          {"model": run.READER, "task": name, "reply": "[]", "usage": {}})
+            with mock.patch.dict(os.environ, {"SHIBA_DATA": self.root}):
+                run.Answers(years.data_dir(), None, self.work)(os.path.join(self.work, folder), run.READER)
+        (row,) = trace.cell(self.build(), "main", "H1036-153-0", "U_naturopath")["model_citations"]["rows"]
+        self.assertEqual(sorted(t["task"] for t in row["answers"]["rows"]),
+                         ["H1036-153-0.md", "H1036-153-0.retry.md", "v-H1036-153-0.md"])
 
     def test_names_the_answers_behind_each_model_citation(self):
         prompt = ask.sha("Find the blanks.")

@@ -278,6 +278,6 @@ CREATE TABLE verdict (
   ok         INTEGER,
   reason     TEXT NOT NULL,
   earlier    INTEGER NOT NULL,
-  PRIMARY KEY (prompt_sha, item)
+  PRIMARY KEY (step, prompt_sha, item)
 );
 CREATE INDEX verdict_fact ON verdict (fact_id, source, doc_sha, page);

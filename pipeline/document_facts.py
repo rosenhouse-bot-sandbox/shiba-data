@@ -51,7 +51,7 @@ def group_facts(texts, work, group, answer, v, data):
     return accepted + (second_facts(texts, work, group, answer, v, data, recheck, accepted) if recheck else [])
 
 
-# Why the second reader's verifier skips a fact that passed the code checks.
+# The second reader's verifier skips a fact that passed the code checks for one of these reasons.
 FOUND_BEFORE, NOT_RECHECKED = "an earlier reader found the same fact", "the second reader does not recheck its plan"
 
 
@@ -86,6 +86,7 @@ def step(data, texts, work, answer, version, reviewed=True, present_version=None
     """answer(task_dir, model, effort) answers every task file in task_dir. The groups run at the same time.
     reviewed=False skips the version's reviewer. The reviewer sees the cells that present_version presents."""
     v = VERSIONS[version]
+    shutil.rmtree(work, ignore_errors=True)
     with concurrent.futures.ThreadPoolExecutor(len(v["groups"])) as pool:
         found = list(pool.map(lambda group: group_facts(texts, work, group, answer, v, data), v["groups"]))
     rows = [row for rows in found for row in rows]

@@ -316,7 +316,7 @@ def outcomes(verify_dir, items, verdicts):
     for n, c in enumerate(items):
         v = by_id.get(n, {})
         out.append(dict(prompt=prompts[c["task"]], item=seen[c["task"]], decoy=c["decoy"], shown=shown(c),
-                        fact=None if c["decoy"] else named(c), ok=v.get("ok") if v else None, reason=v.get("reason", "")))
+                        fact=None if c["decoy"] else named(c), ok=v.get("ok"), reason=v.get("reason", "")))
         seen[c["task"]] += 1
     return out
 

@@ -92,6 +92,17 @@ class StepTest(StepsTest):
             document_facts.step(self.data, self.work, self.dir, fake, 9, reviewed=False)
             self.assertEqual(len(facts.read(self.data / "machine" / "document_facts.csv")), 1)
 
+    def test_clears_the_outcomes_of_an_earlier_run(self):
+        def fake(task_dir, model, effort):
+            for task in glob.glob(f"{task_dir}/*.md"):
+                with open(task[:-3] + ".json", "w") as f:
+                    json.dump([], f)
+
+        for groups in (("imaging", "ambulance"), ("imaging",)):
+            with mock.patch.dict(document_facts.VERSIONS, {9: dict(groups=groups, reader=("r", "high"), verifier=("v", "low"))}):
+                document_facts.step(self.data, self.work, self.dir, fake, 9)
+        self.assertEqual(os.listdir(self.dir), ["imaging"])
+
     def test_groups_run_at_the_same_time(self):
         both_reading = threading.Barrier(2, timeout=10)
 

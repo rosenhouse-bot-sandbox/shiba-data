@@ -153,8 +153,9 @@ def load_checks(db, work):
                         benefit=text(a, "benefit"), answer=json.dumps(a, ensure_ascii=False), problem=o["problem"],
                         fact_id=fact["fact_id"], source=fact["source"], page=fact["page"], skipped=o.get("skipped"))
                 else:
-                    verdicts[o["prompt"], o["item"]] = dict(
-                        step="reviewer" if "earlier" in o else "verifier", prompt_sha=o["prompt"], item=o["item"],
+                    step = "reviewer" if "earlier" in o else "verifier"
+                    verdicts[step, o["prompt"], o["item"]] = dict(
+                        step=step, prompt_sha=o["prompt"], item=o["item"],
                         decoy=int(o.get("decoy", False)), shown=json.dumps(o["shown"], ensure_ascii=False) if "shown" in o else None,
                         **fact, ok=None if o["ok"] is None else int(o["ok"] is True), reason=str(o["reason"]),
                         earlier=int(o.get("earlier", False)))
@@ -185,7 +186,7 @@ def load_rules(db, data):
 
 
 def rule(db, plan_id, col, code):
-    """Record 6: the rule's lines and the facts it used and set aside."""
+    """Returns record 6, the rule's lines and the facts it used and set aside."""
     lines = rows(db, "SELECT line, value, presented, held FROM rule_line WHERE plan_id = ? AND col = ? ORDER BY line",
                  plan_id, col)
     considered = rows(db, f"""SELECT r.line, r.reasons, {FACT_COLUMNS}, f.origin, f.reviewed
@@ -201,8 +202,8 @@ def rule(db, plan_id, col, code):
 
 
 def checks(db, plan_id, col, considered):
-    """The prompts behind record 5, and record 5: each check of the document facts the rule considered, and of the
-    answers that state a fact for the plan and the column's benefits."""
+    """Returns record 5 and the prompts behind it. The record checks each document fact the rule considered, and
+    each answer that states a fact for the plan and the column's benefits."""
     identities = [facts.identity(f) for f in considered if f["origin"] == "document"]
     found = [s for s in rows(db, "SELECT * FROM stated WHERE plan_id = ? ORDER BY rowid", plan_id)
              if linked(db, s) and present.related(s, present.LEAVES[col])]
@@ -211,7 +212,8 @@ def checks(db, plan_id, col, considered):
                       *identity)
     out, by_fact, prompts = [], {}, []
     for s in {(s["prompt_sha"], s["item"]): s for s in found}.values():
-        ref = dict(prompt=s["prompt_sha"], item=s["item"], answer_key=answer_key(db, s["prompt_sha"]), stated=json.loads(s["answer"]))
+        ref = dict(prompt=s["prompt_sha"], item=s["item"], answer_key=answer_key(db, s["prompt_sha"]),
+                   stated=json.loads(s["answer"]), skipped=s["skipped"])
         prompts.append(s["prompt_sha"])
         if s["problem"] is None:
             identity = tuple(s[c] for c in facts.IDENTITY)
@@ -219,16 +221,15 @@ def checks(db, plan_id, col, considered):
                 by_fact[identity] = fact_check(db, identity, prompts)
                 out.append(by_fact[identity])
             by_fact[identity]["stated_by"].append(ref)
-            by_fact[identity]["skipped"] = by_fact[identity]["skipped"] or s["skipped"]
         else:
             out.append(dict(fact=None, code_check=s["problem"], stated_by=[ref], verifier=[], reviewer={"status": NONE},
-                            kept=False, skipped=None))
+                            kept=False))
     out += [dict(fact_check(db, identity, prompts), code_check=NOT_RECORDED) for identity in identities if identity not in by_fact]
     return prompts, record(out, rows=out)
 
 
 def answers_of(db, prompts):
-    """Record 4: the saved answers to the prompts, each with the tasks that sent them."""
+    """Returns record 4, the saved answers to the prompts. Each answer lists the tasks that sent it."""
     keys = {}
     for prompt in prompts:
         for t in rows(db, "SELECT * FROM task t JOIN answer a ON a.key = t.answer_key WHERE t.prompt_sha = ?", prompt):
@@ -241,7 +242,7 @@ def answers_of(db, prompts):
 
 
 def model_tasks(db, step, plan_id):
-    """Record 8: the step's tasks for the plan, which have one reader task and one task per verifier."""
+    """Returns record 8, the step's tasks for the plan. A plan has one reader task and one task per verifier."""
     found = rows(db, "SELECT dir, task, prompt_sha AS prompt, answer_key FROM task WHERE dir LIKE ? AND task IN (?, ?, ?) "
                      "ORDER BY rowid", f"{step}/%", f"{plan_id}.md", f"{plan_id}.retry.md", f"v-{plan_id}.md")
     for t in found:
@@ -256,8 +257,10 @@ def linked(db, s):
         (s["doc_sha"], s["plan_id"])).fetchone())
 
 
-def answer_key(db, prompt):
-    found = db.execute("SELECT answer_key FROM task WHERE prompt_sha = ?", (prompt,)).fetchone()
+def answer_key(db, prompt, step="reader"):
+    """The prompt's answer in the step. A reviewer's prompt can repeat a verifier's prompt for one fact."""
+    found = db.execute("SELECT answer_key FROM task WHERE prompt_sha = ? AND (dir LIKE 'facts/review%') = ?",
+                       (prompt, step == "reviewer")).fetchone()
     return found and found[0]
 
 
@@ -265,10 +268,10 @@ def fact_check(db, identity, prompts):
     """A stated fact's checks after the code checks passed it. Adds the prompts of its verdicts to prompts."""
     named = dict(zip(facts.IDENTITY, identity))
     verdicts = rows(db, """SELECT step, prompt_sha, item, ok, reason, earlier FROM verdict
-                           WHERE fact_id = ? AND source = ? AND doc_sha = ? AND page = ? ORDER BY step, prompt_sha, item""",
+                           WHERE fact_id = ? AND source = ? AND doc_sha = ? AND page = ? ORDER BY prompt_sha, item""",
                     *identity)
     prompts += [v["prompt_sha"] for v in verdicts]
-    verifier = [dict(prompt=v["prompt_sha"], item=v["item"], answer_key=answer_key(db, v["prompt_sha"]), ok=verdict_ok(v),
+    verifier = [dict(prompt=v["prompt_sha"], item=v["item"], answer_key=answer_key(db, v["prompt_sha"], "verifier"), ok=verdict_ok(v),
                      reason=v["reason"], decoys=[dict(item=d["item"], shown=json.loads(d["shown"]), ok=verdict_ok(d),
                                                       reason=d["reason"]) for d in rows(
                          db, "SELECT item, shown, ok, reason FROM verdict WHERE prompt_sha = ? AND decoy = 1 ORDER BY item",
@@ -276,16 +279,15 @@ def fact_check(db, identity, prompts):
     reviews = [v for v in verdicts if v["step"] == "reviewer"]
     if reviews:
         v = reviews[0]
-        reviewer = dict(status=TRACED, prompt=v["prompt_sha"], answer_key=answer_key(db, v["prompt_sha"]), ok=verdict_ok(v),
+        reviewer = dict(status=TRACED, prompt=v["prompt_sha"], answer_key=answer_key(db, v["prompt_sha"], "reviewer"), ok=verdict_ok(v),
                         reason=v["reason"], earlier=bool(v["earlier"]))
     elif db.execute("SELECT 1 FROM fact WHERE fact_id = ? AND source = ? AND doc_sha = ? AND page = ? AND reviewed = 1",
                     identity).fetchone():
         reviewer = {"status": NOT_RECORDED, "note": TRUSTED_WITHOUT_REVIEW}
     else:
         reviewer = {"status": NONE}
-    kept = db.execute("SELECT 1 FROM fact WHERE fact_id = ? AND source = ? AND doc_sha = ? AND page = ? AND origin = 'document'",
-                      identity).fetchone()
-    return dict(fact=named, code_check="passed", stated_by=[], verifier=verifier, reviewer=reviewer, kept=bool(kept), skipped=None)
+    kept = db.execute("SELECT 1 FROM fact WHERE fact_id = ? AND source = ? AND doc_sha = ? AND page = ?", identity).fetchone()
+    return dict(fact=named, code_check="passed", stated_by=[], verifier=verifier, reviewer=reviewer, kept=bool(kept))
 
 
 def verdict_ok(v):
