@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-57.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 14 Section 4.1 premium table: the Value plan row shows a $0 monthly plan premium. The separate Value Lane row is a different plan.\"}]\n```",
+ "usage": {
+  "input_tokens": 2078,
+  "output_tokens": 150,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

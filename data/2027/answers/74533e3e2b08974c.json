@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-23.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 lists \\\"Monthly plan premium $0\\\" for H1036323000. This is the plan premium, separate from the Part B premium and the Part B reduction. The field values match the vocabulary for plan_premium.\"}]\n```",
+ "usage": {
+  "input_tokens": 2003,
+  "output_tokens": 99,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -194,7 +194,7 @@ class TraceTest(unittest.TestCase):
     def test_names_the_build_commit_and_pins(self):
         build = self.cell(*AMBULANCE)["build"]
         self.assertEqual(build["sha"], SHA)
-        self.assertEqual(build["steps"]["present"], 2)
+        self.assertEqual(build["steps"], json.loads((years.data_dir() / "steps.json").read_text()))
         self.assertEqual(self.cell(*AMBULANCE)["draft"]["code"]["url"],
                          f"{trace.REPO_URL}/blob/{SHA}/pipeline/main_chart.py")
 

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-11.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5 Routine eye exam row (one exam every year): $0 copay with an EyeMed network provider. The plan, routine exam, in-network copay, amount and yearly limit all match.\"}]\n```",
+ "usage": {
+  "input_tokens": 2283,
+  "output_tokens": 268,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-18.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5 Hearing aids row (TruHearing, 1 per ear per calendar year): in-network cost is $499, $699, or $999 per aid. These are aid levels, so they form one copay fact.\"}]\n```",
+ "usage": {
+  "input_tokens": 2335,
+  "output_tokens": 392,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

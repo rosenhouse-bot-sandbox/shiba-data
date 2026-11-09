@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-22.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5 for H1036317000 shows a monthly plan premium of $0, separate from the Part B premium.\"}]\n```",
+ "usage": {
+  "input_tokens": 1863,
+  "output_tokens": 120,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
