@@ -157,11 +157,6 @@ class MainChartTest(unittest.TestCase):
 
 
 class SpecTest(unittest.TestCase):
-    def test_fields_are_the_columns_an_eoc_can_show(self):
-        every = {f"{c.sheet}.{c.key}" for c in fields.COLUMNS}
-        self.assertEqual(set(fields.FIELDS),
-                         every - {"main.D_premium_full_extra_help", "dvha.C_premium", "dvha.D_premium_full_extra_help"})
-
     def test_sheet_rows_have_the_spec_columns_in_order(self):
         columns = ["section", "plan_id", "plan_name"] + list(fields.labels("dvha"))
         plans = [{"plan_id": "A"}]

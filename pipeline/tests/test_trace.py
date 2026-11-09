@@ -5,6 +5,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path[:0] = [os.path.dirname(HERE), os.path.join(os.path.dirname(os.path.dirname(HERE)), "web")]
 import ask, blobs, build, document_facts, extract, fields, layers, present, reads, run, trace, years
 
+READER, VERIFIER, REVIEWER = "reader-model", "verifier-model", "reviewer-model"
+
 SHA = "0" * 40
 AMBULANCE = ("main", "H1036-153-0", "AB_ambulance")
 STATUSES = {trace.TRACED, trace.NONE, trace.NOT_RECORDED}
@@ -235,11 +237,11 @@ class RunTest(unittest.TestCase):
         os.makedirs(os.path.join(self.work, "facts/ambulance/read"))
         with open(os.path.join(self.work, "facts/ambulance/read/doc.md"), "w") as f:
             f.write("Read the facts.")
-        key = ask.key(run.READER, "Read the facts.", "high")
+        key = ask.key(READER, "Read the facts.", "high")
         ask.write(os.path.join(self.data, "answers", f"{key}.json"),
-                  {"model": run.READER, "effort": "high", "task": "doc.md", "reply": "[]", "usage": {"input_tokens": 9}})
+                  {"model": READER, "effort": "high", "task": "doc.md", "reply": "[]", "usage": {"input_tokens": 9}})
         with mock.patch.dict(os.environ, {"SHIBA_DATA": self.root}):
-            run.Answers(years.data_dir(), None, self.work)(os.path.join(self.work, "facts/ambulance/read"), run.READER, "high")
+            run.Answers(years.data_dir(), None, self.work)(os.path.join(self.work, "facts/ambulance/read"), READER, "high")
         self.key = key
 
     def build(self):
@@ -256,16 +258,16 @@ class AnswersTest(RunTest):
         db = self.build()
         self.assertEqual(db.execute("SELECT answer_key, dir, task FROM task").fetchall(),
                          [(self.key, "facts/ambulance/read", "doc.md")])
-        self.assertEqual(db.execute("SELECT model, effort, reply FROM answer").fetchall(), [(run.READER, "high", "[]")])
+        self.assertEqual(db.execute("SELECT model, effort, reply FROM answer").fetchall(), [(READER, "high", "[]")])
 
     def test_keeps_each_models_answer_to_one_prompt(self):
         os.makedirs(os.path.join(self.work, "facts/ambulance/again"))
         shutil.copy(os.path.join(self.work, "facts/ambulance/read/doc.md"), os.path.join(self.work, "facts/ambulance/again"))
-        key = ask.key(run.VERIFIER, "Read the facts.")
+        key = ask.key(VERIFIER, "Read the facts.")
         ask.write(os.path.join(self.data, "answers", f"{key}.json"),
-                  {"model": run.VERIFIER, "task": "doc.md", "reply": "[1]", "usage": {}})
+                  {"model": VERIFIER, "task": "doc.md", "reply": "[1]", "usage": {}})
         with mock.patch.dict(os.environ, {"SHIBA_DATA": self.root}):
-            run.Answers(years.data_dir(), None, self.work)(os.path.join(self.work, "facts/ambulance/again"), run.VERIFIER)
+            run.Answers(years.data_dir(), None, self.work)(os.path.join(self.work, "facts/ambulance/again"), VERIFIER)
         db = self.build()
         self.assertEqual(db.execute("SELECT answer_key, dir FROM task ORDER BY dir").fetchall(),
                          [(key, "facts/ambulance/again"), (self.key, "facts/ambulance/read")])
@@ -312,11 +314,11 @@ class FactChecksTest(RunTest):
         os.makedirs(os.path.join(self.work, "facts/ambulance/check"))
         with open(os.path.join(self.work, "facts/ambulance/check/v-doc.md"), "w") as f:
             f.write("Check the facts.")
-        self.check_key = ask.key(run.VERIFIER, "Check the facts.", "medium")
+        self.check_key = ask.key(VERIFIER, "Check the facts.", "medium")
         ask.write(os.path.join(self.data, "answers", f"{self.check_key}.json"),
-                  {"model": run.VERIFIER, "effort": "medium", "task": "v-doc.md", "reply": "[]", "usage": {}})
+                  {"model": VERIFIER, "effort": "medium", "task": "v-doc.md", "reply": "[]", "usage": {}})
         with mock.patch.dict(os.environ, {"SHIBA_DATA": self.root}):
-            run.Answers(years.data_dir(), None, self.work)(os.path.join(self.work, "facts/ambulance/check"), run.VERIFIER,
+            run.Answers(years.data_dir(), None, self.work)(os.path.join(self.work, "facts/ambulance/check"), VERIFIER,
                                                            "medium")
         outcomes = {
             "facts/ambulance/read": [
@@ -345,7 +347,7 @@ class FactChecksTest(RunTest):
         answers = self.records["answers"]
         self.assertEqual(answers["status"], trace.TRACED)
         read, check = answers["rows"]
-        self.assertEqual((read["key"], read["model"], read["effort"], read["reply"]), (self.key, run.READER, "high", "[]"))
+        self.assertEqual((read["key"], read["model"], read["effort"], read["reply"]), (self.key, READER, "high", "[]"))
         self.assertEqual(read["prompts"], [dict(prompt=self.prompt, dir="facts/ambulance/read", task="doc.md",
                                                 url=trace.PROMPT_URL.format(self.prompt))])
         self.assertEqual((check["key"], check["prompts"][0]["dir"]), (self.check_key, "facts/ambulance/check"))
@@ -426,11 +428,11 @@ class FactChecksTest(RunTest):
         review = os.path.join(self.work, "facts/review")
         with open(os.path.join(review, "v-0.md"), "w") as f:
             f.write("Check the facts.")
-        review_key = ask.key(run.SECOND_VERIFIER, "Check the facts.", "high")
+        review_key = ask.key(REVIEWER, "Check the facts.", "high")
         ask.write(os.path.join(self.data, "answers", f"{review_key}.json"),
-                  {"model": run.SECOND_VERIFIER, "effort": "high", "task": "v-0.md", "reply": "[]", "usage": {}})
+                  {"model": REVIEWER, "effort": "high", "task": "v-0.md", "reply": "[]", "usage": {}})
         with mock.patch.dict(os.environ, {"SHIBA_DATA": self.root}):
-            run.Answers(years.data_dir(), None, self.work)(review, run.SECOND_VERIFIER, "high")
+            run.Answers(years.data_dir(), None, self.work)(review, REVIEWER, "high")
         with open(os.path.join(review, extract.OUTCOMES), "w") as f:
             json.dump([dict(prompt=self.check, item=0, fact=CHECKED, ok=False, reason="too vague", earlier=False)], f)
         (checked,) = [r for r in trace.cell(self.build(), *AMBULANCE)["fact_checks"]["rows"] if r["fact"] == CHECKED]

@@ -5,7 +5,7 @@ They come only from the CMS Landscape and PBP Benefits files, carrier websites, 
 The methods doc and Appendix B below are the 2027 bootstrap's, which git history keeps.
 
 `python3 -I pipeline/run.py 2027 <work_dir>` lists plan documents from `found.csv` and `links.csv`, downloads them and the sources named in `config.json`, and regenerates `generated/`.
-It then rebuilds `machine/document_facts.csv` and `generated/presented.csv` from the model answers saved in `answers/`.
+It then reads facts into `machine/document_facts.csv` from the answers saved in `answers/`, and presents them in `generated/presented.csv`.
 
 ## Layers
 

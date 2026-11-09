@@ -334,7 +334,7 @@ Rules also read the added facts from step 8. Most main-sheet columns have rules.
 
 ## 8. Claude sessions correct what is left
 
-Some cells need judgment that no rule or reader handles. Claude sessions make those calls in pull requests and record them in three tables.
+Some cells need judgment that no rule or reader handles. Claude sessions make those calls in pull requests and record them in four tables.
 
 An **added fact** adds a fact the readers missed, with a note saying why. Step 7's rules read it like any other fact. `added_facts.csv`, selected columns:
 
@@ -364,6 +364,8 @@ dvha,H3805-048-0,E_optional_packages,"Dental Platinum Rider $66/mo, max $1,500, 
 ```
 
 `source` is `session` on every edit: a Claude session wrote it.
+
+A **strike** in `struck.csv` hides a machine quote that doesn't support its cell.
 
 ## 9. Stack the layers
 

@@ -331,10 +331,6 @@ class StepsTest(unittest.TestCase):
             for n, c in enumerate(items)])
 
 
-if __name__ == "__main__":
-    unittest.main()
-
-
 class VerdictsTest(unittest.TestCase):
     def test_numbers_counts_every_number(self):
         self.assertEqual(extract.numbers("$0/$0; days 1-5; tiers 1,2; 1,000 rides; 0%"),
@@ -356,3 +352,7 @@ class VerdictsTest(unittest.TestCase):
     def test_accepted_fails_when_a_decoy_is_accepted(self):
         with self.assertRaises(SystemExit):
             extract.accepted([dict(n=0, decoy=True)], [{"id": 0, "ok": True}])
+
+
+if __name__ == "__main__":
+    unittest.main()

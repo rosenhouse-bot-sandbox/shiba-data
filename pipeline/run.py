@@ -14,7 +14,6 @@ import csv
 import glob
 import hashlib
 import os
-import shutil
 import subprocess
 import sys
 import threading
@@ -32,7 +31,6 @@ import steps  # noqa: E402
 import years  # noqa: E402
 
 CMS = ("landscape", "pbp")
-READER, VERIFIER, SECOND_VERIFIER = "claude-haiku-5-5", "claude-sonnet-5-5", "claude-opus-5-5"
 STEPS = {"document_facts": document_facts.VERSIONS, "present": present.VERSIONS}
 
 
@@ -111,12 +109,6 @@ class Answers:
                     out.write(text.encode())
                 w.writerow(dict(dir=os.path.relpath(task_dir, self.work), task=os.path.basename(task), model=model,
                                 effort=effort or "", key=ask.key(model, text, effort), prompt=prompt))
-
-
-def fresh(path):
-    shutil.rmtree(path, ignore_errors=True)
-    os.makedirs(path)
-    return path
 
 
 def model_steps(data, texts, work, answer, versions):
