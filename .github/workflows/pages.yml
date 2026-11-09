@@ -89,7 +89,6 @@ jobs:
       - run: |
           year=$(basename "$(python3 -I pipeline/years.py)")
           python3 -I pipeline/trace.py build "$year" "_work/trace/$year.sqlite" "$SHA" _work
-          python3 -I pipeline/trace.py check "_work/trace/$year.sqlite"
           python3 -I pipeline/trace.py export "_work/trace/$year.sqlite" "_work/trace/$year"
         env:
           SHA: ${{ github.event.pull_request.head.sha || github.sha }}

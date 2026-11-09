@@ -91,7 +91,6 @@ function lens(step, steps, link, terms, example, trace, sheet) {
 const STATUS = {
   traced: "Traced",
   none: "No step touched this cell",
-  not_traced_yet: "Not traced yet",
   not_recorded: "Not recorded in this build",
 };
 

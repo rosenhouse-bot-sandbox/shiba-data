@@ -263,12 +263,12 @@ def chart_row(landscape, plan):
         column: compute(landscape, plan) for column, compute in COLUMNS.items()}
 
 
-def reads(landscape, plan, dictionary):
+def reads(landscape, plan, dictionary, columns=None):
     """The plans.csv and PBP fields each column read, with each PBP field's title and decoded value."""
     return [dict(plan_id=landscape["plan_id"], column=column, file=file, field=field, value=value,
                  title=dictionary.get((file, field), {}).get("title", "") if field != ROWS else "",
                  meaning=cms_sources.meaning(dictionary, file, field, value) if field != ROWS else "")
-            for column, compute in COLUMNS.items()
+            for column, compute in (columns or COLUMNS).items()
             for file, field, value in logged(compute, (PLANS, landscape), ("plan", plan))[1]]
 
 

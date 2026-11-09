@@ -198,7 +198,7 @@ def main(year, work, mode="", candidate=""):
     py("cite.py", gen / "documents_checked.csv", f"{work}/texts/text", gen / "citations.csv")
     py("main_chart.py", gen / "plans.csv", f"{work}/pbp", gen / "main_chart.csv", gen / "cms_reads.csv")
     py("pbp_facts.py", gen / "plans.csv", f"{work}/pbp", gen / "pbp_facts.csv")
-    py("dvha.py", gen / "plans.csv", f"{work}/pbp", gen / "dvha.csv")
+    py("dvha.py", gen / "plans.csv", f"{work}/pbp", gen / "dvha.csv", gen / "dvha_reads.csv")
     py("cms_sources.py", f"{work}/{config['landscape_csv']}", gen / "plans.csv", f"{work}/pbp", gen / "cms_sources.csv",
        config["state"])
     if config["year"] == appendix_b.YEAR:

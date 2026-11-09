@@ -200,10 +200,10 @@ function unpick() {
   linkHow();
 }
 
-// The ? beside a cell's note and the header's "How it's made" open the selected cell's pipeline view.
+// The ? beside a cell's note and the header's "How it's made" open the last step of the selected cell's pipeline view.
 function linkHow() {
   const { sheet, plan, col } = selection?.dataset ?? {};
-  const href = selection ? format({ year: site.year, view: "how", sheet, plan, column: site[sheet].columns.find((c) => c.key === col).id }) : "#/how";
+  const href = selection ? format({ year: site.year, view: "how", sheet, plan, column: site[sheet].columns.find((c) => c.key === col).id, step: "publish" }) : "#/how";
   $("#how-this").hidden = !selection;
   $("#how-this").href = href;
   $("header nav a[data-view=how]").href = href;

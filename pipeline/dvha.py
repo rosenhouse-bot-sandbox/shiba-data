@@ -1,6 +1,7 @@
 """Generates the DVHA sheet (dental, vision, hearing, alternative care) from the CMS PBP Benefits files.
 
-Usage: python3 -I dvha.py <plans.csv> <pbp_dir> <out.csv>
+Usage: python3 -I dvha.py <plans.csv> <pbp_dir> <out.csv> <reads.csv>
+reads.csv lists the plans.csv and PBP fields behind each cell.
 Cells summarize in-network supplemental benefits. Column rules are in fields.py.
 """
 import csv
@@ -166,26 +167,42 @@ def optional_packages(plan):
     return "; ".join(out)
 
 
+COLUMNS = {
+    "C_premium": lambda landscape, plan: landscape["premium"],
+    "D_premium_full_extra_help": lambda landscape, plan: landscape["premium_full_extra_help"],
+    "E_optional_packages": lambda landscape, plan: optional_packages(plan),
+    "F_dental": lambda landscape, plan: dental(plan),
+    "G_vision": lambda landscape, plan: vision(plan),
+    "H_hearing": lambda landscape, plan: hearing(plan),
+    "I_alt_care_otc_travel": lambda landscape, plan: alt_care(plan),
+    "J_extra_benefits": lambda landscape, plan: extras(plan),
+}
+
+
 def dvha_row(landscape, plan):
-    return {
-        "section": landscape["section"], "plan_id": landscape["plan_id"], "plan_name": landscape["plan_name"],
-        "C_premium": landscape["premium"], "D_premium_full_extra_help": landscape["premium_full_extra_help"],
-        "E_optional_packages": optional_packages(plan), "F_dental": dental(plan), "G_vision": vision(plan),
-        "H_hearing": hearing(plan), "I_alt_care_otc_travel": alt_care(plan), "J_extra_benefits": extras(plan),
-    }
+    return {"section": landscape["section"], "plan_id": landscape["plan_id"], "plan_name": landscape["plan_name"]} | {
+        column: compute(landscape, plan) for column, compute in COLUMNS.items()}
+
+
+def reads(landscape, plan, dictionary):
+    return main_chart.reads(landscape, plan, dictionary, COLUMNS)
 
 
 def sheet(plans, data):
     return main_chart.sheet(plans, data, dvha_row, dvha=True)
 
 
-def main(plans_csv, pbp_dir, out_csv):
+def main(plans_csv, pbp_dir, out_csv, reads_csv):
     global DICTIONARY
     DICTIONARY = pbp.load_dictionary(pbp_dir)
     with open(plans_csv) as f:
         plans = list(csv.DictReader(f))
     data = pbp.load(pbp_dir, [p["plan_id"] for p in plans])
     write_csv(out_csv, sheet(plans, data))
+    with open(reads_csv, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=main_chart.READS)
+        w.writeheader()
+        w.writerows(r for p in plans for r in reads(p, data[p["plan_id"]], DICTIONARY))
 
 
 if __name__ == "__main__":

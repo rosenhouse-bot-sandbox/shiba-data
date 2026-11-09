@@ -2,7 +2,7 @@ import csv, contextlib, io, os, sys, tempfile, unittest
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path[:0] = [os.path.join(HERE, ".."), HERE]
-import cms_sources, main_chart, reads, universe  # noqa: E402
+import cms_sources, dvha, main_chart, reads, universe  # noqa: E402
 from test_cms_sources import DICTIONARY, FIXTURE, PLANS  # noqa: E402
 from test_scripts import landscape_row  # noqa: E402
 
@@ -56,6 +56,22 @@ class MainChartReadsTest(unittest.TestCase):
         rows = main_chart.reads(landscape, FIXTURE["plans"][landscape["plan_id"]], DICTIONARY)
         self.assertTrue(any(r["title"] for r in rows))
         self.assertTrue(all(r["title"] == r["meaning"] == "" for r in rows if r["field"] == reads.ROWS))
+
+
+class DvhaReadsTest(unittest.TestCase):
+    def test_each_cell_comes_from_the_fields_it_read(self):
+        for landscape in PLANS:
+            plan = FIXTURE["plans"][landscape["plan_id"]]
+            whole = dvha.dvha_row(landscape, plan)
+            for column, compute in dvha.COLUMNS.items():
+                with self.subTest(plan=landscape["plan_id"], column=column):
+                    found = reads.logged(compute, (main_chart.PLANS, landscape), ("plan", plan))[1]
+                    self.assertEqual(compute(*reversed(keep(plan, landscape, found))), whole[column])
+
+    def test_lists_the_reads_of_every_column(self):
+        rows = dvha.reads(PLANS[0], FIXTURE["plans"][PLANS[0]["plan_id"]], DICTIONARY)
+        self.assertEqual({r["column"] for r in rows}, set(dvha.COLUMNS))
+        self.assertTrue(any(r["title"] for r in rows))
 
 
 FULL = {"Plan Type": "HMO", "Organization Marketing Name": "Carrier", "Monthly Consolidated Premium (Part C + D)": "$10.00",

@@ -7,7 +7,7 @@ import ask, blobs, build, document_facts, extract, fields, layers, present, read
 
 SHA = "0" * 40
 AMBULANCE = ("main", "H1036-153-0", "AB_ambulance")
-STATUSES = {trace.TRACED, trace.NONE, trace.NOT_YET, trace.NOT_RECORDED}
+STATUSES = {trace.TRACED, trace.NONE, trace.NOT_RECORDED}
 
 
 def statuses(records):
@@ -36,17 +36,18 @@ class TraceTest(unittest.TestCase):
     def cell(self, *key):
         return trace.cell(self.db, *key)
 
-    def test_every_main_cell_has_every_record_with_a_known_status(self):
+    def test_every_cell_has_every_record_with_a_known_status(self):
         sheets = layers.live(years.data_dir())[0]
-        for r in sheets["main"]:
-            for col in fields.labels("main"):
-                with self.subTest(plan_id=r["plan_id"], col=col):
-                    records = self.cell("main", r["plan_id"], col)
-                    self.assertEqual(records["cell"]["value"], r[col])
-                    self.assertEqual(set(records), {
-                        "cell", "plan", "documents", "draft", "answers", "fact_checks", "rule", "added_facts", "notes",
-                        "struck_quotes", "model_citations", "layers", "build"})
-                    self.assertLessEqual(statuses(records), STATUSES - {trace.NOT_YET})
+        for sheet in ("main", "dvha"):
+            for r in sheets[sheet]:
+                for col in fields.labels(sheet):
+                    with self.subTest(sheet=sheet, plan_id=r["plan_id"], col=col):
+                        records = self.cell(sheet, r["plan_id"], col)
+                        self.assertEqual(records["cell"]["value"], r[col])
+                        self.assertEqual(set(records), {
+                            "cell", "plan", "documents", "draft", "answers", "fact_checks", "rule", "added_facts",
+                            "notes", "struck_quotes", "model_citations", "layers", "build"})
+                        self.assertLessEqual(statuses(records), STATUSES)
 
     def test_shows_the_values_and_citations_the_site_shows_in_its_order(self):
         site = build.site_data()
@@ -114,15 +115,6 @@ class TraceTest(unittest.TestCase):
         self.assertEqual(records["notes"], {"status": trace.NONE, "rows": []})
         self.assertEqual(records["struck_quotes"]["status"], trace.NONE)
 
-    def test_check_passes_when_every_main_cell_is_traced(self):
-        trace.check(self.db)
-
-    def test_check_names_each_record_left_not_traced_yet(self):
-        def cell(db, sheet, plan_id, col):
-            return {"draft": {"status": trace.TRACED, "cms_fields": {"status": trace.NOT_YET}}}
-        with mock.patch.object(trace, "cell", cell), self.assertRaisesRegex(SystemExit, "H1036-153-0 AB_ambulance: draft/cms_fields"):
-            trace.check(self.db)
-
     def test_says_none_when_no_model_step_cited_the_cell(self):
         self.assertEqual(self.cell(*AMBULANCE)["model_citations"], {"status": trace.NONE, "rows": []})
 
@@ -175,10 +167,15 @@ class TraceTest(unittest.TestCase):
         fields = self.cell(*AMBULANCE)["plan"]["landscape_row"]["fields"]
         self.assertIn(("Plan Name", "Humana Total Complete (HMO)"), [(f["field"], f["value"]) for f in fields])
 
-    def test_lists_the_cms_fields_where_cms_sources_has_them_on_dvha(self):
+    def test_lists_the_pbp_fields_a_dvha_cell_read(self):
+        cms = self.cell("dvha", "H1036-153-0", "G_vision")["draft"]["cms_fields"]
+        self.assertIn("pbp_b17_eye_exams_wear", {r["file"] for r in cms["rows"]})
+        self.assertNotIn("pbp_b10_amb_trans", {r["file"] for r in cms["rows"]})
+
+    def test_lists_the_landscape_fields_behind_a_dvha_plans_csv_field(self):
         cms = self.cell("dvha", "H3805-048-0", "D_premium_full_extra_help")["draft"]["cms_fields"]
-        self.assertEqual(cms["status"], trace.TRACED)
-        self.assertIn("Part C Premium", [r["field"] for r in cms["rows"]])
+        self.assertEqual([r["field"] for r in cms["rows"]], ["premium_full_extra_help"])
+        self.assertIn("Part C Premium", [n["field"] for n in cms["rows"][0]["landscape"]])
 
     def test_lists_the_plans_documents_with_their_text_hashes(self):
         documents = self.cell(*AMBULANCE)["documents"]["documents"]
