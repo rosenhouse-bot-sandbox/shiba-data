@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-4ec81cd0d2695486.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 12, Section 5.1 gives the monthly plan premium for AgeRight Advantage Premier Health Plan (HMO C-SNP) as $69.00 for 2027. This matches the plan, premium kind, amount and per-month unit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2100,
+  "output_tokens": 238,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

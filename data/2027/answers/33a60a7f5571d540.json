@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-5e11cf20cec995f3.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 40 states the plan doesn't cover emergency or urgently needed services outside the U.S. under any circumstances. This is an outside-U.S. not-covered fact.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 40 says urgently needed services from an out-of-network provider are covered when network providers are temporarily unavailable or inaccessible and it is not reasonable to wait. The condition is copied from the document.\"}]\n```",
+ "usage": {
+  "input_tokens": 2439,
+  "output_tokens": 348,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

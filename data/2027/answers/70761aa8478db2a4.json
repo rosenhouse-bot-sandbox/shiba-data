@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-8980c5c5d9008083.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 13, Section 4.1 Plan premium: for 2027 the monthly plan premium for our plan is $29. The document covers only one plan, and the amount excludes the Part B premium and Extra Help.\"}]\n```",
+ "usage": {
+  "input_tokens": 2007,
+  "output_tokens": 96,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

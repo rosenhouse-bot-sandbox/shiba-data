@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-fd314311528d4668.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 11 Medicare Explorer row covers out-of-network Medicare providers up to a benefit maximum of $1,200 in covered plan charges per calendar year. The row is in the single 'You pay' column that applies to all plan members.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 11 Home medical care not covered by Medicare (Kaiser Permanente at Home) row: $0 when prescribed as part of your home treatment plan. The row is in the single column that applies to all plan members.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 11 Medicare Explorer row covers out-of-network Medicare providers up to a benefit maximum of $1,200 per calendar year. The row is in the single 'You pay' column that applies to all plan members.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 11 Medicare Explorer row covers out-of-network Medicare providers up to a benefit maximum of $1,200 per calendar year. The row is in the single 'You pay' column that applies to all plan members.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 11 Home medical care (Kaiser Permanente at Home) row: $0 when prescribed as part of your home treatment plan. The row is in the single column that applies to all plan members.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 11 Home medical care (Kaiser Permanente at Home) row: $0 when prescribed as part of your home treatment plan. The row is in the single column that applies to all plan members.\"}]\n```",
+ "usage": {
+  "input_tokens": 3675,
+  "output_tokens": 746,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

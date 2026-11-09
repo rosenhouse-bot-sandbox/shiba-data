@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-05d56d5f782708e7.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 10 24-Hour Nurse Line row: your cost in our plan is $0. It is a supplemental benefit with no other benefit word.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 10 Visitor/traveler program: Travel Advantage lets you stay in the plan for up to 12 months outside the service area. You pay in-network cost shares and no separate amount is stated, so it is covered.\"}]\n```",
+ "usage": {
+  "input_tokens": 2072,
+  "output_tokens": 334,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

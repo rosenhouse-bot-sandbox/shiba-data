@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-4a0ee31be3437c35.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 7 Worldwide Coverage lists Emergency room - Hospital at $115 copay, but care outside the U.S. is a supplemental benefit, not Medicare-covered, so covered_by 'medicare' is doubtful.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Page 7 Worldwide Coverage says you pay $0 if admitted to the same hospital within 24 hours for the same condition, but care outside the U.S. is supplemental, not Medicare-covered, so covered_by 'medicare' is doubtful.\"}]\n```",
+ "usage": {
+  "input_tokens": 2383,
+  "output_tokens": 553,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

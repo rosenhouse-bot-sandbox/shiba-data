@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "4a0ee31be3437c35.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-306-0\", \"benefit\": \"meals\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"4 times per year\",\n  \"condition\": \"After your inpatient stay in either a hospital or a nursing facility\",\n  \"page\": 16,\n  \"quotes\": [\"$0 copayment for Humana Well Dine®\", \"Limited to 4 times per year.\"], \"note\": \"\"},\n {\"plan_id\": \"H1036-306-0\", \"benefit\": \"meals\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"14\", \"unit\": \"meals\", \"limit\": \"2 meals per day for 7 days after an inpatient stay\",\n  \"condition\": \"After your inpatient stay in either a hospital or a nursing facility\",\n  \"page\": 16,\n  \"quotes\": [\"receive 2 home delivered meals per day for\", \"7 days (up to 14 meals).\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 2544,
+  "output_tokens": 945,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

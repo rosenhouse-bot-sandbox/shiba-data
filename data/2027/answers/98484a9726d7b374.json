@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-f73d19eeaaf3a08a.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 79 urgently needed services row: Worldwide Coverage is a $40 copayment at an Urgent Care Center. Urgent care falls under the emergency benefit, and worldwide care maps to outside_us.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 53 emergency care row: in network, Emergency Services is a $130 copayment in the Emergency Room.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 53 emergency care row: out of network, Emergency Services is a $130 copayment in the Emergency Room. The page says out-of-network cost sharing equals in-network.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 53 emergency care row: Worldwide Coverage is a $130 copayment in the Emergency Room, so the outside-U.S. emergency copay is $130.\"}]\n```",
+ "usage": {
+  "input_tokens": 4002,
+  "output_tokens": 749,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

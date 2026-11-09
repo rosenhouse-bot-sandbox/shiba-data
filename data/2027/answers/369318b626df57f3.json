@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-d370b4b5b3950077.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 Monthly Premium row shows $43 for DEVOTED PREMIUM 005 OR (HMO). The page notes the Part B premium is paid separately, so $43 is the plan premium per month.\"}]\n```",
+ "usage": {
+  "input_tokens": 2057,
+  "output_tokens": 98,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

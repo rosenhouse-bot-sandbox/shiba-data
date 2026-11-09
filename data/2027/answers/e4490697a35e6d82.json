@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "7a95606e4d0c87d0.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-048-0\", \"benefit\": \"meals\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"2 meals per day for 7 days; limited to 4 times per calendar year\", \"page\": 58, \"quotes\": [\"In-Network: $0 copayment Out-of-Network:\", \"After your inpatient stay in either the hospital or a nursing facility, you are eligible to receive 2 meals per day for 7 days at no extra cost to you.\", \"Meal program limited to 4 times per calendar year.\"], \"note\": \"Humana Well Dine meal program after an inpatient stay. The out-of-network 5% reimbursement is left out because it is unclear.\"},\n {\"plan_id\": \"H5216-048-0\", \"benefit\": \"meals\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"condition\": \"After your inpatient stay for Congestive Heart Failure (CHF)\", \"limit\": \"up to two home delivered meals per day for 30 days (up to 60 meals)\", \"page\": 59, \"quotes\": [\"After your inpatient stay for Congestive Heart Failure (CHF) in either a hospital or skilled nursing facility, you may be eligible to receive up to two home delivered meals per day for 30 days (up to 60 meals)\"], \"note\": \"Uniformity flexibility nutritional benefit. Page 58 shows a $0 in-network copayment for it, but that quote is not unique on the page, so this is given as covered.\"}]\n```",
+ "usage": {
+  "input_tokens": 4069,
+  "output_tokens": 2346,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

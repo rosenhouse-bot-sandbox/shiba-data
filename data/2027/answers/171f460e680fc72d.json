@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-630e49b10e7ad131.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 79 Urgently needed services row: Out-of-Network Worldwide Coverage is a $40 copayment (Urgent Care Center). This matches an outside-U.S. supplemental copay.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 56 Emergency care row: Out-of-Network Worldwide Coverage is a $115 copayment (Emergency Room). This matches an outside-U.S. supplemental copay.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 79 Urgently needed services row: In-Network Urgently Needed Services is a $40 copayment. The only setting listed is Urgent Care Center, so one cost covers the benefit.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 56 Emergency care row: In-Network Emergency Services is a $115 copayment in the Emergency Room. The separate $0 line is for provider and professional services.\"}]\n```",
+ "usage": {
+  "input_tokens": 3891,
+  "output_tokens": 914,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

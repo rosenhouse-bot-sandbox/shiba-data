@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-d4758cd5b94a2266.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 2, plan OR-0002 (PPO): the Monthly plan premium row shows $0, with a note to keep paying the Part B premium. The premium is not split by network, so 'any' fits.\"}]\n```",
+ "usage": {
+  "input_tokens": 2057,
+  "output_tokens": 140,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

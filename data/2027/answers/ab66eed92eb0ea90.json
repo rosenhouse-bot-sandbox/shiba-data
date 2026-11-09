@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "f73d19eeaaf3a08a.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-428-2\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$130\", \"unit\": \"\", \"limit\": \"\", \"page\": 53, \"quotes\": [\"In-Network: Emergency Services $130 copayment\"], \"note\": \"Cost is listed for the Emergency Room setting, which is mapped to 'any' here.\"},\n {\"plan_id\": \"H5216-428-2\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$130\", \"unit\": \"\", \"limit\": \"\", \"page\": 53, \"quotes\": [\"Out-of-Network: Emergency Services $130 copayment\"], \"note\": \"Cost is listed for the Emergency Room setting, which is mapped to 'any' here.\"},\n {\"plan_id\": \"H5216-428-2\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$130\", \"unit\": \"\", \"limit\": \"\", \"page\": 53, \"quotes\": [\"Worldwide Coverage $130 copayment – Emergency Room\"], \"note\": \"Supplemental per page 35: 'This is a supplemental benefit not generally covered by Medicare.'\"},\n {\"plan_id\": \"H5216-428-2\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$40\", \"unit\": \"\", \"limit\": \"\", \"page\": 79, \"quotes\": [\"Worldwide Coverage $40 copayment – Urgent Care Center\"], \"note\": \"Worldwide urgently needed services. Supplemental per page 35.\"}]\n```",
+ "usage": {
+  "input_tokens": 10247,
+  "output_tokens": 2199,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

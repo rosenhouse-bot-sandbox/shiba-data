@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "a744eaa24232bb11.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-306-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"limit\": \"unlimited visits per calendar year\", \"page\": 70, \"quotes\": [\"You are also covered for supplemental routine foot care benefits:\", \"You may self-refer for unlimited visits per calendar year\"], \"note\": \"The $15 copayments for Medicare-covered and routine podiatry are left out because they apply only in the Specialist's Office setting, which is not in the setting list.\"}]\n```",
+ "usage": {
+  "input_tokens": 2774,
+  "output_tokens": 880,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

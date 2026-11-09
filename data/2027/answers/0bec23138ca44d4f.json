@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "5e11cf20cec995f3.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-048-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$45\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 84, \"quotes\": [\"$45 copayment or each Medicare-covered\"], \"note\": \"The document says this copay applies in an office or home setting. Outpatient hospital services are billed under outpatient surgery.\"},\n {\"plan_id\": \"H3805-048-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$45\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 84, \"quotes\": [\"$45 copayment or each routine visit.\"]},\n {\"plan_id\": \"H3805-048-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"6\", \"unit\": \"\", \"limit\": \"per year\", \"page\": 84, \"quotes\": [\"We cover 6 routine oot care visits every year.\"]}]\n```",
+ "usage": {
+  "input_tokens": 2760,
+  "output_tokens": 1277,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "77d83ba821336370.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H2001-045-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per visit\", \"page\": 103,\n   \"quotes\": [\"$0 copayment or each Medicare- covered visit in an o ice or home setting.\"],\n   \"note\": \"Podiatry row, which includes routine foot care for members with certain medical conditions affecting the lower limbs. The cost is for office or home visits. Outpatient hospital services are billed under outpatient surgery.\"},\n  {\"plan_id\": \"H2001-045-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"unit\": \"per visit\", \"page\": 103,\n   \"quotes\": [\"30% coinsurance or each Medicare- covered visit in an o ice or home setting.\"],\n   \"note\": \"Podiatry row, which includes routine foot care for members with certain medical conditions affecting the lower limbs. The cost is for office or home visits.\"},\n  {\"plan_id\": \"H2001-045-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per visit\", \"page\": 104,\n   \"quotes\": [\"$0 copayment or each routine visit.\"]},\n  {\"plan_id\": \"H2001-045-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"unit\": \"per visit\", \"page\": 104,\n   \"quotes\": [\"30% coinsurance or each routine visit.\"]},\n  {\"plan_id\": \"H2001-045-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"4\", \"limit\": \"every year\", \"page\": 104,\n   \"quotes\": [\"We cover 4 in and out-o -network routine oot care visits every year.\"]}\n]\n```",
+ "usage": {
+  "input_tokens": 5278,
+  "output_tokens": 2099,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

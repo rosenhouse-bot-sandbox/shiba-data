@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "05d56d5f782708e7.md",
+ "reply": "```json\n[{\"plan_id\": \"H2056-003-0\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"limit\": \"up to 12 months\", \"pool\": \"Visitor/traveler program: Travel Advantage\", \"page\": 10,\n  \"quotes\": [\"This benefit allows you to remain in your plan for up to 12\"], \"note\": \"Travel within the U.S. (except California and Puerto Rico) with Aetna Medicare participating providers at in-network cost shares; no dollar amount stated.\"},\n {\"plan_id\": \"H2056-003-0\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"pool\": \"24‑Hour Nurse Line\", \"page\": 10,\n  \"quotes\": [\"24‑Hour Nurse Line $0\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 2221,
+  "output_tokens": 946,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

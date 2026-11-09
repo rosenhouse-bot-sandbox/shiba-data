@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "362ee075ea5896d4.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2001-045-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 10, \"quotes\": [\"Foot exams and treatment $0 copay\"], \"note\": \"Row is 'Foot exams and treatment' under Foot care (podiatry services). The service name wraps onto two lines, so the quote may not match the page text exactly.\"},\n {\"plan_id\": \"H2001-045-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"page\": 10, \"quotes\": [\"Foot exams and treatment $0 copay 30% coinsurance\"], \"note\": \"Row is 'Foot exams and treatment'. The quote is the whole row, so it also shows the in-network $0 copay. The service name wraps onto two lines, so the quote may not match the page text exactly.\"}]\n```",
+ "usage": {
+  "input_tokens": 3726,
+  "output_tokens": 1604,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

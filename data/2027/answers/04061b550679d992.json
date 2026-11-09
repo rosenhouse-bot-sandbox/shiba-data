@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "a744eaa24232bb11.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-306-0\", \"benefit\": \"meals\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"limit\": \"2 meals per day for 7 days after an inpatient stay\", \"condition\": \"After your inpatient stay in either the hospital or a nursing facility\", \"page\": 57, \"quotes\": [\"Humana Well Dine® meal program\", \"$0 copayment\"], \"note\": \"\"},\n{\"plan_id\": \"H1036-306-0\", \"benefit\": \"meals\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"4\", \"unit\": \"meal program uses\", \"limit\": \"per calendar year\", \"condition\": \"After your inpatient stay in either the hospital or a nursing facility\", \"page\": 58, \"quotes\": [\"Meal program limited to 4 times per calendar year.\"], \"note\": \"\"},\n{\"plan_id\": \"H1036-306-0\", \"benefit\": \"meals\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"14\", \"unit\": \"meals\", \"limit\": \"per inpatient stay\", \"condition\": \"After your inpatient stay in either the hospital or a nursing facility\", \"page\": 58, \"quotes\": [\"14 nutritious meals will be delivered to your home.\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 3948,
+  "output_tokens": 1057,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

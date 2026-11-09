@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-2a970381e331a34a.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 Monthly Premium row: $0 per month for this single plan. The Part B premium is still owed separately.\"}]\n```",
+ "usage": {
+  "input_tokens": 2025,
+  "output_tokens": 66,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "bee1858e7e963c62.md",
+ "reply": "```json\n[]\n```\n\nPage 36 states no facts for `other_supplemental`. It covers emergency follow-up care, urgently needed services, and worldwide emergency and urgent care. Those are emergency and urgent care benefits, not a supplemental benefit that no other benefit word names. The page also gives no costs, allowances or limits for any supplemental program.",
+ "usage": {
+  "input_tokens": 2786,
+  "output_tokens": 252,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

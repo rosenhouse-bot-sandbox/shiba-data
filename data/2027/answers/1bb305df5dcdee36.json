@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "2af2a9f1fd104b7f.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-455-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$40\", \"page\": 15, \"quotes\": [\"Podiatry services (Medicare-covered)\", \"$15 copay $40 copay\"], \"note\": \"In-network column read down: chiropractic $15 copay, then podiatry $40 copay\"},\n {\"plan_id\": \"H5216-455-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 15, \"quotes\": [\"Podiatry services (Medicare-covered)\", \"and/or exclusions. 50% of the cost 50% of the cost\"], \"note\": \"Out-of-network column read down: after the acupuncture note comes chiropractic 50%, then podiatry 50%\"}]\n```",
+ "usage": {
+  "input_tokens": 2928,
+  "output_tokens": 1356,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

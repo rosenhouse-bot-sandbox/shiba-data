@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-d370b4b5b3950077.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5 Emergency Care row shows $130 per visit. That is the in-network Medicare-covered emergency copay, and one cost is given for every setting.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 5 Emergency Care row says the plan also covers emergency services worldwide as a supplemental benefit. That supports covered care outside the U.S., with no amount stated.\"}]\n```",
+ "usage": {
+  "input_tokens": 2044,
+  "output_tokens": 388,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

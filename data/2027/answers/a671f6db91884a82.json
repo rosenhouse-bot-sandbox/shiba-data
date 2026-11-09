@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-e41fce2e65cf35f2.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 8 Worldwide Coverage row does show a $130 copay for Emergency room - Hospital. But emergency care outside the U.S. is generally a routine (supplemental) benefit, not a Medicare-covered one. The page does not support 'medicare' as covered_by.\"}]\n```",
+ "usage": {
+  "input_tokens": 1844,
+  "output_tokens": 305,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "5f6896f5c437eeed.md",
+ "reply": "```json\n[{\"plan_id\": \"H7199-002-0\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$130\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 5,\n  \"quotes\": [\"$130 per visit\"], \"note\": \"\"},\n {\"plan_id\": \"H7199-002-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"page\": 5,\n  \"quotes\": [\"This plan also covers emergency services worldwide as a supplemental benefit.\"], \"note\": \"The page names no network for worldwide emergency care, so this uses the in-network default. It states no cost or maximum for worldwide care.\"}]\n```",
+ "usage": {
+  "input_tokens": 2533,
+  "output_tokens": 826,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

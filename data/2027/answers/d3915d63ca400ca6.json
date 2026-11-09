@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-362ee075ea5896d4.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 2 'Monthly plan premium' row: $0 per month for UHC Complete Care Support OR-1A, with the Part B premium paid separately. One premium covers the plan.\"}]\n```",
+ "usage": {
+  "input_tokens": 2104,
+  "output_tokens": 88,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "8980c5c5d9008083.md",
+ "reply": "```json\n[\n  {\n    \"plan_id\": \"H5439-015-0\",\n    \"benefit\": \"emergency\",\n    \"setting\": \"any\",\n    \"network\": \"any\",\n    \"covered_by\": \"medicare\",\n    \"cost_kind\": \"covered\",\n    \"page\": 39,\n    \"quotes\": [\"You can get covered emergency medical care whenever you need it, anywhere in the United States or its territories, and from any provider with an appropriate state license even if they’re not part of our network.\"],\n    \"note\": \"\"\n  },\n  {\n    \"plan_id\": \"H5439-015-0\",\n    \"benefit\": \"emergency\",\n    \"setting\": \"outside_us\",\n    \"network\": \"in\",\n    \"covered_by\": \"supplemental\",\n    \"cost_kind\": \"copay\",\n    \"amount\": \"$115\",\n    \"page\": 70,\n    \"quotes\": [\"$115 copay for emergency services outside of the United States\"],\n    \"note\": \"Supplemental because page 41 says Medicare does not cover emergency care outside the U.S. Page 118 gives the same $115 copay for urgently needed services outside the U.S. Network set to in by default, since the document names no network.\"\n  },\n  {\n    \"plan_id\": \"H5439-015-0\",\n    \"benefit\": \"emergency\",\n    \"setting\": \"outside_us\",\n    \"network\": \"in\",\n    \"covered_by\": \"supplemental\",\n    \"cost_kind\": \"max\",\n    \"amount\": \"$50,000\",\n    \"limit\": \"every year\",\n    \"page\": 70,\n    \"quotes\": [\"You are covered for up to $50,000 every year for emergency or urgently needed services outside the United States.\"],\n    \"note\": \"Supplemental because Medicare does not cover care outside the U.S. Network set to in by default, since the document names no network.\"\n  }\n]\n```",
+ "usage": {
+  "input_tokens": 9144,
+  "output_tokens": 1723,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

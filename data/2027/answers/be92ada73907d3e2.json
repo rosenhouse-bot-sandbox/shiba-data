@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "50159487a52ccddf.md",
+ "reply": "```json\n[{\"plan_id\": \"H7006-018-0\", \"benefit\": \"meals\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per meal\", \"limit\": \"up to 2 meals per day for 14 days (28 meals per episode)\", \"condition\": \"inpatient or SNF direct admissions/ post hospital\", \"page\": 14, \"quotes\": [\"Meal benefit $0 copay for up to 2 meals per\"], \"note\": \"\"},\n {\"plan_id\": \"H7006-021-0\", \"benefit\": \"meals\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per meal\", \"limit\": \"up to 2 meals per day for 14 days (28 meals per episode)\", \"condition\": \"inpatient or SNF direct admissions/ post hospital\", \"page\": 14, \"quotes\": [\"Meal benefit $0 copay for up to 2 meals per\"], \"note\": \"Both plan columns state the same meal text, so no quote is unique to the ATRIO Freedom column. This quote is the row label with the first column, which matches the Freedom column word for word.\"}]\n```",
+ "usage": {
+  "input_tokens": 2569,
+  "output_tokens": 1651,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-05d56d5f782708e7.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 8 Foot care row: non-Medicare covered podiatry services are not covered, so the supplemental benefit is not covered.\"}, {\"id\": 1, \"ok\": true, \"reason\": \"Page 8 Foot exams and treatment row: $65 copay for Medicare-covered podiatry visits, in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2218,
+  "output_tokens": 130,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

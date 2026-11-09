@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "808ccc78793ded84.md",
+ "reply": "```json\n[{\"plan_id\": \"H7199-002-0\", \"benefit\": \"plan_premium\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"premium\", \"amount\": \"$28.50\", \"unit\": \"per month\", \"limit\": \"\", \"page\": 13, \"quotes\": [\"For 2027, the monthly plan premium for DEVOTED CHOICE PREMIUM 002 OR (PPO) is $28.50.\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 15619,
+  "output_tokens": 400,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

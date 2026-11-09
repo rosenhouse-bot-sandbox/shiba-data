@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-dca4e04d7b6dc26b.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 49 Worldwide emergency coverage row does show a $120 copay. But worldwide care is not described as Medicare-covered; it is a routine (supplemental) benefit, so covered_by 'medicare' is wrong.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 49 Emergency care row: $150 copay for each Medicare-covered emergency room visit, which matches the per-visit unit.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"Page 49 does state a $250,000 allowance every year for all covered worldwide services. But this worldwide benefit is supplemental, not Medicare-covered, so covered_by 'medicare' is wrong.\"}]\n```",
+ "usage": {
+  "input_tokens": 2326,
+  "output_tokens": 472,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

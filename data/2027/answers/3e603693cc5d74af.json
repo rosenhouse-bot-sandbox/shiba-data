@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "0bd982dc589e8cba.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-427-2\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"condition\": \"inpatient or observation hospitalization within the past 30 days related to a heart failure diagnosis\", \"pool\": \"Virtual Cardiac Recovery Program\", \"page\": 70, \"quotes\": [\"Virtual Cardiac Recovery Program\", \"In-Network: $0 copayment\"], \"note\": \"\"},\n {\"plan_id\": \"H5216-427-2\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"36\", \"unit\": \"sessions\", \"limit\": \"per episode\", \"condition\": \"inpatient or observation hospitalization within the past 30 days related to a heart failure diagnosis\", \"pool\": \"Virtual Cardiac Recovery Program\", \"page\": 70, \"quotes\": [\"Includes up to 36 sessions per episode following a qualifying hospitalization with a $0 copayment\"], \"note\": \"The page says out-of-network benefits are subject to in-network benefit maximums and limitations, so the 36-session limit is listed for both networks.\"}]\n```",
+ "usage": {
+  "input_tokens": 4063,
+  "output_tokens": 1343,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

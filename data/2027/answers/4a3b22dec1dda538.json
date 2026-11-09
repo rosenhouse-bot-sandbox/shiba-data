@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-64e05773e847b56e.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 72 Virtual Cardiac Recovery Program: up to 36 sessions per episode after a qualifying heart failure-related hospitalization. The condition summarizes the eligibility text.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 72 Virtual Cardiac Recovery Program: In-Network $0 copayment for eligible members after a qualifying heart failure-related hospitalization.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 82 says the HMO Travel Benefit is available to members of Humana Total Complete (HMO). It is covered using National Medicare HMO/SNP network providers, and no amount is stated.\"}]\n```",
+ "usage": {
+  "input_tokens": 3774,
+  "output_tokens": 648,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-f751937f09316ed1.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 106 'Special supplemental benefits for the chronically ill — Food & Home Card' row shows $289 per month. This fits a supplemental allowance for members with a chronic condition (SSBCI). The card covers healthy foods, utilities and rent or mortgage, so other_supplemental is the right benefit word.\"}]\n```",
+ "usage": {
+  "input_tokens": 2384,
+  "output_tokens": 601,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

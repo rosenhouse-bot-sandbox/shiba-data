@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "e41fce2e65cf35f2.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-428-2\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$130\", \"page\": 8, \"quotes\": [\"Emergency services at $130 copay\"], \"note\": \"The out-of-network column also shows $130 copay for this row. It is left out because no quote that is unique on the page shows that column without mixing columns.\"}]\n```",
+ "usage": {
+  "input_tokens": 2375,
+  "output_tokens": 1069,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

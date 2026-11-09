@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "5e11cf20cec995f3.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-048-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"not_covered\", \"page\": 40, \"quotes\": [\"Emergency and urgently needed services outside the United States are not covered under any circumstances.\"], \"note\": \"\"},\n{\"plan_id\": \"H3805-048-0\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"covered\", \"condition\": \"providers are temporarily unavailable or inaccessible and it is not reasonable to wait to obtain care rom your network provider\", \"page\": 40, \"quotes\": [\"we will cover urgently needed services that you get rom an out-o -network provider\"], \"note\": \"Applies to urgently needed services only, not emergency services.\"}]\n```",
+ "usage": {
+  "input_tokens": 4320,
+  "output_tokens": 696,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-557f08e61a7e8f42.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 62 Emergency care row: $130 per Emergency Department visit for Standard plan members. Out-of-network cost-sharing is the same as in-network.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Page 62 lists $150 for the Enhanced plan. The Standard plan pays $130.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 62 Emergency care row: 'You have worldwide emergency care coverage.' The statement applies to all plans, including Enhanced.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 62 Emergency care row: 'You have worldwide emergency care coverage.' The statement applies to all plans, including Value.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 62 Emergency care row: 'You have worldwide emergency care coverage.' The statement applies to all plans, including Standard.\"},\n{\"id\": 5, \"ok\": false, \"reason\": \"$130 is the Standard plan amount. Page 62 lists $150 for Enhanced plan members.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 62 Emergency care row: $130 per Emergency Department visit for Value plan members. Out-of-network cost-sharing is the same as in-network.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 62 Emergency care row: $150 per Emergency Department visit for Enhanced plan members. Out-of-network cost-sharing is the same as in-network.\"},\n{\"id\": 8, \"ok\": false, \"reason\": \"$130 is the Value plan amount. Page 62 lists $150 for Enhanced plan members.\"}]\n```",
+ "usage": {
+  "input_tokens": 3111,
+  "output_tokens": 1141,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "5e11cf20cec995f3.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-048-0\", \"benefit\": \"plan_premium\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"premium\", \"amount\": \"$0\", \"unit\": \"per month\", \"limit\": \"\", \"page\": 11, \"quotes\": [\"Monthly plan premium\", \"$0\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 18479,
+  "output_tokens": 592,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

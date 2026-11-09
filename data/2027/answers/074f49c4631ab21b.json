@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-7a95606e4d0c87d0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 15, Section 4.1 Plan Premium: the monthly premium for HumanaChoice H5216-048 (PPO) for 2027 is $97. This is the plan premium, separate from the Part B premium and the optional supplemental premium.\"}]\n```",
+ "usage": {
+  "input_tokens": 2156,
+  "output_tokens": 109,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

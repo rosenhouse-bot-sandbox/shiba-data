@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "a744eaa24232bb11.md",
+ "reply": "```json\n[\n  {\n    \"plan_id\": \"H1036-306-0\",\n    \"benefit\": \"other_supplemental\",\n    \"setting\": \"any\",\n    \"network\": \"in\",\n    \"covered_by\": \"supplemental\",\n    \"cost_kind\": \"covered\",\n    \"pool\": \"Virtual Cardiac Recovery Program\",\n    \"condition\": \"for members with recent heart failure-related hospitalization\",\n    \"page\": 47,\n    \"quotes\": [\n      \"Virtual Cardiac Recovery Program – for members with recent heart failure-related hospitalization\"\n    ],\n    \"note\": \"Uniformity Flexibility benefit; members must also meet the applicable criteria. The cost on page 75 is cut off after 'In-Network:'.\"\n  },\n  {\n    \"plan_id\": \"H1036-306-0\",\n    \"benefit\": \"other_supplemental\",\n    \"setting\": \"any\",\n    \"network\": \"in\",\n    \"covered_by\": \"supplemental\",\n    \"cost_kind\": \"covered\",\n    \"pool\": \"HMO Travel Benefit\",\n    \"page\": 84,\n    \"quotes\": [\n      \"The HMO Travel Benefit is available to you as a member of Humana Gold Plus - Diabetes and Heart (HMO C-SNP).\",\n      \"If you get care from a provider within the National Medicare HMO/SNP network, you'll pay the same in-network copay or coinsurance you would pay if you got care within your home service area.\"\n    ],\n    \"note\": \"Covers care while traveling within the United States from National Medicare HMO/SNP network providers. Cost sharing is the same as in-network.\"\n  }\n]\n```",
+ "usage": {
+  "input_tokens": 5079,
+  "output_tokens": 1072,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

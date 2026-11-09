@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "dca4e04d7b6dc26b.md",
+ "reply": "```json\n[{\"plan_id\": \"H7006-021-0\", \"benefit\": \"meals\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"up to 2 meals per day for 14 days (28 meals per episode)\", \"page\": 60, \"quotes\": [\"In-Network $0 copay for up to 2 meals per day for 14 days (28 meals per episode). Prior Authorization may be required.\"], \"note\": \"\"},\n{\"plan_id\": \"H7006-021-0\", \"benefit\": \"meals\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"up to 2 meals per day for 14 days (28 meals per episode)\", \"page\": 60, \"quotes\": [\"Out-of-Network $0 copay for up to 2 meals per day for 14 days (28 meals per episode).\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 2426,
+  "output_tokens": 914,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

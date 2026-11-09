@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-7ac7300e6ca40ac7.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 85 Additional routine foot care row says 'We cover 6 routine foot care visits every year.' This is a supplemental benefit with a limit of 6 visits per year.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"The page 85 Additional routine foot care row shows a $45 copayment for each routine visit. This is the supplemental benefit, with one in-network amount.\"}]\n```",
+ "usage": {
+  "input_tokens": 2403,
+  "output_tokens": 312,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

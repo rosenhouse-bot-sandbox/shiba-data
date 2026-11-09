@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "808ccc78793ded84.md",
+ "reply": "```json\n[{\"plan_id\": \"H7199-002-0\", \"benefit\": \"meals\", \"setting\": \"any\", \"network\": \"any\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"not_covered\", \"page\": 140,\n  \"quotes\": [\"Home-delivered meals                   Not covered under any condition\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 2498,
+  "output_tokens": 318,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

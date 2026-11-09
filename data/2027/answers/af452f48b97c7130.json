@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "dca4e04d7b6dc26b.md",
+ "reply": "```json\n[{\"plan_id\": \"H7006-021-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$40\", \"unit\": \"per service\", \"limit\": \"\", \"page\": 80,\n  \"quotes\": [\"Routine foot care for members with certain medical\", \"$40 copay for each\"], \"note\": \"\"},\n {\"plan_id\": \"H7006-021-0\", \"benefit\": \"foot_care\", \"setting\": \"any\", \"network\": \"out\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"unit\": \"per service\", \"limit\": \"\", \"page\": 80,\n  \"quotes\": [\"Routine foot care for members with certain medical\", \"50% coinsurance for each\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 2701,
+  "output_tokens": 940,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

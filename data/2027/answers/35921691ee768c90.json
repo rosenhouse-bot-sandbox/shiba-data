@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-f751937f09316ed1.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 70 worldwide emergency row: the plan covers worldwide emergency, urgent care and ambulance up to $25,000 per lifetime. The limit applies to care outside the U.S. and its territories.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 69 Worldwide Emergency Care (services outside the United States) row: cost-share for emergency services worldwide is a $0 copay. The left column says you still pay your standard ER copay, but this row states that amount explicitly as $0.\"}]\n```",
+ "usage": {
+  "input_tokens": 3253,
+  "output_tokens": 520,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

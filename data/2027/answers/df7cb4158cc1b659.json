@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "f73d19eeaaf3a08a.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-428-2\", \"benefit\": \"meals\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"up to two home delivered meals per day for 30 days (up to 60 meals)\", \"condition\": \"After your inpatient stay for Congestive Heart Failure (CHF) in either a hospital or skilled nursing facility\", \"page\": 57, \"quotes\": [\"Humana Well Dine® meal program\", \"In-Network: $0 copayment\", \"home delivered meals per day for 30 days (up to 60 meals)\"], \"note\": \"\"},\n {\"plan_id\": \"H5216-428-2\", \"benefit\": \"meals\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"60\", \"unit\": \"meals\", \"limit\": \"for 30 days\", \"condition\": \"After your inpatient stay for Congestive Heart Failure (CHF) in either a hospital or skilled nursing facility\", \"page\": 57, \"quotes\": [\"Humana Well Dine® meal program\", \"home delivered meals per day for 30 days (up to 60 meals)\"], \"note\": \"\"},\n {\"plan_id\": \"H5216-428-2\", \"benefit\": \"meals\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"not_covered\", \"page\": 100, \"quotes\": [\"Home-delivered meals Not covered under any condition\"], \"note\": \"The exclusions chart lists home-delivered meals as not covered. Page 57 covers post-CHF meals under the Well Dine program, so this exclusion likely applies only outside that program.\"}]\n```",
+ "usage": {
+  "input_tokens": 3492,
+  "output_tokens": 1396,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "bf93677641b9fa6f.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-001-0\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$130\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 5, \"quotes\": [\"Emergency Care                            $130 per visit\"], \"note\": \"\"},\n{\"plan_id\": \"H2923-001-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"page\": 5, \"quotes\": [\"This plan also covers emergency services worldwide as a supplemental benefit.\"], \"note\": \"Worldwide emergency coverage is stated, but no maximum or cost is given on this page.\"}]\n```",
+ "usage": {
+  "input_tokens": 2546,
+  "output_tokens": 861,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

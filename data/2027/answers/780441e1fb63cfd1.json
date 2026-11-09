@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-7ac7300e6ca40ac7.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 13 Summary of Important Costs for UHC Complete Care OR-5: the monthly plan premium is $0. The asterisk only notes the premium can be higher, as Section 5.1 explains.\"}]\n```",
+ "usage": {
+  "input_tokens": 2139,
+  "output_tokens": 214,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

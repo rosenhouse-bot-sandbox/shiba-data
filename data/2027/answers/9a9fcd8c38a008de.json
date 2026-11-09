@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "a744eaa24232bb11.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-306-0\", \"benefit\": \"plan_premium\", \"setting\": \"any\", \"network\": \"any\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"premium\", \"amount\": \"$0\", \"unit\": \"per month\", \"limit\": \"\", \"page\": 13,\n  \"quotes\": [\"Monthly plan premium $0\"], \"note\": \"Summary table footnote says the premium can be higher than this amount, for example with a Part D late enrollment penalty. Page 17 confirms no separate monthly plan premium.\"}]\n```",
+ "usage": {
+  "input_tokens": 13559,
+  "output_tokens": 670,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

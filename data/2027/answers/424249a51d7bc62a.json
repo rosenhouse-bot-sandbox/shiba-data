@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-2a970381e331a34a.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5 Emergency Care row: $115 per visit. The cost is waived if you are admitted within 24 hours, but that is an exception, not a condition on the $115 copay.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 5 Emergency Care row says the plan also covers emergency services worldwide as a supplemental benefit. No amount is stated on this page, so 'covered' fits.\"}]\n```",
+ "usage": {
+  "input_tokens": 2221,
+  "output_tokens": 669,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

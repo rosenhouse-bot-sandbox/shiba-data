@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-7e45f25357b792a7.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 124 exclusions chart for this plan: 'Home-delivered meals — Not covered under any condition', which supports supplemental not_covered in any setting and network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2206,
+  "output_tokens": 359,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
