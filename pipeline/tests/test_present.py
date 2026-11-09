@@ -532,6 +532,68 @@ class PlanPremiumTest(unittest.TestCase):
         self.assertEqual(column(present.plan_premium, *found), [("", [])])
 
 
+def routine(benefit, cost_kind="copay", amount="$0", **more):
+    return priced(benefit, covered_by="supplemental", cost_kind=cost_kind, amount=amount, **more)
+
+
+class VisionTest(unittest.TestCase):
+    def test_exam_and_eyewear_cite_the_facts_that_say_how_often_they_renew(self):
+        found = [routine("vision.exam"), routine("vision.exam", "visit_limit", "1", limit="every year"),
+                 routine("vision.eyewear", "allowance", "$150", limit="every 2 calendar years")]
+        self.assertEqual(column(present.vision, *found), [("exam $0/year; eyewear $150/two years", found)])
+
+    def test_renews_only_as_the_best_source_says(self):
+        found = [routine("vision.exam"), routine("vision.exam", "visit_limit", "1", limit="every other year"),
+                 routine("vision.eyewear", "allowance", "$90"),
+                 routine("vision.eyewear", "visit_limit", "1", limit="every year", source="SB", page="2"),
+                 routine("vision.eyewear", "visit_limit", "1", limit="every 2 years")]
+        self.assertEqual(column(present.vision, *found)[0][0], "exam $0; eyewear $90/two years")
+
+    def test_a_tier_of_providers_adds_its_allowance(self):
+        found = [routine("vision.eyewear", "max", "$50"), routine("vision.eyewear", "max", "$100", provider_tier="PLUS** Provider")]
+        self.assertEqual(column(present.vision, *found)[0][0], "eyewear $50 ($100 at PLUS providers)")
+        self.assertEqual(column(present.vision, found[1]), [("", [])])
+
+    def test_some_carriers_allow_frames_or_contacts_and_cite_a_0_lens_copay(self):
+        found = [routine("vision.eyewear", "allowance", "$100"), routine("vision.eyewear")]
+        self.assertEqual(present.vision("Regence BlueCross", found), [("frames or contacts $100; lenses $0", found)])
+        self.assertEqual(present.vision("Regence BlueCross", found[:1])[0][0], "frames or contacts $100")
+
+    def test_skips_medicare_conditional_tiered_package_and_pooled_benefits(self):
+        found = [priced("vision.exam"), routine("vision.exam", condition="diabetes"),
+                 routine("vision.exam", provider_tier="PLUS"),
+                 routine("vision.eyewear", "allowance", "$175", package="Advantage Plus"),
+                 routine("vision", "allowance", "$20", pool="Spendables")]
+        self.assertEqual(column(present.vision, *found), [("", [])])
+
+
+class HearingTest(unittest.TestCase):
+    def test_exam_aid_copays_and_the_fewest_aids_a_limit_allows(self):
+        found = [routine("hearing.exam"), routine("hearing.aids", amount="$499 or $699 or $999", unit="per aid"),
+                 routine("hearing.aids", "visit_limit", "2", limit="per year"),
+                 routine("hearing.aids", "visit_limit", "4", limit="")]
+        self.assertEqual(column(present.hearing, *found), [("exam $0; aids $499-$999; 2 aids/year", found)])
+
+    def test_an_allowance_per_ear_wins_over_a_copay_and_means_2_aids(self):
+        found = [routine("hearing.aids", "allowance", "$500", unit="per ear", limit="every 3 calendar years"),
+                 routine("hearing.aids", unit="per ear")]
+        self.assertEqual(column(present.hearing, *found),
+                         [("aids allowance $500 per ear/three years; 2 aids/three years", [found[0]])])
+
+    def test_a_price_per_aid_or_for_both_ears_counts_no_aids(self):
+        found = [routine("hearing.aids", "allowance", "$1,600", unit="for both ears combined", limit="every 2 years")]
+        self.assertEqual(column(present.hearing, *found)[0][0], "aids allowance $1,600/two years")
+        self.assertEqual(column(present.hearing, routine("hearing.aids", amount="$499", unit="per aid"))[0][0], "aids $499")
+
+    def test_counts_aids_only_beside_a_price(self):
+        self.assertEqual(column(present.hearing, routine("hearing.aids", "visit_limit", "2", limit="per year")), [("", [])])
+
+    def test_skips_medicare_tiered_and_pooled_benefits(self):
+        found = [priced("hearing.exam", amount="$40"), routine("hearing.aids", "allowance", "$175", pool="Healthy Options"),
+                 routine("hearing.aids", "allowance", "$900", provider_tier="Premier")]
+        self.assertEqual(column(present.hearing, *found), [("", [])])
+
+
 def presented_cells(data, column):
     return {p: [value for value, _ in got] for p, got in present.lines(data, column).items()}
 
@@ -597,6 +659,12 @@ class WriteTest(unittest.TestCase):
         cells = {v: {(r["column"], r["plan_id"]) for r in present.layer_rows(data, v)} for v in (1, 2)}
         self.assertEqual(cells[2] - cells[1], {cell})
 
+    def test_version_4_presents_dvha_vision_and_hearing_and_holds_some_hearing_cells(self):
+        data = years.data_dir(YEAR)
+        cells = {v: {(r["sheet"], r["column"], r["plan_id"]) for r in present.layer_rows(data, v)} for v in (3, 4)}
+        self.assertEqual({c[:2] for c in cells[4] - cells[3]}, {("dvha", "G_vision"), ("dvha", "H_hearing")})
+        self.assertNotIn(("dvha", "H_hearing", "H6815-038-0"), cells[4])
+
     def test_a_held_main_cell_does_not_hold_the_dvha_cell_of_the_same_name(self):
         self.assertNotEqual(present.cell("main", "C_premium", "H1"), present.cell("dvha", "C_premium", "H1"))
 
@@ -609,12 +677,13 @@ class WriteTest(unittest.TestCase):
     def test_the_pinned_version_holds_its_cells(self):
         data = years.data_dir(YEAR)
         self.assertEqual(present.held(data), present.held(data, json.load(open(data / "steps.json"))["present"]))
-        self.assertEqual(present.held(data, 3), present.VERSIONS[3])
-        with mock.patch.dict(os.environ, {present.CANDIDATE: "filled@6, present@3"}):
-            self.assertEqual(present.held(data), present.VERSIONS[3])
+        latest = max(present.VERSIONS)
+        self.assertEqual(present.held(data, latest), present.VERSIONS[latest])
+        with mock.patch.dict(os.environ, {present.CANDIDATE: f"filled@6, present@{latest}"}):
+            self.assertEqual(present.held(data), present.VERSIONS[latest])
 
     def test_a_held_reason_does_not_imply_that_people_read_the_documents(self):
-        for why in present.HELD_1.values():
+        for why in (why for held in present.VERSIONS.values() for why in held.values()):
             self.assertNotIn("reader", why)
 
     def test_refuses_a_second_line_for_a_one_line_cell(self):
