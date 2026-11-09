@@ -5,6 +5,7 @@
   --head: #eef1f6;
   --accent: #1f5fbf;
   --comment: #fff6d6;
+  --caveat: #e8dcf4;
   --hand-written: #e3f1e0;
   --warn: #a33b00;
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -42,6 +43,7 @@ td { cursor: pointer; }
 td:hover { outline: 2px solid var(--accent); outline-offset: -2px; }
 td.dot { text-align: center; }
 td.commented { background: var(--comment); }
+td.commented.caveat { background: var(--caveat); }
 td.commented.hand_written { background: var(--hand-written); }
 tr.open-plan > :not(.commented) { background: #e1ecfb; }
 td.selected { outline: 3px solid var(--ink); outline-offset: -3px; }
@@ -78,6 +80,7 @@ td.selected { outline: 3px solid var(--ink); outline-offset: -3px; }
 #source-note p { margin: 4px 0; }
 #source-note .cms ul { margin: 0; padding-left: 20px; }
 #source-note .comment { background: var(--comment); padding: 4px 6px; }
+#source-note .comment.caveat { background: var(--caveat); }
 #source-note .comment.hand_written { background: var(--hand-written); }
 .pbp { color: var(--muted); }
 .warn { color: var(--warn); }

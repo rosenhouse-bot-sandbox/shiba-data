@@ -390,12 +390,13 @@ H1372-003-0,ambulance,outside_us,not_covered,EOC,41,"[""Our plan doesn’t cover
 
 That fact makes line 2 of the AgeRight plan's Ambulance cell read `not covered`.
 
-A **note** explains a cell to volunteers. A `hand_written` note, shown in green, marks a cell that uses a hand-written fact. A `question`, shown in yellow, flags a value that needs a domain expert's check. `comments.csv`, selected columns:
+A **note** explains a cell to volunteers. A `hand_written` note, in green, marks a value that uses a hand-written fact. A `caveat`, in lavender, gives a settled detail the value leaves out. A `question`, in yellow, flags a value that needs a domain expert's check. `comments.csv`, selected columns:
 
 ```
 sheet,plan_id,column,kind,comment,pdf_page,quote
 main,H1372-003-0,AB_ambulance,hand_written,"The EOC excludes all care abroad, so it excludes ambulances there.",41,"Our plan doesn’t cover …"
-main,H7199-002-0,L_xray_imaging,question,"EOC page 96 prices X-rays at $25 in every office setting. … This needs an expert's check (#127).",96,X-rays PCP's office: $25 copay
+dvha,H1372-003-0,F_dental,caveat,"EOC page 57 says there is no coinsurance or copayment for supplemental dental benefits, … The EOC does not say how often the maximum resets.",57,"Maximum: $1,000 for"
+main,H7199-002-0,L_xray_imaging,question,"EOC page 96 prices X-rays at $25 in every office setting. …",96,X-rays PCP's office: $25 copay
 ```
 
 An **edit** sets a cell's value directly, with a citation. Edits remain only on the DVHA sheet, whose columns have no rules yet. Each edit records `saw`, the value it replaced. The build warns if the value beneath an edit changes. `edits.csv`, selected columns:
