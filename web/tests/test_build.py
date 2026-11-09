@@ -298,9 +298,9 @@ class SiteCommandTest(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.dir = pathlib.Path(self.tmp.name)
-        traces = mock.patch.object(build, "write_traces")
-        self.traces = traces.start()
-        self.addCleanup(traces.stop)
+        self.traces = self.enterContext(mock.patch.object(build, "write_traces"))
+        self.enterContext(mock.patch.object(build.layers, "live", return_value=({}, [], [])))
+        self.enterContext(mock.patch.object(build.layers, "stale_strikes", return_value=[]))
 
     def tearDown(self):
         self.tmp.cleanup()

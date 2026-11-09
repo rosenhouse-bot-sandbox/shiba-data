@@ -1,4 +1,4 @@
-import json, os, pathlib, sys, tempfile, unittest
+import contextlib, io, json, os, pathlib, sys, tempfile, unittest
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -77,6 +77,9 @@ class TrustedTest(unittest.TestCase):
 
 
 class GateTest(unittest.TestCase):
+    def setUp(self):
+        self.enterContext(contextlib.redirect_stdout(io.StringIO()))
+
     def gate(self, trusted, new, answer, cap=10, held=HELD):
         with tempfile.TemporaryDirectory() as work:
             return review.gate(DATA, None, work, answer, trusted, new, dict(reviewer=("m", "e"), review_cap=cap), held,

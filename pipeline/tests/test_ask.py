@@ -1,4 +1,4 @@
-import datetime, json, os, pathlib, sys, tempfile, types, unittest
+import contextlib, datetime, io, json, os, pathlib, sys, tempfile, types, unittest
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -6,6 +6,14 @@ import ask
 
 MODEL = "claude-haiku-5-5"
 USAGE = {"input_tokens": 100, "output_tokens": 20, "cache_read_input_tokens": 0, "cache_creation_input_tokens": 0}
+
+
+@contextlib.contextmanager
+def printing(test, expected):
+    out = io.StringIO()
+    with contextlib.redirect_stdout(out):
+        yield
+    test.assertIn(expected, out.getvalue())
 
 
 def each(ask_one):
@@ -69,7 +77,8 @@ class AnswerTest(unittest.TestCase):
         fake = each(lambda model, text, effort: ("[]" if text == "Read that." else "Sorry, no.", USAGE))
         rounds = []
         asker = lambda model, effort, texts: rounds.append(sorted(texts.values())) or fake(model, effort, texts)
-        self.assertEqual(ask.answer([self.task, good], MODEL, self.saved, asker), [self.task])
+        with printing(self, "P-1.md: claude-haiku-5-5 did not reply with a JSON array"):
+            self.assertEqual(ask.answer([self.task, good], MODEL, self.saved, asker), [self.task])
         self.assertEqual(rounds, [["Read that.", "Read this."]] + [["Read this."]] * (ask.ATTEMPTS - 1))
 
     def test_saves_that_a_batch_answered(self):
@@ -104,13 +113,15 @@ class AnswerTest(unittest.TestCase):
 
     def test_asks_again_after_a_reply_that_is_not_an_array(self):
         fake = Fake("Sorry, no.", '[{"id": 0}]')
-        self.assertEqual(ask.answer([self.task], MODEL, self.saved, fake), [])
+        with printing(self, "did not reply with a JSON array"):
+            self.assertEqual(ask.answer([self.task], MODEL, self.saved, fake), [])
         self.assertEqual(len(fake.asked), 2)
         both = {k: 2 * v for k, v in USAGE.items()}
         self.assertEqual(self.saved_answers()[0]["usage"], both)
         fake = Fake("Sorry, no.")
         self.task.write_text("Another task.")
-        self.assertEqual(ask.answer([self.task], MODEL, self.saved, fake), [self.task])
+        with printing(self, "did not reply with a JSON array"):
+            self.assertEqual(ask.answer([self.task], MODEL, self.saved, fake), [self.task])
         self.assertEqual(len(fake.asked), ask.ATTEMPTS)
 
     def test_reads_a_fenced_array_and_drops_a_reply_that_is_not_an_array(self):
@@ -118,7 +129,8 @@ class AnswerTest(unittest.TestCase):
         self.assertEqual(json.loads(self.task.with_suffix(".json").read_text()), [{"id": 0}])
         self.task.write_text("Another task.")
         for reply in ("Sorry, no.", '{"id": 0}', '[{"id": 0}, 1]'):
-            missing, _ = self.answer(reply=reply)
+            with printing(self, "did not reply with a JSON array"):
+                missing, _ = self.answer(reply=reply)
             self.assertEqual(missing, [self.task])
         self.assertEqual(len(list(self.saved.iterdir())), 1)
 
@@ -201,13 +213,15 @@ class BatchesTest(unittest.TestCase):
 
     def test_leaves_out_requests_that_did_not_succeed(self):
         asker = self.asker(Client(lambda params: None, kind="errored"))
-        self.assertEqual(self.ask(asker, MODEL, None, {"a": "Read this."}), {})
+        with printing(self, "a: errored"):
+            self.assertEqual(self.ask(asker, MODEL, None, {"a": "Read this."}), {})
 
     def test_reuses_each_earlier_succeeded_result_once_instead_of_asking_again(self):
         old = [result("a", message=Message("end_turn", "[1]")), result("b", "errored")]
         client = Client(lambda params: Message("end_turn", "[2]"), earlier=[old])
         asker = self.asker(client)
-        got = self.ask(asker, MODEL, None, {"a": "Read this.", "b": "Read that."})
+        with printing(self, "b: errored"):
+            got = self.ask(asker, MODEL, None, {"a": "Read this.", "b": "Read that."})
         self.assertEqual({k: r for k, (r, _) in got.items()}, {"a": "[1]", "b": "[2]"})
         self.assertEqual([[r["custom_id"] for r in rs] for rs in client.created], [["b"]])
         got = self.ask(asker, MODEL, None, {"a": "Read this."})

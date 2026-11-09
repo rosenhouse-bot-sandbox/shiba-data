@@ -31,9 +31,13 @@ jobs:
           node-version: "22"
       - run: pipx run ruff==0.16.9 check
         working-directory: .
-      - run: python3 -I -m unittest discover -b -s tests
-      - run: python3 -I -m unittest discover -b -s ../pipeline/tests
-      - run: node --test --test-reporter=dot tests/highlight.test.mjs tests/ago.test.mjs tests/permalink.test.mjs tests/worker.test.mjs tests/pipeline.test.mjs
+      - run: python3 -I -m unittest discover -s tests
+      - run: python3 -I -m unittest discover -s ../pipeline/tests
+      # Only the spec report shows a test file's load error, so it prints when a test fails.
+      - run: |
+          node --test --test-reporter=dot --test-reporter-destination=stdout \
+            --test-reporter=spec --test-reporter-destination="$RUNNER_TEMP/spec.txt" \
+            tests/highlight.test.mjs tests/ago.test.mjs tests/permalink.test.mjs tests/worker.test.mjs tests/pipeline.test.mjs || { cat "$RUNNER_TEMP/spec.txt"; exit 1; }
       - run: python3 -I build.py site ../_site
       # The e2e tests open each PDF the site links. The public site serves every blob, so pull requests need no secret.
       - run: |
@@ -42,7 +46,10 @@ jobs:
           xargs -P 8 -I{} curl -sSfL --retry 5 --retry-all-errors --max-time 300 -o "../_docs/{}.pdf" "https://pdxplans.org/docs/{}.pdf" < ../_docs.txt
           sed 's|.*|&  ../_docs/&.pdf|' ../_docs.txt | sha256sum -c --quiet
       - run: npm ci && npx playwright install --with-deps chromium
-      - run: SITE=../_site DOCS=../_docs FAILURES=../_failures node --test --test-reporter=dot tests/e2e.test.mjs
+      - run: |
+          SITE=../_site DOCS=../_docs FAILURES=../_failures node --test --test-reporter=dot --test-reporter-destination=stdout \
+            --test-reporter=spec --test-reporter-destination="$RUNNER_TEMP/spec.txt" \
+            tests/e2e.test.mjs || { cat "$RUNNER_TEMP/spec.txt"; exit 1; }
       - if: failure()
         uses: actions/upload-artifact@v4
         with:

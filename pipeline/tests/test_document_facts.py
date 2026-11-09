@@ -1,4 +1,4 @@
-import glob, json, os, pathlib, sys, threading, unittest
+import contextlib, glob, io, json, os, pathlib, sys, threading, unittest
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -7,6 +7,10 @@ from test_extract import SHA, StepsTest, answer
 
 
 class StepTest(StepsTest):
+    def setUp(self):
+        super().setUp()
+        self.enterContext(contextlib.redirect_stdout(io.StringIO()))
+
     def test_writes_the_facts_the_versions_verifier_accepts(self):
         asked = []
         version = dict(groups=("imaging",), reader=("r", "high"), verifier=("v", "low"))
