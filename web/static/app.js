@@ -2,6 +2,9 @@ import * as pdfjsLib from "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build
 import { findAll, matchRanges, squash } from "./highlight.js";
 import { ago } from "./ago.js";
 import { parse, format } from "./permalink.js";
+import { el } from "./dom.js";
+import { howView, howLink } from "./how.js";
+import { STEPS, stepById } from "./pipeline.js";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.worker.min.mjs";
 
@@ -10,16 +13,6 @@ const SHEET_NAMES = { main: "Main chart", dvha: "Dental, vision, hearing & extra
 const KIND_NAMES = { question: "Open question", caveat: "Caveat", added: "Added fact" };
 let kindFilter = "";
 const $ = (sel) => document.querySelector(sel);
-const el = (tag, attrs = {}, ...kids) => {
-  const e = document.createElement(tag);
-  for (const [k, v] of Object.entries(attrs)) {
-    if (k === "class") e.className = v;
-    else if (k.startsWith("on")) e.addEventListener(k.slice(2), v);
-    else e.setAttribute(k, v);
-  }
-  e.append(...kids.filter((k) => k != null));
-  return e;
-};
 
 // Keep in sync with PAGE_REF in web/build.py.
 const PAGE_REF = /\b(EOC|SB|rider) pages? (\d+)/gi;
@@ -109,10 +102,11 @@ function route() {
     routed = location.hash;
   }
   if (otherYear) hideViewer();
+  if (state.view === "how") return routeHow(state);
   const { view } = state;
   const plan = view === "plan" && plans[state.plan];
   const key = `${view}/${plan ? plan.plan_id : ""}`;
-  document.querySelectorAll("nav a").forEach((a) => a.classList.toggle("active", a.dataset.view === view));
+  document.querySelectorAll("header nav a").forEach((a) => a.classList.toggle("active", a.dataset.view === view));
   const content = $("#content");
   const sameView = key === here?.key && !otherYear;
   if (!sameView) {
@@ -142,6 +136,24 @@ function route() {
     unpick();
   }
   updateUrl();
+}
+
+// Until #185, every cell opens the example cell.
+function routeHow(state) {
+  hideViewer();
+  const step = stepById(state.step) ?? STEPS[0];
+  const hash = howLink(site.year, step);
+  if (location.hash !== hash) history.replaceState(null, "", hash);
+  routed = location.hash;
+  document.querySelectorAll("header nav a").forEach((a) => a.classList.toggle("active", a.dataset.view === "how"));
+  const content = $("#content");
+  const stepping = here?.view === "how";
+  const mapTop = stepping ? content.querySelector(".how-map").scrollTop : 0;
+  if (here && !stepping) scrollTops[here.key] = content.scrollTop;
+  content.replaceChildren(howView(site.year, step));
+  content.querySelector(".how-map").scrollTop = mapTop;
+  if (stepping) content.querySelector(".how-step").focus({ preventScroll: true });
+  here = { key: "how", view: "how" };
 }
 
 const planSb = (plan) => plan.docs.find((d) => site.docs[d].kind === "SB");
@@ -174,7 +186,7 @@ function updateUrl() {
   const push = pushNext;
   pushNext = false;
   // A link changed the hash, and its hashchange event has not yet run route().
-  if (!here || location.hash !== routed) return;
+  if (!here || here.view === "how" || location.hash !== routed) return;
   const state = { year: site.year, view: here.view, plan: here.plan };
   if (selection) {
     const { plan, sheet, col } = selection.dataset;
