@@ -6,7 +6,7 @@ import { parse, format } from "./permalink.js";
 pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.worker.min.mjs";
 
 const SHEET_NAMES = { main: "Main chart", dvha: "Dental, vision, hearing & extras" };
-const KIND_NAMES = { contradicts: "Contradicts the EOC", note: "Note" };
+const KIND_NAMES = { question: "Open question", hand_written: "Hand-written fact" };
 let kindFilter = "";
 const $ = (sel) => document.querySelector(sel);
 const el = (tag, attrs = {}, ...kids) => {
@@ -116,7 +116,7 @@ function route() {
   const sameView = key === here?.key && !otherYear;
   if (!sameView) {
     if (here) scrollTops[here.key] = content.scrollTop;
-    content.replaceChildren(view === "ambiguities" ? ambiguitiesView() : plan ? planPage(plan) : sheetView(view));
+    content.replaceChildren(view === "notes" ? notesView() : plan ? planPage(plan) : sheetView(view));
     if (otherYear) content.prepend(el("p", { class: "warn" }, `That link was for ${otherYear} plans. This site shows ${site.year} plans.`));
     content.scrollTop = scrollTops[key] ?? 0;
   }
@@ -245,7 +245,8 @@ function valueCell(sheet, plan, column, cell) {
 }
 
 const cellHeader = (plan, column, cell) => el("div", {}, el("b", {}, `${plan.plan_name}: ${column.label} = ${oneLine(cell.value)}`),
-  cell.comment ? el("p", { class: `comment ${cell.comment.kind}` }, ...commentText(plan, column, cell)) : null);
+  cell.comment ? el("p", { class: `comment ${cell.comment.kind}` }, el("b", {}, `${KIND_NAMES[cell.comment.kind]}: `),
+    ...commentText(plan, column, cell)) : null);
 
 // Links each "EOC page N" in a comment to page N of the plan's document of that kind.
 function commentText(plan, column, cell) {
@@ -335,21 +336,21 @@ function citeNote(header, cell) {
   return note;
 }
 
-function ambiguitiesView() {
+function notesView() {
   const rows = Object.keys(SHEET_NAMES).flatMap((sheet) => site[sheet].rows.flatMap((r) =>
-    site[sheet].columns.filter((c) => r.cells[c.key].comment).map((c) => ambiguityRow(sheet, plans[r.plan_id], c, r.cells[c.key]))));
+    site[sheet].columns.filter((c) => r.cells[c.key].comment).map((c) => noteRow(sheet, plans[r.plan_id], c, r.cells[c.key]))));
   const applyFilter = () => rows.forEach((r) => { r.hidden = Boolean(kindFilter) && r.dataset.kind !== kindFilter; });
   const filter = el("select", { id: "kind-filter", onchange: () => { kindFilter = filter.value; applyFilter(); } },
     el("option", { value: "" }, "All kinds"), ...Object.entries(KIND_NAMES).map(([k, name]) => el("option", { value: k }, name)));
   filter.value = kindFilter;
   applyFilter();
-  return el("div", { class: "ambiguities-page" }, el("h2", {}, "Ambiguities"), el("label", {}, "Show ", filter),
-    el("table", { class: "sheet ambiguities" },
-      el("thead", {}, el("tr", {}, ...["Plan", "Benefit", "Value", "Kind", "Comment", "Links"].map((h) => el("th", {}, h)))),
+  return el("div", { class: "notes-page" }, el("h2", {}, "Notes"), el("label", {}, "Show ", filter),
+    el("table", { class: "sheet notes" },
+      el("thead", {}, el("tr", {}, ...["Plan", "Benefit", "Value", "Kind", "Note", "Links"].map((h) => el("th", {}, h)))),
       el("tbody", {}, ...rows)));
 }
 
-function ambiguityRow(sheet, plan, column, cell) {
+function noteRow(sheet, plan, column, cell) {
   const { doc, page, kind } = cell.comment;
   const cellHash = format({ year: site.year, view: sheet, plan: plan.plan_id, sheet, column: column.id });
   const value = valueCell(sheet, plan, column, cell);

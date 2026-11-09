@@ -7,7 +7,7 @@ import unittest
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 import build  # noqa: E402
 import sheet_sync  # noqa: E402
-from sheet_layout import DETAILS, FILLS, SITE, TABS, Cell, Row, details, rows  # noqa: E402
+from sheet_layout import DETAILS, FILLS, SITE, TABS, Cell, Row, details, rows, value_cell  # noqa: E402
 import facts  # noqa: E402
 from test_build import data_copy  # noqa: E402
 
@@ -313,7 +313,12 @@ class SyncTest(unittest.TestCase):
         self.assertIn(f"{SITE}#/2027/plan/H2001-045-0", links)
         fills = [c["userEnteredFormat"]["backgroundColor"]
                  for r in api.batches[1] if "updateCells" in r for row in r["updateCells"]["rows"] for c in row["values"]]
-        self.assertIn(sheet_sync.color(FILLS["note"]), fills)
+        self.assertIn(sheet_sync.color(FILLS["question"]), fills)
+
+    def test_a_note_names_its_kind(self):
+        cell = dict(value="$1", cites=[], comment=dict(kind="hand_written", text="t"))
+        out = value_cell(2027, "main", "H1", dict(id="x"), cell)
+        self.assertEqual((out.note, out.fill), ("Hand-written fact: t", FILLS["hand_written"]))
 
 
 if __name__ == "__main__":

@@ -202,11 +202,11 @@ test("the page has no plan dropdown, citation corners or footer", async () => {
 const allCells = (sheet) => site[sheet].rows.flatMap((r) => Object.entries(r.cells).map(([col, cell]) => ({ plan_id: r.plan_id, col, cell })));
 const cellTd = (planId, col) => page.locator(`.sheet-wrap td[data-plan="${planId}"][data-col="${col}"]`);
 
-test("Ambiguities lists every comment with links to its document page and cell", async () => {
+test("Notes lists every comment with links to its document page and cell", async () => {
   const comments = ["main", "dvha"].flatMap(allCells).filter(({ cell }) => cell.comment);
   await page.goto(`${base}#/main`);
-  await page.click("nav a[data-view=ambiguities]");
-  const rows = page.locator("table.ambiguities tbody tr");
+  await page.click("nav a[data-view=notes]");
+  const rows = page.locator("table.notes tbody tr");
   await rows.first().waitFor();
   assert.equal(await rows.count(), comments.length);
   const wellcare = rows.filter({ has: page.locator('td[data-plan="H6815-038-0"][data-col="K_tests_labs"]') });
@@ -218,16 +218,16 @@ test("Ambiguities lists every comment with links to its document page and cell",
   assert.match(await cellTd("H6815-038-0", "K_tests_labs").getAttribute("class"), /selected/);
 });
 
-test("going back to Ambiguities keeps the scroll position", async () => {
-  await page.goto(`${base}#/ambiguities`);
-  const target = page.locator("table.ambiguities tbody tr").nth(35);
+test("going back to Notes keeps the scroll position", async () => {
+  await page.goto(`${base}#/notes`);
+  const target = page.locator("table.notes tbody tr").last();
   await target.scrollIntoViewIfNeeded();
   const before = await page.$eval("#content", (c) => c.scrollTop);
   assert.ok(before > 0);
   await target.locator("td.links a", { hasText: "Show in" }).click();
   await page.waitForSelector(".sheet-wrap td.selected");
   await page.goBack();
-  await page.waitForSelector("table.ambiguities");
+  await page.waitForSelector("table.notes");
   assert.equal(await page.$eval("#content", (c) => c.scrollTop), before);
 });
 
@@ -344,7 +344,7 @@ test("orange marks a comment that contradicts the cell", async () => {
   assert.equal(await background(fresh.locator("#source-note .comment")), orange);
   assert.equal(await background(contradicts), orange, "stays orange in the open plan's row");
   await fresh.click("nav a[data-view=ambiguities]");
-  const rows = fresh.locator("table.ambiguities tbody tr");
+  const rows = fresh.locator("table.notes tbody tr");
   await fresh.selectOption("#kind-filter", "contradicts");
   const contradictions = ["main", "dvha"].flatMap((sheet) => edited[sheet].rows.flatMap((r) => Object.values(r.cells)))
     .filter((c) => c.comment?.kind === "contradicts");
@@ -683,7 +683,7 @@ test("permalink: an Ambiguities cell keeps the Ambiguities page and links to the
   const { plan_id, col } = allCells("dvha").find(({ cell }) => cell.comment);
   const id = col.replace(/^[A-Z]+_/, "");
   await page.goto(`${base}#/ambiguities`);
-  const tr = page.locator("table.ambiguities tr", { has: page.locator(`td[data-col="${col}"]`) }).filter({ hasText: plan_id }).first();
+  const tr = page.locator("table.notes tr", { has: page.locator(`td[data-col="${col}"]`) }).filter({ hasText: plan_id }).first();
   await tr.locator(`td[data-col="${col}"]`).click();
   await hashIs(`#/2027/ambiguities/dvha/${plan_id}/${id}`);
   assert.equal(await tr.locator("td.links a", { hasText: "Show in" }).getAttribute("href"), `#/2027/dvha/${plan_id}/${id}`);
