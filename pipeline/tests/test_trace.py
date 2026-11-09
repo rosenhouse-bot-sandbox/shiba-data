@@ -70,7 +70,16 @@ class TraceTest(unittest.TestCase):
     def test_traces_a_dvha_cell_from_its_own_code(self):
         records = self.cell("dvha", "H2923-001-0", "F_dental")
         self.assertEqual(records["draft"]["code"]["file"], "pipeline/dvha.py")
-        self.assertEqual(records["rule"]["status"], trace.NONE)
+        self.assertEqual(records["rule"]["code"]["function"], "dental")
+
+    def test_traces_each_sheets_own_rule_for_a_column_both_sheets_have(self):
+        self.assertEqual(self.cell("dvha", "H1036-153-0", "C_premium")["rule"]["code"]["function"], "plan_premium")
+        self.assertEqual(self.cell("main", "H1036-153-0", "C_premium")["rule"]["status"], trace.NONE)
+
+    def test_says_why_the_pinned_version_holds_a_dvha_cell(self):
+        held = present.held(years.data_dir())
+        (column, plan_id), reason = next((k, v) for k, v in held.items() if k[0].startswith("dvha."))
+        self.assertEqual(self.cell("dvha", plan_id, column.removeprefix("dvha."))["rule"]["held"], reason)
 
     def test_reads_a_page_of_a_layout_text(self):
         with tempfile.TemporaryDirectory() as work:
@@ -197,7 +206,7 @@ class TraceTest(unittest.TestCase):
         self.assertEqual(self.cell(*AMBULANCE)["draft"]["code"]["url"],
                          f"{trace.REPO_URL}/blob/{SHA}/pipeline/main_chart.py")
 
-    def test_exports_each_main_cells_records_once_by_content_without_the_commit(self):
+    def test_exports_each_cells_records_once_by_content_without_the_commit(self):
         with tempfile.TemporaryDirectory() as out:
             trace.export(self.db, out)
             with open(os.path.join(out, f"{SHA}.json")) as f:
@@ -206,14 +215,15 @@ class TraceTest(unittest.TestCase):
             for name in os.listdir(os.path.join(out, "cells")):
                 with open(os.path.join(out, "cells", name), encoding="utf-8") as f:
                     texts[name] = f.read()
-        main = self.db.execute("SELECT count(*) FROM draft_cell WHERE sheet = 'main'").fetchone()[0]
-        self.assertEqual((manifest["sha"], manifest["year"], len(manifest["cells"])), (SHA, years.LIVE, main))
+        every = self.db.execute("SELECT count(*) FROM draft_cell").fetchone()[0]
+        self.assertEqual((manifest["sha"], manifest["year"], len(manifest["cells"])), (SHA, years.LIVE, every))
         self.assertEqual(set(texts), {f"{h}.json" for h in manifest["cells"].values()})
         for name, text in texts.items():
             self.assertEqual(name, hashlib.sha256(text.encode()).hexdigest() + ".json")
             self.assertNotIn(SHA, text)
-        text = texts[manifest["cells"]["/".join(AMBULANCE[1:])] + ".json"]
-        self.assertEqual(json.loads(text.replace(trace.COMMIT, SHA)), self.cell(*AMBULANCE))
+        for key in (AMBULANCE, ("dvha", "H1036-153-0", "F_dental")):
+            text = texts[manifest["cells"]["/".join(key)] + ".json"]
+            self.assertEqual(json.loads(text.replace(trace.COMMIT, SHA)), self.cell(*key))
 
     def test_rejects_an_unknown_cell(self):
         with self.assertRaises(LookupError):

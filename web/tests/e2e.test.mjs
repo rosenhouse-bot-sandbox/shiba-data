@@ -947,6 +947,22 @@ test("pipeline view: a main-sheet cell's detail links to its pipeline view", asy
   assert.match(await page.textContent(".how-cell"), /Premium/);
 });
 
+test("pipeline view: a DVHA cell's detail links to its pipeline view, which shows the DVHA draft and rule", async () => {
+  await page.goto("about:blank");
+  await page.goto(`${base}#/2027/dvha/H1036-153-0/vision`);
+  await page.click("a:text('How the pipeline made this cell')");
+  await page.waitForSelector(".how-lens");
+  assert.match(page.url(), /#\/2027\/how\/dvha\/H1036-153-0\/vision\/list-plans$/);
+  assert.match(await page.textContent(".how-cell"), /Vision/);
+  assert.ok((await chainOf(page)).includes("Column rules"));
+  await openHow(page, "dvha/H1036-153-0/vision/draft");
+  assert.deepEqual(await page.locator(".how-end code").allTextContents(), ["PBP tables", "dvha.csv"]);
+  await page.click(".how-trace summary");
+  assert.match(await page.textContent(".how-trace pre"), /pipeline\/dvha\.py/);
+  await openHow(page, "dvha/H1036-153-0/vision/column-rules");
+  assert.match(await page.textContent(".how-strip"), /becomes line 1 /);
+});
+
 test("pipeline view: says it is loading, and a cell picked meanwhile stays", async () => {
   const fresh = await browser.newPage();
   opened.push(fresh);
@@ -965,10 +981,12 @@ test("pipeline view: says it is loading, and a cell picked meanwhile stays", asy
   assert.match(fresh.url(), /#\/2027\/main$/);
 });
 
-test("pipeline view: a link to no main-sheet cell shows the example cell and says so", async () => {
+test("pipeline view: a link to no cell shows the example cell and says so", async () => {
   await openHow(page, "main/NOPE/ambulance/draft");
-  assert.match(await page.textContent(".warn"), /names no main-sheet cell/);
+  assert.match(await page.textContent(".warn"), /names no cell/);
   assert.match(page.url(), /H1036-153-0\/ambulance\/draft$/);
+  await openHow(page, "dvha/H1036-153-0/ambulance/draft");
+  assert.match(page.url(), /how\/main\/H1036-153-0\/ambulance\/draft$/);
 });
 
 test("pipeline view: a link may name the column by its key", async () => {

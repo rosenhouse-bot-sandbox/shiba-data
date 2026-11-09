@@ -357,16 +357,18 @@ class TraceFilesTest(unittest.TestCase):
         self.addCleanup(self.tmp.cleanup)
         self.dir = pathlib.Path(self.tmp.name)
 
-    def test_writes_each_main_cells_trace(self):
+    def test_writes_each_cells_trace(self):
         build.write_traces(self.dir / "site", "abc")
         year = build.years.config(build.DATA)["year"]
-        main = self.dir / f"site/trace/{year}/main"
-        cells = {f"{r['plan_id']}/{col}.json" for r in build.layers.live(build.DATA)[0]["main"] for col in build.fields.labels("main")}
-        self.assertEqual({str(p.relative_to(main)) for p in main.rglob("*.json")}, cells)
+        traces = self.dir / f"site/trace/{year}"
+        sheets = build.layers.live(build.DATA)[0]
+        cells = {f"{sheet}/{r['plan_id']}/{col}.json" for sheet in ("main", "dvha") for r in sheets[sheet]
+                 for col in build.fields.labels(sheet)}
+        self.assertEqual({str(p.relative_to(traces)) for p in traces.rglob("*.json")}, cells)
         build.trace.build(year, self.dir / "trace.sqlite", "abc")
         with contextlib.closing(sqlite3.connect(self.dir / "trace.sqlite")) as db:
-            expected = build.trace.cell(db, "main", "H1036-153-0", "AB_ambulance")
-        self.assertEqual(json.loads((main / "H1036-153-0/AB_ambulance.json").read_text()), expected)
+            for key in (("main", "H1036-153-0", "AB_ambulance"), ("dvha", "H1036-153-0", "F_dental")):
+                self.assertEqual(json.loads((traces / "/".join(key)).with_suffix(".json").read_text()), build.trace.cell(db, *key))
 
     def test_each_pipeline_step_names_a_record_of_the_trace(self):
         build.trace.build(2027, self.dir / "trace.sqlite", "abc")

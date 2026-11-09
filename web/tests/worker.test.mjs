@@ -148,9 +148,11 @@ function bucket(objects) {
 const OLD = "1".repeat(40), NEW = "2".repeat(40), THIRD = "3".repeat(40), TOKEN = "t".repeat(64);
 const PLANS = Array.from({ length: 12 }, (_, n) => `H1036-${String(n).padStart(3, "0")}-0`);
 const hash = (n, version) => `${version}${String(n).padStart(2, "0")}`.padEnd(64, "0");
+// Every other cell is on the DVHA sheet.
+const cellKey = (n) => `${n % 2 ? "dvha" : "main"}/${PLANS[n]}/AB_ambulance`;
 // Uploads a build of 12 cells, as CI does. changed lists the cells at version 2, and the rest are at version 1.
 function upload(e, sha, changed = []) {
-  const cells = Object.fromEntries(PLANS.map((plan, n) => [`${plan}/AB_ambulance`, hash(n, changed.includes(n) ? 2 : 1)]));
+  const cells = Object.fromEntries(PLANS.map((_, n) => [cellKey(n), hash(n, changed.includes(n) ? 2 : 1)]));
   for (const [n, v] of PLANS.map((_, n) => [n, changed.includes(n) ? 2 : 1])) {
     e.BLOBS.objects[`trace/2027/cells/${hash(n, v)}.json`] = JSON.stringify({ n, v, code: "blob/${commit}/", sha: "${commit}" });
   }
@@ -160,7 +162,7 @@ const traceEnv = (commit) => ({ ...env, BLOBS: bucket({}), TRACE: d1(), COMMIT: 
 const post = (e, sha, token = TOKEN) => worker.fetch(new Request(`https://pdxplans.org/trace/2027/load/${sha}`, {
   method: "POST", headers: { Authorization: `Bearer ${token}` } }), e);
 const at = (e, path) => worker.fetch(new Request(`https://pdxplans.org${path}`), e);
-const cellAt = (n) => `/trace/2027/main/${PLANS[n]}/AB_ambulance`;
+const cellAt = (n) => `/trace/2027/${cellKey(n)}`;
 // Loads as CI does, until the Worker stops answering 409. Returns the last response and the loads it took.
 async function load(e, sha) {
   for (let loads = 1; ; loads++) {
@@ -181,6 +183,9 @@ test("serves a cell's trace from D1, with the deployed commit, once its build ha
   assert.equal(await (await post(e, OLD)).text(), "Loaded every cell");
   const response = await at(e, cellAt(11));
   assert.equal(await response.text(), served(11, 1, OLD));
+  assert.equal(await (await at(e, cellAt(10))).text(), served(10, 1, OLD));
+  const otherSheet = cellAt(11).replace("dvha", "main");
+  assert.equal(await (await at(e, otherSheet)).text(), `asset ${otherSheet}.json`);
   assert.equal(response.headers.get("Content-Type"), "application/json; charset=utf-8");
 });
 

@@ -11,7 +11,7 @@ Usage:
 "not_traced_yet" when the trace does not cover it yet, as for some DVHA cells, or "not_recorded" when nothing kept
 the record. With a work_dir from a run, `build` adds the run's prompts, their saved answers and the checks' outcomes.
 `check` fails if a main cell has a record left not traced yet.
-`export` writes every main cell's records once by content, which web/worker.js loads into D1.
+`export` writes every cell's records once by content, which web/worker.js loads into D1.
 `page` prints a page's layout text from a run's <work_dir>/texts, where blobs.py puts it.
 """
 import csv, glob, hashlib, json, os, sqlite3, sys
@@ -174,27 +174,31 @@ def load_rules(db, data):
     organization = {p["plan_id"]: p["organization"] for p in read(data / "generated/plans.csv")}
     found = present.plan_facts(data)
     held = present.held(data, steps.versions(data, {"present": present.VERSIONS})["present"])
-    for r in layers.generated(data)["main"]:
-        plan_id = r["plan_id"]
-        for col in present.COLUMNS:
-            got, aside = present.explain(organization[plan_id], found[plan_id], col)
-            insert(db, "rule_line", (dict(plan_id=plan_id, col=col, line=n, value=value, presented=int(present.presents(cited)),
-                                          held=held.get((col, plan_id))) for n, (value, cited) in enumerate(got, 1)))
-            used = {(n, facts.identity(f)) for n, (_, cited) in enumerate(got, 1) for f in cited}
-            insert(db, "rule_fact", [dict(plan_id=plan_id, col=col, line=n, **dict(zip(facts.IDENTITY, identity)), reasons=None)
-                                     for n, identity in sorted(used)]
-                   + [dict(plan_id=plan_id, col=col, line=None, **dict(zip(facts.IDENTITY, identity)),
-                           reasons=json.dumps(reasons)) for identity, reasons in sorted(aside.items())])
+    for sheet, (rules, _) in present.SHEETS.items():
+        for r in layers.generated(data)[sheet]:
+            plan_id = r["plan_id"]
+            for col in rules:
+                got, aside = present.explain(organization[plan_id], found[plan_id], col, sheet)
+                cell = dict(sheet=sheet, plan_id=plan_id, col=col)
+                insert(db, "rule_line", (dict(cell, line=n, value=value, presented=int(present.presents(cited)),
+                                              held=held.get(present.cell(sheet, col, plan_id)))
+                                         for n, (value, cited) in enumerate(got, 1)))
+                used = {(n, facts.identity(f)) for n, (_, cited) in enumerate(got, 1) for f in cited}
+                insert(db, "rule_fact", [dict(cell, line=n, **dict(zip(facts.IDENTITY, identity)), reasons=None)
+                                         for n, identity in sorted(used)]
+                       + [dict(cell, line=None, **dict(zip(facts.IDENTITY, identity)), reasons=json.dumps(reasons))
+                          for identity, reasons in sorted(aside.items())])
 
 
-def rule(db, plan_id, col, code):
+def rule(db, sheet, plan_id, col, code):
     """Returns record 6, the rule's lines and the facts it used and set aside."""
-    lines = rows(db, "SELECT line, value, presented, held FROM rule_line WHERE plan_id = ? AND col = ? ORDER BY line",
-                 plan_id, col)
+    lines = rows(db, "SELECT line, value, presented, held FROM rule_line WHERE sheet = ? AND plan_id = ? AND col = ? "
+                     "ORDER BY line", sheet, plan_id, col)
     considered = rows(db, f"""SELECT r.line, r.reasons, {FACT_COLUMNS}, f.origin, f.reviewed
                               FROM rule_fact r JOIN fact f USING (fact_id, source, doc_sha, page)
-                              WHERE r.plan_id = ? AND r.col = ? ORDER BY r.line, f.fact_id""", plan_id, col)
-    function = present.COLUMNS[col].__qualname__.split(".")[0]
+                              WHERE r.sheet = ? AND r.plan_id = ? AND r.col = ? ORDER BY r.line, f.fact_id""",
+                      sheet, plan_id, col)
+    function = present.SHEETS[sheet][0][col].__qualname__.split(".")[0]
     return considered, record(True, code=dict(file="pipeline/present.py", function=function, url=code + "pipeline/present.py"),
                               held=lines[0]["held"], lines=[dict(
                                   line=n["line"], value=n["value"], presented=bool(n["presented"]),
@@ -203,12 +207,12 @@ def rule(db, plan_id, col, code):
                                          if f["line"] is None])
 
 
-def checks(db, plan_id, col, considered):
+def checks(db, sheet, plan_id, col, considered):
     """Returns record 5 and the prompts behind it. The record checks each document fact the rule considered, and
     each answer that states a fact for the plan and the column's benefits."""
     identities = [facts.identity(f) for f in considered if f["origin"] == "document"]
     found = [s for s in rows(db, "SELECT * FROM stated WHERE plan_id = ? ORDER BY rowid", plan_id)
-             if linked(db, s) and present.related(s, present.LEAVES[col])]
+             if linked(db, s) and present.related(s, present.SHEETS[sheet][1][col])]
     for identity in identities:
         found += rows(db, "SELECT * FROM stated WHERE fact_id = ? AND source = ? AND doc_sha = ? AND page = ? ORDER BY rowid",
                       *identity)
@@ -359,15 +363,15 @@ def cell(db, sheet, plan_id, col):
         cms_fields = record(cms, rows=cms) if cms else {"status": NOT_YET}
     landscape_row = list({(n["field"], n["value"]): dict(field=n["field"], value=n["value"]) for n in landscape}.values())
     file, function = DRAFT_CODE[sheet]
-    has_rule = sheet == "main" and col in present.COLUMNS
-    considered, rule_record = rule(db, plan_id, col, code) if has_rule else ([], {"status": NONE})
+    has_rule = col in present.SHEETS[sheet][0]
+    considered, rule_record = rule(db, sheet, plan_id, col, code) if has_rule else ([], {"status": NONE})
     added = list({json.dumps(f): f for f in map(fact_of, considered) if f["origin"] == "added"}.values())
     model = [dict(r, answers=model_tasks(db, r["step"], plan_id) if r["step"] in MODEL_STEPS and build_row["replayed"]
                   else {"status": NOT_RECORDED}) for r in cited if r.get("step") in MODEL_STEPS + ("xref",)]
     if not has_rule:
         prompts, fact_checks = [], {"status": NONE}
     elif build_row["checked"]:
-        prompts, fact_checks = checks(db, plan_id, col, considered)
+        prompts, fact_checks = checks(db, sheet, plan_id, col, considered)
     else:
         prompts, fact_checks = [], {"status": NOT_RECORDED}
     prompts += [t["prompt"] for r in model for t in r["answers"].get("rows", [])]
@@ -417,13 +421,14 @@ COMMIT = "${commit}"
 
 
 def export(db, out):
-    """Writes each main cell's records to <out>/cells/<sha256>.json, and <out>/<commit>.json, which names each cell's file."""
+    """Writes each cell's records to <out>/cells/<sha256>.json, and <out>/<commit>.json, which names each cell's file
+    by <sheet>/<plan_id>/<col>."""
     sha, year = db.execute("SELECT sha, year FROM build").fetchone()
     os.makedirs(os.path.join(out, "cells"), exist_ok=True)
     cells = {}
-    for plan_id, col in db.execute("SELECT plan_id, col FROM draft_cell WHERE sheet = 'main' ORDER BY plan_id, col").fetchall():
-        text = json.dumps(cell(db, "main", plan_id, col), ensure_ascii=False).replace(sha, COMMIT)
-        digest = cells[f"{plan_id}/{col}"] = hashlib.sha256(text.encode()).hexdigest()
+    for key in db.execute("SELECT sheet, plan_id, col FROM draft_cell ORDER BY sheet, plan_id, col").fetchall():
+        text = json.dumps(cell(db, *key), ensure_ascii=False).replace(sha, COMMIT)
+        digest = cells["/".join(key)] = hashlib.sha256(text.encode()).hexdigest()
         with open(os.path.join(out, "cells", f"{digest}.json"), "w", encoding="utf-8") as f:
             f.write(text)
     with open(os.path.join(out, f"{sha}.json"), "w") as f:

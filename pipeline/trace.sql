@@ -172,20 +172,22 @@ CREATE TABLE fact (
   PRIMARY KEY (fact_id, source, doc_sha, page)
 );
 
--- Each line a present.py rule returned for a main cell. presented is 0 when no document fact backs the line, so
+-- Each line a present.py rule returned for a cell. presented is 0 when no document fact backs the line, so
 -- the line keeps its other layers' value. held is the pinned version's reason for leaving the whole cell alone.
 CREATE TABLE rule_line (
+  sheet     TEXT NOT NULL,
   plan_id   TEXT NOT NULL REFERENCES plan,
   col       TEXT NOT NULL,
   line      INTEGER NOT NULL,
   value     TEXT NOT NULL,
   presented INTEGER NOT NULL,
   held      TEXT,
-  PRIMARY KEY (plan_id, col, line)
+  PRIMARY KEY (sheet, plan_id, col, line)
 );
 
 -- Each fact a rule considered. A used fact names its line. A set-aside fact has no line, and reasons is a JSON array.
 CREATE TABLE rule_fact (
+  sheet   TEXT NOT NULL,
   plan_id TEXT NOT NULL,
   col     TEXT NOT NULL,
   line    INTEGER,
@@ -196,7 +198,7 @@ CREATE TABLE rule_fact (
   reasons TEXT,
   FOREIGN KEY (fact_id, source, doc_sha, page) REFERENCES fact
 );
-CREATE INDEX rule_fact_cell ON rule_fact (plan_id, col);
+CREATE INDEX rule_fact_cell ON rule_fact (sheet, plan_id, col);
 
 -- Each plans.csv or PBP field a main-sheet cell read (main_chart.py).
 CREATE TABLE cms_read (

@@ -145,9 +145,9 @@ async function routeHow(state) {
   hideViewer();
   const ticket = ++howTicket, asked = location.hash;
   // Links from before column ids name the column by its key.
-  const asColumn = site.main.columns.find((c) => c.id === state.column || c.key === state.column);
-  const known = state.sheet === "main" && asColumn && site.main.rows.some((r) => r.plan_id === state.plan);
-  const plan = known ? state.plan : EXAMPLE.plan;
+  const asColumn = site[state.sheet]?.columns.find((c) => c.id === state.column || c.key === state.column);
+  const known = asColumn && site[state.sheet].rows.some((r) => r.plan_id === state.plan);
+  const { sheet, plan } = known ? state : EXAMPLE;
   const column = known ? asColumn : site.main.columns.find((c) => c.id === EXAMPLE.column);
   document.querySelectorAll("header nav a").forEach((a) => a.classList.toggle("active", a.dataset.view === "how"));
   const content = $("#content");
@@ -158,25 +158,25 @@ async function routeHow(state) {
     content.replaceChildren(el("p", { class: "how-loading" }, "Loading the cell's trace…"));
   }
   here = { key: "how", view: "how" };
-  const trace = await traceOf(plan, column.key);
+  const trace = await traceOf(sheet, plan, column.key);
   if (ticket !== howTicket || location.hash !== asked) return;
   const steps = chain(trace);
   const step = steps.find((s) => s.id === state.step) ?? steps[0];
-  const value = site.main.rows.find((r) => r.plan_id === plan).cells[column.key].value;
-  const cell = { plan, column: column.id, label: `${plans[plan].plan_name} · ${column.label}`, value };
+  const value = site[sheet].rows.find((r) => r.plan_id === plan).cells[column.key].value;
+  const cell = { sheet, plan, column: column.id, label: `${plans[plan].plan_name} · ${column.label}`, value };
   const hash = howLink(site.year, cell, step);
   if (location.hash !== hash) history.replaceState(null, "", hash);
   routed = location.hash;
   content.replaceChildren(howView({ year: site.year, cell, step, steps, terms: site.terms, trace }));
-  if (state.plan && !known) content.prepend(el("p", { class: "warn" }, "That link names no main-sheet cell, so this shows the example cell."));
+  if (state.plan && !known) content.prepend(el("p", { class: "warn" }, "That link names no cell, so this shows the example cell."));
   content.querySelector(".how-map").scrollTop = mapTop;
   if (map) content.querySelector(".how-step").focus({ preventScroll: true });
 }
 
 // A failed load is not kept, so the next visit tries again.
 const traces = {};
-const traceOf = (plan, columnKey) => {
-  const url = traceUrl(site.year, plan, columnKey);
+const traceOf = (sheet, plan, columnKey) => {
+  const url = traceUrl(site.year, sheet, plan, columnKey);
   return traces[url] ??= fetch(url).then((r) => r.ok ? r.json() : null).catch(() => null)
     .then((trace) => trace ?? (delete traces[url], null));
 };
@@ -331,10 +331,9 @@ function openCell(plan, column, cell, at = null) {
         : `The CMS ${site.year} Plan Benefit Package data has no entry for this benefit. `,
       "The plan's Summary of Benefits is shown for reference."), ...cmsFields(cell), medicareGov(plan, column));
   }
-  if (site.main.columns.includes(column)) {
-    note.append(el("p", { class: "how-link" },
-      el("a", { href: format({ year: site.year, view: "how", sheet: "main", plan: plan.plan_id, column: column.id }) }, "How the pipeline made this cell →")));
-  }
+  const sheet = Object.keys(SHEET_NAMES).find((s) => site[s].columns.includes(column));
+  note.append(el("p", { class: "how-link" },
+    el("a", { href: format({ year: site.year, view: "how", sheet, plan: plan.plan_id, column: column.id }) }, "How the pipeline made this cell →")));
   const first = cell.cites[0] || cell.comment || { doc: planSb(plan), page: 1, quote: null };
   const doc = plan.docs.find((d) => site.docs[d].kind === at?.kind);
   if (!doc) return openDoc(first.doc, first.page, first.quote, note, cell.cites);
