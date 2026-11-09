@@ -753,11 +753,11 @@ class ExplainTest(unittest.TestCase):
                                          f("part_b_drugs.chemo", cost_kind="coinsurance", amount="10%", source="PBP")],
              {"10%": ["PBP ranks below EOC"]}),
         ]
-        for column, organization, found, expected in cases:
-            with self.subTest(column=column, expected=expected):
+        for column, organization, found, reasons in cases:
+            with self.subTest(column=column, reasons=reasons):
                 found = [dict(g, fact_id=g["amount"]) for g in found]
                 _, aside = present.explain(organization, found, column)
-                self.assertEqual({g["amount"]: aside[facts.identity(g)] for g in found if facts.identity(g) in aside}, expected)
+                self.assertEqual({g["amount"]: aside[facts.identity(g)] for g in found if facts.identity(g) in aside}, reasons)
 
     def test_every_fact_a_rule_sets_aside_in_the_year_has_a_noted_reason_unless_the_column_skips_its_benefit(self):
         data = years.data_dir()
