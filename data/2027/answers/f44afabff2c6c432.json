@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-15.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 80 Eyewear Benefit (1 per calendar year): the in-network column says the member pays any retail amount over $150 from a PLUS Provider. So the plan pays up to $150 for routine eyewear at that tier.\"}]\n```",
+ "usage": {
+  "input_tokens": 2531,
+  "output_tokens": 314,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

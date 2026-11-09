@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-10.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5, Routine eye exam row, in-network column: $0 copay for a routine eye exam each year. This is a routine (supplemental) exam, and the limit is each year.\"}]\n```",
+ "usage": {
+  "input_tokens": 2252,
+  "output_tokens": 129,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

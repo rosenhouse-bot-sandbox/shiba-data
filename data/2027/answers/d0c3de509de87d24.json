@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-9.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 79 lists the Eyewear Benefit (1 per calendar year) as a non-Medicare covered routine benefit. In network, the member pays any retail amount over $250 from a PLUS Provider, so the plan pays up to $250. The plan, eyewear benefit, supplemental coverage, $250 allowance, PLUS Provider tier and limit all match.\"}]\n```",
+ "usage": {
+  "input_tokens": 2468,
+  "output_tokens": 470,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

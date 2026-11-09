@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-47.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 lists a Monthly Plan Premium of $0 for Wellcare Patriot Giveback Open (PPO), H5439 Plan 010. The Part B premium is noted as separate, and the item matches on every field.\"}]\n```",
+ "usage": {
+  "input_tokens": 1786,
+  "output_tokens": 103,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

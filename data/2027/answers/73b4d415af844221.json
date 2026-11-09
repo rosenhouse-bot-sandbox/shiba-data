@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-51.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 12, Section 4.1 Plan premium: the monthly plan premium for Wellcare Low Premium (HMO-POS) in 2027 is $44.50. This matches the premium, the amount and the per-month unit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2018,
+  "output_tokens": 102,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
