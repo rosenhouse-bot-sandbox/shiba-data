@@ -19,6 +19,7 @@ async function get(key, { range, onlyIf }) {
 const env = { ASSETS: { fetch: async (request) => new Response(`asset ${new URL(request.url).pathname}`) }, BLOBS: { get } };
 const fetchPath = (path, init) => worker.fetch(new Request(`https://pdxplans.org${path}`, init), env);
 const DOC = `/docs/${SHA}.pdf`;
+const TRACE = "/trace/2027/main/H1036-153-0/AB_ambulance";
 
 test("serves a PDF from its blob", async () => {
   const response = await fetchPath(DOC);
@@ -52,7 +53,19 @@ test("answers 404 for a hash with no blob", async () => {
 });
 
 test("serves everything else from the site's assets", async () => {
-  for (const path of ["/data.json", `/docs/${SHA.slice(16)}.pdf`, `/x${DOC}`]) {
+  for (const path of ["/data.json", `/docs/${SHA.slice(16)}.pdf`, `/x${DOC}`, `${TRACE}.json`, "/trace/2027/main/x"]) {
     assert.equal(await (await fetchPath(path)).text(), `asset ${path}`);
   }
+});
+
+test("serves a cell's trace from its static file", async () => {
+  assert.equal(await (await fetchPath(TRACE)).text(), `asset ${TRACE}.json`);
+});
+
+test("passes a trace request's method and headers to the assets", async () => {
+  const seen = [];
+  const assets = { fetch: async (request) => (seen.push(request), new Response("")) };
+  await worker.fetch(new Request(`https://pdxplans.org${TRACE}`, { method: "HEAD", headers: { "If-None-Match": '"e"' } }), { ...env, ASSETS: assets });
+  assert.equal(seen[0].method, "HEAD");
+  assert.equal(seen[0].headers.get("If-None-Match"), '"e"');
 });
