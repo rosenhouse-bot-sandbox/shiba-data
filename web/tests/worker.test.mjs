@@ -79,7 +79,7 @@ test("passes a trace request's method and headers to the assets", async () => {
   assert.equal(seen[0].headers.get("If-None-Match"), '"e"');
 });
 
-// A D1 database on node:sqlite, with the binding's prepare, bind, first, run and batch.
+// The fake D1 database runs on node:sqlite, with the binding's prepare, bind, first, run and batch.
 function d1() {
   const db = new DatabaseSync(":memory:");
   const statement = (sql, args = []) => ({
@@ -105,7 +105,7 @@ function d1() {
   };
 }
 
-// An R2 bucket holding text objects.
+// The fake R2 bucket holds text objects.
 function bucket(objects) {
   return {
     objects,
@@ -119,72 +119,84 @@ function bucket(objects) {
   };
 }
 
-const OLD = "1".repeat(40), NEW = "2".repeat(40);
+const OLD = "1".repeat(40), NEW = "2".repeat(40), TOKEN = "t".repeat(64);
 const parts = (sha, json) => ({
-  [`trace/2027/${sha}/manifest.json`]: JSON.stringify({ sha, year: 2027, hash: `hash ${sha}`, cells: 3, parts: 2 }),
+  [`trace/2027/${sha}/manifest.json`]: JSON.stringify({ sha, year: 2027, cells: 3, parts: 2 }),
   [`trace/2027/${sha}/0.json`]: JSON.stringify([["H1036-153-0", "AB_ambulance", json], ["H1036-153-0", "C_premium", "{}"]]),
   [`trace/2027/${sha}/1.json`]: JSON.stringify([["H1036-306-0", "AB_ambulance", "{}"]]),
 });
-const traceEnv = () => ({ ...env, BLOBS: bucket({ ...parts(OLD, '{"old": 1}'), ...parts(NEW, '{"new": 1}') }), TRACE: d1() });
-const post = (e, path) => worker.fetch(new Request(`https://pdxplans.org${path}`, { method: "POST" }), e);
+const traceEnv = (commit) => ({ ...env, BLOBS: bucket(parts(OLD, '{"old": 1}')), TRACE: d1(), COMMIT: commit, LOAD_TOKEN: TOKEN });
+const upload = (e, sha) => Object.assign(e.BLOBS.objects, parts(sha, `{"${sha}": 1}`));
+const post = (e, path, token = TOKEN) => worker.fetch(new Request(`https://pdxplans.org${path}`, {
+  method: "POST", headers: { Authorization: `Bearer ${token}` } }), e);
 const at = (e, path) => worker.fetch(new Request(`https://pdxplans.org${path}`), e);
 const load = async (e, sha, partsToLoad = [0, 1]) => {
   for (const n of partsToLoad) assert.equal((await post(e, `/trace/2027/load/${sha}/${n}`)).status, 200);
   return post(e, `/trace/2027/load/${sha}`);
 };
+const rows = (e, sha) => e.TRACE.prepare("SELECT count(*) AS n FROM cell_trace WHERE sha = ?").bind(sha).first();
 
-test("serves a cell's trace from D1 once its build is live", async () => {
-  const e = traceEnv();
-  assert.equal((await load(e, OLD)).status, 200);
+test("serves a cell's trace from D1 once every cell of the deployed commit's build has loaded", async () => {
+  const e = traceEnv(OLD);
+  assert.equal((await load(e, OLD, [0])).status, 409);
+  assert.equal(await (await at(e, TRACE)).text(), `asset ${TRACE}.json`);
+  assert.equal((await load(e, OLD, [1])).status, 200);
   const response = await at(e, TRACE);
   assert.equal(await response.text(), '{"old": 1}');
   assert.equal(response.headers.get("Content-Type"), "application/json; charset=utf-8");
-  assert.deepEqual(await (await at(e, "/trace/2027/live")).json(), { sha: OLD, hash: `hash ${OLD}` });
 });
 
-test("serves the static file before any build is live, and for another year", async () => {
-  const e = traceEnv();
-  assert.equal(await (await at(e, TRACE)).text(), `asset ${TRACE}.json`);
-  assert.equal((await at(e, "/trace/2027/live")).status, 404);
+test("serves the static file for a build other than the deployed commit's, and for another year", async () => {
+  const e = traceEnv(NEW);
   await load(e, OLD);
+  assert.equal(await (await at(e, TRACE)).text(), `asset ${TRACE}.json`);
+  upload(e, NEW);
+  await load(e, NEW);
   const other = "/trace/2026/main/H1036-153-0/AB_ambulance";
   assert.equal(await (await at(e, other)).text(), `asset ${other}.json`);
+  assert.equal(await (await at({ ...e, COMMIT: undefined }, TRACE)).text(), `asset ${TRACE}.json`);
 });
 
-test("keeps the previous build live until every part of the next has loaded", async () => {
-  const e = traceEnv();
+test("a loaded build drops other builds' rows and parts, but keeps the deployed commit's", async () => {
+  const e = traceEnv(OLD);
   await load(e, OLD);
-  assert.equal((await load(e, NEW, [0])).status, 409);
-  assert.equal(await (await at(e, TRACE)).text(), '{"old": 1}');
-  assert.equal((await load(e, NEW, [1])).status, 200);
-  assert.equal(await (await at(e, TRACE)).text(), '{"new": 1}');
-});
-
-test("going live drops the earlier build's rows and parts", async () => {
-  const e = traceEnv();
-  await load(e, OLD);
+  upload(e, NEW);
   await load(e, NEW);
+  assert.deepEqual([(await rows(e, OLD)).n, (await rows(e, NEW)).n], [3, 3]);
+  assert.equal(await (await at(e, TRACE)).text(), '{"old": 1}');
+  const e2 = { ...e, COMMIT: NEW };
+  await load(e2, NEW, []);
+  assert.deepEqual([(await rows(e2, OLD)).n, (await rows(e2, NEW)).n], [0, 3]);
+  assert.equal((await e2.TRACE.prepare("SELECT group_concat(sha) AS shas FROM loaded").first()).shas, NEW);
   assert.deepEqual(Object.keys(e.BLOBS.objects).filter((k) => k.includes(OLD)), []);
-  assert.equal((await load(e, OLD, [])).status, 404);
+  assert.equal(Object.keys(e.BLOBS.objects).filter((k) => k.includes(NEW)).length, 3);
 });
 
-test("going live again keeps the build's own parts", async () => {
-  const e = traceEnv();
+test("an unfinished build drops nothing", async () => {
+  const e = traceEnv(OLD);
   await load(e, OLD);
-  assert.equal((await load(e, OLD, [])).status, 200);
-  assert.equal(Object.keys(e.BLOBS.objects).filter((k) => k.includes(OLD)).length, 3);
+  upload(e, NEW);
+  assert.equal((await load(e, NEW, [1])).status, 409);
+  assert.equal((await rows(e, OLD)).n, 3);
 });
 
-test("loads a part once", async () => {
-  const e = traceEnv();
-  await post(e, `/trace/2027/load/${OLD}/0`);
-  const before = e.TRACE.batches.length;
-  assert.equal((await post(e, `/trace/2027/load/${OLD}/0`)).status, 200);
-  assert.equal(e.TRACE.batches.length, before + 1);  // only the schema
+test("a part loaded twice counts its cells once", async () => {
+  const e = traceEnv(OLD);
+  await post(e, `/trace/2027/load/${OLD}/1`);
+  assert.equal((await load(e, OLD, [1])).status, 409);
+  assert.equal((await load(e, OLD, [0])).status, 200);
+});
+
+test("loads only for a POST with the load token", async () => {
+  const e = traceEnv(OLD);
+  assert.equal((await post(e, `/trace/2027/load/${OLD}/0`, "wrong")).status, 401);
+  assert.equal((await post({ ...e, LOAD_TOKEN: undefined }, `/trace/2027/load/${OLD}/0`, "undefined")).status, 401);
+  assert.equal(await (await at(e, `/trace/2027/load/${OLD}/0`)).text(), `asset /trace/2027/load/${OLD}/0`);
+  assert.deepEqual(e.TRACE.batches, []);
 });
 
 test("answers 404 to a load of a part or build that R2 lacks", async () => {
-  const e = traceEnv();
+  const e = traceEnv(OLD);
   assert.equal((await post(e, `/trace/2027/load/${OLD}/2`)).status, 404);
   assert.equal((await post(e, `/trace/2027/load/${"3".repeat(40)}`)).status, 404);
 });

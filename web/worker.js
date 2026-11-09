@@ -2,24 +2,26 @@
 // /blobs/<sha256>.txt serves a model prompt, which the Pipeline workflow stores the same way.
 // The static site comes from the assets directory.
 // CI downloads every blob through this route too, so it needs no R2 credentials.
-// /trace/<year>/main/<plan_id>/<col> serves a cell's trace from D1 once a build is live, and from the static file
-// that web/build.py writes otherwise.
+// /trace/<year>/main/<plan_id>/<col> serves a cell's trace from D1 once every cell of the deployed commit's build has
+// loaded. Until then it serves the static file that web/build.py writes.
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     const [, year, plan, col] = url.pathname.match(/^\/trace\/(\d+)\/main\/([^/]+)\/([^/.]+)$/) ?? [];
     if (year) {
-      const live = year === D1_YEAR && await env.TRACE.prepare(
-        "SELECT json FROM cell_trace JOIN live USING (sha) WHERE plan_id = ? AND col = ?").bind(plan, col).first().catch(() => null);
-      if (live) return new Response(live.json, { headers: { "Content-Type": "application/json; charset=utf-8" } });
+      const loaded = year === D1_YEAR && await env.TRACE.prepare(
+        "SELECT json FROM cell_trace JOIN loaded USING (sha) WHERE sha = ? AND plan_id = ? AND col = ?")
+        .bind(env.COMMIT, plan, col).first().catch(() => null);
+      if (loaded) return new Response(loaded.json, { headers: { "Content-Type": "application/json; charset=utf-8" } });
       return env.ASSETS.fetch(new Request(new URL(`${url.pathname}.json`, url), request));
     }
-    if (url.pathname === `/trace/${D1_YEAR}/live`) {
-      const live = await env.TRACE.prepare("SELECT sha, hash FROM live").first().catch(() => null);
-      return live ? Response.json(live) : new Response("Not found", { status: 404 });
+    const [, build, part] = url.pathname.match(LOAD) ?? [];
+    if (build && request.method === "POST") {
+      if (!env.LOAD_TOKEN || request.headers.get("Authorization") !== `Bearer ${env.LOAD_TOKEN}`) {
+        return new Response("Unauthorized", { status: 401 });
+      }
+      return part === undefined ? finish(env, build) : loadPart(env, build, part);
     }
-    const [, build, part] = url.pathname.match(/^\/trace\/2027\/load\/([0-9a-f]{40})(?:\/(\d+))?$/) ?? [];
-    if (build && request.method === "POST") return part === undefined ? goLive(env, build) : loadPart(env, build, Number(part));
     const [, pdf, text] = url.pathname.match(/^\/(?:docs\/([0-9a-f]{64})\.pdf|blobs\/([0-9a-f]{64})\.txt)$/) ?? [];
     const sha = pdf ?? text;
     if (!sha) return env.ASSETS.fetch(request);
@@ -44,13 +46,14 @@ export default {
   },
 };
 
-// Each main build loads its cells' traces into D1 one part at a time, then goes live, so a cut-off load leaves the
-// previous build live. CI uploads the parts to R2 as trace/<year>/<sha>/<n>.json beside a manifest.json.
+// CI loads each main build's cells into D1 from R2's trace/<year>/<sha>/ one part at a time, then finishes the build.
+// LOAD_TOKEN is a secret that the deploy job gives the Worker and the trace job derives the same way.
 const D1_YEAR = "2027";
+const LOAD = new RegExp(`^/trace/${D1_YEAR}/load/([0-9a-f]{40})(?:/(\\d+))?$`);
 const SCHEMA = [
-  `CREATE TABLE IF NOT EXISTS cell_trace (sha TEXT NOT NULL, part INTEGER NOT NULL, plan_id TEXT NOT NULL, col TEXT NOT NULL,
-                                          json TEXT NOT NULL, PRIMARY KEY (sha, plan_id, col))`,
-  "CREATE TABLE IF NOT EXISTS live (one INTEGER PRIMARY KEY CHECK (one = 1), sha TEXT NOT NULL, hash TEXT NOT NULL)",
+  `CREATE TABLE IF NOT EXISTS cell_trace (sha TEXT NOT NULL, plan_id TEXT NOT NULL, col TEXT NOT NULL, json TEXT NOT NULL,
+                                          PRIMARY KEY (sha, plan_id, col))`,
+  "CREATE TABLE IF NOT EXISTS loaded (sha TEXT PRIMARY KEY)",
 ];
 const missing = () => new Response("Not found", { status: 404 });
 
@@ -58,38 +61,40 @@ async function object(env, key) {
   return (await env.BLOBS.get(key))?.json();
 }
 
+const schema = (env) => SCHEMA.map((sql) => env.TRACE.prepare(sql));
+
 async function loadPart(env, sha, part) {
-  await env.TRACE.batch(SCHEMA.map((sql) => env.TRACE.prepare(sql)));
-  if (await env.TRACE.prepare("SELECT 1 FROM cell_trace WHERE sha = ? AND part = ?").bind(sha, part).first()) {
-    return new Response("Loaded before");
-  }
   const cells = await object(env, `trace/${D1_YEAR}/${sha}/${part}.json`);
   if (!cells) return missing();
-  const insert = env.TRACE.prepare("INSERT INTO cell_trace VALUES (?, ?, ?, ?, ?)");
-  await env.TRACE.batch(cells.map(([plan, col, json]) => insert.bind(sha, part, plan, col, json)));
+  const insert = env.TRACE.prepare("INSERT OR IGNORE INTO cell_trace VALUES (?, ?, ?, ?)");
+  await env.TRACE.batch([...schema(env), ...cells.map(([plan, col, json]) => insert.bind(sha, plan, col, json))]);
   return new Response("Loaded");
 }
 
-async function goLive(env, sha) {
+// A build counts as loaded once it has every cell. Then the other builds' rows and parts go, except the deployed one's.
+// A batch runs as one transaction, so the count and the deletes see the same rows.
+async function finish(env, sha) {
   const manifest = await object(env, `trace/${D1_YEAR}/${sha}/manifest.json`);
   if (!manifest) return missing();
-  await env.TRACE.batch(SCHEMA.map((sql) => env.TRACE.prepare(sql)));
-  const { n } = await env.TRACE.prepare("SELECT count(*) AS n FROM cell_trace WHERE sha = ?").bind(sha).first();
-  if (n !== manifest.cells) return new Response(`${n} of ${manifest.cells} cells loaded`, { status: 409 });
-  const before = await env.TRACE.prepare("SELECT sha FROM live").first();
+  const keep = env.COMMIT ?? sha;
   await env.TRACE.batch([
-    env.TRACE.prepare("INSERT OR REPLACE INTO live VALUES (1, ?, ?)").bind(sha, manifest.hash),
-    env.TRACE.prepare("DELETE FROM cell_trace WHERE sha != ?").bind(sha),
+    ...schema(env),
+    env.TRACE.prepare("INSERT OR IGNORE INTO loaded SELECT ?1 WHERE (SELECT count(*) FROM cell_trace WHERE sha = ?1) = ?2")
+      .bind(sha, manifest.cells),
+    env.TRACE.prepare("DELETE FROM cell_trace WHERE sha NOT IN (?1, ?2) AND ?1 IN (SELECT sha FROM loaded)").bind(sha, keep),
+    env.TRACE.prepare("DELETE FROM loaded WHERE sha NOT IN (?1, ?2) AND ?1 IN (SELECT sha FROM loaded)").bind(sha, keep),
   ]);
-  // Without its parts, the build that was live cannot go live again.
-  if (before && before.sha !== sha) {
-    const prefix = `trace/${D1_YEAR}/${before.sha}/`;
-    for (let cursor; ;) {
-      const listed = await env.BLOBS.list({ prefix, cursor });
-      if (listed.objects.length) await env.BLOBS.delete(listed.objects.map((o) => o.key));
-      if (!listed.truncated) break;
-      cursor = listed.cursor;
-    }
+  if (!await env.TRACE.prepare("SELECT 1 FROM loaded WHERE sha = ?").bind(sha).first()) {
+    const { n } = await env.TRACE.prepare("SELECT count(*) AS n FROM cell_trace WHERE sha = ?").bind(sha).first();
+    return new Response(`${n} of ${manifest.cells} cells loaded`, { status: 409 });
   }
-  return new Response("Live");
+  const prefix = `trace/${D1_YEAR}/`;
+  for (let cursor; ;) {
+    const listed = await env.BLOBS.list({ prefix, cursor });
+    const old = listed.objects.map((o) => o.key).filter((key) => ![sha, keep].some((s) => key.startsWith(`${prefix}${s}/`)));
+    if (old.length) await env.BLOBS.delete(old);
+    if (!listed.truncated) break;
+    cursor = listed.cursor;
+  }
+  return new Response("Loaded every cell");
 }

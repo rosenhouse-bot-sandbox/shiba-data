@@ -14,7 +14,7 @@ the record. With a work_dir from a run, `build` adds the run's prompts, their sa
 `export` writes every main cell's records in parts, which web/worker.js loads into D1.
 `page` prints a page's layout text from a run's <work_dir>/texts, where blobs.py puts it.
 """
-import csv, glob, hashlib, json, os, sqlite3, sys
+import csv, glob, json, os, sqlite3, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -412,7 +412,8 @@ def check(db):
         raise SystemExit("These records are not traced yet:\n" + "\n".join(left))
 
 
-PART = 10  # cells, so the Worker loads each part in one short request
+# The Worker loads each part of PART cells in one short request.
+PART = 10
 
 
 def export(db, out):
@@ -426,12 +427,7 @@ def export(db, out):
         with open(os.path.join(out, f"{n}.json"), "w", encoding="utf-8") as f:
             json.dump(part, f, ensure_ascii=False)
     with open(os.path.join(out, "manifest.json"), "w") as f:
-        json.dump(dict(sha=sha, year=year, hash=content_hash(cells, sha), cells=len(cells), parts=len(parts)), f)
-
-
-def content_hash(cells, sha):
-    """Hashes the cells' records without the build's commit, so CI can skip loading a trace that did not change."""
-    return hashlib.sha256(json.dumps(cells, ensure_ascii=False).replace(sha, "").encode()).hexdigest()
+        json.dump(dict(sha=sha, year=year, cells=len(cells), parts=len(parts)), f)
 
 
 def not_yet(records, path=""):

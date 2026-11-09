@@ -109,16 +109,23 @@ jobs:
         with:
           name: site
           path: _site
+      - env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          LOAD_TOKEN=$(printf 'pdxplans trace load %s' "$CLOUDFLARE_API_TOKEN" | sha256sum | cut -c1-64)
+          echo "::add-mask::$LOAD_TOKEN"
+          echo "LOAD_TOKEN=$LOAD_TOKEN" >> "$GITHUB_ENV"
       - uses: cloudflare/wrangler-action@9acf94ace14e7dc412b076f2c5c20b8ce93c79cd # v3.15.0
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
           wranglerVersion: "4.156.1"
-          command: deploy
+          secrets: LOAD_TOKEN
+          command: deploy --var COMMIT:${{ github.sha }}
 
   # R2 keeps each prompt the replay sent, so a trace can show it. Keys are content hashes, so sync adds only new ones.
   # R2 also keeps the latest main build's trace as trace/<year>.sqlite.
-  # When a trace changes, the Worker loads its cells into D1 from trace/<year>/<sha>/, part by part, then makes it live.
+  # The Worker loads the build's cells into D1 from trace/<year>/<sha>/, part by part, then serves them.
   trace:
     if: github.ref == 'refs/heads/main'
     needs: [build, reproduce, deploy]
@@ -147,19 +154,17 @@ jobs:
           echo "::add-mask::$AWS_SECRET_ACCESS_KEY"
           aws s3 sync prompts s3://pdxplans/blobs/ --size-only --only-show-errors
           for db in trace/*.sqlite; do aws s3 cp "$db" "s3://pdxplans/$db" --only-show-errors; done
+          LOAD_TOKEN=$(printf 'pdxplans trace load %s' "$CLOUDFLARE_API_TOKEN" | sha256sum | cut -c1-64)
+          echo "::add-mask::$LOAD_TOKEN"
+          load() { curl -sS --fail-with-body --max-time 60 --retry 3 -X POST -w "\n" -H "Authorization: Bearer $LOAD_TOKEN" "$1"; }
           for manifest in trace/*/*/manifest.json; do
             build=$(dirname "$manifest")
-            year=$(jq .year "$manifest")
-            sha=$(jq -r .sha "$manifest")
-            if [ "$(curl -sS "https://pdxplans.org/trace/$year/live" | jq -r .hash 2>/dev/null)" = "$(jq -r .hash "$manifest")" ]; then
-              echo "The $year trace did not change."
-              continue
-            fi
+            year=$(jq -e .year "$manifest")
+            sha=$(jq -er .sha "$manifest")
+            parts=$(jq -e .parts "$manifest")
             aws s3 cp "$build" "s3://pdxplans/$build/" --recursive --only-show-errors
-            for n in $(seq 0 $(($(jq .parts "$manifest") - 1))); do
-              curl -sSf --retry 3 -X POST -w "\n" "https://pdxplans.org/trace/$year/load/$sha/$n"
-            done
-            curl -sSf --retry 3 -X POST -w "\n" "https://pdxplans.org/trace/$year/load/$sha"
+            for n in $(seq 0 $((parts - 1))); do load "https://pdxplans.org/trace/$year/load/$sha/$n"; done
+            load "https://pdxplans.org/trace/$year/load/$sha"
           done
 
   sheet:
