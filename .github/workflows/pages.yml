@@ -42,7 +42,13 @@ jobs:
           xargs -P 8 -I{} curl -sSfL --retry 5 --retry-all-errors --max-time 300 -o "../_docs/{}.pdf" "https://pdxplans.org/docs/{}.pdf" < ../_docs.txt
           sed 's|.*|&  ../_docs/&.pdf|' ../_docs.txt | sha256sum -c --quiet
       - run: npm ci && npx playwright install --with-deps chromium
-      - run: SITE=../_site DOCS=../_docs node --test tests/e2e.test.mjs
+      - run: SITE=../_site DOCS=../_docs FAILURES=../_failures node --test tests/e2e.test.mjs
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: failures
+          path: _failures
+          if-no-files-found: ignore
       - uses: actions/upload-artifact@v4
         with:
           name: site
