@@ -191,8 +191,8 @@ def rule(db, plan_id, col, code):
 
 
 def checks(db, plan_id, col, considered):
-    """Records 4 and 5: each check of the document facts the rule considered, and of the answers that state a fact for
-    the plan and the column's benefits, with the answers behind them."""
+    """The prompts behind record 5, and record 5: each check of the document facts the rule considered, and of the
+    answers that state a fact for the plan and the column's benefits."""
     identities = [facts.identity(f) for f in considered if f["origin"] == "document"]
     found = [s for s in rows(db, "SELECT * FROM stated WHERE plan_id = ? ORDER BY rowid", plan_id)
              if linked(db, s) and present.related(s, present.LEAVES[col])]
@@ -213,6 +213,11 @@ def checks(db, plan_id, col, considered):
             out.append(dict(fact=None, code_check=s["problem"], stated_by=[ref], verifier=[], reviewer={"status": NONE},
                             kept=False))
     out += [fact_check(db, identity, prompts) for identity in identities if identity not in by_fact]
+    return prompts, record(out, rows=out)
+
+
+def answers_of(db, prompts):
+    """Record 4: the saved answers to the prompts, each with the tasks that sent them."""
     keys = {}
     for prompt in prompts:
         for t in rows(db, "SELECT * FROM task t JOIN answer a ON a.key = t.answer_key WHERE t.prompt_sha = ?", prompt):
@@ -221,7 +226,16 @@ def checks(db, plan_id, col, considered):
             ref = dict(prompt=prompt, dir=t["dir"], task=t["task"], url=PROMPT_URL.format(prompt))
             if ref not in a["prompts"]:
                 a["prompts"].append(ref)
-    return record(keys, rows=list(keys.values())), record(out, rows=out)
+    return record(keys, rows=list(keys.values()))
+
+
+def model_tasks(db, step, plan_id):
+    """Record 8: the step's tasks for the plan, which have one reader task and one task per verifier."""
+    found = rows(db, "SELECT dir, task, prompt_sha AS prompt, answer_key FROM task WHERE dir LIKE ? AND task IN (?, ?, ?) "
+                     "ORDER BY rowid", f"{step}/%", f"{plan_id}.md", f"{plan_id}.retry.md", f"v-{plan_id}.md")
+    for t in found:
+        t["url"] = PROMPT_URL.format(t["prompt"])
+    return dict(status=TRACED, rows=found) if found else {"status": NOT_RECORDED}
 
 
 def linked(db, s):
@@ -333,14 +347,19 @@ def cell(db, sheet, plan_id, col):
     has_rule = sheet == "main" and col in present.COLUMNS
     considered, rule_record = rule(db, plan_id, col, code) if has_rule else ([], {"status": NONE})
     added = list({json.dumps(f): f for f in map(fact_of, considered) if f["origin"] == "added"}.values())
+    model = [dict(r, answers=model_tasks(db, r["step"], plan_id) if r["step"] in MODEL_STEPS and build_row["replayed"]
+                  else {"status": NOT_RECORDED}) for r in cited if r.get("step") in MODEL_STEPS + ("xref",)]
     if not has_rule:
-        answers = fact_checks = {"status": NONE}
+        prompts, fact_checks = [], {"status": NONE}
     elif build_row["replayed"]:
-        answers, fact_checks = checks(db, plan_id, col, considered)
+        prompts, fact_checks = checks(db, plan_id, col, considered)
     else:
-        answers = fact_checks = {"status": NOT_RECORDED}
-    model = [dict(r, answers={"status": NOT_RECORDED if r["step"] == "xref" else NOT_YET})
-             for r in cited if r.get("step") in MODEL_STEPS + ("xref",)]
+        prompts, fact_checks = [], {"status": NOT_RECORDED}
+    prompts += [t["prompt"] for r in model for t in r["answers"].get("rows", [])]
+    if build_row["replayed"]:
+        answers = answers_of(db, prompts)
+    else:
+        answers = {"status": NOT_RECORDED if has_rule or any(r["step"] in MODEL_STEPS for r in model) else NONE}
     return {
         "cell": dict(year=build_row["year"], sheet=sheet, plan_id=plan_id, col=col, label=fields.labels(sheet)[col],
                      value=values[-1]["value"]),
@@ -357,8 +376,7 @@ def cell(db, sheet, plan_id, col):
                                       "AND col = ?", sheet, plan_id, col), rows=n),
         "struck_quotes": record(s := rows(db, "SELECT quote, note FROM struck_quote WHERE sheet = ? AND plan_id = ? AND col = ?",
                                           sheet, plan_id, col), rows=s),
-        # Without rows, milestone 6 tells a cell the model steps asked about from one they left alone.
-        "model_citations": record(model, rows=model) if model else {"status": NOT_YET},
+        "model_citations": record(model, rows=model),
         "layers": record(True, draft=found[0]["value"], applied=[
             dict(layer=v["layer"], value=v["value"], rows=[r for r in cited if r["layer"] == v["layer"]]) for v in values],
             live=dict(value=values[-1]["value"], set_by=setters[0] if setters else None,

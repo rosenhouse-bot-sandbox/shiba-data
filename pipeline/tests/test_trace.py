@@ -46,7 +46,7 @@ class TraceTest(unittest.TestCase):
                     self.assertEqual(set(records), {
                         "cell", "plan", "documents", "draft", "answers", "fact_checks", "rule", "added_facts", "notes",
                         "struck_quotes", "model_citations", "layers", "build"})
-                    self.assertLessEqual(statuses(records), STATUSES)
+                    self.assertLessEqual(statuses(records), STATUSES - {trace.NOT_YET})
 
     def test_shows_the_values_and_citations_the_site_shows_in_its_order(self):
         site = build.site_data()
@@ -106,8 +106,8 @@ class TraceTest(unittest.TestCase):
         self.assertEqual(records["notes"], {"status": trace.NONE, "rows": []})
         self.assertEqual(records["struck_quotes"]["status"], trace.NONE)
 
-    def test_says_not_traced_yet_for_records_later_milestones_fill(self):
-        self.assertEqual(self.cell(*AMBULANCE)["model_citations"]["status"], trace.NOT_YET)
+    def test_says_none_when_no_model_step_cited_the_cell(self):
+        self.assertEqual(self.cell(*AMBULANCE)["model_citations"], {"status": trace.NONE, "rows": []})
 
     def test_lists_the_facts_each_line_used_and_why_the_rule_set_others_aside(self):
         rule = self.cell(*AMBULANCE)["rule"]
@@ -169,11 +169,12 @@ class TraceTest(unittest.TestCase):
         self.assertTrue(eoc[0]["sha256"].startswith("64e05773e847b56e"))
         self.assertEqual(len(eoc[0]["text"]["layout"]), 64)
 
-    def test_model_citations_name_their_step_and_say_answers_come_later(self):
+    def test_model_citations_name_their_step_and_need_a_run_for_their_answers(self):
         model = self.cell("main", "H3805-048-0", "T_chiropractic")["model_citations"]
         self.assertEqual(model["status"], trace.TRACED)
         self.assertEqual({r["step"] for r in model["rows"]}, {"blanks"})
-        self.assertEqual({r["answers"]["status"] for r in model["rows"]}, {trace.NOT_YET})
+        self.assertEqual({r["answers"]["status"] for r in model["rows"]}, {trace.NOT_RECORDED})
+        self.assertEqual(self.cell("main", "H3805-048-0", "T_chiropractic")["answers"]["status"], trace.NOT_RECORDED)
         self.assertNotIn("answers", self.cell("main", "H3805-048-0", "T_chiropractic")["layers"]["live"]["citations"][0])
 
     def test_xref_citations_have_no_recorded_answer(self):
@@ -197,7 +198,7 @@ class TraceTest(unittest.TestCase):
             self.assertEqual(done.stderr.strip(), module.__doc__.strip())
 
 
-class AnswersTest(unittest.TestCase):
+class RunTest(unittest.TestCase):
     """Builds from a copy of the year without its saved answers, and a run that asked one task."""
 
     def setUp(self):
@@ -225,6 +226,8 @@ class AnswersTest(unittest.TestCase):
         self.addCleanup(db.close)
         return db
 
+
+class AnswersTest(RunTest):
     def test_loads_each_prompt_and_its_saved_answer(self):
         db = self.build()
         self.assertEqual(db.execute("SELECT answer_key, dir, task FROM task").fetchall(),
@@ -268,7 +271,7 @@ STATED = dict(plan_id="H1036-153-0", benefit="ambulance", amount="$325")
 CHECKED = dict(fact_id="dcc6a0f01e6c0594", source="EOC", doc_sha=EOC, page="46")
 
 
-class FactChecksTest(AnswersTest):
+class FactChecksTest(RunTest):
     """A run whose reader stated a fact the Ambulance rule uses, and three answers it rejected."""
 
     def setUp(self):
@@ -328,6 +331,33 @@ class FactChecksTest(AnswersTest):
         (checked,) = [r for r in trace.cell(self.build(), *AMBULANCE)["fact_checks"]["rows"] if r["fact"] == CHECKED]
         self.assertEqual(checked["reviewer"], dict(status=trace.TRACED, prompt="d" * 64, answer_key=None, ok=True,
                                                    reason="fine", earlier=True))
+
+
+
+class ModelAnswersTest(RunTest):
+    """A run whose blanks step asked one reader task for the plan."""
+
+    def setUp(self):
+        super().setUp()
+        os.makedirs(os.path.join(self.work, "blanks/read"))
+        with open(os.path.join(self.work, "blanks/read/H1036-153-0.md"), "w") as f:
+            f.write("Find the blanks.")
+        self.blanks_key = ask.key(run.READER, "Find the blanks.")
+        ask.write(os.path.join(self.data, "answers", f"{self.blanks_key}.json"),
+                  {"model": run.READER, "task": "H1036-153-0.md", "reply": '[{"key": "main.U_naturopath"}]', "usage": {}})
+        with mock.patch.dict(os.environ, {"SHIBA_DATA": self.root}):
+            run.Answers(years.data_dir(), None, self.work)(os.path.join(self.work, "blanks/read"), run.READER)
+        self.records = trace.cell(self.build(), "main", "H1036-153-0", "U_naturopath")
+
+    def test_names_the_answers_behind_each_model_citation(self):
+        prompt = ask.sha("Find the blanks.")
+        rows = self.records["model_citations"]["rows"]
+        self.assertEqual([r["step"] for r in rows], ["blanks"])
+        self.assertEqual(rows[0]["answers"], dict(status=trace.TRACED, rows=[dict(
+            dir="blanks/read", task="H1036-153-0.md", prompt=prompt, answer_key=self.blanks_key,
+            url=trace.PROMPT_URL.format(prompt))]))
+        self.assertEqual([(a["key"], a["reply"]) for a in self.records["answers"]["rows"]],
+                         [(self.blanks_key, '[{"key": "main.U_naturopath"}]')])
 
 
 if __name__ == "__main__":
