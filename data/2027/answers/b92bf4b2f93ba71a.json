@@ -1,0 +1,12 @@
+{
+ "model": "claude-sonnet-5-5",
+ "batch": true,
+ "task": "v-H3805-048-0.md",
+ "reply": "[{\"id\":0,\"ok\":false,\"reason\":\"The $66/mo premium is supported on pages 14 and 97. But the value calls the package 'Dental Platinum Rider', while the EOC calls it 'Platinum Dental Rider'. The field format also includes the maximum, and page 97 shows an annual maximum of $1,500 that the value leaves out.\"}]",
+ "usage": {
+  "input_tokens": 2535,
+  "output_tokens": 430,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
