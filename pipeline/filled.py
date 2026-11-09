@@ -74,6 +74,7 @@ V6_COLUMNS = V5_COLUMNS + ("Z_part_b_reduction", "M_part_b_drugs", "O_medical_de
 # Cells that present held when version 6 was pinned. Version 6 sees neither their edits nor their presented rows.
 V6_HELD = {("K_tests_labs", p) for p in ("H2406-070-0", "H2923-009-0", "H3817-008-1", "H7006-021-0")} | {
     ("M_part_b_drugs", p) for p in ("H9003-001-0", "H9003-006-0", "H9003-009-0")}
+V7_DVHA = ("dvha.C_premium", "dvha.E_optional_packages", "dvha.G_vision", "dvha.H_hearing")
 VERSIONS = {
     1: (layers.without(layers.FILLED, layers.PRESENTED), None),
     2: (layers.without(layers.FILLED), presented("L_xray_imaging")),
@@ -81,8 +82,9 @@ VERSIONS = {
     4: (layers.without(layers.FILLED), presented("L_xray_imaging", "AB_ambulance", "I_outpatient_surgery")),
     5: (layers.without(layers.FILLED), presented(*V5_COLUMNS)),
     6: (layers.without(layers.FILLED), presented(*V6_COLUMNS, held=V6_HELD)),
-    7: (layers.without(layers.FILLED), presented(*V6_COLUMNS, "dvha.C_premium", "dvha.E_optional_packages", "dvha.G_vision",
-                                                 "dvha.H_hearing", held=V6_HELD)),
+    7: (layers.without(layers.FILLED), presented(*V6_COLUMNS, *V7_DVHA, held=V6_HELD)),
+    8: (layers.without(layers.FILLED), presented(*V6_COLUMNS, *V7_DVHA, "dvha.F_dental", "dvha.I_alt_care_otc_travel",
+                                                 "dvha.J_extra_benefits", held=V6_HELD)),
 }
 
 
