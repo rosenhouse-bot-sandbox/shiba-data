@@ -24,7 +24,7 @@ class TraceTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.tmp = tempfile.TemporaryDirectory()
-        path = os.path.join(cls.tmp.name, "trace.sqlite")
+        path = os.path.join(cls.tmp.name, "trace", "2027.sqlite")  # as CI names it
         trace.build(years.LIVE, path, SHA)
         cls.db = sqlite3.connect(path)
 

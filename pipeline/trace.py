@@ -56,6 +56,7 @@ def build(year, out, sha, work=None):
     data = years.data_dir(year)
     if os.path.exists(out):
         os.remove(out)
+    os.makedirs(os.path.dirname(os.path.abspath(out)), exist_ok=True)
     db = sqlite3.connect(out)
     try:
         with open(os.path.join(HERE, "trace.sql")) as f:
