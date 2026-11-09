@@ -359,9 +359,10 @@ class TraceFilesTest(unittest.TestCase):
 
     def test_writes_each_main_cells_trace(self):
         build.write_traces(self.dir / "site", "abc")
-        main = self.dir / "site/trace/2027/main"
-        cells = {f"{r['plan_id']}/{col}.json" for r in build.layers.live(DATA)[0]["main"] for col in build.fields.labels("main")}
+        year = build.years.config(build.DATA)["year"]
+        main = self.dir / f"site/trace/{year}/main"
+        cells = {f"{r['plan_id']}/{col}.json" for r in build.layers.live(build.DATA)[0]["main"] for col in build.fields.labels("main")}
         self.assertEqual({str(p.relative_to(main)) for p in main.rglob("*.json")}, cells)
-        build.trace.build(2027, self.dir / "trace.sqlite", "abc")
+        build.trace.build(year, self.dir / "trace.sqlite", "abc")
         expected = build.trace.cell(sqlite3.connect(self.dir / "trace.sqlite"), "main", "H1036-153-0", "AB_ambulance")
         self.assertEqual(json.loads((main / "H1036-153-0/AB_ambulance.json").read_text()), expected)

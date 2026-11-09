@@ -6,6 +6,7 @@ Usage:
 
 The pdxplans Worker serves each PDF from R2 as docs/<sha256>.pdf.
 """
+import contextlib
 import csv
 import datetime
 import html
@@ -16,8 +17,8 @@ import re
 import shutil
 import sqlite3
 import subprocess
-import tempfile
 import sys
+import tempfile
 
 HERE = pathlib.Path(__file__).resolve().parent
 sys.path[:0] = [str(HERE), str(HERE.parent / "pipeline")]
@@ -158,16 +159,15 @@ def commit():
 
 
 def write_traces(out_dir, sha):
-    """Writes each main cell's trace where the Worker serves it until #181 serves it from D1."""
+    """Writes each main cell's trace where the Worker serves it."""
     year = years.config(DATA)["year"]
     with tempfile.TemporaryDirectory() as tmp:
         trace.build(year, f"{tmp}/trace.sqlite", sha)
-        db = sqlite3.connect(f"{tmp}/trace.sqlite")
-        for plan_id, col in db.execute("SELECT plan_id, col FROM draft_cell WHERE sheet = 'main'"):
-            path = out_dir / "trace" / str(year) / "main" / plan_id / f"{col}.json"
-            path.parent.mkdir(parents=True, exist_ok=True)
-            path.write_text(json.dumps(trace.cell(db, "main", plan_id, col)))
-        db.close()
+        with contextlib.closing(sqlite3.connect(f"{tmp}/trace.sqlite")) as db:
+            for plan_id, col in db.execute("SELECT plan_id, col FROM draft_cell WHERE sheet = 'main'"):
+                path = out_dir / "trace" / str(year) / "main" / plan_id / f"{col}.json"
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text(json.dumps(trace.cell(db, "main", plan_id, col)))
 
 
 def main(command, out=None):
