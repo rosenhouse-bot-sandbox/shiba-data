@@ -92,15 +92,16 @@ class SiteDataTest(unittest.TestCase):
         self.assertEqual((comment["doc"], comment["page"]), ("90a4efa6544175a2", 83))
         self.assertIn("EKGs", comment["quote"])
 
-    def test_comment_kind_is_a_question_or_a_hand_written_fact(self):
+    def test_comment_kind_is_a_question_a_caveat_or_a_hand_written_fact(self):
         self.assertEqual(self.cell("main", "H6815-038-0", "K_tests_labs")["comment"]["kind"], "question")
-        with tempfile.TemporaryDirectory() as tmp:
-            data = data_copy(tmp, [])
-            (data / "comments.csv").write_text(
-                f"sheet,plan_id,column,kind,comment,url,pdf_page,quote\nmain,H6815-038-0,K_tests_labs,hand_written,x,{H6815_038_EOC},83,EKGs\n")
-            rows = build.site_data(data)["main"]["rows"]
-        row = next(r for r in rows if r["plan_id"] == "H6815-038-0")
-        self.assertEqual(row["cells"]["K_tests_labs"]["comment"]["kind"], "hand_written")
+        for kind in ("caveat", "hand_written"):
+            with tempfile.TemporaryDirectory() as tmp:
+                data = data_copy(tmp, [])
+                (data / "comments.csv").write_text(
+                    f"sheet,plan_id,column,kind,comment,url,pdf_page,quote\nmain,H6815-038-0,K_tests_labs,{kind},x,{H6815_038_EOC},83,EKGs\n")
+                rows = build.site_data(data)["main"]["rows"]
+            row = next(r for r in rows if r["plan_id"] == "H6815-038-0")
+            self.assertEqual(row["cells"]["K_tests_labs"]["comment"]["kind"], kind)
 
     def test_unknown_comment_kind_fails(self):
         with tempfile.TemporaryDirectory() as tmp:

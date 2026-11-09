@@ -327,14 +327,16 @@ test("header says when the site was last updated", async () => {
   await fresh.close();
 });
 
-test("green marks a hand-written fact, and the Notes filter shows those notes", async () => {
+test("each note kind has its own color, and the Notes filter shows hand-written facts", async () => {
   const fresh = await browser.newPage({ viewport: { width: 1600, height: 1000 } });
   await fresh.goto(`${base}#/main`);
   const background = (locator) => locator.evaluate((e) => getComputedStyle(e).backgroundColor);
   const handWritten = fresh.locator("table.sheet td.commented.hand_written").first();
   const question = fresh.locator("table.sheet td.commented.question").first();
+  const caveat = fresh.locator("table.sheet td.commented.caveat").first();
   const green = await background(handWritten);
-  assert.notEqual(green, await background(question));
+  assert.equal(new Set([green, await background(question), await background(caveat)]).size, 3);
+  assert.match(await caveat.getAttribute("title"), /^Caveat: /);
   assert.match(await handWritten.getAttribute("title"), /^Hand-written fact: /);
   await question.click();
   assert.equal(await background(fresh.locator("#source-note .comment")), await background(question));
