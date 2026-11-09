@@ -1,5 +1,5 @@
 // The pipeline as a graph: tables are nodes and operations are edges.
-// Until #182 publishes each cell's trace, the rows are the example cell's, copied from main's 2027 data.
+// The rows are the example cell's, copied from main's 2027 data.
 
 export const EXAMPLE = { sheet: "main", plan: "H1036-153-0", column: "ambulance" };
 export const EXAMPLE_LABEL = "Humana Total Complete (HMO) · Ambulance";
@@ -77,49 +77,50 @@ export const NODES = {
 
 // A paragraph is a list of segments: a string, or [term, text] for a term in web/terms.py.
 // highlight lists the example rows that the cell uses in the input and the output.
+// record names the key of the cell's trace (#181) that shows the step.
 export const STEPS = [
-  { id: "list-plans", from: "landscape", to: "plans", label: "List the plans", highlight: [[0, 1], [0]],
+  { id: "list-plans", record: "plan", from: "landscape", to: "plans", label: "List the plans", highlight: [[0, 1], [0]],
     before: "H1036_153_0 in Multnomah and Clackamas", after: "H1036-153-0, one row",
     paras: [["Code keeps ", ["bothCounties", "plans sold in both counties"], ". The plan has one Landscape row per county, which become one row of plans.csv. 39 plans remain."]] },
-  { id: "find-pdfs", from: "links", to: "documents", label: "Find PDFs", highlight: [[0, 1], [0, 1]],
+  { id: "find-pdfs", record: "documents", from: "links", to: "documents", label: "Find PDFs", highlight: [[0, 1], [0, 1]],
     before: "links.csv: …H1036153000EOC27pdf", after: "documents.csv: EOC URL",
     paras: [["URLs come from browser searches of carrier sites by Claude sessions, the volunteers' Links sheet, and URL patterns. ", ["firstUrl", "The first URL found wins"], ". This plan's URLs came from the Links sheet."]] },
-  { id: "download", from: "documents", to: "checked", label: "Download PDFs", highlight: [[0], [0]],
+  { id: "download", record: "documents", from: "documents", to: "checked", label: "Download PDFs", highlight: [[0], [0]],
     before: "…/H1036153000SB27pdf", after: "sha256 ce13e925…, 24 pages",
     paras: [["The pipeline downloads each PDF, runs a ", ["cover", "cover check"], ", and records the PDF's SHA-256 hash."]] },
-  { id: "extract-text", from: "checked", to: "text", label: "Extract page text", highlight: [[0], [3, 4, 5]],
+  { id: "extract-text", record: "documents", from: "checked", to: "text", label: "Extract page text", highlight: [[0], [3, 4, 5]],
     before: "PDF ce13e925…", after: "text of page 9",
     paras: [["Code turns each page into ", ["layoutText", "text that keeps the page's columns"], ". The PDFs and texts are stored in R2, named by hash, so every later run reads the same bytes."]] },
-  { id: "draft", from: "pbp", to: "draft", label: "Draft from CMS", highlight: [[0], [0]],
+  { id: "draft", record: "draft", from: "pbp", to: "draft", label: "Draft from CMS", highlight: [[0], [0]],
     before: "325.00, 20, 111, 325.00", after: "$325 or 20% | $325",
     paras: [["Code reads the ", ["pbpFields", "PBP ambulance fields"], " and writes a draft value. Here the draft matches the EOC, but it has no citation, so a volunteer can't check it."]] },
-  { id: "read-facts", from: "text", to: "answers", label: "Claude reads facts", highlight: [[3, 4, 5], [0, 1, 2]],
+  { id: "read-facts", record: "answers", from: "text", to: "answers", label: "Claude reads facts", highlight: [[3, 4, 5], [0, 1, 2]],
     before: "Ground  $325 copay per date of service", after: "{benefit: ambulance.ground, amount: $325, page: 9}",
     paras: [["The pipeline sends Claude Opus ", ["prompt", "one prompt"], " for this SB and the ambulance group. Claude answers with three facts, each with its quotes and page."],
       ["The answer is ", ["hash", "saved under a hash of the model, effort and prompt"], ", so a rerun calls no model."]] },
-  { id: "check-facts", from: "answers", to: "facts", label: "Check facts", highlight: [[2], [3, 4, 5]],
+  { id: "check-facts", record: "fact_checks", from: "answers", to: "facts", label: "Check facts", highlight: [[2], [3, 4, 5]],
     before: "SB: abroad, covered_by medicare", after: "rejected; the EOC's supplemental fact stands",
     paras: [["Code runs a ", ["quoteCheck", "quote check"], " on every fact. A verifier, Claude Opus, then judges each fact mixed with ", ["decoy", "decoys"], ". Last, a ", ["reviewer", "reviewer"], " checks each fact a value would cite."],
       ["The verifier rejected the SB's worldwide fact: Medicare doesn't cover care abroad, so it is supplemental. The EOC's fact, already marked supplemental, passed."]] },
-  { id: "column-rules", from: "facts", to: "presented", label: "Column rules", highlight: [[0, 1, 2, 3], [0, 1, 2]],
+  { id: "column-rules", record: "rule", from: "facts", to: "presented", label: "Column rules", highlight: [[0, 1, 2, 3], [0, 1, 2]],
     before: "ground $325, air 20%, abroad $325", after: "$325 or 20% | $325",
     paras: [["Each column has a ", ["rule", "rule"], ", written in code from the domain expert's instructions. Line 1 takes in-network, Medicare-covered ground and air trips from the ", ["bestSource", "best source"], ", here the EOC. Line 2 takes trips abroad."],
       ["Each line cites the quotes of the facts it used, so this cell gets four citations from EOC page 46."]] },
-  { id: "added-facts", from: "added", to: "presented", label: "Added facts", highlight: [[], []], pillAt: 0.15,
+  { id: "added-facts", record: "added_facts", from: "added", to: "presented", label: "Added facts", highlight: [[], []], pillAt: 0.15,
     before: "no added facts for this plan", after: "nothing changes",
     none: ["This plan has no added facts. The EOC stated every ambulance cost, so the rule needed nothing more.", "No rows come from this table for this cell."],
     paras: [[["added", "Added facts"], " fill gaps where the documents' extracted facts fall short. This cell needed none."]] },
-  { id: "cite-blanks", from: "text", to: "blanks", label: "Cite blank cells", highlight: [[], []],
+  { id: "cite-blanks", record: "model_citations", from: "text", to: "blanks", label: "Cite blank cells", highlight: [[], []],
     before: "Ambulance has a value", after: "no blank-cell citation",
     none: ["Only blank cells go through this step.", "This cell has a value, so blanks.csv has no row for it. For this plan, the step cites the blank Naturopath cell from EOC page 84."],
     paras: [["Claude Haiku makes ", ["blankClaim", "blank-cell claims"], ": why a cell is blank, with quotes. This step adds citations only. It never changes a value."]] },
-  { id: "stack-draft", from: "draft", to: "live", label: "Stack: draft", highlight: [[0], [0]],
+  { id: "stack-draft", record: "layers", from: "draft", to: "live", label: "Stack: draft", highlight: [[0], [0]],
     before: "draft $325 or 20% | $325", after: "bottom layer",
     paras: [["The draft is the bottom ", ["layer", "layer"], ". A later layer that sets the same cell wins."]] },
-  { id: "stack-presented", from: "presented", to: "live", label: "Stack: presented", highlight: [[0, 1, 2], [0]],
+  { id: "stack-presented", record: "layers", from: "presented", to: "live", label: "Stack: presented", highlight: [[0, 1, 2], [0]],
     before: "presented $325 or 20% | $325, 4 quotes", after: "live value, cited",
     paras: [["The presented ", ["layer", "layer"], " sits above the draft. Its value is the same here, so the cell keeps its value and gains four citations. Code drops any citation whose value differs from the cell's final value."]] },
-  { id: "publish", from: "live", to: "site", label: "Publish", highlight: [[0], [1, 4, 5]],
+  { id: "publish", record: "layers", from: "live", to: "site", label: "Publish", highlight: [[0], [1, 4, 5]],
     before: "live AB_ambulance", after: "cell + EOC page 46 highlight",
     paras: [["Merging to main builds the site. ", ["worker", "The pdxplans Worker"], " serves it at pdxplans.org, and the same build updates the volunteers' Google Sheet."]] },
 ];

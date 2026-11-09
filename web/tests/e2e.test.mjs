@@ -23,8 +23,9 @@ const site = JSON.parse(fs.readFileSync(path.join(SITE, "data.json")));
 before(async () => {
   server = http.createServer((req, res) => {
     const name = decodeURIComponent(new URL(req.url, "http://x").pathname);
-    // Like the pdxplans Worker, which serves docs/ from R2.
-    const file = name.startsWith("/docs/") ? path.join(DOCS, path.basename(name)) : path.join(SITE, name.replace(/\/$/, "/index.html"));
+    // Like the pdxplans Worker, which serves docs/ from R2 and each trace from its static file.
+    const file = name.startsWith("/docs/") ? path.join(DOCS, path.basename(name))
+      : name.startsWith("/trace/") ? path.join(SITE, `${name}.json`) : path.join(SITE, name.replace(/\/$/, "/index.html"));
     fs.readFile(file, (err, body) => {
       res.writeHead(err ? 404 : 200, { "Content-Type": TYPES[path.extname(file)] || "application/octet-stream" });
       res.end(body);
@@ -874,4 +875,44 @@ test("pipeline view: a term's pop-over stays inside the window, and opening anot
   } finally {
     await page.setViewportSize({ width: 1600, height: 1000 });
   }
+});
+
+test("pipeline view: each step shows its record from the cell's trace", async () => {
+  await page.goto(`${base}#/2027/how/main/H1036-153-0/ambulance/draft`);
+  await page.waitForSelector(".how-trace pre");
+  assert.match(await page.textContent(".how-trace-head"), /draft\s*Traced/);
+  assert.match(await page.textContent(".how-trace pre"), /pipeline\/main_chart\.py/);
+  await page.click("a.how-nav[rel=next]");
+  await page.waitForFunction(() => document.querySelector(".how-trace-head")?.textContent.includes("Not traced yet"));
+  assert.equal(await page.locator(".how-trace pre").count(), 0);
+});
+
+test("pipeline view: a cell with no trace says so, and the next step loads it again", async () => {
+  const fresh = await browser.newPage();
+  opened.push(fresh);
+  let fail = true;
+  await fresh.route("**/trace/**", (route) => fail ? route.fulfill({ status: 404, body: "Not found" }) : route.continue());
+  await fresh.goto(`${base}#/2027/how/main/H1036-153-0/ambulance/draft`);
+  await fresh.waitForFunction(() => document.querySelector(".how-trace")?.textContent.includes("This build has no trace for this cell."));
+  fail = false;
+  await fresh.click("a.how-nav[rel=prev]");
+  await fresh.waitForSelector(".how-trace pre");
+});
+
+test("pipeline view: a record's status reads in words, and a record the trace lacks reads as not recorded", async () => {
+  const fresh = await browser.newPage();
+  opened.push(fresh);
+  await fresh.route("**/trace/**", async (route) => {
+    const trace = await (await route.fetch()).json();
+    delete trace.draft;
+    trace.plan = { status: "none" };
+    await route.fulfill({ json: trace });
+  });
+  const head = async (step) => {
+    await fresh.goto(`${base}#/2027/how/main/H1036-153-0/ambulance/${step}`);
+    await fresh.waitForSelector(".how-trace-head");
+    return fresh.textContent(".how-trace-head");
+  };
+  assert.match(await head("draft"), /draft\s*Not recorded in this build/);
+  assert.match(await head("list-plans"), /plan\s*No step touched this cell/);
 });
