@@ -40,6 +40,14 @@ def bare_site(**kw):
 
 H6815_038_EOC = "https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf"
 
+class NoteWordingTest(unittest.TestCase):
+    def test_notes_do_not_name_the_pipeline(self):
+        jargon = re.compile(r"reader|expert's|#\d", re.I)
+        notes = [r["comment"] for r in csv.DictReader(open(DATA / "comments.csv"))]
+        notes += [r["note"] for r in csv.DictReader(open(DATA / "override_facts.csv"))]
+        self.assertEqual([n for n in notes if jargon.search(n)], [])
+
+
 class SiteDataTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
