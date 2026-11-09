@@ -83,24 +83,8 @@ function lens(step, steps, link, terms, example, trace) {
       ...step.paras.map(para), ...(example?.paras ?? []).map(para)),
     example ? rows("Input", step.from, example.highlight[0], example.none?.[0]) : null,
     example ? rows("Output", step.to, example.highlight[1], example.none?.[1]) : null,
-    traceRecord(step, trace),
+    trace ? null : el("p", { class: "how-none" }, "This build has no trace for this cell."),
     chips(after(step, steps), "after", (l) => `next: ${l} ↘`));
-}
-
-const STATUS = {
-  traced: "Traced",
-  none: "No step touched this cell",
-  not_traced_yet: "Not traced yet",
-  not_recorded: "Not recorded in this build",
-};
-
-function traceRecord(step, trace) {
-  if (!trace) return el("div", { class: "how-trace" }, el("p", { class: "how-none" }, "This build has no trace for this cell."));
-  const { status, ...record } = trace[step.record] ?? { status: "not_recorded" };
-  // Closed by default: the strip above says the same in words.
-  return el("details", { class: `how-trace ${status}` },
-    el("summary", { class: "how-trace-head" }, el("strong", {}, "Raw trace record"), el("code", {}, step.record), el("span", {}, STATUS[status] ?? status)),
-    status === "traced" ? el("div", { class: "how-scroll" }, el("pre", {}, JSON.stringify(record, null, 1))) : null);
 }
 
 let pops = 0;

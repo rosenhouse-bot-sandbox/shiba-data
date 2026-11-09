@@ -880,44 +880,17 @@ test("pipeline view: a term's pop-over stays inside the window, and opening anot
   }
 });
 
-test("pipeline view: each step shows its record from the cell's trace", async () => {
-  await openHow(page, "main/H1036-153-0/ambulance/draft");
-  assert.match(await page.textContent(".how-trace-head"), /draft\s*Traced/);
-  assert.ok(!(await page.locator(".how-trace pre").isVisible()));
-  await page.click(".how-trace summary");
-  assert.match(await page.textContent(".how-trace pre"), /pipeline\/main_chart\.py/);
-  await page.click("a.how-nav[rel=next]");
-  await page.waitForFunction(() => document.querySelector(".how-trace-head")?.textContent.includes("Not recorded in this build"));
-  assert.equal(await page.locator(".how-trace pre").count(), 0);
-});
-
 test("pipeline view: a cell with no trace says so, and the next step loads it again", async () => {
   const fresh = await browser.newPage();
   opened.push(fresh);
   let fail = true;
   await fresh.route("**/trace/**", (route) => fail ? route.fulfill({ status: 404, body: "Not found" }) : route.continue());
-  await fresh.goto(`${base}#/2027/how/main/H1036-153-0/ambulance/draft`);
-  await fresh.waitForFunction(() => document.querySelector(".how-trace")?.textContent.includes("This build has no trace for this cell."));
+  await fresh.goto(`${base}#/2027/how/main/H5216-048-0/chiropractic/draft`);
+  await fresh.waitForFunction(() => document.querySelector(".how-lens")?.textContent.includes("This build has no trace for this cell."));
+  assert.equal(await fresh.locator(".how-strip").count(), 0);
   fail = false;
   await fresh.click("a.how-nav[rel=prev]");
-  await fresh.waitForSelector(".how-trace pre", { state: "attached" });
-});
-
-test("pipeline view: a record's status reads in words, and a record the trace lacks reads as not recorded", async () => {
-  const fresh = await browser.newPage();
-  opened.push(fresh);
-  await fresh.route("**/trace/**", async (route) => {
-    const trace = await (await route.fetch()).json();
-    delete trace.draft;
-    trace.plan = { status: "none" };
-    await route.fulfill({ json: trace });
-  });
-  const head = async (step) => {
-    await openHow(fresh, `main/H1036-153-0/ambulance/${step}`);
-    return fresh.textContent(".how-trace-head");
-  };
-  assert.match(await head("draft"), /draft\s*Not recorded in this build/);
-  assert.match(await head("list-plans"), /plan\s*No step touched this cell/);
+  await fresh.waitForSelector(".how-strip");
 });
 
 test("pipeline view: a CMS-only cell shows a short chain, and a step it skips opens its first step", async () => {
@@ -933,8 +906,6 @@ test("pipeline view: a blank cell with a blank-cell citation shows the blanks st
   await openHow(page, "main/H5216-048-0/chiropractic/cite-blanks");
   assert.ok((await chainOf(page)).includes("Cite blank cells"));
   assert.equal(await page.textContent(".how-value"), "blank");
-  assert.match(await page.textContent(".how-trace-head"), /model_citations\s*Traced/);
-  assert.match(await page.textContent(".how-trace pre"), /"step": "blanks"/);
   assert.equal(await page.textContent(".how-strip"), "SB and EOC page text becomes 2 quotes from EOC pages 51, 102");
 });
 
