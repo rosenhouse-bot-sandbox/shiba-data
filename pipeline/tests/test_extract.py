@@ -129,6 +129,26 @@ class DocFactsTest(unittest.TestCase):
         self.assertEqual(failed, [])
 
 
+class MergeTest(unittest.TestCase):
+    def run_it(self, *answers):
+        return extract.doc_facts(DOC, "imaging", list(answers), None, PAGES, ok_unless_bad, merge=True)[:2]
+
+    def test_merges_answers_that_differ_only_in_quotes_and_notes(self):
+        found, failed = self.run_it(answer(note="a"), answer(quotes=[X_RAYS, "MRI and CT scans $250 copay"], note="b"))
+        self.assertEqual(failed, [])
+        self.assertEqual([(json.loads(f["quotes"]), f["note"]) for f in found],
+                         [([X_RAYS, "MRI and CT scans $250 copay"], "a b")])
+
+    def test_still_rejects_answers_with_different_amounts(self):
+        found, failed = self.run_it(answer(), answer(quotes=["MRI and CT scans $250 copay"], amount="$250"))
+        self.assertEqual((found, [why for _, why in failed]), ([], [extract.CLASH] * 2))
+
+    def test_without_merge_both_copies_clash(self):
+        found, failed = extract.doc_facts(DOC, "imaging", [answer(note="a"), answer(note="b")], None, PAGES,
+                                          ok_unless_bad)[:2]
+        self.assertEqual((found, [why for _, why in failed]), ([], [extract.CLASH] * 2))
+
+
 class DecoyTest(unittest.TestCase):
     def facts(self, *more):
         return gate(answer(setting="office", amount="$40", quotes=["$40 office"]),

@@ -42,9 +42,9 @@ def group_facts(texts, work, group, answer, v, data):
     found = f"{read}/facts.json"
     extract.read(texts, read, group, data)
     answer(read, *v["reader"])
-    extract.extract_facts(texts, read, group, found, data)
+    extract.extract_facts(texts, read, group, found, data, v.get("merge", False))
     answer(read, *v["reader"])
-    extract.extract_facts(texts, read, group, found, data)
+    extract.extract_facts(texts, read, group, found, data, v.get("merge", False))
     extract.verify(texts, found, check, data)
     answer(check, *v["verifier"])
     extract.accept(check, f"{check}/accepted.csv")
@@ -64,7 +64,7 @@ def second_facts(texts, work, group, answer, v, data, plan_ids, known):
     extract.reread(texts, read, group, plan_ids, known, data)
     for _ in range(2):
         answer(read, *v["reader"])
-        extract.extract_facts(texts, read, group, found, data)
+        extract.extract_facts(texts, read, group, found, data, v.get("merge", False))
     seen = {tuple(f[c] for c in facts.KEY) for f in known}
 
     def skipped(r):
@@ -109,3 +109,5 @@ VERSIONS[13] = dict(VERSIONS[12], review_cap=200, recheck=VERSIONS[12]["recheck"
 HEARING_EXAM = ("H7006-018-0", "H6815-038-0", "H5439-019-0", "H5439-011-0", "H1372-003-0", "H7006-021-0", "H5439-010-0",
                 "H7199-002-0", "H2923-001-0", "H2923-028-3", "H2923-025-0", "H2923-005-0", "H2923-009-0", "H2923-019-0")
 VERSIONS[14] = dict(VERSIONS[13], recheck=VERSIONS[13]["recheck"] | {"hearing": VERSIONS[13]["recheck"]["hearing"] + HEARING_EXAM})
+# Readers often state one fact twice on a page, once per quote. Version 15 merges such answers instead of dropping both.
+VERSIONS[15] = dict(VERSIONS[14], merge=True)

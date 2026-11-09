@@ -133,11 +133,23 @@ def problem(doc, group, a, pages, quote_ok):
     return None, row
 
 
-def checks(doc, group, answers, pages, quote_ok):
-    """Each answer with why it cannot be a fact, or None, and the fact."""
+def merged(rows):
+    """Rows that share an identity, as one row with all their quotes and notes, or None if they differ otherwise."""
+    if len({tuple(r[c] for c in facts.COLUMNS if c not in ("quotes", "note")) for r in rows}) > 1:
+        return None
+    quotes = list(dict.fromkeys(q for r in rows for q in json.loads(r["quotes"])))
+    notes = " ".join(dict.fromkeys(r["note"] for r in rows if r["note"]))
+    return dict(rows[0], quotes=json.dumps(quotes, ensure_ascii=False), note=notes)
+
+
+def checks(doc, group, answers, pages, quote_ok, merge=False):
+    """Each answer with why it cannot be a fact, or None, and the fact.
+    With merge, answers that differ only in quotes and notes become one fact."""
     checked = [(a, *problem(doc, group, a, pages, quote_ok)) for a in answers]
     clash = set(facts.conflicts([r for _, why, r in checked if not why]))
-    return [(a, CLASH, None) if not why and facts.identity(r) in clash else (a, why, r) for a, why, r in checked]
+    rows = {i: merged([r for _, why, r in checked if not why and facts.identity(r) == i]) if merge else None for i in clash}
+    return [(a, why, r) if why or facts.identity(r) not in clash else (a, None, rows[facts.identity(r)])
+            if rows[facts.identity(r)] else (a, CLASH, None) for a, why, r in checked]
 
 
 def gate(doc, group, answers, pages, quote_ok):
@@ -197,10 +209,10 @@ def answers(path):
     return found if isinstance(found, list) else [found]
 
 
-def doc_facts(doc, group, first, retry, pages, quote_ok):
+def doc_facts(doc, group, first, retry, pages, quote_ok, merge=False):
     """The document's facts from its first answers and any retry answers, the failures to retry, if it needs a retry,
     and each answer's check."""
-    checked = checks(doc, group, first + (retry or []), pages, quote_ok)
+    checked = checks(doc, group, first + (retry or []), pages, quote_ok, merge)
     found, failed = passed(checked)
     return found, (failed if retry is None else []), checked
 
@@ -249,7 +261,7 @@ def reread(work, out_dir, group, plan_ids, known, data=DATA):
                 f.write(task(doc, plan_rows, pages, group, data, known=theirs, plan_ids=mine))
 
 
-def extract_facts(work, answers_dir, group, out, data=DATA):
+def extract_facts(work, answers_dir, group, out, data=DATA, merge=False):
     plan_rows, found, retries, outcomes = plans(data), [], 0, []
     for doc in documents(data):
         first = f"{answers_dir}/{doc['id']}.json"
@@ -259,7 +271,7 @@ def extract_facts(work, answers_dir, group, out, data=DATA):
         pages = d.pages("layout")
         stated = answers(first)
         got, failed, checked = doc_facts(doc, group, stated, answers(retry) if os.path.exists(retry) else None,
-                                         pages, d.quote_ok)
+                                         pages, d.quote_ok, merge)
         prompts = [prompt_of(f"{answers_dir}/{doc['id']}.md")] * len(stated) + [prompt_of(retry[:-5] + ".md")] * (
             len(checked) - len(stated))
         items = list(range(len(stated))) + list(range(len(checked) - len(stated)))
