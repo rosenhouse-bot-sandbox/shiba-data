@@ -7,7 +7,7 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dis
 
 const SHEET_NAMES = { main: "Main chart", dvha: "Dental, vision, hearing & extras" };
 // Keep in sync with KIND_NAMES in web/sheet_layout.py.
-const KIND_NAMES = { question: "Open question", hand_written: "Hand-written fact" };
+const KIND_NAMES = { question: "Open question", caveat: "Caveat", hand_written: "Hand-written fact" };
 let kindFilter = "";
 const $ = (sel) => document.querySelector(sel);
 const el = (tag, attrs = {}, ...kids) => {

@@ -208,7 +208,7 @@ Most main-sheet columns have rules. Every DVHA column keeps its CMS value, and s
 ## 11. People correct what is left
 
 - `edits.csv` sets a cell's value. Each row records `saw`, the value it replaced. The site build warns when the value beneath an edit changes, so a person can check the edit. Most edits are on the DVHA sheet, whose columns have no rules yet.
-- `comments.csv` adds a note to a cell. An open question shows in yellow, and a hand-written fact in green.
+- `comments.csv` adds a note to a cell. An open question shows in yellow, a caveat in lavender, and a hand-written fact in green.
 - `struck.csv` hides a model's quote that does not support its cell.
 
 ## 12. Stack the layers
