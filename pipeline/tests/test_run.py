@@ -3,7 +3,7 @@ from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import layers
-import ask, run, years
+import ask, blobs, run, years
 
 URL = "https://example.org/sb.pdf"
 
@@ -45,6 +45,22 @@ class AnswersTest(unittest.TestCase):
             ask.write(f"{tmp}/answers/{ask.key(run.READER, 'task', 'high')}.json", {"reply": "[]"})
             run.Answers(pathlib.Path(tmp), None)(tmp, run.READER, "high")
             self.assertEqual(pathlib.Path(tmp, "P-1.json").read_text(), "[]\n")
+
+
+    def test_lists_each_task_with_its_answer_key_and_keeps_its_prompt(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            os.makedirs(f"{tmp}/step/read")
+            pathlib.Path(tmp, "step/read/P-1.md").write_text("task ✓")
+            os.makedirs(f"{tmp}/answers")
+            ask.write(f"{tmp}/answers/{ask.key(run.READER, 'task ✓', 'high')}.json", {"reply": "[]"})
+            run.Answers(pathlib.Path(tmp), None, tmp)(f"{tmp}/step/read", run.READER, "high")
+            with open(f"{tmp}/{blobs.LEDGER}") as f:
+                rows = list(csv.DictReader(f))
+            self.assertEqual([{k: r[k] for k in ("dir", "task", "model", "effort")} for r in rows],
+                             [dict(dir="step/read", task="P-1.md", model=run.READER, effort="high")])
+            prompt = pathlib.Path(tmp, blobs.PROMPTS, rows[0]["prompt"]).read_text()
+            self.assertEqual(ask.key(run.READER, prompt, "high"), rows[0]["key"])
+            self.assertTrue(os.path.exists(f"{tmp}/answers/{rows[0]['key']}.json"))
 
 
 class StepsTest(unittest.TestCase):

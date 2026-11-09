@@ -17,6 +17,7 @@ import os
 import shutil
 import subprocess
 import sys
+import threading
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path[:0] = [HERE, os.path.join(HERE, "tests")]
@@ -73,19 +74,44 @@ def check_quotes(data, texts):
         raise SystemExit("The site cannot highlight these quotes:\n" + "\n".join(f"{layers.where(c)}: {c['quote']}" for c in lost))
 
 
-class Answers:
-    """Answers each model step's task files from saved answers, or from the asker."""
+LEDGER_COLUMNS = ["dir", "task", "model", "effort", "key", "prompt"]
 
-    def __init__(self, data, asker):
-        self.saved, self.asker = data / "answers", asker
+
+class Answers:
+    """Answers each model step's task files from saved answers, or from the asker.
+    With a work dir, it also keeps each task's text as <work>/prompts/<sha256>, and lists the task in <work>/ledger.csv."""
+
+    def __init__(self, data, asker, work=None):
+        self.saved, self.asker, self.work = data / "answers", asker, work
+        self.lock = threading.Lock()  # document_facts runs its groups at once
 
     def __call__(self, task_dir, model, effort=None):
         tasks = sorted(glob.glob(f"{task_dir}/*.md"))
+        if self.work:
+            with self.lock:
+                self.record(task_dir, tasks, model, effort)
         missing = ask.answer(tasks, model, self.saved, self.asker, effort)
         if missing:
             print("\n".join(missing))
             raise SystemExit(f"{len(missing)} of {len(tasks)} tasks in {task_dir} have no answer from {model}. "
                              + ("Rerun to ask again." if self.asker else "Rerun with `api` to ask the Claude API."))
+
+
+    def record(self, task_dir, tasks, model, effort):
+        os.makedirs(f"{self.work}/{blobs.PROMPTS}", exist_ok=True)
+        new = not os.path.exists(f"{self.work}/{blobs.LEDGER}")
+        with open(f"{self.work}/{blobs.LEDGER}", "a", newline="") as f:
+            w = csv.DictWriter(f, LEDGER_COLUMNS, lineterminator="\n")
+            if new:
+                w.writeheader()
+            for task in tasks:
+                with open(task) as t:  # as ask.answer reads it
+                    text = t.read()
+                prompt = hashlib.sha256(text.encode()).hexdigest()
+                with open(f"{self.work}/{blobs.PROMPTS}/{prompt}", "wb") as out:
+                    out.write(text.encode())
+                w.writerow(dict(dir=os.path.relpath(task_dir, self.work), task=os.path.basename(task), model=model,
+                                effort=effort or "", key=ask.key(model, text, effort), prompt=prompt))
 
 
 def fresh(path):
@@ -181,7 +207,7 @@ def main(year, work, mode="", candidate=""):
     check_quotes(data, f"{work}/texts")
     if config["year"] == years.LIVE:  # blanks.py and filled.py read the live year
         versions = steps.versions(data, STEPS, candidate)
-        answer = Answers(data, ask.api() if mode == "api" else None)
+        answer = Answers(data, ask.api() if mode == "api" else None, work)
         before = {name: len(layers.layer(data, name)) for name in (layers.BLANKS, layers.FILLED)}
         model_steps(data, f"{work}/texts", work, answer, versions)
         check_quotes(data, f"{work}/texts")

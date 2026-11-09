@@ -11,6 +11,7 @@ import pathlib
 import sys
 
 CMS_FILES, TEXTS = "cms_files.csv", "texts.csv"
+LEDGER, PROMPTS = "ledger.csv", "prompts"
 TEXT_KINDS = {"text": "txt", "layout": "txt", "items": "json"}
 
 

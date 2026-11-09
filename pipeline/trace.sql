@@ -217,3 +217,24 @@ CREATE TABLE landscape_read (
   value      TEXT NOT NULL,
   PRIMARY KEY (plan_id, plan_field, position)
 );
+
+-- Each prompt a run sent, by the sha256 of its text, which R2 keeps as blobs/<prompt_sha>.
+-- dir is the task's folder under the run's work dir, such as facts/ambulance/read.
+CREATE TABLE task (
+  prompt_sha TEXT NOT NULL,
+  answer_key TEXT NOT NULL REFERENCES answer,
+  dir        TEXT NOT NULL,
+  task       TEXT NOT NULL,
+  PRIMARY KEY (prompt_sha, answer_key, dir, task)
+);
+CREATE INDEX task_answer ON task (answer_key);
+
+-- A saved answer in data/<year>/answers/<key>.json.
+CREATE TABLE answer (
+  key    TEXT PRIMARY KEY,
+  model  TEXT NOT NULL,
+  effort TEXT,
+  batch  INTEGER NOT NULL,
+  reply  TEXT NOT NULL,
+  usage  TEXT NOT NULL
+);
