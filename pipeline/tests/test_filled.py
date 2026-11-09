@@ -101,8 +101,8 @@ class VersionsTest(unittest.TestCase):
         self.assertFalse(ignore(dict(layer=layers.EDITS, sheet="dvha", column="F_dental")))
         self.assertTrue(ignore(dict(layer=layers.PRESENTED, sheet="dvha", column="F_dental")))
         self.assertTrue(ignore(dict(layer=layers.EDITS, sheet="main", column="L_xray_imaging")))
-        self.assertTrue(ignore(dict(layer=layers.PRESENTED, column=next(iter(filled.V6_HELD))[0],
-                                    plan_id=next(iter(filled.V6_HELD))[1])))
+        column, plan_id = next(iter(filled.V6_HELD))
+        self.assertTrue(ignore(dict(layer=layers.PRESENTED, column=column, plan_id=plan_id)))
 
     def test_earlier_versions_see_dvha_edits_instead_of_their_presented_rows(self):
         for version in range(2, 7):
