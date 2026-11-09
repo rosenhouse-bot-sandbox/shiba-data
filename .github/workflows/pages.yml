@@ -79,13 +79,17 @@ jobs:
             < _work/inputs.txt
           sed 's/ /  /' _work/inputs.txt | sha256sum -c --quiet
       - run: python3 -I pipeline/run.py "$(basename "$(python3 -I pipeline/years.py)")" _work replay
-      - run: python3 -I pipeline/trace.py build "$(basename "$(python3 -I pipeline/years.py)")" _work/trace.sqlite "$SHA"
+      - run: python3 -I pipeline/trace.py build "$(basename "$(python3 -I pipeline/years.py)")" _work/trace.sqlite "$SHA" _work
         env:
           SHA: ${{ github.event.pull_request.head.sha || github.sha }}
       - uses: actions/upload-artifact@v4
         with:
           name: trace
           path: _work/trace.sqlite
+      - uses: actions/upload-artifact@v4
+        with:
+          name: prompts
+          path: _work/prompts
       - run: |
           git status --porcelain -- . ':(exclude)_work'
           test -z "$(git status --porcelain -- . ':(exclude)_work')"
@@ -107,6 +111,31 @@ jobs:
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
           wranglerVersion: "4.156.1"
           command: deploy
+
+  # R2 keeps each prompt the replay sent, so a trace can show it. Keys are content hashes, so sync adds only new ones.
+  prompts:
+    if: github.ref == 'refs/heads/main'
+    needs: [build, reproduce]
+    runs-on: ubuntu-latest
+    environment: cloudflare
+    env:
+      AWS_ACCESS_KEY_ID: ${{ vars.CLOUDFLARE_API_TOKEN_ID }}
+      AWS_DEFAULT_REGION: auto
+      AWS_ENDPOINT_URL: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+      AWS_REQUEST_CHECKSUM_CALCULATION: when_required
+      AWS_RESPONSE_CHECKSUM_VALIDATION: when_required
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: prompts
+          path: prompts
+      - env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          AWS_SECRET_ACCESS_KEY=$(printf %s "$CLOUDFLARE_API_TOKEN" | sha256sum | cut -c1-64)
+          export AWS_SECRET_ACCESS_KEY
+          echo "::add-mask::$AWS_SECRET_ACCESS_KEY"
+          aws s3 sync prompts s3://pdxplans/blobs/ --size-only --only-show-errors
 
   sheet:
     if: github.ref == 'refs/heads/main'

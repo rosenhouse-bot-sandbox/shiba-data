@@ -1,4 +1,5 @@
 // Serves each plan PDF from the R2 bucket, where the Pipeline workflow stores it as blobs/<sha256>.
+// /blobs/<sha256>.txt serves a model prompt, which the Pipeline workflow stores the same way.
 // The static site comes from the assets directory.
 // CI downloads every blob through this route too, so it needs no R2 credentials.
 export default {
@@ -8,13 +9,14 @@ export default {
     if (/^\/trace\/\d+\/main\/[^/]+\/[^/.]+$/.test(url.pathname)) {
       return env.ASSETS.fetch(new Request(new URL(`${url.pathname}.json`, url), request));
     }
-    const sha = url.pathname.match(/^\/docs\/([0-9a-f]{64})\.pdf$/)?.[1];
+    const [, pdf, text] = url.pathname.match(/^\/(?:docs\/([0-9a-f]{64})\.pdf|blobs\/([0-9a-f]{64})\.txt)$/) ?? [];
+    const sha = pdf ?? text;
     if (!sha) return env.ASSETS.fetch(request);
     // pdf.js loads large EOCs in ranges.
     const blob = await env.BLOBS.get(`blobs/${sha}`, { range: request.headers, onlyIf: request.headers });
     if (!blob) return new Response("Not found", { status: 404 });
     const headers = new Headers({
-      "Content-Type": "application/pdf",
+      "Content-Type": pdf ? "application/pdf" : "text/plain; charset=utf-8",
       "Cache-Control": "public, max-age=31536000, immutable",
       "Accept-Ranges": "bytes",
       ETag: blob.httpEtag,

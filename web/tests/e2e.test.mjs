@@ -885,7 +885,7 @@ test("pipeline view: each step shows its record from the cell's trace", async ()
   assert.match(await page.textContent(".how-trace-head"), /draft\s*Traced/);
   assert.match(await page.textContent(".how-trace pre"), /pipeline\/main_chart\.py/);
   await page.click("a.how-nav[rel=next]");
-  await page.waitForFunction(() => document.querySelector(".how-trace-head")?.textContent.includes("Not traced yet"));
+  await page.waitForFunction(() => document.querySelector(".how-trace-head")?.textContent.includes("Not recorded in this build"));
   assert.equal(await page.locator(".how-trace pre").count(), 0);
 });
 

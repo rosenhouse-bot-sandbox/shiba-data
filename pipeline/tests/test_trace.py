@@ -1,8 +1,9 @@
-import os, sqlite3, sys, tempfile, unittest
+import csv, os, shutil, sqlite3, sys, tempfile, unittest
+from unittest import mock
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path[:0] = [os.path.dirname(HERE), os.path.join(os.path.dirname(os.path.dirname(HERE)), "web")]
-import blobs, build, fields, layers, present, reads, trace, years
+import ask, blobs, build, fields, layers, present, reads, run, trace, years
 
 SHA = "0" * 40
 AMBULANCE = ("main", "H1036-153-0", "AB_ambulance")
@@ -192,6 +193,62 @@ class TraceTest(unittest.TestCase):
     def test_rejects_an_unknown_cell(self):
         with self.assertRaises(LookupError):
             self.cell("main", "H1036-153-0", "ZZ_nothing")
+
+
+class AnswersTest(unittest.TestCase):
+    """Builds from a copy of the year without its saved answers, and a run that asked one task."""
+
+    def setUp(self):
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        self.root, self.work = os.path.join(tmp.name, "data"), os.path.join(tmp.name, "work")
+        self.data = os.path.join(self.root, str(years.LIVE))
+        shutil.copytree(years.data_dir(), self.data, ignore=shutil.ignore_patterns("answers", "rebuilds", "evaluations"))
+        os.makedirs(os.path.join(self.data, "answers"))
+        os.makedirs(os.path.join(self.work, "facts/ambulance/read"))
+        with open(os.path.join(self.work, "facts/ambulance/read/doc.md"), "w") as f:
+            f.write("Read the facts.")
+        key = ask.key(run.READER, "Read the facts.", "high")
+        ask.write(os.path.join(self.data, "answers", f"{key}.json"),
+                  {"model": run.READER, "effort": "high", "task": "doc.md", "reply": "[]", "usage": {"input_tokens": 9}})
+        with mock.patch.dict(os.environ, {"SHIBA_DATA": self.root}):
+            run.Answers(years.data_dir(), None, self.work)(os.path.join(self.work, "facts/ambulance/read"), run.READER, "high")
+        self.key = key
+
+    def build(self):
+        path = os.path.join(self.work, "trace.sqlite")
+        with mock.patch.dict(os.environ, {"SHIBA_DATA": self.root}):
+            trace.build(years.LIVE, path, SHA, self.work)
+        db = sqlite3.connect(path)
+        self.addCleanup(db.close)
+        return db
+
+    def test_loads_each_prompt_and_its_saved_answer(self):
+        db = self.build()
+        self.assertEqual(db.execute("SELECT answer_key, dir, task FROM task").fetchall(),
+                         [(self.key, "facts/ambulance/read", "doc.md")])
+        self.assertEqual(db.execute("SELECT model, effort, reply FROM answer").fetchall(), [(run.READER, "high", "[]")])
+
+    def test_keeps_each_models_answer_to_one_prompt(self):
+        os.makedirs(os.path.join(self.work, "facts/ambulance/again"))
+        shutil.copy(os.path.join(self.work, "facts/ambulance/read/doc.md"), os.path.join(self.work, "facts/ambulance/again"))
+        key = ask.key(run.VERIFIER, "Read the facts.")
+        ask.write(os.path.join(self.data, "answers", f"{key}.json"),
+                  {"model": run.VERIFIER, "task": "doc.md", "reply": "[1]", "usage": {}})
+        with mock.patch.dict(os.environ, {"SHIBA_DATA": self.root}):
+            run.Answers(years.data_dir(), None, self.work)(os.path.join(self.work, "facts/ambulance/again"), run.VERIFIER)
+        db = self.build()
+        self.assertEqual(db.execute("SELECT answer_key, dir FROM task ORDER BY dir").fetchall(),
+                         [(key, "facts/ambulance/again"), (self.key, "facts/ambulance/read")])
+        self.assertEqual(db.execute("SELECT count(*) FROM answer").fetchall(), [(2,)])
+
+    def test_fails_when_a_prompt_does_not_hash_to_its_answers_key(self):
+        with open(os.path.join(self.work, run.LEDGER)) as f:
+            prompt = next(csv.DictReader(f))["prompt"]
+        with open(os.path.join(self.work, run.PROMPTS, prompt), "a") as f:
+            f.write("changed")
+        with self.assertRaisesRegex(ValueError, "does not hash to the key of facts/ambulance/read/doc.md"):
+            self.build()
 
 
 if __name__ == "__main__":

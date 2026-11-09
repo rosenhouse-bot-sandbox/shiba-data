@@ -1,19 +1,20 @@
 """Builds a year's trace database, and shows how one cell got its value (#178).
 
 Usage:
-  python3 -I pipeline/trace.py build <year> <out.sqlite> <commit sha>
+  python3 -I pipeline/trace.py build <year> <out.sqlite> <commit sha> [<work_dir>]
   python3 -I pipeline/trace.py cell <db> <sheet> <plan_id> <col>
   python3 -I pipeline/trace.py page <work_dir> <pdf sha256> <page>
 
 `cell` prints JSON. Each record has a status: "traced", "none" when no step touched the cell,
 "not_traced_yet" when a later milestone of #181 fills it, or "not_recorded" when nothing kept the record.
+With a work_dir from a run, `build` adds the run's prompts and the saved answers they got.
 `page` prints a page's layout text from a run's <work_dir>/texts, where blobs.py puts it.
 """
 import csv, json, os, sqlite3, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-import blobs, eoc, facts, fields, layers, present, steps, years
+import ask, blobs, eoc, facts, fields, layers, present, run, steps, years
 
 REPO_URL = "https://github.com/rosenhouse-bot-sandbox/shiba-data"
 TRACED, NONE, NOT_YET, NOT_RECORDED = "traced", "none", "not_traced_yet", "not_recorded"
@@ -47,38 +48,42 @@ def sheet_cells(sheets):
             for sheet, sheet_rows in sheets.items() for r in sheet_rows for col in fields.labels(sheet)]
 
 
-def build(year, out, sha):
+def build(year, out, sha, work=None):
     data = years.data_dir(year)
     if os.path.exists(out):
         os.remove(out)
     db = sqlite3.connect(out)
-    with open(os.path.join(HERE, "trace.sql")) as f:
-        db.executescript(f.read())
-    db.execute("INSERT INTO build VALUES (?, ?, ?)", (sha, year, (data / "steps.json").read_text()))
-    insert(db, "plan", (dict(p, position=n) for n, p in enumerate(read(data / "generated/plans.csv"))))
-    documents = read(data / "generated/documents.csv")
-    insert(db, "document", (dict(url=d["url"], position=n, kind=d["kind"], found_via=d["found_via"])
-                            for n, d in enumerate(documents)))
-    insert(db, "plan_document", (dict(plan_id=p, url=d["url"]) for d in documents for p in d["plan_ids"].split(";")))
-    checked = read(data / "generated/documents_checked.csv")
-    insert(db, "download", (dict(url=d["url"], sha256=d["sha256"] or None, pages=number(d["pages"]),
-                                 cover_problems=d["cover_problems"], baseline=d["baseline"],
-                                 baseline_file=d["baseline_file"]) for d in checked))
-    insert(db, "text", (dict(pdf=t["pdf"], plain=t["text"], layout=t["layout"], items=t["items"])
-                        for t in read(data / "generated" / blobs.TEXTS)))
-    insert(db, "draft_cell", sheet_cells(layers.generated(data)))
-    insert(db, "cms_source", (renamed(r) for r in read(data / "generated/cms_sources.csv")))
-    insert(db, "cms_read", (dict(renamed(r), position=n) for n, r in enumerate(read(data / "generated/cms_reads.csv"))))
-    insert(db, "landscape_read", (dict(r, position=n) for n, r in enumerate(read(data / "generated/landscape_reads.csv"))))
-    load_layers(db, data, checked)
-    reviewed = {facts.identity(f) for f in read(data / "machine/reviewed_facts.csv")}
-    insert(db, "fact", (dict(f, origin=origin, reviewed=int(facts.identity(f) in reviewed))
-                        for origin, path in FACT_FILES.items() for f in read(data / path)))
-    load_rules(db, data)
-    insert(db, "comment", (dict(renamed(c), pdf_page=number(c["pdf_page"])) for c in read(data / "comments.csv")))
-    insert(db, "struck_quote", (renamed(s) for s in layers.strikes(data)))
-    db.commit()
-    db.close()
+    try:
+        with open(os.path.join(HERE, "trace.sql")) as f:
+            db.executescript(f.read())
+        db.execute("INSERT INTO build VALUES (?, ?, ?)", (sha, year, (data / "steps.json").read_text()))
+        insert(db, "plan", (dict(p, position=n) for n, p in enumerate(read(data / "generated/plans.csv"))))
+        documents = read(data / "generated/documents.csv")
+        insert(db, "document", (dict(url=d["url"], position=n, kind=d["kind"], found_via=d["found_via"])
+                                for n, d in enumerate(documents)))
+        insert(db, "plan_document", (dict(plan_id=p, url=d["url"]) for d in documents for p in d["plan_ids"].split(";")))
+        checked = read(data / "generated/documents_checked.csv")
+        insert(db, "download", (dict(url=d["url"], sha256=d["sha256"] or None, pages=number(d["pages"]),
+                                     cover_problems=d["cover_problems"], baseline=d["baseline"],
+                                     baseline_file=d["baseline_file"]) for d in checked))
+        insert(db, "text", (dict(pdf=t["pdf"], plain=t["text"], layout=t["layout"], items=t["items"])
+                            for t in read(data / "generated" / blobs.TEXTS)))
+        insert(db, "draft_cell", sheet_cells(layers.generated(data)))
+        insert(db, "cms_source", (renamed(r) for r in read(data / "generated/cms_sources.csv")))
+        insert(db, "cms_read", (dict(renamed(r), position=n) for n, r in enumerate(read(data / "generated/cms_reads.csv"))))
+        insert(db, "landscape_read", (dict(r, position=n) for n, r in enumerate(read(data / "generated/landscape_reads.csv"))))
+        load_layers(db, data, checked)
+        reviewed = {facts.identity(f) for f in read(data / "machine/reviewed_facts.csv")}
+        insert(db, "fact", (dict(f, origin=origin, reviewed=int(facts.identity(f) in reviewed))
+                            for origin, path in FACT_FILES.items() for f in read(data / path)))
+        load_rules(db, data)
+        if work:
+            load_answers(db, data, work)
+        insert(db, "comment", (dict(renamed(c), pdf_page=number(c["pdf_page"])) for c in read(data / "comments.csv")))
+        insert(db, "struck_quote", (renamed(s) for s in layers.strikes(data)))
+        db.commit()
+    finally:
+        db.close()
 
 
 def number(text):
@@ -102,6 +107,23 @@ def load_layers(db, data, checked):
     _, cited = layers.citations(data, {d["url"]: d["kind"] for d in checked})
     insert(db, "live_citation", (dict(layer=c["layer"], position=c["position"], site_order=n, hidden=c["hidden"])
                                  for n, c in enumerate(cited)))
+
+
+def load_answers(db, data, work):
+    """Loads the replay's ledger and the saved answers it names. Fails if a kept prompt does not hash to its answer's key."""
+    tasks = list({tuple(t.values()): t for t in read(os.path.join(work, run.LEDGER))}.values())
+    for t in tasks:
+        with open(os.path.join(work, run.PROMPTS, t["prompt"]), encoding="utf-8") as f:
+            if ask.key(t["model"], f.read(), t["effort"] or None) != t["key"]:
+                raise ValueError(f"The prompt {t['prompt']} does not hash to the key of {t['dir']}/{t['task']}")
+    insert(db, "task", (dict(prompt_sha=t["prompt"], answer_key=t["key"], dir=t["dir"], task=t["task"]) for t in tasks))
+    answers = []
+    for key in sorted({t["key"] for t in tasks}):
+        with open(data / "answers" / f"{key}.json", encoding="utf-8") as f:
+            a = json.load(f)
+        answers.append(dict(key=key, model=a["model"], effort=a.get("effort"), batch=int(a.get("batch", False)),
+                            reply=a["reply"], usage=json.dumps(a.get("usage", {}))))
+    insert(db, "answer", answers)
 
 
 def load_rules(db, data):
@@ -228,8 +250,8 @@ def page(work, sha256, n):
 
 
 def main(command=None, *args):
-    if command == "build" and len(args) == 3:
-        build(int(args[0]), args[1], args[2])
+    if command == "build" and len(args) in (3, 4):
+        build(int(args[0]), *args[1:])
     elif command == "cell" and len(args) == 4:
         db = sqlite3.connect(f"file:{args[0]}?mode=ro", uri=True)
         print(json.dumps(cell(db, *args[1:]), indent=1, ensure_ascii=False))

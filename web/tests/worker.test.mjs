@@ -52,8 +52,16 @@ test("answers 404 for a hash with no blob", async () => {
   assert.equal((await fetchPath(`/docs/${"b".repeat(64)}.pdf`)).status, 404);
 });
 
+test("serves a prompt blob as UTF-8 text", async () => {
+  const response = await fetchPath(`/blobs/${SHA}.txt`);
+  assert.equal(response.status, 200);
+  assert.equal(await response.text(), PDF);
+  assert.equal(response.headers.get("Content-Type"), "text/plain; charset=utf-8");
+});
+
 test("serves everything else from the site's assets", async () => {
-  for (const path of ["/data.json", `/docs/${SHA.slice(16)}.pdf`, `/x${DOC}`, `${TRACE}.json`, "/trace/2027/main/x"]) {
+  for (const path of ["/data.json", `/docs/${SHA.slice(16)}.pdf`, `/x${DOC}`, `${TRACE}.json`, "/trace/2027/main/x",
+                      `/blobs/${SHA}.pdf`, `/docs/${SHA}.txt`]) {
     assert.equal(await (await fetchPath(path)).text(), `asset ${path}`);
   }
 });
