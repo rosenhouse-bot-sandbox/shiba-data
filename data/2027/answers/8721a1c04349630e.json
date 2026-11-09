@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-70.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 100, Podiatry services, Routine Foot Care (supplemental extra benefit): the page says 'This benefit covers you for 4 visits per year.' That matches a visit limit of 4 per year.\"}]\n```",
+ "usage": {
+  "input_tokens": 2287,
+  "output_tokens": 211,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

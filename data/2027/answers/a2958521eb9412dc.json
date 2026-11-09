@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-47.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 60 emergency row: $130 copay for emergency services outside the United States. This is worldwide coverage, which Medicare does not cover, so it is supplemental. Network does not apply outside the U.S.\"}]\n```",
+ "usage": {
+  "input_tokens": 1965,
+  "output_tokens": 318,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

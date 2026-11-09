@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-26.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 109, under supplemental benefits, lists Worldwide Urgently Needed Services (outside the United States) with a cost-share of a $130 copay. Urgent care falls under the emergency benefit. The member pays any provider and then submits a claim, so network any fits.\"}]\n```",
+ "usage": {
+  "input_tokens": 1920,
+  "output_tokens": 591,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

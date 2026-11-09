@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-83.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 63, Routine podiatry row (supplemental, beyond the Medicare-covered podiatry): additional routine foot care for members with a diabetes diagnosis, limited to 6 visits every calendar year. The limit sits in the service description, so it covers both in- and out-of-network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2440,
+  "output_tokens": 315,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

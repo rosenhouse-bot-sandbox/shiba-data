@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-52.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 70 Emergency care row for services outside the U.S. says: 'You are covered for up to $50,000 every year for emergency or urgently needed services outside the United States.' This matches a supplemental max of $50,000 with limit 'every year'. The page names no network, so the in-network default applies.\"}]\n```",
+ "usage": {
+  "input_tokens": 1965,
+  "output_tokens": 426,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

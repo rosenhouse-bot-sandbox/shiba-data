@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-76.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 84 'Additional routine foot care' row is supplemental and in addition to the Medicare-covered podiatry row. It states 'We cover 6 routine foot care visits every year', a visit limit of 6 per year.\"}]\n```",
+ "usage": {
+  "input_tokens": 2460,
+  "output_tokens": 190,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

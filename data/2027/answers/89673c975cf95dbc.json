@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "cd39f32cdbd73e52.md",
+ "reply": "```json\n[]\n```",
+ "usage": {
+  "input_tokens": 4430,
+  "output_tokens": 257,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

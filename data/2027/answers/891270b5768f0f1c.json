@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-71.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 85 'Additional routine foot care' row: $45 copayment for each routine visit. It is a supplemental routine benefit in addition to the Medicare-covered podiatry row, and the plan is UHC Complete Care OR-5.\"}]\n```",
+ "usage": {
+  "input_tokens": 2284,
+  "output_tokens": 315,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

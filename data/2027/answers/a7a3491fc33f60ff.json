@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-97.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 60 Meal benefit row: in-network $0 copay for up to 2 meals per day for 14 days (28 meals per episode). The qualifying-event wording is the usual post-discharge meal trigger, not a member-eligibility condition.\"}]\n```",
+ "usage": {
+  "input_tokens": 2171,
+  "output_tokens": 363,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

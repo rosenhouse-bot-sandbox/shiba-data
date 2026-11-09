@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-57.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 72 Worldwide Emergency Care (services outside the U.S.) row lists a $130 copay. The page calls worldwide emergency care a supplemental benefit, and out-of-network emergency cost sharing is the same as in-network, so network 'any' fits.\"}]\n```",
+ "usage": {
+  "input_tokens": 2294,
+  "output_tokens": 342,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-89.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 69 Meal benefit row: $0 copayment for home-delivered meals after a covered inpatient or SNF stay. This is a routine benefit not covered by Medicare, so supplemental. The item gives no limit field (the page says up to 28 meals for up to 14 days), so no stated field is wrong.\"}]\n```",
+ "usage": {
+  "input_tokens": 2368,
+  "output_tokens": 505,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

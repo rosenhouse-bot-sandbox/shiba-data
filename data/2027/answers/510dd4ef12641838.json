@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-43.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 71 Worldwide emergency and urgent care row: emergency or urgent care outside the U.S., in- and out-of-network, $130 copay per visit. Worldwide care is a supplemental benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2404,
+  "output_tokens": 235,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

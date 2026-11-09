@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-36.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 70, Worldwide Emergency Care (services outside the United States, marked as an extra benefit): cost-share for emergency services worldwide is a $115 copay. Network does not apply outside the U.S., so 'any' fits.\"}]\n```",
+ "usage": {
+  "input_tokens": 2066,
+  "output_tokens": 322,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "29166053e638f7e6.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-317-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 9, \"quotes\": [\"$0 copay for emergency diagnostic exam, periodic\", \"oral exam, prophylaxis (cleaning) up to 2 per year.\"], \"note\": \"Preventive services are $0. Limits vary by service: exams and cleanings up to 2 per year; bitewing x-rays up to 1 per year; comprehensive evaluation up to 1 every 3 years; panoramic film up to 1 every 5 years.\"},\n {\"plan_id\": \"H1036-317-0\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 9, \"quotes\": [\"$0 copay for amalgam filling, resin-based\"], \"note\": \"Comprehensive services are $0. Limits vary by service: fillings up to 1 per tooth per surface every 2 years; scaling and root planing up to 1 per quadrant every 3 years; periodontal maintenance up to 4 per year.\"}]\n```",
+ "usage": {
+  "input_tokens": 4033,
+  "output_tokens": 1073,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

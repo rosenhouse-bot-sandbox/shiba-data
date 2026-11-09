@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-55.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 68 Emergency care row: $115 copay for emergency services outside the United States. This is a supplemental benefit, since Medicare does not cover care outside the U.S. The page names no network, so the in-network default applies.\"}]\n```",
+ "usage": {
+  "input_tokens": 1871,
+  "output_tokens": 446,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

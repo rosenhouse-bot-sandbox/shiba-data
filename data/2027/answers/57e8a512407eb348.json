@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-54.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 71 emergency care row states coverage up to $50,000 every year for emergency or urgently needed services outside the United States. Care outside the U.S. is not Medicare-covered, so it is a supplemental benefit, and network any fits.\"}]\n```",
+ "usage": {
+  "input_tokens": 1970,
+  "output_tokens": 286,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
