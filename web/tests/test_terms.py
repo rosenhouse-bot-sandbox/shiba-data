@@ -24,7 +24,7 @@ class TermsTest(unittest.TestCase):
 
     def test_the_view_names_exactly_these_terms(self):
         script = ('import("./static/pipeline.js").then((m) => console.log(JSON.stringify('
-                  'm.STEPS.flatMap((s) => s.paras.flat()).filter(Array.isArray).map((s) => s[0]))))')
+                  'm.STEPS.flatMap((s) => [...s.paras, ...s.example.paras].flat()).filter(Array.isArray).map((s) => s[0]))))')
         used = set(json.loads(subprocess.run(["node", "-e", script], cwd=HERE.parent, capture_output=True, text=True,
                                              check=True).stdout))
         self.assertEqual(used, set(terms.TERMS))
