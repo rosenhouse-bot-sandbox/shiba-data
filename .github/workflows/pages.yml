@@ -33,7 +33,7 @@ jobs:
         working-directory: .
       - run: python3 -I -m unittest discover -s tests
       - run: python3 -I -m unittest discover -s ../pipeline/tests
-      - run: node --test tests/highlight.test.mjs tests/ago.test.mjs tests/permalink.test.mjs tests/worker.test.mjs
+      - run: node --test tests/highlight.test.mjs tests/ago.test.mjs tests/permalink.test.mjs tests/worker.test.mjs tests/pipeline.test.mjs
       - run: python3 -I build.py site ../_site
       # The e2e tests open each PDF the site links. The public site serves every blob, so pull requests need no secret.
       - run: |

@@ -12,6 +12,9 @@ const cases = [
   ["#/2027/plan/H3805-048-0/dvha/dental/SB/3",
     { year: 2027, view: "plan", plan: "H3805-048-0", sheet: "dvha", column: "dental", kind: "SB", page: 3 }],
   ["#/2027/notes", { year: 2027, view: "notes" }],
+  ["#/2027/how", { year: 2027, view: "how" }],
+  ["#/2027/how/main/H1036-153-0/ambulance/column-rules",
+    { year: 2027, view: "how", plan: "H1036-153-0", sheet: "main", column: "ambulance", step: "column-rules" }],
   ["#/2027/notes/main/H3805-048-0/ambulance/RIDER/2",
     { year: 2027, view: "notes", plan: "H3805-048-0", sheet: "main", column: "ambulance", kind: "RIDER", page: 2 }],
 ];
@@ -46,4 +49,9 @@ test("an unknown view falls back to the main sheet", () => {
 
 test("a malformed escape is read as it is", () => {
   assert.deepEqual(parse("#/2027/main/%/x", 2027), { year: 2027, view: "main", plan: "%", sheet: "main", column: "x" });
+});
+
+test("a pipeline link with no step opens the cell's first step", () => {
+  assert.deepEqual(parse("#/2027/how/main/H1/ambulance", 2027),
+    { year: 2027, view: "how", plan: "H1", sheet: "main", column: "ambulance" });
 });

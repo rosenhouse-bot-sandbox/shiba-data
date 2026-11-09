@@ -748,3 +748,51 @@ test("permalink: an old Ambiguities link opens Notes, and a page link in a note 
   await fresh.waitForFunction(() => location.hash === "#/2027/notes/main/H6815-038-0/tests_labs/EOC/82");
   await fresh.close();
 });
+
+test("pipeline view: the nav link opens the example cell's first step", async () => {
+  await page.goto(`${base}#/main`);
+  await page.click("nav a[data-view=how]");
+  await page.waitForSelector(".how-lens");
+  assert.match(page.url(), /#\/2027\/how\/main\/H1036-153-0\/ambulance\/list-plans$/);
+  assert.equal(await page.textContent(".how-step"), "List the plans");
+});
+
+test("pipeline view: Next steps through every step, each showing the cell's rows or why there are none", async () => {
+  await page.goto(`${base}#/2027/how`);
+  await page.waitForSelector(".how-lens");
+  const labels = [];
+  for (;;) {
+    labels.push(await page.textContent(".how-step"));
+    assert.ok(await page.locator(".how-rows .hi, .how-none").count(), labels.at(-1));
+    const next = page.locator("a.how-nav[rel=next]");
+    if (!(await next.count())) break;
+    await next.click();
+    await page.waitForFunction((n) => document.querySelector(".how-count")?.textContent.startsWith(`${n} `), labels.length + 1);
+  }
+  assert.equal(labels.length, 13);
+  assert.equal(labels.at(-1), "Publish");
+});
+
+test("pipeline view: a step on the map opens in the lens, and Back returns", async () => {
+  await page.goto(`${base}#/2027/how/main/H1036-153-0/ambulance/check-facts`);
+  await page.waitForSelector(".how-lens");
+  await page.click(".how-pill:text-is('Column rules')");
+  await page.waitForFunction(() => document.querySelector(".how-step")?.textContent === "Column rules");
+  assert.equal(await page.locator(".how-node.on").count(), 2);
+  assert.equal(await page.locator(".how-rows.input .hi").count(), 4);
+  await page.goBack();
+  await page.waitForFunction(() => document.querySelector(".how-step")?.textContent === "Check facts");
+});
+
+test("pipeline view: a step that leaves the cell alone says so instead of showing rows", async () => {
+  await page.goto(`${base}#/2027/how/main/H1036-153-0/ambulance/added-facts`);
+  await page.waitForSelector(".how-lens");
+  assert.match(await page.textContent(".how-rows.input .how-none"), /no added facts/);
+  assert.equal(await page.locator(".how-rows table").count(), 0);
+});
+
+test("pipeline view: an unknown step opens the first step", async () => {
+  await page.goto(`${base}#/2027/how/main/H1036-153-0/ambulance/nope`);
+  await page.waitForSelector(".how-lens");
+  assert.equal(await page.textContent(".how-step"), "List the plans");
+});
