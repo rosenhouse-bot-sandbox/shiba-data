@@ -13,7 +13,7 @@ const SCALE = RAIL_W / MAP_W;
 export const howLink = (year, step) => format({ year, view: "how", ...EXAMPLE, step: step.id });
 const shown = (id) => NODES[id].table ?? NODES[id].text;
 
-export function howView(year, step) {
+export function howView(year, step, terms) {
   const at = STEPS.indexOf(step);
   const link = (s) => howLink(year, s);
   const prev = STEPS[at - 1], next = STEPS[at + 1];
@@ -26,7 +26,7 @@ export function howView(year, step) {
       prev ? el("a", { class: "how-nav", href: link(prev), rel: "prev" }, "← Prev") : el("span", { class: "how-nav off" }, "← Prev"),
       el("span", { class: "how-count" }, `${at + 1} of ${STEPS.length}`),
       next ? el("a", { class: "how-nav primary", href: link(next), rel: "next" }, "Next →") : el("span", { class: "how-nav primary off" }, "Next →")),
-    el("div", { class: "how-body" }, map(step, link), lens(step, link)));
+    el("div", { class: "how-body" }, map(step, link), lens(step, link, terms)));
 }
 
 function map(step, link) {
@@ -61,7 +61,7 @@ function map(step, link) {
       el("span", { class: "source" }, "■"), " source ", el("span", {}, "■"), " table the pipeline writes"));
 }
 
-function lens(step, link) {
+function lens(step, link, terms) {
   const chips = (steps, cls, text) => steps.length ? el("div", { class: `how-chips ${cls}` },
     ...steps.map((s) => el("a", { href: link(s) }, text(s.label)))) : null;
   const end = (id) => el("div", { class: `how-end${NODES[id].source ? " source" : ""}` },
@@ -72,13 +72,71 @@ function lens(step, link) {
       el("h2", { class: "how-step", tabindex: "-1" }, step.label), el("span", { class: "how-wire to" }), end(step.to)),
     el("div", { class: "how-card" },
       el("p", { class: "how-strip" }, el("code", { class: "from" }, step.before), " becomes ", el("code", { class: "to" }, step.after)),
-      ...step.paras.map((p) => el("p", {}, ...p.map(segment)))),
+      ...step.paras.map((p) => el("p", {}, ...p.map((s) => typeof s === "string" ? s : term(terms[s[0]], s[1]))))),
     rows("Input", step.from, step.highlight[0], step.none?.[0]),
     rows("Output", step.to, step.highlight[1], step.none?.[1]),
     chips(after(step), "after", (l) => `next: ${l} ↘`));
 }
 
-const segment = (s) => typeof s === "string" ? s : el("span", { class: "how-term", "data-term": s[0] }, s[1]);
+let pops = 0;
+// The one open pop-over, if any.
+let opened = null;
+
+const MARGIN = 8;
+
+// Hovering or focusing a term shows what it means and the code behind it. Clicking pins it open.
+function term(t, text) {
+  const id = `how-pop-${++pops}`;
+  const button = el("button", { type: "button", class: "how-term", "aria-expanded": "false", "aria-controls": id }, text);
+  const pop = el("div", { class: "how-pop", id },
+    el("strong", {}, t.title), el("span", {}, t.text),
+    t.code ? el("pre", {}, t.code) : null,
+    el("a", { href: t.url, target: "_blank", rel: "noopener" }, `${t.where} ↗`));
+  const box = el("span", { class: "how-term-box" }, button, pop);
+  let pinned = false;
+  const close = () => {
+    pinned = false;
+    box.classList.remove("open");
+    button.setAttribute("aria-expanded", "false");
+    if (opened?.box === box) opened = null;
+  };
+  const open = () => {
+    if (opened?.box !== box) opened?.close();
+    opened = { box, close };
+    box.classList.add("open");
+    button.setAttribute("aria-expanded", "true");
+    place(pop, button.getBoundingClientRect());
+  };
+  const leave = () => pinned || box.contains(document.activeElement) || close();
+  box.addEventListener("mouseenter", open);
+  box.addEventListener("mouseleave", leave);
+  button.addEventListener("focus", open);
+  box.addEventListener("focusout", (e) => pinned || box.contains(e.relatedTarget) || close());
+  button.addEventListener("click", () => {
+    if (pinned) return close();
+    open();
+    pinned = true;
+  });
+  return box;
+}
+
+// Places a pop-over under its term, or above it when there is no room, inside the window.
+function place(pop, at) {
+  const { innerWidth: w, innerHeight: h } = window;
+  pop.style.maxWidth = `${w - 2 * MARGIN}px`;
+  const { width, height } = pop.getBoundingClientRect();
+  pop.style.left = `${Math.max(MARGIN, Math.min(at.left, w - width - MARGIN))}px`;
+  const below = at.bottom + 4;
+  pop.style.top = `${below + height <= h - MARGIN ? below : Math.max(MARGIN, at.top - height - 4)}px`;
+}
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") opened?.close();
+});
+document.addEventListener("click", (e) => {
+  if (opened && !opened.box.contains(e.target)) opened.close();
+});
+document.addEventListener("scroll", (e) => opened && !opened.box.contains(e.target) && opened.close(), true);
 
 function rows(role, id, highlight, none) {
   const n = NODES[id], hi = new Set(highlight);

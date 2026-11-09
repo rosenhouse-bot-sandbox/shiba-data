@@ -150,7 +150,7 @@ function routeHow(state) {
   const stepping = here?.view === "how";
   const mapTop = stepping ? content.querySelector(".how-map").scrollTop : 0;
   if (here && !stepping) scrollTops[here.key] = content.scrollTop;
-  content.replaceChildren(howView(site.year, step));
+  content.replaceChildren(howView(site.year, step, site.terms));
   content.querySelector(".how-map").scrollTop = mapTop;
   if (stepping) content.querySelector(".how-step").focus({ preventScroll: true });
   here = { key: "how", view: "how" };
