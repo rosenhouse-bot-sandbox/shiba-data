@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-bee1858e7e963c62.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"The page 97 Worldwide urgent care row does state a $250,000 yearly allowance. But worldwide coverage outside the U.S. is a supplemental benefit, not Medicare-covered, so covered_by 'medicare' is unsupported.\"}]\n```",
+ "usage": {
+  "input_tokens": 1967,
+  "output_tokens": 193,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

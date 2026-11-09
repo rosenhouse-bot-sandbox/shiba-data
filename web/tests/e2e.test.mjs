@@ -120,8 +120,8 @@ test("clicking a cited cell highlights the quote on its page", async () => {
 test("clicking a DVHA cell with an EOC citation highlights the quote", async () => {
   await page.goto(`${base}#/dvha`);
   await row("H3805-048-0").locator("td.cited", { hasText: "Routine foot care" }).click();
-  await shown(docOf("H3805-048-0", "EOC"), 84);
-  assert.match((await page.locator(".textLayer mark").allTextContents()).join(" "), /\$45 copayment/);
+  await shown(docOf("H3805-048-0", "EOC"), 60);
+  assert.match((await page.locator(".textLayer mark").allTextContents()).join(" "), /Fitness program/);
 });
 
 test("clicking an uncited cell opens the summary of benefits with a note", async () => {
@@ -515,7 +515,7 @@ test("a cited blank cell says the document shows why", async () => {
 test("a link followed while the document scrolls still opens its sheet", async () => {
   await page.goto(`${base}#/dvha`);
   await row("H3805-048-0").locator("td.cited", { hasText: "Routine foot care" }).click();
-  await shown(docOf("H3805-048-0", "EOC"), 84);
+  await shown(docOf("H3805-048-0", "EOC"), 60);
   await page.evaluate(() => {
     location.hash = "#/main";
     document.querySelector("#page-area").dispatchEvent(new Event("scroll"));

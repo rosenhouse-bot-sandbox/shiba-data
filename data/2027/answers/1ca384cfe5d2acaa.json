@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "bee1858e7e963c62.md",
+ "reply": "```json\n[{\"plan_id\": \"H7006-018-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$300\", \"unit\": \"\", \"limit\": \"\", \"page\": 58, \"quotes\": [\"Worldwide emergency coverage $300 copay\", \"Worldwide urgent care coverage $300 copay\"], \"note\": \"Worldwide emergency and worldwide urgent care rows each show a $300 copay. Network set to the in-network default because the document gives no network split for care outside the U.S.\"},\n {\"plan_id\": \"H7006-018-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"max\", \"amount\": \"$250,000\", \"unit\": \"\", \"limit\": \"per year\", \"page\": 97, \"quotes\": [\"$250,000 allowance every year for all covered worldwide services.\"], \"note\": \"Network set to the in-network default because the document gives no network split for care outside the U.S.\"}]\n```",
+ "usage": {
+  "input_tokens": 5959,
+  "output_tokens": 1836,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

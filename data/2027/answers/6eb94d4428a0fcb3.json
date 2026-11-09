@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-28.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 68 Worldwide Emergency Care row: the plan covers worldwide emergency, urgent care and ambulance services up to $25,000 per lifetime, only when traveling outside the U.S. It is listed as a supplemental (extra) benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2233,
+  "output_tokens": 284,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

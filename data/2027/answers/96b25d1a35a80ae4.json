@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-90.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 69 Meal benefit row: up to 28 home-delivered meals for up to 14 days, used right after a covered inpatient hospital or SNF stay. Meals are a supplemental benefit and the limit matches the page.\"}]\n```",
+ "usage": {
+  "input_tokens": 2428,
+  "output_tokens": 333,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "e306f120395b6260.md",
+ "reply": "```json\n[{\"plan_id\": \"H2406-073-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"max\", \"amount\": \"$4,000\", \"unit\": \"\", \"limit\": \"per year\", \"page\": 95, \"quotes\": [\"Annual dental maximum: $4,000\"], \"note\": \"\"},\n {\"plan_id\": \"H2406-073-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"page\": 48, \"quotes\": [\"You are covered or routine dental bene its.\"], \"note\": \"\"},\n {\"plan_id\": \"H2406-073-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"page\": 96, \"quotes\": [\"This dental plan o ers both in-network and out-o -\"], \"note\": \"Out-of-network routine dental is covered, but the page states no specific out-of-network cost share.\"}]\n```",
+ "usage": {
+  "input_tokens": 7669,
+  "output_tokens": 1039,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

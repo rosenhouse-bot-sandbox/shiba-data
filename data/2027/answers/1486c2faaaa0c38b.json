@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "cabbc3b82885b498.retry.md",
+ "reply": "```json\n[]\n```\n\nThe failed fact can't be fixed, so I left it out. Page 7 says preventive dental gets \"100% reimbursement up to the yearly allowance.\" That implies the member pays 0% coinsurance, but no text on the page shows \"0%\", so no quote can pass the number check. Recording \"100%\" as the member's coinsurance would be wrong.",
+ "usage": {
+  "input_tokens": 2931,
+  "output_tokens": 415,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

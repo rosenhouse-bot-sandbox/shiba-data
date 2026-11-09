@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "61de2101267140ce.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H1372-003-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"2\", \"limit\": \"per year\", \"page\": 5, \"quotes\": [\"oral exams (up to 2 per year)\", \"cleanings (up to 2 per year)\"], \"note\": \"The limit of 2 per year applies to oral exams and to cleanings, each counted separately. Fluoride treatments (up to 1 every 6 months) are left out because they would be a second answer for this fact.\"}]\n```",
+ "usage": {
+  "input_tokens": 2651,
+  "output_tokens": 585,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

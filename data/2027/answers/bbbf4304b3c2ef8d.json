@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-68.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 82 'Additional routine foot care' row (supplemental): $45 copayment for each routine visit in network; the $80 is out of network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2280,
+  "output_tokens": 227,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

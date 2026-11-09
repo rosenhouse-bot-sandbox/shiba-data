@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-15.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 95, under the routine dental benefits included with the plan, reads 'Annual dental maximum: $4,000'. That is a supplemental dental maximum of $4,000 per year. No network is stated, so in-network applies by default.\"}]\n```",
+ "usage": {
+  "input_tokens": 2267,
+  "output_tokens": 287,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

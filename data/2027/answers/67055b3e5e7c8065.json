@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-0050f865534f41bb.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 74 shows a $0 in-network copay for the Virtual Cardiac Recovery Program, but the condition is a loose paraphrase, not the document's words. It also leaves out required criteria: a hospitalization within the past 30 days, plus HFrEF or an additional qualifying condition. Counselors could tell ineligible members they qualify.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Page 74 does say up to 36 sessions per episode. However, the condition paraphrases and understates eligibility: it omits the 30-day window and the HFrEF or additional-condition requirement. The fact is incomplete in a way that could mislead counselors.\"}]\n```",
+ "usage": {
+  "input_tokens": 2672,
+  "output_tokens": 668,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-87.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 69 Meal benefit row reads 'Receive up to 28 home-delivered meals [f]or up to 14 days' after a covered inpatient or SNF stay. The supplemental visit limit of 28 meals, the unit and the 14-day limit all match.\"}]\n```",
+ "usage": {
+  "input_tokens": 2358,
+  "output_tokens": 522,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

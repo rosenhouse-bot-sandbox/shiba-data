@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "a744eaa24232bb11.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-306-0\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"0%\", \"page\": 78, \"quotes\": [\"Periodontal maintenance following periodontal therapy – D4910 0%\"]},\n {\"plan_id\": \"H1036-306-0\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"100%\", \"page\": 78, \"quotes\": [\"Periodontal maintenance following periodontal therapy – D4910 0% 100%\"], \"note\": \"The chart's out-of-network column shows 100%. Page 88 says services from out-of-network dentists are not covered.\"},\n {\"plan_id\": \"H1036-306-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"100%\", \"page\": 78, \"quotes\": [\"Periodic oral exam – D0120 0% 100%\", \"Prophylaxis (cleaning) – D1110 0% 100%\"], \"note\": \"The chart's out-of-network column shows 100%. Page 88 says services from out-of-network dentists are not covered.\"}]\n```",
+ "usage": {
+  "input_tokens": 12807,
+  "output_tokens": 1610,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

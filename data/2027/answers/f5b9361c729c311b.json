@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-cabbc3b82885b498.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 7 says the plan reimburses 50% of comprehensive dental costs, up to a shared $2,000 yearly allowance. It is not a member coinsurance. Under the vocabulary, a shared allowance that names dental is an allowance fact with its pool, so recording 50% as coinsurance misstates the cost kind.\"}]\n```",
+ "usage": {
+  "input_tokens": 2398,
+  "output_tokens": 459,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

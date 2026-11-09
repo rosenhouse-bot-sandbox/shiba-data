@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "4ec81cd0d2695486.md",
+ "reply": "```json\n[{\"plan_id\": \"H1372-003-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 57, \"quotes\": [\"There is no coinsurance or copayment for supplemental dental benefits.\"], \"note\": \"The chart says there is no coinsurance or copayment for supplemental dental, so this is stated as a $0 copay.\"},\n {\"plan_id\": \"H1372-003-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"page\": 57, \"quotes\": [\"Supplemental benefits Preventive dental services\"]},\n {\"plan_id\": \"H1372-003-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"2\", \"limit\": \"per year\", \"page\": 57, \"quotes\": [\"Plan will only cover 2 of periodic, limited, periodontal\", \"Limit 2 visits every year\"], \"note\": \"The page gives 2 oral exams per calendar year and 2 cleanings per year. Other preventive services have different limits.\"}]\n```",
+ "usage": {
+  "input_tokens": 5018,
+  "output_tokens": 1360,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-24.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 39, Section 3.2: emergency and urgently needed services outside the United States are not covered under any circumstances, in or out of network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2084,
+  "output_tokens": 329,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
