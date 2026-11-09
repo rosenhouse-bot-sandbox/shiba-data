@@ -240,3 +240,33 @@ const STRIPS = {
 // [before, after] for a step, or null when the trace does not say.
 export const strip = (step, trace) =>
   trace?.[step.record]?.status === "traced" && STRIPS[step.id] ? STRIPS[step.id](trace) : null;
+
+const docKind = (t, task) => t.documents.documents.find((d) => d.sha256.startsWith(task.replace(/^v-/, "").split(".")[0]))?.kind ?? "PDF";
+const prompts = (t, verifier) => t.answers.status !== "traced" ? [] : t.answers.rows.flatMap((a) => a.prompts
+  .filter((p) => p.task.startsWith("v-") === verifier)
+  .map((p) => ({ text: `${docKind(t, p.task)} ${verifier ? "verifier prompt" : `reader prompt, answered by ${a.model}`}`, href: p.url })));
+const fact = (source, page, f) => `${source} page ${page}, ${[f.benefit, f.amount].filter(Boolean).join(" ")}`;
+
+function checked(r) {
+  const stated = r.stated_by[0]?.stated ?? {};
+  const said = [r.fact ? fact(r.fact.source, r.fact.page, stated) : fact("PDF", stated.page, stated)];
+  if (r.code_check && r.code_check !== "passed") said.push(`Quote check: ${r.code_check}`);
+  for (const v of r.verifier) said.push(`Verifier: ${v.reason}`);
+  if (r.reviewer.status === "traced") said.push(`Reviewer: ${r.reviewer.reason}`);
+  else if (r.reviewer.note) said.push(`Reviewer: ${r.reviewer.note.replace(/ \(#\d+\)/, "")}`);
+  return { text: `${r.kept ? "Kept" : "Rejected"}: ${said.map((x) => x.replace(/\.$/, "")).join(". ")}.` };
+}
+
+// Lines that show a step's work for a cell, read from its trace.
+const DETAILS = {
+  "read-facts": (t) => prompts(t, false),
+  "check-facts": (t) => [...t.fact_checks.rows.map(checked), ...prompts(t, true)],
+  "column-rules": (t) => [
+    ...(t.rule.held ? [{ text: `Held: ${t.rule.held}` }] : []),
+    ...t.rule.lines.flatMap((l) => l.facts.map((f) => ({ text: `Line ${l.line} used ${fact(f.source, f.page, f)}` }))),
+    ...t.rule.set_aside.map((f) => ({ text: `Set aside ${fact(f.source, f.page, f)}: ${f.reasons.join("; ")}` })),
+  ],
+};
+
+export const details = (step, trace) =>
+  trace?.[step.record]?.status === "traced" && DETAILS[step.id] ? DETAILS[step.id](trace) : [];

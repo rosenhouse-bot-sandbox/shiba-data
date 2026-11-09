@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import fs from "node:fs";
 import assert from "node:assert/strict";
-import { NODES, STEPS, LINKS, nodeBox, pillBox, edge, before, after, stepById, chain, strip } from "../static/pipeline.js";
+import { NODES, STEPS, LINKS, nodeBox, pillBox, edge, before, after, stepById, chain, strip, details } from "../static/pipeline.js";
 
 const inside = ([x, y], b) => x > b.x && x < b.x + b.w && y > b.y && y < b.y + b.h;
 
@@ -152,4 +152,35 @@ test("a held cell's rule strip says why", () => {
 test("every step of a replayed trace's chain has a strip, except added facts the cell lacks", () => {
   const missing = chain(replay).filter((s) => !strip(s, replay)).map((s) => s.id);
   assert.deepEqual(missing, ["added-facts"]);
+});
+
+const BLOBS = "https://pdxplans.org/blobs/";
+const lines = (id) => details(stepById(id), replay);
+
+test("Claude reads facts links each reader prompt", () => {
+  assert.deepEqual(lines("read-facts"), [
+    { text: "EOC reader prompt, answered by claude-opus-5-5", href: `${BLOBS}226ee67e4a27f3e7c117e6aa8e197a07423fac0b4d1fe9b6d6033e8602313064.txt` },
+    { text: "SB reader prompt, answered by claude-opus-5-5", href: `${BLOBS}6761dbbfbd4ec26bccf84990d6d9db9b6ff67e7aa12674da3851203ab390d96b.txt` },
+  ]);
+});
+
+test("Check facts gives each fact's verdicts", () => {
+  const got = lines("check-facts").map((l) => l.text);
+  assert.equal(got.length, 8 + 2);
+  assert.match(got[0], /^Kept: EOC page 46, ambulance\.ground \$325\. Verifier: Page 46 ambulance row/);
+  assert.match(got[0], /Reviewer: trusted without review\.$/);
+  assert.match(got[7], /^Rejected: SB page 6, ambulance \$325\. Verifier: The page 6 Worldwide Coverage/);
+  assert.deepEqual(lines("check-facts").slice(8).map((l) => l.text), ["EOC verifier prompt", "SB verifier prompt"]);
+});
+
+test("Column rules lists the facts each line used and why others were set aside", () => {
+  const got = lines("column-rules").map((l) => l.text);
+  assert.ok(got.includes("Line 2 used EOC page 46, ambulance $325"));
+  assert.ok(got.includes("Set aside SB page 9, ambulance.air 20%: SB ranks below EOC"));
+});
+
+test("a step without a traced record has no details", () => {
+  assert.deepEqual(details(stepById("check-facts"), { ...replay, fact_checks: { status: "not_recorded" } }), []);
+  assert.deepEqual(details(stepById("draft"), replay), []);
+  assert.deepEqual(details(stepById("draft"), null), []);
 });
