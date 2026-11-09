@@ -21,9 +21,9 @@ PRESENTED = "generated/presented.csv"
 # Code-made cells come first, then model steps' rows, then columns presented from facts,
 # then edits by people or the Claude sessions they steer.
 LAYERS = ("generated/citations.csv", XREF, BLANKS, FILLED, PRESENTED, EDITS)
-# Model steps only cite, because a person reviews their corrections first (issue #48).
+# Model steps only cite until a person reviews their corrections (issue #48).
 CITE_ONLY = {XREF, BLANKS, FILLED}
-# A person strikes a machine quote that does not support its cell, so the site does not show it.
+# struck.csv hides a machine quote that does not support its cell.
 STRUCK, STRUCK_COLUMNS = "struck.csv", ["sheet", "plan_id", "column", "quote", "note"]
 
 

@@ -44,7 +44,7 @@ class NoteWordingTest(unittest.TestCase):
     def test_notes_do_not_name_the_pipeline(self):
         jargon = re.compile(r"reader|expert's|#\d", re.I)
         notes = [r["comment"] for r in csv.DictReader(open(DATA / "comments.csv"))]
-        notes += [r["note"] for r in csv.DictReader(open(DATA / "override_facts.csv"))]
+        notes += [r["note"] for r in csv.DictReader(open(DATA / "added_facts.csv"))]
         self.assertEqual([n for n in notes if jargon.search(n)], [])
 
 
@@ -100,9 +100,9 @@ class SiteDataTest(unittest.TestCase):
         self.assertEqual((comment["doc"], comment["page"]), ("90a4efa6544175a2", 83))
         self.assertIn("EKGs", comment["quote"])
 
-    def test_comment_kind_is_a_question_a_caveat_or_a_hand_written_fact(self):
+    def test_comment_kind_is_a_question_a_caveat_or_a_added_fact(self):
         self.assertEqual(self.cell("main", "H6815-038-0", "K_tests_labs")["comment"]["kind"], "question")
-        for kind in ("caveat", "hand_written"):
+        for kind in ("caveat", "added"):
             with tempfile.TemporaryDirectory() as tmp:
                 data = data_copy(tmp, [])
                 (data / "comments.csv").write_text(

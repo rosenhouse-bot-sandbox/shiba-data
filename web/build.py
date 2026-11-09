@@ -123,7 +123,7 @@ def site_data(data_dir=DATA, layer_names=layers.LAYERS, ignore=None):
             raise ValueError(f"comments.csv names no cell: {c['sheet']} {c['plan_id']} {c['column']}")
         if (c["plan_id"], c["column"]) in comments[c["sheet"]]:
             raise ValueError(f"comments.csv names a cell twice: {c['sheet']} {c['plan_id']} {c['column']}")
-        if c["kind"] not in ("question", "caveat", "hand_written"):
+        if c["kind"] not in ("question", "caveat", "added"):
             raise ValueError(f"comments.csv {c['plan_id']} {c['column']}: unknown kind {c['kind']}")
         for ref in PAGE_REF.finditer(c["comment"]):
             kind, page = ref[1].upper(), int(ref[2])

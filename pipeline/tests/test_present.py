@@ -120,7 +120,7 @@ class AmbulanceTest(unittest.TestCase):
         self.assertEqual(ambulance(trip(), trip(amount="$0", condition="home treatment"),
                                    trip("ambulance", "", setting="outside_us", cost_kind="covered")), ["$0-$300", "$300"])
 
-    def test_line_2_says_eoc_unclear_when_a_hand_written_fact_says_so(self):
+    def test_line_2_says_eoc_unclear_when_a_added_fact_says_so(self):
         self.assertEqual(ambulance(trip(), trip("ambulance", "", setting="outside_us", cost_kind="unclear"),
                                    trip("ambulance", "$500", setting="outside_us"))[1], "EOC unclear")
 
@@ -522,39 +522,39 @@ def shown(lines, line):
     return " | ".join(lines).removesuffix(" | ") if not line else lines[int(line) - 1]
 
 
-class OverrideTest(unittest.TestCase):
-    def test_plan_facts_include_hand_written_facts(self):
+class AddedFactTest(unittest.TestCase):
+    def test_plan_facts_include_added_facts(self):
         with tempfile.TemporaryDirectory() as tmp:
             data = pathlib.Path(tmp)
-            for name in ("machine/document_facts.csv", "generated/pbp_facts.csv", present.OVERRIDES):
+            for name in ("machine/document_facts.csv", "generated/pbp_facts.csv", present.ADDED):
                 os.makedirs(data / os.path.dirname(name), exist_ok=True)
                 with open(data / name, "w", newline="") as f:
                     out = csv.DictWriter(f, facts.COLUMNS)
                     out.writeheader()
-                    if name == present.OVERRIDES:
-                        out.writerow(fact(amount="$1", note="hand-written"))
+                    if name == present.ADDED:
+                        out.writerow(fact(amount="$1", note="added"))
             self.assertEqual([f["amount"] for f in present.plan_facts(data)["H1036-153-0"]], ["$1"])
 
-    def test_hand_written_facts_say_why_and_pass_the_fact_checks_but_for_cost_kind_unclear(self):
-        rows = facts.read(years.data_dir(YEAR) / present.OVERRIDES)
+    def test_added_facts_say_why_and_pass_the_fact_checks_but_for_cost_kind_unclear(self):
+        rows = facts.read(years.data_dir(YEAR) / present.ADDED)
         self.assertTrue(rows and all(r["note"] and r["source"] in facts.DOCUMENTS for r in rows))
         self.assertEqual([(r["plan_id"], p) for r in rows for p in facts.check(r) if p != "cost_kind: 'unclear'"], [])
         self.assertLessEqual({r["cost_kind"] for r in rows} - set(facts.COST_KINDS), {"unclear"})
 
 
-    def test_a_cell_has_a_hand_written_fact_note_exactly_when_it_cites_a_hand_written_fact(self):
+    def test_a_cell_has_a_added_fact_note_exactly_when_it_cites_a_added_fact(self):
         data = years.data_dir(YEAR)
         url = {d["sha256"]: d["url"] for d in layers.rows(data / "generated" / "documents_checked.csv") if d["sha256"]}
-        hand_written = {(f["plan_id"], url[f["doc_sha"]], f["page"], q)
-                        for f in facts.read(data / present.OVERRIDES) for q in json.loads(f["quotes"])}
+        added = {(f["plan_id"], url[f["doc_sha"]], f["page"], q)
+                        for f in facts.read(data / present.ADDED) for q in json.loads(f["quotes"])}
         citing = {(r["plan_id"], r["column"]) for r in layers.rows(data / layers.PRESENTED)
-                  if (r["plan_id"], r["url"], r["pdf_page"], r["quote"]) in hand_written}
+                  if (r["plan_id"], r["url"], r["pdf_page"], r["quote"]) in added}
         noted = {(c["plan_id"], c["column"]) for c in layers.rows(data / "comments.csv")
-                 if c["sheet"] == "main" and c["kind"] == "hand_written"
+                 if c["sheet"] == "main" and c["kind"] == "added"
                  and (c["column"], c["plan_id"]) not in present.held(data)}
         self.assertTrue(citing)
-        self.assertEqual(sorted(citing - noted), [], "cells that cite a hand-written fact but have no note")
-        self.assertEqual(sorted(noted - citing), [], "notes about a hand-written fact that the cell no longer cites")
+        self.assertEqual(sorted(citing - noted), [], "cells that cite an added fact but have no note")
+        self.assertEqual(sorted(noted - citing), [], "notes about an added fact that the cell no longer cites")
 
 class WriteTest(unittest.TestCase):
     def test_writes_the_layer_rows(self):

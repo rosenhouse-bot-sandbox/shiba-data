@@ -379,7 +379,7 @@ In both steps, code checks each quote, and Claude Sonnet and then Claude Opus ve
 
 Some cells need judgment that no rule or reader handles. Claude sessions make those calls in pull requests and record them in four tables.
 
-An **added fact** adds a fact the readers missed, with a note saying why. Step 7's rules read it like any other fact. `override_facts.csv`, selected columns:
+An **added fact** adds a fact the readers missed, with a note saying why. Step 7's rules read it like any other fact. `added_facts.csv`, selected columns:
 
 ```
 plan_id,benefit,setting,cost_kind,source,page,quotes,note
@@ -390,11 +390,11 @@ H1372-003-0,ambulance,outside_us,not_covered,EOC,41,"[""Our plan doesn’t cover
 
 That fact makes line 2 of the AgeRight plan's Ambulance cell read `not covered`.
 
-A **note** explains a cell to volunteers. A `hand_written` note, in green, marks a value that uses an added fact. A `caveat`, in lavender, gives a settled detail the value leaves out. A `question`, in yellow, flags a value that needs a domain expert's check. `comments.csv`, selected columns:
+A **note** explains a cell to volunteers. A `added` note, in green, marks a value that uses an added fact. A `caveat`, in lavender, gives a settled detail the value leaves out. A `question`, in yellow, flags a value that needs a domain expert's check. `comments.csv`, selected columns:
 
 ```
 sheet,plan_id,column,kind,comment,pdf_page,quote
-main,H1372-003-0,AB_ambulance,hand_written,"The EOC excludes all care abroad, so it excludes ambulances there.",41,"Our plan doesn’t cover …"
+main,H1372-003-0,AB_ambulance,added,"The EOC excludes all care abroad, so it excludes ambulances there.",41,"Our plan doesn’t cover …"
 dvha,H1372-003-0,F_dental,caveat,"EOC page 57 says there is no coinsurance or copayment for supplemental dental benefits, … The EOC does not say how often the maximum resets.",57,"Maximum: $1,000 for"
 main,H7199-002-0,L_xray_imaging,question,"EOC page 96 prices X-rays at $25 in every office setting. …",96,X-rays PCP's office: $25 copay
 ```
@@ -430,7 +430,7 @@ edits.csv                                (9)  yes           (none)              
 live sheet                                                  $325 or 20% | $325      $0-$30 | $205-$330
 ```
 
-Code drops a citation whose value differs from the cell's final value. So a quote never supports a value it doesn't show. `machine/eoc_citations.csv` holds citations that Claude sessions found by hand.
+Code drops a citation whose value differs from the cell's final value. So a quote never supports a value it doesn't show. `machine/eoc_citations.csv` holds citations that Claude sessions found before the pipeline existed.
 
 ## 11. Publish
 
