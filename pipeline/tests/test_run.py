@@ -109,7 +109,7 @@ class StepsTest(unittest.TestCase):
         self.assertEqual(order, ["blanks", ("work/facts", 3, 4), ("present", 4), ("filled", {"version": 2})])
 
     def test_knows_every_pinned_step(self):
-        self.assertEqual(set(run.STEPS), set(json.load(open(years.data_dir(years.LIVE) / "steps.json"))))
+        self.assertEqual(set(run.STEPS), set(json.loads((years.data_dir(years.LIVE) / "steps.json").read_text())))
 
 
 class MainTest(unittest.TestCase):

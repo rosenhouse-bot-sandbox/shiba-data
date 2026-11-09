@@ -44,8 +44,8 @@ H6815_038_EOC = "https://www.wellcareor.com/content/dam/centene/medicare/pdfs/ae
 class NoteWordingTest(unittest.TestCase):
     def test_notes_do_not_name_the_pipeline(self):
         jargon = re.compile(r"reader|expert's|#\d", re.I)
-        notes = [r["comment"] for r in csv.DictReader(open(DATA / "comments.csv"))]
-        notes += [r["note"] for r in csv.DictReader(open(DATA / "added_facts.csv"))]
+        with open(DATA / "comments.csv") as comments, open(DATA / "added_facts.csv") as added:
+            notes = [r["comment"] for r in csv.DictReader(comments)] + [r["note"] for r in csv.DictReader(added)]
         self.assertEqual([n for n in notes if jargon.search(n)], [])
 
 
@@ -298,9 +298,9 @@ class SiteCommandTest(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.dir = pathlib.Path(self.tmp.name)
-        traces = mock.patch.object(build, "write_traces")
-        self.traces = traces.start()
-        self.addCleanup(traces.stop)
+        self.traces = self.enterContext(mock.patch.object(build, "write_traces"))
+        self.enterContext(mock.patch.object(build.layers, "live", return_value=({}, [], [])))
+        self.enterContext(mock.patch.object(build.layers, "stale_strikes", return_value=[]))
 
     def tearDown(self):
         self.tmp.cleanup()
@@ -334,7 +334,6 @@ class SiteCommandTest(unittest.TestCase):
         strike = dict(sheet="main", plan_id="H3805-048-0", column="E_moop", quote="gone", note="")
         out = io.StringIO()
         with (mock.patch.object(build, "site_data", return_value=bare_site()),
-              mock.patch.object(build.layers, "live", return_value=({}, [], [])),
               mock.patch.object(build.layers, "stale_strikes", return_value=[strike]), contextlib.redirect_stdout(out)):
             build.main("site", self.dir / "site")
         self.assertIn("::warning::A strike matches no machine quote: main H3805-048-0 E_moop gone", out.getvalue())
@@ -365,12 +364,14 @@ class TraceFilesTest(unittest.TestCase):
         cells = {f"{r['plan_id']}/{col}.json" for r in build.layers.live(build.DATA)[0]["main"] for col in build.fields.labels("main")}
         self.assertEqual({str(p.relative_to(main)) for p in main.rglob("*.json")}, cells)
         build.trace.build(year, self.dir / "trace.sqlite", "abc")
-        expected = build.trace.cell(sqlite3.connect(self.dir / "trace.sqlite"), "main", "H1036-153-0", "AB_ambulance")
+        with contextlib.closing(sqlite3.connect(self.dir / "trace.sqlite")) as db:
+            expected = build.trace.cell(db, "main", "H1036-153-0", "AB_ambulance")
         self.assertEqual(json.loads((main / "H1036-153-0/AB_ambulance.json").read_text()), expected)
 
     def test_each_pipeline_step_names_a_record_of_the_trace(self):
         build.trace.build(2027, self.dir / "trace.sqlite", "abc")
-        records = build.trace.cell(sqlite3.connect(self.dir / "trace.sqlite"), "main", "H1036-153-0", "AB_ambulance")
+        with contextlib.closing(sqlite3.connect(self.dir / "trace.sqlite")) as db:
+            records = build.trace.cell(db, "main", "H1036-153-0", "AB_ambulance")
         script = 'import("./static/pipeline.js").then((m) => console.log(JSON.stringify(m.STEPS.map((s) => s.record))))'
         named = json.loads(subprocess.run(["node", "-e", script], cwd=build.HERE, capture_output=True, text=True, check=True).stdout)
         self.assertEqual([r for r in named if r not in records], [])

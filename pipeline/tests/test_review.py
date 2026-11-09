@@ -1,4 +1,4 @@
-import json, os, pathlib, sys, tempfile, unittest
+import contextlib, io, json, os, pathlib, sys, tempfile, unittest
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -26,7 +26,7 @@ def answering(rejected=(), asked=None):
     def answer(task_dir, model, effort):
         for name in os.listdir(task_dir):
             if name.endswith(".md"):
-                text = open(os.path.join(task_dir, name)).read()
+                text = pathlib.Path(task_dir, name).read_text()
                 ok = not any(r in text for r in rejected)
                 if asked is not None:
                     asked.append(name)
@@ -77,6 +77,9 @@ class TrustedTest(unittest.TestCase):
 
 
 class GateTest(unittest.TestCase):
+    def setUp(self):
+        self.printed = self.enterContext(contextlib.redirect_stdout(io.StringIO()))
+
     def gate(self, trusted, new, answer, cap=10, held=HELD):
         with tempfile.TemporaryDirectory() as work:
             return review.gate(DATA, None, work, answer, trusted, new, dict(reviewer=("m", "e"), review_cap=cap), held,
@@ -114,6 +117,7 @@ class GateTest(unittest.TestCase):
         self.assertIn(good, kept)
         self.assertIn(uncited, kept)
         self.assertNotIn(bad, kept)
+        self.assertRegex(self.printed.getvalue(), r"Reviewer rejected \S+ \S+ \$3: test")
         self.assertIn(good, trusted)
         self.assertNotIn(uncited, trusted)
 

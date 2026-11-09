@@ -169,7 +169,7 @@ def section(key, value, layout, earlier=None):
 
 
 def task(plan, cells, layout, failed=None):
-    names = {r["plan_id"]: r["plan_name"] for r in csv.DictReader(open(f"{DATA}/generated/plans.csv"))}
+    names = {r["plan_id"]: r["plan_name"] for r in layers.rows(f"{DATA}/generated/plans.csv")}
     head = fill("filled_prompt.md", PLAN_NAME=names[plan], PLAN_ID=plan, YEAR=str(years.config(DATA)["year"]))
     body = [section(k, v, layout, (failed or {}).get(k)) for k, v in sorted(cells.items())]
     return "\n\n".join([head] + body) + "\n"
@@ -181,7 +181,7 @@ def bundle(work, out_dir, every="", version=None):
     os.makedirs(out_dir, exist_ok=True)
     for plan, cells in sorted(targets(site_data(DATA, resolve(version)), every == "every").items()):
         layout = Doc.of_plan(work, plan).pages("layout")
-        open(f"{out_dir}/{plan}.md", "w").write(task(plan, cells, layout))
+        pathlib.Path(f"{out_dir}/{plan}.md").write_text(task(plan, cells, layout))
 
 
 def claims(work, answers_dir, out, version=None):
@@ -193,9 +193,9 @@ def claims(work, answers_dir, out, version=None):
         found += got
         if failed and not os.path.exists(f"{answers_dir}/{plan}.retry.json"):
             cells = {k: values[plan][k] for k in failed}
-            open(f"{answers_dir}/{plan}.retry.md", "w").write(task(plan, cells, doc.pages("layout"), failed))
+            pathlib.Path(f"{answers_dir}/{plan}.retry.md").write_text(task(plan, cells, doc.pages("layout"), failed))
             retries += 1
-    json.dump(found, open(out, "w"), indent=1, ensure_ascii=False)
+    pathlib.Path(out).write_text(json.dumps(found, indent=1, ensure_ascii=False))
     print(len(found), "claims;", retries, "retry tasks")
 
 
@@ -213,9 +213,9 @@ def decoys(claims, rnd, n=3):
 def verify(work, claims_path, out_dir):
     os.makedirs(out_dir, exist_ok=True)
     by_plan = collections.defaultdict(list)
-    for c in json.load(open(claims_path)):
+    for c in json.loads(pathlib.Path(claims_path).read_text()):
         by_plan[c["plan"]].append(c)
-    names = {r["plan_id"]: r["plan_name"] for r in csv.DictReader(open(f"{DATA}/generated/plans.csv"))}
+    names = {r["plan_id"]: r["plan_name"] for r in layers.rows(f"{DATA}/generated/plans.csv")}
     items = []
     for plan, found in sorted(by_plan.items()):
         rnd = random.Random(plan)
@@ -230,8 +230,8 @@ def verify(work, claims_path, out_dir):
             items.append(dict(c, task=plan))
         parts.append("## EOC pages")
         parts += [f"=====PAGE {p}=====\n{layout[p].rstrip()}" for p in sorted({q["page"] for c in mine for q in c["citations"]})]
-        open(f"{out_dir}/v-{plan}.md", "w").write("\n\n".join(parts) + "\n")
-    json.dump(items, open(f"{out_dir}/items.json", "w"), indent=1, ensure_ascii=False)
+        pathlib.Path(f"{out_dir}/v-{plan}.md").write_text("\n\n".join(parts) + "\n")
+    pathlib.Path(f"{out_dir}/items.json").write_text(json.dumps(items, indent=1, ensure_ascii=False))
     print(sum(not c["decoy"] for c in items), "claims", sum(c["decoy"] for c in items), "decoys")
 
 
@@ -245,10 +245,10 @@ def accepted(items, verdicts):
 
 
 def accept(verify_dir, out):
-    items = json.load(open(f"{verify_dir}/items.json"))
+    items = json.loads(pathlib.Path(f"{verify_dir}/items.json").read_text())
     verdicts = blanks.verdicts(items, verify_dir)
     acc = accepted(items, verdicts)
-    json.dump(acc, open(out, "w"), indent=1, ensure_ascii=False)
+    pathlib.Path(out).write_text(json.dumps(acc, indent=1, ensure_ascii=False))
     print(len(acc), "of", sum(not c["decoy"] for c in items), "claims accepted;", sum(c["decoy"] for c in items), "decoys rejected;",
           len(blanks.missing_verdicts(items, verdicts)), "items without a verdict")
 

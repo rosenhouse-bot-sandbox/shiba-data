@@ -290,7 +290,8 @@ def sheet(plans, data, make_row, dvha=False):
 
 
 def main(plans_csv, pbp_dir, out_csv, reads_csv):
-    plans = list(csv.DictReader(open(plans_csv)))
+    with open(plans_csv) as f:
+        plans = list(csv.DictReader(f))
     data = pbp.load(pbp_dir, [p["plan_id"] for p in plans])
     write_csv(out_csv, sheet(plans, data, chart_row))
     dictionary = pbp.load_dictionary(pbp_dir)

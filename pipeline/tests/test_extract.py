@@ -245,7 +245,7 @@ class StepsTest(unittest.TestCase):
         with open(self.dir.parent / "new.json", "w") as f:
             json.dump([self.known(network="out", amount="$0", quotes=json.dumps(["Outpatient X-rays $0"]))], f)
         self.step(extract.verify, self.work, self.dir.parent / "new.json", self.dir, known=[self.known()])
-        items = json.load(open(self.dir / "items.json"))
+        items = json.loads((self.dir / "items.json").read_text())
         self.assertEqual([c["network"] for c in items if not c["decoy"]], ["out"])
         self.assertTrue(any(c["decoy"] for c in items))
 
@@ -297,7 +297,7 @@ class StepsTest(unittest.TestCase):
         with open(self.dir.parent / "new.json", "w") as f:
             json.dump([dict(new, fact_id=facts.fact_id(new))], f)
         self.step(extract.verify, self.work, self.dir.parent / "new.json", self.dir, known=[self.known()])
-        items = json.load(open(self.dir / "items.json"))
+        items = json.loads((self.dir / "items.json").read_text())
         real = next(n for n, c in enumerate(items) if not c["decoy"])
         (self.dir / f"v-{SHA[:16]}.json").write_text(json.dumps(
             [{"id": n, "ok": n == real, "reason": f"r{n}"} for n in range(len(items) - 1)]))

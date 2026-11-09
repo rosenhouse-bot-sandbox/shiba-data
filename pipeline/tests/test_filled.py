@@ -1,4 +1,4 @@
-import contextlib, csv, io, json, os, pathlib, random, shutil, sys, tempfile, unittest
+import contextlib, io, json, os, pathlib, random, shutil, sys, tempfile, unittest
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -390,7 +390,7 @@ class PublishTest(unittest.TestCase):
         for _ in range(2):
             filled.publish(self.accepted(self.value), data=self.data)
         self.assertTrue((self.data / "machine/filled.csv").read_bytes().endswith(b"no amount\r\n"))
-        rows = list(csv.DictReader(open(self.data / "machine/filled.csv")))
+        rows = layers.rows(self.data / "machine/filled.csv")
         sheet, column = self.key.split(".")
         prompt = filled.blanks.prompt_version("filled_prompt.md", "vfilled_prompt.md")
         self.assertEqual([(r["step"], r["prompt"], r["sheet"], r["plan_id"], r["column"], r["line"], r["value"], r["pdf_page"])
@@ -409,7 +409,7 @@ class PublishTest(unittest.TestCase):
         with self.assertRaises(SystemExit):
             filled.publish(self.accepted(self.value), data=self.data)
         filled.publish(self.accepted(self.value), data=self.data, every=True)
-        rows = csv.DictReader(open(self.data / "machine/filled.csv"))
+        rows = layers.rows(self.data / "machine/filled.csv")
         self.assertIn((self.plan, self.key, self.value), {(r["plan_id"], f'{r["sheet"]}.{r["column"]}', r["value"]) for r in rows})
 
     def test_writes_rows_to_another_file_even_for_cells_an_eoc_cites(self):
@@ -418,7 +418,7 @@ class PublishTest(unittest.TestCase):
         before = (self.data / "machine/filled.csv").read_bytes()
         filled.publish(self.accepted(self.value), out, data=self.data)
         filled.publish(self.accepted(self.value), out, data=self.data)
-        rows = list(csv.DictReader(open(out)))
+        rows = layers.rows(out)
         self.assertEqual([(r["plan_id"], r["value"], r["quote"]) for r in rows],
                          [(self.plan, self.value, f"pay {self.value}, then"), (self.plan, self.value, "no amount")])
         self.assertEqual((self.data / "machine/filled.csv").read_bytes(), before)
