@@ -117,6 +117,20 @@ BENEFITS.update({
     "packages": "An optional supplemental benefit package that a member may buy. Give its monthly premium as a "
                 "`packages` `supplemental` `premium` fact with `package` set to its name. A document that says the "
                 "plan offers no optional supplemental benefits gives `packages` `supplemental` `not_covered`",
+    "plan_premium": "The plan's monthly premium, not counting the Part B premium, an optional package's premium or "
+                    "Extra Help. Use `covered_by` `medicare`, `cost_kind` `premium` and `unit` `per month`",
+    "emergency": "Emergency and urgently needed care. Not ambulance. Care outside the U.S. has `setting` `outside_us`, "
+                 "and the most the plan pays for it is a `max` fact with its `limit`, such as `per year`",
+    "foot_care": "Routine foot care (podiatry). A row for routine foot care for members with certain medical conditions "
+                 "affecting the lower limbs is Medicare's, so it is `covered_by` `medicare`. Additional or "
+                 f"supplemental foot care is `supplemental`. {ROUTINE}",
+    "meals": f"Meals, such as home-delivered meals after a hospital stay. {NOT_MEDICARE}. {ROUTINE}",
+    "other_supplemental": "A supplemental benefit that no other benefit word names, such as hospital care at home, a "
+                          "recovery program, care while traveling in the U.S., or a card for food and utilities for "
+                          "members with chronic conditions. Not an OTC allowance (even one that also pays for food), "
+                          "fitness, transportation, meals, foot care, acupuncture, chiropractic, massage, naturopathy, "
+                          "dental, vision or hearing. Put the benefit's name, as the document gives it, in `pool`. "
+                          f"{NOT_MEDICARE}. {ROUTINE}",
 })
 # Regexes that find the pages about each benefit group
 FIND = {"imaging": [r"x.ray", r"radiolog", r"\bMRI\b", r"\bCT\b", r"\bPET\b", r"ultrasound", r"mammogra",
@@ -154,7 +168,14 @@ FIND = {"imaging": [r"x.ray", r"radiolog", r"\bMRI\b", r"\bCT\b", r"\bPET\b", r"
         "fitness": [r"fitness", r"silver ?sneakers", r"renew active", r"\bgym\b", r"one pass"],
         "otc": [r"over.the.counter", r"\bOTC\b"],
         "packages": [r"optional supplemental", r"advantage plus", r"optional (?:dental|vision|hearing|benefits?)\b",
-                     r"(?:dental|vision|hearing) rider"]}
+                     r"(?:dental|vision|hearing) rider"],
+        "plan_premium": [r"(?:monthly|plan) premium"],
+        "emergency": [r"world.?wide", r"outside (?:of )?the United States"],
+        "foot_care": [r"foot care", r"podiatr"],
+        "meals": [r"meals? (?:benefit|program|deliver)", r"(?:delivered|post.discharge) meals?"],
+        "other_supplemental": [r"chronically ill", r"\bSSBCI\b", r"hospital care at home", r"Permanente at Home",
+                               r"alternative to (?:receiving )?acute care", r"recovery program", r"while traveling",
+                               r"(?:food|grocer|utilit)[\w &]{0,20} (?:card|allowance|benefit)"]}
 SETTINGS = {
     "any": "The document names no setting, or one cost covers every setting",
     "office": "A physician's office, of any kind",
@@ -188,6 +209,11 @@ GROUP_SETTINGS = {
     "fitness": ("any",),
     "otc": ("any",),
     "packages": ("any",),
+    "plan_premium": ("any",),
+    "emergency": ("any", "outside_us"),
+    "foot_care": ("any",),
+    "meals": ("any",),
+    "other_supplemental": ("any",),
 }
 NETWORKS = {"any": "In and out of network, as the document says", "in": "In network", "out": "Out of network"}
 COVERED_BY = {"medicare": "A Medicare-covered benefit", "supplemental": "A routine (supplemental) benefit"}

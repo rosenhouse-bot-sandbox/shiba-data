@@ -27,6 +27,8 @@ VERSIONS[10] = dict(VERSIONS[9], recheck={
     "surgery": KAISER + ("H3817-008-1",)})
 # A reviewer checks each untrusted fact that a cell cites (review.py). The cap stops a run that would ask about too many.
 VERSIONS[11] = dict(VERSIONS[10], reviewer=("claude-opus-5-5", "high"), review_cap=100)
+VERSIONS[12] = dict(VERSIONS[11], groups=VERSIONS[11]["groups"] + ("plan_premium", "emergency", "foot_care", "meals",
+                                                             "other_supplemental"))
 
 
 def fresh(path):

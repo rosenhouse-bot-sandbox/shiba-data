@@ -186,6 +186,24 @@ class VocabularyTest(unittest.TestCase):
                             ("packages", "Optional Dental Rider")):
             self.assertTrue(any(re.search(rx, text, re.I) for rx in facts.FIND[group]), (group, text))
 
+    def test_groups_for_the_dvha_sheet(self):
+        for b in ("plan_premium", "emergency", "foot_care", "meals", "other_supplemental"):
+            self.assertIn(b, facts.BENEFITS)
+        self.assertIn("outside_us", facts.GROUP_SETTINGS["emergency"])
+        for group, text in (("plan_premium", "Monthly premium $28.50"), ("plan_premium", "Your plan premium is $0"),
+                            ("emergency", "World-wide coverage $130 copay"), ("emergency", "Care outside the United States"),
+                            ("foot_care", "Routine foot care $45 copay"), ("foot_care", "Podiatry services"),
+                            ("meals", "Meal benefit"), ("meals", "Home-delivered meals"),
+                            ("meals", "Post-discharge meal"),
+                            ("other_supplemental", "Benefits for the Chronically Ill"), ("other_supplemental", "SSBCI"),
+                            ("other_supplemental", "Hospital care at home"),
+                            ("other_supplemental", "Kaiser Permanente at Home"),
+                            ("other_supplemental", "an alternative to receiving acute care in a hospital"),
+                            ("other_supplemental", "Virtual Cardiac Recovery Program"),
+                            ("other_supplemental", "Out-of-network care while traveling"),
+                            ("other_supplemental", "Food & Home Card"), ("other_supplemental", "Utilities allowance")):
+            self.assertEqual(sum(bool(re.search(rx, text, re.I)) for rx in facts.FIND[group]), 1, (group, text))
+
     def test_describe_lists_one_group(self):
         text = facts.describe("imaging")
         for b in facts.BENEFITS:
