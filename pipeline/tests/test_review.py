@@ -2,7 +2,7 @@ import json, os, pathlib, sys, tempfile, unittest
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-import ask, document_facts, facts, layers, present, review, years
+import document_facts, facts, layers, present, review, years
 
 DATA = years.data_dir(years.LIVE)
 COMMITTED = facts.read(DATA / "machine/document_facts.csv")

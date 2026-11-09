@@ -1,4 +1,4 @@
-import contextlib, csv, io, json, os, pathlib, sys, tempfile, unittest
+import contextlib, io, json, os, pathlib, sys, tempfile, unittest
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
