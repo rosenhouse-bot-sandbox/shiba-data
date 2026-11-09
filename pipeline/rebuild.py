@@ -8,7 +8,6 @@ with the seeded errors in tests/fixtures/seeded_errors.json applied as uncited e
 Every model step runs at its pinned version, or at a candidate version as in run.py.
 Every model step skips its reviewer. The filled step covers every filled cell. The run's answers, machine rows and report go to data/<year>/rebuilds/<name>.
 """
-import collections
 import csv
 import json
 import os

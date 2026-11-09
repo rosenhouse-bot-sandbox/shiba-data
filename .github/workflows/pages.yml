@@ -29,6 +29,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
+      - run: pipx run ruff==0.16.9 check
+        working-directory: .
       - run: python3 -I -m unittest discover -s tests
       - run: python3 -I -m unittest discover -s ../pipeline/tests
       - run: node --test tests/highlight.test.mjs tests/ago.test.mjs tests/permalink.test.mjs tests/worker.test.mjs

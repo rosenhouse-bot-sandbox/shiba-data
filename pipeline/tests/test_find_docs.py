@@ -1,4 +1,4 @@
-import contextlib, csv, io, os, pathlib, sys, tempfile, unittest
+import contextlib, io, os, pathlib, sys, tempfile, unittest
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import find_docs
