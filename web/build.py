@@ -83,16 +83,14 @@ def site_data(data_dir=DATA, layer_names=layers.LAYERS, ignore=None):
         "plan_ids": d["plan_ids"].split(";"),
     } for d in checked}
 
-    live, kept, _ = layers.live(data_dir, layer_names, ignore)
+    live, cited = layers.citations(data_dir, {d["url"]: d["kind"] for d in checked}, layer_names, ignore)
     cites = {"main": {}, "dvha": {}}
-    for c in kept:
-        if c["layer"] == layers.EDITS and c["url"] not in doc_by_url:
+    for c in cited:
+        if c["hidden"] == layers.UNKNOWN_DOCUMENT:
             # An unknown document must not stop the build. The edit still sets its cell.
-            if c["url"]:
-                print(f"::warning::An edit cites a document not in documents_checked.csv: {layers.where(c)} {c['url']}")
+            print(f"::warning::An edit cites a document not in documents_checked.csv: {layers.where(c)} {c['url']}")
+        if c["hidden"]:
             continue
-        if c["url"] not in doc_by_url:
-            raise ValueError(f"A citation names a document not in documents_checked.csv: {layers.where(c)} {c['url']}")
         cites[c["sheet"]].setdefault((c["plan_id"], c["column"]), []).append({
             "line": int(c["line"]) if c["line"] else None,
             "value": c["value"],
@@ -100,10 +98,6 @@ def site_data(data_dir=DATA, layer_names=layers.LAYERS, ignore=None):
             "page": int(c["pdf_page"]),
             "quote": c["quote"],
         })
-    for sheet_cites in cites.values():
-        for key, cell_cites in sheet_cites.items():
-            if any(docs[c["doc"]]["kind"] != "SB" for c in cell_cites):
-                sheet_cites[key] = [c for c in cell_cites if docs[c["doc"]]["kind"] != "SB"]
     pbp = {name: {(g["plan_id"], k): v for g, r in zip(generated, live[name]) for k, v in g.items() if r[k] != v}
            for name, generated in layers.generated(data_dir).items()}
 

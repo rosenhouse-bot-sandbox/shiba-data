@@ -1,0 +1,144 @@
+-- A year's trace database (#178). pipeline/trace.py builds it, and #68 plans its later tables.
+
+CREATE TABLE build (
+  sha   TEXT PRIMARY KEY,
+  year  INTEGER NOT NULL,
+  steps TEXT NOT NULL  -- steps.json
+);
+
+CREATE TABLE plan (
+  plan_id                        TEXT PRIMARY KEY,
+  position                       INTEGER NOT NULL UNIQUE,
+  section                        TEXT NOT NULL,
+  plan_name                      TEXT NOT NULL,
+  plan_type                      TEXT NOT NULL,
+  organization                   TEXT NOT NULL,
+  premium                        TEXT NOT NULL,
+  premium_full_extra_help        TEXT NOT NULL,
+  moop_in_network                TEXT NOT NULL,
+  part_d_deductible              TEXT NOT NULL,
+  tier_without_part_d_deductible TEXT NOT NULL,
+  c_snp_conditions               TEXT NOT NULL,
+  overall_star_rating            TEXT NOT NULL
+);
+
+CREATE TABLE document (
+  url       TEXT PRIMARY KEY,
+  position  INTEGER NOT NULL UNIQUE,
+  kind      TEXT NOT NULL CHECK (kind IN ('SB', 'EOC', 'RIDER')),
+  found_via TEXT NOT NULL
+);
+
+CREATE TABLE plan_document (
+  plan_id TEXT NOT NULL REFERENCES plan,
+  url     TEXT NOT NULL REFERENCES document,
+  PRIMARY KEY (plan_id, url)
+);
+
+-- sha256 and pages are NULL when the download is not a PDF.
+CREATE TABLE download (
+  url            TEXT PRIMARY KEY REFERENCES document,
+  sha256         TEXT,
+  pages          INTEGER,
+  cover_problems TEXT NOT NULL,
+  baseline       TEXT NOT NULL,
+  baseline_file  TEXT NOT NULL
+);
+
+-- Each text is a blob. trace.py page reads one page of it.
+CREATE TABLE text (
+  pdf    TEXT PRIMARY KEY,
+  plain  TEXT NOT NULL,
+  layout TEXT NOT NULL,
+  items  TEXT NOT NULL
+);
+
+-- value keeps a cell's lines, separated by " | ".
+CREATE TABLE draft_cell (
+  sheet   TEXT NOT NULL CHECK (sheet IN ('main', 'dvha')),
+  plan_id TEXT NOT NULL REFERENCES plan,
+  col     TEXT NOT NULL,
+  value   TEXT NOT NULL,
+  PRIMARY KEY (sheet, plan_id, col)
+);
+
+-- generated/cms_sources.csv: the CMS fields behind some columns.
+CREATE TABLE cms_source (
+  plan_id TEXT NOT NULL REFERENCES plan,
+  col     TEXT NOT NULL,
+  file    TEXT NOT NULL,
+  field   TEXT NOT NULL,
+  title   TEXT NOT NULL,
+  value   TEXT NOT NULL,
+  meaning TEXT NOT NULL,
+  PRIMARY KEY (plan_id, col, file, field)
+);
+
+-- One row of a layer file. position is the row's place in its file, where a later edit wins.
+-- line is NULL for a whole cell.
+CREATE TABLE layer_row (
+  layer    TEXT NOT NULL,
+  position INTEGER NOT NULL,
+  step     TEXT,
+  prompt   TEXT,
+  sheet    TEXT NOT NULL,
+  plan_id  TEXT NOT NULL,
+  col      TEXT NOT NULL,
+  line     INTEGER,
+  value    TEXT NOT NULL,
+  url      TEXT NOT NULL,
+  pdf_page INTEGER,
+  quote    TEXT NOT NULL,
+  saw      TEXT,
+  source   TEXT,
+  author   TEXT,
+  note     TEXT,
+  PRIMARY KEY (layer, position),
+  FOREIGN KEY (sheet, plan_id, col) REFERENCES draft_cell
+);
+CREATE INDEX layer_row_cell ON layer_row (sheet, plan_id, col);
+
+-- A cell's value after each layer, in the order the layers apply.
+CREATE TABLE layer_value (
+  sheet   TEXT NOT NULL,
+  plan_id TEXT NOT NULL,
+  col     TEXT NOT NULL,
+  step    INTEGER NOT NULL,
+  layer   TEXT NOT NULL,
+  value   TEXT NOT NULL,
+  PRIMARY KEY (sheet, plan_id, col, step),
+  FOREIGN KEY (sheet, plan_id, col) REFERENCES draft_cell
+);
+
+-- What the site does with each layer row: shows it, or hides it for a reason in layers.py.
+-- site_order orders a cell's rows as the site lists them.
+CREATE TABLE live_citation (
+  layer      TEXT NOT NULL,
+  position   INTEGER NOT NULL,
+  site_order INTEGER NOT NULL,
+  hidden     TEXT NOT NULL,
+  PRIMARY KEY (layer, position),
+  FOREIGN KEY (layer, position) REFERENCES layer_row
+);
+
+CREATE TABLE comment (
+  sheet    TEXT NOT NULL,
+  plan_id  TEXT NOT NULL,
+  col      TEXT NOT NULL,
+  kind     TEXT NOT NULL,
+  comment  TEXT NOT NULL,
+  url      TEXT NOT NULL,
+  pdf_page INTEGER,
+  quote    TEXT NOT NULL,
+  PRIMARY KEY (sheet, plan_id, col),
+  FOREIGN KEY (sheet, plan_id, col) REFERENCES draft_cell
+);
+
+CREATE TABLE struck_quote (
+  sheet   TEXT NOT NULL,
+  plan_id TEXT NOT NULL,
+  col     TEXT NOT NULL,
+  quote   TEXT NOT NULL,
+  note    TEXT NOT NULL,
+  PRIMARY KEY (sheet, plan_id, col, quote)
+);
