@@ -1,5 +1,0 @@
-{
- "model": "claude-opus-5-5",
- "task": "v-H3805-048-0.md",
- "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The exclusions chart says routine dental is not covered and Medicare dental costs 20%, so the only routine dental is the Platinum Dental Rider at $66 a month.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Chiropractic appears only as the Medicare-covered spinal manipulation ($15 copay), with all other services excluded and no routine chiropractic benefit anywhere.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Preventive and comprehensive dental come only through the optional Platinum Dental Rider, and the exclusions chart says routine dental is not covered under any condition.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Acupuncture is listed only as the Medicare-covered chronic low back pain benefit, with no routine acupuncture anywhere.\"}]\n```"
-}

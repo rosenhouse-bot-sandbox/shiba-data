@@ -12,9 +12,8 @@ import collections, contextlib, glob, io, json, math, os, shutil, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-import ask, blanks, expected, extract, facts, years
+import ask, expected, extract, facts, years
 from eoc import Doc
-from filled import numbers
 
 MODELS = ("claude-haiku-5-5", "claude-sonnet-5-5", "claude-opus-5-5")
 EFFORTS = ("low", "medium", "high")
@@ -167,10 +166,10 @@ def score_expected(found, wanted, docs, group):
     amounts = collections.defaultdict(collections.Counter)
     for f in found:
         if facts.covers(group, f["benefit"]) and f["network"] in ("in", "any"):
-            amounts[f["plan_id"]] |= numbers(f["amount"])
+            amounts[f["plan_id"]] |= extract.numbers(f["amount"])
     covered = {p for d in docs for p in d["plan_ids"]}
     lines = [w for w in wanted if w["plan_id"] in covered]
-    return share(sum(not numbers(w["value"]) - amounts[w["plan_id"]] for w in lines), len(lines))
+    return share(sum(not extract.numbers(w["value"]) - amounts[w["plan_id"]] for w in lines), len(lines))
 
 
 def upper(s):
@@ -260,7 +259,7 @@ def main(year, work, root, group, which, budget, mode=""):
             shutil.copy(t, d)
         tasks = sorted(glob.glob(f"{d}/v-*.md"))
         left = runner.answer(tasks, role)
-        verdicts[name(role)] = judged(items, blanks.verdicts(items, d))
+        verdicts[name(role)] = judged(items, extract.verdicts(items, d))
         scores.append({"role": name(role), "unanswered": len(left), "dollars": spent(tasks, role, runner.saved)})
 
     reviewer = verdicts[name(REVIEWER)]

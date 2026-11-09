@@ -4,7 +4,7 @@ Each review task holds one fact, so a rerun asks again only for facts it has not
 """
 import os, shutil
 
-import ask, blanks, extract, facts, present
+import ask, extract, facts, present
 from eoc import Doc
 
 REVIEWED = "machine/reviewed_facts.csv"
@@ -91,7 +91,7 @@ def ask_each(out, answer, model, effort, texts):
         with open(f"{out}/v-{n}.md", "w") as f:
             f.write(text)
     answer(out, model, effort)
-    got = {v["id"]: v for v in blanks.verdicts([dict(task=str(n)) for n in range(len(texts))], out)}
+    got = {v["id"]: v for v in extract.verdicts([dict(task=str(n)) for n in range(len(texts))], out)}
     return [got.get(n, {}) for n in range(len(texts))]
 
 

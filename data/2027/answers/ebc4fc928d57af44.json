@@ -1,5 +1,0 @@
-{
- "model": "claude-opus-5-5",
- "task": "v-H6815-038-0.md",
- "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 58 shows the plan also covers supplemental (non-Medicare-covered) chiropractic visits, up to 24 per year at a $15 copay, so the plan is not Medicare-only.\"}]\n```"
-}

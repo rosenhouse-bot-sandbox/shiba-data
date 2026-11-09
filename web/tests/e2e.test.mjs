@@ -929,15 +929,6 @@ test("pipeline view: a CMS-only cell shows a short chain, and a step it skips op
   assert.deepEqual(await page.locator(".how-end code").allTextContents(), ["Landscape.csv", "plans.csv"]);
 });
 
-test("pipeline view: a blank cell with a blank-cell citation shows the blanks step and its record", async () => {
-  await openHow(page, "main/H5216-048-0/chiropractic/cite-blanks");
-  assert.ok((await chainOf(page)).includes("Cite blank cells"));
-  assert.equal(await page.textContent(".how-value"), "blank");
-  assert.match(await page.textContent(".how-trace-head"), /model_citations\s*Traced/);
-  assert.match(await page.textContent(".how-trace pre"), /"step": "blanks"/);
-  assert.equal(await page.textContent(".how-strip"), "SB and EOC page text becomes 2 quotes from EOC pages 51, 102");
-});
-
 test("pipeline view: a main-sheet cell's detail links to its pipeline view from a ? in its corner, at its last step", async () => {
   await page.goto("about:blank");
   await page.goto(`${base}#/2027/main/H5216-048-0/premium`);

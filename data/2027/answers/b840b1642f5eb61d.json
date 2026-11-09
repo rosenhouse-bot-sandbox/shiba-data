@@ -1,5 +1,0 @@
-{
- "model": "claude-opus-5-5",
- "task": "v-H1036-306-0.md",
- "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 51 limits chiropractic to Medicare-covered manual manipulation of the spine and says other chiropractor services are not covered, page 87 confirms this, and no passage shows routine chiropractic.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"The exclusions table on page 86 lists naturopath services as not covered under any condition, and no passage shows naturopathic coverage.\"}]\n```"
-}

@@ -942,16 +942,6 @@
     "rows": []
    },
    {
-    "layer": "machine/blanks.csv",
-    "value": "$325 or 20% | $325",
-    "rows": []
-   },
-   {
-    "layer": "machine/filled.csv",
-    "value": "$325 or 20% | $325",
-    "rows": []
-   },
-   {
     "layer": "generated/presented.csv",
     "value": "$325 or 20% | $325",
     "rows": [
@@ -1065,7 +1055,6 @@
   "status": "traced",
   "sha": "x",
   "steps": {
-   "filled": 6,
    "document_facts": 11,
    "present": 2
   },

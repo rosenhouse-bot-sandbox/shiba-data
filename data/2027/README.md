@@ -5,17 +5,17 @@ They come only from the CMS Landscape and PBP Benefits files, carrier websites, 
 The methods doc and Appendix B below are the 2027 bootstrap's, which git history keeps.
 
 `python3 -I pipeline/run.py 2027 <work_dir>` lists plan documents from `found.csv` and `links.csv`, downloads them and the sources named in `config.json`, and regenerates `generated/`.
-It then rebuilds `machine/blanks.csv` and `machine/filled.csv` from the model answers saved in `answers/`.
+It then reads facts into `machine/document_facts.csv` from the answers saved in `answers/`, and presents them in `generated/presented.csv`.
 
 ## Layers
 
-The site shows the generated sheets with three layers applied in order. Each layer row cites the value of a cell, or of one line of it.
+The site shows the generated sheets with these layers applied in order. Each layer row cites the value of a cell, or of one line of it.
 
 | File | Rows from | Sets the value |
 |---|---|---|
 | `generated/citations.csv` | `pipeline/cite.py`: naturopathy dots, which the PBP lacks | Yes |
 | `machine/eoc_citations.csv` | Model steps run by earlier Claude sessions, with `step` xref | No, until people review model corrections (issue #48) |
-| `machine/blanks.csv`, `machine/filled.csv` | `pipeline/blanks.py` and `pipeline/filled.py`. `prompt` hashes the step's prompts. | No |
+| `generated/presented.csv` | `pipeline/present.py`: column rules applied to facts | Yes |
 | `edits.csv` | People, and Claude sessions they steer | Yes |
 
 A later layer wins, and within `edits.csv` a later row wins. The site drops a citation whose value is not the live cell's.

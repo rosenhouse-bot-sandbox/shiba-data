@@ -8,10 +8,7 @@ on:
         required: true
         default: "2027"
       candidate:
-        description: Run these unpinned step versions, such as filled@2 or filled@2,document_facts@5, in place of their pins (pipeline/steps.py)
-        required: false
-      rebuild:
-        description: Also rebuild the model steps from scratch, at the candidate versions if any, into data/<year>/rebuilds/<this name> (issue #47)
+        description: Run these unpinned step versions, such as present@8 or present@8,document_facts@16, in place of their pins (pipeline/steps.py)
         required: false
 
 concurrency: pipeline
@@ -28,7 +25,6 @@ jobs:
     runs-on: ubuntu-24.04
     env:
       YEAR: ${{ inputs.year }}
-      REBUILD: ${{ inputs.rebuild }}
       CANDIDATE: ${{ inputs.candidate }}
       ANTHROPIC_ORGANIZATION_ID: 3c97a8fb-8968-4ed9-aec7-f68b88683532
       ANTHROPIC_SERVICE_ACCOUNT_ID: svac_0142UmsmTSG4RDAgtFvyHY9F
@@ -67,7 +63,7 @@ jobs:
       # GitHub stops a job after 360 minutes, so these leave time to commit.
       # A rerun after a timeout reuses the results of the batches this run sent.
       - run: python3 -I pipeline/run.py "$YEAR" _work api "$CANDIDATE"
-        timeout-minutes: ${{ inputs.rebuild != '' && 100 || 290 }}
+        timeout-minutes: 290
       # Upload before committing any data that names these blobs. Keys are content hashes, so a re-upload changes nothing.
       - id: upload
         if: always()
@@ -82,9 +78,6 @@ jobs:
           while read -r key path; do
             aws s3 cp "$path" "s3://pdxplans/$key" --only-show-errors < /dev/null
           done < _blobs.txt
-      - if: inputs.rebuild != ''
-        run: python3 -I pipeline/rebuild.py "$YEAR" _work "$REBUILD" api "$CANDIDATE"
-        timeout-minutes: 210
       # Saved answers are worth keeping even when a later step stops the run.
       - if: always()
         env:

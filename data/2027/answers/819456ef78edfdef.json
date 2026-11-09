@@ -1,5 +1,0 @@
-{
- "model": "claude-sonnet-5-5",
- "task": "v-H2923-025-0.md",
- "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Chiropractic is described only as Medicare-covered manual manipulation of the spine for subluxation with a $15 copay, and the exclusions table lists only that under routine chiropractic. No passage shows a routine chiropractic benefit, and the page 59 'supplemental benefits' line is layout bleed from a neighboring row.\"}]"
-}

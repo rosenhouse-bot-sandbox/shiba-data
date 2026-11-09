@@ -45,8 +45,6 @@ export const NODES = {
         '[{"benefit": "ambulance.air", "setting": "any", "network": "in", "cost_kind": "coinsurance", "amount": "20%", "page": 9, "quotes": ["20% of the cost"]},',
         ' {"benefit": "ambulance.ground", "setting": "any", "network": "in", "cost_kind": "copay", "amount": "$325", "page": 9, "quotes": ["$325 copay per date of service"]},',
         ' {"benefit": "ambulance", "setting": "outside_us", "covered_by": "medicare", "amount": "$325", "page": 6, "quotes": ["Emergency ambulance: $325 copay per date of"]}]'] } },
-  blanks: { col: 2, row: 5, kind: "table", label: "blanks.csv",
-    table: { name: "machine/blanks.csv", note: "citations for blank cells", cols: ["plan_id", "column", "value", "pdf_page", "quote"], rows: [] } },
   facts: { col: 0, row: 6, kind: "table", label: "document_facts",
     table: { name: "machine/document_facts.csv", note: "accepted facts, selected columns",
       cols: ["benefit", "setting", "network", "condition", "covered_by", "cost_kind", "amount", "source", "page"],
@@ -116,8 +114,6 @@ export const STEPS = [
     example: { highlight: [[], []], before: "no added facts for this plan", after: "nothing changes",
       none: ["This plan has no added facts. The EOC stated every ambulance cost, so the rule needed nothing more.", "No rows come from this table for this cell."],
       paras: [["This cell needed none."]] } },
-  { id: "cite-blanks", record: "model_citations", from: "text", to: "blanks", label: "Cite blank cells",
-    paras: [["Claude Haiku makes ", ["blankClaim", "blank-cell claims"], ": why a cell is blank, with quotes. This step adds citations only. It never changes a value."]] },
   { id: "stack-draft", record: "layers", from: "draft", to: "live", label: "Stack: draft",
     paras: [["The draft is the bottom ", ["layer", "layer"], ". A later layer that sets the same cell wins."]],
     example: { highlight: [[0], [0]], before: "draft $325 or 20% | $325", after: "bottom layer", paras: [] } },
@@ -137,17 +133,15 @@ const DOCUMENT_STEPS = ["find-pdfs", "download", "extract-text"];
 export function chain(trace) {
   if (!trace) return STEPS;
   const ruled = trace.rule?.status !== "none";
-  const blanks = trace.cell.value === "" || (trace.model_citations?.rows ?? []).some((r) => r.step === "blanks");
   const rows = (layer) => (trace.layers?.applied ?? []).filter((l) => !layer || l.layer === layer).some((l) => l.rows.length);
   return STEPS.filter((s) => s.id === "stack-presented" ? rows("generated/presented.csv")
     : FACT_STEPS.includes(s.id) ? ruled
-    : s.id === "cite-blanks" ? blanks
-    : DOCUMENT_STEPS.includes(s.id) ? ruled || blanks || rows()
+    : DOCUMENT_STEPS.includes(s.id) ? ruled || rows()
     : true);
 }
 
 // Edges with no step of their own.
-export const LINKS = [["plans", "documents"], ["blanks", "live"]];
+export const LINKS = [["plans", "documents"]];
 
 export const NODE_W = 128;
 export const NODE_H = 54;
@@ -234,7 +228,6 @@ const STRIPS = {
     const more = fields.length > SHOWN_FIELDS ? ` and ${plural(fields.length - SHOWN_FIELDS, "more field")}` : "";
     return [fields.length ? fields.slice(0, SHOWN_FIELDS).join(", ") + more : "the plan's CMS fields", shownValue(t.draft.value)];
   },
-  "cite-blanks": (t) => [`${kinds(t)} page text`, quotes(t.model_citations.rows.filter((r) => r.step === "blanks"), t)],
   "stack-draft": (t) => [`draft ${shownValue(t.layers.draft)}`,
     t.layers.live.value === t.layers.draft ? live(t) : `${live(t)}, set by ${t.layers.live.set_by}`],
   "stack-presented": (t) => {

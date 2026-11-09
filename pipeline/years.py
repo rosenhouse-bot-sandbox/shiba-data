@@ -8,7 +8,7 @@ LIVE = 2027  # The year the site shows.
 
 
 def data_dir(year=LIVE):
-    """SHIBA_DATA names another data root, such as rebuild.py's copy."""
+    """SHIBA_DATA names another data root, such as a test's copy."""
     root = os.environ.get("SHIBA_DATA")
     return (pathlib.Path(root) if root else REPO / "data") / str(year)
 
