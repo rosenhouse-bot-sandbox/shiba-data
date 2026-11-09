@@ -1,7 +1,8 @@
 import os, sqlite3, sys, tempfile, unittest
 
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-import fields, layers, present, trace, years
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path[:0] = [os.path.dirname(HERE), os.path.join(os.path.dirname(os.path.dirname(HERE)), "web")]
+import blobs, build, fields, layers, present, trace, years
 
 SHA = "0" * 40
 AMBULANCE = ("main", "H1036-153-0", "AB_ambulance")
@@ -46,11 +47,43 @@ class TraceTest(unittest.TestCase):
                         "struck_quotes", "model_citations", "layers", "build"})
                     self.assertLessEqual(statuses(records), STATUSES)
 
+    def test_shows_the_values_and_citations_the_site_shows_in_its_order(self):
+        site = build.site_data()
+        doc = {d["url"]: i for i, d in site["docs"].items()}
+        for sheet in ("main", "dvha"):
+            for r in site[sheet]["rows"]:
+                for col, shown in r["cells"].items():
+                    with self.subTest(sheet=sheet, plan_id=r["plan_id"], col=col):
+                        live = self.cell(sheet, r["plan_id"], col)["layers"]["live"]
+                        self.assertEqual(live["value"], shown["value"])
+                        self.assertEqual([dict(line=c.get("line"), value=c["value"], doc=doc[c["url"]], page=c["pdf_page"],
+                                               quote=c["quote"]) for c in live["citations"]], shown["cites"])
+
+    def test_says_when_a_document_other_than_an_sb_hides_an_sb_citation(self):
+        site = build.site_data()
+        sb_rows = [(r["plan_id"], col) for r in site["main"]["rows"] for col in r["cells"]
+                   if any(c["hidden"] == layers.NOT_SB_CITES_CELL
+                          for c in self.cell("main", r["plan_id"], col)["layers"]["hidden"])]
+        self.assertTrue(sb_rows)
+
+    def test_traces_a_dvha_cell_from_its_own_code(self):
+        records = self.cell("dvha", "H2923-001-0", "F_dental")
+        self.assertEqual(records["draft"]["code"]["file"], "pipeline/dvha.py")
+        self.assertEqual(records["layers"]["live"]["set_by"], layers.EDITS)
+        self.assertEqual(records["rule"]["status"], trace.NONE)
+
+    def test_reads_a_page_of_a_layout_text(self):
+        with tempfile.TemporaryDirectory() as work:
+            path = blobs.text_path(work, "layout", "ab" * 32)
+            path.parent.mkdir(parents=True)
+            path.write_text("=====PAGE 1=====\nfirst\n=====PAGE 2=====\nsecond\n")
+            self.assertEqual(trace.page(work, "ab" * 32, "2"), "second\n")
+
     def test_shows_the_citations_the_site_shows(self):
         live = self.cell(*AMBULANCE)["layers"]["live"]
         self.assertEqual(live["value"], "$325 or 20% | $325")
         self.assertEqual(live["set_by"], layers.PRESENTED)
-        self.assertEqual({(c["line"], c["pdf_page"]) for c in live["citations"]}, {(1, "46"), (2, "46")})
+        self.assertEqual({(c["line"], c["pdf_page"]) for c in live["citations"]}, {(1, 46), (2, 46)})
         self.assertTrue(all(c["layer"] == layers.PRESENTED for c in live["citations"]))
 
     def test_lists_the_value_after_each_layer(self):
@@ -71,10 +104,10 @@ class TraceTest(unittest.TestCase):
         records = self.cell(*AMBULANCE)
         self.assertEqual(records["notes"], {"status": trace.NONE, "rows": []})
         self.assertEqual(records["struck_quotes"]["status"], trace.NONE)
-        self.assertEqual(records["model_citations"]["status"], trace.NONE)
 
     def test_says_not_traced_yet_for_records_later_milestones_fill(self):
         records = self.cell(*AMBULANCE)
+        self.assertEqual(records["model_citations"]["status"], trace.NOT_YET)
         for name in ("answers", "fact_checks", "rule", "added_facts"):
             self.assertEqual(records[name]["status"], trace.NOT_YET, name)
         self.assertEqual(records["draft"]["cms_fields"]["status"], trace.NOT_YET)
@@ -101,6 +134,7 @@ class TraceTest(unittest.TestCase):
         self.assertEqual(model["status"], trace.TRACED)
         self.assertEqual({r["step"] for r in model["rows"]}, {"blanks"})
         self.assertEqual({r["answers"]["status"] for r in model["rows"]}, {trace.NOT_YET})
+        self.assertNotIn("answers", self.cell("main", "H3805-048-0", "T_chiropractic")["layers"]["live"]["citations"][0])
 
     def test_xref_citations_have_no_recorded_answer(self):
         rows = self.cell("main", "H3805-048-0", "E_moop")["model_citations"]["rows"]

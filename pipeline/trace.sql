@@ -1,4 +1,4 @@
--- A year's trace database (#68). pipeline/trace.py builds it.
+-- A year's trace database (#178). pipeline/trace.py builds it, and #68 plans its later tables.
 
 CREATE TABLE build (
   sha   TEXT PRIMARY KEY,
@@ -53,11 +53,6 @@ CREATE TABLE text (
   items  TEXT NOT NULL
 );
 
-CREATE TABLE cms_file (
-  name   TEXT PRIMARY KEY,
-  sha256 TEXT NOT NULL
-);
-
 -- value keeps a cell's lines, separated by " | ".
 CREATE TABLE draft_cell (
   sheet   TEXT NOT NULL CHECK (sheet IN ('main', 'dvha')),
@@ -79,35 +74,9 @@ CREATE TABLE cms_source (
   PRIMARY KEY (plan_id, col, file, field)
 );
 
--- facts.IDENTITY names a fact. fact_id alone repeats across an SB and an EOC.
-CREATE TABLE fact (
-  fact_id       TEXT NOT NULL,
-  source        TEXT NOT NULL,
-  doc_sha       TEXT NOT NULL,
-  page          TEXT NOT NULL,
-  origin        TEXT NOT NULL CHECK (origin IN ('document', 'pbp', 'added')),
-  reviewed      INTEGER NOT NULL,
-  plan_id       TEXT NOT NULL REFERENCES plan,
-  benefit       TEXT NOT NULL,
-  setting       TEXT NOT NULL,
-  network       TEXT NOT NULL,
-  provider_tier TEXT NOT NULL,
-  condition     TEXT NOT NULL,
-  package       TEXT NOT NULL,
-  pool          TEXT NOT NULL,
-  covered_by    TEXT NOT NULL,
-  cost_kind     TEXT NOT NULL,
-  amount        TEXT NOT NULL,
-  unit          TEXT NOT NULL,
-  "limit"       TEXT NOT NULL,
-  quotes        TEXT NOT NULL,
-  note          TEXT NOT NULL,
-  PRIMARY KEY (fact_id, source, doc_sha, page)
-);
-
 -- One row of a layer file. position is the row's place in its file, where a later edit wins.
+-- line is NULL for a whole cell.
 CREATE TABLE layer_row (
-  id       INTEGER PRIMARY KEY,
   layer    TEXT NOT NULL,
   position INTEGER NOT NULL,
   step     TEXT,
@@ -115,16 +84,16 @@ CREATE TABLE layer_row (
   sheet    TEXT NOT NULL,
   plan_id  TEXT NOT NULL,
   col      TEXT NOT NULL,
-  line     INTEGER NOT NULL,
+  line     INTEGER,
   value    TEXT NOT NULL,
   url      TEXT NOT NULL,
-  pdf_page TEXT NOT NULL,
+  pdf_page INTEGER,
   quote    TEXT NOT NULL,
   saw      TEXT,
   source   TEXT,
   author   TEXT,
   note     TEXT,
-  UNIQUE (layer, position),
+  PRIMARY KEY (layer, position),
   FOREIGN KEY (sheet, plan_id, col) REFERENCES draft_cell
 );
 CREATE INDEX layer_row_cell ON layer_row (sheet, plan_id, col);
@@ -142,11 +111,14 @@ CREATE TABLE layer_value (
 );
 
 -- What the site does with each layer row: shows it, or hides it for a reason in layers.py.
--- position orders a cell's rows as the site lists them.
+-- site_order orders a cell's rows as the site lists them.
 CREATE TABLE live_citation (
-  layer_row INTEGER PRIMARY KEY REFERENCES layer_row,
-  position  INTEGER NOT NULL,
-  hidden    TEXT NOT NULL
+  layer      TEXT NOT NULL,
+  position   INTEGER NOT NULL,
+  site_order INTEGER NOT NULL,
+  hidden     TEXT NOT NULL,
+  PRIMARY KEY (layer, position),
+  FOREIGN KEY (layer, position) REFERENCES layer_row
 );
 
 CREATE TABLE comment (
@@ -156,7 +128,7 @@ CREATE TABLE comment (
   kind     TEXT NOT NULL,
   comment  TEXT NOT NULL,
   url      TEXT NOT NULL,
-  pdf_page TEXT NOT NULL,
+  pdf_page INTEGER,
   quote    TEXT NOT NULL,
   PRIMARY KEY (sheet, plan_id, col),
   FOREIGN KEY (sheet, plan_id, col) REFERENCES draft_cell

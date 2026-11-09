@@ -186,7 +186,7 @@ class CitationsTest(unittest.TestCase):
     def test_hides_sb_rows_when_another_document_cites_the_cell(self):
         sb = dict(cite("U_naturopath", "●", quote="sb"), url="sb")
         write(self.data / "generated/citations.csv", [sb, cite("U_naturopath", "●", quote="eoc")])
-        self.assertEqual(self.hidden("U_naturopath"), [("sb", layers.LAYERS[0], layers.EOC_CITES_CELL),
+        self.assertEqual(self.hidden("U_naturopath"), [("sb", layers.LAYERS[0], layers.NOT_SB_CITES_CELL),
                                                        ("eoc", layers.LAYERS[0], "")])
         write(self.data / "generated/citations.csv", [sb])
         self.assertEqual(self.hidden("U_naturopath"), [("sb", layers.LAYERS[0], "")])

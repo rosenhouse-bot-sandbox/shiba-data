@@ -37,7 +37,7 @@ def generated(data):
 
 
 def layer(data, name):
-    """Reads a layer's rows and adds the layer's name to each. A missing layer has no rows."""
+    """Reads a layer's rows and adds the layer's name and each row's place in the file. A missing layer has no rows."""
     if not (data / name).exists():
         return []
     with open(data / name, newline="") as f:
@@ -45,7 +45,7 @@ def layer(data, name):
         columns = MACHINE_COLUMNS if name in CITE_ONLY else EDIT_COLUMNS if name == EDITS else COLUMNS
         if reader.fieldnames != columns:
             raise ValueError(f"{name} has columns {reader.fieldnames}, not {columns}")
-        return [dict(r, layer=name) for r in reader]
+        return [dict(r, layer=name, position=n) for n, r in enumerate(reader)]
 
 
 def strikes(data):
@@ -123,8 +123,8 @@ def live(data, names=LAYERS, ignore=None):
 
 
 # Why the site leaves out a layer row's citation.
-OTHER_VALUE, STRUCK_QUOTE, NO_DOCUMENT, UNKNOWN_DOCUMENT, EOC_CITES_CELL = (
-    "other_value", "struck", "no_document", "unknown_document", "eoc_cites_cell")
+OTHER_VALUE, STRUCK_QUOTE, NO_DOCUMENT, UNKNOWN_DOCUMENT, NOT_SB_CITES_CELL = (
+    "other_value", "struck", "no_document", "unknown_document", "not_sb_cites_cell")
 
 
 def citations(data, kind_of, names=LAYERS, ignore=None):
@@ -145,6 +145,6 @@ def citations(data, kind_of, names=LAYERS, ignore=None):
     not_sb = {(c["sheet"], c["plan_id"], c["column"]) for c in kept if not c["hidden"] and kind_of[c["url"]] != "SB"}
     for c in kept:
         if not c["hidden"] and kind_of[c["url"]] == "SB" and (c["sheet"], c["plan_id"], c["column"]) in not_sb:
-            c["hidden"] = EOC_CITES_CELL
+            c["hidden"] = NOT_SB_CITES_CELL
     return sheets, (kept + [dict(c, hidden=OTHER_VALUE) for c in dropped]
                     + [dict(c, hidden=STRUCK_QUOTE) for c in struck_rows])
