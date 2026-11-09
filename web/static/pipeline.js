@@ -187,3 +187,49 @@ export function pillBox(step) {
 export const stepById = (id) => STEPS.find((s) => s.id === id);
 export const before = (step, steps = STEPS) => steps.filter((s) => s.to === step.from);
 export const after = (step, steps = STEPS) => steps.filter((s) => s.from === step.to);
+
+const shownValue = (v) => v === "" ? "blank" : v;
+const plural = (n, word) => `${n} ${word}${n === 1 ? "" : "s"}`;
+const listed = (words) => words.length < 2 ? words.join("") : `${words.slice(0, -1).join(", ")} and ${words.at(-1)}`;
+const kinds = (t) => listed(t.documents.documents.map((d) => d.kind));
+
+// "3 quotes from EOC pages 46, 51", naming each document by its kind.
+function quotes(rows, trace) {
+  if (!rows.length) return "no quotes";
+  const kind = Object.fromEntries(trace.documents.documents.map((d) => [d.url, d.kind]));
+  const pages = Map.groupBy(rows, (r) => kind[r.url]);
+  const where = [...pages].map(([k, rs]) => {
+    const ps = [...new Set(rs.map((r) => r.pdf_page))].sort((x, y) => x - y);
+    return `${k} ${ps.length === 1 ? "page" : "pages"} ${ps.join(", ")}`;
+  });
+  return `${plural(rows.length, "quote")} from ${where.join("; ")}`;
+}
+
+const layer = (trace, name) => trace.layers.applied.find((l) => l.layer === name);
+const live = (t) => `live ${shownValue(t.layers.live.value)}`;
+
+// What each step took in and gave out for a cell, read from its trace.
+const STRIPS = {
+  "list-plans": (t) => [`${t.plan.row.plan_id} in the Landscape file`, `plans.csv: ${t.plan.row.plan_name}`],
+  "find-pdfs": (t) => [plural(new Set(t.documents.documents.map((d) => d.found_via)).size, "source"), `${kinds(t)} URLs`],
+  "download": (t) => [plural(t.documents.documents.length, "URL"), t.documents.documents.map((d) =>
+    `${d.kind}, ${plural(d.pages, "page")}${d.cover_problems ? ", cover problems" : ""}`).join("; ")],
+  "extract-text": (t) => [plural(t.documents.documents.length, "PDF"),
+    `text of ${plural(t.documents.documents.reduce((n, d) => n + d.pages, 0), "page")}`],
+  "draft": (t) => {
+    const fields = t.draft.cms_fields?.status === "traced" ? t.draft.cms_fields.rows.map((f) => `${f.field} = ${f.value}`) : [];
+    return [fields.length ? fields.join(", ") : "the plan's CMS fields", shownValue(t.draft.value)];
+  },
+  "cite-blanks": (t) => [`${kinds(t)} page text`, quotes(t.model_citations.rows.filter((r) => r.step === "blanks"), t)],
+  "stack-draft": (t) => [`draft ${shownValue(t.layers.draft)}`,
+    t.layers.live.value === t.layers.draft ? live(t) : `${live(t)}, set by ${t.layers.live.set_by}`],
+  "stack-presented": (t) => {
+    const presented = layer(t, "generated/presented.csv");
+    return [`presented ${shownValue(presented.value)}, ${quotes(presented.rows, t)}`, live(t)];
+  },
+  "publish": (t) => [live(t), `site cell ${shownValue(t.layers.live.value)} with ${quotes(t.layers.live.citations, t)}`],
+};
+
+// [before, after] for a step, or null when the trace does not say.
+export const strip = (step, trace) =>
+  trace?.[step.record]?.status === "traced" && STRIPS[step.id] ? STRIPS[step.id](trace) : null;

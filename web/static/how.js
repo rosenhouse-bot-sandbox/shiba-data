@@ -3,7 +3,7 @@ import { el, svg } from "./dom.js";
 import { format } from "./permalink.js";
 import {
   EXAMPLE, NODES, STEPS, LINKS, NODE_W, NODE_H, MAP_W, MAP_H,
-  nodeBox, pillBox, edge, before, after,
+  nodeBox, pillBox, edge, before, after, strip,
 } from "./pipeline.js";
 
 // The map is drawn at full size, then scaled to fit its rail.
@@ -72,13 +72,14 @@ function lens(step, steps, link, terms, example, trace) {
     ...near.map((s) => el("a", { href: link(s) }, text(s.label)))) : null;
   const end = (id) => el("div", { class: `how-end${NODES[id].source ? " source" : ""}` },
     el("small", {}, NODES[id].kind), el("code", {}, example ? shown(id).name : NODES[id].label));
+  const fromTo = example ? [example.before, example.after] : strip(step, trace);
   const para = (p) => el("p", {}, ...p.map((s) => typeof s === "string" ? s : term(terms[s[0]], s[1])));
   return el("section", { class: "how-lens" },
     chips(before(step, steps), "before", (l) => `↖ after: ${l}`),
     el("div", { class: "how-edge-big" }, end(step.from), el("span", { class: "how-wire" }),
       el("h2", { class: "how-step", tabindex: "-1" }, step.label), el("span", { class: "how-wire to" }), end(step.to)),
     el("div", { class: "how-card" },
-      example ? el("p", { class: "how-strip" }, el("code", { class: "from" }, example.before), " becomes ", el("code", { class: "to" }, example.after)) : null,
+      fromTo ? el("p", { class: "how-strip" }, el("code", { class: "from" }, fromTo[0]), " becomes ", el("code", { class: "to" }, fromTo[1])) : null,
       ...step.paras.map(para), ...(example?.paras ?? []).map(para)),
     example ? rows("Input", step.from, example.highlight[0], example.none?.[0]) : null,
     example ? rows("Output", step.to, example.highlight[1], example.none?.[1]) : null,
