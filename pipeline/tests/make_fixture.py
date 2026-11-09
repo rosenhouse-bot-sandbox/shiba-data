@@ -5,6 +5,7 @@ Usage: python3 -I make_fixture.py <pbp_dir>
 import gzip
 import json
 import os
+import pathlib
 import sys
 
 here = os.path.dirname(os.path.abspath(__file__))
@@ -15,7 +16,7 @@ from appendix_b import PLAN_IDS  # noqa: E402
 
 def write(path, data):
     """Keeps a file whose JSON is unchanged, because zlib versions compress the same JSON differently."""
-    if os.path.exists(path) and gzip.decompress(open(path, "rb").read()) == data:
+    if os.path.exists(path) and gzip.decompress(pathlib.Path(path).read_bytes()) == data:
         return
     with open(path, "wb") as f:
         f.write(gzip.compress(data, mtime=0))

@@ -1,4 +1,4 @@
-import glob, json, os, sys, threading, unittest
+import glob, json, os, pathlib, sys, threading, unittest
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -14,7 +14,7 @@ class StepTest(StepsTest):
         def fake(task_dir, model, effort):
             asked.append((os.path.basename(task_dir), model, effort))
             for task in glob.glob(f"{task_dir}/*.md"):
-                text = open(task).read()
+                text = pathlib.Path(task).read_text()
                 if os.path.basename(task).startswith("v-"):
                     reply = [{"id": n, "ok": True} for n in range(text.count('{"id": '))]
                 else:
@@ -42,11 +42,11 @@ class StepTest(StepsTest):
         def fake(task_dir, model, effort):
             asked.append(os.path.basename(task_dir))
             if asked[-1] == "recheck":
-                rechecked.extend(json.load(open(f"{task_dir}/items.json")))
+                rechecked.extend(json.loads(pathlib.Path(f"{task_dir}/items.json").read_text()))
             for task in glob.glob(f"{task_dir}/*.md"):
-                text = open(task).read()
+                text = pathlib.Path(task).read_text()
                 if os.path.basename(task).startswith("v-"):
-                    items = json.load(open(f"{task_dir}/items.json"))
+                    items = json.loads(pathlib.Path(f"{task_dir}/items.json").read_text())
                     reply = [{"id": n, "ok": not c["decoy"]} for n, c in enumerate(items)]
                 elif "## Facts already found" in text:
                     reply = [answer(page=1), answer(page=1, amount="$5"), answer(page=1, network="out", amount="$0", quotes=["Outpatient X-rays $0"]),
@@ -72,7 +72,7 @@ class StepTest(StepsTest):
     def test_a_reviewer_keeps_what_it_accepts_and_saves_what_a_later_run_trusts(self):
         def fake(task_dir, model, effort):
             for task in glob.glob(f"{task_dir}/*.md"):
-                text = open(task).read()
+                text = pathlib.Path(task).read_text()
                 reply = ([{"id": n, "ok": True} for n in range(text.count('{"id": '))] if os.path.basename(task).startswith("v-")
                          else [] if "## Earlier answers" in text else [answer(page=1), answer(page=1, amount="$5")])
                 with open(task[:-3] + ".json", "w") as f:

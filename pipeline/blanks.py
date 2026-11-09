@@ -117,12 +117,12 @@ def prompt_version(*templates):
 
 def bundle(work, out_dir):
     os.makedirs(out_dir, exist_ok=True)
-    names = {r["plan_id"]: r["plan_name"] for r in csv.DictReader(open(f"{DATA}/generated/plans.csv"))}
+    names = {r["plan_id"]: r["plan_name"] for r in layers.rows(f"{DATA}/generated/plans.csv")}
     for plan, keys in sorted(uncited_blanks(cells()).items()):
         layout = Doc.of_plan(work, plan).pages("layout")
         head = fill("blank_prompt.md", PLAN_NAME=names[plan], PLAN_ID=plan, YEAR=str(years.config(DATA)["year"]))
         body = [f"### {k}\n\n{FIELDS[k][0]}\n\n{passages(layout, k)}" for k in sorted(keys)]
-        open(f"{out_dir}/{plan}.md", "w").write("\n\n".join([head] + body) + "\n")
+        pathlib.Path(f"{out_dir}/{plan}.md").write_text("\n\n".join([head] + body) + "\n")
 
 
 def citations(answer):
@@ -153,8 +153,8 @@ def claims(work, answers_dir, out):
     for task in sorted(glob.glob(f"{answers_dir}/*.md")):
         if os.path.exists(task[:-3] + ".json"):
             plan = os.path.basename(task)[:-3]
-            found += gate_claims(plan, json.load(open(task[:-3] + ".json")), Doc.of_plan(work, plan).quote_ok)
-    json.dump(found, open(out, "w"), indent=1, ensure_ascii=False)
+            found += gate_claims(plan, json.loads(pathlib.Path(task[:-3] + ".json").read_text()), Doc.of_plan(work, plan).quote_ok)
+    pathlib.Path(out).write_text(json.dumps(found, indent=1, ensure_ascii=False))
     print(len(found), "claims")
 
 
@@ -195,12 +195,12 @@ def verifier_items(found, planted):
 
 def verify(work, claims_path, out_dir):
     os.makedirs(out_dir, exist_ok=True)
-    found = json.load(open(claims_path))
+    found = json.loads(pathlib.Path(claims_path).read_text())
     filled = {k: [p for p, c in by_plan.items() if c["value"].strip()] for k, by_plan in cells().items()}
     docs = {}
     doc_of = lambda plan: docs.setdefault(plan, Doc.of_plan(work, plan))
     items = verifier_items(found, decoys(found, filled, doc_of))
-    json.dump(items, open(f"{out_dir}/items.json", "w"), indent=1, ensure_ascii=False)
+    pathlib.Path(f"{out_dir}/items.json").write_text(json.dumps(items, indent=1, ensure_ascii=False))
     for task in sorted({c["task"] for c in items}):
         parts = [fill("vblank_prompt.md")]
         for n, c in enumerate(c for c in items if c["task"] == task):
@@ -208,7 +208,7 @@ def verify(work, claims_path, out_dir):
                      "claim": c["claim"], "citations": c["citations"]}
             parts.append(f"### Item {n}\n\n{json.dumps(shown, ensure_ascii=False)}\n\nPassages:\n\n"
                          f"{passages(doc_of(c['plan']).pages('layout'), c['key'])}")
-        open(f"{out_dir}/v-{task}.md", "w").write("\n\n".join(parts) + "\n")
+        pathlib.Path(f"{out_dir}/v-{task}.md").write_text("\n\n".join(parts) + "\n")
     print(len(found), "claims", len(items) - len(found), "decoys")
 
 
@@ -233,7 +233,7 @@ def verdicts(items, verify_dir):
     out = []
     for f in sorted(glob.glob(f"{verify_dir}/v-*.json")):
         mine = [i for i, c in enumerate(items) if c["task"] == os.path.basename(f)[2:-5]]
-        out += [dict(v, id=mine[v["id"]]) for v in json.load(open(f))
+        out += [dict(v, id=mine[v["id"]]) for v in json.loads(pathlib.Path(f).read_text())
                 if type(v.get("id")) is int and 0 <= v["id"] < len(mine)]
     return out
 
@@ -260,10 +260,10 @@ def accepted(items, verdicts, quote_ok_for):
 
 
 def accept(work, verify_dir, out):
-    items = json.load(open(f"{verify_dir}/items.json"))
+    items = json.loads(pathlib.Path(f"{verify_dir}/items.json").read_text())
     found = verdicts(items, verify_dir)
     acc = accepted(items, found, lambda plan: Doc.of_plan(work, plan).quote_ok)
-    json.dump([{k: v for k, v in c.items() if k not in ("decoy", "task")} for c in acc], open(out, "w"), indent=1, ensure_ascii=False)
+    pathlib.Path(out).write_text(json.dumps([{k: v for k, v in c.items() if k not in ("decoy", "task")} for c in acc], indent=1, ensure_ascii=False))
     print(len(acc), "of", sum(1 for c in items if not c.get("decoy")), "claims accepted;",
           sum(1 for c in items if c.get("decoy")), "decoys rejected;", len(missing_verdicts(items, found)), "items without a verdict")
 

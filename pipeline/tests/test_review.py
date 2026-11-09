@@ -26,7 +26,7 @@ def answering(rejected=(), asked=None):
     def answer(task_dir, model, effort):
         for name in os.listdir(task_dir):
             if name.endswith(".md"):
-                text = open(os.path.join(task_dir, name)).read()
+                text = pathlib.Path(os.path.join(task_dir, name)).read_text()
                 ok = not any(r in text for r in rejected)
                 if asked is not None:
                     asked.append(name)

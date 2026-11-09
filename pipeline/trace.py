@@ -14,7 +14,7 @@ the record. With a work_dir from a run, `build` adds the run's prompts, their sa
 `export` writes every main cell's records once by content, which web/worker.js loads into D1.
 `page` prints a page's layout text from a run's <work_dir>/texts, where blobs.py puts it.
 """
-import csv, glob, hashlib, json, os, sqlite3, sys
+import contextlib, csv, glob, hashlib, json, os, sqlite3, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -444,16 +444,22 @@ def page(work, sha256, n):
     return eoc.load_pages(blobs.text_path(work, "layout", sha256))[int(n)]
 
 
+def read_only(path):
+    return contextlib.closing(sqlite3.connect(f"file:{path}?mode=ro", uri=True))
+
+
 def main(command=None, *args):
     if command == "build" and len(args) in (3, 4):
         build(int(args[0]), *args[1:])
     elif command == "cell" and len(args) == 4:
-        db = sqlite3.connect(f"file:{args[0]}?mode=ro", uri=True)
-        print(json.dumps(cell(db, *args[1:]), indent=1, ensure_ascii=False))
+        with read_only(args[0]) as db:
+            print(json.dumps(cell(db, *args[1:]), indent=1, ensure_ascii=False))
     elif command == "check" and len(args) == 1:
-        check(sqlite3.connect(f"file:{args[0]}?mode=ro", uri=True))
+        with read_only(args[0]) as db:
+            check(db)
     elif command == "export" and len(args) == 2:
-        export(sqlite3.connect(f"file:{args[0]}?mode=ro", uri=True), args[1])
+        with read_only(args[0]) as db:
+            export(db, args[1])
     elif command == "page" and len(args) == 3:
         print(page(*args))
     else:

@@ -160,7 +160,7 @@ def model_steps(data, texts, work, answer, versions):
 
 
 def unit_tests(candidate):
-    subprocess.run([sys.executable, "-I", "-m", "unittest", "discover", "-s", os.path.join(HERE, "tests")], check=True,
+    subprocess.run([sys.executable, "-I", "-m", "unittest", "discover", "-b", "-s", os.path.join(HERE, "tests")], check=True,
                    env=dict(os.environ, **{present.CANDIDATE: candidate}))
 
 

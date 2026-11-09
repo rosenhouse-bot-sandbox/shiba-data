@@ -7,6 +7,7 @@ import csv
 import hashlib
 import json
 import os
+import pathlib
 import re
 import subprocess
 import sys
@@ -82,18 +83,21 @@ def compare(sha, url, by_sha, by_url):
 
 
 def main(docs_csv, plans_csv, cache, out_csv, year, counties, manifest_path=None):
-    names = {r["plan_id"]: r["plan_name"] for r in csv.DictReader(open(plans_csv))}
+    with open(plans_csv) as f:
+        names = {r["plan_id"]: r["plan_name"] for r in csv.DictReader(f)}
     counties = counties.split(",")
-    by_sha, by_url = baseline_index(json.load(open(manifest_path))) if manifest_path else ({}, {})
+    by_sha, by_url = baseline_index(json.loads(pathlib.Path(manifest_path).read_text())) if manifest_path else ({}, {})
     os.makedirs(os.path.join(cache, "pdf"), exist_ok=True)
     os.makedirs(os.path.join(cache, "text"), exist_ok=True)
     results = []
-    for d in csv.DictReader(open(docs_csv)):
+    with open(docs_csv) as f:
+        docs = list(csv.DictReader(f))
+    for d in docs:
         tmp = os.path.join(cache, "pdf", hashlib.sha256(d["url"].encode()).hexdigest()[:16] + ".pdf")
         if not os.path.exists(tmp):
             subprocess.run(["curl", "-sS", "-L", "--max-time", "180", "-A", "Mozilla/5.0", "-o", tmp, d["url"]],
                            check=False)
-        raw = open(tmp, "rb").read() if os.path.exists(tmp) else b""
+        raw = pathlib.Path(tmp).read_bytes() if os.path.exists(tmp) else b""
         row = dict(d, sha256="", pages="", text_file="", cover_problems="", baseline="", baseline_file="")
         if not raw.startswith(b"%PDF"):
             row["cover_problems"] = "not a PDF"
@@ -103,7 +107,7 @@ def main(docs_csv, plans_csv, cache, out_csv, year, counties, manifest_path=None
         txt = os.path.join(cache, "text", sha[:16] + ".txt")
         if not os.path.exists(txt):
             subprocess.run([sys.executable, "-I", "-c", EXTRACT, tmp, txt], check=False)
-        text = open(txt).read() if os.path.exists(txt) else ""
+        text = pathlib.Path(txt).read_text() if os.path.exists(txt) else ""
         ids = d["plan_ids"].split(";")
         row.update(sha256=sha, pages=text.count("=====PAGE "), text_file=os.path.basename(txt),
                    cover_problems="; ".join(cover_check(text, ids, d["kind"], names, year, counties)))

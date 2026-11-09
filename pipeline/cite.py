@@ -5,6 +5,7 @@ The output is a layer (see layers.py).
 """
 import csv
 import os
+import pathlib
 import re
 import sys
 
@@ -46,8 +47,8 @@ def citations(docs, text):
 
 
 def main(docs_csv, text_dir, out_csv):
-    docs = [d for d in csv.DictReader(open(docs_csv)) if d["kind"] in ("SB", "EOC")]
-    text = {d["text_file"]: pages(open(os.path.join(text_dir, d["text_file"])).read()) for d in docs}
+    docs = [d for d in layers.rows(docs_csv) if d["kind"] in ("SB", "EOC")]
+    text = {d["text_file"]: pages(pathlib.Path(os.path.join(text_dir, d["text_file"])).read_text()) for d in docs}
     with open(out_csv, "w", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=layers.COLUMNS)
         w.writeheader()

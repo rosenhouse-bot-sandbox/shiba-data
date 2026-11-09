@@ -1,4 +1,4 @@
-import csv, json, os, pathlib, shutil, sys, tempfile, unittest
+import json, os, pathlib, shutil, sys, tempfile, unittest
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -200,7 +200,7 @@ class PublishTest(unittest.TestCase):
             blanks.publish(self.accepted(plan, key), self.data)
         raw = (self.data / "machine/blanks.csv").read_bytes()
         self.assertTrue(raw.endswith(b'"q, r"\r\n'))
-        rows = list(csv.DictReader(open(self.data / "machine/blanks.csv")))
+        rows = layers.rows(self.data / "machine/blanks.csv")
         self.assertEqual([(r["step"], r["prompt"], r["sheet"], r["plan_id"], r["column"], r["line"], r["value"], r["pdf_page"])
                           for r in rows],
                          [("blanks", blanks.prompt_version("blank_prompt.md", "vblank_prompt.md"), key.split(".")[0], plan,

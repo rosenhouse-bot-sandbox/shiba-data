@@ -87,7 +87,8 @@ def rows(plans, data, dictionary, landscape):
 
 
 def main(landscape_csv, plans_csv, pbp_dir, out_csv, state):
-    plans = list(csv.DictReader(open(plans_csv)))
+    with open(plans_csv) as f:
+        plans = list(csv.DictReader(f))
     wanted = {p["plan_id"] for p in plans}
     landscape = {}
     with open(landscape_csv, encoding="utf-8-sig") as f:

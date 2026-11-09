@@ -109,7 +109,7 @@ def main(year, work, name, mode="", candidate=""):
     out = (data if mode == "api" else pathlib.Path(work)) / "rebuilds" / name
     if (out / "report.txt").exists():
         raise SystemExit(f"{out} is done. Name the rebuild something else.")
-    seeds = json.load(open(SEEDS))
+    seeds = json.loads(pathlib.Path(SEEDS).read_text())
     copy = scratch_copy(data, work, seeds, out / "answers")
     subprocess.run([sys.executable, "-I", __file__, "steps", work, mode, candidate], check=True,
                    env=dict(os.environ, SHIBA_DATA=str(copy.parent)))

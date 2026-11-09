@@ -718,7 +718,7 @@ class WriteTest(unittest.TestCase):
     @mock.patch.dict(os.environ, {present.CANDIDATE: ""})
     def test_the_pinned_version_holds_its_cells(self):
         data = years.data_dir(YEAR)
-        self.assertEqual(present.held(data), present.held(data, json.load(open(data / "steps.json"))["present"]))
+        self.assertEqual(present.held(data), present.held(data, json.loads((data / "steps.json").read_text())["present"]))
         latest = max(present.VERSIONS)
         self.assertEqual(present.held(data, latest), present.VERSIONS[latest])
         with mock.patch.dict(os.environ, {present.CANDIDATE: f"filled@6, present@{latest}"}):
@@ -748,7 +748,7 @@ TRIAGED = {
 class ExpectedTest(unittest.TestCase):
     def test_the_committed_layer_is_current(self):
         data = years.data_dir(YEAR)
-        pinned = json.load(open(data / "steps.json"))["present"]
+        pinned = json.loads((data / "steps.json").read_text())["present"]
         self.assertEqual(layers.rows(data / layers.PRESENTED), present.layer_rows(data, pinned))
 
     def test_presents_every_expected_line(self):
