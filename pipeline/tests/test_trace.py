@@ -1,4 +1,4 @@
-import csv, os, shutil, sqlite3, sys, tempfile, unittest
+import csv, os, shutil, sqlite3, subprocess, sys, tempfile, unittest
 from unittest import mock
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -194,6 +194,11 @@ class TraceTest(unittest.TestCase):
         with self.assertRaises(LookupError):
             self.cell("main", "H1036-153-0", "ZZ_nothing")
 
+    def test_trace_and_run_start_as_scripts(self):
+        for module in (trace, run):
+            done = subprocess.run([sys.executable, "-I", module.__file__], capture_output=True, text=True)
+            self.assertEqual(done.stderr.strip(), module.__doc__.strip())
+
 
 class AnswersTest(unittest.TestCase):
     """Builds from a copy of the year without its saved answers, and a run that asked one task."""
@@ -243,9 +248,9 @@ class AnswersTest(unittest.TestCase):
         self.assertEqual(db.execute("SELECT count(*) FROM answer").fetchall(), [(2,)])
 
     def test_fails_when_a_prompt_does_not_hash_to_its_answers_key(self):
-        with open(os.path.join(self.work, run.LEDGER)) as f:
+        with open(os.path.join(self.work, blobs.LEDGER)) as f:
             prompt = next(csv.DictReader(f))["prompt"]
-        with open(os.path.join(self.work, run.PROMPTS, prompt), "a") as f:
+        with open(os.path.join(self.work, blobs.PROMPTS, prompt), "a") as f:
             f.write("changed")
         with self.assertRaisesRegex(ValueError, "does not hash to the key of facts/ambulance/read/doc.md"):
             self.build()

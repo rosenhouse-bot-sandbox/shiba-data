@@ -14,7 +14,7 @@ import csv, json, os, sqlite3, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-import ask, blobs, eoc, facts, fields, layers, present, run, steps, years
+import ask, blobs, eoc, facts, fields, layers, present, steps, years
 
 REPO_URL = "https://github.com/rosenhouse-bot-sandbox/shiba-data"
 TRACED, NONE, NOT_YET, NOT_RECORDED = "traced", "none", "not_traced_yet", "not_recorded"
@@ -111,9 +111,9 @@ def load_layers(db, data, checked):
 
 def load_answers(db, data, work):
     """Loads the replay's ledger and the saved answers it names. Fails if a kept prompt does not hash to its answer's key."""
-    tasks = list({tuple(t.values()): t for t in read(os.path.join(work, run.LEDGER))}.values())
+    tasks = list({tuple(t.values()): t for t in read(os.path.join(work, blobs.LEDGER))}.values())
     for t in tasks:
-        with open(os.path.join(work, run.PROMPTS, t["prompt"]), encoding="utf-8") as f:
+        with open(os.path.join(work, blobs.PROMPTS, t["prompt"]), encoding="utf-8") as f:
             if ask.key(t["model"], f.read(), t["effort"] or None) != t["key"]:
                 raise ValueError(f"The prompt {t['prompt']} does not hash to the key of {t['dir']}/{t['task']}")
     insert(db, "task", (dict(prompt_sha=t["prompt"], answer_key=t["key"], dir=t["dir"], task=t["task"]) for t in tasks))

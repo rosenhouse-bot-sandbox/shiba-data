@@ -74,7 +74,6 @@ def check_quotes(data, texts):
         raise SystemExit("The site cannot highlight these quotes:\n" + "\n".join(f"{layers.where(c)}: {c['quote']}" for c in lost))
 
 
-LEDGER, PROMPTS = "ledger.csv", "prompts"
 LEDGER_COLUMNS = ["dir", "task", "model", "effort", "key", "prompt"]
 
 
@@ -99,9 +98,9 @@ class Answers:
 
 
     def record(self, task_dir, tasks, model, effort):
-        os.makedirs(f"{self.work}/{PROMPTS}", exist_ok=True)
-        new = not os.path.exists(f"{self.work}/{LEDGER}")
-        with open(f"{self.work}/{LEDGER}", "a", newline="") as f:
+        os.makedirs(f"{self.work}/{blobs.PROMPTS}", exist_ok=True)
+        new = not os.path.exists(f"{self.work}/{blobs.LEDGER}")
+        with open(f"{self.work}/{blobs.LEDGER}", "a", newline="") as f:
             w = csv.DictWriter(f, LEDGER_COLUMNS, lineterminator="\n")
             if new:
                 w.writeheader()
@@ -109,7 +108,7 @@ class Answers:
                 with open(task) as t:  # as ask.answer reads it
                     text = t.read()
                 prompt = hashlib.sha256(text.encode()).hexdigest()
-                with open(f"{self.work}/{PROMPTS}/{prompt}", "wb") as out:
+                with open(f"{self.work}/{blobs.PROMPTS}/{prompt}", "wb") as out:
                     out.write(text.encode())
                 w.writerow(dict(dir=os.path.relpath(task_dir, self.work), task=os.path.basename(task), model=model,
                                 effort=effort or "", key=ask.key(model, text, effort), prompt=prompt))
