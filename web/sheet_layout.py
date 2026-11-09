@@ -15,7 +15,7 @@ FACT_COLUMNS = {"Plan ID": "plan_id", "Plan": None, "Benefit": "benefit", "Setti
 # Keep in sync with --comment, --caveat and --hand-written in web/static/style.css.
 FILLS = {"question": "FFF6D6", "caveat": "E8DCF4", "hand_written": "E3F1E0"}
 # Keep in sync with KIND_NAMES in web/static/app.js.
-KIND_NAMES = {"question": "Open question", "caveat": "Caveat", "hand_written": "Hand-written fact"}
+KIND_NAMES = {"question": "Open question", "caveat": "Caveat", "hand_written": "Added fact"}
 HEAD = "EEF1F6"
 SECTION = "1D2433"
 MAX_WIDTH = 40

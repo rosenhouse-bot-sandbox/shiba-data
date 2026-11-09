@@ -183,7 +183,7 @@ Version 10 of `document_facts.py` adds a second reader for plans whose readers m
 
 Version 11 adds a reviewer (`review.py`). Opus at high effort checks each fact that a presented cell cites, one fact per task, and the step drops the facts it rejects. `machine/reviewed_facts.csv` lists the facts a run reviewed or trusted, and later runs trust them. Before the first review, the step trusts the cited facts of the committed version. A fact no cell cites goes unreviewed until a cell cites it. A run stops if more facts need a new answer than the version's `review_cap`. A rebuild skips the reviewer.
 
-Readers still miss some prices. `override_facts.csv` holds hand-written facts for those. Each has a note that says why, and the person who writes one also adds a `hand_written` note to its cell in `comments.csv`.
+Readers still miss some prices. `override_facts.csv` holds facts that a Claude session added for those. Each has a note that says why, and the session also adds a `hand_written` note to its cell in `comments.csv`.
 
 ## 9. Present the facts as cells
 
@@ -208,7 +208,7 @@ Most main-sheet columns have rules. Every DVHA column keeps its CMS value, and s
 ## 11. People correct what is left
 
 - `edits.csv` sets a cell's value. Each row records `saw`, the value it replaced. The site build warns when the value beneath an edit changes, so a person can check the edit. Most edits are on the DVHA sheet, whose columns have no rules yet.
-- `comments.csv` adds a note to a cell. An open question shows in yellow, a caveat in lavender, and a hand-written fact in green.
+- `comments.csv` adds a note to a cell. An open question shows in yellow, a caveat in lavender, and an added fact in green.
 - `struck.csv` hides a model's quote that does not support its cell.
 
 ## 12. Stack the layers
