@@ -13,11 +13,13 @@ import csv, json, os, sqlite3, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-import blobs, eoc, fields, layers, present, years
+import blobs, eoc, facts, fields, layers, present, steps, years
 
 REPO_URL = "https://github.com/rosenhouse-bot-sandbox/shiba-data"
 TRACED, NONE, NOT_YET, NOT_RECORDED = "traced", "none", "not_traced_yet", "not_recorded"
 MODEL_STEPS = ("blanks", "filled")
+FACT_FILES = {"document": "machine/document_facts.csv", "pbp": "generated/pbp_facts.csv", "added": present.ADDED}
+FACT_COLUMNS = ", ".join(f'f."{c}"' for c in facts.COLUMNS)
 DRAFT_CODE = {"main": ("pipeline/main_chart.py", "chart_row"), "dvha": ("pipeline/dvha.py", "dvha_row")}
 
 
@@ -67,6 +69,10 @@ def build(year, out, sha):
     insert(db, "draft_cell", sheet_cells(layers.generated(data)))
     insert(db, "cms_source", (renamed(r) for r in read(data / "generated/cms_sources.csv")))
     load_layers(db, data, checked)
+    reviewed = {facts.identity(f) for f in read(data / "machine/reviewed_facts.csv")}
+    insert(db, "fact", (dict(f, origin=origin, reviewed=int(facts.identity(f) in reviewed))
+                        for origin, path in FACT_FILES.items() for f in read(data / path)))
+    load_rules(db, data)
     insert(db, "comment", (dict(renamed(c), pdf_page=number(c["pdf_page"])) for c in read(data / "comments.csv")))
     insert(db, "struck_quote", (renamed(s) for s in layers.strikes(data)))
     db.commit()
@@ -94,6 +100,43 @@ def load_layers(db, data, checked):
     _, cited = layers.citations(data, {d["url"]: d["kind"] for d in checked})
     insert(db, "live_citation", (dict(layer=c["layer"], position=c["position"], site_order=n, hidden=c["hidden"])
                                  for n, c in enumerate(cited)))
+
+
+def load_rules(db, data):
+    organization = {p["plan_id"]: p["organization"] for p in read(data / "generated/plans.csv")}
+    found = present.plan_facts(data)
+    held = present.held(data, steps.versions(data, {"present": present.VERSIONS})["present"])
+    for r in layers.generated(data)["main"]:
+        plan_id = r["plan_id"]
+        for col in present.COLUMNS:
+            got, aside = present.explain(organization[plan_id], found[plan_id], col)
+            insert(db, "rule_line", (dict(plan_id=plan_id, col=col, line=n, value=value, presented=int(present.presents(cited)),
+                                          held=held.get((col, plan_id))) for n, (value, cited) in enumerate(got, 1)))
+            used = {(n, facts.identity(f)) for n, (_, cited) in enumerate(got, 1) for f in cited}
+            insert(db, "rule_fact", [dict(plan_id=plan_id, col=col, line=n, **dict(zip(facts.IDENTITY, identity)), reasons=None)
+                                     for n, identity in sorted(used)]
+                   + [dict(plan_id=plan_id, col=col, line=None, **dict(zip(facts.IDENTITY, identity)),
+                           reasons=json.dumps(reasons)) for identity, reasons in sorted(aside.items())])
+
+
+def rule(db, plan_id, col, code):
+    """Record 6: the rule's lines and the facts it used and set aside."""
+    lines = rows(db, "SELECT line, value, presented, held FROM rule_line WHERE plan_id = ? AND col = ? ORDER BY line",
+                 plan_id, col)
+    considered = rows(db, f"""SELECT r.line, r.reasons, {FACT_COLUMNS}, f.origin, f.reviewed
+                              FROM rule_fact r JOIN fact f USING (fact_id, source, doc_sha, page)
+                              WHERE r.plan_id = ? AND r.col = ? ORDER BY r.line, f.fact_id""", plan_id, col)
+    function = present.COLUMNS[col].__qualname__.split(".")[0]
+    return considered, record(True, code=dict(file="pipeline/present.py", function=function, url=code + "pipeline/present.py"),
+                              held=lines[0]["held"], lines=[dict(
+                                  line=n["line"], value=n["value"], presented=bool(n["presented"]),
+                                  facts=[fact_of(f) for f in considered if f["line"] == n["line"]]) for n in lines],
+                              set_aside=[dict(fact_of(f), reasons=json.loads(f["reasons"])) for f in considered
+                                         if f["line"] is None])
+
+
+def fact_of(row):
+    return {k: v for k, v in row.items() if k not in ("line", "reasons")} | {"reviewed": bool(row["reviewed"])}
 
 
 def rows(db, sql, *args):
@@ -135,6 +178,8 @@ def cell(db, sheet, plan_id, col):
     cms = rows(db, "SELECT file, field, title, value, meaning FROM cms_source WHERE plan_id = ? AND col = ?", plan_id, col)
     file, function = DRAFT_CODE[sheet]
     has_rule = sheet == "main" and col in present.COLUMNS
+    considered, rule_record = rule(db, plan_id, col, code) if has_rule else ([], {"status": NONE})
+    added = list({json.dumps(f): f for f in map(fact_of, considered) if f["origin"] == "added"}.values())
     model = [dict(r, answers={"status": NOT_RECORDED if r["step"] == "xref" else NOT_YET})
              for r in cited if r.get("step") in MODEL_STEPS + ("xref",)]
     return {
@@ -148,8 +193,8 @@ def cell(db, sheet, plan_id, col):
                         cms_fields=record(cms, rows=cms) if cms else {"status": NOT_YET}),
         "answers": {"status": NOT_YET if has_rule else NONE},
         "fact_checks": {"status": NOT_YET if has_rule else NONE},
-        "rule": {"status": NOT_YET} if has_rule else {"status": NONE},
-        "added_facts": {"status": NOT_YET if has_rule else NONE},
+        "rule": rule_record,
+        "added_facts": record(added, rows=added),
         "notes": record(n := rows(db, "SELECT kind, comment, url, pdf_page, quote FROM comment WHERE sheet = ? AND plan_id = ? "
                                       "AND col = ?", sheet, plan_id, col), rows=n),
         "struck_quotes": record(s := rows(db, "SELECT quote, note FROM struck_quote WHERE sheet = ? AND plan_id = ? AND col = ?",

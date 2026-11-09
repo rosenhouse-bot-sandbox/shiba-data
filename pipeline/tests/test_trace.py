@@ -108,10 +108,36 @@ class TraceTest(unittest.TestCase):
     def test_says_not_traced_yet_for_records_later_milestones_fill(self):
         records = self.cell(*AMBULANCE)
         self.assertEqual(records["model_citations"]["status"], trace.NOT_YET)
-        for name in ("answers", "fact_checks", "rule", "added_facts"):
+        for name in ("answers", "fact_checks"):
             self.assertEqual(records[name]["status"], trace.NOT_YET, name)
         self.assertEqual(records["draft"]["cms_fields"]["status"], trace.NOT_YET)
         self.assertEqual(records["plan"]["landscape_row"]["status"], trace.NOT_YET)
+
+    def test_lists_the_facts_each_line_used_and_why_the_rule_set_others_aside(self):
+        rule = self.cell(*AMBULANCE)["rule"]
+        self.assertEqual(rule["code"]["function"], "ambulance")
+        self.assertEqual([(n["line"], n["value"], n["presented"]) for n in rule["lines"]],
+                         [(1, "$325 or 20%", True), (2, "$325", True)])
+        self.assertIn("ae326523b26fbf5e", [f["fact_id"] for f in rule["lines"][0]["facts"]])
+        self.assertEqual([f["fact_id"] for f in rule["lines"][1]["facts"]], ["dcc6a0f01e6c0594"])
+        aside = {f["fact_id"]: f["reasons"] for f in rule["set_aside"]}
+        self.assertEqual(aside["aab50a29be55fef4"], ["SB ranks below EOC"])
+
+    def test_a_line_without_a_document_fact_is_not_presented(self):
+        (plan_id, col), = self.db.execute("SELECT plan_id, col FROM rule_line WHERE presented = 0 LIMIT 1").fetchall()
+        lines = self.cell("main", plan_id, col)["rule"]["lines"]
+        self.assertTrue(any(not n["presented"] for n in lines))
+        for n in lines:
+            self.assertEqual(n["presented"], any(f["source"] in ("SB", "EOC") for f in n["facts"]), n)
+
+    def test_says_why_the_pinned_version_holds_a_cell(self):
+        rule = self.cell("main", "H5439-010-0", "K_tests_labs")["rule"]
+        self.assertEqual(rule["held"], present.HELD_1[("K_tests_labs", "H5439-010-0")])
+
+    def test_lists_the_added_facts_a_rule_considered(self):
+        added = self.cell("main", "H1372-003-0", "AB_ambulance")["added_facts"]
+        self.assertEqual([(f["fact_id"], f["origin"]) for f in added["rows"]], [("279e0b3e50b5b24d", "added")])
+        self.assertEqual(self.cell(*AMBULANCE)["added_facts"]["status"], trace.NONE)
 
     def test_a_column_without_a_rule_has_no_rule_record(self):
         self.assertNotIn("C_premium", present.COLUMNS)

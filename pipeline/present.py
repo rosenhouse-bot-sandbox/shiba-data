@@ -2,7 +2,7 @@
 
 Usage: python3 -I pipeline/present.py <year>
 """
-import collections, csv, json, os, re, sys
+import collections, contextvars, csv, itertools, json, os, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -15,9 +15,69 @@ ADVANCED = ("imaging.diagnostic.advanced.ct", "imaging.diagnostic.advanced.mri",
 NO_MAMMOGRAM_ZERO = ("Kaiser", "Humana", "Devoted")
 
 
+# While explain() runs a rule, this maps the identity of each fact a filter examined to why filters set it aside.
+_reasons = contextvars.ContextVar("reasons", default=None)
+
+
+def note(f, reason=None):
+    """Records that a filter examined f, and why it set f aside, if it did."""
+    reasons = _reasons.get()
+    if reasons is not None:
+        reasons.setdefault(facts.identity(f), []).extend([reason] if reason else [])
+
+
+def keep(found, test, reason):
+    """The facts test accepts. Notes reason(f) for the others."""
+    kept, tracing = [], _reasons.get() is not None
+    for f in found:
+        ok = test(f)
+        if tracing:
+            note(f, None if ok else reason(f))
+        if ok:
+            kept.append(f)
+    return kept
+
+
+def prefer(found, test, reason):
+    """The facts test accepts, or all the facts if it accepts none."""
+    return keep(found, test if any(map(test, found)) else lambda f: True, reason)
+
+
+def unless(reason):
+    """Names, for a reader, why the decorated filter rejects a fact when no FILTERED field explains it."""
+    def named(ok):
+        ok.unless = reason
+        return ok
+    return named
+
+
+# The fields a filter may reject a fact for, and a value that the usual filters accept.
+FILTERED = (("network", "in"), ("covered_by", "medicare"), ("covered_by", "supplemental"), ("cost_kind", "copay"),
+            ("condition", ""), ("provider_tier", ""), ("package", ""))
+
+
+def why_not(f, ok):
+    """Names the fewest fields whose values made ok reject f, or else ok's own reason."""
+    for n in range(1, len(FILTERED) + 1):
+        for changes in itertools.combinations(FILTERED, n):
+            if (len({field for field, _ in changes}) == n and all(f[field] != value for field, value in changes)
+                    and ok(dict(f, **dict(changes)))):
+                return " and ".join(f"{field} is {f[field]!r}" for field, _ in changes)
+    return ok.unless
+
+
+def screen(found, ok):
+    """The facts ok accepts. Notes why it rejects the others."""
+    return keep(found, ok, lambda f: why_not(f, ok))
+
+
 def top(found):
     """The facts from the best source among them."""
-    return [f for f in found if RANK[f["source"]] == min(RANK[g["source"]] for g in found)]
+    best_rank = min((RANK[g["source"]] for g in found), default=None)
+    for f in found:
+        if RANK[f["source"]] != best_rank:
+            note(f, f"{f['source']} ranks below {facts.SOURCES_BEST_FIRST[best_rank]}")
+    return [f for f in found if RANK[f["source"]] == best_rank]
 
 
 def usable(f):
@@ -25,9 +85,14 @@ def usable(f):
             and not (f["condition"] or f["provider_tier"] or f["package"]))
 
 
-def best(found, leaf, setting, ok=usable):
+def best(found, leaf, setting, ok=usable, settings_noted=True):
     """The ok facts for leaf and setting from the best source, and within it the most specific."""
-    fits = [f for f in found if ok(f) and facts.covers(f["benefit"], leaf) and facts.covers(f["setting"], setting)]
+    fits = []
+    for f in screen([f for f in found if facts.covers(f["benefit"], leaf)], ok):
+        if facts.covers(f["setting"], setting):
+            fits.append(f)
+        elif settings_noted:
+            note(f, f"setting {f['setting']!r} is not {setting!r}")
     if not fits:
         return []
     fits = top(fits)
@@ -36,13 +101,23 @@ def best(found, leaf, setting, ok=usable):
         return f["benefit"].count("."), f["setting"] != "any", f["setting"].count(".")
 
     deepest = max(map(depth, fits))
+    for f in fits:
+        if depth(f) != deepest:
+            note(f, "a more specific fact won")
     return [f for f in fits if depth(f) == deepest]
 
 
 def winners(found, leaves, settings, ok=usable):
     """The best ok facts at the settings, or at an outpatient hospital if none of the settings has one."""
-    got = [f for s in settings for leaf in leaves for f in best(found, leaf, s, ok)]
-    return got or [f for leaf in leaves for f in best(found, leaf, "outpatient_hospital", ok)]
+    got = [f for s in settings for leaf in leaves for f in best(found, leaf, s, ok, settings_noted=False)]
+    if not got:
+        settings = ("outpatient_hospital",)
+        got = [f for leaf in leaves for f in best(found, leaf, settings[0], ok, settings_noted=False)]
+    for f in found:
+        if (any(facts.covers(f["benefit"], leaf) for leaf in leaves) and ok(f)
+                and not any(facts.covers(f["setting"], s) for s in settings)):
+            note(f, f"setting {f['setting']!r} is not {' or '.join(map(repr, settings))}")
+    return got
 
 
 def amounts(found):
@@ -74,9 +149,13 @@ def xray_imaging(organization, found):
     xrays = winners(found, ["imaging.xray"], OFFICES[:2] if humana else OFFICES)
     advanced = winners(found, ADVANCED, OFFICES)
     line2 = show(advanced)
-    mammograms = [f for f in winners(found, ["imaging.diagnostic.mammogram"], OFFICES)
-                  if f["cost_kind"] == "copay" and f["amount"] == "$0"]
-    if line2 and mammograms and not any(name in organization for name in NO_MAMMOGRAM_ZERO):
+    mammograms = keep(winners(found, ["imaging.diagnostic.mammogram"], OFFICES),
+                      lambda f: f["cost_kind"] == "copay" and f["amount"] == "$0", lambda f: "only a $0 mammogram copay counts")
+    if not line2:
+        mammograms = keep(mammograms, lambda f: False, lambda f: "a $0 mammogram counts only with a CT, MRI or PET price")
+    mammograms = keep(mammograms, lambda f: not any(name in organization for name in NO_MAMMOGRAM_ZERO),
+                      lambda f: f"{organization} keeps no $0 low end for a mammogram")
+    if mammograms:
         line2 = show(advanced + mammograms)
         advanced += mammograms
     return [(show(xrays), unique(xrays)), (line2, unique(advanced))]
@@ -112,24 +191,34 @@ def show_or(found):
 def ambulance(organization, found):
     """Line 1 is trips within the U.S. and line 2 is emergency trips abroad, each as (value, cited facts).
     See the expert's rules in #99."""
-    here = unique([f for leaf in TRIPS for f in best(found, leaf, "any", trip_here)])
-    abroad = unique([f for leaf in TRIPS for f in best(found, leaf, "outside_us", trip_abroad)])
+    here = unique([f for leaf in TRIPS for f in best([f for f in found if f["setting"] != "outside_us"], leaf, "any", trip_here)])
+    trips = [f for f in found if f["setting"] == "outside_us"]
+    abroad = unique([f for leaf in TRIPS for f in best(trips, leaf, "outside_us", trip_abroad)])
     priced = [f for f in abroad if f["cost_kind"] in PRICED]
     covered = [f for f in abroad if f["cost_kind"] == "covered"]
     excluded = [f for f in abroad if f["cost_kind"] == "not_covered"]
     unclear = [f for f in abroad if f["cost_kind"] == "unclear"]
     if unclear:
         line2 = ("EOC unclear", unclear)
+        for f in priced + covered + excluded:
+            note(f, "line 2 says the EOC is unclear")
     elif priced:
         line2 = (show_or(priced), priced)
+        for f in covered + excluded:
+            note(f, "line 2 shows a price abroad")
     elif covered:
         plain = [f for f in here if not f["condition"]]
         line2 = (show_or(plain), covered + plain)
+        for f in excluded:
+            note(f, "line 2 shows that trips abroad are covered")
     elif excluded:
         line2 = ("not covered", excluded)
     else:
         line2 = ("", [])
     return [(show_or(here), here), line2]
+
+
+ZERO_SURGERIES = ("surgery.colonoscopy", "surgery.skin_biopsy")
 
 
 def outpatient_surgery(organization, found):
@@ -138,11 +227,13 @@ def outpatient_surgery(organization, found):
     So does a $0 low end that any source gives surgery in that setting, even one for other services (the expert's rule in #99)."""
     def line(setting):
         cost = best(found, "surgery", setting)
+        exact = keep([f for f in found if f["benefit"] in ZERO_SURGERIES], lambda f: f["setting"] == setting,
+                     lambda f: f"the {setting!r} line counts only a price at {setting!r} itself")
         if not cost:
+            keep(exact, lambda f: False, lambda f: f"the {setting!r} line has no surgery price")
             return "", []
-        zeros = [f for leaf in ("surgery.colonoscopy", "surgery.skin_biopsy")
-                 for f in best(found, leaf, setting, lambda f: usable(f) and f["benefit"] == leaf and f["setting"] == setting)
-                 if f["amount"] == "$0"]
+        zeros = keep([f for leaf in ZERO_SURGERIES for f in best([g for g in exact if g["benefit"] == leaf], leaf, setting)],
+                     lambda f: f["amount"] == "$0", lambda f: "only a $0 colonoscopy or skin biopsy counts")
         low_ends = [f for f in found if usable(f) and f["benefit"] == "surgery" and f["setting"] == setting
                     and f["amount"].startswith("$0-")]
         return show(cost + zeros + [dict(f, amount="$0") for f in low_ends]), unique(cost + zeros + low_ends)
@@ -166,7 +257,12 @@ def tests_labs(organization, found):
     """Shows "tests/labs". Each side uses office and freestanding prices, or outpatient hospital ones if there are none."""
     tests = winners(found, ["tests.diagnostic"], OFFICES, any_test)
     if any(f["plan_id"] in HOSPITAL_SLEEP_STUDY for f in found):
-        tests += best(found, "tests.diagnostic.sleep_study", "outpatient_hospital")
+        keep([f for f in found if f["benefit"] == "tests.diagnostic.sleep_study"],
+             lambda f: facts.covers(f["setting"], "outpatient_hospital"), lambda f: "only a sleep study at an outpatient hospital counts")
+        tests += best(found, "tests.diagnostic.sleep_study", "outpatient_hospital", settings_noted=False)
+    else:
+        keep([f for f in found if f["benefit"] == "tests.diagnostic.sleep_study"], lambda f: False,
+             lambda f: "a sleep study counts only for " + ", ".join(HOSPITAL_SLEEP_STUDY))
     if tests and any(name in organization for name in ZERO_TESTS):
         zeros = winners(found, ["imaging.diagnostic.mammogram"], OFFICES) + [
             f for s in ("outpatient_hospital", "asc") for f in best(found, "surgery.colonoscopy", s)]
@@ -176,9 +272,12 @@ def tests_labs(organization, found):
 
 
 def visit_line(found, setting, network):
-    got = best(found, "visits", setting, lambda f: priced(f, network))
-    got = [f for f in got if f["network"] == network] or got
-    got = [f for f in got if not f["condition"]] or got
+    def ok(f):
+        return priced(f, network)
+
+    got = best([f for f in found if f["network"] in (network, "any")], "visits", setting, ok)
+    got = prefer(got, lambda f: f["network"] == network, lambda f: f"a price for network {network!r} won")
+    got = prefer(got, lambda f: not f["condition"], lambda f: "a price without a condition won")
     return show(got), got
 
 
@@ -186,6 +285,9 @@ def visits(setting):
     """Line 1 is in network and line 2 out of network, if the plan prices any visit out of network."""
     def rule(organization, found):
         out = any(f["benefit"] == "visits" and f["network"] == "out" and priced(f, "out") for f in found)
+        if not out:
+            keep([f for f in found if facts.covers(f["benefit"], "visits") and f["network"] == "out"], lambda f: False,
+                 lambda f: "the plan has no out-of-network visit price")
         return [visit_line(found, setting, "in"), visit_line(found, setting, "out") if out else ("", [])]
     return rule
 
@@ -215,10 +317,14 @@ def inpatient(organization, found):
     daily = [f for f in got if days(f)]
     paid = [f for f in daily if any(facts.number(a) > 0 for a in amounts([f]))]
     if paid:
+        for f in got:
+            if f not in paid:
+                note(f, "line 1 shows the days that cost more than $0" if days(f) else "a cost per day won")
         first = min(days(f)[0] for f in paid)
         last = [days(f)[1] for f in paid]
         return [(show(paid), paid), (span(str(first), str(max(last))) if all(last) else f"{first}+", paid)]
-    stays = [f for f in got if f["unit"] == "per stay"]
+    stays = keep(got, lambda f: f["unit"] == "per stay", lambda f: "a cost per stay won") if any(
+        f["unit"] == "per stay" for f in got) else []
     if stays:
         return [(f"{show(stays)} per admission", stays), ("", [])]
     return [(show(got), got), ("", [])]
@@ -230,13 +336,20 @@ def unique(found):
 
 def giveback(organization, found):
     """Shows the monthly Part B premium reduction."""
-    got = best(found, "giveback", "any", lambda f: f["cost_kind"] in ("part_b_reduction", "covered")
-               and not (f["package"] or f["provider_tier"]))
-    got = [f for f in got if not f["condition"]] or got
+    @unless("it is not a Part B premium reduction")
+    def ok(f):
+        return f["cost_kind"] in ("part_b_reduction", "covered") and not (f["package"] or f["provider_tier"])
+
+    got = prefer(best(found, "giveback", "any", ok), lambda f: not f["condition"],
+                 lambda f: "a reduction without a condition won")
     paid = [f for f in got if f["cost_kind"] == "part_b_reduction"]
+    for f in got:
+        if paid and f not in paid:
+            note(f, "a reduction amount won")
     return [(show(paid), paid)] if paid else [("●", got)] if got else [("", [])]
 
 
+@unless("it is not a coinsurance or $0 copay for a Part B drug")
 def drug_price(f):
     return (priced(f) and not f["provider_tier"] and facts.covers("part_b_drugs", f["benefit"])
             and (f["cost_kind"] == "coinsurance" or f["amount"] == "$0"))
@@ -245,7 +358,7 @@ def drug_price(f):
 def part_b_drugs(organization, found):
     """Shows the range of Part B drug coinsurance, from each kind of drug's best source.
     A $0 copay, such as for vaccines, counts as 0%."""
-    ok = [f for f in found if drug_price(f)]
+    ok = screen([f for f in found if facts.covers("part_b_drugs", f["benefit"])], drug_price)
     got = [f for leaf in sorted({f["benefit"] for f in ok}) for f in top([g for g in ok if g["benefit"] == leaf])]
     percents = sorted(facts.number(n) for n in amounts(got))
     return [(span(f"{percents[0]:g}%", f"{percents[-1]:g}%") if got else "", got)]
@@ -260,17 +373,24 @@ def medical_deductible(organization, found):
     """Shows the in-network deductible, or else the out-of-network one, and says if it applies to some services only.
     A $0 in-network deductible shows as $0, whatever the out-of-network one is."""
     for networks in (("in", "any"), ("out",)):
+        @unless(f"it is not a Medicare deductible in network {networks[0]!r}")
         def ok(f):
             return deductible_ok(f) and f["network"] in networks
         got = best(found, "medical_deductible.some", "any", ok)
         if got:
             break
     else:
+        keep([f for f in found if f["benefit"] == "medical_deductible.part_b"], lambda f: False,
+             lambda f: "the column shows the Part B deductible only beside a plan deductible")
         return [("", [])]
-    if show(got) == "$0":
-        return [("$0", got)]
     some = [f for f in found if f["benefit"] == "medical_deductible.some" and ok(f)]
-    part_b = [f for f in found if f["benefit"] == "medical_deductible.part_b" and f["cost_kind"] == "covered"]
+    part_b = keep([f for f in found if f["benefit"] == "medical_deductible.part_b"], lambda f: f["cost_kind"] == "covered",
+                  lambda f: "only a covered Part B deductible counts")
+    if show(got) == "$0":
+        for f in some + part_b:
+            if f not in got:
+                note(f, "a $0 deductible won")
+        return [("$0", got)]
     value = "Part B deductible" if part_b else show(got)
     if networks == ("out",):
         value += " some out-of-network services" if some else " out-of-network only"
@@ -291,18 +411,20 @@ def offers(f):
 def dot(*leaves):
     """Shows ● for a routine benefit. Facts for only a Medicare, package, conditional or uncovered benefit cite a blank."""
     def rule(organization, found):
-        mine = [f for f in found if f["network"] in ("in", "any")
-                and any(facts.covers(f["benefit"], leaf) for leaf in leaves)]
-        yes = [f for f in mine if offers(f)]
+        mine = keep([f for f in found if any(facts.covers(f["benefit"], leaf) for leaf in leaves)],
+                    lambda f: f["network"] in ("in", "any"), lambda f: f"network is {f['network']!r}")
+        yes = screen(mine, offers)
         return [("●", top(yes))] if yes else [("", top(mine) if mine else [])]
     return rule
 
 
 def packages(organization, found):
     """Shows ● when a member may buy an optional package. A document that says there is none cites a blank."""
-    mine = [f for f in found if f["network"] in ("in", "any") and f["covered_by"] == "supplemental"]
+    mine = keep(keep(found, lambda f: f["covered_by"] == "supplemental", lambda f: f"covered_by is {f['covered_by']!r}"),
+                lambda f: f["network"] in ("in", "any"), lambda f: f"network is {f['network']!r}")
     sold = [f for f in mine if f["cost_kind"] == "premium" and f["package"]]
-    none = [f for f in mine if facts.covers(f["benefit"], "packages")]
+    none = keep([f for f in mine if facts.covers(f["benefit"], "packages") and f not in sold], lambda f: not sold,
+                lambda f: "a package for sale won")
     return [("●", top(sold))] if sold else [("", top(none) if none else [])]
 
 
@@ -330,6 +452,49 @@ COLUMNS = {"L_xray_imaging": xray_imaging, "AB_ambulance": ambulance, "I_outpati
            "R_dental": dot("dental.preventive", "dental.comprehensive"), "U_naturopath": dot("extras.naturopathy"),
            "P_vision": dot("vision.exam", "vision.eyewear"), "Q_hearing": dot("hearing.exam", "hearing.aids"),
            "W_fitness": dot("fitness"), "Y_otc": dot("otc"), "AA_opt_packages": packages}
+
+
+# The benefits each rule reads. A fact for a broader or narrower benefit is one the rule considers.
+LEAVES = {"L_xray_imaging": ("imaging",), "AB_ambulance": ("ambulance",), "I_outpatient_surgery": ("surgery",),
+          "F_primary_care": ("visits",), "G_specialist": ("visits",), "H_inpatient": ("inpatient",),
+          "J_outpatient_rehab": ("rehab",), "K_tests_labs": ("tests",), "Z_part_b_reduction": ("giveback",),
+          "M_part_b_drugs": ("part_b_drugs",), "O_medical_deductible": ("medical_deductible",),
+          "S_acupuncture": ("extras.acupuncture",), "T_chiropractic": ("extras.chiropractic",),
+          "V_massage": ("extras.massage",), "X_transportation": ("extras.transportation",),
+          "R_dental": ("dental",), "U_naturopath": ("extras.naturopathy",), "P_vision": ("vision",),
+          "Q_hearing": ("hearing",), "W_fitness": ("fitness",), "Y_otc": ("otc",), "AA_opt_packages": ("packages",)}
+
+
+def related(f, leaves):
+    return any(facts.covers(f["benefit"], leaf) or facts.covers(leaf, f["benefit"]) for leaf in leaves)
+
+
+# A reason explain() gives only if a filter set a fact aside without noting why. A test keeps it from happening.
+UNNOTED = "no filter recorded a reason"
+
+
+def explain(organization, found, column):
+    """(lines, set_aside): the rule's lines, and {identity: reasons} for each fact for a benefit in LEAVES that the
+    rule did not use."""
+    token = _reasons.set({})
+    try:
+        got = COLUMNS[column](organization, found)
+        reasons = _reasons.get()
+    finally:
+        _reasons.reset(token)
+    used = {facts.identity(f) for _, cited in got for f in cited}
+
+    def why(f):
+        if facts.identity(f) not in reasons:
+            return [f"the column does not use {f['benefit']}"]
+        return sorted(set(reasons[facts.identity(f)])) or [UNNOTED]
+    return got, {facts.identity(f): why(f) for f in found
+                 if related(f, LEAVES[column]) and facts.identity(f) not in used}
+
+
+def presents(cited):
+    """Whether a line's cited facts give it a presented row. A line without one keeps its other layers' value."""
+    return any(f["source"] in facts.DOCUMENTS for f in cited)
 
 
 def lines(data, column, document=None):
@@ -376,7 +541,7 @@ def layer_rows(data, version=None):
                 raise ValueError(f"{plan_id} {column} has one line, not {[value for value, _ in got]}")
             for n, (value, cited) in enumerate(got, 1):
                 row = dict(sheet="main", plan_id=plan_id, column=column, line="" if one_line else str(n), value=value)
-                cites = [(url[f["doc_sha"]], f["page"], q) for f in cited if f["source"] in facts.DOCUMENTS
+                cites = [(url[f["doc_sha"]], f["page"], q) for f in cited if presents([f])
                          for q in json.loads(f["quotes"])]
                 for cite in cites:
                     full = dict(row, **dict(zip(("url", "pdf_page", "quote"), cite)))

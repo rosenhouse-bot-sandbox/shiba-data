@@ -241,6 +241,10 @@ def fact_id(row):
     return hashlib.sha256("\x1f".join(row[k] for k in KEY).encode()).hexdigest()[:16]
 
 
+def identity(row):
+    return tuple(row[c] for c in IDENTITY)
+
+
 def covers(word, leaf):
     """Whether a fact's benefit or setting word applies to leaf. The setting `any` applies to every setting."""
     return word == "any" or leaf == word or leaf.startswith(word + ".")

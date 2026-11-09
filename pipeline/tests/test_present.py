@@ -632,5 +632,175 @@ class ExpectedTest(unittest.TestCase):
                               for n, (v, cited) in enumerate(got, 1) if v or cited})
 
 
+class ExplainTest(unittest.TestCase):
+    def set_aside(self, column, *found):
+        found = [dict(f, fact_id=f["amount"]) for f in found]
+        got, aside = present.explain("Humana", list(found), column)
+        self.assertEqual(got, present.COLUMNS[column]("Humana", list(found)))
+        return {f["amount"]: aside[facts.identity(f)] for f in found if facts.identity(f) in aside}
+
+    def test_says_which_filter_set_each_fact_aside(self):
+        eoc = fact(amount="$10")
+        self.assertEqual(self.set_aside("L_xray_imaging", eoc, fact(amount="$20", source="SB", page="3"),
+                                        fact(amount="$30", network="out"), fact(amount="$40", condition="QMB"),
+                                        fact(amount="$50", setting="outpatient_hospital")), {
+            "$20": ["SB ranks below EOC"], "$30": ["network is 'out'"], "$40": ["condition is 'QMB'"],
+            "$50": ["setting 'outpatient_hospital' is not 'office.pcp' or 'office.specialist'"]})
+
+    def test_names_every_field_that_made_a_filter_reject_a_fact(self):
+        self.assertEqual(self.set_aside("L_xray_imaging", fact(amount="$5"), fact(amount="$9", network="out", condition="QMB")),
+                         {"$9": ["network is 'out' and condition is 'QMB'"]})
+
+    def test_a_trip_within_the_us_gets_no_reason_from_the_line_for_trips_abroad(self):
+        self.assertEqual(self.set_aside("AB_ambulance", fact("ambulance.ground", amount="$250"),
+                                        fact("ambulance.ground", amount="$300", source="SB", page="3")),
+                         {"$300": ["SB ranks below EOC"]})
+
+    def test_says_why_a_dot_column_skips_a_medicare_fact(self):
+        self.assertEqual(self.set_aside("V_massage", fact("extras.massage", amount="$5"),
+                                        fact("extras.massage", amount="$9", covered_by="supplemental")),
+                         {"$5": ["covered_by is 'medicare'"]})
+
+    def test_gives_the_filters_own_reason_when_no_field_explains_it(self):
+        self.assertEqual(self.set_aside("M_part_b_drugs", fact("part_b_drugs.chemo", cost_kind="coinsurance", amount="20%"),
+                                        fact("part_b_drugs.chemo", amount="$5")),
+                         {"$5": ["it is not a coinsurance or $0 copay for a Part B drug"]})
+
+    def test_says_why_the_rule_dropped_a_fact_after_its_filters(self):
+        self.assertEqual(self.set_aside("H_inpatient", fact("inpatient.acute", amount="$300", unit="per day", limit="days 1-5"),
+                                        fact("inpatient.acute", amount="$0", unit="per day", limit="days 6+")),
+                         {"$0": ["line 1 shows the days that cost more than $0"]})
+
+    def test_says_why_each_filter_set_a_fact_aside(self):
+        def f(benefit, setting="any", amount="$25", **more):
+            return fact(benefit, setting, amount, **more)
+        supplemental = dict(covered_by="supplemental")
+        cases = [
+            ("I_outpatient_surgery", "Aetna", [f("surgery.colonoscopy", "outpatient_hospital", "$0")],
+             {"$0": ["the 'asc' line counts only a price at 'asc' itself", "the 'outpatient_hospital' line has no surgery price"]}),
+            ("I_outpatient_surgery", "Aetna", [f("surgery", "asc", "$50"), f("surgery.colonoscopy", "asc", "$20")],
+             {"$20": ["only a $0 colonoscopy or skin biopsy counts",
+                      "the 'outpatient_hospital' line counts only a price at 'outpatient_hospital' itself"]}),
+            ("O_medical_deductible", "Aetna", [f("medical_deductible.part_b", cost_kind="covered", amount="")],
+             {"": ["the column shows the Part B deductible only beside a plan deductible"]}),
+            ("O_medical_deductible", "Aetna", [f("medical_deductible", cost_kind="deductible", amount="$0"),
+                                               f("medical_deductible.part_b", cost_kind="deductible", amount="$257")],
+             {"$257": ["only a covered Part B deductible counts"]}),
+            ("O_medical_deductible", "Aetna", [f("medical_deductible", cost_kind="deductible", amount="$0"),
+                                               f("medical_deductible.part_b", cost_kind="covered", amount="")],
+             {"": ["a $0 deductible won"]}),
+            ("AA_opt_packages", "Aetna", [f("packages", covered_by="medicare", cost_kind="not_covered", amount="")],
+             {"": ["covered_by is 'medicare'"]}),
+            ("AA_opt_packages", "Aetna", [f("packages", **supplemental, cost_kind="not_covered", amount="", network="out")],
+             {"": ["network is 'out'"]}),
+            ("AA_opt_packages", "Aetna", [f("dental", **supplemental, cost_kind="premium", amount="$20", package="Rider"),
+                                          f("packages", **supplemental, cost_kind="not_covered", amount="")],
+             {"": ["a package for sale won"]}),
+            ("F_primary_care", "Aetna", [f("visits", "office.pcp", "$5"), f("visits", "office.pcp", "$9", network="out", **supplemental)],
+             {"$9": ["the plan has no out-of-network visit price"]}),
+            ("F_primary_care", "Aetna", [f("visits", "office.pcp", "$5"), f("visits", "office.pcp", "$7", network="any")],
+             {"$7": ["a price for network 'in' won"]}),
+            ("F_primary_care", "Aetna", [f("visits", "office.pcp", "$5"), f("visits", "office.pcp", "$0", condition="diabetes")],
+             {"$0": ["a price without a condition won"]}),
+            ("AB_ambulance", "Aetna", [f("ambulance.ground", amount="$250"), f("ambulance", "outside_us", "$100"),
+                                       f("ambulance", "outside_us", "", cost_kind="unclear")],
+             {"$100": ["line 2 says the EOC is unclear"]}),
+            ("AB_ambulance", "Aetna", [f("ambulance", "outside_us", "$100"), f("ambulance", "outside_us", "", cost_kind="covered")],
+             {"": ["line 2 shows a price abroad"]}),
+            ("AB_ambulance", "Aetna", [f("ambulance.ground", amount="$250"), f("ambulance", "outside_us", "", cost_kind="covered"),
+                                       f("ambulance", "outside_us", "$0", cost_kind="not_covered")],
+             {"$0": ["line 2 shows that trips abroad are covered"]}),
+            ("K_tests_labs", "Aetna", [f("tests.diagnostic", "office.pcp", "$5"),
+                                       f("tests.diagnostic.sleep_study", "outpatient_hospital", "$140")],
+             {"$140": ["a sleep study counts only for H1036-306-0"]}),
+            ("K_tests_labs", "Aetna", [f("tests.diagnostic", "office.pcp", "$5", plan_id="H1036-306-0"),
+                                       f("tests.diagnostic.sleep_study", "office.specialist", "$75", plan_id="H1036-306-0")],
+             {"$75": ["only a sleep study at an outpatient hospital counts"]}),
+            ("L_xray_imaging", "Aetna", [f("imaging.xray", "office", "$5"), f("imaging.diagnostic.mammogram", "office", "$0")],
+             {"$0": ["a $0 mammogram counts only with a CT, MRI or PET price"]}),
+            ("L_xray_imaging", "Humana", [f("imaging.diagnostic.advanced", "office", "$100"),
+                                          f("imaging.diagnostic.mammogram", "office", "$0")],
+             {"$0": ["Humana keeps no $0 low end for a mammogram"]}),
+            ("L_xray_imaging", "Aetna", [f("imaging.diagnostic.advanced", "office", "$100"),
+                                         f("imaging.diagnostic.mammogram", "office", "0%", cost_kind="coinsurance")],
+             {"0%": ["only a $0 mammogram copay counts"]}),
+            ("H_inpatient", "Aetna", [f("inpatient.acute", amount="$900", unit="per stay"), f("inpatient.acute", amount="$5")],
+             {"$5": ["a cost per stay won"]}),
+            ("H_inpatient", "Aetna", [f("inpatient.acute", amount="$300", unit="per day", limit="days 1-5"),
+                                      f("inpatient.acute", amount="$900", unit="per stay")],
+             {"$900": ["a cost per day won"]}),
+            ("Z_part_b_reduction", "Aetna", [f("giveback", cost_kind="part_b_reduction", amount="$50"),
+                                             f("giveback", cost_kind="covered", amount=""),
+                                             f("giveback", cost_kind="part_b_reduction", amount="$20", condition="QMB")],
+             {"": ["a reduction amount won"], "$20": ["a reduction without a condition won"]}),
+            ("J_outpatient_rehab", "Aetna", [f("rehab.physical", "outpatient_hospital", "$9"), f("rehab.physical", "asc", "$7")],
+             {"$7": ["setting 'asc' is not 'outpatient_hospital'"]}),
+            ("W_fitness", "Aetna", [f("fitness", **supplemental, cost_kind="covered", amount=""),
+                                    f("fitness", **supplemental, amount="$5", package="Rider")],
+             {"$5": ["package is 'Rider'"]}),
+            ("Z_part_b_reduction", "Aetna", [f("giveback", cost_kind="part_b_reduction", amount="$50"),
+                                             f("giveback", cost_kind="copay", amount="$5")],
+             {"$5": ["it is not a Part B premium reduction"]}),
+            ("O_medical_deductible", "Aetna", [f("medical_deductible", cost_kind="deductible", amount="$500"),
+                                               f("medical_deductible", cost_kind="copay", amount="$900")],
+             {"$900": ["it is not a Medicare deductible in network 'in'"]}),
+            ("I_outpatient_surgery", "Aetna", [f("surgery", "asc", "$50"), f("surgery", "office.pcp", "$40")],
+             {"$40": ["setting 'office.pcp' is not 'asc'", "setting 'office.pcp' is not 'outpatient_hospital'"]}),
+            ("L_xray_imaging", "Aetna", [f("imaging.xray", "office", "$5"),
+                                         f("imaging.xray", "office", "$1", network="out", covered_by="supplemental", cost_kind="allowance")],
+             {"$1": ["network is 'out' and covered_by is 'supplemental' and cost_kind is 'allowance'"]}),
+            ("M_part_b_drugs", "Aetna", [f("part_b_drugs.chemo", cost_kind="coinsurance", amount="20%"),
+                                         f("part_b_drugs.chemo", cost_kind="coinsurance", amount="10%", source="PBP")],
+             {"10%": ["PBP ranks below EOC"]}),
+        ]
+        for column, organization, found, reasons in cases:
+            with self.subTest(column=column, reasons=reasons):
+                found = [dict(g, fact_id=g["amount"]) for g in found]
+                _, aside = present.explain(organization, found, column)
+                self.assertEqual({g["amount"]: aside[facts.identity(g)] for g in found if facts.identity(g) in aside}, reasons)
+
+    def test_every_fact_a_rule_sets_aside_in_the_year_has_a_noted_reason_unless_the_column_skips_its_benefit(self):
+        data = years.data_dir()
+        organization = {p["plan_id"]: p["organization"] for p in layers.rows(data / "generated/plans.csv")}
+        found = present.plan_facts(data)
+        unused_benefits, noted_benefits = {}, {}
+        for plan_id, name in organization.items():
+            for column in present.COLUMNS:
+                with self.subTest(plan_id=plan_id, column=column):
+                    for identity, reasons in present.explain(name, found[plan_id], column)[1].items():
+                        self.assertNotIn(present.UNNOTED, reasons)
+                        self.assertTrue(all(isinstance(r, str) and r for r in reasons), reasons)
+                        benefit = next(f["benefit"] for f in found[plan_id] if facts.identity(f) == identity)
+                        unused = reasons == [f"the column does not use {benefit}"]
+                        (unused_benefits if unused else noted_benefits).setdefault(column, set()).add(benefit)
+        for column, benefits in unused_benefits.items():
+            with self.subTest(column=column):
+                self.assertFalse(benefits & noted_benefits.get(column, set()))
+
+    def test_says_when_a_more_specific_fact_won(self):
+        self.assertEqual(self.set_aside("H_inpatient", fact("inpatient", amount="$5"), fact("inpatient.acute", amount="$10")),
+                         {"$5": ["a more specific fact won"]})
+
+    def test_says_the_column_does_not_use_a_related_fact_no_filter_examined(self):
+        self.assertEqual(self.set_aside("L_xray_imaging", fact(amount="$10"), fact("imaging.diagnostic.ultrasound",
+                                                                                      amount="$70")),
+                         {"$70": ["the column does not use imaging.diagnostic.ultrasound"]})
+
+    def test_leaves_unrelated_facts_out(self):
+        self.assertEqual(self.set_aside("L_xray_imaging", fact(amount="$10"), fact("ambulance.ground", amount="$250")), {})
+
+    def test_used_facts_are_not_set_aside(self):
+        self.assertEqual(self.set_aside("S_acupuncture", fact("extras.acupuncture", covered_by="supplemental",
+                                                              amount="$15")), {})
+
+    def test_records_nothing_outside_explain(self):
+        present.xray_imaging("Humana", [fact(network="out")])
+        self.assertIsNone(present._reasons.get())
+
+    def test_every_rule_names_its_benefits(self):
+        self.assertEqual(set(present.LEAVES), set(present.COLUMNS))
+        self.assertLessEqual({leaf for leaves in present.LEAVES.values() for leaf in leaves}, set(facts.BENEFITS))
+
+
 if __name__ == "__main__":
     unittest.main()
