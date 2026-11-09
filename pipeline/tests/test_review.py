@@ -2,7 +2,7 @@ import json, os, pathlib, sys, tempfile, unittest
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-import document_facts, facts, layers, present, review, years
+import ask, document_facts, extract, facts, layers, present, review, years
 
 DATA = years.data_dir(years.LIVE)
 COMMITTED = facts.read(DATA / "machine/document_facts.csv")
@@ -76,6 +76,32 @@ class GateTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as work:
             return review.gate(DATA, None, work, answer, trusted, new, dict(reviewer=("m", "e"), review_cap=cap), held,
                                task_of=lambda f: json.dumps(f))
+
+    def outcomes(self, new, answer, saved=lambda *_: False):
+        with tempfile.TemporaryDirectory() as work, mock.patch.object(review, "saved", saved):
+            review.gate(DATA, None, work, answer, TRUSTED, new, dict(reviewer=("m", "e"), review_cap=10), HELD,
+                        task_of=lambda f: json.dumps(f))
+            with open(f"{work}/review/{extract.OUTCOMES}") as f:
+                return json.load(f)
+
+    def test_records_each_verdict(self):
+        good, bad = fact(), fact(amount="$3")
+        self.assertEqual(self.outcomes(COMMITTED + [good, bad], answering(['"$3"'])), [
+            dict(prompt=ask.sha(json.dumps(f)), item=0, fact=extract.named(f), ok=f is good, reason="test", earlier=False)
+            for f in (good, bad)])
+
+    def test_records_the_saved_verdicts_of_trusted_facts(self):
+        old = next(f for f in COMMITTED if review.row(f) in TRUSTED)
+        asked = []
+        got = self.outcomes(COMMITTED, answering((), asked), saved=lambda data, model, text, effort: text == json.dumps(old))
+        self.assertEqual(got, [dict(prompt=ask.sha(json.dumps(old)), item=0, fact=extract.named(old), ok=True, reason="test",
+                                    earlier=True)])
+        self.assertEqual(asked, ["v-0.md"])
+
+    def test_gives_saved_verdicts_only_for_trusted_facts(self):
+        uncited = fact(benefit="radiation_therapy", amount="$2")
+        got = self.outcomes(COMMITTED + [uncited], answering(), saved=lambda data, model, text, effort: text == json.dumps(uncited))
+        self.assertEqual(got, [])
 
     def test_drops_the_facts_the_reviewer_rejects_and_keeps_the_rest(self):
         good, bad, uncited = fact(), fact(amount="$3", setting="office.specialist"), fact(benefit="radiation_therapy")

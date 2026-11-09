@@ -1,9 +1,12 @@
 -- A year's trace database (#178). pipeline/trace.py builds it, and #68 plans its later tables.
 
+-- replayed is 1 when the build read a run's ledger of prompts, and checked when it read the run's check outcomes.
 CREATE TABLE build (
-  sha   TEXT PRIMARY KEY,
-  year  INTEGER NOT NULL,
-  steps TEXT NOT NULL  -- steps.json
+  sha      TEXT PRIMARY KEY,
+  year     INTEGER NOT NULL,
+  steps    TEXT NOT NULL,  -- steps.json
+  replayed INTEGER NOT NULL,
+  checked  INTEGER NOT NULL
 );
 
 CREATE TABLE plan (
@@ -238,3 +241,43 @@ CREATE TABLE answer (
   reply  TEXT NOT NULL,
   usage  TEXT NOT NULL
 );
+
+-- Each item of a reader's answer, and why the code checks rejected it (extract.py). problem is NULL when the item
+-- passed, and the fact columns then name its fact. plan_id and benefit are as stated, or NULL if not text.
+-- skipped says why the verifier did not check a fact that passed (document_facts.py).
+CREATE TABLE stated (
+  prompt_sha TEXT NOT NULL,
+  item       INTEGER NOT NULL,
+  doc_sha    TEXT NOT NULL,
+  plan_id    TEXT,
+  benefit    TEXT,
+  answer     TEXT NOT NULL,
+  problem    TEXT,
+  fact_id    TEXT,
+  source     TEXT,
+  page       TEXT,
+  skipped    TEXT,
+  PRIMARY KEY (prompt_sha, item)
+);
+CREATE INDEX stated_plan ON stated (plan_id);
+CREATE INDEX stated_doc ON stated (doc_sha);
+CREATE INDEX stated_fact ON stated (fact_id, source, doc_sha, page);
+
+-- Each verdict on an item of a verifier or reviewer task (extract.py, review.py). A decoy names no fact.
+-- ok is NULL when the answer gave no verdict. earlier is 1 for a trusted fact's saved verdict from an earlier run.
+CREATE TABLE verdict (
+  step       TEXT NOT NULL CHECK (step IN ('verifier', 'reviewer')),
+  prompt_sha TEXT NOT NULL,
+  item       INTEGER NOT NULL,
+  decoy      INTEGER NOT NULL,
+  shown      TEXT,
+  fact_id    TEXT,
+  source     TEXT,
+  doc_sha    TEXT,
+  page       TEXT,
+  ok         INTEGER,
+  reason     TEXT NOT NULL,
+  earlier    INTEGER NOT NULL,
+  PRIMARY KEY (step, prompt_sha, item)
+);
+CREATE INDEX verdict_fact ON verdict (fact_id, source, doc_sha, page);

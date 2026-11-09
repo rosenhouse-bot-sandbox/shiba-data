@@ -15,7 +15,7 @@ import collections, csv, json, os, random, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-import blanks, facts, years
+import ask, blanks, facts, years
 from eoc import DATA, Doc
 from fields import CARRIERS
 from filled import accepted, numbers
@@ -83,6 +83,10 @@ def task(doc, plan_rows, pages, group, data, failed=(), known=None, plan_ids=())
     return "\n\n".join(parts) + "\n"
 
 
+CLASH = "two answers for one fact on one page"
+# Each step's outcomes.json lists each answer item with its check's result, for trace.py.
+OUTCOMES = "outcomes.json"
+
 # These groups' documents state some $0 amounts in words.
 ZERO_GROUPS = ("part_b_drugs", "medical_deductible")
 NO_COST = re.compile(r"\bno (?:coinsurance|copay|deductible)|does not have a (?:medical )?deductible|no deductible for medical", re.I)
@@ -129,20 +133,23 @@ def problem(doc, group, a, pages, quote_ok):
     return None, row
 
 
+def checks(doc, group, answers, pages, quote_ok):
+    """Each answer with why it cannot be a fact, or None, and the fact."""
+    checked = [(a, *problem(doc, group, a, pages, quote_ok)) for a in answers]
+    clash = set(facts.conflicts([r for _, why, r in checked if not why]))
+    return [(a, CLASH, None) if not why and facts.identity(r) in clash else (a, why, r) for a, why, r in checked]
+
+
 def gate(doc, group, answers, pages, quote_ok):
     """The facts whose answers pass the code checks, and [(answer, why)] for the rest."""
-    passed, failed = [], []
-    for a in answers:
-        why, row = problem(doc, group, a, pages, quote_ok)
-        if why:
-            failed.append((a, why))
-        else:
-            passed.append((a, row))
-    clash = set(facts.conflicts([r for _, r in passed]))
-    failed += [(a, "two answers for one fact on one page") for a, r in passed
-               if tuple(r[c] for c in facts.IDENTITY) in clash]
-    unique = {tuple(r[c] for c in facts.COLUMNS): r for _, r in passed if tuple(r[c] for c in facts.IDENTITY) not in clash}
-    return list(unique.values()), failed
+    return passed(checks(doc, group, answers, pages, quote_ok))
+
+
+def passed(checked):
+    """The facts of the checked answers, and [(answer, why)] for the rest, with clashes last."""
+    unique = {tuple(r[c] for c in facts.COLUMNS): r for _, why, r in checked if not why}
+    return list(unique.values()), ([(a, why) for a, why, _ in checked if why and why != CLASH]
+                                   + [(a, why) for a, why, _ in checked if why == CLASH])
 
 
 def overlaps(f, g):
@@ -191,9 +198,28 @@ def answers(path):
 
 
 def doc_facts(doc, group, first, retry, pages, quote_ok):
-    """The document's facts from its first answers and any retry answers, and the failures to retry, if it needs a retry."""
-    found, failed = gate(doc, group, first + (retry or []), pages, quote_ok)
-    return found, (failed if retry is None else [])
+    """The document's facts from its first answers and any retry answers, the failures to retry, if it needs a retry,
+    and each answer's check."""
+    checked = checks(doc, group, first + (retry or []), pages, quote_ok)
+    found, failed = passed(checked)
+    return found, (failed if retry is None else []), checked
+
+
+def named(fact):
+    return {c: fact[c] for c in facts.IDENTITY}
+
+
+def prompt_of(path):
+    """The sha256 of a task file's text, or None if it is gone."""
+    if not os.path.exists(path):
+        return None
+    with open(path) as f:
+        return ask.sha(f.read())
+
+
+def write_outcomes(out_dir, outcomes):
+    with open(f"{out_dir}/{OUTCOMES}", "w") as f:
+        json.dump(outcomes, f, indent=1, ensure_ascii=False)
 
 
 def read(work, out_dir, group, data=DATA, ids=None):
@@ -224,15 +250,21 @@ def reread(work, out_dir, group, plan_ids, known, data=DATA):
 
 
 def extract_facts(work, answers_dir, group, out, data=DATA):
-    plan_rows, found, retries = plans(data), [], 0
+    plan_rows, found, retries, outcomes = plans(data), [], 0, []
     for doc in documents(data):
         first = f"{answers_dir}/{doc['id']}.json"
         if not os.path.exists(first):
             continue
         d, retry = Doc(work, doc["id"]), f"{answers_dir}/{doc['id']}.retry.json"
         pages = d.pages("layout")
-        got, failed = doc_facts(doc, group, answers(first), answers(retry) if os.path.exists(retry) else None,
-                                pages, d.quote_ok)
+        stated = answers(first)
+        got, failed, checked = doc_facts(doc, group, stated, answers(retry) if os.path.exists(retry) else None,
+                                         pages, d.quote_ok)
+        prompts = [prompt_of(f"{answers_dir}/{doc['id']}.md")] * len(stated) + [prompt_of(retry[:-5] + ".md")] * (
+            len(checked) - len(stated))
+        items = list(range(len(stated))) + list(range(len(checked) - len(stated)))
+        outcomes += [dict(prompt=prompt, item=n, doc_sha=doc["sha256"], stated=a, problem=why, fact=row and named(row))
+                     for prompt, n, (a, why, row) in zip(prompts, items, checked)]
         if failed:
             with open(f"{answers_dir}/{doc['id']}.retry.md", "w") as f:
                 f.write(task(doc, plan_rows, pages, group, data, failed))
@@ -240,6 +272,7 @@ def extract_facts(work, answers_dir, group, out, data=DATA):
         found += got
     with open(out, "w") as f:
         json.dump(found, f, indent=1)
+    write_outcomes(answers_dir, outcomes)
     print(len(found), "facts;", retries, "retry tasks")
 
 
@@ -271,8 +304,21 @@ def accept(verify_dir, out):
     verdicts = blanks.verdicts(items, verify_dir)
     acc = accepted(items, verdicts)
     facts.write(out, acc)
+    write_outcomes(verify_dir, outcomes(verify_dir, items, verdicts))
     print(len(acc), "of", sum(not c["decoy"] for c in items), "facts accepted;",
           len(blanks.missing_verdicts(items, verdicts)), "items without a verdict")
+
+
+def outcomes(verify_dir, items, verdicts):
+    """Each item's verdict, by its task's prompt and its id in that task. A decoy names no fact."""
+    by_id, out, seen = {v["id"]: v for v in verdicts}, [], collections.Counter()
+    prompts = {c["task"]: prompt_of(f"{verify_dir}/v-{c['task']}.md") for c in items}
+    for n, c in enumerate(items):
+        v = by_id.get(n, {})
+        out.append(dict(prompt=prompts[c["task"]], item=seen[c["task"]], decoy=c["decoy"], shown=shown(c),
+                        fact=None if c["decoy"] else named(c), ok=v.get("ok"), reason=v.get("reason", "")))
+        seen[c["task"]] += 1
+    return out
 
 
 COMMANDS = {"read": read, "facts": extract_facts, "verify": verify, "accept": accept}

@@ -2,7 +2,7 @@ import glob, json, os, sys, threading, unittest
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-import document_facts, facts, review
+import document_facts, extract, facts, review
 from test_extract import SHA, StepsTest, answer
 
 
@@ -63,6 +63,9 @@ class StepTest(StepsTest):
                          [("H1036-306-0", "in", "$0-$40"), ("H1036-306-0", "out", "$0"),
                           ("H1036-307-0", "in", "$0-$40")])
         self.assertEqual(asked, ["read", "read", "check", "reread", "reread", "recheck"])
+        with open(self.dir / "imaging/reread" / extract.OUTCOMES) as f:
+            self.assertEqual([o.get("skipped") for o in json.load(f)][:4],
+                             [document_facts.FOUND_BEFORE, None, None, document_facts.NOT_RECHECKED])
         self.assertEqual([c["network"] for c in rechecked if not c["decoy"]], ["out"])
         self.assertTrue(any(c["decoy"] for c in rechecked))
 
@@ -88,6 +91,17 @@ class StepTest(StepsTest):
             self.assertEqual(len(facts.read(self.data / review.REVIEWED)), 1)
             document_facts.step(self.data, self.work, self.dir, fake, 9, reviewed=False)
             self.assertEqual(len(facts.read(self.data / "machine" / "document_facts.csv")), 1)
+
+    def test_clears_the_outcomes_of_an_earlier_run(self):
+        def fake(task_dir, model, effort):
+            for task in glob.glob(f"{task_dir}/*.md"):
+                with open(task[:-3] + ".json", "w") as f:
+                    json.dump([], f)
+
+        for groups in (("imaging", "ambulance"), ("imaging",)):
+            with mock.patch.dict(document_facts.VERSIONS, {9: dict(groups=groups, reader=("r", "high"), verifier=("v", "low"))}):
+                document_facts.step(self.data, self.work, self.dir, fake, 9)
+        self.assertEqual(os.listdir(self.dir), ["imaging"])
 
     def test_groups_run_at_the_same_time(self):
         both_reading = threading.Barrier(2, timeout=10)

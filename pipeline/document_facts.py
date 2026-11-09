@@ -51,6 +51,10 @@ def group_facts(texts, work, group, answer, v, data):
     return accepted + (second_facts(texts, work, group, answer, v, data, recheck, accepted) if recheck else [])
 
 
+# The second reader's verifier skips a fact that passed the code checks for one of these reasons.
+FOUND_BEFORE, NOT_RECHECKED = "an earlier reader found the same fact", "the second reader does not recheck its plan"
+
+
 def second_facts(texts, work, group, answer, v, data, plan_ids, known):
     """The facts a second reader adds for plan_ids and its verifier accepts."""
     read, check = fresh(f"{work}/{group}/reread"), fresh(f"{work}/{group}/recheck")
@@ -60,10 +64,18 @@ def second_facts(texts, work, group, answer, v, data, plan_ids, known):
         answer(read, *v["reader"])
         extract.extract_facts(texts, read, group, found, data)
     seen = {tuple(f[c] for c in facts.KEY) for f in known}
+
+    def skipped(r):
+        return NOT_RECHECKED if r["plan_id"] not in plan_ids else FOUND_BEFORE if tuple(r[c] for c in facts.KEY) in seen else None
     with open(found) as f:
-        new = [r for r in json.load(f) if r["plan_id"] in plan_ids and tuple(r[c] for c in facts.KEY) not in seen]
+        stated = json.load(f)
     with open(found, "w") as f:
-        json.dump(new, f, indent=1)
+        json.dump([r for r in stated if not skipped(r)], f, indent=1)
+    why = {facts.identity(r): skipped(r) for r in stated if skipped(r)}
+    with open(f"{read}/{extract.OUTCOMES}") as f:
+        outcomes = json.load(f)
+    extract.write_outcomes(read, [dict(o, skipped=why[tuple(o["fact"][c] for c in facts.IDENTITY)])
+                                  if o["fact"] and tuple(o["fact"][c] for c in facts.IDENTITY) in why else o for o in outcomes])
     extract.verify(texts, found, check, data, known)
     answer(check, *v["verifier"])
     extract.accept(check, f"{check}/accepted.csv")
@@ -74,6 +86,7 @@ def step(data, texts, work, answer, version, reviewed=True, present_version=None
     """answer(task_dir, model, effort) answers every task file in task_dir. The groups run at the same time.
     reviewed=False skips the version's reviewer. The reviewer sees the cells that present_version presents."""
     v = VERSIONS[version]
+    shutil.rmtree(work, ignore_errors=True)
     with concurrent.futures.ThreadPoolExecutor(len(v["groups"])) as pool:
         found = list(pool.map(lambda group: group_facts(texts, work, group, answer, v, data), v["groups"]))
     rows = [row for rows in found for row in rows]
