@@ -337,6 +337,8 @@ test("each note kind has its own color, and the Notes filter shows hand-written 
   const green = await background(handWritten);
   assert.equal(new Set([green, await background(question), await background(caveat)]).size, 3);
   assert.match(await caveat.getAttribute("title"), /^Caveat: /);
+  await caveat.click();
+  assert.equal(await background(fresh.locator("#source-note .comment")), await background(caveat));
   assert.match(await handWritten.getAttribute("title"), /^Hand-written fact: /);
   await question.click();
   assert.equal(await background(fresh.locator("#source-note .comment")), await background(question));
