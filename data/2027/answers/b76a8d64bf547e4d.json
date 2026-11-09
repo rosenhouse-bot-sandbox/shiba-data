@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-f751937f09316ed1.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 76, under the routine hearing exam: 'You are covered for 1 routine hearing exam each year.' That is a supplemental, in-network limit of 1 per year.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 76 Hearing aids row: $399 copay per ear for Advanced and $699 copay per ear for Premium. These aid levels form one fact, '$399 or $699' per ear.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 76 shows a $0 copay for the routine hearing exam and a $0 copay for the hearing aid fitting. Both are supplemental hearing exams.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 76: 'Balance exams: 30% coinsurance.' The page says these services are all covered by Medicare, and balance exams are Medicare-covered diagnostic exams.\"}]\n```",
+ "usage": {
+  "input_tokens": 2935,
+  "output_tokens": 577,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

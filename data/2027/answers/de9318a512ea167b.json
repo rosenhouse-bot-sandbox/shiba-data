@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-034e045a83e5b49d.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 Emergency room visit row: $130 copay in network.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Worldwide emergency and urgent care is $130 in both columns. But care outside the U.S. is a supplemental benefit, not Medicare-covered, so covered_by is doubtful.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 4 Emergency room visit row: $130 copay out of network.\"},\n{\"id\": 3, \"ok\": false, \"reason\": \"The $130 matches, but worldwide care is a supplemental benefit, not Medicare-covered, so covered_by is doubtful.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 4 Urgent care visit row: $50 copay out of network.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 4 Urgent care visit row: $50 copay in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2523,
+  "output_tokens": 632,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

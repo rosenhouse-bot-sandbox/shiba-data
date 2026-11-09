@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "f751937f09316ed1.retry.md",
+ "reply": "```json\n[]\n```\n\nThe hearing aid visit limit is left out. Page 76 writes the count only as a word (\"two hearing aids per year\" and \"Up to two TruHearing®-branded hearing aids every year\"). No quote on that page shows the numeral 2, so the fact cannot pass the check.",
+ "usage": {
+  "input_tokens": 4473,
+  "output_tokens": 254,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

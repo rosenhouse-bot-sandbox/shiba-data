@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "516ff586a12c8288.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-019-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 63, \"quotes\": [\"$0 copay for each oral exam.\", \"$0 copay for each cleaning.\", \"$0 copay for each fluoride treatment\"], \"note\": \"Same $0 copay applies to each oral exam, each cleaning and each fluoride treatment.\"},\n {\"plan_id\": \"H5439-019-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 63, \"quotes\": [\"50% coinsurance for each oral exam.\", \"50% coinsurance for each cleaning.\"], \"note\": \"Same 50% coinsurance applies to each oral exam and each cleaning.\"},\n {\"plan_id\": \"H5439-019-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 64, \"quotes\": [\"50% coinsurance for each fluoride treatment\", \"50% coinsurance for dental x-rays per visit\", \"50% coinsurance for other diagnostic dental services per visit\"], \"note\": \"Same 50% coinsurance applies to fluoride treatment, dental x-rays and other diagnostic dental services.\"}]\n```",
+ "usage": {
+  "input_tokens": 8826,
+  "output_tokens": 1498,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

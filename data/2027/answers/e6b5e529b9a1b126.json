@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-49912316cc55d9c5.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 74 hearing services rows: the routine hearing exam is a $0 copay and the hearing aid fitting is a $0 copay. Both are supplemental hearing exam benefits in network, separate from the $40 Medicare diagnostic and balance exams.\"}]\n```",
+ "usage": {
+  "input_tokens": 2537,
+  "output_tokens": 309,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

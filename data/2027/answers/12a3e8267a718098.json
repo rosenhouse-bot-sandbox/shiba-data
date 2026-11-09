@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "2eb4caa23079d78f.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-019-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 9, \"quotes\": [\"Cleanings\", \"50% coinsurance\"], \"note\": \"Cleanings\"},\n{\"plan_id\": \"H5439-019-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 10, \"quotes\": [\"Dental X-Rays\", \"Wellcare Premium Enhanced Open (PPO) H5439, Plan 019, 000 In-Network $0 copay * Out-of-Network 50% coinsurance\"], \"note\": \"Dental X-Rays\"},\n{\"plan_id\": \"H5439-019-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 10, \"quotes\": [\"Oral exams\", \"Wellcare Premium Enhanced Open (PPO) H5439, Plan 019, 000 In-Network $0 copay * Out-of-Network 50% coinsurance In-Network $0 copay * Out-of-Network 50% coinsurance\"], \"note\": \"Oral exams\"},\n{\"plan_id\": \"H5439-019-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 10, \"quotes\": [\"Fluoride Treatment\", \"Wellcare Premium Enhanced Open (PPO) H5439, Plan 019, 000 In-Network $0 copay * Out-of-Network 50% coinsurance In-Network $0 copay * Out-of-Network 50% coinsurance In-Network $0 copay * Out-of-Network 50% coinsurance\"], \"note\": \"Fluoride Treatment\"},\n{\"plan_id\": \"H5439-019-0\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 11, \"quotes\": [\"Adjunctive General Services\", \"50% coinsurance\"], \"note\": \"Adjunctive General Services\"}]\n```",
+ "usage": {
+  "input_tokens": 3933,
+  "output_tokens": 2416,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

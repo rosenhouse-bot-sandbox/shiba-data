@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "4a0ee31be3437c35.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-306-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"2\", \"limit\": \"per year\", \"page\": 8, \"quotes\": [\"$0 copay for emergency diagnostic exam, periodic\", \"oral exam, prophylaxis (cleaning) up to 2 per year.\"], \"note\": \"Only one of several preventive dental visit limits on this page. This one covers emergency diagnostic exam, periodic oral exam and cleaning. The others were dropped to avoid duplicate facts.\"},\n {\"plan_id\": \"H1036-306-0\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"2\", \"limit\": \"per year\", \"page\": 8, \"quotes\": [\"0% of the cost for oral surgery up to 2 per year.\"], \"note\": \"Only one of several comprehensive dental visit limits on this page. This one is for oral surgery. The others were dropped to avoid duplicate facts.\"}]\n```",
+ "usage": {
+  "input_tokens": 4210,
+  "output_tokens": 1181,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

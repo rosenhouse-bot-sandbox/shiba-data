@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-516ff586a12c8288.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 62: $30 is the in-network copay. The out-of-network copay for Medicare-covered dental is $60.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 62 Dental services row: in-network $30 copay for each Medicare-covered dental service.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 64: in-network $0 copay per visit for dental x-rays, other diagnostic and other preventive dental services.\"},\n{\"id\": 3, \"ok\": false, \"reason\": \"Page 62: $60 is the out-of-network copay. The in-network copay is $30.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 65: adjunctive general services, listed under Comprehensive Dental Care, are 50% coinsurance each out of network.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 62: out-of-network $60 copay for each Medicare-covered dental service.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 65: out-of-network 50% coinsurance for other preventive dental services per visit.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 65: in-network $0 copay for each adjunctive general service under Comprehensive Dental Care.\"}]\n```",
+ "usage": {
+  "input_tokens": 4138,
+  "output_tokens": 678,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

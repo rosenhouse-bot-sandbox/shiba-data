@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "2aa68f4230962abc.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-025-0\", \"benefit\": \"tests.lab\", \"setting\": \"outpatient_hospital\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0 or $45\", \"page\": 89, \"quotes\": [\"Dedicated testing laboratory: $0 copay Outpatient hospital: $0 copay\", \"Outpatient hospital: $45 copay\"], \"note\": \"Routine Laboratory Services at an outpatient hospital cost $0. Advanced Laboratory Services at an outpatient hospital cost $45. Page 50 says the deductible applies to non-routine lab services at an outpatient hospital.\"}]\n```",
+ "usage": {
+  "input_tokens": 13223,
+  "output_tokens": 830,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

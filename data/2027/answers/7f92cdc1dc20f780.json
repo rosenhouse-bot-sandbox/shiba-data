@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-d649ac2bebc0321d.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 74 lists a routine hearing exam at a $0 copay (1 each year) and a hearing aid fitting at a $0 copay. Both are supplemental, in-network hearing exam benefits, and neither is the Medicare diagnostic exam ($50).\"}]\n```",
+ "usage": {
+  "input_tokens": 2554,
+  "output_tokens": 410,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
