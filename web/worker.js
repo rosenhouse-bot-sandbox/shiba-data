@@ -10,17 +10,19 @@ export default {
     const [, year, plan, col] = url.pathname.match(/^\/trace\/(\d+)\/main\/([^/]+)\/([^/.]+)$/) ?? [];
     if (year) {
       const row = year === D1_YEAR && env.COMMIT && await env.TRACE.prepare(
-        "SELECT json FROM cell_trace JOIN loaded USING (sha) WHERE sha = ? AND plan_id = ? AND col = ?")
-        .bind(env.COMMIT, plan, col).first().catch(() => null);
-      if (row) return new Response(row.json, { headers: { "Content-Type": "application/json; charset=utf-8" } });
+        "SELECT json FROM cell_json WHERE hash = (SELECT cells ->> ? FROM build WHERE sha = ?)")
+        .bind(`$."${plan}/${col}"`, env.COMMIT).first().catch(() => null);
+      if (row) {
+        return new Response(row.json.replaceAll(COMMIT, env.COMMIT), { headers: { "Content-Type": "application/json; charset=utf-8" } });
+      }
       return env.ASSETS.fetch(new Request(new URL(`${url.pathname}.json`, url), request));
     }
-    const [, build, part] = url.pathname.match(LOAD) ?? [];
+    const [, build] = url.pathname.match(LOAD) ?? [];
     if (build && request.method === "POST") {
       if (!env.LOAD_TOKEN || request.headers.get("Authorization") !== `Bearer ${env.LOAD_TOKEN}`) {
         return new Response("Unauthorized", { status: 401 });
       }
-      return part === undefined ? finish(env, build) : loadPart(env, build, part);
+      return load(env, build);
     }
     const [, pdf, text] = url.pathname.match(/^\/(?:docs\/([0-9a-f]{64})\.pdf|blobs\/([0-9a-f]{64})\.txt)$/) ?? [];
     const sha = pdf ?? text;
@@ -46,52 +48,56 @@ export default {
   },
 };
 
-// CI loads each main build's cells into D1 from R2's trace/<year>/<sha>/ one part at a time, then finishes the build.
+// CI loads each main build into D1 from R2: trace/<year>/<sha>.json names the file in trace/<year>/cells/ that holds
+// each cell's trace. CI repeats the load until it answers 200. Each load adds a few cells that D1 lacks, so a cell that
+// did not change since an earlier build costs no writes. Once D1 has every cell, the load adds the build.
 // LOAD_TOKEN is a secret that the deploy job gives the Worker and the trace job derives the same way.
 const D1_YEAR = "2027";
-const LOAD = new RegExp(`^/trace/${D1_YEAR}/load/([0-9a-f]{40})(?:/(\\d+))?$`);
+const COMMIT = "${commit}";
+const PER_LOAD = 10;
+const LOAD = new RegExp(`^/trace/${D1_YEAR}/load/([0-9a-f]{40})$`);
+const PREFIX = `trace/${D1_YEAR}/`;
 const SCHEMA = [
-  `CREATE TABLE IF NOT EXISTS cell_trace (sha TEXT NOT NULL, plan_id TEXT NOT NULL, col TEXT NOT NULL, json TEXT NOT NULL,
-                                          PRIMARY KEY (sha, plan_id, col))`,
-  "CREATE TABLE IF NOT EXISTS loaded (sha TEXT PRIMARY KEY)",
+  "CREATE TABLE IF NOT EXISTS cell_json (hash TEXT PRIMARY KEY, json TEXT NOT NULL)",
+  "CREATE TABLE IF NOT EXISTS build (sha TEXT PRIMARY KEY, cells TEXT NOT NULL)",
+  "DROP TABLE IF EXISTS cell_trace",
+  "DROP TABLE IF EXISTS loaded",
 ];
 const missing = () => new Response("Not found", { status: 404 });
+const LACKING = "SELECT value AS hash FROM json_each(?1) WHERE value NOT IN (SELECT hash FROM cell_json)";
 
-async function readJson(env, key) {
-  return (await env.BLOBS.get(key))?.json();
-}
-
-const schema = (env) => SCHEMA.map((sql) => env.TRACE.prepare(sql));
-
-async function loadPart(env, sha, part) {
-  const cells = await readJson(env, `trace/${D1_YEAR}/${sha}/${part}.json`);
-  if (!cells) return missing();
-  const insert = env.TRACE.prepare("INSERT OR IGNORE INTO cell_trace VALUES (?, ?, ?, ?)");
-  await env.TRACE.batch([...schema(env), ...cells.map(([plan, col, json]) => insert.bind(sha, plan, col, json))]);
-  return new Response("Loaded");
-}
-
-// A build counts as loaded once it has every cell. Then the other builds' rows and parts go, except the deployed one's.
-// A batch runs as one transaction, so the count and the deletes see the same rows.
-async function finish(env, sha) {
-  const manifest = await readJson(env, `trace/${D1_YEAR}/${sha}/manifest.json`);
+async function load(env, sha) {
+  const manifest = await (await env.BLOBS.get(`${PREFIX}${sha}.json`))?.json();
   if (!manifest) return missing();
+  const cells = JSON.stringify(manifest.cells);
+  await env.TRACE.batch(SCHEMA.map((sql) => env.TRACE.prepare(sql)));
+  const { results: lacking } = await env.TRACE.prepare(LACKING).bind(cells).all();
+  if (lacking.length) {
+    const some = lacking.slice(0, PER_LOAD);
+    const texts = await Promise.all(some.map(async ({ hash }) => (await env.BLOBS.get(`${PREFIX}cells/${hash}.json`))?.text()));
+    if (texts.includes(undefined)) return missing();
+    const insert = env.TRACE.prepare("INSERT OR IGNORE INTO cell_json VALUES (?, ?)");
+    await env.TRACE.batch(some.map(({ hash }, i) => insert.bind(hash, texts[i])));
+    return new Response(`${lacking.length - some.length} cells left to load`, { status: 409 });
+  }
+  return finish(env, sha, cells);
+}
+
+// Adding a build drops every other build, except the deployed one, and the cells that only they used.
+// A batch runs as one transaction, so a cell that another build's load just dropped stops the build from being added.
+async function finish(env, sha, cells) {
   const keep = env.COMMIT ?? sha;
   await env.TRACE.batch([
-    ...schema(env),
-    env.TRACE.prepare("INSERT OR IGNORE INTO loaded SELECT ?1 WHERE (SELECT count(*) FROM cell_trace WHERE sha = ?1) = ?2")
-      .bind(sha, manifest.cells),
-    env.TRACE.prepare("DELETE FROM cell_trace WHERE sha NOT IN (?1, ?2) AND ?1 IN (SELECT sha FROM loaded)").bind(sha, keep),
-    env.TRACE.prepare("DELETE FROM loaded WHERE sha NOT IN (?1, ?2) AND ?1 IN (SELECT sha FROM loaded)").bind(sha, keep),
+    env.TRACE.prepare(`INSERT OR IGNORE INTO build SELECT ?2, ?1 WHERE NOT EXISTS (${LACKING})`).bind(cells, sha),
+    env.TRACE.prepare("DELETE FROM build WHERE sha NOT IN (?1, ?2) AND ?1 IN (SELECT sha FROM build)").bind(sha, keep),
+    env.TRACE.prepare("DELETE FROM cell_json WHERE hash NOT IN (SELECT value FROM build, json_each(build.cells))"),
   ]);
-  if (!await env.TRACE.prepare("SELECT 1 FROM loaded WHERE sha = ?").bind(sha).first()) {
-    const { n } = await env.TRACE.prepare("SELECT count(*) AS n FROM cell_trace WHERE sha = ?").bind(sha).first();
-    return new Response(`${n} of ${manifest.cells} cells loaded`, { status: 409 });
-  }
-  const prefix = `trace/${D1_YEAR}/`;
+  const { results: kept } = await env.TRACE.prepare("SELECT sha, cells FROM build").all();
+  if (!kept.some((b) => b.sha === sha)) return new Response("A cell went missing, so load again", { status: 409 });
+  const keys = new Set(kept.flatMap((b) => [`${PREFIX}${b.sha}.json`, ...Object.values(JSON.parse(b.cells)).map((h) => `${PREFIX}cells/${h}.json`)]));
   for (let cursor; ;) {
-    const listed = await env.BLOBS.list({ prefix, cursor });
-    const old = listed.objects.map((o) => o.key).filter((key) => ![sha, keep].some((s) => key.startsWith(`${prefix}${s}/`)));
+    const listed = await env.BLOBS.list({ prefix: PREFIX, cursor });
+    const old = listed.objects.map((o) => o.key).filter((key) => !keys.has(key));
     if (old.length) await env.BLOBS.delete(old);
     if (!listed.truncated) break;
     cursor = listed.cursor;
