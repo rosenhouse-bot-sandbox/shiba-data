@@ -16,9 +16,9 @@ def row(f):
 
 def cited(data, document, held):
     """The rows of the facts in document that a presented cell cites, but for the held cells."""
-    return {row(f) for column in present.COLUMNS
-            for plan_id, got in present.lines(data, column, document).items() if (column, plan_id) not in held
-            for _, used in got for f in used}
+    return {row(f) for sheet, (rules, _) in present.SHEETS.items() for column in rules
+            for plan_id, got in present.lines(data, column, document, sheet).items()
+            if present.cell(sheet, column, plan_id) not in held for _, used in got for f in used}
 
 
 def trusted(data, old, held):
