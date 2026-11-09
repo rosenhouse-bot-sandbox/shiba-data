@@ -15,9 +15,46 @@ ADVANCED = ("imaging.diagnostic.advanced.ct", "imaging.diagnostic.advanced.mri",
 NO_MAMMOGRAM_ZERO = ("Kaiser", "Humana", "Devoted")
 
 
+# While explain() runs a rule, this maps each fact's identity to why a filter set it aside.
+_set_aside = None
+
+
+def note(f, reason):
+    if _set_aside is not None:
+        _set_aside.setdefault(facts.identity(f), []).append(reason)
+
+
+# The fields a filter may reject a fact for, and a value that the usual filters accept.
+FILTERED = (("network", "in"), ("covered_by", "medicare"), ("covered_by", "supplemental"), ("cost_kind", "copay"),
+            ("condition", ""), ("provider_tier", ""), ("package", ""))
+
+
+def why_not(f, ok):
+    """Names the field whose value made ok reject f."""
+    for field, value in FILTERED:
+        if f[field] != value and ok(dict(f, **{field: value})):
+            return f"{field} is {f[field]!r}"
+    return f"{ok.__name__ if ok.__name__ != '<lambda>' else 'the rule'} rejects it"
+
+
+def screen(found, ok):
+    """The facts ok accepts. Notes why it rejects the others."""
+    kept = []
+    for f in found:
+        if ok(f):
+            kept.append(f)
+        else:
+            note(f, why_not(f, ok))
+    return kept
+
+
 def top(found):
     """The facts from the best source among them."""
-    return [f for f in found if RANK[f["source"]] == min(RANK[g["source"]] for g in found)]
+    best_rank = min((RANK[g["source"]] for g in found), default=None)
+    for f in found:
+        if RANK[f["source"]] != best_rank:
+            note(f, f"{f['source']} ranks below {facts.SOURCES_BEST_FIRST[best_rank]}")
+    return [f for f in found if RANK[f["source"]] == best_rank]
 
 
 def usable(f):
@@ -27,7 +64,12 @@ def usable(f):
 
 def best(found, leaf, setting, ok=usable):
     """The ok facts for leaf and setting from the best source, and within it the most specific."""
-    fits = [f for f in found if ok(f) and facts.covers(f["benefit"], leaf) and facts.covers(f["setting"], setting)]
+    fits = []
+    for f in screen([f for f in found if facts.covers(f["benefit"], leaf)], ok):
+        if facts.covers(f["setting"], setting):
+            fits.append(f)
+        else:
+            note(f, f"setting {f['setting']!r} is not {setting!r}")
     if not fits:
         return []
     fits = top(fits)
@@ -36,6 +78,9 @@ def best(found, leaf, setting, ok=usable):
         return f["benefit"].count("."), f["setting"] != "any", f["setting"].count(".")
 
     deepest = max(map(depth, fits))
+    for f in fits:
+        if depth(f) != deepest:
+            note(f, "a more specific fact won")
     return [f for f in fits if depth(f) == deepest]
 
 
@@ -245,7 +290,7 @@ def drug_price(f):
 def part_b_drugs(organization, found):
     """Shows the range of Part B drug coinsurance, from each kind of drug's best source.
     A $0 copay, such as for vaccines, counts as 0%."""
-    ok = [f for f in found if drug_price(f)]
+    ok = screen([f for f in found if facts.covers("part_b_drugs", f["benefit"])], drug_price)
     got = [f for leaf in sorted({f["benefit"] for f in ok}) for f in top([g for g in ok if g["benefit"] == leaf])]
     percents = sorted(facts.number(n) for n in amounts(got))
     return [(span(f"{percents[0]:g}%", f"{percents[-1]:g}%") if got else "", got)]
@@ -293,7 +338,7 @@ def dot(*leaves):
     def rule(organization, found):
         mine = [f for f in found if f["network"] in ("in", "any")
                 and any(facts.covers(f["benefit"], leaf) for leaf in leaves)]
-        yes = [f for f in mine if offers(f)]
+        yes = screen(mine, offers)
         return [("●", top(yes))] if yes else [("", top(mine) if mine else [])]
     return rule
 
@@ -330,6 +375,42 @@ COLUMNS = {"L_xray_imaging": xray_imaging, "AB_ambulance": ambulance, "I_outpati
            "R_dental": dot("dental.preventive", "dental.comprehensive"), "U_naturopath": dot("extras.naturopathy"),
            "P_vision": dot("vision.exam", "vision.eyewear"), "Q_hearing": dot("hearing.exam", "hearing.aids"),
            "W_fitness": dot("fitness"), "Y_otc": dot("otc"), "AA_opt_packages": packages}
+
+
+# The benefits each rule reads. A fact for a broader or narrower benefit is one the rule considers.
+LEAVES = {"L_xray_imaging": ("imaging",), "AB_ambulance": ("ambulance",), "I_outpatient_surgery": ("surgery",),
+          "F_primary_care": ("visits",), "G_specialist": ("visits",), "H_inpatient": ("inpatient",),
+          "J_outpatient_rehab": ("rehab",), "K_tests_labs": ("tests",), "Z_part_b_reduction": ("giveback",),
+          "M_part_b_drugs": ("part_b_drugs",), "O_medical_deductible": ("medical_deductible",),
+          "S_acupuncture": ("extras.acupuncture",), "T_chiropractic": ("extras.chiropractic",),
+          "V_massage": ("extras.massage",), "X_transportation": ("extras.transportation",),
+          "R_dental": ("dental",), "U_naturopath": ("extras.naturopathy",), "P_vision": ("vision",),
+          "Q_hearing": ("hearing",), "W_fitness": ("fitness",), "Y_otc": ("otc",), "AA_opt_packages": ("packages",)}
+
+
+def related(f, leaves):
+    return any(facts.covers(f["benefit"], leaf) or facts.covers(leaf, f["benefit"]) for leaf in leaves)
+
+
+def explain(organization, found, column):
+    """(lines, set_aside): the rule's lines, and {identity: reasons} for each fact it considered but did not use.
+    A considered fact is one a filter examined, or one for a benefit in LEAVES."""
+    global _set_aside
+    _set_aside = {}
+    try:
+        got = COLUMNS[column](organization, found)
+        seen = _set_aside
+    finally:
+        _set_aside = None
+    used = {facts.identity(f) for _, cited in got for f in cited}
+    considered = [f for f in found if facts.identity(f) in seen or related(f, LEAVES[column])]
+    return got, {facts.identity(f): sorted(set(seen.get(facts.identity(f), ["no filter recorded a reason"])))
+                 for f in considered if facts.identity(f) not in used}
+
+
+def presents(cited):
+    """Whether a line's cited facts give it a presented row. A line without one keeps its other layers' value."""
+    return any(f["source"] in facts.DOCUMENTS for f in cited)
 
 
 def lines(data, column, document=None):
@@ -376,7 +457,7 @@ def layer_rows(data, version=None):
                 raise ValueError(f"{plan_id} {column} has one line, not {[value for value, _ in got]}")
             for n, (value, cited) in enumerate(got, 1):
                 row = dict(sheet="main", plan_id=plan_id, column=column, line="" if one_line else str(n), value=value)
-                cites = [(url[f["doc_sha"]], f["page"], q) for f in cited if f["source"] in facts.DOCUMENTS
+                cites = [(url[f["doc_sha"]], f["page"], q) for f in cited if presents([f])
                          for q in json.loads(f["quotes"])]
                 for cite in cites:
                     full = dict(row, **dict(zip(("url", "pdf_page", "quote"), cite)))

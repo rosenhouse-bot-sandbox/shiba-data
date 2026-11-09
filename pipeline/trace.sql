@@ -142,3 +142,55 @@ CREATE TABLE struck_quote (
   note    TEXT NOT NULL,
   PRIMARY KEY (sheet, plan_id, col, quote)
 );
+
+-- facts.IDENTITY names a fact. fact_id alone repeats across an SB and an EOC.
+CREATE TABLE fact (
+  fact_id       TEXT NOT NULL,
+  source        TEXT NOT NULL,
+  doc_sha       TEXT NOT NULL,
+  page          TEXT NOT NULL,
+  origin        TEXT NOT NULL CHECK (origin IN ('document', 'pbp', 'added')),
+  reviewed      INTEGER NOT NULL,
+  plan_id       TEXT NOT NULL REFERENCES plan,
+  benefit       TEXT NOT NULL,
+  setting       TEXT NOT NULL,
+  network       TEXT NOT NULL,
+  provider_tier TEXT NOT NULL,
+  condition     TEXT NOT NULL,
+  package       TEXT NOT NULL,
+  pool          TEXT NOT NULL,
+  covered_by    TEXT NOT NULL,
+  cost_kind     TEXT NOT NULL,
+  amount        TEXT NOT NULL,
+  unit          TEXT NOT NULL,
+  "limit"       TEXT NOT NULL,
+  quotes        TEXT NOT NULL,
+  note          TEXT NOT NULL,
+  PRIMARY KEY (fact_id, source, doc_sha, page)
+);
+
+-- Each line a present.py rule returned for a main cell. presented is 0 when no document fact backs the line, so
+-- the line keeps its other layers' value. held is the pinned version's reason for leaving the whole cell alone.
+CREATE TABLE rule_line (
+  plan_id   TEXT NOT NULL REFERENCES plan,
+  col       TEXT NOT NULL,
+  line      INTEGER NOT NULL,
+  value     TEXT NOT NULL,
+  presented INTEGER NOT NULL,
+  held      TEXT,
+  PRIMARY KEY (plan_id, col, line)
+);
+
+-- Each fact a rule considered. A used fact names its line. A set-aside fact has no line, and reasons is a JSON array.
+CREATE TABLE rule_fact (
+  plan_id TEXT NOT NULL,
+  col     TEXT NOT NULL,
+  line    INTEGER,
+  fact_id TEXT NOT NULL,
+  source  TEXT NOT NULL,
+  doc_sha TEXT NOT NULL,
+  page    TEXT NOT NULL,
+  reasons TEXT,
+  FOREIGN KEY (fact_id, source, doc_sha, page) REFERENCES fact
+);
+CREATE INDEX rule_fact_cell ON rule_fact (plan_id, col);

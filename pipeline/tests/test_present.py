@@ -632,5 +632,45 @@ class ExpectedTest(unittest.TestCase):
                               for n, (v, cited) in enumerate(got, 1) if v or cited})
 
 
+class ExplainTest(unittest.TestCase):
+    def set_aside(self, column, *found):
+        found = [dict(f, fact_id=f["amount"]) for f in found]
+        got, aside = present.explain("Humana", list(found), column)
+        self.assertEqual(got, present.COLUMNS[column]("Humana", list(found)))
+        return {f["amount"]: aside[facts.identity(f)] for f in found if facts.identity(f) in aside}
+
+    def test_says_which_filter_set_each_fact_aside(self):
+        eoc = fact(amount="$10")
+        self.assertEqual(self.set_aside("L_xray_imaging", eoc, fact(amount="$20", source="SB", page="3"),
+                                        fact(amount="$30", network="out"), fact(amount="$40", condition="QMB"),
+                                        fact(amount="$50", setting="outpatient_hospital")), {
+            "$20": ["SB ranks below EOC"], "$30": ["network is 'out'"], "$40": ["condition is 'QMB'"],
+            "$50": [f"setting 'outpatient_hospital' is not {s!r}" for s in ("office.pcp", "office.specialist")]})
+
+    def test_says_when_a_more_specific_fact_won(self):
+        self.assertEqual(self.set_aside("H_inpatient", fact("inpatient", amount="$5"), fact("inpatient.acute", amount="$10")),
+                         {"$5": ["a more specific fact won"]})
+
+    def test_lists_related_facts_no_filter_examined(self):
+        self.assertEqual(self.set_aside("L_xray_imaging", fact(amount="$10"), fact("imaging.diagnostic.ultrasound",
+                                                                                      amount="$70")),
+                         {"$70": ["no filter recorded a reason"]})
+
+    def test_leaves_unrelated_facts_out(self):
+        self.assertEqual(self.set_aside("L_xray_imaging", fact(amount="$10"), fact("ambulance.ground", amount="$250")), {})
+
+    def test_used_facts_are_not_set_aside(self):
+        self.assertEqual(self.set_aside("S_acupuncture", fact("extras.acupuncture", covered_by="supplemental",
+                                                              amount="$15")), {})
+
+    def test_records_nothing_outside_explain(self):
+        present.xray_imaging("Humana", [fact(network="out")])
+        self.assertIsNone(present._set_aside)
+
+    def test_every_rule_names_its_benefits(self):
+        self.assertEqual(set(present.LEAVES), set(present.COLUMNS))
+        self.assertLessEqual({leaf for leaves in present.LEAVES.values() for leaf in leaves}, set(facts.BENEFITS))
+
+
 if __name__ == "__main__":
     unittest.main()
