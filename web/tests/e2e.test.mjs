@@ -1,14 +1,23 @@
-// Drives the built site in Chromium. Usage: SITE=<build dir> DOCS=<dir of <sha256>.pdf> node --test web/tests/e2e.test.mjs
-import { test, before, after } from "node:test";
+// Drives the built site in Chromium. Usage: SITE=<build dir> DOCS=<dir of <sha256>.pdf> [FAILURES=<dir>] node --test web/tests/e2e.test.mjs
+// With FAILURES, each failed test leaves a screenshot and the HTML of each of its pages there.
+import { test, before, after, afterEach } from "node:test";
 import assert from "node:assert/strict";
 import http from "node:http";
 import fs from "node:fs";
 import path from "node:path";
 import { chromium } from "playwright";
 
-const { SITE, DOCS } = process.env;
+const { SITE, DOCS, FAILURES } = process.env;
 const TYPES = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css", ".json": "application/json", ".pdf": "application/pdf" };
 let server, browser, page, base;
+let opened = [];
+
+async function newPage(options) {
+  const p = await browser.newPage(options);
+  opened.push(p);
+  return p;
+}
+
 const site = JSON.parse(fs.readFileSync(path.join(SITE, "data.json")));
 
 before(async () => {
@@ -27,6 +36,22 @@ before(async () => {
   browser = await chromium.launch({ proxy });
   page = await browser.newPage({ viewport: { width: 1600, height: 1000 } });
 });
+
+afterEach(async (t) => {
+  try {
+    if (FAILURES && !t.passed) {
+      fs.mkdirSync(FAILURES, { recursive: true });
+      for (const [i, p] of [page, ...opened].filter((p) => !p.isClosed()).entries()) {
+        const name = path.join(FAILURES, `${t.name.replace(/\W+/g, "-")}-${i}`);
+        await p.screenshot({ path: `${name}.png`, timeout: 10000 }).catch(() => {});
+        fs.writeFileSync(`${name}.html`, await p.content().catch((e) => String(e)));
+      }
+    }
+  } finally {
+    for (const p of opened) await p.close();
+    opened = [];
+  }
+}, { timeout: 60000 });
 
 after(async () => {
   await browser?.close();
@@ -61,7 +86,7 @@ test("sheets are grouped under named sections", async () => {
 });
 
 test("section labels stay in view when the sheet scrolls sideways", async () => {
-  const narrow = await browser.newPage({ viewport: { width: 400, height: 800 } });
+  const narrow = await newPage({ viewport: { width: 400, height: 800 } });
   await narrow.goto(`${base}#/main`);
   await narrow.waitForSelector("table.sheet");
   await narrow.evaluate(() => { document.querySelector("#content").scrollLeft = 1000; });
@@ -241,7 +266,7 @@ test("a cited cell's note links to its comment's page", async () => {
 });
 
 test("page references in comment text open that page", async () => {
-  const fresh = await browser.newPage({ viewport: { width: 1600, height: 1000 } });
+  const fresh = await newPage({ viewport: { width: 1600, height: 1000 } });
   await fresh.route("**/data.json", (route) => {
     const edited = structuredClone(site);
     edited.main.rows.find((r) => r.plan_id === "H6815-038-0").cells.K_tests_labs.comment.text = "See EOC page 82 for EKGs.";
@@ -266,7 +291,7 @@ test("the open document's plan row is highlighted until the viewer closes", asyn
 });
 
 test("a quote running down one column of a two-column table is highlighted", async () => {
-  const fresh = await browser.newPage({ viewport: { width: 1600, height: 1000 } });
+  const fresh = await newPage({ viewport: { width: 1600, height: 1000 } });
   const eoc = docOf("H2406-070-0", "EOC");
   const quote = "$0 copayment or a colonoscopy at an outpatient hospital.";
   await fresh.route("**/data.json", (route) => {
@@ -296,7 +321,7 @@ test("every quote a cell cites on the shown page is highlighted", async () => {
 
 test("browser zoom enlarges the document pages", async () => {
   const pageWidthRatio = async (zoom) => {
-    const fresh = await browser.newPage({ viewport: { width: 1600, height: 1000 } });
+    const fresh = await newPage({ viewport: { width: 1600, height: 1000 } });
     // Chrome reports browser zoom as the ratio of the window's width to the page's width.
     if (zoom) await fresh.addInitScript((z) => Object.defineProperty(window, "outerWidth", { get: () => window.innerWidth * z }), zoom);
     await fresh.goto(`${base}#/main`);
@@ -313,7 +338,7 @@ test("browser zoom enlarges the document pages", async () => {
 });
 
 test("header says when the site was last updated", async () => {
-  const fresh = await browser.newPage({ timezoneId: "America/Los_Angeles" });
+  const fresh = await newPage({ timezoneId: "America/Los_Angeles" });
   await fresh.route("**/data.json", (route) =>
     route.fulfill({ json: { ...site, built: new Date(Date.now() - 3 * 3600000).toISOString() } }));
   await fresh.clock.install();
@@ -328,7 +353,7 @@ test("header says when the site was last updated", async () => {
 });
 
 test("each note kind has its own color, and the Notes filter shows added facts", async () => {
-  const fresh = await browser.newPage({ viewport: { width: 1600, height: 1000 } });
+  const fresh = await newPage({ viewport: { width: 1600, height: 1000 } });
   await fresh.goto(`${base}#/main`);
   const background = (locator) => locator.evaluate((e) => getComputedStyle(e).backgroundColor);
   const added = fresh.locator("table.sheet td.commented.added").first();
@@ -402,7 +427,7 @@ test("every citation's and comment's quote is highlighted in full on its page", 
 });
 
 test("a slow document never shows the previous document's pages", async () => {
-  const fresh = await browser.newPage({ viewport: { width: 1600, height: 1000 } });
+  const fresh = await newPage({ viewport: { width: 1600, height: 1000 } });
   const slow = docOf("H7006-018-0", "SB");
   await fresh.route(`**/${site.docs[slow].file}`, async (route) => {
     await new Promise((r) => setTimeout(r, 2000));
@@ -425,7 +450,7 @@ test("a slow document never shows the previous document's pages", async () => {
 });
 
 test("the viewer links to the carrier when a document fails to load", async () => {
-  const fresh = await browser.newPage({ viewport: { width: 1600, height: 1000 } });
+  const fresh = await newPage({ viewport: { width: 1600, height: 1000 } });
   const [missing] = site.plans.find((p) => p.plan_id === "H2001-045-0").docs;
   await fresh.route(`**/${site.docs[missing].file}`, (route) => route.fulfill({ status: 404, body: "Not found" }));
   await fresh.goto(`${base}#/plan/H2001-045-0`);
@@ -735,7 +760,7 @@ test("permalink: Back to a plan page shows its summary of benefits", async () =>
 });
 
 test("permalink: an old Ambiguities link opens Notes, and a page link in a note points the URL at its row's cell", async () => {
-  const fresh = await browser.newPage({ viewport: { width: 1600, height: 1000 } });
+  const fresh = await newPage({ viewport: { width: 1600, height: 1000 } });
   await fresh.route("**/data.json", (route) => {
     const edited = structuredClone(site);
     edited.main.rows.find((r) => r.plan_id === "H6815-038-0").cells.K_tests_labs.comment.text = "See EOC page 82 for EKGs.";
