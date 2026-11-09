@@ -97,8 +97,9 @@ const STATUS = {
 function traceRecord(step, trace) {
   if (!trace) return el("div", { class: "how-trace" }, el("p", { class: "how-none" }, "This build has no trace for this cell."));
   const { status, ...record } = trace[step.record] ?? { status: "not_recorded" };
-  return el("div", { class: `how-trace ${status}` },
-    el("div", { class: "how-trace-head" }, el("strong", {}, "Trace"), el("code", {}, step.record), el("span", {}, STATUS[status] ?? status)),
+  // Closed by default: the strip above says the same in words.
+  return el("details", { class: `how-trace ${status}` },
+    el("summary", { class: "how-trace-head" }, el("strong", {}, "Raw trace record"), el("code", {}, step.record), el("span", {}, STATUS[status] ?? status)),
     status === "traced" ? el("div", { class: "how-scroll" }, el("pre", {}, JSON.stringify(record, null, 1))) : null);
 }
 
