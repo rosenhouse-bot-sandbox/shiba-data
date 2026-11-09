@@ -104,6 +104,13 @@ class VersionsTest(unittest.TestCase):
         column, plan_id = next(iter(filled.V6_HELD))
         self.assertTrue(ignore(dict(layer=layers.PRESENTED, column=column, plan_id=plan_id)))
 
+    def test_version_8_also_sees_presented_dvha_dental_alt_care_and_extras(self):
+        _, ignore = filled.VERSIONS[8]
+        for column in ("C_premium", "F_dental", "I_alt_care_otc_travel", "J_extra_benefits"):
+            self.assertTrue(ignore(dict(layer=layers.EDITS, sheet="dvha", column=column)), column)
+            self.assertFalse(ignore(dict(layer=layers.PRESENTED, sheet="dvha", column=column)), column)
+        self.assertFalse(ignore(dict(layer=layers.EDITS, sheet="dvha", column="D_premium_full_extra_help")))
+
     def test_earlier_versions_see_dvha_edits_instead_of_their_presented_rows(self):
         for version in range(2, 7):
             _, ignore = filled.VERSIONS[version]
