@@ -987,6 +987,6 @@ test("pipeline view: a replayed trace shows the reader prompt, each fact's verdi
     return fresh.locator(".how-details li").allTextContents();
   };
   assert.ok((await work("read-facts")).includes("EOC reader prompt, answered by claude-opus-5-5 ↗"));
-  assert.ok((await work("check-facts")).some((l) => l.startsWith("Rejected: SB page 6")));
+  assert.ok((await work("check-facts")).some((l) => l.startsWith("Rejected: SB page 6, ambulance $325. Verifier disagreed:")));
   assert.ok((await work("column-rules")).includes("Set aside SB page 9, ambulance.air 20%: SB ranks below EOC"));
 });

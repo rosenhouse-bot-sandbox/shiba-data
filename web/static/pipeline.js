@@ -241,30 +241,55 @@ const STRIPS = {
 export const strip = (step, trace) =>
   trace?.[step.record]?.status === "traced" && STRIPS[step.id] ? STRIPS[step.id](trace) : null;
 
-const docKind = (t, task) => t.documents.documents.find((d) => d.sha256.startsWith(task.replace(/^v-/, "").split(".")[0]))?.kind ?? "PDF";
-const prompts = (t, verifier) => t.answers.status !== "traced" ? [] : t.answers.rows.flatMap((a) => a.prompts
-  .filter((p) => p.task.startsWith("v-") === verifier)
-  .map((p) => ({ text: `${docKind(t, p.task)} ${verifier ? "verifier prompt" : `reader prompt, answered by ${a.model}`}`, href: p.url })));
-const fact = (source, page, f) => `${source} page ${page}, ${[f.benefit, f.amount].filter(Boolean).join(" ")}`;
+// A prompt's task names its document by the first 16 hex digits of the PDF's hash.
+function docKindOf(t, task) {
+  const prefix = task.match(/^(?:v-)?([0-9a-f]{16})\./)?.[1];
+  return prefix && t.documents.documents.find((d) => d.sha256.startsWith(prefix))?.kind;
+}
 
-function checked(r) {
-  const stated = r.stated_by[0]?.stated ?? {};
-  const said = [r.fact ? fact(r.fact.source, r.fact.page, stated) : fact("PDF", stated.page, stated)];
-  if (r.code_check && r.code_check !== "passed") said.push(`Quote check: ${r.code_check}`);
-  for (const v of r.verifier) said.push(`Verifier: ${v.reason}`);
-  if (r.reviewer.status === "traced") said.push(`Reviewer: ${r.reviewer.reason}`);
-  else if (r.reviewer.note) said.push(`Reviewer: ${r.reviewer.note.replace(/ \(#\d+\)/, "")}`);
-  return { text: `${r.kept ? "Kept" : "Rejected"}: ${said.map((x) => x.replace(/\.$/, "")).join(". ")}.` };
+const PROMPT_ROLES = {
+  read: "reader prompt", reread: "second reader prompt",
+  check: "verifier prompt", recheck: "second verifier prompt",
+  review: "reviewer prompt", earlier: "earlier reviewer prompt",
+};
+const READING = ["read", "reread"];
+
+function promptLinks(t, reading) {
+  if (t.answers.status !== "traced") return [];
+  return t.answers.rows.flatMap((answer) => answer.prompts.map((p) => ({ p, answer })))
+    .filter(({ p }) => READING.includes(p.dir.split("/").at(-1)) === reading)
+    .map(({ p, answer }) => {
+      const role = PROMPT_ROLES[p.dir.split("/").at(-1)] ?? "prompt";
+      const kind = docKindOf(t, p.task);
+      const retry = p.task.includes(".retry.") ? ", retried" : "";
+      return { text: `${kind ? `${kind} ` : ""}${role}${retry}, answered by ${answer.model}`, href: p.url };
+    });
+}
+
+const factLabel = (kind, page, f) =>
+  `${kind ?? "Unknown document"}${page ? ` page ${page}` : ""}, ${[f.benefit, f.amount].filter(Boolean).join(" ")}`;
+const verdict = (who, check) => `${who} ${check.ok ? "agreed" : "disagreed"}: ${check.reason.replace(/\.$/, "")}`;
+
+function factCheck(t, row) {
+  const statedBy = row.stated_by[0];
+  const stated = statedBy?.stated ?? {};
+  // A fact that failed its quote check has no id, so its document comes from the prompt that stated it.
+  const task = t.answers.rows?.flatMap((a) => a.prompts).find((p) => p.prompt === statedBy?.prompt)?.task;
+  const parts = [row.fact ? factLabel(row.fact.source, row.fact.page, stated) : factLabel(task && docKindOf(t, task), stated.page, stated)];
+  if (row.code_check && row.code_check !== "passed") parts.push(`Quote check failed: ${row.code_check}`);
+  parts.push(...row.verifier.map((v) => verdict("Verifier", v)));
+  if (row.reviewer.status === "traced") parts.push(verdict("Reviewer", row.reviewer));
+  return { text: `${row.kept ? "Kept" : "Rejected"}: ${parts.join(". ")}.` };
 }
 
 // Lines that show a step's work for a cell, read from its trace.
 const DETAILS = {
-  "read-facts": (t) => prompts(t, false),
-  "check-facts": (t) => [...t.fact_checks.rows.map(checked), ...prompts(t, true)],
+  "read-facts": (t) => promptLinks(t, true),
+  "check-facts": (t) => [...t.fact_checks.rows.map((r) => factCheck(t, r)), ...promptLinks(t, false)],
   "column-rules": (t) => [
-    ...(t.rule.held ? [{ text: `Held: ${t.rule.held}` }] : []),
-    ...t.rule.lines.flatMap((l) => l.facts.map((f) => ({ text: `Line ${l.line} used ${fact(f.source, f.page, f)}` }))),
-    ...t.rule.set_aside.map((f) => ({ text: `Set aside ${fact(f.source, f.page, f)}: ${f.reasons.join("; ")}` })),
+    ...(t.rule.held ? [{ text: `The rule leaves this cell as it was, because ${t.rule.held}` }] : []),
+    ...t.rule.lines.flatMap((l) => l.facts.map((f) => ({ text: `Line ${l.line} (${shownValue(l.value)}) used ${factLabel(f.source, f.page, f)}` }))),
+    ...t.rule.set_aside.map((f) => ({ text: `Set aside ${factLabel(f.source, f.page, f)}: ${f.reasons.join("; ")}` })),
   ],
 };
 
