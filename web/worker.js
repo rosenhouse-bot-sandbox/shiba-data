@@ -49,7 +49,7 @@ export default {
 };
 
 // CI loads each main build into D1 from R2: trace/<year>/<sha>.json names the file in trace/<year>/cells/ that holds
-// each cell's trace. CI repeats the load until it answers 200. Each load adds a few cells that D1 lacks, so a cell that
+// each cell's trace. CI repeats the load while it answers 409. Each load adds a few cells that D1 lacks, so a cell that
 // did not change since an earlier build costs no writes. Once D1 has every cell, the load adds the build.
 // LOAD_TOKEN is a secret that the deploy job gives the Worker and the trace job derives the same way.
 const D1_YEAR = "2027";
@@ -78,7 +78,7 @@ async function load(env, sha) {
     if (texts.includes(undefined)) return missing();
     const insert = env.TRACE.prepare("INSERT OR IGNORE INTO cell_json VALUES (?, ?)");
     await env.TRACE.batch(some.map(({ hash }, i) => insert.bind(hash, texts[i])));
-    return new Response(`${lacking.length - some.length} cells left to load`, { status: 409 });
+    if (lacking.length > some.length) return new Response(`${lacking.length - some.length} cells left to load`, { status: 409 });
   }
   return finish(env, sha, cells);
 }
@@ -88,12 +88,13 @@ async function load(env, sha) {
 async function finish(env, sha, cells) {
   const keep = env.COMMIT ?? sha;
   await env.TRACE.batch([
-    env.TRACE.prepare(`INSERT OR IGNORE INTO build SELECT ?2, ?1 WHERE NOT EXISTS (${LACKING})`).bind(cells, sha),
+    env.TRACE.prepare(`INSERT INTO build SELECT ?2, ?1 WHERE NOT EXISTS (${LACKING}) ON CONFLICT (sha) DO UPDATE SET cells = ?1`)
+      .bind(cells, sha),
     env.TRACE.prepare("DELETE FROM build WHERE sha NOT IN (?1, ?2) AND ?1 IN (SELECT sha FROM build)").bind(sha, keep),
     env.TRACE.prepare("DELETE FROM cell_json WHERE hash NOT IN (SELECT value FROM build, json_each(build.cells))"),
   ]);
   const { results: kept } = await env.TRACE.prepare("SELECT sha, cells FROM build").all();
-  if (!kept.some((b) => b.sha === sha)) return new Response("A cell went missing, so load again", { status: 409 });
+  if (!kept.some((b) => b.sha === sha && b.cells === cells)) return new Response("A cell went missing, so load again", { status: 409 });
   const keys = new Set(kept.flatMap((b) => [`${PREFIX}${b.sha}.json`, ...Object.values(JSON.parse(b.cells)).map((h) => `${PREFIX}cells/${h}.json`)]));
   for (let cursor; ;) {
     const listed = await env.BLOBS.list({ prefix: PREFIX, cursor });

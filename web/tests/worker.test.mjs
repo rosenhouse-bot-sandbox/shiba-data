@@ -80,11 +80,13 @@ test("passes a trace request's method and headers to the assets", async () => {
 });
 
 // The fake D1 database runs on node:sqlite, with the binding's prepare, bind, first, all, run and batch.
-// It counts the rows that statements change, and runs afterQuery, if set, after each query's results.
+// It counts the rows that statements change. It runs afterQuery, if set, after each query's results, and beforeBatch
+// before each batch.
 function d1() {
   const db = new DatabaseSync(":memory:");
-  const fake = { db, batches: 0, written: 0, afterQuery: null };
+  const fake = { db, batches: 0, written: 0, afterQuery: null, beforeBatch: null };
   const statement = (sql, args = []) => ({
+    sql,
     // Like D1, bind throws at once on undefined.
     bind: (...values) => {
       if (values.includes(undefined)) throw new TypeError("D1_TYPE_ERROR: Type 'undefined' not supported");
@@ -106,6 +108,7 @@ function d1() {
   fake.prepare = (sql) => statement(sql);
   fake.batch = async (statements) => {
     fake.batches++;
+    fake.beforeBatch?.(statements);
     db.exec("BEGIN");
     try {
       for (const s of statements) await s.run();
@@ -136,11 +139,11 @@ function bucket(objects) {
 const OLD = "1".repeat(40), NEW = "2".repeat(40), THIRD = "3".repeat(40), TOKEN = "t".repeat(64);
 const PLANS = Array.from({ length: 12 }, (_, n) => `H1036-${String(n).padStart(3, "0")}-0`);
 const hash = (n, version) => `${version}${String(n).padStart(2, "0")}`.padEnd(64, "0");
-// Uploads a build of 12 cells, as CI does. Cell n of version v reads {"n": n, "v": v}. changed lists the cells at version 2.
+// Uploads a build of 12 cells, as CI does. changed lists the cells at version 2, and the rest are at version 1.
 function upload(e, sha, changed = []) {
   const cells = Object.fromEntries(PLANS.map((plan, n) => [`${plan}/AB_ambulance`, hash(n, changed.includes(n) ? 2 : 1)]));
   for (const [n, v] of PLANS.map((_, n) => [n, changed.includes(n) ? 2 : 1])) {
-    e.BLOBS.objects[`trace/2027/cells/${hash(n, v)}.json`] = JSON.stringify({ n, v, code: "blob/${commit}/" });
+    e.BLOBS.objects[`trace/2027/cells/${hash(n, v)}.json`] = JSON.stringify({ n, v, code: "blob/${commit}/", sha: "${commit}" });
   }
   e.BLOBS.objects[`trace/2027/${sha}.json`] = JSON.stringify({ sha, year: 2027, cells });
 }
@@ -156,6 +159,7 @@ async function load(e, sha) {
     if (response.status !== 409) return { response, loads };
   }
 }
+const served = (n, v, sha) => JSON.stringify({ n, v, code: `blob/${sha}/`, sha });
 const stored = (e) => e.TRACE.db.prepare("SELECT count(*) AS n FROM cell_json").get().n;
 
 test("serves a cell's trace from D1, with the deployed commit, once its build has every cell", async () => {
@@ -165,10 +169,9 @@ test("serves a cell's trace from D1, with the deployed commit, once its build ha
   assert.equal(first.status, 409);
   assert.equal(await first.text(), "2 cells left to load");
   assert.equal(await (await at(e, cellAt(0))).text(), `asset ${cellAt(0)}.json`);
-  assert.equal(await (await post(e, OLD)).text(), "0 cells left to load");
   assert.equal(await (await post(e, OLD)).text(), "Loaded every cell");
   const response = await at(e, cellAt(11));
-  assert.deepEqual(await response.json(), { n: 11, v: 1, code: `blob/${OLD}/` });
+  assert.equal(await response.text(), served(11, 1, OLD));
   assert.equal(response.headers.get("Content-Type"), "application/json; charset=utf-8");
 });
 
@@ -178,7 +181,7 @@ test("serves the static file before a build loads, for a build other than the de
   upload(e, OLD);
   await load(e, OLD);
   assert.equal(await (await at(e, cellAt(0))).text(), `asset ${cellAt(0)}.json`);
-  assert.equal(await (await at({ ...e, COMMIT: OLD }, cellAt(0))).text(), '{"n":0,"v":1,"code":"blob/1111111111111111111111111111111111111111/"}');
+  assert.equal(await (await at({ ...e, COMMIT: OLD }, cellAt(0))).text(), served(0, 1, OLD));
   const other = cellAt(0).replace("2027", "2026");
   assert.equal(await (await at({ ...e, COMMIT: OLD }, other)).text(), `asset ${other}.json`);
   assert.equal(await (await at({ ...e, COMMIT: undefined }, cellAt(0))).text(), `asset ${cellAt(0)}.json`);
@@ -190,12 +193,38 @@ test("a build writes only the cells that changed", async () => {
   await load(e, OLD);
   e.TRACE.written = 0;
   upload(e, NEW, [3]);
-  const { response, loads } = await load(e, NEW);
+  const { response, loads } = await load({ ...e, COMMIT: NEW }, NEW);
   assert.equal(response.status, 200);
-  assert.equal(loads, 2);
+  assert.equal(loads, 1);
+  assert.equal(e.TRACE.written, 4);
+  assert.equal(stored(e), 12);
+  assert.equal(await (await at({ ...e, COMMIT: NEW }, cellAt(3))).text(), served(3, 2, NEW));
+  e.TRACE.written = 0;
+  upload(e, THIRD, [3]);
+  assert.equal((await load({ ...e, COMMIT: THIRD }, THIRD)).loads, 1);
   assert.equal(e.TRACE.written, 2);
-  assert.equal(stored(e), 13);
-  assert.equal(await (await at({ ...e, COMMIT: NEW }, cellAt(3))).text(), '{"n":3,"v":2,"code":"blob/2222222222222222222222222222222222222222/"}');
+});
+
+test("a build loaded again with other cells replaces them", async () => {
+  const e = traceEnv(OLD);
+  upload(e, OLD);
+  await load(e, OLD);
+  upload(e, OLD, [3]);
+  assert.equal((await load(e, OLD)).response.status, 200);
+  assert.equal(await (await at(e, cellAt(3))).text(), served(3, 2, OLD));
+  assert.ok(`trace/2027/cells/${hash(3, 2)}.json` in e.BLOBS.objects);
+});
+
+test("a build loaded again whose new cell went missing keeps its earlier cells", async () => {
+  const e = traceEnv(OLD);
+  upload(e, OLD);
+  await load(e, OLD);
+  upload(e, OLD, [3]);
+  e.TRACE.beforeBatch = (statements) => {
+    if (statements[0].sql.startsWith("INSERT INTO build")) e.TRACE.db.exec(`DELETE FROM cell_json WHERE hash = '${hash(3, 2)}'`);
+  };
+  assert.equal((await post(e, OLD)).status, 409);
+  assert.equal(await (await at(e, cellAt(3))).text(), served(3, 1, OLD));
 });
 
 test("a build drops other builds and the cells only they used, but keeps the deployed commit's", async () => {
@@ -223,7 +252,7 @@ test("an unfinished build drops nothing", async () => {
   await load(e, OLD);
   upload(e, THIRD, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
   assert.equal((await post(e, THIRD)).status, 409);
-  assert.equal(await (await at({ ...e, COMMIT: OLD }, cellAt(11))).text(), '{"n":11,"v":1,"code":"blob/1111111111111111111111111111111111111111/"}');
+  assert.equal(await (await at({ ...e, COMMIT: OLD }, cellAt(11))).text(), served(11, 1, OLD));
 });
 
 test("a build whose cell went missing while it loaded is neither added nor drops other builds", async () => {
@@ -231,12 +260,14 @@ test("a build whose cell went missing while it loaded is neither added nor drops
   upload(e, OLD);
   await load(e, OLD);
   upload(e, THIRD, [0]);
-  assert.equal(await (await post(e, THIRD)).text(), "0 cells left to load");
-  e.TRACE.afterQuery = () => (e.TRACE.db.exec(`DELETE FROM cell_json WHERE hash = '${hash(0, 2)}'`), e.TRACE.afterQuery = null);
+  e.TRACE.beforeBatch = (statements) => {
+    if (statements[0].sql.startsWith("INSERT INTO build")) e.TRACE.db.exec(`DELETE FROM cell_json WHERE hash = '${hash(0, 2)}'`);
+  };
   const response = await post(e, THIRD);
+  e.TRACE.beforeBatch = null;
   assert.equal(response.status, 409);
   assert.equal(await response.text(), "A cell went missing, so load again");
-  assert.equal(await (await at({ ...e, COMMIT: OLD }, cellAt(1))).text(), '{"n":1,"v":1,"code":"blob/1111111111111111111111111111111111111111/"}');
+  assert.equal(await (await at({ ...e, COMMIT: OLD }, cellAt(1))).text(), served(1, 1, OLD));
   assert.equal(await (await at({ ...e, COMMIT: THIRD }, cellAt(1))).text(), `asset ${cellAt(1)}.json`);
   assert.equal(await (await load(e, THIRD)).response.text(), "Loaded every cell");
 });
