@@ -989,8 +989,7 @@ VERSIONS[6] = VERSIONS[5] | {
     for p in ("H1036-153-0", "H5216-428-2", "H5216-048-0", "H5216-427-2")}
 # Version 7 presents DVHA cells whose rule only leaves details out. Cells whose rule would mislead stay held.
 RELEASED_7 = {("dvha.H_hearing", p) for p, in (c[1:] for c in VERSIONS[6] if c[0] == "dvha.H_hearing")} | {
-    ("dvha.E_optional_packages", p) for p in ("H2406-070-0", "H3805-040-0", "H3805-048-0", "H5216-048-0", "H1036-323-0",
-                                              "H5216-428-2")} | {
+    ("dvha.E_optional_packages", p) for p in ("H2406-070-0", "H3805-040-0", "H3805-048-0")} | {
     ("dvha.F_dental", p) for p in ("H1036-153-0", "H5439-010-0", "H5439-011-0", "H2056-003-0", "H2406-070-0", "H3805-040-0",
                                    "H5216-427-2", "H5216-455-0", "H7199-002-0")} | {
     ("dvha.I_alt_care_otc_travel", p) for p in ("H2001-045-0", "H3805-040-0", "H1372-003-0", "H7006-018-0", "H7006-021-0")} | {

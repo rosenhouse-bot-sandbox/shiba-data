@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-24.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"The quote 'Medicare-covered service. In-Network $0 copay' is not on page 51, which shows only the 50% out-of-network cost for Medicare-covered hearing. It also describes a Medicare-covered exam, not the supplemental benefit claimed. The routine exam row ($0 in network, limited to 1 visit every year) is a separate row, and the item gives no limit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2342,
+  "output_tokens": 442,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

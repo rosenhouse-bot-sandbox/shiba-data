@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-43.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 57 Well Dine row confirms an in-network $0 copay, but the page does not state the limit (2 meals per day for 7 days after inpatient stay; 4 times per calendar year).\"}]\n```",
+ "usage": {
+  "input_tokens": 2426,
+  "output_tokens": 176,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

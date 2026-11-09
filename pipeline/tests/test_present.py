@@ -933,10 +933,9 @@ class ExpectedTest(unittest.TestCase):
 
 class DvhaTest(unittest.TestCase):
     def test_presents_the_live_value_of_each_cell_it_does_not_hold(self):
-        """Except cells that version 7 releases on purpose, whose values change when their edits retire."""
         data = years.data_dir(YEAR)
         live = {r["plan_id"]: r for r in layers.live(data)[0]["dvha"]}
-        held = present.held(data, max(present.VERSIONS)) | dict.fromkeys(present.RELEASED_7)
+        held = present.held(data, max(present.VERSIONS))
         for column in present.DVHA:
             got = {p: v for p, ((v, cited),) in present.lines(data, column, sheet="dvha").items()
                    if present.cell("dvha", column, p) not in held and cited}

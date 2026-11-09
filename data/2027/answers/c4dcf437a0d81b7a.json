@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-32.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 17 'Routine foot care' row: 20% of the cost for routine podiatry visits, in network, supplemental (routine). The stated fields match. The item omits the 12-visits-per-year limit but states nothing that conflicts with the page.\"}]\n```",
+ "usage": {
+  "input_tokens": 2028,
+  "output_tokens": 348,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

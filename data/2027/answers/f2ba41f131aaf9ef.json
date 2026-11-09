@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-11.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 12, H5439-011-0: the Adjunctive General Services row shows a $0 copay in network. That row falls within the routine (non-Medicare-covered) comprehensive dental services described in the Additional Dental Information.\"}]\n```",
+ "usage": {
+  "input_tokens": 1931,
+  "output_tokens": 575,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

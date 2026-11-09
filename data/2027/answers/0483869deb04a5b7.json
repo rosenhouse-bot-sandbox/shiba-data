@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-19.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 7 Hearing Aids row: the in-network benefit covers up to 2 TruHearing Advanced or Premium hearing aids. This is a supplemental item limit of 2, and the page states no frequency.\"}]\n```",
+ "usage": {
+  "input_tokens": 2340,
+  "output_tokens": 287,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
