@@ -73,9 +73,28 @@ function lens(step, link, terms) {
     el("div", { class: "how-card" },
       el("p", { class: "how-strip" }, el("code", { class: "from" }, step.before), " becomes ", el("code", { class: "to" }, step.after)),
       ...step.paras.map((p) => el("p", {}, ...p.map((s) => typeof s === "string" ? s : term(terms[s[0]], s[1]))))),
+    el("div", { class: "how-trace" }, el("p", { class: "how-none" }, "Loading the cell's trace…")),
     rows("Input", step.from, step.highlight[0], step.none?.[0]),
     rows("Output", step.to, step.highlight[1], step.none?.[1]),
     chips(after(step), "after", (l) => `next: ${l} ↘`));
+}
+
+export const traceUrl = (year, column) => `trace/${year}/${EXAMPLE.sheet}/${EXAMPLE.plan}/${column}`;
+
+const STATUS = {
+  traced: "Traced",
+  none: "No step touched this cell",
+  not_traced_yet: "Not traced yet",
+  not_recorded: "Not recorded in this build",
+};
+
+// The step's record from the cell's trace, or null when the build has none.
+export function traceRecord(step, trace) {
+  if (!trace) return el("div", { class: "how-trace" }, el("p", { class: "how-none" }, "This build has no trace for this cell."));
+  const { status, ...record } = trace[step.record];
+  return el("div", { class: `how-trace ${status}` },
+    el("div", { class: "how-trace-head" }, el("strong", {}, "Trace"), el("code", {}, step.record), el("span", {}, STATUS[status])),
+    status === "traced" ? el("div", { class: "how-scroll" }, el("pre", {}, JSON.stringify(record, null, 1))) : null);
 }
 
 let pops = 0;

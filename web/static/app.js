@@ -3,8 +3,8 @@ import { findAll, matchRanges, squash } from "./highlight.js";
 import { ago } from "./ago.js";
 import { parse, format } from "./permalink.js";
 import { el } from "./dom.js";
-import { howView, howLink } from "./how.js";
-import { STEPS, stepById } from "./pipeline.js";
+import { howView, howLink, traceRecord, traceUrl } from "./how.js";
+import { EXAMPLE, STEPS, stepById } from "./pipeline.js";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.worker.min.mjs";
 
@@ -154,7 +154,13 @@ function routeHow(state) {
   content.querySelector(".how-map").scrollTop = mapTop;
   if (stepping) content.querySelector(".how-step").focus({ preventScroll: true });
   here = { key: "how", view: "how" };
+  const box = content.querySelector(".how-trace");
+  exampleTrace().then((trace) => box.replaceWith(traceRecord(step, trace)));
 }
+
+let traced;
+const exampleTrace = () => traced ??= fetch(traceUrl(site.year, site.main.columns.find((c) => c.id === EXAMPLE.column).key))
+  .then((r) => r.ok ? r.json() : null).catch(() => null);
 
 const planSb = (plan) => plan.docs.find((d) => site.docs[d].kind === "SB");
 

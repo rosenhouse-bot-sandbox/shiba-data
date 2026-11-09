@@ -7,6 +7,7 @@ import pathlib
 import re
 import shutil
 import sqlite3
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -366,3 +367,10 @@ class TraceFilesTest(unittest.TestCase):
         build.trace.build(year, self.dir / "trace.sqlite", "abc")
         expected = build.trace.cell(sqlite3.connect(self.dir / "trace.sqlite"), "main", "H1036-153-0", "AB_ambulance")
         self.assertEqual(json.loads((main / "H1036-153-0/AB_ambulance.json").read_text()), expected)
+
+    def test_each_pipeline_step_names_a_record_of_the_trace(self):
+        build.trace.build(2027, self.dir / "trace.sqlite", "abc")
+        records = build.trace.cell(sqlite3.connect(self.dir / "trace.sqlite"), "main", "H1036-153-0", "AB_ambulance")
+        script = 'import("./static/pipeline.js").then((m) => console.log(JSON.stringify(m.STEPS.map((s) => s.record))))'
+        named = json.loads(subprocess.run(["node", "-e", script], cwd=build.HERE, capture_output=True, text=True, check=True).stdout)
+        self.assertEqual([r for r in named if r not in records], [])
