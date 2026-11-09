@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { NODES, STEPS, LINKS, nodeBox, pillBox, edge, before, after, stepById, chain } from "../static/pipeline.js";
+import { NODES, STEPS, LINKS, nodeBox, pillBox, edge, before, after, stepById, chain, strip } from "../static/pipeline.js";
 
 const inside = ([x, y], b) => x > b.x && x < b.x + b.w && y > b.y && y < b.y + b.h;
 
@@ -91,4 +91,35 @@ test("a cell cited by another layer uses the documents", () => {
 
 test("without a trace, the chain is every step", () => {
   assert.equal(chain(null), STEPS);
+});
+
+const EOC = "https://x/eoc.pdf";
+const full = {
+  cell: { value: "" },
+  plan: { status: "traced", row: { plan_id: "H1-1-0", plan_name: "Plan One" } },
+  documents: { status: "traced", documents: [{ kind: "SB", url: "https://x/sb.pdf", found_via: "Links sheet", pages: 10 },
+    { kind: "EOC", url: EOC, found_via: "Links sheet", pages: 90 }] },
+  draft: { status: "traced", value: "$0" },
+  model_citations: { status: "traced", rows: [{ step: "blanks", url: EOC, pdf_page: 5 }, { step: "xref", url: EOC, pdf_page: 6 }] },
+  layers: { status: "traced", draft: "$0", applied: [{ layer: "generated/presented.csv", value: "", rows: [{ url: EOC, pdf_page: 5 }] }],
+    live: { value: "", citations: [{ url: EOC, pdf_page: 5 }, { url: EOC, pdf_page: 7 }] } },
+};
+const stripOf = (id) => strip(stepById(id), full);
+
+test("each step's strip reads the cell's own records", () => {
+  assert.deepEqual(stripOf("list-plans"), ["H1-1-0 in the Landscape file", "plans.csv: Plan One"]);
+  assert.deepEqual(stripOf("find-pdfs"), ["Links sheet", "SB and EOC URLs"]);
+  assert.deepEqual(stripOf("download"), ["2 URLs", "SB, 10 pages; EOC, 90 pages"]);
+  assert.deepEqual(stripOf("extract-text"), ["2 PDFs", "text of 100 pages"]);
+  assert.deepEqual(stripOf("draft"), ["the plan's CMS fields", "$0"]);
+  assert.deepEqual(stripOf("cite-blanks"), ["blank", "1 quote from EOC page 5"]);
+  assert.deepEqual(stripOf("stack-draft"), ["draft $0", "bottom layer"]);
+  assert.deepEqual(stripOf("stack-presented"), ["presented blank, 1 quote from EOC page 5", "live blank"]);
+  assert.deepEqual(stripOf("publish"), ["live blank", "2 quotes from EOC page 5, EOC page 7"]);
+});
+
+test("a step whose record the trace lacks, or that has no strip, gets none", () => {
+  assert.equal(strip(stepById("list-plans"), { ...full, plan: { status: "not_recorded" } }), null);
+  assert.equal(strip(stepById("read-facts"), full), null);
+  assert.equal(strip(stepById("draft"), null), null);
 });

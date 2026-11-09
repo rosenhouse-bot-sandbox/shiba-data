@@ -187,3 +187,42 @@ export function pillBox(step) {
 export const stepById = (id) => STEPS.find((s) => s.id === id);
 export const before = (step, steps = STEPS) => steps.filter((s) => s.to === step.from);
 export const after = (step, steps = STEPS) => steps.filter((s) => s.from === step.to);
+
+const shownValue = (v) => v === "" ? "blank" : v;
+const plural = (n, word) => `${n} ${word}${n === 1 ? "" : "s"}`;
+
+// "4 quotes from EOC page 46", naming each document by its kind.
+function quotes(rows, trace) {
+  if (!rows.length) return "no quotes";
+  const kind = Object.fromEntries(trace.documents.documents?.map((d) => [d.url, d.kind]) ?? []);
+  const pages = [...new Set(rows.map((r) => `${kind[r.url] ?? "PDF"} page ${r.pdf_page}`))];
+  return `${plural(rows.length, "quote")} from ${pages.join(", ")}`;
+}
+
+const layer = (trace, name) => trace.layers.applied.find((l) => l.layer === name);
+
+// What each step took in and gave out for a cell, read from its trace.
+const STRIPS = {
+  "list-plans": (t) => [`${t.plan.row.plan_id} in the Landscape file`, `plans.csv: ${t.plan.row.plan_name}`],
+  "find-pdfs": (t) => [[...new Set(t.documents.documents.map((d) => d.found_via))].join(", "),
+    `${t.documents.documents.map((d) => d.kind).join(" and ")} URLs`],
+  "download": (t) => [plural(t.documents.documents.length, "URL"),
+    t.documents.documents.map((d) => `${d.kind}, ${plural(d.pages, "page")}`).join("; ")],
+  "extract-text": (t) => [plural(t.documents.documents.length, "PDF"),
+    `text of ${plural(t.documents.documents.reduce((n, d) => n + d.pages, 0), "page")}`],
+  "draft": (t) => ["the plan's CMS fields", shownValue(t.draft.value)],
+  "cite-blanks": (t) => {
+    const rows = (t.model_citations.rows ?? []).filter((r) => r.step === "blanks");
+    return [shownValue(t.cell.value), quotes(rows, t)];
+  },
+  "stack-draft": (t) => [`draft ${shownValue(t.layers.draft)}`, "bottom layer"],
+  "stack-presented": (t) => {
+    const presented = layer(t, "generated/presented.csv");
+    return [`presented ${shownValue(presented.value)}, ${quotes(presented.rows, t)}`, `live ${shownValue(t.layers.live.value)}`];
+  },
+  "publish": (t) => [`live ${shownValue(t.layers.live.value)}`, quotes(t.layers.live.citations, t)],
+};
+
+// [before, after] for a step, or null when the trace does not say.
+export const strip = (step, trace) =>
+  trace?.[step.record]?.status === "traced" && STRIPS[step.id] ? STRIPS[step.id](trace) : null;
