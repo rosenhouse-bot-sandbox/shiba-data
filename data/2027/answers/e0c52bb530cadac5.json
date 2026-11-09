@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-bf93677641b9fa6f.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 6 gives the hearing aid copay as $399 or $699 per aid. The $50 is an add-on charge per aid for optional rechargeability, not the hearing aid copay. Rechargeability is a product option, not a member group that qualifies, so it does not belong in `condition`.\"}]\n```",
+ "usage": {
+  "input_tokens": 2679,
+  "output_tokens": 314,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

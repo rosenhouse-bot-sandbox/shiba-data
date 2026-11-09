@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-44.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 58 meal benefit text: 'Meal program limited to 4 times per calendar year,' after an inpatient stay. The quote matches the 4-uses-per-year limit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2656,
+  "output_tokens": 472,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

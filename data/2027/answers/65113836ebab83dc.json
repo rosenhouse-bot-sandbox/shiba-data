@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-33.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 71 Podiatry row: supplemental routine foot care allows self-referral for 12 visits per calendar year to a network specialist, so it is in network. The visit limit names no setting.\"}]\n```",
+ "usage": {
+  "input_tokens": 2542,
+  "output_tokens": 194,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

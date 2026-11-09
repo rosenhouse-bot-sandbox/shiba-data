@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-2aa68f4230962abc.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 76 Hearing services row: Medicare-covered diagnostic hearing and balance evaluations have a $45 copay in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 76 Hearing services row: the supplemental routine hearing exam and the hearing aid fitting each have a $0 copay. The item has no limit field to check against the 1 routine exam each year.\"}]\n```",
+ "usage": {
+  "input_tokens": 2674,
+  "output_tokens": 451,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

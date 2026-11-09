@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-f751937f09316ed1.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 76 shows 30% coinsurance only for balance exams. The item presents it as the general Medicare-covered hearing exam cost without saying it is balance-only. The diagnostic hearing exam cost is not shown on this page and may differ, so the fact could mislead.\"}]\n```",
+ "usage": {
+  "input_tokens": 2551,
+  "output_tokens": 758,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

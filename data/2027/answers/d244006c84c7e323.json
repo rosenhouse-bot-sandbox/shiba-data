@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-34.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 102 Routine Foot Care: $45 copay, described as the amount you pay for routine foot care and as an extra benefit from Devoted Health (supplemental, 4 visits per year). 'Per visit' is not stated but fits a copay for visits.\"}]\n```",
+ "usage": {
+  "input_tokens": 2267,
+  "output_tokens": 568,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
