@@ -976,3 +976,17 @@ test("pipeline view: a link may name the column by its key", async () => {
   assert.match(page.url(), /H5216-048-0\/premium\/list-plans$/);
   assert.equal(await page.locator(".warn").count(), 0);
 });
+
+test("pipeline view: a replayed trace shows the reader prompt, each fact's verdicts and the facts the rule set aside", async () => {
+  const fresh = await browser.newPage();
+  opened.push(fresh);
+  const replay = fs.readFileSync(path.join(path.dirname(new URL(import.meta.url).pathname), "fixtures/replay_trace.json"));
+  await fresh.route("**/trace/**", (route) => route.fulfill({ body: replay, contentType: "application/json" }));
+  const work = async (step) => {
+    await openHow(fresh, `main/H1036-153-0/ambulance/${step}`);
+    return fresh.locator(".how-details li").allTextContents();
+  };
+  assert.ok((await work("read-facts")).includes("EOC reader prompt, answered by claude-opus-5-5 ↗"));
+  assert.ok((await work("check-facts")).some((l) => l.startsWith("Rejected: SB page 6, ambulance $325. Verifier disagreed:")));
+  assert.ok((await work("column-rules")).includes("Set aside SB page 9, ambulance.air 20%: SB ranks below EOC"));
+});

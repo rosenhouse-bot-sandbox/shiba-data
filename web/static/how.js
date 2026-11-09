@@ -3,7 +3,7 @@ import { el, svg } from "./dom.js";
 import { format } from "./permalink.js";
 import {
   EXAMPLE, NODES, STEPS, LINKS, NODE_W, NODE_H, MAP_W, MAP_H,
-  nodeBox, pillBox, edge, before, after, strip,
+  nodeBox, pillBox, edge, before, after, strip, details,
 } from "./pipeline.js";
 
 // The map is drawn at full size, then scaled to fit its rail.
@@ -80,7 +80,7 @@ function lens(step, steps, link, terms, example, trace) {
       el("h2", { class: "how-step", tabindex: "-1" }, step.label), el("span", { class: "how-wire to" }), end(step.to)),
     el("div", { class: "how-card" },
       fromTo ? el("p", { class: "how-strip" }, el("code", { class: "from" }, fromTo[0]), " becomes ", el("code", { class: "to" }, fromTo[1])) : null,
-      ...step.paras.map(para), ...(example?.paras ?? []).map(para)),
+      ...step.paras.map(para), ...(example?.paras ?? []).map(para), workList(details(step, trace))),
     example ? rows("Input", step.from, example.highlight[0], example.none?.[0]) : null,
     example ? rows("Output", step.to, example.highlight[1], example.none?.[1]) : null,
     traceRecord(step, trace),
@@ -102,6 +102,9 @@ function traceRecord(step, trace) {
     el("summary", { class: "how-trace-head" }, el("strong", {}, "Raw trace record"), el("code", {}, step.record), el("span", {}, STATUS[status] ?? status)),
     status === "traced" ? el("div", { class: "how-scroll" }, el("pre", {}, JSON.stringify(record, null, 1))) : null);
 }
+
+const workList = (lines) => lines.length ? el("ul", { class: "how-details" }, ...lines.map((l) => el("li", {},
+  l.href ? el("a", { href: l.href, target: "_blank", rel: "noopener" }, `${l.text} ↗`) : l.text))) : null;
 
 let pops = 0;
 // The one open pop-over, if any.

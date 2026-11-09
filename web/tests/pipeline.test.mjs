@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import fs from "node:fs";
 import assert from "node:assert/strict";
-import { NODES, STEPS, LINKS, nodeBox, pillBox, edge, before, after, stepById, chain, strip } from "../static/pipeline.js";
+import { NODES, STEPS, LINKS, nodeBox, pillBox, edge, before, after, stepById, chain, strip, details } from "../static/pipeline.js";
 
 const inside = ([x, y], b) => x > b.x && x < b.x + b.w && y > b.y && y < b.y + b.h;
 
@@ -152,4 +152,63 @@ test("a held cell's rule strip says why", () => {
 test("every step of a replayed trace's chain has a strip, except added facts the cell lacks", () => {
   const missing = chain(replay).filter((s) => !strip(s, replay)).map((s) => s.id);
   assert.deepEqual(missing, ["added-facts"]);
+});
+
+const BLOBS = "https://pdxplans.org/blobs/";
+const lines = (id, t = replay) => details(stepById(id), t).map((l) => l.text);
+
+test("Claude reads facts links each reader prompt", () => {
+  assert.deepEqual(details(stepById("read-facts"), replay), [
+    { text: "EOC reader prompt, answered by claude-opus-5-5", href: `${BLOBS}226ee67e4a27f3e7c117e6aa8e197a07423fac0b4d1fe9b6d6033e8602313064.txt` },
+    { text: "SB reader prompt, answered by claude-opus-5-5", href: `${BLOBS}6761dbbfbd4ec26bccf84990d6d9db9b6ff67e7aa12674da3851203ab390d96b.txt` },
+  ]);
+});
+
+// The replayed trace with one more answer whose prompts sit in the given dirs and tasks.
+const withPrompts = (...prompts) => ({ ...replay, answers: { ...replay.answers, rows: [...replay.answers.rows,
+  { model: "m", prompts: prompts.map(([dir, task]) => ({ dir, task, prompt: task, url: task })) }] } });
+
+test("a prompt's label names its role, its document when known, and a retry", () => {
+  const t = withPrompts(["facts/a/reread", "ce13e925c0384896.retry.md"], ["facts/review", "v-0.md"], ["facts/review/earlier", "v-1.md"],
+    ["facts/a/recheck", "v-0123456789abcdef.md"]);
+  assert.deepEqual(lines("read-facts", t).slice(2), ["SB second reader prompt, retried, answered by m"]);
+  assert.deepEqual(lines("check-facts", t).slice(-3), ["reviewer prompt, answered by m", "earlier reviewer prompt, answered by m",
+    "second verifier prompt, answered by m"]);
+});
+
+test("Check facts gives each fact's verdicts", () => {
+  const got = lines("check-facts");
+  assert.equal(got.length, 8 + 2);
+  assert.equal(got[0], "Kept: EOC page 46, ambulance.ground $325. Verifier agreed: Page 46 ambulance row, In-Network, Emergency Ambulance: $325 copayment per date of service for Ground Ambulance.");
+  assert.match(got[7], /^Rejected: SB page 6, ambulance \$325\. Verifier disagreed: The page 6 Worldwide Coverage/);
+  assert.deepEqual(got.slice(8), ["EOC verifier prompt, answered by claude-opus-5-5", "SB verifier prompt, answered by claude-opus-5-5"]);
+});
+
+test("a fact that failed its quote check names its document from the prompt that stated it, and the reviewer's verdict shows", () => {
+  const [row] = replay.fact_checks.rows.filter((r) => r.fact?.source === "SB");
+  const failed = { ...row, fact: null, code_check: "quote not found", kept: false,
+    reviewer: { status: "traced", ok: false, reason: "Wrong row." } };
+  const t = { ...replay, fact_checks: { status: "traced", rows: [failed] } };
+  assert.match(lines("check-facts", t)[0],
+    /^Rejected: SB page 9, ambulance\.\w+ \S+\. Quote check failed: quote not found\. Verifier agreed: .*\. Reviewer disagreed: Wrong row\.$/);
+});
+
+test("Column rules lists the facts each line used and why others were set aside", () => {
+  const got = lines("column-rules");
+  assert.ok(got.includes("Line 2 ($325) used EOC page 46, ambulance $325"));
+  assert.ok(got.includes("Set aside SB page 9, ambulance.air 20%: SB ranks below EOC"));
+});
+
+test("a held rule says why, and a fact with no page names none", () => {
+  const pbp = { ...replay.rule.set_aside[0], source: "PBP", page: "" };
+  const t = { ...replay, rule: { ...replay.rule, held: "the EOC and SB disagree", lines: [], set_aside: [pbp] } };
+  assert.deepEqual(lines("column-rules", t), ["The rule leaves this cell as it was, because the EOC and SB disagree",
+    "Set aside PBP, ambulance.air 20%: SB ranks below EOC"]);
+});
+
+test("a step without a traced record has no details", () => {
+  assert.deepEqual(lines("check-facts", { ...replay, fact_checks: { status: "not_recorded" } }), []);
+  assert.deepEqual(lines("check-facts", { ...replay, answers: { status: "not_recorded" } }).length, 8);
+  assert.deepEqual(lines("draft"), []);
+  assert.deepEqual(details(stepById("draft"), null), []);
 });
