@@ -775,6 +775,15 @@ test("permalink: an old Ambiguities link opens Notes, and a page link in a note 
   await fresh.close();
 });
 
+// A full load, so the lens on screen is the new one.
+async function openHow(p, path) {
+  await p.goto("about:blank");
+  await p.goto(`${base}#/2027/how${path && `/${path}`}`);
+  await p.waitForSelector(".how-lens");
+}
+
+const chainOf = (p) => p.locator(".how-pill:not(.skip)").allTextContents();
+
 test("pipeline view: the nav link opens the example cell's first step", async () => {
   await page.goto(`${base}#/main`);
   await page.click("nav a[data-view=how]");
@@ -783,9 +792,8 @@ test("pipeline view: the nav link opens the example cell's first step", async ()
   assert.equal(await page.textContent(".how-step"), "List the plans");
 });
 
-test("pipeline view: Next steps through every step, each showing the cell's rows or why there are none", async () => {
-  await page.goto(`${base}#/2027/how`);
-  await page.waitForSelector(".how-lens");
+test("pipeline view: Next steps through the example cell's chain, each step showing its rows or why there are none", async () => {
+  await openHow(page, "");
   const labels = [];
   for (;;) {
     labels.push(await page.textContent(".how-step"));
@@ -797,13 +805,13 @@ test("pipeline view: Next steps through every step, each showing the cell's rows
     await next.click();
     await page.waitForFunction((n) => document.querySelector(".how-count")?.textContent.startsWith(`${n} `), labels.length + 1);
   }
-  assert.equal(labels.length, 13);
+  assert.equal(labels.length, 12);
+  assert.ok(!labels.includes("Cite blank cells"));
   assert.equal(labels.at(-1), "Publish");
 });
 
 test("pipeline view: a step on the map opens in the lens, and Back returns", async () => {
-  await page.goto(`${base}#/2027/how/main/H1036-153-0/ambulance/check-facts`);
-  await page.waitForSelector(".how-lens");
+  await openHow(page, "main/H1036-153-0/ambulance/check-facts");
   await page.click(".how-pill:text-is('Column rules')");
   await page.waitForFunction(() => document.querySelector(".how-step")?.textContent === "Column rules");
   assert.equal(await page.locator(".how-node.on").count(), 2);
@@ -816,8 +824,7 @@ test("pipeline view: a step on the map opens in the lens, and Back returns", asy
 test("pipeline view: at phone width the lens sits below the map at full width", async () => {
   await page.setViewportSize({ width: 390, height: 800 });
   try {
-    await page.goto(`${base}#/2027/how/main/H1036-153-0/ambulance/column-rules`);
-    await page.waitForSelector(".how-lens");
+    await openHow(page, "main/H1036-153-0/ambulance/column-rules");
     const lens = await page.locator(".how-lens").boundingBox();
     assert.ok(lens.width > 350, `lens is ${lens.width}px wide`);
   } finally {
@@ -826,22 +833,19 @@ test("pipeline view: at phone width the lens sits below the map at full width", 
 });
 
 test("pipeline view: a step that leaves the cell alone says so instead of showing rows", async () => {
-  await page.goto(`${base}#/2027/how/main/H1036-153-0/ambulance/added-facts`);
-  await page.waitForSelector(".how-lens");
+  await openHow(page, "main/H1036-153-0/ambulance/added-facts");
   assert.match(await page.textContent(".how-rows.input .how-none"), /no added facts/);
   assert.equal(await page.locator(".how-rows table").count(), 0);
 });
 
 test("pipeline view: an unknown step opens the first step", async () => {
-  await page.goto(`${base}#/2027/how/main/H1036-153-0/ambulance/nope`);
-  await page.waitForSelector(".how-lens");
+  await openHow(page, "main/H1036-153-0/ambulance/nope");
   assert.equal(await page.textContent(".how-step"), "List the plans");
 });
 
 test("pipeline view: hovering a term shows its code, linked at the build's commit; clicking pins it and Escape closes it", async () => {
-  await page.goto(`${base}#/2027/how/main/H1036-153-0/ambulance/column-rules`);
-  await page.waitForSelector(".how-lens");
-  const box = page.locator(".how-term-box", { hasText: "rule" }).first();
+  await openHow(page, "main/H1036-153-0/ambulance/column-rules");
+  const box = page.locator(".how-term-box", { has: page.locator("button", { hasText: "Ambulance rule" }) });
   const pop = box.locator(".how-pop");
   await box.hover();
   assert.ok(await pop.isVisible());
@@ -860,8 +864,7 @@ test("pipeline view: hovering a term shows its code, linked at the build's commi
 test("pipeline view: a term's pop-over stays inside the window, and opening another closes it", async () => {
   await page.setViewportSize({ width: 1000, height: 700 });
   try {
-    await page.goto(`${base}#/2027/how/main/H1036-153-0/ambulance/check-facts`);
-    await page.waitForSelector(".how-lens");
+    await openHow(page, "main/H1036-153-0/ambulance/check-facts");
     for (const name of ["quote check", "decoys", "reviewer"]) {
       await page.locator(".how-term", { hasText: name }).first().focus();
       const pops = page.locator(".how-pop:visible");
@@ -878,8 +881,7 @@ test("pipeline view: a term's pop-over stays inside the window, and opening anot
 });
 
 test("pipeline view: each step shows its record from the cell's trace", async () => {
-  await page.goto(`${base}#/2027/how/main/H1036-153-0/ambulance/draft`);
-  await page.waitForSelector(".how-trace pre");
+  await openHow(page, "main/H1036-153-0/ambulance/draft");
   assert.match(await page.textContent(".how-trace-head"), /draft\s*Traced/);
   assert.match(await page.textContent(".how-trace pre"), /pipeline\/main_chart\.py/);
   await page.click("a.how-nav[rel=next]");
@@ -909,10 +911,65 @@ test("pipeline view: a record's status reads in words, and a record the trace la
     await route.fulfill({ json: trace });
   });
   const head = async (step) => {
-    await fresh.goto(`${base}#/2027/how/main/H1036-153-0/ambulance/${step}`);
-    await fresh.waitForSelector(".how-trace-head");
+    await openHow(fresh, `main/H1036-153-0/ambulance/${step}`);
     return fresh.textContent(".how-trace-head");
   };
   assert.match(await head("draft"), /draft\s*Not recorded in this build/);
   assert.match(await head("list-plans"), /plan\s*No step touched this cell/);
+});
+
+test("pipeline view: a CMS-only cell shows a short chain, and a step it skips opens its first step", async () => {
+  await openHow(page, "main/H5216-048-0/premium_full_extra_help/column-rules");
+  assert.deepEqual(await chainOf(page), ["List the plans", "Draft from CMS", "Stack: draft", "Publish"]);
+  assert.match(page.url(), /#\/2027\/how\/main\/H5216-048-0\/premium_full_extra_help\/list-plans$/);
+  assert.equal(await page.textContent(".how-count"), "1 of 4");
+  assert.equal(await page.locator(".how-rows").count(), 0);
+  assert.deepEqual(await page.locator(".how-end code").allTextContents(), ["Landscape.csv", "plans.csv"]);
+});
+
+test("pipeline view: a blank cell with a blank-cell citation shows the blanks step and its record", async () => {
+  await openHow(page, "main/H5216-048-0/chiropractic/cite-blanks");
+  assert.ok((await chainOf(page)).includes("Cite blank cells"));
+  assert.equal(await page.textContent(".how-value"), "blank");
+  assert.match(await page.textContent(".how-trace-head"), /model_citations\s*Traced/);
+  assert.match(await page.textContent(".how-trace pre"), /"step": "blanks"/);
+});
+
+test("pipeline view: a main-sheet cell's detail links to its pipeline view", async () => {
+  await page.goto("about:blank");
+  await page.goto(`${base}#/2027/main/H5216-048-0/premium`);
+  await page.click("a:text('How the pipeline made this cell')");
+  await page.waitForSelector(".how-lens");
+  assert.match(page.url(), /#\/2027\/how\/main\/H5216-048-0\/premium\/list-plans$/);
+  assert.match(await page.textContent(".how-cell"), /Premium/);
+});
+
+test("pipeline view: says it is loading, and a cell picked meanwhile stays", async () => {
+  const fresh = await browser.newPage();
+  opened.push(fresh);
+  let release;
+  const held = new Promise((r) => { release = r; });
+  await fresh.route("**/trace/**", async (route) => { await held; await route.continue(); });
+  await fresh.goto(`${base}#/2027/main`);
+  await fresh.waitForSelector("td[data-col]");
+  await fresh.click("nav a[data-view=how]");
+  await fresh.waitForSelector(".how-loading");
+  await fresh.evaluate(() => { location.hash = "#/2027/main"; });
+  await fresh.waitForSelector("td[data-col]");
+  release();
+  await fresh.waitForTimeout(300);
+  assert.equal(await fresh.locator(".how-lens").count(), 0);
+  assert.match(fresh.url(), /#\/2027\/main$/);
+});
+
+test("pipeline view: a link to no main-sheet cell shows the example cell and says so", async () => {
+  await openHow(page, "main/NOPE/ambulance/draft");
+  assert.match(await page.textContent(".warn"), /names no main-sheet cell/);
+  assert.match(page.url(), /H1036-153-0\/ambulance\/draft$/);
+});
+
+test("pipeline view: a link may name the column by its key", async () => {
+  await openHow(page, "main/H5216-048-0/C_premium");
+  assert.match(page.url(), /H5216-048-0\/premium\/list-plans$/);
+  assert.equal(await page.locator(".warn").count(), 0);
 });

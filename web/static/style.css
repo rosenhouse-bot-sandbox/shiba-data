@@ -156,6 +156,9 @@ td.selected { outline: 3px solid var(--ink); outline-offset: -3px; }
 .how-rows-head strong { font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--source); }
 .how-rows.output .how-rows-head strong { color: var(--accent); }
 .how-rows-head code { font-size: 13px; font-weight: 600; color: var(--ink); }
+.how-loading { padding: 24px; color: var(--muted); }
+.how-pill.skip { opacity: .35; border-style: dashed; cursor: default; }
+.how-edge.skip { opacity: .25; }
 .how-trace { background: #fff; border: 1px dashed var(--line); border-radius: 12px; overflow: hidden; margin-bottom: 14px; }
 .how-trace-head { display: flex; gap: 10px; align-items: baseline; padding: 9px 14px; font-size: 12px; color: var(--muted); }
 .how-trace-head strong { font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; }
