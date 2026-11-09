@@ -594,6 +594,44 @@ class HearingTest(unittest.TestCase):
         self.assertEqual(column(present.hearing, *found), [("", [])])
 
 
+class OptionalPackagesTest(unittest.TestCase):
+    def test_each_package_shows_its_premium_and_yearly_dental_max(self):
+        found = [routine("packages", "premium", "$50.90", package="MyOption DEN972", unit="per month"),
+                 routine("dental", "max", "$1,500", package="MyOption DEN972", limit="per calendar year"),
+                 routine("dental", "max", "$100", package="MyOption DEN972", unit="per incident")]
+        self.assertEqual(column(present.optional_packages, *found), [("MyOption DEN972 $50.90/mo, max $1,500", found[:2])])
+
+    def test_a_package_with_other_benefits_says_dental_max(self):
+        found = [routine("packages", "premium", "$54", package="Advantage Plus"),
+                 routine("dental", "max", "$1,500", package="Advantage Plus", limit="per year"),
+                 routine("hearing.aids", "allowance", "$500", package="Advantage Plus")]
+        self.assertEqual(column(present.optional_packages, *found)[0][0], "Advantage Plus $54/mo, dental max $1,500")
+
+    def test_the_best_source_gives_the_premium_and_the_max(self):
+        found = [routine("packages", "premium", "$40", package="Rider", source="SB", page="2"),
+                 routine("packages", "premium", "$45", package="Rider"),
+                 routine("dental", "max", "$900", package="Rider", limit="per year", source="SB", page="2"),
+                 routine("dental", "max", "$1,000", package="Rider", limit="per year")]
+        self.assertEqual(column(present.optional_packages, *found), [("Rider $45/mo, max $1,000", [found[1], found[3]])])
+
+    def test_skips_out_of_network_conditional_and_medicare_packages_and_one_without_a_premium(self):
+        found = [routine("packages", "premium", "$9", package="Out", network="out"),
+                 routine("packages", "premium", "$9", package="Some", condition="diabetes"),
+                 priced("packages", amount="$9", cost_kind="premium", package="Medicare"),
+                 routine("dental", "premium", "$9", package="Dental only")]
+        self.assertEqual(column(present.optional_packages, *found), [("", [])])
+
+    def test_a_document_that_says_none_are_sold_cites_a_blank_unless_one_is(self):
+        none = routine("packages", "not_covered", "")
+        self.assertEqual(column(present.optional_packages, none), [("", [none])])
+        sold = routine("packages", "premium", "$9", package="Rider")
+        self.assertEqual(column(present.optional_packages, none, sold), [("Rider $9/mo", [sold])])
+
+    def test_several_packages_are_separated_by_semicolons(self):
+        found = [routine("packages", "premium", a, package=n) for a, n in (("$9", "A"), ("$8", "B"))]
+        self.assertEqual(column(present.optional_packages, *found)[0][0], "A $9/mo; B $8/mo")
+
+
 def presented_cells(data, column):
     return {p: [value for value, _ in got] for p, got in present.lines(data, column).items()}
 
@@ -627,11 +665,10 @@ class AddedFactTest(unittest.TestCase):
         url = {d["sha256"]: d["url"] for d in layers.rows(data / "generated" / "documents_checked.csv") if d["sha256"]}
         added = {(f["plan_id"], url[f["doc_sha"]], f["page"], q)
                         for f in facts.read(data / present.ADDED) for q in json.loads(f["quotes"])}
-        citing = {(r["plan_id"], r["column"]) for r in layers.rows(data / layers.PRESENTED)
+        citing = {(r["sheet"], r["plan_id"], r["column"]) for r in layers.rows(data / layers.PRESENTED)
                   if (r["plan_id"], r["url"], r["pdf_page"], r["quote"]) in added}
-        noted = {(c["plan_id"], c["column"]) for c in layers.rows(data / "comments.csv")
-                 if c["sheet"] == "main" and c["kind"] == "added"
-                 and (c["column"], c["plan_id"]) not in present.held(data)}
+        noted = {(c["sheet"], c["plan_id"], c["column"]) for c in layers.rows(data / "comments.csv")
+                 if c["kind"] == "added" and present.cell(c["sheet"], c["column"], c["plan_id"]) not in present.held(data)}
         self.assertTrue(citing)
         self.assertEqual(sorted(citing - noted), [], "cells that cite an added fact but have no note")
         self.assertEqual(sorted(noted - citing), [], "notes about an added fact that the cell no longer cites")
@@ -664,6 +701,11 @@ class WriteTest(unittest.TestCase):
         cells = {v: {(r["sheet"], r["column"], r["plan_id"]) for r in present.layer_rows(data, v)} for v in (3, 4)}
         self.assertEqual({c[:2] for c in cells[4] - cells[3]}, {("dvha", "G_vision"), ("dvha", "H_hearing")})
         self.assertNotIn(("dvha", "H_hearing", "H6815-038-0"), cells[4])
+
+    def test_version_5_presents_dvha_packages(self):
+        data = years.data_dir(YEAR)
+        cells = {v: {(r["sheet"], r["column"]) for r in present.layer_rows(data, v)} for v in (4, 5)}
+        self.assertEqual(cells[5] - cells[4], {("dvha", "E_optional_packages")})
 
     def test_a_held_main_cell_does_not_hold_the_dvha_cell_of_the_same_name(self):
         self.assertNotEqual(present.cell("main", "C_premium", "H1"), present.cell("dvha", "C_premium", "H1"))

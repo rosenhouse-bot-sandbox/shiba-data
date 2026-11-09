@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-27.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 2 out-of-pocket costs table for Aetna Medicare Eagle (HMO): Monthly plan premium $0, apart from the Part B premium.\"}]\n```",
+ "usage": {
+  "input_tokens": 2101,
+  "output_tokens": 225,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

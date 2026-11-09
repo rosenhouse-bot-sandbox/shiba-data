@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-44.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 5 Plan Costs row reads \\\"Monthly plan premium $0\\\" for plan H5216427002 (H5216-427-2). It is a single premium that applies regardless of network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2047,
+  "output_tokens": 143,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

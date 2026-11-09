@@ -546,6 +546,43 @@ def hearing(organization, found):
     return [("; ".join(parts), unique(exams + priced + renews + counted))]
 
 
+@unless("it is not a monthly package premium")
+def package_premium(f):
+    return f["cost_kind"] == "premium" and f["unit"] in ("per month", "")
+
+
+@unless("it is not a yearly maximum")
+def yearly_max(f):
+    return f["cost_kind"] == "max" and period(f) == "year" and not f["pool"]
+
+
+def optional_packages(organization, found):
+    """Shows each optional package's monthly premium and its yearly dental maximum. A package that also covers other
+    benefits says "dental max". A document that says the plan sells none cites a blank."""
+    mine = keep([f for f in found if f["package"] or facts.covers("packages", f["benefit"])],
+                lambda f: f["covered_by"] == "supplemental" and f["network"] in ("in", "any") and not f["condition"],
+                lambda f: "it is not a supplemental in-network benefit for every member")
+    named = keep(mine, lambda f: f["package"] or f["cost_kind"] == "not_covered", lambda f: "it names no package")
+    priced = {f["package"] for f in best(named, "packages", "any", package_premium)}
+    parts, cited = [], []
+    for name in sorted(priced):
+        package = [f for f in named if f["package"] == name]
+        premium = best(package, "packages", "any", package_premium)
+        dental_max = best(package, "dental", "any", yearly_max)
+        part = f"{name} {show(premium)}/mo"
+        if dental_max:
+            others = any(not facts.covers("dental", f["benefit"]) and not facts.covers("packages", f["benefit"])
+                         for f in package)
+            part += f", {'dental max' if others else 'max'} {show(dental_max)}"
+        parts.append(part)
+        cited += premium + dental_max
+    keep([f for f in named if f["package"] and f["package"] not in priced], lambda f: False,
+         lambda f: "its package has no monthly premium")
+    none = keep([f for f in named if f["cost_kind"] == "not_covered"], lambda f: not parts,
+                lambda f: "a package for sale won")
+    return [("; ".join(parts), unique(cited))] if parts else [("", top(none) if none else [])]
+
+
 # Added facts fill in what readers miss, and each note says why. Only they use cost kind "unclear".
 ADDED = "added_facts.csv"
 
@@ -583,8 +620,9 @@ LEAVES = {"L_xray_imaging": ("imaging",), "AB_ambulance": ("ambulance",), "I_out
           "Q_hearing": ("hearing",), "W_fitness": ("fitness",), "Y_otc": ("otc",), "AA_opt_packages": ("packages",)}
 
 
-DVHA = {"C_premium": plan_premium, "G_vision": vision, "H_hearing": hearing}
-DVHA_LEAVES = {"C_premium": ("plan_premium",), "G_vision": ("vision",), "H_hearing": ("hearing",)}
+DVHA = {"C_premium": plan_premium, "E_optional_packages": optional_packages, "G_vision": vision, "H_hearing": hearing}
+DVHA_LEAVES = {"C_premium": ("plan_premium",), "E_optional_packages": ("packages",), "G_vision": ("vision",),
+               "H_hearing": ("hearing",)}
 SHEETS = {"main": (COLUMNS, LEAVES), "dvha": (DVHA, DVHA_LEAVES)}
 
 
@@ -653,8 +691,13 @@ VERSIONS[4] = VERSIONS[3] | {("dvha.H_hearing", p): NO_EXAM for p in (
     ("dvha.H_hearing", p): f"{NO_EXAM}, and {NO_RENEWAL}" for p in (
         "H7199-002-0", "H2923-001-0", "H2923-028-3", "H2923-025-0", "H2923-005-0", "H2923-009-0")} | {
     ("dvha.H_hearing", "H2923-019-0"): NO_RENEWAL}
+VERSIONS[5] = VERSIONS[4] | {
+    ("dvha.E_optional_packages", p): "the facts do not say that the rider replaces the plan's dental, and they name it "
+                                     "Platinum Dental Rider"
+    for p in ("H3805-048-0", "H2406-070-0", "H3805-040-0")} | {
+    ("dvha.E_optional_packages", "H5216-048-0"): "the facts give no yearly maximum for the package"}
 # The version that first presents each DVHA column. Earlier versions hold its cells.
-DVHA_SINCE = {"C_premium": 3, "G_vision": 4, "H_hearing": 4}
+DVHA_SINCE = {"C_premium": 3, "G_vision": 4, "H_hearing": 4, "E_optional_packages": 5}
 
 
 def held(data, version=None):

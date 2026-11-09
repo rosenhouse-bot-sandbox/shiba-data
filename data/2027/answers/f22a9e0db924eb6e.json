@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-6.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 80, Mandatory Supplemental Vision Benefit: the routine eyewear benefit is 1 per calendar year in the Humana Medicare Insight Network. With a PLUS Provider the member pays any retail amount over $100, so the plan's allowance is $100 at that tier.\"}]\n```",
+ "usage": {
+  "input_tokens": 2456,
+  "output_tokens": 283,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
