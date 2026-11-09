@@ -228,7 +228,9 @@ const STRIPS = {
   "column-rules": (t) => [`${plural(t.rule.lines.reduce((n, l) => n + l.facts.length, 0), "fact")} used, ${t.rule.set_aside.length} set aside`,
     t.rule.held ? `held: ${t.rule.held}` : t.rule.lines.map((l) => `line ${l.line} ${shownValue(l.value)}`).join("; ")],
   "draft": (t) => {
-    const fields = t.draft.cms_fields?.status === "traced" ? t.draft.cms_fields.rows.map((f) => `${f.field} = ${f.value}`) : [];
+    // A file's row count and a blank field say little, so the strip leaves them to the raw record.
+    const fields = t.draft.cms_fields?.status === "traced"
+      ? t.draft.cms_fields.rows.filter((f) => f.field !== "(rows)" && f.value !== "").map((f) => `${f.field} = ${f.value}`) : [];
     const more = fields.length > SHOWN_FIELDS ? ` and ${plural(fields.length - SHOWN_FIELDS, "more field")}` : "";
     return [fields.length ? fields.slice(0, SHOWN_FIELDS).join(", ") + more : "the plan's CMS fields", shownValue(t.draft.value)];
   },
