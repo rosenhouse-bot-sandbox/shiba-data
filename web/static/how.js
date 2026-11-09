@@ -13,7 +13,7 @@ const SCALE = RAIL_W / MAP_W;
 export const howLink = (year, step) => format({ year, view: "how", ...EXAMPLE, step: step.id });
 const shown = (id) => NODES[id].table ?? NODES[id].text;
 
-export function howView(year, step) {
+export function howView(year, step, terms) {
   const at = STEPS.indexOf(step);
   const link = (s) => howLink(year, s);
   const prev = STEPS[at - 1], next = STEPS[at + 1];
@@ -26,7 +26,7 @@ export function howView(year, step) {
       prev ? el("a", { class: "how-nav", href: link(prev), rel: "prev" }, "← Prev") : el("span", { class: "how-nav off" }, "← Prev"),
       el("span", { class: "how-count" }, `${at + 1} of ${STEPS.length}`),
       next ? el("a", { class: "how-nav primary", href: link(next), rel: "next" }, "Next →") : el("span", { class: "how-nav primary off" }, "Next →")),
-    el("div", { class: "how-body" }, map(step, link), lens(step, link)));
+    el("div", { class: "how-body" }, map(step, link), lens(step, link, terms)));
 }
 
 function map(step, link) {
@@ -61,7 +61,7 @@ function map(step, link) {
       el("span", { class: "source" }, "■"), " source ", el("span", {}, "■"), " table the pipeline writes"));
 }
 
-function lens(step, link) {
+function lens(step, link, terms) {
   const chips = (steps, cls, text) => steps.length ? el("div", { class: `how-chips ${cls}` },
     ...steps.map((s) => el("a", { href: link(s) }, text(s.label)))) : null;
   const end = (id) => el("div", { class: `how-end${NODES[id].source ? " source" : ""}` },
@@ -72,13 +72,38 @@ function lens(step, link) {
       el("h2", { class: "how-step", tabindex: "-1" }, step.label), el("span", { class: "how-wire to" }), end(step.to)),
     el("div", { class: "how-card" },
       el("p", { class: "how-strip" }, el("code", { class: "from" }, step.before), " becomes ", el("code", { class: "to" }, step.after)),
-      ...step.paras.map((p) => el("p", {}, ...p.map(segment)))),
+      ...step.paras.map((p) => el("p", {}, ...p.map((s) => typeof s === "string" ? s : term(terms[s[0]], s[1]))))),
     rows("Input", step.from, step.highlight[0], step.none?.[0]),
     rows("Output", step.to, step.highlight[1], step.none?.[1]),
     chips(after(step), "after", (l) => `next: ${l} ↘`));
 }
 
-const segment = (s) => typeof s === "string" ? s : el("span", { class: "how-term", "data-term": s[0] }, s[1]);
+let pops = 0;
+
+// Hovering or focusing a term shows what it means and the code behind it. Clicking pins it open.
+function term(t, text) {
+  const id = `how-pop-${++pops}`;
+  const button = el("button", { type: "button", class: "how-term", "aria-expanded": "false", "aria-describedby": id }, text);
+  const box = el("span", { class: "how-term-box" }, button,
+    el("span", { class: "how-pop", role: "tooltip", id },
+      el("strong", {}, t.title), el("span", {}, t.text),
+      t.code ? el("pre", {}, t.code) : null,
+      el("a", { href: t.url, target: "_blank", rel: "noopener" }, `${t.where} ↗`)));
+  let pinned = false;
+  const show = (open) => {
+    box.classList.toggle("open", open);
+    button.setAttribute("aria-expanded", String(open));
+  };
+  box.addEventListener("mouseenter", () => show(true));
+  box.addEventListener("mouseleave", () => pinned || show(false));
+  button.addEventListener("focus", () => show(true));
+  box.addEventListener("focusout", (e) => pinned || box.contains(e.relatedTarget) || show(false));
+  button.addEventListener("click", () => show(pinned = !pinned));
+  box.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") show(pinned = false);
+  });
+  return box;
+}
 
 function rows(role, id, highlight, none) {
   const n = NODES[id], hi = new Set(highlight);

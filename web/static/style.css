@@ -142,7 +142,14 @@ td.selected { outline: 3px solid var(--ink); outline-offset: -3px; }
 .how-strip code { padding: 3px 8px; border-radius: 6px; font-size: 12px; }
 .how-strip .from { background: var(--hi-in); }
 .how-strip .to { background: var(--hi-out); }
-.how-term { border-bottom: 1.5px dotted var(--accent); }
+.how-term-box { position: relative; }
+.how-term { background: none; border: 0; padding: 0; font: inherit; color: inherit; cursor: help; border-bottom: 1.5px dotted var(--accent); }
+.how-term:hover, .how-term:focus-visible, .how-term-box.open .how-term { background: #e8efff; outline: none; }
+.how-pop { display: none; position: absolute; left: 0; top: 1.6em; z-index: 20; width: min(560px, 80vw); padding: 12px 14px; background: #fff; border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 12px 32px rgba(0, 0, 0, .16); font-size: 13px; line-height: 1.5; }
+.how-term-box.open .how-pop { display: block; }
+.how-pop strong, .how-pop > span { display: block; margin-bottom: 6px; }
+.how-pop pre { margin: 0 0 8px; padding: 8px 10px; max-height: 240px; overflow: auto; background: #f6f7f9; border: 1px solid var(--line); border-radius: 6px; font-size: 11px; }
+.how-pop a { font: 12px ui-monospace, monospace; }
 .how-rows { background: #fff; border: 1.5px solid #e7c9a6; border-radius: 12px; overflow: hidden; margin-bottom: 14px; }
 .how-rows.output { border-color: #b9cdf7; }
 .how-rows-head { display: flex; gap: 10px; align-items: baseline; padding: 9px 14px; border-bottom: 1px solid var(--line); font-size: 12px; color: var(--muted); }

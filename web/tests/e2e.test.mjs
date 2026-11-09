@@ -811,3 +811,22 @@ test("pipeline view: an unknown step opens the first step", async () => {
   await page.waitForSelector(".how-lens");
   assert.equal(await page.textContent(".how-step"), "List the plans");
 });
+
+test("pipeline view: hovering a term shows its code, linked at the build's commit; clicking pins it and Escape closes it", async () => {
+  await page.goto(`${base}#/2027/how/main/H1036-153-0/ambulance/column-rules`);
+  await page.waitForSelector(".how-lens");
+  const box = page.locator(".how-term-box", { hasText: "rule" }).first();
+  const pop = box.locator(".how-pop");
+  await box.hover();
+  assert.ok(await pop.isVisible());
+  assert.match(await pop.locator("pre").textContent(), /^def ambulance\(/);
+  assert.match(await pop.locator("a").getAttribute("href"), /\/blob\/[0-9a-f]{7,40}\/pipeline\/present\.py#L\d+-L\d+$/);
+  await page.mouse.move(0, 0);
+  assert.ok(!(await pop.isVisible()));
+  await box.locator("button").click();
+  await page.mouse.move(0, 0);
+  assert.ok(await pop.isVisible());
+  assert.equal(await box.locator("button").getAttribute("aria-expanded"), "true");
+  await page.keyboard.press("Escape");
+  assert.ok(!(await pop.isVisible()));
+});

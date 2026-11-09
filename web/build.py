@@ -10,9 +10,11 @@ import csv
 import datetime
 import html
 import json
+import os
 import pathlib
 import re
 import shutil
+import subprocess
 import sys
 
 HERE = pathlib.Path(__file__).resolve().parent
@@ -20,6 +22,7 @@ sys.path[:0] = [str(HERE), str(HERE.parent / "pipeline")]
 import cms_sources  # noqa: E402
 import fields  # noqa: E402
 import layers  # noqa: E402
+import terms  # noqa: E402
 import years  # noqa: E402
 
 DATA = years.data_dir()
@@ -152,6 +155,11 @@ def titled(index_html, site):
             .replace("<h1>Medicare Advantage plans</h1>", f"<h1>{title} <span>for {area}</span></h1>"))
 
 
+def commit():
+    return os.environ.get("GITHUB_SHA") or subprocess.run(
+        ["git", "rev-parse", "HEAD"], cwd=HERE, capture_output=True, text=True, check=True).stdout.strip()
+
+
 def main(command, out=None):
     site = site_data()
     if command == "docs":
@@ -169,6 +177,7 @@ def main(command, out=None):
     shutil.copytree(HERE / "static", out_dir, dirs_exist_ok=True)
     (out_dir / "index.html").write_text(titled((HERE / "static" / "index.html").read_text(), site))
     site["built"] = datetime.datetime.now(datetime.timezone.utc).isoformat()
+    site["terms"] = terms.resolve(HERE.parent, commit(), site["year"])
     (out_dir / "data.json").write_text(json.dumps(site))
 
 
