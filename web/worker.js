@@ -2,17 +2,17 @@
 // /blobs/<sha256>.txt serves a model prompt, which the Pipeline workflow stores the same way.
 // The static site comes from the assets directory.
 // CI downloads every blob through this route too, so it needs no R2 credentials.
-// /trace/<year>/main/<plan_id>/<col> serves a cell's trace from D1 once every cell of the deployed commit's build has
-// loaded. Until then it serves the static file that web/build.py writes.
+// /trace/2027/main/<plan_id>/<col> serves a cell's trace from D1 once every cell of the deployed commit's build has
+// loaded. Until then, and for other years, it serves the static file that web/build.py writes.
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     const [, year, plan, col] = url.pathname.match(/^\/trace\/(\d+)\/main\/([^/]+)\/([^/.]+)$/) ?? [];
     if (year) {
-      const loaded = year === D1_YEAR && await env.TRACE.prepare(
+      const row = year === D1_YEAR && env.COMMIT && await env.TRACE.prepare(
         "SELECT json FROM cell_trace JOIN loaded USING (sha) WHERE sha = ? AND plan_id = ? AND col = ?")
         .bind(env.COMMIT, plan, col).first().catch(() => null);
-      if (loaded) return new Response(loaded.json, { headers: { "Content-Type": "application/json; charset=utf-8" } });
+      if (row) return new Response(row.json, { headers: { "Content-Type": "application/json; charset=utf-8" } });
       return env.ASSETS.fetch(new Request(new URL(`${url.pathname}.json`, url), request));
     }
     const [, build, part] = url.pathname.match(LOAD) ?? [];
@@ -27,7 +27,7 @@ export default {
     if (!sha) return env.ASSETS.fetch(request);
     // pdf.js loads large EOCs in ranges.
     const blob = await env.BLOBS.get(`blobs/${sha}`, { range: request.headers, onlyIf: request.headers });
-    if (!blob) return new Response("Not found", { status: 404 });
+    if (!blob) return missing();
     const headers = new Headers({
       "Content-Type": pdf ? "application/pdf" : "text/plain; charset=utf-8",
       "Cache-Control": "public, max-age=31536000, immutable",
@@ -57,14 +57,14 @@ const SCHEMA = [
 ];
 const missing = () => new Response("Not found", { status: 404 });
 
-async function object(env, key) {
+async function readJson(env, key) {
   return (await env.BLOBS.get(key))?.json();
 }
 
 const schema = (env) => SCHEMA.map((sql) => env.TRACE.prepare(sql));
 
 async function loadPart(env, sha, part) {
-  const cells = await object(env, `trace/${D1_YEAR}/${sha}/${part}.json`);
+  const cells = await readJson(env, `trace/${D1_YEAR}/${sha}/${part}.json`);
   if (!cells) return missing();
   const insert = env.TRACE.prepare("INSERT OR IGNORE INTO cell_trace VALUES (?, ?, ?, ?)");
   await env.TRACE.batch([...schema(env), ...cells.map(([plan, col, json]) => insert.bind(sha, plan, col, json))]);
@@ -74,7 +74,7 @@ async function loadPart(env, sha, part) {
 // A build counts as loaded once it has every cell. Then the other builds' rows and parts go, except the deployed one's.
 // A batch runs as one transaction, so the count and the deletes see the same rows.
 async function finish(env, sha) {
-  const manifest = await object(env, `trace/${D1_YEAR}/${sha}/manifest.json`);
+  const manifest = await readJson(env, `trace/${D1_YEAR}/${sha}/manifest.json`);
   if (!manifest) return missing();
   const keep = env.COMMIT ?? sha;
   await env.TRACE.batch([

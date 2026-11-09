@@ -83,7 +83,11 @@ test("passes a trace request's method and headers to the assets", async () => {
 function d1() {
   const db = new DatabaseSync(":memory:");
   const statement = (sql, args = []) => ({
-    bind: (...values) => statement(sql, values),
+    // Like D1, bind throws at once on undefined.
+    bind: (...values) => {
+      if (values.includes(undefined)) throw new TypeError("D1_TYPE_ERROR: Type 'undefined' not supported");
+      return statement(sql, values);
+    },
     first: async () => db.prepare(sql).get(...args) ?? null,
     run: async () => (db.prepare(sql).run(...args), { success: true }),
   });
@@ -110,7 +114,7 @@ function bucket(objects) {
   return {
     objects,
     get: async (key) => key in objects ? { json: async () => JSON.parse(objects[key]) } : null,
-    // Lists two keys a page, as R2 lists up to 1000.
+    // Lists two keys a page, so the tests page through the listing.
     list: async ({ prefix, cursor = "" }) => {
       const keys = Object.keys(objects).filter((k) => k.startsWith(prefix) && k > cursor).sort();
       return { objects: keys.slice(0, 2).map((key) => ({ key })), truncated: keys.length > 2, cursor: keys[1] };
@@ -119,7 +123,7 @@ function bucket(objects) {
   };
 }
 
-const OLD = "1".repeat(40), NEW = "2".repeat(40), TOKEN = "t".repeat(64);
+const OLD = "1".repeat(40), NEW = "2".repeat(40), THIRD = "3".repeat(40), TOKEN = "t".repeat(64);
 const parts = (sha, json) => ({
   [`trace/2027/${sha}/manifest.json`]: JSON.stringify({ sha, year: 2027, cells: 3, parts: 2 }),
   [`trace/2027/${sha}/0.json`]: JSON.stringify([["H1036-153-0", "AB_ambulance", json], ["H1036-153-0", "C_premium", "{}"]]),
@@ -146,8 +150,9 @@ test("serves a cell's trace from D1 once every cell of the deployed commit's bui
   assert.equal(response.headers.get("Content-Type"), "application/json; charset=utf-8");
 });
 
-test("serves the static file for a build other than the deployed commit's, and for another year", async () => {
+test("serves the static file before any build loads, for a build other than the deployed commit's, and for another year", async () => {
   const e = traceEnv(NEW);
+  assert.equal(await (await at(e, TRACE)).text(), `asset ${TRACE}.json`);
   await load(e, OLD);
   assert.equal(await (await at(e, TRACE)).text(), `asset ${TRACE}.json`);
   upload(e, NEW);
@@ -163,6 +168,7 @@ test("a loaded build drops other builds' rows and parts, but keeps the deployed 
   upload(e, NEW);
   await load(e, NEW);
   assert.deepEqual([(await rows(e, OLD)).n, (await rows(e, NEW)).n], [3, 3]);
+  assert.equal(Object.keys(e.BLOBS.objects).filter((k) => k.includes(OLD)).length, 3);
   assert.equal(await (await at(e, TRACE)).text(), '{"old": 1}');
   const e2 = { ...e, COMMIT: NEW };
   await load(e2, NEW, []);
@@ -173,11 +179,25 @@ test("a loaded build drops other builds' rows and parts, but keeps the deployed 
 });
 
 test("an unfinished build drops nothing", async () => {
-  const e = traceEnv(OLD);
+  const e = traceEnv(NEW);
+  await load(e, OLD);
+  upload(e, THIRD);
+  assert.equal((await load(e, THIRD, [1])).status, 409);
+  assert.equal(await (await at({ ...e, COMMIT: OLD }, TRACE)).text(), '{"old": 1}');
+});
+
+test("finishing a build before any of its parts reports that none loaded", async () => {
+  const response = await post(traceEnv(OLD), `/trace/2027/load/${OLD}`);
+  assert.equal(response.status, 409);
+  assert.equal(await response.text(), "0 of 3 cells loaded");
+});
+
+test("a build loaded while no commit is deployed drops the other builds", async () => {
+  const e = traceEnv(undefined);
   await load(e, OLD);
   upload(e, NEW);
-  assert.equal((await load(e, NEW, [1])).status, 409);
-  assert.equal((await rows(e, OLD)).n, 3);
+  assert.equal((await load(e, NEW)).status, 200);
+  assert.deepEqual([(await rows(e, OLD)).n, (await rows(e, NEW)).n], [0, 3]);
 });
 
 test("a part loaded twice counts its cells once", async () => {
@@ -198,5 +218,5 @@ test("loads only for a POST with the load token", async () => {
 test("answers 404 to a load of a part or build that R2 lacks", async () => {
   const e = traceEnv(OLD);
   assert.equal((await post(e, `/trace/2027/load/${OLD}/2`)).status, 404);
-  assert.equal((await post(e, `/trace/2027/load/${"3".repeat(40)}`)).status, 404);
+  assert.equal((await post(e, `/trace/2027/load/${THIRD}`)).status, 404);
 });
