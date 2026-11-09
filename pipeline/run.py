@@ -133,6 +133,11 @@ def model_steps(data, texts, work, answer, versions):
     filled_step(texts, work, answer, version=versions["filled"])
 
 
+def unit_tests(candidate):
+    subprocess.run([sys.executable, "-I", "-m", "unittest", "discover", "-s", os.path.join(HERE, "tests")], check=True,
+                   env=dict(os.environ, **{present.CANDIDATE: candidate}))
+
+
 def main(year, work, mode="", candidate=""):
     if mode not in ("", "api", "replay"):
         raise SystemExit(__doc__)
@@ -140,6 +145,7 @@ def main(year, work, mode="", candidate=""):
     config = years.config(data)
     if candidate and config["year"] != years.LIVE:
         raise SystemExit(f"Only the live year, {years.LIVE}, runs model steps.")
+    unit_tests(candidate)
     work = os.path.abspath(work)
     os.makedirs(work, exist_ok=True)
     web = mode != "replay"
@@ -181,8 +187,6 @@ def main(year, work, mode="", candidate=""):
         for name, was in before.items():
             now = len(layers.layer(data, name))
             print(f"{'::warning::' if now < was / 2 else ''}{name} has {now} rows, and had {was}.")
-    subprocess.run([sys.executable, "-I", "-m", "unittest", "discover", "-s", os.path.join(HERE, "tests")], check=True,
-                   env=dict(os.environ, **{present.CANDIDATE: candidate}))
 
 
 if __name__ == "__main__":
