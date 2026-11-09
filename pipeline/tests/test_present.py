@@ -587,6 +587,10 @@ class WriteTest(unittest.TestCase):
         with mock.patch.dict(os.environ, {present.CANDIDATE: "filled@6, present@2"}):
             self.assertEqual(present.held(data), present.VERSIONS[2])
 
+    def test_a_held_reason_does_not_imply_that_people_read_the_documents(self):
+        for why in present.HELD_1.values():
+            self.assertNotIn("reader", why)
+
     def test_refuses_a_second_line_for_a_one_line_cell(self):
         data = years.data_dir(YEAR)
         plan = layers.generated(data)["main"][0]["plan_id"]

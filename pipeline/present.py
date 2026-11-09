@@ -507,13 +507,13 @@ def lines(data, column, document=None):
 
 # Each version names the cells that keep their other layers' value, because the facts miss part of them.
 HELD_1 = {
-    ("K_tests_labs", "H2923-009-0"): "readers found a 50% lab price but no 0%",
+    ("K_tests_labs", "H2923-009-0"): "the facts give a 50% lab price but no 0%",
     ("K_tests_labs", "H5439-010-0"): "the rule leaves out the SB's $0 tests and the $50 genetic test",
     ("K_tests_labs", "H5439-011-0"): "the rule leaves out the $50 genetic test",
     ("K_tests_labs", "H5439-015-0"): "the rule leaves out the SB's $0 tests and the $50 genetic test",
     ("K_tests_labs", "H5439-019-0"): "the rule leaves out the $50 genetic test",
-    ("K_tests_labs", "H6815-038-0"): "readers took a $200 price for tests that is not a diagnostic test",
-    ("O_medical_deductible", "H1036-317-0"): "readers missed that the $283 is Original Medicare's Part B deductible",
+    ("K_tests_labs", "H6815-038-0"): "the facts take a $200 price for tests that is not a diagnostic test",
+    ("O_medical_deductible", "H1036-317-0"): "the facts miss that the $283 is Original Medicare's Part B deductible",
 }
 CANDIDATE = "SHIBA_CANDIDATE"
 VERSIONS = {1: HELD_1, 2: {cell: why for cell, why in HELD_1.items() if cell != ("K_tests_labs", "H2923-009-0")}}
