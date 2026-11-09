@@ -121,7 +121,14 @@ class TraceTest(unittest.TestCase):
         self.assertIn("ae326523b26fbf5e", [f["fact_id"] for f in rule["lines"][0]["facts"]])
         self.assertEqual([f["fact_id"] for f in rule["lines"][1]["facts"]], ["dcc6a0f01e6c0594"])
         aside = {f["fact_id"]: f["reasons"] for f in rule["set_aside"]}
-        self.assertIn("SB ranks below EOC", aside["aab50a29be55fef4"])
+        self.assertEqual(aside["aab50a29be55fef4"], ["SB ranks below EOC"])
+
+    def test_a_line_without_a_document_fact_is_not_presented(self):
+        (plan_id, col), = self.db.execute("SELECT plan_id, col FROM rule_line WHERE presented = 0 LIMIT 1").fetchall()
+        lines = self.cell("main", plan_id, col)["rule"]["lines"]
+        self.assertTrue(any(not n["presented"] for n in lines))
+        for n in lines:
+            self.assertEqual(n["presented"], any(f["source"] in ("SB", "EOC") for f in n["facts"]), n)
 
     def test_says_why_the_pinned_version_holds_a_cell(self):
         rule = self.cell("main", "H5439-010-0", "K_tests_labs")["rule"]

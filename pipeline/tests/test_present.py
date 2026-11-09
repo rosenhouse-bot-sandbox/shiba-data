@@ -645,16 +645,58 @@ class ExplainTest(unittest.TestCase):
                                         fact(amount="$30", network="out"), fact(amount="$40", condition="QMB"),
                                         fact(amount="$50", setting="outpatient_hospital")), {
             "$20": ["SB ranks below EOC"], "$30": ["network is 'out'"], "$40": ["condition is 'QMB'"],
-            "$50": [f"setting 'outpatient_hospital' is not {s!r}" for s in ("office.pcp", "office.specialist")]})
+            "$50": ["setting 'outpatient_hospital' is not 'office.pcp' or 'office.specialist'"]})
+
+    def test_names_every_field_that_made_a_filter_reject_a_fact(self):
+        self.assertEqual(self.set_aside("L_xray_imaging", fact(amount="$5"), fact(amount="$9", network="out", condition="QMB")),
+                         {"$9": ["network is 'out' and condition is 'QMB'"]})
+
+    def test_a_trip_within_the_us_gets_no_reason_from_the_line_for_trips_abroad(self):
+        self.assertEqual(self.set_aside("AB_ambulance", fact("ambulance.ground", amount="$250"),
+                                        fact("ambulance.ground", amount="$300", source="SB", page="3")),
+                         {"$300": ["SB ranks below EOC"]})
+
+    def test_says_why_a_dot_column_skips_a_medicare_fact(self):
+        self.assertEqual(self.set_aside("V_massage", fact("extras.massage", amount="$5"),
+                                        fact("extras.massage", amount="$9", covered_by="supplemental")),
+                         {"$5": ["covered_by is 'medicare'"]})
+
+    def test_gives_the_filters_own_reason_when_no_field_explains_it(self):
+        self.assertEqual(self.set_aside("M_part_b_drugs", fact("part_b_drugs.chemo", cost_kind="coinsurance", amount="20%"),
+                                        fact("part_b_drugs.chemo", amount="$5")),
+                         {"$5": ["it is not a coinsurance or $0 copay for a Part B drug"]})
+
+    def test_says_why_the_rule_dropped_a_fact_after_its_filters(self):
+        self.assertEqual(self.set_aside("H_inpatient", fact("inpatient.acute", amount="$300", unit="per day", limit="days 1-5"),
+                                        fact("inpatient.acute", amount="$0", unit="per day", limit="days 6+")),
+                         {"$0": ["line 1 shows the days that cost more than $0"]})
+
+    def test_every_fact_a_rule_sets_aside_in_the_year_has_a_noted_reason_unless_the_column_skips_its_benefit(self):
+        data = years.data_dir()
+        organization = {p["plan_id"]: p["organization"] for p in layers.rows(data / "generated/plans.csv")}
+        found = present.plan_facts(data)
+        unused_benefits, noted_benefits = {}, {}
+        for plan_id, name in organization.items():
+            for column in present.COLUMNS:
+                with self.subTest(plan_id=plan_id, column=column):
+                    for identity, reasons in present.explain(name, found[plan_id], column)[1].items():
+                        self.assertNotIn(present.UNNOTED, reasons)
+                        self.assertTrue(all(isinstance(r, str) and r for r in reasons), reasons)
+                        benefit = next(f["benefit"] for f in found[plan_id] if facts.identity(f) == identity)
+                        unused = reasons == [f"the column does not use {benefit}"]
+                        (unused_benefits if unused else noted_benefits).setdefault(column, set()).add(benefit)
+        for column, benefits in unused_benefits.items():
+            with self.subTest(column=column):
+                self.assertFalse(benefits & noted_benefits.get(column, set()))
 
     def test_says_when_a_more_specific_fact_won(self):
         self.assertEqual(self.set_aside("H_inpatient", fact("inpatient", amount="$5"), fact("inpatient.acute", amount="$10")),
                          {"$5": ["a more specific fact won"]})
 
-    def test_lists_related_facts_no_filter_examined(self):
+    def test_says_the_column_does_not_use_a_related_fact_no_filter_examined(self):
         self.assertEqual(self.set_aside("L_xray_imaging", fact(amount="$10"), fact("imaging.diagnostic.ultrasound",
                                                                                       amount="$70")),
-                         {"$70": ["no filter recorded a reason"]})
+                         {"$70": ["the column does not use imaging.diagnostic.ultrasound"]})
 
     def test_leaves_unrelated_facts_out(self):
         self.assertEqual(self.set_aside("L_xray_imaging", fact(amount="$10"), fact("ambulance.ground", amount="$250")), {})
@@ -665,7 +707,7 @@ class ExplainTest(unittest.TestCase):
 
     def test_records_nothing_outside_explain(self):
         present.xray_imaging("Humana", [fact(network="out")])
-        self.assertIsNone(present._set_aside)
+        self.assertIsNone(present._reasons.get())
 
     def test_every_rule_names_its_benefits(self):
         self.assertEqual(set(present.LEAVES), set(present.COLUMNS))
