@@ -22,7 +22,6 @@ REPO_URL = "https://github.com/rosenhouse-bot-sandbox/shiba-data"
 PROMPT_URL = "https://pdxplans.org/blobs/{}.txt"
 TRUSTED_WITHOUT_REVIEW = "trusted without review (#170)"
 TRACED, NONE, NOT_RECORDED = "traced", "none", "not_recorded"
-MODEL_STEPS = ("blanks", "filled")
 FACT_FILES = {"document": "machine/document_facts.csv", "pbp": "generated/pbp_facts.csv", "added": present.ADDED}
 FACT_COLUMNS = ", ".join(f'f."{c}"' for c in facts.COLUMNS)
 DRAFT_CODE = {"main": ("pipeline/main_chart.py", "chart_row"), "dvha": ("pipeline/dvha.py", "dvha_row")}
@@ -246,15 +245,6 @@ def answers_of(db, prompts):
     return record(keys, rows=list(keys.values()))
 
 
-def model_tasks(db, step, plan_id):
-    """Returns record 8, the step's tasks for the plan. A plan has one reader task and one task per verifier."""
-    found = rows(db, "SELECT dir, task, prompt_sha AS prompt, answer_key FROM task WHERE dir LIKE ? AND task IN (?, ?, ?) "
-                     "ORDER BY rowid", f"{step}/%", f"{plan_id}.md", f"{plan_id}.retry.md", f"v-{plan_id}.md")
-    for t in found:
-        t["url"] = PROMPT_URL.format(t["prompt"])
-    return dict(status=TRACED, rows=found) if found else {"status": NOT_RECORDED}
-
-
 def linked(db, s):
     """Whether the stated item names a plan its document covers and a known benefit."""
     return s["benefit"] in facts.BENEFITS and bool(db.execute(
@@ -360,17 +350,15 @@ def cell(db, sheet, plan_id, col):
     has_rule = col in present.SHEETS[sheet][0]
     considered, rule_record = rule(db, sheet, plan_id, col, code) if has_rule else ([], {"status": NONE})
     added = list({json.dumps(f): f for f in map(fact_of, considered) if f["origin"] == "added"}.values())
-    model = [dict(r, answers=model_tasks(db, r["step"], plan_id) if r["step"] in MODEL_STEPS and build_row["replayed"]
-                  else {"status": NOT_RECORDED}) for r in cited if r.get("step") in MODEL_STEPS + ("xref",)]
+    model = [dict(r, answers={"status": NOT_RECORDED}) for r in cited if r.get("step") == "xref"]
     if not has_rule:
         prompts, fact_checks = [], {"status": NONE}
     elif build_row["checked"]:
         prompts, fact_checks = checks(db, sheet, plan_id, col, considered)
     else:
         prompts, fact_checks = [], {"status": NOT_RECORDED}
-    prompts += [t["prompt"] for r in model for t in r["answers"].get("rows", [])]
     if not build_row["replayed"]:
-        answers = {"status": NOT_RECORDED if has_rule or any(r["step"] in MODEL_STEPS for r in model) else NONE}
+        answers = {"status": NOT_RECORDED if has_rule else NONE}
     else:
         answers = answers_of(db, prompts)
         if answers["status"] == NONE and fact_checks["status"] == NOT_RECORDED:

@@ -64,49 +64,13 @@ class AnswersTest(unittest.TestCase):
 
 
 class StepsTest(unittest.TestCase):
-    def calls(self, step, name):
-        log = []
-        module = mock.Mock(**{f"{f}.side_effect": (lambda f: lambda *a, **kw: log.append((f, kw) if kw else f))(f)
-                              for f in ("bundle", "claims", "verify", "accept", "publish")})
-        with tempfile.TemporaryDirectory() as work, mock.patch.dict(sys.modules, {name: module}):
-            step("texts", work, lambda d, model: log.append((os.path.relpath(d, work), model)))
-        return log
-
-    def test_blanks_reads_with_the_reader_and_verifies_twice(self):
-        self.assertEqual(self.calls(run.blanks_step, "blanks"), [
-            "bundle", ("blanks/read", run.READER), "claims", "verify", ("blanks/check", run.VERIFIER), "accept",
-            "verify", ("blanks/recheck", run.SECOND_VERIFIER), "accept", "publish"])
-
-    def test_filled_answers_one_retry_round_before_verifying_twice(self):
-        self.assertEqual(self.calls(run.filled_step, "filled"), [
-            ("bundle", {"version": None}), ("filled/read", run.READER), ("claims", {"version": None}),
-            ("filled/read", run.READER), ("claims", {"version": None}),
-            "verify", ("filled/check", run.VERIFIER), "accept", "verify", ("filled/recheck", run.SECOND_VERIFIER), "accept",
-            ("publish", {"every": False, "version": None})])
-
-    def test_filled_can_bundle_and_publish_every_filled_cell(self):
-        module = mock.Mock()
-        with tempfile.TemporaryDirectory() as work, mock.patch.dict(sys.modules, {"filled": module}):
-            run.filled_step("texts", work, lambda d, model: None, every=True)
-        self.assertEqual(module.bundle.call_args.args[2], "every")
-        self.assertEqual(module.publish.call_args.kwargs, {"every": True, "version": None})
-
-    def test_filled_runs_the_version_asked_for(self):
-        module = mock.Mock()
-        with tempfile.TemporaryDirectory() as work, mock.patch.dict(sys.modules, {"filled": module}):
-            run.filled_step("texts", work, lambda d, model: None, version=2)
-        for f in (module.bundle, module.claims, module.publish):
-            self.assertEqual(f.call_args.kwargs.get("version"), 2, f)
-
-    def test_filled_sees_the_columns_presented_from_document_facts(self):
+    def test_presents_the_facts_its_reviewer_checked(self):
         order = []
-        with mock.patch.multiple(run, blanks_step=lambda *a: order.append("blanks"),
-                                 filled_step=lambda *a, **kw: order.append(("filled", kw))), \
-             mock.patch.object(run.document_facts, "step",
+        with mock.patch.object(run.document_facts, "step",
                                lambda data, texts, work, answer, version, present_version: order.append((work, version, present_version))), \
              mock.patch.object(run.present, "write", lambda data, version: order.append(("present", version))):
-            run.model_steps("data", "texts", "work", None, {"filled": 2, "document_facts": 3, "present": 4})
-        self.assertEqual(order, ["blanks", ("work/facts", 3, 4), ("present", 4), ("filled", {"version": 2})])
+            run.model_steps("data", "texts", "work", None, {"document_facts": 3, "present": 4})
+        self.assertEqual(order, [("work/facts", 3, 4), ("present", 4)])
 
     def test_knows_every_pinned_step(self):
         self.assertEqual(set(run.STEPS), set(json.loads((years.data_dir(years.LIVE) / "steps.json").read_text())))

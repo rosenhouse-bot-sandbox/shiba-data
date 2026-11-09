@@ -1,5 +1,0 @@
-{
- "model": "claude-sonnet-5-5",
- "task": "v-H5439-019-0.md",
- "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Chiropractic section says only manual spine manipulation is covered at a Medicare-covered copay, and the exclusions table says routine chiropractic care is limited to manual manipulation; no passage shows a supplemental benefit.\"},{\"id\":1,\"ok\":true,\"reason\":\"Acupuncture is covered only for chronic low back pain under Medicare rules (12 visits plus 8, 20 max); the exclusions table limits it to those circumstances, and no passage shows routine acupuncture.\"},{\"id\":2,\"ok\":true,\"reason\":\"The EOC lists naturopath services as 'Not covered under any condition', which directly supports exclusion, and no passage shows any covering allowance.\"}]"
-}

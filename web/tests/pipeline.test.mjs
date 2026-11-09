@@ -56,11 +56,11 @@ test("neighbouring steps share a table", () => {
   assert.deepEqual(before(stepById("list-plans")), []);
 });
 
-const trace = ({ value = "$5", rule = "none", blanks = false, cited = false, presented = false } = {}) => ({
+const trace = ({ value = "$5", rule = "none", cited = false, presented = false } = {}) => ({
   cell: { value },
   rule: { status: rule },
-  model_citations: blanks ? { status: "traced", rows: [{ step: "blanks" }] } : { status: "not_recorded" },
-  layers: { status: "traced", applied: [{ layer: "machine/blanks.csv", rows: cited ? [{}] : [] },
+  model_citations: { status: "not_recorded" },
+  layers: { status: "traced", applied: [{ layer: "machine/eoc_citations.csv", rows: cited ? [{}] : [] },
     { layer: "generated/presented.csv", rows: presented ? [{}] : [] }] },
 });
 const ids = (t) => chain(t).map((s) => s.id);
@@ -69,10 +69,9 @@ test("a CMS-only cell's chain is the plan, the draft and the live sheet", () => 
   assert.deepEqual(ids(trace()), ["list-plans", "draft", "stack-draft", "publish"]);
 });
 
-test("a cell with a rule reads facts from the documents but skips blank-cell citations", () => {
+test("a cell with a rule reads facts from the documents", () => {
   const steps = ids(trace({ rule: "not_recorded" }));
   for (const id of ["find-pdfs", "read-facts", "check-facts", "column-rules", "added-facts"]) assert.ok(steps.includes(id), id);
-  assert.ok(!steps.includes("cite-blanks"));
 });
 
 test("only a cell the presented layer cites stacks it", () => {
@@ -80,10 +79,8 @@ test("only a cell the presented layer cites stacks it", () => {
   assert.ok(ids(trace({ rule: "not_recorded", presented: true })).includes("stack-presented"));
 });
 
-test("a blank cell, or one with a blank-cell citation, goes through the blanks step and its documents", () => {
-  for (const t of [trace({ value: "" }), trace({ blanks: true })]) {
-    assert.deepEqual(ids(t), ["list-plans", "find-pdfs", "download", "extract-text", "draft", "cite-blanks", "stack-draft", "publish"]);
-  }
+test("a blank CMS-only cell's chain is the plan, the draft and the live sheet", () => {
+  assert.deepEqual(ids(trace({ value: "" })), ["list-plans", "draft", "stack-draft", "publish"]);
 });
 
 test("a cell cited by another layer uses the documents", () => {
@@ -102,8 +99,7 @@ const full = {
     { kind: "EOC", url: EOC, found_via: "Links sheet", pages: 90, cover_problems: "" },
     { kind: "RIDER", url: "https://x/rider.pdf", found_via: "carrier page", pages: 4, cover_problems: "no year" }] },
   draft: { status: "traced", value: "$0", cms_fields: { status: "traced", rows: [{ field: "Part C Premium", value: "$0.00" }] } },
-  model_citations: { status: "traced", rows: [{ step: "blanks", url: EOC, pdf_page: 51 }, { step: "blanks", url: EOC, pdf_page: 7 },
-    { step: "blanks", url: EOC, pdf_page: 51 }, { step: "xref", url: EOC, pdf_page: 6 }, { step: "filled", url: EOC, pdf_page: 8 }] },
+  model_citations: { status: "traced", rows: [{ step: "xref", url: EOC, pdf_page: 6 }] },
   layers: { status: "traced", draft: "$0", applied: [{ layer: "generated/presented.csv", value: "", rows: [{ url: EOC, pdf_page: 5 }] }],
     live: { value: "", set_by: "generated/presented.csv", citations: [{ url: EOC, pdf_page: 5 }, { url: "https://x/sb.pdf", pdf_page: 2 }] } },
 };
@@ -115,7 +111,6 @@ test("each step's strip reads the cell's own records", () => {
   assert.deepEqual(stripOf("download"), ["3 URLs", "SB, 10 pages; EOC, 90 pages; RIDER, 4 pages, cover problems"]);
   assert.deepEqual(stripOf("extract-text"), ["3 PDFs", "text of 104 pages"]);
   assert.deepEqual(stripOf("draft"), ["Part C Premium = $0.00", "$0"]);
-  assert.deepEqual(stripOf("cite-blanks"), ["SB, EOC and RIDER page text", "3 quotes from EOC pages 7, 51"]);
   assert.deepEqual(stripOf("stack-draft"), ["draft $0", "live blank, set by generated/presented.csv"]);
   assert.deepEqual(stripOf("stack-presented"), ["presented blank, 1 quote from EOC page 5", "live blank"]);
   assert.deepEqual(stripOf("publish"), ["live blank", "site cell blank with 2 quotes from EOC page 5; SB page 2"]);

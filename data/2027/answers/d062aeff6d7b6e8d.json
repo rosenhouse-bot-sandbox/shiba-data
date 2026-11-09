@@ -1,5 +1,0 @@
-{
- "model": "claude-sonnet-5-5",
- "task": "v-H2923-001-0.md",
- "reply": "[\n{\"id\":0,\"ok\":false,\"reason\":\"The cited quote is from the Part D excluded-drugs list, which is not an OTC allowance, and the plan has a $40 per quarter OTC allowance.\"},\n{\"id\":1,\"ok\":false,\"reason\":\"The EOC lists 12 routine chiropractic visits per year for a $15 copay, so the plan covers routine chiropractic care and is not Medicare-only.\"},\n{\"id\":2,\"ok\":false,\"reason\":\"The Dental & Alternative Therapy Allowance names naturopath services and reimburses them, so the plan covers the benefit.\"}\n]"
-}

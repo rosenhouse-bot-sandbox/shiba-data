@@ -1,5 +1,0 @@
-{
- "model": "claude-sonnet-5-5",
- "task": "v-H2056-018-0.md",
- "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"The $40 copay applies to Medicare-covered acupuncture visits for chronic low back pain. Page 74 limits acupuncture to that condition, and no passage shows routine acupuncture, including on the Extra Benefits Card.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"The page 74 table says naturopath services are not covered under any condition, and no passage shows any allowance covering them.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"The page 76 table says therapeutic massage is not covered under any condition, and no passage shows any other coverage.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"The plan covers only manual manipulation of the spine as a Medicare-covered visit, and the page 75 table says routine chiropractic care and all other services are not covered.\"}\n]"
-}

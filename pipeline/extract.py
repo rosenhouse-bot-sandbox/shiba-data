@@ -11,19 +11,48 @@ Needs the texts.py <work> directory. One reader task covers one document and one
 The first facts run writes a retry task, <dir>/<doc>.retry.md, for each document with failed answers.
 Answer those, then run facts again.
 """
-import collections, csv, json, os, random, re, sys
+import collections, csv, glob, json, os, pathlib, random, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-import ask, blanks, facts, years
+import ask, facts, years
 from eoc import DATA, Doc
 from fields import CARRIERS
-from filled import accepted, numbers
 
 ANSWER_FIELDS = set(facts.KEY) | {"amount", "unit", "limit", "page", "quotes", "note"}
 OPTIONAL = {"provider_tier", "condition", "package", "pool", "amount", "unit", "limit", "note"}
 DECOY_FIELDS = ("plan_id", "network", "setting")
 TREES = ("benefit", "setting", "network")
+NUMBER = re.compile(r"\$?(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?%?")
+
+
+def numbers(s):
+    """How often each dollar amount, percentage and other number appears, with 0% read as $0."""
+    found = (re.sub(r"\.0+(?=%?$)", "", n.replace(",", "")) for n in NUMBER.findall(s))
+    return collections.Counter("$0" if n == "0%" else n for n in found)
+
+
+def verdicts(items, verify_dir):
+    """The verdicts in <verify_dir>/v-<task>.json, with each id, counted within its task, mapped to an index of items."""
+    out = []
+    for f in sorted(glob.glob(f"{verify_dir}/v-*.json")):
+        mine = [i for i, c in enumerate(items) if c["task"] == os.path.basename(f)[2:-5]]
+        out += [dict(v, id=mine[v["id"]]) for v in json.loads(pathlib.Path(f).read_text())
+                if type(v.get("id")) is int and 0 <= v["id"] < len(mine)]
+    return out
+
+
+def missing_verdicts(items, verdicts):
+    return sorted(set(range(len(items))) - {v["id"] for v in verdicts})
+
+
+def accepted(items, verdicts):
+    """Items every verdict accepted. An item without a verdict is rejected."""
+    ok = {v["id"] for v in verdicts} - {v["id"] for v in verdicts if v.get("ok") is not True}
+    decoys_ok = sorted(i for i in ok if items[i]["decoy"])
+    if decoys_ok:
+        raise SystemExit(f"The verifier accepted decoys {decoys_ok}. Use a stronger verifier.")
+    return [{k: v for k, v in items[i].items() if k not in ("decoy", "task")} for i in sorted(ok)]
 
 
 def documents(data=DATA):
@@ -54,8 +83,12 @@ def fill(template, doc, plan_rows, data, **values):
     names = "\n".join(f"- {p}: {plan_rows.get(p, {}).get('plan_name', '')}" for p in doc["plan_ids"])
     orgs = sorted({plan_rows[p]["organization"] for p in doc["plan_ids"] if p in plan_rows} & set(CARRIERS))
     notes = "".join(f"\nSeen in {o} documents: {CARRIERS[o]}" for o in orgs)
-    return blanks.fill(template, KIND=doc["kind"], PLANS=names, NOTES=notes,
-                       YEAR=str(years.config(data)["year"]), **values)
+    values = dict(KIND=doc["kind"], PLANS=names, NOTES=notes, YEAR=str(years.config(data)["year"]), **values)
+    with open(f"{HERE}/{template}") as f:
+        text = f.read()
+    for k, v in values.items():
+        text = text.replace("{" + k + "}", v)
+    return text
 
 
 def printable(answer):
@@ -313,12 +346,12 @@ def verify(work, facts_path, out_dir, data=DATA, known=()):
 def accept(verify_dir, out):
     with open(f"{verify_dir}/items.json") as f:
         items = json.load(f)
-    verdicts = blanks.verdicts(items, verify_dir)
-    acc = accepted(items, verdicts)
+    judged = verdicts(items, verify_dir)
+    acc = accepted(items, judged)
     facts.write(out, acc)
-    write_outcomes(verify_dir, outcomes(verify_dir, items, verdicts))
+    write_outcomes(verify_dir, outcomes(verify_dir, items, judged))
     print(len(acc), "of", sum(not c["decoy"] for c in items), "facts accepted;",
-          len(blanks.missing_verdicts(items, verdicts)), "items without a verdict")
+          len(missing_verdicts(items, judged)), "items without a verdict")
 
 
 def outcomes(verify_dir, items, verdicts):

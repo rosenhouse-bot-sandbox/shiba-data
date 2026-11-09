@@ -878,7 +878,7 @@ class WriteTest(unittest.TestCase):
         self.assertEqual(present.held(data), present.held(data, json.loads((data / "steps.json").read_text())["present"]))
         latest = max(present.VERSIONS)
         self.assertEqual(present.held(data, latest), present.VERSIONS[latest])
-        with mock.patch.dict(os.environ, {present.CANDIDATE: f"filled@6, present@{latest}"}):
+        with mock.patch.dict(os.environ, {present.CANDIDATE: f"document_facts@1, present@{latest}"}):
             self.assertEqual(present.held(data), present.VERSIONS[latest])
 
     def test_a_held_reason_does_not_imply_that_people_read_the_documents(self):

@@ -1,5 +1,0 @@
-{
- "model": "claude-haiku-5-5",
- "task": "H5439-010-0.md",
- "reply": "```json\n[{\"key\": \"dvha.E_optional_packages\", \"result\": \"not_mentioned\", \"citations\": [], \"reason\": \"The passages only define EOC and riders generally and name no optional supplemental package with a premium.\"},\n{\"key\": \"main.AA_opt_packages\", \"result\": \"not_mentioned\", \"citations\": [], \"reason\": \"The passages do not mention any optional supplemental benefit package bought for an extra premium.\"},\n{\"key\": \"main.U_naturopath\", \"result\": \"excluded\", \"citations\": [{\"page\": 117, \"quote\": \"Naturopath services (uses natural or alternative treatments)\"}], \"reason\": \"The benefit table lists naturopath services as not covered under any condition.\"},\n{\"key\": \"main.V_massage\", \"result\": \"not_mentioned\", \"citations\": [], \"reason\": \"No passage mentions massage therapy.\"},\n{\"key\": \"main.X_transportation\", \"result\": \"unclear\", \"citations\": [], \"reason\": \"The passages show only Medicare-covered ambulance cost shares and an emergency-abroad exclusion, not whether routine non-emergency transportation is covered.\"}]\n```"
-}

@@ -8,7 +8,7 @@ import json
 
 def versions(data, known, candidate=""):
     """{step: version} as pinned, with each candidate in place of its step's pin.
-    candidate is like "filled@2", or several joined by commas. known maps each step to its versions."""
+    candidate is like "present@2", or several joined by commas. known maps each step to its versions."""
     with open(f"{data}/steps.json") as f:
         out = json.load(f)
     candidates = [c.strip().partition("@") for c in candidate.split(",")] if candidate else []

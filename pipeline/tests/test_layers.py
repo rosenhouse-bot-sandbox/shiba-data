@@ -17,7 +17,7 @@ def cite(column, value, line="", sheet="main", quote="q"):
 
 
 def machine(*rows):
-    return [dict(r, step="filled", prompt="p") for r in rows]
+    return [dict(r, step="xref", prompt="p") for r in rows]
 
 
 def edit(column, value, saw, line="", sheet="main", quote="q"):

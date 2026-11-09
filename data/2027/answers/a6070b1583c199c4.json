@@ -1,5 +1,0 @@
-{
- "model": "claude-sonnet-5-5",
- "task": "v-H3817-009-1.md",
- "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"The EOC covers only Medicare chronic low back pain acupuncture, with limits of 12 visits in 90 days and 20 per year, and page 72 says it is available only for chronic low back pain; no routine acupuncture benefit appears.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"The chiropractic benefit covers only manual manipulation of the spine for subluxation, and the page 75 passage on routine chiropractic care confirms nothing beyond that is covered.\"},\n{\"id\":2,\"ok\":false,\"reason\":\"The quote is about Part D excluded drugs (non-prescription drugs), not an OTC items allowance, so it does not support the claim.\"},\n{\"id\":3,\"ok\":true,\"reason\":\"The exclusions table says naturopath services are not covered under any condition.\"},\n{\"id\":4,\"ok\":true,\"reason\":\"The exclusions table says therapeutic massage is not covered under any condition, and no passage shows a massage benefit.\"}\n]"
-}

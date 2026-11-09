@@ -333,3 +333,26 @@ class StepsTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class VerdictsTest(unittest.TestCase):
+    def test_numbers_counts_every_number(self):
+        self.assertEqual(extract.numbers("$0/$0; days 1-5; tiers 1,2; 1,000 rides; 0%"),
+                         {"$0": 3, "1": 2, "5": 1, "2": 1, "1000": 1})
+
+    def test_verdicts_count_ids_within_each_task_and_drop_bad_ones(self):
+        items = [{"task": "A"}, {"task": "B"}, {"task": "A"}]
+        with tempfile.TemporaryDirectory() as d:
+            pathlib.Path(d, "v-A.json").write_text(json.dumps([{"id": 1, "ok": True}, {"id": 2, "ok": True}, {"ok": True}]))
+            pathlib.Path(d, "v-B.json").write_text(json.dumps([{"id": 0, "ok": False}, {"id": "0", "ok": True}]))
+            self.assertEqual(extract.verdicts(items, d), [{"id": 2, "ok": True}, {"id": 1, "ok": False}])
+            self.assertEqual(extract.missing_verdicts(items, extract.verdicts(items, d)), [0])
+
+    def test_accepted_keeps_items_every_verdict_accepts(self):
+        items = [dict(n=0, decoy=False, task="A"), dict(n=1, decoy=True, task="A"), dict(n=2, decoy=False, task="A")]
+        verdicts = [{"id": 0, "ok": True}, {"id": 1, "ok": False}, {"id": 2, "ok": True}, {"id": 2, "ok": "yes"}]
+        self.assertEqual(extract.accepted(items, verdicts), [{"n": 0}])
+
+    def test_accepted_fails_when_a_decoy_is_accepted(self):
+        with self.assertRaises(SystemExit):
+            extract.accepted([dict(n=0, decoy=True)], [{"id": 0, "ok": True}])

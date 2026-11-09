@@ -1,5 +1,0 @@
-{
- "model": "claude-sonnet-5-5",
- "task": "v-H3817-010-0.md",
- "reply": "[\n{\"id\":0,\"ok\":true,\"reason\":\"Page 67 lists therapeutic massage as 'Not covered under any condition', and the other passages only say massage is not covered when ordered by an acupuncturist or chiropractor, so no supplemental massage benefit appears.\"},\n{\"id\":1,\"ok\":true,\"reason\":\"The only acupuncture benefit shown is the Medicare chronic low back pain benefit (12 visits plus 8 more, 20 per year), and page 63 limits acupuncture to that condition, with no routine acupuncture in the passages.\"},\n{\"id\":2,\"ok\":true,\"reason\":\"Page 65 lists naturopath services as 'Not covered under any condition', and no passage shows any naturopathic coverage.\"}\n]"
-}

@@ -1,5 +1,5 @@
 """Rebuilds data/<year>/generated from the sources in data/<year>/config.json, found.csv and links.csv,
-then the live year's machine/blanks.csv, machine/document_facts.csv, generated/presented.csv and machine/filled.csv.
+then the live year's machine/document_facts.csv and generated/presented.csv.
 
 Usage: python3 -I pipeline/run.py <year> <work_dir> [api|replay] [<step>@<version>[,...]]
 
@@ -26,7 +26,6 @@ import ask  # noqa: E402
 import blobs  # noqa: E402
 import document_facts  # noqa: E402
 import eoc  # noqa: E402
-import filled  # noqa: E402
 import layers  # noqa: E402
 import present  # noqa: E402
 import steps  # noqa: E402
@@ -34,7 +33,7 @@ import years  # noqa: E402
 
 CMS = ("landscape", "pbp")
 READER, VERIFIER, SECOND_VERIFIER = "claude-haiku-5-5", "claude-sonnet-5-5", "claude-opus-5-5"
-STEPS = {"filled": filled.VERSIONS, "document_facts": document_facts.VERSIONS, "present": present.VERSIONS}
+STEPS = {"document_facts": document_facts.VERSIONS, "present": present.VERSIONS}
 
 
 def get(url, path):
@@ -120,43 +119,9 @@ def fresh(path):
     return path
 
 
-def blanks_step(texts, work, answer):
-    import blanks
-    read, check, recheck = (fresh(f"{work}/blanks/{d}") for d in ("read", "check", "recheck"))
-    blanks.bundle(texts, read)
-    answer(read, READER)
-    blanks.claims(texts, read, f"{work}/blanks/claims.json")
-    blanks.verify(texts, f"{work}/blanks/claims.json", check)
-    answer(check, VERIFIER)
-    blanks.accept(texts, check, f"{work}/blanks/checked.json")
-    blanks.verify(texts, f"{work}/blanks/checked.json", recheck)
-    answer(recheck, SECOND_VERIFIER)
-    blanks.accept(texts, recheck, f"{work}/blanks/accepted.json")
-    blanks.publish(f"{work}/blanks/accepted.json")
-
-
-def filled_step(texts, work, answer, every=False, version=None):
-    import filled
-    read, check, recheck = (fresh(f"{work}/filled/{d}") for d in ("read", "check", "recheck"))
-    filled.bundle(texts, read, "every" if every else "", version=version)
-    answer(read, READER)
-    filled.claims(texts, read, f"{work}/filled/claims.json", version=version)
-    answer(read, READER)  # the retry tasks
-    filled.claims(texts, read, f"{work}/filled/claims.json", version=version)
-    filled.verify(texts, f"{work}/filled/claims.json", check)
-    answer(check, VERIFIER)
-    filled.accept(check, f"{work}/filled/checked.json")
-    filled.verify(texts, f"{work}/filled/checked.json", recheck)
-    answer(recheck, SECOND_VERIFIER)
-    filled.accept(recheck, f"{work}/filled/accepted.json")
-    filled.publish(f"{work}/filled/accepted.json", every=every, version=version)
-
-
 def model_steps(data, texts, work, answer, versions):
-    blanks_step(texts, work, answer)
     document_facts.step(data, texts, f"{work}/facts", answer, versions["document_facts"], present_version=versions["present"])
     present.write(data, versions["present"])
-    filled_step(texts, work, answer, version=versions["filled"])
 
 
 def unit_tests(candidate):
@@ -205,15 +170,11 @@ def main(year, work, mode="", candidate=""):
         py("tests/make_fixture.py", f"{work}/pbp")
 
     check_quotes(data, f"{work}/texts")
-    if config["year"] == years.LIVE:  # blanks.py and filled.py read the live year
+    if config["year"] == years.LIVE:
         versions = steps.versions(data, STEPS, candidate)
         answer = Answers(data, ask.api() if mode == "api" else None, work)
-        before = {name: len(layers.layer(data, name)) for name in (layers.BLANKS, layers.FILLED)}
         model_steps(data, f"{work}/texts", work, answer, versions)
         check_quotes(data, f"{work}/texts")
-        for name, was in before.items():
-            now = len(layers.layer(data, name))
-            print(f"{'::warning::' if now < was / 2 else ''}{name} has {now} rows, and had {was}.")
 
 
 if __name__ == "__main__":

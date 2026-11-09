@@ -1,5 +1,0 @@
-{
- "model": "claude-opus-5-5",
- "task": "v-H2406-042-0.md",
- "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The exclusions chart lists acupuncture as covered only for chronic low back pain (Medicare-covered), and no passage shows routine acupuncture coverage.\"},\n {\"id\": 1, \"ok\": true, \"reason\": \"The exclusions chart says only manual manipulation of the spine for subluxation is covered and all other chiropractic services are excluded, with no routine chiropractic benefit shown.\"}]\n```"
-}

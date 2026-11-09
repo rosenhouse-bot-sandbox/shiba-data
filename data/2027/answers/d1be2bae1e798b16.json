@@ -1,5 +1,0 @@
-{
- "model": "claude-sonnet-5-5",
- "task": "v-H6815-038-0.md",
- "reply": "[{\"id\":0,\"ok\":false,\"reason\":\"The EOC says the plan also covers supplemental chiropractic visits (up to 24 per year, $15 copay), so the claim that it covers only the Medicare benefit is wrong.\"},{\"id\":1,\"ok\":false,\"reason\":\"The EOC says the plan also covers supplemental acupuncture for other conditions (24 visits per year, $0 copay), so the claim that it covers only the Medicare benefit is wrong.\"}]"
-}

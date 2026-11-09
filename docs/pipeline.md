@@ -53,13 +53,11 @@ flowchart TD
   text --> read[5. Claude reads facts from the PDFs]
   read --> check[6. Code and Claude check each fact]
   check --> present[7. Rules turn facts into values]
-  text --> blanks[8. Claude cites blank cells and uncited values]
-  draft --> stack[10. Stack the layers]
+  draft --> stack[9. Stack the layers]
   present --> stack
-  blanks --> stack
-  fix[9. Claude sessions correct what is left] --> present
+  fix[8. Claude sessions correct what is left] --> present
   fix --> stack
-  stack --> publish[11. Publish the site and Google Sheet]
+  stack --> publish[10. Publish the site and Google Sheet]
 ```
 
 ## 1. List the plans
@@ -332,52 +330,11 @@ main,H1036-153-0,AB_ambulance,1,$325 or 20%,…H1036153000EOC27pdf,46,Non-Emerge
 main,H1036-153-0,AB_ambulance,2,$325,…H1036153000EOC27pdf,46,Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance
 ```
 
-Rules also read the added facts from step 9. Most main-sheet columns have rules. Columns without one, including every DVHA column, keep their draft value or an edit from step 9.
+Rules also read the added facts from step 8. Most main-sheet columns have rules. Columns without one, including every DVHA column, keep their draft value or an edit from step 8.
 
-## 8. Claude cites blank cells and uncited values
+## 8. Claude sessions correct what is left
 
-Two more model steps add citations to cells that step 7 doesn't cover. Neither changes a value.
-
-**Blank cells.** A blank cell claims the plan lacks the benefit. Claude Haiku reads the EOC passages that mention the benefit and says why. The prompt, shortened:
-
-```markdown
-Each field below is BLANK on the sheet, which claims the plan does not have that benefit. Below each field are all EOC
-passages that mention it, in printed layout. …
-- `covered`: the plan itself covers the benefit, as the field defines it, in the base premium. The blank is wrong.
-- `excluded`: a passage states the plan does not cover it, …
-- `medicare_only`: only for acupuncture and chiropractic. …
-- `not_mentioned`: the passages are about something else …
-```
-
-For our plan's Naturopath cell, Haiku answered:
-
-```json
-{"key": "main.U_naturopath", "result": "excluded",
- "citations": [{"page": 84, "quote": "Naturopath services (uses natural or alternative treatments) Not covered under any condition"}],
- "reason": "The exclusions table lists naturopath services as not covered under any condition."}
-```
-
-That quote becomes the blank cell's citation. `machine/blanks.csv`:
-
-```
-step,prompt,sheet,plan_id,column,line,value,url,pdf_page,quote
-blanks,3223a3015019,main,H1036-153-0,U_naturopath,,,…H1036153000EOC27pdf,84,Naturopath services (uses natural or alternative treatments) Not covered under any condition
-```
-
-**Uncited values.** Some cells have a value but no citation, such as DVHA cells. Claude Haiku looks for an EOC quote that shows the whole value. Our plan's cells didn't need this step, so the example is a UnitedHealthcare vision cell. `machine/filled.csv`, selected columns:
-
-```
-sheet,plan_id,column,value,pdf_page,quote
-dvha,H2001-045-0,G_vision,exam $0/year; eyewear $200/year,116,$0 copayment or 1 pair o eyeglasses (lenses/ rames) or contact lenses with a retail value o up to $200.
-```
-
-The quote lacks its f's because the PDF draws that letter as a separate glyph. Quotes keep the PDF's text, so the site can highlight them.
-
-In both steps, code checks each quote, and Claude Sonnet and then Claude Opus verify it, with decoys, as in step 6.
-
-## 9. Claude sessions correct what is left
-
-Some cells need judgment that no rule or reader handles. Claude sessions make those calls in pull requests and record them in four tables.
+Some cells need judgment that no rule or reader handles. Claude sessions make those calls in pull requests and record them in three tables.
 
 An **added fact** adds a fact the readers missed, with a note saying why. Step 7's rules read it like any other fact. `added_facts.csv`, selected columns:
 
@@ -408,14 +365,7 @@ dvha,H3805-048-0,E_optional_packages,"Dental Platinum Rider $66/mo, max $1,500, 
 
 `source` is `session` on every edit: a Claude session wrote it.
 
-A **strike** removes a citation whose quote doesn't support its cell. `struck.csv`:
-
-```
-sheet,plan_id,column,quote,note
-main,H3805-048-0,T_chiropractic,Excluded rom Medicare coverage is any,Does not support the blank cell on its own.
-```
-
-## 10. Stack the layers
+## 9. Stack the layers
 
 A **layer** is a table whose rows set a cell's value, attach a citation to it, or both. Code applies the layers in order. When two layers set the same cell, the later one wins:
 
@@ -423,21 +373,20 @@ A **layer** is a table whose rows set a cell's value, attach a citation to it, o
 layer                                         sets values?  Ambulance               X-ray
 generated/main_chart.csv, citations.csv  (4)  yes           $325 or 20% | $325      $0-$145 | $0-$345
 machine/eoc_citations.csv                     no            (citations only)
-machine/blanks.csv, machine/filled.csv   (8)  no            (citations only)
 generated/presented.csv                  (7)  yes           $325 or 20% | $325      $0-$30 | $205-$330
-edits.csv                                (9)  yes           (none)                  (none)
+edits.csv                                (8)  yes           (none)                  (none)
 ──────────────────────────────────────────────────────────
 live sheet                                                  $325 or 20% | $325      $0-$30 | $205-$330
 ```
 
 Code drops a citation whose value differs from the cell's final value. So a quote never supports a value it doesn't show. `machine/eoc_citations.csv` holds citations that Claude sessions found before the pipeline existed.
 
-## 11. Publish
+## 10. Publish
 
 Merging to main builds the site. The `pdxplans` Cloudflare Worker serves the site at [pdxplans.org](https://pdxplans.org), and serves the PDFs from R2. The same build updates the volunteers' Google Sheet in place, so their comments stay on their cells. The Sheet's Details tab lists every fact.
 
 ## Reproducible runs
 
-- **Pinned versions.** `steps.json` pins each model step's version, such as `{"filled": 6, "document_facts": 11, "present": 2}`.
+- **Pinned versions.** `steps.json` pins each model step's version, such as `{"document_facts": 15, "present": 7}`.
 - **Three-stage deploys.** Only workflows on main can call the Claude API. A new version (1) merges unpinned. (2) The Pipeline workflow runs it on main and pushes the new answers to a new branch, such as `pipeline/2027-41966948424`. (3) A pull request from that branch pins the version.
 - **Pull request checks.** `reproduce` reruns the pipeline from R2 and the saved answers, with no API access, and fails if any table changes. `build` runs the tests, builds the site, and opens each linked PDF.

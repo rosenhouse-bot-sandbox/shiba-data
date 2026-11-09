@@ -1,5 +1,0 @@
-{
- "model": "claude-opus-5-5",
- "task": "v-H2923-025-0.md",
- "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The chiropractic row covers only Medicare-covered spinal manipulation for subluxation, and the exclusions table limits routine chiropractic care to that, with no supplemental chiropractic benefit shown.\"}]\n```"
-}
