@@ -158,9 +158,10 @@ function routeHow(state) {
   exampleTrace().then((trace) => box.replaceWith(traceRecord(step, trace)));
 }
 
+// A failed load is not kept, so the next step tries again.
 let traced;
 const exampleTrace = () => traced ??= fetch(traceUrl(site.year, site.main.columns.find((c) => c.id === EXAMPLE.column).key))
-  .then((r) => r.ok ? r.json() : null).catch(() => null);
+  .then((r) => r.ok ? r.json() : null).catch(() => null).then((trace) => trace ?? (traced = null));
 
 const planSb = (plan) => plan.docs.find((d) => site.docs[d].kind === "SB");
 
