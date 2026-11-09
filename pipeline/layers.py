@@ -120,3 +120,31 @@ def live(data, names=LAYERS, ignore=None):
              if not (c["layer"] in CITE_ONLY and strike_key(c) in struck)]
     matches = [shown(index[(c["sheet"], c["plan_id"])][c["column"]], c["line"]) == c["value"] for c in cites]
     return sheets, [c for c, ok in zip(cites, matches) if ok], [c for c, ok in zip(cites, matches) if not ok]
+
+
+# Why the site leaves out a layer row's citation.
+OTHER_VALUE, STRUCK_QUOTE, NO_DOCUMENT, UNKNOWN_DOCUMENT, EOC_CITES_CELL = (
+    "other_value", "struck", "no_document", "unknown_document", "eoc_cites_cell")
+
+
+def citations(data, kind_of, names=LAYERS, ignore=None):
+    """Returns (sheets, rows): live()'s sheets, and every layer row with `hidden`, why the site leaves its citation out,
+    or "" if the site shows it. kind_of maps each checked document's url to its kind.
+    Shown rows keep live()'s order. A cell cited by a document other than an SB shows no SB citation."""
+    sheets, kept, dropped = live(data, names, ignore)
+    struck = {strike_key(s) for s in strikes(data)}
+    struck_rows = [r for name in reversed(names) if name in CITE_ONLY for r in layer(data, name)
+                   if not (ignore and ignore(r)) and strike_key(r) in struck]
+    for c in kept:
+        if c["url"] in kind_of:
+            c["hidden"] = ""
+        elif c["layer"] == EDITS:
+            c["hidden"] = UNKNOWN_DOCUMENT if c["url"] else NO_DOCUMENT
+        else:
+            raise ValueError(f"A citation names a document not in documents_checked.csv: {where(c)} {c['url']}")
+    not_sb = {(c["sheet"], c["plan_id"], c["column"]) for c in kept if not c["hidden"] and kind_of[c["url"]] != "SB"}
+    for c in kept:
+        if not c["hidden"] and kind_of[c["url"]] == "SB" and (c["sheet"], c["plan_id"], c["column"]) in not_sb:
+            c["hidden"] = EOC_CITES_CELL
+    return sheets, (kept + [dict(c, hidden=OTHER_VALUE) for c in dropped]
+                    + [dict(c, hidden=STRUCK_QUOTE) for c in struck_rows])

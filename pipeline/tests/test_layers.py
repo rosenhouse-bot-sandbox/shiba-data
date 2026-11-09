@@ -165,5 +165,43 @@ class LiveTest(unittest.TestCase):
         self.assertEqual(self.live()[0]["dvha"][0]["F_dental"], "Dental")
 
 
+class CitationsTest(unittest.TestCase):
+    setUp = LiveTest.setUp
+
+    def citations(self, kinds=None):
+        return layers.citations(self.data, kinds or {"u": "EOC", "sb": "SB"})[1]
+
+    def hidden(self, column, **kinds):
+        return [(c["quote"], c["layer"], c["hidden"]) for c in self.citations(kinds or None) if c["column"] == column]
+
+    def test_shows_kept_rows_and_says_why_it_hides_the_others(self):
+        write(self.data / "generated/citations.csv", [cite("L_xray_imaging", "$0", line="1", quote="code"),
+                                                      cite("L_xray_imaging", "$0-$300", line="2", quote="stale")])
+        write(self.data / layers.STRUCK, [dict(sheet="main", plan_id="H1-001-0", column="L_xray_imaging",
+                                               quote="machine", note="")], layers.STRUCK_COLUMNS)
+        self.assertEqual(self.hidden("L_xray_imaging"), [
+            ("q", layers.EDITS, ""), ("code", layers.LAYERS[0], ""), ("stale", layers.LAYERS[0], layers.OTHER_VALUE),
+            ("machine", layers.XREF, layers.STRUCK_QUOTE)])
+
+    def test_hides_sb_rows_when_another_document_cites_the_cell(self):
+        sb = dict(cite("U_naturopath", "●", quote="sb"), url="sb")
+        write(self.data / "generated/citations.csv", [sb, cite("U_naturopath", "●", quote="eoc")])
+        self.assertEqual(self.hidden("U_naturopath"), [("sb", layers.LAYERS[0], layers.EOC_CITES_CELL),
+                                                       ("eoc", layers.LAYERS[0], "")])
+        write(self.data / "generated/citations.csv", [sb])
+        self.assertEqual(self.hidden("U_naturopath"), [("sb", layers.LAYERS[0], "")])
+
+    def test_hides_edits_without_a_known_document(self):
+        write_edits(self.data, dict(edit("G_specialist", "$40", ""), url=""),
+                    dict(edit("G_specialist", "$40", "", quote="other"), url="elsewhere"))
+        self.assertEqual(self.hidden("G_specialist"), [("q", layers.EDITS, layers.NO_DOCUMENT),
+                                                       ("other", layers.EDITS, layers.UNKNOWN_DOCUMENT)])
+
+    def test_rejects_other_rows_that_cite_an_unknown_document(self):
+        write(self.data / "generated/citations.csv", [dict(cite("U_naturopath", "●"), url="elsewhere")])
+        with self.assertRaisesRegex(ValueError, "names a document not in documents_checked.csv"):
+            self.citations()
+
+
 if __name__ == "__main__":
     unittest.main()
