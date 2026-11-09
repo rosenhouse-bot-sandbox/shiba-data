@@ -2,7 +2,7 @@
 
 CMS has no query API for plan benefits, and Medicare Plan Finder has no official public API.
 CMS does publish two bulk files each contract year that cover most of both sheets.
-We checked the 2027 files against the 2027 sheets on 2026-10-26.
+A Claude session checked the 2027 files against the 2027 sheets on 2026-10-26.
 
 These files are not citable the way an SB or EOC page is.
 Use them for automated cross-checks and to seed extraction.
@@ -23,7 +23,7 @@ The file has one row per plan per county.
 | N Pharmacy Deductible | Annual Part D Deductible Amount; Offers Drug Tier with No Part D Deductible |
 
 Column C matches the sheet for all 39 plans.
-The column D formula matches every sheet value we compared, e.g. Wellcare Premium Ultra $159.40 + $40.30 = $199.70.
+The column D formula matches every sheet value it compared, e.g. Wellcare Premium Ultra $159.40 + $40.30 = $199.70.
 The SB and EOC do not state column D.
 
 The file also gives SNP type, C-SNP qualifying conditions and star ratings.

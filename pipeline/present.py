@@ -306,8 +306,8 @@ def packages(organization, found):
     return [("●", top(sold))] if sold else [("", top(none) if none else [])]
 
 
-# Hand-written facts fill in what readers miss, and each note says why. Only they use cost kind "unclear".
-OVERRIDES = "override_facts.csv"
+# Added facts fill in what readers miss, and each note says why. Only they use cost kind "unclear".
+ADDED = "added_facts.csv"
 
 
 def plan_facts(data, document=None):
@@ -315,7 +315,7 @@ def plan_facts(data, document=None):
     if document is None:
         document = facts.read(data / "machine/document_facts.csv")
     by_plan = collections.defaultdict(list)
-    for f in document + facts.read(data / "generated/pbp_facts.csv") + facts.read(data / OVERRIDES):
+    for f in document + facts.read(data / "generated/pbp_facts.csv") + facts.read(data / ADDED):
         by_plan[f["plan_id"]].append(f)
     return by_plan
 
