@@ -1,0 +1,1074 @@
+{
+ "cell": {
+  "year": 2027,
+  "sheet": "main",
+  "plan_id": "H1036-153-0",
+  "col": "AB_ambulance",
+  "label": "Ambulance Domestic/International",
+  "value": "$325 or 20% | $325"
+ },
+ "plan": {
+  "status": "traced",
+  "row": {
+   "plan_id": "H1036-153-0",
+   "position": 12,
+   "section": "MA-PD",
+   "plan_name": "Humana Total Complete (HMO)",
+   "plan_type": "HMO",
+   "organization": "Humana",
+   "premium": "$0",
+   "premium_full_extra_help": "$0",
+   "moop_in_network": "$5,150",
+   "part_d_deductible": "$700",
+   "tier_without_part_d_deductible": "Yes",
+   "c_snp_conditions": "Not Applicable",
+   "overall_star_rating": "4.5"
+  },
+  "landscape_row": {
+   "status": "traced",
+   "fields": [
+    {
+     "field": "SNP Type",
+     "value": "Not Applicable"
+    },
+    {
+     "field": "Part D Coverage Indicator",
+     "value": "Yes"
+    },
+    {
+     "field": "Contract ID",
+     "value": "H1036"
+    },
+    {
+     "field": "Plan ID",
+     "value": "153"
+    },
+    {
+     "field": "Segment ID",
+     "value": "0"
+    },
+    {
+     "field": "Plan Name",
+     "value": "Humana Total Complete (HMO)"
+    },
+    {
+     "field": "Plan Type",
+     "value": "HMO"
+    },
+    {
+     "field": "Organization Marketing Name",
+     "value": "Humana"
+    },
+    {
+     "field": "Monthly Consolidated Premium (Part C + D)",
+     "value": "$0.00 "
+    },
+    {
+     "field": "Part C Premium",
+     "value": "$0.00 "
+    },
+    {
+     "field": "Part D Low Income Beneficiary Premium Amount",
+     "value": "$0.00 "
+    },
+    {
+     "field": "In-Network Maximum Out-of-Pocket (MOOP) Amount",
+     "value": "$5,150.00 "
+    },
+    {
+     "field": "Annual Part D Deductible Amount",
+     "value": "$700.00 "
+    },
+    {
+     "field": "Offers Drug Tier with No Part D Deductible",
+     "value": "Yes"
+    },
+    {
+     "field": "Chronic or Disabling Condition SNP (C-SNP) Condition Type",
+     "value": "Not Applicable"
+    },
+    {
+     "field": "Overall Star Rating",
+     "value": "4.5"
+    }
+   ]
+  }
+ },
+ "documents": {
+  "status": "traced",
+  "documents": [
+   {
+    "kind": "SB",
+    "url": "https://assets.humana.com/is/content/humana/H1036153000SB27pdf",
+    "found_via": "volunteers' Links sheet",
+    "sha256": "ce13e925c0384896d725da85a06c14dfbd268b422134b85b58640c8d7c494220",
+    "pages": 24,
+    "cover_problems": "",
+    "baseline": "same bytes as baseline",
+    "text": {
+     "plain": "cf4c1df17b4cdd0dff09a58449f2410654e1af7221fb22fe242ef1728f790277",
+     "layout": "6ebca98d895a45b3d8c15ea4fd6a6052d6a31ade9374ff3cdfe194d957f8c1b7",
+     "items": "78c548f8d1480f0f06e330e73e9328fdcfdbbb00ad99d918367de6f36155d173"
+    },
+    "unlinked_answers": {
+     "status": "none",
+     "rows": []
+    }
+   },
+   {
+    "kind": "EOC",
+    "url": "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf",
+    "found_via": "volunteers' Links sheet",
+    "sha256": "64e05773e847b56e0eeb5425979d54996c5f1975307c9ae186f5af4fecafc44c",
+    "pages": 188,
+    "cover_problems": "",
+    "baseline": "same bytes as baseline",
+    "text": {
+     "plain": "460da5207a532f3d022e6340f9d347dd36ede0b7d4164f2da4163e78d40b6ae9",
+     "layout": "d50cc84cc494a4c76915f920ce159d656c59fb79008895d26c2f40d5be920d89",
+     "items": "4161c11f6caa1854a0003e05ddb25ac7d8c2ee48fba4148eff358248276f828e"
+    },
+    "unlinked_answers": {
+     "status": "none",
+     "rows": []
+    }
+   }
+  ]
+ },
+ "draft": {
+  "status": "traced",
+  "value": "$325 or 20% | $325",
+  "code": {
+   "file": "pipeline/main_chart.py",
+   "function": "chart_row",
+   "url": "https://github.com/rosenhouse-bot-sandbox/shiba-data/blob/x/pipeline/main_chart.py"
+  },
+  "cms_fields": {
+   "status": "traced",
+   "rows": [
+    {
+     "file": "pbp_b10_amb_trans",
+     "field": "(rows)",
+     "value": "1",
+     "title": "",
+     "meaning": ""
+    },
+    {
+     "file": "pbp_b10_amb_trans",
+     "field": "pbp_b10a_copay_gas_amt_min",
+     "value": "325.00",
+     "title": "Ambulance Grnd Copay Min Amt",
+     "meaning": ""
+    },
+    {
+     "file": "pbp_b10_amb_trans",
+     "field": "pbp_b10a_copay_gas_amt_max",
+     "value": "325.00",
+     "title": "Ambulance Grnd Copay Max Amt",
+     "meaning": ""
+    },
+    {
+     "file": "pbp_b10_amb_trans",
+     "field": "pbp_b10a_copay_aas_amt_min",
+     "value": "",
+     "title": "Ambulance Air MC Min Copay Amt",
+     "meaning": ""
+    },
+    {
+     "file": "pbp_b10_amb_trans",
+     "field": "pbp_b10a_copay_aas_amt_max",
+     "value": "",
+     "title": "Ambulance Air MC Max Copay Amt",
+     "meaning": ""
+    },
+    {
+     "file": "pbp_b10_amb_trans",
+     "field": "pbp_b10a_coins_gas_pct_min",
+     "value": "",
+     "title": "Ambulance Grnd Coins Min Pct",
+     "meaning": ""
+    },
+    {
+     "file": "pbp_b10_amb_trans",
+     "field": "pbp_b10a_coins_gas_pct_max",
+     "value": "",
+     "title": "Ambulance Grnd Coins Max Pct",
+     "meaning": ""
+    },
+    {
+     "file": "pbp_b10_amb_trans",
+     "field": "pbp_b10a_coins_aas_pct_min",
+     "value": "20",
+     "title": "Ambulance Air MC Min Coins Pct",
+     "meaning": ""
+    },
+    {
+     "file": "pbp_b10_amb_trans",
+     "field": "pbp_b10a_coins_aas_pct_max",
+     "value": "20",
+     "title": "Ambulance Air MC Max Coins Pct",
+     "meaning": ""
+    },
+    {
+     "file": "pbp_b4_emerg_urgent",
+     "field": "(rows)",
+     "value": "1",
+     "title": "",
+     "meaning": ""
+    },
+    {
+     "file": "pbp_b4_emerg_urgent",
+     "field": "pbp_b4c_bendesc_ehc",
+     "value": "111",
+     "title": "Worldwide supp ben desc",
+     "meaning": "Worldwide Emergency Transportation; Worldwide Emergency Coverage; Worldwide Urgent Coverage"
+    },
+    {
+     "file": "pbp_b4_emerg_urgent",
+     "field": "pbp_b4c_copay_amt_wet_min",
+     "value": "325.00",
+     "title": "Worldwide emerg tran Min Copay",
+     "meaning": ""
+    },
+    {
+     "file": "pbp_b4_emerg_urgent",
+     "field": "pbp_b4c_copay_amt_wet_max",
+     "value": "325.00",
+     "title": "Worldwide emerg tran Max Copay",
+     "meaning": ""
+    },
+    {
+     "file": "pbp_b4_emerg_urgent",
+     "field": "pbp_b4c_coins_pct_wet_min",
+     "value": "",
+     "title": "Worldwide emerg tran Min Coins",
+     "meaning": ""
+    },
+    {
+     "file": "pbp_b4_emerg_urgent",
+     "field": "pbp_b4c_coins_pct_wet_max",
+     "value": "",
+     "title": "Worldwide emerg tran Max Coins",
+     "meaning": ""
+    }
+   ]
+  }
+ },
+ "answers": {
+  "status": "traced",
+  "rows": [
+   {
+    "key": "53c77fe49511c59a",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "batch": false,
+    "usage": {
+     "input_tokens": 10272,
+     "output_tokens": 2481,
+     "cache_read_input_tokens": 0,
+     "cache_creation_input_tokens": 0
+    },
+    "reply": "```json\n[{\"plan_id\": \"H1036-153-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per date of service\",\n  \"condition\": \"Emergency Ambulance\", \"page\": 46,\n  \"quotes\": [\"In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance\"]},\n {\"plan_id\": \"H1036-153-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\",\n  \"condition\": \"Emergency Ambulance\", \"page\": 46,\n  \"quotes\": [\"In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance\"]},\n {\"plan_id\": \"H1036-153-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per date of service\",\n  \"condition\": \"Non-Emergency Ambulance\", \"page\": 46,\n  \"quotes\": [\"Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance\"]},\n {\"plan_id\": \"H1036-153-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\",\n  \"condition\": \"Non-Emergency Ambulance\", \"page\": 46,\n  \"quotes\": [\"Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance\"]},\n {\"plan_id\": \"H1036-153-0\", \"benefit\": \"ambulance\", \"setting\": \"outside_us\", \"network\": \"out\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per date of service\",\n  \"condition\": \"Emergency Ambulance\", \"page\": 46,\n  \"quotes\": [\"Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance\"],\n  \"note\": \"Worldwide emergency coverage is described as a supplemental benefit on page 36.\"}]\n```",
+    "prompts": [
+     {
+      "prompt": "226ee67e4a27f3e7c117e6aa8e197a07423fac0b4d1fe9b6d6033e8602313064",
+      "dir": "facts/ambulance/read",
+      "task": "64e05773e847b56e.md",
+      "url": "https://pdxplans.org/blobs/226ee67e4a27f3e7c117e6aa8e197a07423fac0b4d1fe9b6d6033e8602313064.txt"
+     }
+    ]
+   },
+   {
+    "key": "db87bdb3f45deecd",
+    "model": "claude-opus-5-5",
+    "effort": "medium",
+    "batch": false,
+    "usage": {
+     "input_tokens": 3213,
+     "output_tokens": 616,
+     "cache_read_input_tokens": 0,
+     "cache_creation_input_tokens": 0
+    },
+    "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 46 ambulance row, In-Network, Non-Emergency Ambulance: 20% coinsurance regardless of the number of trips for Air Ambulance.\"},\n {\"id\": 1, \"ok\": true, \"reason\": \"Page 46 ambulance row, Out-of-Network Worldwide Coverage: $325 copayment per date of service regardless of the number of trips for Emergency Ambulance, with no ground/air split.\"},\n {\"id\": 2, \"ok\": true, \"reason\": \"Page 46 ambulance row, In-Network, Emergency Ambulance: 20% coinsurance regardless of the number of trips for Air Ambulance.\"},\n {\"id\": 3, \"ok\": true, \"reason\": \"Page 46 ambulance row, In-Network, Non-Emergency Ambulance: $325 copayment per date of service for Ground Ambulance.\"},\n {\"id\": 4, \"ok\": true, \"reason\": \"Page 46 ambulance row, In-Network, Emergency Ambulance: $325 copayment per date of service for Ground Ambulance.\"}]\n```",
+    "prompts": [
+     {
+      "prompt": "b5440712e725656a1d08ab46be442d02fe00346a555f3f5545644d5d02bd1d74",
+      "dir": "facts/ambulance/check",
+      "task": "v-64e05773e847b56e.md",
+      "url": "https://pdxplans.org/blobs/b5440712e725656a1d08ab46be442d02fe00346a555f3f5545644d5d02bd1d74.txt"
+     }
+    ]
+   },
+   {
+    "key": "e920fcee050a431f",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "batch": false,
+    "usage": {
+     "input_tokens": 3479,
+     "output_tokens": 954,
+     "cache_read_input_tokens": 0,
+     "cache_creation_input_tokens": 0
+    },
+    "reply": "```json\n[{\"plan_id\": \"H1036-153-0\", \"benefit\": \"ambulance.air\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 9, \"quotes\": [\"20% of the cost\"]},\n{\"plan_id\": \"H1036-153-0\", \"benefit\": \"ambulance.ground\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per date of service\", \"page\": 9, \"quotes\": [\"$325 copay per date of service\"]},\n{\"plan_id\": \"H1036-153-0\", \"benefit\": \"ambulance\", \"setting\": \"outside_us\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$325\", \"unit\": \"per date of service\", \"page\": 6, \"quotes\": [\"Emergency ambulance: $325 copay per date of\"], \"note\": \"Worldwide coverage row. The network is not stated, so the in-network default is used. Members pay upfront and can request reimbursement.\"}]\n```",
+    "prompts": [
+     {
+      "prompt": "6761dbbfbd4ec26bccf84990d6d9db9b6ff67e7aa12674da3851203ab390d96b",
+      "dir": "facts/ambulance/read",
+      "task": "ce13e925c0384896.md",
+      "url": "https://pdxplans.org/blobs/6761dbbfbd4ec26bccf84990d6d9db9b6ff67e7aa12674da3851203ab390d96b.txt"
+     }
+    ]
+   },
+   {
+    "key": "d4fb425fcc789e40",
+    "model": "claude-opus-5-5",
+    "effort": "medium",
+    "batch": false,
+    "usage": {
+     "input_tokens": 3402,
+     "output_tokens": 481,
+     "cache_read_input_tokens": 0,
+     "cache_creation_input_tokens": 0
+    },
+    "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 9 Ambulance Ground row reads \\\"$325 copay per date of service\\\". This matches the benefit, amount and unit.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"The page 6 Worldwide Coverage section does list emergency ambulance at $325 per date of service. However, Medicare does not cover care outside the U.S., so this is a supplemental benefit, not 'medicare'. It is also paid upfront and reimbursed, so 'in' network is doubtful.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"The page 9 Ambulance Air row reads \\\"20% of the cost\\\", which is coinsurance in network.\"}]\n```",
+    "prompts": [
+     {
+      "prompt": "958dc0da290488a6f5b74479f9199ac0401fa4ff8ffa96cfb4903a8c721716bf",
+      "dir": "facts/ambulance/check",
+      "task": "v-ce13e925c0384896.md",
+      "url": "https://pdxplans.org/blobs/958dc0da290488a6f5b74479f9199ac0401fa4ff8ffa96cfb4903a8c721716bf.txt"
+     }
+    ]
+   }
+  ]
+ },
+ "fact_checks": {
+  "status": "traced",
+  "rows": [
+   {
+    "fact": {
+     "fact_id": "ae326523b26fbf5e",
+     "source": "EOC",
+     "doc_sha": "64e05773e847b56e0eeb5425979d54996c5f1975307c9ae186f5af4fecafc44c",
+     "page": "46"
+    },
+    "code_check": "passed",
+    "stated_by": [
+     {
+      "prompt": "226ee67e4a27f3e7c117e6aa8e197a07423fac0b4d1fe9b6d6033e8602313064",
+      "item": 0,
+      "answer_key": "53c77fe49511c59a",
+      "stated": {
+       "plan_id": "H1036-153-0",
+       "benefit": "ambulance.ground",
+       "setting": "any",
+       "network": "in",
+       "covered_by": "medicare",
+       "cost_kind": "copay",
+       "amount": "$325",
+       "unit": "per date of service",
+       "condition": "Emergency Ambulance",
+       "page": 46,
+       "quotes": [
+        "In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance"
+       ]
+      },
+      "skipped": null
+     }
+    ],
+    "verifier": [
+     {
+      "prompt": "b5440712e725656a1d08ab46be442d02fe00346a555f3f5545644d5d02bd1d74",
+      "item": 4,
+      "answer_key": "db87bdb3f45deecd",
+      "ok": true,
+      "reason": "Page 46 ambulance row, In-Network, Emergency Ambulance: $325 copayment per date of service for Ground Ambulance.",
+      "decoys": []
+     }
+    ],
+    "reviewer": {
+     "status": "not_recorded",
+     "note": "trusted without review (#170)"
+    },
+    "kept": true
+   },
+   {
+    "fact": {
+     "fact_id": "7c0cd5739ce43f8b",
+     "source": "EOC",
+     "doc_sha": "64e05773e847b56e0eeb5425979d54996c5f1975307c9ae186f5af4fecafc44c",
+     "page": "46"
+    },
+    "code_check": "passed",
+    "stated_by": [
+     {
+      "prompt": "226ee67e4a27f3e7c117e6aa8e197a07423fac0b4d1fe9b6d6033e8602313064",
+      "item": 1,
+      "answer_key": "53c77fe49511c59a",
+      "stated": {
+       "plan_id": "H1036-153-0",
+       "benefit": "ambulance.air",
+       "setting": "any",
+       "network": "in",
+       "covered_by": "medicare",
+       "cost_kind": "coinsurance",
+       "amount": "20%",
+       "condition": "Emergency Ambulance",
+       "page": 46,
+       "quotes": [
+        "In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance"
+       ]
+      },
+      "skipped": null
+     }
+    ],
+    "verifier": [
+     {
+      "prompt": "b5440712e725656a1d08ab46be442d02fe00346a555f3f5545644d5d02bd1d74",
+      "item": 2,
+      "answer_key": "db87bdb3f45deecd",
+      "ok": true,
+      "reason": "Page 46 ambulance row, In-Network, Emergency Ambulance: 20% coinsurance regardless of the number of trips for Air Ambulance.",
+      "decoys": []
+     }
+    ],
+    "reviewer": {
+     "status": "not_recorded",
+     "note": "trusted without review (#170)"
+    },
+    "kept": true
+   },
+   {
+    "fact": {
+     "fact_id": "673cdd579df971ad",
+     "source": "EOC",
+     "doc_sha": "64e05773e847b56e0eeb5425979d54996c5f1975307c9ae186f5af4fecafc44c",
+     "page": "46"
+    },
+    "code_check": "passed",
+    "stated_by": [
+     {
+      "prompt": "226ee67e4a27f3e7c117e6aa8e197a07423fac0b4d1fe9b6d6033e8602313064",
+      "item": 2,
+      "answer_key": "53c77fe49511c59a",
+      "stated": {
+       "plan_id": "H1036-153-0",
+       "benefit": "ambulance.ground",
+       "setting": "any",
+       "network": "in",
+       "covered_by": "medicare",
+       "cost_kind": "copay",
+       "amount": "$325",
+       "unit": "per date of service",
+       "condition": "Non-Emergency Ambulance",
+       "page": 46,
+       "quotes": [
+        "Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance"
+       ]
+      },
+      "skipped": null
+     }
+    ],
+    "verifier": [
+     {
+      "prompt": "b5440712e725656a1d08ab46be442d02fe00346a555f3f5545644d5d02bd1d74",
+      "item": 3,
+      "answer_key": "db87bdb3f45deecd",
+      "ok": true,
+      "reason": "Page 46 ambulance row, In-Network, Non-Emergency Ambulance: $325 copayment per date of service for Ground Ambulance.",
+      "decoys": []
+     }
+    ],
+    "reviewer": {
+     "status": "not_recorded",
+     "note": "trusted without review (#170)"
+    },
+    "kept": true
+   },
+   {
+    "fact": {
+     "fact_id": "4bdd44ed9a2413ce",
+     "source": "EOC",
+     "doc_sha": "64e05773e847b56e0eeb5425979d54996c5f1975307c9ae186f5af4fecafc44c",
+     "page": "46"
+    },
+    "code_check": "passed",
+    "stated_by": [
+     {
+      "prompt": "226ee67e4a27f3e7c117e6aa8e197a07423fac0b4d1fe9b6d6033e8602313064",
+      "item": 3,
+      "answer_key": "53c77fe49511c59a",
+      "stated": {
+       "plan_id": "H1036-153-0",
+       "benefit": "ambulance.air",
+       "setting": "any",
+       "network": "in",
+       "covered_by": "medicare",
+       "cost_kind": "coinsurance",
+       "amount": "20%",
+       "condition": "Non-Emergency Ambulance",
+       "page": 46,
+       "quotes": [
+        "Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance"
+       ]
+      },
+      "skipped": null
+     }
+    ],
+    "verifier": [
+     {
+      "prompt": "b5440712e725656a1d08ab46be442d02fe00346a555f3f5545644d5d02bd1d74",
+      "item": 0,
+      "answer_key": "db87bdb3f45deecd",
+      "ok": true,
+      "reason": "Page 46 ambulance row, In-Network, Non-Emergency Ambulance: 20% coinsurance regardless of the number of trips for Air Ambulance.",
+      "decoys": []
+     }
+    ],
+    "reviewer": {
+     "status": "not_recorded",
+     "note": "trusted without review (#170)"
+    },
+    "kept": true
+   },
+   {
+    "fact": {
+     "fact_id": "dcc6a0f01e6c0594",
+     "source": "EOC",
+     "doc_sha": "64e05773e847b56e0eeb5425979d54996c5f1975307c9ae186f5af4fecafc44c",
+     "page": "46"
+    },
+    "code_check": "passed",
+    "stated_by": [
+     {
+      "prompt": "226ee67e4a27f3e7c117e6aa8e197a07423fac0b4d1fe9b6d6033e8602313064",
+      "item": 4,
+      "answer_key": "53c77fe49511c59a",
+      "stated": {
+       "plan_id": "H1036-153-0",
+       "benefit": "ambulance",
+       "setting": "outside_us",
+       "network": "out",
+       "covered_by": "supplemental",
+       "cost_kind": "copay",
+       "amount": "$325",
+       "unit": "per date of service",
+       "condition": "Emergency Ambulance",
+       "page": 46,
+       "quotes": [
+        "Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance"
+       ],
+       "note": "Worldwide emergency coverage is described as a supplemental benefit on page 36."
+      },
+      "skipped": null
+     }
+    ],
+    "verifier": [
+     {
+      "prompt": "b5440712e725656a1d08ab46be442d02fe00346a555f3f5545644d5d02bd1d74",
+      "item": 1,
+      "answer_key": "db87bdb3f45deecd",
+      "ok": true,
+      "reason": "Page 46 ambulance row, Out-of-Network Worldwide Coverage: $325 copayment per date of service regardless of the number of trips for Emergency Ambulance, with no ground/air split.",
+      "decoys": []
+     }
+    ],
+    "reviewer": {
+     "status": "not_recorded",
+     "note": "trusted without review (#170)"
+    },
+    "kept": true
+   },
+   {
+    "fact": {
+     "fact_id": "aab50a29be55fef4",
+     "source": "SB",
+     "doc_sha": "ce13e925c0384896d725da85a06c14dfbd268b422134b85b58640c8d7c494220",
+     "page": "9"
+    },
+    "code_check": "passed",
+    "stated_by": [
+     {
+      "prompt": "6761dbbfbd4ec26bccf84990d6d9db9b6ff67e7aa12674da3851203ab390d96b",
+      "item": 0,
+      "answer_key": "e920fcee050a431f",
+      "stated": {
+       "plan_id": "H1036-153-0",
+       "benefit": "ambulance.air",
+       "setting": "any",
+       "network": "in",
+       "covered_by": "medicare",
+       "cost_kind": "coinsurance",
+       "amount": "20%",
+       "page": 9,
+       "quotes": [
+        "20% of the cost"
+       ]
+      },
+      "skipped": null
+     }
+    ],
+    "verifier": [
+     {
+      "prompt": "958dc0da290488a6f5b74479f9199ac0401fa4ff8ffa96cfb4903a8c721716bf",
+      "item": 2,
+      "answer_key": "d4fb425fcc789e40",
+      "ok": true,
+      "reason": "The page 9 Ambulance Air row reads \"20% of the cost\", which is coinsurance in network.",
+      "decoys": []
+     }
+    ],
+    "reviewer": {
+     "status": "none"
+    },
+    "kept": true
+   },
+   {
+    "fact": {
+     "fact_id": "e39fd04021727efb",
+     "source": "SB",
+     "doc_sha": "ce13e925c0384896d725da85a06c14dfbd268b422134b85b58640c8d7c494220",
+     "page": "9"
+    },
+    "code_check": "passed",
+    "stated_by": [
+     {
+      "prompt": "6761dbbfbd4ec26bccf84990d6d9db9b6ff67e7aa12674da3851203ab390d96b",
+      "item": 1,
+      "answer_key": "e920fcee050a431f",
+      "stated": {
+       "plan_id": "H1036-153-0",
+       "benefit": "ambulance.ground",
+       "setting": "any",
+       "network": "in",
+       "covered_by": "medicare",
+       "cost_kind": "copay",
+       "amount": "$325",
+       "unit": "per date of service",
+       "page": 9,
+       "quotes": [
+        "$325 copay per date of service"
+       ]
+      },
+      "skipped": null
+     }
+    ],
+    "verifier": [
+     {
+      "prompt": "958dc0da290488a6f5b74479f9199ac0401fa4ff8ffa96cfb4903a8c721716bf",
+      "item": 0,
+      "answer_key": "d4fb425fcc789e40",
+      "ok": true,
+      "reason": "The page 9 Ambulance Ground row reads \"$325 copay per date of service\". This matches the benefit, amount and unit.",
+      "decoys": []
+     }
+    ],
+    "reviewer": {
+     "status": "none"
+    },
+    "kept": true
+   },
+   {
+    "fact": {
+     "fact_id": "a23188e556b93983",
+     "source": "SB",
+     "doc_sha": "ce13e925c0384896d725da85a06c14dfbd268b422134b85b58640c8d7c494220",
+     "page": "6"
+    },
+    "code_check": "passed",
+    "stated_by": [
+     {
+      "prompt": "6761dbbfbd4ec26bccf84990d6d9db9b6ff67e7aa12674da3851203ab390d96b",
+      "item": 2,
+      "answer_key": "e920fcee050a431f",
+      "stated": {
+       "plan_id": "H1036-153-0",
+       "benefit": "ambulance",
+       "setting": "outside_us",
+       "network": "in",
+       "covered_by": "medicare",
+       "cost_kind": "copay",
+       "amount": "$325",
+       "unit": "per date of service",
+       "page": 6,
+       "quotes": [
+        "Emergency ambulance: $325 copay per date of"
+       ],
+       "note": "Worldwide coverage row. The network is not stated, so the in-network default is used. Members pay upfront and can request reimbursement."
+      },
+      "skipped": null
+     }
+    ],
+    "verifier": [
+     {
+      "prompt": "958dc0da290488a6f5b74479f9199ac0401fa4ff8ffa96cfb4903a8c721716bf",
+      "item": 1,
+      "answer_key": "d4fb425fcc789e40",
+      "ok": false,
+      "reason": "The page 6 Worldwide Coverage section does list emergency ambulance at $325 per date of service. However, Medicare does not cover care outside the U.S., so this is a supplemental benefit, not 'medicare'. It is also paid upfront and reimbursed, so 'in' network is doubtful.",
+      "decoys": []
+     }
+    ],
+    "reviewer": {
+     "status": "none"
+    },
+    "kept": false
+   }
+  ]
+ },
+ "rule": {
+  "status": "traced",
+  "code": {
+   "file": "pipeline/present.py",
+   "function": "ambulance",
+   "url": "https://github.com/rosenhouse-bot-sandbox/shiba-data/blob/x/pipeline/present.py"
+  },
+  "held": null,
+  "lines": [
+   {
+    "line": 1,
+    "value": "$325 or 20%",
+    "presented": true,
+    "facts": [
+     {
+      "fact_id": "4bdd44ed9a2413ce",
+      "plan_id": "H1036-153-0",
+      "benefit": "ambulance.air",
+      "setting": "any",
+      "network": "in",
+      "provider_tier": "",
+      "condition": "Non-Emergency Ambulance",
+      "package": "",
+      "pool": "",
+      "covered_by": "medicare",
+      "cost_kind": "coinsurance",
+      "amount": "20%",
+      "unit": "",
+      "limit": "",
+      "source": "EOC",
+      "doc_sha": "64e05773e847b56e0eeb5425979d54996c5f1975307c9ae186f5af4fecafc44c",
+      "page": "46",
+      "quotes": "[\"Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance\"]",
+      "note": "",
+      "origin": "document",
+      "reviewed": true
+     },
+     {
+      "fact_id": "673cdd579df971ad",
+      "plan_id": "H1036-153-0",
+      "benefit": "ambulance.ground",
+      "setting": "any",
+      "network": "in",
+      "provider_tier": "",
+      "condition": "Non-Emergency Ambulance",
+      "package": "",
+      "pool": "",
+      "covered_by": "medicare",
+      "cost_kind": "copay",
+      "amount": "$325",
+      "unit": "per date of service",
+      "limit": "",
+      "source": "EOC",
+      "doc_sha": "64e05773e847b56e0eeb5425979d54996c5f1975307c9ae186f5af4fecafc44c",
+      "page": "46",
+      "quotes": "[\"Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance\"]",
+      "note": "",
+      "origin": "document",
+      "reviewed": true
+     },
+     {
+      "fact_id": "7c0cd5739ce43f8b",
+      "plan_id": "H1036-153-0",
+      "benefit": "ambulance.air",
+      "setting": "any",
+      "network": "in",
+      "provider_tier": "",
+      "condition": "Emergency Ambulance",
+      "package": "",
+      "pool": "",
+      "covered_by": "medicare",
+      "cost_kind": "coinsurance",
+      "amount": "20%",
+      "unit": "",
+      "limit": "",
+      "source": "EOC",
+      "doc_sha": "64e05773e847b56e0eeb5425979d54996c5f1975307c9ae186f5af4fecafc44c",
+      "page": "46",
+      "quotes": "[\"In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance\"]",
+      "note": "",
+      "origin": "document",
+      "reviewed": true
+     },
+     {
+      "fact_id": "ae326523b26fbf5e",
+      "plan_id": "H1036-153-0",
+      "benefit": "ambulance.ground",
+      "setting": "any",
+      "network": "in",
+      "provider_tier": "",
+      "condition": "Emergency Ambulance",
+      "package": "",
+      "pool": "",
+      "covered_by": "medicare",
+      "cost_kind": "copay",
+      "amount": "$325",
+      "unit": "per date of service",
+      "limit": "",
+      "source": "EOC",
+      "doc_sha": "64e05773e847b56e0eeb5425979d54996c5f1975307c9ae186f5af4fecafc44c",
+      "page": "46",
+      "quotes": "[\"In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance\"]",
+      "note": "",
+      "origin": "document",
+      "reviewed": true
+     }
+    ]
+   },
+   {
+    "line": 2,
+    "value": "$325",
+    "presented": true,
+    "facts": [
+     {
+      "fact_id": "dcc6a0f01e6c0594",
+      "plan_id": "H1036-153-0",
+      "benefit": "ambulance",
+      "setting": "outside_us",
+      "network": "out",
+      "provider_tier": "",
+      "condition": "Emergency Ambulance",
+      "package": "",
+      "pool": "",
+      "covered_by": "supplemental",
+      "cost_kind": "copay",
+      "amount": "$325",
+      "unit": "per date of service",
+      "limit": "",
+      "source": "EOC",
+      "doc_sha": "64e05773e847b56e0eeb5425979d54996c5f1975307c9ae186f5af4fecafc44c",
+      "page": "46",
+      "quotes": "[\"Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance\"]",
+      "note": "Worldwide emergency coverage is described as a supplemental benefit on page 36.",
+      "origin": "document",
+      "reviewed": true
+     }
+    ]
+   }
+  ],
+  "set_aside": [
+   {
+    "fact_id": "aab50a29be55fef4",
+    "plan_id": "H1036-153-0",
+    "benefit": "ambulance.air",
+    "setting": "any",
+    "network": "in",
+    "provider_tier": "",
+    "condition": "",
+    "package": "",
+    "pool": "",
+    "covered_by": "medicare",
+    "cost_kind": "coinsurance",
+    "amount": "20%",
+    "unit": "",
+    "limit": "",
+    "source": "SB",
+    "doc_sha": "ce13e925c0384896d725da85a06c14dfbd268b422134b85b58640c8d7c494220",
+    "page": "9",
+    "quotes": "[\"20% of the cost\"]",
+    "note": "",
+    "origin": "document",
+    "reviewed": false,
+    "reasons": [
+     "SB ranks below EOC"
+    ]
+   },
+   {
+    "fact_id": "e39fd04021727efb",
+    "plan_id": "H1036-153-0",
+    "benefit": "ambulance.ground",
+    "setting": "any",
+    "network": "in",
+    "provider_tier": "",
+    "condition": "",
+    "package": "",
+    "pool": "",
+    "covered_by": "medicare",
+    "cost_kind": "copay",
+    "amount": "$325",
+    "unit": "per date of service",
+    "limit": "",
+    "source": "SB",
+    "doc_sha": "ce13e925c0384896d725da85a06c14dfbd268b422134b85b58640c8d7c494220",
+    "page": "9",
+    "quotes": "[\"$325 copay per date of service\"]",
+    "note": "",
+    "origin": "document",
+    "reviewed": false,
+    "reasons": [
+     "SB ranks below EOC"
+    ]
+   }
+  ]
+ },
+ "added_facts": {
+  "status": "none",
+  "rows": []
+ },
+ "notes": {
+  "status": "none",
+  "rows": []
+ },
+ "struck_quotes": {
+  "status": "none",
+  "rows": []
+ },
+ "model_citations": {
+  "status": "none",
+  "rows": []
+ },
+ "layers": {
+  "status": "traced",
+  "draft": "$325 or 20% | $325",
+  "applied": [
+   {
+    "layer": "generated/citations.csv",
+    "value": "$325 or 20% | $325",
+    "rows": []
+   },
+   {
+    "layer": "machine/eoc_citations.csv",
+    "value": "$325 or 20% | $325",
+    "rows": []
+   },
+   {
+    "layer": "machine/blanks.csv",
+    "value": "$325 or 20% | $325",
+    "rows": []
+   },
+   {
+    "layer": "machine/filled.csv",
+    "value": "$325 or 20% | $325",
+    "rows": []
+   },
+   {
+    "layer": "generated/presented.csv",
+    "value": "$325 or 20% | $325",
+    "rows": [
+     {
+      "layer": "generated/presented.csv",
+      "line": 1,
+      "value": "$325 or 20%",
+      "url": "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf",
+      "pdf_page": 46,
+      "quote": "In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance",
+      "hidden": ""
+     },
+     {
+      "layer": "generated/presented.csv",
+      "line": 1,
+      "value": "$325 or 20%",
+      "url": "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf",
+      "pdf_page": 46,
+      "quote": "In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance",
+      "hidden": ""
+     },
+     {
+      "layer": "generated/presented.csv",
+      "line": 1,
+      "value": "$325 or 20%",
+      "url": "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf",
+      "pdf_page": 46,
+      "quote": "Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance",
+      "hidden": ""
+     },
+     {
+      "layer": "generated/presented.csv",
+      "line": 1,
+      "value": "$325 or 20%",
+      "url": "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf",
+      "pdf_page": 46,
+      "quote": "Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance",
+      "hidden": ""
+     },
+     {
+      "layer": "generated/presented.csv",
+      "line": 2,
+      "value": "$325",
+      "url": "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf",
+      "pdf_page": 46,
+      "quote": "Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance",
+      "hidden": ""
+     }
+    ]
+   },
+   {
+    "layer": "edits.csv",
+    "value": "$325 or 20% | $325",
+    "rows": []
+   }
+  ],
+  "live": {
+   "value": "$325 or 20% | $325",
+   "set_by": "generated/presented.csv",
+   "citations": [
+    {
+     "layer": "generated/presented.csv",
+     "line": 1,
+     "value": "$325 or 20%",
+     "url": "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf",
+     "pdf_page": 46,
+     "quote": "In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance",
+     "hidden": ""
+    },
+    {
+     "layer": "generated/presented.csv",
+     "line": 1,
+     "value": "$325 or 20%",
+     "url": "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf",
+     "pdf_page": 46,
+     "quote": "In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance",
+     "hidden": ""
+    },
+    {
+     "layer": "generated/presented.csv",
+     "line": 1,
+     "value": "$325 or 20%",
+     "url": "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf",
+     "pdf_page": 46,
+     "quote": "Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance",
+     "hidden": ""
+    },
+    {
+     "layer": "generated/presented.csv",
+     "line": 1,
+     "value": "$325 or 20%",
+     "url": "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf",
+     "pdf_page": 46,
+     "quote": "Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance",
+     "hidden": ""
+    },
+    {
+     "layer": "generated/presented.csv",
+     "line": 2,
+     "value": "$325",
+     "url": "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf",
+     "pdf_page": 46,
+     "quote": "Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance",
+     "hidden": ""
+    }
+   ]
+  },
+  "hidden": []
+ },
+ "build": {
+  "status": "traced",
+  "sha": "x",
+  "steps": {
+   "filled": 6,
+   "document_facts": 11,
+   "present": 2
+  },
+  "code": "https://github.com/rosenhouse-bot-sandbox/shiba-data/blob/x/"
+ }
+}

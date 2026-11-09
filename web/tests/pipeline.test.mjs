@@ -1,4 +1,5 @@
 import { test } from "node:test";
+import fs from "node:fs";
 import assert from "node:assert/strict";
 import { NODES, STEPS, LINKS, nodeBox, pillBox, edge, before, after, stepById, chain, strip } from "../static/pipeline.js";
 
@@ -132,4 +133,23 @@ test("a step whose record the trace lacks, or that has no strip, gets none", () 
   assert.equal(strip(stepById("list-plans"), { ...full, plan: { status: "not_recorded" } }), null);
   assert.equal(strip(stepById("read-facts"), full), null);
   assert.equal(strip(stepById("draft"), null), null);
+});
+
+// A replayed build's trace of the example cell, which records answers, checks and the rule.
+const replay = JSON.parse(fs.readFileSync(new URL("./fixtures/replay_trace.json", import.meta.url)));
+
+test("a replayed trace writes the fact steps' strips", () => {
+  assert.deepEqual(strip(stepById("read-facts"), replay), ["SB and EOC page text", "4 saved answers from claude-opus-5-5"]);
+  assert.deepEqual(strip(stepById("check-facts"), replay), ["8 facts", "7 kept, 1 rejected"]);
+  assert.deepEqual(strip(stepById("column-rules"), replay), ["5 facts used, 2 set aside", "line 1 $325 or 20%; line 2 $325"]);
+});
+
+test("a held cell's rule strip says why", () => {
+  const held = { ...replay, rule: { ...replay.rule, held: "the EOC and SB disagree", lines: [] } };
+  assert.deepEqual(strip(stepById("column-rules"), held), ["0 facts used, 2 set aside", "held: the EOC and SB disagree"]);
+});
+
+test("every step of a replayed trace's chain has a strip, except added facts the cell lacks", () => {
+  const missing = chain(replay).filter((s) => !strip(s, replay)).map((s) => s.id);
+  assert.deepEqual(missing, ["added-facts"]);
 });

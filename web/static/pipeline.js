@@ -216,6 +216,13 @@ const STRIPS = {
     `${d.kind}, ${plural(d.pages, "page")}${d.cover_problems ? ", cover problems" : ""}`).join("; ")],
   "extract-text": (t) => [plural(t.documents.documents.length, "PDF"),
     `text of ${plural(t.documents.documents.reduce((n, d) => n + d.pages, 0), "page")}`],
+  "read-facts": (t) => [`${kinds(t)} page text`, `${plural(t.answers.rows.length, "saved answer")} from ${listed([...new Set(t.answers.rows.map((a) => a.model))])}`],
+  "check-facts": (t) => {
+    const kept = t.fact_checks.rows.filter((r) => r.kept).length;
+    return [plural(t.fact_checks.rows.length, "fact"), `${kept} kept, ${t.fact_checks.rows.length - kept} rejected`];
+  },
+  "column-rules": (t) => [`${plural(t.rule.lines.reduce((n, l) => n + l.facts.length, 0), "fact")} used, ${t.rule.set_aside.length} set aside`,
+    t.rule.held ? `held: ${t.rule.held}` : t.rule.lines.map((l) => `line ${l.line} ${shownValue(l.value)}`).join("; ")],
   "draft": (t) => {
     const fields = t.draft.cms_fields?.status === "traced" ? t.draft.cms_fields.rows.map((f) => `${f.field} = ${f.value}`) : [];
     return [fields.length ? fields.join(", ") : "the plan's CMS fields", shownValue(t.draft.value)];

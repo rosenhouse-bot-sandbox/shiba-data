@@ -883,6 +883,8 @@ test("pipeline view: a term's pop-over stays inside the window, and opening anot
 test("pipeline view: each step shows its record from the cell's trace", async () => {
   await openHow(page, "main/H1036-153-0/ambulance/draft");
   assert.match(await page.textContent(".how-trace-head"), /draft\s*Traced/);
+  assert.ok(!(await page.locator(".how-trace pre").isVisible()));
+  await page.click(".how-trace summary");
   assert.match(await page.textContent(".how-trace pre"), /pipeline\/main_chart\.py/);
   await page.click("a.how-nav[rel=next]");
   await page.waitForFunction(() => document.querySelector(".how-trace-head")?.textContent.includes("Not recorded in this build"));
@@ -898,7 +900,7 @@ test("pipeline view: a cell with no trace says so, and the next step loads it ag
   await fresh.waitForFunction(() => document.querySelector(".how-trace")?.textContent.includes("This build has no trace for this cell."));
   fail = false;
   await fresh.click("a.how-nav[rel=prev]");
-  await fresh.waitForSelector(".how-trace pre");
+  await fresh.waitForSelector(".how-trace pre", { state: "attached" });
 });
 
 test("pipeline view: a record's status reads in words, and a record the trace lacks reads as not recorded", async () => {
