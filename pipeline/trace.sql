@@ -1,4 +1,4 @@
--- A year's trace database (#178). pipeline/trace.py builds it, and #68 plans its later tables.
+-- A year's trace database (#178). pipeline/trace.py builds it.
 
 -- replayed is 1 when the build read a run's ledger of prompts, and checked when it read the run's check outcomes.
 CREATE TABLE build (

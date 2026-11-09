@@ -83,6 +83,7 @@ jobs:
           year=$(basename "$(python3 -I pipeline/years.py)")
           python3 -I pipeline/trace.py build "$year" "_work/trace/$year.sqlite" "$SHA" _work
           python3 -I pipeline/trace.py check "_work/trace/$year.sqlite"
+          python3 -I pipeline/trace.py export "_work/trace/$year.sqlite" "_work/trace/$year/$SHA"
         env:
           SHA: ${{ github.event.pull_request.head.sha || github.sha }}
       - uses: actions/upload-artifact@v4
@@ -117,9 +118,10 @@ jobs:
 
   # R2 keeps each prompt the replay sent, so a trace can show it. Keys are content hashes, so sync adds only new ones.
   # R2 also keeps the latest main build's trace as trace/<year>.sqlite.
+  # When a trace changes, the Worker loads its cells into D1 from trace/<year>/<sha>/, part by part, then makes it live.
   trace:
     if: github.ref == 'refs/heads/main'
-    needs: [build, reproduce]
+    needs: [build, reproduce, deploy]
     runs-on: ubuntu-latest
     environment: cloudflare
     env:
@@ -144,7 +146,21 @@ jobs:
           export AWS_SECRET_ACCESS_KEY
           echo "::add-mask::$AWS_SECRET_ACCESS_KEY"
           aws s3 sync prompts s3://pdxplans/blobs/ --size-only --only-show-errors
-          aws s3 cp trace s3://pdxplans/trace/ --recursive --only-show-errors
+          for db in trace/*.sqlite; do aws s3 cp "$db" "s3://pdxplans/$db" --only-show-errors; done
+          for manifest in trace/*/*/manifest.json; do
+            build=$(dirname "$manifest")
+            year=$(jq .year "$manifest")
+            sha=$(jq -r .sha "$manifest")
+            if [ "$(curl -sS "https://pdxplans.org/trace/$year/live" | jq -r .hash 2>/dev/null)" = "$(jq -r .hash "$manifest")" ]; then
+              echo "The $year trace did not change."
+              continue
+            fi
+            aws s3 cp "$build" "s3://pdxplans/$build/" --recursive --only-show-errors
+            for n in $(seq 0 $(($(jq .parts "$manifest") - 1))); do
+              curl -sSf --retry 3 -X POST -w "\n" "https://pdxplans.org/trace/$year/load/$sha/$n"
+            done
+            curl -sSf --retry 3 -X POST -w "\n" "https://pdxplans.org/trace/$year/load/$sha"
+          done
 
   sheet:
     if: github.ref == 'refs/heads/main'

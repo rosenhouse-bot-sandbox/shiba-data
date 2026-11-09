@@ -15,3 +15,9 @@ binding = "ASSETS"
 [[r2_buckets]]
 binding = "BLOBS"
 bucket_name = "pdxplans"
+
+# Each main build's cell traces, loaded through this binding by web/worker.js.
+[[d1_databases]]
+binding = "TRACE"
+database_name = "pdxplans-2027"
+database_id = "9ce1bcb4-070e-4488-befc-762ea371b4f5"

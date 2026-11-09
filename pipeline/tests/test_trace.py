@@ -198,6 +198,29 @@ class TraceTest(unittest.TestCase):
         self.assertEqual(self.cell(*AMBULANCE)["draft"]["code"]["url"],
                          f"{trace.REPO_URL}/blob/{SHA}/pipeline/main_chart.py")
 
+    def test_exports_each_main_cells_records_in_parts_with_a_manifest(self):
+        with tempfile.TemporaryDirectory() as out:
+            trace.export(self.db, out)
+            with open(os.path.join(out, "manifest.json")) as f:
+                manifest = json.load(f)
+            parts = []
+            for n in range(manifest["parts"]):
+                with open(os.path.join(out, f"{n}.json")) as f:
+                    parts.append(json.load(f))
+        main = self.db.execute("SELECT count(*) FROM draft_cell WHERE sheet = 'main'").fetchone()[0]
+        cells = [c for part in parts for c in part]
+        self.assertEqual((manifest["sha"], manifest["year"], manifest["cells"], len(cells)), (SHA, years.LIVE, main, main))
+        self.assertEqual(manifest["hash"], trace.content_hash(cells, SHA))
+        self.assertEqual({len(part) for part in parts[:-1]}, {trace.PART})
+        (text,) = [t for plan_id, col, t in cells if (plan_id, col) == AMBULANCE[1:]]
+        self.assertEqual(json.loads(text), self.cell(*AMBULANCE))
+
+    def test_a_trace_hash_ignores_the_builds_commit(self):
+        cells = [["H1036-153-0", "AB_ambulance", f'{{"url": "{SHA}/x"}}']]
+        other = [["H1036-153-0", "AB_ambulance", f'{{"url": "{"1" * 40}/x"}}']]
+        self.assertEqual(trace.content_hash(cells, SHA), trace.content_hash(other, "1" * 40))
+        self.assertNotEqual(trace.content_hash(cells, SHA), trace.content_hash([["H1036-153-0", "AB_ambulance", "{}"]], SHA))
+
     def test_rejects_an_unknown_cell(self):
         with self.assertRaises(LookupError):
             self.cell("main", "H1036-153-0", "ZZ_nothing")
