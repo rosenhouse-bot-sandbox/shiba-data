@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-39.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 56 Humana Well Dine meal program row (supplemental, marked *): after an inpatient stay in a hospital or nursing facility, 2 meals per day for 7 days, so 14 meals are delivered home. 14 meals per inpatient stay matches.\"}]\n```",
+ "usage": {
+  "input_tokens": 2467,
+  "output_tokens": 397,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

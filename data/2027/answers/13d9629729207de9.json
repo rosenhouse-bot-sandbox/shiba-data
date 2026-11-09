@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "7e45f25357b792a7.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-019-0\", \"benefit\": \"hearing.aids\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"2\", \"unit\": \"per ear\", \"limit\": \"per year\", \"page\": 77, \"quotes\": [\"You are covered for up to two hearing aids per year, one per ear.\"], \"note\": \"The quote states the count as the word 'two', not the digit; the limit is one aid per ear.\"}]\n```",
+ "usage": {
+  "input_tokens": 4076,
+  "output_tokens": 674,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

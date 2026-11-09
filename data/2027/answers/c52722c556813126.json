@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-35.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 102 foot care row: the Routine Foot Care* text says it is an extra benefit offered by Devoted Health and covers 4 visits per year, which matches the supplemental podiatry benefits listed on the left.\"}]\n```",
+ "usage": {
+  "input_tokens": 2261,
+  "output_tokens": 413,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

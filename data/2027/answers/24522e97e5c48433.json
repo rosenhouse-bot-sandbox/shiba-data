@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "4a3883a20d17f740.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-010-0\", \"benefit\": \"hearing.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 8, \"quotes\": [\"Routine Hearing Exam\", \"$0 copay * Out-of-Network 40% coinsurance 1 exam(s) every year\", \"Fitting/Evaluation(s)\", \"$0 copay * Out-of-Network 40% coinsurance 1 fitting(s)\"], \"note\": \"Same $0 copay applies to both the routine hearing exam and the hearing aid fitting/evaluation\"},\n {\"plan_id\": \"H5439-010-0\", \"benefit\": \"hearing.exam\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"40%\", \"page\": 8, \"quotes\": [\"Routine Hearing Exam\", \"Out-of-Network 40% coinsurance 1 exam(s) every year\", \"Fitting/Evaluation(s)\", \"Out-of-Network 40% coinsurance 1 fitting(s)\"], \"note\": \"Same 40% coinsurance applies to both the routine hearing exam and the hearing aid fitting/evaluation\"},\n {\"plan_id\": \"H5439-010-0\", \"benefit\": \"hearing.exam\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"1\", \"limit\": \"every year\", \"page\": 8, \"quotes\": [\"Routine Hearing Exam\", \"1 exam(s) every year\"], \"note\": \"Routine hearing exam limit; hearing aid fitting/evaluation also has a separate limit of 1 every year\"}]\n```",
+ "usage": {
+  "input_tokens": 4446,
+  "output_tokens": 1593,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

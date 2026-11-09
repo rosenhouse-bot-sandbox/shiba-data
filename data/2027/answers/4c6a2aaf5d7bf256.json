@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-14.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 6 Hearing Aids row: benefit covers up to 2 TruHearing Advanced or Premium hearing aids. This is a routine (supplemental) hearing aid count of 2. The page states no frequency, so leaving limit blank is consistent.\"}]\n```",
+ "usage": {
+  "input_tokens": 2653,
+  "output_tokens": 253,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

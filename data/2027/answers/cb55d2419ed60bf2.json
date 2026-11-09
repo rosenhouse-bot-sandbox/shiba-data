@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-29.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 15 does show a $300 copay for worldwide emergency coverage in the ATRIO Choice Rx column. But emergency care outside the U.S. is generally a supplemental benefit, not a Medicare-covered one, so covered_by 'medicare' is doubtful. The row also has no network label.\"}]\n```",
+ "usage": {
+  "input_tokens": 1565,
+  "output_tokens": 299,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

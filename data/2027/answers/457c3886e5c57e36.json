@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-20.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 76 hearing services, supplemental part: the routine hearing exam is a $0 copay and the hearing aid fitting is a $0 copay, in network. Both are supplemental exam-type services. The item omits the stated limit of 1 routine exam per year, but that omission is not an error, and the fitting row states no limit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2558,
+  "output_tokens": 574,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

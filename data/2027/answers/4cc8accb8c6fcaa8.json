@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-30.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 15 does show a $120 copay for ATRIO Freedom under 'Worldwide emergency coverage'. But care outside the U.S. is a routine (supplemental) benefit, not Medicare-covered, and the row names no network, so covered_by 'medicare' and network 'in' are not supported.\"}]\n```",
+ "usage": {
+  "input_tokens": 1554,
+  "output_tokens": 270,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "model": "claude-haiku-5-5",
+ "batch": true,
+ "task": "H1036-317-0.md",
+ "reply": "```json\n[{\"key\": \"dvha.F_dental\", \"result\": \"skip\"},\n {\"key\": \"dvha.I_alt_care_otc_travel\", \"result\": \"skip\"}]\n```",
+ "usage": {
+  "input_tokens": 3316,
+  "output_tokens": 708,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

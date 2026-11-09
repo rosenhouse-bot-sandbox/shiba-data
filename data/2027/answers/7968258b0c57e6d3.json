@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-8.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 routine dental, Preventive services row: $0 copay for covered preventive services such as oral exams, X-rays and cleanings. This is part of the base routine dental benefit, which the page labels covered in and out-of-network, not the optional rider.\"}]\n```",
+ "usage": {
+  "input_tokens": 2188,
+  "output_tokens": 418,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
