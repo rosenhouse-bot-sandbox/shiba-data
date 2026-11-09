@@ -4,12 +4,14 @@ Usage:
   python3 -I pipeline/trace.py build <year> <out.sqlite> <commit sha> [<work_dir>]
   python3 -I pipeline/trace.py cell <db> <sheet> <plan_id> <col>
   python3 -I pipeline/trace.py check <db>
+  python3 -I pipeline/trace.py export <db> <out_dir>
   python3 -I pipeline/trace.py page <work_dir> <pdf sha256> <page>
 
 `cell` prints JSON. Each record has a status: "traced", "none" when no step touched the cell,
 "not_traced_yet" when the trace does not cover it yet, as for some DVHA cells, or "not_recorded" when nothing kept
 the record. With a work_dir from a run, `build` adds the run's prompts, their saved answers and the checks' outcomes.
 `check` fails if a main cell has a record left not traced yet.
+`export` writes every main cell's records in parts, which web/worker.js loads into D1.
 `page` prints a page's layout text from a run's <work_dir>/texts, where blobs.py puts it.
 """
 import csv, glob, json, os, sqlite3, sys
@@ -410,6 +412,24 @@ def check(db):
         raise SystemExit("These records are not traced yet:\n" + "\n".join(left))
 
 
+# The Worker loads each part of PART cells in one short request.
+PART = 10
+
+
+def export(db, out):
+    """Writes each main cell's records to <out>/<n>.json in parts of PART cells, and <out>/manifest.json."""
+    sha, year = db.execute("SELECT sha, year FROM build").fetchone()
+    cells = [[plan_id, col, json.dumps(cell(db, "main", plan_id, col), ensure_ascii=False)] for plan_id, col in db.execute(
+        "SELECT plan_id, col FROM draft_cell WHERE sheet = 'main' ORDER BY plan_id, col").fetchall()]
+    parts = [cells[n:n + PART] for n in range(0, len(cells), PART)]
+    os.makedirs(out, exist_ok=True)
+    for n, part in enumerate(parts):
+        with open(os.path.join(out, f"{n}.json"), "w", encoding="utf-8") as f:
+            json.dump(part, f, ensure_ascii=False)
+    with open(os.path.join(out, "manifest.json"), "w") as f:
+        json.dump(dict(sha=sha, year=year, cells=len(cells), parts=len(parts)), f)
+
+
 def not_yet(records, path=""):
     """The paths of the records whose status is not traced yet."""
     if isinstance(records, list):
@@ -432,6 +452,8 @@ def main(command=None, *args):
         print(json.dumps(cell(db, *args[1:]), indent=1, ensure_ascii=False))
     elif command == "check" and len(args) == 1:
         check(sqlite3.connect(f"file:{args[0]}?mode=ro", uri=True))
+    elif command == "export" and len(args) == 2:
+        export(sqlite3.connect(f"file:{args[0]}?mode=ro", uri=True), args[1])
     elif command == "page" and len(args) == 3:
         print(page(*args))
     else:
