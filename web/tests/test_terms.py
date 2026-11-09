@@ -24,10 +24,19 @@ class TermsTest(unittest.TestCase):
 
     def test_the_view_names_exactly_these_terms(self):
         script = ('import("./static/pipeline.js").then((m) => console.log(JSON.stringify('
-                  'm.STEPS.flatMap((s) => [...s.paras, ...s.example.paras].flat()).filter(Array.isArray).map((s) => s[0]))))')
+                  'm.STEPS.flatMap((s) => [...s.paras, ...(s.example?.paras ?? [])].flat()).filter(Array.isArray).map((s) => s[0]))))')
         used = set(json.loads(subprocess.run(["node", "-e", script], cwd=HERE.parent, capture_output=True, text=True,
                                              check=True).stdout))
         self.assertEqual(used, set(terms.TERMS))
+
+    def test_text_shown_for_any_cell_names_no_ambulance(self):
+        script = ('import("./static/pipeline.js").then((m) => console.log(JSON.stringify('
+                  'm.STEPS.flatMap((s) => s.paras.flat()))))')
+        segments = json.loads(subprocess.run(["node", "-e", script], cwd=HERE.parent, capture_output=True, text=True,
+                                             check=True).stdout)
+        shown = [s if isinstance(s, str) else " ".join([s[1], terms.TERMS[s[0]]["title"], terms.TERMS[s[0]]["text"]])
+                 for s in segments]
+        self.assertEqual([s for s in shown if "mbulance" in s], [])
 
     def test_each_link_spans_exactly_the_code_shown(self):
         for name, t in terms.resolve(REPO, "abc123", 2027).items():

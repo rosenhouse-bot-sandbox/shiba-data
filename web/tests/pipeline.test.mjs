@@ -36,7 +36,7 @@ test("every step joins two known nodes and has a unique id", () => {
 });
 
 test("highlighted rows exist", () => {
-  for (const s of STEPS) {
+  for (const s of STEPS.filter((s) => s.example)) {
     [s.from, s.to].forEach((id, i) => {
       const n = NODES[id], count = (n.table?.rows ?? n.text.lines).length;
       for (const r of s.example.highlight[i]) assert.ok(r < count, `${s.id} row ${r} of ${id}`);
@@ -45,7 +45,7 @@ test("highlighted rows exist", () => {
 });
 
 test("each side of a step highlights the cell's rows or explains why there are none", () => {
-  for (const s of STEPS) for (const i of [0, 1]) assert.ok(s.example.highlight[i].length || s.example.none?.[i], `${s.id} side ${i}`);
+  for (const s of STEPS.filter((s) => s.example)) for (const i of [0, 1]) assert.ok(s.example.highlight[i].length || s.example.none?.[i], `${s.id} side ${i}`);
 });
 
 test("neighbouring steps share a table", () => {
@@ -55,11 +55,12 @@ test("neighbouring steps share a table", () => {
   assert.deepEqual(before(stepById("list-plans")), []);
 });
 
-const trace = ({ value = "$5", rule = "none", blanks = false, cited = false } = {}) => ({
+const trace = ({ value = "$5", rule = "none", blanks = false, cited = false, presented = false } = {}) => ({
   cell: { value },
   rule: { status: rule },
   model_citations: blanks ? { status: "traced", rows: [{ step: "blanks" }] } : { status: "not_traced_yet" },
-  layers: { status: "traced", applied: [{ layer: "machine/blanks.csv", rows: cited ? [{}] : [] }] },
+  layers: { status: "traced", applied: [{ layer: "machine/blanks.csv", rows: cited ? [{}] : [] },
+    { layer: "generated/presented.csv", rows: presented ? [{}] : [] }] },
 });
 const ids = (t) => chain(t).map((s) => s.id);
 
@@ -69,8 +70,13 @@ test("a CMS-only cell's chain is the plan, the draft and the live sheet", () => 
 
 test("a cell with a rule reads facts from the documents but skips blank-cell citations", () => {
   const steps = ids(trace({ rule: "not_traced_yet" }));
-  for (const id of ["find-pdfs", "read-facts", "check-facts", "column-rules", "added-facts", "stack-presented"]) assert.ok(steps.includes(id), id);
+  for (const id of ["find-pdfs", "read-facts", "check-facts", "column-rules", "added-facts"]) assert.ok(steps.includes(id), id);
   assert.ok(!steps.includes("cite-blanks"));
+});
+
+test("only a cell the presented layer cites stacks it", () => {
+  assert.ok(!ids(trace({ rule: "not_traced_yet" })).includes("stack-presented"));
+  assert.ok(ids(trace({ rule: "not_traced_yet", presented: true })).includes("stack-presented"));
 });
 
 test("a blank cell, or one with a blank-cell citation, goes through the blanks step and its documents", () => {

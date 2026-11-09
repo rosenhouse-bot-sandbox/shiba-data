@@ -143,28 +143,34 @@ function route() {
 let howTicket = 0;
 async function routeHow(state) {
   hideViewer();
-  const ticket = ++howTicket;
-  const known = site.main.rows.some((r) => r.plan_id === state.plan) && site.main.columns.some((c) => c.id === state.column);
-  const { plan, column: id } = known && state.sheet === "main" ? state : EXAMPLE;
-  const column = site.main.columns.find((c) => c.id === id);
-  const value = site.main.rows.find((r) => r.plan_id === plan).cells[column.key].value;
+  const ticket = ++howTicket, asked = location.hash;
+  // Links from before column ids name the column by its key.
+  const asColumn = site.main.columns.find((c) => c.id === state.column || c.key === state.column);
+  const known = state.sheet === "main" && asColumn && site.main.rows.some((r) => r.plan_id === state.plan);
+  const plan = known ? state.plan : EXAMPLE.plan;
+  const column = known ? asColumn : site.main.columns.find((c) => c.id === EXAMPLE.column);
+  document.querySelectorAll("header nav a").forEach((a) => a.classList.toggle("active", a.dataset.view === "how"));
+  const content = $("#content");
+  const map = content.querySelector(".how-map");
+  const mapTop = map?.scrollTop ?? 0;
+  if (!map) {
+    if (here) scrollTops[here.key] = content.scrollTop;
+    content.replaceChildren(el("p", { class: "how-loading" }, "Loading the cell's trace…"));
+  }
+  here = { key: "how", view: "how" };
   const trace = await traceOf(plan, column.key);
-  if (ticket !== howTicket) return;
+  if (ticket !== howTicket || location.hash !== asked) return;
   const steps = chain(trace);
   const step = steps.find((s) => s.id === state.step) ?? steps[0];
-  const cell = { plan, column: id, label: `${plans[plan].plan_name} · ${column.label}`, value };
+  const value = site.main.rows.find((r) => r.plan_id === plan).cells[column.key].value;
+  const cell = { plan, column: column.id, label: `${plans[plan].plan_name} · ${column.label}`, value };
   const hash = howLink(site.year, cell, step);
   if (location.hash !== hash) history.replaceState(null, "", hash);
   routed = location.hash;
-  document.querySelectorAll("header nav a").forEach((a) => a.classList.toggle("active", a.dataset.view === "how"));
-  const content = $("#content");
-  const stepping = here?.view === "how";
-  const mapTop = stepping ? content.querySelector(".how-map").scrollTop : 0;
-  if (here && !stepping) scrollTops[here.key] = content.scrollTop;
   content.replaceChildren(howView({ year: site.year, cell, step, steps, terms: site.terms, trace }));
+  if (state.plan && !known) content.prepend(el("p", { class: "warn" }, "That link names no main-sheet cell, so this shows the example cell."));
   content.querySelector(".how-map").scrollTop = mapTop;
-  if (stepping) content.querySelector(".how-step").focus({ preventScroll: true });
-  here = { key: "how", view: "how" };
+  if (map) content.querySelector(".how-step").focus({ preventScroll: true });
 }
 
 // A failed load is not kept, so the next visit tries again.

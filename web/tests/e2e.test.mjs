@@ -845,7 +845,7 @@ test("pipeline view: an unknown step opens the first step", async () => {
 
 test("pipeline view: hovering a term shows its code, linked at the build's commit; clicking pins it and Escape closes it", async () => {
   await openHow(page, "main/H1036-153-0/ambulance/column-rules");
-  const box = page.locator(".how-term-box", { hasText: "rule" }).first();
+  const box = page.locator(".how-term-box", { has: page.locator("button", { hasText: "Ambulance rule" }) });
   const pop = box.locator(".how-pop");
   await box.hover();
   assert.ok(await pop.isVisible());
@@ -942,4 +942,34 @@ test("pipeline view: a main-sheet cell's detail links to its pipeline view", asy
   await page.waitForSelector(".how-lens");
   assert.match(page.url(), /#\/2027\/how\/main\/H5216-048-0\/premium\/list-plans$/);
   assert.match(await page.textContent(".how-cell"), /Premium/);
+});
+
+test("pipeline view: says it is loading, and a cell picked meanwhile stays", async () => {
+  const fresh = await browser.newPage();
+  opened.push(fresh);
+  let release;
+  const held = new Promise((r) => { release = r; });
+  await fresh.route("**/trace/**", async (route) => { await held; await route.continue(); });
+  await fresh.goto(`${base}#/2027/main`);
+  await fresh.waitForSelector("td[data-col]");
+  await fresh.click("nav a[data-view=how]");
+  await fresh.waitForSelector(".how-loading");
+  await fresh.evaluate(() => { location.hash = "#/2027/main"; });
+  await fresh.waitForSelector("td[data-col]");
+  release();
+  await fresh.waitForTimeout(300);
+  assert.equal(await fresh.locator(".how-lens").count(), 0);
+  assert.match(fresh.url(), /#\/2027\/main$/);
+});
+
+test("pipeline view: a link to no main-sheet cell shows the example cell and says so", async () => {
+  await openHow(page, "main/NOPE/ambulance/draft");
+  assert.match(await page.textContent(".warn"), /names no main-sheet cell/);
+  assert.match(page.url(), /H1036-153-0\/ambulance\/draft$/);
+});
+
+test("pipeline view: a link may name the column by its key", async () => {
+  await openHow(page, "main/H5216-048-0/C_premium");
+  assert.match(page.url(), /H5216-048-0\/premium\/list-plans$/);
+  assert.equal(await page.locator(".warn").count(), 0);
 });
