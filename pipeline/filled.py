@@ -53,12 +53,14 @@ def targets(site, every=False):
 
 
 def presented(*columns, held=()):
-    """Ignores edits to the columns, and presented rows of other columns or of held cells."""
+    """Ignores edits to the columns, and presented rows of other columns or of held cells.
+    A column on another sheet is named <sheet>.<column>."""
     def ignore(row):
+        sheet = row.get("sheet", "main")
+        column = row["column"] if sheet == "main" else f"{sheet}.{row['column']}"
         if row["layer"] == layers.EDITS:
-            return row["column"] in columns
-        return row["layer"] == layers.PRESENTED and (row["column"] not in columns
-                                                     or (row["column"], row.get("plan_id")) in held)
+            return column in columns
+        return row["layer"] == layers.PRESENTED and (column not in columns or (column, row.get("plan_id")) in held)
     return ignore
 
 
@@ -79,6 +81,8 @@ VERSIONS = {
     4: (layers.without(layers.FILLED), presented("L_xray_imaging", "AB_ambulance", "I_outpatient_surgery")),
     5: (layers.without(layers.FILLED), presented(*V5_COLUMNS)),
     6: (layers.without(layers.FILLED), presented(*V6_COLUMNS, held=V6_HELD)),
+    7: (layers.without(layers.FILLED), presented(*V6_COLUMNS, "dvha.C_premium", "dvha.E_optional_packages", "dvha.G_vision",
+                                                 "dvha.H_hearing", held=V6_HELD)),
 }
 
 
