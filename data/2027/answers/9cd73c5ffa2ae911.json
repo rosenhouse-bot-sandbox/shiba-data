@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "23e2bdae59ea8981.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3817-011-1\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$130\", \"page\": 4, \"quotes\": [\"Emergency room visit $130\"], \"note\": \"Urgent care visit ($50) left out because it has the same benefit, setting, network and cost kind as the emergency room visit.\"},\n {\"plan_id\": \"H3817-011-1\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$130\", \"page\": 4, \"quotes\": [\"Emergency room visit $130 $130\"], \"note\": \"Urgent care visit ($50) left out because it has the same benefit, setting, network and cost kind as the emergency room visit.\"}]\n```",
+ "usage": {
+  "input_tokens": 3392,
+  "output_tokens": 793,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

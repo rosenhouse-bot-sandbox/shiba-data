@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-22.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 74 lists two supplemental hearing exam rows for this plan, routine hearing exam and hearing aid fitting. Each shows a $0 copay. The item gives no limit field, so the 1-exam-per-year limit is not contradicted.\"}]\n```",
+ "usage": {
+  "input_tokens": 2537,
+  "output_tokens": 408,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

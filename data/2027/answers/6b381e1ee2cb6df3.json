@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-27.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 79, in-network section above the 'Out-of-network' heading: routine hearing exam is a $0 copay and hearing aid fitting is a $0 copay. Both are supplemental hearing exams per the vocabulary. The out-of-network routine exam is $35, so the $0 is the in-network cost.\"}]\n```",
+ "usage": {
+  "input_tokens": 2615,
+  "output_tokens": 457,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-23.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 76 Hearing services row lists 'Routine hearing exam $0 copay' and 'Hearing aid fitting $0 copay'. Both are supplemental hearing exams in network, so the fact matches.\"}]\n```",
+ "usage": {
+  "input_tokens": 2571,
+  "output_tokens": 573,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

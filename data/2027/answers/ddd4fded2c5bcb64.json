@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "a4bc20077fb4a2cf.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3817-011-1\", \"benefit\": \"visits\", \"setting\": \"telehealth\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per day\", \"limit\": \"\", \"condition\": \"Virtual primary care provider (PCP) visits\", \"page\": 62, \"quotes\": [\"Virtual primary care provider (PCP) visits: In-network: $0 copay per provider per day\"], \"note\": \"The condition separates the virtual PCP visit cost from the virtual specialist visit cost.\"},\n {\"plan_id\": \"H3817-011-1\", \"benefit\": \"visits\", \"setting\": \"telehealth\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$40\", \"unit\": \"per day\", \"limit\": \"\", \"condition\": \"Virtual specialist visits\", \"page\": 62, \"quotes\": [\"Virtual specialist visits: In-network: $40 copay per provider per day\"], \"note\": \"The condition separates the virtual specialist visit cost from the virtual PCP visit cost.\"}]\n```",
+ "usage": {
+  "input_tokens": 5845,
+  "output_tokens": 993,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

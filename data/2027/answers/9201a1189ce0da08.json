@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-4a3883a20d17f740.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 8: the Medicare-covered hearing exam is a $30 copay in network. The $60 copay is the out-of-network cost.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 8: the routine hearing exam is limited to 1 exam every year, and the fitting/evaluation to 1 every year. The limit is stated apart from the in-network and out-of-network costs, so it applies to both networks.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 8: the routine hearing exam and the hearing aid fitting/evaluation are each a $0 copay in network.\"},\n{\"id\": 3, \"ok\": false, \"reason\": \"Page 8: the Medicare-covered hearing exam is a $60 copay out of network. The $30 copay is the in-network cost.\"}]\n```",
+ "usage": {
+  "input_tokens": 2304,
+  "output_tokens": 636,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

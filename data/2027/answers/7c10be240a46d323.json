@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-8980c5c5d9008083.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 61 Dental services row, in-network: $55 copay for each Medicare-covered dental service.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 63 in-network: $0 copay per visit for dental x-rays, other diagnostic and other preventive dental services.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 64 out-of-network: 50% coinsurance for other preventive dental services per visit.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 61 out-of-network: 30% coinsurance for each Medicare-covered dental service.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 64, under Comprehensive Dental Care, out-of-network: 50% coinsurance for each adjunctive general service.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 64, under Comprehensive Dental Care, in-network: $0 copay for each adjunctive general service.\"}]\n```",
+ "usage": {
+  "input_tokens": 3915,
+  "output_tokens": 765,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

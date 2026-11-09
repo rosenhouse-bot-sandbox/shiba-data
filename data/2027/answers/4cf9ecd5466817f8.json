@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-13.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 62 dental x-rays and other diagnostic dental services rows: $0 copay per visit in network. These are routine (supplemental) preventive dental services with frequency limits.\"}]\n```",
+ "usage": {
+  "input_tokens": 1918,
+  "output_tokens": 435,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

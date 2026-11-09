@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-7.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"On page 89 the first $0 block has no service heading, so it may belong to a row on the previous page that is not lab services. The second quote is 'Advanced Laboratory Services', a separate category that may be genetic or molecular testing rather than routine outpatient lab. The quotes do not clearly show a $0 office copay for standard outpatient lab services.\"}]\n```",
+ "usage": {
+  "input_tokens": 2102,
+  "output_tokens": 438,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
