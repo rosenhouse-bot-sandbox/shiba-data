@@ -1,0 +1,746 @@
+plan_id,plan_field,field,value
+H3805-048-0,section,SNP Type,Not Applicable
+H3805-048-0,section,Part D Coverage Indicator,Yes
+H3805-048-0,plan_id,Contract ID,H3805
+H3805-048-0,plan_id,Plan ID,048
+H3805-048-0,plan_id,Segment ID,0
+H3805-048-0,plan_name,Plan Name,AARP Medicare Advantage Essentials from UHC OR-7 (HMO-POS)
+H3805-048-0,plan_type,Plan Type,HMO-POS
+H3805-048-0,organization,Organization Marketing Name,UnitedHealthcare
+H3805-048-0,premium,Part D Coverage Indicator,Yes
+H3805-048-0,premium,Monthly Consolidated Premium (Part C + D),$0.00 
+H3805-048-0,premium_full_extra_help,Part D Coverage Indicator,Yes
+H3805-048-0,premium_full_extra_help,Part C Premium,$0.00 
+H3805-048-0,premium_full_extra_help,Part D Low Income Beneficiary Premium Amount,$0.00 
+H3805-048-0,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$6,700.00 "
+H3805-048-0,part_d_deductible,Part D Coverage Indicator,Yes
+H3805-048-0,part_d_deductible,Annual Part D Deductible Amount,$685.00 
+H3805-048-0,tier_without_part_d_deductible,Part D Coverage Indicator,Yes
+H3805-048-0,tier_without_part_d_deductible,Offers Drug Tier with No Part D Deductible,Yes
+H3805-048-0,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,Not Applicable
+H3805-048-0,overall_star_rating,Overall Star Rating,3.5
+H3805-041-0,section,SNP Type,Not Applicable
+H3805-041-0,section,Part D Coverage Indicator,Yes
+H3805-041-0,plan_id,Contract ID,H3805
+H3805-041-0,plan_id,Plan ID,041
+H3805-041-0,plan_id,Segment ID,0
+H3805-041-0,plan_name,Plan Name,AARP Medicare Advantage Extras from UHC OR-6 (HMO-POS)
+H3805-041-0,plan_type,Plan Type,HMO-POS
+H3805-041-0,organization,Organization Marketing Name,UnitedHealthcare
+H3805-041-0,premium,Part D Coverage Indicator,Yes
+H3805-041-0,premium,Monthly Consolidated Premium (Part C + D),$0.00 
+H3805-041-0,premium_full_extra_help,Part D Coverage Indicator,Yes
+H3805-041-0,premium_full_extra_help,Part C Premium,$0.00 
+H3805-041-0,premium_full_extra_help,Part D Low Income Beneficiary Premium Amount,$0.00 
+H3805-041-0,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$7,150.00 "
+H3805-041-0,part_d_deductible,Part D Coverage Indicator,Yes
+H3805-041-0,part_d_deductible,Annual Part D Deductible Amount,$685.00 
+H3805-041-0,tier_without_part_d_deductible,Part D Coverage Indicator,Yes
+H3805-041-0,tier_without_part_d_deductible,Offers Drug Tier with No Part D Deductible,Yes
+H3805-041-0,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,Not Applicable
+H3805-041-0,overall_star_rating,Overall Star Rating,3.5
+H2406-042-0,section,SNP Type,Not Applicable
+H2406-042-0,section,Part D Coverage Indicator,Yes
+H2406-042-0,plan_id,Contract ID,H2406
+H2406-042-0,plan_id,Plan ID,042
+H2406-042-0,plan_id,Segment ID,0
+H2406-042-0,plan_name,Plan Name,AARP Medicare Advantage from UHC OR-0001 (PPO)
+H2406-042-0,plan_type,Plan Type,PPO
+H2406-042-0,organization,Organization Marketing Name,UnitedHealthcare
+H2406-042-0,premium,Part D Coverage Indicator,Yes
+H2406-042-0,premium,Monthly Consolidated Premium (Part C + D),$94.00 
+H2406-042-0,premium_full_extra_help,Part D Coverage Indicator,Yes
+H2406-042-0,premium_full_extra_help,Part C Premium,$0.00 
+H2406-042-0,premium_full_extra_help,Part D Low Income Beneficiary Premium Amount,$87.70 
+H2406-042-0,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$6,700.00 "
+H2406-042-0,part_d_deductible,Part D Coverage Indicator,Yes
+H2406-042-0,part_d_deductible,Annual Part D Deductible Amount,$595.00 
+H2406-042-0,tier_without_part_d_deductible,Part D Coverage Indicator,Yes
+H2406-042-0,tier_without_part_d_deductible,Offers Drug Tier with No Part D Deductible,Yes
+H2406-042-0,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,Not Applicable
+H2406-042-0,overall_star_rating,Overall Star Rating,4.0
+H2406-070-0,section,SNP Type,Not Applicable
+H2406-070-0,section,Part D Coverage Indicator,Yes
+H2406-070-0,plan_id,Contract ID,H2406
+H2406-070-0,plan_id,Plan ID,070
+H2406-070-0,plan_id,Segment ID,0
+H2406-070-0,plan_name,Plan Name,AARP Medicare Advantage from UHC OR-0002 (PPO)
+H2406-070-0,plan_type,Plan Type,PPO
+H2406-070-0,organization,Organization Marketing Name,UnitedHealthcare
+H2406-070-0,premium,Part D Coverage Indicator,Yes
+H2406-070-0,premium,Monthly Consolidated Premium (Part C + D),$0.00 
+H2406-070-0,premium_full_extra_help,Part D Coverage Indicator,Yes
+H2406-070-0,premium_full_extra_help,Part C Premium,$0.00 
+H2406-070-0,premium_full_extra_help,Part D Low Income Beneficiary Premium Amount,$0.00 
+H2406-070-0,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$7,150.00 "
+H2406-070-0,part_d_deductible,Part D Coverage Indicator,Yes
+H2406-070-0,part_d_deductible,Annual Part D Deductible Amount,$685.00 
+H2406-070-0,tier_without_part_d_deductible,Part D Coverage Indicator,Yes
+H2406-070-0,tier_without_part_d_deductible,Offers Drug Tier with No Part D Deductible,Yes
+H2406-070-0,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,Not Applicable
+H2406-070-0,overall_star_rating,Overall Star Rating,4.0
+H2056-003-0,section,SNP Type,Not Applicable
+H2056-003-0,section,Part D Coverage Indicator,Yes
+H2056-003-0,plan_id,Contract ID,H2056
+H2056-003-0,plan_id,Plan ID,003
+H2056-003-0,plan_id,Segment ID,0
+H2056-003-0,plan_name,Plan Name,Aetna Medicare Elite (HMO)
+H2056-003-0,plan_type,Plan Type,HMO
+H2056-003-0,organization,Organization Marketing Name,Aetna Medicare
+H2056-003-0,premium,Part D Coverage Indicator,Yes
+H2056-003-0,premium,Monthly Consolidated Premium (Part C + D),$0.00 
+H2056-003-0,premium_full_extra_help,Part D Coverage Indicator,Yes
+H2056-003-0,premium_full_extra_help,Part C Premium,$0.00 
+H2056-003-0,premium_full_extra_help,Part D Low Income Beneficiary Premium Amount,$0.00 
+H2056-003-0,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$7,150.00 "
+H2056-003-0,part_d_deductible,Part D Coverage Indicator,Yes
+H2056-003-0,part_d_deductible,Annual Part D Deductible Amount,$700.00 
+H2056-003-0,tier_without_part_d_deductible,Part D Coverage Indicator,Yes
+H2056-003-0,tier_without_part_d_deductible,Offers Drug Tier with No Part D Deductible,Yes
+H2056-003-0,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,Not Applicable
+H2056-003-0,overall_star_rating,Overall Star Rating,3.0
+H7006-018-0,section,SNP Type,Not Applicable
+H7006-018-0,section,Part D Coverage Indicator,Yes
+H7006-018-0,plan_id,Contract ID,H7006
+H7006-018-0,plan_id,Plan ID,018
+H7006-018-0,plan_id,Segment ID,0
+H7006-018-0,plan_name,Plan Name,ATRIO Choice Rx (PPO)
+H7006-018-0,plan_type,Plan Type,PPO
+H7006-018-0,organization,Organization Marketing Name,ATRIO Health Plans
+H7006-018-0,premium,Part D Coverage Indicator,Yes
+H7006-018-0,premium,Monthly Consolidated Premium (Part C + D),$0.00 
+H7006-018-0,premium_full_extra_help,Part D Coverage Indicator,Yes
+H7006-018-0,premium_full_extra_help,Part C Premium,$0.00 
+H7006-018-0,premium_full_extra_help,Part D Low Income Beneficiary Premium Amount,$0.00 
+H7006-018-0,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$5,900.00 "
+H7006-018-0,part_d_deductible,Part D Coverage Indicator,Yes
+H7006-018-0,part_d_deductible,Annual Part D Deductible Amount,$400.00 
+H7006-018-0,tier_without_part_d_deductible,Part D Coverage Indicator,Yes
+H7006-018-0,tier_without_part_d_deductible,Offers Drug Tier with No Part D Deductible,Yes
+H7006-018-0,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,Not Applicable
+H7006-018-0,overall_star_rating,Overall Star Rating,2.5
+H7199-002-0,section,SNP Type,Not Applicable
+H7199-002-0,section,Part D Coverage Indicator,Yes
+H7199-002-0,plan_id,Contract ID,H7199
+H7199-002-0,plan_id,Plan ID,002
+H7199-002-0,plan_id,Segment ID,0
+H7199-002-0,plan_name,Plan Name,DEVOTED CHOICE PREMIUM 002 OR (PPO)
+H7199-002-0,plan_type,Plan Type,PPO
+H7199-002-0,organization,Organization Marketing Name,Devoted Health
+H7199-002-0,premium,Part D Coverage Indicator,Yes
+H7199-002-0,premium,Monthly Consolidated Premium (Part C + D),$28.50 
+H7199-002-0,premium_full_extra_help,Part D Coverage Indicator,Yes
+H7199-002-0,premium_full_extra_help,Part C Premium,$28.50 
+H7199-002-0,premium_full_extra_help,Part D Low Income Beneficiary Premium Amount,$0.00 
+H7199-002-0,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$6,000.00 "
+H7199-002-0,part_d_deductible,Part D Coverage Indicator,Yes
+H7199-002-0,part_d_deductible,Annual Part D Deductible Amount,$650.00 
+H7199-002-0,tier_without_part_d_deductible,Part D Coverage Indicator,Yes
+H7199-002-0,tier_without_part_d_deductible,Offers Drug Tier with No Part D Deductible,Yes
+H7199-002-0,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,Not Applicable
+H7199-002-0,overall_star_rating,Overall Star Rating,4.5
+H2923-001-0,section,SNP Type,Not Applicable
+H2923-001-0,section,Part D Coverage Indicator,Yes
+H2923-001-0,plan_id,Contract ID,H2923
+H2923-001-0,plan_id,Plan ID,001
+H2923-001-0,plan_id,Segment ID,0
+H2923-001-0,plan_name,Plan Name,DEVOTED CORE 001 OR (HMO)
+H2923-001-0,plan_type,Plan Type,HMO
+H2923-001-0,organization,Organization Marketing Name,Devoted Health
+H2923-001-0,premium,Part D Coverage Indicator,Yes
+H2923-001-0,premium,Monthly Consolidated Premium (Part C + D),$0.00 
+H2923-001-0,premium_full_extra_help,Part D Coverage Indicator,Yes
+H2923-001-0,premium_full_extra_help,Part C Premium,$0.00 
+H2923-001-0,premium_full_extra_help,Part D Low Income Beneficiary Premium Amount,$0.00 
+H2923-001-0,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$6,700.00 "
+H2923-001-0,part_d_deductible,Part D Coverage Indicator,Yes
+H2923-001-0,part_d_deductible,Annual Part D Deductible Amount,$461.00 
+H2923-001-0,tier_without_part_d_deductible,Part D Coverage Indicator,Yes
+H2923-001-0,tier_without_part_d_deductible,Offers Drug Tier with No Part D Deductible,Yes
+H2923-001-0,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,Not Applicable
+H2923-001-0,overall_star_rating,Overall Star Rating,3.0
+H2923-028-3,section,SNP Type,Not Applicable
+H2923-028-3,section,Part D Coverage Indicator,Yes
+H2923-028-3,plan_id,Contract ID,H2923
+H2923-028-3,plan_id,Plan ID,028
+H2923-028-3,plan_id,Segment ID,3
+H2923-028-3,plan_name,Plan Name,DEVOTED GIVEBACK 028 OR (HMO)
+H2923-028-3,plan_type,Plan Type,HMO
+H2923-028-3,organization,Organization Marketing Name,Devoted Health
+H2923-028-3,premium,Part D Coverage Indicator,Yes
+H2923-028-3,premium,Monthly Consolidated Premium (Part C + D),$0.00 
+H2923-028-3,premium_full_extra_help,Part D Coverage Indicator,Yes
+H2923-028-3,premium_full_extra_help,Part C Premium,$0.00 
+H2923-028-3,premium_full_extra_help,Part D Low Income Beneficiary Premium Amount,$0.00 
+H2923-028-3,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$8,900.00 "
+H2923-028-3,part_d_deductible,Part D Coverage Indicator,Yes
+H2923-028-3,part_d_deductible,Annual Part D Deductible Amount,$461.00 
+H2923-028-3,tier_without_part_d_deductible,Part D Coverage Indicator,Yes
+H2923-028-3,tier_without_part_d_deductible,Offers Drug Tier with No Part D Deductible,Yes
+H2923-028-3,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,Not Applicable
+H2923-028-3,overall_star_rating,Overall Star Rating,3.0
+H2923-025-0,section,SNP Type,Not Applicable
+H2923-025-0,section,Part D Coverage Indicator,Yes
+H2923-025-0,plan_id,Contract ID,H2923
+H2923-025-0,plan_id,Plan ID,025
+H2923-025-0,plan_id,Segment ID,0
+H2923-025-0,plan_name,Plan Name,DEVOTED GIVEBACK EXTRAS 025 OR (HMO)
+H2923-025-0,plan_type,Plan Type,HMO
+H2923-025-0,organization,Organization Marketing Name,Devoted Health
+H2923-025-0,premium,Part D Coverage Indicator,Yes
+H2923-025-0,premium,Monthly Consolidated Premium (Part C + D),$0.00 
+H2923-025-0,premium_full_extra_help,Part D Coverage Indicator,Yes
+H2923-025-0,premium_full_extra_help,Part C Premium,$0.00 
+H2923-025-0,premium_full_extra_help,Part D Low Income Beneficiary Premium Amount,$0.00 
+H2923-025-0,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$7,700.00 "
+H2923-025-0,part_d_deductible,Part D Coverage Indicator,Yes
+H2923-025-0,part_d_deductible,Annual Part D Deductible Amount,$700.00 
+H2923-025-0,tier_without_part_d_deductible,Part D Coverage Indicator,Yes
+H2923-025-0,tier_without_part_d_deductible,Offers Drug Tier with No Part D Deductible,Yes
+H2923-025-0,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,Not Applicable
+H2923-025-0,overall_star_rating,Overall Star Rating,3.0
+H2923-005-0,section,SNP Type,Not Applicable
+H2923-005-0,section,Part D Coverage Indicator,Yes
+H2923-005-0,plan_id,Contract ID,H2923
+H2923-005-0,plan_id,Plan ID,005
+H2923-005-0,plan_id,Segment ID,0
+H2923-005-0,plan_name,Plan Name,DEVOTED PREMIUM 005 OR (HMO)
+H2923-005-0,plan_type,Plan Type,HMO
+H2923-005-0,organization,Organization Marketing Name,Devoted Health
+H2923-005-0,premium,Part D Coverage Indicator,Yes
+H2923-005-0,premium,Monthly Consolidated Premium (Part C + D),$43.00 
+H2923-005-0,premium_full_extra_help,Part D Coverage Indicator,Yes
+H2923-005-0,premium_full_extra_help,Part C Premium,$43.00 
+H2923-005-0,premium_full_extra_help,Part D Low Income Beneficiary Premium Amount,$0.00 
+H2923-005-0,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$5,900.00 "
+H2923-005-0,part_d_deductible,Part D Coverage Indicator,Yes
+H2923-005-0,part_d_deductible,Annual Part D Deductible Amount,$650.00 
+H2923-005-0,tier_without_part_d_deductible,Part D Coverage Indicator,Yes
+H2923-005-0,tier_without_part_d_deductible,Offers Drug Tier with No Part D Deductible,Yes
+H2923-005-0,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,Not Applicable
+H2923-005-0,overall_star_rating,Overall Star Rating,3.0
+H1036-323-0,section,SNP Type,Not Applicable
+H1036-323-0,section,Part D Coverage Indicator,Yes
+H1036-323-0,plan_id,Contract ID,H1036
+H1036-323-0,plan_id,Plan ID,323
+H1036-323-0,plan_id,Segment ID,0
+H1036-323-0,plan_name,Plan Name,Humana Essentials Plus Giveback (HMO)
+H1036-323-0,plan_type,Plan Type,HMO
+H1036-323-0,organization,Organization Marketing Name,Humana
+H1036-323-0,premium,Part D Coverage Indicator,Yes
+H1036-323-0,premium,Monthly Consolidated Premium (Part C + D),$0.00 
+H1036-323-0,premium_full_extra_help,Part D Coverage Indicator,Yes
+H1036-323-0,premium_full_extra_help,Part C Premium,$0.00 
+H1036-323-0,premium_full_extra_help,Part D Low Income Beneficiary Premium Amount,$0.00 
+H1036-323-0,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$9,050.00 "
+H1036-323-0,part_d_deductible,Part D Coverage Indicator,Yes
+H1036-323-0,part_d_deductible,Annual Part D Deductible Amount,$700.00 
+H1036-323-0,tier_without_part_d_deductible,Part D Coverage Indicator,Yes
+H1036-323-0,tier_without_part_d_deductible,Offers Drug Tier with No Part D Deductible,Yes
+H1036-323-0,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,Not Applicable
+H1036-323-0,overall_star_rating,Overall Star Rating,4.5
+H1036-153-0,section,SNP Type,Not Applicable
+H1036-153-0,section,Part D Coverage Indicator,Yes
+H1036-153-0,plan_id,Contract ID,H1036
+H1036-153-0,plan_id,Plan ID,153
+H1036-153-0,plan_id,Segment ID,0
+H1036-153-0,plan_name,Plan Name,Humana Total Complete (HMO)
+H1036-153-0,plan_type,Plan Type,HMO
+H1036-153-0,organization,Organization Marketing Name,Humana
+H1036-153-0,premium,Part D Coverage Indicator,Yes
+H1036-153-0,premium,Monthly Consolidated Premium (Part C + D),$0.00 
+H1036-153-0,premium_full_extra_help,Part D Coverage Indicator,Yes
+H1036-153-0,premium_full_extra_help,Part C Premium,$0.00 
+H1036-153-0,premium_full_extra_help,Part D Low Income Beneficiary Premium Amount,$0.00 
+H1036-153-0,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$5,150.00 "
+H1036-153-0,part_d_deductible,Part D Coverage Indicator,Yes
+H1036-153-0,part_d_deductible,Annual Part D Deductible Amount,$700.00 
+H1036-153-0,tier_without_part_d_deductible,Part D Coverage Indicator,Yes
+H1036-153-0,tier_without_part_d_deductible,Offers Drug Tier with No Part D Deductible,Yes
+H1036-153-0,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,Not Applicable
+H1036-153-0,overall_star_rating,Overall Star Rating,4.5
+H5216-428-2,section,SNP Type,Not Applicable
+H5216-428-2,section,Part D Coverage Indicator,Yes
+H5216-428-2,plan_id,Contract ID,H5216
+H5216-428-2,plan_id,Plan ID,428
+H5216-428-2,plan_id,Segment ID,2
+H5216-428-2,plan_name,Plan Name,Humana Value Choice (PPO)
+H5216-428-2,plan_type,Plan Type,PPO
+H5216-428-2,organization,Organization Marketing Name,Humana
+H5216-428-2,premium,Part D Coverage Indicator,Yes
+H5216-428-2,premium,Monthly Consolidated Premium (Part C + D),$0.00 
+H5216-428-2,premium_full_extra_help,Part D Coverage Indicator,Yes
+H5216-428-2,premium_full_extra_help,Part C Premium,$0.00 
+H5216-428-2,premium_full_extra_help,Part D Low Income Beneficiary Premium Amount,$0.00 
+H5216-428-2,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$6,950.00 "
+H5216-428-2,part_d_deductible,Part D Coverage Indicator,Yes
+H5216-428-2,part_d_deductible,Annual Part D Deductible Amount,$700.00 
+H5216-428-2,tier_without_part_d_deductible,Part D Coverage Indicator,Yes
+H5216-428-2,tier_without_part_d_deductible,Offers Drug Tier with No Part D Deductible,Yes
+H5216-428-2,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,Not Applicable
+H5216-428-2,overall_star_rating,Overall Star Rating,4.0
+H5216-048-0,section,SNP Type,Not Applicable
+H5216-048-0,section,Part D Coverage Indicator,Yes
+H5216-048-0,plan_id,Contract ID,H5216
+H5216-048-0,plan_id,Plan ID,048
+H5216-048-0,plan_id,Segment ID,0
+H5216-048-0,plan_name,Plan Name,HumanaChoice H5216-048 (PPO)
+H5216-048-0,plan_type,Plan Type,PPO
+H5216-048-0,organization,Organization Marketing Name,Humana
+H5216-048-0,premium,Part D Coverage Indicator,Yes
+H5216-048-0,premium,Monthly Consolidated Premium (Part C + D),$97.00 
+H5216-048-0,premium_full_extra_help,Part D Coverage Indicator,Yes
+H5216-048-0,premium_full_extra_help,Part C Premium,$0.00 
+H5216-048-0,premium_full_extra_help,Part D Low Income Beneficiary Premium Amount,$82.60 
+H5216-048-0,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$7,000.00 "
+H5216-048-0,part_d_deductible,Part D Coverage Indicator,Yes
+H5216-048-0,part_d_deductible,Annual Part D Deductible Amount,$700.00 
+H5216-048-0,tier_without_part_d_deductible,Part D Coverage Indicator,Yes
+H5216-048-0,tier_without_part_d_deductible,Offers Drug Tier with No Part D Deductible,Yes
+H5216-048-0,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,Not Applicable
+H5216-048-0,overall_star_rating,Overall Star Rating,4.0
+H9003-001-0,section,SNP Type,Not Applicable
+H9003-001-0,section,Part D Coverage Indicator,Yes
+H9003-001-0,plan_id,Contract ID,H9003
+H9003-001-0,plan_id,Plan ID,001
+H9003-001-0,plan_id,Segment ID,0
+H9003-001-0,plan_name,Plan Name,Kaiser Permanente Senior Advantage Enhanced (HMO-POS)
+H9003-001-0,plan_type,Plan Type,HMO-POS
+H9003-001-0,organization,Organization Marketing Name,Kaiser Permanente
+H9003-001-0,premium,Part D Coverage Indicator,Yes
+H9003-001-0,premium,Monthly Consolidated Premium (Part C + D),$134.00 
+H9003-001-0,premium_full_extra_help,Part D Coverage Indicator,Yes
+H9003-001-0,premium_full_extra_help,Part C Premium,$134.00 
+H9003-001-0,premium_full_extra_help,Part D Low Income Beneficiary Premium Amount,$0.00 
+H9003-001-0,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$4,000.00 "
+H9003-001-0,part_d_deductible,Part D Coverage Indicator,Yes
+H9003-001-0,part_d_deductible,Annual Part D Deductible Amount,$0.00 
+H9003-001-0,tier_without_part_d_deductible,Part D Coverage Indicator,Yes
+H9003-001-0,tier_without_part_d_deductible,Offers Drug Tier with No Part D Deductible,Not Applicable
+H9003-001-0,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,Not Applicable
+H9003-001-0,overall_star_rating,Overall Star Rating,4.5
+H9003-006-0,section,SNP Type,Not Applicable
+H9003-006-0,section,Part D Coverage Indicator,Yes
+H9003-006-0,plan_id,Contract ID,H9003
+H9003-006-0,plan_id,Plan ID,006
+H9003-006-0,plan_id,Segment ID,0
+H9003-006-0,plan_name,Plan Name,Kaiser Permanente Senior Advantage Standard (HMO-POS)
+H9003-006-0,plan_type,Plan Type,HMO-POS
+H9003-006-0,organization,Organization Marketing Name,Kaiser Permanente
+H9003-006-0,premium,Part D Coverage Indicator,Yes
+H9003-006-0,premium,Monthly Consolidated Premium (Part C + D),$49.00 
+H9003-006-0,premium_full_extra_help,Part D Coverage Indicator,Yes
+H9003-006-0,premium_full_extra_help,Part C Premium,$49.00 
+H9003-006-0,premium_full_extra_help,Part D Low Income Beneficiary Premium Amount,$0.00 
+H9003-006-0,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$5,250.00 "
+H9003-006-0,part_d_deductible,Part D Coverage Indicator,Yes
+H9003-006-0,part_d_deductible,Annual Part D Deductible Amount,$0.00 
+H9003-006-0,tier_without_part_d_deductible,Part D Coverage Indicator,Yes
+H9003-006-0,tier_without_part_d_deductible,Offers Drug Tier with No Part D Deductible,Not Applicable
+H9003-006-0,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,Not Applicable
+H9003-006-0,overall_star_rating,Overall Star Rating,4.5
+H9003-009-0,section,SNP Type,Not Applicable
+H9003-009-0,section,Part D Coverage Indicator,Yes
+H9003-009-0,plan_id,Contract ID,H9003
+H9003-009-0,plan_id,Plan ID,009
+H9003-009-0,plan_id,Segment ID,0
+H9003-009-0,plan_name,Plan Name,Kaiser Permanente Senior Advantage Value (HMO-POS)
+H9003-009-0,plan_type,Plan Type,HMO-POS
+H9003-009-0,organization,Organization Marketing Name,Kaiser Permanente
+H9003-009-0,premium,Part D Coverage Indicator,Yes
+H9003-009-0,premium,Monthly Consolidated Premium (Part C + D),$0.00 
+H9003-009-0,premium_full_extra_help,Part D Coverage Indicator,Yes
+H9003-009-0,premium_full_extra_help,Part C Premium,$0.00 
+H9003-009-0,premium_full_extra_help,Part D Low Income Beneficiary Premium Amount,$0.00 
+H9003-009-0,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$6,750.00 "
+H9003-009-0,part_d_deductible,Part D Coverage Indicator,Yes
+H9003-009-0,part_d_deductible,Annual Part D Deductible Amount,$0.00 
+H9003-009-0,tier_without_part_d_deductible,Part D Coverage Indicator,Yes
+H9003-009-0,tier_without_part_d_deductible,Offers Drug Tier with No Part D Deductible,Not Applicable
+H9003-009-0,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,Not Applicable
+H9003-009-0,overall_star_rating,Overall Star Rating,4.5
+H3817-008-1,section,SNP Type,Not Applicable
+H3817-008-1,section,Part D Coverage Indicator,Yes
+H3817-008-1,plan_id,Contract ID,H3817
+H3817-008-1,plan_id,Plan ID,008
+H3817-008-1,plan_id,Segment ID,1
+H3817-008-1,plan_name,Plan Name,Regence MedAdvantage + Rx Classic (PPO)
+H3817-008-1,plan_type,Plan Type,PPO
+H3817-008-1,organization,Organization Marketing Name,Regence BlueCross BlueShield of Oregon
+H3817-008-1,premium,Part D Coverage Indicator,Yes
+H3817-008-1,premium,Monthly Consolidated Premium (Part C + D),$130.00 
+H3817-008-1,premium_full_extra_help,Part D Coverage Indicator,Yes
+H3817-008-1,premium_full_extra_help,Part C Premium,$76.30 
+H3817-008-1,premium_full_extra_help,Part D Low Income Beneficiary Premium Amount,$47.40 
+H3817-008-1,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$6,700.00 "
+H3817-008-1,part_d_deductible,Part D Coverage Indicator,Yes
+H3817-008-1,part_d_deductible,Annual Part D Deductible Amount,$590.00 
+H3817-008-1,tier_without_part_d_deductible,Part D Coverage Indicator,Yes
+H3817-008-1,tier_without_part_d_deductible,Offers Drug Tier with No Part D Deductible,Yes
+H3817-008-1,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,Not Applicable
+H3817-008-1,overall_star_rating,Overall Star Rating,3.5
+H3817-009-1,section,SNP Type,Not Applicable
+H3817-009-1,section,Part D Coverage Indicator,Yes
+H3817-009-1,plan_id,Contract ID,H3817
+H3817-009-1,plan_id,Plan ID,009
+H3817-009-1,plan_id,Segment ID,1
+H3817-009-1,plan_name,Plan Name,Regence MedAdvantage + Rx Enhanced (PPO)
+H3817-009-1,plan_type,Plan Type,PPO
+H3817-009-1,organization,Organization Marketing Name,Regence BlueCross BlueShield of Oregon
+H3817-009-1,premium,Part D Coverage Indicator,Yes
+H3817-009-1,premium,Monthly Consolidated Premium (Part C + D),$244.00 
+H3817-009-1,premium_full_extra_help,Part D Coverage Indicator,Yes
+H3817-009-1,premium_full_extra_help,Part C Premium,$160.90 
+H3817-009-1,premium_full_extra_help,Part D Low Income Beneficiary Premium Amount,$76.80 
+H3817-009-1,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$5,900.00 "
+H3817-009-1,part_d_deductible,Part D Coverage Indicator,Yes
+H3817-009-1,part_d_deductible,Annual Part D Deductible Amount,$305.00 
+H3817-009-1,tier_without_part_d_deductible,Part D Coverage Indicator,Yes
+H3817-009-1,tier_without_part_d_deductible,Offers Drug Tier with No Part D Deductible,Yes
+H3817-009-1,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,Not Applicable
+H3817-009-1,overall_star_rating,Overall Star Rating,3.5
+H3817-011-1,section,SNP Type,Not Applicable
+H3817-011-1,section,Part D Coverage Indicator,Yes
+H3817-011-1,plan_id,Contract ID,H3817
+H3817-011-1,plan_id,Plan ID,011
+H3817-011-1,plan_id,Segment ID,1
+H3817-011-1,plan_name,Plan Name,Regence MedAdvantage + Rx Primary (PPO)
+H3817-011-1,plan_type,Plan Type,PPO
+H3817-011-1,organization,Organization Marketing Name,Regence BlueCross BlueShield of Oregon
+H3817-011-1,premium,Part D Coverage Indicator,Yes
+H3817-011-1,premium,Monthly Consolidated Premium (Part C + D),$88.00 
+H3817-011-1,premium_full_extra_help,Part D Coverage Indicator,Yes
+H3817-011-1,premium_full_extra_help,Part C Premium,$72.50 
+H3817-011-1,premium_full_extra_help,Part D Low Income Beneficiary Premium Amount,$9.20 
+H3817-011-1,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$7,150.00 "
+H3817-011-1,part_d_deductible,Part D Coverage Indicator,Yes
+H3817-011-1,part_d_deductible,Annual Part D Deductible Amount,$700.00 
+H3817-011-1,tier_without_part_d_deductible,Part D Coverage Indicator,Yes
+H3817-011-1,tier_without_part_d_deductible,Offers Drug Tier with No Part D Deductible,Yes
+H3817-011-1,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,Not Applicable
+H3817-011-1,overall_star_rating,Overall Star Rating,3.5
+H6815-038-0,section,SNP Type,Not Applicable
+H6815-038-0,section,Part D Coverage Indicator,Yes
+H6815-038-0,plan_id,Contract ID,H6815
+H6815-038-0,plan_id,Plan ID,038
+H6815-038-0,plan_id,Segment ID,0
+H6815-038-0,plan_name,Plan Name,Wellcare Low Premium (HMO-POS)
+H6815-038-0,plan_type,Plan Type,HMO-POS
+H6815-038-0,organization,Organization Marketing Name,Wellcare
+H6815-038-0,premium,Part D Coverage Indicator,Yes
+H6815-038-0,premium,Monthly Consolidated Premium (Part C + D),$44.50 
+H6815-038-0,premium_full_extra_help,Part D Coverage Indicator,Yes
+H6815-038-0,premium_full_extra_help,Part C Premium,$44.50 
+H6815-038-0,premium_full_extra_help,Part D Low Income Beneficiary Premium Amount,$0.00 
+H6815-038-0,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$7,900.00 "
+H6815-038-0,part_d_deductible,Part D Coverage Indicator,Yes
+H6815-038-0,part_d_deductible,Annual Part D Deductible Amount,$700.00 
+H6815-038-0,tier_without_part_d_deductible,Part D Coverage Indicator,Yes
+H6815-038-0,tier_without_part_d_deductible,Offers Drug Tier with No Part D Deductible,Yes
+H6815-038-0,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,Not Applicable
+H6815-038-0,overall_star_rating,Overall Star Rating,3.0
+H5439-015-0,section,SNP Type,Not Applicable
+H5439-015-0,section,Part D Coverage Indicator,Yes
+H5439-015-0,plan_id,Contract ID,H5439
+H5439-015-0,plan_id,Plan ID,015
+H5439-015-0,plan_id,Segment ID,0
+H5439-015-0,plan_name,Plan Name,Wellcare Low Premium Open (PPO)
+H5439-015-0,plan_type,Plan Type,PPO
+H5439-015-0,organization,Organization Marketing Name,Wellcare
+H5439-015-0,premium,Part D Coverage Indicator,Yes
+H5439-015-0,premium,Monthly Consolidated Premium (Part C + D),$29.00 
+H5439-015-0,premium_full_extra_help,Part D Coverage Indicator,Yes
+H5439-015-0,premium_full_extra_help,Part C Premium,$29.00 
+H5439-015-0,premium_full_extra_help,Part D Low Income Beneficiary Premium Amount,$0.00 
+H5439-015-0,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$9,250.00 "
+H5439-015-0,part_d_deductible,Part D Coverage Indicator,Yes
+H5439-015-0,part_d_deductible,Annual Part D Deductible Amount,$700.00 
+H5439-015-0,tier_without_part_d_deductible,Part D Coverage Indicator,Yes
+H5439-015-0,tier_without_part_d_deductible,Offers Drug Tier with No Part D Deductible,Yes
+H5439-015-0,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,Not Applicable
+H5439-015-0,overall_star_rating,Overall Star Rating,3.0
+H5439-019-0,section,SNP Type,Not Applicable
+H5439-019-0,section,Part D Coverage Indicator,Yes
+H5439-019-0,plan_id,Contract ID,H5439
+H5439-019-0,plan_id,Plan ID,019
+H5439-019-0,plan_id,Segment ID,0
+H5439-019-0,plan_name,Plan Name,Wellcare Premium Enhanced Open (PPO)
+H5439-019-0,plan_type,Plan Type,PPO
+H5439-019-0,organization,Organization Marketing Name,Wellcare
+H5439-019-0,premium,Part D Coverage Indicator,Yes
+H5439-019-0,premium,Monthly Consolidated Premium (Part C + D),$76.60 
+H5439-019-0,premium_full_extra_help,Part D Coverage Indicator,Yes
+H5439-019-0,premium_full_extra_help,Part C Premium,$76.60 
+H5439-019-0,premium_full_extra_help,Part D Low Income Beneficiary Premium Amount,$0.00 
+H5439-019-0,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$7,000.00 "
+H5439-019-0,part_d_deductible,Part D Coverage Indicator,Yes
+H5439-019-0,part_d_deductible,Annual Part D Deductible Amount,$700.00 
+H5439-019-0,tier_without_part_d_deductible,Part D Coverage Indicator,Yes
+H5439-019-0,tier_without_part_d_deductible,Offers Drug Tier with No Part D Deductible,Yes
+H5439-019-0,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,Not Applicable
+H5439-019-0,overall_star_rating,Overall Star Rating,3.0
+H5439-011-0,section,SNP Type,Not Applicable
+H5439-011-0,section,Part D Coverage Indicator,Yes
+H5439-011-0,plan_id,Contract ID,H5439
+H5439-011-0,plan_id,Plan ID,011
+H5439-011-0,plan_id,Segment ID,0
+H5439-011-0,plan_name,Plan Name,Wellcare Premium Ultra Open (PPO)
+H5439-011-0,plan_type,Plan Type,PPO
+H5439-011-0,organization,Organization Marketing Name,Wellcare
+H5439-011-0,premium,Part D Coverage Indicator,Yes
+H5439-011-0,premium,Monthly Consolidated Premium (Part C + D),$206.00 
+H5439-011-0,premium_full_extra_help,Part D Coverage Indicator,Yes
+H5439-011-0,premium_full_extra_help,Part C Premium,$159.40 
+H5439-011-0,premium_full_extra_help,Part D Low Income Beneficiary Premium Amount,$40.30 
+H5439-011-0,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$6,500.00 "
+H5439-011-0,part_d_deductible,Part D Coverage Indicator,Yes
+H5439-011-0,part_d_deductible,Annual Part D Deductible Amount,$700.00 
+H5439-011-0,tier_without_part_d_deductible,Part D Coverage Indicator,Yes
+H5439-011-0,tier_without_part_d_deductible,Offers Drug Tier with No Part D Deductible,Yes
+H5439-011-0,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,Not Applicable
+H5439-011-0,overall_star_rating,Overall Star Rating,3.0
+H1372-003-0,section,SNP Type,Chronic or Disabling Condition
+H1372-003-0,plan_id,Contract ID,H1372
+H1372-003-0,plan_id,Plan ID,003
+H1372-003-0,plan_id,Segment ID,0
+H1372-003-0,plan_name,Plan Name,AgeRight Advantage Premier Health Plan (HMO C-SNP)
+H1372-003-0,plan_type,Plan Type,HMO C-SNP
+H1372-003-0,organization,Organization Marketing Name,AgeRight Advantage
+H1372-003-0,premium,Part D Coverage Indicator,Yes
+H1372-003-0,premium,Monthly Consolidated Premium (Part C + D),$69.00 
+H1372-003-0,premium_full_extra_help,Part D Coverage Indicator,Yes
+H1372-003-0,premium_full_extra_help,Part C Premium,$25.70 
+H1372-003-0,premium_full_extra_help,Part D Low Income Beneficiary Premium Amount,$43.30 
+H1372-003-0,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$6,500.00 "
+H1372-003-0,part_d_deductible,Part D Coverage Indicator,Yes
+H1372-003-0,part_d_deductible,Annual Part D Deductible Amount,$400.00 
+H1372-003-0,tier_without_part_d_deductible,Part D Coverage Indicator,Yes
+H1372-003-0,tier_without_part_d_deductible,Offers Drug Tier with No Part D Deductible,Yes
+H1372-003-0,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,"CardiovascularDisorders,ChronicHeartFailure,DiabetesMellitus"
+H1372-003-0,overall_star_rating,Overall Star Rating,Not Enough Data Available
+H2923-019-0,section,SNP Type,Chronic or Disabling Condition
+H2923-019-0,plan_id,Contract ID,H2923
+H2923-019-0,plan_id,Plan ID,019
+H2923-019-0,plan_id,Segment ID,0
+H2923-019-0,plan_name,Plan Name,DEVOTED C-SNP GIVEBACK EXTRAS 019 OR (HMO C-SNP)
+H2923-019-0,plan_type,Plan Type,HMO C-SNP
+H2923-019-0,organization,Organization Marketing Name,Devoted Health
+H2923-019-0,premium,Part D Coverage Indicator,Yes
+H2923-019-0,premium,Monthly Consolidated Premium (Part C + D),$0.00 
+H2923-019-0,premium_full_extra_help,Part D Coverage Indicator,Yes
+H2923-019-0,premium_full_extra_help,Part C Premium,$0.00 
+H2923-019-0,premium_full_extra_help,Part D Low Income Beneficiary Premium Amount,$0.00 
+H2923-019-0,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$7,700.00 "
+H2923-019-0,part_d_deductible,Part D Coverage Indicator,Yes
+H2923-019-0,part_d_deductible,Annual Part D Deductible Amount,$700.00 
+H2923-019-0,tier_without_part_d_deductible,Part D Coverage Indicator,Yes
+H2923-019-0,tier_without_part_d_deductible,Offers Drug Tier with No Part D Deductible,Yes
+H2923-019-0,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,"CardiovascularDisorders,ChronicHeartFailure,DiabetesMellitus"
+H2923-019-0,overall_star_rating,Overall Star Rating,3.0
+H2923-009-0,section,SNP Type,Chronic or Disabling Condition
+H2923-009-0,plan_id,Contract ID,H2923
+H2923-009-0,plan_id,Plan ID,009
+H2923-009-0,plan_id,Segment ID,0
+H2923-009-0,plan_name,Plan Name,DEVOTED C-SNP PLUS 009 OR (HMO C-SNP)
+H2923-009-0,plan_type,Plan Type,HMO C-SNP
+H2923-009-0,organization,Organization Marketing Name,Devoted Health
+H2923-009-0,premium,Part D Coverage Indicator,Yes
+H2923-009-0,premium,Monthly Consolidated Premium (Part C + D),$0.00 
+H2923-009-0,premium_full_extra_help,Part D Coverage Indicator,Yes
+H2923-009-0,premium_full_extra_help,Part C Premium,$0.00 
+H2923-009-0,premium_full_extra_help,Part D Low Income Beneficiary Premium Amount,$0.00 
+H2923-009-0,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$9,850.00 "
+H2923-009-0,part_d_deductible,Part D Coverage Indicator,Yes
+H2923-009-0,part_d_deductible,Annual Part D Deductible Amount,$461.00 
+H2923-009-0,tier_without_part_d_deductible,Part D Coverage Indicator,Yes
+H2923-009-0,tier_without_part_d_deductible,Offers Drug Tier with No Part D Deductible,Yes
+H2923-009-0,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,"CardiovascularDisorders,ChronicHeartFailure,DiabetesMellitus"
+H2923-009-0,overall_star_rating,Overall Star Rating,3.0
+H1036-306-0,section,SNP Type,Chronic or Disabling Condition
+H1036-306-0,plan_id,Contract ID,H1036
+H1036-306-0,plan_id,Plan ID,306
+H1036-306-0,plan_id,Segment ID,0
+H1036-306-0,plan_name,Plan Name,Humana Gold Plus - Diabetes and Heart (HMO C-SNP)
+H1036-306-0,plan_type,Plan Type,HMO C-SNP
+H1036-306-0,organization,Organization Marketing Name,Humana
+H1036-306-0,premium,Part D Coverage Indicator,Yes
+H1036-306-0,premium,Monthly Consolidated Premium (Part C + D),$0.00 
+H1036-306-0,premium_full_extra_help,Part D Coverage Indicator,Yes
+H1036-306-0,premium_full_extra_help,Part C Premium,$0.00 
+H1036-306-0,premium_full_extra_help,Part D Low Income Beneficiary Premium Amount,$0.00 
+H1036-306-0,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$4,550.00 "
+H1036-306-0,part_d_deductible,Part D Coverage Indicator,Yes
+H1036-306-0,part_d_deductible,Annual Part D Deductible Amount,$500.00 
+H1036-306-0,tier_without_part_d_deductible,Part D Coverage Indicator,Yes
+H1036-306-0,tier_without_part_d_deductible,Offers Drug Tier with No Part D Deductible,Yes
+H1036-306-0,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,"CardiovascularDisorders,ChronicHeartFailure,DiabetesMellitus"
+H1036-306-0,overall_star_rating,Overall Star Rating,4.5
+H1036-317-0,section,SNP Type,Chronic or Disabling Condition
+H1036-317-0,plan_id,Contract ID,H1036
+H1036-317-0,plan_id,Plan ID,317
+H1036-317-0,plan_id,Segment ID,0
+H1036-317-0,plan_name,Plan Name,Humana Gold Plus - Diabetes and Heart (HMO C-SNP)
+H1036-317-0,plan_type,Plan Type,HMO C-SNP
+H1036-317-0,organization,Organization Marketing Name,Humana
+H1036-317-0,premium,Part D Coverage Indicator,Yes
+H1036-317-0,premium,Monthly Consolidated Premium (Part C + D),$0.00 
+H1036-317-0,premium_full_extra_help,Part D Coverage Indicator,Yes
+H1036-317-0,premium_full_extra_help,Part C Premium,$0.00 
+H1036-317-0,premium_full_extra_help,Part D Low Income Beneficiary Premium Amount,$0.00 
+H1036-317-0,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$9,850.00 "
+H1036-317-0,part_d_deductible,Part D Coverage Indicator,Yes
+H1036-317-0,part_d_deductible,Annual Part D Deductible Amount,$700.00 
+H1036-317-0,tier_without_part_d_deductible,Part D Coverage Indicator,Yes
+H1036-317-0,tier_without_part_d_deductible,Offers Drug Tier with No Part D Deductible,Yes
+H1036-317-0,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,"CardiovascularDisorders,ChronicHeartFailure,DiabetesMellitus"
+H1036-317-0,overall_star_rating,Overall Star Rating,4.5
+H3805-040-0,section,SNP Type,Chronic or Disabling Condition
+H3805-040-0,plan_id,Contract ID,H3805
+H3805-040-0,plan_id,Plan ID,040
+H3805-040-0,plan_id,Segment ID,0
+H3805-040-0,plan_name,Plan Name,UHC Complete Care OR-5 (HMO-POS C-SNP)
+H3805-040-0,plan_type,Plan Type,HMO-POS C-SNP
+H3805-040-0,organization,Organization Marketing Name,UnitedHealthcare
+H3805-040-0,premium,Part D Coverage Indicator,Yes
+H3805-040-0,premium,Monthly Consolidated Premium (Part C + D),$0.00 
+H3805-040-0,premium_full_extra_help,Part D Coverage Indicator,Yes
+H3805-040-0,premium_full_extra_help,Part C Premium,$0.00 
+H3805-040-0,premium_full_extra_help,Part D Low Income Beneficiary Premium Amount,$0.00 
+H3805-040-0,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$7,150.00 "
+H3805-040-0,part_d_deductible,Part D Coverage Indicator,Yes
+H3805-040-0,part_d_deductible,Annual Part D Deductible Amount,$685.00 
+H3805-040-0,tier_without_part_d_deductible,Part D Coverage Indicator,Yes
+H3805-040-0,tier_without_part_d_deductible,Offers Drug Tier with No Part D Deductible,Yes
+H3805-040-0,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,"CardiovascularDisorders,ChronicHeartFailure,DiabetesMellitus"
+H3805-040-0,overall_star_rating,Overall Star Rating,3.5
+H2001-045-0,section,SNP Type,Chronic or Disabling Condition
+H2001-045-0,plan_id,Contract ID,H2001
+H2001-045-0,plan_id,Plan ID,045
+H2001-045-0,plan_id,Segment ID,0
+H2001-045-0,plan_name,Plan Name,UHC Complete Care Support OR-1A (PPO C-SNP)
+H2001-045-0,plan_type,Plan Type,PPO C-SNP
+H2001-045-0,organization,Organization Marketing Name,UnitedHealthcare
+H2001-045-0,premium,Part D Coverage Indicator,Yes
+H2001-045-0,premium,Monthly Consolidated Premium (Part C + D),$0.00 
+H2001-045-0,premium_full_extra_help,Part D Coverage Indicator,Yes
+H2001-045-0,premium_full_extra_help,Part C Premium,$0.00 
+H2001-045-0,premium_full_extra_help,Part D Low Income Beneficiary Premium Amount,$0.00 
+H2001-045-0,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$9,850.00 "
+H2001-045-0,part_d_deductible,Part D Coverage Indicator,Yes
+H2001-045-0,part_d_deductible,Annual Part D Deductible Amount,$700.00 
+H2001-045-0,tier_without_part_d_deductible,Part D Coverage Indicator,Yes
+H2001-045-0,tier_without_part_d_deductible,Offers Drug Tier with No Part D Deductible,Yes
+H2001-045-0,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,"CardiovascularDisorders,ChronicHeartFailure,DiabetesMellitus"
+H2001-045-0,overall_star_rating,Overall Star Rating,4.5
+H2406-073-0,section,SNP Type,Not Applicable
+H2406-073-0,section,Part D Coverage Indicator,No
+H2406-073-0,plan_id,Contract ID,H2406
+H2406-073-0,plan_id,Plan ID,073
+H2406-073-0,plan_id,Segment ID,0
+H2406-073-0,plan_name,Plan Name,AARP Medicare Advantage Patriot No Rx OR-MA01 (PPO)
+H2406-073-0,plan_type,Plan Type,PPO
+H2406-073-0,organization,Organization Marketing Name,UnitedHealthcare
+H2406-073-0,premium,Part D Coverage Indicator,No
+H2406-073-0,premium,Part C Premium,$0.00 
+H2406-073-0,premium_full_extra_help,Part D Coverage Indicator,No
+H2406-073-0,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$7,150.00 "
+H2406-073-0,part_d_deductible,Part D Coverage Indicator,No
+H2406-073-0,tier_without_part_d_deductible,Part D Coverage Indicator,No
+H2406-073-0,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,Not Applicable
+H2406-073-0,overall_star_rating,Overall Star Rating,4.0
+H2056-018-0,section,SNP Type,Not Applicable
+H2056-018-0,section,Part D Coverage Indicator,No
+H2056-018-0,plan_id,Contract ID,H2056
+H2056-018-0,plan_id,Plan ID,018
+H2056-018-0,plan_id,Segment ID,0
+H2056-018-0,plan_name,Plan Name,Aetna Medicare Eagle (HMO)
+H2056-018-0,plan_type,Plan Type,HMO
+H2056-018-0,organization,Organization Marketing Name,Aetna Medicare
+H2056-018-0,premium,Part D Coverage Indicator,No
+H2056-018-0,premium,Part C Premium,$0.00 
+H2056-018-0,premium_full_extra_help,Part D Coverage Indicator,No
+H2056-018-0,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$5,500.00 "
+H2056-018-0,part_d_deductible,Part D Coverage Indicator,No
+H2056-018-0,tier_without_part_d_deductible,Part D Coverage Indicator,No
+H2056-018-0,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,Not Applicable
+H2056-018-0,overall_star_rating,Overall Star Rating,3.0
+H7006-021-0,section,SNP Type,Not Applicable
+H7006-021-0,section,Part D Coverage Indicator,No
+H7006-021-0,plan_id,Contract ID,H7006
+H7006-021-0,plan_id,Plan ID,021
+H7006-021-0,plan_id,Segment ID,0
+H7006-021-0,plan_name,Plan Name,ATRIO Freedom (PPO)
+H7006-021-0,plan_type,Plan Type,PPO
+H7006-021-0,organization,Organization Marketing Name,ATRIO Health Plans
+H7006-021-0,premium,Part D Coverage Indicator,No
+H7006-021-0,premium,Part C Premium,$0.00 
+H7006-021-0,premium_full_extra_help,Part D Coverage Indicator,No
+H7006-021-0,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$4,450.00 "
+H7006-021-0,part_d_deductible,Part D Coverage Indicator,No
+H7006-021-0,tier_without_part_d_deductible,Part D Coverage Indicator,No
+H7006-021-0,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,Not Applicable
+H7006-021-0,overall_star_rating,Overall Star Rating,2.5
+H5216-427-2,section,SNP Type,Not Applicable
+H5216-427-2,section,Part D Coverage Indicator,No
+H5216-427-2,plan_id,Contract ID,H5216
+H5216-427-2,plan_id,Plan ID,427
+H5216-427-2,plan_id,Segment ID,2
+H5216-427-2,plan_name,Plan Name,Humana USAA Honor Giveback (PPO)
+H5216-427-2,plan_type,Plan Type,PPO
+H5216-427-2,organization,Organization Marketing Name,Humana
+H5216-427-2,premium,Part D Coverage Indicator,No
+H5216-427-2,premium,Part C Premium,$0.00 
+H5216-427-2,premium_full_extra_help,Part D Coverage Indicator,No
+H5216-427-2,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$9,150.00 "
+H5216-427-2,part_d_deductible,Part D Coverage Indicator,No
+H5216-427-2,tier_without_part_d_deductible,Part D Coverage Indicator,No
+H5216-427-2,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,Not Applicable
+H5216-427-2,overall_star_rating,Overall Star Rating,4.0
+H5216-455-0,section,SNP Type,Not Applicable
+H5216-455-0,section,Part D Coverage Indicator,No
+H5216-455-0,plan_id,Contract ID,H5216
+H5216-455-0,plan_id,Plan ID,455
+H5216-455-0,plan_id,Segment ID,0
+H5216-455-0,plan_name,Plan Name,Humana USAA Honor Giveback (PPO)
+H5216-455-0,plan_type,Plan Type,PPO
+H5216-455-0,organization,Organization Marketing Name,Humana
+H5216-455-0,premium,Part D Coverage Indicator,No
+H5216-455-0,premium,Part C Premium,$0.00 
+H5216-455-0,premium_full_extra_help,Part D Coverage Indicator,No
+H5216-455-0,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$5,100.00 "
+H5216-455-0,part_d_deductible,Part D Coverage Indicator,No
+H5216-455-0,tier_without_part_d_deductible,Part D Coverage Indicator,No
+H5216-455-0,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,Not Applicable
+H5216-455-0,overall_star_rating,Overall Star Rating,4.0
+H3817-010-0,section,SNP Type,Not Applicable
+H3817-010-0,section,Part D Coverage Indicator,No
+H3817-010-0,plan_id,Contract ID,H3817
+H3817-010-0,plan_id,Plan ID,010
+H3817-010-0,plan_id,Segment ID,0
+H3817-010-0,plan_name,Plan Name,Regence Valiance (PPO)
+H3817-010-0,plan_type,Plan Type,PPO
+H3817-010-0,organization,Organization Marketing Name,Regence BlueCross BlueShield of Oregon
+H3817-010-0,premium,Part D Coverage Indicator,No
+H3817-010-0,premium,Part C Premium,$0.00 
+H3817-010-0,premium_full_extra_help,Part D Coverage Indicator,No
+H3817-010-0,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$5,300.00 "
+H3817-010-0,part_d_deductible,Part D Coverage Indicator,No
+H3817-010-0,tier_without_part_d_deductible,Part D Coverage Indicator,No
+H3817-010-0,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,Not Applicable
+H3817-010-0,overall_star_rating,Overall Star Rating,3.5
+H5439-010-0,section,SNP Type,Not Applicable
+H5439-010-0,section,Part D Coverage Indicator,No
+H5439-010-0,plan_id,Contract ID,H5439
+H5439-010-0,plan_id,Plan ID,010
+H5439-010-0,plan_id,Segment ID,0
+H5439-010-0,plan_name,Plan Name,Wellcare Patriot Giveback Open (PPO)
+H5439-010-0,plan_type,Plan Type,PPO
+H5439-010-0,organization,Organization Marketing Name,Wellcare
+H5439-010-0,premium,Part D Coverage Indicator,No
+H5439-010-0,premium,Part C Premium,$0.00 
+H5439-010-0,premium_full_extra_help,Part D Coverage Indicator,No
+H5439-010-0,moop_in_network,In-Network Maximum Out-of-Pocket (MOOP) Amount,"$6,750.00 "
+H5439-010-0,part_d_deductible,Part D Coverage Indicator,No
+H5439-010-0,tier_without_part_d_deductible,Part D Coverage Indicator,No
+H5439-010-0,c_snp_conditions,Chronic or Disabling Condition SNP (C-SNP) Condition Type,Not Applicable
+H5439-010-0,overall_star_rating,Overall Star Rating,3.0

@@ -194,3 +194,26 @@ CREATE TABLE rule_fact (
   FOREIGN KEY (fact_id, source, doc_sha, page) REFERENCES fact
 );
 CREATE INDEX rule_fact_cell ON rule_fact (plan_id, col);
+
+-- Each plans.csv or PBP field a main-sheet cell read (main_chart.py).
+CREATE TABLE cms_read (
+  plan_id  TEXT NOT NULL REFERENCES plan,
+  col      TEXT NOT NULL,
+  position INTEGER NOT NULL,
+  file     TEXT NOT NULL,
+  field    TEXT NOT NULL,
+  value    TEXT NOT NULL,
+  title    TEXT NOT NULL,
+  meaning  TEXT NOT NULL,
+  PRIMARY KEY (plan_id, col, position)
+);
+
+-- Each Landscape field a plans.csv column read (universe.py).
+CREATE TABLE landscape_read (
+  plan_id    TEXT NOT NULL REFERENCES plan,
+  plan_field TEXT NOT NULL,
+  position   INTEGER NOT NULL,
+  field      TEXT NOT NULL,
+  value      TEXT NOT NULL,
+  PRIMARY KEY (plan_id, plan_field, position)
+);

@@ -158,7 +158,8 @@ def main(year, work, mode="", candidate=""):
     gen = data / "generated"
     os.makedirs(gen, exist_ok=True)
     blobs.record_cms(CMS, work, gen / blobs.CMS_FILES)
-    py("universe.py", f"{work}/{config['landscape_csv']}", gen / "plans.csv", config["state"], *config["counties"])
+    py("universe.py", f"{work}/{config['landscape_csv']}", gen / "plans.csv", gen / "landscape_reads.csv", config["state"],
+       *config["counties"])
     baseline = [years.REPO / config["baseline_manifest"]] if "baseline_manifest" in config else []
     if web:
         py("find_docs.py", gen / "plans.csv", data / "found.csv", data / "links.csv", gen / "documents.csv",
@@ -169,7 +170,7 @@ def main(year, work, mode="", candidate=""):
     py("texts.py", f"{work}/pdfs", f"{work}/texts")
     blobs.record_texts(gen, work)
     py("cite.py", gen / "documents_checked.csv", f"{work}/texts/text", gen / "citations.csv")
-    py("main_chart.py", gen / "plans.csv", f"{work}/pbp", gen / "main_chart.csv")
+    py("main_chart.py", gen / "plans.csv", f"{work}/pbp", gen / "main_chart.csv", gen / "cms_reads.csv")
     py("pbp_facts.py", gen / "plans.csv", f"{work}/pbp", gen / "pbp_facts.csv")
     py("dvha.py", gen / "plans.csv", f"{work}/pbp", gen / "dvha.csv")
     py("cms_sources.py", f"{work}/{config['landscape_csv']}", gen / "plans.csv", f"{work}/pbp", gen / "cms_sources.csv",
