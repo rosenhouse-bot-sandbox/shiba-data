@@ -59,8 +59,11 @@ def locate(repo, ref):
     path, name = ref.split(":")
     source = (repo / path).read_text()
     for node in ast.parse(source).body:
-        names = [node.name] if isinstance(node, ast.FunctionDef) else \
-            [t.id for t in getattr(node, "targets", []) if isinstance(t, ast.Name)]
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+            names = [node.name]
+        else:
+            targets = getattr(node, "targets", None) or [getattr(node, "target", None)]
+            names = [t.id for t in targets if isinstance(t, ast.Name)]
         if name in names:
             return ast.get_source_segment(source, node), node.lineno, node.end_lineno
     raise ValueError(f"{path} has no {name}")
@@ -75,7 +78,7 @@ def resolve(repo, commit, year):
             code, start, end = locate(repo, ref)
             url, where = f"{base}#L{start}-L{end}", ref.replace(":", ": ")
         else:
-            # A year's data may not be in this checkout, as in tests.
+            # A year's data file is checked by the build that reads that year.
             if "{year}" not in t["ref"] and not (repo / ref).exists():
                 raise ValueError(f"{ref} does not exist")
             code, url, where = "", base, ref

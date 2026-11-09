@@ -830,3 +830,23 @@ test("pipeline view: hovering a term shows its code, linked at the build's commi
   await page.keyboard.press("Escape");
   assert.ok(!(await pop.isVisible()));
 });
+
+test("pipeline view: a term's pop-over stays inside the window, and opening another closes it", async () => {
+  await page.setViewportSize({ width: 1000, height: 700 });
+  try {
+    await page.goto(`${base}#/2027/how/main/H1036-153-0/ambulance/check-facts`);
+    await page.waitForSelector(".how-lens");
+    for (const name of ["quote check", "decoys", "reviewer"]) {
+      await page.locator(".how-term", { hasText: name }).first().focus();
+      const pops = page.locator(".how-pop:visible");
+      assert.equal(await pops.count(), 1, name);
+      const r = await pops.boundingBox();
+      assert.ok(r.x >= 0 && r.x + r.width <= 1000 && r.y >= 0 && r.y + r.height <= 700, `${name}: ${JSON.stringify(r)}`);
+    }
+    await page.locator(".how-term", { hasText: "reviewer" }).first().click();
+    await page.mouse.click(5, 690);
+    assert.equal(await page.locator(".how-pop:visible").count(), 0);
+  } finally {
+    await page.setViewportSize({ width: 1600, height: 1000 });
+  }
+});

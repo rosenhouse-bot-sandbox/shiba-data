@@ -75,7 +75,7 @@ export const NODES = {
         '   of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance"'] } },
 };
 
-// A paragraph is a list of segments: a string, or [term, text] for a term #184 will explain.
+// A paragraph is a list of segments: a string, or [term, text] for a term in web/terms.py.
 // highlight lists the example rows that the cell uses in the input and the output.
 export const STEPS = [
   { id: "list-plans", from: "landscape", to: "plans", label: "List the plans", highlight: [[0, 1], [0]],

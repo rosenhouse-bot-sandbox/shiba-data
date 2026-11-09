@@ -4,6 +4,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))
@@ -27,6 +28,24 @@ class TermsTest(unittest.TestCase):
         used = set(json.loads(subprocess.run(["node", "-e", script], cwd=HERE.parent, capture_output=True, text=True,
                                              check=True).stdout))
         self.assertEqual(used, set(terms.TERMS))
+
+    def test_each_link_spans_exactly_the_code_shown(self):
+        for name, t in terms.resolve(REPO, "abc123", 2027).items():
+            if not t["code"]:
+                continue
+            path, lines = t["url"].split("/blob/abc123/")[1].split("#")
+            start, end = (int(n) for n in lines.replace("L", "").split("-"))
+            self.assertEqual("\n".join((REPO / path).read_text().splitlines()[start - 1:end]), t["code"], name)
+
+    def test_an_annotated_constant_resolves(self):
+        with tempfile.TemporaryDirectory() as d:
+            (pathlib.Path(d) / "m.py").write_text("X: int = 1\n")
+            self.assertEqual(terms.locate(pathlib.Path(d), "m.py:X"), ("X: int = 1", 1, 1))
+
+    def test_a_missing_file_fails_the_build(self):
+        with tempfile.TemporaryDirectory() as d, mock.patch.dict(terms.TERMS, {"x": {"title": "", "text": "", "ref": "gone.js"}}, clear=True):
+            with self.assertRaisesRegex(ValueError, "gone.js does not exist"):
+                terms.resolve(pathlib.Path(d), "abc123", 2027)
 
     def test_a_constant_resolves_to_its_assignment(self):
         layer = terms.resolve(REPO, "abc123", 2027)["layer"]
