@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-29166053e638f7e6.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 9 Medicare-covered hearing row shows 20% of the cost in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 9 supplemental hearing benefit (HER101) shows a $0 copay for follow-up provider visits, up to 3 per year, in network.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 9 shows a $0 copay for each Level 2 prescription hearing aid, up to 1 per ear per year, in network.\"},\n{\"id\": 3, \"ok\": false, \"reason\": \"Page 9 lists routine exams and fittings as separate bullets, each up to 1 per year. Merging them into one fact with a 1 per year limit understates the total (one exam plus one fitting).\"}]\n```",
+ "usage": {
+  "input_tokens": 3037,
+  "output_tokens": 663,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

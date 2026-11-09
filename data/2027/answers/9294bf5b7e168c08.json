@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 86: the 'Diagnostic Procedures and Tests' row and the EKG/EEG row both list a $40 in-network copay at a freestanding location.\"}]\n```",
+ "usage": {
+  "input_tokens": 2467,
+  "output_tokens": 281,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

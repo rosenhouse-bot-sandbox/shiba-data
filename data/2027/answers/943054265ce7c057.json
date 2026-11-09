@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-4a0ee31be3437c35.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 8 Dental Services row: Medicare-covered dental is a $15 copay.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 8 mandatory supplemental dental, in network: $0 copay for oral evaluations, exams, cleanings and x-rays. These are preventive services, and each has its own limit, so no single limit applies.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 8 mandatory supplemental dental, in network: 0% of the cost for crown and bridge recementation, root canal retreatment, oral surgery and periodontal maintenance. These are comprehensive services, and each has its own limit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2850,
+  "output_tokens": 475,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

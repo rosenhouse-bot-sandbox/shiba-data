@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-6.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 89 shows Advanced Laboratory Services at an office or freestanding location for a $0 copay. The block above it, whose heading starts on an earlier page, also lists $0 there. Lab at a freestanding location is a $0 copay.\"}]\n```",
+ "usage": {
+  "input_tokens": 2105,
+  "output_tokens": 924,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

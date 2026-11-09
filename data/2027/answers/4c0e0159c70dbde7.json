@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "6c89db5198e7a3b2.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3817-010-0\", \"benefit\": \"visits\", \"setting\": \"telehealth\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"condition\": \"Virtual primary care provider visits\", \"page\": 3, \"quotes\": [\"Virtual primary care provider visits $0\"], \"note\": \"Condition separates this from the virtual specialist copay, since there is no telehealth setting for primary care or specialist.\"},\n {\"plan_id\": \"H3817-010-0\", \"benefit\": \"visits\", \"setting\": \"telehealth\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$35\", \"condition\": \"Virtual specialist visits\", \"page\": 3, \"quotes\": [\"Virtual specialist visits $35\"], \"note\": \"Condition separates this from the virtual primary care copay, since there is no telehealth setting for primary care or specialist.\"}]\n```",
+ "usage": {
+  "input_tokens": 2545,
+  "output_tokens": 819,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

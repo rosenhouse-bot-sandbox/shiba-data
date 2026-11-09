@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-2aa68f4230962abc.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 76 Hearing services, supplemental rows for DEVOTED GIVEBACK EXTRAS 025: routine hearing exam $0 copay and hearing aid fitting $0 copay, in network. The 1-per-year limit applies only to the routine exam, so leaving limit blank for the combined fact is acceptable.\"}]\n```",
+ "usage": {
+  "input_tokens": 2571,
+  "output_tokens": 564,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

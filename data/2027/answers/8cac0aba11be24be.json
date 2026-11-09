@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-cbcaa238a8c713a4.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4, Emergency care section: the Worldwide emergency care row shows a $130 copay in-network. The Worldwide urgent care visit row also shows $130 in-network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 4: the Worldwide emergency care and Worldwide urgent care visit rows both show $130 in the out-of-network column.\"}]\n```",
+ "usage": {
+  "input_tokens": 2027,
+  "output_tokens": 654,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-21.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 65, Hearing services supplemental benefits: the routine hearing exam is a $0 copayment and the hearing aid fitting and evaluation is a $0 copayment. Both are supplemental and use the in-network default. A $0 per-visit copay holds for both. Their limits differ (1 visit every year vs. unlimited visits), so one blank limit is not wrong, though less complete.\"}]\n```",
+ "usage": {
+  "input_tokens": 2291,
+  "output_tokens": 685,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

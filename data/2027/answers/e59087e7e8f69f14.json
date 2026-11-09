@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-18.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 76 lists a $0 copay for both the routine hearing exam and the hearing aid fitting. These are supplemental hearing exam benefits for this plan, in network by default.\"}]\n```",
+ "usage": {
+  "input_tokens": 2564,
+  "output_tokens": 337,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

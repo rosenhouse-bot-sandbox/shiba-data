@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-17.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 61 Vision care row, in network: $0 copay for each follow-up diabetic eye exam, listed as an extra benefit beyond Medicare, and $0 copay for one non-Medicare covered routine eye exam including refraction with an EyeMed provider. Both are supplemental eye exams at a $0 copay.\"}]\n```",
+ "usage": {
+  "input_tokens": 2581,
+  "output_tokens": 549,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
