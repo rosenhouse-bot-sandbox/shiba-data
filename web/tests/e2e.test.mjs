@@ -763,7 +763,9 @@ test("pipeline view: Next steps through every step, each showing the cell's rows
   const labels = [];
   for (;;) {
     labels.push(await page.textContent(".how-step"));
-    assert.ok(await page.locator(".how-rows .hi, .how-none").count(), labels.at(-1));
+    for (const side of ["input", "output"]) {
+      assert.ok(await page.locator(`.how-rows.${side} :is(.hi, .how-none)`).count(), `${labels.at(-1)} ${side}`);
+    }
     const next = page.locator("a.how-nav[rel=next]");
     if (!(await next.count())) break;
     await next.click();
@@ -780,8 +782,21 @@ test("pipeline view: a step on the map opens in the lens, and Back returns", asy
   await page.waitForFunction(() => document.querySelector(".how-step")?.textContent === "Column rules");
   assert.equal(await page.locator(".how-node.on").count(), 2);
   assert.equal(await page.locator(".how-rows.input .hi").count(), 4);
+  assert.equal(await page.evaluate(() => document.activeElement.className), "how-step");
   await page.goBack();
   await page.waitForFunction(() => document.querySelector(".how-step")?.textContent === "Check facts");
+});
+
+test("pipeline view: at phone width the lens sits below the map at full width", async () => {
+  await page.setViewportSize({ width: 390, height: 800 });
+  try {
+    await page.goto(`${base}#/2027/how/main/H1036-153-0/ambulance/column-rules`);
+    await page.waitForSelector(".how-lens");
+    const lens = await page.locator(".how-lens").boundingBox();
+    assert.ok(lens.width > 350, `lens is ${lens.width}px wide`);
+  } finally {
+    await page.setViewportSize({ width: 1600, height: 1000 });
+  }
 });
 
 test("pipeline view: a step that leaves the cell alone says so instead of showing rows", async () => {

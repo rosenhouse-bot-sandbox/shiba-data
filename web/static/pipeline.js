@@ -12,7 +12,7 @@ export const NODES = {
       cols: ["Contract Plan Segment ID", "Plan Name", "County Name", "Plan Type", "SNP Type", "Part C Premium", "In-Network MOOP"],
       rows: [["H1036_153_0", "Humana Total Complete (HMO)", "Multnomah", "HMO", "Not Applicable", "$0.00", "$5,150.00"],
         ["H1036_153_0", "Humana Total Complete (HMO)", "Clackamas", "HMO", "Not Applicable", "$0.00", "$5,150.00"]] } },
-  links: { col: 1, row: 0, kind: "volunteers' sheet", source: true, label: "links.csv",
+  links: { col: 1, row: 0, kind: "Links sheet", source: true, label: "links.csv",
     table: { name: "links.csv", note: "copied from the volunteers' Links sheet", cols: ["plan_ids", "kind", "url"],
       rows: [["H1036-153-0", "SB", "https://assets.humana.com/is/content/humana/H1036153000SB27pdf"],
         ["H1036-153-0", "EOC", "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf"]] } },
@@ -84,7 +84,7 @@ export const STEPS = [
   { id: "find-pdfs", from: "links", to: "documents", label: "Find PDFs", highlight: [[0, 1], [0, 1]],
     before: "links.csv: …H1036153000EOC27pdf", after: "documents.csv: EOC URL",
     paras: [["URLs come from browser searches of carrier sites by Claude sessions, the volunteers' Links sheet, and URL patterns. ", ["firstUrl", "The first URL found wins"], ". This plan's URLs came from the Links sheet."]] },
-  { id: "download", from: "documents", to: "checked", label: "Download, check cover", highlight: [[0], [0]],
+  { id: "download", from: "documents", to: "checked", label: "Download PDFs", highlight: [[0], [0]],
     before: "…/H1036153000SB27pdf", after: "sha256 ce13e925…, 24 pages",
     paras: [["The pipeline downloads each PDF, runs a ", ["cover", "cover check"], ", and records the PDF's SHA-256 hash."]] },
   { id: "extract-text", from: "checked", to: "text", label: "Extract page text", highlight: [[0], [3, 4, 5]],
@@ -127,9 +127,9 @@ export const STEPS = [
 // Edges with no step of their own.
 export const LINKS = [["plans", "documents"], ["blanks", "live"]];
 
-export const NODE_W = 124;
+export const NODE_W = 128;
 export const NODE_H = 54;
-const COL_STEP = 134;
+const COL_STEP = 138;
 const ROW_STEP = 80;
 const MARGIN = 10;
 

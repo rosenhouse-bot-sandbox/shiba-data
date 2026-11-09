@@ -44,8 +44,8 @@ test("highlighted rows exist", () => {
   }
 });
 
-test("a step with no highlighted rows explains why", () => {
-  for (const s of STEPS) if (!s.highlight[0].length) assert.equal(s.none?.length, 2, s.id);
+test("each side of a step highlights the cell's rows or explains why there are none", () => {
+  for (const s of STEPS) for (const i of [0, 1]) assert.ok(s.highlight[i].length || s.none?.[i], `${s.id} side ${i}`);
 });
 
 test("neighbouring steps share a table", () => {

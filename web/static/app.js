@@ -3,8 +3,8 @@ import { findAll, matchRanges, squash } from "./highlight.js";
 import { ago } from "./ago.js";
 import { parse, format } from "./permalink.js";
 import { el } from "./dom.js";
-import { howView } from "./how.js";
-import { EXAMPLE, STEPS, stepById } from "./pipeline.js";
+import { howView, howLink } from "./how.js";
+import { STEPS, stepById } from "./pipeline.js";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.worker.min.mjs";
 
@@ -106,7 +106,7 @@ function route() {
   const { view } = state;
   const plan = view === "plan" && plans[state.plan];
   const key = `${view}/${plan ? plan.plan_id : ""}`;
-  document.querySelectorAll("nav a").forEach((a) => a.classList.toggle("active", a.dataset.view === view));
+  document.querySelectorAll("header nav a").forEach((a) => a.classList.toggle("active", a.dataset.view === view));
   const content = $("#content");
   const sameView = key === here?.key && !otherYear;
   if (!sameView) {
@@ -142,14 +142,17 @@ function route() {
 function routeHow(state) {
   hideViewer();
   const step = stepById(state.step) ?? STEPS[0];
-  const hash = format({ year: site.year, view: "how", ...EXAMPLE, step: step.id });
+  const hash = howLink(site.year, step);
   if (location.hash !== hash) history.replaceState(null, "", hash);
   routed = location.hash;
-  document.querySelectorAll("nav a").forEach((a) => a.classList.toggle("active", a.dataset.view === "how"));
+  document.querySelectorAll("header nav a").forEach((a) => a.classList.toggle("active", a.dataset.view === "how"));
   const content = $("#content");
-  if (here) scrollTops[here.key] = content.scrollTop;
+  const stepping = here?.view === "how";
+  const mapTop = stepping ? content.querySelector(".how-map").scrollTop : 0;
+  if (here && !stepping) scrollTops[here.key] = content.scrollTop;
   content.replaceChildren(howView(site.year, step));
-  content.scrollTop = 0;
+  content.querySelector(".how-map").scrollTop = mapTop;
+  if (stepping) content.querySelector(".how-step").focus({ preventScroll: true });
   here = { key: "how", view: "how" };
 }
 
