@@ -9,7 +9,7 @@ Each example names its table. Paths are relative to `data/2027/`.
 
 ## Terms
 
-- **Medicare Advantage** plans are private plans that replace Original Medicare. Each sets its own copays and extra benefits.
+- **Medicare Advantage** plans are private plans that replace Original Medicare. Each sets its copays and extra benefits.
 - **CMS** (the Centers for Medicare & Medicaid Services) publishes two files each year. The **Landscape** file lists plans and premiums. The **PBP** (plan benefit package) file holds what each plan told CMS it covers.
 - Each plan publishes an **SB** (Summary of Benefits, about 10 to 25 pages) and an **EOC** (Evidence of Coverage, the full legal terms, about 200 pages). Some also publish a **rider** for optional benefits.
 - A **cell** is one plan's entry in one column. Its **value** is the text it shows. A value can have several **lines**, separated by ` | `.
