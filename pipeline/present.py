@@ -583,6 +583,265 @@ def optional_packages(organization, found):
     return [("; ".join(parts), unique(cited))] if parts else [("", top(none) if none else [])]
 
 
+MONTHS = re.compile(r"\b(?:every|per|each)\s+(month|quarter|three months|six months)\b", re.I)
+
+
+def every(f):
+    """How often an allowance or limit renews, such as "month" or "two years", or "" if the fact does not say."""
+    months = MONTHS.search(f["limit"] + " " + f["unit"])
+    if period(f) or not months:
+        return period(f)
+    return "three months" if months[1].lower() == "quarter" else months[1].lower()
+
+
+def renews(found):
+    """How often all the facts renew, or "" if they do not agree or do not say."""
+    periods = {every(f) for f in found}
+    return periods.pop() if len(periods) == 1 else ""
+
+
+def extra(f):
+    """Says if the fact is an in-network supplemental benefit with no package or provider tier."""
+    return f["network"] in ("in", "any") and f["covered_by"] == "supplemental" and not (f["package"] or f["provider_tier"])
+
+
+def exactly(found, leaves, test, reason):
+    """The facts whose benefit is one of leaves, not a broader or narrower one, that test accepts. Notes reason for the
+    others."""
+    return keep([f for f in found if f["benefit"] in leaves], test, lambda f: reason)
+
+
+@unless("it is not a supplemental in-network benefit for every member")
+def everyone(f):
+    return extra(f) and not f["condition"]
+
+
+def limit_text(limits):
+    """" 12 visits/year" from visit limits that agree on how often they renew, or ""."""
+    return f" {min(int(f['amount']) for f in limits)} visits/{renews(limits)}" if limits and renews(limits) else ""
+
+
+# Each service's short name, its name beside a dental maximum, and its benefit.
+ALT_CARE = (("Acup", "acupuncture", "extras.acupuncture"), ("Chiro", "chiropractic", "extras.chiropractic"),
+            ("Massage", "massage", "extras.massage"), ("Naturopath", "naturopath", "extras.naturopathy"))
+COMBINED = re.compile(r"combined", re.I)
+
+
+def alt_care(found):
+    """("Acup $0 24 visits/year", ...) parts and their facts. A service paid from a shared allowance names it.
+    Copays whose visit limits are shared show the limit once."""
+    pooled, own = {}, []
+    for name, _, leaf in ALT_CARE:
+        facts_ = exactly(found, (leaf,), lambda f: extra(f) and (not f["condition"] or COMBINED.search(f["condition"])),
+                      "it is not a supplemental in-network benefit for every member")
+        copays = top(keep(facts_, lambda f: f["cost_kind"] == "copay" and not f["pool"] and not f["condition"],
+                          lambda f: "it is not the service's own copay"))
+        if copays:
+            limits = top([f for f in facts_ if f["cost_kind"] == "visit_limit" and not f["pool"]])
+            own.append((name, copays, limits))
+            continue
+        shared = top(keep(facts_, lambda f: f["pool"] and f["cost_kind"] in ("allowance", "covered", "max"),
+                          lambda f: "it is neither a copay nor a shared allowance"))
+        if shared:
+            pooled.setdefault(shared[0]["pool"], []).append((name, shared))
+    parts, cited = [], []
+    for pool, services in pooled.items():
+        fs = [f for _, got in services for f in got]
+        allowance = [f for f in fs if f["cost_kind"] == "allowance"]
+        if re.search(r"dental", pool, re.I):
+            source = "dental allowance"
+        elif renews(allowance):
+            kind = "Wellness Bucks" if re.search(r"wellness bucks", pool, re.I) else "allowance"
+            source = f"{show(allowance)}/{renews(allowance)} {kind}"
+        else:
+            drop([f for got in pooled.values() for _, fs_ in got for f in fs_] + [f for _, c, lim in own for f in c + lim],
+                 "the facts do not say how often the shared allowance renews")
+            return None
+        parts.append(f"{', '.join(name for name, _ in services)} from {source}")
+        cited += fs
+    shared_limit = (len(own) > 1 and all(limits for *_, limits in own)
+                    and all(COMBINED.search(f["condition"]) for *_, limits in own for f in limits)
+                    and len({(f["amount"], every(f)) for *_, limits in own for f in limits}) == 1)
+    for name, copays, limits in own:
+        parts.append(f"{name} {show(copays)}{'' if shared_limit else limit_text(limits)}")
+        cited += copays + limits
+    if shared_limit:
+        parts.append(f"{limit_text(own[0][2]).strip()} combined")
+    return parts, cited
+
+
+# The benefits a shared card or allowance names, in sheet order.
+SHARERS = ("dental", "vision", "hearing", "fitness")
+
+
+def over_the_counter(found):
+    """The OTC allowance, and the benefits that share it when the same allowance pays for them."""
+    got = top(keep(exactly(found, ("otc",), everyone, "it is not a supplemental in-network benefit for every member"),
+                   lambda f: f["cost_kind"] == "allowance", lambda f: "it is not an allowance"))
+    if not got:
+        return [], []
+    period_ = renews(got)
+    if not period_:
+        drop(got, "the facts do not say how often the OTC allowance renews")
+        return None
+    pools = {f["pool"] for f in got if f["pool"]}
+    amount = {facts.number(a) for a in amounts(got)}
+    sharers = top([f for f in found if f["pool"] in pools and f["benefit"] != "otc" and everyone(f)
+                   and f["cost_kind"] == "allowance" and {facts.number(a) for a in amounts([f])} == amount
+                   and every(f) == period_])
+    if not sharers:
+        return [f"OTC {show(got)}/{period_}"], got
+    names = [n for n in SHARERS if any(facts.covers(n, f["benefit"]) for f in sharers)]
+    return [f"OTC from {show(got)}/{period_} card shared with {', '.join(names)}"], got + sharers
+
+
+def urgent(f):
+    return all(re.search(r"urgent", q, re.I) and not re.search(r"emergenc", q, re.I) for q in json.loads(f["quotes"]))
+
+
+def worldwide(found):
+    """The copay for emergency care outside the U.S. and the most the plan pays. Several copays that no quote tells
+    apart leave the part unknown. A document that says the plan covers none cites a blank."""
+    abroad = keep(exactly(found, ("emergency",), lambda f: f["setting"] == "outside_us", "it is not care outside the U.S."),
+                  lambda f: not (f["condition"] or f["package"]), lambda f: "it has a condition or package")
+    copays = top(keep(abroad, lambda f: f["cost_kind"] in PRICED and not urgent(f),
+                      lambda f: "it is not an emergency copay"))
+    if not copays:
+        none = [f for f in abroad if f["cost_kind"] == "not_covered"]
+        if none or not abroad:
+            return [], top(none)
+        drop(abroad, "the facts give no copay for emergency care outside the U.S.")
+        return None
+    if len({f["amount"] for f in copays}) > 1:
+        drop(abroad, "the facts do not say which copay is the ER's")
+        return None
+    maxes = top([f for f in abroad if f["cost_kind"] == "max"])
+    return [f"Worldwide ER {show(copays)}" + (f", {show(maxes)} max" if maxes else "")], copays + maxes
+
+
+def alt_care_otc_travel(organization, found):
+    """Shows routine acupuncture, chiropractic, massage and naturopathy, the OTC allowance, and worldwide emergency
+    care. A part the facts do not fully give leaves the cell blank."""
+    parts, cited = [], []
+    for part in (alt_care, over_the_counter, worldwide):
+        got = part(found)
+        if got is None:
+            drop(cited, f"the facts do not fully give the {part.__name__.replace('_', ' ')} part")
+            return [("", [])]
+        parts += got[0]
+        cited += got[1]
+    return [("; ".join(parts), unique(cited))]
+
+
+def drop(found, reason):
+    """Notes reason for each fact, which the rule does not cite."""
+    keep(found, lambda f: False, lambda f: reason)
+
+
+def foot_care(found):
+    """Routine foot care's price and visit limit, for every member or else for members with diabetes."""
+    routine_care = keep(exactly(found, ("foot_care",), lambda f: extra(f) and not f["pool"],
+                             "it is not supplemental in-network foot care"),
+                        lambda f: f["cost_kind"] in PRICED + ("visit_limit",), lambda f: "it is neither a price nor a limit")
+    routine_care = keep(routine_care, lambda f: not f["condition"] or DIABETES.search(f["condition"]),
+                        lambda f: "its condition is not diabetes")
+    groups = [[f for f in routine_care if not f["condition"]], [f for f in routine_care if f["condition"]]]
+    for diabetic, group in enumerate(groups):
+        prices = top([f for f in group if f["cost_kind"] in PRICED])
+        if prices:
+            if not diabetic:
+                drop(groups[1], "foot care for every member won")
+            limits = top([f for f in group if f["cost_kind"] == "visit_limit"])
+            visits = limit_text(limits).replace(" visits", "")
+            if not visits:
+                drop(limits, "the limits do not agree on how often they renew")
+            return [f"Routine foot care {show(prices)}{visits}{' for members with diabetes' if diabetic else ''}"], (
+                prices + (limits if visits else []))
+        drop(group, "it gives no price")
+    return [], []
+
+
+DIABETES = re.compile(r"diabet", re.I)
+CHRONIC = re.compile(r"chronic", re.I)
+HEART = re.compile(r"heart", re.I)
+
+
+def extra_benefits(organization, found):
+    """Names fitness, meals and transportation for every member, then shows routine foot care, a fitness allowance,
+    a card for members with chronic conditions, and the programs after a heart-failure hospital stay."""
+    parts, cited = [], []
+    for name, leaf in (("Fitness", "fitness"), ("Meals", "meals"), ("Transportation", "extras.transportation")):
+        got = top(exactly(found, (leaf,), lambda f: extra(f) and offers(f),
+                       "it is not a supplemental in-network benefit for every member"))
+        if got:
+            parts.append(name)
+            cited += got
+    got = foot_care(found)
+    parts += got[0]
+    cited += got[1]
+    alt_care_pools = {f["pool"] for f in found if f["benefit"].startswith("extras.") and f["pool"]}
+    bucks = top(exactly(found, ("fitness",), lambda f: everyone(f) and f["cost_kind"] == "allowance"
+                        and re.search(r"wellness bucks", f["pool"], re.I) and f["pool"] not in alt_care_pools and every(f),
+                        "it is not Wellness Bucks for fitness alone"))
+    if bucks and renews(bucks):
+        parts.append(f"Wellness Bucks {show(bucks)}/{renews(bucks)}")
+        cited += bucks
+    cards = top(exactly(found, ("other_supplemental",),
+                     lambda f: extra(f) and CHRONIC.search(f["condition"]) and f["cost_kind"] == "allowance" and every(f),
+                     "it is not an allowance for members with chronic conditions"))
+    for pool in sorted({f["pool"] for f in cards}):
+        card = [f for f in cards if f["pool"] == pool]
+        parts.append(f"For members with certain chronic conditions: {pool} {show(card)}/{renews(card)}")
+        cited += card
+    heart = top(exactly(found, ("other_supplemental", "meals"),
+                     lambda f: extra(f) and HEART.search(f["condition"]) and f["cost_kind"] in PRICED + ("covered",),
+                     "it is not a benefit after a heart-failure hospital stay"))
+    if heart:
+        names = sorted({f["pool"] for f in heart if f["benefit"] == "other_supplemental" and f["pool"]})
+        names += ["home-delivered meals"] if any(f["benefit"] == "meals" for f in heart) else []
+        parts.append(f"After a heart-failure hospital stay: {', '.join(names)}")
+        cited += heart
+    return [("; ".join(parts), unique(cited))]
+
+
+def dental_price(found, leaf):
+    got = top(exactly(found, (leaf,), lambda f: everyone(f) and f["cost_kind"] in PRICED,
+                   "it is not a supplemental in-network price for every member"))
+    shown = show(got)
+    return got, "$0" if shown == "0%" else shown.replace("0%-", "$0-") if got else ""
+
+
+def dental(organization, found):
+    """Shows routine preventive and comprehensive dental prices and the maximum, naming the services that share it.
+    A plan with only an allowance shows it. An allowance on a card shared with other benefits is not a maximum."""
+    prev, prev_shown = dental_price(found, "dental.preventive")
+    comp, comp_shown = dental_price(found, "dental.comprehensive")
+    others = {f["pool"] for f in found if f["pool"] and not facts.covers("dental", f["benefit"])
+              and not f["benefit"].startswith("extras.")}
+    caps = top(exactly(found, ("dental", "dental.preventive", "dental.comprehensive"),
+                    lambda f: everyone(f) and f["cost_kind"] in ("max", "allowance") and f["pool"] not in others,
+                    "it is not a dental maximum for every member"))
+    parts = ([f"PREV {prev_shown}"] if prev else []) + ([f"COMP {comp_shown}"] if comp else [])
+    cited = prev + comp
+    if caps:
+        if not renews(caps):
+            drop(cited + caps, "the facts do not say how often the dental maximum renews")
+            return [("", [])]
+        amount = f"{show(caps)}/{renews(caps)}"
+        pools = {f["pool"] for f in caps if f["pool"]}
+        sharing = [name for _, name, leaf in ALT_CARE if any(g["benefit"] == leaf and g["pool"] in pools for g in found)]
+        if not parts:
+            parts.append(f"PREV+COMP from {amount} allowance")
+        elif sharing:
+            parts.append(f"max {amount} shared by PREV+COMP, {', '.join(sharing)}")
+        elif all(f["benefit"] == "dental.comprehensive" for f in caps):
+            parts.append(f"COMP max {amount}")
+        else:
+            parts.append(f"max {amount} PREV+COMP")
+        cited += caps
+    return [("; ".join(parts), unique(cited))]
+
+
 # Added facts fill in what readers miss, and each note says why. Only they use cost kind "unclear".
 ADDED = "added_facts.csv"
 
@@ -620,9 +879,13 @@ LEAVES = {"L_xray_imaging": ("imaging",), "AB_ambulance": ("ambulance",), "I_out
           "Q_hearing": ("hearing",), "W_fitness": ("fitness",), "Y_otc": ("otc",), "AA_opt_packages": ("packages",)}
 
 
-DVHA = {"C_premium": plan_premium, "E_optional_packages": optional_packages, "G_vision": vision, "H_hearing": hearing}
-DVHA_LEAVES = {"C_premium": ("plan_premium",), "E_optional_packages": ("packages",), "G_vision": ("vision",),
-               "H_hearing": ("hearing",)}
+DVHA = {"C_premium": plan_premium, "E_optional_packages": optional_packages, "F_dental": dental, "G_vision": vision,
+        "H_hearing": hearing, "I_alt_care_otc_travel": alt_care_otc_travel, "J_extra_benefits": extra_benefits}
+DVHA_LEAVES = {"C_premium": ("plan_premium",), "E_optional_packages": ("packages",), "F_dental": ("dental",),
+               "G_vision": ("vision",), "H_hearing": ("hearing",),
+               "I_alt_care_otc_travel": ("extras.acupuncture", "extras.chiropractic", "extras.massage",
+                                         "extras.naturopathy", "otc", "emergency"),
+               "J_extra_benefits": ("fitness", "meals", "foot_care", "extras.transportation", "other_supplemental")}
 SHEETS = {"main": (COLUMNS, LEAVES), "dvha": (DVHA, DVHA_LEAVES)}
 
 
@@ -697,8 +960,33 @@ VERSIONS[5] = VERSIONS[4] | {
     for p in ("H3805-048-0", "H2406-070-0", "H3805-040-0")} | {
     ("dvha.E_optional_packages", p): "the facts give no yearly maximum for the package"
     for p in ("H5216-048-0", "H1036-323-0", "H5216-428-2")}
+KAISER = ("H9003-001-0", "H9003-006-0", "H9003-009-0")
+VERSIONS[6] = VERSIONS[5] | {
+    ("dvha.F_dental", p): "the rule does not show that comprehensive care covers only periodontal maintenance"
+    for p in ("H1036-323-0", "H5216-428-2", "H5216-048-0")} | {
+    ("dvha.F_dental", p): "the rule does not show that comprehensive care covers only adjunctive general services"
+    for p in ("H6815-038-0", "H5439-015-0", "H5439-019-0", "H5439-010-0", "H5439-011-0")} | {
+    ("dvha.F_dental", p): "the facts do not say that the plan has no annual maximum"
+    for p in ("H2406-070-0", "H2056-003-0", "H3805-040-0")} | {
+    ("dvha.J_extra_benefits", p): "the facts do not say what Wellness Bucks pay for"
+    for p in ("H7199-002-0", "H2923-001-0", "H2923-028-3", "H2923-025-0", "H2923-005-0", "H2923-019-0")} | {
+    ("dvha.I_alt_care_otc_travel", p): "the facts do not say what else the OTC allowance pays for"
+    for p in ("H1036-317-0", "H3805-040-0", "H2001-045-0", "H1372-003-0")} | {
+    ("dvha.I_alt_care_otc_travel", p): "the rule does not show care while traveling in the U.S." for p in KAISER} | {
+    ("dvha.J_extra_benefits", p): "the rule does not show when transportation and hospital care at home apply"
+    for p in KAISER} | {
+    ("dvha.F_dental", p): "the facts give no routine preventive dental price" for p in ("H7199-002-0",)} | {
+    ("dvha.F_dental", p): "the facts give no routine preventive or comprehensive dental price"
+    for p in ("H2923-025-0", "H1036-317-0")} | {
+    ("dvha.F_dental", p): "the facts give no routine comprehensive dental price"
+    for p in ("H1036-153-0", "H1036-306-0", "H5216-427-2", "H5216-455-0")} | {
+    ("dvha.I_alt_care_otc_travel", p): "the facts give no worldwide emergency maximum" for p in ("H7006-018-0", "H7006-021-0")} | {
+    ("dvha.J_extra_benefits", p): "the facts miss the Virtual Cardiac Recovery Program"
+    for p in ("H1036-323-0", "H1036-317-0", "H5216-455-0")} | {
+    ("dvha.J_extra_benefits", "H1036-306-0"): "the facts miss the meals for every member"}
 # The version that first presents each DVHA column. Earlier versions hold its cells.
-DVHA_SINCE = {"C_premium": 3, "G_vision": 4, "H_hearing": 4, "E_optional_packages": 5}
+DVHA_SINCE = {"C_premium": 3, "G_vision": 4, "H_hearing": 4, "E_optional_packages": 5, "F_dental": 6,
+              "I_alt_care_otc_travel": 6, "J_extra_benefits": 6}
 
 
 def held(data, version=None):
