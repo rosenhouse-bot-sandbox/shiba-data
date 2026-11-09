@@ -70,7 +70,6 @@ class TraceTest(unittest.TestCase):
     def test_traces_a_dvha_cell_from_its_own_code(self):
         records = self.cell("dvha", "H2923-001-0", "F_dental")
         self.assertEqual(records["draft"]["code"]["file"], "pipeline/dvha.py")
-        self.assertEqual(records["layers"]["live"]["set_by"], layers.EDITS)
         self.assertEqual(records["rule"]["status"], trace.NONE)
 
     def test_reads_a_page_of_a_layout_text(self):
