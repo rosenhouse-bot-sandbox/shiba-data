@@ -632,6 +632,154 @@ class OptionalPackagesTest(unittest.TestCase):
         self.assertEqual(column(present.optional_packages, *found)[0][0], "A $9/mo; B $8/mo")
 
 
+class DentalTest(unittest.TestCase):
+    def test_shows_preventive_and_comprehensive_prices_and_the_yearly_max(self):
+        found = [routine("dental.preventive", "coinsurance", "0%"), routine("dental.comprehensive", "coinsurance", "50%"),
+                 routine("dental", "max", "$1,000", limit="per year"), routine("dental", "covered", "")]
+        self.assertEqual(column(present.dental, *found), [("PREV $0; COMP 50%; max $1,000/year PREV+COMP", found[:3])])
+
+    def test_a_max_for_comprehensive_care_says_so(self):
+        found = [routine("dental.preventive"), routine("dental.comprehensive"),
+                 routine("dental.comprehensive", "max", "$1,000", limit="every year")]
+        self.assertEqual(column(present.dental, *found)[0][0], "PREV $0; COMP $0; COMP max $1,000/year")
+
+    def test_names_the_alternative_care_that_shares_the_max(self):
+        pool = dict(pool="Dental & Alternative Therapy Allowance")
+        found = [routine("dental.preventive"), routine("dental.comprehensive", "coinsurance", "50%"),
+                 routine("dental", "allowance", "$1,750", limit="per year", **pool),
+                 routine("extras.massage", "allowance", "$1,750", limit="per year", **pool),
+                 routine("extras.acupuncture", "allowance", "$1,750", limit="per year", **pool)]
+        self.assertEqual(column(present.dental, *found)[0][0],
+                         "PREV $0; COMP 50%; max $1,750/year shared by PREV+COMP, acupuncture, massage")
+
+    def test_an_allowance_alone_pays_for_both(self):
+        found = [routine("dental", "allowance", "$150", limit="every three months", pool="Flex Card")]
+        self.assertEqual(column(present.dental, *found)[0][0], "PREV+COMP from $150/three months allowance")
+
+    def test_a_card_shared_with_other_benefits_is_not_a_max(self):
+        card = dict(pool="Spendables", limit="per month")
+        found = [routine("dental.preventive"), routine("dental", "allowance", "$20", **card),
+                 routine("otc", "allowance", "$20", **card)]
+        self.assertEqual(column(present.dental, *found), [("PREV $0", found[:1])])
+
+    def test_a_max_that_does_not_say_how_often_it_renews_leaves_the_cell_blank(self):
+        found = [routine("dental.preventive"), routine("dental", "max", "$1,250")]
+        self.assertEqual(column(present.dental, *found), [("", [])])
+
+    def test_skips_medicare_conditional_package_and_out_of_network_dental(self):
+        found = [priced("dental.preventive", amount="$30"), routine("dental.comprehensive", condition="diabetes"),
+                 routine("dental.comprehensive", package="Rider"), routine("dental.comprehensive", network="out")]
+        self.assertEqual(column(present.dental, *found), [("", [])])
+
+
+class EveryTest(unittest.TestCase):
+    def test_names_how_often_a_fact_renews(self):
+        for limit, want in (("per quarter", "three months"), ("every six months", "six months"), ("per month", "month"),
+                            ("every 2 years", "two years"), ("per calendar year", "year"), ("for 12 months", ""),
+                            ("annually", "")):
+            self.assertEqual(present.every(routine("otc", "allowance", "$1", limit=limit)), want, limit)
+
+
+class AltCareOtcTravelTest(unittest.TestCase):
+    def test_shows_each_service_copay_and_visit_limit_then_otc_and_worldwide_er(self):
+        found = [routine("extras.acupuncture"), routine("extras.acupuncture", "visit_limit", "24", limit="per year"),
+                 routine("extras.chiropractic", amount="$15"), routine("otc", "allowance", "$40", limit="per quarter"),
+                 routine("emergency", setting="outside_us", amount="$130"),
+                 routine("emergency", "max", "$50,000", setting="outside_us", limit="per year")]
+        self.assertEqual(column(present.alt_care_otc_travel, *found),
+                         [("Acup $0 24 visits/year; Chiro $15; OTC $40/three months; Worldwide ER $130, $50,000 max",
+                           found)])
+
+    def test_services_with_one_shared_visit_limit_show_it_once(self):
+        found = [f for leaf in ("extras.acupuncture", "extras.chiropractic")
+                 for f in (routine(leaf, amount="$10"), routine(leaf, "visit_limit", "18", limit="per calendar year",
+                                                                 condition="for all three services combined"))]
+        self.assertEqual(column(present.alt_care_otc_travel, *found)[0][0], "Acup $10; Chiro $10; 18 visits/year combined")
+
+    def test_services_paid_from_a_shared_allowance_name_it(self):
+        dental = dict(pool="Dental & Alternative Therapy Allowance", limit="per year")
+        flex = dict(pool="Flex Card", limit="every six months")
+        self.assertEqual(column(present.alt_care_otc_travel, routine("extras.acupuncture", "allowance", "$1,750", **dental),
+                                routine("extras.massage", "allowance", "$1,750", **dental))[0][0],
+                         "Acup, Massage from dental allowance")
+        self.assertEqual(column(present.alt_care_otc_travel, routine("extras.acupuncture", "allowance", "$50", **flex),
+                                routine("extras.naturopathy", "allowance", "$50", **flex))[0][0],
+                         "Acup, Naturopath from $50/six months allowance")
+        bucks = routine("extras.massage", "allowance", "$150", pool="Wellness Bucks", limit="per year")
+        self.assertEqual(column(present.alt_care_otc_travel, bucks)[0][0], "Massage from $150/year Wellness Bucks")
+
+    def test_an_otc_allowance_that_pays_for_other_benefits_names_them(self):
+        card = dict(pool="Spendables", limit="per month")
+        found = [routine("otc", "allowance", "$20", **card), routine("hearing", "allowance", "$20", **card),
+                 routine("dental", "allowance", "$20", **card), routine("vision", "allowance", "$90", **card)]
+        self.assertEqual(column(present.alt_care_otc_travel, *found),
+                         [("OTC from $20/month card shared with dental, hearing", found[:3])])
+
+    def test_worldwide_er_skips_urgent_care(self):
+        found = [routine("emergency", setting="outside_us", amount="$130"),
+                 routine("emergency", setting="outside_us", amount="$500", quotes='["Urgent care $500"]')]
+        self.assertEqual(column(present.alt_care_otc_travel, *found), [("Worldwide ER $130", found[:1])])
+
+    def test_copays_that_no_quote_tells_apart_leave_the_cell_blank(self):
+        found = [routine("otc", "allowance", "$40", limit="per month"),
+                 routine("emergency", setting="outside_us", amount="$130"),
+                 routine("emergency", setting="outside_us", amount="$50")]
+        self.assertEqual(column(present.alt_care_otc_travel, *found), [("", [])])
+        found = [dict(f, fact_id=f["amount"]) for f in found]
+        _, aside = present.explain("Humana", found, "I_alt_care_otc_travel", "dvha")
+        self.assertEqual({f["amount"]: aside[facts.identity(f)] for f in found}, {
+            "$40": ["the facts do not fully give the worldwide part"],
+            "$130": ["the facts do not say which copay is the ER's"], "$50": ["the facts do not say which copay is the ER's"]})
+
+    def test_a_document_that_says_care_abroad_is_not_covered_cites_a_blank(self):
+        none = priced("emergency", setting="outside_us", cost_kind="not_covered", amount="")
+        self.assertEqual(column(present.alt_care_otc_travel, none), [("", [none])])
+
+    def test_care_abroad_without_a_copay_leaves_the_cell_blank(self):
+        found = [routine("extras.acupuncture"), priced("emergency", setting="outside_us", cost_kind="covered", amount="")]
+        self.assertEqual(column(present.alt_care_otc_travel, *found), [("", [])])
+
+    def test_skips_medicare_and_conditional_care(self):
+        found = [priced("extras.acupuncture", amount="$20"), routine("extras.chiropractic", condition="diabetes"),
+                 routine("emergency", amount="$90")]
+        self.assertEqual(column(present.alt_care_otc_travel, *found), [("", [])])
+
+
+class ExtraBenefitsTest(unittest.TestCase):
+    def test_names_fitness_meals_and_transportation_and_shows_foot_care(self):
+        found = [routine("fitness"), routine("meals"), routine("extras.transportation"), routine("foot_care", amount="$45"),
+                 routine("foot_care", "visit_limit", "6", limit="per year")]
+        self.assertEqual(column(present.extra_benefits, *found),
+                         [("Fitness; Meals; Transportation; Routine foot care $45 6/year", found)])
+
+    def test_foot_care_for_members_with_diabetes_says_so_unless_every_member_has_some(self):
+        diabetic = routine("foot_care", condition="diabetes")
+        self.assertEqual(column(present.extra_benefits, diabetic)[0][0], "Routine foot care $0 for members with diabetes")
+        self.assertEqual(column(present.extra_benefits, diabetic, routine("foot_care", amount="$15"))[0][0],
+                         "Routine foot care $15")
+
+    def test_skips_conditional_and_uncovered_benefits(self):
+        found = [routine("meals", condition="after a hospital stay"), routine("fitness", cost_kind="not_covered", amount=""),
+                 routine("extras.transportation", network="out")]
+        self.assertEqual(column(present.extra_benefits, *found), [("", [])])
+
+    def test_shows_wellness_bucks_unless_they_also_pay_for_alternative_care(self):
+        bucks = routine("fitness", "allowance", "$150", pool="Devoted Health Wellness Bucks", limit="per year")
+        self.assertEqual(column(present.extra_benefits, routine("fitness"), bucks, dict(bucks, source="SB", page="2"))[0][0],
+                         "Fitness; Wellness Bucks $150/year")
+        massage = routine("extras.massage", "allowance", "$150", pool=bucks["pool"], limit="per year")
+        self.assertEqual(column(present.extra_benefits, routine("fitness"), bucks, massage)[0][0], "Fitness")
+
+    def test_names_cards_for_chronic_conditions_and_programs_after_heart_failure(self):
+        found = [routine("other_supplemental", "allowance", "$30", pool="Food & Home Card", limit="per month",
+                         condition="chronically ill members"),
+                 routine("other_supplemental", pool="Virtual Cardiac Recovery Program", condition="recent heart failure"),
+                 routine("meals", condition="After your inpatient stay for Congestive Heart Failure")]
+        self.assertEqual(column(present.extra_benefits, *found)[0][0],
+                         "For members with certain chronic conditions: Food & Home Card $30/month; "
+                         "After a heart-failure hospital stay: Virtual Cardiac Recovery Program, home-delivered meals")
+
+
 def presented_cells(data, column):
     return {p: [value for value, _ in got] for p, got in present.lines(data, column).items()}
 

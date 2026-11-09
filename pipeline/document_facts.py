@@ -101,3 +101,8 @@ def step(data, texts, work, answer, version, reviewed=True, present_version=None
         rows, trusted = review.gate(data, texts, work, answer, review.trusted(data, old, held), rows, v, held)
         facts.write(str(data / review.REVIEWED), trusted)
     facts.write(str(path), rows)
+VERSIONS[13] = dict(VERSIONS[12], review_cap=200, recheck=VERSIONS[12]["recheck"] | {
+    "dental": ("H3805-041-0", "H2406-042-0", "H1372-003-0", "H2406-073-0", "H7199-002-0", "H2923-025-0", "H1036-153-0",
+               "H1036-306-0", "H1036-317-0", "H5216-427-2", "H5216-455-0"),
+    "emergency": ("H7006-018-0", "H7006-021-0"), "meals": ("H1036-306-0",),
+    "other_supplemental": ("H1036-323-0", "H1036-317-0", "H5216-455-0")})
