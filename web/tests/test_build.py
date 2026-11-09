@@ -334,7 +334,6 @@ class SiteCommandTest(unittest.TestCase):
         strike = dict(sheet="main", plan_id="H3805-048-0", column="E_moop", quote="gone", note="")
         out = io.StringIO()
         with (mock.patch.object(build, "site_data", return_value=bare_site()),
-              mock.patch.object(build.layers, "live", return_value=({}, [], [])),
               mock.patch.object(build.layers, "stale_strikes", return_value=[strike]), contextlib.redirect_stdout(out)):
             build.main("site", self.dir / "site")
         self.assertIn("::warning::A strike matches no machine quote: main H3805-048-0 E_moop gone", out.getvalue())
