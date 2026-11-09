@@ -666,10 +666,10 @@ class DentalTest(unittest.TestCase):
         found = [routine("dental.preventive"), routine("dental", "max", "$1,250")]
         self.assertEqual(column(present.dental, *found), [("", [])])
 
-    def test_skips_medicare_conditional_package_and_out_of_network_dental(self):
+    def test_medicare_conditional_and_package_dental_cite_a_blank(self):
         found = [priced("dental.preventive", amount="$30"), routine("dental.comprehensive", condition="diabetes"),
                  routine("dental.comprehensive", package="Rider"), routine("dental.comprehensive", network="out")]
-        self.assertEqual(column(present.dental, *found), [("", [])])
+        self.assertEqual(column(present.dental, *found), [("", found[:3])])
 
 
 class EveryTest(unittest.TestCase):

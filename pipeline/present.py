@@ -813,7 +813,8 @@ def dental_price(found, leaf):
 
 def dental(organization, found):
     """Shows routine preventive and comprehensive dental prices and the maximum, naming the services that share it.
-    A plan with only an allowance shows it. An allowance on a card shared with other benefits is not a maximum."""
+    A plan with only an allowance shows it. An allowance on a card shared with other benefits is not a maximum.
+    Without routine dental, it cites a blank as the main sheet's dental column does."""
     prev, prev_shown = dental_price(found, "dental.preventive")
     comp, comp_shown = dental_price(found, "dental.comprehensive")
     others = {f["pool"] for f in found if f["pool"] and not facts.covers("dental", f["benefit"])
@@ -839,6 +840,9 @@ def dental(organization, found):
         else:
             parts.append(f"max {amount} PREV+COMP")
         cited += caps
+    if not parts:
+        blank = COLUMNS["R_dental"](organization, found)
+        return blank if not blank[0][0] else [("", [])]
     return [("; ".join(parts), unique(cited))]
 
 
