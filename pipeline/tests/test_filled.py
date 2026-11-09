@@ -93,6 +93,23 @@ class VersionsTest(unittest.TestCase):
         self.assertFalse(ignore(dict(layer=layers.PRESENTED, column="K_tests_labs", plan_id="H5439-010-0")))
         self.assertIn(("K_tests_labs", "H7006-021-0"), filled.V6_HELD)
 
+    def test_version_7_also_sees_presented_dvha_columns_instead_of_their_edits(self):
+        _, ignore = filled.VERSIONS[7]
+        for column in ("C_premium", "E_optional_packages", "G_vision", "H_hearing"):
+            self.assertTrue(ignore(dict(layer=layers.EDITS, sheet="dvha", column=column)), column)
+            self.assertFalse(ignore(dict(layer=layers.PRESENTED, sheet="dvha", column=column)), column)
+        self.assertFalse(ignore(dict(layer=layers.EDITS, sheet="dvha", column="F_dental")))
+        self.assertTrue(ignore(dict(layer=layers.PRESENTED, sheet="dvha", column="F_dental")))
+        self.assertTrue(ignore(dict(layer=layers.EDITS, sheet="main", column="L_xray_imaging")))
+        self.assertTrue(ignore(dict(layer=layers.PRESENTED, column=next(iter(filled.V6_HELD))[0],
+                                    plan_id=next(iter(filled.V6_HELD))[1])))
+
+    def test_earlier_versions_see_dvha_edits_instead_of_their_presented_rows(self):
+        for version in range(2, 7):
+            _, ignore = filled.VERSIONS[version]
+            self.assertFalse(ignore(dict(layer=layers.EDITS, sheet="dvha", column="C_premium")), version)
+            self.assertTrue(ignore(dict(layer=layers.PRESENTED, sheet="dvha", column="C_premium")), version)
+
     def test_site_data_shows_what_the_version_sees(self):
         with mock.patch.object(filled.build, "site_data") as site_data:
             filled.site_data(DATA, 2)
