@@ -56,3 +56,8 @@ test("serves everything else from the site's assets", async () => {
     assert.equal(await (await fetchPath(path)).text(), `asset ${path}`);
   }
 });
+
+test("serves a cell's trace from its static file", async () => {
+  const path = "/trace/2027/main/H1036-153-0/AB_ambulance";
+  assert.equal(await (await fetchPath(path)).text(), `asset ${path}.json`);
+});

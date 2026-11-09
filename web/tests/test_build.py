@@ -6,6 +6,7 @@ import json
 import pathlib
 import re
 import shutil
+import sqlite3
 import sys
 import tempfile
 import unittest
@@ -296,6 +297,9 @@ class SiteCommandTest(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.dir = pathlib.Path(self.tmp.name)
+        traces = mock.patch.object(build, "write_traces")
+        self.traces = traces.start()
+        self.addCleanup(traces.stop)
 
     def tearDown(self):
         self.tmp.cleanup()
@@ -334,9 +338,30 @@ class SiteCommandTest(unittest.TestCase):
             build.main("site", self.dir / "site")
         self.assertIn("::warning::A strike matches no machine quote: main H3805-048-0 E_moop gone", out.getvalue())
 
+    def test_site_command_writes_traces_from_the_commit(self):
+        with mock.patch.object(build, "site_data", return_value=bare_site()), mock.patch.object(build, "commit", return_value="abc"):
+            build.main("site", self.dir / "site")
+        self.traces.assert_called_once_with(self.dir / "site", "abc")
+
     def test_site_command_records_build_time_and_titles_the_page(self):
         with mock.patch.object(build, "site_data", return_value=bare_site(year=2099, area="A & B")):
             build.main("site", self.dir / "site")
         built = datetime.datetime.fromisoformat(json.loads((self.dir / "site" / "data.json").read_text())["built"])
         self.assertLess(datetime.datetime.now(datetime.timezone.utc) - built, datetime.timedelta(minutes=1))
         self.assertIn("<title>pdxplans.org – 2099 Medicare Advantage plans</title>", (self.dir / "site" / "index.html").read_text())
+
+
+class TraceFilesTest(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.dir = pathlib.Path(self.tmp.name)
+
+    def test_writes_each_main_cells_trace(self):
+        build.write_traces(self.dir / "site", "abc")
+        main = self.dir / "site/trace/2027/main"
+        cells = {f"{r['plan_id']}/{col}.json" for r in build.layers.live(DATA)[0]["main"] for col in build.fields.labels("main")}
+        self.assertEqual({str(p.relative_to(main)) for p in main.rglob("*.json")}, cells)
+        build.trace.build(2027, self.dir / "trace.sqlite", "abc")
+        expected = build.trace.cell(sqlite3.connect(self.dir / "trace.sqlite"), "main", "H1036-153-0", "AB_ambulance")
+        self.assertEqual(json.loads((main / "H1036-153-0/AB_ambulance.json").read_text()), expected)

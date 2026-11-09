@@ -3,7 +3,12 @@
 // CI downloads every blob through this route too, so it needs no R2 credentials.
 export default {
   async fetch(request, env) {
-    const sha = new URL(request.url).pathname.match(/^\/docs\/([0-9a-f]{64})\.pdf$/)?.[1];
+    const url = new URL(request.url);
+    // Until #181 serves traces from D1, web/build.py writes each one as a static file.
+    if (/^\/trace\/\d+\/main\/[^/]+\/[^/.]+$/.test(url.pathname)) {
+      return env.ASSETS.fetch(new Request(new URL(`${url.pathname}.json`, url), request));
+    }
+    const sha = url.pathname.match(/^\/docs\/([0-9a-f]{64})\.pdf$/)?.[1];
     if (!sha) return env.ASSETS.fetch(request);
     // pdf.js loads large EOCs in ranges.
     const blob = await env.BLOBS.get(`blobs/${sha}`, { range: request.headers, onlyIf: request.headers });

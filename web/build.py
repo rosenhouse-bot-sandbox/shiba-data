@@ -14,7 +14,9 @@ import os
 import pathlib
 import re
 import shutil
+import sqlite3
 import subprocess
+import tempfile
 import sys
 
 HERE = pathlib.Path(__file__).resolve().parent
@@ -23,6 +25,7 @@ import cms_sources  # noqa: E402
 import fields  # noqa: E402
 import layers  # noqa: E402
 import terms  # noqa: E402
+import trace  # noqa: E402
 import years  # noqa: E402
 
 DATA = years.data_dir()
@@ -154,6 +157,19 @@ def commit():
         ["git", "rev-parse", "HEAD"], cwd=HERE, capture_output=True, text=True, check=True).stdout.strip()
 
 
+def write_traces(out_dir, sha):
+    """Writes each main cell's trace where the Worker serves it until #181 serves it from D1."""
+    year = years.config(DATA)["year"]
+    with tempfile.TemporaryDirectory() as tmp:
+        trace.build(year, f"{tmp}/trace.sqlite", sha)
+        db = sqlite3.connect(f"{tmp}/trace.sqlite")
+        for plan_id, col in db.execute("SELECT plan_id, col FROM draft_cell WHERE sheet = 'main'"):
+            path = out_dir / "trace" / str(year) / "main" / plan_id / f"{col}.json"
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(json.dumps(trace.cell(db, "main", plan_id, col)))
+        db.close()
+
+
 def main(command, out=None):
     site = site_data()
     if command == "docs":
@@ -172,6 +188,7 @@ def main(command, out=None):
     (out_dir / "index.html").write_text(titled((HERE / "static" / "index.html").read_text(), site))
     site["built"] = datetime.datetime.now(datetime.timezone.utc).isoformat()
     site["terms"] = terms.resolve(HERE.parent, commit(), site["year"])
+    write_traces(out_dir, commit())
     (out_dir / "data.json").write_text(json.dumps(site))
 
 
