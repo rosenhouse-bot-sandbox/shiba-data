@@ -695,7 +695,8 @@ VERSIONS[5] = VERSIONS[4] | {
     ("dvha.E_optional_packages", p): "the facts do not say that the rider replaces the plan's dental, and they name it "
                                      "Platinum Dental Rider"
     for p in ("H3805-048-0", "H2406-070-0", "H3805-040-0")} | {
-    ("dvha.E_optional_packages", "H5216-048-0"): "the facts give no yearly maximum for the package"}
+    ("dvha.E_optional_packages", p): "the facts give no yearly maximum for the package"
+    for p in ("H5216-048-0", "H1036-323-0", "H5216-428-2")}
 # The version that first presents each DVHA column. Earlier versions hold its cells.
 DVHA_SINCE = {"C_premium": 3, "G_vision": 4, "H_hearing": 4, "E_optional_packages": 5}
 
