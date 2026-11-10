@@ -517,8 +517,7 @@ async function openDoc(docId, page, quote, note, otherQuotes = []) {
 }
 
 async function loadSizes(file) {
-  // pdf.js would otherwise probe eval, which the content security policy forbids.
-  const pdf = await pdfjsLib.getDocument({ url: file, isEvalSupported: false }).promise;
+  const pdf = await pdfjsLib.getDocument(file).promise;
   const pages = await Promise.all(Array.from({ length: pdf.numPages }, (_, i) => pdf.getPage(i + 1)));
   return { pdf, sizes: pages.map((p) => p.getViewport({ scale: 1 })) };
 }

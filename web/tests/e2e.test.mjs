@@ -20,8 +20,9 @@ async function newPage(options) {
 
 const site = JSON.parse(fs.readFileSync(path.join(SITE, "data.json")));
 // Like Cloudflare, which adds the headers that _headers lists for /* to every asset.
-const HEADERS = Object.fromEntries(fs.readFileSync(path.join(SITE, "_headers"), "utf8").split("\n").slice(1)
-  .filter((l) => l.trim()).map((l) => l.trim().split(/: (.*)/s).slice(0, 2)));
+const [rule, ...headerLines] = fs.readFileSync(path.join(SITE, "_headers"), "utf8").trim().split("\n");
+assert.equal(rule, "/*");
+const HEADERS = Object.fromEntries(headerLines.map((l) => l.match(/^ {2}([\w-]+): (.+)$/).slice(1)));
 
 before(async () => {
   server = http.createServer((req, res) => {
@@ -128,6 +129,12 @@ test("a cell opens from the keyboard", async () => {
   assert.match(page.url(), /#\/2027\/main\/H2001-045-0\/inpatient$/);
 });
 
+test("a blank cell's link has a box to show focus", async () => {
+  await page.goto(`${base}#/main`);
+  const box = await page.locator('td[data-col] > a[aria-label="Blank"]').first().boundingBox();
+  assert.ok(box.width > 0 && box.height > 0);
+});
+
 test("every link is a permalink that opens what clicking it shows", async () => {
   const clicking = await newPage();
   await clicking.goto(`${base}#/notes`);
@@ -158,7 +165,6 @@ test("the window title names the view", async () => {
   assert.equal(await page.title(), "Notes – pdxplans.org – 2027 Medicare Advantage plans");
   await page.goto(`${base}#/plan/H2001-045-0`);
   await page.waitForSelector(".plan-page");
-  assert.match(await page.title(), /^.+ – pdxplans\.org – 2027 Medicare Advantage plans$/);
   assert.equal(await page.title(), `${site.plans.find((p) => p.plan_id === "H2001-045-0").plan_name} – pdxplans.org – 2027 Medicare Advantage plans`);
 });
 

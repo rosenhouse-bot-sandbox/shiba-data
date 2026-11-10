@@ -41,7 +41,7 @@ a { color: var(--accent); }
 .sheet tr.section th span { position: sticky; left: 6px; }
 td { cursor: pointer; }
 td:hover { outline: 2px solid var(--accent); outline-offset: -2px; }
-td[data-col] > a { color: inherit; text-decoration: none; }
+td[data-col] > a { display: block; min-height: 1lh; color: inherit; text-decoration: none; }
 td.dot { text-align: center; }
 td.commented { background: var(--comment); }
 td.commented.caveat { background: var(--caveat); }
@@ -151,7 +151,7 @@ td.selected { outline: 3px solid var(--ink); outline-offset: -3px; }
 .how-strip .to { background: var(--hi-out); }
 .how-term { background: none; border: 0; padding: 0; font: inherit; color: inherit; cursor: help; border-bottom: 1.5px dotted var(--accent); }
 .how-term:hover, .how-term:focus-visible, .how-term-box.open .how-term { background: #e8efff; }
-.how-pop { display: none; position: fixed; z-index: 20; width: 560px; max-height: calc(100vh - 16px); overflow: auto; padding: 12px 14px; background: #fff; border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 12px 32px rgba(0, 0, 0, .16); font-size: 13px; line-height: 1.5; }
+.how-pop { display: none; position: fixed; z-index: 20; width: 560px; max-height: calc(100dvh - 16px); overflow: auto; padding: 12px 14px; background: #fff; border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 12px 32px rgba(0, 0, 0, .16); font-size: 13px; line-height: 1.5; }
 .how-term-box.open .how-pop { display: block; }
 .how-pop strong, .how-pop > span { display: block; margin-bottom: 6px; }
 .how-pop pre { margin: 0 0 8px; padding: 8px 10px; max-height: 240px; overflow: auto; background: #f6f7f9; border: 1px solid var(--line); border-radius: 6px; font-size: 11px; }

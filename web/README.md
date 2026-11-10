@@ -30,9 +30,10 @@ The site serves pdf.js from `web/node_modules`, so it loads no third-party code.
 
 ```sh
 cd web
+npm ci
 python3 -I -m unittest discover -s tests
 node --test tests/highlight.test.mjs tests/ago.test.mjs tests/permalink.test.mjs tests/worker.test.mjs tests/pipeline.test.mjs
-npm ci && SITE=../_site DOCS=<dir of <sha256>.pdf> node --test tests/e2e.test.mjs
+SITE=../_site DOCS=<dir of <sha256>.pdf> node --test tests/e2e.test.mjs
 ```
 
 ## Web platform guidance
