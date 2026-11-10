@@ -877,10 +877,10 @@ main,H1036-317-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/hum
 main,H1036-317-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,63,Other Medicare Part B Drugs 20% coinsurance – PCP's Office – Specialist's Office – Outpatient Hospital
 main,H1036-317-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036317000SB27pdf,11,Allergy shots and serum • PCP's office: $0 copay
 main,H1036-317-0,M_part_b_drugs,,0%-20%,https://assets.humana.com/is/content/humana/H1036317000SB27pdf,11,Specialist's office: $0 copay
-main,H1036-317-0,O_medical_deductible,,$283 some,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,45,The following services listed are excluded from the in-network deductible:
-main,H1036-317-0,O_medical_deductible,,$283 some,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,45,Your deductible is $283.
-main,H1036-317-0,O_medical_deductible,,$283 some,https://assets.humana.com/is/content/humana/H1036317000SB27pdf,5,Medical deductible $283
-main,H1036-317-0,O_medical_deductible,,$283 some,https://assets.humana.com/is/content/humana/H1036317000SB27pdf,5,The following services listed are excluded from the in-network deductible:
+main,H1036-317-0,O_medical_deductible,,Part B deductible some,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,45,The following services listed are excluded from the in-network deductible:
+main,H1036-317-0,O_medical_deductible,,Part B deductible some,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,45,Your deductible is $283.
+main,H1036-317-0,O_medical_deductible,,Part B deductible some,https://assets.humana.com/is/content/humana/H1036317000SB27pdf,5,Medical deductible $283
+main,H1036-317-0,O_medical_deductible,,Part B deductible some,https://assets.humana.com/is/content/humana/H1036317000SB27pdf,5,The following services listed are excluded from the in-network deductible:
 main,H1036-317-0,P_vision,,●,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,85,Any retail amount over $150 toward the purchase of frame and pair
 main,H1036-317-0,P_vision,,●,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,85,Eyewear Benefit (1 per calendar year) at a Humana Medicare Insight
 main,H1036-317-0,P_vision,,●,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,85,Routine Eye Exam including refraction (1 per calendar year) by a

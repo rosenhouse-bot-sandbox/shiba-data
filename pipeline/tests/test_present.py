@@ -937,6 +937,10 @@ class WriteTest(unittest.TestCase):
         cells = {v: {(r["sheet"], r["column"]) for r in present.layer_rows(data, v)} for v in (8, 9)}
         self.assertEqual(cells[9] - cells[8], {("main", "C_premium")})
 
+    def test_version_11_presents_the_cell_version_10_holds_for_review(self):
+        self.assertEqual(set(present.VERSIONS[10]) - set(present.VERSIONS[11]), {("O_medical_deductible", "H2001-045-0")})
+        self.assertLessEqual(set(present.VERSIONS[11]), set(present.VERSIONS[10]))
+
     def test_a_held_main_cell_does_not_hold_the_dvha_cell_of_the_same_name(self):
         self.assertNotEqual(present.cell("main", "C_premium", "H1"), present.cell("dvha", "C_premium", "H1"))
 
@@ -1020,7 +1024,8 @@ class CmsColumnsTest(unittest.TestCase):
     def test_present_the_live_value_of_every_plan(self):
         data = years.data_dir(YEAR)
         live = layers.live(data)[0]
-        for sheet, columns in (("main", ("C_premium", "D_premium_full_extra_help", "E_moop", "N_pharmacy_deductible")),
+        for sheet, columns in (("main", ("C_premium", "D_premium_full_extra_help", "E_moop", "N_pharmacy_deductible",
+                                         "O_medical_deductible")),
                                ("dvha", ("D_premium_full_extra_help",))):
             plans = {r["plan_id"]: r for r in live[sheet]}
             for column in columns:

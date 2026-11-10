@@ -1056,6 +1056,9 @@ VERSIONS[8] = {c: why for c, why in VERSIONS[7].items() if c[0] not in ("K_tests
                or c[1] in ("H6815-038-0", "H5439-019-0")}
 VERSIONS[8][("K_tests_labs", "H5439-019-0")] = "the reviewer rejected the $10 price for most labs"
 VERSIONS[9] = dict(VERSIONS[8])
+# Version 10 holds a cell whose new PBP fact makes it cite document facts the reviewer has not checked. Version 11 does not.
+VERSIONS[10] = VERSIONS[9] | {("O_medical_deductible", "H2001-045-0"): "the reviewer has not checked its Part B facts"}
+VERSIONS[11] = dict(VERSIONS[9])
 # The version that first presents each later column. Earlier versions hold its cells.
 SINCE = {("dvha", "C_premium"): 3, ("dvha", "G_vision"): 4, ("dvha", "H_hearing"): 4, ("dvha", "E_optional_packages"): 5,
          ("dvha", "F_dental"): 6, ("dvha", "I_alt_care_otc_travel"): 6, ("dvha", "J_extra_benefits"): 6,

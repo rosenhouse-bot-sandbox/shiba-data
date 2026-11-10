@@ -146,7 +146,7 @@ class MainTest(unittest.TestCase):
             with open(f"{tmp}/pbp/pbp_b8_clin_diag_ther.txt", "w") as f:
                 f.write("pbp_a_hnumber\tpbp_a_plan_identifier\tsegment_id\tpbp_b8b_copay_yn\tpbp_b8b_coins_yn\n"
                         "H1111\t001\t0\t2\t2\n")
-            pbp_facts.main(f"{tmp}/plans.csv", f"{tmp}/reads.csv", f"{tmp}/pbp", f"{tmp}/out.csv")
+            pbp_facts.main(f"{tmp}/plans.csv", f"{tmp}/reads.csv", f"{tmp}/pbp", f"{tmp}/out.csv", "$283")
             rows = facts.read(f"{tmp}/out.csv")
         self.assertEqual([(r["plan_id"], r["benefit"], r["amount"]) for r in rows],
                          [(PLAN, "imaging.diagnostic", "$0"), (PLAN, "imaging.xray", "$0"),
@@ -203,6 +203,57 @@ class PlanFactsTest(unittest.TestCase):
         plan = {"pbp_Section_D": [dict(pbp_d_out_pocket_amt="5900.00")], "pbp_mrx": [dict(mrx_alt_no_ded_tier="1")]}
         for r in pbp_facts.plan_facts(LANDSCAPE, READS, plan):
             self.assertEqual(facts.check(r), [], r)
+
+
+def deductible(**fields):
+    return plan_terms(pbp_facts.deductible_facts(PLAN, {"pbp_Section_D": [fields]}, "$283"))
+
+
+class DeductibleFactsTest(unittest.TestCase):
+    def test_a_plan_without_a_deductible_has_a_zero_one(self):
+        for fields in ({"pbp_d_inn_deduct_yn": "2"}, {"pbp_d_ann_deduct_yn": "2"}):
+            self.assertEqual(deductible(**fields), [
+                ("medical_deductible", "in", "", "deductible", "$0", "PBP", tuple(fields))])
+
+    def test_an_in_network_deductible_for_some_services(self):
+        self.assertEqual(deductible(pbp_d_inn_deduct_yn="1", pbp_d_inn_deduct_partb_yn="2", pbp_d_inn_deduct_amt="750.00",
+                                    pbp_d_inn_deduct_m_yn="2"), [
+            ("medical_deductible.some", "in", "", "deductible", "$750", "PBP",
+             ("pbp_d_inn_deduct_amt", "pbp_d_inn_deduct_m_yn"))])
+
+    def test_an_in_network_deductible_for_every_service(self):
+        self.assertEqual(deductible(pbp_d_inn_deduct_yn="1", pbp_d_inn_deduct_partb_yn="2", pbp_d_inn_deduct_amt="200.00",
+                                    pbp_d_inn_deduct_m_yn="1")[0][:5], ("medical_deductible", "in", "", "deductible", "$200"))
+
+    def test_the_part_b_deductible(self):
+        self.assertEqual(deductible(pbp_d_inn_deduct_yn="1", pbp_d_inn_deduct_partb_yn="1", pbp_d_inn_deduct_m_yn="2"), [
+            ("medical_deductible.part_b", "in", "", "covered", "", "PBP", ("pbp_d_inn_deduct_partb_yn",)),
+            ("medical_deductible.some", "in", "", "deductible", "$283", "PBP",
+             ("pbp_d_inn_deduct_partb_yn", "pbp_d_inn_deduct_m_yn"))])
+
+    def test_a_combined_deductible_for_some_in_network_services(self):
+        self.assertEqual(deductible(pbp_d_ann_deduct_yn="1", pbp_d_ann_deduct_amt_type="4", pbp_d_ann_deduct_amt="250.00",
+                                    pbp_d_ann_deduct_bens="010", pbp_d_ann_deduct_inn_mc_yn="2"), [
+            ("medical_deductible.some", "any", "", "deductible", "$250", "PBP",
+             ("pbp_d_ann_deduct_amt", "pbp_d_ann_deduct_bens", "pbp_d_ann_deduct_inn_mc_yn"))])
+
+    def test_a_combined_part_b_deductible(self):
+        self.assertEqual([t[:5] for t in deductible(pbp_d_ann_deduct_yn="1", pbp_d_ann_deduct_amt_type="2",
+                                                     pbp_d_ann_deduct_bens="010", pbp_d_ann_deduct_inn_mc_yn="2")], [
+            ("medical_deductible.part_b", "any", "", "covered", ""),
+            ("medical_deductible.some", "any", "", "deductible", "$283")])
+
+    def test_a_deductible_only_out_of_network(self):
+        self.assertEqual(deductible(pbp_d_ann_deduct_yn="1", pbp_d_ann_deduct_amt_type="4", pbp_d_ann_deduct_amt="100.00")
+                         [0][:5], ("medical_deductible", "out", "", "deductible", "$100"))
+
+    def test_a_plan_whose_pbp_gives_no_deductible_has_no_fact(self):
+        self.assertEqual(deductible(), [])
+
+    def test_every_deductible_fact_passes_the_fact_checks(self):
+        for fields in ({"pbp_d_inn_deduct_yn": "2"}, {"pbp_d_inn_deduct_yn": "1", "pbp_d_inn_deduct_partb_yn": "1"}):
+            for r in pbp_facts.deductible_facts(PLAN, {"pbp_Section_D": [fields]}, "$283"):
+                self.assertEqual(facts.check(r), [], r)
 
 
 class ImagingCellsTest(unittest.TestCase):
