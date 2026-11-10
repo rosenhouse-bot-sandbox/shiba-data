@@ -596,21 +596,6 @@ test("a link followed while the document scrolls still opens its sheet", async (
   assert.doesNotMatch(await page.evaluate(() => location.hash), /dvha/);
 });
 
-test("a cell's note restates the CMS plan data without our symbols", async () => {
-  const withPbp = (match) => ["main", "dvha"].flatMap((sheet) => site[sheet].rows.flatMap((r) =>
-    Object.entries(r.cells).filter(([, c]) => c.cites.length && match(c.pbp ?? null)).map(([col]) => `#/${sheet}/${r.plan_id}/${col}`)))[0];
-  for (const [hash, expected] of [
-    [withPbp((p) => p === "●"), /CMS plan data shows this benefit is covered\./],
-    [withPbp((p) => p === "$0-$100/$0"), /CMS plan data shows \$0-\$100\/\$0\./],
-    [withPbp((p) => p === ""), /CMS plan data leaves this blank/],
-  ]) {
-    await page.goto(`${base}${hash}`);
-    const pbp = await page.locator("#source-note p.pbp").textContent();
-    assert.match(pbp, expected);
-    assert.doesNotMatch(pbp, /[●◐“]/);
-  }
-});
-
 const openEoc = async (planId) => {
   await page.goto(`${base}#/plan/${planId}`);
   await page.locator("table.docs a", { hasText: "Evidence of Coverage" }).click();
@@ -957,7 +942,7 @@ test("pipeline view: each step shows its record from the cell's trace", async ()
   assert.match(await page.textContent(".how-trace-head"), /draft\s*Traced/);
   assert.ok(!(await page.locator(".how-trace pre").isVisible()));
   await page.click(".how-trace summary");
-  assert.match(await page.textContent(".how-trace pre"), /pipeline\/main_chart\.py/);
+  assert.match(await page.textContent(".how-trace pre"), /pipeline\/present\.py/);
   await page.click("a.how-nav[rel=next]");
   await page.waitForFunction(() => document.querySelector(".how-trace-head")?.textContent.includes("Not recorded in this build"));
   assert.equal(await page.locator(".how-trace pre").count(), 0);
@@ -1021,10 +1006,10 @@ test("pipeline view: a DVHA cell's detail links to its pipeline view, which show
   assert.match(await page.textContent(".how-cell"), /Vision/);
   assert.ok((await chainOf(page)).includes("Column rules"));
   await openHow(page, "dvha/H1036-153-0/vision/draft");
-  assert.deepEqual(await page.locator(".how-end code").allTextContents(), ["PBP tables", "dvha.csv"]);
-  assert.match(await page.textContent(".how-strip"), /pbp_b17a_bendesc_amo_rex = /);
+  assert.deepEqual(await page.locator(".how-end code").allTextContents(), ["document_facts", "dvha.csv"]);
+  assert.match(await page.textContent(".how-strip"), /the column rule/);
   await page.click(".how-trace summary");
-  assert.match(await page.textContent(".how-trace pre"), /pipeline\/dvha\.py/);
+  assert.match(await page.textContent(".how-trace pre"), /pipeline\/present\.py/);
   await openHow(page, "dvha/H1036-153-0/vision/column-rules");
   assert.match(await page.textContent(".how-strip"), /becomes line 1 /);
 });

@@ -86,7 +86,7 @@ const full = {
   documents: { status: "traced", documents: [{ kind: "SB", url: "https://x/sb.pdf", found_via: "Links sheet", pages: 10, cover_problems: "" },
     { kind: "EOC", url: EOC, found_via: "Links sheet", pages: 90, cover_problems: "" },
     { kind: "RIDER", url: "https://x/rider.pdf", found_via: "carrier page", pages: 4, cover_problems: "no year" }] },
-  draft: { status: "traced", value: "$0", cms_fields: { status: "traced", rows: [{ field: "Part C Premium", value: "$0.00" }] } },
+  draft: { status: "traced", value: "$0" },
   model_citations: { status: "traced", rows: [{ step: "xref", url: EOC, pdf_page: 6 }] },
   layers: { status: "traced", draft: "$0", applied: [{ layer: "generated/presented.csv", value: "", rows: [{ url: EOC, pdf_page: 5 }] }],
     live: { value: "", set_by: "generated/presented.csv", citations: [{ url: EOC, pdf_page: 5 }, { url: "https://x/sb.pdf", pdf_page: 2 }] } },
@@ -98,25 +98,16 @@ test("each step's strip reads the cell's own records", () => {
   assert.deepEqual(stripOf("find-pdfs"), ["2 sources", "SB, EOC and RIDER URLs"]);
   assert.deepEqual(stripOf("download"), ["3 URLs", "SB, 10 pages; EOC, 90 pages; RIDER, 4 pages, cover problems"]);
   assert.deepEqual(stripOf("extract-text"), ["3 PDFs", "text of 104 pages"]);
-  assert.deepEqual(stripOf("draft"), ["Part C Premium = $0.00", "$0"]);
+  assert.deepEqual(stripOf("draft"), ["the column rule", "$0"]);
   assert.deepEqual(stripOf("stack-draft"), ["draft $0", "live blank, set by generated/presented.csv"]);
   assert.deepEqual(stripOf("stack-presented"), ["presented blank, 1 quote from EOC page 5", "live blank"]);
   assert.deepEqual(stripOf("publish"), ["live blank", "site cell blank with 2 quotes from EOC page 5; SB page 2"]);
 });
 
-test("a strip says when the trace has no fields or quotes to name", () => {
-  const bare = { ...full, draft: { status: "traced", value: "$0", cms_fields: { status: "not_recorded" } },
-    layers: { ...full.layers, live: { value: "$0", citations: [] } } };
-  assert.deepEqual(stripOf("draft", bare), ["the plan's CMS fields", "$0"]);
+test("a strip says when the trace has no quotes to name", () => {
+  const bare = { ...full, layers: { ...full.layers, live: { value: "$0", citations: [] } } };
   assert.deepEqual(stripOf("stack-draft", bare), ["draft $0", "live $0"]);
   assert.deepEqual(stripOf("publish", bare), ["live $0", "site cell $0 with no quotes"]);
-});
-
-test("a draft strip names its first six filled fields and counts the rest", () => {
-  const rows = [{ field: "(rows)", value: "1" }, { field: "blank", value: "" },
-    ...Array.from({ length: 9 }, (_, i) => ({ field: `f${i}`, value: String(i) }))];
-  const many = { ...full, draft: { ...full.draft, cms_fields: { status: "traced", rows } } };
-  assert.deepEqual(stripOf("draft", many), ["f0 = 0, f1 = 1, f2 = 2, f3 = 3, f4 = 4, f5 = 5 and 3 more fields", "$0"]);
 });
 
 test("a step whose record the trace lacks, or that has no strip, gets none", () => {

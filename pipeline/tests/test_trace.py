@@ -3,7 +3,7 @@ from unittest import mock
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path[:0] = [os.path.dirname(HERE), os.path.join(os.path.dirname(os.path.dirname(HERE)), "web")]
-import ask, blobs, build, document_facts, extract, fields, layers, present, reads, run, trace, years
+import ask, blobs, build, document_facts, extract, fields, layers, present, run, trace, years
 
 READER, VERIFIER, REVIEWER = "reader-model", "verifier-model", "reviewer-model"
 
@@ -75,7 +75,7 @@ class TraceTest(unittest.TestCase):
 
     def test_traces_a_dvha_cell_from_its_own_code(self):
         records = self.cell("dvha", "H2923-001-0", "F_dental")
-        self.assertEqual(records["draft"]["code"]["file"], "pipeline/dvha.py")
+        self.assertEqual(records["draft"]["code"]["file"], "pipeline/present.py")
         self.assertEqual(records["rule"]["code"]["function"], "dental")
 
     def test_says_why_the_pinned_version_holds_a_dvha_cell(self):
@@ -141,33 +141,13 @@ class TraceTest(unittest.TestCase):
         self.assertEqual([(f["fact_id"], f["origin"]) for f in added["rows"]], [("279e0b3e50b5b24d", "added")])
         self.assertEqual(self.cell(*AMBULANCE)["added_facts"]["status"], trace.NONE)
 
-    def test_lists_the_pbp_fields_a_cell_read(self):
-        cms = self.cell(*AMBULANCE)["draft"]["cms_fields"]
-        self.assertIn(("pbp_b10_amb_trans", "pbp_b10a_copay_gas_amt_min", "325.00"),
-                      [(r["file"], r["field"], r["value"]) for r in cms["rows"]])
-        self.assertIn(("pbp_b10_amb_trans", reads.ROWS, "1"), [(r["file"], r["field"], r["value"]) for r in cms["rows"]])
-
-    def test_lists_the_landscape_fields_behind_a_plans_csv_field(self):
-        cms = self.cell("main", "H3805-048-0", "D_premium_full_extra_help")["draft"]["cms_fields"]
-        self.assertEqual([r["field"] for r in cms["rows"]], ["premium_full_extra_help"])
-        self.assertIn("Part C Premium", [n["field"] for n in cms["rows"][0]["landscape"]])
-
-    def test_says_none_for_a_cell_that_read_no_cms_field(self):
-        self.assertEqual(self.cell("main", "H3805-048-0", "U_naturopath")["draft"]["cms_fields"]["status"], trace.NONE)
+    def test_lists_the_landscape_facts_a_rule_used(self):
+        lines = self.cell("main", "H3805-048-0", "D_premium_full_extra_help")["rule"]["lines"]
+        self.assertIn("Landscape", {f["source"] for f in lines[0]["facts"]})
 
     def test_lists_the_landscape_fields_behind_the_plan(self):
         fields = self.cell(*AMBULANCE)["plan"]["landscape_row"]["fields"]
         self.assertIn(("Plan Name", "Humana Total Complete (HMO)"), [(f["field"], f["value"]) for f in fields])
-
-    def test_lists_the_pbp_fields_a_dvha_cell_read(self):
-        cms = self.cell("dvha", "H1036-153-0", "G_vision")["draft"]["cms_fields"]
-        self.assertIn("pbp_b17_eye_exams_wear", {r["file"] for r in cms["rows"]})
-        self.assertNotIn("pbp_b10_amb_trans", {r["file"] for r in cms["rows"]})
-
-    def test_lists_the_landscape_fields_behind_a_dvha_plans_csv_field(self):
-        cms = self.cell("dvha", "H3805-048-0", "D_premium_full_extra_help")["draft"]["cms_fields"]
-        self.assertEqual([r["field"] for r in cms["rows"]], ["premium_full_extra_help"])
-        self.assertIn("Part C Premium", [n["field"] for n in cms["rows"][0]["landscape"]])
 
     def test_lists_the_plans_documents_with_their_text_hashes(self):
         documents = self.cell(*AMBULANCE)["documents"]["documents"]
@@ -185,7 +165,7 @@ class TraceTest(unittest.TestCase):
         self.assertEqual(build["sha"], SHA)
         self.assertEqual(build["steps"], json.loads((years.data_dir() / "steps.json").read_text()))
         self.assertEqual(self.cell(*AMBULANCE)["draft"]["code"]["url"],
-                         f"{trace.REPO_URL}/blob/{SHA}/pipeline/main_chart.py")
+                         f"{trace.REPO_URL}/blob/{SHA}/pipeline/present.py")
 
     def test_exports_each_cells_records_once_by_content_without_the_commit(self):
         with tempfile.TemporaryDirectory() as out:

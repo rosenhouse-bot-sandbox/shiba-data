@@ -9,10 +9,8 @@ import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 import cite  # noqa: E402
-import dvha  # noqa: E402
 import fetch_docs  # noqa: E402
 import fields  # noqa: E402
-import main_chart as mc  # noqa: E402
 import pbp  # noqa: E402
 import universe  # noqa: E402
 import years  # noqa: E402
@@ -78,94 +76,7 @@ class PbpDictionaryTest(unittest.TestCase):
                 pbp.load_dictionary(tmp)
 
 
-class MainChartTest(unittest.TestCase):
-    def test_span_and_default_zero(self):
-        self.assertEqual(mc.span("0.00", "100.00", mc.money), "$0-$100")
-        self.assertEqual(mc.span("45.00", "45.00", mc.money), "$45")
-        self.assertEqual(mc.copay_or_coins({}, "a", "b", "c", "d"), "$0")
-
-    def test_flag_reads_cms_bit_positions(self):
-        self.assertTrue(mc.flag({"f": "0110000"}, "f", 2))
-        self.assertFalse(mc.flag({"f": "0110000"}, "f", 1))
-
-    def test_pharmacy_deductible_names_exempt_tiers(self):
-        plan = {"pbp_mrx": [{"mrx_alt_no_ded_tier": "0110000"}]}
-        self.assertEqual(mc.pharmacy_deductible(plan, {"part_d_deductible": "$700"}), "$700 not tiers 1,2")
-
-    def test_medical_deductible_scope(self):
-        some = {"pbp_Section_D": [{"pbp_d_inn_deduct_yn": "1", "pbp_d_inn_deduct_amt": "200.00", "pbp_d_inn_deduct_m_yn": "2"}]}
-        oon = {"pbp_Section_D": [{"pbp_d_ann_deduct_yn": "1", "pbp_d_ann_deduct_amt": "100.00",
-                                  "pbp_d_ann_deduct_bens": "100", "pbp_d_ann_deduct_inn_mc_yn": "2"}]}
-        part_b = {"pbp_Section_D": [{"pbp_d_inn_deduct_yn": "1", "pbp_d_inn_deduct_partb_yn": "1", "pbp_d_inn_deduct_m_yn": "2"}]}
-        self.assertEqual(mc.medical_deductible(some), "$200 some")
-        self.assertEqual(mc.medical_deductible(oon), "$100 out-of-network only")
-        self.assertEqual(mc.medical_deductible(part_b), "Part B deductible some")
-        self.assertEqual(mc.medical_deductible({}), "$0")
-
-    def test_inpatient_day_intervals(self):
-        plan = {"pbp_b1a_inpat_hosp": [{"pbp_b1a_copay_mcs_int_num_t1": "3", "pbp_b1a_copay_mcs_amt_int1_t1": "465.00",
-                                        "pbp_b1a_copay_mcs_bgnd_int1_t1": "1", "pbp_b1a_copay_mcs_endd_int1_t1": "5",
-                                        "pbp_b1a_copay_mcs_amt_int2_t1": "0.00"}]}
-        self.assertEqual(mc.inpatient(plan), "$465 | 1-5")
-
-    def test_inpatient_copay_per_admission(self):
-        self.assertEqual(mc.inpatient({"pbp_b1a_inpat_hosp": [{"pbp_b1a_copay_mcs_amt_t1": "2241.00"}]}), "$2,241 per admission")
-
-    def test_inpatient_without_cost_sharing(self):
-        self.assertEqual(mc.inpatient({"pbp_b1a_inpat_hosp": [{"pbp_b1a_copay_yn": "1"}]}), "$0")
-        self.assertEqual(mc.inpatient({}), "")
-
-    def test_inpatient_rejects_provider_tiers(self):
-        with self.assertRaises(ValueError):
-            mc.inpatient({"pbp_b1a_inpat_hosp": [{"pbp_b1a_cost_vary_tiers_yn": "1"}]})
-
-    def test_out_of_network_matches_whole_category(self):
-        plan = {"pbp_Section_C_OON": [{"pbp_c_oon_out_mc_bendesc_cats": "17a;", "pbp_c_oon_outpt_coins_min_pct": "50"}]}
-        self.assertEqual(mc.out_of_network(plan, "7a"), "")
-        self.assertEqual(mc.out_of_network(plan, "17a"), "50%")
-
-    def test_part_b_reduction_shows_monthly_amount(self):
-        def plan(**d):
-            return {"pbp_Section_D": [d]}
-        self.assertEqual(mc.part_b_reduction(plan(pbp_d_mco_pay_reduct_yn="1", pbp_d_mco_pay_reduct_amt="154.20")), "$154.20")
-        self.assertEqual(mc.part_b_reduction(plan(pbp_d_mco_pay_reduct_yn="1")), "●")
-        self.assertEqual(mc.part_b_reduction(plan()), "")
-
-    def test_ambulance_spans_ground_and_air_then_worldwide(self):
-        plan = {"pbp_b10_amb_trans": [{"pbp_b10a_copay_gas_amt_min": "0.00", "pbp_b10a_copay_gas_amt_max": "325.00",
-                                       "pbp_b10a_coins_aas_pct_min": "20", "pbp_b10a_coins_aas_pct_max": "20"}],
-                "pbp_b4_emerg_urgent": [{"pbp_b4c_bendesc_ehc": "111", "pbp_b4c_copay_amt_wet_min": "325.00",
-                                         "pbp_b4c_copay_amt_wet_max": "325.00", "pbp_b4c_coins_pct_wet_min": "20",
-                                         "pbp_b4c_coins_pct_wet_max": "20"}]}
-        self.assertEqual(mc.ambulance(plan), "$0-$325 or 20% | $325 or 20%")
-
-    def test_ambulance_copays_of_both_kinds_make_one_range(self):
-        plan = {"pbp_b10_amb_trans": [{"pbp_b10a_copay_gas_amt_min": "250.00", "pbp_b10a_copay_gas_amt_max": "250.00",
-                                       "pbp_b10a_copay_aas_amt_min": "300.00", "pbp_b10a_copay_aas_amt_max": "300.00"}]}
-        self.assertEqual(mc.ambulance(plan), "$250-$300 | not covered")
-
-    def test_ambulance_without_cost_sharing(self):
-        plan = {"pbp_b10_amb_trans": [{"pbp_b10a_copay_yn": "2"}], "pbp_b4_emerg_urgent": [{"pbp_b4c_bendesc_ehc": "111"}]}
-        self.assertEqual(mc.ambulance(plan), "$0 | $0")
-
-    def test_ambulance_worldwide_needs_the_transportation_flag(self):
-        plan = {"pbp_b10_amb_trans": [{"pbp_b10a_copay_yn": "2"}], "pbp_b4_emerg_urgent": [{"pbp_b4c_bendesc_ehc": "011"}]}
-        self.assertEqual(mc.ambulance(plan), "$0 | not covered")
-
-    def test_ambulance_without_a_pbp_row_is_blank(self):
-        self.assertEqual(mc.ambulance({}), " | not covered")
-
-
 class SpecTest(unittest.TestCase):
-    def test_sheet_rows_have_the_spec_columns_in_order(self):
-        columns = ["section", "plan_id", "plan_name"] + list(fields.labels("dvha"))
-        plans = [{"plan_id": "A"}]
-        build = lambda keys: mc.sheet(plans, {"A": {}}, lambda p, d: {k: "" for k in keys}, dvha=True)
-        self.assertEqual(list(build(columns)[0]), columns)
-        for keys in (columns[::-1], columns[:-1], columns + ["Z_extra"]):
-            with self.assertRaisesRegex(ValueError, "A: columns differ from pipeline/fields.py"):
-                build(keys)
-
     def test_carriers_are_organizations_in_the_plans_file(self):
         with open(f"{years.data_dir()}/generated/plans.csv") as f:
             organizations = {r["organization"] for r in csv.DictReader(f)}
@@ -196,43 +107,6 @@ class DocumentTest(unittest.TestCase):
         docs = [{"text_file": "eoc.txt", "url": "v", "plan_ids": "A"}]
         text = {"eoc.txt": {2: "Wellness Bucks pay for a Naturopath"}}
         self.assertEqual([c["value"] for c in cite.citations(docs, text)], ["●"])
-
-
-class DvhaTest(unittest.TestCase):
-    def test_costs(self):
-        self.assertEqual(dvha.costs({"a_copay": "0.00", "a_coins": "0.00"}, ["a_copay", "a_coins"]), "$0")
-        self.assertEqual(dvha.costs({"a_copay": "10.00", "b_copay": "40.00", "a_coins": "50"},
-                                    ["a_copay", "b_copay", "a_coins"]), "$10-$40 or 50%")
-
-    def test_dental_names_narrow_comprehensive_scope(self):
-        plan = {"pbp_b16_dental": [{"pbp_b16b_bendesc_oe_amo": "2", "pbp_b16c_bendesc_ags_amo": "2"}]}
-        self.assertEqual(dvha.dental(plan), "PREV $0; COMP $0 (adjunctive general services only); no annual max")
-
-    def test_dental_separate_comprehensive_max(self):
-        plan = {"pbp_b16_dental": [{"pbp_b16b_bendesc_oe_amo": "2", "pbp_b16c_maxplan_cmp_amt": "1000.00"}]}
-        self.assertEqual(dvha.dental(plan), "PREV $0; COMP max $1,000")
-
-    def test_targeted_package_says_who_qualifies(self):
-        plan = {"pbp_b19b_model_test_vbid_uf": [{"pbp_b19b_package_name": "Nutritional Benefit"}]}
-        self.assertEqual(dvha.extras(plan), "For qualifying members: Nutritional Benefit")
-
-    def test_vision_per_item_allowance(self):
-        plan = {"pbp_b17_eye_exams_wear": [{"pbp_b17b_indv_maxplan_amt_egf": "100.00"}]}
-        self.assertEqual(dvha.vision(plan), "eyewear $100 per item type")
-
-    def test_targeted_foot_care(self):
-        plan = {"pbp_b7_b19b_health_prof_vbid_uf": [{"pbp_b7f_bendesc_amo_rf": "2", "pbp_b7f_bendesc_amt_rf": "6"}]}
-        self.assertEqual(dvha.extras(plan), "Routine foot care $0 6 (targeted)")
-
-    def test_worldwide_er_cap(self):
-        plan = {"pbp_b4_emerg_urgent": [{"pbp_b4c_bendesc_yn": "1", "pbp_b4c_copay_amt_wec_min": "0.00",
-                                         "pbp_b4c_wwc_maxplan_amt": "25000.00"}]}
-        self.assertEqual(dvha.alt_care(plan), "Worldwide ER $0, $25,000 max")
-
-    def test_optional_package(self):
-        plan = {"pbp_Section_D_opt": [{"pbp_d_opt_name": "MyOption DEN972", "pbp_d_amt_opt_premium": "52.10",
-                                       "pbp_d_opt_maxplan_ben_cov_amt": "1500.00"}]}
-        self.assertEqual(dvha.optional_packages(plan), "MyOption DEN972 $52.10/mo, max $1,500")
 
 
 if __name__ == "__main__":

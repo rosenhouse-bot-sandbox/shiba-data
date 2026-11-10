@@ -24,8 +24,6 @@ TRUSTED_WITHOUT_REVIEW = "trusted without review (#170)"
 TRACED, NONE, NOT_RECORDED = "traced", "none", "not_recorded"
 FACT_FILES = {"document": "machine/document_facts.csv", "pbp": "generated/pbp_facts.csv", "added": present.ADDED}
 FACT_COLUMNS = ", ".join(f'f."{c}"' for c in facts.COLUMNS)
-DRAFT_CODE = {"main": ("pipeline/main_chart.py", "chart_row"), "dvha": ("pipeline/dvha.py", "dvha_row")}
-CMS_READS = {"main": "cms_reads.csv", "dvha": "dvha_reads.csv"}
 
 
 def read(path):
@@ -76,8 +74,6 @@ def build(year, out, sha, work=None):
         insert(db, "text", (dict(pdf=t["pdf"], plain=t["text"], layout=t["layout"], items=t["items"])
                             for t in read(data / "generated" / blobs.TEXTS)))
         insert(db, "draft_cell", sheet_cells(layers.generated(data)))
-        insert(db, "cms_read", (dict(renamed(r), sheet=sheet, position=n) for sheet, file in CMS_READS.items()
-                                for n, r in enumerate(read(data / "generated" / file))))
         insert(db, "landscape_read", (dict(r, position=n) for n, r in enumerate(read(data / "generated/landscape_reads.csv"))))
         load_layers(db, data, checked)
         reviewed = {facts.identity(f) for f in read(data / "machine/reviewed_facts.csv")}
@@ -339,14 +335,7 @@ def cell(db, sheet, plan_id, col):
         d["text"] = {k: d.pop(k) for k in ("plain", "layout", "items")}
         d["unlinked_answers"] = unlinked(db, d["sha256"]) if build_row["checked"] else {"status": NOT_RECORDED}
     landscape = rows(db, "SELECT plan_field, field, value FROM landscape_read WHERE plan_id = ? ORDER BY position", plan_id)
-    cms = rows(db, "SELECT file, field, value, title, meaning FROM cms_read WHERE sheet = ? AND plan_id = ? AND col = ? "
-                   "ORDER BY position", sheet, plan_id, col)
-    for r in cms:
-        if r["file"] == "plans.csv":
-            r["landscape"] = [dict(field=n["field"], value=n["value"]) for n in landscape if n["plan_field"] == r["field"]]
-    cms_fields = record(cms, rows=cms)
     landscape_row = list({(n["field"], n["value"]): dict(field=n["field"], value=n["value"]) for n in landscape}.values())
-    file, function = DRAFT_CODE[sheet]
     considered, rule_record = rule(db, sheet, plan_id, col, code)
     added = list({json.dumps(f): f for f in map(fact_of, considered) if f["origin"] == "added"}.values())
     model = [dict(r, answers={"status": NOT_RECORDED}) for r in cited if r.get("step") == "xref"]
@@ -366,8 +355,7 @@ def cell(db, sheet, plan_id, col):
         "plan": record(True, row=rows(db, "SELECT * FROM plan WHERE plan_id = ?", plan_id)[0],
                        landscape_row=record(landscape_row, fields=landscape_row)),
         "documents": record(documents, documents=documents),
-        "draft": record(True, value=found[0]["value"], code=dict(file=file, function=function, url=code + file),
-                        cms_fields=cms_fields),
+        "draft": record(True, value=found[0]["value"], code=rule_record["code"]),
         "answers": answers,
         "fact_checks": fact_checks,
         "rule": rule_record,

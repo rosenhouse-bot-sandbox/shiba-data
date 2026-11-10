@@ -88,10 +88,6 @@ class SiteDataTest(unittest.TestCase):
     def test_uncited_cell_has_no_cites(self):
         self.assertEqual(self.cell("main", "H3805-048-0", "E_moop"), {"value": "$6,700", "cites": []})
 
-    def test_pbp_override_is_attached_to_cell(self):
-        cell = self.cell("main", "H3805-048-0", "G_specialist")
-        self.assertEqual(cell["pbp"], "$0-$55")
-
     def test_wellcare_tests_cells_carry_ekg_comment(self):
         for plan_id in ("H6815-038-0", "H5439-015-0", "H5439-019-0", "H5439-011-0", "H5439-010-0"):
             self.assertIn("EKG", self.cell("main", plan_id, "K_tests_labs")["comment"]["text"], plan_id)
@@ -263,12 +259,11 @@ class EditsTest(unittest.TestCase):
                 site = build.site_data(data)
         return next(r for r in site["dvha"]["rows"] if r["plan_id"] == "H3805-048-0")["cells"]["F_dental"], site, out.getvalue()
 
-    def test_an_edit_sets_its_dvha_cell_and_keeps_the_pbp_value(self):
+    def test_an_edit_sets_its_dvha_cell(self):
         sb = next(d for d in build.rows("generated/documents_checked.csv", DATA)
                   if d["kind"] == "SB" and "H3805-048-0" in d["plan_ids"])
         cell, site, _ = self.dental(sb["url"])
-        generated = next(r for r in build.rows("generated/dvha.csv", DATA) if r["plan_id"] == "H3805-048-0")
-        self.assertEqual((cell["value"], cell["pbp"]), ("fixed", generated["F_dental"]))
+        self.assertEqual(cell["value"], "fixed")
         self.assertEqual([(c["value"], c["page"], c["quote"]) for c in cell["cites"]], [("fixed", 4, "dental quote")])
         self.assertNotIn("dental quote", str(site["main"]))
 

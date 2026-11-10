@@ -30,7 +30,7 @@ On [pdxplans.org](https://pdxplans.org), a volunteer who clicks the cell sees th
 
 > **EOC page 46:** "In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance"
 
-The plan's documents are the source of truth. CMS data gives a draft of each value, but a volunteer can't check it. So the pipeline replaces or confirms each value with a citation.
+The plan's documents are the source of truth. CMS data fills some gaps, but a volunteer can't check a value without a citation. So rules prefer the documents' facts and cite their quotes.
 
 ## Who does what
 
@@ -49,12 +49,12 @@ flowchart TD
   carriers[(Carrier websites)] --> find[2. Find each plan's PDFs]
   plans --> find
   find --> text[3. Download PDFs, extract page text]
-  cms --> draft[4. Draft values from CMS data]
+  cms --> cmsfacts[4. Facts from CMS data]
   text --> read[5. Claude reads facts from the PDFs]
   read --> check[6. Code and Claude check each fact]
   check --> present[7. Rules turn facts into values]
-  draft --> stack[9. Stack the layers]
-  present --> stack
+  cmsfacts --> present
+  present --> stack[9. Stack the layers]
   fix[8. Claude sessions correct what is left] --> present
   fix --> stack
   stack --> publish[10. Publish the site and Google Sheet]
@@ -133,35 +133,18 @@ Then code turns each page into text that keeps the page's columns. Models read t
 
 The PDFs, texts and CMS files are stored in a Cloudflare R2 bucket, named by hash, so every later run reads the same bytes.
 
-## 4. Draft values from CMS data
+## 4. Facts from CMS data
 
-The PBP file is a set of tables, one per benefit category. Our plan's ambulance fields, from `pbp_b10_amb_trans.txt` and `pbp_b4_emerg_urgent.txt`:
-
-```
-pbp_b10a_copay_gas_amt_min = 325.00    # ground ambulance copay
-pbp_b10a_copay_gas_amt_max = 325.00
-pbp_b10a_coins_aas_pct_min = 20        # air ambulance coinsurance
-pbp_b10a_coins_aas_pct_max = 20
-pbp_b4c_bendesc_ehc        = 111       # 2nd flag: worldwide emergency coverage
-pbp_b4c_copay_amt_wet_min  = 325.00    # worldwide emergency transportation copay
-```
-
-Code reads these fields and writes draft values for both sheets, in `generated/main_chart.csv` and `generated/dvha.csv`. `generated/main_chart.csv`, selected columns:
+Plan documents rarely state some values, such as a $0 deductible. Code turns the plan's Landscape and PBP fields into facts whose source is `Landscape` or `PBP`. These rank below every document, so a rule uses one only when no document gives the value. Our plan's CMS facts in `generated/pbp_facts.csv`, selected rows and columns:
 
 ```
-plan_id,plan_name,F_primary_care,L_xray_imaging,AB_ambulance
-H1036-153-0,Humana Total Complete (HMO),$0,$0-$145 | $0-$345,$325 or 20% | $325
+benefit             network  condition        cost_kind          amount  source     fields
+medical_deductible  in                        deductible         $0      PBP        pbp_d_inn_deduct_yn
+moop                in                        out_of_pocket_max  $5,150  PBP        pbp_d_out_pocket_amt
+part_d_deductible   any      not tiers 1,2,3  deductible         $700    Landscape  Annual Part D Deductible Amount, …
 ```
 
-The draft Ambulance value matches the EOC. Other drafts do not. The same plan's X-ray cell:
-
-```
-                  X-rays      CT, MRI, PET
-CMS draft         $0-$145     $0-$345       one range over every setting, including hospitals
-Published         $0-$30      $205-$330     the expert's rule: office prices only (EOC page 60)
-```
-
-A draft value also has no citation. Steps 5 to 9 replace or confirm each value with one.
+A CMS fact has no quote, so a value built from one has no citation.
 
 ## 5. Claude reads facts from the PDFs
 
@@ -330,7 +313,9 @@ main,H1036-153-0,AB_ambulance,1,$325 or 20%,…H1036153000EOC27pdf,46,Non-Emerge
 main,H1036-153-0,AB_ambulance,2,$325,…H1036153000EOC27pdf,46,Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance
 ```
 
-Rules also read the added facts from step 8. Most main-sheet columns have rules. Columns without one, including every DVHA column, keep their draft value or an edit from step 8.
+Rules write every value to the draft sheets, `generated/main_chart.csv` and `generated/dvha.csv`. A line that only CMS facts back goes there without a citation.
+
+Rules also read the added facts from step 8.
 
 ## 8. Claude sessions correct what is left
 
@@ -356,7 +341,7 @@ dvha,H1372-003-0,F_dental,caveat,"EOC page 57 says there is no coinsurance or co
 main,H7199-002-0,L_xray_imaging,question,"EOC page 96 prices X-rays at $25 in every office setting. …",96,X-rays PCP's office: $25 copay
 ```
 
-An **edit** sets a cell's value directly, with a citation. Edits remain only on the DVHA sheet, whose columns have no rules yet. Each edit records `saw`, the value it replaced. The build warns if the value beneath an edit changes. `edits.csv`, selected columns:
+An **edit** sets a cell's value directly, with a citation. Edits remain only on the DVHA sheet. Each edit records `saw`, the value it replaced. The build warns if the value beneath an edit changes. `edits.csv`, selected columns:
 
 ```
 sheet,plan_id,column,value,pdf_page,quote,saw,source
@@ -373,7 +358,7 @@ A **layer** is a table whose rows set a cell's value, attach a citation to it, o
 
 ```
 layer                                         sets values?  Ambulance               X-ray
-generated/main_chart.csv, citations.csv  (4)  yes           $325 or 20% | $325      $0-$145 | $0-$345
+generated/main_chart.csv, citations.csv  (7)  yes           $325 or 20% | $325      $0-$30 | $205-$330
 machine/eoc_citations.csv                     no            (citations only)
 generated/presented.csv                  (7)  yes           $325 or 20% | $325      $0-$30 | $205-$330
 edits.csv                                (8)  yes           (none)                  (none)

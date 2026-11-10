@@ -2,7 +2,7 @@ import csv, json, os, pathlib, sys, tempfile, unittest
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-import expected, facts, layers, present, years
+import expected, facts, fields, layers, present, years
 
 YEAR = 2027
 
@@ -913,12 +913,17 @@ class AddedFactTest(unittest.TestCase):
         self.assertEqual(sorted(noted - citing), [], "notes about an added fact that the cell no longer cites")
 
 class WriteTest(unittest.TestCase):
-    def test_writes_the_layer_rows(self):
+    def test_writes_the_sheets_and_the_layer_rows(self):
         row = dict.fromkeys(layers.COLUMNS, "x")
-        with tempfile.TemporaryDirectory() as tmp, mock.patch.object(present, "layer_rows", lambda data, version: [row] * version):
+
+        def sheet_rows(data, sheet):
+            return [dict.fromkeys(["section", "plan_id", "plan_name"] + list(fields.labels(sheet)), sheet)]
+        with tempfile.TemporaryDirectory() as tmp, mock.patch.object(present, "layer_rows", lambda data, version: [row] * version), \
+                mock.patch.object(present, "sheet_rows", sheet_rows):
             os.makedirs(f"{tmp}/generated")
             present.write(pathlib.Path(tmp), 1)
             self.assertEqual(layers.rows(pathlib.Path(tmp, layers.PRESENTED)), [row])
+            self.assertEqual(layers.generated(pathlib.Path(tmp))["dvha"], sheet_rows(None, "dvha"))
 
     def test_a_blank_with_cited_facts_writes_rows(self):
         data = years.data_dir(YEAR)
@@ -996,12 +1001,13 @@ class WriteTest(unittest.TestCase):
         for why in (why for held in present.VERSIONS.values() for why in held.values()):
             self.assertNotIn("reader", why)
 
-    def test_refuses_a_second_line_for_a_one_line_cell(self):
+    def test_a_trailing_blank_line_writes_no_row(self):
         data = years.data_dir(YEAR)
-        plan = layers.generated(data)["main"][0]["plan_id"]
-        with mock.patch.object(present, "lines", lambda data, column, sheet: {plan: [("$1", []), ("$2", [])]}):
-            with self.assertRaisesRegex(ValueError, f"{plan} .* has one line"):
-                present.layer_rows(data)
+        f = facts.read(data / "machine/document_facts.csv")[0]
+        with mock.patch.object(present, "lines", lambda data, column, sheet: {f["plan_id"]: [("$1", [f]), ("", [f])]}), \
+                mock.patch.dict(present.SHEETS, {"main": ({"S_acupuncture": None}, {}), "dvha": ({}, {})}):
+            rows = present.layer_rows(data)
+        self.assertEqual({(r["line"], r["value"]) for r in rows}, {("", "$1")})
 
 
 # Lines where the rule and an edit disagree. The rule wins on X-ray lines (#127 has the evidence).
@@ -1011,6 +1017,24 @@ TRIAGED = {
     ("L_xray_imaging", "H2056-018-0", "2"): "the expert's $0 mammogram rule covers Aetna",
     ("L_xray_imaging", "H7199-002-0", ""): "the EOC prices X-rays at $25; the SB's $0 is for ultrasounds",
 }
+
+
+class SheetTest(unittest.TestCase):
+    def test_a_cell_joins_its_lines_without_trailing_blank_ones(self):
+        self.assertEqual(present.shown([("$0", []), ("", [])]), "$0")
+        self.assertEqual(present.shown([("", []), ("$5", [])]), " | $5")
+        self.assertEqual(present.shown([("", [])]), "")
+
+    def test_the_committed_sheets_are_current(self):
+        data = years.data_dir(YEAR)
+        for sheet in layers.SHEETS:
+            self.assertEqual(layers.generated(data)[sheet], present.sheet_rows(data, sheet), sheet)
+
+    def test_a_sheet_has_a_row_per_plan_and_the_columns_of_fields(self):
+        data = years.data_dir(YEAR)
+        rows = present.sheet_rows(data, "dvha")
+        self.assertEqual([r["plan_id"] for r in rows], [p["plan_id"] for p in layers.rows(data / "generated/plans.csv")])
+        self.assertEqual(list(rows[0]), ["section", "plan_id", "plan_name"] + list(fields.labels("dvha")))
 
 
 class ExpectedTest(unittest.TestCase):
