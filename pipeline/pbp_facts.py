@@ -1,7 +1,8 @@
-"""Turns each plan's PBP section 8b fields into facts with source PBP.
+"""Turns each plan's CMS fields into facts with source PBP or Landscape.
 
-Usage: python3 -I pbp_facts.py <plans.csv> <pbp_dir> <out.csv>
+Usage: python3 -I pbp_facts.py <plans.csv> <landscape_reads.csv> <pbp_dir> <out.csv>
 Section 8b prices the plan's network. Section C's out-of-network and point-of-service groups price the rest.
+plans.csv gives the premiums and drug deductible, and landscape_reads.csv names the Landscape fields behind them.
 """
 import csv
 import json
@@ -53,10 +54,10 @@ def amount(row, names, fmt):
     return fmt(values[0]) if len(values) == 1 else f"{fmt(values[0])}-{fmt(values[-1])}"
 
 
-def fact(plan_id, benefit, network, cost_kind, value, fields):
-    row = dict(plan_id=plan_id, benefit=benefit, setting="any", network=network, provider_tier="", condition="",
+def fact(plan_id, benefit, network, cost_kind, value, fields, source="PBP", condition=""):
+    row = dict(plan_id=plan_id, benefit=benefit, setting="any", network=network, provider_tier="", condition=condition,
                package="", pool="", covered_by="medicare", cost_kind=cost_kind, amount=value, unit="", limit="",
-               source="PBP", doc_sha="", page="", quotes=json.dumps(list(fields)), note="")
+               source=source, doc_sha="", page="", quotes=json.dumps(list(fields)), note="")
     return dict(row, fact_id=facts.fact_id(row))
 
 
@@ -105,6 +106,40 @@ def first(plan, stem):
     return (plan.get(stem) or [{}])[0]
 
 
+# The drug tier in each position of mrx_alt_no_ded_tier
+TIER_POSITIONS = {2: 1, 3: 2, 4: 3, 5: 4, 6: 5, 7: 6, 1: 7}
+
+
+def plan_facts(landscape, reads, plan):
+    """reads are landscape_reads.csv rows."""
+    plan_id = landscape["plan_id"]
+
+    def fields(column):
+        return [r["field"] for r in reads if r["plan_id"] == plan_id and r["plan_field"] == column]
+
+    def landscape_fact(benefit, cost_kind, value, column, condition="", more=()):
+        return fact(plan_id, benefit, "any", cost_kind, value, fields(column) + list(more), "Landscape", condition)
+
+    found = [landscape_fact("plan_premium", "premium", landscape["premium"], "premium")]
+    if landscape["premium_full_extra_help"] != "n/a":
+        found.append(landscape_fact("plan_premium", "premium", landscape["premium_full_extra_help"],
+                                    "premium_full_extra_help", "full Extra Help"))
+    if landscape["part_d_deductible"] == "n/a":
+        found.append(landscape_fact("part_d_deductible", "not_covered", "", "part_d_deductible"))
+    else:
+        bits = first(plan, "pbp_mrx").get("mrx_alt_no_ded_tier", "")
+        tiers = sorted(TIER_POSITIONS[i] for i, bit in enumerate(bits[:7], 1) if bit == "1")
+        skips = tiers and landscape["part_d_deductible"] != "$0"
+        found.append(landscape_fact("part_d_deductible", "deductible", landscape["part_d_deductible"],
+                                    "part_d_deductible", f"not tiers {','.join(map(str, tiers))}" if skips else "",
+                                    ["mrx_alt_no_ded_tier"] if skips else []))
+    d = first(plan, "pbp_Section_D")
+    for network, name in (("in", "pbp_d_out_pocket_amt"), ("any", "pbp_d_comb_max_enr_amt")):
+        if d.get(name):
+            found.append(fact(plan_id, "moop", network, "out_of_pocket_max", money(float(d[name])), [name]))
+    return found
+
+
 def facts_for(plan_id, plan):
     rows = plan.get(B8, [])
     if len(rows) != 1:
@@ -113,11 +148,14 @@ def facts_for(plan_id, plan):
     return in_network(plan_id, rows[0]) + out_of_network(plan_id, plan)
 
 
-def main(plans_csv, pbp_dir, out_csv):
+def main(plans_csv, reads_csv, pbp_dir, out_csv):
     with open(plans_csv, newline="") as f:
-        plan_ids = [p["plan_id"] for p in csv.DictReader(f)]
-    data = pbp.load(pbp_dir, plan_ids)
-    facts.write(out_csv, [row for p in plan_ids for row in facts_for(p, data[p])])
+        plans = list(csv.DictReader(f))
+    with open(reads_csv, newline="") as f:
+        reads = list(csv.DictReader(f))
+    data = pbp.load(pbp_dir, [p["plan_id"] for p in plans])
+    facts.write(out_csv, [row for p in plans for row in
+                          facts_for(p["plan_id"], data[p["plan_id"]]) + plan_facts(p, reads, data[p["plan_id"]])])
 
 
 if __name__ == "__main__":

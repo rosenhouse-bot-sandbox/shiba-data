@@ -75,10 +75,6 @@ class TraceTest(unittest.TestCase):
         self.assertEqual(records["draft"]["code"]["file"], "pipeline/dvha.py")
         self.assertEqual(records["rule"]["code"]["function"], "dental")
 
-    def test_traces_each_sheets_own_rule_for_a_column_both_sheets_have(self):
-        self.assertEqual(self.cell("dvha", "H1036-153-0", "C_premium")["rule"]["code"]["function"], "plan_premium")
-        self.assertEqual(self.cell("main", "H1036-153-0", "C_premium")["rule"]["status"], trace.NONE)
-
     def test_says_why_the_pinned_version_holds_a_dvha_cell(self):
         held = present.held(years.data_dir())
         (column, plan_id), reason = next((k, v) for k, v in held.items() if k[0].startswith("dvha."))
@@ -143,11 +139,6 @@ class TraceTest(unittest.TestCase):
         added = self.cell("main", "H1372-003-0", "AB_ambulance")["added_facts"]
         self.assertEqual([(f["fact_id"], f["origin"]) for f in added["rows"]], [("279e0b3e50b5b24d", "added")])
         self.assertEqual(self.cell(*AMBULANCE)["added_facts"]["status"], trace.NONE)
-
-    def test_a_column_without_a_rule_has_no_rule_record(self):
-        self.assertNotIn("C_premium", present.COLUMNS)
-        records = self.cell("main", "H1036-153-0", "C_premium")
-        self.assertEqual((records["rule"]["status"], records["answers"]["status"]), (trace.NONE, trace.NONE))
 
     def test_lists_the_pbp_fields_a_cell_read(self):
         cms = self.cell(*AMBULANCE)["draft"]["cms_fields"]

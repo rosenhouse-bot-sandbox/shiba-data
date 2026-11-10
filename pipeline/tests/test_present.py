@@ -532,6 +532,69 @@ class PlanPremiumTest(unittest.TestCase):
         self.assertEqual(column(present.plan_premium, *found), [("", [])])
 
 
+def landscape(benefit, cost_kind, amount="", **more):
+    return fact(benefit, amount=amount, cost_kind=cost_kind, source="Landscape", network="any", page="", **more)
+
+
+class ExtraHelpPremiumTest(unittest.TestCase):
+    def test_shows_the_premium_with_full_extra_help(self):
+        full = landscape("plan_premium", "premium", "$28.50", condition="full Extra Help")
+        found = [landscape("plan_premium", "premium", "$69"), full]
+        self.assertEqual(column(present.extra_help_premium, *found), [("$28.50", [full])])
+
+    def test_shows_na_without_part_d(self):
+        none = landscape("part_d_deductible", "not_covered")
+        self.assertEqual(column(present.extra_help_premium, landscape("plan_premium", "premium", "$0"), none),
+                         [("n/a", [none])])
+
+    def test_skips_a_package_premium(self):
+        rider = landscape("plan_premium", "premium", "$9", condition="full Extra Help", package="Rider")
+        self.assertEqual(column(present.extra_help_premium, rider), [("", [])])
+
+
+class MoopTest(unittest.TestCase):
+    def test_shows_the_in_network_maximum(self):
+        inn = fact("moop", amount="$6,700", cost_kind="out_of_pocket_max", source="PBP")
+        self.assertEqual(column(present.moop, inn), [("$6,700", [inn])])
+
+    def test_adds_the_combined_maximum_as_a_second_line(self):
+        inn = fact("moop", amount="$6,700", cost_kind="out_of_pocket_max", source="PBP")
+        both = dict(inn, network="any", amount="$10,100")
+        self.assertEqual(column(present.moop, both, inn), [("$6,700", [inn]), ("$10,100", [both])])
+
+    def test_keeps_an_empty_first_line_for_a_combined_maximum_alone(self):
+        both = fact("moop", amount="$10,100", cost_kind="out_of_pocket_max", source="PBP", network="any")
+        self.assertEqual(column(present.moop, both), [("", []), ("$10,100", [both])])
+
+    def test_skips_a_conditional_or_tiered_maximum(self):
+        for more in ({"condition": "dual eligible"}, {"provider_tier": "Tier 2"}):
+            inn = fact("moop", amount="$3,000", cost_kind="out_of_pocket_max", source="PBP", **more)
+            self.assertEqual(column(present.moop, inn), [("", [])])
+
+
+class DrugDeductibleTest(unittest.TestCase):
+    def test_names_the_tiers_the_deductible_skips(self):
+        ded = landscape("part_d_deductible", "deductible", "$685", condition="not tiers 1,2")
+        self.assertEqual(column(present.drug_deductible, ded), [("$685 not tiers 1,2", [ded])])
+
+    def test_shows_a_deductible_without_tiers_alone(self):
+        for amount in ("$0", "$590"):
+            ded = landscape("part_d_deductible", "deductible", amount)
+            self.assertEqual(column(present.drug_deductible, ded), [(amount, [ded])])
+
+    def test_shows_no_tiers_when_facts_disagree_on_them(self):
+        found = [landscape("part_d_deductible", "deductible", "$685", condition=c) for c in ("not tiers 1", "not tiers 1,2")]
+        self.assertEqual(column(present.drug_deductible, *found), [("$685", found)])
+
+    def test_skips_a_package_deductible(self):
+        ded = landscape("part_d_deductible", "deductible", "$100", package="Rider")
+        self.assertEqual(column(present.drug_deductible, ded), [("", [])])
+
+    def test_shows_na_without_part_d(self):
+        none = landscape("part_d_deductible", "not_covered")
+        self.assertEqual(column(present.drug_deductible, none), [("n/a", [none])])
+
+
 def routine(benefit, cost_kind="copay", amount="$0", **more):
     return priced(benefit, covered_by="supplemental", cost_kind=cost_kind, amount=amount, **more)
 
@@ -869,6 +932,11 @@ class WriteTest(unittest.TestCase):
         self.assertEqual(held_main, {("K_tests_labs", "H6815-038-0"), ("K_tests_labs", "H5439-019-0")})
         self.assertLessEqual(set(present.VERSIONS[8]), set(present.VERSIONS[7]))
 
+    def test_version_9_presents_the_main_premium(self):
+        data = years.data_dir(YEAR)
+        cells = {v: {(r["sheet"], r["column"]) for r in present.layer_rows(data, v)} for v in (8, 9)}
+        self.assertEqual(cells[9] - cells[8], {("main", "C_premium")})
+
     def test_a_held_main_cell_does_not_hold_the_dvha_cell_of_the_same_name(self):
         self.assertNotEqual(present.cell("main", "C_premium", "H1"), present.cell("dvha", "C_premium", "H1"))
 
@@ -930,10 +998,10 @@ class ExpectedTest(unittest.TestCase):
         self.assertTrue(rows and all(r["url"] and r["quote"] for r in rows))
         generated = {r["plan_id"]: r for r in layers.generated(data)["main"]}
         for column in present.COLUMNS:
-            self.assertEqual({(r["plan_id"], r["line"]) for r in rows if r["column"] == column},
+            self.assertEqual({(r["plan_id"], r["line"]) for r in rows if (r["sheet"], r["column"]) == ("main", column)},
                              {(p, str(n) if " | " in generated[p][column] else "")
                               for p, got in present.lines(data, column).items() if (column, p) not in present.held(data)
-                              for n, (v, cited) in enumerate(got, 1) if v or cited})
+                              for n, (v, cited) in enumerate(got, 1) if v and not cited or present.presents(cited)})
 
 
 class DvhaTest(unittest.TestCase):
@@ -946,6 +1014,18 @@ class DvhaTest(unittest.TestCase):
                    if present.cell("dvha", column, p) not in held and cited}
             self.assertTrue(got, column)
             self.assertEqual({p: v for p, v in got.items() if v != live[p][column]}, {}, column)
+
+
+class CmsColumnsTest(unittest.TestCase):
+    def test_present_the_live_value_of_every_plan(self):
+        data = years.data_dir(YEAR)
+        live = layers.live(data)[0]
+        for sheet, columns in (("main", ("C_premium", "D_premium_full_extra_help", "E_moop", "N_pharmacy_deductible")),
+                               ("dvha", ("D_premium_full_extra_help",))):
+            plans = {r["plan_id"]: r for r in live[sheet]}
+            for column in columns:
+                got = {p: " | ".join(v for v, _ in lines) for p, lines in present.lines(data, column, sheet=sheet).items()}
+                self.assertEqual({p: (v, plans[p][column]) for p, v in got.items() if v != plans[p][column]}, {}, column)
 
 
 class ExplainTest(unittest.TestCase):

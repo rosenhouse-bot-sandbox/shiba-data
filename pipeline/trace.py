@@ -347,18 +347,15 @@ def cell(db, sheet, plan_id, col):
     cms_fields = record(cms, rows=cms)
     landscape_row = list({(n["field"], n["value"]): dict(field=n["field"], value=n["value"]) for n in landscape}.values())
     file, function = DRAFT_CODE[sheet]
-    has_rule = col in present.SHEETS[sheet][0]
-    considered, rule_record = rule(db, sheet, plan_id, col, code) if has_rule else ([], {"status": NONE})
+    considered, rule_record = rule(db, sheet, plan_id, col, code)
     added = list({json.dumps(f): f for f in map(fact_of, considered) if f["origin"] == "added"}.values())
     model = [dict(r, answers={"status": NOT_RECORDED}) for r in cited if r.get("step") == "xref"]
-    if not has_rule:
-        prompts, fact_checks = [], {"status": NONE}
-    elif build_row["checked"]:
+    if build_row["checked"]:
         prompts, fact_checks = checks(db, sheet, plan_id, col, considered)
     else:
         prompts, fact_checks = [], {"status": NOT_RECORDED}
     if not build_row["replayed"]:
-        answers = {"status": NOT_RECORDED if has_rule else NONE}
+        answers = {"status": NOT_RECORDED}
     else:
         answers = answers_of(db, prompts)
         if answers["status"] == NONE and fact_checks["status"] == NOT_RECORDED:

@@ -709,6 +709,7 @@ main,H1036-153-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content
 main,H1036-153-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,46,Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance
 main,H1036-153-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,46,Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance
 main,H1036-153-0,AB_ambulance,2,$325,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,46,Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance
+main,H1036-153-0,C_premium,,$0,https://assets.humana.com/is/content/humana/H1036153000SB27pdf,4,Monthly plan premium                   $0
 main,H1036-153-0,F_primary_care,,$0,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,12,$0 copayment per visit
 main,H1036-153-0,F_primary_care,,$0,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,12,Primary care office visits
 main,H1036-153-0,F_primary_care,,$0,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,65,"Physician/practitioner services, including doctor's office visits"
@@ -781,6 +782,7 @@ main,H1036-306-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content
 main,H1036-306-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,49,In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance
 main,H1036-306-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,49,Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance
 main,H1036-306-0,AB_ambulance,2,$325,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,49,Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance
+main,H1036-306-0,C_premium,,$0,https://assets.humana.com/is/content/humana/H1036306000SB27pdf,5,Monthly plan premium $0
 main,H1036-306-0,F_primary_care,,$0,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,13,Primary care office visits $0 copayment per visit
 main,H1036-306-0,F_primary_care,,$0,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,69,Provider and Professional Services $0 copayment – PCP's Office
 main,H1036-306-0,G_specialist,,$15,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,13,Specialist office visits $15 copayment per visit
@@ -842,6 +844,7 @@ main,H1036-317-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content
 main,H1036-317-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,51,Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance
 main,H1036-317-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,51,Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance
 main,H1036-317-0,AB_ambulance,2,$325,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,51,Out-of-Network: Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance
+main,H1036-317-0,C_premium,,$0,https://assets.humana.com/is/content/humana/H1036317000SB27pdf,5,Monthly plan premium $0
 main,H1036-317-0,F_primary_care,,$0,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,13,Primary care office visits $0 copayment per visit
 main,H1036-317-0,F_primary_care,,$0,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,70,Provider and Professional Services $0 copayment – PCP's Office
 main,H1036-317-0,G_specialist,,20%,https://assets.humana.com/is/content/humana/H1036317000EOC27pdf,13,Specialist office visits 20% of the total cost per visit
@@ -909,6 +912,7 @@ main,H1036-323-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content
 main,H1036-323-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,48,In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance
 main,H1036-323-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,48,Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance
 main,H1036-323-0,AB_ambulance,2,$325,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,48,Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance
+main,H1036-323-0,C_premium,,$0,https://assets.humana.com/is/content/humana/H1036323000SB27pdf,4,Monthly plan premium $0
 main,H1036-323-0,F_primary_care,,$0,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,12,Primary care office visits $0 copayment per visit
 main,H1036-323-0,F_primary_care,,$0,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,67,Provider and Professional Services $0 copayment – PCP's Office
 main,H1036-323-0,G_specialist,,$50,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,12,Specialist office visits $50 copayment per visit
@@ -970,6 +974,7 @@ main,H1036-323-0,Z_part_b_reduction,,$56,https://assets.humana.com/is/content/hu
 main,H1372-003-0,AB_ambulance,1,$250 or 20%,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,52,$250 copayment for each Medicare-covered Ground Ambulance service.
 main,H1372-003-0,AB_ambulance,1,$250 or 20%,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,52,20% coinsurance for each Medicare-covered Air Ambulance service.
 main,H1372-003-0,AB_ambulance,2,not covered,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,41,"Our plan doesn’t cover emergency services, urgently needed services, or any other services you get outside of the United States and its territories."
+main,H1372-003-0,C_premium,,$69,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,12,"For 2027, the monthly plan premium for AgeRight Advantage Premier Health Plan (HMO C-SNP) is $69.00."
 main,H1372-003-0,F_primary_care,,$0,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,10,Primary care office visits $0 copayment
 main,H1372-003-0,G_specialist,,$0-$20,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,10,"$0 copayment for cardiologist, endocrinologist, vascular surgery consultation, or cardiothoracic surgery consultation"
 main,H1372-003-0,G_specialist,,$0-$20,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,10,$20 copayment for all other services
@@ -1025,6 +1030,7 @@ main,H1372-003-0,Y_otc,,●,https://agerightadvantage.com/wp-content/uploads/202
 main,H2001-045-0,AB_ambulance,1,20%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,59,$0 copayment or 20% coinsurance or each one-way Medicare-covered air trip
 main,H2001-045-0,AB_ambulance,1,20%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,59,$0 copayment or 20% coinsurance or each one-way Medicare-covered ground trip
 main,H2001-045-0,AB_ambulance,2,not covered,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,59,ambulance transportation is not covered under any circumstances
+main,H2001-045-0,C_premium,,$0,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,13,Monthly plan premium*                                              $0
 main,H2001-045-0,F_primary_care,1,20%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,13,Primary care office visits
 main,H2001-045-0,F_primary_care,1,20%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,13,or 20% coinsurance per visit (in-
 main,H2001-045-0,F_primary_care,1,20%,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,99,"Depending on your level o Medicaid eligibility, $0 copayment or 20% coinsurance or services rom a primary care physician"
@@ -1073,6 +1079,7 @@ main,H2001-045-0,Y_otc,,●,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0
 main,H2056-003-0,AB_ambulance,1,$295 or 20%,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,40,$295 copay for each Medicare‑covered
 main,H2056-003-0,AB_ambulance,1,$295 or 20%,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,40,20% coinsurance for each
 main,H2056-003-0,AB_ambulance,2,$295,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,47,$295 copay for one‑way emergency
+main,H2056-003-0,C_premium,,$0,https://www.aetna.com/medicare/documents/individual/2027/sb/en/Y0001_H2056_003_HR01_SB2027_M.pdf,2,Monthly plan premium $0
 main,H2056-003-0,F_primary_care,,$0,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,62,$0 copay for Medicare‑covered primary care provider (PCP) services
 main,H2056-003-0,F_primary_care,,$0,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,7,Primary care office visits $0 per visit
 main,H2056-003-0,G_specialist,,$65,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,63,$65 copay for Medicare‑covered physician specialist services (including surgery
@@ -1128,6 +1135,7 @@ main,H2056-018-0,AB_ambulance,1,$245 or 20%,https://www.aetna.com/medicare/docum
 main,H2056-018-0,AB_ambulance,1,$245 or 20%,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,31,one‑way trip via ground ambulance.
 main,H2056-018-0,AB_ambulance,2,$245,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,39,$245 copay for one‑way emergency
 main,H2056-018-0,AB_ambulance,2,$245,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,39,"ambulance services worldwide (i.e.,"
+main,H2056-018-0,C_premium,,$0,https://www.aetna.com/medicare/documents/individual/2027/sb/en/Y0001_H2056_018_NS45_SB2027_M.pdf,2,Monthly plan premium $0
 main,H2056-018-0,F_primary_care,,$0,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,53,$0 copay for Medicare‑covered primary
 main,H2056-018-0,F_primary_care,,$0,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,6,$0 per visit
 main,H2056-018-0,F_primary_care,,$0,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_018_NS45_EOC2027_C.pdf,6,Primary care office visits
@@ -1179,6 +1187,7 @@ main,H2056-018-0,Z_part_b_reduction,,$50,https://www.aetna.com/medicare/document
 main,H2406-042-0,AB_ambulance,1,$290,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,52,$290 copayment or each one-way Medicare- covered air trip.
 main,H2406-042-0,AB_ambulance,1,$290,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,52,$290 copayment or each one-way Medicare- covered ground trip (in-network).
 main,H2406-042-0,AB_ambulance,2,not covered,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,52,"Outside o the United States or its territories, ambulance transportation is not covered under any circumstances."
+main,H2406-042-0,C_premium,,$94,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,13,"For 2027, the monthly premium or our plan is $94."
 main,H2406-042-0,F_primary_care,1,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,12,$0 copayment per visit (in-
 main,H2406-042-0,F_primary_care,1,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,12,Primary care office visits
 main,H2406-042-0,F_primary_care,1,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418684_000,88,$0 copayment or services rom a primary care physician
@@ -1229,6 +1238,8 @@ main,H2406-070-0,AA_opt_packages,,●,https://www.aarpmedicareplans.com/alphadog
 main,H2406-070-0,AB_ambulance,1,$350,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,52,$350 copayment or each one-way Medicare- covered air trip.
 main,H2406-070-0,AB_ambulance,1,$350,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,52,$350 copayment or each one-way Medicare- covered ground trip (in-network).
 main,H2406-070-0,AB_ambulance,2,not covered,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,52,"Outside o the United States or its territories, ambulance transportation is not covered under any circumstances."
+main,H2406-070-0,C_premium,,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,11,$0
+main,H2406-070-0,C_premium,,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,11,Monthly plan premium
 main,H2406-070-0,F_primary_care,1,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,12,$0 copayment per visit (in-
 main,H2406-070-0,F_primary_care,1,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,12,Primary care office visits
 main,H2406-070-0,F_primary_care,1,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418701_000,88,$0 copayment or
@@ -1279,6 +1290,7 @@ main,H2406-070-0,U_naturopath,,,https://www.aarpmedicareplans.com/alphadog/AAOR2
 main,H2406-073-0,AB_ambulance,1,$350,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,41,$350 copayment or each one-way Medicare- covered air trip.
 main,H2406-073-0,AB_ambulance,1,$350,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,41,$350 copayment or each one-way Medicare- covered ground trip (in-network).
 main,H2406-073-0,AB_ambulance,2,not covered,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,41,"Outside o the United States or its territories, ambulance transportation is not covered under any circumstances."
+main,H2406-073-0,C_premium,,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,10,Monthly plan premium $0
 main,H2406-073-0,F_primary_care,1,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,10,$0 copayment per visit (in-
 main,H2406-073-0,F_primary_care,1,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,10,Primary care office visits
 main,H2406-073-0,F_primary_care,2,$25,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,10,$25 copayment per visit (out-o -
@@ -1337,6 +1349,7 @@ main,H2923-001-0,AB_ambulance,1,$0-$315 or 20%,https://assets.devoted.com/plan-d
 main,H2923-001-0,AB_ambulance,1,$0-$315 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,54,You pay $0 copay for facility-to-
 main,H2923-001-0,AB_ambulance,2,$315 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,54,Ground Ambulance: $315 copay per one-way trip
 main,H2923-001-0,AB_ambulance,2,$315 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,55,Air Ambulance: 20% coinsurance per one-way trip
+main,H2923-001-0,C_premium,,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-SB-H2923-001-ENG.pdf,4,Monthly Premium $0
 main,H2923-001-0,F_primary_care,,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,11,Primary care office visits $0 copay per visit
 main,H2923-001-0,F_primary_care,,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,96,Services from a primary care physician (PCP): $0 copay
 main,H2923-001-0,G_specialist,,$40,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,11,Specialist office visits $40 copay per visit
@@ -1403,6 +1416,7 @@ main,H2923-005-0,AB_ambulance,1,$0-$315 or 20%,https://assets.devoted.com/plan-d
 main,H2923-005-0,AB_ambulance,1,$0-$315 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,55,You pay $0 copay for facility-to-
 main,H2923-005-0,AB_ambulance,2,$315 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,55,Ground Ambulance: $315 copay per one-way trip
 main,H2923-005-0,AB_ambulance,2,$315 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,56,Air Ambulance: 20%
+main,H2923-005-0,C_premium,,$43,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,12,"For 2027, the monthly plan premium for DEVOTED PREMIUM 005 OR (HMO) is $43."
 main,H2923-005-0,F_primary_care,,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,98,Services from a primary care physician (PCP): $0 copay
 main,H2923-005-0,G_specialist,,$40,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,98,Services from a specialist: $40 copay
 main,H2923-005-0,H_inpatient,1,$445,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-PREMIUM-005-OR-%28HMO%29-EOC-H2923-005-ENG.pdf,11,You pay $445 per day for days 1
@@ -1461,6 +1475,7 @@ main,H2923-009-0,AB_ambulance,1,50%,https://assets.devoted.com/plan-documents/20
 main,H2923-009-0,AB_ambulance,1,50%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,58,Ground Ambulance 50% coinsurance per one-way trip
 main,H2923-009-0,AB_ambulance,2,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,59,Air Ambulance: $0 copay per one-way trip
 main,H2923-009-0,AB_ambulance,2,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,59,Ground Ambulance: $0 copay per one-way trip
+main,H2923-009-0,C_premium,,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-SB-H2923-009-ENG.pdf,4,Monthly Premium                           $0
 main,H2923-009-0,F_primary_care,,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,98,Services from a primary care physician (PCP): $0 copay
 main,H2923-009-0,G_specialist,,30%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,98,Services from a specialist: 30% coinsurance
 main,H2923-009-0,H_inpatient,,"$2,241 per admission",https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-PLUS-009-OR-%28HMO-C-SNP%29-EOC-H2923-009-ENG.pdf,81,"$2,241 copay per stay"
@@ -1521,6 +1536,7 @@ main,H2923-019-0,AB_ambulance,1,$0-$330 or 20%,https://assets.devoted.com/plan-d
 main,H2923-019-0,AB_ambulance,1,$0-$330 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,58,Air Ambulance 20% coinsurance per one-way trip
 main,H2923-019-0,AB_ambulance,2,$330 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,58,Air Ambulance: 20%
 main,H2923-019-0,AB_ambulance,2,$330 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,58,Ground Ambulance: $330
+main,H2923-019-0,C_premium,,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-SB-H2923-019-ENG.pdf,4,Monthly Premium $0
 main,H2923-019-0,F_primary_care,,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,14,Primary care office visits $0 copay per visit
 main,H2923-019-0,F_primary_care,,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,99,Services from a primary care physician (PCP): $0 copay
 main,H2923-019-0,G_specialist,,$45,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,14,Specialist office visits $45 copay per visit
@@ -1597,6 +1613,7 @@ main,H2923-025-0,AB_ambulance,1,$0-$330 or 20%,https://assets.devoted.com/plan-d
 main,H2923-025-0,AB_ambulance,1,$0-$330 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,55,You pay $0 copay for facility-to-
 main,H2923-025-0,AB_ambulance,2,$330 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,56,Air Ambulance: 20%
 main,H2923-025-0,AB_ambulance,2,$330 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,56,Ground Ambulance: $330
+main,H2923-025-0,C_premium,,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-SB-H2923-025-ENG.pdf,4,Monthly Premium                           $0
 main,H2923-025-0,F_primary_care,,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,11,Primary care office visits $0 copay per visit
 main,H2923-025-0,F_primary_care,,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,98,Services from a primary care physician (PCP): $0 copay
 main,H2923-025-0,G_specialist,,$45,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-EXTRAS-025-OR-%28HMO%29-EOC-H2923-025-ENG.pdf,11,Specialist office visits $45 copay per visit
@@ -1672,6 +1689,7 @@ main,H2923-028-3,AB_ambulance,1,$0-$345 or 20%,https://assets.devoted.com/plan-d
 main,H2923-028-3,AB_ambulance,1,$0-$345 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,55,You pay $0 copay for facility-to- facility transfers between hospitals via ground ambulance
 main,H2923-028-3,AB_ambulance,2,$345 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,55,Ground Ambulance: $345 copay per one-way trip
 main,H2923-028-3,AB_ambulance,2,$345 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,56,Air Ambulance: 20% coinsurance per one-way trip
+main,H2923-028-3,C_premium,,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-SB-H2923-028-003-ENG.pdf,4,Monthly Premium $0
 main,H2923-028-3,F_primary_care,,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,11,Primary care office visits $0 copay per visit
 main,H2923-028-3,F_primary_care,,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,94,Services from a primary care physician (PCP): $0 copay
 main,H2923-028-3,G_specialist,,$50,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-EOC-H2923-028-003-ENG.pdf,11,Specialist office visits $50 copay per visit
@@ -1732,6 +1750,7 @@ main,H3805-040-0,AA_opt_packages,,●,https://www.aarpmedicareplans.com/alphadog
 main,H3805-040-0,AB_ambulance,1,$400,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,52,$400 copayment or each one-way Medicare- covered air trip.
 main,H3805-040-0,AB_ambulance,1,$400,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,52,$400 copayment or each one-way Medicare- covered ground trip.
 main,H3805-040-0,AB_ambulance,2,not covered,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,52,ambulance transportation is not covered under
+main,H3805-040-0,C_premium,,$0,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,13,Monthly plan premium* $0
 main,H3805-040-0,F_primary_care,,$0,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,13,$0 copayment per visit.
 main,H3805-040-0,F_primary_care,,$0,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,82,$0 copayment or services rom a primary care
 main,H3805-040-0,G_specialist,,$55,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,13,$55 copayment per visit.
@@ -1777,6 +1796,8 @@ main,H3805-040-0,Y_otc,,●,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0
 main,H3805-041-0,AB_ambulance,1,$350,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,51,$350 copayment or each one-way Medicare- covered air trip.
 main,H3805-041-0,AB_ambulance,1,$350,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,51,$350 copayment or each one-way Medicare- covered ground trip.
 main,H3805-041-0,AB_ambulance,2,not covered,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,51,"Outside o the United States or its territories, ambulance transportation is not covered under any circumstances."
+main,H3805-041-0,C_premium,,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,11,$0
+main,H3805-041-0,C_premium,,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,11,Monthly plan premium
 main,H3805-041-0,F_primary_care,,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,12,Primary care office visits $0 copayment per visit.
 main,H3805-041-0,F_primary_care,,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,82,$0 copayment or services rom a primary care
 main,H3805-041-0,G_specialist,,$70,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418843_000,12,Specialist office visits $70 copayment per visit.
@@ -1819,6 +1840,8 @@ main,H3805-048-0,AA_opt_packages,,●,https://www.aarpmedicareplans.com/alphadog
 main,H3805-048-0,AB_ambulance,1,$370,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,51,$370 copayment or each one-way Medicare- covered air trip.
 main,H3805-048-0,AB_ambulance,1,$370,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,51,$370 copayment or each one-way Medicare- covered ground trip.
 main,H3805-048-0,AB_ambulance,2,not covered,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,51,"Outside o the United States or its territories, ambulance transportation is not covered under any circumstances."
+main,H3805-048-0,C_premium,,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,11,$0
+main,H3805-048-0,C_premium,,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,11,Monthly plan premium
 main,H3805-048-0,F_primary_care,,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,12,$0 copayment per visit.
 main,H3805-048-0,F_primary_care,,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,12,Primary care office visits
 main,H3805-048-0,F_primary_care,,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,81,$0 copayment or services rom a primary care
@@ -1875,6 +1898,7 @@ main,H3805-048-0,W_fitness,,●,https://www.aarpmedicareplans.com/alphadog/AAOR2
 main,H3805-048-0,W_fitness,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,60,Fitness program                                     $0 copayment
 main,H3817-008-1,AB_ambulance,1,$300,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,39,In- and Out-of-network: $300 copay per Medicare covered one-way transport
 main,H3817-008-1,AB_ambulance,2,$300,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,71,Ambulance services: In- and Out-of-network: $300 copay per covered one-
+main,H3817-008-1,C_premium,,$130,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,9,"For 2027, the monthly plan premium for Regence MedAdvantage + Rx Classic is $130."
 main,H3817-008-1,F_primary_care,1,$0,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,62,In-office primary care provider (PCP) visits: In-network: $0 copay per provider per day Out-of-network: 50% coinsurance
 main,H3817-008-1,F_primary_care,1,$0,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,8,Primary care office visits In-network: $0 per provider per day
 main,H3817-008-1,F_primary_care,2,50%,https://beonbrand.getbynder.com/asset/85039f9f-9466-4c0f-9edc-0016f91d698f/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,62,In-office primary care provider (PCP) visits: In-network: $0 copay per provider per day Out-of-network: 50% coinsurance
@@ -1936,6 +1960,7 @@ main,H3817-008-1,W_fitness,,●,https://beonbrand.getbynder.com/asset/85039f9f-9
 main,H3817-008-1,X_transportation,,,https://beonbrand.getbynder.com/asset/509b7b1f-c03e-498d-9107-158cc9783b71/Summary-of-Benefits-Medicare-MedAdvantage-Rx-Classic-2027-OR-Metro.pdf,7,Transportation Not covered Not covered
 main,H3817-009-1,AB_ambulance,1,$300,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,39,$300 copay per Medicare
 main,H3817-009-1,AB_ambulance,2,$300,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,71,$300 copay per covered one-
+main,H3817-009-1,C_premium,,$244,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,9,"For 2027, the monthly plan premium for Regence MedAdvantage + Rx Enhanced is $244."
 main,H3817-009-1,F_primary_care,1,$0,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,8,Primary care office visits                                  In-network: $0 per provider per day
 main,H3817-009-1,F_primary_care,2,50%,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,8,In-network: $0 per provider per day Out-of-network: 50% coinsurance
 main,H3817-009-1,G_specialist,1,$30,https://beonbrand.getbynder.com/asset/84960024-c25d-4f1d-acd1-d3f30ab21ac1/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Enhanced-2027-OR-Metro.pdf,8,Specialist office visits                                    In-network: $30 per provider per day
@@ -2052,6 +2077,7 @@ main,H3817-010-0,W_fitness,,●,https://beonbrand.getbynder.com/asset/5b106892-e
 main,H3817-010-0,X_transportation,,,https://beonbrand.getbynder.com/asset/04a8c0a0-9d0b-4085-a9c5-657b68a53d5a/Summary-of-Benefits-Medicare-Regence-Valiance-PPO-no-Rx-2027-OR.pdf,6,Transportation Not covered Not covered
 main,H3817-011-1,AB_ambulance,1,$300,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,39,In- and Out-of-network: $300 copay per Medicare covered one-way transport
 main,H3817-011-1,AB_ambulance,2,$300,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,71,Ambulance services: In- and Out-of-network: $300 copay per covered one-
+main,H3817-011-1,C_premium,,$88,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,9,"For 2027, the monthly plan premium for Regence MedAdvantage + Rx Primary is $88."
 main,H3817-011-1,F_primary_care,1,$0,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,62,In-office primary care provider (PCP) visits: In-network: $0 copay per provider per day
 main,H3817-011-1,F_primary_care,1,$0,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,8,Primary care office visits In-network: $0 per provider per day
 main,H3817-011-1,F_primary_care,2,50%,https://beonbrand.getbynder.com/asset/78bdf8d9-4f73-4ab9-858f-ab6466e7e5c7/Evidence-of-Coverage-Medicare-MedAdvantage-Rx-Primary-2027-OR-Metro.pdf,62,In-office primary care provider (PCP) visits: In-network: $0 copay per provider per day Out-of-network: 50% coinsurance
@@ -2118,6 +2144,7 @@ main,H5216-048-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content
 main,H5216-048-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,48,Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance
 main,H5216-048-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,48,Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance
 main,H5216-048-0,AB_ambulance,2,$325,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,49,Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance
+main,H5216-048-0,C_premium,,$97,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,15,"For 2027, the monthly premium for HumanaChoice H5216-048 (PPO) is $97."
 main,H5216-048-0,F_primary_care,1,$0,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,12,Primary care office visits $0 copayment per visit
 main,H5216-048-0,F_primary_care,1,$0,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,74,Provider and Professional Services $0 copayment – PCP's Office
 main,H5216-048-0,F_primary_care,2,50%,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,12,Primary care office visits $0 copayment per visit 50% of the total cost per visit
@@ -2178,6 +2205,7 @@ main,H5216-048-0,X_transportation,,,https://assets.humana.com/is/content/humana/
 main,H5216-427-2,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,36,In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance
 main,H5216-427-2,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,36,In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance
 main,H5216-427-2,AB_ambulance,2,$325,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,37,Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance
+main,H5216-427-2,C_premium,,$0,https://assets.humana.com/is/content/humana/H5216427002SB27pdf,5,Monthly plan premium                   $0
 main,H5216-427-2,F_primary_care,1,$0,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,63,Provider and Professional Services $0 copayment – PCP's Office $45 copayment – Specialist's Office
 main,H5216-427-2,F_primary_care,2,35%,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,64,Provider and Professional Services 35% coinsurance – PCP's Office – Specialist's Office
 main,H5216-427-2,G_specialist,1,$45,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,63,Provider and Professional Services $0 copayment – PCP's Office $45 copayment – Specialist's Office
@@ -2236,6 +2264,7 @@ main,H5216-428-2,AA_opt_packages,,●,https://assets.humana.com/is/content/human
 main,H5216-428-2,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,47,$325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance Out-of-Network:
 main,H5216-428-2,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,47,Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance Out-of-Network:
 main,H5216-428-2,AB_ambulance,2,$325,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,47,Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance
+main,H5216-428-2,C_premium,,$0,https://assets.humana.com/is/content/humana/H5216428002SB27pdf,5,Monthly plan premium $0
 main,H5216-428-2,F_primary_care,1,$0,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,12,Primary care office visits $0 copayment per visit
 main,H5216-428-2,F_primary_care,1,$0,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,72,Provider and Professional Services $0 copayment – PCP's Office
 main,H5216-428-2,F_primary_care,2,50%,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,12,Primary care office visits $0 copayment per visit 50% of the total cost per visit
@@ -2298,6 +2327,7 @@ main,H5216-455-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content
 main,H5216-455-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,36,Non-Emergency Ambulance $325 copayment per date of
 main,H5216-455-0,AB_ambulance,1,$325 or 20%,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,37,20% coinsurance regardless of the number of trips – Air Ambulance Out-of-Network:
 main,H5216-455-0,AB_ambulance,2,$325,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,37,Worldwide Coverage $325 copayment
+main,H5216-455-0,C_premium,,$0,https://assets.humana.com/is/content/humana/H5216455000SB27pdf,5,Monthly plan premium $0
 main,H5216-455-0,F_primary_care,1,$0,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,62,Provider and Professional Services $0 copayment – PCP's Office
 main,H5216-455-0,F_primary_care,2,50%,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,63,Provider and Professional Services 50% coinsurance – PCP's Office
 main,H5216-455-0,G_specialist,1,$40,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,62,Provider and Professional Services $0 copayment – PCP's Office $40 copayment – Specialist's Office
@@ -2357,6 +2387,7 @@ main,H5216-455-0,Z_part_b_reduction,,$43,https://assets.humana.com/is/content/hu
 main,H5439-010-0,AB_ambulance,1,$175,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,42,$175 copay per one-way trip for Medicare-covered ground ambulance services.
 main,H5439-010-0,AB_ambulance,1,$175,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,43,$175 copay per one-way trip for Medicare-covered air ambulance services.
 main,H5439-010-0,AB_ambulance,2,EOC unclear,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,28,Our plan covers worldwide emergency and urgent care services outside the United States under the following circumstances.
+main,H5439-010-0,C_premium,,$0,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H5439_010_2027_OR_SB_PMAO_7017600ENG_M.pdf,4,Monthly Plan Premium                 $0
 main,H5439-010-0,F_primary_care,1,$0,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,90,$0 copay for each Medicare-covered PCP office visit.
 main,H5439-010-0,F_primary_care,2,$30,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,90,$30 copay for each Medicare-covered PCP office visit.
 main,H5439-010-0,G_specialist,1,$30,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,90,$30 copay for each Medicare-covered specialist visit.
@@ -2411,6 +2442,7 @@ main,H5439-010-0,Z_part_b_reduction,,$10,https://www.wellcareor.com/content/dam/
 main,H5439-011-0,AB_ambulance,1,$350,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,54,$350 copay per one-way trip for Medicare-covered ground ambulance services.
 main,H5439-011-0,AB_ambulance,1,$350,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,55,$350 copay per one-way trip for Medicare-covered air ambulance services.
 main,H5439-011-0,AB_ambulance,2,EOC unclear,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,40,"You are covered for up to $50,000 when traveling outside the United States under your worldwide emergency and urgent care coverage."
+main,H5439-011-0,C_premium,,$206,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,12,"For 2027, the monthly plan premium for our plan is $206."
 main,H5439-011-0,F_primary_care,1,$0,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,10,$0 copay per visit
 main,H5439-011-0,F_primary_care,1,$0,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,102,$0 copay for each Medicare-covered PCP office visit.
 main,H5439-011-0,F_primary_care,2,30%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,10,"30% coinsurance, for each Medicare-covered PCP office visit."
@@ -2463,6 +2495,7 @@ main,H5439-011-0,X_transportation,,,https://www.wellcareor.com/content/dam/cente
 main,H5439-015-0,AB_ambulance,1,$335,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,55,Deductible applies. $335 copay per one-way trip for Medicare-covered air
 main,H5439-015-0,AB_ambulance,1,$335,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,55,Deductible applies. $335 copay per one-way trip for Medicare-covered ground
 main,H5439-015-0,AB_ambulance,2,EOC unclear,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,41,"You are covered for up to $50,000 when traveling outside the United States under your worldwide emergency and urgent care coverage."
+main,H5439-015-0,C_premium,,$29,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,13,"For 2027, the monthly plan premium for our plan is $29."
 main,H5439-015-0,F_primary_care,1,$0,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,100,$0 copay for each Medicare-covered PCP office visit.
 main,H5439-015-0,F_primary_care,2,30%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,100,30% coinsurance for each Medicare-covered PCP office visit.
 main,H5439-015-0,G_specialist,1,$55,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,101,$55 copay for each Medicare-covered specialist visit.
@@ -2513,6 +2546,7 @@ main,H5439-015-0,X_transportation,,,https://www.wellcareor.com/content/dam/cente
 main,H5439-019-0,AB_ambulance,1,$325,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,56,Deductible applies. $325 copay per one-way trip for Medicare-covered air
 main,H5439-019-0,AB_ambulance,1,$325,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,56,Deductible applies. $325 copay per one-way trip for Medicare-covered ground
 main,H5439-019-0,AB_ambulance,2,EOC unclear,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,42,"You are covered for up to $50,000 when traveling outside the United States under your worldwide emergency and urgent care coverage."
+main,H5439-019-0,C_premium,,$76.60,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,13,"For 2027, the monthly plan premium for our plan is $76.60."
 main,H5439-019-0,F_primary_care,1,$0,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,100,$0 copay for each Medicare-covered PCP office visit.
 main,H5439-019-0,F_primary_care,2,$30,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,101,$30 copay for each Medicare-covered PCP office visit.
 main,H5439-019-0,G_specialist,1,$30,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,101,$30 copay for each Medicare-covered specialist visit.
@@ -2563,6 +2597,7 @@ main,H5439-019-0,X_transportation,,,https://www.wellcareor.com/content/dam/cente
 main,H6815-038-0,AB_ambulance,1,$310,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,54,$310 copay per one-way trip for Medicare-covered ground
 main,H6815-038-0,AB_ambulance,1,$310,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,55,$310 copay per one-way trip for Medicare-covered air
 main,H6815-038-0,AB_ambulance,2,EOC unclear,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,42,"You are covered for up to $50,000 when traveling outside the United States under your worldwide emergency and urgent care coverage."
+main,H6815-038-0,C_premium,,$44.50,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,12,"For 2027, the monthly plan premium for our plan is $44.50."
 main,H6815-038-0,F_primary_care,,$0,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,90,$0 copay for each Medicare-covered PCP office visit.
 main,H6815-038-0,G_specialist,,$25,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,91,$25 copay for each Medicare-covered specialist visit.
 main,H6815-038-0,H_inpatient,1,$600,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,74,"$600 copay per day, for days 1 to 4"
@@ -2604,6 +2639,7 @@ main,H7006-018-0,AB_ambulance,1,$250,https://atriohp.com/media/qzyffvwm/h7006_01
 main,H7006-018-0,AB_ambulance,1,$250,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,47,$250 copay for each Medicare-covered Ground Ambulance service.
 main,H7006-018-0,AB_ambulance,1,$250,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,47,Cost sharing applies to each one-way trip.
 main,H7006-018-0,AB_ambulance,2,EOC unclear,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,58,You are covered for emergency care worldwide.
+main,H7006-018-0,C_premium,,$0,https://atriohp.com/media/254ghvxu/2027-portland-sb_final-v2.pdf,5,Monthly Plan Premium (includes both medical and drugs) $0
 main,H7006-018-0,F_primary_care,1,$0,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,10,$0 copay per visit
 main,H7006-018-0,F_primary_care,1,$0,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,10,Primary care office visits
 main,H7006-018-0,F_primary_care,1,$0,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_2027_atrio-choice-rx-ppo-portland.pdf,84,$0 copay for each
@@ -2664,6 +2700,7 @@ main,H7006-018-0,Y_otc,,●,https://atriohp.com/media/qzyffvwm/h7006_018_eoc_202
 main,H7006-021-0,AB_ambulance,1,$300,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,39,In-Network $300 copay for each Medicare-covered Ground Ambulance service.
 main,H7006-021-0,AB_ambulance,1,$300,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,39,prior authorization. $300 copay for each Medicare-covered Air Ambulance service.
 main,H7006-021-0,AB_ambulance,2,EOC unclear,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,49,You are covered for emergency care worldwide.
+main,H7006-021-0,C_premium,,$0,https://atriohp.com/media/254ghvxu/2027-portland-sb_final-v2.pdf,5,Monthly Plan Premium (includes both medical and drugs) $0 $0
 main,H7006-021-0,F_primary_care,1,$0,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,9,$0 copay per visit
 main,H7006-021-0,F_primary_care,1,$0,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,9,Primary care office visits
 main,H7006-021-0,F_primary_care,2,$50,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,9,In-Network: $0 copay per visit Out-of-Network: $50 copay per visit
@@ -2719,6 +2756,7 @@ main,H7199-002-0,AB_ambulance,1,$0-$325 or 20%,https://assets.devoted.com/plan-d
 main,H7199-002-0,AB_ambulance,1,$0-$325 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,55,You pay $0 copay for facility-to-
 main,H7199-002-0,AB_ambulance,2,$325 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,56,Air Ambulance: 20%
 main,H7199-002-0,AB_ambulance,2,$325 or 20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,56,Ground Ambulance: $325
+main,H7199-002-0,C_premium,,$28.50,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,13,"For 2027, the monthly plan premium for DEVOTED CHOICE PREMIUM 002 OR (PPO) is $28.50."
 main,H7199-002-0,F_primary_care,1,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,111,Services from a primary care physician (PCP): $0 copay
 main,H7199-002-0,F_primary_care,2,$10,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,112,Services from a primary care physician (PCP): $10 copay
 main,H7199-002-0,G_specialist,1,$45,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,111,Services from a specialist: $45 copay
@@ -2783,6 +2821,7 @@ main,H9003-001-0,AB_ambulance,2,$250,https://healthy.kaiserpermanente.org/conten
 main,H9003-001-0,AB_ambulance,2,$250,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,54,"fixed wing, rotary wing, and ground ambulance"
 main,H9003-001-0,AB_ambulance,2,$250,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,55,We also cover the services of a licensed ambulance
 main,H9003-001-0,AB_ambulance,2,$250,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,55,anywhere in the world without prior authorization
+main,H9003-001-0,C_premium,,$134,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,14,Enhanced plan $134
 main,H9003-001-0,F_primary_care,,$0,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,88,Primary care office visits $0
 main,H9003-001-0,G_specialist,,$35,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,88,$35 for Enhanced plan members.
 main,H9003-001-0,G_specialist,,$35,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,88,Specialist office visits
@@ -2842,6 +2881,7 @@ main,H9003-006-0,AB_ambulance,2,$300,https://healthy.kaiserpermanente.org/conten
 main,H9003-006-0,AB_ambulance,2,$300,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,54,"fixed wing, rotary wing, and ground ambulance"
 main,H9003-006-0,AB_ambulance,2,$300,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,55,We also cover the services of a licensed ambulance
 main,H9003-006-0,AB_ambulance,2,$300,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,55,anywhere in the world without prior authorization
+main,H9003-006-0,C_premium,,$49,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,14,Standard plan $49
 main,H9003-006-0,F_primary_care,,$0,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,88,Primary care office visits $0
 main,H9003-006-0,G_specialist,,$40,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,88,$40 for Standard plan members.
 main,H9003-006-0,G_specialist,,$40,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,88,Specialist office visits
@@ -2894,6 +2934,7 @@ main,H9003-009-0,AB_ambulance,1,$0-$350,https://healthy.kaiserpermanente.org/con
 main,H9003-009-0,AB_ambulance,2,$350,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,55,$350 for Value plan members.
 main,H9003-009-0,AB_ambulance,2,$350,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,55,We also cover the services of a licensed ambulance
 main,H9003-009-0,AB_ambulance,2,$350,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,55,anywhere in the world without prior authorization
+main,H9003-009-0,C_premium,,$0,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,14,Value plan $0
 main,H9003-009-0,F_primary_care,,$0,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,88,Primary care office visits $0
 main,H9003-009-0,G_specialist,,$45,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,88,$45 for Value plan members.
 main,H9003-009-0,G_specialist,,$45,https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/eoc/medicare/2027/evidence-of-coverage-nw.pdf,88,Specialist office visits

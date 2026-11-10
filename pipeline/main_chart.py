@@ -12,6 +12,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import cms_sources  # noqa: E402
 import fields  # noqa: E402
 import pbp  # noqa: E402
+from pbp_facts import TIER_POSITIONS  # noqa: E402
 from reads import ROWS, logged  # noqa: E402
 
 
@@ -166,7 +167,6 @@ def part_b_drugs(plan):
                       span(r.get("mrx_b_chemo_copay_amt_min"), r.get("mrx_b_chemo_copay_amt_max"), money))
 
 
-TIER_POSITIONS = {2: 1, 3: 2, 4: 3, 5: 4, 6: 5, 7: 6, 1: 7}
 
 
 def pharmacy_deductible(plan, landscape):

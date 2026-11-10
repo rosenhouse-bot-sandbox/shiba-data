@@ -210,11 +210,21 @@ class VocabularyTest(unittest.TestCase):
             self.assertEqual(f"`{b}`" in text, b == "imaging" or b.startswith("imaging."))
         for column, words in facts.VOCABULARIES.items():
             for word in words:
-                if column not in ("benefit", "setting"):
+                if column not in ("benefit", "setting") and word != "out_of_pocket_max":
                     self.assertIn(f"`{word}`", text)
         self.assertIn(facts.AMOUNT_RULES, text)
         with self.assertRaises(KeyError):
             facts.describe("imagin")
+
+    def test_finds_pages_about_plan_wide_costs(self):
+        for group, text in (("moop", "Maximum out-of-pocket amount"), ("moop", "your out-of-pocket limit"),
+                            ("part_d_deductible", "Stage 1: Yearly Deductible Stage"),
+                            ("part_d_deductible", "Part D deductible $590")):
+            self.assertTrue(any(re.search(rx, text, re.I) for rx in facts.FIND[group]), text)
+
+    def test_only_moop_readers_see_the_out_of_pocket_max(self):
+        self.assertNotIn("`out_of_pocket_max`", facts.describe("imaging"))
+        self.assertIn("`out_of_pocket_max`", facts.describe("moop"))
 
     def test_ambulance_readers_see_pages_about_care_abroad(self):
         for text in ("Our plan doesn't cover any services you get outside of the United States",
