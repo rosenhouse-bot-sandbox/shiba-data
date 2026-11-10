@@ -164,6 +164,10 @@ class StepTest(StepsTest):
     def test_version_15_merges_answers_that_differ_only_in_quotes(self):
         self.assertEqual(document_facts.VERSIONS[15], dict(document_facts.VERSIONS[14], merge=True))
 
+    def test_version_16_reads_the_moop_and_part_d_deductible(self):
+        v15 = document_facts.VERSIONS[15]
+        self.assertEqual(document_facts.VERSIONS[16], dict(v15, groups=v15["groups"] + ("moop", "part_d_deductible")))
+
     def test_version_9_adds_vision_hearing_fitness_otc_and_packages_to_7(self):
         self.assertEqual(document_facts.VERSIONS[9], dict(document_facts.VERSIONS[7], groups=document_facts.VERSIONS[7]["groups"]
                                                           + ("vision", "hearing", "fitness", "otc", "packages")))

@@ -111,3 +111,5 @@ HEARING_EXAM = ("H7006-018-0", "H6815-038-0", "H5439-019-0", "H5439-011-0", "H13
 VERSIONS[14] = dict(VERSIONS[13], recheck=VERSIONS[13]["recheck"] | {"hearing": VERSIONS[13]["recheck"]["hearing"] + HEARING_EXAM})
 # Readers often state one fact twice on a page, once per quote. Version 15 merges such answers instead of dropping both.
 VERSIONS[15] = dict(VERSIONS[14], merge=True)
+# Version 16 reads the costs that only CMS facts gave, so the sheets can cite them.
+VERSIONS[16] = dict(VERSIONS[15], groups=VERSIONS[15]["groups"] + ("moop", "part_d_deductible"))
