@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-49912316cc55d9c5.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 149, Section 4: yearly deductible of $461 on Tier 3-5 drugs, with no deductible for all other drugs. That matches $461 per year, not tiers 1,2.\"}]\n```",
+ "usage": {
+  "input_tokens": 2362,
+  "output_tokens": 221,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

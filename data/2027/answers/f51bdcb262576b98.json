@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-106.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 123, Deductible Stage: a yearly deductible of $400 applies to Tier 3, 4 and 5 drugs, and all other drugs have no deductible. That matches 'not tiers 1,2' on the usual five-tier formulary. This page does not state the tier count.\"}]\n```",
+ "usage": {
+  "input_tokens": 1949,
+  "output_tokens": 523,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-67.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 43 states the combined maximum out-of-pocket amount is $5,900. This is the most the member pays during the calendar year for covered services from both in-network and out-of-network providers, so network any, per year.\"}]\n```",
+ "usage": {
+  "input_tokens": 2273,
+  "output_tokens": 94,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

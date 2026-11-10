@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-d594b0a1d3772214.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 36 Section 1.3: the in-network MOOP for Aetna Medicare Elite (HMO) is $7,150 for calendar year 2027.\"}]\n```",
+ "usage": {
+  "input_tokens": 2522,
+  "output_tokens": 80,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

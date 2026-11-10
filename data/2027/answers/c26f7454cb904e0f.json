@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-38.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 50, Section 1.3, says the MOOP for calendar year 2027 is $8,900 for this HMO plan. That is a yearly out-of-pocket maximum for Medicare Part A and B services, and an HMO's maximum is in-network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2238,
+  "output_tokens": 197,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

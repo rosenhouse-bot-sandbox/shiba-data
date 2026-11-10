@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "be9deec855112c1d.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-005-0\", \"benefit\": \"part_d_deductible\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"deductible\", \"amount\": \"$650\", \"limit\": \"per year\", \"condition\": \"not tiers 1,2\", \"page\": 147, \"quotes\": [\"You'll pay a yearly deductible of $650 on Tier 3 - 5 drugs.\"]}]\n```",
+ "usage": {
+  "input_tokens": 6163,
+  "output_tokens": 420,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-26.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 25 Section 1.2 sets the MOOP for in-network medical services at $5,500 for calendar year 2027. This is the yearly in-network maximum for the single plan, Aetna Medicare Eagle (HMO).\"}]\n```",
+ "usage": {
+  "input_tokens": 2271,
+  "output_tokens": 105,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-75.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 10 Summary of Important Costs, Maximum out-of-pocket row: 'Value – $6,750' for covered Part A and Part B services. This matches H9003-009-0, Senior Advantage Value, which is listed separately from Value Lane.\"}]\n```",
+ "usage": {
+  "input_tokens": 2081,
+  "output_tokens": 485,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

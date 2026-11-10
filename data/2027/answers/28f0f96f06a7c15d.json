@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-36.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 53 Section 1.3 sets the 2027 MOOP for this HMO C-SNP plan at $7,700 per year for Part A and B services. As an HMO, this is the in-network maximum.\"}]\n```",
+ "usage": {
+  "input_tokens": 2242,
+  "output_tokens": 216,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

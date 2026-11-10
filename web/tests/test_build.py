@@ -86,7 +86,8 @@ class SiteDataTest(unittest.TestCase):
         self.assertEqual([c["line"] for c in cell["cites"]], [1, 2, 2])
 
     def test_uncited_cell_has_no_cites(self):
-        self.assertEqual(self.cell("main", "H3805-048-0", "E_moop"), {"value": "$6,700", "cites": []})
+        cell = self.cell("main", "H2406-042-0", "D_premium_full_extra_help")
+        self.assertEqual((cell["value"], cell["cites"]), ("$87.70", []))
 
     def test_wellcare_tests_cells_carry_ekg_comment(self):
         for plan_id in ("H6815-038-0", "H5439-015-0", "H5439-019-0", "H5439-011-0", "H5439-010-0"):

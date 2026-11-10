@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-84.md",
+ "reply": "```json\n[{\"id\": 0, \"plan_id\": \"H2001-045-0\", \"ok\": true, \"reason\": \"Page 148, Section 4 (Deductible Stage): a yearly deductible of $700 on Tier 3, 4 and 5 drugs, with no deductible for all other drugs. This matches $700 per year, not tiers 1,2.\"}]\n```",
+ "usage": {
+  "input_tokens": 2457,
+  "output_tokens": 323,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

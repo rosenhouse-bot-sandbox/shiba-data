@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-64e05773e847b56e.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 42 Section 1.2 sets the yearly in-network MOOP for Medicare Part A and B services at $5,150 for 2027.\"}]\n```",
+ "usage": {
+  "input_tokens": 2176,
+  "output_tokens": 75,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

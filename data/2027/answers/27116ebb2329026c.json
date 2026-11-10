@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-516ff586a12c8288.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 149, Deductible Stage: yearly deductible of $700 on Tiers 2 through 5. All other drugs, which is Tier 1 on this page, have no deductible. That matches 'not tier 1'.\"}]\n```",
+ "usage": {
+  "input_tokens": 2334,
+  "output_tokens": 419,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

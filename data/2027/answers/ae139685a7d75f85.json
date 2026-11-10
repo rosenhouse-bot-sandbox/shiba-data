@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-40.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 45, Section 1.2: the yearly limit for in-network Part A and Part B medical services is $7,150 for calendar year 2027.\"}]\n```",
+ "usage": {
+  "input_tokens": 2234,
+  "output_tokens": 188,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "50159487a52ccddf.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H7006-018-0\", \"benefit\": \"moop\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"out_of_pocket_max\", \"amount\": \"$5,900\", \"limit\": \"per year\", \"page\": 5, \"quotes\": [\"From in-network providers: $5,900\"]},\n  {\"plan_id\": \"H7006-018-0\", \"benefit\": \"moop\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"out_of_pocket_max\", \"amount\": \"$5,900\", \"limit\": \"per year\", \"page\": 5, \"quotes\": [\"From in-network and out-of-network providers combined: $5,900\"]},\n  {\"plan_id\": \"H7006-021-0\", \"benefit\": \"moop\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"out_of_pocket_max\", \"amount\": \"$4,450\", \"limit\": \"per year\", \"page\": 5, \"quotes\": [\"From in-network providers: $4,450\"]},\n  {\"plan_id\": \"H7006-021-0\", \"benefit\": \"moop\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"out_of_pocket_max\", \"amount\": \"$4,450\", \"limit\": \"per year\", \"page\": 5, \"quotes\": [\"From in-network and out-of-network providers combined: $4,450\"]}\n]\n```",
+ "usage": {
+  "input_tokens": 2294,
+  "output_tokens": 850,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

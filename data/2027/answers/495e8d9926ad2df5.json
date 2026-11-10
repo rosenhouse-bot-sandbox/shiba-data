@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "034e045a83e5b49d.md",
+ "reply": "```json\n[{\"plan_id\": \"H3817-008-1\", \"benefit\": \"moop\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"out_of_pocket_max\", \"amount\": \"$6,700\", \"limit\": \"per year\", \"page\": 3, \"quotes\": [\"$6,700 for services you receive from in-network\"]},\n{\"plan_id\": \"H3817-008-1\", \"benefit\": \"moop\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"out_of_pocket_max\", \"amount\": \"$10,100\", \"limit\": \"per year\", \"page\": 3, \"quotes\": [\"$10,100 for services you receive from in- and\"]}]\n```",
+ "usage": {
+  "input_tokens": 4901,
+  "output_tokens": 368,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
