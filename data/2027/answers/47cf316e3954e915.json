@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-21.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 54 row 'Acupuncture, alternative therapy (naturopathy), and chiropractic care not covered by Medicare' sets a limit for all plans, including Enhanced. Members self-refer to network providers, 'not to exceed a total of 18 visits per calendar year for all three services combined.' The supplemental benefit, in-network, the 18-visit limit, the calendar-year period and the combined condition all match.\"}]\n```",
+ "usage": {
+  "input_tokens": 2560,
+  "output_tokens": 450,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-7.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 83 row for diagnostic non-laboratory tests (which includes EKGs): $200 copay for all other Medicare-covered services received in other settings, such as a physician office. Mammogram ($0) and outpatient radiology ($500) are priced separately, so an office EKG falls under the $200 copay.\"}]\n```",
+ "usage": {
+  "input_tokens": 2076,
+  "output_tokens": 802,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

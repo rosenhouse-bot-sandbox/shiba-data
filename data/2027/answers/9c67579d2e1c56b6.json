@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-30.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 56 Emergency care row, under Out-of-Network: 'Worldwide Coverage $115 copayment – Emergency Room', so the worldwide (outside U.S.) emergency copay is $115.\"}]\n```",
+ "usage": {
+  "input_tokens": 2514,
+  "output_tokens": 791,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
