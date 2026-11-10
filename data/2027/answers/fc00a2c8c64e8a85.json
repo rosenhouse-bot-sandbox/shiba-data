@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-19.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 45 Section 1.2 gives this plan's in-network MOOP as $4,550 for calendar year 2027, covering Medicare Part A and Part B services.\"}]\n```",
+ "usage": {
+  "input_tokens": 2223,
+  "output_tokens": 83,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

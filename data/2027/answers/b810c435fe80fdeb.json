@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "034e045a83e5b49d.md",
+ "reply": "```json\n[{\"plan_id\": \"H3817-008-1\", \"benefit\": \"part_d_deductible\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"deductible\", \"amount\": \"$590\", \"limit\": \"per year\", \"condition\": \"not tiers 1,2\", \"page\": 8, \"quotes\": [\"$590 for Tiers 3, 4 and 5\", \"$0 for Tiers 1 and 2, Tiers 3 and 4 insulins, and most vaccines\"], \"note\": \"Deductible also skips Tier 3 and 4 insulins and most vaccines.\"}]\n```",
+ "usage": {
+  "input_tokens": 2123,
+  "output_tokens": 409,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

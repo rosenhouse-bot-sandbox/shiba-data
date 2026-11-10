@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "4a0ee31be3437c35.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-306-0\", \"benefit\": \"moop\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"out_of_pocket_max\", \"amount\": \"$4,550\", \"unit\": \"\", \"limit\": \"per year\", \"page\": 5, \"quotes\": [\"$4,550 in-network\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 4417,
+  "output_tokens": 308,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

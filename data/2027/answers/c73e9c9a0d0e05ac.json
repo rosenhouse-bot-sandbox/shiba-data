@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-0e1831fb00cf2a95.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 2 shows MOOP $5,500 for Aetna Medicare Eagle (HMO) H2056-018. The page defines it as the most you pay in a plan year, and an HMO maximum is in-network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2135,
+  "output_tokens": 168,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

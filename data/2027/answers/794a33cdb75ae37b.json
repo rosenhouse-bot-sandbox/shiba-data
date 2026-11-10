@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "61de2101267140ce.md",
+ "reply": "```json\n[{\"plan_id\": \"H1372-003-0\", \"benefit\": \"part_d_deductible\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"deductible\", \"amount\": \"$400\", \"unit\": \"\", \"limit\": \"per year\", \"condition\": \"not tiers 1\", \"page\": 9, \"quotes\": [\"Deductible stage $400\", \"Deductible applies to Tiers 2-5. For all other drugs, coverage applies immediately.\"], \"note\": \"The page does not say 'per year'. It was added because this is the yearly Part D deductible.\"}]\n```",
+ "usage": {
+  "input_tokens": 2141,
+  "output_tokens": 606,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

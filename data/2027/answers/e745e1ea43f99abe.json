@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-4ec81cd0d2695486.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 10 Summary of Important Costs, Maximum out-of-pocket amount row: $6,500 for in-network services, the most paid for covered Part A and Part B services in 2027.\"}]\n```",
+ "usage": {
+  "input_tokens": 1824,
+  "output_tokens": 89,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

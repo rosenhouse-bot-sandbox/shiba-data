@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "d649ac2bebc0321d.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-028-3\", \"benefit\": \"moop\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"out_of_pocket_max\", \"amount\": \"$8,900\", \"unit\": \"\", \"limit\": \"per year\", \"page\": 50, \"quotes\": [\"For calendar year 2027, the MOOP amount is $8,900.\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 5622,
+  "output_tokens": 538,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

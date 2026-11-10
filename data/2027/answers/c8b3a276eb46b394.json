@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "7a95606e4d0c87d0.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-048-0\", \"benefit\": \"part_d_deductible\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"deductible\", \"amount\": \"$700\", \"unit\": \"\", \"limit\": \"per year\", \"condition\": \"not tiers 1,2\", \"page\": 126, \"quotes\": [\"You'll pay a yearly deductible of $700 on Cost-Sharing Tier 3, Cost-Sharing Tier 4, and Cost-Sharing Tier 5 drugs.\", \"For all other drugs, you won't have to pay any deductible.\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 6638,
+  "output_tokens": 836,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

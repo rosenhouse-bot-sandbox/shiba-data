@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-cbcaa238a8c713a4.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 3 Maximum out-of-pocket responsibility row (annual limit for Medicare-covered services): $5,900 for services from in-network providers.\"}, {\"id\": 1, \"ok\": true, \"reason\": \"Page 3 Maximum out-of-pocket responsibility row (annual limit for Medicare-covered services): $9,550 for in- and out-of-network providers combined.\"}]\n```",
+ "usage": {
+  "input_tokens": 2015,
+  "output_tokens": 153,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "faf9b5f14f8f128e.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-015-0\", \"benefit\": \"part_d_deductible\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"deductible\", \"amount\": \"$700\", \"condition\": \"not tier 1\", \"page\": 16, \"quotes\": [\"Deductible             $700 for Part D prescription drugs (this applies to drugs on Tier 2 (Preferred\"], \"note\": \"The deductible applies to Tiers 2, 3, 4 and 5, so it skips Tier 1. The page also says it doesn't apply to covered insulin products or most adult Part D vaccines. The page does not say whether network applies, so in network is assumed.\"}]\n```",
+ "usage": {
+  "input_tokens": 2035,
+  "output_tokens": 632,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

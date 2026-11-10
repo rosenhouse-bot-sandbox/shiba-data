@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-557f08e61a7e8f42.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 10: $5,250 is the Standard maximum. Enhanced (H9003-001-0) is $4,000.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Page 10: $5,250 is the Standard maximum. Value (H9003-009-0) is $6,750.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 10 maximum out-of-pocket row: Standard – $5,250 for covered Part A and Part B services.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 49 Section 1.2: the in-network MOOP for 2027 is $4,000 for Enhanced plan members.\"},\n{\"id\": 4, \"ok\": false, \"reason\": \"Page 10: $6,750 is the Value maximum. Enhanced is $4,000.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 10 maximum out-of-pocket row: Value – $6,750. This is distinct from Value Lane at $4,450.\"}]\n```",
+ "usage": {
+  "input_tokens": 3492,
+  "output_tokens": 582,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

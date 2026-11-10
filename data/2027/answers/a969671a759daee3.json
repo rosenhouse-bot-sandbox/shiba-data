@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-52.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 32, Section 1.2: the combined maximum out-of-pocket amount is $13,900 per calendar year for Medicare Part A and Part B services from both in-network and out-of-network providers.\"}]\n```",
+ "usage": {
+  "input_tokens": 2298,
+  "output_tokens": 93,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

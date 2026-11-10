@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "0bd982dc589e8cba.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-427-2\", \"benefit\": \"moop\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"out_of_pocket_max\", \"amount\": \"$9,150\", \"unit\": \"\", \"limit\": \"per year\", \"page\": 32,\n  \"quotes\": [\"Your in-network maximum out-of-pocket amount (MOOP) is $9,150.\"], \"note\": \"\"},\n {\"plan_id\": \"H5216-427-2\", \"benefit\": \"moop\", \"setting\": \"any\", \"network\": \"any\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"out_of_pocket_max\", \"amount\": \"$13,900\", \"unit\": \"\", \"limit\": \"per year\", \"page\": 32,\n  \"quotes\": [\"Your combined maximum out-of-pocket amount is $13,900.\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 8000,
+  "output_tokens": 670,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

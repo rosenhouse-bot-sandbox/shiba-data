@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-86.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 137, Section 4 (Deductible Stage) says the yearly deductible is $595 on Tier 3, Tier 4 and Tier 5 drugs. That leaves tiers 1 and 2 outside the deductible, which matches the plan, amount, condition and limit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2375,
+  "output_tokens": 405,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

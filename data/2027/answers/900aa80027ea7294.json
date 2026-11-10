@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-94.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 133, Section 4: the yearly Part D deductible is $685 on Tier 3, 4 and 5 drugs. All other drugs have no deductible, which matches 'not tiers 1,2'.\"}]\n```",
+ "usage": {
+  "input_tokens": 2469,
+  "output_tokens": 422,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-89.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 147, Section 4 (Deductible Stage), for DEVOTED PREMIUM 005 OR (HMO): a yearly $650 deductible applies to Tier 3-5 drugs, and other drugs have no deductible. That matches the deductible of $650 per year with condition 'not tiers 1,2'.\"}]\n```",
+ "usage": {
+  "input_tokens": 2368,
+  "output_tokens": 371,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

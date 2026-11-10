@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-77.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 109 Deductible Stage: a $700 yearly deductible applies to Cost-Sharing Tier 4 and Tier 5 drugs. No deductible applies to all other drugs, so tiers 1-3 skip it.\"}]\n```",
+ "usage": {
+  "input_tokens": 2435,
+  "output_tokens": 419,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

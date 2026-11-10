@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-6c89db5198e7a3b2.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 3 lists the Regence Valiance maximum out-of-pocket for Medicare-covered services as $5,300 for in-network providers, an annual limit.\"}]\n```",
+ "usage": {
+  "input_tokens": 1864,
+  "output_tokens": 81,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

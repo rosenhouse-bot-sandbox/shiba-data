@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-5f6896f5c437eeed.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 Maximum Out-of-Pocket Responsibility row: the In-network column shows $6,000 as the most you pay in the plan year for Medicare-covered services.\"}, {\"id\": 1, \"ok\": true, \"reason\": \"Page 4 Maximum Out-of-Pocket Responsibility row: the In- and out-of-network column shows $10,750 as the combined most you pay in the plan year.\"}]\n```",
+ "usage": {
+  "input_tokens": 2236,
+  "output_tokens": 162,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

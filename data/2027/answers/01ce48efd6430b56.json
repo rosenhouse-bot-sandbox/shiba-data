@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "557f08e61a7e8f42.md",
+ "reply": "```json\n[{\"plan_id\": \"H9003-001-0\", \"benefit\": \"moop\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"out_of_pocket_max\", \"amount\": \"$4,000\", \"unit\": \"\", \"limit\": \"per year\", \"page\": 49, \"quotes\": [\"$4,000 for Enhanced plan members.\"], \"note\": \"\"},\n{\"plan_id\": \"H9003-006-0\", \"benefit\": \"moop\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"out_of_pocket_max\", \"amount\": \"$5,250\", \"unit\": \"\", \"limit\": \"per year\", \"page\": 10, \"quotes\": [\"Standard – $5,250\"], \"note\": \"\"},\n{\"plan_id\": \"H9003-009-0\", \"benefit\": \"moop\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"out_of_pocket_max\", \"amount\": \"$6,750\", \"unit\": \"\", \"limit\": \"per year\", \"page\": 10, \"quotes\": [\"Value – $6,750\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 47158,
+  "output_tokens": 951,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
