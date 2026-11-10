@@ -1,7 +1,7 @@
 """Builds the static site from the live year's data, or lists the hashes of the PDFs it links.
 
 Usage:
-  python3 -I web/build.py site <out_dir>
+  (cd web && npm ci) && python3 -I web/build.py site <out_dir>
   python3 -I web/build.py docs
 
 The pdxplans Worker serves each PDF from R2 as docs/<sha256>.pdf.
@@ -30,6 +30,8 @@ import trace  # noqa: E402
 import years  # noqa: E402
 
 DATA = years.data_dir()
+# The site serves pdf.js itself, from web/node_modules after `npm ci`.
+PDFJS = HERE / "node_modules" / "pdfjs-dist"
 
 # Keep in sync with PAGE_REF in web/static/app.js.
 PAGE_REF = re.compile(r"\b(EOC|SB|rider) pages? (\d+)", re.IGNORECASE)
@@ -185,6 +187,9 @@ def main(command, out=None):
         if "beneath" in c:
             print(f"::warning::An edit's author saw {c['saw']}, but the cell beneath it is now {c['beneath']}: {layers.where(c)}")
     shutil.copytree(HERE / "static", out_dir, dirs_exist_ok=True)
+    (out_dir / "pdfjs").mkdir(exist_ok=True)
+    for name in ["build/pdf.min.mjs", "build/pdf.worker.min.mjs", "web/pdf_viewer.css"]:
+        shutil.copy(PDFJS / name, out_dir / "pdfjs")
     (out_dir / "index.html").write_text(titled((HERE / "static" / "index.html").read_text(), site))
     site["built"] = datetime.datetime.now(datetime.timezone.utc).isoformat()
     site["terms"] = terms.resolve(HERE.parent, commit(), site["year"])
