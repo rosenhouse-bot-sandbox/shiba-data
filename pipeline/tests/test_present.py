@@ -972,6 +972,9 @@ class WriteTest(unittest.TestCase):
             ("dvha.I_alt_care_otc_travel", "H5216-455-0")})
         self.assertLessEqual(set(present.VERSIONS[11]), set(present.VERSIONS[10]))
 
+    def test_version_12_holds_no_cell(self):
+        self.assertEqual(present.held(years.data_dir(YEAR), 12), {})
+
     def test_a_held_main_cell_does_not_hold_the_dvha_cell_of_the_same_name(self):
         self.assertNotEqual(present.cell("main", "C_premium", "H1"), present.cell("dvha", "C_premium", "H1"))
 
@@ -1043,7 +1046,7 @@ class DvhaTest(unittest.TestCase):
     def test_presents_the_live_value_of_each_cell_it_does_not_hold(self):
         data = years.data_dir(YEAR)
         live = {r["plan_id"]: r for r in layers.live(data)[0]["dvha"]}
-        held = present.held(data, max(present.VERSIONS))
+        held = present.held(data)
         for column in present.DVHA:
             got = {p: v for p, ((v, cited),) in present.lines(data, column, sheet="dvha").items()
                    if present.cell("dvha", column, p) not in held and cited}
