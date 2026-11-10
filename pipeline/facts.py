@@ -132,7 +132,7 @@ BENEFITS.update({
                           "dental, vision or hearing. Put the benefit's name, as the document gives it, in `pool`. "
                           f"{NOT_MEDICARE}. {ROUTINE}",
 })
-# Plan-wide costs. Only CMS facts state them so far.
+# Plan-wide costs
 BENEFITS.update({
     "moop": "The most a member pays in a year for Medicare-covered services, as `cost_kind` `out_of_pocket_max`. "
             "`network` `in` is the in-network maximum, and `any` is the combined in- and out-of-network maximum",
