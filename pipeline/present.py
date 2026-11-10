@@ -1079,6 +1079,13 @@ VERSIONS[10] = VERSIONS[9] | {(c, p): "the reviewer has not checked the document
 VERSIONS[11] = VERSIONS[9] | {("dvha.F_dental", "H1372-003-0"): "the facts give no routine comprehensive dental price"}
 # Version 12 holds no cell. Caveat notes give what a rule leaves out.
 VERSIONS[12] = {}
+VERSIONS[13] = {
+    ("K_tests_labs", "H5439-019-0"): "the reviewer rejected the $10 price for most labs",
+    ("dvha.F_dental", "H1036-306-0"): "the facts give only the 0% crown recementation price for comprehensive care",
+    ("dvha.F_dental", "H2923-025-0"): "the rule leaves out the 50% comprehensive price and what else the $2,000 pays for",
+    ("dvha.I_alt_care_otc_travel", "H5216-048-0"): "the facts take the $50 worldwide urgent care copay for the emergency room's",
+    ("dvha.I_alt_care_otc_travel", "H5216-455-0"): "the reviewer rejected the $130 worldwide emergency room copay",
+}
 # The version that first presents each later column. Earlier versions hold its cells.
 SINCE = {("dvha", "C_premium"): 3, ("dvha", "G_vision"): 4, ("dvha", "H_hearing"): 4, ("dvha", "E_optional_packages"): 5,
          ("dvha", "F_dental"): 6, ("dvha", "I_alt_care_otc_travel"): 6, ("dvha", "J_extra_benefits"): 6,

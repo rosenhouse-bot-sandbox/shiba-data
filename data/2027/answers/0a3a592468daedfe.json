@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-4.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 80, Urgently needed services row: under Worldwide Coverage it lists a $50 copayment at an Urgent Care Center. Urgently needed care falls under the emergency benefit, and care outside the U.S. maps to setting outside_us. The fact matches, though the quote leaves out the 'Urgent Care Center' line.\"}]\n```",
+ "usage": {
+  "input_tokens": 2445,
+  "output_tokens": 1007,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-33.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 43 does show a 'Worldwide Coverage $130 copayment – Emergency Room' row. But that row sits apart from the separate 'Out-of-Network' rows, and the page never labels worldwide coverage as out-of-network. The network field 'out' is not supported by the page, so it is doubtful.\"}]\n```",
+ "usage": {
+  "input_tokens": 2323,
+  "output_tokens": 532,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
