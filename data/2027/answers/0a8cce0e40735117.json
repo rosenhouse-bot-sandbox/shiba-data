@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-23e2bdae59ea8981.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 3 maximum out-of-pocket row: $10,100 for services from in- and out-of-network providers combined, an annual limit.\"}, {\"id\": 1, \"ok\": true, \"reason\": \"Page 3 maximum out-of-pocket row: $7,150 for services from in-network providers, an annual limit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2011,
+  "output_tokens": 129,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

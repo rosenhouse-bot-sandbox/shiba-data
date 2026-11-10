@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-d649ac2bebc0321d.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 50, Section 1.3: for calendar year 2027 the MOOP for Part A and Part B services is $8,900 per year. The plan is an HMO, so this is the in-network maximum.\"}]\n```",
+ "usage": {
+  "input_tokens": 2238,
+  "output_tokens": 168,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

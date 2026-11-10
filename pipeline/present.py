@@ -482,9 +482,9 @@ def moop(organization, found):
 
 def drug_deductible(organization, found):
     """Shows the yearly Part D deductible and the tiers it skips, or n/a for a plan without Part D."""
-    @unless("it is not a yearly Part D deductible")
+    @unless("it is not a yearly Part D deductible for every member")
     def ok(f):
-        return f["cost_kind"] in ("deductible", "not_covered") and bare(f)
+        return f["cost_kind"] in ("deductible", "not_covered") and bare(f) and "extra help" not in f["condition"].lower()
 
     got = best(found, "part_d_deductible", "any", ok)
     if any(f["cost_kind"] == "not_covered" for f in got):

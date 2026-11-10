@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "77d83ba821336370.md",
+ "reply": "```json\n[{\"plan_id\": \"H2001-045-0\", \"benefit\": \"part_d_deductible\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"deductible\", \"amount\": \"$700\", \"limit\": \"per year\", \"condition\": \"not tiers 1,2\", \"page\": 148, \"quotes\": [\"deductible o $700 on Tier 3, Tier 4 and Tier 5 drugs\"], \"note\": \"The page also says the deductible doesn't apply to covered insulin products and most adult Part D vaccines.\"}]\n```",
+ "usage": {
+  "input_tokens": 5561,
+  "output_tokens": 638,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

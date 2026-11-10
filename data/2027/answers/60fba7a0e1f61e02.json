@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-d1ca3a965cb15437.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 45, Section 1.2 sets the yearly limit for in-network Part A and Part B services. For calendar year 2027 the MOOP amount is $7,150, and that figure is repeated in the same section.\"}]\n```",
+ "usage": {
+  "input_tokens": 2234,
+  "output_tokens": 187,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

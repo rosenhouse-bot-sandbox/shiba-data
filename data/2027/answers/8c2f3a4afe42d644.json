@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-93.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 144, Section 4 (Deductible Stage), says: 'You'll pay a yearly deductible of $461 on Tier 3 - 5 drugs' and 'For all other drugs, you won't have to pay any deductible.' That matches the $461 yearly Part D deductible that skips tiers 1 and 2. In-network is the default.\"}]\n```",
+ "usage": {
+  "input_tokens": 2370,
+  "output_tokens": 383,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

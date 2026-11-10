@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-362ee075ea5896d4.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 2 maximum out-of-pocket row: in-network column is $9,850 per year for Medicare-covered services received from network providers.\"}, {\"id\": 1, \"ok\": true, \"reason\": \"Page 2 maximum out-of-pocket row: out-of-network column is $14,800 per year for Medicare-covered services received from any provider, so it is the combined maximum.\"}]\n```",
+ "usage": {
+  "input_tokens": 2235,
+  "output_tokens": 148,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

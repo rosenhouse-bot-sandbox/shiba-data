@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "28e22b4acec7d885.md",
+ "reply": "```json\n[{\"plan_id\": \"H2406-073-0\", \"benefit\": \"moop\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"out_of_pocket_max\", \"amount\": \"$7,150\", \"limit\": \"per year\", \"page\": 2, \"quotes\": [\"$7,150\", \"This is the most you will pay out-of-pocket each year for Medicare-covered services and supplies received from network providers.\"]},\n{\"plan_id\": \"H2406-073-0\", \"benefit\": \"moop\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"out_of_pocket_max\", \"amount\": \"$10,750\", \"limit\": \"per year\", \"page\": 2, \"quotes\": [\"$10,750\", \"This is the most you will pay out-of-pocket each year for Medicare-covered services and supplies received from any provider.\"]}]\n```",
+ "usage": {
+  "input_tokens": 2349,
+  "output_tokens": 631,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-33.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 48, Section 1.2: for calendar year 2027 the MOOP for this HMO plan is $6,700 for Medicare Part A and B services.\"}]\n```",
+ "usage": {
+  "input_tokens": 2204,
+  "output_tokens": 135,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

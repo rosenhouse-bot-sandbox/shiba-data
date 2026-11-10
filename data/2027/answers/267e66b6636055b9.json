@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-bf93677641b9fa6f.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 Maximum Out-of-Pocket Responsibility row: $6,700 is the most you will pay in the plan year for Medicare-covered Part A and Part B services from in-network providers. This is an HMO and only one plan is listed.\"}]\n```",
+ "usage": {
+  "input_tokens": 2080,
+  "output_tokens": 108,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

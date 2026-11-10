@@ -592,6 +592,11 @@ class DrugDeductibleTest(unittest.TestCase):
         found = [landscape("part_d_deductible", "deductible", "$685", condition=c) for c in ("not tiers 1", "not tiers 1,2")]
         self.assertEqual(column(present.drug_deductible, *found), [("$685", found)])
 
+    def test_skips_the_deductible_with_extra_help(self):
+        ded = landscape("part_d_deductible", "deductible", "$700", condition="not tiers 1,2,3")
+        helped = landscape("part_d_deductible", "deductible", "$0", condition="If you receive Extra Help")
+        self.assertEqual(column(present.drug_deductible, ded, helped), [("$700 not tiers 1,2,3", [ded])])
+
     def test_skips_a_package_deductible(self):
         ded = landscape("part_d_deductible", "deductible", "$100", package="Rider")
         self.assertEqual(column(present.drug_deductible, ded), [("", [])])
@@ -966,10 +971,10 @@ class WriteTest(unittest.TestCase):
         self.assertEqual(held_main, {("K_tests_labs", "H6815-038-0"), ("K_tests_labs", "H5439-019-0")})
         self.assertLessEqual(set(present.VERSIONS[8]), set(present.VERSIONS[7]))
 
-    def test_version_9_presents_the_main_premium(self):
+    def test_version_9_presents_the_main_premium_moop_and_drug_deductible(self):
         data = years.data_dir(YEAR)
         cells = {v: {(r["sheet"], r["column"]) for r in present.layer_rows(data, v)} for v in (8, 9)}
-        self.assertEqual(cells[9] - cells[8], {("main", "C_premium")})
+        self.assertEqual(cells[9] - cells[8], {("main", "C_premium"), ("main", "E_moop"), ("main", "N_pharmacy_deductible")})
 
     def test_version_11_presents_the_cell_version_10_holds_for_review(self):
         self.assertEqual(set(present.VERSIONS[10]) - set(present.VERSIONS[11]), {

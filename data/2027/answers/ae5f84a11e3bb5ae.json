@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "7dcf10accd77535d.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-011-0\", \"benefit\": \"part_d_deductible\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"deductible\", \"amount\": \"$700\", \"unit\": \"\", \"limit\": \"per year\", \"condition\": \"not tier 1\", \"page\": 17, \"quotes\": [\"$700 for Part D prescription drugs\", \"For all other covered drugs, you will not have to pay any deductible and will start receiving coverage immediately.\"], \"note\": \"The deductible applies to Tiers 2-5. Insulin and most Part D vaccines are also exempt from it.\"}]\n```",
+ "usage": {
+  "input_tokens": 2039,
+  "output_tokens": 649,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

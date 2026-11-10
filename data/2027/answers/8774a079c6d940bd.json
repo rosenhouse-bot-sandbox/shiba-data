@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-98.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 97, Deductible Stage: a yearly deductible of $305 applies to Tier 3 through Tier 5 drugs. All other drugs have no deductible, so tiers 1 and 2 skip it, matching the condition.\"}]\n```",
+ "usage": {
+  "input_tokens": 2395,
+  "output_tokens": 323,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

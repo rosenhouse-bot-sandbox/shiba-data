@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "a4bc20077fb4a2cf.md",
+ "reply": "```json\n[{\"plan_id\": \"H3817-011-1\", \"benefit\": \"part_d_deductible\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"deductible\", \"amount\": \"$700\", \"limit\": \"per year\",\n  \"condition\": \"not tiers 1,2\", \"page\": 97,\n  \"quotes\": [\"You’ll pay a yearly deductible of $700 on Tier 3 – Preferred Brand through Tier 5 – Specialty drugs.\"],\n  \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 5688,
+  "output_tokens": 382,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

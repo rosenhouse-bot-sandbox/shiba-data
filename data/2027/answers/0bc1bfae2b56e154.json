@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-83.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 128, Section 4 (Deductible Stage): a yearly $400 deductible applies to Tier 2, 3, 4 and 5 drugs, and other drugs pay no deductible, so it skips Tier 1. The amount, the per-year limit and the condition match.\"}]\n```",
+ "usage": {
+  "input_tokens": 2151,
+  "output_tokens": 550,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

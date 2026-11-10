@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-18.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 42, Section 1.2: the MOOP for in-network Part A and Part B services is $5,150 for calendar year 2027, a yearly limit for this single HMO plan.\"}]\n```",
+ "usage": {
+  "input_tokens": 2176,
+  "output_tokens": 87,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

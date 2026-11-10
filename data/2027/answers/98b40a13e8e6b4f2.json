@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-41.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 45, Section 1.2: the yearly limit for in-network Part A and Part B services is $6,700 for calendar year 2027. This matches the in-network MOOP for this plan.\"}]\n```",
+ "usage": {
+  "input_tokens": 2237,
+  "output_tokens": 153,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

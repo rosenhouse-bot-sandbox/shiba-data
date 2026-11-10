@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-32.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 34 Section 1.2: the in-network maximum out-of-pocket amount (MOOP) is $7,150. This is the most the member pays during the calendar year for covered Part A and Part B services from network providers.\"}]\n```",
+ "usage": {
+  "input_tokens": 2260,
+  "output_tokens": 98,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
