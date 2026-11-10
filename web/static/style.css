@@ -13,7 +13,7 @@
   color: var(--ink);
 }
 * { box-sizing: border-box; }
-body { margin: 0; height: 100vh; display: flex; flex-direction: column; background: #fff; }
+body { margin: 0; height: 100dvh; display: flex; flex-direction: column; background: #fff; }
 header { padding: 8px 16px; border-bottom: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: center; }
 h1 { font-size: 18px; margin: 0; }
 h1 span { color: var(--muted); font-weight: normal; }
@@ -41,6 +41,7 @@ a { color: var(--accent); }
 .sheet tr.section th span { position: sticky; left: 6px; }
 td { cursor: pointer; }
 td:hover { outline: 2px solid var(--accent); outline-offset: -2px; }
+td[data-col] > a { color: inherit; text-decoration: none; }
 td.dot { text-align: center; }
 td.commented { background: var(--comment); }
 td.commented.caveat { background: var(--caveat); }
@@ -77,10 +78,10 @@ td.selected { outline: 3px solid var(--ink); outline-offset: -3px; }
 #find-query { flex: 0 1 240px; min-width: 0; }
 #find-count { color: var(--muted); font-size: 13px; min-width: 70px; }
 #note-box { position: relative; }
-#source-note { padding: 4px 28px 4px 10px; font-size: 13px; border-bottom: 1px solid var(--line); max-height: 30vh; overflow: auto; }
-#how-this { position: absolute; right: 6px; bottom: 6px; width: 16px; height: 16px; border: 1px solid var(--line); border-radius: 50%;
-  background: #fff; color: var(--muted); font-size: 11px; line-height: 16px; text-align: center; text-decoration: none; }
-#how-this:hover, #how-this:focus { color: var(--accent); border-color: var(--accent); }
+#source-note { padding: 4px 32px 4px 10px; font-size: 13px; border-bottom: 1px solid var(--line); max-height: 30vh; overflow: auto; }
+#how-this { position: absolute; right: 4px; bottom: 4px; width: 24px; height: 24px; border: 1px solid var(--line); border-radius: 50%;
+  background: #fff; color: var(--muted); font-size: 13px; line-height: 22px; text-align: center; text-decoration: none; }
+#how-this:hover, #how-this:focus-visible { color: var(--accent); border-color: var(--accent); }
 #how-this[hidden] { display: none; }
 #source-note p { margin: 4px 0; }
 #source-note .cms ul { margin: 0; padding-left: 20px; }
@@ -149,7 +150,7 @@ td.selected { outline: 3px solid var(--ink); outline-offset: -3px; }
 .how-strip .from { background: var(--hi-in); }
 .how-strip .to { background: var(--hi-out); }
 .how-term { background: none; border: 0; padding: 0; font: inherit; color: inherit; cursor: help; border-bottom: 1.5px dotted var(--accent); }
-.how-term:hover, .how-term:focus-visible, .how-term-box.open .how-term { background: #e8efff; outline: none; }
+.how-term:hover, .how-term:focus-visible, .how-term-box.open .how-term { background: #e8efff; }
 .how-pop { display: none; position: fixed; z-index: 20; width: 560px; max-height: calc(100vh - 16px); overflow: auto; padding: 12px 14px; background: #fff; border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 12px 32px rgba(0, 0, 0, .16); font-size: 13px; line-height: 1.5; }
 .how-term-box.open .how-pop { display: block; }
 .how-pop strong, .how-pop > span { display: block; margin-bottom: 6px; }

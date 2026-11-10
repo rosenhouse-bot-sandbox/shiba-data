@@ -350,6 +350,15 @@ class SiteCommandTest(unittest.TestCase):
         self.assertLess(datetime.datetime.now(datetime.timezone.utc) - built, datetime.timedelta(minutes=1))
         self.assertIn("<title>pdxplans.org – 2099 Medicare Advantage plans</title>", (self.dir / "site" / "index.html").read_text())
 
+    def test_site_command_hosts_pdfjs_itself(self):
+        with mock.patch.object(build, "site_data", return_value=bare_site()):
+            build.main("site", self.dir / "site")
+        site = self.dir / "site"
+        for name in ["pdf.min.mjs", "pdf.worker.min.mjs", "pdf_viewer.css"]:
+            self.assertTrue((site / "pdfjs" / name).is_file(), name)
+        for page in [*site.glob("*.html"), *site.glob("*.js")]:
+            self.assertNotIn("https://cdn", page.read_text(), page.name)
+
 
 class TraceFilesTest(unittest.TestCase):
     def setUp(self):

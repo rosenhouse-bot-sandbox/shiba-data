@@ -18,9 +18,13 @@ It signs in as the `sheets-sync` service account through Workload Identity Feder
 ## Local build
 
 ```sh
+(cd web && npm ci)
 python3 -I web/build.py site _site
 npx wrangler dev --remote
 ```
+
+The site serves pdf.js from `web/node_modules`, so it loads no third-party code.
+`static/_headers` sets its content security policy, which the e2e tests apply too.
 
 ## Tests
 
@@ -30,3 +34,13 @@ python3 -I -m unittest discover -s tests
 node --test tests/highlight.test.mjs tests/ago.test.mjs tests/permalink.test.mjs tests/worker.test.mjs tests/pipeline.test.mjs
 npm ci && SITE=../_site DOCS=<dir of <sha256>.pdf> node --test tests/e2e.test.mjs
 ```
+
+## Web platform guidance
+
+Web UI work should follow [Modern Web Guidance](https://github.com/GoogleChrome/modern-web-guidance).
+Claude sessions load it from `.claude/skills/modern-web-guidance`, which searches the guides before writing HTML, CSS or client-side JavaScript.
+Without the skill, read the guides in that repository.
+
+The site targets Baseline Widely available features.
+It may use a newer feature behind feature detection, with a fallback of a few lines.
+It should not add polyfills or runtime dependencies.

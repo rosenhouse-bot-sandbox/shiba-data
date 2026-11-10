@@ -29,6 +29,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
+      # The site build copies pdf.js from node_modules.
+      - run: npm ci && npx playwright install --with-deps chromium
       - run: pipx run ruff==0.16.9 check
         working-directory: .
       - run: python3 -I -m unittest discover -s tests
@@ -45,7 +47,6 @@ jobs:
           python3 -I build.py docs > ../_docs.txt
           xargs -P 8 -I{} curl -sSfL --retry 5 --retry-all-errors --max-time 300 -o "../_docs/{}.pdf" "https://pdxplans.org/docs/{}.pdf" < ../_docs.txt
           sed 's|.*|&  ../_docs/&.pdf|' ../_docs.txt | sha256sum -c --quiet
-      - run: npm ci && npx playwright install --with-deps chromium
       - run: |
           SITE=../_site DOCS=../_docs FAILURES=../_failures node --test --test-reporter=dot --test-reporter-destination=stdout \
             --test-reporter=spec --test-reporter-destination="$RUNNER_TEMP/spec.txt" \

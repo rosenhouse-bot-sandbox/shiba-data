@@ -8,7 +8,7 @@ import path from "node:path";
 import { chromium } from "playwright";
 
 const { SITE, DOCS, FAILURES } = process.env;
-const TYPES = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css", ".json": "application/json", ".pdf": "application/pdf" };
+const TYPES = { ".html": "text/html", ".js": "text/javascript", ".mjs": "text/javascript", ".css": "text/css", ".json": "application/json", ".pdf": "application/pdf" };
 let server, browser, page, base;
 let opened = [];
 
@@ -19,6 +19,9 @@ async function newPage(options) {
 }
 
 const site = JSON.parse(fs.readFileSync(path.join(SITE, "data.json")));
+// Like Cloudflare, which adds the headers that _headers lists for /* to every asset.
+const HEADERS = Object.fromEntries(fs.readFileSync(path.join(SITE, "_headers"), "utf8").split("\n").slice(1)
+  .filter((l) => l.trim()).map((l) => l.trim().split(/: (.*)/s).slice(0, 2)));
 
 before(async () => {
   server = http.createServer((req, res) => {
@@ -27,7 +30,7 @@ before(async () => {
     const file = name.startsWith("/docs/") ? path.join(DOCS, path.basename(name))
       : name.startsWith("/trace/") ? path.join(SITE, `${name}.json`) : path.join(SITE, name.replace(/\/$/, "/index.html"));
     fs.readFile(file, (err, body) => {
-      res.writeHead(err ? 404 : 200, { "Content-Type": TYPES[path.extname(file)] || "application/octet-stream" });
+      res.writeHead(err ? 404 : 200, { ...HEADERS, "Content-Type": TYPES[path.extname(file)] || "application/octet-stream" });
       res.end(body);
     });
   });
@@ -67,7 +70,7 @@ const UNCITED = "td:not(.cited):not(.commented)";
 test("the header names the plan year and counties", async () => {
   await page.goto(`${base}#/main`);
   await page.waitForSelector("table.sheet");
-  assert.equal(await page.title(), "pdxplans.org – 2027 Medicare Advantage plans");
+  assert.equal(await page.title(), "Main chart – pdxplans.org – 2027 Medicare Advantage plans");
   assert.equal(await page.textContent("h1"), "pdxplans.org – 2027 Medicare Advantage plans for Multnomah & Clackamas");
 });
 
@@ -101,6 +104,69 @@ test("a spreadsheet link to a cited cell opens its quote", async () => {
   await page.goto(`${base}#/main/H2001-045-0/H_inpatient`);
   await shown(docOf("H2001-045-0", "EOC"), 14);
   assert.match((await page.locator(".textLayer mark").allTextContents()).join(" "), /\$1,980 copayment/);
+});
+
+test("a cited cell and its pipeline view load under the content security policy", async () => {
+  const fresh = await newPage();
+  await fresh.addInitScript(() => {
+    window.violations = [];
+    document.addEventListener("securitypolicyviolation", (e) => window.violations.push(`${e.violatedDirective} ${e.blockedURI}`));
+  });
+  const response = await fresh.goto(`${base}#/main/H2001-045-0/H_inpatient`);
+  assert.match(response.headers()["content-security-policy"], /default-src 'self'/);
+  await fresh.waitForSelector(`#page-area[data-shown="${docOf("H2001-045-0", "EOC")} 14"] .textLayer mark`);
+  await fresh.locator("#how-this").click();
+  await fresh.waitForSelector(".how-lens");
+  assert.deepEqual(await fresh.evaluate(() => window.violations), []);
+});
+
+test("a cell opens from the keyboard", async () => {
+  await page.goto(`${base}#/main`);
+  await row("H2001-045-0").locator("td.cited", { hasText: "$1,980" }).getByRole("link").focus();
+  await page.keyboard.press("Enter");
+  await shown(docOf("H2001-045-0", "EOC"), 14);
+  assert.match(page.url(), /#\/2027\/main\/H2001-045-0\/inpatient$/);
+});
+
+test("every link is a permalink that opens what clicking it shows", async () => {
+  const clicking = await newPage();
+  await clicking.goto(`${base}#/notes`);
+  await clicking.locator("td.cited").first().click();
+  await clicking.waitForSelector("#page-area[data-shown]");
+  assert.equal(await clicking.locator('a[href="#"], a:not([href])').count(), 0);
+  const link = clicking.locator("#source-note p.cite a").last();
+  const href = await link.getAttribute("href");
+  const [, plan, kind, n] = href.match(/^#\/2027\/notes\/\w+\/([^/]+)\/\w+\/(\w+)\/(\d+)$/);
+  const target = `#page-area[data-shown="${docOf(plan, kind)} ${n}"]`;
+  await link.click();
+  await clicking.waitForSelector(target);
+  const fresh = await newPage();
+  await fresh.goto(`${base}${href}`);
+  await fresh.waitForSelector(target);
+});
+
+test("icon buttons have names", async () => {
+  await page.goto(`${base}#/main/H2001-045-0/H_inpatient`);
+  for (const name of ["Previous page", "Next page", "Close document", "Find in document"]) {
+    assert.equal(await page.getByRole("button", { name, exact: true }).count(), 1, name);
+  }
+});
+
+test("the window title names the view", async () => {
+  await page.goto(`${base}#/notes`);
+  await page.waitForSelector("table.notes");
+  assert.equal(await page.title(), "Notes – pdxplans.org – 2027 Medicare Advantage plans");
+  await page.goto(`${base}#/plan/H2001-045-0`);
+  await page.waitForSelector(".plan-page");
+  assert.match(await page.title(), /^.+ – pdxplans\.org – 2027 Medicare Advantage plans$/);
+  assert.equal(await page.title(), `${site.plans.find((p) => p.plan_id === "H2001-045-0").plan_name} – pdxplans.org – 2027 Medicare Advantage plans`);
+});
+
+test("sheet headers name their rows and columns", async () => {
+  await page.goto(`${base}#/main`);
+  await page.waitForSelector("table.sheet");
+  assert.equal(await page.locator("table.sheet thead th:not([scope=col])").count(), 0);
+  assert.equal(await page.locator("table.sheet tbody th.plan:not([scope=row])").count(), 0);
 });
 
 test("hiding the viewer forgets the shown page", async () => {
