@@ -1046,7 +1046,7 @@ class DvhaTest(unittest.TestCase):
     def test_presents_the_live_value_of_each_cell_it_does_not_hold(self):
         data = years.data_dir(YEAR)
         live = {r["plan_id"]: r for r in layers.live(data)[0]["dvha"]}
-        held = present.held(data)
+        held = present.held(data, json.loads((data / "steps.json").read_text())["present"])
         for column in present.DVHA:
             got = {p: v for p, ((v, cited),) in present.lines(data, column, sheet="dvha").items()
                    if present.cell("dvha", column, p) not in held and cited}
