@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-11.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 8, under 'Mandatory supplemental dental benefit', In-Network: 0% of the cost for crown recementation, root canal retreatment, bridge recementation, oral surgery and periodontal maintenance. These are comprehensive services, so 0% coinsurance holds. Each service has its own limit, so no single limit applies.\"}]\n```",
+ "usage": {
+  "input_tokens": 2539,
+  "output_tokens": 534,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

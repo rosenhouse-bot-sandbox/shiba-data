@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-5.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 68 Urgently needed services row does show 'Worldwide Coverage $50 copayment – Urgent Care Center'. But Worldwide Coverage is its own heading, separate from the Out-of-Network block. The page never calls it out-of-network, so the network field 'out' is not supported by the quote.\"}]\n```",
+ "usage": {
+  "input_tokens": 2405,
+  "output_tokens": 612,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

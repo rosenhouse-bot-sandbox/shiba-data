@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-24.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 54 row for acupuncture, naturopathy and chiropractic not covered by Medicare: members self-refer to network providers, not to exceed a total of 18 visits per calendar year for all three services combined. The limit applies to all plans, including Standard.\"}]\n```",
+ "usage": {
+  "input_tokens": 2560,
+  "output_tokens": 242,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
