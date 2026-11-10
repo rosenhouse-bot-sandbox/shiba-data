@@ -41,8 +41,7 @@ TERMS = {
               "text": "Facts a Claude session wrote where the extracted facts fell short, each with a note. "
                       "The site marks the cell with a green note."},
     "layer": {"title": "Layers", "ref": "pipeline/layers.py:LAYERS",
-              "text": "Tables applied in order on top of the draft. A later layer that sets a value wins. "
-                      "Some layers only attach citations."},
+              "text": "Tables applied in order on top of the draft. A later layer wins."},
     "worker": {"title": "The Worker", "ref": "web/worker.js",
                "text": "A Cloudflare Worker serves the static site, and serves each PDF from R2 by its hash."},
 }

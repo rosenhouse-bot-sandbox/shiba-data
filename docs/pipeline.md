@@ -352,7 +352,7 @@ dvha,H3805-048-0,E_optional_packages,"Dental Platinum Rider $66/mo, max $1,500, 
 
 ## 9. Stack the layers
 
-A **layer** is a table whose rows set a cell's value and cite it. Code applies the layers in order. When two layers set the same cell, the later one wins:
+A **layer** is a table whose rows set a cell's value and cite it. Code applies the layers in order on top of the draft. When two layers set the same cell, the later one wins:
 
 ```
 layer                             Ambulance               X-ray

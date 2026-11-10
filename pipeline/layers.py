@@ -1,7 +1,7 @@
 """Builds a year's live sheets by applying layers to its generated sheets, in order.
 
-A layer row cites and sets a value for a cell, or for one line of it. A later layer wins. Within the edits layer, a later row wins. The live sheets drop a citation whose value is not
-the live cell's.
+A layer row sets and cites a value for a cell, or for one line of it. A later layer wins, and within the edits layer,
+a later row wins. The live sheets drop a citation whose value is not the live cell's.
 """
 import csv
 

@@ -129,9 +129,12 @@ class LiveTest(unittest.TestCase):
                           "unknown view": None})
 
     def test_rejects_a_layer_without_its_columns(self):
-        write(self.data / "edits.csv", [cite("G_specialist", "$40")])
-        with self.assertRaisesRegex(ValueError, "edits.csv has columns"):
-            self.live()
+        for name in layers.LAYERS:
+            with self.subTest(name=name):
+                write(self.data / name, [dict(cite("G_specialist", "$0-$40"), extra="x")],
+                      layers.COLUMNS + ["extra"])
+                with self.assertRaisesRegex(ValueError, f"{name} has columns"):
+                    layers.layer(self.data, name)
 
     def test_reads_a_missing_layer_as_empty(self):
         (self.data / "edits.csv").unlink()

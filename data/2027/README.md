@@ -51,7 +51,7 @@ Two UHC EOCs were re-issued on 2026-10-14 (`UHOR27HP0418842_001`, `AAOR27LP04187
 `pipeline/present.py` writes both sheets, `generated/main_chart.csv` and `generated/dvha.csv`, from the column rules.
 `pipeline/fields.py` gives each column's rules.
 
-- The PBP has no naturopathy category. Column U is set when the SB or EOC mentions naturopathy outside the exclusions table.
+- The PBP has no naturopathy category. Column U is a dot when the facts include an `extras.naturopathy` benefit.
 - UHC OR-1A charges $0 to members with QMB or full Medicaid. The sheet shows what other members pay.
 - Six Humana plans cover acupuncture only for chronic low back pain, which Medicare covers. Column S is blank for them.
 - Devoted 009 pays for acupuncture, massage and naturopathy only from its Wellness Bucks. A SHIBA expert counts that as a dot.

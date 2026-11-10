@@ -95,6 +95,9 @@ class TraceTest(unittest.TestCase):
         self.assertEqual({(c["line"], c["pdf_page"]) for c in live["citations"]}, {(1, 46), (2, 46)})
         self.assertTrue(all(c["layer"] == layers.PRESENTED for c in live["citations"]))
 
+    def test_names_the_edit_that_sets_a_value(self):
+        self.assertEqual(self.cell("dvha", "H2923-025-0", "F_dental")["layers"]["live"]["set_by"], layers.EDITS)
+
     def test_lists_the_value_after_each_layer(self):
         applied = self.cell(*AMBULANCE)["layers"]["applied"]
         self.assertEqual([a["layer"] for a in applied], list(layers.LAYERS))
