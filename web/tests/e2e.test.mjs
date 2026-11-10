@@ -920,13 +920,9 @@ test("pipeline view: a record's status reads in words, and a record the trace la
   assert.match(await head("list-plans"), /plan\s*No step touched this cell/);
 });
 
-test("pipeline view: a CMS-only cell shows a short chain, and a step it skips opens its first step", async () => {
-  await openHow(page, "main/H5216-048-0/premium_full_extra_help/column-rules");
-  assert.deepEqual(await chainOf(page), ["List the plans", "Draft from CMS", "Stack: draft", "Publish"]);
+test("pipeline view: a step the cell skips opens its first step", async () => {
+  await openHow(page, "main/H5216-048-0/premium_full_extra_help/stack-presented");
   assert.match(page.url(), /#\/2027\/how\/main\/H5216-048-0\/premium_full_extra_help\/list-plans$/);
-  assert.equal(await page.textContent(".how-count"), "1 of 4");
-  assert.equal(await page.locator(".how-rows").count(), 0);
-  assert.deepEqual(await page.locator(".how-end code").allTextContents(), ["Landscape.csv", "plans.csv"]);
 });
 
 test("pipeline view: a main-sheet cell's detail links to its pipeline view from a ? in its corner, at its last step", async () => {

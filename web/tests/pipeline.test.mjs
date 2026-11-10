@@ -56,35 +56,23 @@ test("neighbouring steps share a table", () => {
   assert.deepEqual(before(stepById("list-plans")), []);
 });
 
-const trace = ({ value = "$5", rule = "none", cited = false, presented = false } = {}) => ({
-  cell: { value },
-  rule: { status: rule },
+const trace = ({ presented = false } = {}) => ({
+  cell: { value: "$5" },
+  rule: { status: "not_recorded" },
   model_citations: { status: "not_recorded" },
-  layers: { status: "traced", applied: [{ layer: "machine/eoc_citations.csv", rows: cited ? [{}] : [] },
+  layers: { status: "traced", applied: [{ layer: "machine/eoc_citations.csv", rows: [{}] },
     { layer: "generated/presented.csv", rows: presented ? [{}] : [] }] },
 });
 const ids = (t) => chain(t).map((s) => s.id);
 
-test("a CMS-only cell's chain is the plan, the draft and the live sheet", () => {
-  assert.deepEqual(ids(trace()), ["list-plans", "draft", "stack-draft", "publish"]);
-});
-
-test("a cell with a rule reads facts from the documents", () => {
-  const steps = ids(trace({ rule: "not_recorded" }));
+test("every cell reads facts from the documents", () => {
+  const steps = ids(trace());
   for (const id of ["find-pdfs", "read-facts", "check-facts", "column-rules", "added-facts"]) assert.ok(steps.includes(id), id);
 });
 
 test("only a cell the presented layer cites stacks it", () => {
-  assert.ok(!ids(trace({ rule: "not_recorded" })).includes("stack-presented"));
-  assert.ok(ids(trace({ rule: "not_recorded", presented: true })).includes("stack-presented"));
-});
-
-test("a blank CMS-only cell's chain is the plan, the draft and the live sheet", () => {
-  assert.deepEqual(ids(trace({ value: "" })), ["list-plans", "draft", "stack-draft", "publish"]);
-});
-
-test("a cell cited by another layer uses the documents", () => {
-  assert.ok(ids(trace({ cited: true })).includes("download"));
+  assert.ok(!ids(trace()).includes("stack-presented"));
+  assert.ok(ids(trace({ presented: true })).includes("stack-presented"));
 });
 
 test("without a trace, the chain is every step", () => {
