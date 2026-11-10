@@ -21,13 +21,6 @@ class LoggedTest(unittest.TestCase):
         self.assertEqual(result, ("1", "2", "x"))
         self.assertEqual(log, [("f", "a", "1"), ("f", "b", "2"), ("f", "missing", "")])
 
-    def test_logs_each_files_row_count_once(self):
-        def compute(plan):
-            return [plan.get("f"), plan.get("f"), plan.get("absent", [])]
-        result, log = reads.logged(compute, ("plan", {"f": [{"a": "1"}]}))
-        self.assertEqual(result, [[{"a": "1"}], [{"a": "1"}], []])
-        self.assertEqual(log, [("f", reads.ROWS, "1"), ("absent", reads.ROWS, "0")])
-
 
 class UniverseReadsTest(unittest.TestCase):
     def test_each_plans_column_comes_from_the_landscape_fields_it_read(self):

@@ -138,13 +138,13 @@ The PDFs, texts and CMS files are stored in a Cloudflare R2 bucket, named by has
 Plan documents rarely state some values, such as a $0 deductible. Code turns the plan's Landscape and PBP fields into facts whose source is `Landscape` or `PBP`. These rank below every document, so a rule uses one only when no document gives the value. Our plan's CMS facts in `generated/pbp_facts.csv`, selected rows and columns:
 
 ```
-benefit             network  condition        cost_kind          amount  source     fields
+benefit             network  condition        cost_kind          amount  source     quotes
 medical_deductible  in                        deductible         $0      PBP        pbp_d_inn_deduct_yn
 moop                in                        out_of_pocket_max  $5,150  PBP        pbp_d_out_pocket_amt
 part_d_deductible   any      not tiers 1,2,3  deductible         $700    Landscape  Annual Part D Deductible Amount, …
 ```
 
-A CMS fact has no quote, so a value built from one has no citation.
+A CMS fact's quotes name fields, not document text, so a value built from one has no citation.
 
 ## 5. Claude reads facts from the PDFs
 
@@ -358,7 +358,7 @@ A **layer** is a table whose rows set a cell's value, attach a citation to it, o
 
 ```
 layer                                         sets values?  Ambulance               X-ray
-generated/main_chart.csv, citations.csv  (7)  yes           $325 or 20% | $325      $0-$30 | $205-$330
+generated/main_chart.csv (7), citations.csv   yes           $325 or 20% | $325      $0-$30 | $205-$330
 machine/eoc_citations.csv                     no            (citations only)
 generated/presented.csv                  (7)  yes           $325 or 20% | $325      $0-$30 | $205-$330
 edits.csv                                (8)  yes           (none)                  (none)

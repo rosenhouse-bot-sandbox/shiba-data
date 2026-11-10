@@ -73,7 +73,7 @@ class TraceTest(unittest.TestCase):
                           for c in self.cell("main", r["plan_id"], col)["layers"]["hidden"])]
         self.assertTrue(sb_rows)
 
-    def test_traces_a_dvha_cell_from_its_own_code(self):
+    def test_traces_a_dvha_cell_from_its_rule(self):
         records = self.cell("dvha", "H2923-001-0", "F_dental")
         self.assertEqual(records["draft"]["code"]["file"], "pipeline/present.py")
         self.assertEqual(records["rule"]["code"]["function"], "dental")

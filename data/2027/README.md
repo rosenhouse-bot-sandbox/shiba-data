@@ -52,7 +52,7 @@ Two UHC EOCs were re-issued on 2026-10-14 (`UHOR27HP0418842_001`, `AAOR27LP04187
 
 ### Sheets
 
-`pipeline/present.py` writes every cell of both sheets from the column rules in `generated/main_chart.csv` and `generated/dvha.csv`.
+`pipeline/present.py` writes both sheets, `generated/main_chart.csv` and `generated/dvha.csv`, from the column rules.
 `pipeline/fields.py` gives each column's rules.
 
 - The PBP has no naturopathy category. Column U is set when the SB or EOC mentions naturopathy outside the exclusions table.
@@ -69,7 +69,7 @@ These items are not reproduced:
 
 DVHA items that the live sheet reproduces: 2 (Kaiser Standard $100/2-year eyewear), 3 ($25,000 worldwide cap on all 7 Devoted rows) and 6 (Regence routine podiatry).
 Item 1 (Wellcare comprehensive dental covers adjunctive services only) is reproduced for one of its two plans, and a note gives it for the other.
-Item 7 (Humana MyOption $1,500 max) is not reproduced: the reviewer rejected the maximum's fact.
+Item 7 (Humana MyOption $1,500 max) is not reproduced: the facts give no yearly maximum for the package.
 Items 4 (Devoted rewards) and 5 (Regence virtual urgent care out of network) are not reproduced either.
 
 ## Limits

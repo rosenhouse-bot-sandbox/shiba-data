@@ -1009,19 +1009,21 @@ def lines(data, column, document=None, sheet="main"):
 def shown(got):
     """A cell's value: its lines, without trailing blank ones."""
     values = [value for value, _ in got]
-    while len(values) > 1 and not values[-1]:
+    while values and not values[-1]:
         values.pop()
     return " | ".join(values)
 
 
-def sheet_rows(data, sheet):
-    """A row per plan, with each column the rule's lines."""
+def sheet_rows(data, sheet, version=None):
+    """A row per plan, with each column the rule's lines. A held cell is blank."""
+    held_cells = held(data, version)
     columns = {column: lines(data, column, sheet=sheet) for column in fields.labels(sheet)}
     return [{"section": p["section"], "plan_id": p["plan_id"], "plan_name": p["plan_name"]}
-            | {column: shown(got[p["plan_id"]]) for column, got in columns.items()} for p in plans(data)]
+            | {column: "" if cell(sheet, column, p["plan_id"]) in held_cells else shown(got[p["plan_id"]])
+               for column, got in columns.items()} for p in plans(data)]
 
 
-# Each version names the cells that keep their other layers' value, because the facts miss part of them.
+# Each version names the cells it holds, because the facts miss part of them. A held cell is blank and cites nothing.
 HELD_1 = {
     ("K_tests_labs", "H2923-009-0"): "the facts give a 50% lab price but no 0%",
     ("K_tests_labs", "H5439-010-0"): "the rule leaves out the SB's $0 tests and the $50 genetic test",
@@ -1116,7 +1118,7 @@ def held(data, version=None):
     version = version or steps.versions(data, {"present": VERSIONS}, candidate)["present"]
     return VERSIONS[version] | {cell(sheet, column, r["plan_id"]): f"present {version} does not present this column"
                                 for (sheet, column), since in SINCE.items() if version < since
-                                for r in layers.generated(data)[sheet]}
+                                for r in plans(data)}
 
 
 def layer_rows(data, version=None):
@@ -1148,7 +1150,7 @@ def write(data, version=None):
         with open(data / "generated" / name, "w", newline="") as f:
             out = csv.DictWriter(f, ["section", "plan_id", "plan_name"] + list(fields.labels(sheet)))
             out.writeheader()
-            out.writerows(sheet_rows(data, sheet))
+            out.writerows(sheet_rows(data, sheet, version))
     with open(data / layers.PRESENTED, "w", newline="") as f:
         out = csv.DictWriter(f, layers.COLUMNS, lineterminator="\n")
         out.writeheader()

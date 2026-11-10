@@ -15,7 +15,7 @@ export const NODES = {
       rows: [["H1036-153-0", "SB", "https://assets.humana.com/is/content/humana/H1036153000SB27pdf"],
         ["H1036-153-0", "EOC", "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf"]] } },
   pbp: { col: 2, row: 5, kind: "CMS source", source: true, label: "PBP tables",
-    table: { name: "pbp_Section_D.txt", note: "the plan's deductible fields; the ambulance cell reads none",
+    table: { name: "pbp_Section_D.txt", note: "the plan's deductible fields, which become facts the rules read; the ambulance rule reads none",
       cols: ["bid_id", "pbp_d_inn_deduct_yn"], rows: [["H1036_153_0", "2"]] } },
   plans: { col: 0, row: 1, kind: "table", label: "plans.csv",
     table: { name: "generated/plans.csv", note: "39 rows", cols: ["plan_id", "plan_name", "plan_type", "organization", "premium", "moop_in_network"],
@@ -107,7 +107,7 @@ export const STEPS = [
   { id: "draft", record: "draft", from: "facts", to: "draft", label: "Draft sheet",
     paras: [["The column rules also write every value to a draft sheet. A line that only CMS data backs has no citation, so a volunteer can't check it."]],
     example: { highlight: [[0, 1, 2, 3], [0]], before: "ground $325, air 20%, abroad $325", after: "$325 or 20% | $325",
-      paras: [["Every line here cites the EOC, so the draft matches the presented value."]] } },
+      paras: [["Every line here cites the EOC."]] } },
   { id: "added-facts", record: "added_facts", from: "added", to: "presented", label: "Added facts", pillAt: 0.15,
     paras: [[["added", "Added facts"], " fill gaps where the documents' extracted facts fall short."]],
     example: { highlight: [[], []], before: "no added facts for this plan", after: "nothing changes",
@@ -133,7 +133,7 @@ export function chain(trace) {
 }
 
 // Edges with no step of their own.
-export const LINKS = [["plans", "documents"], ["pbp", "facts"]];
+export const LINKS = [["plans", "documents"], ["pbp", "draft"], ["added", "draft"]];
 
 export const NODE_W = 128;
 export const NODE_H = 54;

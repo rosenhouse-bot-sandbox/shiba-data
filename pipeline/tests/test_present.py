@@ -916,14 +916,15 @@ class WriteTest(unittest.TestCase):
     def test_writes_the_sheets_and_the_layer_rows(self):
         row = dict.fromkeys(layers.COLUMNS, "x")
 
-        def sheet_rows(data, sheet):
-            return [dict.fromkeys(["section", "plan_id", "plan_name"] + list(fields.labels(sheet)), sheet)]
+        def sheet_rows(data, sheet, version):
+            return [dict.fromkeys(["section", "plan_id", "plan_name"] + list(fields.labels(sheet)), f"{sheet} {version}")]
         with tempfile.TemporaryDirectory() as tmp, mock.patch.object(present, "layer_rows", lambda data, version: [row] * version), \
                 mock.patch.object(present, "sheet_rows", sheet_rows):
             os.makedirs(f"{tmp}/generated")
             present.write(pathlib.Path(tmp), 1)
             self.assertEqual(layers.rows(pathlib.Path(tmp, layers.PRESENTED)), [row])
-            self.assertEqual(layers.generated(pathlib.Path(tmp))["dvha"], sheet_rows(None, "dvha"))
+            self.assertEqual(layers.generated(pathlib.Path(tmp))["dvha"], sheet_rows(None, "dvha", 1))
+            self.assertTrue(pathlib.Path(tmp, "generated", layers.SHEETS["main"]).read_bytes().endswith(b"main 1\r\n"))
 
     def test_a_blank_with_cited_facts_writes_rows(self):
         data = years.data_dir(YEAR)
@@ -1024,11 +1025,19 @@ class SheetTest(unittest.TestCase):
         self.assertEqual(present.shown([("$0", []), ("", [])]), "$0")
         self.assertEqual(present.shown([("", []), ("$5", [])]), " | $5")
         self.assertEqual(present.shown([("", [])]), "")
+        self.assertEqual(present.shown([]), "")
 
     def test_the_committed_sheets_are_current(self):
         data = years.data_dir(YEAR)
+        pinned = json.loads((data / "steps.json").read_text())["present"]
         for sheet in layers.SHEETS:
-            self.assertEqual(layers.generated(data)[sheet], present.sheet_rows(data, sheet), sheet)
+            self.assertEqual(layers.generated(data)[sheet], present.sheet_rows(data, sheet, pinned), sheet)
+
+    def test_a_held_cell_is_blank(self):
+        data = years.data_dir(YEAR)
+        row = next(r for r in present.sheet_rows(data, "dvha", 10) if r["plan_id"] == "H5216-048-0")
+        self.assertEqual(row["E_optional_packages"], "")
+        self.assertTrue(row["G_vision"])
 
     def test_a_sheet_has_a_row_per_plan_and_the_columns_of_fields(self):
         data = years.data_dir(YEAR)

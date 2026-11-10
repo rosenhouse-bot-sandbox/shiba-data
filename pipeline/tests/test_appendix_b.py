@@ -9,7 +9,7 @@ import layers  # noqa: E402
 import years  # noqa: E402
 from appendix_b import DVHA_CASES, MAIN_CHART_CASES  # noqa: E402
 
-# Cases whose detail the facts miss. A caveat or question note on the cell gives it.
+# Cases whose detail the facts miss.
 MISSED = {
     ("10", "H6815-038-0", "K_tests_labs"): "the facts take a $200 price for tests that is not a diagnostic test",
     ("1", "H5439-015-0", "F_dental"): "the rule does not show that comprehensive care covers only adjunctive services",
