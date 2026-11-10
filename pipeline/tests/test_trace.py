@@ -10,6 +10,8 @@ READER, VERIFIER, REVIEWER = "reader-model", "verifier-model", "reviewer-model"
 SHA = "0" * 40
 AMBULANCE = ("main", "H1036-153-0", "AB_ambulance")
 STATUSES = {trace.TRACED, trace.NONE, trace.NOT_RECORDED}
+HELD = {present.cell("main", "K_tests_labs", "H5439-019-0"): "a held main cell",
+        present.cell("dvha", "F_dental", "H2923-025-0"): "a held DVHA cell"}
 
 
 def statuses(records):
@@ -27,7 +29,8 @@ class TraceTest(unittest.TestCase):
     def setUpClass(cls):
         cls.tmp = tempfile.TemporaryDirectory()
         path = os.path.join(cls.tmp.name, "trace", "2027.sqlite")  # as CI names it
-        trace.build(years.LIVE, path, SHA)
+        with mock.patch.object(present, "held", return_value=HELD):
+            trace.build(years.LIVE, path, SHA)
         cls.db = sqlite3.connect(path)
 
     @classmethod
@@ -76,9 +79,7 @@ class TraceTest(unittest.TestCase):
         self.assertEqual(records["rule"]["code"]["function"], "dental")
 
     def test_says_why_the_pinned_version_holds_a_dvha_cell(self):
-        held = present.held(years.data_dir())
-        (column, plan_id), reason = next((k, v) for k, v in held.items() if k[0].startswith("dvha."))
-        self.assertEqual(self.cell("dvha", plan_id, column.removeprefix("dvha."))["rule"]["held"], reason)
+        self.assertEqual(self.cell("dvha", "H2923-025-0", "F_dental")["rule"]["held"], "a held DVHA cell")
 
     def test_reads_a_page_of_a_layout_text(self):
         with tempfile.TemporaryDirectory() as work:
@@ -133,7 +134,7 @@ class TraceTest(unittest.TestCase):
 
     def test_says_why_the_pinned_version_holds_a_cell(self):
         rule = self.cell("main", "H5439-019-0", "K_tests_labs")["rule"]
-        self.assertEqual(rule["held"], present.VERSIONS[8][("K_tests_labs", "H5439-019-0")])
+        self.assertEqual(rule["held"], "a held main cell")
 
     def test_lists_the_added_facts_a_rule_considered(self):
         added = self.cell("main", "H1372-003-0", "AB_ambulance")["added_facts"]
