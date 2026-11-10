@@ -126,18 +126,11 @@ export const STEPS = [
     example: { highlight: [[0], [1, 4, 5]], before: "live AB_ambulance", after: "cell + EOC page 46 highlight", paras: [] } },
 ];
 
-const FACT_STEPS = ["read-facts", "check-facts", "column-rules", "added-facts"];
-const DOCUMENT_STEPS = ["find-pdfs", "download", "extract-text"];
-
 // The steps that touched a cell, read from its trace. Without a trace, every step.
 export function chain(trace) {
   if (!trace) return STEPS;
-  const ruled = trace.rule?.status !== "none";
-  const rows = (layer) => (trace.layers?.applied ?? []).filter((l) => !layer || l.layer === layer).some((l) => l.rows.length);
-  return STEPS.filter((s) => s.id === "stack-presented" ? rows("generated/presented.csv")
-    : FACT_STEPS.includes(s.id) ? ruled
-    : DOCUMENT_STEPS.includes(s.id) ? ruled || rows()
-    : true);
+  const presented = (trace.layers?.applied ?? []).some((l) => l.layer === "generated/presented.csv" && l.rows.length);
+  return STEPS.filter((s) => s.id !== "stack-presented" || presented);
 }
 
 // Edges with no step of their own.

@@ -138,16 +138,71 @@ class MainTest(unittest.TestCase):
     def test_writes_each_plans_facts_from_the_pbp_files(self):
         with tempfile.TemporaryDirectory() as tmp:
             with open(f"{tmp}/plans.csv", "w") as f:
-                f.write(f"plan_id\n{PLAN}\n")
+                f.write(f"plan_id,premium,premium_full_extra_help,part_d_deductible\n{PLAN},$0,n/a,n/a\n")
+            with open(f"{tmp}/reads.csv", "w") as f:
+                f.write(f"plan_id,plan_field,field,value\n{PLAN},premium,Part C Premium,$0.00\n"
+                        f"{PLAN},part_d_deductible,Part D Coverage Indicator,No\n")
             os.mkdir(f"{tmp}/pbp")
             with open(f"{tmp}/pbp/pbp_b8_clin_diag_ther.txt", "w") as f:
                 f.write("pbp_a_hnumber\tpbp_a_plan_identifier\tsegment_id\tpbp_b8b_copay_yn\tpbp_b8b_coins_yn\n"
                         "H1111\t001\t0\t2\t2\n")
-            pbp_facts.main(f"{tmp}/plans.csv", f"{tmp}/pbp", f"{tmp}/out.csv")
+            pbp_facts.main(f"{tmp}/plans.csv", f"{tmp}/reads.csv", f"{tmp}/pbp", f"{tmp}/out.csv")
             rows = facts.read(f"{tmp}/out.csv")
         self.assertEqual([(r["plan_id"], r["benefit"], r["amount"]) for r in rows],
                          [(PLAN, "imaging.diagnostic", "$0"), (PLAN, "imaging.xray", "$0"),
-                          (PLAN, "radiation_therapy", "$0")])
+                          (PLAN, "part_d_deductible", ""), (PLAN, "plan_premium", "$0"), (PLAN, "radiation_therapy", "$0")])
+
+
+LANDSCAPE = dict(plan_id=PLAN, premium="$12.50", premium_full_extra_help="$1.20", part_d_deductible="$615")
+READS = [dict(plan_id=PLAN, plan_field=k, field=f"Landscape {k}", value="") for k in LANDSCAPE if k != "plan_id"]
+
+
+def plan_terms(rows):
+    return sorted((r["benefit"], r["network"], r["condition"], r["cost_kind"], r["amount"], r["source"],
+                   tuple(json.loads(r["quotes"]))) for r in rows)
+
+
+class PlanFactsTest(unittest.TestCase):
+    def test_landscape_gives_the_premiums_and_drug_deductible(self):
+        self.assertEqual(plan_terms(pbp_facts.plan_facts(LANDSCAPE, READS, {})), [
+            ("part_d_deductible", "any", "", "deductible", "$615", "Landscape", ("Landscape part_d_deductible",)),
+            ("plan_premium", "any", "", "premium", "$12.50", "Landscape", ("Landscape premium",)),
+            ("plan_premium", "any", "full Extra Help", "premium", "$1.20", "Landscape",
+             ("Landscape premium_full_extra_help",))])
+
+    def test_a_plan_without_part_d_does_not_cover_it_or_charge_an_extra_help_premium(self):
+        found = pbp_facts.plan_facts(dict(LANDSCAPE, premium_full_extra_help="n/a", part_d_deductible="n/a"), READS, {})
+        self.assertEqual([(r["benefit"], r["condition"], r["cost_kind"], r["amount"]) for r in found],
+                         [("plan_premium", "", "premium", "$12.50"), ("part_d_deductible", "", "not_covered", "")])
+
+    def test_names_the_drug_tiers_without_a_deductible(self):
+        plan = {"pbp_mrx": [dict(mrx_alt_no_ded_tier="0110000")]}
+        (ded,) = [r for r in pbp_facts.plan_facts(LANDSCAPE, READS, plan) if r["benefit"] == "part_d_deductible"]
+        self.assertEqual((ded["condition"], json.loads(ded["quotes"])),
+                         ("not tiers 1,2", ["Landscape part_d_deductible", "mrx_alt_no_ded_tier"]))
+
+    def test_the_first_tier_bit_is_tier_7(self):
+        plan = {"pbp_mrx": [dict(mrx_alt_no_ded_tier="1000000")]}
+        (ded,) = [r for r in pbp_facts.plan_facts(LANDSCAPE, READS, plan) if r["benefit"] == "part_d_deductible"]
+        self.assertEqual(ded["condition"], "not tiers 7")
+
+    def test_a_zero_deductible_skips_no_tiers(self):
+        plan = {"pbp_mrx": [dict(mrx_alt_no_ded_tier="0110000")]}
+        (ded,) = [r for r in pbp_facts.plan_facts(dict(LANDSCAPE, part_d_deductible="$0"), READS, plan)
+                  if r["benefit"] == "part_d_deductible"]
+        self.assertEqual((ded["condition"], json.loads(ded["quotes"])), ("", ["Landscape part_d_deductible"]))
+
+    def test_pbp_gives_the_in_network_and_combined_moop(self):
+        plan = {"pbp_Section_D": [dict(pbp_d_out_pocket_amt="5900.00", pbp_d_comb_max_enr_amt="9550.00")]}
+        moop = [r for r in pbp_facts.plan_facts(LANDSCAPE, READS, plan) if r["benefit"] == "moop"]
+        self.assertEqual(plan_terms(moop), [
+            ("moop", "any", "", "out_of_pocket_max", "$9,550", "PBP", ("pbp_d_comb_max_enr_amt",)),
+            ("moop", "in", "", "out_of_pocket_max", "$5,900", "PBP", ("pbp_d_out_pocket_amt",))])
+
+    def test_every_plan_fact_passes_the_fact_checks(self):
+        plan = {"pbp_Section_D": [dict(pbp_d_out_pocket_amt="5900.00")], "pbp_mrx": [dict(mrx_alt_no_ded_tier="1")]}
+        for r in pbp_facts.plan_facts(LANDSCAPE, READS, plan):
+            self.assertEqual(facts.check(r), [], r)
 
 
 class ImagingCellsTest(unittest.TestCase):

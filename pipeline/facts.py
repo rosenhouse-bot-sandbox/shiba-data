@@ -132,6 +132,15 @@ BENEFITS.update({
                           "dental, vision or hearing. Put the benefit's name, as the document gives it, in `pool`. "
                           f"{NOT_MEDICARE}. {ROUTINE}",
 })
+# Plan-wide costs. Only CMS facts state them so far.
+BENEFITS.update({
+    "moop": "The most a member pays in a year for Medicare-covered services, as `cost_kind` `out_of_pocket_max`. "
+            "`network` `in` is the in-network maximum, and `any` is the combined in- and out-of-network maximum",
+    "part_d_deductible": "The yearly Part D drug deductible. `condition` names the drug tiers it skips, such as "
+                         "`not tiers 1,2`. A plan without Part D has `cost_kind` `not_covered`",
+})
+
+
 # Regexes that find the pages about each benefit group
 FIND = {"imaging": [r"x.ray", r"radiolog", r"\bMRI\b", r"\bCT\b", r"\bPET\b", r"ultrasound", r"mammogra",
                     r"nuclear medicine", r"imaging"],
@@ -170,6 +179,8 @@ FIND = {"imaging": [r"x.ray", r"radiolog", r"\bMRI\b", r"\bCT\b", r"\bPET\b", r"
         "packages": [r"optional supplemental", r"advantage plus", r"optional (?:dental|vision|hearing|benefits?)\b",
                      r"(?:dental|vision|hearing) rider"],
         "plan_premium": [r"(?:monthly|plan) premium"],
+        "moop": [r"maximum out.of.pocket", r"out.of.pocket (?:maximum|limit)", r"\bMOOP\b"],
+        "part_d_deductible": [r"(?:drug|part d|pharmacy) deductible", r"deductible stage"],
         "emergency": [r"world.?wide", r"outside (?:of )?the United States"],
         "foot_care": [r"foot care", r"podiatr"],
         "meals": [r"meals? (?:benefit|program|deliver)", r"(?:delivered|post.discharge) meals?"],
@@ -210,6 +221,8 @@ GROUP_SETTINGS = {
     "otc": ("any",),
     "packages": ("any",),
     "plan_premium": ("any",),
+    "moop": ("any",),
+    "part_d_deductible": ("any",),
     "emergency": ("any", "outside_us"),
     "foot_care": ("any",),
     "meals": ("any",),
@@ -226,6 +239,7 @@ COST_KINDS = {
     "deductible": "Dollar deductible",
     "premium": "Dollar monthly premium",
     "part_b_reduction": "Dollar monthly Part B premium reduction",
+    "out_of_pocket_max": "Dollar yearly maximum a member pays",
     "covered": "Covered, with no amount stated",
     "not_covered": "Not covered",
 }
@@ -344,5 +358,6 @@ def describe(group):
         return "\n".join(f"- `{k}`: {v}" for k, v in words.items())
 
     vocabularies = dict(VOCABULARIES, benefit={k: v for k, v in BENEFITS.items() if covers(group, k)},
+                        cost_kind={k: v for k, v in COST_KINDS.items() if k != "out_of_pocket_max" or group == "moop"},
                         setting={k: v for k, v in SETTINGS.items() if k in GROUP_SETTINGS[group]})
     return "\n\n".join([f"{column}:\n{table(words)}" for column, words in vocabularies.items()] + [AMOUNT_RULES])

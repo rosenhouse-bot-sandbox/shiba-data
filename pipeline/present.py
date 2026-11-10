@@ -440,6 +440,52 @@ def plan_premium(organization, found):
     return [(show(got), got)]
 
 
+def bare(f):
+    return not (f["package"] or f["provider_tier"])
+
+
+def extra_help_premium(organization, found):
+    """Shows the monthly plan premium with full Extra Help, or n/a for a plan without Part D."""
+    @unless("it is not the monthly plan premium with full Extra Help")
+    def ok(f):
+        return f["cost_kind"] == "premium" and f["condition"] == "full Extra Help" and bare(f)
+
+    @unless("it does not say that the plan has no Part D")
+    def no_part_d(f):
+        return f["cost_kind"] == "not_covered" and bare(f)
+
+    got = best(found, "plan_premium", "any", ok)
+    if got:
+        return [(show(got), got)]
+    none = best(found, "part_d_deductible", "any", no_part_d)
+    return [("n/a" if none else "", none)]
+
+
+def moop(organization, found):
+    """Shows the in-network maximum out-of-pocket, then the combined in- and out-of-network maximum if there is one."""
+    def ok(network):
+        @unless("it is not a yearly maximum out-of-pocket")
+        def test(f):
+            return f["cost_kind"] == "out_of_pocket_max" and f["network"] == network and not f["condition"] and bare(f)
+        return test
+
+    got = [(show(cited), cited) for cited in (best(found, "moop", "any", ok(n)) for n in ("in", "any"))]
+    return got if got[1][1] else got[:1]
+
+
+def drug_deductible(organization, found):
+    """Shows the yearly Part D deductible and the tiers it skips, or n/a for a plan without Part D."""
+    @unless("it is not a yearly Part D deductible")
+    def ok(f):
+        return f["cost_kind"] in ("deductible", "not_covered") and bare(f)
+
+    got = best(found, "part_d_deductible", "any", ok)
+    if any(f["cost_kind"] == "not_covered" for f in got):
+        return [("n/a", got)]
+    skips = {f["condition"] for f in got}
+    return [(f"{show(got)} {skips.pop()}".strip() if len(skips) == 1 else show(got), got)]
+
+
 YEARS = {"2": "two", "two": "two", "3": "three", "three": "three"}
 SEVERAL_YEARS = re.compile(r"\b(?:every|per|each|during an?)\s+(2|two|3|three)[ -](?:calendar[ -])?years?\b", re.I)
 ONE_YEAR = re.compile(r"\b(?:every|per|each)\s+(?:calendar\s+)?year\b", re.I)
@@ -869,7 +915,8 @@ COLUMNS = {"L_xray_imaging": xray_imaging, "AB_ambulance": ambulance, "I_outpati
            "V_massage": dot("extras.massage"), "X_transportation": dot("extras.transportation"),
            "R_dental": dot("dental.preventive", "dental.comprehensive"), "U_naturopath": dot("extras.naturopathy"),
            "P_vision": dot("vision.exam", "vision.eyewear"), "Q_hearing": dot("hearing.exam", "hearing.aids"),
-           "W_fitness": dot("fitness"), "Y_otc": dot("otc"), "AA_opt_packages": packages}
+           "W_fitness": dot("fitness"), "Y_otc": dot("otc"), "AA_opt_packages": packages, "C_premium": plan_premium,
+           "D_premium_full_extra_help": extra_help_premium, "E_moop": moop, "N_pharmacy_deductible": drug_deductible}
 
 
 # The benefits each rule reads. A fact for a broader or narrower benefit is one the rule considers.
@@ -880,12 +927,16 @@ LEAVES = {"L_xray_imaging": ("imaging",), "AB_ambulance": ("ambulance",), "I_out
           "S_acupuncture": ("extras.acupuncture",), "T_chiropractic": ("extras.chiropractic",),
           "V_massage": ("extras.massage",), "X_transportation": ("extras.transportation",),
           "R_dental": ("dental",), "U_naturopath": ("extras.naturopathy",), "P_vision": ("vision",),
-          "Q_hearing": ("hearing",), "W_fitness": ("fitness",), "Y_otc": ("otc",), "AA_opt_packages": ("packages",)}
+          "Q_hearing": ("hearing",), "W_fitness": ("fitness",), "Y_otc": ("otc",), "AA_opt_packages": ("packages",),
+          "C_premium": ("plan_premium",), "D_premium_full_extra_help": ("plan_premium", "part_d_deductible"),
+          "E_moop": ("moop",), "N_pharmacy_deductible": ("part_d_deductible",)}
 
 
-DVHA = {"C_premium": plan_premium, "E_optional_packages": optional_packages, "F_dental": dental, "G_vision": vision,
-        "H_hearing": hearing, "I_alt_care_otc_travel": alt_care_otc_travel, "J_extra_benefits": extra_benefits}
-DVHA_LEAVES = {"C_premium": ("plan_premium",), "E_optional_packages": ("packages",), "F_dental": ("dental",),
+DVHA = {"C_premium": plan_premium, "D_premium_full_extra_help": extra_help_premium,
+        "E_optional_packages": optional_packages, "F_dental": dental, "G_vision": vision, "H_hearing": hearing,
+        "I_alt_care_otc_travel": alt_care_otc_travel, "J_extra_benefits": extra_benefits}
+DVHA_LEAVES = {"C_premium": ("plan_premium",), "D_premium_full_extra_help": ("plan_premium", "part_d_deductible"),
+               "E_optional_packages": ("packages",), "F_dental": ("dental",),
                "G_vision": ("vision",), "H_hearing": ("hearing",),
                "I_alt_care_otc_travel": ("extras.acupuncture", "extras.chiropractic", "extras.massage",
                                          "extras.naturopathy", "otc", "emergency"),
@@ -1004,18 +1055,21 @@ VERSIONS[7] = {c: why for c, why in VERSIONS[6].items() if c not in RELEASED_7}
 VERSIONS[8] = {c: why for c, why in VERSIONS[7].items() if c[0] not in ("K_tests_labs", "O_medical_deductible")
                or c[1] in ("H6815-038-0", "H5439-019-0")}
 VERSIONS[8][("K_tests_labs", "H5439-019-0")] = "the reviewer rejected the $10 price for most labs"
-# The version that first presents each DVHA column. Earlier versions hold its cells.
-DVHA_SINCE = {"C_premium": 3, "G_vision": 4, "H_hearing": 4, "E_optional_packages": 5, "F_dental": 6,
-              "I_alt_care_otc_travel": 6, "J_extra_benefits": 6}
+VERSIONS[9] = dict(VERSIONS[8])
+# The version that first presents each later column. Earlier versions hold its cells.
+SINCE = {("dvha", "C_premium"): 3, ("dvha", "G_vision"): 4, ("dvha", "H_hearing"): 4, ("dvha", "E_optional_packages"): 5,
+         ("dvha", "F_dental"): 6, ("dvha", "I_alt_care_otc_travel"): 6, ("dvha", "J_extra_benefits"): 6,
+         ("dvha", "D_premium_full_extra_help"): 9, ("main", "C_premium"): 9, ("main", "D_premium_full_extra_help"): 9,
+         ("main", "E_moop"): 9, ("main", "N_pharmacy_deductible"): 9}
 
 
 def held(data, version=None):
     """The cells that a version holds, by default the run's candidate or else the pinned one."""
     candidate = ",".join(c for c in os.environ.get(CANDIDATE, "").split(",") if c.strip().startswith("present@"))
     version = version or steps.versions(data, {"present": VERSIONS}, candidate)["present"]
-    return VERSIONS[version] | {cell("dvha", column, r["plan_id"]): f"present {version} does not present this column"
-                                for column, since in DVHA_SINCE.items() if version < since
-                                for r in layers.generated(data)["dvha"]}
+    return VERSIONS[version] | {cell(sheet, column, r["plan_id"]): f"present {version} does not present this column"
+                                for (sheet, column), since in SINCE.items() if version < since
+                                for r in layers.generated(data)[sheet]}
 
 
 def layer_rows(data, version=None):
