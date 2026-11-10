@@ -864,6 +864,11 @@ class WriteTest(unittest.TestCase):
         self.assertIn(("dvha.I_alt_care_otc_travel", "H9003-001-0"), present.VERSIONS[7])
         self.assertLessEqual(set(present.VERSIONS[7]), set(present.VERSIONS[6]))
 
+    def test_version_8_holds_only_the_main_cell_whose_facts_misread_a_price(self):
+        held_main = {c for c in present.VERSIONS[8] if not c[0].startswith("dvha.")}
+        self.assertEqual(held_main, {("K_tests_labs", "H6815-038-0")})
+        self.assertLessEqual(set(present.VERSIONS[8]), set(present.VERSIONS[7]))
+
     def test_a_held_main_cell_does_not_hold_the_dvha_cell_of_the_same_name(self):
         self.assertNotEqual(present.cell("main", "C_premium", "H1"), present.cell("dvha", "C_premium", "H1"))
 
