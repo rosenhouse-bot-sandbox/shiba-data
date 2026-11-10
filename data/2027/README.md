@@ -32,7 +32,7 @@ An edit row also records `saw`, the value its author saw. The site build warns w
 | Premium and Extra Help premium | All 39 premiums match the section 4 table. Extra Help premiums match wherever section 4 lists one. |
 | Plan documents | All 73 SBs and EOCs were found. 71 were byte-identical to the bootstrap's manifest. |
 | Main chart | 10 of the 13 Appendix B items are reproduced. |
-| DVHA sheet | 3 of the 7 significant DVHA findings are reproduced, and 1 in part. |
+| DVHA sheet | 3 of the 7 significant DVHA findings are reproduced. |
 
 `pipeline/tests/test_appendix_b.py` checks the live sheets against each Appendix B correction.
 
@@ -68,7 +68,7 @@ These items are not reproduced:
 - Item 10 (Wellcare EKG): the facts take a $200 price for tests that is not a diagnostic test. A note on the cell says so.
 
 DVHA items that the live sheet reproduces: 2 (Kaiser Standard $100/2-year eyewear), 3 ($25,000 worldwide cap on all 7 Devoted rows) and 6 (Regence routine podiatry).
-Item 1 (Wellcare comprehensive dental covers adjunctive services only) is reproduced for one of its two plans, and a note gives it for the other.
+Item 1 (Wellcare comprehensive dental covers adjunctive services only) is not reproduced, but caveat notes give it.
 Item 7 (Humana MyOption $1,500 max) is not reproduced: the facts give no yearly maximum for the package.
 Items 4 (Devoted rewards) and 5 (Regence virtual urgent care out of network) are not reproduced either.
 
