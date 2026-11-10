@@ -371,11 +371,18 @@ def deductible_ok(f):
 
 def medical_deductible(organization, found):
     """Shows the in-network deductible, or else the out-of-network one, and says if it applies to some services only.
-    A $0 in-network deductible shows as $0, whatever the out-of-network one is."""
+    A $0 in-network deductible shows as $0, whatever the out-of-network one is. When a fact says the deductible is
+    Part B's, a covered deductible with no amount counts."""
+    part_b_named = any(f["benefit"] == "medical_deductible.part_b" and f["cost_kind"] == "covered" for f in found)
+
+    def amountless(f):
+        return (part_b_named and f["cost_kind"] == "covered" and f["benefit"] != "medical_deductible.part_b"
+                and deductible_ok(dict(f, cost_kind="deductible")))
+
     for networks in (("in", "any"), ("out",)):
         @unless(f"it is not a Medicare deductible in network {networks[0]!r}")
         def ok(f):
-            return deductible_ok(f) and f["network"] in networks
+            return (deductible_ok(f) or amountless(f)) and f["network"] in networks
         got = best(found, "medical_deductible.some", "any", ok)
         if got:
             break
@@ -753,7 +760,8 @@ def worldwide(found):
     priced = keep(abroad, lambda f: f["cost_kind"] in PRICED and not urgent(f), lambda f: "it is not an emergency copay")
     copays = top(priced)
     tiebreak = top([f for f in priced if f not in copays])
-    if len({f["amount"] for f in copays}) > 1 and len({f["amount"] for f in tiebreak}) == 1:
+    if (len({f["amount"] for f in copays}) > 1 and len({f["amount"] for f in tiebreak}) == 1
+            and tiebreak[0]["amount"] in {f["amount"] for f in copays}):
         copays = keep(copays, lambda f: f["amount"] == tiebreak[0]["amount"],
                       lambda f: f"{tiebreak[0]['source']} gives another copay") + tiebreak
     if not copays:

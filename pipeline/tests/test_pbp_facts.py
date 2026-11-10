@@ -146,7 +146,7 @@ class MainTest(unittest.TestCase):
             with open(f"{tmp}/pbp/pbp_b8_clin_diag_ther.txt", "w") as f:
                 f.write("pbp_a_hnumber\tpbp_a_plan_identifier\tsegment_id\tpbp_b8b_copay_yn\tpbp_b8b_coins_yn\n"
                         "H1111\t001\t0\t2\t2\n")
-            pbp_facts.main(f"{tmp}/plans.csv", f"{tmp}/reads.csv", f"{tmp}/pbp", f"{tmp}/out.csv", "$283")
+            pbp_facts.main(f"{tmp}/plans.csv", f"{tmp}/reads.csv", f"{tmp}/pbp", f"{tmp}/out.csv")
             rows = facts.read(f"{tmp}/out.csv")
         self.assertEqual([(r["plan_id"], r["benefit"], r["amount"]) for r in rows],
                          [(PLAN, "imaging.diagnostic", "$0"), (PLAN, "imaging.xray", "$0"),
@@ -206,7 +206,7 @@ class PlanFactsTest(unittest.TestCase):
 
 
 def deductible(**fields):
-    return plan_terms(pbp_facts.deductible_facts(PLAN, {"pbp_Section_D": [fields]}, "$283"))
+    return plan_terms(pbp_facts.deductible_facts(PLAN, {"pbp_Section_D": [fields]}))
 
 
 class DeductibleFactsTest(unittest.TestCase):
@@ -228,7 +228,7 @@ class DeductibleFactsTest(unittest.TestCase):
     def test_the_part_b_deductible(self):
         self.assertEqual(deductible(pbp_d_inn_deduct_yn="1", pbp_d_inn_deduct_partb_yn="1", pbp_d_inn_deduct_m_yn="2"), [
             ("medical_deductible.part_b", "in", "", "covered", "", "PBP", ("pbp_d_inn_deduct_partb_yn",)),
-            ("medical_deductible.some", "in", "", "deductible", "$283", "PBP",
+            ("medical_deductible.some", "in", "", "covered", "", "PBP",
              ("pbp_d_inn_deduct_partb_yn", "pbp_d_inn_deduct_m_yn"))])
 
     def test_a_combined_deductible_for_some_in_network_services(self):
@@ -241,7 +241,12 @@ class DeductibleFactsTest(unittest.TestCase):
         self.assertEqual([t[:5] for t in deductible(pbp_d_ann_deduct_yn="1", pbp_d_ann_deduct_amt_type="2",
                                                      pbp_d_ann_deduct_bens="010", pbp_d_ann_deduct_inn_mc_yn="2")], [
             ("medical_deductible.part_b", "any", "", "covered", ""),
-            ("medical_deductible.some", "any", "", "deductible", "$283")])
+            ("medical_deductible.some", "any", "", "covered", "")])
+
+    def test_a_combined_deductible_for_every_in_network_service(self):
+        self.assertEqual(deductible(pbp_d_ann_deduct_yn="1", pbp_d_ann_deduct_amt_type="4", pbp_d_ann_deduct_amt="250.00",
+                                    pbp_d_ann_deduct_bens="000", pbp_d_ann_deduct_inn_mc_yn="1")[0][:5],
+                         ("medical_deductible", "any", "", "deductible", "$250"))
 
     def test_a_deductible_only_out_of_network(self):
         self.assertEqual(deductible(pbp_d_ann_deduct_yn="1", pbp_d_ann_deduct_amt_type="4", pbp_d_ann_deduct_amt="100.00")
@@ -252,7 +257,7 @@ class DeductibleFactsTest(unittest.TestCase):
 
     def test_every_deductible_fact_passes_the_fact_checks(self):
         for fields in ({"pbp_d_inn_deduct_yn": "2"}, {"pbp_d_inn_deduct_yn": "1", "pbp_d_inn_deduct_partb_yn": "1"}):
-            for r in pbp_facts.deductible_facts(PLAN, {"pbp_Section_D": [fields]}, "$283"):
+            for r in pbp_facts.deductible_facts(PLAN, {"pbp_Section_D": [fields]}):
                 self.assertEqual(facts.check(r), [], r)
 
 
@@ -275,8 +280,19 @@ class SupplementalFactsTest(unittest.TestCase):
         self.assertEqual([t[:7] for t in supplemental_terms(pbp_facts.supplemental_facts(PLAN, plan))], [
             ("dental.comprehensive", "any", "in", "supplemental", "max", "$1,000", "every two years")])
 
+    def test_a_preventive_maximum_not_shared_with_comprehensive_care(self):
+        plan = {"pbp_b16_dental": [dict(pbp_b16b_maxplan_pv_amt="500.00", pbp_b16b_maxplan_pv_per="5",
+                                        pbp_b16c_maxplan_cmp_type="2")]}
+        self.assertEqual([t[:7] for t in supplemental_terms(pbp_facts.supplemental_facts(PLAN, plan))], [
+            ("dental.preventive", "any", "in", "supplemental", "max", "$500", "every three months")])
+
+    def test_a_maximum_shared_with_other_benefits_gives_no_fact(self):
+        plan = {"pbp_b16_dental": [dict(pbp_b16b_maxplan_pv_amt="500.00", pbp_b16b_maxplan_excl_csg_yn="1",
+                                        pbp_b16c_maxplan_cmp_type="1")]}
+        self.assertEqual(pbp_facts.supplemental_facts(PLAN, plan), [])
+
     def test_a_period_no_rule_reads_gives_no_limit(self):
-        plan = {"pbp_b16_dental": [dict(pbp_b16b_maxplan_pv_amt="150.00", pbp_b16b_maxplan_pv_per="5")]}
+        plan = {"pbp_b16_dental": [dict(pbp_b16b_maxplan_pv_amt="150.00", pbp_b16b_maxplan_pv_per="6")]}
         (cap,) = pbp_facts.supplemental_facts(PLAN, plan)
         self.assertEqual((cap["limit"], json.loads(cap["quotes"])), ("", ["pbp_b16b_maxplan_pv_amt"]))
 
@@ -289,7 +305,8 @@ class SupplementalFactsTest(unittest.TestCase):
             ("emergency", "outside_us", "any", "supplemental", "max", "$25,000", "", ("pbp_b4c_wwc_maxplan_amt",))])
 
     def test_no_worldwide_coverage_gives_no_fact(self):
-        plan = {"pbp_b4_emerg_urgent": [dict(pbp_b4c_bendesc_yn="2")]}
+        plan = {"pbp_b4_emerg_urgent": [dict(pbp_b4c_bendesc_yn="2", pbp_b4c_copay_amt_wec_min="130.00",
+                                             pbp_b4c_wwc_maxplan_amt="25000.00")]}
         self.assertEqual(pbp_facts.supplemental_facts(PLAN, plan), [])
 
     def test_every_supplemental_fact_passes_the_fact_checks(self):

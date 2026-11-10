@@ -121,8 +121,7 @@ class RunTest(unittest.TestCase):
 class ReplayTest(unittest.TestCase):
     def scripts(self, mode):
         config = {"year": 1999, "state": "OR", "counties": ["Multnomah"], "landscape_csv": "landscape.csv",
-                  "landscape_zip": "https://example.org/l.zip", "pbp_zip": "https://example.org/p.zip",
-                  "part_b_deductible": "$283"}
+                  "landscape_zip": "https://example.org/l.zip", "pbp_zip": "https://example.org/p.zip"}
         with tempfile.TemporaryDirectory() as tmp, \
                 mock.patch.object(run.years, "data_dir", return_value=pathlib.Path(tmp)), \
                 mock.patch.object(run.years, "config", return_value=config), \

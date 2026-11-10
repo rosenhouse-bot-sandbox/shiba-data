@@ -445,6 +445,12 @@ class MedicalDeductibleTest(unittest.TestCase):
         uncovered = dict(found[1], cost_kind="not_covered")
         self.assertEqual(column(present.medical_deductible, found[0], uncovered), [("$283 some", [found[0]])])
 
+    def test_a_part_b_deductible_needs_no_amount(self):
+        part_b = priced("medical_deductible.part_b", amount="", cost_kind="covered", source="SB")
+        applies = priced("medical_deductible.some", amount="", cost_kind="covered", source="PBP")
+        self.assertEqual(column(present.medical_deductible, applies, part_b), [("Part B deductible some", [applies, part_b])])
+        self.assertEqual(column(present.medical_deductible, applies), [("", [])])
+
     def test_out_of_network_only_when_none_in_network(self):
         self.assertEqual(column(present.medical_deductible, deductible("$100", "medical_deductible.some", network="out"))[0][0],
                          "$100 some out-of-network services")
@@ -810,6 +816,12 @@ class AltCareOtcTravelTest(unittest.TestCase):
         _, aside = present.explain("Humana", found, "I_alt_care_otc_travel", "dvha")
         self.assertEqual(aside[facts.identity(found[1])], ["PBP gives another copay"])
 
+    def test_a_lower_source_copay_no_document_gives_leaves_the_cell_blank(self):
+        found = [routine("emergency", setting="outside_us", amount="$130"),
+                 routine("emergency", setting="outside_us", amount="$50"),
+                 routine("emergency", setting="outside_us", amount="$90", source="PBP")]
+        self.assertEqual(column(present.alt_care_otc_travel, *found), [("", [])])
+
     def test_a_document_that_says_care_abroad_is_not_covered_cites_a_blank(self):
         none = priced("emergency", setting="outside_us", cost_kind="not_covered", amount="")
         self.assertEqual(column(present.alt_care_otc_travel, none), [("", [none])])
@@ -954,8 +966,10 @@ class WriteTest(unittest.TestCase):
         self.assertEqual(cells[9] - cells[8], {("main", "C_premium")})
 
     def test_version_11_presents_the_cell_version_10_holds_for_review(self):
-        self.assertIn(("O_medical_deductible", "H2001-045-0"), set(present.VERSIONS[10]) - set(present.VERSIONS[11]))
-        self.assertIn(("dvha.I_alt_care_otc_travel", "H5216-048-0"), set(present.VERSIONS[10]) - set(present.VERSIONS[11]))
+        self.assertEqual(set(present.VERSIONS[10]) - set(present.VERSIONS[11]), {
+            ("O_medical_deductible", "H2001-045-0"), ("dvha.F_dental", "H2406-042-0"), ("dvha.F_dental", "H3805-041-0"),
+            ("dvha.I_alt_care_otc_travel", "H5216-048-0"), ("dvha.I_alt_care_otc_travel", "H5216-427-2"),
+            ("dvha.I_alt_care_otc_travel", "H5216-455-0")})
         self.assertLessEqual(set(present.VERSIONS[11]), set(present.VERSIONS[10]))
 
     def test_a_held_main_cell_does_not_hold_the_dvha_cell_of_the_same_name(self):

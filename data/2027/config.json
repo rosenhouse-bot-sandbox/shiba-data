@@ -3,7 +3,6 @@
   "counties": ["Multnomah", "Clackamas"],
   "landscape_zip": "https://www.cms.gov/files/zip/cy2027-landscape-202610.zip",
   "landscape_csv": "CY2027_Landscape_202610/CY2027_Landscape_202610.csv",
-  "part_b_deductible": "$283",
   "pbp_zip": "https://www.cms.gov/files/zip/pbp-benefits-2027.zip",
   "sheet_id": "1rtEUsead0baopKYqf_9ggqtYGyXYSUcfT8NnOJsTGBc"
 }
