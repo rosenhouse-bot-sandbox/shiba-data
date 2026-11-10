@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-20.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5 lists a $283 in-network medical deductible for this plan. It applies only to some services because the page lists services excluded from it.\"}]\n```",
+ "usage": {
+  "input_tokens": 2084,
+  "output_tokens": 202,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

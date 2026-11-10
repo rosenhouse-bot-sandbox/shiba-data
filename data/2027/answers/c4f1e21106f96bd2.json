@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-17.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 91, 'Other outpatient diagnostic tests' row, In-Network: 20% coinsurance for all other Medicare-covered services. No setting is named. The $0 copay applies only to diagnostic colonoscopy and specified testing-related services, which are separate services.\"}]\n```",
+ "usage": {
+  "input_tokens": 1891,
+  "output_tokens": 395,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
