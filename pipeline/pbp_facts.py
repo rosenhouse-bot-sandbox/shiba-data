@@ -54,10 +54,10 @@ def amount(row, names, fmt):
     return fmt(values[0]) if len(values) == 1 else f"{fmt(values[0])}-{fmt(values[-1])}"
 
 
-def fact(plan_id, benefit, network, cost_kind, value, fields, source="PBP", condition=""):
+def fact(plan_id, benefit, network, cost_kind, value, fields, source="PBP", condition="", **more):
     row = dict(plan_id=plan_id, benefit=benefit, setting="any", network=network, provider_tier="", condition=condition,
                package="", pool="", covered_by="medicare", cost_kind=cost_kind, amount=value, unit="", limit="",
-               source=source, doc_sha="", page="", quotes=json.dumps(list(fields)), note="")
+               source=source, doc_sha="", page="", quotes=json.dumps(list(fields)), note="") | more
     return dict(row, fact_id=facts.fact_id(row))
 
 
@@ -165,6 +165,32 @@ def deductible_facts(plan_id, plan, part_b):
     return found + ([fact(plan_id, "medical_deductible.part_b", network, "covered", "", part_b_fields)] if is_part_b else [])
 
 
+# The PBP period codes whose words present.period reads
+PERIODS = {"1": "every three years", "2": "every two years", "3": "every year"}
+
+
+def supplemental_facts(plan_id, plan):
+    """Facts for the dental maximum and worldwide emergency care."""
+    found = []
+    dental = first(plan, "pbp_b16_dental")
+    for benefit, amt, per, more in (("dental", "pbp_b16b_maxplan_pv_amt", "pbp_b16b_maxplan_pv_per",
+                                     ["pbp_b16c_maxplan_cmp_type"]),
+                                    ("dental.comprehensive", "pbp_b16c_maxplan_cmp_amt", "pbp_b16c_maxplan_cmp_per", [])):
+        if dental.get(amt):
+            limit = PERIODS.get(dental.get(per), "")
+            fields = [amt] + ([per] if limit else []) + [n for n in more if dental.get(n)]
+            found.append(fact(plan_id, benefit, "in", "max", money(float(dental[amt])), fields, covered_by="supplemental",
+                              limit=limit))
+    er = first(plan, "pbp_b4_emerg_urgent")
+    if er.get("pbp_b4c_bendesc_yn") == "1":
+        copay = ["pbp_b4c_copay_amt_wec_min", "pbp_b4c_copay_amt_wec_max"]
+        for kind, names in (("copay", copay), ("max", ["pbp_b4c_wwc_maxplan_amt"])):
+            if amount(er, names, money):
+                found.append(fact(plan_id, "emergency", "any", kind, amount(er, names, money), names,
+                                  setting="outside_us", covered_by="supplemental"))
+    return found
+
+
 def facts_for(plan_id, plan):
     rows = plan.get(B8, [])
     if len(rows) != 1:
@@ -181,7 +207,8 @@ def main(plans_csv, reads_csv, pbp_dir, out_csv, part_b):
     data = pbp.load(pbp_dir, [p["plan_id"] for p in plans])
     facts.write(out_csv, [row for p in plans for row in
                           facts_for(p["plan_id"], data[p["plan_id"]]) + plan_facts(p, reads, data[p["plan_id"]])
-                          + deductible_facts(p["plan_id"], data[p["plan_id"]], part_b)])
+                          + deductible_facts(p["plan_id"], data[p["plan_id"]], part_b)
+                          + supplemental_facts(p["plan_id"], data[p["plan_id"]])])
 
 
 if __name__ == "__main__":

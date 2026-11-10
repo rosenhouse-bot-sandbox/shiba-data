@@ -256,6 +256,50 @@ class DeductibleFactsTest(unittest.TestCase):
                 self.assertEqual(facts.check(r), [], r)
 
 
+def supplemental_terms(rows):
+    return sorted((r["benefit"], r["setting"], r["network"], r["covered_by"], r["cost_kind"], r["amount"], r["limit"],
+                   tuple(json.loads(r["quotes"]))) for r in rows)
+
+
+class SupplementalFactsTest(unittest.TestCase):
+    def test_the_dental_maximum_and_how_often_it_renews(self):
+        plan = {"pbp_b16_dental": [dict(pbp_b16b_maxplan_pv_amt="1250.00", pbp_b16b_maxplan_pv_per="3",
+                                        pbp_b16c_maxplan_cmp_type="1")]}
+        self.assertEqual(supplemental_terms(pbp_facts.supplemental_facts(PLAN, plan)), [
+            ("dental", "any", "in", "supplemental", "max", "$1,250", "every year",
+             ("pbp_b16b_maxplan_pv_amt", "pbp_b16b_maxplan_pv_per", "pbp_b16c_maxplan_cmp_type"))])
+
+    def test_a_comprehensive_dental_maximum(self):
+        plan = {"pbp_b16_dental": [dict(pbp_b16c_maxplan_cmp_type="2", pbp_b16c_maxplan_cmp_amt="1000.00",
+                                        pbp_b16c_maxplan_cmp_per="2")]}
+        self.assertEqual([t[:7] for t in supplemental_terms(pbp_facts.supplemental_facts(PLAN, plan))], [
+            ("dental.comprehensive", "any", "in", "supplemental", "max", "$1,000", "every two years")])
+
+    def test_a_period_no_rule_reads_gives_no_limit(self):
+        plan = {"pbp_b16_dental": [dict(pbp_b16b_maxplan_pv_amt="150.00", pbp_b16b_maxplan_pv_per="5")]}
+        (cap,) = pbp_facts.supplemental_facts(PLAN, plan)
+        self.assertEqual((cap["limit"], json.loads(cap["quotes"])), ("", ["pbp_b16b_maxplan_pv_amt"]))
+
+    def test_worldwide_emergency_copay_and_maximum(self):
+        plan = {"pbp_b4_emerg_urgent": [dict(pbp_b4c_bendesc_yn="1", pbp_b4c_copay_amt_wec_min="130.00",
+                                             pbp_b4c_copay_amt_wec_max="130.00", pbp_b4c_wwc_maxplan_amt="25000.00")]}
+        self.assertEqual(supplemental_terms(pbp_facts.supplemental_facts(PLAN, plan)), [
+            ("emergency", "outside_us", "any", "supplemental", "copay", "$130", "",
+             ("pbp_b4c_copay_amt_wec_min", "pbp_b4c_copay_amt_wec_max")),
+            ("emergency", "outside_us", "any", "supplemental", "max", "$25,000", "", ("pbp_b4c_wwc_maxplan_amt",))])
+
+    def test_no_worldwide_coverage_gives_no_fact(self):
+        plan = {"pbp_b4_emerg_urgent": [dict(pbp_b4c_bendesc_yn="2")]}
+        self.assertEqual(pbp_facts.supplemental_facts(PLAN, plan), [])
+
+    def test_every_supplemental_fact_passes_the_fact_checks(self):
+        plan = {"pbp_b16_dental": [dict(pbp_b16b_maxplan_pv_amt="1250.00", pbp_b16b_maxplan_pv_per="3")],
+                "pbp_b4_emerg_urgent": [dict(pbp_b4c_bendesc_yn="1", pbp_b4c_copay_amt_wec_min="0.00",
+                                             pbp_b4c_copay_amt_wec_max="130.00")]}
+        for r in pbp_facts.supplemental_facts(PLAN, plan):
+            self.assertEqual(facts.check(r), [], r)
+
+
 class ImagingCellsTest(unittest.TestCase):
     def test_facts_agree_with_every_imaging_line_built_from_the_pbp(self):
         data = years.data_dir()

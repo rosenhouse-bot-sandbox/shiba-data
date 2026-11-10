@@ -729,6 +729,13 @@ class DentalTest(unittest.TestCase):
         found = [routine("dental.preventive"), routine("dental", "max", "$1,250")]
         self.assertEqual(column(present.dental, *found), [("", [])])
 
+    def test_a_lower_source_with_the_same_max_says_how_often_it_renews(self):
+        found = [routine("dental.preventive"), routine("dental", "max", "$1,250"),
+                 routine("dental", "max", "$1,250", limit="every year", source="PBP")]
+        self.assertEqual(column(present.dental, *found), [("PREV $0; max $1,250/year PREV+COMP", found)])
+        other = dict(found[2], amount="$1,000")
+        self.assertEqual(column(present.dental, *found[:2], other), [("", [])])
+
     def test_medicare_conditional_and_package_dental_cite_a_blank(self):
         found = [priced("dental.preventive", amount="$30"), routine("dental.comprehensive", condition="diabetes"),
                  routine("dental.comprehensive", package="Rider"), routine("dental.comprehensive", network="out")]
@@ -793,6 +800,15 @@ class AltCareOtcTravelTest(unittest.TestCase):
         self.assertEqual({f["amount"]: aside[facts.identity(f)] for f in found}, {
             "$40": ["the facts do not fully give the worldwide part"],
             "$130": ["the facts do not say which copay is the ER's"], "$50": ["the facts do not say which copay is the ER's"]})
+
+    def test_a_lower_source_tells_the_documents_er_copay_apart(self):
+        found = [routine("emergency", setting="outside_us", amount="$130"),
+                 routine("emergency", setting="outside_us", amount="$50"),
+                 routine("emergency", setting="outside_us", amount="$130", source="PBP")]
+        self.assertEqual(column(present.alt_care_otc_travel, *found), [("Worldwide ER $130", [found[0], found[2]])])
+        found = [dict(f, fact_id=f["amount"] + f["source"]) for f in found]
+        _, aside = present.explain("Humana", found, "I_alt_care_otc_travel", "dvha")
+        self.assertEqual(aside[facts.identity(found[1])], ["PBP gives another copay"])
 
     def test_a_document_that_says_care_abroad_is_not_covered_cites_a_blank(self):
         none = priced("emergency", setting="outside_us", cost_kind="not_covered", amount="")
@@ -938,7 +954,8 @@ class WriteTest(unittest.TestCase):
         self.assertEqual(cells[9] - cells[8], {("main", "C_premium")})
 
     def test_version_11_presents_the_cell_version_10_holds_for_review(self):
-        self.assertEqual(set(present.VERSIONS[10]) - set(present.VERSIONS[11]), {("O_medical_deductible", "H2001-045-0")})
+        self.assertIn(("O_medical_deductible", "H2001-045-0"), set(present.VERSIONS[10]) - set(present.VERSIONS[11]))
+        self.assertIn(("dvha.I_alt_care_otc_travel", "H5216-048-0"), set(present.VERSIONS[10]) - set(present.VERSIONS[11]))
         self.assertLessEqual(set(present.VERSIONS[11]), set(present.VERSIONS[10]))
 
     def test_a_held_main_cell_does_not_hold_the_dvha_cell_of_the_same_name(self):
