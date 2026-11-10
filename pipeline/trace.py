@@ -85,7 +85,6 @@ def build(year, out, sha, work=None):
         if outcomes:
             load_checks(db, work)
         insert(db, "comment", (dict(renamed(c), pdf_page=number(c["pdf_page"])) for c in read(data / "comments.csv")))
-        insert(db, "struck_quote", (renamed(s) for s in layers.strikes(data)))
         db.commit()
     finally:
         db.close()
@@ -106,7 +105,7 @@ def renamed(row):
 
 def load_layers(db, data, checked):
     insert(db, "layer_row", (dict(
-        layer=name, position=r["position"], step=r.get("step"), prompt=r.get("prompt"), sheet=r["sheet"],
+        layer=name, position=r["position"], sheet=r["sheet"],
         plan_id=r["plan_id"], col=r["column"], line=number(r["line"]), value=r["value"], url=r["url"],
         pdf_page=number(r["pdf_page"]), quote=r["quote"], saw=r.get("saw"), source=r.get("source"),
         author=r.get("author"), note=r.get("note")) for name in layers.LAYERS for r in layers.layer(data, name)))
@@ -309,7 +308,7 @@ def record(found, **more):
 
 def layer_rows(db, sheet, plan_id, col):
     """The cell's layer rows in the site's order, without the columns their layer lacks."""
-    found = rows(db, """SELECT r.layer, r.step, r.prompt, r.line, r.value, r.url, r.pdf_page, r.quote,
+    found = rows(db, """SELECT r.layer, r.line, r.value, r.url, r.pdf_page, r.quote,
                                r.saw, r.source, r.author, r.note, c.hidden
                         FROM layer_row r JOIN live_citation c USING (layer, position)
                         WHERE r.sheet = ? AND r.plan_id = ? AND r.col = ? ORDER BY c.site_order""", sheet, plan_id, col)
@@ -326,7 +325,6 @@ def cell(db, sheet, plan_id, col):
     values = rows(db, "SELECT layer, value FROM layer_value WHERE sheet = ? AND plan_id = ? AND col = ? ORDER BY step",
                   sheet, plan_id, col)
     cited = layer_rows(db, sheet, plan_id, col)
-    setters = [r["layer"] for r in cited if r["layer"] not in layers.CITE_ONLY]
     documents = rows(db, """SELECT d.kind, d.url, d.found_via, w.sha256, w.pages, w.cover_problems, w.baseline,
                                    t.plain, t.layout, t.items
                             FROM plan_document p JOIN document d USING (url) JOIN download w USING (url)
@@ -338,7 +336,6 @@ def cell(db, sheet, plan_id, col):
     landscape_row = list({(n["field"], n["value"]): dict(field=n["field"], value=n["value"]) for n in landscape}.values())
     considered, rule_record = rule(db, sheet, plan_id, col, code)
     added = list({json.dumps(f): f for f in map(fact_of, considered) if f["origin"] == "added"}.values())
-    model = [dict(r, answers={"status": NOT_RECORDED}) for r in cited if r.get("step") == "xref"]
     if build_row["checked"]:
         prompts, fact_checks = checks(db, sheet, plan_id, col, considered)
     else:
@@ -362,12 +359,9 @@ def cell(db, sheet, plan_id, col):
         "added_facts": record(added, rows=added),
         "notes": record(n := rows(db, "SELECT kind, comment, url, pdf_page, quote FROM comment WHERE sheet = ? AND plan_id = ? "
                                       "AND col = ?", sheet, plan_id, col), rows=n),
-        "struck_quotes": record(s := rows(db, "SELECT quote, note FROM struck_quote WHERE sheet = ? AND plan_id = ? AND col = ?",
-                                          sheet, plan_id, col), rows=s),
-        "model_citations": record(model, rows=model),
         "layers": record(True, draft=found[0]["value"], applied=[
             dict(layer=v["layer"], value=v["value"], rows=[r for r in cited if r["layer"] == v["layer"]]) for v in values],
-            live=dict(value=values[-1]["value"], set_by=setters[0] if setters else None,
+            live=dict(value=values[-1]["value"], set_by=cited[0]["layer"] if cited else None,
                       citations=[r for r in cited if not r["hidden"]]),
             hidden=[r for r in cited if r["hidden"]]),
         "build": record(True, sha=build_row["sha"], steps=json.loads(build_row["steps"]), code=code),

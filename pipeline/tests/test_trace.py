@@ -51,7 +51,7 @@ class TraceTest(unittest.TestCase):
                         self.assertEqual(records["cell"]["value"], r[col])
                         self.assertEqual(set(records), {
                             "cell", "plan", "documents", "draft", "answers", "fact_checks", "rule", "added_facts",
-                            "notes", "struck_quotes", "model_citations", "layers", "build"})
+                            "notes", "layers", "build"})
                         self.assertLessEqual(statuses(records), STATUSES)
 
     def test_shows_the_values_and_citations_the_site_shows_in_its_order(self):
@@ -104,16 +104,12 @@ class TraceTest(unittest.TestCase):
                              years.data_dir())["main"]].index("H1036-153-0")]["AB_ambulance"])
 
     def test_says_why_the_site_hides_a_citation(self):
-        hidden = self.cell("main", "H2056-003-0", "L_xray_imaging")["layers"]["hidden"]
-        self.assertIn((layers.XREF, layers.OTHER_VALUE), [(r["layer"], r["hidden"]) for r in hidden])
+        hidden = self.cell("dvha", "H2001-045-0", "G_vision")["layers"]["hidden"]
+        self.assertIn((layers.PRESENTED, layers.NOT_SB_CITES_CELL), [(r["layer"], r["hidden"]) for r in hidden])
 
     def test_says_none_when_no_step_touched_the_cell(self):
         records = self.cell(*AMBULANCE)
         self.assertEqual(records["notes"], {"status": trace.NONE, "rows": []})
-        self.assertEqual(records["struck_quotes"]["status"], trace.NONE)
-
-    def test_says_none_when_no_model_step_cited_the_cell(self):
-        self.assertEqual(self.cell(*AMBULANCE)["model_citations"], {"status": trace.NONE, "rows": []})
 
     def test_lists_the_facts_each_line_used_and_why_the_rule_set_others_aside(self):
         rule = self.cell(*AMBULANCE)["rule"]
@@ -155,10 +151,6 @@ class TraceTest(unittest.TestCase):
         self.assertEqual(eoc[0]["url"], "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf")
         self.assertTrue(eoc[0]["sha256"].startswith("64e05773e847b56e"))
         self.assertEqual(len(eoc[0]["text"]["layout"]), 64)
-
-    def test_xref_citations_have_no_recorded_answer(self):
-        rows = self.cell("main", "H3805-048-0", "E_moop")["model_citations"]["rows"]
-        self.assertEqual({(r["step"], r["answers"]["status"]) for r in rows}, {("xref", trace.NOT_RECORDED)})
 
     def test_names_the_build_commit_and_pins(self):
         build = self.cell(*AMBULANCE)["build"]

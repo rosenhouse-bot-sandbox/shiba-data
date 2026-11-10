@@ -19,14 +19,13 @@ import build  # noqa: E402
 DATA = build.years.data_dir(2027)
 
 
-def data_copy(tmp, machine_rows, year=2027):
-    """A copy of DATA, as data for `year`, whose machine layer holds only machine_rows."""
+def data_copy(tmp, presented_rows, year=2027):
+    """A copy of DATA, as data for `year`, whose presented layer also holds presented_rows."""
     data = pathlib.Path(tmp) / str(year)
     shutil.copytree(DATA, data)
-    with open(data / "machine/eoc_citations.csv", "w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=build.layers.MACHINE_COLUMNS)
-        w.writeheader()
-        w.writerows(dict(step="test", prompt="", line="", **r) for r in machine_rows)
+    with open(data / build.layers.PRESENTED, "a", newline="") as f:
+        csv.DictWriter(f, fieldnames=build.layers.COLUMNS, lineterminator="\n").writerows(
+            dict(line="", **r) for r in presented_rows)
     return data
 
 
@@ -214,7 +213,6 @@ class EocCitationsTest(unittest.TestCase):
         self.site = build.site_data(data_copy(self.tmp.name, [
             cite("main", "G_specialist", "$55", eoc["url"], 80, "specialist quote"),
             cite("dvha", "C_premium", "$0", eoc["url"], 9, "premium quote"),
-            cite("main", "G_specialist", "$0-$55", eoc["url"], 76, "stale quote"),
             cite("main", "O_medical_deductible", "$0", eoc["url"], 9, "deductible quote"),
         ]))
 
@@ -236,15 +234,12 @@ class EocCitationsTest(unittest.TestCase):
     def test_a_cite_of_an_unknown_document_fails(self):
         with tempfile.TemporaryDirectory() as tmp:
             data = data_copy(tmp, [cite("main", "E_moop", "$6,700", "https://x/reissued.pdf", 45, "q")])
-            with self.assertRaisesRegex(ValueError, "machine/eoc_citations.csv main H3805-048-0 E_moop.*reissued.pdf"):
+            with self.assertRaisesRegex(ValueError, "generated/presented.csv main H3805-048-0 E_moop.*reissued.pdf"):
                 build.site_data(data)
 
     def test_cited_cell_lists_no_cms_fields(self):
         cell = next(r for r in self.site["main"]["rows"] if r["plan_id"] == "H3805-048-0")["cells"]["O_medical_deductible"]
         self.assertNotIn("cms", cell)
-
-    def test_drops_a_cite_whose_value_an_edit_changed(self):
-        self.assertNotIn("stale quote", [c["quote"] for c in self.cites("main", "G_specialist")])
 
 
 class EditsTest(unittest.TestCase):
@@ -296,7 +291,6 @@ class SiteCommandTest(unittest.TestCase):
         self.dir = pathlib.Path(self.tmp.name)
         self.traces = self.enterContext(mock.patch.object(build, "write_traces"))
         self.enterContext(mock.patch.object(build.layers, "live", return_value=({}, [], [])))
-        self.enterContext(mock.patch.object(build.layers, "stale_strikes", return_value=[]))
 
     def tearDown(self):
         self.tmp.cleanup()
@@ -325,14 +319,6 @@ class SiteCommandTest(unittest.TestCase):
             build.main("site", self.dir / "site")
         self.assertIn("::warning::An edit's author saw $6,700, but the cell beneath it is now $6,900: "
                       "edits.csv main H3805-048-0 E_moop", out.getvalue())
-
-    def test_site_command_warns_of_a_strike_that_matches_no_machine_quote(self):
-        strike = dict(sheet="main", plan_id="H3805-048-0", column="E_moop", quote="gone", note="")
-        out = io.StringIO()
-        with (mock.patch.object(build, "site_data", return_value=bare_site()),
-              mock.patch.object(build.layers, "stale_strikes", return_value=[strike]), contextlib.redirect_stdout(out)):
-            build.main("site", self.dir / "site")
-        self.assertIn("::warning::A strike matches no machine quote: main H3805-048-0 E_moop gone", out.getvalue())
 
     def test_site_command_writes_traces_from_the_commit(self):
         with mock.patch.object(build, "site_data", return_value=bare_site()), mock.patch.object(build, "commit", return_value="abc"):

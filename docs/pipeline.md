@@ -350,23 +350,20 @@ dvha,H3805-048-0,E_optional_packages,"Dental Platinum Rider $66/mo, max $1,500, 
 
 `source` is `session` on every edit: a Claude session wrote it.
 
-A **strike** in `struck.csv` hides a machine quote that doesn't support its cell.
-
 ## 9. Stack the layers
 
-A **layer** is a table whose rows set a cell's value, attach a citation to it, or both. Code applies the layers in order. When two layers set the same cell, the later one wins:
+A **layer** is a table whose rows set a cell's value and cite it. Code applies the layers in order. When two layers set the same cell, the later one wins:
 
 ```
-layer                                         sets values?  Ambulance               X-ray
-generated/main_chart.csv (7), citations.csv   yes           $325 or 20% | $325      $0-$30 | $205-$330
-machine/eoc_citations.csv                     no            (citations only)
-generated/presented.csv                  (7)  yes           $325 or 20% | $325      $0-$30 | $205-$330
-edits.csv                                (8)  yes           (none)                  (none)
+layer                             Ambulance               X-ray
+generated/main_chart.csv     (7)  $325 or 20% | $325      $0-$30 | $205-$330
+generated/presented.csv      (7)  $325 or 20% | $325      $0-$30 | $205-$330
+edits.csv                    (8)  (none)                  (none)
 ──────────────────────────────────────────────────────────
-live sheet                                                  $325 or 20% | $325      $0-$30 | $205-$330
+live sheet                        $325 or 20% | $325      $0-$30 | $205-$330
 ```
 
-Code drops a citation whose value differs from the cell's final value. So a quote never supports a value it doesn't show. `machine/eoc_citations.csv` holds citations that Claude sessions found before the pipeline existed.
+Code drops a citation whose value differs from the cell's final value. So a quote never supports a value it doesn't show.
 
 ## 10. Publish
 
