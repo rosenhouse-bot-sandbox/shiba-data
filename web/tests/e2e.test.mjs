@@ -943,7 +943,7 @@ test("pipeline view: each step shows its record from the cell's trace", async ()
   assert.ok(!(await page.locator(".how-trace pre").isVisible()));
   await page.click(".how-trace summary");
   assert.match(await page.textContent(".how-trace pre"), /pipeline\/present\.py/);
-  await page.click("a.how-nav[rel=next]");
+  await openHow(page, "main/H1036-153-0/ambulance/read-facts");
   await page.waitForFunction(() => document.querySelector(".how-trace-head")?.textContent.includes("Not recorded in this build"));
   assert.equal(await page.locator(".how-trace pre").count(), 0);
 });
