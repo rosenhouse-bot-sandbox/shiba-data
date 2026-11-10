@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-7.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 92 lab row, in-network part above the Out-of-Network heading: $10 copay for all other Medicare-covered lab services. No setting is named, and the condition copies the document's words.\"}]\n```",
+ "usage": {
+  "input_tokens": 2021,
+  "output_tokens": 476,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

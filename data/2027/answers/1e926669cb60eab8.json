@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-12.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 90 Laboratory tests row: the $10 in-network copay covers only 'all other' lab services. A1C and kidney health labs are $0, so $10 with no condition misstates lab costs.\"}]\n```",
+ "usage": {
+  "input_tokens": 1954,
+  "output_tokens": 311,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

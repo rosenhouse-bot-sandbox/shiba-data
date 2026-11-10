@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-14.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 79 Laboratory tests row, In-Network: \\\"$10 copay for all other Medicare-covered lab services.\\\" Plan, benefit, network, cost kind, amount and condition all match.\"}]\n```",
+ "usage": {
+  "input_tokens": 1947,
+  "output_tokens": 301,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
