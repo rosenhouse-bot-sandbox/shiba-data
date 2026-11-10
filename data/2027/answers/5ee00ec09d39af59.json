@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-19.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 45, Section 1.2: the plan deductible is $283. It does not apply to some services, which are listed as excluded from the in-network deductible (e.g., Ambulance Services, Chemotherapy). This supports an in-network deductible for some services only.\"}]\n```",
+ "usage": {
+  "input_tokens": 2266,
+  "output_tokens": 204,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

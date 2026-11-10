@@ -1002,7 +1002,8 @@ RELEASED_7 = {("dvha.H_hearing", p) for p, in (c[1:] for c in VERSIONS[6] if c[0
 VERSIONS[7] = {c: why for c, why in VERSIONS[6].items() if c not in RELEASED_7}
 # Version 8 presents main cells whose rule only leaves a detail out or names the Part B deductible's amount.
 VERSIONS[8] = {c: why for c, why in VERSIONS[7].items() if c[0] not in ("K_tests_labs", "O_medical_deductible")
-               or c[1] == "H6815-038-0"}
+               or c[1] in ("H6815-038-0", "H5439-019-0")}
+VERSIONS[8][("K_tests_labs", "H5439-019-0")] = "the reviewer rejected the $10 price for most labs"
 # The version that first presents each DVHA column. Earlier versions hold its cells.
 DVHA_SINCE = {"C_premium": 3, "G_vision": 4, "H_hearing": 4, "E_optional_packages": 5, "F_dental": 6,
               "I_alt_care_otc_travel": 6, "J_extra_benefits": 6}

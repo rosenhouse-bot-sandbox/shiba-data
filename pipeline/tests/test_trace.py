@@ -136,8 +136,8 @@ class TraceTest(unittest.TestCase):
             self.assertEqual(n["presented"], any(f["source"] in ("SB", "EOC") for f in n["facts"]), n)
 
     def test_says_why_the_pinned_version_holds_a_cell(self):
-        rule = self.cell("main", "H5439-010-0", "K_tests_labs")["rule"]
-        self.assertEqual(rule["held"], present.HELD_1[("K_tests_labs", "H5439-010-0")])
+        rule = self.cell("main", "H5439-019-0", "K_tests_labs")["rule"]
+        self.assertEqual(rule["held"], present.VERSIONS[8][("K_tests_labs", "H5439-019-0")])
 
     def test_lists_the_added_facts_a_rule_considered(self):
         added = self.cell("main", "H1372-003-0", "AB_ambulance")["added_facts"]
