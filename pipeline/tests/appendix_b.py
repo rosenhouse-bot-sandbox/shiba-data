@@ -24,7 +24,7 @@ MAIN_CHART_CASES = [
     ("11", "H1372-003-0", "T_chiropractic", "●"),
     ("12", "H1036-153-0", "L_xray_imaging", "$0-$30 | $205-$330"),
     ("13", "H1036-317-0", "Y_otc", "●"),
-    ("13", "H1036-317-0", "O_medical_deductible", "$283 some"),
+    ("13", "H1036-317-0", "O_medical_deductible", "Part B deductible some"),
 ]
 
 # (Appendix B DVHA item, plan, column, text the cell must contain)

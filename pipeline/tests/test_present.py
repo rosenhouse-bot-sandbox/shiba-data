@@ -445,6 +445,12 @@ class MedicalDeductibleTest(unittest.TestCase):
         uncovered = dict(found[1], cost_kind="not_covered")
         self.assertEqual(column(present.medical_deductible, found[0], uncovered), [("$283 some", [found[0]])])
 
+    def test_a_part_b_deductible_needs_no_amount(self):
+        part_b = priced("medical_deductible.part_b", amount="", cost_kind="covered", source="SB")
+        applies = priced("medical_deductible.some", amount="", cost_kind="covered", source="PBP")
+        self.assertEqual(column(present.medical_deductible, applies, part_b), [("Part B deductible some", [applies, part_b])])
+        self.assertEqual(column(present.medical_deductible, applies), [("", [])])
+
     def test_out_of_network_only_when_none_in_network(self):
         self.assertEqual(column(present.medical_deductible, deductible("$100", "medical_deductible.some", network="out"))[0][0],
                          "$100 some out-of-network services")
@@ -729,6 +735,13 @@ class DentalTest(unittest.TestCase):
         found = [routine("dental.preventive"), routine("dental", "max", "$1,250")]
         self.assertEqual(column(present.dental, *found), [("", [])])
 
+    def test_a_lower_source_with_the_same_max_says_how_often_it_renews(self):
+        found = [routine("dental.preventive"), routine("dental", "max", "$1,250"),
+                 routine("dental", "max", "$1,250", limit="every year", source="PBP")]
+        self.assertEqual(column(present.dental, *found), [("PREV $0; max $1,250/year PREV+COMP", found)])
+        other = dict(found[2], amount="$1,000")
+        self.assertEqual(column(present.dental, *found[:2], other), [("", [])])
+
     def test_medicare_conditional_and_package_dental_cite_a_blank(self):
         found = [priced("dental.preventive", amount="$30"), routine("dental.comprehensive", condition="diabetes"),
                  routine("dental.comprehensive", package="Rider"), routine("dental.comprehensive", network="out")]
@@ -793,6 +806,21 @@ class AltCareOtcTravelTest(unittest.TestCase):
         self.assertEqual({f["amount"]: aside[facts.identity(f)] for f in found}, {
             "$40": ["the facts do not fully give the worldwide part"],
             "$130": ["the facts do not say which copay is the ER's"], "$50": ["the facts do not say which copay is the ER's"]})
+
+    def test_a_lower_source_tells_the_documents_er_copay_apart(self):
+        found = [routine("emergency", setting="outside_us", amount="$130"),
+                 routine("emergency", setting="outside_us", amount="$50"),
+                 routine("emergency", setting="outside_us", amount="$130", source="PBP")]
+        self.assertEqual(column(present.alt_care_otc_travel, *found), [("Worldwide ER $130", [found[0], found[2]])])
+        found = [dict(f, fact_id=f["amount"] + f["source"]) for f in found]
+        _, aside = present.explain("Humana", found, "I_alt_care_otc_travel", "dvha")
+        self.assertEqual(aside[facts.identity(found[1])], ["PBP gives another copay"])
+
+    def test_a_lower_source_copay_no_document_gives_leaves_the_cell_blank(self):
+        found = [routine("emergency", setting="outside_us", amount="$130"),
+                 routine("emergency", setting="outside_us", amount="$50"),
+                 routine("emergency", setting="outside_us", amount="$90", source="PBP")]
+        self.assertEqual(column(present.alt_care_otc_travel, *found), [("", [])])
 
     def test_a_document_that_says_care_abroad_is_not_covered_cites_a_blank(self):
         none = priced("emergency", setting="outside_us", cost_kind="not_covered", amount="")
@@ -937,6 +965,13 @@ class WriteTest(unittest.TestCase):
         cells = {v: {(r["sheet"], r["column"]) for r in present.layer_rows(data, v)} for v in (8, 9)}
         self.assertEqual(cells[9] - cells[8], {("main", "C_premium")})
 
+    def test_version_11_presents_the_cell_version_10_holds_for_review(self):
+        self.assertEqual(set(present.VERSIONS[10]) - set(present.VERSIONS[11]), {
+            ("O_medical_deductible", "H2001-045-0"), ("dvha.F_dental", "H2406-042-0"), ("dvha.F_dental", "H3805-041-0"),
+            ("dvha.I_alt_care_otc_travel", "H5216-048-0"), ("dvha.I_alt_care_otc_travel", "H5216-427-2"),
+            ("dvha.I_alt_care_otc_travel", "H5216-455-0")})
+        self.assertLessEqual(set(present.VERSIONS[11]), set(present.VERSIONS[10]))
+
     def test_a_held_main_cell_does_not_hold_the_dvha_cell_of_the_same_name(self):
         self.assertNotEqual(present.cell("main", "C_premium", "H1"), present.cell("dvha", "C_premium", "H1"))
 
@@ -1020,7 +1055,8 @@ class CmsColumnsTest(unittest.TestCase):
     def test_present_the_live_value_of_every_plan(self):
         data = years.data_dir(YEAR)
         live = layers.live(data)[0]
-        for sheet, columns in (("main", ("C_premium", "D_premium_full_extra_help", "E_moop", "N_pharmacy_deductible")),
+        for sheet, columns in (("main", ("C_premium", "D_premium_full_extra_help", "E_moop", "N_pharmacy_deductible",
+                                         "O_medical_deductible")),
                                ("dvha", ("D_premium_full_extra_help",))):
             plans = {r["plan_id"]: r for r in live[sheet]}
             for column in columns:

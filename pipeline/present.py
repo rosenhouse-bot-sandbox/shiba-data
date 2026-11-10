@@ -371,11 +371,18 @@ def deductible_ok(f):
 
 def medical_deductible(organization, found):
     """Shows the in-network deductible, or else the out-of-network one, and says if it applies to some services only.
-    A $0 in-network deductible shows as $0, whatever the out-of-network one is."""
+    A $0 in-network deductible shows as $0, whatever the out-of-network one is. When a fact says the deductible is
+    Part B's, a covered deductible with no amount counts."""
+    part_b_named = any(f["benefit"] == "medical_deductible.part_b" and f["cost_kind"] == "covered" for f in found)
+
+    def amountless(f):
+        return (part_b_named and f["cost_kind"] == "covered" and f["benefit"] != "medical_deductible.part_b"
+                and deductible_ok(dict(f, cost_kind="deductible")))
+
     for networks in (("in", "any"), ("out",)):
         @unless(f"it is not a Medicare deductible in network {networks[0]!r}")
         def ok(f):
-            return deductible_ok(f) and f["network"] in networks
+            return (deductible_ok(f) or amountless(f)) and f["network"] in networks
         got = best(found, "medical_deductible.some", "any", ok)
         if got:
             break
@@ -750,8 +757,13 @@ def worldwide(found):
     apart leave the part unknown. A document that says the plan covers none cites a blank."""
     abroad = keep(exactly(found, ("emergency",), lambda f: f["setting"] == "outside_us", "it is not care outside the U.S."),
                   lambda f: not (f["condition"] or f["package"]), lambda f: "it has a condition or package")
-    copays = top(keep(abroad, lambda f: f["cost_kind"] in PRICED and not urgent(f),
-                      lambda f: "it is not an emergency copay"))
+    priced = keep(abroad, lambda f: f["cost_kind"] in PRICED and not urgent(f), lambda f: "it is not an emergency copay")
+    copays = top(priced)
+    tiebreak = top([f for f in priced if f not in copays])
+    if (len({f["amount"] for f in copays}) > 1 and len({f["amount"] for f in tiebreak}) == 1
+            and tiebreak[0]["amount"] in {f["amount"] for f in copays}):
+        copays = keep(copays, lambda f: f["amount"] == tiebreak[0]["amount"],
+                      lambda f: f"{tiebreak[0]['source']} gives another copay") + tiebreak
     if not copays:
         none = [f for f in abroad if f["cost_kind"] == "not_covered"]
         if none or not abroad:
@@ -865,16 +877,19 @@ def dental(organization, found):
     comp, comp_shown = dental_price(found, "dental.comprehensive")
     others = {f["pool"] for f in found if f["pool"] and not facts.covers("dental", f["benefit"])
               and not f["benefit"].startswith("extras.")}
-    caps = top(exactly(found, ("dental", "dental.preventive", "dental.comprehensive"),
-                    lambda f: everyone(f) and f["cost_kind"] in ("max", "allowance") and f["pool"] not in others,
-                    "it is not a dental maximum for every member"))
+    eligible = exactly(found, ("dental", "dental.preventive", "dental.comprehensive"),
+                       lambda f: everyone(f) and f["cost_kind"] in ("max", "allowance") and f["pool"] not in others,
+                       "it is not a dental maximum for every member")
+    caps = top(eligible)
     parts = ([f"PREV {prev_shown}"] if prev else []) + ([f"COMP {comp_shown}"] if comp else [])
     cited = prev + comp
     if caps:
-        if not renews(caps):
+        timed = caps if renews(caps) else top([f for f in eligible if every(f) and show([f]) == show(caps)])
+        if not renews(timed):
             drop(cited + caps, "the facts do not say how often the dental maximum renews")
             return [("", [])]
-        amount = f"{show(caps)}/{renews(caps)}"
+        amount = f"{show(caps)}/{renews(timed)}"
+        caps = unique(caps + timed)
         pools = {f["pool"] for f in caps if f["pool"]}
         sharing = [name for _, name, leaf in ALT_CARE if any(g["benefit"] == leaf and g["pool"] in pools for g in found)]
         if not parts:
@@ -1056,6 +1071,12 @@ VERSIONS[8] = {c: why for c, why in VERSIONS[7].items() if c[0] not in ("K_tests
                or c[1] in ("H6815-038-0", "H5439-019-0")}
 VERSIONS[8][("K_tests_labs", "H5439-019-0")] = "the reviewer rejected the $10 price for most labs"
 VERSIONS[9] = dict(VERSIONS[8])
+# Version 10 holds cells whose new PBP facts make them cite document facts the reviewer has not checked. Version 11 does not.
+VERSIONS[10] = VERSIONS[9] | {(c, p): "the reviewer has not checked the document facts it cites" for c, p in (
+    ("O_medical_deductible", "H2001-045-0"), ("dvha.F_dental", "H1372-003-0"), ("dvha.F_dental", "H2406-042-0"),
+    ("dvha.F_dental", "H3805-041-0"), ("dvha.I_alt_care_otc_travel", "H5216-048-0"),
+    ("dvha.I_alt_care_otc_travel", "H5216-427-2"), ("dvha.I_alt_care_otc_travel", "H5216-455-0"))}
+VERSIONS[11] = VERSIONS[9] | {("dvha.F_dental", "H1372-003-0"): "the facts give no routine comprehensive dental price"}
 # The version that first presents each later column. Earlier versions hold its cells.
 SINCE = {("dvha", "C_premium"): 3, ("dvha", "G_vision"): 4, ("dvha", "H_hearing"): 4, ("dvha", "E_optional_packages"): 5,
          ("dvha", "F_dental"): 6, ("dvha", "I_alt_care_otc_travel"): 6, ("dvha", "J_extra_benefits"): 6,
