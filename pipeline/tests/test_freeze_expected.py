@@ -3,8 +3,7 @@ import csv, os, pathlib, sys, tempfile, unittest
 here = os.path.dirname(os.path.abspath(__file__))
 sys.path[:0] = [here, os.path.dirname(here)]
 import freeze_expected
-import layers
-from test_layers import cite, edit, write, write_edits
+from test_layers import edit, write, write_edits
 
 EOC, SB = "https://x/eoc.pdf", "https://x/sb.pdf"
 
@@ -22,14 +21,10 @@ class FreezeTest(unittest.TestCase):
         write(self.data / "generated/main_chart.csv", [dict(plan, L_xray_imaging="$0 | $0-$300", G_specialist="$40")],
               list(plan) + ["L_xray_imaging", "G_specialist"])
         write(self.data / "generated/dvha.csv", [dict(plan, F_dental="Dental")], list(plan) + ["F_dental"])
-        write(self.data / "generated/citations.csv", [])
         write(self.data / "generated/documents.csv",
               [dict(plan_ids="H1-001-0", kind="EOC", url=EOC, found_via=""),
                dict(plan_ids="H1-001-0", kind="SB", url=SB, found_via="")],
               ["plan_ids", "kind", "url", "found_via"])
-        write(self.data / "machine/eoc_citations.csv",
-              [dict(at(cite("F_dental", "PREV $0", sheet="dvha"), EOC, "60"), step="xref", prompt="")],
-              layers.MACHINE_COLUMNS)
         write_edits(self.data,
                     at(edit("G_specialist", "$40", "$40"), SB, "2"),
                     at(edit("L_xray_imaging", "$0-$250", "$0-$300", line="2"), EOC, "9"),

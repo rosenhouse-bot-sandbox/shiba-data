@@ -8,7 +8,6 @@ import tempfile
 import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
-import cite  # noqa: E402
 import fetch_docs  # noqa: E402
 import fields  # noqa: E402
 import pbp  # noqa: E402
@@ -89,24 +88,6 @@ class DocumentTest(unittest.TestCase):
                  ("H3817-008-1", "H3817_008001EOC2027"), ("H2923-028-3", "H2923-028-003")]
         for plan, printed in cases:
             self.assertTrue(any(re.search(rx, printed) for rx in fetch_docs.id_patterns(plan)), printed)
-
-    def test_naturopathy_ignores_exclusion_table(self):
-        excluded = {1: "Naturopath services (uses natural or alternative treatments) Not covered under any condition"}
-        covered = {2: "allowance toward Massage, Routine Acupuncture, and/or Naturopath Services combined."}
-        self.assertEqual(cite.naturopathy_mentions(excluded), [])
-        self.assertEqual(cite.naturopathy_mentions(covered)[0][0], 2)
-
-    def test_cites_each_plan_of_a_document_that_mentions_naturopathy(self):
-        docs = [{"text_file": "a.txt", "url": "u", "plan_ids": "A;B"}, {"text_file": "b.txt", "url": "v", "plan_ids": "C"}]
-        text = {"a.txt": {3: "$0 copay for naturopathy visits"}, "b.txt": {1: "acupuncture"}}
-        cited = dict(sheet="main", column="U_naturopath", line="", value="●", url="u", pdf_page=3,
-                     quote="$0 copay for naturopathy visits")
-        self.assertEqual(cite.citations(docs, text), [dict(cited, plan_id="A"), dict(cited, plan_id="B")])
-
-    def test_naturopathy_from_wellness_fund_earns_a_dot(self):
-        docs = [{"text_file": "eoc.txt", "url": "v", "plan_ids": "A"}]
-        text = {"eoc.txt": {2: "Wellness Bucks pay for a Naturopath"}}
-        self.assertEqual([c["value"] for c in cite.citations(docs, text)], ["●"])
 
 
 if __name__ == "__main__":

@@ -9,20 +9,16 @@ It then reads facts into `machine/document_facts.csv` from the answers saved in 
 
 ## Layers
 
-The site shows the generated sheets with these layers applied in order. Each layer row cites the value of a cell, or of one line of it.
+The site shows the generated sheets with these layers applied in order. Each layer row sets and cites the value of a cell, or of one line of it.
 
-| File | Rows from | Sets the value |
-|---|---|---|
-| `generated/citations.csv` | `pipeline/cite.py`: naturopathy dots, which the PBP lacks | Yes |
-| `machine/eoc_citations.csv` | Model steps run by earlier Claude sessions, with `step` xref | No, until people review model corrections (issue #48) |
-| `generated/presented.csv` | `pipeline/present.py`: column rules applied to facts | Yes |
-| `edits.csv` | People, and Claude sessions they steer | Yes |
+| File | Rows from |
+|---|---|
+| `generated/presented.csv` | `pipeline/present.py`: column rules applied to facts |
+| `edits.csv` | People, and Claude sessions they steer |
 
 A later layer wins, and within `edits.csv` a later row wins. The site drops a citation whose value is not the live cell's.
 
 An edit row also records `saw`, the value its author saw. The site build warns when the cell beneath an edit is no longer `saw`, and when an edit cites an unknown document.
-
-`struck.csv` lists machine quotes that do not support their cell, so the site leaves them out. The build warns when a strike matches no machine quote.
 
 ## Results
 
@@ -55,7 +51,7 @@ Two UHC EOCs were re-issued on 2026-10-14 (`UHOR27HP0418842_001`, `AAOR27LP04187
 `pipeline/present.py` writes both sheets, `generated/main_chart.csv` and `generated/dvha.csv`, from the column rules.
 `pipeline/fields.py` gives each column's rules.
 
-- The PBP has no naturopathy category. Column U is set when the SB or EOC mentions naturopathy outside the exclusions table.
+- The PBP has no naturopathy category. Column U is a dot when the facts include an `extras.naturopathy` benefit.
 - UHC OR-1A charges $0 to members with QMB or full Medicaid. The sheet shows what other members pay.
 - Six Humana plans cover acupuncture only for chronic low back pain, which Medicare covers. Column S is blank for them.
 - Devoted 009 pays for acupuncture, massage and naturopathy only from its Wellness Bucks. A SHIBA expert counts that as a dot.

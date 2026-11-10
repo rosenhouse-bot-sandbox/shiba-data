@@ -59,9 +59,7 @@ test("neighbouring steps share a table", () => {
 const trace = ({ presented = false } = {}) => ({
   cell: { value: "$5" },
   rule: { status: "not_recorded" },
-  model_citations: { status: "not_recorded" },
-  layers: { status: "traced", applied: [{ layer: "machine/eoc_citations.csv", rows: [{}] },
-    { layer: "generated/presented.csv", rows: presented ? [{}] : [] }] },
+  layers: { status: "traced", applied: [{ layer: "generated/presented.csv", rows: presented ? [{}] : [] }] },
 });
 const ids = (t) => chain(t).map((s) => s.id);
 
@@ -87,7 +85,6 @@ const full = {
     { kind: "EOC", url: EOC, found_via: "Links sheet", pages: 90, cover_problems: "" },
     { kind: "RIDER", url: "https://x/rider.pdf", found_via: "carrier page", pages: 4, cover_problems: "no year" }] },
   draft: { status: "traced", value: "$0" },
-  model_citations: { status: "traced", rows: [{ step: "xref", url: EOC, pdf_page: 6 }] },
   layers: { status: "traced", draft: "$0", applied: [{ layer: "generated/presented.csv", value: "", rows: [{ url: EOC, pdf_page: 5 }] }],
     live: { value: "", set_by: "generated/presented.csv", citations: [{ url: EOC, pdf_page: 5 }, { url: "https://x/sb.pdf", pdf_page: 2 }] } },
 };

@@ -141,7 +141,7 @@ class ReplayTest(unittest.TestCase):
         downloads, scripts = self.scripts("replay")
         self.assertEqual(downloads, 0)
         self.assertFalse({"find_docs.py", "fetch_docs.py"} & set(scripts))
-        self.assertIn("cite.py", scripts)
+        self.assertIn("texts.py", scripts)
 
 
 if __name__ == "__main__":

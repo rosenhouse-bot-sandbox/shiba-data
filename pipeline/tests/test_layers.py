@@ -16,10 +16,6 @@ def cite(column, value, line="", sheet="main", quote="q"):
     return dict(sheet=sheet, plan_id="H1-001-0", column=column, line=line, value=value, url="u", pdf_page="1", quote=quote)
 
 
-def machine(*rows):
-    return [dict(r, step="xref", prompt="p") for r in rows]
-
-
 def edit(column, value, saw, line="", sheet="main", quote="q"):
     return dict(cite(column, value, line, sheet, quote), saw=saw, source="volunteer", author="v1", note="")
 
@@ -38,9 +34,7 @@ class LiveTest(unittest.TestCase):
               [dict(plan, G_specialist="$0-$40", L_xray_imaging="$0 | $0-$300", U_naturopath="")],
               list(plan) + ["G_specialist", "L_xray_imaging", "U_naturopath"])
         write(self.data / "generated/dvha.csv", [dict(plan, F_dental="Dental")], list(plan) + ["F_dental"])
-        write(self.data / "generated/citations.csv", [cite("U_naturopath", "●")])
-        write(self.data / "machine/eoc_citations.csv", machine(cite("L_xray_imaging", "$0 | $150-$300", quote="machine")),
-              layers.MACHINE_COLUMNS)
+        write(self.data / layers.PRESENTED, [cite("U_naturopath", "●")])
         write_edits(self.data, edit("L_xray_imaging", "$150-$300", "$0-$300", line="2"),
                     edit("F_dental", "PREV $0", "Dental", sheet="dvha"))
 
@@ -52,7 +46,7 @@ class LiveTest(unittest.TestCase):
         self.assertEqual(sheets["main"][0], dict(section="", plan_id="H1-001-0", plan_name="A", G_specialist="$0-$40",
                                                  L_xray_imaging="$0 | $150-$300", U_naturopath="●"))
         self.assertEqual(sheets["dvha"][0]["F_dental"], "PREV $0")
-        self.assertEqual(len(kept), 4)
+        self.assertEqual(len(kept), 3)
         self.assertEqual(dropped, [])
 
     def test_applies_only_the_layers_asked_for(self):
@@ -69,52 +63,31 @@ class LiveTest(unittest.TestCase):
         self.assertEqual(sheets["dvha"][0]["F_dental"], "PREV $0")
         self.assertFalse(any(map(xray_edit, kept + dropped)))
 
-    def test_a_struck_machine_quote_is_no_citation(self):
-        write(self.data / "machine/eoc_citations.csv", machine(cite("L_xray_imaging", "$0 | $0-$300", quote="wrong"),
-                                                          cite("L_xray_imaging", "$0 | $0-$300", quote="right")),
-              layers.MACHINE_COLUMNS)
-        write_edits(self.data, edit("L_xray_imaging", "$0 | $0-$300", saw="", quote="wrong"))
-        write(self.data / layers.STRUCK, [dict(sheet="main", plan_id="H1-001-0", column="L_xray_imaging", quote="wrong",
-                                               note="")], layers.STRUCK_COLUMNS)
-        _, kept, dropped = self.live()
-        self.assertEqual([(c["quote"], c["layer"]) for c in kept + dropped if c["column"] == "L_xray_imaging"],
-                         [("wrong", layers.EDITS), ("right", layers.XREF)])
-
-    def test_lists_strikes_that_match_no_machine_row(self):
-        strike = dict(sheet="main", plan_id="H1-001-0", column="L_xray_imaging", note="")
-        write(self.data / layers.STRUCK, [dict(strike, quote="machine"), dict(strike, quote="gone")], layers.STRUCK_COLUMNS)
-        self.assertEqual([s["quote"] for s in layers.stale_strikes(self.data)], ["gone"])
-
-    def test_machine_rows_only_cite(self):
-        write_edits(self.data)
-        sheets, kept, dropped = self.live()
-        self.assertEqual(sheets["main"][0]["L_xray_imaging"], "$0 | $0-$300")
-        self.assertEqual([c["quote"] for c in dropped], ["machine"])
-
     def test_lists_citations_from_the_latest_layer_first(self):
-        write(self.data / "generated/citations.csv", [cite("L_xray_imaging", "$0 | $150-$300", quote="code")])
+        write(self.data / layers.PRESENTED, [cite("L_xray_imaging", "$0 | $150-$300", quote="code")])
         write_edits(self.data, edit("L_xray_imaging", "$0 | $150-$300", quote="edit", saw=""))
         _, kept, _ = self.live()
-        self.assertEqual([c["quote"] for c in kept], ["edit", "machine", "code"])
+        self.assertEqual([c["quote"] for c in kept], ["edit", "code"])
 
     def test_drops_a_citation_whose_value_a_later_layer_changed(self):
+        write(self.data / layers.PRESENTED, [cite("L_xray_imaging", "$0 | $150-$300", quote="code")])
         write_edits(self.data, edit("L_xray_imaging", "$45", saw=""))
         sheets, kept, dropped = self.live()
         self.assertEqual(sheets["main"][0]["L_xray_imaging"], "$45")
-        self.assertEqual([c["quote"] for c in dropped], ["machine"])
+        self.assertEqual([c["quote"] for c in dropped], ["code"])
 
     def test_keeps_a_line_citation_whose_line_a_later_layer_kept(self):
-        write(self.data / "generated/citations.csv", [cite("L_xray_imaging", "$0", line="1", quote="code")])
+        write(self.data / layers.PRESENTED, [cite("L_xray_imaging", "$0", line="1", quote="code")])
         write_edits(self.data, edit("L_xray_imaging", "$0 | $150-$300", saw=""))
         _, kept, dropped = self.live()
         self.assertIn("code", [c["quote"] for c in kept])
         self.assertEqual(dropped, [])
 
     def test_drops_a_line_citation_whose_line_a_later_layer_removed(self):
-        write(self.data / "generated/citations.csv", [cite("L_xray_imaging", "$0-$300", line="2", quote="code")])
+        write(self.data / layers.PRESENTED, [cite("L_xray_imaging", "$0-$300", line="2", quote="code")])
         write_edits(self.data, edit("L_xray_imaging", "$45", saw=""))
         _, _, dropped = self.live()
-        self.assertEqual([c["quote"] for c in dropped], ["machine", "code"])
+        self.assertEqual([c["quote"] for c in dropped], ["code"])
 
     def test_rejects_a_row_that_names_no_cell(self):
         for column in ("G_specialists", "plan_name"):
@@ -132,8 +105,8 @@ class LiveTest(unittest.TestCase):
                     self.live()
 
     def test_rejects_code_rows_that_set_a_cell_two_ways(self):
-        write(self.data / "generated/citations.csv", [cite("G_specialist", "$40"), cite("G_specialist", "$45")])
-        with self.assertRaisesRegex(ValueError, "set different values: generated/citations.csv main H1-001-0 G_specialist"):
+        write(self.data / layers.PRESENTED, [cite("G_specialist", "$40"), cite("G_specialist", "$45")])
+        with self.assertRaisesRegex(ValueError, "set different values: generated/presented.csv main H1-001-0 G_specialist"):
             self.live()
 
     def test_a_later_edit_wins(self):
@@ -156,9 +129,12 @@ class LiveTest(unittest.TestCase):
                           "unknown view": None})
 
     def test_rejects_a_layer_without_its_columns(self):
-        write(self.data / "machine/eoc_citations.csv", [cite("G_specialist", "$40")])
-        with self.assertRaisesRegex(ValueError, "machine/eoc_citations.csv has columns"):
-            self.live()
+        for name in layers.LAYERS:
+            with self.subTest(name=name):
+                write(self.data / name, [dict(cite("G_specialist", "$0-$40"), extra="x")],
+                      layers.COLUMNS + ["extra"])
+                with self.assertRaisesRegex(ValueError, f"{name} has columns"):
+                    layers.layer(self.data, name)
 
     def test_reads_a_missing_layer_as_empty(self):
         (self.data / "edits.csv").unlink()
@@ -175,20 +151,17 @@ class CitationsTest(unittest.TestCase):
         return [(c["quote"], c["layer"], c["hidden"]) for c in self.citations(kinds or None) if c["column"] == column]
 
     def test_shows_kept_rows_and_says_why_it_hides_the_others(self):
-        write(self.data / "generated/citations.csv", [cite("L_xray_imaging", "$0", line="1", quote="code"),
+        write(self.data / layers.PRESENTED, [cite("L_xray_imaging", "$0", line="1", quote="code"),
                                                       cite("L_xray_imaging", "$0-$300", line="2", quote="stale")])
-        write(self.data / layers.STRUCK, [dict(sheet="main", plan_id="H1-001-0", column="L_xray_imaging",
-                                               quote="machine", note="")], layers.STRUCK_COLUMNS)
         self.assertEqual(self.hidden("L_xray_imaging"), [
-            ("q", layers.EDITS, ""), ("code", layers.LAYERS[0], ""), ("stale", layers.LAYERS[0], layers.OTHER_VALUE),
-            ("machine", layers.XREF, layers.STRUCK_QUOTE)])
+            ("q", layers.EDITS, ""), ("code", layers.LAYERS[0], ""), ("stale", layers.LAYERS[0], layers.OTHER_VALUE)])
 
     def test_hides_sb_rows_when_another_document_cites_the_cell(self):
         sb = dict(cite("U_naturopath", "●", quote="sb"), url="sb")
-        write(self.data / "generated/citations.csv", [sb, cite("U_naturopath", "●", quote="eoc")])
+        write(self.data / layers.PRESENTED, [sb, cite("U_naturopath", "●", quote="eoc")])
         self.assertEqual(self.hidden("U_naturopath"), [("sb", layers.LAYERS[0], layers.NOT_SB_CITES_CELL),
                                                        ("eoc", layers.LAYERS[0], "")])
-        write(self.data / "generated/citations.csv", [sb])
+        write(self.data / layers.PRESENTED, [sb])
         self.assertEqual(self.hidden("U_naturopath"), [("sb", layers.LAYERS[0], "")])
 
     def test_hides_edits_without_a_known_document(self):
@@ -198,7 +171,7 @@ class CitationsTest(unittest.TestCase):
                                                        ("other", layers.EDITS, layers.UNKNOWN_DOCUMENT)])
 
     def test_rejects_other_rows_that_cite_an_unknown_document(self):
-        write(self.data / "generated/citations.csv", [dict(cite("U_naturopath", "●"), url="elsewhere")])
+        write(self.data / layers.PRESENTED, [dict(cite("U_naturopath", "●"), url="elsewhere")])
         with self.assertRaisesRegex(ValueError, "names a document not in documents_checked.csv"):
             self.citations()
 

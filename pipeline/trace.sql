@@ -70,8 +70,6 @@ CREATE TABLE draft_cell (
 CREATE TABLE layer_row (
   layer    TEXT NOT NULL,
   position INTEGER NOT NULL,
-  step     TEXT,
-  prompt   TEXT,
   sheet    TEXT NOT NULL,
   plan_id  TEXT NOT NULL,
   col      TEXT NOT NULL,
@@ -123,15 +121,6 @@ CREATE TABLE comment (
   quote    TEXT NOT NULL,
   PRIMARY KEY (sheet, plan_id, col),
   FOREIGN KEY (sheet, plan_id, col) REFERENCES draft_cell
-);
-
-CREATE TABLE struck_quote (
-  sheet   TEXT NOT NULL,
-  plan_id TEXT NOT NULL,
-  col     TEXT NOT NULL,
-  quote   TEXT NOT NULL,
-  note    TEXT NOT NULL,
-  PRIMARY KEY (sheet, plan_id, col, quote)
 );
 
 -- facts.IDENTITY names a fact. fact_id alone repeats across an SB and an EOC.

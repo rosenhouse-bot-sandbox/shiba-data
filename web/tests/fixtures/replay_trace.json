@@ -809,28 +809,10 @@
   "status": "none",
   "rows": []
  },
- "struck_quotes": {
-  "status": "none",
-  "rows": []
- },
- "model_citations": {
-  "status": "none",
-  "rows": []
- },
  "layers": {
   "status": "traced",
   "draft": "$325 or 20% | $325",
   "applied": [
-   {
-    "layer": "generated/citations.csv",
-    "value": "$325 or 20% | $325",
-    "rows": []
-   },
-   {
-    "layer": "machine/eoc_citations.csv",
-    "value": "$325 or 20% | $325",
-    "rows": []
-   },
    {
     "layer": "generated/presented.csv",
     "value": "$325 or 20% | $325",
