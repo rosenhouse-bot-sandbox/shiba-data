@@ -47,14 +47,14 @@ def rows(name, data_dir):
         return list(csv.DictReader(f))
 
 
-def sheet(csv_rows, labels, cites, pbp, comments, cms):
+def sheet(csv_rows, labels, cites, changed, comments, cms):
     return {
         "columns": [column(k, v) for k, v in labels.items()],
         "rows": [{
             "plan_id": r["plan_id"],
             "section": r["section"],
-            "cells": {k: cell(r[k], cites.get((r["plan_id"], k), []), pbp.get((r["plan_id"], k)),
-                              comments.get((r["plan_id"], k)), cms.get((r["plan_id"], k)))
+            "cells": {k: cell(r[k], cites.get((r["plan_id"], k), []), comments.get((r["plan_id"], k)),
+                              None if (r["plan_id"], k) in changed else cms.get((r["plan_id"], k)))
                       for k in labels},
         } for r in csv_rows],
     }
@@ -67,11 +67,9 @@ def column(key, label):
     return c
 
 
-def cell(value, cites, pbp, comment, cms):
+def cell(value, cites, comment, cms):
     c = {"value": value, "cites": cites}
-    if pbp is not None:
-        c["pbp"] = pbp
-    elif cms and not cites:
+    if cms and not cites:
         c["cms"] = cms
     if comment:
         c["comment"] = comment
@@ -107,9 +105,9 @@ def site_data(data_dir=DATA, layer_names=layers.LAYERS, ignore=None):
             "page": int(c["pdf_page"]),
             "quote": c["quote"],
         })
-    pbp = {name: {(g["plan_id"], k): v for g, r in zip(generated, live[name]) for k, v in g.items() if r[k] != v}
-           for name, generated in layers.generated(data_dir).items()}
 
+    changed = {name: {(g["plan_id"], k) for g, r in zip(generated, live[name]) for k, v in g.items() if r[k] != v}
+               for name, generated in layers.generated(data_dir).items()}
     plans = rows("generated/plans.csv", data_dir)
     cms = {}
     for r in rows("generated/cms_sources.csv", data_dir):
@@ -143,7 +141,7 @@ def site_data(data_dir=DATA, layer_names=layers.LAYERS, ignore=None):
         "plans": plans,
         "docs": docs,
         "cms_files": {"Landscape": config["landscape_zip"], "PBP": config["pbp_zip"]},
-        **{name: sheet(csv_rows, labels, cites[name], pbp[name], comments[name], cms)
+        **{name: sheet(csv_rows, labels, cites[name], changed[name], comments[name], cms)
            for name, (csv_rows, labels) in sheets.items()},
     }
 

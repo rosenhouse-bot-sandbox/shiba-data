@@ -17,9 +17,6 @@ TERMS = {
     "layoutText": {"title": "Text that keeps the page's columns", "ref": "pipeline/texts.py:main",
                    "text": "pdftotext -layout keeps a benefit table's two columns side by side, "
                            "so a model can tell which cost belongs to which row."},
-    "pbpFields": {"title": "PBP ambulance fields", "ref": "pipeline/main_chart.py:ambulance",
-                  "text": "Line 1 spans the ground and air ambulance copays and coinsurance. "
-                          "Line 2 is the worldwide emergency transportation cost, or \"not covered\"."},
     "prompt": {"title": "The prompt", "ref": "pipeline/fact_prompt.md",
                "text": "One prompt per document and benefit group: the task, the words each field may use, "
                        "and only the pages that mention the group."},

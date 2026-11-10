@@ -14,10 +14,9 @@ export const NODES = {
     table: { name: "links.csv", note: "copied from the volunteers' Links sheet", cols: ["plan_ids", "kind", "url"],
       rows: [["H1036-153-0", "SB", "https://assets.humana.com/is/content/humana/H1036153000SB27pdf"],
         ["H1036-153-0", "EOC", "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf"]] } },
-  pbp: { col: 3, row: 0, kind: "CMS source", source: true, label: "PBP tables",
-    table: { name: "pbp_b10_amb_trans.txt + pbp_b4_emerg_urgent.txt", note: "the plan's ambulance fields",
-      cols: ["bid_id", "pbp_b10a_copay_gas_amt_min", "pbp_b10a_coins_aas_pct_min", "pbp_b4c_bendesc_ehc", "pbp_b4c_copay_amt_wet_min"],
-      rows: [["H1036_153_0", "325.00", "20", "111", "325.00"]] } },
+  pbp: { col: 2, row: 5, kind: "CMS source", source: true, label: "PBP tables",
+    table: { name: "pbp_Section_D.txt", note: "the plan's deductible fields, which become facts the rules read; the ambulance rule reads none",
+      cols: ["bid_id", "pbp_d_inn_deduct_yn"], rows: [["H1036_153_0", "2"]] } },
   plans: { col: 0, row: 1, kind: "table", label: "plans.csv",
     table: { name: "generated/plans.csv", note: "39 rows", cols: ["plan_id", "plan_name", "plan_type", "organization", "premium", "moop_in_network"],
       rows: [["H1036-153-0", "Humana Total Complete (HMO)", "HMO", "Humana", "$0", "$5,150"]] } },
@@ -36,8 +35,8 @@ export const NODES = {
         " Air                                             20% of the cost",
         " Ground                                          $325 copay per date of service",
         " TRANSPORTATION                                  Not Covered"] } },
-  draft: { col: 3, row: 4, kind: "table", label: "main_chart.csv",
-    table: { name: "generated/main_chart.csv", note: "draft values, selected columns", cols: ["plan_id", "plan_name", "AB_ambulance"],
+  draft: { col: 2, row: 8, kind: "table", label: "main_chart.csv",
+    table: { name: "generated/main_chart.csv", note: "every rule's value, selected columns", cols: ["plan_id", "plan_name", "AB_ambulance"],
       rows: [["H1036-153-0", "Humana Total Complete (HMO)", "$325 or 20% | $325"]] } },
   answers: { col: 0, row: 5, kind: "model answers", source: true, label: "answers/*.json",
     text: { name: "answers/e920fcee050a431f.json", note: "Claude Opus, high effort · 3,479 in / 954 out tokens",
@@ -92,10 +91,6 @@ export const STEPS = [
   { id: "extract-text", record: "documents", from: "checked", to: "text", label: "Extract page text",
     paras: [["Code turns each page into ", ["layoutText", "text that keeps the page's columns"], ". The PDFs and texts are stored in R2, named by hash, so every later run reads the same bytes."]],
     example: { highlight: [[0], [3, 4, 5]], before: "PDF ce13e925…", after: "text of page 9", paras: [] } },
-  { id: "draft", record: "draft", from: "pbp", to: "draft", label: "Draft from CMS",
-    paras: [["Code reads the plan's CMS fields and writes a draft value. A draft value has no citation, so a volunteer can't check it."]],
-    example: { highlight: [[0], [0]], before: "325.00, 20, 111, 325.00", after: "$325 or 20% | $325",
-      paras: [["Here code reads the ", ["pbpFields", "PBP ambulance fields"], ". The draft matches the EOC."]] } },
   { id: "read-facts", record: "answers", from: "text", to: "answers", label: "Claude reads facts",
     paras: [["The pipeline sends Claude Opus ", ["prompt", "one prompt"], " per document and benefit group. Claude answers with facts, each with its quotes and page."],
       ["The answer is ", ["hash", "saved under a hash of the model, effort and prompt"], ", so a rerun calls no model."]],
@@ -109,6 +104,10 @@ export const STEPS = [
     paras: [["Each column has a rule, written in code from the domain expert's instructions. It takes facts from the ", ["bestSource", "best source"], " and cites their quotes."]],
     example: { highlight: [[0, 1, 2, 3], [0, 1, 2]], before: "ground $325, air 20%, abroad $325", after: "$325 or 20% | $325",
       paras: [["In the ", ["rule", "Ambulance rule"], ", line 1 takes in-network, Medicare-covered ground and air trips from the EOC. Line 2 takes trips abroad. Each line cites the quotes of the facts it used, so this cell gets four citations from EOC page 46."]] } },
+  { id: "draft", record: "draft", from: "facts", to: "draft", label: "Draft sheet",
+    paras: [["The column rules also write every value to a draft sheet. A line that only CMS data backs has no citation, so a volunteer can't check it."]],
+    example: { highlight: [[0, 1, 2, 3], [0]], before: "ground $325, air 20%, abroad $325", after: "$325 or 20% | $325",
+      paras: [["Every line here cites the EOC."]] } },
   { id: "added-facts", record: "added_facts", from: "added", to: "presented", label: "Added facts", pillAt: 0.15,
     paras: [[["added", "Added facts"], " fill gaps where the documents' extracted facts fall short."]],
     example: { highlight: [[], []], before: "no added facts for this plan", after: "nothing changes",
@@ -134,7 +133,7 @@ export function chain(trace) {
 }
 
 // Edges with no step of their own.
-export const LINKS = [["plans", "documents"]];
+export const LINKS = [["plans", "documents"], ["pbp", "draft"], ["added", "draft"]];
 
 export const NODE_W = 128;
 export const NODE_H = 54;
@@ -147,7 +146,7 @@ export function nodeBox(id) {
   return { x: MARGIN + n.col * COL_STEP, y: MARGIN + n.row * ROW_STEP, w: NODE_W, h: NODE_H };
 }
 
-export const MAP_W = MARGIN * 2 + 3 * COL_STEP + NODE_W;
+export const MAP_W = MARGIN * 2 + Math.max(...Object.values(NODES).map((n) => n.col)) * COL_STEP + NODE_W;
 export const MAP_H = MARGIN * 2 + Math.max(...Object.values(NODES).map((n) => n.row)) * ROW_STEP + NODE_H;
 
 // A vertical cubic curve from the bottom middle of one node to the top middle of another.
@@ -197,8 +196,6 @@ function quotes(rows, trace) {
 const layer = (trace, name) => trace.layers.applied.find((l) => l.layer === name);
 const live = (t) => `live ${shownValue(t.layers.live.value)}`;
 
-const SHOWN_FIELDS = 6;
-
 // What each step took in and gave out for a cell, read from its trace.
 const STRIPS = {
   "list-plans": (t) => [`${t.plan.row.plan_id} in the Landscape file`, `plans.csv: ${t.plan.row.plan_name}`],
@@ -214,13 +211,7 @@ const STRIPS = {
   },
   "column-rules": (t) => [`${plural(t.rule.lines.reduce((n, l) => n + l.facts.length, 0), "fact")} used, ${t.rule.set_aside.length} set aside`,
     t.rule.held ? `held: ${t.rule.held}` : t.rule.lines.map((l) => `line ${l.line} ${shownValue(l.value)}`).join("; ")],
-  "draft": (t) => {
-    // A file's row count and a blank field say little, so the strip leaves them to the raw record.
-    const fields = t.draft.cms_fields?.status === "traced"
-      ? t.draft.cms_fields.rows.filter((f) => f.field !== "(rows)" && f.value !== "").map((f) => `${f.field} = ${f.value}`) : [];
-    const more = fields.length > SHOWN_FIELDS ? ` and ${plural(fields.length - SHOWN_FIELDS, "more field")}` : "";
-    return [fields.length ? fields.slice(0, SHOWN_FIELDS).join(", ") + more : "the plan's CMS fields", shownValue(t.draft.value)];
-  },
+  "draft": (t) => ["the column rule", shownValue(t.draft.value)],
   "stack-draft": (t) => [`draft ${shownValue(t.layers.draft)}`,
     t.layers.live.value === t.layers.draft ? live(t) : `${live(t)}, set by ${t.layers.live.set_by}`],
   "stack-presented": (t) => {

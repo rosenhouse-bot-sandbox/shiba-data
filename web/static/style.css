@@ -88,7 +88,6 @@ td.selected { outline: 3px solid var(--ink); outline-offset: -3px; }
 #source-note .comment { background: var(--comment); padding: 4px 6px; }
 #source-note .comment.caveat { background: var(--caveat); }
 #source-note .comment.added { background: var(--added); }
-.pbp { color: var(--muted); }
 .warn { color: var(--warn); }
 #page-area { flex: 1; overflow: auto; position: relative; padding: 12px; background: #e6e8ec; }
 .page { position: relative; margin: 0 auto 12px; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3); background: #fff; }

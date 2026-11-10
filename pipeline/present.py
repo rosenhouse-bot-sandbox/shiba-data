@@ -6,7 +6,7 @@ import collections, contextvars, csv, itertools, json, os, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-import facts, layers, steps, years
+import facts, fields, layers, steps, years
 
 RANK = {s: i for i, s in enumerate(facts.SOURCES_BEST_FIRST)}
 OFFICES = ("office.pcp", "office.specialist", "freestanding")
@@ -996,15 +996,34 @@ def presents(cited):
     return any(f["source"] in facts.DOCUMENTS for f in cited)
 
 
+def plans(data):
+    return layers.rows(data / "generated" / "plans.csv")
+
+
 def lines(data, column, document=None, sheet="main"):
-    """{plan_id: [(value, cited facts), ...]} for each plan on the sheet. See plan_facts for document."""
-    organization = {r["plan_id"]: r["organization"] for r in layers.rows(data / "generated" / "plans.csv")}
+    """{plan_id: [(value, cited facts), ...]} for each plan. See plan_facts for document."""
     found = plan_facts(data, document)
-    return {r["plan_id"]: SHEETS[sheet][0][column](organization[r["plan_id"]], found[r["plan_id"]])
-            for r in layers.generated(data)[sheet]}
+    return {p["plan_id"]: SHEETS[sheet][0][column](p["organization"], found[p["plan_id"]]) for p in plans(data)}
 
 
-# Each version names the cells that keep their other layers' value, because the facts miss part of them.
+def shown(got):
+    """A cell's value: its lines, without trailing blank ones."""
+    values = [value for value, _ in got]
+    while values and not values[-1]:
+        values.pop()
+    return " | ".join(values)
+
+
+def sheet_rows(data, sheet, version=None):
+    """A row per plan, with each column the rule's lines. A held cell is blank."""
+    held_cells = held(data, version)
+    columns = {column: lines(data, column, sheet=sheet) for column in fields.labels(sheet)}
+    return [{"section": p["section"], "plan_id": p["plan_id"], "plan_name": p["plan_name"]}
+            | {column: "" if cell(sheet, column, p["plan_id"]) in held_cells else shown(got[p["plan_id"]])
+               for column, got in columns.items()} for p in plans(data)]
+
+
+# Each version names the cells it holds, because the facts miss part of them. A held cell is blank and cites nothing.
 HELD_1 = {
     ("K_tests_labs", "H2923-009-0"): "the facts give a 50% lab price but no 0%",
     ("K_tests_labs", "H5439-010-0"): "the rule leaves out the SB's $0 tests and the $50 genetic test",
@@ -1099,24 +1118,22 @@ def held(data, version=None):
     version = version or steps.versions(data, {"present": VERSIONS}, candidate)["present"]
     return VERSIONS[version] | {cell(sheet, column, r["plan_id"]): f"present {version} does not present this column"
                                 for (sheet, column), since in SINCE.items() if version < since
-                                for r in layers.generated(data)[sheet]}
+                                for r in plans(data)}
 
 
 def layer_rows(data, version=None):
     """Writes one row per line and cited document quote. A blank line with no cited fact writes no row, so the line keeps
     its other layers' value.
-    Rows for a cell that the generated sheet gives one line name no line."""
+    Rows for a one-line cell name no line."""
     url = {d["sha256"]: d["url"] for d in layers.rows(data / "generated" / "documents_checked.csv") if d["sha256"]}
     out, held_cells = {}, held(data, version)
     for sheet, (rules, _) in SHEETS.items():
-        generated = {r["plan_id"]: r for r in layers.generated(data)[sheet]}
         for column in rules:
             for plan_id, got in lines(data, column, sheet=sheet).items():
                 if cell(sheet, column, plan_id) in held_cells:
                     continue
-                one_line = " | " not in generated[plan_id][column]
-                if one_line and any(value for value, _ in got[1:]):
-                    raise ValueError(f"{plan_id} {column} has one line, not {[value for value, _ in got]}")
+                value = shown(got)
+                got, one_line = got[:value.count(" | ") + 1], " | " not in value
                 for n, (value, cited) in enumerate(got, 1):
                     row = dict(sheet=sheet, plan_id=plan_id, column=column, line="" if one_line else str(n), value=value)
                     cites = [(url[f["doc_sha"]], f["page"], q) for f in cited if presents([f])
@@ -1128,6 +1145,12 @@ def layer_rows(data, version=None):
 
 
 def write(data, version=None):
+    """Writes the generated sheets and the presented layer."""
+    for sheet, name in layers.SHEETS.items():
+        with open(data / "generated" / name, "w", newline="") as f:
+            out = csv.DictWriter(f, ["section", "plan_id", "plan_name"] + list(fields.labels(sheet)))
+            out.writeheader()
+            out.writerows(sheet_rows(data, sheet, version))
     with open(data / layers.PRESENTED, "w", newline="") as f:
         out = csv.DictWriter(f, layers.COLUMNS, lineterminator="\n")
         out.writeheader()

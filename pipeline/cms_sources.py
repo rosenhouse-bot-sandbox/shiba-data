@@ -13,7 +13,7 @@ import universe  # noqa: E402
 LANDSCAPE = "Landscape"
 PART_D = "Part D Coverage Indicator"
 
-# The PBP file and fields that main_chart.py reads for each column.
+# The PBP file and fields behind each column.
 PBP_FIELDS = {
     "K_tests_labs": ("pbp_b8_clin_diag_ther", (
         "pbp_b8a_copay_min_dmc_amt", "pbp_b8a_copay_max_dmc_amt", "pbp_b8a_coins_pct_dmc", "pbp_b8a_coins_pct_dmc_max",

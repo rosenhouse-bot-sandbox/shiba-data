@@ -188,20 +188,6 @@ CREATE TABLE rule_fact (
 );
 CREATE INDEX rule_fact_cell ON rule_fact (sheet, plan_id, col);
 
--- Each plans.csv or PBP field a cell's draft read (main_chart.py, dvha.py).
-CREATE TABLE cms_read (
-  sheet    TEXT NOT NULL,
-  plan_id  TEXT NOT NULL REFERENCES plan,
-  col      TEXT NOT NULL,
-  position INTEGER NOT NULL,
-  file     TEXT NOT NULL,
-  field    TEXT NOT NULL,
-  value    TEXT NOT NULL,
-  title    TEXT NOT NULL,
-  meaning  TEXT NOT NULL,
-  PRIMARY KEY (sheet, plan_id, col, position)
-);
-
 -- Each Landscape field a plans.csv column read (universe.py).
 CREATE TABLE landscape_read (
   plan_id    TEXT NOT NULL REFERENCES plan,

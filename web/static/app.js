@@ -393,11 +393,6 @@ function citeNote(href, header, cell) {
       c.line ? ` (line ${c.line})` : "", `: “${c.quote}”`));
   });
   if (cell.comment) note.append(commentSource(href, cell, note));
-  if (cell.pbp != null) {
-    note.append(el("p", { class: "pbp" }, cell.pbp
-      ? `CMS plan data shows ${cell.pbp === "●" ? "this benefit is covered" : oneLine(cell.pbp)}. The plan document overrides it.`
-      : "CMS plan data leaves this blank. The plan document fills it in."));
-  }
   return note;
 }
 
