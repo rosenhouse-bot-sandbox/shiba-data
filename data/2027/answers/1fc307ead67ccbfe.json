@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "8865a3a5b2f4fcad.md",
+ "reply": "```json\n[{\"plan_id\": \"H6815-038-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$25\", \"unit\": \"per service\", \"limit\": \"\", \"page\": 7, \"quotes\": [\"$25 copay for each Medicare-covered service.\"], \"note\": \"\"},\n{\"plan_id\": \"H6815-038-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 8, \"quotes\": [\"Cleanings In-Network $0 copay\", \"Dental X-Rays In-Network $0 copay\", \"Oral exams In-Network $0 copay\", \"Fluoride Treatment In-Network $0 copay\"], \"note\": \"\"},\n{\"plan_id\": \"H6815-038-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"25%\", \"unit\": \"\", \"limit\": \"\", \"page\": 8, \"quotes\": [\"Cleanings In-Network $0 copay Out-of-Network 25% coinsurance\", \"Dental X-Rays In-Network $0 copay Out-of-Network 25% coinsurance\", \"Oral exams In-Network $0 copay Out-of-Network 25% coinsurance\", \"Fluoride Treatment In-Network $0 copay Out-of-Network 25% coinsurance\"], \"note\": \"\"},\n{\"plan_id\": \"H6815-038-0\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 9, \"quotes\": [\"Adjunctive General Services In-Network $0 copay\"], \"note\": \"Only adjunctive general services are listed under Routine Comprehensive Services.\"},\n{\"plan_id\": \"H6815-038-0\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"25%\", \"unit\": \"\", \"limit\": \"\", \"page\": 9, \"quotes\": [\"Adjunctive General Services In-Network $0 copay Out-of-Network 25% coinsurance\"], \"note\": \"Only adjunctive general services are listed under Routine Comprehensive Services.\"}]\n```",
+ "usage": {
+  "input_tokens": 4574,
+  "output_tokens": 2791,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-90.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 108 is the Advantage Plus optional supplemental dental section and applies to all plans in the document. Its preventive and diagnostic row (exams, X-rays, cleanings) shows $0 at network dentists, up to the $1,500 annual dental benefit maximum.\"}]\n```",
+ "usage": {
+  "input_tokens": 2359,
+  "output_tokens": 621,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

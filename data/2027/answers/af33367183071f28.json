@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-4ec81cd0d2695486.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"The page 57 quote sits beside the preventive dental rows only; the page lists no comprehensive services. The one mention of comprehensive is the $1,000 maximum line, and the page states amounts (no cost share, $1,000 max) rather than plain 'covered'. Too much doubt to confirm.\"}]\n```",
+ "usage": {
+  "input_tokens": 2201,
+  "output_tokens": 700,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

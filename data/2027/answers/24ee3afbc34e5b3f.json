@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-76.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 12 Adjunctive General Services row, a comprehensive dental category, shows a $0 copay in network for H5439-011-0. Out-of-network is 50% coinsurance. The page calls these routine comprehensive dental services, which makes them supplemental.\"}]\n```",
+ "usage": {
+  "input_tokens": 1981,
+  "output_tokens": 797,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

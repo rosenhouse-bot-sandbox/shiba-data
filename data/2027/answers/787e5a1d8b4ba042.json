@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-be9deec855112c1d.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 61 Dental services row: Medicare-covered dental is a $40 copay. The row names no network, so it is in-network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 62 Dental & Alternative Therapy Allowance is a $1,500 yearly allowance for supplemental dental and other services. It is a pool named on the page and the row names no network.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 110 Mandatory Supplemental Dental chart: the Preventive section says 'What you pay: 0% coinsurance'.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 112 Mandatory Supplemental Dental chart: the Comprehensive section says 'What you pay: 50% coinsurance'.\"}]\n```",
+ "usage": {
+  "input_tokens": 5082,
+  "output_tokens": 505,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

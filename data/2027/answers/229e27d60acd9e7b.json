@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-12.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 57 supplemental dental row: Maximum $1,000 for preventive and comprehensive services combined. The row names no network, so it is in-network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2204,
+  "output_tokens": 273,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

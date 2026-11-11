@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-aca9d3510177adcd.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 71, Mandatory Supplemental Dental, Preventive Services, Exams: 'Frequency/Limits – 2 procedure codes per calendar year'. The row shows both network columns, and the page says out-of-network care follows the in-network limits.\"}]\n```",
+ "usage": {
+  "input_tokens": 2316,
+  "output_tokens": 464,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-a4bc20077fb4a2cf.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 43: the Basic (Class II) and Major (Class III) comprehensive dental rows both show 50% coinsurance in and out of network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 42: the Medicare-covered dental services row shows a $45 in-network copay per provider per day.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 43: the Preventive dental services row shows 50% coinsurance out of network.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 43: the Preventive dental services row shows a $0 in-network copay per provider per day.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 42: the Medicare-covered dental services row shows 50% coinsurance out of network.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 43: preventive, basic and major supplemental dental share a combined $1,000 benefit limit every calendar year, with no network split.\"}]\n```",
+ "usage": {
+  "input_tokens": 4319,
+  "output_tokens": 650,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "d649ac2bebc0321d.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-028-3\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$115\", \"unit\": \"\", \"limit\": \"\", \"page\": 68, \"quotes\": [\"Your cost-share for emergency services worldwide is: $115 copay\"], \"note\": \"\"},\n{\"plan_id\": \"H2923-028-3\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$115\", \"unit\": \"\", \"limit\": \"\", \"condition\": \"urgently needed services\", \"page\": 104, \"quotes\": [\"Your cost-share for urgently needed services worldwide is: $115 copay\"], \"note\": \"\"},\n{\"plan_id\": \"H2923-028-3\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"max\", \"amount\": \"$25,000\", \"unit\": \"\", \"limit\": \"per lifetime\", \"page\": 68, \"quotes\": [\"ambulance services up to $25,000 per lifetime\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 8707,
+  "output_tokens": 1876,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

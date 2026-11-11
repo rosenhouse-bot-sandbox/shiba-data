@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-7a95606e4d0c87d0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 80 urgently needed services row: In-Network $50 copayment at an Urgent Care Center. The condition correctly names urgently needed services.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 80 urgently needed services row: Out-of-Network $50 copayment at an Urgent Care Center.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 54 emergency care row: Worldwide Coverage $130 copayment in the Emergency Room. This is care outside the U.S., so network any.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 55: Provider and Professional Services $0 copayment in the Emergency Room. It falls under the In-Network heading that ends page 54, before the Out-of-Network heading.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 55: Out-of-Network Provider and Professional Services $0 copayment in the Emergency Room.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 54 emergency care row: In-Network Emergency Services $130 copayment in the Emergency Room.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 80 urgently needed services row: Worldwide Coverage $50 copayment. The page covers urgently needed services world-wide, so outside_us with network any.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 54 emergency care row: Out-of-Network Emergency Services $130 copayment in the Emergency Room.\"}]\n```",
+ "usage": {
+  "input_tokens": 5648,
+  "output_tokens": 1287,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

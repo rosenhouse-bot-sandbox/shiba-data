@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-72.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 50 supplemental dental section: a $1,000 plan benefit allowance every year for all in-network and out-of-network covered Comprehensive Dental services.\"}]\n```",
+ "usage": {
+  "input_tokens": 2067,
+  "output_tokens": 211,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

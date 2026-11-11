@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-124.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 60, Emergency care row for this plan: 'You are covered for up to $50,000 every year for emergency or urgently needed services outside the United States.' This matches a $50,000 per-year max for care outside the U.S., network any. Medicare does not normally cover care outside the U.S., so supplemental fits.\"}]\n```",
+ "usage": {
+  "input_tokens": 2079,
+  "output_tokens": 282,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

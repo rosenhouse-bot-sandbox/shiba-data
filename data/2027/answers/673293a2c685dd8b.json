@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "50159487a52ccddf.md",
+ "reply": "```json\n[{\"plan_id\": \"H7006-018-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$300\", \"page\": 15, \"quotes\": [\"Worldwide emergency coverage $300 copay\"]},\n {\"plan_id\": \"H7006-021-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$120\", \"page\": 15, \"quotes\": [\"Worldwide emergency coverage\", \"$120 copay\"]}]\n```",
+ "usage": {
+  "input_tokens": 1963,
+  "output_tokens": 684,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

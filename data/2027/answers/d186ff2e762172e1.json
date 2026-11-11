@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-82.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 63, Comprehensive Dental Care, Adjunctive general services row: in network, $0 copay for each adjunctive general service. The page ties these to routine dental providers, so supplemental fits.\"}]\n```",
+ "usage": {
+  "input_tokens": 1975,
+  "output_tokens": 608,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

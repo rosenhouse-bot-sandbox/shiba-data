@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-29166053e638f7e6.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 8 Worldwide Coverage: if you are admitted to the same hospital within 24 hours for the same condition, you pay $0 for the emergency care.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 8 Worldwide Coverage: Emergency room - Hospital is a $115 copay outside the U.S.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"Page 8 Worldwide Coverage does list Urgent care center at a $40 copay, but the condition should be the page's name for the care, 'urgently needed service', not the setting name 'Urgent care center'.\"}]\n```",
+ "usage": {
+  "input_tokens": 2629,
+  "output_tokens": 679,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

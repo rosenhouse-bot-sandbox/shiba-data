@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-22.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 104 routine dental section says the plan offers both in-network and out-of-network dental coverage and all covered services have a $0 copayment. Out-of-network dentists may bill more, but the plan copay is $0.\"}]\n```",
+ "usage": {
+  "input_tokens": 2438,
+  "output_tokens": 302,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "e306f120395b6260.md",
+ "reply": "```json\n[{\"plan_id\": \"H2406-073-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"max\", \"amount\": \"$4,000\", \"limit\": \"per year\", \"page\": 95, \"quotes\": [\"Annual dental maximum: $4,000\"], \"note\": \"Network set to any because page 96 says out-of-network benefits are subject to in-network benefit maximums.\"}]\n```",
+ "usage": {
+  "input_tokens": 7812,
+  "output_tokens": 885,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

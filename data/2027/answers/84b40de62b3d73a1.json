@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-4.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5 routine dental row: all routine dental services are covered up to a combined $1,250 benefit maximum every calendar year. The amount sits in the in-network column.\"}]\n```",
+ "usage": {
+  "input_tokens": 2167,
+  "output_tokens": 386,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

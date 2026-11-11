@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-46.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 102 exclusions chart: the row 'Routine dental care, such as cleanings, exams or x-rays' reads 'Not covered under any condition'. That supports supplemental dental as not covered.\"}]\n```",
+ "usage": {
+  "input_tokens": 2127,
+  "output_tokens": 660,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

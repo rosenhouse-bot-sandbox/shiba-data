@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-74.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 51 in-network rows show a $0 copay for cleanings (2 per year), fluoride (1 per year) and dental x-rays. These are routine preventive dental services, so supplemental. The 50% coinsurance applies only out of network.\"}]\n```",
+ "usage": {
+  "input_tokens": 1912,
+  "output_tokens": 510,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

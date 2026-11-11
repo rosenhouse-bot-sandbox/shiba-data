@@ -95,8 +95,8 @@ class TraceTest(unittest.TestCase):
         self.assertEqual({(c["line"], c["pdf_page"]) for c in live["citations"]}, {(1, 46), (2, 46)})
         self.assertTrue(all(c["layer"] == layers.PRESENTED for c in live["citations"]))
 
-    def test_names_the_edit_that_sets_a_value(self):
-        self.assertEqual(self.cell("dvha", "H2923-025-0", "F_dental")["layers"]["live"]["set_by"], layers.EDITS)
+    def test_names_no_layer_when_none_sets_the_value(self):
+        self.assertIsNone(self.cell("main", "H2406-042-0", "D_premium_full_extra_help")["layers"]["live"]["set_by"])
 
     def test_lists_the_value_after_each_layer(self):
         applied = self.cell(*AMBULANCE)["layers"]["applied"]
@@ -269,7 +269,7 @@ EOC = "64e05773e847b56e0eeb5425979d54996c5f1975307c9ae186f5af4fecafc44c"
 STATED = dict(plan_id="H1036-153-0", benefit="ambulance", amount="$325")
 CHECKED = dict(fact_id="dcc6a0f01e6c0594", source="EOC", doc_sha=EOC, page="46")
 PACKAGES_EOC = "0050f865534f41bbbc1c785cb45951a27165b9d114a54a0680f353a81aeed66d"
-DENTAL_PACKAGE = dict(fact_id="d7df1ed404d93051", source="EOC", doc_sha=PACKAGES_EOC, page="15")
+DENTAL_PACKAGE = dict(fact_id="df757c3def1f6826", source="EOC", doc_sha=PACKAGES_EOC, page="15")
 
 
 class FactChecksTest(RunTest):

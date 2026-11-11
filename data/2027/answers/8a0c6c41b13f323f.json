@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-4a0ee31be3437c35.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 8 Dental Services: the Medicare-covered dental row shows a $15 copay. No setting or network is named, so it is in-network, any setting.\"}]\n```",
+ "usage": {
+  "input_tokens": 2479,
+  "output_tokens": 117,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

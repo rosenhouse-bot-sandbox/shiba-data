@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-99.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 54 Emergency care row: under Out-of-Network, 'Worldwide Coverage' shows a $115 copayment for the Emergency Room. The text says emergency care is covered world-wide, which fits outside_us with network any and a supplemental benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2596,
+  "output_tokens": 640,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

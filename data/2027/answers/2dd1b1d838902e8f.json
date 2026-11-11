@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-034e045a83e5b49d.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 4 lists worldwide emergency care at $130 in both columns. But care outside the U.S. is a supplemental Medicare Advantage benefit, not Medicare-covered, so covered_by 'medicare' is doubtful.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 4 Emergency room visit row: $130 copay in network.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 4 Urgent care visit row under 'Urgently needed services': $50 copay in network.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 4 Emergency room visit row: $130 copay out of network.\"},\n{\"id\": 4, \"ok\": false, \"reason\": \"Page 4 lists the worldwide urgent care visit at $130 in both columns. But care outside the U.S. is a supplemental benefit, so covered_by 'medicare' is doubtful.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 4 Urgent care visit row under 'Urgently needed services': $50 copay out of network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2518,
+  "output_tokens": 777,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

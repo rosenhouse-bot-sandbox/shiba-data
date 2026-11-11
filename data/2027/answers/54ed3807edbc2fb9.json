@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-17.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 36 comprehensive dental (non-Medicare covered) row: annual allowance of $1,500 for covered comprehensive services through the Aetna Dental PPO Network. Out-of-network services are not covered.\"}]\n```",
+ "usage": {
+  "input_tokens": 2251,
+  "output_tokens": 250,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

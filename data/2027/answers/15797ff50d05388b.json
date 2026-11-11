@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "8865a3a5b2f4fcad.md",
+ "reply": "```json\n[{\"plan_id\": \"H6815-038-0\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$115\", \"page\": 5, \"quotes\": [\"Emergency Care $115 copay\"], \"note\": \"Copay is waived if you are admitted to a hospital within 24 hours.\"},\n{\"plan_id\": \"H6815-038-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$115\", \"page\": 5, \"quotes\": [\"Worldwide Emergency $115 copay\"], \"note\": \"The copay is not waived if admitted to the hospital for worldwide emergency services.\"},\n{\"plan_id\": \"H6815-038-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"max\", \"amount\": \"$50,000\", \"page\": 5, \"quotes\": [\"Worldwide emergency and worldwide urgently needed services are subject to a $50,000 maximum plan coverage.\"], \"note\": \"No time period for the maximum is stated.\"},\n{\"plan_id\": \"H6815-038-0\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$40\", \"condition\": \"urgently needed services\", \"page\": 6, \"quotes\": [\"Urgently Needed Services $40 copay\"], \"note\": \"Copay is waived if you are admitted to a hospital within 24 hours.\"},\n{\"plan_id\": \"H6815-038-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$115\", \"condition\": \"urgently needed services\", \"page\": 6, \"quotes\": [\"Worldwide Urgent Care $115 copay\"], \"note\": \"The copay is not waived if admitted to the hospital for worldwide urgently needed services.\"}]\n```",
+ "usage": {
+  "input_tokens": 2790,
+  "output_tokens": 1443,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

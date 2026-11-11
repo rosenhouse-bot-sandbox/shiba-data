@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-23.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 111 Platinum Dental Rider section: 'Annual maximum: $1,500' for the optional dental package. The row names no network, so it is read as in-network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2194,
+  "output_tokens": 244,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

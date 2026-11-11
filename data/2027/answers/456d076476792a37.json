@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-da2974c756f3eedc.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5 Emergency Care row: $115 per visit, in network, Medicare-covered emergency care.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 5 Emergency Care row states the plan covers emergency services worldwide as a supplemental benefit. No amount is given there, so covered with network any fits.\"}]\n```",
+ "usage": {
+  "input_tokens": 2149,
+  "output_tokens": 292,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

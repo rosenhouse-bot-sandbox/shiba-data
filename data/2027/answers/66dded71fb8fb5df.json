@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-96.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 71, Mandatory Supplemental Dental, Preventive Services > Exams: 'Frequency/Limits – 2 procedure codes per calendar year'. The line sits above both the in-network and out-of-network columns, and the page says out-of-network benefits follow in-network limits, so network 'any' holds. The limit is printed under Exams, which falls within dental.preventive.\"}]\n```",
+ "usage": {
+  "input_tokens": 2316,
+  "output_tokens": 765,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

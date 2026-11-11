@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-51.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 34 does state a combined $1,500 benefit limit every calendar year for preventive, basic and major dental. But that sentence names no network, so under the chart rule it gives in-network terms, and nothing on the page says the limit covers out-of-network care too. Network 'any' is not supported.\"}]\n```",
+ "usage": {
+  "input_tokens": 2403,
+  "output_tokens": 472,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

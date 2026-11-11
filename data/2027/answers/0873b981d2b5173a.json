@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-95.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 110, under Mandatory Supplemental Dental Benefits: Devoted Health will pay as much as $2,000 per year for covered dental services. No network is named, so it reads as in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2284,
+  "output_tokens": 225,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

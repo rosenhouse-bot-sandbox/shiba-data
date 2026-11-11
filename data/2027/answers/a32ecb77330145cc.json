@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "aca9d3510177adcd.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-455-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"2\", \"unit\": \"procedure codes\", \"limit\": \"per calendar year\", \"page\": 71, \"quotes\": [\"Frequency/Limits – 2 procedure codes per calendar year\"], \"note\": \"The limit is listed under Exams. It sits above the column that shows both in-network and out-of-network costs, so I applied it to both networks.\"}]\n```",
+ "usage": {
+  "input_tokens": 11693,
+  "output_tokens": 784,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

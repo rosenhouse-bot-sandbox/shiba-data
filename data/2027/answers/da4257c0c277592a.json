@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-119.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 54 Emergency care row: under Worldwide Coverage, a $130 copayment for the Emergency Room. Care outside the U.S. is network any, and worldwide emergency care is a supplemental benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2581,
+  "output_tokens": 358,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
