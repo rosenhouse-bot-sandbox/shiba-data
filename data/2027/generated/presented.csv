@@ -1,9 +1,15 @@
 sheet,plan_id,column,line,value,url,pdf_page,quote
 dvha,H1036-153-0,C_premium,,$0,https://assets.humana.com/is/content/humana/H1036153000SB27pdf,4,Monthly plan premium                   $0
-dvha,H1036-153-0,F_dental,,"PREV $0; max $1,500/year PREV+COMP",https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,74,"Annual Maximum: $1,500"
-dvha,H1036-153-0,F_dental,,"PREV $0; max $1,500/year PREV+COMP",https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,74,"Bitewing x-rays – D0270, D0272, D0273, D0274 0%"
-dvha,H1036-153-0,F_dental,,"PREV $0; max $1,500/year PREV+COMP",https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,74,Periodic oral exam – D0120 0%
-dvha,H1036-153-0,F_dental,,"PREV $0; max $1,500/year PREV+COMP",https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,74,Prophylaxis (cleaning) – D1110 0%
+dvha,H1036-153-0,F_dental,,"PREV $0; COMP $0; max $1,500/year PREV+COMP",https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,74,"Annual Maximum: $1,500"
+dvha,H1036-153-0,F_dental,,"PREV $0; COMP $0; max $1,500/year PREV+COMP",https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,74,"Bitewing x-rays – D0270, D0272, D0273, D0274 0%"
+dvha,H1036-153-0,F_dental,,"PREV $0; COMP $0; max $1,500/year PREV+COMP",https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,74,Periodic oral exam – D0120 0%
+dvha,H1036-153-0,F_dental,,"PREV $0; COMP $0; max $1,500/year PREV+COMP",https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,74,Prophylaxis (cleaning) – D1110 0%
+dvha,H1036-153-0,F_dental,,"PREV $0; COMP $0; max $1,500/year PREV+COMP",https://assets.humana.com/is/content/humana/H1036153000SB27pdf,7,$0 copay for amalgam and/or composite filling up
+dvha,H1036-153-0,F_dental,,"PREV $0; COMP $0; max $1,500/year PREV+COMP",https://assets.humana.com/is/content/humana/H1036153000SB27pdf,7,"$0 copay for complete dentures, panoramic film"
+dvha,H1036-153-0,F_dental,,"PREV $0; COMP $0; max $1,500/year PREV+COMP",https://assets.humana.com/is/content/humana/H1036153000SB27pdf,7,$0 copay for comprehensive oral evaluation or
+dvha,H1036-153-0,F_dental,,"PREV $0; COMP $0; max $1,500/year PREV+COMP",https://assets.humana.com/is/content/humana/H1036153000SB27pdf,7,$0 copay for crown recementation up to 1 every 2
+dvha,H1036-153-0,F_dental,,"PREV $0; COMP $0; max $1,500/year PREV+COMP",https://assets.humana.com/is/content/humana/H1036153000SB27pdf,7,"$0 copay for crown, denture repair - additions,"
+dvha,H1036-153-0,F_dental,,"PREV $0; COMP $0; max $1,500/year PREV+COMP",https://assets.humana.com/is/content/humana/H1036153000SB27pdf,7,$0 copay for scaling and root planing (deep
 dvha,H1036-153-0,G_vision,,exam $0/year; eyewear $50/year ($100 at PLUS providers),https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,80,$0 for refraction exam in addition to the Medical Specialist cost-share for the medical exam
 dvha,H1036-153-0,G_vision,,exam $0/year; eyewear $50/year ($100 at PLUS providers),https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,80,"A refraction exam (1 per calendar year), instead of a routine eye exam,"
 dvha,H1036-153-0,G_vision,,exam $0/year; eyewear $50/year ($100 at PLUS providers),https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,80,Any retail amount over $100 toward the purchase of frame and pair
@@ -138,8 +144,7 @@ dvha,H2001-045-0,J_extra_benefits,,Fitness; Transportation; Routine foot care $0
 dvha,H2001-045-0,J_extra_benefits,,Fitness; Transportation; Routine foot care $0 4/year,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,112,"Up to 24 one-way trips, combined in and out-o -network, are covered each year"
 dvha,H2001-045-0,J_extra_benefits,,Fitness; Transportation; Routine foot care $0 4/year,https://www.aarpmedicareplans.com/alphadog/UHOR27LP0418588_000,70,Fitness program $0 copayment
 dvha,H2056-003-0,C_premium,,$0,https://www.aetna.com/medicare/documents/individual/2027/sb/en/Y0001_H2056_003_HR01_SB2027_M.pdf,2,Monthly plan premium $0
-dvha,H2056-003-0,F_dental,,PREV $0,https://www.aetna.com/medicare/documents/individual/2027/sb/en/Y0001_H2056_003_HR01_SB2027_M.pdf,4,$0 copay for preventive services
-dvha,H2056-003-0,F_dental,,PREV $0,https://www.aetna.com/medicare/documents/individual/2027/sb/en/Y0001_H2056_003_HR01_SB2027_M.pdf,4,Dental services (non‑Medicare covered)
+dvha,H2056-003-0,F_dental,,PREV $0,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,74,D0461 testing for cracked tooth $0
 dvha,H2056-003-0,G_vision,,exam $0/year; eyewear $100/year,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,70,$0 copay for each follow‑up diabetic eye
 dvha,H2056-003-0,G_vision,,exam $0/year; eyewear $100/year,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,71,$0 copay for one non‑Medicare covered
 dvha,H2056-003-0,G_vision,,exam $0/year; eyewear $100/year,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,71,refraction: one exam every year
@@ -216,6 +221,7 @@ dvha,H2406-073-0,J_extra_benefits,,Fitness; Routine foot care $45 6/year,https:/
 dvha,H2406-073-0,J_extra_benefits,,Fitness; Routine foot care $45 6/year,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,82,$45 copayment or each routine visit
 dvha,H2406-073-0,J_extra_benefits,,Fitness; Routine foot care $45 6/year,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,82,We cover 6 in and out-o -network routine oot care visits every year.
 dvha,H2923-001-0,C_premium,,$0,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-SB-H2923-001-ENG.pdf,4,Monthly Premium $0
+dvha,H2923-001-0,F_dental,,"PREV $0; COMP 50%; max $1,750/year shared by PREV+COMP, acupuncture, massage, naturopath",https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,111,"Devoted Health will pay as much as $1,750 per year for covered dental services listed below."
 dvha,H2923-001-0,F_dental,,"PREV $0; COMP 50%; max $1,750/year shared by PREV+COMP, acupuncture, massage, naturopath",https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,112,What you pay: 0% coinsurance
 dvha,H2923-001-0,F_dental,,"PREV $0; COMP 50%; max $1,750/year shared by PREV+COMP, acupuncture, massage, naturopath",https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,114,What you pay: 50% coinsurance
 dvha,H2923-001-0,F_dental,,"PREV $0; COMP 50%; max $1,750/year shared by PREV+COMP, acupuncture, massage, naturopath",https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,61,"You have a $1,750 yearly allowance toward Preventive"
@@ -383,7 +389,6 @@ dvha,H3805-048-0,C_premium,,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27
 dvha,H3805-048-0,C_premium,,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,11,Monthly plan premium
 dvha,H3805-048-0,E_optional_packages,,"Platinum Dental Rider $66/mo, max $1,500",https://www.aarpmedicareplans.com/alphadog/AAEX27HM0432520_000,1,"$1,500 per year for covered dental services."
 dvha,H3805-048-0,E_optional_packages,,"Platinum Dental Rider $66/mo, max $1,500",https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,14,The premium amount or the Platinum Dental Rider is $66.
-dvha,H3805-048-0,F_dental,,,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,102,"Routine dental care, such as cleanings, exams"
 dvha,H3805-048-0,F_dental,,,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,14,The premium amount or the Platinum Dental Rider is $66.
 dvha,H3805-048-0,F_dental,,,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,57,20% coinsurance or Medicare-covered dental
 dvha,H3805-048-0,F_dental,,,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,98,"$0 copay or preventive and diagnostic dental care such as exams, routine cleanings, X-rays,"
@@ -633,7 +638,7 @@ dvha,H5439-015-0,C_premium,,$29,https://www.wellcareor.com/content/dam/centene/m
 dvha,H5439-015-0,F_dental,,PREV $0; COMP $0 for adjunctive services,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,63,$0 copay for dental x-rays per visit.
 dvha,H5439-015-0,F_dental,,PREV $0; COMP $0 for adjunctive services,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,63,$0 copay for other diagnostic dental services per visit.
 dvha,H5439-015-0,F_dental,,PREV $0; COMP $0 for adjunctive services,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,63,$0 copay for other preventive dental services per visit.
-dvha,H5439-015-0,F_dental,,PREV $0; COMP $0 for adjunctive services,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H5439_015_2027_OR_SB_PPO_7017569ENG_M.pdf,11,Adjunctive General Services In-Network $0 copay
+dvha,H5439-015-0,F_dental,,PREV $0; COMP $0 for adjunctive services,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,64,$0 copay for each adjunctive general service.
 dvha,H5439-015-0,G_vision,,exam $0/year,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,120,$0 copay for 1 routine eye exam every year.
 dvha,H5439-015-0,G_vision,,exam $0/year,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,120,1 routine eye exam every year. The routine eye exam includes a glaucoma test
 dvha,H5439-015-0,H_hearing,,aids allowance $350 per ear/year; 2 aids/year,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,73,$0 copay for 2 hearing aid(s) every year.
@@ -646,7 +651,7 @@ dvha,H5439-019-0,C_premium,,$76.60,https://www.wellcareor.com/content/dam/centen
 dvha,H5439-019-0,F_dental,,PREV $0; COMP $0 for adjunctive services,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,64,$0 copay for dental x-rays per visit.
 dvha,H5439-019-0,F_dental,,PREV $0; COMP $0 for adjunctive services,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,64,$0 copay for other diagnostic dental services per visit.
 dvha,H5439-019-0,F_dental,,PREV $0; COMP $0 for adjunctive services,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,64,$0 copay for other preventive dental services per visit.
-dvha,H5439-019-0,F_dental,,PREV $0; COMP $0 for adjunctive services,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H5439_019_2027_OR_SB_PPO_7017570ENG_M.pdf,11,Adjunctive General Services In-Network $0 copay
+dvha,H5439-019-0,F_dental,,PREV $0; COMP $0 for adjunctive services,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,65,$0 copay for each adjunctive general service.
 dvha,H5439-019-0,G_vision,,exam $0/year; eyewear $100/year,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,121,$0 copay for 1 routine eye
 dvha,H5439-019-0,G_vision,,exam $0/year; eyewear $100/year,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,121,1 routine eye exam every year. The
 dvha,H5439-019-0,G_vision,,exam $0/year; eyewear $100/year,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,121,maximum benefit of $100 every year
@@ -715,7 +720,7 @@ dvha,H7006-021-0,J_extra_benefits,,Fitness; Meals,https://atriohp.com/media/qyfp
 dvha,H7199-002-0,C_premium,,$28.50,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,13,"For 2027, the monthly plan premium for DEVOTED CHOICE PREMIUM 002 OR (PPO) is $28.50."
 dvha,H7199-002-0,F_dental,,"COMP 50%; max $2,250/year shared by PREV+COMP, acupuncture, massage, naturopath",https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,62,"You can be reimbursed up to $2,250 per year for covered dental"
 dvha,H7199-002-0,F_dental,,"COMP 50%; max $2,250/year shared by PREV+COMP, acupuncture, massage, naturopath",https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,62,"You have a $2,250 yearly allowance toward Preventive"
-dvha,H7199-002-0,F_dental,,"COMP 50%; max $2,250/year shared by PREV+COMP, acupuncture, massage, naturopath",https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-SB-H7199-002-ENG.pdf,8,"For all covered comprehensive dental services, Therapeutic Massage, Routine Acupuncture, and/or Naturopath services, you will receive 50% reimbursement up to the yearly allowance."
+dvha,H7199-002-0,F_dental,,"COMP 50%; max $2,250/year shared by PREV+COMP, acupuncture, massage, naturopath",https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,63,"You will be reimbursed 50% for your out-of-pocket costs, up to the $2,250 annual allowance for comprehensive dental service categories, such as Dentures, Crowns, Root Canals, Bridges, and more."
 dvha,H7199-002-0,G_vision,,exam $0/year; eyewear $200/year,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,125,Routine eye exam $0 copay
 dvha,H7199-002-0,G_vision,,exam $0/year; eyewear $200/year,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,125,"You are covered for 1 routine vision exam (including refraction, if needed)"
 dvha,H7199-002-0,G_vision,,exam $0/year; eyewear $200/year,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,126,Your plan pays up to $200 per year
@@ -1224,8 +1229,7 @@ main,H2056-003-0,P_vision,,●,https://www.aetna.com/medicare/documents/individu
 main,H2056-003-0,Q_hearing,,●,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,49,$0 copay for each non‑Medicare covered hearing aid fitting/evaluation.
 main,H2056-003-0,Q_hearing,,●,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,49,"$0 copay per ear, per year (two hearing aids every year)."
 main,H2056-003-0,Q_hearing,,●,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,49,"(allowance) of $500 per ear, every year."
-main,H2056-003-0,R_dental,,●,https://www.aetna.com/medicare/documents/individual/2027/sb/en/Y0001_H2056_003_HR01_SB2027_M.pdf,4,$0 copay for preventive services
-main,H2056-003-0,R_dental,,●,https://www.aetna.com/medicare/documents/individual/2027/sb/en/Y0001_H2056_003_HR01_SB2027_M.pdf,4,Dental services (non‑Medicare covered)
+main,H2056-003-0,R_dental,,●,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,74,D0461 testing for cracked tooth $0
 main,H2056-003-0,S_acupuncture,,,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,39,$65 copay for each Medicare‑covered
 main,H2056-003-0,S_acupuncture,,,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,76,Available for people with chronic low back pain under certain
 main,H2056-003-0,T_chiropractic,,,https://www.aetna.com/medicare/documents/individual/2027/eoc/en/Y0001_H2056_003_HR01_EOC2027_C.pdf,42,$15 copay for each Medicare‑covered
@@ -1444,7 +1448,6 @@ main,H2406-073-0,Q_hearing,,●,https://www.aarpmedicareplans.com/alphadog/AAOR2
 main,H2406-073-0,Q_hearing,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,53,Hearing services - routine hearing exam
 main,H2406-073-0,Q_hearing,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,53,We cover 1 in or out-o -network hearing exam
 main,H2406-073-0,Q_hearing,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,53,limited to 2 hearing aids every
-main,H2406-073-0,R_dental,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,48,You are covered or routine dental bene its.
 main,H2406-073-0,R_dental,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,95,$0 copay or covered preventive and diagnostic dental care
 main,H2406-073-0,R_dental,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,95,"A 50% coinsurance on all covered comprehensive services such as illings, crowns,"
 main,H2406-073-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/AAOR27LP0418704_001,101,Acupuncture (Medicare-covered)
@@ -1511,6 +1514,7 @@ main,H2923-001-0,Q_hearing,,●,https://assets.devoted.com/plan-documents/2027/2
 main,H2923-001-0,Q_hearing,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,74,Hearing aid fitting $0 copay
 main,H2923-001-0,Q_hearing,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,74,Routine hearing exam $0 copay
 main,H2923-001-0,Q_hearing,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,74,You are covered for 1 routine hearing exam each year.
+main,H2923-001-0,R_dental,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,111,"Devoted Health will pay as much as $1,750 per year for covered dental services listed below."
 main,H2923-001-0,R_dental,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,112,What you pay: 0% coinsurance
 main,H2923-001-0,R_dental,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,114,What you pay: 50% coinsurance
 main,H2923-001-0,R_dental,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CORE-001-OR-%28HMO%29-EOC-H2923-001-ENG.pdf,61,"You have a $1,750 yearly allowance toward Preventive"
@@ -1911,7 +1915,7 @@ main,H3805-040-0,P_vision,,●,https://www.aarpmedicareplans.com/alphadog/UHOR27
 main,H3805-040-0,P_vision,,●,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,94,We cover 1 routine eye exam every year.
 main,H3805-040-0,Q_hearing,,●,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,61,Hearing services - routine hearing exam             $0 copayment
 main,H3805-040-0,Q_hearing,,●,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,61,We cover 1 hearing exam every year.
-main,H3805-040-0,R_dental,,●,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0412772_000,4,Preventive services $0 copay for covered preventive services like oral
+main,H3805-040-0,R_dental,,●,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,95,"This dental plan o ers both in-network and out-o -network dental coverage, and all covered services have a $0 copayment."
 main,H3805-040-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,108,Acupuncture (Medicare-covered)
 main,H3805-040-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,108,Available or people with chronic low back
 main,H3805-040-0,S_acupuncture,,,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,50,Acupuncture for chronic low back pain
@@ -2013,7 +2017,6 @@ main,H3805-048-0,Q_hearing,,●,https://www.aarpmedicareplans.com/alphadog/AAOR2
 main,H3805-048-0,Q_hearing,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,61,Hearing services - routine hearing exam $0 copayment
 main,H3805-048-0,Q_hearing,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,61,This bene it is limited to 2 hearing aids every
 main,H3805-048-0,Q_hearing,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,61,We cover 1 hearing exam every year.
-main,H3805-048-0,R_dental,,,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,102,"Routine dental care, such as cleanings, exams"
 main,H3805-048-0,R_dental,,,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,14,The premium amount or the Platinum Dental Rider is $66.
 main,H3805-048-0,R_dental,,,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,57,20% coinsurance or Medicare-covered dental
 main,H3805-048-0,R_dental,,,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,98,"$0 copay or preventive and diagnostic dental care such as exams, routine cleanings, X-rays,"
@@ -2646,6 +2649,7 @@ main,H5439-011-0,Q_hearing,,●,https://www.wellcareor.com/content/dam/centene/m
 main,H5439-011-0,Q_hearing,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,75,1 non-implantable hearing aid up to $350 per ear every year.
 main,H5439-011-0,Q_hearing,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,75,Limited to 2 non-implantable hearing aids every year.
 main,H5439-011-0,R_dental,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,62,$0 copay for each oral exam.
+main,H5439-011-0,R_dental,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,62,Periodic Oral exams - 2 every year
 main,H5439-011-0,R_dental,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,62,"There is a plan benefit allowance of $1,000 every year for all in-network and out-of-network covered Comprehensive Dental services."
 main,H5439-011-0,R_dental,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,64,$0 copay for other diagnostic dental services per visit.
 main,H5439-011-0,R_dental,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_011_2027_OR_EOC_PPO_7001680ENG_C.pdf,64,$0 copay for other preventive dental services per visit.
@@ -2698,6 +2702,7 @@ main,H5439-015-0,Q_hearing,,●,https://www.wellcareor.com/content/dam/centene/m
 main,H5439-015-0,R_dental,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,63,$0 copay for dental x-rays per visit.
 main,H5439-015-0,R_dental,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,63,$0 copay for other diagnostic dental services per visit.
 main,H5439-015-0,R_dental,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,63,$0 copay for other preventive dental services per visit.
+main,H5439-015-0,R_dental,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,64,$0 copay for each adjunctive general service.
 main,H5439-015-0,S_acupuncture,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,122,Available for people with chronic low back pain under certain circumstances
 main,H5439-015-0,S_acupuncture,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,53,$0 copay for Medicare-covered acupuncture received in a PCP office.
 main,H5439-015-0,S_acupuncture,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_015_2027_OR_EOC_PPO_7001681ENG_C.pdf,53,Up to 12 visits in 90 days are covered under the following
@@ -2751,6 +2756,7 @@ main,H5439-019-0,Q_hearing,,●,https://www.wellcareor.com/content/dam/centene/m
 main,H5439-019-0,R_dental,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,64,$0 copay for dental x-rays per visit.
 main,H5439-019-0,R_dental,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,64,$0 copay for other diagnostic dental services per visit.
 main,H5439-019-0,R_dental,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,64,$0 copay for other preventive dental services per visit.
+main,H5439-019-0,R_dental,,●,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,65,$0 copay for each adjunctive general service.
 main,H5439-019-0,S_acupuncture,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,123,Available for people with chronic low back pain under
 main,H5439-019-0,S_acupuncture,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,54,$0 copay for Medicare-covered acupuncture received in a PCP office.
 main,H5439-019-0,S_acupuncture,,,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,54,Up to 12 visits in 90 days are covered under the following
@@ -2985,6 +2991,7 @@ main,H7199-002-0,Q_hearing,,●,https://assets.devoted.com/plan-documents/2027/2
 main,H7199-002-0,Q_hearing,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,79,You are covered for 1 routine hearing exam from in- or out- of-network providers each year.
 main,H7199-002-0,R_dental,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,62,"You can be reimbursed up to $2,250 per year for covered dental"
 main,H7199-002-0,R_dental,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,62,"You have a $2,250 yearly allowance toward Preventive"
+main,H7199-002-0,R_dental,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,63,"You will be reimbursed 50% for your out-of-pocket costs, up to the $2,250 annual allowance for comprehensive dental service categories, such as Dentures, Crowns, Root Canals, Bridges, and more."
 main,H7199-002-0,S_acupuncture,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,62,"You have a $2,250 yearly allowance toward Preventive Dental and Comprehensive dental services, therapeutic massage, routine acupuncture, and/or naturopath services combined."
 main,H7199-002-0,S_acupuncture,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,63,You will be reimbursed for 50% for your out-of-pocket costs for covered alternative therapies.
 main,H7199-002-0,T_chiropractic,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,59,$15 copay You are covered for up to 12 visits per year.

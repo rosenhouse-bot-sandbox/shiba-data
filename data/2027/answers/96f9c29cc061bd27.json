@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-4a3883a20d17f740.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 10 rows for Dental X-Rays, Oral exams and Fluoride Treatment each show 50% coinsurance out of network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 9 Cleanings row shows 50% coinsurance out of network.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"Page 9 Medicare-covered dental is $30 in network. $60 is the out-of-network copay.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 12 Adjunctive General Services, a routine comprehensive row, shows a $0 copay in network.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 12 says coverage up to $1,000 per plan year for all in-network and out-of-network routine comprehensive dental services.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 9 Medicare-covered dental shows a $60 copay per service out of network.\"},\n{\"id\": 6, \"ok\": false, \"reason\": \"Page 9 out-of-network Medicare-covered dental is $60. $30 is the in-network copay.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 9 Medicare-covered dental shows a $30 copay per service in network.\"},\n{\"id\": 8, \"ok\": true, \"reason\": \"Page 22 Wellcare Spendables card is preloaded with $20 monthly for OTC, Dental, Vision and Hearing. The page names no network, so in-network is the default.\"},\n{\"id\": 9, \"ok\": true, \"reason\": \"Page 12 Adjunctive General Services shows 50% coinsurance out of network.\"},\n{\"id\": 10, \"ok\": true, \"reason\": \"Page 9 Cleanings row shows a $0 copay in network.\"},\n{\"id\": 11, \"ok\": true, \"reason\": \"Page 10 rows for Dental X-Rays, Oral exams and Fluoride Treatment each show a $0 copay in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 5940,
+  "output_tokens": 1087,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

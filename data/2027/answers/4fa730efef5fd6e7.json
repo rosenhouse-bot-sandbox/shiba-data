@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-e2d6e1e199a3b8a9.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 36 states an annual allowance of $1,500 for covered comprehensive dental services, which use the Aetna Dental PPO Network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 64 introduces the whole supplemental Dental Schedule of Benefits (preventive and comprehensive) and says there is no coverage with an out-of-network dentist.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 64 introduces the supplemental dental schedule, which includes the preventive services, and says there is no coverage with an out-of-network dentist.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 35 Dental services row: $40 copay for each Medicare-covered dental service.\"}]\n```",
+ "usage": {
+  "input_tokens": 6672,
+  "output_tokens": 502,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

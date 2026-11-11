@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-16.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 64 Comprehensive Dental Care lists only adjunctive general services, at a $0 in-network copay for each service. The dental section ends on this page and is described as routine dental services.\"}]\n```",
+ "usage": {
+  "input_tokens": 2837,
+  "output_tokens": 658,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
