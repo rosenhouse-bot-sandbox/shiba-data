@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-a744eaa24232bb11.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 78 D4910 row: 0% is the in-network cost. Out of network the member pays 100%.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 78 periodontal maintenance D4910, under Comprehensive Services: out-of-network you pay 100%.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"Page 78 exam and cleaning rows: in network is 0%. 100% is the out-of-network cost.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 78 periodontal maintenance D4910: in-network you pay 0%.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 78 periodic oral exam and cleaning rows: out-of-network you pay 100%.\"},\n{\"id\": 5, \"ok\": false, \"reason\": \"Page 78 preventive rows: 0% is the in-network cost. Out of network the member pays 100%.\"}]\n```",
+ "usage": {
+  "input_tokens": 4205,
+  "output_tokens": 501,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

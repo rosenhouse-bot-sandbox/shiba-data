@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-bee1858e7e963c62.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 53 Dental services row: In-Network $0 copay for each Medicare-covered service.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 54 Dental services continued: Out-of-Network 50% coinsurance for each Medicare-covered service.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 54 routine dental row: $150 allowance every three months, loaded to the Flex Card, for comprehensive and preventive dental. The row names no network, so in-network applies.\"}]\n```",
+ "usage": {
+  "input_tokens": 4239,
+  "output_tokens": 489,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

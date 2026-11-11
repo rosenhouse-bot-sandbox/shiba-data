@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-18.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 127 does state the $2,250 per year mandatory supplemental dental maximum, but it names no network. Under the rules this is an in-network cost, and nothing on the page supports network 'any'.\"}]\n```",
+ "usage": {
+  "input_tokens": 3227,
+  "output_tokens": 310,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

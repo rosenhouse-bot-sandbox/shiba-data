@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-0bd982dc589e8cba.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 72 plan overview: the deductible is $0 for the mandatory supplemental dental benefit, with no network limit.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 72: the periodic oral exam (D0120) is 0% in network.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 72 says non-Medicare covered routine dental services are covered under the mandatory supplemental dental benefit.\"},\n{\"id\": 3, \"ok\": false, \"reason\": \"The 2-per-year limit is for exams only. Other preventive services have different limits, such as 1 bitewing per year and full mouth X-rays every 5 years, so this does not hold for all preventive care. The unit 'procedure codes' is also left out.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 72: the annual maximum is $1,500, and out-of-network benefits are subject to the in-network maximums.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 72: the periodic oral exam (D0120) is 0% out of network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3964,
+  "output_tokens": 788,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

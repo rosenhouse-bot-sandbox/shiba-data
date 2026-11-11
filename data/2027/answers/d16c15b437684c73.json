@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-19.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 63: comprehensive dental under the Dental & Alternative Therapy Allowance is reimbursed at 50%, which means 50% coinsurance. The same row continues on page 64, which says members can see any licensed practitioner with no network restrictions, so network any is supported.\"}]\n```",
+ "usage": {
+  "input_tokens": 3437,
+  "output_tokens": 492,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

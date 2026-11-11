@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-4a0ee31be3437c35.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 8 Medicare-covered dental row gives a $15 copay. No network is named, so it is in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 8 mandatory supplemental dental, in network: exams, cleanings and x-rays are each a $0 copay.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"Page 8 lists some comprehensive services at 0%, but page 9 lists many others (fillings, crowns, bridges, root canals, extractions) at 50%. A flat 0% comprehensive coinsurance would mislead counselors.\"}]\n```",
+ "usage": {
+  "input_tokens": 4039,
+  "output_tokens": 552,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
