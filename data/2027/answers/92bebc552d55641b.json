@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "29166053e638f7e6.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-317-0\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 9, \"quotes\": [\"$0 copay for amalgam filling, resin-based\", \"$0 copay for scaling and root planing (deep\", \"$0 copay for periodontal maintenance up to 4 per\", \"$0 copay for necessary nitrous oxide/analgesia\"], \"note\": \"Mandatory supplemental dental benefit DEN235, in network. Covers fillings, scaling and root planing, periodontal maintenance, and nitrous oxide given with a covered service. Each service has its own frequency limit.\"}]\n```",
+ "usage": {
+  "input_tokens": 3179,
+  "output_tokens": 648,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

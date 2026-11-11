@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-24.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 63 does give 50% reimbursement for comprehensive dental under the $2,250 allowance, which is 50% coinsurance. But nothing on the page says members may use any provider, so network 'any' is not supported. A dental row that names no network gives in-network costs.\"}]\n```",
+ "usage": {
+  "input_tokens": 2681,
+  "output_tokens": 426,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

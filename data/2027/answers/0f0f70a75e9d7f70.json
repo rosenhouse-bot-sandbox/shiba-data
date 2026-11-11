@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-d1ca3a965cb15437.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 57 Routine dental benefits row: 'You are covered for routine dental benefits.' It is a supplemental dental benefit with no amount stated, so the kind is covered. The row names no network, so the in-network default applies.\"}]\n```",
+ "usage": {
+  "input_tokens": 2404,
+  "output_tokens": 194,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-13.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 97 does show a $1,500 annual maximum for the Platinum Dental Rider, but it names no network. The rules read an unstated network as in-network, so network 'any' is not supported.\"}]\n```",
+ "usage": {
+  "input_tokens": 2311,
+  "output_tokens": 287,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-18.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 72's limit of 2 procedure codes per calendar year sits under the Exams heading only. The item applies it to all preventive dental, which also covers cleanings and X-rays. It also drops the 'procedure codes' unit, so the fact is broader than the quote supports.\"}]\n```",
+ "usage": {
+  "input_tokens": 2392,
+  "output_tokens": 398,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
