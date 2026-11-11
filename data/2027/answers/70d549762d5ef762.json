@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-d4758cd5b94a2266.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5 Optional Dental Rider row: $1,500 per year for covered dental services through the Platinum Dental Rider. This is the most the plan pays. The row names no network, so it defaults to in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 5 Platinum Dental Rider: 50% coinsurance for all covered network comprehensive services such as fillings, crowns and extractions.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 9: the Platinum Dental Rider premium is an additional $54 per month.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 4 Routine dental preventive services row: $0 copay for covered preventive services like oral exams, X-rays and cleanings. The row names no network, so it is in network.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 5 Platinum Dental Rider: $0 copay for covered network preventive services such as exams, cleanings and X-rays.\"}]\n```",
+ "usage": {
+  "input_tokens": 3826,
+  "output_tokens": 625,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

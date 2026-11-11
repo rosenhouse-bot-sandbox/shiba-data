@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-0bd982dc589e8cba.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 72, Mandatory Supplemental Dental, Exams row: 2 procedure codes per calendar year. The page says out-of-network benefits follow in-network limitations, so the limit also applies out of network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2429,
+  "output_tokens": 525,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

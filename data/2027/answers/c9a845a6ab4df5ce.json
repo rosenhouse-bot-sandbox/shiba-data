@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-11.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 64 Dental & Alternative Therapy Allowance: comprehensive dental (dentures, crowns, root canals) is reimbursed at 50%, so the member pays 50% coinsurance. The row names no network, so in-network is acceptable.\"}]\n```",
+ "usage": {
+  "input_tokens": 2782,
+  "output_tokens": 758,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

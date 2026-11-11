@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-d594b0a1d3772214.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 43 Dental services row: $65 copay for each Medicare-covered dental service, in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 44 says comprehensive dental services (non-Medicare covered) are not covered.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"Page 74 shows D0461 at $0 in network, but the row carries a frequency limit (two procedures from the code group per calendar year) that the item leaves out.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 44 says supplemental dental from a provider outside the Aetna Dental PPO Network will not be covered.\"}]\n```",
+ "usage": {
+  "input_tokens": 4642,
+  "output_tokens": 650,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

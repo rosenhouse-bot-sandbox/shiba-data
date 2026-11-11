@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-f751937f09316ed1.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 114 Mandatory Supplemental Dental chart, Preventive section: 'What you pay: 0% coinsurance'. In-network dentists are required.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 116 Mandatory Supplemental Dental chart, Comprehensive section (fillings): 'What you pay: 0% coinsurance'. In network.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 113 Mandatory Supplemental Dental Benefits: plan pays as much as $3,000 per year for covered dental services. In-network dentists are required.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 64 Dental services row, under 'Dental services covered by Medicare': 30% coinsurance.\"}]\n```",
+ "usage": {
+  "input_tokens": 5074,
+  "output_tokens": 525,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

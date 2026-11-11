@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-8.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 57 lists only preventive supplemental dental services. The quoted 'no coinsurance or copayment' cell sits beside the preventive row. Comprehensive services appear only in the $1,000 maximum line, and their covered services and cost are not shown on this page.\"}]\n```",
+ "usage": {
+  "input_tokens": 2288,
+  "output_tokens": 608,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
