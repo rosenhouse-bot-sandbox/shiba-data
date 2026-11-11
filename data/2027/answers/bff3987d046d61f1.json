@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-05d56d5f782708e7.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4, Dental services (non-Medicare covered) row: \\\"Comprehensive services are not covered.\\\" Supplemental, so not covered in network too.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 4 dental row: services from a provider outside the Aetna Dental PPO Network will not be covered. This includes the preventive benefit out of network.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 4, Dental services (non-Medicare covered) row: $0 copay for preventive services. The row names no network, so this is the in-network cost.\"}]\n```",
+ "usage": {
+  "input_tokens": 2326,
+  "output_tokens": 329,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

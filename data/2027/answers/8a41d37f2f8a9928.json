@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "4ec81cd0d2695486.md",
+ "reply": "```json\n[{\"plan_id\": \"H1372-003-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"not_covered\", \"page\": 41,\n  \"quotes\": [\"Our plan doesn’t cover emergency services, urgently needed services, or any other services you get outside of the United States and its territories.\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 3897,
+  "output_tokens": 282,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

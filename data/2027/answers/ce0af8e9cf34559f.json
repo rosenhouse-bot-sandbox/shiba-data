@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-7dcf10accd77535d.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 9 Cleanings row, under Routine Diagnostic and Preventive Services: In-Network $0 copay.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 9 Cleanings row: Out-of-Network 50% coinsurance.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 12 Additional Dental Information: coverage up to $1,000 per plan year for all in-network and out-of-network routine comprehensive dental services.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 9 Medicare-covered dental row: Out-of-Network 30% coinsurance for each Medicare-covered service.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 9 Medicare-covered dental row: In-Network $30 copay for each Medicare-covered service.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 12 Adjunctive General Services row, a routine comprehensive dental service: Out-of-Network 50% coinsurance.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 12 Adjunctive General Services row: In-Network $0 copay.\"}]\n```",
+ "usage": {
+  "input_tokens": 3131,
+  "output_tokens": 776,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-10.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 76 lists Periodontal maintenance (D4910) under Comprehensive Services of the Mandatory Supplemental Dental chart, at 0% in network (100% out of network). The quote fits this one row only, not all comprehensive dental. The row's limit of 4 procedure codes per calendar year is not captured in the item.\"}]\n```",
+ "usage": {
+  "input_tokens": 2253,
+  "output_tokens": 825,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

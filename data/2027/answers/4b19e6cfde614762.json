@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "29166053e638f7e6.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-317-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$40\", \"condition\": \"Urgent care center\", \"page\": 8, \"quotes\": [\"• Emergency room - Hospital: $115 copay • Urgent care center: $40 copay\"], \"note\": \"Worldwide urgent care center cost. The quote reads the right-hand column of the Worldwide Coverage row straight down, so it does not match the other Urgent care center rows.\"}]\n```",
+ "usage": {
+  "input_tokens": 2914,
+  "output_tokens": 653,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

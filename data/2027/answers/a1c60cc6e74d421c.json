@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-28e22b4acec7d885.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5, routine dental row in the in-network column: $0 copay for covered preventive services like oral exams, X-rays and cleanings.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 5, routine dental row: $4,000 allowance for all covered dental services. No period or shared pool is stated.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 5, routine dental row: 50% coinsurance for covered comprehensive services like fillings, crowns, bridges and dentures.\"}]\n```",
+ "usage": {
+  "input_tokens": 2443,
+  "output_tokens": 416,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

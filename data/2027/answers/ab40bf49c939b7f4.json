@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "2947683a555fc83c.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-323-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$40\", \"condition\": \"urgently needed service\", \"page\": 7, \"quotes\": [\"• Emergency room - Hospital: $115 copay • Urgent care center: $40 copay\"], \"note\": \"The quote is the Worldwide Coverage column read straight down, which makes it unique. The $40 applies to the urgent care center for urgently needed service outside the U.S.\"}]\n```",
+ "usage": {
+  "input_tokens": 2893,
+  "output_tokens": 623,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

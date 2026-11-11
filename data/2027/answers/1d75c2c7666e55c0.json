@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "faebfcb17c1abba1.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-048-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$130\", \"page\": 8, \"quotes\": [\"Emergency room - Hospital $130 copay\"], \"note\": \"Listed under WORLDWIDE COVERAGE. The page states no maximum for care outside the U.S.\"}]\n```",
+ "usage": {
+  "input_tokens": 2426,
+  "output_tokens": 1791,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "da2974c756f3eedc.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-009-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"max\", \"amount\": \"$3,000\", \"limit\": \"per year\", \"page\": 7, \"quotes\": [\"Devoted Health will pay as much as $3,000 per year for covered dental services.\"]},\n{\"plan_id\": \"H2923-009-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 7, \"quotes\": [\"You pay $0 towards all covered dental services until you reach your plan’s dollar limit.\"]},\n{\"plan_id\": \"H2923-009-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"page\": 7, \"quotes\": [\"periodic oral exams, dental evaluations, cleanings, X-rays\"]},\n{\"plan_id\": \"H2923-009-0\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"page\": 7, \"quotes\": [\"fillings, deep cleanings, extractions, dentures, root canals, crowns, and bridges\"]}]\n```",
+ "usage": {
+  "input_tokens": 2554,
+  "output_tokens": 1375,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

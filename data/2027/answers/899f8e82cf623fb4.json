@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-91.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 108 Advantage Plus optional supplemental chart, Preventive and diagnostic services row: $0 up to the $1,500 annual dental benefit maximum. The row names no network, so the cost is in network. The page does not split costs by plan.\"}]\n```",
+ "usage": {
+  "input_tokens": 2359,
+  "output_tokens": 631,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

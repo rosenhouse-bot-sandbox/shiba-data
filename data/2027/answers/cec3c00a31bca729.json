@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "49912316cc55d9c5.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H2923-001-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$130\", \"page\": 68,\n   \"quotes\": [\"$130 copay\"], \"note\": \"Worldwide Emergency Care (Services outside the United States)\"},\n  {\"plan_id\": \"H2923-001-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"max\", \"amount\": \"$25,000\", \"limit\": \"per lifetime\", \"page\": 68,\n   \"quotes\": [\"ambulance services up to $25,000\"], \"note\": \"Combined limit for worldwide emergency, urgent care and ambulance\"},\n  {\"plan_id\": \"H2923-001-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$130\", \"condition\": \"urgently needed services\", \"page\": 109,\n   \"quotes\": [\"$130 copay\"], \"note\": \"Worldwide Urgently Needed Services (Services outside the United States)\"}\n]\n```",
+ "usage": {
+  "input_tokens": 8450,
+  "output_tokens": 1574,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

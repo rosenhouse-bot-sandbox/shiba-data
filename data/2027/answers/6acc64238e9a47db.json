@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "0bd982dc589e8cba.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-427-2\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"2\", \"limit\": \"per calendar year\", \"page\": 72, \"quotes\": [\"Frequency/Limits – 2 procedure codes per calendar year\", \"Benefits received out-of-network are subject to any in-network benefit maximums, limitations and/or exclusions.\"], \"note\": \"The page states the limit once in the chart and says out-of-network benefits follow the in-network limits.\"}]\n```",
+ "usage": {
+  "input_tokens": 11971,
+  "output_tokens": 864,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

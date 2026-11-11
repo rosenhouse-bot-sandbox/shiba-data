@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-41.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 102 says the optional Platinum Dental Rider for UHC Complete Care OR-5 is offered for a monthly premium of $54.\"}]\n```",
+ "usage": {
+  "input_tokens": 2196,
+  "output_tokens": 200,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

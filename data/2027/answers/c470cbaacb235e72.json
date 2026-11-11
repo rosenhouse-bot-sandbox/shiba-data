@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-2c828c1ac1616719.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 61, Worldwide emergency and urgent care row (outside the U.S.): 'Emergency or urgent care: In- and Out-of-network: $130 copay per visit'. It covers both kinds of care, so no condition applies.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 37, Emergency care row: 'In- and Out-of-network: $130 copay per visit'. This is the Medicare-covered emergency benefit inside the U.S. The copay is waived if you are admitted within 48 hours, but that does not change the stated amount.\"}]\n```",
+ "usage": {
+  "input_tokens": 3537,
+  "output_tokens": 512,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

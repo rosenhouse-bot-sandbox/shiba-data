@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "f751937f09316ed1.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-009-0\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"covered\", \"page\": 43, \"quotes\": [\"You can get covered emergency medical care whenever you need it, anywhere in the United States or its territories, and from any provider with an appropriate state license even if they’re not part of our network.\"]},\n{\"plan_id\": \"H2923-009-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 69, \"quotes\": [\"Your cost-share for emergency services worldwide is: $0 copay\"]},\n{\"plan_id\": \"H2923-009-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"condition\": \"urgently needed services\", \"page\": 111, \"quotes\": [\"Your cost-share for urgently needed services worldwide is: $0 copay\"]},\n{\"plan_id\": \"H2923-009-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"max\", \"amount\": \"$25,000\", \"limit\": \"per lifetime\", \"page\": 70, \"quotes\": [\"The plan covers worldwide emergency, urgent care, and ambulance services up to $25,000 per lifetime\"]}]\n```",
+ "usage": {
+  "input_tokens": 9765,
+  "output_tokens": 1961,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

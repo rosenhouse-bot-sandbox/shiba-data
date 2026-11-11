@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "630e49b10e7ad131.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H1036-317-0\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$115\", \"page\": 56,\n   \"quotes\": [\"Emergency Services $115 copayment – Emergency Room\"], \"note\": \"The cost is listed for the Emergency Room. It is mapped to setting any because no emergency room setting is offered.\"},\n  {\"plan_id\": \"H1036-317-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$115\", \"page\": 56,\n   \"quotes\": [\"Worldwide Coverage $115 copayment – Emergency Room\"], \"note\": \"Page 39 calls worldwide emergency coverage a supplemental benefit.\"},\n  {\"plan_id\": \"H1036-317-0\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$40\", \"condition\": \"Urgently Needed Services\", \"page\": 79,\n   \"quotes\": [\"Urgently Needed Services $40 copayment – Urgent Care Center\"], \"note\": \"The cost is listed for the Urgent Care Center. It is mapped to setting any.\"},\n  {\"plan_id\": \"H1036-317-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$40\", \"condition\": \"Urgently Needed Services\", \"page\": 79,\n   \"quotes\": [\"Worldwide Coverage $40 copayment – Urgent Care Center\"], \"note\": \"Page 39 calls worldwide urgent care coverage a supplemental benefit.\"},\n  {\"plan_id\": \"H1036-317-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"page\": 39,\n   \"quotes\": [\"Our plan covers worldwide emergency and urgent care services outside of the United States under the following circumstances:\", \"This is a supplemental benefit not generally covered by Medicare.\"]}\n]\n```",
+ "usage": {
+  "input_tokens": 9492,
+  "output_tokens": 2169,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

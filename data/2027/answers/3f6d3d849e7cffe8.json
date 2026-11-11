@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-27.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 95 routine dental section for this plan states a 50% coinsurance on covered comprehensive services such as fillings, crowns, bridges, root canals, extractions and dentures. No network is named, so it counts as in-network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2314,
+  "output_tokens": 254,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-33.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 64 is this plan's Dental & Alternative Therapy Allowance row. It says: '$2,000 yearly allowance toward Preventive Dental and Comprehensive dental services... combined.' It also says 'reimbursed up to $2,000 per year.' This is a supplemental dental allowance in the named pool. The row names no network, so it counts as in-network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2744,
+  "output_tokens": 320,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

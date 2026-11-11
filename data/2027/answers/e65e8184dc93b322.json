@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "d594b0a1d3772214.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2056-003-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 74, \"quotes\": [\"D0461 testing for cracked tooth $0\"], \"note\": \"Every preventive service listed in the Dental Schedule of Benefits shows $0 in-network. The quoted row has no special hyphen characters, so it should match exactly.\"}]\n```",
+ "usage": {
+  "input_tokens": 8540,
+  "output_tokens": 1365,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

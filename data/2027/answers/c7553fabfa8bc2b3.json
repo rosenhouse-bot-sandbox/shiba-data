@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-55.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 43 Preventive dental services (Class I) row, listed in addition to Medicare-covered dental: in-network $0 copay per provider per day.\"}]\n```",
+ "usage": {
+  "input_tokens": 2432,
+  "output_tokens": 159,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

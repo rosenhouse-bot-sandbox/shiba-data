@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-73.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 53 in-network rows show a $0 copay for each restorative, endodontic, periodontic and oral surgery service.\"}]\n```",
+ "usage": {
+  "input_tokens": 1946,
+  "output_tokens": 403,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

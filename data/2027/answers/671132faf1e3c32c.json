@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-e3505ced672350fa.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 1, Platinum Dental Rider: $0 copay for covered network (in-network) preventive services.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 1, Platinum Dental Rider: $1,500 per year for covered dental services. The page names no network, so in network applies by default.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 1: the Platinum Dental Rider costs $54 a month, an optional package premium.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 1, Platinum Dental Rider: 50% coinsurance for all covered network comprehensive services.\"}]\n```",
+ "usage": {
+  "input_tokens": 2674,
+  "output_tokens": 565,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

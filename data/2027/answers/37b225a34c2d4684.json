@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-89.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 108 is the Advantage Plus optional supplemental chart, which names no plan split. Its preventive and diagnostic dental row shows $0 in network, up to the $1,500 annual dental maximum.\"}]\n```",
+ "usage": {
+  "input_tokens": 2359,
+  "output_tokens": 661,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

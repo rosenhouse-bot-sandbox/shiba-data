@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-88.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 63 says the plan reimburses 50% of costs up to the $2,250 allowance. It does not state a member coinsurance. The row names no network, so it gives in-network costs, not 'any'.\"}]\n```",
+ "usage": {
+  "input_tokens": 2594,
+  "output_tokens": 347,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

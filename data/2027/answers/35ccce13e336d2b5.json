@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-d594b0a1d3772214.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 47 Emergency care row: $130 copay for emergency care, in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 47: out-of-network emergency cost sharing is the same as in network, so it is a $130 copay.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 47: $250,000 annual maximum benefit for worldwide emergency, ambulance and urgently needed care.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 47: $130 copay for emergency care worldwide, outside the U.S. The cost is for emergency care only, so no condition is needed.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 70 Urgently needed services row: $130 copay for each urgent care visit worldwide, outside the U.S.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 70 Urgently needed services row: $50 copay for each Medicare-covered urgent care facility visit.\"}]\n```",
+ "usage": {
+  "input_tokens": 4157,
+  "output_tokens": 732,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

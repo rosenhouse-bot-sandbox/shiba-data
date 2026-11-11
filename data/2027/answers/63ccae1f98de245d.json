@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "e3505ced672350fa.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H2406-070-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"premium\", \"amount\": \"$54\", \"unit\": \"per month\", \"package\": \"Platinum Dental Rider\", \"page\": 1, \"quotes\": [\"For $54 a month\"]},\n  {\"plan_id\": \"H2406-070-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"max\", \"amount\": \"$1,500\", \"limit\": \"per year\", \"package\": \"Platinum Dental Rider\", \"page\": 1, \"quotes\": [\"$1,500 per year for covered dental services.\"], \"note\": \"The page does not name a network for the $1,500. In network was used by default, but it may apply to all covered dental services.\"},\n  {\"plan_id\": \"H2406-070-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"package\": \"Platinum Dental Rider\", \"page\": 1, \"quotes\": [\"$0 copay for covered network preventive services.\"]},\n  {\"plan_id\": \"H2406-070-0\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"package\": \"Platinum Dental Rider\", \"page\": 1, \"quotes\": [\"50% coinsurance for all covered network comprehensive services.\"]}\n]\n```",
+ "usage": {
+  "input_tokens": 3494,
+  "output_tokens": 1010,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

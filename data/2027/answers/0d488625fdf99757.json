@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-ce13e925c0384896.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 7 Dental Services row: Medicare-covered dental is a $30 copay, with no network or setting named, so in-network and any setting apply.\"}]",
+ "usage": {
+  "input_tokens": 2413,
+  "output_tokens": 71,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

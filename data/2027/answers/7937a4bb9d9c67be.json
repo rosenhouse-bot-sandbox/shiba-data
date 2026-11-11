@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "cabbc3b82885b498.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-025-0\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"any\", \"pool\": \"Dental and Alternative Therapy Allowance\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"limit\": \"up to the yearly allowance\", \"page\": 7, \"quotes\": [\"For all covered comprehensive dental services, Therapeutic Massage, Routine Acupuncture,\", \"and/or Naturopath services, you will receive 50% reimbursement up to the yearly allowance.\", \"You can see any licensed provider in the United States.\"], \"note\": \"The page states the plan reimburses 50%. The member's 50% coinsurance is inferred from that.\"}]\n```",
+ "usage": {
+  "input_tokens": 2956,
+  "output_tokens": 1149,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

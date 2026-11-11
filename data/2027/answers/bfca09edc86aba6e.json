@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-34.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 112 supplemental dental chart, Preventive section (exams and X-rays): 'What you pay: 0% coinsurance'. No network is named, so this is the in-network cost.\"}]\n```",
+ "usage": {
+  "input_tokens": 2498,
+  "output_tokens": 239,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

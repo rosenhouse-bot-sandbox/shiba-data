@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-53.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 43 does state a combined $1,000 limit every calendar year for preventive, basic and major dental. But the limit names no network, so under the stated rule it is an in-network figure, not 'any'.\"}]\n```",
+ "usage": {
+  "input_tokens": 2441,
+  "output_tokens": 412,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

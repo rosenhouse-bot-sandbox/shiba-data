@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-129.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 6 Worldwide Emergency Coverage (outside of the United States) row: $130 copay, network any. This is the emergency row, not the worldwide urgent care row, so no condition is needed. The page does not say whether the benefit is Medicare-covered or supplemental.\"}]\n```",
+ "usage": {
+  "input_tokens": 2041,
+  "output_tokens": 644,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

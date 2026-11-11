@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-8865a3a5b2f4fcad.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 9, Routine Comprehensive Services: the only row is Adjunctive General Services, at 25% coinsurance out of network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 8: cleanings, X-rays, oral exams and fluoride each cost a $0 copay in network.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 7, Medicare-covered dental: $25 copay for each Medicare-covered service.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 8: every routine preventive service costs 25% coinsurance out of network.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 9, Routine Comprehensive Services: Adjunctive General Services cost a $0 copay in network, and it is the only comprehensive row.\"}]\n```",
+ "usage": {
+  "input_tokens": 3187,
+  "output_tokens": 598,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

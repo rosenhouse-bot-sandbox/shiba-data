@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-77.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 64: the in-network rows for other diagnostic and other preventive dental services both show a $0 copay per visit. These are routine preventive dental services.\"}]\n```",
+ "usage": {
+  "input_tokens": 1929,
+  "output_tokens": 587,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

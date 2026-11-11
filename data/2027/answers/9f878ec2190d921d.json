@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-3.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 1 lists $1,500 per year for covered dental services under the optional Platinum Dental Rider. This is a yearly limit on what the plan pays, so it is a max. Unlike the preventive and comprehensive bullets, it is not limited to network services, and out-of-network dentists are allowed, so network any fits.\"}]\n```",
+ "usage": {
+  "input_tokens": 2301,
+  "output_tokens": 605,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

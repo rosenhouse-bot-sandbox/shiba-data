@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-7.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 11 shows $0 in-network only for the Adjunctive General Services sub-row of Routine Comprehensive Services. The item states it as the copay for all comprehensive dental, with no condition naming that sub-row. Other comprehensive services may cost differently, so the fact as stated is not supported.\"}]\n```",
+ "usage": {
+  "input_tokens": 1950,
+  "output_tokens": 566,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

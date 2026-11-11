@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-62.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 72 Mandatory Supplemental Dental (non-Medicare covered routine) lists an Annual Maximum of $1,500. Out-of-network care is subject to the same in-network maximums, so network 'any' and 'per year' hold.\"}]\n```",
+ "usage": {
+  "input_tokens": 2324,
+  "output_tokens": 295,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

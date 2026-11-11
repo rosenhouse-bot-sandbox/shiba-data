@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "808ccc78793ded84.md",
+ "reply": "```json\n[{\"plan_id\": \"H7199-002-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"any\", \"pool\": \"Dental & Alternative Therapy Allowance\", \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"page\": 63, \"quotes\": [\"For all covered preventive services, you will pay up front and receive 100% reimbursement of your out-of-pocket costs, up to the $2,250 annual allowance.\"], \"note\": \"The plan reimburses 100% of preventive dental costs up to the shared $2,250 allowance. This is recorded as covered rather than as a 0% coinsurance, because 0% is not printed in the text.\"}]\n```",
+ "usage": {
+  "input_tokens": 12545,
+  "output_tokens": 1305,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

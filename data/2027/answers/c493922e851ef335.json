@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-14.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 57 lists preventive dental services (exams, cleanings, X-rays, fluoride) under Supplemental benefits and says there is no coinsurance or copayment for them. Covered as a supplemental benefit; the row names no network, so in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2199,
+  "output_tokens": 391,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

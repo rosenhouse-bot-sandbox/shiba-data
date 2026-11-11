@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-bf93677641b9fa6f.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 6 names a $1,750 yearly Dental and Alternative Therapy Allowance that covers Comprehensive Dental. In network is the default convention even though any licensed provider may be used.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 6 names a $1,750 yearly Dental and Alternative Therapy Allowance that covers Preventive Dental. In network is the default convention even though any licensed provider may be used.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"Page 6 says the plan reimburses 50% only up to the yearly allowance. Stating this as a 50% member coinsurance converts the figure and drops the allowance cap, so it is doubtful.\"}]\n```",
+ "usage": {
+  "input_tokens": 2864,
+  "output_tokens": 903,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

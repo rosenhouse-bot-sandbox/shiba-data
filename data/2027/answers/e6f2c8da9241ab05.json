@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-034e045a83e5b49d.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5: Preventive services (Class I) are $0 in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 5: Class II and Class III comprehensive services are both 50% in network.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 5: Medicare-covered dental services are a $40 copay in network.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 5: All routine dental services are covered up to a combined $1,250 benefit maximum every calendar year. The row names no network, so it is in network.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 5: Medicare-covered dental services are 50% out of network.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 5: Class II and Class III are both 50% in the out-of-network column.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 5: Preventive services (Class I) are 50% out of network. The quote mixes in the hearing aid row, but the page supports the fact.\"}]\n```",
+ "usage": {
+  "input_tokens": 2861,
+  "output_tokens": 630,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

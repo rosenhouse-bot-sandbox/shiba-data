@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-122.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 43 Emergency care row lists 'Worldwide Coverage $130 copayment – Emergency Room'. That is the plan's cost for emergency care outside the U.S. Network any applies to care outside the U.S. Medicare does not cover this care, so it is supplemental. No condition, limit or unit is stated.\"}]\n```",
+ "usage": {
+  "input_tokens": 2413,
+  "output_tokens": 365,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

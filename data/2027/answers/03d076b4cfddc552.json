@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "2947683a555fc83c.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-323-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$115\", \"page\": 7,\n  \"quotes\": [\"Emergency room - Hospital: $115 copay\"], \"note\": \"\"},\n {\"plan_id\": \"H1036-323-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$40\", \"condition\": \"urgently needed service\", \"page\": 7,\n  \"quotes\": [\"• Urgent care center: $40 copay\"], \"note\": \"The same \\\"Urgent care center: $40 copay\\\" text also appears in the X-ray and diagnostic procedures rows. This quote may only be unique because of its bullet spacing.\"},\n {\"plan_id\": \"H1036-323-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"condition\": \"admitted to the same hospital within 24 hours for the same condition\", \"page\": 7,\n  \"quotes\": [\"hours for the same condition, you pay $0 for the\"], \"note\": \"This $0 copay for emergency care is stated in the Worldwide Coverage section. It applies when you are admitted to the same hospital within 24 hours for the same condition.\"}]\n```",
+ "usage": {
+  "input_tokens": 2631,
+  "output_tokens": 1354,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
