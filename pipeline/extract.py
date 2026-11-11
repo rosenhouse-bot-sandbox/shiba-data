@@ -232,11 +232,13 @@ def shown(fact):
             | {"quotes": json.loads(fact["quotes"])})
 
 
-def verifier_task(doc, plan_rows, pages, items, data, notes={}):
+def verifier_task(doc, plan_rows, pages, items, data, notes={}, after={}):
+    """after names how many pages after an item's page its group's checkers see."""
     groups = sorted({c["benefit"].split(".")[0] for c in items})
     parts = [fill("vfact_prompt.md", doc, plan_rows, data, VOCABULARY="\n\n".join(facts.describe(g, notes) for g in groups))]
     parts += [json.dumps({"id": n, **shown(c)}, ensure_ascii=False) for n, c in enumerate(items)]
-    parts.append("## Pages\n\n" + page_text({p: pages[p] for p in {int(c["page"]) for c in items}}))
+    shown_pages = {int(c["page"]) + n for c in items for n in range(after.get(c["benefit"].split(".")[0], 0) + 1)}
+    parts.append("## Pages\n\n" + page_text({p: pages[p] for p in shown_pages if p in pages}))
     return "\n\n".join(parts) + "\n"
 
 
@@ -329,7 +331,7 @@ def extract_facts(work, answers_dir, group, out, data=DATA, merge=False, notes={
     print(len(found), "facts;", retries, "retry tasks")
 
 
-def verify(work, facts_path, out_dir, data=DATA, known=(), notes={}):
+def verify(work, facts_path, out_dir, data=DATA, known=(), notes={}, after={}):
     """Known facts are not checked again, but help make decoys."""
     os.makedirs(out_dir, exist_ok=True)
     with open(facts_path) as f:
@@ -344,7 +346,7 @@ def verify(work, facts_path, out_dir, data=DATA, known=(), notes={}):
         mixed = [dict(f, decoy=False) for f in mine] + [dict(f, decoy=True) for f in decoys(mine + theirs, rnd)]
         rnd.shuffle(mixed)
         with open(f"{out_dir}/v-{doc['id']}.md", "w") as f:
-            f.write(verifier_task(doc, plan_rows, Doc(work, doc["id"]).pages("layout"), mixed, data, notes))
+            f.write(verifier_task(doc, plan_rows, Doc(work, doc["id"]).pages("layout"), mixed, data, notes, after))
         items += [dict(c, task=doc["id"]) for c in mixed]
     with open(f"{out_dir}/items.json", "w") as f:
         json.dump(items, f, indent=1)

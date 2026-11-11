@@ -735,6 +735,21 @@ class DentalTest(unittest.TestCase):
         found = [routine("dental", "allowance", "$2,250", **pool), routine("extras.massage", "allowance", "$2,250", **pool)]
         self.assertEqual(column(present.dental, *found)[0][0], "PREV+COMP from $2,250/year allowance shared with massage")
 
+    def test_names_the_only_comprehensive_services_the_facts_price(self):
+        adjunctive = routine("dental.comprehensive", quotes='["Adjunctive General Services In-Network $0 copay"]')
+        perio = routine("dental.comprehensive", source="SB", quotes='["$0 copay for periodontal maintenance", '
+                                                                     '"Administration of nitrous oxide 0%"]')
+        self.assertEqual(column(present.dental, adjunctive)[0][0], "COMP $0 for adjunctive services")
+        self.assertEqual(column(present.dental, adjunctive, perio)[0][0],
+                         "COMP $0 for adjunctive services, periodontal maintenance, nitrous oxide")
+        fillings = routine("dental.comprehensive", source="SB", quotes='["$0 copay for amalgam filling"]')
+        self.assertEqual(column(present.dental, adjunctive, fillings)[0][0], "COMP $0")
+        merged = routine("dental.comprehensive", source="SB", quotes='["$0 copay for amalgam filling", '
+                                                                       '"$0 copay for periodontal maintenance"]')
+        self.assertEqual(column(present.dental, adjunctive, merged)[0][0], "COMP $0")
+        unnamed = routine("dental.comprehensive", source="SB", quotes='["What you pay: 0% coinsurance"]')
+        self.assertEqual(column(present.dental, adjunctive, unnamed)[0][0], "COMP $0")
+
     def test_a_card_shared_with_other_benefits_is_not_a_max(self):
         card = dict(pool="Spendables", limit="per month")
         found = [routine("dental.preventive"), routine("dental", "allowance", "$20", **card),

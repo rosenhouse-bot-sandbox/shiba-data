@@ -50,7 +50,7 @@ def group_facts(texts, work, group, answer, v, data):
     extract.extract_facts(texts, read, group, found, data, merging(v, group), notes)
     answer(read, *v["reader"])
     extract.extract_facts(texts, read, group, found, data, merging(v, group), notes)
-    extract.verify(texts, found, check, data, notes=review.checker_notes(v))
+    extract.verify(texts, found, check, data, notes=review.checker_notes(v), after=v.get("check_after", {}))
     answer(check, *v["verifier"])
     extract.accept(check, f"{check}/accepted.csv")
     accepted = facts.read(f"{check}/accepted.csv")
@@ -84,7 +84,7 @@ def second_facts(texts, work, group, answer, v, data, plan_ids, known):
         outcomes = json.load(f)
     extract.write_outcomes(read, [dict(o, skipped=why[tuple(o["fact"][c] for c in facts.IDENTITY)])
                                   if o["fact"] and tuple(o["fact"][c] for c in facts.IDENTITY) in why else o for o in outcomes])
-    extract.verify(texts, found, check, data, known, review.checker_notes(v))
+    extract.verify(texts, found, check, data, known, notes=review.checker_notes(v), after=v.get("check_after", {}))
     answer(check, *v["verifier"])
     extract.accept(check, f"{check}/accepted.csv")
     return facts.read(f"{check}/accepted.csv")
@@ -133,3 +133,5 @@ VERSIONS[18] = dict(VERSIONS[17], merge_limits=("dental",), check_notes={
     "dental": "A page that says the plan reimburses a percent of a cost gives the member the rest as `coinsurance`: 50% "
               "reimbursement is 50% coinsurance. A cost under an allowance that members may use with any licensed "
               "provider may have `network` `any`, though its row names no network."})
+# A dental price list can go on past its page, so version 19 shows dental checkers the next page too.
+VERSIONS[19] = dict(VERSIONS[18], check_after={"dental": 1})

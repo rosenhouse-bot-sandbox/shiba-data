@@ -862,11 +862,33 @@ def extra_benefits(organization, found):
     return [("; ".join(parts), unique(cited))]
 
 
+# Comprehensive services that some plans cover alone, by how their quotes name them.
+NARROW = (("adjunctive services", re.compile(r"adjunctive general", re.I)),
+          ("periodontal maintenance", re.compile(r"periodontal maintenance", re.I)),
+          ("nitrous oxide", re.compile(r"nitrous oxide", re.I)))
+BROAD = re.compile(r"filling|amalgam|resin|crown|denture|bridge|implant|root canal|extraction|oral surgery|restorative|"
+                   r"endodontic|periodontic|root planing|comprehensive (?:dental )?services", re.I)
+
+
+def narrow(prices):
+    """The narrow services that prices name, or [] if a price names none of them or names another service."""
+    quotes = [json.loads(f["quotes"]) for f in prices]
+    named = [[name for name, words in NARROW if any(words.search(q) for q in qs)] for qs in quotes]
+    if not all(named) or any(BROAD.search(q) for qs in quotes for q in qs):
+        return []
+    return [name for name, _ in NARROW if any(name in n for n in named)]
+
+
 def dental_price(found, leaf):
-    got = top(exactly(found, (leaf,), lambda f: everyone(f) and f["cost_kind"] in PRICED,
-                   "it is not a supplemental in-network price for every member"))
+    """The best source's prices, and how the cell shows them. It names the narrow services that all sources' prices
+    name, without saying they are the only ones, since readers may miss some."""
+    prices = exactly(found, (leaf,), lambda f: everyone(f) and f["cost_kind"] in PRICED,
+                     "it is not a supplemental in-network price for every member")
+    got = top(prices)
     shown = show(got)
-    return got, "$0" if shown == "0%" else shown.replace("0%-", "$0-") if got else ""
+    shown = "$0" if shown == "0%" else shown.replace("0%-", "$0-") if got else ""
+    only = narrow(prices)
+    return got, f"{shown} for {', '.join(only)}" if only else shown
 
 
 def dental(organization, found):

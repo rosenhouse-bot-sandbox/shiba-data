@@ -212,6 +212,13 @@ class VerifierTaskTest(unittest.TestCase):
         for part in ("decoy", "unsure", "=====PAGE 62====="):
             self.assertNotIn(part, text)
 
+    def test_shows_the_pages_after_an_items_page_that_its_group_asks_for(self):
+        items = [dict(gate(answer())[0][0], decoy=False)]
+        self.assertIn("=====PAGE 62=====\nDental X-rays", extract.verifier_task(DOC, NAMES, PAGES, items, DATA, after={"imaging": 1}))
+        self.assertNotIn("=====PAGE 62=====", extract.verifier_task(DOC, NAMES, PAGES, items, DATA, after={"dental": 1}))
+        last = [dict(items[0], page="62")]
+        self.assertIn("=====PAGE 62=====", extract.verifier_task(DOC, NAMES, PAGES, last, DATA, after={"imaging": 1}))
+
 
 class StepsTest(unittest.TestCase):
     """read, facts and verify on a work directory with two documents."""
