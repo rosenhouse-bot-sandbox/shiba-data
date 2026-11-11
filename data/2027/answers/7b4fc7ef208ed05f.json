@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "557f08e61a7e8f42.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H9003-001-0\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"deductible\", \"amount\": \"$50\", \"limit\": \"per year\", \"package\": \"Advantage Plus\", \"page\": 109, \"quotes\": [\"Minor restorative services: After the $50 annual\", \"Routine fillings. deductible is met,\"]},\n{\"plan_id\": \"H9003-006-0\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"deductible\", \"amount\": \"$50\", \"limit\": \"per year\", \"package\": \"Advantage Plus\", \"page\": 109, \"quotes\": [\"Minor restorative services: After the $50 annual\", \"Routine fillings. deductible is met,\"]},\n{\"plan_id\": \"H9003-009-0\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"deductible\", \"amount\": \"$50\", \"limit\": \"per year\", \"package\": \"Advantage Plus\", \"page\": 109, \"quotes\": [\"Minor restorative services: After the $50 annual\", \"Routine fillings. deductible is met,\"]},\n{\"plan_id\": \"H9003-001-0\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"package\": \"Advantage Plus\", \"page\": 109, \"quotes\": [\"Restorations (composite/acrylic and steel). you pay 50%\"]},\n{\"plan_id\": \"H9003-006-0\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"package\": \"Advantage Plus\", \"page\": 109, \"quotes\": [\"Restorations (composite/acrylic and steel). you pay 50%\"]},\n{\"plan_id\": \"H9003-009-0\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"package\": \"Advantage Plus\", \"page\": 109, \"quotes\": [\"Restorations (composite/acrylic and steel). you pay 50%\"]}]\n```",
+ "usage": {
+  "input_tokens": 18961,
+  "output_tokens": 2217,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

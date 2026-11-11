@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "e41fce2e65cf35f2.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-428-2\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 11, \"quotes\": [\"IN-NETWORK $50 copay DEN350 • $0 copay for comprehensive oral evaluation or periodontal exam up to 1 every 3 years.\"], \"note\": \"The in-network and out-of-network columns repeat the same bullet text. The quote reads the in-network column straight down from its header so that it occurs only once on the page.\"},\n {\"plan_id\": \"H5216-428-2\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"premium\", \"amount\": \"$50.90\", \"unit\": \"per month\", \"package\": \"MyOption DEN972\", \"page\": 22, \"quotes\": [\"$50.90 Monthly premium\", \"MyOption DEN972 is an Optional Supplemental Benefit (OSB) package\"]}]\n```",
+ "usage": {
+  "input_tokens": 4671,
+  "output_tokens": 2000,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

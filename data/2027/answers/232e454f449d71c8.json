@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-43.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 96, routine dental section of this plan's EOC: 'Annual dental maximum: $1,250'. It is a supplemental (routine) dental maximum per year, and no network is named, so it is read as in-network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2305,
+  "output_tokens": 290,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

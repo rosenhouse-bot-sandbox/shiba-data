@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-362ee075ea5896d4.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5 routine dental row: $2,000 allowance for all covered dental services. The row names no network, so the cost is in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 5 routine dental row: $0 copay for covered preventive services such as cleanings.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 5 routine dental row: $0 copay for covered comprehensive services such as fillings, crowns, bridges and dentures.\"}]\n```",
+ "usage": {
+  "input_tokens": 2383,
+  "output_tokens": 365,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

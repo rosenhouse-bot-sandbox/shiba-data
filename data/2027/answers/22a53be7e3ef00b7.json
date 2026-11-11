@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-36.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 112 dental chart for this plan: the Comprehensive section (fillings) says 'What you pay: 50% coinsurance'. The row names no network, so it is in network. The listed procedure codes are routine dental.\"}]\n```",
+ "usage": {
+  "input_tokens": 2180,
+  "output_tokens": 261,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

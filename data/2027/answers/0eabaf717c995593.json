@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-aca9d3510177adcd.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 71 periodic oral exam row (D0120) shows 0% in the Out-of-Network You Pay column.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 71 periodic oral exam row (D0120) shows 0% in the In-Network You Pay column.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 71 states an Annual Maximum of $2,500, and out-of-network benefits are subject to the in-network maximums.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 71 plan overview states a $0 deductible for the Mandatory Supplemental Dental Benefit.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 40 says you are covered for the Mandatory Supplemental Dental Benefit and gives no amount.\"},\n{\"id\": 5, \"ok\": false, \"reason\": \"Page 71 limit of 2 procedure codes per calendar year applies to the Exams subsection only, not all preventive dental, and the unit (procedure codes) is missing.\"}]\n```",
+ "usage": {
+  "input_tokens": 4124,
+  "output_tokens": 848,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

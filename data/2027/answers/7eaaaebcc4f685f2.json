@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-85.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 54 'Dental services (routine benefit)' row gives a $150 allowance every three months, loaded to the Flex Card, for comprehensive and preventive dental together. The row names no network, so it counts as in-network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2211,
+  "output_tokens": 537,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

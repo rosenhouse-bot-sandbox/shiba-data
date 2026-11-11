@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-131.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 68 Emergency care row: $115 copay for emergency services outside the United States. This care is supplemental, and the asterisk matches the other supplemental rows on the page (nurse advice line, fitness). Network is any because the care is outside the U.S. No condition applies because the cost is for emergency services.\"}]\n```",
+ "usage": {
+  "input_tokens": 1961,
+  "output_tokens": 366,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

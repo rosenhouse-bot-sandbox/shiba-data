@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-808ccc78793ded84.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 123, in-network urgently needed services: $45 copay at an Urgent Care Center or Walk-in Retail Clinic. Telehealth is also $45.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 72, Worldwide Emergency Care (services outside the United States), a supplemental benefit: $130 copay.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 123, Worldwide Urgently Needed Services (outside the United States), a supplemental benefit: $130 copay.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 73: worldwide emergency, urgent care and ambulance services are covered up to $25,000 per lifetime when outside the U.S.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 124 continues the Out-of-network section that starts at the bottom of page 123: $45 copay for urgently needed services at an Urgent Care Center.\"}]\n```",
+ "usage": {
+  "input_tokens": 5319,
+  "output_tokens": 653,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

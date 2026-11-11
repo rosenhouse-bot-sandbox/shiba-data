@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-5.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 49 Dental services row, In-Network: 'Mandatory Supplemental Dental Benefits – You are covered for Mandatory Supplemental Dental Benefit', with no amount given. This matches supplemental dental, covered, in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2642,
+  "output_tokens": 253,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

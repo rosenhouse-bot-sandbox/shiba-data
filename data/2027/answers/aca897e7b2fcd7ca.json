@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-630e49b10e7ad131.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 83 says '1 unit per visit', but only if the primary procedure is covered. The item leaves out that condition, so it is doubtful.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Page 83 nitrous oxide row: 0% is the in-network cost. Out of network is 100%.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"Page 83 nitrous oxide row: in network is 0%. The 100% is the out-of-network cost.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 83 nitrous oxide (D9230) row: 100% coinsurance in the Out-of-Network column.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 54 dental row, under In-Network: 'You are covered for Mandatory Supplemental Dental Benefit.'\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 83 nitrous oxide (D9230) row: 0% coinsurance in the In-Network column.\"}]\n```",
+ "usage": {
+  "input_tokens": 4141,
+  "output_tokens": 766,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

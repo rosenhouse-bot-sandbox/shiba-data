@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-134.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 15 shows a $120 copay for Worldwide emergency coverage under ATRIO Freedom, so the plan and amount match. However, emergency care outside the U.S. is normally a supplemental benefit, not a Medicare-covered one, and the page does not say it is Medicare-covered. That leaves doubt about covered_by: medicare.\"}]\n```",
+ "usage": {
+  "input_tokens": 1657,
+  "output_tokens": 388,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

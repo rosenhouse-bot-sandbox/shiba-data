@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-7e45f25357b792a7.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 71, Worldwide Emergency Care (services outside the United States): the cost-share for emergency services worldwide is a $115 copay. It is a supplemental benefit with network any.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 109, Worldwide Urgently Needed Services (services outside the United States): the cost-share for urgently needed services worldwide is a $115 copay. It is a supplemental benefit, and the condition matches the page's name for this care.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 71: the plan covers worldwide emergency, urgent care, and ambulance services up to $25,000 per lifetime. This is a supplemental maximum for care outside the U.S.\"}]\n```",
+ "usage": {
+  "input_tokens": 3610,
+  "output_tokens": 574,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

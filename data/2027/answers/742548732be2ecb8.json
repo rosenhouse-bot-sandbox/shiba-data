@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-8.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 6 does show a $115 copay for Worldwide Emergency Coverage outside the U.S. But Medicare does not cover care outside the U.S., so this is a supplemental benefit and covered_by 'medicare' is likely wrong.\"}]\n```",
+ "usage": {
+  "input_tokens": 2054,
+  "output_tokens": 347,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "2c101bd739d45a62.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-028-3\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$250\", \"limit\": \"per year\", \"pool\": \"Dental and Alternative Therapy Allowance\", \"page\": 7, \"quotes\": [\"Dental and Alternative Therapy Allowance\", \"You have a $250 yearly allowance toward Preventive Dental, Comprehensive Dental,\", \"see any licensed provider in the United States.\"], \"note\": \"Shared $250 yearly allowance combined with therapeutic massage, routine acupuncture and naturopath services; any licensed provider in the US, paid by reimbursement.\"}]\n```",
+ "usage": {
+  "input_tokens": 2636,
+  "output_tokens": 830,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

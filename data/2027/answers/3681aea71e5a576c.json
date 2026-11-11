@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-6c89db5198e7a3b2.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5 Dental services row 'Medicare-covered services' shows a $40 copay in the in-network column.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 5 Dental services row 'Medicare-covered services' shows 50% coinsurance in the out-of-network column.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 5 routine dental row shows a $1,500 combined benefit maximum every calendar year in the in-network column.\"}]\n```",
+ "usage": {
+  "input_tokens": 2407,
+  "output_tokens": 417,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

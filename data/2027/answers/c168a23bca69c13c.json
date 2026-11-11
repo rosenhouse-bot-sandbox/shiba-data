@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-21.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 106 routine dental section: '$0 copay [f]or covered preventive and diagnostic dental care' such as exams, cleanings and X-rays. The 'or' is a dropped f, not a Medicaid alternative. The footnote says the $0 cost-share is for network dental care, so the fact is in network and supplemental.\"}]\n```",
+ "usage": {
+  "input_tokens": 2292,
+  "output_tokens": 278,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

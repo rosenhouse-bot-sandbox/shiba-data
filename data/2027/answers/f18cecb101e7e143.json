@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-2947683a555fc83c.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 8 dental row: Medicare-covered dental is a $50 copay. The row names no network, so it is the in-network cost.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 16: the optional MyOption DEN972 dental package has a $50.90 monthly premium.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 8 mandatory supplemental dental (DEN310, in network): $0 copay for exams, x-rays and cleanings.\"}]\n```",
+ "usage": {
+  "input_tokens": 3506,
+  "output_tokens": 401,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

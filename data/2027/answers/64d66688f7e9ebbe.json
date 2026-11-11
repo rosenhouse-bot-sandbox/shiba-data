@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-f73d19eeaaf3a08a.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 53 Emergency care row: in network, Provider and Professional Services, $0 copayment – Emergency Room.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 79 urgently needed row: out of network, Urgently Needed Services, $40 copayment – Urgent Care Center.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 53 Emergency care row: out of network, Provider and Professional Services, $0 copayment – Emergency Room.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 53 Emergency care row: in network, Emergency Services, $130 copayment – Emergency Room.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 53 Emergency care row: out of network, Emergency Services, $130 copayment – Emergency Room.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 79 urgently needed row: Worldwide Coverage, $40 copayment – Urgent Care Center, for urgently needed services outside the U.S.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 53 Emergency care row: Worldwide Coverage, $130 copayment – Emergency Room, for emergency care outside the U.S.\"}]\n```",
+ "usage": {
+  "input_tokens": 4530,
+  "output_tokens": 925,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

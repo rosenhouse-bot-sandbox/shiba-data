@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "dca4e04d7b6dc26b.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H7006-021-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$120\", \"unit\": \"\", \"limit\": \"\", \"page\": 49, \"quotes\": [\"$120 copay\", \"You are covered for emergency care worldwide.\"], \"note\": \"\"},\n {\"plan_id\": \"H7006-021-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$120\", \"unit\": \"\", \"limit\": \"\", \"page\": 50, \"condition\": \"urgently needed services\", \"quotes\": [\"$120 copay\", \"Worldwide urgent care coverage\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 5222,
+  "output_tokens": 681,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

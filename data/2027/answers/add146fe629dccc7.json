@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-5f6896f5c437eeed.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5 Emergency Care row: $130 per visit. The plan has one cost for emergency care, so the in-network default applies.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 5 Emergency Care row: the plan covers emergency services worldwide as a supplemental benefit. No amount or maximum is stated, so the cost kind is covered.\"}]\n```",
+ "usage": {
+  "input_tokens": 2416,
+  "output_tokens": 435,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

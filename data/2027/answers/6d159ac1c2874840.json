@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-d1ca3a965cb15437.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 57 'Routine dental benefits' row says 'You are covered for routine dental benefits.' It gives no amount and names no network, so it counts as in-network supplemental dental, covered.\"}]\n```",
+ "usage": {
+  "input_tokens": 2317,
+  "output_tokens": 237,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

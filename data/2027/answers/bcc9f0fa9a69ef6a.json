@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "2af2a9f1fd104b7f.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-455-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"max\", \"amount\": \"$2,500\", \"limit\": \"per year\", \"page\": 11, \"quotes\": [\"$2,500 combined maximum benefit coverage amount per year for all diagnostic/preventive and comprehensive benefits. • Benefits received\"], \"note\": \"The quote reads the out-of-network column straight down and runs into the next bullet, which appears only in that column. The in-network fact is left out because its text is identical to the out-of-network column and cannot be quoted uniquely.\"}]\n```",
+ "usage": {
+  "input_tokens": 4978,
+  "output_tokens": 1073,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

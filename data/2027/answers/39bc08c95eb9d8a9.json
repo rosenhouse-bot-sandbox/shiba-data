@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "ce13e925c0384896.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-153-0\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 7, \"quotes\": [\"$0 copay for amalgam and/or composite filling up\", \"$0 copay for crown recementation up to 1 every 2\", \"$0 copay for scaling and root planing (deep\", \"$0 copay for crown, denture repair - additions,\", \"$0 copay for complete dentures, panoramic film\"], \"note\": \"Merged comprehensive services, all $0 copay: fillings (1 per tooth per surface every 2 years), crown recementation (1 every 2 years), scaling and root planing (1 per quadrant every 3 years), occlusal adjustment (1 every 3 years), crown, denture repair and core buildup (1 per tooth every 5 years), complete and partial dentures (1 every 5 years). Limits differ by service, so limit is left blank.\"}, {\"plan_id\": \"H1036-153-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 7, \"quotes\": [\"$0 copay for comprehensive oral evaluation or\", \"$0 copay for complete dentures, panoramic film\"], \"note\": \"Merged preventive services, both $0 copay: comprehensive oral evaluation or periodontal exam (1 every 3 years), panoramic film or diagnostic x-rays (1 every 5 years). Limits differ, so limit is left blank.\"}]\n```",
+ "usage": {
+  "input_tokens": 4095,
+  "output_tokens": 1089,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

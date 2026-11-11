@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-7ac7300e6ca40ac7.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 41 states that emergency and urgently needed services outside the United States are not covered under any circumstances. This matches not_covered for outside_us emergency care with network any, for this plan.\"}]\n```",
+ "usage": {
+  "input_tokens": 2278,
+  "output_tokens": 217,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

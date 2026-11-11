@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "516ff586a12c8288.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-019-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$130\", \"page\": 71, \"quotes\": [\"$130 copay for emergency services outside of the United States.\"], \"note\": \"Page 42 says Medicare does not cover emergency care outside the U.S., but the document does not call this benefit supplemental.\"},\n {\"plan_id\": \"H5439-019-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"max\", \"amount\": \"$50,000\", \"limit\": \"per year\", \"page\": 71, \"quotes\": [\"You are covered for up to $50,000 every year for emergency or urgently needed services outside the United States.\"], \"note\": \"Page 42 says Medicare does not cover emergency care outside the U.S., but the document does not call this benefit supplemental.\"},\n {\"plan_id\": \"H5439-019-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$130\", \"condition\": \"urgently needed services\", \"page\": 118, \"quotes\": [\"$130 copay for urgently needed services outside of the United States.\"], \"note\": \"Page 42 says Medicare does not cover emergency care outside the U.S., but the document does not call this benefit supplemental.\"},\n {\"plan_id\": \"H5439-019-0\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$40\", \"condition\": \"urgently needed services\", \"page\": 118, \"quotes\": [\"$40 copay for Medicare-covered urgently needed service visits.\"]}]\n```",
+ "usage": {
+  "input_tokens": 9498,
+  "output_tokens": 1699,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

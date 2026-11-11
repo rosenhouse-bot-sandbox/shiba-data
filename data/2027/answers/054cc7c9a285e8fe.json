@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "61de2101267140ce.md",
+ "reply": "```json\n[{\"plan_id\": \"H1372-003-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"2\", \"unit\": \"oral exams\", \"limit\": \"per year\", \"page\": 5, \"quotes\": [\"oral exams (up to 2 per year)\"], \"note\": \"Limit applies to oral exams.\"},\n{\"plan_id\": \"H1372-003-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"2\", \"unit\": \"cleanings\", \"limit\": \"per year\", \"page\": 5, \"quotes\": [\"cleanings (up to 2 per year)\"], \"note\": \"Limit applies to cleanings.\"},\n{\"plan_id\": \"H1372-003-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"1\", \"unit\": \"fluoride treatments\", \"limit\": \"every 6 months\", \"page\": 5, \"quotes\": [\"fluoride treatments (up to 1 every 6\"], \"note\": \"Limit applies to fluoride treatments. The word 'months' is on the next printed line.\"}]\n```",
+ "usage": {
+  "input_tokens": 2546,
+  "output_tokens": 1106,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

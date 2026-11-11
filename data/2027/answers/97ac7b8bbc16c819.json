@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-da2974c756f3eedc.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 7 Dental Services: the plan pays as much as $3,000 per year for covered dental services. Supplemental dental, and members must use participating providers.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 7 lists fillings, extractions, dentures, root canals, crowns and bridges among covered dental services.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 7: you pay $0 toward all covered dental services until the plan's dollar limit is reached, with participating providers.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 7 lists periodic oral exams, evaluations, cleanings and X-rays among covered dental services.\"}]\n```",
+ "usage": {
+  "input_tokens": 2614,
+  "output_tokens": 464,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

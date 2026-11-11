@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "808ccc78793ded84.md",
+ "reply": "```json\n[{\"plan_id\": \"H7199-002-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$130\", \"page\": 72,\n  \"quotes\": [\"Your cost-share for emergency services worldwide is: $130 copay\"]},\n {\"plan_id\": \"H7199-002-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"max\", \"amount\": \"$25,000\", \"limit\": \"per lifetime\", \"page\": 73,\n  \"quotes\": [\"The plan covers worldwide emergency, urgent care, and ambulance services up to $25,000 per lifetime.\"]},\n {\"plan_id\": \"H7199-002-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$130\", \"condition\": \"urgently needed services\", \"page\": 123,\n  \"quotes\": [\"Your cost-share for urgently needed services worldwide is: $130 copay\"]},\n {\"plan_id\": \"H7199-002-0\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$45\", \"condition\": \"urgently needed services\", \"page\": 123,\n  \"quotes\": [\"You pay a $45 copay for urgently needed services provided in an Urgent Care Center.\"],\n  \"note\": \"Cost is for an Urgent Care Center or Walk-in Retail Clinic; recorded as setting any because only any and outside_us are listed.\"},\n {\"plan_id\": \"H7199-002-0\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"out\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$45\", \"condition\": \"urgently needed services\", \"page\": 124,\n  \"quotes\": [\"You pay a $45 copay for urgently needed services provided in an Urgent Care Center.\"],\n  \"note\": \"Out-of-network column continued from page 123; cost is for an Urgent Care Center or Walk-in Retail Clinic.\"}]\n```",
+ "usage": {
+  "input_tokens": 10471,
+  "output_tokens": 2299,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

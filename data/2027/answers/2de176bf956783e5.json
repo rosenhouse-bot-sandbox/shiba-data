@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-37b0122461ea99ed.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 120, outside-U.S. urgently needed row: $130 copay for urgently needed services outside the United States. The condition matches the page's name for that care, and network is any for care outside the U.S.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 72, emergency row: $130 copay for emergency services outside the United States. This cost covers emergency care, so no condition is needed, and network is any for care outside the U.S.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 72: the plan covers up to $50,000 every year for emergency or urgently needed services outside the United States. This is a per-year max.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 72: $130 copay for Medicare-covered emergency room visits. The page says out-of-network emergency cost sharing is the same as in-network, which supports network any.\"}]\n```",
+ "usage": {
+  "input_tokens": 3183,
+  "output_tokens": 567,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

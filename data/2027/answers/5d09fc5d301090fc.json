@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "a4bc20077fb4a2cf.md",
+ "reply": "```json\n[\n  {\n    \"plan_id\": \"H3817-011-1\",\n    \"benefit\": \"emergency\",\n    \"setting\": \"any\",\n    \"network\": \"any\",\n    \"covered_by\": \"medicare\",\n    \"cost_kind\": \"copay\",\n    \"amount\": \"$130\",\n    \"unit\": \"per visit\",\n    \"limit\": \"\",\n    \"page\": 46,\n    \"quotes\": [\"$130 copay per visit\"],\n    \"note\": \"\"\n  },\n  {\n    \"plan_id\": \"H3817-011-1\",\n    \"benefit\": \"emergency\",\n    \"setting\": \"any\",\n    \"network\": \"any\",\n    \"covered_by\": \"medicare\",\n    \"cost_kind\": \"copay\",\n    \"amount\": \"$50\",\n    \"unit\": \"per visit\",\n    \"limit\": \"\",\n    \"condition\": \"Urgently needed services\",\n    \"page\": 69,\n    \"quotes\": [\"$50 copay per visit\"],\n    \"note\": \"Urgent care center office visit.\"\n  },\n  {\n    \"plan_id\": \"H3817-011-1\",\n    \"benefit\": \"emergency\",\n    \"setting\": \"outside_us\",\n    \"network\": \"any\",\n    \"covered_by\": \"supplemental\",\n    \"cost_kind\": \"copay\",\n    \"amount\": \"$130\",\n    \"unit\": \"per visit\",\n    \"limit\": \"\",\n    \"page\": 71,\n    \"quotes\": [\"$130 copay per visit\"],\n    \"note\": \"Worldwide emergency or urgent care. Page 30 calls this a supplemental benefit.\"\n  }\n]\n```",
+ "usage": {
+  "input_tokens": 10303,
+  "output_tokens": 1427,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

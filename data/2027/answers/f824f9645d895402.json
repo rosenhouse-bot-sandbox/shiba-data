@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-6c89db5198e7a3b2.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 Emergency room visit row: $130 copay out of network.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Page 4: 'Not covered' out of network applies only to virtual urgent care through Doctor On Demand. The generic condition 'Urgently needed services' misstates this. Urgent care visits ($50) and virtual visits through a local care center ($0) are covered out of network.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 4 Worldwide emergency care row: $130 copay, network any.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 4 virtual urgent care through Doctor On Demand row: $0 copay in network.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 4 Emergency room visit row: $130 copay in network.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 4 Urgent care visit row under Urgently needed services: $50 copay out of network.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 4 Worldwide urgent care visit row: $130 copay, outside the U.S., network any.\"}]\n```",
+ "usage": {
+  "input_tokens": 2666,
+  "output_tokens": 789,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

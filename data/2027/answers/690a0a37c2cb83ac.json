@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "2c101bd739d45a62.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-028-3\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$115\", \"unit\": \"per visit\", \"limit\": \"\", \"page\": 5, \"quotes\": [\"$115 per visit\"], \"note\": \"\"},\n{\"plan_id\": \"H2923-028-3\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"page\": 5, \"quotes\": [\"This plan also covers emergency services worldwide as a supplemental benefit.\"], \"note\": \"The page states worldwide emergency coverage but no cost or plan maximum for it. The quoted sentence wraps across several lines of the left column.\"}]\n```",
+ "usage": {
+  "input_tokens": 2496,
+  "output_tokens": 864,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

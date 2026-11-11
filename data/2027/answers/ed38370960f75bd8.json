@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-7dcf10accd77535d.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 6 Urgently Needed Services row: $50 copay. No network split is shown, so in-network applies by default.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 6 Worldwide Emergency Coverage row: $130 copay outside the U.S. The quoted wording is from that row.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 6 worldwide rows: $50,000 maximum plan coverage. The page states no time period, so the blank limit matches.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 6 Emergency Care row: $130 copay.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 6 Worldwide Urgent Care Coverage row: $130 copay. The quoted 'The copay is not waived' wording is from that row.\"}]\n```",
+ "usage": {
+  "input_tokens": 2512,
+  "output_tokens": 786,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

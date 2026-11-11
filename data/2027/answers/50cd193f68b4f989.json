@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-57.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 16, Section 4.3 (optional supplemental benefit premium) reads \\\"MyOption DEN972: $52.10 additional monthly premium\\\" for HumanaChoice H5216-048. The page does not say \\\"dental\\\" outright, but the DEN package name and the supplemental-premium section support a dental package premium of $52.10 per month.\"}]\n```",
+ "usage": {
+  "input_tokens": 2602,
+  "output_tokens": 376,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

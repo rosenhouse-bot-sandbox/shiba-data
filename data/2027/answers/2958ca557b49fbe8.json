@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-cabbc3b82885b498.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5 Emergency Care row: $115 per visit. This is the Medicare-covered in-network emergency cost.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 5 Emergency Care row says the plan also covers emergency services worldwide as a supplemental benefit. No amount is stated, so the cost kind is covered, with network any.\"}]\n```",
+ "usage": {
+  "input_tokens": 2301,
+  "output_tokens": 297,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "64e05773e847b56e.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-153-0\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$115\", \"page\": 51, \"quotes\": [\"Emergency Services $115 copayment\"], \"note\": \"Emergency Room copay; waived if admitted to the same hospital within 24 hours for the same condition\"},\n {\"plan_id\": \"H1036-153-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$115\", \"page\": 51, \"quotes\": [\"Worldwide Coverage $115 copayment\"], \"note\": \"Worldwide Emergency Room copay; page 36 calls worldwide emergency care a supplemental benefit\"},\n {\"plan_id\": \"H1036-153-0\", \"benefit\": \"emergency\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$40\", \"condition\": \"Urgently Needed Services\", \"page\": 71, \"quotes\": [\"Urgently Needed Services $40 copayment\"], \"note\": \"Urgent Care Center copay\"},\n {\"plan_id\": \"H1036-153-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$40\", \"condition\": \"Urgently Needed Services\", \"page\": 71, \"quotes\": [\"Worldwide Coverage $40 copayment\"], \"note\": \"Worldwide Urgent Care Center copay; page 36 calls worldwide urgent care a supplemental benefit\"}]\n```",
+ "usage": {
+  "input_tokens": 9349,
+  "output_tokens": 1937,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

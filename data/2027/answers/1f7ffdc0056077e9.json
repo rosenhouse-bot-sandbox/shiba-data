@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-f961eb582c1534d5.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 53: in-network $0 copay for each restorative, endodontic and periodontic service, all supplemental comprehensive dental.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Page 50: the in-network Medicare-covered dental copay is $30. $60 is the out-of-network amount.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 112: Wellcare Spendables® card gives $20 monthly that can be used for dental (also OTC, vision and hearing).\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 51: out-of-network 50% coinsurance for each oral exam, cleaning and fluoride treatment.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 53: out-of-network 50% coinsurance for each restorative, endodontic and periodontic service.\"},\n{\"id\": 5, \"ok\": false, \"reason\": \"Page 50: the out-of-network Medicare-covered dental copay is $60. $30 is the in-network amount.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 50: $1,000 plan benefit allowance every year for all in-network and out-of-network covered Comprehensive Dental services.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 50: out-of-network $60 copay for each Medicare-covered dental service.\"},\n{\"id\": 8, \"ok\": true, \"reason\": \"Page 51: in-network $0 copay for cleanings, fluoride treatment and dental x-rays (oral exam $0 on page 50).\"},\n{\"id\": 9, \"ok\": true, \"reason\": \"Page 50: in-network $30 copay for each Medicare-covered dental service.\"}]\n```",
+ "usage": {
+  "input_tokens": 4943,
+  "output_tokens": 1074,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

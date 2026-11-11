@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-2aa68f4230962abc.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 70 Worldwide Emergency Care: the plan covers worldwide emergency, urgent care and ambulance services up to $25,000 per lifetime, outside the U.S. only. This is a supplemental benefit with network any.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 69 Emergency care row: $115 per visit. Out-of-network cost sharing is the same as in-network, so network any is right for this Medicare-covered emergency care.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 70 Worldwide Emergency Care (services outside the United States): the cost-share for emergency services worldwide is a $115 copay. This is a supplemental benefit.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 107 Worldwide Urgently Needed Services: the cost-share for urgently needed services worldwide is a $115 copay. The condition 'urgently needed services' is correct.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 107 Urgently Needed Services at an Urgent Care Center or Walk-in Retail Clinic: $40 copay, with the same $40 via telehealth. The condition 'urgently needed services' fits a cost only for urgently needed care.\"}]\n```",
+ "usage": {
+  "input_tokens": 4787,
+  "output_tokens": 955,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

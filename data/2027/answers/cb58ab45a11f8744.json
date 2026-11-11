@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-18.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 59 Routine dental benefits row: 'You are covered for routine dental benefits.' This text spans both the in-network and out-of-network columns, so network any is supported. No amount is given, so covered fits.\"}]\n```",
+ "usage": {
+  "input_tokens": 2324,
+  "output_tokens": 287,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
