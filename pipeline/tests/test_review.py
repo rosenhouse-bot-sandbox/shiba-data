@@ -186,6 +186,15 @@ class GateTest(unittest.TestCase):
 
 
 class VersionTest(unittest.TestCase):
+    def test_asks_with_the_versions_notes(self):
+        notes = {"imaging": "Read this."}
+        with tempfile.TemporaryDirectory() as work, mock.patch.object(review, "Doc") as doc, \
+                mock.patch.object(extract, "verifier_task", return_value="task") as verifier_task:
+            doc.return_value.pages.return_value = {}
+            review.gate(DATA, None, work, answering(), TRUSTED, COMMITTED + [fact()],
+                        dict(reviewer=("m", "e"), review_cap=10, notes=notes), HELD)
+        self.assertEqual(verifier_task.call_args.args[-1], notes)
+
     def test_version_11_is_10_with_a_reviewer(self):
         v = document_facts.VERSIONS[11]
         self.assertEqual(dict(v, reviewer=None, review_cap=None), dict(document_facts.VERSIONS[10], reviewer=None,

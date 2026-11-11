@@ -99,8 +99,8 @@ RECHECK = ("Earlier readers may have missed some facts. Read every page again, i
            "each benefit's row. Reply with only the facts for {plans} that {lacks}, or `[]` if there are none.")
 
 
-def task(doc, plan_rows, pages, group, data, failed=(), known=None, plan_ids=()):
-    parts = [fill("fact_prompt.md", doc, plan_rows, data, VOCABULARY=facts.describe(group))]
+def task(doc, plan_rows, pages, group, data, failed=(), known=None, plan_ids=(), notes={}):
+    parts = [fill("fact_prompt.md", doc, plan_rows, data, VOCABULARY=facts.describe(group, notes))]
     if known is not None:
         plans_text = ", ".join(sorted(plan_ids))
         found = (f"Earlier readers found these facts for {plans_text}:\n\n" + "\n".join(
@@ -224,9 +224,9 @@ def shown(fact):
             | {"quotes": json.loads(fact["quotes"])})
 
 
-def verifier_task(doc, plan_rows, pages, items, data):
+def verifier_task(doc, plan_rows, pages, items, data, notes={}):
     groups = sorted({c["benefit"].split(".")[0] for c in items})
-    parts = [fill("vfact_prompt.md", doc, plan_rows, data, VOCABULARY="\n\n".join(facts.describe(g) for g in groups))]
+    parts = [fill("vfact_prompt.md", doc, plan_rows, data, VOCABULARY="\n\n".join(facts.describe(g, notes) for g in groups))]
     parts += [json.dumps({"id": n, **shown(c)}, ensure_ascii=False) for n, c in enumerate(items)]
     parts.append("## Pages\n\n" + page_text({p: pages[p] for p in {int(c["page"]) for c in items}}))
     return "\n\n".join(parts) + "\n"
@@ -267,7 +267,7 @@ def write_outcomes(out_dir, outcomes):
         json.dump(outcomes, f, indent=1, ensure_ascii=False)
 
 
-def read(work, out_dir, group, data=DATA, ids=None):
+def read(work, out_dir, group, data=DATA, ids=None, notes={}):
     """Writes a task for each document that mentions the group, or for those of them named in ids."""
     os.makedirs(out_dir, exist_ok=True)
     plan_rows = plans(data)
@@ -277,10 +277,10 @@ def read(work, out_dir, group, data=DATA, ids=None):
         pages = Doc(work, doc["id"]).pages("layout")
         if relevant(pages, group):
             with open(f"{out_dir}/{doc['id']}.md", "w") as f:
-                f.write(task(doc, plan_rows, pages, group, data))
+                f.write(task(doc, plan_rows, pages, group, data, notes=notes))
 
 
-def reread(work, out_dir, group, plan_ids, known, data=DATA):
+def reread(work, out_dir, group, plan_ids, known, data=DATA, notes={}):
     """Writes a task for each relevant document covering plan_ids. It lists the facts known for those plans and asks
     for the rest."""
     os.makedirs(out_dir, exist_ok=True)
@@ -291,10 +291,10 @@ def reread(work, out_dir, group, plan_ids, known, data=DATA):
         if mine and relevant(pages, group):
             theirs = [f for f in known if f["doc_sha"] == doc["sha256"] and f["plan_id"] in mine]
             with open(f"{out_dir}/{doc['id']}.md", "w") as f:
-                f.write(task(doc, plan_rows, pages, group, data, known=theirs, plan_ids=mine))
+                f.write(task(doc, plan_rows, pages, group, data, known=theirs, plan_ids=mine, notes=notes))
 
 
-def extract_facts(work, answers_dir, group, out, data=DATA, merge=False):
+def extract_facts(work, answers_dir, group, out, data=DATA, merge=False, notes={}):
     plan_rows, found, retries, outcomes = plans(data), [], 0, []
     for doc in documents(data):
         first = f"{answers_dir}/{doc['id']}.json"
@@ -312,7 +312,7 @@ def extract_facts(work, answers_dir, group, out, data=DATA, merge=False):
                      for prompt, n, (a, why, row) in zip(prompts, items, checked)]
         if failed:
             with open(f"{answers_dir}/{doc['id']}.retry.md", "w") as f:
-                f.write(task(doc, plan_rows, pages, group, data, failed))
+                f.write(task(doc, plan_rows, pages, group, data, failed, notes=notes))
             retries += 1
         found += got
     with open(out, "w") as f:
@@ -321,7 +321,7 @@ def extract_facts(work, answers_dir, group, out, data=DATA, merge=False):
     print(len(found), "facts;", retries, "retry tasks")
 
 
-def verify(work, facts_path, out_dir, data=DATA, known=()):
+def verify(work, facts_path, out_dir, data=DATA, known=(), notes={}):
     """Known facts are not checked again, but help make decoys."""
     os.makedirs(out_dir, exist_ok=True)
     with open(facts_path) as f:
@@ -336,7 +336,7 @@ def verify(work, facts_path, out_dir, data=DATA, known=()):
         mixed = [dict(f, decoy=False) for f in mine] + [dict(f, decoy=True) for f in decoys(mine + theirs, rnd)]
         rnd.shuffle(mixed)
         with open(f"{out_dir}/v-{doc['id']}.md", "w") as f:
-            f.write(verifier_task(doc, plan_rows, Doc(work, doc["id"]).pages("layout"), mixed, data))
+            f.write(verifier_task(doc, plan_rows, Doc(work, doc["id"]).pages("layout"), mixed, data, notes))
         items += [dict(c, task=doc["id"]) for c in mixed]
     with open(f"{out_dir}/items.json", "w") as f:
         json.dump(items, f, indent=1)

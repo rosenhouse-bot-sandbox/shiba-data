@@ -983,6 +983,12 @@ class WriteTest(unittest.TestCase):
             ("dvha.I_alt_care_otc_travel", "H5216-455-0")})
         self.assertLessEqual(set(present.VERSIONS[11]), set(present.VERSIONS[10]))
 
+    def test_version_14_presents_the_cells_whose_facts_document_facts_17_fixes(self):
+        self.assertEqual(set(present.VERSIONS[13]) - set(present.VERSIONS[14]), {
+            ("dvha.F_dental", "H2923-025-0"), ("dvha.I_alt_care_otc_travel", "H5216-048-0"),
+            ("dvha.I_alt_care_otc_travel", "H5216-455-0")})
+        self.assertLessEqual(set(present.VERSIONS[14]), set(present.VERSIONS[13]))
+
     def test_version_12_holds_no_cell(self):
         self.assertEqual(present.held(years.data_dir(YEAR), 12), {})
 
