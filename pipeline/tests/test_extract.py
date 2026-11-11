@@ -143,6 +143,22 @@ class MergeTest(unittest.TestCase):
         found, failed = self.run_it(answer(), answer(quotes=["MRI and CT scans $250 copay"], amount="$250"))
         self.assertEqual((found, [why for _, why in failed]), ([], [extract.CLASH] * 2))
 
+    def test_merging_limits_drops_the_limits_that_differ(self):
+        two = answer(note="a", limit="1 per year"), answer(note="b", limit="2 per year")
+        self.assertEqual(self.run_it(*two)[0], [])
+        found, failed = extract.doc_facts(DOC, "imaging", list(two), None, PAGES, ok_unless_bad, merge="limits")[:2]
+        self.assertEqual((failed, [f["limit"] for f in found]), ([], [""]))
+
+    def test_merging_limits_keeps_the_limits_of_a_cap(self):
+        two = answer(cost_kind="max", note="a", limit="per year"), answer(cost_kind="max", note="b", limit="per visit")
+        found, failed = extract.doc_facts(DOC, "imaging", list(two), None, PAGES, ok_unless_bad, merge="limits")[:2]
+        self.assertEqual((found, [why for _, why in failed]), ([], [extract.CLASH] * 2))
+
+    def test_merging_limits_keeps_a_shared_limit(self):
+        found = extract.doc_facts(DOC, "imaging", [answer(note="a", limit="1 per year"), answer(note="b", limit="1 per year")],
+                                  None, PAGES, ok_unless_bad, merge="limits")[0]
+        self.assertEqual([f["limit"] for f in found], ["1 per year"])
+
     def test_without_merge_both_copies_clash(self):
         found, failed = extract.doc_facts(DOC, "imaging", [answer(note="a"), answer(note="b")], None, PAGES,
                                           ok_unless_bad)[:2]

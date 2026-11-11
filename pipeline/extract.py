@@ -166,21 +166,29 @@ def problem(doc, group, a, pages, quote_ok):
     return None, row
 
 
-def merged(rows):
-    """Rows that share an identity, as one row with all their quotes and notes, or None if they differ otherwise."""
-    if len({tuple(r[c] for c in facts.COLUMNS if c not in ("quotes", "note")) for r in rows}) > 1:
+PRICES = ("copay", "coinsurance")
+
+
+def merged(rows, limits=False):
+    """Rows that share an identity, as one row with all their quotes and notes, or None if they differ otherwise.
+    With limits, prices may also differ in limit, and then the row has none."""
+    free = ("quotes", "note", "limit") if limits and rows[0]["cost_kind"] in PRICES else ("quotes", "note")
+    if len({tuple(r[c] for c in facts.COLUMNS if c not in free) for r in rows}) > 1:
         return None
     quotes = list(dict.fromkeys(q for r in rows for q in json.loads(r["quotes"])))
     notes = " ".join(dict.fromkeys(r["note"] for r in rows if r["note"]))
-    return dict(rows[0], quotes=json.dumps(quotes, ensure_ascii=False), note=notes)
+    limit = rows[0]["limit"] if len({r["limit"] for r in rows}) == 1 else ""
+    return dict(rows[0], quotes=json.dumps(quotes, ensure_ascii=False), note=notes, limit=limit)
 
 
 def checks(doc, group, answers, pages, quote_ok, merge=False):
     """Each answer with why it cannot be a fact, or None, and the fact.
-    With merge, answers that differ only in quotes and notes become one fact."""
+    With merge, answers that differ only in quotes and notes become one fact. With merge "limits", so do those that
+    differ in limits too."""
     checked = [(a, *problem(doc, group, a, pages, quote_ok)) for a in answers]
     clash = set(facts.conflicts([r for _, why, r in checked if not why]))
-    rows = {i: merged([r for _, why, r in checked if not why and facts.identity(r) == i]) if merge else None for i in clash}
+    rows = {i: merged([r for _, why, r in checked if not why and facts.identity(r) == i], merge == "limits") if merge else None
+            for i in clash}
     return [(a, why, r) if why or facts.identity(r) not in clash else (a, None, rows[facts.identity(r)])
             if rows[facts.identity(r)] else (a, CLASH, None) for a, why, r in checked]
 
