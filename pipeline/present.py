@@ -213,9 +213,28 @@ def ambulance(organization, found):
             note(f, "line 2 shows that trips abroad are covered")
     elif excluded:
         line2 = ("not covered", excluded)
-    else:
-        line2 = ("", [])
+    emergency = [f for f in found if f["benefit"] == "emergency"]
+    if not abroad:
+        return [(show_or(here), here), emergency_abroad(emergency)]
+    for f in emergency:
+        note(f, "a fact names trips abroad")
     return [(show_or(here), here), line2]
+
+
+PLAIN_CARE = "line 2 uses only the EOC's plain emergency care abroad"
+
+
+def emergency_abroad(emergency):
+    """Line 2 from the EOC's emergency care abroad: "not covered" if it excludes that care, or "EOC unclear" if it
+    covers it, since no fact names trips abroad."""
+    care = keep(emergency, lambda f: f["setting"] == "outside_us" and f["source"] == "EOC"
+                and not (f["provider_tier"] or f["package"] or f["condition"]), lambda f: PLAIN_CARE)
+    covered = [f for f in care if f["cost_kind"] != "not_covered"]
+    if covered:
+        for f in care:
+            note(f, None if f in covered else "line 2 says the EOC is unclear")
+        return "EOC unclear", covered
+    return ("not covered", care) if care else ("", [])
 
 
 ZERO_SURGERIES = ("surgery.colonoscopy", "surgery.skin_biopsy")
@@ -957,7 +976,7 @@ COLUMNS = {"L_xray_imaging": xray_imaging, "AB_ambulance": ambulance, "I_outpati
 
 
 # The benefits each rule reads. A fact for a broader or narrower benefit is one the rule considers.
-LEAVES = {"L_xray_imaging": ("imaging",), "AB_ambulance": ("ambulance",), "I_outpatient_surgery": ("surgery",),
+LEAVES = {"L_xray_imaging": ("imaging",), "AB_ambulance": ("ambulance", "emergency"), "I_outpatient_surgery": ("surgery",),
           "F_primary_care": ("visits",), "G_specialist": ("visits",), "H_inpatient": ("inpatient",),
           "J_outpatient_rehab": ("rehab",), "K_tests_labs": ("tests",), "Z_part_b_reduction": ("giveback",),
           "M_part_b_drugs": ("part_b_drugs",), "O_medical_deductible": ("medical_deductible",),
@@ -1131,6 +1150,8 @@ VERSIONS[13] = {
 VERSIONS[14] = {k: v for k, v in VERSIONS[13].items() if k not in {
     ("dvha.F_dental", "H2923-025-0"), ("dvha.I_alt_care_otc_travel", "H5216-048-0"),
     ("dvha.I_alt_care_otc_travel", "H5216-455-0")}}
+# Version 15 holds no cell. EOC page 90 gives H5439-019-0's $10 lab price, and H1036-306-0's dental rule only omits detail.
+VERSIONS[15] = {}
 # The version that first presents each later column. Earlier versions hold its cells.
 SINCE = {("dvha", "C_premium"): 3, ("dvha", "G_vision"): 4, ("dvha", "H_hearing"): 4, ("dvha", "E_optional_packages"): 5,
          ("dvha", "F_dental"): 6, ("dvha", "I_alt_care_otc_travel"): 6, ("dvha", "J_extra_benefits"): 6,

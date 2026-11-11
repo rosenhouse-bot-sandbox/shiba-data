@@ -33,13 +33,22 @@ def to_review(data, trusted_rows, new, held):
     return list({row(f): f for f in new if row(f) in rows}.values())
 
 
+def joined(*notes):
+    """Each group's notes, in order."""
+    return {g: " ".join(n[g] for n in notes if n.get(g)) for g in set().union(*notes)}
+
+
 def checker_notes(version):
-    """The notes for each group's verifier and reviewer: the version's notes, then its check_notes."""
-    notes, more = version.get("notes", {}), version.get("check_notes", {})
-    return {g: " ".join(n for n in (notes.get(g), more.get(g)) if n) for g in notes | more}
+    """The notes for each group's verifier: the version's notes, then its check_notes."""
+    return joined(version.get("notes", {}), version.get("check_notes", {}))
 
 
-def task(data, texts, notes={}, after={}):
+def second_notes(version):
+    """The notes for each group's second verifier and reviewer: the checker notes, then the recheck_notes."""
+    return joined(checker_notes(version), version.get("recheck_notes", {}))
+
+
+def task(data, texts, notes={}, after={}, before={}):
     docs = {d["sha256"]: d for d in extract.documents(data)}
     plan_rows = extract.plans(data)
     pages = {}
@@ -48,7 +57,7 @@ def task(data, texts, notes={}, after={}):
         doc = docs[f["doc_sha"]]
         if doc["id"] not in pages:
             pages[doc["id"]] = Doc(texts, doc["id"]).pages("layout")
-        return extract.verifier_task(doc, plan_rows, pages[doc["id"]], [f], data, notes, after=after)
+        return extract.verifier_task(doc, plan_rows, pages[doc["id"]], [f], data, notes, after=after, before=before)
     return of
 
 
@@ -60,7 +69,8 @@ def gate(data, texts, work, answer, trusted_rows, new, version, held, task_of=No
     """new without the facts the reviewer rejects, and the kept facts that are cited or trusted, which a later run trusts.
     Stops if more facts than version["review_cap"] lack a saved answer.
     Writes <work>/review/outcomes.json with each verdict, and the saved verdicts of the trusted facts that have one."""
-    task_of = task_of or task(data, texts, checker_notes(version), version.get("check_after", {}))
+    task_of = task_of or task(data, texts, second_notes(version), version.get("check_after", {}),
+                              version.get("check_before", {}))
     model, effort = version["reviewer"]
     verdict, unsaved, outcomes, out = {}, 0, [], f"{work}/review"
     while True:

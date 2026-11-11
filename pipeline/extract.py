@@ -122,10 +122,11 @@ OUTCOMES = "outcomes.json"
 
 # These groups' documents state some $0 amounts in words.
 ZERO_GROUPS = ("part_b_drugs", "medical_deductible")
-NO_COST = re.compile(r"\bno (?:coinsurance|copay|deductible)|does not have a (?:medical )?deductible|no deductible for medical", re.I)
+NO_COST = re.compile(r"\bno (?:coinsurance|copay|deductible)|does not have a (?:medical )?deductible|no deductible for medical|"
+                     r"(?:don[’']t|do not) pay a separate monthly plan premium", re.I)
 
 
-def problem(doc, group, a, pages, quote_ok):
+def problem(doc, group, a, pages, quote_ok, zero=ZERO_GROUPS):
     """Why the answer cannot be a fact, or None, and the fact."""
     if not isinstance(a, dict):
         return "not an object", None
@@ -159,7 +160,7 @@ def problem(doc, group, a, pages, quote_ok):
     if failing:
         return "quote not found exactly once on its page: " + "; ".join(json.dumps(q) for q in failing), None
     missing = numbers(row["amount"]) - sum((numbers(q) for q in a["quotes"]), collections.Counter())
-    if group in ZERO_GROUPS and missing == collections.Counter({"$0": 1}) and any(NO_COST.search(q) for q in a["quotes"]):
+    if group in zero and missing == collections.Counter({"$0": 1}) and any(NO_COST.search(q) for q in a["quotes"]):
         missing = None
     if missing:
         return "no quote shows " + ", ".join(sorted(missing)), None
@@ -181,11 +182,11 @@ def merged(rows, limits=False):
     return dict(rows[0], quotes=json.dumps(quotes, ensure_ascii=False), note=notes, limit=limit)
 
 
-def checks(doc, group, answers, pages, quote_ok, merge=False):
+def checks(doc, group, answers, pages, quote_ok, merge=False, zero=ZERO_GROUPS):
     """Each answer with why it cannot be a fact, or None, and the fact.
     With merge, answers that differ only in quotes and notes become one fact. With merge "limits", so do those that
     differ in limits too."""
-    checked = [(a, *problem(doc, group, a, pages, quote_ok)) for a in answers]
+    checked = [(a, *problem(doc, group, a, pages, quote_ok, zero)) for a in answers]
     clash = set(facts.conflicts([r for _, why, r in checked if not why]))
     rows = {i: merged([r for _, why, r in checked if not why and facts.identity(r) == i], merge == "limits") if merge else None
             for i in clash}
@@ -232,12 +233,13 @@ def shown(fact):
             | {"quotes": json.loads(fact["quotes"])})
 
 
-def verifier_task(doc, plan_rows, pages, items, data, notes={}, after={}):
-    """after names how many pages after an item's page its group's checkers see."""
+def verifier_task(doc, plan_rows, pages, items, data, notes={}, after={}, before={}):
+    """after and before name how many pages after and before an item's page its group's checkers see."""
     groups = sorted({c["benefit"].split(".")[0] for c in items})
     parts = [fill("vfact_prompt.md", doc, plan_rows, data, VOCABULARY="\n\n".join(facts.describe(g, notes) for g in groups))]
     parts += [json.dumps({"id": n, **shown(c)}, ensure_ascii=False) for n, c in enumerate(items)]
-    shown_pages = {int(c["page"]) + n for c in items for n in range(after.get(c["benefit"].split(".")[0], 0) + 1)}
+    shown_pages = {int(c["page"]) + n for c in items for g in [c["benefit"].split(".")[0]]
+                   for n in range(-before.get(g, 0), after.get(g, 0) + 1)}
     parts.append("## Pages\n\n" + page_text({p: pages[p] for p in shown_pages if p in pages}))
     return "\n\n".join(parts) + "\n"
 
@@ -252,10 +254,10 @@ def answers(path):
     return found if isinstance(found, list) else [found]
 
 
-def doc_facts(doc, group, first, retry, pages, quote_ok, merge=False):
+def doc_facts(doc, group, first, retry, pages, quote_ok, merge=False, zero=ZERO_GROUPS):
     """The document's facts from its first answers and any retry answers, the failures to retry, if it needs a retry,
     and each answer's check."""
-    checked = checks(doc, group, first + (retry or []), pages, quote_ok, merge)
+    checked = checks(doc, group, first + (retry or []), pages, quote_ok, merge, zero)
     found, failed = passed(checked)
     return found, (failed if retry is None else []), checked
 
@@ -304,7 +306,7 @@ def reread(work, out_dir, group, plan_ids, known, data=DATA, notes={}):
                 f.write(task(doc, plan_rows, pages, group, data, known=theirs, plan_ids=mine, notes=notes))
 
 
-def extract_facts(work, answers_dir, group, out, data=DATA, merge=False, notes={}):
+def extract_facts(work, answers_dir, group, out, data=DATA, merge=False, notes={}, zero=ZERO_GROUPS):
     plan_rows, found, retries, outcomes = plans(data), [], 0, []
     for doc in documents(data):
         first = f"{answers_dir}/{doc['id']}.json"
@@ -314,7 +316,7 @@ def extract_facts(work, answers_dir, group, out, data=DATA, merge=False, notes={
         pages = d.pages("layout")
         stated = answers(first)
         got, failed, checked = doc_facts(doc, group, stated, answers(retry) if os.path.exists(retry) else None,
-                                         pages, d.quote_ok, merge)
+                                         pages, d.quote_ok, merge, zero)
         prompts = [prompt_of(f"{answers_dir}/{doc['id']}.md")] * len(stated) + [prompt_of(retry[:-5] + ".md")] * (
             len(checked) - len(stated))
         items = list(range(len(stated))) + list(range(len(checked) - len(stated)))
@@ -331,7 +333,7 @@ def extract_facts(work, answers_dir, group, out, data=DATA, merge=False, notes={
     print(len(found), "facts;", retries, "retry tasks")
 
 
-def verify(work, facts_path, out_dir, data=DATA, known=(), notes={}, after={}):
+def verify(work, facts_path, out_dir, data=DATA, known=(), notes={}, after={}, before={}):
     """Known facts are not checked again, but help make decoys."""
     os.makedirs(out_dir, exist_ok=True)
     with open(facts_path) as f:
@@ -346,7 +348,7 @@ def verify(work, facts_path, out_dir, data=DATA, known=(), notes={}, after={}):
         mixed = [dict(f, decoy=False) for f in mine] + [dict(f, decoy=True) for f in decoys(mine + theirs, rnd)]
         rnd.shuffle(mixed)
         with open(f"{out_dir}/v-{doc['id']}.md", "w") as f:
-            f.write(verifier_task(doc, plan_rows, Doc(work, doc["id"]).pages("layout"), mixed, data, notes, after))
+            f.write(verifier_task(doc, plan_rows, Doc(work, doc["id"]).pages("layout"), mixed, data, notes, after, before))
         items += [dict(c, task=doc["id"]) for c in mixed]
     with open(f"{out_dir}/items.json", "w") as f:
         json.dump(items, f, indent=1)

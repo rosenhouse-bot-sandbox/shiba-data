@@ -87,6 +87,20 @@ class GateTest(unittest.TestCase):
         self.assertEqual(len(gate({k: v for k, v in answer(cost_kind="covered").items() if k != "amount"})[0]), 1)
         self.assertEqual(len(gate(answer(cost_kind="visit_limit", amount="4"))[1]), 1)
 
+    def test_a_version_can_name_more_groups_that_price_zeros_in_words(self):
+        pages = {7: "Because we have no deductible, this stage does not apply.", 6: "You don’t pay a separate monthly plan premium."}
+        deductible = answer(benefit="part_d_deductible", cost_kind="deductible", amount="$0", page=7,
+                            quotes=["Because we have no deductible"])
+        premium = answer(benefit="plan_premium", cost_kind="premium", amount="$0", page=6,
+                         quotes=["You don’t pay a separate monthly plan premium."])
+        straight = dict(premium, quotes=["You do not pay a separate monthly plan premium."])
+        pages[6] += " You don't pay a separate monthly plan premium. You do not pay a separate monthly plan premium."
+        for group, a in (("part_d_deductible", deductible), ("plan_premium", premium), ("plan_premium", straight),
+                         ("plan_premium", dict(premium, quotes=["You don't pay a separate monthly plan premium."]))):
+            self.assertEqual(len(extract.doc_facts(DOC, group, [a], None, pages, ok_unless_bad)[0]), 0, group)
+            zero = extract.ZERO_GROUPS + (group,)
+            self.assertEqual(len(extract.doc_facts(DOC, group, [a], None, pages, ok_unless_bad, zero=zero)[0]), 1, group)
+
     def test_words_for_no_cost_show_0_in_groups_that_price_zeros(self):
         pages = {5: "This plan does not have a deductible.", 52: "There is no coinsurance, copayment, or deductible for flu vaccines"}
         deductible = dict(benefit="medical_deductible", cost_kind="deductible", amount="$0", page=5,
@@ -216,6 +230,7 @@ class VerifierTaskTest(unittest.TestCase):
         items = [dict(gate(answer())[0][0], decoy=False)]
         self.assertIn("=====PAGE 62=====\nDental X-rays", extract.verifier_task(DOC, NAMES, PAGES, items, DATA, after={"imaging": 1}))
         self.assertNotIn("=====PAGE 62=====", extract.verifier_task(DOC, NAMES, PAGES, items, DATA, after={"dental": 1}))
+        self.assertIn("=====PAGE 3=====\nIndex", extract.verifier_task(DOC, NAMES, PAGES, items, DATA, before={"imaging": 58}))
         last = [dict(items[0], page="62")]
         self.assertIn("=====PAGE 62=====", extract.verifier_task(DOC, NAMES, PAGES, last, DATA, after={"imaging": 1}))
 

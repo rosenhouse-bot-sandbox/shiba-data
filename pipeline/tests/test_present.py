@@ -128,6 +128,18 @@ class AmbulanceTest(unittest.TestCase):
         self.assertEqual(ambulance(trip(), trip("ambulance", "", setting="outside_us", cost_kind="not_covered"))[1],
                          "not covered")
 
+    def test_line_2_follows_the_eocs_word_on_emergency_care_abroad_when_no_fact_names_trips(self):
+        excluded = trip("emergency", "", setting="outside_us", cost_kind="not_covered")
+        covered = trip("emergency", "$90", setting="outside_us", covered_by="supplemental")
+        self.assertEqual(ambulance(trip(), excluded)[1], "not covered")
+        self.assertEqual(ambulance(trip(), covered)[1], "EOC unclear")
+        self.assertEqual(ambulance(trip(), dict(covered, source="SB"))[1], "")
+        self.assertEqual(ambulance(trip(), covered, trip("ambulance", "$500", setting="outside_us"))[1], "$500")
+        self.assertEqual(present.ambulance("Aetna", [trip(), covered])[1], ("EOC unclear", [covered]))
+        for aside in (dict(covered, condition="urgently needed services"), dict(covered, provider_tier="preferred"),
+                      dict(covered, package="Travel"), dict(covered, setting="any"), dict(covered, benefit="urgent_care")):
+            self.assertEqual(ambulance(trip(), aside)[1], "", aside)
+
     def test_line_2_takes_the_best_source_whatever_it_says(self):
         self.assertEqual(ambulance(trip(), trip("ambulance", "", setting="outside_us", cost_kind="not_covered"),
                                    trip("ambulance", "$500", setting="outside_us", source="SB"))[1], "not covered")
@@ -1009,6 +1021,9 @@ class WriteTest(unittest.TestCase):
             ("dvha.I_alt_care_otc_travel", "H5216-455-0")})
         self.assertLessEqual(set(present.VERSIONS[14]), set(present.VERSIONS[13]))
 
+    def test_version_15_holds_no_cell(self):
+        self.assertEqual(present.VERSIONS[15], {})
+
     def test_version_12_holds_no_cell(self):
         self.assertEqual(present.held(years.data_dir(YEAR), 12), {})
 
@@ -1209,6 +1224,12 @@ class ExplainTest(unittest.TestCase):
             ("AB_ambulance", "Aetna", [f("ambulance.ground", amount="$250"), f("ambulance", "outside_us", "", cost_kind="covered"),
                                        f("ambulance", "outside_us", "$0", cost_kind="not_covered")],
              {"$0": ["line 2 shows that trips abroad are covered"]}),
+            ("AB_ambulance", "Aetna", [f("ambulance.ground", amount="$250"), f("emergency", "outside_us", "$90"),
+                                       f("emergency", "outside_us", "$80", source="SB", page="3"), f("emergency", amount="$70"),
+                                       f("emergency", "outside_us", "$60", cost_kind="not_covered")],
+             {"$80": [present.PLAIN_CARE], "$70": [present.PLAIN_CARE], "$60": ["line 2 says the EOC is unclear"]}),
+            ("AB_ambulance", "Aetna", [f("ambulance", "outside_us", "$100"), f("emergency", "outside_us", "$90")],
+             {"$90": ["a fact names trips abroad"]}),
             ("K_tests_labs", "Aetna", [f("tests.diagnostic", "office.pcp", "$5"),
                                        f("tests.diagnostic.sleep_study", "outpatient_hospital", "$140")],
              {"$140": ["a sleep study counts only for H1036-306-0"]}),

@@ -37,6 +37,10 @@ def fresh(path):
     return path
 
 
+def zero(v):
+    return v.get("zero_groups", extract.ZERO_GROUPS)
+
+
 def merging(v, group):
     return "limits" if group in v.get("merge_limits", ()) else v.get("merge", False)
 
@@ -47,10 +51,11 @@ def group_facts(texts, work, group, answer, v, data):
     notes = v.get("notes", {})
     extract.read(texts, read, group, data, notes=notes)
     answer(read, *v["reader"])
-    extract.extract_facts(texts, read, group, found, data, merging(v, group), notes)
+    extract.extract_facts(texts, read, group, found, data, merging(v, group), notes, zero=zero(v))
     answer(read, *v["reader"])
-    extract.extract_facts(texts, read, group, found, data, merging(v, group), notes)
-    extract.verify(texts, found, check, data, notes=review.checker_notes(v), after=v.get("check_after", {}))
+    extract.extract_facts(texts, read, group, found, data, merging(v, group), notes, zero=zero(v))
+    extract.verify(texts, found, check, data, notes=review.checker_notes(v), after=v.get("check_after", {}),
+                   before=v.get("check_before", {}))
     answer(check, *v["verifier"])
     extract.accept(check, f"{check}/accepted.csv")
     accepted = facts.read(f"{check}/accepted.csv")
@@ -66,11 +71,11 @@ def second_facts(texts, work, group, answer, v, data, plan_ids, known):
     """The facts a second reader adds for plan_ids and its verifier accepts."""
     read, check = fresh(f"{work}/{group}/reread"), fresh(f"{work}/{group}/recheck")
     found = f"{read}/facts.json"
-    notes = v.get("notes", {})
+    notes = review.joined(v.get("notes", {}), v.get("recheck_notes", {}))
     extract.reread(texts, read, group, plan_ids, known, data, notes)
     for _ in range(2):
         answer(read, *v["reader"])
-        extract.extract_facts(texts, read, group, found, data, merging(v, group), notes)
+        extract.extract_facts(texts, read, group, found, data, merging(v, group), notes, zero=zero(v))
     seen = {tuple(f[c] for c in facts.KEY) for f in known}
 
     def skipped(r):
@@ -84,7 +89,8 @@ def second_facts(texts, work, group, answer, v, data, plan_ids, known):
         outcomes = json.load(f)
     extract.write_outcomes(read, [dict(o, skipped=why[tuple(o["fact"][c] for c in facts.IDENTITY)])
                                   if o["fact"] and tuple(o["fact"][c] for c in facts.IDENTITY) in why else o for o in outcomes])
-    extract.verify(texts, found, check, data, known, notes=review.checker_notes(v), after=v.get("check_after", {}))
+    extract.verify(texts, found, check, data, known, notes=review.second_notes(v), after=v.get("check_after", {}),
+                   before=v.get("check_before", {}))
     answer(check, *v["verifier"])
     extract.accept(check, f"{check}/accepted.csv")
     return facts.read(f"{check}/accepted.csv")
@@ -135,3 +141,14 @@ VERSIONS[18] = dict(VERSIONS[17], merge_limits=("dental",), check_notes={
               "provider may have `network` `any`, though its row names no network."})
 # A dental price list can go on past its page, so version 19 shows dental checkers the next page too.
 VERSIONS[19] = dict(VERSIONS[18], check_after={"dental": 1})
+# Version 20 takes a second look at the cells readers left short. Part D deductibles and plan premiums may be $0 in words.
+# Hearing checkers see the page before, where a price's row can start.
+VERSIONS[20] = dict(VERSIONS[19], zero_groups=extract.ZERO_GROUPS + ("part_d_deductible", "plan_premium"),
+                    check_before={"hearing": 1}, recheck=VERSIONS[19]["recheck"] | {
+                        "plan_premium": ("H3817-010-0",), "emergency": VERSIONS[19]["recheck"]["emergency"] + ("H5439-019-0",)},
+                    recheck_notes={
+    "plan_premium": "When a page says in words that the member pays no plan premium, quote those words.",
+    "emergency": "A page that says the plan covers emergency care worldwide gives a `covered` fact with `setting` "
+                 "`outside_us`.",
+    "tests": "A dedicated or independent testing laboratory is `freestanding`.",
+    "surgery": "A price for outpatient surgery that names no place has `setting` `any`."})
