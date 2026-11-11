@@ -1105,6 +1105,10 @@ VERSIONS[13] = {
     ("dvha.I_alt_care_otc_travel", "H5216-048-0"): "the facts take the $50 worldwide urgent care copay for the emergency room's",
     ("dvha.I_alt_care_otc_travel", "H5216-455-0"): "the reviewer rejected the $130 worldwide emergency room copay",
 }
+# document_facts 17 reads the facts these cells lacked.
+VERSIONS[14] = {k: v for k, v in VERSIONS[13].items() if k not in {
+    ("dvha.F_dental", "H2923-025-0"), ("dvha.I_alt_care_otc_travel", "H5216-048-0"),
+    ("dvha.I_alt_care_otc_travel", "H5216-455-0")}}
 # The version that first presents each later column. Earlier versions hold its cells.
 SINCE = {("dvha", "C_premium"): 3, ("dvha", "G_vision"): 4, ("dvha", "H_hearing"): 4, ("dvha", "E_optional_packages"): 5,
          ("dvha", "F_dental"): 6, ("dvha", "I_alt_care_otc_travel"): 6, ("dvha", "J_extra_benefits"): 6,

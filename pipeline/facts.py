@@ -349,8 +349,8 @@ def read(path):
         return list(csv.DictReader(f))
 
 
-def describe(group):
-    """The vocabulary for one benefit group, as Markdown for a reader's task."""
+def describe(group, notes={}):
+    """The vocabulary for one benefit group, and its note in notes, as Markdown for a reader's task."""
     if group not in BENEFITS:
         raise KeyError(group)
 
@@ -360,4 +360,5 @@ def describe(group):
     vocabularies = dict(VOCABULARIES, benefit={k: v for k, v in BENEFITS.items() if covers(group, k)},
                         cost_kind={k: v for k, v in COST_KINDS.items() if k != "out_of_pocket_max" or group == "moop"},
                         setting={k: v for k, v in SETTINGS.items() if k in GROUP_SETTINGS[group]})
-    return "\n\n".join([f"{column}:\n{table(words)}" for column, words in vocabularies.items()] + [AMOUNT_RULES])
+    return "\n\n".join([f"{column}:\n{table(words)}" for column, words in vocabularies.items()] + [AMOUNT_RULES]
+                       + ([notes[group]] if group in notes else []))

@@ -34,6 +34,24 @@ class StepTest(StepsTest):
                          [("copay", "$0-$40", "EOC"), ("covered", "", "EOC")])
         self.assertEqual(asked, [("read", "r", "high"), ("read", "r", "high"), ("check", "v", "low")])
 
+    def test_a_versions_notes_reach_its_readers_and_verifiers(self):
+        prompts = []
+
+        def fake(task_dir, model, effort):
+            for task in glob.glob(f"{task_dir}/*.md"):
+                text = pathlib.Path(task).read_text()
+                prompts.append((os.path.basename(task).startswith("v-"), text))
+                reply = ([{"id": n, "ok": True} for n in range(text.count('{"id": '))] if os.path.basename(task).startswith("v-")
+                         else [answer(page=1)])
+                with open(task[:-3] + ".json", "w") as f:
+                    json.dump(reply, f)
+
+        version = dict(groups=("imaging",), reader=("r", "high"), verifier=("v", "low"), notes={"imaging": "Read this."})
+        with mock.patch.dict(document_facts.VERSIONS, {9: version}):
+            document_facts.step(self.data, self.work, self.dir, fake, 9)
+        self.assertEqual({verifier for verifier, _ in prompts}, {False, True})
+        self.assertTrue(all(facts.describe("imaging", version["notes"]) in text for _, text in prompts))
+
     def test_a_merge_version_keeps_answers_that_differ_only_in_notes(self):
         def fake(task_dir, model, effort):
             for task in glob.glob(f"{task_dir}/*.md"):
@@ -167,6 +185,11 @@ class StepTest(StepsTest):
     def test_version_16_reads_the_moop_and_part_d_deductible(self):
         v15 = document_facts.VERSIONS[15]
         self.assertEqual(document_facts.VERSIONS[16], dict(v15, groups=v15["groups"] + ("moop", "part_d_deductible")))
+
+    def test_version_17_notes_how_to_read_dental_and_emergency_networks(self):
+        v16, v17 = document_facts.VERSIONS[16], document_facts.VERSIONS[17]
+        self.assertEqual(dict(v17, notes=None), dict(v16, notes=None))
+        self.assertEqual(set(v17["notes"]), {"dental", "emergency"})
 
     def test_version_9_adds_vision_hearing_fitness_otc_and_packages_to_7(self):
         self.assertEqual(document_facts.VERSIONS[9], dict(document_facts.VERSIONS[7], groups=document_facts.VERSIONS[7]["groups"]

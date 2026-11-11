@@ -40,12 +40,13 @@ def fresh(path):
 def group_facts(texts, work, group, answer, v, data):
     read, check = fresh(f"{work}/{group}/read"), fresh(f"{work}/{group}/check")
     found = f"{read}/facts.json"
-    extract.read(texts, read, group, data)
+    notes = v.get("notes", {})
+    extract.read(texts, read, group, data, notes=notes)
     answer(read, *v["reader"])
-    extract.extract_facts(texts, read, group, found, data, v.get("merge", False))
+    extract.extract_facts(texts, read, group, found, data, v.get("merge", False), notes)
     answer(read, *v["reader"])
-    extract.extract_facts(texts, read, group, found, data, v.get("merge", False))
-    extract.verify(texts, found, check, data)
+    extract.extract_facts(texts, read, group, found, data, v.get("merge", False), notes)
+    extract.verify(texts, found, check, data, notes=notes)
     answer(check, *v["verifier"])
     extract.accept(check, f"{check}/accepted.csv")
     accepted = facts.read(f"{check}/accepted.csv")
@@ -61,10 +62,11 @@ def second_facts(texts, work, group, answer, v, data, plan_ids, known):
     """The facts a second reader adds for plan_ids and its verifier accepts."""
     read, check = fresh(f"{work}/{group}/reread"), fresh(f"{work}/{group}/recheck")
     found = f"{read}/facts.json"
-    extract.reread(texts, read, group, plan_ids, known, data)
+    notes = v.get("notes", {})
+    extract.reread(texts, read, group, plan_ids, known, data, notes)
     for _ in range(2):
         answer(read, *v["reader"])
-        extract.extract_facts(texts, read, group, found, data, v.get("merge", False))
+        extract.extract_facts(texts, read, group, found, data, v.get("merge", False), notes)
     seen = {tuple(f[c] for c in facts.KEY) for f in known}
 
     def skipped(r):
@@ -78,7 +80,7 @@ def second_facts(texts, work, group, answer, v, data, plan_ids, known):
         outcomes = json.load(f)
     extract.write_outcomes(read, [dict(o, skipped=why[tuple(o["fact"][c] for c in facts.IDENTITY)])
                                   if o["fact"] and tuple(o["fact"][c] for c in facts.IDENTITY) in why else o for o in outcomes])
-    extract.verify(texts, found, check, data, known)
+    extract.verify(texts, found, check, data, known, notes)
     answer(check, *v["verifier"])
     extract.accept(check, f"{check}/accepted.csv")
     return facts.read(f"{check}/accepted.csv")
@@ -113,3 +115,9 @@ VERSIONS[14] = dict(VERSIONS[13], recheck=VERSIONS[13]["recheck"] | {"hearing": 
 VERSIONS[15] = dict(VERSIONS[14], merge=True)
 # Version 16 reads the costs that only CMS facts gave, so the sheets can cite them.
 VERSIONS[16] = dict(VERSIONS[15], groups=VERSIONS[15]["groups"] + ("moop", "part_d_deductible"))
+# Verifiers rejected true facts whose network another page gave, and readers took urgent care for emergency care.
+VERSIONS[17] = dict(VERSIONS[16], notes={
+    "dental": "A dental chart row that names no network gives in-network costs, even when another page says members "
+              "may see any dentist.",
+    "emergency": "Care outside the U.S. has `network` `any`: no network applies there. Urgently needed care, as at "
+                 "an urgent care center, has `condition` `urgently needed care`."})

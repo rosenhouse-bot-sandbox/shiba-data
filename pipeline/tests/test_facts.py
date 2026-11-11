@@ -231,6 +231,10 @@ class VocabularyTest(unittest.TestCase):
                      "Worldwide emergency and urgent care", "a licensed ambulance anywhere in the world"):
             self.assertTrue(any(re.search(rx, text, re.I) for rx in facts.FIND["ambulance"]), text)
 
+    def test_describe_adds_the_groups_note(self):
+        self.assertEqual(facts.describe("imaging", {"imaging": "Read this."}), facts.describe("imaging") + "\n\nRead this.")
+        self.assertEqual(facts.describe("imaging", {"dental": "Read this."}), facts.describe("imaging"))
+
     def test_describe_lists_the_groups_settings(self):
         for group, settings in facts.GROUP_SETTINGS.items():
             text = facts.describe(group)

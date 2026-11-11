@@ -33,7 +33,7 @@ def to_review(data, trusted_rows, new, held):
     return list({row(f): f for f in new if row(f) in rows}.values())
 
 
-def task(data, texts):
+def task(data, texts, notes={}):
     docs = {d["sha256"]: d for d in extract.documents(data)}
     plan_rows = extract.plans(data)
     pages = {}
@@ -42,7 +42,7 @@ def task(data, texts):
         doc = docs[f["doc_sha"]]
         if doc["id"] not in pages:
             pages[doc["id"]] = Doc(texts, doc["id"]).pages("layout")
-        return extract.verifier_task(doc, plan_rows, pages[doc["id"]], [f], data)
+        return extract.verifier_task(doc, plan_rows, pages[doc["id"]], [f], data, notes)
     return of
 
 
@@ -54,7 +54,7 @@ def gate(data, texts, work, answer, trusted_rows, new, version, held, task_of=No
     """new without the facts the reviewer rejects, and the kept facts that are cited or trusted, which a later run trusts.
     Stops if more facts than version["review_cap"] lack a saved answer.
     Writes <work>/review/outcomes.json with each verdict, and the saved verdicts of the trusted facts that have one."""
-    task_of = task_of or task(data, texts)
+    task_of = task_of or task(data, texts, version.get("notes", {}))
     model, effort = version["reviewer"]
     verdict, unsaved, outcomes, out = {}, 0, [], f"{work}/review"
     while True:
