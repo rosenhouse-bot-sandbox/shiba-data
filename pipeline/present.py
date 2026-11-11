@@ -893,7 +893,7 @@ def dental(organization, found):
         pools = {f["pool"] for f in caps if f["pool"]}
         sharing = [name for _, name, leaf in ALT_CARE if any(g["benefit"] == leaf and g["pool"] in pools for g in found)]
         if not parts:
-            parts.append(f"PREV+COMP from {amount} allowance")
+            parts.append(f"PREV+COMP from {amount} allowance" + (f" shared with {', '.join(sharing)}" if sharing else ""))
         elif sharing:
             parts.append(f"max {amount} shared by PREV+COMP, {', '.join(sharing)}")
         elif all(f["benefit"] == "dental.comprehensive" for f in caps):

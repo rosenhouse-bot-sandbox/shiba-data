@@ -730,6 +730,11 @@ class DentalTest(unittest.TestCase):
         found = [routine("dental", "allowance", "$150", limit="every three months", pool="Flex Card")]
         self.assertEqual(column(present.dental, *found)[0][0], "PREV+COMP from $150/three months allowance")
 
+    def test_an_allowance_alone_names_the_alternative_care_that_shares_it(self):
+        pool = dict(pool="Dental & Alternative Therapy Allowance", limit="per year")
+        found = [routine("dental", "allowance", "$2,250", **pool), routine("extras.massage", "allowance", "$2,250", **pool)]
+        self.assertEqual(column(present.dental, *found)[0][0], "PREV+COMP from $2,250/year allowance shared with massage")
+
     def test_a_card_shared_with_other_benefits_is_not_a_max(self):
         card = dict(pool="Spendables", limit="per month")
         found = [routine("dental.preventive"), routine("dental", "allowance", "$20", **card),
