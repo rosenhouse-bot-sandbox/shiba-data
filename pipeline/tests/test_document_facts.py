@@ -39,6 +39,8 @@ class StepTest(StepsTest):
             f.write(f"plan_ids,kind,sha256\nH1036-306-0;H1036-307-0,EOC,{SHA}\n")
         with open(self.data / "generated" / "plans.csv", "w") as f:
             f.write("plan_id,plan_name,organization\nH1036-306-0,Gold,Humana\nH1036-307-0,Silver,Humana\n")
+        with open(self.work / "layout" / f"{SHA[:16]}.txt", "a") as f:
+            f.write("=====PAGE 2=====\nThe list goes on.\n")
         prompts = {}
 
         def fake(task_dir, model, effort):
@@ -56,7 +58,7 @@ class StepTest(StepsTest):
                     json.dump(reply, f)
 
         version = dict(groups=("imaging",), reader=("r", "high"), verifier=("v", "low"), notes={"imaging": "Read this."},
-                       check_notes={"imaging": "Check this."}, recheck={"imaging": ("H1036-306-0",)})
+                       check_notes={"imaging": "Check this."}, check_after={"imaging": 1}, recheck={"imaging": ("H1036-306-0",)})
         with mock.patch.dict(document_facts.VERSIONS, {9: version}):
             document_facts.step(self.data, self.work, self.dir, fake, 9)
         self.assertEqual({name.split("/")[0] for name in prompts}, {"read", "check", "reread", "recheck"})
@@ -66,6 +68,7 @@ class StepTest(StepsTest):
                           if facts.describe("imaging", review.checker_notes(version) if checking[name] else version["notes"])
                           not in text], [])
         self.assertEqual([name for name, text in prompts.items() if ("Check this." in text) != checking[name]], [])
+        self.assertEqual([name for name, text in prompts.items() if ("=====PAGE 2=====" in text) != checking[name]], [])
 
     def test_a_merge_version_keeps_answers_that_differ_only_in_notes(self):
         def fake(task_dir, model, effort):
@@ -211,6 +214,11 @@ class StepTest(StepsTest):
         v17, v18 = document_facts.VERSIONS[17], document_facts.VERSIONS[18]
         self.assertEqual(dict(v18, merge_limits=None, check_notes=None), dict(v17, merge_limits=None, check_notes=None))
         self.assertEqual((v18["merge_limits"], set(v18["check_notes"])), (("dental",), {"dental"}))
+
+    def test_version_19_shows_dental_checkers_the_next_page(self):
+        v18, v19 = document_facts.VERSIONS[18], document_facts.VERSIONS[19]
+        self.assertEqual(dict(v19, check_after=None), dict(v18, check_after=None))
+        self.assertEqual(v19["check_after"], {"dental": 1})
 
     def test_version_9_adds_vision_hearing_fitness_otc_and_packages_to_7(self):
         self.assertEqual(document_facts.VERSIONS[9], dict(document_facts.VERSIONS[7], groups=document_facts.VERSIONS[7]["groups"]

@@ -39,7 +39,7 @@ def checker_notes(version):
     return {g: " ".join(n for n in (notes.get(g), more.get(g)) if n) for g in notes | more}
 
 
-def task(data, texts, notes={}):
+def task(data, texts, notes={}, after={}):
     docs = {d["sha256"]: d for d in extract.documents(data)}
     plan_rows = extract.plans(data)
     pages = {}
@@ -48,7 +48,7 @@ def task(data, texts, notes={}):
         doc = docs[f["doc_sha"]]
         if doc["id"] not in pages:
             pages[doc["id"]] = Doc(texts, doc["id"]).pages("layout")
-        return extract.verifier_task(doc, plan_rows, pages[doc["id"]], [f], data, notes)
+        return extract.verifier_task(doc, plan_rows, pages[doc["id"]], [f], data, notes, after=after)
     return of
 
 
@@ -60,7 +60,7 @@ def gate(data, texts, work, answer, trusted_rows, new, version, held, task_of=No
     """new without the facts the reviewer rejects, and the kept facts that are cited or trusted, which a later run trusts.
     Stops if more facts than version["review_cap"] lack a saved answer.
     Writes <work>/review/outcomes.json with each verdict, and the saved verdicts of the trusted facts that have one."""
-    task_of = task_of or task(data, texts, checker_notes(version))
+    task_of = task_of or task(data, texts, checker_notes(version), version.get("check_after", {}))
     model, effort = version["reviewer"]
     verdict, unsaved, outcomes, out = {}, 0, [], f"{work}/review"
     while True:
