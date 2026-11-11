@@ -40,7 +40,7 @@ class StepTest(StepsTest):
         with open(self.data / "generated" / "plans.csv", "w") as f:
             f.write("plan_id,plan_name,organization\nH1036-306-0,Gold,Humana\nH1036-307-0,Silver,Humana\n")
         with open(self.work / "layout" / f"{SHA[:16]}.txt", "a") as f:
-            f.write("=====PAGE 2=====\nThe list goes on.\n")
+            f.write("=====PAGE 2=====\nThe list goes on.\n=====PAGE 0=====\nThe list starts.\n")
         prompts = {}
 
         def fake(task_dir, model, effort):
@@ -58,17 +58,45 @@ class StepTest(StepsTest):
                     json.dump(reply, f)
 
         version = dict(groups=("imaging",), reader=("r", "high"), verifier=("v", "low"), notes={"imaging": "Read this."},
-                       check_notes={"imaging": "Check this."}, check_after={"imaging": 1}, recheck={"imaging": ("H1036-306-0",)})
+                       check_notes={"imaging": "Check this."}, recheck_notes={"imaging": "Look again."},
+                       check_after={"imaging": 1}, check_before={"imaging": 1}, recheck={"imaging": ("H1036-306-0",)})
         with mock.patch.dict(document_facts.VERSIONS, {9: version}):
             document_facts.step(self.data, self.work, self.dir, fake, 9)
         self.assertEqual({name.split("/")[0] for name in prompts}, {"read", "check", "reread", "recheck"})
         self.assertTrue(any(name.endswith(".retry.md") for name in prompts))
-        checking = {name: name.split("/")[0] in ("check", "recheck") for name in prompts}
+        expected = {"read": version["notes"], "check": review.checker_notes(version),
+                    "reread": review.joined(version["notes"], version["recheck_notes"]), "recheck": review.second_notes(version)}
         self.assertEqual([name for name, text in prompts.items()
-                          if facts.describe("imaging", review.checker_notes(version) if checking[name] else version["notes"])
-                          not in text], [])
+                          if facts.describe("imaging", expected[name.split("/")[0]]) not in text], [])
+        checking = {name: name.split("/")[0] in ("check", "recheck") for name in prompts}
+        second = {name: name.split("/")[0] in ("reread", "recheck") for name in prompts}
         self.assertEqual([name for name, text in prompts.items() if ("Check this." in text) != checking[name]], [])
+        self.assertEqual([name for name, text in prompts.items() if ("Look again." in text) != second[name]], [])
         self.assertEqual([name for name, text in prompts.items() if ("=====PAGE 2=====" in text) != checking[name]], [])
+        self.assertEqual([name for name, text in prompts.items() if ("=====PAGE 0=====" in text) != checking[name]], [])
+
+    def test_a_versions_zero_groups_let_every_reading_price_zeros_in_words(self):
+        text = "There is no copayment for X-rays."
+        for sub in ("text", "layout"):
+            (self.work / sub / f"{SHA[:16]}.txt").write_text(f"=====PAGE 1=====\n{text}\n")
+        (self.work / "items" / f"{SHA[:16]}.json").write_text(json.dumps({"1": {"strs": [text], "lefts": [0]}}))
+        free = answer(page=1, amount="$0", quotes=["no copayment for X-rays"])
+
+        def fake(task_dir, model, effort):
+            for task in glob.glob(f"{task_dir}/*.md"):
+                text = pathlib.Path(task).read_text()
+                if os.path.basename(task).startswith("v-"):
+                    reply = [{"id": n, "ok": True} for n in range(text.count('{"id": '))]
+                else:
+                    reply = [dict(free, network="out")] if "## Facts already found" in text else [free]
+                with open(task[:-3] + ".json", "w") as f:
+                    json.dump(reply, f)
+        for zero, networks in (((), []), (("imaging",), ["in", "out"])):
+            version = dict(groups=("imaging",), reader=("r", "high"), verifier=("v", "low"), zero_groups=zero,
+                           recheck={"imaging": ("H1036-306-0",)})
+            with mock.patch.dict(document_facts.VERSIONS, {9: version}):
+                document_facts.step(self.data, self.work, self.dir, fake, 9)
+            self.assertEqual(sorted(r["network"] for r in facts.read(self.data / "machine" / "document_facts.csv")), networks, zero)
 
     def test_a_merge_version_keeps_answers_that_differ_only_in_notes(self):
         def fake(task_dir, model, effort):
@@ -219,6 +247,17 @@ class StepTest(StepsTest):
         v18, v19 = document_facts.VERSIONS[18], document_facts.VERSIONS[19]
         self.assertEqual(dict(v19, check_after=None), dict(v18, check_after=None))
         self.assertEqual(v19["check_after"], {"dental": 1})
+
+    def test_version_20_takes_a_second_look_at_the_cells_readers_left_short(self):
+        v19, v20 = document_facts.VERSIONS[19], document_facts.VERSIONS[20]
+        more = ("zero_groups", "check_before", "recheck_notes", "recheck")
+        self.assertEqual(dict(v20, **dict.fromkeys(more)), dict(v19, **dict.fromkeys(more)))
+        self.assertEqual(v20["zero_groups"], extract.ZERO_GROUPS + ("part_d_deductible", "plan_premium"))
+        self.assertEqual(v20["check_before"], {"hearing": 1})
+        self.assertEqual(v20["recheck"], v19["recheck"] | {"plan_premium": ("H3817-010-0",),
+                                                            "emergency": v19["recheck"]["emergency"] + ("H5439-019-0",)})
+        self.assertEqual(set(v20["recheck_notes"]), {"plan_premium", "emergency", "tests", "surgery"})
+        self.assertLessEqual(set(v20["recheck_notes"]), set(v20["recheck"]))
 
     def test_version_9_adds_vision_hearing_fitness_otc_and_packages_to_7(self):
         self.assertEqual(document_facts.VERSIONS[9], dict(document_facts.VERSIONS[7], groups=document_facts.VERSIONS[7]["groups"]

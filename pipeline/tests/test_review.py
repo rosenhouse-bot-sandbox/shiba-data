@@ -205,6 +205,18 @@ class VersionTest(unittest.TestCase):
                         dict(version, reviewer=("m", "e"), review_cap=10), HELD)
         self.assertEqual(verifier_task.call_args.args[-1], review.checker_notes(version))
 
+    def test_asks_with_the_second_looks_notes_and_pages_before(self):
+        version = dict(notes={"imaging": "Read this."}, check_notes={"imaging": "Check this."},
+                       recheck_notes={"imaging": "Look again.", "dental": "Teeth."}, check_before={"imaging": 1})
+        self.assertEqual(review.second_notes(version), {"imaging": "Read this. Check this. Look again.", "dental": "Teeth."})
+        with tempfile.TemporaryDirectory() as work, mock.patch.object(review, "Doc") as doc, \
+                mock.patch.object(extract, "verifier_task", return_value="task") as verifier_task:
+            doc.return_value.pages.return_value = {}
+            review.gate(DATA, None, work, answering(), TRUSTED, COMMITTED + [fact()],
+                        dict(version, reviewer=("m", "e"), review_cap=10), HELD)
+        self.assertEqual(verifier_task.call_args.args[-1], review.second_notes(version))
+        self.assertEqual(verifier_task.call_args.kwargs["before"], {"imaging": 1})
+
     def test_shows_the_pages_after_that_the_version_asks_for(self):
         with tempfile.TemporaryDirectory() as work, mock.patch.object(review, "Doc") as doc, \
                 mock.patch.object(extract, "verifier_task", return_value="task") as verifier_task:
