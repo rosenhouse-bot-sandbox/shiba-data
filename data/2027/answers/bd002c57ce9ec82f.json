@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "4a0ee31be3437c35.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-306-0\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"0%\", \"page\": 8, \"quotes\": [\"0% of the cost for crown recementation up to 1\", \"0% of the cost for root canal retreatment up to 1\", \"0% of the cost for bridge recementation up to 1\", \"0% of the cost for oral surgery up to 2 per year.\", \"0% of the cost for periodontal maintenance up to\"], \"note\": \"Periodontal maintenance is grouped here as comprehensive care. Each service has its own frequency limit, so no single limit is given.\"}]\n```",
+ "usage": {
+  "input_tokens": 3191,
+  "output_tokens": 790,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

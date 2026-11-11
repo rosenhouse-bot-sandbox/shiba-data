@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-2af2a9f1fd104b7f.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 11 out-of-network column lists a $0 copay for periodontal maintenance up to 4 per year. This is a mandatory supplemental comprehensive dental service.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"The page 11 out-of-network column lists a $0 copay for preventive services: periodic oral exam, cleaning (2 per year) and intraoral x-rays (6 per year). Each has a different limit, so leaving the limit blank fits a combined fact.\"}]\n```",
+ "usage": {
+  "input_tokens": 4103,
+  "output_tokens": 706,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

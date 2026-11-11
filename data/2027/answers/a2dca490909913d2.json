@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-5.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 7 mandatory supplemental dental, in network: $0 copay for comprehensive services such as fillings, crown recementation, deep cleaning, crown and denture repair, and dentures. Some quotes (oral evaluation, x-rays) are preventive items, but they are also $0, so the comprehensive $0 copay holds.\"}]\n```",
+ "usage": {
+  "input_tokens": 3730,
+  "output_tokens": 416,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

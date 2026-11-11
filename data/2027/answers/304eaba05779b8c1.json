@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-2a970381e331a34a.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 7: the Dental and Alternative Therapy Allowance is $2,000 yearly and names Comprehensive Dental. Members can see any licensed provider in the United States, so network any fits.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 7: the shared Dental and Alternative Therapy Allowance names dental and gives a $2,000 yearly amount. It can be used with any licensed provider, so this is an allowance fact with that pool and network any.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 7: the $2,000 yearly Dental and Alternative Therapy Allowance names Preventive Dental and can be used with any licensed provider in the United States.\"}]\n```",
+ "usage": {
+  "input_tokens": 3776,
+  "output_tokens": 428,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

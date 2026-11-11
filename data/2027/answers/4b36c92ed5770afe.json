@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-7.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"The quote sits in the page 57 preventive dental row. It states a cost (no coinsurance or copayment, so $0), not 'covered with no amount', and the comprehensive services themselves are listed on page 58.\"}]\n```",
+ "usage": {
+  "input_tokens": 3008,
+  "output_tokens": 1016,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

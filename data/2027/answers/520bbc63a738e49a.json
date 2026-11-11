@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-5f6896f5c437eeed.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 8, Dental and Alternative Therapy Allowance: comprehensive dental gets 50% reimbursement up to the yearly allowance, which is 50% coinsurance. Members can see any licensed provider, so network any fits.\"}]\n```",
+ "usage": {
+  "input_tokens": 3577,
+  "output_tokens": 319,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

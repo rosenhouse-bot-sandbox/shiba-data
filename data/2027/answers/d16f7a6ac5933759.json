@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-cabbc3b82885b498.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 7 Dental and Alternative Therapy Allowance: $2,000 yearly allowance toward dental and other services combined. Any licensed provider in the US supports network any.\"}]\n```",
+ "usage": {
+  "input_tokens": 3404,
+  "output_tokens": 202,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

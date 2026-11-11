@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-630e49b10e7ad131.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 83: the 1-unit-per-visit limit applies only to nitrous oxide administration, not to comprehensive dental in general. It also drops the condition 'only covered if primary procedure is covered'.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Page 83 nitrous oxide row: 0% is the in-network cost. Out of network is 100%.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"Page 83 nitrous oxide row: 100% is the out-of-network cost. In network is 0%.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 83 nitrous oxide (D9230) row: the Out-of-Network You Pay column shows 100%.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 54 In-Network column: 'You are covered for Mandatory Supplemental Dental Benefit', with no amount stated.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 83 nitrous oxide (D9230) row: the In-Network You Pay column shows 0%.\"}]\n```",
+ "usage": {
+  "input_tokens": 6270,
+  "output_tokens": 805,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

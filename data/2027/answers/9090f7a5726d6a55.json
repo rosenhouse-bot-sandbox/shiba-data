@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-5f6896f5c437eeed.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 8: the Dental and Alternative Therapy Allowance gives $2,250 per year toward Preventive Dental and other named services. Members can see any licensed provider, so network any is correct.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 8: the same $2,250 yearly shared allowance names Comprehensive Dental. Members can see any licensed provider, so network any is correct.\"}]\n```",
+ "usage": {
+  "input_tokens": 3703,
+  "output_tokens": 246,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

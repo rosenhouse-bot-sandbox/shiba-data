@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-90a4efa6544175a2.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 62 dental x-rays and other diagnostic dental services rows, In-Network: $0 copay per visit. Both are supplemental preventive care.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 63 Other Preventive Dental services row, In-Network: $0 copay per visit.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 63 Comprehensive Dental Care, Adjunctive general services row, In-Network: $0 copay for each adjunctive general service.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 63 Other Preventive Dental services row, Out-of-Network: 25% coinsurance per visit.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 60 Dental services row: $25 copay for each Medicare-covered dental service.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 63 Adjunctive general services row, Out-of-Network: 25% coinsurance for each adjunctive general service.\"}]\n```",
+ "usage": {
+  "input_tokens": 5192,
+  "output_tokens": 645,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
