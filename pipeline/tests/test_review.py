@@ -195,6 +195,16 @@ class VersionTest(unittest.TestCase):
                         dict(reviewer=("m", "e"), review_cap=10, notes=notes), HELD)
         self.assertEqual(verifier_task.call_args.args[-1], notes)
 
+    def test_asks_with_the_versions_check_notes_too(self):
+        version = dict(notes={"imaging": "Read this.", "dental": "Teeth."}, check_notes={"imaging": "Check this."})
+        self.assertEqual(review.checker_notes(version), {"imaging": "Read this. Check this.", "dental": "Teeth."})
+        with tempfile.TemporaryDirectory() as work, mock.patch.object(review, "Doc") as doc, \
+                mock.patch.object(extract, "verifier_task", return_value="task") as verifier_task:
+            doc.return_value.pages.return_value = {}
+            review.gate(DATA, None, work, answering(), TRUSTED, COMMITTED + [fact()],
+                        dict(version, reviewer=("m", "e"), review_cap=10), HELD)
+        self.assertEqual(verifier_task.call_args.args[-1], review.checker_notes(version))
+
     def test_version_11_is_10_with_a_reviewer(self):
         v = document_facts.VERSIONS[11]
         self.assertEqual(dict(v, reviewer=None, review_cap=None), dict(document_facts.VERSIONS[10], reviewer=None,

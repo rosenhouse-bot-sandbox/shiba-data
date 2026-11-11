@@ -33,6 +33,12 @@ def to_review(data, trusted_rows, new, held):
     return list({row(f): f for f in new if row(f) in rows}.values())
 
 
+def checker_notes(version):
+    """The notes for each group's verifier and reviewer: the version's notes, then its check_notes."""
+    notes, more = version.get("notes", {}), version.get("check_notes", {})
+    return {g: " ".join(n for n in (notes.get(g), more.get(g)) if n) for g in notes | more}
+
+
 def task(data, texts, notes={}):
     docs = {d["sha256"]: d for d in extract.documents(data)}
     plan_rows = extract.plans(data)
@@ -54,7 +60,7 @@ def gate(data, texts, work, answer, trusted_rows, new, version, held, task_of=No
     """new without the facts the reviewer rejects, and the kept facts that are cited or trusted, which a later run trusts.
     Stops if more facts than version["review_cap"] lack a saved answer.
     Writes <work>/review/outcomes.json with each verdict, and the saved verdicts of the trusted facts that have one."""
-    task_of = task_of or task(data, texts, version.get("notes", {}))
+    task_of = task_of or task(data, texts, checker_notes(version))
     model, effort = version["reviewer"]
     verdict, unsaved, outcomes, out = {}, 0, [], f"{work}/review"
     while True:

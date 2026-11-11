@@ -37,16 +37,20 @@ def fresh(path):
     return path
 
 
+def merging(v, group):
+    return "limits" if group in v.get("merge_limits", ()) else v.get("merge", False)
+
+
 def group_facts(texts, work, group, answer, v, data):
     read, check = fresh(f"{work}/{group}/read"), fresh(f"{work}/{group}/check")
     found = f"{read}/facts.json"
     notes = v.get("notes", {})
     extract.read(texts, read, group, data, notes=notes)
     answer(read, *v["reader"])
-    extract.extract_facts(texts, read, group, found, data, v.get("merge", False), notes)
+    extract.extract_facts(texts, read, group, found, data, merging(v, group), notes)
     answer(read, *v["reader"])
-    extract.extract_facts(texts, read, group, found, data, v.get("merge", False), notes)
-    extract.verify(texts, found, check, data, notes=notes)
+    extract.extract_facts(texts, read, group, found, data, merging(v, group), notes)
+    extract.verify(texts, found, check, data, notes=review.checker_notes(v))
     answer(check, *v["verifier"])
     extract.accept(check, f"{check}/accepted.csv")
     accepted = facts.read(f"{check}/accepted.csv")
@@ -66,7 +70,7 @@ def second_facts(texts, work, group, answer, v, data, plan_ids, known):
     extract.reread(texts, read, group, plan_ids, known, data, notes)
     for _ in range(2):
         answer(read, *v["reader"])
-        extract.extract_facts(texts, read, group, found, data, v.get("merge", False), notes)
+        extract.extract_facts(texts, read, group, found, data, merging(v, group), notes)
     seen = {tuple(f[c] for c in facts.KEY) for f in known}
 
     def skipped(r):
@@ -80,7 +84,7 @@ def second_facts(texts, work, group, answer, v, data, plan_ids, known):
         outcomes = json.load(f)
     extract.write_outcomes(read, [dict(o, skipped=why[tuple(o["fact"][c] for c in facts.IDENTITY)])
                                   if o["fact"] and tuple(o["fact"][c] for c in facts.IDENTITY) in why else o for o in outcomes])
-    extract.verify(texts, found, check, data, known, notes)
+    extract.verify(texts, found, check, data, known, review.checker_notes(v))
     answer(check, *v["verifier"])
     extract.accept(check, f"{check}/accepted.csv")
     return facts.read(f"{check}/accepted.csv")
@@ -123,3 +127,9 @@ VERSIONS[17] = dict(VERSIONS[16], review_cap=250, notes={
     "emergency": "Care outside the U.S. has `network` `any`, even under a network heading. A cost only for urgently "
                  "needed care, as at an urgent care center, has the page's name for that care as its `condition`, such "
                  "as `urgently needed services`. A cost for both emergency and urgently needed care has none."})
+# Version 18 merges dental prices whose limits differ, as when a page prices each service with its own limit.
+# It tells dental checkers that reimbursement gives coinsurance and that an any-provider allowance has network any.
+VERSIONS[18] = dict(VERSIONS[17], merge_limits=("dental",), check_notes={
+    "dental": "A page that says the plan reimburses a percent of a cost gives the member the rest as `coinsurance`: 50% "
+              "reimbursement is 50% coinsurance. A cost under an allowance that members may use with any licensed "
+              "provider may have `network` `any`, though its row names no network."})
