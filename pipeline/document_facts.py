@@ -116,8 +116,10 @@ VERSIONS[15] = dict(VERSIONS[14], merge=True)
 # Version 16 reads the costs that only CMS facts gave, so the sheets can cite them.
 VERSIONS[16] = dict(VERSIONS[15], groups=VERSIONS[15]["groups"] + ("moop", "part_d_deductible"))
 # Verifiers rejected true facts whose network another page gave, and readers took urgent care for emergency care.
-VERSIONS[17] = dict(VERSIONS[16], notes={
+# Its notes change every dental and emergency prompt, so more facts need review.
+VERSIONS[17] = dict(VERSIONS[16], review_cap=250, notes={
     "dental": "A dental chart row that names no network gives in-network costs, even when another page says members "
               "may see any dentist.",
-    "emergency": "Care outside the U.S. has `network` `any`: no network applies there. Urgently needed care, as at "
-                 "an urgent care center, has `condition` `urgently needed care`."})
+    "emergency": "Care outside the U.S. has `network` `any`, even under a network heading. A cost only for urgently "
+                 "needed care, as at an urgent care center, has the page's name for that care as its `condition`, such "
+                 "as `urgently needed services`. A cost for both emergency and urgently needed care has none."})
