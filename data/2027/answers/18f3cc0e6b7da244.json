@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-808ccc78793ded84.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 63 does say preventive dental is reimbursed 100% up to the $2,250 annual allowance. But the page gives amounts, so `covered` with no amount is the wrong cost kind. Nothing on this page supports network `any`.\"}]\n```",
+ "usage": {
+  "input_tokens": 2646,
+  "output_tokens": 365,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

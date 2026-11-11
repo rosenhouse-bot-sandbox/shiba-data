@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-034e045a83e5b49d.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5: Preventive services (Class I) show a $0 in-network cost.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 5: Class II and Class III comprehensive services both show 50% in network.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 5: Medicare-covered dental services show a $40 in-network copay.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 5: all routine dental services are covered up to a combined $1,250 maximum every calendar year, listed in the in-network column.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 5: Medicare-covered dental services show 50% out of network.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 5: Class II and Class III comprehensive services both show 50% out of network.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 5: Preventive services (Class I) show 50% out of network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2948,
+  "output_tokens": 622,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

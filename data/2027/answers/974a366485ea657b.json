@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-630e49b10e7ad131.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 83 nitrous oxide (D9230) row: Frequency/Limits is 1 unit per visit.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Page 83 D9230 row: 0% is the in-network column. Out of network is 100%.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"Page 83 D9230 row: 100% is the out-of-network column. In network is 0%.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 83 D9230 row: out-of-network column shows 100% coinsurance.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 54 Dental services row, In-Network: 'You are covered for Mandatory Supplemental Dental Benefit.'\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 83 D9230 row: in-network column shows 0% coinsurance.\"}]\n```",
+ "usage": {
+  "input_tokens": 4228,
+  "output_tokens": 810,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

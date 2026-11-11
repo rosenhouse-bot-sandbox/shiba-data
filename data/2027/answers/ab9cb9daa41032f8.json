@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-e41fce2e65cf35f2.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 11 Medicare-covered dental row, out-of-network column: 50% of the cost.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 22: MyOption DEN972 optional supplemental dental package has a $50.90 monthly premium.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 11 Medicare-covered dental row, in-network column: $50 copay.\"}]\n```",
+ "usage": {
+  "input_tokens": 3559,
+  "output_tokens": 301,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

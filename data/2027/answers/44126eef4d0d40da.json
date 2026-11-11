@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-20.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 62 does give the limit '2 every year' for periodic oral exams, but that row lists only In-Network costs ($0 copay). Nothing on the page says the limit applies out of network, so network 'any' is not supported.\"}]\n```",
+ "usage": {
+  "input_tokens": 2122,
+  "output_tokens": 310,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

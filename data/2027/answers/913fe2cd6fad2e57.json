@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-1ed5fdb720cabd03.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 58 Dental services row: the out-of-network column shows 30% coinsurance for Medicare-covered dental services.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 59 Routine dental benefits row: 'You are covered for routine dental benefits' spans both network columns.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 106 routine dental: 50% coinsurance on covered comprehensive services. No network is named, so it is in network.\"},\n{\"id\": 3, \"ok\": false, \"reason\": \"Page 58: 20% is the in-network amount. Out of network is 30%.\"},\n{\"id\": 4, \"ok\": false, \"reason\": \"Page 58: 30% is the out-of-network amount. In network is 20%.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 58 Dental services row: the in-network column shows 20% coinsurance for Medicare-covered dental services.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 106: the routine dental benefit has an annual dental maximum of $1,000.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 106: $0 copay for covered preventive and diagnostic dental care.\"}]\n```",
+ "usage": {
+  "input_tokens": 4776,
+  "output_tokens": 648,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

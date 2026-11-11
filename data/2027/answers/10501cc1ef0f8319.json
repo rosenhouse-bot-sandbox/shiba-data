@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-3.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 11, Routine Comprehensive Services, Adjunctive General Services row: $0 copay in network for Wellcare Premium Enhanced Open (PPO). This is routine (supplemental) comprehensive dental. Only this sub-row is shown, so other comprehensive services may cost more.\"}]\n```",
+ "usage": {
+  "input_tokens": 2037,
+  "output_tokens": 740,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

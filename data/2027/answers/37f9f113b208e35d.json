@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-21.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 64 gives the $0 in-network copay only for adjunctive general services, limited to 1 every date of service. The item states it as a cost for all comprehensive dental care and omits the limit. Other comprehensive services may cost something different.\"}]\n```",
+ "usage": {
+  "input_tokens": 2111,
+  "output_tokens": 387,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
