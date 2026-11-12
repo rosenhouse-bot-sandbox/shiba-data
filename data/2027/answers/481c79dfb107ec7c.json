@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-20.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"On page 104, the supplemental (routine) Eyewear row says \\\"$0 copay for eyewear.\\\" The eyewear fitting row also shows a $0 copay. The item's supplemental eyewear $0 in-network copay is supported.\"}]\n```",
+ "usage": {
+  "input_tokens": 2342,
+  "output_tokens": 406,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

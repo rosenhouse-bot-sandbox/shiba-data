@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "5e11cf20cec995f3.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-048-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"\", \"limit\": \"\", \"page\": 94, \"quotes\": [\"Vision services - routine eye exam\", \"$0 copayment Provided by: UnitedHealthcare Vision®\"], \"note\": \"The $0 copayment for the routine eye exam sits alone in its table cell. The next cell in the same column starts the eyewear row, so the column quote runs into it.\"}]\n```",
+ "usage": {
+  "input_tokens": 5949,
+  "output_tokens": 1167,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

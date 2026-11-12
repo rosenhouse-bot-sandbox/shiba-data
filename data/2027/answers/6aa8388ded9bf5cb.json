@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-19.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"On page 94, the 'Vision services - routine eye exam' row shows a $0 copayment for the routine eye exam, which includes refraction, limited to 1 per year. It is a supplemental benefit, in network by default. The quote's 'Provided by: UnitedHealthcare Vision' text belongs to the eyewear row, but the exam row's $0 copay still matches the item.\"}]\n```",
+ "usage": {
+  "input_tokens": 2331,
+  "output_tokens": 397,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

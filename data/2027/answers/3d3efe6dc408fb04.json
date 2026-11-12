@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-90a4efa6544175a2.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 69 lists supplemental routine hearing services. It shows a $0 copay for 1 routine hearing exam every year and a $0 copay for 1 hearing aid fitting and evaluation every year.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 70 hearing services row shows a $0 copay for 2 hearing aid(s) every year. These are routine non-implantable aids, so the per-aid copay is $0.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 70 says hearing aids are limited to 2 non-implantable hearing aids every year.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 70 says the plan covers a non-implantable hearing aid up to $500 per ear every year, and costs above the benefit maximum are the member's responsibility.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 69 diagnostic hearing and balance evaluations row shows a $25 copay for each Medicare-covered hearing exam. The prior authorization note is not a condition.\"}]\n```",
+ "usage": {
+  "input_tokens": 4007,
+  "output_tokens": 612,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

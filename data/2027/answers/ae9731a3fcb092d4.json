@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-8980c5c5d9008083.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 72 out-of-network row: 30% coinsurance for each Medicare-covered hearing exam. 'Deductible may apply' is a note, not a condition.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 73 routine hearing aid benefit: 1 non-implantable hearing aid up to $350 per ear every year.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 72 out-of-network rows: 40% coinsurance for the routine hearing exam and for the hearing aid fitting and evaluation.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 73 in-network row: $0 copay for 2 hearing aid(s) every year.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 72 in-network rows: $0 copay for the routine hearing exam and for the fitting and evaluation.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 73: Limited to 2 non-implantable hearing aids every year.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 73 out-of-network row: 40% coinsurance for 2 hearing aid(s) every year.\"}]\n```",
+ "usage": {
+  "input_tokens": 4207,
+  "output_tokens": 819,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

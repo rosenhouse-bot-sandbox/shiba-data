@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "d649ac2bebc0321d.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-028-3\", \"benefit\": \"hearing.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$50\", \"page\": 74, \"quotes\": [\"Hearing services covered by Medicare $50 copay\", \"Balance exams: $50 copay\"], \"note\": \"Covers the Medicare diagnostic hearing evaluation and the balance exam, which have the same price.\"},\n{\"plan_id\": \"H2923-028-3\", \"benefit\": \"hearing.aids\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"2\", \"limit\": \"per year\", \"unit\": \"one per ear\", \"page\": 74, \"quotes\": [\"You are covered for up to two hearing aids per year, one per ear.\"], \"note\": \"The page writes the limit as the word 'two', not the number 2.\"}]\n```",
+ "usage": {
+  "input_tokens": 3918,
+  "output_tokens": 1207,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

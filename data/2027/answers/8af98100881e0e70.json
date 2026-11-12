@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "516ff586a12c8288.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-019-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"2\", \"unit\": \"\", \"limit\": \"per year\", \"page\": 63, \"quotes\": [\"Periodic Oral exams - 2 every year\"], \"note\": \"Limit is for periodic oral exams only. The cleanings limit (2 per year) and fluoride limit (1 per year) on the same page are left out because they would be duplicate facts.\"}]\n```",
+ "usage": {
+  "input_tokens": 7822,
+  "output_tokens": 652,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
