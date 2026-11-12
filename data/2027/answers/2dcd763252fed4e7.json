@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "f961eb582c1534d5.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-010-0\", \"benefit\": \"tests.lab\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$10\", \"page\": 79, \"quotes\": [\"$10 copay for all other Medicare-covered lab services.\"], \"note\": \"Applies to lab services other than A1C and kidney health evaluation labs, which have a $0 copay, and genetic testing, which has a $50 copay.\"},\n {\"plan_id\": \"H5439-010-0\", \"benefit\": \"tests.genetic\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 79, \"quotes\": [\"20% coinsurance for each Medicare-covered lab service.\"], \"note\": \"Genetic testing is listed under the Laboratory tests row, and the out-of-network cost for that row covers each lab service. Genetic testing is not named separately out of network.\"}]\n```",
+ "usage": {
+  "input_tokens": 13965,
+  "output_tokens": 1502,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

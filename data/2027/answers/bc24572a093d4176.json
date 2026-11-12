@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-32.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"On page 51, the 'Additional routine hearing exams' row (1 visit per year) and the 'Fitting-evaluation(s) for hearing aids' row both show an in-network $0 copay. These are supplemental hearing exams, so every field matches. The quotes join text across neighboring rows, but the page supports the fact.\"}]\n```",
+ "usage": {
+  "input_tokens": 3031,
+  "output_tokens": 803,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

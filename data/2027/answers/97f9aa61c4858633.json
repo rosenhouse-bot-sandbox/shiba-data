@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-34.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 70 does show a $115 copay for emergency services outside the United States, but care outside the U.S. must have covered_by 'supplemental', not 'medicare'.\"}]\n```",
+ "usage": {
+  "input_tokens": 2091,
+  "output_tokens": 119,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

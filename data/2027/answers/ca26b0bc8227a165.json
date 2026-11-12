@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-8980c5c5d9008083.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 91, Other outpatient diagnostic tests, In-Network: 20% coinsurance for all other Medicare-covered services.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 92, Spirometry row, In-Network: 0% coinsurance for Spirometry.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"Page 92: the 0% Spirometry coinsurance is In-Network. Out-of-Network is 30%.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 92, Spirometry row, Out-of-Network: 30% coinsurance for Spirometry.\"},\n{\"id\": 4, \"ok\": false, \"reason\": \"Page 92: the 30% Spirometry coinsurance is Out-of-Network. In-Network is 0%.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 121, EKG following Welcome to Medicare, In-Network: $0 copay for each Medicare-covered EKG.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 121, EKG following Welcome to Medicare, Out-of-Network: 30% coinsurance for each Medicare-covered EKG.\"}]\n```",
+ "usage": {
+  "input_tokens": 4188,
+  "output_tokens": 645,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

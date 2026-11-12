@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-23.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 65 Hearing services note: hearing aids are not covered unless the member is on the Enhanced plan or enrolled in the optional Advantage Plus package. The hearing aid allowance is for Enhanced members only, so the Value plan's base benefit does not cover hearing aids.\"}]\n```",
+ "usage": {
+  "input_tokens": 3244,
+  "output_tokens": 453,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

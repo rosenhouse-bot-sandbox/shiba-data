@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "808ccc78793ded84.retry.md",
+ "reply": "```json\n[]\n```\n\nThe one failed fact, the limit of two hearing aids a year, cannot be fixed, so I left it out. Page 79 and page 80 both write the limit only as the word \"two\" (for example \"up to two hearing aids from either in-network or out-of- network providers per year, one per ear\"). No quote on either page shows the numeral 2 that the amount needs.",
+ "usage": {
+  "input_tokens": 3892,
+  "output_tokens": 278,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

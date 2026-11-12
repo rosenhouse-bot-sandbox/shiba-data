@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-6.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 88, EKGs/ECGs and EEGs row: PCP or Specialist's office 50% coinsurance. This covers the PCP office for a Medicare-covered, in-network non-radiological diagnostic test.\"}]\n```",
+ "usage": {
+  "input_tokens": 2487,
+  "output_tokens": 275,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

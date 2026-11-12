@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-50159487a52ccddf.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 15 Worldwide emergency coverage row: ATRIO Choice Rx (PPO) has a $300 copay. The $120 copay is in the ATRIO Freedom column.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 15 Worldwide emergency coverage row: ATRIO Choice Rx (PPO) column shows a $300 copay.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 15 Worldwide emergency coverage row: ATRIO Freedom (PPO) column shows a $120 copay.\"},\n{\"id\": 3, \"ok\": false, \"reason\": \"Page 15 Worldwide emergency coverage row: ATRIO Freedom (PPO) has a $120 copay. The $300 copay belongs to ATRIO Choice Rx.\"},\n{\"id\": 4, \"ok\": false, \"reason\": \"Page 15: ATRIO Freedom's worldwide copay is $120, not $300. Care outside the U.S. is also supplemental, not Medicare-covered.\"}]\n```",
+ "usage": {
+  "input_tokens": 2168,
+  "output_tokens": 528,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

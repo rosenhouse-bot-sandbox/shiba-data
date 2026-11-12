@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-d370b4b5b3950077.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 6, Hearing Care row: Routine Hearing Exam is $0 copay, 1 visit per year, in network. The supplemental visit limit of 1 per year is correct.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 6, Hearing Care row: Routine Hearing Exam is $0 copay, 1 visit per year. Hearing Aid Fitting and Evaluation is also $0 copay. Rows with the same price may share one fact.\"}]\n```",
+ "usage": {
+  "input_tokens": 3211,
+  "output_tokens": 566,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

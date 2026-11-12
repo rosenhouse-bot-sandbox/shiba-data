@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "dca4e04d7b6dc26b.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H7006-021-0\", \"benefit\": \"hearing.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"limit\": \"\", \"page\": 51, \"quotes\": [\"Medicare-covered service. In-Network $0 copay\", \"80% coinsurance In-Network $0 copay\"], \"note\": \"Covers additional routine hearing exams (1 visit every year) and fitting-evaluations for hearing aids (unlimited visits). Quotes are read down the 'What you pay' column, so they run across rows.\"}]\n```",
+ "usage": {
+  "input_tokens": 4128,
+  "output_tokens": 1141,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
