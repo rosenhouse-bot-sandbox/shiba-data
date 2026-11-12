@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-be9deec855112c1d.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 76 shows a $40 copay for Medicare-covered hearing services, but it never says 'per visit'. The unit field is not supported by the page.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 76 shows a $0 copay for the routine hearing exam and a $0 copay for the hearing aid fitting, both in network.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 76 says members are covered for 1 routine hearing exam each year.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 76 shows hearing aids at a $399 copay per ear for Advanced or a $699 copay per ear for Premium.\"}]\n```",
+ "usage": {
+  "input_tokens": 3282,
+  "output_tokens": 512,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

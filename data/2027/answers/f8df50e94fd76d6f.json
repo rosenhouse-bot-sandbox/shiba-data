@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-4ec81cd0d2695486.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 65: the routine hearing exam and the hearing aid fitting and evaluation are both supplemental at a $0 copayment in network. Limit is left blank because their visit limits differ.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 65: prescription hearing aids are a supplemental allowance of $1,600 every 2 years for both ears combined. The page calls it an allowance.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 65: the supplemental routine hearing exam is limited to 1 visit every year.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 65: Medicare-covered diagnostic hearing and balance evaluations are 20% coinsurance in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3139,
+  "output_tokens": 535,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

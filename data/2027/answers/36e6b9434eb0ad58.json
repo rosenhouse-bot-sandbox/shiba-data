@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-d649ac2bebc0321d.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 74 Hearing services row: Medicare-covered diagnostic hearing and balance exams each cost a $50 copay. The plan is an HMO, so this is in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3315,
+  "output_tokens": 192,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-27.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 62 lists 1 routine hearing exam and, separately, 1 hearing aid fitting and evaluation each year. Merging them into a single limit of 1 exam per year could read as one visit in total rather than one of each. The page is also cut off before the out-of-network terms for the fitting, so network 'any' is not confirmed for that service.\"}]\n```",
+ "usage": {
+  "input_tokens": 2766,
+  "output_tokens": 594,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

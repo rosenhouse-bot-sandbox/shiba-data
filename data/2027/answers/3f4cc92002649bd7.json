@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-bf93677641b9fa6f.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 6 Hearing Care row: the Routine Hearing Exam and the Hearing Aid Fitting and Evaluation are each a $0 copay. Both are supplemental, starred routine services.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 6 Hearing Aids row: the benefit covers up to 2 TruHearing Advanced or Premium hearing aids.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 6 Hearing Aids row: $399 copay or $699 copay per aid, matching the two aid levels.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 6 Hearing Care row: Medicare-Covered Hearing Care is a $40 copay. Medicare covers diagnostic hearing exams, so medicare hearing.exam fits.\"}]\n```",
+ "usage": {
+  "input_tokens": 3933,
+  "output_tokens": 640,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

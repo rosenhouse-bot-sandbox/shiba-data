@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-d649ac2bebc0321d.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 74 shows a $50 copay for Medicare-covered hearing and balance exams. The page states no unit, so 'per visit' is unsupported.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 74: 'You are covered for 1 routine hearing exam each year.'\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 74: routine hearing exam $0 copay and hearing aid fitting $0 copay.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 74: hearing aids are a $599 copay per ear for Advanced or $899 per ear for Premium.\"}]\n```",
+ "usage": {
+  "input_tokens": 3682,
+  "output_tokens": 594,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

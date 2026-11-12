@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-808ccc78793ded84.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 79: 1 routine hearing exam each year from in- or out-of-network providers, so network any is right.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 79 in-network hearing aids: $399 copay per ear for Advanced, $699 copay per ear for Premium.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"The $0 exam and fitting copays are in the in-network column. Out of network, the routine exam is $35 and the fitting is $35.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 80 out-of-network column: hearing aid fitting $35 copay.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 79 out-of-network column: routine hearing exam $35 copay, limited to 1 per year.\"},\n{\"id\": 5, \"ok\": false, \"reason\": \"$35 is the out-of-network routine exam copay. In network it is $0.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 79 in-network column: routine hearing exam $0 copay and hearing aid fitting $0 copay.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 80 out-of-network hearing aids: 90% coinsurance per ear per hearing aid.\"},\n{\"id\": 8, \"ok\": false, \"reason\": \"The $35 fitting copay is in the out-of-network column. In network the fitting is $0.\"},\n{\"id\": 9, \"ok\": true, \"reason\": \"Page 79 out-of-network column: hearing services covered by Medicare $40 copay.\"},\n{\"id\": 10, \"ok\": true, \"reason\": \"Page 79 out-of-network column: balance exams $45 copay. Balance exams are Medicare-covered diagnostic exams.\"}]\n```",
+ "usage": {
+  "input_tokens": 5250,
+  "output_tokens": 1155,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-2c101bd739d45a62.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 6 shows a $0 copay for the routine hearing exam and the fitting/evaluation, but the routine exam is limited to 1 visit per year. The item leaves the limit blank even though its quote includes it.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 6 Hearing Aids row: the benefit covers up to 2 TruHearing Advanced or Premium hearing aids in network.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 6 Hearing Care row: Medicare-Covered Hearing Care is a $50 copay in network.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 6 Hearing Aids row: $599 or $899 copay per aid, with up to 2 aids covered.\"}]\n```",
+ "usage": {
+  "input_tokens": 3556,
+  "output_tokens": 692,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
