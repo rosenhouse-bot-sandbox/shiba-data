@@ -425,38 +425,33 @@ test("header says when the site was last updated", async () => {
   await fresh.close();
 });
 
-test("each note kind has its own color, and the Notes filter shows added facts", async () => {
+test("each note kind has its own color, and the Notes filter shows caveats", async () => {
   const fresh = await newPage({ viewport: { width: 1600, height: 1000 } });
   await fresh.goto(`${base}#/main`);
   const background = (locator) => locator.evaluate((e) => getComputedStyle(e).backgroundColor);
-  const added = fresh.locator("table.sheet td.commented.added").first();
   const question = fresh.locator("table.sheet td.commented.question").first();
   const caveat = fresh.locator("table.sheet td.commented.caveat").first();
-  const green = await background(added);
-  assert.equal(new Set([green, await background(question), await background(caveat)]).size, 3);
+  const lavender = await background(caveat);
+  assert.notEqual(lavender, await background(question));
   assert.match(await caveat.getAttribute("title"), /^Caveat: /);
-  await caveat.click();
-  assert.equal(await background(fresh.locator("#source-note .comment")), await background(caveat));
-  assert.match(await added.getAttribute("title"), /^Added fact: /);
   await question.click();
   assert.equal(await background(fresh.locator("#source-note .comment")), await background(question));
   assert.match(await fresh.textContent("#source-note .comment"), /^Open question: /);
-  await added.click();
-  assert.equal(await background(fresh.locator("#source-note .comment")), green);
-  assert.match(await fresh.textContent("#source-note .comment"), /^Added fact: /);
-  assert.equal(await background(added), green, "stays green in the open plan's row");
+  await caveat.click();
+  assert.equal(await background(fresh.locator("#source-note .comment")), lavender);
+  assert.equal(await background(caveat), lavender, "stays lavender in the open plan's row");
   await fresh.click("nav a[data-view=notes]");
   const rows = fresh.locator("table.notes tbody tr");
-  await fresh.selectOption("#kind-filter", "added");
+  await fresh.selectOption("#kind-filter", "caveat");
   const notes = ["main", "dvha"].flatMap((sheet) => site[sheet].rows.flatMap((r) => Object.values(r.cells)))
-    .filter((c) => c.comment?.kind === "added");
+    .filter((c) => c.comment?.kind === "caveat");
   const shown = await rows.filter({ visible: true }).allTextContents();
   assert.ok(notes.length > 0);
   assert.equal(shown.length, notes.length);
-  assert.ok(shown.every((t) => t.includes("Added fact")));
+  assert.ok(shown.every((t) => t.includes("Caveat")));
   await rows.filter({ visible: true }).first().locator("a", { hasText: "Show in" }).click();
   await fresh.goBack();
-  assert.equal(await fresh.locator("#kind-filter").inputValue(), "added");
+  assert.equal(await fresh.locator("#kind-filter").inputValue(), "caveat");
   assert.equal(await rows.filter({ visible: true }).count(), notes.length);
   await fresh.selectOption("#kind-filter", "");
   assert.equal(await rows.filter({ visible: true }).count(), await rows.count());
@@ -849,20 +844,20 @@ test("pipeline view: the nav link opens the example cell's first step", async ()
   assert.equal(await page.textContent(".how-step"), "List the plans");
 });
 
-test("pipeline view: Next steps through the example cell's chain, each step showing its rows or why there are none", async () => {
+test("pipeline view: Next steps through the example cell's chain, each step highlighting its rows", async () => {
   await openHow(page, "");
   const labels = [];
   for (;;) {
     labels.push(await page.textContent(".how-step"));
     for (const side of ["input", "output"]) {
-      assert.ok(await page.locator(`.how-rows.${side} :is(.hi, .how-none)`).count(), `${labels.at(-1)} ${side}`);
+      assert.ok(await page.locator(`.how-rows.${side} .hi`).count(), `${labels.at(-1)} ${side}`);
     }
     const next = page.locator("a.how-nav[rel=next]");
     if (!(await next.count())) break;
     await next.click();
     await page.waitForFunction((n) => document.querySelector(".how-count")?.textContent.startsWith(`${n} `), labels.length + 1);
   }
-  assert.equal(labels.length, 12);
+  assert.equal(labels.length, 11);
   assert.ok(!labels.includes("Cite blank cells"));
   assert.equal(labels.at(-1), "Publish");
 });
@@ -887,12 +882,6 @@ test("pipeline view: at phone width the lens sits below the map at full width", 
   } finally {
     await page.setViewportSize({ width: 1600, height: 1000 });
   }
-});
-
-test("pipeline view: a step that leaves the cell alone says so instead of showing rows", async () => {
-  await openHow(page, "main/H1036-153-0/ambulance/added-facts");
-  assert.match(await page.textContent(".how-rows.input .how-none"), /no added facts/);
-  assert.equal(await page.locator(".how-rows table").count(), 0);
 });
 
 test("pipeline view: an unknown step opens the first step", async () => {

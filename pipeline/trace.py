@@ -22,7 +22,7 @@ REPO_URL = "https://github.com/rosenhouse-bot-sandbox/shiba-data"
 PROMPT_URL = "https://pdxplans.org/blobs/{}.txt"
 TRUSTED_WITHOUT_REVIEW = "trusted without review (#170)"
 TRACED, NONE, NOT_RECORDED = "traced", "none", "not_recorded"
-FACT_FILES = {"document": "machine/document_facts.csv", "pbp": "generated/pbp_facts.csv", "added": present.ADDED}
+FACT_FILES = {"document": "machine/document_facts.csv", "pbp": "generated/pbp_facts.csv"}
 FACT_COLUMNS = ", ".join(f'f."{c}"' for c in facts.COLUMNS)
 
 
@@ -166,7 +166,7 @@ def text(answer, field):
 def load_rules(db, data):
     organization = {p["plan_id"]: p["organization"] for p in read(data / "generated/plans.csv")}
     version = present.current(data, candidate="")
-    found, held = present.plan_facts(data, version=version), present.held(data, version)
+    found, held = present.plan_facts(data), present.held(data, version)
     for sheet, (rules, _) in present.SHEETS.items():
         for r in layers.generated(data)[sheet]:
             plan_id = r["plan_id"]
@@ -335,7 +335,6 @@ def cell(db, sheet, plan_id, col):
     landscape = rows(db, "SELECT plan_field, field, value FROM landscape_read WHERE plan_id = ? ORDER BY position", plan_id)
     landscape_row = list({(n["field"], n["value"]): dict(field=n["field"], value=n["value"]) for n in landscape}.values())
     considered, rule_record = rule(db, sheet, plan_id, col, code)
-    added = list({json.dumps(f): f for f in map(fact_of, considered) if f["origin"] == "added"}.values())
     if build_row["checked"]:
         prompts, fact_checks = checks(db, sheet, plan_id, col, considered)
     else:
@@ -356,7 +355,6 @@ def cell(db, sheet, plan_id, col):
         "answers": answers,
         "fact_checks": fact_checks,
         "rule": rule_record,
-        "added_facts": record(added, rows=added),
         "notes": record(n := rows(db, "SELECT kind, comment, url, pdf_page, quote FROM comment WHERE sheet = ? AND plan_id = ? "
                                       "AND col = ?", sheet, plan_id, col), rows=n),
         "layers": record(True, draft=found[0]["value"], applied=[

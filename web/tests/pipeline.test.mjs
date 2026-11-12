@@ -65,7 +65,7 @@ const ids = (t) => chain(t).map((s) => s.id);
 
 test("every cell reads facts from the documents", () => {
   const steps = ids(trace());
-  for (const id of ["find-pdfs", "read-facts", "check-facts", "column-rules", "added-facts"]) assert.ok(steps.includes(id), id);
+  for (const id of ["find-pdfs", "read-facts", "check-facts", "column-rules"]) assert.ok(steps.includes(id), id);
 });
 
 test("only a cell the presented layer cites stacks it", () => {
@@ -127,9 +127,8 @@ test("a held cell's rule strip says why", () => {
   assert.deepEqual(strip(stepById("column-rules"), held), ["0 facts used, 2 set aside", "held: the EOC and SB disagree"]);
 });
 
-test("every step of a replayed trace's chain has a strip, except added facts the cell lacks", () => {
-  const missing = chain(replay).filter((s) => !strip(s, replay)).map((s) => s.id);
-  assert.deepEqual(missing, ["added-facts"]);
+test("every step of a replayed trace's chain has a strip", () => {
+  assert.deepEqual(chain(replay).filter((s) => !strip(s, replay)).map((s) => s.id), []);
 });
 
 const BLOBS = "https://pdxplans.org/blobs/";

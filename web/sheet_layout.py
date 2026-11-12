@@ -12,10 +12,10 @@ FACT_COLUMNS = {"Plan ID": "plan_id", "Plan": None, "Benefit": "benefit", "Setti
                 "Covered by": "covered_by", "Cost kind": "cost_kind", "Amount": "amount", "Unit": "unit", "Limit": "limit",
                 "Condition": "condition", "Package": "package", "Pool": "pool", "Provider tier": "provider_tier",
                 "Source": "source", "Page": "page", "Quote or CMS field": None, "Note": "note"}
-# Keep in sync with --comment, --caveat and --added in web/static/style.css.
-FILLS = {"question": "FFF6D6", "caveat": "E8DCF4", "added": "E3F1E0"}
+# Keep in sync with --comment and --caveat in web/static/style.css.
+FILLS = {"question": "FFF6D6", "caveat": "E8DCF4"}
 # Keep in sync with KIND_NAMES in web/static/app.js.
-KIND_NAMES = {"question": "Open question", "caveat": "Caveat", "added": "Added fact"}
+KIND_NAMES = {"question": "Open question", "caveat": "Caveat"}
 HEAD = "EEF1F6"
 SECTION = "1D2433"
 MAX_WIDTH = 40

@@ -55,8 +55,7 @@ flowchart TD
   check --> present[7. Rules turn facts into values]
   cmsfacts --> present
   present --> stack[9. Stack the layers]
-  fix[8. Claude sessions correct what is left] --> present
-  fix --> stack
+  fix[8. Claude sessions explain what is left] --> stack
   stack --> publish[10. Publish the site and Google Sheet]
 ```
 
@@ -297,10 +296,10 @@ line 1 (in the U.S.):
 
 line 2 (outside the U.S.), first match wins:
   facts = trips with setting outside_us, from the best source
-  unclear      -> "EOC unclear"
   priced       -> show the range                        -> "$325"
   covered      -> line 1's value
   not_covered  -> "not covered"
+  no facts     -> the EOC's emergency care abroad: covered -> "EOC unclear", excluded -> "not covered"
 ```
 
 Each line cites the quotes of the facts it used. `generated/presented.csv` has one row per citation:
@@ -315,40 +314,19 @@ main,H1036-153-0,AB_ambulance,2,$325,…H1036153000EOC27pdf,46,Worldwide Coverag
 
 Rules write every value to the draft sheets, `generated/main_chart.csv` and `generated/dvha.csv`. A line that only CMS facts back goes there without a citation.
 
-Rules also read the added facts from step 8.
+## 8. Claude sessions explain what is left
 
-## 8. Claude sessions correct what is left
+Some values need explaining. Claude sessions write notes in pull requests.
 
-Some cells need judgment that no rule or reader handles. Claude sessions make those calls in pull requests and record them in four tables.
-
-An **added fact** adds a fact the readers missed, with a note saying why. Step 7's rules read it like any other fact. `added_facts.csv`, selected columns:
-
-```
-plan_id,benefit,setting,cost_kind,source,page,quotes,note
-H1372-003-0,ambulance,outside_us,not_covered,EOC,41,"[""Our plan doesn’t cover emergency services, urgently needed services,
-  or any other services you get outside of the United States and its territories.""]",
-  "The EOC excludes all care abroad, so it excludes ambulances there."
-```
-
-That fact makes line 2 of the AgeRight plan's Ambulance cell read `not covered`.
-
-A **note** explains a cell to volunteers. A `added` note, in green, marks a value that uses an added fact. A `caveat`, in lavender, gives a settled detail the value leaves out. A `question`, in yellow, flags a value that needs a domain expert's check. `comments.csv`, selected columns:
+A **note** explains a cell to volunteers. A `caveat`, in lavender, gives a settled detail the value leaves out. A `question`, in yellow, flags a value that needs a domain expert's check. `comments.csv`, selected columns:
 
 ```
 sheet,plan_id,column,kind,comment,pdf_page,quote
-main,H1372-003-0,AB_ambulance,added,"The EOC excludes all care abroad, so it excludes ambulances there.",41,"Our plan doesn’t cover …"
 dvha,H1372-003-0,F_dental,caveat,"EOC page 57 says there is no coinsurance or copayment for supplemental dental benefits, … The EOC does not say how often the maximum resets.",57,"Maximum: $1,000 for"
 main,H7199-002-0,L_xray_imaging,question,"EOC page 96 prices X-rays at $25 in every office setting. …",96,X-rays PCP's office: $25 copay
 ```
 
-An **edit** sets a cell's value directly, with a citation. Edits remain only on the DVHA sheet. Each edit records `saw`, the value it replaced. The build warns if the value beneath an edit changes. `edits.csv`, selected columns:
-
-```
-sheet,plan_id,column,value,pdf_page,quote,saw,source
-dvha,H3805-048-0,E_optional_packages,"Dental Platinum Rider $66/mo, max $1,500, replaces plan dental",97,It is offered to you for a monthly premium of $66,Dental Platinum Rider $66/mo,session
-```
-
-`source` is `session` on every edit: a Claude session wrote it.
+An **edit** in `edits.csv` sets a cell's value directly, with a citation.
 
 ## 9. Stack the layers
 

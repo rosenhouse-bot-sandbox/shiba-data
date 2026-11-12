@@ -43,8 +43,8 @@ H6815_038_EOC = "https://www.wellcareor.com/content/dam/centene/medicare/pdfs/ae
 class NoteWordingTest(unittest.TestCase):
     def test_notes_do_not_name_the_pipeline(self):
         jargon = re.compile(r"reader|expert's|#\d", re.I)
-        with open(DATA / "comments.csv") as comments, open(DATA / "added_facts.csv") as added:
-            notes = [r["comment"] for r in csv.DictReader(comments)] + [r["note"] for r in csv.DictReader(added)]
+        with open(DATA / "comments.csv") as comments:
+            notes = [r["comment"] for r in csv.DictReader(comments)]
         self.assertEqual([n for n in notes if jargon.search(n)], [])
 
 
@@ -97,16 +97,17 @@ class SiteDataTest(unittest.TestCase):
         self.assertEqual((comment["doc"], comment["page"]), ("90a4efa6544175a2", 83))
         self.assertIn("EKGs", comment["quote"])
 
-    def test_comment_kind_is_a_question_a_caveat_or_a_added_fact(self):
+    def test_comment_kind_is_a_question_or_a_caveat(self):
         self.assertEqual(self.cell("main", "H6815-038-0", "K_tests_labs")["comment"]["kind"], "question")
-        for kind in ("caveat", "added"):
-            with tempfile.TemporaryDirectory() as tmp:
-                data = data_copy(tmp, [])
-                (data / "comments.csv").write_text(
-                    f"sheet,plan_id,column,kind,comment,url,pdf_page,quote\nmain,H6815-038-0,K_tests_labs,{kind},x,{H6815_038_EOC},83,EKGs\n")
-                rows = build.site_data(data)["main"]["rows"]
-            row = next(r for r in rows if r["plan_id"] == "H6815-038-0")
-            self.assertEqual(row["cells"]["K_tests_labs"]["comment"]["kind"], kind)
+        with tempfile.TemporaryDirectory() as tmp:
+            data = data_copy(tmp, [])
+            comment = f"sheet,plan_id,column,kind,comment,url,pdf_page,quote\nmain,H6815-038-0,K_tests_labs,{{}},x,{H6815_038_EOC},83,EKGs\n"
+            (data / "comments.csv").write_text(comment.format("caveat"))
+            row = next(r for r in build.site_data(data)["main"]["rows"] if r["plan_id"] == "H6815-038-0")
+            self.assertEqual(row["cells"]["K_tests_labs"]["comment"]["kind"], "caveat")
+            (data / "comments.csv").write_text(comment.format("added"))
+            with self.assertRaisesRegex(ValueError, "unknown kind added"):
+                build.site_data(data)
 
     def test_unknown_comment_kind_fails(self):
         with tempfile.TemporaryDirectory() as tmp:

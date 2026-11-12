@@ -1,4 +1,4 @@
-import csv, json, os, pathlib, sys, tempfile, unittest
+import json, os, pathlib, sys, tempfile, unittest
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -119,10 +119,6 @@ class AmbulanceTest(unittest.TestCase):
     def test_line_2_covered_abroad_costs_what_unconditional_trips_cost_here(self):
         self.assertEqual(ambulance(trip(), trip(amount="$0", condition="home treatment"),
                                    trip("ambulance", "", setting="outside_us", cost_kind="covered")), ["$0-$300", "$300"])
-
-    def test_line_2_says_eoc_unclear_when_a_added_fact_says_so(self):
-        self.assertEqual(ambulance(trip(), trip("ambulance", "", setting="outside_us", cost_kind="unclear"),
-                                   trip("ambulance", "$500", setting="outside_us"))[1], "EOC unclear")
 
     def test_line_2_says_not_covered_when_the_document_excludes_care_abroad(self):
         self.assertEqual(ambulance(trip(), trip("ambulance", "", setting="outside_us", cost_kind="not_covered"))[1],
@@ -909,7 +905,7 @@ class ExtraBenefitsTest(unittest.TestCase):
 
 
 def presented_cells(data, column):
-    return {p: [value for value, _ in got] for p, got in present.lines(data, column, version=pinned(data)).items()}
+    return {p: [value for value, _ in got] for p, got in present.lines(data, column).items()}
 
 
 def pinned(data):
@@ -919,26 +915,6 @@ def pinned(data):
 
 def shown(lines, line):
     return " | ".join(lines).removesuffix(" | ") if not line else lines[int(line) - 1]
-
-
-class AddedFactTest(unittest.TestCase):
-    def test_plan_facts_include_added_facts_before_version_16(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            data = pathlib.Path(tmp)
-            for name in ("machine/document_facts.csv", "generated/pbp_facts.csv", present.ADDED):
-                os.makedirs(data / os.path.dirname(name), exist_ok=True)
-                with open(data / name, "w", newline="") as f:
-                    out = csv.DictWriter(f, facts.COLUMNS)
-                    out.writeheader()
-                    if name == present.ADDED:
-                        out.writerow(fact(amount="$1", note="added"))
-            self.assertEqual([f["amount"] for f in present.plan_facts(data, version=15)["H1036-153-0"]], ["$1"])
-            self.assertEqual(present.plan_facts(data, version=16)["H1036-153-0"], [])
-            for candidate, amounts in (("present@15", ["$1"]), ("present@16", [])):
-                with mock.patch.dict(os.environ, {present.CANDIDATE: candidate}), \
-                        mock.patch.object(present.steps, "versions", lambda data, steps, candidate: {
-                            "present": int(candidate.split("@")[1])}):
-                    self.assertEqual([f["amount"] for f in present.plan_facts(data)["H1036-153-0"]], amounts, candidate)
 
 
 class WriteTest(unittest.TestCase):
@@ -959,7 +935,7 @@ class WriteTest(unittest.TestCase):
         data = years.data_dir(YEAR)
         f = facts.read(data / "machine/document_facts.csv")[0]
         plan = f["plan_id"]
-        with mock.patch.object(present, "lines", lambda data, column, sheet, version: {plan: [("", [f])]}), \
+        with mock.patch.object(present, "lines", lambda data, column, sheet: {plan: [("", [f])]}), \
                 mock.patch.dict(present.SHEETS, {"main": ({"S_acupuncture": None}, {}), "dvha": ({}, {})}):
             rows = present.layer_rows(data)
         self.assertEqual({(r["plan_id"], r["column"], r["value"]) for r in rows}, {(plan, "S_acupuncture", "")})
@@ -1053,7 +1029,7 @@ class WriteTest(unittest.TestCase):
     def test_a_trailing_blank_line_writes_no_row(self):
         data = years.data_dir(YEAR)
         f = facts.read(data / "machine/document_facts.csv")[0]
-        with mock.patch.object(present, "lines", lambda data, column, sheet, version: {f["plan_id"]: [("$1", [f]), ("", [f])]}), \
+        with mock.patch.object(present, "lines", lambda data, column, sheet: {f["plan_id"]: [("$1", [f]), ("", [f])]}), \
                 mock.patch.dict(present.SHEETS, {"main": ({"S_acupuncture": None}, {}), "dvha": ({}, {})}):
             rows = present.layer_rows(data)
         self.assertEqual({(r["line"], r["value"]) for r in rows}, {("", "$1")})
@@ -1124,7 +1100,7 @@ class ExpectedTest(unittest.TestCase):
         for column in present.COLUMNS:
             self.assertEqual({(r["plan_id"], r["line"]) for r in rows if (r["sheet"], r["column"]) == ("main", column)},
                              {(p, str(n) if " | " in generated[p][column] else "")
-                              for p, got in present.lines(data, column, version=version).items()
+                              for p, got in present.lines(data, column).items()
                               if (column, p) not in present.held(data, version)
                               for n, (v, cited) in enumerate(got, 1) if v and not cited or present.presents(cited)})
 
@@ -1224,9 +1200,6 @@ class ExplainTest(unittest.TestCase):
              {"$7": ["a price for network 'in' won"]}),
             ("F_primary_care", "Aetna", [f("visits", "office.pcp", "$5"), f("visits", "office.pcp", "$0", condition="diabetes")],
              {"$0": ["a price without a condition won"]}),
-            ("AB_ambulance", "Aetna", [f("ambulance.ground", amount="$250"), f("ambulance", "outside_us", "$100"),
-                                       f("ambulance", "outside_us", "", cost_kind="unclear")],
-             {"$100": ["line 2 says the EOC is unclear"]}),
             ("AB_ambulance", "Aetna", [f("ambulance", "outside_us", "$100"), f("ambulance", "outside_us", "", cost_kind="covered")],
              {"": ["line 2 shows a price abroad"]}),
             ("AB_ambulance", "Aetna", [f("ambulance.ground", amount="$250"), f("ambulance", "outside_us", "", cost_kind="covered"),

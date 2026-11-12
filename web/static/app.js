@@ -11,7 +11,7 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = "pdfjs/pdf.worker.min.mjs";
 const SHEET_NAMES = { main: "Main chart", dvha: "Dental, vision, hearing & extras" };
 const VIEW_NAMES = { ...SHEET_NAMES, notes: "Notes", how: "How it's made" };
 // Keep in sync with KIND_NAMES in web/sheet_layout.py.
-const KIND_NAMES = { question: "Open question", caveat: "Caveat", added: "Added fact" };
+const KIND_NAMES = { question: "Open question", caveat: "Caveat" };
 let kindFilter = "";
 const $ = (sel) => document.querySelector(sel);
 

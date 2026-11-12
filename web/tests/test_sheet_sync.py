@@ -183,8 +183,7 @@ class DetailsTest(unittest.TestCase):
         return row.cells[self.header.index(column)]
 
     def test_one_row_per_fact_under_a_header(self):
-        found = (facts.read(build.DATA / "machine/document_facts.csv") + facts.read(build.DATA / "generated/pbp_facts.csv")
-                 + facts.read(build.DATA / "added_facts.csv"))
+        found = (facts.read(build.DATA / "machine/document_facts.csv") + facts.read(build.DATA / "generated/pbp_facts.csv"))
         self.assertEqual(self.rows[0].kind, "header")
         self.assertEqual(self.header[:3], ["Plan ID", "Plan", "Benefit"])
         self.assertEqual(len(self.rows), len(found) + 1)
@@ -316,11 +315,11 @@ class SyncTest(unittest.TestCase):
         self.assertIn(sheet_sync.color(FILLS["question"]), fills)
 
     def test_a_note_names_its_kind(self):
-        for kind, name in [("question", "Open question"), ("caveat", "Caveat"), ("added", "Added fact")]:
+        for kind, name in [("question", "Open question"), ("caveat", "Caveat")]:
             cell = dict(value="$1", cites=[], comment=dict(kind=kind, text="t"))
             out = value_cell(2027, "main", "H1", dict(id="x"), cell)
             self.assertEqual((out.note, out.fill), (f"{name}: t", FILLS[kind]))
-        self.assertEqual(len(set(FILLS.values())), 3)
+        self.assertEqual(len(set(FILLS.values())), 2)
 
 
 if __name__ == "__main__":

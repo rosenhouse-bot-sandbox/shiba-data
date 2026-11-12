@@ -82,8 +82,8 @@ function lens(step, steps, link, terms, example, trace, sheet) {
     el("div", { class: "how-card" },
       fromTo ? el("p", { class: "how-strip" }, el("code", { class: "from" }, fromTo[0]), " becomes ", el("code", { class: "to" }, fromTo[1])) : null,
       ...step.paras.map(para), ...(example?.paras ?? []).map(para), workList(details(step, trace))),
-    example ? rows("Input", step.from, example.highlight[0], example.none?.[0]) : null,
-    example ? rows("Output", step.to, example.highlight[1], example.none?.[1]) : null,
+    example ? rows("Input", step.from, example.highlight[0]) : null,
+    example ? rows("Output", step.to, example.highlight[1]) : null,
     traceRecord(step, trace),
     chips(after(step, steps), "after", (l) => `next: ${l} ↘`));
 }
@@ -166,16 +166,16 @@ document.addEventListener("click", (e) => {
 });
 document.addEventListener("scroll", (e) => opened && !opened.box.contains(e.target) && opened.close(), true);
 
-function rows(role, id, highlight, none) {
+function rows(role, id, highlight) {
   const n = NODES[id], hi = new Set(highlight);
   const mark = (i) => hi.has(i) ? { class: "hi" } : {};
   const body = n.table
-    ? (n.table.rows.length ? el("table", {},
+    ? el("table", {},
         el("thead", {}, el("tr", {}, ...n.table.cols.map((c) => el("th", {}, c)))),
-        el("tbody", {}, ...n.table.rows.map((r, i) => el("tr", mark(i), ...r.map((c) => el("td", {}, c)))))) : null)
+        el("tbody", {}, ...n.table.rows.map((r, i) => el("tr", mark(i), ...r.map((c) => el("td", {}, c))))))
     : el("pre", {}, ...n.text.lines.map((l, i) => el("span", mark(i), l)));
   const { name, note } = shown(id);
   return el("div", { class: `how-rows ${role.toLowerCase()}` },
     el("div", { class: "how-rows-head" }, el("strong", {}, role), el("code", {}, name), el("span", {}, note)),
-    none ? el("p", { class: "how-none" }, none) : body ? el("div", { class: "how-scroll" }, body) : null);
+    el("div", { class: "how-scroll" }, body));
 }

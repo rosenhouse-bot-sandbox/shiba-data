@@ -50,7 +50,7 @@ class TraceTest(unittest.TestCase):
                         records = self.cell(sheet, r["plan_id"], col)
                         self.assertEqual(records["cell"]["value"], r[col])
                         self.assertEqual(set(records), {
-                            "cell", "plan", "documents", "draft", "answers", "fact_checks", "rule", "added_facts",
+                            "cell", "plan", "documents", "draft", "answers", "fact_checks", "rule",
                             "notes", "layers", "build"})
                         self.assertLessEqual(statuses(records), STATUSES)
 
