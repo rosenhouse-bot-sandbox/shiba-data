@@ -3,7 +3,7 @@ from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import document_facts, extract, facts, review
-from test_extract import SHA, StepsTest, answer
+from test_extract import SHA, X_RAYS, StepsTest, answer
 
 
 class StepTest(StepsTest):
@@ -102,6 +102,32 @@ class StepTest(StepsTest):
                 document_facts.step(self.data, self.work, self.dir, fake, 9)
             self.assertEqual(sorted(r["network"] for r in facts.read(self.data / "machine" / "document_facts.csv")), networks, zero)
 
+    def test_a_version_keeps_the_facts_of_the_version_it_inherits(self):
+        """The parent reads $0-$40 for x-rays. The child reads a covered fact, and $5 where the parent read $0-$40."""
+        asked = []
+
+        def fake(task_dir, model, effort):
+            asked.append((os.path.relpath(task_dir, self.dir), model))
+            for task in glob.glob(f"{task_dir}/*.md"):
+                text = pathlib.Path(task).read_text()
+                reply = ([{"id": n, "ok": True} for n in range(text.count('{"id": '))] if os.path.basename(task).startswith("v-")
+                         else [answer(page=1)] if model == "parent" else
+                         [answer(page=1, amount="$5", quotes=["X-rays $5 copay"]), answer(page=1, cost_kind="covered", amount="")])
+                with open(task[:-3] + ".json", "w") as f:
+                    json.dump(reply, f)
+
+        parent = dict(groups=("imaging",), reader=("parent", "high"), verifier=("v", "low"))
+        child = dict(parent, groups=("imaging", "dental"), reader=("child", "high"), inherits=8)
+        for sub in ("text", "layout"):
+            (self.work / sub / f"{SHA[:16]}.txt").write_text(f"=====PAGE 1=====\n{X_RAYS}\nX-rays $5 copay\n")
+        (self.work / "items" / f"{SHA[:16]}.json").write_text(json.dumps({"1": {"strs": [X_RAYS, "X-rays $5 copay"], "lefts": [0, 0]}}))
+        with mock.patch.dict(document_facts.VERSIONS, {8: parent, 9: child}):
+            document_facts.step(self.data, self.work, self.dir, fake, 9)
+        rows = facts.read(self.data / "machine" / "document_facts.csv")
+        self.assertEqual(sorted((r["cost_kind"], r["amount"]) for r in rows), [("copay", "$0-$40"), ("covered", "")])
+        self.assertIn(("inherited/imaging/read", "parent"), asked)
+        self.assertNotIn(("inherited/dental/read", "parent"), asked)
+
     def test_a_merge_version_keeps_answers_that_differ_only_in_notes(self):
         def fake(task_dir, model, effort):
             for task in glob.glob(f"{task_dir}/*.md"):
@@ -112,7 +138,7 @@ class StepTest(StepsTest):
                     json.dump(reply, f)
 
         for more, count in ((dict(merge=False), 0), (dict(merge=True), 1), (dict(merge_limits=("imaging",)), 1),
-                            (dict(merge_limits=("dental",)), 0)):
+                            (dict(merge_limits=("dental",)), 0), (dict(merge_prices=("imaging",)), 1)):
             version = dict(groups=("imaging",), reader=("r", "high"), verifier=("v", "low"), **more)
             with mock.patch.dict(document_facts.VERSIONS, {9: version}):
                 document_facts.step(self.data, self.work, self.dir, fake, 9)
@@ -288,6 +314,11 @@ class StepTest(StepsTest):
         self.assertEqual(v22["recheck_notes"]["hearing"], v21["recheck_notes"]["hearing"] + " " + note)
         self.assertEqual(v23["recheck_plan_notes"], {"hearing": {"H9003-009-0": note}})
         self.assertEqual(v23["targets"], {"hearing": ("H9003-009-0",)})
+
+    def test_version_24_inherits_23_and_merges_hearing_dental_and_vision_prices(self):
+        v23, v24 = document_facts.VERSIONS[23], document_facts.VERSIONS[24]
+        self.assertEqual(dict(v24, inherits=None, merge_prices=None, targets=None), dict(v23, inherits=None, merge_prices=None, targets=None))
+        self.assertEqual((v24["inherits"], v24["merge_prices"]), (23, ("hearing", "dental", "vision")))
 
     def test_version_9_adds_vision_hearing_fitness_otc_and_packages_to_7(self):
         self.assertEqual(document_facts.VERSIONS[9], dict(document_facts.VERSIONS[7], groups=document_facts.VERSIONS[7]["groups"]

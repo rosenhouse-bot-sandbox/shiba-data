@@ -22,7 +22,7 @@ def ledger(work):
 
 def touched(row, text, docs, version):
     """The (group, plan) pairs a task is about."""
-    group, doc = row["dir"].split("/")[1], docs.get(row["task"].removeprefix("v-").split(".")[0])
+    group, doc = row["dir"].split("/")[-2], docs.get(row["task"].removeprefix("v-").split(".")[0])
     if doc is None:
         pairs = {(i["benefit"].split(".")[0], i["plan_id"]) for i in map(json.loads, ITEM.findall(text))}
     else:

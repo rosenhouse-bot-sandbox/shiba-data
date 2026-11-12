@@ -43,7 +43,7 @@ class Pinned:
     def __init__(self, work, rows):
         self.answer = {(r["dir"], r["task"]): r["key"] for r in rows}
         self.kept = {os.path.relpath(os.path.dirname(p), work): {judged(f) for f in facts.read(p)}
-                     for p in glob.glob(f"{work}/facts/*/*/accepted.csv")}
+                     for p in glob.glob(f"{work}/facts/**/accepted.csv", recursive=True)}
         self.reviewed = {}
         for p in glob.glob(f"{work}/facts/review/**/{extract.OUTCOMES}", recursive=True):
             with open(p) as f:
