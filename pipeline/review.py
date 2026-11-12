@@ -59,7 +59,7 @@ def task(data, texts, notes={}, after={}, before={}, plan_notes={}):
         if doc["id"] not in pages:
             pages[doc["id"]] = Doc(texts, doc["id"]).pages("layout")
         return extract.verifier_task(doc, plan_rows, pages[doc["id"]], [f], data,
-                                     extract.for_document(notes, plan_notes, doc), after=after, before=before)
+                                     extract.for_plans(notes, plan_notes, (f["plan_id"],)), after=after, before=before)
     return of
 
 

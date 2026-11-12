@@ -161,8 +161,12 @@ VERSIONS[21] = dict(VERSIONS[20], recheck=VERSIONS[20]["recheck"] | {
     "emergency": VERSIONS[20]["recheck_notes"]["emergency"] + " Care outside the U.S. has `covered_by` `supplemental`.",
     "tests": VERSIONS[20]["recheck_notes"]["tests"] + " A `unit` keeps the page's words, such as `per provider per day`.",
     "hearing": "Rows that give the same price may share one fact, whatever each row's visit limit."})
+KAISER_HEARING = ("A price list can continue across a page break. `$0 for Value plan members` at the top of page 65 "
+                  "ends page 64's list of routine hearing exam prices. The Value plan and the Value Lane plan are "
+                  "different plans.")
 # Version 22 says that a hearing price list can continue across a page break, as in Kaiser's EOC.
 VERSIONS[22] = dict(VERSIONS[21], recheck_notes=VERSIONS[21]["recheck_notes"] | {
-    "hearing": VERSIONS[21]["recheck_notes"]["hearing"] + " A price list can continue across a page break. "
-               "`$0 for Value plan members` at the top of page 65 ends page 64's list of routine hearing exam "
-               "prices. The Value plan and the Value Lane plan are different plans."})
+    "hearing": VERSIONS[21]["recheck_notes"]["hearing"] + " " + KAISER_HEARING})
+# Version 23 gives 22's note only to tasks about Kaiser's Value plan, since 22 moved other plans' prices.
+VERSIONS[23] = dict(VERSIONS[21], recheck_plan_notes={"hearing": {"H9003-009-0": KAISER_HEARING}},
+                    targets={"hearing": ("H9003-009-0",)})

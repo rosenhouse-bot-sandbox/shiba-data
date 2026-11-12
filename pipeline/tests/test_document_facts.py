@@ -51,7 +51,8 @@ class StepTest(StepsTest):
                     items = json.loads(pathlib.Path(f"{task_dir}/items.json").read_text())
                     reply = [{"id": n, "ok": not c["decoy"]} for n, c in enumerate(items)]
                 elif "## Facts already found" in text:
-                    reply = [answer(page=1, network="out", amount="$0", quotes=["Outpatient X-rays $0"])]
+                    reply = [answer(page=1, network="out", amount="$0", quotes=["Outpatient X-rays $0"])] + (
+                        [] if "## Earlier answers" in text else [answer(page=1, network="out", amount="$99")])
                 else:
                     reply = [answer(page=1)] + ([] if "## Earlier answers" in text else [answer(page=1, amount="$99")])
                 with open(task[:-3] + ".json", "w") as f:
@@ -60,11 +61,11 @@ class StepTest(StepsTest):
         version = dict(groups=("imaging",), reader=("r", "high"), verifier=("v", "low"), notes={"imaging": "Read this."},
                        check_notes={"imaging": "Check this."}, recheck_notes={"imaging": "Look again."},
                        check_after={"imaging": 1}, check_before={"imaging": 1}, recheck={"imaging": ("H1036-306-0",)},
-                       recheck_plan_notes={"imaging": {"H1036-306-0": "Mind page 2.", "H0000-000-0": "Other plan."}})
+                       recheck_plan_notes={"imaging": {"H1036-306-0": "Mind page 2.", "H1036-307-0": "Other plan."}})
         with mock.patch.dict(document_facts.VERSIONS, {9: version}):
             document_facts.step(self.data, self.work, self.dir, fake, 9)
         self.assertEqual({name.split("/")[0] for name in prompts}, {"read", "check", "reread", "recheck"})
-        self.assertTrue(any(name.endswith(".retry.md") for name in prompts))
+        self.assertEqual({name.split("/")[0] for name in prompts if name.endswith(".retry.md")}, {"read", "reread"})
         expected = {"read": version["notes"], "check": review.checker_notes(version),
                     "reread": review.joined(version["notes"], version["recheck_notes"]), "recheck": review.second_notes(version)}
         self.assertEqual([name for name, text in prompts.items()
@@ -279,6 +280,14 @@ class StepTest(StepsTest):
         self.assertEqual({g for g in notes if notes[g] != v21["recheck_notes"][g]}, {"hearing"})
         self.assertTrue(notes["hearing"].startswith(v21["recheck_notes"]["hearing"]))
         self.assertIn("Value plan members", notes["hearing"])
+
+    def test_version_23_gives_22s_hearing_note_to_kaisers_value_plan_only(self):
+        v21, v22, v23 = (document_facts.VERSIONS[v] for v in (21, 22, 23))
+        self.assertEqual(dict(v23, recheck_plan_notes=None, targets=None), dict(v21, recheck_plan_notes=None, targets=None))
+        note = v23["recheck_plan_notes"]["hearing"]["H9003-009-0"]
+        self.assertEqual(v22["recheck_notes"]["hearing"], v21["recheck_notes"]["hearing"] + " " + note)
+        self.assertEqual(v23["recheck_plan_notes"], {"hearing": {"H9003-009-0": note}})
+        self.assertEqual(v23["targets"], {"hearing": ("H9003-009-0",)})
 
     def test_version_9_adds_vision_hearing_fitness_otc_and_packages_to_7(self):
         self.assertEqual(document_facts.VERSIONS[9], dict(document_facts.VERSIONS[7], groups=document_facts.VERSIONS[7]["groups"]

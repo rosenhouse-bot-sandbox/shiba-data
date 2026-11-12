@@ -75,9 +75,9 @@ def relevant(pages, group):
     return {p: t for p, t in pages.items() if any(re.search(rx, t, re.I) for rx in facts.FIND[group])}
 
 
-def for_document(notes, plan_notes, doc):
-    """notes, with each group's plan_notes for the document's plans appended."""
-    extra = {g: " ".join(n for p, n in by_plan.items() if p in doc["plan_ids"]) for g, by_plan in plan_notes.items()}
+def for_plans(notes, plan_notes, plan_ids):
+    """notes, with each group's plan_notes for plan_ids appended."""
+    extra = {g: " ".join(n for p, n in by_plan.items() if p in plan_ids) for g, by_plan in plan_notes.items()}
     return {g: " ".join(n for n in (notes.get(g), extra.get(g)) if n) for g in set(notes) | {g for g in extra if extra[g]}}
 
 
@@ -310,7 +310,7 @@ def reread(work, out_dir, group, plan_ids, known, data=DATA, notes={}, plan_note
             theirs = [f for f in known if f["doc_sha"] == doc["sha256"] and f["plan_id"] in mine]
             with open(f"{out_dir}/{doc['id']}.md", "w") as f:
                 f.write(task(doc, plan_rows, pages, group, data, known=theirs, plan_ids=mine,
-                             notes=for_document(notes, plan_notes, doc)))
+                             notes=for_plans(notes, plan_notes, mine)))
 
 
 def extract_facts(work, answers_dir, group, out, data=DATA, merge=False, notes={}, zero=ZERO_GROUPS, plan_notes={}):
@@ -331,7 +331,8 @@ def extract_facts(work, answers_dir, group, out, data=DATA, merge=False, notes={
                      for prompt, n, (a, why, row) in zip(prompts, items, checked)]
         if failed:
             with open(f"{answers_dir}/{doc['id']}.retry.md", "w") as f:
-                f.write(task(doc, plan_rows, pages, group, data, failed, notes=for_document(notes, plan_notes, doc)))
+                f.write(task(doc, plan_rows, pages, group, data, failed,
+                             notes=for_plans(notes, plan_notes, {a.get("plan_id") for a, _ in failed})))
             retries += 1
         found += got
     with open(out, "w") as f:
@@ -356,7 +357,7 @@ def verify(work, facts_path, out_dir, data=DATA, known=(), notes={}, after={}, b
         rnd.shuffle(mixed)
         with open(f"{out_dir}/v-{doc['id']}.md", "w") as f:
             f.write(verifier_task(doc, plan_rows, Doc(work, doc["id"]).pages("layout"), mixed, data,
-                                  for_document(notes, plan_notes, doc), after, before))
+                                  for_plans(notes, plan_notes, {f["plan_id"] for f in mine}), after, before))
         items += [dict(c, task=doc["id"]) for c in mixed]
     with open(f"{out_dir}/items.json", "w") as f:
         json.dump(items, f, indent=1)
