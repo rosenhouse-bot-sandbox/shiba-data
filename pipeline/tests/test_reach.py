@@ -18,8 +18,9 @@ def review(plan_id):
 
 class TouchedTest(unittest.TestCase):
     def test_a_first_read_is_about_every_plan_of_its_document(self):
-        for dir, task in (("read", f"{DOC['id']}.md"), ("read", f"{DOC['id']}.retry.md"), ("check", f"v-{DOC['id']}.md")):
-            self.assertEqual(reach.touched(row(f"facts/hearing/{dir}", task), "", DOCS, VERSION),
+        for dir, task in (("hearing/read", f"{DOC['id']}.md"), ("hearing/read", f"{DOC['id']}.retry.md"),
+                          ("hearing/check", f"v-{DOC['id']}.md"), ("inherited/hearing/read", f"{DOC['id']}.md")):
+            self.assertEqual(reach.touched(row(f"facts/{dir}", task), "", DOCS, VERSION),
                              {("hearing", "H1036-001-0"), ("hearing", "H1036-002-0")})
 
     def test_a_second_look_is_about_its_documents_rechecked_plans(self):

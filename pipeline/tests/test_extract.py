@@ -173,6 +173,22 @@ class MergeTest(unittest.TestCase):
                                   None, PAGES, ok_unless_bad, merge="limits")[0]
         self.assertEqual([f["limit"] for f in found], ["1 per year"])
 
+    def test_merging_prices_drops_the_units_and_limits_that_differ(self):
+        two = answer(note="a", unit="per visit", limit="1 per year"), answer(note="b", unit="per exam", limit="2 per year")
+        self.assertEqual(extract.doc_facts(DOC, "imaging", list(two), None, PAGES, ok_unless_bad, merge="limits")[0], [])
+        found, failed = extract.doc_facts(DOC, "imaging", list(two), None, PAGES, ok_unless_bad, merge="prices")[:2]
+        self.assertEqual((failed, [(f["unit"], f["limit"]) for f in found]), ([], [("", "")]))
+
+    def test_merging_prices_keeps_units_that_count_ears_or_pairs(self):
+        two = answer(note="a", unit="per ear"), answer(note="b", unit="per pair")
+        found, failed = extract.doc_facts(DOC, "imaging", list(two), None, PAGES, ok_unless_bad, merge="prices")[:2]
+        self.assertEqual((found, [why for _, why in failed]), ([], [extract.CLASH] * 2))
+
+    def test_merging_prices_still_rejects_different_amounts(self):
+        two = answer(unit="per visit"), answer(quotes=["MRI and CT scans $250 copay"], amount="$250", unit="per exam")
+        found, failed = extract.doc_facts(DOC, "imaging", list(two), None, PAGES, ok_unless_bad, merge="prices")[:2]
+        self.assertEqual((found, [why for _, why in failed]), ([], [extract.CLASH] * 2))
+
     def test_without_merge_both_copies_clash(self):
         found, failed = extract.doc_facts(DOC, "imaging", [answer(note="a"), answer(note="b")], None, PAGES,
                                           ok_unless_bad)[:2]

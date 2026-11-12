@@ -176,25 +176,32 @@ def problem(doc, group, a, pages, quote_ok, zero=ZERO_GROUPS):
 PRICES = ("copay", "coinsurance")
 
 
-def merged(rows, limits=False):
-    """Rows that share an identity, as one row with all their quotes and notes, or None if they differ otherwise.
-    With limits, prices may also differ in limit, and then the row has none."""
-    free = ("quotes", "note", "limit") if limits and rows[0]["cost_kind"] in PRICES else ("quotes", "note")
-    if len({tuple(r[c] for c in facts.COLUMNS if c not in free) for r in rows}) > 1:
+# The details in which merged prices may differ, by merge mode. A merged price keeps a detail only if every row shares it.
+LOOSE = {"limits": ("limit",), "prices": ("limit", "unit")}
+# A unit that counts ears, aids or pairs changes what a price buys, so prices whose units differ so never merge.
+COUNTED = re.compile(r"\b(ears?|aids?|pairs?)\b", re.I)
+
+
+def merged(rows, mode):
+    """Rows that share an identity, as one row with all their quotes and notes, or None if they differ otherwise."""
+    loose = LOOSE.get(mode, ()) if rows[0]["cost_kind"] in PRICES else ()
+    if any(COUNTED.search(r["unit"]) for r in rows):
+        loose = tuple(c for c in loose if c != "unit")
+    if len({tuple(r[c] for c in facts.COLUMNS if c not in ("quotes", "note") + loose) for r in rows}) > 1:
         return None
     quotes = list(dict.fromkeys(q for r in rows for q in json.loads(r["quotes"])))
     notes = " ".join(dict.fromkeys(r["note"] for r in rows if r["note"]))
-    limit = rows[0]["limit"] if len({r["limit"] for r in rows}) == 1 else ""
-    return dict(rows[0], quotes=json.dumps(quotes, ensure_ascii=False), note=notes, limit=limit)
+    shared = {c: rows[0][c] if len({r[c] for r in rows}) == 1 else "" for c in loose}
+    return dict(rows[0], quotes=json.dumps(quotes, ensure_ascii=False), note=notes, **shared)
 
 
 def checks(doc, group, answers, pages, quote_ok, merge=False, zero=ZERO_GROUPS):
     """Each answer with why it cannot be a fact, or None, and the fact.
-    With merge, answers that differ only in quotes and notes become one fact. With merge "limits", so do those that
-    differ in limits too."""
+    With merge, answers that differ only in quotes and notes become one fact. With merge "limits" or "prices", so do
+    prices that differ only in the details LOOSE names."""
     checked = [(a, *problem(doc, group, a, pages, quote_ok, zero)) for a in answers]
     clash = set(facts.conflicts([r for _, why, r in checked if not why]))
-    rows = {i: merged([r for _, why, r in checked if not why and facts.identity(r) == i], merge == "limits") if merge else None
+    rows = {i: merged([r for _, why, r in checked if not why and facts.identity(r) == i], merge) if merge else None
             for i in clash}
     return [(a, why, r) if why or facts.identity(r) not in clash else (a, None, rows[facts.identity(r)])
             if rows[facts.identity(r)] else (a, CLASH, None) for a, why, r in checked]

@@ -47,8 +47,9 @@ class StubTest(unittest.TestCase):
     def test_a_verifier_keeps_what_the_pinned_run_kept_and_no_decoy(self):
         kept, dropped = fact(), fact(amount="$5")
         items = [dict(dropped, decoy=False), dict(kept, decoy=True), dict(kept, decoy=False)]
-        self.assertEqual(self.answer("facts/hearing/recheck", f"v-{DOC['id']}.md", "new", kept=[kept], items=items),
-                         [{"id": 0, "ok": False}, {"id": 1, "ok": False}, {"id": 2, "ok": True}])
+        for dir in ("facts/hearing/recheck", "facts/inherited/hearing/recheck"):
+            self.assertEqual(self.answer(dir, f"v-{DOC['id']}.md", "new", kept=[kept], items=items),
+                             [{"id": 0, "ok": False}, {"id": 1, "ok": False}, {"id": 2, "ok": True}])
 
     def test_a_reviewer_keeps_what_the_pinned_review_kept_and_passes_a_fact_it_never_saw(self):
         rejected, unseen = fact(), fact(plan_id="H1036-001-0")

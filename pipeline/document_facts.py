@@ -42,6 +42,8 @@ def zero(v):
 
 
 def merging(v, group):
+    if group in v.get("merge_prices", ()):
+        return "prices"
     return "limits" if group in v.get("merge_limits", ()) else v.get("merge", False)
 
 
@@ -97,13 +99,26 @@ def second_facts(texts, work, group, answer, v, data, plan_ids, known):
     return facts.read(f"{check}/accepted.csv")
 
 
+def inherited(texts, work, group, answer, v, data):
+    """The group's facts: those of the version it inherits, and its own whose identity that version lacks."""
+    own = group_facts(texts, work, group, answer, v, data)
+    parent = VERSIONS.get(v.get("inherits"))
+    if not parent or group not in parent["groups"]:
+        return own
+    if "inherits" in parent:
+        raise ValueError("A version cannot inherit a version that inherits.")
+    rows = group_facts(texts, f"{work}/inherited", group, answer, parent, data)
+    ids = {facts.identity(r) for r in rows}
+    return rows + [r for r in own if facts.identity(r) not in ids]
+
+
 def step(data, texts, work, answer, version, reviewed=True, present_version=None):
     """answer(task_dir, model, effort) answers every task file in task_dir. The groups run at the same time.
     reviewed=False skips the version's reviewer. The reviewer sees the cells that present_version presents."""
     v = VERSIONS[version]
     shutil.rmtree(work, ignore_errors=True)
     with concurrent.futures.ThreadPoolExecutor(len(v["groups"])) as pool:
-        found = list(pool.map(lambda group: group_facts(texts, work, group, answer, v, data), v["groups"]))
+        found = list(pool.map(lambda group: inherited(texts, work, group, answer, v, data), v["groups"]))
     rows = [row for rows in found for row in rows]
     data = pathlib.Path(data)
     path = data / "machine/document_facts.csv"
@@ -170,3 +185,11 @@ VERSIONS[22] = dict(VERSIONS[21], recheck_notes=VERSIONS[21]["recheck_notes"] | 
 # Version 23 gives 22's note only to tasks about Kaiser's Value plan, since 22 moved other plans' prices.
 VERSIONS[23] = dict(VERSIONS[21], recheck_plan_notes={"hearing": {"H9003-009-0": KAISER_HEARING}},
                     targets={"hearing": ("H9003-009-0",)})
+# Version 24 merges hearing, dental and vision prices that differ only in unit or limit, instead of dropping both.
+# It keeps version 23's facts. A merge changes the retry and verifier tasks of the merged prices' documents, so their
+# new answers can add other facts of those documents too.
+# Its targets are the plans whose tasks a dry run (blast.py) found it asks about.
+VERSIONS[24] = dict(VERSIONS[23], inherits=23, merge_prices=("hearing", "dental", "vision"), targets={
+    "dental": ("H1036-317-0", "H5439-011-0", "H5439-015-0", "H5439-019-0", "H6815-038-0"),
+    "hearing": HEARING_EXAM + ("H5439-015-0",),
+    "vision": ("H2056-003-0", "H2056-018-0", "H2406-042-0", "H3805-048-0", "H5439-011-0", "H6815-038-0", "H7006-018-0")})
