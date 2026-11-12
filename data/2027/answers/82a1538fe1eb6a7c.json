@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-516ff586a12c8288.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 74 hearing aid row, in network: $0 copay for 2 hearing aids every year.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 74 hearing aid row, out of network: 40% coinsurance for 2 hearing aids every year.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 73, in network: $0 copay for the routine hearing exam and for the hearing aid fitting and evaluation.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 73, out of network: 40% coinsurance for the routine hearing exam and for the fitting and evaluation.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 74: limited to 2 non-implantable hearing aids every year.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 73, out of network: $60 copay for each Medicare-covered hearing exam.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 74: hearing aid covered up to $350 per ear every year, and costs above this benefit maximum are the member's responsibility.\"}]\n```",
+ "usage": {
+  "input_tokens": 4205,
+  "output_tokens": 744,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

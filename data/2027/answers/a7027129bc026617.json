@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-28.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 8, ATRIO Choice Rx (H7006018) column: the routine hearing exam and the fitting-evaluation for hearing aids are both $0 copay in network. They share one supplemental exam fact.\"}]\n```",
+ "usage": {
+  "input_tokens": 3185,
+  "output_tokens": 297,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

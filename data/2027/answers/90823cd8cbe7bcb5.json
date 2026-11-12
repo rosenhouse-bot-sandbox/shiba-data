@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-5e11cf20cec995f3.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 92 Vision services row: $0 copayment for each Medicare-covered exam to diagnose and treat eye disease.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 93: $0 copayment for Medicare-covered glaucoma screening and for Medicare-covered eye exams to evaluate for eye disease.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 93: $0 copayment for one pair of Medicare-covered standard glasses or contact lenses after each cataract surgery.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 94 routine eyewear row: covers eyewear up to a retail value of $150, with 1 pair every 2 years.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 94 routine eyewear row: $0 copayment for 1 pair of eyeglasses or contacts every 2 years, up to $150.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 94 routine eye exam row: $0 copayment. The quote joins text from the next row, but the routine exam is $0.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 94: the plan covers 1 routine eye exam every year.\"}]\n```",
+ "usage": {
+  "input_tokens": 4631,
+  "output_tokens": 911,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

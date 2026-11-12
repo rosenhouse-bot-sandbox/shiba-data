@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "bee1858e7e963c62.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H7006-018-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"limit\": \"every year\", \"page\": 98, \"quotes\": [\"Routine eye exam Limited to 1 visit(s) every year\", \"Out-of-Network 50% coinsurance for each Medicare-covered service. In-Network $0 copay for each Medicare-covered service. Out-of-Network 50% coinsurance for each Medicare-covered service. In-Network $0 copay\"], \"note\": \"The $0 copay cell is the last entry in the cost column, so the quote joins that column across rows to make it unique.\"},\n{\"plan_id\": \"H7006-018-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"1\", \"unit\": \"visit\", \"limit\": \"every year\", \"page\": 98, \"quotes\": [\"Routine eye exam Limited to 1 visit(s) every year\"]},\n{\"plan_id\": \"H7006-018-0\", \"benefit\": \"vision.eyewear\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"1\", \"unit\": \"pair of eyeglasses (lenses and frames) or box of contact lenses\", \"limit\": \"every year\", \"page\": 99, \"quotes\": [\"Limited to 1 pair of eyeglasses (lenses and frames) every year.\", \"Limited to 1 box of contact lenses every year.\"], \"note\": \"Merged the eyeglasses and contact lens limits into one fact. The page says contact lenses are covered in lieu of glasses.\"}]\n```",
+ "usage": {
+  "input_tokens": 5830,
+  "output_tokens": 1867,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

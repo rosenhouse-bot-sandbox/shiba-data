@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "bf93677641b9fa6f.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-001-0\", \"benefit\": \"hearing.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"1\", \"unit\": \"visits\", \"limit\": \"per year\", \"page\": 6, \"quotes\": [\"Routine Hearing Exam*: $0 copay — 1 visit per year\"]}]\n```",
+ "usage": {
+  "input_tokens": 3560,
+  "output_tokens": 477,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

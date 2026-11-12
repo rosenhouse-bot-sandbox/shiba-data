@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-14.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 66 routine dental rows: in network, removable prosthodontics and adjunctive general services are each a $0 copay. Both are comprehensive supplemental services under the plan's routine dental section.\"}]\n```",
+ "usage": {
+  "input_tokens": 2819,
+  "output_tokens": 546,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

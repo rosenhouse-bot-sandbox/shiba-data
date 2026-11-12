@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-21.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 76 Hearing services row: under 'Routine hearing exam $0 copay', it says 'You are covered for 1 routine hearing exam each year.' This is a supplemental visit limit of 1 per year, in network for this HMO.\"}]\n```",
+ "usage": {
+  "input_tokens": 2896,
+  "output_tokens": 222,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

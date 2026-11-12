@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "49912316cc55d9c5.retry.md",
+ "reply": "The only failed fact cannot be fixed. The page writes the hearing aid limit as words (\"two hearing aids\", \"one per ear\") and never as a digit, so no quote can show the number. I have left it out.\n\n```json\n[]\n```",
+ "usage": {
+  "input_tokens": 3668,
+  "output_tokens": 218,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
