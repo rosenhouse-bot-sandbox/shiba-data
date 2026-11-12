@@ -269,6 +269,14 @@ class StepTest(StepsTest):
         self.assertTrue(all(notes[g].startswith(v20["recheck_notes"][g]) for g in ("tests", "emergency")))
         self.assertLessEqual(set(notes), set(v21["recheck"]))
 
+    def test_version_22_says_a_hearing_price_list_can_cross_a_page_break(self):
+        v21, v22 = document_facts.VERSIONS[21], document_facts.VERSIONS[22]
+        self.assertEqual(dict(v22, recheck_notes=None), dict(v21, recheck_notes=None))
+        notes = v22["recheck_notes"]
+        self.assertEqual({g for g in notes if notes[g] != v21["recheck_notes"][g]}, {"hearing"})
+        self.assertTrue(notes["hearing"].startswith(v21["recheck_notes"]["hearing"]))
+        self.assertIn("Value plan members", notes["hearing"])
+
     def test_version_9_adds_vision_hearing_fitness_otc_and_packages_to_7(self):
         self.assertEqual(document_facts.VERSIONS[9], dict(document_facts.VERSIONS[7], groups=document_facts.VERSIONS[7]["groups"]
                                                           + ("vision", "hearing", "fitness", "otc", "packages")))
