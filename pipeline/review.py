@@ -49,7 +49,7 @@ def second_notes(version):
     return joined(checker_notes(version), version.get("recheck_notes", {}))
 
 
-def task(data, texts, notes={}, after={}, before={}):
+def task(data, texts, notes={}, after={}, before={}, plan_notes={}):
     docs = {d["sha256"]: d for d in extract.documents(data)}
     plan_rows = extract.plans(data)
     pages = {}
@@ -58,7 +58,8 @@ def task(data, texts, notes={}, after={}, before={}):
         doc = docs[f["doc_sha"]]
         if doc["id"] not in pages:
             pages[doc["id"]] = Doc(texts, doc["id"]).pages("layout")
-        return extract.verifier_task(doc, plan_rows, pages[doc["id"]], [f], data, notes, after=after, before=before)
+        return extract.verifier_task(doc, plan_rows, pages[doc["id"]], [f], data,
+                                     extract.for_document(notes, plan_notes, doc), after=after, before=before)
     return of
 
 
@@ -71,7 +72,7 @@ def gate(data, texts, work, answer, trusted_rows, new, version, present_version,
     Stops if more facts than version["review_cap"] lack a saved answer.
     Writes <work>/review/outcomes.json with each verdict, and the saved verdicts of the trusted facts that have one."""
     task_of = task_of or task(data, texts, second_notes(version), version.get("check_after", {}),
-                              version.get("check_before", {}))
+                              version.get("check_before", {}), version.get("recheck_plan_notes", {}))
     model, effort = version["reviewer"]
     verdict, unsaved, outcomes, out = {}, 0, [], f"{work}/review"
     while True:

@@ -72,10 +72,11 @@ def second_facts(texts, work, group, answer, v, data, plan_ids, known):
     read, check = fresh(f"{work}/{group}/reread"), fresh(f"{work}/{group}/recheck")
     found = f"{read}/facts.json"
     notes = review.joined(v.get("notes", {}), v.get("recheck_notes", {}))
-    extract.reread(texts, read, group, plan_ids, known, data, notes)
+    plan_notes = v.get("recheck_plan_notes", {})
+    extract.reread(texts, read, group, plan_ids, known, data, notes, plan_notes)
     for _ in range(2):
         answer(read, *v["reader"])
-        extract.extract_facts(texts, read, group, found, data, merging(v, group), notes, zero=zero(v))
+        extract.extract_facts(texts, read, group, found, data, merging(v, group), notes, zero=zero(v), plan_notes=plan_notes)
     seen = {tuple(f[c] for c in facts.KEY) for f in known}
 
     def skipped(r):
@@ -90,7 +91,7 @@ def second_facts(texts, work, group, answer, v, data, plan_ids, known):
     extract.write_outcomes(read, [dict(o, skipped=why[tuple(o["fact"][c] for c in facts.IDENTITY)])
                                   if o["fact"] and tuple(o["fact"][c] for c in facts.IDENTITY) in why else o for o in outcomes])
     extract.verify(texts, found, check, data, known, notes=review.second_notes(v), after=v.get("check_after", {}),
-                   before=v.get("check_before", {}))
+                   before=v.get("check_before", {}), plan_notes=plan_notes)
     answer(check, *v["verifier"])
     extract.accept(check, f"{check}/accepted.csv")
     return facts.read(f"{check}/accepted.csv")

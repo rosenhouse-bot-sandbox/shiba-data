@@ -59,7 +59,8 @@ class StepTest(StepsTest):
 
         version = dict(groups=("imaging",), reader=("r", "high"), verifier=("v", "low"), notes={"imaging": "Read this."},
                        check_notes={"imaging": "Check this."}, recheck_notes={"imaging": "Look again."},
-                       check_after={"imaging": 1}, check_before={"imaging": 1}, recheck={"imaging": ("H1036-306-0",)})
+                       check_after={"imaging": 1}, check_before={"imaging": 1}, recheck={"imaging": ("H1036-306-0",)},
+                       recheck_plan_notes={"imaging": {"H1036-306-0": "Mind page 2.", "H0000-000-0": "Other plan."}})
         with mock.patch.dict(document_facts.VERSIONS, {9: version}):
             document_facts.step(self.data, self.work, self.dir, fake, 9)
         self.assertEqual({name.split("/")[0] for name in prompts}, {"read", "check", "reread", "recheck"})
@@ -72,6 +73,8 @@ class StepTest(StepsTest):
         second = {name: name.split("/")[0] in ("reread", "recheck") for name in prompts}
         self.assertEqual([name for name, text in prompts.items() if ("Check this." in text) != checking[name]], [])
         self.assertEqual([name for name, text in prompts.items() if ("Look again." in text) != second[name]], [])
+        self.assertEqual([name for name, text in prompts.items() if ("Look again. Mind page 2." in text) != second[name]], [])
+        self.assertEqual([name for name, text in prompts.items() if "Other plan." in text], [])
         self.assertEqual([name for name, text in prompts.items() if ("=====PAGE 2=====" in text) != checking[name]], [])
         self.assertEqual([name for name, text in prompts.items() if ("=====PAGE 0=====" in text) != checking[name]], [])
 

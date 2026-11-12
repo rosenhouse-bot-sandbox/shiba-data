@@ -218,6 +218,17 @@ class VersionTest(unittest.TestCase):
         self.assertEqual(verifier_task.call_args.args[-1], review.second_notes(version))
         self.assertEqual(verifier_task.call_args.kwargs["before"], {"imaging": 1})
 
+    def test_asks_with_the_plan_notes_of_the_facts_document(self):
+        plan_notes = {"imaging": {fact()["plan_id"]: "This plan.", "H0000-000-0": "Not this."}}
+        with tempfile.TemporaryDirectory() as work, mock.patch.object(review, "Doc") as doc, \
+                mock.patch.object(extract, "verifier_task", return_value="task") as verifier_task:
+            doc.return_value.pages.return_value = {}
+            review.gate(DATA, None, work, answering(), TRUSTED, COMMITTED + [fact()],
+                        dict(reviewer=("m", "e"), review_cap=10, recheck_plan_notes=plan_notes), HELD)
+        notes = {c.args[3][0]["plan_id"]: c.args[-1] for c in verifier_task.call_args_list}
+        self.assertEqual(notes[fact()["plan_id"]], {"imaging": "This plan."})
+        self.assertEqual(notes["H1036-306-0"], {})
+
     def test_shows_the_pages_after_that_the_version_asks_for(self):
         with tempfile.TemporaryDirectory() as work, mock.patch.object(review, "Doc") as doc, \
                 mock.patch.object(extract, "verifier_task", return_value="task") as verifier_task:

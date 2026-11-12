@@ -75,6 +75,12 @@ def relevant(pages, group):
     return {p: t for p, t in pages.items() if any(re.search(rx, t, re.I) for rx in facts.FIND[group])}
 
 
+def for_document(notes, plan_notes, doc):
+    """notes, with each group's plan_notes for the document's plans appended."""
+    extra = {g: " ".join(n for p, n in by_plan.items() if p in doc["plan_ids"]) for g, by_plan in plan_notes.items()}
+    return {g: " ".join(n for n in (notes.get(g), extra.get(g)) if n) for g in set(notes) | {g for g in extra if extra[g]}}
+
+
 def page_text(pages):
     return "\n\n".join(f"=====PAGE {p}=====\n{pages[p].rstrip()}" for p in sorted(pages))
 
@@ -292,7 +298,7 @@ def read(work, out_dir, group, data=DATA, ids=None, notes={}):
                 f.write(task(doc, plan_rows, pages, group, data, notes=notes))
 
 
-def reread(work, out_dir, group, plan_ids, known, data=DATA, notes={}):
+def reread(work, out_dir, group, plan_ids, known, data=DATA, notes={}, plan_notes={}):
     """Writes a task for each relevant document covering plan_ids. It lists the facts known for those plans and asks
     for the rest."""
     os.makedirs(out_dir, exist_ok=True)
@@ -303,10 +309,11 @@ def reread(work, out_dir, group, plan_ids, known, data=DATA, notes={}):
         if mine and relevant(pages, group):
             theirs = [f for f in known if f["doc_sha"] == doc["sha256"] and f["plan_id"] in mine]
             with open(f"{out_dir}/{doc['id']}.md", "w") as f:
-                f.write(task(doc, plan_rows, pages, group, data, known=theirs, plan_ids=mine, notes=notes))
+                f.write(task(doc, plan_rows, pages, group, data, known=theirs, plan_ids=mine,
+                             notes=for_document(notes, plan_notes, doc)))
 
 
-def extract_facts(work, answers_dir, group, out, data=DATA, merge=False, notes={}, zero=ZERO_GROUPS):
+def extract_facts(work, answers_dir, group, out, data=DATA, merge=False, notes={}, zero=ZERO_GROUPS, plan_notes={}):
     plan_rows, found, retries, outcomes = plans(data), [], 0, []
     for doc in documents(data):
         first = f"{answers_dir}/{doc['id']}.json"
@@ -324,7 +331,7 @@ def extract_facts(work, answers_dir, group, out, data=DATA, merge=False, notes={
                      for prompt, n, (a, why, row) in zip(prompts, items, checked)]
         if failed:
             with open(f"{answers_dir}/{doc['id']}.retry.md", "w") as f:
-                f.write(task(doc, plan_rows, pages, group, data, failed, notes=notes))
+                f.write(task(doc, plan_rows, pages, group, data, failed, notes=for_document(notes, plan_notes, doc)))
             retries += 1
         found += got
     with open(out, "w") as f:
@@ -333,7 +340,7 @@ def extract_facts(work, answers_dir, group, out, data=DATA, merge=False, notes={
     print(len(found), "facts;", retries, "retry tasks")
 
 
-def verify(work, facts_path, out_dir, data=DATA, known=(), notes={}, after={}, before={}):
+def verify(work, facts_path, out_dir, data=DATA, known=(), notes={}, after={}, before={}, plan_notes={}):
     """Known facts are not checked again, but help make decoys."""
     os.makedirs(out_dir, exist_ok=True)
     with open(facts_path) as f:
@@ -348,7 +355,8 @@ def verify(work, facts_path, out_dir, data=DATA, known=(), notes={}, after={}, b
         mixed = [dict(f, decoy=False) for f in mine] + [dict(f, decoy=True) for f in decoys(mine + theirs, rnd)]
         rnd.shuffle(mixed)
         with open(f"{out_dir}/v-{doc['id']}.md", "w") as f:
-            f.write(verifier_task(doc, plan_rows, Doc(work, doc["id"]).pages("layout"), mixed, data, notes, after, before))
+            f.write(verifier_task(doc, plan_rows, Doc(work, doc["id"]).pages("layout"), mixed, data,
+                                  for_document(notes, plan_notes, doc), after, before))
         items += [dict(c, task=doc["id"]) for c in mixed]
     with open(f"{out_dir}/items.json", "w") as f:
         json.dump(items, f, indent=1)

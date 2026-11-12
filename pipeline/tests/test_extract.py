@@ -293,6 +293,14 @@ class StepsTest(unittest.TestCase):
         self.assertNotIn("$7", text)
         self.assertLess(text.index("## Facts already found"), text.index("## Pages"))
 
+    def test_a_documents_notes_add_the_plan_notes_of_its_plans_only(self):
+        doc = {"plan_ids": ["H1036-306-0"]}
+        notes = {"imaging": "Read this.", "dental": "Teeth."}
+        self.assertEqual(extract.for_document(notes, {}, doc), notes)
+        self.assertEqual(extract.for_document(notes, {"imaging": {"H0000-000-0": "No."}}, doc), notes)
+        self.assertEqual(extract.for_document(notes, {"imaging": {"H1036-306-0": "Mind page 2."}, "vision": {"H1036-306-0": "Eyes."}}, doc),
+                         {"imaging": "Read this. Mind page 2.", "dental": "Teeth.", "vision": "Eyes."})
+
     def test_reread_says_when_no_facts_were_found(self):
         self.step(extract.reread, self.work, self.dir, "imaging", plan_ids={"H1036-306-0"}, known=[])
         text = (self.dir / f"{SHA[:16]}.md").read_text()
