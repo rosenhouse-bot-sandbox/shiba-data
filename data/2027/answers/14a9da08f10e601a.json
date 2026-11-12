@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-2eb4caa23079d78f.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 6 does show a Worldwide Emergency Coverage row ($130 copay, $50,000 maximum), so a covered fact outside the U.S. fits. But Original Medicare generally does not cover care outside the U.S., so this is normally a supplemental benefit. The page does not support covered_by medicare.\"}]\n```",
+ "usage": {
+  "input_tokens": 2016,
+  "output_tokens": 390,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

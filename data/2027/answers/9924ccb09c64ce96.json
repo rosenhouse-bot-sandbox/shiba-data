@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"The quoted 50% block sits at the top of page 88 under a heading from the previous page, and it is followed by 'Home Sleep Studies'. It likely belongs to a sleep study row, not general diagnostic tests. The EKG/EEG freestanding 50% row on the page is not what was quoted, so the benefit field is in doubt.\"}]\n```",
+ "usage": {
+  "input_tokens": 2467,
+  "output_tokens": 592,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

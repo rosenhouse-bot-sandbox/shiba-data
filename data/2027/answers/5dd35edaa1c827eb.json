@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "808ccc78793ded84.retry.md",
+ "reply": "The hearing aid limit can't be fixed. Both pages write it only as the word \"two\" (\"up to two hearing aids\", \"Up to two TruHearing®-branded hearing aids\"), never as the numeral 2. No exact quote can show the amount, so I left this fact out.\n\n```json\n[]\n```",
+ "usage": {
+  "input_tokens": 3865,
+  "output_tokens": 307,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

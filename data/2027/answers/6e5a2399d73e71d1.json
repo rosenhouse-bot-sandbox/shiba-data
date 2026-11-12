@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "da2974c756f3eedc.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-009-0\", \"benefit\": \"tests.diagnostic\", \"setting\": \"office\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"0% or 50%\", \"page\": 6, \"quotes\": [\"Diagnostic Tests and Procedures (such as a stress\", \"Office or freestanding location: $0 or 50% coinsurance\"], \"note\": \"The document says \\\"$0 or 50% coinsurance\\\" and does not say when each applies. The $0 is shown here as 0% coinsurance.\"},\n {\"plan_id\": \"H2923-009-0\", \"benefit\": \"tests.diagnostic\", \"setting\": \"freestanding\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"0% or 50%\", \"page\": 6, \"quotes\": [\"Diagnostic Tests and Procedures (such as a stress\", \"Office or freestanding location: $0 or 50% coinsurance\"], \"note\": \"The document says \\\"$0 or 50% coinsurance\\\" and does not say when each applies. The $0 is shown here as 0% coinsurance.\"},\n {\"plan_id\": \"H2923-009-0\", \"benefit\": \"tests.lab\", \"setting\": \"freestanding\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"0% or 50%\", \"condition\": \"Dedicated testing laboratory\", \"page\": 6, \"quotes\": [\"Dedicated testing laboratory: $0 or 50% coinsurance\"], \"note\": \"This is the dedicated testing laboratory row. A separate line gives 50% for an office or freestanding location. The document does not say when the $0 applies; it is shown here as 0% coinsurance.\"}]\n```",
+ "usage": {
+  "input_tokens": 3316,
+  "output_tokens": 1167,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

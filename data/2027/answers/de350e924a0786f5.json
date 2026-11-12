@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-33.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 49 does state a $250,000 yearly limit for worldwide services. But worldwide emergency coverage is a routine (supplemental) benefit, since Original Medicare generally does not cover care outside the U.S., so covered_by 'medicare' is likely wrong.\"}]\n```",
+ "usage": {
+  "input_tokens": 2246,
+  "output_tokens": 310,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

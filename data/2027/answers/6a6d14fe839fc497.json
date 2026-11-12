@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-d594b0a1d3772214.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 48 Hearing services row: $0 copay for each Medicare-covered hearing exam, in network.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Page 48 supports the $0 copay for each routine hearing exam. The limit 'one exam every year' appears only on page 49, not on the cited page.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 49 Hearing aids: $0 copay per ear, per year (two hearing aids every year).\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 49: $0 copay for each non-Medicare covered hearing aid fitting/evaluation, one fitting/evaluation every year.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 49: hearing aid annual benefit amount (allowance) of $500 per ear, every year.\"}]\n```",
+ "usage": {
+  "input_tokens": 5052,
+  "output_tokens": 681,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

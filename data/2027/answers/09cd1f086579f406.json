@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-6.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 90 Laboratory tests row, in network: $10 copay for all other Medicare-covered lab services. The $0 for A1C and kidney health labs is a carve-out, and the $50 genetic testing copay is a separate benefit. This matches the usual Wellcare pattern of one main copay with exceptions.\"}]\n```",
+ "usage": {
+  "input_tokens": 1977,
+  "output_tokens": 561,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 88: the quoted rows continue a section whose heading is on an earlier page. It could be facility sleep studies, since 'Home Sleep Studies' follows. The quote does not confirm the benefit is tests.diagnostic.\"}]\n```",
+ "usage": {
+  "input_tokens": 2468,
+  "output_tokens": 535,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

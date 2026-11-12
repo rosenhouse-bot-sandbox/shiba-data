@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-516ff586a12c8288.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 40 supports a covered fact for worldwide emergency/urgent care, but care outside the U.S. is not a Medicare-covered benefit. It is a supplemental benefit, so covered_by 'medicare' is doubtful.\"}]\n```",
+ "usage": {
+  "input_tokens": 2361,
+  "output_tokens": 375,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

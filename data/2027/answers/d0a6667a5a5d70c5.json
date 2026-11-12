@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-0bd982dc589e8cba.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 79 hearing aid row says 'Up to 2 prescription hearing aids every year (1 per ear per year)': in-network routine hearing aids, limit of 2 per year.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 78 row 'Routine hearing exam (1 per year)' shows $0 in the In-Network column: routine exam, $0 copay, 1 per year.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 79 In-Network column shows '$575 per Level 1 Aid OR $750 per Level 2 Aid': one fact with amount $575 or $750 per aid.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 78 routine hearing exam row states '(1 per year)': visit limit of 1 per year, in network.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 61 Over-the-Counter (OTC) Allowance gives $50 quarterly on the Humana Spending Account Card and lists 'Hearing aids you can buy without a prescription': an allowance fact for hearing aids with the OTC pool.\"}]\n```",
+ "usage": {
+  "input_tokens": 6542,
+  "output_tokens": 661,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

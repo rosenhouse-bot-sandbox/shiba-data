@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-5ab489f7c419b042.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 Hearing services, Routine hearing exam row: $0 copay for a routine hearing exam. It is a supplemental benefit, in network by default, with no limit stated.\"}]\n```",
+ "usage": {
+  "input_tokens": 3105,
+  "output_tokens": 138,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

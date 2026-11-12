@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-557f08e61a7e8f42.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The Hearing services row (pages 64-65) covers diagnostic hearing and balance evaluations per visit. The list continues on page 65 with \\\"$0 for Value plan members.\\\" The $55 line is for Value Lane, a different plan.\"},\n {\"id\": 1, \"ok\": true, \"reason\": \"The same Hearing services row also covers routine hearing exams. It prices them per visit at \\\"$0 for Value plan members\\\" on page 65, which makes them a supplemental $0 copay for Value.\"}]\n```",
+ "usage": {
+  "input_tokens": 3337,
+  "output_tokens": 639,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
