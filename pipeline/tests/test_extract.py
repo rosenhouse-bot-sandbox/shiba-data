@@ -293,6 +293,14 @@ class StepsTest(unittest.TestCase):
         self.assertNotIn("$7", text)
         self.assertLess(text.index("## Facts already found"), text.index("## Pages"))
 
+    def test_a_tasks_notes_add_the_plan_notes_of_its_plans_only(self):
+        plans = {"H1036-306-0"}
+        notes = {"imaging": "Read this.", "dental": "Teeth."}
+        self.assertEqual(extract.for_plans(notes, {}, plans), notes)
+        self.assertEqual(extract.for_plans(notes, {"imaging": {"H0000-000-0": "No."}}, plans), notes)
+        self.assertEqual(extract.for_plans(notes, {"imaging": {"H1036-306-0": "Mind page 2."}, "vision": {"H1036-306-0": "Eyes."}}, plans),
+                         {"imaging": "Read this. Mind page 2.", "dental": "Teeth.", "vision": "Eyes."})
+
     def test_reread_says_when_no_facts_were_found(self):
         self.step(extract.reread, self.work, self.dir, "imaging", plan_ids={"H1036-306-0"}, known=[])
         text = (self.dir / f"{SHA[:16]}.md").read_text()
@@ -314,7 +322,7 @@ class StepsTest(unittest.TestCase):
     def test_facts_retries_once_then_verify_writes_tasks_and_items(self):
         self.step(extract.read, self.work, self.dir, "imaging")
         good, bad = answer(page=1), answer(page=1, amount="$5")
-        (self.dir / f"{SHA[:16]}.json").write_text(json.dumps([good, bad]))
+        (self.dir / f"{SHA[:16]}.json").write_text(json.dumps([good, bad, "text", answer(page=1, plan_id=["a", "b"])]))
         out = self.dir / "facts.json"
         self.assertEqual(self.step(extract.extract_facts, self.work, self.dir, "imaging", out), "1 facts; 1 retry tasks\n")
         self.assertIn("no quote shows $5", (self.dir / f"{SHA[:16]}.retry.md").read_text())

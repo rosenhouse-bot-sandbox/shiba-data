@@ -72,10 +72,11 @@ def second_facts(texts, work, group, answer, v, data, plan_ids, known):
     read, check = fresh(f"{work}/{group}/reread"), fresh(f"{work}/{group}/recheck")
     found = f"{read}/facts.json"
     notes = review.joined(v.get("notes", {}), v.get("recheck_notes", {}))
-    extract.reread(texts, read, group, plan_ids, known, data, notes)
+    plan_notes = v.get("recheck_plan_notes", {})
+    extract.reread(texts, read, group, plan_ids, known, data, notes, plan_notes)
     for _ in range(2):
         answer(read, *v["reader"])
-        extract.extract_facts(texts, read, group, found, data, merging(v, group), notes, zero=zero(v))
+        extract.extract_facts(texts, read, group, found, data, merging(v, group), notes, zero=zero(v), plan_notes=plan_notes)
     seen = {tuple(f[c] for c in facts.KEY) for f in known}
 
     def skipped(r):
@@ -90,7 +91,7 @@ def second_facts(texts, work, group, answer, v, data, plan_ids, known):
     extract.write_outcomes(read, [dict(o, skipped=why[tuple(o["fact"][c] for c in facts.IDENTITY)])
                                   if o["fact"] and tuple(o["fact"][c] for c in facts.IDENTITY) in why else o for o in outcomes])
     extract.verify(texts, found, check, data, known, notes=review.second_notes(v), after=v.get("check_after", {}),
-                   before=v.get("check_before", {}))
+                   before=v.get("check_before", {}), plan_notes=plan_notes)
     answer(check, *v["verifier"])
     extract.accept(check, f"{check}/accepted.csv")
     return facts.read(f"{check}/accepted.csv")
@@ -160,8 +161,12 @@ VERSIONS[21] = dict(VERSIONS[20], recheck=VERSIONS[20]["recheck"] | {
     "emergency": VERSIONS[20]["recheck_notes"]["emergency"] + " Care outside the U.S. has `covered_by` `supplemental`.",
     "tests": VERSIONS[20]["recheck_notes"]["tests"] + " A `unit` keeps the page's words, such as `per provider per day`.",
     "hearing": "Rows that give the same price may share one fact, whatever each row's visit limit."})
+KAISER_HEARING = ("A price list can continue across a page break. `$0 for Value plan members` at the top of page 65 "
+                  "ends page 64's list of routine hearing exam prices. The Value plan and the Value Lane plan are "
+                  "different plans.")
 # Version 22 says that a hearing price list can continue across a page break, as in Kaiser's EOC.
 VERSIONS[22] = dict(VERSIONS[21], recheck_notes=VERSIONS[21]["recheck_notes"] | {
-    "hearing": VERSIONS[21]["recheck_notes"]["hearing"] + " A price list can continue across a page break. "
-               "`$0 for Value plan members` at the top of page 65 ends page 64's list of routine hearing exam "
-               "prices. The Value plan and the Value Lane plan are different plans."})
+    "hearing": VERSIONS[21]["recheck_notes"]["hearing"] + " " + KAISER_HEARING})
+# Version 23 gives 22's note only to tasks about Kaiser's Value plan, since 22 moved other plans' prices.
+VERSIONS[23] = dict(VERSIONS[21], recheck_plan_notes={"hearing": {"H9003-009-0": KAISER_HEARING}},
+                    targets={"hearing": ("H9003-009-0",)})

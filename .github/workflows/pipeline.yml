@@ -8,7 +8,7 @@ on:
         required: true
         default: "2027"
       candidate:
-        description: Run these unpinned step versions, such as present@8 or present@8,document_facts@16, in place of their pins (pipeline/steps.py)
+        description: Run these unpinned step versions, such as present@8 or document_facts@16, in place of their pins (pipeline/steps.py)
         required: false
 
 concurrency: pipeline
@@ -60,6 +60,14 @@ jobs:
             curl -sSfL --retry 5 --retry-all-errors --max-time 300 -o "$path" "https://pdxplans.org/docs/$digest.pdf" < /dev/null
           done < _texts.txt
           if [ -s _texts.txt ]; then sed 's/ /  /' _texts.txt | sha256sum -c --quiet; fi
+      # A document_facts candidate must change only its targets' plans. This check calls no API.
+      - id: blast
+        if: contains(env.CANDIDATE, 'document_facts@')
+        run: python3 -I pipeline/blast.py "$YEAR" _work "$CANDIDATE"
+        timeout-minutes: 60
+      # A stopped check can leave its stand-in outputs in data/<year>, which the later steps would commit.
+      - if: always() && steps.blast.outcome != 'success' && steps.blast.outcome != 'skipped'
+        run: git checkout -- "data/$YEAR" && git clean -fdq -- "data/$YEAR"
       # GitHub stops a job after 360 minutes, so these leave time to commit.
       # A rerun after a timeout reuses the results of the batches this run sent.
       - run: python3 -I pipeline/run.py "$YEAR" _work api "$CANDIDATE"

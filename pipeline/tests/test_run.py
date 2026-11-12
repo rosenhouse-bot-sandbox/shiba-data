@@ -48,6 +48,13 @@ class AnswersTest(unittest.TestCase):
             run.Answers(pathlib.Path(tmp), None)(tmp, READER, "high")
             self.assertEqual(pathlib.Path(tmp, "P-1.json").read_text(), "[]\n")
 
+    def test_saves_new_answers_where_it_is_told(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            pathlib.Path(tmp, "P-1.md").write_text("task")
+            run.Answers(pathlib.Path(tmp), lambda model, effort, texts: {k: ("[]", {}) for k in texts}, None,
+                        f"{tmp}/elsewhere")(tmp, READER)
+            self.assertEqual(os.listdir(f"{tmp}/elsewhere"), [f"{ask.key(READER, 'task')}.json"])
+            self.assertFalse(os.path.exists(f"{tmp}/answers"))
 
     def test_lists_each_task_with_its_answer_key_and_keeps_its_prompt(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -76,6 +83,15 @@ class StepsTest(unittest.TestCase):
 
     def test_knows_every_pinned_step(self):
         self.assertEqual(set(run.STEPS), set(json.loads((years.data_dir(years.LIVE) / "steps.json").read_text())))
+
+
+class AskerTest(unittest.TestCase):
+    def test_a_document_facts_candidate_asks_only_about_its_targets(self):
+        with mock.patch.object(run.ask, "api", lambda: "api"):
+            self.assertIsNone(run.asker("replay", "data", "work", {"document_facts": 23}, "document_facts@23"))
+            self.assertEqual(run.asker("api", "data", "work", {"document_facts": 21}, "present@16"), "api")
+            guard = run.asker("api", "data", "work", {"document_facts": 23}, "present@16,document_facts@23")
+        self.assertEqual((guard.asker, guard.version), ("api", run.STEPS["document_facts"][23]))
 
 
 class MainTest(unittest.TestCase):
