@@ -53,8 +53,6 @@ export const NODES = {
         ["ambulance", "outside_us", "out", "Emergency Ambulance", "supplemental", "copay", "$325", "EOC", "46"],
         ["ambulance.ground", "any", "in", "", "medicare", "copay", "$325", "SB", "9"],
         ["ambulance.air", "any", "in", "", "medicare", "coinsurance", "20%", "SB", "9"]] } },
-  added: { col: 1, row: 6, kind: "Claude sessions", source: true, label: "added_facts.csv",
-    table: { name: "added_facts.csv", note: "added facts", cols: ["plan_id", "benefit", "setting", "cost_kind", "source", "page", "note"], rows: [] } },
   presented: { col: 0, row: 8, kind: "table", label: "presented.csv",
     table: { name: "generated/presented.csv", note: "one row per citation", cols: ["plan_id", "column", "line", "value", "pdf_page", "quote"],
       rows: [["H1036-153-0", "AB_ambulance", "1", "$325 or 20%", "46", "In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance"],
@@ -75,7 +73,7 @@ export const DRAFT_FILES = { main: "main_chart.csv", dvha: "dvha.csv" };
 // A paragraph is a list of segments: a string, or [term, text] for a term in web/terms.py.
 // record names the key of the cell's trace (#181) that shows the step.
 // paras hold for any cell. example holds only for the example cell, on the steps that touched it: highlight lists the example rows
-// that the cell uses in the input and the output, and none says why a side has none.
+// that the cell uses in the input and the output.
 export const STEPS = [
   { id: "list-plans", record: "plan", from: "landscape", to: "plans", label: "List the plans",
     paras: [["Code keeps ", ["bothCounties", "plans sold in both counties"], ". A plan's Landscape rows become one row of plans.csv."]],
@@ -108,11 +106,6 @@ export const STEPS = [
     paras: [["The column rules also write every value to a draft sheet. A line that only CMS data backs has no citation, so a volunteer can't check it."]],
     example: { highlight: [[0, 1, 2, 3], [0]], before: "ground $325, air 20%, abroad $325", after: "$325 or 20% | $325",
       paras: [["Every line here cites the EOC."]] } },
-  { id: "added-facts", record: "added_facts", from: "added", to: "presented", label: "Added facts", pillAt: 0.15,
-    paras: [[["added", "Added facts"], " fill gaps where the documents' extracted facts fall short."]],
-    example: { highlight: [[], []], before: "no added facts for this plan", after: "nothing changes",
-      none: ["This plan has no added facts. The EOC stated every ambulance cost, so the rule needed nothing more.", "No rows come from this table for this cell."],
-      paras: [["This cell needed none."]] } },
   { id: "stack-draft", record: "layers", from: "draft", to: "live", label: "Stack: draft",
     paras: [["The draft is the bottom ", ["layer", "layer"], ". A later layer that sets the same cell wins."]],
     example: { highlight: [[0], [0]], before: "draft $325 or 20% | $325", after: "bottom layer", paras: [] } },
@@ -133,7 +126,7 @@ export function chain(trace) {
 }
 
 // Edges with no step of their own.
-export const LINKS = [["plans", "documents"], ["pbp", "draft"], ["added", "draft"]];
+export const LINKS = [["plans", "documents"], ["pbp", "draft"]];
 
 export const NODE_W = 128;
 export const NODE_H = 54;
@@ -166,9 +159,9 @@ export function edge(from, to) {
 export const PILL_W = 116;
 export const PILL_H = 24;
 
-// A step's label sits on its edge, at pillAt along it (the middle by default).
+// A step's label sits at the middle of its edge.
 export function pillBox(step) {
-  const [x, y] = edge(step.from, step.to).at(step.pillAt ?? 0.5);
+  const [x, y] = edge(step.from, step.to).at(0.5);
   return { x: x - PILL_W / 2, y: y - PILL_H / 2, w: PILL_W, h: PILL_H };
 }
 

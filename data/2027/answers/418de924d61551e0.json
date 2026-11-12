@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"The quoted block sits at the top of page 88 under a heading on the previous page, so its service is unclear. It sits just before 'Home Sleep Studies' and may be facility sleep studies (tests.diagnostic.sleep_study) rather than general diagnostic tests. The quote does not establish the benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2491,
+  "output_tokens": 602,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

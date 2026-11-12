@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-da2974c756f3eedc.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 6 Diagnostic Tests and Procedures, office or freestanding row: '$0 or 50% coinsurance'. Giving only 50% drops the $0 alternative. The quote also merges this row with the outpatient hospital line.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 6 Diagnostic Tests and Procedures (such as a stress test), office or freestanding location: $0 or 50% coinsurance in network, which matches 0% or 50%.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"Page 6 Diagnostic Tests and Procedures, outpatient hospital row: 50% coinsurance only. The $0 or 50% option applies to office or freestanding locations.\"}]\n```",
+ "usage": {
+  "input_tokens": 2655,
+  "output_tokens": 622,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

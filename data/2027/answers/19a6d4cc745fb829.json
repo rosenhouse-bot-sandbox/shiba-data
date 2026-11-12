@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-10.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 94 Spirometry row under outpatient diagnostic tests: 0% coinsurance in network (30% out of network). Spirometry is a non-radiological diagnostic test, and no setting is named.\"}]\n```",
+ "usage": {
+  "input_tokens": 2181,
+  "output_tokens": 442,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

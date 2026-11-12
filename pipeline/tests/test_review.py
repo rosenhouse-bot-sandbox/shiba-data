@@ -41,11 +41,6 @@ TRUSTED = review.cited(DATA, COMMITTED, HELD)
 
 
 class ToReviewTest(unittest.TestCase):
-    def test_a_version_without_added_facts_cites_the_document_facts_they_hid(self):
-        hidden = {r for r in review.cited(DATA, COMMITTED, 16) - review.cited(DATA, COMMITTED, 15)
-                  if dict(zip(facts.COLUMNS, r))["plan_id"] == "H7006-018-0"}
-        self.assertTrue(hidden)
-
     def test_reviews_only_untrusted_facts_that_a_cell_cites(self):
         cited, uncited = fact(), fact(benefit="radiation_therapy", amount="$2")
         self.assertEqual(review.to_review(DATA, TRUSTED, COMMITTED + [cited, uncited], HELD), [cited])

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-d649ac2bebc0321d.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 74 hearing services: the routine hearing exam is a $0 copay and the hearing aid fitting is a $0 copay. Both are supplemental hearing exam services at the same price, so they can share one fact.\"}]\n```",
+ "usage": {
+  "input_tokens": 3324,
+  "output_tokens": 355,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

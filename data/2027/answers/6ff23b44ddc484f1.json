@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "557f08e61a7e8f42.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H9003-009-0\", \"benefit\": \"hearing.aids\", \"setting\": \"any\", \"network\": \"in\", \"package\": \"Advantage Plus\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$35\", \"unit\": \"per aid\", \"condition\": \"\", \"limit\": \"\", \"page\": 107, \"quotes\": [\"Reprogramming fee if needed for a hearing aid that is no\", \"$35 per aid.\"], \"note\": \"Reprogramming fee for a hearing aid no longer under warranty. The $10-per-visit fee to clean, service and check an out-of-warranty aid was dropped because it clashed with this fact under the same key.\"}]\n```",
+ "usage": {
+  "input_tokens": 8514,
+  "output_tokens": 1138,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

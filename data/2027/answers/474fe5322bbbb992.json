@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-42.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 49 Worldwide emergency coverage row: $120 copay for emergency care worldwide (waived if admitted). This is outside-U.S. care, so network any and supplemental.\"}]\n```",
+ "usage": {
+  "input_tokens": 2260,
+  "output_tokens": 307,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

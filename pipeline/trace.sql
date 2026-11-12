@@ -129,7 +129,7 @@ CREATE TABLE fact (
   source        TEXT NOT NULL,
   doc_sha       TEXT NOT NULL,
   page          TEXT NOT NULL,
-  origin        TEXT NOT NULL CHECK (origin IN ('document', 'pbp', 'added')),
+  origin        TEXT NOT NULL CHECK (origin IN ('document', 'pbp')),
   reviewed      INTEGER NOT NULL,
   plan_id       TEXT NOT NULL REFERENCES plan,
   benefit       TEXT NOT NULL,

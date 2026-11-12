@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-37.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 40 states the plan includes world-wide emergency/urgent coverage, which gives a covered fact for outside the U.S. with network any and supplemental.\"}]\n```",
+ "usage": {
+  "input_tokens": 2385,
+  "output_tokens": 79,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

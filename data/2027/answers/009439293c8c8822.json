@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-39.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 58 Worldwide emergency coverage row: $300 copay, outside the U.S., network any, supplemental. The second quote joins the end of the previous row's text to this row's '$300 copay', but the fact matches the worldwide emergency row.\"}]\n```",
+ "usage": {
+  "input_tokens": 2300,
+  "output_tokens": 565,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

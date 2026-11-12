@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-28.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"On page 76, the routine hearing exam row is a $0 copay with 1 routine exam each year. The hearing aid fitting row is also a $0 copay. Rows with the same price may share one fact.\"}]\n```",
+ "usage": {
+  "input_tokens": 2937,
+  "output_tokens": 397,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

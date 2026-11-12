@@ -18,7 +18,7 @@ def cited(data, document, version):
     """The rows of the facts in document that a cell cites in a present version, but for the held cells."""
     held = present.held(data, version)
     return {row(f) for sheet, (rules, _) in present.SHEETS.items() for column in rules
-            for plan_id, got in present.lines(data, column, document, sheet, version).items()
+            for plan_id, got in present.lines(data, column, document, sheet).items()
             if present.cell(sheet, column, plan_id) not in held for _, used in got for f in used}
 
 

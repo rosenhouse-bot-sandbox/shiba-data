@@ -15,7 +15,7 @@ REPO = HERE.parent.parent
 
 class TermsTest(unittest.TestCase):
     def test_every_term_resolves_to_code_at_the_commit(self):
-        got = terms.resolve(REPO, "abc123", 2027)
+        got = terms.resolve(REPO, "abc123")
         self.assertEqual(set(got), set(terms.TERMS))
         rule = got["rule"]
         self.assertTrue(rule["code"].startswith("def ambulance("))
@@ -39,7 +39,7 @@ class TermsTest(unittest.TestCase):
         self.assertEqual([s for s in shown if "mbulance" in s], [])
 
     def test_each_link_spans_exactly_the_code_shown(self):
-        for name, t in terms.resolve(REPO, "abc123", 2027).items():
+        for name, t in terms.resolve(REPO, "abc123").items():
             if not t["code"]:
                 continue
             path, lines = t["url"].split("/blob/abc123/")[1].split("#")
@@ -54,16 +54,16 @@ class TermsTest(unittest.TestCase):
     def test_a_missing_file_fails_the_build(self):
         with tempfile.TemporaryDirectory() as d, mock.patch.dict(terms.TERMS, {"x": {"title": "", "text": "", "ref": "gone.js"}}, clear=True):
             with self.assertRaisesRegex(ValueError, "gone.js does not exist"):
-                terms.resolve(pathlib.Path(d), "abc123", 2027)
+                terms.resolve(pathlib.Path(d), "abc123")
 
     def test_a_constant_resolves_to_its_assignment(self):
-        layer = terms.resolve(REPO, "abc123", 2027)["layer"]
+        layer = terms.resolve(REPO, "abc123")["layer"]
         self.assertTrue(layer["code"].startswith("LAYERS = "))
 
     def test_a_file_term_links_the_file_with_no_code(self):
-        added = terms.resolve(REPO, "abc123", 2027)["added"]
-        self.assertEqual(added["url"], "https://github.com/rosenhouse-bot-sandbox/shiba-data/blob/abc123/data/2027/added_facts.csv")
-        self.assertEqual(added["code"], "")
+        worker = terms.resolve(REPO, "abc123")["worker"]
+        self.assertEqual(worker["url"], "https://github.com/rosenhouse-bot-sandbox/shiba-data/blob/abc123/web/worker.js")
+        self.assertEqual(worker["code"], "")
 
     def test_a_renamed_function_fails_the_build(self):
         with tempfile.TemporaryDirectory() as d:

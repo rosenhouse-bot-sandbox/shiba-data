@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 6, Diagnostic Tests and Procedures row (such as a stress test): 'Office or freestanding location: $0 or 50% coinsurance' for this plan, in network. A $0 cost share is the same as 0% coinsurance, so '0% or 50%' matches.\"}]\n```",
+ "usage": {
+  "input_tokens": 2385,
+  "output_tokens": 678,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

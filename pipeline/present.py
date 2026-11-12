@@ -175,7 +175,7 @@ def trip_here(f):
 
 
 def trip_abroad(f):
-    return (f["setting"] == "outside_us" and f["cost_kind"] in PRICED + ("covered", "not_covered", "unclear")
+    return (f["setting"] == "outside_us" and f["cost_kind"] in PRICED + ("covered", "not_covered")
             and not (f["provider_tier"] or f["package"]))
 
 
@@ -197,12 +197,7 @@ def ambulance(organization, found):
     priced = [f for f in abroad if f["cost_kind"] in PRICED]
     covered = [f for f in abroad if f["cost_kind"] == "covered"]
     excluded = [f for f in abroad if f["cost_kind"] == "not_covered"]
-    unclear = [f for f in abroad if f["cost_kind"] == "unclear"]
-    if unclear:
-        line2 = ("EOC unclear", unclear)
-        for f in priced + covered + excluded:
-            note(f, "line 2 says the EOC is unclear")
-    elif priced:
+    if priced:
         line2 = (show_or(priced), priced)
         for f in covered + excluded:
             note(f, "line 2 shows a price abroad")
@@ -948,19 +943,12 @@ def dental(organization, found):
     return [("; ".join(parts), unique(cited))]
 
 
-# Added facts fill in what readers miss, and each note says why. Only they use cost kind "unclear".
-ADDED = "added_facts.csv"
-# Versions from this one on use no added facts.
-WITHOUT_ADDED = 16
-
-
-def plan_facts(data, document=None, version=None):
+def plan_facts(data, document=None):
     """Each plan's facts. document replaces machine/document_facts.csv if given."""
     if document is None:
         document = facts.read(data / "machine/document_facts.csv")
-    added = facts.read(data / ADDED) if (version or current(data)) < WITHOUT_ADDED else []
     by_plan = collections.defaultdict(list)
-    for f in document + facts.read(data / "generated/pbp_facts.csv") + added:
+    for f in document + facts.read(data / "generated/pbp_facts.csv"):
         by_plan[f["plan_id"]].append(f)
     return by_plan
 
@@ -1044,9 +1032,9 @@ def plans(data):
     return layers.rows(data / "generated" / "plans.csv")
 
 
-def lines(data, column, document=None, sheet="main", version=None):
-    """{plan_id: [(value, cited facts), ...]} for each plan. See plan_facts for document and version."""
-    found = plan_facts(data, document, version)
+def lines(data, column, document=None, sheet="main"):
+    """{plan_id: [(value, cited facts), ...]} for each plan. See plan_facts for document."""
+    found = plan_facts(data, document)
     return {p["plan_id"]: SHEETS[sheet][0][column](p["organization"], found[p["plan_id"]]) for p in plans(data)}
 
 
@@ -1062,7 +1050,7 @@ def sheet_rows(data, sheet, version=None):
     """A row per plan, with each column the rule's lines. A held cell is blank."""
     version = version or current(data)
     held_cells = held(data, version)
-    columns = {column: lines(data, column, sheet=sheet, version=version) for column in fields.labels(sheet)}
+    columns = {column: lines(data, column, sheet=sheet) for column in fields.labels(sheet)}
     return [{"section": p["section"], "plan_id": p["plan_id"], "plan_name": p["plan_name"]}
             | {column: "" if cell(sheet, column, p["plan_id"]) in held_cells else shown(got[p["plan_id"]])
                for column, got in columns.items()} for p in plans(data)]
@@ -1156,7 +1144,7 @@ VERSIONS[14] = {k: v for k, v in VERSIONS[13].items() if k not in {
     ("dvha.I_alt_care_otc_travel", "H5216-455-0")}}
 # Version 15 holds no cell. EOC page 90 gives H5439-019-0's $10 lab price, and H1036-306-0's dental rule only omits detail.
 VERSIONS[15] = {}
-# Version 16 holds no cell and uses no added facts.
+# Version 16 holds no cell.
 VERSIONS[16] = {}
 # The version that first presents each later column. Earlier versions hold its cells.
 SINCE = {("dvha", "C_premium"): 3, ("dvha", "G_vision"): 4, ("dvha", "H_hearing"): 4, ("dvha", "E_optional_packages"): 5,
@@ -1189,7 +1177,7 @@ def layer_rows(data, version=None):
     out, held_cells = {}, held(data, version)
     for sheet, (rules, _) in SHEETS.items():
         for column in rules:
-            for plan_id, got in lines(data, column, sheet=sheet, version=version).items():
+            for plan_id, got in lines(data, column, sheet=sheet).items():
                 if cell(sheet, column, plan_id) in held_cells:
                     continue
                 value = shown(got)

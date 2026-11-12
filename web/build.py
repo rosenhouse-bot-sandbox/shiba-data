@@ -124,7 +124,7 @@ def site_data(data_dir=DATA, layer_names=layers.LAYERS, ignore=None):
             raise ValueError(f"comments.csv names no cell: {c['sheet']} {c['plan_id']} {c['column']}")
         if (c["plan_id"], c["column"]) in comments[c["sheet"]]:
             raise ValueError(f"comments.csv names a cell twice: {c['sheet']} {c['plan_id']} {c['column']}")
-        if c["kind"] not in ("question", "caveat", "added"):
+        if c["kind"] not in ("question", "caveat"):
             raise ValueError(f"comments.csv {c['plan_id']} {c['column']}: unknown kind {c['kind']}")
         for ref in PAGE_REF.finditer(c["comment"]):
             kind, page = ref[1].upper(), int(ref[2])
@@ -188,7 +188,7 @@ def main(command, out=None):
         shutil.copy(PDFJS / name, out_dir / "pdfjs")
     (out_dir / "index.html").write_text(titled((HERE / "static" / "index.html").read_text(), site))
     site["built"] = datetime.datetime.now(datetime.timezone.utc).isoformat()
-    site["terms"] = terms.resolve(HERE.parent, commit(), site["year"])
+    site["terms"] = terms.resolve(HERE.parent, commit())
     write_traces(out_dir, commit())
     (out_dir / "data.json").write_text(json.dumps(site))
 

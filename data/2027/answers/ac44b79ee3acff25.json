@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-43.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 49 Worldwide emergency coverage row states 'You are covered for emergency care worldwide.' This supports a covered fact with setting outside_us, network any, supplemental.\"}]\n```",
+ "usage": {
+  "input_tokens": 2247,
+  "output_tokens": 87,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

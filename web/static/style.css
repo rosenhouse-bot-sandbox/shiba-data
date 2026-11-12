@@ -6,7 +6,6 @@
   --accent: #1f5fbf;
   --comment: #fff6d6;
   --caveat: #e8dcf4;
-  --added: #e3f1e0;
   --warn: #a33b00;
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
   font-size: 15px;
@@ -45,7 +44,6 @@ td[data-col] > a { display: block; min-height: 1lh; color: inherit; text-decorat
 td.dot { text-align: center; }
 td.commented { background: var(--comment); }
 td.commented.caveat { background: var(--caveat); }
-td.commented.added { background: var(--added); }
 tr.open-plan > :not(.commented) { background: #e1ecfb; }
 td.selected { outline: 3px solid var(--ink); outline-offset: -3px; }
 
@@ -87,7 +85,6 @@ td.selected { outline: 3px solid var(--ink); outline-offset: -3px; }
 #source-note .cms ul { margin: 0; padding-left: 20px; }
 #source-note .comment { background: var(--comment); padding: 4px 6px; }
 #source-note .comment.caveat { background: var(--caveat); }
-#source-note .comment.added { background: var(--added); }
 .warn { color: var(--warn); }
 #page-area { flex: 1; overflow: auto; position: relative; padding: 12px; background: #e6e8ec; }
 .page { position: relative; margin: 0 auto 12px; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3); background: #fff; }

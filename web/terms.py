@@ -3,7 +3,7 @@ import ast
 
 REPO_URL = "https://github.com/rosenhouse-bot-sandbox/shiba-data"
 
-# ref is "<path>:<function or constant>" for Python, or a path to link whole. {year} names the year's data.
+# ref is "<path>:<function or constant>" for Python, or a path to link whole.
 TERMS = {
     "bothCounties": {"title": "Plans sold in both counties", "ref": "pipeline/universe.py:select_plans",
                      "text": "Code keeps a plan only if the Landscape file lists it in every county in config.json, "
@@ -37,9 +37,6 @@ TERMS = {
                      "line 1 is trips in the U.S., line 2 is trips abroad."},
     "bestSource": {"title": "Best source", "ref": "pipeline/present.py:top",
                    "text": "Among matching facts, a rule keeps those from the best source: EOC, then rider, then SB, then CMS."},
-    "added": {"title": "Added facts", "ref": "data/{year}/added_facts.csv",
-              "text": "Facts a Claude session wrote where the extracted facts fell short, each with a note. "
-                      "The site marks the cell with a green note."},
     "layer": {"title": "Layers", "ref": "pipeline/layers.py:LAYERS",
               "text": "Tables applied in order on top of the draft. A later layer wins."},
     "worker": {"title": "The Worker", "ref": "web/worker.js",
@@ -62,17 +59,16 @@ def locate(repo, ref):
     raise ValueError(f"{path} has no {name}")
 
 
-def resolve(repo, commit, year):
+def resolve(repo, commit):
     out = {}
     for term, t in TERMS.items():
-        ref = t["ref"].format(year=year)
+        ref = t["ref"]
         base = f"{REPO_URL}/blob/{commit}/{ref.split(':')[0]}"
         if ":" in ref:
             code, start, end = locate(repo, ref)
             url, where = f"{base}#L{start}-L{end}", ref.replace(":", ": ")
         else:
-            # A year's data file is checked by the build that reads that year.
-            if "{year}" not in t["ref"] and not (repo / ref).exists():
+            if not (repo / ref).exists():
                 raise ValueError(f"{ref} does not exist")
             code, url, where = "", base, ref
         out[term] = {"title": t["title"], "text": t["text"], "code": code, "url": url, "where": where}
