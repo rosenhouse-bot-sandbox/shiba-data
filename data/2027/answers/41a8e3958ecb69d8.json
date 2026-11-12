@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-f751937f09316ed1.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"On page 76, 30% coinsurance applies only to balance exams. Page 75 gives 50% coinsurance for Medicare diagnostic hearing and balance evaluations. A hearing.exam fact of 30% with no qualifier would mislead counselors about diagnostic hearing exams.\"}]\n```",
+ "usage": {
+  "input_tokens": 3288,
+  "output_tokens": 505,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

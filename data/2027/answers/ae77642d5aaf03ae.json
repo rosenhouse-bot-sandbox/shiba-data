@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-d649ac2bebc0321d.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 74 shows 'Routine hearing exam $0 copay' and 'Hearing aid fitting $0 copay' as supplemental hearing benefits for this plan, in network. The 'per visit' unit is not printed but matches a single exam copay. The page's limit of 1 routine exam each year is not part of this item.\"}]\n```",
+ "usage": {
+  "input_tokens": 3298,
+  "output_tokens": 606,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

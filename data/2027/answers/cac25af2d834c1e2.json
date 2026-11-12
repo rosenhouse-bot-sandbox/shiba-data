@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 89 does show 'Office or freestanding location: 50% coinsurance', but under 'Advanced Laboratory Services', a separate sub-category listed with MRIs and PET scans. It is not general outpatient lab services (tests.lab). The routine lab row likely has its own cost, so labeling this 50% as tests.lab could mislead.\"}]\n```",
+ "usage": {
+  "input_tokens": 2105,
+  "output_tokens": 569,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

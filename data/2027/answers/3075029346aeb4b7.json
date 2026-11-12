@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-26.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The Hearing services row starts on page 64 and covers routine hearing exams per visit. It continues on page 65 with '$0 for Value plan members.' That makes the in-network routine exam copay $0 per visit for the Value plan. The $55 line on page 64 belongs to the separately named 'Value Lane' plan.\"}]\n```",
+ "usage": {
+  "input_tokens": 3224,
+  "output_tokens": 516,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

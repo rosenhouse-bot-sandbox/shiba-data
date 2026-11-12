@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-11.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 94 Spirometry row under outpatient diagnostic tests: in network, 0% coinsurance for Spirometry, with no setting named. Out of network is 30%, which the item does not claim.\"}]\n```",
+ "usage": {
+  "input_tokens": 2155,
+  "output_tokens": 388,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

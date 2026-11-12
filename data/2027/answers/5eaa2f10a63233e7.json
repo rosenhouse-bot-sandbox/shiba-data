@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-4.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 89: the first $0 block has no service heading on this page, so it can't be confirmed as lab services. The other quote is the separate Advanced Laboratory Services row.\"}]\n```",
+ "usage": {
+  "input_tokens": 2125,
+  "output_tokens": 486,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

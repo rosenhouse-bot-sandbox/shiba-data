@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-1ed5fdb720cabd03.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 63 routine hearing exam row: in-network is a $0 copayment. The $80 copayment is the out-of-network column.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Page 63 Medicare-covered hearing exam: out-of-network is an $80 copayment per exam. The $0 is in-network.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 63 Hearing services row: $0 copayment for each Medicare-covered exam in network.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 63 routine hearing exam row: $80 copayment out of network.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 64 hearing aids row, in-network column: hearing aid allowance is $700 through UnitedHealthcare Hearing.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 64: we cover 1 in or out-of-network hearing exam every year.\"},\n{\"id\": 6, \"ok\": false, \"reason\": \"Page 63 routine hearing exam row: out-of-network is an $80 copayment. The $0 is in-network.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 63 routine hearing exam row: $0 copayment in network.\"},\n{\"id\": 8, \"ok\": true, \"reason\": \"Page 64: the benefit is limited to 2 hearing aids every year, in either network.\"},\n{\"id\": 9, \"ok\": true, \"reason\": \"Page 63 Hearing services row: $80 copayment for each Medicare-covered exam out of network.\"},\n{\"id\": 10, \"ok\": true, \"reason\": \"Page 64 hearing aids row, out-of-network column: 90% coinsurance on the first $700 for up to 2 hearing aids.\"}]\n```",
+ "usage": {
+  "input_tokens": 5884,
+  "output_tokens": 982,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-15.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 91, 'Other outpatient diagnostic tests' row, In-Network: 20% coinsurance for all other Medicare-covered services. The row names no setting, and the condition matches the document's words.\"}]\n```",
+ "usage": {
+  "input_tokens": 1930,
+  "output_tokens": 291,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

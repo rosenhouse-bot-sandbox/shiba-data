@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 6 Diagnostic Tests and Procedures row, office or freestanding: '$0 or 50% coinsurance'. The $0 is a dollar copay, not 0% coinsurance, so the cost kind and amount '0% or 50%' coinsurance do not match what the document states.\"}]\n```",
+ "usage": {
+  "input_tokens": 2384,
+  "output_tokens": 452,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

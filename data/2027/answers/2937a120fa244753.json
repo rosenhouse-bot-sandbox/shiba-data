@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-e306f120395b6260.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 53 routine hearing exam row: $0 copayment in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 53 routine hearing exam row: $80 copayment out of network.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"Page 53: the $80 copayment is the out-of-network amount. In network the exam is $0.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 53 hearing aids row, in-network column: hearing aid allowance is $700.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 53 hearing aids row, out-of-network column: 90% coinsurance on the first $700 for up to 2 hearing aids.\"},\n{\"id\": 5, \"ok\": false, \"reason\": \"Page 53: the $0 copayment is the in-network amount. Out of network the exam is $80.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 53: we cover 1 in or out-of-network hearing exam every year.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 53: this benefit is limited to 2 hearing aids every year. The out-of-network column also says up to 2 hearing aids.\"}]\n```",
+ "usage": {
+  "input_tokens": 4466,
+  "output_tokens": 674,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

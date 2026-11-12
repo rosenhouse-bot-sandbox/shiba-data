@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-9.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 88, Routine Laboratory Services: 'Dedicated testing laboratory: $0 copay'. A dedicated testing laboratory counts as freestanding. The separate 'Office or freestanding location: 50% coinsurance' line covers other freestanding locations, not dedicated labs.\"}]\n```",
+ "usage": {
+  "input_tokens": 2422,
+  "output_tokens": 506,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-49912316cc55d9c5.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 74 hearing aids row: $399 copay per ear for Advanced and $699 copay per ear for Premium. These are supplemental, in-network aid-level prices.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 74: Medicare-covered diagnostic hearing evaluations and balance exams are each a $40 copay.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 74: the routine (supplemental) hearing exam is covered for 1 exam each year.\"}]\n```",
+ "usage": {
+  "input_tokens": 3546,
+  "output_tokens": 362,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

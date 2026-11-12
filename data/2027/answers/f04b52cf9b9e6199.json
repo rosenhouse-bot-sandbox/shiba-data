@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-14.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 92 Spirometry row under outpatient diagnostic tests: in-network 0% coinsurance for Spirometry (deductible may apply). No setting is named.\"}]\n```",
+ "usage": {
+  "input_tokens": 2152,
+  "output_tokens": 338,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

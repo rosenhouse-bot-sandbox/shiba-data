@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-5e11cf20cec995f3.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 61 'Hearing services - routine hearing exam' row: $0 copayment. This is a routine (supplemental) exam, in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 61 'Hearing services - hearing aids' row: 'Hearing aid allowance is $700', through UnitedHealthcare Hearing. The item adds no unit or limit the page does not state.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 61 routine hearing exam row: 'We cover 1 hearing exam every year.'\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 61 hearing aids row: 'This benefit is limited to 2 hearing aids every year.'\"}]\n```",
+ "usage": {
+  "input_tokens": 3727,
+  "output_tokens": 516,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
