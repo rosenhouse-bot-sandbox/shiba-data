@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "4a3883a20d17f740.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-010-0\", \"benefit\": \"hearing.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 8, \"quotes\": [\"Routine Hearing Exam\", \"$0 copay * Out-of-Network 40% coinsurance 1 exam(s) every year\", \"$0 copay * Out-of-Network 40% coinsurance 1 fitting(s) / evaluation(s) every year\"], \"note\": \"Routine hearing exam and hearing aid fitting/evaluation rows give the same price.\"},\n{\"plan_id\": \"H5439-010-0\", \"benefit\": \"hearing.exam\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"40%\", \"page\": 8, \"quotes\": [\"Routine Hearing Exam\", \"40% coinsurance 1 exam(s) every year\", \"40% coinsurance 1 fitting(s) / evaluation(s) every year\"], \"note\": \"Routine hearing exam and hearing aid fitting/evaluation rows give the same price.\"},\n{\"plan_id\": \"H5439-010-0\", \"benefit\": \"hearing.exam\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"1\", \"limit\": \"every year\", \"page\": 8, \"quotes\": [\"1 exam(s) every year\", \"1 fitting(s) / evaluation(s) every year\"], \"note\": \"1 routine exam and 1 fitting/evaluation every year.\"}]\n```",
+ "usage": {
+  "input_tokens": 4441,
+  "output_tokens": 1652,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

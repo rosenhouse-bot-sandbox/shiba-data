@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "557f08e61a7e8f42.md",
+ "reply": "```json\n[{\"plan_id\": \"H9003-001-0\", \"benefit\": \"ambulance\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"covered\", \"condition\": \"prescribed as part of your home treatment plan\", \"page\": 69, \"quotes\": [\"Ambulance transportation to and from network facilities when ambulance transport is medically necessary.\"], \"note\": \"Page 69 says the chart's usual cost-sharing does not apply to this ambulance transport under a home treatment plan, but it states no amount. The page does not name which plans offer the home treatment benefit.\"},\n{\"plan_id\": \"H9003-006-0\", \"benefit\": \"ambulance\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"covered\", \"condition\": \"prescribed as part of your home treatment plan\", \"page\": 69, \"quotes\": [\"Ambulance transportation to and from network facilities when ambulance transport is medically necessary.\"], \"note\": \"Page 69 says the chart's usual cost-sharing does not apply to this ambulance transport under a home treatment plan, but it states no amount. The page does not name which plans offer the home treatment benefit.\"},\n{\"plan_id\": \"H9003-009-0\", \"benefit\": \"ambulance\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"covered\", \"condition\": \"prescribed as part of your home treatment plan\", \"page\": 69, \"quotes\": [\"Ambulance transportation to and from network facilities when ambulance transport is medically necessary.\"], \"note\": \"Page 69 says the chart's usual cost-sharing does not apply to this ambulance transport under a home treatment plan, but it states no amount. The page does not name which plans offer the home treatment benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 12294,
+  "output_tokens": 1468,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

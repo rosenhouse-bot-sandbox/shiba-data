@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-24.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 107, Advantage Plus Hearing aid coverage row: $500 allowance per ear, every 3 years, in network. The page lists no plan-specific columns and excludes no plan.\"}]\n```",
+ "usage": {
+  "input_tokens": 3005,
+  "output_tokens": 339,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

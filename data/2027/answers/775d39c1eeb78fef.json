@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-7.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 88, Routine Laboratory Services: 'Dedicated testing laboratory: $0 copay' in network. The task maps a dedicated testing laboratory to freestanding. The 50% for 'Office or freestanding location' is a separate line.\"}]\n```",
+ "usage": {
+  "input_tokens": 2445,
+  "output_tokens": 375,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

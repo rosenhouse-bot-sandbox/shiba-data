@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "50159487a52ccddf.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H7006-021-0\", \"benefit\": \"tests.lab\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 7, \"quotes\": [\"Lab services\", \"Out-of-Network 50% coinsurance In-Network $0 - $60 copay*\"], \"note\": \"The Freedom cost cells repeat on this page. The quote is the Freedom column read down from the Lab services out-of-network cell into the next row, Diagnostic radiology services.\"}]\n```",
+ "usage": {
+  "input_tokens": 3499,
+  "output_tokens": 3181,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

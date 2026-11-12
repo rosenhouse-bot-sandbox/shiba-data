@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "dbc45a45d9843dd0.md",
+ "reply": "```json\n[{\"plan_id\": \"H3817-008-1\", \"benefit\": \"tests.lab\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per provider per day\", \"condition\": \"for HbA1C testing\", \"page\": 57, \"quotes\": [\"$0 copay per provider per day for HbA1C testing\"], \"note\": \"The $0 copay applies only to HbA1C testing. Other lab tests cost $20.\"},\n {\"plan_id\": \"H3817-008-1\", \"benefit\": \"tests.lab\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$20\", \"unit\": \"per provider per day\", \"condition\": \"for all other tests\", \"page\": 57, \"quotes\": [\"$20 copay per provider per day for all other tests\"], \"note\": \"The $20 copay applies to lab tests other than HbA1C testing.\"},\n {\"plan_id\": \"H3817-008-1\", \"benefit\": \"tests.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$20\", \"unit\": \"per provider per day\", \"page\": 58, \"quotes\": [\"Outpatient diagnostic tests: In-network: $20 copay per provider per day\"]}]\n```",
+ "usage": {
+  "input_tokens": 10611,
+  "output_tokens": 1070,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-516ff586a12c8288.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 71 Emergency care row: covered for up to $50,000 every year for emergency or urgently needed services outside the U.S. This is a max with limit per year and no condition.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 71 emergency services outside the United States: $130 copay. This is the emergency-only row, so no condition is needed.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 118 Urgently needed services row: $130 copay for urgently needed services outside the U.S. The condition matches the page's wording.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 40 states the plan includes world-wide emergency/urgent coverage. This gives a covered fact with setting outside_us.\"}]\n```",
+ "usage": {
+  "input_tokens": 4346,
+  "output_tokens": 398,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

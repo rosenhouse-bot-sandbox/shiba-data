@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-dca4e04d7b6dc26b.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 49 Worldwide emergency coverage row shows a $120 copay with no other condition. Outside-U.S. care is network any and supplemental.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 50 Worldwide urgent care coverage row shows a $120 copay. The page calls this care 'urgently needed services', which matches the condition.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 49 states a $250,000 allowance every year for all covered worldwide services. That is the most the plan pays, so a max per year fits.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 49 states 'You are covered for emergency care worldwide.' This gives a covered fact for outside_us.\"}]\n```",
+ "usage": {
+  "input_tokens": 3257,
+  "output_tokens": 464,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

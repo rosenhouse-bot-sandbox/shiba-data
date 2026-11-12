@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-37b0122461ea99ed.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 94 Spirometry row: the 0% coinsurance is the in-network cost. Out of network is 30%.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Page 93 Other outpatient diagnostic tests: the 30% coinsurance is out of network. In network is 20% for other services.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 94 Spirometry row: 30% coinsurance out of network.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 93 Other outpatient diagnostic tests: $0 copay in network for diagnostic colonoscopy and specified testing-related services.\"},\n{\"id\": 4, \"ok\": false, \"reason\": \"Page 93 Other outpatient diagnostic tests: the 20% coinsurance is in network. Out of network is 30%.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 94 Spirometry row: 0% coinsurance in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3340,
+  "output_tokens": 344,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

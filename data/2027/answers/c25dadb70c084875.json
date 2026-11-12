@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-bee1858e7e963c62.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 97 worldwide row: $250,000 allowance every year for all covered worldwide services. This is the most the plan pays outside the U.S., with no condition.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 58 Worldwide emergency coverage row: 'You are covered for emergency care worldwide.'\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 97 Worldwide urgent care coverage row: $300 copay for worldwide urgently needed services.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 58 Worldwide emergency coverage row: $300 copay, waived if admitted. The quote joins this copay to text from the row above, but the fact matches the page.\"}]\n```",
+ "usage": {
+  "input_tokens": 3343,
+  "output_tokens": 611,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

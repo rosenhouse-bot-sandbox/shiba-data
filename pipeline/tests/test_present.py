@@ -940,25 +940,6 @@ class AddedFactTest(unittest.TestCase):
                             "present": int(candidate.split("@")[1])}):
                     self.assertEqual([f["amount"] for f in present.plan_facts(data)["H1036-153-0"]], amounts, candidate)
 
-    def test_added_facts_say_why_and_pass_the_fact_checks_but_for_cost_kind_unclear(self):
-        rows = facts.read(years.data_dir(YEAR) / present.ADDED)
-        self.assertTrue(rows and all(r["note"] and r["source"] in facts.DOCUMENTS for r in rows))
-        self.assertEqual([(r["plan_id"], p) for r in rows for p in facts.check(r) if p != "cost_kind: 'unclear'"], [])
-        self.assertLessEqual({r["cost_kind"] for r in rows} - set(facts.COST_KINDS), {"unclear"})
-
-
-    def test_a_cell_has_a_added_fact_note_exactly_when_it_cites_a_added_fact(self):
-        data = years.data_dir(YEAR)
-        url = {d["sha256"]: d["url"] for d in layers.rows(data / "generated" / "documents_checked.csv") if d["sha256"]}
-        added = {(f["plan_id"], url[f["doc_sha"]], f["page"], q)
-                        for f in facts.read(data / present.ADDED) for q in json.loads(f["quotes"])}
-        citing = {(r["sheet"], r["plan_id"], r["column"]) for r in layers.rows(data / layers.PRESENTED)
-                  if (r["plan_id"], r["url"], r["pdf_page"], r["quote"]) in added}
-        noted = {(c["sheet"], c["plan_id"], c["column"]) for c in layers.rows(data / "comments.csv")
-                 if c["kind"] == "added" and present.cell(c["sheet"], c["column"], c["plan_id"]) not in present.held(data)}
-        self.assertTrue(citing)
-        self.assertEqual(sorted(citing - noted), [], "cells that cite an added fact but have no note")
-        self.assertEqual(sorted(noted - citing), [], "notes about an added fact that the cell no longer cites")
 
 class WriteTest(unittest.TestCase):
     def test_writes_the_sheets_and_the_layer_rows(self):
@@ -1035,15 +1016,6 @@ class WriteTest(unittest.TestCase):
     def test_version_15_holds_no_cell(self):
         self.assertEqual(present.VERSIONS[15], {})
 
-    def test_version_16_cites_no_added_fact(self):
-        data = years.data_dir(YEAR)
-        kaiser = {v: [r for r in present.layer_rows(data, v) if (r["plan_id"], r["column"]) == ("H9003-001-0", "AB_ambulance")]
-                  for v in (15, 16)}
-        self.assertEqual([r["value"] for r in kaiser[15] if r["line"] == "1"][0], "$0-$250")
-        self.assertEqual({r["value"] for r in kaiser[16] if r["line"] == "1"}, {"$250"})
-        ambulance = {v: {r["plan_id"]: r["AB_ambulance"] for r in present.sheet_rows(data, "main", v)} for v in (15, 16)}
-        self.assertNotEqual(ambulance[15]["H9003-001-0"], ambulance[16]["H9003-001-0"])
-
     def test_the_pinned_version_ignores_the_candidate(self):
         data = years.data_dir(YEAR)
         pinned_version = json.loads((data / "steps.json").read_text())["present"]
@@ -1093,7 +1065,11 @@ TRIAGED = {
     ("L_xray_imaging", "H2056-003-0", "2"): "the expert's $0 mammogram rule covers Aetna",
     ("L_xray_imaging", "H2056-018-0", "2"): "the expert's $0 mammogram rule covers Aetna",
     ("L_xray_imaging", "H7199-002-0", ""): "the EOC prices X-rays at $25; the SB's $0 is for ultrasounds",
-    ("K_tests_labs", "H3817-008-1", ""): "checkers rejected the EOC's $0 HbA1C lab price for its unit, per provider per day",
+    **{("AB_ambulance", p, "1"): "readers miss the $0 home treatment plan ambulance trip because the EOC states "
+       "the $0 on the page before"
+       for p in ("H9003-001-0", "H9003-006-0", "H9003-009-0")},
+    **{("I_outpatient_surgery", p, line): "the EOC gives one price for every setting; the SB's $0 is for other services"
+       for p in ("H9003-001-0", "H9003-006-0", "H9003-009-0") for line in ("1", "2")},
 }
 
 

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "37b0122461ea99ed.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-011-0\", \"benefit\": \"tests.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"condition\": \"diagnostic colonoscopy and specified testing-related services\", \"page\": 93, \"quotes\": [\"$0 copay for Medicare-covered diagnostic colonoscopy and specified testing-related services.\"]},\n {\"plan_id\": \"H5439-011-0\", \"benefit\": \"tests.diagnostic\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"0%\", \"condition\": \"Spirometry\", \"page\": 94, \"quotes\": [\"0% coinsurance for Spirometry. Prior Authorization may be required.\"]},\n {\"plan_id\": \"H5439-011-0\", \"benefit\": \"tests.diagnostic\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"condition\": \"Spirometry\", \"page\": 94, \"quotes\": [\"30% coinsurance for Spirometry.\"]}]\n```",
+ "usage": {
+  "input_tokens": 14377,
+  "output_tokens": 1859,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

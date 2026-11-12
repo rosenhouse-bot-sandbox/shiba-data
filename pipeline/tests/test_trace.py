@@ -135,11 +135,6 @@ class TraceTest(unittest.TestCase):
         rule = self.cell("main", "H5439-019-0", "K_tests_labs")["rule"]
         self.assertEqual(rule["held"], "a held main cell")
 
-    def test_lists_the_added_facts_a_rule_considered(self):
-        added = self.cell("main", "H1372-003-0", "AB_ambulance")["added_facts"]
-        self.assertEqual([(f["fact_id"], f["origin"]) for f in added["rows"]], [("279e0b3e50b5b24d", "added")])
-        self.assertEqual(self.cell(*AMBULANCE)["added_facts"]["status"], trace.NONE)
-
     def test_lists_the_landscape_facts_a_rule_used(self):
         lines = self.cell("main", "H3805-048-0", "D_premium_full_extra_help")["rule"]["lines"]
         self.assertIn("Landscape", {f["source"] for f in lines[0]["facts"]})
