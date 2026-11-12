@@ -186,6 +186,17 @@ class TraceTest(unittest.TestCase):
             self.assertEqual(done.stderr.strip(), module.__doc__.strip())
 
 
+class OutcomeFilesTest(unittest.TestCase):
+    def test_lists_an_inherited_versions_outcomes_first(self):
+        with tempfile.TemporaryDirectory() as work:
+            for d in ("facts/hearing/read", "facts/inherited/hearing/read", "facts/review"):
+                os.makedirs(f"{work}/{d}")
+                open(f"{work}/{d}/{extract.OUTCOMES}", "w").close()
+            self.assertEqual([os.path.relpath(p, work) for p in trace.outcome_files(work)],
+                             [f"facts/inherited/hearing/read/{extract.OUTCOMES}", f"facts/hearing/read/{extract.OUTCOMES}",
+                              f"facts/review/{extract.OUTCOMES}"])
+
+
 class RunTest(unittest.TestCase):
     """Builds from a copy of the year without its saved answers, and a run that asked one task."""
 

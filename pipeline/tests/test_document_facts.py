@@ -128,6 +128,27 @@ class StepTest(StepsTest):
         self.assertIn(("inherited/imaging/read", "parent"), asked)
         self.assertNotIn(("inherited/dental/read", "parent"), asked)
 
+    def test_a_version_cannot_inherit_a_version_that_inherits(self):
+        version = dict(groups=("imaging",), reader=("r", "high"), verifier=("v", "low"))
+        with mock.patch.dict(document_facts.VERSIONS, {7: version, 8: dict(version, inherits=7), 9: dict(version, inherits=8)}), \
+                self.assertRaises(ValueError):
+            document_facts.step(self.data, self.work, self.dir, lambda *a: None, 9)
+
+    def test_a_merge_prices_version_keeps_answers_that_differ_in_unit(self):
+        def fake(task_dir, model, effort):
+            for task in glob.glob(f"{task_dir}/*.md"):
+                text = pathlib.Path(task).read_text()
+                reply = ([{"id": n, "ok": True} for n in range(text.count('{"id": '))] if os.path.basename(task).startswith("v-")
+                         else [answer(page=1, unit="per visit"), answer(page=1, unit="per exam")])
+                with open(task[:-3] + ".json", "w") as f:
+                    json.dump(reply, f)
+
+        for more, count in ((dict(merge_limits=("imaging",)), 0), (dict(merge_prices=("imaging",)), 1)):
+            version = dict(groups=("imaging",), reader=("r", "high"), verifier=("v", "low"), **more)
+            with mock.patch.dict(document_facts.VERSIONS, {9: version}):
+                document_facts.step(self.data, self.work, self.dir, fake, 9)
+            self.assertEqual(len(facts.read(self.data / "machine" / "document_facts.csv")), count, more)
+
     def test_a_merge_version_keeps_answers_that_differ_only_in_notes(self):
         def fake(task_dir, model, effort):
             for task in glob.glob(f"{task_dir}/*.md"):
@@ -138,7 +159,7 @@ class StepTest(StepsTest):
                     json.dump(reply, f)
 
         for more, count in ((dict(merge=False), 0), (dict(merge=True), 1), (dict(merge_limits=("imaging",)), 1),
-                            (dict(merge_limits=("dental",)), 0), (dict(merge_prices=("imaging",)), 1)):
+                            (dict(merge_limits=("dental",)), 0)):
             version = dict(groups=("imaging",), reader=("r", "high"), verifier=("v", "low"), **more)
             with mock.patch.dict(document_facts.VERSIONS, {9: version}):
                 document_facts.step(self.data, self.work, self.dir, fake, 9)
@@ -316,9 +337,9 @@ class StepTest(StepsTest):
         self.assertEqual(v23["targets"], {"hearing": ("H9003-009-0",)})
 
     def test_version_24_inherits_23_and_merges_hearing_dental_and_vision_prices(self):
-        v23, v24 = document_facts.VERSIONS[23], document_facts.VERSIONS[24]
-        self.assertEqual(dict(v24, inherits=None, merge_prices=None, targets=None), dict(v23, inherits=None, merge_prices=None, targets=None))
-        self.assertEqual((v24["inherits"], v24["merge_prices"]), (23, ("hearing", "dental", "vision")))
+        self.assertEqual(document_facts.VERSIONS[24], dict(document_facts.VERSIONS[23], inherits=23,
+                                                           merge_prices=("hearing", "dental", "vision"),
+                                                           targets=document_facts.VERSIONS[24]["targets"]))
 
     def test_version_9_adds_vision_hearing_fitness_otc_and_packages_to_7(self):
         self.assertEqual(document_facts.VERSIONS[9], dict(document_facts.VERSIONS[7], groups=document_facts.VERSIONS[7]["groups"]

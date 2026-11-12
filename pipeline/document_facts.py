@@ -100,13 +100,16 @@ def second_facts(texts, work, group, answer, v, data, plan_ids, known):
 
 
 def inherited(texts, work, group, answer, v, data):
-    """The group's facts, and those of the version it inherits that have an identity of their own."""
+    """The group's facts: those of the version it inherits, and its own whose identity that version lacks."""
     own = group_facts(texts, work, group, answer, v, data)
     parent = VERSIONS.get(v.get("inherits"))
     if not parent or group not in parent["groups"]:
         return own
-    rows = {facts.identity(r): r for r in inherited(texts, f"{work}/inherited", group, answer, parent, data)}
-    return list(rows.values()) + [r for r in own if facts.identity(r) not in rows]
+    if "inherits" in parent:
+        raise ValueError("A version cannot inherit a version that inherits.")
+    rows = group_facts(texts, f"{work}/inherited", group, answer, parent, data)
+    ids = {facts.identity(r) for r in rows}
+    return rows + [r for r in own if facts.identity(r) not in ids]
 
 
 def step(data, texts, work, answer, version, reviewed=True, present_version=None):
@@ -183,5 +186,6 @@ VERSIONS[22] = dict(VERSIONS[21], recheck_notes=VERSIONS[21]["recheck_notes"] | 
 VERSIONS[23] = dict(VERSIONS[21], recheck_plan_notes={"hearing": {"H9003-009-0": KAISER_HEARING}},
                     targets={"hearing": ("H9003-009-0",)})
 # Version 24 merges hearing, dental and vision prices that differ only in unit or limit, instead of dropping both.
-# It keeps version 23's facts, so it can only add facts.
+# It keeps version 23's facts. A merge changes the retry and verifier tasks of the merged prices' documents, so their
+# new answers can add other facts of those documents too.
 VERSIONS[24] = dict(VERSIONS[23], inherits=23, merge_prices=("hearing", "dental", "vision"), targets={})

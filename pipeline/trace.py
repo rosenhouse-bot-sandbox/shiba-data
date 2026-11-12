@@ -91,7 +91,9 @@ def build(year, out, sha, work=None):
 
 
 def outcome_files(work):
-    return sorted(glob.glob(os.path.join(work, "facts", "**", extract.OUTCOMES), recursive=True))
+    """The outcome files, an inherited version's first, so a version's own outcome wins for a prompt they share."""
+    paths = glob.glob(os.path.join(work, "facts", "**", extract.OUTCOMES), recursive=True)
+    return sorted(paths, key=lambda p: (f"{os.sep}inherited{os.sep}" not in p, p))
 
 
 def number(text):

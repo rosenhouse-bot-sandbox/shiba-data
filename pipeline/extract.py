@@ -178,11 +178,15 @@ PRICES = ("copay", "coinsurance")
 
 # The details in which merged prices may differ, by merge mode. A merged price keeps a detail only if every row shares it.
 LOOSE = {"limits": ("limit",), "prices": ("limit", "unit")}
+# A unit that counts ears, aids or pairs changes what a price buys, so prices whose units differ so never merge.
+COUNTED = re.compile(r"\b(ears?|aids?|pairs?)\b", re.I)
 
 
-def merged(rows, mode=True):
+def merged(rows, mode):
     """Rows that share an identity, as one row with all their quotes and notes, or None if they differ otherwise."""
     loose = LOOSE.get(mode, ()) if rows[0]["cost_kind"] in PRICES else ()
+    if any(COUNTED.search(r["unit"]) for r in rows):
+        loose = tuple(c for c in loose if c != "unit")
     if len({tuple(r[c] for c in facts.COLUMNS if c not in ("quotes", "note") + loose) for r in rows}) > 1:
         return None
     quotes = list(dict.fromkeys(q for r in rows for q in json.loads(r["quotes"])))

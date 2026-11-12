@@ -74,6 +74,7 @@ jobs:
         timeout-minutes: 290
       # A pin PR copies this table of changed cells from the run's summary.
       - run: python3 -I pipeline/changes.py "$YEAR" HEAD >> "$GITHUB_STEP_SUMMARY"
+        continue-on-error: true
       # Upload before committing any data that names these blobs. Keys are content hashes, so a re-upload changes nothing.
       - id: upload
         if: always()
