@@ -165,7 +165,7 @@ def text(answer, field):
 
 def load_rules(db, data):
     organization = {p["plan_id"]: p["organization"] for p in read(data / "generated/plans.csv")}
-    version = present.current(data)
+    version = present.current(data, candidate="")
     found, held = present.plan_facts(data, version=version), present.held(data, version)
     for sheet, (rules, _) in present.SHEETS.items():
         for r in layers.generated(data)[sheet]:
