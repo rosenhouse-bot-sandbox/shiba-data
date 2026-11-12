@@ -188,4 +188,8 @@ VERSIONS[23] = dict(VERSIONS[21], recheck_plan_notes={"hearing": {"H9003-009-0":
 # Version 24 merges hearing, dental and vision prices that differ only in unit or limit, instead of dropping both.
 # It keeps version 23's facts. A merge changes the retry and verifier tasks of the merged prices' documents, so their
 # new answers can add other facts of those documents too.
-VERSIONS[24] = dict(VERSIONS[23], inherits=23, merge_prices=("hearing", "dental", "vision"), targets={})
+# Its targets are the plans whose tasks a dry run (blast.py) found it asks about.
+VERSIONS[24] = dict(VERSIONS[23], inherits=23, merge_prices=("hearing", "dental", "vision"), targets={
+    "dental": ("H1036-317-0", "H5439-011-0", "H5439-015-0", "H5439-019-0", "H6815-038-0"),
+    "hearing": HEARING_EXAM + ("H5439-015-0",),
+    "vision": ("H2056-003-0", "H2056-018-0", "H2406-042-0", "H3805-048-0", "H5439-011-0", "H6815-038-0", "H7006-018-0")})
