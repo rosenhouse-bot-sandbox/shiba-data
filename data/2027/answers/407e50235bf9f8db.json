@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-61de2101267140ce.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 additional hearing benefits: the routine hearing exam row ($0 copay, up to 1 visit every year) and the hearing aid fitting/evaluation row ($0 copay, unlimited visits) give the same $0 in-network supplemental copay per visit, so they can share one fact.\"}]\n```",
+ "usage": {
+  "input_tokens": 2483,
+  "output_tokens": 267,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

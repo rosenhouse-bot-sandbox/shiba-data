@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-5f6896f5c437eeed.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 7 Hearing Care, in-network column: Routine Hearing Exam is a $0 copay (1 visit per year) and Hearing Aid Fitting and Evaluation is a $0 copay. Both are supplemental hearing exams at the same price, so they can share one fact.\"}]\n```",
+ "usage": {
+  "input_tokens": 3460,
+  "output_tokens": 257,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

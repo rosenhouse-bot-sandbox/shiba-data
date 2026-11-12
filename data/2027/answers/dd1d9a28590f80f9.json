@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-17.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 7 Routine Hearing Exam row for Wellcare Low Premium (HMO-POS): $0 copay. It is a routine (supplemental) exam, in network by default.\"}]\n```",
+ "usage": {
+  "input_tokens": 2613,
+  "output_tokens": 332,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

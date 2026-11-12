@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-be9deec855112c1d.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 76 Hearing services row, under Routine hearing exam, says the member is covered for 1 routine hearing exam each year. The exam is supplemental, in network, with a visit limit of 1 per year.\"}]\n```",
+ "usage": {
+  "input_tokens": 2963,
+  "output_tokens": 95,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

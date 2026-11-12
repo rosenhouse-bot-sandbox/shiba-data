@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-4ec81cd0d2695486.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 65, Hearing services, Supplemental benefits: the Routine hearing exam row and the Hearing aid fitting and evaluation row are both $0 copayment. Both are supplemental hearing exams at the same price, so they may share one fact despite different visit limits. The copay is per visit, in network for this HMO.\"}]\n```",
+ "usage": {
+  "input_tokens": 2817,
+  "output_tokens": 403,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

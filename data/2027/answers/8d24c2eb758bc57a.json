@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-19.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 51 does show a $0 in-network copay for routine hearing exams and hearing aid fittings, which would fit a supplemental fact. But the quote pairs 'Medicare-covered service' with '$0 copay'. That matches the Medicare diagnostic exam row that starts on page 50, which is covered_by medicare, not supplemental. Because the quote supports a different covered_by than the item states, it is marked false.\"}]\n```",
+ "usage": {
+  "input_tokens": 3080,
+  "output_tokens": 745,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "50159487a52ccddf.retry.md",
+ "reply": "```json\n[\n{\"plan_id\": \"H7006-018-0\", \"benefit\": \"hearing.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"limit\": \"1 visit every year\", \"page\": 8, \"quotes\": [\"hearing aids (services not $0 copay $0 copay\", \"covered by Medicare) must be Limited to 1 visit every year* Limited to 1 visit every year*\"], \"note\": \"Routine hearing exam and hearing aid fitting-evaluations are both $0 in network. The limit shown is for the routine exam; fitting-evaluations have unlimited visits.\"},\n{\"plan_id\": \"H7006-018-0\", \"benefit\": \"hearing.exam\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"80%\", \"page\": 8, \"quotes\": [\"Routine hearing exam 80% coinsurance 80% coinsurance\"]},\n{\"plan_id\": \"H7006-018-0\", \"benefit\": \"hearing.aids\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$699-$999\", \"limit\": \"2 hearing aids every year\", \"page\": 8, \"quotes\": [\"$699 - $999 copay $699 - $999 copay\", \"Limited to 2 hearing aids Limited to 2 hearing aids\"]},\n{\"plan_id\": \"H7006-021-0\", \"benefit\": \"hearing.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"limit\": \"1 visit every year\", \"page\": 8, \"quotes\": [\"hearing aids (services not $0 copay $0 copay\", \"covered by Medicare) must be Limited to 1 visit every year* Limited to 1 visit every year*\"], \"note\": \"Routine hearing exam and hearing aid fitting-evaluations are both $0 in network. The limit shown is for the routine exam; fitting-evaluations have unlimited visits.\"},\n{\"plan_id\": \"H7006-021-0\", \"benefit\": \"hearing.exam\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"80%\", \"page\": 8, \"quotes\": [\"Routine hearing exam 80% coinsurance 80% coinsurance\"]},\n{\"plan_id\": \"H7006-021-0\", \"benefit\": \"hearing.aids\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$699-$999\", \"limit\": \"2 hearing aids every year\", \"page\": 8, \"quotes\": [\"$699 - $999 copay $699 - $999 copay\", \"Limited to 2 hearing aids Limited to 2 hearing aids\"]}\n]\n```",
+ "usage": {
+  "input_tokens": 6044,
+  "output_tokens": 3365,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

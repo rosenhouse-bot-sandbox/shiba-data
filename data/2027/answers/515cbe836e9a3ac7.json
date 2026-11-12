@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-808ccc78793ded84.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"The $0 routine hearing exam and fitting copays on page 79 are in the in-network column. Out of network, the routine exam (page 79) and the fitting (page 80) are each a $35 copay.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 79, in-network column: routine hearing exam $0 copay and hearing aid fitting $0 copay. Both are supplemental benefits.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"The $35 hearing aid fitting copay on page 80 sits under the out-of-network heading that starts on page 79. The in-network fitting copay is $0.\"}]\n```",
+ "usage": {
+  "input_tokens": 4380,
+  "output_tokens": 363,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
