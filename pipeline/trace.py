@@ -16,7 +16,7 @@ import csv, glob, hashlib, json, os, sqlite3, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-import ask, blobs, eoc, extract, facts, fields, layers, present, steps, years
+import ask, blobs, eoc, extract, facts, fields, layers, present, years
 
 REPO_URL = "https://github.com/rosenhouse-bot-sandbox/shiba-data"
 PROMPT_URL = "https://pdxplans.org/blobs/{}.txt"
@@ -165,8 +165,8 @@ def text(answer, field):
 
 def load_rules(db, data):
     organization = {p["plan_id"]: p["organization"] for p in read(data / "generated/plans.csv")}
-    found = present.plan_facts(data)
-    held = present.held(data, steps.versions(data, {"present": present.VERSIONS})["present"])
+    version = present.current(data)
+    found, held = present.plan_facts(data, version=version), present.held(data, version)
     for sheet, (rules, _) in present.SHEETS.items():
         for r in layers.generated(data)[sheet]:
             plan_id = r["plan_id"]

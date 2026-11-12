@@ -917,7 +917,7 @@ def shown(lines, line):
 
 
 class AddedFactTest(unittest.TestCase):
-    def test_plan_facts_include_added_facts(self):
+    def test_plan_facts_include_added_facts_before_version_16(self):
         with tempfile.TemporaryDirectory() as tmp:
             data = pathlib.Path(tmp)
             for name in ("machine/document_facts.csv", "generated/pbp_facts.csv", present.ADDED):
@@ -927,7 +927,13 @@ class AddedFactTest(unittest.TestCase):
                     out.writeheader()
                     if name == present.ADDED:
                         out.writerow(fact(amount="$1", note="added"))
-            self.assertEqual([f["amount"] for f in present.plan_facts(data)["H1036-153-0"]], ["$1"])
+            self.assertEqual([f["amount"] for f in present.plan_facts(data, version=15)["H1036-153-0"]], ["$1"])
+            self.assertEqual(present.plan_facts(data, version=16)["H1036-153-0"], [])
+            for candidate, amounts in (("present@15", ["$1"]), ("present@16", [])):
+                with mock.patch.dict(os.environ, {present.CANDIDATE: candidate}), \
+                        mock.patch.object(present.steps, "versions", lambda data, steps, candidate: {
+                            "present": int(candidate.split("@")[1])}):
+                    self.assertEqual([f["amount"] for f in present.plan_facts(data)["H1036-153-0"]], amounts, candidate)
 
     def test_added_facts_say_why_and_pass_the_fact_checks_but_for_cost_kind_unclear(self):
         rows = facts.read(years.data_dir(YEAR) / present.ADDED)
@@ -967,7 +973,7 @@ class WriteTest(unittest.TestCase):
         data = years.data_dir(YEAR)
         f = facts.read(data / "machine/document_facts.csv")[0]
         plan = f["plan_id"]
-        with mock.patch.object(present, "lines", lambda data, column, sheet: {plan: [("", [f])]}), \
+        with mock.patch.object(present, "lines", lambda data, column, sheet, version: {plan: [("", [f])]}), \
                 mock.patch.dict(present.SHEETS, {"main": ({"S_acupuncture": None}, {}), "dvha": ({}, {})}):
             rows = present.layer_rows(data)
         self.assertEqual({(r["plan_id"], r["column"], r["value"]) for r in rows}, {(plan, "S_acupuncture", "")})
@@ -1024,6 +1030,18 @@ class WriteTest(unittest.TestCase):
     def test_version_15_holds_no_cell(self):
         self.assertEqual(present.VERSIONS[15], {})
 
+    def test_version_16_cites_no_added_fact(self):
+        data = years.data_dir(YEAR)
+        kaiser = {v: [r for r in present.layer_rows(data, v) if (r["plan_id"], r["column"]) == ("H9003-001-0", "AB_ambulance")]
+                  for v in (15, 16)}
+        self.assertEqual([r["value"] for r in kaiser[15] if r["line"] == "1"][0], "$0-$250")
+        self.assertEqual({r["value"] for r in kaiser[16] if r["line"] == "1"}, {"$250"})
+        ambulance = {v: {r["plan_id"]: r["AB_ambulance"] for r in present.sheet_rows(data, "main", v)} for v in (15, 16)}
+        self.assertNotEqual(ambulance[15]["H9003-001-0"], ambulance[16]["H9003-001-0"])
+
+    def test_version_16_holds_no_cell(self):
+        self.assertEqual(present.VERSIONS[16], {})
+
     def test_version_12_holds_no_cell(self):
         self.assertEqual(present.held(years.data_dir(YEAR), 12), {})
 
@@ -1051,7 +1069,7 @@ class WriteTest(unittest.TestCase):
     def test_a_trailing_blank_line_writes_no_row(self):
         data = years.data_dir(YEAR)
         f = facts.read(data / "machine/document_facts.csv")[0]
-        with mock.patch.object(present, "lines", lambda data, column, sheet: {f["plan_id"]: [("$1", [f]), ("", [f])]}), \
+        with mock.patch.object(present, "lines", lambda data, column, sheet, version: {f["plan_id"]: [("$1", [f]), ("", [f])]}), \
                 mock.patch.dict(present.SHEETS, {"main": ({"S_acupuncture": None}, {}), "dvha": ({}, {})}):
             rows = present.layer_rows(data)
         self.assertEqual({(r["line"], r["value"]) for r in rows}, {("", "$1")})

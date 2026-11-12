@@ -3,7 +3,7 @@ import concurrent.futures, json, os, pathlib, shutil, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-import extract, facts, present, review
+import extract, facts, review
 
 VERSIONS = {
     # evaluate.py picked these models.
@@ -109,8 +109,8 @@ def step(data, texts, work, answer, version, reviewed=True, present_version=None
     os.makedirs(data / "machine", exist_ok=True)
     if reviewed and "reviewer" in v:
         old = facts.read(path) if path.exists() else []
-        held = present.held(data, present_version)
-        rows, trusted = review.gate(data, texts, work, answer, review.trusted(data, old, held), rows, v, held)
+        trusted = review.trusted(data, old, present_version)
+        rows, trusted = review.gate(data, texts, work, answer, trusted, rows, v, present_version)
         facts.write(str(data / review.REVIEWED), trusted)
     facts.write(str(path), rows)
 VERSIONS[13] = dict(VERSIONS[12], review_cap=200, recheck=VERSIONS[12]["recheck"] | {
@@ -152,3 +152,11 @@ VERSIONS[20] = dict(VERSIONS[19], zero_groups=extract.ZERO_GROUPS + ("part_d_ded
                  "`outside_us`.",
     "tests": "A dedicated or independent testing laboratory is `freestanding`.",
     "surgery": "A price for outpatient surgery that names no place has `setting` `any`."})
+# Version 21 rechecks ambulance prices for Kaiser members in a home treatment plan. Its recheck notes say that care
+# abroad is supplemental, that a unit keeps the page's words, and that rows with one price may share a fact.
+VERSIONS[21] = dict(VERSIONS[20], recheck=VERSIONS[20]["recheck"] | {
+    "ambulance": ("H9003-001-0", "H9003-006-0", "H9003-009-0")}, recheck_notes=VERSIONS[20]["recheck_notes"] | {
+    "ambulance": "A price for members in a home treatment plan has that plan in `condition`.",
+    "emergency": VERSIONS[20]["recheck_notes"]["emergency"] + " Care outside the U.S. has `covered_by` `supplemental`.",
+    "tests": VERSIONS[20]["recheck_notes"]["tests"] + " A `unit` keeps the page's words, such as `per provider per day`.",
+    "hearing": "Rows that give the same price may share one fact, whatever each row's visit limit."})

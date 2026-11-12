@@ -14,22 +14,23 @@ def row(f):
     return tuple(f[c] for c in facts.COLUMNS)
 
 
-def cited(data, document, held):
-    """The rows of the facts in document that a presented cell cites, but for the held cells."""
+def cited(data, document, version):
+    """The rows of the facts in document that a cell cites in a present version, but for the held cells."""
+    held = present.held(data, version)
     return {row(f) for sheet, (rules, _) in present.SHEETS.items() for column in rules
-            for plan_id, got in present.lines(data, column, document, sheet).items()
+            for plan_id, got in present.lines(data, column, document, sheet, version).items()
             if present.cell(sheet, column, plan_id) not in held for _, used in got for f in used}
 
 
-def trusted(data, old, held):
+def trusted(data, old, version):
     """The rows an earlier run reviewed. Before the first review, the cited rows of the old facts."""
     path = data / REVIEWED
-    return {row(f) for f in facts.read(path)} if path.exists() else cited(data, old, held)
+    return {row(f) for f in facts.read(path)} if path.exists() else cited(data, old, version)
 
 
-def to_review(data, trusted_rows, new, held):
+def to_review(data, trusted_rows, new, version):
     """The facts in new, once each, that a presented cell cites and that are not trusted."""
-    rows = cited(data, new, held) - trusted_rows
+    rows = cited(data, new, version) - trusted_rows
     return list({row(f): f for f in new if row(f) in rows}.values())
 
 
@@ -65,7 +66,7 @@ def saved(data, model, text, effort):
     return (data / "answers" / f"{ask.key(model, text, effort)}.json").exists()
 
 
-def gate(data, texts, work, answer, trusted_rows, new, version, held, task_of=None):
+def gate(data, texts, work, answer, trusted_rows, new, version, present_version, task_of=None):
     """new without the facts the reviewer rejects, and the kept facts that are cited or trusted, which a later run trusts.
     Stops if more facts than version["review_cap"] lack a saved answer.
     Writes <work>/review/outcomes.json with each verdict, and the saved verdicts of the trusted facts that have one."""
@@ -75,7 +76,7 @@ def gate(data, texts, work, answer, trusted_rows, new, version, held, task_of=No
     verdict, unsaved, outcomes, out = {}, 0, [], f"{work}/review"
     while True:
         kept = [f for f in new if verdict.get(row(f)) is not False]
-        pending = [f for f in to_review(data, trusted_rows, kept, held) if row(f) not in verdict]
+        pending = [f for f in to_review(data, trusted_rows, kept, present_version) if row(f) not in verdict]
         if not pending:
             break
         texts_of = [task_of(f) for f in pending]
@@ -88,7 +89,7 @@ def gate(data, texts, work, answer, trusted_rows, new, version, held, task_of=No
             outcomes.append(outcome(f, text, v, earlier=False))
             if not verdict[row(f)]:
                 print(f"Reviewer rejected {f['plan_id']} {f['benefit']} {f['amount']}: {v.get('reason', 'no verdict')}")
-    rows = cited(data, kept, held) | trusted_rows
+    rows = cited(data, kept, present_version) | trusted_rows
     earlier = [f for f in {row(f): f for f in kept if row(f) in trusted_rows and row(f) not in verdict}.values()
                if saved(data, model, task_of(f), effort)]
     texts_of = [task_of(f) for f in earlier]
