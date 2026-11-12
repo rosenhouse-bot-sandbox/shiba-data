@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-2c828c1ac1616719.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 6, Section 4.1 says in words: \\\"You don't pay a separate monthly plan premium for Regence Valiance.\\\" The summary table also shows a $0 monthly plan premium.\"}]\n```",
+ "usage": {
+  "input_tokens": 2084,
+  "output_tokens": 91,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-37b0122461ea99ed.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 94: 0% coinsurance for Spirometry is the in-network cost. Out of network, Spirometry is 30% coinsurance.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Page 93: 30% coinsurance for diagnostic procedures and tests is the out-of-network cost. In network, all other services are 20%.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 94 Spirometry row: in network, 0% coinsurance for Spirometry.\"},\n{\"id\": 3, \"ok\": false, \"reason\": \"Page 93: 20% coinsurance for all other services is the in-network cost. Out of network, it is 30%.\"},\n{\"id\": 4, \"ok\": false, \"reason\": \"Page 92: the quote is the out-of-network lab services row. Genetic testing is not named, so the benefit does not match.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 94 Spirometry row: out of network, 30% coinsurance for Spirometry.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 93 Other outpatient diagnostic tests row: in network, $0 copay for diagnostic colonoscopy and specified testing-related services.\"}]\n```",
+ "usage": {
+  "input_tokens": 4017,
+  "output_tokens": 662,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-50159487a52ccddf.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 8, Medicare-covered hearing and balance exam row, Choice Rx (H7006018) column: $0 copay in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 8, Medicare-covered hearing and balance exam row, Choice Rx (H7006018) column: 50% coinsurance out of network.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 8, Medicare-covered hearing and balance exam row, Freedom (H7006021) column: 50% coinsurance out of network.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 8, Medicare-covered hearing and balance exam row, Freedom (H7006021) column: $0 copay in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3480,
+  "output_tokens": 333,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

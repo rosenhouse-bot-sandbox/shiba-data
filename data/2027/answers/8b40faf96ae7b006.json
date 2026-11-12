@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-da2974c756f3eedc.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 6 Hearing Care row: Medicare-Covered Hearing Care is 50% coinsurance in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 6 Hearing Aids* row: $399 copay or $699 copay per aid. The asterisk marks it as a routine supplemental benefit.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 6 Hearing Aids row: the benefit covers up to 2 TruHearing Advanced or Premium hearing aids. The page states no time frame.\"}]\n```",
+ "usage": {
+  "input_tokens": 3311,
+  "output_tokens": 390,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1063,6 +1063,7 @@ TRIAGED = {
     ("L_xray_imaging", "H2056-003-0", "2"): "the expert's $0 mammogram rule covers Aetna",
     ("L_xray_imaging", "H2056-018-0", "2"): "the expert's $0 mammogram rule covers Aetna",
     ("L_xray_imaging", "H7199-002-0", ""): "the EOC prices X-rays at $25; the SB's $0 is for ultrasounds",
+    ("K_tests_labs", "H3817-008-1", ""): "checkers rejected the EOC's $0 HbA1C lab price for its unit, per provider per day",
 }
 
 

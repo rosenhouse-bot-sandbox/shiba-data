@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "bee1858e7e963c62.md",
+ "reply": "```json\n[{\"plan_id\": \"H7006-018-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"covered\", \"page\": 58, \"quotes\": [\"You are covered for emergency care worldwide.\"], \"note\": \"\"},\n{\"plan_id\": \"H7006-018-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$300\", \"page\": 58, \"quotes\": [\"Worldwide emergency coverage $300 copay\"], \"note\": \"\"},\n{\"plan_id\": \"H7006-018-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"condition\": \"urgently needed services\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$300\", \"page\": 58, \"quotes\": [\"Worldwide urgent care coverage $300 copay\"], \"note\": \"\"},\n{\"plan_id\": \"H7006-018-0\", \"benefit\": \"emergency\", \"setting\": \"outside_us\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"max\", \"amount\": \"$250,000\", \"limit\": \"per year\", \"page\": 58, \"quotes\": [\"You are covered for emergency care worldwide. $250,000 allowance every year for all covered worldwide services.\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 6090,
+  "output_tokens": 1913,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

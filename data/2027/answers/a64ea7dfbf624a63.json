@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-30.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 15 shows a $300 copay for worldwide emergency coverage under ATRIO Choice Rx (H7006018), so the plan and amount match. But the field covered_by is 'medicare'. Original Medicare generally does not cover emergency care outside the U.S., so this is normally a supplemental benefit, and the page does not say it is Medicare-covered.\"}]\n```",
+ "usage": {
+  "input_tokens": 1693,
+  "output_tokens": 385,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-32.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 58 does state a $250,000 yearly allowance for worldwide emergency care. But worldwide emergency coverage is a supplemental benefit, since Medicare generally does not cover care outside the U.S. The page does not label it Medicare-covered, so covered_by 'medicare' is doubtful.\"}]\n```",
+ "usage": {
+  "input_tokens": 2286,
+  "output_tokens": 533,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

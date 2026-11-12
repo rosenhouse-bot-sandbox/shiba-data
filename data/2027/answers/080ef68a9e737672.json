@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-37b0122461ea99ed.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 75 hearing aid row, In-Network: $0 copay for 2 hearing aid(s) every year.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 74 diagnostic hearing row, In-Network: $30 copay for each Medicare-covered hearing exam.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 75 hearing aid fitting and evaluation row, Out-of-Network: 40% coinsurance for 1 fitting and evaluation every year.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 75 hearing aid service description, which applies to both networks: limited to 2 non-implantable hearing aids every year.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 74 routine hearing exam row, Out-of-Network: 40% coinsurance for 1 routine hearing exam every year.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 75 hearing aid row, Out-of-Network: 40% coinsurance for 2 hearing aid(s) every year.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 75 hearing aid service description, which applies to both networks: plan pays up to $350 per ear every year.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 74 diagnostic hearing row, Out-of-Network: 30% coinsurance for each Medicare-covered hearing exam.\"}]\n```",
+ "usage": {
+  "input_tokens": 4287,
+  "output_tokens": 776,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

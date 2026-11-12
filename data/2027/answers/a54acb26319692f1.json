@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-dbc45a45d9843dd0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 61 outpatient hospital services: out-of-network is 50% coinsurance. This covers all outpatient hospital services, including diagnostic colonoscopy.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"The top block on page 61 has no setting header, so the ASC setting cannot be confirmed from this page. Colonoscopy is also not named in that block.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"The 50% coinsurance for outpatient hospital services is out of network. In network, other services are 20% coinsurance.\"},\n{\"id\": 3, \"ok\": false, \"reason\": \"The 20% coinsurance for outpatient hospital services is in network. Out of network is 50%.\"}]\n```",
+ "usage": {
+  "input_tokens": 2505,
+  "output_tokens": 632,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

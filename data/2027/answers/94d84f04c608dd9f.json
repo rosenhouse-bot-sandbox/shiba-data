@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-3.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 89 shows 50% coinsurance for 'Advanced Laboratory Services' in an office or freestanding location. That is a separate advanced-services row, not clearly routine outpatient lab services, so counselors could misread it as the general lab cost. The quote also combines office with freestanding. There is enough doubt to reject.\"}]\n```",
+ "usage": {
+  "input_tokens": 2102,
+  "output_tokens": 557,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
