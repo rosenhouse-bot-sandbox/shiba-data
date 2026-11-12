@@ -35,11 +35,17 @@ def answering(rejected=(), asked=None):
     return answer
 
 
-HELD = present.held(DATA, 1)
+# The present version whose held cells and facts the reviewer sees.
+HELD = 1
 TRUSTED = review.cited(DATA, COMMITTED, HELD)
 
 
 class ToReviewTest(unittest.TestCase):
+    def test_a_version_without_added_facts_cites_the_document_facts_they_hid(self):
+        hidden = {r for r in review.cited(DATA, COMMITTED, 16) - review.cited(DATA, COMMITTED, 15)
+                  if dict(zip(facts.COLUMNS, r))["plan_id"] == "H7006-018-0"}
+        self.assertTrue(hidden)
+
     def test_reviews_only_untrusted_facts_that_a_cell_cites(self):
         cited, uncited = fact(), fact(benefit="radiation_therapy", amount="$2")
         self.assertEqual(review.to_review(DATA, TRUSTED, COMMITTED + [cited, uncited], HELD), [cited])
@@ -49,16 +55,16 @@ class ToReviewTest(unittest.TestCase):
 
     def test_skips_facts_that_only_a_held_cell_cites(self):
         held = fact(plan_id="H6815-038-0", benefit="tests.diagnostic", setting="office.pcp", amount="$9")
-        self.assertIn(("K_tests_labs", "H6815-038-0"), HELD)
+        self.assertIn(("K_tests_labs", "H6815-038-0"), present.held(DATA, HELD))
         self.assertEqual(review.to_review(DATA, TRUSTED, COMMITTED + [held], HELD), [])
 
     def test_reviews_the_facts_that_a_released_cell_cites(self):
-        released = review.to_review(DATA, TRUSTED, COMMITTED, present.held(DATA, 2))
+        released = review.to_review(DATA, TRUSTED, COMMITTED, 2)
         self.assertEqual({(f["plan_id"], f["benefit"].split(".")[0]) for f in released}, {("H2923-009-0", "tests")})
 
     def test_reviews_the_facts_that_a_dvha_cell_cites(self):
-        released = review.to_review(DATA, review.cited(DATA, COMMITTED, present.held(DATA, 2)), COMMITTED,
-                                    present.held(DATA, 3))
+        released = review.to_review(DATA, review.cited(DATA, COMMITTED, 2), COMMITTED,
+                                    3)
         self.assertEqual({f["benefit"] for f in released}, {"plan_premium"})
 
     def test_an_unchanged_fact_set_needs_no_review(self):
@@ -70,7 +76,7 @@ class TrustedTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             data = pathlib.Path(d)
             (data / "machine").mkdir()
-            with mock.patch.object(review, "cited", lambda data, document, held: {review.row(document[0])} if held is HELD else set()):
+            with mock.patch.object(review, "cited", lambda data, document, version: {review.row(document[0])} if version == HELD else set()):
                 self.assertEqual(review.trusted(data, [fact(), fact(amount="$2")], HELD), {review.row(fact())})
             facts.write(str(data / review.REVIEWED), [fact(amount="$3")])
             self.assertEqual(review.trusted(data, [fact()], HELD), {review.row(fact(amount="$3"))})
@@ -128,8 +134,8 @@ class GateTest(unittest.TestCase):
 
     def test_trusts_the_facts_a_released_cell_cites_once_reviewed(self):
         asked = []
-        _, trusted = self.gate(TRUSTED, COMMITTED, answering((), asked), held=present.held(DATA, 2))
-        released = review.to_review(DATA, TRUSTED, COMMITTED, present.held(DATA, 2))
+        _, trusted = self.gate(TRUSTED, COMMITTED, answering((), asked), held=2)
+        released = review.to_review(DATA, TRUSTED, COMMITTED, 2)
         self.assertEqual(len(asked), len(released))
         self.assertLessEqual({review.row(f) for f in released}, {review.row(f) for f in trusted})
 

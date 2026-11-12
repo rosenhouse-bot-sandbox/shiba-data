@@ -162,14 +162,14 @@ class StepTest(StepsTest):
                 with open(task[:-3] + ".json", "w") as f:
                     json.dump(reply, f)
 
-        def gate(data, texts, work, answer_, trusted, rows, v, held):
-            self.assertEqual((trusted, held), ({"old"}, {"held 2"}))
+        def gate(data, texts, work, answer_, trusted, rows, v, present_version):
+            self.assertEqual((trusted, present_version), ({"old 2"}, 2))
             return rows[:0], rows
 
         version = dict(groups=("imaging",), reader=("r", "high"), verifier=("v", "low"), reviewer=("m", "e"))
         with mock.patch.dict(document_facts.VERSIONS, {9: version}), \
-                mock.patch.object(review, "trusted", lambda data, old, held: {"old"}), mock.patch.object(review, "gate", gate), \
-                mock.patch.object(document_facts.present, "held", lambda data, version: {f"held {version}"}):
+                mock.patch.object(review, "trusted", lambda data, old, version: {f"old {version}"}), \
+                mock.patch.object(review, "gate", gate):
             document_facts.step(self.data, self.work, self.dir, fake, 9, present_version=2)
             self.assertEqual(facts.read(self.data / "machine" / "document_facts.csv"), [])
             self.assertEqual(len(facts.read(self.data / review.REVIEWED)), 1)
@@ -258,6 +258,16 @@ class StepTest(StepsTest):
                                                             "emergency": v19["recheck"]["emergency"] + ("H5439-019-0",)})
         self.assertEqual(set(v20["recheck_notes"]), {"plan_premium", "emergency", "tests", "surgery"})
         self.assertLessEqual(set(v20["recheck_notes"]), set(v20["recheck"]))
+
+    def test_version_21_adds_second_look_notes_for_hearing_tests_ambulance_and_care_abroad(self):
+        v20, v21 = document_facts.VERSIONS[20], document_facts.VERSIONS[21]
+        self.assertEqual(dict(v21, recheck_notes=None, recheck=None), dict(v20, recheck_notes=None, recheck=None))
+        self.assertEqual(v21["recheck"], v20["recheck"] | {"ambulance": ("H9003-001-0", "H9003-006-0", "H9003-009-0")})
+        notes = v21["recheck_notes"]
+        self.assertEqual({g: n for g, n in notes.items() if n != v20["recheck_notes"].get(g)}.keys(),
+                         {"hearing", "tests", "emergency", "ambulance"})
+        self.assertTrue(all(notes[g].startswith(v20["recheck_notes"][g]) for g in ("tests", "emergency")))
+        self.assertLessEqual(set(notes), set(v21["recheck"]))
 
     def test_version_9_adds_vision_hearing_fitness_otc_and_packages_to_7(self):
         self.assertEqual(document_facts.VERSIONS[9], dict(document_facts.VERSIONS[7], groups=document_facts.VERSIONS[7]["groups"]

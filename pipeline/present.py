@@ -950,14 +950,17 @@ def dental(organization, found):
 
 # Added facts fill in what readers miss, and each note says why. Only they use cost kind "unclear".
 ADDED = "added_facts.csv"
+# Versions from this one on use no added facts.
+WITHOUT_ADDED = 16
 
 
-def plan_facts(data, document=None):
+def plan_facts(data, document=None, version=None):
     """Each plan's facts. document replaces machine/document_facts.csv if given."""
     if document is None:
         document = facts.read(data / "machine/document_facts.csv")
+    added = facts.read(data / ADDED) if (version or current(data)) < WITHOUT_ADDED else []
     by_plan = collections.defaultdict(list)
-    for f in document + facts.read(data / "generated/pbp_facts.csv") + facts.read(data / ADDED):
+    for f in document + facts.read(data / "generated/pbp_facts.csv") + added:
         by_plan[f["plan_id"]].append(f)
     return by_plan
 
@@ -1041,9 +1044,9 @@ def plans(data):
     return layers.rows(data / "generated" / "plans.csv")
 
 
-def lines(data, column, document=None, sheet="main"):
-    """{plan_id: [(value, cited facts), ...]} for each plan. See plan_facts for document."""
-    found = plan_facts(data, document)
+def lines(data, column, document=None, sheet="main", version=None):
+    """{plan_id: [(value, cited facts), ...]} for each plan. See plan_facts for document and version."""
+    found = plan_facts(data, document, version)
     return {p["plan_id"]: SHEETS[sheet][0][column](p["organization"], found[p["plan_id"]]) for p in plans(data)}
 
 
@@ -1057,8 +1060,9 @@ def shown(got):
 
 def sheet_rows(data, sheet, version=None):
     """A row per plan, with each column the rule's lines. A held cell is blank."""
+    version = version or current(data)
     held_cells = held(data, version)
-    columns = {column: lines(data, column, sheet=sheet) for column in fields.labels(sheet)}
+    columns = {column: lines(data, column, sheet=sheet, version=version) for column in fields.labels(sheet)}
     return [{"section": p["section"], "plan_id": p["plan_id"], "plan_name": p["plan_name"]}
             | {column: "" if cell(sheet, column, p["plan_id"]) in held_cells else shown(got[p["plan_id"]])
                for column, got in columns.items()} for p in plans(data)]
@@ -1152,6 +1156,8 @@ VERSIONS[14] = {k: v for k, v in VERSIONS[13].items() if k not in {
     ("dvha.I_alt_care_otc_travel", "H5216-455-0")}}
 # Version 15 holds no cell. EOC page 90 gives H5439-019-0's $10 lab price, and H1036-306-0's dental rule only omits detail.
 VERSIONS[15] = {}
+# Version 16 holds no cell and uses no added facts.
+VERSIONS[16] = {}
 # The version that first presents each later column. Earlier versions hold its cells.
 SINCE = {("dvha", "C_premium"): 3, ("dvha", "G_vision"): 4, ("dvha", "H_hearing"): 4, ("dvha", "E_optional_packages"): 5,
          ("dvha", "F_dental"): 6, ("dvha", "I_alt_care_otc_travel"): 6, ("dvha", "J_extra_benefits"): 6,
@@ -1159,10 +1165,15 @@ SINCE = {("dvha", "C_premium"): 3, ("dvha", "G_vision"): 4, ("dvha", "H_hearing"
          ("main", "E_moop"): 9, ("main", "N_pharmacy_deductible"): 9}
 
 
-def held(data, version=None):
-    """The cells that a version holds, by default the run's candidate or else the pinned one."""
+def current(data):
+    """The run's candidate version, or else the pinned one."""
     candidate = ",".join(c for c in os.environ.get(CANDIDATE, "").split(",") if c.strip().startswith("present@"))
-    version = version or steps.versions(data, {"present": VERSIONS}, candidate)["present"]
+    return steps.versions(data, {"present": VERSIONS}, candidate)["present"]
+
+
+def held(data, version=None):
+    """The cells that a version holds, by default the current one."""
+    version = version or current(data)
     return VERSIONS[version] | {cell(sheet, column, r["plan_id"]): f"present {version} does not present this column"
                                 for (sheet, column), since in SINCE.items() if version < since
                                 for r in plans(data)}
@@ -1173,10 +1184,11 @@ def layer_rows(data, version=None):
     its other layers' value.
     Rows for a one-line cell name no line."""
     url = {d["sha256"]: d["url"] for d in layers.rows(data / "generated" / "documents_checked.csv") if d["sha256"]}
+    version = version or current(data)
     out, held_cells = {}, held(data, version)
     for sheet, (rules, _) in SHEETS.items():
         for column in rules:
-            for plan_id, got in lines(data, column, sheet=sheet).items():
+            for plan_id, got in lines(data, column, sheet=sheet, version=version).items():
                 if cell(sheet, column, plan_id) in held_cells:
                     continue
                 value = shown(got)
