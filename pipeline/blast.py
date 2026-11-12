@@ -9,13 +9,15 @@ pinned run's answer for the same document, and a verifier or reviewer keeps what
 task without a saved answer is about it, or if its document facts or presented cells change. Each run writes
 data/<year>, so data/<year> must be clean, and is restored after.
 """
-import csv
+import contextlib
 import glob
+import io
 import json
 import os
-import re
+import shutil
 import subprocess
 import sys
+import tempfile
 
 sys.path[:0] = [os.path.dirname(os.path.abspath(__file__))]
 import ask  # noqa: E402
@@ -23,25 +25,16 @@ import blobs  # noqa: E402
 import extract  # noqa: E402
 import facts  # noqa: E402
 import layers  # noqa: E402
+import reach  # noqa: E402
 import run  # noqa: E402
 import steps  # noqa: E402
 import years  # noqa: E402
 
-# A verifier or review task lists each fact it judges as one JSON line.
-ITEM = re.compile(r'^\{"id": \d+, .*\}$', re.M)
 
-
-def ledger(work):
-    path = f"{work}/{blobs.LEDGER}"
-    if not os.path.exists(path):
-        return []
-    with open(path) as f:
-        return list(csv.DictReader(f))
-
-
-def kept(f):
-    """What a verdict judged of a fact."""
-    return f.get("fact_id") or facts.fact_id({k: f.get(k, "") for k in facts.KEY}), str(f["page"]), f.get("amount", "")
+def judged(f):
+    """What a verdict judged of a fact. A review item does not name its document, so a reviewer looks only at the first two."""
+    return (f.get("fact_id") or facts.fact_id({k: f.get(k, "") for k in facts.KEY}), str(f["page"]), f.get("doc_sha", ""),
+            f.get("amount", ""))
 
 
 class Pinned:
@@ -49,12 +42,12 @@ class Pinned:
 
     def __init__(self, work, rows):
         self.answer = {(r["dir"], r["task"]): r["key"] for r in rows}
-        self.kept = {os.path.relpath(os.path.dirname(p), work): {kept(f) for f in facts.read(p)}
+        self.kept = {os.path.relpath(os.path.dirname(p), work): {judged(f) for f in facts.read(p)}
                      for p in glob.glob(f"{work}/facts/*/*/accepted.csv")}
         self.reviewed = {}
         for p in glob.glob(f"{work}/facts/review/**/{extract.OUTCOMES}", recursive=True):
             with open(p) as f:
-                self.reviewed |= {(o["fact"]["fact_id"], str(o["fact"]["page"])): o["ok"] is True for o in json.load(f)}
+                self.reviewed |= {judged(o["fact"])[:2]: o["ok"] is True for o in json.load(f)}
 
 
 class Stub:
@@ -65,36 +58,24 @@ class Stub:
 
     def __call__(self, model, effort, texts):
         # Answers lists a task in the ledger before asking.
-        row = {r["prompt"]: r for r in ledger(self.work) if r["prompt"]}
+        row = {r["prompt"]: r for r in reach.ledger(self.work)}
         return {k: (json.dumps(self.reply(row[ask.sha(text)], text)), {}) for k, text in texts.items()}
 
     def reply(self, row, text):
         name = row["task"].removeprefix("v-").split(".")[0]
         if row["dir"].startswith("facts/review"):
-            return [{"id": i["id"], "ok": self.pinned.reviewed.get(kept(i)[:2], True)} for i in map(json.loads, ITEM.findall(text))]
+            return [{"id": i["id"], "ok": self.pinned.reviewed.get(judged(i)[:2], True)}
+                    for i in map(json.loads, reach.ITEM.findall(text))]
         if row["task"].startswith("v-"):
             with open(f"{self.work}/{row['dir']}/items.json") as f:
                 items = [i for i in json.load(f) if i["task"] == name]
             ok = self.pinned.kept.get(row["dir"], set())
-            return [{"id": n, "ok": not i["decoy"] and kept(i) in ok} for n, i in enumerate(items)]
+            return [{"id": n, "ok": not i["decoy"] and judged(i) in ok} for n, i in enumerate(items)]
         key = self.pinned.answer.get((row["dir"], row["task"]))
         if key is None:
             return []
         with open(os.path.join(self.saved, f"{key}.json")) as f:
             return ask.array(json.load(f)["reply"])
-
-
-def touched(row, text, docs, version):
-    """The (group, plan) pairs a task is about."""
-    group, doc = row["dir"].split("/")[1], docs.get(row["task"].removeprefix("v-").split(".")[0])
-    if doc is None:
-        pairs = {(i["benefit"].split(".")[0], i["plan_id"]) for i in map(json.loads, ITEM.findall(text))}
-    else:
-        second = row["dir"].rsplit("/", 1)[1] in ("reread", "recheck")
-        pairs = {(group, p) for p in doc["plan_ids"] if not second or p in version.get("recheck", {}).get(group, ())}
-    if not pairs:
-        raise SystemExit(f"Cannot tell which plans {row['dir']}/{row['task']} is about.")
-    return pairs
 
 
 def changed_plans(before, after):
@@ -109,9 +90,13 @@ def changed_plans(before, after):
     return pairs, plans
 
 
-def outside(pairs, plans, targets):
-    every = {p for ps in targets.values() for p in ps}
-    return sorted({(g, p) for g, p in pairs if p not in targets.get(g, ())} | {("presented", p) for p in plans - every})
+def asked(rows, work, docs, version):
+    """The (group, plan) pairs the tasks are about."""
+    pairs = set()
+    for r in rows:
+        with open(f"{work}/{blobs.PROMPTS}/{r['prompt']}") as f:
+            pairs |= reach.touched(r, f.read(), docs, version)
+    return pairs
 
 
 def outputs(data):
@@ -127,11 +112,19 @@ def restore(data):
     git("clean", "-fdq", "--", str(data))
 
 
-def model_steps(data, work, versions, asker):
-    """The ledger of one run of the model steps. The work dir keeps no ledger, so a later run.py lists only its own tasks."""
+def model_steps(data, work, versions, asker, saved):
+    """The ledger of one quiet run of the model steps. The work dir keeps no ledger, so a later run.py lists only its own
+    tasks."""
+    out = io.StringIO()
     try:
-        run.model_steps(data, f"{work}/texts", work, run.Answers(data, asker, work), versions)
-        return ledger(work)
+        with contextlib.redirect_stdout(out):
+            run.model_steps(data, f"{work}/texts", work, run.Answers(data, asker, work, saved), versions)
+        return reach.ledger(work)
+    except BaseException as e:
+        print(out.getvalue(), end="")
+        if asker is None and isinstance(e, SystemExit):
+            raise SystemExit("The pinned version has tasks without saved answers.") from e
+        raise
     finally:
         if os.path.exists(f"{work}/{blobs.LEDGER}"):
             os.remove(f"{work}/{blobs.LEDGER}")
@@ -143,29 +136,27 @@ def main(year, work, candidate):
         raise SystemExit("blast.py checks one document_facts candidate.")
     if git("status", "--porcelain", "--ignored", "--", str(data)):
         raise SystemExit(f"{data} has uncommitted changes.")
+    saved = set(os.listdir(data / "answers"))
+    versions = steps.versions(data, run.STEPS, candidate)
     try:
+        pinned = Pinned(work, model_steps(data, work, steps.versions(data, run.STEPS), None, None))
         before = outputs(data)
-        pinned = Pinned(work, model_steps(data, work, steps.versions(data, run.STEPS), None))
         restore(data)
-        saved = set(os.listdir(data / "answers"))
-        versions = steps.versions(data, run.STEPS, candidate)
-        rows = model_steps(data, work, versions, Stub(pinned, data / "answers", work))
+        # The stand-in answers go to a copy, so data/<year>/answers never holds them.
+        with tempfile.TemporaryDirectory() as copy:
+            shutil.copytree(data / "answers", copy, dirs_exist_ok=True)
+            rows = model_steps(data, work, versions, Stub(pinned, copy, work), copy)
         after = outputs(data)
     finally:
         restore(data)
-    docs = {d["id"]: d for d in extract.documents(data)}
     version = run.STEPS["document_facts"][versions["document_facts"]]
     new = [r for r in rows if f"{r['key']}.json" not in saved]
-    asked = set()
-    for r in new:
-        with open(f"{work}/{blobs.PROMPTS}/{r['prompt']}") as f:
-            asked |= touched(r, f.read(), docs, version)
-    pairs, plans = changed_plans(before, after)
-    print(f"{len(new)} of {len(rows)} tasks would call the API, about:")
-    print("\n".join(f"  {g} {p}" for g, p in sorted(asked)))
-    print("Changed document facts:\n" + "\n".join(f"  {g} {p}" for g, p in sorted(pairs)))
-    print("Changed presented cells:\n" + "\n".join(f"  {p}" for p in sorted(plans)))
-    wide = outside(asked | pairs, plans, version.get("targets", {}))
+    pairs = asked(new, work, {d["id"]: d for d in extract.documents(data)}, version)
+    changed, plans = changed_plans(before, after)
+    print(f"{len(new)} of {len(rows)} tasks would call the API.")
+    wide = reach.outside(pairs | changed, version.get("targets", {}), plans)
+    print("Plans these tasks are about, or whose document facts or presented cells change:\n"
+          + "\n".join(f"  {g} {p}" for g, p in sorted(pairs | changed | {("presented", p) for p in plans})))
     if wide:
         raise SystemExit("Outside the version's targets:\n" + "\n".join(f"  {g} {p}" for g, p in wide))
 

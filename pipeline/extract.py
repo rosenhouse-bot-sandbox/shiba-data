@@ -332,7 +332,7 @@ def extract_facts(work, answers_dir, group, out, data=DATA, merge=False, notes={
         if failed:
             with open(f"{answers_dir}/{doc['id']}.retry.md", "w") as f:
                 f.write(task(doc, plan_rows, pages, group, data, failed,
-                             notes=for_plans(notes, plan_notes, {a.get("plan_id") for a, _ in failed})))
+                             notes=for_plans(notes, plan_notes, {a.get("plan_id") for a, _ in failed if isinstance(a, dict) and isinstance(a.get("plan_id"), str)})))
             retries += 1
         found += got
     with open(out, "w") as f:

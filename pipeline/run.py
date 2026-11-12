@@ -27,6 +27,7 @@ import document_facts  # noqa: E402
 import eoc  # noqa: E402
 import layers  # noqa: E402
 import present  # noqa: E402
+import reach  # noqa: E402
 import steps  # noqa: E402
 import years  # noqa: E402
 
@@ -78,8 +79,8 @@ class Answers:
     """Answers each model step's task files from saved answers, or from the asker.
     With a work dir, it also keeps each task's text as <work>/prompts/<sha256>, and lists the task in <work>/ledger.csv."""
 
-    def __init__(self, data, asker, work=None):
-        self.saved, self.asker, self.work = data / "answers", asker, work
+    def __init__(self, data, asker, work=None, saved=None):
+        self.saved, self.asker, self.work = saved or data / "answers", asker, work
         self.lock = threading.Lock()  # document_facts runs its groups at once
 
     def __call__(self, task_dir, model, effort=None):
@@ -109,6 +110,15 @@ class Answers:
                     out.write(text.encode())
                 w.writerow(dict(dir=os.path.relpath(task_dir, self.work), task=os.path.basename(task), model=model,
                                 effort=effort or "", key=ask.key(model, text, effort), prompt=prompt))
+
+
+def asker(mode, data, work, versions, candidate):
+    """The Claude API in `api` mode. A document_facts candidate may ask only about its version's targets."""
+    if mode != "api":
+        return None
+    if "document_facts@" not in candidate:
+        return ask.api()
+    return reach.Guard(ask.api(), data, work, STEPS["document_facts"][versions["document_facts"]])
 
 
 def model_steps(data, texts, work, answer, versions):
@@ -161,7 +171,7 @@ def main(year, work, mode="", candidate=""):
     check_quotes(data, f"{work}/texts")
     if config["year"] == years.LIVE:
         versions = steps.versions(data, STEPS, candidate)
-        answer = Answers(data, ask.api() if mode == "api" else None, work)
+        answer = Answers(data, asker(mode, data, work, versions, candidate), work)
         model_steps(data, f"{work}/texts", work, answer, versions)
         check_quotes(data, f"{work}/texts")
 

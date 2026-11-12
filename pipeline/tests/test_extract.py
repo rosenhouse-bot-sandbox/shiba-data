@@ -322,7 +322,7 @@ class StepsTest(unittest.TestCase):
     def test_facts_retries_once_then_verify_writes_tasks_and_items(self):
         self.step(extract.read, self.work, self.dir, "imaging")
         good, bad = answer(page=1), answer(page=1, amount="$5")
-        (self.dir / f"{SHA[:16]}.json").write_text(json.dumps([good, bad]))
+        (self.dir / f"{SHA[:16]}.json").write_text(json.dumps([good, bad, "text", answer(page=1, plan_id=["a", "b"])]))
         out = self.dir / "facts.json"
         self.assertEqual(self.step(extract.extract_facts, self.work, self.dir, "imaging", out), "1 facts; 1 retry tasks\n")
         self.assertIn("no quote shows $5", (self.dir / f"{SHA[:16]}.retry.md").read_text())
