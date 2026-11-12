@@ -1165,9 +1165,10 @@ SINCE = {("dvha", "C_premium"): 3, ("dvha", "G_vision"): 4, ("dvha", "H_hearing"
          ("main", "E_moop"): 9, ("main", "N_pharmacy_deductible"): 9}
 
 
-def current(data):
-    """The run's candidate version, or else the pinned one."""
-    candidate = ",".join(c for c in os.environ.get(CANDIDATE, "").split(",") if c.strip().startswith("present@"))
+def current(data, candidate=None):
+    """The run's candidate version, or else the pinned one. candidate="" gives the pinned one."""
+    if candidate is None:
+        candidate = ",".join(c for c in os.environ.get(CANDIDATE, "").split(",") if c.strip().startswith("present@"))
     return steps.versions(data, {"present": VERSIONS}, candidate)["present"]
 
 

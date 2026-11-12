@@ -909,7 +909,12 @@ class ExtraBenefitsTest(unittest.TestCase):
 
 
 def presented_cells(data, column):
-    return {p: [value for value, _ in got] for p, got in present.lines(data, column).items()}
+    return {p: [value for value, _ in got] for p, got in present.lines(data, column, version=pinned(data)).items()}
+
+
+def pinned(data):
+    """A candidate run tests the committed data, so these tests use the pinned version."""
+    return present.current(data, candidate="")
 
 
 def shown(lines, line):
@@ -1039,6 +1044,13 @@ class WriteTest(unittest.TestCase):
         ambulance = {v: {r["plan_id"]: r["AB_ambulance"] for r in present.sheet_rows(data, "main", v)} for v in (15, 16)}
         self.assertNotEqual(ambulance[15]["H9003-001-0"], ambulance[16]["H9003-001-0"])
 
+    def test_the_pinned_version_ignores_the_candidate(self):
+        data = years.data_dir(YEAR)
+        pinned_version = json.loads((data / "steps.json").read_text())["present"]
+        with mock.patch.dict(os.environ, {present.CANDIDATE: "present@16"}):
+            self.assertEqual(present.current(data), 16)
+            self.assertEqual(present.current(data, candidate=""), pinned_version)
+
     def test_version_16_holds_no_cell(self):
         self.assertEqual(present.VERSIONS[16], {})
 
@@ -1123,20 +1135,21 @@ class ExpectedTest(unittest.TestCase):
             cells = presented_cells(data, column)
             wanted = {(w["plan_id"], w["line"]): w["value"] for w in expected.load() if w["column"] == column}
             missed = [(p, line, value, cells.get(p)) for (p, line), value in wanted.items()
-                      if (column, p, line) not in TRIAGED and (column, p) not in present.held(data)
+                      if (column, p, line) not in TRIAGED and (column, p) not in present.held(data, pinned(data))
                       and shown(cells.get(p, ["", ""]), line) != value]
             self.assertEqual(missed, [], column)
             self.assertTrue(all(shown(cells[p], line) != wanted[p, line] for c, p, line in TRIAGED if c == column))
 
     def test_every_nonblank_or_cited_line_cites_a_document(self):
         data = years.data_dir(YEAR)
-        rows = present.layer_rows(data)
+        rows, version = present.layer_rows(data, pinned(data)), pinned(data)
         self.assertTrue(rows and all(r["url"] and r["quote"] for r in rows))
         generated = {r["plan_id"]: r for r in layers.generated(data)["main"]}
         for column in present.COLUMNS:
             self.assertEqual({(r["plan_id"], r["line"]) for r in rows if (r["sheet"], r["column"]) == ("main", column)},
                              {(p, str(n) if " | " in generated[p][column] else "")
-                              for p, got in present.lines(data, column).items() if (column, p) not in present.held(data)
+                              for p, got in present.lines(data, column, version=version).items()
+                              if (column, p) not in present.held(data, version)
                               for n, (v, cited) in enumerate(got, 1) if v and not cited or present.presents(cited)})
 
 
