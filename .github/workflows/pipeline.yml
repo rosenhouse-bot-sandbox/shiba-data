@@ -72,6 +72,8 @@ jobs:
       # A rerun after a timeout reuses the results of the batches this run sent.
       - run: python3 -I pipeline/run.py "$YEAR" _work api "$CANDIDATE"
         timeout-minutes: 290
+      # A pin PR copies this table of changed cells from the run's summary.
+      - run: python3 -I pipeline/changes.py "$YEAR" HEAD >> "$GITHUB_STEP_SUMMARY"
       # Upload before committing any data that names these blobs. Keys are content hashes, so a re-upload changes nothing.
       - id: upload
         if: always()
