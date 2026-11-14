@@ -1139,9 +1139,9 @@ class DvhaTest(unittest.TestCase):
     def test_presents_the_live_value_of_each_cell_it_does_not_hold(self):
         data = years.data_dir(YEAR)
         live = {r["plan_id"]: r for r in layers.live(data)[0]["dvha"]}
-        held = present.held(data, json.loads((data / "steps.json").read_text())["present"])
+        held = present.held(data, pinned(data))
         for column in present.DVHA:
-            got = {p: v for p, ((v, cited),) in present.lines(data, column, sheet="dvha").items()
+            got = {p: v for p, ((v, cited),) in present.lines(data, column, sheet="dvha", version=pinned(data)).items()
                    if present.cell("dvha", column, p) not in held and cited}
             self.assertTrue(got, column)
             self.assertEqual({p: v for p, v in got.items() if v != live[p][column]}, {}, column)
@@ -1156,7 +1156,7 @@ class CmsColumnsTest(unittest.TestCase):
                                ("dvha", ("D_premium_full_extra_help",))):
             plans = {r["plan_id"]: r for r in live[sheet]}
             for column in columns:
-                got = {p: " | ".join(v for v, _ in lines) for p, lines in present.lines(data, column, sheet=sheet).items()}
+                got = {p: " | ".join(v for v, _ in lines) for p, lines in present.lines(data, column, sheet=sheet, version=pinned(data)).items()}
                 self.assertEqual({p: (v, plans[p][column]) for p, v in got.items() if v != plans[p][column]}, {}, column)
 
 
