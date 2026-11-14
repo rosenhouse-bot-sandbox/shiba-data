@@ -341,6 +341,17 @@ class StepTest(StepsTest):
                                                            merge_prices=("hearing", "dental", "vision"),
                                                            targets=document_facts.VERSIONS[24]["targets"]))
 
+    def test_version_25_adds_dental_notes_for_three_plans(self):
+        v24, v25 = document_facts.VERSIONS[24], document_facts.VERSIONS[25]
+        self.assertEqual(dict(v25, recheck_plan_notes=None, targets=None), dict(v24, recheck_plan_notes=None, targets=None))
+        notes = v25["recheck_plan_notes"]
+        self.assertEqual(dict(notes, dental=None), dict(v24["recheck_plan_notes"], dental=None))
+        self.assertEqual(set(notes["dental"]), set(v25["targets"]["dental"]))
+        self.assertIn("`0% or 50%`", notes["dental"]["H1036-306-0"])
+        self.assertIn("`0% or 30%`", notes["dental"]["H5216-427-2"])
+        self.assertIn("`dental.preventive` coinsurance 0%", notes["dental"]["H7199-002-0"])
+        self.assertLessEqual(set(notes["dental"]), set(v25["recheck"]["dental"]))
+
     def test_version_9_adds_vision_hearing_fitness_otc_and_packages_to_7(self):
         self.assertEqual(document_facts.VERSIONS[9], dict(document_facts.VERSIONS[7], groups=document_facts.VERSIONS[7]["groups"]
                                                           + ("vision", "hearing", "fitness", "otc", "packages")))

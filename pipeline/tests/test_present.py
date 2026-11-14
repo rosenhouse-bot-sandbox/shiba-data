@@ -686,8 +686,20 @@ class OptionalPackagesTest(unittest.TestCase):
     def test_a_package_with_other_benefits_says_dental_max(self):
         found = [routine("packages", "premium", "$54", package="Advantage Plus"),
                  routine("dental", "max", "$1,500", package="Advantage Plus", limit="per year"),
-                 routine("hearing.aids", "allowance", "$500", package="Advantage Plus")]
+                 routine("vision.exam", "copay", "$0", package="Advantage Plus")]
         self.assertEqual(column(present.optional_packages, *found)[0][0], "Advantage Plus $54/mo, dental max $1,500")
+
+    def test_a_package_shows_its_eyewear_and_hearing_aid_allowances(self):
+        found = [routine("packages", "premium", "$54", package="Advantage Plus"),
+                 routine("dental", "max", "$1,500", package="Advantage Plus", limit="per year"),
+                 routine("vision.eyewear", "allowance", "$175", package="Advantage Plus", limit="every 2 calendar-year period"),
+                 routine("hearing.aids", "allowance", "$500", package="Advantage Plus", unit="per ear", limit="every 3 years"),
+                 routine("hearing.aids", "copay", "$0", package="Advantage Plus")]
+        self.assertEqual(column(present.optional_packages, *found), [(
+            "Advantage Plus $54/mo, dental max $1,500, eyewear $175/two years, hearing aids $500 per ear/three years",
+            found[:4])])
+        self.assertEqual(present.optional_packages("", found, allowances=False)[0][0],
+                         "Advantage Plus $54/mo, dental max $1,500")
 
     def test_the_best_source_gives_the_premium_and_the_max(self):
         found = [routine("packages", "premium", "$40", package="Rider", source="SB", page="2"),
@@ -935,7 +947,7 @@ class WriteTest(unittest.TestCase):
         data = years.data_dir(YEAR)
         f = facts.read(data / "machine/document_facts.csv")[0]
         plan = f["plan_id"]
-        with mock.patch.object(present, "lines", lambda data, column, sheet: {plan: [("", [f])]}), \
+        with mock.patch.object(present, "lines", lambda data, column, sheet, version: {plan: [("", [f])]}), \
                 mock.patch.dict(present.SHEETS, {"main": ({"S_acupuncture": None}, {}), "dvha": ({}, {})}):
             rows = present.layer_rows(data)
         self.assertEqual({(r["plan_id"], r["column"], r["value"]) for r in rows}, {(plan, "S_acupuncture", "")})
@@ -1002,6 +1014,24 @@ class WriteTest(unittest.TestCase):
     def test_version_16_holds_no_cell(self):
         self.assertEqual(present.VERSIONS[16], {})
 
+    def test_version_17_holds_no_cell_and_shows_package_allowances_only_from_17(self):
+        self.assertEqual(present.VERSIONS[17], {})
+        data = years.data_dir(YEAR)
+        found = [routine("packages", "premium", "$9", package="P", plan_id=p["plan_id"]) for p in present.plans(data)[:1]]
+        found.append(routine("vision.eyewear", "allowance", "$175", package="P", plan_id=found[0]["plan_id"]))
+        got = {v: present.lines(data, "E_optional_packages", found, "dvha", v)[found[0]["plan_id"]][0][0] for v in (16, 17)}
+        self.assertEqual(got, {16: "P $9/mo", 17: "P $9/mo, eyewear $175"})
+        explained = {v: present.explain("", found, "E_optional_packages", "dvha", v)[0][0][0] for v in (16, 17)}
+        self.assertEqual(explained, got)
+
+    def test_version_17_changes_only_the_kaiser_package_cells(self):
+        data = years.data_dir(YEAR)
+        rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.layer_rows(data, v)} for v in (16, 17)}
+        self.assertEqual({r[:3] for r in rows[16] ^ rows[17]},
+                         {("dvha", "E_optional_packages", p) for p in ("H9003-001-0", "H9003-006-0", "H9003-009-0")})
+        sheets = {v: present.sheet_rows(data, "dvha", v) for v in (16, 17)}
+        self.assertEqual([r["plan_id"] for r, s in zip(*sheets.values()) if r != s], ["H9003-001-0", "H9003-006-0", "H9003-009-0"])
+
     def test_version_12_holds_no_cell(self):
         self.assertEqual(present.held(years.data_dir(YEAR), 12), {})
 
@@ -1029,7 +1059,7 @@ class WriteTest(unittest.TestCase):
     def test_a_trailing_blank_line_writes_no_row(self):
         data = years.data_dir(YEAR)
         f = facts.read(data / "machine/document_facts.csv")[0]
-        with mock.patch.object(present, "lines", lambda data, column, sheet: {f["plan_id"]: [("$1", [f]), ("", [f])]}), \
+        with mock.patch.object(present, "lines", lambda data, column, sheet, version: {f["plan_id"]: [("$1", [f]), ("", [f])]}), \
                 mock.patch.dict(present.SHEETS, {"main": ({"S_acupuncture": None}, {}), "dvha": ({}, {})}):
             rows = present.layer_rows(data)
         self.assertEqual({(r["line"], r["value"]) for r in rows}, {("", "$1")})

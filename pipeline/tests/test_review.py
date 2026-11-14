@@ -57,6 +57,11 @@ class ToReviewTest(unittest.TestCase):
         released = review.to_review(DATA, TRUSTED, COMMITTED, 2)
         self.assertEqual({(f["plan_id"], f["benefit"].split(".")[0]) for f in released}, {("H2923-009-0", "tests")})
 
+    def test_reviews_the_package_allowances_that_present_17_shows(self):
+        released = review.to_review(DATA, review.cited(DATA, COMMITTED, 16), COMMITTED, 17)
+        self.assertEqual({(f["plan_id"], f["benefit"]) for f in released},
+                         {(p, b) for p in document_facts.KAISER for b in ("vision.eyewear", "hearing.aids")})
+
     def test_reviews_the_facts_that_a_dvha_cell_cites(self):
         released = review.to_review(DATA, review.cited(DATA, COMMITTED, 2), COMMITTED,
                                     3)
