@@ -526,7 +526,7 @@ def renewal(found, leaf):
 def per(found):
     """"/year" or the like when the facts agree on how often they renew."""
     periods = {period(f) for f in found}
-    return f"/{periods.pop()}" if len(periods) == 1 else ""
+    return f"/{periods.pop()}" if len(periods) == 1 and "" not in periods else ""
 
 
 def routine(f):
@@ -623,9 +623,15 @@ def yearly_max(f):
     return f["cost_kind"] == "max" and period(f) == "year" and not f["pool"]
 
 
-def optional_packages(organization, found):
-    """Shows each optional package's monthly premium and its yearly dental maximum. A package that also covers other
-    benefits says "dental max". A document that says the plan sells none cites a blank."""
+@unless("it is not an allowance for every member of the package")
+def allowance(f):
+    return f["cost_kind"] == "allowance" and not (f["provider_tier"] or f["pool"])
+
+
+def optional_packages(organization, found, allowances=True):
+    """Shows each optional package's monthly premium, its yearly dental maximum, and with allowances its eyewear and
+    hearing aid allowances. A package that also covers other benefits says "dental max". A document that says the plan
+    sells none cites a blank."""
     mine = keep([f for f in found if f["package"] or facts.covers("packages", f["benefit"])],
                 lambda f: f["covered_by"] == "supplemental" and f["network"] in ("in", "any") and not f["condition"],
                 lambda f: "it is not a supplemental in-network benefit for every member")
@@ -641,8 +647,15 @@ def optional_packages(organization, found):
             others = any(not facts.covers("dental", f["benefit"]) and not facts.covers("packages", f["benefit"])
                          for f in package)
             part += f", {'dental max' if others else 'max'} {show(dental_max)}"
+        eyewear = best(package, "vision.eyewear", "any", allowance) if allowances else []
+        if eyewear:
+            part += f", eyewear {show(eyewear)}{per(eyewear)}"
+        aids = best(package, "hearing.aids", "any", allowance) if allowances else []
+        if aids:
+            ear = " per ear" if any(f["unit"] == "per ear" for f in aids) else ""
+            part += f", hearing aids {show(aids)}{ear}{per(aids)}"
         parts.append(part)
-        cited += premium + dental_max
+        cited += premium + dental_max + eyewear + aids
     keep([f for f in named if f["package"] and f["package"] not in priced], lambda f: False,
          lambda f: "its package has no monthly premium")
     none = keep([f for f in named if f["cost_kind"] == "not_covered"], lambda f: not parts,
@@ -665,6 +678,8 @@ def renews(found):
     """How often all the facts renew, or "" if they do not agree or do not say."""
     periods = {every(f) for f in found}
     return periods.pop() if len(periods) == 1 else ""
+
+
 
 
 def extra(f):
@@ -1004,12 +1019,12 @@ def related(f, leaves):
 UNNOTED = "no filter recorded a reason"
 
 
-def explain(organization, found, column, sheet="main"):
+def explain(organization, found, column, sheet="main", version=None):
     """(lines, set_aside): the rule's lines, and {identity: reasons} for each fact for a benefit in LEAVES that the
     rule did not use."""
     token = _reasons.set({})
     try:
-        got = SHEETS[sheet][0][column](organization, found)
+        got = rule(sheet, column, version or max(VERSIONS))(organization, found)
         reasons = _reasons.get()
     finally:
         _reasons.reset(token)
@@ -1032,10 +1047,19 @@ def plans(data):
     return layers.rows(data / "generated" / "plans.csv")
 
 
-def lines(data, column, document=None, sheet="main"):
+# Each column whose rule a version changed, that version, and the rule before it.
+EARLIER_RULES = {("dvha", "E_optional_packages"): (17, lambda o, found: optional_packages(o, found, allowances=False))}
+
+
+def rule(sheet, column, version):
+    since, earlier = EARLIER_RULES.get((sheet, column), (0, None))
+    return earlier if version < since else SHEETS[sheet][0][column]
+
+
+def lines(data, column, document=None, sheet="main", version=None):
     """{plan_id: [(value, cited facts), ...]} for each plan. See plan_facts for document."""
-    found = plan_facts(data, document)
-    return {p["plan_id"]: SHEETS[sheet][0][column](p["organization"], found[p["plan_id"]]) for p in plans(data)}
+    found, column_rule = plan_facts(data, document), rule(sheet, column, version or current(data))
+    return {p["plan_id"]: column_rule(p["organization"], found[p["plan_id"]]) for p in plans(data)}
 
 
 def shown(got):
@@ -1050,7 +1074,7 @@ def sheet_rows(data, sheet, version=None):
     """A row per plan, with each column the rule's lines. A held cell is blank."""
     version = version or current(data)
     held_cells = held(data, version)
-    columns = {column: lines(data, column, sheet=sheet) for column in fields.labels(sheet)}
+    columns = {column: lines(data, column, sheet=sheet, version=version) for column in fields.labels(sheet)}
     return [{"section": p["section"], "plan_id": p["plan_id"], "plan_name": p["plan_name"]}
             | {column: "" if cell(sheet, column, p["plan_id"]) in held_cells else shown(got[p["plan_id"]])
                for column, got in columns.items()} for p in plans(data)]
@@ -1146,6 +1170,8 @@ VERSIONS[14] = {k: v for k, v in VERSIONS[13].items() if k not in {
 VERSIONS[15] = {}
 # Version 16 holds no cell.
 VERSIONS[16] = {}
+# Version 17 holds no cell. It shows an optional package's eyewear and hearing aid allowances.
+VERSIONS[17] = {}
 # The version that first presents each later column. Earlier versions hold its cells.
 SINCE = {("dvha", "C_premium"): 3, ("dvha", "G_vision"): 4, ("dvha", "H_hearing"): 4, ("dvha", "E_optional_packages"): 5,
          ("dvha", "F_dental"): 6, ("dvha", "I_alt_care_otc_travel"): 6, ("dvha", "J_extra_benefits"): 6,
@@ -1177,7 +1203,7 @@ def layer_rows(data, version=None):
     out, held_cells = {}, held(data, version)
     for sheet, (rules, _) in SHEETS.items():
         for column in rules:
-            for plan_id, got in lines(data, column, sheet=sheet).items():
+            for plan_id, got in lines(data, column, sheet=sheet, version=version).items():
                 if cell(sheet, column, plan_id) in held_cells:
                     continue
                 value = shown(got)

@@ -173,7 +173,7 @@ def load_rules(db, data):
         for r in layers.generated(data)[sheet]:
             plan_id = r["plan_id"]
             for col in rules:
-                got, aside = present.explain(organization[plan_id], found[plan_id], col, sheet)
+                got, aside = present.explain(organization[plan_id], found[plan_id], col, sheet, version)
                 cell = dict(sheet=sheet, plan_id=plan_id, col=col)
                 insert(db, "rule_line", (dict(cell, line=n, value=value, presented=int(present.presents(cited)),
                                               held=held.get(present.cell(sheet, col, plan_id)))

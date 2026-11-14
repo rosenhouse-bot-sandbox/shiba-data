@@ -193,3 +193,15 @@ VERSIONS[24] = dict(VERSIONS[23], inherits=23, merge_prices=("hearing", "dental"
     "dental": ("H1036-317-0", "H5439-011-0", "H5439-015-0", "H5439-019-0", "H6815-038-0"),
     "hearing": HEARING_EXAM + ("H5439-015-0",),
     "vision": ("H2056-003-0", "H2056-018-0", "H2406-042-0", "H3805-048-0", "H5439-011-0", "H6815-038-0", "H7006-018-0")})
+# Humana dental code tables price comprehensive codes at one rate, but a few codes at 0%.
+CODE_TABLE = ("Pages {pages} give the dental code table. In-network, most comprehensive codes cost {most}, and some, such "
+              "as recementation and root canal retreatment, cost 0%. Prices that differ by code are one "
+              "`dental.comprehensive` fact with amount `0% or {most}`. Page {both} has rows at both prices.")
+# Version 25 adds the comprehensive dental prices that two Humana code tables give, and Devoted's preventive dental price.
+# It keeps version 23's facts.
+VERSIONS[25] = dict(VERSIONS[24], recheck_plan_notes=VERSIONS[24]["recheck_plan_notes"] | {"dental": {
+    "H1036-306-0": CODE_TABLE.format(pages="78 to 80", most="50%", both="79"),
+    "H5216-427-2": CODE_TABLE.format(pages="72 to 75", most="30%", both="74"),
+    "H7199-002-0": "Page 63 says members get 100% reimbursement for covered preventive services, which is "
+                   "`dental.preventive` coinsurance 0%."}},
+    targets={"dental": ("H1036-306-0", "H5216-427-2", "H7199-002-0")})
