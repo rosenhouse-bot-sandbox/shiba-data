@@ -105,7 +105,18 @@ RECHECK = ("Earlier readers may have missed some facts. Read every page again, i
            "each benefit's row. Reply with only the facts for {plans} that {lacks}, or `[]` if there are none.")
 
 
-def task(doc, plan_rows, pages, group, data, failed=(), known=None, plan_ids=(), notes={}):
+def following(plan_after, plan_ids):
+    """How many pages after each relevant page the readers of plan_ids see."""
+    return max((plan_after.get(p, 0) for p in plan_ids), default=0)
+
+
+def shown_pages(pages, group, after=0):
+    """The relevant pages, and the after pages that follow each one, as when a price table goes on past its heading."""
+    found = relevant(pages, group)
+    return {p: pages[p] for p in pages if any(p - n in found for n in range(after + 1))}
+
+
+def task(doc, plan_rows, pages, group, data, failed=(), known=None, plan_ids=(), notes={}, after=0):
     parts = [fill("fact_prompt.md", doc, plan_rows, data, VOCABULARY=facts.describe(group, notes))]
     if known is not None:
         plans_text = ", ".join(sorted(plan_ids))
@@ -118,7 +129,7 @@ def task(doc, plan_rows, pages, group, data, failed=(), known=None, plan_ids=(),
                      "Code keeps the facts that passed. Reply with fixed versions of only these answers, "
                      "and leave out any you cannot fix.\n\n"
                      + "\n".join(f"- {printable(a)}: {why}" for a, why in failed))
-    parts.append("## Pages\n\n" + page_text(relevant(pages, group)))
+    parts.append("## Pages\n\n" + page_text(shown_pages(pages, group, after)))
     return "\n\n".join(parts) + "\n"
 
 
@@ -132,7 +143,16 @@ NO_COST = re.compile(r"\bno (?:coinsurance|copay|deductible)|does not have a (?:
                      r"(?:don[’']t|do not) pay a separate monthly plan premium", re.I)
 
 
-def problem(doc, group, a, pages, quote_ok, zero=ZERO_GROUPS):
+def reimbursed(amount, quotes):
+    """Says if a quote gives the coinsurance amount as the rest of a reimbursement, as 100% reimbursement gives 0%."""
+    percent = re.fullmatch(r"(\d+)%", amount)
+    if not percent:
+        return False
+    rest = 100 - int(percent[1])
+    return any(re.search(rf"\b(?:{rest}% reimburse|reimbursed (?:for )?{rest}%)", q, re.I) for q in quotes)
+
+
+def problem(doc, group, a, pages, quote_ok, zero=ZERO_GROUPS, reimburses=()):
     """Why the answer cannot be a fact, or None, and the fact."""
     if not isinstance(a, dict):
         return "not an object", None
@@ -168,6 +188,8 @@ def problem(doc, group, a, pages, quote_ok, zero=ZERO_GROUPS):
     missing = numbers(row["amount"]) - sum((numbers(q) for q in a["quotes"]), collections.Counter())
     if group in zero and missing == collections.Counter({"$0": 1}) and any(NO_COST.search(q) for q in a["quotes"]):
         missing = None
+    if missing and group in reimburses and reimbursed(row["amount"], a["quotes"]):
+        missing = None
     if missing:
         return "no quote shows " + ", ".join(sorted(missing)), None
     return None, row
@@ -195,11 +217,11 @@ def merged(rows, mode):
     return dict(rows[0], quotes=json.dumps(quotes, ensure_ascii=False), note=notes, **shared)
 
 
-def checks(doc, group, answers, pages, quote_ok, merge=False, zero=ZERO_GROUPS):
+def checks(doc, group, answers, pages, quote_ok, merge=False, zero=ZERO_GROUPS, reimburses=()):
     """Each answer with why it cannot be a fact, or None, and the fact.
     With merge, answers that differ only in quotes and notes become one fact. With merge "limits" or "prices", so do
     prices that differ only in the details LOOSE names."""
-    checked = [(a, *problem(doc, group, a, pages, quote_ok, zero)) for a in answers]
+    checked = [(a, *problem(doc, group, a, pages, quote_ok, zero, reimburses)) for a in answers]
     clash = set(facts.conflicts([r for _, why, r in checked if not why]))
     rows = {i: merged([r for _, why, r in checked if not why and facts.identity(r) == i], merge) if merge else None
             for i in clash}
@@ -251,9 +273,9 @@ def verifier_task(doc, plan_rows, pages, items, data, notes={}, after={}, before
     groups = sorted({c["benefit"].split(".")[0] for c in items})
     parts = [fill("vfact_prompt.md", doc, plan_rows, data, VOCABULARY="\n\n".join(facts.describe(g, notes) for g in groups))]
     parts += [json.dumps({"id": n, **shown(c)}, ensure_ascii=False) for n, c in enumerate(items)]
-    shown_pages = {int(c["page"]) + n for c in items for g in [c["benefit"].split(".")[0]]
-                   for n in range(-before.get(g, 0), after.get(g, 0) + 1)}
-    parts.append("## Pages\n\n" + page_text({p: pages[p] for p in shown_pages if p in pages}))
+    near = {int(c["page"]) + n for c in items for g in [c["benefit"].split(".")[0]]
+            for n in range(-before.get(g, 0), after.get(g, 0) + 1)}
+    parts.append("## Pages\n\n" + page_text({p: pages[p] for p in near if p in pages}))
     return "\n\n".join(parts) + "\n"
 
 
@@ -267,10 +289,10 @@ def answers(path):
     return found if isinstance(found, list) else [found]
 
 
-def doc_facts(doc, group, first, retry, pages, quote_ok, merge=False, zero=ZERO_GROUPS):
+def doc_facts(doc, group, first, retry, pages, quote_ok, merge=False, zero=ZERO_GROUPS, reimburses=()):
     """The document's facts from its first answers and any retry answers, the failures to retry, if it needs a retry,
     and each answer's check."""
-    checked = checks(doc, group, first + (retry or []), pages, quote_ok, merge, zero)
+    checked = checks(doc, group, first + (retry or []), pages, quote_ok, merge, zero, reimburses)
     found, failed = passed(checked)
     return found, (failed if retry is None else []), checked
 
@@ -305,7 +327,7 @@ def read(work, out_dir, group, data=DATA, ids=None, notes={}):
                 f.write(task(doc, plan_rows, pages, group, data, notes=notes))
 
 
-def reread(work, out_dir, group, plan_ids, known, data=DATA, notes={}, plan_notes={}):
+def reread(work, out_dir, group, plan_ids, known, data=DATA, notes={}, plan_notes={}, plan_after={}):
     """Writes a task for each relevant document covering plan_ids. It lists the facts known for those plans and asks
     for the rest."""
     os.makedirs(out_dir, exist_ok=True)
@@ -317,10 +339,11 @@ def reread(work, out_dir, group, plan_ids, known, data=DATA, notes={}, plan_note
             theirs = [f for f in known if f["doc_sha"] == doc["sha256"] and f["plan_id"] in mine]
             with open(f"{out_dir}/{doc['id']}.md", "w") as f:
                 f.write(task(doc, plan_rows, pages, group, data, known=theirs, plan_ids=mine,
-                             notes=for_plans(notes, plan_notes, mine)))
+                             notes=for_plans(notes, plan_notes, mine), after=following(plan_after, mine)))
 
 
-def extract_facts(work, answers_dir, group, out, data=DATA, merge=False, notes={}, zero=ZERO_GROUPS, plan_notes={}):
+def extract_facts(work, answers_dir, group, out, data=DATA, merge=False, notes={}, zero=ZERO_GROUPS, plan_notes={},
+                  plan_after={}, reimburses=()):
     plan_rows, found, retries, outcomes = plans(data), [], 0, []
     for doc in documents(data):
         first = f"{answers_dir}/{doc['id']}.json"
@@ -330,16 +353,17 @@ def extract_facts(work, answers_dir, group, out, data=DATA, merge=False, notes={
         pages = d.pages("layout")
         stated = answers(first)
         got, failed, checked = doc_facts(doc, group, stated, answers(retry) if os.path.exists(retry) else None,
-                                         pages, d.quote_ok, merge, zero)
+                                         pages, d.quote_ok, merge, zero, reimburses)
         prompts = [prompt_of(f"{answers_dir}/{doc['id']}.md")] * len(stated) + [prompt_of(retry[:-5] + ".md")] * (
             len(checked) - len(stated))
         items = list(range(len(stated))) + list(range(len(checked) - len(stated)))
         outcomes += [dict(prompt=prompt, item=n, doc_sha=doc["sha256"], stated=a, problem=why, fact=row and named(row))
                      for prompt, n, (a, why, row) in zip(prompts, items, checked)]
         if failed:
+            named_plans = {a.get("plan_id") for a, _ in failed if isinstance(a, dict) and isinstance(a.get("plan_id"), str)}
             with open(f"{answers_dir}/{doc['id']}.retry.md", "w") as f:
-                f.write(task(doc, plan_rows, pages, group, data, failed,
-                             notes=for_plans(notes, plan_notes, {a.get("plan_id") for a, _ in failed if isinstance(a, dict) and isinstance(a.get("plan_id"), str)})))
+                f.write(task(doc, plan_rows, pages, group, data, failed, notes=for_plans(notes, plan_notes, named_plans),
+                             after=following(plan_after, named_plans)))
             retries += 1
         found += got
     with open(out, "w") as f:

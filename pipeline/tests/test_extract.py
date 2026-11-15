@@ -32,6 +32,16 @@ class PagesTest(unittest.TestCase):
         self.assertEqual(sorted(extract.relevant(PAGES, "imaging")), [61, 62])
 
 
+    def test_can_show_the_pages_after_each_relevant_page(self):
+        pages = PAGES | {63: "Crowns 50%", 64: "Bridges 50%", 65: "Index"}
+        self.assertEqual(sorted(extract.shown_pages(pages, "imaging")), [61, 62])
+        self.assertEqual(sorted(extract.shown_pages(pages, "imaging", 2)), [61, 62, 63, 64])
+
+    def test_following_takes_the_largest_after_of_the_plans(self):
+        self.assertEqual(extract.following({"H1036-306-0": 2, "H9": 5}, {"H1036-306-0", "H1036-307-0"}), 2)
+        self.assertEqual(extract.following({}, {"H1036-306-0"}), 0)
+
+
 class TaskTest(unittest.TestCase):
     def test_shows_plans_vocabulary_and_pages(self):
         text = extract.task(DOC, NAMES, PAGES, "imaging", DATA)
@@ -114,6 +124,22 @@ class GateTest(unittest.TestCase):
             self.assertEqual(why, "no quote shows $5")
         imaging = answer(amount="$0", page=52, quotes=["no coinsurance, copayment, or deductible for flu vaccines"])
         self.assertEqual(len(extract.gate(DOC, "imaging", [imaging], pages, ok_unless_bad)[1]), 1)
+
+    def test_a_version_can_take_a_reimbursement_as_the_rest_of_a_coinsurance(self):
+        pages = {63: "you will pay up front and receive 100% reimbursement of your costs. You will be reimbursed 50% for crowns. "
+                     "Implants are reimbursed for 40%. Dentures get 1100% reimbursement."}
+        prev = answer(benefit="dental.preventive", covered_by="supplemental", cost_kind="coinsurance", amount="0%", page=63,
+                      quotes=["receive 100% reimbursement"])
+        comp = dict(prev, benefit="dental.comprehensive", amount="50%", quotes=["You will be reimbursed 50% for crowns."])
+        implants = dict(comp, amount="60%", quotes=["Implants are reimbursed for 40%."])
+        dentures = dict(comp, amount="0%", quotes=["Dentures get 1100% reimbursement."])
+        for a, passes in ((prev, True), (comp, True), (implants, True), (dict(prev, amount="10%"), False), (dentures, False),
+                          (dict(prev, cost_kind="copay", amount="$0"), False)):
+            self.assertEqual(len(extract.doc_facts(DOC, "dental", [a], None, pages, ok_unless_bad, reimburses=("dental",))[0]),
+                             int(passes), a["amount"])
+        self.assertEqual(extract.doc_facts(DOC, "dental", [prev], None, pages, ok_unless_bad)[0], [])
+        self.assertEqual(extract.doc_facts(DOC, "imaging", [dict(prev, benefit="imaging.xray")], None, pages, ok_unless_bad,
+                                           reimburses=("dental",))[0], [])
 
     def test_rejects_both_copies_of_a_conflict(self):
         found, failed = gate(answer(), answer(quotes=["MRI and CT scans $250 copay"], amount="$250"))
@@ -316,6 +342,14 @@ class StepsTest(unittest.TestCase):
         self.assertEqual(extract.for_plans(notes, {"imaging": {"H0000-000-0": "No."}}, plans), notes)
         self.assertEqual(extract.for_plans(notes, {"imaging": {"H1036-306-0": "Mind page 2."}, "vision": {"H1036-306-0": "Eyes."}}, plans),
                          {"imaging": "Read this. Mind page 2.", "dental": "Teeth.", "vision": "Eyes."})
+
+    def test_reread_shows_a_plans_readers_the_pages_after_each_relevant_page(self):
+        (self.work / "layout" / f"{SHA[:16]}.txt").write_text(f"=====PAGE 1=====\n{X_RAYS}\n=====PAGE 2=====\nCrowns 50%\n")
+        self.step(extract.reread, self.work, self.dir, "imaging", plan_ids={"H1036-306-0"}, known=[])
+        self.assertNotIn("Crowns 50%", (self.dir / f"{SHA[:16]}.md").read_text())
+        self.step(extract.reread, self.work, self.dir, "imaging", plan_ids={"H1036-306-0"}, known=[],
+                  plan_after={"H1036-306-0": 1})
+        self.assertIn("=====PAGE 2=====\nCrowns 50%", (self.dir / f"{SHA[:16]}.md").read_text())
 
     def test_reread_says_when_no_facts_were_found(self):
         self.step(extract.reread, self.work, self.dir, "imaging", plan_ids={"H1036-306-0"}, known=[])
