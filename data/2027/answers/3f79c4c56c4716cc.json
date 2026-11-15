@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "a744eaa24232bb11.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-306-0\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"0% or 50%\", \"page\": 79, \"quotes\": [\"Root canal – D3310, D3320, D3330 50%\", \"Retreatment of previous root canal therapy – D3346, D3347, D3348 0%\"], \"note\": \"Coinsurance differs by procedure code.\"},\n {\"plan_id\": \"H1036-306-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"covered\", \"page\": 52, \"quotes\": [\"Medicare pays for dental services in a limited number of circumstances,\"], \"note\": \"The $15 copayment for Medicare-covered dental applies only in the Specialist's Office, which is not an allowed setting, so that cost is left out.\"}]\n```",
+ "usage": {
+  "input_tokens": 26219,
+  "output_tokens": 1523,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
