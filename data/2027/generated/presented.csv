@@ -28,10 +28,12 @@ dvha,H1036-153-0,J_extra_benefits,,Fitness; Meals,https://assets.humana.com/is/c
 dvha,H1036-153-0,J_extra_benefits,,Fitness; Meals,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,69,In-Network: $0 copayment
 dvha,H1036-153-0,J_extra_benefits,,Fitness; Meals,https://assets.humana.com/is/content/humana/H1036153000EOC27pdf,69,SilverSneakers® fitness program
 dvha,H1036-306-0,C_premium,,$0,https://assets.humana.com/is/content/humana/H1036306000SB27pdf,5,Monthly plan premium $0
-dvha,H1036-306-0,F_dental,,"PREV $0; max $4,000/year PREV+COMP",https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,77,"Annual Maximum: $4,000"
-dvha,H1036-306-0,F_dental,,"PREV $0; max $4,000/year PREV+COMP",https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,78,"Bitewing x-rays – D0270, D0272, D0273, D0274 0%"
-dvha,H1036-306-0,F_dental,,"PREV $0; max $4,000/year PREV+COMP",https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,78,Periodic oral exam – D0120 0%
-dvha,H1036-306-0,F_dental,,"PREV $0; max $4,000/year PREV+COMP",https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,78,Prophylaxis (cleaning) – D1110 0%
+dvha,H1036-306-0,F_dental,,"PREV $0; COMP $0-50%; max $4,000/year PREV+COMP",https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,77,"Annual Maximum: $4,000"
+dvha,H1036-306-0,F_dental,,"PREV $0; COMP $0-50%; max $4,000/year PREV+COMP",https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,78,"Bitewing x-rays – D0270, D0272, D0273, D0274 0%"
+dvha,H1036-306-0,F_dental,,"PREV $0; COMP $0-50%; max $4,000/year PREV+COMP",https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,78,Periodic oral exam – D0120 0%
+dvha,H1036-306-0,F_dental,,"PREV $0; COMP $0-50%; max $4,000/year PREV+COMP",https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,78,Prophylaxis (cleaning) – D1110 0%
+dvha,H1036-306-0,F_dental,,"PREV $0; COMP $0-50%; max $4,000/year PREV+COMP",https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,79,"Retreatment of previous root canal therapy – D3346, D3347, D3348 0%"
+dvha,H1036-306-0,F_dental,,"PREV $0; COMP $0-50%; max $4,000/year PREV+COMP",https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,79,"Root canal – D3310, D3320, D3330 50%"
 dvha,H1036-306-0,G_vision,,exam $0/year; eyewear $150/year ($250 at PLUS providers),https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,82,$0
 dvha,H1036-306-0,G_vision,,exam $0/year; eyewear $150/year ($250 at PLUS providers),https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,82,Routine Eye Exam including refraction (1 per calendar year)
 dvha,H1036-306-0,G_vision,,exam $0/year; eyewear $150/year ($250 at PLUS providers),https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,83,Any retail amount over $150 toward the purchase of frame and pair
@@ -522,9 +524,11 @@ dvha,H5216-048-0,J_extra_benefits,,Meals; After a heart-failure hospital stay: h
 dvha,H5216-048-0,J_extra_benefits,,Meals; After a heart-failure hospital stay: home-delivered meals,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,58,Meal program limited to 4 times per calendar year.
 dvha,H5216-048-0,J_extra_benefits,,Meals; After a heart-failure hospital stay: home-delivered meals,https://assets.humana.com/is/content/humana/H5216048000EOC27pdf,59,"After your inpatient stay for Congestive Heart Failure (CHF) in either a hospital or skilled nursing facility, you may be eligible to receive up to two home delivered meals per day for 30 days (up to 60 meals)"
 dvha,H5216-427-2,C_premium,,$0,https://assets.humana.com/is/content/humana/H5216427002SB27pdf,5,Monthly plan premium                   $0
-dvha,H5216-427-2,F_dental,,"PREV $0; max $1,500/year PREV+COMP",https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,72,"Annual Maximum: $1,500"
-dvha,H5216-427-2,F_dental,,"PREV $0; max $1,500/year PREV+COMP",https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,72,"Benefits received out-of-network are subject to any in-network benefit maximums, limitations and/or exclusions."
-dvha,H5216-427-2,F_dental,,"PREV $0; max $1,500/year PREV+COMP",https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,72,Periodic oral exam – D0120 0%
+dvha,H5216-427-2,F_dental,,"PREV $0; COMP $0-30%; max $1,500/year PREV+COMP",https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,72,"Annual Maximum: $1,500"
+dvha,H5216-427-2,F_dental,,"PREV $0; COMP $0-30%; max $1,500/year PREV+COMP",https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,72,"Benefits received out-of-network are subject to any in-network benefit maximums, limitations and/or exclusions."
+dvha,H5216-427-2,F_dental,,"PREV $0; COMP $0-30%; max $1,500/year PREV+COMP",https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,72,Periodic oral exam – D0120 0%
+dvha,H5216-427-2,F_dental,,"PREV $0; COMP $0-30%; max $1,500/year PREV+COMP",https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,74,"Retreatment of previous root canal therapy – D3346, D3347, D3348 0%"
+dvha,H5216-427-2,F_dental,,"PREV $0; COMP $0-30%; max $1,500/year PREV+COMP",https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,74,"Root canal – D3310, D3320, D3330 30%"
 dvha,H5216-427-2,G_vision,,exam $0/year; eyewear $75/year ($150 at PLUS providers),https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,79,$0
 dvha,H5216-427-2,G_vision,,exam $0/year; eyewear $75/year ($150 at PLUS providers),https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,79,Routine Eye Exam including refraction (1 per calendar year) by
 dvha,H5216-427-2,G_vision,,exam $0/year; eyewear $75/year ($150 at PLUS providers),https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,80,$0 for refraction exam
@@ -759,9 +763,10 @@ dvha,H7006-021-0,I_alt_care_otc_travel,,"Acup, Chiro, Naturopath from $100/six m
 dvha,H7006-021-0,J_extra_benefits,,Fitness; Meals,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,50,$100 allowance every three
 dvha,H7006-021-0,J_extra_benefits,,Fitness; Meals,https://atriohp.com/media/qyfpfa50/h7006_021_eoc_2027_atrio-freedom-ppo-portland.pdf,60,In-Network $0 copay for up to 2 meals per day for 14 days (28 meals per episode). Prior Authorization may be required.
 dvha,H7199-002-0,C_premium,,$28.50,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,13,"For 2027, the monthly plan premium for DEVOTED CHOICE PREMIUM 002 OR (PPO) is $28.50."
-dvha,H7199-002-0,F_dental,,"COMP 50%; max $2,250/year shared by PREV+COMP, acupuncture, massage, naturopath",https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,62,"You can be reimbursed up to $2,250 per year for covered dental"
-dvha,H7199-002-0,F_dental,,"COMP 50%; max $2,250/year shared by PREV+COMP, acupuncture, massage, naturopath",https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,62,"You have a $2,250 yearly allowance toward Preventive"
-dvha,H7199-002-0,F_dental,,"COMP 50%; max $2,250/year shared by PREV+COMP, acupuncture, massage, naturopath",https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,63,"You will be reimbursed 50% for your out-of-pocket costs, up to the $2,250 annual allowance for comprehensive dental service categories, such as Dentures, Crowns, Root Canals, Bridges, and more."
+dvha,H7199-002-0,F_dental,,"PREV $0; COMP 50%; max $2,250/year shared by PREV+COMP, acupuncture, massage, naturopath",https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,62,"You can be reimbursed up to $2,250 per year for covered dental"
+dvha,H7199-002-0,F_dental,,"PREV $0; COMP 50%; max $2,250/year shared by PREV+COMP, acupuncture, massage, naturopath",https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,62,"You have a $2,250 yearly allowance toward Preventive"
+dvha,H7199-002-0,F_dental,,"PREV $0; COMP 50%; max $2,250/year shared by PREV+COMP, acupuncture, massage, naturopath",https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,63,"For all covered preventive services, you will pay up front and receive 100% reimbursement"
+dvha,H7199-002-0,F_dental,,"PREV $0; COMP 50%; max $2,250/year shared by PREV+COMP, acupuncture, massage, naturopath",https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,63,"You will be reimbursed 50% for your out-of-pocket costs, up to the $2,250 annual allowance for comprehensive dental service categories, such as Dentures, Crowns, Root Canals, Bridges, and more."
 dvha,H7199-002-0,G_vision,,exam $0/year; eyewear $200/year,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,125,Routine eye exam $0 copay
 dvha,H7199-002-0,G_vision,,exam $0/year; eyewear $200/year,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,125,"You are covered for 1 routine vision exam (including refraction, if needed)"
 dvha,H7199-002-0,G_vision,,exam $0/year; eyewear $200/year,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,126,Your plan pays up to $200 per year
@@ -970,6 +975,8 @@ main,H1036-306-0,R_dental,,●,https://assets.humana.com/is/content/humana/H1036
 main,H1036-306-0,R_dental,,●,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,78,"Bitewing x-rays – D0270, D0272, D0273, D0274 0%"
 main,H1036-306-0,R_dental,,●,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,78,Periodic oral exam – D0120 0%
 main,H1036-306-0,R_dental,,●,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,78,Prophylaxis (cleaning) – D1110 0%
+main,H1036-306-0,R_dental,,●,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,79,"Retreatment of previous root canal therapy – D3346, D3347, D3348 0%"
+main,H1036-306-0,R_dental,,●,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,79,"Root canal – D3310, D3320, D3330 50%"
 main,H1036-306-0,S_acupuncture,,●,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,49,Routine acupuncture $0 copayment – Specialist's Office
 main,H1036-306-0,S_acupuncture,,●,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,49,You are covered for up to 25 visits per calendar year.
 main,H1036-306-0,T_chiropractic,,,https://assets.humana.com/is/content/humana/H1036306000EOC27pdf,51,Medicare Covered Chiropractic Services $15 copayment – Specialist's Office
@@ -2453,6 +2460,8 @@ main,H5216-427-2,R_dental,,●,https://assets.humana.com/is/content/humana/H5216
 main,H5216-427-2,R_dental,,●,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,72,"Benefits received out-of-network are subject to any in-network benefit maximums, limitations and/or exclusions."
 main,H5216-427-2,R_dental,,●,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,72,Periodic oral exam – D0120 0%
 main,H5216-427-2,R_dental,,●,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,72,You may receive the following non-Medicare covered routine dental-related services:
+main,H5216-427-2,R_dental,,●,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,74,"Retreatment of previous root canal therapy – D3346, D3347, D3348 0%"
+main,H5216-427-2,R_dental,,●,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,74,"Root canal – D3310, D3320, D3330 30%"
 main,H5216-427-2,S_acupuncture,,,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,36,Acupuncture for chronic low back pain
 main,H5216-427-2,S_acupuncture,,,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,36,In-Network: $45 copayment
 main,H5216-427-2,S_acupuncture,,,https://assets.humana.com/is/content/humana/H5216427002EOC27pdf,36,Up to 20 visits per calendar year under the following circumstances:
@@ -3094,6 +3103,7 @@ main,H7199-002-0,Q_hearing,,●,https://assets.devoted.com/plan-documents/2027/2
 main,H7199-002-0,Q_hearing,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,79,You are covered for 1 routine hearing exam from in- or out- of-network providers each year.
 main,H7199-002-0,R_dental,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,62,"You can be reimbursed up to $2,250 per year for covered dental"
 main,H7199-002-0,R_dental,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,62,"You have a $2,250 yearly allowance toward Preventive"
+main,H7199-002-0,R_dental,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,63,"For all covered preventive services, you will pay up front and receive 100% reimbursement"
 main,H7199-002-0,R_dental,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,63,"You will be reimbursed 50% for your out-of-pocket costs, up to the $2,250 annual allowance for comprehensive dental service categories, such as Dentures, Crowns, Root Canals, Bridges, and more."
 main,H7199-002-0,S_acupuncture,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,62,"You have a $2,250 yearly allowance toward Preventive Dental and Comprehensive dental services, therapeutic massage, routine acupuncture, and/or naturopath services combined."
 main,H7199-002-0,S_acupuncture,,●,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-CHOICE-PREMIUM-002-OR-%28PPO%29-EOC-H7199-002-ENG.pdf,63,You will be reimbursed for 50% for your out-of-pocket costs for covered alternative therapies.

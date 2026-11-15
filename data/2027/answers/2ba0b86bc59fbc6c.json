@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-a744eaa24232bb11.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 79 in-network column: root canal codes D3310, D3320 and D3330 cost 50%, and retreatment codes D3346 to D3348 cost 0%. This matches the 0% or 50% comprehensive dental fact.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Page 52 gives a $15 copay for Medicare-covered dental services at a Specialist's Office. 'Covered' with no amount and setting 'any' misstates the cost kind and the setting.\"}]\n```",
+ "usage": {
+  "input_tokens": 6326,
+  "output_tokens": 394,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
