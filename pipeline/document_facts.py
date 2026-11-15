@@ -75,10 +75,12 @@ def second_facts(texts, work, group, answer, v, data, plan_ids, known):
     found = f"{read}/facts.json"
     notes = review.joined(v.get("notes", {}), v.get("recheck_notes", {}))
     plan_notes = v.get("recheck_plan_notes", {})
-    extract.reread(texts, read, group, plan_ids, known, data, notes, plan_notes)
+    after = v.get("recheck_plan_after", {}).get(group, {})
+    extract.reread(texts, read, group, plan_ids, known, data, notes, plan_notes, after)
     for _ in range(2):
         answer(read, *v["reader"])
-        extract.extract_facts(texts, read, group, found, data, merging(v, group), notes, zero=zero(v), plan_notes=plan_notes)
+        extract.extract_facts(texts, read, group, found, data, merging(v, group), notes, zero=zero(v), plan_notes=plan_notes,
+                              plan_after=after, reimburses=v.get("recheck_reimburses", ()))
     seen = {tuple(f[c] for c in facts.KEY) for f in known}
 
     def skipped(r):
@@ -205,3 +207,7 @@ VERSIONS[25] = dict(VERSIONS[24], recheck_plan_notes=VERSIONS[24]["recheck_plan_
     "H7199-002-0": "Page 63 says members get 100% reimbursement for covered preventive services, which is "
                    "`dental.preventive` coinsurance 0%."}},
     targets={"dental": ("H1036-306-0", "H5216-427-2", "H7199-002-0")})
+# Version 26 shows the second dental readers of those plans the pages after each dental page, where Humana's code tables
+# go on without saying "dental". Their code check takes "100% reimbursement" as 0% coinsurance.
+VERSIONS[26] = dict(VERSIONS[25], recheck_plan_after={"dental": {"H1036-306-0": 2, "H5216-427-2": 3}},
+                    recheck_reimburses=("dental",))
