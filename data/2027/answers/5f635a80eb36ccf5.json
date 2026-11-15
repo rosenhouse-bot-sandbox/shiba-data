@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-4a0ee31be3437c35.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Comprehensive dental coinsurance varies by code: page 8 lists 0% items (recementation, root canal retreatment, oral surgery), but page 9 lists 50% for fillings, crowns, root canals and extractions. The fact should be '0% or 50%', not '0%' alone.\"}]\n```",
+ "usage": {
+  "input_tokens": 3837,
+  "output_tokens": 271,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

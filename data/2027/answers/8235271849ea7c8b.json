@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "5f6896f5c437eeed.retry.md",
+ "reply": "```json\n[]\n```\n\nThe failed fact can't be fixed, so I left it out. The 0% coinsurance comes from \"100% reimbursement up to the yearly allowance\" on page 8. No sentence on that page shows the $0 or 0% the check needs.",
+ "usage": {
+  "input_tokens": 3131,
+  "output_tokens": 414,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

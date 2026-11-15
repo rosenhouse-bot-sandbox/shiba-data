@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "4a0ee31be3437c35.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-306-0\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"0%\", \"page\": 8, \"quotes\": [\"0% of the cost for crown recementation up to 1\", \"0% of the cost for root canal retreatment up to 1\", \"0% of the cost for bridge recementation up to 1\", \"0% of the cost for oral surgery up to 2 per year.\", \"0% of the cost for periodontal maintenance up to\"], \"note\": \"Page 8 shows only the 0% comprehensive services. The 50% codes are on the dental code table (pages 78-80), which is not included here, so the full amount may be 0% or 50%.\"}]\n```",
+ "usage": {
+  "input_tokens": 3296,
+  "output_tokens": 779,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
