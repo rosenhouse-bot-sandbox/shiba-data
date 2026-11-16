@@ -1163,8 +1163,8 @@ class CmsColumnsTest(unittest.TestCase):
 class ExplainTest(unittest.TestCase):
     def set_aside(self, column, *found):
         found = [dict(f, fact_id=f["amount"]) for f in found]
-        got, aside = present.explain("Humana", list(found), column)
-        self.assertEqual(got, present.COLUMNS[column]("Humana", list(found)))
+        got, aside = present.explain("Humana", list(found), column, version=17)
+        self.assertEqual(got, present.rule("main", column, 17)("Humana", list(found)))
         return {f["amount"]: aside[facts.identity(f)] for f in found if facts.identity(f) in aside}
 
     def test_says_which_filter_set_each_fact_aside(self):
@@ -1287,7 +1287,24 @@ class ExplainTest(unittest.TestCase):
         for column, organization, found, reasons in cases:
             with self.subTest(column=column, reasons=reasons):
                 found = [dict(g, fact_id=g["amount"]) for g in found]
-                _, aside = present.explain(organization, found, column)
+                _, aside = present.explain(organization, found, column, version=17)
+                self.assertEqual({g["amount"]: aside[facts.identity(g)] for g in found if facts.identity(g) in aside}, reasons)
+
+    def test_says_why_the_final_chart_sets_a_fact_aside(self):
+        cases = [
+            ("I_outpatient_surgery", [fact("surgery", "asc", "$50"), fact("surgery.colonoscopy", "asc", "$0")],
+             {"$0": ["the 'outpatient_hospital' line counts only a price at 'outpatient_hospital' itself",
+                     "the final chart counts no $0 colonoscopy or skin biopsy"]}),
+            ("L_xray_imaging", [fact("imaging.diagnostic.advanced.ct", "office.pcp", "$100"),
+                                fact("imaging.diagnostic.mammogram", "office.pcp", "$0")],
+             {"$0": ["the final chart counts no mammogram"]}),
+            ("J_outpatient_rehab", [fact("rehab.physical", "outpatient_hospital", "$9"), fact("rehab.physical", "asc", "$7")],
+             {"$7": ["setting 'asc' is not 'office.pcp' or 'office.specialist' or 'freestanding' or 'outpatient_hospital'"]}),
+        ]
+        for column, found, reasons in cases:
+            with self.subTest(column=column):
+                found = [dict(g, fact_id=g["amount"]) for g in found]
+                _, aside = present.explain("Aetna", found, column, version=18)
                 self.assertEqual({g["amount"]: aside[facts.identity(g)] for g in found if facts.identity(g) in aside}, reasons)
 
     def test_every_fact_a_rule_sets_aside_in_the_year_has_a_noted_reason_unless_the_column_skips_its_benefit(self):
@@ -1332,6 +1349,81 @@ class ExplainTest(unittest.TestCase):
         for rules, leaves in present.SHEETS.values():
             self.assertEqual(set(leaves), set(rules))
             self.assertLessEqual({leaf for benefits in leaves.values() for leaf in benefits}, set(facts.BENEFITS))
+
+
+def chart(column, *found, organization="Aetna"):
+    return [value for value, _ in present.SHEETS["main"][0][column](organization, list(found))]
+
+
+class FinalChartTest(unittest.TestCase):
+    def test_surgery_shows_each_settings_surgery_price_without_a_0_colonoscopy(self):
+        found = [op(), op(setting="asc", amount="$400"), op("surgery.colonoscopy", "asc", "$0")]
+        self.assertEqual(chart("I_outpatient_surgery", *found), ["$500", "$400"])
+        self.assertEqual(chart("I_outpatient_surgery", op(amount="$0-$400")), ["$0-$400", ""])
+
+    def test_identical_lines_show_once_and_cite_both(self):
+        found = [op(), op(setting="asc")]
+        self.assertEqual(present.SHEETS["main"][0]["I_outpatient_surgery"]("Aetna", found), [("$500", found)])
+        self.assertEqual(chart("E_moop", priced("moop", amount="$5,900", cost_kind="out_of_pocket_max", network="any"),
+                               priced("moop", amount="$5,900", cost_kind="out_of_pocket_max")), ["$5,900"])
+
+    def test_rehab_and_labs_count_outpatient_hospital_prices(self):
+        self.assertEqual(chart("J_outpatient_rehab", priced("rehab.physical", "office.pcp", "$20"),
+                               priced("rehab.physical", "outpatient_hospital", "$50")), ["$20-$50"])
+        found = [priced("tests.diagnostic", "office.pcp"), priced("tests.diagnostic", "outpatient_hospital", "$95"),
+                 priced("tests.lab", "freestanding"), priced("tests.lab", "outpatient_hospital", "$40")]
+        self.assertEqual(chart("K_tests_labs", *found), ["$0/$0-$40"])
+
+    def test_only_agerights_0_colonoscopy_counts_as_a_test(self):
+        found = [priced("tests.diagnostic", amount="20%"), priced("surgery.colonoscopy", "outpatient_hospital")]
+        self.assertEqual(chart("K_tests_labs", *found, organization="AgeRight Advantage"), ["$0-20%/"])
+        self.assertEqual(chart("K_tests_labs", *found, organization="Regence"), ["20%/"])
+
+    def test_imaging_takes_every_office_x_ray_and_no_0_mammogram(self):
+        found = [priced("imaging.xray", "office.pcp"), priced("imaging.xray", "freestanding", "$40"),
+                 priced("imaging.diagnostic.advanced.ct", "freestanding", "$205"),
+                 priced("imaging.diagnostic.mammogram", "freestanding")]
+        self.assertEqual(chart("L_xray_imaging", *found, organization="Humana"), ["$0-$40", "$205"])
+
+    def test_part_b_drugs_show_the_highest_coinsurance(self):
+        found = [priced("part_b_drugs.vaccine"), priced("part_b_drugs", amount="20%")]
+        self.assertEqual(chart("M_part_b_drugs", *found), ["20%"])
+        self.assertEqual(chart("M_part_b_drugs"), [""])
+
+    def test_a_cost_per_stay_is_per_admit(self):
+        self.assertEqual(chart("H_inpatient", priced("inpatient.acute", amount="$2,241", unit="per stay")),
+                         ["$2,241 per admit", ""])
+
+    def test_a_giveback_is_a_dot(self):
+        self.assertEqual(chart("Z_part_b_reduction", priced("giveback", amount="$90", cost_kind="part_b_reduction")), ["●"])
+        self.assertEqual(chart("Z_part_b_reduction"), [""])
+
+    def test_medical_deductible_wording(self):
+        part_b = [deductible("$283", "medical_deductible.some"),
+                  priced("medical_deductible.part_b", amount="", cost_kind="covered", source="SB")]
+        self.assertEqual(chart("O_medical_deductible", *part_b), ["Same as 2027 Pt B Deductible"])
+        oon = [deductible("$100", "medical_deductible.some", network="out")]
+        self.assertEqual(chart("O_medical_deductible", *oon), ["$100 some OON"])
+        self.assertEqual(chart("O_medical_deductible", deductible("$250", "medical_deductible.some")), ["$250 some"])
+
+    def test_identical_office_visit_and_imaging_lines_show_once(self):
+        for column, benefit in (("F_primary_care", "visits"), ("G_specialist", "visits"), ("L_xray_imaging", "imaging.xray")):
+            in_and_out = [priced(benefit, "office.pcp", "$45"), priced(benefit, "office.specialist", "$45"),
+                          priced(benefit, "office.pcp", "$45", network="out"),
+                          priced(benefit, "office.specialist", "$45", network="out")]
+            if benefit != "visits":
+                in_and_out = [in_and_out[0], priced("imaging.diagnostic.advanced.ct", "office.pcp", "$45")]
+            self.assertEqual(chart(column, *in_and_out), ["$45"], column)
+
+    def test_the_latest_version_uses_these_rules_and_version_17_the_earlier_ones(self):
+        stay = [priced("inpatient.acute", amount="$2,241", unit="per stay")]
+        self.assertEqual(present.rule("main", "H_inpatient", max(present.VERSIONS))("Aetna", stay)[0][0], "$2,241 per admit")
+        self.assertEqual(present.rule("main", "H_inpatient", 17)("Aetna", stay)[0][0], "$2,241 per admission")
+        found = [op(), op("surgery.colonoscopy", amount="$0")]
+        self.assertEqual(present.rule("main", "I_outpatient_surgery", 17)("Aetna", found)[0][0], "$0-$500")
+        for column in ("E_moop", "F_primary_care", "G_specialist", "J_outpatient_rehab", "K_tests_labs", "L_xray_imaging",
+                       "M_part_b_drugs", "O_medical_deductible", "Z_part_b_reduction"):
+            self.assertIsNot(present.rule("main", column, 17), present.rule("main", column, 18), column)
 
 
 if __name__ == "__main__":
