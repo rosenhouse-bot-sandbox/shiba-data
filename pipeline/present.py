@@ -11,7 +11,7 @@ import facts, fields, layers, steps, years
 RANK = {s: i for i, s in enumerate(facts.SOURCES_BEST_FIRST)}
 OFFICES = ("office.pcp", "office.specialist", "freestanding")
 ADVANCED = ("imaging.diagnostic.advanced.ct", "imaging.diagnostic.advanced.mri", "imaging.diagnostic.advanced.pet")
-# These carriers' imaging keeps no $0 low end for a $0 diagnostic mammogram. fields.py omits Devoted (#127).
+# Before present 18, these carriers' imaging kept no $0 low end for a $0 diagnostic mammogram (#127).
 NO_MAMMOGRAM_ZERO = ("Kaiser", "Humana", "Devoted")
 
 
@@ -242,7 +242,7 @@ ZERO_SURGERIES = ("surgery.colonoscopy", "surgery.skin_biopsy")
 
 def outpatient_surgery(organization, found, zero_low_ends=True):
     """Line 1 is outpatient hospital surgery and line 2 is surgical center surgery, each as (value, cited facts).
-    A $0 diagnostic colonoscopy or skin biopsy priced in that setting starts its line at $0 (fields.py).
+    Unless zero_low_ends is False, a $0 diagnostic colonoscopy or skin biopsy priced in that setting starts its line at $0.
     So does a $0 low end that any source gives surgery in that setting, even one for other services (the expert's rule in #99)."""
     def line(setting):
         cost = best(found, "surgery", setting)

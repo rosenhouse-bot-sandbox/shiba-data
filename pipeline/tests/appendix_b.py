@@ -1,5 +1,5 @@
 """Corrected 2027 values from Appendix B of the 2027 bootstrap methods doc, which git history keeps.
-SHIBA's final 2027 chart later changed the format of some cells."""
+A SHIBA expert later changed the format of some cells, and SHIBA's final 2027 chart changed some values."""
 
 YEAR = 2027
 

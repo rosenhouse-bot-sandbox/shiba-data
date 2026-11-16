@@ -45,7 +45,7 @@ COLUMNS = [
            "\"tests/labs\", e.g. \"$35/$0\". Tests = non-radiological diagnostic tests (EKG, sleep studies, stress tests). "
            "Labs = outpatient lab services. Leave out X-rays, imaging and genetic testing (#31 section 2.4). "
            "For AgeRight, a $0 diagnostic colonoscopy or mammogram also counts as a test (final chart). "
-           f"{OFFICE} Labs count outpatient hospital prices too (final chart). "
+           "Tests use office and freestanding prices. Labs also count outpatient hospital prices (final chart). "
            "Humana H1036-306 keeps its $140 sleep study, which only outpatient hospitals offer (expert)."),
     Column("main", "L_xray_imaging", "X-Ray / Diag Radiology",
            "Line 1 = X-rays. Line 2 = advanced imaging: CT, MRI and PET scans only (methods 6.5). "
@@ -82,7 +82,7 @@ COLUMNS = [
     Column("main", "Y_otc", "OTC",
            f"Dot if an over-the-counter (OTC) items allowance is covered. Rewards programs are not OTC (methods R12). {DOT}"),
     Column("main", "Z_part_b_reduction", "Pt B Reduction",
-           "Dot if the plan pays part of the Part B premium (Part B giveback) (final chart)."),
+           "Dot if the plan pays part of the Part B premium, a Part B giveback (final chart)."),
     Column("main", "AA_opt_packages", "Opt Packages",
            "Dot if optional supplemental benefit packages can be bought for an extra monthly premium (methods R13)."),
     Column("main", "AB_ambulance", "Ambulance Domestic/International",

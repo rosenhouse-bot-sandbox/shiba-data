@@ -1118,7 +1118,7 @@ class ExpectedTest(unittest.TestCase):
             cells = presented_cells(data, column, version=17)
             wanted = {(w["plan_id"], w["line"]): w["value"] for w in expected.load() if w["column"] == column}
             missed = [(p, line, value, cells.get(p)) for (p, line), value in wanted.items()
-                      if (column, p, line) not in TRIAGED and (column, p) not in present.held(data, pinned(data))
+                      if (column, p, line) not in TRIAGED and (column, p) not in present.held(data, 17)
                       and shown(cells.get(p, ["", ""]), line) != value]
             self.assertEqual(missed, [], column)
             self.assertTrue(all(shown(cells[p], line) != wanted[p, line] for c, p, line in TRIAGED if c == column))
