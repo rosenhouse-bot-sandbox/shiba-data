@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-3.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 62 shows the $40 copay for Urgent Care Center and Freestanding Radiological Facility under 'Basic Radiological Services'. That heading is not labeled outpatient X-rays, and Humana charts often list X-rays separately. The row likely maps to diagnostic radiology rather than imaging.xray.\"}]\n```",
+ "usage": {
+  "input_tokens": 2401,
+  "output_tokens": 621,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

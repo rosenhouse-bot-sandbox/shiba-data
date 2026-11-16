@@ -1,5 +1,5 @@
 """Corrected 2027 values from Appendix B of the 2027 bootstrap methods doc, which git history keeps.
-A SHIBA expert later changed the format of some cells."""
+A SHIBA expert later changed the format of some cells, and SHIBA's final 2027 chart changed some values."""
 
 YEAR = 2027
 
@@ -7,9 +7,9 @@ YEAR = 2027
 MAIN_CHART_CASES = [
     ("1", "H5216-048-0", "K_tests_labs", "$0-$45/$0"),
     ("1", "H5216-048-0", "L_xray_imaging", "$0-$45 | $205-$330"),
-    ("1", "H5216-048-0", "O_medical_deductible", "$100 some out-of-network services"),
+    ("1", "H5216-048-0", "O_medical_deductible", "$100 some OON"),
     ("1", "H5216-048-0", "AA_opt_packages", "●"),
-    ("2", "H2001-045-0", "O_medical_deductible", "Part B deductible some"),
+    ("2", "H2001-045-0", "O_medical_deductible", "Same as 2027 Pt B Deductible"),
     ("2", "H2001-045-0", "T_chiropractic", ""),
     ("3", "H9003-009-0", "K_tests_labs", "$15-$45/$0"),
     ("4", "H2923-001-0", "T_chiropractic", "●"),
@@ -22,9 +22,9 @@ MAIN_CHART_CASES = [
     ("10", "H6815-038-0", "K_tests_labs", "0%-20%/$0-$50"),
     ("11", "H1372-003-0", "S_acupuncture", "●"),
     ("11", "H1372-003-0", "T_chiropractic", "●"),
-    ("12", "H1036-153-0", "L_xray_imaging", "$0-$30 | $205-$330"),
+    ("12", "H1036-153-0", "L_xray_imaging", "$0-$40 | $205-$330"),
     ("13", "H1036-317-0", "Y_otc", "●"),
-    ("13", "H1036-317-0", "O_medical_deductible", "Part B deductible some"),
+    ("13", "H1036-317-0", "O_medical_deductible", "Same as 2027 Pt B Deductible"),
 ]
 
 # (Appendix B DVHA item, plan, column, text the cell must contain)

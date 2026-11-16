@@ -4,7 +4,7 @@ Also what carriers' EOCs tend to do.
 The generators and the site read this spec.
 A rule's source, when known, is in parentheses: "#31 section n" is issue #31, and
 "methods Rn" or "methods 6.5" is docs/2027-bootstrap/CLAUDE_ANALYSIS_METHODS.md.
-"expert" is a SHIBA Medicare expert's review.
+"expert" is a SHIBA Medicare expert's review. "final chart" is SHIBA's final 2027 chart, which wins over "expert".
 """
 import collections
 
@@ -17,6 +17,7 @@ DOT = ("A dot means the plan covers the routine (supplemental) benefit, not only
        "A benefit only for some members, such as SSBCI, gets no dot unless the plan also covers it for all members.")
 
 OFFICE = "When the SB prices settings separately, use office and freestanding prices, not outpatient hospital (expert)."
+SAME = "Two identical lines show once (final chart)."
 
 COLUMNS = [
     Column("main", "C_premium", "Premium",
@@ -24,39 +25,41 @@ COLUMNS = [
     Column("main", "D_premium_full_extra_help", "Premium w/ Full Extra Help",
            "Premium with full Extra Help, from the CMS Landscape file. \"n/a\" for plans without Part D."),
     Column("main", "E_moop", "MOOP In/Out of Network",
-           "Maximum out-of-pocket (MOOP). Line 1 = in-network MOOP. Line 2 (PPO only) = combined in- and out-of-network MOOP."),
+           "Maximum out-of-pocket (MOOP). Line 1 = in-network MOOP. Line 2 (PPO only) = combined in- and out-of-network MOOP. " + SAME),
     Column("main", "F_primary_care", "Primary Care",
-           "Primary care physician office visit copay. Line 1 in-network, line 2 out-of-network. A range covers several visit types."),
+           "Primary care physician office visit copay. Line 1 in-network, line 2 out-of-network. A range covers several visit types. "
+           + SAME),
     Column("main", "G_specialist", "Specialist",
            "Specialist office visit copay. Line 1 in-network, line 2 out-of-network. "
-           "Office visits only: leave out hearing exams, telehealth and nursing-home visits (#31 section 2.2)."),
+           "Office visits only: leave out hearing exams, telehealth and nursing-home visits (#31 section 2.2). " + SAME),
     Column("main", "H_inpatient", "Inpatient Hospital $/Day",
-           "Inpatient hospital (acute) cost. \"$395 | 1-5\" = $395 per day for days 1-5, then $0. \"per admission\" = one copay per admission, however long the stay."),
+           "Inpatient hospital (acute) cost. \"$395 | 1-5\" = $395 per day for days 1-5, then $0. \"per admit\" = one copay per admission, however long the stay (final chart)."),
     Column("main", "I_outpatient_surgery", "Outpatient Surgery / ASC",
            "Line 1 = outpatient hospital surgery; line 2 = ambulatory surgical center (ASC). \"a/b\" inside a line = in/out-of-network. "
-           "Give the surgery amount in each setting. Start the range at $0 when that setting charges $0 for a diagnostic "
-           "colonoscopy or skin biopsy (expert). Leave out wound care and other services billed in the same setting (#31 section 1.3)."),
+           "Give the surgery amount in each setting. A $0 diagnostic colonoscopy or skin biopsy does not count (final chart). "
+           f"Leave out wound care and other services billed in the same setting (#31 section 1.3). {SAME}"),
     Column("main", "J_outpatient_rehab", "Outpatient Rehab OT, PT, ST",
            "Outpatient rehabilitation (occupational, physical, speech therapy) visit copay or range. "
-           f"Leave out re-evaluations (#31 section 2.3). {OFFICE}"),
+           "Leave out re-evaluations (#31 section 2.3). Outpatient hospital prices count (final chart)."),
     Column("main", "K_tests_labs", "Diagnostic Tests / Labs",
            "\"tests/labs\", e.g. \"$35/$0\". Tests = non-radiological diagnostic tests (EKG, sleep studies, stress tests). "
            "Labs = outpatient lab services. Leave out X-rays, imaging and genetic testing (#31 section 2.4). "
-           "For AgeRight and Regence, a $0 diagnostic colonoscopy or mammogram also counts as a test (expert). "
-           f"{OFFICE} Humana H1036-306 keeps its $140 sleep study, which only outpatient hospitals offer (expert)."),
+           "For AgeRight, a $0 diagnostic colonoscopy or mammogram also counts as a test (final chart). "
+           "Tests use office and freestanding prices. Labs also count outpatient hospital prices (final chart). "
+           "Humana H1036-306 keeps its $140 sleep study, which only outpatient hospitals offer (expert)."),
     Column("main", "L_xray_imaging", "X-Ray / Diag Radiology",
            "Line 1 = X-rays. Line 2 = advanced imaging: CT, MRI and PET scans only (methods 6.5). "
-           "Start line 2 at $0 when the plan charges $0 for a diagnostic mammogram, except for Kaiser and Humana (expert). "
-           f"Leave out ultrasounds and other tests. {OFFICE} Humana X-rays use PCP and specialist office prices (expert)."),
+           "A $0 diagnostic mammogram does not count (final chart). "
+           f"Leave out ultrasounds and other tests. {OFFICE} {SAME}"),
     Column("main", "M_part_b_drugs", "Chemo / Part B Drugs",
-           "Medicare Part B prescription drugs (incl. chemotherapy) coinsurance range. "
-           "A 0% low end needs a Part B drug that costs nothing, such as allergy shots (#31 section 1.7)."),
+           "Medicare Part B prescription drugs (incl. chemotherapy): the highest coinsurance (final chart)."),
     Column("main", "N_pharmacy_deductible", "Pharmacy Deductible",
            "Part D drug deductible. \"$685 not tiers 1,2\" = deductible that does not apply to tiers 1 and 2."),
     Column("main", "O_medical_deductible", "Medical Deductible",
            "Medical (Part A/B services) deductible. \"$750 some\" = applies to some services only (methods R4). "
-           "\"$100 out-of-network only\" = applies only out of network. \"$100 some out-of-network services\" is the same, "
-           "for some services only (expert). \"$0\" = no medical deductible."),
+           "\"$100 out-of-network only\" = applies only out of network. \"$100 some OON\" is the same, "
+           "for some services only. \"Same as 2027 Pt B Deductible\" = Original Medicare's Part B deductible (final chart). "
+           "\"$0\" = no medical deductible."),
     Column("main", "P_vision", "Vision",
            f"Dot (●) if the plan covers routine vision: eye exam and/or eyewear. Blank if not. {DOT}",
 ),
@@ -79,7 +82,7 @@ COLUMNS = [
     Column("main", "Y_otc", "OTC",
            f"Dot if an over-the-counter (OTC) items allowance is covered. Rewards programs are not OTC (methods R12). {DOT}"),
     Column("main", "Z_part_b_reduction", "Pt B Reduction",
-           "The monthly amount the plan pays toward the Part B premium (Part B giveback), or a dot if no amount is given."),
+           "Dot if the plan pays part of the Part B premium, a Part B giveback (final chart)."),
     Column("main", "AA_opt_packages", "Opt Packages",
            "Dot if optional supplemental benefit packages can be bought for an extra monthly premium (methods R13)."),
     Column("main", "AB_ambulance", "Ambulance Domestic/International",

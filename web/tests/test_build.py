@@ -72,7 +72,7 @@ class SiteDataTest(unittest.TestCase):
 
     def test_cited_cell_points_to_document_page_and_quote(self):
         cell = self.cell("main", "H2001-045-0", "H_inpatient")
-        self.assertEqual(cell["value"], "$1,980 per admission")
+        self.assertEqual(cell["value"], "$1,980 per admit")
         cite = next(c for c in cell["cites"] if c["page"] == 77)
         self.assertEqual(len(cell["cites"]), len({(c["doc"], c["page"], c["quote"]) for c in cell["cites"]}))
         self.assertIn("$1,980", cite["quote"])
@@ -82,7 +82,7 @@ class SiteDataTest(unittest.TestCase):
 
     def test_cite_keeps_line_number(self):
         cell = self.cell("main", "H3805-041-0", "L_xray_imaging")
-        self.assertEqual([c["line"] for c in cell["cites"]], [1, 2, 2])
+        self.assertEqual([c["line"] for c in cell["cites"]], [1, 2])
 
     def test_uncited_cell_has_no_cites(self):
         cell = self.cell("main", "H2406-042-0", "D_premium_full_extra_help")
