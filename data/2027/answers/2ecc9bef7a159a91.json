@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-14.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"On page 89, the Advanced Laboratory Services row lists Outpatient hospital: $40 copay. This matches tests.lab in the outpatient hospital setting, in network, with the Advanced Laboratory Services qualifier. Basic lab services in the outpatient hospital are $0 in the row above, so the qualifier is needed.\"}]\n```",
+ "usage": {
+  "input_tokens": 2104,
+  "output_tokens": 637,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-33.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 83 outpatient hospital row 'Laboratory and diagnostic tests billed by the hospital' shows 'Lab tests $0' with no plan split, so it applies to Standard members, in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2188,
+  "output_tokens": 240,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

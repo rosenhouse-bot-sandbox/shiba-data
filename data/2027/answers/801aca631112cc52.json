@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-29.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 67, Outpatient hospital services row, In-Network: 'Lab Services $0 copayment – Outpatient Hospital'. This is a Medicare-covered benefit, and the plan, setting, network, cost kind and amount all match.\"}]\n```",
+ "usage": {
+  "input_tokens": 2559,
+  "output_tokens": 292,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
