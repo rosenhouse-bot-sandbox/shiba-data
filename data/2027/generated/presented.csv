@@ -1754,6 +1754,7 @@ main,H2923-019-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-document
 main,H2923-019-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,86,Chemotherapy Drugs: 20% coinsurance at: A PCP's office A specialist's office
 main,H2923-019-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,86,Chemotherapy Drugs: 20% coinsurance at: A PCP's office A specialist's office In the home An outpatient hospital setting
 main,H2923-019-0,M_part_b_drugs,,0%-20%,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,86,Chemotherapy Drugs: 20% coinsurance at: A PCP's office A specialist's office In the home An outpatient hospital setting An Ambulatory Surgical Center (ASC)
+main,H2923-019-0,N_pharmacy_deductible,,"$700 not tiers 1,2",https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,148,"For all other drugs, you won't have to pay any deductible."
 main,H2923-019-0,N_pharmacy_deductible,,"$700 not tiers 1,2",https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,148,You'll pay a yearly deductible of $700 on Tier 3 - 5 drugs.
 main,H2923-019-0,O_medical_deductible,,$150 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,14,$150 except for insulin furnished
 main,H2923-019-0,O_medical_deductible,,$150 some,https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-C-SNP-GIVEBACK-EXTRAS-019-OR-%28HMO-C-SNP%29-EOC-H2923-019-ENG.pdf,52,The deductible applies to some services.
@@ -1964,7 +1965,9 @@ main,H3805-040-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphad
 main,H3805-040-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,70,$0 copayment or Medicare-covered Part B allergy antigens.
 main,H3805-040-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,70,20% coinsurance or all other Medicare-
 main,H3805-040-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,70,20% coinsurance or each Medicare-covered chemotherapy drug and the administration o that drug.
+main,H3805-040-0,N_pharmacy_deductible,,"$685 not tiers 1,2",https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,133,For all other drugs you won’t have to pay any deductible.
 main,H3805-040-0,N_pharmacy_deductible,,"$685 not tiers 1,2",https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,133,"You’ll pay a yearly deductible o $685 on Tier 3, Tier 4 and Tier 5 drugs."
+main,H3805-040-0,N_pharmacy_deductible,,"$685 not tiers 1,2",https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,133,"deductible o $685 on Tier 3, Tier 4 and Tier 5 drugs"
 main,H3805-040-0,O_medical_deductible,,$0,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0412772_000,2,This plan does not have a medical deductible.
 main,H3805-040-0,P_vision,,●,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,94,$0 copayment
 main,H3805-040-0,P_vision,,●,https://www.aarpmedicareplans.com/alphadog/UHOR27HP0418842_001,94,We cover 1 routine eye exam every year.
@@ -2064,6 +2067,7 @@ main,H3805-048-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphad
 main,H3805-048-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,71,20% coinsurance or all other Medicare-
 main,H3805-048-0,M_part_b_drugs,,0%-20%,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,71,20% coinsurance or each Medicare-covered chemotherapy drug and the administration o that drug.
 main,H3805-048-0,N_pharmacy_deductible,,"$685 not tiers 1,2",https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,129,"You’ll pay a yearly deductible o $685 on Tier 3, Tier 4 and Tier 5 drugs."
+main,H3805-048-0,N_pharmacy_deductible,,"$685 not tiers 1,2",https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,129,"deductible o $685 on Tier 3, Tier 4 and Tier 5 drugs"
 main,H3805-048-0,O_medical_deductible,,$0,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0412776_000,2,This plan does not have a medical deductible.
 main,H3805-048-0,P_vision,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,94,$0 copayment Provided by: UnitedHealthcare Vision®
 main,H3805-048-0,P_vision,,●,https://www.aarpmedicareplans.com/alphadog/AAOR27HP0418846_000,94,$0 copayment or 1 pair o eyeglasses
@@ -2831,6 +2835,7 @@ main,H5439-019-0,M_part_b_drugs,,0%-20%,https://www.wellcareor.com/content/dam/c
 main,H5439-019-0,M_part_b_drugs,,0%-20%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,86,20% coinsurance for all other Medicare-covered Part B drugs. Prior Authorization may be required.
 main,H5439-019-0,M_part_b_drugs,,0%-20%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,86,In-Network 20% coinsurance for Medicare-covered Part B chemotherapy drugs.
 main,H5439-019-0,N_pharmacy_deductible,,$700 not tier 1,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,149,"You’ll pay a yearly deductible of $700 on Tier 2 (Preferred Brand), Tier 3 (Non-Preferred Drug),"
+main,H5439-019-0,N_pharmacy_deductible,,$700 not tier 1,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,149,pay a yearly deductible of $700 on Tier 2 (Preferred Brand)
 main,H5439-019-0,O_medical_deductible,,$250 some,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,48,"Until you’ve paid the deductible amount, you must pay the full cost for most of your covered services."
 main,H5439-019-0,O_medical_deductible,,$250 some,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,48,Your deductible is $250.
 main,H5439-019-0,O_medical_deductible,,$250 some,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H5439_019_2027_OR_SB_PPO_7017570ENG_M.pdf,4,$250 deductible for select Part B services.

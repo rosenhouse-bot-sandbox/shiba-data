@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-2eb4caa23079d78f.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 16 Yearly Deductible Stage row for H5439-019: $700 Part D deductible that applies to Tiers 2-5, so Tier 1 skips it. No Tier 6 appears on the page.\"}]\n```",
+ "usage": {
+  "input_tokens": 1800,
+  "output_tokens": 488,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

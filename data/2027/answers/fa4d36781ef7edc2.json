@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-630e49b10e7ad131.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 115, Section 4: a $700 yearly deductible applies to Tier 4 and Tier 5 drugs, and other drugs have no deductible, so tiers 1-3 skip it. No tier 6 is mentioned.\"}]\n```",
+ "usage": {
+  "input_tokens": 2531,
+  "output_tokens": 295,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

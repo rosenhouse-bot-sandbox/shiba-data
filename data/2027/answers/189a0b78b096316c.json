@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "37b0122461ea99ed.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-011-0\", \"benefit\": \"part_d_deductible\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"deductible\", \"amount\": \"$700\", \"limit\": \"per year\", \"condition\": \"not tier 1\", \"page\": 150, \"quotes\": [\"You’ll pay a yearly deductible of $700 on Tier 2 (Preferred Brand), Tier 3 (Non-Preferred Drug), Tier 4 (Injectable Drugs), and Tier 5 (Specialty Tier) drugs.\"], \"note\": \"The $700 deductible applies to tiers 2-5, so it skips tier 1. The pages also say it doesn't apply to covered insulin and most adult Part D vaccines; that exemption is not in the condition. The pages name no network, so in-network is the default.\"}]\n```",
+ "usage": {
+  "input_tokens": 5001,
+  "output_tokens": 758,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

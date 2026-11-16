@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-f73d19eeaaf3a08a.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 125, Section 4: a $700 yearly deductible on Cost-Sharing Tiers 3, 4 and 5. Other drugs have no deductible, so tiers 1 and 2 are skipped. The page names no tier 6.\"}]\n```",
+ "usage": {
+  "input_tokens": 2454,
+  "output_tokens": 291,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
