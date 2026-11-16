@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-42.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 68 Outpatient rehabilitation, In-Network, Physical Therapy row: 20% coinsurance, with Outpatient Hospital listed among its settings.\"}]\n```",
+ "usage": {
+  "input_tokens": 2337,
+  "output_tokens": 85,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

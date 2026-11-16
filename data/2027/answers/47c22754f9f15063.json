@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-5.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"On page 53, the quoted $40 copay for Urgent Care Center and Freestanding Radiological Facility sits under \\\"Basic Radiological Services\\\". The page never labels this row as outpatient X-rays, and basic radiology may cover more than X-rays. Mapping it to imaging.xray is not clearly supported.\"}]\n```",
+ "usage": {
+  "input_tokens": 2322,
+  "output_tokens": 525,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

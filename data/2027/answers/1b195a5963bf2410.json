@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-48.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 92, Outpatient rehabilitation services row: the block before Occupational Therapy is the continued physical therapy block. It lists Outpatient Hospital at a $50 copay, separate from the $20 re-evaluation. Every therapy type shows $50 for outpatient hospital, so the amount holds regardless of the heading on the prior page.\"}]\n```",
+ "usage": {
+  "input_tokens": 2137,
+  "output_tokens": 696,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

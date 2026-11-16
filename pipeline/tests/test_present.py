@@ -916,8 +916,8 @@ class ExtraBenefitsTest(unittest.TestCase):
                          "After a heart-failure hospital stay: Virtual Cardiac Recovery Program, home-delivered meals")
 
 
-def presented_cells(data, column):
-    return {p: [value for value, _ in got] for p, got in present.lines(data, column, version=pinned(data)).items()}
+def presented_cells(data, column, version):
+    return {p: [value for value, _ in got] for p, got in present.lines(data, column, version=version).items()}
 
 
 def pinned(data):
@@ -1111,10 +1111,11 @@ class ExpectedTest(unittest.TestCase):
         pinned = json.loads((data / "steps.json").read_text())["present"]
         self.assertEqual(layers.rows(data / layers.PRESENTED), present.layer_rows(data, pinned))
 
-    def test_presents_every_expected_line(self):
+    def test_present_17_presents_every_expected_line(self):
+        """The expected cells follow the expert's provisional rules, which present 18 replaced with the final chart's."""
         data = years.data_dir(YEAR)
         for column in present.COLUMNS:
-            cells = presented_cells(data, column)
+            cells = presented_cells(data, column, version=17)
             wanted = {(w["plan_id"], w["line"]): w["value"] for w in expected.load() if w["column"] == column}
             missed = [(p, line, value, cells.get(p)) for (p, line), value in wanted.items()
                       if (column, p, line) not in TRIAGED and (column, p) not in present.held(data, pinned(data))

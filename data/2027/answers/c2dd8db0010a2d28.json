@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-5.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"On page 8, the 'Basic radiological services (X-rays)' row lists a $40 copay in network at a freestanding radiological facility. This matches the plan, benefit, setting, network, cost kind and amount.\"}]\n```",
+ "usage": {
+  "input_tokens": 2408,
+  "output_tokens": 97,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

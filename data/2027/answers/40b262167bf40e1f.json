@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-27.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 66 Lab Services row lists a $0 copayment for Outpatient Hospital, among other settings, above the Out-of-Network heading, so it is the in-network cost.\"}]\n```",
+ "usage": {
+  "input_tokens": 2140,
+  "output_tokens": 198,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

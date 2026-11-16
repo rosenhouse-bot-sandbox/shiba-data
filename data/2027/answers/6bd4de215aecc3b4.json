@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-24.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 6, Lab Services row under Diagnostic Services, Labs, and Imaging: 'Outpatient hospital: $0 or $45 copay'. The item has the right plan, benefit, setting, network, cost kind and alternative amounts.\"}]\n```",
+ "usage": {
+  "input_tokens": 2366,
+  "output_tokens": 246,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
