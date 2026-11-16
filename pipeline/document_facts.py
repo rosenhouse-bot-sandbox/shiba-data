@@ -211,3 +211,16 @@ VERSIONS[25] = dict(VERSIONS[24], recheck_plan_notes=VERSIONS[24]["recheck_plan_
 # go on without saying "dental". Their code check takes "100% reimbursement" as 0% coinsurance.
 VERSIONS[26] = dict(VERSIONS[25], recheck_plan_after={"dental": {"H1036-306-0": 2, "H5216-427-2": 3}},
                     recheck_reimburses=("dental",))
+# Version 27 asks readers to name every tier a drug deductible skips. Readers assumed five tiers and left out tier 6.
+EVERY_TIER = ("Name every tier the deductible skips, including tier 6 or higher when the plan has them, "
+              "such as `not tiers 1,2,6`.")
+PART_D_PLANS = (
+    "H1036-153-0", "H1036-306-0", "H1036-317-0", "H1036-323-0", "H1372-003-0", "H2001-045-0",
+    "H2056-003-0", "H2406-042-0", "H2406-070-0", "H2923-001-0", "H2923-005-0", "H2923-009-0",
+    "H2923-019-0", "H2923-025-0", "H2923-028-3", "H3805-040-0", "H3805-041-0", "H3805-048-0",
+    "H3817-008-1", "H3817-009-1", "H3817-011-1", "H5216-048-0", "H5216-428-2", "H5439-011-0",
+    "H5439-015-0", "H5439-019-0", "H6815-038-0", "H7006-018-0", "H7199-002-0", "H9003-001-0",
+    "H9003-006-0", "H9003-009-0")
+# Its targets are the plans a dry run (blast.py) found it asks about: every plan with Part D.
+VERSIONS[27] = dict(VERSIONS[26], notes=VERSIONS[26]["notes"] | {"part_d_deductible": EVERY_TIER},
+                    targets={"part_d_deductible": PART_D_PLANS})
