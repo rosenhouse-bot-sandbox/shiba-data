@@ -917,7 +917,7 @@ class ExtraBenefitsTest(unittest.TestCase):
 
 
 def presented_cells(data, column):
-    return {p: [value for value, _ in got] for p, got in present.lines(data, column).items()}
+    return {p: [value for value, _ in got] for p, got in present.lines(data, column, version=pinned(data)).items()}
 
 
 def pinned(data):
@@ -1130,7 +1130,7 @@ class ExpectedTest(unittest.TestCase):
         for column in present.COLUMNS:
             self.assertEqual({(r["plan_id"], r["line"]) for r in rows if (r["sheet"], r["column"]) == ("main", column)},
                              {(p, str(n) if " | " in generated[p][column] else "")
-                              for p, got in present.lines(data, column).items()
+                              for p, got in present.lines(data, column, version=version).items()
                               if (column, p) not in present.held(data, version)
                               for n, (v, cited) in enumerate(got, 1) if v and not cited or present.presents(cited)})
 
