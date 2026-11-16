@@ -358,6 +358,14 @@ class StepTest(StepsTest):
         self.assertEqual(v26["recheck_plan_after"], {"dental": {"H1036-306-0": 2, "H5216-427-2": 3}})
         self.assertEqual(v26["recheck_reimburses"], ("dental",))
 
+    def test_version_27_asks_readers_to_count_tier_6_in_the_tiers_a_drug_deductible_skips(self):
+        v26, v27 = document_facts.VERSIONS[26], document_facts.VERSIONS[27]
+        self.assertEqual(dict(v27, notes=None, targets=None), dict(v26, notes=None, targets=None))
+        self.assertEqual(v27["notes"], v26["notes"] | {"part_d_deductible": document_facts.EVERY_TIER})
+        self.assertIn("tier 6", document_facts.EVERY_TIER)
+        self.assertEqual(list(v27["targets"]), ["part_d_deductible"])
+        self.assertEqual(len(v27["targets"]["part_d_deductible"]), 32)
+
     def test_a_second_reader_sees_the_pages_after_and_takes_reimbursements_as_its_version_says(self):
         page = "Members receive 100% reimbursement."
         for sub in ("text", "layout"):

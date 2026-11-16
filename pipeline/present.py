@@ -143,12 +143,17 @@ def show(found):
     return span(f"{percents[0]:g}%", f"{percents[-1]:g}%") if percents else ""
 
 
-def xray_imaging(organization, found):
-    """Line 1 is X-rays and line 2 is CT, MRI and PET, each as (value, cited facts). See fields.py."""
-    humana = "Humana" in organization
+def xray_imaging(organization, found, mammograms=True):
+    """Line 1 is X-rays and line 2 is CT, MRI and PET, each as (value, cited facts). See fields.py.
+    Without mammograms, no $0 mammogram counts and Humana X-rays take every office price."""
+    humana = "Humana" in organization and mammograms
     xrays = winners(found, ["imaging.xray"], OFFICES[:2] if humana else OFFICES)
     advanced = winners(found, ADVANCED, OFFICES)
     line2 = show(advanced)
+    if not mammograms:
+        keep([f for f in found if f["benefit"] == "imaging.diagnostic.mammogram"], lambda f: False,
+             lambda f: "the final chart counts no mammogram")
+        return [(show(xrays), unique(xrays)), (line2, unique(advanced))]
     mammograms = keep(winners(found, ["imaging.diagnostic.mammogram"], OFFICES),
                       lambda f: f["cost_kind"] == "copay" and f["amount"] == "$0", lambda f: "only a $0 mammogram copay counts")
     if not line2:
@@ -235,7 +240,7 @@ def emergency_abroad(emergency):
 ZERO_SURGERIES = ("surgery.colonoscopy", "surgery.skin_biopsy")
 
 
-def outpatient_surgery(organization, found):
+def outpatient_surgery(organization, found, zero_low_ends=True):
     """Line 1 is outpatient hospital surgery and line 2 is surgical center surgery, each as (value, cited facts).
     A $0 diagnostic colonoscopy or skin biopsy priced in that setting starts its line at $0 (fields.py).
     So does a $0 low end that any source gives surgery in that setting, even one for other services (the expert's rule in #99)."""
@@ -243,9 +248,10 @@ def outpatient_surgery(organization, found):
         cost = best(found, "surgery", setting)
         exact = keep([f for f in found if f["benefit"] in ZERO_SURGERIES], lambda f: f["setting"] == setting,
                      lambda f: f"the {setting!r} line counts only a price at {setting!r} itself")
-        if not cost:
-            keep(exact, lambda f: False, lambda f: f"the {setting!r} line has no surgery price")
-            return "", []
+        if not cost or not zero_low_ends:
+            keep(exact, lambda f: False, lambda f: f"the {setting!r} line has no surgery price" if not cost
+                 else "the final chart counts no $0 colonoscopy or skin biopsy")
+            return show(cost), cost
         zeros = keep([f for leaf in ZERO_SURGERIES for f in best([g for g in exact if g["benefit"] == leaf], leaf, setting)],
                      lambda f: f["amount"] == "$0", lambda f: "only a $0 colonoscopy or skin biopsy counts")
         low_ends = [f for f in found if usable(f) and f["benefit"] == "surgery" and f["setting"] == setting
@@ -267,8 +273,9 @@ def any_test(f):
     return priced(f) and not (f["provider_tier"] or ELIGIBILITY.search(f["condition"]))
 
 
-def tests_labs(organization, found):
-    """Shows "tests/labs". Each side uses office and freestanding prices, or outpatient hospital ones if there are none."""
+def tests_labs(organization, found, zero_tests=ZERO_TESTS, lab_settings=OFFICES):
+    """Shows "tests/labs". Tests use office and freestanding prices and labs use lab_settings, or else outpatient
+    hospital prices."""
     tests = winners(found, ["tests.diagnostic"], OFFICES, any_test)
     if any(f["plan_id"] in HOSPITAL_SLEEP_STUDY for f in found):
         keep([f for f in found if f["benefit"] == "tests.diagnostic.sleep_study"],
@@ -277,11 +284,11 @@ def tests_labs(organization, found):
     else:
         keep([f for f in found if f["benefit"] == "tests.diagnostic.sleep_study"], lambda f: False,
              lambda f: "a sleep study counts only for " + ", ".join(HOSPITAL_SLEEP_STUDY))
-    if tests and any(name in organization for name in ZERO_TESTS):
+    if tests and any(name in organization for name in zero_tests):
         zeros = winners(found, ["imaging.diagnostic.mammogram"], OFFICES) + [
             f for s in ("outpatient_hospital", "asc") for f in best(found, "surgery.colonoscopy", s)]
         tests += [f for f in zeros if f["amount"] == "$0"]
-    tests, labs = unique(tests), winners(found, ["tests.lab"], OFFICES, any_test)
+    tests, labs = unique(tests), winners(found, ["tests.lab"], lab_settings, any_test)
     return [(f"{show(tests)}/{show(labs)}" if tests or labs else "", tests + labs)]
 
 
@@ -309,9 +316,9 @@ def visits(setting):
 THERAPIES = ("rehab.physical", "rehab.occupational", "rehab.speech")
 
 
-def outpatient_rehab(organization, found):
-    """Shows therapy visit prices at offices and freestanding facilities, or at outpatient hospitals if there are none."""
-    got = unique(winners(found, THERAPIES, OFFICES))
+def outpatient_rehab(organization, found, settings=OFFICES):
+    """Shows therapy visit prices at settings, or at outpatient hospitals if there are none."""
+    got = unique(winners(found, THERAPIES, settings))
     return [(show(got), got)]
 
 
@@ -325,7 +332,7 @@ def stay_ok(f):
     return usable(dict(f, condition="")) and f["condition"] in ("", f["limit"])
 
 
-def inpatient(organization, found):
+def inpatient(organization, found, per_stay="per admission"):
     """Line 1 is the cost and line 2 the days it applies, as "$395 | 1-5". A cost per stay is "per admission"."""
     got = best(found, "inpatient.acute", "any", stay_ok)
     daily = [f for f in got if days(f)]
@@ -340,7 +347,7 @@ def inpatient(organization, found):
     stays = keep(got, lambda f: f["unit"] == "per stay", lambda f: "a cost per stay won") if any(
         f["unit"] == "per stay" for f in got) else []
     if stays:
-        return [(f"{show(stays)} per admission", stays), ("", [])]
+        return [(f"{show(stays)} {per_stay}", stays), ("", [])]
     return [(show(got), got), ("", [])]
 
 
@@ -348,8 +355,8 @@ def unique(found):
     return list({id(f): f for f in found}.values())
 
 
-def giveback(organization, found):
-    """Shows the monthly Part B premium reduction."""
+def giveback(organization, found, dot_only=False):
+    """Shows the monthly Part B premium reduction, or a dot."""
     @unless("it is not a Part B premium reduction")
     def ok(f):
         return f["cost_kind"] in ("part_b_reduction", "covered") and not (f["package"] or f["provider_tier"])
@@ -360,7 +367,7 @@ def giveback(organization, found):
     for f in got:
         if paid and f not in paid:
             note(f, "a reduction amount won")
-    return [(show(paid), paid)] if paid else [("●", got)] if got else [("", [])]
+    return [("●" if dot_only else show(paid), paid)] if paid else [("●", got)] if got else [("", [])]
 
 
 @unless("it is not a coinsurance or $0 copay for a Part B drug")
@@ -369,13 +376,16 @@ def drug_price(f):
             and (f["cost_kind"] == "coinsurance" or f["amount"] == "$0"))
 
 
-def part_b_drugs(organization, found):
+def part_b_drugs(organization, found, highest=False):
     """Shows the range of Part B drug coinsurance, from each kind of drug's best source.
     A $0 copay, such as for vaccines, counts as 0%."""
     ok = screen([f for f in found if facts.covers("part_b_drugs", f["benefit"])], drug_price)
     got = [f for leaf in sorted({f["benefit"] for f in ok}) for f in top([g for g in ok if g["benefit"] == leaf])]
     percents = sorted(facts.number(n) for n in amounts(got))
-    return [(span(f"{percents[0]:g}%", f"{percents[-1]:g}%") if got else "", got)]
+    if not got:
+        return [("", got)]
+    low = percents[-1] if highest else percents[0]
+    return [(span(f"{low:g}%", f"{percents[-1]:g}%"), got)]
 
 
 def deductible_ok(f):
@@ -383,7 +393,7 @@ def deductible_ok(f):
             and not (f["condition"] or f["provider_tier"] or f["package"]))
 
 
-def medical_deductible(organization, found):
+def medical_deductible(organization, found, chart_wording=False):
     """Shows the in-network deductible, or else the out-of-network one, and says if it applies to some services only.
     A $0 in-network deductible shows as $0, whatever the out-of-network one is. When a fact says the deductible is
     Part B's, a covered deductible with no amount counts."""
@@ -412,9 +422,11 @@ def medical_deductible(organization, found):
             if f not in got:
                 note(f, "a $0 deductible won")
         return [("$0", got)]
+    if part_b and chart_wording:
+        return [("Same as 2027 Pt B Deductible", unique(got + some + part_b))]
     value = "Part B deductible" if part_b else show(got)
     if networks == ("out",):
-        value += " some out-of-network services" if some else " out-of-network only"
+        value += (" some OON" if chart_wording else " some out-of-network services") if some else " out-of-network only"
     elif some:
         value += " some"
     return [(value, unique(got + some + part_b))]
@@ -968,17 +980,35 @@ def plan_facts(data, document=None):
     return by_plan
 
 
-# A rule returns the lines of its column.
-COLUMNS = {"L_xray_imaging": xray_imaging, "AB_ambulance": ambulance, "I_outpatient_surgery": outpatient_surgery,
-           "F_primary_care": visits("office.pcp"), "G_specialist": visits("office.specialist"), "H_inpatient": inpatient,
-           "J_outpatient_rehab": outpatient_rehab, "K_tests_labs": tests_labs, "Z_part_b_reduction": giveback,
-           "M_part_b_drugs": part_b_drugs, "O_medical_deductible": medical_deductible,
+def once(rule):
+    """The rule, but two identical lines show once."""
+    def one(organization, found):
+        got = rule(organization, found)
+        if len(got) == 2 and got[0][0] == got[1][0]:
+            return [(got[0][0], unique(got[0][1] + got[1][1]))]
+        return got
+    return one
+
+
+ANY_SETTING = OFFICES + ("outpatient_hospital",)
+
+
+# A rule returns the lines of its column. Version 18 presents E-O and Z as SHIBA's final 2027 chart does.
+COLUMNS = {"L_xray_imaging": once(lambda o, found: xray_imaging(o, found, mammograms=False)), "AB_ambulance": ambulance,
+           "I_outpatient_surgery": once(lambda o, found: outpatient_surgery(o, found, zero_low_ends=False)),
+           "F_primary_care": once(visits("office.pcp")), "G_specialist": once(visits("office.specialist")),
+           "H_inpatient": lambda o, found: inpatient(o, found, per_stay="per admit"),
+           "J_outpatient_rehab": lambda o, found: outpatient_rehab(o, found, settings=ANY_SETTING),
+           "K_tests_labs": lambda o, found: tests_labs(o, found, zero_tests=("AgeRight",), lab_settings=ANY_SETTING),
+           "Z_part_b_reduction": lambda o, found: giveback(o, found, dot_only=True),
+           "M_part_b_drugs": lambda o, found: part_b_drugs(o, found, highest=True),
+           "O_medical_deductible": lambda o, found: medical_deductible(o, found, chart_wording=True),
            "S_acupuncture": dot("extras.acupuncture"), "T_chiropractic": dot("extras.chiropractic"),
            "V_massage": dot("extras.massage"), "X_transportation": dot("extras.transportation"),
            "R_dental": dot("dental.preventive", "dental.comprehensive"), "U_naturopath": dot("extras.naturopathy"),
            "P_vision": dot("vision.exam", "vision.eyewear"), "Q_hearing": dot("hearing.exam", "hearing.aids"),
            "W_fitness": dot("fitness"), "Y_otc": dot("otc"), "AA_opt_packages": packages, "C_premium": plan_premium,
-           "D_premium_full_extra_help": extra_help_premium, "E_moop": moop, "N_pharmacy_deductible": drug_deductible}
+           "D_premium_full_extra_help": extra_help_premium, "E_moop": once(moop), "N_pharmacy_deductible": drug_deductible}
 
 
 # The benefits each rule reads. A fact for a broader or narrower benefit is one the rule considers.
@@ -1048,7 +1078,12 @@ def plans(data):
 
 
 # Each column whose rule a version changed, that version, and the rule before it.
-EARLIER_RULES = {("dvha", "E_optional_packages"): (17, lambda o, found: optional_packages(o, found, allowances=False))}
+EARLIER_RULES = {("dvha", "E_optional_packages"): (17, lambda o, found: optional_packages(o, found, allowances=False))} | {
+    ("main", column): (18, rule) for column, rule in {
+        "E_moop": moop, "F_primary_care": visits("office.pcp"), "G_specialist": visits("office.specialist"),
+        "H_inpatient": inpatient, "I_outpatient_surgery": outpatient_surgery, "J_outpatient_rehab": outpatient_rehab,
+        "K_tests_labs": tests_labs, "L_xray_imaging": xray_imaging, "M_part_b_drugs": part_b_drugs,
+        "O_medical_deductible": medical_deductible, "Z_part_b_reduction": giveback}.items()}
 
 
 def rule(sheet, column, version):
@@ -1172,6 +1207,8 @@ VERSIONS[15] = {}
 VERSIONS[16] = {}
 # Version 17 holds no cell. It shows an optional package's eyewear and hearing aid allowances.
 VERSIONS[17] = {}
+# Version 18 holds no cell. It presents main columns as the final chart does.
+VERSIONS[18] = {}
 # The version that first presents each later column. Earlier versions hold its cells.
 SINCE = {("dvha", "C_premium"): 3, ("dvha", "G_vision"): 4, ("dvha", "H_hearing"): 4, ("dvha", "E_optional_packages"): 5,
          ("dvha", "F_dental"): 6, ("dvha", "I_alt_care_otc_travel"): 6, ("dvha", "J_extra_benefits"): 6,
