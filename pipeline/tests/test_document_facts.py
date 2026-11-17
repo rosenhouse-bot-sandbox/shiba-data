@@ -128,6 +128,24 @@ class StepTest(StepsTest):
         self.assertIn(("inherited/imaging/read", "parent"), asked)
         self.assertNotIn(("inherited/dental/read", "parent"), asked)
 
+    def test_a_version_can_read_a_group_fresh_instead_of_inheriting_it(self):
+        def fake(task_dir, model, effort):
+            for task in glob.glob(f"{task_dir}/*.md"):
+                text = pathlib.Path(task).read_text()
+                reply = ([{"id": n, "ok": True} for n in range(text.count('{"id": '))] if os.path.basename(task).startswith("v-")
+                         else [answer(page=1)] if model == "parent" else [answer(page=1, amount="$5", quotes=["X-rays $5 copay"])])
+                with open(task[:-3] + ".json", "w") as f:
+                    json.dump(reply, f)
+
+        parent = dict(groups=("imaging",), reader=("parent", "high"), verifier=("v", "low"))
+        child = dict(parent, reader=("child", "high"), inherits=8, fresh=("imaging",))
+        for sub in ("text", "layout"):
+            (self.work / sub / f"{SHA[:16]}.txt").write_text(f"=====PAGE 1=====\n{X_RAYS}\nX-rays $5 copay\n")
+        (self.work / "items" / f"{SHA[:16]}.json").write_text(json.dumps({"1": {"strs": [X_RAYS, "X-rays $5 copay"], "lefts": [0, 0]}}))
+        with mock.patch.dict(document_facts.VERSIONS, {8: parent, 9: child}):
+            document_facts.step(self.data, self.work, self.dir, fake, 9)
+        self.assertEqual([r["amount"] for r in facts.read(self.data / "machine" / "document_facts.csv")], ["$5"])
+
     def test_a_version_cannot_inherit_a_version_that_inherits(self):
         version = dict(groups=("imaging",), reader=("r", "high"), verifier=("v", "low"))
         with mock.patch.dict(document_facts.VERSIONS, {7: version, 8: dict(version, inherits=7), 9: dict(version, inherits=8)}), \
@@ -368,7 +386,8 @@ class StepTest(StepsTest):
 
     def test_version_28_shows_drug_deductible_readers_and_checkers_the_pages_that_list_tier_6(self):
         v27, v28 = document_facts.VERSIONS[27], document_facts.VERSIONS[28]
-        self.assertEqual(dict(v28, find=None, check_after=None), dict(v27, find=None, check_after=None))
+        self.assertEqual(dict(v28, find=None, check_after=None, fresh=None), dict(v27, find=None, check_after=None, fresh=None))
+        self.assertEqual(v28["fresh"], ("part_d_deductible",))
         pages = {1: "Tier 6 - Select Care Drugs", 2: "Cost-Sharing Tier 6 – Select", 3: "Tier 6 (Select Care Drugs)",
                  4: "Tier 16 - Specialty", 5: "Cost Sharing Tier 6    $0", 6: "Tier 5 - Specialty", 7: "Stier 6 - x"}
         self.assertEqual(sorted(extract.relevant(pages, "part_d_deductible", v28["find"]["part_d_deductible"])), [1, 2, 3])

@@ -101,10 +101,11 @@ def second_facts(texts, work, group, answer, v, data, plan_ids, known):
 
 
 def inherited(texts, work, group, answer, v, data):
-    """The group's facts: those of the version it inherits, and its own whose identity that version lacks."""
+    """The group's facts: those of the version it inherits, and its own whose identity that version lacks.
+    A group the version reads fresh inherits nothing."""
     own = group_facts(texts, work, group, answer, v, data)
     parent = VERSIONS.get(v.get("inherits"))
-    if not parent or group not in parent["groups"]:
+    if not parent or group not in parent["groups"] or group in v.get("fresh", ()):
         return own
     if "inherits" in parent:
         raise ValueError("A version cannot inherit a version that inherits.")
@@ -225,5 +226,6 @@ VERSIONS[27] = dict(VERSIONS[26], notes=VERSIONS[26]["notes"] | {"part_d_deducti
                     targets={"part_d_deductible": PART_D_PLANS})
 # Version 28 also shows those readers the pages that name tier 6, which rarely mention the deductible.
 # Its checkers see the page after the cited one, where those plans name tier 6.
+# It reads drug deductibles fresh, since version 23's tier lists leave out tier 6.
 VERSIONS[28] = dict(VERSIONS[27], find={"part_d_deductible": (r"\btier 6\s*[-–—(]",)},
-                    check_after=VERSIONS[27]["check_after"] | {"part_d_deductible": 1})
+                    check_after=VERSIONS[27]["check_after"] | {"part_d_deductible": 1}, fresh=("part_d_deductible",))
