@@ -256,7 +256,7 @@ VERSIONS[30] = dict(VERSIONS[29], recheck_plan_notes=VERSIONS[29]["recheck_plan_
                           "H5439-010-0": SPIROMETRY}},
     targets={"dental": ("H5216-455-0", "H1372-003-0"), "tests": ("H6815-038-0", "H5439-019-0", "H5439-010-0")})
 # Version 31 adds the in-network price for other tests that one Wellcare reader missed in version 30.
+# It keeps version 30's targets, since version 30 is not pinned.
 VERSIONS[31] = dict(VERSIONS[30], plan_notes={"tests": VERSIONS[30]["plan_notes"]["tests"] | {
     "H5439-019-0": SPIROMETRY + " Page 92's in-network column also gives `20% coinsurance for all other Medicare-covered "
-                   "services`: a `tests.diagnostic` coinsurance 20% fact with no `condition`."}},
-    targets={"tests": ("H5439-019-0",)})
+                   "services`: a `tests.diagnostic` coinsurance 20% fact with no `condition`."}})
