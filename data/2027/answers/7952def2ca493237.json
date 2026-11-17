@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-36.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 72: the Core buildup D2950 row sits under Comprehensive Services and shows 0% in network, which matches a dental.comprehensive 0% coinsurance fact.\"}]\n```",
+ "usage": {
+  "input_tokens": 3589,
+  "output_tokens": 243,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
