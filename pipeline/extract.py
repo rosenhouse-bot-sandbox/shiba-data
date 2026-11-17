@@ -71,8 +71,9 @@ def plans(data=DATA):
         return {r["plan_id"]: r for r in csv.DictReader(f)}
 
 
-def relevant(pages, group):
-    return {p: t for p, t in pages.items() if any(re.search(rx, t, re.I) for rx in facts.FIND[group])}
+def relevant(pages, group, find=()):
+    """find: patterns a version adds to the group's."""
+    return {p: t for p, t in pages.items() if any(re.search(rx, t, re.I) for rx in facts.FIND[group] + list(find))}
 
 
 def for_plans(notes, plan_notes, plan_ids):
@@ -110,13 +111,13 @@ def following(plan_after, plan_ids):
     return max((plan_after.get(p, 0) for p in plan_ids), default=0)
 
 
-def shown_pages(pages, group, after=0):
+def shown_pages(pages, group, after=0, find=()):
     """The relevant pages, and the after pages that follow each one, as when a price table goes on past its heading."""
-    found = relevant(pages, group)
+    found = relevant(pages, group, find)
     return {p: pages[p] for p in pages if any(p - n in found for n in range(after + 1))}
 
 
-def task(doc, plan_rows, pages, group, data, failed=(), known=None, plan_ids=(), notes={}, after=0):
+def task(doc, plan_rows, pages, group, data, failed=(), known=None, plan_ids=(), notes={}, after=0, find=()):
     parts = [fill("fact_prompt.md", doc, plan_rows, data, VOCABULARY=facts.describe(group, notes))]
     if known is not None:
         plans_text = ", ".join(sorted(plan_ids))
@@ -129,7 +130,7 @@ def task(doc, plan_rows, pages, group, data, failed=(), known=None, plan_ids=(),
                      "Code keeps the facts that passed. Reply with fixed versions of only these answers, "
                      "and leave out any you cannot fix.\n\n"
                      + "\n".join(f"- {printable(a)}: {why}" for a, why in failed))
-    parts.append("## Pages\n\n" + page_text(shown_pages(pages, group, after)))
+    parts.append("## Pages\n\n" + page_text(shown_pages(pages, group, after, find)))
     return "\n\n".join(parts) + "\n"
 
 
@@ -314,7 +315,7 @@ def write_outcomes(out_dir, outcomes):
         json.dump(outcomes, f, indent=1, ensure_ascii=False)
 
 
-def read(work, out_dir, group, data=DATA, ids=None, notes={}):
+def read(work, out_dir, group, data=DATA, ids=None, notes={}, find=()):
     """Writes a task for each document that mentions the group, or for those of them named in ids."""
     os.makedirs(out_dir, exist_ok=True)
     plan_rows = plans(data)
@@ -322,12 +323,12 @@ def read(work, out_dir, group, data=DATA, ids=None, notes={}):
         if ids is not None and doc["id"] not in ids:
             continue
         pages = Doc(work, doc["id"]).pages("layout")
-        if relevant(pages, group):
+        if relevant(pages, group, find):
             with open(f"{out_dir}/{doc['id']}.md", "w") as f:
-                f.write(task(doc, plan_rows, pages, group, data, notes=notes))
+                f.write(task(doc, plan_rows, pages, group, data, notes=notes, find=find))
 
 
-def reread(work, out_dir, group, plan_ids, known, data=DATA, notes={}, plan_notes={}, plan_after={}):
+def reread(work, out_dir, group, plan_ids, known, data=DATA, notes={}, plan_notes={}, plan_after={}, find=()):
     """Writes a task for each relevant document covering plan_ids. It lists the facts known for those plans and asks
     for the rest."""
     os.makedirs(out_dir, exist_ok=True)
@@ -335,15 +336,15 @@ def reread(work, out_dir, group, plan_ids, known, data=DATA, notes={}, plan_note
     for doc in documents(data):
         mine = [p for p in doc["plan_ids"] if p in plan_ids]
         pages = Doc(work, doc["id"]).pages("layout") if mine else {}
-        if mine and relevant(pages, group):
+        if mine and relevant(pages, group, find):
             theirs = [f for f in known if f["doc_sha"] == doc["sha256"] and f["plan_id"] in mine]
             with open(f"{out_dir}/{doc['id']}.md", "w") as f:
                 f.write(task(doc, plan_rows, pages, group, data, known=theirs, plan_ids=mine,
-                             notes=for_plans(notes, plan_notes, mine), after=following(plan_after, mine)))
+                             notes=for_plans(notes, plan_notes, mine), after=following(plan_after, mine), find=find))
 
 
 def extract_facts(work, answers_dir, group, out, data=DATA, merge=False, notes={}, zero=ZERO_GROUPS, plan_notes={},
-                  plan_after={}, reimburses=()):
+                  plan_after={}, reimburses=(), find=()):
     plan_rows, found, retries, outcomes = plans(data), [], 0, []
     for doc in documents(data):
         first = f"{answers_dir}/{doc['id']}.json"
@@ -363,7 +364,7 @@ def extract_facts(work, answers_dir, group, out, data=DATA, merge=False, notes={
             named_plans = {a.get("plan_id") for a, _ in failed if isinstance(a, dict) and isinstance(a.get("plan_id"), str)}
             with open(f"{answers_dir}/{doc['id']}.retry.md", "w") as f:
                 f.write(task(doc, plan_rows, pages, group, data, failed, notes=for_plans(notes, plan_notes, named_plans),
-                             after=following(plan_after, named_plans)))
+                             after=following(plan_after, named_plans), find=find))
             retries += 1
         found += got
     with open(out, "w") as f:

@@ -366,6 +366,12 @@ class StepTest(StepsTest):
         self.assertEqual(list(v27["targets"]), ["part_d_deductible"])
         self.assertEqual(len(v27["targets"]["part_d_deductible"]), 32)
 
+    def test_version_28_shows_drug_deductible_readers_the_pages_that_list_tier_6(self):
+        v27, v28 = document_facts.VERSIONS[27], document_facts.VERSIONS[28]
+        self.assertEqual(dict(v28, find=None), dict(v27, find=None))
+        self.assertEqual(sorted(extract.relevant({1: "Tier 6 - Select Care Drugs", 2: "Tier 16", 3: "Tier 5"}, "part_d_deductible",
+                                                 v28["find"]["part_d_deductible"])), [1])
+
     def test_a_second_reader_sees_the_pages_after_and_takes_reimbursements_as_its_version_says(self):
         page = "Members receive 100% reimbursement."
         for sub in ("text", "layout"):
@@ -401,6 +407,35 @@ class StepTest(StepsTest):
             self.assertEqual(any(r["amount"] == "0%" for r in rows), found, more)
             self.assertEqual({name: "=====PAGE 2=====" in text for name, text in rereads.items()},
                              {f"{SHA[:16]}.md": found, f"{SHA[:16]}.retry.md": found}, more)
+
+    def test_readers_see_the_pages_their_version_finds(self):
+        page = "Tier 6 Select Care Drugs"
+        for sub in ("text", "layout"):
+            with open(self.work / sub / f"{SHA[:16]}.txt", "a") as f:
+                f.write(f"=====PAGE 2=====\n{page}\n")
+        items = self.work / "items" / f"{SHA[:16]}.json"
+        items.write_text(json.dumps(json.loads(items.read_text()) | {"2": {"strs": [page], "lefts": [0]}}))
+        seen = {}
+
+        def fake(task_dir, model, effort):
+            for task in glob.glob(f"{task_dir}/*.md"):
+                text = pathlib.Path(task).read_text()
+                if os.path.basename(task).startswith("v-"):
+                    items = json.loads(pathlib.Path(f"{task_dir}/items.json").read_text())
+                    reply = [{"id": n, "ok": not c["decoy"]} for n, c in enumerate(items)]
+                else:
+                    seen[os.path.basename(task_dir), os.path.basename(task)] = page in text
+                    reply = [answer(page=1)] + ([] if "## Earlier answers" in text else [answer(page=1, amount="$99")])
+                with open(task[:-3] + ".json", "w") as f:
+                    json.dump(reply, f)
+
+        version = dict(groups=("imaging",), reader=("r", "high"), verifier=("v", "low"), recheck={"imaging": ("H1036-306-0",)})
+        for more, found in ((dict(find={"imaging": (r"tier 6",)}), True), ({}, False)):
+            seen.clear()
+            with mock.patch.dict(document_facts.VERSIONS, {9: version | more}):
+                document_facts.step(self.data, self.work, self.dir, fake, 9)
+            self.assertEqual(seen, {(stage, f"{SHA[:16]}{retry}.md"): found
+                                    for stage in ("read", "reread") for retry in ("", ".retry")}, more)
 
     def test_version_9_adds_vision_hearing_fitness_otc_and_packages_to_7(self):
         self.assertEqual(document_facts.VERSIONS[9], dict(document_facts.VERSIONS[7], groups=document_facts.VERSIONS[7]["groups"]

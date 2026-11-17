@@ -50,12 +50,11 @@ def merging(v, group):
 def group_facts(texts, work, group, answer, v, data):
     read, check = fresh(f"{work}/{group}/read"), fresh(f"{work}/{group}/check")
     found = f"{read}/facts.json"
-    notes = v.get("notes", {})
-    extract.read(texts, read, group, data, notes=notes)
-    answer(read, *v["reader"])
-    extract.extract_facts(texts, read, group, found, data, merging(v, group), notes, zero=zero(v))
-    answer(read, *v["reader"])
-    extract.extract_facts(texts, read, group, found, data, merging(v, group), notes, zero=zero(v))
+    notes, find = v.get("notes", {}), v.get("find", {}).get(group, ())
+    extract.read(texts, read, group, data, notes=notes, find=find)
+    for _ in range(2):
+        answer(read, *v["reader"])
+        extract.extract_facts(texts, read, group, found, data, merging(v, group), notes, zero=zero(v), find=find)
     extract.verify(texts, found, check, data, notes=review.checker_notes(v), after=v.get("check_after", {}),
                    before=v.get("check_before", {}))
     answer(check, *v["verifier"])
@@ -75,12 +74,12 @@ def second_facts(texts, work, group, answer, v, data, plan_ids, known):
     found = f"{read}/facts.json"
     notes = review.joined(v.get("notes", {}), v.get("recheck_notes", {}))
     plan_notes = v.get("recheck_plan_notes", {})
-    after = v.get("recheck_plan_after", {}).get(group, {})
-    extract.reread(texts, read, group, plan_ids, known, data, notes, plan_notes, after)
+    after, find = v.get("recheck_plan_after", {}).get(group, {}), v.get("find", {}).get(group, ())
+    extract.reread(texts, read, group, plan_ids, known, data, notes, plan_notes, after, find)
     for _ in range(2):
         answer(read, *v["reader"])
         extract.extract_facts(texts, read, group, found, data, merging(v, group), notes, zero=zero(v), plan_notes=plan_notes,
-                              plan_after=after, reimburses=v.get("recheck_reimburses", ()))
+                              plan_after=after, reimburses=v.get("recheck_reimburses", ()), find=find)
     seen = {tuple(f[c] for c in facts.KEY) for f in known}
 
     def skipped(r):
@@ -224,3 +223,5 @@ PART_D_PLANS = (
 # Its targets are the plans a dry run (blast.py) found it asks about: every plan with Part D.
 VERSIONS[27] = dict(VERSIONS[26], notes=VERSIONS[26]["notes"] | {"part_d_deductible": EVERY_TIER},
                     targets={"part_d_deductible": PART_D_PLANS})
+# Version 28 also shows those readers the pages that list tier 6, which rarely mention the deductible.
+VERSIONS[28] = dict(VERSIONS[27], find={"part_d_deductible": (r"\btier 6\b",)})
