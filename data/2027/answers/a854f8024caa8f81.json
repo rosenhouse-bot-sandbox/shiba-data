@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-19.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 92's in-network column for outpatient diagnostic tests reads '20% coinsurance for all other Medicare-covered services.' The instructions treat this as a tests.diagnostic coinsurance fact of 20% with no condition, and the item matches that.\"}]\n```",
+ "usage": {
+  "input_tokens": 2074,
+  "output_tokens": 224,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
