@@ -407,6 +407,27 @@ class StepTest(StepsTest):
         self.assertEqual(v29["fresh"], ("part_d_deductible", "tests"))
         self.assertEqual(v29["targets"], {"tests": ("H6815-038-0",)})
 
+    def test_version_30_points_readers_to_comprehensive_dental_and_spirometry_prices_they_missed(self):
+        v29, v30 = document_facts.VERSIONS[29], document_facts.VERSIONS[30]
+        changed = dict(plan_notes=None, recheck_plan_notes=None, recheck_plan_after=None, targets=None)
+        self.assertEqual(dict(v30, **changed), dict(v29, **changed))
+        notes = v30["recheck_plan_notes"]
+        self.assertEqual(dict(notes, dental=None), dict(v29["recheck_plan_notes"], dental=None))
+        dental = notes["dental"]
+        self.assertEqual(dict(dental, **{"H5216-455-0": None, "H1372-003-0": None}),
+                         dict(v29["recheck_plan_notes"]["dental"], **{"H5216-455-0": None, "H1372-003-0": None}))
+        self.assertIn("`dental.comprehensive` coinsurance 0%", dental["H5216-455-0"])
+        self.assertIn("`dental.comprehensive` copay $0", dental["H1372-003-0"])
+        self.assertEqual(v30["recheck_plan_after"]["dental"],
+                         v29["recheck_plan_after"]["dental"] | {"H5216-455-0": 3})
+        tests = v30["plan_notes"]["tests"]
+        wellcare = ("H6815-038-0", "H5439-019-0", "H5439-010-0")
+        self.assertEqual(tuple(tests), wellcare)
+        self.assertTrue(all("`tests.diagnostic`" in tests[p] and "Spirometry" in tests[p] for p in wellcare))
+        self.assertIn(document_facts.WELLCARE_EKG, tests["H6815-038-0"])
+        self.assertEqual(v30["targets"], {"dental": ("H5216-455-0", "H1372-003-0"), "tests": wellcare})
+        self.assertLessEqual({"H5216-455-0", "H1372-003-0"}, set(v30["recheck"]["dental"]))
+
     def test_a_second_reader_sees_the_pages_after_and_takes_reimbursements_as_its_version_says(self):
         page = "Members receive 100% reimbursement."
         for sub in ("text", "layout"):
