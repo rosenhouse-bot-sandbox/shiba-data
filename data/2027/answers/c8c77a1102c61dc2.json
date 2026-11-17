@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "61de2101267140ce.md",
+ "reply": "```json\n[{\"plan_id\": \"H1372-003-0\", \"benefit\": \"part_d_deductible\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"medicare\", \"cost_kind\": \"deductible\", \"amount\": \"$400\", \"condition\": \"not tier 1\", \"page\": 9,\n  \"quotes\": [\"$400\", \"Deductible applies to Tiers 2-5. For all other drugs, coverage applies\"],\n  \"note\": \"The plan has tiers 1-5 and the deductible applies to Tiers 2-5, so only tier 1 skips it.\"}]\n```",
+ "usage": {
+  "input_tokens": 2185,
+  "output_tokens": 584,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

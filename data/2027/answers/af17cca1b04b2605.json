@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-61de2101267140ce.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 9 deductible stage: $400 deductible for this plan, applying to Tiers 2-5. The plan has tiers 1-5 only, so it skips tier 1, which matches 'not tier 1'.\"}]\n```",
+ "usage": {
+  "input_tokens": 2154,
+  "output_tokens": 247,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
