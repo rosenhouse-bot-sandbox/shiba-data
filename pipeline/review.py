@@ -49,6 +49,14 @@ def second_notes(version):
     return joined(checker_notes(version), version.get("recheck_notes", {}))
 
 
+def plan_notes(version):
+    """Each group's notes per plan for second readers, their checkers and the reviewer: the plan_notes, then the
+    recheck_plan_notes. Plans keep their order, so a prompt that names two plans stays the same."""
+    first, second = version.get("plan_notes", {}), version.get("recheck_plan_notes", {})
+    return {g: {p: " ".join(n[p] for n in (first.get(g, {}), second.get(g, {})) if n.get(p))
+                for p in dict.fromkeys([*first.get(g, {}), *second.get(g, {})])} for g in set(first) | set(second)}
+
+
 def task(data, texts, notes={}, after={}, before={}, plan_notes={}):
     docs = {d["sha256"]: d for d in extract.documents(data)}
     plan_rows = extract.plans(data)
@@ -72,7 +80,7 @@ def gate(data, texts, work, answer, trusted_rows, new, version, present_version,
     Stops if more facts than version["review_cap"] lack a saved answer.
     Writes <work>/review/outcomes.json with each verdict, and the saved verdicts of the trusted facts that have one."""
     task_of = task_of or task(data, texts, second_notes(version), version.get("check_after", {}),
-                              version.get("check_before", {}), version.get("recheck_plan_notes", {}))
+                              version.get("check_before", {}), plan_notes(version))
     model, effort = version["reviewer"]
     verdict, unsaved, outcomes, out = {}, 0, [], f"{work}/review"
     while True:

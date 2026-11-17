@@ -50,13 +50,14 @@ def merging(v, group):
 def group_facts(texts, work, group, answer, v, data):
     read, check = fresh(f"{work}/{group}/read"), fresh(f"{work}/{group}/check")
     found = f"{read}/facts.json"
-    notes, find = v.get("notes", {}), v.get("find", {}).get(group, ())
-    extract.read(texts, read, group, data, notes=notes, find=find)
+    notes, find, plan_notes = v.get("notes", {}), v.get("find", {}).get(group, ()), v.get("plan_notes", {})
+    extract.read(texts, read, group, data, notes=notes, find=find, plan_notes=plan_notes)
     for _ in range(2):
         answer(read, *v["reader"])
-        extract.extract_facts(texts, read, group, found, data, merging(v, group), notes, zero=zero(v), find=find)
+        extract.extract_facts(texts, read, group, found, data, merging(v, group), notes, zero=zero(v), find=find,
+                              plan_notes=plan_notes)
     extract.verify(texts, found, check, data, notes=review.checker_notes(v), after=v.get("check_after", {}),
-                   before=v.get("check_before", {}))
+                   before=v.get("check_before", {}), plan_notes=plan_notes)
     answer(check, *v["verifier"])
     extract.accept(check, f"{check}/accepted.csv")
     accepted = facts.read(f"{check}/accepted.csv")
@@ -73,7 +74,7 @@ def second_facts(texts, work, group, answer, v, data, plan_ids, known):
     read, check = fresh(f"{work}/{group}/reread"), fresh(f"{work}/{group}/recheck")
     found = f"{read}/facts.json"
     notes = review.joined(v.get("notes", {}), v.get("recheck_notes", {}))
-    plan_notes = v.get("recheck_plan_notes", {})
+    plan_notes = review.plan_notes(v)
     after, find = v.get("recheck_plan_after", {}).get(group, {}), v.get("find", {}).get(group, ())
     extract.reread(texts, read, group, plan_ids, known, data, notes, plan_notes, after, find)
     for _ in range(2):
@@ -229,3 +230,11 @@ VERSIONS[27] = dict(VERSIONS[26], notes=VERSIONS[26]["notes"] | {"part_d_deducti
 # It reads drug deductibles fresh, since version 23's tier lists leave out tier 6.
 VERSIONS[28] = dict(VERSIONS[27], find={"part_d_deductible": (r"\btier 6\s*[-–—(]",)},
                     check_after=VERSIONS[27]["check_after"] | {"part_d_deductible": 1}, fresh=("part_d_deductible",))
+WELLCARE_EKG = ("In the Evidence of Coverage, page 83's row for diagnostic non-laboratory tests such as CT scans, MRIs, "
+                "EKGs and PET scans gives imaging prices, so it gives no `tests` fact. Its $200 in other settings is the "
+                "imaging price outside a hospital. Page 84's row for other outpatient diagnostic tests gives the "
+                "`tests.diagnostic` coinsurance.")
+# Version 29 tells every tests reader of one Wellcare plan that its EKG row prices imaging, as other Wellcare plans read it.
+# It reads tests fresh, since version 23 took that row's $200 for tests.
+VERSIONS[29] = dict(VERSIONS[28], plan_notes={"tests": {"H6815-038-0": WELLCARE_EKG}},
+                    fresh=VERSIONS[28]["fresh"] + ("tests",), targets={"tests": ("H6815-038-0",)})
