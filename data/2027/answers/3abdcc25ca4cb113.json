@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-8865a3a5b2f4fcad.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 6 Lab Services row: $50 copay for genetic testing, in network, with no setting named.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 6 Diagnostic Tests and Procedures row: 20% coinsurance for all other services. The $0 applies only to specified tests such as colonoscopy and spirometry.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 6 Lab Services row: $0 copay for all other labs (everything except genetic testing).\"}]\n```",
+ "usage": {
+  "input_tokens": 2325,
+  "output_tokens": 442,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
