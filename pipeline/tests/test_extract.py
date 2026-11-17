@@ -36,6 +36,8 @@ class PagesTest(unittest.TestCase):
         pages = PAGES | {63: "Tier 6 Select Care Drugs"}
         self.assertEqual(sorted(extract.relevant(pages, "imaging", find=(r"tier 6",))), [61, 62, 63])
         self.assertEqual(sorted(extract.shown_pages(pages, "imaging", find=(r"tier 6",))), [61, 62, 63])
+        with self.assertRaises(TypeError):
+            extract.relevant(pages, "imaging", find=r"tier 6")
 
     def test_can_show_the_pages_after_each_relevant_page(self):
         pages = PAGES | {63: "Crowns 50%", 64: "Bridges 50%", 65: "Index"}
@@ -317,8 +319,8 @@ class StepsTest(unittest.TestCase):
         self.assertIn("Dental cleanings", (self.dir / ("ef" * 8 + ".md")).read_text())
 
     def test_reread_finds_the_pages_a_version_adds(self):
-        self.step(extract.reread, self.work, self.dir, "imaging", plan_ids={"H1036-306-0"}, known=[], find=(r"nothing",))
-        self.assertEqual(os.listdir(self.dir), [f"{SHA[:16]}.md"])
+        self.step(extract.reread, self.work, self.dir, "imaging", plan_ids={"H1036-306-0"}, known=[], find=(r"cleanings",))
+        self.assertIn("Dental cleanings", (self.dir / ("ef" * 8 + ".md")).read_text())
 
     def test_read_can_skip_documents(self):
         self.step(extract.read, self.work, self.dir, "imaging", ids=set())

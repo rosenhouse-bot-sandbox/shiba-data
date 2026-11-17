@@ -366,11 +366,13 @@ class StepTest(StepsTest):
         self.assertEqual(list(v27["targets"]), ["part_d_deductible"])
         self.assertEqual(len(v27["targets"]["part_d_deductible"]), 32)
 
-    def test_version_28_shows_drug_deductible_readers_the_pages_that_list_tier_6(self):
+    def test_version_28_shows_drug_deductible_readers_and_checkers_the_pages_that_list_tier_6(self):
         v27, v28 = document_facts.VERSIONS[27], document_facts.VERSIONS[28]
-        self.assertEqual(dict(v28, find=None), dict(v27, find=None))
-        self.assertEqual(sorted(extract.relevant({1: "Tier 6 - Select Care Drugs", 2: "Tier 16", 3: "Tier 5"}, "part_d_deductible",
-                                                 v28["find"]["part_d_deductible"])), [1])
+        self.assertEqual(dict(v28, find=None, check_after=None), dict(v27, find=None, check_after=None))
+        pages = {1: "Tier 6 - Select Care Drugs", 2: "Cost-Sharing Tier 6 – Select", 3: "Tier 6 (Select Care Drugs)",
+                 4: "Tier 16 - Specialty", 5: "Cost Sharing Tier 6    $0", 6: "Tier 5 - Specialty", 7: "Stier 6 - x"}
+        self.assertEqual(sorted(extract.relevant(pages, "part_d_deductible", v28["find"]["part_d_deductible"])), [1, 2, 3])
+        self.assertEqual(v28["check_after"], v27["check_after"] | {"part_d_deductible": 1})
 
     def test_a_second_reader_sees_the_pages_after_and_takes_reimbursements_as_its_version_says(self):
         page = "Members receive 100% reimbursement."
