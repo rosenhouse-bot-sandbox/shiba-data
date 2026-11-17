@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "8865a3a5b2f4fcad.md",
+ "reply": "```json\n[{\"plan_id\": \"H6815-038-0\", \"benefit\": \"part_d_deductible\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"deductible\", \"amount\": \"$700\", \"limit\": \"per year\", \"condition\": \"not tiers 1\", \"page\": 13, \"quotes\": [\"$700 for Part D prescription drugs\"], \"note\": \"The deductible applies to Tiers 2-5. The page names no Tier 1, but tiers 2-5 are listed and all other covered drugs skip the deductible, so Tier 1 is taken as the skipped tier.\"}]\n```",
+ "usage": {
+  "input_tokens": 2081,
+  "output_tokens": 455,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

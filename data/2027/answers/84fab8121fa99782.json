@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-23e2bdae59ea8981.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 8 Part D deductible: $700 for Tiers 3, 4 and 5 and $0 for Tiers 1 and 2. The plan has five tiers, so the deductible skips tiers 1 and 2.\"}]\n```",
+ "usage": {
+  "input_tokens": 2560,
+  "output_tokens": 263,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
