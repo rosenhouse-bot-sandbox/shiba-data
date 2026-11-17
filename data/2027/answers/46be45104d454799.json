@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-37.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 128, Section 4: yearly deductible of $400 on Tiers 2, 3, 4 and 5; other drugs have no deductible. Page 129 shows the plan has only 5 tiers, so 'not tier 1' is complete.\"}]\n```",
+ "usage": {
+  "input_tokens": 2978,
+  "output_tokens": 359,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
