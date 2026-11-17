@@ -223,5 +223,7 @@ PART_D_PLANS = (
 # Its targets are the plans a dry run (blast.py) found it asks about: every plan with Part D.
 VERSIONS[27] = dict(VERSIONS[26], notes=VERSIONS[26]["notes"] | {"part_d_deductible": EVERY_TIER},
                     targets={"part_d_deductible": PART_D_PLANS})
-# Version 28 also shows those readers the pages that list tier 6, which rarely mention the deductible.
-VERSIONS[28] = dict(VERSIONS[27], find={"part_d_deductible": (r"\btier 6\b",)})
+# Version 28 also shows those readers the pages that name tier 6, which rarely mention the deductible.
+# Its checkers see the page after the cited one, where those plans name tier 6.
+VERSIONS[28] = dict(VERSIONS[27], find={"part_d_deductible": (r"\btier 6\s*[-–—(]",)},
+                    check_after=VERSIONS[27]["check_after"] | {"part_d_deductible": 1})

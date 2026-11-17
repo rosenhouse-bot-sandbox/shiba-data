@@ -73,6 +73,8 @@ def plans(data=DATA):
 
 def relevant(pages, group, find=()):
     """find: patterns a version adds to the group's."""
+    if isinstance(find, str):
+        raise TypeError("find takes a tuple of patterns")
     return {p: t for p, t in pages.items() if any(re.search(rx, t, re.I) for rx in facts.FIND[group] + list(find))}
 
 
