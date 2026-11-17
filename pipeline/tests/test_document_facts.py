@@ -428,6 +428,15 @@ class StepTest(StepsTest):
         self.assertEqual(v30["targets"], {"dental": ("H5216-455-0", "H1372-003-0"), "tests": wellcare})
         self.assertLessEqual({"H5216-455-0", "H1372-003-0"}, set(v30["recheck"]["dental"]))
 
+    def test_version_31_points_one_wellcare_reader_to_its_in_network_price_for_other_tests(self):
+        v30, v31 = document_facts.VERSIONS[30], document_facts.VERSIONS[31]
+        self.assertEqual(dict(v31, plan_notes=None, targets=None), dict(v30, plan_notes=None, targets=None))
+        tests = v31["plan_notes"]["tests"]
+        self.assertEqual(dict(tests, **{"H5439-019-0": None}), dict(v30["plan_notes"]["tests"], **{"H5439-019-0": None}))
+        self.assertIn(document_facts.SPIROMETRY, tests["H5439-019-0"])
+        self.assertIn("`tests.diagnostic` coinsurance 20% fact with no `condition`", tests["H5439-019-0"])
+        self.assertEqual(v31["targets"], {"tests": ("H5439-019-0",)})
+
     def test_a_second_reader_sees_the_pages_after_and_takes_reimbursements_as_its_version_says(self):
         page = "Members receive 100% reimbursement."
         for sub in ("text", "layout"):
