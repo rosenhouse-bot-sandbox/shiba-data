@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-28.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 57 supplemental dental row: no coinsurance or copayment for supplemental dental benefits, with a $1,000 maximum covering preventive and comprehensive services. The row names no network, so it is in network. Comprehensive dental is a covered supplemental benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 3125,
+  "output_tokens": 618,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

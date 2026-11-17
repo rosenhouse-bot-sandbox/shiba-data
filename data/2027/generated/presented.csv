@@ -104,9 +104,9 @@ dvha,H1036-323-0,J_extra_benefits,,Fitness; Meals,https://assets.humana.com/is/c
 dvha,H1036-323-0,J_extra_benefits,,Fitness; Meals,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,56,Meal program limited to 4 times per calendar year.
 dvha,H1036-323-0,J_extra_benefits,,Fitness; Meals,https://assets.humana.com/is/content/humana/H1036323000EOC27pdf,71,In-Network: $0 copayment
 dvha,H1372-003-0,C_premium,,$69,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,12,"For 2027, the monthly plan premium for AgeRight Advantage Premier Health Plan (HMO C-SNP) is $69.00."
-dvha,H1372-003-0,F_dental,,"PREV $0; max $1,000/year PREV+COMP",https://agerightadvantage.com/wp-content/uploads/2026/09/H1372_003_0_SB_v07.pdf,5,$0 copay for:
-dvha,H1372-003-0,F_dental,,"PREV $0; max $1,000/year PREV+COMP",https://agerightadvantage.com/wp-content/uploads/2026/09/H1372_003_0_SB_v07.pdf,5,"Up to $1,000 allowance every year for"
-dvha,H1372-003-0,F_dental,,"PREV $0; max $1,000/year PREV+COMP",https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,57,"Maximum: $1,000 for preventive services and comprehensive services"
+dvha,H1372-003-0,F_dental,,"PREV $0; COMP $0; max $1,000/year PREV+COMP",https://agerightadvantage.com/wp-content/uploads/2026/09/H1372_003_0_SB_v07.pdf,5,$0 copay for:
+dvha,H1372-003-0,F_dental,,"PREV $0; COMP $0; max $1,000/year PREV+COMP",https://agerightadvantage.com/wp-content/uploads/2026/09/H1372_003_0_SB_v07.pdf,5,"Up to $1,000 allowance every year for"
+dvha,H1372-003-0,F_dental,,"PREV $0; COMP $0; max $1,000/year PREV+COMP",https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,57,"Maximum: $1,000 for preventive services and comprehensive services"
 dvha,H1372-003-0,G_vision,,exam $0/year; eyewear $330/year,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,102,"Eyewear (or other vision hardware) $330 every year for lenses,"
 dvha,H1372-003-0,G_vision,,exam $0/year; eyewear $330/year,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,102,Limit 1 visit every year
 dvha,H1372-003-0,G_vision,,exam $0/year; eyewear $330/year,https://agerightadvantage.com/wp-content/uploads/2026/10/H1372_003_0_EOC_v03_508.pdf,102,Routine eye exam $0 copayment
@@ -572,9 +572,10 @@ dvha,H5216-428-2,J_extra_benefits,,Fitness; After a heart-failure hospital stay:
 dvha,H5216-428-2,J_extra_benefits,,Fitness; After a heart-failure hospital stay: home-delivered meals,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,57,home delivered meals per day for 30 days (up to 60 meals)
 dvha,H5216-428-2,J_extra_benefits,,Fitness; After a heart-failure hospital stay: home-delivered meals,https://assets.humana.com/is/content/humana/H5216428002EOC27pdf,77,In-Network: $0 copayment
 dvha,H5216-455-0,C_premium,,$0,https://assets.humana.com/is/content/humana/H5216455000SB27pdf,5,Monthly plan premium $0
-dvha,H5216-455-0,F_dental,,"PREV $0; max $2,500/year PREV+COMP",https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,71,"Annual Maximum: $2,500"
-dvha,H5216-455-0,F_dental,,"PREV $0; max $2,500/year PREV+COMP",https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,71,Benefits received out-of-network are subject to any in-network benefit maximums
-dvha,H5216-455-0,F_dental,,"PREV $0; max $2,500/year PREV+COMP",https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,71,Periodic oral exam – D0120 0%
+dvha,H5216-455-0,F_dental,,"PREV $0; COMP $0; max $2,500/year PREV+COMP",https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,71,"Annual Maximum: $2,500"
+dvha,H5216-455-0,F_dental,,"PREV $0; COMP $0; max $2,500/year PREV+COMP",https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,71,Benefits received out-of-network are subject to any in-network benefit maximums
+dvha,H5216-455-0,F_dental,,"PREV $0; COMP $0; max $2,500/year PREV+COMP",https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,71,Periodic oral exam – D0120 0%
+dvha,H5216-455-0,F_dental,,"PREV $0; COMP $0; max $2,500/year PREV+COMP",https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,72,Core buildup – D2950 0%
 dvha,H5216-455-0,G_vision,,exam $0/year; eyewear $75/year ($150 at PLUS providers),https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,78,$0
 dvha,H5216-455-0,G_vision,,exam $0/year; eyewear $75/year ($150 at PLUS providers),https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,78,Routine Eye Exam including refraction (1 per calendar year) by
 dvha,H5216-455-0,G_vision,,exam $0/year; eyewear $75/year ($150 at PLUS providers),https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,79,$0 for refraction exam
@@ -2585,6 +2586,7 @@ main,H5216-455-0,R_dental,,●,https://assets.humana.com/is/content/humana/H5216
 main,H5216-455-0,R_dental,,●,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,71,"Annual Maximum: $2,500"
 main,H5216-455-0,R_dental,,●,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,71,Benefits received out-of-network are subject to any in-network benefit maximums
 main,H5216-455-0,R_dental,,●,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,71,Periodic oral exam – D0120 0%
+main,H5216-455-0,R_dental,,●,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,72,Core buildup – D2950 0%
 main,H5216-455-0,S_acupuncture,,,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,36,In-Network: $40 copayment – Specialist’s Office
 main,H5216-455-0,S_acupuncture,,,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,36,Up to 20 visits per calendar year under the following circumstances:
 main,H5216-455-0,S_acupuncture,,,https://assets.humana.com/is/content/humana/H5216455000EOC27pdf,81,Available for people with chronic low back pain under certain
@@ -2614,9 +2616,12 @@ main,H5439-010-0,I_outpatient_surgery,2,$200,https://www.wellcareor.com/content/
 main,H5439-010-0,J_outpatient_rehab,,$25,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,85,$25 copay for each Medicare-covered physical therapy visit.
 main,H5439-010-0,J_outpatient_rehab,,$25,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,86,$25 copay for each Medicare-covered occupational therapy visit.
 main,H5439-010-0,J_outpatient_rehab,,$25,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,86,$25 copay for each Medicare-covered speech language therapy visit.
-main,H5439-010-0,K_tests_labs,,20%/$0-$10,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,81,20% coinsurance for all other Medicare-covered services.
-main,H5439-010-0,K_tests_labs,,20%/$0-$10,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H5439_010_2027_OR_SB_PMAO_7017600ENG_M.pdf,7,$0 copay for labs related to A1C and kidney health evaluation.
-main,H5439-010-0,K_tests_labs,,20%/$0-$10,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H5439_010_2027_OR_SB_PMAO_7017600ENG_M.pdf,7,$10 copay for all other labs.
+main,H5439-010-0,K_tests_labs,,$0-20%/$0-$10,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,111,$0 copay for each Medicare-covered EKG following the Welcome to Medicare Preventive Service.
+main,H5439-010-0,K_tests_labs,,$0-20%/$0-$10,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,79,$0 copay for labs related to A1C and kidney health evaluation.
+main,H5439-010-0,K_tests_labs,,$0-20%/$0-$10,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,79,$10 copay for all other Medicare-covered lab services.
+main,H5439-010-0,K_tests_labs,,$0-20%/$0-$10,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,81,0% coinsurance for Spirometry.
+main,H5439-010-0,K_tests_labs,,$0-20%/$0-$10,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,81,20% coinsurance for all other Medicare-covered services.
+main,H5439-010-0,K_tests_labs,,$0-20%/$0-$10,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,81,Other outpatient diagnostic tests
 main,H5439-010-0,L_xray_imaging,1,$50,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,78,$50 copay for Medicare-covered X-rays.
 main,H5439-010-0,L_xray_imaging,2,$125,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,80,$125 copay for all other Medicare-covered services received in other settings (such as a physician office or freestanding facility).
 main,H5439-010-0,M_part_b_drugs,,20%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_010_2027_OR_EOC_PMAO_7001732ENG_C.pdf,67,"There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines."
@@ -2803,9 +2808,9 @@ main,H5439-019-0,I_outpatient_surgery,2,$350,https://www.wellcareor.com/content/
 main,H5439-019-0,J_outpatient_rehab,,$30,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,96,$30 copay for each Medicare-covered occupational therapy visit.
 main,H5439-019-0,J_outpatient_rehab,,$30,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,96,$30 copay for each Medicare-covered physical therapy visit.
 main,H5439-019-0,J_outpatient_rehab,,$30,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,97,$30 copay for each Medicare-covered speech language therapy visit.
-main,H5439-019-0,K_tests_labs,,20%/$0-$10,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,90,$0 copay for labs related to A1C and kidney health evaluation.
-main,H5439-019-0,K_tests_labs,,20%/$0-$10,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,90,$10 copay for all other Medicare-covered lab services.
-main,H5439-019-0,K_tests_labs,,20%/$0-$10,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/sb/H5439_019_2027_OR_SB_PPO_7017570ENG_M.pdf,7,20% coinsurance for all other services.
+main,H5439-019-0,K_tests_labs,,0%/$0-$10,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,90,$0 copay for labs related to A1C and kidney health evaluation.
+main,H5439-019-0,K_tests_labs,,0%/$0-$10,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,90,$10 copay for all other Medicare-covered lab services.
+main,H5439-019-0,K_tests_labs,,0%/$0-$10,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,92,Deductible may apply. 0% coinsurance for Spirometry.
 main,H5439-019-0,L_xray_imaging,1,$50,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,89,$50 copay for Medicare-covered X-rays.
 main,H5439-019-0,L_xray_imaging,2,$250,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,91,$250 copay for all other Medicare-covered services received in other settings (such as a physician office or freestanding facility).
 main,H5439-019-0,M_part_b_drugs,,20%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H5439_019_2027_OR_EOC_PPO_7001682ENG_C.pdf,78,"There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines."
@@ -2860,9 +2865,9 @@ main,H6815-038-0,I_outpatient_surgery,2,$300,https://www.wellcareor.com/content/
 main,H6815-038-0,J_outpatient_rehab,,$25,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,87,$25 copay for each Medicare-covered physical therapy visit.
 main,H6815-038-0,J_outpatient_rehab,,$25,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,88,$25 copay for each Medicare-covered occupational therapy visit.
 main,H6815-038-0,J_outpatient_rehab,,$25,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,88,$25 copay for each Medicare-covered speech language therapy visit.
-main,H6815-038-0,K_tests_labs,,20%/$0,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,83,$0 copay for all other Medicare-covered lab services.
-main,H6815-038-0,K_tests_labs,,20%/$0,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,84,20% coinsurance for all other Medicare-covered services.
-main,H6815-038-0,K_tests_labs,,20%/$0,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,84,Other outpatient diagnostic tests
+main,H6815-038-0,K_tests_labs,,0%-20%/$0,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,83,$0 copay for all other Medicare-covered lab services.
+main,H6815-038-0,K_tests_labs,,0%-20%/$0,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,84,0% coinsurance for Spirometry.
+main,H6815-038-0,K_tests_labs,,0%-20%/$0,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,84,20% coinsurance for all other Medicare-covered services.
 main,H6815-038-0,L_xray_imaging,1,$50,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,82,$50 copay for Medicare-covered X-rays.
 main,H6815-038-0,L_xray_imaging,2,$200,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,83,$200 copay for all other Medicare-covered services received in other settings (such as a physician office or freestanding facility).
 main,H6815-038-0,M_part_b_drugs,,20%,https://www.wellcareor.com/content/dam/centene/medicare/pdfs/aep/2027/eoc/H6815_038_2027_OR_EOC_HMAPD_7001734ENG_C.pdf,74,"There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza, Hepatitis B, and COVID-19 vaccines."
