@@ -234,6 +234,22 @@ class VersionTest(unittest.TestCase):
         self.assertEqual(notes[fact()["plan_id"]], {"imaging": "This plan."})
         self.assertEqual(notes["H1036-306-0"], {})
 
+    def test_asks_with_the_plan_notes_of_every_reader_then_of_second_readers(self):
+        plan = fact()["plan_id"]
+        with tempfile.TemporaryDirectory() as work, mock.patch.object(review, "Doc") as doc, \
+                mock.patch.object(extract, "verifier_task", return_value="task") as verifier_task:
+            doc.return_value.pages.return_value = {}
+            review.gate(DATA, None, work, answering(), TRUSTED, COMMITTED + [fact()],
+                        dict(reviewer=("m", "e"), review_cap=10, plan_notes={"imaging": {plan: "Every reader."}},
+                             recheck_plan_notes={"imaging": {plan: "This plan."}}), HELD)
+        notes = {c.args[3][0]["plan_id"]: c.args[-1] for c in verifier_task.call_args_list}
+        self.assertEqual(notes[plan], {"imaging": "Every reader. This plan."})
+
+    def test_plan_notes_keep_the_order_the_version_gives_its_plans(self):
+        plans = [f"H{n:04}-000-0" for n in range(20)]
+        version = dict(plan_notes={"imaging": {p: p for p in plans}}, recheck_plan_notes={"imaging": {plans[0]: "Again."}})
+        self.assertEqual(list(review.plan_notes(version)["imaging"]), plans)
+
     def test_shows_the_pages_after_that_the_version_asks_for(self):
         with tempfile.TemporaryDirectory() as work, mock.patch.object(review, "Doc") as doc, \
                 mock.patch.object(extract, "verifier_task", return_value="task") as verifier_task:

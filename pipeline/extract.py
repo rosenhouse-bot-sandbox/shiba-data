@@ -317,7 +317,7 @@ def write_outcomes(out_dir, outcomes):
         json.dump(outcomes, f, indent=1, ensure_ascii=False)
 
 
-def read(work, out_dir, group, data=DATA, ids=None, notes={}, find=()):
+def read(work, out_dir, group, data=DATA, ids=None, notes={}, find=(), plan_notes={}):
     """Writes a task for each document that mentions the group, or for those of them named in ids."""
     os.makedirs(out_dir, exist_ok=True)
     plan_rows = plans(data)
@@ -327,7 +327,7 @@ def read(work, out_dir, group, data=DATA, ids=None, notes={}, find=()):
         pages = Doc(work, doc["id"]).pages("layout")
         if relevant(pages, group, find):
             with open(f"{out_dir}/{doc['id']}.md", "w") as f:
-                f.write(task(doc, plan_rows, pages, group, data, notes=notes, find=find))
+                f.write(task(doc, plan_rows, pages, group, data, notes=for_plans(notes, plan_notes, doc["plan_ids"]), find=find))
 
 
 def reread(work, out_dir, group, plan_ids, known, data=DATA, notes={}, plan_notes={}, plan_after={}, find=()):

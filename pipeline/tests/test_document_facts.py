@@ -61,7 +61,8 @@ class StepTest(StepsTest):
         version = dict(groups=("imaging",), reader=("r", "high"), verifier=("v", "low"), notes={"imaging": "Read this."},
                        check_notes={"imaging": "Check this."}, recheck_notes={"imaging": "Look again."},
                        check_after={"imaging": 1}, check_before={"imaging": 1}, recheck={"imaging": ("H1036-306-0",)},
-                       recheck_plan_notes={"imaging": {"H1036-306-0": "Mind page 2.", "H1036-307-0": "Other plan."}})
+                       recheck_plan_notes={"imaging": {"H1036-306-0": "Mind page 2.", "H1036-307-0": "Other plan."}},
+                       plan_notes={"imaging": {"H1036-306-0": "Every reader.", "H1036-307-0": "Elsewhere."}})
         with mock.patch.dict(document_facts.VERSIONS, {9: version}):
             document_facts.step(self.data, self.work, self.dir, fake, 9)
         self.assertEqual({name.split("/")[0] for name in prompts}, {"read", "check", "reread", "recheck"})
@@ -74,8 +75,11 @@ class StepTest(StepsTest):
         second = {name: name.split("/")[0] in ("reread", "recheck") for name in prompts}
         self.assertEqual([name for name, text in prompts.items() if ("Check this." in text) != checking[name]], [])
         self.assertEqual([name for name, text in prompts.items() if ("Look again." in text) != second[name]], [])
-        self.assertEqual([name for name, text in prompts.items() if ("Look again. Mind page 2." in text) != second[name]], [])
+        self.assertEqual([name for name, text in prompts.items() if ("Look again. Every reader. Mind page 2." in text) != second[name]], [])
+        self.assertEqual([name for name, text in prompts.items() if "Every reader." not in text], [])
         self.assertEqual([name for name, text in prompts.items() if "Other plan." in text], [])
+        # The first reader reads the whole document, which covers both plans.
+        self.assertEqual([name for name, text in prompts.items() if "Elsewhere." in text], [f"read/{SHA[:16]}.md"])
         self.assertEqual([name for name, text in prompts.items() if ("=====PAGE 2=====" in text) != checking[name]], [])
         self.assertEqual([name for name, text in prompts.items() if ("=====PAGE 0=====" in text) != checking[name]], [])
 
@@ -392,6 +396,16 @@ class StepTest(StepsTest):
                  4: "Tier 16 - Specialty", 5: "Cost Sharing Tier 6    $0", 6: "Tier 5 - Specialty", 7: "Stier 6 - x"}
         self.assertEqual(sorted(extract.relevant(pages, "part_d_deductible", v28["find"]["part_d_deductible"])), [1, 2, 3])
         self.assertEqual(v28["check_after"], v27["check_after"] | {"part_d_deductible": 1})
+
+    def test_version_29_tells_every_tests_reader_of_one_wellcare_plan_that_its_ekg_row_prices_imaging(self):
+        v28, v29 = document_facts.VERSIONS[28], document_facts.VERSIONS[29]
+        changed = dict(plan_notes=None, fresh=None, targets=None)
+        self.assertEqual(dict(v29, **changed), dict(v28, **changed))
+        self.assertEqual(list(v29["plan_notes"]), ["tests"])
+        self.assertEqual(list(v29["plan_notes"]["tests"]), ["H6815-038-0"])
+        self.assertIn("EKGs", v29["plan_notes"]["tests"]["H6815-038-0"])
+        self.assertEqual(v29["fresh"], ("part_d_deductible", "tests"))
+        self.assertEqual(v29["targets"], {"tests": ("H6815-038-0",)})
 
     def test_a_second_reader_sees_the_pages_after_and_takes_reimbursements_as_its_version_says(self):
         page = "Members receive 100% reimbursement."
