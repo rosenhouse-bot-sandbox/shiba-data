@@ -238,3 +238,20 @@ WELLCARE_EKG = ("In the Evidence of Coverage, page 83's row for diagnostic non-l
 # It reads tests fresh, since version 23 took that row's $200 for tests.
 VERSIONS[29] = dict(VERSIONS[28], plan_notes={"tests": {"H6815-038-0": WELLCARE_EKG}},
                     fresh=VERSIONS[28]["fresh"] + ("tests",), targets={"tests": ("H6815-038-0",)})
+SPIROMETRY = ("In the Evidence of Coverage, the spirometry row prices a diagnostic test: it gives a `tests.diagnostic` "
+              "coinsurance fact with `condition` `Spirometry` for each network it prices.")
+# Version 30 adds prices that readers missed: two plans' comprehensive dental and three Wellcare plans' spirometry,
+# which other Wellcare plans read.
+VERSIONS[30] = dict(VERSIONS[29], recheck_plan_notes=VERSIONS[29]["recheck_plan_notes"] | {"dental": VERSIONS[29][
+    "recheck_plan_notes"]["dental"] | {
+    "H5216-455-0": "Pages 71 to 75 give the dental code table. Every code under `Comprehensive Services`, such as "
+                   "fillings, extractions and crowns, costs 0% in-network and out-of-network: a `dental.comprehensive` "
+                   "coinsurance 0% fact for each network.",
+    "H1372-003-0": "The Summary of Benefits row for preventive and comprehensive dental services gives `$0 copay for:`, "
+                   "and page 57 of the Evidence of Coverage says there is no coinsurance or copayment for supplemental "
+                   "dental benefits, including the comprehensive services on page 58. So the Summary's row also gives a "
+                   "`dental.comprehensive` copay $0 fact."}},
+    recheck_plan_after={"dental": VERSIONS[29]["recheck_plan_after"]["dental"] | {"H5216-455-0": 3}},
+    plan_notes={"tests": {"H6815-038-0": WELLCARE_EKG + " " + SPIROMETRY, "H5439-019-0": SPIROMETRY,
+                          "H5439-010-0": SPIROMETRY}},
+    targets={"dental": ("H5216-455-0", "H1372-003-0"), "tests": ("H6815-038-0", "H5439-019-0", "H5439-010-0")})
