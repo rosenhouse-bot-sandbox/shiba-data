@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "557f08e61a7e8f42.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H9003-009-0\", \"benefit\": \"hearing.aids\", \"setting\": \"any\", \"network\": \"in\", \"condition\": \"clean, service, and check a hearing aid that is no longer under warranty\", \"package\": \"Advantage Plus\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$10\", \"unit\": \"per visit\", \"page\": 107, \"quotes\": [\"Clean, service, and check a hearing aid that is no longer under\", \"$10 per visit.\"], \"note\": \"Cost to clean, service and check a hearing aid after its warranty ends.\"},\n{\"plan_id\": \"H9003-009-0\", \"benefit\": \"hearing.aids\", \"setting\": \"any\", \"network\": \"in\", \"condition\": \"reprogramming fee for a hearing aid that is no longer under warranty\", \"package\": \"Advantage Plus\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$35\", \"unit\": \"per aid\", \"page\": 107, \"quotes\": [\"Reprogramming fee if needed for a hearing aid that is no\", \"$35 per aid.\"], \"note\": \"Reprogramming fee for a hearing aid after its warranty ends.\"}]\n```",
+ "usage": {
+  "input_tokens": 8913,
+  "output_tokens": 856,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

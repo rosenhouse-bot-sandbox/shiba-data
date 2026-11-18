@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "5f6896f5c437eeed.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H7199-002-0\", \"benefit\": \"hearing\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$40\", \"page\": 7, \"quotes\": [\"Evaluation: $0 copay Medicare-Covered Hearing Care: $40 copay\"], \"note\": \"This quote reads the in-network column straight down. It includes the line above to make it unique, and the footnote asterisk is left out.\"},\n {\"plan_id\": \"H7199-002-0\", \"benefit\": \"hearing\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$40\", \"page\": 7, \"quotes\": [\"Evaluation: $35 copay Medicare-Covered Hearing Care: $40 copay\"], \"note\": \"This quote reads the out-of-network column straight down. It includes the line above to make it unique, and the footnote asterisk is left out.\"}]\n```",
+ "usage": {
+  "input_tokens": 3163,
+  "output_tokens": 1004,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

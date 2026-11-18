@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-108.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 76 says up to two hearing aids per year, one per ear. That is a count, so it should be a visit_limit fact (2, per year), not a 'covered' fact, which is only for when no amount is stated.\"}]\n```",
+ "usage": {
+  "input_tokens": 3143,
+  "output_tokens": 536,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

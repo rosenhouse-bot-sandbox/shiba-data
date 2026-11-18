@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "bee1858e7e963c62.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H7006-018-0\", \"benefit\": \"hearing.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 59, \"quotes\": [\"Additional routine hearing exams\", \"Medicare-covered service. In-Network $0 copay\"], \"note\": \"The cost quote reads the right-hand column straight down. It starts at the end of the diagnostic row so that it occurs only once, and its '$0 copay' is the routine hearing exam's in-network copay.\"},\n {\"plan_id\": \"H7006-018-0\", \"benefit\": \"hearing.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"condition\": \"fitting/evaluation\", \"page\": 59, \"quotes\": [\"Fitting-evaluation(s) for hearing aids\", \"80% coinsurance In-Network $0 copay\"], \"note\": \"The cost quote reads the right-hand column straight down. It starts at the end of the routine exam row so that it occurs only once, and its '$0 copay' is the fitting-evaluation's in-network copay.\"}]\n```",
+ "usage": {
+  "input_tokens": 4518,
+  "output_tokens": 1031,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

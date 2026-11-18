@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "f961eb582c1534d5.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-010-0\", \"benefit\": \"hearing.aids\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"2\", \"limit\": \"per year\", \"page\": 63, \"quotes\": [\"40% coinsurance for 2 hearing aid(s) every year\"]}]\n```",
+ "usage": {
+  "input_tokens": 10661,
+  "output_tokens": 968,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

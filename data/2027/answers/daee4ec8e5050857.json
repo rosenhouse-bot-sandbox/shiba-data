@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-aca9d3510177adcd.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 78: the in-network hearing aid purchase includes a 3-year extended warranty.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 78: in network you pay $575 per Level 1 aid or $750 per Level 2 aid.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 77: the routine hearing exam (1 per year) is $0 in network.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 78: OTC hearing aids are listed under what the benefit does not include or cover.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 78: up to 2 prescription hearing aids every year (1 per ear per year).\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 78: 3 follow-up provider visits during the first year following hearing aid purchase.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 78: 3 years of batteries per non-rechargeable aid, up to 60 cells per ear per year.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 78: the in-network hearing aid purchase includes a 60-day trial period.\"},\n{\"id\": 8, \"ok\": true, \"reason\": \"Page 78: 1 fitting appointment during the first year following a hearing aid purchase.\"},\n{\"id\": 9, \"ok\": true, \"reason\": \"Page 77: routine hearing exam is limited to 1 per year.\"}]\n```",
+ "usage": {
+  "input_tokens": 5342,
+  "output_tokens": 779,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

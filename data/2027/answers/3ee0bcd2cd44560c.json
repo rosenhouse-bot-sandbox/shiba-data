@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-be9deec855112c1d.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 77 lists ear molds under what the hearing aid benefit does not include or cover, so this is a supplemental hearing aid exclusion.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 76 hearing aids row: covered for up to two hearing aids per year, one per ear, as a supplemental benefit.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 77 lists hearing aid accessories under what the hearing aid benefit does not include or cover.\"}]\n```",
+ "usage": {
+  "input_tokens": 3872,
+  "output_tokens": 289,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
