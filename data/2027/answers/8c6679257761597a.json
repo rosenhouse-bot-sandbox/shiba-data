@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-172.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 48, Routine hearing aids row, out-of-network: an 80% coinsurance after a $1,000 deductible. The item states the coinsurance correctly; the deductible is a separate fact.\"}]\n```",
+ "usage": {
+  "input_tokens": 3564,
+  "output_tokens": 520,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

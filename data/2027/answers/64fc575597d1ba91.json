@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-128.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 63 out-of-network rows for fluoride, dental x-rays and other diagnostic dental services all show 50% coinsurance. These are preventive services in the routine dental section, and page 64 refers to routine dental services.\"}]\n```",
+ "usage": {
+  "input_tokens": 2653,
+  "output_tokens": 470,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

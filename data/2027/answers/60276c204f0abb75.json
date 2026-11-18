@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-100.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 83, under Comprehensive Services: the D4910 and D9230 rows each show 0% in the Out-of-Network You Pay column. The page sits in the Medical Benefits Chart next to mandatory supplemental benefits, which fits supplemental. No package is named, though the page does not show the dental section's own header.\"}]\n```",
+ "usage": {
+  "input_tokens": 3199,
+  "output_tokens": 878,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

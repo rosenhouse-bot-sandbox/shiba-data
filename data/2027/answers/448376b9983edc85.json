@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-21.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 63 lists 'Certain additional telehealth services' in the physician/practitioner services row. It shows a $0 copay for each primary care provider service, and these match the Medicare-covered telehealth list in the left column.\"}]\n```",
+ "usage": {
+  "input_tokens": 2542,
+  "output_tokens": 555,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

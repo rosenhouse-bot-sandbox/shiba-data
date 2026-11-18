@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-193.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 63 continues the routine (supplemental) hearing services row. Under Out-of-Network it gives 40% coinsurance for 1 hearing aid fitting and evaluation every year, which matches the cost, network, limit and unit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2783,
+  "output_tokens": 279,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-35.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 98, Physician/practitioner services row, Virtual visits: 'Virtual services provided by your Primary Care Physician (PCP): $0 copay'. This is a Medicare-covered telehealth PCP visit in network, and the condition copies the document's words.\"}]\n```",
+ "usage": {
+  "input_tokens": 2457,
+  "output_tokens": 366,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

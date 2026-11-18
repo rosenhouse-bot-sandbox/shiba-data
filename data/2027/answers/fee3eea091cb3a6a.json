@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-39.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 82, physician/practitioner services, 'Medicare-covered including: Telehealth...' row: $0 copayment for each Medicare-covered visit, in network. This is a single $0 amount, not a Medicaid-dependent alternative. The row adds 'Referral is required', which is a referral note rather than a cost condition.\"}]\n```",
+ "usage": {
+  "input_tokens": 2270,
+  "output_tokens": 529,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

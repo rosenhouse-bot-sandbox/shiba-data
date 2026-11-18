@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-185.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"On page 9, the out-of-network column of the Mandatory supplemental hearing benefit says \\\"95% of the cost for each prescription hearing aid up to 1 per ear per year.\\\" This matches the supplemental hearing aids out-of-network fact: 95% coinsurance per aid, limited to 1 per ear per year.\"}]\n```",
+ "usage": {
+  "input_tokens": 3412,
+  "output_tokens": 266,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

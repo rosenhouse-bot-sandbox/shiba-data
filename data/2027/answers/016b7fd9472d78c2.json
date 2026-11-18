@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-41.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 82 physician services row: the Medicare-covered telehealth services for consultation, diagnosis and treatment by a physician or practitioner cost a $0 copayment for each Medicare-covered visit, in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2231,
+  "output_tokens": 391,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

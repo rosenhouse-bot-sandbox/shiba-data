@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-30.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The Doctor Visits row on page 5 lists 'Specialist: $40 copay'. The same row says telehealth services cost the same as an in-person office visit. A telehealth specialist visit in network is therefore a $40 copay, Medicare-covered.\"}]\n```",
+ "usage": {
+  "input_tokens": 2021,
+  "output_tokens": 312,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

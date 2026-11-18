@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-31.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 98, Physician/practitioner services row, under Virtual visits: 'Virtual services provided by your Primary Care Physician (PCP): $0 copay'. The row lists PCP telehealth visits among the Medicare-covered services and requires a network provider, so the plan, benefit, setting, network, condition and amount all match.\"}]\n```",
+ "usage": {
+  "input_tokens": 2463,
+  "output_tokens": 431,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
