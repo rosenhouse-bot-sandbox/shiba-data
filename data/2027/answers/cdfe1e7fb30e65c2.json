@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-102.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 35 only lists the Uniformity Flexibility Nutritional Benefit among benefits members may be eligible for. It gives no detail. A nutritional benefit may be meals, which `other_supplemental` excludes, so the benefit word is in doubt.\"}]\n```",
+ "usage": {
+  "input_tokens": 2796,
+  "output_tokens": 719,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

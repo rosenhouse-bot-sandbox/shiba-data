@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-54.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 40 says members are covered for Mandatory Supplemental Dental, but the statement sits in the Out-of-Network part of the column, so network 'any' is not clearly supported.\"}]\n```",
+ "usage": {
+  "input_tokens": 4243,
+  "output_tokens": 533,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

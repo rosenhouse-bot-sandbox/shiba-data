@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "630e49b10e7ad131.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H1036-317-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"page\": 54,\n   \"quotes\": [\"Mandatory Supplemental Dental Benefits *You are covered for Mandatory Supplemental Dental Benefit.\"], \"note\": \"\"},\n  {\"plan_id\": \"H1036-317-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"max\", \"amount\": \"$1,000\", \"limit\": \"per year\", \"page\": 81,\n   \"quotes\": [\"Annual Maximum: $1,000\"], \"note\": \"\"},\n  {\"plan_id\": \"H1036-317-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"deductible\", \"amount\": \"$0\", \"page\": 81,\n   \"quotes\": [\"Deductible: $0\"], \"note\": \"\"},\n  {\"plan_id\": \"H1036-317-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"out\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"not_covered\", \"page\": 91,\n   \"quotes\": [\"Services received from an out-of-network dentist are not covered benefits.\"], \"note\": \"\"}\n]\n```",
+ "usage": {
+  "input_tokens": 11419,
+  "output_tokens": 1446,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

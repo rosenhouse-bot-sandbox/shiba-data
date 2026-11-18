@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-138.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 78 Nursing hotline row: $0. The chart has a single cost column that applies to all plans, so H9003-009-0 pays a $0 copay in network for this supplemental benefit. The quote '$0 $0' is not on the page verbatim, but the page supports every field.\"}]\n```",
+ "usage": {
+  "input_tokens": 2454,
+  "output_tokens": 430,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

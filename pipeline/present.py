@@ -736,6 +736,31 @@ def dental_deductible(found):
     return ("no deductible" if shown_ == "$0" else f"deductible {shown_}/year"), deductibles
 
 
+HOW_OFTEN = re.compile(r"\b(?:every|per|each)\s+(?:(\d+)\s+)?(?:calendar\s+)?(year|month)s?\b", re.I)
+
+
+PER_PART = re.compile(r"\bper (?:tooth|quadrant|surface|arch)\b", re.I)
+
+
+def how_often(f):
+    """"year", "5 years" or "6 months" from the fact's limit, or ""."""
+    match = HOW_OFTEN.search(f["limit"])
+    if not match:
+        return ""
+    count, unit = match[1], match[2].lower()
+    return f"{count} {unit}s" if count and count != "1" else unit
+
+
+def preventive_limits(found):
+    """A detail: how often the best source says the plan covers each preventive dental service."""
+    limits = top(exactly(found, ("dental.preventive",),
+                         lambda f: extra(f) and f["condition"] and f["cost_kind"] == "visit_limit" and not f["unit"]
+                         and how_often(f) and not PER_PART.search(f["limit"]), "it is not a limit on how often the plan covers one preventive service"))
+    parts = [f"{f['condition']} {f['amount']}" + (f"/{how_often(f)}" if how_often(f) == "year" else f" every {how_often(f)}")
+             for f in limits]
+    return ("PREV limits: " + ", ".join(parts) if parts else ""), limits
+
+
 def with_packages(rule):
     """The rule, followed by "With <package>: ..." for the parts that the rule shows from each priced package's own
     facts and not from the plan's."""
@@ -982,11 +1007,11 @@ def fitness_program(got):
     return None, []
 
 
-def extra_benefits(organization, found, prices=False, programs=False):
+def extra_benefits(organization, found, prices=False, programs=False, alike=False):
     """Names fitness, meals and transportation for every member, then shows routine foot care, a fitness allowance,
     a card for members with chronic conditions, and the programs after a heart-failure hospital stay.
     With prices, it shows the fitness and meals copays and how many meals. With programs, it names the fitness program
-    and then each other program for every member."""
+    and then each other program for every member, with alike as other_programs takes it."""
     parts, cited = [], []
     for name, leaf in (("Fitness", "fitness"), ("Meals", "meals"), ("Transportation", "extras.transportation")):
         got = top(exactly(found, (leaf,), lambda f: extra(f) and offers(f),
@@ -1009,7 +1034,7 @@ def extra_benefits(organization, found, prices=False, programs=False):
             cited += got
         cited += naming
     if programs:
-        got = other_programs(found)
+        got = other_programs(found, alike)
         parts += got[0]
         cited += got[1]
     got = foot_care(found)
@@ -1040,21 +1065,33 @@ def extra_benefits(organization, found, prices=False, programs=False):
     return [("; ".join(parts), unique(cited))]
 
 
-def other_programs(found):
+HOURS = re.compile(r"\b24\W?hours?\b")
+
+
+def program_name(pool):
+    """The program's name with its kind, case, hours and trailing "program" left out, so two sources' names compare."""
+    words = re.sub(r"\W+", " ", HOURS.sub("", pool.split(":")[-1].lower())).split()
+    return " ".join(words[:-1] if words[-1:] == ["program"] else words)
+
+
+def other_programs(found, alike=False):
     """Names each other program for every member, with its price and how often an allowance renews. Each program's
-    best source gives it, since a page may name only some programs."""
+    best source gives it, since a page may name only some programs. With alike, programs whose names match
+    (program_name) are one program, shown by its best source's shortest name."""
     programs = exactly(found, ("other_supplemental",), lambda f: everyone(f) and f["pool"] and f["cost_kind"] in DOT_KINDS,
                        "it is not a named program that every member has")
-    parts, cited = [], []
-    for pool in sorted({f["pool"] for f in programs}):
-        got = top([f for f in programs if f["pool"] == pool])
+    key = program_name if alike else (lambda pool: pool)
+    shown = []
+    for name in {key(f["pool"]) for f in programs}:
+        got = top([f for f in programs if key(f["pool"]) == name])
         allowances = [f for f in got if f["cost_kind"] == "allowance"]
         priced = allowances or [f for f in got if f["cost_kind"] in PRICED]
         price = f" {show(priced)}" if priced else ""
         period = f"/{renews(allowances)}" if allowances and renews(allowances) else ""
-        parts.append(f"{pool.replace(chr(0x2011), '-')}{price}{period}")
-        cited += priced or got
-    return parts, cited
+        label = min((f["pool"] for f in got), key=lambda pool: (len(pool), pool)).replace(chr(0x2011), "-")
+        shown.append((label, f"{label}{price}{period}", priced or got))
+    shown.sort()
+    return [part for _, part, _ in shown], [f for _, _, used in shown for f in used]
 
 
 # Comprehensive services that some plans cover alone, by how their quotes name them.
@@ -1181,12 +1218,12 @@ LEAVES = {"L_xray_imaging": ("imaging",), "AB_ambulance": ("ambulance", "emergen
 DVHA = {"C_premium": plan_premium, "D_premium_full_extra_help": extra_help_premium,
         "E_optional_packages": lambda o, found: optional_packages(o, found, details=False),
         "F_dental": with_packages(with_details(dental, dental_deductible, out_of_network(
-            ("PREV", "dental.preventive"), ("COMP", "dental.comprehensive")))),
+            ("PREV", "dental.preventive"), ("COMP", "dental.comprehensive")), preventive_limits)),
         "G_vision": with_packages(with_details(vision, out_of_network(("exam", "vision.exam"), ("eyewear", "vision.eyewear")))),
         "H_hearing": with_packages(with_details(lambda o, found: hearing(o, found, each_price=True),
                                                 out_of_network(("exam", "hearing.exam"), ("aids", "hearing.aids")))),
         "I_alt_care_otc_travel": lambda o, found: alt_care_otc_travel(o, found, telehealth=True, food=True),
-        "J_extra_benefits": lambda o, found: extra_benefits(o, found, prices=True, programs=True)}
+        "J_extra_benefits": lambda o, found: extra_benefits(o, found, prices=True, programs=True, alike=True)}
 DVHA_LEAVES = {"C_premium": ("plan_premium",), "D_premium_full_extra_help": ("plan_premium", "part_d_deductible"),
                "E_optional_packages": ("packages",), "F_dental": ("dental",),
                "G_vision": ("vision",), "H_hearing": ("hearing",),
@@ -1241,10 +1278,12 @@ def plans(data):
 EARLIER_RULES = {
     ("dvha", "E_optional_packages"): ((17, lambda o, found: optional_packages(o, found, allowances=False)),
                                       (19, optional_packages)),
-    ("dvha", "F_dental"): ((19, dental),), ("dvha", "G_vision"): ((19, vision),), ("dvha", "H_hearing"): ((19, hearing),),
+    ("dvha", "F_dental"): ((19, dental), (21, with_packages(with_details(dental, dental_deductible, out_of_network(
+        ("PREV", "dental.preventive"), ("COMP", "dental.comprehensive")))))), ("dvha", "G_vision"): ((19, vision),), ("dvha", "H_hearing"): ((19, hearing),),
     ("dvha", "I_alt_care_otc_travel"): (
         (19, alt_care_otc_travel), (20, lambda o, found: alt_care_otc_travel(o, found, telehealth=True))), ("dvha", "J_extra_benefits"): (
-        (19, extra_benefits), (20, lambda o, found: extra_benefits(o, found, prices=True)))} | {
+        (19, extra_benefits), (20, lambda o, found: extra_benefits(o, found, prices=True)),
+        (21, lambda o, found: extra_benefits(o, found, prices=True, programs=True)))} | {
     ("main", column): ((18, rule),) for column, rule in {
         "E_moop": moop, "F_primary_care": visits("office.pcp"), "G_specialist": visits("office.specialist"),
         "H_inpatient": inpatient, "I_outpatient_surgery": outpatient_surgery, "J_outpatient_rehab": outpatient_rehab,
@@ -1383,6 +1422,9 @@ VERSIONS[19] = {}
 # Version 20 holds no cell. It names the fitness program and each other program for every member, and says when the
 # OTC allowance also pays for food.
 VERSIONS[20] = {}
+# Version 21 holds no cell. It shows how often the plan covers each preventive dental service, and shows a program
+# once when two sources name it differently.
+VERSIONS[21] = {}
 # The version that first presents each later column. Earlier versions hold its cells.
 SINCE = {("dvha", "C_premium"): 3, ("dvha", "G_vision"): 4, ("dvha", "H_hearing"): 4, ("dvha", "E_optional_packages"): 5,
          ("dvha", "F_dental"): 6, ("dvha", "I_alt_care_otc_travel"): 6, ("dvha", "J_extra_benefits"): 6,

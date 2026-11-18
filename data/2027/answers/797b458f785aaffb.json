@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-103.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 70 does support a $0 in-network copay for up to 36 sessions per episode. But the condition is a paraphrase, not the document's words, and it is incomplete. Members also need a hospitalization within the past 30 days and either HFrEF or heart failure with an additional qualifying condition.\"}]\n```",
+ "usage": {
+  "input_tokens": 2808,
+  "output_tokens": 648,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

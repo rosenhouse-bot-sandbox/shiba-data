@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-130.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 68, Health and wellness education programs, Nurse advice line row: $0 copay for the nurse advice line. It is a supplemental benefit, no setting is named, and the default in-network reading holds.\"}]\n```",
+ "usage": {
+  "input_tokens": 2222,
+  "output_tokens": 244,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "0bd982dc589e8cba.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-427-2\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"page\": 40, \"quotes\": [\"*You are covered for Mandatory\"], \"note\": \"\"},\n{\"plan_id\": \"H5216-427-2\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"max\", \"amount\": \"$1,500\", \"limit\": \"per year\", \"page\": 72, \"quotes\": [\"Annual Maximum: $1,500\"], \"note\": \"Out-of-network benefits are subject to the in-network benefit maximums.\"},\n{\"plan_id\": \"H5216-427-2\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"deductible\", \"amount\": \"$0\", \"page\": 72, \"quotes\": [\"Deductible: $0\"], \"note\": \"\"},\n{\"plan_id\": \"H5216-427-2\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"0%\", \"condition\": \"Periodic oral exam\", \"page\": 72, \"quotes\": [\"Periodic oral exam – D0120 0% 0%\"], \"note\": \"\"},\n{\"plan_id\": \"H5216-427-2\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"0%\", \"condition\": \"Periodic oral exam\", \"page\": 72, \"quotes\": [\"Periodic oral exam – D0120 0% 0%\"], \"note\": \"\"},\n{\"plan_id\": \"H5216-427-2\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"2\", \"condition\": \"Exams\", \"limit\": \"per calendar year\", \"page\": 72, \"quotes\": [\"Frequency/Limits – 2 procedure codes per calendar year\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 11287,
+  "output_tokens": 1625,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

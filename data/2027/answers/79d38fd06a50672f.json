@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "7dcf10accd77535d.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-011-0\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"pool\": \"Social Support Platform\", \"page\": 23, \"quotes\": [\"Social Support Platform $0 copay\"]},\n{\"plan_id\": \"H5439-011-0\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"pool\": \"24-Hour Nurse Advice Line\", \"page\": 26, \"quotes\": [\"24-Hour Nurse Advice Line $0 copay\"]},\n{\"plan_id\": \"H5439-011-0\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$100\", \"pool\": \"My Wellcare Rewards\", \"page\": 26, \"quotes\": [\"With My Wellcare Rewards, you can earn up to $100 by completing eligible health activities\"]}]\n```",
+ "usage": {
+  "input_tokens": 3423,
+  "output_tokens": 892,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

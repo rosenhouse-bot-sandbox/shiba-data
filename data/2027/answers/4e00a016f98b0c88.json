@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "5ab489f7c419b042.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-041-0\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"pool\": \"Rewards Program\", \"page\": 10, \"quotes\": [\"Rewards Program - Medicare Advantage reward offerings may vary by plan and are not available in all plans.\"], \"note\": \"Only the required-information disclaimer names the Rewards Program. It gives no earning amount, and its wording is generic (\\\"not available in all plans\\\"), so coverage is inferred from the disclaimer being in this plan's SB.\"}]\n```",
+ "usage": {
+  "input_tokens": 3261,
+  "output_tokens": 660,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

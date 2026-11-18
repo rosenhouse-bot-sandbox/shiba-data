@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-140.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 17 lists 'Rewards and Incentives - Go365® by Humana': members do healthy activities and get rewarded with Go365 Plus. No maximum or price is given, so covered (supplemental, any setting) with the stated pool name is correct.\"}]\n```",
+ "usage": {
+  "input_tokens": 2475,
+  "output_tokens": 259,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-2947683a555fc83c.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 8, mandatory supplemental dental (DEN310), in-network: comprehensive oral evaluation or periodontal exam up to 1 every 3 years.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 8, mandatory supplemental dental, in-network: $0 copay for comprehensive oral evaluation or periodontal exam.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 8, mandatory supplemental dental, in-network: $0 copay for panoramic film or diagnostic x-rays.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 8, mandatory supplemental dental, in-network: panoramic film or diagnostic x-rays up to 1 every 5 years.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 16: the MyOption DEN972 optional supplemental dental package has a $50.90 monthly premium.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 8, mandatory supplemental dental, in-network: bitewing x-rays up to 1 per year.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 8, Medicare-covered dental row: $50 copay.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 8, mandatory supplemental dental, in-network: emergency diagnostic exam, periodic oral exam, prophylaxis (cleaning) up to 2 per year.\"},\n{\"id\": 8, \"ok\": true, \"reason\": \"Page 8, mandatory supplemental dental, in-network: $0 copay for emergency diagnostic exam, periodic oral exam and prophylaxis.\"},\n{\"id\": 9, \"ok\": true, \"reason\": \"Page 8, mandatory supplemental dental, in-network: $0 copay for bitewing x-rays.\"}]\n```",
+ "usage": {
+  "input_tokens": 6693,
+  "output_tokens": 896,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

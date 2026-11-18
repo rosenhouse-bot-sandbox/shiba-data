@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-dbc45a45d9843dd0.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 43 Class III list: dentures (full or partial, new), 1 every 5 years.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 43 Basic comprehensive (Class II): 50% coinsurance in and out of network.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 43 Class III list: extractions (including local anesthesia), 2 every calendar year.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 43 Class I list: full mouth (FMX) or panoramic x-ray, 1 every 3 calendar years.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 43: preventive, basic and major dental share a combined $1,250 benefit limit every calendar year.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 43 Class III list: endodontics (root canals), 1 every calendar year.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 43 Class I list: oral evaluations, 2 every calendar year.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 42 Medicare-covered dental: $40 copay per provider per day in network.\"},\n{\"id\": 8, \"ok\": true, \"reason\": \"Page 43 Class I list: topical fluoride, 1 every calendar year.\"},\n{\"id\": 9, \"ok\": true, \"reason\": \"Page 42 Medicare-covered dental: 50% coinsurance out of network.\"},\n{\"id\": 10, \"ok\": true, \"reason\": \"Page 43 preventive dental: $0 copay per provider per day in network.\"},\n{\"id\": 11, \"ok\": false, \"reason\": \"Page 43 says the 2 cleanings are combined with the full mouth debridement visit. The condition leaves out this shared limit.\"},\n{\"id\": 12, \"ok\": true, \"reason\": \"Page 43 Class II list: restorative fillings, 2 every calendar year.\"},\n{\"id\": 13, \"ok\": true, \"reason\": \"Page 43 Major comprehensive (Class III): 50% coinsurance in and out of network.\"},\n{\"id\": 14, \"ok\": true, \"reason\": \"Page 43 preventive dental: 50% coinsurance out of network.\"},\n{\"id\": 15, \"ok\": true, \"reason\": \"Page 43 Class I list: bitewing x-rays, 1 set every calendar year.\"}]\n```",
+ "usage": {
+  "input_tokens": 7163,
+  "output_tokens": 1498,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

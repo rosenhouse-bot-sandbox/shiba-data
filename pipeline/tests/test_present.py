@@ -813,6 +813,22 @@ class DetailsTest(unittest.TestCase):
         none = routine("dental", "deductible", "$0", limit="per calendar year")
         self.assertEqual(rule("", [found[0], none]), [("PREV $0; no deductible", [found[0], none])])
 
+    def test_adds_how_often_the_best_source_covers_each_preventive_service(self):
+        def limit(service, amount, every, **more):
+            return routine("dental.preventive", "visit_limit", amount, condition=service, limit=every, **more)
+        found = [routine("dental.preventive"), limit("Cleanings", "2", "per calendar year"),
+                 limit("Panoramic X-rays", "1", "every 5 calendar years"), limit("Fluoride", "1", "every 6 months"),
+                 limit("Bitewings", "1", "every year", source="SB"), limit("Exams", "2", ""),
+                 limit("Space maintainers", "1", "per year", unit="per tooth"), limit("Crowns", "1", "every 5 years", package="P"),
+                 limit("Sealants", "1", "per year", network="out"),
+                 limit("Other services", "1", "per tooth per 6 months")]
+        rule = present.with_details(present.dental, present.preventive_limits)
+        self.assertEqual(rule("", found),
+                         [("PREV $0; PREV limits: Cleanings 2/year, Panoramic X-rays 1 every 5 years, Fluoride 1 every 6 months",
+                           found[:4])])
+        self.assertEqual(rule("", found[:1] + found[4:5])[0][0], "PREV $0; PREV limits: Bitewings 1/year")
+        self.assertEqual(rule("", found[:1] + found[5:])[0][0], "PREV $0")
+
     def test_adds_nothing_to_a_blank_cell(self):
         found = [routine("dental.preventive", "coinsurance", "50%", network="out")]
         rule = present.with_details(present.dental, present.out_of_network(("PREV", "dental.preventive")))
@@ -1052,6 +1068,22 @@ class ExtraBenefitsTest(unittest.TestCase):
                          "24-Hour Nurse Line $0; Routine foot care $0; "
                          "For members with certain chronic conditions: Food Card $30/month")
 
+    def test_a_program_named_differently_by_two_sources_shows_once_by_its_best_sources_name(self):
+        eoc = routine("other_supplemental", pool="Nurse advice line")
+        sb = dict(eoc, source="SB", pool="24\u2011Hour Nurse Advice Line")
+        support = [routine("other_supplemental", pool="Social support platform"),
+                   routine("other_supplemental", pool="Social Support Platform", source="SB")]
+        travel = [routine("other_supplemental", "covered", "", pool="Travel Advantage", source="SB", page="9"),
+                  routine("other_supplemental", "covered", "", pool="Visitor/traveler program: Travel Advantage",
+                          source="SB")]
+        self.assertEqual(present.other_programs([sb, eoc] + support + travel)[0],
+                         ["24-Hour Nurse Advice Line $0", "Nurse advice line $0", "Social Support Platform $0",
+                          "Social support platform $0", "Travel Advantage", "Visitor/traveler program: Travel Advantage"])
+        self.assertEqual(present.other_programs([sb, eoc] + support + travel, alike=True),
+                         (["Nurse advice line $0", "Social support platform $0", "Travel Advantage"],
+                          [eoc, support[0]] + travel))
+        self.assertEqual(present.other_programs([sb], alike=True)[0], ["24-Hour Nurse Advice Line $0"])
+
     def test_a_program_shows_its_best_sources_allowance_and_cites_only_its_price(self):
         rewards = routine("other_supplemental", "allowance", "$100", pool="Rewards", limit="per year")
         named = routine("other_supplemental", "covered", "", pool="Rewards")
@@ -1228,9 +1260,17 @@ class WriteTest(unittest.TestCase):
         rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.layer_rows(data, v)} for v in (19, 20)}
         self.assertEqual({r[1] for r in rows[19] ^ rows[20]}, {"I_alt_care_otc_travel", "J_extra_benefits"})
         got = {v: present.lines(data, "J_extra_benefits", sheet="dvha", version=v)["H9003-001-0"][0][0] for v in (19, 20)}
-        self.assertEqual(got, {19: "Fitness $0", 20: "Fitness One Pass $0"})
+        self.assertEqual({v: g.split(";")[0] for v, g in got.items()}, {19: "Fitness $0", 20: "Fitness One Pass $0"})
         got = {v: present.lines(data, "I_alt_care_otc_travel", sheet="dvha", version=v)["H2001-045-0"][0][0] for v in (19, 20)}
         self.assertEqual([g.split(";")[0] for g in got.values()], ["OTC $196/month", "OTC and food $196/month"])
+
+    def test_version_21_shows_preventive_dental_limits_and_each_program_once(self):
+        self.assertEqual(present.VERSIONS[21], {})
+        data = years.data_dir(YEAR)
+        rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.layer_rows(data, v)} for v in (20, 21)}
+        self.assertEqual({r[1] for r in rows[20] ^ rows[21]}, {"F_dental", "J_extra_benefits"})
+        got = present.lines(data, "F_dental", sheet="dvha", version=21)["H5439-015-0"][0][0]
+        self.assertIn("PREV limits: Cleanings (prophylaxis) 2/year", got)
 
     def test_version_12_holds_no_cell(self):
         self.assertEqual(present.held(years.data_dir(YEAR), 12), {})

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "cabbc3b82885b498.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-025-0\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"pool\": \"Devoted Dollars\", \"page\": 11, \"quotes\": [\"Earn grocery and gas reward cards when you take key\", \"You must opt in to the Devoted Dollars program to receive the rewards.\"], \"note\": \"Rewards program. The page gives $50 for a yearly PCP check-up and $20 for a yearly flu vaccine, but no stated maximum a member can earn, so this is stated as covered.\"}]\n```",
+ "usage": {
+  "input_tokens": 2896,
+  "output_tokens": 566,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
