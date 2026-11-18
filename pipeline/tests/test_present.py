@@ -681,7 +681,11 @@ class HearingTest(unittest.TestCase):
                  routine("hearing.aids", "visit_limit", "2", limit="per year")]
         self.assertEqual(present.hearing("", found, each_price=True)[0][0],
                          "exam $0; aids $499 or $699 or $999 per aid; 2 aids/year")
-        self.assertEqual(present.hearing("", [routine("hearing.aids", amount="$0")], each_price=True)[0][0], "aids $0")
+        for amount, unit, want in (("$0", "", "aids $0"), ("$699 or $499", "per ear", "aids $499 or $699 per aid; 2 aids"),
+                                   ("$399-$699", "per aid", "aids $399-$699"), ("$500 or $900", "per pair", "aids $500-$900"),
+                                   ("$0 or 20%", "per aid", "aids $0-20%")):
+            got = present.hearing("", [routine("hearing.aids", amount=amount, unit=unit)], each_price=True)[0][0]
+            self.assertEqual(got, want)
 
 
 class OptionalPackagesTest(unittest.TestCase):
@@ -765,6 +769,16 @@ class WithPackagesTest(unittest.TestCase):
                          "exam $0. With Advantage Plus: aids allowance $500 per ear/three years; 2 aids/three years")
         self.assertEqual(present.with_packages(present.hearing)("", found + [dict(found[3], package="")])[0][0],
                          "exam $0; aids allowance $500 per ear/three years; 2 aids/three years")
+
+    def test_a_blank_cell_keeps_its_citations_unless_a_package_fills_it(self):
+        none = routine("dental", "not_covered", "")
+        self.assertEqual(present.with_packages(present.dental)("", [none]), [("", [none])])
+        rider = [routine("packages", "premium", "$54", **self.PLUS), routine("dental.preventive", **self.PLUS)]
+        self.assertEqual(present.with_packages(present.dental)("", [none] + rider), [("With Advantage Plus: PREV $0", rider[1:])])
+
+    def test_a_package_from_a_plan_benefit_summary_alone_is_not_shown(self):
+        found = [routine("packages", "premium", "$54", **self.PLUS), routine("dental.preventive", source="PBP", **self.PLUS)]
+        self.assertEqual(present.with_packages(present.dental)("", found)[0][0], "")
 
     def test_skips_a_package_without_a_monthly_premium_or_without_the_benefit(self):
         found = [routine("vision.exam"), routine("vision.eyewear", "allowance", "$175", package="No premium"),
@@ -967,6 +981,14 @@ class ExtraBenefitsTest(unittest.TestCase):
         self.assertEqual(column(present.extra_benefits, *found),
                          [("Fitness; Meals; Transportation; Routine foot care $45 6/year", found)])
 
+    def test_with_prices_shows_the_fitness_and_meals_copays_and_how_many_meals(self):
+        found = [routine("fitness"), routine("meals"), routine("meals", "visit_limit", "28", unit="meals"),
+                 routine("meals", "visit_limit", "4", limit="per year"), routine("extras.transportation"),
+                 routine("meals", "visit_limit", "14", unit="meals", source="SB")]
+        self.assertEqual(present.extra_benefits("", found, prices=True),
+                         [("Fitness $0; Meals $0, 28 meals; Transportation", found[:3] + found[4:5])])
+        self.assertEqual(present.extra_benefits("", found[:2] + found[5:], prices=True)[0][0], "Fitness $0; Meals $0, 14 meals")
+
     def test_foot_care_for_members_with_diabetes_says_so_unless_every_member_has_some(self):
         diabetic = routine("foot_care", condition="diabetes")
         self.assertEqual(column(present.extra_benefits, diabetic)[0][0], "Routine foot care $0 for members with diabetes")
@@ -1116,14 +1138,15 @@ class WriteTest(unittest.TestCase):
         data = years.data_dir(YEAR)
         rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.layer_rows(data, v)} for v in (18, 19)}
         changed = {r[:3] for r in rows[18] ^ rows[19]}
-        self.assertEqual({c for _, c, _ in changed}, {"E_optional_packages", "F_dental", "G_vision", "H_hearing"})
+        self.assertEqual({c for _, c, _ in changed},
+                         {"E_optional_packages", "F_dental", "G_vision", "H_hearing", "J_extra_benefits"})
         self.assertIn(("dvha", "F_dental", "H9003-009-0"), changed)
         self.assertIn(("dvha", "H_hearing", "H2923-001-0"), changed)
         got = {v: present.lines(data, "H_hearing", sheet="dvha", version=v)["H2923-001-0"][0][0] for v in (18, 19)}
         self.assertEqual(got, {18: "exam $0; aids $399-$699; 2 aids", 19: "exam $0; aids $399 or $699 per aid; 2 aids"})
         got = {v: present.lines(data, "E_optional_packages", sheet="dvha", version=v)["H9003-009-0"][0][0] for v in (16, 18, 19)}
         self.assertEqual(got[19], "Advantage Plus $54/mo")
-        self.assertTrue(got[16] != got[18] != got[19])
+        self.assertEqual(len(set(got.values())), 3)
 
     def test_version_12_holds_no_cell(self):
         self.assertEqual(present.held(years.data_dir(YEAR), 12), {})
