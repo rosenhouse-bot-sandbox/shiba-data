@@ -819,12 +819,13 @@ def everyone(f):
 
 
 def lacks(found, leaf):
-    """(lacking, cited): whether a plan with document facts has no in-network supplemental leaf benefit, even for some
-    members, and the best source's facts that say it does not cover leaf for every member."""
-    mine = [f for f in found if facts.covers(leaf, f["benefit"]) and extra(f)]
-    if not any(f["source"] in facts.DOCUMENTS for f in found) or any(f["cost_kind"] != "not_covered" for f in mine):
+    """Says if a plan's documents give no supplemental leaf benefit in any network, at any tier or for any member, and
+    gives the best source's facts that say the plan does not cover leaf itself for every member."""
+    related_ = [f for f in found if (facts.covers(leaf, f["benefit"]) or facts.covers(f["benefit"], leaf))
+                and f["covered_by"] == "supplemental" and not f["package"]]
+    if not any(f["source"] in facts.DOCUMENTS for f in found) or any(f["cost_kind"] != "not_covered" for f in related_):
         return False, []
-    return True, top([f for f in mine if not f["condition"]])
+    return True, top([f for f in related_ if f["benefit"] == leaf and extra(f) and not f["condition"]])
 
 
 def or_none(rule, leaf):
@@ -840,19 +841,18 @@ def or_none(rule, leaf):
     return none
 
 
-def no(label, leaf):
-    """A detail: label when the plan lacks leaf."""
-    def detail(found):
-        lacking, says = lacks(found, leaf)
-        return (label, says) if lacking else ("", [])
-    return detail
-
-
-def no_comprehensive(found):
-    """A detail: "no COMP" when the plan lacks comprehensive dental care and has no dental maximum or allowance."""
-    if any(extra(f) and f["benefit"] == "dental" and f["cost_kind"] in ("max", "allowance") for f in found):
-        return "", []
-    return no("no COMP", "dental.comprehensive")(found)
+def with_lacking(rule, *parts):
+    """The rule, with each (label, leaf) part the plan lacks added to the plan's own value, before any package's."""
+    def lacking(organization, found):
+        (value, cited), = rule(organization, found)
+        own, packaged = (value.split(". With ", 1) + [""])[:2]
+        for label, leaf in parts if own and not own.startswith("With ") else ():
+            missing, says = lacks(found, leaf)
+            if missing:
+                own, cited = f"{own}; {label}", cited + says
+        return [(f"{own}. With {packaged}" if packaged else own, unique(cited))]
+    lacking.__name__, lacking.__qualname__ = rule.__name__, rule.__qualname__
+    return lacking
 
 
 def limit_text(limits):
@@ -1285,13 +1285,13 @@ VISION_OON = out_of_network(("exam", "vision.exam"), ("eyewear", "vision.eyewear
 HEARING_OON = out_of_network(("exam", "hearing.exam"), ("aids", "hearing.aids"))
 DVHA = {"C_premium": plan_premium, "D_premium_full_extra_help": extra_help_premium,
         "E_optional_packages": lambda o, found: optional_packages(o, found, details=False),
-        "F_dental": or_none(with_packages(with_details(dental, no_comprehensive, dental_deductible, DENTAL_OON,
-                                                       preventive_limits)), "dental"),
-        "G_vision": or_none(with_packages(with_details(vision, no("no eyewear allowance", "vision.eyewear"),
-                                                       VISION_OON)), "vision"),
-        "H_hearing": or_none(with_packages(with_details(lambda o, found: hearing(o, found, each_price=True),
-                                                        no("no hearing aid allowance", "hearing.aids"), HEARING_OON)),
-                             "hearing"),
+        "F_dental": or_none(with_lacking(with_packages(with_details(dental, dental_deductible, DENTAL_OON, preventive_limits)),
+                                         ("no COMP", "dental.comprehensive")), "dental"),
+        "G_vision": or_none(with_lacking(with_packages(with_details(vision, VISION_OON)),
+                                         ("no eyewear allowance", "vision.eyewear")), "vision"),
+        "H_hearing": or_none(with_lacking(with_packages(with_details(lambda o, found: hearing(o, found, each_price=True),
+                                                                     HEARING_OON)),
+                                          ("no hearing aid allowance", "hearing.aids")), "hearing"),
         "I_alt_care_otc_travel": lambda o, found: alt_care_otc_travel(o, found, telehealth=True, food=True, rates=True,
                                                                       none=True),
         "J_extra_benefits": lambda o, found: extra_benefits(o, found, prices=True, programs=True, alike=True,

@@ -850,21 +850,26 @@ class DetailsTest(unittest.TestCase):
 
 
 class NoneTest(unittest.TestCase):
-    def test_a_plan_lacks_a_benefit_no_source_gives_even_to_some_members(self):
+    def test_a_plan_lacks_a_benefit_no_source_gives_in_any_way(self):
         exam = routine("vision.exam")
         says = routine("vision.eyewear", "not_covered", "")
         self.assertEqual(present.lacks([exam], "vision.eyewear"), (True, []))
         self.assertEqual(present.lacks([exam, says, dict(says, source="SB")], "vision.eyewear"), (True, [says]))
         for offered in (routine("vision.eyewear", "allowance", "$100"), routine("vision.eyewear", condition="diabetes"),
-                        routine("vision.eyewear.contacts", "allowance", "$100"), routine("vision.eyewear", network="any")):
+                        routine("vision.eyewear.contacts", "allowance", "$100"), routine("vision", "allowance", "$100"),
+                        routine("vision.eyewear", "allowance", "$100", provider_tier="PLUS"),
+                        routine("vision.eyewear", "allowance", "$100", network="out")):
             self.assertEqual(present.lacks([exam, offered], "vision.eyewear"), (False, []), offered)
 
-    def test_medicare_out_of_network_and_package_benefits_do_not_count(self):
+    def test_medicare_and_package_benefits_do_not_count(self):
         exam = routine("vision.exam")
-        for other in (priced("vision.eyewear", condition="after cataract surgery"), routine("vision.eyewear", network="out"),
-                      routine("vision.eyewear", "allowance", "$175", package="Advantage Plus"),
-                      routine("vision", "allowance", "$100", provider_tier="PLUS")):
+        for other in (priced("vision.eyewear", condition="after cataract surgery"),
+                      routine("vision.eyewear", "allowance", "$175", package="Advantage Plus")):
             self.assertEqual(present.lacks([exam, other], "vision.eyewear"), (True, []), other)
+
+    def test_cites_only_facts_that_exclude_the_benefit_itself(self):
+        narrow = routine("dental.comprehensive", "not_covered", "", quotes='["Implants are not covered"]')
+        self.assertEqual(present.lacks([routine("vision.exam"), narrow], "dental"), (True, []))
 
     def test_a_plan_without_document_facts_lacks_nothing(self):
         self.assertEqual(present.lacks([routine("vision.exam", source="PBP")], "vision.eyewear"), (False, []))
@@ -881,21 +886,25 @@ class NoneTest(unittest.TestCase):
         self.assertEqual(rule("", found[2:] + [says]), [("None", [says])])
         self.assertEqual(rule("", [routine("dental.preventive")])[0][0], "PREV $0")
 
-    def test_details_say_when_a_plan_lacks_a_part(self):
-        rule = present.with_details(present.vision, present.no("no eyewear allowance", "vision.eyewear"))
-        self.assertEqual(rule("", [routine("vision.exam")])[0][0], "exam $0; no eyewear allowance")
-        self.assertEqual(rule("", [routine("vision.exam"), routine("vision.eyewear")])[0][0], "exam $0")
-
-    def test_no_comprehensive_dental_unless_a_maximum_or_allowance_may_pay_for_it(self):
+    def test_adds_what_the_plan_lacks_to_its_own_value_before_a_packages(self):
+        plus = dict(package="Plus")
         says = routine("dental.comprehensive", "not_covered", "")
-        rule = present.with_details(present.dental, present.no_comprehensive)
-        self.assertEqual(rule("", [routine("dental.preventive"), says]), [("PREV $0; no COMP", [routine("dental.preventive"),
-                                                                                                    says])])
-        for cap in (routine("dental", "max", "$1,000", limit="per year"),
-                    routine("dental", "allowance", "$1,000", limit="per year", pool="Dental Allowance")):
-            self.assertNotIn("no COMP", rule("", [routine("dental.preventive"), cap])[0][0], cap)
-        self.assertEqual(rule("", [routine("dental.preventive"), routine("dental.comprehensive", condition="diabetes")])[0][0],
-                         "PREV $0")
+        rule = present.with_lacking(present.with_packages(present.dental), ("no COMP", "dental.comprehensive"))
+        found = [routine("dental.preventive"), says]
+        self.assertEqual(rule("", found), [("PREV $0; no COMP", found)])
+        packaged = [routine("packages", "premium", "$20", **plus), routine("dental.comprehensive", "coinsurance", "50%", **plus)]
+        self.assertEqual(rule("", found + packaged)[0][0], "PREV $0; no COMP. With Plus: COMP 50%")
+        self.assertEqual(rule("", packaged)[0][0], "With Plus: COMP 50%")
+        for offered in (routine("dental", "max", "$1,000", limit="per year"), routine("dental", "coinsurance", "50%"),
+                        routine("dental.comprehensive", condition="diabetes")):
+            self.assertNotIn("no COMP", rule("", [routine("dental.preventive"), offered])[0][0], offered)
+
+    def test_a_package_part_never_says_what_the_package_lacks(self):
+        plus = dict(package="Plus")
+        found = [routine("vision.exam"), routine("vision.eyewear", "allowance", "$100", limit="per year"),
+                 routine("packages", "premium", "$20", **plus), routine("vision.exam", amount="$5", **plus)]
+        rule = present.with_lacking(present.with_packages(present.vision), ("no eyewear allowance", "vision.eyewear"))
+        self.assertEqual(rule("", found)[0][0], "exam $0; eyewear $100/year. With Plus: exam $5")
 
 
 class TelehealthTest(unittest.TestCase):
