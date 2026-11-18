@@ -968,15 +968,15 @@ CHRONIC = re.compile(r"chronic", re.I)
 HEART = re.compile(r"heart", re.I)
 
 
-FITNESS_PROGRAMS = {re.compile(pattern, re.I): name for pattern, name in (
-    (r"silver ?sneakers", "SilverSneakers"), (r"silver ?& ?fit", "Silver&Fit"), (r"one pass", "One Pass"),
-    (r"renew active", "Renew Active"))}
+FITNESS_PROGRAMS = tuple((re.compile(pattern, re.I), name) for pattern, name in (
+    (r"silver ?sneakers", "SilverSneakers"), (r"silver ?& ?fit", "Silver&Fit"), (r"\bone pass\b", "One Pass"),
+    (r"renew active", "Renew Active")))
 
 
 def fitness_program(got):
     """The fitness program the best source names, and the fact that names it."""
     for f in sorted(got, key=lambda f: RANK[f["source"]]):
-        for pattern, name in FITNESS_PROGRAMS.items():
+        for pattern, name in FITNESS_PROGRAMS:
             if pattern.search(f["quotes"]):
                 return name, [f]
     return None, []
@@ -985,7 +985,8 @@ def fitness_program(got):
 def extra_benefits(organization, found, prices=False, programs=False):
     """Names fitness, meals and transportation for every member, then shows routine foot care, a fitness allowance,
     a card for members with chronic conditions, and the programs after a heart-failure hospital stay.
-    With prices, it shows the fitness and meals copays and how many meals. With programs, it names the fitness program."""
+    With prices, it shows the fitness and meals copays and how many meals. With programs, it names the fitness program
+    and then each other program for every member."""
     parts, cited = [], []
     for name, leaf in (("Fitness", "fitness"), ("Meals", "meals"), ("Transportation", "extras.transportation")):
         got = top(exactly(found, (leaf,), lambda f: extra(f) and offers(f),
@@ -1006,7 +1007,11 @@ def extra_benefits(organization, found, prices=False, programs=False):
         else:
             parts.append(name)
             cited += got
-        cited += [f for f in naming if f not in cited]
+        cited += naming
+    if programs:
+        got = other_programs(found)
+        parts += got[0]
+        cited += got[1]
     got = foot_care(found)
     parts += got[0]
     cited += got[1]
@@ -1032,25 +1037,22 @@ def extra_benefits(organization, found, prices=False, programs=False):
         names += ["home-delivered meals"] if any(f["benefit"] == "meals" for f in heart) else []
         parts.append(f"After a heart-failure hospital stay: {', '.join(names)}")
         cited += heart
-    if programs:
-        got = other_programs(found)
-        parts += got[0]
-        cited += got[1]
     return [("; ".join(parts), unique(cited))]
 
 
 def other_programs(found):
-    """Names each other program for every member, with its price and how often an allowance renews."""
+    """Names each other program for every member, with its price and how often an allowance renews. Each program's
+    best source gives it, since a page may name only some programs."""
     programs = exactly(found, ("other_supplemental",), lambda f: everyone(f) and f["pool"] and f["cost_kind"] in DOT_KINDS,
-                       "it is not a program for every member")
+                       "it is not a named program that every member has")
     parts, cited = [], []
     for pool in sorted({f["pool"] for f in programs}):
         got = top([f for f in programs if f["pool"] == pool])
-        priced = [f for f in got if f["cost_kind"] in PRICED + ("allowance",)]
+        allowances = [f for f in got if f["cost_kind"] == "allowance"]
+        priced = allowances or [f for f in got if f["cost_kind"] in PRICED]
         price = f" {show(priced)}" if priced else ""
-        allowance = [f for f in priced if f["cost_kind"] == "allowance"]
-        period = f"/{renews(allowance)}" if allowance and renews(allowance) else ""
-        parts.append(f"{pool}{price}{period}")
+        period = f"/{renews(allowances)}" if allowances and renews(allowances) else ""
+        parts.append(f"{pool.replace(chr(0x2011), '-')}{price}{period}")
         cited += priced or got
     return parts, cited
 
