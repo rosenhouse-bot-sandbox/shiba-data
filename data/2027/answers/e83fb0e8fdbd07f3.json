@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-153.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 9 in-network mandatory supplemental dental list for H1036-317-0 says '$0 copay for bitewing x-rays, scaling for moderate inflammation up to 1 per year.' That supports a visit limit of 1 per year for scaling for moderate inflammation, which is a cleaning-type preventive service.\"}]\n```",
+ "usage": {
+  "input_tokens": 3807,
+  "output_tokens": 555,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

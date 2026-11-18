@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-158.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 73 Prophylaxis (Cleaning) row says 2 procedure codes per calendar year. The table shows the same 0% in-network and out-of-network, so the limit applies to both networks.\"}]\n```",
+ "usage": {
+  "input_tokens": 3756,
+  "output_tokens": 448,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-96.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 34, supplemental Preventive dental services (Class I): cleanings (prophylaxis or periodontal maintenance), any combination, 2 every calendar year. The page notes this limit is shared with the full mouth debridement visit, but the count of 2 per calendar year for cleanings is correct.\"}]\n```",
+ "usage": {
+  "input_tokens": 3781,
+  "output_tokens": 467,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-76.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 76 supplemental dental chart: the Exams row for emergency diagnostic exam (D0140) states its own limit of 2 procedure codes per calendar year. Network is in-network as stated.\"}]\n```",
+ "usage": {
+  "input_tokens": 3416,
+  "output_tokens": 247,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-114.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 91 does support 6 intraoral (periapical) X-ray procedure codes per calendar year at 0% in network. The page's $52.10 monthly premium suggests an optional package, but the name 'MyOption DEN972' does not appear on page 91, so the package field cannot be verified.\"}]\n```",
+ "usage": {
+  "input_tokens": 3838,
+  "output_tokens": 363,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

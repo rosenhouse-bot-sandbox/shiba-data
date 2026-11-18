@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-95.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 34, preventive dental (Class I), non-Medicare supplemental list: 'Bitewing x-rays, 1 set every calendar year'. The limit applies to the in-network preventive benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 3756,
+  "output_tokens": 281,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

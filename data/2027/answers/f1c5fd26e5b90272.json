@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-134.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 90 supports 2 prophylaxis (cleaning) procedure codes per calendar year. But neither the quote nor the page names the package 'MyOption DEN972', so that field cannot be verified.\"}]\n```",
+ "usage": {
+  "input_tokens": 3939,
+  "output_tokens": 253,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-104.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 43 lists 'Topical fluoride, 1 every calendar year' under supplemental preventive dental (Class I) for this plan. The plan covers that row both in network ($0 copay) and out of network (50% coinsurance), and the frequency limit is not tied to either network, so network any fits.\"}]\n```",
+ "usage": {
+  "input_tokens": 3780,
+  "output_tokens": 284,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

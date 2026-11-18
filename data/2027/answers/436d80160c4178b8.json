@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-117.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 84 Diagnostic Services lists periodontal exam (D0180) and comprehensive exam (D0150) with a limit of 1 procedure code every 3 calendar years. This sits in the dental chart just before the Mandatory Supplemental Hearing Benefit, so it reads as supplemental, in-network dental with no package named.\"}]\n```",
+ "usage": {
+  "input_tokens": 3320,
+  "output_tokens": 861,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

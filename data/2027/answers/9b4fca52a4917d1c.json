@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-143.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 62 supplemental dental row reads 'Cleanings (prophylaxis) - 2 every year', with a $0 in-network copay for each cleaning. The frequency applies to the service, so it holds in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2562,
+  "output_tokens": 340,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

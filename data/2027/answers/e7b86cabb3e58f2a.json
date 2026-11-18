@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-112.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 83, Full Mouth or Panoramic X-rays row in the mandatory supplemental dental chart: 1 procedure code every 5 calendar years. This applies to in-network care.\"}]\n```",
+ "usage": {
+  "input_tokens": 3547,
+  "output_tokens": 210,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

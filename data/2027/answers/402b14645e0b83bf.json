@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-78.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 76 Preventive Services, Exams row: 'Frequency/Limits – 2 procedure codes per calendar year' for Periodic oral exam D0120. It is a Mandatory Supplemental Dental benefit, and the plan, the in-network setting, the count and the period all match.\"}]\n```",
+ "usage": {
+  "input_tokens": 3410,
+  "output_tokens": 347,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
