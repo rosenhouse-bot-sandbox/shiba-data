@@ -1,4 +1,4 @@
-import contextlib, glob, io, json, os, pathlib, sys, threading, unittest
+import contextlib, glob, io, json, os, pathlib, re, sys, threading, unittest
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -435,6 +435,23 @@ class StepTest(StepsTest):
         self.assertEqual(dict(tests, **{"H5439-019-0": None}), dict(v30["plan_notes"]["tests"], **{"H5439-019-0": None}))
         self.assertIn(document_facts.SPIROMETRY, tests["H5439-019-0"])
         self.assertIn("`tests.diagnostic` coinsurance 20% fact with no `condition`", tests["H5439-019-0"])
+
+    def test_version_32_reads_programs_for_every_plan_and_some_plans_dental_frequencies_and_eyewear_discounts(self):
+        v31, v32 = document_facts.VERSIONS[31], document_facts.VERSIONS[32]
+        changed = ("notes", "find", "plan_notes", "targets")
+        self.assertEqual({k: v for k, v in v32.items() if k not in changed}, {k: v for k, v in v31.items() if k not in changed})
+        self.assertEqual(v32["notes"], v31["notes"] | {"other_supplemental": document_facts.PROGRAMS})
+        find = [re.compile(p, re.I) for p in v32["find"]["other_supplemental"]]
+        for page in ("My Wellcare Rewards", "24-hour nurse line", "Nurse Advice Line", "a social support platform"):
+            self.assertTrue(any(p.search(page) for p in find), page)
+        self.assertFalse(any(p.search("rewarding") for p in find))
+        self.assertEqual(dict(v32["find"], other_supplemental=None), dict(v31["find"], other_supplemental=None))
+        notes = v32["plan_notes"]
+        self.assertEqual(notes["tests"], v31["plan_notes"]["tests"])
+        self.assertEqual(set(notes["dental"].values()), {document_facts.DENTAL_FREQUENCIES})
+        self.assertEqual(set(notes["vision"].values()), {document_facts.EYEWEAR_DISCOUNT})
+        self.assertLessEqual(set(notes["dental"]), set(v32["targets"]["dental"]))
+        self.assertLessEqual(set(notes["vision"]), set(v32["targets"]["vision"]))
 
     def test_a_second_reader_sees_the_pages_after_and_takes_reimbursements_as_its_version_says(self):
         page = "Members receive 100% reimbursement."
