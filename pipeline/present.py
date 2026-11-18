@@ -688,6 +688,48 @@ def optional_packages(organization, found, allowances=True, details=True):
     return [("; ".join(parts), unique(cited))] if parts else [("", top(none) if none else [])]
 
 
+def with_details(rule, *details):
+    """The rule, with each detail's part added to a cell that shows something. A detail returns (part, cited)."""
+    def shown(organization, found):
+        (value, cited), = rule(organization, found)
+        for detail in details if value else ():
+            part, used = detail(found)
+            if part:
+                value, cited = f"{value}; {part}", cited + used
+        return [(value, unique(cited))]
+    shown.__name__, shown.__qualname__ = rule.__name__, rule.__qualname__
+    return shown
+
+
+def out_of_network(*services):
+    """A detail: "OON <label> <price>, ..." from each (label, benefit)'s out-of-network price for every member."""
+    @unless("it is not an out-of-network supplemental price for every member that pays part of the cost")
+    def ok(f):
+        return (f["network"] == "out" and f["covered_by"] == "supplemental" and f["cost_kind"] in PRICED
+                and f["amount"] != "100%" and not (f["condition"] or f["package"] or f["pool"] or f["provider_tier"]))
+
+    def detail(found):
+        parts, cited = [], []
+        for label, leaf in services:
+            prices = top(exactly(found, (leaf,), ok, ok.unless))
+            if prices:
+                parts.append(f"{label} {show(prices)}")
+                cited += prices
+        return ("OON " + ", ".join(parts) if parts else "", cited)
+    return detail
+
+
+def dental_deductible(found):
+    """A detail: the yearly deductible for routine dental care, or "no deductible"."""
+    deductibles = top(exactly(found, ("dental", "dental.preventive", "dental.comprehensive"),
+                              lambda f: everyone(f) and f["cost_kind"] == "deductible" and period(f) == "year",
+                              "it is not a yearly dental deductible for every member"))
+    if not deductibles:
+        return "", []
+    shown_ = show(deductibles)
+    return ("no deductible" if shown_ == "$0" else f"deductible {shown_}/year"), deductibles
+
+
 def with_packages(rule):
     """The rule, followed by "With <package>: ..." for the parts that the rule shows from each priced package's own
     facts and not from the plan's."""
@@ -1058,11 +1100,15 @@ LEAVES = {"L_xray_imaging": ("imaging",), "AB_ambulance": ("ambulance", "emergen
           "E_moop": ("moop",), "N_pharmacy_deductible": ("part_d_deductible",)}
 
 
-# Version 19 shows what a package gives in each benefit's own column, and lists each hearing aid copay.
+# Version 19 shows what a package gives in each benefit's own column, lists each hearing aid copay, and adds
+# out-of-network prices and the dental deductible.
 DVHA = {"C_premium": plan_premium, "D_premium_full_extra_help": extra_help_premium,
         "E_optional_packages": lambda o, found: optional_packages(o, found, details=False),
-        "F_dental": with_packages(dental), "G_vision": with_packages(vision),
-        "H_hearing": with_packages(lambda o, found: hearing(o, found, each_price=True)),
+        "F_dental": with_packages(with_details(dental, dental_deductible, out_of_network(
+            ("PREV", "dental.preventive"), ("COMP", "dental.comprehensive")))),
+        "G_vision": with_packages(with_details(vision, out_of_network(("exam", "vision.exam"), ("eyewear", "vision.eyewear")))),
+        "H_hearing": with_packages(with_details(lambda o, found: hearing(o, found, each_price=True),
+                                                out_of_network(("exam", "hearing.exam"), ("aids", "hearing.aids")))),
         "I_alt_care_otc_travel": alt_care_otc_travel, "J_extra_benefits": extra_benefits}
 DVHA_LEAVES = {"C_premium": ("plan_premium",), "D_premium_full_extra_help": ("plan_premium", "part_d_deductible"),
                "E_optional_packages": ("packages",), "F_dental": ("dental",),

@@ -772,6 +772,39 @@ class WithPackagesTest(unittest.TestCase):
         self.assertEqual(present.with_packages(present.vision)("", found), [("exam $0", found[:1])])
 
 
+class DetailsTest(unittest.TestCase):
+    def test_adds_out_of_network_prices_for_each_service(self):
+        found = [routine("dental.preventive"), routine("dental.preventive", "coinsurance", "50%", network="out"),
+                 routine("dental.comprehensive", "coinsurance", "50%", network="out"),
+                 routine("dental.comprehensive", "not_covered", "", network="out", source="SB")]
+        rule = present.with_details(present.dental, present.out_of_network(("PREV", "dental.preventive"),
+                                                                           ("COMP", "dental.comprehensive")))
+        self.assertEqual(rule("", found), [("PREV $0; OON PREV 50%, COMP 50%", found[:3])])
+
+    def test_skips_a_100_percent_coinsurance_which_pays_nothing(self):
+        found = [routine("dental.preventive"), routine("dental.preventive", "coinsurance", "100%", network="out")]
+        rule = present.with_details(present.dental, present.out_of_network(("PREV", "dental.preventive")))
+        self.assertEqual(rule("", found), [("PREV $0", found[:1])])
+
+    def test_skips_a_conditional_or_packaged_out_of_network_price(self):
+        found = [routine("vision.exam"), routine("vision.exam", "copay", "$40", network="out", condition="diabetes"),
+                 routine("vision.exam", "copay", "$40", network="out", package="Rider")]
+        rule = present.with_details(present.vision, present.out_of_network(("exam", "vision.exam")))
+        self.assertEqual(rule("", found), [("exam $0", found[:1])])
+
+    def test_adds_a_yearly_dental_deductible(self):
+        found = [routine("dental.preventive"), routine("dental.comprehensive", "deductible", "$50", limit="per year")]
+        rule = present.with_details(present.dental, present.dental_deductible)
+        self.assertEqual(rule("", found), [("PREV $0; deductible $50/year", found)])
+        none = routine("dental", "deductible", "$0", limit="per calendar year")
+        self.assertEqual(rule("", [found[0], none]), [("PREV $0; no deductible", [found[0], none])])
+
+    def test_adds_nothing_to_a_blank_cell(self):
+        found = [routine("dental.preventive", "coinsurance", "50%", network="out")]
+        rule = present.with_details(present.dental, present.out_of_network(("PREV", "dental.preventive")))
+        self.assertEqual(rule("", found)[0][0], "")
+
+
 class DentalTest(unittest.TestCase):
     def test_shows_preventive_and_comprehensive_prices_and_the_yearly_max(self):
         found = [routine("dental.preventive", "coinsurance", "0%"), routine("dental.comprehensive", "coinsurance", "50%"),
