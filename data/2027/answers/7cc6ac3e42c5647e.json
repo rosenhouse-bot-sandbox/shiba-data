@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-75.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 91, Section 2.3, describes the HMO Travel Benefit, care while traveling in the U.S., from National Medicare HMO/SNP network providers. It is offered to all members of this plan and gives no separate amount, so in-network supplemental covered is correct.\"}]\n```",
+ "usage": {
+  "input_tokens": 2520,
+  "output_tokens": 354,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
