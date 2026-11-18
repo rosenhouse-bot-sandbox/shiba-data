@@ -262,31 +262,27 @@ VERSIONS[31] = dict(VERSIONS[30], plan_notes={"tests": VERSIONS[30]["plan_notes"
                    "services`: a `tests.diagnostic` coinsurance 20% fact with no `condition`."}})
 DENTAL_FREQUENCIES = ("Give how often the plan covers each preventive service it lists, such as 2 cleanings per year or "
                       "1 panoramic X-ray every 5 years, as a `dental.preventive` `visit_limit` fact: the count in "
-                      "`amount`, the service in `unit`, such as `cleanings`, and the period in `limit`.")
-EYEWEAR_DISCOUNT = ("A discount on eyewear with no allowance is a `vision.eyewear` `supplemental` `covered` fact with "
-                    "`unit` `discount`.")
+                      "`amount`, the service in `condition`, such as `cleanings`, and the period in `limit`.")
 PROGRAMS = ("A rewards program, a nurse advice line and a social support program are each an `other_supplemental` fact "
             "with `pool` set to the name the document gives: an `allowance` when the page gives the most a member can "
             "earn, a `copay` when it gives a price, or else `covered`.")
-EVERY_PLAN = (
+PROGRAM_PLANS = (
     "H1036-153-0", "H1036-306-0", "H1036-317-0", "H1036-323-0", "H1372-003-0", "H2001-045-0", "H2056-003-0",
     "H2056-018-0", "H2406-042-0", "H2406-070-0", "H2406-073-0", "H2923-001-0", "H2923-005-0", "H2923-009-0",
     "H2923-019-0", "H2923-025-0", "H2923-028-3", "H3805-040-0", "H3805-041-0", "H3805-048-0", "H3817-008-1",
     "H3817-009-1", "H3817-010-0", "H3817-011-1", "H5216-048-0", "H5216-427-2", "H5216-428-2", "H5216-455-0",
     "H5439-010-0", "H5439-011-0", "H5439-015-0", "H5439-019-0", "H6815-038-0", "H7006-018-0", "H7006-021-0",
     "H9003-001-0", "H9003-006-0", "H9003-009-0")
-# Version 32 reads details that the final volunteer sheets show: rewards programs and nurse lines for every plan, and
-# dental frequencies and eyewear discounts for the plans whose sheet cells show them.
+# Version 32 reads details that the final volunteer sheets show: rewards, nurse lines and social support for every
+# plan, and dental frequencies for the plans whose sheet cells show them.
 # Its targets are the plans a dry run (blast.py) found it asks about.
 VERSIONS[32] = dict(
     VERSIONS[31], notes=VERSIONS[31]["notes"] | {"other_supplemental": PROGRAMS},
-    find=VERSIONS[31]["find"] | {"other_supplemental": (r"\brewards?\b", r"nurse (?:advice )?(?:line|hotline)",
-                                                        r"social support")},
-    plan_notes=VERSIONS[31]["plan_notes"] | {
-        "dental": dict.fromkeys(("H1036-153-0", "H1036-306-0", "H1036-317-0", "H1036-323-0", "H5216-428-2", "H5216-048-0",
-                                 "H5216-455-0", "H5216-427-2", "H3817-008-1", "H3817-009-1", "H3817-010-0", "H3817-011-1",
-                                 "H6815-038-0", "H5439-015-0", "H5439-019-0", "H5439-011-0", "H5439-010-0",
-                                 "H1372-003-0"), DENTAL_FREQUENCIES),
-        "vision": dict.fromkeys(("H3805-041-0", "H2406-070-0", "H3805-040-0"), EYEWEAR_DISCOUNT)})
-VERSIONS[32]["targets"] = {"other_supplemental": EVERY_PLAN} | {
-    g: tuple(VERSIONS[32]["plan_notes"][g]) for g in ("dental", "vision")}
+    find=VERSIONS[31]["find"] | {"other_supplemental": (
+        r"\bmy \w+ rewards\b", r"\bgo365\b", r"\bearn\w*\b[^\n]{0,60}\brewards?\b", r"\brewards? program",
+        r"nurse (?:advice )?(?:line|hotline)", r"advice nurse", r"\bsocial support")},
+    plan_notes=VERSIONS[31]["plan_notes"] | {"dental": dict.fromkeys((
+        "H1036-153-0", "H1036-306-0", "H1036-317-0", "H1036-323-0", "H5216-428-2", "H5216-048-0", "H5216-455-0",
+        "H5216-427-2", "H3817-008-1", "H3817-009-1", "H3817-010-0", "H3817-011-1", "H6815-038-0", "H5439-015-0",
+        "H5439-019-0", "H5439-011-0", "H5439-010-0", "H1372-003-0"), DENTAL_FREQUENCIES)})
+VERSIONS[32]["targets"] = {"other_supplemental": PROGRAM_PLANS, "dental": tuple(VERSIONS[32]["plan_notes"]["dental"])}
