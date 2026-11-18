@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-83.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5 Hearing aids row: the service description states '1 per ear per calendar year', and the row has both in-network and out-of-network costs. The limit is part of the benefit description, so it applies across both networks.\"}]\n```",
+ "usage": {
+  "input_tokens": 3192,
+  "output_tokens": 406,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

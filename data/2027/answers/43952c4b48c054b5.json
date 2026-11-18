@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-4ec81cd0d2695486.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 65 supplemental row: hearing aid fitting and evaluation has a $0 copayment.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Page 65 shows a $0 copayment for the routine hearing exam, but it states no 'per visit' unit, so that field is unsupported.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 65 routine hearing exam row: limit 1 visit every year.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 65 hearing aid fitting and evaluation row: unlimited visits, with no count given.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 65: Medicare-covered diagnostic hearing and balance evaluations have 20% coinsurance.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 65 prescription hearing aids row: $1,600 every 2 years for both ears combined, described as an allowance.\"}]\n```",
+ "usage": {
+  "input_tokens": 3574,
+  "output_tokens": 765,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

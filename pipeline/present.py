@@ -608,7 +608,8 @@ def each_per_aid(found):
 
 def hearing(organization, found, each_price=False):
     """Shows the routine hearing exam copay, then a hearing aid allowance or else copays, and how many aids.
-    The count comes from a visit limit, or is 2 when the best source prices or limits aids per ear.
+    The count comes from a visit limit, doubled when it is per ear, or is 2 when the best source prices or limits aids
+    per ear.
     With each_price, it lists each aid copay instead of their range."""
     @unless("it is not a routine hearing aid allowance")
     def allowance_ok(f):
@@ -636,7 +637,8 @@ def hearing(organization, found, each_price=False):
     pairs = [f for f in priced + renews if PAIR.search(f["unit"] + " " + f["limit"])]
     counted = limits or pairs
     if counted:
-        parts.append(f"{min(int(f['amount']) for f in limits) if limits else 2} aids{per(renews)}")
+        aids = min(int(f["amount"]) * (2 if f["unit"] == "per ear" else 1) for f in limits) if limits else 2
+        parts.append(f"{aids} aids{per(renews)}")
     return [("; ".join(parts), unique(exams + priced + renews + counted))]
 
 

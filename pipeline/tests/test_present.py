@@ -656,6 +656,11 @@ class HearingTest(unittest.TestCase):
                  routine("hearing.aids", "visit_limit", "4", limit="")]
         self.assertEqual(column(present.hearing, *found), [("exam $0; aids $499-$999; 2 aids/year", found)])
 
+    def test_a_limit_of_1_aid_per_ear_means_2_aids(self):
+        found = [routine("hearing.aids", amount="$499", unit="per aid"),
+                 routine("hearing.aids", "visit_limit", "1", unit="per ear", limit="per calendar year")]
+        self.assertEqual(column(present.hearing, *found), [("aids $499; 2 aids/year", found)])
+
     def test_an_allowance_per_ear_wins_over_a_copay_and_means_2_aids(self):
         found = [routine("hearing.aids", "allowance", "$500", unit="per ear", limit="every 3 calendar years"),
                  routine("hearing.aids", unit="per ear")]

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-cd39f32cdbd73e52.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 Routine hearing exam row: $0 copay in network for a routine hearing exam.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 4 Exam to diagnose and treat hearing and balance issues row: $80 copay out of network.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 4 Hearing aids row: 3-year manufacturer warranty on all prescription hearing aids, in network.\"},\n{\"id\": 3, \"ok\": false, \"reason\": \"Page 4 diagnostic exam row: the $0 copay is the in-network amount. Out of network is $80.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 4 Hearing aids row (in network): the warranty text says it covers a trial period. No length is given and none is claimed.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 4 Hearing aids row: allowance for 2 hearing aids every year, in network.\"},\n{\"id\": 6, \"ok\": false, \"reason\": \"Page 4 diagnostic exam row: the $80 copay is the out-of-network amount. In network is $0.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 4 Exam to diagnose and treat hearing and balance issues row: $0 copay in network, Medicare-covered.\"},\n{\"id\": 8, \"ok\": false, \"reason\": \"Page 4 Routine hearing exam row: $0 is in network. Out of network is $80.\"},\n{\"id\": 9, \"ok\": true, \"reason\": \"Page 4 Routine hearing exam row: $80 copay out of network.\"},\n{\"id\": 10, \"ok\": true, \"reason\": \"Page 4 Hearing aids row: $700 allowance for 2 hearing aids every year, in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 4517,
+  "output_tokens": 1074,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

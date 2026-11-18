@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-be9deec855112c1d.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 76 lists the first year of follow-up provider visits as part of the hearing aid purchase.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 76 shows a $0 copay for hearing aid fitting.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 77 includes 80 batteries per aid for non-rechargeable models.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 76 shows a $0 copay for the routine hearing exam.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 76 shows a $40 copay for Medicare-covered hearing services and for balance exams.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 77 includes a 60-day trial period with the hearing aid purchase.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 76 covers 1 routine hearing exam each year.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 76 shows a $399 copay per ear for Advanced and $699 per ear for Premium hearing aids.\"},\n{\"id\": 8, \"ok\": true, \"reason\": \"Page 77 includes a 3-year extended warranty.\"}]\n```",
+ "usage": {
+  "input_tokens": 4609,
+  "output_tokens": 667,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

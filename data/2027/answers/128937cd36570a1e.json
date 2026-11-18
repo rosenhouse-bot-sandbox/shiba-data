@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "5f6896f5c437eeed.md",
+ "reply": "```json\n[{\"plan_id\": \"H7199-002-0\", \"benefit\": \"hearing\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$40\", \"page\": 7, \"quotes\": [\"Care: $40 copay Care: $40 copay\"], \"note\": \"Medicare-Covered Hearing Care is $40 copay in both the in-network and out-of-network columns. The quote uses one table row across both columns because the text 'Medicare-Covered Hearing Care: $40 copay' appears twice on the page.\"}]\n```",
+ "usage": {
+  "input_tokens": 4604,
+  "output_tokens": 995,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
