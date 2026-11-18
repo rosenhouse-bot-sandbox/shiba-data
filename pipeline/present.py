@@ -594,9 +594,16 @@ def vision(organization, found):
 PAIR = re.compile(r"per ear|\b(?:2|two) hearing aids?\b", re.I)
 
 
-def hearing(organization, found):
+def each(found):
+    """Each of the facts' amounts, lowest first, joined by "or"."""
+    amounts_ = {a.strip() for f in found for a in f["amount"].split(" or ")}
+    return " or ".join(sorted(amounts_, key=lambda a: facts.number(a.split("-")[0])))
+
+
+def hearing(organization, found, each_price=False):
     """Shows the routine hearing exam copay, then a hearing aid allowance or else copays, and how many aids.
-    The count comes from a visit limit, or is 2 when the best source prices or limits aids per ear."""
+    The count comes from a visit limit, or is 2 when the best source prices or limits aids per ear.
+    With each_price, it lists each aid copay instead of their range."""
     @unless("it is not a routine hearing aid allowance")
     def allowance_ok(f):
         return routine(f) and f["cost_kind"] in ("allowance", "max") and not f["provider_tier"]
@@ -614,6 +621,8 @@ def hearing(organization, found):
     if allowance:
         ear = " per ear" if any(f["unit"] == "per ear" for f in allowance) else ""
         parts.append(f"aids allowance {show(allowance)}{ear}{per(renews)}")
+    elif copays and each_price and show(copays) != "$0":
+        parts.append(f"aids {each(copays)} per aid")
     elif copays:
         parts.append(f"aids {show(copays)}")
     limits = top([f for f in found if f["benefit"] == "hearing.aids" and routine(f) and not f["provider_tier"]
@@ -640,10 +649,10 @@ def allowance(f):
     return f["cost_kind"] == "allowance" and not (f["provider_tier"] or f["pool"])
 
 
-def optional_packages(organization, found, allowances=True):
-    """Shows each optional package's monthly premium, its yearly dental maximum, and with allowances its eyewear and
-    hearing aid allowances. A package that also covers other benefits says "dental max". A document that says the plan
-    sells none cites a blank."""
+def optional_packages(organization, found, allowances=True, details=True):
+    """Shows each optional package's monthly premium. With details, it also shows its yearly dental maximum, and with
+    allowances its eyewear and hearing aid allowances. A package that also covers other benefits says "dental max".
+    A document that says the plan sells none cites a blank."""
     mine = keep([f for f in found if f["package"] or facts.covers("packages", f["benefit"])],
                 lambda f: f["covered_by"] == "supplemental" and f["network"] in ("in", "any") and not f["condition"],
                 lambda f: "it is not a supplemental in-network benefit for every member")
@@ -655,6 +664,10 @@ def optional_packages(organization, found, allowances=True):
         premium = best(package, "packages", "any", package_premium)
         dental_max = best(package, "dental", "any", yearly_max)
         part = f"{name} {show(premium)}/mo"
+        if not details:
+            parts.append(part)
+            cited += premium
+            continue
         if dental_max:
             others = any(not facts.covers("dental", f["benefit"]) and not facts.covers("packages", f["benefit"])
                          for f in package)
@@ -673,6 +686,27 @@ def optional_packages(organization, found, allowances=True):
     none = keep([f for f in named if f["cost_kind"] == "not_covered"], lambda f: not parts,
                 lambda f: "a package for sale won")
     return [("; ".join(parts), unique(cited))] if parts else [("", top(none) if none else [])]
+
+
+def with_packages(rule):
+    """The rule, followed by "With <package>: ..." for the parts that the rule shows from each priced package's own
+    facts and not from the plan's."""
+    def shown(organization, found):
+        (value, cited), = rule(organization, found)
+        if not value:
+            cited = []
+        names = sorted({f["package"] for f in best(found, "packages", "any", package_premium)})
+        for name in names:
+            pairs = [(dict(f, package=""), f) for f in found if f["package"] == name]
+            packed = {id(copy): f for copy, f in pairs}
+            (extra_, got), = rule(organization, [copy for copy, _ in pairs])
+            extra_ = "; ".join(part for part in extra_.split("; ") if part and part not in value.split("; "))
+            if extra_ and any(f["source"] in facts.DOCUMENTS for f in got):
+                value = f"{value}. With {name}: {extra_}" if value else f"With {name}: {extra_}"
+                cited = cited + [packed[id(f)] for f in got]
+        return [(value, unique(cited))]
+    shown.__name__, shown.__qualname__ = rule.__name__, rule.__qualname__
+    return shown
 
 
 MONTHS = re.compile(r"\b(?:every|per|each)\s+(month|quarter|three months|six months)\b", re.I)
@@ -1024,8 +1058,11 @@ LEAVES = {"L_xray_imaging": ("imaging",), "AB_ambulance": ("ambulance", "emergen
           "E_moop": ("moop",), "N_pharmacy_deductible": ("part_d_deductible",)}
 
 
+# Version 19 shows what a package gives in each benefit's own column, and lists each hearing aid copay.
 DVHA = {"C_premium": plan_premium, "D_premium_full_extra_help": extra_help_premium,
-        "E_optional_packages": optional_packages, "F_dental": dental, "G_vision": vision, "H_hearing": hearing,
+        "E_optional_packages": lambda o, found: optional_packages(o, found, details=False),
+        "F_dental": with_packages(dental), "G_vision": with_packages(vision),
+        "H_hearing": with_packages(lambda o, found: hearing(o, found, each_price=True)),
         "I_alt_care_otc_travel": alt_care_otc_travel, "J_extra_benefits": extra_benefits}
 DVHA_LEAVES = {"C_premium": ("plan_premium",), "D_premium_full_extra_help": ("plan_premium", "part_d_deductible"),
                "E_optional_packages": ("packages",), "F_dental": ("dental",),
@@ -1077,9 +1114,12 @@ def plans(data):
     return layers.rows(data / "generated" / "plans.csv")
 
 
-# Each column whose rule a version changed, that version, and the rule before it.
-EARLIER_RULES = {("dvha", "E_optional_packages"): (17, lambda o, found: optional_packages(o, found, allowances=False))} | {
-    ("main", column): (18, rule) for column, rule in {
+# Each column whose rule a version changed: each version that changed it, and the rule before that version.
+EARLIER_RULES = {
+    ("dvha", "E_optional_packages"): ((17, lambda o, found: optional_packages(o, found, allowances=False)),
+                                      (19, optional_packages)),
+    ("dvha", "F_dental"): ((19, dental),), ("dvha", "G_vision"): ((19, vision),), ("dvha", "H_hearing"): ((19, hearing),)} | {
+    ("main", column): ((18, rule),) for column, rule in {
         "E_moop": moop, "F_primary_care": visits("office.pcp"), "G_specialist": visits("office.specialist"),
         "H_inpatient": inpatient, "I_outpatient_surgery": outpatient_surgery, "J_outpatient_rehab": outpatient_rehab,
         "K_tests_labs": tests_labs, "L_xray_imaging": xray_imaging, "M_part_b_drugs": part_b_drugs,
@@ -1087,8 +1127,10 @@ EARLIER_RULES = {("dvha", "E_optional_packages"): (17, lambda o, found: optional
 
 
 def rule(sheet, column, version):
-    since, earlier = EARLIER_RULES.get((sheet, column), (0, None))
-    return earlier if version < since else SHEETS[sheet][0][column]
+    for since, earlier in EARLIER_RULES.get((sheet, column), ()):
+        if version < since:
+            return earlier
+    return SHEETS[sheet][0][column]
 
 
 def lines(data, column, document=None, sheet="main", version=None):
@@ -1209,6 +1251,7 @@ VERSIONS[16] = {}
 VERSIONS[17] = {}
 # Version 18 holds no cell. It presents main columns as the final chart does.
 VERSIONS[18] = {}
+VERSIONS[19] = {}
 # The version that first presents each later column. Earlier versions hold its cells.
 SINCE = {("dvha", "C_premium"): 3, ("dvha", "G_vision"): 4, ("dvha", "H_hearing"): 4, ("dvha", "E_optional_packages"): 5,
          ("dvha", "F_dental"): 6, ("dvha", "I_alt_care_otc_travel"): 6, ("dvha", "J_extra_benefits"): 6,
