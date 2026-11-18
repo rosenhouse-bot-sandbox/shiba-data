@@ -643,6 +643,51 @@ def hearing(organization, found, each_price=False, exam_renews=False):
     return [("; ".join(parts), unique(exams + exam_renewals + priced + renews + counted))]
 
 
+VISITS = (("fitting", re.compile(r"fitting|evaluation", re.I)), ("follow-ups", re.compile(r"follow.?up", re.I)))
+FIRST_YEAR = re.compile(r"\bfirst (?:year|12 months)\b", re.I)
+UNLIMITED = re.compile(r"\bunlimited\b", re.I)
+AID_EXTRAS = (("trial period", re.compile(r"^(\d+) days?$", re.I), "{}-day trial"),
+              ("warranty", re.compile(r"^(\d+) years?$", re.I), "{}-year warranty"),
+              ("batteries", re.compile(r"^(\d+ batteries per aid)$", re.I), "{}"))
+
+
+def visit_count(f):
+    """"1/year", "3 in the first year", "unlimited" or the like from a visit limit, or "" if it gives no count."""
+    count = f["amount"] if f["cost_kind"] == "visit_limit" else "unlimited" if UNLIMITED.search(f["limit"]) else ""
+    when = per([f]) or (" in the first year" if FIRST_YEAR.search(f["limit"]) else "")
+    return f"{count}{when}" if count else ""
+
+
+def hearing_details(found):
+    """A detail: the best source's price and count of hearing aid fittings and follow-up visits, then the trial period,
+    warranty and batteries that come with an aid."""
+    mine = [f for f in found if f["benefit"] in ("hearing.exam", "hearing.aids") and extra(f) and f["condition"]]
+    parts, cited = [], []
+    for name, words in VISITS:
+        visits = [f for f in mine if f["benefit"] == "hearing.exam" and words.search(f["condition"])]
+        prices = top([f for f in visits if f["cost_kind"] in PRICED])
+        counts = top([f for f in visits if f["cost_kind"] in ("visit_limit", "covered") and visit_count(f)])
+        if len({visit_count(f) for f in counts}) > 1:
+            counts = []
+        shown = " ".join(p for p in (show(prices), visit_count(counts[0]) if counts else "") if p)
+        if shown:
+            parts.append(f"{name} {shown}")
+            cited += prices + counts
+    extras = []
+    for item, length, label in AID_EXTRAS:
+        got = top([f for f in mine if f["benefit"] == "hearing.aids" and f["cost_kind"] == "covered"
+                   and f["condition"].lower() == item and (f["limit"] or item == "batteries")])
+        lengths = {m[1] for f in got for m in [length.match(f["limit"])] if m}
+        if lengths and len(lengths) == 1:
+            extras.append(label.format(lengths.pop()))
+        elif item == "batteries" and got:
+            extras.append("batteries")
+        else:
+            continue
+        cited += got
+    return "; ".join(parts + ([", ".join(extras)] if extras else [])), cited
+
+
 @unless("it is not a monthly package premium")
 def package_premium(f):
     return f["cost_kind"] == "premium" and f["unit"] in ("per month", "")
@@ -1313,7 +1358,7 @@ DVHA = {"C_premium": plan_premium, "D_premium_full_extra_help": extra_help_premi
         "G_vision": or_none(with_lacking(with_packages(with_details(vision, VISION_OON)),
                                          ("no eyewear allowance", "vision.eyewear")), "vision"),
         "H_hearing": or_none(with_lacking(with_packages(with_details(
-            lambda o, found: hearing(o, found, each_price=True, exam_renews=True), HEARING_OON)),
+            lambda o, found: hearing(o, found, each_price=True, exam_renews=True), hearing_details, HEARING_OON)),
             ("no hearing aid allowance", "hearing.aids")), "hearing"),
         "I_alt_care_otc_travel": lambda o, found: alt_care_otc_travel(o, found, telehealth=True, food=True, rates=True,
                                                                       none=True, urgent_care=True),
@@ -1534,7 +1579,8 @@ VERSIONS[21] = {}
 # Version 22 holds no cell. It says when a plan has none of a benefit, adds the Part B giveback to extra benefits, and
 # shows an allowance that alternative care shares with dental and the services' price.
 VERSIONS[22] = {}
-# Version 23 holds no cell. It shows worldwide urgent care and how often the hearing exam renews.
+# Version 23 holds no cell. It shows worldwide urgent care, how often the hearing exam renews, hearing aid fittings and
+# follow-ups, and the trial, warranty and batteries that come with an aid.
 VERSIONS[23] = {}
 # The version that first presents each later column. Earlier versions hold its cells.
 SINCE = {("dvha", "C_premium"): 3, ("dvha", "G_vision"): 4, ("dvha", "H_hearing"): 4, ("dvha", "E_optional_packages"): 5,

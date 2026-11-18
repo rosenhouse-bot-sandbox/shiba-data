@@ -670,6 +670,30 @@ class HearingTest(unittest.TestCase):
         self.assertEqual(column(rule, yearly), [("", [])])
         self.assertEqual(column(present.hearing, exam, yearly), [("exam $0", [exam])])
 
+    def test_hearing_details_show_fittings_follow_ups_and_what_comes_with_an_aid(self):
+        fitting = routine("hearing.exam", condition="fitting/evaluation")
+        fittings = routine("hearing.exam", "visit_limit", "1", condition="fitting/evaluation", limit="per year")
+        follow_ups = routine("hearing.exam", condition="follow-up visits", source="SB")
+        three = routine("hearing.exam", "visit_limit", "3", condition="follow-up visits", limit="during the first year",
+                        source="SB")
+        trial = routine("hearing.aids", "covered", "", condition="trial period", limit="60 days")
+        warranty = routine("hearing.aids", "covered", "", condition="warranty", limit="3 years")
+        batteries = routine("hearing.aids", "covered", "", condition="batteries", limit="80 batteries per aid")
+        found = [fitting, fittings, follow_ups, three, trial, warranty, batteries]
+        self.assertEqual(present.hearing_details(found), (
+            "fitting $0 1/year; follow-ups $0 3 in the first year; 60-day trial, 3-year warranty, 80 batteries per aid", found))
+        unlimited = routine("hearing.exam", "covered", "", condition="fitting/evaluation", limit="unlimited visits")
+        some = dict(batteries, limit="a supply of batteries")
+        self.assertEqual(present.hearing_details([fitting, unlimited, some]),
+                         ("fitting $0 unlimited; batteries", [fitting, unlimited, some]))
+        skipped = [dict(fitting, network="out", cost_kind="coinsurance", amount="80%"), dict(trial, package="Rider"),
+                   routine("hearing.aids", "not_covered", "", condition="batteries"),
+                   routine("hearing.exam", condition="balance exams", amount="$50"),
+                   dict(warranty, limit="")]
+        self.assertEqual(present.hearing_details(skipped), ("", []))
+        sb = dict(fitting, amount="$10", source="SB")
+        self.assertEqual(present.hearing_details([fitting, sb])[0], "fitting $0")
+
     def test_an_allowance_per_ear_wins_over_a_copay_and_means_2_aids(self):
         found = [routine("hearing.aids", "allowance", "$500", unit="per ear", limit="every 3 calendar years"),
                  routine("hearing.aids", unit="per ear")]
@@ -1433,15 +1457,16 @@ class WriteTest(unittest.TestCase):
             "Acup, Massage, Naturopath 50% from $2,000/year allowance shared with dental; OTC $106/three months"))
         self.assertTrue(got["J_extra_benefits"].startswith("Part B giveback $70/month; "))
 
-    def test_version_23_shows_worldwide_urgent_care_and_how_often_the_hearing_exam_renews(self):
+    def test_version_23_shows_worldwide_urgent_care_and_hearing_details(self):
         self.assertEqual(present.VERSIONS[23], {})
         data = years.data_dir(YEAR)
         rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.layer_rows(data, v)} for v in (22, 23)}
         self.assertEqual({r[1] for r in rows[22] ^ rows[23]}, {"H_hearing", "I_alt_care_otc_travel"})
         got = {(c, p): present.lines(data, c, sheet="dvha", version=23)[p][0][0] for c, p in (
-            ("H_hearing", "H2056-003-0"), ("I_alt_care_otc_travel", "H2056-003-0"),
+            ("H_hearing", "H2056-003-0"), ("H_hearing", "H2923-001-0"), ("I_alt_care_otc_travel", "H2056-003-0"),
             ("I_alt_care_otc_travel", "H5216-455-0"))}
         self.assertTrue(got[("H_hearing", "H2056-003-0")].startswith("exam $0/year; "))
+        self.assertIn("; fitting $0; 60-day trial, 3-year warranty, 80 batteries per aid", got[("H_hearing", "H2923-001-0")])
         self.assertIn("Worldwide ER/urgent $130, $250,000 max", got[("I_alt_care_otc_travel", "H2056-003-0")])
         self.assertIn("Worldwide ER $130, urgent care $50", got[("I_alt_care_otc_travel", "H5216-455-0")])
 
