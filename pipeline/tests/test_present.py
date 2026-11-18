@@ -819,6 +819,17 @@ class DetailsTest(unittest.TestCase):
         self.assertEqual(rule("", found)[0][0], "")
 
 
+class TelehealthTest(unittest.TestCase):
+    def test_adds_the_range_of_virtual_visit_prices_after_the_other_parts(self):
+        found = [routine("otc", "allowance", "$40", limit="per quarter"),
+                 priced("visits", "telehealth", condition="PCP Virtual"), priced("visits", "telehealth", "$40"),
+                 priced("visits", "telehealth", "$90", condition="services in a nursing home"),
+                 priced("visits", "telehealth", "$45", network="out"), priced("visits", "office.pcp", "$5")]
+        self.assertEqual(present.alt_care_otc_travel("", found, telehealth=True),
+                         [("OTC $40/three months; Telehealth $0-$40", found[:3])])
+        self.assertEqual(present.alt_care_otc_travel("", found[1:2], telehealth=True), [("Telehealth $0", found[1:2])])
+
+
 class DentalTest(unittest.TestCase):
     def test_shows_preventive_and_comprehensive_prices_and_the_yearly_max(self):
         found = [routine("dental.preventive", "coinsurance", "0%"), routine("dental.comprehensive", "coinsurance", "50%"),
@@ -1139,7 +1150,8 @@ class WriteTest(unittest.TestCase):
         rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.layer_rows(data, v)} for v in (18, 19)}
         changed = {r[:3] for r in rows[18] ^ rows[19]}
         self.assertEqual({c for _, c, _ in changed},
-                         {"E_optional_packages", "F_dental", "G_vision", "H_hearing", "J_extra_benefits"})
+                         {"E_optional_packages", "F_dental", "G_vision", "H_hearing", "I_alt_care_otc_travel",
+                          "J_extra_benefits"})
         self.assertIn(("dvha", "F_dental", "H9003-009-0"), changed)
         self.assertIn(("dvha", "H_hearing", "H2923-001-0"), changed)
         got = {v: present.lines(data, "H_hearing", sheet="dvha", version=v)["H2923-001-0"][0][0] for v in (18, 19)}

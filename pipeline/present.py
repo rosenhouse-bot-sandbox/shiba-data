@@ -898,11 +898,24 @@ def worldwide(found):
     return [f"Worldwide ER {show(copays)}" + (f", {show(maxes)} max" if maxes else "")], copays + maxes
 
 
-def alt_care_otc_travel(organization, found):
+NURSING_HOME = re.compile(r"nursing home|skilled nursing", re.I)
+
+
+def virtual_visits(found):
+    """["Telehealth $0-$40"] from in-network virtual visit prices, other than in a nursing home, and their facts."""
+    @unless("it is not an in-network virtual visit price outside a nursing home")
+    def ok(f):
+        return (f["network"] in ("in", "any") and f["setting"] == "telehealth" and f["cost_kind"] in PRICED
+                and not (f["package"] or f["provider_tier"] or NURSING_HOME.search(f["condition"])))
+    prices = top(exactly(found, ("visits",), ok, ok.unless))
+    return ([f"Telehealth {show(prices)}"] if prices else []), prices
+
+
+def alt_care_otc_travel(organization, found, telehealth=False):
     """Shows routine acupuncture, chiropractic, massage and naturopathy, the OTC allowance, and worldwide emergency
-    care. A part the facts do not fully give leaves the cell blank."""
+    care, and with telehealth, virtual visit prices. A part the facts do not fully give leaves the cell blank."""
     parts, cited = [], []
-    for part in (alt_care, over_the_counter, worldwide):
+    for part in (alt_care, over_the_counter, worldwide) + ((virtual_visits,) if telehealth else ()):
         got = part(found)
         if got is None:
             drop(cited, f"the facts do not fully give the {part.__name__.replace('_', ' ')} part")
@@ -1121,7 +1134,7 @@ DVHA = {"C_premium": plan_premium, "D_premium_full_extra_help": extra_help_premi
         "G_vision": with_packages(with_details(vision, out_of_network(("exam", "vision.exam"), ("eyewear", "vision.eyewear")))),
         "H_hearing": with_packages(with_details(lambda o, found: hearing(o, found, each_price=True),
                                                 out_of_network(("exam", "hearing.exam"), ("aids", "hearing.aids")))),
-        "I_alt_care_otc_travel": alt_care_otc_travel,
+        "I_alt_care_otc_travel": lambda o, found: alt_care_otc_travel(o, found, telehealth=True),
         "J_extra_benefits": lambda o, found: extra_benefits(o, found, prices=True)}
 DVHA_LEAVES = {"C_premium": ("plan_premium",), "D_premium_full_extra_help": ("plan_premium", "part_d_deductible"),
                "E_optional_packages": ("packages",), "F_dental": ("dental",),
@@ -1178,7 +1191,7 @@ EARLIER_RULES = {
     ("dvha", "E_optional_packages"): ((17, lambda o, found: optional_packages(o, found, allowances=False)),
                                       (19, optional_packages)),
     ("dvha", "F_dental"): ((19, dental),), ("dvha", "G_vision"): ((19, vision),), ("dvha", "H_hearing"): ((19, hearing),),
-    ("dvha", "J_extra_benefits"): ((19, extra_benefits),)} | {
+    ("dvha", "I_alt_care_otc_travel"): ((19, alt_care_otc_travel),), ("dvha", "J_extra_benefits"): ((19, extra_benefits),)} | {
     ("main", column): ((18, rule),) for column, rule in {
         "E_moop": moop, "F_primary_care": visits("office.pcp"), "G_specialist": visits("office.specialist"),
         "H_inpatient": inpatient, "I_outpatient_surgery": outpatient_surgery, "J_outpatient_rehab": outpatient_rehab,
@@ -1312,7 +1325,7 @@ VERSIONS[17] = {}
 # Version 18 holds no cell. It presents main columns as the final chart does.
 VERSIONS[18] = {}
 # Version 19 holds no cell. It shows what a package gives in each benefit's own column, lists each hearing aid copay,
-# and adds out-of-network prices, the dental deductible, and fitness and meals prices.
+# and adds out-of-network prices, the dental deductible, fitness and meals prices, and virtual visit prices.
 VERSIONS[19] = {}
 # The version that first presents each later column. Earlier versions hold its cells.
 SINCE = {("dvha", "C_premium"): 3, ("dvha", "G_vision"): 4, ("dvha", "H_hearing"): 4, ("dvha", "E_optional_packages"): 5,
