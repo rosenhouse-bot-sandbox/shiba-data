@@ -286,3 +286,15 @@ VERSIONS[32] = dict(
         "H5216-427-2", "H3817-008-1", "H3817-009-1", "H3817-010-0", "H3817-011-1", "H6815-038-0", "H5439-015-0",
         "H5439-019-0", "H5439-011-0", "H5439-010-0", "H1372-003-0"), DENTAL_FREQUENCIES)})
 VERSIONS[32]["targets"] = {"other_supplemental": PROGRAM_PLANS, "dental": tuple(VERSIONS[32]["plan_notes"]["dental"])}
+HEARING_DETAILS = ("Give a hearing aid fitting or evaluation and a follow-up visit each as `hearing.exam` facts with the "
+                   "visit in `condition`, such as `fitting/evaluation` or `follow-up visits`: one fact for its price, "
+                   "and a `visit_limit` fact for how many the plan covers, with the period in `limit`. Give a hearing "
+                   "aid trial period, warranty and batteries each as a `hearing.aids` `covered` fact with the item in "
+                   "`condition`, such as `trial period`, `warranty` or `batteries`, and its length or count in `limit`, "
+                   "such as `60 days`, `3 years` or `80 batteries per aid`.")
+# Version 33 reads hearing details that the final volunteer sheets show.
+VERSIONS[33] = dict(
+    VERSIONS[32], notes=VERSIONS[32]["notes"] | {"hearing": HEARING_DETAILS},
+    find=VERSIONS[32]["find"] | {"hearing": (r"\bfittings?\b", r"\btrial period", r"\bwarrant(?:y|ies)\b",
+                                             r"\bbatter(?:y|ies)\b")},
+    targets={"hearing": PROGRAM_PLANS})
