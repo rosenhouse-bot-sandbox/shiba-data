@@ -292,9 +292,10 @@ HEARING_DETAILS = ("Give a hearing aid fitting or evaluation and a follow-up vis
                    "aid trial period, warranty and batteries each as a `hearing.aids` `covered` fact with the item in "
                    "`condition`, such as `trial period`, `warranty` or `batteries`, and its length or count in `limit`, "
                    "such as `60 days`, `3 years` or `80 batteries per aid`.")
-# Version 33 reads hearing details that the final volunteer sheets show.
+# Version 33 reads hearing details that the final volunteer sheets show. Its targets are the plans a dry run found it
+# asks about.
 VERSIONS[33] = dict(
     VERSIONS[32], notes=VERSIONS[32]["notes"] | {"hearing": HEARING_DETAILS},
     find=VERSIONS[32]["find"] | {"hearing": (r"\bfittings?\b", r"\btrial period", r"\bwarrant(?:y|ies)\b",
                                              r"\bbatter(?:y|ies)\b")},
-    targets={"hearing": PROGRAM_PLANS})
+    targets={"hearing": PROGRAM_PLANS + ("H7199-002-0",)})
