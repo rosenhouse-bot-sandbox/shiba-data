@@ -674,25 +674,50 @@ class HearingTest(unittest.TestCase):
         fitting = routine("hearing.exam", condition="fitting/evaluation")
         fittings = routine("hearing.exam", "visit_limit", "1", condition="fitting/evaluation", limit="per year")
         follow_ups = routine("hearing.exam", condition="follow-up visits", source="SB")
-        three = routine("hearing.exam", "visit_limit", "3", condition="follow-up visits", limit="during the first year",
-                        source="SB")
+        three = routine("hearing.exam", "visit_limit", "3", condition="follow-up visits",
+                        limit="during the first year following a hearing aid purchase")
         trial = routine("hearing.aids", "covered", "", condition="trial period", limit="60 days")
         warranty = routine("hearing.aids", "covered", "", condition="warranty", limit="3 years")
         batteries = routine("hearing.aids", "covered", "", condition="batteries", limit="80 batteries per aid")
         found = [fitting, fittings, follow_ups, three, trial, warranty, batteries]
         self.assertEqual(present.hearing_details(found), (
-            "fitting $0 1/year; follow-ups $0 3 in the first year; 60-day trial, 3-year warranty, 80 batteries per aid", found))
-        unlimited = routine("hearing.exam", "covered", "", condition="fitting/evaluation", limit="unlimited visits")
-        some = dict(batteries, limit="a supply of batteries")
-        self.assertEqual(present.hearing_details([fitting, unlimited, some]),
-                         ("fitting $0 unlimited; batteries", [fitting, unlimited, some]))
+            "fitting $0 1 visit/year; follow-ups $0 3 visits in the first year after buying an aid; "
+            "60-day trial, 3-year warranty, 80 batteries per aid", found))
+
+    def test_hearing_details_count_unlimited_visits_and_describe_batteries(self):
+        unlimited = routine("hearing.exam", "covered", "", condition="fitting/evaluation",
+                            limit="unlimited visits for the first 12 months")
+        batteries = routine("hearing.aids", "covered", "", condition="batteries",
+                            limit="3 years of batteries per non-rechargeable aid (up to 60 cells per ear per year)")
+        self.assertEqual(present.hearing_details([unlimited, batteries]), (
+            "fitting unlimited visits in the first year after buying an aid; 3 years of batteries", [unlimited, batteries]))
+        models = dict(batteries, limit="80 batteries per aid for non-rechargeable models")
+        self.assertEqual(present.hearing_details([models])[0], "80 batteries per aid")
+        self.assertEqual(present.hearing_details([dict(batteries, limit="a supply of batteries")])[0], "batteries")
+        self.assertEqual(present.hearing_details([dict(batteries, limit="3 years per non-rechargeable aid")])[0],
+                         "3 years of batteries")
+
+    def test_hearing_details_take_the_best_source_and_skip_what_it_does_not_agree_on(self):
+        fitting = routine("hearing.exam", condition="fitting/evaluation")
+        eoc = routine("hearing.exam", "visit_limit", "1", condition="fitting/evaluation", limit="per year")
+        sb = dict(eoc, amount="2", source="SB")
+        self.assertEqual(present.hearing_details([fitting, eoc, sb]), ("fitting $0 1 visit/year", [fitting, eoc]))
+        self.assertEqual(present.hearing_details([fitting, eoc, dict(eoc, amount="2", page="61")]),
+                         ("fitting $0", [fitting]))
+        warranty = routine("hearing.aids", "covered", "", condition="warranty", limit="3 years")
+        self.assertEqual(present.hearing_details([warranty, dict(warranty, limit="1 year", source="SB")])[0],
+                         "3-year warranty")
+        self.assertEqual(present.hearing_details([warranty, dict(warranty, limit="1 year", page="61")])[0], "")
+        self.assertEqual(present.hearing_details([dict(warranty, limit="36 months")]), ("", []))
+
+    def test_hearing_details_skip_other_networks_packages_and_services(self):
+        fitting = routine("hearing.exam", condition="fitting/evaluation")
+        trial = routine("hearing.aids", "covered", "", condition="trial period", limit="60 days")
         skipped = [dict(fitting, network="out", cost_kind="coinsurance", amount="80%"), dict(trial, package="Rider"),
                    routine("hearing.aids", "not_covered", "", condition="batteries"),
-                   routine("hearing.exam", condition="balance exams", amount="$50"),
-                   dict(warranty, limit="")]
+                   routine("hearing.exam", condition="balance evaluation", amount="$50"),
+                   routine("hearing.aids", "covered", "", condition="warranty", limit="")]
         self.assertEqual(present.hearing_details(skipped), ("", []))
-        sb = dict(fitting, amount="$10", source="SB")
-        self.assertEqual(present.hearing_details([fitting, sb])[0], "fitting $0")
 
     def test_an_allowance_per_ear_wins_over_a_copay_and_means_2_aids(self):
         found = [routine("hearing.aids", "allowance", "$500", unit="per ear", limit="every 3 calendar years"),
@@ -1121,6 +1146,15 @@ class AltCareOtcTravelTest(unittest.TestCase):
         self.assertEqual(cell(er, dict(same, cost_kind="covered", amount="")), [("Worldwide ER $130", [er])])
         self.assertEqual(cell(er, same, dict(less, condition="urgent care")), [("Worldwide ER $130", [er])])
         self.assertEqual(present.alt_care_otc_travel("", [er, same])[0][0], "Worldwide ER $130")
+
+    def test_worldwide_urgent_care_is_any_in_network_copay_outside_the_us(self):
+        er = routine("emergency", setting="outside_us", amount="$130")
+        medicare = priced("emergency", setting="outside_us", amount="$130", condition="urgently needed services")
+        cell = lambda *found: present.alt_care_otc_travel("", list(found), urgent_care=True)[0][0]
+        self.assertEqual(cell(er, medicare), "Worldwide ER/urgent $130")
+        self.assertEqual(cell(er, dict(medicare, setting="any", amount="$40")), "Worldwide ER $130")
+        self.assertEqual(cell(er, dict(medicare, network="out", amount="$40")), "Worldwide ER $130")
+        self.assertEqual(cell(er, dict(medicare, provider_tier="PLUS", amount="$40")), "Worldwide ER $130")
 
     def test_copays_that_no_quote_tells_apart_leave_the_cell_blank(self):
         found = [routine("otc", "allowance", "$40", limit="per month"),
