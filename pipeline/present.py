@@ -1312,11 +1312,11 @@ DVHA = {"C_premium": plan_premium, "D_premium_full_extra_help": extra_help_premi
                                          ("no COMP", "dental.comprehensive")), "dental"),
         "G_vision": or_none(with_lacking(with_packages(with_details(vision, VISION_OON)),
                                          ("no eyewear allowance", "vision.eyewear")), "vision"),
-        "H_hearing": or_none(with_lacking(with_packages(with_details(lambda o, found: hearing(o, found, each_price=True),
-                                                                     HEARING_OON)),
-                                          ("no hearing aid allowance", "hearing.aids")), "hearing"),
+        "H_hearing": or_none(with_lacking(with_packages(with_details(
+            lambda o, found: hearing(o, found, each_price=True, exam_renews=True), HEARING_OON)),
+            ("no hearing aid allowance", "hearing.aids")), "hearing"),
         "I_alt_care_otc_travel": lambda o, found: alt_care_otc_travel(o, found, telehealth=True, food=True, rates=True,
-                                                                      none=True),
+                                                                      none=True, urgent_care=True),
         "J_extra_benefits": lambda o, found: extra_benefits(o, found, prices=True, programs=True, alike=True,
                                                             part_b=True)}
 DVHA_LEAVES = {"C_premium": ("plan_premium",), "D_premium_full_extra_help": ("plan_premium", "part_d_deductible"),
@@ -1378,10 +1378,15 @@ EARLIER_RULES = {
                            (22, with_packages(with_details(dental, dental_deductible, DENTAL_OON, preventive_limits)))),
     ("dvha", "G_vision"): ((19, vision), (22, with_packages(with_details(vision, VISION_OON)))),
     ("dvha", "H_hearing"): (
-        (19, hearing), (22, with_packages(with_details(lambda o, found: hearing(o, found, each_price=True), HEARING_OON)))),
+        (19, hearing), (22, with_packages(with_details(lambda o, found: hearing(o, found, each_price=True), HEARING_OON))),
+        (23, or_none(with_lacking(with_packages(with_details(lambda o, found: hearing(o, found, each_price=True),
+                                                             HEARING_OON)),
+                                  ("no hearing aid allowance", "hearing.aids")), "hearing"))),
     ("dvha", "I_alt_care_otc_travel"): (
         (19, alt_care_otc_travel), (20, lambda o, found: alt_care_otc_travel(o, found, telehealth=True)),
-        (22, lambda o, found: alt_care_otc_travel(o, found, telehealth=True, food=True))), ("dvha", "J_extra_benefits"): (
+        (22, lambda o, found: alt_care_otc_travel(o, found, telehealth=True, food=True)),
+        (23, lambda o, found: alt_care_otc_travel(o, found, telehealth=True, food=True, rates=True, none=True))),
+    ("dvha", "J_extra_benefits"): (
         (19, extra_benefits), (20, lambda o, found: extra_benefits(o, found, prices=True)),
         (21, lambda o, found: extra_benefits(o, found, prices=True, programs=True)),
         (22, lambda o, found: extra_benefits(o, found, prices=True, programs=True, alike=True)))} | {
@@ -1529,6 +1534,8 @@ VERSIONS[21] = {}
 # Version 22 holds no cell. It says when a plan has none of a benefit, adds the Part B giveback to extra benefits, and
 # shows an allowance that alternative care shares with dental and the services' price.
 VERSIONS[22] = {}
+# Version 23 holds no cell. It shows worldwide urgent care and how often the hearing exam renews.
+VERSIONS[23] = {}
 # The version that first presents each later column. Earlier versions hold its cells.
 SINCE = {("dvha", "C_premium"): 3, ("dvha", "G_vision"): 4, ("dvha", "H_hearing"): 4, ("dvha", "E_optional_packages"): 5,
          ("dvha", "F_dental"): 6, ("dvha", "I_alt_care_otc_travel"): 6, ("dvha", "J_extra_benefits"): 6,

@@ -1433,6 +1433,18 @@ class WriteTest(unittest.TestCase):
             "Acup, Massage, Naturopath 50% from $2,000/year allowance shared with dental; OTC $106/three months"))
         self.assertTrue(got["J_extra_benefits"].startswith("Part B giveback $70/month; "))
 
+    def test_version_23_shows_worldwide_urgent_care_and_how_often_the_hearing_exam_renews(self):
+        self.assertEqual(present.VERSIONS[23], {})
+        data = years.data_dir(YEAR)
+        rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.layer_rows(data, v)} for v in (22, 23)}
+        self.assertEqual({r[1] for r in rows[22] ^ rows[23]}, {"H_hearing", "I_alt_care_otc_travel"})
+        got = {(c, p): present.lines(data, c, sheet="dvha", version=23)[p][0][0] for c, p in (
+            ("H_hearing", "H2056-003-0"), ("I_alt_care_otc_travel", "H2056-003-0"),
+            ("I_alt_care_otc_travel", "H5216-455-0"))}
+        self.assertTrue(got[("H_hearing", "H2056-003-0")].startswith("exam $0/year; "))
+        self.assertIn("Worldwide ER/urgent $130, $250,000 max", got[("I_alt_care_otc_travel", "H2056-003-0")])
+        self.assertIn("Worldwide ER $130, urgent care $50", got[("I_alt_care_otc_travel", "H5216-455-0")])
+
     def test_version_12_holds_no_cell(self):
         self.assertEqual(present.held(years.data_dir(YEAR), 12), {})
 
