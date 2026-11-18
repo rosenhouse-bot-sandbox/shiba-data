@@ -958,16 +958,34 @@ CHRONIC = re.compile(r"chronic", re.I)
 HEART = re.compile(r"heart", re.I)
 
 
-def extra_benefits(organization, found, prices=False):
+FITNESS_PROGRAMS = {re.compile(pattern, re.I): name for pattern, name in (
+    (r"silver ?sneakers", "SilverSneakers"), (r"silver ?& ?fit", "Silver&Fit"), (r"one pass", "One Pass"),
+    (r"renew active", "Renew Active"))}
+
+
+def fitness_program(got):
+    """The fitness program the best source names, and the fact that names it."""
+    for f in sorted(got, key=lambda f: RANK[f["source"]]):
+        for pattern, name in FITNESS_PROGRAMS.items():
+            if pattern.search(f["quotes"]):
+                return name, [f]
+    return None, []
+
+
+def extra_benefits(organization, found, prices=False, programs=False):
     """Names fitness, meals and transportation for every member, then shows routine foot care, a fitness allowance,
     a card for members with chronic conditions, and the programs after a heart-failure hospital stay.
-    With prices, it shows the fitness and meals copays and how many meals."""
+    With prices, it shows the fitness and meals copays and how many meals. With programs, it names the fitness program."""
     parts, cited = [], []
     for name, leaf in (("Fitness", "fitness"), ("Meals", "meals"), ("Transportation", "extras.transportation")):
         got = top(exactly(found, (leaf,), lambda f: extra(f) and offers(f),
                        "it is not a supplemental in-network benefit for every member"))
         if not got:
             continue
+        program, naming = (fitness_program([f for f in found if f["benefit"] == leaf and extra(f) and offers(f)])
+                           if programs and leaf == "fitness" else (None, []))
+        if program:
+            name = f"{name} {program}"
         copays = [f for f in got if f["cost_kind"] == "copay"]
         if prices and leaf != "extras.transportation" and copays:
             meals = top([f for f in found if f["benefit"] == leaf and extra(f) and offers(f)
@@ -978,6 +996,7 @@ def extra_benefits(organization, found, prices=False):
         else:
             parts.append(name)
             cited += got
+        cited += [f for f in naming if f not in cited]
     got = foot_care(found)
     parts += got[0]
     cited += got[1]
@@ -1135,7 +1154,7 @@ DVHA = {"C_premium": plan_premium, "D_premium_full_extra_help": extra_help_premi
         "H_hearing": with_packages(with_details(lambda o, found: hearing(o, found, each_price=True),
                                                 out_of_network(("exam", "hearing.exam"), ("aids", "hearing.aids")))),
         "I_alt_care_otc_travel": lambda o, found: alt_care_otc_travel(o, found, telehealth=True),
-        "J_extra_benefits": lambda o, found: extra_benefits(o, found, prices=True)}
+        "J_extra_benefits": lambda o, found: extra_benefits(o, found, prices=True, programs=True)}
 DVHA_LEAVES = {"C_premium": ("plan_premium",), "D_premium_full_extra_help": ("plan_premium", "part_d_deductible"),
                "E_optional_packages": ("packages",), "F_dental": ("dental",),
                "G_vision": ("vision",), "H_hearing": ("hearing",),
@@ -1191,7 +1210,8 @@ EARLIER_RULES = {
     ("dvha", "E_optional_packages"): ((17, lambda o, found: optional_packages(o, found, allowances=False)),
                                       (19, optional_packages)),
     ("dvha", "F_dental"): ((19, dental),), ("dvha", "G_vision"): ((19, vision),), ("dvha", "H_hearing"): ((19, hearing),),
-    ("dvha", "I_alt_care_otc_travel"): ((19, alt_care_otc_travel),), ("dvha", "J_extra_benefits"): ((19, extra_benefits),)} | {
+    ("dvha", "I_alt_care_otc_travel"): ((19, alt_care_otc_travel),), ("dvha", "J_extra_benefits"): (
+        (19, extra_benefits), (20, lambda o, found: extra_benefits(o, found, prices=True)))} | {
     ("main", column): ((18, rule),) for column, rule in {
         "E_moop": moop, "F_primary_care": visits("office.pcp"), "G_specialist": visits("office.specialist"),
         "H_inpatient": inpatient, "I_outpatient_surgery": outpatient_surgery, "J_outpatient_rehab": outpatient_rehab,
@@ -1327,6 +1347,8 @@ VERSIONS[18] = {}
 # Version 19 holds no cell. It shows what a package gives in each benefit's own column, lists each hearing aid copay,
 # and adds out-of-network prices, the dental deductible, fitness and meals prices, and virtual visit prices.
 VERSIONS[19] = {}
+# Version 20 holds no cell. It names the fitness program.
+VERSIONS[20] = {}
 # The version that first presents each later column. Earlier versions hold its cells.
 SINCE = {("dvha", "C_premium"): 3, ("dvha", "G_vision"): 4, ("dvha", "H_hearing"): 4, ("dvha", "E_optional_packages"): 5,
          ("dvha", "F_dental"): 6, ("dvha", "I_alt_care_otc_travel"): 6, ("dvha", "J_extra_benefits"): 6,

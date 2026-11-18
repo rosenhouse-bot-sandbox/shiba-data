@@ -1000,6 +1000,23 @@ class ExtraBenefitsTest(unittest.TestCase):
                          [("Fitness $0; Meals $0, 28 meals; Transportation", found[:3] + found[4:5])])
         self.assertEqual(present.extra_benefits("", found[:2] + found[5:], prices=True)[0][0], "Fitness $0; Meals $0, 14 meals")
 
+    def test_with_programs_names_the_fitness_program_from_the_best_source_that_names_it(self):
+        eoc = routine("fitness", quotes='["$0 membership"]')
+        sb = routine("fitness", source="SB", quotes='["SilverSneakers®: $0 membership"]')
+        self.assertEqual(present.extra_benefits("", [eoc, sb], prices=True, programs=True),
+                         [("Fitness SilverSneakers $0", [eoc, sb])])
+        self.assertEqual(present.extra_benefits("", [eoc, sb], programs=True), [("Fitness SilverSneakers", [eoc, sb])])
+        self.assertEqual(present.extra_benefits("", [eoc, sb], prices=True)[0][0], "Fitness $0")
+        self.assertEqual(present.extra_benefits("", [eoc], prices=True, programs=True)[0][0], "Fitness $0")
+        for quote, program in (("The Silver&Fit® Healthy Aging", "Silver&Fit"), ("Fitness benefit (One Pass®)", "One Pass"),
+                               ("Renew Active® by UnitedHealthcare", "Renew Active")):
+            named = routine("fitness", quotes=f'["{quote}"]')
+            self.assertEqual(present.extra_benefits("", [named], prices=True, programs=True)[0][0], f"Fitness {program} $0")
+
+    def test_with_programs_ignores_a_program_named_only_by_a_fact_it_does_not_show(self):
+        named = routine("fitness", network="out", quotes='["SilverSneakers"]')
+        self.assertEqual(present.extra_benefits("", [routine("fitness"), named], prices=True, programs=True)[0][0], "Fitness $0")
+
     def test_foot_care_for_members_with_diabetes_says_so_unless_every_member_has_some(self):
         diabetic = routine("foot_care", condition="diabetes")
         self.assertEqual(column(present.extra_benefits, diabetic)[0][0], "Routine foot care $0 for members with diabetes")
@@ -1159,6 +1176,14 @@ class WriteTest(unittest.TestCase):
         got = {v: present.lines(data, "E_optional_packages", sheet="dvha", version=v)["H9003-009-0"][0][0] for v in (16, 18, 19)}
         self.assertEqual(got[19], "Advantage Plus $54/mo")
         self.assertEqual(len(set(got.values())), 3)
+
+    def test_version_20_names_the_fitness_program(self):
+        self.assertEqual(present.VERSIONS[20], {})
+        data = years.data_dir(YEAR)
+        rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.layer_rows(data, v)} for v in (19, 20)}
+        self.assertEqual({r[1] for r in rows[19] ^ rows[20]}, {"J_extra_benefits"})
+        got = {v: present.lines(data, "J_extra_benefits", sheet="dvha", version=v)["H9003-001-0"][0][0] for v in (19, 20)}
+        self.assertEqual(got, {19: "Fitness $0", 20: "Fitness One Pass $0"})
 
     def test_version_12_holds_no_cell(self):
         self.assertEqual(present.held(years.data_dir(YEAR), 12), {})
