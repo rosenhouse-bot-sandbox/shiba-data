@@ -940,6 +940,15 @@ class AltCareOtcTravelTest(unittest.TestCase):
         self.assertEqual(column(present.alt_care_otc_travel, *found),
                          [("OTC from $20/month card shared with dental, hearing", found[:3])])
 
+    def test_with_food_says_when_any_source_says_the_otc_allowance_also_pays_for_food(self):
+        eoc = routine("otc", "allowance", "$196", limit="per month")
+        sb = routine("otc", "allowance", "$196", limit="per month", source="SB", pool="OTC and food credit")
+        self.assertEqual(present.alt_care_otc_travel("", [eoc, sb], food=True), [("OTC and food $196/month", [eoc, sb])])
+        self.assertEqual(present.alt_care_otc_travel("", [eoc, sb])[0][0], "OTC $196/month")
+        groceries = dict(eoc, quotes='["Use your allowance on groceries and OTC items"]')
+        self.assertEqual(present.alt_care_otc_travel("", [groceries], food=True)[0][0], "OTC and food $196/month")
+        self.assertEqual(present.alt_care_otc_travel("", [eoc], food=True)[0][0], "OTC $196/month")
+
     def test_worldwide_er_skips_urgent_care(self):
         found = [routine("emergency", setting="outside_us", amount="$130"),
                  routine("emergency", setting="outside_us", amount="$500", quotes='["Urgent care $500"]')]
@@ -999,6 +1008,59 @@ class ExtraBenefitsTest(unittest.TestCase):
         self.assertEqual(present.extra_benefits("", found, prices=True),
                          [("Fitness $0; Meals $0, 28 meals; Transportation", found[:3] + found[4:5])])
         self.assertEqual(present.extra_benefits("", found[:2] + found[5:], prices=True)[0][0], "Fitness $0; Meals $0, 14 meals")
+
+    def test_with_programs_names_the_fitness_program_from_the_best_source_that_names_it(self):
+        eoc = routine("fitness", quotes='["$0 membership"]')
+        sb = routine("fitness", source="SB", quotes='["SilverSneakers®: $0 membership"]')
+        self.assertEqual(present.extra_benefits("", [eoc, sb], prices=True, programs=True),
+                         [("Fitness SilverSneakers $0", [eoc, sb])])
+        self.assertEqual(present.extra_benefits("", [eoc, sb], programs=True), [("Fitness SilverSneakers", [eoc, sb])])
+        self.assertEqual(present.extra_benefits("", [eoc, sb], prices=True)[0][0], "Fitness $0")
+        self.assertEqual(present.extra_benefits("", [eoc], prices=True, programs=True)[0][0], "Fitness $0")
+        named_eoc = dict(eoc, quotes='["One Pass"]')
+        self.assertEqual(present.extra_benefits("", [sb, named_eoc], prices=True, programs=True)[0][0], "Fitness One Pass $0")
+        for quote, program in (("The Silver&Fit® Healthy Aging", "Silver&Fit"), ("Fitness benefit (One Pass®)", "One Pass"),
+                               ("Renew Active® by UnitedHealthcare", "Renew Active"), ("Silver Sneakers", "SilverSneakers"),
+                               ("Silver & Fit", "Silver&Fit")):
+            named = routine("fitness", quotes=f'["{quote}"]')
+            self.assertEqual(present.extra_benefits("", [named], prices=True, programs=True)[0][0], f"Fitness {program} $0")
+
+    def test_with_programs_ignores_a_program_named_only_by_a_fact_it_does_not_show(self):
+        for named in (routine("fitness", network="out", quotes='["SilverSneakers"]'),
+                      routine("fitness", condition="diabetes", quotes='["SilverSneakers"]'),
+                      routine("fitness", package="Rider", quotes='["SilverSneakers"]'),
+                      routine("fitness", quotes='["One passenger may ride along"]')):
+            self.assertEqual(present.extra_benefits("", [routine("fitness"), named], prices=True, programs=True)[0][0],
+                             "Fitness $0")
+        meals = routine("meals", quotes='["Meals for SilverSneakers members"]')
+        self.assertEqual(present.extra_benefits("", [meals], prices=True, programs=True)[0][0], "Meals $0")
+
+    def test_with_programs_names_each_other_program_for_every_member(self):
+        nurse = routine("other_supplemental", pool="24-Hour Nurse Line", source="SB")
+        travel = routine("other_supplemental", "covered", "", pool="Travel Advantage", source="SB")
+        travel_eoc = dict(travel, source="EOC", pool="HMO Travel Benefit")
+        rewards = routine("other_supplemental", "allowance", "$100", pool="Rewards", limit="per year")
+        card = routine("other_supplemental", "allowance", "$30", pool="Food Card", condition="chronic", limit="per month")
+        away = routine("other_supplemental", "max", "$1,200", pool="Explorer", network="out")
+        nameless = routine("other_supplemental")
+        dropped = routine("other_supplemental", "not_covered", "", pool="Dropped")
+        self.assertEqual(present.extra_benefits("", [nurse, travel, travel_eoc, rewards, away, nameless, dropped],
+                                                programs=True),
+                         [("24-Hour Nurse Line $0; HMO Travel Benefit; Rewards $100/year; Travel Advantage",
+                           [nurse, travel_eoc, rewards, travel])])
+        self.assertEqual(present.extra_benefits("", [routine("foot_care"), card, nurse], programs=True)[0][0],
+                         "24-Hour Nurse Line $0; Routine foot care $0; "
+                         "For members with certain chronic conditions: Food Card $30/month")
+
+    def test_a_program_shows_its_best_sources_allowance_and_cites_only_its_price(self):
+        rewards = routine("other_supplemental", "allowance", "$100", pool="Rewards", limit="per year")
+        named = routine("other_supplemental", "covered", "", pool="Rewards")
+        sb = dict(rewards, source="SB", amount="$500")
+        copay = routine("other_supplemental", pool="Rewards")
+        self.assertEqual(present.other_programs([rewards, named, sb, copay]), (["Rewards $100/year"], [rewards]))
+        self.assertEqual(present.other_programs([dict(rewards, limit="")]), (["Rewards $100"], [dict(rewards, limit="")]))
+        self.assertEqual(present.other_programs([routine("other_supplemental", pool="24\u2011Hour Nurse Line")])[0],
+                         ["24-Hour Nurse Line $0"])
 
     def test_foot_care_for_members_with_diabetes_says_so_unless_every_member_has_some(self):
         diabetic = routine("foot_care", condition="diabetes")
@@ -1159,6 +1221,16 @@ class WriteTest(unittest.TestCase):
         got = {v: present.lines(data, "E_optional_packages", sheet="dvha", version=v)["H9003-009-0"][0][0] for v in (16, 18, 19)}
         self.assertEqual(got[19], "Advantage Plus $54/mo")
         self.assertEqual(len(set(got.values())), 3)
+
+    def test_version_20_names_programs_and_says_when_otc_pays_for_food(self):
+        self.assertEqual(present.VERSIONS[20], {})
+        data = years.data_dir(YEAR)
+        rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.layer_rows(data, v)} for v in (19, 20)}
+        self.assertEqual({r[1] for r in rows[19] ^ rows[20]}, {"I_alt_care_otc_travel", "J_extra_benefits"})
+        got = {v: present.lines(data, "J_extra_benefits", sheet="dvha", version=v)["H9003-001-0"][0][0] for v in (19, 20)}
+        self.assertEqual(got, {19: "Fitness $0", 20: "Fitness One Pass $0"})
+        got = {v: present.lines(data, "I_alt_care_otc_travel", sheet="dvha", version=v)["H2001-045-0"][0][0] for v in (19, 20)}
+        self.assertEqual([g.split(";")[0] for g in got.values()], ["OTC $196/month", "OTC and food $196/month"])
 
     def test_version_12_holds_no_cell(self):
         self.assertEqual(present.held(years.data_dir(YEAR), 12), {})
