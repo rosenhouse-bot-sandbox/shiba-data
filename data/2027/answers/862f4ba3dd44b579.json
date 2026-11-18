@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-60.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 78 Diagnostic Services row (Periodontal exam D0180, Comprehensive exam D0150) allows 1 procedure code every 3 calendar years. These are oral exams in the mandatory supplemental dental chart, so the in-network preventive visit limit is correct.\"}]\n```",
+ "usage": {
+  "input_tokens": 3740,
+  "output_tokens": 409,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

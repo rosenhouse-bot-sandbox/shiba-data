@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-137.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 51 dental row 'Cleanings (prophylaxis) - 2 every year' sits beside the in-network $0 copay for each cleaning. This is routine supplemental preventive dental: 2 cleanings per year.\"}]\n```",
+ "usage": {
+  "input_tokens": 2582,
+  "output_tokens": 326,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

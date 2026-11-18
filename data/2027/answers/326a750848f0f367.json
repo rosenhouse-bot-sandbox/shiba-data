@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-136.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 71, mandatory supplemental dental, Preventive Services: the Exams group (periodic oral exam D0120) says 2 procedure codes per calendar year. The page says out-of-network benefits are subject to in-network limitations, so the limit applies in both networks.\"}]\n```",
+ "usage": {
+  "input_tokens": 3574,
+  "output_tokens": 427,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

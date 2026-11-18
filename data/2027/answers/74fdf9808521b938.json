@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-82.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"On page 57, under Supplemental benefits > Preventive dental services, the Fluoride Treatment entry says 'Limit 1 visit every 6 months'. The row names no network, so it counts as in-network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3249,
+  "output_tokens": 214,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

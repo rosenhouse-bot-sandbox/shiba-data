@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-79.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 76 Diagnostic Services lists 'Frequency/Limits – 1 procedure code every 3 calendar years' over the periodontal exam (D0180) and comprehensive exam (D0150) rows. These are mandatory supplemental oral exams with in-network rows, so it is a dental.preventive visit limit of 1 every 3 calendar years.\"}]\n```",
+ "usage": {
+  "input_tokens": 3408,
+  "output_tokens": 499,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

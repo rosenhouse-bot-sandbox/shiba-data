@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-90.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 43 lists supplemental preventive dental (Class I) as 'Bitewing x-rays, 1 set every calendar year', which matches the count, unit, service and period.\"}]\n```",
+ "usage": {
+  "input_tokens": 3798,
+  "output_tokens": 270,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-130.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 90 does show 2 periodic oral exams (D0120) per calendar year at 0% in network. But the page never names a package, so 'MyOption DEN972' cannot be verified from the quoted page.\"}]\n```",
+ "usage": {
+  "input_tokens": 3935,
+  "output_tokens": 278,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

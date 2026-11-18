@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-63.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 9 mandatory supplemental dental row (In-Network, DEN235): $0 copay for comprehensive oral evaluation or periodontal exam up to 1 every 3 years. That is a preventive exam limit of 1 every 3 years, and the condition is copied word for word.\"}]\n```",
+ "usage": {
+  "input_tokens": 3818,
+  "output_tokens": 237,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
