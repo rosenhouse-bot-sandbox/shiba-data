@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-125.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 90 does show 'Exams – 2 procedure codes per calendar year' for the emergency diagnostic exam (D0140). But nothing on the page names the package 'MyOption DEN972' or says this is an optional package, so the package field cannot be verified.\"}]\n```",
+ "usage": {
+  "input_tokens": 3941,
+  "output_tokens": 333,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

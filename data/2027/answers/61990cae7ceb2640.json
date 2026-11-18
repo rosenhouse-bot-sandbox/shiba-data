@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-116.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 91 does show 2 periodic oral exams (D0120) per calendar year with a $52.10 monthly premium. But the package name 'MyOption DEN972' does not appear on the page, so the package field cannot be confirmed.\"}]\n```",
+ "usage": {
+  "input_tokens": 3830,
+  "output_tokens": 288,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

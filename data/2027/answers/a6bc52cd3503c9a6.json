@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-111.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 91 does support a limit of 2 emergency diagnostic exams (D0140) per calendar year. However, the package name 'MyOption DEN972' appears nowhere on the cited page or in the quote. The page shows a $52.10 monthly premium, which suggests an optional package, but it never names that package, so the package field cannot be verified.\"}]\n```",
+ "usage": {
+  "input_tokens": 3836,
+  "output_tokens": 311,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

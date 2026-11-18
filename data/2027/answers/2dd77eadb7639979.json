@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-83.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 57, supplemental preventive dental X-rays: intraoral occlusal radiographs are covered twice (2) every year. The row names no network, so it gives in-network costs.\"}]\n```",
+ "usage": {
+  "input_tokens": 3265,
+  "output_tokens": 197,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

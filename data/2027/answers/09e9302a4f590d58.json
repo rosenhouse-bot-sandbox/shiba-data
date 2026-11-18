@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-88.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 43 lists supplemental preventive dental (Class I) with 'Oral evaluations, 2 every calendar year'. The plan, benefit, count, condition and period all match, and the limit applies in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3805,
+  "output_tokens": 280,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

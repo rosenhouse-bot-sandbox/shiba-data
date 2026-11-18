@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-110.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"On page 83, the second Exams row under Preventive Services gives \\\"Frequency/Limits – 2 procedure codes per calendar year\\\" for Emergency diagnostic exam – D0140. This is mandatory supplemental dental, and the limit applies in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3554,
+  "output_tokens": 292,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
