@@ -464,23 +464,31 @@ class StepTest(StepsTest):
         self.assertEqual(facts.conflicts([limit("oral exams", "2"), limit("cleanings", "2"), limit("bitewing X-rays", "1")]),
                          [])
 
-    def test_version_33_reads_hearing_aid_fittings_follow_ups_trials_warranties_and_batteries(self):
+    def test_version_33_reads_hearing_details_for_every_plan_with_hearing_benefits(self):
         v32, v33 = document_facts.VERSIONS[32], document_facts.VERSIONS[33]
-        changed = ("notes", "find", "targets")
-        self.assertEqual({k: v for k, v in v33.items() if k not in changed}, {k: v for k, v in v32.items() if k not in changed})
+        self.assertEqual(dict(v33, notes=None, targets=None), dict(v32, notes=None, targets=None))
         self.assertEqual(v33["notes"], v32["notes"] | {"hearing": document_facts.HEARING_DETAILS})
-        find = [re.compile(p, re.I) for p in v33["find"]["hearing"]]
-        for page in ("Hearing aid fitting/evaluation", "fittings", "a 60-day trial period", "3-year extended warranty",
-                     "80 batteries per aid", "Battery"):
-            self.assertTrue(any(p.search(page) for p in find), page)
-        for page in ("a clinical trial", "durable medical equipment"):
-            self.assertFalse(any(p.search(page) for p in find), page)
-        self.assertEqual(dict(v33["find"], hearing=None), dict(v32["find"], hearing=None))
-        self.assertEqual(set(v33["targets"]), {"hearing"})
+        self.assertEqual(v33["targets"], {"hearing": document_facts.HEARING_PLANS})
+        self.assertEqual(len(set(document_facts.HEARING_PLANS)), 39)
 
-    def test_version_33_hearing_details_are_not_routine_prices(self):
-        for item in ("`condition`", "`fitting/evaluation`", "`warranty`", "`batteries`", "`trial period`"):
-            self.assertIn(item, document_facts.HEARING_DETAILS)
+    def test_version_33_hearing_details_are_valid_facts_with_different_identities(self):
+        def detail(benefit, condition, cost_kind, amount="", limit=""):
+            row = dict.fromkeys(facts.COLUMNS, "") | dict(
+                plan_id="H1036-153-0", benefit=benefit, setting="any", network="in", condition=condition,
+                covered_by="supplemental", cost_kind=cost_kind, amount=amount, limit=limit, source="EOC",
+                doc_sha=SHA, page="3", quotes='["q"]')
+            return row | {"fact_id": facts.fact_id(row)}
+        details = [detail("hearing.exam", "fitting/evaluation", "copay", "$0"),
+                   detail("hearing.exam", "fitting/evaluation", "visit_limit", "1", "per year"),
+                   detail("hearing.exam", "follow-up visits", "covered", limit="the first year"),
+                   detail("hearing.aids", "trial period", "covered", limit="60 days"),
+                   detail("hearing.aids", "warranty", "covered", limit="3 years"),
+                   detail("hearing.aids", "batteries", "covered", limit="80 batteries per aid")]
+        self.assertEqual([facts.check(f) for f in details], [[]] * len(details))
+        self.assertEqual(facts.conflicts(details), [])
+        for words in ("`condition`", "`fitting/evaluation`", "`follow-up visits`", "`trial period`", "`warranty`",
+                      "`batteries`", "`covered` fact when the page gives no count"):
+            self.assertIn(words, document_facts.HEARING_DETAILS)
 
     def test_a_second_reader_sees_the_pages_after_and_takes_reimbursements_as_its_version_says(self):
         page = "Members receive 100% reimbursement."
