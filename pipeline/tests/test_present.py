@@ -661,6 +661,15 @@ class HearingTest(unittest.TestCase):
                  routine("hearing.aids", "visit_limit", "1", unit="per ear", limit="per calendar year")]
         self.assertEqual(column(present.hearing, *found), [("aids $499; 2 aids/year", found)])
 
+    def test_with_exam_renews_the_exam_says_how_often_its_best_source_renews_it(self):
+        exam, yearly = routine("hearing.exam"), routine("hearing.exam", "visit_limit", "1", limit="every year")
+        sb = routine("hearing.exam", "visit_limit", "1", limit="every 2 years", source="SB")
+        rule = lambda o, found: present.hearing(o, found, exam_renews=True)
+        self.assertEqual(column(rule, exam, yearly, sb), [("exam $0/year", [exam, yearly])])
+        self.assertEqual(column(rule, exam), [("exam $0", [exam])])
+        self.assertEqual(column(rule, yearly), [("", [])])
+        self.assertEqual(column(present.hearing, exam, yearly), [("exam $0", [exam])])
+
     def test_an_allowance_per_ear_wins_over_a_copay_and_means_2_aids(self):
         found = [routine("hearing.aids", "allowance", "$500", unit="per ear", limit="every 3 calendar years"),
                  routine("hearing.aids", unit="per ear")]
@@ -1074,6 +1083,20 @@ class AltCareOtcTravelTest(unittest.TestCase):
         found = [routine("emergency", setting="outside_us", amount="$130"),
                  routine("emergency", setting="outside_us", amount="$500", quotes='["Urgent care $500"]')]
         self.assertEqual(column(present.alt_care_otc_travel, *found), [("Worldwide ER $130", found[:1])])
+
+    def test_with_urgent_care_shows_worldwide_urgent_care_beside_the_er(self):
+        er = routine("emergency", setting="outside_us", amount="$130")
+        same = routine("emergency", setting="outside_us", amount="$130", condition="urgently needed services")
+        less = routine("emergency", setting="outside_us", amount="$50", quotes='["Urgent care $50"]')
+        sb = dict(less, amount="$65", source="SB")
+        cell = lambda *found: present.alt_care_otc_travel("", list(found), urgent_care=True)
+        self.assertEqual(cell(er, same), [("Worldwide ER/urgent $130", [er, same])])
+        self.assertEqual(cell(er, less, sb), [("Worldwide ER $130, urgent care $50", [er, less])])
+        self.assertEqual(cell(er), [("Worldwide ER $130", [er])])
+        self.assertEqual(cell(er, dict(same, package="Rider")), [("Worldwide ER $130", [er])])
+        self.assertEqual(cell(er, dict(same, cost_kind="covered", amount="")), [("Worldwide ER $130", [er])])
+        self.assertEqual(cell(er, same, dict(less, condition="urgent care")), [("Worldwide ER $130", [er])])
+        self.assertEqual(present.alt_care_otc_travel("", [er, same])[0][0], "Worldwide ER $130")
 
     def test_copays_that_no_quote_tells_apart_leave_the_cell_blank(self):
         found = [routine("otc", "allowance", "$40", limit="per month"),

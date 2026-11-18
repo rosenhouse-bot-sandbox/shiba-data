@@ -606,11 +606,11 @@ def each_per_aid(found):
     return " or ".join(money(n) for n in sorted(options)) + " per aid"
 
 
-def hearing(organization, found, each_price=False):
+def hearing(organization, found, each_price=False, exam_renews=False):
     """Shows the routine hearing exam copay, then a hearing aid allowance or else copays, and how many aids.
     The count comes from a visit limit, doubled when it is per ear, or is 2 when the best source prices or limits aids
-    per ear.
-    With each_price, it lists each aid copay instead of their range."""
+    per ear. With each_price, it lists each aid copay instead of their range. With exam_renews, the exam says how
+    often it renews when its best source says so."""
     @unless("it is not a routine hearing aid allowance")
     def allowance_ok(f):
         return routine(f) and f["cost_kind"] in ("allowance", "max") and not f["provider_tier"]
@@ -624,7 +624,8 @@ def hearing(organization, found, each_price=False):
     copays = keep(best(found, "hearing.aids", "any", copay_ok), lambda f: not allowance, lambda f: "an allowance won")
     priced = allowance or copays
     renews = renewal(found, "hearing.aids") if priced else []
-    parts = [f"exam {show(exams)}"] if exams else []
+    exam_renewals = renewal(found, "hearing.exam") if exams and exam_renews else []
+    parts = [f"exam {show(exams)}{per(exam_renewals)}"] if exams else []
     if allowance:
         ear = " per ear" if any(f["unit"] == "per ear" for f in allowance) else ""
         parts.append(f"aids allowance {show(allowance)}{ear}{per(renews)}")
@@ -639,7 +640,7 @@ def hearing(organization, found, each_price=False):
     if counted:
         aids = min(int(f["amount"]) * (2 if f["unit"] == "per ear" else 1) for f in limits) if limits else 2
         parts.append(f"{aids} aids{per(renews)}")
-    return [("; ".join(parts), unique(exams + priced + renews + counted))]
+    return [("; ".join(parts), unique(exams + exam_renewals + priced + renews + counted))]
 
 
 @unless("it is not a monthly package premium")
@@ -961,9 +962,19 @@ def urgent(f):
     return all(re.search(r"urgent", q, re.I) and not re.search(r"emergenc", q, re.I) for q in json.loads(f["quotes"]))
 
 
-def worldwide(found):
+URGENT = re.compile(r"urgent", re.I)
+
+
+def abroad_urgent_care(found):
+    """The best source's copays for urgently needed care outside the U.S."""
+    return top([f for f in found if f["benefit"] == "emergency" and f["setting"] == "outside_us" and extra(f)
+                and f["cost_kind"] in PRICED and (URGENT.search(f["condition"]) or urgent(f))])
+
+
+def worldwide(found, urgent_care=False):
     """The copay for emergency care outside the U.S. and the most the plan pays. Several copays that no quote tells
-    apart leave the part unknown. A document that says the plan covers none cites a blank."""
+    apart leave the part unknown. A document that says the plan covers none cites a blank.
+    With urgent_care, it also shows the best source's one copay for urgently needed care outside the U.S."""
     abroad = keep(exactly(found, ("emergency",), lambda f: f["setting"] == "outside_us", "it is not care outside the U.S."),
                   lambda f: not (f["condition"] or f["package"]), lambda f: "it has a condition or package")
     priced = keep(abroad, lambda f: f["cost_kind"] in PRICED and not urgent(f), lambda f: "it is not an emergency copay")
@@ -983,7 +994,15 @@ def worldwide(found):
         drop(abroad, "the facts do not say which copay is the ER's")
         return None
     maxes = top([f for f in abroad if f["cost_kind"] == "max"])
-    return [f"Worldwide ER {show(copays)}" + (f", {show(maxes)} max" if maxes else "")], copays + maxes
+    label, urgent_part = "Worldwide ER", ""
+    urgents = abroad_urgent_care(found) if urgent_care else []
+    if len({f["amount"] for f in urgents}) != 1:
+        urgents = []
+    elif urgents[0]["amount"] == copays[0]["amount"]:
+        label = "Worldwide ER/urgent"
+    else:
+        urgent_part = f", urgent care {show(urgents)}"
+    return [f"{label} {show(copays)}{urgent_part}" + (f", {show(maxes)} max" if maxes else "")], copays + urgents + maxes
 
 
 NURSING_HOME = re.compile(r"nursing home|skilled nursing", re.I)
@@ -999,14 +1018,16 @@ def virtual_visits(found):
     return ([f"Telehealth {show(prices)}"] if prices else []), prices
 
 
-def alt_care_otc_travel(organization, found, telehealth=False, food=False, rates=False, none=False):
+def alt_care_otc_travel(organization, found, telehealth=False, food=False, rates=False, none=False, urgent_care=False):
     """Shows routine acupuncture, chiropractic, massage and naturopathy, the OTC allowance, and worldwide emergency
     care, and with telehealth, virtual visit prices. With food, it says when the OTC allowance also pays for food.
-    See alt_care for rates and over_the_counter for none. A part the facts do not fully give leaves the cell blank."""
+    See alt_care for rates, over_the_counter for none and worldwide for urgent_care. A part the facts do not fully
+    give leaves the cell blank."""
     parts, cited = [], []
     for name, part in (("alt care", lambda found: alt_care(found, rates)),
                        ("over the counter", lambda found: over_the_counter(found, food, none)),
-                       ("worldwide", worldwide)) + ((("virtual visits", virtual_visits),) if telehealth else ()):
+                       ("worldwide", lambda found: worldwide(found, urgent_care))) + (
+                           (("virtual visits", virtual_visits),) if telehealth else ()):
         got = part(found)
         if got is None:
             drop(cited, f"the facts do not fully give the {name} part")
