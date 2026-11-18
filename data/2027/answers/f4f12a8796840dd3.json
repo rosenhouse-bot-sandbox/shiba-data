@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-95.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 74, supplemental hearing services, in-network: $0 copay for 1 routine hearing exam every year. Plan, benefit, network, cost and limit all match.\"}]\n```",
+ "usage": {
+  "input_tokens": 2981,
+  "output_tokens": 178,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

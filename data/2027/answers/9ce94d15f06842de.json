@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-89.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5 Hearing aids row: 1 per ear per calendar year, in-network hearing aids provided by TruHearing. This is a supplemental hearing-aid visit limit of 1 per ear per calendar year.\"}]\n```",
+ "usage": {
+  "input_tokens": 3207,
+  "output_tokens": 274,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

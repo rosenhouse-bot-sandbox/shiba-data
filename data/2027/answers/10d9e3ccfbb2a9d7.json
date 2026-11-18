@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-dca4e04d7b6dc26b.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 51 lists the $50 per aid rechargeability charge as an additional cost that the benefit does not include or cover. It is not a plan copay.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 51 hearing aids row: the purchase includes a 60-day trial period.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 51 additional routine hearing exams row: 80% coinsurance out of network.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 51 fitting-evaluation row: $0 copay in network.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 51 fitting-evaluation row: unlimited visits every year.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 51 hearing aids row: the purchase includes the first year of follow-up provider visits.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 51 hearing aids row: up to 2 TruHearing-branded hearing aids every year.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 51 additional routine hearing exams row: limited to 1 visit every year.\"},\n{\"id\": 8, \"ok\": true, \"reason\": \"Page 51 hearing aids row: 80 batteries per aid for non-rechargeable models.\"},\n{\"id\": 9, \"ok\": true, \"reason\": \"Page 51 hearing aids row: 3-year extended warranty.\"},\n{\"id\": 10, \"ok\": true, \"reason\": \"Page 51 hearing aids row, in network: $699 copay per aid for Advanced and $999 copay per aid for Premium.\"},\n{\"id\": 11, \"ok\": true, \"reason\": \"Page 51 additional routine hearing exams row: $0 copay in network.\"},\n{\"id\": 12, \"ok\": true, \"reason\": \"Page 51 fitting-evaluation row: 80% coinsurance out of network.\"},\n{\"id\": 13, \"ok\": true, \"reason\": \"Page 51 diagnostic hearing and balance evaluations: 50% coinsurance out of network for each Medicare-covered service.\"},\n{\"id\": 14, \"ok\": true, \"reason\": \"Page 51 hearing aids row: 80% coinsurance out of network.\"}]\n```",
+ "usage": {
+  "input_tokens": 5032,
+  "output_tokens": 1198,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

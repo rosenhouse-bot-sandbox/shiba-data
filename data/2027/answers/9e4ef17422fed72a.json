@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-64e05773e847b56e.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 79 hearing table: up to 2 prescription hearing aids every year (1 per ear per year), in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 79: aid purchase includes 1 fitting appointment during the first year following a hearing aid purchase.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 79 hearing table: routine hearing exam, 1 per year.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 79: in-network aid purchase includes a 3-year extended warranty.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 79: in-network aid purchase includes a 60-day trial period.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 79: 3 years of batteries per non-rechargeable aid, up to 60 cells per ear per year.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 79 in-network column: $575 per Level 1 Aid or $750 per Level 2 Aid.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 79: 3 follow-up provider visits during the first year following hearing aid purchase.\"},\n{\"id\": 8, \"ok\": true, \"reason\": \"Page 79 hearing table: routine hearing exam (1 per year) costs $0 in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 4737,
+  "output_tokens": 751,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

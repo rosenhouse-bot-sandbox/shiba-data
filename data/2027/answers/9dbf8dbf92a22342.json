@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "dca4e04d7b6dc26b.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H7006-021-0\", \"benefit\": \"hearing.aids\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$699 or $999\", \"unit\": \"per aid\", \"page\": 51, \"quotes\": [\"$699 copay per aid for\", \"$999 copay per\"], \"note\": \"$699 is for Advanced aids and $999 is for Premium aids. The quotes are split by line because the table cell wraps across lines.\"}]\n```",
+ "usage": {
+  "input_tokens": 4309,
+  "output_tokens": 638,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

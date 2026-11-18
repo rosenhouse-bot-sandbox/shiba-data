@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-7ac7300e6ca40ac7.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 61, 'Hearing services - routine hearing exam' row: $0 copayment. This is a routine (supplemental) exam, in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 61, routine hearing exam row: 'We cover 1 hearing exam every year.' That gives a visit limit of 1 per year.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 61, 'Hearing services' row for diagnostic hearing and balance evaluations: $0 copayment for each Medicare-covered exam.\"}]\n```",
+ "usage": {
+  "input_tokens": 4085,
+  "output_tokens": 357,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

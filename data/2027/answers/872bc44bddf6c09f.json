@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-2a970381e331a34a.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 6 does show the Routine Hearing Exam at a $0 copay, limited to 1 visit per year. The page never says 'per visit', so the unit field is unsupported.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 6: hearing aid purchase includes a 3-year extended warranty.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 6: Routine Hearing Exam is limited to 1 visit per year.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 6: the benefit covers up to 2 TruHearing Advanced or Premium hearing aids. The page gives no period, and the item sets none.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 6: hearing aid purchase includes a 60-day trial period.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 6: hearing aid purchase includes the first year of follow-up provider visits.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 6: Medicare-Covered Hearing Care is a $45 copay.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 6: Hearing Aid Fitting and Evaluation is a $0 copay.\"},\n{\"id\": 8, \"ok\": true, \"reason\": \"Page 6: 80 batteries per aid for non-rechargeable models.\"},\n{\"id\": 9, \"ok\": true, \"reason\": \"Page 6: hearing aids are a $599 copay or $899 copay per aid (Advanced or Premium).\"},\n{\"id\": 10, \"ok\": true, \"reason\": \"Page 6: $50 additional cost per aid for optional hearing aid rechargeability.\"}]\n```",
+ "usage": {
+  "input_tokens": 4668,
+  "output_tokens": 1059,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
