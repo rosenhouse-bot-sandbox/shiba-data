@@ -1,4 +1,4 @@
-import contextlib, glob, io, json, os, pathlib, sys, threading, unittest
+import contextlib, glob, io, json, os, pathlib, re, sys, threading, unittest
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -435,6 +435,34 @@ class StepTest(StepsTest):
         self.assertEqual(dict(tests, **{"H5439-019-0": None}), dict(v30["plan_notes"]["tests"], **{"H5439-019-0": None}))
         self.assertIn(document_facts.SPIROMETRY, tests["H5439-019-0"])
         self.assertIn("`tests.diagnostic` coinsurance 20% fact with no `condition`", tests["H5439-019-0"])
+
+    def test_version_32_reads_programs_and_some_plans_dental_frequencies(self):
+        v31, v32 = document_facts.VERSIONS[31], document_facts.VERSIONS[32]
+        changed = ("notes", "find", "plan_notes", "targets")
+        self.assertEqual({k: v for k, v in v32.items() if k not in changed}, {k: v for k, v in v31.items() if k not in changed})
+        self.assertEqual(v32["notes"], v31["notes"] | {"other_supplemental": document_facts.PROGRAMS})
+        find = [re.compile(p, re.I) for p in v32["find"]["other_supplemental"]]
+        for page in ("My Wellcare Rewards", "the Go365 program", "Earn rewards for healthy activities",
+                     "24-hour nurse line", "Nurse Advice Line", "speak with an advice nurse", "a social support platform"):
+            self.assertTrue(any(p.search(page) for p in find), page)
+        for page in ("does not reward practitioners for issuing denials", "ExtraBucks® Rewards", "psychosocial support"):
+            self.assertFalse(any(p.search(page) for p in find), page)
+        self.assertEqual(dict(v32["find"], other_supplemental=None), dict(v31["find"], other_supplemental=None))
+        self.assertEqual(dict(v32["plan_notes"], dental=None), dict(v31["plan_notes"], dental=None))
+        self.assertEqual(set(v32["plan_notes"]["dental"].values()), {document_facts.DENTAL_FREQUENCIES})
+        self.assertEqual(set(v32["targets"]), {"other_supplemental", "dental"})
+
+    def test_version_32_frequencies_of_services_on_one_page_are_different_facts(self):
+        self.assertIn("the service in `condition`", document_facts.DENTAL_FREQUENCIES)
+
+        def limit(service, amount):
+            row = dict.fromkeys(facts.COLUMNS, "") | dict(
+                plan_id="H1", benefit="dental.preventive", setting="any", network="in", condition=service,
+                covered_by="supplemental", cost_kind="visit_limit", amount=amount, limit="per year", source="EOC",
+                doc_sha=SHA, page="3")
+            return row | {"fact_id": facts.fact_id(row)}
+        self.assertEqual(facts.conflicts([limit("oral exams", "2"), limit("cleanings", "2"), limit("bitewing X-rays", "1")]),
+                         [])
 
     def test_a_second_reader_sees_the_pages_after_and_takes_reimbursements_as_its_version_says(self):
         page = "Members receive 100% reimbursement."
