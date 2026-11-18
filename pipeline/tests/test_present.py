@@ -849,6 +849,55 @@ class DetailsTest(unittest.TestCase):
         self.assertEqual(rule("", found)[0][0], "")
 
 
+class NoneTest(unittest.TestCase):
+    def test_a_plan_lacks_a_benefit_no_source_gives_even_to_some_members(self):
+        exam = routine("vision.exam")
+        says = routine("vision.eyewear", "not_covered", "")
+        self.assertEqual(present.lacks([exam], "vision.eyewear"), (True, []))
+        self.assertEqual(present.lacks([exam, says, dict(says, source="SB")], "vision.eyewear"), (True, [says]))
+        for offered in (routine("vision.eyewear", "allowance", "$100"), routine("vision.eyewear", condition="diabetes"),
+                        routine("vision.eyewear.contacts", "allowance", "$100"), routine("vision.eyewear", network="any")):
+            self.assertEqual(present.lacks([exam, offered], "vision.eyewear"), (False, []), offered)
+
+    def test_medicare_out_of_network_and_package_benefits_do_not_count(self):
+        exam = routine("vision.exam")
+        for other in (priced("vision.eyewear", condition="after cataract surgery"), routine("vision.eyewear", network="out"),
+                      routine("vision.eyewear", "allowance", "$175", package="Advantage Plus"),
+                      routine("vision", "allowance", "$100", provider_tier="PLUS")):
+            self.assertEqual(present.lacks([exam, other], "vision.eyewear"), (True, []), other)
+
+    def test_a_plan_without_document_facts_lacks_nothing(self):
+        self.assertEqual(present.lacks([routine("vision.exam", source="PBP")], "vision.eyewear"), (False, []))
+
+    def test_a_cell_says_none_before_what_a_package_adds(self):
+        plus = dict(package="Advantage Plus")
+        says = routine("dental", "not_covered", "")
+        found = [routine("packages", "premium", "$54", **plus), routine("dental.preventive", **plus),
+                 priced("dental", amount="$45")]
+        rule = present.or_none(present.with_packages(present.dental), "dental")
+        self.assertEqual(rule("", found), [("None. With Advantage Plus: PREV $0", found[1:2])])
+        self.assertEqual(rule("", found + [says]), [("None. With Advantage Plus: PREV $0", [says, found[1]])])
+        self.assertEqual(rule("", found[2:]), [("None", [])])
+        self.assertEqual(rule("", found[2:] + [says]), [("None", [says])])
+        self.assertEqual(rule("", [routine("dental.preventive")])[0][0], "PREV $0")
+
+    def test_details_say_when_a_plan_lacks_a_part(self):
+        rule = present.with_details(present.vision, present.no("no eyewear allowance", "vision.eyewear"))
+        self.assertEqual(rule("", [routine("vision.exam")])[0][0], "exam $0; no eyewear allowance")
+        self.assertEqual(rule("", [routine("vision.exam"), routine("vision.eyewear")])[0][0], "exam $0")
+
+    def test_no_comprehensive_dental_unless_a_maximum_or_allowance_may_pay_for_it(self):
+        says = routine("dental.comprehensive", "not_covered", "")
+        rule = present.with_details(present.dental, present.no_comprehensive)
+        self.assertEqual(rule("", [routine("dental.preventive"), says]), [("PREV $0; no COMP", [routine("dental.preventive"),
+                                                                                                    says])])
+        for cap in (routine("dental", "max", "$1,000", limit="per year"),
+                    routine("dental", "allowance", "$1,000", limit="per year", pool="Dental Allowance")):
+            self.assertNotIn("no COMP", rule("", [routine("dental.preventive"), cap])[0][0], cap)
+        self.assertEqual(rule("", [routine("dental.preventive"), routine("dental.comprehensive", condition="diabetes")])[0][0],
+                         "PREV $0")
+
+
 class TelehealthTest(unittest.TestCase):
     def test_adds_the_range_of_virtual_visit_prices_after_the_other_parts(self):
         found = [routine("otc", "allowance", "$40", limit="per quarter"),
@@ -978,6 +1027,34 @@ class AltCareOtcTravelTest(unittest.TestCase):
         groceries = dict(eoc, quotes='["Use your allowance on groceries and OTC items"]')
         self.assertEqual(present.alt_care_otc_travel("", [groceries], food=True)[0][0], "OTC and food $196/month")
         self.assertEqual(present.alt_care_otc_travel("", [eoc], food=True)[0][0], "OTC $196/month")
+
+    def test_with_none_says_when_the_plan_lacks_otc(self):
+        er = routine("emergency", setting="outside_us", amount="$130")
+        says = routine("otc", "not_covered", "")
+        self.assertEqual(present.alt_care_otc_travel("", [er], none=True), [("OTC none; Worldwide ER $130", [er])])
+        self.assertEqual(present.alt_care_otc_travel("", [er, says], none=True)[0][1], [says, er])
+        self.assertEqual(present.alt_care_otc_travel("", [er])[0][0], "Worldwide ER $130")
+        for otc in (routine("otc", "allowance", "$50", condition="chronically ill"), routine("otc", "allowance", "$50")):
+            self.assertNotIn("OTC none", present.alt_care_otc_travel("", [er, otc], none=True)[0][0], otc)
+
+    def test_with_rates_an_allowance_shared_with_dental_shows_its_amount_and_one_price(self):
+        pool = dict(pool="Dental & Alternative Therapy Allowance")
+        found = [routine(leaf, kind, amount, fact_id=f"{leaf} {kind}", **pool, **more)
+                 for leaf in ("extras.acupuncture", "extras.massage")
+                 for kind, amount, more in (("allowance", "$2,000", dict(limit="per year")), ("coinsurance", "50%", {}))]
+        self.assertEqual(present.alt_care_otc_travel("", found, rates=True),
+                         [("Acup, Massage 50% from $2,000/year allowance shared with dental", found)])
+        self.assertEqual(present.alt_care_otc_travel("", found)[0][0], "Acup, Massage from dental allowance")
+        allowances = [found[0], found[2]]
+        self.assertEqual(present.alt_care_otc_travel("", found[:3], rates=True),
+                         [("Acup, Massage from $2,000/year allowance shared with dental", allowances)])
+        _, aside = present.explain("", found[:3], "I_alt_care_otc_travel", "dvha")
+        self.assertIn("the services that share the allowance do not all give one price", aside[facts.identity(found[1])])
+        unrenewed = [dict(f, limit="") for f in allowances]
+        self.assertEqual(present.alt_care_otc_travel("", unrenewed, rates=True)[0][0], "Acup, Massage from dental allowance")
+        flex = [routine("extras.acupuncture", kind, amount, pool="Flex Card", limit="every six months")
+                for kind, amount in (("allowance", "$50"), ("copay", "$0"))]
+        self.assertEqual(present.alt_care_otc_travel("", flex, rates=True)[0][0], "Acup $0 from $50/six months allowance")
 
     def test_worldwide_er_skips_urgent_care(self):
         found = [routine("emergency", setting="outside_us", amount="$130"),
@@ -1133,6 +1210,18 @@ class ExtraBenefitsTest(unittest.TestCase):
                          "Fitness; Wellness Bucks $150/year")
         massage = routine("extras.massage", "allowance", "$150", pool=bucks["pool"], limit="per year")
         self.assertEqual(column(present.extra_benefits, routine("fitness"), bucks, massage)[0][0], "Fitness")
+
+    def test_with_part_b_starts_with_the_monthly_giveback(self):
+        eoc = priced("giveback", amount="$154.20", cost_kind="part_b_reduction", unit="per month")
+        sb = dict(eoc, source="SB")
+        self.assertEqual(present.extra_benefits("", [routine("fitness"), sb, eoc], part_b=True),
+                         [("Part B giveback $154.20/month; Fitness", [eoc, routine("fitness")])])
+        self.assertEqual(present.extra_benefits("", [dict(eoc, unit="")], part_b=True)[0][0], "Part B giveback $154.20")
+        self.assertEqual(present.extra_benefits("", [routine("fitness"), eoc])[0][0], "Fitness")
+        covered = priced("giveback", amount="", cost_kind="covered")
+        self.assertEqual(present.extra_benefits("", [covered], part_b=True), [("", [])])
+        _, aside = present.explain("", [covered], "J_extra_benefits", "dvha")
+        self.assertEqual(aside[facts.identity(covered)], ["it gives no amount"])
 
     def test_names_cards_for_chronic_conditions_and_programs_after_heart_failure(self):
         found = [routine("other_supplemental", "allowance", "$30", pool="Food & Home Card", limit="per month",
@@ -1293,6 +1382,19 @@ class WriteTest(unittest.TestCase):
         self.assertEqual({r[1] for r in rows[20] ^ rows[21]}, {"F_dental", "J_extra_benefits"})
         got = present.lines(data, "F_dental", sheet="dvha", version=21)["H5439-015-0"][0][0]
         self.assertIn("PREV limits: Cleanings (prophylaxis) 2/year", got)
+
+    def test_version_22_says_none_shows_the_giveback_and_shared_allowances(self):
+        self.assertEqual(present.VERSIONS[22], {})
+        data = years.data_dir(YEAR)
+        rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.layer_rows(data, v)} for v in (21, 22)}
+        self.assertEqual({r[1] for r in rows[21] ^ rows[22]},
+                         {"F_dental", "G_vision", "H_hearing", "I_alt_care_otc_travel", "J_extra_benefits"})
+        got = {c: present.lines(data, c, sheet="dvha", version=22)[p][0][0] for c, p in (
+            ("F_dental", "H3805-048-0"), ("I_alt_care_otc_travel", "H2923-019-0"), ("J_extra_benefits", "H2923-025-0"))}
+        self.assertTrue(got["F_dental"].startswith("None. With Platinum Dental Rider: "))
+        self.assertTrue(got["I_alt_care_otc_travel"].startswith(
+            "Acup, Massage, Naturopath 50% from $2,000/year allowance shared with dental; OTC $106/three months"))
+        self.assertTrue(got["J_extra_benefits"].startswith("Part B giveback $70/month; "))
 
     def test_version_12_holds_no_cell(self):
         self.assertEqual(present.held(years.data_dir(YEAR), 12), {})
