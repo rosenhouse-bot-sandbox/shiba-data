@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-64e05773e847b56e.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 86 dental exclusions: services from an out-of-network dentist are not covered benefits.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 74: periodic oral exam, cleaning and panoramic film are listed under Preventive Services at 0% in network.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 74 plan overview gives an annual maximum of $1,500. Benefits run on a calendar year basis.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 74 lists emergency diagnostic exam D0140 under Preventive Services, limited to 2 procedure codes per calendar year.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 74 plan overview: Deductible $0.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 74: prophylaxis (cleaning) is limited to 2 procedure codes per calendar year.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 74 Diagnostic Services: periodontal and comprehensive exams are limited to 1 procedure code every 3 calendar years.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 74: bitewing X-rays are limited to 1 procedure code per calendar year.\"},\n{\"id\": 8, \"ok\": true, \"reason\": \"Page 74: periodic oral exam D0120 is limited to 2 procedure codes per calendar year.\"},\n{\"id\": 9, \"ok\": true, \"reason\": \"Page 74: intraoral periapical X-rays are limited to 6 procedure codes per calendar year.\"},\n{\"id\": 10, \"ok\": true, \"reason\": \"Page 49: the plan covers Mandatory Supplemental Dental Benefits, including preventive and diagnostic services.\"},\n{\"id\": 11, \"ok\": true, \"reason\": \"Page 74: full mouth or panoramic X-rays are limited to 1 procedure code every 5 calendar years.\"},\n{\"id\": 12, \"ok\": true, \"reason\": \"Page 78, in the comprehensive services table: general anesthesia D9222 and nitrous oxide D9230 are 0% in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 12025,
+  "output_tokens": 1390,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

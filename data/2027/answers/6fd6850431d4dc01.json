@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-aca9d3510177adcd.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 69, Virtual Cardiac Recovery Program: up to 36 sessions per episode after a qualifying heart failure-related hospitalization. Eligible members must have had a hospitalization within 30 days related to heart failure. The condition is a fair summary of that, though it leaves out the extra HFrEF or comorbidity criteria.\"}, {\"id\": 1, \"ok\": true, \"reason\": \"Page 69, Virtual Cardiac Recovery Program: $0 copayment in network for members with a qualifying heart failure hospitalization. The condition carries the same simplification as item 0.\"}, {\"id\": 2, \"ok\": false, \"reason\": \"Page 98 only gives the Nurse Advice Line phone number as a way to get information about care management programs. It is in the rights chapter, not presented as a covered benefit, so the coverage claim is not clearly supported.\"}]\n```",
+ "usage": {
+  "input_tokens": 4099,
+  "output_tokens": 829,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

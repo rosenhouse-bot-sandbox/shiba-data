@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-82.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 80 Virtual Cardiac Recovery Program row: In-Network $0 copayment. It is limited to members with a heart failure-related hospitalization in the past 30 days, which matches the condition as a summary.\"}]\n```",
+ "usage": {
+  "input_tokens": 2841,
+  "output_tokens": 446,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

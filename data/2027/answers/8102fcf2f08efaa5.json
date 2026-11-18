@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "4a0ee31be3437c35.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-306-0\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"pool\": \"HMO Travel Benefit\", \"page\": 16,\n  \"quotes\": [\"HMO Travel Benefit\", \"Members may receive in-network benefits when services are received from a participating HMO National Network provider when traveling to other states.\"]},\n {\"plan_id\": \"H1036-306-0\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"pool\": \"Rewards and Incentives - Go365® by Humana\", \"page\": 16,\n  \"quotes\": [\"Rewards and Incentives - Go365® by Humana\", \"Complete eligible healthy activities, like preventive screenings and exams, and get rewarded with Go365 Advanced.\"]}]\n```",
+ "usage": {
+  "input_tokens": 2760,
+  "output_tokens": 865,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

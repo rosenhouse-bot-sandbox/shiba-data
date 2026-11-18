@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "2947683a555fc83c.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-323-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"premium\", \"amount\": \"$50.90\", \"package\": \"MyOption DEN972\", \"unit\": \"per month\", \"page\": 16, \"quotes\": [\"$50.90 Monthly premium\", \"MyOption DEN972 is an Optional Supplemental Benefit (OSB) package\"]}]\n```",
+ "usage": {
+  "input_tokens": 3740,
+  "output_tokens": 435,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

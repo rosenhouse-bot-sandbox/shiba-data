@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-129.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 20 My Wellcare Rewards row says members can earn up to $100 through eligible health and portal activities. This matches a rewards-program allowance of $100 with pool 'My Wellcare Rewards'. No time limit is stated, so leaving limit blank is correct.\"}]\n```",
+ "usage": {
+  "input_tokens": 2077,
+  "output_tokens": 201,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

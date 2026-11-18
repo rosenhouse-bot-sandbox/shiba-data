@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-122.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 116 Social support platform row: $0 copay for the social support platform, a supplemental benefit with no setting named and no network split, so in-network applies by default.\"}]\n```",
+ "usage": {
+  "input_tokens": 2334,
+  "output_tokens": 289,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

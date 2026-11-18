@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-a744eaa24232bb11.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 79 in-network column: root canal codes cost 50% and root canal retreatment codes cost 0%. Prices differ by code, so the fact is dental.comprehensive coinsurance of 0% or 50%.\"}]\n```",
+ "usage": {
+  "input_tokens": 3925,
+  "output_tokens": 99,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

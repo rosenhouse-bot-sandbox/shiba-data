@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-49912316cc55d9c5.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 104, Special supplemental benefits for the chronically ill — Food & Home Card: $30 per month allowance for members diagnosed with a medically complex chronic condition. It is a food, utility and rent card, not an OTC allowance.\"}]\n```",
+ "usage": {
+  "input_tokens": 2625,
+  "output_tokens": 245,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

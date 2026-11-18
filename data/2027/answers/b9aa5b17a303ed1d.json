@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-e2d6e1e199a3b8a9.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 40, Health and wellness education programs row: '$0 copay for the 24-Hour Nurse Line benefit' for Aetna Medicare Eagle (HMO). A nurse line is an other_supplemental copay fact named in pool, which matches.\"}]\n```",
+ "usage": {
+  "input_tokens": 2585,
+  "output_tokens": 232,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
