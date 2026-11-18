@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-120.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 9 Advantage Plus table applies to every plan in the document. Its 'Annual deductible for comprehensive dental care' row is $50 and names no network, so it is in-network. That supports a $50 per-year deductible in the Advantage Plus package.\"}]\n```",
+ "usage": {
+  "input_tokens": 3068,
+  "output_tokens": 408,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

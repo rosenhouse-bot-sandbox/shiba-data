@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-134.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 72 lists Core buildup D2950 under Comprehensive Services at 0% both in-network and out-of-network, which supports the 0% out-of-network coinsurance.\"}]\n```",
+ "usage": {
+  "input_tokens": 3589,
+  "output_tokens": 313,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

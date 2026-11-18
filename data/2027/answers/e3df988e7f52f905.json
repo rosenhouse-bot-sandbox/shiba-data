@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-169.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 63, 'Hearing services - routine hearing exam' row: the out-of-network column shows a $90 copayment*. The row says the plan covers 1 in- or out-of-network hearing exam every year. This is a routine (supplemental) benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 3904,
+  "output_tokens": 278,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

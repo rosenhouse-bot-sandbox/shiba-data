@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-98.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 90 shows 0% for fillings and extractions, but it never names the package 'MyOption DEN972'. Page 91 also shows 50% for other comprehensive services (crowns, root canals, dentures), so 0% alone misstates comprehensive dental.\"}]\n```",
+ "usage": {
+  "input_tokens": 3843,
+  "output_tokens": 330,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

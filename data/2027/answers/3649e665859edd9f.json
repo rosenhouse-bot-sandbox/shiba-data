@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-143.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 70, routine vision hardware row: lenses out-of-network are 50% coinsurance (based on billed charges), limited to 1 set every calendar year. This is a routine (supplemental) benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2625,
+  "output_tokens": 453,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

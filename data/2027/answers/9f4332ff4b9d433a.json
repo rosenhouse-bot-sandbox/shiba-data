@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-119.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 10, Advantage Plus comprehensive dental row: 50% coinsurance after the deductible is met. The row applies to all plans and names no network, so it is in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3380,
+  "output_tokens": 627,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

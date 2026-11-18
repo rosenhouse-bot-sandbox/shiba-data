@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-50.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 74 physician/practitioner services row, In-Network, Telehealth Services: $0 copayment for PCP Virtual. The Specialist Virtual line is separate at $45.\"}]\n```",
+ "usage": {
+  "input_tokens": 2606,
+  "output_tokens": 398,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

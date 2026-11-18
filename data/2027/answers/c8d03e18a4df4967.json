@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-92.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 91 shows 0% in-network coinsurance for the periodic exam, cleaning and bitewing X-ray rows, but nothing on the page names the package 'MyOption DEN972', so the package field cannot be confirmed.\"}]\n```",
+ "usage": {
+  "input_tokens": 3743,
+  "output_tokens": 302,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

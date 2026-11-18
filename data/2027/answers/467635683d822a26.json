@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-179.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 40 'Fitting and evaluation' row for routine hearing (a hearing aid fitting evaluation, so hearing.exam) lists out-of-network as 80% coinsurance (based on billed charges) with 'Unlimited visits'.\"}]\n```",
+ "usage": {
+  "input_tokens": 3570,
+  "output_tokens": 469,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
