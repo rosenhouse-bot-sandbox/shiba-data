@@ -1022,7 +1022,27 @@ def extra_benefits(organization, found, prices=False, programs=False):
         names += ["home-delivered meals"] if any(f["benefit"] == "meals" for f in heart) else []
         parts.append(f"After a heart-failure hospital stay: {', '.join(names)}")
         cited += heart
+    if programs:
+        got = other_programs(found)
+        parts += got[0]
+        cited += got[1]
     return [("; ".join(parts), unique(cited))]
+
+
+def other_programs(found):
+    """Names each other program for every member, with its price and how often an allowance renews."""
+    programs = exactly(found, ("other_supplemental",), lambda f: everyone(f) and f["pool"] and f["cost_kind"] in DOT_KINDS,
+                       "it is not a program for every member")
+    parts, cited = [], []
+    for pool in sorted({f["pool"] for f in programs}):
+        got = top([f for f in programs if f["pool"] == pool])
+        priced = [f for f in got if f["cost_kind"] in PRICED + ("allowance",)]
+        price = f" {show(priced)}" if priced else ""
+        allowance = [f for f in priced if f["cost_kind"] == "allowance"]
+        period = f"/{renews(allowance)}" if allowance and renews(allowance) else ""
+        parts.append(f"{pool}{price}{period}")
+        cited += priced or got
+    return parts, cited
 
 
 # Comprehensive services that some plans cover alone, by how their quotes name them.
@@ -1347,7 +1367,7 @@ VERSIONS[18] = {}
 # Version 19 holds no cell. It shows what a package gives in each benefit's own column, lists each hearing aid copay,
 # and adds out-of-network prices, the dental deductible, fitness and meals prices, and virtual visit prices.
 VERSIONS[19] = {}
-# Version 20 holds no cell. It names the fitness program.
+# Version 20 holds no cell. It names the fitness program and each other program for every member.
 VERSIONS[20] = {}
 # The version that first presents each later column. Earlier versions hold its cells.
 SINCE = {("dvha", "C_premium"): 3, ("dvha", "G_vision"): 4, ("dvha", "H_hearing"): 4, ("dvha", "E_optional_packages"): 5,

@@ -1017,6 +1017,19 @@ class ExtraBenefitsTest(unittest.TestCase):
         named = routine("fitness", network="out", quotes='["SilverSneakers"]')
         self.assertEqual(present.extra_benefits("", [routine("fitness"), named], prices=True, programs=True)[0][0], "Fitness $0")
 
+    def test_with_programs_names_each_other_program_for_every_member(self):
+        nurse = routine("other_supplemental", pool="24-Hour Nurse Line", source="SB")
+        travel = routine("other_supplemental", "covered", "", pool="Travel Advantage", source="SB")
+        travel_eoc = dict(travel, source="EOC", pool="HMO Travel Benefit")
+        rewards = routine("other_supplemental", "allowance", "$100", pool="Rewards", limit="per year")
+        card = routine("other_supplemental", "allowance", "$30", pool="Food Card", condition="chronic", limit="per month")
+        away = routine("other_supplemental", "max", "$1,200", pool="Explorer", network="out")
+        self.assertEqual(present.extra_benefits("", [nurse, travel, travel_eoc, rewards, away], programs=True),
+                         [("24-Hour Nurse Line $0; HMO Travel Benefit; Rewards $100/year; Travel Advantage",
+                           [nurse, travel_eoc, rewards, travel])])
+        self.assertEqual(present.extra_benefits("", [nurse, rewards, card], prices=True)[0][0],
+                         "For members with certain chronic conditions: Food Card $30/month")
+
     def test_foot_care_for_members_with_diabetes_says_so_unless_every_member_has_some(self):
         diabetic = routine("foot_care", condition="diabetes")
         self.assertEqual(column(present.extra_benefits, diabetic)[0][0], "Routine foot care $0 for members with diabetes")
@@ -1177,7 +1190,7 @@ class WriteTest(unittest.TestCase):
         self.assertEqual(got[19], "Advantage Plus $54/mo")
         self.assertEqual(len(set(got.values())), 3)
 
-    def test_version_20_names_the_fitness_program(self):
+    def test_version_20_names_the_fitness_program_and_other_programs(self):
         self.assertEqual(present.VERSIONS[20], {})
         data = years.data_dir(YEAR)
         rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.layer_rows(data, v)} for v in (19, 20)}
