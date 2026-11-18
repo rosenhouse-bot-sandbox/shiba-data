@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-110.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 64 routine dental chart: under Comprehensive Dental Care, the only listed service is adjunctive general services. Its Out-of-Network row reads '50% coinsurance for each adjunctive general service', which matches out-of-network, supplemental, 50% coinsurance, per service. The item leaves out the '1 every date of service' frequency limit, but no stated field is wrong.\"}]\n```",
+ "usage": {
+  "input_tokens": 2842,
+  "output_tokens": 700,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

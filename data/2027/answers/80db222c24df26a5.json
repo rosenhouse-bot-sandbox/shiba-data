@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-25.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 3 Doctor visits table: the 'Virtual medical visits' row shows a $0 copay in network. The out-of-network column says 'Same as a Doctor's office visit', which does not affect the in-network fact. The page does not label the row as routine or supplemental.\"}]\n```",
+ "usage": {
+  "input_tokens": 2230,
+  "output_tokens": 439,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-133.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 74 dental code table, Out-of-Network column: root canal (D3310, D3320, D3330) is 30% and retreatment (D3346-D3348) is 0%. Prices differ by code, so 0% or 30% out-of-network coinsurance for comprehensive dental is correct.\"}]\n```",
+ "usage": {
+  "input_tokens": 3737,
+  "output_tokens": 379,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

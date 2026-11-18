@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-113.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 65 dental services continuation, in the preventive section before Comprehensive Dental Care: Out-of-Network 50% coinsurance for other preventive dental services per visit. The routine dental context makes this supplemental.\"}]\n```",
+ "usage": {
+  "input_tokens": 2852,
+  "output_tokens": 789,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

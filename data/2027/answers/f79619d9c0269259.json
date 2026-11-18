@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-114.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 63 lists Adjunctive general services under Comprehensive Dental Care. The Out-of-Network row gives 25% coinsurance for each adjunctive general service, and it is a routine (supplemental) dental benefit. The row's frequency, 1 every date of service, is not in the item, which leaves it incomplete but not wrong.\"}]\n```",
+ "usage": {
+  "input_tokens": 2849,
+  "output_tokens": 524,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

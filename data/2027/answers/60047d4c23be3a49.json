@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-94.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 91 shows 0% out-of-network for the exam, cleaning and bitewing X-ray rows. The page has a $52.10 monthly premium, which suggests an optional package. But neither cited page names a package, so 'MyOption DEN972' cannot be verified.\"}]\n```",
+ "usage": {
+  "input_tokens": 3743,
+  "output_tokens": 314,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

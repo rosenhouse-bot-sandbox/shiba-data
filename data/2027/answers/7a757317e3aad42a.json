@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-141.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"On page 70, the Routine vision hardware Lenses row (1 set every calendar year) shows Out-of-network: 50% coinsurance (based on billed charges). This is a supplemental eyewear benefit. The 50% applies to lenses; frames have a separate $100 allowance.\"}]\n```",
+ "usage": {
+  "input_tokens": 2628,
+  "output_tokens": 683,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
