@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-90.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 15 'Rewards and Incentives - Go365® by Humana': members get rewarded with Go365 Plus for eligible healthy activities. No maximum amount is given, so a supplemental covered fact under the program's name is correct.\"}]\n```",
+ "usage": {
+  "input_tokens": 2261,
+  "output_tokens": 202,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

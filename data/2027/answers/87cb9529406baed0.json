@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-89.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 79 does show the Virtual Cardiac Recovery Program (Uniformity Flexibility Benefit) at a $0 copayment in network. But the condition is incomplete: the page says members must also meet one of further criteria, such as heart failure with reduced ejection fraction (HFrEF), and that list continues past the page. A counselor could tell members they qualify when they do not.\"}]\n```",
+ "usage": {
+  "input_tokens": 2716,
+  "output_tokens": 697,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

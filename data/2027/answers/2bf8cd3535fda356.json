@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-41.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"The page 90 rows do show 0% in network for fillings and extractions. But the cited page never names a 'MyOption DEN972' package. Comprehensive care is also not 0% across the board: page 91 shows 50% for crowns, root canals, bridges and dentures. The item gives 0% with no condition.\"}]\n```",
+ "usage": {
+  "input_tokens": 3944,
+  "output_tokens": 359,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

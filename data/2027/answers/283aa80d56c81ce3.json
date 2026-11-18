@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "630e49b10e7ad131.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-317-0\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\", \"pool\": \"Nurse Advice Line\", \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"page\": 133, \"quotes\": [\"call the Nurse Advice Line at 1-800-491-4164, TTY 711\"], \"note\": \"Mentioned in Chapter 8 (rights) rather than the Medical Benefits Chart; no cost stated.\"}]\n```",
+ "usage": {
+  "input_tokens": 9115,
+  "output_tokens": 599,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

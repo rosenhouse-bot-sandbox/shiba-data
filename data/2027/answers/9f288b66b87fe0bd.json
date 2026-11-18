@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "aca9d3510177adcd.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-455-0\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"pool\": \"Nurse Advice Line\", \"page\": 98, \"quotes\": [\"If you would like more information about these health programs, call the Nurse Advice Line at 1-800-491-4164, TTY 711.\"], \"note\": \"The Nurse Advice Line is only named as a contact number in the rights chapter. No cost is stated.\"}]\n```",
+ "usage": {
+  "input_tokens": 5592,
+  "output_tokens": 755,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

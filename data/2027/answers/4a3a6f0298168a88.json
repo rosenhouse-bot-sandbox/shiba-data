@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-90a4efa6544175a2.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The Social support platform row on page 101 gives a $0 copay for the social support platform. It is a supplemental benefit, and the pool name matches the document.\"}, {\"id\": 1, \"ok\": true, \"reason\": \"The Nurse advice line row, under Health and wellness education programs on page 68, gives a $0 copay for the nurse advice line. It is a supplemental benefit, and the pool name matches the document.\"}]\n```",
+ "usage": {
+  "input_tokens": 3083,
+  "output_tokens": 277,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

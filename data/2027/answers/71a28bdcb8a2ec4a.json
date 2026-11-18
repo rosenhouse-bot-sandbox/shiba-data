@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "49912316cc55d9c5.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-001-0\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$30\", \"limit\": \"per month\", \"pool\": \"Food & Home Card\", \"condition\": \"medically complex chronic condition\", \"page\": 104, \"quotes\": [\"$30 per month\", \"The Food & Home Card is a benefit card with an allowance that lets you purchase healthy foods, pay for eligible utility costs, and/or pay for rent or mortgage costs.\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 5979,
+  "output_tokens": 839,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

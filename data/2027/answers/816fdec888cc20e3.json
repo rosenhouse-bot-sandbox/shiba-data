@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-44.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 93 D5520 row does show 50% out of network, but the page never names the package 'MyOption DEN972', so that field can't be verified.\"}]\n```",
+ "usage": {
+  "input_tokens": 4043,
+  "output_tokens": 289,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

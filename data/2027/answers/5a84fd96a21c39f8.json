@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-f73d19eeaaf3a08a.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 79 Virtual Cardiac Recovery Program row: in-network $0 copayment. The condition copies the stated eligibility sentence.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Page 143 only gives the Nurse Advice Line phone number as a contact for information about care management programs. It is not presented as a covered supplemental benefit with network or cost terms.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 79 Virtual Cardiac Recovery Program: up to 36 sessions per episode following a qualifying hospitalization.\"}]\n```",
+ "usage": {
+  "input_tokens": 4368,
+  "output_tokens": 542,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

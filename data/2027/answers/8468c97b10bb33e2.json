@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "37b0122461ea99ed.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-011-0\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"pool\": \"Nurse advice line\", \"page\": 73, \"quotes\": [\"$0 copay for the nurse advice line.\"], \"note\": \"The row has no network label, so in-network is assumed. Page 49 also lists the Nursing hotline under Out-of-Network.\"},\n {\"plan_id\": \"H5439-011-0\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"pool\": \"Social support platform\", \"page\": 118, \"quotes\": [\"$0 copay for the social support platform.\"], \"note\": \"The row has no network label, so in-network is assumed. Pages 48-49 list the Social Support Platform under both In-Network and Out-of-Network.\"}]\n```",
+ "usage": {
+  "input_tokens": 6837,
+  "output_tokens": 844,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
