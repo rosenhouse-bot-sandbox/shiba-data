@@ -824,10 +824,24 @@ class DetailsTest(unittest.TestCase):
                  limit("Other services", "1", "per tooth per 6 months")]
         rule = present.with_details(present.dental, present.preventive_limits)
         self.assertEqual(rule("", found),
-                         [("PREV $0; PREV limits: Cleanings 2/year, Panoramic X-rays 1 every 5 years, Fluoride 1 every 6 months",
+                         [("PREV $0; PREV limits: Cleanings 2/year · Panoramic X-rays 1 every 5 years · Fluoride 1 every 6 months",
                            found[:4])])
         self.assertEqual(rule("", found[:1] + found[4:5])[0][0], "PREV $0; PREV limits: Bitewings 1/year")
         self.assertEqual(rule("", found[:1] + found[5:])[0][0], "PREV $0")
+
+    def test_reads_how_often_from_the_limit_and_skips_limits_per_part_of_the_mouth(self):
+        for limit, often in (("Each Calendar Year", "year"), ("every 1 year", "year"), ("per benefit year", "year"),
+                             ("every two years", "2 years"), ("Every Six Months", "6 months"), ("twice a year", ""),
+                             ("everyyear", "")):
+            self.assertEqual(present.how_often({"limit": limit}), often, limit)
+        found = [routine("dental.preventive"),
+                 routine("dental.preventive", "visit_limit", "1", condition="Bitewings", unit="set", limit="per year")]
+        found += [routine("dental.preventive", "visit_limit", "1", condition="Sealants", limit=f"per {part} per year")
+                  for part in ("Quadrant", "surface", "arch")]
+        found += [routine("dental.preventive", "visit_limit", "2", limit="per year"),
+                  routine("dental.preventive", "coinsurance", "0%", condition="Cleanings", limit="per year")]
+        rule = present.with_details(present.dental, present.preventive_limits)
+        self.assertEqual(rule("", found), [("PREV $0; PREV limits: Bitewings 1/year", found[:2])])
 
     def test_adds_nothing_to_a_blank_cell(self):
         found = [routine("dental.preventive", "coinsurance", "50%", network="out")]
@@ -1083,6 +1097,14 @@ class ExtraBenefitsTest(unittest.TestCase):
                          (["Nurse advice line $0", "Social support platform $0", "Travel Advantage"],
                           [eoc, support[0]] + travel))
         self.assertEqual(present.other_programs([sb], alike=True)[0], ["24-Hour Nurse Advice Line $0"])
+        for names in (["Healthy Rewards", "Healthy Rewards program"], ["24 hours nurse line", "Nurse Line"],
+                      ["24hour nurse line", "Nurse line"], ["Nurse-line", "nurse line"]):
+            got = [routine("other_supplemental", pool=name) for name in names]
+            self.assertEqual(present.other_programs(got, alike=True)[0], [f"{min(names, key=len)} $0"], names)
+        named = [routine("other_supplemental", pool=name) for name in ("Nurse Line", "Nurse  line")]
+        self.assertEqual(present.other_programs(named, alike=True)[0], ["Nurse Line $0"])
+        hyphens = [routine("other_supplemental", pool=name) for name in ("Nurse\u2011Line", "Nurse-Line")]
+        self.assertEqual(present.other_programs(hyphens)[0], ["Nurse-Line $0", "Nurse-Line $0"])
 
     def test_a_program_shows_its_best_sources_allowance_and_cites_only_its_price(self):
         rewards = routine("other_supplemental", "allowance", "$100", pool="Rewards", limit="per year")

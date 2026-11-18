@@ -736,9 +736,9 @@ def dental_deductible(found):
     return ("no deductible" if shown_ == "$0" else f"deductible {shown_}/year"), deductibles
 
 
-HOW_OFTEN = re.compile(r"\b(?:every|per|each)\s+(?:(\d+)\s+)?(?:calendar\s+)?(year|month)s?\b", re.I)
-
-
+COUNTS = {"two": "2", "three": "3", "four": "4", "five": "5", "six": "6"}
+HOW_OFTEN = re.compile(r"\b(?:every|per|each)\s+(?:(\d+|two|three|four|five|six)\s+)?(?:calendar\s+|benefit\s+|plan\s+)?"
+                       r"(year|month)s?\b", re.I)
 PER_PART = re.compile(r"\bper (?:tooth|quadrant|surface|arch)\b", re.I)
 
 
@@ -747,18 +747,21 @@ def how_often(f):
     match = HOW_OFTEN.search(f["limit"])
     if not match:
         return ""
-    count, unit = match[1], match[2].lower()
+    count, unit = COUNTS.get((match[1] or "").lower(), match[1]), match[2].lower()
     return f"{count} {unit}s" if count and count != "1" else unit
 
 
 def preventive_limits(found):
-    """A detail: how often the best source says the plan covers each preventive dental service."""
+    """Shows how often the best source says the plan covers each preventive dental service."""
     limits = top(exactly(found, ("dental.preventive",),
-                         lambda f: extra(f) and f["condition"] and f["cost_kind"] == "visit_limit" and not f["unit"]
-                         and how_often(f) and not PER_PART.search(f["limit"]), "it is not a limit on how often the plan covers one preventive service"))
-    parts = [f"{f['condition']} {f['amount']}" + (f"/{how_often(f)}" if how_often(f) == "year" else f" every {how_often(f)}")
-             for f in limits]
-    return ("PREV limits: " + ", ".join(parts) if parts else ""), limits
+                         lambda f: extra(f) and f["condition"] and f["cost_kind"] == "visit_limit" and how_often(f)
+                         and not PER_PART.search(f["unit"] + " " + f["limit"]),
+                         "it is not a limit on how often the plan covers one preventive service"))
+    parts = []
+    for f in limits:
+        often = how_often(f)
+        parts.append(f"{f['condition']} {f['amount']}" + (f"/{often}" if often == "year" else f" every {often}"))
+    return ("PREV limits: " + " · ".join(parts) if parts else ""), limits
 
 
 def with_packages(rule):
@@ -1011,7 +1014,7 @@ def extra_benefits(organization, found, prices=False, programs=False, alike=Fals
     """Names fitness, meals and transportation for every member, then shows routine foot care, a fitness allowance,
     a card for members with chronic conditions, and the programs after a heart-failure hospital stay.
     With prices, it shows the fitness and meals copays and how many meals. With programs, it names the fitness program
-    and then each other program for every member, with alike as other_programs takes it."""
+    and then each other program for every member. With alike, it merges programs as other_programs does."""
     parts, cited = [], []
     for name, leaf in (("Fitness", "fitness"), ("Meals", "meals"), ("Transportation", "extras.transportation")):
         got = top(exactly(found, (leaf,), lambda f: extra(f) and offers(f),
@@ -1069,7 +1072,7 @@ HOURS = re.compile(r"\b24\W?hours?\b")
 
 
 def program_name(pool):
-    """The program's name with its kind, case, hours and trailing "program" left out, so two sources' names compare."""
+    """The program's name without its kind, case, "24-hour" or a trailing "program", so two sources' names compare."""
     words = re.sub(r"\W+", " ", HOURS.sub("", pool.split(":")[-1].lower())).split()
     return " ".join(words[:-1] if words[-1:] == ["program"] else words)
 
@@ -1090,7 +1093,7 @@ def other_programs(found, alike=False):
         period = f"/{renews(allowances)}" if allowances and renews(allowances) else ""
         label = min((f["pool"] for f in got), key=lambda pool: (len(pool), pool)).replace(chr(0x2011), "-")
         shown.append((label, f"{label}{price}{period}", priced or got))
-    shown.sort()
+    shown.sort(key=lambda shown_: shown_[:2])
     return [part for _, part, _ in shown], [f for _, _, used in shown for f in used]
 
 
@@ -1215,10 +1218,10 @@ LEAVES = {"L_xray_imaging": ("imaging",), "AB_ambulance": ("ambulance", "emergen
           "E_moop": ("moop",), "N_pharmacy_deductible": ("part_d_deductible",)}
 
 
+DENTAL_OON = out_of_network(("PREV", "dental.preventive"), ("COMP", "dental.comprehensive"))
 DVHA = {"C_premium": plan_premium, "D_premium_full_extra_help": extra_help_premium,
         "E_optional_packages": lambda o, found: optional_packages(o, found, details=False),
-        "F_dental": with_packages(with_details(dental, dental_deductible, out_of_network(
-            ("PREV", "dental.preventive"), ("COMP", "dental.comprehensive")), preventive_limits)),
+        "F_dental": with_packages(with_details(dental, dental_deductible, DENTAL_OON, preventive_limits)),
         "G_vision": with_packages(with_details(vision, out_of_network(("exam", "vision.exam"), ("eyewear", "vision.eyewear")))),
         "H_hearing": with_packages(with_details(lambda o, found: hearing(o, found, each_price=True),
                                                 out_of_network(("exam", "hearing.exam"), ("aids", "hearing.aids")))),
@@ -1278,8 +1281,8 @@ def plans(data):
 EARLIER_RULES = {
     ("dvha", "E_optional_packages"): ((17, lambda o, found: optional_packages(o, found, allowances=False)),
                                       (19, optional_packages)),
-    ("dvha", "F_dental"): ((19, dental), (21, with_packages(with_details(dental, dental_deductible, out_of_network(
-        ("PREV", "dental.preventive"), ("COMP", "dental.comprehensive")))))), ("dvha", "G_vision"): ((19, vision),), ("dvha", "H_hearing"): ((19, hearing),),
+    ("dvha", "F_dental"): ((19, dental), (21, with_packages(with_details(dental, dental_deductible, DENTAL_OON)))),
+    ("dvha", "G_vision"): ((19, vision),), ("dvha", "H_hearing"): ((19, hearing),),
     ("dvha", "I_alt_care_otc_travel"): (
         (19, alt_care_otc_travel), (20, lambda o, found: alt_care_otc_travel(o, found, telehealth=True))), ("dvha", "J_extra_benefits"): (
         (19, extra_benefits), (20, lambda o, found: extra_benefits(o, found, prices=True)),
