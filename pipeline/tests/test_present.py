@@ -940,6 +940,15 @@ class AltCareOtcTravelTest(unittest.TestCase):
         self.assertEqual(column(present.alt_care_otc_travel, *found),
                          [("OTC from $20/month card shared with dental, hearing", found[:3])])
 
+    def test_with_food_says_when_any_source_says_the_otc_allowance_also_pays_for_food(self):
+        eoc = routine("otc", "allowance", "$196", limit="per month")
+        sb = routine("otc", "allowance", "$196", limit="per month", source="SB", pool="OTC and food credit")
+        self.assertEqual(present.alt_care_otc_travel("", [eoc, sb], food=True), [("OTC and food $196/month", [eoc, sb])])
+        self.assertEqual(present.alt_care_otc_travel("", [eoc, sb])[0][0], "OTC $196/month")
+        groceries = dict(eoc, quotes='["Use your allowance on groceries and OTC items"]')
+        self.assertEqual(present.alt_care_otc_travel("", [groceries], food=True)[0][0], "OTC and food $196/month")
+        self.assertEqual(present.alt_care_otc_travel("", [eoc], food=True)[0][0], "OTC $196/month")
+
     def test_worldwide_er_skips_urgent_care(self):
         found = [routine("emergency", setting="outside_us", amount="$130"),
                  routine("emergency", setting="outside_us", amount="$500", quotes='["Urgent care $500"]')]
@@ -1190,13 +1199,15 @@ class WriteTest(unittest.TestCase):
         self.assertEqual(got[19], "Advantage Plus $54/mo")
         self.assertEqual(len(set(got.values())), 3)
 
-    def test_version_20_names_the_fitness_program_and_other_programs(self):
+    def test_version_20_names_programs_and_says_when_otc_pays_for_food(self):
         self.assertEqual(present.VERSIONS[20], {})
         data = years.data_dir(YEAR)
         rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.layer_rows(data, v)} for v in (19, 20)}
-        self.assertEqual({r[1] for r in rows[19] ^ rows[20]}, {"J_extra_benefits"})
+        self.assertEqual({r[1] for r in rows[19] ^ rows[20]}, {"I_alt_care_otc_travel", "J_extra_benefits"})
         got = {v: present.lines(data, "J_extra_benefits", sheet="dvha", version=v)["H9003-001-0"][0][0] for v in (19, 20)}
         self.assertEqual(got, {19: "Fitness $0", 20: "Fitness One Pass $0"})
+        got = {v: present.lines(data, "I_alt_care_otc_travel", sheet="dvha", version=v)["H2001-045-0"][0][0] for v in (19, 20)}
+        self.assertEqual([g.split(";")[0] for g in got.values()], ["OTC $196/month", "OTC and food $196/month"])
 
     def test_version_12_holds_no_cell(self):
         self.assertEqual(present.held(years.data_dir(YEAR), 12), {})
