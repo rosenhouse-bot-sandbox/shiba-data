@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-52.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 87 says the Optional Supplemental Dental benefits use the HumanaDental Medicare Network. Page 88 names MyOption DEN972 as the only optional supplemental dental package.\"}]\n```",
+ "usage": {
+  "input_tokens": 3979,
+  "output_tokens": 657,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
