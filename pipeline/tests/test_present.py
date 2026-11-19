@@ -618,7 +618,7 @@ def routine(benefit, cost_kind="copay", amount="$0", **more):
     return priced(benefit, covered_by="supplemental", cost_kind=cost_kind, amount=amount, **more)
 
 
-class DetailsTest(unittest.TestCase):
+class AllowanceDetailsTest(unittest.TestCase):
     def test_names_the_vision_network_by_its_shortest_name_or_abbreviation(self):
         network = present.provider_network("vision")
         vsp = routine("vision", "covered", "", condition="provider network", limit="Vision Service Plan (VSP)")
@@ -626,8 +626,11 @@ class DetailsTest(unittest.TestCase):
         self.assertEqual(network([vsp]), ("VSP network", [vsp]))
         self.assertEqual(network([insight, dict(insight, limit="Humana Medicare Insight Network for vision")]),
                          ("Humana Medicare Insight Network", [insight]))
-        for other in (dict(vsp, package="Plus"), dict(vsp, benefit="dental"), dict(vsp, condition="")):
+        for other in (dict(vsp, package="Plus"), dict(vsp, benefit="dental"), dict(vsp, condition=""),
+                      dict(vsp, network="out"), dict(vsp, covered_by="medicare"), dict(vsp, cost_kind="not_covered")):
             self.assertEqual(network([other]), ("", []), other)
+        eyemed = dict(vsp, limit="EyeMed", source="SB")
+        self.assertEqual(network([insight, eyemed]), ("Humana Medicare Insight Network", [insight]))
 
     def test_says_whether_an_allowance_rolls_over_until_year_end(self):
         no = routine("otc", "not_covered", "", condition="rollover")
@@ -650,6 +653,9 @@ class DetailsTest(unittest.TestCase):
         none = routine("dental", "covered", "", condition="no annual maximum")
         self.assertEqual(present.no_maximum([none]), ("no annual max", [none]))
         self.assertEqual(present.no_maximum([none, routine("dental", "max", "$1,000", limit="per year")]), ("", []))
+        self.assertEqual(present.no_maximum([none, routine("dental", "max", "$1,000", condition="diabetes")]),
+                         ("no annual max", [none]))
+        self.assertEqual(present.no_maximum([dict(none, cost_kind="not_covered")]), ("", []))
 
     def test_otc_says_rollover_and_what_else_the_card_pays_for(self):
         card = routine("otc", "allowance", "$175", limit="per month", quotes='["groceries"]')
@@ -659,8 +665,15 @@ class DetailsTest(unittest.TestCase):
         self.assertEqual(present.over_the_counter([card], food=True, details=True), (["OTC and food $175/month"], [card]))
         self.assertEqual(present.over_the_counter([card, yes, safety, food, dict(food, limit="food")], food=True, details=True),
                          (["OTC $175/month (rolls over until year-end; also for home and bath safety devices; "
-                           "also for Food for some members)"], [card, yes, safety, food]))
+                           "also for Food for some members)"], [card, yes, safety, food, dict(food, limit="food")]))
         self.assertEqual(present.over_the_counter([card, yes, safety], food=True), (["OTC and food $175/month"], [card]))
+        self.assertEqual(present.over_the_counter([card, safety], food=True, details=True)[0],
+                         ["OTC and food $175/month (also for home and bath safety devices)"])
+        self.assertEqual(present.over_the_counter([card, safety, dict(safety, condition="also pays for members")],
+                                                  details=True)[0],
+                         ["OTC $175/month (also for home and bath safety devices)"])
+        self.assertEqual(present.over_the_counter([card, dict(safety, cost_kind="not_covered")], details=True)[0],
+                         ["OTC $175/month"])
 
     def test_otc_leaves_out_uses_that_name_a_benefit_sharing_the_card(self):
         card = routine("otc", "allowance", "$20", limit="per month", pool="card")

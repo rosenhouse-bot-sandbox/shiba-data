@@ -1081,7 +1081,7 @@ def over_the_counter(found, food=False, none=False, details=False):
     if not got:
         return [], []
     for_food = [f for f in allowances if FOOD.search(f["pool"] + f["quotes"])][:1] if food else []
-    for_food = [] if details and also_pays_for(found)[0] else for_food
+    for_food = [] if details and any(FOOD.search(f["limit"]) for f in also_pays_for(found)[1]) else for_food
     label = "OTC and food" if for_food else "OTC"
     got += [f for f in for_food if f not in got]
     period_ = renews(got)
@@ -1101,6 +1101,7 @@ def over_the_counter(found, food=False, none=False, details=False):
         return [f"{label} {show(got)}/{period_}{note}"], got + says + also_cited
     return ([f"{label} from {show(got)}/{period_} card shared with {', '.join(names)}{note}"],
             got + sharers + says + also_cited)
+
 
 def urgent(f):
     return all(re.search(r"urgent", q, re.I) and not re.search(r"emergenc", q, re.I) for q in json.loads(f["quotes"]))
