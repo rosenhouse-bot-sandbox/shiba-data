@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-216.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 51 Hearing aids row: the TruHearing hearing aid purchase includes a 60-day trial period. This is a routine (supplemental) benefit, priced in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3252,
+  "output_tokens": 172,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

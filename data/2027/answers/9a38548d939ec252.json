@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-224.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 107, Advantage Plus optional package table: 'Evaluation and fitting for hearing aids' shows $0. This is a supplemental benefit for Advantage Plus enrollees. The page names no specific plan, so it applies to the Senior Advantage plans generally.\"}]\n```",
+ "usage": {
+  "input_tokens": 3238,
+  "output_tokens": 470,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

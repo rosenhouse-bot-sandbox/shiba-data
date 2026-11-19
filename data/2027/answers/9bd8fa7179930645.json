@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-228.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 107 Advantage Plus table: $0 for visits for fitting, counseling, adjustment, cleaning and inspection before the warranty is exhausted. These are optional supplemental package benefits, and the page names no plan restriction.\"}]\n```",
+ "usage": {
+  "input_tokens": 3310,
+  "output_tokens": 607,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

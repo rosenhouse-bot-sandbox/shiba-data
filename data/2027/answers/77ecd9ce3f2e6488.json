@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-198.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 73 hearing aid row says the benefit includes a 3-year warranty covering loss and damage, with a supply of batteries. No battery count is given, so a covered fact for batteries with no limit is correct.\"}]\n```",
+ "usage": {
+  "input_tokens": 2993,
+  "output_tokens": 256,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

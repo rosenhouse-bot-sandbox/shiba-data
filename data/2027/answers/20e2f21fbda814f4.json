@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-186.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 9 shows the in-network supplemental hearing benefit (HER128) as '$0 copay for fitting, routine hearing exams up to 1 per year.' That makes the fitting/evaluation copay $0 in network. A per-visit unit fits a fitting visit.\"}]\n```",
+ "usage": {
+  "input_tokens": 3667,
+  "output_tokens": 369,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

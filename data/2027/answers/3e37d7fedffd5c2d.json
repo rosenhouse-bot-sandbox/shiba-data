@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-175.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 79 hearing aid row: the in-network purchase includes 3 follow-up provider visits during the first year following hearing aid purchase. This is a routine (supplemental) benefit, so the plan, benefit, network, count and limit all match.\"}]\n```",
+ "usage": {
+  "input_tokens": 3316,
+  "output_tokens": 254,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

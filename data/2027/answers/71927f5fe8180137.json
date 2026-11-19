@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-105.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 8 mandatory supplemental hearing benefit, in network: \\\"$0 copay for fitting, routine hearing exams\\\". This matches a $0 supplemental copay for fitting/evaluation for this plan.\"}]\n```",
+ "usage": {
+  "input_tokens": 3791,
+  "output_tokens": 220,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
