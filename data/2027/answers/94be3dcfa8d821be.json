@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "f751937f09316ed1.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H2923-009-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"page\": 64, \"quotes\": [\"30% coinsurance\"]},\n  {\"plan_id\": \"H2923-009-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"max\", \"amount\": \"$3,000\", \"limit\": \"per year\", \"page\": 113, \"quotes\": [\"Devoted Health will pay as much as $3,000 per year for covered dental services listed below.\"]},\n  {\"plan_id\": \"H2923-009-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"0%\", \"page\": 114, \"quotes\": [\"What you pay: 0% coinsurance\"]},\n  {\"plan_id\": \"H2923-009-0\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"0%\", \"page\": 116, \"quotes\": [\"What you pay: 0% coinsurance\"]}\n]\n```",
+ "usage": {
+  "input_tokens": 9228,
+  "output_tokens": 1239,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

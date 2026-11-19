@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-93.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 95 lists 'Annual dental maximum: $4,000' under the plan's covered routine (supplemental) dental benefits. The row names no network, so it reads as in-network, and the limit is per year.\"}]\n```",
+ "usage": {
+  "input_tokens": 3530,
+  "output_tokens": 288,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

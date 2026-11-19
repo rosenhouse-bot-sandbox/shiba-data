@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "49912316cc55d9c5.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-001-0\", \"benefit\": \"otc\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$40\", \"unit\": \"\", \"limit\": \"per quarter\", \"page\": 93,\n  \"quotes\": [\"Over-the-counter allowance $40 per quarter\"], \"note\": \"\"},\n {\"plan_id\": \"H2923-001-0\", \"benefit\": \"otc\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"not_covered\", \"condition\": \"rollover\", \"page\": 94,\n  \"quotes\": [\"Unused balances do not roll over.\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 6839,
+  "output_tokens": 732,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

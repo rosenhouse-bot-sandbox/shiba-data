@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-130.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 43 lists supplemental Class I preventive dental with 'Topical fluoride, 1 every calendar year.' This frequency limit covers the in-network preventive benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 3994,
+  "output_tokens": 227,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

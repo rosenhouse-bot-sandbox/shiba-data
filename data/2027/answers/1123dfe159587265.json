@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "61de2101267140ce.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H1372-003-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 6, \"quotes\": [\"Eye exams to diagnose and        $0 copay\"], \"note\": \"Exam to diagnose and treat eye diseases and conditions. The quote keeps the page's original spacing between the service and cost columns, because \\\"$0 copay\\\" alone repeats on the page.\"},\n {\"plan_id\": \"H1372-003-0\", \"benefit\": \"vision.eyewear\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 6, \"quotes\": [\"Eyewear following cataract       $0 copay\"], \"note\": \"Eyewear following cataract surgery. The quote keeps the page's original spacing between the service and cost columns, because \\\"$0 copay\\\" alone repeats on the page.\"}]\n```",
+ "usage": {
+  "input_tokens": 3055,
+  "output_tokens": 953,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

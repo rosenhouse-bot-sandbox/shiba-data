@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-127.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 43 supplemental preventive dental (Class I) row lists cleanings (prophylaxis or periodontal maintenance), any combination, 2 every calendar year. The limit applies to in-network care, and the item copies the service wording correctly.\"}]\n```",
+ "usage": {
+  "input_tokens": 4037,
+  "output_tokens": 390,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

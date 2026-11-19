@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-202.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 73, Prophylaxis (Cleaning) row: limit of 2 procedure codes per calendar year (D1110). The row prices both in-network and out-of-network at 0%, so the limit applies to either network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3961,
+  "output_tokens": 324,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

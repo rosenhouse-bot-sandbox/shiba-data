@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-40.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 90 does not name the package \\\"MyOption DEN972\\\". Fillings and extractions are 0%, but page 91 lists other comprehensive services (crowns, root canals, dentures) at 50%, so a single 0% comprehensive coinsurance is not supported.\"}]\n```",
+ "usage": {
+  "input_tokens": 4159,
+  "output_tokens": 252,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

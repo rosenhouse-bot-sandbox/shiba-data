@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "7ac7300e6ca40ac7.md",
+ "reply": "```json\n[{\"plan_id\": \"H3805-040-0\", \"benefit\": \"otc\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$40\", \"limit\": \"per month\", \"page\": 80, \"quotes\": [\"Monthly credit is $40\"]},\n{\"plan_id\": \"H3805-040-0\", \"benefit\": \"otc\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"not_covered\", \"condition\": \"rollover\", \"page\": 80, \"quotes\": [\"part o your OTC credit expiring monthly\"]},\n{\"plan_id\": \"H3805-040-0\", \"benefit\": \"otc\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"condition\": \"also pays for\", \"limit\": \"home and bath safety devices\", \"page\": 80, \"quotes\": [\"You can also use your OTC credit on covered\"]},\n{\"plan_id\": \"H3805-040-0\", \"benefit\": \"otc\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"condition\": \"also pays for members with certain chronic conditions (SSBCI)\", \"limit\": \"healthy food\", \"page\": 80, \"quotes\": [\"Home and bathroom sa ety devices and Healthy ood - Special Supplemental Bene its or the Chronically Ill (SSBCI) are combined with the OTC credit amount\"]}]\n```",
+ "usage": {
+  "input_tokens": 9307,
+  "output_tokens": 1285,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

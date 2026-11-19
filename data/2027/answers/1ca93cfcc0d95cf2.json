@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-e2d6e1e199a3b8a9.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 36 gives an annual benefit amount (allowance) of $1,500 for covered comprehensive dental services. These are non-Medicare covered and use the Aetna Dental PPO Network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 36 says that if you choose a provider outside the Aetna Dental PPO Network, services will not be covered.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 36 says this dental benefit uses the Aetna Dental PPO Network for covered services.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 35 Dental services row: $40 copay for each Medicare-covered dental service.\"}]\n```",
+ "usage": {
+  "input_tokens": 5124,
+  "output_tokens": 374,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-231.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 85 supplemental vision row: routine eye exam including refraction, 1 per calendar year. The row spans both the in-network and out-of-network columns, so network any fits.\"}]\n```",
+ "usage": {
+  "input_tokens": 2806,
+  "output_tokens": 406,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

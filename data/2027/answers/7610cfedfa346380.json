@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-214.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"The 'Out-of-network: 50% coinsurance' quote at the top of page 70 continues a row from the previous page. Page 70 does not show which service that row covers, so it cannot be confirmed as the routine eye exam rather than another vision or medical service.\"}]\n```",
+ "usage": {
+  "input_tokens": 2855,
+  "output_tokens": 220,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

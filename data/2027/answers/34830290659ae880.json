@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "dbc45a45d9843dd0.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3817-008-1\", \"benefit\": \"vision.eyewear\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"covered\", \"condition\": \"glasses\", \"limit\": \"after each cataract surgery\", \"page\": 70, \"quotes\": [\"One pair of eyeglasses or contact lenses after each cataract surgery\"], \"note\": \"The page says 'One pair' only in words, so the check could not match the amount 1. This is restated as a covered fact with no amount.\"}]\n```",
+ "usage": {
+  "input_tokens": 8572,
+  "output_tokens": 598,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-205.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 73 dental code table, under 'Intraoral X-rays (inside the mouth)': 6 procedure codes per calendar year. The limit applies to both the in-network and out-of-network columns.\"}]\n```",
+ "usage": {
+  "input_tokens": 3951,
+  "output_tokens": 297,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

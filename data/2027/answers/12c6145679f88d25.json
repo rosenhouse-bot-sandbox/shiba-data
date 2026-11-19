@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-233.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 110 Eyewear row: routine (supplemental) prescription eyewear is covered up to a maximum benefit of $100 every year. The in-network column lists $0 copay for eyewear, so the $100 annual maximum applies in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2545,
+  "output_tokens": 327,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

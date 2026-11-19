@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-49.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 73 'Mandatory Supplemental Dental Benefit' says members may receive non-Medicare covered routine dental services. This is supplemental dental with no optional package, and page 74 shows in-network coverage.\"}]\n```",
+ "usage": {
+  "input_tokens": 3848,
+  "output_tokens": 272,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-183.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 61 supplemental dental row: 'Periodic Oral exams - 2 every year', with in-network costs listed for that row.\"}]\n```",
+ "usage": {
+  "input_tokens": 2795,
+  "output_tokens": 318,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

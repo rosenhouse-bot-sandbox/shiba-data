@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-31.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 97 states 'Annual maximum: $1,500' for the Platinum Dental Rider but names no network. By the stated rule, an unlabeled dental cost is in-network, so 'any' is not supported by the quoted page. Page 98 does say out-of-network benefits are subject to the in-network maximums, but that is not on the cited page, so there is doubt.\"}]\n```",
+ "usage": {
+  "input_tokens": 3548,
+  "output_tokens": 580,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

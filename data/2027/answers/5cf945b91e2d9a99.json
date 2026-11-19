@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-180.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 61 supplemental routine dental rows show an in-network $0 copay for each oral exam and each cleaning. Fluoride, X-rays and other diagnostic services on page 62 are also $0 in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2785,
+  "output_tokens": 330,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

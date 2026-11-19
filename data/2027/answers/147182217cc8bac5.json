@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-82.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 58 lists 'Comprehensive dental services' as a covered service, including endodontics, extractions, periodontics and prosthodontics. These are routine services, not Medicare-covered ones, and the chart row names no network, so it is in-network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3445,
+  "output_tokens": 387,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

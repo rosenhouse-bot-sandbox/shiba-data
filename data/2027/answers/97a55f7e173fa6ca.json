@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-5f6896f5c437eeed.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 8, Dental and Alternative Therapy Allowance: 100% reimbursement for covered preventive dental (exams, cleanings) up to the yearly allowance, which is 0% coinsurance. Members may see any licensed provider, so network any fits. The page footer names this plan.\"}]\n```",
+ "usage": {
+  "input_tokens": 3798,
+  "output_tokens": 325,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

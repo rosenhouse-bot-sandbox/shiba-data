@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-86.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 57 lists the supplemental preventive dental X-rays: 'One (1) panoramic radiograph or one (1) complete series is a covered benefit once every three (3) years.' The row names no network, so it counts as in-network. The count, condition and period all match.\"}]\n```",
+ "usage": {
+  "input_tokens": 3473,
+  "output_tokens": 235,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

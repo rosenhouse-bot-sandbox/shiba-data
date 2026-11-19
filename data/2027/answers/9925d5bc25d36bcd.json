@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-8acbaf3993261220.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 Vision services row 'Eyewear after cataract surgery' shows a $0 copay. This is Medicare-covered eyewear, and in-network is the default.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 4 Routine eye exam row: '$0 copay for a routine eye exam each year' is a supplemental exam, $0 copay, per year.\"}]\n```",
+ "usage": {
+  "input_tokens": 2684,
+  "output_tokens": 313,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-170.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 63 dental preventive row reads 'Fluoride treatment - 1 every year'. That frequency sits on the service row and covers both the in-network ($0) and out-of-network (50%) costs listed under it, so network 'any' fits. Fluoride is routine (supplemental) dental.\"}]\n```",
+ "usage": {
+  "input_tokens": 2815,
+  "output_tokens": 354,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

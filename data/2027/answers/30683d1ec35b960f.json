@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-34.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 91 shows 0% in network for fillings and extractions, but it never names the 'MyOption DEN972' package. Page 92 also shows 50% for other comprehensive services, so 0% does not cover the whole benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 4055,
+  "output_tokens": 307,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

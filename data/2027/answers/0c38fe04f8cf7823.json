@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-f961eb582c1534d5.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 112 Wellcare Spendables row: the unused monthly allowance rolls over to the following month and expires at the end of the plan year.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 112 Wellcare Spendables row: a total of $20 monthly is preloaded on the Wellcare Spendables card for OTC items.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 112 Wellcare Spendables row: the same card allowance can also be used for dental, vision, and hearing services, with no member restriction stated.\"}]\n```",
+ "usage": {
+  "input_tokens": 2720,
+  "output_tokens": 343,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
