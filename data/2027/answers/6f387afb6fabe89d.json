@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-630e49b10e7ad131.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 79 does show the Virtual Cardiac Recovery Program at a $0 in-network copay. The condition is a paraphrase, not the document's words, and it leaves out eligibility rules: the hospitalization must be within the past 30 days, and members must also meet further criteria such as HFrEF. As written it overstates who qualifies.\"}]\n```",
+ "usage": {
+  "input_tokens": 2828,
+  "output_tokens": 421,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

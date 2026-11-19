@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-104.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 133 (Chapter 8, Section 1.4) tells members to call the plan's Nurse Advice Line at 1-800-491-4164. No cost is stated, so it is an other_supplemental covered fact. The source is a rights section rather than the benefits chart, which makes this weaker evidence.\"}]\n```",
+ "usage": {
+  "input_tokens": 2778,
+  "output_tokens": 810,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

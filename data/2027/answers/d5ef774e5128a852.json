@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "28e22b4acec7d885.md",
+ "reply": "```json\n[{\"plan_id\": \"H2406-073-0\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"pool\": \"UnitedHealthcare® Medicare National Network\", \"page\": 10, \"quotes\": [\"access to care at in-network costs when\", \"visit any provider participating in the UnitedHealthcare® Medicare National Network\"]}]\n```",
+ "usage": {
+  "input_tokens": 3918,
+  "output_tokens": 516,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

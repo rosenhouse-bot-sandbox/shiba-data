@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "630e49b10e7ad131.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-317-0\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\", \"pool\": \"Virtual Cardiac Recovery Program\", \"condition\": \"members with recent heart failure-related hospitalization\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 79, \"quotes\": [\"Virtual Cardiac Recovery Program\", \"$0 copayment\"], \"note\": \"Uniformity Flexibility Benefit. The page also lists other eligibility criteria, and the list of them is cut off at the end of the page.\"}]\n```",
+ "usage": {
+  "input_tokens": 10176,
+  "output_tokens": 1201,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
