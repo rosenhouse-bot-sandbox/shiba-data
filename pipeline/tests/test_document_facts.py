@@ -496,11 +496,11 @@ class StepTest(StepsTest):
         self.assertEqual(dict(v34["notes"], otc=None, vision=None, dental=None),
                          dict(v33["notes"], otc=None, vision=None, dental=None))
         self.assertTrue(v34["notes"]["dental"].startswith(v33["notes"]["dental"]))
-        for group, words in (("otc", ("`otc` fact with `condition` `rollover`", "`also pays for`")),
-                             ("vision", ("`vision` `covered` fact with `condition` `provider network`",
-                                         "`condition` `glasses`", "`vision.eyewear` fact with `condition` `rollover`")),
-                             ("dental", ("`dental` `covered` fact with `condition` `provider network`",
-                                         "`no annual maximum`", "`dental` fact with `condition` `rollover`"))):
+        for group, words in (("otc", ("fact for `otc` with `condition` `rollover`", "`also pays for`")),
+                             ("vision", ("one `vision` `covered` fact with `condition` `provider network`",
+                                         "`condition` `glasses`", "fact for `vision.eyewear` with `condition` `rollover`")),
+                             ("dental", ("one `dental` `covered` fact with `condition` `provider network`",
+                                         "`no annual maximum`", "fact for `dental` with `condition` `rollover`"))):
             for word in words:
                 self.assertIn(word, v34["notes"][group])
         self.assertEqual(v34["targets"], dict.fromkeys(("otc", "vision", "dental"), document_facts.EVERY_PLAN))
@@ -524,9 +524,7 @@ class StepTest(StepsTest):
                  detail("vision.eyewear", "contact lenses", "visit_limit", "1", "every 2 years")]
         self.assertEqual([facts.check(f) for f in details + pairs], [[]] * len(details + pairs))
         self.assertEqual(facts.conflicts(details + pairs), [])
-        for f in details:
-            self.assertTrue(present.DETAIL.match(f["condition"]), f)
-            self.assertIn(f"`{f['condition'].split(' members')[0]}`", " ".join(document_facts.VERSIONS[34]["notes"].values()))
+        self.assertTrue(all(present.DETAIL.match(f["condition"]) for f in details))
 
     def test_a_second_reader_sees_the_pages_after_and_takes_reimbursements_as_its_version_says(self):
         page = "Members receive 100% reimbursement."

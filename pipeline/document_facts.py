@@ -294,28 +294,28 @@ HEARING_DETAILS = ("Give a hearing aid fitting or evaluation and a follow-up vis
                    "item in `condition`, such as `trial period`, `warranty` or `batteries`, and its length or count in "
                    "`limit`, such as `60 days`, `3 years` or `80 batteries per aid`.")
 EVERY_PLAN = PROGRAM_PLANS + ("H7199-002-0",)
-# Version 33 reads hearing details that the final volunteer sheets show. Its targets are the plans a dry run found it
-# asks about.
+# Version 33 reads hearing details that the final volunteer sheets show.
 VERSIONS[33] = dict(VERSIONS[32], notes=VERSIONS[32]["notes"] | {"hearing": HEARING_DETAILS},
                     targets={"hearing": EVERY_PLAN})
 def rollover(benefit):
-    return (f"Say whether an unused `{benefit}` allowance carries over, as a `{benefit}` fact with `condition` "
-            "`rollover`: `covered` with how long in `limit`, such as `to the next quarter until the end of the year`, "
-            "or `not_covered` when it does not carry over.")
+    return (f"Say whether an unused `{benefit}` allowance or maximum carries over, as a fact for `{benefit}` with "
+            "`condition` `rollover`: `covered` with how long in `limit`, such as `to the next quarter until the end "
+            "of the year`, or `not_covered` when it does not carry over.")
 
 
 def provider_network(benefit, examples):
     return (f"Give the company or network whose providers the plan uses for the `{benefit}` benefits it covers, such "
-            f"as {examples}, as a `{benefit}` `covered` fact with `condition` `provider network` and the name in "
+            f"as {examples}, as one `{benefit}` `covered` fact with `condition` `provider network` and every name in "
             "`limit`. It is not a `provider_tier`.")
 
 
-ALSO_PAYS_FOR = ("When the `otc` allowance also pays for things other than over-the-counter items, give an `otc` "
-                 "`covered` fact with `condition` `also pays for` and the things in `limit`, such as `groceries and "
+ALSO_PAYS_FOR = ("When the `otc` allowance also pays for things other than over-the-counter items, give one `otc` "
+                 "`covered` fact with `condition` `also pays for` and every such thing in `limit`, such as `groceries and "
                  "utilities`. When only some members may use it for them, add those members to `condition`, such as "
                  "`also pays for members with certain chronic conditions`.")
 PAIRS = ("Give how many pairs of routine glasses or contact lens supplies the plan covers as `vision.eyewear` "
-         "`visit_limit` facts with `condition` `glasses` or `contact lenses` and the period in `limit`.")
+         "`visit_limit` facts with `condition` `glasses`, `frames`, `lenses` or `contact lenses` and the period in "
+         "`limit`.")
 NO_MAXIMUM = ("A plan that says its dental coverage has no annual maximum gives a `dental` `covered` fact with "
               "`condition` `no annual maximum`.")
 # Version 34 reads the allowance, network and dental maximum details that the final volunteer sheets show.
