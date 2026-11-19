@@ -889,7 +889,7 @@ def with_packages(rule):
         (value, cited), = rule(organization, found)
         for name in sorted({f["package"] for f in best(found, "packages", "any", package_premium)}):
             originals = [f for f in found if f["package"] == name]
-            copies = [dict(f, package="") for f in originals]
+            copies = [dict(f, package="", packaged=name) for f in originals]
             original = {id(c): f for c, f in zip(copies, originals)} | {facts.identity(c): f for c, f in zip(copies, originals)}
             (added, used), = rule(organization, copies)
             added = "; ".join(part for part in added.split("; ") if part and part not in value.split("; "))
@@ -1346,11 +1346,17 @@ def narrow(prices):
     return [name for name, _ in NARROW if any(name in n for n in named)]
 
 
-def dental_price(found, leaf):
+def dental_price(found, leaf, services=False):
     """The best source's prices, and how the cell shows them. It names the narrow services that all sources' prices
-    name, without saying they are the only ones, since readers may miss some."""
+    name, without saying they are the only ones, since readers may miss some. With services, a plan's own prices
+    for several named services give the range when no price covers every service."""
     prices = exactly(found, (leaf,), lambda f: everyone(f) and f["cost_kind"] in PRICED,
                      "it is not a supplemental in-network price for every member")
+    if services and not prices:
+        each = top([f for f in found if f["benefit"] == leaf and f["cost_kind"] in PRICED and f["condition"]
+                    and extra(f) and not f.get("packaged") and not re.search(r"\bmembers?\b", f["condition"], re.I)])
+        if len({f["condition"] for f in each}) > 1:
+            return each, "$0" if show(each) == "0%" else show(each).replace("0%-", "$0-")
     got = top(prices)
     shown = show(got)
     shown = "$0" if shown == "0%" else shown.replace("0%-", "$0-") if got else ""
@@ -1358,12 +1364,12 @@ def dental_price(found, leaf):
     return got, f"{shown} for {', '.join(only)}" if only else shown
 
 
-def dental(organization, found):
+def dental(organization, found, services=True):
     """Shows routine preventive and comprehensive dental prices and the maximum, naming the services that share it.
     A plan with only an allowance shows it. An allowance on a card shared with other benefits is not a maximum.
-    Without routine dental, it cites a blank as the main sheet's dental column does."""
-    prev, prev_shown = dental_price(found, "dental.preventive")
-    comp, comp_shown = dental_price(found, "dental.comprehensive")
+    Without routine dental, it cites a blank as the main sheet's dental column does. See dental_price for services."""
+    prev, prev_shown = dental_price(found, "dental.preventive", services)
+    comp, comp_shown = dental_price(found, "dental.comprehensive", services)
     others = {f["pool"] for f in found if f["pool"] and not facts.covers("dental", f["benefit"])
               and not f["benefit"].startswith("extras.")}
     eligible = exactly(found, ("dental", "dental.preventive", "dental.comprehensive"),
@@ -1456,8 +1462,8 @@ HEARING_OON = out_of_network(("exam", "hearing.exam"), ("aids", "hearing.aids"))
 DVHA = {"C_premium": plan_premium, "D_premium_full_extra_help": extra_help_premium,
         "E_optional_packages": lambda o, found: optional_packages(o, found, details=False),
         "F_dental": or_none(with_lacking(with_packages(with_details(
-            dental, no_maximum, dental_deductible, DENTAL_OON, preventive_limits)), ("no COMP", "dental.comprehensive")),
-            "dental"),
+            dental, no_maximum, dental_deductible, DENTAL_OON, preventive_limits, provider_network("dental"))),
+            ("no COMP", "dental.comprehensive")), "dental"),
         "G_vision": or_none(with_lacking(with_packages(with_details(
             vision, eyewear_pairs, VISION_OON, provider_network("vision"))), ("no eyewear allowance", "vision.eyewear")),
             "vision"),
@@ -1517,14 +1523,24 @@ def plans(data):
     return layers.rows(data / "generated" / "plans.csv")
 
 
+def dental_before_25(organization, found):
+    return dental(organization, found, services=False)
+
+
 # Each column's earlier rules, by the version that replaced each.
 EARLIER_RULES = {
     ("dvha", "E_optional_packages"): ((17, lambda o, found: optional_packages(o, found, allowances=False)),
                                       (19, optional_packages)),
-    ("dvha", "F_dental"): ((19, dental), (21, with_packages(with_details(dental, dental_deductible, DENTAL_OON))),
-                           (22, with_packages(with_details(dental, dental_deductible, DENTAL_OON, preventive_limits))),
+    ("dvha", "F_dental"): ((19, dental_before_25), (21, with_packages(with_details(dental_before_25, dental_deductible, DENTAL_OON))),
+                           (22, with_packages(with_details(dental_before_25, dental_deductible, DENTAL_OON, preventive_limits))),
                            (24, or_none(with_lacking(with_packages(with_details(
-                               dental, dental_deductible, DENTAL_OON, preventive_limits)),
+                               dental_before_25, dental_deductible, DENTAL_OON, preventive_limits)),
+                               ("no COMP", "dental.comprehensive")), "dental")),
+                           (25, or_none(with_lacking(with_packages(with_details(
+                               dental_before_25, no_maximum, dental_deductible, DENTAL_OON, preventive_limits)),
+                               ("no COMP", "dental.comprehensive")), "dental")),
+                           (26, or_none(with_lacking(with_packages(with_details(
+                               dental, no_maximum, dental_deductible, DENTAL_OON, preventive_limits)),
                                ("no COMP", "dental.comprehensive")), "dental"))),
     ("dvha", "G_vision"): ((19, vision), (22, with_packages(with_details(vision, VISION_OON))),
                            (24, or_none(with_lacking(with_packages(with_details(vision, VISION_OON)),
@@ -1692,6 +1708,10 @@ VERSIONS[23] = {}
 # Version 24 shows allowance rollover, what the OTC card also pays for, eyewear pairs, the vision network and "no annual
 # max" on the DVHA sheet.
 VERSIONS[24] = {}
+# Version 25 shows a DVHA dental price range from per-service prices when no price covers every service.
+VERSIONS[25] = {}
+# Version 26 names the DVHA dental network.
+VERSIONS[26] = {}
 # The version that first presents each later column. Earlier versions hold its cells.
 SINCE = {("dvha", "C_premium"): 3, ("dvha", "G_vision"): 4, ("dvha", "H_hearing"): 4, ("dvha", "E_optional_packages"): 5,
          ("dvha", "F_dental"): 6, ("dvha", "I_alt_care_otc_travel"): 6, ("dvha", "J_extra_benefits"): 6,
