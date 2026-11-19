@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-189.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 78 in-network hearing aid purchase list includes '3 follow-up provider visits during first year following hearing aid purchase'. This is a supplemental follow-up visit limit of 3 in network, as stated.\"}]\n```",
+ "usage": {
+  "input_tokens": 3316,
+  "output_tokens": 225,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

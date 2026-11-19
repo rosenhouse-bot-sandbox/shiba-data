@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-253.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 103, urgently needed services row: $115 copay for urgently needed services outside the United States. Every field matches: outside_us, network any, supplemental, and the condition is the page's name for this care.\"}]\n```",
+ "usage": {
+  "input_tokens": 2161,
+  "output_tokens": 273,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

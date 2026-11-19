@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-95.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 84 Mandatory Supplemental Hearing Benefit lists in-network hearing aid purchase extras for this plan. They include '3 years of batteries per non-rechargeable aid (up to 60 cells per ear per year)'. The fact is a supplemental hearing.aids covered fact with condition batteries, and the limit matches the page.\"}]\n```",
+ "usage": {
+  "input_tokens": 3626,
+  "output_tokens": 274,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

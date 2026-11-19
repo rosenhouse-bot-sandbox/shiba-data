@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-164.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 86, mandatory supplemental hearing aid row: the in-network hearing aid purchase includes a 3-year extended warranty. The benefit is mandatory, not an optional package, so a blank package is correct.\"}]\n```",
+ "usage": {
+  "input_tokens": 3636,
+  "output_tokens": 248,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

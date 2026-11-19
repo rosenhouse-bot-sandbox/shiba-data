@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-115.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 4 in-network hearing aids row lists a 3-year manufacturer warranty on all prescription hearing aids. That supports a supplemental covered warranty fact with a 3-year limit.\"}]\n```",
+ "usage": {
+  "input_tokens": 3451,
+  "output_tokens": 224,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

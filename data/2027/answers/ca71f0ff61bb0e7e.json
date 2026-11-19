@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-132.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 77 hearing services row: 'Hearing aid fitting $0 copay'. The left column lists hearing aid evaluations and fittings as supplemental benefits. The plan is HMO, so the cost is in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3632,
+  "output_tokens": 241,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

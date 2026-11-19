@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-146.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 49 Fitting and evaluation row, in-network: $0 copay with unlimited visits for the first 12 months after the purchase of hearing aids. This is a routine (supplemental) TruHearing benefit, correctly recorded as a covered fact with that limit.\"}]\n```",
+ "usage": {
+  "input_tokens": 3798,
+  "output_tokens": 379,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

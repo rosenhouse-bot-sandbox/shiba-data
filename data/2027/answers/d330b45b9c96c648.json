@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-110.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 65 Hearing services, Supplemental benefits: the hearing aid fitting and evaluation row shows a $0 copayment with unlimited visits. The rules record that as a supplemental covered fact with limit 'unlimited visits'. In network by default, single plan.\"}]\n```",
+ "usage": {
+  "input_tokens": 2966,
+  "output_tokens": 272,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

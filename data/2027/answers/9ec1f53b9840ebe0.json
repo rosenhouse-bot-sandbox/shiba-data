@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-92.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 82, in-network hearing aid purchase: '1 fitting appointment during first year following a hearing aid purchase with the original provider'. This matches a supplemental in-network visit limit of 1 for fitting/evaluation in the first year after purchase.\"}]\n```",
+ "usage": {
+  "input_tokens": 3610,
+  "output_tokens": 257,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

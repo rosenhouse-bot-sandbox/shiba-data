@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-157.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 48, Routine hearing aids row: the TruHearing hearing aid purchase includes '80 batteries per aid for non-rechargeable models'. This is a supplemental, in-network inclusion with no separate price, which matches a covered batteries fact limited to 80 batteries per aid.\"}]\n```",
+ "usage": {
+  "input_tokens": 3831,
+  "output_tokens": 306,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
