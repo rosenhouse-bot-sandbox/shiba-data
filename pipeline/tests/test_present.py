@@ -618,6 +618,73 @@ def routine(benefit, cost_kind="copay", amount="$0", **more):
     return priced(benefit, covered_by="supplemental", cost_kind=cost_kind, amount=amount, **more)
 
 
+class AllowanceDetailsTest(unittest.TestCase):
+    def test_names_the_vision_network_by_its_shortest_name_or_abbreviation(self):
+        network = present.provider_network("vision")
+        vsp = routine("vision", "covered", "", condition="provider network", limit="Vision Service Plan (VSP)")
+        insight = routine("vision", "covered", "", condition="provider network", limit="Humana Medicare Insight Network")
+        self.assertEqual(network([vsp]), ("VSP network", [vsp]))
+        self.assertEqual(network([insight, dict(insight, limit="Humana Medicare Insight Network for vision")]),
+                         ("Humana Medicare Insight Network", [insight]))
+        for other in (dict(vsp, package="Plus"), dict(vsp, benefit="dental"), dict(vsp, condition=""),
+                      dict(vsp, network="out"), dict(vsp, covered_by="medicare"), dict(vsp, cost_kind="not_covered")):
+            self.assertEqual(network([other]), ("", []), other)
+        eyemed = dict(vsp, limit="EyeMed", source="SB")
+        self.assertEqual(network([insight, eyemed]), ("Humana Medicare Insight Network", [insight]))
+
+    def test_says_whether_an_allowance_rolls_over_until_year_end(self):
+        no = routine("otc", "not_covered", "", condition="rollover")
+        yes = routine("otc", "covered", "", condition="rollover", limit="to the next month until the end of the plan year")
+        self.assertEqual(present.rollover([no], "otc"), ("no rollover", [no]))
+        self.assertEqual(present.rollover([yes], "otc"), ("rolls over until year-end", [yes]))
+        for unclear in ([dict(yes, limit="after the initial point of sale")], [yes, no], [dict(no, package="Plus")]):
+            self.assertEqual(present.rollover(unclear, "otc"), ("", []), unclear)
+
+    def test_counts_pairs_of_glasses_and_says_whether_an_eyewear_allowance_rolls_over(self):
+        allowance = routine("vision.eyewear", "allowance", "$150", limit="per year")
+        pairs = routine("vision.eyewear", "visit_limit", "1", condition="glasses", limit="every 2 years")
+        no = routine("vision.eyewear", "not_covered", "", condition="rollover")
+        self.assertEqual(present.eyewear_pairs([allowance, pairs, no]), ("1 pair/two years; no rollover", [pairs, no]))
+        self.assertEqual(present.eyewear_pairs([pairs, dict(pairs, amount="2", limit="per year")])[0], "")
+        self.assertEqual(present.eyewear_pairs([dict(pairs, amount="2", limit="per year")])[0], "2 pairs/year")
+        self.assertEqual(present.eyewear_pairs([no]), ("", []))
+
+    def test_says_no_annual_maximum_only_without_a_maximum(self):
+        none = routine("dental", "covered", "", condition="no annual maximum")
+        self.assertEqual(present.no_maximum([none]), ("no annual max", [none]))
+        self.assertEqual(present.no_maximum([none, routine("dental", "max", "$1,000", limit="per year")]), ("", []))
+        self.assertEqual(present.no_maximum([none, routine("dental", "max", "$1,000", condition="diabetes")]),
+                         ("no annual max", [none]))
+        self.assertEqual(present.no_maximum([dict(none, cost_kind="not_covered")]), ("", []))
+
+    def test_otc_says_rollover_and_what_else_the_card_pays_for(self):
+        card = routine("otc", "allowance", "$175", limit="per month", quotes='["groceries"]')
+        yes = routine("otc", "covered", "", condition="rollover", limit="to the next month until the end of the year")
+        safety = routine("otc", "covered", "", condition="also pays for", limit="home and bath safety devices")
+        food = routine("otc", "covered", "", condition="also pays for members with chronic conditions", limit="Food")
+        self.assertEqual(present.over_the_counter([card], food=True, details=True), (["OTC and food $175/month"], [card]))
+        self.assertEqual(present.over_the_counter([card, yes, safety, food, dict(food, limit="food")], food=True, details=True),
+                         (["OTC $175/month (rolls over until year-end; also for home and bath safety devices; "
+                           "also for Food for some members)"], [card, yes, safety, food, dict(food, limit="food")]))
+        self.assertEqual(present.over_the_counter([card, yes, safety], food=True), (["OTC and food $175/month"], [card]))
+        self.assertEqual(present.over_the_counter([card, safety], food=True, details=True)[0],
+                         ["OTC and food $175/month (also for home and bath safety devices)"])
+        self.assertEqual(present.over_the_counter([card, safety, dict(safety, condition="also pays for members")],
+                                                  details=True)[0],
+                         ["OTC $175/month (also for home and bath safety devices)"])
+        self.assertEqual(present.over_the_counter([card, dict(safety, cost_kind="not_covered")], details=True)[0],
+                         ["OTC $175/month"])
+
+    def test_otc_leaves_out_uses_that_name_a_benefit_sharing_the_card(self):
+        card = routine("otc", "allowance", "$20", limit="per month", pool="card")
+        dental = routine("dental", "allowance", "$20", limit="per month", pool="card")
+        uses = routine("otc", "covered", "", condition="also pays for", limit="dental, vision and hearing services")
+        self.assertEqual(present.over_the_counter([card, dental, uses], details=True)[0],
+                         ["OTC from $20/month card shared with dental"])
+        self.assertEqual(present.over_the_counter([card, uses], details=True)[0],
+                         ["OTC $20/month (also for dental, vision and hearing services)"])
+
+
 class VisionTest(unittest.TestCase):
     def test_exam_and_eyewear_cite_the_facts_that_say_how_often_they_renew(self):
         found = [routine("vision.exam"), routine("vision.exam", "visit_limit", "1", limit="every year"),
@@ -1508,6 +1575,18 @@ class WriteTest(unittest.TestCase):
         self.assertIn("; fitting $0; 60-day trial, 3-year warranty, 80 batteries per aid", got[("H_hearing", "H2923-001-0")])
         self.assertIn("Worldwide ER/urgent $130, $250,000 max", got[("I_alt_care_otc_travel", "H2056-003-0")])
         self.assertIn("Worldwide ER $130, urgent care $50", got[("I_alt_care_otc_travel", "H5216-455-0")])
+
+    def test_version_24_shows_rollover_otc_uses_eyewear_pairs_networks_and_no_dental_maximum(self):
+        self.assertEqual(present.VERSIONS[24], {})
+        data = years.data_dir(YEAR)
+        rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.layer_rows(data, v)} for v in (23, 24)}
+        self.assertEqual({r[1] for r in rows[23] ^ rows[24]}, {"F_dental", "G_vision", "I_alt_care_otc_travel"})
+        got = {(c, p): present.lines(data, c, sheet="dvha", version=24)[p][0][0] for c, p in (
+            ("F_dental", "H6815-038-0"), ("G_vision", "H5216-428-2"), ("I_alt_care_otc_travel", "H1036-317-0"))}
+        self.assertIn("; no annual max;", got[("F_dental", "H6815-038-0")])
+        self.assertIn("; 1 pair/year; no rollover;", got[("G_vision", "H5216-428-2")])
+        self.assertIn("(rolls over until year-end; also for groceries, utilities and rent for some members)",
+                      got[("I_alt_care_otc_travel", "H1036-317-0")])
 
     def test_version_12_holds_no_cell(self):
         self.assertEqual(present.held(years.data_dir(YEAR), 12), {})
