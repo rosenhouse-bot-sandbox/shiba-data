@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-94.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 116 routine eyewear row lists 1 pair of standard lenses and frames every year in the service column, so it covers both networks. The out-of-network column also covers 1 pair of eyeglasses, so 1 pair of glasses per year with network any matches.\"}]\n```",
+ "usage": {
+  "input_tokens": 2933,
+  "output_tokens": 333,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

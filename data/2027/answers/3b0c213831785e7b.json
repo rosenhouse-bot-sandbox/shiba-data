@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-149.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 7, OTC and food credit row: a $40 monthly credit for OTC products, plus healthy food for qualifying members. It is a supplemental OTC credit that also pays for healthy food, but only for qualifying members.\"}]\n```",
+ "usage": {
+  "input_tokens": 2441,
+  "output_tokens": 349,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

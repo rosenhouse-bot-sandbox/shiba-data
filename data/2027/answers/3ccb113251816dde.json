@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-113.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 86, Mandatory Supplemental Vision Benefit VIS694: 'Vision benefit through Humana Medicare Insight Network'. This names the provider network for the routine (supplemental) vision benefit as a whole, so network 'any' fits.\"}]\n```",
+ "usage": {
+  "input_tokens": 2816,
+  "output_tokens": 452,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

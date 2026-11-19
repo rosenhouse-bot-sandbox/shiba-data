@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-140.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 76 OTC credit row says members can also use the OTC credit on covered home and bath safety devices. These are the only non-OTC items it names. The out-of-network column also draws purchases from the same credit, so network 'any' fits.\"}]\n```",
+ "usage": {
+  "input_tokens": 2818,
+  "output_tokens": 536,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

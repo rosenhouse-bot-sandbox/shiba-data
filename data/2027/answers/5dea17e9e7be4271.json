@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-96.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"In the page 72 eyewear (non-Medicare covered) row, the plan says it has teamed up with EyeMed and you must see an EyeMed network provider. EyeMed is the only vendor named, so it supports the provider-network fact.\"}]\n```",
+ "usage": {
+  "input_tokens": 2763,
+  "output_tokens": 424,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
