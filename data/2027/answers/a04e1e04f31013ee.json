@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "29166053e638f7e6.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-317-0\", \"benefit\": \"vision\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"20%\", \"page\": 10, \"quotes\": [\"Medicare-covered vision services\", \"20% of the cost\"]},\n{\"plan_id\": \"H1036-317-0\", \"benefit\": \"vision.eyewear\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"1\", \"condition\": \"lenses\", \"limit\": \"per year\", \"page\": 10, \"quotes\": [\"maximum benefit coverage amount up to 1 pair\"], \"note\": \"The page says eyeglass lens options may be available up to 1 pair per year. It does not give a separate count for frames.\"}]\n```",
+ "usage": {
+  "input_tokens": 3513,
+  "output_tokens": 1270,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

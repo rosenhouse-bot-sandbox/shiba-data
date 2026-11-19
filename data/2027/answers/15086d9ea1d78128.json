@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-199.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 74 dental code table, in-network column: root canal D3310/D3320/D3330 is 30% and recement crown D2920 is 0%. Code-varying comprehensive prices are correctly given as 0% or 30%.\"}]\n```",
+ "usage": {
+  "input_tokens": 4036,
+  "output_tokens": 228,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

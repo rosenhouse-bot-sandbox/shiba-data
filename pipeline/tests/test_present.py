@@ -1481,7 +1481,7 @@ class WriteTest(unittest.TestCase):
         rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.layer_rows(data, v)} for v in (20, 21)}
         self.assertEqual({r[1] for r in rows[20] ^ rows[21]}, {"F_dental", "J_extra_benefits"})
         got = present.lines(data, "F_dental", sheet="dvha", version=21)["H5439-015-0"][0][0]
-        self.assertIn("PREV limits: Cleanings (prophylaxis) 2/year", got)
+        self.assertIn("PREV limits: cleanings 2/year", got)
 
     def test_version_22_says_none_shows_the_giveback_and_shared_allowances(self):
         self.assertEqual(present.VERSIONS[22], {})

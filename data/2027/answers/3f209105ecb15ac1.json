@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-171.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 62 supplemental dental, Diagnostic and Preventive Dental Care: 'Periodic Oral exams - 2 every year'. The limit sits in the service column and applies to both the in-network and out-of-network costs listed.\"}]\n```",
+ "usage": {
+  "input_tokens": 2940,
+  "output_tokens": 303,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

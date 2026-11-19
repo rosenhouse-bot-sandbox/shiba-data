@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-0bd982dc589e8cba.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 62 OTC section: leftover money rolls over to the next quarter, and any money left on the card ends at the end of the year.\"}, {\"id\": 1, \"ok\": true, \"reason\": \"Page 61 OTC Allowance row: $50 quarterly on the Humana Spending Account Card, a supplemental benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 4010,
+  "output_tokens": 235,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-99.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 61 states a $250 yearly Dental & Alternative Therapy Allowance toward preventive and comprehensive dental, along with massage, acupuncture and naturopath services. The page says members can see any licensed dentist, which supports network any. The allowance is for non-Medicare covered dental, which makes it supplemental.\"}]\n```",
+ "usage": {
+  "input_tokens": 3584,
+  "output_tokens": 287,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

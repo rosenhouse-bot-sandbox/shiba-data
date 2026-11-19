@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-64e05773e847b56e.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 80: the routine eye exam with refraction is $0 at a Humana Medicare Insight Network optical provider, 1 per calendar year.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 80: the routine eye exam is limited to 1 per calendar year.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 73 Eyewear (Post Cataract Surgery) row: $0 copayment for All Places of Treatment, a Medicare-covered benefit.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 80: at a PLUS Provider the member pays any retail amount over $100 toward frame and lenses or contacts, 1 per calendar year.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 80: the supplemental vision benefit is provided through the Humana Medicare Insight Network.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 80: the eyewear benefit (frame and pair of lenses) is 1 per calendar year.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 80: the benefit can only be used one time and remaining dollars do not roll over.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 80: the eyewear benefit, which may be used for contact lenses, is 1 per calendar year.\"},\n{\"id\": 8, \"ok\": true, \"reason\": \"Page 80: at a standard network provider the member pays any retail amount over $50 toward eyewear, 1 per calendar year.\"},\n{\"id\": 9, \"ok\": true, \"reason\": \"Page 73 Diabetic Eye Exam row: $0 copayment for All Places of Treatment, a Medicare-covered exam.\"}]\n```",
+ "usage": {
+  "input_tokens": 5163,
+  "output_tokens": 1045,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

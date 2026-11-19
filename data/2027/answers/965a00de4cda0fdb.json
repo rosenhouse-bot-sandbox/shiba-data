@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-94.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 61 Dental & Alternative Therapy Allowance row: $1,750 yearly allowance for non-Medicare (supplemental) dental, combined with alternative therapies. A row with no named network defaults to in-network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3688,
+  "output_tokens": 493,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

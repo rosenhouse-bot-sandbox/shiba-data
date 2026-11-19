@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "2c828c1ac1616719.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3817-010-0\", \"benefit\": \"vision.eyewear\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"medicare\", \"cost_kind\": \"covered\", \"limit\": \"one pair of eyeglasses or contact lenses after each cataract surgery\", \"page\": 60, \"quotes\": [\"One pair of eyeglasses or contact lenses after each cataract surgery\"], \"note\": \"The page states the count as the word 'One', not the numeral 1, so this is a covered fact rather than a visit_limit fact.\"}]\n```",
+ "usage": {
+  "input_tokens": 7394,
+  "output_tokens": 458,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

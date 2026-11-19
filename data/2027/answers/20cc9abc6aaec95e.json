@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "29166053e638f7e6.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-317-0\", \"benefit\": \"otc\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$175\", \"limit\": \"per month\",\n  \"pool\": \"Humana Healthy Options Allowance\", \"page\": 16,\n  \"quotes\": [\"Humana Healthy Options Allowance\", \"$175 monthly allowance on a prepaid\", \"buy approved over the counter (OTC) health\"], \"note\": \"\"},\n {\"plan_id\": \"H1036-317-0\", \"benefit\": \"otc\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"condition\": \"rollover\",\n  \"limit\": \"to the next month until the end of the plan year\", \"pool\": \"Humana Healthy Options Allowance\", \"page\": 16,\n  \"quotes\": [\"Any unused amount rolls over each month\", \"and expires at the end of the plan year or\"], \"note\": \"\"},\n {\"plan_id\": \"H1036-317-0\", \"benefit\": \"otc\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\",\n  \"condition\": \"also pays for members with certain qualifying chronic condition(s) who meet other program criteria\",\n  \"limit\": \"groceries, utilities and rent\", \"pool\": \"Humana Healthy Options Allowance\", \"page\": 16,\n  \"quotes\": [\"eligible groceries, utilities, rent, and more if\", \"they have certain qualifying chronic\"], \"note\": \"The page says the allowance also pays for groceries, utilities, rent \\\"and more\\\", so this list may not be complete.\"}]\n```",
+ "usage": {
+  "input_tokens": 2829,
+  "output_tokens": 1246,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

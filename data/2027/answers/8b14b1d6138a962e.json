@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-81.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 57 lists supplemental preventive and comprehensive dental benefits with no coinsurance or copayment. The plan covers supplemental dental, and a row that names no network is in-network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3435,
+  "output_tokens": 387,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

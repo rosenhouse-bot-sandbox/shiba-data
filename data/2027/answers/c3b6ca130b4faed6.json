@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-83.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 57, under supplemental preventive dental, Dental X-Rays: 'Two (2) bitewing radiographs are covered benefit every year.' The row names no network, so it is in-network. The count of 2, the service and the yearly limit all match.\"}]\n```",
+ "usage": {
+  "input_tokens": 3469,
+  "output_tokens": 278,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

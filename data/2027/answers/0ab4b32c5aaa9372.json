@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-58.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 78 Prophylaxis (Cleaning) row allows 2 procedure codes per calendar year for D1110. It sits under Mandatory Supplemental Dental, preventive services.\"}]\n```",
+ "usage": {
+  "input_tokens": 3956,
+  "output_tokens": 222,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "2a970381e331a34a.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-019-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$2,000\", \"limit\": \"per year\", \"pool\": \"Dental and Alternative Therapy Allowance\", \"page\": 7, \"quotes\": [\"You have a $2,000 yearly allowance toward Preventive Dental, Comprehensive Dental,\"], \"note\": \"The allowance is shared with Therapeutic Massage, Routine Acupuncture and Naturopath Services. Members pay first and then ask for reimbursement. Any licensed provider in the United States may be used; in-network is the default.\"},\n {\"plan_id\": \"H2923-019-0\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"pool\": \"Dental and Alternative Therapy Allowance\", \"page\": 7, \"quotes\": [\"and/or Naturopath services, you will receive 50% reimbursement up to the yearly allowance.\"], \"note\": \"The page gives 50% reimbursement up to the yearly allowance. This is read as the member paying 50%.\"}]\n```",
+ "usage": {
+  "input_tokens": 2915,
+  "output_tokens": 1446,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

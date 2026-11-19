@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-d594b0a1d3772214.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 43 Dental services row: $65 copay for each Medicare-covered dental service.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 44: comprehensive dental services (non-Medicare covered) are not covered.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 44: services from providers outside the Aetna Dental PPO Network will not be covered.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 44: the dental benefit uses the Aetna Dental PPO Network for covered services.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 74 Dental Schedule of Benefits: 'Maximum Benefit: None' for the plan's supplemental dental (preventive only), so there is no annual maximum.\"}]\n```",
+ "usage": {
+  "input_tokens": 7238,
+  "output_tokens": 591,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

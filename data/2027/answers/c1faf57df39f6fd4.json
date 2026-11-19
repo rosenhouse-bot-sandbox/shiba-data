@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-129.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 43 lists supplemental preventive dental (Class I), added on top of the Medicare-covered dental services: 'Oral evaluations, 2 every calendar year'. The frequency limit applies to the benefit, including in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3994,
+  "output_tokens": 264,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
