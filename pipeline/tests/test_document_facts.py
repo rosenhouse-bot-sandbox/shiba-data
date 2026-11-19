@@ -505,6 +505,25 @@ class StepTest(StepsTest):
                 self.assertIn(word, v34["notes"][group])
         self.assertEqual(v34["targets"], dict.fromkeys(("otc", "vision", "dental"), document_facts.EVERY_PLAN))
 
+    def test_version_35_reads_medical_alerts_and_national_networks_for_plans_whose_documents_mention_them(self):
+        v34, v35 = document_facts.VERSIONS[34], document_facts.VERSIONS[35]
+        self.assertEqual(dict(v35, plan_notes=None, find=None, targets=None),
+                         dict(v34, plan_notes=None, find=None, targets=None))
+        self.assertEqual(dict(v35["plan_notes"], other_supplemental=None), dict(v34["plan_notes"], other_supplemental=None))
+        plans = v35["targets"]["other_supplemental"]
+        self.assertEqual(set(v35["plan_notes"]["other_supplemental"]), set(plans))
+        for note in v35["plan_notes"]["other_supplemental"].values():
+            for word in ("personal emergency response system", "A discount on one is not a fact",
+                         "in-network costs at network providers across the country"):
+                self.assertIn(word, note)
+        self.assertEqual(dict(v35["find"], other_supplemental=None), dict(v34["find"], other_supplemental=None))
+        for text in ("Personal emergency response system (PERS)", "wearable medical alert",
+                     "UnitedHealthcare® Medicare National Network", "The PPO national network gives you"):
+            self.assertTrue(any(re.search(p, text, re.I) for p in v35["find"]["other_supplemental"]), text)
+        self.assertFalse(any(re.search(p, "a national network of gyms", re.I) for p in v35["find"]["other_supplemental"]))
+        self.assertEqual(set(v35["targets"]), {"other_supplemental"})
+        self.assertLessEqual(set(plans), set(document_facts.EVERY_PLAN))
+
     def test_version_34_details_are_valid_facts_that_do_not_offer_a_benefit(self):
         def detail(benefit, condition, cost_kind, amount="", limit=""):
             row = dict.fromkeys(facts.COLUMNS, "") | dict(
