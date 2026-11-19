@@ -293,8 +293,35 @@ HEARING_DETAILS = ("Give a hearing aid fitting or evaluation and a follow-up vis
                    "hearing aid trial period, warranty and batteries each as a `hearing.aids` `covered` fact with the "
                    "item in `condition`, such as `trial period`, `warranty` or `batteries`, and its length or count in "
                    "`limit`, such as `60 days`, `3 years` or `80 batteries per aid`.")
-HEARING_PLANS = PROGRAM_PLANS + ("H7199-002-0",)
-# Version 33 reads hearing details that the final volunteer sheets show. Its targets are the plans a dry run found it
-# asks about.
+EVERY_PLAN = PROGRAM_PLANS + ("H7199-002-0",)
+# Version 33 reads hearing details that the final volunteer sheets show.
 VERSIONS[33] = dict(VERSIONS[32], notes=VERSIONS[32]["notes"] | {"hearing": HEARING_DETAILS},
-                    targets={"hearing": HEARING_PLANS})
+                    targets={"hearing": EVERY_PLAN})
+def rollover(benefit):
+    return (f"Say whether an unused `{benefit}` allowance or maximum carries over, as a fact for `{benefit}` with "
+            "`condition` `rollover`: `covered` with how long in `limit`, such as `to the next quarter until the end "
+            "of the year`, or `not_covered` when it does not carry over.")
+
+
+def provider_network(benefit, examples):
+    return (f"Give the company or network whose providers the plan uses for the `{benefit}` benefits it covers, such "
+            f"as {examples}, as one `{benefit}` `covered` fact with `condition` `provider network` and every name in "
+            "`limit`. It is not a `provider_tier`.")
+
+
+ALSO_PAYS_FOR = ("When the `otc` allowance also pays for things other than over-the-counter items, give one `otc` "
+                 "`covered` fact with `condition` `also pays for` and every such thing in `limit`, such as `groceries and "
+                 "utilities`. When only some members may use it for them, add those members to `condition`, such as "
+                 "`also pays for members with certain chronic conditions`.")
+PAIRS = ("Give how many pairs of routine glasses or contact lens supplies the plan covers as `vision.eyewear` "
+         "`visit_limit` facts with `condition` `glasses`, `frames`, `lenses` or `contact lenses` and the period in "
+         "`limit`.")
+NO_MAXIMUM = ("A plan that says its dental coverage has no annual maximum gives a `dental` `covered` fact with "
+              "`condition` `no annual maximum`.")
+# Version 34 reads the allowance, network and dental maximum details that the final volunteer sheets show.
+VERSIONS[34] = dict(VERSIONS[33], notes=VERSIONS[33]["notes"] | {
+    "otc": f"{rollover('otc')} {ALSO_PAYS_FOR}",
+    "vision": f"{provider_network('vision', 'VSP or EyeMed')} {PAIRS} {rollover('vision.eyewear')}",
+    "dental": f"{VERSIONS[33]['notes']['dental']} {provider_network('dental', 'Delta Dental PPO')} {NO_MAXIMUM} "
+              f"{rollover('dental')}"},
+    targets=dict.fromkeys(("otc", "vision", "dental"), EVERY_PLAN))
