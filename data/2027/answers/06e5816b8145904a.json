@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-146.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 96, OTC benefit (CVS FlexBenefits): balances expire at the end of the quarter and 'Unused balances do not roll over.' This supports rollover not_covered.\"}]\n```",
+ "usage": {
+  "input_tokens": 2518,
+  "output_tokens": 187,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

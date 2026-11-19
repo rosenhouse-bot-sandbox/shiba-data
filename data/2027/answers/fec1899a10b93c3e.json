@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-134.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 64 Healthy Living Allowance lists Groceries* and Personal hygiene items* alongside OTC items. The asterisk note says these are SSBCI and that only members who qualify receive them. So the allowance also pays for groceries and personal hygiene items for members with certain chronic conditions. Fitness is available to all members and belongs in a separate fact.\"}]\n```",
+ "usage": {
+  "input_tokens": 2131,
+  "output_tokens": 768,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-54.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 74 belongs to the Aetna Medicare Elite (HMO) EOC. It shows the mandatory supplemental dental schedule, which is preventive only and in network only, with \\\"Maximum Benefit: None\\\". The plan's only dental coverage therefore has no maximum.\"}]\n```",
+ "usage": {
+  "input_tokens": 3774,
+  "output_tokens": 415,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

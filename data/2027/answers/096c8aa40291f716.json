@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-81.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 80 (Mandatory Supplemental Vision Benefit VIS736) says the routine vision benefit is 'through Humana Medicare Insight Network'. PLUS Providers are part of that same network, so the single network name is complete.\"}]\n```",
+ "usage": {
+  "input_tokens": 2669,
+  "output_tokens": 233,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

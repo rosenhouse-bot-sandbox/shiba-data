@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-131.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 16, Humana Healthy Options Allowance: members may also use this money for eligible groceries, utilities, rent, and more if they have certain qualifying chronic condition(s) and meet other program criteria. The pool, condition and items listed match.\"}]\n```",
+ "usage": {
+  "input_tokens": 2593,
+  "output_tokens": 432,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
