@@ -649,6 +649,13 @@ class AllowanceDetailsTest(unittest.TestCase):
         self.assertEqual(present.eyewear_pairs([dict(pairs, amount="2", limit="per year")])[0], "2 pairs/year")
         self.assertEqual(present.eyewear_pairs([no]), ("", []))
 
+    def test_shows_a_routine_exam_maximum_that_renews(self):
+        cap = routine("vision.exam", "max", "$75", limit="per year")
+        self.assertEqual(present.exam_max([cap]), ("exam max $75/year", [cap]))
+        for other in (dict(cap, limit=""), dict(cap, provider_tier="PLUS"), dict(cap, cost_kind="allowance"),
+                      dict(cap, network="out"), dict(cap, benefit="vision.eyewear")):
+            self.assertEqual(present.exam_max([other]), ("", []), other)
+
     def test_says_no_annual_maximum_only_without_a_maximum(self):
         none = routine("dental", "covered", "", condition="no annual maximum")
         self.assertEqual(present.no_maximum([none]), ("no annual max", [none]))
@@ -1380,6 +1387,21 @@ class ExtraBenefitsTest(unittest.TestCase):
         self.assertEqual(present.other_programs([routine("other_supplemental", pool="24\u2011Hour Nurse Line")])[0],
                          ["24-Hour Nurse Line $0"])
 
+    def test_anywhere_names_an_out_of_network_program_with_its_yearly_maximum(self):
+        named = routine("other_supplemental", "covered", "", pool="Explorer", network="out")
+        cap = dict(named, cost_kind="max", amount="$1,200", limit="per calendar year", source="SB")
+        self.assertEqual(present.other_programs([named, cap]), ([], []))
+        self.assertEqual(present.other_programs([named, cap], anywhere=True), (["Explorer max $1,200/year"], [cap]))
+        self.assertEqual(present.other_programs([named, dict(cap, limit="")], anywhere=True), (["Explorer"], [named]))
+        self.assertEqual(present.other_programs([named, dict(cap, source="EOC")], anywhere=True)[1], [dict(cap, source="EOC")])
+        for other in ({"condition": "diabetes"}, {"package": "Plus"}, {"provider_tier": "1"}, {"covered_by": "medicare"}):
+            self.assertEqual(present.other_programs([dict(named, **other)], anywhere=True), ([], []), other)
+        inside = routine("other_supplemental", pool="Explorer")
+        self.assertEqual(present.other_programs([inside, dict(inside, amount="$20", network="out"), cap], anywhere=True),
+                         (["Explorer $0"], [inside]))
+        copay = dict(inside, network="out", amount="$20")
+        self.assertEqual(present.other_programs([copay, dict(cap, source="EOC")], anywhere=True)[0], ["Explorer $20"])
+
     def test_foot_care_for_members_with_diabetes_says_so_unless_every_member_has_some(self):
         diabetic = routine("foot_care", condition="diabetes")
         self.assertEqual(column(present.extra_benefits, diabetic)[0][0], "Routine foot care $0 for members with diabetes")
@@ -1409,6 +1431,14 @@ class ExtraBenefitsTest(unittest.TestCase):
         self.assertEqual(present.extra_benefits("", [covered], part_b=True), [("", [])])
         _, aside = present.explain("", [covered], "J_extra_benefits", "dvha")
         self.assertEqual(aside[facts.identity(covered)], ["it gives no amount"])
+
+    def test_with_part_d_ends_by_saying_when_a_plan_has_no_part_d(self):
+        none = landscape("part_d_deductible", "not_covered")
+        self.assertEqual(present.extra_benefits("", [routine("fitness"), none], part_d=True),
+                         [("Fitness; No Part D coverage", [routine("fitness"), none])])
+        self.assertEqual(present.extra_benefits("", [none]), [("", [])])
+        self.assertEqual(present.extra_benefits("", [landscape("part_d_deductible", "deductible", "$0")], part_d=True),
+                         [("", [])])
 
     def test_names_cards_for_chronic_conditions_and_programs_after_heart_failure(self):
         found = [routine("other_supplemental", "allowance", "$30", pool="Food & Home Card", limit="per month",
@@ -1595,6 +1625,20 @@ class WriteTest(unittest.TestCase):
         self.assertIn("; fitting $0; 60-day trial, 3-year warranty, 80 batteries per aid", got[("H_hearing", "H2923-001-0")])
         self.assertIn("Worldwide ER/urgent $130, $250,000 max", got[("I_alt_care_otc_travel", "H2056-003-0")])
         self.assertIn("Worldwide ER $130, urgent care $50", got[("I_alt_care_otc_travel", "H5216-455-0")])
+
+    def test_version_27_shows_exam_maximums_out_of_network_programs_and_no_part_d(self):
+        self.assertEqual(present.VERSIONS[27], {})
+        data = years.data_dir(YEAR)
+        rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.layer_rows(data, v)} for v in (26, 27)}
+        self.assertEqual({r[1] for r in rows[26] ^ rows[27]}, {"G_vision", "J_extra_benefits"})
+        self.assertEqual(present.lines(data, "G_vision", sheet="dvha", version=27)["H5216-455-0"][0][0],
+                         "exam $0/year; eyewear $75/year ($150 at PLUS providers); exam max $75/year; 1 pair/year; "
+                         "no rollover; OON exam $0; Humana Medicare Insight Network")
+        extras = present.lines(data, "J_extra_benefits", sheet="dvha", version=27)
+        self.assertIn("; Medicare Explorer by Kaiser Permanente max $1,200/year; ", extras["H9003-001-0"][0][0])
+        self.assertEqual({p for p, got in extras.items() if got[0][0].endswith("; No Part D coverage")},
+                         {"H2406-073-0", "H5216-455-0", "H5216-427-2", "H3817-010-0", "H2056-018-0", "H5439-010-0",
+                          "H7006-021-0"})
 
     def test_version_26_names_the_dental_network(self):
         self.assertEqual(present.VERSIONS[26], {})
