@@ -1432,6 +1432,14 @@ class ExtraBenefitsTest(unittest.TestCase):
         _, aside = present.explain("", [covered], "J_extra_benefits", "dvha")
         self.assertEqual(aside[facts.identity(covered)], ["it gives no amount"])
 
+    def test_with_part_d_ends_by_saying_when_a_plan_has_no_part_d(self):
+        none = landscape("part_d_deductible", "not_covered")
+        self.assertEqual(present.extra_benefits("", [routine("fitness"), none], part_d=True),
+                         [("Fitness; No Part D coverage", [routine("fitness"), none])])
+        self.assertEqual(present.extra_benefits("", [none]), [("", [])])
+        self.assertEqual(present.extra_benefits("", [landscape("part_d_deductible", "deductible", "$0")], part_d=True),
+                         [("", [])])
+
     def test_names_cards_for_chronic_conditions_and_programs_after_heart_failure(self):
         found = [routine("other_supplemental", "allowance", "$30", pool="Food & Home Card", limit="per month",
                          condition="chronically ill members"),
@@ -1618,7 +1626,7 @@ class WriteTest(unittest.TestCase):
         self.assertIn("Worldwide ER/urgent $130, $250,000 max", got[("I_alt_care_otc_travel", "H2056-003-0")])
         self.assertIn("Worldwide ER $130, urgent care $50", got[("I_alt_care_otc_travel", "H5216-455-0")])
 
-    def test_version_27_shows_exam_maximums_and_out_of_network_programs(self):
+    def test_version_27_shows_exam_maximums_out_of_network_programs_and_no_part_d(self):
         self.assertEqual(present.VERSIONS[27], {})
         data = years.data_dir(YEAR)
         rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.layer_rows(data, v)} for v in (26, 27)}
@@ -1626,8 +1634,11 @@ class WriteTest(unittest.TestCase):
         self.assertEqual(present.lines(data, "G_vision", sheet="dvha", version=27)["H5216-455-0"][0][0],
                          "exam $0/year; eyewear $75/year ($150 at PLUS providers); exam max $75/year; 1 pair/year; "
                          "no rollover; OON exam $0; Humana Medicare Insight Network")
-        self.assertIn("; Medicare Explorer by Kaiser Permanente max $1,200/year; ",
-                      present.lines(data, "J_extra_benefits", sheet="dvha", version=27)["H9003-001-0"][0][0])
+        extras = present.lines(data, "J_extra_benefits", sheet="dvha", version=27)
+        self.assertIn("; Medicare Explorer by Kaiser Permanente max $1,200/year; ", extras["H9003-001-0"][0][0])
+        self.assertEqual({p for p, got in extras.items() if got[0][0].endswith("; No Part D coverage")},
+                         {"H2406-073-0", "H5216-455-0", "H5216-427-2", "H3817-010-0", "H2056-018-0", "H5439-010-0",
+                          "H7006-021-0"})
 
     def test_version_26_names_the_dental_network(self):
         self.assertEqual(present.VERSIONS[26], {})

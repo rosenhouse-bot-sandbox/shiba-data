@@ -1252,12 +1252,14 @@ def part_b_giveback(found):
     return [f"Part B giveback {value}" + (f"/{renews(paid)}" if renews(paid) else "")], paid
 
 
-def extra_benefits(organization, found, prices=False, programs=False, alike=False, part_b=False, anywhere=False):
+def extra_benefits(organization, found, prices=False, programs=False, alike=False, part_b=False, anywhere=False,
+                   part_d=False):
     """Names fitness, meals and transportation for every member, then shows routine foot care, a fitness allowance,
     a card for members with chronic conditions, and the programs after a heart-failure hospital stay.
     With prices, it shows the fitness and meals copays and how many meals. With programs, it names the fitness program
     and then each other program for every member. With alike, it merges programs as other_programs does.
-    With part_b, it starts with the Part B giveback. See other_programs for anywhere."""
+    With part_b, it starts with the Part B giveback. With part_d, it ends by saying when the plan has no Part D.
+    See other_programs for anywhere."""
     parts, cited = part_b_giveback(found) if part_b else ([], [])
     for name, leaf in (("Fitness", "fitness"), ("Meals", "meals"), ("Transportation", "extras.transportation")):
         got = top(exactly(found, (leaf,), lambda f: extra(f) and offers(f),
@@ -1308,6 +1310,12 @@ def extra_benefits(organization, found, prices=False, programs=False, alike=Fals
         names += ["home-delivered meals"] if any(f["benefit"] == "meals" for f in heart) else []
         parts.append(f"After a heart-failure hospital stay: {', '.join(names)}")
         cited += heart
+    without = exactly(found, ("part_d_deductible",), lambda f: f["cost_kind"] == "not_covered",
+                      "it does not say the plan has no Part D") if part_d else []
+    [(deductible, without)] = drug_deductible(organization, without) if without else [("", [])]
+    if deductible == "n/a":
+        parts.append("No Part D coverage")
+        cited += without
     return [("; ".join(parts), unique(cited))]
 
 
@@ -1488,14 +1496,14 @@ DVHA = {"C_premium": plan_premium, "D_premium_full_extra_help": extra_help_premi
         "I_alt_care_otc_travel": lambda o, found: alt_care_otc_travel(o, found, telehealth=True, food=True, rates=True,
                                                                       none=True, urgent_care=True, details=True),
         "J_extra_benefits": lambda o, found: extra_benefits(o, found, prices=True, programs=True, alike=True,
-                                                            part_b=True, anywhere=True)}
+                                                            part_b=True, anywhere=True, part_d=True)}
 DVHA_LEAVES = {"C_premium": ("plan_premium",), "D_premium_full_extra_help": ("plan_premium", "part_d_deductible"),
                "E_optional_packages": ("packages",), "F_dental": ("dental",),
                "G_vision": ("vision",), "H_hearing": ("hearing",),
                "I_alt_care_otc_travel": ("extras.acupuncture", "extras.chiropractic", "extras.massage",
                                          "extras.naturopathy", "otc", "emergency"),
                "J_extra_benefits": ("giveback", "fitness", "meals", "foot_care", "extras.transportation",
-                                    "other_supplemental")}
+                                    "other_supplemental", "part_d_deductible")}
 SHEETS = {"main": (COLUMNS, LEAVES), "dvha": (DVHA, DVHA_LEAVES)}
 
 
@@ -1733,7 +1741,8 @@ VERSIONS[24] = {}
 VERSIONS[25] = {}
 # Version 26 names the DVHA dental network.
 VERSIONS[26] = {}
-# Version 27 shows a DVHA eye exam maximum and out-of-network travel programs, such as Medicare Explorer.
+# Version 27 shows a DVHA eye exam maximum, out-of-network travel programs such as Medicare Explorer, and
+# "No Part D coverage".
 VERSIONS[27] = {}
 # The version that first presents each later column. Earlier versions hold its cells.
 SINCE = {("dvha", "C_premium"): 3, ("dvha", "G_vision"): 4, ("dvha", "H_hearing"): 4, ("dvha", "E_optional_packages"): 5,
