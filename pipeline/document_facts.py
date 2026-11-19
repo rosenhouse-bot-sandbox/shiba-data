@@ -293,8 +293,27 @@ HEARING_DETAILS = ("Give a hearing aid fitting or evaluation and a follow-up vis
                    "hearing aid trial period, warranty and batteries each as a `hearing.aids` `covered` fact with the "
                    "item in `condition`, such as `trial period`, `warranty` or `batteries`, and its length or count in "
                    "`limit`, such as `60 days`, `3 years` or `80 batteries per aid`.")
-HEARING_PLANS = PROGRAM_PLANS + ("H7199-002-0",)
+EVERY_PLAN = PROGRAM_PLANS + ("H7199-002-0",)
 # Version 33 reads hearing details that the final volunteer sheets show. Its targets are the plans a dry run found it
 # asks about.
 VERSIONS[33] = dict(VERSIONS[32], notes=VERSIONS[32]["notes"] | {"hearing": HEARING_DETAILS},
-                    targets={"hearing": HEARING_PLANS})
+                    targets={"hearing": EVERY_PLAN})
+ROLLOVER = ("Say whether an unused allowance carries over: a `covered` fact with `condition` `rollover` when it does, "
+            "or a `not_covered` fact when it does not. Put how long it carries over in `limit`, such as `to the next "
+            "quarter until the end of the year`.")
+ALSO_PAYS_FOR = ("When the allowance also pays for things other than over-the-counter items, give a `covered` fact with "
+                 "`condition` `also pays for` and the things in `limit`, such as `groceries, utilities and rent`. When "
+                 "only some members may use it for them, start `limit` with those members, such as `members with "
+                 "certain chronic conditions: groceries`.")
+PROVIDER_NETWORK = ("Give the company or network whose providers the plan uses for this benefit, such as VSP, EyeMed "
+                    "or Aetna Dental PPO, as a `covered` fact with `condition` `provider network` and the name in "
+                    "`limit`.")
+PAIRS = ("Give how many pairs of glasses or supplies of contact lenses the plan covers as a `vision.eyewear` "
+         "`visit_limit` fact with the period in `limit`.")
+NO_MAXIMUM = ("A plan that says its dental coverage has no annual maximum gives a `dental` `covered` fact with "
+              "`condition` `no annual maximum`.")
+# Version 34 reads the allowance, network and dental maximum details that the final volunteer sheets show.
+VERSIONS[34] = dict(VERSIONS[33], notes=VERSIONS[33]["notes"] | {
+    "otc": f"{ROLLOVER} {ALSO_PAYS_FOR}", "vision": f"{PROVIDER_NETWORK} {PAIRS} {ROLLOVER}",
+    "dental": f"{VERSIONS[33]['notes']['dental']} {PROVIDER_NETWORK} {NO_MAXIMUM} {ROLLOVER}"},
+    targets=dict.fromkeys(("otc", "vision", "dental"), EVERY_PLAN))

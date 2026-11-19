@@ -468,8 +468,8 @@ class StepTest(StepsTest):
         v32, v33 = document_facts.VERSIONS[32], document_facts.VERSIONS[33]
         self.assertEqual(dict(v33, notes=None, targets=None), dict(v32, notes=None, targets=None))
         self.assertEqual(v33["notes"], v32["notes"] | {"hearing": document_facts.HEARING_DETAILS})
-        self.assertEqual(v33["targets"], {"hearing": document_facts.HEARING_PLANS})
-        self.assertEqual(len(set(document_facts.HEARING_PLANS)), 39)
+        self.assertEqual(v33["targets"], {"hearing": document_facts.EVERY_PLAN})
+        self.assertEqual(len(set(document_facts.EVERY_PLAN)), 39)
 
     def test_version_33_hearing_details_are_valid_facts_with_different_identities(self):
         def detail(benefit, condition, cost_kind, amount="", limit=""):
@@ -489,6 +489,39 @@ class StepTest(StepsTest):
         for words in ("`condition`", "`fitting/evaluation`", "`follow-up visits`", "`trial period`", "`warranty`",
                       "`batteries`", "`covered` fact when the page gives no count"):
             self.assertIn(words, document_facts.HEARING_DETAILS)
+
+    def test_version_34_reads_allowance_network_and_dental_maximum_details_for_every_plan(self):
+        v33, v34 = document_facts.VERSIONS[33], document_facts.VERSIONS[34]
+        self.assertEqual(dict(v34, notes=None, targets=None), dict(v33, notes=None, targets=None))
+        self.assertEqual(dict(v34["notes"], otc=None, vision=None, dental=None),
+                         dict(v33["notes"], otc=None, vision=None, dental=None))
+        self.assertTrue(v34["notes"]["dental"].startswith(v33["notes"]["dental"]))
+        for group, notes in (("otc", ("ROLLOVER", "ALSO_PAYS_FOR")), ("vision", ("PROVIDER_NETWORK", "PAIRS", "ROLLOVER")),
+                             ("dental", ("PROVIDER_NETWORK", "NO_MAXIMUM", "ROLLOVER"))):
+            for note in notes:
+                self.assertIn(getattr(document_facts, note), v34["notes"][group])
+        self.assertEqual(v34["targets"], dict.fromkeys(("otc", "vision", "dental"), document_facts.EVERY_PLAN))
+
+    def test_version_34_details_are_valid_facts_with_different_identities(self):
+        def detail(benefit, condition, cost_kind, amount="", limit=""):
+            row = dict.fromkeys(facts.COLUMNS, "") | dict(
+                plan_id="H1036-153-0", benefit=benefit, setting="any", network="in", condition=condition,
+                covered_by="supplemental", cost_kind=cost_kind, amount=amount, limit=limit, source="EOC",
+                doc_sha=SHA, page="3", quotes='["q"]')
+            return row | {"fact_id": facts.fact_id(row)}
+        details = [detail("otc", "rollover", "covered", limit="to the next quarter until the end of the year"),
+                   detail("otc", "also pays for", "covered", limit="members with certain chronic conditions: groceries"),
+                   detail("vision", "provider network", "covered", limit="VSP"),
+                   detail("vision.eyewear", "", "visit_limit", "1", "per year"),
+                   detail("dental", "no annual maximum", "covered"),
+                   detail("dental", "rollover", "not_covered")]
+        self.assertEqual([facts.check(f) for f in details], [[]] * len(details))
+        self.assertEqual(facts.conflicts(details), [])
+        for words in ("`condition` `rollover`", "`condition` `also pays for`", "`condition` `provider network`",
+                      "`visit_limit`", "`condition` `no annual maximum`"):
+            self.assertIn(words, " ".join((document_facts.ROLLOVER, document_facts.ALSO_PAYS_FOR,
+                                           document_facts.PROVIDER_NETWORK, document_facts.PAIRS,
+                                           document_facts.NO_MAXIMUM)))
 
     def test_a_second_reader_sees_the_pages_after_and_takes_reimbursements_as_its_version_says(self):
         page = "Members receive 100% reimbursement."
