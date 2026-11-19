@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "f73d19eeaaf3a08a.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-428-2\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"pool\": \"Virtual Cardiac Recovery Program\", \"condition\": \"members with recent heart failure-related hospitalization\", \"page\": 79, \"quotes\": [\"In-Network: $0 copayment\"], \"note\": \"\"},\n {\"plan_id\": \"H5216-428-2\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"36\", \"limit\": \"per episode\", \"pool\": \"Virtual Cardiac Recovery Program\", \"condition\": \"members with recent heart failure-related hospitalization\", \"page\": 79, \"quotes\": [\"Includes up to 36 sessions per episode following a qualifying hospitalization with a $0 copayment.\"], \"note\": \"\"},\n {\"plan_id\": \"H5216-428-2\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"pool\": \"Nurse Advice Line\", \"page\": 143, \"quotes\": [\"call the Nurse Advice Line at 1-800-491-4164, TTY 711.\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 5558,
+  "output_tokens": 1357,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
