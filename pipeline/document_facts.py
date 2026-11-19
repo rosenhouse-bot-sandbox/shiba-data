@@ -325,3 +325,20 @@ VERSIONS[34] = dict(VERSIONS[33], notes=VERSIONS[33]["notes"] | {
     "dental": f"{VERSIONS[33]['notes']['dental']} {provider_network('dental', 'Delta Dental PPO')} {NO_MAXIMUM} "
               f"{rollover('dental')}"},
     targets=dict.fromkeys(("otc", "vision", "dental"), EVERY_PLAN))
+MEDICAL_ALERT = ("A personal emergency response system or wearable medical alert device is an `other_supplemental` "
+                 "fact with `pool` set to the name the document gives, priced as a program is. A discount on one is "
+                 "not a fact.")
+NATIONAL_NETWORK = ("When members pay in-network costs at network providers across the country, give one "
+                    "`other_supplemental` `covered` fact with `pool` set to the name the document gives that network or "
+                    "travel benefit, such as `UnitedHealthcare Medicare National Network`.")
+# Version 35 reads medical alert devices and travel coverage from the plans whose documents mention them.
+ALERT_OR_NATIONAL_PLANS = (
+    "H1036-317-0", "H2406-073-0", "H3805-040-0", "H3805-041-0", "H3805-048-0", "H5216-048-0", "H5216-427-2",
+    "H5216-428-2", "H5216-455-0", "H7006-018-0", "H7006-021-0", "H9003-001-0", "H9003-006-0", "H9003-009-0")
+VERSIONS[35] = dict(
+    VERSIONS[34],
+    plan_notes=VERSIONS[34]["plan_notes"] | {"other_supplemental": dict.fromkeys(
+        ALERT_OR_NATIONAL_PLANS, f"{MEDICAL_ALERT} {NATIONAL_NETWORK}")},
+    find=VERSIONS[34]["find"] | {"other_supplemental": VERSIONS[34]["find"]["other_supplemental"] + (
+        r"personal emergency response", r"medical alert", r"medicare national network", r"ppo national network")},
+    targets={"other_supplemental": ALERT_OR_NATIONAL_PLANS})
