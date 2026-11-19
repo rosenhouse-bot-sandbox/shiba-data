@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-106.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 11 has no per-plan columns; the row applies to every plan member, so it covers H9003-001-0. Medicare Explorer is a point-of-service supplemental benefit for care while traveling in the U.S. It covers out-of-network Medicare providers, 'not to exceed a benefit maximum of $1,200 in covered plan charges per calendar year.' Every field matches.\"}]\n```",
+ "usage": {
+  "input_tokens": 2887,
+  "output_tokens": 466,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
