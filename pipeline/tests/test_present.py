@@ -930,6 +930,11 @@ class NoneTest(unittest.TestCase):
                       routine("vision.eyewear", "allowance", "$175", package="Advantage Plus")):
             self.assertEqual(present.lacks([exam, other], "vision.eyewear"), (True, []), other)
 
+    def test_details_of_a_benefit_do_not_offer_it(self):
+        exam = routine("vision.exam")
+        for detail in ("rollover", "also pays for members with diabetes", "provider network", "no annual maximum"):
+            self.assertEqual(present.lacks([exam, routine("vision", condition=detail)], "vision.eyewear"), (True, []))
+
     def test_cites_only_facts_that_exclude_the_benefit_itself(self):
         narrow = routine("dental.comprehensive", "not_covered", "", quotes='["Implants are not covered"]')
         self.assertEqual(present.lacks([routine("vision.exam"), narrow], "dental"), (True, []))

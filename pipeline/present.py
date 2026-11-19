@@ -880,11 +880,15 @@ def everyone(f):
     return extra(f) and not f["condition"]
 
 
+# Conditions that describe a benefit rather than limit who gets it.
+DETAIL = re.compile(r"^(rollover|also pays for|provider network|no annual maximum)")
+
+
 def lacks(found, leaf):
     """Says if a plan's documents give no supplemental leaf benefit in any network, at any tier or for any member, and
     gives the best source's facts that say the plan does not cover leaf itself for every member."""
     related_ = [f for f in found if (facts.covers(leaf, f["benefit"]) or facts.covers(f["benefit"], leaf))
-                and f["covered_by"] == "supplemental" and not f["package"]]
+                and f["covered_by"] == "supplemental" and not f["package"] and not DETAIL.match(f["condition"])]
     if not any(f["source"] in facts.DOCUMENTS for f in found) or any(f["cost_kind"] != "not_covered" for f in related_):
         return False, []
     return True, top([f for f in related_ if f["benefit"] == leaf and extra(f) and not f["condition"]])
