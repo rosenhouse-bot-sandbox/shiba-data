@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-e306f120395b6260.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 76 OTC credit row: the in-network column says the quarterly credit is $50, and credits are loaded each quarter.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 76: credits expire on the last day of each quarter and do not roll over.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 76 OTC row, out-of-network column: you pay 90% coinsurance of the approved purchase amount at an out-of-network store or provider.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 76: the OTC credit can also be used on covered home and bath safety devices such as bathmats, grab bars and shower chairs. This is the only non-OTC use listed.\"}]\n```",
+ "usage": {
+  "input_tokens": 3142,
+  "output_tokens": 529,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

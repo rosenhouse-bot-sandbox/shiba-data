@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-168.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 50, under Supplemental (routine) dental services, the Periodic Oral exams row gives an in-network $0 copay for each oral exam.\"}]\n```",
+ "usage": {
+  "input_tokens": 2928,
+  "output_tokens": 268,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

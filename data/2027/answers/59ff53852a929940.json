@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-114.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 43 supplemental preventive dental list: cleanings (prophylaxis or periodontal maintenance), any combination, 2 every calendar year. The limit is stated for the service with no network split, so network any fits. The note that full mouth debridement visits share this limit is omitted, but that leaves out detail rather than making the fact wrong.\"}]\n```",
+ "usage": {
+  "input_tokens": 4018,
+  "output_tokens": 454,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

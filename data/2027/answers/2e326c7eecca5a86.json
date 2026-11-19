@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "d1ca3a965cb15437.md",
+ "reply": "```json\n[]\n```\n\nThe earlier list already holds every dental fact these pages state for H3805-041-0. Three possible additions were left out:\n\n- **Out-of-network costs:** The pages give no separate out-of-network cost for preventive or comprehensive dental care.\n- **Out-of-network maximum:** Page 97 says out-of-network care is \"subject to any in-network benefit maximums\". This suggests the $1,250 maximum also applies out of network, but the dollar amount is printed only on page 96. A fact with quotes from both pages would break the one-page rule, so I left it out rather than risk a wrong fact.\n- **Rollover:** None of these pages say whether an unused maximum carries over.",
+ "usage": {
+  "input_tokens": 13514,
+  "output_tokens": 828,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

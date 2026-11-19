@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-184.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 54 does show a $150 routine dental allowance every three months. But it is loaded to the Flex Card, a card that names dental, so the fact should likely carry pool 'Flex Card'. The item leaves pool blank, so it is false given the doubt.\"}]\n```",
+ "usage": {
+  "input_tokens": 3284,
+  "output_tokens": 854,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

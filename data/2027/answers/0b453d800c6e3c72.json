@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-186.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 108 Advantage Plus preventive row: oral exams up to 2 per calendar year and teeth cleaning up to 2 per calendar year. The chart is not plan-specific, so it applies to this plan's optional Advantage Plus package.\"}]\n```",
+ "usage": {
+  "input_tokens": 3284,
+  "output_tokens": 543,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

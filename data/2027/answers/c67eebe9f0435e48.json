@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-238.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 113 exclusions chart, 'Eyeglasses and contact lenses' row: eyewear is covered only after cataract surgery, which is Medicare eyewear. The exclusion is lifted only for the Enhanced and Standard plans or for members in the optional supplemental package. So routine eyewear in the base Value plan is not covered.\"}]\n```",
+ "usage": {
+  "input_tokens": 2520,
+  "output_tokens": 549,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

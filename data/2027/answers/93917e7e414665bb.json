@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-2aa68f4230962abc.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 63, Dental & Alternative Therapy Allowance: 'Any unused funds will not roll over into the next year.' This is a supplemental dental rollover that is not covered.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 61 Dental services row, under 'Dental services covered by Medicare': $45 copay.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 62: $2,000 yearly allowance toward preventive and comprehensive dental, massage, acupuncture and naturopath services combined. This is a shared pool allowance of $2,000 per year.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 112 dental chart, Comprehensive section: 'What you pay: 50% coinsurance'. Page 62 agrees with 50% reimbursement.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 110 Mandatory Supplemental Dental chart, Preventive section: 'What you pay: 0% coinsurance'.\"}]\n```",
+ "usage": {
+  "input_tokens": 8778,
+  "output_tokens": 678,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

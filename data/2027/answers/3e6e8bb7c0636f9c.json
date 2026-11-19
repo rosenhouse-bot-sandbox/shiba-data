@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "cabbc3b82885b498.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-025-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$45\", \"unit\": \"per visit\", \"page\": 7, \"quotes\": [\"Medicare-Covered Diagnostic Eye Exam: $45 copay\"]},\n{\"plan_id\": \"H2923-025-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"unit\": \"per visit\", \"condition\": \"Diabetic Retinopathy Exam\", \"page\": 7, \"quotes\": [\"Diabetic Retinopathy Exam: $0 copay\"], \"note\": \"The condition separates this exam from the $45 diagnostic eye exam. It applies to members who get diabetic retinopathy exams, meaning members with diabetes.\"}]\n```",
+ "usage": {
+  "input_tokens": 3349,
+  "output_tokens": 878,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

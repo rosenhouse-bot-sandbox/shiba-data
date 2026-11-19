@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-49912316cc55d9c5.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 61: a $1,750 yearly allowance under the Dental & Alternative Therapy Allowance covers preventive and comprehensive dental. Any licensed dentist may be used, so network 'in' is the default and not contradicted.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 114 dental chart, Comprehensive section: 'What you pay: 50% coinsurance'. The row names no network, so it is in-network.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 62: unused allowance funds will not roll over into the next year.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 111 Mandatory Supplemental Dental Benefits: the plan pays as much as $1,750 per year for covered dental services.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 60 Dental services row: dental services covered by Medicare have a $40 copay.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 112 dental chart, Preventive section: 'What you pay: 0% coinsurance'.\"}]\n```",
+ "usage": {
+  "input_tokens": 9555,
+  "output_tokens": 747,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

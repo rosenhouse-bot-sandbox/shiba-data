@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-4ec81cd0d2695486.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 57 lists preventive dental services (oral exams, cleanings, X-rays) under 'Supplemental benefits' in the plan's benefits chart. The row names no network, so it reads as in-network, and the service is covered.\"}]\n```",
+ "usage": {
+  "input_tokens": 3432,
+  "output_tokens": 323,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

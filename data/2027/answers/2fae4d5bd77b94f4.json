@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "90a4efa6544175a2.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H6815-038-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$25\", \"page\": 103,\n   \"quotes\": [\"$25 copay for all other eye exams to diagnose and treat diseases of the eye.\"]},\n  {\"plan_id\": \"H6815-038-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"limit\": \"each year\", \"page\": 104,\n   \"quotes\": [\"$0 copay for a Medicare-covered glaucoma screening.\"]},\n  {\"plan_id\": \"H6815-038-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"limit\": \"once per year\", \"page\": 104,\n   \"quotes\": [\"$0 copay for Medicare-covered retinal exam for diabetic members or diabetic eye exam.\"]},\n  {\"plan_id\": \"H6815-038-0\", \"benefit\": \"vision.eyewear\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"limit\": \"after each cataract surgery\", \"page\": 104,\n   \"quotes\": [\"$0 copay for Medicare-covered eyewear.\"]},\n  {\"plan_id\": \"H6815-038-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"limit\": \"every year\", \"page\": 104,\n   \"quotes\": [\"$0 copay for 1 routine eye exam every year.\"]},\n  {\"plan_id\": \"H6815-038-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"1\", \"limit\": \"every year\", \"page\": 104,\n   \"quotes\": [\"$0 copay for 1 routine eye exam every year.\"]},\n  {\"plan_id\": \"H6815-038-0\", \"benefit\": \"vision.eyewear\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 104,\n   \"quotes\": [\"$0 copay for eyewear.\"]},\n  {\"plan_id\": \"H6815-038-0\", \"benefit\": \"vision.eyewear\", \"setting\": \"any\", \"network\": \"in\",\n   \"covered_by\": \"supplemental\", \"cost_kind\": \"max\", \"amount\": \"$100\", \"limit\": \"every year\", \"page\": 104,\n   \"quotes\": [\"maximum benefit of $100 every year\"]}\n]\n```",
+ "usage": {
+  "input_tokens": 8040,
+  "output_tokens": 2377,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "b4be2a8a3e57d86a.md",
+ "reply": "```json\n[\n  {\"plan_id\": \"H5216-427-2\", \"benefit\": \"otc\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$50\", \"limit\": \"per quarter\", \"page\": 17, \"quotes\": [\"$50 quarterly allowance on a prepaid\"]},\n  {\"plan_id\": \"H5216-427-2\", \"benefit\": \"otc\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"condition\": \"rollover\", \"limit\": \"to the next quarter until the end of the plan year or upon disenrollment from the plan\", \"page\": 17, \"quotes\": [\"Unused amount rolls over to the next\", \"quarter and expires at the end of the plan\"]},\n  {\"plan_id\": \"H5216-427-2\", \"benefit\": \"otc\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"95%\", \"page\": 17, \"quotes\": [\"Out-of-network: 95% coinsurance.\"]}\n]\n```",
+ "usage": {
+  "input_tokens": 2789,
+  "output_tokens": 809,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

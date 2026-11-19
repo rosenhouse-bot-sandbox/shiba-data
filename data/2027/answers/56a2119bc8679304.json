@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-218.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 80 supplemental vision chart lists the in-network Routine Eye Exam including refraction as 1 per calendar year.\"}]\n```",
+ "usage": {
+  "input_tokens": 2671,
+  "output_tokens": 161,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

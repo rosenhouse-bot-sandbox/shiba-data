@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-d649ac2bebc0321d.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 105 Vision care row: Medicare-covered vision services are a $50 copay in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 105 says the plan covers 1 routine vision exam (including refraction, if needed) each year.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 105 Routine eye exam: $0 copay. This is a supplemental benefit.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 105: Medicare-covered eyeglasses or contacts after cataract surgery are a $0 copay.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 105: Annual Glaucoma Screening is a $0 copay, one per year for people at high risk for glaucoma.\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 106: you must use Devoted's in-network vendors for vision benefits; with other providers you pay the full cost, and out-of-network expenses cannot be reimbursed.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 105 Eyewear: the plan pays up to $200 per year for glasses, lenses and contacts.\"},\n{\"id\": 7, \"ok\": true, \"reason\": \"Page 105: Diabetic retinopathy screening is a $0 copay, once per year for people with diabetes.\"}]\n```",
+ "usage": {
+  "input_tokens": 4407,
+  "output_tokens": 835,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

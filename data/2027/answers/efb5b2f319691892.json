@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-221.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"On page 79, under Mandatory Supplemental Vision, the in-network routine eye exam row reads \\\"Routine Eye Exam including refraction (1 per calendar year)\\\". This matches a supplemental vision.exam limit of 1 per calendar year.\"}]\n```",
+ "usage": {
+  "input_tokens": 2682,
+  "output_tokens": 235,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

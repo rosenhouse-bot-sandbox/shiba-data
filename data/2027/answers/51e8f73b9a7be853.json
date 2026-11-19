@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-219.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 83 Eyewear Benefit (1 per calendar year): the member pays any retail amount over $250 for frame and lenses or contacts from a PLUS Provider. So the plan gives a $250 in-network allowance per calendar year at that tier.\"}]\n```",
+ "usage": {
+  "input_tokens": 2676,
+  "output_tokens": 456,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

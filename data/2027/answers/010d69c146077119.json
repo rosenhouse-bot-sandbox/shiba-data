@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-187.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 9, Advantage Plus Preventive dental row: 'Oral exam (up to 2 per calendar year)', $0. The row names no plan, so it applies to all plans including Enhanced. It names no network, so in-network. It is supplemental dental offered only in the Advantage Plus optional package.\"}]\n```",
+ "usage": {
+  "input_tokens": 3295,
+  "output_tokens": 390,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

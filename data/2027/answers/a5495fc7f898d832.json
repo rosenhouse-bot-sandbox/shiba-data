@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-7ac7300e6ca40ac7.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 93 vision row: $0 copayment for one pair of Medicare-covered standard glasses or contact lenses after cataract surgery.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 94 routine eye exam row: $0 copayment.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 92 vision services row: $0 copayment for each Medicare-covered exam.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 144 names UHC Vision as the vendor for routine eyewear benefits.\"},\n{\"id\": 4, \"ok\": true, \"reason\": \"Page 94: 'We cover 1 routine eye exam every year.'\"},\n{\"id\": 5, \"ok\": true, \"reason\": \"Page 93: $0 copayment for Medicare-covered glaucoma screening and for eye exams to evaluate eye disease.\"},\n{\"id\": 6, \"ok\": true, \"reason\": \"Page 144 lists routine eyewear (UHC Vision) as a supplemental benefit with a reimbursement process, so it is covered.\"}]\n```",
+ "usage": {
+  "input_tokens": 5781,
+  "output_tokens": 963,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

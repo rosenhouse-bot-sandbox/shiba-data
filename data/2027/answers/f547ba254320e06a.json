@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "362ee075ea5896d4.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H2001-045-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 5, \"quotes\": [\"conditions of the eye $0 copay\"], \"note\": \"Exam to diagnose and treat diseases and conditions of the eye. The quote assumes the checker reads the row cell by cell and drops the footnote mark 2.\"},\n{\"plan_id\": \"H2001-045-0\", \"benefit\": \"vision.exam\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"page\": 5, \"quotes\": [\"conditions of the eye $0 copay 30% coinsurance\"], \"note\": \"Exam to diagnose and treat diseases and conditions of the eye. The quote assumes the checker reads the row cell by cell and drops the footnote mark 2.\"},\n{\"plan_id\": \"H2001-045-0\", \"benefit\": \"vision.eyewear\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"medicare\", \"cost_kind\": \"copay\", \"amount\": \"$0\", \"page\": 5, \"quotes\": [\"Eyewear after cataract surgery $0 copay\"], \"note\": \"Eyewear after cataract surgery\"},\n{\"plan_id\": \"H2001-045-0\", \"benefit\": \"vision.eyewear\", \"setting\": \"any\", \"network\": \"out\", \"covered_by\": \"medicare\", \"cost_kind\": \"coinsurance\", \"amount\": \"30%\", \"page\": 5, \"quotes\": [\"Eyewear after cataract surgery $0 copay 30% coinsurance\"], \"note\": \"Eyewear after cataract surgery\"}]\n```",
+ "usage": {
+  "input_tokens": 6190,
+  "output_tokens": 3003,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

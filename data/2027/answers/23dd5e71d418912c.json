@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "bee1858e7e963c62.md",
+ "reply": "```json\n[{\"plan_id\": \"H7006-018-0\", \"benefit\": \"otc\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"allowance\", \"amount\": \"$30\", \"limit\": \"every three months\", \"pool\": \"Flex Card\", \"page\": 82, \"quotes\": [\"$30 allowance every three months, loaded to your Flex Card, for select OTC items.\"], \"note\": \"The $30 is loaded to the Flex Card but appears specific to OTC items; the pool may not apply.\"},\n{\"plan_id\": \"H7006-018-0\", \"benefit\": \"otc\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"not_covered\", \"condition\": \"rollover\", \"page\": 82, \"quotes\": [\"Any unused allowance does not carry over to the next benefit period or plan year.\"]}]\n```",
+ "usage": {
+  "input_tokens": 6336,
+  "output_tokens": 1037,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
