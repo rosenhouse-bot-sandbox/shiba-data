@@ -1176,12 +1176,16 @@ def virtual_visits(found):
 
 
 def alt_care_otc_travel(organization, found, telehealth=False, food=False, rates=False, none=False, urgent_care=False,
-                        details=False):
+                        details=False, fitness=False):
     """Shows routine acupuncture, chiropractic, massage and naturopathy, the OTC allowance, and worldwide emergency
     care, and with telehealth, virtual visit prices. With food, it says when the OTC allowance also pays for food.
-    See alt_care for rates, over_the_counter for none and details and worldwide for urgent_care. A part the facts do not fully
-    give leaves the cell blank."""
+    See alt_care for rates, over_the_counter for none and details and worldwide for urgent_care. With fitness, it starts
+    with the fitness program and Wellness Bucks. A part the facts do not fully give leaves the cell blank."""
     parts, cited = [], []
+    if fitness:
+        for got in (named_extras(found, ("fitness",), prices=True, programs=True), wellness_bucks(found)):
+            parts += got[0]
+            cited += got[1]
     for name, part in (("alt care", lambda found: alt_care(found, rates)),
                        ("over the counter", lambda found: over_the_counter(found, food, none, details)),
                        ("worldwide", lambda found: worldwide(found, urgent_care))) + (
@@ -1252,16 +1256,22 @@ def part_b_giveback(found):
     return [f"Part B giveback {value}" + (f"/{renews(paid)}" if renews(paid) else "")], paid
 
 
-def extra_benefits(organization, found, prices=False, programs=False, alike=False, part_b=False, anywhere=False,
-                   part_d=False):
-    """Names fitness, meals and transportation for every member, then shows routine foot care, a fitness allowance,
-    a card for members with chronic conditions, and the programs after a heart-failure hospital stay.
-    With prices, it shows the fitness and meals copays and how many meals. With programs, it names the fitness program
-    and then each other program for every member. With alike, it merges programs as other_programs does.
-    With part_b, it starts with the Part B giveback. With part_d, it ends by saying when the plan has no Part D.
-    See other_programs for anywhere."""
-    parts, cited = part_b_giveback(found) if part_b else ([], [])
+def wellness_bucks(found):
+    """Shows a Wellness Bucks allowance that pays for fitness alone."""
+    alt_care_pools = {f["pool"] for f in found if f["benefit"].startswith("extras.") and f["pool"]}
+    bucks = top(exactly(found, ("fitness",), lambda f: everyone(f) and f["cost_kind"] == "allowance"
+                        and re.search(r"wellness bucks", f["pool"], re.I) and f["pool"] not in alt_care_pools and every(f),
+                        "it is not Wellness Bucks for fitness alone"))
+    return ([f"Wellness Bucks {show(bucks)}/{renews(bucks)}"], bucks) if bucks and renews(bucks) else ([], [])
+
+
+def named_extras(found, leaves, prices=False, programs=False):
+    """Names each of fitness, meals and transportation in leaves that every member has. See extra_benefits for
+    prices and programs."""
+    parts, cited = [], []
     for name, leaf in (("Fitness", "fitness"), ("Meals", "meals"), ("Transportation", "extras.transportation")):
+        if leaf not in leaves:
+            continue
         got = top(exactly(found, (leaf,), lambda f: extra(f) and offers(f),
                        "it is not a supplemental in-network benefit for every member"))
         if not got:
@@ -1281,6 +1291,22 @@ def extra_benefits(organization, found, prices=False, programs=False, alike=Fals
             parts.append(name)
             cited += got
         cited += naming
+    return parts, cited
+
+
+def extra_benefits(organization, found, prices=False, programs=False, alike=False, part_b=False, anywhere=False,
+                   part_d=False, fitness=True):
+    """Names fitness, meals and transportation for every member, then shows routine foot care, a fitness allowance,
+    a card for members with chronic conditions, and the programs after a heart-failure hospital stay.
+    With prices, it shows the fitness and meals copays and how many meals. With programs, it names the fitness program
+    and then each other program for every member. With alike, it merges programs as other_programs does.
+    With part_b, it starts with the Part B giveback. With part_d, it ends by saying when the plan has no Part D.
+    Without fitness, it leaves fitness and Wellness Bucks to alt_care_otc_travel. See other_programs for anywhere."""
+    parts, cited = part_b_giveback(found) if part_b else ([], [])
+    got = named_extras(found, ("fitness", "meals", "extras.transportation") if fitness else ("meals", "extras.transportation"),
+                       prices, programs)
+    parts += got[0]
+    cited += got[1]
     if programs:
         got = other_programs(found, alike, anywhere)
         parts += got[0]
@@ -1288,13 +1314,12 @@ def extra_benefits(organization, found, prices=False, programs=False, alike=Fals
     got = foot_care(found)
     parts += got[0]
     cited += got[1]
-    alt_care_pools = {f["pool"] for f in found if f["benefit"].startswith("extras.") and f["pool"]}
-    bucks = top(exactly(found, ("fitness",), lambda f: everyone(f) and f["cost_kind"] == "allowance"
-                        and re.search(r"wellness bucks", f["pool"], re.I) and f["pool"] not in alt_care_pools and every(f),
-                        "it is not Wellness Bucks for fitness alone"))
-    if bucks and renews(bucks):
-        parts.append(f"Wellness Bucks {show(bucks)}/{renews(bucks)}")
-        cited += bucks
+    if fitness:
+        got = wellness_bucks(found)
+        parts += got[0]
+        cited += got[1]
+    else:
+        drop([f for f in found if f["benefit"] == "fitness"], "Alternative Care / OTC / Travel shows fitness")
     cards = top(exactly(found, ("other_supplemental",),
                      lambda f: extra(f) and CHRONIC.search(f["condition"]) and f["cost_kind"] == "allowance" and every(f),
                      "it is not an allowance for members with chronic conditions"))
@@ -1494,14 +1519,15 @@ DVHA = {"C_premium": plan_premium, "D_premium_full_extra_help": extra_help_premi
             ("no eyewear allowance", "vision.eyewear")), "vision"),
         "H_hearing": dvha_hearing(exam_renews=True, details=(hearing_details,)),
         "I_alt_care_otc_travel": lambda o, found: alt_care_otc_travel(o, found, telehealth=True, food=True, rates=True,
-                                                                      none=True, urgent_care=True, details=True),
+                                                                      none=True, urgent_care=True, details=True,
+                                                                      fitness=True),
         "J_extra_benefits": lambda o, found: extra_benefits(o, found, prices=True, programs=True, alike=True,
-                                                            part_b=True, anywhere=True, part_d=True)}
+                                                            part_b=True, anywhere=True, part_d=True, fitness=False)}
 DVHA_LEAVES = {"C_premium": ("plan_premium",), "D_premium_full_extra_help": ("plan_premium", "part_d_deductible"),
                "E_optional_packages": ("packages",), "F_dental": ("dental",),
                "G_vision": ("vision",), "H_hearing": ("hearing",),
                "I_alt_care_otc_travel": ("extras.acupuncture", "extras.chiropractic", "extras.massage",
-                                         "extras.naturopathy", "otc", "emergency"),
+                                         "extras.naturopathy", "otc", "emergency", "fitness"),
                "J_extra_benefits": ("giveback", "fitness", "meals", "foot_care", "extras.transportation",
                                     "other_supplemental", "part_d_deductible")}
 SHEETS = {"main": (COLUMNS, LEAVES), "dvha": (DVHA, DVHA_LEAVES)}
@@ -1581,12 +1607,16 @@ EARLIER_RULES = {
         (22, lambda o, found: alt_care_otc_travel(o, found, telehealth=True, food=True)),
         (23, lambda o, found: alt_care_otc_travel(o, found, telehealth=True, food=True, rates=True, none=True)),
         (24, lambda o, found: alt_care_otc_travel(o, found, telehealth=True, food=True, rates=True, none=True,
-                                                  urgent_care=True))),
+                                                  urgent_care=True)),
+        (28, lambda o, found: alt_care_otc_travel(o, found, telehealth=True, food=True, rates=True, none=True,
+                                                  urgent_care=True, details=True))),
     ("dvha", "J_extra_benefits"): (
         (19, extra_benefits), (20, lambda o, found: extra_benefits(o, found, prices=True)),
         (21, lambda o, found: extra_benefits(o, found, prices=True, programs=True)),
         (22, lambda o, found: extra_benefits(o, found, prices=True, programs=True, alike=True)),
-        (27, lambda o, found: extra_benefits(o, found, prices=True, programs=True, alike=True, part_b=True)))} | {
+        (27, lambda o, found: extra_benefits(o, found, prices=True, programs=True, alike=True, part_b=True)),
+        (28, lambda o, found: extra_benefits(o, found, prices=True, programs=True, alike=True, part_b=True,
+                                             anywhere=True, part_d=True)))} | {
     ("main", column): ((18, rule),) for column, rule in {
         "E_moop": moop, "F_primary_care": visits("office.pcp"), "G_specialist": visits("office.specialist"),
         "H_inpatient": inpatient, "I_outpatient_surgery": outpatient_surgery, "J_outpatient_rehab": outpatient_rehab,
@@ -1744,6 +1774,8 @@ VERSIONS[26] = {}
 # Version 27 shows a DVHA eye exam maximum, out-of-network travel programs such as Medicare Explorer, and
 # "No Part D coverage".
 VERSIONS[27] = {}
+# Version 28 moves DVHA fitness from Extra Benefits to Alternative Care / OTC / Travel, as the volunteer sheet has it.
+VERSIONS[28] = {}
 # The version that first presents each later column. Earlier versions hold its cells.
 SINCE = {("dvha", "C_premium"): 3, ("dvha", "G_vision"): 4, ("dvha", "H_hearing"): 4, ("dvha", "E_optional_packages"): 5,
          ("dvha", "F_dental"): 6, ("dvha", "I_alt_care_otc_travel"): 6, ("dvha", "J_extra_benefits"): 6,

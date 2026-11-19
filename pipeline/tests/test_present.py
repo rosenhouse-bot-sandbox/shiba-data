@@ -1199,6 +1199,19 @@ class AltCareOtcTravelTest(unittest.TestCase):
         self.assertEqual(present.alt_care_otc_travel("", [groceries], food=True)[0][0], "OTC and food $196/month")
         self.assertEqual(present.alt_care_otc_travel("", [eoc], food=True)[0][0], "OTC $196/month")
 
+    def test_with_fitness_starts_with_the_fitness_program_and_wellness_bucks(self):
+        er = routine("emergency", setting="outside_us", amount="$130")
+        gym = routine("fitness")
+        named = routine("fitness", source="SB", quotes='["SilverSneakers®: $0 membership"]')
+        bucks = routine("fitness", "allowance", "$150", pool="Wellness Bucks", limit="per year")
+        self.assertEqual(present.alt_care_otc_travel("", [er, gym, named, bucks], fitness=True),
+                         [("Fitness SilverSneakers $0; Wellness Bucks $150/year; Worldwide ER $130",
+                           [gym, named, bucks, er])])
+        self.assertEqual(present.alt_care_otc_travel("", [er, gym, named, bucks])[0][0], "Worldwide ER $130")
+        unoffered = routine("fitness", "not_covered", "", page="9")
+        _, aside = present.explain("", [er, gym, unoffered], "I_alt_care_otc_travel", "dvha")
+        self.assertIn("it is not a supplemental in-network benefit for every member", aside[facts.identity(unoffered)])
+
     def test_with_none_says_when_the_plan_lacks_otc(self):
         er = routine("emergency", setting="outside_us", amount="$130")
         says = routine("otc", "not_covered", "")
@@ -1432,6 +1445,14 @@ class ExtraBenefitsTest(unittest.TestCase):
         _, aside = present.explain("", [covered], "J_extra_benefits", "dvha")
         self.assertEqual(aside[facts.identity(covered)], ["it gives no amount"])
 
+    def test_without_fitness_leaves_it_to_alternative_care(self):
+        gym, foot = routine("fitness"), routine("foot_care", page="9")
+        bucks = routine("fitness", "allowance", "$150", pool="Wellness Bucks", limit="per year", page="8")
+        self.assertEqual(present.extra_benefits("", [gym, bucks, foot], prices=True, programs=True, fitness=False),
+                         [("Routine foot care $0", [foot])])
+        _, aside = present.explain("", [gym, foot], "J_extra_benefits", "dvha")
+        self.assertEqual(aside[facts.identity(gym)], ["Alternative Care / OTC / Travel shows fitness"])
+
     def test_with_part_d_ends_by_saying_when_a_plan_has_no_part_d(self):
         none = landscape("part_d_deductible", "not_covered")
         self.assertEqual(present.extra_benefits("", [routine("fitness"), none], part_d=True),
@@ -1639,6 +1660,14 @@ class WriteTest(unittest.TestCase):
         self.assertEqual({p for p, got in extras.items() if got[0][0].endswith("; No Part D coverage")},
                          {"H2406-073-0", "H5216-455-0", "H5216-427-2", "H3817-010-0", "H2056-018-0", "H5439-010-0",
                           "H7006-021-0"})
+
+    def test_version_28_moves_fitness_to_alternative_care(self):
+        self.assertEqual(present.VERSIONS[28], {})
+        data = years.data_dir(YEAR)
+        got = {c: present.lines(data, c, sheet="dvha", version=28)["H2923-001-0"][0][0]
+               for c in ("I_alt_care_otc_travel", "J_extra_benefits")}
+        self.assertTrue(got["I_alt_care_otc_travel"].startswith("Fitness SilverSneakers $0; Wellness Bucks $150/year; Acup"))
+        self.assertEqual(got["J_extra_benefits"], "For members with certain chronic conditions: Food & Home Card $30/month")
 
     def test_version_26_names_the_dental_network(self):
         self.assertEqual(present.VERSIONS[26], {})
