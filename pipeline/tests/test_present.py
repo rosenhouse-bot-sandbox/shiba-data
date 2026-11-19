@@ -1596,6 +1596,14 @@ class WriteTest(unittest.TestCase):
         self.assertIn("Worldwide ER/urgent $130, $250,000 max", got[("I_alt_care_otc_travel", "H2056-003-0")])
         self.assertIn("Worldwide ER $130, urgent care $50", got[("I_alt_care_otc_travel", "H5216-455-0")])
 
+    def test_version_26_names_the_dental_network(self):
+        self.assertEqual(present.VERSIONS[26], {})
+        data = years.data_dir(YEAR)
+        rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.layer_rows(data, v)} for v in (25, 26)}
+        self.assertEqual({r[1] for r in rows[25] ^ rows[26]}, {"F_dental"})
+        got = present.lines(data, "F_dental", sheet="dvha", version=26)["H2056-003-0"][0][0]
+        self.assertEqual(got, "PREV $0; no annual max; Aetna Dental PPO Network; no COMP")
+
     def test_version_25_shows_a_comprehensive_dental_range_from_per_service_prices(self):
         self.assertEqual(present.VERSIONS[25], {})
         data = years.data_dir(YEAR)

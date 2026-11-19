@@ -1462,8 +1462,8 @@ HEARING_OON = out_of_network(("exam", "hearing.exam"), ("aids", "hearing.aids"))
 DVHA = {"C_premium": plan_premium, "D_premium_full_extra_help": extra_help_premium,
         "E_optional_packages": lambda o, found: optional_packages(o, found, details=False),
         "F_dental": or_none(with_lacking(with_packages(with_details(
-            dental, no_maximum, dental_deductible, DENTAL_OON, preventive_limits)), ("no COMP", "dental.comprehensive")),
-            "dental"),
+            dental, no_maximum, dental_deductible, DENTAL_OON, preventive_limits, provider_network("dental"))),
+            ("no COMP", "dental.comprehensive")), "dental"),
         "G_vision": or_none(with_lacking(with_packages(with_details(
             vision, eyewear_pairs, VISION_OON, provider_network("vision"))), ("no eyewear allowance", "vision.eyewear")),
             "vision"),
@@ -1538,6 +1538,9 @@ EARLIER_RULES = {
                                ("no COMP", "dental.comprehensive")), "dental")),
                            (25, or_none(with_lacking(with_packages(with_details(
                                dental_before_25, no_maximum, dental_deductible, DENTAL_OON, preventive_limits)),
+                               ("no COMP", "dental.comprehensive")), "dental")),
+                           (26, or_none(with_lacking(with_packages(with_details(
+                               dental, no_maximum, dental_deductible, DENTAL_OON, preventive_limits)),
                                ("no COMP", "dental.comprehensive")), "dental"))),
     ("dvha", "G_vision"): ((19, vision), (22, with_packages(with_details(vision, VISION_OON))),
                            (24, or_none(with_lacking(with_packages(with_details(vision, VISION_OON)),
@@ -1707,6 +1710,8 @@ VERSIONS[23] = {}
 VERSIONS[24] = {}
 # Version 25 shows a DVHA dental price range from per-service prices when no price covers every service.
 VERSIONS[25] = {}
+# Version 26 names the DVHA dental network.
+VERSIONS[26] = {}
 # The version that first presents each later column. Earlier versions hold its cells.
 SINCE = {("dvha", "C_premium"): 3, ("dvha", "G_vision"): 4, ("dvha", "H_hearing"): 4, ("dvha", "E_optional_packages"): 5,
          ("dvha", "F_dental"): 6, ("dvha", "I_alt_care_otc_travel"): 6, ("dvha", "J_extra_benefits"): 6,
