@@ -1054,6 +1054,26 @@ class TelehealthTest(unittest.TestCase):
 
 
 class DentalTest(unittest.TestCase):
+    def test_with_services_a_plans_own_per_service_prices_give_the_range(self):
+        fillings = routine("dental.comprehensive", "coinsurance", "50%", condition="fillings")
+        recement = routine("dental.comprehensive", "coinsurance", "0%", condition="crown recementation")
+        found = [routine("dental.preventive"), fillings, recement]
+        self.assertEqual(column(lambda o, f: present.dental(o, f, services=True), *found),
+                         [("PREV $0; COMP $0-50%", found)])
+        self.assertEqual(column(present.dental_before_25, *found)[0][0], "PREV $0")
+        for other in (dict(recement, condition="members with diabetes"), dict(recement, network="out"), fillings):
+            self.assertEqual(column(lambda o, f: present.dental(o, f, services=True), found[0], fillings, other)[0][0],
+                             "PREV $0", other)
+        everyone = routine("dental.comprehensive", "coinsurance", "20%")
+        self.assertEqual(column(lambda o, f: present.dental(o, f, services=True), everyone, fillings)[0][0], "COMP 20%")
+
+    def test_with_services_a_packages_per_service_prices_do_not_give_a_range(self):
+        plus = dict(package="Plus")
+        found = [routine("dental.preventive"), routine("packages", "premium", "$20", **plus),
+                 routine("dental.comprehensive", "coinsurance", "50%", condition="fillings", **plus)]
+        rule = present.with_packages(lambda o, f: present.dental(o, f, services=True))
+        self.assertEqual(rule("", found)[0][0], "PREV $0")
+
     def test_shows_preventive_and_comprehensive_prices_and_the_yearly_max(self):
         found = [routine("dental.preventive", "coinsurance", "0%"), routine("dental.comprehensive", "coinsurance", "50%"),
                  routine("dental", "max", "$1,000", limit="per year"), routine("dental", "covered", "")]
@@ -1575,6 +1595,14 @@ class WriteTest(unittest.TestCase):
         self.assertIn("; fitting $0; 60-day trial, 3-year warranty, 80 batteries per aid", got[("H_hearing", "H2923-001-0")])
         self.assertIn("Worldwide ER/urgent $130, $250,000 max", got[("I_alt_care_otc_travel", "H2056-003-0")])
         self.assertIn("Worldwide ER $130, urgent care $50", got[("I_alt_care_otc_travel", "H5216-455-0")])
+
+    def test_version_25_shows_a_comprehensive_dental_range_from_per_service_prices(self):
+        self.assertEqual(present.VERSIONS[25], {})
+        data = years.data_dir(YEAR)
+        rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.layer_rows(data, v)} for v in (24, 25)}
+        self.assertEqual({(r[1], r[2]) for r in rows[24] ^ rows[25]}, {("F_dental", "H1036-306-0")})
+        got = present.lines(data, "F_dental", sheet="dvha", version=25)["H1036-306-0"][0][0]
+        self.assertTrue(got.startswith("PREV $0; COMP $0-50%; max $4,000/year"))
 
     def test_version_24_shows_rollover_otc_uses_eyewear_pairs_networks_and_no_dental_maximum(self):
         self.assertEqual(present.VERSIONS[24], {})
