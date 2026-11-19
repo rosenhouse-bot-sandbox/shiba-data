@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-108.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 94 routine eyewear row: '1 pair of standard lenses and frames every 2 years' (or contacts instead) through the UnitedHealthcare Vision network. That is one pair of glasses every 2 years, a supplemental benefit in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2595,
+  "output_tokens": 219,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

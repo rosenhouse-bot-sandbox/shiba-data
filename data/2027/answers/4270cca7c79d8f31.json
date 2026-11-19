@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-150.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 80 OTC credit row: the $40 monthly credit is described as 'your OTC credit expiring monthly', so unused credit does not carry over. Coverage is limited to in-network locations.\"}]\n```",
+ "usage": {
+  "input_tokens": 2707,
+  "output_tokens": 344,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-135.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 97 does say the OTC credit can be used on home and bath safety devices. But the same credit also pays for healthy food for members who qualify under SSBCI (certain chronic conditions). The fact must list every such thing and add those members to the condition, so this fact is incomplete.\"}]\n```",
+ "usage": {
+  "input_tokens": 2754,
+  "output_tokens": 330,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

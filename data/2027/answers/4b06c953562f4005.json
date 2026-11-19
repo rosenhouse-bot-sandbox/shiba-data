@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-112.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 70 routine vision hardware row: Vision Service Plan (VSP) providers must be used to receive the in-network benefits for routine vision exam and hardware services.\"}]\n```",
+ "usage": {
+  "input_tokens": 2870,
+  "output_tokens": 175,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

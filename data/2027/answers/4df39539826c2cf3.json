@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-111.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 61 says Vision Service Plan (VSP) providers must be used to get in-network benefits for all routine vision services (exam and hardware), so VSP is the supplemental vision provider network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2832,
+  "output_tokens": 174,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

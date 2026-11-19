@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-114.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 87 lists the Eyewear Benefit as 1 per calendar year. It covers a frame and pair of lenses, or contacts, and has amounts in both the in-network and out-of-network columns, so 1 pair of glasses per calendar year in any network holds.\"}]\n```",
+ "usage": {
+  "input_tokens": 2757,
+  "output_tokens": 598,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
