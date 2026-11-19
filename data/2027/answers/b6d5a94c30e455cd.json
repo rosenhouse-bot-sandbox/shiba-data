@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-61.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 44, Dental services (continued), non-Medicare covered dental: 'This dental benefit uses the Aetna Dental PPO Network for covered services,' and out-of-network providers are not covered. This matches a supplemental dental provider network fact.\"}]\n```",
+ "usage": {
+  "input_tokens": 3649,
+  "output_tokens": 213,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

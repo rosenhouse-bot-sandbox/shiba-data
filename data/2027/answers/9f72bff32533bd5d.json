@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-9.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 9 dental list: 50% of the cost for emergency treatment for pain, necessary general anesthesia with covered service, up to 2 per year. The condition is copied verbatim. It is a supplemental comprehensive benefit, and the row names no network, so in-network applies.\"}]\n```",
+ "usage": {
+  "input_tokens": 4207,
+  "output_tokens": 664,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
