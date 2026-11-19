@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-238.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 109, under Worldwide Urgently Needed Services (services outside the United States), the cost-share for urgently needed services worldwide is a $115 copay. This is a supplemental benefit, so it is outside_us, network any, with the condition urgently needed services.\"}]\n```",
+ "usage": {
+  "input_tokens": 2495,
+  "output_tokens": 312,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

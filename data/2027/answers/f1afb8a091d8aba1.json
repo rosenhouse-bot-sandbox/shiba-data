@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-171.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 79 hearing aid row lists '3-year extended warranty' as part of an in-network hearing aid purchase. This is a covered supplemental item for 3 years.\"}]\n```",
+ "usage": {
+  "input_tokens": 3285,
+  "output_tokens": 152,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

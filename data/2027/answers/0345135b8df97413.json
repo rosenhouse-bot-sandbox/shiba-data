@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-78.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 6, Value Plan column, 'Other eyewear' row: 'Not covered unless you sign up for optional benefits (see Advantage Plus for details).' The base plan does not cover routine eyewear, so supplemental not_covered with no package is correct.\"}]\n```",
+ "usage": {
+  "input_tokens": 2538,
+  "output_tokens": 345,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

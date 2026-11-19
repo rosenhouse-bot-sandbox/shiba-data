@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-219.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 51 'Fitting-evaluation(s) for hearing aids' row says 'Unlimited visits every year' with in-network coverage. No count is given, so it is a supplemental covered fact with condition fitting/evaluation.\"}]\n```",
+ "usage": {
+  "input_tokens": 3266,
+  "output_tokens": 308,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

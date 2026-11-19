@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-117.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 75 lists what a hearing aid purchase includes: '80 batteries per aid for non-rechargeable models'. This is the supplemental TruHearing hearing aid benefit, in network. The batteries condition and the '80 batteries per aid' limit match the task's own example format. The non-rechargeable qualifier is implied by that format.\"}]\n```",
+ "usage": {
+  "input_tokens": 3391,
+  "output_tokens": 391,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

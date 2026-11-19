@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-199.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 73 supplemental hearing aid row says the benefit includes a 3-year warranty including loss and damage. It is in the hearing services section, which applies in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3011,
+  "output_tokens": 238,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

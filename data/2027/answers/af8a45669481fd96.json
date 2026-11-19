@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-177.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 85, Mandatory Supplemental Hearing Benefit: the in-network hearing aid purchase includes a '60-day trial period'. This is a supplemental, in-network hearing aid fact with no package, and it matches every field.\"}]\n```",
+ "usage": {
+  "input_tokens": 3619,
+  "output_tokens": 205,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

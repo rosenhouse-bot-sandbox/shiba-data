@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-149.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 48, routine hearing aids row: the TruHearing hearing aid purchase includes a '3-year full manufacturer warranty'. This is a supplemental benefit, and the purchase is through TruHearing, which is in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3842,
+  "output_tokens": 239,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-81.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 79 hearing aid purchase list says '3 years of batteries per non-rechargeable aid (up to 60 cells per ear per year)', which matches the in-network supplemental batteries fact and its limit.\"}]\n```",
+ "usage": {
+  "input_tokens": 3734,
+  "output_tokens": 355,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
