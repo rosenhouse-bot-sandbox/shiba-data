@@ -600,6 +600,17 @@ def eyewear_pairs(found):
     return "; ".join(parts), cited
 
 
+@unless("it is not a routine exam maximum")
+def exam_max_ok(f):
+    return routine(f) and f["cost_kind"] == "max" and not f["provider_tier"]
+
+
+def exam_max(found):
+    """"exam max $75/year" from the best source's routine in-network eye exam maximum."""
+    got = best(found, "vision.exam", "any", exam_max_ok)
+    return (f"exam max {show(got)}{per(got)}", got) if got and per(got) else ("", [])
+
+
 def no_maximum(found):
     """"no annual max" when the best source says the plan's dental coverage has none and no fact gives one."""
     got = [f for f in details_of(found, "dental", "no annual maximum") if f["cost_kind"] == "covered"]
@@ -1241,12 +1252,12 @@ def part_b_giveback(found):
     return [f"Part B giveback {value}" + (f"/{renews(paid)}" if renews(paid) else "")], paid
 
 
-def extra_benefits(organization, found, prices=False, programs=False, alike=False, part_b=False):
+def extra_benefits(organization, found, prices=False, programs=False, alike=False, part_b=False, anywhere=False):
     """Names fitness, meals and transportation for every member, then shows routine foot care, a fitness allowance,
     a card for members with chronic conditions, and the programs after a heart-failure hospital stay.
     With prices, it shows the fitness and meals copays and how many meals. With programs, it names the fitness program
     and then each other program for every member. With alike, it merges programs as other_programs does.
-    With part_b, it starts with the Part B giveback."""
+    With part_b, it starts with the Part B giveback. See other_programs for anywhere."""
     parts, cited = part_b_giveback(found) if part_b else ([], [])
     for name, leaf in (("Fitness", "fitness"), ("Meals", "meals"), ("Transportation", "extras.transportation")):
         got = top(exactly(found, (leaf,), lambda f: extra(f) and offers(f),
@@ -1269,7 +1280,7 @@ def extra_benefits(organization, found, prices=False, programs=False, alike=Fals
             cited += got
         cited += naming
     if programs:
-        got = other_programs(found, alike)
+        got = other_programs(found, alike, anywhere)
         parts += got[0]
         cited += got[1]
     got = foot_care(found)
@@ -1309,20 +1320,26 @@ def program_name(pool):
     return " ".join(words[:-1] if words[-1:] == ["program"] else words)
 
 
-def other_programs(found, alike=False):
+def other_programs(found, alike=False, anywhere=False):
     """Names each other program for every member, with its price and how often an allowance renews. Each program's
     best source gives it, since a page may name only some programs. With alike, programs whose names match
-    (program_name) are one program, shown by its best source's shortest name."""
-    programs = exactly(found, ("other_supplemental",), lambda f: everyone(f) and f["pool"] and f["cost_kind"] in DOT_KINDS,
-                       "it is not a named program that every member has")
+    (program_name) are one program, shown by its best source's shortest name. With anywhere, it also names programs
+    that only pay out of network, such as a travel benefit, with a yearly maximum when nothing else gives a price."""
+    def ok(f):
+        return everyone(dict(f, network="in") if anywhere else f) and f["pool"] and f["cost_kind"] in DOT_KINDS
+    programs = exactly(found, ("other_supplemental",), ok, "it is not a named program that every member has")
     key = program_name if alike else (lambda pool: pool)
     shown = []
     for name in {key(f["pool"]) for f in programs}:
-        got = top([f for f in programs if key(f["pool"]) == name])
+        named = [f for f in programs if key(f["pool"]) == name]
+        named = [f for f in named if f["network"] != "out"] or named
+        got = top(named)
         allowances = [f for f in got if f["cost_kind"] == "allowance"]
         priced = allowances or [f for f in got if f["cost_kind"] in PRICED]
-        price = f" {show(priced)}" if priced else ""
-        period = f"/{renews(allowances)}" if allowances and renews(allowances) else ""
+        caps = top([f for f in named if f["cost_kind"] == "max" and renews([f])]) if anywhere and not priced else []
+        price = f" {show(priced)}" if priced else f" max {show(caps)}" if caps else ""
+        period = f"/{renews(allowances or caps)}" if (allowances or caps) and renews(allowances or caps) else ""
+        priced = priced or caps
         label = min((f["pool"] for f in got), key=lambda pool: (len(pool), pool)).replace(chr(0x2011), "-")
         shown.append((label, f"{label}{price}{period}", priced or got))
     shown.sort(key=lambda shown_: shown_[:2])
@@ -1465,13 +1482,13 @@ DVHA = {"C_premium": plan_premium, "D_premium_full_extra_help": extra_help_premi
             dental, no_maximum, dental_deductible, DENTAL_OON, preventive_limits, provider_network("dental"))),
             ("no COMP", "dental.comprehensive")), "dental"),
         "G_vision": or_none(with_lacking(with_packages(with_details(
-            vision, eyewear_pairs, VISION_OON, provider_network("vision"))), ("no eyewear allowance", "vision.eyewear")),
-            "vision"),
+            vision, exam_max, eyewear_pairs, VISION_OON, provider_network("vision"))),
+            ("no eyewear allowance", "vision.eyewear")), "vision"),
         "H_hearing": dvha_hearing(exam_renews=True, details=(hearing_details,)),
         "I_alt_care_otc_travel": lambda o, found: alt_care_otc_travel(o, found, telehealth=True, food=True, rates=True,
                                                                       none=True, urgent_care=True, details=True),
         "J_extra_benefits": lambda o, found: extra_benefits(o, found, prices=True, programs=True, alike=True,
-                                                            part_b=True)}
+                                                            part_b=True, anywhere=True)}
 DVHA_LEAVES = {"C_premium": ("plan_premium",), "D_premium_full_extra_help": ("plan_premium", "part_d_deductible"),
                "E_optional_packages": ("packages",), "F_dental": ("dental",),
                "G_vision": ("vision",), "H_hearing": ("hearing",),
@@ -1544,7 +1561,10 @@ EARLIER_RULES = {
                                ("no COMP", "dental.comprehensive")), "dental"))),
     ("dvha", "G_vision"): ((19, vision), (22, with_packages(with_details(vision, VISION_OON))),
                            (24, or_none(with_lacking(with_packages(with_details(vision, VISION_OON)),
-                                                     ("no eyewear allowance", "vision.eyewear")), "vision"))),
+                                                     ("no eyewear allowance", "vision.eyewear")), "vision")),
+                           (27, or_none(with_lacking(with_packages(with_details(
+                               vision, eyewear_pairs, VISION_OON, provider_network("vision"))),
+                               ("no eyewear allowance", "vision.eyewear")), "vision"))),
     ("dvha", "H_hearing"): (
         (19, hearing), (22, with_packages(with_details(lambda o, found: hearing(o, found, each_price=True), HEARING_OON))),
         (23, dvha_hearing())),
@@ -1557,7 +1577,8 @@ EARLIER_RULES = {
     ("dvha", "J_extra_benefits"): (
         (19, extra_benefits), (20, lambda o, found: extra_benefits(o, found, prices=True)),
         (21, lambda o, found: extra_benefits(o, found, prices=True, programs=True)),
-        (22, lambda o, found: extra_benefits(o, found, prices=True, programs=True, alike=True)))} | {
+        (22, lambda o, found: extra_benefits(o, found, prices=True, programs=True, alike=True)),
+        (27, lambda o, found: extra_benefits(o, found, prices=True, programs=True, alike=True, part_b=True)))} | {
     ("main", column): ((18, rule),) for column, rule in {
         "E_moop": moop, "F_primary_care": visits("office.pcp"), "G_specialist": visits("office.specialist"),
         "H_inpatient": inpatient, "I_outpatient_surgery": outpatient_surgery, "J_outpatient_rehab": outpatient_rehab,
@@ -1712,6 +1733,8 @@ VERSIONS[24] = {}
 VERSIONS[25] = {}
 # Version 26 names the DVHA dental network.
 VERSIONS[26] = {}
+# Version 27 shows a DVHA eye exam maximum and out-of-network travel programs, such as Medicare Explorer.
+VERSIONS[27] = {}
 # The version that first presents each later column. Earlier versions hold its cells.
 SINCE = {("dvha", "C_premium"): 3, ("dvha", "G_vision"): 4, ("dvha", "H_hearing"): 4, ("dvha", "E_optional_packages"): 5,
          ("dvha", "F_dental"): 6, ("dvha", "I_alt_care_otc_travel"): 6, ("dvha", "J_extra_benefits"): 6,
