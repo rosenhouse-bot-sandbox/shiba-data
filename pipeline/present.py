@@ -551,6 +551,62 @@ def exam_ok(f):
     return routine(f) and f["cost_kind"] == "copay" and not f["provider_tier"]
 
 
+def details_of(found, benefit, condition):
+    """The best source's supplemental in-network facts, outside packages, that give a detail of benefit."""
+    return top([f for f in found if f["benefit"] == benefit and f["condition"] == condition
+                and f["covered_by"] == "supplemental" and f["network"] in ("in", "any") and not f["package"]])
+
+
+def provider_network(benefit):
+    """A detail naming the company or network whose providers the plan uses for benefit."""
+    def network(found):
+        got = [f for f in details_of(found, benefit, "provider network") if f["cost_kind"] == "covered" and f["limit"]]
+        if not got:
+            return "", []
+        name = min((f["limit"] for f in got), key=len)
+        short = re.sub(r"^.*\((\w+)\)$", r"\1", name)
+        return (short if re.search(r"network$", short, re.I) else f"{short} network"), [f for f in got if f["limit"] == name]
+    return network
+
+
+YEAR_END = re.compile(r"end of the (?:plan |calendar )?year", re.I)
+
+
+def rollover(found, benefit):
+    """"no rollover" or "rolls over until year-end" when the best source says, and the facts it cites."""
+    got = details_of(found, benefit, "rollover")
+    kinds = {f["cost_kind"] for f in got}
+    if kinds == {"not_covered"}:
+        return "no rollover", got
+    if kinds == {"covered"} and all(YEAR_END.search(f["limit"]) for f in got):
+        return "rolls over until year-end", got
+    return "", []
+
+
+def eyewear_pairs(found):
+    """"1 pair/year" from glasses limits that agree, and whether an unused eyewear allowance rolls over."""
+    got = [f for f in details_of(found, "vision.eyewear", "glasses") if f["cost_kind"] == "visit_limit"]
+    counts = {f["amount"] for f in got}
+    parts, cited = [], []
+    if len(counts) == 1 and per(got):
+        count = counts.pop()
+        parts.append(f"{count} pair{'' if count == '1' else 's'}{per(got)}")
+        cited += got
+    if any(f["benefit"] == "vision.eyewear" and routine(f) and f["cost_kind"] in ("allowance", "max") for f in found):
+        text, says = rollover(found, "vision.eyewear")
+        if text:
+            parts.append(text)
+            cited += says
+    return "; ".join(parts), cited
+
+
+def no_maximum(found):
+    """"no annual max" when the best source says the plan's dental coverage has none and no fact gives one."""
+    got = [f for f in details_of(found, "dental", "no annual maximum") if f["cost_kind"] == "covered"]
+    capped = any(facts.covers("dental", f["benefit"]) and f["cost_kind"] == "max" and everyone(f) for f in found)
+    return ("no annual max", got) if got and not capped else ("", [])
+
+
 # These carriers give one allowance for frames or contacts.
 FRAMES_OR_CONTACTS = ("Regence",)
 
@@ -992,9 +1048,30 @@ SHARERS = ("dental", "vision", "hearing", "fitness")
 FOOD = re.compile(r"food|grocer", re.I)
 
 
-def over_the_counter(found, food=False, none=False):
+def also_pays_for(found, sharers=()):
+    """What the best source says the OTC allowance also pays for, for every member and then for some members, leaving
+    out things that name a sharer."""
+    def things(condition, shown=()):
+        names = {}
+        for f in details_of(found, "otc", condition):
+            if (f["cost_kind"] == "covered" and f["limit"] and f["limit"].casefold() not in shown
+                    and not any(re.search(rf"\b{name}", f["limit"], re.I) for name in sharers)):
+                names.setdefault(f["limit"].casefold(), (f["limit"], []))[1].append(f)
+        return names
+    every_member = things("also pays for")
+    some = {}
+    for condition in {f["condition"] for f in found if f["condition"].startswith("also pays for ")}:
+        for key, (name, got) in things(condition, every_member).items():
+            some.setdefault(key, (name, []))[1].extend(got)
+    parts = [f"also for {', '.join(n for n, _ in every_member.values())}"] if every_member else []
+    parts += [f"also for {', '.join(n for n, _ in some.values())} for some members"] if some else []
+    return parts, [f for _, got in (*every_member.values(), *some.values()) for f in got]
+
+
+def over_the_counter(found, food=False, none=False, details=False):
     """The OTC allowance, and the benefits that share it when the same allowance pays for them.
-    With food, it says when any source says the allowance also pays for food. With none, it says when the plan lacks OTC."""
+    With food, it says when any source says the allowance also pays for food. With none, it says when the plan lacks OTC.
+    With details, it says whether the allowance rolls over and what else it pays for, instead of saying food."""
     allowances = keep(exactly(found, ("otc",), everyone, "it is not a supplemental in-network benefit for every member"),
                       lambda f: f["cost_kind"] == "allowance", lambda f: "it is not an allowance")
     got = top(allowances)
@@ -1004,6 +1081,7 @@ def over_the_counter(found, food=False, none=False):
     if not got:
         return [], []
     for_food = [f for f in allowances if FOOD.search(f["pool"] + f["quotes"])][:1] if food else []
+    for_food = [] if details and also_pays_for(found)[0] else for_food
     label = "OTC and food" if for_food else "OTC"
     got += [f for f in for_food if f not in got]
     period_ = renews(got)
@@ -1015,11 +1093,14 @@ def over_the_counter(found, food=False, none=False):
     sharers = top([f for f in found if f["pool"] in pools and f["benefit"] != "otc" and everyone(f)
                    and f["cost_kind"] == "allowance" and {facts.number(a) for a in amounts([f])} == amount
                    and every(f) == period_])
-    if not sharers:
-        return [f"{label} {show(got)}/{period_}"], got
     names = [n for n in SHARERS if any(facts.covers(n, f["benefit"]) for f in sharers)]
-    return [f"{label} from {show(got)}/{period_} card shared with {', '.join(names)}"], got + sharers
-
+    text, says = rollover(found, "otc") if details else ("", [])
+    also, also_cited = also_pays_for(found, names) if details else ([], [])
+    note = f" ({'; '.join(([text] if text else []) + also)})" if text or also else ""
+    if not sharers:
+        return [f"{label} {show(got)}/{period_}{note}"], got + says + also_cited
+    return ([f"{label} from {show(got)}/{period_} card shared with {', '.join(names)}{note}"],
+            got + sharers + says + also_cited)
 
 def urgent(f):
     return all(re.search(r"urgent", q, re.I) and not re.search(r"emergenc", q, re.I) for q in json.loads(f["quotes"]))
@@ -1082,14 +1163,15 @@ def virtual_visits(found):
     return ([f"Telehealth {show(prices)}"] if prices else []), prices
 
 
-def alt_care_otc_travel(organization, found, telehealth=False, food=False, rates=False, none=False, urgent_care=False):
+def alt_care_otc_travel(organization, found, telehealth=False, food=False, rates=False, none=False, urgent_care=False,
+                        details=False):
     """Shows routine acupuncture, chiropractic, massage and naturopathy, the OTC allowance, and worldwide emergency
     care, and with telehealth, virtual visit prices. With food, it says when the OTC allowance also pays for food.
-    See alt_care for rates, over_the_counter for none and worldwide for urgent_care. A part the facts do not fully
+    See alt_care for rates, over_the_counter for none and details and worldwide for urgent_care. A part the facts do not fully
     give leaves the cell blank."""
     parts, cited = [], []
     for name, part in (("alt care", lambda found: alt_care(found, rates)),
-                       ("over the counter", lambda found: over_the_counter(found, food, none)),
+                       ("over the counter", lambda found: over_the_counter(found, food, none, details)),
                        ("worldwide", lambda found: worldwide(found, urgent_care))) + (
                            (("virtual visits", virtual_visits),) if telehealth else ()):
         got = part(found)
@@ -1372,13 +1454,15 @@ VISION_OON = out_of_network(("exam", "vision.exam"), ("eyewear", "vision.eyewear
 HEARING_OON = out_of_network(("exam", "hearing.exam"), ("aids", "hearing.aids"))
 DVHA = {"C_premium": plan_premium, "D_premium_full_extra_help": extra_help_premium,
         "E_optional_packages": lambda o, found: optional_packages(o, found, details=False),
-        "F_dental": or_none(with_lacking(with_packages(with_details(dental, dental_deductible, DENTAL_OON, preventive_limits)),
-                                         ("no COMP", "dental.comprehensive")), "dental"),
-        "G_vision": or_none(with_lacking(with_packages(with_details(vision, VISION_OON)),
-                                         ("no eyewear allowance", "vision.eyewear")), "vision"),
+        "F_dental": or_none(with_lacking(with_packages(with_details(
+            dental, no_maximum, dental_deductible, DENTAL_OON, preventive_limits)), ("no COMP", "dental.comprehensive")),
+            "dental"),
+        "G_vision": or_none(with_lacking(with_packages(with_details(
+            vision, eyewear_pairs, VISION_OON, provider_network("vision"))), ("no eyewear allowance", "vision.eyewear")),
+            "vision"),
         "H_hearing": dvha_hearing(exam_renews=True, details=(hearing_details,)),
         "I_alt_care_otc_travel": lambda o, found: alt_care_otc_travel(o, found, telehealth=True, food=True, rates=True,
-                                                                      none=True, urgent_care=True),
+                                                                      none=True, urgent_care=True, details=True),
         "J_extra_benefits": lambda o, found: extra_benefits(o, found, prices=True, programs=True, alike=True,
                                                             part_b=True)}
 DVHA_LEAVES = {"C_premium": ("plan_premium",), "D_premium_full_extra_help": ("plan_premium", "part_d_deductible"),
@@ -1437,15 +1521,22 @@ EARLIER_RULES = {
     ("dvha", "E_optional_packages"): ((17, lambda o, found: optional_packages(o, found, allowances=False)),
                                       (19, optional_packages)),
     ("dvha", "F_dental"): ((19, dental), (21, with_packages(with_details(dental, dental_deductible, DENTAL_OON))),
-                           (22, with_packages(with_details(dental, dental_deductible, DENTAL_OON, preventive_limits)))),
-    ("dvha", "G_vision"): ((19, vision), (22, with_packages(with_details(vision, VISION_OON)))),
+                           (22, with_packages(with_details(dental, dental_deductible, DENTAL_OON, preventive_limits))),
+                           (24, or_none(with_lacking(with_packages(with_details(
+                               dental, dental_deductible, DENTAL_OON, preventive_limits)),
+                               ("no COMP", "dental.comprehensive")), "dental"))),
+    ("dvha", "G_vision"): ((19, vision), (22, with_packages(with_details(vision, VISION_OON))),
+                           (24, or_none(with_lacking(with_packages(with_details(vision, VISION_OON)),
+                                                     ("no eyewear allowance", "vision.eyewear")), "vision"))),
     ("dvha", "H_hearing"): (
         (19, hearing), (22, with_packages(with_details(lambda o, found: hearing(o, found, each_price=True), HEARING_OON))),
         (23, dvha_hearing())),
     ("dvha", "I_alt_care_otc_travel"): (
         (19, alt_care_otc_travel), (20, lambda o, found: alt_care_otc_travel(o, found, telehealth=True)),
         (22, lambda o, found: alt_care_otc_travel(o, found, telehealth=True, food=True)),
-        (23, lambda o, found: alt_care_otc_travel(o, found, telehealth=True, food=True, rates=True, none=True))),
+        (23, lambda o, found: alt_care_otc_travel(o, found, telehealth=True, food=True, rates=True, none=True)),
+        (24, lambda o, found: alt_care_otc_travel(o, found, telehealth=True, food=True, rates=True, none=True,
+                                                  urgent_care=True))),
     ("dvha", "J_extra_benefits"): (
         (19, extra_benefits), (20, lambda o, found: extra_benefits(o, found, prices=True)),
         (21, lambda o, found: extra_benefits(o, found, prices=True, programs=True)),
@@ -1597,6 +1688,9 @@ VERSIONS[22] = {}
 # Version 23 holds no cell. It shows worldwide urgent care, how often the hearing exam renews, hearing aid fittings and
 # follow-ups, and the trial, warranty and batteries that come with an aid.
 VERSIONS[23] = {}
+# Version 24 shows allowance rollover, what the OTC card also pays for, eyewear pairs, the vision network and "no annual
+# max" on the DVHA sheet.
+VERSIONS[24] = {}
 # The version that first presents each later column. Earlier versions hold its cells.
 SINCE = {("dvha", "C_premium"): 3, ("dvha", "G_vision"): 4, ("dvha", "H_hearing"): 4, ("dvha", "E_optional_packages"): 5,
          ("dvha", "F_dental"): 6, ("dvha", "I_alt_care_otc_travel"): 6, ("dvha", "J_extra_benefits"): 6,
