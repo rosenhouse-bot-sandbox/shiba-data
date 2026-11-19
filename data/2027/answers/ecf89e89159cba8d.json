@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-66.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 104, in the routine (non-Medicare) dental section for this plan, says the dental plan offers access to the UHC Dental National Medicare Advantage Network. That is the only network named.\"}]\n```",
+ "usage": {
+  "input_tokens": 3515,
+  "output_tokens": 268,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

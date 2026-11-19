@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-73.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 83, in-network providers section: Mandatory Supplemental Dental benefits are provided through the HumanaDental Medicare Network. That is the only network named, it is supplemental dental, and it is in-network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3751,
+  "output_tokens": 311,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

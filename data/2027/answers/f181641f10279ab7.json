@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-15.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 9 dental list, in the comprehensive services after fillings and root canals, with no network named so in network: '50% of the cost for scaling for moderate inflammation up to 1 per year.' Plan, coinsurance, condition and limit all match.\"}]\n```",
+ "usage": {
+  "input_tokens": 4195,
+  "output_tokens": 667,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
