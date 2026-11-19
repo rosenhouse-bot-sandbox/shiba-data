@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-116.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 21 lists 'Travel Coverage': the PPO national network gives in-network coverage across the country. No amount is stated, so it is an other_supplemental covered fact with pool 'Travel Coverage'.\"}]\n```",
+ "usage": {
+  "input_tokens": 2441,
+  "output_tokens": 253,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

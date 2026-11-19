@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-aca9d3510177adcd.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 69 does give up to 36 sessions per episode. But the condition leaves out part of the eligibility. Members also need HFrEF, or heart failure plus an additional condition, besides a heart failure hospitalization within 30 days.\"},\n{\"id\": 1, \"ok\": false, \"reason\": \"Page 69 does give a $0 in-network copayment for up to 36 sessions per episode. But the condition misstates eligibility. It leaves out the HFrEF or additional-condition requirement and the 30-day window.\"},\n{\"id\": 2, \"ok\": false, \"reason\": \"Page 98 only gives the Nurse Advice Line as a number to call for information about care management programs. It does not present it as a covered benefit, and it says nothing to support 'any' network.\"}]\n```",
+ "usage": {
+  "input_tokens": 4259,
+  "output_tokens": 848,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

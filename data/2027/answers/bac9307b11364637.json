@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "2af2a9f1fd104b7f.md",
+ "reply": "```json\n[{\"plan_id\": \"H5216-455-0\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"pool\": \"Travel Coverage\", \"page\": 17,\n  \"quotes\": [\"Travel Coverage\", \"The PPO national network gives you\"], \"note\": \"The document describes the PPO national network under the heading Travel Coverage. Either name could serve as the pool.\"},\n {\"plan_id\": \"H5216-455-0\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\",\n  \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"pool\": \"Rewards and Incentives - Go365® by Humana\", \"page\": 17,\n  \"quotes\": [\"Rewards and Incentives - Go365® by\", \"rewarded with Go365 Plus.\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 2904,
+  "output_tokens": 732,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

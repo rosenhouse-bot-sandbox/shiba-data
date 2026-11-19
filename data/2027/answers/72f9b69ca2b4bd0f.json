@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "29166053e638f7e6.md",
+ "reply": "```json\n[{\"plan_id\": \"H1036-317-0\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"pool\": \"Rewards and Incentives - Go365® by Humana\", \"page\": 17, \"quotes\": [\"Complete eligible healthy activities, like preventive screenings and exams, and get rewarded with Go365 Advanced.\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 2626,
+  "output_tokens": 484,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

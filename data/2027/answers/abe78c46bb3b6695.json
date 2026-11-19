@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-107.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 10 says members get care at in-network costs from any provider in the UnitedHealthcare® Medicare National Network. This is the national network fact the rules call for: other_supplemental, covered, with that name as pool.\"}]\n```",
+ "usage": {
+  "input_tokens": 2311,
+  "output_tokens": 250,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-102.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 79 does show a $0 in-network copay for the Virtual Cardiac Recovery Program. But eligibility needs more than a heart failure-related inpatient or observation stay in the past 30 days. The member must also have HFrEF or heart failure with one of the listed additional conditions. The item's condition leaves this out, so it is incomplete and not in the document's words.\"}]\n```",
+ "usage": {
+  "input_tokens": 3024,
+  "output_tokens": 589,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

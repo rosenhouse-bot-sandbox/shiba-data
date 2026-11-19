@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-50159487a52ccddf.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 14 PERS row, ATRIO Freedom (H7006021) column: $0 copay for wearable medical alert system and monitoring through LifeStation.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 14 PERS row, ATRIO Choice Rx (H7006018) column: $0 copay for wearable medical alert system and monitoring through LifeStation.\"}]\n```",
+ "usage": {
+  "input_tokens": 2946,
+  "output_tokens": 221,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

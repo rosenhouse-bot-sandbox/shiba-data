@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-127.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 69 Virtual Cardiac Recovery Program row: In-Network $0 copayment, up to 36 sessions per episode. The condition copies the eligibility wording but leaves out the extra requirement of HFrEF or heart failure with an additional condition.\"}]\n```",
+ "usage": {
+  "input_tokens": 2944,
+  "output_tokens": 760,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
