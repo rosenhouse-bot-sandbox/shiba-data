@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-101.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 63, In-Network, Advanced Imaging Services: $345 copayment for Outpatient Hospital. This matches the plan, benefit, setting and amount.\"}]\n```",
+ "usage": {
+  "input_tokens": 2409,
+  "output_tokens": 219,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

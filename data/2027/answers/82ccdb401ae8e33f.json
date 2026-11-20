@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-114.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 90 shows a $500 in-network copay for 'all other' diagnostic radiology 'received in an outpatient setting'. That is not the same as an outpatient hospital: the wording could also cover freestanding centers, and the page may continue with other settings. The $500 also excludes diagnostic mammograms, which are $0, so diagnostic radiology is not priced as one group. Too much doubt to confirm.\"}]\n```",
+ "usage": {
+  "input_tokens": 2178,
+  "output_tokens": 557,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

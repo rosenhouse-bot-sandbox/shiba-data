@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-22.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"On page 62 the $145 Outpatient Hospital copay sits under 'Basic Radiological Services', not under an X-ray heading. No X-ray row appears on this page, so labeling it imaging.xray is not supported.\"}]\n```",
+ "usage": {
+  "input_tokens": 2393,
+  "output_tokens": 403,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

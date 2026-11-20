@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-35.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 86, Diagnostic mammograms row for DEVOTED CORE 001 OR (HMO): Specialist's office $0 copay. This is a Medicare-covered outpatient diagnostic test, priced in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2643,
+  "output_tokens": 246,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

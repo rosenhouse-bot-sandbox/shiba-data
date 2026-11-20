@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-105.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 63 does show a $145 copayment for Outpatient Hospital, but under 'Basic Radiological Services'. The page never says that heading means X-rays. X-rays could also fall under 'Diagnostic Procedures and Tests' ($100 at Outpatient Hospital). The link to imaging.xray is too uncertain to publish.\"}]\n```",
+ "usage": {
+  "input_tokens": 2402,
+  "output_tokens": 708,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

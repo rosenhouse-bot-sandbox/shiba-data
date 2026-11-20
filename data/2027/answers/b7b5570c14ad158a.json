@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-188.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 57, Outpatient hospital services row, In-Network: Diagnostic Procedures and Tests is a $100 copayment for Outpatient Hospital, a Medicare-covered service.\"}]\n```",
+ "usage": {
+  "input_tokens": 2495,
+  "output_tokens": 229,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

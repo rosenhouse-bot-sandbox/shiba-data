@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-152.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 86, Genetic Testing row for this plan: 'Office or Freestanding location: 20% coinsurance' (in network). This matches office, coinsurance, 20%. Outpatient hospital is also 20%, so the office fact holds.\"}]\n```",
+ "usage": {
+  "input_tokens": 2486,
+  "output_tokens": 295,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

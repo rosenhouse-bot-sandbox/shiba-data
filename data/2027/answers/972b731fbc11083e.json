@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-91.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 65 Diagnostic Mammography row: $0 copayment, with Specialist's Office listed as a setting. The amount is in the plan's Medicare-covered benefits chart.\"}]\n```",
+ "usage": {
+  "input_tokens": 2257,
+  "output_tokens": 268,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
