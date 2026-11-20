@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-169.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 90, EKGs/ECGs and EEGs sub-row (non-radiological diagnostic tests): Outpatient hospital $95 copay in network. This matches tests.diagnostic at the outpatient hospital. The $0 outpatient hospital line above it belongs to a preceding category.\"}]\n```",
+ "usage": {
+  "input_tokens": 2296,
+  "output_tokens": 717,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

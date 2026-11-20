@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 7 Basic radiological services (X-rays) row: Outpatient hospital $145 copay. Plan H1036-306-0, in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2582,
+  "output_tokens": 76,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

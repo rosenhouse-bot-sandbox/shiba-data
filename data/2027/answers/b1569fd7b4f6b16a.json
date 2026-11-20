@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-207.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 84 does show $0 per visit, per department for Enhanced plan members for sleep studies. But the page names no outpatient hospital setting, so `outpatient_hospital` is not supported; the setting should be `any`.\"}]\n```",
+ "usage": {
+  "input_tokens": 2209,
+  "output_tokens": 201,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

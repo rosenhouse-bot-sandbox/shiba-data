@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-53.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 90, 'All Other Advanced Imaging services' row: 'Outpatient hospital: 50% coinsurance'. The document covers only this HMO C-SNP plan, and the medical benefits chart lists in-network Medicare-covered costs.\"}]\n```",
+ "usage": {
+  "input_tokens": 2288,
+  "output_tokens": 245,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-102.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 64 Diagnostic Mammography row: $0 copayment listed for Freestanding Radiological Facility (also Specialist's Office and Outpatient Hospital). This is a Medicare-covered diagnostic service, and no network label is shown, so it is taken as in-network by default.\"}]\n```",
+ "usage": {
+  "input_tokens": 2222,
+  "output_tokens": 360,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

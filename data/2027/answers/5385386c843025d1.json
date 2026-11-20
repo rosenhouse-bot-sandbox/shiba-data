@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-161.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"The quoted 50% outpatient hospital line sits under a header that is not on page 88, probably sleep studies continued from the prior page. The quote does not clearly support general diagnostic tests, though the EKG/EEG rows elsewhere on the page show the same amount.\"}]\n```",
+ "usage": {
+  "input_tokens": 2479,
+  "output_tokens": 466,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

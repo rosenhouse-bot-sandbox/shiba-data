@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-75.md",
+ "reply": "On page 88, the \"Diagnostic mammograms\" row lists \"Specialist's office: $0 copay\". It sits in the Medicare outpatient diagnostic tests section, which is in network by default. The plan, benefit, setting, network, cost kind and amount all match the page.\n\n```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 88 Diagnostic mammograms row: Specialist's office $0 copay, Medicare outpatient diagnostic benefit, in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2636,
+  "output_tokens": 167,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
