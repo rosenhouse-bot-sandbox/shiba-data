@@ -144,6 +144,7 @@ OUTCOMES = "outcomes.json"
 ZERO_GROUPS = ("part_b_drugs", "medical_deductible")
 NO_COST = re.compile(r"\bno (?:coinsurance|copay|deductible)|does not have a (?:medical )?deductible|no deductible for medical|"
                      r"(?:don[’']t|do not) pay a separate monthly plan premium", re.I)
+NO_COST_37 = re.compile(NO_COST.pattern + r"|\bat no cost\b|\bno annual deductible\b", re.I)
 
 
 def reimbursed(amount, quotes):
@@ -155,7 +156,7 @@ def reimbursed(amount, quotes):
     return any(re.search(rf"\b(?:{rest}% reimburse|reimbursed (?:for )?{rest}%)", q, re.I) for q in quotes)
 
 
-def problem(doc, group, a, pages, quote_ok, zero=ZERO_GROUPS, reimburses=()):
+def problem(doc, group, a, pages, quote_ok, zero=ZERO_GROUPS, reimburses=(), no_cost=NO_COST):
     """Why the answer cannot be a fact, or None, and the fact."""
     if not isinstance(a, dict):
         return "not an object", None
@@ -189,7 +190,7 @@ def problem(doc, group, a, pages, quote_ok, zero=ZERO_GROUPS, reimburses=()):
     if failing:
         return "quote not found exactly once on its page: " + "; ".join(json.dumps(q) for q in failing), None
     missing = numbers(row["amount"]) - sum((numbers(q) for q in a["quotes"]), collections.Counter())
-    if group in zero and missing == collections.Counter({"$0": 1}) and any(NO_COST.search(q) for q in a["quotes"]):
+    if group in zero and missing == collections.Counter({"$0": 1}) and any(no_cost.search(q) for q in a["quotes"]):
         missing = None
     if missing and group in reimburses and reimbursed(row["amount"], a["quotes"]):
         missing = None
@@ -220,11 +221,11 @@ def merged(rows, mode):
     return dict(rows[0], quotes=json.dumps(quotes, ensure_ascii=False), note=notes, **shared)
 
 
-def checks(doc, group, answers, pages, quote_ok, merge=False, zero=ZERO_GROUPS, reimburses=()):
+def checks(doc, group, answers, pages, quote_ok, merge=False, zero=ZERO_GROUPS, reimburses=(), no_cost=NO_COST):
     """Each answer with why it cannot be a fact, or None, and the fact.
     With merge, answers that differ only in quotes and notes become one fact. With merge "limits" or "prices", so do
     prices that differ only in the details LOOSE names."""
-    checked = [(a, *problem(doc, group, a, pages, quote_ok, zero, reimburses)) for a in answers]
+    checked = [(a, *problem(doc, group, a, pages, quote_ok, zero, reimburses, no_cost)) for a in answers]
     clash = set(facts.conflicts([r for _, why, r in checked if not why]))
     rows = {i: merged([r for _, why, r in checked if not why and facts.identity(r) == i], merge) if merge else None
             for i in clash}
@@ -292,10 +293,10 @@ def answers(path):
     return found if isinstance(found, list) else [found]
 
 
-def doc_facts(doc, group, first, retry, pages, quote_ok, merge=False, zero=ZERO_GROUPS, reimburses=()):
+def doc_facts(doc, group, first, retry, pages, quote_ok, merge=False, zero=ZERO_GROUPS, reimburses=(), no_cost=NO_COST):
     """The document's facts from its first answers and any retry answers, the failures to retry, if it needs a retry,
     and each answer's check."""
-    checked = checks(doc, group, first + (retry or []), pages, quote_ok, merge, zero, reimburses)
+    checked = checks(doc, group, first + (retry or []), pages, quote_ok, merge, zero, reimburses, no_cost)
     found, failed = passed(checked)
     return found, (failed if retry is None else []), checked
 
@@ -346,7 +347,7 @@ def reread(work, out_dir, group, plan_ids, known, data=DATA, notes={}, plan_note
 
 
 def extract_facts(work, answers_dir, group, out, data=DATA, merge=False, notes={}, zero=ZERO_GROUPS, plan_notes={},
-                  plan_after={}, reimburses=(), find=()):
+                  plan_after={}, reimburses=(), find=(), no_cost=NO_COST):
     plan_rows, found, retries, outcomes = plans(data), [], 0, []
     for doc in documents(data):
         first = f"{answers_dir}/{doc['id']}.json"
@@ -356,7 +357,7 @@ def extract_facts(work, answers_dir, group, out, data=DATA, merge=False, notes={
         pages = d.pages("layout")
         stated = answers(first)
         got, failed, checked = doc_facts(doc, group, stated, answers(retry) if os.path.exists(retry) else None,
-                                         pages, d.quote_ok, merge, zero, reimburses)
+                                         pages, d.quote_ok, merge, zero, reimburses, no_cost)
         prompts = [prompt_of(f"{answers_dir}/{doc['id']}.md")] * len(stated) + [prompt_of(retry[:-5] + ".md")] * (
             len(checked) - len(stated))
         items = list(range(len(stated))) + list(range(len(checked) - len(stated)))

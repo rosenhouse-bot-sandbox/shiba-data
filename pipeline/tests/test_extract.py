@@ -132,6 +132,16 @@ class GateTest(unittest.TestCase):
         imaging = answer(amount="$0", page=52, quotes=["no coinsurance, copayment, or deductible for flu vaccines"])
         self.assertEqual(len(extract.gate(DOC, "imaging", [imaging], pages, ok_unless_bad)[1]), 1)
 
+    def test_a_version_may_take_at_no_cost_and_no_annual_deductible_as_0(self):
+        pages = {4: "No annual deductible", 30: "Speak with a nurse anytime, at no cost to you"}
+        deductible = answer(benefit="medical_deductible", cost_kind="deductible", amount="$0", page=4,
+                            quotes=["No annual deductible"])
+        nurse = answer(benefit="part_b_drugs", amount="$0", page=30, quotes=["at no cost to you"])
+        for group, a in (("medical_deductible", deductible), ("part_b_drugs", nurse)):
+            for no_cost, passing in ((extract.NO_COST, 0), (extract.NO_COST_37, 1)):
+                self.assertEqual(len(extract.passed(extract.checks(DOC, group, [a], pages, ok_unless_bad,
+                                                                   no_cost=no_cost))[0]), passing, group)
+
     def test_a_version_can_take_a_reimbursement_as_the_rest_of_a_coinsurance(self):
         pages = {63: "you will pay up front and receive 100% reimbursement of your costs. You will be reimbursed 50% for crowns. "
                      "Implants are reimbursed for 40%. Dentures get 1100% reimbursement."}

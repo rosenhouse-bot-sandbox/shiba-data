@@ -540,14 +540,34 @@ class StepTest(StepsTest):
                          {g: plans for g, plans in v35["recheck"].items() if g not in v36["targets"]})
         self.assertIn("There is no coinsurance or copayment", v36["recheck_plan_notes"]["dental"]["H1372-003-0"])
 
+    def test_version_37_points_second_readers_to_hearing_and_dental_details(self):
+        v36, v37 = document_facts.VERSIONS[36], document_facts.VERSIONS[37]
+        changed = dict(recheck=None, recheck_plan_notes=None, recheck_zero=None, recheck_no_cost=None, targets=None)
+        self.assertEqual(dict(v37, **changed), dict(v36, **changed))
+        self.assertEqual(v37["recheck_zero"], ("dental", "other_supplemental"))
+        self.assertIs(v37["recheck_no_cost"], extract.NO_COST_37)
+        for group, plans in v37["targets"].items():
+            self.assertLessEqual(set(plans), set(v37["recheck"][group]), group)
+            self.assertLessEqual(set(plans), set(v37["recheck_plan_notes"][group]), group)
+        self.assertEqual(dict(v37["recheck"], dental=None), dict(v36["recheck"], dental=None))
+        self.assertEqual(v37["recheck"]["dental"][:len(v36["recheck"]["dental"])], v36["recheck"]["dental"])
+        for group, notes in v36["recheck_plan_notes"].items():
+            kept = {p: n for p, n in notes.items() if p not in v37["targets"].get(group, ())}
+            self.assertEqual({p: v37["recheck_plan_notes"][group][p] for p in kept}, kept, group)
+        self.assertTrue(v37["recheck_plan_notes"]["dental"]["H7199-002-0"].startswith(
+            v36["recheck_plan_notes"]["dental"]["H7199-002-0"]))
+        self.assertIn("`condition` `rechargeable`", v37["recheck_plan_notes"]["hearing"]["H2923-009-0"])
+        self.assertIn("`condition` `excludes`", v37["recheck_plan_notes"]["dental"]["H6815-038-0"])
+
     def test_a_second_reader_may_state_0_in_words_as_its_version_says(self):
-        page = "There is no coinsurance or copayment for X-rays."
+        page = "There is no coinsurance or copayment for X-rays, and fluoride is at no cost to you."
         for sub in ("text", "layout"):
             with open(self.work / sub / f"{SHA[:16]}.txt", "a") as f:
                 f.write(f"=====PAGE 2=====\n{page}\n")
         items = self.work / "items" / f"{SHA[:16]}.json"
         items.write_text(json.dumps(json.loads(items.read_text()) | {"2": {"strs": [page], "lefts": [0]}}))
-        free = answer(page=2, network="out", amount="$0", quotes=[page])
+        free = answer(page=2, network="out", amount="$0", quotes=["There is no coinsurance or copayment for X-rays"])
+        fluoride = answer(page=2, network="out", setting="office", amount="$0", quotes=["fluoride is at no cost to you"])
 
         def fake(task_dir, model, effort):
             for task in glob.glob(f"{task_dir}/*.md"):
@@ -555,17 +575,19 @@ class StepTest(StepsTest):
                     items = json.loads(pathlib.Path(f"{task_dir}/items.json").read_text())
                     reply = [{"id": n, "ok": not c["decoy"]} for n, c in enumerate(items)]
                 else:
-                    reply = [free, answer(page=1)]
+                    reply = [free, fluoride, answer(page=1)]
                 with open(task[:-3] + ".json", "w") as f:
                     json.dump(reply, f)
 
         version = dict(groups=("imaging",), reader=("r", "high"), verifier=("v", "low"), recheck={"imaging": ("H1036-306-0",)})
-        for more, found in ((dict(recheck_zero=("imaging",)), True), ({}, False)):
+        in_words = dict(recheck_zero=("imaging",), recheck_no_cost=extract.NO_COST_37)
+        for more, found in ((in_words, ["any", "office"]), (dict(in_words, recheck_no_cost=extract.NO_COST), ["any"]),
+                            ({}, [])):
             with mock.patch.dict(document_facts.VERSIONS, {9: version | more}):
                 document_facts.step(self.data, self.work, self.dir, fake, 9)
             rows = facts.read(self.data / "machine" / "document_facts.csv")
-            self.assertEqual([r["page"] for r in rows if r["amount"] == "$0" and r["network"] == "out"],
-                             ["2"] if found else [], more)
+            self.assertEqual(sorted(r["setting"] for r in rows if r["amount"] == "$0" and r["network"] == "out"),
+                             found, more)
 
     def test_version_34_details_are_valid_facts_that_do_not_offer_a_benefit(self):
         def detail(benefit, condition, cost_kind, amount="", limit=""):

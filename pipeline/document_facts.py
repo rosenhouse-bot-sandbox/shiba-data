@@ -81,7 +81,8 @@ def second_facts(texts, work, group, answer, v, data, plan_ids, known):
         answer(read, *v["reader"])
         extract.extract_facts(texts, read, group, found, data, merging(v, group), notes,
                               zero=zero(v) + v.get("recheck_zero", ()), plan_notes=plan_notes,
-                              plan_after=after, reimburses=v.get("recheck_reimburses", ()), find=find)
+                              plan_after=after, reimburses=v.get("recheck_reimburses", ()), find=find,
+                              no_cost=v.get("recheck_no_cost", extract.NO_COST))
     seen = {tuple(f[c] for c in facts.KEY) for f in known}
 
     def skipped(r):
@@ -387,3 +388,35 @@ VERSIONS[36] = dict(
              "visits": ("H6815-038-0", "H5439-011-0", "H5439-015-0"),
              "other_supplemental": ("H3817-009-1", "H3817-011-1", "H3817-010-0", "H2923-028-3", "H2923-025-0"),
              "vision": ("H5216-428-2",), "dental": ("H1372-003-0",)})
+RECHARGEABLE = ("The extra cost per aid for optional hearing aid rechargeability is a `hearing.aids` copay fact with "
+                "`condition` `rechargeable` and `unit` `per aid`.")
+EXCLUDES = ("Give the dental services the plan says it does not cover, such as implants or cosmetic procedures, as one "
+            "`dental` `not_covered` fact with `condition` `excludes` and every such service in `limit`.")
+WELLCARE_EXCLUDES = EXCLUDES + (" Page {page} of the Evidence of Coverage lists the routine dental care the plan does "
+                                "not cover, such as fillings and implant services.")
+REIMBURSED = ("When members pay for dental care up front and the plan reimburses them, give a `dental` `covered` fact "
+              "with `condition` `reimbursement` and `limit` `pay up front, then reimbursed`.")
+DEVOTED_REIMBURSED = ("H2923-001-0", "H2923-005-0", "H2923-019-0", "H2923-025-0", "H2923-028-3", "H7199-002-0")
+DEVOTED_HEARING = DEVOTED_REIMBURSED + ("H2923-009-0",)
+# Version 37 points second readers to more details the final volunteer sheets show: rechargeable hearing aids, dental
+# exclusions, dental reimbursement and a dental deductible.
+VERSIONS[37] = dict(
+    VERSIONS[36],
+    recheck=VERSIONS[36]["recheck"] | {"dental": VERSIONS[36]["recheck"]["dental"] + tuple(
+        p for p in DEVOTED_REIMBURSED + ("H6815-038-0", "H5439-015-0", "H5439-019-0", "H7006-018-0", "H7006-021-0",
+                                         "H3805-041-0") if p not in VERSIONS[36]["recheck"]["dental"])},
+    recheck_plan_notes=VERSIONS[36]["recheck_plan_notes"] | {
+        "hearing": VERSIONS[36]["recheck_plan_notes"]["hearing"] | dict.fromkeys(DEVOTED_HEARING, RECHARGEABLE),
+        "dental": VERSIONS[36]["recheck_plan_notes"]["dental"] | {
+            p: " ".join(n for n in (VERSIONS[36]["recheck_plan_notes"]["dental"].get(p), REIMBURSED, EXCLUDES) if n)
+            for p in DEVOTED_REIMBURSED} | {
+            "H6815-038-0": WELLCARE_EXCLUDES.format(page=108), "H5439-015-0": WELLCARE_EXCLUDES.format(page=124),
+            "H5439-019-0": WELLCARE_EXCLUDES.format(page=125), "H7006-018-0": EXCLUDES, "H7006-021-0": EXCLUDES,
+            "H3805-041-0": "The Summary of Benefits' dental row says `No annual deductible`: a `dental` deductible $0 "
+                           "fact with `limit` `per year`."}},
+    recheck_zero=VERSIONS[36]["recheck_zero"] + ("other_supplemental",),
+    recheck_no_cost=extract.NO_COST_37,
+    targets={"hearing": DEVOTED_HEARING,
+             "dental": DEVOTED_REIMBURSED + ("H6815-038-0", "H5439-015-0", "H5439-019-0", "H7006-018-0", "H7006-021-0",
+                                             "H3805-041-0"),
+             "other_supplemental": ("H3817-009-1", "H3817-011-1", "H3817-010-0")})
