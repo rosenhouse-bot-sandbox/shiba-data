@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "8980c5c5d9008083.md",
+ "reply": "```json\n[{\"plan_id\": \"H5439-015-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"not_covered\", \"condition\": \"excludes\", \"limit\": \"Fillings, Dentures, Orthodontic services, Endodontics, Periodontics, Implant services, Maxillofacial prosthetics\", \"page\": 124, \"quotes\": [\"Routine dental care, such as:\", \"Fillings\", \"Dentures\", \"Orthodontic services\", \"Endodontics\", \"Periodontics\", \"Implant services\", \"Maxillofacial prosthetics\"], \"note\": \"Page 124 lists these as routine dental care not covered and points to the Dental care services benefit for the routine dental care the plan does cover.\"},\n {\"plan_id\": \"H5439-015-0\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"1\", \"condition\": \"adjunctive general services\", \"limit\": \"every date of service\", \"page\": 64, \"quotes\": [\"Adjunctive general services - 1 every date of service\"], \"note\": \"The frequency rule is listed for preventive services; this comprehensive-service limit is included as a coverage term.\"}]\n```",
+ "usage": {
+  "input_tokens": 9633,
+  "output_tokens": 1067,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

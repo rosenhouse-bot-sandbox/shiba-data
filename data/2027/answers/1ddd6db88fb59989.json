@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-90a4efa6544175a2.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 63, under Comprehensive Dental Care: 'Adjunctive general services - 1 every date of service', with $0 in network.\"},\n{\"id\": 1, \"ok\": true, \"reason\": \"Page 108 lists routine dental care not covered under any condition: fillings, dentures, orthodontic services, endodontics, periodontics, implant services and maxillofacial prosthetics.\"},\n{\"id\": 2, \"ok\": true, \"reason\": \"Page 62, in the preventive dental section (Comprehensive starts on page 63): 'Other Diagnostic dental services - 1 per visit'.\"},\n{\"id\": 3, \"ok\": true, \"reason\": \"Page 62: 'Dental x-rays - 1 set(s) every date of service to 3 years depending on type of service', $0 in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 5615,
+  "output_tokens": 667,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

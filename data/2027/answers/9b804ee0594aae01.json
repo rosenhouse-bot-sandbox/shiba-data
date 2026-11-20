@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "808ccc78793ded84.md",
+ "reply": "```json\n[{\"plan_id\": \"H7199-002-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"any\", \"pool\": \"Dental & Alternative Therapy Allowance\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"0%\", \"page\": 63, \"quotes\": [\"receive 100% reimbursement of your out-of-\"]},\n {\"plan_id\": \"H7199-002-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"any\", \"condition\": \"reimbursement\", \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"limit\": \"pay up front, then reimbursed\", \"page\": 64, \"quotes\": [\"This is a reimbursable benefit.\"]},\n {\"plan_id\": \"H7199-002-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"any\", \"condition\": \"excludes\", \"covered_by\": \"supplemental\", \"cost_kind\": \"not_covered\", \"limit\": \"dental procedure codes not listed under Mandatory Supplemental Dental Benefits; dental savings or membership plans\", \"page\": 64, \"quotes\": [\"Dental savings or membership plans are not covered.\"]}]\n```",
+ "usage": {
+  "input_tokens": 12936,
+  "output_tokens": 1964,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

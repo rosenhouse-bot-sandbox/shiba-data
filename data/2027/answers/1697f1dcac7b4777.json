@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "808ccc78793ded84.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H7199-002-0\", \"benefit\": \"hearing.aids\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"limit\": \"up to two hearing aids per year, one per ear\", \"page\": 79, \"quotes\": [\"Up to two TruHearing®-branded hearing aids every year (one per ear per year).\"], \"note\": \"The count is written as the word 'two', not a digit, so this is given as a covered fact with the count in limit instead of a visit_limit amount.\"}]\n```",
+ "usage": {
+  "input_tokens": 4174,
+  "output_tokens": 687,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

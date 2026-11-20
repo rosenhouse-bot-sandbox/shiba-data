@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "2eb4caa23079d78f.retry.md",
+ "reply": "```json\n[]\n```\n\nBoth facts are left out because no valid quote can show their amounts. On page 10, each of these rows has its service name split across two lines, separated from the cost column. A quote that keeps the service name and the cost together mixes the two columns, which is not allowed. Quoting the cost text alone (\"$0 copay\", \"50% coinsurance\") is not unique on the page.",
+ "usage": {
+  "input_tokens": 4014,
+  "output_tokens": 1291,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
