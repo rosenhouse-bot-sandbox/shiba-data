@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-20.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 62 Diagnostic Mammography row: $0 copayment, with Outpatient Hospital among the listed settings. In network, Medicare-covered.\"}]\n```",
+ "usage": {
+  "input_tokens": 2429,
+  "output_tokens": 196,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

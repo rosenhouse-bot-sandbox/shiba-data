@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-121.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"On page 97, the 'All Other Advanced Imaging services' row lists 'Outpatient hospital: $200 copay'. It sits above the 'Out-of-network' heading, so it is the in-network cost.\"}]\n```",
+ "usage": {
+  "input_tokens": 2220,
+  "output_tokens": 354,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

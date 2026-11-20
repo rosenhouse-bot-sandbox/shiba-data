@@ -9,9 +9,11 @@ import layers  # noqa: E402
 import years  # noqa: E402
 from appendix_b import DVHA_CASES, MAIN_CHART_CASES  # noqa: E402
 
-# Cases whose detail the facts miss.
+# Cases the live sheets do not match.
 MISSED = {
-    ("10", "H6815-038-0", "K_tests_labs"): "the facts take a $200 price for tests that is not a diagnostic test",
+    ("1", "H5216-048-0", "K_tests_labs"): "the cell also shows outpatient hospital prices",
+    ("1", "H5216-048-0", "L_xray_imaging"): "the cell also shows outpatient hospital prices and a $0 mammogram",
+    ("12", "H1036-153-0", "L_xray_imaging"): "the cell also shows outpatient hospital prices and a $0 mammogram",
     ("1", "H5439-015-0", "F_dental"): "the rule does not show that comprehensive care covers only adjunctive services",
     ("1", "H6815-038-0", "F_dental"): "the rule does not show that comprehensive care covers only adjunctive services",
     ("7", "H5216-048-0", "E_optional_packages"): "the facts give no yearly maximum for the package",

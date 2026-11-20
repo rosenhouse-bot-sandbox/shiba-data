@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-6.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 64 Diagnostic Mammography row: $0 copay at a Specialist's Office, Outpatient Hospital and Freestanding Radiological Facility. The freestanding setting is listed, and the cost is in network by default.\"}]\n```",
+ "usage": {
+  "input_tokens": 2213,
+  "output_tokens": 104,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

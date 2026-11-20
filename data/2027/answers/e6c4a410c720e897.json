@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-228.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 74, Medicare Part B drugs row, Medicare Part B Insulin Drugs, In-Network: $35 copay for Medicare-covered Part B insulin drugs, no more than $35 per month supply of each covered insulin product. No setting is named.\"}]\n```",
+ "usage": {
+  "input_tokens": 2302,
+  "output_tokens": 373,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

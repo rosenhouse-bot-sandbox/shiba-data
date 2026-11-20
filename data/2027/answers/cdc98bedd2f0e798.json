@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-67.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 88, CT Scans row in the outpatient diagnostic tests benefit: the in-network outpatient hospital copay is $200 (office or freestanding is $100).\"}]\n```",
+ "usage": {
+  "input_tokens": 2642,
+  "output_tokens": 85,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

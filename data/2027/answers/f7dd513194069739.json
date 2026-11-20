@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-61.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 91: the PET Scans heading is followed by 'Office or Freestanding location: $200 copay, Outpatient hospital: $300 copay'. The same heading-then-cost layout holds for the Ultrasounds and X-rays rows, so the $300 outpatient hospital copay is the in-network, Medicare-covered PET cost.\"}]\n```",
+ "usage": {
+  "input_tokens": 2266,
+  "output_tokens": 356,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

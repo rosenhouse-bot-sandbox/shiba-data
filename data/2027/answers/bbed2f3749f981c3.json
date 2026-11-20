@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-29.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 88 'All Other Advanced Imaging services' row gives a $100 copay for an office or freestanding location, in network. The outpatient hospital cost ($200) is a separate setting.\"}]\n```",
+ "usage": {
+  "input_tokens": 2206,
+  "output_tokens": 226,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

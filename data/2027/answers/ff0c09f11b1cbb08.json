@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-111.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 53 shows $145 copay at Outpatient Hospital under 'Basic Radiological Services'. That heading is not explicitly outpatient X-rays. Humana EOCs often price X-ray services in a separate row, which may continue past this page, so the benefit mapping is uncertain.\"}]\n```",
+ "usage": {
+  "input_tokens": 2325,
+  "output_tokens": 431,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

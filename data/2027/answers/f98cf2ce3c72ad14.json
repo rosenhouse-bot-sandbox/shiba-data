@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-212.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5, Doctor Visits, Primary Care Provider (PCP) row: 'Telehealth: $0 copay', in network. The provider tier names PCP, which separates it from the specialist's $50 telehealth copay.\"}]\n```",
+ "usage": {
+  "input_tokens": 1772,
+  "output_tokens": 371,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

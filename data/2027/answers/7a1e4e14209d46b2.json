@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-135.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 61 Facility Based Sleep Study row: $50 copayment for the Specialist's Office setting ($100 is the Outpatient Hospital setting).\"}]\n```",
+ "usage": {
+  "input_tokens": 2153,
+  "output_tokens": 335,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
