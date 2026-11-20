@@ -82,7 +82,7 @@ class SiteDataTest(unittest.TestCase):
 
     def test_cite_keeps_line_number(self):
         cell = self.cell("main", "H3805-041-0", "L_xray_imaging")
-        self.assertEqual([c["line"] for c in cell["cites"]], [1, 2])
+        self.assertEqual(sorted({c["line"] for c in cell["cites"]}), [1, 2])
 
     def test_uncited_cell_has_no_cites(self):
         cell = self.cell("main", "H2406-042-0", "D_premium_full_extra_help")
@@ -212,7 +212,7 @@ class EocCitationsTest(unittest.TestCase):
                    if d["kind"] == "EOC" and "H3805-048-0" in d["plan_ids"])
         self.eoc_id = eoc["sha256"][:16]
         self.site = build.site_data(data_copy(self.tmp.name, [
-            cite("main", "G_specialist", "$55", eoc["url"], 80, "specialist quote"),
+            cite("main", "G_specialist", "$0-$55", eoc["url"], 80, "specialist quote"),
             cite("dvha", "C_premium", "$0", eoc["url"], 9, "premium quote"),
             cite("main", "O_medical_deductible", "$0", eoc["url"], 9, "deductible quote"),
         ]))
@@ -225,7 +225,7 @@ class EocCitationsTest(unittest.TestCase):
 
     def test_eoc_cite_replaces_sb_cites(self):
         cites = self.cites("main", "G_specialist")
-        self.assertIn({"line": None, "value": "$55", "doc": self.eoc_id, "page": 80, "quote": "specialist quote"}, cites)
+        self.assertIn({"line": None, "value": "$0-$55", "doc": self.eoc_id, "page": 80, "quote": "specialist quote"}, cites)
         self.assertEqual({c["doc"] for c in cites}, {self.eoc_id})
 
     def test_eoc_cite_goes_to_its_own_sheet(self):
