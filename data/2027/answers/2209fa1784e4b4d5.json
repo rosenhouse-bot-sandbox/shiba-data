@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "d370b4b5b3950077.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-005-0\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"any\", \"pool\": \"Dental and Alternative Therapy Allowance\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 7, \"quotes\": [\"For all covered comprehensive dental services, Therapeutic Massage, Routine Acupuncture,\", \"and/or Naturopath services, you will receive 50% reimbursement up to the yearly allowance.\"], \"note\": \"Members are reimbursed 50% of their costs, so they pay 50%.\"},\n {\"plan_id\": \"H2923-005-0\", \"benefit\": \"extras.massage\", \"setting\": \"any\", \"network\": \"any\", \"pool\": \"Dental and Alternative Therapy Allowance\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 7, \"quotes\": [\"For all covered comprehensive dental services, Therapeutic Massage, Routine Acupuncture,\", \"and/or Naturopath services, you will receive 50% reimbursement up to the yearly allowance.\"], \"note\": \"Members are reimbursed 50% of their costs, so they pay 50%.\"},\n {\"plan_id\": \"H2923-005-0\", \"benefit\": \"extras.naturopathy\", \"setting\": \"any\", \"network\": \"any\", \"pool\": \"Dental and Alternative Therapy Allowance\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 7, \"quotes\": [\"For all covered comprehensive dental services, Therapeutic Massage, Routine Acupuncture,\", \"and/or Naturopath services, you will receive 50% reimbursement up to the yearly allowance.\"], \"note\": \"Members are reimbursed 50% of their costs, so they pay 50%.\"}]\n```",
+ "usage": {
+  "input_tokens": 6581,
+  "output_tokens": 1279,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

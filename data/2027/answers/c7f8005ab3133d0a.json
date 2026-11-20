@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "be9deec855112c1d.md",
+ "reply": "```json\n[{\"plan_id\": \"H2923-005-0\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"any\", \"pool\": \"Dental & Alternative Therapy Allowance\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 62, \"quotes\": [\"You will be reimbursed for 50% for your out-of-pocket costs for covered alternative therapies.\"], \"note\": \"The plan reimburses 50%, so the member pays 50%.\"},\n{\"plan_id\": \"H2923-005-0\", \"benefit\": \"extras.massage\", \"setting\": \"any\", \"network\": \"any\", \"pool\": \"Dental & Alternative Therapy Allowance\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 62, \"quotes\": [\"You will be reimbursed for 50% for your out-of-pocket costs for covered alternative therapies.\"], \"note\": \"The plan reimburses 50%, so the member pays 50%.\"},\n{\"plan_id\": \"H2923-005-0\", \"benefit\": \"extras.naturopathy\", \"setting\": \"any\", \"network\": \"any\", \"pool\": \"Dental & Alternative Therapy Allowance\", \"covered_by\": \"supplemental\", \"cost_kind\": \"coinsurance\", \"amount\": \"50%\", \"page\": 62, \"quotes\": [\"You will be reimbursed for 50% for your out-of-pocket costs for covered alternative therapies.\"], \"note\": \"The plan reimburses 50%, so the member pays 50%.\"},\n{\"plan_id\": \"H2923-005-0\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"in\", \"condition\": \"chronic low back pain\", \"covered_by\": \"medicare\", \"cost_kind\": \"visit_limit\", \"amount\": \"12\", \"limit\": \"in 90 days\", \"page\": 53, \"quotes\": [\"Up to 12 visits in 90 days are covered\"]},\n{\"plan_id\": \"H2923-005-0\", \"benefit\": \"extras.acupuncture\", \"setting\": \"any\", \"network\": \"in\", \"condition\": \"chronic low back pain\", \"covered_by\": \"medicare\", \"cost_kind\": \"visit_limit\", \"amount\": \"20\", \"limit\": \"per year\", \"page\": 53, \"quotes\": [\"No more than 20 acupuncture treatments may be administered annually.\"]}]\n```",
+ "usage": {
+  "input_tokens": 15437,
+  "output_tokens": 2004,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

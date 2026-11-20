@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-100.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 57 supplemental dental row: 'There is no coinsurance or copayment for supplemental dental benefits.' This covers the comprehensive services continued on page 58. The row names no network, so it is in network. A $0 copay matches the stated rule.\"}]\n```",
+ "usage": {
+  "input_tokens": 3417,
+  "output_tokens": 389,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-101.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 61, Dental & Alternative Therapy Allowance: routine acupuncture is reimbursed at 50% of cost (a 50% coinsurance) from the shared $1,750 allowance. Any licensed acupuncturist may be used, which supports network 'any'.\"}]\n```",
+ "usage": {
+  "input_tokens": 2969,
+  "output_tokens": 573,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

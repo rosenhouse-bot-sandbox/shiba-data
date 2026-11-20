@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-107.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 62, Dental & Alternative Therapy Allowance: members are reimbursed 50% of out-of-pocket costs for covered alternative therapies, including routine acupuncture, up to the shared $2,000 allowance. Members can see any licensed acupuncturist, which supports network 'any'.\"}]\n```",
+ "usage": {
+  "input_tokens": 2977,
+  "output_tokens": 550,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

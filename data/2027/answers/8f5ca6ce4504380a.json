@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "5d52bb731683d536.retry.md",
+ "reply": "```json\n[{\"plan_id\": \"H3817-009-1\", \"benefit\": \"other_supplemental\", \"setting\": \"any\", \"network\": \"in\", \"pool\": \"24-Hour Nurse Advice Line\", \"covered_by\": \"supplemental\", \"cost_kind\": \"covered\", \"page\": 30, \"quotes\": [\"24-Hour Nurse Advice Line – Speak with a nurse anytime, day or night, at no cost to you\"], \"note\": \"The page says \\\"at no cost to you\\\" (a $0 cost) but shows no dollar figure, so this is stated as covered to pass the quote check.\"}]\n```",
+ "usage": {
+  "input_tokens": 4363,
+  "output_tokens": 457,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

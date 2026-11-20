@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-106.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 62 shows members are reimbursed 50% of their cost for naturopath services, up to the $1,500 Dental & Alternative Therapy Allowance. The page says members can see any licensed naturopath, which supports network 'any'.\"}]\n```",
+ "usage": {
+  "input_tokens": 2975,
+  "output_tokens": 595,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
