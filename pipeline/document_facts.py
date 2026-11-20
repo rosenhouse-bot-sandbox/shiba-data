@@ -79,7 +79,8 @@ def second_facts(texts, work, group, answer, v, data, plan_ids, known):
     extract.reread(texts, read, group, plan_ids, known, data, notes, plan_notes, after, find)
     for _ in range(2):
         answer(read, *v["reader"])
-        extract.extract_facts(texts, read, group, found, data, merging(v, group), notes, zero=zero(v), plan_notes=plan_notes,
+        extract.extract_facts(texts, read, group, found, data, merging(v, group), notes,
+                              zero=zero(v) + v.get("recheck_zero", ()), plan_notes=plan_notes,
                               plan_after=after, reimburses=v.get("recheck_reimburses", ()), find=find)
     seen = {tuple(f[c] for c in facts.KEY) for f in known}
 
@@ -342,3 +343,47 @@ VERSIONS[35] = dict(
     find=VERSIONS[34]["find"] | {"other_supplemental": VERSIONS[34]["find"]["other_supplemental"] + (
         r"personal emergency response", r"medical alert", r"medicare national network", r"ppo national network")},
     targets={"other_supplemental": ALERT_OR_NATIONAL_PLANS})
+REIMBURSED_HALF = ("Page {page} of the Evidence of Coverage says members are reimbursed 50% of their costs for covered "
+                   "alternative therapies, up to the allowance they share with dental: an `extras.acupuncture`, "
+                   "`extras.massage` and `extras.naturopathy` coinsurance 50% fact, each with the allowance's `pool`.")
+WELLCARE_TELEHEALTH = ("The Evidence of Coverage's row for certain telehealth services, on page {page}, gives `$0 copay for "
+                       "virtual visit services performed through your plan's virtual visit provider(s)`: a `visits` copay "
+                       "$0 fact with `setting` `telehealth` and that condition.")
+REGENCE_NURSE_LINE = ("Page {page} of the Evidence of Coverage lists the 24-Hour Nurse Advice Line at no cost to members: "
+                      "an `other_supplemental` copay $0 fact with `pool` `24-Hour Nurse Advice Line`.")
+DEVOTED_DOLLARS = ("The Summary of Benefits' Devoted Dollars row is a rewards program: an `other_supplemental` `covered` "
+                   "fact with `pool` `Devoted Dollars`, and an `allowance` fact with that `pool` for each reward, with "
+                   "the step that earns it in `condition`, such as `yearly check-up with your Primary Care Provider`.")
+# Version 36 points second readers to facts that the final volunteer sheets show and the documents give: Devoted's 50%
+# rate for alternative therapies, Wellcare's $0 virtual visits, Regence's nurse line, Devoted Dollars, a Humana eye exam
+# maximum and AgeRight's $0 comprehensive dental. Its second dental readers may state $0 in words.
+VERSIONS[36] = dict(
+    VERSIONS[35],
+    recheck=VERSIONS[35]["recheck"] | {
+        "extras": ("H2923-001-0", "H2923-005-0", "H2923-025-0"),
+        "visits": ("H6815-038-0", "H5439-011-0", "H5439-015-0"),
+        "other_supplemental": VERSIONS[35]["recheck"]["other_supplemental"] + (
+            "H3817-009-1", "H3817-011-1", "H3817-010-0", "H2923-028-3", "H2923-025-0"),
+        "vision": ("H5216-428-2",)},
+    recheck_plan_notes=VERSIONS[35]["recheck_plan_notes"] | {
+        "extras": {"H2923-001-0": REIMBURSED_HALF.format(page=61), "H2923-005-0": REIMBURSED_HALF.format(page=62),
+                   "H2923-025-0": REIMBURSED_HALF.format(page=62)},
+        "visits": {"H6815-038-0": WELLCARE_TELEHEALTH.format(page=92),
+                   "H5439-011-0": WELLCARE_TELEHEALTH.format(page=104),
+                   "H5439-015-0": WELLCARE_TELEHEALTH.format(page=102)},
+        "other_supplemental": {"H3817-009-1": REGENCE_NURSE_LINE.format(page=30),
+                               "H3817-011-1": REGENCE_NURSE_LINE.format(page=30),
+                               "H3817-010-0": REGENCE_NURSE_LINE.format(page=20),
+                               "H2923-028-3": DEVOTED_DOLLARS, "H2923-025-0": DEVOTED_DOLLARS},
+        "vision": {"H5216-428-2": "Page 13 of the Summary of Benefits gives a `$75 combined maximum benefit coverage "
+                                  "amount per year for routine exam`: a `vision.exam` max $75 fact per year for each "
+                                  "network."},
+        "dental": VERSIONS[35]["recheck_plan_notes"]["dental"] | {
+            "H1372-003-0": "Page 57 of the Evidence of Coverage says `There is no coinsurance or copayment for "
+                           "supplemental dental benefits`, which include the comprehensive services on page 58. Quoting "
+                           "that sentence, give a `dental.comprehensive` copay $0 fact."}},
+    recheck_zero=("dental",),
+    targets={"extras": ("H2923-001-0", "H2923-005-0", "H2923-025-0"),
+             "visits": ("H6815-038-0", "H5439-011-0", "H5439-015-0"),
+             "other_supplemental": ("H3817-009-1", "H3817-011-1", "H3817-010-0", "H2923-028-3", "H2923-025-0"),
+             "vision": ("H5216-428-2",), "dental": ("H1372-003-0",)})

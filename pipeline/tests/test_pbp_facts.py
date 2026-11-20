@@ -304,6 +304,13 @@ class SupplementalFactsTest(unittest.TestCase):
              ("pbp_b4c_copay_amt_wec_min", "pbp_b4c_copay_amt_wec_max")),
             ("emergency", "outside_us", "any", "supplemental", "max", "$25,000", "", ("pbp_b4c_wwc_maxplan_amt",))])
 
+    def test_worldwide_urgent_care_copay(self):
+        plan = {"pbp_b4_emerg_urgent": [dict(pbp_b4c_bendesc_yn="1", pbp_b4c_copay_amt_wuc_min="65.00",
+                                             pbp_b4c_copay_amt_wuc_max="65.00")]}
+        (urgent,) = pbp_facts.supplemental_facts(PLAN, plan)
+        self.assertEqual((urgent["benefit"], urgent["setting"], urgent["condition"], urgent["cost_kind"], urgent["amount"]),
+                         ("emergency", "outside_us", "urgently needed services", "copay", "$65"))
+
     def test_no_worldwide_coverage_gives_no_fact(self):
         plan = {"pbp_b4_emerg_urgent": [dict(pbp_b4c_bendesc_yn="2", pbp_b4c_copay_amt_wec_min="130.00",
                                              pbp_b4c_wwc_maxplan_amt="25000.00")]}
@@ -312,7 +319,7 @@ class SupplementalFactsTest(unittest.TestCase):
     def test_every_supplemental_fact_passes_the_fact_checks(self):
         plan = {"pbp_b16_dental": [dict(pbp_b16b_maxplan_pv_amt="1250.00", pbp_b16b_maxplan_pv_per="3")],
                 "pbp_b4_emerg_urgent": [dict(pbp_b4c_bendesc_yn="1", pbp_b4c_copay_amt_wec_min="0.00",
-                                             pbp_b4c_copay_amt_wec_max="130.00")]}
+                                             pbp_b4c_copay_amt_wec_max="130.00", pbp_b4c_copay_amt_wuc_min="50.00")]}
         for r in pbp_facts.supplemental_facts(PLAN, plan):
             self.assertEqual(facts.check(r), [], r)
 

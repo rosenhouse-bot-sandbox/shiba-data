@@ -1266,14 +1266,16 @@ def virtual_visits(found):
 
 
 def alt_care_otc_travel(organization, found, telehealth=False, food=False, rates=False, none=False, urgent_care=False,
-                        details=False, fitness=False):
+                        details=False, fitness=False, fitness_allowance=False):
     """Shows routine acupuncture, chiropractic, massage and naturopathy, the OTC allowance, and worldwide emergency
     care, and with telehealth, virtual visit prices. With food, it says when the OTC allowance also pays for food.
     See alt_care for rates, over_the_counter for none and details and worldwide for urgent_care. With fitness, it starts
-    with the fitness program and Wellness Bucks. A part the facts do not fully give leaves the cell blank."""
+    with the fitness program and Wellness Bucks. With fitness_allowance, it shows a fitness allowance that no other
+    benefit shares. A part the facts do not fully give leaves the cell blank."""
     parts, cited = [], []
     if fitness:
-        for got in (named_extras(found, ("fitness",), prices=True, programs=True), wellness_bucks(found)):
+        for got in (named_extras(found, ("fitness",), prices=True, programs=True, allowances=fitness_allowance),
+                    wellness_bucks(found)):
             parts += got[0]
             cited += got[1]
     for name, part in (("alt care", lambda found: alt_care(found, rates)),
@@ -1355,9 +1357,9 @@ def wellness_bucks(found):
     return ([f"Wellness Bucks {show(bucks)}/{renews(bucks)}"], bucks) if bucks and renews(bucks) else ([], [])
 
 
-def named_extras(found, leaves, prices=False, programs=False):
+def named_extras(found, leaves, prices=False, programs=False, allowances=False):
     """Names each of fitness, meals and transportation in leaves that every member has. See extra_benefits for
-    prices and programs."""
+    prices and programs. With allowances, a benefit without a copay shows its own allowance and how often it renews."""
     parts, cited = [], []
     for name, leaf in (("Fitness", "fitness"), ("Meals", "meals"), ("Transportation", "extras.transportation")):
         if leaf not in leaves:
@@ -1377,6 +1379,9 @@ def named_extras(found, leaves, prices=False, programs=False):
             count = f", {min(int(f['amount']) for f in meals)} meals" if meals else ""
             parts.append(f"{name} {show(copays)}{count}")
             cited += copays + meals
+        elif allowances and renews(own := [f for f in got if f["cost_kind"] == "allowance" and not f["pool"]]):
+            parts.append(f"{name} {show(own)}/{renews(own)}")
+            cited += own
         else:
             parts.append(name)
             cited += got
@@ -1618,7 +1623,7 @@ DVHA = {"C_premium": plan_premium, "D_premium_full_extra_help": extra_help_premi
         "H_hearing": dvha_hearing(exam_renews=True, details=(hearing_details,)),
         "I_alt_care_otc_travel": lambda o, found: alt_care_otc_travel(o, found, telehealth=True, food=True, rates=True,
                                                                       none=True, urgent_care=True, details=True,
-                                                                      fitness=True),
+                                                                      fitness=True, fitness_allowance=True),
         "J_extra_benefits": lambda o, found: extra_benefits(o, found, prices=True, programs=True, alike=True,
                                                             part_b=True, anywhere=True, part_d=True, fitness=False)}
 DVHA_LEAVES = {"C_premium": ("plan_premium",), "D_premium_full_extra_help": ("plan_premium", "part_d_deductible"),
@@ -1707,7 +1712,9 @@ EARLIER_RULES = {
         (24, lambda o, found: alt_care_otc_travel(o, found, telehealth=True, food=True, rates=True, none=True,
                                                   urgent_care=True)),
         (28, lambda o, found: alt_care_otc_travel(o, found, telehealth=True, food=True, rates=True, none=True,
-                                                  urgent_care=True, details=True))),
+                                                  urgent_care=True, details=True)),
+        (30, lambda o, found: alt_care_otc_travel(o, found, telehealth=True, food=True, rates=True, none=True,
+                                                  urgent_care=True, details=True, fitness=True))),
     ("dvha", "J_extra_benefits"): (
         (19, extra_benefits), (20, lambda o, found: extra_benefits(o, found, prices=True)),
         (21, lambda o, found: extra_benefits(o, found, prices=True, programs=True)),
@@ -1876,6 +1883,8 @@ VERSIONS[27] = {}
 VERSIONS[28] = {}
 # Version 29 shows every in-network price for main columns F, G, I, K, L and M.
 VERSIONS[29] = {}
+# Version 30 shows a DVHA fitness allowance, such as ATRIO's gym reimbursement.
+VERSIONS[30] = {}
 # The version that first presents each later column. Earlier versions hold its cells.
 SINCE = {("dvha", "C_premium"): 3, ("dvha", "G_vision"): 4, ("dvha", "H_hearing"): 4, ("dvha", "E_optional_packages"): 5,
          ("dvha", "F_dental"): 6, ("dvha", "I_alt_care_otc_travel"): 6, ("dvha", "J_extra_benefits"): 6,
