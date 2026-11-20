@@ -187,10 +187,12 @@ def supplemental_facts(plan_id, plan):
     er = first(plan, "pbp_b4_emerg_urgent")
     if er.get("pbp_b4c_bendesc_yn") == "1":
         copay = ["pbp_b4c_copay_amt_wec_min", "pbp_b4c_copay_amt_wec_max"]
-        for kind, names in (("copay", copay), ("max", ["pbp_b4c_wwc_maxplan_amt"])):
+        urgent = ["pbp_b4c_copay_amt_wuc_min", "pbp_b4c_copay_amt_wuc_max"]
+        for kind, names, condition in (("copay", copay, ""), ("max", ["pbp_b4c_wwc_maxplan_amt"], ""),
+                                       ("copay", urgent, "urgently needed services")):
             if amount(er, names, money):
                 found.append(fact(plan_id, "emergency", "any", kind, amount(er, names, money), names,
-                                  setting="outside_us", covered_by="supplemental"))
+                                  condition=condition, setting="outside_us", covered_by="supplemental"))
     return found
 
 
