@@ -1672,6 +1672,24 @@ class WriteTest(unittest.TestCase):
         got = present.lines(data, "M_part_b_drugs", sheet="main", version=29)["H2056-018-0"][0][0]
         self.assertEqual(got, "$0-$35 or 20%")
 
+    def test_a_fitness_allowance_of_its_own_shows_with_its_renewal(self):
+        def gym(amount, **more):
+            return fact("fitness", covered_by="supplemental", cost_kind="allowance", amount=amount,
+                        limit="every six months", **more)
+        self.assertEqual(present.named_extras([gym("$120")], ("fitness",), prices=True, allowances=True)[0],
+                         ["Fitness $120/six months"])
+        self.assertEqual(present.named_extras([gym("$120")], ("fitness",), prices=True)[0], ["Fitness"])
+        self.assertEqual(present.named_extras([gym("$150", pool="Wellness Bucks")], ("fitness",), prices=True,
+                                              allowances=True)[0], ["Fitness"])
+
+    def test_version_30_shows_a_fitness_allowance(self):
+        self.assertEqual(present.VERSIONS[30], {})
+        data = years.data_dir(YEAR)
+        got = {v: present.lines(data, "I_alt_care_otc_travel", sheet="dvha", version=v) for v in (29, 30)}
+        self.assertEqual({p for p in got[30] if got[29][p] != got[30][p]}, {"H7006-018-0", "H7006-021-0"})
+        self.assertTrue(got[30]["H7006-018-0"][0][0].startswith("Fitness $120/six months; "))
+        self.assertTrue(got[30]["H7006-021-0"][0][0].startswith("Fitness $100/three months; "))
+
     def test_version_28_moves_fitness_to_alternative_care(self):
         self.assertEqual(present.VERSIONS[28], {})
         data = years.data_dir(YEAR)
