@@ -120,6 +120,34 @@ def winners(found, leaves, settings, ok=usable):
     return got
 
 
+def every_price(found, leaves, settings=None, ok=usable):
+    """Every ok price for the leaves at the settings, or at every setting if settings is (). A leaf with no price of its
+    own or of a narrower benefit takes its broader benefits' prices. A source counts only where no better one has a
+    price."""
+    settings = ANY_SETTING if settings is None else settings
+    got = []
+    for f in screen([f for f in found if any(kin(f["benefit"], leaf) for leaf in leaves)], ok):
+        if not settings or any(facts.covers(f["setting"], s) for s in settings):
+            got.append(f)
+        else:
+            note(f, f"setting {f['setting']!r} is not {' or '.join(map(repr, settings))}")
+    got = keep(got, lambda f: not shadow(f, got), lambda f: f"{shadow(f, got)} prices this benefit at this setting")
+    priced_leaves = {leaf for leaf in leaves for f in got if facts.covers(leaf, f["benefit"])}
+    return keep(got, lambda f: not any(facts.covers(f["benefit"], leaf) and f["benefit"] != leaf for leaf in priced_leaves),
+                lambda f: "a narrower benefit has a price")
+
+
+def shadow(f, found):
+    """The best source above f's that prices f's benefit or a broader one at a setting that covers f's or that f's covers."""
+    return next((g["source"] for g in sorted(found, key=lambda g: RANK[g["source"]])
+                 if RANK[g["source"]] < RANK[f["source"]] and facts.covers(g["benefit"], f["benefit"])
+                 and (facts.covers(g["setting"], f["setting"]) or facts.covers(f["setting"], g["setting"]))), None)
+
+
+def kin(benefit, leaf):
+    return facts.covers(benefit, leaf) or facts.covers(leaf, benefit)
+
+
 def amounts(found):
     return [n for f in found for alternative in f["amount"].split(" or ") for n in alternative.split("-")]
 
@@ -143,6 +171,15 @@ def show(found):
     return span(f"{percents[0]:g}%", f"{percents[-1]:g}%") if percents else ""
 
 
+def show_every(found):
+    """Like show, but "$0-$35 or 20%" when a dollar amount above $0 sits beside a percent."""
+    dollars = sorted(facts.number(a) for a in amounts(found) if a.startswith("$"))
+    percents = sorted(facts.number(a) for a in amounts(found) if a.endswith("%"))
+    if dollars and percents and dollars[-1]:
+        return f"{span(money(dollars[0]), money(dollars[-1]))} or {span(f'{percents[0]:g}%', f'{percents[-1]:g}%')}"
+    return show(found)
+
+
 def xray_imaging(organization, found, mammograms=True):
     """Line 1 is X-rays and line 2 is CT, MRI and PET, each as (value, cited facts). See fields.py.
     Without mammograms, no $0 mammogram counts and Humana X-rays take every office price."""
@@ -164,6 +201,16 @@ def xray_imaging(organization, found, mammograms=True):
         line2 = show(advanced + mammograms)
         advanced += mammograms
     return [(show(xrays), unique(xrays)), (line2, unique(advanced))]
+
+
+def every_xray_and_imaging(organization, found):
+    """Line 1 is every in-network X-ray price and line 2 every CT, MRI, PET and $0 mammogram price, at an office,
+    freestanding facility or outpatient hospital."""
+    xrays = every_price(found, ("imaging.xray",))
+    mammograms = keep(every_price(found, ("imaging.diagnostic.mammogram",)), lambda f: f["amount"] == "$0",
+                      lambda f: "only a $0 mammogram counts")
+    advanced = every_price(found, ("imaging.diagnostic.advanced",)) + mammograms
+    return [(show_every(xrays), xrays), (show_every(advanced), advanced)]
 
 
 TRIPS = ("ambulance.ground", "ambulance.air")
@@ -273,6 +320,18 @@ def any_test(f):
     return priced(f) and not (f["provider_tier"] or ELIGIBILITY.search(f["condition"]))
 
 
+def every_test_and_lab(organization, found):
+    """Shows "tests/labs" from every in-network test, lab and genetic test price at an office, freestanding facility or
+    outpatient hospital, plus AgeRight's $0 mammogram or colonoscopy."""
+    tests = every_price(found, ("tests.diagnostic",), ok=any_test)
+    if tests and "AgeRight" in organization:
+        zeros = winners(found, ["imaging.diagnostic.mammogram"], OFFICES) + [
+            f for s in ("outpatient_hospital", "asc") for f in best(found, "surgery.colonoscopy", s)]
+        tests += [f for f in zeros if f["amount"] == "$0"]
+    tests, labs = unique(tests), every_price(found, ("tests.lab", "tests.genetic"), ok=any_test)
+    return [(f"{show_every(tests)}/{show_every(labs)}" if tests or labs else "", tests + labs)]
+
+
 def tests_labs(organization, found, zero_tests=ZERO_TESTS, lab_settings=OFFICES):
     """Shows "tests/labs". Tests use office and freestanding prices and labs use lab_settings, or else outpatient
     hospital prices."""
@@ -289,7 +348,7 @@ def tests_labs(organization, found, zero_tests=ZERO_TESTS, lab_settings=OFFICES)
             f for s in ("outpatient_hospital", "asc") for f in best(found, "surgery.colonoscopy", s)]
         tests += [f for f in zeros if f["amount"] == "$0"]
     tests, labs = unique(tests), winners(found, ["tests.lab"], lab_settings, any_test)
-    return [(f"{show(tests)}/{show(labs)}" if tests or labs else "", tests + labs)]
+    return [(f"{show_every(tests)}/{show_every(labs)}" if tests or labs else "", tests + labs)]
 
 
 def visit_line(found, setting, network):
@@ -302,14 +361,33 @@ def visit_line(found, setting, network):
     return show(got), got
 
 
-def visits(setting):
-    """Line 1 is in network and line 2 out of network, if the plan prices any visit out of network."""
+VISIT_KINDS = {"office.pcp": re.compile(r"\bPCP\b|primary care", re.I), "office.specialist": re.compile(r"specialist", re.I)}
+
+
+def virtual_kind(f):
+    """The visit setting a telehealth price is for: "" for any visit, or None for something else."""
+    words = f"{f['condition']} {f['provider_tier']}".strip()
+    if not words:
+        return ""
+    kinds = [kind for kind, pattern in VISIT_KINDS.items() if pattern.search(words)]
+    return kinds[0] if len(kinds) == 1 else None
+
+
+def visits(setting, telehealth=False):
+    """Line 1 is in network and line 2 out of network, if the plan prices any visit out of network. With telehealth,
+    line 1 also counts the in-network telehealth visit price."""
     def rule(organization, found):
         out = any(f["benefit"] == "visits" and f["network"] == "out" and priced(f, "out") for f in found)
         if not out:
             keep([f for f in found if facts.covers(f["benefit"], "visits") and f["network"] == "out"], lambda f: False,
                  lambda f: "the plan has no out-of-network visit price")
-        return [visit_line(found, setting, "in"), visit_line(found, setting, "out") if out else ("", [])]
+        line = visit_line(found, setting, "in")
+        if telehealth and line[1]:
+            virtual = keep([f for f in found if f["setting"] == "telehealth" and f["benefit"] == "visits"],
+                           lambda f: priced(f) and virtual_kind(f) in ("", setting),
+                           lambda f: f"it is not a {setting} telehealth price")
+            line = (show_every(line[1] + top(virtual)), line[1] + top(virtual))
+        return [line, visit_line(found, setting, "out") if out else ("", [])]
     return rule
 
 
@@ -386,6 +464,18 @@ def part_b_drugs(organization, found, highest=False):
         return [("", got)]
     low = percents[-1] if highest else percents[0]
     return [(span(f"{low:g}%", f"{percents[-1]:g}%"), got)]
+
+
+@unless("it is not a Part B drug price for every member")
+def any_drug_price(f):
+    """A price for some of the drugs, such as "flu vaccines", but not one for some members only."""
+    return facts.covers("part_b_drugs", f["benefit"]) and any_test(f)
+
+
+def every_drug_price(organization, found):
+    """Shows every Part B drug price, such as "$0-20%" or "$0-$35 or 20%"."""
+    got = every_price(found, ("part_b_drugs",), (), any_drug_price)
+    return [(show_every(got), got)]
 
 
 def deductible_ok(f):
@@ -1475,15 +1565,23 @@ def once(rule):
 ANY_SETTING = OFFICES + ("outpatient_hospital",)
 
 
-# A rule returns the lines of its column. Version 18 presents E-O and Z as SHIBA's final 2027 chart does.
-COLUMNS = {"L_xray_imaging": once(lambda o, found: xray_imaging(o, found, mammograms=False)), "AB_ambulance": ambulance,
-           "I_outpatient_surgery": once(lambda o, found: outpatient_surgery(o, found, zero_low_ends=False)),
-           "F_primary_care": once(visits("office.pcp")), "G_specialist": once(visits("office.specialist")),
+# Version 18 presents E-O and Z as SHIBA's final 2027 chart does. Version 29 shows every in-network price the documents
+# give for these columns.
+CHART_18 = {"L_xray_imaging": once(lambda o, found: xray_imaging(o, found, mammograms=False)),
+            "I_outpatient_surgery": once(lambda o, found: outpatient_surgery(o, found, zero_low_ends=False)),
+            "F_primary_care": once(visits("office.pcp")), "G_specialist": once(visits("office.specialist")),
+            "K_tests_labs": lambda o, found: tests_labs(o, found, zero_tests=("AgeRight",), lab_settings=ANY_SETTING),
+            "M_part_b_drugs": lambda o, found: part_b_drugs(o, found, highest=True)}
+# A rule returns the lines of its column.
+COLUMNS = {"L_xray_imaging": once(every_xray_and_imaging), "AB_ambulance": ambulance,
+           "I_outpatient_surgery": once(outpatient_surgery),
+           "F_primary_care": once(visits("office.pcp", telehealth=True)),
+           "G_specialist": once(visits("office.specialist", telehealth=True)),
            "H_inpatient": lambda o, found: inpatient(o, found, per_stay="per admit"),
            "J_outpatient_rehab": lambda o, found: outpatient_rehab(o, found, settings=ANY_SETTING),
-           "K_tests_labs": lambda o, found: tests_labs(o, found, zero_tests=("AgeRight",), lab_settings=ANY_SETTING),
+           "K_tests_labs": every_test_and_lab,
            "Z_part_b_reduction": lambda o, found: giveback(o, found, dot_only=True),
-           "M_part_b_drugs": lambda o, found: part_b_drugs(o, found, highest=True),
+           "M_part_b_drugs": every_drug_price,
            "O_medical_deductible": lambda o, found: medical_deductible(o, found, chart_wording=True),
            "S_acupuncture": dot("extras.acupuncture"), "T_chiropractic": dot("extras.chiropractic"),
            "V_massage": dot("extras.massage"), "X_transportation": dot("extras.transportation"),
@@ -1617,7 +1715,7 @@ EARLIER_RULES = {
         (27, lambda o, found: extra_benefits(o, found, prices=True, programs=True, alike=True, part_b=True)),
         (28, lambda o, found: extra_benefits(o, found, prices=True, programs=True, alike=True, part_b=True,
                                              anywhere=True, part_d=True)))} | {
-    ("main", column): ((18, rule),) for column, rule in {
+    ("main", column): ((18, rule),) + (((29, CHART_18[column]),) if column in CHART_18 else ()) for column, rule in {
         "E_moop": moop, "F_primary_care": visits("office.pcp"), "G_specialist": visits("office.specialist"),
         "H_inpatient": inpatient, "I_outpatient_surgery": outpatient_surgery, "J_outpatient_rehab": outpatient_rehab,
         "K_tests_labs": tests_labs, "L_xray_imaging": xray_imaging, "M_part_b_drugs": part_b_drugs,
@@ -1776,6 +1874,8 @@ VERSIONS[26] = {}
 VERSIONS[27] = {}
 # Version 28 moves DVHA fitness from Extra Benefits to Alternative Care / OTC / Travel, as the volunteer sheet has it.
 VERSIONS[28] = {}
+# Version 29 shows every in-network price for main columns F, G, I, K, L and M.
+VERSIONS[29] = {}
 # The version that first presents each later column. Earlier versions hold its cells.
 SINCE = {("dvha", "C_premium"): 3, ("dvha", "G_vision"): 4, ("dvha", "H_hearing"): 4, ("dvha", "E_optional_packages"): 5,
          ("dvha", "F_dental"): 6, ("dvha", "I_alt_care_otc_travel"): 6, ("dvha", "J_extra_benefits"): 6,
