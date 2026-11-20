@@ -1006,7 +1006,8 @@ class NoneTest(unittest.TestCase):
 
     def test_details_of_a_benefit_do_not_offer_it(self):
         exam = routine("vision.exam")
-        for detail in ("rollover", "also pays for members with diabetes", "provider network", "no annual maximum"):
+        for detail in ("rollover", "also pays for members with diabetes", "provider network", "no annual maximum", "excludes",
+                       "reimbursement"):
             self.assertEqual(present.lacks([exam, routine("vision", condition=detail)], "vision.eyewear"), (True, []))
 
     def test_cites_only_facts_that_exclude_the_benefit_itself(self):
@@ -1681,6 +1682,59 @@ class WriteTest(unittest.TestCase):
         self.assertEqual(present.named_extras([gym("$120")], ("fitness",), prices=True)[0], ["Fitness"])
         self.assertEqual(present.named_extras([gym("$150", pool="Wellness Bucks")], ("fitness",), prices=True,
                                               allowances=True)[0], ["Fitness"])
+
+    def test_version_31_shows_rewards_hearing_and_dental_details(self):
+        self.assertEqual(present.VERSIONS[31], {})
+        data = years.data_dir(YEAR)
+        rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.layer_rows(data, v)} for v in (30, 31)}
+        self.assertEqual({r[:2] for r in rows[30] ^ rows[31]},
+                         {("dvha", "F_dental"), ("dvha", "H_hearing"), ("dvha", "J_extra_benefits")})
+        got = {c: present.lines(data, c, sheet="dvha", version=31)["H7199-002-0"][0][0] for c in ("F_dental", "H_hearing")}
+        self.assertTrue(got["H_hearing"].endswith("; OON exam $35, fitting $35, aids 90%"))
+        self.assertTrue(got["F_dental"].endswith("; no rollover"))
+
+    def test_a_programs_rewards_show_per_step(self):
+        def reward(amount, condition):
+            return fact("other_supplemental", covered_by="supplemental", cost_kind="allowance", amount=amount,
+                        pool="Devoted Dollars", condition=condition)
+        program = fact("other_supplemental", covered_by="supplemental", cost_kind="covered", amount="", pool="Devoted Dollars")
+        found = [program, reward("$20", "a flu shot"), reward("$50", "a check-up"), reward("$0-$10", "a survey"),
+                 reward("$100", "members with chronic conditions")]
+        self.assertEqual(present.other_programs(found, steps=True)[0],
+                         ["Devoted Dollars ($50 for a check-up, $20 for a flu shot, $0-$10 for a survey)"])
+        self.assertEqual(present.other_programs(found)[0], ["Devoted Dollars"])
+        priced = dict(program, cost_kind="copay", amount="$5")
+        self.assertEqual(present.other_programs([priced] + found[1:], steps=True)[0], ["Devoted Dollars $5"])
+
+    def test_dental_details_show_reimbursement_and_exclusions(self):
+        def detail(condition, cost_kind, limit=""):
+            return fact("dental", covered_by="supplemental", cost_kind=cost_kind, amount="", condition=condition, limit=limit)
+        self.assertEqual(present.dental_exclusions([detail("excludes", "not_covered", "implants, cosmetic procedures")])[0],
+                         "excludes implants, cosmetic procedures")
+        self.assertEqual(present.dental_exclusions([detail("excludes", "not_covered", "implants"),
+                                                    dict(detail("excludes", "not_covered", "implants"), page="61")])[0],
+                         "excludes implants")
+        self.assertEqual(present.dental_exclusions([detail("excludes", "covered", "implants")])[0], "")
+        self.assertEqual(present.dental_reimbursement([detail("reimbursement", "covered", "pay up front")])[0],
+                         "pay up front, then reimbursed")
+        self.assertEqual(present.dental_reimbursement([detail("rollover", "covered")])[0], "")
+
+    def test_dental_rollover_shows_only_with_an_allowance_or_maximum(self):
+        never = fact("dental", covered_by="supplemental", cost_kind="not_covered", amount="", condition="rollover")
+        maximum = fact("dental", covered_by="supplemental", cost_kind="max", amount="$1,000")
+        self.assertEqual(present.dental_rollover([maximum, never])[0], "no rollover")
+        self.assertEqual(present.dental_rollover([never])[0], "")
+        self.assertEqual(present.dental_rollover([dict(maximum, package="Optional Dental"), never])[0], "")
+
+    def test_hearing_details_can_show_a_rechargeable_aids_extra_price(self):
+        upgrade = fact("hearing.aids", covered_by="supplemental", amount="$50", condition="rechargeable", unit="per aid")
+        self.assertEqual(present.hearing_details([upgrade], rechargeable=True)[0], "$50 more per aid for rechargeable")
+        self.assertEqual(present.hearing_details([upgrade])[0], "")
+
+    def test_out_of_network_can_take_a_service_by_its_condition(self):
+        fitting = fact("hearing.exam", network="out", covered_by="supplemental", amount="$35", condition="fitting/evaluation")
+        self.assertEqual(present.HEARING_OON_31([fitting])[0], "OON fitting $35")
+        self.assertEqual(present.HEARING_OON([fitting])[0], "")
 
     def test_version_30_shows_a_fitness_allowance(self):
         self.assertEqual(present.VERSIONS[30], {})
