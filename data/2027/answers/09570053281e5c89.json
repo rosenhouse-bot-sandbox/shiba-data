@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "bee1858e7e963c62.md",
+ "reply": "```json\n[{\"plan_id\": \"H7006-018-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"not_covered\", \"condition\": \"excludes\", \"limit\": \"cosmetic procedures\", \"page\": 54, \"quotes\": [\"Excludes cosmetic procedures\"], \"note\": \"\"}]\n```",
+ "usage": {
+  "input_tokens": 4187,
+  "output_tokens": 627,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

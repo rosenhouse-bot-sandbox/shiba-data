@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-5d52bb731683d536.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 30 lists the 24-Hour Nurse Advice Line at no cost to you. That supports an other_supplemental $0 copay for this plan's EOC, matching the stated example.\"}]\n```",
+ "usage": {
+  "input_tokens": 2793,
+  "output_tokens": 89,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "90a4efa6544175a2.md",
+ "reply": "```json\n[{\"plan_id\": \"H6815-038-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"1\", \"condition\": \"dental x-rays\", \"limit\": \"every date of service to 3 years depending on type of service\", \"unit\": \"set\", \"page\": 62, \"quotes\": [\"Dental x-rays - 1 set(s) every date of service to 3 years\"], \"note\": \"The period depends on the type of x-ray; the chart does not say which type has which period.\"},\n {\"plan_id\": \"H6815-038-0\", \"benefit\": \"dental.preventive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"1\", \"condition\": \"other diagnostic dental services\", \"limit\": \"per visit\", \"page\": 62, \"quotes\": [\"Other Diagnostic dental services - 1 per visit\"]},\n {\"plan_id\": \"H6815-038-0\", \"benefit\": \"dental.comprehensive\", \"setting\": \"any\", \"network\": \"in\", \"covered_by\": \"supplemental\", \"cost_kind\": \"visit_limit\", \"amount\": \"1\", \"condition\": \"adjunctive general services\", \"limit\": \"every date of service\", \"page\": 63, \"quotes\": [\"Adjunctive general services - 1 every date of service\"]},\n {\"plan_id\": \"H6815-038-0\", \"benefit\": \"dental\", \"setting\": \"any\", \"network\": \"any\", \"covered_by\": \"supplemental\", \"cost_kind\": \"not_covered\", \"condition\": \"excludes\", \"limit\": \"Fillings, Dentures, Orthodontic services, Endodontics, Periodontics, Implant services, Maxillofacial prosthetics\", \"page\": 108, \"quotes\": [\"Routine dental care, such as:\", \"Fillings\", \"Dentures\", \"Orthodontic services\", \"Endodontics\", \"Periodontics\", \"Implant services\", \"Maxillofacial prosthetics\"]}]\n```",
+ "usage": {
+  "input_tokens": 8756,
+  "output_tokens": 1789,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-127.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 30 lists the 24-Hour Nurse Advice Line: speak with a nurse anytime, day or night, at no cost to you. This matches the stated convention of an other_supplemental $0 copay with that pool.\"}]\n```",
+ "usage": {
+  "input_tokens": 2793,
+  "output_tokens": 207,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

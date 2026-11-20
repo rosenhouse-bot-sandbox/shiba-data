@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-129.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 30 lists the 24-Hour Nurse Advice Line at no cost to you. That makes it a $0 copay other_supplemental fact for this plan, the only plan in the document.\"}]\n```",
+ "usage": {
+  "input_tokens": 2789,
+  "output_tokens": 169,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
