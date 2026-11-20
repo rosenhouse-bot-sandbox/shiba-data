@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-105.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 62, Dental & Alternative Therapy Allowance: therapeutic massage is reimbursed at 50% of the member's cost, up to the shared $1,500 allowance. Any licensed massage therapist may be used, which supports network any. This matches the 50% coinsurance fact with the pool that the instructions describe.\"}]\n```",
+ "usage": {
+  "input_tokens": 2972,
+  "output_tokens": 618,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
