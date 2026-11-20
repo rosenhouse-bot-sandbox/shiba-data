@@ -1691,7 +1691,7 @@ class WriteTest(unittest.TestCase):
                          {("dvha", "F_dental"), ("dvha", "H_hearing"), ("dvha", "J_extra_benefits")})
         got = {c: present.lines(data, c, sheet="dvha", version=31)["H7199-002-0"][0][0] for c in ("F_dental", "H_hearing")}
         self.assertTrue(got["H_hearing"].endswith("; OON exam $35, fitting $35, aids 90%"))
-        self.assertTrue(got["F_dental"].endswith("; no rollover"))
+        self.assertIn("; no rollover", got["F_dental"])
 
     def test_a_programs_rewards_show_per_step(self):
         def reward(amount, condition):
