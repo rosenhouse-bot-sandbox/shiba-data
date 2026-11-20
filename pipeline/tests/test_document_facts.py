@@ -551,7 +551,6 @@ class StepTest(StepsTest):
 
         def fake(task_dir, model, effort):
             for task in glob.glob(f"{task_dir}/*.md"):
-                text = pathlib.Path(task).read_text()
                 if os.path.basename(task).startswith("v-"):
                     items = json.loads(pathlib.Path(f"{task_dir}/items.json").read_text())
                     reply = [{"id": n, "ok": not c["decoy"]} for n, c in enumerate(items)]
