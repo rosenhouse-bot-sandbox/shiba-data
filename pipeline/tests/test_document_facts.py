@@ -524,6 +524,50 @@ class StepTest(StepsTest):
         self.assertEqual(set(v35["targets"]), {"other_supplemental"})
         self.assertLessEqual(set(plans), set(document_facts.EVERY_PLAN))
 
+    def test_version_36_points_second_readers_of_its_targets_to_facts_they_missed(self):
+        v35, v36 = document_facts.VERSIONS[35], document_facts.VERSIONS[36]
+        changed = dict(recheck=None, recheck_plan_notes=None, recheck_zero=None, targets=None)
+        self.assertEqual(dict(v36, **changed), dict(v35, **changed))
+        self.assertEqual(v36["recheck_zero"], ("dental",))
+        for group, plans in v36["targets"].items():
+            self.assertLessEqual(set(plans), set(v36["recheck"][group]), group)
+            self.assertEqual(set(v36["recheck_plan_notes"][group]) - set(v35["recheck_plan_notes"].get(group, {})),
+                             set(plans) - set(v35["recheck_plan_notes"].get(group, {})), group)
+        for group, notes in v35["recheck_plan_notes"].items():
+            self.assertEqual({p: n for p, n in v36["recheck_plan_notes"][group].items() if p not in v36["targets"].get(group, ())},
+                             {p: n for p, n in notes.items() if p not in v36["targets"].get(group, ())}, group)
+        self.assertEqual({g: plans for g, plans in v36["recheck"].items() if g not in v36["targets"]},
+                         {g: plans for g, plans in v35["recheck"].items() if g not in v36["targets"]})
+        self.assertIn("There is no coinsurance or copayment", v36["recheck_plan_notes"]["dental"]["H1372-003-0"])
+
+    def test_a_second_reader_may_state_0_in_words_as_its_version_says(self):
+        page = "There is no coinsurance or copayment for X-rays."
+        for sub in ("text", "layout"):
+            with open(self.work / sub / f"{SHA[:16]}.txt", "a") as f:
+                f.write(f"=====PAGE 2=====\n{page}\n")
+        items = self.work / "items" / f"{SHA[:16]}.json"
+        items.write_text(json.dumps(json.loads(items.read_text()) | {"2": {"strs": [page], "lefts": [0]}}))
+        free = answer(page=2, network="out", amount="$0", quotes=[page])
+
+        def fake(task_dir, model, effort):
+            for task in glob.glob(f"{task_dir}/*.md"):
+                text = pathlib.Path(task).read_text()
+                if os.path.basename(task).startswith("v-"):
+                    items = json.loads(pathlib.Path(f"{task_dir}/items.json").read_text())
+                    reply = [{"id": n, "ok": not c["decoy"]} for n, c in enumerate(items)]
+                else:
+                    reply = [free, answer(page=1)]
+                with open(task[:-3] + ".json", "w") as f:
+                    json.dump(reply, f)
+
+        version = dict(groups=("imaging",), reader=("r", "high"), verifier=("v", "low"), recheck={"imaging": ("H1036-306-0",)})
+        for more, found in ((dict(recheck_zero=("imaging",)), True), ({}, False)):
+            with mock.patch.dict(document_facts.VERSIONS, {9: version | more}):
+                document_facts.step(self.data, self.work, self.dir, fake, 9)
+            rows = facts.read(self.data / "machine" / "document_facts.csv")
+            self.assertEqual([r["page"] for r in rows if r["amount"] == "$0" and r["network"] == "out"],
+                             ["2"] if found else [], more)
+
     def test_version_34_details_are_valid_facts_that_do_not_offer_a_benefit(self):
         def detail(benefit, condition, cost_kind, amount="", limit=""):
             row = dict.fromkeys(facts.COLUMNS, "") | dict(
