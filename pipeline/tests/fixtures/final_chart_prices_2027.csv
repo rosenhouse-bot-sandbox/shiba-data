@@ -1,0 +1,492 @@
+plan_id,column,chart
+H1036-153-0,C_premium,$0
+H1036-306-0,C_premium,$0
+H1036-317-0,C_premium,$0
+H1036-323-0,C_premium,$0
+H1372-003-0,C_premium,$69
+H2001-045-0,C_premium,$0
+H2056-003-0,C_premium,$0
+H2056-018-0,C_premium,$0
+H2406-042-0,C_premium,$94
+H2406-070-0,C_premium,$0
+H2406-073-0,C_premium,$0
+H2923-001-0,C_premium,$0
+H2923-005-0,C_premium,$43
+H2923-009-0,C_premium,$0
+H2923-019-0,C_premium,$0
+H2923-025-0,C_premium,$0
+H2923-028-3,C_premium,$0
+H3805-040-0,C_premium,$0
+H3805-041-0,C_premium,$0
+H3805-048-0,C_premium,$0
+H3817-008-1,C_premium,$130
+H3817-009-1,C_premium,$244
+H3817-010-0,C_premium,$0
+H3817-011-1,C_premium,$88
+H5216-048-0,C_premium,$97
+H5216-427-2,C_premium,$0
+H5216-428-2,C_premium,$0
+H5216-455-0,C_premium,$0
+H5439-010-0,C_premium,$0
+H5439-011-0,C_premium,$206
+H5439-015-0,C_premium,$29
+H5439-019-0,C_premium,$76.60
+H6815-038-0,C_premium,$44.50
+H7006-018-0,C_premium,$0
+H7006-021-0,C_premium,$0
+H7199-002-0,C_premium,$28.50
+H9003-001-0,C_premium,$134
+H9003-006-0,C_premium,$49
+H9003-009-0,C_premium,$0
+H1036-153-0,D_premium_full_extra_help,$0
+H1036-306-0,D_premium_full_extra_help,$0
+H1036-317-0,D_premium_full_extra_help,$0
+H1036-323-0,D_premium_full_extra_help,$0
+H1372-003-0,D_premium_full_extra_help,$69
+H2001-045-0,D_premium_full_extra_help,$0
+H2056-003-0,D_premium_full_extra_help,$0
+H2406-042-0,D_premium_full_extra_help,$87.70
+H2406-070-0,D_premium_full_extra_help,$0
+H2923-001-0,D_premium_full_extra_help,$0
+H2923-005-0,D_premium_full_extra_help,$43
+H2923-009-0,D_premium_full_extra_help,$0
+H2923-019-0,D_premium_full_extra_help,$0
+H2923-025-0,D_premium_full_extra_help,$0
+H2923-028-3,D_premium_full_extra_help,$0
+H3805-040-0,D_premium_full_extra_help,$0
+H3805-041-0,D_premium_full_extra_help,$0
+H3805-048-0,D_premium_full_extra_help,$0
+H3817-008-1,D_premium_full_extra_help,$123.70
+H3817-009-1,D_premium_full_extra_help,$237.70
+H3817-011-1,D_premium_full_extra_help,$81.70
+H5216-048-0,D_premium_full_extra_help,$82.60
+H5216-428-2,D_premium_full_extra_help,$0
+H5439-011-0,D_premium_full_extra_help,$199.70
+H5439-015-0,D_premium_full_extra_help,$29
+H5439-019-0,D_premium_full_extra_help,$76.60
+H6815-038-0,D_premium_full_extra_help,$44.50
+H7006-018-0,D_premium_full_extra_help,$0
+H7199-002-0,D_premium_full_extra_help,$28.50
+H9003-001-0,D_premium_full_extra_help,$134
+H9003-006-0,D_premium_full_extra_help,$49
+H9003-009-0,D_premium_full_extra_help,$0
+H1036-153-0,E_moop,"$5,150)"
+H1036-306-0,E_moop,"$4,550"
+H1036-317-0,E_moop,"$9,850"
+H1036-323-0,E_moop,"$9,050)"
+H1372-003-0,E_moop,"$6,500"
+H2001-045-0,E_moop,"$9,850 $14,800"
+H2056-003-0,E_moop,"$7,150)"
+H2056-018-0,E_moop,"$5,500"
+H2406-042-0,E_moop,"$6,700 $10,750"
+H2406-070-0,E_moop,"$7,150 $10,750"
+H2406-073-0,E_moop,"$7,150 $10,750"
+H2923-001-0,E_moop,"$6,700)"
+H2923-005-0,E_moop,"$5,900)"
+H2923-009-0,E_moop,"$9,850"
+H2923-019-0,E_moop,"$7,700"
+H2923-025-0,E_moop,"$7,700)"
+H2923-028-3,E_moop,"$8,900)"
+H3805-040-0,E_moop,"$7,150"
+H3805-041-0,E_moop,"$7,150)"
+H3805-048-0,E_moop,"$6,700)"
+H3817-008-1,E_moop,"$6,700 $10,100"
+H3817-009-1,E_moop,"$5,900 $9,550"
+H3817-010-0,E_moop,"$5,300 $9,550"
+H3817-011-1,E_moop,"$7,150 $10,100"
+H5216-048-0,E_moop,"$7,000 $10,100"
+H5216-427-2,E_moop,"$9,150 $13,900"
+H5216-428-2,E_moop,"$6,950 $10,750"
+H5216-455-0,E_moop,"$5,100 $10,100"
+H5439-010-0,E_moop,"$6,750 $9,200"
+H5439-011-0,E_moop,"$6,500 $8,700"
+H5439-015-0,E_moop,"$9,250 $13,700"
+H5439-019-0,E_moop,"$7,000 $10,700"
+H6815-038-0,E_moop,"$7,900)"
+H7006-018-0,E_moop,"$5,900)"
+H7006-021-0,E_moop,"$4,450 $4,450"
+H7199-002-0,E_moop,"$6,000 $10,750"
+H9003-001-0,E_moop,"$4,000)"
+H9003-006-0,E_moop,"$5,250)"
+H9003-009-0,E_moop,"$6,750)"
+H1036-153-0,F_primary_care,$0)
+H1036-306-0,F_primary_care,$0
+H1036-317-0,F_primary_care,$0
+H1036-323-0,F_primary_care,$0)
+H1372-003-0,F_primary_care,$0
+H2001-045-0,F_primary_care,20% 30%
+H2056-003-0,F_primary_care,$0)
+H2056-018-0,F_primary_care,$0)
+H2406-042-0,F_primary_care,$0 $25
+H2406-070-0,F_primary_care,$0 $25
+H2406-073-0,F_primary_care,$0 $25
+H2923-001-0,F_primary_care,$0)
+H2923-005-0,F_primary_care,$0)
+H2923-009-0,F_primary_care,$0
+H2923-019-0,F_primary_care,$0
+H2923-025-0,F_primary_care,$0)
+H2923-028-3,F_primary_care,$0)
+H3805-040-0,F_primary_care,$0
+H3805-041-0,F_primary_care,$0)
+H3805-048-0,F_primary_care,$0)
+H3817-008-1,F_primary_care,$0 50%
+H3817-009-1,F_primary_care,$0 50%
+H3817-010-0,F_primary_care,$0 50%
+H3817-011-1,F_primary_care,$0 50%
+H5216-048-0,F_primary_care,$0 50%
+H5216-427-2,F_primary_care,$0 35%
+H5216-428-2,F_primary_care,$0 50%
+H5216-455-0,F_primary_care,$0 50%
+H5439-010-0,F_primary_care,$0 $30
+H5439-011-0,F_primary_care,$0 30%
+H5439-015-0,F_primary_care,$0 30%
+H5439-019-0,F_primary_care,$0 $30
+H6815-038-0,F_primary_care,$0)
+H7006-018-0,F_primary_care,$0 $50
+H7006-021-0,F_primary_care,$0 $50
+H7199-002-0,F_primary_care,$0 $10
+H9003-001-0,F_primary_care,$0)
+H9003-006-0,F_primary_care,$0)
+H9003-009-0,F_primary_care,$0)
+H1036-153-0,G_specialist,$30)
+H1036-306-0,G_specialist,$15
+H1036-317-0,G_specialist,20%
+H1036-323-0,G_specialist,$50)
+H1372-003-0,G_specialist,$0-$20
+H2001-045-0,G_specialist,20% 30%
+H2056-003-0,G_specialist,$65)
+H2056-018-0,G_specialist,$40)
+H2406-042-0,G_specialist,$0-$50 $80
+H2406-070-0,G_specialist,$0-$70 $90
+H2406-073-0,G_specialist,$60 $80
+H2923-001-0,G_specialist,$40)
+H2923-005-0,G_specialist,$40)
+H2923-009-0,G_specialist,30%
+H2923-019-0,G_specialist,$45)
+H2923-025-0,G_specialist,$45)
+H2923-028-3,G_specialist,$50)
+H3805-040-0,G_specialist,$55
+H3805-041-0,G_specialist,$0-$70
+H3805-048-0,G_specialist,$55)
+H3817-008-1,G_specialist,$40 50%
+H3817-009-1,G_specialist,$30 50%
+H3817-010-0,G_specialist,$40 50%
+H3817-011-1,G_specialist,$45 50%
+H5216-048-0,G_specialist,$45 50%
+H5216-427-2,G_specialist,$45 35%
+H5216-428-2,G_specialist,$50 50%
+H5216-455-0,G_specialist,$40 50%
+H5439-010-0,G_specialist,$30 $60
+H5439-011-0,G_specialist,$30 30%
+H5439-015-0,G_specialist,$55 30%
+H5439-019-0,G_specialist,$30 $60
+H6815-038-0,G_specialist,$25)
+H7006-018-0,G_specialist,$45)
+H7006-021-0,G_specialist,$40 $50
+H7199-002-0,G_specialist,$45)
+H9003-001-0,G_specialist,$35)
+H9003-006-0,G_specialist,$40)
+H9003-009-0,G_specialist,$45)
+H1036-153-0,H_inpatient,$420 1-4
+H1036-306-0,H_inpatient,$290 1-4
+H1036-317-0,H_inpatient,"$2,241 per admit"
+H1036-323-0,H_inpatient,$515 1-4
+H1372-003-0,H_inpatient,$325 1-7
+H2001-045-0,H_inpatient,"$1,980 per admit"
+H2056-003-0,H_inpatient,$550 1-5
+H2056-018-0,H_inpatient,$325 1-5
+H2406-042-0,H_inpatient,$550 1-5
+H2406-070-0,H_inpatient,$835 1-3
+H2406-073-0,H_inpatient,$610 1-4
+H2923-001-0,H_inpatient,$465 1-5
+H2923-005-0,H_inpatient,$445 1-5
+H2923-009-0,H_inpatient,"$2,241 per admit"
+H2923-019-0,H_inpatient,$490 1-5
+H2923-025-0,H_inpatient,$490 1-5
+H2923-028-3,H_inpatient,$490 1-5
+H3805-040-0,H_inpatient,$685 1-4
+H3805-041-0,H_inpatient,$685 1-4
+H3805-048-0,H_inpatient,$550 1-5
+H3817-008-1,H_inpatient,$395 1-5
+H3817-009-1,H_inpatient,$315 1-5
+H3817-010-0,H_inpatient,$370 1-4
+H3817-011-1,H_inpatient,$450 1-5
+H5216-048-0,H_inpatient,$610 1-4
+H5216-427-2,H_inpatient,$610 1-4
+H5216-428-2,H_inpatient,$689 1-4
+H5216-455-0,H_inpatient,$480 1-4
+H5439-010-0,H_inpatient,$525 1-5
+H5439-011-0,H_inpatient,$425 1-7
+H5439-015-0,H_inpatient,$475 1-5
+H5439-019-0,H_inpatient,$475 1-5
+H6815-038-0,H_inpatient,$600 1-4
+H7006-018-0,H_inpatient,$585 1-4
+H7006-021-0,H_inpatient,$250 1-5
+H7199-002-0,H_inpatient,$400 1-5
+H9003-001-0,H_inpatient,$250 1-6
+H9003-006-0,H_inpatient,$320 1-6
+H9003-009-0,H_inpatient,$455 1-6
+H1036-153-0,I_outpatient_surgery,$395 $350
+H1036-306-0,I_outpatient_surgery,$395 $0-$100
+H1036-317-0,I_outpatient_surgery,20% $0-20%
+H1036-323-0,I_outpatient_surgery,$450 $350
+H1372-003-0,I_outpatient_surgery,20% 20%
+H2001-045-0,I_outpatient_surgery,20%
+H2056-003-0,I_outpatient_surgery,$500 $450
+H2056-018-0,I_outpatient_surgery,$325 $275
+H2406-042-0,I_outpatient_surgery,$550 $400
+H2406-070-0,I_outpatient_surgery,$835 $785
+H2406-073-0,I_outpatient_surgery,$0-$610
+H2923-001-0,I_outpatient_surgery,$565 $465
+H2923-005-0,I_outpatient_surgery,$475 $375
+H2923-009-0,I_outpatient_surgery,50%
+H2923-019-0,I_outpatient_surgery,$580 $480
+H2923-025-0,I_outpatient_surgery,$580 $480
+H2923-028-3,I_outpatient_surgery,$590 $490
+H3805-040-0,I_outpatient_surgery,$685 $0-$635
+H3805-041-0,I_outpatient_surgery,$685 $635
+H3805-048-0,I_outpatient_surgery,$550 $500
+H3817-008-1,I_outpatient_surgery,20% $375
+H3817-009-1,I_outpatient_surgery,20% $300
+H3817-010-0,I_outpatient_surgery,$0-20% $0-$360
+H3817-011-1,I_outpatient_surgery,20% $395
+H5216-048-0,I_outpatient_surgery,$450 $350
+H5216-427-2,I_outpatient_surgery,$450 $350
+H5216-428-2,I_outpatient_surgery,$450 $350
+H5216-455-0,I_outpatient_surgery,$450 $350
+H5439-010-0,I_outpatient_surgery,$0-$500 $200
+H5439-011-0,I_outpatient_surgery,$425 $200
+H5439-015-0,I_outpatient_surgery,$500 $300
+H5439-019-0,I_outpatient_surgery,$500 $350
+H6815-038-0,I_outpatient_surgery,20% $300
+H7006-018-0,I_outpatient_surgery,$0-$400 $250
+H7006-021-0,I_outpatient_surgery,$350/$250
+H7199-002-0,I_outpatient_surgery,$500 $400
+H9003-001-0,I_outpatient_surgery,$250)
+H9003-006-0,I_outpatient_surgery,$350)
+H9003-009-0,I_outpatient_surgery,$400)
+H1036-153-0,J_outpatient_rehab,$35)
+H1036-306-0,J_outpatient_rehab,$35)
+H1036-317-0,J_outpatient_rehab,20%
+H1036-323-0,J_outpatient_rehab,$35)
+H1372-003-0,J_outpatient_rehab,$0)
+H2001-045-0,J_outpatient_rehab,20%
+H2056-003-0,J_outpatient_rehab,$50-$65
+H2056-018-0,J_outpatient_rehab,$40)
+H2406-042-0,J_outpatient_rehab,$50)
+H2406-070-0,J_outpatient_rehab,$50-$60
+H2406-073-0,J_outpatient_rehab,$50-$60
+H2923-001-0,J_outpatient_rehab,$20-$50
+H2923-005-0,J_outpatient_rehab,$40-$50
+H2923-009-0,J_outpatient_rehab,30%
+H2923-019-0,J_outpatient_rehab,$35-$45
+H2923-025-0,J_outpatient_rehab,$35-$50
+H2923-028-3,J_outpatient_rehab,$35-$50
+H3805-040-0,J_outpatient_rehab,$50-$55
+H3805-041-0,J_outpatient_rehab,$50-$70
+H3805-048-0,J_outpatient_rehab,$50-$55
+H3817-008-1,J_outpatient_rehab,$40)
+H3817-009-1,J_outpatient_rehab,$30)
+H3817-010-0,J_outpatient_rehab,$40)
+H3817-011-1,J_outpatient_rehab,$45)
+H5216-048-0,J_outpatient_rehab,$45)
+H5216-427-2,J_outpatient_rehab,$35)
+H5216-428-2,J_outpatient_rehab,$45)
+H5216-455-0,J_outpatient_rehab,$45)
+H5439-010-0,J_outpatient_rehab,$25
+H5439-011-0,J_outpatient_rehab,$25)
+H5439-015-0,J_outpatient_rehab,$35)
+H5439-019-0,J_outpatient_rehab,$30)
+H6815-038-0,J_outpatient_rehab,$25)
+H7006-018-0,J_outpatient_rehab,$20)
+H7006-021-0,J_outpatient_rehab,$20)
+H7199-002-0,J_outpatient_rehab,$40-$50
+H9003-001-0,J_outpatient_rehab,$25)
+H9003-006-0,J_outpatient_rehab,$35)
+H9003-009-0,J_outpatient_rehab,$50)
+H1036-153-0,K_tests_labs,$0-$100/$0
+H1036-306-0,K_tests_labs,$0-$140 $0
+H1036-317-0,K_tests_labs,$0-20%/$0
+H1036-323-0,K_tests_labs,$0-$100/$0
+H1372-003-0,K_tests_labs,$0-20%/$0
+H2001-045-0,K_tests_labs,20%/$0
+H2056-003-0,K_tests_labs,$0-$35
+H2056-018-0,K_tests_labs,$0-$20/$0
+H2406-042-0,K_tests_labs,$10/$0
+H2406-070-0,K_tests_labs,$50/$0
+H2406-073-0,K_tests_labs,$50/$0
+H2923-001-0,K_tests_labs,$0-$40/$0
+H2923-005-0,K_tests_labs,$0-$40/ $0-$40
+H2923-009-0,K_tests_labs,$0-50%
+H2923-019-0,K_tests_labs,$0-$40 $0
+H2923-025-0,K_tests_labs,$0-$40/$0-$45
+H2923-028-3,K_tests_labs,$0-$40/$0-$50
+H3805-040-0,K_tests_labs,$60/$0
+H3805-041-0,K_tests_labs,$60/$0
+H3805-048-0,K_tests_labs,$35/$0
+H3817-008-1,K_tests_labs,$20/ $0-$20
+H3817-009-1,K_tests_labs,$10/ $0-$10
+H3817-010-0,K_tests_labs,$0-$10
+H3817-011-1,K_tests_labs,$40/ $30
+H5216-048-0,K_tests_labs,$0-$50/ $0
+H5216-427-2,K_tests_labs,$0-$45/$0
+H5216-428-2,K_tests_labs,$0-$100/$0
+H5216-455-0,K_tests_labs,$0-$40/$0
+H5439-010-0,K_tests_labs,$0-20% $10-$50
+H5439-011-0,K_tests_labs,$0-20%/ $0-$50
+H5439-015-0,K_tests_labs,$0-20%/ $0-$50
+H5439-019-0,K_tests_labs,$0-20%/ $0-20%
+H6815-038-0,K_tests_labs,$0-20%/ $0-$50
+H7006-018-0,K_tests_labs,$20/$0
+H7006-021-0,K_tests_labs,$0)
+H7199-002-0,K_tests_labs,$0-$40/ $0-$40
+H9003-001-0,K_tests_labs,$0-$35/$0
+H9003-006-0,K_tests_labs,$0 - $40/$0
+H9003-009-0,K_tests_labs,$15 - $45/$0
+H1036-153-0,L_xray_imaging,$0-$40 $0-$330
+H1036-306-0,L_xray_imaging,$0-$15 $205-$330
+H1036-317-0,L_xray_imaging,$0-20% $205-$330
+H1036-323-0,L_xray_imaging,$0-$50 $0-$330
+H1372-003-0,L_xray_imaging,20%
+H2001-045-0,L_xray_imaging,20%
+H2056-003-0,L_xray_imaging,$15 $350
+H2056-018-0,L_xray_imaging,$10 $275
+H2406-042-0,L_xray_imaging,$15 $320
+H2406-070-0,L_xray_imaging,$30 $320
+H2406-073-0,L_xray_imaging,$30 $0-$320
+H2923-001-0,L_xray_imaging,$0-$20 $100-$300
+H2923-005-0,L_xray_imaging,$0-$20 $100-$300
+H2923-009-0,L_xray_imaging,40%/50%
+H2923-019-0,L_xray_imaging,$25 $100-$300
+H2923-025-0,L_xray_imaging,$0-$20 $100-$300
+H2923-028-3,L_xray_imaging,$0-$20 $100-$300
+H3805-040-0,L_xray_imaging,$25/$285
+H3805-041-0,L_xray_imaging,$30 $320
+H3805-048-0,L_xray_imaging,$30 $320
+H3817-008-1,L_xray_imaging,$10 $0- $300
+H3817-009-1,L_xray_imaging,$5 $0-$300
+H3817-010-0,L_xray_imaging,$5 $0-$300
+H3817-011-1,L_xray_imaging,$25 $300
+H5216-048-0,L_xray_imaging,$0-$50 $0-$330
+H5216-427-2,L_xray_imaging,$0-$45 $0-$330
+H5216-428-2,L_xray_imaging,$0-$50 $0-$330
+H5216-455-0,L_xray_imaging,$0-$40 $205-$330
+H5439-010-0,L_xray_imaging,$50 $125-$500
+H5439-011-0,L_xray_imaging,$50 $0-$425
+H5439-015-0,L_xray_imaging,$50 $0-$200
+H5439-019-0,L_xray_imaging,$50 $0-$250
+H6815-038-0,L_xray_imaging,$50 $0-$200
+H7006-018-0,L_xray_imaging,$0 $300
+H7006-021-0,L_xray_imaging,$0 $0-$60
+H7199-002-0,L_xray_imaging,$0-$20 $100-$300
+H9003-001-0,L_xray_imaging,$0 $150
+H9003-006-0,L_xray_imaging,$0 $225
+H9003-009-0,L_xray_imaging,$15 $350
+H1036-153-0,M_part_b_drugs,20%
+H1036-306-0,M_part_b_drugs,$0-20%
+H1036-317-0,M_part_b_drugs,$0-20%
+H1036-323-0,M_part_b_drugs,20%
+H1372-003-0,M_part_b_drugs,$0-20%
+H2001-045-0,M_part_b_drugs,20%
+H2056-003-0,M_part_b_drugs,20%
+H2056-018-0,M_part_b_drugs,$0-20%
+H2406-042-0,M_part_b_drugs,20%
+H2406-070-0,M_part_b_drugs,20%
+H2406-073-0,M_part_b_drugs,$0-20%
+H2923-001-0,M_part_b_drugs,20%
+H2923-005-0,M_part_b_drugs,20%
+H2923-009-0,M_part_b_drugs,$0-20%
+H2923-019-0,M_part_b_drugs,$0-20%
+H2923-025-0,M_part_b_drugs,20%
+H2923-028-3,M_part_b_drugs,20%
+H3805-040-0,M_part_b_drugs,$0-20%
+H3805-041-0,M_part_b_drugs,20%
+H3805-048-0,M_part_b_drugs,20%
+H3817-008-1,M_part_b_drugs,$0-20%
+H3817-009-1,M_part_b_drugs,$0-20%
+H3817-010-0,M_part_b_drugs,$0-20%
+H3817-011-1,M_part_b_drugs,$0-20%
+H5216-048-0,M_part_b_drugs,20%
+H5216-427-2,M_part_b_drugs,20%
+H5216-428-2,M_part_b_drugs,20%
+H5216-455-0,M_part_b_drugs,20%
+H5439-010-0,M_part_b_drugs,$0-20%
+H5439-011-0,M_part_b_drugs,20%
+H5439-015-0,M_part_b_drugs,20%
+H5439-019-0,M_part_b_drugs,20%
+H6815-038-0,M_part_b_drugs,20%
+H7006-018-0,M_part_b_drugs,$0-20%
+H7006-021-0,M_part_b_drugs,$0-20%
+H7199-002-0,M_part_b_drugs,20%
+H9003-001-0,M_part_b_drugs,"$0, $35, or 20%"
+H9003-006-0,M_part_b_drugs,"$0, $35, or 20%"
+H9003-009-0,M_part_b_drugs,"$0, $35, or 20%"
+H1036-153-0,N_pharmacy_deductible,"$700 not tiers 1,2,3"
+H1036-306-0,N_pharmacy_deductible,"$500 not tiers 1,2,6"
+H1036-317-0,N_pharmacy_deductible,"$700 not tiers 1,2,3,6"
+H1036-323-0,N_pharmacy_deductible,"$700 not tiers 1,2,3"
+H1372-003-0,N_pharmacy_deductible,$400 not tier 1
+H2001-045-0,N_pharmacy_deductible,"$700 not tiers 1,2"
+H2056-003-0,N_pharmacy_deductible,"$700 not tiers 1,2"
+H2406-042-0,N_pharmacy_deductible,"$595 not tiers 1,2"
+H2406-070-0,N_pharmacy_deductible,"$685 not tiers 1,2"
+H2923-001-0,N_pharmacy_deductible,"$461 not tiers 1,2"
+H2923-005-0,N_pharmacy_deductible,"$650 not tiers 1,2"
+H2923-009-0,N_pharmacy_deductible,"$461 not tiers 1,2"
+H2923-019-0,N_pharmacy_deductible,"$700 not tiers 1,2"
+H2923-025-0,N_pharmacy_deductible,"$700 not tiers 1,2"
+H2923-028-3,N_pharmacy_deductible,"$461 not tiers 1,2"
+H3805-040-0,N_pharmacy_deductible,"$685 not tiers 1,2"
+H3805-041-0,N_pharmacy_deductible,"$685 not tiers 1,2"
+H3805-048-0,N_pharmacy_deductible,"$685 not tiers 1,2"
+H3817-008-1,N_pharmacy_deductible,"$590 not tiers 1,2"
+H3817-009-1,N_pharmacy_deductible,"$305 not tiers 1,2"
+H3817-011-1,N_pharmacy_deductible,"$700 not tiers 1,2"
+H5216-048-0,N_pharmacy_deductible,"$700 not tiers 1,2"
+H5216-428-2,N_pharmacy_deductible,"$700 not tiers 1,2"
+H5439-011-0,N_pharmacy_deductible,$700 not tier 1
+H5439-015-0,N_pharmacy_deductible,$700 not tier 1
+H5439-019-0,N_pharmacy_deductible,$700 not tier 1
+H6815-038-0,N_pharmacy_deductible,$700 not tier 1
+H7006-018-0,N_pharmacy_deductible,"$400 not tiers 1,2,6"
+H7199-002-0,N_pharmacy_deductible,"$650 not tiers 1,2"
+H9003-001-0,N_pharmacy_deductible,$0)
+H9003-006-0,N_pharmacy_deductible,$0)
+H9003-009-0,N_pharmacy_deductible,$0)
+H1036-153-0,O_medical_deductible,$0)
+H1036-306-0,O_medical_deductible,$0
+H1036-323-0,O_medical_deductible,$700 some
+H1372-003-0,O_medical_deductible,$0
+H2056-003-0,O_medical_deductible,$750 some
+H2056-018-0,O_medical_deductible,$0)
+H2406-042-0,O_medical_deductible,$0)
+H2406-070-0,O_medical_deductible,$0)
+H2406-073-0,O_medical_deductible,$0)
+H2923-001-0,O_medical_deductible,$0)
+H2923-005-0,O_medical_deductible,$200 some
+H2923-009-0,O_medical_deductible,$990 some
+H2923-019-0,O_medical_deductible,$150 some
+H2923-025-0,O_medical_deductible,$150 some
+H2923-028-3,O_medical_deductible,$200 some
+H3805-040-0,O_medical_deductible,$0
+H3805-041-0,O_medical_deductible,$0)
+H3805-048-0,O_medical_deductible,$0)
+H3817-008-1,O_medical_deductible,$0)
+H3817-009-1,O_medical_deductible,$0)
+H3817-010-0,O_medical_deductible,$0)
+H3817-011-1,O_medical_deductible,$0)
+H5216-048-0,O_medical_deductible,$100 some OON
+H5216-427-2,O_medical_deductible,$0)
+H5216-428-2,O_medical_deductible,$80 some
+H5216-455-0,O_medical_deductible,$0)
+H5439-010-0,O_medical_deductible,$200 some
+H5439-011-0,O_medical_deductible,$250 some
+H5439-015-0,O_medical_deductible,$250 some
+H5439-019-0,O_medical_deductible,$250 some
+H6815-038-0,O_medical_deductible,$150 some
+H7006-018-0,O_medical_deductible,$0)
+H7006-021-0,O_medical_deductible,$0)
+H7199-002-0,O_medical_deductible,$250 some
+H9003-001-0,O_medical_deductible,$0)
+H9003-006-0,O_medical_deductible,$0)
+H9003-009-0,O_medical_deductible,$0)

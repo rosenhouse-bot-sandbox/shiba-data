@@ -1,4 +1,4 @@
-import json, os, pathlib, sys, tempfile, unittest
+import csv, json, os, pathlib, re, sys, tempfile, unittest
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -1661,6 +1661,17 @@ class WriteTest(unittest.TestCase):
                          {"H2406-073-0", "H5216-455-0", "H5216-427-2", "H3817-010-0", "H2056-018-0", "H5439-010-0",
                           "H7006-021-0"})
 
+    def test_version_29_shows_every_in_network_price(self):
+        self.assertEqual(present.VERSIONS[29], {})
+        data = years.data_dir(YEAR)
+        rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["line"], r["value"]) for r in present.layer_rows(data, v)}
+                for v in (28, 29)}
+        self.assertEqual({r[1] for r in rows[28] ^ rows[29]},
+                         {"F_primary_care", "G_specialist", "I_outpatient_surgery", "K_tests_labs", "L_xray_imaging",
+                          "M_part_b_drugs"})
+        got = present.lines(data, "M_part_b_drugs", sheet="main", version=29)["H2056-018-0"][0][0]
+        self.assertEqual(got, "$0-$35 or 20%")
+
     def test_version_28_moves_fitness_to_alternative_care(self):
         self.assertEqual(present.VERSIONS[28], {})
         data = years.data_dir(YEAR)
@@ -2017,15 +2028,19 @@ class ExplainTest(unittest.TestCase):
             self.assertLessEqual({leaf for benefits in leaves.values() for leaf in benefits}, set(facts.BENEFITS))
 
 
-def chart(column, *found, organization="Aetna"):
-    return [value for value, _ in present.SHEETS["main"][0][column](organization, list(found))]
+def chart(column, *found, organization="Aetna", rules=present.SHEETS["main"][0]):
+    return [value for value, _ in rules[column](organization, list(found))]
+
+
+def chart_18(column, *found, organization="Aetna"):
+    return chart(column, *found, organization=organization, rules=present.SHEETS["main"][0] | present.CHART_18)
 
 
 class FinalChartTest(unittest.TestCase):
     def test_surgery_shows_each_settings_surgery_price_without_a_0_colonoscopy(self):
         found = [op(), op(setting="asc", amount="$400"), op("surgery.colonoscopy", "asc", "$0")]
-        self.assertEqual(chart("I_outpatient_surgery", *found), ["$500", "$400"])
-        self.assertEqual(chart("I_outpatient_surgery", op(amount="$0-$400")), ["$0-$400", ""])
+        self.assertEqual(chart_18("I_outpatient_surgery", *found), ["$500", "$400"])
+        self.assertEqual(chart_18("I_outpatient_surgery", op(amount="$0-$400")), ["$0-$400", ""])
 
     def test_identical_lines_show_once_and_cite_both(self):
         found = [op(), op(setting="asc")]
@@ -2038,23 +2053,23 @@ class FinalChartTest(unittest.TestCase):
                                priced("rehab.physical", "outpatient_hospital", "$50")), ["$20-$50"])
         found = [priced("tests.diagnostic", "office.pcp"), priced("tests.diagnostic", "outpatient_hospital", "$95"),
                  priced("tests.lab", "freestanding"), priced("tests.lab", "outpatient_hospital", "$40")]
-        self.assertEqual(chart("K_tests_labs", *found), ["$0/$0-$40"])
+        self.assertEqual(chart_18("K_tests_labs", *found), ["$0/$0-$40"])
 
     def test_only_agerights_0_colonoscopy_counts_as_a_test(self):
         found = [priced("tests.diagnostic", amount="20%"), priced("surgery.colonoscopy", "outpatient_hospital")]
-        self.assertEqual(chart("K_tests_labs", *found, organization="AgeRight Advantage"), ["$0-20%/"])
-        self.assertEqual(chart("K_tests_labs", *found, organization="Regence"), ["20%/"])
+        self.assertEqual(chart_18("K_tests_labs", *found, organization="AgeRight Advantage"), ["$0-20%/"])
+        self.assertEqual(chart_18("K_tests_labs", *found, organization="Regence"), ["20%/"])
 
     def test_imaging_takes_every_office_x_ray_and_no_0_mammogram(self):
         found = [priced("imaging.xray", "office.pcp"), priced("imaging.xray", "freestanding", "$40"),
                  priced("imaging.diagnostic.advanced.ct", "freestanding", "$205"),
                  priced("imaging.diagnostic.mammogram", "freestanding")]
-        self.assertEqual(chart("L_xray_imaging", *found, organization="Humana"), ["$0-$40", "$205"])
+        self.assertEqual(chart_18("L_xray_imaging", *found, organization="Humana"), ["$0-$40", "$205"])
 
     def test_part_b_drugs_show_the_highest_coinsurance(self):
         found = [priced("part_b_drugs.vaccine"), priced("part_b_drugs", amount="20%")]
-        self.assertEqual(chart("M_part_b_drugs", *found), ["20%"])
-        self.assertEqual(chart("M_part_b_drugs"), [""])
+        self.assertEqual(chart_18("M_part_b_drugs", *found), ["20%"])
+        self.assertEqual(chart_18("M_part_b_drugs"), [""])
 
     def test_a_cost_per_stay_is_per_admit(self):
         self.assertEqual(chart("H_inpatient", priced("inpatient.acute", amount="$2,241", unit="per stay")),
@@ -2090,6 +2105,137 @@ class FinalChartTest(unittest.TestCase):
         for column in ("E_moop", "F_primary_care", "G_specialist", "J_outpatient_rehab", "K_tests_labs", "L_xray_imaging",
                        "M_part_b_drugs", "O_medical_deductible", "Z_part_b_reduction"):
             self.assertIsNot(present.rule("main", column, 17), present.rule("main", column, 18), column)
+
+
+
+class EveryPriceTest(unittest.TestCase):
+    def test_takes_narrower_benefits_and_broader_ones_only_without_them(self):
+        ct, broad = priced("imaging.diagnostic.advanced.ct", amount="$200"), priced("imaging.diagnostic", amount="$300")
+        self.assertEqual(present.every_price([ct, broad], ("imaging.diagnostic.advanced",)), [ct])
+        self.assertEqual(present.every_price([broad], ("imaging.diagnostic.advanced",)), [broad])
+
+    def test_a_lesser_source_counts_where_no_better_one_gives_the_setting(self):
+        eoc, sb_office = priced("tests.diagnostic", "freestanding", "$40"), priced("tests.diagnostic", "office", source="SB")
+        self.assertEqual(present.every_price([eoc, sb_office], ("tests.diagnostic",)), [eoc, sb_office])
+        for better in (priced("tests.diagnostic", "office.pcp", "$5"), priced("tests.diagnostic", amount="$5"),
+                       priced("tests", "office", "$5")):
+            self.assertEqual(present.every_price([better, sb_office], ("tests.diagnostic",)), [better])
+
+    def test_skips_other_settings_unless_settings_is_empty(self):
+        urgent = priced("tests.diagnostic", "urgent_care", "$45")
+        self.assertEqual(present.every_price([urgent], ("tests.diagnostic",)), [])
+        self.assertEqual(present.every_price([urgent], ("tests.diagnostic",), ()), [urgent])
+
+
+class EveryPriceChartTest(unittest.TestCase):
+    def test_surgery_keeps_a_0_colonoscopy(self):
+        found = [op(), op(setting="asc", amount="$400"), op("surgery.colonoscopy", "asc", "$0")]
+        self.assertEqual(chart("I_outpatient_surgery", *found), ["$500", "$0-$400"])
+
+    def test_tests_count_every_setting_and_narrower_test(self):
+        found = [priced("tests.diagnostic", "office.pcp"), priced("tests.diagnostic", "outpatient_hospital", "$95"),
+                 priced("tests.diagnostic.sleep_study", "outpatient_hospital", "$140"),
+                 priced("tests.diagnostic", "urgent_care", "$200"), priced("tests.lab", "freestanding"),
+                 priced("tests.genetic", "office", "$60")]
+        self.assertEqual(chart("K_tests_labs", *found), ["$0-$140/$0-$60"])
+        self.assertEqual(chart("K_tests_labs", priced("tests.lab", amount="$40"), priced("tests.genetic", amount="20%")),
+                         ["/$40 or 20%"])
+        colonoscopy = [priced("tests.diagnostic", amount="20%"), priced("surgery.colonoscopy", "outpatient_hospital")]
+        self.assertEqual(chart("K_tests_labs", *colonoscopy, organization="AgeRight Advantage"), ["$0-20%/"])
+        self.assertEqual(chart("K_tests_labs", *colonoscopy, organization="Regence"), ["20%/"])
+
+    def test_imaging_takes_every_x_ray_and_advanced_price_and_a_0_mammogram(self):
+        found = [priced("imaging.xray", "office.pcp"), priced("imaging.xray", "outpatient_hospital", "$145"),
+                 priced("imaging.diagnostic.advanced.ct", "freestanding", "$205"),
+                 priced("imaging.diagnostic.advanced", "outpatient_hospital", "$345"),
+                 priced("imaging.diagnostic.mammogram", "freestanding"),
+                 priced("imaging.diagnostic.mammogram", "outpatient_hospital", "$20"),
+                 priced("imaging.diagnostic.ultrasound", "freestanding", "$500")]
+        self.assertEqual(chart("L_xray_imaging", *found, organization="Humana"), ["$0-$145", "$0-$345"])
+
+    def test_part_b_drugs_show_every_drugs_price(self):
+        found = [priced("part_b_drugs.vaccine", condition="flu and COVID-19"), priced("part_b_drugs", amount="20%")]
+        self.assertEqual(chart("M_part_b_drugs", *found), ["$0-20%"])
+        self.assertEqual(chart("M_part_b_drugs", *found, priced("part_b_drugs.insulin", amount="$35")), ["$0-$35 or 20%"])
+        self.assertEqual(chart("M_part_b_drugs", priced("part_b_drugs.vaccine", condition="Extra Help members"),
+                               found[1]), ["20%"])
+        self.assertEqual(chart("M_part_b_drugs"), [""])
+
+    def test_office_visits_count_that_kinds_telehealth_price(self):
+        found = [priced("visits", "office.pcp", "$5"), priced("visits", "office.specialist", "$45"),
+                 priced("visits", "telehealth", condition="Virtual specialist visits"),
+                 priced("visits", "telehealth", "$3", condition="Primary care provider (PCP)"),
+                 priced("visits", "telehealth", "$1", condition="services in a nursing home")]
+        self.assertEqual(chart("F_primary_care", *found), ["$3-$5", ""])
+        self.assertEqual(chart("G_specialist", *found), ["$0-$45", ""])
+        self.assertEqual(chart("G_specialist", *found[1:2], priced("visits", "telehealth", "$10")), ["$10-$45", ""])
+        self.assertEqual(chart("G_specialist", *found[1:2], priced("visits", "telehealth", "$10", provider_tier="PCP or specialist"),
+                               priced("visits", "telehealth", "$9", cost_kind="covered"),
+                               priced("visits", "telehealth", "$20"), priced("visits", "telehealth", "$8", source="SB")),
+                         ["$20-$45", ""])
+        self.assertEqual(chart("G_specialist", priced("visits", "telehealth", "$10")), [""])
+
+
+TOKEN = re.compile(r"\$[\d,]+(?:\.\d+)?|\d+%")
+
+
+def lacks(value, chart_value):
+    """The chart's prices that value neither shows nor spans with a range of the same kind."""
+    have = set(TOKEN.findall(value))
+    spans = re.findall(r"(\$[\d,]+|\d+%)-(\$[\d,]+|\d+%)", value)
+
+    def number(token):
+        return float(token.strip("$%").replace(",", ""))
+
+    def inside(token):
+        unit = token[-1] == "%"
+        return token in ("$0", "0%") and have & {"$0", "0%"} or any(
+            (a[-1] == "%") == unit == (b[-1] == "%") and number(a) <= number(token) <= number(b) for a, b in spans)
+    return sorted(t for t in set(TOKEN.findall(chart_value)) - have if not inside(t))
+
+
+# The chart's prices that the plan documents contradict.
+CHART_ERRORS = {("H5439-019-0", "K_tests_labs", " $0-20%"): "EOC page 90 gives 20% for labs out of network only"}
+
+
+class FinalChartPricesTest(unittest.TestCase):
+    def test_lacks_a_price_outside_every_range(self):
+        self.assertEqual(lacks("$0-$145 | $345", "$40 $330 $345 0%"), ["$330"])
+        self.assertEqual(lacks("$0-20%", "$10 20%"), ["$10"])
+
+    def test_every_main_cell_shows_every_price_the_final_chart_shows(self):
+        data = years.data_dir(YEAR)
+        path = pathlib.Path(__file__).parent / "fixtures" / "final_chart_prices_2027.csv"
+        with path.open(newline="") as f:
+            charted = list(csv.DictReader(f))
+        shown = {c: present.lines(data, c, sheet="main", version=max(present.VERSIONS)) for c in {r["column"] for r in charted}}
+        missing = []
+        for r in charted:
+            value = " | ".join(v for v, _ in shown[r["column"]][r["plan_id"]])
+            pairs = (zip(value.split("/"), r["chart"].split("/")) if value.count("/") == r["chart"].count("/") == 1
+                     else [(value, r["chart"])])
+            missing += [(r["plan_id"], r["column"], c) for v, c in pairs if lacks(v, c)]
+        self.assertEqual(missing, list(CHART_ERRORS))
+
+
+def segments(value):
+    """A value's lines, with "tests/labs" split into its halves."""
+    return [half for line in value.split(" | ") for half in line.split("/")]
+
+
+class LostPricesTest(unittest.TestCase):
+    def test_version_29_keeps_every_price_version_28_showed(self):
+        data = years.data_dir(YEAR)
+        lost = []
+        for column in ("F_primary_care", "G_specialist", "I_outpatient_surgery", "K_tests_labs", "L_xray_imaging",
+                       "M_part_b_drugs"):
+            old, new = (present.lines(data, column, sheet="main", version=v) for v in (28, 29))
+            for plan, lines in old.items():
+                for (before, _), (after, _) in zip(lines, new[plan]):
+                    for a, b in zip(segments(before), segments(after)):
+                        if lacks(b, a):
+                            lost.append((plan, column, a, b))
+        self.assertEqual(lost, [])
 
 
 if __name__ == "__main__":
