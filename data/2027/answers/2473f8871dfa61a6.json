@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-129.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 64 is part of the Dental & Alternative Therapy Allowance row, which covers dental. It says 'This is a reimbursable benefit. You must pay out-of-pocket and submit for reimbursement' and 'There are no network restrictions to use this benefit.' That supports a supplemental dental covered fact with network any, condition reimbursement and limit 'pay up front, then reimbursed.'\"}]\n```",
+ "usage": {
+  "input_tokens": 3296,
+  "output_tokens": 770,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

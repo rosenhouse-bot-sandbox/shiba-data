@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-122.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 62 Dental & Alternative Therapy Allowance (covers dental services and alternative therapies): 'This is a reimbursable benefit. You must pay out-of-pocket and submit for reimbursement.' 'No network restrictions' supports network any, and the mandatory supplemental dental reference supports supplemental.\"}]\n```",
+ "usage": {
+  "input_tokens": 3388,
+  "output_tokens": 423,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

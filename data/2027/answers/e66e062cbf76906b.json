@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-154.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The Out-of-network section starts on page 79 and continues onto page 80, where the hearing aid fitting row reads $35 copay. It is a supplemental fitting/evaluation benefit, so every field matches.\"}]\n```",
+ "usage": {
+  "input_tokens": 3669,
+  "output_tokens": 302,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

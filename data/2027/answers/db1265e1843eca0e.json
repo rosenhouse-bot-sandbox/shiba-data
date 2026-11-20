@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-151.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 73, supplemental hearing aid fitting and evaluation row: out-of-network cost is 40% coinsurance for 1 fitting and evaluation every year.\"}]\n```",
+ "usage": {
+  "input_tokens": 2981,
+  "output_tokens": 234,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

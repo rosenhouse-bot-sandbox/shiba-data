@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-125.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 108 exclusions chart lists routine dental care, including fillings, dentures, orthodontic services, endodontics, periodontics, implant services and maxillofacial prosthetics, as 'Not covered under any condition'. The limit names all seven services, and the task notes confirm this page as the plan's dental exclusions list.\"}]\n```",
+ "usage": {
+  "input_tokens": 3329,
+  "output_tokens": 497,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

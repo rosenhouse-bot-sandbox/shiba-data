@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-118.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 65 row for the Dental & Alternative Therapy Allowance (dental services plus alternative therapies) says it has no network restrictions and is a reimbursable benefit: pay out of pocket, then submit for reimbursement.\"}]\n```",
+ "usage": {
+  "input_tokens": 3527,
+  "output_tokens": 552,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
