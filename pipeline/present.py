@@ -701,9 +701,12 @@ def exam_max(found):
     return (f"exam max {show(got)}{per(got)}", got) if got and per(got) else ("", [])
 
 
-def dental_exclusions(found):
-    """A detail: "excludes implants, cosmetic procedures" from the best source's dental exclusions."""
-    got = [f for f in details_of(found, "dental", "excludes") if f["cost_kind"] == "not_covered" and f["limit"]]
+def dental_exclusions(found, summary_first=False):
+    """A detail: "excludes implants, cosmetic procedures" from the best source's dental exclusions. With summary_first,
+    the Summary of Benefits' shorter list comes first."""
+    def listed(facts_):
+        return [f for f in details_of(facts_, "dental", "excludes") if f["cost_kind"] == "not_covered" and f["limit"]]
+    got = (listed([f for f in found if f["source"] == "SB"]) if summary_first else []) or listed(found)
     return (f"excludes {', '.join(dict.fromkeys(f['limit'] for f in got))}", got) if got else ("", [])
 
 
@@ -1658,8 +1661,9 @@ HEARING_OON_31 = out_of_network(("exam", "hearing.exam"), ("fitting", "hearing.e
 DVHA = {"C_premium": plan_premium, "D_premium_full_extra_help": extra_help_premium,
         "E_optional_packages": lambda o, found: optional_packages(o, found, details=False),
         "F_dental": or_none(with_lacking(with_packages(with_details(
-            dental, no_maximum, dental_deductible, dental_rollover, dental_reimbursement, dental_exclusions, DENTAL_OON,
-            preventive_limits, provider_network("dental"))), ("no COMP", "dental.comprehensive")), "dental"),
+            dental, no_maximum, dental_deductible, dental_rollover, dental_reimbursement,
+            lambda found: dental_exclusions(found, summary_first=True), DENTAL_OON, preventive_limits,
+            provider_network("dental"))), ("no COMP", "dental.comprehensive")), "dental"),
         "G_vision": or_none(with_lacking(with_packages(with_details(
             vision, exam_max, eyewear_pairs, VISION_OON, provider_network("vision"))),
             ("no eyewear allowance", "vision.eyewear")), "vision"),
@@ -1743,7 +1747,11 @@ EARLIER_RULES = {
                                ("no COMP", "dental.comprehensive")), "dental")),
                            (31, or_none(with_lacking(with_packages(with_details(
                                dental, no_maximum, dental_deductible, DENTAL_OON, preventive_limits,
-                               provider_network("dental"))), ("no COMP", "dental.comprehensive")), "dental"))),
+                               provider_network("dental"))), ("no COMP", "dental.comprehensive")), "dental")),
+                           (32, or_none(with_lacking(with_packages(with_details(
+                               dental, no_maximum, dental_deductible, dental_rollover, dental_reimbursement,
+                               dental_exclusions, DENTAL_OON, preventive_limits, provider_network("dental"))),
+                               ("no COMP", "dental.comprehensive")), "dental"))),
     ("dvha", "G_vision"): ((19, vision), (22, with_packages(with_details(vision, VISION_OON))),
                            (24, or_none(with_lacking(with_packages(with_details(vision, VISION_OON)),
                                                      ("no eyewear allowance", "vision.eyewear")), "vision")),
@@ -1938,6 +1946,8 @@ VERSIONS[30] = {}
 # Version 31 shows a program's rewards per step, rechargeable hearing aids, out-of-network hearing aid fittings, and
 # dental rollover, reimbursement and exclusions.
 VERSIONS[31] = {}
+# Version 32 takes dental exclusions from the Summary of Benefits when it lists them.
+VERSIONS[32] = {}
 # The version that first presents each later column. Earlier versions hold its cells.
 SINCE = {("dvha", "C_premium"): 3, ("dvha", "G_vision"): 4, ("dvha", "H_hearing"): 4, ("dvha", "E_optional_packages"): 5,
          ("dvha", "F_dental"): 6, ("dvha", "I_alt_care_otc_travel"): 6, ("dvha", "J_extra_benefits"): 6,

@@ -1719,6 +1719,25 @@ class WriteTest(unittest.TestCase):
                          "pay up front, then reimbursed")
         self.assertEqual(present.dental_reimbursement([detail("rollover", "covered")])[0], "")
 
+    def test_dental_exclusions_can_prefer_the_summary_of_benefits_short_list(self):
+        def excludes(limit, source):
+            return fact("dental", covered_by="supplemental", cost_kind="not_covered", amount="", condition="excludes",
+                        limit=limit, source=source)
+        found = [excludes("procedure codes not listed in the chart", "EOC"), excludes("implants, cosmetic procedures", "SB")]
+        self.assertEqual(present.dental_exclusions(found, summary_first=True)[0], "excludes implants, cosmetic procedures")
+        self.assertEqual(present.dental_exclusions(found)[0], "excludes procedure codes not listed in the chart")
+        self.assertEqual(present.dental_exclusions(found[:1], summary_first=True)[0],
+                         "excludes procedure codes not listed in the chart")
+
+    def test_version_32_shows_devoted_dental_exclusions_from_the_summary_of_benefits(self):
+        self.assertEqual(present.VERSIONS[32], {})
+        data = years.data_dir(YEAR)
+        got = {v: present.lines(data, "F_dental", sheet="dvha", version=v) for v in (31, 32)}
+        changed = {p for p in got[32] if got[31][p] != got[32][p]}
+        self.assertTrue(changed)
+        self.assertTrue(all(p.startswith(("H2923-", "H7199-")) for p in changed), changed)
+        self.assertIn("excludes Cosmetic procedures, dental implants, elective procedures", got[32]["H2923-001-0"][0][0])
+
     def test_dental_rollover_shows_only_with_an_allowance_or_maximum(self):
         never = fact("dental", covered_by="supplemental", cost_kind="not_covered", amount="", condition="rollover")
         maximum = fact("dental", covered_by="supplemental", cost_kind="max", amount="$1,000")
