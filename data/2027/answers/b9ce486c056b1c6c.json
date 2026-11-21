@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-161.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 80 lists a \\\"$50 additional cost per aid for optional hearing aid rechargeability\\\" for the TruHearing benefit, and page 79 confirms rechargeable options for an additional $50 per aid. The task maps this to a hearing.aids copay with condition rechargeable and unit per aid, in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3677,
+  "output_tokens": 475,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-153.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 51 'Fitting-evaluation(s) for hearing aids' row gives 80% coinsurance out of network, a supplemental hearing exam fact. The quote's '$699 copay per aid' is from the separate hearing aids row, but every field of the fact matches the fitting row.\"}]\n```",
+ "usage": {
+  "input_tokens": 3300,
+  "output_tokens": 382,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-68.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 81, in the dental benefit notes, says benefits are on a calendar year basis and any unused amount expires at the end of the year, so nothing rolls over.\"}]\n```",
+ "usage": {
+  "input_tokens": 3671,
+  "output_tokens": 252,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

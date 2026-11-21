@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-121.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 63 does say dental savings or membership plans are not covered. But the same exclusions list also excludes any dental procedure codes not listed under Mandatory Supplemental Dental Benefits, and the limit leaves that out. Network 'any' is also not shown on this page.\"}]\n```",
+ "usage": {
+  "input_tokens": 3681,
+  "output_tokens": 608,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

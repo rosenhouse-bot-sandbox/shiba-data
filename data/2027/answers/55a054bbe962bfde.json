@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-120.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 63 says the Dental & Alternative Therapy Allowance is reimbursable: members pay up front and submit for reimbursement. But the same page says there are no network restrictions and any licensed practitioner may be used, so network 'in' does not match. The fact should be network 'any', and the pool name is also missing.\"}]\n```",
+ "usage": {
+  "input_tokens": 3423,
+  "output_tokens": 513,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
