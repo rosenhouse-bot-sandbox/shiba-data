@@ -540,6 +540,14 @@ class StepTest(StepsTest):
                          {g: plans for g, plans in v35["recheck"].items() if g not in v36["targets"]})
         self.assertIn("There is no coinsurance or copayment", v36["recheck_plan_notes"]["dental"]["H1372-003-0"])
 
+    def test_version_38_points_one_vision_reader_to_the_evidence_of_coverage(self):
+        v37, v38 = document_facts.VERSIONS[37], document_facts.VERSIONS[38]
+        changed = dict(recheck_plan_notes=None, targets=None)
+        self.assertEqual(dict(v38, **changed), dict(v37, **changed))
+        self.assertEqual(v38["targets"], {"vision": ("H5216-428-2",)})
+        self.assertEqual(dict(v38["recheck_plan_notes"], vision=None), dict(v37["recheck_plan_notes"], vision=None))
+        self.assertIn("Page 85 of the Evidence of Coverage", v38["recheck_plan_notes"]["vision"]["H5216-428-2"])
+
     def test_version_37_points_second_readers_to_hearing_and_dental_details(self):
         v36, v37 = document_facts.VERSIONS[36], document_facts.VERSIONS[37]
         changed = dict(recheck=None, recheck_plan_notes=None, recheck_zero=None, recheck_no_cost=None, targets=None)

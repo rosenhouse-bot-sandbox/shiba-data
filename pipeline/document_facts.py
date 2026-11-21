@@ -420,3 +420,11 @@ VERSIONS[37] = dict(
              "dental": DEVOTED_REIMBURSED + ("H6815-038-0", "H5439-015-0", "H5439-019-0", "H7006-018-0", "H7006-021-0",
                                              "H3805-041-0"),
              "other_supplemental": ("H3817-009-1", "H3817-011-1", "H3817-010-0")})
+# Version 38 points H5216-428-2's second vision reader to the Evidence of Coverage, since its Summary of Benefits page
+# has two columns that quotes do not match.
+VERSIONS[38] = dict(
+    VERSIONS[37],
+    recheck_plan_notes=VERSIONS[37]["recheck_plan_notes"] | {
+        "vision": {"H5216-428-2": "Page 85 of the Evidence of Coverage gives the in-network routine eye exam a `$75 "
+                                  "allowance`: a `vision.exam` max $75 fact with `limit` `per year`."}},
+    targets={"vision": ("H5216-428-2",)})
