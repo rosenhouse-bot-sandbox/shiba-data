@@ -64,7 +64,7 @@ These items are not reproduced:
 - Item 10 (Wellcare EKG): the facts take a $200 price for tests that is not a diagnostic test. A note on the cell says so.
 
 DVHA items that the live sheet reproduces: 2 (Kaiser Standard $100/2-year eyewear), 3 ($25,000 worldwide cap on all 7 Devoted rows) and 6 (Regence routine podiatry).
-Item 1 (Wellcare comprehensive dental covers adjunctive services only) is not reproduced, but caveat notes give it.
+Item 1 (Wellcare comprehensive dental covers adjunctive services only) is not reproduced, but notes give it.
 Item 7 (Humana MyOption $1,500 max) is not reproduced: the facts give no yearly maximum for the package.
 Items 4 (Devoted rewards) and 5 (Regence virtual urgent care out of network) are not reproduced either.
 
