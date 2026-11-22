@@ -318,7 +318,7 @@ Rules write every value to the draft sheets, `generated/main_chart.csv` and `gen
 
 Some values need explaining. Claude sessions write notes in pull requests.
 
-A **note** explains a cell to volunteers. A `caveat`, in lavender, gives a settled detail the value leaves out. A `question`, in yellow, flags a value that needs a domain expert's check. A `contradiction`, in orange, says what the volunteer chart shows where the documents disagree. `comments.csv`, selected columns:
+A **note** explains a cell to volunteers. A `caveat`, in lavender, gives a settled detail the value leaves out. A `question`, in yellow, flags a value that needs a domain expert's check. A `contradiction`, in orange, says what the volunteer chart shows and what the documents show where they disagree. `comments.csv`, selected columns:
 
 ```
 sheet,plan_id,column,kind,comment,pdf_page,quote

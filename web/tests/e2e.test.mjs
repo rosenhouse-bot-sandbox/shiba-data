@@ -444,6 +444,8 @@ test("each note kind has its own color, and the Notes filter shows caveats", asy
   await caveat.click();
   assert.equal(await background(fresh.locator("#source-note .comment")), lavender);
   assert.equal(await background(caveat), lavender, "stays lavender in the open plan's row");
+  await contradiction.click();
+  assert.equal(await background(fresh.locator("#source-note .comment")), await background(contradiction));
   await fresh.click("nav a[data-view=notes]");
   const rows = fresh.locator("table.notes tbody tr");
   await fresh.selectOption("#kind-filter", "caveat");
