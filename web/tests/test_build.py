@@ -97,14 +97,15 @@ class SiteDataTest(unittest.TestCase):
         self.assertEqual((comment["doc"], comment["page"]), ("90a4efa6544175a2", 83))
         self.assertIn("EKGs", comment["quote"])
 
-    def test_comment_kind_is_a_question_or_a_caveat(self):
+    def test_comment_kind_is_a_question_caveat_or_contradiction(self):
         self.assertEqual(self.cell("main", "H6815-038-0", "K_tests_labs")["comment"]["kind"], "question")
         with tempfile.TemporaryDirectory() as tmp:
             data = data_copy(tmp, [])
             comment = f"sheet,plan_id,column,kind,comment,url,pdf_page,quote\nmain,H6815-038-0,K_tests_labs,{{}},x,{H6815_038_EOC},83,EKGs\n"
-            (data / "comments.csv").write_text(comment.format("caveat"))
-            row = next(r for r in build.site_data(data)["main"]["rows"] if r["plan_id"] == "H6815-038-0")
-            self.assertEqual(row["cells"]["K_tests_labs"]["comment"]["kind"], "caveat")
+            for kind in ("caveat", "contradiction"):
+                (data / "comments.csv").write_text(comment.format(kind))
+                row = next(r for r in build.site_data(data)["main"]["rows"] if r["plan_id"] == "H6815-038-0")
+                self.assertEqual(row["cells"]["K_tests_labs"]["comment"]["kind"], kind)
             (data / "comments.csv").write_text(comment.format("added"))
             with self.assertRaisesRegex(ValueError, "unknown kind added"):
                 build.site_data(data)

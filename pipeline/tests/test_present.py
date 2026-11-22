@@ -2285,8 +2285,8 @@ def lacks(value, chart_value):
     return sorted(t for t in set(TOKEN.findall(chart_value)) - have if not inside(t))
 
 
-# The chart's prices that the plan documents contradict.
-CHART_ERRORS = {("H5439-019-0", "K_tests_labs", " $0-20%"): "EOC page 90 gives 20% for labs out of network only"}
+# The chart's prices that the plan documents contradict. Each cell's contradiction note explains why.
+CHART_ERRORS = [("H5439-019-0", "K_tests_labs", " $0-20%")]
 
 
 class FinalChartPricesTest(unittest.TestCase):
@@ -2306,7 +2306,13 @@ class FinalChartPricesTest(unittest.TestCase):
             pairs = (zip(value.split("/"), r["chart"].split("/")) if value.count("/") == r["chart"].count("/") == 1
                      else [(value, r["chart"])])
             missing += [(r["plan_id"], r["column"], c) for v, c in pairs if lacks(v, c)]
-        self.assertEqual(missing, list(CHART_ERRORS))
+        self.assertEqual(missing, CHART_ERRORS)
+
+    def test_each_chart_error_has_a_contradiction_note(self):
+        with (years.data_dir(YEAR) / "comments.csv").open(newline="") as f:
+            contradicted = {(c["plan_id"], c["column"]) for c in csv.DictReader(f)
+                            if c["sheet"] == "main" and c["kind"] == "contradiction"}
+        self.assertEqual([e[:2] for e in CHART_ERRORS if e[:2] not in contradicted], [])
 
 
 def segments(value):

@@ -432,9 +432,12 @@ test("each note kind has its own color, and the Notes filter shows caveats", asy
   const background = (locator) => locator.evaluate((e) => getComputedStyle(e).backgroundColor);
   const question = fresh.locator("table.sheet td.commented.question").first();
   const caveat = fresh.locator("table.sheet td.commented.caveat").first();
+  const contradiction = fresh.locator("table.sheet td.commented.contradiction").first();
   const lavender = await background(caveat);
-  assert.notEqual(lavender, await background(question));
+  const colors = new Set([lavender, await background(question), await background(contradiction)]);
+  assert.equal(colors.size, 3);
   assert.match(await caveat.getAttribute("title"), /^Caveat: /);
+  assert.match(await contradiction.getAttribute("title"), /^Volunteer chart differs: /);
   await question.click();
   assert.equal(await background(fresh.locator("#source-note .comment")), await background(question));
   assert.match(await fresh.textContent("#source-note .comment"), /^Open question: /);
