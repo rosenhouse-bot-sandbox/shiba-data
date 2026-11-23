@@ -3,7 +3,7 @@ from unittest import mock
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path[:0] = [os.path.dirname(HERE), os.path.join(os.path.dirname(os.path.dirname(HERE)), "web")]
-import ask, blobs, build, document_facts, extract, fields, sheets, present, run, trace, years
+import ask, blobs, build, built, document_facts, extract, fields, sheets, present, run, trace, years
 
 READER, VERIFIER, REVIEWER = "reader-model", "verifier-model", "reviewer-model"
 
@@ -24,6 +24,7 @@ def statuses(records):
     return set()
 
 
+@built.check
 class TraceTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -188,6 +189,7 @@ class OutcomeFilesTest(unittest.TestCase):
                               f"facts/review/{extract.OUTCOMES}"])
 
 
+@built.check
 class RunTest(unittest.TestCase):
     """Builds from a copy of the year without its saved answers, and a run that asked one task."""
 

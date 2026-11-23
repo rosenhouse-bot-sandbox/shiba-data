@@ -8,13 +8,12 @@ import unittest
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, ".."))
 sys.path.insert(0, HERE)
+import built  # noqa: E402
 import cms_sources  # noqa: E402
 import years  # noqa: E402
 
 with gzip.open(os.path.join(HERE, "fixtures", "pbp_appendix_b.json.gz"), "rt") as f:
     FIXTURE = json.load(f)
-with open(years.data_dir(2027) / "generated/plans.csv", newline="") as f:
-    PLANS = [p for p in csv.DictReader(f) if p["plan_id"] in FIXTURE["plans"]]
 DICTIONARY = {(stem, field): {"codes": codes} for stem, field, codes in FIXTURE["codes"]}
 for stem, field, title in FIXTURE["titles"]:
     DICTIONARY.setdefault((stem, field), {"codes": {}})["title"] = title
@@ -62,20 +61,25 @@ class LandscapeTest(unittest.TestCase):
         self.assertNotIn("N_pharmacy_deductible", {r["column"] for r in cms_sources.pbp_rows("p", plan, {}, False)})
 
 
-class CommittedSourcesMatchGenerator(unittest.TestCase):
-    def test_pbp_rows(self):
-        made = [r for p in PLANS for r in cms_sources.pbp_rows(
-            p["plan_id"], FIXTURE["plans"][p["plan_id"]], DICTIONARY, p["premium_full_extra_help"] != "n/a")]
-        with open(years.data_dir(2027) / "generated/cms_sources.csv") as f:
-            committed = [r for r in csv.DictReader(f) if r["plan_id"] in FIXTURE["plans"] and r["file"] != "Landscape"]
-        self.assertTrue(made)
-        self.assertEqual(committed, made)
-
+class PbpRowsTest(unittest.TestCase):
     def test_a_plan_without_a_deductible_says_no(self):
         rows = cms_sources.pbp_rows("H2923-001-0", FIXTURE["plans"]["H2923-001-0"], DICTIONARY, True)
         self.assertIn({"plan_id": "H2923-001-0", "column": "O_medical_deductible", "file": "pbp_Section_D",
                        "field": "pbp_d_inn_deduct_yn", "title": "In-Ntwk Plan Deductible YN", "value": "2", "meaning": "No"},
                       rows)
+
+
+@built.check
+class CommittedSourcesMatchGenerator(unittest.TestCase):
+    def test_pbp_rows(self):
+        with open(years.data_dir(2027) / "generated/plans.csv", newline="") as f:
+            plans = [p for p in csv.DictReader(f) if p["plan_id"] in FIXTURE["plans"]]
+        made = [r for p in plans for r in cms_sources.pbp_rows(
+            p["plan_id"], FIXTURE["plans"][p["plan_id"]], DICTIONARY, p["premium_full_extra_help"] != "n/a")]
+        with open(years.data_dir(2027) / "generated/cms_sources.csv") as f:
+            committed = [r for r in csv.DictReader(f) if r["plan_id"] in FIXTURE["plans"] and r["file"] != "Landscape"]
+        self.assertTrue(made)
+        self.assertEqual(committed, made)
 
 
 if __name__ == "__main__":

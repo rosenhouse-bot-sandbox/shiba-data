@@ -1,6 +1,7 @@
 import json, os, sys, tempfile, unittest
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import built
 import expected
 import facts
 import sheets
@@ -325,6 +326,7 @@ class SupplementalFactsTest(unittest.TestCase):
 
 
 class ImagingCellsTest(unittest.TestCase):
+    @built.check
     def test_facts_agree_with_every_imaging_line_built_from_the_pbp(self):
         data = years.data_dir()
         rows = facts.read(data / "generated" / "pbp_facts.csv")

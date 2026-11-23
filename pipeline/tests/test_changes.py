@@ -2,7 +2,7 @@ import contextlib, io, os, sys, tempfile, unittest
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-import changes, sheets, years
+import built, changes, sheets, years
 
 
 def sheet(**cells):
@@ -34,6 +34,7 @@ class ChangedTest(unittest.TestCase):
 
 
 class AtTest(unittest.TestCase):
+    @built.check
     def test_reads_the_sheets_at_a_ref(self):
         data = years.data_dir(years.LIVE)
         with tempfile.TemporaryDirectory() as out:

@@ -95,23 +95,27 @@ class AskerTest(unittest.TestCase):
 
 
 class MainTest(unittest.TestCase):
-    def test_runs_the_unit_tests_before_any_download_or_model_call(self):
+    def run_main(self, mode, candidate=""):
         order = []
-
-        class Stop(Exception):
-            pass
-
-        def unit_tests(candidate):
-            order.append(("unit_tests", candidate))
-            raise Stop
-
         with tempfile.TemporaryDirectory() as work, \
-             mock.patch.multiple(run, unit_tests=unit_tests, get=lambda *a: order.append("get"),
-                                 model_steps=lambda *a: order.append("model_steps")), \
-             self.assertRaises(Stop):
-            run.main(str(years.LIVE), work, "api", "present@2")
-        self.assertEqual(order, [("unit_tests", "present@2")])
+             mock.patch.multiple(run, tests=lambda kind, candidate: order.append((kind, candidate)),
+                                 get=lambda *a: order.append("get"), py=lambda *a: None, check_quotes=lambda *a: None,
+                                 model_steps=lambda *a: order.append("model_steps"), asker=lambda *a: None), \
+             mock.patch.object(run.subprocess, "run"), mock.patch.object(run.blobs, "record_cms"), \
+             mock.patch.object(run.blobs, "record_texts"), mock.patch.object(run, "pdfs"):
+            run.main(str(years.LIVE), work, mode, candidate)
+        return order
 
+    def test_runs_the_code_tests_before_any_download_or_model_call(self):
+        self.assertEqual(self.run_main("api", "present@2")[0], ("code", "present@2"))
+        self.assertEqual(self.run_main("api", "present@2")[1], "get")
+
+    def test_checks_the_built_data_after_the_model_steps(self):
+        self.assertEqual(self.run_main("replay")[-2:], ["model_steps", ("checks", "")])
+        self.assertEqual(self.run_main("api")[-2:], ["model_steps", ("checks", "")])
+
+    def test_leaves_a_candidates_data_for_its_pin_to_check(self):
+        self.assertEqual(self.run_main("api", "present@2")[-1], "model_steps")
 
 if __name__ == "__main__":
     unittest.main()

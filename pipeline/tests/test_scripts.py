@@ -8,6 +8,7 @@ import tempfile
 import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
+import built  # noqa: E402
 import fetch_docs  # noqa: E402
 import fields  # noqa: E402
 import pbp  # noqa: E402
@@ -76,6 +77,7 @@ class PbpDictionaryTest(unittest.TestCase):
 
 
 class SpecTest(unittest.TestCase):
+    @built.check
     def test_carriers_are_organizations_in_the_plans_file(self):
         with open(f"{years.data_dir()}/generated/plans.csv") as f:
             organizations = {r["organization"] for r in csv.DictReader(f)}

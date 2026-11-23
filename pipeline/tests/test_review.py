@@ -1,11 +1,10 @@
-import contextlib, io, json, os, pathlib, sys, tempfile, unittest
+import contextlib, functools, io, json, os, pathlib, sys, tempfile, unittest
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-import ask, document_facts, extract, facts, sheets, present, review, years
+import ask, built, document_facts, extract, facts, sheets, present, review, years
 
 DATA = years.data_dir(years.LIVE)
-COMMITTED = facts.read(DATA / "machine/document_facts.csv")
 PLAN = "H2923-001-0"
 
 
@@ -37,38 +36,48 @@ def answering(rejected=(), asked=None):
 
 # The present version whose held cells and facts the reviewer sees.
 HELD = 1
-TRUSTED = review.cited(DATA, COMMITTED, HELD)
 
 
+@functools.cache
+def committed_facts():
+    return facts.read(DATA / "machine/document_facts.csv")
+
+
+@functools.cache
+def trusted_rows():
+    return review.cited(DATA, committed_facts(), HELD)
+
+
+@built.check
 class ToReviewTest(unittest.TestCase):
     def test_reviews_only_untrusted_facts_that_a_cell_cites(self):
         cited, uncited = fact(), fact(benefit="radiation_therapy", amount="$2")
-        self.assertEqual(review.to_review(DATA, TRUSTED, COMMITTED + [cited, uncited], HELD), [cited])
+        self.assertEqual(review.to_review(DATA, trusted_rows(), committed_facts() + [cited, uncited], HELD), [cited])
 
     def test_reviews_a_duplicated_fact_once(self):
-        self.assertEqual(review.to_review(DATA, TRUSTED, COMMITTED + [fact(), fact()], HELD), [fact()])
+        self.assertEqual(review.to_review(DATA, trusted_rows(), committed_facts() + [fact(), fact()], HELD), [fact()])
 
     def test_skips_facts_that_only_a_held_cell_cites(self):
         held = fact(plan_id="H6815-038-0", benefit="tests.diagnostic", setting="office.pcp", amount="$9")
         self.assertIn(("K_tests_labs", "H6815-038-0"), present.held(DATA, HELD))
-        self.assertEqual(review.to_review(DATA, TRUSTED, COMMITTED + [held], HELD), [])
+        self.assertEqual(review.to_review(DATA, trusted_rows(), committed_facts() + [held], HELD), [])
 
     def test_reviews_the_facts_that_a_released_cell_cites(self):
-        released = review.to_review(DATA, TRUSTED, COMMITTED, 2)
+        released = review.to_review(DATA, trusted_rows(), committed_facts(), 2)
         self.assertEqual({(f["plan_id"], f["benefit"].split(".")[0]) for f in released}, {("H2923-009-0", "tests")})
 
     def test_reviews_the_package_allowances_that_present_17_shows(self):
-        released = review.to_review(DATA, review.cited(DATA, COMMITTED, 16), COMMITTED, 17)
+        released = review.to_review(DATA, review.cited(DATA, committed_facts(), 16), committed_facts(), 17)
         self.assertEqual({(f["plan_id"], f["benefit"]) for f in released},
                          {(p, b) for p in document_facts.KAISER for b in ("vision.eyewear", "hearing.aids")})
 
     def test_reviews_the_facts_that_a_dvha_cell_cites(self):
-        released = review.to_review(DATA, review.cited(DATA, COMMITTED, 2), COMMITTED,
+        released = review.to_review(DATA, review.cited(DATA, committed_facts(), 2), committed_facts(),
                                     3)
         self.assertEqual({f["benefit"] for f in released}, {"plan_premium"})
 
     def test_an_unchanged_fact_set_needs_no_review(self):
-        self.assertEqual(review.to_review(DATA, TRUSTED, COMMITTED, HELD), [])
+        self.assertEqual(review.to_review(DATA, trusted_rows(), committed_facts(), HELD), [])
 
 
 class TrustedTest(unittest.TestCase):
@@ -82,6 +91,7 @@ class TrustedTest(unittest.TestCase):
             self.assertEqual(review.trusted(data, [fact()], HELD), {review.row(fact(amount="$3"))})
 
 
+@built.check
 class GateTest(unittest.TestCase):
     def setUp(self):
         self.printed = self.enterContext(contextlib.redirect_stdout(io.StringIO()))
@@ -93,33 +103,33 @@ class GateTest(unittest.TestCase):
 
     def outcomes(self, new, answer, saved=lambda *_: False):
         with tempfile.TemporaryDirectory() as work, mock.patch.object(review, "saved", saved):
-            review.gate(DATA, None, work, answer, TRUSTED, new, dict(reviewer=("m", "e"), review_cap=10), HELD,
+            review.gate(DATA, None, work, answer, trusted_rows(), new, dict(reviewer=("m", "e"), review_cap=10), HELD,
                         task_of=lambda f: json.dumps(f))
             with open(f"{work}/review/{extract.OUTCOMES}") as f:
                 return json.load(f)
 
     def test_records_each_verdict(self):
         good, bad = fact(), fact(amount="$3")
-        self.assertEqual(self.outcomes(COMMITTED + [good, bad], answering(['"$3"'])), [
+        self.assertEqual(self.outcomes(committed_facts() + [good, bad], answering(['"$3"'])), [
             dict(prompt=ask.sha(json.dumps(f)), item=0, fact=extract.named(f), ok=f is good, reason="test", earlier=False)
             for f in (good, bad)])
 
     def test_records_the_saved_verdicts_of_trusted_facts(self):
-        old = next(f for f in COMMITTED if review.row(f) in TRUSTED)
+        old = next(f for f in committed_facts() if review.row(f) in trusted_rows())
         asked = []
-        got = self.outcomes(COMMITTED, answering((), asked), saved=lambda data, model, text, effort: text == json.dumps(old))
+        got = self.outcomes(committed_facts(), answering((), asked), saved=lambda data, model, text, effort: text == json.dumps(old))
         self.assertEqual(got, [dict(prompt=ask.sha(json.dumps(old)), item=0, fact=extract.named(old), ok=True, reason="test",
                                     earlier=True)])
         self.assertEqual(asked, ["v-0.md"])
 
     def test_gives_saved_verdicts_only_for_trusted_facts(self):
         uncited = fact(benefit="radiation_therapy", amount="$2")
-        got = self.outcomes(COMMITTED + [uncited], answering(), saved=lambda data, model, text, effort: text == json.dumps(uncited))
+        got = self.outcomes(committed_facts() + [uncited], answering(), saved=lambda data, model, text, effort: text == json.dumps(uncited))
         self.assertEqual(got, [])
 
     def test_drops_the_facts_the_reviewer_rejects_and_keeps_the_rest(self):
         good, bad, uncited = fact(), fact(amount="$3", setting="office.specialist"), fact(benefit="radiation_therapy")
-        kept, trusted = self.gate(TRUSTED, COMMITTED + [good, bad, uncited], answering(["$3"]))
+        kept, trusted = self.gate(trusted_rows(), committed_facts() + [good, bad, uncited], answering(["$3"]))
         self.assertIn(good, kept)
         self.assertIn(uncited, kept)
         self.assertNotIn(bad, kept)
@@ -129,19 +139,19 @@ class GateTest(unittest.TestCase):
 
     def test_keeps_trusting_a_kept_fact_that_no_cell_cites(self):
         uncited = fact(benefit="radiation_therapy")
-        _, trusted = self.gate(TRUSTED | {review.row(uncited)}, COMMITTED + [uncited], answering())
+        _, trusted = self.gate(trusted_rows() | {review.row(uncited)}, committed_facts() + [uncited], answering())
         self.assertIn(uncited, trusted)
 
     def test_trusts_the_facts_a_released_cell_cites_once_reviewed(self):
         asked = []
-        _, trusted = self.gate(TRUSTED, COMMITTED, answering((), asked), held=2)
-        released = review.to_review(DATA, TRUSTED, COMMITTED, 2)
+        _, trusted = self.gate(trusted_rows(), committed_facts(), answering((), asked), held=2)
+        released = review.to_review(DATA, trusted_rows(), committed_facts(), 2)
         self.assertEqual(len(asked), len(released))
         self.assertLessEqual({review.row(f) for f in released}, {review.row(f) for f in trusted})
 
     def test_gives_each_verdict_to_its_own_fact(self):
         a, b = fact(amount="$1"), fact(amount="$4")
-        kept, _ = self.gate(TRUSTED, COMMITTED + [a, b], answering(["$4"]))
+        kept, _ = self.gate(trusted_rows(), committed_facts() + [a, b], answering(["$4"]))
         self.assertIn(a, kept)
         self.assertNotIn(b, kept)
 
@@ -149,13 +159,13 @@ class GateTest(unittest.TestCase):
         fitness = dict(plan_id="H2406-070-0", benefit="fitness", setting="any", covered_by="supplemental",
                        cost_kind="covered", amount="")
         hiding, hidden = fact(**fitness, quotes='["bad"]'), fact(**fitness, source="SB")
-        _, trusted = self.gate(TRUSTED, COMMITTED + [hidden, hiding], answering())
+        _, trusted = self.gate(trusted_rows(), committed_facts() + [hidden, hiding], answering())
         asked = []
-        self.gate({review.row(f) for f in trusted}, COMMITTED + [hidden], answering((), asked))
+        self.gate({review.row(f) for f in trusted}, committed_facts() + [hidden], answering((), asked))
         self.assertEqual(len(asked), 1)
 
     def test_trusts_what_it_kept_so_a_rerun_asks_nothing(self):
-        kept, trusted = self.gate(TRUSTED, COMMITTED + [fact()], answering())
+        kept, trusted = self.gate(trusted_rows(), committed_facts() + [fact()], answering())
         asked = []
         self.assertEqual(self.gate({review.row(f) for f in trusted}, kept, answering((), asked))[0], kept)
         self.assertEqual(asked, [])
@@ -165,7 +175,7 @@ class GateTest(unittest.TestCase):
                        cost_kind="covered", amount="")
         hiding, hidden = fact(**fitness, quotes='["bad"]'), fact(**fitness, source="SB")
         asked = []
-        kept, _ = self.gate(TRUSTED, COMMITTED + [hidden, hiding], answering(["bad"], asked))
+        kept, _ = self.gate(trusted_rows(), committed_facts() + [hidden, hiding], answering(["bad"], asked))
         self.assertEqual(len(asked), 2)
         self.assertIn(hidden, kept)
         self.assertNotIn(hiding, kept)
@@ -175,42 +185,45 @@ class GateTest(unittest.TestCase):
                        cost_kind="covered", amount="")
         hiding, hidden = fact(**fitness, quotes='["bad"]'), fact(**fitness, source="SB")
         with self.assertRaisesRegex(SystemExit, "needs 2 new answers"):
-            self.gate(TRUSTED, COMMITTED + [hidden, hiding], answering(["bad"]), cap=1)
+            self.gate(trusted_rows(), committed_facts() + [hidden, hiding], answering(["bad"]), cap=1)
 
     def test_stops_when_more_new_facts_need_review_than_the_cap(self):
         new = [fact(amount=f"${n}", setting=s) for n, s in ((7, "office.pcp"), (8, "office.specialist"))]
-        self.gate(TRUSTED, COMMITTED + new, answering(), cap=2)
+        self.gate(trusted_rows(), committed_facts() + new, answering(), cap=2)
         with self.assertRaisesRegex(SystemExit, "needs 2 new answers"):
-            self.gate(TRUSTED, COMMITTED + new, answering(), cap=1)
+            self.gate(trusted_rows(), committed_facts() + new, answering(), cap=1)
 
     def test_the_cap_counts_only_answers_not_saved(self):
         new = [fact(amount="$7"), fact(amount="$8")]
         with mock.patch.object(review, "saved", lambda data, model, text, effort: "$7" in text):
-            self.gate(TRUSTED, COMMITTED + new, answering(), cap=1)
+            self.gate(trusted_rows(), committed_facts() + new, answering(), cap=1)
             with self.assertRaisesRegex(SystemExit, "needs 1 new answers"):
-                self.gate(TRUSTED, COMMITTED + new, answering(), cap=0)
+                self.gate(trusted_rows(), committed_facts() + new, answering(), cap=0)
 
 
 class VersionTest(unittest.TestCase):
+    @built.check
     def test_asks_with_the_versions_notes(self):
         notes = {"imaging": "Read this."}
         with tempfile.TemporaryDirectory() as work, mock.patch.object(review, "Doc") as doc, \
                 mock.patch.object(extract, "verifier_task", return_value="task") as verifier_task:
             doc.return_value.pages.return_value = {}
-            review.gate(DATA, None, work, answering(), TRUSTED, COMMITTED + [fact()],
+            review.gate(DATA, None, work, answering(), trusted_rows(), committed_facts() + [fact()],
                         dict(reviewer=("m", "e"), review_cap=10, notes=notes), HELD)
         self.assertEqual(verifier_task.call_args.args[-1], notes)
 
+    @built.check
     def test_asks_with_the_versions_check_notes_too(self):
         version = dict(notes={"imaging": "Read this.", "dental": "Teeth."}, check_notes={"imaging": "Check this."})
         self.assertEqual(review.checker_notes(version), {"imaging": "Read this. Check this.", "dental": "Teeth."})
         with tempfile.TemporaryDirectory() as work, mock.patch.object(review, "Doc") as doc, \
                 mock.patch.object(extract, "verifier_task", return_value="task") as verifier_task:
             doc.return_value.pages.return_value = {}
-            review.gate(DATA, None, work, answering(), TRUSTED, COMMITTED + [fact()],
+            review.gate(DATA, None, work, answering(), trusted_rows(), committed_facts() + [fact()],
                         dict(version, reviewer=("m", "e"), review_cap=10), HELD)
         self.assertEqual(verifier_task.call_args.args[-1], review.checker_notes(version))
 
+    @built.check
     def test_asks_with_the_second_looks_notes_and_pages_before(self):
         version = dict(notes={"imaging": "Read this."}, check_notes={"imaging": "Check this."},
                        recheck_notes={"imaging": "Look again.", "dental": "Teeth."}, check_before={"imaging": 1})
@@ -218,28 +231,30 @@ class VersionTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as work, mock.patch.object(review, "Doc") as doc, \
                 mock.patch.object(extract, "verifier_task", return_value="task") as verifier_task:
             doc.return_value.pages.return_value = {}
-            review.gate(DATA, None, work, answering(), TRUSTED, COMMITTED + [fact()],
+            review.gate(DATA, None, work, answering(), trusted_rows(), committed_facts() + [fact()],
                         dict(version, reviewer=("m", "e"), review_cap=10), HELD)
         self.assertEqual(verifier_task.call_args.args[-1], review.second_notes(version))
         self.assertEqual(verifier_task.call_args.kwargs["before"], {"imaging": 1})
 
+    @built.check
     def test_asks_with_the_plan_notes_of_the_facts_document(self):
         plan_notes = {"imaging": {fact()["plan_id"]: "This plan.", "H0000-000-0": "Not this."}}
         with tempfile.TemporaryDirectory() as work, mock.patch.object(review, "Doc") as doc, \
                 mock.patch.object(extract, "verifier_task", return_value="task") as verifier_task:
             doc.return_value.pages.return_value = {}
-            review.gate(DATA, None, work, answering(), TRUSTED, COMMITTED + [fact()],
+            review.gate(DATA, None, work, answering(), trusted_rows(), committed_facts() + [fact()],
                         dict(reviewer=("m", "e"), review_cap=10, recheck_plan_notes=plan_notes), HELD)
         notes = {c.args[3][0]["plan_id"]: c.args[-1] for c in verifier_task.call_args_list}
         self.assertEqual(notes[fact()["plan_id"]], {"imaging": "This plan."})
         self.assertEqual(notes["H1036-306-0"], {})
 
+    @built.check
     def test_asks_with_the_plan_notes_of_every_reader_then_of_second_readers(self):
         plan = fact()["plan_id"]
         with tempfile.TemporaryDirectory() as work, mock.patch.object(review, "Doc") as doc, \
                 mock.patch.object(extract, "verifier_task", return_value="task") as verifier_task:
             doc.return_value.pages.return_value = {}
-            review.gate(DATA, None, work, answering(), TRUSTED, COMMITTED + [fact()],
+            review.gate(DATA, None, work, answering(), trusted_rows(), committed_facts() + [fact()],
                         dict(reviewer=("m", "e"), review_cap=10, plan_notes={"imaging": {plan: "Every reader."}},
                              recheck_plan_notes={"imaging": {plan: "This plan."}}), HELD)
         notes = {c.args[3][0]["plan_id"]: c.args[-1] for c in verifier_task.call_args_list}
@@ -250,11 +265,12 @@ class VersionTest(unittest.TestCase):
         version = dict(plan_notes={"imaging": {p: p for p in plans}}, recheck_plan_notes={"imaging": {plans[0]: "Again."}})
         self.assertEqual(list(review.plan_notes(version)["imaging"]), plans)
 
+    @built.check
     def test_shows_the_pages_after_that_the_version_asks_for(self):
         with tempfile.TemporaryDirectory() as work, mock.patch.object(review, "Doc") as doc, \
                 mock.patch.object(extract, "verifier_task", return_value="task") as verifier_task:
             doc.return_value.pages.return_value = {}
-            review.gate(DATA, None, work, answering(), TRUSTED, COMMITTED + [fact()],
+            review.gate(DATA, None, work, answering(), trusted_rows(), committed_facts() + [fact()],
                         dict(reviewer=("m", "e"), review_cap=10, check_after={"imaging": 1}), HELD)
         self.assertEqual(verifier_task.call_args.kwargs["after"], {"imaging": 1})
 
