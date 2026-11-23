@@ -7,19 +7,6 @@ The methods doc and Appendix B below are the 2027 bootstrap's, which git history
 `python3 -I pipeline/run.py 2027 <work_dir>` lists plan documents from `found.csv` and `links.csv`, downloads them and the sources named in `config.json`, and regenerates `generated/`.
 It then reads facts into `machine/document_facts.csv` from the answers saved in `answers/`, and presents them in `generated/presented.csv`.
 
-## Layers
-
-The site shows the generated sheets with these layers applied in order. Each layer row sets and cites the value of a cell, or of one line of it.
-
-| File | Rows from |
-|---|---|
-| `generated/presented.csv` | `pipeline/present.py`: column rules applied to facts |
-| `edits.csv` | People, and Claude sessions they steer |
-
-A later layer wins, and within `edits.csv` a later row wins. The site drops a citation whose value is not the live cell's.
-
-An edit row also records `saw`, the value its author saw. The site build warns when the cell beneath an edit is no longer `saw`, and when an edit cites an unknown document.
-
 ## Results
 
 | Step | Result |
@@ -70,8 +57,8 @@ Items 4 (Devoted rewards) and 5 (Regence virtual urgent care out of network) are
 
 ## Limits
 
-- The PBP is bid data, not a citable document. Only the cells that a layer cites carry SB/EOC page citations.
-- `pipeline/cms_sources.py` lists the CMS fields behind columns D, K, M, N and O in `generated/cms_sources.csv`. The site shows them for a cell no layer cites or changes.
+- The PBP is bid data, not a citable document. Only the cells that `generated/presented.csv` cites carry SB/EOC page citations.
+- `pipeline/cms_sources.py` lists the CMS fields behind columns D, K, M, N and O in `generated/cms_sources.csv`. The site shows them for a cell with no citation.
 - `run.py` does not run the model steps (issue #46). A model step publishes a citation only if the EOC value matches the cell, the quote highlights once on its page, and two models both confirm it.
 - DVHA cells leave out vendor names, frequency limits and rewards. ATRIO's shared allowance shows only as the services it covers.
 - The dot rules in `pipeline/fields.py` follow the methods doc's inferred policy R10 to R13, not rules from the SHIBA team.

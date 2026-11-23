@@ -3,7 +3,7 @@ import ast
 
 REPO_URL = "https://github.com/rosenhouse-bot-sandbox/shiba-data"
 
-# ref is "<path>:<function or constant>" for Python, or a path to link whole.
+# ref is "<path>:<function>" for Python, or a path to link whole.
 TERMS = {
     "bothCounties": {"title": "Plans sold in both counties", "ref": "pipeline/universe.py:select_plans",
                      "text": "Code keeps a plan only if the Landscape file lists it in every county in config.json, "
@@ -37,24 +37,17 @@ TERMS = {
                      "line 1 is trips in the U.S., line 2 is trips abroad."},
     "bestSource": {"title": "Best source", "ref": "pipeline/present.py:top",
                    "text": "Among matching facts, a rule keeps those from the best source: EOC, then rider, then SB, then CMS."},
-    "layer": {"title": "Layers", "ref": "pipeline/layers.py:LAYERS",
-              "text": "Tables applied in order on top of the draft. A later layer wins."},
     "worker": {"title": "The Worker", "ref": "web/worker.js",
                "text": "A Cloudflare Worker serves the static site, and serves each PDF from R2 by its hash."},
 }
 
 
 def locate(repo, ref):
-    """The source and line span of a Python function or top-level constant."""
+    """The source and line span of a Python function."""
     path, name = ref.split(":")
     source = (repo / path).read_text()
     for node in ast.parse(source).body:
-        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
-            names = [node.name]
-        else:
-            targets = getattr(node, "targets", None) or [getattr(node, "target", None)]
-            names = [t.id for t in targets if isinstance(t, ast.Name)]
-        if name in names:
+        if isinstance(node, ast.FunctionDef) and node.name == name:
             return ast.get_source_segment(source, node), node.lineno, node.end_lineno
     raise ValueError(f"{path} has no {name}")
 

@@ -54,9 +54,9 @@ flowchart TD
   read --> check[6. Code and Claude check each fact]
   check --> present[7. Rules turn facts into values]
   cmsfacts --> present
-  present --> stack[9. Stack the layers]
-  fix[8. Claude sessions explain what is left] --> stack
-  stack --> publish[10. Publish the site and Google Sheet]
+  present --> notes[8. Claude sessions write notes]
+  present --> publish[9. Publish the site and Google Sheet]
+  notes --> publish
 ```
 
 ## 1. List the plans
@@ -312,9 +312,9 @@ main,H1036-153-0,AB_ambulance,1,$325 or 20%,…H1036153000EOC27pdf,46,Non-Emerge
 main,H1036-153-0,AB_ambulance,2,$325,…H1036153000EOC27pdf,46,Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance
 ```
 
-Rules write every value to the draft sheets, `generated/main_chart.csv` and `generated/dvha.csv`. A line that only CMS facts back goes there without a citation.
+Rules write every value to the sheets, `generated/main_chart.csv` and `generated/dvha.csv`. A line that only CMS facts back has no citation.
 
-## 8. Claude sessions explain what is left
+## 8. Claude sessions write notes
 
 Some values need explaining. Claude sessions write notes in pull requests.
 
@@ -326,26 +326,10 @@ dvha,H1372-003-0,F_dental,caveat,"EOC page 57 says there is no coinsurance or co
 main,H7199-002-0,L_xray_imaging,question,"EOC page 96 prices X-rays at $25 in every office setting. …",96,X-rays PCP's office: $25 copay
 ```
 
-An **edit** in `edits.csv` sets a cell's value directly, with a citation.
+## 9. Publish
 
-## 9. Stack the layers
-
-A **layer** is a table whose rows set a cell's value and cite it. Code applies the layers in order on top of the draft. When two layers set the same cell, the later one wins:
-
-```
-layer                             Ambulance               X-ray
-generated/main_chart.csv     (7)  $325 or 20% | $325      $0-$30 | $205-$330
-generated/presented.csv      (7)  $325 or 20% | $325      $0-$30 | $205-$330
-edits.csv                    (8)  (none)                  (none)
-──────────────────────────────────────────────────────────
-live sheet                        $325 or 20% | $325      $0-$30 | $205-$330
-```
-
-Code drops a citation whose value differs from the cell's final value. So a quote never supports a value it doesn't show.
-
-## 10. Publish
-
-Merging to main builds the site. The `pdxplans` Cloudflare Worker serves the site at [pdxplans.org](https://pdxplans.org), and serves the PDFs from R2. The same build updates the volunteers' Google Sheet in place, so their comments stay on their cells. The Sheet's Details tab lists every fact.
+Merging to main builds the site from the sheets and `presented.csv`. Where an EOC or rider cites a cell, the site leaves out the cell's SB citations.
+The `pdxplans` Cloudflare Worker serves the site at [pdxplans.org](https://pdxplans.org), and serves the PDFs from R2. The same build updates the volunteers' Google Sheet in place, so their comments stay on their cells. The Sheet's Details tab lists every fact.
 
 ## Reproducible runs
 

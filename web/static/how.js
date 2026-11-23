@@ -2,7 +2,7 @@
 import { el, svg } from "./dom.js";
 import { format } from "./permalink.js";
 import {
-  EXAMPLE, NODES, STEPS, DRAFT_FILES, LINKS, NODE_W, NODE_H, MAP_W, MAP_H,
+  EXAMPLE, NODES, STEPS, SHEET_FILES, LINKS, NODE_W, NODE_H, MAP_W, MAP_H,
   nodeBox, pillBox, edge, before, after, strip, details,
 } from "./pipeline.js";
 
@@ -13,14 +13,14 @@ const SCALE = RAIL_W / MAP_W;
 export const howLink = (year, cell, step) => format({ year, view: "how", sheet: cell.sheet, plan: cell.plan, column: cell.column, step: step.id });
 export const traceUrl = (year, sheet, plan, columnKey) => `trace/${year}/${sheet}/${plan}/${columnKey}`;
 const shown = (id) => NODES[id].table ?? NODES[id].text;
-const label = (id, sheet) => id === "draft" ? DRAFT_FILES[sheet] : NODES[id].label;
+const label = (id, sheet) => id === "sheet" ? SHEET_FILES[sheet] : NODES[id].label;
 const isExample = (cell) => cell.sheet === EXAMPLE.sheet && cell.plan === EXAMPLE.plan && cell.column === EXAMPLE.column;
 
-// cell is { sheet, plan, column, label, value }. steps are the ones that touched it, from chain().
-export function howView({ year, cell, step, steps, terms, trace }) {
-  const at = steps.indexOf(step);
+// cell is { sheet, plan, column, label, value }.
+export function howView({ year, cell, step, terms, trace }) {
+  const at = STEPS.indexOf(step);
   const link = (s) => howLink(year, cell, s);
-  const prev = steps[at - 1], next = steps[at + 1];
+  const prev = STEPS[at - 1], next = STEPS[at + 1];
   return el("div", { class: "how" },
     el("div", { class: "how-head" },
       el("span", {}, "Following one cell:"),
@@ -28,21 +28,20 @@ export function howView({ year, cell, step, steps, terms, trace }) {
       el("code", { class: "how-value" }, cell.value || "blank"),
       el("span", { class: "how-spacer" }),
       prev ? el("a", { class: "how-nav", href: link(prev), rel: "prev" }, "← Prev") : el("span", { class: "how-nav off" }, "← Prev"),
-      el("span", { class: "how-count" }, `${at + 1} of ${steps.length}`),
+      el("span", { class: "how-count" }, `${at + 1} of ${STEPS.length}`),
       next ? el("a", { class: "how-nav primary", href: link(next), rel: "next" }, "Next →") : el("span", { class: "how-nav primary off" }, "Next →")),
-    el("div", { class: "how-body" }, map(step, steps, link, cell.sheet),
-      lens(step, steps, link, terms, isExample(cell) ? step.example : null, trace, cell.sheet)));
+    el("div", { class: "how-body" }, map(step, link, cell.sheet),
+      lens(step, link, terms, isExample(cell) ? step.example : null, trace, cell.sheet)));
 }
 
-function map(step, steps, link, sheet) {
+function map(step, link, sheet) {
   const on = new Set([step.from, step.to]);
-  const skip = (s) => s.extra || steps.includes(s) ? "" : " skip";
   const lines = svg("svg", { width: MAP_W, height: MAP_H, "aria-hidden": "true" },
     svg("defs", {}, ...["off", "on"].map((k) => svg("marker", {
       id: `how-arrow-${k}`, viewBox: "0 0 10 10", refX: "9", refY: "5", markerWidth: "10", markerHeight: "10", markerUnits: "userSpaceOnUse", orient: "auto",
     }, svg("path", { d: "M0,0 L10,5 L0,10 z", class: `how-arrow ${k}` })))),
     ...[...LINKS.map(([f, t]) => ({ from: f, to: t, extra: true })), ...STEPS].map((s) => svg("path", {
-      d: edge(s.from, s.to).d, class: `how-edge${s === step ? " on" : ""}${s.extra ? " extra" : ""}${skip(s)}`,
+      d: edge(s.from, s.to).d, class: `how-edge${s === step ? " on" : ""}${s.extra ? " extra" : ""}`,
       "marker-end": `url(#how-arrow-${s === step ? "on" : "off"})`,
     })));
   const nodes = Object.entries(NODES).map(([id, n]) => {
@@ -56,7 +55,6 @@ function map(step, steps, link, sheet) {
   const pills = STEPS.map((s) => {
     const b = pillBox(s);
     const style = `left:${b.x}px;top:${b.y}px;width:${b.w}px;height:${b.h}px`;
-    if (!steps.includes(s)) return el("span", { class: "how-pill skip", style, title: `${s.label}: this cell skips it` }, s.label);
     return el("a", { class: `how-pill${s === step ? " on" : ""}`, href: link(s), title: s.label, style,
       ...(s === step ? { "aria-current": "step" } : {}) }, s.label);
   });
@@ -68,7 +66,7 @@ function map(step, steps, link, sheet) {
       el("span", { class: "source" }, "■"), " source ", el("span", {}, "■"), " table the pipeline writes"));
 }
 
-function lens(step, steps, link, terms, example, trace, sheet) {
+function lens(step, link, terms, example, trace, sheet) {
   const chips = (near, cls, text) => near.length ? el("div", { class: `how-chips ${cls}` },
     ...near.map((s) => el("a", { href: link(s) }, text(s.label)))) : null;
   const end = (id) => el("div", { class: `how-end${NODES[id].source ? " source" : ""}` },
@@ -76,7 +74,7 @@ function lens(step, steps, link, terms, example, trace, sheet) {
   const fromTo = example ? [example.before, example.after] : strip(step, trace);
   const para = (p) => el("p", {}, ...p.map((s) => typeof s === "string" ? s : term(terms[s[0]], s[1])));
   return el("section", { class: "how-lens" },
-    chips(before(step, steps), "before", (l) => `↖ after: ${l}`),
+    chips(before(step), "before", (l) => `↖ after: ${l}`),
     el("div", { class: "how-edge-big" }, end(step.from), el("span", { class: "how-wire" }),
       el("h2", { class: "how-step", tabindex: "-1" }, step.label), el("span", { class: "how-wire to" }), end(step.to)),
     el("div", { class: "how-card" },
@@ -85,7 +83,7 @@ function lens(step, steps, link, terms, example, trace, sheet) {
     example ? rows("Input", step.from, example.highlight[0]) : null,
     example ? rows("Output", step.to, example.highlight[1]) : null,
     traceRecord(step, trace),
-    chips(after(step, steps), "after", (l) => `next: ${l} ↘`));
+    chips(after(step), "after", (l) => `next: ${l} ↘`));
 }
 
 const STATUS = {

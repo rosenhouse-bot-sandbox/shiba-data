@@ -24,7 +24,7 @@ HERE = pathlib.Path(__file__).resolve().parent
 sys.path[:0] = [str(HERE), str(HERE.parent / "pipeline")]
 import cms_sources  # noqa: E402
 import fields  # noqa: E402
-import layers  # noqa: E402
+import sheets  # noqa: E402
 import terms  # noqa: E402
 import trace  # noqa: E402
 import years  # noqa: E402
@@ -47,14 +47,13 @@ def rows(name, data_dir):
         return list(csv.DictReader(f))
 
 
-def sheet(csv_rows, labels, cites, changed, comments, cms):
+def sheet(csv_rows, labels, cites, comments, cms):
     return {
         "columns": [column(k, v) for k, v in labels.items()],
         "rows": [{
             "plan_id": r["plan_id"],
             "section": r["section"],
-            "cells": {k: cell(r[k], cites.get((r["plan_id"], k), []), comments.get((r["plan_id"], k)),
-                              None if (r["plan_id"], k) in changed else cms.get((r["plan_id"], k)))
+            "cells": {k: cell(r[k], cites.get((r["plan_id"], k), []), comments.get((r["plan_id"], k)), cms.get((r["plan_id"], k)))
                       for k in labels},
         } for r in csv_rows],
     }
@@ -76,7 +75,7 @@ def cell(value, cites, comment, cms):
     return c
 
 
-def site_data(data_dir=DATA, layer_names=layers.LAYERS, ignore=None):
+def site_data(data_dir=DATA):
     config = years.config(data_dir)
     year = config["year"]
     checked = rows("generated/documents_checked.csv", data_dir)
@@ -90,12 +89,9 @@ def site_data(data_dir=DATA, layer_names=layers.LAYERS, ignore=None):
         "plan_ids": d["plan_ids"].split(";"),
     } for d in checked}
 
-    live, cited = layers.citations(data_dir, {d["url"]: d["kind"] for d in checked}, layer_names, ignore)
+    sheet_rows, cited = sheets.citations(data_dir, {d["url"]: d["kind"] for d in checked})
     cites = {"main": {}, "dvha": {}}
     for c in cited:
-        if c["hidden"] == layers.UNKNOWN_DOCUMENT:
-            # An unknown document must not stop the build. The edit still sets its cell.
-            print(f"::warning::An edit cites a document not in documents_checked.csv: {layers.where(c)} {c['url']}")
         if c["hidden"]:
             continue
         cites[c["sheet"]].setdefault((c["plan_id"], c["column"]), []).append({
@@ -106,8 +102,6 @@ def site_data(data_dir=DATA, layer_names=layers.LAYERS, ignore=None):
             "quote": c["quote"],
         })
 
-    changed = {name: {(g["plan_id"], k) for g, r in zip(generated, live[name]) for k, v in g.items() if r[k] != v}
-               for name, generated in layers.generated(data_dir).items()}
     plans = rows("generated/plans.csv", data_dir)
     cms = {}
     for r in rows("generated/cms_sources.csv", data_dir):
@@ -116,10 +110,10 @@ def site_data(data_dir=DATA, layer_names=layers.LAYERS, ignore=None):
     for p in plans:
         p["docs"] = [i for i, d in docs.items() if p["plan_id"] in d["plan_ids"]]
         p["plan_finder_url"] = f"https://www.medicare.gov/plan-compare/#/plan-details/{year}-{p['plan_id']}?year={year}&lang=en"
-    sheets = {name: (live[name], fields.labels(name)) for name in ("main", "dvha")}
+    labeled = {name: (sheet_rows[name], fields.labels(name)) for name in ("main", "dvha")}
     comments = {"main": {}, "dvha": {}}
     for c in rows("comments.csv", data_dir):
-        csv_rows, labels = sheets[c["sheet"]]
+        csv_rows, labels = labeled[c["sheet"]]
         if c["column"] not in labels or c["plan_id"] not in {r["plan_id"] for r in csv_rows}:
             raise ValueError(f"comments.csv names no cell: {c['sheet']} {c['plan_id']} {c['column']}")
         if (c["plan_id"], c["column"]) in comments[c["sheet"]]:
@@ -141,8 +135,8 @@ def site_data(data_dir=DATA, layer_names=layers.LAYERS, ignore=None):
         "plans": plans,
         "docs": docs,
         "cms_files": {"Landscape": config["landscape_zip"], "PBP": config["pbp_zip"]},
-        **{name: sheet(csv_rows, labels, cites[name], changed[name], comments[name], cms)
-           for name, (csv_rows, labels) in sheets.items()},
+        **{name: sheet(csv_rows, labels, cites[name], comments[name], cms)
+           for name, (csv_rows, labels) in labeled.items()},
     }
 
 
@@ -164,7 +158,7 @@ def write_traces(out_dir, sha):
     with tempfile.TemporaryDirectory() as tmp:
         trace.build(year, f"{tmp}/trace.sqlite", sha)
         with contextlib.closing(sqlite3.connect(f"{tmp}/trace.sqlite")) as db:
-            for sheet, plan_id, col in db.execute("SELECT sheet, plan_id, col FROM draft_cell").fetchall():
+            for sheet, plan_id, col in db.execute("SELECT sheet, plan_id, col FROM sheet_cell").fetchall():
                 path = out_dir / "trace" / str(year) / sheet / plan_id / f"{col}.json"
                 path.parent.mkdir(parents=True, exist_ok=True)
                 path.write_text(json.dumps(trace.cell(db, sheet, plan_id, col)))
@@ -176,12 +170,6 @@ def main(command, out=None):
         print("\n".join(d["sha256"] for d in site["docs"].values()))
         return
     out_dir = pathlib.Path(out)
-    _, kept, dropped = layers.live(DATA)
-    for c in dropped:
-        print(f"::warning::Dropped a citation whose value is not the live cell's: {layers.where(c)} {c['value']}")
-    for c in kept + dropped:
-        if "beneath" in c:
-            print(f"::warning::An edit's author saw {c['saw']}, but the cell beneath it is now {c['beneath']}: {layers.where(c)}")
     shutil.copytree(HERE / "static", out_dir, dirs_exist_ok=True)
     (out_dir / "pdfjs").mkdir(exist_ok=True)
     for name in ["build/pdf.min.mjs", "build/pdf.worker.min.mjs", "web/pdf_viewer.css"]:

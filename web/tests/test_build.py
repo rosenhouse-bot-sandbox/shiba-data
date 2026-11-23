@@ -20,11 +20,11 @@ DATA = build.years.data_dir(2027)
 
 
 def data_copy(tmp, presented_rows, year=2027):
-    """A copy of DATA, as data for `year`, whose presented layer also holds presented_rows."""
+    """A copy of DATA, as data for `year`, whose presented.csv also holds presented_rows."""
     data = pathlib.Path(tmp) / str(year)
     shutil.copytree(DATA, data)
-    with open(data / build.layers.PRESENTED, "a", newline="") as f:
-        csv.DictWriter(f, fieldnames=build.layers.COLUMNS, lineterminator="\n").writerows(
+    with open(data / build.sheets.PRESENTED, "a", newline="") as f:
+        csv.DictWriter(f, fieldnames=build.sheets.COLUMNS, lineterminator="\n").writerows(
             dict(line="", **r) for r in presented_rows)
     return data
 
@@ -236,7 +236,7 @@ class EocCitationsTest(unittest.TestCase):
     def test_a_cite_of_an_unknown_document_fails(self):
         with tempfile.TemporaryDirectory() as tmp:
             data = data_copy(tmp, [cite("main", "E_moop", "$6,700", "https://x/reissued.pdf", 45, "q")])
-            with self.assertRaisesRegex(ValueError, "generated/presented.csv main H3805-048-0 E_moop.*reissued.pdf"):
+            with self.assertRaisesRegex(ValueError, "main H3805-048-0 E_moop.*reissued.pdf"):
                 build.site_data(data)
 
     def test_cited_cell_lists_no_cms_fields(self):
@@ -244,55 +244,11 @@ class EocCitationsTest(unittest.TestCase):
         self.assertNotIn("cms", cell)
 
 
-class EditsTest(unittest.TestCase):
-    def dental(self, url, page="4", quote="dental quote"):
-        with tempfile.TemporaryDirectory() as tmp:
-            data = data_copy(tmp, [])
-            with open(data / "edits.csv", "a", newline="") as f:
-                csv.DictWriter(f, fieldnames=build.layers.EDIT_COLUMNS).writerow(
-                    dict(cite("dvha", "F_dental", "fixed", url, page, quote), line="", saw="", source="volunteer",
-                         author="v1", note=""))
-            out = io.StringIO()
-            with contextlib.redirect_stdout(out):
-                site = build.site_data(data)
-        return next(r for r in site["dvha"]["rows"] if r["plan_id"] == "H3805-048-0")["cells"]["F_dental"], site, out.getvalue()
-
-    def test_an_edit_sets_its_dvha_cell(self):
-        sb = next(d for d in build.rows("generated/documents_checked.csv", DATA)
-                  if d["kind"] == "SB" and "H3805-048-0" in d["plan_ids"])
-        cell, site, _ = self.dental(sb["url"])
-        self.assertEqual(cell["value"], "fixed")
-        self.assertEqual([(c["value"], c["page"], c["quote"]) for c in cell["cites"]], [("fixed", 4, "dental quote")])
-        self.assertNotIn("dental quote", str(site["main"]))
-
-    def test_an_uncited_edit_sets_its_cell(self):
-        cell, _, out = self.dental("", "", "")
-        self.assertEqual((cell["value"], cell["cites"], out), ("fixed", [], ""))
-
-    def test_an_uncited_edit_lists_no_cms_fields(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            data = data_copy(tmp, [])
-            with open(data / "edits.csv", "a", newline="") as f:
-                csv.DictWriter(f, fieldnames=build.layers.EDIT_COLUMNS).writerow(
-                    dict(cite("main", "O_medical_deductible", "$100", "", "", ""), line="", saw="", source="volunteer",
-                         author="v1", note=""))
-            site = build.site_data(data)
-        cell = next(r for r in site["main"]["rows"] if r["plan_id"] == "H3805-048-0")["cells"]["O_medical_deductible"]
-        self.assertEqual((cell["value"], "cms" in cell), ("$100", False))
-
-    def test_an_edit_of_an_unknown_document_sets_its_cell_and_warns(self):
-        cell, _, out = self.dental("https://x/unknown.pdf")
-        self.assertEqual((cell["value"], cell["cites"]), ("fixed", []))
-        self.assertIn("::warning::", out)
-        self.assertIn("edits.csv dvha H3805-048-0 F_dental https://x/unknown.pdf", out)
-
-
 class SiteCommandTest(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.dir = pathlib.Path(self.tmp.name)
         self.traces = self.enterContext(mock.patch.object(build, "write_traces"))
-        self.enterContext(mock.patch.object(build.layers, "live", return_value=({}, [], [])))
 
     def tearDown(self):
         self.tmp.cleanup()
@@ -303,24 +259,6 @@ class SiteCommandTest(unittest.TestCase):
         with mock.patch.object(build, "site_data", return_value=site), contextlib.redirect_stdout(out):
             build.main("docs")
         self.assertEqual(out.getvalue(), f"{'a' * 64}\n{'b' * 64}\n")
-
-    def test_site_command_warns_of_dropped_cites(self):
-        dropped = dict(cite("main", "E_moop", "$6,800", "u", 45, "stale quote"), layer="edits.csv", line="")
-        out = io.StringIO()
-        with (mock.patch.object(build, "site_data", return_value=bare_site()),
-              mock.patch.object(build.layers, "live", return_value=({}, [], [dropped])), contextlib.redirect_stdout(out)):
-            build.main("site", self.dir / "site")
-        self.assertIn("::warning::", out.getvalue())
-        self.assertIn("edits.csv main H3805-048-0 E_moop", out.getvalue())
-
-    def test_site_command_warns_of_an_edit_whose_cell_changed_beneath_it(self):
-        edit = dict(cite("main", "E_moop", "$6,800", "u", 45, "q"), layer="edits.csv", line="", saw="$6,700", beneath="$6,900")
-        out = io.StringIO()
-        with (mock.patch.object(build, "site_data", return_value=bare_site()),
-              mock.patch.object(build.layers, "live", return_value=({}, [], [edit])), contextlib.redirect_stdout(out)):
-            build.main("site", self.dir / "site")
-        self.assertIn("::warning::An edit's author saw $6,700, but the cell beneath it is now $6,900: "
-                      "edits.csv main H3805-048-0 E_moop", out.getvalue())
 
     def test_site_command_writes_traces_from_the_commit(self):
         with mock.patch.object(build, "site_data", return_value=bare_site()), mock.patch.object(build, "commit", return_value="abc"):
@@ -354,8 +292,8 @@ class TraceFilesTest(unittest.TestCase):
         build.write_traces(self.dir / "site", "abc")
         year = build.years.config(build.DATA)["year"]
         traces = self.dir / f"site/trace/{year}"
-        sheets = build.layers.live(build.DATA)[0]
-        cells = {f"{sheet}/{r['plan_id']}/{col}.json" for sheet in ("main", "dvha") for r in sheets[sheet]
+        by_sheet = build.sheets.read(build.DATA)
+        cells = {f"{sheet}/{r['plan_id']}/{col}.json" for sheet in ("main", "dvha") for r in by_sheet[sheet]
                  for col in build.fields.labels(sheet)}
         self.assertEqual({str(p.relative_to(traces)) for p in traces.rglob("*.json")}, cells)
         build.trace.build(year, self.dir / "trace.sqlite", "abc")

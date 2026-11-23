@@ -46,19 +46,10 @@ class TermsTest(unittest.TestCase):
             start, end = (int(n) for n in lines.replace("L", "").split("-"))
             self.assertEqual("\n".join((REPO / path).read_text().splitlines()[start - 1:end]), t["code"], name)
 
-    def test_an_annotated_constant_resolves(self):
-        with tempfile.TemporaryDirectory() as d:
-            (pathlib.Path(d) / "m.py").write_text("X: int = 1\n")
-            self.assertEqual(terms.locate(pathlib.Path(d), "m.py:X"), ("X: int = 1", 1, 1))
-
     def test_a_missing_file_fails_the_build(self):
         with tempfile.TemporaryDirectory() as d, mock.patch.dict(terms.TERMS, {"x": {"title": "", "text": "", "ref": "gone.js"}}, clear=True):
             with self.assertRaisesRegex(ValueError, "gone.js does not exist"):
                 terms.resolve(pathlib.Path(d), "abc123")
-
-    def test_a_constant_resolves_to_its_assignment(self):
-        layer = terms.resolve(REPO, "abc123")["layer"]
-        self.assertTrue(layer["code"].startswith("LAYERS = "))
 
     def test_a_file_term_links_the_file_with_no_code(self):
         worker = terms.resolve(REPO, "abc123")["worker"]

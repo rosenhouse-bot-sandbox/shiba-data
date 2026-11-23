@@ -4,7 +4,7 @@ import { ago } from "./ago.js";
 import { parse, format } from "./permalink.js";
 import { el } from "./dom.js";
 import { howView, howLink, traceUrl } from "./how.js";
-import { EXAMPLE, STEPS, chain } from "./pipeline.js";
+import { EXAMPLE, STEPS } from "./pipeline.js";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = "pdfjs/pdf.worker.min.mjs";
 
@@ -145,7 +145,7 @@ function route() {
 // A link may name any sheet, but only a sheet the site shows has cells.
 const sheetOf = (state) => Object.hasOwn(SHEET_NAMES, state.sheet) ? site[state.sheet] : null;
 
-// An unknown cell opens the example cell, and a step the cell skips opens its first step.
+// An unknown cell opens the example cell, and an unknown step opens its first step.
 let howTicket = 0;
 async function routeHow(state) {
   hideViewer();
@@ -167,14 +167,13 @@ async function routeHow(state) {
   here = { key: "how", view: "how" };
   const trace = await traceOf(sheet, plan, column.key);
   if (ticket !== howTicket || location.hash !== asked) return;
-  const steps = chain(trace);
-  const step = steps.find((s) => s.id === state.step) ?? steps[0];
+  const step = STEPS.find((s) => s.id === state.step) ?? STEPS[0];
   const value = site[sheet].rows.find((r) => r.plan_id === plan).cells[column.key].value;
   const cell = { sheet, plan, column: column.id, label: `${plans[plan].plan_name} · ${column.label}`, value };
   const hash = howLink(site.year, cell, step);
   if (location.hash !== hash) history.replaceState(null, "", hash);
   routed = location.hash;
-  content.replaceChildren(howView({ year: site.year, cell, step, steps, terms: site.terms, trace }));
+  content.replaceChildren(howView({ year: site.year, cell, step, terms: site.terms, trace }));
   if (state.plan && !known) content.prepend(el("p", { class: "warn" }, "That link names no cell, so this shows the example cell."));
   content.querySelector(".how-map").scrollTop = mapTop;
   if (map) content.querySelector(".how-step").focus({ preventScroll: true });

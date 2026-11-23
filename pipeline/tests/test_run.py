@@ -2,7 +2,7 @@ import contextlib, csv, io, json, os, pathlib, sys, tempfile, unittest
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-import layers
+import sheets
 import ask, blobs, run, years
 
 READER = "reader-model"
@@ -11,7 +11,7 @@ URL = "https://example.org/sb.pdf"
 
 
 class LostQuotesTest(unittest.TestCase):
-    def test_lists_layer_rows_the_site_cannot_highlight_even_once(self):
+    def test_lists_citations_the_site_cannot_highlight_even_once(self):
         with tempfile.TemporaryDirectory() as tmp:
             data, texts = pathlib.Path(tmp, "2027"), pathlib.Path(tmp, "texts")
             (data / "generated").mkdir(parents=True)
@@ -20,12 +20,12 @@ class LostQuotesTest(unittest.TestCase):
                 f.write(f"url,sha256\n{URL},{'a' * 64}\n")
             page = {"strs": ["Specialist $40 copay", "Specialist $40 copay"], "lefts": [0, 0]}
             (texts / "items" / f"{'a' * 16}.json").write_text(json.dumps({"2": page}))
-            with open(data / "edits.csv", "w", newline="") as f:
-                w = csv.DictWriter(f, fieldnames=layers.EDIT_COLUMNS)
+            with open(data / sheets.PRESENTED, "w", newline="") as f:
+                w = csv.DictWriter(f, fieldnames=sheets.COLUMNS)
                 w.writeheader()
                 for quote in ("Specialist $40", "Specialist $50", ""):
                     w.writerow(dict(sheet="main", plan_id="P", column="G_specialist", line="", value="$40", url=URL,
-                                    pdf_page="2", quote=quote, saw="$40", source="session", author="", note=""))
+                                    pdf_page="2", quote=quote))
             lost = run.lost_quotes(data, texts)
         self.assertEqual([c["quote"] for c in lost], ["Specialist $50"])
 
