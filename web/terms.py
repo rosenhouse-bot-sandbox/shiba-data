@@ -12,7 +12,7 @@ TERMS = {
                  "text": "Browser finds come first, then the Links sheet, then URL patterns. "
                          "A plan keeps the first URL found for each kind of document."},
     "cover": {"title": "Cover check", "ref": "pipeline/fetch_docs.py:cover_check",
-              "text": "The first pages must show the year, every plan ID, the right kind of document and both counties. "
+              "text": "The first pages must show the year, and the PDF must show every plan ID, the right kind of document and both counties. "
                       "Any problem is recorded in cover_problems."},
     "layoutText": {"title": "Text that keeps the page's columns", "ref": "pipeline/texts.py:main",
                    "text": "pdftotext -layout keeps a benefit table's two columns side by side, "

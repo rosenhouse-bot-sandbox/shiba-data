@@ -43,9 +43,7 @@ CREATE TABLE download (
   url            TEXT PRIMARY KEY REFERENCES document,
   sha256         TEXT,
   pages          INTEGER,
-  cover_problems TEXT NOT NULL,
-  baseline       TEXT NOT NULL,
-  baseline_file  TEXT NOT NULL
+  cover_problems TEXT NOT NULL
 );
 
 -- Each text is a blob. trace.py page reads one page of it.

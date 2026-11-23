@@ -2,10 +2,10 @@
 
 This folder holds the 2027 Multnomah/Clackamas MA sheets, built without the volunteers' PDFs or summary tables.
 They come only from the CMS Landscape and PBP Benefits files, carrier websites, and the plan documents those sites serve.
-The methods doc and its Appendix B are the 2027 bootstrap's, which git history keeps.
+The methods doc, `docs/2027-bootstrap/CLAUDE_ANALYSIS_METHODS.md`, and its Appendix B are the 2027 bootstrap's, which git history keeps.
 
 `python3 -I pipeline/run.py 2027 <work_dir>` lists plan documents from `found.csv` and `links.csv`, downloads them and the sources named in `config.json`, and regenerates `generated/`.
-It then reads facts into `machine/document_facts.csv` from the answers saved in `answers/`, and writes the sheets and their citations, `generated/presented.csv`.
+It then reads facts into `machine/document_facts.csv` from the answers saved in `answers/`, and writes the sheets, `generated/main_chart.csv` and `generated/dvha.csv`, and their citations, `generated/presented.csv`.
 
 ## Results
 
@@ -13,15 +13,15 @@ It then reads facts into `machine/document_facts.csv` from the answers saved in 
 |---|---|
 | Plan universe | The Landscape file gives the same 39 plans as the methods doc, after dropping 2 D-SNPs and 4 I-SNPs. |
 | Premium and Extra Help premium | All 39 premiums match the section 4 table. Extra Help premiums match wherever section 4 lists one. |
-| Plan documents | All 73 SBs and EOCs were found. 71 were byte-identical to the bootstrap's manifest. |
+| Plan documents | All 73 SBs and EOCs were found. |
 
-`pipeline/present.py` writes both sheets from the column rules in `pipeline/fields.py`.
+`pipeline/present.py` writes both sheets. `pipeline/fields.py` says what each column means.
 `pipeline/tests/test_appendix_b.py` checks them against each Appendix B correction, and lists the ones they miss.
 
 ### Finding documents
 
 Web search did not index any 2027 plan document. The documents were found as follows.
-`found.csv` records the browser finds. `links.csv` transcribes the Links sheet from methods doc Appendix A. The documents themselves told which UHC links were SBs.
+`found.csv` records the browser finds. `links.csv` transcribes the Links sheet from methods doc Appendix A.
 
 | Carriers | How |
 |---|---|
@@ -34,7 +34,7 @@ Two UHC EOCs were re-issued on 2026-10-14 (`UHOR27HP0418842_001`, `AAOR27LP04187
 
 ## Limits
 
-- The PBP is bid data, not a citable document. Only the cells that `generated/presented.csv` cites carry SB/EOC page citations.
+- The PBP is bid data, not a citable document. A value that only CMS facts back has no citation.
 - `pipeline/cms_sources.py` lists the CMS fields behind columns D, K, M, N and O in `generated/cms_sources.csv`. The site shows them for a cell with no citation.
 - Rules marked `methods` in `pipeline/fields.py` follow the methods doc's inferred policy, not rules from the SHIBA team.
-- A person has reviewed only some of these values.
+- Rules marked `expert` or `final chart` in `pipeline/fields.py` come from SHIBA's review.

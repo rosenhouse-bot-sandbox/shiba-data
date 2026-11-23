@@ -1,5 +1,5 @@
 """Rebuilds data/<year>/generated from the sources in data/<year>/config.json, found.csv and links.csv,
-then the live year's machine/document_facts.csv and generated/presented.csv.
+then the live year's machine/document_facts.csv, sheets and generated/presented.csv.
 
 Usage: python3 -I pipeline/run.py <year> <work_dir> [api|replay] [<step>@<version>[,...]]
 
@@ -153,12 +153,11 @@ def main(year, work, mode="", candidate=""):
     blobs.record_cms(CMS, work, gen / blobs.CMS_FILES)
     py("universe.py", f"{work}/{config['landscape_csv']}", gen / "plans.csv", gen / "landscape_reads.csv", config["state"],
        *config["counties"])
-    baseline = [years.REPO / config["baseline_manifest"]] if "baseline_manifest" in config else []
     if web:
         py("find_docs.py", gen / "plans.csv", data / "found.csv", data / "links.csv", gen / "documents.csv",
            config["year"])
         py("fetch_docs.py", gen / "documents.csv", gen / "plans.csv", f"{work}/docs", gen / "documents_checked.csv",
-           config["year"], ",".join(config["counties"]), *baseline)
+           config["year"], ",".join(config["counties"]))
         pdfs(gen, work)
     py("texts.py", f"{work}/pdfs", f"{work}/texts")
     blobs.record_texts(gen, work)

@@ -104,7 +104,6 @@
     "sha256": "ce13e925c0384896d725da85a06c14dfbd268b422134b85b58640c8d7c494220",
     "pages": 24,
     "cover_problems": "",
-    "baseline": "same bytes as baseline",
     "text": {
      "plain": "cf4c1df17b4cdd0dff09a58449f2410654e1af7221fb22fe242ef1728f790277",
      "layout": "6ebca98d895a45b3d8c15ea4fd6a6052d6a31ade9374ff3cdfe194d957f8c1b7",
@@ -122,7 +121,6 @@
     "sha256": "64e05773e847b56e0eeb5425979d54996c5f1975307c9ae186f5af4fecafc44c",
     "pages": 188,
     "cover_problems": "",
-    "baseline": "same bytes as baseline",
     "text": {
      "plain": "460da5207a532f3d022e6340f9d347dd36ede0b7d4164f2da4163e78d40b6ae9",
      "layout": "d50cc84cc494a4c76915f920ce159d656c59fb79008895d26c2f40d5be920d89",

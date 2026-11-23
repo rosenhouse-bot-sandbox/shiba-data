@@ -3,7 +3,7 @@ Also what carriers' EOCs tend to do.
 
 The generators and the site read this spec.
 A rule's source, when known, is in parentheses: "#31 section n" is issue #31, and
-"methods Rn" or "methods 6.5" is the 2027 bootstrap methods doc, which git history keeps.
+"methods Rn" or "methods 6.5" is docs/2027-bootstrap/CLAUDE_ANALYSIS_METHODS.md, which git history keeps.
 "expert" is a SHIBA Medicare expert's review. "final chart" is SHIBA's final 2027 chart, which wins over "expert".
 """
 import collections

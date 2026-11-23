@@ -11,7 +11,7 @@ Each example names its table. Paths are relative to `data/2027/`.
 
 - **Medicare Advantage** plans are private plans that replace Original Medicare. Each sets its copays and extra benefits.
 - **CMS** (the Centers for Medicare & Medicaid Services) publishes two files each year. The **Landscape** file lists plans and premiums. The **PBP** (plan benefit package) file holds what each plan told CMS it covers.
-- Each plan publishes an **SB** (Summary of Benefits, about 10 to 25 pages) and an **EOC** (Evidence of Coverage, the full legal terms, about 200 pages). Some also publish a **rider** for optional benefits.
+- Each plan publishes an **SB** (Summary of Benefits, about 10 to 30 pages) and an **EOC** (Evidence of Coverage, the full legal terms, about 200 pages). Some also publish a **rider** for optional benefits.
 - A **cell** is one plan's entry in one column. Its **value** is the text it shows. A value can have several **lines**, separated by ` | `.
 - A **quote** is text copied exactly from one page of a PDF.
 - A **fact** is one cost that a document states for one plan, such as "ground ambulance, in network, $325 copay". Each fact carries its quotes and their page.
@@ -39,7 +39,7 @@ The plan's documents are the source of truth. CMS data fills some gaps, but a vo
 - **Claude** AI was used in several ways, including:
   - locating the official sources for the PDFs on carrier websites
   - writing all code in this source repo, including code to download PDFs, and render the website and sheets
-  - Some of that code calls other Claude models through the API to extract and review facts from the PDFs
+  - some of that code calls other Claude models through the API to extract and review facts from the PDFs
 
 ## Steps
 
@@ -140,7 +140,7 @@ Plan documents rarely state some values, such as a $0 deductible. Code turns the
 benefit             network  condition        cost_kind          amount  source     quotes
 medical_deductible  in                        deductible         $0      PBP        pbp_d_inn_deduct_yn
 moop                in                        out_of_pocket_max  $5,150  PBP        pbp_d_out_pocket_amt
-part_d_deductible   any      not tiers 1,2,3  deductible         $700    Landscape  Annual Part D Deductible Amount, …
+part_d_deductible   any      not tiers 1,2,3  deductible         $700    Landscape  Part D Coverage Indicator, Annual Part D Deductible Amount, …
 ```
 
 A CMS fact's quotes name fields, not document text, so a value built from one has no citation.
