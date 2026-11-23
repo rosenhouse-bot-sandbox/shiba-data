@@ -35,7 +35,7 @@ The plan's documents are the source of truth. CMS data fills some gaps, but a vo
 ## Who does what
 
 - **A SHIBA domain expert** decided what information should go into which columns of the sheets
-- **SHIBA volunteers** found plan document PDFs and curated draft of the sheets
+- **SHIBA volunteers** found plan document PDFs and curated a draft of the sheets
 - **Claude** AI was used in several ways, including:
   - locating the official sources for the PDFs on carrier websites
   - writing all code in this source repo, including code to download PDFs, and render the website and sheets
@@ -282,7 +282,7 @@ ambulance.ground  any         in                                medicare      co
 ambulance.air     any         in                                medicare      coinsurance  20%     SB      9
 ```
 
-2027 has about 5,800 accepted facts for 39 plans.
+2027 has about 7,800 accepted facts for 39 plans.
 
 ## 7. Rules turn facts into values
 
@@ -333,6 +333,6 @@ The `pdxplans` Cloudflare Worker serves the site at [pdxplans.org](https://pdxpl
 
 ## Reproducible runs
 
-- **Pinned versions.** `steps.json` pins each model step's version, such as `{"document_facts": 15, "present": 7}`.
+- **Pinned versions.** `steps.json` pins each model step's version, such as `{"document_facts": 38, "present": 32}`.
 - **Three-stage deploys.** Only workflows on main can call the Claude API. A new version (1) merges unpinned. (2) The Pipeline workflow runs it on main and pushes the new answers to a new branch, such as `pipeline/2027-41966948424`. (3) A pull request from that branch pins the version.
 - **Pull request checks.** `reproduce` reruns the pipeline from R2 and the saved answers, with no API access, and fails if any table changes. `build` runs the tests, builds the site, and opens each linked PDF.

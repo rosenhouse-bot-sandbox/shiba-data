@@ -1,10 +1,7 @@
-"""A plan's EOC text, and whether a quote can be cited on a page."""
-import csv, json, os, re, subprocess
-
-import years
+"""A document's page text, and whether a quote can be cited on a page."""
+import json, os, re, subprocess
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-DATA = years.data_dir()
 PDFIUM_SOFT_HYPHEN = "￾"
 
 
@@ -16,15 +13,6 @@ def load_pages(path):
     with open(path) as f:
         parts = re.split(r"=====PAGE (\d+)=====\n", f.read())
     return {int(parts[i]): parts[i + 1] for i in range(1, len(parts) - 1, 2)}
-
-
-def eoc(plan_id, data=DATA):
-    """The plan's EOC: (doc id, url)."""
-    with open(f"{data}/generated/documents_checked.csv") as f:
-        for d in csv.DictReader(f):
-            if d["kind"] == "EOC" and plan_id in d["plan_ids"].split(";"):
-                return d["sha256"][:16], d["url"]
-    raise LookupError(f"No EOC for {plan_id}")
 
 
 def highlights(work, cites, result="ok"):
@@ -39,11 +27,6 @@ class Doc:
         self.work = work
         self.id = doc_id
         self._flow = None
-
-    @classmethod
-    def of_plan(cls, work, plan_id, data=DATA):
-        """The plan's EOC."""
-        return cls(work, eoc(plan_id, data)[0])
 
     def pages(self, kind):
         return load_pages(f"{self.work}/{kind}/{self.id}.txt")

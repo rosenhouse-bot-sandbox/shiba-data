@@ -2,7 +2,7 @@ import contextlib, io, json, os, pathlib, random, shutil, sys, tempfile, unittes
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import ask, extract, facts
-from eoc import DATA
+from extract import DATA
 
 SHA = "cd" * 32
 DOC = {"id": SHA[:16], "sha256": SHA, "kind": "EOC", "plan_ids": ["H1036-306-0", "H1036-307-0"]}

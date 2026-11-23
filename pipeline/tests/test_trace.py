@@ -196,7 +196,7 @@ class RunTest(unittest.TestCase):
         self.addCleanup(tmp.cleanup)
         self.root, self.work = os.path.join(tmp.name, "data"), os.path.join(tmp.name, "work")
         self.data = os.path.join(self.root, str(years.LIVE))
-        shutil.copytree(years.data_dir(), self.data, ignore=shutil.ignore_patterns("answers", "rebuilds", "evaluations"))
+        shutil.copytree(years.data_dir(), self.data, ignore=shutil.ignore_patterns("answers", "evaluations"))
         os.makedirs(os.path.join(self.data, "answers"))
         os.makedirs(os.path.join(self.work, "facts/ambulance/read"))
         with open(os.path.join(self.work, "facts/ambulance/read/doc.md"), "w") as f:
