@@ -98,14 +98,14 @@ export const STEPS = [
   { id: "column-rules", record: "rule", from: "facts", to: "presented", label: "Column rules",
     paras: [["Each column has a rule, written in code from the domain expert's instructions. It takes facts from the ", ["bestSource", "best source"], " and cites their quotes."]],
     example: { highlight: [[0, 1, 2, 3], [0, 1, 2]], before: "ground $325, air 20%, abroad $325", after: "$325 or 20% | $325",
-      paras: [["In the ", ["rule", "Ambulance rule"], ", line 1 takes in-network, Medicare-covered ground and air trips from the EOC. Line 2 takes trips abroad. Each line cites the quotes of the facts it used, so this cell gets four citations from EOC page 46."]] } },
+      paras: [["In the ", ["rule", "Ambulance rule"], ", line 1 takes in-network, Medicare-covered ground and air trips from the EOC. Line 2 takes trips abroad. Each line cites the quotes of the facts it used, so line 1 gets four citations and line 2 one, all from EOC page 46."]] } },
   { id: "sheet", record: "sheet", from: "facts", to: "sheet", label: "Write sheet",
     paras: [["The column rules also write every value to the sheet. A line that only CMS data backs has no citation, so a volunteer can't check it."]],
     example: { highlight: [[0, 1, 2, 3], [0]], before: "ground $325, air 20%, abroad $325", after: "$325 or 20% | $325",
       paras: [["Every line here cites the EOC."]] } },
   { id: "publish", record: "citations", from: "sheet", to: "site", label: "Publish",
     paras: [["Merging to main builds the site from the sheet and its citations. ", ["worker", "The pdxplans Worker"], " serves it at pdxplans.org, and the same build updates the volunteers' Google Sheet."]],
-    example: { highlight: [[0], [1, 4, 5]], before: "$325 or 20% | $325, 4 quotes", after: "cell + EOC page 46 highlight", paras: [] } },
+    example: { highlight: [[0], [1, 4, 5]], before: "$325 or 20% | $325, 5 quotes", after: "cell + EOC page 46 highlight", paras: [] } },
 ];
 
 // Edges with no step of their own.
@@ -238,7 +238,7 @@ const DETAILS = {
   "read-facts": (t) => promptLinks(t, true),
   "check-facts": (t) => [...t.fact_checks.rows.map((r) => factCheck(t, r)), ...promptLinks(t, false)],
   "column-rules": (t) => [
-    ...(t.rule.held ? [{ text: `The rule leaves this cell as it was, because ${t.rule.held}` }] : []),
+    ...(t.rule.held ? [{ text: `The rule leaves this cell blank, because ${t.rule.held}` }] : []),
     ...t.rule.lines.flatMap((l) => l.facts.map((f) => ({ text: `Line ${l.line} (${shownValue(l.value)}) used ${factLabel(f.source, f.page, f)}` }))),
     ...t.rule.set_aside.map((f) => ({ text: `Set aside ${factLabel(f.source, f.page, f)}: ${f.reasons.join("; ")}` })),
   ],

@@ -69,8 +69,7 @@ def build(year, out, sha, work=None):
         insert(db, "plan_document", (dict(plan_id=p, url=d["url"]) for d in documents for p in d["plan_ids"].split(";")))
         checked = read(data / "generated/documents_checked.csv")
         insert(db, "download", (dict(url=d["url"], sha256=d["sha256"] or None, pages=number(d["pages"]),
-                                     cover_problems=d["cover_problems"], baseline=d["baseline"],
-                                     baseline_file=d["baseline_file"]) for d in checked))
+                                     cover_problems=d["cover_problems"]) for d in checked))
         insert(db, "text", (dict(pdf=t["pdf"], plain=t["text"], layout=t["layout"], items=t["items"])
                             for t in read(data / "generated" / blobs.TEXTS)))
         insert(db, "sheet_cell", sheet_cells(sheets.read(data)))
@@ -318,7 +317,7 @@ def cell(db, sheet, plan_id, col):
     code = f"{REPO_URL}/blob/{build_row['sha']}/"
     value = found[0]["value"]
     cited = citations(db, sheet, plan_id, col)
-    documents = rows(db, """SELECT d.kind, d.url, d.found_via, w.sha256, w.pages, w.cover_problems, w.baseline,
+    documents = rows(db, """SELECT d.kind, d.url, d.found_via, w.sha256, w.pages, w.cover_problems,
                                    t.plain, t.layout, t.items
                             FROM plan_document p JOIN document d USING (url) JOIN download w USING (url)
                             LEFT JOIN text t ON t.pdf = w.sha256 WHERE p.plan_id = ? ORDER BY d.position""", plan_id)

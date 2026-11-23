@@ -2,7 +2,6 @@ import contextlib, io, json, os, pathlib, random, shutil, sys, tempfile, unittes
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import ask, extract, facts
-from eoc import DATA
 
 SHA = "cd" * 32
 DOC = {"id": SHA[:16], "sha256": SHA, "kind": "EOC", "plan_ids": ["H1036-306-0", "H1036-307-0"]}
@@ -51,14 +50,14 @@ class PagesTest(unittest.TestCase):
 
 class TaskTest(unittest.TestCase):
     def test_shows_plans_vocabulary_and_pages(self):
-        text = extract.task(DOC, NAMES, PAGES, "imaging", DATA)
+        text = extract.task(DOC, NAMES, PAGES, "imaging", extract.DATA)
         for part in ("H1036-306-0: Gold", "H1036-307-0: Silver", facts.describe("imaging"), "Seen in Humana",
                      "plan year 2027", f"=====PAGE 61=====\n{X_RAYS}", "=====PAGE 62=====\nDental X-rays"):
             self.assertIn(part, text)
         self.assertNotIn("=====PAGE 3=====", text)
 
     def test_asks_only_for_fixes_of_failed_answers(self):
-        text = extract.task(DOC, NAMES, PAGES, "imaging", DATA, [(answer(), "no quote shows $40"), ("\ud800", "x")])
+        text = extract.task(DOC, NAMES, PAGES, "imaging", extract.DATA, [(answer(), "no quote shows $40"), ("\ud800", "x")])
         self.assertIn('"quotes": ["Outpatient X-rays $0 to $40 copay"]}: no quote shows $40', text)
         self.assertIn("fixed versions of only these answers", text)
         text.encode()
@@ -278,7 +277,7 @@ class VerifierTaskTest(unittest.TestCase):
     def test_shows_items_and_their_pages_without_notes_or_decoy_flags(self):
         real = gate(answer(note="unsure"))[0]
         items = [dict(real[0], decoy=False), dict(real[0], plan_id="H1036-307-0", decoy=True)]
-        text = extract.verifier_task(DOC, NAMES, PAGES, items, DATA)
+        text = extract.verifier_task(DOC, NAMES, PAGES, items, extract.DATA)
         for part in ('{"id": 0, "plan_id": "H1036-306-0"', '{"id": 1, "plan_id": "H1036-307-0"',
                      facts.describe("imaging"), f"=====PAGE 61=====\n{X_RAYS}"):
             self.assertIn(part, text)
@@ -287,11 +286,11 @@ class VerifierTaskTest(unittest.TestCase):
 
     def test_shows_the_pages_after_an_items_page_that_its_group_asks_for(self):
         items = [dict(gate(answer())[0][0], decoy=False)]
-        self.assertIn("=====PAGE 62=====\nDental X-rays", extract.verifier_task(DOC, NAMES, PAGES, items, DATA, after={"imaging": 1}))
-        self.assertNotIn("=====PAGE 62=====", extract.verifier_task(DOC, NAMES, PAGES, items, DATA, after={"dental": 1}))
-        self.assertIn("=====PAGE 3=====\nIndex", extract.verifier_task(DOC, NAMES, PAGES, items, DATA, before={"imaging": 58}))
+        self.assertIn("=====PAGE 62=====\nDental X-rays", extract.verifier_task(DOC, NAMES, PAGES, items, extract.DATA, after={"imaging": 1}))
+        self.assertNotIn("=====PAGE 62=====", extract.verifier_task(DOC, NAMES, PAGES, items, extract.DATA, after={"dental": 1}))
+        self.assertIn("=====PAGE 3=====\nIndex", extract.verifier_task(DOC, NAMES, PAGES, items, extract.DATA, before={"imaging": 58}))
         last = [dict(items[0], page="62")]
-        self.assertIn("=====PAGE 62=====", extract.verifier_task(DOC, NAMES, PAGES, last, DATA, after={"imaging": 1}))
+        self.assertIn("=====PAGE 62=====", extract.verifier_task(DOC, NAMES, PAGES, last, extract.DATA, after={"imaging": 1}))
 
 
 class StepsTest(unittest.TestCase):
@@ -303,7 +302,7 @@ class StepsTest(unittest.TestCase):
         root = pathlib.Path(tmp.name)
         self.data, self.work, self.dir = root / "2027", root / "work", root / "read"
         (self.data / "generated").mkdir(parents=True)
-        shutil.copy(f"{DATA}/config.json", self.data)
+        shutil.copy(f"{extract.DATA}/config.json", self.data)
         with open(self.data / "generated" / "documents_checked.csv", "w") as f:
             f.write(f"plan_ids,kind,sha256\nH1036-306-0,EOC,{SHA}\nH1036-306-0,SB,{'ef' * 32}\nH1036-306-0,EOC,\n")
         with open(self.data / "generated" / "plans.csv", "w") as f:

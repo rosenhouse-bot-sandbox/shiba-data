@@ -155,7 +155,7 @@ test("Column rules lists the facts each line used and why others were set aside"
 test("a held rule says why, and a fact with no page names none", () => {
   const pbp = { ...replay.rule.set_aside[0], source: "PBP", page: "" };
   const t = { ...replay, rule: { ...replay.rule, held: "the EOC and SB disagree", lines: [], set_aside: [pbp] } };
-  assert.deepEqual(lines("column-rules", t), ["The rule leaves this cell as it was, because the EOC and SB disagree",
+  assert.deepEqual(lines("column-rules", t), ["The rule leaves this cell blank, because the EOC and SB disagree",
     "Set aside PBP, ambulance.air 20%: SB ranks below EOC"]);
 });
 

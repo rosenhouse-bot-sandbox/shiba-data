@@ -16,9 +16,10 @@ import collections, csv, glob, json, os, pathlib, random, re, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import ask, facts, years
-from eoc import DATA, Doc
+from eoc import Doc
 from fields import CARRIERS
 
+DATA = years.data_dir()
 ANSWER_FIELDS = set(facts.KEY) | {"amount", "unit", "limit", "page", "quotes", "note"}
 OPTIONAL = {"provider_tier", "condition", "package", "pool", "amount", "unit", "limit", "note"}
 DECOY_FIELDS = ("plan_id", "network", "setting")
