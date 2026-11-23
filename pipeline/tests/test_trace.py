@@ -82,13 +82,6 @@ class TraceTest(unittest.TestCase):
     def test_says_why_the_pinned_version_holds_a_dvha_cell(self):
         self.assertEqual(self.cell("dvha", "H2923-025-0", "F_dental")["rule"]["held"], "a held DVHA cell")
 
-    def test_reads_a_page_of_a_layout_text(self):
-        with tempfile.TemporaryDirectory() as work:
-            path = blobs.text_path(work, "layout", "ab" * 32)
-            path.parent.mkdir(parents=True)
-            path.write_text("=====PAGE 1=====\nfirst\n=====PAGE 2=====\nsecond\n")
-            self.assertEqual(trace.page(work, "ab" * 32, "2"), "second\n")
-
     def test_shows_the_sheet_value_and_its_citations(self):
         records = self.cell(*AMBULANCE)
         self.assertEqual(records["sheet"]["value"], "$325 or 20% | $325")
@@ -171,6 +164,15 @@ class TraceTest(unittest.TestCase):
     def test_rejects_an_unknown_cell(self):
         with self.assertRaises(LookupError):
             self.cell("main", "H1036-153-0", "ZZ_nothing")
+
+
+class ScriptTest(unittest.TestCase):
+    def test_reads_a_page_of_a_layout_text(self):
+        with tempfile.TemporaryDirectory() as work:
+            path = blobs.text_path(work, "layout", "ab" * 32)
+            path.parent.mkdir(parents=True)
+            path.write_text("=====PAGE 1=====\nfirst\n=====PAGE 2=====\nsecond\n")
+            self.assertEqual(trace.page(work, "ab" * 32, "2"), "second\n")
 
     def test_trace_and_run_start_as_scripts(self):
         for module in (trace, run):

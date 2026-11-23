@@ -11,6 +11,7 @@ import shutil
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
@@ -31,10 +32,10 @@ def check(test):
     return test
 
 
-def tests(suite):
+def cases(suite):
     for test in suite:
         if isinstance(test, unittest.TestSuite):
-            yield from tests(test)
+            yield from cases(test)
         else:
             yield test
 
@@ -45,9 +46,11 @@ def is_check(test):
 
 
 def split(suite):
-    """(code tests, checks)"""
+    """(code tests, checks). A module that fails to load fails both."""
     code, checks = unittest.TestSuite(), unittest.TestSuite()
-    for test in tests(suite):
+    for test in cases(suite):
+        if isinstance(test, unittest.loader._FailedTest):
+            checks.addTest(test)
         (checks if is_check(test) else code).addTest(test)
     return code, checks
 
@@ -68,17 +71,10 @@ def main(kind):
     """Runs one kind of test, and says whether they all passed."""
     if kind == "checks":
         return run(kind)
-    with tempfile.TemporaryDirectory() as tmp:
-        without_built(years.data_dir().parent, f"{tmp}/data")
-        saved = os.environ.get("SHIBA_DATA")
-        os.environ["SHIBA_DATA"] = f"{tmp}/data"
-        try:
-            return run(kind)
-        finally:
-            if saved is None:
-                del os.environ["SHIBA_DATA"]
-            else:
-                os.environ["SHIBA_DATA"] = saved
+    root = years.data_dir().parent
+    with tempfile.TemporaryDirectory() as tmp, mock.patch.dict(os.environ, SHIBA_DATA=f"{tmp}/data"):
+        without_built(root, f"{tmp}/data")
+        return run(kind)
 
 
 if __name__ == "__main__":

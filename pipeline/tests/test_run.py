@@ -94,11 +94,20 @@ class AskerTest(unittest.TestCase):
         self.assertEqual((guard.asker, guard.version), ("api", run.STEPS["document_facts"][23]))
 
 
+class RunTestsTest(unittest.TestCase):
+    def test_runs_one_kind_with_the_candidate(self):
+        with mock.patch.object(run.subprocess, "run") as sub:
+            run.run_tests("checks", "present@2")
+        args, kwargs = sub.call_args
+        self.assertEqual(args[0][-2:], [os.path.join(run.HERE, "built.py"), "checks"])
+        self.assertEqual(kwargs["env"][run.present.CANDIDATE], "present@2")
+
+
 class MainTest(unittest.TestCase):
     def run_main(self, mode, candidate=""):
         order = []
         with tempfile.TemporaryDirectory() as work, \
-             mock.patch.multiple(run, tests=lambda kind, candidate: order.append((kind, candidate)),
+             mock.patch.multiple(run, run_tests=lambda kind, candidate: order.append((kind, candidate)),
                                  get=lambda *a: order.append("get"), py=lambda *a: None, check_quotes=lambda *a: None,
                                  model_steps=lambda *a: order.append("model_steps"), asker=lambda *a: None), \
              mock.patch.object(run.subprocess, "run"), mock.patch.object(run.blobs, "record_cms"), \
@@ -107,8 +116,7 @@ class MainTest(unittest.TestCase):
         return order
 
     def test_runs_the_code_tests_before_any_download_or_model_call(self):
-        self.assertEqual(self.run_main("api", "present@2")[0], ("code", "present@2"))
-        self.assertEqual(self.run_main("api", "present@2")[1], "get")
+        self.assertEqual(self.run_main("api", "present@2")[:2], [("code", "present@2"), "get"])
 
     def test_checks_the_built_data_after_the_model_steps(self):
         self.assertEqual(self.run_main("replay")[-2:], ["model_steps", ("checks", "")])
