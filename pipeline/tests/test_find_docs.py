@@ -1,6 +1,7 @@
 import contextlib, io, os, pathlib, sys, tempfile, unittest
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import built
 import find_docs
 import years
 
@@ -86,6 +87,7 @@ class DocumentsTest(unittest.TestCase):
 
 
 class Rebuild2027Test(unittest.TestCase):
+    @built.check
     def test_rebuilds_the_committed_documents_list(self):
         data = years.data_dir(2027)
         with tempfile.TemporaryDirectory() as tmp:

@@ -126,8 +126,9 @@ def model_steps(data, texts, work, answer, versions):
     present.write(data, versions["present"])
 
 
-def unit_tests(candidate):
-    subprocess.run([sys.executable, "-I", "-m", "unittest", "discover", "-s", os.path.join(HERE, "tests")], check=True,
+def run_tests(kind, candidate):
+    """Runs the code tests or the checks of built data (see built.py)."""
+    subprocess.run([sys.executable, "-I", os.path.join(HERE, "built.py"), kind], check=True,
                    env=dict(os.environ, **{present.CANDIDATE: candidate}))
 
 
@@ -138,7 +139,7 @@ def main(year, work, mode="", candidate=""):
     config = years.config(data)
     if candidate and config["year"] != years.LIVE:
         raise SystemExit(f"Only the live year, {years.LIVE}, runs model steps.")
-    unit_tests(candidate)
+    run_tests("code", candidate)
     work = os.path.abspath(work)
     os.makedirs(work, exist_ok=True)
     web = mode != "replay"
@@ -173,6 +174,9 @@ def main(year, work, mode="", candidate=""):
         answer = Answers(data, asker(mode, data, work, versions, candidate), work)
         model_steps(data, f"{work}/texts", work, answer, versions)
         check_quotes(data, f"{work}/texts")
+        # A candidate's pin PR checks its data.
+        if not candidate:
+            run_tests("checks", candidate)
 
 
 if __name__ == "__main__":

@@ -5,6 +5,7 @@ import unittest
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path[:0] = [os.path.join(HERE, ".."), HERE]
+import built  # noqa: E402
 import sheets  # noqa: E402
 import years  # noqa: E402
 from appendix_b import DVHA_CASES, MAIN_CHART_CASES  # noqa: E402
@@ -20,6 +21,7 @@ MISSED = {
 }
 
 
+@built.check
 class AppendixBTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):

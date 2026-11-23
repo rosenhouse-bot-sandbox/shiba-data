@@ -3,7 +3,7 @@ from unittest import mock
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path[:0] = [os.path.dirname(HERE), os.path.join(os.path.dirname(os.path.dirname(HERE)), "web")]
-import ask, blobs, build, document_facts, extract, fields, sheets, present, run, trace, years
+import ask, blobs, build, built, document_facts, extract, fields, sheets, present, run, trace, years
 
 READER, VERIFIER, REVIEWER = "reader-model", "verifier-model", "reviewer-model"
 
@@ -24,6 +24,7 @@ def statuses(records):
     return set()
 
 
+@built.check
 class TraceTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -80,13 +81,6 @@ class TraceTest(unittest.TestCase):
 
     def test_says_why_the_pinned_version_holds_a_dvha_cell(self):
         self.assertEqual(self.cell("dvha", "H2923-025-0", "F_dental")["rule"]["held"], "a held DVHA cell")
-
-    def test_reads_a_page_of_a_layout_text(self):
-        with tempfile.TemporaryDirectory() as work:
-            path = blobs.text_path(work, "layout", "ab" * 32)
-            path.parent.mkdir(parents=True)
-            path.write_text("=====PAGE 1=====\nfirst\n=====PAGE 2=====\nsecond\n")
-            self.assertEqual(trace.page(work, "ab" * 32, "2"), "second\n")
 
     def test_shows_the_sheet_value_and_its_citations(self):
         records = self.cell(*AMBULANCE)
@@ -171,6 +165,15 @@ class TraceTest(unittest.TestCase):
         with self.assertRaises(LookupError):
             self.cell("main", "H1036-153-0", "ZZ_nothing")
 
+
+class ScriptTest(unittest.TestCase):
+    def test_reads_a_page_of_a_layout_text(self):
+        with tempfile.TemporaryDirectory() as work:
+            path = blobs.text_path(work, "layout", "ab" * 32)
+            path.parent.mkdir(parents=True)
+            path.write_text("=====PAGE 1=====\nfirst\n=====PAGE 2=====\nsecond\n")
+            self.assertEqual(trace.page(work, "ab" * 32, "2"), "second\n")
+
     def test_trace_and_run_start_as_scripts(self):
         for module in (trace, run):
             done = subprocess.run([sys.executable, "-I", module.__file__], capture_output=True, text=True)
@@ -188,6 +191,7 @@ class OutcomeFilesTest(unittest.TestCase):
                               f"facts/review/{extract.OUTCOMES}"])
 
 
+@built.check
 class RunTest(unittest.TestCase):
     """Builds from a copy of the year without its saved answers, and a run that asked one task."""
 

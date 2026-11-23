@@ -335,4 +335,4 @@ The `pdxplans` Cloudflare Worker serves the site at [pdxplans.org](https://pdxpl
 
 - **Pinned versions.** `steps.json` pins each model step's version, such as `{"document_facts": 38, "present": 32}`.
 - **Three-stage deploys.** Only workflows on main can call the Claude API. A new version (1) merges unpinned. (2) The Pipeline workflow runs it on main and pushes the new answers to a new branch, such as `pipeline/2027-41966948424`. (3) A pull request from that branch pins the version.
-- **Pull request checks.** `reproduce` reruns the pipeline from R2 and the saved answers, with no API access, and fails if any table changes. `build` runs the tests, builds the site, and opens each linked PDF.
+- **Pull request checks.** `reproduce` reruns the pipeline from R2 and the saved answers, with no API access, then runs the checks of the data it built. It fails if any table changes. `build` runs the code tests, which see no built data, builds the site, and opens each linked PDF.

@@ -2,7 +2,7 @@ import csv, json, os, pathlib, re, sys, tempfile, unittest
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-import expected, facts, fields, sheets, present, years
+import built, expected, facts, fields, sheets, present, years
 
 YEAR = 2027
 
@@ -1499,6 +1499,7 @@ class WriteTest(unittest.TestCase):
             self.assertEqual(sheets.read(pathlib.Path(tmp))["dvha"], sheet_rows(None, "dvha", 1))
             self.assertTrue(pathlib.Path(tmp, "generated", sheets.SHEETS["main"]).read_bytes().endswith(b"main 1\r\n"))
 
+    @built.check
     def test_a_blank_with_cited_facts_writes_rows(self):
         data = years.data_dir(YEAR)
         f = facts.read(data / "machine/document_facts.csv")[0]
@@ -1508,18 +1509,21 @@ class WriteTest(unittest.TestCase):
             rows = present.citation_rows(data)
         self.assertEqual({(r["plan_id"], r["column"], r["value"]) for r in rows}, {(plan, "S_acupuncture", "")})
 
+    @built.check
     def test_a_version_skips_the_cells_it_holds(self):
         data = years.data_dir(YEAR)
         cell = ("K_tests_labs", "H2923-009-0")
         cells = {v: {(r["column"], r["plan_id"]) for r in present.citation_rows(data, v)} for v in (1, 2)}
         self.assertEqual(cells[2] - cells[1], {cell})
 
+    @built.check
     def test_version_4_presents_dvha_vision_and_hearing_and_holds_some_hearing_cells(self):
         data = years.data_dir(YEAR)
         cells = {v: {(r["sheet"], r["column"], r["plan_id"]) for r in present.citation_rows(data, v)} for v in (3, 4)}
         self.assertEqual({c[:2] for c in cells[4] - cells[3]}, {("dvha", "G_vision"), ("dvha", "H_hearing")})
         self.assertNotIn(("dvha", "H_hearing", "H6815-038-0"), cells[4])
 
+    @built.check
     def test_version_5_presents_dvha_packages(self):
         data = years.data_dir(YEAR)
         cells = {v: {(r["sheet"], r["column"]) for r in present.citation_rows(data, v)} for v in (4, 5)}
@@ -1539,6 +1543,7 @@ class WriteTest(unittest.TestCase):
         self.assertEqual(held_main, {("K_tests_labs", "H6815-038-0"), ("K_tests_labs", "H5439-019-0")})
         self.assertLessEqual(set(present.VERSIONS[8]), set(present.VERSIONS[7]))
 
+    @built.check
     def test_version_9_presents_the_main_premium_moop_and_drug_deductible(self):
         data = years.data_dir(YEAR)
         cells = {v: {(r["sheet"], r["column"]) for r in present.citation_rows(data, v)} for v in (8, 9)}
@@ -1570,6 +1575,7 @@ class WriteTest(unittest.TestCase):
     def test_version_16_holds_no_cell(self):
         self.assertEqual(present.VERSIONS[16], {})
 
+    @built.check
     def test_version_17_holds_no_cell_and_shows_package_allowances_only_from_17(self):
         self.assertEqual(present.VERSIONS[17], {})
         data = years.data_dir(YEAR)
@@ -1580,6 +1586,7 @@ class WriteTest(unittest.TestCase):
         explained = {v: present.explain("", found, "E_optional_packages", "dvha", v)[0][0][0] for v in (16, 17)}
         self.assertEqual(explained, got)
 
+    @built.check
     def test_version_17_changes_only_the_kaiser_package_cells(self):
         data = years.data_dir(YEAR)
         rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.citation_rows(data, v)} for v in (16, 17)}
@@ -1588,6 +1595,7 @@ class WriteTest(unittest.TestCase):
         sheets = {v: present.sheet_rows(data, "dvha", v) for v in (16, 17)}
         self.assertEqual([r["plan_id"] for r, s in zip(*sheets.values()) if r != s], ["H9003-001-0", "H9003-006-0", "H9003-009-0"])
 
+    @built.check
     def test_version_19_moves_package_benefits_to_their_columns_and_lists_hearing_aid_copays(self):
         self.assertEqual(present.VERSIONS[19], {})
         data = years.data_dir(YEAR)
@@ -1604,6 +1612,7 @@ class WriteTest(unittest.TestCase):
         self.assertEqual(got[19], "Advantage Plus $54/mo")
         self.assertEqual(len(set(got.values())), 3)
 
+    @built.check
     def test_version_20_names_programs_and_says_when_otc_pays_for_food(self):
         self.assertEqual(present.VERSIONS[20], {})
         data = years.data_dir(YEAR)
@@ -1614,6 +1623,7 @@ class WriteTest(unittest.TestCase):
         got = {v: present.lines(data, "I_alt_care_otc_travel", sheet="dvha", version=v)["H2001-045-0"][0][0] for v in (19, 20)}
         self.assertEqual([g.split(";")[0] for g in got.values()], ["OTC $196/month", "OTC and food $196/month"])
 
+    @built.check
     def test_version_21_shows_preventive_dental_limits_and_each_program_once(self):
         self.assertEqual(present.VERSIONS[21], {})
         data = years.data_dir(YEAR)
@@ -1622,6 +1632,7 @@ class WriteTest(unittest.TestCase):
         got = present.lines(data, "F_dental", sheet="dvha", version=21)["H5439-015-0"][0][0]
         self.assertIn("PREV limits: cleanings 2/year", got)
 
+    @built.check
     def test_version_22_says_none_shows_the_giveback_and_shared_allowances(self):
         self.assertEqual(present.VERSIONS[22], {})
         data = years.data_dir(YEAR)
@@ -1635,6 +1646,7 @@ class WriteTest(unittest.TestCase):
             "Acup, Massage, Naturopath 50% from $2,000/year allowance shared with dental; OTC $106/three months"))
         self.assertTrue(got["J_extra_benefits"].startswith("Part B giveback $70/month; "))
 
+    @built.check
     def test_version_23_shows_worldwide_urgent_care_and_hearing_details(self):
         self.assertEqual(present.VERSIONS[23], {})
         data = years.data_dir(YEAR)
@@ -1648,6 +1660,7 @@ class WriteTest(unittest.TestCase):
         self.assertIn("Worldwide ER/urgent $130, $250,000 max", got[("I_alt_care_otc_travel", "H2056-003-0")])
         self.assertIn("Worldwide ER $130, urgent care $50", got[("I_alt_care_otc_travel", "H5216-455-0")])
 
+    @built.check
     def test_version_27_shows_exam_maximums_out_of_network_programs_and_no_part_d(self):
         self.assertEqual(present.VERSIONS[27], {})
         data = years.data_dir(YEAR)
@@ -1662,6 +1675,7 @@ class WriteTest(unittest.TestCase):
                          {"H2406-073-0", "H5216-455-0", "H5216-427-2", "H3817-010-0", "H2056-018-0", "H5439-010-0",
                           "H7006-021-0"})
 
+    @built.check
     def test_version_29_shows_every_in_network_price(self):
         self.assertEqual(present.VERSIONS[29], {})
         data = years.data_dir(YEAR)
@@ -1683,6 +1697,7 @@ class WriteTest(unittest.TestCase):
         self.assertEqual(present.named_extras([gym("$150", pool="Wellness Bucks")], ("fitness",), prices=True,
                                               allowances=True)[0], ["Fitness"])
 
+    @built.check
     def test_version_31_shows_rewards_hearing_and_dental_details(self):
         self.assertEqual(present.VERSIONS[31], {})
         data = years.data_dir(YEAR)
@@ -1729,6 +1744,7 @@ class WriteTest(unittest.TestCase):
         self.assertEqual(present.dental_exclusions(found[:1], summary_first=True)[0],
                          "excludes procedure codes not listed in the chart")
 
+    @built.check
     def test_version_32_shows_devoted_dental_exclusions_from_the_summary_of_benefits(self):
         self.assertEqual(present.VERSIONS[32], {})
         data = years.data_dir(YEAR)
@@ -1755,6 +1771,7 @@ class WriteTest(unittest.TestCase):
         self.assertEqual(present.HEARING_OON_31([fitting])[0], "OON fitting $35")
         self.assertEqual(present.HEARING_OON([fitting])[0], "")
 
+    @built.check
     def test_version_30_shows_a_fitness_allowance(self):
         self.assertEqual(present.VERSIONS[30], {})
         data = years.data_dir(YEAR)
@@ -1763,6 +1780,7 @@ class WriteTest(unittest.TestCase):
         self.assertTrue(got[30]["H7006-018-0"][0][0].startswith("Fitness $120/six months; "))
         self.assertTrue(got[30]["H7006-021-0"][0][0].startswith("Fitness $100/three months; "))
 
+    @built.check
     def test_version_28_moves_fitness_to_alternative_care(self):
         self.assertEqual(present.VERSIONS[28], {})
         data = years.data_dir(YEAR)
@@ -1771,6 +1789,7 @@ class WriteTest(unittest.TestCase):
         self.assertTrue(got["I_alt_care_otc_travel"].startswith("Fitness SilverSneakers $0; Wellness Bucks $150/year; Acup"))
         self.assertEqual(got["J_extra_benefits"], "For members with certain chronic conditions: Food & Home Card $30/month")
 
+    @built.check
     def test_version_26_names_the_dental_network(self):
         self.assertEqual(present.VERSIONS[26], {})
         data = years.data_dir(YEAR)
@@ -1779,6 +1798,7 @@ class WriteTest(unittest.TestCase):
         got = present.lines(data, "F_dental", sheet="dvha", version=26)["H2056-003-0"][0][0]
         self.assertEqual(got, "PREV $0; no annual max; Aetna Dental PPO Network; no COMP")
 
+    @built.check
     def test_version_25_shows_a_comprehensive_dental_range_from_per_service_prices(self):
         self.assertEqual(present.VERSIONS[25], {})
         data = years.data_dir(YEAR)
@@ -1787,6 +1807,7 @@ class WriteTest(unittest.TestCase):
         got = present.lines(data, "F_dental", sheet="dvha", version=25)["H1036-306-0"][0][0]
         self.assertTrue(got.startswith("PREV $0; COMP $0-50%; max $4,000/year"))
 
+    @built.check
     def test_version_24_shows_rollover_otc_uses_eyewear_pairs_networks_and_no_dental_maximum(self):
         self.assertEqual(present.VERSIONS[24], {})
         data = years.data_dir(YEAR)
@@ -1805,6 +1826,7 @@ class WriteTest(unittest.TestCase):
     def test_a_held_main_cell_does_not_hold_the_dvha_cell_of_the_same_name(self):
         self.assertNotEqual(present.cell("main", "C_premium", "H1"), present.cell("dvha", "C_premium", "H1"))
 
+    @built.check
     def test_version_3_presents_the_dvha_premium(self):
         data = years.data_dir(YEAR)
         cells = {v: {(r["sheet"], r["column"]) for r in present.citation_rows(data, v)} for v in (2, 3)}
@@ -1823,6 +1845,7 @@ class WriteTest(unittest.TestCase):
         for why in (why for held in present.VERSIONS.values() for why in held.values()):
             self.assertNotIn("reader", why)
 
+    @built.check
     def test_a_trailing_blank_line_writes_no_row(self):
         data = years.data_dir(YEAR)
         f = facts.read(data / "machine/document_facts.csv")[0]
@@ -1853,18 +1876,21 @@ class SheetTest(unittest.TestCase):
         self.assertEqual(present.shown([("", [])]), "")
         self.assertEqual(present.shown([]), "")
 
+    @built.check
     def test_the_committed_sheets_are_current(self):
         data = years.data_dir(YEAR)
         pinned = json.loads((data / "steps.json").read_text())["present"]
         for sheet in sheets.SHEETS:
             self.assertEqual(sheets.read(data)[sheet], present.sheet_rows(data, sheet, pinned), sheet)
 
+    @built.check
     def test_a_held_cell_is_blank(self):
         data = years.data_dir(YEAR)
         row = next(r for r in present.sheet_rows(data, "dvha", 10) if r["plan_id"] == "H5216-048-0")
         self.assertEqual(row["E_optional_packages"], "")
         self.assertTrue(row["G_vision"])
 
+    @built.check
     def test_a_sheet_has_a_row_per_plan_and_the_columns_of_fields(self):
         data = years.data_dir(YEAR)
         rows = present.sheet_rows(data, "dvha")
@@ -1873,11 +1899,13 @@ class SheetTest(unittest.TestCase):
 
 
 class ExpectedTest(unittest.TestCase):
+    @built.check
     def test_the_committed_citations_are_current(self):
         data = years.data_dir(YEAR)
         pinned = json.loads((data / "steps.json").read_text())["present"]
         self.assertEqual(sheets.rows(data / sheets.PRESENTED), present.citation_rows(data, pinned))
 
+    @built.check
     def test_present_17_presents_every_expected_line(self):
         """The expected cells follow the expert's provisional rules, which present 18 replaced with the final chart's."""
         data = years.data_dir(YEAR)
@@ -1890,6 +1918,7 @@ class ExpectedTest(unittest.TestCase):
             self.assertEqual(missed, [], column)
             self.assertTrue(all(shown(cells[p], line) != wanted[p, line] for c, p, line in TRIAGED if c == column))
 
+    @built.check
     def test_every_nonblank_or_cited_line_cites_a_document(self):
         data = years.data_dir(YEAR)
         rows, version = present.citation_rows(data, pinned(data)), pinned(data)
@@ -1904,6 +1933,7 @@ class ExpectedTest(unittest.TestCase):
 
 
 class DvhaTest(unittest.TestCase):
+    @built.check
     def test_every_column_cites_a_cell_it_does_not_hold(self):
         data = years.data_dir(YEAR)
         held = present.held(data, pinned(data))
@@ -2059,6 +2089,7 @@ class ExplainTest(unittest.TestCase):
                 _, aside = present.explain("Aetna", found, column, version=18)
                 self.assertEqual({g["amount"]: aside[facts.identity(g)] for g in found if facts.identity(g) in aside}, reasons)
 
+    @built.check
     def test_every_fact_a_rule_sets_aside_in_the_year_has_a_noted_reason_unless_the_column_skips_its_benefit(self):
         data = years.data_dir()
         organization = {p["plan_id"]: p["organization"] for p in sheets.rows(data / "generated/plans.csv")}
@@ -2278,6 +2309,7 @@ class FinalChartPricesTest(unittest.TestCase):
         self.assertEqual(lacks("$0-$145 | $345", "$40 $330 $345 0%"), ["$330"])
         self.assertEqual(lacks("$0-20%", "$10 20%"), ["$10"])
 
+    @built.check
     def test_every_main_cell_shows_every_price_the_final_chart_shows(self):
         data = years.data_dir(YEAR)
         path = pathlib.Path(__file__).parent / "fixtures" / "final_chart_prices_2027.csv"
@@ -2305,6 +2337,7 @@ def segments(value):
 
 
 class LostPricesTest(unittest.TestCase):
+    @built.check
     def test_version_29_keeps_every_price_version_28_showed(self):
         data = years.data_dir(YEAR)
         lost = []
