@@ -69,7 +69,7 @@ export const SHEET_FILES = { main: "main_chart.csv", dvha: "dvha.csv" };
 
 // A paragraph is a list of segments: a string, or [term, text] for a term in web/terms.py.
 // record names the key of the cell's trace (#181) that shows the step.
-// paras hold for any cell. example holds only for the example cell, on the steps that touched it: highlight lists the example rows
+// paras hold for any cell. example holds only for the example cell: highlight lists the example rows
 // that the cell uses in the input and the output.
 export const STEPS = [
   { id: "list-plans", record: "plan", from: "landscape", to: "plans", label: "List the plans",

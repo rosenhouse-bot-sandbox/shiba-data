@@ -11,7 +11,7 @@ URL = "https://example.org/sb.pdf"
 
 
 class LostQuotesTest(unittest.TestCase):
-    def test_lists_layer_rows_the_site_cannot_highlight_even_once(self):
+    def test_lists_citations_the_site_cannot_highlight_even_once(self):
         with tempfile.TemporaryDirectory() as tmp:
             data, texts = pathlib.Path(tmp, "2027"), pathlib.Path(tmp, "texts")
             (data / "generated").mkdir(parents=True)

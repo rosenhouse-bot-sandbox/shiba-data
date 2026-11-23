@@ -39,8 +39,8 @@ def citations(data, kind_of):
     why the site leaves it out, or "" if the site shows it. kind_of maps each checked document's url to its kind.
     A cell cited by a document other than an SB shows no SB citation.
     Fails if a row's value is not its cell's, or it cites an unknown document."""
-    sheets = read(data)
-    index = {(sheet, r["plan_id"]): r for sheet, sheet_rows in sheets.items() for r in sheet_rows}
+    by_sheet = read(data)
+    index = {(sheet, r["plan_id"]): r for sheet, sheet_rows in by_sheet.items() for r in sheet_rows}
     with open(data / PRESENTED, newline="") as f:
         reader = csv.DictReader(f)
         if reader.fieldnames != COLUMNS:
@@ -57,4 +57,4 @@ def citations(data, kind_of):
     not_sb = {(c["sheet"], c["plan_id"], c["column"]) for c in cited if kind_of[c["url"]] != "SB"}
     for c in cited:
         c["hidden"] = NOT_SB_CITES_CELL if kind_of[c["url"]] == "SB" and (c["sheet"], c["plan_id"], c["column"]) in not_sb else ""
-    return sheets, cited
+    return by_sheet, cited

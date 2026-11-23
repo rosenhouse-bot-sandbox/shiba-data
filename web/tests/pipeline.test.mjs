@@ -52,6 +52,7 @@ test("each side of a step highlights the cell's rows or explains why there are n
 test("neighbouring steps share a table", () => {
   const rules = stepById("column-rules");
   assert.deepEqual(before(rules).map((s) => s.id), ["check-facts"]);
+  assert.deepEqual(after(rules), []);
   assert.deepEqual(after(stepById("sheet")).map((s) => s.id), ["publish"]);
   assert.deepEqual(before(stepById("list-plans")), []);
 });

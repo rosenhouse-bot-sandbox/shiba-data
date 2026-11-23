@@ -328,13 +328,13 @@ class ImagingCellsTest(unittest.TestCase):
     def test_facts_agree_with_every_imaging_line_built_from_the_pbp(self):
         data = years.data_dir()
         rows = facts.read(data / "generated" / "pbp_facts.csv")
-        edited = {(e["plan_id"], e["line"]) for e in expected.load()
+        expected_lines = {(e["plan_id"], e["line"]) for e in expected.load()
                   if (e["sheet"], e["column"]) == ("main", "L_xray_imaging")}
         checked = []
         for cells in sheets.read(data)["main"]:
             plan_id = cells["plan_id"]
             for line, benefit in (("1", "imaging.xray"), ("2", "imaging.diagnostic")):
-                if {(plan_id, ""), (plan_id, line)} & edited:
+                if {(plan_id, ""), (plan_id, line)} & expected_lines:
                     continue
                 found = {r["cost_kind"]: r["amount"] for r in rows
                          if (r["plan_id"], r["benefit"], r["network"]) == (plan_id, benefit, "in")}

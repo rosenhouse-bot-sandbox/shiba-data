@@ -51,7 +51,6 @@ class TermsTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "gone.js does not exist"):
                 terms.resolve(pathlib.Path(d), "abc123")
 
-
     def test_a_file_term_links_the_file_with_no_code(self):
         worker = terms.resolve(REPO, "abc123")["worker"]
         self.assertEqual(worker["url"], "https://github.com/rosenhouse-bot-sandbox/shiba-data/blob/abc123/web/worker.js")

@@ -849,7 +849,7 @@ test("pipeline view: the nav link opens the example cell's first step", async ()
   assert.equal(await page.textContent(".how-step"), "List the plans");
 });
 
-test("pipeline view: Next steps through the example cell's chain, each step highlighting its rows", async () => {
+test("pipeline view: Next steps through the example cell's steps, each step highlighting its rows", async () => {
   await openHow(page, "");
   const labels = [];
   for (;;) {
