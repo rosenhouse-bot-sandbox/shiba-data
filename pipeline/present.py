@@ -1,4 +1,4 @@
-"""Writes generated/presented.csv, a layer that presents sheet columns from facts and cites them.
+"""Writes the generated sheets from facts, and generated/presented.csv, which cites them.
 
 Usage: python3 -I pipeline/present.py <year>
 """
@@ -6,7 +6,7 @@ import collections, contextvars, csv, itertools, json, os, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-import facts, fields, layers, steps, years
+import facts, fields, sheets, steps, years
 
 RANK = {s: i for i, s in enumerate(facts.SOURCES_BEST_FIRST)}
 OFFICES = ("office.pcp", "office.specialist", "freestanding")
@@ -1718,12 +1718,12 @@ def explain(organization, found, column, sheet="main", version=None):
 
 
 def presents(cited):
-    """Whether a line's cited facts give it a presented row. A line without one keeps its other layers' value."""
+    """Whether a line's cited facts give it a citation."""
     return any(f["source"] in facts.DOCUMENTS for f in cited)
 
 
 def plans(data):
-    return layers.rows(data / "generated" / "plans.csv")
+    return sheets.rows(data / "generated" / "plans.csv")
 
 
 def dental_before_25(organization, found):
@@ -1970,11 +1970,10 @@ def held(data, version=None):
                                 for r in plans(data)}
 
 
-def layer_rows(data, version=None):
-    """Writes one row per line and cited document quote. A blank line with no cited fact writes no row, so the line keeps
-    its other layers' value.
+def citation_rows(data, version=None):
+    """Returns one row per line and cited document quote. A line that cites no document fact gets no row.
     Rows for a one-line cell name no line."""
-    url = {d["sha256"]: d["url"] for d in layers.rows(data / "generated" / "documents_checked.csv") if d["sha256"]}
+    url = {d["sha256"]: d["url"] for d in sheets.rows(data / "generated" / "documents_checked.csv") if d["sha256"]}
     version = version or current(data)
     out, held_cells = {}, held(data, version)
     for sheet, (rules, _) in SHEETS.items():
@@ -1995,16 +1994,16 @@ def layer_rows(data, version=None):
 
 
 def write(data, version=None):
-    """Writes the generated sheets and the presented layer."""
-    for sheet, name in layers.SHEETS.items():
+    """Writes the generated sheets and their citations."""
+    for sheet, name in sheets.SHEETS.items():
         with open(data / "generated" / name, "w", newline="") as f:
             out = csv.DictWriter(f, ["section", "plan_id", "plan_name"] + list(fields.labels(sheet)))
             out.writeheader()
             out.writerows(sheet_rows(data, sheet, version))
-    with open(data / layers.PRESENTED, "w", newline="") as f:
-        out = csv.DictWriter(f, layers.COLUMNS, lineterminator="\n")
+    with open(data / sheets.PRESENTED, "w", newline="") as f:
+        out = csv.DictWriter(f, sheets.COLUMNS, lineterminator="\n")
         out.writeheader()
-        out.writerows(layer_rows(data, version))
+        out.writerows(citation_rows(data, version))
 
 
 if __name__ == "__main__":

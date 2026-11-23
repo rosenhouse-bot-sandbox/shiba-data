@@ -35,7 +35,7 @@ export const NODES = {
         " Air                                             20% of the cost",
         " Ground                                          $325 copay per date of service",
         " TRANSPORTATION                                  Not Covered"] } },
-  draft: { col: 2, row: 8, kind: "table", label: "main_chart.csv",
+  sheet: { col: 2, row: 8, kind: "table", label: "main_chart.csv",
     table: { name: "generated/main_chart.csv", note: "every rule's value, selected columns", cols: ["plan_id", "plan_name", "AB_ambulance"],
       rows: [["H1036-153-0", "Humana Total Complete (HMO)", "$325 or 20% | $325"]] } },
   answers: { col: 0, row: 5, kind: "model answers", source: true, label: "answers/*.json",
@@ -58,17 +58,14 @@ export const NODES = {
       rows: [["H1036-153-0", "AB_ambulance", "1", "$325 or 20%", "46", "In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance"],
         ["H1036-153-0", "AB_ambulance", "1", "$325 or 20%", "46", "… Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance"],
         ["H1036-153-0", "AB_ambulance", "2", "$325", "46", "Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance"]] } },
-  live: { col: 1, row: 9, kind: "result", label: "live sheet",
-    table: { name: "live sheet (main)", note: "after stacking the layers", cols: ["plan_id", "plan_name", "AB_ambulance", "citations"],
-      rows: [["H1036-153-0", "Humana Total Complete (HMO)", "$325 or 20% | $325", "4 quotes, EOC page 46"]] } },
-  site: { col: 1, row: 10, kind: "website", source: true, label: "pdxplans.org",
+  site: { col: 1, row: 9, kind: "website", source: true, label: "pdxplans.org",
     text: { name: "pdxplans.org", note: "after a volunteer clicks the cell",
       lines: ["Humana Total Complete (HMO) · Ambulance", "  $325 or 20% | $325", "", "EOC page 46, highlighted in the PDF beside the sheet:",
         '  "In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number',
         '   of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance"'] } },
 };
 
-export const DRAFT_FILES = { main: "main_chart.csv", dvha: "dvha.csv" };
+export const SHEET_FILES = { main: "main_chart.csv", dvha: "dvha.csv" };
 
 // A paragraph is a list of segments: a string, or [term, text] for a term in web/terms.py.
 // record names the key of the cell's trace (#181) that shows the step.
@@ -102,31 +99,17 @@ export const STEPS = [
     paras: [["Each column has a rule, written in code from the domain expert's instructions. It takes facts from the ", ["bestSource", "best source"], " and cites their quotes."]],
     example: { highlight: [[0, 1, 2, 3], [0, 1, 2]], before: "ground $325, air 20%, abroad $325", after: "$325 or 20% | $325",
       paras: [["In the ", ["rule", "Ambulance rule"], ", line 1 takes in-network, Medicare-covered ground and air trips from the EOC. Line 2 takes trips abroad. Each line cites the quotes of the facts it used, so this cell gets four citations from EOC page 46."]] } },
-  { id: "draft", record: "draft", from: "facts", to: "draft", label: "Draft sheet",
-    paras: [["The column rules also write every value to a draft sheet. A line that only CMS data backs has no citation, so a volunteer can't check it."]],
+  { id: "sheet", record: "sheet", from: "facts", to: "sheet", label: "Write sheet",
+    paras: [["The column rules also write every value to the sheet. A line that only CMS data backs has no citation, so a volunteer can't check it."]],
     example: { highlight: [[0, 1, 2, 3], [0]], before: "ground $325, air 20%, abroad $325", after: "$325 or 20% | $325",
       paras: [["Every line here cites the EOC."]] } },
-  { id: "stack-draft", record: "layers", from: "draft", to: "live", label: "Stack: draft",
-    paras: [["The draft is the bottom ", ["layer", "layer"], ". A later layer that sets the same cell wins."]],
-    example: { highlight: [[0], [0]], before: "draft $325 or 20% | $325", after: "bottom layer", paras: [] } },
-  { id: "stack-presented", record: "layers", from: "presented", to: "live", label: "Stack: presented",
-    paras: [["The presented ", ["layer", "layer"], " sits above the draft. Code drops any citation whose value differs from the cell's final value."]],
-    example: { highlight: [[0, 1, 2], [0]], before: "presented $325 or 20% | $325, 4 quotes", after: "live value, cited",
-      paras: [["Its value is the same here, so the cell keeps its value and gains four citations."]] } },
-  { id: "publish", record: "layers", from: "live", to: "site", label: "Publish",
-    paras: [["Merging to main builds the site. ", ["worker", "The pdxplans Worker"], " serves it at pdxplans.org, and the same build updates the volunteers' Google Sheet."]],
-    example: { highlight: [[0], [1, 4, 5]], before: "live AB_ambulance", after: "cell + EOC page 46 highlight", paras: [] } },
+  { id: "publish", record: "citations", from: "sheet", to: "site", label: "Publish",
+    paras: [["Merging to main builds the site from the sheet and its citations. ", ["worker", "The pdxplans Worker"], " serves it at pdxplans.org, and the same build updates the volunteers' Google Sheet."]],
+    example: { highlight: [[0], [1, 4, 5]], before: "$325 or 20% | $325, 4 quotes", after: "cell + EOC page 46 highlight", paras: [] } },
 ];
 
-// The steps that touched a cell, read from its trace. Without a trace, every step.
-export function chain(trace) {
-  if (!trace) return STEPS;
-  const presented = (trace.layers?.applied ?? []).some((l) => l.layer === "generated/presented.csv" && l.rows.length);
-  return STEPS.filter((s) => s.id !== "stack-presented" || presented);
-}
-
 // Edges with no step of their own.
-export const LINKS = [["plans", "documents"], ["pbp", "draft"]];
+export const LINKS = [["plans", "documents"], ["pbp", "sheet"], ["presented", "site"]];
 
 export const NODE_W = 128;
 export const NODE_H = 54;
@@ -166,8 +149,8 @@ export function pillBox(step) {
 }
 
 export const stepById = (id) => STEPS.find((s) => s.id === id);
-export const before = (step, steps = STEPS) => steps.filter((s) => s.to === step.from);
-export const after = (step, steps = STEPS) => steps.filter((s) => s.from === step.to);
+export const before = (step) => STEPS.filter((s) => s.to === step.from);
+export const after = (step) => STEPS.filter((s) => s.from === step.to);
 
 const shownValue = (v) => v === "" ? "blank" : v;
 const plural = (n, word) => `${n} ${word}${n === 1 ? "" : "s"}`;
@@ -186,9 +169,6 @@ function quotes(rows, trace) {
   return `${plural(rows.length, "quote")} from ${where.join("; ")}`;
 }
 
-const layer = (trace, name) => trace.layers.applied.find((l) => l.layer === name);
-const live = (t) => `live ${shownValue(t.layers.live.value)}`;
-
 // What each step took in and gave out for a cell, read from its trace.
 const STRIPS = {
   "list-plans": (t) => [`${t.plan.row.plan_id} in the Landscape file`, `plans.csv: ${t.plan.row.plan_name}`],
@@ -204,14 +184,8 @@ const STRIPS = {
   },
   "column-rules": (t) => [`${plural(t.rule.lines.reduce((n, l) => n + l.facts.length, 0), "fact")} used, ${t.rule.set_aside.length} set aside`,
     t.rule.held ? `held: ${t.rule.held}` : t.rule.lines.map((l) => `line ${l.line} ${shownValue(l.value)}`).join("; ")],
-  "draft": (t) => ["the column rule", shownValue(t.draft.value)],
-  "stack-draft": (t) => [`draft ${shownValue(t.layers.draft)}`,
-    t.layers.live.value === t.layers.draft ? live(t) : `${live(t)}, set by ${t.layers.live.set_by}`],
-  "stack-presented": (t) => {
-    const presented = layer(t, "generated/presented.csv");
-    return [`presented ${shownValue(presented.value)}, ${quotes(presented.rows, t)}`, live(t)];
-  },
-  "publish": (t) => [live(t), `site cell ${shownValue(t.layers.live.value)} with ${quotes(t.layers.live.citations, t)}`],
+  "sheet": (t) => ["the column rule", shownValue(t.sheet.value)],
+  "publish": (t) => [`sheet ${shownValue(t.sheet.value)}`, `site cell ${shownValue(t.sheet.value)} with ${quotes(t.citations.shown, t)}`],
 };
 
 // [before, after] for a step, or null when the trace does not say.

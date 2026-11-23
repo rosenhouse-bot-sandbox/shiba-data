@@ -57,7 +57,7 @@ CREATE TABLE text (
 );
 
 -- value keeps a cell's lines, separated by " | ".
-CREATE TABLE draft_cell (
+CREATE TABLE sheet_cell (
   sheet   TEXT NOT NULL CHECK (sheet IN ('main', 'dvha')),
   plan_id TEXT NOT NULL REFERENCES plan,
   col     TEXT NOT NULL,
@@ -65,11 +65,10 @@ CREATE TABLE draft_cell (
   PRIMARY KEY (sheet, plan_id, col)
 );
 
--- One row of a layer file. position is the row's place in its file, where a later edit wins.
--- line is NULL for a whole cell.
-CREATE TABLE layer_row (
-  layer    TEXT NOT NULL,
-  position INTEGER NOT NULL,
+-- One row of presented.csv. position is the row's place in the file. line is NULL for a whole cell.
+-- hidden is why the site leaves the citation out, a reason in sheets.py, or '' when the site shows it.
+CREATE TABLE citation (
+  position INTEGER PRIMARY KEY,
   sheet    TEXT NOT NULL,
   plan_id  TEXT NOT NULL,
   col      TEXT NOT NULL,
@@ -78,37 +77,10 @@ CREATE TABLE layer_row (
   url      TEXT NOT NULL,
   pdf_page INTEGER,
   quote    TEXT NOT NULL,
-  saw      TEXT,
-  source   TEXT,
-  author   TEXT,
-  note     TEXT,
-  PRIMARY KEY (layer, position),
-  FOREIGN KEY (sheet, plan_id, col) REFERENCES draft_cell
+  hidden   TEXT NOT NULL,
+  FOREIGN KEY (sheet, plan_id, col) REFERENCES sheet_cell
 );
-CREATE INDEX layer_row_cell ON layer_row (sheet, plan_id, col);
-
--- A cell's value after each layer, in the order the layers apply.
-CREATE TABLE layer_value (
-  sheet   TEXT NOT NULL,
-  plan_id TEXT NOT NULL,
-  col     TEXT NOT NULL,
-  step    INTEGER NOT NULL,
-  layer   TEXT NOT NULL,
-  value   TEXT NOT NULL,
-  PRIMARY KEY (sheet, plan_id, col, step),
-  FOREIGN KEY (sheet, plan_id, col) REFERENCES draft_cell
-);
-
--- What the site does with each layer row: shows it, or hides it for a reason in layers.py.
--- site_order orders a cell's rows as the site lists them.
-CREATE TABLE live_citation (
-  layer      TEXT NOT NULL,
-  position   INTEGER NOT NULL,
-  site_order INTEGER NOT NULL,
-  hidden     TEXT NOT NULL,
-  PRIMARY KEY (layer, position),
-  FOREIGN KEY (layer, position) REFERENCES layer_row
-);
+CREATE INDEX citation_cell ON citation (sheet, plan_id, col);
 
 CREATE TABLE comment (
   sheet    TEXT NOT NULL,
@@ -120,7 +92,7 @@ CREATE TABLE comment (
   pdf_page INTEGER,
   quote    TEXT NOT NULL,
   PRIMARY KEY (sheet, plan_id, col),
-  FOREIGN KEY (sheet, plan_id, col) REFERENCES draft_cell
+  FOREIGN KEY (sheet, plan_id, col) REFERENCES sheet_cell
 );
 
 -- facts.IDENTITY names a fact. fact_id alone repeats across an SB and an EOC.
@@ -149,8 +121,8 @@ CREATE TABLE fact (
   PRIMARY KEY (fact_id, source, doc_sha, page)
 );
 
--- Each line a present.py rule returned for a cell. presented is 0 when no document fact backs the line, so
--- the line keeps its other layers' value. held is the pinned version's reason for leaving the whole cell alone.
+-- Each line a present.py rule returned for a cell. presented is 0 when no document fact backs the line, so the
+-- line has no citation. held is the pinned version's reason for leaving the whole cell alone.
 CREATE TABLE rule_line (
   sheet     TEXT NOT NULL,
   plan_id   TEXT NOT NULL REFERENCES plan,

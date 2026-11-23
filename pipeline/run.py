@@ -25,7 +25,7 @@ import ask  # noqa: E402
 import blobs  # noqa: E402
 import document_facts  # noqa: E402
 import eoc  # noqa: E402
-import layers  # noqa: E402
+import sheets  # noqa: E402
 import present  # noqa: E402
 import reach  # noqa: E402
 import steps  # noqa: E402
@@ -58,10 +58,10 @@ def pdfs(gen, work):
 
 
 def lost_quotes(data, texts):
-    """Layer rows whose quote the site cannot highlight on its page."""
+    """Citations whose quote the site cannot highlight on its page."""
     with open(data / "generated" / "documents_checked.csv") as f:
         doc = {d["url"]: d["sha256"][:16] for d in csv.DictReader(f)}
-    cites = [dict(c, doc=doc[c["url"]], page=c["pdf_page"]) for name in layers.LAYERS for c in layers.layer(data, name)
+    cites = [dict(c, doc=doc[c["url"]], page=c["pdf_page"]) for c in sheets.rows(data / sheets.PRESENTED)
              if c["quote"].strip() and c["url"] in doc]
     return [c for c, found in zip(cites, eoc.highlights(texts, cites, "found")) if not found]
 
@@ -69,7 +69,7 @@ def lost_quotes(data, texts):
 def check_quotes(data, texts):
     lost = lost_quotes(data, texts)
     if lost:
-        raise SystemExit("The site cannot highlight these quotes:\n" + "\n".join(f"{layers.where(c)}: {c['quote']}" for c in lost))
+        raise SystemExit("The site cannot highlight these quotes:\n" + "\n".join(f"{sheets.where(c)}: {c['quote']}" for c in lost))
 
 
 LEDGER_COLUMNS = ["dir", "task", "model", "effort", "key", "prompt"]

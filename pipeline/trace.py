@@ -16,7 +16,7 @@ import csv, glob, hashlib, json, os, sqlite3, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-import ask, blobs, eoc, extract, facts, fields, layers, present, years
+import ask, blobs, eoc, extract, facts, fields, sheets, present, years
 
 REPO_URL = "https://github.com/rosenhouse-bot-sandbox/shiba-data"
 PROMPT_URL = "https://pdxplans.org/blobs/{}.txt"
@@ -73,9 +73,9 @@ def build(year, out, sha, work=None):
                                      baseline_file=d["baseline_file"]) for d in checked))
         insert(db, "text", (dict(pdf=t["pdf"], plain=t["text"], layout=t["layout"], items=t["items"])
                             for t in read(data / "generated" / blobs.TEXTS)))
-        insert(db, "draft_cell", sheet_cells(layers.generated(data)))
+        insert(db, "sheet_cell", sheet_cells(sheets.read(data)))
         insert(db, "landscape_read", (dict(r, position=n) for n, r in enumerate(read(data / "generated/landscape_reads.csv"))))
-        load_layers(db, data, checked)
+        load_citations(db, data, checked)
         reviewed = {facts.identity(f) for f in read(data / "machine/reviewed_facts.csv")}
         insert(db, "fact", (dict(f, origin=origin, reviewed=int(facts.identity(f) in reviewed))
                             for origin, path in FACT_FILES.items() for f in read(data / path)))
@@ -105,18 +105,12 @@ def renamed(row):
     return {("col" if k == "column" else k): v for k, v in row.items()}
 
 
-def load_layers(db, data, checked):
-    insert(db, "layer_row", (dict(
-        layer=name, position=r["position"], sheet=r["sheet"],
-        plan_id=r["plan_id"], col=r["column"], line=number(r["line"]), value=r["value"], url=r["url"],
-        pdf_page=number(r["pdf_page"]), quote=r["quote"], saw=r.get("saw"), source=r.get("source"),
-        author=r.get("author"), note=r.get("note")) for name in layers.LAYERS for r in layers.layer(data, name)))
-    for step, name in enumerate(layers.LAYERS):
-        insert(db, "layer_value", (dict(c, step=step, layer=name)
-                                   for c in sheet_cells(layers.live(data, layers.LAYERS[:step + 1])[0])))
-    _, cited = layers.citations(data, {d["url"]: d["kind"] for d in checked})
-    insert(db, "live_citation", (dict(layer=c["layer"], position=c["position"], site_order=n, hidden=c["hidden"])
-                                 for n, c in enumerate(cited)))
+def load_citations(db, data, checked):
+    _, cited = sheets.citations(data, {d["url"]: d["kind"] for d in checked})
+    insert(db, "citation", (dict(
+        position=c["position"], sheet=c["sheet"], plan_id=c["plan_id"], col=c["column"], line=number(c["line"]),
+        value=c["value"], url=c["url"], pdf_page=number(c["pdf_page"]), quote=c["quote"], hidden=c["hidden"])
+        for c in cited))
 
 
 def load_answers(db, data, work):
@@ -170,7 +164,7 @@ def load_rules(db, data):
     version = present.current(data, candidate="")
     found, held = present.plan_facts(data), present.held(data, version)
     for sheet, (rules, _) in present.SHEETS.items():
-        for r in layers.generated(data)[sheet]:
+        for r in sheets.read(data)[sheet]:
             plan_id = r["plan_id"]
             for col in rules:
                 got, aside = present.explain(organization[plan_id], found[plan_id], col, sheet, version)
@@ -308,25 +302,22 @@ def record(found, **more):
     return dict(status=TRACED if found else NONE, **more)
 
 
-def layer_rows(db, sheet, plan_id, col):
-    """The cell's layer rows in the site's order, without the columns their layer lacks."""
-    found = rows(db, """SELECT r.layer, r.line, r.value, r.url, r.pdf_page, r.quote,
-                               r.saw, r.source, r.author, r.note, c.hidden
-                        FROM layer_row r JOIN live_citation c USING (layer, position)
-                        WHERE r.sheet = ? AND r.plan_id = ? AND r.col = ? ORDER BY c.site_order""", sheet, plan_id, col)
+def citations(db, sheet, plan_id, col):
+    """The cell's citations in the site's order. A whole-cell citation has no line."""
+    found = rows(db, """SELECT line, value, url, pdf_page, quote, hidden FROM citation
+                        WHERE sheet = ? AND plan_id = ? AND col = ? ORDER BY position""", sheet, plan_id, col)
     return [{k: v for k, v in r.items() if v is not None} for r in found]
 
 
 def cell(db, sheet, plan_id, col):
     """The records of #178 for one cell, read from that cell's rows only."""
-    found = rows(db, "SELECT value FROM draft_cell WHERE sheet = ? AND plan_id = ? AND col = ?", sheet, plan_id, col)
+    found = rows(db, "SELECT value FROM sheet_cell WHERE sheet = ? AND plan_id = ? AND col = ?", sheet, plan_id, col)
     if not found:
         raise LookupError(f"No cell {sheet} {plan_id} {col}")
     build_row = rows(db, "SELECT sha, year, steps, replayed, checked FROM build")[0]
     code = f"{REPO_URL}/blob/{build_row['sha']}/"
-    values = rows(db, "SELECT layer, value FROM layer_value WHERE sheet = ? AND plan_id = ? AND col = ? ORDER BY step",
-                  sheet, plan_id, col)
-    cited = layer_rows(db, sheet, plan_id, col)
+    value = found[0]["value"]
+    cited = citations(db, sheet, plan_id, col)
     documents = rows(db, """SELECT d.kind, d.url, d.found_via, w.sha256, w.pages, w.cover_problems, w.baseline,
                                    t.plain, t.layout, t.items
                             FROM plan_document p JOIN document d USING (url) JOIN download w USING (url)
@@ -349,21 +340,17 @@ def cell(db, sheet, plan_id, col):
             answers = {"status": NOT_RECORDED}
     return {
         "cell": dict(year=build_row["year"], sheet=sheet, plan_id=plan_id, col=col, label=fields.labels(sheet)[col],
-                     value=values[-1]["value"]),
+                     value=value),
         "plan": record(True, row=rows(db, "SELECT * FROM plan WHERE plan_id = ?", plan_id)[0],
                        landscape_row=record(landscape_row, fields=landscape_row)),
         "documents": record(documents, documents=documents),
-        "draft": record(True, value=found[0]["value"], code=rule_record["code"]),
+        "sheet": record(True, value=value, code=rule_record["code"]),
         "answers": answers,
         "fact_checks": fact_checks,
         "rule": rule_record,
         "notes": record(n := rows(db, "SELECT kind, comment, url, pdf_page, quote FROM comment WHERE sheet = ? AND plan_id = ? "
                                       "AND col = ?", sheet, plan_id, col), rows=n),
-        "layers": record(True, draft=found[0]["value"], applied=[
-            dict(layer=v["layer"], value=v["value"], rows=[r for r in cited if r["layer"] == v["layer"]]) for v in values],
-            live=dict(value=values[-1]["value"], set_by=cited[0]["layer"] if cited else None,
-                      citations=[r for r in cited if not r["hidden"]]),
-            hidden=[r for r in cited if r["hidden"]]),
+        "citations": record(True, shown=[r for r in cited if not r["hidden"]], hidden=[r for r in cited if r["hidden"]]),
         "build": record(True, sha=build_row["sha"], steps=json.loads(build_row["steps"]), code=code),
     }
 
@@ -378,7 +365,7 @@ def export(db, out):
     sha, year = db.execute("SELECT sha, year FROM build").fetchone()
     os.makedirs(os.path.join(out, "cells"), exist_ok=True)
     cells = {}
-    for key in db.execute("SELECT sheet, plan_id, col FROM draft_cell ORDER BY sheet, plan_id, col").fetchall():
+    for key in db.execute("SELECT sheet, plan_id, col FROM sheet_cell ORDER BY sheet, plan_id, col").fetchall():
         text = json.dumps(cell(db, *key), ensure_ascii=False).replace(sha, COMMIT)
         digest = cells["/".join(key)] = hashlib.sha256(text.encode()).hexdigest()
         with open(os.path.join(out, "cells", f"{digest}.json"), "w", encoding="utf-8") as f:

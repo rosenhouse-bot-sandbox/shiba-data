@@ -3,7 +3,7 @@ from unittest import mock
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path[:0] = [os.path.dirname(HERE), os.path.join(os.path.dirname(os.path.dirname(HERE)), "web")]
-import ask, blobs, build, document_facts, extract, fields, layers, present, run, trace, years
+import ask, blobs, build, document_facts, extract, fields, sheets, present, run, trace, years
 
 READER, VERIFIER, REVIEWER = "reader-model", "verifier-model", "reviewer-model"
 
@@ -42,16 +42,16 @@ class TraceTest(unittest.TestCase):
         return trace.cell(self.db, *key)
 
     def test_every_cell_has_every_record_with_a_known_status(self):
-        sheets = layers.live(years.data_dir())[0]
+        by_sheet = sheets.read(years.data_dir())
         for sheet in ("main", "dvha"):
-            for r in sheets[sheet]:
+            for r in by_sheet[sheet]:
                 for col in fields.labels(sheet):
                     with self.subTest(sheet=sheet, plan_id=r["plan_id"], col=col):
                         records = self.cell(sheet, r["plan_id"], col)
                         self.assertEqual(records["cell"]["value"], r[col])
                         self.assertEqual(set(records), {
-                            "cell", "plan", "documents", "draft", "answers", "fact_checks", "rule",
-                            "notes", "layers", "build"})
+                            "cell", "plan", "documents", "sheet", "answers", "fact_checks", "rule",
+                            "notes", "citations", "build"})
                         self.assertLessEqual(statuses(records), STATUSES)
 
     def test_shows_the_values_and_citations_the_site_shows_in_its_order(self):
@@ -61,21 +61,21 @@ class TraceTest(unittest.TestCase):
             for r in site[sheet]["rows"]:
                 for col, shown in r["cells"].items():
                     with self.subTest(sheet=sheet, plan_id=r["plan_id"], col=col):
-                        live = self.cell(sheet, r["plan_id"], col)["layers"]["live"]
-                        self.assertEqual(live["value"], shown["value"])
+                        records = self.cell(sheet, r["plan_id"], col)
+                        self.assertEqual(records["sheet"]["value"], shown["value"])
                         self.assertEqual([dict(line=c.get("line"), value=c["value"], doc=doc[c["url"]], page=c["pdf_page"],
-                                               quote=c["quote"]) for c in live["citations"]], shown["cites"])
+                                               quote=c["quote"]) for c in records["citations"]["shown"]], shown["cites"])
 
     def test_says_when_a_document_other_than_an_sb_hides_an_sb_citation(self):
         site = build.site_data()
         sb_rows = [(r["plan_id"], col) for r in site["main"]["rows"] for col in r["cells"]
-                   if any(c["hidden"] == layers.NOT_SB_CITES_CELL
-                          for c in self.cell("main", r["plan_id"], col)["layers"]["hidden"])]
+                   if any(c["hidden"] == sheets.NOT_SB_CITES_CELL
+                          for c in self.cell("main", r["plan_id"], col)["citations"]["hidden"])]
         self.assertTrue(sb_rows)
 
     def test_traces_a_dvha_cell_from_its_rule(self):
         records = self.cell("dvha", "H2923-001-0", "F_dental")
-        self.assertEqual(records["draft"]["code"]["file"], "pipeline/present.py")
+        self.assertEqual(records["sheet"]["code"]["file"], "pipeline/present.py")
         self.assertEqual(records["rule"]["code"]["function"], "dental")
 
     def test_says_why_the_pinned_version_holds_a_dvha_cell(self):
@@ -88,27 +88,18 @@ class TraceTest(unittest.TestCase):
             path.write_text("=====PAGE 1=====\nfirst\n=====PAGE 2=====\nsecond\n")
             self.assertEqual(trace.page(work, "ab" * 32, "2"), "second\n")
 
-    def test_shows_the_citations_the_site_shows(self):
-        live = self.cell(*AMBULANCE)["layers"]["live"]
-        self.assertEqual(live["value"], "$325 or 20% | $325")
-        self.assertEqual(live["set_by"], layers.PRESENTED)
-        self.assertEqual({(c["line"], c["pdf_page"]) for c in live["citations"]}, {(1, 46), (2, 46)})
-        self.assertTrue(all(c["layer"] == layers.PRESENTED for c in live["citations"]))
+    def test_shows_the_sheet_value_and_its_citations(self):
+        records = self.cell(*AMBULANCE)
+        self.assertEqual(records["sheet"]["value"], "$325 or 20% | $325")
+        self.assertEqual({(c["line"], c["pdf_page"]) for c in records["citations"]["shown"]}, {(1, 46), (2, 46)})
 
-    def test_names_no_layer_when_none_sets_the_value(self):
-        self.assertIsNone(self.cell("main", "H2406-042-0", "D_premium_full_extra_help")["layers"]["live"]["set_by"])
-
-    def test_lists_the_value_after_each_layer(self):
-        applied = self.cell(*AMBULANCE)["layers"]["applied"]
-        self.assertEqual([a["layer"] for a in applied], list(layers.LAYERS))
-        self.assertEqual(applied[-1]["value"], "$325 or 20% | $325")
-        self.assertEqual(self.cell(*AMBULANCE)["layers"]["draft"],
-                         layers.generated(years.data_dir())["main"][[r["plan_id"] for r in layers.generated(
-                             years.data_dir())["main"]].index("H1036-153-0")]["AB_ambulance"])
+    def test_lists_no_citation_of_an_uncited_cell(self):
+        self.assertEqual(self.cell("main", "H2406-042-0", "D_premium_full_extra_help")["citations"],
+                         {"status": trace.TRACED, "shown": [], "hidden": []})
 
     def test_says_why_the_site_hides_a_citation(self):
-        hidden = self.cell("dvha", "H2001-045-0", "G_vision")["layers"]["hidden"]
-        self.assertIn((layers.PRESENTED, layers.NOT_SB_CITES_CELL), [(r["layer"], r["hidden"]) for r in hidden])
+        hidden = self.cell("dvha", "H2001-045-0", "G_vision")["citations"]["hidden"]
+        self.assertIn(sheets.NOT_SB_CITES_CELL, [r["hidden"] for r in hidden])
 
     def test_says_none_when_no_step_touched_the_cell(self):
         records = self.cell(*AMBULANCE)
@@ -154,7 +145,7 @@ class TraceTest(unittest.TestCase):
         build = self.cell(*AMBULANCE)["build"]
         self.assertEqual(build["sha"], SHA)
         self.assertEqual(build["steps"], json.loads((years.data_dir() / "steps.json").read_text()))
-        self.assertEqual(self.cell(*AMBULANCE)["draft"]["code"]["url"],
+        self.assertEqual(self.cell(*AMBULANCE)["sheet"]["code"]["url"],
                          f"{trace.REPO_URL}/blob/{SHA}/pipeline/present.py")
 
     def test_exports_each_cells_records_once_by_content_without_the_commit(self):
@@ -166,7 +157,7 @@ class TraceTest(unittest.TestCase):
             for name in os.listdir(os.path.join(out, "cells")):
                 with open(os.path.join(out, "cells", name), encoding="utf-8") as f:
                     texts[name] = f.read()
-        every = self.db.execute("SELECT count(*) FROM draft_cell").fetchone()[0]
+        every = self.db.execute("SELECT count(*) FROM sheet_cell").fetchone()[0]
         self.assertEqual((manifest["sha"], manifest["year"], len(manifest["cells"])), (SHA, years.LIVE, every))
         self.assertEqual(set(texts), {f"{h}.json" for h in manifest["cells"].values()})
         for name, text in texts.items():

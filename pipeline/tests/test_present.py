@@ -2,7 +2,7 @@ import csv, json, os, pathlib, re, sys, tempfile, unittest
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-import expected, facts, fields, layers, present, years
+import expected, facts, fields, sheets, present, years
 
 YEAR = 2027
 
@@ -1486,18 +1486,18 @@ def shown(lines, line):
 
 
 class WriteTest(unittest.TestCase):
-    def test_writes_the_sheets_and_the_layer_rows(self):
-        row = dict.fromkeys(layers.COLUMNS, "x")
+    def test_writes_the_sheets_and_their_citations(self):
+        row = dict.fromkeys(sheets.COLUMNS, "x")
 
         def sheet_rows(data, sheet, version):
             return [dict.fromkeys(["section", "plan_id", "plan_name"] + list(fields.labels(sheet)), f"{sheet} {version}")]
-        with tempfile.TemporaryDirectory() as tmp, mock.patch.object(present, "layer_rows", lambda data, version: [row] * version), \
+        with tempfile.TemporaryDirectory() as tmp, mock.patch.object(present, "citation_rows", lambda data, version: [row] * version), \
                 mock.patch.object(present, "sheet_rows", sheet_rows):
             os.makedirs(f"{tmp}/generated")
             present.write(pathlib.Path(tmp), 1)
-            self.assertEqual(layers.rows(pathlib.Path(tmp, layers.PRESENTED)), [row])
-            self.assertEqual(layers.generated(pathlib.Path(tmp))["dvha"], sheet_rows(None, "dvha", 1))
-            self.assertTrue(pathlib.Path(tmp, "generated", layers.SHEETS["main"]).read_bytes().endswith(b"main 1\r\n"))
+            self.assertEqual(sheets.rows(pathlib.Path(tmp, sheets.PRESENTED)), [row])
+            self.assertEqual(sheets.read(pathlib.Path(tmp))["dvha"], sheet_rows(None, "dvha", 1))
+            self.assertTrue(pathlib.Path(tmp, "generated", sheets.SHEETS["main"]).read_bytes().endswith(b"main 1\r\n"))
 
     def test_a_blank_with_cited_facts_writes_rows(self):
         data = years.data_dir(YEAR)
@@ -1505,24 +1505,24 @@ class WriteTest(unittest.TestCase):
         plan = f["plan_id"]
         with mock.patch.object(present, "lines", lambda data, column, sheet, version: {plan: [("", [f])]}), \
                 mock.patch.dict(present.SHEETS, {"main": ({"S_acupuncture": None}, {}), "dvha": ({}, {})}):
-            rows = present.layer_rows(data)
+            rows = present.citation_rows(data)
         self.assertEqual({(r["plan_id"], r["column"], r["value"]) for r in rows}, {(plan, "S_acupuncture", "")})
 
     def test_a_version_skips_the_cells_it_holds(self):
         data = years.data_dir(YEAR)
         cell = ("K_tests_labs", "H2923-009-0")
-        cells = {v: {(r["column"], r["plan_id"]) for r in present.layer_rows(data, v)} for v in (1, 2)}
+        cells = {v: {(r["column"], r["plan_id"]) for r in present.citation_rows(data, v)} for v in (1, 2)}
         self.assertEqual(cells[2] - cells[1], {cell})
 
     def test_version_4_presents_dvha_vision_and_hearing_and_holds_some_hearing_cells(self):
         data = years.data_dir(YEAR)
-        cells = {v: {(r["sheet"], r["column"], r["plan_id"]) for r in present.layer_rows(data, v)} for v in (3, 4)}
+        cells = {v: {(r["sheet"], r["column"], r["plan_id"]) for r in present.citation_rows(data, v)} for v in (3, 4)}
         self.assertEqual({c[:2] for c in cells[4] - cells[3]}, {("dvha", "G_vision"), ("dvha", "H_hearing")})
         self.assertNotIn(("dvha", "H_hearing", "H6815-038-0"), cells[4])
 
     def test_version_5_presents_dvha_packages(self):
         data = years.data_dir(YEAR)
-        cells = {v: {(r["sheet"], r["column"]) for r in present.layer_rows(data, v)} for v in (4, 5)}
+        cells = {v: {(r["sheet"], r["column"]) for r in present.citation_rows(data, v)} for v in (4, 5)}
         self.assertEqual(cells[5] - cells[4], {("dvha", "E_optional_packages")})
 
     def test_version_7_releases_dvha_cells_whose_rule_only_leaves_details_out(self):
@@ -1541,7 +1541,7 @@ class WriteTest(unittest.TestCase):
 
     def test_version_9_presents_the_main_premium_moop_and_drug_deductible(self):
         data = years.data_dir(YEAR)
-        cells = {v: {(r["sheet"], r["column"]) for r in present.layer_rows(data, v)} for v in (8, 9)}
+        cells = {v: {(r["sheet"], r["column"]) for r in present.citation_rows(data, v)} for v in (8, 9)}
         self.assertEqual(cells[9] - cells[8], {("main", "C_premium"), ("main", "E_moop"), ("main", "N_pharmacy_deductible")})
 
     def test_version_11_presents_the_cell_version_10_holds_for_review(self):
@@ -1582,7 +1582,7 @@ class WriteTest(unittest.TestCase):
 
     def test_version_17_changes_only_the_kaiser_package_cells(self):
         data = years.data_dir(YEAR)
-        rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.layer_rows(data, v)} for v in (16, 17)}
+        rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.citation_rows(data, v)} for v in (16, 17)}
         self.assertEqual({r[:3] for r in rows[16] ^ rows[17]},
                          {("dvha", "E_optional_packages", p) for p in ("H9003-001-0", "H9003-006-0", "H9003-009-0")})
         sheets = {v: present.sheet_rows(data, "dvha", v) for v in (16, 17)}
@@ -1591,7 +1591,7 @@ class WriteTest(unittest.TestCase):
     def test_version_19_moves_package_benefits_to_their_columns_and_lists_hearing_aid_copays(self):
         self.assertEqual(present.VERSIONS[19], {})
         data = years.data_dir(YEAR)
-        rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.layer_rows(data, v)} for v in (18, 19)}
+        rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.citation_rows(data, v)} for v in (18, 19)}
         changed = {r[:3] for r in rows[18] ^ rows[19]}
         self.assertEqual({c for _, c, _ in changed},
                          {"E_optional_packages", "F_dental", "G_vision", "H_hearing", "I_alt_care_otc_travel",
@@ -1607,7 +1607,7 @@ class WriteTest(unittest.TestCase):
     def test_version_20_names_programs_and_says_when_otc_pays_for_food(self):
         self.assertEqual(present.VERSIONS[20], {})
         data = years.data_dir(YEAR)
-        rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.layer_rows(data, v)} for v in (19, 20)}
+        rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.citation_rows(data, v)} for v in (19, 20)}
         self.assertEqual({r[1] for r in rows[19] ^ rows[20]}, {"I_alt_care_otc_travel", "J_extra_benefits"})
         got = {v: present.lines(data, "J_extra_benefits", sheet="dvha", version=v)["H9003-001-0"][0][0] for v in (19, 20)}
         self.assertEqual({v: g.split(";")[0] for v, g in got.items()}, {19: "Fitness $0", 20: "Fitness One Pass $0"})
@@ -1617,7 +1617,7 @@ class WriteTest(unittest.TestCase):
     def test_version_21_shows_preventive_dental_limits_and_each_program_once(self):
         self.assertEqual(present.VERSIONS[21], {})
         data = years.data_dir(YEAR)
-        rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.layer_rows(data, v)} for v in (20, 21)}
+        rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.citation_rows(data, v)} for v in (20, 21)}
         self.assertEqual({r[1] for r in rows[20] ^ rows[21]}, {"F_dental", "J_extra_benefits"})
         got = present.lines(data, "F_dental", sheet="dvha", version=21)["H5439-015-0"][0][0]
         self.assertIn("PREV limits: cleanings 2/year", got)
@@ -1625,7 +1625,7 @@ class WriteTest(unittest.TestCase):
     def test_version_22_says_none_shows_the_giveback_and_shared_allowances(self):
         self.assertEqual(present.VERSIONS[22], {})
         data = years.data_dir(YEAR)
-        rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.layer_rows(data, v)} for v in (21, 22)}
+        rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.citation_rows(data, v)} for v in (21, 22)}
         self.assertEqual({r[1] for r in rows[21] ^ rows[22]},
                          {"F_dental", "G_vision", "H_hearing", "I_alt_care_otc_travel", "J_extra_benefits"})
         got = {c: present.lines(data, c, sheet="dvha", version=22)[p][0][0] for c, p in (
@@ -1638,7 +1638,7 @@ class WriteTest(unittest.TestCase):
     def test_version_23_shows_worldwide_urgent_care_and_hearing_details(self):
         self.assertEqual(present.VERSIONS[23], {})
         data = years.data_dir(YEAR)
-        rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.layer_rows(data, v)} for v in (22, 23)}
+        rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.citation_rows(data, v)} for v in (22, 23)}
         self.assertEqual({r[1] for r in rows[22] ^ rows[23]}, {"H_hearing", "I_alt_care_otc_travel"})
         got = {(c, p): present.lines(data, c, sheet="dvha", version=23)[p][0][0] for c, p in (
             ("H_hearing", "H2056-003-0"), ("H_hearing", "H2923-001-0"), ("I_alt_care_otc_travel", "H2056-003-0"),
@@ -1651,7 +1651,7 @@ class WriteTest(unittest.TestCase):
     def test_version_27_shows_exam_maximums_out_of_network_programs_and_no_part_d(self):
         self.assertEqual(present.VERSIONS[27], {})
         data = years.data_dir(YEAR)
-        rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.layer_rows(data, v)} for v in (26, 27)}
+        rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.citation_rows(data, v)} for v in (26, 27)}
         self.assertEqual({r[1] for r in rows[26] ^ rows[27]}, {"G_vision", "J_extra_benefits"})
         self.assertEqual(present.lines(data, "G_vision", sheet="dvha", version=27)["H5216-455-0"][0][0],
                          "exam $0/year; eyewear $75/year ($150 at PLUS providers); exam max $75/year; 1 pair/year; "
@@ -1665,7 +1665,7 @@ class WriteTest(unittest.TestCase):
     def test_version_29_shows_every_in_network_price(self):
         self.assertEqual(present.VERSIONS[29], {})
         data = years.data_dir(YEAR)
-        rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["line"], r["value"]) for r in present.layer_rows(data, v)}
+        rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["line"], r["value"]) for r in present.citation_rows(data, v)}
                 for v in (28, 29)}
         self.assertEqual({r[1] for r in rows[28] ^ rows[29]},
                          {"F_primary_care", "G_specialist", "I_outpatient_surgery", "K_tests_labs", "L_xray_imaging",
@@ -1686,7 +1686,7 @@ class WriteTest(unittest.TestCase):
     def test_version_31_shows_rewards_hearing_and_dental_details(self):
         self.assertEqual(present.VERSIONS[31], {})
         data = years.data_dir(YEAR)
-        rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.layer_rows(data, v)} for v in (30, 31)}
+        rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.citation_rows(data, v)} for v in (30, 31)}
         self.assertEqual({r[:2] for r in rows[30] ^ rows[31]},
                          {("dvha", "F_dental"), ("dvha", "H_hearing"), ("dvha", "J_extra_benefits")})
         got = {c: present.lines(data, c, sheet="dvha", version=31)["H7199-002-0"][0][0] for c in ("F_dental", "H_hearing")}
@@ -1774,7 +1774,7 @@ class WriteTest(unittest.TestCase):
     def test_version_26_names_the_dental_network(self):
         self.assertEqual(present.VERSIONS[26], {})
         data = years.data_dir(YEAR)
-        rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.layer_rows(data, v)} for v in (25, 26)}
+        rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.citation_rows(data, v)} for v in (25, 26)}
         self.assertEqual({r[1] for r in rows[25] ^ rows[26]}, {"F_dental"})
         got = present.lines(data, "F_dental", sheet="dvha", version=26)["H2056-003-0"][0][0]
         self.assertEqual(got, "PREV $0; no annual max; Aetna Dental PPO Network; no COMP")
@@ -1782,7 +1782,7 @@ class WriteTest(unittest.TestCase):
     def test_version_25_shows_a_comprehensive_dental_range_from_per_service_prices(self):
         self.assertEqual(present.VERSIONS[25], {})
         data = years.data_dir(YEAR)
-        rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.layer_rows(data, v)} for v in (24, 25)}
+        rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.citation_rows(data, v)} for v in (24, 25)}
         self.assertEqual({(r[1], r[2]) for r in rows[24] ^ rows[25]}, {("F_dental", "H1036-306-0")})
         got = present.lines(data, "F_dental", sheet="dvha", version=25)["H1036-306-0"][0][0]
         self.assertTrue(got.startswith("PREV $0; COMP $0-50%; max $4,000/year"))
@@ -1790,7 +1790,7 @@ class WriteTest(unittest.TestCase):
     def test_version_24_shows_rollover_otc_uses_eyewear_pairs_networks_and_no_dental_maximum(self):
         self.assertEqual(present.VERSIONS[24], {})
         data = years.data_dir(YEAR)
-        rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.layer_rows(data, v)} for v in (23, 24)}
+        rows = {v: {(r["sheet"], r["column"], r["plan_id"], r["value"]) for r in present.citation_rows(data, v)} for v in (23, 24)}
         self.assertEqual({r[1] for r in rows[23] ^ rows[24]}, {"F_dental", "G_vision", "I_alt_care_otc_travel"})
         got = {(c, p): present.lines(data, c, sheet="dvha", version=24)[p][0][0] for c, p in (
             ("F_dental", "H6815-038-0"), ("G_vision", "H5216-428-2"), ("I_alt_care_otc_travel", "H1036-317-0"))}
@@ -1807,7 +1807,7 @@ class WriteTest(unittest.TestCase):
 
     def test_version_3_presents_the_dvha_premium(self):
         data = years.data_dir(YEAR)
-        cells = {v: {(r["sheet"], r["column"]) for r in present.layer_rows(data, v)} for v in (2, 3)}
+        cells = {v: {(r["sheet"], r["column"]) for r in present.citation_rows(data, v)} for v in (2, 3)}
         self.assertEqual(cells[3] - cells[2], {("dvha", "C_premium")})
 
     @mock.patch.dict(os.environ, {present.CANDIDATE: ""})
@@ -1828,7 +1828,7 @@ class WriteTest(unittest.TestCase):
         f = facts.read(data / "machine/document_facts.csv")[0]
         with mock.patch.object(present, "lines", lambda data, column, sheet, version: {f["plan_id"]: [("$1", [f]), ("", [f])]}), \
                 mock.patch.dict(present.SHEETS, {"main": ({"S_acupuncture": None}, {}), "dvha": ({}, {})}):
-            rows = present.layer_rows(data)
+            rows = present.citation_rows(data)
         self.assertEqual({(r["line"], r["value"]) for r in rows}, {("", "$1")})
 
 
@@ -1856,8 +1856,8 @@ class SheetTest(unittest.TestCase):
     def test_the_committed_sheets_are_current(self):
         data = years.data_dir(YEAR)
         pinned = json.loads((data / "steps.json").read_text())["present"]
-        for sheet in layers.SHEETS:
-            self.assertEqual(layers.generated(data)[sheet], present.sheet_rows(data, sheet, pinned), sheet)
+        for sheet in sheets.SHEETS:
+            self.assertEqual(sheets.read(data)[sheet], present.sheet_rows(data, sheet, pinned), sheet)
 
     def test_a_held_cell_is_blank(self):
         data = years.data_dir(YEAR)
@@ -1868,7 +1868,7 @@ class SheetTest(unittest.TestCase):
     def test_a_sheet_has_a_row_per_plan_and_the_columns_of_fields(self):
         data = years.data_dir(YEAR)
         rows = present.sheet_rows(data, "dvha")
-        self.assertEqual([r["plan_id"] for r in rows], [p["plan_id"] for p in layers.rows(data / "generated/plans.csv")])
+        self.assertEqual([r["plan_id"] for r in rows], [p["plan_id"] for p in sheets.rows(data / "generated/plans.csv")])
         self.assertEqual(list(rows[0]), ["section", "plan_id", "plan_name"] + list(fields.labels("dvha")))
 
 
@@ -1876,7 +1876,7 @@ class ExpectedTest(unittest.TestCase):
     def test_the_committed_layer_is_current(self):
         data = years.data_dir(YEAR)
         pinned = json.loads((data / "steps.json").read_text())["present"]
-        self.assertEqual(layers.rows(data / layers.PRESENTED), present.layer_rows(data, pinned))
+        self.assertEqual(sheets.rows(data / sheets.PRESENTED), present.citation_rows(data, pinned))
 
     def test_present_17_presents_every_expected_line(self):
         """The expected cells follow the expert's provisional rules, which present 18 replaced with the final chart's."""
@@ -1892,9 +1892,9 @@ class ExpectedTest(unittest.TestCase):
 
     def test_every_nonblank_or_cited_line_cites_a_document(self):
         data = years.data_dir(YEAR)
-        rows, version = present.layer_rows(data, pinned(data)), pinned(data)
+        rows, version = present.citation_rows(data, pinned(data)), pinned(data)
         self.assertTrue(rows and all(r["url"] and r["quote"] for r in rows))
-        generated = {r["plan_id"]: r for r in layers.generated(data)["main"]}
+        generated = {r["plan_id"]: r for r in sheets.read(data)["main"]}
         for column in present.COLUMNS:
             self.assertEqual({(r["plan_id"], r["line"]) for r in rows if (r["sheet"], r["column"]) == ("main", column)},
                              {(p, str(n) if " | " in generated[p][column] else "")
@@ -1906,7 +1906,7 @@ class ExpectedTest(unittest.TestCase):
 class DvhaTest(unittest.TestCase):
     def test_presents_the_live_value_of_each_cell_it_does_not_hold(self):
         data = years.data_dir(YEAR)
-        live = {r["plan_id"]: r for r in layers.live(data)[0]["dvha"]}
+        live = {r["plan_id"]: r for r in sheets.read(data)["dvha"]}
         held = present.held(data, pinned(data))
         for column in present.DVHA:
             got = {p: v for p, ((v, cited),) in present.lines(data, column, sheet="dvha", version=pinned(data)).items()
@@ -1918,7 +1918,7 @@ class DvhaTest(unittest.TestCase):
 class CmsColumnsTest(unittest.TestCase):
     def test_present_the_live_value_of_every_plan(self):
         data = years.data_dir(YEAR)
-        live = layers.live(data)[0]
+        live = sheets.read(data)
         for sheet, columns in (("main", ("C_premium", "D_premium_full_extra_help", "E_moop", "N_pharmacy_deductible",
                                          "O_medical_deductible")),
                                ("dvha", ("D_premium_full_extra_help",))):
@@ -2077,7 +2077,7 @@ class ExplainTest(unittest.TestCase):
 
     def test_every_fact_a_rule_sets_aside_in_the_year_has_a_noted_reason_unless_the_column_skips_its_benefit(self):
         data = years.data_dir()
-        organization = {p["plan_id"]: p["organization"] for p in layers.rows(data / "generated/plans.csv")}
+        organization = {p["plan_id"]: p["organization"] for p in sheets.rows(data / "generated/plans.csv")}
         found = present.plan_facts(data)
         unused_benefits, noted_benefits = {}, {}
         for plan_id, name in organization.items():

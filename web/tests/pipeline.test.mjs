@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import fs from "node:fs";
 import assert from "node:assert/strict";
-import { NODES, STEPS, LINKS, nodeBox, pillBox, edge, before, after, stepById, chain, strip, details } from "../static/pipeline.js";
+import { NODES, STEPS, LINKS, nodeBox, pillBox, edge, before, after, stepById, strip, details } from "../static/pipeline.js";
 
 const inside = ([x, y], b) => x > b.x && x < b.x + b.w && y > b.y && y < b.y + b.h;
 
@@ -52,29 +52,8 @@ test("each side of a step highlights the cell's rows or explains why there are n
 test("neighbouring steps share a table", () => {
   const rules = stepById("column-rules");
   assert.deepEqual(before(rules).map((s) => s.id), ["check-facts"]);
-  assert.deepEqual(after(rules).map((s) => s.id), ["stack-presented"]);
+  assert.deepEqual(after(stepById("sheet")).map((s) => s.id), ["publish"]);
   assert.deepEqual(before(stepById("list-plans")), []);
-});
-
-const trace = ({ presented = false } = {}) => ({
-  cell: { value: "$5" },
-  rule: { status: "not_recorded" },
-  layers: { status: "traced", applied: [{ layer: "generated/presented.csv", rows: presented ? [{}] : [] }] },
-});
-const ids = (t) => chain(t).map((s) => s.id);
-
-test("every cell reads facts from the documents", () => {
-  const steps = ids(trace());
-  for (const id of ["find-pdfs", "read-facts", "check-facts", "column-rules"]) assert.ok(steps.includes(id), id);
-});
-
-test("only a cell the presented layer cites stacks it", () => {
-  assert.ok(!ids(trace()).includes("stack-presented"));
-  assert.ok(ids(trace({ presented: true })).includes("stack-presented"));
-});
-
-test("without a trace, the chain is every step", () => {
-  assert.equal(chain(null), STEPS);
 });
 
 const EOC = "https://x/eoc.pdf";
@@ -84,9 +63,8 @@ const full = {
   documents: { status: "traced", documents: [{ kind: "SB", url: "https://x/sb.pdf", found_via: "Links sheet", pages: 10, cover_problems: "" },
     { kind: "EOC", url: EOC, found_via: "Links sheet", pages: 90, cover_problems: "" },
     { kind: "RIDER", url: "https://x/rider.pdf", found_via: "carrier page", pages: 4, cover_problems: "no year" }] },
-  draft: { status: "traced", value: "$0" },
-  layers: { status: "traced", draft: "$0", applied: [{ layer: "generated/presented.csv", value: "", rows: [{ url: EOC, pdf_page: 5 }] }],
-    live: { value: "", set_by: "generated/presented.csv", citations: [{ url: EOC, pdf_page: 5 }, { url: "https://x/sb.pdf", pdf_page: 2 }] } },
+  sheet: { status: "traced", value: "" },
+  citations: { status: "traced", shown: [{ url: EOC, pdf_page: 5 }, { url: "https://x/sb.pdf", pdf_page: 2 }], hidden: [] },
 };
 const stripOf = (id, t = full) => strip(stepById(id), t);
 
@@ -95,22 +73,19 @@ test("each step's strip reads the cell's own records", () => {
   assert.deepEqual(stripOf("find-pdfs"), ["2 sources", "SB, EOC and RIDER URLs"]);
   assert.deepEqual(stripOf("download"), ["3 URLs", "SB, 10 pages; EOC, 90 pages; RIDER, 4 pages, cover problems"]);
   assert.deepEqual(stripOf("extract-text"), ["3 PDFs", "text of 104 pages"]);
-  assert.deepEqual(stripOf("draft"), ["the column rule", "$0"]);
-  assert.deepEqual(stripOf("stack-draft"), ["draft $0", "live blank, set by generated/presented.csv"]);
-  assert.deepEqual(stripOf("stack-presented"), ["presented blank, 1 quote from EOC page 5", "live blank"]);
-  assert.deepEqual(stripOf("publish"), ["live blank", "site cell blank with 2 quotes from EOC page 5; SB page 2"]);
+  assert.deepEqual(stripOf("sheet"), ["the column rule", "blank"]);
+  assert.deepEqual(stripOf("publish"), ["sheet blank", "site cell blank with 2 quotes from EOC page 5; SB page 2"]);
 });
 
 test("a strip says when the trace has no quotes to name", () => {
-  const bare = { ...full, layers: { ...full.layers, live: { value: "$0", citations: [] } } };
-  assert.deepEqual(stripOf("stack-draft", bare), ["draft $0", "live $0"]);
-  assert.deepEqual(stripOf("publish", bare), ["live $0", "site cell $0 with no quotes"]);
+  const bare = { ...full, sheet: { status: "traced", value: "$0" }, citations: { status: "traced", shown: [], hidden: [] } };
+  assert.deepEqual(stripOf("publish", bare), ["sheet $0", "site cell $0 with no quotes"]);
 });
 
 test("a step whose record the trace lacks, or that has no strip, gets none", () => {
   assert.equal(strip(stepById("list-plans"), { ...full, plan: { status: "not_recorded" } }), null);
   assert.equal(strip(stepById("read-facts"), full), null);
-  assert.equal(strip(stepById("draft"), null), null);
+  assert.equal(strip(stepById("sheet"), null), null);
 });
 
 // A replayed build's trace of the example cell, which records answers, checks and the rule.
@@ -127,8 +102,8 @@ test("a held cell's rule strip says why", () => {
   assert.deepEqual(strip(stepById("column-rules"), held), ["0 facts used, 2 set aside", "held: the EOC and SB disagree"]);
 });
 
-test("every step of a replayed trace's chain has a strip", () => {
-  assert.deepEqual(chain(replay).filter((s) => !strip(s, replay)).map((s) => s.id), []);
+test("every step has a strip for a replayed trace", () => {
+  assert.deepEqual(STEPS.filter((s) => !strip(s, replay)).map((s) => s.id), []);
 });
 
 const BLOBS = "https://pdxplans.org/blobs/";
@@ -186,6 +161,6 @@ test("a held rule says why, and a fact with no page names none", () => {
 test("a step without a traced record has no details", () => {
   assert.deepEqual(lines("check-facts", { ...replay, fact_checks: { status: "not_recorded" } }), []);
   assert.deepEqual(lines("check-facts", { ...replay, answers: { status: "not_recorded" } }).length, 8);
-  assert.deepEqual(lines("draft"), []);
-  assert.deepEqual(details(stepById("draft"), null), []);
+  assert.deepEqual(lines("sheet"), []);
+  assert.deepEqual(details(stepById("sheet"), null), []);
 });

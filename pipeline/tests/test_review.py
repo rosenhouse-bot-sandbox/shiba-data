@@ -2,7 +2,7 @@ import contextlib, io, json, os, pathlib, sys, tempfile, unittest
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-import ask, document_facts, extract, facts, layers, present, review, years
+import ask, document_facts, extract, facts, sheets, present, review, years
 
 DATA = years.data_dir(years.LIVE)
 COMMITTED = facts.read(DATA / "machine/document_facts.csv")
@@ -11,7 +11,7 @@ PLAN = "H2923-001-0"
 
 def fact(plan_id=PLAN, source="EOC", **more):
     """A fact the X-ray rule cites for PLAN, or an uncited one with benefit radiation_therapy."""
-    doc = next(d for d in layers.rows(DATA / "generated/documents_checked.csv")
+    doc = next(d for d in sheets.rows(DATA / "generated/documents_checked.csv")
                if plan_id in d["plan_ids"].split(";") and d["kind"] == source)
     row = dict.fromkeys(facts.COLUMNS, "")
     row.update(dict(plan_id=plan_id, source=source, benefit="imaging.xray", setting="office.pcp", network="in", covered_by="medicare",

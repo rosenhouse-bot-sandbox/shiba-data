@@ -2,7 +2,7 @@ import contextlib, io, os, sys, tempfile, unittest
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-import changes, layers, years
+import changes, sheets, years
 
 
 def sheet(**cells):
@@ -21,7 +21,7 @@ class ChangedTest(unittest.TestCase):
     def test_prints_the_table_of_changes_since_a_ref(self):
         out = io.StringIO()
         with mock.patch.object(changes, "at", lambda ref, data, tmp: sheet(Q_hearing="")), \
-             mock.patch.object(changes.layers, "live", lambda data: (sheet(Q_hearing="$0"), [], [])), \
+             mock.patch.object(changes.sheets, "read", lambda data: sheet(Q_hearing="$0")), \
              contextlib.redirect_stdout(out):
             changes.main(str(years.LIVE), "HEAD")
         self.assertIn("| main | H1036-001-0 | Q_hearing | (blank) | `$0` |", out.getvalue())
@@ -34,12 +34,12 @@ class ChangedTest(unittest.TestCase):
 
 
 class AtTest(unittest.TestCase):
-    def test_reads_the_live_sheets_at_a_ref(self):
+    def test_reads_the_sheets_at_a_ref(self):
         data = years.data_dir(years.LIVE)
         with tempfile.TemporaryDirectory() as out:
-            sheets = changes.at("HEAD", data, out)
-        self.assertEqual(set(sheets), set(layers.SHEETS))
-        self.assertTrue(sheets["main"] and sheets["dvha"])
+            got = changes.at("HEAD", data, out)
+        self.assertEqual(set(got), set(sheets.SHEETS))
+        self.assertTrue(got["main"] and got["dvha"])
 
 
 if __name__ == "__main__":

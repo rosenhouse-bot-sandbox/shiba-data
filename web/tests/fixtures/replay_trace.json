@@ -135,7 +135,7 @@
    }
   ]
  },
- "draft": {
+ "sheet": {
   "status": "traced",
   "value": "$325 or 20% | $325",
   "code": {
@@ -805,118 +805,50 @@
   "status": "none",
   "rows": []
  },
- "layers": {
+ "citations": {
   "status": "traced",
-  "draft": "$325 or 20% | $325",
-  "applied": [
+  "shown": [
    {
-    "layer": "generated/presented.csv",
-    "value": "$325 or 20% | $325",
-    "rows": [
-     {
-      "layer": "generated/presented.csv",
-      "line": 1,
-      "value": "$325 or 20%",
-      "url": "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf",
-      "pdf_page": 46,
-      "quote": "In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance",
-      "hidden": ""
-     },
-     {
-      "layer": "generated/presented.csv",
-      "line": 1,
-      "value": "$325 or 20%",
-      "url": "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf",
-      "pdf_page": 46,
-      "quote": "In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance",
-      "hidden": ""
-     },
-     {
-      "layer": "generated/presented.csv",
-      "line": 1,
-      "value": "$325 or 20%",
-      "url": "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf",
-      "pdf_page": 46,
-      "quote": "Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance",
-      "hidden": ""
-     },
-     {
-      "layer": "generated/presented.csv",
-      "line": 1,
-      "value": "$325 or 20%",
-      "url": "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf",
-      "pdf_page": 46,
-      "quote": "Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance",
-      "hidden": ""
-     },
-     {
-      "layer": "generated/presented.csv",
-      "line": 2,
-      "value": "$325",
-      "url": "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf",
-      "pdf_page": 46,
-      "quote": "Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance",
-      "hidden": ""
-     }
-    ]
+    "line": 1,
+    "value": "$325 or 20%",
+    "url": "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf",
+    "pdf_page": 46,
+    "quote": "In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance",
+    "hidden": ""
    },
    {
-    "layer": "edits.csv",
-    "value": "$325 or 20% | $325",
-    "rows": []
+    "line": 1,
+    "value": "$325 or 20%",
+    "url": "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf",
+    "pdf_page": 46,
+    "quote": "In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance",
+    "hidden": ""
+   },
+   {
+    "line": 1,
+    "value": "$325 or 20%",
+    "url": "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf",
+    "pdf_page": 46,
+    "quote": "Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance",
+    "hidden": ""
+   },
+   {
+    "line": 1,
+    "value": "$325 or 20%",
+    "url": "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf",
+    "pdf_page": 46,
+    "quote": "Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance",
+    "hidden": ""
+   },
+   {
+    "line": 2,
+    "value": "$325",
+    "url": "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf",
+    "pdf_page": 46,
+    "quote": "Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance",
+    "hidden": ""
    }
   ],
-  "live": {
-   "value": "$325 or 20% | $325",
-   "set_by": "generated/presented.csv",
-   "citations": [
-    {
-     "layer": "generated/presented.csv",
-     "line": 1,
-     "value": "$325 or 20%",
-     "url": "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf",
-     "pdf_page": 46,
-     "quote": "In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance",
-     "hidden": ""
-    },
-    {
-     "layer": "generated/presented.csv",
-     "line": 1,
-     "value": "$325 or 20%",
-     "url": "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf",
-     "pdf_page": 46,
-     "quote": "In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance",
-     "hidden": ""
-    },
-    {
-     "layer": "generated/presented.csv",
-     "line": 1,
-     "value": "$325 or 20%",
-     "url": "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf",
-     "pdf_page": 46,
-     "quote": "Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance",
-     "hidden": ""
-    },
-    {
-     "layer": "generated/presented.csv",
-     "line": 1,
-     "value": "$325 or 20%",
-     "url": "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf",
-     "pdf_page": 46,
-     "quote": "Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance",
-     "hidden": ""
-    },
-    {
-     "layer": "generated/presented.csv",
-     "line": 2,
-     "value": "$325",
-     "url": "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf",
-     "pdf_page": 46,
-     "quote": "Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance",
-     "hidden": ""
-    }
-   ]
-  },
   "hidden": []
  },
  "build": {

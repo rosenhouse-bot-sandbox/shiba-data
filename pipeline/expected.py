@@ -1,8 +1,8 @@
-"""Scores candidate cells against the expected cells frozen from people's edits."""
+"""Scores candidate cells against the expected cells in tests/fixtures/expected_cells.csv."""
 import csv
 import os
 
-import layers
+import sheets
 
 FIXTURE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "tests", "fixtures", "expected_cells.csv")
 
@@ -16,7 +16,7 @@ def miss(want, got):
     """Says why a candidate cell fails an expected cell line, or returns None."""
     if got is None:
         return "no cell"
-    value = layers.shown(got["value"], want["line"])
+    value = sheets.shown(got["value"], want["line"])
     if value is None:
         return f"no line {want['line']}"
     if value != want["value"]:

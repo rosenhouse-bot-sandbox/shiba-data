@@ -5,7 +5,7 @@ import unittest
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path[:0] = [os.path.join(HERE, ".."), HERE]
-import layers  # noqa: E402
+import sheets  # noqa: E402
 import years  # noqa: E402
 from appendix_b import DVHA_CASES, MAIN_CHART_CASES  # noqa: E402
 
@@ -23,7 +23,7 @@ MISSED = {
 class AppendixBTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.live = {sheet: {r["plan_id"]: r for r in rows} for sheet, rows in layers.live(years.data_dir(2027))[0].items()}
+        cls.live = {sheet: {r["plan_id"]: r for r in rows} for sheet, rows in sheets.read(years.data_dir(2027)).items()}
 
     def test_main_chart_cases(self):
         for item, plan, col, expected in MAIN_CHART_CASES:

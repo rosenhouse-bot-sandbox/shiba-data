@@ -3,7 +3,7 @@ import json, os, sys, tempfile, unittest
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import expected
 import facts
-import layers
+import sheets
 import pbp_facts
 import years
 
@@ -330,9 +330,8 @@ class ImagingCellsTest(unittest.TestCase):
         rows = facts.read(data / "generated" / "pbp_facts.csv")
         edited = {(e["plan_id"], e["line"]) for e in expected.load()
                   if (e["sheet"], e["column"]) == ("main", "L_xray_imaging")}
-        sheets, _, _ = layers.live(data, layers.without(layers.EDITS))
         checked = []
-        for cells in sheets["main"]:
+        for cells in sheets.read(data)["main"]:
             plan_id = cells["plan_id"]
             for line, benefit in (("1", "imaging.xray"), ("2", "imaging.diagnostic")):
                 if {(plan_id, ""), (plan_id, line)} & edited:
@@ -340,7 +339,7 @@ class ImagingCellsTest(unittest.TestCase):
                 found = {r["cost_kind"]: r["amount"] for r in rows
                          if (r["plan_id"], r["benefit"], r["network"]) == (plan_id, benefit, "in")}
                 cell = " or ".join(found[k] for k in ("copay", "coinsurance") if k in found)
-                self.assertEqual(cell, layers.shown(cells["L_xray_imaging"], line), (plan_id, line))
+                self.assertEqual(cell, sheets.shown(cells["L_xray_imaging"], line), (plan_id, line))
                 checked.append((plan_id, line))
         self.assertGreaterEqual(len(checked), 20)
 
