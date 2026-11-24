@@ -135,6 +135,22 @@ class TraceTest(unittest.TestCase):
         self.assertTrue(eoc[0]["sha256"].startswith("64e05773e847b56e"))
         self.assertEqual(len(eoc[0]["text"]["layout"]), 64)
 
+    def test_lists_every_url_each_source_offered_the_plan_in_the_order_tried(self):
+        kaiser = "https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/"
+        self.assertEqual(self.offered("H9003-006-0", "EOC"), [
+            ("links.csv", kaiser + "eoc/medicare/2027/evidence-of-coverage-nw.pdf", "volunteers' Links sheet", True),
+            ("URL template", kaiser + "eoc/medicare/2027/evidence-of-coverage-nw.pdf", "URL template in pipeline/find_docs.py", False)])
+        devoted = "https://assets.devoted.com/plan-documents/2027/2027-DEVOTED-GIVEBACK-028-OR-%28HMO%29-SB-H2923-028-003-ENG.pdf"
+        self.assertEqual(self.offered("H2923-028-3", "SB"), [
+            ("found.csv", devoted,
+             "carrier plan page https://www.devoted.com/plan-documents/benefit-and-coverage-details/H2923-028-003-2027/", True),
+            ("links.csv", devoted, "volunteers' Links sheet", False),
+            ("URL template", devoted, "URL template in pipeline/find_docs.py", False)])
+
+    def offered(self, plan_id, kind):
+        offered = self.cell("main", plan_id, "AB_ambulance")["documents"]["candidates"]
+        return [(c["source"], c["url"], c["found_via"], c["used"]) for c in offered if c["kind"] == kind]
+
     def test_names_the_build_commit_and_pins(self):
         build = self.cell(*AMBULANCE)["build"]
         self.assertEqual(build["sha"], SHA)

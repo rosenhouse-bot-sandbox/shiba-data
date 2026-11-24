@@ -40,18 +40,28 @@ def templated(plans, year):
     return [dict(r, found_via="URL template in pipeline/find_docs.py") for r in rows]
 
 
+def offers(plans, found, links, year):
+    """Each source's rows in the order tried, as (source, row, the plans whose document of that kind the row gives)."""
+    sources = {"found.csv": found, "links.csv": [dict(r, found_via="volunteers' Links sheet") for r in links],
+               "URL template": templated(plans, year)}
+    have, out = set(), []
+    for source, rows in sources.items():
+        for r in rows:
+            gives = [i for i in r["plan_ids"].split(";") if (i, r["kind"]) not in have]
+            have.update((i, r["kind"]) for i in gives)
+            out.append((source, r, gives))
+    return out
+
+
 def documents(plans, found, links, year):
     """Prints a warning for each plan left without an SB or EOC."""
     ids = {p["plan_id"] for p in plans}
     for r in found + links:
         if r["kind"] not in KINDS + ("RIDER",) or not set(r["plan_ids"].split(";")) <= ids:
             raise SystemExit(f"A row names an unknown kind or plan: {r}")
-    rows, have = [], set()
-    for r in found + links + templated(plans, year):
-        missing = [i for i in r["plan_ids"].split(";") if (i, r["kind"]) not in have]
-        if missing:
-            rows.append(dict(r, plan_ids=";".join(missing)))
-            have.update((i, r["kind"]) for i in missing)
+    offered = offers(plans, found, links, year)
+    rows = [dict(r, plan_ids=";".join(gives)) for _, r, gives in offered if gives]
+    have = {(i, r["kind"]) for _, r, gives in offered for i in gives}
     for p in plans:
         for kind in KINDS:
             if (p["plan_id"], kind) not in have:
@@ -65,8 +75,7 @@ def read(path):
 
 
 def main(plans_csv, found_csv, links_csv, out_csv, year):
-    links = [dict(r, found_via="volunteers' Links sheet") for r in read(links_csv)]
-    rows = documents(read(plans_csv), read(found_csv), links, str(year))
+    rows = documents(read(plans_csv), read(found_csv), read(links_csv), str(year))
     with open(out_csv, "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=COLUMNS)
         w.writeheader()

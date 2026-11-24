@@ -14,6 +14,7 @@ export const NODES = {
     table: { name: "links.csv", note: "copied from the volunteers' Links sheet", cols: ["plan_ids", "kind", "url"],
       rows: [["H1036-153-0", "SB", "https://assets.humana.com/is/content/humana/H1036153000SB27pdf"],
         ["H1036-153-0", "EOC", "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf"]] } },
+  found: { col: 2, row: 1, kind: "browser finds", source: true, label: "found.csv" },
   pbp: { col: 2, row: 5, kind: "CMS source", source: true, label: "PBP tables",
     table: { name: "pbp_Section_D.txt", note: "the plan's deductible fields, which become facts the rules read; the ambulance rule reads none",
       cols: ["bid_id", "pbp_d_inn_deduct_yn"], rows: [["H1036_153_0", "2"]] } },
@@ -76,10 +77,11 @@ export const STEPS = [
     paras: [["Code keeps ", ["bothCounties", "plans sold in both counties"], ". A plan's Landscape rows become one row of plans.csv."]],
     example: { highlight: [[0, 1], [0]], before: "H1036_153_0 in Multnomah and Clackamas", after: "H1036-153-0, one row",
       paras: [["The plan has one Landscape row per county. 39 plans remain."]] } },
-  { id: "find-pdfs", record: "documents", from: "links", also: ["plans"], to: "documents", label: "Find PDFs",
-    paras: [["URLs come from browser searches of carrier sites by Claude sessions, the volunteers' Links sheet, and URL patterns. ", ["firstUrl", "The first URL found wins"], "."]],
+  { id: "find-pdfs", record: "documents", from: "links", also: ["plans", "found"], to: "documents", label: "Find PDFs",
+    paras: [["plans.csv lists the plans that need an SB and EOC. Three sources offer URLs: found.csv holds what Claude sessions found on carrier sites, links.csv copies the volunteers' Links sheet, and code fills URL templates for carriers whose URLs follow a pattern. ",
+      ["firstUrl", "The first URL found wins"], "."]],
     example: { highlight: [[0, 1], [0, 1]], before: "links.csv: …H1036153000EOC27pdf", after: "documents.csv: EOC URL",
-      paras: [["This plan's URLs came from the Links sheet."]] } },
+      paras: [] } },
   { id: "download", record: "documents", from: "documents", to: "checked", label: "Download PDFs",
     paras: [["The pipeline downloads each PDF, runs a ", ["cover", "cover check"], ", and records the PDF's SHA-256 hash."]],
     example: { highlight: [[0], [0]], before: "…/H1036153000SB27pdf", after: "sha256 ce13e925…, 24 pages", paras: [] } },
@@ -173,7 +175,8 @@ function quotes(rows, trace) {
 // What each step took in and gave out for a cell, read from its trace.
 const STRIPS = {
   "list-plans": (t) => [`${t.plan.row.plan_id} in the Landscape file`, `plans.csv: ${t.plan.row.plan_name}`],
-  "find-pdfs": (t) => [plural(new Set(t.documents.documents.map((d) => d.found_via)).size, "source"), `${kinds(t)} URLs`],
+  "find-pdfs": (t) => [`${plural(t.documents.candidates.length, "URL")} from ${plural(new Set(t.documents.candidates.map((c) => c.source)).size, "source")}`,
+    `${kinds(t)} URLs`],
   "download": (t) => [plural(t.documents.documents.length, "URL"), t.documents.documents.map((d) =>
     `${d.kind}, ${plural(d.pages, "page")}${d.cover_problems ? ", cover problems" : ""}`).join("; ")],
   "extract-text": (t) => [plural(t.documents.documents.length, "PDF"),
@@ -244,6 +247,20 @@ const DETAILS = {
     ...t.rule.set_aside.map((f) => ({ text: `Set aside ${factLabel(f.source, f.page, f)}: ${f.reasons.join("; ")}` })),
   ],
 };
+
+// Tables of the cell's own input rows, read from its trace. hi lists the rows the step kept.
+const RECORDS = {
+  "find-pdfs": (t) => [
+    { name: "plans.csv", note: "the plan's row, selected columns", cols: ["plan_id", "plan_name", "organization"],
+      rows: [[t.plan.row.plan_id, t.plan.row.plan_name, t.plan.row.organization]], hi: [0] },
+    { name: "URLs offered", note: "in the order tried; highlighted rows won", cols: ["source", "kind", "url", "found_via"],
+      rows: t.documents.candidates.map((c) => [c.source, c.kind, c.url, c.found_via]),
+      hi: t.documents.candidates.flatMap((c, i) => c.used ? [i] : []) },
+  ],
+};
+
+export const records = (step, trace) =>
+  trace?.[step.record]?.status === "traced" && RECORDS[step.id] ? RECORDS[step.id](trace) : [];
 
 export const details = (step, trace) =>
   trace?.[step.record]?.status === "traced" && DETAILS[step.id] ? DETAILS[step.id](trace) : [];

@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import fs from "node:fs";
 import assert from "node:assert/strict";
-import { NODES, STEPS, EDGES, nodeBox, pillBox, edge, before, after, stepById, strip, details } from "../static/pipeline.js";
+import { NODES, STEPS, EDGES, nodeBox, pillBox, edge, before, after, stepById, strip, details, records } from "../static/pipeline.js";
 
 const inside = ([x, y], b) => x > b.x && x < b.x + b.w && y > b.y && y < b.y + b.h;
 
@@ -39,7 +39,7 @@ test("every step joins known nodes and has a unique id", () => {
 
 test("steps with several inputs label each input's edge", () => {
   const inputs = (id) => EDGES.filter((e) => e.step.id === id).map((e) => e.from);
-  assert.deepEqual(inputs("find-pdfs"), ["links", "plans"]);
+  assert.deepEqual(inputs("find-pdfs"), ["links", "plans", "found"]);
   assert.deepEqual(inputs("sheet"), ["facts", "pbp"]);
   assert.deepEqual(inputs("publish"), ["sheet", "presented"]);
 });
@@ -70,10 +70,15 @@ test("neighbouring steps share a table", () => {
 const EOC = "https://x/eoc.pdf";
 const full = {
   cell: { value: "" },
-  plan: { status: "traced", row: { plan_id: "H1-1-0", plan_name: "Plan One" } },
+  plan: { status: "traced", row: { plan_id: "H1-1-0", plan_name: "Plan One", organization: "Org One" } },
   documents: { status: "traced", documents: [{ kind: "SB", url: "https://x/sb.pdf", found_via: "Links sheet", pages: 10, cover_problems: "" },
     { kind: "EOC", url: EOC, found_via: "Links sheet", pages: 90, cover_problems: "" },
-    { kind: "RIDER", url: "https://x/rider.pdf", found_via: "carrier page", pages: 4, cover_problems: "no year" }] },
+    { kind: "RIDER", url: "https://x/rider.pdf", found_via: "carrier page", pages: 4, cover_problems: "no year" }],
+    candidates: [{ source: "found.csv", kind: "RIDER", url: "https://x/rider.pdf", found_via: "carrier page", used: true },
+      { source: "links.csv", kind: "SB", url: "https://x/sb.pdf", found_via: "Links sheet", used: true },
+      { source: "links.csv", kind: "EOC", url: EOC, found_via: "Links sheet", used: true },
+      { source: "URL template", kind: "SB", url: "https://x/sb.pdf", found_via: "URL template", used: false },
+      { source: "URL template", kind: "EOC", url: "https://x/other.pdf", found_via: "URL template", used: false }] },
   sheet: { status: "traced", value: "" },
   citations: { status: "traced", shown: [{ url: EOC, pdf_page: 5 }, { url: "https://x/sb.pdf", pdf_page: 2 }], hidden: [] },
 };
@@ -81,11 +86,19 @@ const stripOf = (id, t = full) => strip(stepById(id), t);
 
 test("each step's strip reads the cell's own records", () => {
   assert.deepEqual(stripOf("list-plans"), ["H1-1-0 in the Landscape file", "plans.csv: Plan One"]);
-  assert.deepEqual(stripOf("find-pdfs"), ["2 sources", "SB, EOC and RIDER URLs"]);
+  assert.deepEqual(stripOf("find-pdfs"), ["5 URLs from 3 sources", "SB, EOC and RIDER URLs"]);
   assert.deepEqual(stripOf("download"), ["3 URLs", "SB, 10 pages; EOC, 90 pages; RIDER, 4 pages, cover problems"]);
   assert.deepEqual(stripOf("extract-text"), ["3 PDFs", "text of 104 pages"]);
   assert.deepEqual(stripOf("sheet"), ["the column rule", "blank"]);
   assert.deepEqual(stripOf("publish"), ["sheet blank", "site cell blank with 2 quotes from EOC page 5; SB page 2"]);
+});
+
+test("Find PDFs shows the plan's row and every URL each source offered, marking the ones it kept", () => {
+  const [plan, offered] = records(stepById("find-pdfs"), full);
+  assert.deepEqual(plan.rows, [["H1-1-0", "Plan One", "Org One"]]);
+  assert.deepEqual(offered.rows.map((r) => r.slice(0, 2)),
+    [["found.csv", "RIDER"], ["links.csv", "SB"], ["links.csv", "EOC"], ["URL template", "SB"], ["URL template", "EOC"]]);
+  assert.deepEqual(offered.hi, [0, 1, 2]);
 });
 
 test("a strip says when the trace has no quotes to name", () => {
