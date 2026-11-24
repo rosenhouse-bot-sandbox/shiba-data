@@ -32,12 +32,12 @@ class PagesTest(unittest.TestCase):
         self.assertEqual(sorted(extract.relevant(PAGES, "imaging")), [61, 62])
 
     def test_searches_a_document_once_for_each_group(self):
-        pages = PAGES | {64: "Searched once"}
-        with mock.patch.object(extract.re, "search", wraps=extract.re.search) as search:
-            extract.relevant(dict(pages), "imaging")
-            once = search.call_count
-            extract.relevant(dict(pages), "imaging")
-        self.assertEqual(search.call_count, once)
+        for pages in (PAGES | {64: "Searched once"}, {1: "Matches nothing, searched once"}):
+            with mock.patch.object(extract.re, "search", wraps=extract.re.search) as search:
+                extract.relevant(dict(pages), "imaging")
+                once = search.call_count
+                extract.relevant(dict(pages), "imaging")
+            self.assertEqual((search.call_count, once > 0), (once, True))
 
     def test_a_version_can_find_more_pages(self):
         pages = PAGES | {63: "Tier 6 Select Care Drugs"}
