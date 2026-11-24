@@ -38,6 +38,18 @@ CREATE TABLE plan_document (
   PRIMARY KEY (plan_id, url)
 );
 
+-- Every URL a source offered a plan, in the order find_docs.py tries them.
+CREATE TABLE candidate (
+  position  INTEGER NOT NULL,
+  plan_id   TEXT NOT NULL REFERENCES plan,
+  source    TEXT NOT NULL,
+  kind      TEXT NOT NULL,
+  url       TEXT NOT NULL,
+  found_via TEXT NOT NULL,
+  used      INTEGER NOT NULL CHECK (used IN (0, 1)),
+  PRIMARY KEY (position, plan_id)
+);
+
 -- sha256 and pages are NULL when the download is not a PDF.
 CREATE TABLE download (
   url            TEXT PRIMARY KEY REFERENCES document,

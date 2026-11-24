@@ -883,7 +883,14 @@ test("pipeline view: a step with two inputs lights both edges and labels each", 
   assert.equal(await page.locator(".how-edge.on").count(), 2);
   assert.equal(await page.locator(".how-pill.on").count(), 2);
   assert.equal(await page.locator(".how-pill[aria-current]").count(), 1);
-  assert.equal(await page.locator(".how-pill[tabindex='-1']").count(), 3);
+  assert.equal(await page.locator(".how-pill[tabindex='-1']").count(), 4);
+});
+
+test("pipeline view: Find PDFs shows every URL offered to the plan and marks the winners", async () => {
+  await openHow(page, "main/H3805-048-0/ambulance/find-pdfs");
+  const offered = page.locator(".how-rows.input", { hasText: "URLs offered" });
+  assert.equal(await offered.locator("tbody tr").count(), 5);
+  assert.deepEqual(await offered.locator("tbody tr.hi td:nth-child(2)").allTextContents(), ["RIDER", "EOC", "SB"]);
 });
 
 test("pipeline view: at phone width the lens sits below the map at full width", async () => {

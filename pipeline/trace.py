@@ -16,7 +16,7 @@ import csv, glob, hashlib, json, os, sqlite3, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-import ask, blobs, eoc, extract, facts, fields, sheets, present, years
+import ask, blobs, eoc, extract, facts, fields, find_docs, sheets, present, years
 
 REPO_URL = "https://github.com/rosenhouse-bot-sandbox/shiba-data"
 PROMPT_URL = "https://pdxplans.org/blobs/{}.txt"
@@ -62,11 +62,16 @@ def build(year, out, sha, work=None):
         ledger = bool(work) and os.path.exists(os.path.join(work, blobs.LEDGER))
         outcomes = ledger and bool(outcome_files(work))
         db.execute("INSERT INTO build VALUES (?, ?, ?, ?, ?)", (sha, year, (data / "steps.json").read_text(), ledger, outcomes))
-        insert(db, "plan", (dict(p, position=n) for n, p in enumerate(read(data / "generated/plans.csv"))))
+        plans = read(data / "generated/plans.csv")
+        insert(db, "plan", (dict(p, position=n) for n, p in enumerate(plans)))
         documents = read(data / "generated/documents.csv")
         insert(db, "document", (dict(url=d["url"], position=n, kind=d["kind"], found_via=d["found_via"])
                                 for n, d in enumerate(documents)))
         insert(db, "plan_document", (dict(plan_id=p, url=d["url"]) for d in documents for p in d["plan_ids"].split(";")))
+        offered = find_docs.offers(plans, read(data / "found.csv"), read(data / "links.csv"), str(year))
+        insert(db, "candidate", (dict(position=n, plan_id=p, source=source, kind=r["kind"], url=r["url"],
+                                      found_via=r["found_via"], used=int(p in gives))
+                                 for n, (source, r, gives) in enumerate(offered) for p in r["plan_ids"].split(";")))
         checked = read(data / "generated/documents_checked.csv")
         insert(db, "download", (dict(url=d["url"], sha256=d["sha256"] or None, pages=number(d["pages"]),
                                      cover_problems=d["cover_problems"]) for d in checked))
@@ -342,7 +347,8 @@ def cell(db, sheet, plan_id, col):
                      value=value),
         "plan": record(True, row=rows(db, "SELECT * FROM plan WHERE plan_id = ?", plan_id)[0],
                        landscape_row=record(landscape_row, fields=landscape_row)),
-        "documents": record(documents, documents=documents),
+        "documents": record(documents, documents=documents, candidates=[dict(c, used=bool(c["used"])) for c in rows(
+            db, "SELECT source, kind, url, found_via, used FROM candidate WHERE plan_id = ? ORDER BY position", plan_id)]),
         "sheet": record(True, value=value, code=rule_record["code"]),
         "answers": answers,
         "fact_checks": fact_checks,

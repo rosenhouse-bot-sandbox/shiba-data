@@ -3,7 +3,7 @@ import { el, svg } from "./dom.js";
 import { format } from "./permalink.js";
 import {
   EXAMPLE, NODES, STEPS, SHEET_FILES, EDGES, NODE_W, NODE_H, MAP_W, MAP_H,
-  nodeBox, pillBox, edge, before, after, strip, details,
+  nodeBox, pillBox, edge, before, after, strip, details, records,
 } from "./pipeline.js";
 
 // The map is drawn at full size, then scaled to fit its rail.
@@ -80,6 +80,7 @@ function lens(step, link, terms, example, trace, sheet) {
     el("div", { class: "how-card" },
       fromTo ? el("p", { class: "how-strip" }, el("code", { class: "from" }, fromTo[0]), " becomes ", el("code", { class: "to" }, fromTo[1])) : null,
       ...step.paras.map(para), ...(example?.paras ?? []).map(para), workList(details(step, trace))),
+    ...records(step, trace).map((r) => table("Input", r.name, r.note, r.cols, r.rows, r.hi)),
     example ? rows("Input", step.from, example.highlight[0]) : null,
     example ? rows("Output", step.to, example.highlight[1]) : null,
     traceRecord(step, trace),
@@ -165,15 +166,19 @@ document.addEventListener("click", (e) => {
 document.addEventListener("scroll", (e) => opened && !opened.box.contains(e.target) && opened.close(), true);
 
 function rows(role, id, highlight) {
-  const n = NODES[id], hi = new Set(highlight);
-  const mark = (i) => hi.has(i) ? { class: "hi" } : {};
-  const body = n.table
-    ? el("table", {},
-        el("thead", {}, el("tr", {}, ...n.table.cols.map((c) => el("th", {}, c)))),
-        el("tbody", {}, ...n.table.rows.map((r, i) => el("tr", mark(i), ...r.map((c) => el("td", {}, c))))))
-    : el("pre", {}, ...n.text.lines.map((l, i) => el("span", mark(i), l)));
-  const { name, note } = shown(id);
-  return el("div", { class: `how-rows ${role.toLowerCase()}` },
-    el("div", { class: "how-rows-head" }, el("strong", {}, role), el("code", {}, name), el("span", {}, note)),
-    el("div", { class: "how-scroll" }, body));
+  const n = NODES[id], { name, note } = shown(id);
+  if (n.table) return table(role, name, note, n.table.cols, n.table.rows, highlight);
+  const hi = new Set(highlight);
+  return frame(role, name, note, el("pre", {}, ...n.text.lines.map((l, i) => el("span", hi.has(i) ? { class: "hi" } : {}, l))));
 }
+
+function table(role, name, note, cols, body, highlight) {
+  const hi = new Set(highlight);
+  return frame(role, name, note, el("table", {},
+    el("thead", {}, el("tr", {}, ...cols.map((c) => el("th", {}, c)))),
+    el("tbody", {}, ...body.map((r, i) => el("tr", hi.has(i) ? { class: "hi" } : {}, ...r.map((c) => el("td", {}, c)))))));
+}
+
+const frame = (role, name, note, body) => el("div", { class: `how-rows ${role.toLowerCase()}` },
+  el("div", { class: "how-rows-head" }, el("strong", {}, role), el("code", {}, name), el("span", {}, note)),
+  el("div", { class: "how-scroll" }, body));

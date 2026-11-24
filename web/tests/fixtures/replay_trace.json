@@ -131,6 +131,36 @@
      "rows": []
     }
    }
+  ],
+  "candidates": [
+   {
+    "source": "links.csv",
+    "kind": "SB",
+    "url": "https://assets.humana.com/is/content/humana/H1036153000SB27pdf",
+    "found_via": "volunteers' Links sheet",
+    "used": true
+   },
+   {
+    "source": "links.csv",
+    "kind": "EOC",
+    "url": "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf",
+    "found_via": "volunteers' Links sheet",
+    "used": true
+   },
+   {
+    "source": "URL template",
+    "kind": "SB",
+    "url": "https://assets.humana.com/is/content/humana/H1036153000SB27pdf",
+    "found_via": "URL template in pipeline/find_docs.py",
+    "used": false
+   },
+   {
+    "source": "URL template",
+    "kind": "EOC",
+    "url": "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf",
+    "found_via": "URL template in pipeline/find_docs.py",
+    "used": false
+   }
   ]
  },
  "sheet": {
