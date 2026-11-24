@@ -4,7 +4,7 @@
 // CI downloads every blob through this route too, so it needs no R2 credentials.
 // /trace/2027/<sheet>/<plan_id>/<col> serves a cell's trace from D1 once every cell of the deployed commit's build has
 // loaded. Until then, and for other years, it serves the static file that web/build.py writes.
-// /tables/2027/<sha>/<table>.json serves a table of any build that D1 keeps.
+// /tables/2027/<sha>/<table>.json serves main_chart, dvha or presented of any build that D1 keeps.
 // Only a build load may change anything, so every other request must be a GET or HEAD.
 export default {
   async fetch(request, env) {
@@ -56,7 +56,7 @@ export default {
 };
 
 // CI loads each main build into D1 from R2: trace/<year>/<sha>.json names the file in trace/<year>/items/ that holds
-// each item: a cell's trace, by <sheet>/<plan_id>/<col>, or a plan's rows of a table, by tables/<table>/<plan_id>.
+// each item: a cell's trace, by <sheet>/<plan_id>/<col>, or the nth run of one plan's rows in a table, by tables/<table>/<n>/<plan_id>.
 // CI repeats the load while it answers 409. Each load adds a few items that D1 lacks, so an item that did not change
 // since an earlier build costs no writes. Once D1 has every item, the load adds the build.
 // LOAD_TOKEN is a secret that the deploy job gives the Worker and the trace job derives the same way.
@@ -80,7 +80,8 @@ async function tableRows(env, sha, table) {
     "SELECT item.json FROM data_build, json_each(data_build.items) AS j JOIN item ON item.hash = j.value " +
     "WHERE data_build.sha = ? AND j.key GLOB ? ORDER BY j.id").bind(sha, `tables/${table}/*`).all().catch(() => ({ results: [] }));
   if (!results.length) return missing();
-  return new Response(JSON.stringify(results.flatMap((r) => JSON.parse(r.json))), { headers: { "Content-Type": "application/json; charset=utf-8" } });
+  const rows = results.map((r) => r.json.slice(1, -1));
+  return new Response(`[${rows.join(",")}]`, { headers: { "Content-Type": "application/json; charset=utf-8" } });
 }
 
 async function load(env, sha) {
@@ -108,7 +109,7 @@ async function finish(env, sha, items) {
   await env.TRACE.batch([
     env.TRACE.prepare(`INSERT INTO data_build SELECT ?2, ?1, ?3 WHERE NOT EXISTS (${LACKING}) ` +
       "ON CONFLICT (sha) DO UPDATE SET items = ?1, loaded = ?3").bind(items, sha, now),
-    env.TRACE.prepare("DELETE FROM data_build WHERE sha NOT IN (?1, ?2) AND ?1 IN (SELECT sha FROM data_build) AND loaded < ?3 " +
+    env.TRACE.prepare("DELETE FROM data_build WHERE sha != ?2 AND ?1 IN (SELECT sha FROM data_build) AND loaded < ?3 " +
       `AND sha NOT IN (SELECT sha FROM data_build ORDER BY loaded DESC LIMIT ${KEEP_BUILDS})`).bind(sha, env.COMMIT ?? sha, now - KEEP_MS),
     env.TRACE.prepare("DELETE FROM item WHERE hash NOT IN (SELECT value FROM data_build, json_each(data_build.items))"),
   ]);

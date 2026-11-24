@@ -186,17 +186,16 @@ class TraceTest(unittest.TestCase):
             text = texts[manifest["items"]["/".join(key)] + ".json"]
             self.assertEqual(json.loads(text.replace(trace.COMMIT, SHA)), self.cell(*key))
 
-    def test_exports_each_tables_rows_by_plan_in_file_order(self):
+    def test_exports_each_tables_rows_in_runs_of_one_plan_in_file_order(self):
         manifest, texts = self.export()
-        for path in trace.TABLES:
-            name = os.path.basename(path).removesuffix(".csv")
-            with open(years.data_dir() / path, newline="", encoding="utf-8") as f:
+        for name in ("main_chart", "dvha", "presented"):
+            with open(years.data_dir() / "generated" / f"{name}.csv", newline="", encoding="utf-8") as f:
                 rows = list(csv.DictReader(f))
-            plans = list(dict.fromkeys(r["plan_id"] for r in rows))
-            got = {k.split("/")[2]: json.loads(texts[h + ".json"]) for k, h in manifest["items"].items()
-                   if k.startswith(f"tables/{name}/")}
-            self.assertEqual(list(got), plans, name)
-            self.assertEqual([r for p in plans for r in got[p]], [r for p in plans for r in rows if r["plan_id"] == p])
+            runs = [(k.split("/")[3], json.loads(texts[h + ".json"])) for k, h in manifest["items"].items()
+                    if k.startswith(f"tables/{name}/")]
+            self.assertEqual([r for _, run in runs for r in run], rows, name)
+            self.assertEqual([{r["plan_id"] for r in run} for _, run in runs], [{plan} for plan, _ in runs], name)
+        self.assertEqual({k.split("/")[1] for k in manifest["items"] if k.startswith("tables/")}, {"main_chart", "dvha", "presented"})
 
     def test_rejects_an_unknown_cell(self):
         with self.assertRaises(LookupError):

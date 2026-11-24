@@ -369,13 +369,17 @@ TABLES = (*(f"generated/{name}" for name in sheets.SHEETS.values()), sheets.PRES
 
 
 def table_items(data):
-    """{tables/<name>/<plan_id>: that plan's rows of the table, as JSON}, in file order."""
+    """{tables/<name>/<n>/<plan_id>: the rows of the table's nth run of one plan's rows, as JSON}, in file order."""
     items = {}
     for path in TABLES:
+        name, runs = os.path.basename(path).removesuffix(".csv"), []
         with open(data / path, newline="", encoding="utf-8") as f:
             for row in csv.DictReader(f):
-                items.setdefault(f"tables/{os.path.basename(path).removesuffix('.csv')}/{row['plan_id']}", []).append(row)
-    return {key: json.dumps(rows, ensure_ascii=False) for key, rows in items.items()}
+                if not runs or runs[-1][0]["plan_id"] != row["plan_id"]:
+                    runs.append([])
+                runs[-1].append(row)
+        items |= {f"tables/{name}/{n}/{run[0]['plan_id']}": json.dumps(run, ensure_ascii=False) for n, run in enumerate(runs)}
+    return items
 
 
 def export(db, out):

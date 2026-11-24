@@ -1,4 +1,4 @@
-import { mock, test } from "node:test";
+import { test } from "node:test";
 import assert from "node:assert/strict";
 import { DatabaseSync } from "node:sqlite";
 import worker from "../worker.js";
@@ -246,53 +246,83 @@ const sha = (n) => n.toString(16).padStart(40, "0");
 const builds = (e) => e.TRACE.db.prepare("SELECT sha FROM data_build ORDER BY loaded").all().map((b) => b.sha);
 const own = (n) => String(n).padStart(64, "e");
 // Loads builds 1, 2 and so on, each on the day given, and each with its own item for cell 0.
-async function loadEach(e, days) {
-  for (const [i, day] of days.entries()) {
+async function loadEach(t, e, days, first = 1) {
+  for (const [j, day] of days.entries()) {
+    const i = j + first - 1;
     upload(e, sha(i + 1));
     const manifest = JSON.parse(e.BLOBS.objects[`trace/2027/${sha(i + 1)}.json`]);
     manifest.items[cellKey(0)] = own(i + 1);
     e.BLOBS.objects[`trace/2027/${sha(i + 1)}.json`] = JSON.stringify(manifest);
     e.BLOBS.objects[`trace/2027/items/${own(i + 1)}.json`] = "{}";
-    mock.method(Date, "now", () => day * DAY);
+    t.mock.method(Date, "now", () => day * DAY);
     assert.equal((await load(e, sha(i + 1))).response.status, 200);
-    mock.restoreAll();
   }
 }
 
-test("a load keeps the last 10 builds, however old", async () => {
+test("a load keeps the last 10 builds, however old", async (t) => {
   const e = traceEnv(undefined);
-  await loadEach(e, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20]);
+  await loadEach(t, e, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20]);
   assert.deepEqual(builds(e), [3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(sha));
 });
 
-test("a load keeps every build of the last 5 days, however many", async () => {
+test("a load keeps every build of the last 5 days, however many", async (t) => {
   const e = traceEnv(undefined);
-  await loadEach(e, [0, ...Array(11).fill(10), 15]);
+  await loadEach(t, e, [0, ...Array(11).fill(10), 15]);
   assert.deepEqual(builds(e), [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map(sha));
 });
 
-test("a load keeps the deployed commit's build, however old", async () => {
+test("a load keeps a build until it is 5 days old", async (t) => {
+  const e = traceEnv(undefined);
+  await loadEach(t, e, [4.5, ...Array(10).fill(9)]);
+  assert.equal(builds(e).length, 11);
+  await loadEach(t, e, [9.6], 12);
+  assert.deepEqual(builds(e), [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(sha));
+});
+
+test("a build loaded again counts as loaded then", async (t) => {
+  const e = traceEnv(undefined);
+  await loadEach(t, e, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+  await loadEach(t, e, [19], 1);
+  await loadEach(t, e, [20], 11);
+  assert.deepEqual(builds(e), [3, 4, 5, 6, 7, 8, 9, 10, 1, 11].map(sha));
+});
+
+test("a build that could not be added drops no other build", async (t) => {
+  const e = traceEnv(undefined);
+  await loadEach(t, e, Array(11).fill(0));
+  upload(e, THIRD, [0]);
+  e.TRACE.beforeBatch = (statements) => {
+    if (statements[0].sql.startsWith("INSERT INTO data_build")) e.TRACE.db.exec(`DELETE FROM item WHERE hash = '${hash(0, 2)}'`);
+  };
+  t.mock.method(Date, "now", () => 10 * DAY);
+  assert.equal((await post(e, THIRD)).status, 409);
+  assert.equal(builds(e).length, 11);
+});
+
+test("a load keeps the deployed commit's build, however old", async (t) => {
   const e = traceEnv(sha(1));
-  await loadEach(e, [0, ...Array(10).fill(10)]);
+  await loadEach(t, e, [0, ...Array(10).fill(10)]);
   assert.deepEqual(builds(e), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(sha));
 });
 
-test("a load drops the items only dropped builds used, from D1 and R2", async () => {
+test("a load drops the items only dropped builds used, from D1 and R2", async (t) => {
   const e = traceEnv(undefined);
   e.BLOBS.objects[`trace/2027/cells/${hash(0, 1)}.json`] = "{}";
-  await loadEach(e, [0, ...Array(10).fill(10)]);
+  await loadEach(t, e, [0, ...Array(10).fill(10)]);
   assert.equal(stored(e), 11 + 10);
   const kept = Object.keys(e.BLOBS.objects);
   assert.deepEqual(kept.filter((k) => k.includes(sha(1)) || k.includes(own(1)) || k.includes("/cells/")), []);
-  assert.equal(kept.length, 10 + 11 + 10);
+  const manifests = 10, sharedCells = 11, ownCells = 10;
+  assert.equal(kept.length, manifests + sharedCells + ownCells);
 });
 
-test("serves a loaded build's table, its plans' rows in the build's order", async () => {
+test("serves a loaded build's table, its rows in the build's order", async () => {
   const e = traceEnv(undefined);
+  assert.equal((await at(e, `/tables/2027/${OLD}/presented.json`)).status, 404);
   upload(e, OLD);
   const manifest = JSON.parse(e.BLOBS.objects[`trace/2027/${OLD}.json`]);
-  const tables = { "tables/presented/P2": [{ n: "1" }, { n: "2" }], "tables/presented/P1": [{ n: "3" }],
-                   "tables/main/P1": [{ n: "4" }], "tables/main_chart/P1": [{ n: "5" }] };
+  const tables = { "tables/presented/0/P2": [{ n: "1" }, { n: "2" }], "tables/presented/1/P1": [{ n: "3" }],
+                   "tables/main/0/P1": [{ n: "4" }], "tables/main_chart/0/P1": [{ n: "5" }] };
   for (const [i, [key, rows]] of Object.entries(tables).entries()) {
     manifest.items[key] = own(i);
     e.BLOBS.objects[`trace/2027/items/${own(i)}.json`] = JSON.stringify(rows);
