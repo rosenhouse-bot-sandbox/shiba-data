@@ -1,16 +1,15 @@
 import { test } from "node:test";
 import fs from "node:fs";
 import assert from "node:assert/strict";
-import { NODES, STEPS, EDGES, nodeBox, pillBox, edge, before, after, stepById, strip, details, records } from "../static/pipeline.js";
+import { NODES, STEPS, inputs, nodeBox, pillBox, paths, before, after, stepById, strip, details, records } from "../static/pipeline.js";
 
 const inside = ([x, y], b) => x > b.x && x < b.x + b.w && y > b.y && y < b.y + b.h;
 
 test("no edge passes behind a node", () => {
-  for (const { from, to } of EDGES) {
-    const { at } = edge(from, to);
+  for (const s of STEPS) for (const { at } of paths(s)) {
     for (const id of Object.keys(NODES)) {
-      if (id === from || id === to) continue;
-      for (let t = 0; t <= 1; t += 0.01) assert.ok(!inside(at(t), nodeBox(id)), `${from}→${to} crosses ${id}`);
+      if (id === s.to || inputs(s).includes(id)) continue;
+      for (let t = 0; t <= 1; t += 0.01) assert.ok(!inside(at(t), nodeBox(id)), `${s.id} crosses ${id}`);
     }
   }
 });
@@ -18,11 +17,14 @@ test("no edge passes behind a node", () => {
 const overlap = (a, b) => a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
 
 test("step labels overlap no node and no other label", () => {
-  for (const e of EDGES) {
-    const name = `${e.step.id} ${e.from}`;
-    for (const id of Object.keys(NODES)) assert.ok(!overlap(pillBox(e), nodeBox(id)), `${name} label covers ${id}`);
-    for (const f of EDGES) if (e !== f) assert.ok(!overlap(pillBox(e), pillBox(f)), `${name} and ${f.step.id} ${f.from} labels`);
+  for (const s of STEPS) {
+    for (const id of Object.keys(NODES)) assert.ok(!overlap(pillBox(s), nodeBox(id)), `${s.id} label covers ${id}`);
+    for (const t of STEPS) if (s !== t) assert.ok(!overlap(pillBox(s), pillBox(t)), `${s.id} and ${t.id} labels`);
   }
+});
+
+test("every edge runs downward", () => {
+  for (const s of STEPS) for (const { at } of paths(s)) assert.ok(at(1)[1] > at(0)[1], s.id);
 });
 
 test("no two nodes overlap", () => {
@@ -34,14 +36,20 @@ test("no two nodes overlap", () => {
 
 test("every step joins known nodes and has a unique id", () => {
   assert.equal(new Set(STEPS.map((s) => s.id)).size, STEPS.length);
-  for (const e of EDGES) assert.ok(NODES[e.from] && NODES[e.to], e.step.id);
+  for (const s of STEPS) for (const id of [...inputs(s), s.to]) assert.ok(NODES[id], s.id);
 });
 
-test("steps with several inputs label each input's edge", () => {
-  const inputs = (id) => EDGES.filter((e) => e.step.id === id).map((e) => e.from);
-  assert.deepEqual(inputs("find-pdfs"), ["links", "plans", "found"]);
-  assert.deepEqual(inputs("sheet"), ["facts", "pbp"]);
-  assert.deepEqual(inputs("publish"), ["sheet", "presented"]);
+test("a step's inputs join at its one label, which points to its output", () => {
+  assert.deepEqual(inputs(stepById("find-pdfs")), ["links", "plans", "found"]);
+  assert.deepEqual(inputs(stepById("sheet")), ["facts", "pbp"]);
+  assert.deepEqual(inputs(stepById("publish")), ["sheet", "presented"]);
+  for (const s of STEPS.filter((s) => inputs(s).length > 1)) {
+    const p = pillBox(s), top = [p.x + p.w / 2, p.y], bottom = [p.x + p.w / 2, p.y + p.h];
+    const ins = paths(s).filter((e) => !e.arrow), [out] = paths(s).filter((e) => e.arrow);
+    assert.equal(ins.length, inputs(s).length, s.id);
+    for (const e of ins) assert.deepEqual(e.at(1), top, s.id);
+    assert.deepEqual(out.at(0), bottom, s.id);
+  }
 });
 
 test("highlighted rows exist", () => {

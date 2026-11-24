@@ -15,37 +15,37 @@ export const NODES = {
       rows: [["H1036-153-0", "SB", "https://assets.humana.com/is/content/humana/H1036153000SB27pdf"],
         ["H1036-153-0", "EOC", "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf"]] } },
   found: { col: 2, row: 1, kind: "browser finds", source: true, label: "found.csv" },
-  pbp: { col: 2, row: 5, kind: "CMS source", source: true, label: "PBP tables",
+  pbp: { col: 2, row: 6, kind: "CMS source", source: true, label: "PBP tables",
     table: { name: "pbp_Section_D.txt", note: "the plan's deductible fields, which become facts the rules read; the ambulance rule reads none",
       cols: ["bid_id", "pbp_d_inn_deduct_yn"], rows: [["H1036_153_0", "2"]] } },
   plans: { col: 0, row: 1, kind: "table", label: "plans.csv",
     table: { name: "generated/plans.csv", note: "39 rows", cols: ["plan_id", "plan_name", "plan_type", "organization", "premium", "moop_in_network"],
       rows: [["H1036-153-0", "Humana Total Complete (HMO)", "HMO", "Humana", "$0", "$5,150"]] } },
-  documents: { col: 1, row: 2, kind: "table", label: "documents.csv",
+  documents: { col: 1, row: 3, kind: "table", label: "documents.csv",
     table: { name: "generated/documents.csv", note: "one URL per plan and kind", cols: ["plan_ids", "kind", "url", "found_via"],
       rows: [["H1036-153-0", "SB", "…/H1036153000SB27pdf", "volunteers' Links sheet"],
         ["H1036-153-0", "EOC", "…/H1036153000EOC27pdf", "volunteers' Links sheet"]] } },
-  checked: { col: 1, row: 3, kind: "table", label: "documents_checked",
+  checked: { col: 1, row: 4, kind: "table", label: "documents_checked",
     table: { name: "generated/documents_checked.csv", note: "selected columns", cols: ["plan_ids", "kind", "sha256", "pages", "cover_problems"],
       rows: [["H1036-153-0", "SB", "ce13e925c0384896d725da85a06c14df…", "24", ""],
         ["H1036-153-0", "EOC", "64e05773e847b56e0eeb5425979d5499…", "188", ""]] } },
-  text: { col: 1, row: 4, kind: "files in R2", source: true, label: "page text",
+  text: { col: 1, row: 5, kind: "files in R2", source: true, label: "page text",
     text: { name: "ce13e925c0384896.txt", note: "SB page 9",
       lines: ["=====PAGE 9=====", " SKILLED NURSING FACILITY (SNF)",
         " This plan covers up to 100 days in a SNF        $10 copay per day for days 1-20", " AMBULANCE",
         " Air                                             20% of the cost",
         " Ground                                          $325 copay per date of service",
         " TRANSPORTATION                                  Not Covered"] } },
-  sheet: { col: 2, row: 8, kind: "table", label: "main_chart.csv",
+  sheet: { col: 2, row: 9, kind: "table", label: "main_chart.csv",
     table: { name: "generated/main_chart.csv", note: "every rule's value, selected columns", cols: ["plan_id", "plan_name", "AB_ambulance"],
       rows: [["H1036-153-0", "Humana Total Complete (HMO)", "$325 or 20% | $325"]] } },
-  answers: { col: 0, row: 5, kind: "model answers", source: true, label: "answers/*.json",
+  answers: { col: 0, row: 6, kind: "model answers", source: true, label: "answers/*.json",
     text: { name: "answers/e920fcee050a431f.json", note: "Claude Opus, high effort · 3,479 in / 954 out tokens",
       lines: [
         '[{"benefit": "ambulance.air", "setting": "any", "network": "in", "cost_kind": "coinsurance", "amount": "20%", "page": 9, "quotes": ["20% of the cost"]},',
         ' {"benefit": "ambulance.ground", "setting": "any", "network": "in", "cost_kind": "copay", "amount": "$325", "page": 9, "quotes": ["$325 copay per date of service"]},',
         ' {"benefit": "ambulance", "setting": "outside_us", "covered_by": "medicare", "amount": "$325", "page": 6, "quotes": ["Emergency ambulance: $325 copay per date of"]}]'] } },
-  facts: { col: 0, row: 6, kind: "table", label: "document_facts",
+  facts: { col: 0, row: 7, kind: "table", label: "document_facts",
     table: { name: "machine/document_facts.csv", note: "accepted facts, selected columns",
       cols: ["benefit", "setting", "network", "condition", "covered_by", "cost_kind", "amount", "source", "page"],
       rows: [["ambulance.ground", "any", "in", "Emergency Ambulance", "medicare", "copay", "$325", "EOC", "46"],
@@ -54,12 +54,12 @@ export const NODES = {
         ["ambulance", "outside_us", "out", "Emergency Ambulance", "supplemental", "copay", "$325", "EOC", "46"],
         ["ambulance.ground", "any", "in", "", "medicare", "copay", "$325", "SB", "9"],
         ["ambulance.air", "any", "in", "", "medicare", "coinsurance", "20%", "SB", "9"]] } },
-  presented: { col: 0, row: 8, kind: "table", label: "presented.csv",
+  presented: { col: 0, row: 9, kind: "table", label: "presented.csv",
     table: { name: "generated/presented.csv", note: "one row per citation", cols: ["plan_id", "column", "line", "value", "pdf_page", "quote"],
       rows: [["H1036-153-0", "AB_ambulance", "1", "$325 or 20%", "46", "In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance"],
         ["H1036-153-0", "AB_ambulance", "1", "$325 or 20%", "46", "… Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance"],
         ["H1036-153-0", "AB_ambulance", "2", "$325", "46", "Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance"]] } },
-  site: { col: 1, row: 9, kind: "website", source: true, label: "pdxplans.org",
+  site: { col: 1, row: 11, kind: "website", source: true, label: "pdxplans.org",
     text: { name: "pdxplans.org", note: "after a volunteer clicks the cell",
       lines: ["Humana Total Complete (HMO) · Ambulance", "  $325 or 20% | $325", "", "EOC page 46, highlighted in the PDF beside the sheet:",
         '  "In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number',
@@ -111,7 +111,7 @@ export const STEPS = [
 ];
 
 // also names a step's other inputs.
-export const EDGES = STEPS.flatMap((step) => [step.from, ...(step.also ?? [])].map((from) => ({ step, from, to: step.to })));
+export const inputs = (step) => [step.from, ...(step.also ?? [])];
 
 export const NODE_W = 128;
 export const NODE_H = 54;
@@ -127,10 +127,8 @@ export function nodeBox(id) {
 export const MAP_W = MARGIN * 2 + Math.max(...Object.values(NODES).map((n) => n.col)) * COL_STEP + NODE_W;
 export const MAP_H = MARGIN * 2 + Math.max(...Object.values(NODES).map((n) => n.row)) * ROW_STEP + NODE_H;
 
-// A vertical cubic curve from the bottom middle of one node to the top middle of another.
-export function edge(from, to) {
-  const a = nodeBox(from), b = nodeBox(to);
-  const x1 = a.x + a.w / 2, y1 = a.y + a.h, x2 = b.x + b.w / 2, y2 = b.y;
+// A vertical cubic curve between two points.
+function curve([x1, y1], [x2, y2]) {
   const dy = Math.max(26, (y2 - y1) / 2);
   const c1 = [x1, y1 + dy], c2 = [x2, y2 - dy];
   const at = (t) => {
@@ -141,17 +139,29 @@ export function edge(from, to) {
   return { d: `M${x1},${y1} C${c1} ${c2} ${x2},${y2}`, at };
 }
 
+const bottom = (b) => [b.x + b.w / 2, b.y + b.h];
+const top = (b) => [b.x + b.w / 2, b.y];
+
 export const PILL_W = 116;
 export const PILL_H = 24;
 
-// An edge's label sits at its middle.
-export function pillBox({ from, to }) {
-  const [x, y] = edge(from, to).at(0.5);
+// A one-input step's label sits on its edge. Several inputs join at a label in the row gap above the output.
+export function pillBox(step) {
+  const to = nodeBox(step.to);
+  const [x, y] = inputs(step).length > 1 ? [to.x + to.w / 2, to.y - ROW_STEP / 2] : curve(bottom(nodeBox(step.from)), top(to)).at(0.5);
   return { x: x - PILL_W / 2, y: y - PILL_H / 2, w: PILL_W, h: PILL_H };
 }
 
+// The lines a step draws. Only the one into the output gets an arrow.
+export function paths(step) {
+  const to = top(nodeBox(step.to));
+  if (inputs(step).length === 1) return [{ ...curve(bottom(nodeBox(step.from)), to), arrow: true }];
+  const pill = pillBox(step);
+  return [...inputs(step).map((id) => ({ ...curve(bottom(nodeBox(id)), top(pill)), arrow: false })),
+    { ...curve(bottom(pill), to), arrow: true }];
+}
+
 export const stepById = (id) => STEPS.find((s) => s.id === id);
-const inputs = (step) => EDGES.filter((e) => e.step === step).map((e) => e.from);
 export const before = (step) => STEPS.filter((s) => inputs(step).includes(s.to));
 export const after = (step) => STEPS.filter((s) => inputs(s).includes(step.to));
 

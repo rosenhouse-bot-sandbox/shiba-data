@@ -877,13 +877,12 @@ test("pipeline view: a step on the map opens in the lens, and Back returns", asy
   await page.waitForFunction(() => document.querySelector(".how-step")?.textContent === "Check facts");
 });
 
-test("pipeline view: a step with two inputs lights both edges and labels each", async () => {
+test("pipeline view: a step with two inputs lights both and joins them at its one label", async () => {
   await openHow(page, "main/H1036-153-0/ambulance/sheet");
   assert.equal(await page.locator(".how-node.on").count(), 3);
-  assert.equal(await page.locator(".how-edge.on").count(), 2);
-  assert.equal(await page.locator(".how-pill.on").count(), 2);
-  assert.equal(await page.locator(".how-pill[aria-current]").count(), 1);
-  assert.equal(await page.locator(".how-pill[tabindex='-1']").count(), 4);
+  assert.equal(await page.locator(".how-edge.on").count(), 3);
+  assert.equal(await page.locator(".how-pill.on").count(), 1);
+  assert.equal(await page.locator(".how-pill").count(), 9);
 });
 
 test("pipeline view: Find PDFs shows every URL offered to the plan and marks the winners", async () => {
