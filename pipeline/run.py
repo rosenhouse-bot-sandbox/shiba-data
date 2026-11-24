@@ -32,6 +32,7 @@ import steps  # noqa: E402
 import years  # noqa: E402
 
 CMS = ("landscape", "pbp")
+FACTS = "machine/document_facts.csv"
 STEPS = {"document_facts": document_facts.VERSIONS, "present": present.VERSIONS}
 
 
@@ -174,9 +175,10 @@ def main(year, work, mode="", candidate=""):
 
     if config["year"] == years.LIVE:
         versions = steps.versions(data, STEPS, candidate)
-        # The new texts must highlight the quotes the committed facts give, before any model call.
-        present.write(data, versions["present"])
-        check_quotes(data, f"{work}/texts")
+        # The new texts must highlight the quotes the earlier facts give, before any model call.
+        if (data / FACTS).exists():
+            present.write(data, versions["present"])
+            check_quotes(data, f"{work}/texts")
         answer = Answers(data, asker(mode, data, work, versions, candidate), work)
         model_steps(data, f"{work}/texts", work, answer, versions)
         check_quotes(data, f"{work}/texts")

@@ -8,6 +8,7 @@ data/*/generated/landscape_reads.csv
 data/*/generated/documents.csv
 data/*/generated/pbp_facts.csv
 data/*/generated/cms_sources.csv
+data/*/machine/document_facts.csv
 data/*/generated/main_chart.csv
 data/*/generated/dvha.csv
 data/*/generated/presented.csv

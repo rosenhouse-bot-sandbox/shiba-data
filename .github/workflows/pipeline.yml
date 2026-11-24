@@ -70,6 +70,8 @@ jobs:
       # A stopped check can leave its stand-in outputs in data/<year>, which the later steps would commit.
       - if: always() && steps.blast.outcome != 'success' && steps.blast.outcome != 'skipped'
         run: git checkout -- "data/$YEAR" && git clean -fdqx -- "data/$YEAR"
+      # run.py checks that the new texts still highlight the quotes of the facts main's inputs give.
+      - run: python3 -I pipeline/tables.py "$YEAR" "$RUNNER_TEMP/tables"
       # GitHub stops a job after 360 minutes, so these leave time to commit.
       # A rerun after a timeout reuses the results of the batches this run sent.
       - run: python3 -I pipeline/run.py "$YEAR" _work api "$CANDIDATE"
