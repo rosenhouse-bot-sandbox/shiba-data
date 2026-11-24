@@ -135,11 +135,11 @@ class MainTest(unittest.TestCase):
 
 
 class RestoreTest(unittest.TestCase):
-    def test_also_removes_the_tables_git_ignores(self):
+    def test_keeps_the_tables_git_ignores_for_the_next_run(self):
         calls = []
         with mock.patch.object(blast, "git", lambda *a: calls.append(a)):
             blast.restore("d")
-        self.assertEqual(calls, [("checkout", "--", "d"), ("clean", "-fdqx", "--", "d")])
+        self.assertEqual(calls, [("checkout", "--", "d"), ("clean", "-fdq", "--", "d")])
 
 
 class ModelStepsTest(unittest.TestCase):

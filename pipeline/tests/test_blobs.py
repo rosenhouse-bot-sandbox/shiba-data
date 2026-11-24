@@ -140,8 +140,8 @@ class ReplayTest(unittest.TestCase):
     def test_a_replay_reads_nothing_from_the_web(self):
         downloads, scripts = self.scripts("replay")
         self.assertEqual(downloads, 0)
-        self.assertFalse({"find_docs.py", "fetch_docs.py"} & set(scripts))
-        self.assertIn("texts.py", scripts)
+        self.assertNotIn("fetch_docs.py", scripts)
+        self.assertLessEqual({"find_docs.py", "texts.py"}, set(scripts))
 
 
 if __name__ == "__main__":

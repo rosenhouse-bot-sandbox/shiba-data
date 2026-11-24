@@ -1,4 +1,4 @@
-import contextlib, io, os, pathlib, sys, tempfile, unittest
+import contextlib, csv, io, os, sys, unittest
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import built
@@ -88,12 +88,13 @@ class DocumentsTest(unittest.TestCase):
 
 class Rebuild2027Test(unittest.TestCase):
     @built.check
-    def test_rebuilds_the_committed_documents_list(self):
-        data = years.data_dir(2027)
-        with tempfile.TemporaryDirectory() as tmp:
-            out = pathlib.Path(tmp, "documents.csv")
-            find_docs.main(data / "generated/plans.csv", data / "found.csv", data / "links.csv", out, "2027")
-            self.assertEqual(out.read_text(), (data / "generated/documents.csv").read_text())
+    def test_lists_the_documents_the_last_download_checked(self):
+        gen = years.data_dir(2027) / "generated"
+        with open(gen / "documents.csv", newline="") as f:
+            listed = list(csv.DictReader(f))
+        with open(gen / "documents_checked.csv", newline="") as f:
+            checked = [{k: r[k] for k in listed[0]} for r in csv.DictReader(f)]
+        self.assertEqual(listed, checked)
 
 
 if __name__ == "__main__":

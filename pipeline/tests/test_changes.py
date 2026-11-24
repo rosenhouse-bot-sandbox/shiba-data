@@ -59,6 +59,20 @@ class AtTest(unittest.TestCase):
             got = changes.at("HEAD", 2027, out, repo)
         self.assertEqual(got["main"], [dict(section="MA", plan_id="H1036-001-0", plan_name="A plan", Q_hearing="$0")])
 
+    def test_runs_the_tables_step_of_a_ref_that_has_one(self):
+        with tempfile.TemporaryDirectory() as repo, tempfile.TemporaryDirectory() as out:
+            commit(repo, {"pipeline/tables.py": FAKE_PRESENT + "assert sys.argv[2] == " + repr(f"{out}/work") + "\n",
+                          "data/2027/config.json": "{}"})
+            got = changes.at("HEAD", 2027, out, repo)
+        self.assertEqual(got["main"][0]["Q_hearing"], "$0")
+
+    def test_prints_nothing_the_refs_code_prints(self):
+        with tempfile.TemporaryDirectory() as repo, tempfile.TemporaryDirectory() as out:
+            commit(repo, {"pipeline/present.py": FAKE_PRESENT + "print('39 plans')\n", "data/2027/config.json": "{}"})
+            done = subprocess.run([sys.executable, "-I", "-c", f"import sys; sys.path.insert(0, {os.path.dirname(changes.__file__)!r}); "
+                                   f"import changes; changes.at('HEAD', 2027, {out!r}, {repo!r})"], capture_output=True, text=True)
+        self.assertEqual((done.returncode, done.stdout), (0, ""))
+
     def test_a_year_the_ref_lacks_has_no_sheets(self):
         with tempfile.TemporaryDirectory() as repo, tempfile.TemporaryDirectory() as out:
             commit(repo, {"pipeline/present.py": FAKE_PRESENT, "data/2027/config.json": "{}"})

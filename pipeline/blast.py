@@ -3,11 +3,11 @@ outside the version's targets.
 
 Usage: python3 -I pipeline/blast.py <year> <work_dir> document_facts@<version>
 
-<work_dir> needs the PDF texts that run.py's replay reads. This runs the model steps twice: pinned, then with the
-candidate. In the candidate run, a task without a saved answer gets the answer the pinned run implies: a reader gets the
-pinned run's answer for the same document, and a verifier or reviewer keeps what the pinned run kept. A plan fails if a
-task without a saved answer is about it, or if its document facts or presented cells change. Each run writes
-data/<year>, so data/<year> must be clean, and is restored after.
+<work_dir> needs the PDF texts that run.py's replay reads, and data/<year> needs the tables that tables.py writes.
+This runs the model steps twice: pinned, then with the candidate. In the candidate run, a task without a saved answer
+gets the answer the pinned run implies: a reader gets the pinned run's answer for the same document, and a verifier or
+reviewer keeps what the pinned run kept. A plan fails if a task without a saved answer is about it, or if its document
+facts or presented cells change. Each run writes data/<year>, so data/<year> must be clean, and is restored after.
 """
 import contextlib
 import glob
@@ -109,7 +109,7 @@ def git(*args):
 
 def restore(data):
     git("checkout", "--", str(data))
-    git("clean", "-fdqx", "--", str(data))
+    git("clean", "-fdq", "--", str(data))
 
 
 def model_steps(data, work, versions, asker, saved):

@@ -36,7 +36,7 @@ def table(rows):
 
 
 def at(ref, year, out, repo=years.REPO):
-    """The sheets that ref's present step writes from ref's facts, in a copy of ref under out."""
+    """The sheets that ref's code writes from ref's inputs, in a copy of ref under out."""
     if subprocess.run(["git", "-C", str(repo), "cat-file", "-e", f"{ref}:data/{year}"], stderr=subprocess.DEVNULL).returncode:
         return {}
     tar = subprocess.run(["git", "-C", str(repo), "archive", ref, "pipeline", f"data/{year}"], check=True,
@@ -44,7 +44,10 @@ def at(ref, year, out, repo=years.REPO):
     with tarfile.open(fileobj=io.BytesIO(tar)) as t:
         t.extractall(out, filter="data")
     env = {k: v for k, v in os.environ.items() if not k.startswith("SHIBA_")}
-    subprocess.run([sys.executable, "-I", f"{out}/pipeline/present.py", str(year)], check=True, env=env)
+    # Refs from before tables.py kept the tables that present.py reads in git.
+    tables = pathlib.Path(out, "pipeline", "tables.py")
+    step = [tables, str(year), f"{out}/work"] if tables.exists() else [f"{out}/pipeline/present.py", str(year)]
+    subprocess.run([sys.executable, "-I", *map(str, step)], check=True, env=env, stdout=subprocess.DEVNULL)
     return sheets.read(pathlib.Path(out, "data", str(year)))
 
 
