@@ -849,13 +849,13 @@ test("pipeline view: the nav link opens the example cell's first step", async ()
   assert.equal(await page.textContent(".how-step"), "List the plans");
 });
 
-test("pipeline view: Next steps through the example cell's steps, each step highlighting its rows", async () => {
+test("pipeline view: Next steps through the example cell's steps, each showing its input and output rows", async () => {
   await openHow(page, "");
   const labels = [];
   for (;;) {
     labels.push(await page.textContent(".how-step"));
     for (const side of ["input", "output"]) {
-      assert.ok(await page.locator(`.how-rows.${side} .hi`).count(), `${labels.at(-1)} ${side}`);
+      assert.ok(await page.locator(`.how-rows.${side} :is(tbody tr, pre span)`).count(), `${labels.at(-1)} ${side}`);
     }
     const next = page.locator("a.how-nav[rel=next]");
     if (!(await next.count())) break;
@@ -871,19 +871,19 @@ test("pipeline view: a step on the map opens in the lens, and Back returns", asy
   await page.click(".how-pill:text-is('Column rules')");
   await page.waitForFunction(() => document.querySelector(".how-step")?.textContent === "Column rules");
   assert.equal(await page.locator(".how-node.on").count(), 2);
-  assert.equal(await page.locator(".how-rows.input .hi").count(), 4);
+  assert.equal(await page.locator(".how-rows.input .hi").count(), 5);
   assert.equal(await page.evaluate(() => document.activeElement.className), "how-step");
   await page.goBack();
   await page.waitForFunction(() => document.querySelector(".how-step")?.textContent === "Check facts");
 });
 
-test("pipeline view: a step with two inputs lights both edges and labels each", async () => {
+test("pipeline view: a step with two inputs lights both and joins them at its one label", async () => {
   await openHow(page, "main/H1036-153-0/ambulance/sheet");
   assert.equal(await page.locator(".how-node.on").count(), 3);
-  assert.equal(await page.locator(".how-edge.on").count(), 2);
-  assert.equal(await page.locator(".how-pill.on").count(), 2);
-  assert.equal(await page.locator(".how-pill[aria-current]").count(), 1);
-  assert.equal(await page.locator(".how-pill[tabindex='-1']").count(), 4);
+  assert.equal(await page.locator(".how-edge.on").count(), 3);
+  assert.equal(await page.locator(".how-pill.on").count(), 1);
+  assert.equal(await page.locator(".how-pill").count(), 9);
+  assert.equal(await page.locator(".how-edge[marker-end]").count(), 9);
 });
 
 test("pipeline view: Find PDFs shows every URL offered to the plan and marks the winners", async () => {
