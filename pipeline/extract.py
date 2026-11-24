@@ -11,7 +11,7 @@ Needs the texts.py <work> directory. One reader task covers one document and one
 The first facts run writes a retry task, <dir>/<doc>.retry.md, for each document with failed answers.
 Answer those, then run facts again.
 """
-import collections, csv, glob, json, os, pathlib, random, re, sys
+import collections, csv, functools, glob, json, os, pathlib, random, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -76,7 +76,13 @@ def relevant(pages, group, find=()):
     """find: patterns a version adds to the group's."""
     if isinstance(find, str):
         raise TypeError("find takes a tuple of patterns")
-    return {p: t for p, t in pages.items() if any(re.search(rx, t, re.I) for rx in facts.FIND[group] + list(find))}
+    return {p: pages[p] for p in matching(group, tuple(find), tuple(sorted(pages.items())))}
+
+
+@functools.cache
+def matching(group, find, pages):
+    """The pages that match a pattern. A run asks this many times for each document and group."""
+    return [p for p, t in pages if any(re.search(rx, t, re.I) for rx in facts.FIND[group] + list(find))]
 
 
 def for_plans(notes, plan_notes, plan_ids):
