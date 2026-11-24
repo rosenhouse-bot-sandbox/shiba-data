@@ -1,4 +1,4 @@
-import contextlib, csv, io, json, os, pathlib, sys, tempfile, unittest
+import contextlib, csv, io, json, os, pathlib, shutil, sys, tempfile, unittest
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -104,9 +104,10 @@ class RunTestsTest(unittest.TestCase):
 
 
 class MainTest(unittest.TestCase):
-    def run_main(self, mode, candidate=""):
+    def run_main(self, mode, candidate="", facts=True):
+        """Lists the order of run.main's steps. The year's data has steps.json, and has earlier facts if facts is true."""
         order = []
-        with tempfile.TemporaryDirectory() as work, \
+        with tempfile.TemporaryDirectory() as work, tempfile.TemporaryDirectory() as root, \
              mock.patch.multiple(run, run_tests=lambda kind, candidate: order.append((kind, candidate)),
                                  get=lambda *a: order.append("get"), py=lambda *a: None,
                                  check_quotes=lambda *a: order.append("check_quotes"),
@@ -114,14 +115,24 @@ class MainTest(unittest.TestCase):
              mock.patch.object(run.subprocess, "run"), mock.patch.object(run.blobs, "record_cms"), \
              mock.patch.object(run.blobs, "record_texts"), mock.patch.object(run, "pdfs"), \
              mock.patch.object(run.present, "write", lambda data, version: order.append("present")):
-            run.main(str(years.LIVE), work, mode, candidate)
+            data = pathlib.Path(root, str(years.LIVE))
+            (data / "machine").mkdir(parents=True)
+            for name in ("config.json", "steps.json"):
+                shutil.copy(years.data_dir() / name, data)
+            if facts:
+                (data / run.FACTS).write_text("")
+            with mock.patch.object(run.years, "data_dir", lambda year: data):
+                run.main(str(years.LIVE), work, mode, candidate)
         return order
 
     def test_runs_the_code_tests_before_any_download_or_model_call(self):
         self.assertEqual(self.run_main("api", "present@2")[:2], [("code", "present@2"), "get"])
 
-    def test_checks_the_quotes_of_the_committed_facts_before_any_model_call(self):
+    def test_checks_the_quotes_of_the_earlier_facts_before_any_model_call(self):
         self.assertEqual(self.run_main("api")[-5:], ["present", "check_quotes", "model_steps", "check_quotes", ("checks", "")])
+
+    def test_without_earlier_facts_checks_only_the_new_quotes(self):
+        self.assertEqual(self.run_main("replay", facts=False), [("code", ""), "model_steps", "check_quotes", ("checks", "")])
 
     def test_checks_the_built_data_after_the_model_steps(self):
         self.assertEqual(self.run_main("replay")[-3:], ["model_steps", "check_quotes", ("checks", "")])

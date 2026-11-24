@@ -20,11 +20,11 @@ class ChangedTest(unittest.TestCase):
 
     def test_prints_the_table_of_changes_since_a_ref(self):
         out = io.StringIO()
-        with mock.patch.object(changes, "at", lambda ref, year, tmp: sheet(Q_hearing="")), \
+        with mock.patch.object(changes, "at", lambda ref, year, tmp, work: sheet(Q_hearing=work)), \
              mock.patch.object(changes.sheets, "read", lambda data: sheet(Q_hearing="$0")), \
              contextlib.redirect_stdout(out):
-            changes.main(str(years.LIVE), "HEAD")
-        self.assertIn("| main | H1036-001-0 | Q_hearing | (blank) | `$0` |", out.getvalue())
+            changes.main(str(years.LIVE), "HEAD", "/work")
+        self.assertIn("| main | H1036-001-0 | Q_hearing | `/work` | `$0` |", out.getvalue())
 
     def test_a_table_escapes_pipes(self):
         self.assertEqual(changes.table([("main", "H1036-001-0", "H_inpatient", "$550 | 1-5", "")]),
@@ -43,7 +43,7 @@ gen.mkdir(exist_ok=True)
 
 
 def commit(repo, files):
-    for path, text in files.items():
+    for path, text in ({"web/static/highlight.js": ""} | files).items():
         pathlib.Path(repo, path).parent.mkdir(parents=True, exist_ok=True)
         pathlib.Path(repo, path).write_text(text)
     for args in (["init", "-q"], ["add", "."],
@@ -65,6 +65,30 @@ class AtTest(unittest.TestCase):
                           "data/2027/config.json": "{}"})
             got = changes.at("HEAD", 2027, out, repo)
         self.assertEqual(got["main"][0]["Q_hearing"], "$0")
+
+    def test_runs_the_tables_step_in_a_given_work_dir(self):
+        with tempfile.TemporaryDirectory() as repo, tempfile.TemporaryDirectory() as out:
+            commit(repo, {"pipeline/tables.py": FAKE_PRESENT + "assert sys.argv[2] == '/given'\n", "data/2027/config.json": "{}"})
+            self.assertEqual(changes.at("HEAD", 2027, out, repo, "/given")["main"][0]["Q_hearing"], "$0")
+
+    def test_a_refs_tables_step_can_check_quotes(self):
+        pipeline = pathlib.Path(changes.__file__).parent
+        with tempfile.TemporaryDirectory() as repo, tempfile.TemporaryDirectory() as out:
+            commit(repo, {"pipeline/tables.py": FAKE_PRESENT + "import subprocess\nsubprocess.run(['node', "
+                          "str(pathlib.Path(__file__).with_name('match.mjs')), '.'], input=b'', check=True)\n",
+                          "pipeline/match.mjs": (pipeline / "match.mjs").read_text(),
+                          "web/static/highlight.js": (pipeline.parent / "web/static/highlight.js").read_text(),
+                          "data/2027/config.json": "{}"})
+            self.assertEqual(changes.at("HEAD", 2027, out, repo)["main"][0]["Q_hearing"], "$0")
+
+    def test_shows_what_the_refs_code_printed_when_it_stops(self):
+        with tempfile.TemporaryDirectory() as repo, tempfile.TemporaryDirectory() as out:
+            commit(repo, {"pipeline/tables.py": "print('2 of 9 tasks have no answer')\nraise SystemExit(1)\n",
+                          "data/2027/config.json": "{}"})
+            done = subprocess.run([sys.executable, "-I", "-c", f"import sys; sys.path.insert(0, {os.path.dirname(changes.__file__)!r}); "
+                                   f"import changes; changes.at('HEAD', 2027, {out!r}, {repo!r})"], capture_output=True, text=True)
+        self.assertEqual((done.returncode, done.stdout), (1, ""))
+        self.assertIn("2 of 9 tasks have no answer", done.stderr)
 
     def test_prints_nothing_the_refs_code_prints(self):
         with tempfile.TemporaryDirectory() as repo, tempfile.TemporaryDirectory() as out:

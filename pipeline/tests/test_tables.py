@@ -1,4 +1,4 @@
-import hashlib, os, pathlib, subprocess, sys, tempfile, unittest
+import contextlib, hashlib, io, os, pathlib, subprocess, sys, tempfile, unittest
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -36,20 +36,56 @@ class FetchTest(unittest.TestCase):
     def test_replaces_a_file_that_is_not_the_pinned_one(self):
         self.assertEqual(self.fetch(have=b"other")[1], ZIP)
 
+    def test_downloads_each_recorded_text(self):
+        served = {hashlib.sha256(b).hexdigest(): b for b in (b"text", b"layout", b"items")}
+        got = {}
+
+        def get(url, path):
+            got[pathlib.Path(path).relative_to(tmp).as_posix()] = served[url.split("/")[-1].removesuffix(".pdf")]
+            pathlib.Path(path).write_bytes(got[pathlib.Path(path).relative_to(tmp).as_posix()])
+        with tempfile.TemporaryDirectory() as tmp:
+            gen = pathlib.Path(tmp, "generated")
+            gen.mkdir()
+            (gen / blobs.CMS_FILES).write_text("name,sha256\n")
+            (gen / blobs.TEXTS).write_text("pdf,text,layout,items\n" + ",".join(["f" * 64, *served]) + "\n")
+            with mock.patch.object(tables.run, "get", get):
+                tables.fetch(gen, tmp)
+        self.assertEqual(got, {"texts/text/ffffffffffffffff.txt": b"text", "texts/layout/ffffffffffffffff.txt": b"layout",
+                               "texts/items/ffffffffffffffff.json": b"items"})
+
     def test_fails_when_the_download_is_not_the_pinned_file(self):
         with self.assertRaisesRegex(ValueError, "pbp"):
             self.fetch(served=b"other")
 
 
 class MainTest(unittest.TestCase):
-    def test_writes_the_cms_tables_then_the_sheets(self):
+    def test_writes_the_cms_tables_then_replays_the_model_steps(self):
         order = []
+
+        def model_steps(data, texts, work, answer, versions):
+            print("progress")
+            order.append(("model_steps", os.path.isabs(work), texts == f"{work}/texts", answer.asker, versions))
+        out = io.StringIO()
         with mock.patch.object(tables, "fetch", lambda gen, work: order.append("fetch")), \
              mock.patch.object(tables.run, "cms_tables", lambda data, config, work: order.append("cms_tables")), \
-             mock.patch.object(tables.present, "write", lambda data: order.append("present")):
-            with tempfile.TemporaryDirectory() as work:
-                tables.main(str(years.LIVE), work)
-        self.assertEqual(order, ["fetch", "cms_tables", "present"])
+             mock.patch.object(tables.run, "model_steps", model_steps), contextlib.redirect_stdout(out):
+            with tempfile.TemporaryDirectory() as tmp, contextlib.chdir(tmp):
+                tables.main(str(years.LIVE), "work")
+        pinned = tables.steps.versions(years.data_dir(), tables.run.STEPS)
+        self.assertEqual(order, ["fetch", "cms_tables", ("model_steps", True, True, None, pinned)])
+        self.assertEqual(out.getvalue(), "")
+
+    def test_prints_the_model_steps_output_when_they_stop(self):
+        def model_steps(*args):
+            print("2 of 9 tasks have no answer")
+            raise SystemExit(1)
+        out = io.StringIO()
+        with mock.patch.object(tables, "fetch", lambda gen, work: None), \
+             mock.patch.object(tables.run, "cms_tables", lambda *a: None), \
+             mock.patch.object(tables.run, "model_steps", model_steps), contextlib.redirect_stdout(out), \
+             self.assertRaises(SystemExit), tempfile.TemporaryDirectory() as work:
+            tables.main(str(years.LIVE), work)
+        self.assertIn("2 of 9 tasks", out.getvalue())
 
 
 class GitTest(unittest.TestCase):

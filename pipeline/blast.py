@@ -7,7 +7,8 @@ Usage: python3 -I pipeline/blast.py <year> <work_dir> document_facts@<version>
 This runs the model steps twice: pinned, then with the candidate. In the candidate run, a task without a saved answer
 gets the answer the pinned run implies: a reader gets the pinned run's answer for the same document, and a verifier or
 reviewer keeps what the pinned run kept. A plan fails if a task without a saved answer is about it, or if its document
-facts or presented cells change. Each run writes data/<year>, so data/<year> must be clean, and is restored after.
+facts or presented cells change. Each run writes data/<year>, so data/<year> must be clean. Git restores it after each
+run, except for the tables it ignores, which the candidate run leaves.
 """
 import contextlib
 import glob
