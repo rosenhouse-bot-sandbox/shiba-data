@@ -76,7 +76,7 @@ export const STEPS = [
     paras: [["Code keeps ", ["bothCounties", "plans sold in both counties"], ". A plan's Landscape rows become one row of plans.csv."]],
     example: { highlight: [[0, 1], [0]], before: "H1036_153_0 in Multnomah and Clackamas", after: "H1036-153-0, one row",
       paras: [["The plan has one Landscape row per county. 39 plans remain."]] } },
-  { id: "find-pdfs", record: "documents", from: "links", to: "documents", label: "Find PDFs",
+  { id: "find-pdfs", record: "documents", from: "links", also: ["plans"], to: "documents", label: "Find PDFs",
     paras: [["URLs come from browser searches of carrier sites by Claude sessions, the volunteers' Links sheet, and URL patterns. ", ["firstUrl", "The first URL found wins"], "."]],
     example: { highlight: [[0, 1], [0, 1]], before: "links.csv: …H1036153000EOC27pdf", after: "documents.csv: EOC URL",
       paras: [["This plan's URLs came from the Links sheet."]] } },
@@ -99,17 +99,17 @@ export const STEPS = [
     paras: [["Each column has a rule, written in code from the domain expert's instructions. It takes facts from the ", ["bestSource", "best source"], " and cites their quotes."]],
     example: { highlight: [[0, 1, 2, 3], [0, 1, 2]], before: "ground $325, air 20%, abroad $325", after: "$325 or 20% | $325",
       paras: [["In the ", ["rule", "Ambulance rule"], ", line 1 takes in-network, Medicare-covered ground and air trips from the EOC. Line 2 takes trips abroad. Each line cites the quotes of the facts it used, so line 1 gets four citations and line 2 one, all from EOC page 46."]] } },
-  { id: "sheet", record: "sheet", from: "facts", to: "sheet", label: "Write sheet",
+  { id: "sheet", record: "sheet", from: "facts", also: ["pbp"], to: "sheet", label: "Write sheet",
     paras: [["The column rules also write every value to the sheet. A line that only CMS data backs has no citation, so a volunteer can't check it."]],
     example: { highlight: [[0, 1, 2, 3], [0]], before: "ground $325, air 20%, abroad $325", after: "$325 or 20% | $325",
       paras: [["Every line here cites the EOC."]] } },
-  { id: "publish", record: "citations", from: "sheet", to: "site", label: "Publish",
+  { id: "publish", record: "citations", from: "sheet", also: ["presented"], to: "site", label: "Publish",
     paras: [["Merging to main builds the site from the sheet and its citations. ", ["worker", "The pdxplans Worker"], " serves it at pdxplans.org, and the same build updates the volunteers' Google Sheet."]],
     example: { highlight: [[0], [1, 4, 5]], before: "$325 or 20% | $325, 5 quotes", after: "cell + EOC page 46 highlight", paras: [] } },
 ];
 
-// Edges with no step of their own.
-export const LINKS = [["plans", "documents"], ["pbp", "sheet"], ["presented", "site"]];
+// also names a step's other inputs.
+export const EDGES = STEPS.flatMap((step) => [step.from, ...(step.also ?? [])].map((from) => ({ step, from, to: step.to })));
 
 export const NODE_W = 128;
 export const NODE_H = 54;
@@ -142,15 +142,16 @@ export function edge(from, to) {
 export const PILL_W = 116;
 export const PILL_H = 24;
 
-// A step's label sits at the middle of its edge.
-export function pillBox(step) {
-  const [x, y] = edge(step.from, step.to).at(0.5);
+// An edge's label sits at its middle.
+export function pillBox({ from, to }) {
+  const [x, y] = edge(from, to).at(0.5);
   return { x: x - PILL_W / 2, y: y - PILL_H / 2, w: PILL_W, h: PILL_H };
 }
 
 export const stepById = (id) => STEPS.find((s) => s.id === id);
-export const before = (step) => STEPS.filter((s) => s.to === step.from);
-export const after = (step) => STEPS.filter((s) => s.from === step.to);
+const inputs = (step) => EDGES.filter((e) => e.step === step).map((e) => e.from);
+export const before = (step) => STEPS.filter((s) => inputs(step).includes(s.to));
+export const after = (step) => STEPS.filter((s) => inputs(s).includes(step.to));
 
 const shownValue = (v) => v === "" ? "blank" : v;
 const plural = (n, word) => `${n} ${word}${n === 1 ? "" : "s"}`;

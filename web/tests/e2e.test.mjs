@@ -877,6 +877,15 @@ test("pipeline view: a step on the map opens in the lens, and Back returns", asy
   await page.waitForFunction(() => document.querySelector(".how-step")?.textContent === "Check facts");
 });
 
+test("pipeline view: a step with two inputs lights both edges and labels each", async () => {
+  await openHow(page, "main/H1036-153-0/ambulance/sheet");
+  assert.equal(await page.locator(".how-node.on").count(), 3);
+  assert.equal(await page.locator(".how-edge.on").count(), 2);
+  assert.equal(await page.locator(".how-pill.on").count(), 2);
+  assert.equal(await page.locator(".how-pill[aria-current]").count(), 1);
+  assert.equal(await page.locator(".how-pill[tabindex='-1']").count(), 3);
+});
+
 test("pipeline view: at phone width the lens sits below the map at full width", async () => {
   await page.setViewportSize({ width: 390, height: 800 });
   try {

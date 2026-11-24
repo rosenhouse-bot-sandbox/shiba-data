@@ -113,7 +113,6 @@ td.selected { outline: 3px solid var(--ink); outline-offset: -3px; }
 .how-world { position: relative; transform-origin: 0 0; }
 .how-world svg { position: absolute; inset: 0; overflow: visible; }
 .how-edge { fill: none; stroke: #c4c8cf; stroke-width: 1.5; }
-.how-edge.extra { stroke: #dde0e5; }
 .how-edge.on { stroke: var(--accent); stroke-width: 3.5; }
 .how-arrow.off { fill: #c4c8cf; }
 .how-arrow.on { fill: var(--accent); }
