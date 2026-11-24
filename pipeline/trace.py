@@ -9,7 +9,7 @@ Usage:
 `cell` prints JSON. Each record has a status: "traced", "none" when no step touched the cell, or "not_recorded" when
 nothing kept the record. With a work_dir from a run, `build` adds the run's prompts, their saved answers and the
 checks' outcomes.
-`export` writes every cell's records once by content, which web/worker.js loads into D1.
+`export` writes every cell's records and each plan's rows of TABLES once by content, which web/worker.js loads into D1.
 `page` prints a page's layout text from a run's <work_dir>/texts, where blobs.py puts it.
 """
 import csv, glob, hashlib, json, os, sqlite3, sys
@@ -364,19 +364,38 @@ def cell(db, sheet, plan_id, col):
 COMMIT = "${commit}"
 
 
+# Main uploads these tables with each build's traces.
+TABLES = (*(f"generated/{name}" for name in sheets.SHEETS.values()), sheets.PRESENTED)
+
+
+def table_items(data):
+    """{tables/<name>/<n>/<plan_id>: the rows of the table's nth run of one plan's rows, as JSON}, in file order."""
+    items = {}
+    for path in TABLES:
+        name, runs = os.path.basename(path).removesuffix(".csv"), []
+        with open(data / path, newline="", encoding="utf-8") as f:
+            for row in csv.DictReader(f):
+                if not runs or runs[-1][0]["plan_id"] != row["plan_id"]:
+                    runs.append([])
+                runs[-1].append(row)
+        items |= {f"tables/{name}/{n}/{run[0]['plan_id']}": json.dumps(run, ensure_ascii=False) for n, run in enumerate(runs)}
+    return items
+
+
 def export(db, out):
-    """Writes each cell's records to <out>/cells/<sha256>.json, and <out>/<commit>.json, which names each cell's file
-    by <sheet>/<plan_id>/<col>."""
+    """Writes each cell's records, and each plan's rows of TABLES, to <out>/items/<sha256>.json,
+    and <out>/<commit>.json, which names each item's file."""
     sha, year = db.execute("SELECT sha, year FROM build").fetchone()
-    os.makedirs(os.path.join(out, "cells"), exist_ok=True)
-    cells = {}
-    for key in db.execute("SELECT sheet, plan_id, col FROM sheet_cell ORDER BY sheet, plan_id, col").fetchall():
-        text = json.dumps(cell(db, *key), ensure_ascii=False).replace(sha, COMMIT)
-        digest = cells["/".join(key)] = hashlib.sha256(text.encode()).hexdigest()
-        with open(os.path.join(out, "cells", f"{digest}.json"), "w", encoding="utf-8") as f:
+    os.makedirs(os.path.join(out, "items"), exist_ok=True)
+    texts = {"/".join(key): json.dumps(cell(db, *key), ensure_ascii=False).replace(sha, COMMIT)
+             for key in db.execute("SELECT sheet, plan_id, col FROM sheet_cell ORDER BY sheet, plan_id, col").fetchall()}
+    items = {}
+    for key, text in (texts | table_items(years.data_dir(year))).items():
+        digest = items[key] = hashlib.sha256(text.encode()).hexdigest()
+        with open(os.path.join(out, "items", f"{digest}.json"), "w", encoding="utf-8") as f:
             f.write(text)
     with open(os.path.join(out, f"{sha}.json"), "w") as f:
-        json.dump(dict(sha=sha, year=year, cells=cells), f)
+        json.dump(dict(sha=sha, year=year, items=items), f)
 
 
 def page(work, sha256, n):
