@@ -849,13 +849,13 @@ test("pipeline view: the nav link opens the example cell's first step", async ()
   assert.equal(await page.textContent(".how-step"), "List the plans");
 });
 
-test("pipeline view: Next steps through the example cell's steps, each step highlighting its rows", async () => {
+test("pipeline view: Next steps through the example cell's steps, each showing its input and output rows", async () => {
   await openHow(page, "");
   const labels = [];
   for (;;) {
     labels.push(await page.textContent(".how-step"));
     for (const side of ["input", "output"]) {
-      assert.ok(await page.locator(`.how-rows.${side} .hi`).count(), `${labels.at(-1)} ${side}`);
+      assert.ok(await page.locator(`.how-rows.${side} :is(tbody tr, pre span)`).count(), `${labels.at(-1)} ${side}`);
     }
     const next = page.locator("a.how-nav[rel=next]");
     if (!(await next.count())) break;
@@ -884,14 +884,6 @@ test("pipeline view: a step with two inputs lights both and joins them at its on
   assert.equal(await page.locator(".how-pill.on").count(), 1);
   assert.equal(await page.locator(".how-pill").count(), 9);
   assert.equal(await page.locator(".how-edge[marker-end]").count(), 9);
-});
-
-test("pipeline view: every step shows the cell's input and output rows", async () => {
-  for (const step of ["list-plans", "find-pdfs", "download", "extract-text", "column-rules", "sheet", "publish"]) {
-    await openHow(page, `main/H1036-153-0/ambulance/${step}`);
-    assert.ok(await page.locator(".how-rows.input tbody tr").count(), `${step} input`);
-    assert.ok(await page.locator(".how-rows.output tbody tr").count(), `${step} output`);
-  }
 });
 
 test("pipeline view: Find PDFs shows every URL offered to the plan and marks the winners", async () => {

@@ -81,8 +81,11 @@ function lens(step, link, terms, example, trace, sheet) {
     el("div", { class: "how-card" },
       fromTo ? el("p", { class: "how-strip" }, el("code", { class: "from" }, fromTo[0]), " becomes ", el("code", { class: "to" }, fromTo[1])) : null,
       ...step.paras.map(para), ...(example?.paras ?? []).map(para), workList(details(step, trace))),
-    ...(live.length ? live.map((r) => table(r.role, r.name, r.note, r.cols, r.rows, r.hi))
-      : example ? [rows("Input", step.from, example.highlight[0]), rows("Output", step.to, example.highlight[1])] : []),
+    ...["Input", "Output"].flatMap((role, i) => {
+      const mine = live.filter((r) => r.role === role);
+      if (mine.length) return mine.map((r) => table(role, r.name, r.note, r.cols, r.rows, r.hi));
+      return example ? [rows(role, i ? step.to : step.from, example.highlight[i])] : [];
+    }),
     traceRecord(step, trace),
     chips(after(step), "after", (l) => `next: ${l} ↘`));
 }
@@ -176,7 +179,8 @@ function table(role, name, note, cols, body, highlight) {
   const hi = new Set(highlight);
   return frame(role, name, note, el("table", {},
     el("thead", {}, el("tr", {}, ...cols.map((c) => el("th", {}, c)))),
-    el("tbody", {}, ...body.map((r, i) => el("tr", hi.has(i) ? { class: "hi" } : {}, ...r.map((c) => el("td", {}, c)))))));
+    el("tbody", {}, ...(body.length ? body.map((r, i) => el("tr", hi.has(i) ? { class: "hi" } : {}, ...r.map((c) => el("td", {}, c))))
+      : [el("tr", {}, el("td", { colspan: cols.length }, "none"))]))));
 }
 
 const frame = (role, name, note, body) => el("div", { class: `how-rows ${role.toLowerCase()}` },

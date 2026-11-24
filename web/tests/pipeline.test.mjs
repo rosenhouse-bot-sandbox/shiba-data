@@ -148,6 +148,32 @@ test("every step shows a replayed cell's input and output rows", () => {
   }
 });
 
+test("a step shows the tables whose records the trace has", () => {
+  const unread = { ...replay, answers: { status: "not_recorded" } };
+  assert.deepEqual(records(stepById("read-facts"), unread).map((r) => r.name), ["page text"]);
+  assert.deepEqual(records(stepById("find-pdfs"), { ...replay, plan: { status: "none" } }).map((r) => r.name), ["URLs offered", "documents.csv"]);
+});
+
+test("Read facts lists only the reader prompts' answers", () => {
+  const [, answers] = records(stepById("read-facts"), replay);
+  assert.deepEqual(answers.rows.map((r) => r.slice(2)), [["EOC", "ambulance"], ["SB", "ambulance"]]);
+});
+
+test("Extract page text outputs the text files, named by the text's hash", () => {
+  const [, text] = records(stepById("extract-text"), replay);
+  assert.deepEqual(text.rows.map((r) => r[2]), replay.documents.documents.map((d) => `${d.text.layout.slice(0, 16)}…`));
+});
+
+test("Publish outputs only the shown citations, naming each document", () => {
+  const [first, ...rest] = replay.citations.shown;
+  const t = { ...replay, citations: { status: "traced", shown: rest, hidden: [first] } };
+  const [, presented, site] = records(stepById("publish"), t);
+  assert.equal(presented.rows.length, 5);
+  assert.deepEqual(presented.hi, [0, 1, 2, 3]);
+  assert.deepEqual(site.rows, presented.rows.slice(0, 4));
+  assert.deepEqual(new Set(site.rows.map((r) => r[2])), new Set(["EOC"]));
+});
+
 test("Check facts marks the kept facts and outputs only those", () => {
   const [stated, kept] = records(stepById("check-facts"), replay);
   assert.equal(stated.rows.length, 8);
