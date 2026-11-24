@@ -1,4 +1,4 @@
-"""Lists, as a Markdown table, each sheet cell whose value differs from the cell at a git ref.
+"""Lists, as a Markdown table, each sheet cell whose value differs from the cell that a git ref's code and facts write.
 
 Usage: python3 -I pipeline/changes.py <year> <ref>
 """
@@ -35,20 +35,23 @@ def table(rows):
         f"| {s} | {p} | {c} | {cell(b)} | {cell(a)} |\n" for s, p, c, b, a in rows)
 
 
-def at(ref, data, out):
-    """data's sheets at ref, read from a copy written under out."""
-    rel = data.relative_to(years.REPO)
-    paths = [str(rel / "generated" / name) for name in sheets.SHEETS.values()]
-    tar = subprocess.run(["git", "-C", str(years.REPO), "archive", ref, *paths], check=True, capture_output=True).stdout
+def at(ref, year, out, repo=years.REPO):
+    """The sheets that ref's present step writes from ref's facts, in a copy of ref under out."""
+    if subprocess.run(["git", "-C", str(repo), "cat-file", "-e", f"{ref}:data/{year}"], stderr=subprocess.DEVNULL).returncode:
+        return {}
+    tar = subprocess.run(["git", "-C", str(repo), "archive", ref, "pipeline", f"data/{year}"], check=True,
+                         stdout=subprocess.PIPE).stdout
     with tarfile.open(fileobj=io.BytesIO(tar)) as t:
         t.extractall(out, filter="data")
-    return sheets.read(pathlib.Path(out, rel))
+    env = {k: v for k, v in os.environ.items() if not k.startswith("SHIBA_")}
+    subprocess.run([sys.executable, "-I", f"{out}/pipeline/present.py", str(year)], check=True, env=env)
+    return sheets.read(pathlib.Path(out, "data", str(year)))
 
 
 def main(year, ref):
     data = years.data_dir(year)
     with tempfile.TemporaryDirectory() as out:
-        before = at(ref, data, out)
+        before = at(ref, year, out)
     print(table(changed(before, sheets.read(data))), end="")
 
 

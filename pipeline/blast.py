@@ -109,7 +109,7 @@ def git(*args):
 
 def restore(data):
     git("checkout", "--", str(data))
-    git("clean", "-fdq", "--", str(data))
+    git("clean", "-fdqx", "--", str(data))
 
 
 def model_steps(data, work, versions, asker, saved):
@@ -134,7 +134,7 @@ def main(year, work, candidate):
     data, work = years.data_dir(year), os.path.abspath(work)
     if candidate.partition("@")[0] != "document_facts" or "," in candidate:
         raise SystemExit("blast.py checks one document_facts candidate.")
-    if git("status", "--porcelain", "--ignored", "--", str(data)):
+    if git("status", "--porcelain", "--", str(data)):
         raise SystemExit(f"{data} has uncommitted changes.")
     saved = set(os.listdir(data / "answers"))
     versions = steps.versions(data, run.STEPS, candidate)

@@ -2,3 +2,7 @@ _site/
 _docs/
 _docs.txt
 _failures/
+# present.py writes these. Run it after a checkout.
+data/*/generated/main_chart.csv
+data/*/generated/dvha.csv
+data/*/generated/presented.csv
