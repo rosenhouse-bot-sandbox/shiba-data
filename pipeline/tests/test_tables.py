@@ -13,8 +13,10 @@ class FetchTest(unittest.TestCase):
         got = []
 
         def get(url, path):
+            """Like run.get, keeps a file that exists."""
             got.append(url)
-            pathlib.Path(path).write_bytes(served)
+            if not pathlib.Path(path).exists():
+                pathlib.Path(path).write_bytes(served)
         with tempfile.TemporaryDirectory() as tmp:
             gen = pathlib.Path(tmp, "generated")
             gen.mkdir()
@@ -45,7 +47,8 @@ class MainTest(unittest.TestCase):
         with mock.patch.object(tables, "fetch", lambda gen, work: order.append("fetch")), \
              mock.patch.object(tables.run, "cms_tables", lambda data, config, work: order.append("cms_tables")), \
              mock.patch.object(tables.present, "write", lambda data: order.append("present")):
-            tables.main(str(years.LIVE), "work")
+            with tempfile.TemporaryDirectory() as work:
+                tables.main(str(years.LIVE), work)
         self.assertEqual(order, ["fetch", "cms_tables", "present"])
 
 

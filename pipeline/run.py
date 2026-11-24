@@ -7,7 +7,7 @@ Saved answers in data/<year>/answers are reused. Without `api`, the run stops at
 with tasks that have no saved answer, and lists them. With `api`, the Claude API answers them.
 Each <step>@<version> candidate runs in place of that step's pinned version (see steps.py).
 `replay` reads nothing from the web. It needs the committed run's PDFs, texts and CMS zips in <work_dir>,
-where blobs.py names them, and keeps the committed lists of downloads.
+where blobs.py names them, and keeps the committed documents_checked.csv.
 Needs pypdfium2, poppler's pdftotext and `npm ci` here, and the anthropic package for `api`.
 """
 import csv
@@ -37,7 +37,7 @@ STEPS = {"document_facts": document_facts.VERSIONS, "present": present.VERSIONS}
 
 def get(url, path):
     if not (os.path.exists(path) and os.path.getsize(path)):
-        subprocess.run(["curl", "-sS", "-L", "--fail", "--max-time", "900", "-A", "Mozilla/5.0", "-o", path, url],
+        subprocess.run(["curl", "-sS", "-L", "--fail", "--retry", "5", "--retry-all-errors", "--max-time", "900", "-A", "Mozilla/5.0", "-o", path, url],
                        check=True)
 
 

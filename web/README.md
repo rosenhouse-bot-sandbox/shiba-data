@@ -19,6 +19,7 @@ It signs in as the `sheets-sync` service account through Workload Identity Feder
 
 ```sh
 (cd web && npm ci)
+pip install openpyxl==3.1.5
 python3 -I pipeline/tables.py 2027 _tables
 python3 -I web/build.py site _site
 npx wrangler dev --remote
