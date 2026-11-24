@@ -123,14 +123,22 @@ class MainTest(unittest.TestCase):
         self.assertEqual(order[1:], [("model_steps", 21), "outputs", "restore", ("model_steps", 23), ("copy", ["old.json"]),
                                      "outputs", "restore"])
 
-    def test_refuses_data_with_uncommitted_or_ignored_files(self):
+    def test_refuses_data_with_uncommitted_files(self):
         order, failed, _ = self.main(status=" M answers/x.json")
-        self.assertEqual([a[:3] for a in order], [("status", "--porcelain", "--ignored")])
+        self.assertEqual([a[:2] for a in order], [("status", "--porcelain")])
         self.assertIn("uncommitted changes", failed)
 
     def test_refuses_more_than_one_candidate(self):
         order, failed, _ = self.main(candidate="present@16,document_facts@23")
         self.assertEqual((order, failed), ([], "blast.py checks one document_facts candidate."))
+
+
+class RestoreTest(unittest.TestCase):
+    def test_also_removes_the_tables_git_ignores(self):
+        calls = []
+        with mock.patch.object(blast, "git", lambda *a: calls.append(a)):
+            blast.restore("d")
+        self.assertEqual(calls, [("checkout", "--", "d"), ("clean", "-fdqx", "--", "d")])
 
 
 class ModelStepsTest(unittest.TestCase):

@@ -1,8 +1,8 @@
-import contextlib, io, os, sys, tempfile, unittest
+import contextlib, io, os, pathlib, subprocess, sys, tempfile, unittest
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-import built, changes, sheets, years
+import changes, years
 
 
 def sheet(**cells):
@@ -20,7 +20,7 @@ class ChangedTest(unittest.TestCase):
 
     def test_prints_the_table_of_changes_since_a_ref(self):
         out = io.StringIO()
-        with mock.patch.object(changes, "at", lambda ref, data, tmp: sheet(Q_hearing="")), \
+        with mock.patch.object(changes, "at", lambda ref, year, tmp: sheet(Q_hearing="")), \
              mock.patch.object(changes.sheets, "read", lambda data: sheet(Q_hearing="$0")), \
              contextlib.redirect_stdout(out):
             changes.main(str(years.LIVE), "HEAD")
@@ -33,14 +33,25 @@ class ChangedTest(unittest.TestCase):
         self.assertEqual(changes.table([]), "No sheet cell changes.\n")
 
 
+FAKE_PRESENT = """import os, pathlib, sys
+assert not {"SHIBA_DATA", "SHIBA_CANDIDATE"} & set(os.environ)
+gen = pathlib.Path(__file__).parents[1] / "data" / sys.argv[1] / "generated"
+(gen / "main_chart.csv").write_text("section,plan_id,plan_name,Q_hearing\\nMA,H1036-001-0,A plan,$0\\n")
+(gen / "dvha.csv").write_text("section,plan_id,plan_name\\n")
+"""
+
+
 class AtTest(unittest.TestCase):
-    @built.check
-    def test_reads_the_sheets_at_a_ref(self):
-        data = years.data_dir(years.LIVE)
-        with tempfile.TemporaryDirectory() as out:
-            got = changes.at("HEAD", data, out)
-        self.assertEqual(set(got), set(sheets.SHEETS))
-        self.assertTrue(got["main"] and got["dvha"])
+    def test_runs_the_present_step_of_the_ref(self):
+        with tempfile.TemporaryDirectory() as repo, tempfile.TemporaryDirectory() as out, \
+                mock.patch.dict(os.environ, SHIBA_DATA="/nowhere", SHIBA_CANDIDATE="present@2"):
+            for path, text in (("pipeline/present.py", FAKE_PRESENT), ("data/2027/generated/documents.csv", "x\n")):
+                pathlib.Path(repo, path).parent.mkdir(parents=True, exist_ok=True)
+                pathlib.Path(repo, path).write_text(text)
+            for args in (["init", "-q"], ["add", "."], ["-c", "user.name=t", "-c", "user.email=t@t", "commit", "-qm", "x"]):
+                subprocess.run(["git", "-C", repo, *args], check=True)
+            got = changes.at("HEAD", 2027, out, repo)
+        self.assertEqual(got["main"], [dict(section="MA", plan_id="H1036-001-0", plan_name="A plan", Q_hearing="$0")])
 
 
 if __name__ == "__main__":

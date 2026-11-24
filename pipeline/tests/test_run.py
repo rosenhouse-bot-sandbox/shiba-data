@@ -108,22 +108,27 @@ class MainTest(unittest.TestCase):
         order = []
         with tempfile.TemporaryDirectory() as work, \
              mock.patch.multiple(run, run_tests=lambda kind, candidate: order.append((kind, candidate)),
-                                 get=lambda *a: order.append("get"), py=lambda *a: None, check_quotes=lambda *a: None,
+                                 get=lambda *a: order.append("get"), py=lambda *a: None,
+                                 check_quotes=lambda *a: order.append("check_quotes"),
                                  model_steps=lambda *a: order.append("model_steps"), asker=lambda *a: None), \
              mock.patch.object(run.subprocess, "run"), mock.patch.object(run.blobs, "record_cms"), \
-             mock.patch.object(run.blobs, "record_texts"), mock.patch.object(run, "pdfs"):
+             mock.patch.object(run.blobs, "record_texts"), mock.patch.object(run, "pdfs"), \
+             mock.patch.object(run.present, "write", lambda data, version: order.append("present")):
             run.main(str(years.LIVE), work, mode, candidate)
         return order
 
     def test_runs_the_code_tests_before_any_download_or_model_call(self):
         self.assertEqual(self.run_main("api", "present@2")[:2], [("code", "present@2"), "get"])
 
+    def test_checks_the_quotes_of_the_committed_facts_before_any_model_call(self):
+        self.assertEqual(self.run_main("api")[-5:], ["present", "check_quotes", "model_steps", "check_quotes", ("checks", "")])
+
     def test_checks_the_built_data_after_the_model_steps(self):
-        self.assertEqual(self.run_main("replay")[-2:], ["model_steps", ("checks", "")])
-        self.assertEqual(self.run_main("api")[-2:], ["model_steps", ("checks", "")])
+        self.assertEqual(self.run_main("replay")[-3:], ["model_steps", "check_quotes", ("checks", "")])
 
     def test_leaves_a_candidates_data_for_its_pin_to_check(self):
-        self.assertEqual(self.run_main("api", "present@2")[-1], "model_steps")
+        self.assertEqual(self.run_main("api", "present@2")[-2:], ["model_steps", "check_quotes"])
+
 
 if __name__ == "__main__":
     unittest.main()

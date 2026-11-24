@@ -168,9 +168,11 @@ def main(year, work, mode="", candidate=""):
     if config["year"] == appendix_b.YEAR:
         py("tests/make_fixture.py", f"{work}/pbp")
 
-    check_quotes(data, f"{work}/texts")
     if config["year"] == years.LIVE:
         versions = steps.versions(data, STEPS, candidate)
+        # The new texts must highlight the quotes the committed facts give, before any model call.
+        present.write(data, versions["present"])
+        check_quotes(data, f"{work}/texts")
         answer = Answers(data, asker(mode, data, work, versions, candidate), work)
         model_steps(data, f"{work}/texts", work, answer, versions)
         check_quotes(data, f"{work}/texts")
