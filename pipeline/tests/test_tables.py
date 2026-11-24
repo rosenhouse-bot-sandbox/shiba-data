@@ -64,15 +64,15 @@ class MainTest(unittest.TestCase):
 
         def model_steps(data, texts, work, answer, versions):
             print("progress")
-            order.append(("model_steps", texts == f"{work}/texts", answer.asker, versions))
+            order.append(("model_steps", os.path.isabs(work), texts == f"{work}/texts", answer.asker, versions))
         out = io.StringIO()
         with mock.patch.object(tables, "fetch", lambda gen, work: order.append("fetch")), \
              mock.patch.object(tables.run, "cms_tables", lambda data, config, work: order.append("cms_tables")), \
              mock.patch.object(tables.run, "model_steps", model_steps), contextlib.redirect_stdout(out):
-            with tempfile.TemporaryDirectory() as work:
-                tables.main(str(years.LIVE), work)
+            with tempfile.TemporaryDirectory() as tmp, contextlib.chdir(tmp):
+                tables.main(str(years.LIVE), "work")
         pinned = tables.steps.versions(years.data_dir(), tables.run.STEPS)
-        self.assertEqual(order, ["fetch", "cms_tables", ("model_steps", True, None, pinned)])
+        self.assertEqual(order, ["fetch", "cms_tables", ("model_steps", True, True, None, pinned)])
         self.assertEqual(out.getvalue(), "")
 
     def test_prints_the_model_steps_output_when_they_stop(self):

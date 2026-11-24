@@ -63,6 +63,7 @@ jobs:
       # A document_facts candidate must change only its targets' plans. This check calls no API.
       - if: contains(env.CANDIDATE, 'document_facts@')
         run: python3 -I pipeline/tables.py "$YEAR" "$RUNNER_TEMP/tables"
+        timeout-minutes: 15
       - id: blast
         if: contains(env.CANDIDATE, 'document_facts@')
         run: python3 -I pipeline/blast.py "$YEAR" _work "$CANDIDATE"
@@ -70,14 +71,17 @@ jobs:
       # A stopped check can leave its stand-in outputs in data/<year>, which the later steps would commit.
       - if: always() && steps.blast.outcome != 'success' && steps.blast.outcome != 'skipped'
         run: git checkout -- "data/$YEAR" && git clean -fdqx -- "data/$YEAR"
-      # run.py checks that the new texts still highlight the quotes of the facts main's inputs give.
+      # run.py checks that the new texts still highlight the quotes of the pinned facts. A check above can leave the
+      # candidate's facts, so this writes the pinned ones again.
       - run: python3 -I pipeline/tables.py "$YEAR" "$RUNNER_TEMP/tables"
+        timeout-minutes: 15
       # GitHub stops a job after 360 minutes, so these leave time to commit.
       # A rerun after a timeout reuses the results of the batches this run sent.
       - run: python3 -I pipeline/run.py "$YEAR" _work api "$CANDIDATE"
         timeout-minutes: 290
       # A pin PR copies this table of changed cells from the run's summary.
-      - run: python3 -I pipeline/changes.py "$YEAR" HEAD >> "$GITHUB_STEP_SUMMARY"
+      - run: python3 -I pipeline/changes.py "$YEAR" HEAD "$RUNNER_TEMP/tables" >> "$GITHUB_STEP_SUMMARY"
+        timeout-minutes: 15
         continue-on-error: true
       # Upload before committing any data that names these blobs. Keys are content hashes, so a re-upload changes nothing.
       - id: upload

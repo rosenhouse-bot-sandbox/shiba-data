@@ -105,7 +105,7 @@ class RunTestsTest(unittest.TestCase):
 
 class MainTest(unittest.TestCase):
     def run_main(self, mode, candidate="", facts=True):
-        """The order of run.main's steps, in a year whose data has steps.json, and earlier facts if facts."""
+        """Lists the order of run.main's steps. The year's data has steps.json, and has earlier facts if facts is true."""
         order = []
         with tempfile.TemporaryDirectory() as work, tempfile.TemporaryDirectory() as root, \
              mock.patch.multiple(run, run_tests=lambda kind, candidate: order.append((kind, candidate)),
@@ -128,7 +128,7 @@ class MainTest(unittest.TestCase):
     def test_runs_the_code_tests_before_any_download_or_model_call(self):
         self.assertEqual(self.run_main("api", "present@2")[:2], [("code", "present@2"), "get"])
 
-    def test_checks_the_quotes_of_the_committed_facts_before_any_model_call(self):
+    def test_checks_the_quotes_of_the_earlier_facts_before_any_model_call(self):
         self.assertEqual(self.run_main("api")[-5:], ["present", "check_quotes", "model_steps", "check_quotes", ("checks", "")])
 
     def test_without_earlier_facts_checks_only_the_new_quotes(self):

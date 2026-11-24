@@ -1,4 +1,4 @@
-import json, os, pathlib, sys, tempfile, threading, unittest
+import json, os, pathlib, sys, tempfile, threading, time, unittest
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -37,11 +37,29 @@ class HighlightsTest(unittest.TestCase):
             work = items(tmp)
             for quote in ("Lab $0", "Specialist $40", "Lab  $0", "Lab $0"):
                 eoc.highlights(work, [dict(doc="d", page="2", quote=quote)])
+            eoc.highlights(work, [dict(doc="d", page=2, quote="Lab $0 copay")] * 2)
             other = threading.Thread(target=eoc.highlights, args=(work, [dict(doc="d", page=2, quote="Dental $5")]))
             other.start()
             other.join()
         self.assertEqual(started, [f"{work}/items"])
-        self.assertEqual(checked, ["Lab $0", "Specialist $40", "Dental $5"])
+        self.assertEqual(checked, ["Lab $0", "Specialist $40", "Lab $0 copay", "Dental $5"])
+
+    def test_threads_get_their_own_answers(self):
+        quotes = ["Lab $0 copay"[:n] for n in range(4, 13)] + [f"Dental ${n}" for n in range(9)]
+        with tempfile.TemporaryDirectory() as tmp:
+            work = items(tmp)
+            start, got = threading.Barrier(len(quotes)), {}
+
+            def check(quote):
+                start.wait()
+                got[quote] = eoc.highlights(work, [dict(doc="d", page=2, quote=quote)])
+            threads = [threading.Thread(target=check, args=(q,), daemon=True) for q in quotes]
+            for t in threads:
+                t.start()
+            deadline = time.monotonic() + 10
+            for t in threads:
+                t.join(deadline - time.monotonic())
+        self.assertEqual(got, {q: [q.startswith("Lab")] for q in quotes})
 
     def test_checks_a_quote_again_in_another_items_dir(self):
         with tempfile.TemporaryDirectory() as one, tempfile.TemporaryDirectory() as two:

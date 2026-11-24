@@ -68,7 +68,7 @@ def highlights(work, cites, result="ok"):
 
 @functools.cache
 def flow(path):
-    """Normalizes each page's text in reading order. A run checks quotes in the same document many times."""
+    """Normalizes each page's text in reading order."""
     return {p: norm(t) for p, t in load_pages(path).items()}
 
 

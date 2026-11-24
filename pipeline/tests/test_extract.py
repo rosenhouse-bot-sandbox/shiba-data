@@ -39,6 +39,10 @@ class PagesTest(unittest.TestCase):
                 extract.relevant(dict(pages), "imaging")
             self.assertEqual((search.call_count, once > 0), (once, True))
 
+    def test_each_group_finds_its_own_pages(self):
+        pages = {1: "Hearing aids $0", 2: "Outpatient X-rays"}
+        self.assertEqual([sorted(extract.relevant(pages, g)) for g in ("hearing", "imaging")], [[1], [2]])
+
     def test_a_version_can_find_more_pages(self):
         pages = PAGES | {63: "Tier 6 Select Care Drugs"}
         self.assertEqual(sorted(extract.relevant(pages, "imaging", find=(r"tier 6",))), [61, 62, 63])
