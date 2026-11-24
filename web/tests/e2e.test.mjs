@@ -141,7 +141,7 @@ test("every link is a permalink that opens what clicking it shows", async () => 
   await clicking.locator("td.cited").first().click();
   await clicking.waitForSelector("#page-area[data-shown]");
   assert.equal(await clicking.locator('a[href="#"], a:not([href])').count(), 0);
-  const link = clicking.locator("#source-note p.cite a").last();
+  const link = clicking.locator("#source-note p.comment-source a");
   const href = await link.getAttribute("href");
   const [, plan, kind, n] = href.match(/^#\/2027\/notes\/\w+\/([^/]+)\/\w+\/(\w+)\/(\d+)$/);
   const target = `#page-area[data-shown="${docOf(plan, kind)} ${n}"]`;
@@ -391,6 +391,20 @@ test("every quote a cell cites on the shown page is highlighted", async () => {
   const squash = (t) => t.replace(/\s+/g, "").toLowerCase();
   const marked = squash((await page.locator(".textLayer mark").allTextContents()).join(""));
   for (const c of cites) assert.ok(marked.includes(squash(c.quote)), `${c.quote} in ${marked}`);
+});
+
+test("a note in Notes shows only the note's own source and quote", async () => {
+  const { plan_id, col, cell } = allCells("main").find(({ cell }) =>
+    cell.comment && cell.cites.some((c) => c.doc === cell.comment.doc && c.page === cell.comment.page && c.quote !== cell.comment.quote));
+  await page.goto(`${base}#/notes`);
+  await page.locator(`table.notes td[data-plan="${plan_id}"][data-col="${col}"]`).click();
+  await shown(cell.comment.doc, cell.comment.page);
+  assert.equal(await page.locator("#source-note p.cite").count(), 0);
+  assert.equal(await page.locator("#source-note p.comment-source").count(), 1);
+  assert.equal(await page.locator("#source-note a", { hasText: "Show this cell's citations in Main chart" }).getAttribute("href"),
+    `#/2027/main/${plan_id}/${col.replace(/^[A-Z]+_/, "")}`);
+  const squash = (t) => t.replace(/\s+/g, "").toLowerCase();
+  assert.equal(squash((await page.locator(".textLayer mark").allTextContents()).join("")), squash(cell.comment.quote));
 });
 
 test("browser zoom enlarges the document pages", async () => {

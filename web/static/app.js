@@ -217,7 +217,7 @@ function defaultDoc() {
   if (selection) {
     const { plan, sheet, col } = selection.dataset;
     const cell = site[sheet].rows.find((r) => r.plan_id === plan).cells[col];
-    const first = cell.cites[0] || cell.comment;
+    const first = shownCites(here.view, cell)[0] || cell.comment;
     return first ? { doc: first.doc, page: first.page } : { doc: planSb(plans[plan]), page: 1 };
   }
   return here.view === "plan" ? { doc: planSb(plans[here.plan]), page: 1 } : null;
@@ -339,9 +339,13 @@ const commentSource = (href, cell, note) => {
     `: “${quote}”`);
 };
 
-// Opens the cell's first citation, or else its comment's source, or else the plan's SB.
+// Notes shows only a cell's comment source, since the cell's citations may be about other benefits.
+const shownCites = (view, cell) => (view === "notes" ? [] : cell.cites);
+
+// Opens the cell's first shown citation, or else its comment's source, or else the plan's SB.
 // at ({ kind, page }) opens that page of the plan's document of that kind instead.
 function openCell(view, sheet, plan, column, cell, at = null) {
+  cell = { ...cell, cites: shownCites(view, cell) };
   const header = cellHeader(view, sheet, plan, column, cell);
   const href = (at) => cellHref(view, sheet, plan, column, at);
   let note;
@@ -350,7 +354,10 @@ function openCell(view, sheet, plan, column, cell, at = null) {
     note.append(medicareGov(plan, column));
   } else if (cell.comment) {
     note = el("div", {}, header);
-    note.append(commentSource(href, cell, note), ...cmsFields(cell), medicareGov(plan, column));
+    note.append(commentSource(href, cell, note));
+    if (view === "notes") note.append(el("p", {}, el("a", { href: cellHref(sheet, sheet, plan, column) },
+      `Show this cell's citations in ${SHEET_NAMES[sheet]}`)));
+    note.append(...cmsFields(cell), medicareGov(plan, column));
   } else {
     note = el("div", {}, header, el("p", {},
       cell.value ? `This value comes from CMS ${site.year} plan data, which has no page to point to. `
