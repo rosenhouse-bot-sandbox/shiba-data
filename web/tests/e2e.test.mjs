@@ -871,7 +871,7 @@ test("pipeline view: a step on the map opens in the lens, and Back returns", asy
   await page.click(".how-pill:text-is('Column rules')");
   await page.waitForFunction(() => document.querySelector(".how-step")?.textContent === "Column rules");
   assert.equal(await page.locator(".how-node.on").count(), 2);
-  assert.equal(await page.locator(".how-rows.input .hi").count(), 4);
+  assert.equal(await page.locator(".how-rows.input .hi").count(), 5);
   assert.equal(await page.evaluate(() => document.activeElement.className), "how-step");
   await page.goBack();
   await page.waitForFunction(() => document.querySelector(".how-step")?.textContent === "Check facts");
@@ -883,6 +883,15 @@ test("pipeline view: a step with two inputs lights both and joins them at its on
   assert.equal(await page.locator(".how-edge.on").count(), 3);
   assert.equal(await page.locator(".how-pill.on").count(), 1);
   assert.equal(await page.locator(".how-pill").count(), 9);
+  assert.equal(await page.locator(".how-edge[marker-end]").count(), 9);
+});
+
+test("pipeline view: every step shows the cell's input and output rows", async () => {
+  for (const step of ["list-plans", "find-pdfs", "download", "extract-text", "column-rules", "sheet", "publish"]) {
+    await openHow(page, `main/H1036-153-0/ambulance/${step}`);
+    assert.ok(await page.locator(".how-rows.input tbody tr").count(), `${step} input`);
+    assert.ok(await page.locator(".how-rows.output tbody tr").count(), `${step} output`);
+  }
 });
 
 test("pipeline view: Find PDFs shows every URL offered to the plan and marks the winners", async () => {

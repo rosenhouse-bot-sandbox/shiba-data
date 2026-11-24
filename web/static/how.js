@@ -72,6 +72,7 @@ function lens(step, link, terms, example, trace, sheet) {
   const end = (id) => el("div", { class: `how-end${NODES[id].source ? " source" : ""}` },
     el("small", {}, NODES[id].kind), el("code", {}, example ? shown(id).name : label(id, sheet)));
   const fromTo = example ? [example.before, example.after] : strip(step, trace);
+  const live = records(step, trace);
   const para = (p) => el("p", {}, ...p.map((s) => typeof s === "string" ? s : term(terms[s[0]], s[1])));
   return el("section", { class: "how-lens" },
     chips(before(step), "before", (l) => `↖ after: ${l}`),
@@ -80,9 +81,8 @@ function lens(step, link, terms, example, trace, sheet) {
     el("div", { class: "how-card" },
       fromTo ? el("p", { class: "how-strip" }, el("code", { class: "from" }, fromTo[0]), " becomes ", el("code", { class: "to" }, fromTo[1])) : null,
       ...step.paras.map(para), ...(example?.paras ?? []).map(para), workList(details(step, trace))),
-    ...records(step, trace).map((r) => table("Input", r.name, r.note, r.cols, r.rows, r.hi)),
-    example ? rows("Input", step.from, example.highlight[0]) : null,
-    example ? rows("Output", step.to, example.highlight[1]) : null,
+    ...(live.length ? live.map((r) => table(r.role, r.name, r.note, r.cols, r.rows, r.hi))
+      : example ? [rows("Input", step.from, example.highlight[0]), rows("Output", step.to, example.highlight[1])] : []),
     traceRecord(step, trace),
     chips(after(step), "after", (l) => `next: ${l} ↘`));
 }

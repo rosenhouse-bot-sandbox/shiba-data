@@ -49,6 +49,17 @@ test("a step's inputs join at its one label, which points to its output", () => 
     assert.equal(ins.length, inputs(s).length, s.id);
     for (const e of ins) assert.deepEqual(e.at(1), top, s.id);
     assert.deepEqual(out.at(0), bottom, s.id);
+    const to = nodeBox(s.to);
+    assert.deepEqual(out.at(1), [to.x + to.w / 2, to.y], s.id);
+    assert.ok(p.y > Math.max(...inputs(s).map((id) => nodeBox(id).y + nodeBox(id).h)), `${s.id} label sits below its inputs`);
+  }
+});
+
+test("each step draws one arrow, into its output", () => {
+  for (const s of STEPS) {
+    const arrows = paths(s).filter((e) => e.arrow), to = nodeBox(s.to);
+    assert.equal(arrows.length, 1, s.id);
+    assert.deepEqual(arrows[0].at(1), [to.x + to.w / 2, to.y], s.id);
   }
 });
 
@@ -127,6 +138,28 @@ test("a replayed trace writes the fact steps' strips", () => {
   assert.deepEqual(strip(stepById("read-facts"), replay), ["SB and EOC page text", "4 saved answers from claude-opus-5-5"]);
   assert.deepEqual(strip(stepById("check-facts"), replay), ["8 facts", "7 kept, 1 rejected"]);
   assert.deepEqual(strip(stepById("column-rules"), replay), ["5 facts used, 2 set aside", "line 1 $325 or 20%; line 2 $325"]);
+});
+
+test("every step shows a replayed cell's input and output rows", () => {
+  for (const s of STEPS) {
+    const tables = records(s, replay);
+    for (const role of ["Input", "Output"]) assert.ok(tables.some((r) => r.role === role && r.rows.length), `${s.id} ${role}`);
+    for (const r of tables) for (const row of r.rows) assert.equal(row.length, r.cols.length, `${s.id} ${r.name}`);
+  }
+});
+
+test("Check facts marks the kept facts and outputs only those", () => {
+  const [stated, kept] = records(stepById("check-facts"), replay);
+  assert.equal(stated.rows.length, 8);
+  assert.equal(stated.hi.length, 7);
+  assert.deepEqual(kept.rows.map((r) => r.slice(2)), stated.hi.map((i) => stated.rows[i].slice(2)));
+});
+
+test("Column rules marks the facts its lines used", () => {
+  const [facts, cited] = records(stepById("column-rules"), replay);
+  assert.equal(facts.rows.length, 7);
+  assert.deepEqual(facts.hi, [0, 1, 2, 3, 4]);
+  assert.equal(cited.rows.length, 5);
 });
 
 test("a held cell's rule strip says why", () => {

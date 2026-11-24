@@ -110,7 +110,7 @@ export const STEPS = [
     example: { highlight: [[0], [1, 4, 5]], before: "$325 or 20% | $325, 5 quotes", after: "cell + EOC page 46 highlight", paras: [] } },
 ];
 
-// also names a step's other inputs.
+// A step's inputs: from, then also.
 export const inputs = (step) => [step.from, ...(step.also ?? [])];
 
 export const NODE_W = 128;
@@ -258,14 +258,74 @@ const DETAILS = {
   ],
 };
 
-// Tables of the cell's own input rows, read from its trace. hi lists the rows the step kept.
+// The cell's own input and output rows for each step, read from its trace. hi lists the rows the step kept or used.
+const traced = (r) => r?.status === "traced";
+const input = (name, note, cols, rows, hi = []) => ({ role: "Input", name, note, cols, rows, hi });
+const output = (name, note, cols, rows) => ({ role: "Output", name, note, cols, rows, hi: [] });
+const short = (sha) => sha ? `${sha.slice(0, 16)}…` : "";
+const FACT_COLS = ["source", "page", "benefit", "setting", "network", "condition", "amount"];
+const factRow = (kind, page, f) => [kind ?? "", String(page ?? ""), f.benefit, f.setting, f.network, f.condition ?? "", f.amount];
+const planRow = (t) => input("plans.csv", "the plan's row, selected columns", ["plan_id", "plan_name", "organization"],
+  [[t.plan.row.plan_id, t.plan.row.plan_name, t.plan.row.organization]]);
+const documentsCsv = (t, make) => make("documents.csv", "the plan's rows", ["kind", "url", "found_via"],
+  t.documents.documents.map((d) => [d.kind, d.url, d.found_via]));
+const checkedCsv = (t, make) => make("documents_checked", "the plan's rows, selected columns", ["kind", "sha256", "pages", "cover_problems"],
+  t.documents.documents.map((d) => [d.kind, short(d.sha256), String(d.pages ?? ""), d.cover_problems]));
+const pageText = (t, make) => make("page text", "one file per PDF, named by hash", ["kind", "pages", "layout text"],
+  t.documents.documents.map((d) => [d.kind, String(d.pages ?? ""), short(d.text?.layout)]));
+const statedKind = (t, row) => {
+  const prompt = row.stated_by[0]?.prompt;
+  const task = t.answers.rows?.flatMap((a) => a.prompts).find((p) => p.prompt === prompt)?.task;
+  return row.fact?.source ?? (task && docKindOf(t, task));
+};
+const used = (t) => t.rule.lines.flatMap((l) => l.facts);
+const sheetRow = (t, make) => make(SHEET_FILES[t.cell.sheet], "the cell", ["plan_id", "column", "value"],
+  [[t.cell.plan_id, t.cell.col, shownValue(t.sheet.value)]]);
+const citationRows = (rows) => rows.map((c) => [String(c.line ?? ""), shownValue(c.value ?? ""), String(c.pdf_page), c.quote]);
+
 const RECORDS = {
+  "list-plans": (t) => [
+    ...(traced(t.plan.landscape_row) ? [input("Landscape.csv", "the fields plans.csv reads", ["field", "value"],
+      t.plan.landscape_row.fields.map((f) => [f.field, f.value]))] : []),
+    output("plans.csv", "the plan's row, selected columns", ["plan_id", "plan_name", "plan_type", "organization", "premium", "moop_in_network"],
+      [["plan_id", "plan_name", "plan_type", "organization", "premium", "moop_in_network"].map((k) => t.plan.row[k])]),
+  ],
   "find-pdfs": (t) => [
-    { name: "plans.csv", note: "the plan's row, selected columns", cols: ["plan_id", "plan_name", "organization"],
-      rows: [[t.plan.row.plan_id, t.plan.row.plan_name, t.plan.row.organization]], hi: [0] },
-    { name: "URLs offered", note: "in the order tried; highlighted rows won", cols: ["source", "kind", "url", "found_via"],
-      rows: t.documents.candidates.map((c) => [c.source, c.kind, c.url, c.found_via]),
-      hi: t.documents.candidates.flatMap((c, i) => c.used ? [i] : []) },
+    planRow(t),
+    input("URLs offered", "in the order tried; highlighted rows won", ["source", "kind", "url", "found_via"],
+      t.documents.candidates.map((c) => [c.source, c.kind, c.url, c.found_via]),
+      t.documents.candidates.flatMap((c, i) => c.used ? [i] : [])),
+    documentsCsv(t, output),
+  ],
+  "download": (t) => [documentsCsv(t, input), checkedCsv(t, output)],
+  "extract-text": (t) => [checkedCsv(t, input), pageText(t, output)],
+  "read-facts": (t) => [pageText(t, input),
+    output("answers/*.json", "one saved answer per prompt", ["answer", "model", "prompt"],
+      t.answers.rows.flatMap((a) => a.prompts.filter((p) => READING.includes(p.dir.split("/").at(-1)))
+        .map((p) => [a.key, a.model, `${docKindOf(t, p.task) ?? ""} ${p.dir.split("/").slice(-2, -1)}`.trim()])))],
+  "check-facts": (t) => [
+    input("facts in the answers", "highlighted facts were kept", FACT_COLS,
+      t.fact_checks.rows.map((r) => factRow(statedKind(t, r), r.stated_by[0]?.stated?.page, r.stated_by[0]?.stated ?? {})),
+      t.fact_checks.rows.flatMap((r, i) => r.kept ? [i] : [])),
+    output("document_facts", "the kept facts", FACT_COLS,
+      t.fact_checks.rows.filter((r) => r.kept).map((r) => factRow(r.fact?.source, r.fact?.page, r.stated_by[0]?.stated ?? {}))),
+  ],
+  "column-rules": (t) => [
+    input("document_facts", "the facts the rule considered; highlighted facts were used", FACT_COLS,
+      [...used(t), ...t.rule.set_aside].map((f) => factRow(f.source, f.page, f)), used(t).map((_, i) => i)),
+    output("presented.csv", "the cell's citations", ["line", "value", "pdf_page", "quote"],
+      citationRows([...t.citations.shown, ...t.citations.hidden])),
+  ],
+  "sheet": (t) => [
+    ...(traced(t.rule) ? [input("column rule", "the value of each line", ["line", "value"],
+      t.rule.lines.map((l) => [String(l.line), shownValue(l.value)]))] : []),
+    sheetRow(t, output),
+  ],
+  "publish": (t) => [
+    sheetRow(t, input),
+    input("presented.csv", "the cell's citations; highlighted ones are shown", ["line", "value", "pdf_page", "quote"],
+      citationRows([...t.citations.shown, ...t.citations.hidden]), t.citations.shown.map((_, i) => i)),
+    output("pdxplans.org", "the cell and the quotes it shows", ["line", "value", "pdf_page", "quote"], citationRows(t.citations.shown)),
   ],
 };
 
