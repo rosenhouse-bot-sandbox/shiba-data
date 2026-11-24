@@ -158,24 +158,45 @@ class TraceTest(unittest.TestCase):
         self.assertEqual(self.cell(*AMBULANCE)["sheet"]["code"]["url"],
                          f"{trace.REPO_URL}/blob/{SHA}/pipeline/present.py")
 
-    def test_exports_each_cells_records_once_by_content_without_the_commit(self):
+    def export(self):
+        """(manifest, {file name: text}) that export writes."""
         with tempfile.TemporaryDirectory() as out:
             trace.export(self.db, out)
             with open(os.path.join(out, f"{SHA}.json")) as f:
                 manifest = json.load(f)
             texts = {}
-            for name in os.listdir(os.path.join(out, "cells")):
-                with open(os.path.join(out, "cells", name), encoding="utf-8") as f:
+            for name in os.listdir(os.path.join(out, "items")):
+                with open(os.path.join(out, "items", name), encoding="utf-8") as f:
                     texts[name] = f.read()
-        every = self.db.execute("SELECT count(*) FROM sheet_cell").fetchone()[0]
-        self.assertEqual((manifest["sha"], manifest["year"], len(manifest["cells"])), (SHA, years.LIVE, every))
-        self.assertEqual(set(texts), {f"{h}.json" for h in manifest["cells"].values()})
+        return manifest, texts
+
+    def test_exports_each_item_once_by_content_without_the_commit(self):
+        manifest, texts = self.export()
+        self.assertEqual((manifest["sha"], manifest["year"]), (SHA, years.LIVE))
+        self.assertEqual(set(texts), {f"{h}.json" for h in manifest["items"].values()})
         for name, text in texts.items():
             self.assertEqual(name, hashlib.sha256(text.encode()).hexdigest() + ".json")
             self.assertNotIn(SHA, text)
+
+    def test_exports_each_cells_records(self):
+        manifest, texts = self.export()
+        every = self.db.execute("SELECT count(*) FROM sheet_cell").fetchone()[0]
+        self.assertEqual(sum(not k.startswith("tables/") for k in manifest["items"]), every)
         for key in (AMBULANCE, ("dvha", "H1036-153-0", "F_dental")):
-            text = texts[manifest["cells"]["/".join(key)] + ".json"]
+            text = texts[manifest["items"]["/".join(key)] + ".json"]
             self.assertEqual(json.loads(text.replace(trace.COMMIT, SHA)), self.cell(*key))
+
+    def test_exports_each_tables_rows_by_plan_in_file_order(self):
+        manifest, texts = self.export()
+        for path in trace.TABLES:
+            name = os.path.basename(path).removesuffix(".csv")
+            with open(years.data_dir() / path, newline="", encoding="utf-8") as f:
+                rows = list(csv.DictReader(f))
+            plans = list(dict.fromkeys(r["plan_id"] for r in rows))
+            got = {k.split("/")[2]: json.loads(texts[h + ".json"]) for k, h in manifest["items"].items()
+                   if k.startswith(f"tables/{name}/")}
+            self.assertEqual(list(got), plans, name)
+            self.assertEqual([r for p in plans for r in got[p]], [r for p in plans for r in rows if r["plan_id"] == p])
 
     def test_rejects_an_unknown_cell(self):
         with self.assertRaises(LookupError):

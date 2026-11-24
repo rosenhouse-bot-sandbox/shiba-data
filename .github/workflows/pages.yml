@@ -139,8 +139,8 @@ jobs:
 
   # R2 keeps each prompt the replay sent, so a trace can show it. Keys are content hashes, so sync adds only new ones.
   # R2 also keeps the latest main build's trace as trace/<year>.sqlite.
-  # Each cell's trace goes to trace/<year>/cells/ by content hash, so sync uploads only cells that changed.
-  # The Worker then loads into D1 the cells it lacks, a few per request, and adds the build.
+  # Each cell's trace and each plan's rows of a table go to trace/<year>/items/ by content hash, so sync uploads only items that changed.
+  # The Worker then loads into D1 the items it lacks, a few per request, and adds the build.
   trace:
     if: github.ref == 'refs/heads/main'
     needs: [build, reproduce, deploy]
@@ -173,7 +173,7 @@ jobs:
           echo "::add-mask::$LOAD_TOKEN"
           for manifest in trace/*/*.json; do
             year=$(basename "$(dirname "$manifest")")
-            aws s3 sync "trace/$year/cells" "s3://pdxplans/trace/$year/cells/" --size-only --only-show-errors
+            aws s3 sync "trace/$year/items" "s3://pdxplans/trace/$year/items/" --size-only --only-show-errors
             aws s3 cp "$manifest" "s3://pdxplans/$manifest" --only-show-errors
             url="https://pdxplans.org/trace/$year/load/$(jq -er .sha "$manifest")"
             for _ in $(seq 200); do

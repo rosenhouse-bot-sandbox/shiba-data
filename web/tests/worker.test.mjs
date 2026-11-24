@@ -1,4 +1,4 @@
-import { test } from "node:test";
+import { mock, test } from "node:test";
 import assert from "node:assert/strict";
 import { DatabaseSync } from "node:sqlite";
 import worker from "../worker.js";
@@ -154,9 +154,9 @@ const cellKey = (n) => `${n % 2 ? "dvha" : "main"}/${PLANS[n]}/AB_ambulance`;
 function upload(e, sha, changed = []) {
   const cells = Object.fromEntries(PLANS.map((_, n) => [cellKey(n), hash(n, changed.includes(n) ? 2 : 1)]));
   for (const [n, v] of PLANS.map((_, n) => [n, changed.includes(n) ? 2 : 1])) {
-    e.BLOBS.objects[`trace/2027/cells/${hash(n, v)}.json`] = JSON.stringify({ n, v, code: "blob/${commit}/", sha: "${commit}" });
+    e.BLOBS.objects[`trace/2027/items/${hash(n, v)}.json`] = JSON.stringify({ n, v, code: "blob/${commit}/", sha: "${commit}" });
   }
-  e.BLOBS.objects[`trace/2027/${sha}.json`] = JSON.stringify({ sha, year: 2027, cells });
+  e.BLOBS.objects[`trace/2027/${sha}.json`] = JSON.stringify({ sha, year: 2027, items: cells });
 }
 const traceEnv = (commit) => ({ ...env, BLOBS: bucket({}), TRACE: d1(), COMMIT: commit, LOAD_TOKEN: TOKEN });
 const post = (e, sha, token = TOKEN) => worker.fetch(new Request(`https://pdxplans.org/trace/2027/load/${sha}`, {
@@ -171,16 +171,16 @@ async function load(e, sha) {
   }
 }
 const served = (n, v, sha) => JSON.stringify({ n, v, code: `blob/${sha}/`, sha });
-const stored = (e) => e.TRACE.db.prepare("SELECT count(*) AS n FROM cell_json").get().n;
+const stored = (e) => e.TRACE.db.prepare("SELECT count(*) AS n FROM item").get().n;
 
 test("serves a cell's trace from D1, with the deployed commit, once its build has every cell", async () => {
   const e = traceEnv(OLD);
   upload(e, OLD);
   const first = await post(e, OLD);
   assert.equal(first.status, 409);
-  assert.equal(await first.text(), "2 cells left to load");
+  assert.equal(await first.text(), "2 items left to load");
   assert.equal(await (await at(e, cellAt(0))).text(), `asset ${cellAt(0)}.json`);
-  assert.equal(await (await post(e, OLD)).text(), "Loaded every cell");
+  assert.equal(await (await post(e, OLD)).text(), "Loaded every item");
   const response = await at(e, cellAt(11));
   assert.equal(await response.text(), served(11, 1, OLD));
   assert.equal(await (await at(e, cellAt(10))).text(), served(10, 1, OLD));
@@ -210,13 +210,13 @@ test("a build writes only the cells that changed", async () => {
   const { response, loads } = await load({ ...e, COMMIT: NEW }, NEW);
   assert.equal(response.status, 200);
   assert.equal(loads, 1);
-  assert.equal(e.TRACE.written, 4);
-  assert.equal(stored(e), 12);
+  assert.equal(e.TRACE.written, 2);
+  assert.equal(stored(e), 13);
   assert.equal(await (await at({ ...e, COMMIT: NEW }, cellAt(3))).text(), served(3, 2, NEW));
   e.TRACE.written = 0;
   upload(e, THIRD, [3]);
   assert.equal((await load({ ...e, COMMIT: THIRD }, THIRD)).loads, 1);
-  assert.equal(e.TRACE.written, 2);
+  assert.equal(e.TRACE.written, 1);
 });
 
 test("a build loaded again with other cells replaces them", async () => {
@@ -226,7 +226,7 @@ test("a build loaded again with other cells replaces them", async () => {
   upload(e, OLD, [3]);
   assert.equal((await load(e, OLD)).response.status, 200);
   assert.equal(await (await at(e, cellAt(3))).text(), served(3, 2, OLD));
-  assert.ok(`trace/2027/cells/${hash(3, 2)}.json` in e.BLOBS.objects);
+  assert.ok(`trace/2027/items/${hash(3, 2)}.json` in e.BLOBS.objects);
 });
 
 test("a build loaded again whose new cell went missing keeps its earlier cells", async () => {
@@ -235,29 +235,77 @@ test("a build loaded again whose new cell went missing keeps its earlier cells",
   await load(e, OLD);
   upload(e, OLD, [3]);
   e.TRACE.beforeBatch = (statements) => {
-    if (statements[0].sql.startsWith("INSERT INTO build")) e.TRACE.db.exec(`DELETE FROM cell_json WHERE hash = '${hash(3, 2)}'`);
+    if (statements[0].sql.startsWith("INSERT INTO data_build")) e.TRACE.db.exec(`DELETE FROM item WHERE hash = '${hash(3, 2)}'`);
   };
   assert.equal((await post(e, OLD)).status, 409);
   assert.equal(await (await at(e, cellAt(3))).text(), served(3, 1, OLD));
 });
 
-test("a build drops other builds and the cells only they used, but keeps the deployed commit's", async () => {
-  const e = traceEnv(OLD);
+const DAY = 24 * 60 * 60 * 1000;
+const sha = (n) => n.toString(16).padStart(40, "0");
+const builds = (e) => e.TRACE.db.prepare("SELECT sha FROM data_build ORDER BY loaded").all().map((b) => b.sha);
+const own = (n) => String(n).padStart(64, "e");
+// Loads builds 1, 2 and so on, each on the day given, and each with its own item for cell 0.
+async function loadEach(e, days) {
+  for (const [i, day] of days.entries()) {
+    upload(e, sha(i + 1));
+    const manifest = JSON.parse(e.BLOBS.objects[`trace/2027/${sha(i + 1)}.json`]);
+    manifest.items[cellKey(0)] = own(i + 1);
+    e.BLOBS.objects[`trace/2027/${sha(i + 1)}.json`] = JSON.stringify(manifest);
+    e.BLOBS.objects[`trace/2027/items/${own(i + 1)}.json`] = "{}";
+    mock.method(Date, "now", () => day * DAY);
+    assert.equal((await load(e, sha(i + 1))).response.status, 200);
+    mock.restoreAll();
+  }
+}
+
+test("a load keeps the last 10 builds, however old", async () => {
+  const e = traceEnv(undefined);
+  await loadEach(e, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20]);
+  assert.deepEqual(builds(e), [3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(sha));
+});
+
+test("a load keeps every build of the last 5 days, however many", async () => {
+  const e = traceEnv(undefined);
+  await loadEach(e, [0, ...Array(11).fill(10), 15]);
+  assert.deepEqual(builds(e), [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map(sha));
+});
+
+test("a load keeps the deployed commit's build, however old", async () => {
+  const e = traceEnv(sha(1));
+  await loadEach(e, [0, ...Array(10).fill(10)]);
+  assert.deepEqual(builds(e), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(sha));
+});
+
+test("a load drops the items only dropped builds used, from D1 and R2", async () => {
+  const e = traceEnv(undefined);
+  e.BLOBS.objects[`trace/2027/cells/${hash(0, 1)}.json`] = "{}";
+  await loadEach(e, [0, ...Array(10).fill(10)]);
+  assert.equal(stored(e), 11 + 10);
+  const kept = Object.keys(e.BLOBS.objects);
+  assert.deepEqual(kept.filter((k) => k.includes(sha(1)) || k.includes(own(1)) || k.includes("/cells/")), []);
+  assert.equal(kept.length, 10 + 11 + 10);
+});
+
+test("serves a loaded build's table, its plans' rows in the build's order", async () => {
+  const e = traceEnv(undefined);
   upload(e, OLD);
+  const manifest = JSON.parse(e.BLOBS.objects[`trace/2027/${OLD}.json`]);
+  const tables = { "tables/presented/P2": [{ n: "1" }, { n: "2" }], "tables/presented/P1": [{ n: "3" }],
+                   "tables/main/P1": [{ n: "4" }], "tables/main_chart/P1": [{ n: "5" }] };
+  for (const [i, [key, rows]] of Object.entries(tables).entries()) {
+    manifest.items[key] = own(i);
+    e.BLOBS.objects[`trace/2027/items/${own(i)}.json`] = JSON.stringify(rows);
+  }
+  e.BLOBS.objects[`trace/2027/${OLD}.json`] = JSON.stringify(manifest);
   await load(e, OLD);
-  e.BLOBS.objects[`trace/2027/${THIRD}/0.json`] = "[]";
-  upload(e, NEW, [3]);
-  await load(e, NEW);
-  assert.equal(stored(e), 13);
-  assert.ok(`trace/2027/${OLD}.json` in e.BLOBS.objects);
-  assert.ok(`trace/2027/cells/${hash(3, 1)}.json` in e.BLOBS.objects);
-  assert.ok(!(`trace/2027/${THIRD}/0.json` in e.BLOBS.objects));
-  const e2 = { ...e, COMMIT: NEW };
-  assert.equal((await load(e2, NEW)).response.status, 200);
-  assert.equal(stored(e2), 12);
-  assert.deepEqual(e2.TRACE.db.prepare("SELECT sha FROM build").all().map((b) => b.sha), [NEW]);
-  assert.deepEqual(Object.keys(e.BLOBS.objects).filter((k) => k.includes(OLD) || k.includes(hash(3, 1))), []);
-  assert.equal(Object.keys(e.BLOBS.objects).length, 13);
+  const response = await at(e, `/tables/2027/${OLD}/presented.json`);
+  assert.equal(response.headers.get("Content-Type"), "application/json; charset=utf-8");
+  assert.deepEqual(await response.json(), [{ n: "1" }, { n: "2" }, { n: "3" }]);
+  assert.deepEqual(await (await at(e, `/tables/2027/${OLD}/main.json`)).json(), [{ n: "4" }]);
+  for (const path of [`/tables/2027/${OLD}/dvha.json`, `/tables/2027/${NEW}/presented.json`, `/tables/2026/${OLD}/presented.json`]) {
+    assert.equal((await at(e, path)).status, 404, path);
+  }
 });
 
 test("an unfinished build drops nothing", async () => {
@@ -275,40 +323,31 @@ test("a build whose cell went missing while it loaded is neither added nor drops
   await load(e, OLD);
   upload(e, THIRD, [0]);
   e.TRACE.beforeBatch = (statements) => {
-    if (statements[0].sql.startsWith("INSERT INTO build")) e.TRACE.db.exec(`DELETE FROM cell_json WHERE hash = '${hash(0, 2)}'`);
+    if (statements[0].sql.startsWith("INSERT INTO data_build")) e.TRACE.db.exec(`DELETE FROM item WHERE hash = '${hash(0, 2)}'`);
   };
   const response = await post(e, THIRD);
   e.TRACE.beforeBatch = null;
   assert.equal(response.status, 409);
-  assert.equal(await response.text(), "A cell went missing, so load again");
+  assert.equal(await response.text(), "An item went missing, so load again");
   assert.equal(await (await at({ ...e, COMMIT: OLD }, cellAt(1))).text(), served(1, 1, OLD));
   assert.equal(await (await at({ ...e, COMMIT: THIRD }, cellAt(1))).text(), `asset ${cellAt(1)}.json`);
-  assert.equal(await (await load(e, THIRD)).response.text(), "Loaded every cell");
+  assert.equal(await (await load(e, THIRD)).response.text(), "Loaded every item");
 });
 
 test("a cell that another load stored first loads without error", async () => {
   const e = traceEnv(OLD);
   upload(e, OLD);
-  e.TRACE.afterQuery = () => (e.TRACE.db.exec(`INSERT INTO cell_json VALUES ('${hash(0, 1)}', '{}')`), e.TRACE.afterQuery = null);
+  e.TRACE.afterQuery = () => (e.TRACE.db.exec(`INSERT INTO item VALUES ('${hash(0, 1)}', '{}')`), e.TRACE.afterQuery = null);
   assert.equal((await post(e, OLD)).status, 409);
 });
 
-test("a build loaded while no commit is deployed drops the other builds", async () => {
-  const e = traceEnv(undefined);
-  upload(e, OLD);
-  await load(e, OLD);
-  upload(e, NEW, [3]);
-  assert.equal((await load(e, NEW)).response.status, 200);
-  assert.deepEqual(e.TRACE.db.prepare("SELECT sha FROM build").all().map((b) => b.sha), [NEW]);
-});
-
-test("a load drops the tables that held whole builds", async () => {
+test("a load drops the tables that earlier versions used", async () => {
   const e = traceEnv(OLD);
-  e.TRACE.db.exec("CREATE TABLE cell_trace (sha); CREATE TABLE loaded (sha)");
+  e.TRACE.db.exec("CREATE TABLE cell_trace (sha); CREATE TABLE loaded (sha); CREATE TABLE cell_json (hash); CREATE TABLE build (sha)");
   upload(e, OLD);
   await post(e, OLD);
   assert.deepEqual(e.TRACE.db.prepare("SELECT name FROM sqlite_master WHERE type = 'table' ORDER BY name").all().map((t) => t.name),
-                   ["build", "cell_json"]);
+                   ["data_build", "item"]);
 });
 
 test("loads only for a POST with the load token", async () => {
@@ -324,6 +363,6 @@ test("answers 404 to a load of a build or cell that R2 lacks", async () => {
   const e = traceEnv(OLD);
   assert.equal((await post(e, OLD)).status, 404);
   upload(e, OLD);
-  delete e.BLOBS.objects[`trace/2027/cells/${hash(4, 1)}.json`];
+  delete e.BLOBS.objects[`trace/2027/items/${hash(4, 1)}.json`];
   assert.equal((await post(e, OLD)).status, 404);
 });
