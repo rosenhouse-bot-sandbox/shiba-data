@@ -15,7 +15,7 @@ It then reads facts into `machine/document_facts.csv` from the answers saved in 
 | Premium and Extra Help premium | All 39 premiums match the section 4 table. Extra Help premiums match wherever section 4 lists one. |
 | Plan documents | All 73 SBs and EOCs were found. |
 
-`pipeline/present.py` writes both sheets and their citations. Git does not keep them, so run `python3 -I pipeline/present.py 2027` after a checkout. `pipeline/fields.py` says what each column means.
+`pipeline/present.py` writes both sheets and their citations. Git keeps neither them nor the CMS tables, so run `python3 -I pipeline/tables.py 2027 <work_dir>` after a checkout. `pipeline/fields.py` says what each column means.
 `pipeline/tests/test_appendix_b.py` checks them against each Appendix B correction, and lists the ones they miss.
 
 ### Finding documents

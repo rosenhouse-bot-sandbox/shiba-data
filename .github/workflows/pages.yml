@@ -33,8 +33,8 @@ jobs:
       - run: npm ci
       - run: pipx run ruff==0.16.9 check
         working-directory: .
-      # Git keeps no sheets, so the site and its tests read the ones the committed facts give.
-      - run: python3 -I ../pipeline/present.py "$(basename "$(python3 -I ../pipeline/years.py)")"
+      # Git keeps no CMS tables or sheets, so the site and its tests read the ones the committed inputs give.
+      - run: python3 -I ../pipeline/tables.py "$(basename "$(python3 -I ../pipeline/years.py)")" "$RUNNER_TEMP/tables"
       - run: python3 -I -m unittest discover -s tests
       - run: python3 -I ../pipeline/built.py code
       # Only the spec report shows a test file's load error, so it prints when a test fails.
@@ -206,7 +206,7 @@ jobs:
           service_account: ${{ vars.GCP_SERVICE_ACCOUNT }}
           token_format: access_token
           access_token_scopes: https://www.googleapis.com/auth/spreadsheets
-      - run: python3 -I pipeline/present.py "$(basename "$(python3 -I pipeline/years.py)")"
+      - run: python3 -I pipeline/tables.py "$(basename "$(python3 -I pipeline/years.py)")" "$RUNNER_TEMP/tables"
       - env:
           SHEETS_TOKEN: ${{ steps.google.outputs.access_token }}
         run: python3 -I web/sheet_sync.py

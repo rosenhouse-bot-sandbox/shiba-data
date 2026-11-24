@@ -2,7 +2,13 @@ _site/
 _docs/
 _docs.txt
 _failures/
-# present.py writes these. Run it after a checkout.
+# pipeline/tables.py writes these. Run it after a checkout.
+data/*/generated/plans.csv
+data/*/generated/landscape_reads.csv
+data/*/generated/documents.csv
+data/*/generated/pbp_facts.csv
+data/*/generated/cms_sources.csv
 data/*/generated/main_chart.csv
 data/*/generated/dvha.csv
 data/*/generated/presented.csv
+_tables/
