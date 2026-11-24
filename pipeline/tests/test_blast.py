@@ -126,6 +126,7 @@ class MainTest(unittest.TestCase):
     def test_refuses_data_with_uncommitted_files(self):
         order, failed, _ = self.main(status=" M answers/x.json")
         self.assertEqual([a[:2] for a in order], [("status", "--porcelain")])
+        self.assertNotIn("--ignored", order[0])
         self.assertIn("uncommitted changes", failed)
 
     def test_refuses_more_than_one_candidate(self):

@@ -37,8 +37,10 @@ def table(rows):
 
 def at(ref, year, out, repo=years.REPO):
     """The sheets that ref's present step writes from ref's facts, in a copy of ref under out."""
+    if subprocess.run(["git", "-C", str(repo), "cat-file", "-e", f"{ref}:data/{year}"], stderr=subprocess.DEVNULL).returncode:
+        return {}
     tar = subprocess.run(["git", "-C", str(repo), "archive", ref, "pipeline", f"data/{year}"], check=True,
-                         capture_output=True).stdout
+                         stdout=subprocess.PIPE).stdout
     with tarfile.open(fileobj=io.BytesIO(tar)) as t:
         t.extractall(out, filter="data")
     env = {k: v for k, v in os.environ.items() if not k.startswith("SHIBA_")}
