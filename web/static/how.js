@@ -2,7 +2,7 @@
 import { el, svg } from "./dom.js";
 import { format } from "./permalink.js";
 import {
-  EXAMPLE, NODES, STEPS, SHEET_FILES, LINKS, NODE_W, NODE_H, MAP_W, MAP_H,
+  EXAMPLE, NODES, STEPS, SHEET_FILES, EDGES, NODE_W, NODE_H, MAP_W, MAP_H,
   nodeBox, pillBox, edge, before, after, strip, details,
 } from "./pipeline.js";
 
@@ -35,14 +35,14 @@ export function howView({ year, cell, step, terms, trace }) {
 }
 
 function map(step, link, sheet) {
-  const on = new Set([step.from, step.to]);
+  const on = new Set(EDGES.filter((e) => e.step === step).flatMap((e) => [e.from, e.to]));
   const lines = svg("svg", { width: MAP_W, height: MAP_H, "aria-hidden": "true" },
     svg("defs", {}, ...["off", "on"].map((k) => svg("marker", {
       id: `how-arrow-${k}`, viewBox: "0 0 10 10", refX: "9", refY: "5", markerWidth: "10", markerHeight: "10", markerUnits: "userSpaceOnUse", orient: "auto",
     }, svg("path", { d: "M0,0 L10,5 L0,10 z", class: `how-arrow ${k}` })))),
-    ...[...LINKS.map(([f, t]) => ({ from: f, to: t, extra: true })), ...STEPS].map((s) => svg("path", {
-      d: edge(s.from, s.to).d, class: `how-edge${s === step ? " on" : ""}${s.extra ? " extra" : ""}`,
-      "marker-end": `url(#how-arrow-${s === step ? "on" : "off"})`,
+    ...EDGES.map((e) => svg("path", {
+      d: edge(e.from, e.to).d, class: `how-edge${e.step === step ? " on" : ""}`,
+      "marker-end": `url(#how-arrow-${e.step === step ? "on" : "off"})`,
     })));
   const nodes = Object.entries(NODES).map(([id, n]) => {
     const b = nodeBox(id);
@@ -52,11 +52,11 @@ function map(step, link, sheet) {
       title: `${n.kind}: ${label(id, sheet)}`,
     }, el("small", {}, n.kind), el("code", {}, label(id, sheet)));
   });
-  const pills = STEPS.map((s) => {
-    const b = pillBox(s);
+  const pills = EDGES.map((e) => {
+    const s = e.step, b = pillBox(e);
     const style = `left:${b.x}px;top:${b.y}px;width:${b.w}px;height:${b.h}px`;
     return el("a", { class: `how-pill${s === step ? " on" : ""}`, href: link(s), title: s.label, style,
-      ...(s === step ? { "aria-current": "step" } : {}) }, s.label);
+      ...(s === step && e.from === s.from ? { "aria-current": "step" } : {}) }, s.label);
   });
   return el("section", { class: "how-map", "aria-label": "Tables and steps" },
     el("h2", {}, "Tables and steps"),

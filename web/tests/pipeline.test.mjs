@@ -1,12 +1,12 @@
 import { test } from "node:test";
 import fs from "node:fs";
 import assert from "node:assert/strict";
-import { NODES, STEPS, LINKS, nodeBox, pillBox, edge, before, after, stepById, strip, details } from "../static/pipeline.js";
+import { NODES, STEPS, EDGES, nodeBox, pillBox, edge, before, after, stepById, strip, details } from "../static/pipeline.js";
 
 const inside = ([x, y], b) => x > b.x && x < b.x + b.w && y > b.y && y < b.y + b.h;
 
 test("no edge passes behind a node", () => {
-  for (const [from, to] of [...STEPS.map((s) => [s.from, s.to]), ...LINKS]) {
+  for (const { from, to } of EDGES) {
     const { at } = edge(from, to);
     for (const id of Object.keys(NODES)) {
       if (id === from || id === to) continue;
@@ -18,9 +18,10 @@ test("no edge passes behind a node", () => {
 const overlap = (a, b) => a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
 
 test("step labels overlap no node and no other label", () => {
-  for (const s of STEPS) {
-    for (const id of Object.keys(NODES)) assert.ok(!overlap(pillBox(s), nodeBox(id)), `${s.id} label covers ${id}`);
-    for (const t of STEPS) if (s !== t) assert.ok(!overlap(pillBox(s), pillBox(t)), `${s.id} and ${t.id} labels`);
+  for (const e of EDGES) {
+    const name = `${e.step.id} ${e.from}`;
+    for (const id of Object.keys(NODES)) assert.ok(!overlap(pillBox(e), nodeBox(id)), `${name} label covers ${id}`);
+    for (const f of EDGES) if (e !== f) assert.ok(!overlap(pillBox(e), pillBox(f)), `${name} and ${f.step.id} ${f.from} labels`);
   }
 });
 
@@ -31,9 +32,16 @@ test("no two nodes overlap", () => {
   }
 });
 
-test("every step joins two known nodes and has a unique id", () => {
+test("every step joins known nodes and has a unique id", () => {
   assert.equal(new Set(STEPS.map((s) => s.id)).size, STEPS.length);
-  for (const s of STEPS) assert.ok(NODES[s.from] && NODES[s.to], s.id);
+  for (const e of EDGES) assert.ok(NODES[e.from] && NODES[e.to], e.step.id);
+});
+
+test("steps with several inputs label each input's edge", () => {
+  const inputs = (id) => EDGES.filter((e) => e.step.id === id).map((e) => e.from);
+  assert.deepEqual(inputs("find-pdfs"), ["links", "plans"]);
+  assert.deepEqual(inputs("sheet"), ["facts", "pbp"]);
+  assert.deepEqual(inputs("publish"), ["sheet", "presented"]);
 });
 
 test("highlighted rows exist", () => {
