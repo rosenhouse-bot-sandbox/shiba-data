@@ -53,10 +53,10 @@ function map(step, link, sheet) {
     }, el("small", {}, n.kind), el("code", {}, label(id, sheet)));
   });
   const pills = EDGES.map((e) => {
-    const s = e.step, b = pillBox(e);
+    const s = e.step, b = pillBox(e), repeat = e.from !== s.from;
     const style = `left:${b.x}px;top:${b.y}px;width:${b.w}px;height:${b.h}px`;
     return el("a", { class: `how-pill${s === step ? " on" : ""}`, href: link(s), title: s.label, style,
-      ...(s === step && e.from === s.from ? { "aria-current": "step" } : {}) }, s.label);
+      ...(repeat ? { tabindex: "-1", "aria-hidden": "true" } : s === step ? { "aria-current": "step" } : {}) }, s.label);
   });
   return el("section", { class: "how-map", "aria-label": "Tables and steps" },
     el("h2", {}, "Tables and steps"),

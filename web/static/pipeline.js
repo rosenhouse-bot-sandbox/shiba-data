@@ -108,7 +108,7 @@ export const STEPS = [
     example: { highlight: [[0], [1, 4, 5]], before: "$325 or 20% | $325, 5 quotes", after: "cell + EOC page 46 highlight", paras: [] } },
 ];
 
-// also lists a step's other inputs. Each input gets its own edge and label.
+// also names a step's other inputs.
 export const EDGES = STEPS.flatMap((step) => [step.from, ...(step.also ?? [])].map((from) => ({ step, from, to: step.to })));
 
 export const NODE_W = 128;
@@ -142,15 +142,16 @@ export function edge(from, to) {
 export const PILL_W = 116;
 export const PILL_H = 24;
 
-// A step's label sits at the middle of each of its edges.
+// An edge's label sits at its middle.
 export function pillBox({ from, to }) {
   const [x, y] = edge(from, to).at(0.5);
   return { x: x - PILL_W / 2, y: y - PILL_H / 2, w: PILL_W, h: PILL_H };
 }
 
 export const stepById = (id) => STEPS.find((s) => s.id === id);
-export const before = (step) => STEPS.filter((s) => s.to === step.from);
-export const after = (step) => STEPS.filter((s) => s.from === step.to);
+const inputs = (step) => EDGES.filter((e) => e.step === step).map((e) => e.from);
+export const before = (step) => STEPS.filter((s) => inputs(step).includes(s.to));
+export const after = (step) => STEPS.filter((s) => inputs(s).includes(step.to));
 
 const shownValue = (v) => v === "" ? "blank" : v;
 const plural = (n, word) => `${n} ${word}${n === 1 ? "" : "s"}`;
