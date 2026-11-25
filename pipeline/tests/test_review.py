@@ -92,7 +92,7 @@ class GateTest(unittest.TestCase):
     def test_records_each_verdict(self):
         good, bad = fact(), fact(amount="$3", setting="office.specialist")
         self.assertEqual(self.outcomes([good, bad], answering(['"$3"'])), [
-            dict(prompt=ask.sha(json.dumps(f)), item=0, fact=extract.named(f), ok=f is good, reason="test", earlier=False)
+            dict(prompt=ask.sha(json.dumps(f)), item=0, fact=extract.named(f), ok=f is good, reason="test", step="reviewer")
             for f in (good, bad)])
 
     def test_drops_the_facts_the_reviewer_rejects_and_keeps_the_rest(self):

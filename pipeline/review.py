@@ -103,6 +103,10 @@ def gate(data, texts, work, answer, new, version, present_version, task_of=None)
             outcomes.append(outcome(f, text, v))
             if not verdict[row(f)] and row(f) not in frozen:
                 print(f"Reviewer rejected {f['plan_id']} {f['benefit']} {f['amount']}: {v.get('reason', 'no verdict')}")
+    stale = {row(f) for f in new if row(f) in frozen and verdict.get(row(f)) is not False}
+    if stale:
+        raise SystemExit(f"{KEPT} lists {len(stale)} facts that no cell cites or that the reviewer accepts. Remove them:\n"
+                         + "\n".join(f"{r[1]} {r[2]} {r[11]}" for r in sorted(stale)))
     os.makedirs(out, exist_ok=True)
     extract.write_outcomes(out, outcomes)
     return kept_rows
@@ -121,4 +125,4 @@ def ask_each(out, answer, model, effort, texts):
 
 
 def outcome(f, text, v):
-    return dict(prompt=ask.sha(text), item=0, fact=extract.named(f), ok=v.get("ok"), reason=v.get("reason", ""), earlier=False)
+    return dict(step="reviewer", prompt=ask.sha(text), item=0, fact=extract.named(f), ok=v.get("ok"), reason=v.get("reason", ""))

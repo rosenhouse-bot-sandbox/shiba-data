@@ -215,7 +215,7 @@ function docKindOf(t, task) {
 const PROMPT_ROLES = {
   read: "reader prompt", reread: "second reader prompt",
   check: "verifier prompt", recheck: "second verifier prompt",
-  review: "reviewer prompt", earlier: "earlier reviewer prompt",
+  review: "reviewer prompt",
 };
 const READING = ["read", "reread"];
 

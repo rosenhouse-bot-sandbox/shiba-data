@@ -306,8 +306,7 @@
      }
     ],
     "reviewer": {
-     "status": "not_recorded",
-     "note": "trusted without review (#170)"
+     "status": "none"
     },
     "kept": true
    },
@@ -352,8 +351,7 @@
      }
     ],
     "reviewer": {
-     "status": "not_recorded",
-     "note": "trusted without review (#170)"
+     "status": "none"
     },
     "kept": true
    },
@@ -399,8 +397,7 @@
      }
     ],
     "reviewer": {
-     "status": "not_recorded",
-     "note": "trusted without review (#170)"
+     "status": "none"
     },
     "kept": true
    },
@@ -445,8 +442,7 @@
      }
     ],
     "reviewer": {
-     "status": "not_recorded",
-     "note": "trusted without review (#170)"
+     "status": "none"
     },
     "kept": true
    },
@@ -493,8 +489,7 @@
      }
     ],
     "reviewer": {
-     "status": "not_recorded",
-     "note": "trusted without review (#170)"
+     "status": "none"
     },
     "kept": true
    },
@@ -669,8 +664,7 @@
       "page": "46",
       "quotes": "[\"Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance\"]",
       "note": "",
-      "origin": "document",
-      "reviewed": true
+      "origin": "document"
      },
      {
       "fact_id": "673cdd579df971ad",
@@ -692,8 +686,7 @@
       "page": "46",
       "quotes": "[\"Non-Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance\"]",
       "note": "",
-      "origin": "document",
-      "reviewed": true
+      "origin": "document"
      },
      {
       "fact_id": "7c0cd5739ce43f8b",
@@ -715,8 +708,7 @@
       "page": "46",
       "quotes": "[\"In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance\"]",
       "note": "",
-      "origin": "document",
-      "reviewed": true
+      "origin": "document"
      },
      {
       "fact_id": "ae326523b26fbf5e",
@@ -738,8 +730,7 @@
       "page": "46",
       "quotes": "[\"In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance\"]",
       "note": "",
-      "origin": "document",
-      "reviewed": true
+      "origin": "document"
      }
     ]
    },
@@ -768,8 +759,7 @@
       "page": "46",
       "quotes": "[\"Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance\"]",
       "note": "Worldwide emergency coverage is described as a supplemental benefit on page 36.",
-      "origin": "document",
-      "reviewed": true
+      "origin": "document"
      }
     ]
    }
@@ -796,7 +786,6 @@
     "quotes": "[\"20% of the cost\"]",
     "note": "",
     "origin": "document",
-    "reviewed": false,
     "reasons": [
      "SB ranks below EOC"
     ]
@@ -822,7 +811,6 @@
     "quotes": "[\"$325 copay per date of service\"]",
     "note": "",
     "origin": "document",
-    "reviewed": false,
     "reasons": [
      "SB ranks below EOC"
     ]

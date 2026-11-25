@@ -226,7 +226,7 @@ class StepTest(StepsTest):
         self.assertEqual([c["network"] for c in rechecked if not c["decoy"]], ["out"])
         self.assertTrue(any(c["decoy"] for c in rechecked))
 
-    def test_a_reviewer_keeps_what_it_accepts(self):
+    def test_writes_the_facts_the_reviewer_keeps(self):
         def fake(task_dir, model, effort):
             for task in glob.glob(f"{task_dir}/*.md"):
                 text = pathlib.Path(task).read_text()

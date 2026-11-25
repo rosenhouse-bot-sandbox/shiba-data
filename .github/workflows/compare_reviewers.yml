@@ -11,7 +11,7 @@ on:
       accepts:
         description: Accepted review tasks to ask the other reviewer models, besides every rejected one
         required: true
-        default: "300"
+        default: "50"
 
 concurrency: compare-reviewers
 
@@ -66,7 +66,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
           git checkout -b "$branch"
-          git add "data/$YEAR/evaluations/reviewer"
+          if [ -d "data/$YEAR/evaluations/reviewer" ]; then git add "data/$YEAR/evaluations/reviewer"; fi
           git commit -m "Save the reviewer answers of run $GITHUB_RUN_ID" || exit 0
           git push "https://x-access-token:$GH_TOKEN@github.com/$GITHUB_REPOSITORY.git" "$branch"
           echo "::notice::Pushed $branch."

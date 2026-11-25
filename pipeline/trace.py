@@ -16,11 +16,12 @@ import csv, glob, hashlib, json, os, sqlite3, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-import ask, blobs, eoc, extract, facts, fields, find_docs, sheets, present, years
+import ask, blobs, eoc, extract, facts, fields, find_docs, sheets, present, review, years
 
 REPO_URL = "https://github.com/rosenhouse-bot-sandbox/shiba-data"
 PROMPT_URL = "https://pdxplans.org/blobs/{}.txt"
 TRACED, NONE, NOT_RECORDED = "traced", "none", "not_recorded"
+KEPT_REJECTED = f"kept although rejected ({review.KEPT})"
 FACT_FILES = {"document": "machine/document_facts.csv", "pbp": "generated/pbp_facts.csv"}
 FACT_COLUMNS = ", ".join(f'f."{c}"' for c in facts.COLUMNS)
 
@@ -79,7 +80,8 @@ def build(year, out, sha, work=None):
         insert(db, "sheet_cell", sheet_cells(sheets.read(data)))
         insert(db, "landscape_read", (dict(r, position=n) for n, r in enumerate(read(data / "generated/landscape_reads.csv"))))
         load_citations(db, data, checked)
-        insert(db, "fact", (dict(f, origin=origin)
+        kept = review.kept(data)
+        insert(db, "fact", (dict(f, origin=origin, kept_rejected=int(review.row(f) in kept))
                             for origin, path in FACT_FILES.items() for f in read(data / path)))
         load_rules(db, data)
         if ledger:
@@ -146,12 +148,11 @@ def load_checks(db, work):
                         benefit=text(a, "benefit"), answer=json.dumps(a, ensure_ascii=False), problem=o["problem"],
                         fact_id=fact["fact_id"], source=fact["source"], page=fact["page"], skipped=o.get("skipped"))
                 else:
-                    step = "reviewer" if "earlier" in o else "verifier"
+                    step = o.get("step", "verifier")
                     verdicts[step, o["prompt"], o["item"]] = dict(
                         step=step, prompt_sha=o["prompt"], item=o["item"],
                         decoy=int(o.get("decoy", False)), shown=json.dumps(o["shown"], ensure_ascii=False) if "shown" in o else None,
-                        **fact, ok=None if o["ok"] is None else int(o["ok"] is True), reason=str(o["reason"]),
-                        earlier=int(o.get("earlier", False)))
+                        **fact, ok=None if o["ok"] is None else int(o["ok"] is True), reason=str(o["reason"]))
     insert(db, "stated", stated.values())
     insert(db, "verdict", verdicts.values())
 
@@ -255,7 +256,7 @@ def answer_key(db, prompt, step="reader"):
 def fact_check(db, identity, prompts):
     """A stated fact's checks after the code checks passed it. Adds the prompts of its verdicts to prompts."""
     named = dict(zip(facts.IDENTITY, identity))
-    verdicts = rows(db, """SELECT step, prompt_sha, item, ok, reason, earlier FROM verdict
+    verdicts = rows(db, """SELECT step, prompt_sha, item, ok, reason FROM verdict
                            WHERE fact_id = ? AND source = ? AND doc_sha = ? AND page = ? ORDER BY prompt_sha, item""",
                     *identity)
     prompts += [v["prompt_sha"] for v in verdicts]
@@ -268,7 +269,10 @@ def fact_check(db, identity, prompts):
     if reviews:
         v = reviews[0]
         reviewer = dict(status=TRACED, prompt=v["prompt_sha"], answer_key=answer_key(db, v["prompt_sha"], "reviewer"), ok=verdict_ok(v),
-                        reason=v["reason"], earlier=bool(v["earlier"]))
+                        reason=v["reason"])
+        if db.execute("SELECT 1 FROM fact WHERE fact_id = ? AND source = ? AND doc_sha = ? AND page = ? AND kept_rejected = 1",
+                      identity).fetchone():
+            reviewer["note"] = KEPT_REJECTED
     else:
         reviewer = {"status": NONE}
     kept = db.execute("SELECT 1 FROM fact WHERE fact_id = ? AND source = ? AND doc_sha = ? AND page = ?", identity).fetchone()
