@@ -262,7 +262,7 @@ The verifier also rejects real facts it doubts. It rejected the SB's worldwide a
 
 The EOC's worldwide fact, which says `supplemental`, passed.
 
-**A reviewer** (Claude Opus, high effort) checks facts last. Code runs step 7's rules on the verified facts, and the reviewer checks each fact that a value would cite, one fact per prompt. `machine/reviewed_facts.csv` lists the facts it has checked, so a later run skips them. A real rejection, from another plan:
+**A reviewer** (Claude Opus, high effort) checks facts last. Code runs step 7's rules on the verified facts, and the reviewer checks each fact that a value would cite, one fact per prompt. A rerun reuses the saved answers. `machine/kept_rejected.csv` lists the facts that the reviewer rejects, mostly over how a value is written, but that the pipeline keeps. The list can only shrink. A real rejection, from another plan:
 
 ```json
 {"id": 0, "ok": false, "reason": "Page 6, Diagnostic Tests and Procedures row: office or freestanding cost is '$0 or 50% coinsurance'.
@@ -342,4 +342,5 @@ The `pdxplans` Cloudflare Worker serves the site at [pdxplans.org](https://pdxpl
 
 - **Pinned versions.** `steps.json` pins each model step's version, such as `{"document_facts": 38, "present": 32}`.
 - **Three-stage deploys.** Only workflows on main can call the Claude API. A new version (1) merges unpinned. (2) The Pipeline workflow runs it on main and pushes the new answers to a new branch, such as `pipeline/2027-41966948424`. (3) A pull request from that branch pins the version.
+- **Built tables.** Git keeps the inputs, the rules and the saved answers, but no table that a step writes. `pipeline/tables.py` rebuilds the CMS tables, `documents.csv`, `document_facts.csv`, the sheets and `presented.csv` from them in about 2 minutes, with no API access. Each main build loads the sheets and `presented.csv` into D1.
 - **Pull request checks.** `reproduce` reruns the pipeline from R2 and the saved answers, with no API access, then runs the checks of the data it built. Its summary lists each sheet cell that the pull request changes. `build` runs the code tests, which see no built data, builds the site, and opens each linked PDF.
