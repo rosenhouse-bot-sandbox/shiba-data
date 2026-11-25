@@ -71,6 +71,11 @@ def task(data, texts, notes={}, after={}, before={}, plan_notes={}):
     return of
 
 
+def reviewer_task(data, texts, version):
+    return task(data, texts, second_notes(version), version.get("check_after", {}), version.get("check_before", {}),
+                plan_notes(version))
+
+
 def saved(data, model, text, effort):
     return (data / "answers" / f"{ask.key(model, text, effort)}.json").exists()
 
@@ -79,8 +84,7 @@ def gate(data, texts, work, answer, trusted_rows, new, version, present_version,
     """new without the facts the reviewer rejects, and the kept facts that are cited or trusted, which a later run trusts.
     Stops if more facts than version["review_cap"] lack a saved answer.
     Writes <work>/review/outcomes.json with each verdict, and the saved verdicts of the trusted facts that have one."""
-    task_of = task_of or task(data, texts, second_notes(version), version.get("check_after", {}),
-                              version.get("check_before", {}), plan_notes(version))
+    task_of = task_of or reviewer_task(data, texts, version)
     model, effort = version["reviewer"]
     verdict, unsaved, outcomes, out = {}, 0, [], f"{work}/review"
     while True:
