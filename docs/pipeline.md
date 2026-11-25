@@ -326,6 +326,13 @@ dvha,H1372-003-0,F_dental,caveat,"EOC page 57 says there is no coinsurance or co
 main,H7199-002-0,L_xray_imaging,question,"EOC page 96 prices X-rays at $25 in every office setting. …",96,X-rays PCP's office: $25 copay
 ```
 
+Claude sessions also list, in `note_facts.csv`, the cell's cited facts that each note is about. A note about something the cell does not cite gets no rows. A test fails if a note's cell stops citing one of its facts.
+
+```
+sheet,plan_id,column,fact_id
+dvha,H1372-003-0,F_dental,e210a35ad12e5069
+```
+
 ## 9. Publish
 
 Merging to main builds the site from the sheets and `presented.csv`. Where an EOC or rider cites a cell, the site leaves out the cell's SB citations.

@@ -2352,5 +2352,21 @@ class LostPricesTest(unittest.TestCase):
         self.assertEqual(lost, [])
 
 
+class NoteFactsTest(unittest.TestCase):
+    def test_a_tag_must_name_a_note_and_a_fact_its_cell_cites(self):
+        cell = ("main", "H1036-153-0", "K_tests_labs")
+        unnoted = cell[:2] + ("L_xray_imaging",)
+        notes, cited = [dict(zip(("sheet", "plan_id", "column"), cell))], {cell: {"a"}, unnoted: {"a"}}
+        tags = [dict(notes[0], fact_id=f) for f in ("a", "b")] + [dict(notes[0], column=unnoted[2], fact_id="a")]
+        self.assertEqual(present.wrong_note_facts(tags, notes, cited), tags[1:])
+
+    @built.check
+    def test_each_note_fact_is_one_its_cell_cites(self):
+        data = years.data_dir(YEAR)
+        with (data / "comments.csv").open(newline="") as c, (data / "note_facts.csv").open(newline="") as t:
+            notes, tags = list(csv.DictReader(c)), list(csv.DictReader(t))
+        self.assertEqual(present.wrong_note_facts(tags, notes, present.cited_facts(data)), [])
+
+
 if __name__ == "__main__":
     unittest.main()
