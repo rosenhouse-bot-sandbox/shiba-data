@@ -498,6 +498,8 @@ async function openDoc(docId, page, quote, note, otherQuotes = []) {
   viewer.showing = docId;
   viewer.page = page;
   $("#viewer").hidden = false;
+  // On a phone the viewer opens under the sheet, which shrinks around the picked cell.
+  selection?.scrollIntoView({ block: "nearest", inline: "nearest" });
   updateUrl();
   markOpenPlans();
   $("#doc-title").textContent = `${kindName(doc.kind)} · ${doc.plan_ids.map((p) => plans[p]?.plan_name || p).join("; ")}`;
