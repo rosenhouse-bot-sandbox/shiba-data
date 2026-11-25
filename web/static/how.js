@@ -76,8 +76,9 @@ function lens(step, link, terms, example, trace, sheet) {
   const para = (p) => el("p", {}, ...p.map((s) => typeof s === "string" ? s : term(terms[s[0]], s[1])));
   return el("section", { class: "how-lens" },
     chips(before(step), "before", (l) => `↖ after: ${l}`),
-    el("div", { class: "how-edge-big" }, end(step.from), el("span", { class: "how-wire" }),
-      el("h2", { class: "how-step", tabindex: "-1" }, step.label), el("span", { class: "how-wire to" }), end(step.to)),
+    // A size container, so the edge stacks when the lens is narrow. It holds no pop-overs, which containment would anchor to it.
+    el("div", { class: "how-edge-box" }, el("div", { class: "how-edge-big" }, end(step.from), el("span", { class: "how-wire" }),
+      el("h2", { class: "how-step", tabindex: "-1" }, step.label), el("span", { class: "how-wire to" }), end(step.to))),
     el("div", { class: "how-card" },
       fromTo ? el("p", { class: "how-strip" }, el("code", { class: "from" }, fromTo[0]), " becomes ", el("code", { class: "to" }, fromTo[1])) : null,
       ...step.paras.map(para), ...(example?.paras ?? []).map(para), workList(details(step, trace))),
@@ -150,14 +151,18 @@ function term(t, text) {
   return box;
 }
 
-// Places a pop-over under its term, or above it when there is no room, inside the window.
+// Places a pop-over under its term, or above it when it fits only there or there is more room, and shrinks it to fit.
 function place(pop, at) {
   const { innerWidth: w, innerHeight: h } = window;
   pop.style.maxWidth = `${w - 2 * MARGIN}px`;
+  const roomBelow = h - MARGIN - at.bottom - 4, roomAbove = at.top - 4 - MARGIN;
+  pop.style.maxHeight = "";
+  const fitsBelow = pop.getBoundingClientRect().height <= roomBelow;
+  const room = fitsBelow || roomBelow >= roomAbove ? roomBelow : roomAbove;
+  pop.style.maxHeight = `${room}px`;
   const { width, height } = pop.getBoundingClientRect();
   pop.style.left = `${Math.max(MARGIN, Math.min(at.left, w - width - MARGIN))}px`;
-  const below = at.bottom + 4;
-  pop.style.top = `${below + height <= h - MARGIN ? below : Math.max(MARGIN, at.top - height - 4)}px`;
+  pop.style.top = `${room === roomBelow ? at.bottom + 4 : at.top - 4 - height}px`;
 }
 
 document.addEventListener("keydown", (e) => {

@@ -5,7 +5,8 @@ import assert from "node:assert/strict";
 import http from "node:http";
 import fs from "node:fs";
 import path from "node:path";
-import { chromium } from "playwright";
+import { chromium, devices } from "playwright";
+import { STEPS } from "../static/pipeline.js";
 
 const { SITE, DOCS, FAILURES } = process.env;
 const TYPES = { ".html": "text/html", ".js": "text/javascript", ".mjs": "text/javascript", ".css": "text/css", ".json": "application/json", ".pdf": "application/pdf" };
@@ -1222,4 +1223,109 @@ test("pipeline view: a replayed trace shows the reader prompt, each fact's verdi
   assert.ok((await work("read-facts")).includes("EOC reader prompt, answered by claude-opus-5-5 ↗"));
   assert.ok((await work("check-facts")).some((l) => l.startsWith("Rejected: SB page 6, ambulance $325. Verifier disagreed:")));
   assert.ok((await work("column-rules")).includes("Set aside SB page 9, ambulance.air 20%: SB ranks below EOC"));
+});
+
+const openPhone = (hash, colorScheme = "light") => newPage({ ...devices["iPhone 13"], colorScheme }).then(async (p) => {
+  await p.goto(`${base}#/2027/${hash}`);
+  await p.waitForSelector("table.sheet, .plan-page, .how-lens");
+  return p;
+});
+const scrollsSideways = (p, selector) => p.$eval(selector, (e) => e.scrollWidth > e.clientWidth);
+
+test("phone: only the sheets scroll sideways", async () => {
+  const views = ["main", "dvha", "notes", "plan/H1036-153-0", ...["main/H1036-153-0/ambulance", "dvha/H1036-153-0/vision"]
+    .flatMap((cell) => STEPS.map((s) => `how/${cell}/${s.id}`))];
+  for (const view of views) {
+    const p = await openPhone(view, "dark");
+    assert.ok(!await scrollsSideways(p, "html"), view);
+    if (!/^(main|dvha)$/.test(view)) assert.ok(!await scrollsSideways(p, "#content"), view);
+    await p.close();
+  }
+});
+
+test("phone: the header takes at most a fifth of the screen, upright or sideways", async () => {
+  for (const device of ["iPhone SE (3rd gen)", "iPhone 13", "iPhone 13 landscape"]) {
+    const p = await newPage(devices[device]);
+    await p.goto(`${base}#/2027/main`);
+    await p.waitForSelector("table.sheet");
+    const header = await p.locator("header").boundingBox();
+    assert.ok(header.height <= p.viewportSize().height / 5, `${device}: header is ${header.height}px tall`);
+  }
+});
+
+test("phone: the plan column leaves most of the sheet's width to the cells", async () => {
+  const p = await openPhone("main");
+  const plan = await p.locator("tbody th.plan").first().boundingBox();
+  assert.ok(plan.width <= p.viewportSize().width * 0.4, `plan column is ${plan.width}px wide`);
+});
+
+test("phone: a cell's document opens under the sheet at full width", async () => {
+  const p = await openPhone("main");
+  await p.locator("td.cited").first().click();
+  await p.waitForSelector("#page-area .page canvas");
+  const sheet = await p.locator("#content").boundingBox();
+  const viewer = await p.locator("#viewer").boundingBox();
+  assert.equal(viewer.width, p.viewportSize().width);
+  assert.ok(viewer.y >= sheet.y + sheet.height, JSON.stringify({ sheet, viewer }));
+  assert.ok(!await scrollsSideways(p, "#page-area"));
+});
+
+test("phone: the tapped cell stays in view above the document", async () => {
+  const p = await openPhone("main");
+  const cell = p.locator("tbody tr:nth-child(6) td.cited").first();
+  await cell.tap();
+  await p.waitForSelector("#viewer:not([hidden])");
+  await p.evaluate(() => new Promise((r) => requestAnimationFrame(r)));
+  const sheet = await p.locator("#content").boundingBox(), box = await cell.boundingBox();
+  assert.ok(box.y >= sheet.y && box.y + box.height <= sheet.y + sheet.height + 1, JSON.stringify({ sheet, box }));
+});
+
+test("phone: the document's pages get a quarter of the screen, even with find open", async () => {
+  const p = await openPhone("main");
+  await p.locator("td.commented").first().tap();
+  await p.waitForSelector("#page-area .page canvas");
+  await p.click("#find-open");
+  const pages = await p.locator("#page-area").boundingBox();
+  assert.ok(pages.height >= p.viewportSize().height / 4, `pages are ${pages.height}px tall`);
+});
+
+test("phone: the Notes filter shows one kind", async () => {
+  const p = await openPhone("notes");
+  await p.selectOption("#kind-filter", "caveat");
+  const kinds = await p.locator(".notes tbody tr:visible").evaluateAll((rows) => [...new Set(rows.map((r) => r.dataset.kind))]);
+  assert.deepEqual(kinds, ["caveat"]);
+});
+
+test("phone: pipeline view boxes fit their text", async () => {
+  for (const s of STEPS) {
+    const p = await openPhone(`how/main/H1036-153-0/ambulance/${s.id}`);
+    const wide = await p.$$eval(".how-end, .how-rows-head, .how-trace-head, .how-step",
+      (els) => els.filter((e) => e.scrollWidth > e.clientWidth).map((e) => e.textContent));
+    assert.deepEqual(wide, [], s.id);
+    await p.close();
+  }
+});
+
+test("pipeline view: a short file name stays on one line", async () => {
+  const p = await newPage({ viewport: { width: 1000, height: 700 } });
+  for (const s of STEPS) {
+    await p.goto(`${base}#/2027/how/main/H1036-153-0/ambulance/${s.id}`);
+    await p.waitForSelector(".how-lens");
+    const broken = await p.$$eval(".how-end code", (codes) => codes.filter((c) => c.textContent.length <= 15 && c.getClientRects().length > 1).map((c) => c.textContent));
+    assert.deepEqual(broken, [], s.id);
+  }
+});
+
+test("landscape phone: a term's pop-over leaves its term uncovered", async () => {
+  const p = await newPage({ ...devices["iPhone 13 landscape"] });
+  await p.goto(`${base}#/2027/how/main/H1036-153-0/ambulance/check-facts`);
+  await p.waitForSelector(".how-lens");
+  const term = p.locator(".how-term", { hasText: "quote check" }).first();
+  // Scrolling closes a pop-over, so the scroll that brings the term into view must land before the tap.
+  await term.scrollIntoViewIfNeeded();
+  await p.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))));
+  await term.tap();
+  const pop = await p.locator(".how-pop:visible").boundingBox(), at = await term.boundingBox();
+  assert.ok(pop.y >= at.y + at.height || pop.y + pop.height <= at.y, JSON.stringify({ pop, at }));
+  assert.ok(pop.y >= 0 && pop.y + pop.height <= p.viewportSize().height, JSON.stringify(pop));
 });
