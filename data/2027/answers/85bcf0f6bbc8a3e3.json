@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1669.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 77 Hearing aids row for this plan: $599 copay per ear for Advanced and $899 copay per ear for Premium. These are supplemental hearing aids obtained in network through the plan's vendor, and the two aid levels combine into one fact as '$599 or $899' per ear.\"}]\n```",
+ "usage": {
+  "input_tokens": 3702,
+  "output_tokens": 208,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

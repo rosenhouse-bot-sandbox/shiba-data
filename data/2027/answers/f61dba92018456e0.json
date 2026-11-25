@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1331.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 80 OTC credit row for this plan: 'Quarterly credit is $25'. 'Coverage is limited to in-network locations only' supports in-network. It is a supplemental allowance of $25 per quarter.\"}]\n```",
+ "usage": {
+  "input_tokens": 2812,
+  "output_tokens": 206,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

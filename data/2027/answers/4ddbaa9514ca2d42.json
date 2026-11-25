@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1570.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 92 Speech Therapy row: Office location $50 copay, in network, Medicare-covered outpatient rehabilitation. 'Per visit' is not printed but is the normal reading of a visit copay.\"}]\n```",
+ "usage": {
+  "input_tokens": 2119,
+  "output_tokens": 443,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-850.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 55 Chiropractic services row (manual manipulation of the spine for subluxation): in-network '$15 copayment or each Medicare-covered visit'. Here 'or' is 'for' with the f dropped, not a Medicaid alternative. It is a Medicare-covered $15 copay per visit, with no setting named.\"}]\n```",
+ "usage": {
+  "input_tokens": 2726,
+  "output_tokens": 351,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

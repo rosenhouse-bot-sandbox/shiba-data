@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-734.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 11 summary row 'Inpatient hospital stays' covers acute care, rehabilitation and long-term care. It says you pay $490 per day for days 1 through 5. That matches inpatient.acute at $490 per day for days 1-5 in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2121,
+  "output_tokens": 365,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

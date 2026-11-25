@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-919.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 92, Occupational Therapy section: 'Office location: $35 copay' in network. This differs from the $50 Speech Therapy and Physical Therapy rows. The outpatient hospital billing caveat does not change the amount, since the OT outpatient hospital copay is also $35.\"}]\n```",
+ "usage": {
+  "input_tokens": 2120,
+  "output_tokens": 397,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

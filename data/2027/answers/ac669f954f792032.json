@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-374.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 62 outpatient surgery row: the $500 in-network copay at an outpatient hospital is correct, but it applies per surgery, not per visit, and only after the $750 plan deductible. The item's unit does not match and it omits the deductible.\"}]\n```",
+ "usage": {
+  "input_tokens": 2236,
+  "output_tokens": 542,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

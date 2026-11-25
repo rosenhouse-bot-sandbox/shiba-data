@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-437.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 11, Section 4.2 Medicare Part B Premium Reduction: Humana will pay up to $43 of the member's monthly Part B premium, and the monthly Social Security check rises by that amount. The $43 per month reduction matches.\"}]\n```",
+ "usage": {
+  "input_tokens": 2004,
+  "output_tokens": 235,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

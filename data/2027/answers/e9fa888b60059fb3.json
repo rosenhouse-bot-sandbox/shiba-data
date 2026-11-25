@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-643.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 12 cost summary for OR-6 (HMO-POS), under 'From network providers': the Primary care office visits row shows a $0 copayment per visit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2186,
+  "output_tokens": 186,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

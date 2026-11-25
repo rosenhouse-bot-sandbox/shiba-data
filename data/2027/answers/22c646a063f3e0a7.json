@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-178.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5, plan H5216455000, Plan Costs table: 'Monthly plan premium $0'. This matches a $0 monthly premium, and the premium does not depend on network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2068,
+  "output_tokens": 181,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

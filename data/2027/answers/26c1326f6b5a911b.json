@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1756.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 85, Chemotherapy Drugs row: 20% coinsurance at a specialist's office, under the Part B drugs benefit. No condition or tier is stated, and in-network is the default for this HMO.\"}]\n```",
+ "usage": {
+  "input_tokens": 2828,
+  "output_tokens": 307,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

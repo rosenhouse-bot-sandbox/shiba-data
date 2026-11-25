@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2076.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 69, Vision care section, routine vision exam row: 'We cover 1 routine vision exam every calendar year.' This is a supplemental frequency limit with no network qualifier, so network any fits.\"}]\n```",
+ "usage": {
+  "input_tokens": 2986,
+  "output_tokens": 500,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

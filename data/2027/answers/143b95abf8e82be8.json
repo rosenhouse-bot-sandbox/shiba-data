@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1334.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 72, 'Vision care — eyewear (non-Medicare covered)' row for Aetna Medicare Elite (HMO): contact lenses, eyeglass lenses and eyeglass frames are each a $0 copay. The quotes match the page. The benefit is routine (supplemental) and in network through EyeMed providers.\"}]\n```",
+ "usage": {
+  "input_tokens": 2782,
+  "output_tokens": 289,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

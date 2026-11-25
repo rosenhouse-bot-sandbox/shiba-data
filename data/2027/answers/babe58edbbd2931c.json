@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2069.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 83: in the outpatient services row (an emergency department or outpatient clinic, alongside hospital-billed lab and X-ray items), the outpatient surgery entry lists $250 per visit for Enhanced plan members, in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 1992,
+  "output_tokens": 840,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1974.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 112, physician/practitioner services row: under the Out-of-network heading, Office visits list 'Services from a primary care physician (PCP): $10 copay'. This matches the out-of-network PCP office visit copay of $10.\"}]\n```",
+ "usage": {
+  "input_tokens": 2492,
+  "output_tokens": 225,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

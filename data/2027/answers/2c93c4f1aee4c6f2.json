@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-967.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 56 does show 'Air Ambulance: 20% coinsurance per one-way trip', but the row begins on an earlier page. It may be the regular Medicare-covered ambulance cost rather than a supplemental worldwide one. The worldwide $25,000 lifetime note follows as a separate statement, so outside_us, network any and supplemental cannot be confirmed from this page.\"}]\n```",
+ "usage": {
+  "input_tokens": 1902,
+  "output_tokens": 698,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

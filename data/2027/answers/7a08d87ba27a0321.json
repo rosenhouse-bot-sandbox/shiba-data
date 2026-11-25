@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2054.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 70, Worldwide Emergency Care row: the plan covers worldwide emergency, urgent care and ambulance services up to $25,000 per lifetime outside the U.S. This matches the outside_us max with limit per lifetime for this plan.\"}]\n```",
+ "usage": {
+  "input_tokens": 2260,
+  "output_tokens": 201,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

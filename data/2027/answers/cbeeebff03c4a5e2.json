@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-287.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 85 cuts off at '$0 copayment for a colonoscopy at an'. The setting (ASC or outpatient hospital) is not shown, and neither is whether the colonoscopy is diagnostic, so the fact cannot be confirmed.\"}]\n```",
+ "usage": {
+  "input_tokens": 2420,
+  "output_tokens": 220,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-512.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 9, Section 4.1 Plan premium: 'For 2027, the monthly plan premium for Regence MedAdvantage + Rx Primary is $88.' The plan name, the amount, the monthly unit and the premium kind all match.\"}]\n```",
+ "usage": {
+  "input_tokens": 2408,
+  "output_tokens": 108,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

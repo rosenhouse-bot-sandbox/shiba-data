@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-610.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 86 in-network column: '$0 for refraction exam', limited to 1 per calendar year. A refraction exam is a routine (supplemental) eye exam. The Medical Specialist cost-share is charged for the separate medical exam, not the refraction.\"}]\n```",
+ "usage": {
+  "input_tokens": 2812,
+  "output_tokens": 487,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

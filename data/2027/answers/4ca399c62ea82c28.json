@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-193.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 111, physician/practitioner services row, in-network office visits: 'Services from a specialist: $45 copay'. This is a Medicare-covered specialist office visit for this plan.\"}]\n```",
+ "usage": {
+  "input_tokens": 2394,
+  "output_tokens": 88,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-328.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 84 shows 'Chemotherapy Drugs: 20% coinsurance at:', but the list of settings is cut off at the end of the page. The outpatient hospital setting cannot be confirmed from this page.\"}]\n```",
+ "usage": {
+  "input_tokens": 2391,
+  "output_tokens": 221,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

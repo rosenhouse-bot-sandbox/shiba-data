@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1619.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 99 'Transportation services—Non-emergency medical transportation not covered by Medicare' row shows a single $0 for all plans, so it is supplemental. The page limits it to immediately after an inpatient hospitalization or certain emergency, urgent care, or outpatient hospital encounters, which matches the item's condition.\"}]\n```",
+ "usage": {
+  "input_tokens": 2504,
+  "output_tokens": 385,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

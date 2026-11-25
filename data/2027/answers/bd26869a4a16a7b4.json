@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-510.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 9, out-of-network supplemental hearing column: 95% of the cost for routine hearing exams up to 1 per year and 95% for fitting up to 1 per year. Same price and limit, so one shared fact is allowed.\"}]\n```",
+ "usage": {
+  "input_tokens": 3677,
+  "output_tokens": 460,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

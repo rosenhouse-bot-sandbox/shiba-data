@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-840.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 12 'Specialist office visits' row lists a $90 copayment per visit out of network, beside $70 in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2198,
+  "output_tokens": 158,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

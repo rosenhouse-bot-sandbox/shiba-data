@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-949.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 87, Advanced Laboratory Services row: 'Office or freestanding location: $0 copay'. A dedicated testing laboratory is also $0, so the freestanding in-network copay of $0 is correct. The outpatient hospital cost is a different $50.\"}]\n```",
+ "usage": {
+  "input_tokens": 2113,
+  "output_tokens": 608,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

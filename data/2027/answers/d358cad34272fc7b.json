@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-576.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 88, the speech language therapist row under Outpatient rehabilitation services for Wellcare Low Premium (HMO-POS) shows a $25 copay for each Medicare-covered speech language therapy visit. No setting is named, and the cost is in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 1902,
+  "output_tokens": 218,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

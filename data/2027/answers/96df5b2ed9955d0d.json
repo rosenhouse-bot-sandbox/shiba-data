@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-678.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 90, MRIs row for this plan: Office or Freestanding location is a $100 copay in network. Outpatient hospital is a separate $200 copay.\"}]\n```",
+ "usage": {
+  "input_tokens": 2412,
+  "output_tokens": 182,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

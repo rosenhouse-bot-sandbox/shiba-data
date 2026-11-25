@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1921.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"On page 51, the in-network Chiropractic services row reads: Medicare Covered Chiropractic Services, $15 copayment – Specialist's Office. The condition is copied from the row's own text: 'We cover only manual manipulation of the spine to correct a vertebral subluxation'.\"}]\n```",
+ "usage": {
+  "input_tokens": 2848,
+  "output_tokens": 339,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

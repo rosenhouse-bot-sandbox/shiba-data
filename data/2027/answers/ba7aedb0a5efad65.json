@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-293.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"In the page 80 Immunizations row, the 'What you pay' column reads 'Medicare-covered vaccines (not including $0 preventive vaccines)' followed by '20% coinsurance'. That matches the condition, cost kind, amount and in-network Medicare benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2472,
+  "output_tokens": 301,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

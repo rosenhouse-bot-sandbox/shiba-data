@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2086.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 62 Dental & Alternative Therapy Allowance row says members can be reimbursed up to $1,500 per year for routine acupuncture, among other services. Routine acupuncture is a supplemental benefit. The page says members can see any licensed acupuncturist, which supports network any.\"}]\n```",
+ "usage": {
+  "input_tokens": 3005,
+  "output_tokens": 428,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

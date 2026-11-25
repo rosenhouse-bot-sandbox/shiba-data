@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2105.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 99, outpatient surgery row, ambulatory surgical center bullet: in network, $350 copay for each Medicare-covered visit to an ambulatory surgical center. The page also says 'Deductible applies', which I read as a note rather than a condition on the copay.\"}]\n```",
+ "usage": {
+  "input_tokens": 1912,
+  "output_tokens": 477,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

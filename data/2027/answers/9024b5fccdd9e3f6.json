@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-30.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 58 chiropractic row gives a $15 copay for each supplemental (Non-Medicare-covered) chiropractor visit. The 24-visit yearly cap is a separate visit-limit fact.\"}]\n```",
+ "usage": {
+  "input_tokens": 2335,
+  "output_tokens": 334,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

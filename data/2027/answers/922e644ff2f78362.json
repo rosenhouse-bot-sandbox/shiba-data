@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1673.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 75 Part B drugs row, in-network column: 20% coinsurance for all other Medicare-covered Part B drugs. The out-of-network column separately shows 30%. Lower amounts apply only to certain rebatable drugs.\"}]\n```",
+ "usage": {
+  "input_tokens": 2781,
+  "output_tokens": 529,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

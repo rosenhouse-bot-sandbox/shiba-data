@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2134.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 49 acupuncture row lists routine (supplemental) acupuncture at a $0 copayment in the Specialist's Office setting. No out-of-network wording, so it is in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2799,
+  "output_tokens": 346,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

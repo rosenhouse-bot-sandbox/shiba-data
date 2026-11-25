@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1012.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 74, in-network column of the Outpatient surgery row: \\\"$610 copayment for Medicare-covered surgery or other services provided to you at an ambulatory surgical center\\\". The plan, benefit, ASC setting, network, cost kind and amount all match.\"}]\n```",
+ "usage": {
+  "input_tokens": 2442,
+  "output_tokens": 275,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

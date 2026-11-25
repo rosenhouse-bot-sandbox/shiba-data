@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1593.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 80 outpatient diagnostic tests row: lab tests sit beside the $0 entry. Under either reading of the layout, Standard plan members pay $0 in network (the per-department tier also lists $0 for Standard).\"}]\n```",
+ "usage": {
+  "input_tokens": 2322,
+  "output_tokens": 624,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

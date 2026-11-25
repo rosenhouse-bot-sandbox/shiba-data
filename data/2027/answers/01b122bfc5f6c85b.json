@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1021.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 101 specialist row, In-Network: $30 copay for each Medicare-covered specialist visit. The page also notes that the deductible applies.\"}]\n```",
+ "usage": {
+  "input_tokens": 1842,
+  "output_tokens": 310,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

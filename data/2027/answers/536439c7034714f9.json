@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1759.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 60, outpatient surgery row, Ambulatory Surgical Center section: in-network $0 copay for diagnostic colonoscopy, a Medicare-covered service. The plan, setting, network and amount all match.\"}]\n```",
+ "usage": {
+  "input_tokens": 2164,
+  "output_tokens": 153,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

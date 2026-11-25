@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1475.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 55 Ambulance Services row: Ground Ambulance is a $345 copay per one-way trip. The worldwide ground ambulance cost is also $345, so setting 'any' holds. The $0 hospital-to-hospital transfer is a separate exception, not this fact.\"}]\n```",
+ "usage": {
+  "input_tokens": 2458,
+  "output_tokens": 461,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

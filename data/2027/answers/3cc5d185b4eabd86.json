@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1050.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 50 shows an in-network 'Chemotherapy Drugs 20% coinsurance' row in Medicare Part B drugs, but the row is cut off at the page end. No setting is shown, so the specialist's office setting cannot be confirmed.\"}]\n```",
+ "usage": {
+  "input_tokens": 2669,
+  "output_tokens": 237,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

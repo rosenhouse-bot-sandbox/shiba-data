@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1405.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 106, in-network Occupational Therapy, Office location: $40 copay. Plan, benefit, setting, network and amount all match.\"}]\n```",
+ "usage": {
+  "input_tokens": 2071,
+  "output_tokens": 183,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

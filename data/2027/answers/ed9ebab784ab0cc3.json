@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1220.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 70 routine vision exam row (1 exam every calendar year): out-of-network 50% coinsurance.\"}]\n```",
+ "usage": {
+  "input_tokens": 2887,
+  "output_tokens": 254,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

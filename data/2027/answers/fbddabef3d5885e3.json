@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2103.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 79, Outpatient surgery row: '$0 copayment for a colonoscopy at an outpatient hospital.' This is in network under the surgery benefit, so it is the diagnostic colonoscopy, not preventive screening. It is separate from the ASC line.\"}]\n```",
+ "usage": {
+  "input_tokens": 2485,
+  "output_tokens": 301,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

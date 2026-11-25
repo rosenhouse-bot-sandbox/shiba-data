@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1479.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 89 does say 'Limited to 1 box of contact lenses every year', listed under the VSP routine eyewear allowance. But eyewear count facts must carry condition 'contact lenses', and this item leaves condition blank. The fact does not follow the required form, so it fails.\"}]\n```",
+ "usage": {
+  "input_tokens": 2452,
+  "output_tokens": 561,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

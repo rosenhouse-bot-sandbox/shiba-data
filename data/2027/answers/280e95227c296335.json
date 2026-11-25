@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2236.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 61 supplemental dental rows for oral exams and cleanings: Out-of-Network 25% coinsurance for each. Fluoride, X-rays and other diagnostic services are also 25% out of network on page 62, so 25% holds for preventive care.\"}]\n```",
+ "usage": {
+  "input_tokens": 2898,
+  "output_tokens": 381,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

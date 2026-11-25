@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-154.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 58 Fitness program row: $120 allowance every six months, paid as reimbursement for gym membership and fitness class fees. This is a supplemental benefit, and the page names no separate network, setting or pool.\"}]\n```",
+ "usage": {
+  "input_tokens": 2288,
+  "output_tokens": 272,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

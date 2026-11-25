@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-400.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 31 Ambulance services row: $245 copay for each Medicare-covered one-way trip via ground ambulance, in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2303,
+  "output_tokens": 71,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-573.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 5, for plan H1036306000: the Monthly plan premium row shows $0, separate from the Part B premium note.\"}]\n```",
+ "usage": {
+  "input_tokens": 1881,
+  "output_tokens": 68,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

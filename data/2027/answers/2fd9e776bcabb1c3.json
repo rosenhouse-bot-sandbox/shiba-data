@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-268.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 58 lists 'Other Medicare Part B Drugs' at 20% coinsurance, and PCP's Office is one of the settings. This plan's EOC applies the same cost to every listed setting. The note that some rebatable drugs may cost less does not change the stated 20%.\"}]\n```",
+ "usage": {
+  "input_tokens": 3017,
+  "output_tokens": 342,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1586.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 58 does support a $300 in-network copay for complex imaging, which covers the CT scans listed in that row. But the page states the unit as 'per provider per day', and the item says only 'per day', leaving out the per-provider condition.\"}]\n```",
+ "usage": {
+  "input_tokens": 2599,
+  "output_tokens": 410,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

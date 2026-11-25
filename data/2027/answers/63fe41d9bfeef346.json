@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1279.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 67 X-ray row: the in-network column shows a $30 copayment for each Medicare-covered standard X-ray service ('or' is 'for' with the f dropped). No setting is named, and $35 is the separate out-of-network column.\"}]\n```",
+ "usage": {
+  "input_tokens": 2488,
+  "output_tokens": 222,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

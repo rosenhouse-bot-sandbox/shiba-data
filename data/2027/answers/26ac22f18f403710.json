@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1703.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 87, Outpatient rehabilitation services row, physical therapist services: '$25 copay for each Medicare-covered physical therapy visit.' This is one cost for all outpatient settings and is in network. A deductible applies, which is a separate fact.\"}]\n```",
+ "usage": {
+  "input_tokens": 1863,
+  "output_tokens": 422,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

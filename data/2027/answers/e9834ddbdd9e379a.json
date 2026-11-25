@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1102.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 85, 'All Other Part B Drugs': 20% coinsurance, with an Ambulatory Surgical Center (ASC) among the listed settings. This matches the general Part B drugs benefit at an ASC, in network, Medicare-covered.\"}]\n```",
+ "usage": {
+  "input_tokens": 2817,
+  "output_tokens": 501,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

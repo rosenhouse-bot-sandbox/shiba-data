@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2152.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"On page 95, the MRIs row reads \\\"Office or Freestanding location: $100 copay\\\", with outpatient hospital listed separately at $200. That matches an in-network Medicare MRI copay of $100 at a freestanding location. The $0 lines at the top of the page belong to a different subheading.\"}]\n```",
+ "usage": {
+  "input_tokens": 2391,
+  "output_tokens": 616,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

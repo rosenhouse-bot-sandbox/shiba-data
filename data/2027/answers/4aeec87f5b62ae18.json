@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-730.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 85 lists a routine eye exam including refraction, 1 per calendar year, at $0 in network from a Humana Medicare Insight Network optical provider. It is a non-Medicare covered (supplemental) service.\"}]\n```",
+ "usage": {
+  "input_tokens": 2738,
+  "output_tokens": 186,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

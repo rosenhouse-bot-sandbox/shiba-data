@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1696.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 62, under 'Diagnostic Procedures and Tests': $50 copayment for the Specialist's Office, in network, Medicare-covered. This matches non-radiological diagnostic tests.\"}]\n```",
+ "usage": {
+  "input_tokens": 2310,
+  "output_tokens": 276,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

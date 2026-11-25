@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-509.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 74: the mandatory supplemental dental schedule lists D0461 testing for cracked tooth under Preventive Services at $0 in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3779,
+  "output_tokens": 247,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-684.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 52, Immunizations row, for H2056-003-0: 20% coinsurance for all other vaccines covered under Medicare Part B. No setting is named, and the condition matches the document's wording.\"}]\n```",
+ "usage": {
+  "input_tokens": 2615,
+  "output_tokens": 199,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

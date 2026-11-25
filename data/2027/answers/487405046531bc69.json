@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1379.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 58, diagnostic radiology row: in-network $0 copay per provider per day for diagnostic mammography. No setting is named. Since the copay is $0, writing the unit as 'per day' instead of 'per provider per day' does not change the cost.\"}]\n```",
+ "usage": {
+  "input_tokens": 2578,
+  "output_tokens": 539,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-762.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 54, Medicare Part B drugs row: in-network 20% coinsurance, with a note that certain drugs may be lower. No setting-specific cost is given, and the plan is the one this document covers.\"}]\n```",
+ "usage": {
+  "input_tokens": 2603,
+  "output_tokens": 443,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

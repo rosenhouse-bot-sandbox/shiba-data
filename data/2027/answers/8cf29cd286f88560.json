@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1276.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 62 in-office specialist row: in-network $45 copay per provider per day. The item's unit 'per day' drops 'per provider', which suggests one $45 charge per day however many specialists you see.\"}]\n```",
+ "usage": {
+  "input_tokens": 2490,
+  "output_tokens": 324,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2213.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 93, Outpatient Procedures/Surgery at an ASC: $490 copay for the facility, with a $0 professional copay. The facility copay is the center's cost, so $490 in network is correct for this plan.\"}]\n```",
+ "usage": {
+  "input_tokens": 2218,
+  "output_tokens": 216,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

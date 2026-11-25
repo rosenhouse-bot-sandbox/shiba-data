@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1497.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 11 cost summary for this plan gives the Deductible as $250 except for insulin furnished through an item of durable medical equipment. Because the document names a service the deductible excludes, it applies to some Medicare-covered services, which fits medical_deductible.some. No network is stated, so the in-network default applies.\"}]\n```",
+ "usage": {
+  "input_tokens": 2136,
+  "output_tokens": 695,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

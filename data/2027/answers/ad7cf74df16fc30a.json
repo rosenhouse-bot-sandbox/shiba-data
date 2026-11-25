@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-195.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 54 row for acupuncture not covered by Medicare (supplemental): $10 per visit for Enhanced plan members, in network. The 18-visit combined limit is not stated in the item, but no stated field is wrong.\"}]\n```",
+ "usage": {
+  "input_tokens": 2564,
+  "output_tokens": 256,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

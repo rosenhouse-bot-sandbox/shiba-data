@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1260.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"In the page 48 Ambulance services row, under In-Network and Emergency Ambulance, Air Ambulance is 20% coinsurance regardless of the number of trips. This is a Medicare-covered benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2363,
+  "output_tokens": 198,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

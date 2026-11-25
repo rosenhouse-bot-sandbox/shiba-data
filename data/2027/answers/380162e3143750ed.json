@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1057.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 70 does list 1 set of frames and 1 set of lenses every calendar year, but the item leaves out the required condition (glasses, frames, lenses or contact lenses). The quotes cover two different items, and contacts are limited by the allowance, not a count, so the fact is ambiguous.\"}]\n```",
+ "usage": {
+  "input_tokens": 2890,
+  "output_tokens": 453,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

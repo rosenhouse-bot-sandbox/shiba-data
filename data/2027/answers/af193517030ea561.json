@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1496.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 54 Lab Services row lists a $0 copayment for Freestanding Laboratory, before the Out-of-Network heading, so it is in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2139,
+  "output_tokens": 283,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

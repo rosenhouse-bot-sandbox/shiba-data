@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-648.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 64, Dental & Alternative Therapy Allowance: a $2,000 yearly allowance covers dental, therapeutic massage, routine acupuncture and naturopath services combined, with any licensed acupuncturist allowed. So routine acupuncture is a supplemental $2,000-per-year allowance from that pool in any network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2921,
+  "output_tokens": 412,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

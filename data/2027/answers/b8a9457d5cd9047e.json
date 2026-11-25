@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1685.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 71: Wellness Bucks reimburses up to $150 per year, including instructional fitness classes and activity/fitness trackers. That supports a supplemental fitness allowance from the Wellness Bucks pool at $150 per year.\"}]\n```",
+ "usage": {
+  "input_tokens": 2231,
+  "output_tokens": 460,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

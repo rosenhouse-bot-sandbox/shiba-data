@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1924.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 87 names the HMO Travel Benefit. It lets members traveling in the U.S. get plan-covered services from National Medicare HMO/SNP network providers at the same in-network costs. That fits one other_supplemental covered fact with the benefit's name as pool.\"}]\n```",
+ "usage": {
+  "input_tokens": 2747,
+  "output_tokens": 301,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

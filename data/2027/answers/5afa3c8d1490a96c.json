@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2138.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 89: the Advanced Laboratory Services row gives a $0 copay for office or freestanding location and a $0 copay for a dedicated testing laboratory. The lab block above it, whose header is on the prior page, also shows $0 freestanding and $0 dedicated lab. So the in-network freestanding lab copay is $0 either way.\"}]\n```",
+ "usage": {
+  "input_tokens": 2141,
+  "output_tokens": 673,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

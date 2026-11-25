@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-787.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"In the page 12 Summary of Important Costs table, the Primary care office visits row shows 50% of the total cost per visit in the Out-of-Network column. This matches the out-of-network PCP office coinsurance of 50% per visit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2268,
+  "output_tokens": 213,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

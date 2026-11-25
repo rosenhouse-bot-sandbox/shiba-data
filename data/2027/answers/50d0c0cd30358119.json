@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-784.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 48 Ambulance services row: under In-Network, Non-Emergency Ambulance shows a $325 copayment per date of service, regardless of the number of trips, for Ground Ambulance.\"}]\n```",
+ "usage": {
+  "input_tokens": 2563,
+  "output_tokens": 270,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

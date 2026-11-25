@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-864.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 54: the naturopathy row for care not covered by Medicare, from network providers, shows $20 per visit for Value plan members. This is a separate line from Value Lane.\"}]\n```",
+ "usage": {
+  "input_tokens": 2562,
+  "output_tokens": 258,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

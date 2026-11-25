@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1861.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 71, 'Hearing services - hearing aids' row: the in-network column says 'Hearing aid allowance is $2,200' through UnitedHealthcare Hearing. This is a routine supplemental benefit, and the allowance amount matches.\"}]\n```",
+ "usage": {
+  "input_tokens": 3932,
+  "output_tokens": 384,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-646.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 58 shows a $300 in-network copay for complex imaging, which covers MRIs. But the unit there is 'per provider per day', not 'per day', so the item understates what a member could owe.\"}]\n```",
+ "usage": {
+  "input_tokens": 2599,
+  "output_tokens": 450,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

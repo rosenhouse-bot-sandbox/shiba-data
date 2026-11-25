@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1847.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 36 in-network Non-Emergency Ambulance row: $325 copay per date of service, but the page cuts off before naming the setting. Emergency costs are split into Ground ($325) and Air (20%), so ground ambulance cannot be confirmed for the non-emergency cost.\"}]\n```",
+ "usage": {
+  "input_tokens": 2269,
+  "output_tokens": 315,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

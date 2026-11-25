@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1902.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 61 'Hearing services - routine hearing exam' row: 'We cover 1 hearing exam every year.' This is a routine (supplemental) exam limit of 1 per year, in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3874,
+  "output_tokens": 195,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

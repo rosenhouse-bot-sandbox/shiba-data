@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-203.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 'Deductible' row lists $0 for the Standard Plan in the middle column, in the medical benefits table, with no Part D or other qualifier.\"}]\n```",
+ "usage": {
+  "input_tokens": 2168,
+  "output_tokens": 272,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1204.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 85, outpatient rehabilitation row 'Services provided by a physical therapist': in network, $25 copay for each Medicare-covered physical therapy visit. The row lists one cost for all outpatient settings, so setting 'any' fits. The in-network deductible applies first and is not stated as a condition on the copay.\"}]\n```",
+ "usage": {
+  "input_tokens": 1849,
+  "output_tokens": 430,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

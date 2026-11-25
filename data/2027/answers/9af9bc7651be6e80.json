@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-136.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 80, outpatient diagnostic tests row: the 'per visit, per department' cost block lines up with X-rays and lists $0 for Standard plan members, in network. Lab tests and blood sit under the separate $0 line above. Either way, the Standard X-ray copay is $0.\"}]\n```",
+ "usage": {
+  "input_tokens": 2465,
+  "output_tokens": 741,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

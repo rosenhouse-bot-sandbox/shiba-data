@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-339.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 75 hearing aid row: 'Limited to 2 non-implantable hearing aids every year.' Both the in-network and out-of-network columns say '2 hearing aid(s) every year', so network 'any' holds. It is a routine supplemental benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 3009,
+  "output_tokens": 228,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

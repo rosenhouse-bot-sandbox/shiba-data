@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-794.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 51 in-network 'Other Medicare Part B Drugs' row: 20% coinsurance, with Pharmacy listed among its settings. It appears above the 'Out-of-Network:' heading, where the same row is 50%.\"}]\n```",
+ "usage": {
+  "input_tokens": 3102,
+  "output_tokens": 445,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

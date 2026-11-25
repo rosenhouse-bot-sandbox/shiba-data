@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1390.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"On page 92, the 'Vision services - routine eye exam' row covers 1 routine eye exam every year. Its in-network column shows a $0 copayment, and the $80 copay is out-of-network only. Plan, benefit, network, amount and limit all match.\"}]\n```",
+ "usage": {
+  "input_tokens": 2772,
+  "output_tokens": 546,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

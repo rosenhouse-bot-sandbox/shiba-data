@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-169.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 11 Medicare Explorer by Kaiser Permanente row: travel care from out-of-network Medicare providers inside the U.S. is covered up to a benefit maximum of $1,200 in covered plan charges per calendar year. The page has no plan columns, so it applies to all plans, including H9003-009-0.\"}]\n```",
+ "usage": {
+  "input_tokens": 3024,
+  "output_tokens": 418,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

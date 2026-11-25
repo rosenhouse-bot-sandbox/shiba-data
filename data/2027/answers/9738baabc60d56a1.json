@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-619.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 6 Ambulance section: the 'Worldwide ground or air ambulance' row shows a $300 in-network copay. The section header says it is a copay per each one-way Medicare-covered transport, which supports the covered_by and unit fields.\"}]\n```",
+ "usage": {
+  "input_tokens": 1985,
+  "output_tokens": 582,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

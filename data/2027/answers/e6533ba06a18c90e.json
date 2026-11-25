@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-995.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 95 in-network column for Medicare-covered surgery at an outpatient hospital lists '$0 copayment or 20% coinsurance' by Medicaid level. Per the guidance, the non-QMB amount is the 20% coinsurance. Out of network is 30%.\"}]\n```",
+ "usage": {
+  "input_tokens": 2499,
+  "output_tokens": 309,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-357.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 62, Medicare Part B drugs, In-Network: Medicare Part B Insulin Drugs is 20% coinsurance, with PCP's Office listed among the settings. Plan, benefit, setting, network and amount all match.\"}]\n```",
+ "usage": {
+  "input_tokens": 2755,
+  "output_tokens": 403,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1326.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 62 shows a $1,500 yearly Dental & Alternative Therapy Allowance for non-Medicare (supplemental) preventive and comprehensive dental. Members can see any licensed dentist, so network any fits.\"}]\n```",
+ "usage": {
+  "input_tokens": 3823,
+  "output_tokens": 237,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

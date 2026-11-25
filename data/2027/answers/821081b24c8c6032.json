@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1894.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 95 Over-the-counter allowance row: $109 per quarter allowance for plan-approved OTC health and wellness products, supplemental, with no copay.\"}]\n```",
+ "usage": {
+  "input_tokens": 2587,
+  "output_tokens": 81,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

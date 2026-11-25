@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-654.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 61 OTC Allowance row gives $50 quarterly on the Humana Spending Account Card and lists 'Hearing aids you can buy without a prescription' among eligible items. That makes it a supplemental hearing.aids allowance in the OTC Allowance pool, in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3936,
+  "output_tokens": 340,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

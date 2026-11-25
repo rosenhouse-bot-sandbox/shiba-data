@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-468.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 72 dental code table, Prophylaxis (Cleaning): 'Frequency/Limits – 2 procedure codes per calendar year'. The D1110 row covers both the in-network and out-of-network columns, so 2 cleanings per calendar year applies to any network for this routine dental benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 3947,
+  "output_tokens": 380,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

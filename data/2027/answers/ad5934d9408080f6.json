@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-526.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"On page 126, under the 'In-network and Out-of-network' heading, the Eyewear entry says 'Your plan pays up to $200 per year'. The page itself calls this a $200 per year allowance for routine eyewear. So the supplemental eyewear allowance of $200 per year in either network is correct.\"}]\n```",
+ "usage": {
+  "input_tokens": 2414,
+  "output_tokens": 280,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

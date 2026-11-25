@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1389.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 62 supplemental dental: 'Cleanings (prophylaxis) - 2 every year' is in the service column, so the limit applies to both in-network and out-of-network cleanings.\"}]\n```",
+ "usage": {
+  "input_tokens": 2874,
+  "output_tokens": 222,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

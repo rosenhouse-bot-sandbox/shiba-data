@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-200.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 70 Wellness Bucks row: $150 per year. The text says Devoted Health will reimburse up to $150 per year, which covers fitness trackers and instructional fitness classes. It is a supplemental wellness allowance pool that names fitness.\"}]\n```",
+ "usage": {
+  "input_tokens": 2154,
+  "output_tokens": 548,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

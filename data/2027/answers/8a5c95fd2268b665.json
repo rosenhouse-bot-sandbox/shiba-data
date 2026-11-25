@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-970.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 64 Dental & Alternative Therapy Allowance: members are reimbursed 50% of out-of-pocket costs for comprehensive dental (dentures, crowns, root canals), which is 50% coinsurance. The plan says members can see any licensed dentist, so network any fits.\"}]\n```",
+ "usage": {
+  "input_tokens": 3897,
+  "output_tokens": 546,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

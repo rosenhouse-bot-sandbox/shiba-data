@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-770.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"On page 60, under Advanced Imaging Services, the $330 copayment row lists both PCP's Office and Specialist's Office. That is the in-network, Medicare-covered cost for H1036-153-0.\"}]\n```",
+ "usage": {
+  "input_tokens": 2330,
+  "output_tokens": 223,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

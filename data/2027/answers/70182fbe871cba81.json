@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-183.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 70 routine vision exam row: 'We cover 1 routine vision exam every calendar year'. This is a supplemental benefit covered both in-network and out-of-network, so a limit of 1 per calendar year for any network is correct.\"}]\n```",
+ "usage": {
+  "input_tokens": 2867,
+  "output_tokens": 228,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1470.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 120 supplemental Routine eye exam row: '1 routine eye exam every year' in the description. Both the in-network ($0 copay) and out-of-network (40% coinsurance) cells cover 1 routine eye exam every year, so the limit applies in any network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2391,
+  "output_tokens": 267,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

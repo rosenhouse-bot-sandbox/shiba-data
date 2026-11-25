@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-264.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 93 exclusions chart: 'Naturopath services (uses natural or alternative treatments)' is 'Not covered under any condition', which maps to supplemental not_covered with any setting.\"}]\n```",
+ "usage": {
+  "input_tokens": 2291,
+  "output_tokens": 237,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

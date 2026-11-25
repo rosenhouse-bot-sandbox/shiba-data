@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-441.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 49, Section 1.2: 'Your deductible is $150.' It is called the annual deductible, and 'Medicare-covered chiropractic services' is listed among the services it applies to. The plan is an HMO, and no setting is named.\"}]\n```",
+ "usage": {
+  "input_tokens": 2691,
+  "output_tokens": 297,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

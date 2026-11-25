@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-167.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 54, row for chiropractic care not covered by Medicare: the Enhanced plan pays $10 per visit with network providers. The 18-visit combined yearly limit is not stated in the item, but no stated field conflicts with the page.\"}]\n```",
+ "usage": {
+  "input_tokens": 2559,
+  "output_tokens": 401,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

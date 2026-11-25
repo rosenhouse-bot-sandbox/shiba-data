@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1230.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 50 continues the Medicare-covered acupuncture row, which mentions 'Medicare-covered acupuncture services' and the cLBP criterion 'Not associated with pregnancy'. It states: 'No more than 20 acupuncture treatments may be administered annually.' Medicare covers acupuncture only for chronic low back pain, so the condition fits, and the limit is 20 per year.\"}]\n```",
+ "usage": {
+  "input_tokens": 2423,
+  "output_tokens": 698,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

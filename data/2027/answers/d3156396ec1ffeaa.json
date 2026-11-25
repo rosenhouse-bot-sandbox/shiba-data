@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-443.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 3, Outpatient hospital services, Diagnostic colonoscopy row: $0 in network. This matches the outpatient hospital setting, in-network, copay $0.\"}]\n```",
+ "usage": {
+  "input_tokens": 1953,
+  "output_tokens": 199,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

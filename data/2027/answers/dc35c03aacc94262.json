@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-517.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 65 says the plan reimburses 50% of out-of-pocket costs. That is a reimbursement rate, not clearly a member coinsurance. The fact also leaves out the stated condition that acupuncture is covered for conditions other than chronic lower back pain.\"}]\n```",
+ "usage": {
+  "input_tokens": 2559,
+  "output_tokens": 443,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

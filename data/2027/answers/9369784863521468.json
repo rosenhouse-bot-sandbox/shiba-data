@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-83.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 83 covers Mandatory Supplemental Dental benefits. Its preventive rows (periodic oral exam D0120, cleaning D1110, bitewing x-rays) show 0% in the In-Network You Pay column, as do all the other preventive rows.\"}]\n```",
+ "usage": {
+  "input_tokens": 3782,
+  "output_tokens": 246,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

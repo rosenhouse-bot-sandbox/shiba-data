@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1725.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 112 Routine transportation row: $0 copayment in network, a supplemental benefit with no setting named. The 75% coinsurance is the out-of-network amount.\"}]\n```",
+ "usage": {
+  "input_tokens": 2488,
+  "output_tokens": 294,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

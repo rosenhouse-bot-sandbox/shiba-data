@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1993.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 60 Hearing aids row, which is a routine (supplemental) benefit: the Out-of-Network cost is 80% coinsurance. This matches every field.\"}]\n```",
+ "usage": {
+  "input_tokens": 3196,
+  "output_tokens": 82,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-242.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 65, Hearing services, Supplemental benefits: the Routine hearing exam row reads \\\"$0 copayment Limit 1 visit every year\\\". That is a supplemental, in-network limit of 1 visit every year for this plan.\"}]\n```",
+ "usage": {
+  "input_tokens": 2969,
+  "output_tokens": 284,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

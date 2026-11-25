@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-540.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 11 Medicare Explorer row: out-of-network travel care up to a benefit maximum of $1,200 in covered plan charges per calendar year. No plan columns, so it applies to all plans.\"}]\n```",
+ "usage": {
+  "input_tokens": 3024,
+  "output_tokens": 331,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

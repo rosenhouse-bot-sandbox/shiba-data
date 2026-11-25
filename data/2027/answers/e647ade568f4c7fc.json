@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1917.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 70, Physician/practitioner services row, In-Network: under Provider and Professional Services, $0 copayment – PCP's Office. This is a Medicare-covered office visit, and the document covers this one plan.\"}]\n```",
+ "usage": {
+  "input_tokens": 2513,
+  "output_tokens": 164,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

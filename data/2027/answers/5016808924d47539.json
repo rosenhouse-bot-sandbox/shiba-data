@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-966.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 90, in-network diagnostic tests row: $0 copay for Medicare-covered diagnostic mammogram, with no setting named. The row also says 'Deductible applies', which the item does not carry as a condition.\"}]\n```",
+ "usage": {
+  "input_tokens": 2165,
+  "output_tokens": 426,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

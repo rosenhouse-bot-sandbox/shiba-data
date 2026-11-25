@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-954.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 35 CVS OTC Wallet row gives a $45 quarterly allowance on the Extra Benefits Card for approved OTC products. That matches a supplemental OTC allowance of $45 per quarter for this plan.\"}]\n```",
+ "usage": {
+  "input_tokens": 2728,
+  "output_tokens": 392,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

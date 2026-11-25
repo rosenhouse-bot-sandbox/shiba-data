@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1160.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"The task says this page 57 sentence gives a dental.comprehensive copay $0 fact, not 'covered with no amount stated'. The page states $0 cost sharing and a $1,000 maximum. The quoted sentence also does not name comprehensive services, which appear on page 58.\"}]\n```",
+ "usage": {
+  "input_tokens": 3409,
+  "output_tokens": 477,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

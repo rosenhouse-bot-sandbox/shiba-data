@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 48: the diagnostic radiology row names MRIs. In network, it charges $300 per provider per day for all other complex imaging. Only diagnostic mammography is carved out at $0, so the fact holds.\"}]\n```",
+ "usage": {
+  "input_tokens": 2396,
+  "output_tokens": 310,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
