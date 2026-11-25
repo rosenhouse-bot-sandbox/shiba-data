@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-400.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 74 is the plan's mandatory supplemental dental schedule, which is preventive only. It states \\\"Maximum Benefit: None\\\", so the dental coverage has no maximum, and it covers in-network dentists only.\"}]\n```",
+ "usage": {
+  "input_tokens": 3774,
+  "output_tokens": 360,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

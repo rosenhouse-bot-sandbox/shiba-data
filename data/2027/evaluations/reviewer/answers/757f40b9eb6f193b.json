@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-235.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 119 says the plan's dental coverage gives access to the UHC Dental National Medicare Advantage Network, with negotiated rates at network dentists. This is the routine (supplemental) dental benefit, and the network name is copied exactly.\"}]\n```",
+ "usage": {
+  "input_tokens": 3969,
+  "output_tokens": 316,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

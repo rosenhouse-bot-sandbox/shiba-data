@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-172.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 64: under Diagnostic Mammography, $0 copayment applies to Specialist's Office, Outpatient Hospital and Freestanding Radiological Facility. The specialist's office setting and $0 in-network copay match, and diagnostic mammography is a Medicare-covered benefit.\"}]",
+ "usage": {
+  "input_tokens": 2191,
+  "output_tokens": 310,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

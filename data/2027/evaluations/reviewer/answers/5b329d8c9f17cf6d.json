@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-226.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 84, Medicare Part B drugs row, Part B Insulin Drugs, In-Network: '$35 copay for Medicare-covered Part B insulin drugs.' The same cell says 'no more than $35 per month supply of each covered insulin product', which supports the per month supply unit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2272,
+  "output_tokens": 438,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

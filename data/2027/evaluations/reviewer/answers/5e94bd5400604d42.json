@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-39.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 94: the block just before the Occupational Therapy heading is the physical therapy block. It lists Outpatient Hospital at a $50 copay, with the $45 re-evaluation priced separately. The Physical Therapy heading is on the previous page, so the match rests on the standard PT, OT, Speech order. The Speech row also shows $50, but it sits under its own heading. The cost is in network, Medicare-covered, per visit.\"}]",
+ "usage": {
+  "input_tokens": 2146,
+  "output_tokens": 520,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

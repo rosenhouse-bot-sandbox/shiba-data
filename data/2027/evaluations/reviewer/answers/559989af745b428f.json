@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-381.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 82 Preventive Services, Exams: 'Frequency/Limits – 2 procedure codes per calendar year' for Periodic oral exam D0120, with 0% in network and 0% out of network. The plan covers it as mandatory supplemental dental, and out-of-network care is subject to the same in-network limits, so network 'any' fits. A limit of 2 per calendar year matches.\"}]",
+ "usage": {
+  "input_tokens": 3748,
+  "output_tokens": 424,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

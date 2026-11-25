@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-56.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 91 does show 0% out-of-network for the exam, cleaning and bitewing rows, and the $52.10 premium suggests an optional package. But the package name 'MyOption DEN972' does not appear on the page, so that field cannot be confirmed.\"}]\n```",
+ "usage": {
+  "input_tokens": 4059,
+  "output_tokens": 237,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-104.md",
+ "reply": "[{\"id\": 0, \"ok\": false, \"reason\": \"The quote is only a heading in Chapter 7 (reimbursement requests) and states no coverage. It describes how to submit a claim for a bill you paid, which does not show in-network coverage of routine eyewear. The network field is unsupported.\"}]",
+ "usage": {
+  "input_tokens": 2717,
+  "output_tokens": 248,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

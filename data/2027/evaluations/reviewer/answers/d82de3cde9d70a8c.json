@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-316.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 35 Section 1.2: in-network MOOP is $7,150 per calendar year for Medicare Part A and B services from network providers. This matches the plan, network, amount and limit.\"}]",
+ "usage": {
+  "input_tokens": 2285,
+  "output_tokens": 84,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

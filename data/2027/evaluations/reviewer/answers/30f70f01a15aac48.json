@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-44.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"The page 83 fillings and extraction rows do show 0%. But the cited pages never name a 'MyOption DEN972' package, so the package field cannot be confirmed. Also, other comprehensive services on page 84 (crowns, root canals, dentures) are 50%, so 0% alone misstates comprehensive coinsurance.\"}]\n```",
+ "usage": {
+  "input_tokens": 4175,
+  "output_tokens": 369,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

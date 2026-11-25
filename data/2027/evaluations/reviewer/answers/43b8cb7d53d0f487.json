@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-42.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 83 shows a $0 deductible per calendar year, but nothing on the page names the package 'MyOption DEN972', so the package field cannot be confirmed.\"}]\n```",
+ "usage": {
+  "input_tokens": 4114,
+  "output_tokens": 260,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

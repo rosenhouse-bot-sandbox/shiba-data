@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-326.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 74 Intraoral X-rays row: periapical x-rays (D0220, D0230) are limited to 6 procedure codes per calendar year. They are mandatory supplemental dental through the HumanaDental Medicare Network, at 0% in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3712,
+  "output_tokens": 229,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

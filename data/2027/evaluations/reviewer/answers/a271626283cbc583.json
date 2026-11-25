@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-106.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 11 lists Fitness as well as Groceries* and Personal hygiene items* as things the Healthy Living Allowance pays for besides OTC items. The limit leaves out fitness, which applies to all members, so it does not name every such thing.\"}]\n```",
+ "usage": {
+  "input_tokens": 2200,
+  "output_tokens": 384,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

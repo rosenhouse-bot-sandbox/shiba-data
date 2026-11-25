@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-327.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 92, Physician/practitioner services telehealth row (covers PCP and Specialist): In-Network $0 copay for virtual visit services performed through your plan's virtual visit provider(s). The row also says 'Deductible applies', which the item does not capture.\"}]\n```",
+ "usage": {
+  "input_tokens": 2213,
+  "output_tokens": 489,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

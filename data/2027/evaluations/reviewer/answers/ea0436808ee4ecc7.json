@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-311.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 34, Class I preventive dental (supplemental, beyond Medicare-covered dental): cleanings, any combination, 2 every calendar year. In-network cost is $0 copay. The frequency limit matches the item's count of 2 per year.\"}]",
+ "usage": {
+  "input_tokens": 3961,
+  "output_tokens": 282,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

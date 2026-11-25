@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-405.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 113 lists eyeglasses and contact lenses as 'covered only under specific conditions', not as not covered. The page never names the Value plan; a Value exclusion is only implied because the exclusion doesn't apply to Enhanced or Standard. The exclusion also doesn't apply to members enrolled in the optional supplemental benefits, so an unqualified not_covered fact for Value is doubtful.\"}]\n```",
+ "usage": {
+  "input_tokens": 2520,
+  "output_tokens": 682,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-349.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 43 lists 'Topical fluoride, 1 every calendar year' under supplemental preventive dental (Class I), which is 'in addition to the Medicare-covered dental services'. The frequency limit sits in the benefit description, not under a specific network, so network 'any' fits. Plan, benefit, count and period all match.\"}]",
+ "usage": {
+  "input_tokens": 4020,
+  "output_tokens": 327,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

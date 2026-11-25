@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-308.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 57, Uniformity flexibility nutritional benefit (Humana Well Dine): In-Network $0 copayment. It applies after an inpatient stay for CHF in a hospital or skilled nursing facility, and covers up to two home-delivered meals per day for 30 days (up to 60 meals). Meals are not Medicare-covered, so supplemental fits. This is the only plan in the document.\"}]",
+ "usage": {
+  "input_tokens": 2635,
+  "output_tokens": 373,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

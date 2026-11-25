@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-57.md",
+ "reply": "[{\"id\":0,\"ok\":false,\"reason\":\"Page 90 shows a $1,500 maximum plan benefit per calendar year, combined in and out of network. But the page never names the package \\\"MyOption DEN972\\\" or says the dental coverage is optional. The package field cannot be confirmed from the quoted page, so I am marking it false.\"}]",
+ "usage": {
+  "input_tokens": 4105,
+  "output_tokens": 256,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-214.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 9, in-network mandatory supplemental dental: '$0 copay for emergency diagnostic exam, periodic oral exam, prophylaxis (cleaning) up to 2 per year.' The periodic oral exam is supplemental preventive dental, limited to 2 per year.\"}]\n```",
+ "usage": {
+  "input_tokens": 4031,
+  "output_tokens": 370,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

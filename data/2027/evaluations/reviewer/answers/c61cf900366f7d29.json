@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-105.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 107 does show $0 for 'Evaluation and fitting for hearing aids' under Advantage Plus. But the item leaves condition blank, and the rules require 'fitting/evaluation' for this visit. The page also does not say Advantage Plus is offered with H9003-001-0.\"}]\n```",
+ "usage": {
+  "input_tokens": 3224,
+  "output_tokens": 274,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

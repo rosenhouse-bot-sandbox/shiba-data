@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-193.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 8 Physical Therapy and Other Rehabilitation Services row, Physical Therapy line: Outpatient hospital $50 copay in network. The row is Medicare-covered and belongs to the single plan, H2923-025-0.\"}]\n```",
+ "usage": {
+  "input_tokens": 2330,
+  "output_tokens": 107,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

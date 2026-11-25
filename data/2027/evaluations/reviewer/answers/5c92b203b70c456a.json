@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-373.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 74 in-network column: root canal codes cost 30% and recement crown D2920 costs 0%. Comprehensive prices differ by code, so the amount is 0% or 30%.\"}]\n```",
+ "usage": {
+  "input_tokens": 4036,
+  "output_tokens": 215,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

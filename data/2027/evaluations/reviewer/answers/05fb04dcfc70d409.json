@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-121.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 74, Virtual Cardiac Recovery Program: in-network $0 copayment. Eligibility is limited to members with a heart failure hospitalization in the past 30 days. The item leaves out the 36-session-per-episode limit, which is a missing detail rather than a wrong one.\"}]",
+ "usage": {
+  "input_tokens": 2566,
+  "output_tokens": 711,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-234.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 48, Routine hearing aids row: the purchase includes a '3-year full manufacturer warranty'. This is a supplemental benefit with no amount stated, so it is a covered fact with limit 3 years. The warranty appears in the description of the TruHearing in-network purchase, and in-network is the default.\"}]",
+ "usage": {
+  "input_tokens": 3805,
+  "output_tokens": 397,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

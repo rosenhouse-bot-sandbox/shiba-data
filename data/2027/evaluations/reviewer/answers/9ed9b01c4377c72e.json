@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-408.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 72 lists periodontal maintenance (D4910) under 'Comprehensive Services' at 0% in-network and 0% out-of-network. That matches dental.comprehensive, in-network, 0% coinsurance, supplemental, for the only plan covered.\"}]",
+ "usage": {
+  "input_tokens": 3927,
+  "output_tokens": 311,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

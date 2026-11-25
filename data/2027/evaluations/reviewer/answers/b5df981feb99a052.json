@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-289.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 59 Humana Well Dine meal program row: In-Network $0 copayment, 2 meals per day for 7 days after an inpatient stay, limited to 4 times per calendar year. This is a non-Medicare benefit, so supplemental. The plan matches the only plan in the document.\"}]",
+ "usage": {
+  "input_tokens": 2472,
+  "output_tokens": 366,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

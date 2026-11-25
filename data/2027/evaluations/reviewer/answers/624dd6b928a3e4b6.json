@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-155.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 13, Mandatory supplemental vision benefit row, in-network column: '$75 combined maximum benefit coverage amount per year for routine exam.' The plan, benefit, network, cost kind, amount and limit all match.\"}]\n```",
+ "usage": {
+  "input_tokens": 2963,
+  "output_tokens": 192,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

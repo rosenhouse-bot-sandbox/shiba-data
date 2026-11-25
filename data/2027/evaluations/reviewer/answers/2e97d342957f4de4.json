@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-251.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 147 Section 4: a yearly deductible of $700 applies to Tier 3-5 drugs, and all other drugs have no deductible. Page 148 says the plan has 5 tiers, so the deductible skips only tiers 1 and 2, matching 'not tiers 1,2'. The amount and the per-year limit also match.\"}]",
+ "usage": {
+  "input_tokens": 3370,
+  "output_tokens": 332,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

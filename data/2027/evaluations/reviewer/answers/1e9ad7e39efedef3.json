@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-296.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 91, Supplemental benefits, Routine podiatry (foot care): '$0 copayment, Limit 6 visits every year'. This matches a supplemental visit limit of 6 per year. The page states no network or setting, so in-network and any-setting apply by default.\"}]",
+ "usage": {
+  "input_tokens": 2102,
+  "output_tokens": 331,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

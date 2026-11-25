@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-330.md",
+ "reply": "The page 71 quote reads \"You are covered for up to $50,000 every year for emergency or urgently needed services outside the United States.\" This matches the item on every field:\n\n- Benefit: emergency, with setting outside_us.\n- Cost kind: max, at $50,000.\n- Limit: per year (\"every year\").\n- Network: any, since care outside the U.S. is treated as any network.\n- Covered by: supplemental, since care outside the U.S. is treated as supplemental.\n- Plan: only one plan is listed.\n\nThe item has no condition, which is correct because the cap covers both emergency and urgently needed services.\n\n```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 71: covered up to $50,000 every year for emergency or urgently needed services outside the United States; matches max, per year, outside_us.\"}]\n```",
+ "usage": {
+  "input_tokens": 4242,
+  "output_tokens": 545,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

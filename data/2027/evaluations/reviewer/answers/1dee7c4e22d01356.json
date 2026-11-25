@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-209.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 83 eyewear row: members pay any retail amount over $250 from a PLUS Provider, so the plan covers up to $250 toward frames and lenses or contact lenses. The benefit is 1 per calendar year, in network at Humana Medicare Insight Network providers, and unused dollars expire.\"}]",
+ "usage": {
+  "input_tokens": 5352,
+  "output_tokens": 892,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

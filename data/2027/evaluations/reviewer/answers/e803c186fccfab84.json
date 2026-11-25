@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-252.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 94, in-network diagnostic mammograms row: Specialist's office $0 copay. This matches the plan, benefit, setting, network and amount.\"}]\n```",
+ "usage": {
+  "input_tokens": 2485,
+  "output_tokens": 179,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

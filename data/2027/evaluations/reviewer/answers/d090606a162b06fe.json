@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-392.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 53: Diagnostic Mammography $0 copayment, with Specialist's Office listed first, then Outpatient Hospital and Freestanding Radiological Facility. This matches in-network, Medicare-covered, $0 copay at the specialist office.\"}]",
+ "usage": {
+  "input_tokens": 2350,
+  "output_tokens": 108,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

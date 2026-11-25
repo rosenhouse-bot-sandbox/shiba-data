@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-196.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 64 'Facility Based Sleep Study' row lists $50 copayment for the Specialist's Office, with a separate $100 line for Outpatient Hospital. The page states no network, so in-network applies. This is a Medicare-covered benefits chart row.\"}]",
+ "usage": {
+  "input_tokens": 2094,
+  "output_tokens": 302,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

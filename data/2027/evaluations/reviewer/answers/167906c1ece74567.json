@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-287.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 91 PET Scans row: outpatient hospital $300 copay. The identical $200/$300 block sits on either side of the PET Scans label, so the amount is the same whichever block belongs to the row.\"}]",
+ "usage": {
+  "input_tokens": 2266,
+  "output_tokens": 693,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

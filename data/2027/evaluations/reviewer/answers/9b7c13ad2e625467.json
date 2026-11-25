@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-414.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 54 Dental services row, under the In-Network column, says the plan covers Mandatory Supplemental Dental Benefits that include preventive and diagnostic services. So preventive dental is a covered supplemental benefit in network, with no amount stated on this page.\"}]\n```",
+ "usage": {
+  "input_tokens": 4238,
+  "output_tokens": 247,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

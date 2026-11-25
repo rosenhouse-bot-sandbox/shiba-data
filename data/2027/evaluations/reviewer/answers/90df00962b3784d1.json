@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-362.md",
+ "reply": "The page says \"Unused balances do not roll over\" for the $106 per quarter OTC allowance. That matches a rollover fact with `not_covered`. The OTC benefit is supplemental and has no setting, so setting `any` fits. The plan is the only one in the document, and the network is in-network by default.\n\nThe item has no `limit` field to check. A rollover `not_covered` fact needs none.\n\n\n<invoke name=\"x\">\n</invoke>\n</br>\n\n```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 97 OTC allowance ($106 per quarter): 'Unused balances do not roll over' and balances expire at quarter end, so rollover is not_covered; supplemental, any setting, in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 7683,
+  "output_tokens": 835,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

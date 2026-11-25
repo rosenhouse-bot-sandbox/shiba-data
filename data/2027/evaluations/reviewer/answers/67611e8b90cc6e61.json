@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-420.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 73 urgently needed services row lists, under Out-of-Network, 'Worldwide Coverage $40 copayment – Urgent Care Center'. That supports a $40 copay outside the U.S., with network any, supplemental, and condition urgently needed services.\"}]\n```",
+ "usage": {
+  "input_tokens": 2502,
+  "output_tokens": 361,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

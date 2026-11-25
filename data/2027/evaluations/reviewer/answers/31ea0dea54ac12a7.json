@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-155.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 13, in-network column (VIS694): '$75 combined maximum benefit coverage amount per year for routine exam.' This matches a supplemental vision exam max of $75 per year. The 'OR' option below it covers $100 for eyewear at a PLUS Provider, so it does not change the exam amount.\"}]",
+ "usage": {
+  "input_tokens": 2963,
+  "output_tokens": 686,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

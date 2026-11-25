@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-421.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 50 Section 1.3: 'For calendar year 2027, the MOOP amount is $8,900.' This is the yearly Medicare Part A and B maximum. The plan is an HMO with a single MOOP stated, so labeling it in-network is reasonable, though the page does not say 'in-network' outright.\"}]",
+ "usage": {
+  "input_tokens": 2238,
+  "output_tokens": 439,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-65.md",
+ "reply": "[{\"id\":0,\"ok\":false,\"reason\":\"Page 127 supports the $2,250 per year plan maximum for mandatory supplemental dental. The page does not say the maximum applies both in and out of network, and the default is in-network unless the document says otherwise. The item's network 'any' is unsupported, so I am marking it false.\"}]",
+ "usage": {
+  "input_tokens": 3612,
+  "output_tokens": 499,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

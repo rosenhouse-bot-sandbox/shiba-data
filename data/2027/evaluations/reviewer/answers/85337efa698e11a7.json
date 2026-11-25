@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-40.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 92: the block just before the 'Occupational Therapy' heading is physical therapy, which the lymphedema note on the left also points to. It lists 'Outpatient Hospital: $50 copay'. The OT block is $35 and the speech block has no re-evaluation line, so this block is PT. The re-evaluation is a separate $50 line and does not change the visit copay.\"}]",
+ "usage": {
+  "input_tokens": 2145,
+  "output_tokens": 596,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

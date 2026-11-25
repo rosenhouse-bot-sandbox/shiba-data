@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-390.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 62 states 'We have teamed up with EyeMed to provide this benefit.' Both the routine eye exam and the eyewear benefit require EyeMed network providers, so EyeMed is the provider network for supplemental vision.\"}]\n```",
+ "usage": {
+  "input_tokens": 2605,
+  "output_tokens": 158,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

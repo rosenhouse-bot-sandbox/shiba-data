@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-204.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 62: the Dental & Alternative Therapy Allowance row says Naturopath Services are reimbursed at 50% of cost, up to the $1,500 annual limit shared with dental. The pool name, supplemental status and 50% coinsurance all match.\"}]",
+ "usage": {
+  "input_tokens": 2975,
+  "output_tokens": 418,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-322.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 63, Outpatient diagnostic tests row, Advanced Imaging Services section (the row's description names CT, MRI and PET scans): $345 copay at Outpatient Hospital, in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2528,
+  "output_tokens": 95,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-375.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 85, Mandatory Supplemental Vision Benefit: the in-network routine eye exam including refraction is limited to 1 per calendar year. This is a non-Medicare covered (supplemental) service.\"}]\n```",
+ "usage": {
+  "input_tokens": 2702,
+  "output_tokens": 97,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

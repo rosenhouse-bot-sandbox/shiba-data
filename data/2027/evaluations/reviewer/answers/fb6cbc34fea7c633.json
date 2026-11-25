@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-22.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 50, Outpatient hospital services row: $0 copay for certain Medicare-covered diagnostic tests and services including retinal fundus, spirometry and PAD testing. This is the in-network outpatient hospital setting, and the condition matches the quote. The 'per service' unit is not stated in so many words but fits 'tests and services'.\"}]",
+ "usage": {
+  "input_tokens": 2604,
+  "output_tokens": 416,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

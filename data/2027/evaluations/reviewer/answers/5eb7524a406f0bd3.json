@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-41.md",
+ "reply": "[{\"id\":0,\"ok\":false,\"reason\":\"Page 59 shows only 'In-Network: Physical Therapy $35 copayment' under Outpatient rehabilitation services. No setting line appears, and the row is cut off at the page end. Nothing on the page supports the outpatient_hospital setting, so the setting field is unsupported.\"}]",
+ "usage": {
+  "input_tokens": 2187,
+  "output_tokens": 306,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

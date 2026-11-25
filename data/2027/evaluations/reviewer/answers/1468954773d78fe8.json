@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-135.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 87: in the layout each service label sits directly above its cost block (MRIs, Nuclear Medicine and Ultrasounds all follow this pattern). So the block under 'Advanced Laboratory Services' applies to it, and its outpatient hospital line reads $50 copay. This is a Medicare-covered in-network lab benefit, and the condition field copies the row name. The one soft spot is that 'Advanced Laboratory Services' is read as ordinary lab rather than genetic testing.\"}]",
+ "usage": {
+  "input_tokens": 2106,
+  "output_tokens": 679,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

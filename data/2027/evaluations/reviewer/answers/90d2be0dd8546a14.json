@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-190.md",
+ "reply": "[{\"id\":0,\"ok\":false,\"reason\":\"Page 5 hearing aids row says '1 per ear per calendar year, in-network hearing aids provided by TruHearing'. The limit is worded for in-network aids, so network 'any' is doubtful, and the page does not say it applies out of network. I am marking it false given the doubt.\"}]",
+ "usage": {
+  "input_tokens": 3192,
+  "output_tokens": 554,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

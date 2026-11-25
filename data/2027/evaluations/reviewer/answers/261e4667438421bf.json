@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-400.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 74: the supplemental Preventive Only EPO dental schedule lists 'Maximum Benefit: None', which means no maximum. Coverage applies only with in-network dentists, so network 'in' fits. The benefit is supplemental dental, and the schedule is preventive only, so the dental benefit as a whole has no maximum.\"}]",
+ "usage": {
+  "input_tokens": 3774,
+  "output_tokens": 595,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

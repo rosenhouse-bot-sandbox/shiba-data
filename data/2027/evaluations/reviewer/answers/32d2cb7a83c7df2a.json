@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-383.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 51 lists 'Cleanings (prophylaxis) - 2 every year' under Dental services. It shows both in-network ($0) and out-of-network (50%) costs, so the limit applies in both networks. The count and period match the item.\"}]",
+ "usage": {
+  "input_tokens": 2797,
+  "output_tokens": 319,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

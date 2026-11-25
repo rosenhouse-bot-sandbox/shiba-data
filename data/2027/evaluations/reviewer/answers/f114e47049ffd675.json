@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-380.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 90 'All Other Advanced Imaging services' row: Office or Freestanding location $100 copay. This matches the 'other advanced imaging' benefit, freestanding setting, in network, Medicare-covered. The plan is the only one in the document.\"}]",
+ "usage": {
+  "input_tokens": 2211,
+  "output_tokens": 324,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

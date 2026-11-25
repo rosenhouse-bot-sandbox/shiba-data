@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-204.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 62 Dental & Alternative Therapy Allowance: members are reimbursed 50% of their costs for naturopath services, so they pay 50% coinsurance. The benefit is supplemental and comes from the named pool. Any licensed naturopath may be used, which supports network any.\"}]\n```",
+ "usage": {
+  "input_tokens": 2975,
+  "output_tokens": 503,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-14.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 53 shows the $145 Outpatient Hospital copay under 'Basic Radiological Services' in the diagnostic tests row. The page never names X-rays, so this may not be the outpatient X-ray benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2314,
+  "output_tokens": 323,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

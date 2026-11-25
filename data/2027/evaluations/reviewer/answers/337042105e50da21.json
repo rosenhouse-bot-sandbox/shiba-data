@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-78.md",
+ "reply": "[{\"id\": 0, \"ok\": false, \"reason\": \"Page 91 supports the limit of 2 cleanings (procedure code D1110) per calendar year, in and out of network. But the page never names the package 'MyOption DEN972'. The premium and maximum shown suggest an optional package, but the package name cannot be verified from the page, so I am marking it false.\"}]",
+ "usage": {
+  "input_tokens": 4041,
+  "output_tokens": 348,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

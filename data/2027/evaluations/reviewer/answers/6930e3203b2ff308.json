@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-280.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 118 Urgently needed services row says: '$130 copay for urgently needed services outside of the United States.' The cost applies only to urgently needed care, so that is its condition. Care outside the U.S. is network any and supplemental.\"}]\n```",
+ "usage": {
+  "input_tokens": 2304,
+  "output_tokens": 234,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

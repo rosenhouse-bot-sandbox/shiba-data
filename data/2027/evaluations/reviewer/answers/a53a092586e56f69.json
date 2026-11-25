@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-153.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 24 row '24-Hour Nurse Advice Line' shows a $0 copay. It has no network split, so the in-network default applies. It is supplemental, and the pool name matches the document.\"}]\n```",
+ "usage": {
+  "input_tokens": 2113,
+  "output_tokens": 239,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

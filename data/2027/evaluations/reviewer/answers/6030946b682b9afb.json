@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-66.md",
+ "reply": "[{\"id\": 0, \"ok\": false, \"reason\": \"The quote is accurate for D4910 alone (0% in network, page 78). But the comprehensive dental benefit has codes at both 0% and 50%, for example fillings, extractions and crowns at 50% on page 79. Stating the benefit as a flat 0% would mislead a counselor. The amount should be '0% or 50%'.\"}]",
+ "usage": {
+  "input_tokens": 3923,
+  "output_tokens": 362,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

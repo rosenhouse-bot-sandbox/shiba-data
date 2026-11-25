@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-140.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 70, supplemental hearing aid row: the benefit \\\"includes a 3-year warranty including loss, and damage with a supply of batteries.\\\" Batteries are covered with no count given, so a blank limit is right. The routine hearing benefit must be used in network (participating vendor), so in-network fits.\"}]",
+ "usage": {
+  "input_tokens": 3085,
+  "output_tokens": 325,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

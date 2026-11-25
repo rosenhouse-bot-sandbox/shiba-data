@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-37.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"On page 62, the physician/practitioner services row lists 'Virtual primary care provider (PCP) visits' with an in-network $0 copay per provider per day. That matches the telehealth PCP visit, the $0 copay and the per-day unit. The quote does not name the plan, but this document covers only one plan.\"}]\n```",
+ "usage": {
+  "input_tokens": 2532,
+  "output_tokens": 547,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

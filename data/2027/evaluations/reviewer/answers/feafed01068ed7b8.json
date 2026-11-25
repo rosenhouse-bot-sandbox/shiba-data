@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-102.md",
+ "reply": "The page only describes a reimbursement process for routine eyewear. It does not say that eyewear is covered, and it gives no cost, network or coverage details. A counselor could not take \"covered, in network\" from a claim-submission heading. Reimbursement also often applies to out-of-network purchases. I can't confirm the item's fields (network in, cost_kind covered) from this page.\n\n```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 144 only has a heading for the reimbursement process for routine eyewear (UHC Vision). It does not state that eyewear is covered or that the benefit is in network, so the fact is not supported.\"}]\n```",
+ "usage": {
+  "input_tokens": 2641,
+  "output_tokens": 212,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

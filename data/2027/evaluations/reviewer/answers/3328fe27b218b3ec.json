@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-108.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 80, OTC credit row: the monthly credit can also be used on covered home and bath safety devices, for every member. Healthy food is a separate SSBCI-only item, so it does not change this fact.\"}]",
+ "usage": {
+  "input_tokens": 2719,
+  "output_tokens": 673,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

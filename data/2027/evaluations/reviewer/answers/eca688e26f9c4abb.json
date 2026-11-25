@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-317.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 109 routine eye exam: the left column gives 1 routine eye exam every year, but the cost column shows only In-Network ($0 copay). Out-of-network coverage of the routine exam is not shown on this page, so network 'any' cannot be confirmed.\"}]\n```",
+ "usage": {
+  "input_tokens": 2380,
+  "output_tokens": 323,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
