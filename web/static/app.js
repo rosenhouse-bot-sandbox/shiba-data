@@ -5,6 +5,7 @@ import { parse, format } from "./permalink.js";
 import { el } from "./dom.js";
 import { howView, howLink, traceUrl } from "./how.js";
 import { EXAMPLE, STEPS } from "./pipeline.js";
+import { initAppearance } from "./appearance.js";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = "pdfjs/pdf.worker.min.mjs";
 
@@ -112,11 +113,12 @@ function route() {
   const plan = view === "plan" && plans[state.plan];
   document.title = `${plan ? plan.plan_name : VIEW_NAMES[view]} – ${TITLE}`;
   const key = `${view}/${plan ? plan.plan_id : ""}`;
-  document.querySelectorAll("header nav a").forEach((a) => a.classList.toggle("active", a.dataset.view === view));
   const content = $("#content");
   const sameView = key === here?.key && !otherYear;
+  // Save the scroll before the nav changes the header's height, which can clamp it.
+  if (!sameView && here) scrollTops[here.key] = content.scrollTop;
+  document.querySelectorAll("header nav a").forEach((a) => a.classList.toggle("active", a.dataset.view === view));
   if (!sameView) {
-    if (here) scrollTops[here.key] = content.scrollTop;
     content.replaceChildren(view === "notes" ? notesView() : plan ? planPage(plan) : sheetView(view));
     if (otherYear) content.prepend(el("p", { class: "warn" }, `That link was for ${otherYear} plans. This site shows ${site.year} plans.`));
     content.scrollTop = scrollTops[key] ?? 0;
@@ -157,7 +159,6 @@ async function routeHow(state) {
   const known = asColumn && site[state.sheet].rows.some((r) => r.plan_id === state.plan);
   const { sheet, plan } = known ? state : EXAMPLE;
   const column = known ? asColumn : site.main.columns.find((c) => c.id === EXAMPLE.column);
-  document.querySelectorAll("header nav a").forEach((a) => a.classList.toggle("active", a.dataset.view === "how"));
   document.title = `${VIEW_NAMES.how} – ${TITLE}`;
   const content = $("#content");
   const map = content.querySelector(".how-map");
@@ -166,6 +167,7 @@ async function routeHow(state) {
     if (here) scrollTops[here.key] = content.scrollTop;
     content.replaceChildren(el("p", { class: "how-loading" }, "Loading the cell's trace…"));
   }
+  document.querySelectorAll("header nav a").forEach((a) => a.classList.toggle("active", a.dataset.view === "how"));
   here = { key: "how", view: "how" };
   const trace = await traceOf(sheet, plan, column.key);
   if (ticket !== howTicket || location.hash !== asked) return;
@@ -753,4 +755,5 @@ function markOpenPlans() {
   document.querySelectorAll("tr[data-plan]").forEach((tr) => tr.classList.toggle("open-plan", open.includes(tr.dataset.plan)));
 }
 
+initAppearance();
 start();
