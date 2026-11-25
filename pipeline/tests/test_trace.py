@@ -3,7 +3,7 @@ from unittest import mock
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path[:0] = [os.path.dirname(HERE), os.path.join(os.path.dirname(os.path.dirname(HERE)), "web")]
-import ask, blobs, build, built, document_facts, extract, fields, sheets, present, run, trace, years
+import ask, blobs, build, built, document_facts, extract, facts, fields, sheets, present, review, run, trace, years
 
 READER, VERIFIER, REVIEWER = "reader-model", "verifier-model", "reviewer-model"
 
@@ -367,7 +367,7 @@ class FactChecksTest(RunTest):
                                                     reason="page 46 says so",
                                                     decoys=[dict(item=0, shown=dict(STATED, network="in"), ok=False,
                                                                  reason="wrong network")])])
-        self.assertEqual(checked["reviewer"], {"status": trace.NOT_RECORDED, "note": trace.TRUSTED_WITHOUT_REVIEW})
+        self.assertEqual(checked["reviewer"], {"status": trace.NONE})
         self.assertTrue(checked["kept"])
 
     def test_lists_a_rejected_answer_for_the_cells_plan_and_benefit(self):
@@ -438,18 +438,27 @@ class FactChecksTest(RunTest):
         with mock.patch.dict(os.environ, {"SHIBA_DATA": self.root}):
             run.Answers(years.data_dir(), None, self.work)(review, REVIEWER, "high")
         with open(os.path.join(review, extract.OUTCOMES), "w") as f:
-            json.dump([dict(prompt=self.check, item=0, fact=CHECKED, ok=False, reason="too vague", earlier=False)], f)
+            json.dump([dict(prompt=self.check, item=0, fact=CHECKED, ok=False, reason="too vague", step="reviewer")], f)
         (checked,) = [r for r in trace.cell(self.build(), *AMBULANCE)["fact_checks"]["rows"] if r["fact"] == CHECKED]
         self.assertEqual([(v["answer_key"], [d["reason"] for d in v["decoys"]]) for v in checked["verifier"]],
                          [(self.check_key, ["wrong network"])])
         self.assertEqual((checked["reviewer"]["answer_key"], checked["reviewer"]["reason"]), (review_key, "too vague"))
 
+    def test_a_rejected_fact_that_the_kept_list_names_says_so(self):
+        with open(os.path.join(self.work, "facts/review", extract.OUTCOMES), "w") as f:
+            json.dump([dict(prompt="d" * 64, item=0, fact=CHECKED, ok=False, reason="vague", step="reviewer")], f)
+        row = next(f for f in facts.read(os.path.join(self.data, "machine/document_facts.csv"))
+                   if facts.identity(f) == tuple(CHECKED.values()))
+        facts.write(os.path.join(self.data, review.KEPT), [row])
+        (checked,) = [r for r in trace.cell(self.build(), *AMBULANCE)["fact_checks"]["rows"] if r["fact"] == CHECKED]
+        self.assertEqual(checked["reviewer"]["note"], trace.KEPT_REJECTED)
+
     def test_a_fact_the_reviewer_checked_has_its_verdict(self):
         with open(os.path.join(self.work, "facts/review", extract.OUTCOMES), "w") as f:
-            json.dump([dict(prompt="d" * 64, item=0, fact=CHECKED, ok=True, reason="fine", earlier=True)], f)
+            json.dump([dict(prompt="d" * 64, item=0, fact=CHECKED, ok=True, reason="fine", step="reviewer")], f)
         (checked,) = [r for r in trace.cell(self.build(), *AMBULANCE)["fact_checks"]["rows"] if r["fact"] == CHECKED]
         self.assertEqual(checked["reviewer"], dict(status=trace.TRACED, prompt="d" * 64, answer_key=None, ok=True,
-                                                   reason="fine", earlier=True))
+                                                   reason="fine"))
 
 
 

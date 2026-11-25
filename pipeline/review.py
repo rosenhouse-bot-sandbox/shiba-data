@@ -1,13 +1,14 @@
-"""A reviewer checks each fact that a presented cell cites, unless an earlier run trusted it.
+"""A reviewer checks each fact that a presented cell cites.
 
-Each review task holds one fact, so a rerun asks again only for facts it has not seen.
+Each review task holds one fact, so a saved answer settles a fact until its task changes.
 """
 import os, shutil
 
 import ask, extract, facts, present
 from eoc import Doc
 
-REVIEWED = "machine/reviewed_facts.csv"
+# Facts a cell keeps citing although the reviewer rejects them. This list should only shrink.
+KEPT = "machine/kept_rejected.csv"
 
 
 def row(f):
@@ -22,15 +23,15 @@ def cited(data, document, version):
             if present.cell(sheet, column, plan_id) not in held for _, used in got for f in used}
 
 
-def trusted(data, old, version):
-    """The rows an earlier run reviewed. Before the first review, the cited rows of the old facts."""
-    path = data / REVIEWED
-    return {row(f) for f in facts.read(path)} if path.exists() else cited(data, old, version)
+def kept(data):
+    """The rows of KEPT, if the year has one."""
+    path = data / KEPT
+    return {row(f) for f in facts.read(path)} if path.exists() else set()
 
 
-def to_review(data, trusted_rows, new, version):
-    """The facts in new, once each, that a presented cell cites and that are not trusted."""
-    rows = cited(data, new, version) - trusted_rows
+def to_review(data, new, version):
+    """The facts in new, once each, that a presented cell cites."""
+    rows = cited(data, new, version)
     return list({row(f): f for f in new if row(f) in rows}.values())
 
 
@@ -80,16 +81,16 @@ def saved(data, model, text, effort):
     return (data / "answers" / f"{ask.key(model, text, effort)}.json").exists()
 
 
-def gate(data, texts, work, answer, trusted_rows, new, version, present_version, task_of=None):
-    """new without the facts the reviewer rejects, and the kept facts that are cited or trusted, which a later run trusts.
-    Stops if more facts than version["review_cap"] lack a saved answer.
-    Writes <work>/review/outcomes.json with each verdict, and the saved verdicts of the trusted facts that have one."""
+def gate(data, texts, work, answer, new, version, present_version, task_of=None):
+    """new without the facts the reviewer rejects, but for those in KEPT.
+    Stops if more cited facts than version["review_cap"] lack a saved answer. Writes <work>/review/outcomes.json."""
     task_of = task_of or reviewer_task(data, texts, version)
     model, effort = version["reviewer"]
+    frozen = kept(data)
     verdict, unsaved, outcomes, out = {}, 0, [], f"{work}/review"
     while True:
-        kept = [f for f in new if verdict.get(row(f)) is not False]
-        pending = [f for f in to_review(data, trusted_rows, kept, present_version) if row(f) not in verdict]
+        kept_rows = [f for f in new if verdict.get(row(f)) is not False or row(f) in frozen]
+        pending = [f for f in to_review(data, kept_rows, present_version) if row(f) not in verdict]
         if not pending:
             break
         texts_of = [task_of(f) for f in pending]
@@ -99,18 +100,16 @@ def gate(data, texts, work, answer, trusted_rows, new, version, present_version,
         got = ask_each(out, answer, model, effort, texts_of)
         for f, text, v in zip(pending, texts_of, got):
             verdict[row(f)] = v.get("ok") is True
-            outcomes.append(outcome(f, text, v, earlier=False))
-            if not verdict[row(f)]:
+            outcomes.append(outcome(f, text, v))
+            if not verdict[row(f)] and row(f) not in frozen:
                 print(f"Reviewer rejected {f['plan_id']} {f['benefit']} {f['amount']}: {v.get('reason', 'no verdict')}")
-    rows = cited(data, kept, present_version) | trusted_rows
-    earlier = [f for f in {row(f): f for f in kept if row(f) in trusted_rows and row(f) not in verdict}.values()
-               if saved(data, model, task_of(f), effort)]
-    texts_of = [task_of(f) for f in earlier]
-    outcomes += [outcome(f, text, v, earlier=True)
-                 for f, text, v in zip(earlier, texts_of, ask_each(f"{out}/earlier", answer, model, effort, texts_of))]
+    stale = {row(f) for f in new if row(f) in frozen and verdict.get(row(f)) is not False}
+    if stale:
+        raise SystemExit(f"{KEPT} lists {len(stale)} facts that no cell cites or that the reviewer accepts. Remove them:\n"
+                         + "\n".join(f"{r[1]} {r[2]} {r[11]}" for r in sorted(stale)))
     os.makedirs(out, exist_ok=True)
     extract.write_outcomes(out, outcomes)
-    return kept, [f for f in kept if row(f) in rows]
+    return kept_rows
 
 
 def ask_each(out, answer, model, effort, texts):
@@ -125,6 +124,5 @@ def ask_each(out, answer, model, effort, texts):
     return [got.get(n, {}) for n in range(len(texts))]
 
 
-def outcome(f, text, v, earlier):
-    return dict(prompt=ask.sha(text), item=0, fact=extract.named(f), ok=v.get("ok"),
-                reason=v.get("reason", ""), earlier=earlier)
+def outcome(f, text, v):
+    return dict(step="reviewer", prompt=ask.sha(text), item=0, fact=extract.named(f), ok=v.get("ok"), reason=v.get("reason", ""))

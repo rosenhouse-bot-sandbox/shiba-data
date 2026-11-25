@@ -44,9 +44,9 @@ class WithoutBuiltTest(unittest.TestCase):
     def test_copies_a_year_but_its_outputs_and_run_state(self):
         with tempfile.TemporaryDirectory() as tmp:
             src, dst = pathlib.Path(tmp, "data"), pathlib.Path(tmp, "copy")
-            dirs = [f"{name}/a.json" for name in built.RUN_STATE if not name.endswith(".csv")]
+            dirs = [f"{name}/a.json" for name in built.RUN_STATE]
             for name in ("config.json", "comments.csv", "generated/documents_checked.csv", "evaluations/imaging/all.md",
-                         *built.OUTPUTS, "machine/reviewed_facts.csv", *dirs):
+                         *built.OUTPUTS, *dirs):
                 path = src / "2027" / name
                 path.parent.mkdir(parents=True, exist_ok=True)
                 path.write_text("x")

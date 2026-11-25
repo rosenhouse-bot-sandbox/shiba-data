@@ -23,7 +23,7 @@ OUTPUTS = ("machine/document_facts.csv", "generated/plans.csv", "generated/docum
            "generated/pbp_facts.csv", "generated/cms_sources.csv", "generated/presented.csv",
            "generated/main_chart.csv", "generated/dvha.csv")
 # What each run reads from earlier runs.
-RUN_STATE = ("answers", "evaluations/imaging/answers", "machine/reviewed_facts.csv")
+RUN_STATE = ("answers", "evaluations/imaging/answers")
 
 
 def check(test):

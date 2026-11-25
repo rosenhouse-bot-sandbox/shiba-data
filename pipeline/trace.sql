@@ -112,7 +112,7 @@ CREATE TABLE fact (
   doc_sha       TEXT NOT NULL,
   page          TEXT NOT NULL,
   origin        TEXT NOT NULL CHECK (origin IN ('document', 'pbp')),
-  reviewed      INTEGER NOT NULL,
+  kept_rejected INTEGER NOT NULL,
   plan_id       TEXT NOT NULL REFERENCES plan,
   benefit       TEXT NOT NULL,
   setting       TEXT NOT NULL,
@@ -212,7 +212,7 @@ CREATE INDEX stated_doc ON stated (doc_sha);
 CREATE INDEX stated_fact ON stated (fact_id, source, doc_sha, page);
 
 -- Each verdict on an item of a verifier or reviewer task (extract.py, review.py). A decoy names no fact.
--- ok is NULL when the answer gave no verdict. earlier is 1 for a trusted fact's saved verdict from an earlier run.
+-- ok is NULL when the answer gave no verdict.
 CREATE TABLE verdict (
   step       TEXT NOT NULL CHECK (step IN ('verifier', 'reviewer')),
   prompt_sha TEXT NOT NULL,
@@ -225,7 +225,6 @@ CREATE TABLE verdict (
   page       TEXT,
   ok         INTEGER,
   reason     TEXT NOT NULL,
-  earlier    INTEGER NOT NULL,
   PRIMARY KEY (step, prompt_sha, item)
 );
 CREATE INDEX verdict_fact ON verdict (fact_id, source, doc_sha, page);

@@ -212,10 +212,10 @@ const withPrompts = (...prompts) => ({ ...replay, answers: { ...replay.answers, 
   { model: "m", prompts: prompts.map(([dir, task]) => ({ dir, task, prompt: task, url: task })) }] } });
 
 test("a prompt's label names its role, its document when known, and a retry", () => {
-  const t = withPrompts(["facts/a/reread", "ce13e925c0384896.retry.md"], ["facts/review", "v-0.md"], ["facts/review/earlier", "v-1.md"],
+  const t = withPrompts(["facts/a/reread", "ce13e925c0384896.retry.md"], ["facts/review", "v-0.md"],
     ["facts/a/recheck", "v-0123456789abcdef.md"]);
   assert.deepEqual(lines("read-facts", t).slice(2), ["SB second reader prompt, retried, answered by m"]);
-  assert.deepEqual(lines("check-facts", t).slice(-3), ["reviewer prompt, answered by m", "earlier reviewer prompt, answered by m",
+  assert.deepEqual(lines("check-facts", t).slice(-2), ["reviewer prompt, answered by m",
     "second verifier prompt, answered by m"]);
 });
 

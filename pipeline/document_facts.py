@@ -25,7 +25,7 @@ VERSIONS[10] = dict(VERSIONS[9], recheck={
               "H7006-021-0"),
     "part_b_drugs": KAISER, "hearing": ("H9003-009-0",),
     "surgery": KAISER + ("H3817-008-1",)})
-# A reviewer checks each untrusted fact that a cell cites (review.py). The cap stops a run that would ask about too many.
+# A reviewer checks each fact that a cell cites (review.py). The cap stops a run that would ask about too many.
 VERSIONS[11] = dict(VERSIONS[10], reviewer=("claude-opus-5-5", "high"), review_cap=100)
 VERSIONS[12] = dict(VERSIONS[11], groups=VERSIONS[11]["groups"] + ("plan_premium", "emergency", "foot_care", "meals",
                                                              "other_supplemental"))
@@ -129,10 +129,7 @@ def step(data, texts, work, answer, version, reviewed=True, present_version=None
     path = data / "machine/document_facts.csv"
     os.makedirs(data / "machine", exist_ok=True)
     if reviewed and "reviewer" in v:
-        old = facts.read(path) if path.exists() else []
-        trusted = review.trusted(data, old, present_version)
-        rows, trusted = review.gate(data, texts, work, answer, trusted, rows, v, present_version)
-        facts.write(str(data / review.REVIEWED), trusted)
+        rows = review.gate(data, texts, work, answer, rows, v, present_version)
     facts.write(str(path), rows)
 VERSIONS[13] = dict(VERSIONS[12], review_cap=200, recheck=VERSIONS[12]["recheck"] | {
     "dental": ("H3805-041-0", "H2406-042-0", "H1372-003-0", "H2406-073-0", "H7199-002-0", "H2923-025-0", "H1036-153-0",

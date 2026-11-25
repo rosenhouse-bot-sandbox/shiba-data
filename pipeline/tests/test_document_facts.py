@@ -226,7 +226,7 @@ class StepTest(StepsTest):
         self.assertEqual([c["network"] for c in rechecked if not c["decoy"]], ["out"])
         self.assertTrue(any(c["decoy"] for c in rechecked))
 
-    def test_a_reviewer_keeps_what_it_accepts_and_saves_what_a_later_run_trusts(self):
+    def test_writes_the_facts_the_reviewer_keeps(self):
         def fake(task_dir, model, effort):
             for task in glob.glob(f"{task_dir}/*.md"):
                 text = pathlib.Path(task).read_text()
@@ -235,17 +235,15 @@ class StepTest(StepsTest):
                 with open(task[:-3] + ".json", "w") as f:
                     json.dump(reply, f)
 
-        def gate(data, texts, work, answer_, trusted, rows, v, present_version):
-            self.assertEqual((trusted, present_version), ({"old 2"}, 2))
-            return rows[:0], rows
+        def gate(data, texts, work, answer_, rows, v, present_version):
+            self.assertEqual(present_version, 2)
+            return rows[:0]
 
         version = dict(groups=("imaging",), reader=("r", "high"), verifier=("v", "low"), reviewer=("m", "e"))
         with mock.patch.dict(document_facts.VERSIONS, {9: version}), \
-                mock.patch.object(review, "trusted", lambda data, old, version: {f"old {version}"}), \
                 mock.patch.object(review, "gate", gate):
             document_facts.step(self.data, self.work, self.dir, fake, 9, present_version=2)
             self.assertEqual(facts.read(self.data / "machine" / "document_facts.csv"), [])
-            self.assertEqual(len(facts.read(self.data / review.REVIEWED)), 1)
             document_facts.step(self.data, self.work, self.dir, fake, 9, reviewed=False)
             self.assertEqual(len(facts.read(self.data / "machine" / "document_facts.csv")), 1)
 
