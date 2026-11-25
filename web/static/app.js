@@ -17,6 +17,8 @@ const $ = (sel) => document.querySelector(sel);
 
 // Keep in sync with PAGE_REF in web/build.py.
 const PAGE_REF = /\b(EOC|SB|rider) pages? (\d+)/gi;
+// Also matches "pages 62-64" and "pages 82 and 83".
+const PAGE_RANGE = /\b(EOC|SB|rider) pages? (\d+)(?:(?:-|–| to | and )(\d+))?/gi;
 
 let site;
 const TITLE = document.title;
@@ -217,7 +219,7 @@ function defaultDoc() {
   if (selection) {
     const { plan, sheet, col } = selection.dataset;
     const cell = site[sheet].rows.find((r) => r.plan_id === plan).cells[col];
-    const first = cell.cites[0] || cell.comment;
+    const first = firstSource(here.view, cell);
     return first ? { doc: first.doc, page: first.page } : { doc: planSb(plans[plan]), page: 1 };
   }
   return here.view === "plan" ? { doc: planSb(plans[here.plan]), page: 1 } : null;
@@ -320,7 +322,9 @@ function commentText(view, sheet, plan, column, cell) {
     parts.push(text.slice(at, ref.index), el("a", {
       href: cellHref(view, sheet, plan, column, { kind, page }),
       onclick: clicked((e) => {
-        if (e.target.closest("#source-note")) return openDoc(doc, page, null, $("#source-note").firstElementChild);
+        if (e.target.closest("#source-note")) {
+          return openDoc(doc, page, null, $("#source-note").firstElementChild, [...shownCites(view, cell), cell.comment]);
+        }
         pick(e.target.closest("tr").querySelector("td[data-col]"));
         openCell(view, sheet, plan, column, cell, { kind, page });
       }),
@@ -339,25 +343,43 @@ const commentSource = (href, cell, note) => {
     `: “${quote}”`);
 };
 
-// Opens the cell's first citation, or else its comment's source, or else the plan's SB.
+// Notes shows only the citations on the pages a note names, since a cell's citations may be about other benefits.
+function shownCites(view, cell) {
+  if (view !== "notes") return cell.cites;
+  const kindPage = (kind, page) => `${kind.toUpperCase()} ${page}`;
+  const named = new Set([kindPage(site.docs[cell.comment.doc].kind, cell.comment.page)]);
+  for (const [, kind, first, last = first] of cell.comment.text.matchAll(PAGE_RANGE)) {
+    for (let page = Number(first); page <= Number(last); page++) named.add(kindPage(kind, page));
+  }
+  return cell.cites.filter((c) => named.has(kindPage(site.docs[c.doc].kind, c.page)));
+}
+
+// Notes opens a note's source first.
+const firstSource = (view, cell) => (view === "notes" ? cell.comment : cell.cites[0] || cell.comment);
+
+// Opens the cell's first shown citation, or else its comment's source, or else the plan's SB.
 // at ({ kind, page }) opens that page of the plan's document of that kind instead.
 function openCell(view, sheet, plan, column, cell, at = null) {
+  const shown = shownCites(view, cell);
+  const sheetLink = shown.length < cell.cites.length ? [el("p", {}, el("a", { href: cellHref(sheet, sheet, plan, column) },
+    `Show this cell's citations in ${SHEET_NAMES[sheet]}`))] : [];
+  cell = { ...cell, cites: shown };
   const header = cellHeader(view, sheet, plan, column, cell);
   const href = (at) => cellHref(view, sheet, plan, column, at);
   let note;
   if (cell.cites.length) {
     note = citeNote(href, header, cell);
-    note.append(medicareGov(plan, column));
+    note.append(...sheetLink, medicareGov(plan, column));
   } else if (cell.comment) {
     note = el("div", {}, header);
-    note.append(commentSource(href, cell, note), ...cmsFields(cell), medicareGov(plan, column));
+    note.append(commentSource(href, cell, note), ...sheetLink, ...cmsFields(cell), medicareGov(plan, column));
   } else {
     note = el("div", {}, header, el("p", {},
       cell.value ? `This value comes from CMS ${site.year} plan data, which has no page to point to. `
         : `The CMS ${site.year} Plan Benefit Package data has no entry for this benefit. `,
       "The plan's Summary of Benefits is shown for reference."), ...cmsFields(cell), medicareGov(plan, column));
   }
-  const first = cell.cites[0] || cell.comment || { doc: planSb(plan), page: 1, quote: null };
+  const first = firstSource(view, cell) || { doc: planSb(plan), page: 1, quote: null };
   const doc = plan.docs.find((d) => site.docs[d].kind === at?.kind);
   if (!doc) return openDoc(first.doc, first.page, first.quote, note, cell.cites);
   const quote = [...cell.cites, cell.comment].find((q) => q?.doc === doc && q.page === at.page)?.quote ?? null;
