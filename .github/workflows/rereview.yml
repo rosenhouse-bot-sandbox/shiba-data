@@ -1,6 +1,7 @@
 name: Rereview
 
-# Asks the pinned reviewer about trusted facts that have no saved review (pipeline/rereview.py).
+# Asks the pinned reviewer about trusted facts that have no saved review (pipeline/rereview.py),
+# and compares other reviewer models with it (pipeline/compare_reviewers.py).
 on:
   workflow_dispatch:
     inputs:
@@ -12,6 +13,10 @@ on:
         description: Most facts to ask about
         required: true
         default: "100"
+      accepts:
+        description: Accepted review tasks to ask the other reviewer models, besides every rejected one. 0 skips them.
+        required: true
+        default: "0"
 
 concurrency: rereview
 
@@ -27,6 +32,7 @@ jobs:
     env:
       YEAR: ${{ inputs.year }}
       LIMIT: ${{ inputs.limit }}
+      ACCEPTS: ${{ inputs.accepts }}
       ANTHROPIC_ORGANIZATION_ID: 3c97a8fb-8968-4ed9-aec7-f68b88683532
       ANTHROPIC_SERVICE_ACCOUNT_ID: svac_0142UmsmTSG4RDAgtFvyHY9F
       ANTHROPIC_FEDERATION_RULE_ID: fdrl_018f3jSg6eLJS1PxSPQQNxks
@@ -44,17 +50,14 @@ jobs:
       - run: pip install pypdfium2==5.13.0 openpyxl==3.1.5 anthropic==2.3.0
       - run: npm ci
         working-directory: pipeline
-      - name: Download the recorded PDF texts
-        timeout-minutes: 20
-        run: |
-          python3 -I pipeline/blobs.py texts "data/$YEAR" _work > _texts.txt
-          # shellcheck disable=SC2016 # sh -c expands $1 and $2.
-          xargs -P 8 -n 2 sh -c 'mkdir -p "$(dirname "$2")" && curl -sSfL --retry 5 --retry-all-errors --max-time 300 -o "$2" "https://pdxplans.org/docs/$1.pdf"' _ \
-            < _texts.txt
-          sed 's/ /  /' _texts.txt | sha256sum -c --quiet
+      # tables.py downloads the texts and replays the pinned facts, with a ledger of each review task.
       - run: python3 -I pipeline/tables.py "$YEAR" "$RUNNER_TEMP/tables"
-      - run: python3 -I pipeline/rereview.py "$YEAR" _work/texts _work "$LIMIT" api
-        timeout-minutes: 300
+        timeout-minutes: 15
+      - run: python3 -I pipeline/rereview.py "$YEAR" "$RUNNER_TEMP/tables/texts" _work "$LIMIT" api
+        timeout-minutes: 150
+      - if: env.ACCEPTS != '0'
+        run: python3 -I pipeline/compare_reviewers.py "$YEAR" "$RUNNER_TEMP/tables" _work "$ACCEPTS" api >> "$GITHUB_STEP_SUMMARY"
+        timeout-minutes: 150
       - if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -71,6 +74,7 @@ jobs:
           git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
           git checkout -b "$branch"
           git add "data/$YEAR/answers"
+          if [ -d "data/$YEAR/evaluations/reviewer" ]; then git add "data/$YEAR/evaluations/reviewer"; fi
           git commit -m "Save the reviewer answers of run $GITHUB_RUN_ID" || exit 0
           git push "https://x-access-token:$GH_TOKEN@github.com/$GITHUB_REPOSITORY.git" "$branch"
           echo "::notice::Pushed $branch."
