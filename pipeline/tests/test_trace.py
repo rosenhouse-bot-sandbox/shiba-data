@@ -367,7 +367,7 @@ class FactChecksTest(RunTest):
                                                     reason="page 46 says so",
                                                     decoys=[dict(item=0, shown=dict(STATED, network="in"), ok=False,
                                                                  reason="wrong network")])])
-        self.assertEqual(checked["reviewer"], {"status": trace.NOT_RECORDED, "note": trace.TRUSTED_WITHOUT_REVIEW})
+        self.assertEqual(checked["reviewer"], {"status": trace.NONE})
         self.assertTrue(checked["kept"])
 
     def test_lists_a_rejected_answer_for_the_cells_plan_and_benefit(self):

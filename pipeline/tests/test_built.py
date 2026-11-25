@@ -46,7 +46,7 @@ class WithoutBuiltTest(unittest.TestCase):
             src, dst = pathlib.Path(tmp, "data"), pathlib.Path(tmp, "copy")
             dirs = [f"{name}/a.json" for name in built.RUN_STATE if not name.endswith(".csv")]
             for name in ("config.json", "comments.csv", "generated/documents_checked.csv", "evaluations/imaging/all.md",
-                         *built.OUTPUTS, "machine/reviewed_facts.csv", *dirs):
+                         *built.OUTPUTS, *dirs):
                 path = src / "2027" / name
                 path.parent.mkdir(parents=True, exist_ok=True)
                 path.write_text("x")

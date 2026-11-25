@@ -20,7 +20,6 @@ import ask, blobs, eoc, extract, facts, fields, find_docs, sheets, present, year
 
 REPO_URL = "https://github.com/rosenhouse-bot-sandbox/shiba-data"
 PROMPT_URL = "https://pdxplans.org/blobs/{}.txt"
-TRUSTED_WITHOUT_REVIEW = "trusted without review (#170)"
 TRACED, NONE, NOT_RECORDED = "traced", "none", "not_recorded"
 FACT_FILES = {"document": "machine/document_facts.csv", "pbp": "generated/pbp_facts.csv"}
 FACT_COLUMNS = ", ".join(f'f."{c}"' for c in facts.COLUMNS)
@@ -80,8 +79,7 @@ def build(year, out, sha, work=None):
         insert(db, "sheet_cell", sheet_cells(sheets.read(data)))
         insert(db, "landscape_read", (dict(r, position=n) for n, r in enumerate(read(data / "generated/landscape_reads.csv"))))
         load_citations(db, data, checked)
-        reviewed = {facts.identity(f) for f in read(data / "machine/reviewed_facts.csv")}
-        insert(db, "fact", (dict(f, origin=origin, reviewed=int(facts.identity(f) in reviewed))
+        insert(db, "fact", (dict(f, origin=origin)
                             for origin, path in FACT_FILES.items() for f in read(data / path)))
         load_rules(db, data)
         if ledger:
@@ -187,7 +185,7 @@ def rule(db, sheet, plan_id, col, code):
     """Returns record 6, the rule's lines and the facts it used and set aside."""
     lines = rows(db, "SELECT line, value, presented, held FROM rule_line WHERE sheet = ? AND plan_id = ? AND col = ? "
                      "ORDER BY line", sheet, plan_id, col)
-    considered = rows(db, f"""SELECT r.line, r.reasons, {FACT_COLUMNS}, f.origin, f.reviewed
+    considered = rows(db, f"""SELECT r.line, r.reasons, {FACT_COLUMNS}, f.origin
                               FROM rule_fact r JOIN fact f USING (fact_id, source, doc_sha, page)
                               WHERE r.sheet = ? AND r.plan_id = ? AND r.col = ? ORDER BY r.line, f.fact_id""",
                       sheet, plan_id, col)
@@ -271,9 +269,6 @@ def fact_check(db, identity, prompts):
         v = reviews[0]
         reviewer = dict(status=TRACED, prompt=v["prompt_sha"], answer_key=answer_key(db, v["prompt_sha"], "reviewer"), ok=verdict_ok(v),
                         reason=v["reason"], earlier=bool(v["earlier"]))
-    elif db.execute("SELECT 1 FROM fact WHERE fact_id = ? AND source = ? AND doc_sha = ? AND page = ? AND reviewed = 1",
-                    identity).fetchone():
-        reviewer = {"status": NOT_RECORDED, "note": TRUSTED_WITHOUT_REVIEW}
     else:
         reviewer = {"status": NONE}
     kept = db.execute("SELECT 1 FROM fact WHERE fact_id = ? AND source = ? AND doc_sha = ? AND page = ?", identity).fetchone()
@@ -293,7 +288,7 @@ def unlinked(db, sha256):
 
 
 def fact_of(row):
-    return {k: v for k, v in row.items() if k not in ("line", "reasons")} | {"reviewed": bool(row["reviewed"])}
+    return {k: v for k, v in row.items() if k not in ("line", "reasons")}
 
 
 def rows(db, sql, *args):
