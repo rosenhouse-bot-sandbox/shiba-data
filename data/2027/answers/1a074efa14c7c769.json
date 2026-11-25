@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1550.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The Page 11 TRANSPORTATION row reads \\\"Not Covered\\\" for this single-plan document. That matches extras.transportation as supplemental not_covered, with no setting and no amount.\"}]\n```",
+ "usage": {
+  "input_tokens": 2587,
+  "output_tokens": 203,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

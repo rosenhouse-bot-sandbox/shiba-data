@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-518.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 64 outpatient surgery row, In-Network Surgery Services: $350 copayment at an Ambulatory Surgical Center. The $395 Outpatient Hospital line and the colonoscopy line are separate.\"}]\n```",
+ "usage": {
+  "input_tokens": 2382,
+  "output_tokens": 214,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

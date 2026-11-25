@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1084.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 8 row 'Primary care office visits' shows In-network: $0 per provider per day. This matches the PCP office setting, in-network, $0 copay and the unit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2214,
+  "output_tokens": 177,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

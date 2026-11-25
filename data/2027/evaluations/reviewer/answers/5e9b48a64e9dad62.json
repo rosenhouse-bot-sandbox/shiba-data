@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-248.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 7, Dental and Alternative Therapy Allowance: cosmetic procedures, dental implants and elective procedures are not covered. These are all the dental exclusions named. Network any fits because members may see any licensed provider.\"}]\n```",
+ "usage": {
+  "input_tokens": 3706,
+  "output_tokens": 226,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

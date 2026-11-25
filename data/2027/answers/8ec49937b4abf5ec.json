@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-535.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 64 hearing aids row, out-of-network column: 90% coinsurance on the first $700 for up to 2 hearing aids. The plan, benefit, network, cost kind, amount and qualifier all match the page.\"}]\n```",
+ "usage": {
+  "input_tokens": 3793,
+  "output_tokens": 412,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

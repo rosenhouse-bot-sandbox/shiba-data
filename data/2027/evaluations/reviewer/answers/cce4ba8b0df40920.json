@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-44.md",
+ "reply": "[{\"id\": 0, \"ok\": false, \"reason\": \"The quotes on page 83 do show 0% in-network for amalgam fillings and extractions. But the page never names the package 'MyOption DEN972', and the dental table appears as a plain plan benefit, so the package field is unsupported.\"}]",
+ "usage": {
+  "input_tokens": 4175,
+  "output_tokens": 292,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

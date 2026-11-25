@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-405.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 110 Eyewear row: the plan pays up to $400 per year for routine eyeglasses, lenses, frames and contacts. The page calls this your $400 per year allowance, so it is a supplemental eyewear allowance.\"}]\n```",
+ "usage": {
+  "input_tokens": 2774,
+  "output_tokens": 223,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

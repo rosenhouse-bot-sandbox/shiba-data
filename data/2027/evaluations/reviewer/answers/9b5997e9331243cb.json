@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-295.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 86 CT Scans heading in the outpatient diagnostic tests row: Outpatient hospital $200 copay, in network, Medicare-covered. This matches the plan, benefit, setting and amount.\"}]\n```",
+ "usage": {
+  "input_tokens": 2611,
+  "output_tokens": 97,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

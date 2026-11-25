@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-405.md",
+ "reply": "[{\"id\":0,\"ok\":false,\"reason\":\"Page 113 does not say outright that the Value plan has no routine eyewear coverage. The row sits under 'Covered only under specific conditions' and says one pair of eyeglasses or contact lenses is covered after cataract surgery. Only the Enhanced and Standard plans are named as exempt from the exclusion, so Value's status is an inference. The exclusion is also lifted for optional supplemental eyewear benefits. A blanket 'not covered' for any setting is therefore not safe.\"}]",
+ "usage": {
+  "input_tokens": 2520,
+  "output_tokens": 564,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

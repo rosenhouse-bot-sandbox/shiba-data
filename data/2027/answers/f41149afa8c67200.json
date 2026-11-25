@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1877.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 112 lists a $0 copay for preventive and diagnostic dental care such as exams, cleanings and X-rays. No network is named, so it is read as in network. The bullets continue without a break onto page 113, which names the Platinum Dental Rider.\"}]\n```",
+ "usage": {
+  "input_tokens": 3784,
+  "output_tokens": 638,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

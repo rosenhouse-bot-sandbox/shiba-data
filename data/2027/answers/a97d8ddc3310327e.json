@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1941.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 89, Diagnostic Procedures and Tests row under Outpatient diagnostic tests: Freestanding location $40 copay, in network, for this single plan.\"}]\n```",
+ "usage": {
+  "input_tokens": 2366,
+  "output_tokens": 311,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1665.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 68 lists the $0 diagnostic colonoscopy copay for both Ambulatory Surgical Center and Outpatient Hospital. One cost covers every setting, so the setting should be 'any', not 'asc'.\"}]\n```",
+ "usage": {
+  "input_tokens": 2436,
+  "output_tokens": 374,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

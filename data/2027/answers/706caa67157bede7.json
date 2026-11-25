@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-944.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 108 Advantage Plus chart, preventive and diagnostic row (exams, X-rays, cleanings): you pay $0 up to the $1,500 annual dental benefit maximum, at network dentists. The chart has no per-plan columns, so it applies to every plan in the document, including H9003-009-0. The package is named Advantage Plus and the benefit is optional supplemental.\"}]\n```",
+ "usage": {
+  "input_tokens": 3269,
+  "output_tokens": 561,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

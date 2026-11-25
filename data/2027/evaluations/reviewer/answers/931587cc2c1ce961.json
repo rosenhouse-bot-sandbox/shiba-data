@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-89.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 90 does list 2 emergency diagnostic exams (D0140) per calendar year. But nothing on the page names the package 'MyOption DEN972' or shows the chart belongs to an optional package, so that field cannot be verified.\"}]\n```",
+ "usage": {
+  "input_tokens": 4151,
+  "output_tokens": 271,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

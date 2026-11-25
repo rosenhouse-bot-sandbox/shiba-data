@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-310.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 8 says cosmetic procedures, dental implants, and/or elective procedures are not covered. This matches a dental not_covered exclusion fact listing all three. The herbs and supplements exclusions are not dental, so leaving them out of the limit is correct. The plan is the only one in the document.\"}]",
+ "usage": {
+  "input_tokens": 3907,
+  "output_tokens": 306,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-379.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 83, Part B drugs row, 'Chemotherapy Drugs' list: 20% coinsurance, and 'An outpatient hospital setting' is one of the listed settings. The plan, benefit, setting, network and amount all match.\"}]\n```",
+ "usage": {
+  "input_tokens": 2833,
+  "output_tokens": 350,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

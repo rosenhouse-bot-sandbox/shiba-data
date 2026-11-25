@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-660.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 70 hearing services row for routine hearing aids: 'Limited to 2 non-implantable hearing aids every year.' This is a supplemental visit limit of 2 aids per year, from participating providers.\"}]\n```",
+ "usage": {
+  "input_tokens": 3114,
+  "output_tokens": 211,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

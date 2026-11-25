@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-218.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 85, outpatient surgery row for services at an ambulatory surgical center: 20% coinsurance, Medicare-covered, in network. It is the only cost on that row, apart from the prior-authorization note.\"}]\n```",
+ "usage": {
+  "input_tokens": 1859,
+  "output_tokens": 238,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1610.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 47 ambulance row reads '$325 copayment per date of service regardless of the number of trips – Ground Ambulance'. The emergency and in-network headings fall on the previous page, but the layout makes them clear: this block comes before 'Non-Emergency Ambulance' and before the 'Out-of-Network: Emergency Ambulance' section, which repeats the same structure.\"}]\n```",
+ "usage": {
+  "input_tokens": 2410,
+  "output_tokens": 647,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

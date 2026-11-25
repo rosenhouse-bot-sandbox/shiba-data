@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2231.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 36 shows the 20% air ambulance coinsurance only under the 'Emergency Ambulance' heading. The item leaves the condition blank. The Non-Emergency Ambulance costs are cut off on this page, so the air cost is not confirmed for every case.\"}]\n```",
+ "usage": {
+  "input_tokens": 2289,
+  "output_tokens": 352,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

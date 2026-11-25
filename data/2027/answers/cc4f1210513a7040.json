@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1780.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 6 has a separate Transportation row after the Ambulance rows, reading Not covered in network (and out of network). This is a non-emergency transportation benefit marked not covered, which maps to supplemental not_covered for the only plan in the document.\"}]\n```",
+ "usage": {
+  "input_tokens": 2301,
+  "output_tokens": 226,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

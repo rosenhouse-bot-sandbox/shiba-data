@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1354.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"The page 120 quote limits the eyewear fitting visit to 1 per year, not eyewear itself. Stated as an eyewear visit limit with no condition, it reads as 1 pair of eyewear per year, which the page does not say.\"}]\n```",
+ "usage": {
+  "input_tokens": 2380,
+  "output_tokens": 381,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

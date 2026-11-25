@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-334.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 8, Basic radiological services (X-rays), Freestanding radiological facility: $40 copay in network (out of network is 35% of the cost). Matches imaging.xray, freestanding, in, Medicare-covered, copay $40.\"}]",
+ "usage": {
+  "input_tokens": 2408,
+  "output_tokens": 102,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

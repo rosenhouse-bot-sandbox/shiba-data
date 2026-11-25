@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-19.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 95 never mentions diagnostic mammograms. The quoted '$0 copay' freestanding/outpatient hospital line belongs to the general diagnostic non-laboratory tests row (CT, MRI, EKG, EEG, PET), which the same page contradicts with $100 MRI and $40 EKG freestanding copays. It does not support a mammogram fact.\"}]\n```",
+ "usage": {
+  "input_tokens": 2396,
+  "output_tokens": 261,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1076.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 74 Hearing aids row matches: $399 copay per ear for the Advanced aid and $699 copay per ear for the Premium aid. These are supplemental, in-network hearing aid costs.\"}]\n```",
+ "usage": {
+  "input_tokens": 3623,
+  "output_tokens": 185,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

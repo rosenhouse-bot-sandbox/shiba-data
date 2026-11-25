@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-66.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 78's D4910 row is 0%, but comprehensive codes on page 79 also cost 50%. Comprehensive prices that differ by code must be one fact with amount '0% or 50%', not '0%'.\"}]\n```",
+ "usage": {
+  "input_tokens": 3923,
+  "output_tokens": 204,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

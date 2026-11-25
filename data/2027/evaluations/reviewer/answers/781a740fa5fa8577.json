@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-282.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 9, in-network column of the mandatory supplemental hearing benefit: '$0 copay for follow-up provider visits up to 3 per year.' This matches a supplemental in-network follow-up visit at a $0 copay.\"}]",
+ "usage": {
+  "input_tokens": 3541,
+  "output_tokens": 249,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

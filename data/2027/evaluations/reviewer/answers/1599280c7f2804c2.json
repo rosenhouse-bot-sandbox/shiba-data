@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-102.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 144 only describes how to get reimbursed for routine eyewear (UHC Vision) after paying a provider yourself. It does not show the eyewear covered in network, so the network field is unsupported.\"}]\n```",
+ "usage": {
+  "input_tokens": 2641,
+  "output_tokens": 319,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

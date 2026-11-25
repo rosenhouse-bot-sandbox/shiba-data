@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1823.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 79 Medicare Part B drugs row, under Other Medicare Part B Drugs: 0% coinsurance for Medicare-covered Part B allergy antigens, with no setting named. This is separate from the 20% for all other Part B drugs.\"}]\n```",
+ "usage": {
+  "input_tokens": 2379,
+  "output_tokens": 222,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

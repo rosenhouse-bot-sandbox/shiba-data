@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-783.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 103, the 'Vision services - routine eye exam' row shows an out-of-network cost of '$80 copay*' (in-network $0). This is a supplemental routine exam.\"}]\n```",
+ "usage": {
+  "input_tokens": 2730,
+  "output_tokens": 219,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

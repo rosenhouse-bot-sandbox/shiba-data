@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-346.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 22 Additional Benefits row reads '24-Hour Nurse Advice Line $0 copay'. That is a stated price, so copay $0 is correct, with no network split and no condition. The pool name, setting any and network in (the default) all match.\"}]\n```",
+ "usage": {
+  "input_tokens": 2256,
+  "output_tokens": 227,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

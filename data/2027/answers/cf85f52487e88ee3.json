@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2185.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 95 outpatient surgery row, in-network column: a flat $0 copayment for a colonoscopy at an outpatient hospital. This is stated separately from the Medicaid-dependent $0 or 20% line.\"}]\n```",
+ "usage": {
+  "input_tokens": 2466,
+  "output_tokens": 488,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-167.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 64 Exclusions say dental procedure codes not listed under Mandatory Supplemental Dental Benefits are strictly excluded, and that dental savings or membership plans are not covered. The limit text matches both, and the plan is the single plan in the document.\"}]",
+ "usage": {
+  "input_tokens": 3326,
+  "output_tokens": 443,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

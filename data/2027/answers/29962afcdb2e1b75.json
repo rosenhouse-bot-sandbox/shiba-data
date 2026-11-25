@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-474.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 14, Section 4.2 (Medicare Part B Premium Reduction): 'Humana will pay up to $56 of your Medicare Part B premium', which is deducted from the monthly Social Security check. That makes it a $56 per month Part B reduction for this plan, with 'up to' dropped as instructed.\"}]\n```",
+ "usage": {
+  "input_tokens": 2016,
+  "output_tokens": 519,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

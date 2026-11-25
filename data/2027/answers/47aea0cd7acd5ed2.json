@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1093.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 80 shows a 90% coinsurance per ear per hearing aid for supplemental hearing aids. It sits in the out-of-network section that begins under the 'Out-of-network' heading on page 79. The text confirms a 90% coinsurance at non-participating providers.\"}]\n```",
+ "usage": {
+  "input_tokens": 3669,
+  "output_tokens": 253,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

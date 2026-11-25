@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2028.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 61, in-network section: 'Other Medicare Part B Drugs 20% coinsurance' lists Outpatient Hospital as a setting. Chemotherapy and insulin drugs are also 20% there, so Part B drugs priced together are 20% in network at an outpatient hospital.\"}]\n```",
+ "usage": {
+  "input_tokens": 3034,
+  "output_tokens": 387,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

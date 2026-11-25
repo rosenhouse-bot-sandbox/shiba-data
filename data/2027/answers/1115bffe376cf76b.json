@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-653.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 62, Physician/practitioner services row, in-office primary care provider (PCP) visits: out-of-network 50% coinsurance. This is a Medicare-covered benefit for this plan.\"}]\n```",
+ "usage": {
+  "input_tokens": 2520,
+  "output_tokens": 92,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

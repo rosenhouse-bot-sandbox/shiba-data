@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-27.md",
+ "reply": "[{\"id\": 0, \"ok\": false, \"reason\": \"Page 89 shows 50% coinsurance for 'Advanced Laboratory Services' at an office or freestanding location. That row is likely separate from the standard outpatient lab row (e.g., HbA1c tests), and the page does not show the section heading or a standard lab row. Mapping it to tests.lab is therefore doubtful, so I can't confirm the item.\"}]",
+ "usage": {
+  "input_tokens": 2128,
+  "output_tokens": 525,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-529.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"On page 86, the Medicare Part B drugs row says chemotherapy drugs have 20% coinsurance, and the listed places include an outpatient hospital setting. The plan is an HMO, so this is the in-network cost.\"}]\n```",
+ "usage": {
+  "input_tokens": 2762,
+  "output_tokens": 395,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

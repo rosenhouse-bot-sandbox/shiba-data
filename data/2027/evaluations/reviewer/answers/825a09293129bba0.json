@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-259.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 108, Advantage Plus optional dental: preventive and diagnostic services list oral exams (up to 2 per calendar year) and teeth cleaning (up to 2 per calendar year), at $0 from network dentists. The page does not limit Advantage Plus to particular plans, so it fits H9003-006-0, and package, network and limit all match.\"}]",
+ "usage": {
+  "input_tokens": 3284,
+  "output_tokens": 687,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

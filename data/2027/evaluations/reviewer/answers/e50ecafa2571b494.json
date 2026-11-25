@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-248.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 7 Dental and Alternative Therapy Allowance: 'Cosmetic procedures, dental implants, and/or elective procedures are not covered.' This matches a dental not_covered excludes fact listing those three services.\"}]",
+ "usage": {
+  "input_tokens": 3706,
+  "output_tokens": 246,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-174.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 90: the EKGs/ECGs, EEGs and other diagnostic tests block lists 'Outpatient hospital: $95 copay' in network. This matches non-radiological diagnostic tests in an outpatient hospital. The $0 copay line above it belongs to the CT/MRI/PET text, and the Genetic Testing and laboratory rows below it are separate.\"}]",
+ "usage": {
+  "input_tokens": 2296,
+  "output_tokens": 880,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

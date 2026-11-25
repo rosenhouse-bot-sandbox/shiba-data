@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1431.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 112 Wellcare Spendables® row: $20 monthly preloaded on the card, usable for OTC items, Dental, Vision and Hearing. This is a shared allowance that names dental, with the pool named correctly, $20 per month.\"}]\n```",
+ "usage": {
+  "input_tokens": 3121,
+  "output_tokens": 330,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

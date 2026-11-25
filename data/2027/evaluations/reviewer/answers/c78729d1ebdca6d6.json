@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-164.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"On page 50, the supplemental dental section lists 'Periodic Oral exams - 2 every year' as a covered preventive service. The limit is stated for the service itself, and both in-network ($0) and out-of-network (50%, page 51) costs are given for it, so network 'any' fits.\"}]\n```",
+ "usage": {
+  "input_tokens": 2941,
+  "output_tokens": 274,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1052.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 8, Physical Therapy and Other Rehabilitation Services row, Occupational Therapy section: 'Office location: 30% coinsurance' for the H2923-009-0 plan, a Medicare-covered service.\"}]\n```",
+ "usage": {
+  "input_tokens": 2357,
+  "output_tokens": 236,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

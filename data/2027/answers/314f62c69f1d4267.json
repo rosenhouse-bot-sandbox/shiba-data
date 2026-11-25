@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-226.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 77 continues the page 76 list 'Hearing aid purchase includes:' for the supplemental TruHearing aids. It includes a '3-year extended warranty', so this is a covered warranty fact with a 3-year limit.\"}]\n```",
+ "usage": {
+  "input_tokens": 3374,
+  "output_tokens": 183,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-218.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 93, Outpatient rehabilitation services, Physical Therapy list: 'Outpatient Hospital: 30% coinsurance'. This is the physical therapy line, not occupational therapy or re-evaluation. It is a Medicare-covered benefit in network, and the page states no limit or condition.\"}]",
+ "usage": {
+  "input_tokens": 2272,
+  "output_tokens": 337,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-963.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"On page 108, the in-network ASC section lists a $400 facility copay and a $0 professional copay for outpatient procedures/surgery. The facility copay is the center's cost, so $400 is correct for the ASC setting.\"}]\n```",
+ "usage": {
+  "input_tokens": 2143,
+  "output_tokens": 245,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-427.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 87 PET Scans row: Office or Freestanding location is a $200 copay, which covers the office setting. The outpatient hospital $300 copay is a separate setting.\"}]\n```",
+ "usage": {
+  "input_tokens": 2206,
+  "output_tokens": 246,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

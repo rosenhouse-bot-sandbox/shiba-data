@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-615.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 92, Speech Therapy section of the outpatient rehabilitation row: 'Office location: $20 copay'. This is in network, Medicare-covered, and in the office setting. It is the speech therapy row, not the occupational therapy row ($40) or the outpatient hospital row ($50).\"}]\n```",
+ "usage": {
+  "input_tokens": 2111,
+  "output_tokens": 380,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

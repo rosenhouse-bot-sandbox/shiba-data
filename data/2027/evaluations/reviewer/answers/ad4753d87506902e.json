@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-99.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 116, routine eyewear row, out-of-network column: 90% coinsurance on the first $200 of retail value for 1 pair of eyeglasses or contact lenses, which the row covers every year.\"}]\n```",
+ "usage": {
+  "input_tokens": 2935,
+  "output_tokens": 631,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

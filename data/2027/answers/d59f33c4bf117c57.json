@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1474.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 51 outpatient surgery row, under 'Outpatient hospital services, In-network': 20% coinsurance for all other services (including associated professional fees). This matches surgery, outpatient hospital, in network, 20% coinsurance.\"}]\n```",
+ "usage": {
+  "input_tokens": 2146,
+  "output_tokens": 279,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

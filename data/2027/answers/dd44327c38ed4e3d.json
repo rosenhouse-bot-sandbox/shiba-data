@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-635.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 84, Medicare Part B drugs row: Allergy Serum is a $0 copay at a specialist's office (also a PCP's office and an outpatient hospital). The plan is an HMO, so the cost is in network by default.\"}]\n```",
+ "usage": {
+  "input_tokens": 2377,
+  "output_tokens": 317,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-91.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"The page 90 row does state 6 intraoral X-ray procedure codes per calendar year. But the page never names a package, so the package 'MyOption DEN972' cannot be confirmed from the quote.\"}]\n```",
+ "usage": {
+  "input_tokens": 4152,
+  "output_tokens": 234,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2036.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"On page 76, the Humana Healthy Options Allowance® (OTC) row gives all members a $175 monthly allowance, in network. It lists \\\"Hearing aids you can buy without a prescription\\\" as an eligible category, so a hearing.aids allowance fact of $175 per month with this pool and no condition matches.\"}]\n```",
+ "usage": {
+  "input_tokens": 3936,
+  "output_tokens": 362,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

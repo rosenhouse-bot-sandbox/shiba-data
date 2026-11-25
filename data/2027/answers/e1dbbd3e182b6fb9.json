@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-620.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 10, Summary of Important Costs for 2027, for AARP Medicare Advantage Patriot No Rx OR-MA01 (PPO): 'Monthly plan premium $0'.\"}]\n```",
+ "usage": {
+  "input_tokens": 2036,
+  "output_tokens": 247,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

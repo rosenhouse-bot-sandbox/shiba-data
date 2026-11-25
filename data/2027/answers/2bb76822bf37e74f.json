@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1512.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 35, Section 1.2: the plan deductible is $750. It doesn't apply to some services and applies only to the listed in-network services, so it is a partial medical deductible, in network, $750.\"}]\n```",
+ "usage": {
+  "input_tokens": 2278,
+  "output_tokens": 186,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-288.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 51 Outpatient surgery row, Ambulatory Surgical Center, in-network: $360 copay for all other services. This is the general ASC surgery price, apart from the separately priced diagnostic colonoscopy and wound care.\"}]\n```",
+ "usage": {
+  "input_tokens": 2126,
+  "output_tokens": 338,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

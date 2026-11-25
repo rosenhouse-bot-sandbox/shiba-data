@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2041.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 6 'Routine, non-emergency transportation' row for Aetna Medicare Elite (HMO) H2056-003 reads 'Not Covered'. It is a routine (supplemental) benefit with no setting given.\"}]\n```",
+ "usage": {
+  "input_tokens": 2468,
+  "output_tokens": 102,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

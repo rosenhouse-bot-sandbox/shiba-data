@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-278.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 118 Social support platform row: $0 copay for the social support platform. The cost is a price, so it is a copay. It is a supplemental benefit for any setting, and in network by default. The Out-of-Network label above it belongs to the smoking cessation row.\"}]\n```",
+ "usage": {
+  "input_tokens": 2338,
+  "output_tokens": 276,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

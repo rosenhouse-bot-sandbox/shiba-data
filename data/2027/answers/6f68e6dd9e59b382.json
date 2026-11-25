@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-275.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 72 SilverSneakers row lists a $0 membership. The plan covers the full cost, with no coinsurance, copayment or deductible for the gym membership, at participating locations.\"}]\n```",
+ "usage": {
+  "input_tokens": 2330,
+  "output_tokens": 170,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

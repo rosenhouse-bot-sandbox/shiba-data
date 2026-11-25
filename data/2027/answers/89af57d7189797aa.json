@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-700.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 73, SilverSneakers row, in network: $0 membership, and the plan says there is no copayment for the gym membership. A fitness benefit is supplemental.\"}]\n```",
+ "usage": {
+  "input_tokens": 2307,
+  "output_tokens": 156,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-522.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"On page 60, under the Advanced Imaging Services heading, the plan lists a $205 copayment for a Freestanding Radiological Facility. This is a Medicare-covered in-network benefit for Humana Total Complete (HMO). The left column of the row names CT, MRI and PET scans.\"}]\n```",
+ "usage": {
+  "input_tokens": 2317,
+  "output_tokens": 302,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-169.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 72, physician/practitioner services row, in-network Telehealth Services: '$50 copayment – Specialist Virtual'. This is a specialist telehealth office-visit cost, separate from the $0 PCP Virtual and $40 Urgent Care Virtual lines. 'Specialist Virtual' in condition copies the document's words and correctly narrows the fact to specialists.\"}]\n```",
+ "usage": {
+  "input_tokens": 2544,
+  "output_tokens": 453,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

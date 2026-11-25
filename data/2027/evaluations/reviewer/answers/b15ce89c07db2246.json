@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-383.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 51 dental chart lists 'Cleanings (prophylaxis) - 2 every year' in the service column. That column covers both the in-network and out-of-network costs, so network 'any' fits. Routine cleanings are a supplemental benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2797,
+  "output_tokens": 363,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

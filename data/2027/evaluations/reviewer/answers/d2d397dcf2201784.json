@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-338.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 67: the 'Home medical care not covered by Medicare for Enhanced, Standard, or Value plan members (Kaiser Permanente at Home)' row shows $0. This covers the Standard plan, and the benefit is non-Medicare, so supplemental. The prior authorization footnote is a note, not a condition. The second quote joins text from the infusion row to the $0 in the home care row, but the $0 for the home care row is on the page.\"}]",
+ "usage": {
+  "input_tokens": 2577,
+  "output_tokens": 501,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

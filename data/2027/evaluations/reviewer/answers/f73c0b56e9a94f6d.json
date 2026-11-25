@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-96.md",
+ "reply": "[{\"id\":0,\"ok\":false,\"reason\":\"The quoted '50% coinsurance' out-of-network line sits at the top of page 70, apart from any service name. It is the tail of a row that begins on the previous page, so it cannot be tied to the routine eye exam. The routine vision hardware row on this page also lists 50% out-of-network for lenses and contact lenses. With the exam row not visible, I can't confirm the fact.\"}]",
+ "usage": {
+  "input_tokens": 2855,
+  "output_tokens": 531,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2042.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 74 Medicare Part B Drugs row, in-network column: '20% coinsurance for all other Medicare-covered Part B drugs.' The out-of-network column shows 30%. Chemotherapy and allergy antigens are priced separately, so 20% is the general Part B drug cost.\"}]\n```",
+ "usage": {
+  "input_tokens": 2698,
+  "output_tokens": 440,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

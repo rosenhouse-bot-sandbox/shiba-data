@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1509.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 88, Diagnostic Procedures and Tests row: Freestanding location $40 copay. The EKG/EEG row also gives $40 at a freestanding location, so the fact is consistent.\"}]\n```",
+ "usage": {
+  "input_tokens": 2559,
+  "output_tokens": 252,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

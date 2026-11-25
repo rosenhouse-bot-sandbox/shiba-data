@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2038.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 94, 'Vision services - routine eye exam' row: 1 routine eye exam every year, refraction included, $0 copayment. No out-of-network or Medicaid-level split is shown.\"}]\n```",
+ "usage": {
+  "input_tokens": 2697,
+  "output_tokens": 308,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

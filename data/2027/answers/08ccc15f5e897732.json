@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-358.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 10 Comprehensive dental row in the Advantage Plus section says 50% coinsurance only 'After the deductible is met', but the item states no condition. The quoted part of the page also does not show that this Advantage Plus cost applies to the Standard plan.\"}]\n```",
+ "usage": {
+  "input_tokens": 3595,
+  "output_tokens": 413,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

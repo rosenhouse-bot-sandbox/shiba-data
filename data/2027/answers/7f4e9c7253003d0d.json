@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2190.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 49 does show the 'Fitting and evaluation' in-network $0 copay. The item leaves condition blank, so it reads as the general routine hearing exam, which has a different limit (1 per calendar year). A fitting/evaluation fact needs condition 'fitting/evaluation'. The 'unlimited visits for the first 12 months' count belongs in a separate visit-count fact, not in this price fact.\"}]\n```",
+ "usage": {
+  "input_tokens": 3800,
+  "output_tokens": 466,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-343.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 90 MRIs row: 'Office or Freestanding location: $100 copay', so the office setting carries a $100 in-network copay under the Medicare-covered diagnostic tests row.\"}]\n```",
+ "usage": {
+  "input_tokens": 2409,
+  "output_tokens": 258,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

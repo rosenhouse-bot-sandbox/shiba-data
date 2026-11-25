@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-130.md",
+ "reply": "The quote \"Topical fluoride, 1 every calendar year\" appears on page 34 under the Preventive dental services (Class I) row. This is a supplemental benefit (\"In addition to the Medicare-covered dental services, we also cover\"). The frequency limit is 1 per calendar year.\n\nEach field checks out:\n- **Benefit:** dental.preventive.\n- **Network:** The item says in-network. The row lists in-network $0 copay and out-of-network 50% coinsurance, and the frequency limit applies to both. The visit limit is not a cost, so in-network is reasonable.\n- **Condition:** \"topical fluoride\", which is the service name as the instructions require.\n- **Amount and limit:** 1, with limit \"per year\". The document says \"every calendar year\", which matches.\n- **Covered by:** supplemental.\n\n<br>\n\n```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 34 Preventive dental (Class I), supplemental: 'Topical fluoride, 1 every calendar year' gives a limit of 1 per year, with in-network $0 copay.\"}]\n```",
+ "usage": {
+  "input_tokens": 3960,
+  "output_tokens": 364,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

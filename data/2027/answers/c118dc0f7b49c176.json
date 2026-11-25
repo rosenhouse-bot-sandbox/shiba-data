@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-833.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 43 supplemental preventive dental services (Class I) row: out-of-network 50% coinsurance. The row sits under 'In addition to the Medicare-covered dental services', so it is supplemental.\"}]\n```",
+ "usage": {
+  "input_tokens": 3981,
+  "output_tokens": 156,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

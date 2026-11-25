@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1678.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 54, in the in-network part above the 'Out-of-Network:' header: the Diagnostic Colonoscopy row shows a $0 copayment for Ambulatory Surgical Center and Outpatient Hospital, so outpatient hospital is a listed setting.\"}]\n```",
+ "usage": {
+  "input_tokens": 1922,
+  "output_tokens": 325,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

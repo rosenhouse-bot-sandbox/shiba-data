@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1684.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 15 'Transportation Services (Non-emergency medical transportation)' row for Wellcare Patriot Giveback Open (PPO): In-Network Not covered.\"}]\n```",
+ "usage": {
+  "input_tokens": 2008,
+  "output_tokens": 157,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

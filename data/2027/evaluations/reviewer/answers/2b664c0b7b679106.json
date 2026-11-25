@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-271.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 81 spirometry row: In-Network '0% coinsurance for Spirometry.' This is a Medicare-covered diagnostic test with no setting named, matching the item's in-network, 0%, condition Spirometry fields. 'Deductible may apply' is a general note, not a change to the amount.\"}]",
+ "usage": {
+  "input_tokens": 2059,
+  "output_tokens": 320,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

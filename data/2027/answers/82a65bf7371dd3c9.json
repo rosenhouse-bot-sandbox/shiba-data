@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2223.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 89 Advanced Laboratory Services row: office or freestanding location $0 copay and dedicated testing laboratory $0 copay, in network. The first quoted block has no service header on this page, but it also shows $0 at freestanding and dedicated lab settings.\"}]\n```",
+ "usage": {
+  "input_tokens": 2151,
+  "output_tokens": 834,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

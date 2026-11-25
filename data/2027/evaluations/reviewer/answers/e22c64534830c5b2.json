@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-124.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 48, routine hearing aids row: the purchase includes 80 batteries per aid for non-rechargeable models. This is a supplemental hearing.aids covered fact through in-network TruHearing, matching the guidance format for batteries.\"}]\n```",
+ "usage": {
+  "input_tokens": 3852,
+  "output_tokens": 255,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

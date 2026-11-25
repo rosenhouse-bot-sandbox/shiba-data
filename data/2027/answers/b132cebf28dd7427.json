@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1916.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 77, under the hearing aid purchase list carried over from page 76, gives a 60-day trial period. This is a supplemental TruHearing hearing aid benefit, so covered, trial period, 60 days is right.\"}]\n```",
+ "usage": {
+  "input_tokens": 3391,
+  "output_tokens": 99,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

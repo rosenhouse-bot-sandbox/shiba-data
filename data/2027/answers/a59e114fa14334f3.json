@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-497.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 13, supplemental vision benefit, out-of-network column: \\\"$0 copay for routine exam up to 1 per year.\\\" The quote's trailing \\\"$75 combined maximum\\\" wording matches that column, not the in-network one.\"}]\n```",
+ "usage": {
+  "input_tokens": 3018,
+  "output_tokens": 324,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

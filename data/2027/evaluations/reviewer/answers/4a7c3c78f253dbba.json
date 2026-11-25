@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-340.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 72 dental code table: the Intraoral X-rays row (periapical D0220, D0230) has 'Frequency/Limits – 6 procedure codes per calendar year'. The row has both in-network and out-of-network columns, so the limit applies to either network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3942,
+  "output_tokens": 314,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

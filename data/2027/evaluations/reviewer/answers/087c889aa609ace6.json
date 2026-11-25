@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-178.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 76 OTC credit row, plan H2406-073-0: 'You can also use your OTC credit on covered home and bath safety devices like bathmats, grab bars, and shower chairs.' The out-of-network column applies purchases to the same benefit credit, so the credit's extra use is not limited to one network. Home and bath safety devices are the only non-OTC use listed.\"}]\n```",
+ "usage": {
+  "input_tokens": 2818,
+  "output_tokens": 437,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

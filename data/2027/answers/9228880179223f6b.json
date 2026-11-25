@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-176.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 97 lists the speech language therapist service under In-Network with a $30 copay for each Medicare-covered speech language therapy visit. No setting is named, so 'any' fits. Out-of-network is 20% coinsurance, a separate fact.\"}]\n```",
+ "usage": {
+  "input_tokens": 1903,
+  "output_tokens": 324,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

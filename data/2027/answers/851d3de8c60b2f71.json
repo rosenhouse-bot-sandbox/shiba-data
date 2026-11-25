@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-428.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 Deductible row: $0 in the Enhanced Plan column (first of three). No network or service limits are stated, so the default in-network setting applies.\"}]\n```",
+ "usage": {
+  "input_tokens": 2168,
+  "output_tokens": 193,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

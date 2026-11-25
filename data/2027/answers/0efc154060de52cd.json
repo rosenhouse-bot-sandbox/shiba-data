@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1903.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"On page 80, the 'Medicare Part B Chemotherapy/ Radiation Drugs' entry says 20% coinsurance for Medicare-covered Part B chemotherapy drugs. No setting is named, and the cost is in network by default. The note that some rebatable drugs may have lower coinsurance does not change the stated 20%.\"}]\n```",
+ "usage": {
+  "input_tokens": 2422,
+  "output_tokens": 331,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

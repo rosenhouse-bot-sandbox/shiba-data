@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1944.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 39 Emergency care row: $250,000 annual maximum benefit for worldwide emergency, emergency ambulance, and urgently needed care. This is the most the plan pays per year for care outside the U.S.\"}]\n```",
+ "usage": {
+  "input_tokens": 2502,
+  "output_tokens": 98,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

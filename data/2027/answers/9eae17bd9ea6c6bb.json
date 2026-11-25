@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1425.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 99 'Additional routine eyewear' row: $150 allowance every year for all additional eyewear. In network you pay a $0 copay up to the allowance amount. The plan, benefit, allowance amount, limit and supplemental status all match.\"}]\n```",
+ "usage": {
+  "input_tokens": 2335,
+  "output_tokens": 261,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

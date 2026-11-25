@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1935.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 74 outpatient diagnostic tests row for X-rays: $30 copayment for each Medicare-covered standard X-ray service. No setting is named and no separate out-of-network cost is printed, so it is the in-network amount.\"}]\n```",
+ "usage": {
+  "input_tokens": 2447,
+  "output_tokens": 309,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

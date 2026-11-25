@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2092.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"On page 79, the Eyewear Benefit (1 per calendar year) row shows 'Any retail amount over $75' in both the in-network and out-of-network columns. That makes it a $75 allowance in any network. The separate $150 PLUS Provider amount is a different provider tier and is not claimed here.\"}]\n```",
+ "usage": {
+  "input_tokens": 2779,
+  "output_tokens": 517,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

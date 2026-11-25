@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1162.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 3, 'Outpatient hospital services' section, 'All other services' row: 20% in network (50% out of network). This is the outpatient hospital price for surgery and procedures other than colonoscopy and wound care. The footnote only flags prior authorization, not a cost condition.\"}]\n```",
+ "usage": {
+  "input_tokens": 1926,
+  "output_tokens": 450,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

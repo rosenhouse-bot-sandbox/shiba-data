@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-8.md",
+ "reply": "[{\"id\":0,\"ok\":false,\"reason\":\"Page 51 lists $10 copay for each Medicare-covered x-ray under outpatient hospital services, so the plan, setting, network and amount fit. The quote says the copay applies 'for each x-ray', not per visit, so the 'per visit' unit is not supported.\"}]",
+ "usage": {
+  "input_tokens": 2326,
+  "output_tokens": 391,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

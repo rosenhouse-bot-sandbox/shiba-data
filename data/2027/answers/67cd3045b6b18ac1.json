@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2021.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 84, Outpatient rehabilitation services: the row 'Services provided by a physical therapist or speech language therapist' shows a $0 copayment. This is a Medicare-covered service with one cost across all listed outpatient settings, in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 1856,
+  "output_tokens": 214,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1948.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 60, Chiropractic services row, In-Network: '$15 copay for Medicare-covered chiropractic services.' No setting is named, so setting is any. The 'Deductible applies' note is not a qualifying condition.\"}]\n```",
+ "usage": {
+  "input_tokens": 2252,
+  "output_tokens": 330,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

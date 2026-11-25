@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1150.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 82, the X-rays row under outpatient diagnostic tests reads '$50 copay for Medicare-covered X-rays.' It names no setting and lists one in-network cost. A deductible applies, but no condition depends on who the member is.\"}]\n```",
+ "usage": {
+  "input_tokens": 2067,
+  "output_tokens": 397,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

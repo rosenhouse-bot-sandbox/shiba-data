@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-175.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 86 Genetic Testing row: 'Outpatient hospital: 20% coinsurance' in network. This matches the benefit, setting, cost kind and amount. Prior authorization is a coverage requirement, not a cost condition.\"}]\n```",
+ "usage": {
+  "input_tokens": 2500,
+  "output_tokens": 191,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

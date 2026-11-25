@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-763.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 73 OTC row does show a $150 allowance every three months. But it is 'loaded to your Flex Card', a card the document names, so the fact should set pool to 'Flex Card'. The item leaves pool blank.\"}]\n```",
+ "usage": {
+  "input_tokens": 2330,
+  "output_tokens": 525,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

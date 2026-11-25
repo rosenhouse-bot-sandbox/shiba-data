@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-393.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 20 Additional Benefits, Wellcare Low Premium (HMO-POS) column: '24-Hour Nurse Advice Line $0 copay'. A nurse advice line with a stated price is an other_supplemental copay fact, so the $0 copay, supplemental status and in-network default all fit.\"}]",
+ "usage": {
+  "input_tokens": 4160,
+  "output_tokens": 581,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

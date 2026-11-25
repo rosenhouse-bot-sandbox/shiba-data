@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-216.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 86, Medicare Part B drugs row: the block above the Out-of-Network heading (the in-network cost) says 20% coinsurance for all other Medicare-covered Part B drugs, with allergy antigens and chemotherapy priced separately.\"}]\n```",
+ "usage": {
+  "input_tokens": 2359,
+  "output_tokens": 555,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1741.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 73 outpatient rehabilitation row, in-network column, reads \\\"$60 copayment for each Medicare-covered physical therapy and speech-language therapy visit.\\\" The out-of-network copay is $80 and occupational therapy is a separate $50 line.\"}]\n```",
+ "usage": {
+  "input_tokens": 2556,
+  "output_tokens": 245,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

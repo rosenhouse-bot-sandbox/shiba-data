@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-266.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 87: the PET Scans heading is followed by its own block, 'Outpatient hospital: $300 copay' in network. The layout puts each service heading above its values, and the Ultrasounds block (PCP, specialist and freestanding rows) fits that reading. The $300 copay is a Medicare-covered benefit and no limit is stated.\"}]",
+ "usage": {
+  "input_tokens": 2219,
+  "output_tokens": 647,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

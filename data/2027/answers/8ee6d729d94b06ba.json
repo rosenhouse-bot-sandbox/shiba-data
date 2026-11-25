@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1934.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 106 'Special supplemental benefits for the chronically ill — Food & Home Card' row: $289 per month allowance. The pool name matches, and the SSBCI chronic-condition qualifier is supported.\"}]\n```",
+ "usage": {
+  "input_tokens": 2468,
+  "output_tokens": 548,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

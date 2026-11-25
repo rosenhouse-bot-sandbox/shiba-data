@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1719.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 65 Physician/practitioner services row, In-Network, Provider and Professional Services: $0 copayment – PCP's Office. This is not the routine physical exam row above it.\"}]\n```",
+ "usage": {
+  "input_tokens": 2460,
+  "output_tokens": 87,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

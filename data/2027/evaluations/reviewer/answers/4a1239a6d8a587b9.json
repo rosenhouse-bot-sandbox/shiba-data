@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-342.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"The PDF page 63 quote under Hearing services (continued) gives 40% coinsurance out of network for 1 hearing aid fitting and evaluation every year. It is a supplemental benefit and it matches the plan, network, cost kind and amount.\"}]",
+ "usage": {
+  "input_tokens": 3013,
+  "output_tokens": 300,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

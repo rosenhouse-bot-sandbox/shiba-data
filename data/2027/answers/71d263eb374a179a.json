@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-462.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 53, under Advanced Imaging Services: a $205 copayment for a Freestanding Radiological Facility, separate from the $330 office and $345 outpatient hospital rows. It is a Medicare-covered diagnostic test (CT, MRI, PET) in the plan's in-network chart.\"}]\n```",
+ "usage": {
+  "input_tokens": 2332,
+  "output_tokens": 337,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1213.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 62 Dental & Alternative Therapy Allowance row: up to $1,500 per year reimbursed for dental, therapeutic massage, acupuncture and naturopath services. It is a non-Medicare (supplemental) shared allowance, and any licensed massage therapist may be used, so network any fits.\"}]\n```",
+ "usage": {
+  "input_tokens": 3002,
+  "output_tokens": 341,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

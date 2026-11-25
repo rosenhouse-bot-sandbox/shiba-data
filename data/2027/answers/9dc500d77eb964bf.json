@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-87.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 91, PET Scans row for this plan: the 'Office or Freestanding location' cost is a $200 copay, so the office setting at $200 is correct.\"}]\n```",
+ "usage": {
+  "input_tokens": 2245,
+  "output_tokens": 233,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

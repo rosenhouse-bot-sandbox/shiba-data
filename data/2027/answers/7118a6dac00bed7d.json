@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-968.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 53, Physician/practitioner services row (including doctor's office visits): $0 copay for Medicare-covered primary care provider (PCP) services in network. The note about using a PCP not named on the Member ID card is a caveat, not a stated condition on the $0 copay.\"}]\n```",
+ "usage": {
+  "input_tokens": 2313,
+  "output_tokens": 410,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

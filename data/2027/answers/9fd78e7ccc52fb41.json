@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-338.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 70 Wellness Bucks row: the plan reimburses up to $150 per year, and the fund names fitness trackers, instructional fitness classes and fitness apps. That makes it a supplemental fitness allowance in the Devoted Health Wellness Bucks pool.\"}]\n```",
+ "usage": {
+  "input_tokens": 2163,
+  "output_tokens": 463,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

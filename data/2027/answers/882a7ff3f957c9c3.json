@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-768.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 103 dental bullets give a 50% coinsurance on covered comprehensive services such as fillings, crowns, bridges, root canals, extractions and dentures, up to the annual maximum, with no network named. The same section continues on page 104 and names the Platinum Dental Rider, so the package and supplemental fields fit. The no-network row reads as in-network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3782,
+  "output_tokens": 930,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

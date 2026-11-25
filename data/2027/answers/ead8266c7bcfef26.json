@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1670.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 71 Wellness Bucks row: the plan reimburses up to $150 per year, and therapeutic massage is named among the eligible uses. The page sets no network restriction on the reimbursement.\"}]\n```",
+ "usage": {
+  "input_tokens": 2390,
+  "output_tokens": 494,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

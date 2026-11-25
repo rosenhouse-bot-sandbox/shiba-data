@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-817.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 51 Emergency care row: under Out-of-Network, 'Worldwide Coverage $115 copayment – Emergency Room' gives a $115 copay for emergency care worldwide. Care outside the U.S. takes network any and supplemental, and the row has no urgently-needed-only condition.\"}]\n```",
+ "usage": {
+  "input_tokens": 2536,
+  "output_tokens": 373,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

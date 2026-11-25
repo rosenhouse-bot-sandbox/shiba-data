@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2012.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"On page 86, the Medicare Part B drugs row says 'All Other Part B Drugs: 20% coinsurance at: A PCP's office.' This is the general Part B drugs category. Allergy serum and generic nebulized medications are priced separately at $0.\"}]\n```",
+ "usage": {
+  "input_tokens": 2732,
+  "output_tokens": 680,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

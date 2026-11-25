@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1829.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"On page 45, the Chiropractic services row shows a $15 in-network copayment for each Medicare-covered visit of manual spinal manipulation. The 'or' in the quote is 'for' with the f dropped. The $80 amount belongs to the out-of-network column.\"}]\n```",
+ "usage": {
+  "input_tokens": 2627,
+  "output_tokens": 375,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

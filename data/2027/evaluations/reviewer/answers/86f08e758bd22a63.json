@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-228.md",
+ "reply": "The item claims an in-network hearing aid warranty of 3 years, covered, supplemental. Page 78 lists \"3-year extended warranty\" in the in-network hearing aid purchase inclusions, which matches. The setting is any and the network is in. The condition is \"warranty\" and the limit is \"3 years\". The benefit is a hearing aid supplemental benefit with no amount stated.\n\nThe only wrinkle is that the warranty is \"extended\" and excludes loss and damage claims. That does not change the fact that a 3-year extended warranty is included.\n\n<br>\n\n```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 78: in-network hearing aid purchase includes a 3-year extended warranty; supplemental, covered, no amount.\"}]\n```",
+ "usage": {
+  "input_tokens": 6570,
+  "output_tokens": 526,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-306.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"On page 51, the 'Fitting-evaluation(s) for hearing aids' row lists Out-of-Network 80% coinsurance. The quote's '$699 copay per aid' text comes from the hearing aids row, but the stated fact matches the fitting row.\"}]\n```",
+ "usage": {
+  "input_tokens": 3300,
+  "output_tokens": 358,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

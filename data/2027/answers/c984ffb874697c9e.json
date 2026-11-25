@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1348.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 90, Outpatient hospital services row, Diagnostic Colonoscopies: 'At an Outpatient hospital: $0 copay' for DEVOTED GIVEBACK 028 OR (HMO). This is the colonoscopy-specific price, separate from the $590 general outpatient hospital visit copay, and it is in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2384,
+  "output_tokens": 305,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

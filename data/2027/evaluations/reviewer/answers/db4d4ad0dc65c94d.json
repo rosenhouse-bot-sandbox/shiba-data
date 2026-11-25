@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-296.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 91 Supplemental benefits, Routine podiatry (foot care) row: limit 6 visits every year. The surrounding table rows state in-network costs, and there is no condition or package.\"}]\n```",
+ "usage": {
+  "input_tokens": 2102,
+  "output_tokens": 90,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

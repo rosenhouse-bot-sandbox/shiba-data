@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-712.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 63, in-network: under Advanced Imaging Services, a $330 copayment applies at the PCP's Office (shared with the Specialist's Office). This matches the plan, benefit, setting, network, cost kind and amount.\"}]\n```",
+ "usage": {
+  "input_tokens": 2421,
+  "output_tokens": 328,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

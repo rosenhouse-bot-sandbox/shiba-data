@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-502.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 48, routine hearing aids row, in network: $499 copay per aid for TruHearing Standard, $699 for Advanced and $999 for Premium. The plan, benefit, network, cost kind, amounts and per-aid unit all match.\"}]\n```",
+ "usage": {
+  "input_tokens": 3868,
+  "output_tokens": 202,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

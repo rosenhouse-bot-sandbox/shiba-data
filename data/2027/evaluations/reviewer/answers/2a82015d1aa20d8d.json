@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-276.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 50, supplemental Diagnostic and Preventive Dental Care, periodic oral exams (2 every year): In-Network $0 copay for each oral exam. The plan, network, cost kind, amount and unit all match. Prior authorization may be required, but that is not a cost condition.\"}]",
+ "usage": {
+  "input_tokens": 2928,
+  "output_tokens": 324,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

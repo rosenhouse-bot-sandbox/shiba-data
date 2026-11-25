@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1145.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 51 continues the Medicare-covered acupuncture row: 'No more than 20 acupuncture treatments may be administered annually.' Medicare covers acupuncture only for chronic low back pain, so the condition fits.\"}]\n```",
+ "usage": {
+  "input_tokens": 2417,
+  "output_tokens": 535,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1958.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 88 specialist row: the out-of-network column reads \\\"$90 copayment for services from a specialist\\\". The \\\"or\\\" is \\\"for\\\" with the f dropped. The in-network amount is $70.\"}]\n```",
+ "usage": {
+  "input_tokens": 2265,
+  "output_tokens": 241,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

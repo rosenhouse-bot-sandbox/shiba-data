@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-159.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 48 routine hearing exam row: 'We cover 1 routine hearing exam every calendar year'. This is a supplemental benefit (in addition to Medicare-covered services). The limit sits in the service column and covers both the in-network and out-of-network prices, so network 'any' fits.\"}]",
+ "usage": {
+  "input_tokens": 3814,
+  "output_tokens": 282,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

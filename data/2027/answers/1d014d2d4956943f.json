@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-669.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 95 lab rows: both Routine and Advanced Laboratory Services show 'Office or freestanding location: $0 copay' in network. So the office lab copay is $0 for both.\"}]\n```",
+ "usage": {
+  "input_tokens": 2302,
+  "output_tokens": 195,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

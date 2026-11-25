@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-808.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 89 in-network column gives a flat '$0 copayment for each diagnostic mammogram.' This is a separate line from the Medicaid-level $0 or 20% line, which covers other radiological services. No setting is named, and the item matches.\"}]\n```",
+ "usage": {
+  "input_tokens": 2649,
+  "output_tokens": 281,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

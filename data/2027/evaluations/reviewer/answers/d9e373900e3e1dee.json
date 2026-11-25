@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-198.md",
+ "reply": "The page shows Lab Services under Diagnostic Services, Labs, and Imaging, with \"Outpatient hospital: $0 or $45 copay\" for the outpatient hospital setting.\n\n- **Plan:** The page footer names DEVOTED GIVEBACK EXTRAS 025 OR (HMO), which matches H2923-025-0.\n- **Benefit and setting:** The quoted line sits under Lab Services, so tests.lab applies. The outpatient hospital setting matches.\n- **Network:** The document states no out-of-network cost here, so in-network is correct.\n- **Coverage type:** Lab services are Medicare-covered, not routine.\n- **Cost:** \"$0 or $45\" is an alternatives amount, and both values match the page.\n- **Condition:** The page gives no condition for choosing between $0 and $45, and the item leaves it blank.\n\nEverything checks out.\n\n```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 6 Lab Services row: Outpatient hospital $0 or $45 copay, in network, Medicare-covered lab.\"}]\n```",
+ "usage": {
+  "input_tokens": 2366,
+  "output_tokens": 367,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

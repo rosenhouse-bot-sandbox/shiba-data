@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-327.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 92 telehealth row: in-network $0 copay for virtual visit services performed through the plan's virtual visit provider(s). The condition matches the document's wording. The row also says 'Deductible applies', which I did not treat as changing the stated $0 copay.\"}]",
+ "usage": {
+  "input_tokens": 2213,
+  "output_tokens": 607,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

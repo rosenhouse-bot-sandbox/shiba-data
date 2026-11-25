@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2188.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 68, Outpatient surgery row (Medicare-covered), In-Network, Surgery Services: $395 copayment for Outpatient Hospital. The $100 ASC copay is a separate setting, so this matches.\"}]\n```",
+ "usage": {
+  "input_tokens": 2425,
+  "output_tokens": 216,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

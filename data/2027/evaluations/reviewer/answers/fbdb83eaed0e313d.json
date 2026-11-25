@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-29.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"On page 89 the 50% outpatient hospital coinsurance sits under 'Advanced Laboratory Services', grouped with MRIs and PET scans. That is a separate tier from ordinary outpatient lab tests, and it may be genetic or molecular testing. The page does not show what that row covers, so tagging it as general tests.lab is doubtful.\"}]\n```",
+ "usage": {
+  "input_tokens": 2141,
+  "output_tokens": 463,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

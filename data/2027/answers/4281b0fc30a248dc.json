@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1504.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 95 lists Routine and Advanced Laboratory Services at an office or freestanding location for a $0 copay, and $0 at a dedicated testing laboratory. These are the in-network amounts for this plan's Medicare-covered lab benefit, so the item matches.\"}]\n```",
+ "usage": {
+  "input_tokens": 2305,
+  "output_tokens": 302,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

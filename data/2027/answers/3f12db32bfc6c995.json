@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1738.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 52 Inpatient hospital care row does show $550 per day for days 1-5. But the same cost line adds 'after your $750 plan deductible', and it is unclear whether that applies to days 1-5 as well. The item gives no deductible condition, so it may be incomplete.\"}]\n```",
+ "usage": {
+  "input_tokens": 2437,
+  "output_tokens": 439,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-50.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 97 says the optional Platinum Dental Rider has an 'Annual maximum: $1,500'. Page 98 says covered services count toward it, and out-of-network benefits are subject to the same maximums, so network 'any' fits. It is a package-only supplemental dental max of $1,500 per year.\"}]",
+ "usage": {
+  "input_tokens": 3548,
+  "output_tokens": 316,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-65.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"The quoted $0 office/freestanding block on page 87 has no heading on this page. It continues from the previous page, so 'Routine Laboratory Services' cannot be confirmed from page 87. The next block, Advanced Laboratory Services, has a different outpatient hospital cost.\"}]\n```",
+ "usage": {
+  "input_tokens": 2129,
+  "output_tokens": 380,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

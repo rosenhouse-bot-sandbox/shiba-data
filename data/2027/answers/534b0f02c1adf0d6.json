@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1388.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"In the Summary of Important Costs table on page 12, the in-network 'Primary care office visits' row shows a $0 copayment per visit for this plan.\"}]\n```",
+ "usage": {
+  "input_tokens": 2254,
+  "output_tokens": 197,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

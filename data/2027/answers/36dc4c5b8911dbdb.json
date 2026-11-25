@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1179.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"In the page 90 X-rays row, the PCP's office line shows a $25 copay. This is in-network, Medicare-covered cost sharing for this plan.\"}]\n```",
+ "usage": {
+  "input_tokens": 2191,
+  "output_tokens": 181,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

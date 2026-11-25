@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-173.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 79, Outpatient surgery row (in network): \\\"$0 copayment for a colonoscopy at an ambulatory surgical center.\\\" The \\\"or\\\" is a dropped \\\"for\\\", not a Medicaid-level alternative. A colonoscopy priced in the surgery row is diagnostic, not screening. Plan, setting, cost kind and amount all match.\"}]\n```",
+ "usage": {
+  "input_tokens": 2481,
+  "output_tokens": 317,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

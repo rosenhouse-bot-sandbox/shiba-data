@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-211.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 92, 'Additional routine foot care' row: 'We cover 6 in and out-of-network routine foot care visits every year.' This is a supplemental routine benefit, separate from the Medicare-covered podiatry row above it. The 6-visit limit applies per year across in- and out-of-network, so network 'any' fits.\"}]",
+ "usage": {
+  "input_tokens": 2433,
+  "output_tokens": 325,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

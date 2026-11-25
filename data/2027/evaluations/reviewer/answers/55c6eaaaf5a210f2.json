@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-372.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 85: MRI, CT, and PET are priced together at $225 per visit, per department for Standard plan members (H9003-006-0). The row sits in the outpatient hospital services section, shown by the neighboring partial hospitalization, splints and casts, and drugs rows and by the outpatient-status note. It is a Medicare-covered benefit, in network.\"}]",
+ "usage": {
+  "input_tokens": 2420,
+  "output_tokens": 799,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

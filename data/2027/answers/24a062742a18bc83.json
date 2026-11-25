@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1779.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 106, Advantage Plus Eyewear coverage row: a $175 allowance toward eyewear from a network optical facility, usable once during a two-calendar-year period. The page shows one Advantage Plus table with no plan-specific split, so it applies to the Enhanced plan.\"}]\n```",
+ "usage": {
+  "input_tokens": 2664,
+  "output_tokens": 472,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

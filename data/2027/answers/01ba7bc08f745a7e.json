@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1146.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 73, Fitness benefit, Home Fitness Kits: \\\"You can receive up to 1 kit per benefit year.\\\" This matches the 1-kit limit per benefit year for this plan's supplemental fitness benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2033,
+  "output_tokens": 200,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

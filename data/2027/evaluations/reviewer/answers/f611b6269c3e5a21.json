@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-145.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 21 SilverSneakers section states '$0 copayment for SilverSneakers®.' It is a supplemental fitness benefit with no setting, condition or limit stated. The page separately gives 95% coinsurance out of network, so $0 is the in-network cost.\"}]",
+ "usage": {
+  "input_tokens": 2108,
+  "output_tokens": 364,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

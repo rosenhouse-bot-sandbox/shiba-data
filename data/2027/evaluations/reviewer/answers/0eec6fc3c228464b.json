@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-374.md",
+ "reply": "The quote says \"Any remaining benefit dollars do not 'roll over' to a future purchase,\" which means an unused eyewear allowance does not carry over. This matches a `vision.eyewear` rollover fact with `not_covered`. The page is in the in-network column, and the benefit is supplemental.\n\nThe page also says \"Any amount unused at the end of the year will expire,\" which agrees with the rollover reading. The setting is `any` and the plan is the only one in the document.\n\n<br>\n\n```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 83 eyewear benefit: remaining benefit dollars do not roll over to a future purchase, so rollover is not_covered. Supplemental, in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 5290,
+  "output_tokens": 583,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

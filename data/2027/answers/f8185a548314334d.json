@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-411.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 70 SilverSneakers row shows a $0 membership. It says there is no copayment for covered gym membership at participating locations, so the $0 in-network supplemental fitness copay is supported.\"}]\n```",
+ "usage": {
+  "input_tokens": 2206,
+  "output_tokens": 245,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

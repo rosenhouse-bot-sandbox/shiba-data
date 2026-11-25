@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1911.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 59, Chiropractic services row: routine (supplemental) chiropractic is covered for 12 visits per year. The left column says \\\"You are covered for 12 visits per year for routine chiropractic care\\\" and the right column says \\\"up to 12 visits per year.\\\" No setting is named, so `any` is correct, and the cost is in network by default.\"}]\n```",
+ "usage": {
+  "input_tokens": 2659,
+  "output_tokens": 246,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

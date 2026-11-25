@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-793.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"The page 76 Part B drugs row says 'You pay $0 or 20% coinsurance depending on the drug.' The $0 is a dollar amount, not a stated 0% coinsurance. The item also leaves out the 'depending on the drug' condition and the note that some drugs may be less than 20%. Too much doubt to confirm.\"}]\n```",
+ "usage": {
+  "input_tokens": 2407,
+  "output_tokens": 713,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

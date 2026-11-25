@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1055.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 65 does show a $45 copay at the Specialist's Office, but under 'Basic Radiological Services', not an X-ray row. Humana EOCs usually list outpatient X-rays separately and use 'Basic Radiological Services' for non-advanced diagnostic radiology. So the imaging.xray benefit is doubtful.\"}]\n```",
+ "usage": {
+  "input_tokens": 2238,
+  "output_tokens": 433,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

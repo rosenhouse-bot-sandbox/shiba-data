@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-179.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 86 'Diagnostic Procedures and Tests' row does show PCP's office: $0 copay. But the benefit definition explicitly includes EKGs, and the separate EKGs/ECGs/EEGs row on the same page charges $15 in a PCP or specialist's office. A flat $0 for tests.diagnostic in a PCP office would misstate the EKG cost.\"}]\n```",
+ "usage": {
+  "input_tokens": 2502,
+  "output_tokens": 609,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

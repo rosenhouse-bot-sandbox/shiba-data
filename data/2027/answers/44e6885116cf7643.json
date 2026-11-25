@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1557.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 79: the 'Diagnostic non-laboratory tests such as CT scans, MRIs, EKGs, and PET scans' row shows 20% coinsurance until the out-of-pocket maximum. No setting is named. The second quote joins the end of the Blood row with this row's text, but the amount is the same.\"}]\n```",
+ "usage": {
+  "input_tokens": 2139,
+  "output_tokens": 605,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

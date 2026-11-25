@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-148.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 87 'Laboratory tests' row, in-network: '$0 copayment [f]or Medicare-covered lab services.' The 'or' is a dropped 'for', not a Medicaid-level alternative. The row names no setting.\"}]\n```",
+ "usage": {
+  "input_tokens": 2465,
+  "output_tokens": 244,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-496.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"On page 68, the in-network Outpatient rehabilitation row lists Physical Therapy at 20% coinsurance, and Specialist's Office is one of its settings. The plan, benefit, setting, network, cost kind and amount all match.\"}]\n```",
+ "usage": {
+  "input_tokens": 2324,
+  "output_tokens": 233,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

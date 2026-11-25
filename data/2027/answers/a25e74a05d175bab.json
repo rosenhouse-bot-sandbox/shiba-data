@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1577.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 51 Ambulance services row for this plan: $350 copayment for each one-way Medicare-covered air trip. No other network or Medicaid-level amount is shown, so the in-network $350 per one-way trip holds.\"}]\n```",
+ "usage": {
+  "input_tokens": 2249,
+  "output_tokens": 275,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

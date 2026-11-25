@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-399.md",
+ "reply": "The item says 1 routine hearing exam per calendar year, which is a visit limit. The quote on page 48 reads \"We cover 1 routine hearing exam every calendar year,\" and the plan is correct. The setting is any, the benefit is hearing.exam, and the coverage is supplemental. The limit \"every calendar year\" is a reasonable way to phrase \"per calendar year.\"\n\nThe network field is the one doubt. The visit limit covers in-network and out-of-network together, since the quote does not distinguish between them, so `any` fits. This is a count rather than a cost, so it applies to both networks.\n\n<br>\n\n```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 48: 'We cover 1 routine hearing exam every calendar year' for the routine hearing exam (supplemental); limit applies regardless of network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3851,
+  "output_tokens": 275,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

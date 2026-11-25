@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-132.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 53 does show a $45 copay for the Specialist's Office. But that cost group continues from the previous page, and its heading is not on this page. The page alone cannot confirm the row is diagnostic tests and procedures rather than another service such as lab services.\"}]\n```",
+ "usage": {
+  "input_tokens": 2235,
+  "output_tokens": 624,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

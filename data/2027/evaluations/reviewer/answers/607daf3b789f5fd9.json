@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-349.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 43 lists 'Topical fluoride, 1 every calendar year' under supplemental preventive dental (Class I). That service is covered both in network ($0) and out of network (50%), so the frequency limit applies to either network.\"}]\n```",
+ "usage": {
+  "input_tokens": 4020,
+  "output_tokens": 302,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

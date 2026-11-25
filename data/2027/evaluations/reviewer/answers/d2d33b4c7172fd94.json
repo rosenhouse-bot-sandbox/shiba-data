@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-49.md",
+ "reply": "[{\"id\": 0, \"ok\": false, \"reason\": \"The 0% out-of-network coinsurance for the periodic oral exam and cleaning matches page 83. But the page never names a package, so \\\"MyOption DEN972\\\" is unsupported by the quotes. The package field must be blank unless the document states one.\"}]",
+ "usage": {
+  "input_tokens": 4146,
+  "output_tokens": 242,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

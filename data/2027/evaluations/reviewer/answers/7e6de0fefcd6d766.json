@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-34.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 84 shows $0 per visit, per department for Standard plan members for sleep studies. The quoted text names no setting, so the outpatient_hospital setting is unsupported. It should be any.\"}]\n```",
+ "usage": {
+  "input_tokens": 2207,
+  "output_tokens": 189,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

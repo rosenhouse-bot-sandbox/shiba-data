@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-14.md",
+ "reply": "[{\"id\":0,\"ok\":false,\"reason\":\"The $145 Outpatient Hospital copay sits under 'Basic Radiological Services' in the diagnostic tests row. The page never names X-rays and shows no separate Outpatient X-rays row, so linking this cost to imaging.xray is an assumption.\"}]",
+ "usage": {
+  "input_tokens": 2314,
+  "output_tokens": 710,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

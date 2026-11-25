@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-243.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 8, mandatory supplemental dental, In-Network (DENH61): 0% of the cost for bridge recementation, up to 1 per year. This is a comprehensive (restorative) service.\"}]\n```",
+ "usage": {
+  "input_tokens": 4099,
+  "output_tokens": 377,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1033.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 80: $0 sits beside the 'Laboratory tests' and 'Blood' lines, set apart from the per-plan schedule that begins at X-rays. In-network lab tests are a $0 copay for all plans, Value included.\"}]\n```",
+ "usage": {
+  "input_tokens": 2322,
+  "output_tokens": 696,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

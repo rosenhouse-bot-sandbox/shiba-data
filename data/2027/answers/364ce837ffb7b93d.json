@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2087.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 51 Ambulance services row: $370 copayment for each one-way Medicare-covered air trip. This is listed separately from the ground trip line.\"}]\n```",
+ "usage": {
+  "input_tokens": 2250,
+  "output_tokens": 337,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

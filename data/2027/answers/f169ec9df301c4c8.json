@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1906.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 110, Vision care, under the supplemental benefits: 'Routine eye exam $0 copay', 1 routine exam including refraction each year. This matches an in-network supplemental vision.exam copay of $0.\"}]\n```",
+ "usage": {
+  "input_tokens": 2809,
+  "output_tokens": 264,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

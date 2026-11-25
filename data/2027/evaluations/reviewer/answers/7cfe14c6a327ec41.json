@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-422.md",
+ "reply": "The item claims a hearing.aids covered fact for a trial period of 60 days, in network, supplemental. Page 84 lists \"60-day trial period\" under what the in-network hearing aid purchase includes. The benefit is a mandatory supplemental hearing benefit, in network, and the plan is the only one in the document. The trial period is stated with no amount, so `covered` fits, and the limit of 60 days matches the quote.\n\nOne concern is the setting, which is `any`. The document names no setting, so that is fine. The item's cited page is also 84, which matches.\n\n\n<invoke name=\"x\">\n</invoke>\n\n```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 84 lists a '60-day trial period' as included in the in-network hearing aid purchase under the supplemental hearing benefit. It is covered with no amount stated, so the fields match.\"}]\n```",
+ "usage": {
+  "input_tokens": 7160,
+  "output_tokens": 525,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

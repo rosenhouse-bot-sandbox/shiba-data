@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1307.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 91, diagnostic non-laboratory tests row, in network: $250 copay for all other Medicare-covered diagnostic services in other settings, such as a physician office. Diagnostic mammograms are priced separately at $0, so $250 is the general diagnostic radiology price in an office.\"}]\n```",
+ "usage": {
+  "input_tokens": 2138,
+  "output_tokens": 620,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

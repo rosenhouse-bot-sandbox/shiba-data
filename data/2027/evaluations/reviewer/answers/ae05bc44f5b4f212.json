@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-32.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"On page 53 the $100 Outpatient Hospital line sits above the Advanced Imaging Services subheading, not under it. The quote wrongly merges the two. The subheading the $100 line falls under starts on the previous page and is not shown, so we cannot confirm it is the diagnostic tests cost.\"}]\n```",
+ "usage": {
+  "input_tokens": 2219,
+  "output_tokens": 438,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

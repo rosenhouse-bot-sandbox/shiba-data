@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-854.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 11, Transportation Services (Non-emergency medical transportation) row for Wellcare Low Premium (HMO-POS) H6815-038-000: Not covered.\"}]\n```",
+ "usage": {
+  "input_tokens": 2077,
+  "output_tokens": 85,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-305.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 34 says preventive, basic and major dental services share a combined $1,500 benefit limit every calendar year. That limit applies to supplemental dental, including in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3942,
+  "output_tokens": 358,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

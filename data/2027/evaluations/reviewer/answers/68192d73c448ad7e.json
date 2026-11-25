@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-360.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 62, Physician/practitioner services row: Virtual primary care provider (PCP) visits cost a $0 copay per provider per day in network. This is a Medicare-covered telehealth office visit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2627,
+  "output_tokens": 243,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

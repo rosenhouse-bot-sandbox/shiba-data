@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-952.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 79, Outpatient rehabilitation services row: $55 in-network copayment for each Medicare-covered physical therapy and speech-language therapy visit. It is one cost across the listed outpatient settings. Occupational therapy is priced separately at $50.\"}]\n```",
+ "usage": {
+  "input_tokens": 2445,
+  "output_tokens": 239,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

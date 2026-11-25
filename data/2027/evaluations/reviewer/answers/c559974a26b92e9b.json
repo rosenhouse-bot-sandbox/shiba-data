@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-306.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 51, 'Fitting-evaluation(s) for hearing aids' row: Out-of-Network 80% coinsurance. The fact matches on plan, service, out-of-network and 80% coinsurance. The second quote runs into the hearing aids row, but the 80% figure is also stated in the fitting row itself.\"}]",
+ "usage": {
+  "input_tokens": 3300,
+  "output_tokens": 442,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
