@@ -3,14 +3,21 @@
 Usage: python3 -I pipeline/compare_reviewers.py <year> <replay_work_dir> <work_dir> <accepts> [api]
 The replay work dir is one that tables.py or run.py wrote. Each model gets every task the pinned reviewer rejected,
 and <accepts> of those it accepted. Answers go to data/<year>/evaluations/reviewer/answers.
+The table goes to <work_dir>/compare/report.md.
 """
-import csv, json, os, pathlib, sys
+import json, os, pathlib, sys
 
 sys.path[:0] = [os.path.dirname(os.path.abspath(__file__))]
-import ask, blobs, evaluate, review, run, years  # noqa: E402
+import ask, blobs, evaluate, extract, review, run, years  # noqa: E402
 
 MODELS = (("claude-opus-5-5", "medium"), ("claude-sonnet-5-5", "high"))
 SAVED = "evaluations/reviewer/answers"
+
+
+def pinned_verdicts(replay):
+    """{prompt sha: ok} for each review task of the replay, as its reviewer gate judged it."""
+    with open(f"{replay}/facts/review/{extract.OUTCOMES}") as f:
+        return {o["prompt"]: o["ok"] is True for o in json.load(f)}
 
 
 def chosen(pinned, accepts):
@@ -19,40 +26,35 @@ def chosen(pinned, accepts):
 
 
 def agreement(pinned, got):
-    """(agreed, asked) on the prompts that pinned accepts and on those it rejects. A missing verdict rejects."""
+    """(agreed, answered) on the prompts that pinned accepts and on those it rejects, and how many got no verdict."""
     def share(want):
-        asked = [p for p in got if pinned[p] is want]
-        return sum((got[p] is True) is want for p in asked), len(asked)
-    return dict(accepts=share(True), rejects=share(False))
-
-
-def pinned_verdicts(data, work, model, effort):
-    """{prompt sha: ok} for each review task in the replay's ledger, from the pinned reviewer's saved answers."""
-    out = {}
-    with open(f"{work}/{blobs.LEDGER}") as f:
-        for t in csv.DictReader(f):
-            if t["dir"].startswith("facts/review") and (t["model"], t["effort"]) == (model, effort):
-                with open(data / "answers" / f"{t['key']}.json") as a:
-                    out[t["prompt"]] = (ask.array(json.load(a)["reply"]) or [{}])[0].get("ok") is True
-    return out
+        answered = [p for p in got if pinned[p] is want and got[p] is not None]
+        return sum(got[p] is want for p in answered), len(answered)
+    return dict(accepts=share(True), rejects=share(False), unanswered=sum(v is None for v in got.values()))
 
 
 def main(year, replay, work, accepts, mode=""):
     if mode not in ("", "api"):
         raise SystemExit(f"Unknown mode {mode}")
     data = years.data_dir(int(year))
-    version = run.STEPS["document_facts"][run.steps.versions(data, run.STEPS)["document_facts"]]
-    pinned = pinned_verdicts(data, replay, *version["reviewer"])
+    pinned = pinned_verdicts(replay)
     prompts = chosen(pinned, int(accepts))
     texts = [pathlib.Path(replay, blobs.PROMPTS, p).read_text() for p in prompts]
     answer = run.Answers(data, ask.api() if mode == "api" else None, saved=data / SAVED)
-    print("| Reviewer | Agrees on accepts | Agrees on rejects | Dollars |\n|---|---|---|---|")
+    rows = ["| Reviewer | Agrees on accepts | Agrees on rejects | No verdict | Dollars |", "|---|---|---|---|---|"]
     for model, effort in MODELS:
-        got = review.ask_each(f"{work}/compare/{model}-{effort}", answer, model, effort, texts)
+        out = f"{work}/compare/{model}-{effort}"
+        got = review.ask_each(out, answer, model, effort, texts)
         a = agreement(pinned, {p: v.get("ok") for p, v in zip(prompts, got)})
         dollars = sum(evaluate.cost(json.loads((data / SAVED / f"{ask.key(model, t, effort)}.json").read_text()))
                       for t in texts)
-        print(f"| {model} {effort} | {a['accepts'][0]}/{a['accepts'][1]} | {a['rejects'][0]}/{a['rejects'][1]} | {dollars:.2f} |")
+        rows.append(f"| {model} {effort} | {a['accepts'][0]}/{a['accepts'][1]} | {a['rejects'][0]}/{a['rejects'][1]} "
+                    f"| {a['unanswered']} | {dollars:.2f} |")
+        with open(f"{out}/verdicts.json", "w") as f:
+            json.dump([dict(prompt=p, pinned=pinned[p], ok=v.get("ok"), reason=v.get("reason", ""))
+                       for p, v in zip(prompts, got)], f, indent=1)
+        pathlib.Path(work, "compare", "report.md").write_text("\n".join(rows) + "\n")
+        print(rows[-1], flush=True)
 
 
 if __name__ == "__main__":

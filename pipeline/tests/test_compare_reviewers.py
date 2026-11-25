@@ -1,7 +1,16 @@
-import os, sys, unittest
+import json, os, sys, tempfile, unittest
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-import compare_reviewers
+import compare_reviewers, extract
+
+
+class PinnedVerdictsTest(unittest.TestCase):
+    def test_reads_the_gate_verdict_of_each_prompt(self):
+        with tempfile.TemporaryDirectory() as replay:
+            os.makedirs(f"{replay}/facts/review")
+            with open(f"{replay}/facts/review/{extract.OUTCOMES}", "w") as f:
+                json.dump([dict(prompt="a", ok=True), dict(prompt="b", ok=False), dict(prompt="c", ok=None)], f)
+            self.assertEqual(compare_reviewers.pinned_verdicts(replay), {"a": True, "b": False, "c": False})
 
 
 class ChosenTest(unittest.TestCase):
@@ -18,10 +27,10 @@ class ChosenTest(unittest.TestCase):
 
 
 class AgreementTest(unittest.TestCase):
-    def test_counts_agreement_on_each_kind_of_pinned_verdict_and_a_missing_one_as_a_reject(self):
+    def test_counts_a_missing_verdict_apart_from_agreement(self):
         pinned = {"a": True, "b": True, "c": False, "d": False}
         got = {"a": True, "b": False, "c": True, "d": None}
-        self.assertEqual(compare_reviewers.agreement(pinned, got), dict(accepts=(1, 2), rejects=(1, 2)))
+        self.assertEqual(compare_reviewers.agreement(pinned, got), dict(accepts=(1, 2), rejects=(0, 1), unanswered=1))
 
 
 if __name__ == "__main__":

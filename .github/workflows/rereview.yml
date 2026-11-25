@@ -56,13 +56,17 @@ jobs:
       - run: python3 -I pipeline/rereview.py "$YEAR" "$RUNNER_TEMP/tables/texts" _work "$LIMIT" api
         timeout-minutes: 150
       - if: env.ACCEPTS != '0'
-        run: python3 -I pipeline/compare_reviewers.py "$YEAR" "$RUNNER_TEMP/tables" _work "$ACCEPTS" api >> "$GITHUB_STEP_SUMMARY"
+        run: python3 -I pipeline/compare_reviewers.py "$YEAR" "$RUNNER_TEMP/tables" _work "$ACCEPTS" api
         timeout-minutes: 150
+      - if: always()
+        run: if [ -f _work/compare/report.md ]; then cat _work/compare/report.md >> "$GITHUB_STEP_SUMMARY"; fi
       - if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: outcomes
-          path: _work/rereview/outcomes.json
+          name: verdicts
+          path: |
+            _work/rereview/outcomes.json
+            _work/compare/*/verdicts.json
           if-no-files-found: ignore
       # Saved answers are worth keeping even when the run stops early.
       - if: always()
