@@ -7,7 +7,7 @@ Saved answers in data/<year>/answers are reused. Without `api`, the run stops at
 with tasks that have no saved answer, and lists them. With `api`, the Claude API answers them.
 Each <step>@<version> candidate runs in place of that step's pinned version (see steps.py).
 `replay` reads nothing from the web. It needs the committed run's PDFs, texts and CMS zips in <work_dir>,
-where blobs.py names them, and keeps the committed documents lists.
+where blobs.py names them, and keeps the committed documents_checked.csv.
 Needs pypdfium2, poppler's pdftotext and `npm ci` here, and the anthropic package for `api`.
 """
 import csv
@@ -32,12 +32,13 @@ import steps  # noqa: E402
 import years  # noqa: E402
 
 CMS = ("landscape", "pbp")
+FACTS = "machine/document_facts.csv"
 STEPS = {"document_facts": document_facts.VERSIONS, "present": present.VERSIONS}
 
 
 def get(url, path):
     if not (os.path.exists(path) and os.path.getsize(path)):
-        subprocess.run(["curl", "-sS", "-L", "--fail", "--max-time", "900", "-A", "Mozilla/5.0", "-o", path, url],
+        subprocess.run(["curl", "-sS", "-L", "--fail", "--retry", "5", "--retry-all-errors", "--max-time", "900", "-A", "Mozilla/5.0", "-o", path, url],
                        check=True)
 
 
@@ -132,6 +133,19 @@ def run_tests(kind, candidate):
                    env=dict(os.environ, **{present.CANDIDATE: candidate}))
 
 
+def cms_tables(data, config, work):
+    """Writes the tables that the CMS zips in work, found.csv and links.csv give."""
+    gen = data / "generated"
+    subprocess.run(["unzip", "-oq", blobs.cms_path(work, "landscape"), "-d", work], check=True)
+    subprocess.run(["unzip", "-oq", blobs.cms_path(work, "pbp"), "-d", f"{work}/pbp"], check=True)
+    py("universe.py", f"{work}/{config['landscape_csv']}", gen / "plans.csv", gen / "landscape_reads.csv", config["state"],
+       *config["counties"])
+    py("find_docs.py", gen / "plans.csv", data / "found.csv", data / "links.csv", gen / "documents.csv", config["year"])
+    py("pbp_facts.py", gen / "plans.csv", gen / "landscape_reads.csv", f"{work}/pbp", gen / "pbp_facts.csv")
+    py("cms_sources.py", f"{work}/{config['landscape_csv']}", gen / "plans.csv", f"{work}/pbp", gen / "cms_sources.csv",
+       config["state"])
+
+
 def main(year, work, mode="", candidate=""):
     if mode not in ("", "api", "replay"):
         raise SystemExit(__doc__)
@@ -143,36 +157,28 @@ def main(year, work, mode="", candidate=""):
     work = os.path.abspath(work)
     os.makedirs(work, exist_ok=True)
     web = mode != "replay"
-    for name in CMS:
-        if web:
-            get(config[f"{name}_zip"], blobs.cms_path(work, name))
-    subprocess.run(["unzip", "-oq", blobs.cms_path(work, "landscape"), "-d", work], check=True)
-    subprocess.run(["unzip", "-oq", blobs.cms_path(work, "pbp"), "-d", f"{work}/pbp"], check=True)
-
     gen = data / "generated"
     os.makedirs(gen, exist_ok=True)
-    blobs.record_cms(CMS, work, gen / blobs.CMS_FILES)
-    py("universe.py", f"{work}/{config['landscape_csv']}", gen / "plans.csv", gen / "landscape_reads.csv", config["state"],
-       *config["counties"])
     if web:
-        py("find_docs.py", gen / "plans.csv", data / "found.csv", data / "links.csv", gen / "documents.csv",
-           config["year"])
+        for name in CMS:
+            get(config[f"{name}_zip"], blobs.cms_path(work, name))
+    blobs.record_cms(CMS, work, gen / blobs.CMS_FILES)
+    cms_tables(data, config, work)
+    if web:
         py("fetch_docs.py", gen / "documents.csv", gen / "plans.csv", f"{work}/docs", gen / "documents_checked.csv",
            config["year"], ",".join(config["counties"]))
         pdfs(gen, work)
     py("texts.py", f"{work}/pdfs", f"{work}/texts")
     blobs.record_texts(gen, work)
-    py("pbp_facts.py", gen / "plans.csv", gen / "landscape_reads.csv", f"{work}/pbp", gen / "pbp_facts.csv")
-    py("cms_sources.py", f"{work}/{config['landscape_csv']}", gen / "plans.csv", f"{work}/pbp", gen / "cms_sources.csv",
-       config["state"])
     if config["year"] == appendix_b.YEAR:
         py("tests/make_fixture.py", f"{work}/pbp")
 
     if config["year"] == years.LIVE:
         versions = steps.versions(data, STEPS, candidate)
-        # The new texts must highlight the quotes the committed facts give, before any model call.
-        present.write(data, versions["present"])
-        check_quotes(data, f"{work}/texts")
+        # The new texts must highlight the quotes the earlier facts give, before any model call.
+        if (data / FACTS).exists():
+            present.write(data, versions["present"])
+            check_quotes(data, f"{work}/texts")
         answer = Answers(data, asker(mode, data, work, versions, candidate), work)
         model_steps(data, f"{work}/texts", work, answer, versions)
         check_quotes(data, f"{work}/texts")

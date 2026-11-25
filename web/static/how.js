@@ -2,8 +2,8 @@
 import { el, svg } from "./dom.js";
 import { format } from "./permalink.js";
 import {
-  EXAMPLE, NODES, STEPS, SHEET_FILES, EDGES, NODE_W, NODE_H, MAP_W, MAP_H,
-  nodeBox, pillBox, edge, before, after, strip, details, records,
+  EXAMPLE, NODES, STEPS, SHEET_FILES, inputs, NODE_W, NODE_H, MAP_W, MAP_H,
+  nodeBox, pillBox, paths, before, after, strip, details, records,
 } from "./pipeline.js";
 
 // The map is drawn at full size, then scaled to fit its rail.
@@ -35,15 +35,15 @@ export function howView({ year, cell, step, terms, trace }) {
 }
 
 function map(step, link, sheet) {
-  const on = new Set(EDGES.filter((e) => e.step === step).flatMap((e) => [e.from, e.to]));
+  const on = new Set([...inputs(step), step.to]);
   const lines = svg("svg", { width: MAP_W, height: MAP_H, "aria-hidden": "true" },
     svg("defs", {}, ...["off", "on"].map((k) => svg("marker", {
       id: `how-arrow-${k}`, viewBox: "0 0 10 10", refX: "9", refY: "5", markerWidth: "10", markerHeight: "10", markerUnits: "userSpaceOnUse", orient: "auto",
     }, svg("path", { d: "M0,0 L10,5 L0,10 z", class: `how-arrow ${k}` })))),
-    ...EDGES.map((e) => svg("path", {
-      d: edge(e.from, e.to).d, class: `how-edge${e.step === step ? " on" : ""}`,
-      "marker-end": `url(#how-arrow-${e.step === step ? "on" : "off"})`,
-    })));
+    ...STEPS.flatMap((s) => paths(s).map((p) => svg("path", {
+      d: p.d, class: `how-edge${s === step ? " on" : ""}`,
+      ...(p.arrow ? { "marker-end": `url(#how-arrow-${s === step ? "on" : "off"})` } : {}),
+    }))));
   const nodes = Object.entries(NODES).map(([id, n]) => {
     const b = nodeBox(id);
     return el("div", {
@@ -52,11 +52,11 @@ function map(step, link, sheet) {
       title: `${n.kind}: ${label(id, sheet)}`,
     }, el("small", {}, n.kind), el("code", {}, label(id, sheet)));
   });
-  const pills = EDGES.map((e) => {
-    const s = e.step, b = pillBox(e), repeat = e.from !== s.from;
+  const pills = STEPS.map((s) => {
+    const b = pillBox(s);
     const style = `left:${b.x}px;top:${b.y}px;width:${b.w}px;height:${b.h}px`;
     return el("a", { class: `how-pill${s === step ? " on" : ""}`, href: link(s), title: s.label, style,
-      ...(repeat ? { tabindex: "-1", "aria-hidden": "true" } : s === step ? { "aria-current": "step" } : {}) }, s.label);
+      ...(s === step ? { "aria-current": "step" } : {}) }, s.label);
   });
   return el("section", { class: "how-map", "aria-label": "Tables and steps" },
     el("h2", {}, "Tables and steps"),
@@ -72,6 +72,7 @@ function lens(step, link, terms, example, trace, sheet) {
   const end = (id) => el("div", { class: `how-end${NODES[id].source ? " source" : ""}` },
     el("small", {}, NODES[id].kind), el("code", {}, example ? shown(id).name : label(id, sheet)));
   const fromTo = example ? [example.before, example.after] : strip(step, trace);
+  const live = records(step, trace);
   const para = (p) => el("p", {}, ...p.map((s) => typeof s === "string" ? s : term(terms[s[0]], s[1])));
   return el("section", { class: "how-lens" },
     chips(before(step), "before", (l) => `↖ after: ${l}`),
@@ -80,9 +81,11 @@ function lens(step, link, terms, example, trace, sheet) {
     el("div", { class: "how-card" },
       fromTo ? el("p", { class: "how-strip" }, el("code", { class: "from" }, fromTo[0]), " becomes ", el("code", { class: "to" }, fromTo[1])) : null,
       ...step.paras.map(para), ...(example?.paras ?? []).map(para), workList(details(step, trace))),
-    ...records(step, trace).map((r) => table("Input", r.name, r.note, r.cols, r.rows, r.hi)),
-    example ? rows("Input", step.from, example.highlight[0]) : null,
-    example ? rows("Output", step.to, example.highlight[1]) : null,
+    ...["Input", "Output"].flatMap((role, i) => {
+      const mine = live.filter((r) => r.role === role);
+      if (mine.length) return mine.map((r) => table(role, r.name, r.note, r.cols, r.rows, r.hi));
+      return example ? [rows(role, i ? step.to : step.from, example.highlight[i])] : [];
+    }),
     traceRecord(step, trace),
     chips(after(step), "after", (l) => `next: ${l} ↘`));
 }
@@ -176,7 +179,8 @@ function table(role, name, note, cols, body, highlight) {
   const hi = new Set(highlight);
   return frame(role, name, note, el("table", {},
     el("thead", {}, el("tr", {}, ...cols.map((c) => el("th", {}, c)))),
-    el("tbody", {}, ...body.map((r, i) => el("tr", hi.has(i) ? { class: "hi" } : {}, ...r.map((c) => el("td", {}, c)))))));
+    el("tbody", {}, ...(body.length ? body.map((r, i) => el("tr", hi.has(i) ? { class: "hi" } : {}, ...r.map((c) => el("td", {}, c))))
+      : [el("tr", {}, el("td", { colspan: cols.length }, "none"))]))));
 }
 
 const frame = (role, name, note, body) => el("div", { class: `how-rows ${role.toLowerCase()}` },

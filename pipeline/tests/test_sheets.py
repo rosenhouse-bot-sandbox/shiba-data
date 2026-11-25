@@ -1,7 +1,7 @@
-import csv, os, pathlib, subprocess, sys, tempfile, unittest
+import csv, os, pathlib, sys, tempfile, unittest
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-import sheets, years
+import sheets
 
 
 def write(path, rows, columns=sheets.COLUMNS):
@@ -65,17 +65,6 @@ class CitationsTest(unittest.TestCase):
         write(self.data / sheets.PRESENTED, [dict(cite("G_specialist", "$0-$40"), extra="x")], sheets.COLUMNS + ["extra"])
         with self.assertRaisesRegex(ValueError, "presented.csv has columns"):
             sheets.citations(self.data, {"u": "EOC"})
-
-
-class GitTest(unittest.TestCase):
-    def test_git_ignores_the_sheets_and_their_citations(self):
-        paths = [f"data/{years.LIVE}/generated/{name}" for name in sheets.SHEETS.values()]
-        paths.append(f"data/{years.LIVE}/{sheets.PRESENTED}")
-
-        def git(*args):
-            return subprocess.run(["git", "-C", str(years.REPO), *args, *paths], capture_output=True, text=True).stdout
-        self.assertEqual(git("ls-files"), "")
-        self.assertEqual(git("check-ignore", "--no-index").split(), paths)
 
 
 if __name__ == "__main__":

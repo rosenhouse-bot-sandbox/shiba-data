@@ -19,7 +19,7 @@ import years  # noqa: E402
 
 TESTS = HERE / "tests"
 # What a replay writes into data/<year>.
-OUTPUTS = ("machine/document_facts.csv", "generated/plans.csv", "generated/landscape_reads.csv",
+OUTPUTS = ("machine/document_facts.csv", "generated/plans.csv", "generated/documents.csv", "generated/landscape_reads.csv",
            "generated/pbp_facts.csv", "generated/cms_sources.csv", "generated/presented.csv",
            "generated/main_chart.csv", "generated/dvha.csv")
 # What each run reads from earlier runs.

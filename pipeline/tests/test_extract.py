@@ -1,4 +1,5 @@
 import contextlib, io, json, os, pathlib, random, shutil, sys, tempfile, unittest
+from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import ask, extract, facts
@@ -30,6 +31,17 @@ class PagesTest(unittest.TestCase):
     def test_keeps_pages_that_mention_the_group(self):
         self.assertEqual(sorted(extract.relevant(PAGES, "imaging")), [61, 62])
 
+    def test_searches_a_document_once_for_each_group(self):
+        for pages in (PAGES | {64: "Searched once"}, {1: "Matches nothing, searched once"}):
+            with mock.patch.object(extract.re, "search", wraps=extract.re.search) as search:
+                extract.relevant(dict(pages), "imaging")
+                once = search.call_count
+                extract.relevant(dict(pages), "imaging")
+            self.assertEqual((search.call_count, once > 0), (once, True))
+
+    def test_each_group_finds_its_own_pages(self):
+        pages = {1: "Hearing aids $0", 2: "Outpatient X-rays"}
+        self.assertEqual([sorted(extract.relevant(pages, g)) for g in ("hearing", "imaging")], [[1], [2]])
 
     def test_a_version_can_find_more_pages(self):
         pages = PAGES | {63: "Tier 6 Select Care Drugs"}
