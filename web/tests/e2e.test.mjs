@@ -85,48 +85,81 @@ test("the header links to the Google Sheet in a new tab", async () => {
   assert.ok(await link.locator("svg").isVisible());
 });
 
-const background = (p) => p.evaluate(() => getComputedStyle(document.body).backgroundColor);
-const WHITE = "rgb(255, 255, 255)";
+// The light page is white; the dark page is not.
+const isDark = async (p) => (await p.evaluate(() => getComputedStyle(document.body).backgroundColor)) !== "rgb(255, 255, 255)";
+
+async function openSheet(options) {
+  const p = await newPage(options);
+  await p.goto(`${base}#/main`);
+  await p.waitForSelector("table.sheet");
+  return p;
+}
 
 test("appearance follows the system by default, and the menu says which it is", async () => {
-  const fresh = await newPage({ colorScheme: "dark" });
-  await fresh.goto(`${base}#/main`);
-  await fresh.waitForSelector("table.sheet");
-  assert.notEqual(await background(fresh), WHITE);
+  const fresh = await openSheet({ colorScheme: "dark" });
+  assert.ok(await isDark(fresh));
   await fresh.getByRole("button", { name: "Appearance" }).click();
-  const system = fresh.getByRole("radio", { name: "System (dark)" });
-  assert.ok(await system.isChecked());
+  assert.ok(await fresh.getByRole("radio", { name: "System (dark)" }).isChecked());
   await fresh.emulateMedia({ colorScheme: "light" });
   assert.ok(await fresh.getByRole("radio", { name: "System (light)" }).isChecked());
-  assert.equal(await background(fresh), WHITE);
+  assert.ok(!await isDark(fresh));
 });
 
 test("a chosen appearance overrides the system and is remembered until System is chosen", async () => {
-  const fresh = await newPage({ colorScheme: "light" });
-  await fresh.goto(`${base}#/main`);
-  await fresh.waitForSelector("table.sheet");
+  const fresh = await openSheet({ colorScheme: "light" });
   const button = fresh.getByRole("button", { name: "Appearance" });
   await button.click();
   await fresh.getByRole("radio", { name: "Dark" }).check();
-  assert.notEqual(await background(fresh), WHITE);
+  assert.ok(await isDark(fresh));
+  assert.ok(await button.locator(".moon").isVisible());
+  assert.ok(!await button.locator(".sun").isVisible());
   await fresh.reload();
   await fresh.waitForSelector("table.sheet");
-  assert.notEqual(await background(fresh), WHITE);
+  assert.ok(await isDark(fresh));
   await button.click();
   assert.ok(await fresh.getByRole("radio", { name: "Dark" }).isChecked());
   await fresh.getByRole("radio", { name: /^System/ }).check();
-  assert.equal(await background(fresh), WHITE);
-  await fresh.reload();
-  await fresh.waitForSelector("table.sheet");
-  assert.equal(await background(fresh), WHITE);
+  assert.ok(!await isDark(fresh));
+  assert.equal(await fresh.evaluate(() => localStorage.getItem("color-scheme")), null);
 });
 
-test("a saved appearance applies before the app script runs", async () => {
+test("an appearance chosen in one tab applies in the others", async () => {
+  const context = await browser.newContext({ colorScheme: "light" });
+  try {
+    const [one, other] = [await context.newPage(), await context.newPage()];
+    for (const p of [one, other]) await p.goto(`${base}#/main`);
+    await one.getByRole("button", { name: "Appearance" }).click();
+    await one.getByRole("radio", { name: "Dark" }).check();
+    await other.waitForFunction(() => getComputedStyle(document.body).backgroundColor !== "rgb(255, 255, 255)");
+  } finally {
+    await context.close();
+  }
+});
+
+test("the appearance menu opens under its button and closes when the window resizes", async () => {
+  const fresh = await openSheet({ viewport: { width: 1300, height: 700 } });
+  const button = fresh.getByRole("button", { name: "Appearance" });
+  const menu = fresh.locator("#appearance-menu");
+  await button.click();
+  const b = await button.boundingBox();
+  const m = await menu.boundingBox();
+  assert.ok(m.y >= b.y + b.height && m.y < b.y + b.height + 10, `menu top ${m.y}, button bottom ${b.y + b.height}`);
+  assert.ok(Math.abs(m.x + m.width - (b.x + b.width)) < 1, "menu's right edge lines up with the button's");
+  await fresh.setViewportSize({ width: 700, height: 700 });
+  await menu.waitFor({ state: "hidden" });
+});
+
+test("a saved appearance applies before the app script runs, and a bad one is ignored", async () => {
   const fresh = await newPage({ colorScheme: "light" });
   await fresh.addInitScript(() => localStorage.setItem("color-scheme", "dark"));
   await fresh.route("**/app.js", (route) => route.abort());
   await fresh.goto(`${base}#/main`, { waitUntil: "domcontentloaded" });
-  assert.notEqual(await background(fresh), WHITE);
+  assert.ok(await isDark(fresh));
+  const bad = await openSheet({ colorScheme: "dark" });
+  await bad.evaluate(() => localStorage.setItem("color-scheme", "bogus"));
+  await bad.reload();
+  await bad.getByRole("button", { name: "Appearance" }).click();
+  assert.ok(await bad.getByRole("radio", { name: "System (dark)" }).isChecked());
 });
 
 test("sheets are grouped under named sections", async () => {
