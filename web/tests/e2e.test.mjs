@@ -85,6 +85,50 @@ test("the header links to the Google Sheet in a new tab", async () => {
   assert.ok(await link.locator("svg").isVisible());
 });
 
+const background = (p) => p.evaluate(() => getComputedStyle(document.body).backgroundColor);
+const WHITE = "rgb(255, 255, 255)";
+
+test("appearance follows the system by default, and the menu says which it is", async () => {
+  const fresh = await newPage({ colorScheme: "dark" });
+  await fresh.goto(`${base}#/main`);
+  await fresh.waitForSelector("table.sheet");
+  assert.notEqual(await background(fresh), WHITE);
+  await fresh.getByRole("button", { name: "Appearance" }).click();
+  const system = fresh.getByRole("radio", { name: "System (dark)" });
+  assert.ok(await system.isChecked());
+  await fresh.emulateMedia({ colorScheme: "light" });
+  assert.ok(await fresh.getByRole("radio", { name: "System (light)" }).isChecked());
+  assert.equal(await background(fresh), WHITE);
+});
+
+test("a chosen appearance overrides the system and is remembered until System is chosen", async () => {
+  const fresh = await newPage({ colorScheme: "light" });
+  await fresh.goto(`${base}#/main`);
+  await fresh.waitForSelector("table.sheet");
+  const button = fresh.getByRole("button", { name: "Appearance" });
+  await button.click();
+  await fresh.getByRole("radio", { name: "Dark" }).check();
+  assert.notEqual(await background(fresh), WHITE);
+  await fresh.reload();
+  await fresh.waitForSelector("table.sheet");
+  assert.notEqual(await background(fresh), WHITE);
+  await button.click();
+  assert.ok(await fresh.getByRole("radio", { name: "Dark" }).isChecked());
+  await fresh.getByRole("radio", { name: /^System/ }).check();
+  assert.equal(await background(fresh), WHITE);
+  await fresh.reload();
+  await fresh.waitForSelector("table.sheet");
+  assert.equal(await background(fresh), WHITE);
+});
+
+test("a saved appearance applies before the app script runs", async () => {
+  const fresh = await newPage({ colorScheme: "light" });
+  await fresh.addInitScript(() => localStorage.setItem("color-scheme", "dark"));
+  await fresh.route("**/app.js", (route) => route.abort());
+  await fresh.goto(`${base}#/main`, { waitUntil: "domcontentloaded" });
+  assert.notEqual(await background(fresh), WHITE);
+});
+
 test("sheets are grouped under named sections", async () => {
   await page.goto(`${base}#/main`);
   assert.equal(await page.textContent("tr.section th"), "Medicare Advantage with drug coverage");

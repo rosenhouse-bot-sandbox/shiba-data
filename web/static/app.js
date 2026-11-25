@@ -5,6 +5,7 @@ import { parse, format } from "./permalink.js";
 import { el } from "./dom.js";
 import { howView, howLink, traceUrl } from "./how.js";
 import { EXAMPLE, STEPS } from "./pipeline.js";
+import { initAppearance } from "./appearance.js";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = "pdfjs/pdf.worker.min.mjs";
 
@@ -753,4 +754,5 @@ function markOpenPlans() {
   document.querySelectorAll("tr[data-plan]").forEach((tr) => tr.classList.toggle("open-plan", open.includes(tr.dataset.plan)));
 }
 
+initAppearance();
 start();
