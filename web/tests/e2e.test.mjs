@@ -393,18 +393,59 @@ test("every quote a cell cites on the shown page is highlighted", async () => {
   for (const c of cites) assert.ok(marked.includes(squash(c.quote)), `${c.quote} in ${marked}`);
 });
 
-test("a note in Notes shows only the note's own source and quote", async () => {
+test("a note in Notes shows only the citations on the pages it names", async () => {
+  const kindPage = (q) => `${site.docs[q.doc].kind} ${q.page}`;
   const { plan_id, col, cell } = allCells("main").find(({ cell }) =>
-    cell.comment && cell.cites.some((c) => c.doc === cell.comment.doc && c.page === cell.comment.page && c.quote !== cell.comment.quote));
-  await page.goto(`${base}#/notes`);
-  await page.locator(`table.notes td[data-plan="${plan_id}"][data-col="${col}"]`).click();
-  await shown(cell.comment.doc, cell.comment.page);
-  assert.equal(await page.locator("#source-note p.cite").count(), 0);
-  assert.equal(await page.locator("#source-note p.comment-source").count(), 1);
-  assert.equal(await page.locator("#source-note a", { hasText: "Show this cell's citations in Main chart" }).getAttribute("href"),
+    cell.comment && new Set(cell.cites.map(kindPage)).size >= 3 && cell.cites.some((c) => kindPage(c) === kindPage(cell.comment)));
+  const named = cell.cites.find((c) => kindPage(c) !== kindPage(cell.comment));
+  const pages = new Set([kindPage(cell.comment), kindPage(named)]);
+  const expected = cell.cites.filter((c) => pages.has(kindPage(c)));
+  const fresh = await newPage();
+  await fresh.route("**/data.json", (route) => {
+    const edited = structuredClone(site);
+    // The range's first page holds no citation, so only its last page names the citations.
+    edited.main.rows.find((r) => r.plan_id === plan_id).cells[col].comment.text =
+      `See ${site.docs[named.doc].kind.toLowerCase()} pages ${named.page - 1}-${named.page}.`;
+    route.fulfill({ json: edited });
+  });
+  assert.ok(!pages.has(`${site.docs[named.doc].kind} ${named.page - 1}`) && !cell.cites.some((c) => kindPage(c) === `${site.docs[named.doc].kind} ${named.page - 1}`));
+  await fresh.goto(`${base}#/notes`);
+  await fresh.locator(`table.notes td[data-plan="${plan_id}"][data-col="${col}"]`).click();
+  await fresh.waitForSelector(`#page-area[data-shown="${cell.comment.doc} ${cell.comment.page}"]`);
+  assert.deepEqual(await fresh.locator("#source-note p.cite").allTextContents(),
+    expected.map((c) => `${kindPage(c).replace(" ", " page ")}${c.line ? ` (line ${c.line})` : ""}: “${c.quote}”`));
+  assert.ok(expected.length < cell.cites.length);
+  assert.equal(await fresh.locator("#source-note p.comment-source").count(), 1);
+  assert.equal(await fresh.locator("#source-note a", { hasText: "Show this cell's citations in Main chart" }).getAttribute("href"),
     `#/2027/main/${plan_id}/${col.replace(/^[A-Z]+_/, "")}`);
-  const squash = (t) => t.replace(/\s+/g, "").toLowerCase();
-  assert.equal(squash((await page.locator(".textLayer mark").allTextContents()).join("")), squash(cell.comment.quote));
+  await fresh.locator("#source-note p.comment a").click();
+  await fresh.waitForSelector(`#page-area[data-shown="${named.doc} ${named.page - 1}"]`);
+  await fresh.locator("#next").click();
+  await fresh.waitForSelector(`#page-area[data-shown="${named.doc} ${named.page}"] .textLayer mark`);
+});
+
+test("a note in Notes links to the cell's citations only when it hides some", async () => {
+  const kindPage = (q) => `${site.docs[q.doc].kind} ${q.page}`;
+  const cells = allCells("main").filter(({ cell }) => cell.comment && cell.cites.length);
+  const fresh = await newPage();
+  await fresh.route("**/data.json", (route) => {
+    const edited = structuredClone(site);
+    const [hidesAll, hidesNone] = cells.map(({ plan_id, col }) => edited.main.rows.find((r) => r.plan_id === plan_id).cells[col]);
+    hidesAll.comment.text = "Note.";
+    hidesAll.comment.page = Math.max(...hidesAll.cites.map((c) => c.page)) + 1;
+    hidesNone.comment.text = "Note.";
+    hidesNone.cites = hidesNone.cites.filter((c) => kindPage(c) === kindPage(hidesNone.comment));
+    route.fulfill({ json: edited });
+  });
+  await fresh.goto(`${base}#/notes`);
+  const link = fresh.locator("#source-note a", { hasText: "Show this cell's citations" });
+  await fresh.locator(`table.notes td[data-plan="${cells[0].plan_id}"][data-col="${cells[0].col}"]`).click();
+  await fresh.waitForSelector("#source-note p.comment-source");
+  assert.equal(await fresh.locator("#source-note p.cite").count(), 0);
+  assert.equal(await link.count(), 1);
+  await fresh.locator(`table.notes td[data-plan="${cells[1].plan_id}"][data-col="${cells[1].col}"]`).click();
+  await fresh.waitForSelector(`#source-note b:has-text("${site.plans.find((p) => p.plan_id === cells[1].plan_id).plan_name}")`);
+  assert.equal(await link.count(), 0);
 });
 
 test("browser zoom enlarges the document pages", async () => {
