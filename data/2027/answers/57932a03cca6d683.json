@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1380.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The PET Scans row on page 89 lists 'Office or Freestanding location: $200 copay' (outpatient hospital is $300), so the office setting is $200 in network for this plan.\"}]\n```",
+ "usage": {
+  "input_tokens": 2217,
+  "output_tokens": 223,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

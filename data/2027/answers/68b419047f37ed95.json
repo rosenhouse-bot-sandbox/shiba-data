@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-511.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 86 outpatient surgery row, in-network column: '$0 copayment for a colonoscopy at an outpatient hospital.' This is distinct from the $550 general outpatient hospital surgery copay. It sits in the outpatient surgery chart, apart from the preventive screening row, so it is the diagnostic colonoscopy cost.\"}]\n```",
+ "usage": {
+  "input_tokens": 2395,
+  "output_tokens": 602,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-920.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 40 does show a $0 in-network copay for fitting and evaluation, with unlimited visits for 12 months after purchase. But the item leaves condition blank when the rules require 'fitting/evaluation'. Without it, the fact reads as a general hearing exam with a 12-month post-purchase limit, which misstates the benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 3849,
+  "output_tokens": 379,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

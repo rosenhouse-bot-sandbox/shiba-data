@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1384.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 52 Ambulance services row reads '$290 copayment for each one-way Medicare-covered air trip.' The line spans both network columns with no network qualifier, so it covers in-network. The amount, the Medicare coverage and the per one-way trip unit all match.\"}]\n```",
+ "usage": {
+  "input_tokens": 2258,
+  "output_tokens": 438,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

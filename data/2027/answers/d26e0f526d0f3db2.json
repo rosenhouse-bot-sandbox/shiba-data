@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1373.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 65 Inpatient hospital care row (covers acute, rehab and long-term care hospitals): In-Network $585 copay each day for days 1 to 4 for Medicare-covered hospital care.\"}]\n```",
+ "usage": {
+  "input_tokens": 2280,
+  "output_tokens": 287,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

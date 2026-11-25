@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-910.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"On page 87, the PET Scans row reads 'Office or Freestanding location: $200 copay' for DEVOTED CORE 001 OR (HMO). That makes the in-network freestanding copay $200, which is a Medicare-covered outpatient diagnostic service. The $300 copay applies only to the outpatient hospital setting.\"}]\n```",
+ "usage": {
+  "input_tokens": 2215,
+  "output_tokens": 285,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

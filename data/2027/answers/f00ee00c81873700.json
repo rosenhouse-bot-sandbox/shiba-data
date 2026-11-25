@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-177.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 53 does show a $45 Specialist's Office copay under 'Basic Radiological Services'. But that heading does not clearly mean outpatient X-rays specifically, and the row continued from the previous page may be a separate X-ray entry, so the benefit mapping is in doubt.\"}]\n```",
+ "usage": {
+  "input_tokens": 2331,
+  "output_tokens": 614,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

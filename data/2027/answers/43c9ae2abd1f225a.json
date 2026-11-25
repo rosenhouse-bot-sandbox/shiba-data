@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2239.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 64 Outpatient rehabilitation services row, In-Network: Physical Therapy is a $35 copayment at the Specialist's Office. The same amount also applies at the Outpatient Hospital and Comprehensive Outpatient Rehab Facility. This is a Medicare-covered service for this plan.\"}]\n```",
+ "usage": {
+  "input_tokens": 2451,
+  "output_tokens": 298,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

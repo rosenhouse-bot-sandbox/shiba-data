@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1092.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 56, Medicare Part B drugs row: 20% coinsurance for all other drugs covered under Medicare Part B. This is the general in-network Part B drug cost, separate from the specially priced categories.\"}]\n```",
+ "usage": {
+  "input_tokens": 2528,
+  "output_tokens": 637,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-402.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 116, routine eyewear row, in-network column: $0 copayment for 1 pair of eyeglasses or contact lenses with a retail value of up to $200. The member pays all costs over $200, so the plan pays at most $200 for supplemental eyewear in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2942,
+  "output_tokens": 384,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

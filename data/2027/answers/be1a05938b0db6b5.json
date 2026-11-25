@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1487.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 Deductible row: the Value Plan column (third) shows $0, so this plan has no medical deductible in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2168,
+  "output_tokens": 143,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

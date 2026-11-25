@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-206.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 65 Advanced Imaging Services: $330 copayment listed for the PCP's Office and the Specialist's Office, so the specialist office setting matches.\"}]\n```",
+ "usage": {
+  "input_tokens": 2240,
+  "output_tokens": 234,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1803.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 61 hearing aids row says the benefit is limited to 2 hearing aids every year. This is a supplemental benefit provided in network through UnitedHealthcare Hearing.\"}]\n```",
+ "usage": {
+  "input_tokens": 3651,
+  "output_tokens": 203,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

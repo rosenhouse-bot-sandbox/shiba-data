@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-557.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 41 does say emergency and urgently needed services outside the U.S. are not covered. But care outside the U.S. must have covered_by 'supplemental', and the item says 'medicare'.\"}]\n```",
+ "usage": {
+  "input_tokens": 2339,
+  "output_tokens": 174,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

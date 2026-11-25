@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-694.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 122 routine eye exam row, listed as supplemental (routine): \\\"1 routine eye exam every year\\\". The in-network and out-of-network costs both cover 1 routine eye exam every year, so a limit of 1 per year for any network holds.\"}]\n```",
+ "usage": {
+  "input_tokens": 2451,
+  "output_tokens": 215,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

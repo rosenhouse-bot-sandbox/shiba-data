@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-682.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 61 OTC Allowance row: $50 quarterly on the Humana Spending Account Card for health items bought at participating stores or by OTC mail order; the in-network cost is $0 copayment.\"}]\n```",
+ "usage": {
+  "input_tokens": 2770,
+  "output_tokens": 554,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

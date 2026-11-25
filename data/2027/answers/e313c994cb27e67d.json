@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1992.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 86 'All Other Part B Drugs' row gives 20% coinsurance at an Ambulatory Surgical Center (ASC), in network, for this plan. At an ASC, only chemotherapy and all other Part B drugs are listed, and both are 20%.\"}]\n```",
+ "usage": {
+  "input_tokens": 2766,
+  "output_tokens": 417,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

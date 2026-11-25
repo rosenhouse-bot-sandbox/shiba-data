@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1909.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 57 Laboratory tests row shows an in-network $0 copay per provider per day for HbA1C testing. This is a Medicare-covered outpatient lab benefit, and no setting is named.\"}]\n```",
+ "usage": {
+  "input_tokens": 2322,
+  "output_tokens": 191,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

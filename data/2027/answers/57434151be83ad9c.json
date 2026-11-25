@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1290.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 48, supplemental chiropractic row: the plan covers supplemental (Non-Medicare-covered) chiropractic visits up to a total of 24 visits every year. The left-column limit sits above both the in-network and out-of-network costs, so network 'any' fits.\"}]\n```",
+ "usage": {
+  "input_tokens": 2380,
+  "output_tokens": 320,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

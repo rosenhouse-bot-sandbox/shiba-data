@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-973.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 109: the plan pays up to $400 per year for prescription eyeglasses, lenses, frames and contact lenses, and calls it the $400 per year allowance. Members must use in-network vendors.\"}]\n```",
+ "usage": {
+  "input_tokens": 2593,
+  "output_tokens": 260,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

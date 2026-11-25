@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1659.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 65, in the outpatient diagnostic tests row, the Advanced Imaging Services sub-heading lists a $330 copayment for PCP's Office and Specialist's Office. That matches the in-network specialist office copay of $330.\"}]\n```",
+ "usage": {
+  "input_tokens": 2384,
+  "output_tokens": 236,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

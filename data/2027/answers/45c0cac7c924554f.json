@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-544.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 86 Outpatient rehabilitation services row (physical, occupational and speech therapy) lists $35 per visit for Standard plan members. It is one cost for all outpatient settings, in network and Medicare-covered.\"}]\n```",
+ "usage": {
+  "input_tokens": 2237,
+  "output_tokens": 224,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

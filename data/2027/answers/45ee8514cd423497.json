@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2064.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 108, outpatient surgery row, in-network section: Diagnostic Colonoscopies at an Outpatient hospital is a $0 copay. This is Medicare-covered, and the out-of-network $40 belongs to a separate part of the row.\"}]\n```",
+ "usage": {
+  "input_tokens": 2180,
+  "output_tokens": 220,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

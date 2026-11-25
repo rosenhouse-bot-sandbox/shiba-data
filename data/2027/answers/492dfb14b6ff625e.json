@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1184.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 55 does show '$350 for Value plan members' for ambulance. But this page only continues the ambulance row, and nothing on it supports the unit 'per one-way trip'. The unit cannot be verified from the quoted page.\"}]\n```",
+ "usage": {
+  "input_tokens": 2103,
+  "output_tokens": 266,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

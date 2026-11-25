@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-113.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 103 gives a $0 copay for preventive and diagnostic dental care (exams, cleanings, X-rays). It is in network, since out-of-network dentists may bill more. The same section continues on page 104, where it is identified as the Platinum Dental Rider.\"}]\n```",
+ "usage": {
+  "input_tokens": 3780,
+  "output_tokens": 970,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

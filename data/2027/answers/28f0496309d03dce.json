@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-480.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 Deductible row: $250 deductible for select Part B services. 'Select' makes it a some-services deductible. No network is stated, so in-network applies by default.\"}]\n```",
+ "usage": {
+  "input_tokens": 1950,
+  "output_tokens": 349,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1321.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 64 hearing aids row: limited to 2 hearing aids every year. The description covers the whole benefit, and the out-of-network column also says up to 2 hearing aids.\"}]\n```",
+ "usage": {
+  "input_tokens": 3788,
+  "output_tokens": 254,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

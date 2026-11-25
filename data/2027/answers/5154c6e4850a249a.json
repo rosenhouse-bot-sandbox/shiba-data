@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2194.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 43 Inpatient hospital care row (inpatient acute, rehabilitation and long-term care hospitals) shows $325 per day for days 1-5 in this HMO plan's network. This is a Medicare-covered benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2284,
+  "output_tokens": 275,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

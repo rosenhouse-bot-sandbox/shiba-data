@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-852.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 102, 'Vision services - routine eye exam' row: the plan covers 1 in- or out-of-network routine eye exam every year. That supports a supplemental visit limit of 1 per year across both networks.\"}]\n```",
+ "usage": {
+  "input_tokens": 2801,
+  "output_tokens": 187,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

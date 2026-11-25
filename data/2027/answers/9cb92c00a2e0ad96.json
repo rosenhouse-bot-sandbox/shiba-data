@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1879.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"On page 89, the $0 in-network copay sits on the contact lenses row and applies only 'up to the allowance amount' ($200 every year for additional eyewear). The item leaves out that cap and limit, so it reads as unlimited $0 eyewear.\"}]\n```",
+ "usage": {
+  "input_tokens": 2424,
+  "output_tokens": 485,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

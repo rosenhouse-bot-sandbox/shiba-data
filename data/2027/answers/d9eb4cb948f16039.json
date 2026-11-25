@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1413.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 75, 'Other outpatient diagnostic tests - non-radiological diagnostic services' row: $60 copayment for Medicare-covered non-radiological diagnostic services. 'or' is 'for' with the f dropped, not an alternative cost. No setting is named.\"}]\n```",
+ "usage": {
+  "input_tokens": 2329,
+  "output_tokens": 435,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

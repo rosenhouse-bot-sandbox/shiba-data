@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1750.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 62 Chiropractic services row: routine (supplemental) chiropractic visits are a $0 copay. The Medicare-covered visits are 30% coinsurance, which is a different fact. No setting is named.\"}]\n```",
+ "usage": {
+  "input_tokens": 2544,
+  "output_tokens": 211,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

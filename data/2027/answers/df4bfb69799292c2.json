@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-426.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 78, Mandatory Supplemental Hearing Benefit table: the row reads 'Routine hearing exam (1 per year)' with $0 in network. The limit sits in the description, so it covers the in-network benefit, and this is a routine supplemental exam.\"}]\n```",
+ "usage": {
+  "input_tokens": 3157,
+  "output_tokens": 289,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

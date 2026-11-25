@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2003.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 62 Chiropractic services row: Medicare-covered chiropractic visits cost a $15 copay. No setting is named, and the cost is in network by default.\"}]\n```",
+ "usage": {
+  "input_tokens": 2546,
+  "output_tokens": 81,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1977.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 61 Dental & Alternative Therapy Allowance row gives a $1,750 yearly allowance for non-Medicare covered preventive and comprehensive dental services. The pool name, supplemental status, amount and per-year limit all match. The row names no network, so in-network is acceptable.\"}]\n```",
+ "usage": {
+  "input_tokens": 3815,
+  "output_tokens": 425,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

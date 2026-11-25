@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2174.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 76, row 'Other outpatient diagnostic tests - non-radiological diagnostic services' (EKGs, stress tests): '$35 copayment [f]or Medicare-covered non-radiological diagnostic services.' No setting is named, and this is the plan's in-network cost.\"}]\n```",
+ "usage": {
+  "input_tokens": 2405,
+  "output_tokens": 349,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

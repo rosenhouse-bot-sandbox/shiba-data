@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-528.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 71 Part B drugs row for this plan gives 20% coinsurance for each Medicare-covered chemotherapy drug and its administration. No setting or network split is shown.\"}]\n```",
+ "usage": {
+  "input_tokens": 2621,
+  "output_tokens": 205,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

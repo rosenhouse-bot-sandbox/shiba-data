@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-501.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 66, Outpatient surgery row, In-Network, Surgery Services: $350 copayment for Ambulatory Surgical Center ($450 is the Outpatient Hospital cost).\"}]\n```",
+ "usage": {
+  "input_tokens": 2396,
+  "output_tokens": 93,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

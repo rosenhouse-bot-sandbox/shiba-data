@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-846.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 6 Outpatient rehabilitation services, Occupational therapy row: $40 copay in network (50% is out-of-network). No setting is named, so the setting is any.\"}]\n```",
+ "usage": {
+  "input_tokens": 2017,
+  "output_tokens": 159,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

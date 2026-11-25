@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-554.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 89, outpatient diagnostic tests row for this plan: under 'Diagnostic Procedures and Tests', the PCP's office cost is a $0 copay. This is Medicare-covered and in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2380,
+  "output_tokens": 254,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

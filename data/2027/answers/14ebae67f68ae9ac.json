@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1832.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 80, diagnostic non-laboratory tests row, in network: $125 copay for all other Medicare-covered services in other settings such as a freestanding facility. The diagnostic mammogram is priced separately, so this covers the other diagnostic radiology.\"}]\n```",
+ "usage": {
+  "input_tokens": 2185,
+  "output_tokens": 744,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

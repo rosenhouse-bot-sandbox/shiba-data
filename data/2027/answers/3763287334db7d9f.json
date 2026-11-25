@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2063.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 112, physician services row, under the Out-of-network heading for Office visits: 'Services from a specialist: $45 copay'. This matches an out-of-network, Medicare-covered specialist office visit copay of $45.\"}]\n```",
+ "usage": {
+  "input_tokens": 2486,
+  "output_tokens": 208,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

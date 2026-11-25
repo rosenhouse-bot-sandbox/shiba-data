@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-606.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 111 says the Platinum Dental Rider is an optional supplemental benefit package offered for a monthly premium of $54. The page covers only plan OR-0002 (PPO), and the package name, premium amount and per-month unit all match.\"}]\n```",
+ "usage": {
+  "input_tokens": 2004,
+  "output_tokens": 106,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

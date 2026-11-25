@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-213.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 88, 'Diagnostic Procedures and Tests' row: Specialist's office $20 copay. EKGs/EEGs have their own row at $15, but the general diagnostic procedures row matches tests.diagnostic for the specialist setting.\"}]\n```",
+ "usage": {
+  "input_tokens": 2489,
+  "output_tokens": 503,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

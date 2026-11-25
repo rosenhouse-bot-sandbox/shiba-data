@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2143.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 84, Mandatory Supplemental Hearing Benefit: the 'Routine hearing exam (1 per year)' row shows $0 in the In-Network You Pay column. This matches a supplemental in-network $0 copay per exam, limited to 1 per year.\"}]\n```",
+ "usage": {
+  "input_tokens": 3599,
+  "output_tokens": 319,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

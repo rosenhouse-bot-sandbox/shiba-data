@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2206.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 53 dental chart, continued under routine dental: the Out-of-Network rows show 50% coinsurance for each restorative, endodontic and periodontic service. These are comprehensive services, and the matching oral surgery and prosthodontic rows on the next page also show 50% out of network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2936,
+  "output_tokens": 429,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

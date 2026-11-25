@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1971.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 55 does say a licensed ambulance is covered anywhere in the world, but the item has doubtful fields. It leaves out the stated condition: you reasonably believe you have an emergency medical condition that needs ambulance support. It labels worldwide coverage Medicare-covered, though care outside the U.S. is normally a supplemental benefit. It says covered with no amount, but the ambulance row lists copays ($400 Value Lane, $350 Value), and the Enhanced plan's cost is not shown on this page.\"}]\n```",
+ "usage": {
+  "input_tokens": 2107,
+  "output_tokens": 654,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2171.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 76 right column: 'Hearing aid fitting $0 copay', listed under the supplemental hearing benefits (routine exams, evaluations and fittings, hearing aids). Plan, benefit, condition, cost kind and amount all match.\"}]\n```",
+ "usage": {
+  "input_tokens": 3196,
+  "output_tokens": 166,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

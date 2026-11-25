@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-781.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 58, under Worldwide Ambulance Services (services outside the United States), lists Air Ambulance at 20% coinsurance per one-way trip. The page calls worldwide emergency ambulance a supplemental (extra) benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2396,
+  "output_tokens": 366,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

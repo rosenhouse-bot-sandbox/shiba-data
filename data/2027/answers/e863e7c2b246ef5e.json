@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1582.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 45 Medicare Part B drugs row lists, under Part B insulin drugs In-network, '20% coinsurance up to a $35 copay for a one-month supply'. The amount, network, unit and cap all match the quote.\"}]\n```",
+ "usage": {
+  "input_tokens": 2737,
+  "output_tokens": 410,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

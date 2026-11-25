@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-692.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 66 Lab Services row, listed before the Out-of-Network heading, gives a $0 copayment with PCP's Office among the settings, so it is in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2137,
+  "output_tokens": 223,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

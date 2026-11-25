@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-158.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 66 exclusions chart, Routine chiropractic care row: \\\"Manual manipulation of the spine to correct a subluxation is covered.\\\" By the stated vocabulary, an exclusions-chart row like this is Medicare-covered with that condition, and no setting is named.\"}]\n```",
+ "usage": {
+  "input_tokens": 2551,
+  "output_tokens": 272,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

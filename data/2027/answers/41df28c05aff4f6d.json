@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-104.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 71 outpatient surgery row, In-Network: Diagnostic Colonoscopy $0 copayment for Ambulatory Surgical Center and Outpatient Hospital. The quote ends just before the Out-of-Network header, so it is the in-network block. This is a Medicare-covered service in the chart.\"}]\n```",
+ "usage": {
+  "input_tokens": 2390,
+  "output_tokens": 375,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

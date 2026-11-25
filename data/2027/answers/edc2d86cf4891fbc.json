@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1267.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"On page 98, the 'Routine eye exam' row under the VSP routine eye wear services shows In-Network $0 copay, limited to 1 visit every year. This is a supplemental exam, not a Medicare-covered one.\"}]\n```",
+ "usage": {
+  "input_tokens": 2643,
+  "output_tokens": 241,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

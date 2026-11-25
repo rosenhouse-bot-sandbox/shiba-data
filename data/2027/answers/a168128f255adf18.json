@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2049.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 81 lists 'Annual Maximum: $1,000' in the plan overview of the Mandatory Supplemental Dental Benefit DEN235 for this plan. The page names no network, and page 82 shows out-of-network members pay 100%, so this is the in-network supplemental dental maximum per year.\"}]\n```",
+ "usage": {
+  "input_tokens": 3652,
+  "output_tokens": 306,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1563.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 54 Ambulance services row covers fixed wing, rotary wing and ground ambulance together. It states a $250 copay per one-way trip for Enhanced plan members (H9003-001-0).\"}]\n```",
+ "usage": {
+  "input_tokens": 2202,
+  "output_tokens": 292,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

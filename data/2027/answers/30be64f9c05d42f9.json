@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1770.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 49: the acupuncture row is priced as \\\"Routine acupuncture\\\", so it is supplemental. It states \\\"You are covered for up to 25 visits per calendar year.\\\" The limit is not tied to a setting, and the row is in network by default.\"}]\n```",
+ "usage": {
+  "input_tokens": 2803,
+  "output_tokens": 351,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

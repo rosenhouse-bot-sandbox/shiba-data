@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1943.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 92, Diagnostic Colonoscopies row for this plan: 'At an Ambulatory Surgical Center (ASC): $0 copay', in network, Medicare-covered. The quote matches the page.\"}]\n```",
+ "usage": {
+  "input_tokens": 2410,
+  "output_tokens": 223,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

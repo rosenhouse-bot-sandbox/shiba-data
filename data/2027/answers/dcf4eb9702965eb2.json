@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1039.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 53 shows a $40 copayment at the Specialist's Office under 'Basic Radiological Services', but the page never says this means X-rays. Humana charts often give outpatient X-rays their own row, so mapping this to imaging.xray is in doubt.\"}]\n```",
+ "usage": {
+  "input_tokens": 2333,
+  "output_tokens": 787,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

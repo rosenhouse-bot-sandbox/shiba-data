@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-403.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 43, Section 1.2: the deductible is $700 for the calendar year. The page lists services excluded from the in-network deductible, so it applies in network to some services only.\"}]\n```",
+ "usage": {
+  "input_tokens": 2245,
+  "output_tokens": 195,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

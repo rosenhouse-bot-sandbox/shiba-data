@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-583.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 92, 'Vision services - routine eyewear' row, out-of-network column: 90% coinsurance on the first $250 of the retail value for 1 pair of eyeglasses (lenses/frames) or contact lenses. The left column limits this to 1 pair every 2 years. It is a routine benefit of this plan.\"}]\n```",
+ "usage": {
+  "input_tokens": 2812,
+  "output_tokens": 670,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

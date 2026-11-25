@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-786.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 40 Hearing services row lists a $0 copay for each non-Medicare covered routine hearing exam. The left column covers one routine exam every year. The supplemental exam, the in-network copay, the per-visit unit and the per-year limit all match.\"}]\n```",
+ "usage": {
+  "input_tokens": 3971,
+  "output_tokens": 267,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

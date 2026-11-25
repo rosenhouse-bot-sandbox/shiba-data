@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-431.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 98 exclusions chart has an Acupuncture row reading \\\"Available for people with chronic low back pain under certain circumstances.\\\" This is a Medicare-covered benefit with that condition, no amount and no setting named.\"}]\n```",
+ "usage": {
+  "input_tokens": 2555,
+  "output_tokens": 202,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

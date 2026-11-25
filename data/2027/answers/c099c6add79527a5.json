@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-297.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 71, Worldwide emergency and urgent care row (covered outside the U.S. and its territories): ambulance services cost a $300 copay per covered one-way transport, in- and out-of-network. Worldwide coverage is a supplemental benefit, and ground and air are not priced separately.\"}]\n```",
+ "usage": {
+  "input_tokens": 2411,
+  "output_tokens": 351,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2151.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 64 Dental & Alternative Therapy Allowance: a $2,000 yearly allowance toward preventive and comprehensive dental (non-Medicare covered), shared with massage, acupuncture and naturopathy. Members can see any licensed dentist, so network any fits.\"}]\n```",
+ "usage": {
+  "input_tokens": 3921,
+  "output_tokens": 279,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

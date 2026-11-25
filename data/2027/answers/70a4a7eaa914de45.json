@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1037.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 64 Naturopathy row (marked *): In-Network $20 copayment. No setting is named. Naturopathy is not a Medicare benefit, so supplemental is right. The 25-visit-per-year limit is left out, which is an omission rather than an error.\"}]\n```",
+ "usage": {
+  "input_tokens": 2667,
+  "output_tokens": 343,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

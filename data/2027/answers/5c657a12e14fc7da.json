@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-254.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 80 Immunizations row says there is no coinsurance, copayment, or deductible for pneumonia, flu/influenza, Hepatitis B and COVID-19 vaccines. That is a $0 copay, and the condition limits it to those four vaccines, which separates it from the 20% coinsurance on other Medicare-covered vaccines.\"}]\n```",
+ "usage": {
+  "input_tokens": 2493,
+  "output_tokens": 319,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

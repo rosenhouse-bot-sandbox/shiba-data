@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-614.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 71 SilverSneakers fitness program row: In-Network $0 copayment. No setting, condition or limit is stated, so setting 'any', a supplemental $0 copay, matches.\"}]\n```",
+ "usage": {
+  "input_tokens": 2583,
+  "output_tokens": 210,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

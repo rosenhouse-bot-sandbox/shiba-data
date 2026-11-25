@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1555.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 101 specialist row, under the physician/practitioner services chart: In-Network $55 copay for each Medicare-covered specialist visit. The page also notes 'Deductible applies' and 'Prior Authorization may be required', which the item leaves out.\"}]\n```",
+ "usage": {
+  "input_tokens": 1863,
+  "output_tokens": 466,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-629.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 80 does show the Virtual Cardiac Recovery Program at a $0 in-network copayment. The condition is a paraphrase rather than the document's words, and it is overbroad: eligibility also requires HFrEF or heart failure with an additional qualifying condition, not just a recent heart failure hospitalization.\"}]\n```",
+ "usage": {
+  "input_tokens": 2978,
+  "output_tokens": 511,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

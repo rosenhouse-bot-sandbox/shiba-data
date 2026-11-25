@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1752.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 58 lists Medicare Part B Insulin Drugs at 20% coinsurance, with PCP's Office as one of the settings. This matches the plan, benefit, setting, network and amount. The $35 monthly cap does not contradict the 20% coinsurance.\"}]\n```",
+ "usage": {
+  "input_tokens": 3023,
+  "output_tokens": 402,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

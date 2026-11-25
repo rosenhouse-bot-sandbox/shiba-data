@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-262.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 76 exclusions chart: the 'Therapeutic massage' row says 'Not covered under any condition', which is supplemental not_covered for this single plan.\"}]\n```",
+ "usage": {
+  "input_tokens": 2511,
+  "output_tokens": 188,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

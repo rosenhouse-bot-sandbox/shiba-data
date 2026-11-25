@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-392.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 50 shows in-network Chemotherapy Drugs at 20% coinsurance, but the row is cut off at the page end and names no setting, so outpatient_hospital is not supported.\"}]\n```",
+ "usage": {
+  "input_tokens": 2672,
+  "output_tokens": 210,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

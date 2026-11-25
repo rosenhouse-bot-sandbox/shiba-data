@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1434.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"On page 43, the supplemental 'Preventive dental services (Class I)' row lists out-of-network cost as 50% coinsurance.\"}]\n```",
+ "usage": {
+  "input_tokens": 3987,
+  "output_tokens": 175,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

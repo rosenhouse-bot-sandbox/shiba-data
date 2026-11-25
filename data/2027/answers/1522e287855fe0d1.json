@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1597.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4, row 'Dental services (non-Medicare covered)': $0 copay for preventive services (oral exams, cleanings, x-rays) through the Aetna Dental PPO Network, so in network and supplemental.\"}]\n```",
+ "usage": {
+  "input_tokens": 3126,
+  "output_tokens": 101,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

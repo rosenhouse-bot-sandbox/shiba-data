@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1558.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 49, outpatient diagnostic tests row for H2056-018-0: '$275 copay for each Medicare-covered CT scan', in network, no setting named. The document prices each CT scan rather than each visit, but the amount, cost kind, network and benefit all match.\"}]\n```",
+ "usage": {
+  "input_tokens": 2480,
+  "output_tokens": 589,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

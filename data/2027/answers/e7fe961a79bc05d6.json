@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-901.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 94 routine eyewear row: '$0 copayment or 1 pair o eyeglasses' is '$0 copayment for 1 pair of eyeglasses' with the f dropped, not a Medicaid alternative. The left column gives 1 pair every 2 years. Eyewear from providers outside the UnitedHealthcare Vision network is not covered, so the $0 copay is in network. The $150 retail cap is a separate fact.\"}]\n```",
+ "usage": {
+  "input_tokens": 2590,
+  "output_tokens": 467,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

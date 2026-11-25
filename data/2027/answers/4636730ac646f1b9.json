@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1547.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 71 routine hearing exam row shows a $0 copayment in network. The 30% coinsurance on that line is the out-of-network column. A routine exam is supplemental.\"}]\n```",
+ "usage": {
+  "input_tokens": 3934,
+  "output_tokens": 216,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

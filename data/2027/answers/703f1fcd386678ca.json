@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-815.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"The page 49 row giving 80% out-of-network coinsurance with unlimited visits is the hearing aid fitting and evaluation. The item leaves condition blank instead of 'fitting/evaluation'. The routine hearing exam on page 48 is also 80% out of network but is limited to 1 per year, not unlimited visits.\"}]\n```",
+ "usage": {
+  "input_tokens": 3844,
+  "output_tokens": 395,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1715.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 86 occupational therapy row, in network, shows a $25 copay for each Medicare-covered occupational therapy visit. No setting is named, and the plan matches.\"}]\n```",
+ "usage": {
+  "input_tokens": 1795,
+  "output_tokens": 272,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-463.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 55 does say ambulance is covered 'anywhere in the world' in emergencies. But Original Medicare generally does not cover care outside the U.S., so 'medicare' as covered_by is doubtful. The page also shows ambulance copays ($400 Value Lane, $350 Value) but none for the Standard plan, so 'covered' with no amount may hide a copay.\"}]\n```",
+ "usage": {
+  "input_tokens": 2107,
+  "output_tokens": 525,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

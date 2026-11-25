@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1196.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 61, in-network Medicare Part B Insulin Drugs row: 20% coinsurance, with PCP's Office listed as a setting.\"}]\n```",
+ "usage": {
+  "input_tokens": 3037,
+  "output_tokens": 226,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

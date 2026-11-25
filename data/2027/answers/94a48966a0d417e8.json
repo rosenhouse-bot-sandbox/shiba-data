@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1034.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 85, Mandatory Supplemental Vision Benefit VIS694: the routine eye exam including refraction is listed as 1 per calendar year, and the in-network You Pay column shows $0. This is a non-Medicare covered (supplemental) in-network benefit, so every field matches.\"}]\n```",
+ "usage": {
+  "input_tokens": 2873,
+  "output_tokens": 432,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

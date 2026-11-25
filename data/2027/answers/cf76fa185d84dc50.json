@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2114.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 88 CT Scans row: 'Office or Freestanding location: $100 copay'. This covers the office setting in network, and it is a Medicare-covered outpatient diagnostic test.\"}]\n```",
+ "usage": {
+  "input_tokens": 2608,
+  "output_tokens": 247,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

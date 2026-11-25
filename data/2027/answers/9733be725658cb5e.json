@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-753.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 62 does say 'Periodic Oral exams - 2 every year'. But the item has no condition naming the service (oral exams). Without it, the fact reads as a limit of 2 for all preventive dental, which is wrong: fluoride is 1 per year and X-rays have different limits.\"}]\n```",
+ "usage": {
+  "input_tokens": 2930,
+  "output_tokens": 325,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

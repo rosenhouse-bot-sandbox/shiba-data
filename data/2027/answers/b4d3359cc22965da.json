@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1904.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 70 does show a $0 copay for each follow-up diabetic eye exam. But this row sits in the Medicare-covered vision section, and diabetic eye exams are Medicare-covered. Labeling it supplemental is wrong.\"}]\n```",
+ "usage": {
+  "input_tokens": 2858,
+  "output_tokens": 165,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

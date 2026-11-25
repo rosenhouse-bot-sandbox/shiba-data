@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1005.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 80 refraction exam row: $0 in network for the refraction exam, 1 per calendar year, a routine (supplemental) exam. The Medical Specialist cost-share for the same-visit Medicare-covered exam is billed separately and is not part of this fact.\"}]\n```",
+ "usage": {
+  "input_tokens": 2760,
+  "output_tokens": 494,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

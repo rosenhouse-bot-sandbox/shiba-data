@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-488.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 62, supplemental Diagnostic and Preventive Dental Care: in network, $0 copay for each oral exam, each cleaning and each fluoride treatment.\"}]\n```",
+ "usage": {
+  "input_tokens": 2877,
+  "output_tokens": 213,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

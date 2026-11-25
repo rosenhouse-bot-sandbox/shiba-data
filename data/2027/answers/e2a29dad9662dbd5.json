@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-295.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 78 hearing aid row says 'Up to 2 prescription hearing aids every year (1 per ear per year)'. This is the in-network supplemental hearing aid benefit (NationsHearing Level 1/2), so a visit_limit of 2 with that limit is correct.\"}]\n```",
+ "usage": {
+  "input_tokens": 3311,
+  "output_tokens": 222,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

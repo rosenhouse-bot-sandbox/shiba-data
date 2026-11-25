@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1660.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 113, under Mandatory Supplemental Dental Benefits: the plan pays as much as $3,000 per year for covered dental services. Page 114 confirms members must see in-network dentists, so this is a supplemental, in-network $3,000 per-year max.\"}]\n```",
+ "usage": {
+  "input_tokens": 3419,
+  "output_tokens": 245,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

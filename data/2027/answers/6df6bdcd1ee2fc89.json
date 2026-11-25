@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1081.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 85, outpatient surgery row, in-network column: '$0 copayment for a colonoscopy at an ambulatory surgical center.' This is a $0 in-network copay for a colonoscopy at an ASC. It sits in the outpatient surgery row, not the preventive screening row, so it is the diagnostic colonoscopy. It is not the Medicaid-dependent '$0 or X' pattern.\"}]\n```",
+ "usage": {
+  "input_tokens": 2444,
+  "output_tokens": 454,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

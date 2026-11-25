@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1999.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 39 Ambulance row, In-Network: $300 copay for each Medicare-covered Ground Ambulance service. The note 'Cost sharing applies to each one-way trip' closes the in-network block, so it reads as covering ground too. It sits after the air entry, though, so this unit reading is less certain.\"}]\n```",
+ "usage": {
+  "input_tokens": 2090,
+  "output_tokens": 612,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

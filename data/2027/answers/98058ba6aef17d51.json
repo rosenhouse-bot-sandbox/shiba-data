@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-565.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 43 Emergency care row, under Worldwide Coverage: $115 copayment for Emergency Room. This is worldwide emergency care, so outside_us, network any and supplemental fit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2474,
+  "output_tokens": 276,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

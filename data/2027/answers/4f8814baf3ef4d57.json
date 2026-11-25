@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1459.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 64, outpatient diagnostic tests row, In-Network, under 'Diagnostic Procedures and Tests': $45 copayment for Specialist's Office.\"}]\n```",
+ "usage": {
+  "input_tokens": 2629,
+  "output_tokens": 313,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

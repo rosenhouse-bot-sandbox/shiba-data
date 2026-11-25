@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-232.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 61 Dental & Alternative Therapy Allowance row: $250 yearly allowance that covers therapeutic massage, combined with dental, acupuncture and naturopathy. Any licensed massage therapist can be seen, so network any fits.\"}]\n```",
+ "usage": {
+  "input_tokens": 2752,
+  "output_tokens": 229,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

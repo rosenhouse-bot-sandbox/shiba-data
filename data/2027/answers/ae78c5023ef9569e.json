@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-991.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 63, in-network Advanced Imaging Services: $205 copayment at a Freestanding Radiological Facility. This sits above the Basic Radiological Services heading.\"}]\n```",
+ "usage": {
+  "input_tokens": 2527,
+  "output_tokens": 212,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

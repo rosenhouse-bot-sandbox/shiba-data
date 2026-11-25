@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1109.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 55 Immunizations row (Medicare Part B), In-Network column: 'There is no coinsurance, copayment, or deductible for the pneumonia, flu/influenza,' vaccines. This counts as a $0 copay, and no setting is named.\"}]\n```",
+ "usage": {
+  "input_tokens": 2237,
+  "output_tokens": 363,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

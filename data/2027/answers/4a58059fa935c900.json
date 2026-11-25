@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-986.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 91, Outpatient rehabilitation services, Physical Therapy: the in-network copay is $20 for the Home or Office location. The page does not say 'per visit', but that is the ordinary reading of a therapy visit copay.\"}]\n```",
+ "usage": {
+  "input_tokens": 2139,
+  "output_tokens": 516,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1705.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"On page 106, the in-network Physical Therapy row reads \\\"Home or Office location: $40 copay\\\". The office setting, the Medicare-covered benefit and the $40 copay all match.\"}]\n```",
+ "usage": {
+  "input_tokens": 2065,
+  "output_tokens": 246,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

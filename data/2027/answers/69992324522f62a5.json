@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-928.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 53 Advanced Imaging Services row lists a $330 copayment for both PCP's Office and Specialist's Office, so the specialist office setting is correct, in network by default.\"}]\n```",
+ "usage": {
+  "input_tokens": 2333,
+  "output_tokens": 176,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

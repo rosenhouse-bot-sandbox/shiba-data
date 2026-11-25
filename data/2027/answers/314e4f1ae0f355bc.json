@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1126.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"The page 88 CT Scans row says 'Office or Freestanding location: $100 copay', so the in-network Medicare-covered CT copay at a freestanding location is $100. The separate $200 outpatient hospital figure does not apply.\"}]\n```",
+ "usage": {
+  "input_tokens": 2611,
+  "output_tokens": 233,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

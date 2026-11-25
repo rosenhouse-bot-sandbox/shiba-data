@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-837.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 93 shows only the continuation of a row whose heading is on the previous page, so the benefit cannot be confirmed. The out-of-network text suggests diagnostic radiology. But '$125 copay for all other Medicare-covered services' implies earlier exceptions that are not shown and that the item does not capture.\"}]\n```",
+ "usage": {
+  "input_tokens": 2091,
+  "output_tokens": 471,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

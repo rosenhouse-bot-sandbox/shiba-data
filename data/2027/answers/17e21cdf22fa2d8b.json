@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-322.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 96, under the covered routine (supplemental) dental benefits, states 'Annual dental maximum: $1,250'. 'Annual' supports per year. The row names no network, so it reads as in-network, and page 97 confirms out-of-network care is subject to the same in-network maximums.\"}]\n```",
+ "usage": {
+  "input_tokens": 3588,
+  "output_tokens": 367,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

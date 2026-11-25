@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-810.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 102, under the Physician/practitioner services Out-of-Network row: 30% coinsurance for each Medicare-covered PCP office visit.\"}]\n```",
+ "usage": {
+  "input_tokens": 1953,
+  "output_tokens": 307,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

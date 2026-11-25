@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1529.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 10, out-of-network column of the mandatory supplemental hearing benefit: 95% of the cost for each prescription hearing aid, up to 1 per ear per year.\"}]\n```",
+ "usage": {
+  "input_tokens": 3651,
+  "output_tokens": 241,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
