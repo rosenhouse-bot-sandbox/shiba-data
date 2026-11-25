@@ -36,6 +36,7 @@ jobs:
       # Git keeps no CMS tables or sheets, so the site and its tests read the ones the committed inputs give.
       - run: pip install openpyxl==3.1.5
       - run: python3 -I ../pipeline/tables.py "$(basename "$(python3 -I ../pipeline/years.py)")" "$RUNNER_TEMP/tables"
+        timeout-minutes: 15
       - run: python3 -I -m unittest discover -s tests
       - run: python3 -I ../pipeline/built.py code
       # Only the spec report shows a test file's load error, so it prints when a test fails.
@@ -95,6 +96,7 @@ jobs:
       - run: python3 -I pipeline/run.py "$(basename "$(python3 -I pipeline/years.py)")" _work replay
       # Git keeps no sheets, so this table shows what a pull request changes in them.
       - run: python3 -I pipeline/changes.py "$(basename "$(python3 -I pipeline/years.py)")" HEAD^ >> "$GITHUB_STEP_SUMMARY"
+        timeout-minutes: 15
       - run: |
           year=$(basename "$(python3 -I pipeline/years.py)")
           python3 -I pipeline/trace.py build "$year" "_work/trace/$year.sqlite" "$SHA" _work
@@ -200,6 +202,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
       - id: google
         uses: google-github-actions/auth@c200f3691d83b41bf9bbd8638997a462592937ed # v2.1.13
         with:
@@ -209,6 +214,7 @@ jobs:
           access_token_scopes: https://www.googleapis.com/auth/spreadsheets
       - run: pip install openpyxl==3.1.5
       - run: python3 -I pipeline/tables.py "$(basename "$(python3 -I pipeline/years.py)")" "$RUNNER_TEMP/tables"
+        timeout-minutes: 15
       - env:
           SHEETS_TOKEN: ${{ steps.google.outputs.access_token }}
         run: python3 -I web/sheet_sync.py
