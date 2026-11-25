@@ -1970,12 +1970,11 @@ def held(data, version=None):
                                 for r in plans(data)}
 
 
-def citation_rows(data, version=None):
-    """Returns one row per line and cited document quote. A line that cites no document fact gets no row.
-    Rows for a one-line cell name no line."""
-    url = {d["sha256"]: d["url"] for d in sheets.rows(data / "generated" / "documents_checked.csv") if d["sha256"]}
+def cited_lines(data, version=None):
+    """Yields (sheet, plan_id, column, line, value, document facts) for each line a presented cell shows.
+    A one-line cell's line is blank."""
     version = version or current(data)
-    out, held_cells = {}, held(data, version)
+    held_cells = held(data, version)
     for sheet, (rules, _) in SHEETS.items():
         for column in rules:
             for plan_id, got in lines(data, column, sheet=sheet, version=version).items():
@@ -1984,13 +1983,35 @@ def citation_rows(data, version=None):
                 value = shown(got)
                 got, one_line = got[:value.count(" | ") + 1], " | " not in value
                 for n, (value, cited) in enumerate(got, 1):
-                    row = dict(sheet=sheet, plan_id=plan_id, column=column, line="" if one_line else str(n), value=value)
-                    cites = [(url[f["doc_sha"]], f["page"], q) for f in cited if presents([f])
-                             for q in json.loads(f["quotes"])]
-                    for cite in cites:
-                        full = dict(row, **dict(zip(("url", "pdf_page", "quote"), cite)))
-                        out[tuple(full.values())] = full
+                    yield sheet, plan_id, column, "" if one_line else str(n), value, [f for f in cited if presents([f])]
+
+
+def citation_rows(data, version=None):
+    """Returns one row per line and cited document quote. A line that cites no document fact gets no row."""
+    url = {d["sha256"]: d["url"] for d in sheets.rows(data / "generated" / "documents_checked.csv") if d["sha256"]}
+    out = {}
+    for sheet, plan_id, column, line, value, cited in cited_lines(data, version):
+        row = dict(sheet=sheet, plan_id=plan_id, column=column, line=line, value=value)
+        for f in cited:
+            for quote in json.loads(f["quotes"]):
+                full = dict(row, url=url[f["doc_sha"]], pdf_page=f["page"], quote=quote)
+                out[tuple(full.values())] = full
     return sorted(out.values(), key=lambda r: tuple(r.values()))
+
+
+def cited_facts(data, version=None):
+    """{(sheet, plan_id, column): fact_ids} of the document facts that each presented cell cites."""
+    out = collections.defaultdict(set)
+    for sheet, plan_id, column, _, _, cited in cited_lines(data, version):
+        out[sheet, plan_id, column] |= {f["fact_id"] for f in cited}
+    return out
+
+
+def wrong_note_facts(tags, notes, cited):
+    """The note_facts.csv rows that name no note, or a fact that the note's cell does not cite."""
+    noted = {(n["sheet"], n["plan_id"], n["column"]) for n in notes}
+    return [t for t in tags if (key := (t["sheet"], t["plan_id"], t["column"])) not in noted
+            or t["fact_id"] not in cited.get(key, ())]
 
 
 def write(data, version=None):
