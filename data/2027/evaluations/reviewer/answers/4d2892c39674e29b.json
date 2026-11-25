@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-382.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 10 (printed page 9), Fitness row for DEVOTED GIVEBACK 028 OR (HMO): 'SilverSneakers®: $0 membership'. This is a supplemental fitness benefit with a $0 member cost. The page names no setting or network, so setting 'any' and in-network default fit. Recording the $0 membership as a copay is a judgement call, but it is the closest cost kind.\"}]",
+ "usage": {
+  "input_tokens": 2403,
+  "output_tokens": 394,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

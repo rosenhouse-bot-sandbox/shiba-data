@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-262.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 79, Mandatory Supplemental Vision Benefit: 'Vision benefit through Humana Medicare Insight Network' covers non-Medicare routine vision services. The provider network is Humana Medicare Insight Network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2680,
+  "output_tokens": 105,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

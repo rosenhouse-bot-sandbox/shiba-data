@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-116.md",
+ "reply": "Page 118 does show a $115 copay for urgently needed services outside the United States, so the plan, setting, network, condition and amount fields match. The item fails on `covered_by`.\n\nThe vocabulary says care outside the U.S. has `covered_by` `supplemental`. The item says `medicare`, which contradicts that rule.\n\n<br>\n\n```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 118 shows a $115 copay for urgently needed services outside the US, but the item gives covered_by as medicare. Care outside the U.S. should be supplemental.\"}]\n```",
+ "usage": {
+  "input_tokens": 2051,
+  "output_tokens": 193,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

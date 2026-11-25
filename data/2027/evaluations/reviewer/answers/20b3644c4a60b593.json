@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-7.md",
+ "reply": "[{\"id\":0,\"ok\":false,\"reason\":\"Page 50, Outpatient hospital services: '$275 copay for each Medicare-covered CT scan' matches the plan, benefit, setting and amount. The unit is per CT scan, not per visit, so the item's unit does not match the quote.\"}]",
+ "usage": {
+  "input_tokens": 2647,
+  "output_tokens": 475,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

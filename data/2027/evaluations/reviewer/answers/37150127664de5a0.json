@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-20.md",
+ "reply": "[{\"id\":0,\"ok\":false,\"reason\":\"Page 95 never names mammograms. The quoted $0 copay is for the row of diagnostic non-laboratory tests (CT, EKG, EEG, PET), which is a different service. MRIs are listed separately on the same page at $100 and $200. Nothing ties this $0 to a diagnostic mammogram.\"}]",
+ "usage": {
+  "input_tokens": 2400,
+  "output_tokens": 362,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

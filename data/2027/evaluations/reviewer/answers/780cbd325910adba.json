@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-8.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 51, Outpatient hospital services: the $10 copay is 'for each Medicare-covered x-ray', not per visit. The plan, setting, network and amount match, but the unit 'per visit' is not supported.\"}]\n```",
+ "usage": {
+  "input_tokens": 2326,
+  "output_tokens": 301,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

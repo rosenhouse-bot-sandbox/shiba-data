@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-240.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 62 is the Dental & Alternative Therapy Allowance section, a reimbursable benefit whose exclusions cover dental codes. It states that unused funds will not roll over into the next year, so a rollover not_covered fact is supported. The page notes there are no network restrictions, but the 'any' network label is optional for allowances, and a rollover fact does not depend on network.\"}]\n```",
+ "usage": {
+  "input_tokens": 3404,
+  "output_tokens": 478,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

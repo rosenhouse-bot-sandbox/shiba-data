@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-152.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 69 Meal benefit row shows a $0 copayment (prior authorization required) for home-delivered meals after a covered inpatient or SNF stay. This is a non-Medicare (supplemental) benefit, in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2282,
+  "output_tokens": 435,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

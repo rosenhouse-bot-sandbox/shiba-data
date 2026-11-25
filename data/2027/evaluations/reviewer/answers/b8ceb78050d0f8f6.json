@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-103.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 140 only has a reimbursement heading, 'Vision services – routine eyewear (UHC Vision)', in Chapter 7's section on asking the plan to pay a bill. It does not say UHC Vision is the provider network for the plan's vision benefits. It covers only routine eyewear and could just name the claims administrator.\"}]\n```",
+ "usage": {
+  "input_tokens": 2733,
+  "output_tokens": 568,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

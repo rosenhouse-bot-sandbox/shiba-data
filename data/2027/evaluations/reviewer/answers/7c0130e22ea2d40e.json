@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-343.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 53 Diagnostic Mammography row: $0 copayment listed for Specialist's Office, Outpatient Hospital and Freestanding Radiological Facility. No out-of-network label appears, so the cost is in network.\"}]",
+ "usage": {
+  "input_tokens": 4698,
+  "output_tokens": 527,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

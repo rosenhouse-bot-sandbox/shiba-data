@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-1.md",
+ "reply": "[{\"id\":0,\"ok\":false,\"reason\":\"Page 64 shows '$40 copayment – Freestanding Radiological Facility', but the service heading for that row is cut off at the top of the page. The row could be X-rays, ultrasound or other diagnostic radiology, so it cannot be confirmed as Outpatient X-rays.\"}]",
+ "usage": {
+  "input_tokens": 2177,
+  "output_tokens": 593,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

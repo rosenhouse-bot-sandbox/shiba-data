@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-210.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 86 lists a 60-day trial period as part of the in-network hearing aid purchase (NationsHearing, mandatory supplemental benefit). It is a covered item with no separate amount, so hearing.aids, in network, supplemental, covered, condition 'trial period' and limit '60 days' all match.\"}]",
+ "usage": {
+  "input_tokens": 10902,
+  "output_tokens": 575,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

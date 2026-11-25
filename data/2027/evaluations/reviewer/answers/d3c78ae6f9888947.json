@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-413.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 110 Eyewear row: up to a maximum benefit of $100 every year, with $0 copay in network. The $100 plan maximum is supplemental (routine) eyewear. Medicare-covered eyewear is excluded from it. Plan and setting match.\"}]",
+ "usage": {
+  "input_tokens": 2545,
+  "output_tokens": 406,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

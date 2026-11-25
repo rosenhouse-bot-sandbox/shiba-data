@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-15.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 82 physician/practitioner services row for H3805-041-0: '$70 copayment for services from a specialist' for consultation, diagnosis, and treatment by a specialist. It is Medicare-covered, in network, and a referral is required.\"}]\n```",
+ "usage": {
+  "input_tokens": 2258,
+  "output_tokens": 253,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

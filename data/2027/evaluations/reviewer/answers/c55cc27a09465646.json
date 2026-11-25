@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-100.md",
+ "reply": "[{\"id\":0,\"ok\":false,\"reason\":\"Page 155 is a claim-reimbursement procedure. The heading 'Vision services – routine eyewear (UHC Vision)' and the mailing address ('UnitedHealthcare I Spectera') do not state that UHC Vision is the plan's vision provider network. The page also names Spectera, so the complete list of network names is unclear. Because of this doubt, I mark it false.\"}]",
+ "usage": {
+  "input_tokens": 2481,
+  "output_tokens": 352,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

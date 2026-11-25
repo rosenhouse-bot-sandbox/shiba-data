@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-131.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 137, Section 4: yearly deductible of $595 applies to Tier 3, 4 and 5 drugs. The plan has 5 tiers, so Tiers 1 and 2 are skipped, matching 'not tiers 1,2'.\"}]",
+ "usage": {
+  "input_tokens": 3431,
+  "output_tokens": 307,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

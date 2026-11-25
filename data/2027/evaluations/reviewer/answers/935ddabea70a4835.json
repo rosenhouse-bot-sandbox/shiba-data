@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-361.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 89 MRIs row for this plan: Outpatient hospital is 50% coinsurance, in network, as a Medicare-covered benefit. It is not the neighboring Advanced Laboratory, PET or Nuclear Medicine row.\"}]",
+ "usage": {
+  "input_tokens": 2261,
+  "output_tokens": 353,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

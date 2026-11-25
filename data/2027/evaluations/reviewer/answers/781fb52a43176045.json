@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-137.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 43, Class I preventive dental (supplemental, in addition to Medicare-covered dental): cleanings (prophylaxis or periodontal maintenance), any combination, 2 every calendar year. The limit applies across networks, and the page also notes it is combined with the full mouth debridement visit.\"}]",
+ "usage": {
+  "input_tokens": 4018,
+  "output_tokens": 399,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

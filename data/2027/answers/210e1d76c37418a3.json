@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-19.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 4 'Dental services (non-Medicare covered)' row lists 50% coinsurance for comprehensive services. The plan uses the Aetna Dental PPO Network, and services outside it are not covered.\"}]\n```",
+ "usage": {
+  "input_tokens": 3135,
+  "output_tokens": 179,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

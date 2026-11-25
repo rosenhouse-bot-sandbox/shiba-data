@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-291.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 82 lists a separate Exams block with 'Frequency/Limits – 2 procedure codes per calendar year' for the Emergency diagnostic exam (D0140), at 0% in and out of network. The page also says out-of-network benefits follow the in-network limits, so network 'any' fits. The benefit is mandatory supplemental dental, so covered_by 'supplemental' fits. The count, period and condition all match.\"}]",
+ "usage": {
+  "input_tokens": 3754,
+  "output_tokens": 488,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

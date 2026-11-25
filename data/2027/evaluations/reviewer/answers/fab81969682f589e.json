@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-28.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": false, \"reason\": \"Page 89 does list 'Advanced Laboratory Services – Office or freestanding location: 50% coinsurance'. But this is a distinct 'Advanced' lab category, separate from routine outpatient lab services, and may be genetic or molecular testing. Labeling it plain tests.lab with no qualifier could mislead counselors about routine lab costs.\"}]\n```",
+ "usage": {
+  "input_tokens": 2125,
+  "output_tokens": 462,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

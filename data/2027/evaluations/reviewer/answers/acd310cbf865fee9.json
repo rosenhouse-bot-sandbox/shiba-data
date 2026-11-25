@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-323.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 62, physician/practitioner services row, In-Network Telehealth Services: $0 copayment for PCP Virtual. This matches the plan, the visits benefit, the telehealth setting and the in-network, Medicare-covered copay of $0. The 'PCP Virtual' condition only repeats the row label and does not change the meaning.\"}]",
+ "usage": {
+  "input_tokens": 2606,
+  "output_tokens": 450,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

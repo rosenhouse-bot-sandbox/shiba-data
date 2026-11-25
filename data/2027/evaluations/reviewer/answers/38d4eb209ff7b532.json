@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-2.md",
+ "reply": "[{\"id\":0,\"ok\":false,\"reason\":\"The $145 Outpatient Hospital line on page 64 is cut off from its service heading. The table starts mid-list, so the page does not show whether this row is X-rays, ultrasound, or another service, and the benefit cannot be confirmed.\"}]",
+ "usage": {
+  "input_tokens": 2178,
+  "output_tokens": 431,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

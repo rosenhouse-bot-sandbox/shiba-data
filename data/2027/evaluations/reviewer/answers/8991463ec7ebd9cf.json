@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-271.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 81 Spirometry row, under In-Network: '0% coinsurance for Spirometry.' Per the instructions, this is a tests.diagnostic coinsurance fact with condition Spirometry. No setting is named, so 'any' is correct.\"}]\n```",
+ "usage": {
+  "input_tokens": 2059,
+  "output_tokens": 234,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

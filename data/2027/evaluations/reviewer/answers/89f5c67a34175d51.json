@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-328.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 62 says members are reimbursed 50% of out-of-pocket costs for therapeutic massage, within the shared $2,000 Dental & Alternative Therapy Allowance. Any licensed massage therapist qualifies, so network is any. This matches the supplemental massage coinsurance 50% fact with that pool.\"}]",
+ "usage": {
+  "input_tokens": 2974,
+  "output_tokens": 470,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

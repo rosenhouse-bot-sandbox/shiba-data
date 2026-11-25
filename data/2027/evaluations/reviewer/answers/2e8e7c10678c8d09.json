@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-255.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 77 lists the $50 additional cost per aid for optional hearing aid rechargeability, and page 76 confirms rechargeable styles cost an additional $50 per aid. This matches the specified rechargeable copay fact: supplemental, $50, per aid, condition rechargeable. The plan is the only one in the document.\"}]",
+ "usage": {
+  "input_tokens": 3558,
+  "output_tokens": 424,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

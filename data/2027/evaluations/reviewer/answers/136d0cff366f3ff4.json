@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-4.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 65, Basic Radiological Services: 20% coinsurance applies to Specialist's Office, Outpatient Hospital and Freestanding Radiological Facility. That matches X-rays in an outpatient hospital, in network, as a Medicare benefit.\"}]\n```",
+ "usage": {
+  "input_tokens": 2413,
+  "output_tokens": 634,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

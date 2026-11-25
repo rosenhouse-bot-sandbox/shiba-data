@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-162.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 50, Worldwide urgent care coverage row: $120 copay for worldwide 'urgently needed services'. This fits outside_us, network any, supplemental, with the condition 'urgently needed services'. The copay waiver on hospital admission and the $250,000 yearly worldwide allowance are separate details that do not change the $120 copay.\"}]",
+ "usage": {
+  "input_tokens": 2074,
+  "output_tokens": 488,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

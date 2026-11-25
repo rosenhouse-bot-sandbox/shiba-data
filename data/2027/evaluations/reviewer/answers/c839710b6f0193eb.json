@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-47.md",
+ "reply": "[{\"id\": 0, \"ok\": false, \"reason\": \"The page 86 row (D5520 complete denture repair, 50% in and out of network) matches the amount and network. But neither page 86 nor 87 names the package 'MyOption DEN972'. Page 87 only says 'Optional Supplemental Dental'. The package field can't be verified from the cited text, so it is false.\"}]",
+ "usage": {
+  "input_tokens": 4275,
+  "output_tokens": 400,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

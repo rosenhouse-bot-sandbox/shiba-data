@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-56.md",
+ "reply": "[{\"id\": 0, \"ok\": false, \"reason\": \"The page shows 0% out-of-network for exams, cleanings and bitewing X-rays. But the package name 'MyOption DEN972' appears nowhere on page 91 or in the quotes, so the package field can't be verified. When in doubt, false.\"}]",
+ "usage": {
+  "input_tokens": 4059,
+  "output_tokens": 299,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

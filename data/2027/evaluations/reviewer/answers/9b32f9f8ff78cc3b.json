@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-101.md",
+ "reply": "[{\"id\":0,\"ok\":false,\"reason\":\"Page 144 only gives the reimbursement process for routine eyewear, headed '(UHC Vision)'. It does not say UHC Vision is the plan's in-network provider network for vision. A reimbursement claim may also involve a provider the member paid directly, so the in-network label is not supported. The quote covers eyewear only, not vision as a whole.\"}]",
+ "usage": {
+  "input_tokens": 2657,
+  "output_tokens": 449,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

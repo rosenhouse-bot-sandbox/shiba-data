@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-239.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 79 supplemental vision benefit, in-network column: the routine eye exam including refraction is limited to 1 per calendar year, matching the quote. The plan is the only one in the document, and the exam is non-Medicare covered (supplemental).\"}]",
+ "usage": {
+  "input_tokens": 2682,
+  "output_tokens": 263,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

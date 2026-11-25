@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-280.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 118 Urgently needed services row: '$130 copay for urgently needed services outside of the United States.' This matches the item's outside-U.S. setting, copay amount and 'urgently needed services' condition. The asterisk footnote is not on the page, so it cannot be checked.\"}]",
+ "usage": {
+  "input_tokens": 2304,
+  "output_tokens": 323,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

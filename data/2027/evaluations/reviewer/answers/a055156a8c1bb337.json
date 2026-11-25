@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-318.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 84, Mandatory Supplemental Hearing Benefit HER101: the in-network hearing aid purchase includes 3 years of batteries per non-rechargeable aid (up to 60 cells per ear per year). This is a supplemental batteries item with no cost stated, so covered is correct.\"}]\n```",
+ "usage": {
+  "input_tokens": 3626,
+  "output_tokens": 202,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

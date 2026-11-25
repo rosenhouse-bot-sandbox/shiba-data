@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-16.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 55 lists a supplemental Worldwide Ambulance Services benefit for services outside the United States. Its cost-share is 'Ground Ambulance: $315 copay per one-way trip'. The plan, benefit, setting, supplemental coverage, copay amount and unit all match.\"}]\n```",
+ "usage": {
+  "input_tokens": 2461,
+  "output_tokens": 445,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

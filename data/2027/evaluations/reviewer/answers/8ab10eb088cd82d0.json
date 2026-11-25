@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-308.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 57, Well Dine meal program row: $0 in-network copay. After a CHF inpatient stay, up to two home-delivered meals per day for 30 days (up to 60 meals). This is a non-Medicare uniformity flexibility benefit, so supplemental is right.\"}]\n```",
+ "usage": {
+  "input_tokens": 2635,
+  "output_tokens": 308,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-171.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 92, routine eyewear row: 'Provided by: UnitedHealthcare Vision®' appears in the in-network column. It names the provider network for the routine (supplemental) vision benefit.\"}]",
+ "usage": {
+  "input_tokens": 2762,
+  "output_tokens": 317,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

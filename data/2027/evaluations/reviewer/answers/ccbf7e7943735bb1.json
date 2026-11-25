@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-331.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"On page 16, the Humana Healthy Options Allowance (OTC card) says members may also use it for eligible groceries, utilities, rent, and more if they have certain qualifying chronic conditions and meet other program criteria. The limit lists every named item, and the condition matches.\"}]\n```",
+ "usage": {
+  "input_tokens": 2593,
+  "output_tokens": 308,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

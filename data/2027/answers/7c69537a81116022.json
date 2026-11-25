@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-68.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 31 lists the Blue FlexDollars Healthy Rewards program, where members earn rewards for eligible care services. No most-you-can-earn amount is stated, so covered is right, and no out-of-network term applies.\"}]\n```",
+ "usage": {
+  "input_tokens": 2725,
+  "output_tokens": 544,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

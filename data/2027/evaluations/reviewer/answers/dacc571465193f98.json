@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-231.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 49 'Fitting and evaluation' lists Out-of-network at 80% coinsurance (based on billed charges). This is the supplemental routine hearing aid fitting/evaluation, not the diagnostic exam on page 48.\"}]",
+ "usage": {
+  "input_tokens": 3911,
+  "output_tokens": 274,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

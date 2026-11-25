@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-286.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 100 telehealth bullet under the physician/practitioner services rows: in-network cost is $0 copayment for each Medicare-covered visit. The $0 is stated outright, not as an alternative to 20% coinsurance, so it is the amount for all members.\"}]",
+ "usage": {
+  "input_tokens": 2335,
+  "output_tokens": 460,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

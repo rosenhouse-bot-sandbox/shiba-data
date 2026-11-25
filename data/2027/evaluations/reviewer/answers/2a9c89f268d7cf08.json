@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-3.md",
+ "reply": "[{\"id\":0,\"ok\":false,\"reason\":\"Page 65 shows 20% coinsurance for 'Basic Radiological Services' at the Freestanding Radiological Facility. Nothing on the page says this row is Outpatient X-rays. It could cover other basic diagnostic radiology, so the benefit field may be wrong. I can't confirm the match, so I'm saying false.\"}]",
+ "usage": {
+  "input_tokens": 2409,
+  "output_tokens": 775,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

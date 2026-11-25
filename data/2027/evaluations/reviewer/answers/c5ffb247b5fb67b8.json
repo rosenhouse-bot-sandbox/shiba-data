@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-238.md",
+ "reply": "The item states out-of-network 40% coinsurance for 1 hearing aid fitting and evaluation every year. Page 73 has exactly this under the supplemental hearing services, in the Out-of-Network line.\n\nChecking each field against the page:\n- **Plan:** The document covers only H5439-019-0, so the plan matches.\n- **Benefit:** `hearing.exam` with condition \"fitting/evaluation\" matches the fitting and evaluation row.\n- **Network:** The quote is under Out-of-Network, so `out` is correct.\n- **Cost:** 40% coinsurance matches.\n- **Covered by:** The row is a supplemental (routine) service, so `supplemental` matches.\n- **Limit:** The item leaves `limit` out, but the quote gives \"every year\". The listed fields to check are plan, benefit, setting, network, cost kind, amount, and condition, and the fields do not include an explicit `limit` value. The quote reflects the limit, so I accept this.\n- **Setting:** `any` fits, since the document names no setting.\n\nThe item matches the page.\n\n```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 73 supplemental hearing: out-of-network 40% coinsurance for 1 hearing aid fitting and evaluation every year.\"}]\n```",
+ "usage": {
+  "input_tokens": 2981,
+  "output_tokens": 428,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

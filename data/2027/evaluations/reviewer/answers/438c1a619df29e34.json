@@ -1,0 +1,13 @@
+{
+ "model": "claude-opus-5-5",
+ "effort": "medium",
+ "batch": true,
+ "task": "v-221.md",
+ "reply": "```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 92 Spirometry row, In-Network column: 'Deductible may apply. 0% coinsurance for Spirometry.' This matches tests.diagnostic, coinsurance 0%, with condition Spirometry, in network.\"}]\n```",
+ "usage": {
+  "input_tokens": 2089,
+  "output_tokens": 105,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

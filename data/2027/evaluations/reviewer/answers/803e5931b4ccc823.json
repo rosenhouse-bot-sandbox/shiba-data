@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-378.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 88 says unused Optional Supplemental Benefits, which are the dental OSB, do not roll over to the next coverage year. Page 89 shows MyOption DEN972 is the only OSB offered, so the package attribution holds. This is a dental rollover not_covered fact.\"}]",
+ "usage": {
+  "input_tokens": 3877,
+  "output_tokens": 503,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

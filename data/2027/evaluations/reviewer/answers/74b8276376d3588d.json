@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-298.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 66 Lab Services row: $0 copayment, with Outpatient Hospital listed as one of the settings. The page states no out-of-network cost, so in-network applies. The row is a Medicare-covered diagnostic/lab service, not a neighboring row.\"}]",
+ "usage": {
+  "input_tokens": 2345,
+  "output_tokens": 326,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

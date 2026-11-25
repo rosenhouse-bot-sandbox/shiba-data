@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-201.md",
+ "reply": "The item is a hearing.exam fact: supplemental, in network, visit_limit of 1, limit \"every year\".\n\nPage 72 says \"1 routine hearing exam every year\" and \"$0 copay for 1 routine hearing exam every year\" in network. That matches the routine exam, the in-network setting and the count of 1.\n\nThe visit_limit fact has no amount issue. It correctly carries the count of 1, and the price would be a separate copay fact.\n\nThe hearing aid fitting and evaluation row is a different fact, and the item does not use it. The item concerns the routine exam row, so it matches that row.\n\nThe cited quote is on page 72, which is the page given.\n\n<br>\n\n```json\n[{\"id\": 0, \"ok\": true, \"reason\": \"Page 72 routine hearing exam row: 1 routine exam every year, $0 copay in network, supplemental. Visit limit of 1 per year matches.\"}]\n```",
+ "usage": {
+  "input_tokens": 8880,
+  "output_tokens": 985,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

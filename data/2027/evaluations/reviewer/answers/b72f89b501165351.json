@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-149.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 9 lists '50% of the cost for necessary nitrous oxide/analgesia with covered service up to 1 unit(s) per visit' among the in-network comprehensive dental bullets. That matches the 50% coinsurance and the 1-unit-per-visit limit. The page does not show the section heading, so I placed the bullet under comprehensive dental because it sits in the same list as fillings, crowns and extractions.\"}]",
+ "usage": {
+  "input_tokens": 4209,
+  "output_tokens": 551,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

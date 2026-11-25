@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-23.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 89: the block just before the 'Advanced Laboratory Services' heading lists office or freestanding $0, dedicated testing laboratory $0, and outpatient hospital $0 copay. Each heading on this page sits above its own cost block, so this block is the routine lab row, whose heading falls on the previous page. The advanced lab row below it is the one with the $40 hospital copay.\"}]",
+ "usage": {
+  "input_tokens": 2103,
+  "output_tokens": 1025,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

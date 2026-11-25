@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-409.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 64, In-Network Outpatient rehabilitation: Speech Therapy $35 copayment, with Outpatient Hospital listed as one of its settings. Plan, benefit, setting, network and amount all match.\"}]",
+ "usage": {
+  "input_tokens": 2464,
+  "output_tokens": 264,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-150.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 56 Humana Well Dine meal program row: In-Network $0 copayment, limited to 4 times per calendar year. The meals are home-delivered after an inpatient stay, which fits supplemental meals. No plan, network, amount or limit mismatch.\"}]",
+ "usage": {
+  "input_tokens": 2466,
+  "output_tokens": 351,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

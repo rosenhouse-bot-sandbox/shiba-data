@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-80.md",
+ "reply": "[{\"id\": 0, \"ok\": false, \"reason\": \"The quote and page 91 support the frequency of 1 procedure code every 5 calendar years for full mouth or panoramic X-rays. However, the item names the package 'MyOption DEN972', and no package name appears anywhere on the page. The package field can't be verified, so I'm marking it false.\"}]",
+ "usage": {
+  "input_tokens": 4057,
+  "output_tokens": 305,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

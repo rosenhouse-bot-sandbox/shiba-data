@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-420.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 73, urgently needed services row: under Out-of-Network 'Worldwide Coverage', '$40 copayment – Urgent Care Center'. The page says urgently needed services are covered worldwide outside the U.S. This matches outside_us, network any, supplemental, a $40 copay, and the condition 'Urgently Needed Services'.\"}]",
+ "usage": {
+  "input_tokens": 2502,
+  "output_tokens": 451,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

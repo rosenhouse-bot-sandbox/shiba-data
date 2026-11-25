@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-319.md",
+ "reply": "[{\"id\":0,\"ok\":true,\"reason\":\"Page 9, Advantage Plus dental: 'Teeth cleaning (up to 2 per calendar year)' under preventive dental at $0. The package is optional and applies to the plan's members, including Standard. The visit limit of 2 per calendar year, the package name, supplemental status and in-network default all match.\"}]",
+ "usage": {
+  "input_tokens": 3301,
+  "output_tokens": 362,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-213.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 67, Outpatient hospital services, In-Network: Diagnostic Procedures and Tests is 20% coinsurance – Outpatient Hospital. No condition, limit, or tier is stated, and the document covers only this one plan.\"}]",
+ "usage": {
+  "input_tokens": 2560,
+  "output_tokens": 329,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}

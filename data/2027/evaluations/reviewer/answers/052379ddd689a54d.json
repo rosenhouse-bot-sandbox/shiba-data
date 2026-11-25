@@ -1,0 +1,13 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "batch": true,
+ "task": "v-423.md",
+ "reply": "[{\"id\": 0, \"ok\": true, \"reason\": \"Page 54 non-Medicare-covered acupuncture, naturopathy and chiropractic row: self-referral to network providers, not to exceed 18 visits per calendar year for all three services combined. The limit applies to every plan, including Value (H9003-009-0), so it is a supplemental in-network visit limit of 18 per calendar year.\"}]",
+ "usage": {
+  "input_tokens": 2560,
+  "output_tokens": 373,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 0
+ }
+}
