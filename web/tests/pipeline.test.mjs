@@ -54,6 +54,7 @@ test("a step's inputs join at its one label, which points to its output", () => 
   assert.deepEqual(inputs(stepById("find-pdfs")), ["links", "plans", "found"]);
   assert.deepEqual(inputs(stepById("sheet")), ["facts", "pbp"]);
   assert.deepEqual(inputs(stepById("publish")), ["sheet", "presented"]);
+  assert.deepEqual(inputs(stepById("read-facts")), ["text", "prompt"]);
   for (const s of STEPS.filter((s) => inputs(s).length > 1)) {
     const p = pillBox(s), top = [p.x + p.w / 2, p.y], bottom = [p.x + p.w / 2, p.y + p.h];
     const ins = paths(s).filter((e) => !e.arrow), [out] = paths(s).filter((e) => e.arrow);
@@ -162,11 +163,13 @@ test("every step shows a replayed cell's input and output rows", () => {
 test("a step shows the tables whose records the trace has", () => {
   const unread = { ...replay, answers: { status: "not_recorded" } };
   assert.deepEqual(records(stepById("read-facts"), unread).map((r) => r.name), ["page text"]);
+  assert.deepEqual(records(stepById("read-facts"), replay).map((r) => r.name), ["page text", "reader prompts", "answers/*.json"]);
   assert.deepEqual(records(stepById("find-pdfs"), { ...replay, plan: { status: "none" } }).map((r) => r.name), ["URLs offered", "documents.csv"]);
 });
 
-test("Read facts lists only the reader prompts' answers", () => {
-  const [, answers] = records(stepById("read-facts"), replay);
+test("Read facts lists only the reader prompts and their answers", () => {
+  const [, prompts, answers] = records(stepById("read-facts"), replay);
+  assert.deepEqual(prompts.rows, [["EOC", "ambulance", "226ee67e4a27f3e7…"], ["SB", "ambulance", "6761dbbfbd4ec26b…"]]);
   assert.deepEqual(answers.rows.map((r) => r.slice(2)), [["EOC", "ambulance"], ["SB", "ambulance"]]);
 });
 
