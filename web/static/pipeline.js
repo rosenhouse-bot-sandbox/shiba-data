@@ -16,7 +16,7 @@ const REPO = "https://github.com/rosenhouse-bot-sandbox/shiba-data";
 // col and row place a node in the map's lanes. git is a path under data/<year>/, code a path in the repo, and cms names
 // the CMS file that R2 copies.
 export const NODES = {
-  landscape: { col: 0, row: 0, store: "r2", label: "CMS Landscape", cms: "Landscape",
+  landscape: { col: 2, row: 0, store: "r2", label: "CMS Landscape", cms: "Landscape",
     table: { name: "CY2027_Landscape_202610.csv", note: "one row per plan per county",
       cols: ["Contract Plan Segment ID", "Plan Name", "County Name", "Plan Type", "SNP Type", "Part C Premium", "In-Network MOOP"],
       rows: [["H1036_153_0", "Humana Total Complete (HMO)", "Multnomah", "HMO", "Not Applicable", "$0.00", "$5,150.00"],
@@ -25,13 +25,13 @@ export const NODES = {
     table: { name: "links", note: "copied from the volunteers' Links sheet", cols: ["plan_ids", "kind", "url"],
       rows: [["H1036-153-0", "SB", "https://assets.humana.com/is/content/humana/H1036153000SB27pdf"],
         ["H1036-153-0", "EOC", "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf"]] } },
-  found: { col: 2, row: 1, store: "git", label: "found", git: "found.csv",
+  found: { col: 0, row: 0, store: "git", label: "found", git: "found.csv",
     table: { name: "found", note: "Claude sessions found no URL for this plan", cols: ["plan_ids", "kind", "url", "found_via"], rows: [] } },
-  pbp: { col: 2, row: 5, store: "r2", label: "CMS PBP tables", cms: "PBP",
+  pbp: { col: 1, row: 5, store: "r2", label: "CMS PBP tables", cms: "PBP",
     table: { name: "pbp_b4_emerg_urgent.txt", note: "the plan's emergency and urgent care copays abroad",
       cols: ["bid_id", "pbp_b4c_copay_amt_wec_min", "pbp_b4c_copay_amt_wec_max", "pbp_b4c_copay_amt_wuc_min", "pbp_b4c_copay_amt_wuc_max"],
       rows: [["H1036_153_0", "115.00", "115.00", "40.00", "40.00"]] } },
-  plans: { col: 0, row: 1, store: "ci", label: "plans",
+  plans: { col: 2, row: 1, store: "ci", label: "plans",
     table: { name: "plans", note: "39 rows", cols: ["plan_id", "plan_name", "plan_type", "organization", "premium", "moop_in_network"],
       rows: [["H1036-153-0", "Humana Total Complete (HMO)", "HMO", "Humana", "$0", "$5,150"]] } },
   documents: { col: 1, row: 2, store: "ci", label: "documents",
@@ -73,7 +73,7 @@ export const NODES = {
         ["ambulance", "outside_us", "out", "Emergency Ambulance", "supplemental", "copay", "$325", "EOC", "46"],
         ["ambulance.ground", "any", "in", "", "medicare", "copay", "$325", "SB", "9"],
         ["ambulance.air", "any", "in", "", "medicare", "coinsurance", "20%", "SB", "9"]] } },
-  rules: { col: 1, row: 5, store: "git", label: "rule code", code: "pipeline/present.py",
+  rules: { col: 1, row: 6, store: "git", label: "rule code", code: "pipeline/present.py",
     text: { name: "pipeline/present.py", note: "the Ambulance column's entry in COLUMNS, and the rule it names",
       lines: ['COLUMNS = {..., "AB_ambulance": ambulance, ...}', "", "def ambulance(organization, found):",
         '    """Line 1 is trips within the U.S. and line 2 is emergency trips abroad, each as (value, cited facts).', "    …"] } },
@@ -128,9 +128,9 @@ export const STEPS = [
   { id: "extract-text", record: "documents", from: "checked", to: "text", label: "Extract page text",
     paras: [["Code turns each page into ", ["layoutText", "text that keeps the page's columns"], ". The PDFs and texts are stored in R2, named by hash, so every later run reads the same bytes."]],
     example: { highlight: { checked: [0], text: [3, 4, 5] }, before: "PDF ce13e925…", after: "text of page 9", paras: [] } },
-  { id: "cms-facts", record: "rule", from: "pbp", to: "cmsFacts", label: "CMS facts",
-    paras: [["Code turns the plan's CMS fields into facts. They rank below every document, so a rule uses one only when no document gives the value. A value built from one has no citation."]],
-    example: { highlight: { pbp: [0], cmsFacts: [0, 1] }, before: "pbp_b4c_copay_amt_wec_min = 115.00", after: "emergency abroad $115",
+  { id: "cms-facts", record: "rule", from: "pbp", also: ["plans"], to: "cmsFacts", label: "CMS facts",
+    paras: [["Code turns the plan's PBP fields into facts, and the premiums and drug deductible that plans copies from the Landscape file. They rank below every document, so a rule uses one only when no document gives the value. A value built from one has no citation."]],
+    example: { highlight: { pbp: [0], plans: [0], cmsFacts: [0, 1] }, before: "pbp_b4c_copay_amt_wec_min = 115.00", after: "emergency abroad $115",
       paras: [["Line 2 of the Ambulance rule considers these facts, but sets them aside because the EOC prices ambulance trips abroad."]] } },
   { id: "read-facts", record: "answers", from: "text", also: ["prompt"], to: "answers", label: "Claude reads facts",
     paras: [["Code fills fact_prompt.md to make ", ["prompt", "one prompt"], " per document and benefit group. Claude Opus answers each with facts, each with its quotes and page."],
@@ -355,6 +355,7 @@ const short = (sha) => sha ? `${sha.slice(0, 16)}…` : "";
 const blob = (sha, href) => sha ? { text: short(sha), href: href(sha) } : "";
 const FACT_COLS = ["source", "page", "benefit", "setting", "network", "condition", "amount"];
 const factRow = (kind, page, f) => [kind ?? "", String(page ?? ""), f.benefit, f.setting, f.network, f.condition ?? "", f.amount];
+const CMS_PLAN_COLS = ["plan_id", "premium", "premium_full_extra_help", "part_d_deductible"];
 const PLAN_COLS = ["plan_id", "plan_name", "plan_type", "organization", "premium", "moop_in_network"];
 const documentsCsv = table(["documents"], "the plan's rows", ["kind", "url", "found_via"],
   (t) => t.documents.documents.map((d) => [d.kind, d.url, d.found_via]));
@@ -415,6 +416,7 @@ export const RECORDS = {
   "cms-facts": {
     pbp: table(["rule"], "the fields behind the column's CMS facts", ["benefit", "fields"],
       (t) => cmsFacts(t).map((f) => [f.benefit, JSON.parse(f.quotes || "[]").join(", ")])),
+    plans: table(["plan"], "the plan's Landscape fact columns", CMS_PLAN_COLS, (t) => [CMS_PLAN_COLS.map((k) => t.plan.row[k])]),
     cmsFacts: table(["rule"], "the column's CMS facts", ["benefit", "setting", "condition", "amount", "source"],
       (t) => cmsFacts(t).map((f) => [f.benefit, f.setting, f.condition ?? "", f.amount, f.source])),
   },

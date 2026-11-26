@@ -184,6 +184,7 @@ async function routeHow(state) {
   rail.scrollTop = mapTop;
   const shown = rail.getBoundingClientRect(), pill = rail.querySelector(".how-pill.on").getBoundingClientRect();
   if (pill.top < shown.top || pill.bottom > shown.bottom) rail.scrollTop += pill.top - shown.top - (shown.height - pill.height) / 2;
+  if (pill.left < shown.left || pill.right > shown.right) rail.scrollLeft += pill.left - shown.left - (shown.width - pill.width) / 2;
   if (map) content.querySelector(".how-step").focus({ preventScroll: true });
 }
 
