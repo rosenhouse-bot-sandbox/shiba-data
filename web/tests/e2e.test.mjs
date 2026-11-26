@@ -995,7 +995,7 @@ test("pipeline view: Next steps through the example cell's steps, each showing i
     await next.click();
     await page.waitForFunction((n) => document.querySelector(".how-count")?.textContent.startsWith(`${n} `), labels.length + 1);
   }
-  assert.equal(labels.length, 9);
+  assert.equal(labels.length, 10);
   assert.equal(labels.at(-1), "Publish");
 });
 
@@ -1015,8 +1015,31 @@ test("pipeline view: a step with two inputs lights both and joins them at its on
   assert.equal(await page.locator(".how-node.on").count(), 3);
   assert.equal(await page.locator(".how-edge.on").count(), 3);
   assert.equal(await page.locator(".how-pill.on").count(), 1);
-  assert.equal(await page.locator(".how-pill").count(), 9);
-  assert.equal(await page.locator(".how-edge[marker-end]").count(), 9);
+  assert.equal(await page.locator(".how-pill").count(), 10);
+  assert.equal(await page.locator(".how-edge[marker-end]").count(), 10);
+});
+
+test("pipeline view: each box says where its data lives and opens it in a new tab when it has a URL", async () => {
+  await openHow(page, "main/H1036-153-0/ambulance/publish");
+  const node = (name) => page.locator(".how-node", { has: page.locator(`code:text-is("${name}")`) });
+  assert.equal(await node("links").getAttribute("aria-label"), "In git: links, opens in a new tab");
+  assert.match(await node("links").getAttribute("href"), /^https:\/\/github\.com\/.+\/blob\/[0-9a-f]{40}\/data\/2027\/links\.csv$/);
+  assert.equal(await node("links").getAttribute("target"), "_blank");
+  assert.match(await node("main_chart").getAttribute("href"), /^tables\/2027\/[0-9a-f]{40}\/main_chart\.json$/);
+  assert.equal(await node("plans").evaluate((e) => e.tagName), "DIV");
+  assert.match(await page.textContent(".how-legend"), /In git.*In R2.*In D1.*CI only.*Website/);
+});
+
+test("pipeline view: a CMS box warns before it downloads a zip file", async () => {
+  await openHow(page, "main/H1036-153-0/ambulance/publish");
+  const url = page.url();
+  await page.locator(".how-node", { has: page.locator('code:text-is("CMS PBP tables")') }).click();
+  const warning = page.locator(".how-download:popover-open");
+  assert.match(await warning.textContent(), /zip file/);
+  assert.equal(await warning.getByRole("link").getAttribute("href"), site.cms_files.PBP);
+  assert.equal(page.url(), url);
+  await page.keyboard.press("Escape");
+  assert.equal(await warning.count(), 0);
 });
 
 test("pipeline view: Find PDFs shows every URL offered to the plan and marks the winners", async () => {
@@ -1115,7 +1138,7 @@ test("pipeline view: Extract page text links each PDF and text file to its blob"
   const hrefs = (side) => page.locator(`.how-rows.${side} td a`).evaluateAll((as) => as.map((a) => a.getAttribute("href")));
   assert.deepEqual((await hrefs("input")).map((h) => h.slice(0, 13)), ["docs/ce13e925", "docs/64e05773"]);
   assert.deepEqual((await hrefs("output")).map((h) => h.slice(0, 14)), ["blobs/6ebca98d", "blobs/d50cc84c"]);
-  assert.match(await page.locator(".how-end.source a").getAttribute("href"), /^blobs\/6ebca98d[0-9a-f]{56}\.txt$/);
+  assert.match(await page.locator(".how-end.store-r2 a").getAttribute("href"), /^blobs\/6ebca98d[0-9a-f]{56}\.txt$/);
 });
 
 test("pipeline view: each step shows its record from the cell's trace", async () => {
@@ -1182,7 +1205,7 @@ test("pipeline view: a DVHA cell's detail links to its pipeline view, which show
   assert.match(await page.textContent(".how-cell"), /Vision/);
   assert.ok((await page.locator(".how-pill").allTextContents()).includes("Column rules"));
   await openHow(page, "dvha/H1036-153-0/vision/sheet");
-  assert.deepEqual(await page.locator(".how-end code").allTextContents(), ["document_facts", "dvha.csv"]);
+  assert.deepEqual(await page.locator(".how-end code").allTextContents(), ["document_facts", "dvha"]);
   assert.match(await page.textContent(".how-strip"), /the column rule/);
   await page.click(".how-trace summary");
   assert.match(await page.textContent(".how-trace pre"), /pipeline\/present\.py/);

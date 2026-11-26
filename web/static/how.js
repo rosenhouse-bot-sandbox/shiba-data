@@ -2,8 +2,8 @@
 import { el, svg } from "./dom.js";
 import { format } from "./permalink.js";
 import {
-  EXAMPLE, NODES, STEPS, SHEET_FILES, inputs, NODE_W, NODE_H, RING, MAP_W, MAP_H,
-  nodeBox, pillBox, paths, before, after, strip, details, records,
+  EXAMPLE, NODES, STEPS, STORES, SHEET_TABLES, inputs, NODE_W, NODE_H, RING, MAP_W, MAP_H,
+  nodeBox, pillBox, paths, before, after, strip, details, records, nodeHref,
 } from "./pipeline.js";
 
 // The map is drawn at full size, then scaled to fit its rail.
@@ -13,11 +13,12 @@ const SCALE = RAIL_W / MAP_W;
 export const howLink = (year, cell, step) => format({ year, view: "how", sheet: cell.sheet, plan: cell.plan, column: cell.column, step: step.id });
 export const traceUrl = (year, sheet, plan, columnKey) => `trace/${year}/${sheet}/${plan}/${columnKey}`;
 const shown = (id) => NODES[id].table ?? NODES[id].text;
-const label = (id, sheet) => id === "sheet" ? SHEET_FILES[sheet] : NODES[id].label;
+const label = (id, sheet) => id === "sheet" ? SHEET_TABLES[sheet] : NODES[id].label;
+const store = (id) => STORES[NODES[id].store];
 const isExample = (cell) => cell.sheet === EXAMPLE.sheet && cell.plan === EXAMPLE.plan && cell.column === EXAMPLE.column;
 
 // cell is { sheet, plan, column, label, value }.
-export function howView({ year, cell, step, terms, trace }) {
+export function howView({ year, cell, step, terms, trace, cms }) {
   const at = STEPS.indexOf(step);
   const link = (s) => howLink(year, cell, s);
   const prev = STEPS[at - 1], next = STEPS[at + 1];
@@ -30,11 +31,13 @@ export function howView({ year, cell, step, terms, trace }) {
       prev ? el("a", { class: "how-nav", href: link(prev), rel: "prev" }, "← Prev") : el("span", { class: "how-nav off" }, "← Prev"),
       el("span", { class: "how-count" }, `${at + 1} of ${STEPS.length}`),
       next ? el("a", { class: "how-nav primary", href: link(next), rel: "next" }, "Next →") : el("span", { class: "how-nav primary off" }, "Next →")),
-    el("div", { class: "how-body" }, map(step, link, cell.sheet),
+    el("div", { class: "how-body" }, map(step, link, { year, sheet: cell.sheet, sha: trace?.build?.sha ?? null,
+      cell: format({ year, view: cell.sheet, plan: cell.plan, column: cell.column }), cms }),
       lens(step, link, terms, isExample(cell) ? step.example : null, trace, cell.sheet)));
 }
 
-function map(step, link, sheet) {
+// at says where each node's data is: { year, sheet, sha, cell }, as nodeHref takes it.
+function map(step, link, at) {
   const on = new Set([...inputs(step), step.to]);
   const lines = svg("svg", { width: MAP_W, height: MAP_H, "aria-hidden": "true" },
     svg("defs", {}, ...["off", "on"].map((k) => svg("marker", {
@@ -44,13 +47,22 @@ function map(step, link, sheet) {
       d: p.d, class: `how-edge${s === step ? " on" : ""}`,
       ...(p.arrow ? { "marker-end": `url(#how-arrow-${s === step ? "on" : "off"})` } : {}),
     }))));
+  const downloads = [];
   const nodes = Object.entries(NODES).map(([id, n]) => {
-    const b = nodeBox(id);
-    return el("div", {
-      class: `how-node${on.has(id) ? " on" : ""}${n.source ? " source" : ""}`,
+    const b = nodeBox(id), href = nodeHref(id, at), name = label(id, at.sheet);
+    const attrs = {
+      class: `how-node store-${n.store}${on.has(id) ? " on" : ""}`,
       style: `left:${b.x}px;top:${b.y}px;width:${NODE_W}px;height:${NODE_H}px`,
-      title: `${n.kind}: ${label(id, sheet)}`,
-    }, el("small", {}, n.kind), el("code", {}, label(id, sheet)));
+      title: `${store(id).label}: ${name}`,
+    };
+    const kids = [el("small", {}, store(id).label), " ", el("code", {}, name)];
+    if (href && n.cms) {
+      const warning = download(`how-download-${id}`, n.cms, href);
+      downloads.push(warning);
+      return el("button", { ...attrs, type: "button", popovertarget: warning.id }, ...kids);
+    }
+    if (href) Object.assign(attrs, { href, target: "_blank", rel: "noopener", "aria-label": `${store(id).label}: ${name}, opens in a new tab` });
+    return el(href ? "a" : "div", attrs, ...kids);
   });
   const pills = STEPS.map((s) => {
     const b = pillBox(s);
@@ -62,15 +74,30 @@ function map(step, link, sheet) {
     el("h2", {}, "Tables and steps"),
     el("div", { class: "how-frame", style: `width:${RAIL_W}px;height:${Math.ceil(MAP_H * SCALE)}px` },
       el("div", { class: "how-world", style: `width:${MAP_W}px;height:${MAP_H}px;--ring:${RING}px;transform:scale(${SCALE})` }, lines, ...nodes, ...pills)),
-    el("p", { class: "how-legend" },
-      el("span", { class: "source" }, "■"), " source ", el("span", {}, "■"), " table the pipeline writes"));
+    ...downloads,
+    el("p", { class: "how-legend" }, ...Object.entries(STORES).map(([key, s]) =>
+      el("span", {}, el("b", { class: `store-${key}` }, s.label), s.note ? ` ${s.note}` : ""))));
+}
+
+// A CMS file is a large zip, so its box asks before it downloads.
+function download(id, file, href) {
+  const pop = el("div", { id, class: "how-download", popover: "" },
+    el("p", {}, `This downloads the CMS ${file} file from cms.gov. It is a zip file of tens of megabytes.`),
+    el("p", {}, el("a", { href }, "Download the zip file"), " ", el("button", { type: "button", popovertarget: id, popovertargetaction: "hide" }, "Cancel")));
+  pop.addEventListener("beforetoggle", (e) => {
+    if (e.newState !== "open") return;
+    const r = document.querySelector(`[popovertarget="${id}"]`).getBoundingClientRect();
+    pop.style.top = `${r.bottom + 4}px`;
+    pop.style.left = `${Math.max(8, Math.min(r.left, innerWidth - 328))}px`;
+  });
+  return pop;
 }
 
 function lens(step, link, terms, example, trace, sheet) {
   const chips = (near, cls, text) => near.length ? el("div", { class: `how-chips ${cls}` },
     ...near.map((s) => el("a", { href: link(s) }, text(s.label)))) : null;
-  const end = (id) => el("div", { class: `how-end${NODES[id].source ? " source" : ""}` },
-    el("small", {}, NODES[id].kind), el("code", {}, example ? linked(shown(id).name, shown(id).href) : label(id, sheet)));
+  const end = (id) => el("div", { class: `how-end store-${NODES[id].store}` },
+    el("small", {}, store(id).label), el("code", {}, example ? linked(shown(id).name, shown(id).href) : label(id, sheet)));
   const fromTo = example ? [example.before, example.after] : strip(step, trace);
   const live = records(step, trace);
   const para = (p) => el("p", {}, ...p.map((s) => typeof s === "string" ? s : term(terms[s[0]], s[1])));
