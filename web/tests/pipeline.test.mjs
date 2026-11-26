@@ -221,7 +221,7 @@ test("Claude reads facts links each reader prompt", () => {
   ]);
 });
 
-// The replayed trace with one more answer whose prompts sit in the given dirs and tasks, named by prompt when given.
+// The replayed trace with one more answer from model m. A prompt is [dir, task], plus its hash when it differs from the task.
 const withPrompts = (...prompts) => ({ ...replay, answers: { ...replay.answers, rows: [...replay.answers.rows,
   { model: "m", prompts: prompts.map(([dir, task, prompt = task]) => ({ dir, task, prompt, url: prompt })) }] } });
 
@@ -231,23 +231,47 @@ test("a prompt's label names its role, its document when known, its group and a 
   assert.deepEqual(lines("check-facts", t).slice(-1), ["second verifier prompt for the a group, answered by m"]);
 });
 
-test("a prompt that an inherited task repeats is linked once", () => {
-  const [eoc] = replay.answers.rows[0].prompts;
-  const t = withPrompts(["facts/inherited/ambulance/read", eoc.task, eoc.prompt]);
-  assert.deepEqual(details(stepById("read-facts"), t).map((l) => l.href), details(stepById("read-facts"), replay).map((l) => l.href));
+test("an answer links once to a prompt that its inherited task repeats", () => {
+  const [answer] = replay.answers.rows;
+  const [eoc] = answer.prompts;
+  const inherited = { ...eoc, dir: "facts/inherited/ambulance/read" };
+  const t = { ...replay, answers: { ...replay.answers, rows: [{ ...answer, prompts: [inherited, eoc] }, ...replay.answers.rows.slice(1)] } };
+  assert.deepEqual(details(stepById("read-facts"), t), details(stepById("read-facts"), replay));
   assert.equal(records(stepById("read-facts"), t)[1].rows.length, 2);
 });
 
-test("a reviewer prompt names the fact it reviews", () => {
+test("an inherited prompt that differs from the version's own says so", () => {
+  const t = withPrompts(["facts/inherited/a/read", "ce13e925c0384896.md", "p1"], ["facts/a/read", "ce13e925c0384896.md", "p2"]);
+  assert.deepEqual(lines("read-facts", t).slice(2), ["SB reader prompt for the a group, inherited, answered by m",
+    "SB reader prompt for the a group, answered by m"]);
+});
+
+test("a reviewer prompt names the fact it reviews, even when a verifier sent the same prompt", () => {
   const [row] = replay.fact_checks.rows;
   const reviewed = { ...row, reviewer: { status: "traced", prompt: "r1", ok: true, reason: "Fine." } };
+  const verifier = { model: "v", prompts: [{ dir: "facts/a/check", task: "v-1.md", prompt: "r1", url: "r1" }] };
   const t = { ...withPrompts(["facts/review", "v-1.md", "r1"]), fact_checks: { status: "traced", rows: [reviewed] } };
-  assert.deepEqual(lines("check-facts", t).slice(-1), ["reviewer prompt for EOC page 46, ambulance.ground $325 (Emergency Ambulance), answered by m"]);
+  t.answers = { ...t.answers, rows: [...t.answers.rows, verifier] };
+  assert.deepEqual(lines("check-facts", t).slice(-2), ["reviewer prompt for EOC page 46, ambulance.ground $325 (Emergency Ambulance), answered by m",
+    "verifier prompt for the a group, answered by v"]);
 });
 
 test("links with the same text to different prompts add each prompt's hash", () => {
-  const t = withPrompts(["facts/review", "v-1.md", "1111111111111111"], ["facts/review", "v-2.md", "2222222222222222"]);
-  assert.deepEqual(lines("check-facts", t).slice(-2), ["reviewer prompt 11111111, answered by m", "reviewer prompt 22222222, answered by m"]);
+  const [row] = replay.fact_checks.rows;
+  const reviewed = (prompt) => ({ ...row, reviewer: { status: "traced", prompt, ok: true, reason: "Fine." } });
+  const t = { ...withPrompts(["facts/review", "v-1.md", "1111111111111111"], ["facts/review", "v-2.md", "2222222222222222"],
+    ["facts/a/read", "x.md"], ["facts/a/read", "x.retry.md"]),
+  fact_checks: { status: "traced", rows: [reviewed("1111111111111111"), reviewed("2222222222222222")] } };
+  assert.deepEqual(lines("check-facts", t).slice(-2), [
+    "reviewer prompt for EOC page 46, ambulance.ground $325 (Emergency Ambulance) 11111111, answered by m",
+    "reviewer prompt for EOC page 46, ambulance.ground $325 (Emergency Ambulance) 22222222, answered by m"]);
+  assert.deepEqual(lines("read-facts", t).slice(-2), ["reader prompt for the a group, answered by m", "reader prompt for the a group, retried, answered by m"]);
+});
+
+test("Claude reads facts counts only reader answers", () => {
+  const checks = { ...replay, answers: { ...replay.answers, rows: replay.answers.rows.filter((a) => a.prompts.every((p) => !p.dir.endsWith("/read"))) } };
+  assert.deepEqual(strip(stepById("read-facts"), withPrompts(["facts/a/read", "x.md"])), ["SB and EOC page text", "3 saved answers from claude-opus-5-5 and m"]);
+  assert.deepEqual(strip(stepById("read-facts"), checks), ["SB and EOC page text", "no saved answers"]);
 });
 
 test("Check facts gives each fact's verdicts", () => {

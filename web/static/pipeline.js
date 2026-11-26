@@ -97,7 +97,7 @@ export const STEPS = [
     paras: [["Code fills fact_prompt.md to make ", ["prompt", "one prompt"], " per document and benefit group. Claude Opus answers each with facts, each with its quotes and page."],
       ["The answer is ", ["hash", "saved under a hash of the model, effort and prompt"], ", so a rerun calls no model."]],
     example: { highlight: [[3, 4, 5], [0, 1, 2]], before: "Ground  $325 copay per date of service", after: "{benefit: ambulance.ground, amount: $325, page: 9}",
-      paras: [["The Ambulance column uses the ambulance and emergency groups, so four prompts read this plan's SB and EOC. For the SB and the ambulance group, Claude answers with three facts."]] } },
+      paras: [["The Ambulance column uses the ambulance and emergency groups, so Claude gets four prompts, one per group and document. For the SB and the ambulance group, Claude answers with three facts."]] } },
   { id: "check-facts", record: "fact_checks", from: "answers", to: "facts", label: "Check facts",
     paras: [["Code runs a ", ["quoteCheck", "quote check"], " on every fact. A verifier, Claude Opus, then judges each fact mixed with ", ["decoy", "decoys"], ". Last, a ", ["reviewer", "reviewer"], " checks each fact a value would cite."]],
     example: { highlight: [[2], [3, 4, 5]], before: "SB: abroad, covered_by medicare", after: "rejected; the EOC's supplemental fact stands",
@@ -191,8 +191,8 @@ function quotes(rows, trace) {
 }
 
 function readerAnswers(t) {
-  const answers = [...new Set(uniquePrompts(t, true).map(({ answer }) => answer))];
-  return `${plural(answers.length, "saved answer")} from ${listed([...new Set(answers.map((a) => a.model))])}`;
+  const answers = uniquePrompts(t, true).map(({ answer }) => answer);
+  return answers.length ? `${plural(answers.length, "saved answer")} from ${listed([...new Set(answers.map((a) => a.model))])}` : "no saved answers";
 }
 
 // What each step took in and gave out for a cell, read from its trace.
@@ -236,30 +236,35 @@ const roleOf = (p) => p.dir.split("/").at(-1);
 const groupOf = (p) => p.dir.split("/").length > 2 ? p.dir.split("/").at(-2) : null;
 const isReading = (p) => READING.includes(roleOf(p));
 
-// Each prompt once, with its answer. An inherited task repeats a prompt.
+const isInherited = (p) => p.dir.includes("/inherited/");
+
+// An inherited task can repeat its version's own prompt in the same answer, so each answer lists each prompt once.
 function uniquePrompts(t, reading) {
-  const found = new Map();
-  for (const answer of t.answers.rows) for (const p of answer.prompts) {
-    if (isReading(p) === reading && !found.has(p.prompt)) found.set(p.prompt, { p, answer });
-  }
-  return [...found.values()];
+  return t.answers.rows.flatMap((answer) => {
+    const own = new Map();
+    for (const p of answer.prompts.filter((p) => isReading(p) === reading)) {
+      if (!own.has(p.prompt) || !isInherited(p)) own.set(p.prompt, p);
+    }
+    return [...own.values()].map((p) => ({ p, answer }));
+  });
 }
 
+// What a prompt is, then the flags that follow it.
 function promptLabel(t, p) {
   const kind = docKindOf(t, p.task);
   const group = groupOf(p);
-  const reviewed = roleOf(p) === "review" && t.fact_checks.rows?.find((r) => r.reviewer.prompt === p.prompt);
-  return `${kind ? `${kind} ` : ""}${PROMPT_ROLES[roleOf(p)] ?? "prompt"}${group ? ` for the ${group} group` : ""}`
+  const reviewed = roleOf(p) === "review" && t.fact_checks.rows.find((r) => r.reviewer.prompt === p.prompt);
+  const what = `${kind ? `${kind} ` : ""}${PROMPT_ROLES[roleOf(p)] ?? "prompt"}${group ? ` for the ${group} group` : ""}`
     + (reviewed ? ` for ${checkedFactLabel(t, reviewed)}` : "");
+  return [what, (p.task.includes(".retry.") ? ", retried" : "") + (isInherited(p) ? ", inherited" : "")];
 }
 
 function promptLinks(t, reading) {
   if (t.answers.status !== "traced") return [];
   const links = uniquePrompts(t, reading).map(({ p, answer }) => ({ p, answer, label: promptLabel(t, p) }));
-  const shared = (label) => links.filter((l) => l.label === label).length > 1;
-  return links.map(({ p, answer, label }) => ({
-    text: `${label}${shared(label) ? ` ${p.prompt.slice(0, 8)}` : ""}${p.task.includes(".retry.") ? ", retried" : ""}, answered by ${answer.model}`,
-    href: p.url,
+  const shared = ([what, flags]) => links.filter(({ label }) => label[0] === what && label[1] === flags).length > 1;
+  return links.map(({ p, answer, label: [what, flags] }) => ({
+    text: `${what}${shared([what, flags]) ? ` ${p.prompt.slice(0, 8)}` : ""}${flags}, answered by ${answer.model}`, href: p.url,
   }));
 }
 
