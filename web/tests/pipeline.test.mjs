@@ -125,7 +125,7 @@ test("neighbouring steps share a table", () => {
   assert.deepEqual(after(rules).map((s) => s.id), ["publish"]);
   assert.deepEqual(after(stepById("sheet")).map((s) => s.id), ["publish"]);
   assert.deepEqual(before(stepById("list-plans")), []);
-  assert.deepEqual(after(stepById("list-plans")).map((s) => s.id), ["find-pdfs"]);
+  assert.deepEqual(after(stepById("list-plans")).map((s) => s.id), ["find-pdfs", "cms-facts"]);
   assert.deepEqual(before(stepById("publish")).map((s) => s.id), ["column-rules", "sheet"]);
 });
 
@@ -228,8 +228,9 @@ const PBP_FACT = { ...replay.rule.set_aside[0], benefit: "medical_deductible", c
 const withCms = { ...replay, rule: { ...replay.rule, set_aside: [...replay.rule.set_aside, PBP_FACT] } };
 
 test("CMS facts shows the column's CMS facts and the fields behind them", () => {
-  const [fields, facts] = records(stepById("cms-facts"), withCms);
+  const [fields, plan, facts] = records(stepById("cms-facts"), withCms);
   assert.deepEqual(fields.rows, [["medical_deductible", "pbp_d_inn_deduct_yn"]]);
+  assert.deepEqual(plan.rows, [["H1036-153-0", "$0", "$0", "$700"]]);
   assert.deepEqual(facts.rows, [["medical_deductible", "any", "", "$0", "PBP"]]);
   assert.deepEqual(strip(stepById("cms-facts"), withCms), ["the plan's PBP and Landscape fields", "1 CMS fact for this column"]);
   assert.equal(strip(stepById("cms-facts"), replay)[1], "no CMS facts for this column");

@@ -173,7 +173,7 @@ td.selected { outline: 3px solid var(--ink); outline-offset: -3px; }
 .how-chips.after { margin-top: 16px; }
 .how-chips.after a { border: 1px solid var(--accent); background: var(--page); font-weight: 600; }
 .how-step:focus { outline: 2px solid var(--ink); outline-offset: 2px; }
-.how-step { margin: 0 0 8px; font-size: 18px; }
+.how-step { display: inline-block; margin: 0 0 8px; font-size: 18px; }
 .how-source { padding: 0; border: 0; background: none; font: inherit; color: var(--accent); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
 .how-card { padding: 14px 18px; background: var(--page); border: 1px solid var(--line); border-radius: 12px; margin-bottom: 16px; }
 .how-card p { margin: 0 0 8px; line-height: 1.6; max-width: 820px; }
