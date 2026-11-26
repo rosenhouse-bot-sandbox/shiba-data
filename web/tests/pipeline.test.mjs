@@ -112,8 +112,8 @@ test("every table a step reads or writes has example rows", () => {
 });
 
 test("each step highlights the example's rows in its first input and its outputs", () => {
-  const exampleRows = (id) => (NODES[id].table?.rows ?? NODES[id].text.lines).length;
-  for (const s of STEPS) for (const id of [s.from, ...outputs(s)].filter(exampleRows)) assert.ok(s.example.highlight[id]?.length, `${s.id} ${id}`);
+  assert.deepEqual(NODES.notes.table.rows, [], "the example cell has no note");
+  for (const s of STEPS) for (const id of [s.from, ...outputs(s)].filter((id) => id !== "notes")) assert.ok(s.example.highlight[id]?.length, `${s.id} ${id}`);
 });
 
 test("a step's tables are the map's inputs, in order, then its outputs", () => {

@@ -6,10 +6,6 @@ import {
   nodeBox, pillBox, paths, before, after, strip, details, records, nodeHref,
 } from "./pipeline.js";
 
-// The map is drawn at full size, then scaled to fit its rail.
-const RAIL_W = 562;
-const SCALE = RAIL_W / MAP_W;
-
 export const howLink = (year, cell, step) => format({ year, view: "how", sheet: cell.sheet, plan: cell.plan, column: cell.column, step: step.id });
 export const traceUrl = (year, sheet, plan, columnKey) => `trace/${year}/${sheet}/${plan}/${columnKey}`;
 const shown = (id) => NODES[id].table ?? NODES[id].text;
@@ -57,10 +53,10 @@ function map(step, link, sheet) {
     return el("a", { class: `how-pill${s === step ? " on" : ""}`, href: link(s), title: s.label, style,
       ...(s === step ? { "aria-current": "step" } : {}) }, s.label);
   });
-  return el("section", { class: "how-map", "aria-label": "Tables and steps" },
+  return el("section", { class: "how-map", style: `--map-w:${MAP_W}px`, "aria-label": "Tables and steps" },
     el("h2", {}, "Tables and steps"),
-    el("div", { class: "how-frame", style: `width:${RAIL_W}px;height:${Math.ceil(MAP_H * SCALE)}px` },
-      el("div", { class: "how-world", style: `width:${MAP_W}px;height:${MAP_H}px;--ring:${RING}px;transform:scale(${SCALE})` }, lines, ...nodes, ...pills)),
+    el("div", { class: "how-frame", style: `width:${MAP_W}px;height:${MAP_H}px` },
+      el("div", { class: "how-world", style: `width:${MAP_W}px;height:${MAP_H}px;--ring:${RING}px` }, lines, ...nodes, ...pills)),
     el("p", { class: "how-legend" }, ...Object.entries(STORES).map(([key, s]) =>
       el("span", {}, el("b", { class: `store-${key}` }, s.label), s.note ? ` ${s.note}` : ""))));
 }

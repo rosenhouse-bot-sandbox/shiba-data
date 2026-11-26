@@ -139,10 +139,10 @@ td.selected { outline: 3px solid var(--ink); outline-offset: -3px; }
 .how-nav.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
 .how-nav.off { opacity: .4; }
 .how-body { flex: 1; display: flex; min-height: 0; }
-.how-map { flex: none; width: 590px; border-right: 1px solid var(--line); padding: 12px 14px; overflow-y: auto; }
+.how-map { flex: none; width: calc(var(--map-w) + 28px); border-right: 1px solid var(--line); padding: 12px 14px; overflow-y: auto; }
 .how-map h2 { margin: 0 0 8px; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
 .how-frame { overflow: hidden; }
-.how-world { position: relative; transform-origin: 0 0; }
+.how-world { position: relative; }
 .how-world svg { position: absolute; inset: 0; overflow: visible; }
 .how-edge { fill: none; stroke: var(--faint); stroke-width: 1.5; }
 .how-edge.on { stroke: var(--accent); stroke-width: 3.5; }
