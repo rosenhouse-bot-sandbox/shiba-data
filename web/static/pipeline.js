@@ -154,11 +154,11 @@ function curve([x1, y1], [x2, y2]) {
 const bottom = (b) => [b.x + b.w / 2, b.y + b.h];
 const top = (b) => [b.x + b.w / 2, b.y];
 
-// A one-input step's label sits on its edge. Several inputs join at a label in the row gap above the output.
+// Every label sits MIN_GAP above its output. A one-input step's label is on its edge; several inputs join above the output.
 export function pillBox(step) {
   const to = nodeBox(step.to);
-  const [x, y] = inputs(step).length > 1 ? [to.x + to.w / 2, to.y - RING - MIN_GAP - PILL_H / 2] : curve(bottom(nodeBox(step.from)), top(to)).at(0.5);
-  return { x: x - PILL_W / 2, y: y - PILL_H / 2, w: PILL_W, h: PILL_H };
+  const x = inputs(step).length > 1 ? to.x + to.w / 2 : curve(bottom(nodeBox(step.from)), top(to)).at(0.5)[0];
+  return { x: x - PILL_W / 2, y: to.y - RING - MIN_GAP - PILL_H, w: PILL_W, h: PILL_H };
 }
 
 // The lines a step draws. Only the one into the output gets an arrow.
