@@ -34,6 +34,24 @@ test("boxes above one another keep a minimum gap outside any ring", () => {
   }
 });
 
+const isMerge = (s) => inputs(s).length > 1;
+const mergeRows = new Set(STEPS.filter(isMerge).map((s) => NODES[s.to].row));
+const gapBelowInputs = (s) => pillBox(s).y - Math.max(...inputs(s).map((id) => nodeBox(id).y + nodeBox(id).h)) - RING;
+
+test("every label sits MIN_GAP above its output", () => {
+  for (const s of STEPS) assert.equal(nodeBox(s.to).y - RING - (pillBox(s).y + pillBox(s).h), MIN_GAP, s.id);
+});
+
+test("merging edges get room to bend, but less than a row", () => {
+  for (const s of STEPS.filter(isMerge)) {
+    assert.ok(gapBelowInputs(s) >= 2 * MIN_GAP && gapBelowInputs(s) <= 3 * MIN_GAP, `${s.id} label is ${gapBelowInputs(s)}px below its inputs`);
+  }
+});
+
+test("labels outside merging rows sit MIN_GAP below their input", () => {
+  for (const s of STEPS.filter((s) => !mergeRows.has(NODES[s.to].row))) assert.equal(gapBelowInputs(s), MIN_GAP, s.id);
+});
+
 test("every edge runs downward", () => {
   for (const s of STEPS) for (const { at } of paths(s)) assert.ok(at(1)[1] > at(0)[1], s.id);
 });
