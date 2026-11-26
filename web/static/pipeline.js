@@ -115,8 +115,14 @@ export const inputs = (step) => [step.from, ...(step.also ?? [])];
 
 export const NODE_W = 128;
 export const NODE_H = 54;
+export const PILL_W = 116;
+export const PILL_H = 24;
+// A selected node's ring, drawn outside its box.
+export const RING = 4;
+// The space above and below every label, outside any ring.
+export const MIN_GAP = 18;
 const COL_STEP = 138;
-const ROW_STEP = 80;
+const ROW_STEP = NODE_H + 2 * (RING + MIN_GAP) + PILL_H;
 const MARGIN = 10;
 
 export function nodeBox(id) {
@@ -142,13 +148,10 @@ function curve([x1, y1], [x2, y2]) {
 const bottom = (b) => [b.x + b.w / 2, b.y + b.h];
 const top = (b) => [b.x + b.w / 2, b.y];
 
-export const PILL_W = 116;
-export const PILL_H = 24;
-
 // A one-input step's label sits on its edge. Several inputs join at a label in the row gap above the output.
 export function pillBox(step) {
   const to = nodeBox(step.to);
-  const [x, y] = inputs(step).length > 1 ? [to.x + to.w / 2, to.y - ROW_STEP / 2] : curve(bottom(nodeBox(step.from)), top(to)).at(0.5);
+  const [x, y] = inputs(step).length > 1 ? [to.x + to.w / 2, to.y - (ROW_STEP - NODE_H) / 2] : curve(bottom(nodeBox(step.from)), top(to)).at(0.5);
   return { x: x - PILL_W / 2, y: y - PILL_H / 2, w: PILL_W, h: PILL_H };
 }
 
