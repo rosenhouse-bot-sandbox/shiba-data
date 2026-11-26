@@ -139,7 +139,7 @@ td.selected { outline: 3px solid var(--ink); outline-offset: -3px; }
 .how-nav.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
 .how-nav.off { opacity: .4; }
 .how-body { flex: 1; display: flex; min-height: 0; }
-.how-map { flex: none; width: 520px; border-right: 1px solid var(--line); padding: 12px 14px; overflow-y: auto; }
+.how-map { flex: none; width: 590px; border-right: 1px solid var(--line); padding: 12px 14px; overflow-y: auto; }
 .how-map h2 { margin: 0 0 8px; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
 .how-frame { overflow: hidden; }
 .how-world { position: relative; transform-origin: 0 0; }

@@ -7,7 +7,7 @@ import {
 } from "./pipeline.js";
 
 // The map is drawn at full size, then scaled to fit its rail.
-const RAIL_W = 492;
+const RAIL_W = 562;
 const SCALE = RAIL_W / MAP_W;
 
 export const howLink = (year, cell, step) => format({ year, view: "how", sheet: cell.sheet, plan: cell.plan, column: cell.column, step: step.id });
