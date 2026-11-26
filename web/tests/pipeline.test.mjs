@@ -191,9 +191,17 @@ test("Read facts lists only the reader prompts and their answers", () => {
   assert.deepEqual(answers.rows.map((r) => r.slice(2)), [["EOC", "ambulance"], ["SB", "ambulance"]]);
 });
 
-test("Extract page text outputs the text files, named by the text's hash", () => {
-  const [, text] = records(stepById("extract-text"), replay);
-  assert.deepEqual(text.rows.map((r) => r[2]), replay.documents.documents.map((d) => `${d.text.layout.slice(0, 16)}…`));
+test("Extract page text outputs the text files, named by the text's hash and linked to their blobs", () => {
+  const [pdfs, text] = records(stepById("extract-text"), replay);
+  const docs = replay.documents.documents;
+  assert.deepEqual(text.rows.map((r) => r[2]), docs.map((d) => ({ text: `${d.text.layout.slice(0, 16)}…`, href: `blobs/${d.text.layout}.txt` })));
+  assert.deepEqual(pdfs.rows.map((r) => r[1]), docs.map((d) => ({ text: `${d.sha256.slice(0, 16)}…`, href: `docs/${d.sha256}.pdf` })));
+});
+
+test("the example's page text links to its blob", () => {
+  const { name, href } = NODES.text.text;
+  assert.equal(href, `blobs/${replay.documents.documents[0].text.layout}.txt`);
+  assert.ok(href.startsWith(`blobs/${name.replace(".txt", "")}`));
 });
 
 test("Publish outputs only the shown citations, naming each document", () => {

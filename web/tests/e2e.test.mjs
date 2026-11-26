@@ -1110,6 +1110,14 @@ test("pipeline view: a term's pop-over stays inside the window, and opening anot
   }
 });
 
+test("pipeline view: Extract page text links each PDF and text file to its blob", async () => {
+  await openHow(page, "main/H1036-153-0/ambulance/extract-text");
+  const hrefs = (side) => page.locator(`.how-rows.${side} td a`).evaluateAll((as) => as.map((a) => a.getAttribute("href")));
+  assert.deepEqual((await hrefs("input")).map((h) => h.slice(0, 13)), ["docs/ce13e925", "docs/64e05773"]);
+  assert.deepEqual((await hrefs("output")).map((h) => h.slice(0, 14)), ["blobs/6ebca98d", "blobs/d50cc84c"]);
+  assert.match(await page.locator(".how-end.source a").getAttribute("href"), /^blobs\/6ebca98d[0-9a-f]{56}\.txt$/);
+});
+
 test("pipeline view: each step shows its record from the cell's trace", async () => {
   await openHow(page, "main/H1036-153-0/ambulance/sheet");
   assert.match(await page.textContent(".how-trace-head"), /sheet\s*Traced/);
