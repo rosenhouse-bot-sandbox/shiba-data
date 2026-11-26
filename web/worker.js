@@ -4,7 +4,7 @@
 // CI downloads every blob through this route too, so it needs no R2 credentials.
 // /trace/2027/<sheet>/<plan_id>/<col> serves a cell's trace from D1 once every cell of the deployed commit's build has
 // loaded. Until then, and for other years, it serves the static file that web/build.py writes.
-// /tables/2027/<sha>/<table>.json serves main_chart, dvha or presented of any build that D1 keeps.
+// /tables/2027/<sha>/<table>.json serves any table that pipeline/tables.py writes, for each build that D1 keeps.
 // Only a build load may change anything, so every other request must be a GET or HEAD.
 export default {
   async fetch(request, env) {
@@ -56,7 +56,7 @@ export default {
 };
 
 // CI loads each main build into D1 from R2: trace/<year>/<sha>.json names the file in trace/<year>/items/ that holds
-// each item: a cell's trace, by <sheet>/<plan_id>/<col>, or the nth run of one plan's rows in a table, by tables/<table>/<n>/<plan_id>.
+// each item: a cell's trace, by <sheet>/<plan_id>/<col>, or the nth run of one plan's rows in a table, by tables/<table>/<n>/<plan>.
 // CI repeats the load while it answers 409. Each load adds a few items that D1 lacks, so an item that did not change
 // since an earlier build costs no writes. Once D1 has every item, the load adds the build.
 // LOAD_TOKEN is a secret that the deploy job gives the Worker and the trace job derives the same way.

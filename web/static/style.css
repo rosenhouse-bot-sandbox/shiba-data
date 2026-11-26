@@ -130,7 +130,7 @@ td.selected { outline: 3px solid var(--ink); outline-offset: -3px; }
 
 /* Pipeline view */
 .how { --source: light-dark(#9a4a06, #f0a868);
-  --store-git: var(--source); --store-r2: light-dark(#7a3fb8, #c9a0ff); --store-d1: var(--accent); --store-ci: var(--muted); --store-web: light-dark(#1d7a3e, #6fcf97); --hi-in: light-dark(#fde7d1, #4a2e14); --hi-out: light-dark(#dbe7ff, #1d2c47); display: flex; flex-direction: column; height: 100%; }
+  --store-git: var(--source); --store-r2: light-dark(#7a3fb8, #c9a0ff); --store-d1: var(--accent); --store-web: light-dark(#1d7a3e, #6fcf97); --hi-in: light-dark(#fde7d1, #4a2e14); --hi-out: light-dark(#dbe7ff, #1d2c47); display: flex; flex-direction: column; height: 100%; }
 .how-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 10px 16px; border-bottom: 1px solid var(--line); font-size: 14px; color: var(--muted); }
 .how-cell { color: var(--ink); background: var(--head); padding: 3px 8px; border-radius: 6px; }
 .how-value { color: var(--accent); font-weight: 600; }
@@ -152,9 +152,8 @@ td.selected { outline: 3px solid var(--ink); outline-offset: -3px; }
 .how-node.on { border-color: var(--accent); background: var(--hover); box-shadow: 0 0 0 var(--ring) color-mix(in srgb, var(--accent) 14%, transparent); opacity: 1; }
 .how-node small, .how-store { display: block; font-size: 9.5px; letter-spacing: .05em; text-transform: uppercase; font-weight: 600; color: var(--accent); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .store-git { --store: var(--store-git); } .store-r2 { --store: var(--store-r2); } .store-d1 { --store: var(--store-d1); }
-.store-ci { --store: var(--store-ci); } .store-web { --store: var(--store-web); }
+.store-web { --store: var(--store-web); }
 .how-node small, .how-store, .how-legend b { color: var(--store); }
-.how-node.store-ci { border-style: dashed; }
 .how-download { position: fixed; inset: auto; margin: 0; max-width: min(320px, calc(100vw - 16px)); padding: 10px 12px; background: var(--page); color: var(--ink); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 12px 32px var(--shadow); font-size: 13px; }
 .how-download p { margin: 0 0 8px; } .how-download p:last-child { margin: 0; display: flex; gap: 12px; align-items: center; }
 .how-download button { font: inherit; padding: 4px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--page); color: var(--ink); cursor: pointer; }

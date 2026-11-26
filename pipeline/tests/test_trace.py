@@ -186,14 +186,20 @@ class TraceTest(unittest.TestCase):
 
     def test_exports_each_tables_rows_in_runs_of_one_plan_in_file_order(self):
         manifest, texts = self.export()
-        for name in ("main_chart", "dvha", "presented"):
-            with open(years.data_dir() / "generated" / f"{name}.csv", newline="", encoding="utf-8") as f:
+        paths = ["generated/plans", "generated/landscape_reads", "generated/documents", "generated/pbp_facts",
+                 "generated/cms_sources", "machine/document_facts", "generated/main_chart", "generated/dvha",
+                 "generated/presented"]
+        names = {path.split("/")[1] for path in paths}
+        for path in paths:
+            name = path.split("/")[1]
+            with open(years.data_dir() / f"{path}.csv", newline="", encoding="utf-8") as f:
                 rows = list(csv.DictReader(f))
-            runs = [(k.split("/")[3], json.loads(texts[h + ".json"])) for k, h in manifest["items"].items()
+            runs = [(k.split("/", 3)[3], json.loads(texts[h + ".json"])) for k, h in manifest["items"].items()
                     if k.startswith(f"tables/{name}/")]
             self.assertEqual([r for _, run in runs for r in run], rows, name)
-            self.assertEqual([{r["plan_id"] for r in run} for _, run in runs], [{plan} for plan, _ in runs], name)
-        self.assertEqual({k.split("/")[1] for k in manifest["items"] if k.startswith("tables/")}, {"main_chart", "dvha", "presented"})
+            plan = "plan_ids" if name == "documents" else "plan_id"
+            self.assertEqual([{r[plan] for r in run} for _, run in runs], [{key} for key, _ in runs], name)
+        self.assertEqual({k.split("/")[1] for k in manifest["items"] if k.startswith("tables/")}, names)
 
     def test_rejects_an_unknown_cell(self):
         with self.assertRaises(LookupError):
