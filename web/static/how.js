@@ -110,7 +110,7 @@ function lens(step, link, terms, example, trace, sheet) {
     ...records(step, trace, sheet).map((r) => {
       if (r.rows) return table(r.role, r.name, r.note, r.cols, r.rows, r.hi);
       if (example) return rows(r.role, r.node, sheet, example.highlight[r.node] ?? []);
-      return frame(r.role, r.name, r.note, el("p", { class: "how-none" }, trace ? "Not recorded in this build." : "No trace for this cell."));
+      return frame(r.role, r.name, r.note, trace ? el("p", { class: "how-none" }, "Not recorded in this build.") : null);
     }),
     traceRecord(step, trace),
     chips(after(step), "after", (l) => `next: ${l} ↘`));
@@ -198,7 +198,7 @@ document.addEventListener("click", (e) => {
 });
 document.addEventListener("scroll", (e) => opened && !opened.box.contains(e.target) && opened.close(), true);
 
-// The example's rows of a node. The note names the example's own file when the node's name does not.
+// An example table's note names the example's own file when the node's name does not.
 function rows(role, id, sheet, highlight) {
   const n = NODES[id], name = nodeName(id, sheet), { name: file, note: about } = shown(id);
   const note = file === name ? about : `${file} · ${about}`;
@@ -219,4 +219,4 @@ const linked = (text, href) => href ? el("a", { href, target: "_blank", rel: "no
 
 const frame = (role, name, note, body) => el("div", { class: `how-rows ${role.toLowerCase()}` },
   el("div", { class: "how-rows-head" }, el("strong", {}, role), el("code", {}, name), el("span", {}, note)),
-  el("div", { class: "how-scroll" }, body));
+  body ? el("div", { class: "how-scroll" }, body) : null);

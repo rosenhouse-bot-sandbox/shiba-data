@@ -25,7 +25,8 @@ export const NODES = {
     table: { name: "links", note: "copied from the volunteers' Links sheet", cols: ["plan_ids", "kind", "url"],
       rows: [["H1036-153-0", "SB", "https://assets.humana.com/is/content/humana/H1036153000SB27pdf"],
         ["H1036-153-0", "EOC", "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf"]] } },
-  found: { col: 2, row: 1, store: "git", label: "found", git: "found.csv" },
+  found: { col: 2, row: 1, store: "git", label: "found", git: "found.csv",
+    table: { name: "found", note: "Claude sessions found no URL for this plan", cols: ["plan_ids", "kind", "url", "found_via"], rows: [] } },
   pbp: { col: 2, row: 5, store: "r2", label: "CMS PBP tables", cms: "PBP",
     table: { name: "pbp_b4_emerg_urgent.txt", note: "the plan's emergency and urgent care copays abroad",
       cols: ["bid_id", "pbp_b4c_copay_amt_wec_min", "pbp_b4c_copay_amt_wec_max", "pbp_b4c_copay_amt_wuc_min", "pbp_b4c_copay_amt_wuc_max"],
@@ -98,7 +99,7 @@ export function nodeHref(id, { year, sheet, sha, cell, cms }) {
   const n = NODES[id];
   if (n.git) return `${REPO}/blob/${sha ?? "main"}/data/${year}/${n.git}`;
   if (n.code) return `${REPO}/blob/${sha ?? "main"}/${n.code}`;
-  if (n.store === "d1") return sha ? `tables/${year}/${sha}/${id === "sheet" ? SHEET_TABLES[sheet] : n.label}.json` : null;
+  if (n.store === "d1") return sha ? `tables/${year}/${sha}/${nodeName(id, sheet)}.json` : null;
   if (n.store === "web") return cell;
   return n.cms ? cms[n.cms] : null;
 }
@@ -345,8 +346,8 @@ const DETAILS = {
   ],
 };
 
-// The cell's own rows in each table a step reads or writes, read from its trace, keyed by the table's node.
-// Each table names the records it reads. hi lists the rows the step kept or used.
+// RECORDS[step][node] reads the cell's rows in that node's table from the trace. Each table names the records it needs,
+// and hi lists the rows the step kept or used.
 const traced = (r) => r?.status === "traced";
 const table = (needs, note, cols, rows, hi = () => []) => ({ needs, note, cols, rows, hi });
 const short = (sha) => sha ? `${sha.slice(0, 16)}…` : "";
@@ -360,7 +361,7 @@ const checkedCsv = table(["documents"], "the plan's rows, selected columns", ["k
   (t) => t.documents.documents.map((d) => [d.kind, blob(d.sha256, (s) => `docs/${s}.pdf`), String(d.pages ?? ""), d.cover_problems]));
 const pageText = table(["documents"], "one file per PDF, named by the text's hash", ["kind", "pages", "text file"],
   (t) => t.documents.documents.map((d) => [d.kind, String(d.pages ?? ""), blob(d.text?.layout, (s) => `blobs/${s}.txt`)]));
-// The URLs one source offered the plan, in the order tried.
+// A source's table lists the URLs it offered the plan, in the order tried.
 const offered = (source, note) => {
   const mine = (t) => t.documents.candidates.filter((c) => c.source === source);
   return table(["documents"], `${note}; highlighted rows won`, ["kind", "url", "found_via"],
@@ -374,7 +375,7 @@ const stated = (row) => row.stated_by[0]?.stated ?? {};
 const used = (t) => t.rule.lines.flatMap((l) => l.facts);
 const considered = (t) => [...used(t), ...t.rule.set_aside];
 const cmsFacts = (t) => considered(t).filter((f) => f.origin === "pbp");
-// The facts of one origin that the rule considered, with the ones its lines used first and highlighted.
+// An origin's table lists the facts of that origin that the rule considered, and highlights the ones it used.
 const ruleFacts = (origin, note) => {
   const mine = (t) => considered(t).filter((f) => f.origin === origin);
   return table(["rule"], `${note}; highlighted facts were used`, FACT_COLS, (t) => mine(t).map((f) => factRow(f.source, f.page, f)),
@@ -442,7 +443,7 @@ export const RECORDS = {
   },
 };
 
-// One table per node the step reads, in the map's order, then its output. rows is null when the trace lacks a record
+// A step shows one table per input, in the map's order, then its output. rows is null when the trace lacks a record
 // the table needs, and empty when a record says no step touched the cell.
 export const records = (step, trace, sheet = trace?.cell?.sheet) => [...inputs(step), step.to].map((id, i) => {
   const r = RECORDS[step.id][id];

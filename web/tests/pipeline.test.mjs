@@ -102,6 +102,10 @@ test("highlighted rows exist in the step's own tables", () => {
   }
 });
 
+test("every table a step reads or writes has example rows", () => {
+  for (const s of STEPS) for (const id of [...inputs(s), s.to]) assert.ok(NODES[id].table ?? NODES[id].text, `${s.id} ${id}`);
+});
+
 test("each step highlights the example's rows in its first input and its output", () => {
   for (const s of STEPS) for (const id of [s.from, s.to]) assert.ok(s.example.highlight[id]?.length, `${s.id} ${id}`);
 });
