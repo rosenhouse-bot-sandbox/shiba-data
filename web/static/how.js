@@ -97,7 +97,7 @@ function lens(step, link, terms, example, trace, sheet) {
   const chips = (near, cls, text) => near.length ? el("div", { class: `how-chips ${cls}` },
     ...near.map((s) => el("a", { href: link(s) }, text(s.label)))) : null;
   const end = (id) => el("div", { class: `how-end store-${NODES[id].store}` },
-    el("small", {}, store(id).label), el("code", {}, example ? shown(id).name : label(id, sheet)));
+    el("small", {}, store(id).label), el("code", {}, example ? linked(shown(id).name, shown(id).href) : label(id, sheet)));
   const fromTo = example ? [example.before, example.after] : strip(step, trace);
   const live = records(step, trace);
   const para = (p) => el("p", {}, ...p.map((s) => typeof s === "string" ? s : term(terms[s[0]], s[1])));
@@ -211,9 +211,11 @@ function table(role, name, note, cols, body, highlight) {
   const hi = new Set(highlight);
   return frame(role, name, note, el("table", {},
     el("thead", {}, el("tr", {}, ...cols.map((c) => el("th", {}, c)))),
-    el("tbody", {}, ...(body.length ? body.map((r, i) => el("tr", hi.has(i) ? { class: "hi" } : {}, ...r.map((c) => el("td", {}, c))))
+    el("tbody", {}, ...(body.length ? body.map((r, i) => el("tr", hi.has(i) ? { class: "hi" } : {}, ...r.map((c) => el("td", {}, c?.href ? linked(c.text, c.href) : c))))
       : [el("tr", {}, el("td", { colspan: cols.length }, "none"))]))));
 }
+
+const linked = (text, href) => href ? el("a", { href, target: "_blank", rel: "noopener" }, text) : text;
 
 const frame = (role, name, note, body) => el("div", { class: `how-rows ${role.toLowerCase()}` },
   el("div", { class: "how-rows-head" }, el("strong", {}, role), el("code", {}, name), el("span", {}, note)),

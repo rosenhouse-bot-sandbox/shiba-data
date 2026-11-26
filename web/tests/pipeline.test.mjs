@@ -72,6 +72,7 @@ test("a step's inputs join at its one label, which points to its output", () => 
   assert.deepEqual(inputs(stepById("find-pdfs")), ["links", "plans", "found"]);
   assert.deepEqual(inputs(stepById("sheet")), ["facts", "cmsFacts"]);
   assert.deepEqual(inputs(stepById("publish")), ["sheet", "presented", "notes"]);
+  assert.deepEqual(inputs(stepById("read-facts")), ["text", "prompt"]);
   for (const s of STEPS.filter((s) => inputs(s).length > 1)) {
     const p = pillBox(s), top = [p.x + p.w / 2, p.y], bottom = [p.x + p.w / 2, p.y + p.h];
     const ins = paths(s).filter((e) => !e.arrow), [out] = paths(s).filter((e) => e.arrow);
@@ -132,6 +133,7 @@ test("a node links to its data where the data has a URL", () => {
     plans: null, documents: null, checked: `${blob}/generated/documents_checked.csv`, text: null,
     sheet: "tables/2027/abc123/dvha.json", answers: null, facts: null, presented: "tables/2027/abc123/presented.json",
     cmsFacts: null, notes: `${blob}/comments.csv`, site: "#/2027/dvha/H1-1-0/vision",
+    prompt: "https://github.com/rosenhouse-bot-sandbox/shiba-data/blob/abc123/pipeline/fact_prompt.md",
   });
 });
 
@@ -198,7 +200,7 @@ test("a step whose record the trace lacks, or that has no strip, gets none", () 
 const replay = JSON.parse(fs.readFileSync(new URL("./fixtures/replay_trace.json", import.meta.url)));
 
 test("a replayed trace writes the fact steps' strips", () => {
-  assert.deepEqual(strip(stepById("read-facts"), replay), ["SB and EOC page text", "4 saved answers from claude-opus-5-5"]);
+  assert.deepEqual(strip(stepById("read-facts"), replay), ["SB and EOC page text", "2 saved answers from claude-opus-5-5"]);
   assert.deepEqual(strip(stepById("check-facts"), replay), ["8 facts", "7 kept, 1 rejected"]);
   assert.deepEqual(strip(stepById("column-rules"), replay), ["5 facts used, 2 set aside", "line 1 $325 or 20%; line 2 $325"]);
 });
@@ -227,17 +229,27 @@ test("every step shows a replayed cell's input and output rows", () => {
 test("a step shows the tables whose records the trace has", () => {
   const unread = { ...replay, answers: { status: "not_recorded" } };
   assert.deepEqual(records(stepById("read-facts"), unread).map((r) => r.name), ["page text"]);
+  assert.deepEqual(records(stepById("read-facts"), replay).map((r) => r.name), ["page text", "reader prompts", "answers/*.json"]);
   assert.deepEqual(records(stepById("find-pdfs"), { ...replay, plan: { status: "none" } }).map((r) => r.name), ["URLs offered", "documents"]);
 });
 
-test("Read facts lists only the reader prompts' answers", () => {
-  const [, answers] = records(stepById("read-facts"), replay);
+test("Read facts lists only the reader prompts and their answers", () => {
+  const [, prompts, answers] = records(stepById("read-facts"), replay);
+  assert.deepEqual(prompts.rows, [["EOC", "ambulance", "226ee67e4a27f3e7…"], ["SB", "ambulance", "6761dbbfbd4ec26b…"]]);
   assert.deepEqual(answers.rows.map((r) => r.slice(2)), [["EOC", "ambulance"], ["SB", "ambulance"]]);
 });
 
-test("Extract page text outputs the text files, named by the text's hash", () => {
-  const [, text] = records(stepById("extract-text"), replay);
-  assert.deepEqual(text.rows.map((r) => r[2]), replay.documents.documents.map((d) => `${d.text.layout.slice(0, 16)}…`));
+test("Extract page text outputs the text files, named by the text's hash and linked to their blobs", () => {
+  const [pdfs, text] = records(stepById("extract-text"), replay);
+  const docs = replay.documents.documents;
+  assert.deepEqual(text.rows.map((r) => r[2]), docs.map((d) => ({ text: `${d.text.layout.slice(0, 16)}…`, href: `blobs/${d.text.layout}.txt` })));
+  assert.deepEqual(pdfs.rows.map((r) => r[1]), docs.map((d) => ({ text: `${d.sha256.slice(0, 16)}…`, href: `docs/${d.sha256}.pdf` })));
+});
+
+test("the example's page text links to its blob", () => {
+  const { name, href } = NODES.text.text;
+  assert.equal(href, `blobs/${replay.documents.documents[0].text.layout}.txt`);
+  assert.ok(href.startsWith(`blobs/${name.replace(".txt", "")}`));
 });
 
 test("Publish outputs only the shown citations, naming each document", () => {
@@ -278,29 +290,71 @@ const lines = (id, t = replay) => details(stepById(id), t).map((l) => l.text);
 
 test("Claude reads facts links each reader prompt", () => {
   assert.deepEqual(details(stepById("read-facts"), replay), [
-    { text: "EOC reader prompt, answered by claude-opus-5-5", href: `${BLOBS}226ee67e4a27f3e7c117e6aa8e197a07423fac0b4d1fe9b6d6033e8602313064.txt` },
-    { text: "SB reader prompt, answered by claude-opus-5-5", href: `${BLOBS}6761dbbfbd4ec26bccf84990d6d9db9b6ff67e7aa12674da3851203ab390d96b.txt` },
+    { text: "EOC reader prompt for the ambulance group, answered by claude-opus-5-5", href: `${BLOBS}226ee67e4a27f3e7c117e6aa8e197a07423fac0b4d1fe9b6d6033e8602313064.txt` },
+    { text: "SB reader prompt for the ambulance group, answered by claude-opus-5-5", href: `${BLOBS}6761dbbfbd4ec26bccf84990d6d9db9b6ff67e7aa12674da3851203ab390d96b.txt` },
   ]);
 });
 
-// The replayed trace with one more answer whose prompts sit in the given dirs and tasks.
+// The replayed trace with one more answer from model m. A prompt is [dir, task], plus its hash when it differs from the task.
 const withPrompts = (...prompts) => ({ ...replay, answers: { ...replay.answers, rows: [...replay.answers.rows,
-  { model: "m", prompts: prompts.map(([dir, task]) => ({ dir, task, prompt: task, url: task })) }] } });
+  { model: "m", prompts: prompts.map(([dir, task, prompt = task]) => ({ dir, task, prompt, url: prompt })) }] } });
 
-test("a prompt's label names its role, its document when known, and a retry", () => {
-  const t = withPrompts(["facts/a/reread", "ce13e925c0384896.retry.md"], ["facts/review", "v-0.md"],
-    ["facts/a/recheck", "v-0123456789abcdef.md"]);
-  assert.deepEqual(lines("read-facts", t).slice(2), ["SB second reader prompt, retried, answered by m"]);
-  assert.deepEqual(lines("check-facts", t).slice(-2), ["reviewer prompt, answered by m",
-    "second verifier prompt, answered by m"]);
+test("a prompt's label names its role, its document when known, its group and a retry", () => {
+  const t = withPrompts(["facts/a/reread", "ce13e925c0384896.retry.md"], ["facts/a/recheck", "v-0123456789abcdef.md"]);
+  assert.deepEqual(lines("read-facts", t).slice(2), ["SB second reader prompt for the a group, retried, answered by m"]);
+  assert.deepEqual(lines("check-facts", t).slice(-1), ["second verifier prompt for the a group, answered by m"]);
+});
+
+test("an answer links once to a prompt that its inherited task repeats", () => {
+  const [answer] = replay.answers.rows;
+  const [eoc] = answer.prompts;
+  const inherited = { ...eoc, dir: "facts/inherited/ambulance/read" };
+  const t = { ...replay, answers: { ...replay.answers, rows: [{ ...answer, prompts: [inherited, eoc] }, ...replay.answers.rows.slice(1)] } };
+  assert.deepEqual(details(stepById("read-facts"), t), details(stepById("read-facts"), replay));
+  assert.equal(records(stepById("read-facts"), t)[1].rows.length, 2);
+});
+
+test("an inherited prompt that differs from the version's own says so", () => {
+  const t = withPrompts(["facts/inherited/a/read", "ce13e925c0384896.md", "p1"], ["facts/a/read", "ce13e925c0384896.md", "p2"]);
+  assert.deepEqual(lines("read-facts", t).slice(2), ["SB reader prompt for the a group, inherited, answered by m",
+    "SB reader prompt for the a group, answered by m"]);
+});
+
+test("a reviewer prompt names the fact it reviews, even when a verifier sent the same prompt", () => {
+  const [row] = replay.fact_checks.rows;
+  const reviewed = { ...row, reviewer: { status: "traced", prompt: "r1", ok: true, reason: "Fine." } };
+  const verifier = { model: "v", prompts: [{ dir: "facts/a/check", task: "v-1.md", prompt: "r1", url: "r1" }] };
+  const t = { ...withPrompts(["facts/review", "v-1.md", "r1"]), fact_checks: { status: "traced", rows: [reviewed] } };
+  t.answers = { ...t.answers, rows: [...t.answers.rows, verifier] };
+  assert.deepEqual(lines("check-facts", t).slice(-2), ["reviewer prompt for EOC page 46, ambulance.ground $325 (Emergency Ambulance), answered by m",
+    "verifier prompt for the a group, answered by v"]);
+});
+
+test("links with the same text to different prompts add each prompt's hash", () => {
+  const [row] = replay.fact_checks.rows;
+  const reviewed = (prompt) => ({ ...row, reviewer: { status: "traced", prompt, ok: true, reason: "Fine." } });
+  const t = { ...withPrompts(["facts/review", "v-1.md", "1111111111111111"], ["facts/review", "v-2.md", "2222222222222222"],
+    ["facts/a/read", "x.md"], ["facts/a/read", "x.retry.md"]),
+  fact_checks: { status: "traced", rows: [reviewed("1111111111111111"), reviewed("2222222222222222")] } };
+  assert.deepEqual(lines("check-facts", t).slice(-2), [
+    "reviewer prompt for EOC page 46, ambulance.ground $325 (Emergency Ambulance) 11111111, answered by m",
+    "reviewer prompt for EOC page 46, ambulance.ground $325 (Emergency Ambulance) 22222222, answered by m"]);
+  assert.deepEqual(lines("read-facts", t).slice(-2), ["reader prompt for the a group, answered by m", "reader prompt for the a group, retried, answered by m"]);
+});
+
+test("Claude reads facts counts only reader answers", () => {
+  const checks = { ...replay, answers: { ...replay.answers, rows: replay.answers.rows.filter((a) => a.prompts.every((p) => !p.dir.endsWith("/read"))) } };
+  assert.deepEqual(strip(stepById("read-facts"), withPrompts(["facts/a/read", "x.md"])), ["SB and EOC page text", "3 saved answers from claude-opus-5-5 and m"]);
+  assert.deepEqual(strip(stepById("read-facts"), checks), ["SB and EOC page text", "no saved answers"]);
 });
 
 test("Check facts gives each fact's verdicts", () => {
   const got = lines("check-facts");
   assert.equal(got.length, 8 + 2);
-  assert.equal(got[0], "Kept: EOC page 46, ambulance.ground $325. Verifier agreed: Page 46 ambulance row, In-Network, Emergency Ambulance: $325 copayment per date of service for Ground Ambulance.");
+  assert.equal(got[0], "Kept: EOC page 46, ambulance.ground $325 (Emergency Ambulance). Verifier agreed: Page 46 ambulance row, In-Network, Emergency Ambulance: $325 copayment per date of service for Ground Ambulance.");
   assert.match(got[7], /^Rejected: SB page 6, ambulance \$325\. Verifier disagreed: The page 6 Worldwide Coverage/);
-  assert.deepEqual(got.slice(8), ["EOC verifier prompt, answered by claude-opus-5-5", "SB verifier prompt, answered by claude-opus-5-5"]);
+  assert.deepEqual(got.slice(8), ["EOC verifier prompt for the ambulance group, answered by claude-opus-5-5",
+    "SB verifier prompt for the ambulance group, answered by claude-opus-5-5"]);
 });
 
 test("a fact that failed its quote check names its document from the prompt that stated it, and the reviewer's verdict shows", () => {
@@ -314,7 +368,7 @@ test("a fact that failed its quote check names its document from the prompt that
 
 test("Column rules lists the facts each line used and why others were set aside", () => {
   const got = lines("column-rules");
-  assert.ok(got.includes("Line 2 ($325) used EOC page 46, ambulance $325"));
+  assert.ok(got.includes("Line 2 ($325) used EOC page 46, ambulance $325 (Emergency Ambulance)"));
   assert.ok(got.includes("Set aside SB page 9, ambulance.air 20%: SB ranks below EOC"));
 });
 

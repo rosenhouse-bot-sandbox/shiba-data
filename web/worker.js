@@ -1,5 +1,5 @@
 // Serves each plan PDF from the R2 bucket, where the Pipeline workflow stores it as blobs/<sha256>.
-// /blobs/<sha256>.txt serves a model prompt, which the Pipeline workflow stores the same way.
+// /blobs/<sha256>.txt serves a model prompt or page text, which the Pipeline workflow stores the same way.
 // The static site comes from the assets directory.
 // CI downloads every blob through this route too, so it needs no R2 credentials.
 // /trace/2027/<sheet>/<plan_id>/<col> serves a cell's trace from D1 once every cell of the deployed commit's build has
