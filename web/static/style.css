@@ -164,7 +164,6 @@ td.selected { outline: 3px solid var(--ink); outline-offset: -3px; }
 .how-pill.on { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
 .how-legend { font-size: 11px; color: var(--muted); margin: 8px 0 0; display: flex; flex-wrap: wrap; gap: 2px 12px; }
 .how-legend b { font-size: 10px; letter-spacing: .05em; text-transform: uppercase; }
-/* Only the edge zooms in: a transform on the lens would anchor its fixed pop-overs to it. */
 .how-lens { flex: 1; min-width: 0; overflow-y: auto; padding: 18px 28px 32px; background: var(--subtle); animation: how-fade .4s both; }
 @keyframes how-fade { from { opacity: 0; } }
 .how-chips { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -172,7 +171,7 @@ td.selected { outline: 3px solid var(--ink); outline-offset: -3px; }
 .how-chips.before a { border: 1px dashed var(--faint); color: var(--muted); }
 .how-chips.after { margin-top: 16px; }
 .how-chips.after a { border: 1px solid var(--accent); background: var(--page); font-weight: 600; }
-.how-step:focus { outline: 2px solid var(--ink); outline-offset: 2px; }
+.how-step:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .how-step { display: inline-block; margin: 0 0 8px; font-size: 18px; }
 .how-source { padding: 0; border: 0; background: none; font: inherit; color: var(--accent); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
 .how-card { padding: 14px 18px; background: var(--page); border: 1px solid var(--line); border-radius: 12px; margin-bottom: 16px; }

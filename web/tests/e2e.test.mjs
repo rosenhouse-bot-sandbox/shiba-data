@@ -1019,12 +1019,12 @@ test("pipeline view: a step with two inputs lights both and joins them at its on
   assert.equal(await page.locator(".how-edge[marker-end]").count(), 10);
 });
 
-test("pipeline view: a step's boxes say where their data lives and open it in a new tab when it has a URL", async () => {
+test("pipeline view: a table heading says where its data lives and opens it in a new tab when it has a URL", async () => {
   await openHow(page, "main/H1036-153-0/ambulance/find-pdfs");
   const head = (name) => page.locator(".how-rows-head", { has: page.locator(`code:text-is("${name}")`) });
   const source = (name) => head(name).locator(".how-source");
   assert.equal(await head("links").locator(".how-store").textContent(), "In git");
-  assert.equal(await source("links").getAttribute("aria-label"), "links, In git, opens in a new tab");
+  assert.equal(await source("links").getAttribute("aria-label"), "links, opens in a new tab");
   assert.match(await source("links").getAttribute("href"), /^https:\/\/github\.com\/.+\/blob\/[0-9a-f]{40}\/data\/2027\/links\.csv$/);
   assert.equal(await source("links").getAttribute("target"), "_blank");
   assert.equal(await source("plans").count(), 0);
@@ -1038,7 +1038,7 @@ test("pipeline view: the map's boxes open nothing", async () => {
   assert.equal(await page.locator(".how-map :is(a, button):not(.how-pill)").count(), 0);
 });
 
-test("pipeline view: a CMS box warns before it downloads a zip file", async () => {
+test("pipeline view: a CMS table heading warns before it downloads a zip file", async () => {
   await openHow(page, "main/H1036-153-0/ambulance/cms-facts");
   const url = page.url();
   await page.locator(".how-rows-head .how-source", { has: page.locator('code:text-is("CMS PBP tables")') }).click();
@@ -1048,6 +1048,19 @@ test("pipeline view: a CMS box warns before it downloads a zip file", async () =
   assert.equal(page.url(), url);
   await page.keyboard.press("Escape");
   assert.equal(await warning.count(), 0);
+});
+
+test("pipeline view: the CMS download warning closes when the detail scrolls", async () => {
+  await page.setViewportSize({ width: 1300, height: 500 });
+  try {
+    await openHow(page, "main/H1036-153-0/ambulance/cms-facts");
+    await page.locator(".how-rows-head .how-source", { has: page.locator('code:text-is("CMS PBP tables")') }).click();
+    assert.equal(await page.locator(".how-download:popover-open").count(), 1);
+    await page.locator(".how-lens").evaluate((e) => e.scrollBy(0, 100));
+    await page.waitForFunction(() => !document.querySelector(".how-download:popover-open"));
+  } finally {
+    await page.setViewportSize({ width: 1600, height: 1000 });
+  }
 });
 
 test("pipeline view: Find PDFs shows the URLs each source offered the plan and marks the winners", async () => {
@@ -1376,6 +1389,15 @@ test("phone: the Notes filter shows one kind", async () => {
   await p.selectOption("#kind-filter", "caveat");
   const kinds = await p.locator(".notes tbody tr:visible").evaluateAll((rows) => [...new Set(rows.map((r) => r.dataset.kind))]);
   assert.deepEqual(kinds, ["caveat"]);
+});
+
+test("phone: the map scrolls sideways to show the step", async () => {
+  for (const s of STEPS) {
+    const p = await openPhone(`how/main/H1036-153-0/ambulance/${s.id}`);
+    const [rail, pill] = await Promise.all([p.locator(".how-map").boundingBox(), p.locator(".how-pill.on").boundingBox()]);
+    assert.ok(pill.x >= rail.x && pill.x + pill.width <= rail.x + rail.width, `${s.id}: ${JSON.stringify([rail, pill])}`);
+    await p.close();
+  }
 });
 
 test("phone: pipeline view boxes fit their text", async () => {

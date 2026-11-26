@@ -65,7 +65,7 @@ function map(step, link, sheet) {
       el("span", {}, el("b", { class: `store-${key}` }, s.label), s.note ? ` ${s.note}` : ""))));
 }
 
-// A CMS file is a large zip, so its box asks before it downloads.
+// A CMS file is a large zip, so its heading asks before it downloads. The pop-over closes when the page scrolls.
 function download(id, file, href) {
   const pop = el("div", { id, class: "how-download", popover: "" },
     el("p", {}, `This downloads the CMS ${file} file from cms.gov. It is a zip file of tens of megabytes.`),
@@ -76,6 +76,7 @@ function download(id, file, href) {
     pop.style.top = `${r.bottom + 4}px`;
     pop.style.left = `${Math.max(8, Math.min(r.left, innerWidth - 328))}px`;
   });
+  document.addEventListener("scroll", () => pop.matches(":popover-open") && pop.hidePopover(), true);
   return pop;
 }
 
@@ -92,10 +93,11 @@ function lens(step, link, terms, example, trace, at) {
     if (href && n.cms) {
       const warning = download(`how-download-${id}`, n.cms, href);
       downloads.push(warning);
-      return [where, el("button", { type: "button", class: "how-source", popovertarget: warning.id }, el("code", {}, name))];
+      return [where, el("button", { type: "button", class: "how-source", popovertarget: warning.id, "aria-label": `${name}, download from cms.gov` },
+        el("code", {}, name), " ↓")];
     }
     if (href) return [where, el("a", { class: "how-source", href, target: "_blank", rel: "noopener",
-      "aria-label": `${name}, ${store(id).label}, opens in a new tab` }, el("code", {}, name), " ↗")];
+      "aria-label": `${name}, opens in a new tab` }, el("code", {}, name), " ↗")];
     return [where, el("code", {}, name)];
   };
   const fromTo = example ? [example.before, example.after] : strip(step, trace);
@@ -220,5 +222,5 @@ function table(role, head, note, cols, body, highlight) {
 const linked = (text, href) => href ? el("a", { href, target: "_blank", rel: "noopener" }, text) : text;
 
 const frame = (role, head, note, body) => el("div", { class: `how-rows ${role.toLowerCase()}` },
-  el("div", { class: "how-rows-head" }, el("strong", {}, role), ...head, el("span", { class: "how-note" }, note)),
+  el("div", { class: "how-rows-head" }, el("strong", {}, role), ...head, el("span", {}, note)),
   body ? el("div", { class: "how-scroll" }, body) : null);
