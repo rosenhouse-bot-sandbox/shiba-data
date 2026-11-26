@@ -49,7 +49,7 @@ flowchart TD
   carriers[(Carrier websites)] --> find[2. Find each plan's PDFs]
   plans --> find
   find --> text[3. Download PDFs, extract page text]
-  cms --> cmsfacts[4. Facts from CMS data]
+  cms --> cmsfacts[4. Read facts from CMS data]
   text --> read[5. Claude reads facts from the PDFs]
   read --> check[6. Code and Claude check each fact]
   check --> present[7. Rules turn facts into values]
@@ -133,7 +133,7 @@ Then code turns each page into text that keeps the page's columns. Models read t
 
 The PDFs, texts and CMS files are stored in a Cloudflare R2 bucket, named by hash, so every later run reads the same bytes.
 
-## 4. Facts from CMS data
+## 4. Read facts from CMS data
 
 Plan documents rarely state some values, such as a $0 deductible. Code turns the plan's Landscape and PBP fields into facts whose source is `Landscape` or `PBP`. These rank below every document, so a rule uses one only when no document gives the value. Our plan's CMS facts in `generated/pbp_facts.csv`, selected rows and columns:
 

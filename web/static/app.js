@@ -183,7 +183,12 @@ async function routeHow(state) {
   const rail = content.querySelector(".how-map");
   rail.scrollTop = mapTop;
   const shown = rail.getBoundingClientRect(), pill = rail.querySelector(".how-pill.on").getBoundingClientRect();
-  if (pill.top < shown.top || pill.bottom > shown.bottom) rail.scrollTop += pill.top - shown.top - (shown.height - pill.height) / 2;
+  // Show the step's label and every table it reads and writes when they fit, or else the label and its outputs.
+  const lit = [pill, ...[...rail.querySelectorAll(".how-node.on")].map((n) => n.getBoundingClientRect())];
+  const span = (boxes) => ({ top: Math.min(...boxes.map((b) => b.top)), bottom: Math.max(...boxes.map((b) => b.bottom)) });
+  let want = span(lit);
+  if (want.bottom - want.top > shown.height) want = span(lit.filter((b) => b.top >= pill.top));
+  if (want.top < shown.top || want.bottom > shown.bottom) rail.scrollTop += (want.top + want.bottom - shown.top - shown.bottom) / 2;
   if (pill.left < shown.left || pill.right > shown.right) rail.scrollLeft += pill.left - shown.left - (shown.width - pill.width) / 2;
   if (map) content.querySelector(".how-step").focus({ preventScroll: true });
 }

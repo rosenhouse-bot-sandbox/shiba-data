@@ -231,7 +231,7 @@ const PBP_FACT = { ...replay.rule.set_aside[0], benefit: "medical_deductible", c
   page: "", quotes: '["pbp_d_inn_deduct_yn"]', reasons: ["not this column"] };
 const withCms = { ...replay, rule: { ...replay.rule, set_aside: [...replay.rule.set_aside, PBP_FACT] } };
 
-test("CMS facts shows the column's CMS facts and the fields behind them", () => {
+test("Read CMS fields shows the column's CMS facts and the fields behind them", () => {
   const [fields, plan, facts] = records(stepById("cms-facts"), withCms);
   assert.deepEqual(fields.rows, [["medical_deductible", "pbp_d_inn_deduct_yn"]]);
   assert.deepEqual(plan.rows, [["H1036-153-0", "$0", "$0", "$700"]]);
@@ -290,7 +290,7 @@ test("Check facts marks the kept facts and outputs only those", () => {
   assert.deepEqual(kept.rows.map((r) => r.slice(2)), stated.hi.map((i) => stated.rows[i].slice(2)));
 });
 
-test("Column rules marks the facts its lines used", () => {
+test("Apply column rules marks the facts its lines used", () => {
   const [facts, , cms, cited] = records(stepById("column-rules"), withCms);
   assert.equal(facts.rows.length, 7);
   assert.deepEqual(facts.hi, [0, 1, 2, 3, 4]);
@@ -393,7 +393,7 @@ const blob = "https://github.com/rosenhouse-bot-sandbox/shiba-data/blob/x/pipeli
 const CODE = [{ name: "AB_ambulance in COLUMNS", url: `${blob}#L1626-L1626` }, { name: "ambulance", url: `${blob}#L243-L268` }];
 const ruleTable = (id, t = replay) => records(stepById("column-rules"), t, "main", CODE).find((r) => r.node === id);
 
-test("Column rules lists the facts each line used, then those set aside and why", () => {
+test("Apply column rules lists the facts each line used, then those set aside and why", () => {
   const facts = ruleTable("facts");
   const at = (line, page, benefit) => facts.rows.findIndex((r) => r[0] === line && r[2] === page && r[3] === benefit);
   const used = at("2", "46", "ambulance"), aside = at("", "9", "ambulance.air");
@@ -403,14 +403,14 @@ test("Column rules lists the facts each line used, then those set aside and why"
   assert.ok(facts.hi.every((i) => facts.rows[i][0] !== ""));
 });
 
-test("Column rules links the rule's code, and shows the example's without links", () => {
+test("Apply column rules links the rule's code, and shows the example's without links", () => {
   assert.equal(records(stepById("column-rules"), replay, "main").find((r) => r.node === "rules").rows, null);
   assert.deepEqual(ruleTable("rules").rows, [
     ["AB_ambulance in COLUMNS", { text: "present.py line 1626", href: `${blob}#L1626-L1626` }],
     ["ambulance", { text: "present.py lines 243–268", href: `${blob}#L243-L268` }]]);
 });
 
-test("Column rules writes the sheet's value and the citations", () => {
+test("Apply column rules writes the sheet's value and the citations", () => {
   assert.deepEqual(ruleTable("sheet").rows, [[replay.cell.plan_id, replay.cell.col, "$325 or 20% | $325"]]);
   assert.ok(ruleTable("presented").rows.length);
 });
