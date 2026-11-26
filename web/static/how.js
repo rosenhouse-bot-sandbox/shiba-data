@@ -2,7 +2,7 @@
 import { el, svg } from "./dom.js";
 import { format } from "./permalink.js";
 import {
-  EXAMPLE, NODES, STEPS, SHEET_FILES, inputs, NODE_W, NODE_H, MAP_W, MAP_H,
+  EXAMPLE, NODES, STEPS, SHEET_FILES, inputs, NODE_W, NODE_H, RING, MAP_W, MAP_H,
   nodeBox, pillBox, paths, before, after, strip, details, records,
 } from "./pipeline.js";
 
@@ -61,7 +61,7 @@ function map(step, link, sheet) {
   return el("section", { class: "how-map", "aria-label": "Tables and steps" },
     el("h2", {}, "Tables and steps"),
     el("div", { class: "how-frame", style: `width:${RAIL_W}px;height:${Math.ceil(MAP_H * SCALE)}px` },
-      el("div", { class: "how-world", style: `width:${MAP_W}px;height:${MAP_H}px;transform:scale(${SCALE})` }, lines, ...nodes, ...pills)),
+      el("div", { class: "how-world", style: `width:${MAP_W}px;height:${MAP_H}px;--ring:${RING}px;transform:scale(${SCALE})` }, lines, ...nodes, ...pills)),
     el("p", { class: "how-legend" },
       el("span", { class: "source" }, "■"), " source ", el("span", {}, "■"), " table the pipeline writes"));
 }

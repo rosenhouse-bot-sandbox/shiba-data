@@ -6,7 +6,7 @@ import http from "node:http";
 import fs from "node:fs";
 import path from "node:path";
 import { chromium, devices } from "playwright";
-import { STEPS } from "../static/pipeline.js";
+import { STEPS, MIN_GAP } from "../static/pipeline.js";
 
 const { SITE, DOCS, FAILURES } = process.env;
 const TYPES = { ".html": "text/html", ".js": "text/javascript", ".mjs": "text/javascript", ".css": "text/css", ".json": "application/json", ".pdf": "application/pdf" };
@@ -1034,6 +1034,31 @@ test("pipeline view: at phone width the lens sits below the map at full width", 
     assert.ok(lens.width > 350, `lens is ${lens.width}px wide`);
   } finally {
     await page.setViewportSize({ width: 1600, height: 1000 });
+  }
+});
+
+test("pipeline view: at every width, boxes on the map above one another keep a minimum gap, counting a selected node's ring", async () => {
+  for (const width of [1600, 900, 390]) {
+    await page.setViewportSize({ width, height: 1000 });
+    try {
+      await openHow(page, "main/H1036-153-0/ambulance/list-plans");
+      const boxes = await page.$$eval(".how-node, .how-pill", (els) => {
+        const ring = Math.max(...[...document.querySelectorAll(".how-node.on")].map((e) =>
+          Number(getComputedStyle(e).boxShadow.match(/0px 0px 0px ([\d.]+)px/)?.[1] ?? 0)));
+        const scale = document.querySelector(".how-world").getBoundingClientRect().width / document.querySelector(".how-world").offsetWidth;
+        return els.map((e) => {
+          const r = e.getBoundingClientRect(), pad = e.matches(".how-node") ? ring * scale : 0;
+          return { name: e.textContent, x: r.x - pad, y: r.y - pad, w: r.width + 2 * pad, h: r.height + 2 * pad };
+        });
+      });
+      for (const [i, a] of boxes.entries()) for (const b of boxes.slice(i + 1)) {
+        if (a.x >= b.x + b.w || b.x >= a.x + a.w) continue;
+        const gap = Math.max(b.y - (a.y + a.h), a.y - (b.y + b.h));
+        assert.ok(gap >= MIN_GAP, `${width}px wide: ${a.name} and ${b.name} are ${gap.toFixed(1)}px apart`);
+      }
+    } finally {
+      await page.setViewportSize({ width: 1600, height: 1000 });
+    }
   }
 });
 

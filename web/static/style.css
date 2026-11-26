@@ -148,7 +148,7 @@ td.selected { outline: 3px solid var(--ink); outline-offset: -3px; }
 .how-arrow.off { fill: var(--faint); }
 .how-arrow.on { fill: var(--accent); }
 .how-node { position: absolute; padding: 8px 10px; border: 1.5px solid var(--line); border-radius: 9px; background: var(--page); opacity: .85; }
-.how-node.on { border-color: var(--accent); background: var(--hover); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 14%, transparent); opacity: 1; }
+.how-node.on { border-color: var(--accent); background: var(--hover); box-shadow: 0 0 0 var(--ring) color-mix(in srgb, var(--accent) 14%, transparent); opacity: 1; }
 .how-node small, .how-end small { display: block; font-size: 9.5px; letter-spacing: .05em; text-transform: uppercase; font-weight: 600; color: var(--accent); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .how-node.source small, .how-end.source small, .how-legend .source { color: var(--source); }
 .how-node code { display: block; font-size: 10.5px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
