@@ -15,21 +15,21 @@ export const NODES = {
       rows: [["H1036-153-0", "SB", "https://assets.humana.com/is/content/humana/H1036153000SB27pdf"],
         ["H1036-153-0", "EOC", "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf"]] } },
   found: { col: 2, row: 1, kind: "browser finds", source: true, label: "found.csv" },
-  pbp: { col: 2, row: 6, kind: "CMS source", source: true, label: "PBP tables",
+  pbp: { col: 2, row: 5, kind: "CMS source", source: true, label: "PBP tables",
     table: { name: "pbp_Section_D.txt", note: "the plan's deductible fields, which become facts the rules read; the ambulance rule reads none",
       cols: ["bid_id", "pbp_d_inn_deduct_yn"], rows: [["H1036_153_0", "2"]] } },
   plans: { col: 0, row: 1, kind: "table", label: "plans.csv",
     table: { name: "generated/plans.csv", note: "39 rows", cols: ["plan_id", "plan_name", "plan_type", "organization", "premium", "moop_in_network"],
       rows: [["H1036-153-0", "Humana Total Complete (HMO)", "HMO", "Humana", "$0", "$5,150"]] } },
-  documents: { col: 1, row: 3, kind: "table", label: "documents.csv",
+  documents: { col: 1, row: 2, kind: "table", label: "documents.csv",
     table: { name: "generated/documents.csv", note: "one URL per plan and kind", cols: ["plan_ids", "kind", "url", "found_via"],
       rows: [["H1036-153-0", "SB", "…/H1036153000SB27pdf", "volunteers' Links sheet"],
         ["H1036-153-0", "EOC", "…/H1036153000EOC27pdf", "volunteers' Links sheet"]] } },
-  checked: { col: 1, row: 4, kind: "table", label: "documents_checked",
+  checked: { col: 1, row: 3, kind: "table", label: "documents_checked",
     table: { name: "generated/documents_checked.csv", note: "selected columns", cols: ["plan_ids", "kind", "sha256", "pages", "cover_problems"],
       rows: [["H1036-153-0", "SB", "ce13e925c0384896d725da85a06c14df…", "24", ""],
         ["H1036-153-0", "EOC", "64e05773e847b56e0eeb5425979d5499…", "188", ""]] } },
-  text: { col: 1, row: 5, kind: "files in R2", source: true, label: "page text",
+  text: { col: 1, row: 4, kind: "files in R2", source: true, label: "page text",
     text: { name: "6ebca98d895a45b3.txt", note: "SB page 9",
       href: "blobs/6ebca98d895a45b3d8c15ea4fd6a6052d6a31ade9374ff3cdfe194d957f8c1b7.txt",
       lines: ["=====PAGE 9=====", " SKILLED NURSING FACILITY (SNF)",
@@ -37,16 +37,21 @@ export const NODES = {
         " Air                                             20% of the cost",
         " Ground                                          $325 copay per date of service",
         " TRANSPORTATION                                  Not Covered"] } },
-  sheet: { col: 2, row: 9, kind: "table", label: "main_chart.csv",
+  prompt: { col: 0, row: 4, kind: "template", source: true, label: "fact_prompt.md",
+    text: { name: "pipeline/fact_prompt.md", note: "the reader prompt's template",
+      lines: ["# Task", "", "You help Medicare counselors compare plans. Read the pages below from a plan's {KIND} for plan year {YEAR},",
+        "and list every benefit fact they state about the benefits named below. A wrong fact is much worse than a missing one.",
+        "", "The document covers these plans:", "{PLANS}", "…", "{VOCABULARY}"] } },
+  sheet: { col: 2, row: 7, kind: "table", label: "main_chart.csv",
     table: { name: "generated/main_chart.csv", note: "every rule's value, selected columns", cols: ["plan_id", "plan_name", "AB_ambulance"],
       rows: [["H1036-153-0", "Humana Total Complete (HMO)", "$325 or 20% | $325"]] } },
-  answers: { col: 0, row: 6, kind: "model answers", source: true, label: "answers/*.json",
+  answers: { col: 0, row: 5, kind: "model answers", source: true, label: "answers/*.json",
     text: { name: "answers/e920fcee050a431f.json", note: "Claude Opus, high effort · 3,479 in / 954 out tokens",
       lines: [
         '[{"benefit": "ambulance.air", "setting": "any", "network": "in", "cost_kind": "coinsurance", "amount": "20%", "page": 9, "quotes": ["20% of the cost"]},',
         ' {"benefit": "ambulance.ground", "setting": "any", "network": "in", "cost_kind": "copay", "amount": "$325", "page": 9, "quotes": ["$325 copay per date of service"]},',
         ' {"benefit": "ambulance", "setting": "outside_us", "covered_by": "medicare", "amount": "$325", "page": 6, "quotes": ["Emergency ambulance: $325 copay per date of"]}]'] } },
-  facts: { col: 0, row: 7, kind: "table", label: "document_facts",
+  facts: { col: 0, row: 6, kind: "table", label: "document_facts",
     table: { name: "machine/document_facts.csv", note: "accepted facts, selected columns",
       cols: ["benefit", "setting", "network", "condition", "covered_by", "cost_kind", "amount", "source", "page"],
       rows: [["ambulance.ground", "any", "in", "Emergency Ambulance", "medicare", "copay", "$325", "EOC", "46"],
@@ -55,12 +60,12 @@ export const NODES = {
         ["ambulance", "outside_us", "out", "Emergency Ambulance", "supplemental", "copay", "$325", "EOC", "46"],
         ["ambulance.ground", "any", "in", "", "medicare", "copay", "$325", "SB", "9"],
         ["ambulance.air", "any", "in", "", "medicare", "coinsurance", "20%", "SB", "9"]] } },
-  presented: { col: 0, row: 9, kind: "table", label: "presented.csv",
+  presented: { col: 0, row: 7, kind: "table", label: "presented.csv",
     table: { name: "generated/presented.csv", note: "one row per citation", cols: ["plan_id", "column", "line", "value", "pdf_page", "quote"],
       rows: [["H1036-153-0", "AB_ambulance", "1", "$325 or 20%", "46", "In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance"],
         ["H1036-153-0", "AB_ambulance", "1", "$325 or 20%", "46", "… Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance"],
         ["H1036-153-0", "AB_ambulance", "2", "$325", "46", "Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance"]] } },
-  site: { col: 1, row: 11, kind: "website", source: true, label: "pdxplans.org",
+  site: { col: 1, row: 8, kind: "website", source: true, label: "pdxplans.org",
     text: { name: "pdxplans.org", note: "after a volunteer clicks the cell",
       lines: ["Humana Total Complete (HMO) · Ambulance", "  $325 or 20% | $325", "", "EOC page 46, highlighted in the PDF beside the sheet:",
         '  "In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number',
@@ -89,11 +94,11 @@ export const STEPS = [
   { id: "extract-text", record: "documents", from: "checked", to: "text", label: "Extract page text",
     paras: [["Code turns each page into ", ["layoutText", "text that keeps the page's columns"], ". The PDFs and texts are stored in R2, named by hash, so every later run reads the same bytes."]],
     example: { highlight: [[0], [3, 4, 5]], before: "PDF ce13e925…", after: "text of page 9", paras: [] } },
-  { id: "read-facts", record: "answers", from: "text", to: "answers", label: "Claude reads facts",
-    paras: [["The pipeline sends Claude Opus ", ["prompt", "one prompt"], " per document and benefit group. Claude answers with facts, each with its quotes and page."],
+  { id: "read-facts", record: "answers", from: "text", also: ["prompt"], to: "answers", label: "Claude reads facts",
+    paras: [["Code fills fact_prompt.md to make ", ["prompt", "one prompt"], " per document and benefit group. Claude Opus answers each with facts, each with its quotes and page."],
       ["The answer is ", ["hash", "saved under a hash of the model, effort and prompt"], ", so a rerun calls no model."]],
     example: { highlight: [[3, 4, 5], [0, 1, 2]], before: "Ground  $325 copay per date of service", after: "{benefit: ambulance.ground, amount: $325, page: 9}",
-      paras: [["For this SB and the ambulance group, Claude answers with three facts."]] } },
+      paras: [["The Ambulance column uses the ambulance and emergency groups, so Claude gets four prompts, one per group and document. For the SB and the ambulance group, Claude answers with three facts."]] } },
   { id: "check-facts", record: "fact_checks", from: "answers", to: "facts", label: "Check facts",
     paras: [["Code runs a ", ["quoteCheck", "quote check"], " on every fact. A verifier, Claude Opus, then judges each fact mixed with ", ["decoy", "decoys"], ". Last, a ", ["reviewer", "reviewer"], " checks each fact a value would cite."]],
     example: { highlight: [[2], [3, 4, 5]], before: "SB: abroad, covered_by medicare", after: "rejected; the EOC's supplemental fact stands",
@@ -122,17 +127,23 @@ export const PILL_H = 24;
 export const RING = 4;
 // The space above and below every label, outside any ring.
 export const MIN_GAP = 18;
+// The space edges get above a label where they merge, so they curve gently.
+export const MERGE_ROOM = 48;
 const COL_STEP = 138;
 const ROW_STEP = NODE_H + 2 * (RING + MIN_GAP) + PILL_H;
 const MARGIN = 10;
 
+// Rows that a merging step writes to are taller by the extra room its edges need.
+const mergeRows = new Set(STEPS.filter((s) => inputs(s).length > 1).map((s) => NODES[s.to].row));
+const rowY = (row) => MARGIN + row * ROW_STEP + [...mergeRows].filter((r) => r <= row).length * (MERGE_ROOM - MIN_GAP);
+
 export function nodeBox(id) {
   const n = NODES[id];
-  return { x: MARGIN + n.col * COL_STEP, y: MARGIN + n.row * ROW_STEP, w: NODE_W, h: NODE_H };
+  return { x: MARGIN + n.col * COL_STEP, y: rowY(n.row), w: NODE_W, h: NODE_H };
 }
 
 export const MAP_W = MARGIN * 2 + Math.max(...Object.values(NODES).map((n) => n.col)) * COL_STEP + NODE_W;
-export const MAP_H = MARGIN * 2 + Math.max(...Object.values(NODES).map((n) => n.row)) * ROW_STEP + NODE_H;
+export const MAP_H = MARGIN + rowY(Math.max(...Object.values(NODES).map((n) => n.row))) + NODE_H;
 
 // A vertical cubic curve between two points.
 function curve([x1, y1], [x2, y2]) {
@@ -149,11 +160,11 @@ function curve([x1, y1], [x2, y2]) {
 const bottom = (b) => [b.x + b.w / 2, b.y + b.h];
 const top = (b) => [b.x + b.w / 2, b.y];
 
-// A one-input step's label sits on its edge. Several inputs join at a label in the row gap above the output.
+// Every label sits MIN_GAP above its output. A one-input step's label is on its edge; several inputs join above the output.
 export function pillBox(step) {
   const to = nodeBox(step.to);
-  const [x, y] = inputs(step).length > 1 ? [to.x + to.w / 2, to.y - (ROW_STEP - NODE_H) / 2] : curve(bottom(nodeBox(step.from)), top(to)).at(0.5);
-  return { x: x - PILL_W / 2, y: y - PILL_H / 2, w: PILL_W, h: PILL_H };
+  const x = inputs(step).length > 1 ? to.x + to.w / 2 : curve(bottom(nodeBox(step.from)), top(to)).at(0.5)[0];
+  return { x: x - PILL_W / 2, y: to.y - RING - MIN_GAP - PILL_H, w: PILL_W, h: PILL_H };
 }
 
 // The lines a step draws. Only the one into the output gets an arrow.
@@ -186,6 +197,11 @@ function quotes(rows, trace) {
   return `${plural(rows.length, "quote")} from ${where.join("; ")}`;
 }
 
+function readerAnswers(t) {
+  const answers = uniquePrompts(t, true).map(({ answer }) => answer);
+  return answers.length ? `${plural(answers.length, "saved answer")} from ${listed([...new Set(answers.map((a) => a.model))])}` : "no saved answers";
+}
+
 // What each step took in and gave out for a cell, read from its trace.
 const STRIPS = {
   "list-plans": (t) => [`${t.plan.row.plan_id} in the Landscape file`, `plans.csv: ${t.plan.row.plan_name}`],
@@ -195,7 +211,7 @@ const STRIPS = {
     `${d.kind}, ${plural(d.pages, "page")}${d.cover_problems ? ", cover problems" : ""}`).join("; ")],
   "extract-text": (t) => [plural(t.documents.documents.length, "PDF"),
     `text of ${plural(t.documents.documents.reduce((n, d) => n + d.pages, 0), "page")}`],
-  "read-facts": (t) => [`${kinds(t)} page text`, `${plural(t.answers.rows.length, "saved answer")} from ${listed([...new Set(t.answers.rows.map((a) => a.model))])}`],
+  "read-facts": (t) => [`${kinds(t)} page text`, readerAnswers(t)],
   "check-facts": (t) => {
     const kept = t.fact_checks.rows.filter((r) => r.kept).length;
     return [plural(t.fact_checks.rows.length, "fact"), `${kept} kept, ${t.fact_checks.rows.length - kept} rejected`];
@@ -222,31 +238,59 @@ const PROMPT_ROLES = {
   review: "reviewer prompt",
 };
 const READING = ["read", "reread"];
+// A prompt's dir is facts/[inherited/]<group>/<role>, or facts/review.
+const roleOf = (p) => p.dir.split("/").at(-1);
+const groupOf = (p) => p.dir.split("/").length > 2 ? p.dir.split("/").at(-2) : null;
+const isReading = (p) => READING.includes(roleOf(p));
+
+const isInherited = (p) => p.dir.includes("/inherited/");
+
+// An inherited task can repeat its version's own prompt in the same answer, so each answer lists each prompt once.
+function uniquePrompts(t, reading) {
+  return t.answers.rows.flatMap((answer) => {
+    const own = new Map();
+    for (const p of answer.prompts.filter((p) => isReading(p) === reading)) {
+      if (!own.has(p.prompt) || !isInherited(p)) own.set(p.prompt, p);
+    }
+    return [...own.values()].map((p) => ({ p, answer }));
+  });
+}
+
+// What a prompt is, then the flags that follow it.
+function promptLabel(t, p) {
+  const kind = docKindOf(t, p.task);
+  const group = groupOf(p);
+  const reviewed = roleOf(p) === "review" && t.fact_checks.rows.find((r) => r.reviewer.prompt === p.prompt);
+  const what = `${kind ? `${kind} ` : ""}${PROMPT_ROLES[roleOf(p)] ?? "prompt"}${group ? ` for the ${group} group` : ""}`
+    + (reviewed ? ` for ${checkedFactLabel(t, reviewed)}` : "");
+  return [what, (p.task.includes(".retry.") ? ", retried" : "") + (isInherited(p) ? ", inherited" : "")];
+}
 
 function promptLinks(t, reading) {
   if (t.answers.status !== "traced") return [];
-  return t.answers.rows.flatMap((answer) => answer.prompts.map((p) => ({ p, answer })))
-    .filter(({ p }) => READING.includes(p.dir.split("/").at(-1)) === reading)
-    .map(({ p, answer }) => {
-      const role = PROMPT_ROLES[p.dir.split("/").at(-1)] ?? "prompt";
-      const kind = docKindOf(t, p.task);
-      const retry = p.task.includes(".retry.") ? ", retried" : "";
-      return { text: `${kind ? `${kind} ` : ""}${role}${retry}, answered by ${answer.model}`, href: p.url };
-    });
+  const links = uniquePrompts(t, reading).map(({ p, answer }) => ({ p, answer, label: promptLabel(t, p) }));
+  const shared = ([what, flags]) => links.filter(({ label }) => label[0] === what && label[1] === flags).length > 1;
+  return links.map(({ p, answer, label: [what, flags] }) => ({
+    text: `${what}${shared([what, flags]) ? ` ${p.prompt.slice(0, 8)}` : ""}${flags}, answered by ${answer.model}`, href: p.url,
+  }));
 }
 
 const factLabel = (kind, page, f) =>
-  `${kind ?? "Unknown document"}${page ? ` page ${page}` : ""}, ${[f.benefit, f.amount].filter(Boolean).join(" ")}`;
+  `${kind ?? "Unknown document"}${page ? ` page ${page}` : ""}, ${[f.benefit, f.amount].filter(Boolean).join(" ")}${f.condition ? ` (${f.condition})` : ""}`;
 const verdict = (who, check) => `${who} ${check.ok ? "agreed" : "disagreed"}: ${check.reason.replace(/\.$/, "")}`;
 
 const taskOf = (t, prompt) => t.answers.rows?.flatMap((a) => a.prompts).find((p) => p.prompt === prompt)?.task;
 
-function factCheck(t, row) {
+// A fact that failed its quote check has no id, so its document comes from the prompt that stated it.
+function checkedFactLabel(t, row) {
   const statedBy = row.stated_by[0];
   const stated = statedBy?.stated ?? {};
-  // A fact that failed its quote check has no id, so its document comes from the prompt that stated it.
   const task = taskOf(t, statedBy?.prompt);
-  const parts = [row.fact ? factLabel(row.fact.source, row.fact.page, stated) : factLabel(task && docKindOf(t, task), stated.page, stated)];
+  return row.fact ? factLabel(row.fact.source, row.fact.page, stated) : factLabel(task && docKindOf(t, task), stated.page, stated);
+}
+
+function factCheck(t, row) {
+  const parts = [checkedFactLabel(t, row)];
   if (row.code_check && row.code_check !== "passed") parts.push(`Quote check failed: ${row.code_check}`);
   parts.push(...row.verifier.map((v) => verdict("Verifier", v)));
   if (row.reviewer.status === "traced") parts.push(verdict("Reviewer", row.reviewer));
@@ -310,9 +354,10 @@ const RECORDS = {
   "download": [documentsCsv(input), checkedCsv(output)],
   "extract-text": [checkedCsv(input), pageText(output)],
   "read-facts": [pageText(input),
-    output(["answers", "documents"], "answers/*.json", "one saved answer per reader prompt", ["answer", "model", "document", "prompt"],
-      (t) => t.answers.rows.flatMap((a) => a.prompts.filter((p) => READING.includes(p.dir.split("/").at(-1)))
-        .map((p) => [a.key, a.model, docKindOf(t, p.task) ?? "", p.dir.split("/").at(-2)])))],
+    input(["answers", "documents"], "reader prompts", "fact_prompt.md filled for each document and benefit group", ["document", "group", "prompt"],
+      (t) => uniquePrompts(t, true).map(({ p }) => [docKindOf(t, p.task) ?? "", groupOf(p), short(p.prompt)])),
+    output(["answers", "documents"], "answers/*.json", "one saved answer per reader prompt", ["answer", "model", "document", "group"],
+      (t) => uniquePrompts(t, true).map(({ p, answer: a }) => [a.key, a.model, docKindOf(t, p.task) ?? "", groupOf(p)]))],
   "check-facts": [
     input(["fact_checks", "documents"], "facts in the answers", "highlighted facts were kept", FACT_COLS,
       (t) => t.fact_checks.rows.map((r) => factRow(statedKind(t, r), stated(r).page, stated(r))),
