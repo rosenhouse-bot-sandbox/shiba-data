@@ -179,7 +179,10 @@ async function routeHow(state) {
   routed = location.hash;
   content.replaceChildren(howView({ year: site.year, cell, step, terms: site.terms, trace }));
   if (state.plan && !known) content.prepend(el("p", { class: "warn" }, "That link names no cell, so this shows the example cell."));
-  content.querySelector(".how-map").scrollTop = mapTop;
+  const rail = content.querySelector(".how-map");
+  rail.scrollTop = mapTop;
+  const shown = rail.getBoundingClientRect(), pill = rail.querySelector(".how-pill.on").getBoundingClientRect();
+  if (pill.top < shown.top || pill.bottom > shown.bottom) rail.scrollTop += pill.top - shown.top - (shown.height - pill.height) / 2;
   if (map) content.querySelector(".how-step").focus({ preventScroll: true });
 }
 

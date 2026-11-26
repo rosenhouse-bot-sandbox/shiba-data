@@ -23,14 +23,13 @@ test("step labels overlap no node and no other label", () => {
   }
 });
 
-// Boxes side by side may share rows; boxes above one another keep MIN_GAP between them.
-const ringed = (b) => ({ x: b.x - RING, y: b.y - RING, w: b.w + 2 * RING, h: b.h + 2 * RING });
-const verticalGap = (a, b) => a.x < b.x + b.w && b.x < a.x + a.w ? Math.max(b.y - (a.y + a.h), a.y - (b.y + b.h)) : Infinity;
+// Boxes side by side may share rows; boxes above one another keep MIN_GAP between them, outside a node's ring.
+const verticalGap = ([a, ar], [b, br]) => a.x < b.x + b.w && b.x < a.x + a.w ? Math.max(b.y - (a.y + a.h), a.y - (b.y + b.h)) - ar - br : Infinity;
 
 test("boxes above one another keep a minimum gap outside any ring", () => {
   assert.ok(MIN_GAP >= 16);
-  const boxes = [...Object.keys(NODES).map((id) => [id, ringed(nodeBox(id))]), ...STEPS.map((s) => [s.id, pillBox(s)])];
-  for (const [i, [a, ab]] of boxes.entries()) for (const [b, bb] of boxes.slice(i + 1)) {
+  const boxes = [...Object.keys(NODES).map((id) => [id, nodeBox(id), RING]), ...STEPS.map((s) => [s.id, pillBox(s), 0])];
+  for (const [i, [a, ...ab]] of boxes.entries()) for (const [b, ...bb] of boxes.slice(i + 1)) {
     assert.ok(verticalGap(ab, bb) >= MIN_GAP, `${a} and ${b} are ${verticalGap(ab, bb)}px apart`);
   }
 });

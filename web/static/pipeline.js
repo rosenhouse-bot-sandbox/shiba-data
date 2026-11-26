@@ -151,7 +151,7 @@ const top = (b) => [b.x + b.w / 2, b.y];
 // A one-input step's label sits on its edge. Several inputs join at a label in the row gap above the output.
 export function pillBox(step) {
   const to = nodeBox(step.to);
-  const [x, y] = inputs(step).length > 1 ? [to.x + to.w / 2, to.y - ROW_STEP / 2] : curve(bottom(nodeBox(step.from)), top(to)).at(0.5);
+  const [x, y] = inputs(step).length > 1 ? [to.x + to.w / 2, to.y - (ROW_STEP - NODE_H) / 2] : curve(bottom(nodeBox(step.from)), top(to)).at(0.5);
   return { x: x - PILL_W / 2, y: y - PILL_H / 2, w: PILL_W, h: PILL_H };
 }
 
