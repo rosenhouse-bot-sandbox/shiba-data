@@ -1213,7 +1213,8 @@ test("pipeline view: a cell with no trace says so, and the next step loads it ag
   await fresh.waitForFunction(() => document.querySelector(".how-trace")?.textContent.includes("This build has no trace for this cell."));
   fail = false;
   await fresh.click("a.how-nav[rel=prev]");
-  await fresh.waitForSelector(".how-trace pre", { state: "attached" });
+  await fresh.waitForFunction(() => document.querySelector(".how-step")?.textContent === "Write notes");
+  await fresh.waitForFunction(() => document.querySelector(".how-trace-head")?.textContent.includes("No step touched this cell"));
 });
 
 test("pipeline view: a record's status reads in words, and a record the trace lacks reads as not recorded", async () => {
