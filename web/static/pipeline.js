@@ -16,7 +16,7 @@ const REPO = "https://github.com/rosenhouse-bot-sandbox/shiba-data";
 // col and row place a node in the map's lanes. git is a path under data/<year>/, code a path in the repo, and cms names
 // the CMS file that R2 copies.
 export const NODES = {
-  landscape: { col: 0, row: 0, store: "r2", label: "CMS Landscape", cms: "Landscape",
+  landscape: { col: 2, row: 0, store: "r2", label: "CMS Landscape", cms: "Landscape",
     table: { name: "CY2027_Landscape_202610.csv", note: "one row per plan per county",
       cols: ["Contract Plan Segment ID", "Plan Name", "County Name", "Plan Type", "SNP Type", "Part C Premium", "In-Network MOOP"],
       rows: [["H1036_153_0", "Humana Total Complete (HMO)", "Multnomah", "HMO", "Not Applicable", "$0.00", "$5,150.00"],
@@ -25,12 +25,13 @@ export const NODES = {
     table: { name: "links", note: "copied from the volunteers' Links sheet", cols: ["plan_ids", "kind", "url"],
       rows: [["H1036-153-0", "SB", "https://assets.humana.com/is/content/humana/H1036153000SB27pdf"],
         ["H1036-153-0", "EOC", "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf"]] } },
-  found: { col: 2, row: 1, store: "git", label: "found", git: "found.csv" },
-  pbp: { col: 2, row: 5, store: "r2", label: "CMS PBP tables", cms: "PBP",
+  found: { col: 0, row: 0, store: "git", label: "found", git: "found.csv",
+    table: { name: "found", note: "Claude sessions found no URL for this plan", cols: ["plan_ids", "kind", "url", "found_via"], rows: [] } },
+  pbp: { col: 1, row: 5, store: "r2", label: "CMS PBP tables", cms: "PBP",
     table: { name: "pbp_b4_emerg_urgent.txt", note: "the plan's emergency and urgent care copays abroad",
       cols: ["bid_id", "pbp_b4c_copay_amt_wec_min", "pbp_b4c_copay_amt_wec_max", "pbp_b4c_copay_amt_wuc_min", "pbp_b4c_copay_amt_wuc_max"],
       rows: [["H1036_153_0", "115.00", "115.00", "40.00", "40.00"]] } },
-  plans: { col: 0, row: 1, store: "ci", label: "plans",
+  plans: { col: 2, row: 1, store: "ci", label: "plans",
     table: { name: "plans", note: "39 rows", cols: ["plan_id", "plan_name", "plan_type", "organization", "premium", "moop_in_network"],
       rows: [["H1036-153-0", "Humana Total Complete (HMO)", "HMO", "Humana", "$0", "$5,150"]] } },
   documents: { col: 1, row: 2, store: "ci", label: "documents",
@@ -90,6 +91,7 @@ export const NODES = {
 };
 
 export const SHEET_TABLES = { main: "main_chart", dvha: "dvha" };
+export const nodeName = (id, sheet) => id === "sheet" ? SHEET_TABLES[sheet] : NODES[id].label;
 
 // The URL of a node's data, or null. at is { year, sheet, sha, cell, cms }: sha is the build's commit, if known,
 // cell the cell's link on the site, and cms the CMS download URLs by file.
@@ -97,55 +99,55 @@ export function nodeHref(id, { year, sheet, sha, cell, cms }) {
   const n = NODES[id];
   if (n.git) return `${REPO}/blob/${sha ?? "main"}/data/${year}/${n.git}`;
   if (n.code) return `${REPO}/blob/${sha ?? "main"}/${n.code}`;
-  if (n.store === "d1") return sha ? `tables/${year}/${sha}/${id === "sheet" ? SHEET_TABLES[sheet] : n.label}.json` : null;
+  if (n.store === "d1") return sha ? `tables/${year}/${sha}/${nodeName(id, sheet)}.json` : null;
   if (n.store === "web") return cell;
   return n.cms ? cms[n.cms] : null;
 }
 
 // A paragraph is a list of segments: a string, or [term, text] for a term in web/terms.py.
 // record names the key of the cell's trace (#181) that shows the step.
-// paras hold for any cell. example holds only for the example cell: highlight lists the example rows
-// that the cell uses in the input and the output.
+// paras hold for any cell. example holds only for the example cell: highlight lists, by node, the example rows
+// that the cell uses.
 export const STEPS = [
   { id: "list-plans", record: "plan", from: "landscape", to: "plans", label: "List the plans",
     paras: [["Code keeps ", ["bothCounties", "plans sold in both counties"], ". A plan's Landscape rows become one row of plans."]],
-    example: { highlight: [[0, 1], [0]], before: "H1036_153_0 in Multnomah and Clackamas", after: "H1036-153-0, one row",
+    example: { highlight: { landscape: [0, 1], plans: [0] }, before: "H1036_153_0 in Multnomah and Clackamas", after: "H1036-153-0, one row",
       paras: [["The plan has one Landscape row per county. 39 plans remain."]] } },
-  { id: "find-pdfs", record: "documents", from: "links", also: ["plans", "found"], to: "documents", label: "Find PDFs",
+  { id: "find-pdfs", record: "documents", from: "plans", also: ["found", "links"], to: "documents", label: "Find PDFs",
     paras: [["plans lists the plans that need an SB and EOC. Three sources offer URLs: found holds what Claude sessions found on carrier sites, links copies the volunteers' Links sheet, and code fills URL templates for carriers whose URLs follow a pattern. ",
       ["firstUrl", "The first URL found wins"], "."]],
-    example: { highlight: [[0, 1], [0, 1]], before: "links: …H1036153000EOC27pdf", after: "documents: EOC URL",
+    example: { highlight: { plans: [0], links: [0, 1], documents: [0, 1] }, before: "links: …H1036153000EOC27pdf", after: "documents: EOC URL",
       paras: [] } },
   { id: "download", record: "documents", from: "documents", to: "checked", label: "Download PDFs",
     paras: [["The pipeline downloads each PDF, runs a ", ["cover", "cover check"], ", and records the PDF's SHA-256 hash."]],
-    example: { highlight: [[0], [0]], before: "…/H1036153000SB27pdf", after: "sha256 ce13e925…, 24 pages", paras: [] } },
+    example: { highlight: { documents: [0], checked: [0] }, before: "…/H1036153000SB27pdf", after: "sha256 ce13e925…, 24 pages", paras: [] } },
   { id: "extract-text", record: "documents", from: "checked", to: "text", label: "Extract page text",
     paras: [["Code turns each page into ", ["layoutText", "text that keeps the page's columns"], ". The PDFs and texts are stored in R2, named by hash, so every later run reads the same bytes."]],
-    example: { highlight: [[0], [3, 4, 5]], before: "PDF ce13e925…", after: "text of page 9", paras: [] } },
-  { id: "cms-facts", record: "rule", from: "pbp", to: "cmsFacts", label: "CMS facts",
-    paras: [["Code turns the plan's CMS fields into facts. They rank below every document, so a rule uses one only when no document gives the value. A value built from one has no citation."]],
-    example: { highlight: [[0], [0, 1]], before: "pbp_b4c_copay_amt_wec_min = 115.00", after: "emergency abroad $115",
+    example: { highlight: { checked: [0], text: [3, 4, 5] }, before: "PDF ce13e925…", after: "text of page 9", paras: [] } },
+  { id: "cms-facts", record: "rule", from: "pbp", also: ["plans"], to: "cmsFacts", label: "CMS facts",
+    paras: [["Code turns the plan's PBP fields into facts, and the premiums and drug deductible that plans copies from the Landscape file. They rank below every document, so a rule uses one only when no document gives the value. A value built from one has no citation."]],
+    example: { highlight: { pbp: [0], plans: [0], cmsFacts: [0, 1] }, before: "pbp_b4c_copay_amt_wec_min = 115.00", after: "emergency abroad $115",
       paras: [["Line 2 of the Ambulance rule considers these facts, but sets them aside because the EOC prices ambulance trips abroad."]] } },
   { id: "read-facts", record: "answers", from: "text", also: ["prompt"], to: "answers", label: "Claude reads facts",
     paras: [["Code fills fact_prompt.md to make ", ["prompt", "one prompt"], " per document and benefit group. Claude Opus answers each with facts, each with its quotes and page."],
       ["The answer is ", ["hash", "saved under a hash of the model, effort and prompt"], ", so a rerun calls no model."]],
-    example: { highlight: [[3, 4, 5], [0, 1, 2]], before: "Ground  $325 copay per date of service", after: "{benefit: ambulance.ground, amount: $325, page: 9}",
+    example: { highlight: { text: [3, 4, 5], answers: [0, 1, 2] }, before: "Ground  $325 copay per date of service", after: "{benefit: ambulance.ground, amount: $325, page: 9}",
       paras: [["The Ambulance column uses the ambulance and emergency groups, so Claude gets four prompts, one per group and document. For the SB and the ambulance group, Claude answers with three facts."]] } },
   { id: "check-facts", record: "fact_checks", from: "answers", to: "facts", label: "Check facts",
     paras: [["Code runs a ", ["quoteCheck", "quote check"], " on every fact. A verifier, Claude Opus, then judges each fact mixed with ", ["decoy", "decoys"], ". Last, a ", ["reviewer", "reviewer"], " checks each fact a value would cite."]],
-    example: { highlight: [[2], [3, 4, 5]], before: "SB: abroad, covered_by medicare", after: "rejected; the EOC's supplemental fact stands",
+    example: { highlight: { answers: [2], facts: [3, 4, 5] }, before: "SB: abroad, covered_by medicare", after: "rejected; the EOC's supplemental fact stands",
       paras: [["The verifier rejected the SB's worldwide fact: Medicare doesn't cover care abroad, so it is supplemental. The EOC's fact, already marked supplemental, passed."]] } },
-  { id: "column-rules", record: "rule", from: "facts", to: "presented", label: "Column rules",
+  { id: "column-rules", record: "rule", from: "facts", also: ["cmsFacts"], to: "presented", label: "Column rules",
     paras: [["Each column has a rule, written in code from the domain expert's instructions. It takes facts from the ", ["bestSource", "best source"], " and cites their quotes."]],
-    example: { highlight: [[0, 1, 2, 3], [0, 1, 2]], before: "ground $325, air 20%, abroad $325", after: "$325 or 20% | $325",
+    example: { highlight: { facts: [0, 1, 2, 3], presented: [0, 1, 2] }, before: "ground $325, air 20%, abroad $325", after: "$325 or 20% | $325",
       paras: [["In the ", ["rule", "Ambulance rule"], ", line 1 takes in-network, Medicare-covered ground and air trips from the EOC. Line 2 takes trips abroad. Each line cites the quotes of the facts it used, so line 1 gets four citations and line 2 one, all from EOC page 46."]] } },
   { id: "sheet", record: "sheet", from: "facts", also: ["cmsFacts"], to: "sheet", label: "Write sheet",
     paras: [["The column rules also write every value to the sheet. A line that only CMS data backs has no citation, so a volunteer can't check it."]],
-    example: { highlight: [[0, 1, 2, 3], [0]], before: "ground $325, air 20%, abroad $325", after: "$325 or 20% | $325",
+    example: { highlight: { facts: [0, 1, 2, 3], sheet: [0] }, before: "ground $325, air 20%, abroad $325", after: "$325 or 20% | $325",
       paras: [["Every line here cites the EOC."]] } },
   { id: "publish", record: "citations", from: "sheet", also: ["presented", "notes"], to: "site", label: "Publish",
     paras: [["Merging to main builds the site from the sheet, its citations and the notes that Claude sessions write. ", ["worker", "The pdxplans Worker"], " serves it at pdxplans.org, and the same build updates the volunteers' Google Sheet."]],
-    example: { highlight: [[0], [1, 4, 5]], before: "$325 or 20% | $325, 5 quotes", after: "cell + EOC page 46 highlight", paras: [] } },
+    example: { highlight: { sheet: [0], presented: [0, 1, 2], site: [1, 4, 5] }, before: "$325 or 20% | $325, 5 quotes", after: "cell + EOC page 46 highlight", paras: [] } },
 ];
 
 // A step reads from first, then each node in also.
@@ -333,6 +335,8 @@ function factCheck(t, row) {
 
 // Lines that show a step's work for a cell, read from its trace.
 const DETAILS = {
+  "find-pdfs": (t) => t.documents.candidates.filter((c) => c.source === "URL template").map((c) =>
+    ({ text: `A URL template in code offered the ${c.kind}${c.used ? ", and it won" : ""}`, href: c.url })),
   "read-facts": (t) => promptLinks(t, true),
   "check-facts": (t) => [...t.fact_checks.rows.map((r) => factCheck(t, r)), ...promptLinks(t, false)],
   "column-rules": (t) => [
@@ -342,93 +346,114 @@ const DETAILS = {
   ],
 };
 
-// The cell's own input and output rows for each step, read from its trace.
-// Each table names the records it reads and shows only when all are traced. hi lists the rows the step kept or used.
+// RECORDS[step][node] reads the cell's rows in that node's table from the trace. Each table names the records it needs,
+// and hi lists the rows the step kept or used.
 const traced = (r) => r?.status === "traced";
-const table = (role) => (needs, name, note, cols, rows, hi = () => []) => ({ role, needs, name, note, cols, rows, hi });
-const input = table("Input"), output = table("Output");
+const table = (needs, note, cols, rows, hi = () => []) => ({ needs, note, cols, rows, hi });
 const short = (sha) => sha ? `${sha.slice(0, 16)}…` : "";
 const blob = (sha, href) => sha ? { text: short(sha), href: href(sha) } : "";
 const FACT_COLS = ["source", "page", "benefit", "setting", "network", "condition", "amount"];
 const factRow = (kind, page, f) => [kind ?? "", String(page ?? ""), f.benefit, f.setting, f.network, f.condition ?? "", f.amount];
+const CMS_PLAN_COLS = ["plan_id", "premium", "premium_full_extra_help", "part_d_deductible"];
 const PLAN_COLS = ["plan_id", "plan_name", "plan_type", "organization", "premium", "moop_in_network"];
-const documentsCsv = (make) => make(["documents"], "documents", "the plan's rows", ["kind", "url", "found_via"],
+const documentsCsv = table(["documents"], "the plan's rows", ["kind", "url", "found_via"],
   (t) => t.documents.documents.map((d) => [d.kind, d.url, d.found_via]));
-const checkedCsv = (make) => make(["documents"], "documents_checked", "the plan's rows, selected columns", ["kind", "sha256", "pages", "cover_problems"],
+const checkedCsv = table(["documents"], "the plan's rows, selected columns", ["kind", "sha256", "pages", "cover_problems"],
   (t) => t.documents.documents.map((d) => [d.kind, blob(d.sha256, (s) => `docs/${s}.pdf`), String(d.pages ?? ""), d.cover_problems]));
-const pageText = (make) => make(["documents"], "page text", "one file per PDF, named by the text's hash", ["kind", "pages", "text file"],
+const pageText = table(["documents"], "one file per PDF, named by the text's hash", ["kind", "pages", "text file"],
   (t) => t.documents.documents.map((d) => [d.kind, String(d.pages ?? ""), blob(d.text?.layout, (s) => `blobs/${s}.txt`)]));
+// A source's table lists the URLs it offered the plan, in the order tried.
+const offered = (source, note) => {
+  const mine = (t) => t.documents.candidates.filter((c) => c.source === source);
+  return table(["documents"], `${note}; highlighted rows won`, ["kind", "url", "found_via"],
+    (t) => mine(t).map((c) => [c.kind, c.url, c.found_via]), (t) => mine(t).flatMap((c, i) => c.used ? [i] : []));
+};
 const statedKind = (t, row) => {
   const task = taskOf(t, row.stated_by[0]?.prompt);
   return row.fact?.source ?? (task && docKindOf(t, task));
 };
 const stated = (row) => row.stated_by[0]?.stated ?? {};
 const used = (t) => t.rule.lines.flatMap((l) => l.facts);
-const cmsFacts = (t) => [...used(t), ...t.rule.set_aside].filter((f) => f.origin === "pbp");
-const sheetRow = (make) => make(["sheet"], (t) => SHEET_TABLES[t.cell.sheet], "the cell", ["plan_id", "column", "value"],
-  (t) => [[t.cell.plan_id, t.cell.col, shownValue(t.sheet.value)]]);
+const considered = (t) => [...used(t), ...t.rule.set_aside];
+const cmsFacts = (t) => considered(t).filter((f) => f.origin === "pbp");
+// An origin's table lists the facts of that origin that the rule considered, and highlights the ones it used.
+const ruleFacts = (origin, note) => {
+  const mine = (t) => considered(t).filter((f) => f.origin === origin);
+  return table(["rule"], `${note}; highlighted facts were used`, FACT_COLS, (t) => mine(t).map((f) => factRow(f.source, f.page, f)),
+    (t) => mine(t).flatMap((f, i) => used(t).includes(f) ? [i] : []));
+};
+const lineFacts = (origin, note) => table(["rule"], note, ["line", ...FACT_COLS],
+  (t) => t.rule.lines.flatMap((l) => l.facts.filter((f) => f.origin === origin).map((f) => [String(l.line), ...factRow(f.source, f.page, f)])));
+const sheetRow = table(["sheet"], "the cell", ["plan_id", "column", "value"], (t) => [[t.cell.plan_id, t.cell.col, shownValue(t.sheet.value)]]);
 const kindOf = (t, url) => t.documents.documents.find((d) => d.url === url)?.kind ?? "";
 const CITE_COLS = ["line", "value", "document", "pdf_page", "quote"];
 const citationRows = (t, rows) => rows.map((c) => [String(c.line ?? ""), shownValue(c.value ?? ""), kindOf(t, c.url), String(c.pdf_page), c.quote]);
 const allCitations = (t) => [...t.citations.shown, ...t.citations.hidden];
 
-const RECORDS = {
-  "list-plans": [
-    input(["plan"], "CMS Landscape", "the fields plans reads", ["field", "value"],
+export const RECORDS = {
+  "list-plans": {
+    landscape: table(["plan"], "the fields plans reads", ["field", "value"],
       (t) => traced(t.plan.landscape_row) ? t.plan.landscape_row.fields.map((f) => [f.field, f.value]) : []),
-    output(["plan"], "plans", "the plan's row, selected columns", PLAN_COLS, (t) => [PLAN_COLS.map((k) => t.plan.row[k])]),
-  ],
-  "find-pdfs": [
-    input(["plan"], "plans", "the plan's row, selected columns", ["plan_id", "plan_name", "organization"],
+    plans: table(["plan"], "the plan's row, selected columns", PLAN_COLS, (t) => [PLAN_COLS.map((k) => t.plan.row[k])]),
+  },
+  "find-pdfs": {
+    plans: table(["plan"], "the plan's row, selected columns", ["plan_id", "plan_name", "organization"],
       (t) => [[t.plan.row.plan_id, t.plan.row.plan_name, t.plan.row.organization]]),
-    input(["documents"], "URLs offered", "in the order tried; highlighted rows won", ["source", "kind", "url", "found_via"],
-      (t) => t.documents.candidates.map((c) => [c.source, c.kind, c.url, c.found_via]),
-      (t) => t.documents.candidates.flatMap((c, i) => c.used ? [i] : [])),
-    documentsCsv(output),
-  ],
-  "download": [documentsCsv(input), checkedCsv(output)],
-  "extract-text": [checkedCsv(input), pageText(output)],
-  "cms-facts": [
-    input(["rule"], "CMS fields", "the fields behind the column's CMS facts", ["benefit", "fields"],
+    found: offered("found.csv", "tried first"),
+    links: offered("links.csv", "tried next"),
+    documents: documentsCsv,
+  },
+  "download": { documents: documentsCsv, checked: checkedCsv },
+  "extract-text": { checked: checkedCsv, text: pageText },
+  "cms-facts": {
+    pbp: table(["rule"], "the fields behind the column's CMS facts", ["benefit", "fields"],
       (t) => cmsFacts(t).map((f) => [f.benefit, JSON.parse(f.quotes || "[]").join(", ")])),
-    output(["rule"], "pbp_facts", "the column's CMS facts", ["benefit", "setting", "condition", "amount", "source"],
+    plans: table(["plan"], "the plan's Landscape fact columns", CMS_PLAN_COLS, (t) => [CMS_PLAN_COLS.map((k) => t.plan.row[k])]),
+    cmsFacts: table(["rule"], "the column's CMS facts", ["benefit", "setting", "condition", "amount", "source"],
       (t) => cmsFacts(t).map((f) => [f.benefit, f.setting, f.condition ?? "", f.amount, f.source])),
-  ],
-  "read-facts": [pageText(input),
-    input(["answers", "documents"], "reader prompts", "fact_prompt.md filled for each document and benefit group", ["document", "group", "prompt"],
+  },
+  "read-facts": {
+    text: pageText,
+    prompt: table(["answers", "documents"], "filled for each document and benefit group", ["document", "group", "prompt"],
       (t) => uniquePrompts(t, true).map(({ p }) => [docKindOf(t, p.task) ?? "", groupOf(p), short(p.prompt)])),
-    output(["answers", "documents"], "answers/*.json", "one saved answer per reader prompt", ["answer", "model", "document", "group"],
-      (t) => uniquePrompts(t, true).map(({ p, answer: a }) => [a.key, a.model, docKindOf(t, p.task) ?? "", groupOf(p)]))],
-  "check-facts": [
-    input(["fact_checks", "documents"], "facts in the answers", "highlighted facts were kept", FACT_COLS,
+    answers: table(["answers", "documents"], "one saved answer per reader prompt", ["answer", "model", "document", "group"],
+      (t) => uniquePrompts(t, true).map(({ p, answer: a }) => [a.key, a.model, docKindOf(t, p.task) ?? "", groupOf(p)])),
+  },
+  "check-facts": {
+    answers: table(["fact_checks", "documents"], "the facts they state; highlighted facts were kept", FACT_COLS,
       (t) => t.fact_checks.rows.map((r) => factRow(statedKind(t, r), stated(r).page, stated(r))),
       (t) => t.fact_checks.rows.flatMap((r, i) => r.kept ? [i] : [])),
-    output(["fact_checks"], "document_facts", "the kept facts", FACT_COLS,
+    facts: table(["fact_checks"], "the kept facts", FACT_COLS,
       (t) => t.fact_checks.rows.filter((r) => r.kept).map((r) => factRow(r.fact?.source, r.fact?.page, stated(r)))),
-  ],
-  "column-rules": [
-    input(["rule"], "facts", "the facts the rule considered, from documents and CMS; highlighted facts were used", FACT_COLS,
-      (t) => [...used(t), ...t.rule.set_aside].map((f) => factRow(f.source, f.page, f)), (t) => used(t).map((_, i) => i)),
-    output(["citations", "documents"], "presented", "the cell's citations", CITE_COLS, (t) => citationRows(t, allCitations(t))),
-  ],
-  "sheet": [
-    input(["rule"], "facts", "the facts each line used, from documents and CMS", ["line", ...FACT_COLS],
-      (t) => t.rule.lines.flatMap((l) => l.facts.map((f) => [String(l.line), ...factRow(f.source, f.page, f)]))),
-    sheetRow(output),
-  ],
-  "publish": [
-    sheetRow(input),
-    input(["citations", "documents"], "presented", "the cell's citations; highlighted ones are shown", CITE_COLS,
+  },
+  "column-rules": {
+    facts: ruleFacts("document", "the document facts the rule considered"),
+    cmsFacts: ruleFacts("pbp", "the CMS facts the rule considered"),
+    presented: table(["citations", "documents"], "the cell's citations", CITE_COLS, (t) => citationRows(t, allCitations(t))),
+  },
+  "sheet": {
+    facts: lineFacts("document", "the document facts each line used"),
+    cmsFacts: lineFacts("pbp", "the CMS facts each line used"),
+    sheet: sheetRow,
+  },
+  "publish": {
+    sheet: sheetRow,
+    presented: table(["citations", "documents"], "the cell's citations; highlighted ones are shown", CITE_COLS,
       (t) => citationRows(t, allCitations(t)), (t) => t.citations.shown.map((_, i) => i)),
-    input(["notes"], "comments", "the cell's note", ["kind", "comment"], (t) => t.notes.rows.map((r) => [r.kind, r.comment])),
-    output(["citations", "documents"], "pdxplans.org", "the quotes the cell shows", CITE_COLS, (t) => citationRows(t, t.citations.shown)),
-  ],
+    notes: table(["notes"], "the cell's note", ["kind", "comment"], (t) => t.notes.rows.map((r) => [r.kind, r.comment])),
+    site: table(["citations", "documents"], "the quotes the cell shows", CITE_COLS, (t) => citationRows(t, t.citations.shown)),
+  },
 };
 
-export const records = (step, trace) => (RECORDS[step.id] ?? [])
-  .filter((r) => r.needs.every((k) => traced(trace?.[k])))
-  .map((r) => ({ role: r.role, name: typeof r.name === "function" ? r.name(trace) : r.name, note: r.note, cols: r.cols,
-    rows: r.rows(trace), hi: r.hi(trace) }));
+// A step shows one table per input, in the map's order, then its output. rows is null when the trace lacks a record
+// the table needs, and empty when a record says no step touched the cell.
+export const records = (step, trace, sheet = trace?.cell?.sheet) => [...inputs(step), step.to].map((id, i) => {
+  const r = RECORDS[step.id][id];
+  const status = r.needs.map((k) => trace?.[k]?.status);
+  const rows = status.every((s) => s === "traced") ? r.rows(trace) : status.every((s) => s === "traced" || s === "none") ? [] : null;
+  return { role: i < inputs(step).length ? "Input" : "Output", node: id, name: nodeName(id, sheet),
+    note: r.note, cols: r.cols, rows, hi: rows?.length ? r.hi(trace) : [] };
+});
 
 export const details = (step, trace) =>
   trace?.[step.record]?.status === "traced" && DETAILS[step.id] ? DETAILS[step.id](trace) : [];

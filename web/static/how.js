@@ -2,7 +2,7 @@
 import { el, svg } from "./dom.js";
 import { format } from "./permalink.js";
 import {
-  EXAMPLE, NODES, STEPS, STORES, SHEET_TABLES, inputs, NODE_W, NODE_H, RING, MAP_W, MAP_H,
+  EXAMPLE, NODES, STEPS, STORES, inputs, nodeName, NODE_W, NODE_H, RING, MAP_W, MAP_H,
   nodeBox, pillBox, paths, before, after, strip, details, records, nodeHref,
 } from "./pipeline.js";
 
@@ -13,7 +13,6 @@ const SCALE = RAIL_W / MAP_W;
 export const howLink = (year, cell, step) => format({ year, view: "how", sheet: cell.sheet, plan: cell.plan, column: cell.column, step: step.id });
 export const traceUrl = (year, sheet, plan, columnKey) => `trace/${year}/${sheet}/${plan}/${columnKey}`;
 const shown = (id) => NODES[id].table ?? NODES[id].text;
-const label = (id, sheet) => id === "sheet" ? SHEET_TABLES[sheet] : NODES[id].label;
 const store = (id) => STORES[NODES[id].store];
 const isExample = (cell) => cell.sheet === EXAMPLE.sheet && cell.plan === EXAMPLE.plan && cell.column === EXAMPLE.column;
 
@@ -31,13 +30,12 @@ export function howView({ year, cell, step, terms, trace, cms }) {
       prev ? el("a", { class: "how-nav", href: link(prev), rel: "prev" }, "← Prev") : el("span", { class: "how-nav off" }, "← Prev"),
       el("span", { class: "how-count" }, `${at + 1} of ${STEPS.length}`),
       next ? el("a", { class: "how-nav primary", href: link(next), rel: "next" }, "Next →") : el("span", { class: "how-nav primary off" }, "Next →")),
-    el("div", { class: "how-body" }, map(step, link, { year, sheet: cell.sheet, sha: trace?.build?.sha ?? null,
-      cell: format({ year, view: cell.sheet, plan: cell.plan, column: cell.column }), cms }),
-      lens(step, link, terms, isExample(cell) ? step.example : null, trace, cell.sheet)));
+    el("div", { class: "how-body" }, map(step, link, cell.sheet),
+      lens(step, link, terms, isExample(cell) ? step.example : null, trace, { year, sheet: cell.sheet, sha: trace?.build?.sha ?? null,
+        cell: format({ year, view: cell.sheet, plan: cell.plan, column: cell.column }), cms })));
 }
 
-// at says where each node's data is: { year, sheet, sha, cell }, as nodeHref takes it.
-function map(step, link, at) {
+function map(step, link, sheet) {
   const on = new Set([...inputs(step), step.to]);
   const lines = svg("svg", { width: MAP_W, height: MAP_H, "aria-hidden": "true" },
     svg("defs", {}, ...["off", "on"].map((k) => svg("marker", {
@@ -47,22 +45,11 @@ function map(step, link, at) {
       d: p.d, class: `how-edge${s === step ? " on" : ""}`,
       ...(p.arrow ? { "marker-end": `url(#how-arrow-${s === step ? "on" : "off"})` } : {}),
     }))));
-  const downloads = [];
   const nodes = Object.entries(NODES).map(([id, n]) => {
-    const b = nodeBox(id), href = nodeHref(id, at), name = label(id, at.sheet);
-    const attrs = {
-      class: `how-node store-${n.store}${on.has(id) ? " on" : ""}`,
-      style: `left:${b.x}px;top:${b.y}px;width:${NODE_W}px;height:${NODE_H}px`,
-      title: `${store(id).label}: ${name}`,
-    };
-    const kids = [el("small", {}, store(id).label), " ", el("code", {}, name)];
-    if (href && n.cms) {
-      const warning = download(`how-download-${id}`, n.cms, href);
-      downloads.push(warning);
-      return el("button", { ...attrs, type: "button", popovertarget: warning.id }, ...kids);
-    }
-    if (href) Object.assign(attrs, { href, target: "_blank", rel: "noopener", "aria-label": `${store(id).label}: ${name}, opens in a new tab` });
-    return el(href ? "a" : "div", attrs, ...kids);
+    const b = nodeBox(id), name = nodeName(id, sheet);
+    return el("div", { class: `how-node store-${n.store}${on.has(id) ? " on" : ""}`,
+      style: `left:${b.x}px;top:${b.y}px;width:${NODE_W}px;height:${NODE_H}px`, title: `${store(id).label}: ${name}` },
+    el("small", {}, store(id).label), " ", el("code", {}, name));
   });
   const pills = STEPS.map((s) => {
     const b = pillBox(s);
@@ -74,12 +61,11 @@ function map(step, link, at) {
     el("h2", {}, "Tables and steps"),
     el("div", { class: "how-frame", style: `width:${RAIL_W}px;height:${Math.ceil(MAP_H * SCALE)}px` },
       el("div", { class: "how-world", style: `width:${MAP_W}px;height:${MAP_H}px;--ring:${RING}px;transform:scale(${SCALE})` }, lines, ...nodes, ...pills)),
-    ...downloads,
     el("p", { class: "how-legend" }, ...Object.entries(STORES).map(([key, s]) =>
       el("span", {}, el("b", { class: `store-${key}` }, s.label), s.note ? ` ${s.note}` : ""))));
 }
 
-// A CMS file is a large zip, so its box asks before it downloads.
+// A CMS file is a large zip, so its heading asks before it downloads. The pop-over closes when the page scrolls.
 function download(id, file, href) {
   const pop = el("div", { id, class: "how-download", popover: "" },
     el("p", {}, `This downloads the CMS ${file} file from cms.gov. It is a zip file of tens of megabytes.`),
@@ -90,30 +76,46 @@ function download(id, file, href) {
     pop.style.top = `${r.bottom + 4}px`;
     pop.style.left = `${Math.max(8, Math.min(r.left, innerWidth - 328))}px`;
   });
+  document.addEventListener("scroll", () => pop.matches(":popover-open") && pop.hidePopover(), true);
   return pop;
 }
 
-function lens(step, link, terms, example, trace, sheet) {
+// at says where each table's data is: { year, sheet, sha, cell, cms }, as nodeHref takes it.
+function lens(step, link, terms, example, trace, at) {
+  const { sheet } = at;
   const chips = (near, cls, text) => near.length ? el("div", { class: `how-chips ${cls}` },
     ...near.map((s) => el("a", { href: link(s) }, text(s.label)))) : null;
-  const end = (id) => el("div", { class: `how-end store-${NODES[id].store}` },
-    el("small", {}, store(id).label), el("code", {}, example ? linked(shown(id).name, shown(id).href) : label(id, sheet)));
+  const downloads = [];
+  // A table's heading says where its data lives, and opens the data when it has a URL.
+  const heading = (id) => {
+    const n = NODES[id], name = nodeName(id, sheet), href = nodeHref(id, at) ?? (example ? shown(id).href : null);
+    const where = el("small", { class: `how-store store-${n.store}` }, store(id).label);
+    if (href && n.cms) {
+      const warning = download(`how-download-${id}`, n.cms, href);
+      downloads.push(warning);
+      return [where, el("button", { type: "button", class: "how-source", popovertarget: warning.id, "aria-label": `${name}, download from cms.gov` },
+        el("code", {}, name), " ↓")];
+    }
+    if (href) return [where, el("a", { class: "how-source", href, target: "_blank", rel: "noopener",
+      "aria-label": `${name}, opens in a new tab` }, el("code", {}, name), " ↗")];
+    return [where, el("code", {}, name)];
+  };
   const fromTo = example ? [example.before, example.after] : strip(step, trace);
-  const live = records(step, trace);
   const para = (p) => el("p", {}, ...p.map((s) => typeof s === "string" ? s : term(terms[s[0]], s[1])));
+  const tables = records(step, trace, sheet).map((r) => {
+    const head = heading(r.node);
+    if (r.rows) return table(r.role, head, r.note, r.cols, r.rows, r.hi);
+    if (example) return rows(r.role, head, r.node, sheet, example.highlight[r.node] ?? []);
+    return frame(r.role, head, r.note, trace ? el("p", { class: "how-none" }, "Not recorded in this build.") : null);
+  });
   return el("section", { class: "how-lens" },
     chips(before(step), "before", (l) => `↖ after: ${l}`),
-    // A size container, so the edge stacks when the lens is narrow. It holds no pop-overs, which containment would anchor to it.
-    el("div", { class: "how-edge-box" }, el("div", { class: "how-edge-big" }, end(step.from), el("span", { class: "how-wire" }),
-      el("h2", { class: "how-step", tabindex: "-1" }, step.label), el("span", { class: "how-wire to" }), end(step.to))),
     el("div", { class: "how-card" },
+      el("h2", { class: "how-step", tabindex: "-1" }, step.label),
       fromTo ? el("p", { class: "how-strip" }, el("code", { class: "from" }, fromTo[0]), " becomes ", el("code", { class: "to" }, fromTo[1])) : null,
       ...step.paras.map(para), ...(example?.paras ?? []).map(para), workList(details(step, trace))),
-    ...["Input", "Output"].flatMap((role, i) => {
-      const mine = live.filter((r) => r.role === role);
-      if (mine.length) return mine.map((r) => table(role, r.name, r.note, r.cols, r.rows, r.hi));
-      return example ? [rows(role, i ? step.to : step.from, example.highlight[i])] : [];
-    }),
+    ...tables,
+    ...downloads,
     traceRecord(step, trace),
     chips(after(step), "after", (l) => `next: ${l} ↘`));
 }
@@ -200,16 +202,18 @@ document.addEventListener("click", (e) => {
 });
 document.addEventListener("scroll", (e) => opened && !opened.box.contains(e.target) && opened.close(), true);
 
-function rows(role, id, highlight) {
-  const n = NODES[id], { name, note } = shown(id);
-  if (n.table) return table(role, name, note, n.table.cols, n.table.rows, highlight);
+// An example table's note names the example's own file when the node's name does not.
+function rows(role, head, id, sheet, highlight) {
+  const n = NODES[id], { name: file, note: about } = shown(id);
+  const note = file === nodeName(id, sheet) ? about : `${file} · ${about}`;
+  if (n.table) return table(role, head, note, n.table.cols, n.table.rows, highlight);
   const hi = new Set(highlight);
-  return frame(role, name, note, el("pre", {}, ...n.text.lines.map((l, i) => el("span", hi.has(i) ? { class: "hi" } : {}, l))));
+  return frame(role, head, note, el("pre", {}, ...n.text.lines.map((l, i) => el("span", hi.has(i) ? { class: "hi" } : {}, l))));
 }
 
-function table(role, name, note, cols, body, highlight) {
+function table(role, head, note, cols, body, highlight) {
   const hi = new Set(highlight);
-  return frame(role, name, note, el("table", {},
+  return frame(role, head, note, el("table", {},
     el("thead", {}, el("tr", {}, ...cols.map((c) => el("th", {}, c)))),
     el("tbody", {}, ...(body.length ? body.map((r, i) => el("tr", hi.has(i) ? { class: "hi" } : {}, ...r.map((c) => el("td", {}, c?.href ? linked(c.text, c.href) : c))))
       : [el("tr", {}, el("td", { colspan: cols.length }, "none"))]))));
@@ -217,6 +221,6 @@ function table(role, name, note, cols, body, highlight) {
 
 const linked = (text, href) => href ? el("a", { href, target: "_blank", rel: "noopener" }, text) : text;
 
-const frame = (role, name, note, body) => el("div", { class: `how-rows ${role.toLowerCase()}` },
-  el("div", { class: "how-rows-head" }, el("strong", {}, role), el("code", {}, name), el("span", {}, note)),
-  el("div", { class: "how-scroll" }, body));
+const frame = (role, head, note, body) => el("div", { class: `how-rows ${role.toLowerCase()}` },
+  el("div", { class: "how-rows-head" }, el("strong", {}, role), ...head, el("span", {}, note)),
+  body ? el("div", { class: "how-scroll" }, body) : null);
