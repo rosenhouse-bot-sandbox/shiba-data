@@ -1022,10 +1022,11 @@ test("pipeline view: a step with two inputs lights both and joins them at its on
 test("pipeline view: each box says where its data lives and opens it in a new tab when it has a URL", async () => {
   await openHow(page, "main/H1036-153-0/ambulance/publish");
   const node = (name) => page.locator(".how-node", { has: page.locator(`code:text-is("${name}")`) });
-  assert.equal(await node("links").textContent(), "In gitlinks");
+  assert.equal(await node("links").getAttribute("aria-label"), "In git: links, opens in a new tab");
   assert.match(await node("links").getAttribute("href"), /^https:\/\/github\.com\/.+\/blob\/[0-9a-f]{40}\/data\/2027\/links\.csv$/);
   assert.equal(await node("links").getAttribute("target"), "_blank");
   assert.match(await node("main_chart").getAttribute("href"), /^tables\/2027\/[0-9a-f]{40}\/main_chart\.json$/);
+  assert.equal(await node("CMS PBP tables").getAttribute("href"), site.cms_files.PBP);
   assert.equal(await node("plans").evaluate((e) => e.tagName), "DIV");
   assert.match(await page.textContent(".how-legend"), /In git.*In R2.*In D1.*CI only.*Website/);
 });

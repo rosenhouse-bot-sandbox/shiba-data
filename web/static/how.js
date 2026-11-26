@@ -18,7 +18,7 @@ const store = (id) => STORES[NODES[id].store];
 const isExample = (cell) => cell.sheet === EXAMPLE.sheet && cell.plan === EXAMPLE.plan && cell.column === EXAMPLE.column;
 
 // cell is { sheet, plan, column, label, value }.
-export function howView({ year, cell, step, terms, trace }) {
+export function howView({ year, cell, step, terms, trace, cms }) {
   const at = STEPS.indexOf(step);
   const link = (s) => howLink(year, cell, s);
   const prev = STEPS[at - 1], next = STEPS[at + 1];
@@ -32,7 +32,7 @@ export function howView({ year, cell, step, terms, trace }) {
       el("span", { class: "how-count" }, `${at + 1} of ${STEPS.length}`),
       next ? el("a", { class: "how-nav primary", href: link(next), rel: "next" }, "Next →") : el("span", { class: "how-nav primary off" }, "Next →")),
     el("div", { class: "how-body" }, map(step, link, { year, sheet: cell.sheet, sha: trace?.build?.sha ?? null,
-      cell: format({ year, view: cell.sheet, plan: cell.plan, column: cell.column }) }),
+      cell: format({ year, view: cell.sheet, plan: cell.plan, column: cell.column }), cms }),
       lens(step, link, terms, isExample(cell) ? step.example : null, trace, cell.sheet)));
 }
 
@@ -52,9 +52,9 @@ function map(step, link, at) {
     return el(href ? "a" : "div", {
       class: `how-node store-${n.store}${on.has(id) ? " on" : ""}`,
       style: `left:${b.x}px;top:${b.y}px;width:${NODE_W}px;height:${NODE_H}px`,
-      title: `${store(id).label}: ${name}${href ? ". Opens in a new tab." : ""}`,
-      ...(href ? { href, target: "_blank", rel: "noopener" } : {}),
-    }, el("small", {}, store(id).label), el("code", {}, name));
+      title: `${store(id).label}: ${name}`,
+      ...(href ? { href, target: "_blank", rel: "noopener", "aria-label": `${store(id).label}: ${name}, opens in a new tab` } : {}),
+    }, el("small", {}, store(id).label), " ", el("code", {}, name));
   });
   const pills = STEPS.map((s) => {
     const b = pillBox(s);

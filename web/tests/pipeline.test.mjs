@@ -120,22 +120,25 @@ test("every node says where its data lives, and names it without a file extensio
     assert.ok(STORES[n.store], id);
     if (n.store !== "web") assert.doesNotMatch(n.label, /\.(csv|json|txt)$/, id);
   }
-  assert.equal(NODES.sheet.store, "d1");
-  assert.equal(NODES.presented.store, "d1");
-  assert.deepEqual(["plans", "documents", "facts", "cmsFacts"].map((id) => NODES[id].store), ["ci", "ci", "ci", "ci"]);
 });
 
+const CMS = { Landscape: "https://cms/landscape.zip", PBP: "https://cms/pbp.zip" };
+
 test("a node links to its data where the data has a URL", () => {
-  const at = { year: 2027, sheet: "dvha", sha: "abc123", cell: "#/2027/dvha/H1-1-0/vision" };
-  const repo = "https://github.com/rosenhouse-bot-sandbox/shiba-data";
-  assert.equal(nodeHref("links", at), `${repo}/blob/abc123/data/2027/links.csv`);
-  assert.equal(nodeHref("checked", at), `${repo}/blob/abc123/data/2027/generated/documents_checked.csv`);
-  assert.equal(nodeHref("answers", at), `${repo}/tree/abc123/data/2027/answers`);
-  assert.equal(nodeHref("sheet", at), "tables/2027/abc123/dvha.json");
-  assert.equal(nodeHref("presented", at), "tables/2027/abc123/presented.json");
-  assert.equal(nodeHref("site", at), "#/2027/dvha/H1-1-0/vision");
-  assert.match(nodeHref("landscape", at), /^https:\/\/www\.cms\.gov\/.*landscape.*\.zip$/);
-  for (const id of ["plans", "documents", "facts", "cmsFacts"]) assert.equal(nodeHref(id, at), null, id);
+  const at = { year: 2027, sheet: "dvha", sha: "abc123", cell: "#/2027/dvha/H1-1-0/vision", cms: CMS };
+  const blob = "https://github.com/rosenhouse-bot-sandbox/shiba-data/blob/abc123/data/2027";
+  assert.deepEqual(Object.fromEntries(Object.keys(NODES).map((id) => [id, nodeHref(id, at)])), {
+    landscape: CMS.Landscape, links: `${blob}/links.csv`, found: `${blob}/found.csv`, pbp: CMS.PBP,
+    plans: null, documents: null, checked: `${blob}/generated/documents_checked.csv`, text: null,
+    sheet: "tables/2027/abc123/dvha.json", answers: null, facts: null, presented: "tables/2027/abc123/presented.json",
+    cmsFacts: null, notes: `${blob}/comments.csv`, site: "#/2027/dvha/H1-1-0/vision",
+  });
+});
+
+test("without a build, git links go to main and D1 tables have no link", () => {
+  const at = { year: 2027, sheet: "main", sha: null, cell: "#/2027/main/H1-1-0/ambulance", cms: CMS };
+  assert.match(nodeHref("found", at), /\/blob\/main\/data\/2027\/found\.csv$/);
+  assert.equal(nodeHref("sheet", at), null);
 });
 
 test("Publish shows the cell's note", () => {
@@ -145,11 +148,6 @@ test("Publish shows the cell's note", () => {
   assert.equal(records(stepById("publish"), { ...full, notes: { status: "none", rows: [] } }).find((r) => r.name === "comments"), undefined);
 });
 
-test("without a build, git links go to main and D1 tables have no link", () => {
-  const at = { year: 2027, sheet: "main", sha: null, cell: "#/2027/main/H1-1-0/ambulance" };
-  assert.match(nodeHref("found", at), /\/blob\/main\/data\/2027\/found\.csv$/);
-  assert.equal(nodeHref("sheet", at), null);
-});
 
 const EOC = "https://x/eoc.pdf";
 const full = {
@@ -210,10 +208,10 @@ const PBP_FACT = { ...replay.rule.set_aside[0], benefit: "medical_deductible", c
   page: "", quotes: '["pbp_d_inn_deduct_yn"]', reasons: ["not this column"] };
 const withCms = { ...replay, rule: { ...replay.rule, set_aside: [...replay.rule.set_aside, PBP_FACT] } };
 
-test("Facts from CMS data shows the column's CMS facts and the fields behind them", () => {
+test("CMS facts shows the column's CMS facts and the fields behind them", () => {
   const [fields, facts] = records(stepById("cms-facts"), withCms);
   assert.deepEqual(fields.rows, [["medical_deductible", "pbp_d_inn_deduct_yn"]]);
-  assert.deepEqual(facts.rows, [["medical_deductible", "in", "deductible", "$0", "PBP"]]);
+  assert.deepEqual(facts.rows, [["medical_deductible", "any", "", "$0", "PBP"]]);
   assert.deepEqual(strip(stepById("cms-facts"), withCms), ["the plan's PBP and Landscape fields", "1 CMS fact for this column"]);
   assert.equal(strip(stepById("cms-facts"), replay)[1], "no CMS facts for this column");
 });

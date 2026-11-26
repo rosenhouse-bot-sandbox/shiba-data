@@ -3,8 +3,6 @@
 
 export const EXAMPLE = { sheet: "main", plan: "H1036-153-0", column: "ambulance" };
 
-// Where a node's data lives. The pipeline keeps its inputs and saved answers in git or R2. It rebuilds every table it
-// derives on each run, and keeps only the sheets and their citations, in D1.
 export const STORES = {
   git: { label: "In git", note: "committed" },
   r2: { label: "In R2", note: "stored files" },
@@ -15,9 +13,9 @@ export const STORES = {
 
 const REPO = "https://github.com/rosenhouse-bot-sandbox/shiba-data";
 
-// col and row place a node in the map's lanes. git is a path under data/<year>/, and cms the CMS download that R2 copies.
+// col and row place a node in the map's lanes. git is a path under data/<year>/, and cms names the CMS file that R2 copies.
 export const NODES = {
-  landscape: { col: 0, row: 0, store: "r2", label: "CMS Landscape", cms: "https://www.cms.gov/files/zip/cy2027-landscape-202610.zip",
+  landscape: { col: 0, row: 0, store: "r2", label: "CMS Landscape", cms: "Landscape",
     table: { name: "CY2027_Landscape_202610.csv", note: "one row per plan per county",
       cols: ["Contract Plan Segment ID", "Plan Name", "County Name", "Plan Type", "SNP Type", "Part C Premium", "In-Network MOOP"],
       rows: [["H1036_153_0", "Humana Total Complete (HMO)", "Multnomah", "HMO", "Not Applicable", "$0.00", "$5,150.00"],
@@ -27,7 +25,7 @@ export const NODES = {
       rows: [["H1036-153-0", "SB", "https://assets.humana.com/is/content/humana/H1036153000SB27pdf"],
         ["H1036-153-0", "EOC", "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf"]] } },
   found: { col: 2, row: 1, store: "git", label: "found", git: "found.csv" },
-  pbp: { col: 2, row: 5, store: "r2", label: "CMS PBP tables", cms: "https://www.cms.gov/files/zip/pbp-benefits-2027.zip",
+  pbp: { col: 2, row: 5, store: "r2", label: "CMS PBP tables", cms: "PBP",
     table: { name: "pbp_b4_emerg_urgent.txt", note: "the plan's emergency and urgent care copays abroad",
       cols: ["bid_id", "pbp_b4c_copay_amt_wec_min", "pbp_b4c_copay_amt_wec_max", "pbp_b4c_copay_amt_wuc_min", "pbp_b4c_copay_amt_wuc_max"],
       rows: [["H1036_153_0", "115.00", "115.00", "40.00", "40.00"]] } },
@@ -52,7 +50,7 @@ export const NODES = {
   sheet: { col: 2, row: 7, store: "d1", label: "main_chart",
     table: { name: "main_chart", note: "every rule's value, selected columns", cols: ["plan_id", "plan_name", "AB_ambulance"],
       rows: [["H1036-153-0", "Humana Total Complete (HMO)", "$325 or 20% | $325"]] } },
-  answers: { col: 0, row: 5, store: "git", label: "model answers", git: "answers/",
+  answers: { col: 0, row: 5, store: "git", label: "model answers",
     text: { name: "answers/e920fcee050a431f.json", note: "Claude Opus, high effort · 3,479 in / 954 out tokens",
       lines: [
         '[{"benefit": "ambulance.air", "setting": "any", "network": "in", "cost_kind": "coinsurance", "amount": "20%", "page": 9, "quotes": ["20% of the cost"]},',
@@ -73,8 +71,8 @@ export const NODES = {
         ["H1036-153-0", "AB_ambulance", "1", "$325 or 20%", "46", "… Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance"],
         ["H1036-153-0", "AB_ambulance", "2", "$325", "46", "Worldwide Coverage $325 copayment per date of service regardless of the number of trips – Emergency Ambulance"]] } },
   cmsFacts: { col: 2, row: 6, store: "ci", label: "pbp_facts",
-    table: { name: "pbp_facts", note: "the facts the Ambulance rule considers, selected columns", cols: ["benefit", "setting", "cost_kind", "amount", "source"],
-      rows: [["emergency", "outside_us", "copay", "$115", "PBP"], ["emergency", "outside_us", "copay", "$40", "PBP"]] } },
+    table: { name: "pbp_facts", note: "the facts the Ambulance rule considers, selected columns", cols: ["benefit", "setting", "condition", "amount", "source"],
+      rows: [["emergency", "outside_us", "", "$115", "PBP"], ["emergency", "outside_us", "urgently needed services", "$40", "PBP"]] } },
   notes: { col: 1, row: 7, store: "git", label: "comments", git: "comments.csv",
     table: { name: "comments", note: "the cell has no note", cols: ["sheet", "plan_id", "column", "kind", "comment"], rows: [] } },
   site: { col: 1, row: 8, store: "web", label: "pdxplans.org",
@@ -86,13 +84,14 @@ export const NODES = {
 
 export const SHEET_TABLES = { main: "main_chart", dvha: "dvha" };
 
-// The URL of a node's data, or null. at is { year, sheet, sha, cell }: sha is the build's commit, if known, and cell the cell's link on the site.
-export function nodeHref(id, { year, sheet, sha, cell }) {
+// The URL of a node's data, or null. at is { year, sheet, sha, cell, cms }: sha is the build's commit, if known,
+// cell the cell's link on the site, and cms the CMS download URLs by file.
+export function nodeHref(id, { year, sheet, sha, cell, cms }) {
   const n = NODES[id];
-  if (n.store === "git") return `${REPO}/${n.git.endsWith("/") ? "tree" : "blob"}/${sha ?? "main"}/data/${year}/${n.git.replace(/\/$/, "")}`;
+  if (n.git) return `${REPO}/blob/${sha ?? "main"}/data/${year}/${n.git}`;
   if (n.store === "d1") return sha ? `tables/${year}/${sha}/${id === "sheet" ? SHEET_TABLES[sheet] : n.label}.json` : null;
   if (n.store === "web") return cell;
-  return n.cms ?? null;
+  return n.cms ? cms[n.cms] : null;
 }
 
 // A paragraph is a list of segments: a string, or [term, text] for a term in web/terms.py.
@@ -115,8 +114,8 @@ export const STEPS = [
   { id: "extract-text", record: "documents", from: "checked", to: "text", label: "Extract page text",
     paras: [["Code turns each page into ", ["layoutText", "text that keeps the page's columns"], ". The PDFs and texts are stored in R2, named by hash, so every later run reads the same bytes."]],
     example: { highlight: [[0], [3, 4, 5]], before: "PDF ce13e925…", after: "text of page 9", paras: [] } },
-  { id: "cms-facts", record: "rule", from: "pbp", to: "cmsFacts", label: "Facts from CMS data",
-    paras: [["Code turns the plan's PBP fields, and a few Landscape fields, into facts. They rank below every document, so a rule uses one only when no document gives the value. A value built from one has no citation."]],
+  { id: "cms-facts", record: "rule", from: "pbp", to: "cmsFacts", label: "CMS facts",
+    paras: [["Code turns the plan's CMS fields into facts. They rank below every document, so a rule uses one only when no document gives the value. A value built from one has no citation."]],
     example: { highlight: [[0], [0, 1]], before: "pbp_b4c_copay_amt_wec_min = 115.00", after: "emergency abroad $115",
       paras: [["Line 2 of the Ambulance rule considers these facts, but sets them aside because the EOC prices ambulance trips abroad."]] } },
   { id: "read-facts", record: "answers", from: "text", to: "answers", label: "Claude reads facts",
@@ -350,8 +349,8 @@ const RECORDS = {
   "cms-facts": [
     input(["rule"], "CMS fields", "the fields behind the column's CMS facts", ["benefit", "fields"],
       (t) => cmsFacts(t).map((f) => [f.benefit, JSON.parse(f.quotes || "[]").join(", ")])),
-    output(["rule"], "pbp_facts", "the column's CMS facts", ["benefit", "network", "cost_kind", "amount", "source"],
-      (t) => cmsFacts(t).map((f) => [f.benefit, f.network, f.cost_kind, f.amount, f.source])),
+    output(["rule"], "pbp_facts", "the column's CMS facts", ["benefit", "setting", "condition", "amount", "source"],
+      (t) => cmsFacts(t).map((f) => [f.benefit, f.setting, f.condition ?? "", f.amount, f.source])),
   ],
   "read-facts": [pageText(input),
     output(["answers", "documents"], "answers/*.json", "one saved answer per reader prompt", ["answer", "model", "document", "prompt"],
