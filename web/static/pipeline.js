@@ -73,6 +73,10 @@ export const NODES = {
         ["ambulance", "outside_us", "out", "Emergency Ambulance", "supplemental", "copay", "$325", "EOC", "46"],
         ["ambulance.ground", "any", "in", "", "medicare", "copay", "$325", "SB", "9"],
         ["ambulance.air", "any", "in", "", "medicare", "coinsurance", "20%", "SB", "9"]] } },
+  rules: { col: 1, row: 5, store: "git", label: "rule code", code: "pipeline/present.py",
+    text: { name: "pipeline/present.py", note: "the Ambulance column's entry in COLUMNS, and the rule it names",
+      lines: ['COLUMNS = {..., "AB_ambulance": ambulance, ...}', "", "def ambulance(organization, found):",
+        '    """Line 1 is trips within the U.S. and line 2 is emergency trips abroad, each as (value, cited facts).', "    …"] } },
   presented: { col: 0, row: 7, store: "d1", label: "presented",
     table: { name: "presented", note: "one row per citation", cols: ["plan_id", "column", "line", "value", "pdf_page", "quote"],
       rows: [["H1036-153-0", "AB_ambulance", "1", "$325 or 20%", "46", "In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance"],
@@ -137,14 +141,10 @@ export const STEPS = [
     paras: [["Code runs a ", ["quoteCheck", "quote check"], " on every fact. A verifier, Claude Opus, then judges each fact mixed with ", ["decoy", "decoys"], ". Last, a ", ["reviewer", "reviewer"], " checks each fact a value would cite."]],
     example: { highlight: { answers: [2], facts: [3, 4, 5] }, before: "SB: abroad, covered_by medicare", after: "rejected; the EOC's supplemental fact stands",
       paras: [["The verifier rejected the SB's worldwide fact: Medicare doesn't cover care abroad, so it is supplemental. The EOC's fact, already marked supplemental, passed."]] } },
-  { id: "column-rules", record: "rule", from: "facts", also: ["cmsFacts"], to: "presented", label: "Column rules",
-    paras: [["Each column has a rule, written in code from the domain expert's instructions. It takes facts from the ", ["bestSource", "best source"], " and cites their quotes."]],
-    example: { highlight: { facts: [0, 1, 2, 3], presented: [0, 1, 2] }, before: "ground $325, air 20%, abroad $325", after: "$325 or 20% | $325",
+  { id: "column-rules", record: "rule", from: "facts", also: ["rules", "cmsFacts"], to: "presented", alsoTo: ["sheet"], label: "Column rules",
+    paras: [["Each column has a rule, written in code from the domain expert's instructions. It takes facts from the ", ["bestSource", "best source"], " and cites their quotes. It writes each value to the sheet and each citation to presented. A line that only CMS data backs has no citation, so a volunteer can't check it."]],
+    example: { highlight: { facts: [0, 1, 2, 3], rules: [0, 2], presented: [0, 1, 2], sheet: [0] }, before: "ground $325, air 20%, abroad $325", after: "$325 or 20% | $325",
       paras: [["In the ", ["rule", "Ambulance rule"], ", line 1 takes in-network, Medicare-covered ground and air trips from the EOC. Line 2 takes trips abroad. Each line cites the quotes of the facts it used, so line 1 gets four citations and line 2 one, all from EOC page 46."]] } },
-  { id: "sheet", record: "sheet", from: "facts", also: ["cmsFacts"], to: "sheet", label: "Write sheet",
-    paras: [["The column rules also write every value to the sheet. A line that only CMS data backs has no citation, so a volunteer can't check it."]],
-    example: { highlight: { facts: [0, 1, 2, 3], sheet: [0] }, before: "ground $325, air 20%, abroad $325", after: "$325 or 20% | $325",
-      paras: [["Every line here cites the EOC."]] } },
   { id: "publish", record: "citations", from: "sheet", also: ["presented", "notes"], to: "site", label: "Publish",
     paras: [["Merging to main builds the site from the sheet, its citations and the notes that Claude sessions write. ", ["worker", "The pdxplans Worker"], " serves it at pdxplans.org, and the same build updates the volunteers' Google Sheet."]],
     example: { highlight: { sheet: [0], presented: [0, 1, 2], site: [1, 4, 5] }, before: "$325 or 20% | $325, 5 quotes", after: "cell + EOC page 46 highlight", paras: [] } },
@@ -152,6 +152,8 @@ export const STEPS = [
 
 // A step reads from first, then each node in also.
 export const inputs = (step) => [step.from, ...(step.also ?? [])];
+// A step writes to, then each node in alsoTo.
+export const outputs = (step) => [step.to, ...(step.alsoTo ?? [])];
 
 export const NODE_W = 128;
 export const NODE_H = 54;
@@ -194,25 +196,28 @@ function curve([x1, y1], [x2, y2]) {
 const bottom = (b) => [b.x + b.w / 2, b.y + b.h];
 const top = (b) => [b.x + b.w / 2, b.y];
 
-// Every label sits MIN_GAP above its output. A one-input step's label is on its edge; several inputs join above the output.
+const center = (boxes) => boxes.reduce((x, b) => x + b.x + b.w / 2, 0) / boxes.length;
+const branches = (step) => inputs(step).length > 1 || outputs(step).length > 1;
+
+// Every label sits MIN_GAP above its outputs, which share a row. A step with one input and one output has its label on
+// its edge; otherwise the inputs join above the outputs' center, and the edges split there.
 export function pillBox(step) {
   const to = nodeBox(step.to);
-  const x = inputs(step).length > 1 ? to.x + to.w / 2 : curve(bottom(nodeBox(step.from)), top(to)).at(0.5)[0];
+  const x = branches(step) ? center(outputs(step).map(nodeBox)) : curve(bottom(nodeBox(step.from)), top(to)).at(0.5)[0];
   return { x: x - PILL_W / 2, y: to.y - RING - MIN_GAP - PILL_H, w: PILL_W, h: PILL_H };
 }
 
-// The lines a step draws. Only the one into the output gets an arrow.
+// The lines a step draws. Only those into an output get an arrow.
 export function paths(step) {
-  const to = top(nodeBox(step.to));
-  if (inputs(step).length === 1) return [{ ...curve(bottom(nodeBox(step.from)), to), arrow: true }];
+  if (!branches(step)) return [{ ...curve(bottom(nodeBox(step.from)), top(nodeBox(step.to))), arrow: true }];
   const pill = pillBox(step);
   return [...inputs(step).map((id) => ({ ...curve(bottom(nodeBox(id)), top(pill)), arrow: false })),
-    { ...curve(bottom(pill), to), arrow: true }];
+    ...outputs(step).map((id) => ({ ...curve(bottom(pill), top(nodeBox(id))), arrow: true }))];
 }
 
 export const stepById = (id) => STEPS.find((s) => s.id === id);
-export const before = (step) => STEPS.filter((s) => inputs(step).includes(s.to));
-export const after = (step) => STEPS.filter((s) => inputs(s).includes(step.to));
+export const before = (step) => STEPS.filter((s) => outputs(s).some((id) => inputs(step).includes(id)));
+export const after = (step) => STEPS.filter((s) => outputs(step).some((id) => inputs(s).includes(id)));
 
 const shownValue = (v) => v === "" ? "blank" : v;
 const plural = (n, word) => `${n} ${word}${n === 1 ? "" : "s"}`;
@@ -254,7 +259,6 @@ const STRIPS = {
   },
   "column-rules": (t) => [`${plural(t.rule.lines.reduce((n, l) => n + l.facts.length, 0), "fact")} used, ${t.rule.set_aside.length} set aside`,
     t.rule.held ? `held: ${t.rule.held}` : t.rule.lines.map((l) => `line ${l.line} ${shownValue(l.value)}`).join("; ")],
-  "sheet": (t) => ["the column rule", shownValue(t.sheet.value)],
   "publish": (t) => [`sheet ${shownValue(t.sheet.value)}`, `site cell ${shownValue(t.sheet.value)} with ${quotes(t.citations.shown, t)}`],
 };
 
@@ -339,11 +343,7 @@ const DETAILS = {
     ({ text: `A URL template in code offered the ${c.kind}${c.used ? ", and it won" : ""}`, href: c.url })),
   "read-facts": (t) => promptLinks(t, true),
   "check-facts": (t) => [...t.fact_checks.rows.map((r) => factCheck(t, r)), ...promptLinks(t, false)],
-  "column-rules": (t) => [
-    ...(t.rule.held ? [{ text: `The rule leaves this cell blank, because ${t.rule.held}` }] : []),
-    ...t.rule.lines.flatMap((l) => l.facts.map((f) => ({ text: `Line ${l.line} (${shownValue(l.value)}) used ${factLabel(f.source, f.page, f)}` }))),
-    ...t.rule.set_aside.map((f) => ({ text: `Set aside ${factLabel(f.source, f.page, f)}: ${f.reasons.join("; ")}` })),
-  ],
+  "column-rules": (t) => t.rule.held ? [{ text: `The rule leaves this cell blank, because ${t.rule.held}` }] : [],
 };
 
 // RECORDS[step][node] reads the cell's rows in that node's table from the trace. Each table names the records it needs,
@@ -375,14 +375,21 @@ const stated = (row) => row.stated_by[0]?.stated ?? {};
 const used = (t) => t.rule.lines.flatMap((l) => l.facts);
 const considered = (t) => [...used(t), ...t.rule.set_aside];
 const cmsFacts = (t) => considered(t).filter((f) => f.origin === "pbp");
-// An origin's table lists the facts of that origin that the rule considered, and highlights the ones it used.
+// An origin's table lists the facts of that origin that the rule considered: each line's facts, highlighted, then
+// the facts it set aside and why.
+const RULE_FACT_COLS = ["line", "source", "page", "benefit", "amount", "set aside because", "setting", "network", "condition"];
+const ruleFactRow = (line, f, why) => [line, f.source, String(f.page ?? ""), f.benefit, f.amount, why, f.setting, f.network, f.condition ?? ""];
 const ruleFacts = (origin, note) => {
-  const mine = (t) => considered(t).filter((f) => f.origin === origin);
-  return table(["rule"], `${note}; highlighted facts were used`, FACT_COLS, (t) => mine(t).map((f) => factRow(f.source, f.page, f)),
-    (t) => mine(t).flatMap((f, i) => used(t).includes(f) ? [i] : []));
+  const usedBy = (t) => t.rule.lines.flatMap((l) => l.facts.filter((f) => f.origin === origin).map((f) => ruleFactRow(String(l.line), f, "")));
+  return table(["rule"], `${note}; highlighted facts were used`, RULE_FACT_COLS,
+    (t) => [...usedBy(t), ...t.rule.set_aside.filter((f) => f.origin === origin).map((f) => ruleFactRow("", f, f.reasons.join("; ")))],
+    (t) => usedBy(t).map((_, i) => i));
 };
-const lineFacts = (origin, note) => table(["rule"], note, ["line", ...FACT_COLS],
-  (t) => t.rule.lines.flatMap((l) => l.facts.filter((f) => f.origin === origin).map((f) => [String(l.line), ...factRow(f.source, f.page, f)])));
+// "present.py lines 323–332" for a link to those lines.
+const codeLines = (url) => {
+  const [start, end] = url.split("#L")[1].split("-L");
+  return `${url.split("/").at(-1).split("#")[0]} ${start === end ? `line ${start}` : `lines ${start}–${end}`}`;
+};
 const sheetRow = table(["sheet"], "the cell", ["plan_id", "column", "value"], (t) => [[t.cell.plan_id, t.cell.col, shownValue(t.sheet.value)]]);
 const kindOf = (t, url) => t.documents.documents.find((d) => d.url === url)?.kind ?? "";
 const CITE_COLS = ["line", "value", "document", "pdf_page", "quote"];
@@ -426,12 +433,10 @@ export const RECORDS = {
   },
   "column-rules": {
     facts: ruleFacts("document", "the document facts the rule considered"),
+    rules: table(["rule"], "the column's entry, then each function it names, at the build's commit", ["code", "lines"],
+      (t) => t.rule.code.map((c) => [c.name, { text: codeLines(c.url), href: c.url }])),
     cmsFacts: ruleFacts("pbp", "the CMS facts the rule considered"),
     presented: table(["citations", "documents"], "the cell's citations", CITE_COLS, (t) => citationRows(t, allCitations(t))),
-  },
-  "sheet": {
-    facts: lineFacts("document", "the document facts each line used"),
-    cmsFacts: lineFacts("pbp", "the CMS facts each line used"),
     sheet: sheetRow,
   },
   "publish": {
@@ -443,9 +448,9 @@ export const RECORDS = {
   },
 };
 
-// A step shows one table per input, in the map's order, then its output. rows is null when the trace lacks a record
+// A step shows one table per input, in the map's order, then its outputs. rows is null when the trace lacks a record
 // the table needs, and empty when a record says no step touched the cell.
-export const records = (step, trace, sheet = trace?.cell?.sheet) => [...inputs(step), step.to].map((id, i) => {
+export const records = (step, trace, sheet = trace?.cell?.sheet) => [...inputs(step), ...outputs(step)].map((id, i) => {
   const r = RECORDS[step.id][id];
   const status = r.needs.map((k) => trace?.[k]?.status);
   const rows = status.every((s) => s === "traced") ? r.rows(trace) : status.every((s) => s === "traced" || s === "none") ? [] : null;

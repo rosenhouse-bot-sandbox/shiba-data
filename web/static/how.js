@@ -2,7 +2,7 @@
 import { el, svg } from "./dom.js";
 import { format } from "./permalink.js";
 import {
-  EXAMPLE, NODES, STEPS, STORES, inputs, nodeName, NODE_W, NODE_H, RING, MAP_W, MAP_H,
+  EXAMPLE, NODES, STEPS, STORES, inputs, outputs, nodeName, NODE_W, NODE_H, RING, MAP_W, MAP_H,
   nodeBox, pillBox, paths, before, after, strip, details, records, nodeHref,
 } from "./pipeline.js";
 
@@ -37,7 +37,7 @@ export function howView({ year, cell, step, terms, trace, cms }) {
 
 // at says where each node's data is: { year, sheet, sha, cell }, as nodeHref takes it.
 function map(step, link, at) {
-  const on = new Set([...inputs(step), step.to]);
+  const on = new Set([...inputs(step), ...outputs(step)]);
   const lines = svg("svg", { width: MAP_W, height: MAP_H, "aria-hidden": "true" },
     svg("defs", {}, ...["off", "on"].map((k) => svg("marker", {
       id: `how-arrow-${k}`, viewBox: "0 0 10 10", refX: "9", refY: "5", markerWidth: "10", markerHeight: "10", markerUnits: "userSpaceOnUse", orient: "auto",
@@ -103,7 +103,7 @@ function lens(step, link, terms, example, trace, sheet) {
     chips(before(step), "before", (l) => `↖ after: ${l}`),
     // A size container, so the edge stacks when the lens is narrow. It holds no pop-overs, which containment would anchor to it.
     el("div", { class: "how-edge-box" }, el("div", { class: "how-edge-big" }, el("div", { class: "how-ins" }, ...inputs(step).map(end)),
-      el("span", { class: "how-wire" }), el("h2", { class: "how-step", tabindex: "-1" }, step.label), el("span", { class: "how-wire to" }), end(step.to))),
+      el("span", { class: "how-wire" }), el("h2", { class: "how-step", tabindex: "-1" }, step.label), el("span", { class: "how-wire to" }), el("div", { class: "how-outs" }, ...outputs(step).map(end)))),
     el("div", { class: "how-card" },
       fromTo ? el("p", { class: "how-strip" }, el("code", { class: "from" }, fromTo[0]), " becomes ", el("code", { class: "to" }, fromTo[1])) : null,
       ...step.paras.map(para), ...(example?.paras ?? []).map(para), workList(details(step, trace))),

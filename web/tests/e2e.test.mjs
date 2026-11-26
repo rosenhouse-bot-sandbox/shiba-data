@@ -1056,11 +1056,11 @@ test("pipeline view: every step's header and input tables name the inputs the ma
       await openHow(page, `${cell}/${step}`);
       const lit = await page.locator(".how-node.on code").allTextContents();
       const header = await page.locator(".how-ins code").allTextContents();
-      const output = await page.locator(".how-edge-big > .how-end code").textContent();
+      const outputs = await page.locator(".how-outs code").allTextContents();
       const tables = await page.locator(".how-rows.input .how-rows-head code").allTextContents();
-      assert.deepEqual([...header, output].sort(), lit.sort(), `${cell} ${step} header`);
+      assert.deepEqual([...header, ...outputs].sort(), lit.sort(), `${cell} ${step} header`);
       assert.deepEqual(tables, header, `${cell} ${step} tables`);
-      assert.deepEqual(await page.locator(".how-rows.output .how-rows-head code").allTextContents(), [output], `${cell} ${step} output`);
+      assert.deepEqual(await page.locator(".how-rows.output .how-rows-head code").allTextContents(), outputs, `${cell} ${step} outputs`);
     }
   }
 });
@@ -1185,7 +1185,7 @@ test("pipeline view: a record's status reads in words, and a record the trace la
   opened.push(fresh);
   await fresh.route("**/trace/**", async (route) => {
     const trace = await (await route.fetch()).json();
-    delete trace.sheet;
+    delete trace.rule;
     trace.plan = { status: "none" };
     await route.fulfill({ json: trace });
   });
@@ -1193,7 +1193,7 @@ test("pipeline view: a record's status reads in words, and a record the trace la
     await openHow(fresh, `main/H1036-153-0/ambulance/${step}`);
     return fresh.textContent(".how-trace-head");
   };
-  assert.match(await head("sheet"), /sheet\s*Not recorded in this build/);
+  assert.match(await head("column-rules"), /rule\s*Not recorded in this build/);
   assert.match(await head("list-plans"), /plan\s*No step touched this cell/);
 });
 
@@ -1289,7 +1289,7 @@ test("pipeline view: a link may name the column by its key", async () => {
   assert.equal(await page.locator(".warn").count(), 0);
 });
 
-test("pipeline view: a replayed trace shows the reader prompt, each fact's verdicts and the facts the rule set aside", async () => {
+test("pipeline view: a replayed trace shows the reader prompt, each fact's verdicts, the rule's code and the facts it set aside", async () => {
   const fresh = await browser.newPage();
   opened.push(fresh);
   const replay = fs.readFileSync(path.join(path.dirname(new URL(import.meta.url).pathname), "fixtures/replay_trace.json"));
@@ -1300,7 +1300,10 @@ test("pipeline view: a replayed trace shows the reader prompt, each fact's verdi
   };
   assert.ok((await work("read-facts")).includes("EOC reader prompt for the ambulance group, answered by claude-opus-5-5 ↗"));
   assert.ok((await work("check-facts")).some((l) => l.startsWith("Rejected: SB page 6, ambulance $325. Verifier disagreed:")));
-  assert.ok((await work("column-rules")).includes("Set aside SB page 9, ambulance.air 20%: SB ranks below EOC"));
+  await work("column-rules");
+  const table = (name) => fresh.locator(".how-rows", { has: fresh.locator(`.how-rows-head code:text-is("${name}")`) });
+  assert.match(await table("rule code").locator("a", { hasText: "present.py lines" }).getAttribute("href"), /present\.py#L\d+-L\d+$/);
+  assert.ok((await table("document_facts").locator("tbody tr:not(.hi)").allTextContents()).some((r) => r.includes("SB ranks below EOC")));
 });
 
 const openPhone = (hash, colorScheme = "light") => newPage({ ...devices["iPhone 13"], colorScheme }).then(async (p) => {

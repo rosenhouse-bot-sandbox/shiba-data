@@ -166,11 +166,16 @@
  "sheet": {
   "status": "traced",
   "value": "$325 or 20% | $325",
-  "code": {
-   "file": "pipeline/present.py",
-   "function": "ambulance",
-   "url": "https://github.com/rosenhouse-bot-sandbox/shiba-data/blob/x/pipeline/present.py"
-  }
+  "code": [
+   {
+    "name": "AB_ambulance in COLUMNS",
+    "url": "https://github.com/rosenhouse-bot-sandbox/shiba-data/blob/x/pipeline/present.py#L1626-L1626"
+   },
+   {
+    "name": "ambulance",
+    "url": "https://github.com/rosenhouse-bot-sandbox/shiba-data/blob/x/pipeline/present.py#L243-L268"
+   }
+  ]
  },
  "answers": {
   "status": "traced",
@@ -632,11 +637,16 @@
  },
  "rule": {
   "status": "traced",
-  "code": {
-   "file": "pipeline/present.py",
-   "function": "ambulance",
-   "url": "https://github.com/rosenhouse-bot-sandbox/shiba-data/blob/x/pipeline/present.py"
-  },
+  "code": [
+   {
+    "name": "AB_ambulance in COLUMNS",
+    "url": "https://github.com/rosenhouse-bot-sandbox/shiba-data/blob/x/pipeline/present.py#L1626-L1626"
+   },
+   {
+    "name": "ambulance",
+    "url": "https://github.com/rosenhouse-bot-sandbox/shiba-data/blob/x/pipeline/present.py#L243-L268"
+   }
+  ],
   "held": null,
   "lines": [
    {
