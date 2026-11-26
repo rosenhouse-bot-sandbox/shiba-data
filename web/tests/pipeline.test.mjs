@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import fs from "node:fs";
 import assert from "node:assert/strict";
-import { NODES, STEPS, RING, MIN_GAP, inputs, nodeBox, pillBox, paths, before, after, stepById, strip, details, records } from "../static/pipeline.js";
+import { NODES, STEPS, RING, MIN_GAP, MERGE_ROOM, inputs, nodeBox, pillBox, paths, before, after, stepById, strip, details, records } from "../static/pipeline.js";
 
 const inside = ([x, y], b) => x > b.x && x < b.x + b.w && y > b.y && y < b.y + b.h;
 
@@ -31,6 +31,17 @@ test("boxes above one another keep a minimum gap outside any ring", () => {
   const boxes = [...Object.keys(NODES).map((id) => [id, nodeBox(id), RING]), ...STEPS.map((s) => [s.id, pillBox(s), 0])];
   for (const [i, [a, ...ab]] of boxes.entries()) for (const [b, ...bb] of boxes.slice(i + 1)) {
     assert.ok(verticalGap(ab, bb) >= MIN_GAP, `${a} and ${b} are ${verticalGap(ab, bb)}px apart`);
+  }
+});
+
+const isMerge = (s) => inputs(s).length > 1;
+const mergeRows = new Set(STEPS.filter(isMerge).map((s) => NODES[s.to].row));
+
+test("labels sit close below their nearest input", () => {
+  for (const s of STEPS) {
+    const above = Math.max(...inputs(s).map((id) => nodeBox(id).y + nodeBox(id).h));
+    const room = mergeRows.has(NODES[s.to].row) ? MERGE_ROOM : MIN_GAP;
+    assert.ok(pillBox(s).y - above - RING <= room, `${s.id} label is ${pillBox(s).y - above - RING}px below its input`);
   }
 });
 
