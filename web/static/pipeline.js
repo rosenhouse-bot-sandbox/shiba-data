@@ -92,7 +92,7 @@ export const STEPS = [
     paras: [["The pipeline sends Claude Opus ", ["prompt", "one prompt"], " per document and benefit group. Claude answers with facts, each with its quotes and page."],
       ["The answer is ", ["hash", "saved under a hash of the model, effort and prompt"], ", so a rerun calls no model."]],
     example: { highlight: [[3, 4, 5], [0, 1, 2]], before: "Ground  $325 copay per date of service", after: "{benefit: ambulance.ground, amount: $325, page: 9}",
-      paras: [["For this SB and the ambulance group, Claude answers with three facts."]] } },
+      paras: [["The Ambulance column uses the ambulance and emergency groups, so four prompts read this plan's SB and EOC. For the SB and the ambulance group, Claude answers with three facts."]] } },
   { id: "check-facts", record: "fact_checks", from: "answers", to: "facts", label: "Check facts",
     paras: [["Code runs a ", ["quoteCheck", "quote check"], " on every fact. A verifier, Claude Opus, then judges each fact mixed with ", ["decoy", "decoys"], ". Last, a ", ["reviewer", "reviewer"], " checks each fact a value would cite."]],
     example: { highlight: [[2], [3, 4, 5]], before: "SB: abroad, covered_by medicare", after: "rejected; the EOC's supplemental fact stands",
@@ -185,6 +185,11 @@ function quotes(rows, trace) {
   return `${plural(rows.length, "quote")} from ${where.join("; ")}`;
 }
 
+function readerAnswers(t) {
+  const answers = [...new Set(uniquePrompts(t, true).map(({ answer }) => answer))];
+  return `${plural(answers.length, "saved answer")} from ${listed([...new Set(answers.map((a) => a.model))])}`;
+}
+
 // What each step took in and gave out for a cell, read from its trace.
 const STRIPS = {
   "list-plans": (t) => [`${t.plan.row.plan_id} in the Landscape file`, `plans.csv: ${t.plan.row.plan_name}`],
@@ -194,7 +199,7 @@ const STRIPS = {
     `${d.kind}, ${plural(d.pages, "page")}${d.cover_problems ? ", cover problems" : ""}`).join("; ")],
   "extract-text": (t) => [plural(t.documents.documents.length, "PDF"),
     `text of ${plural(t.documents.documents.reduce((n, d) => n + d.pages, 0), "page")}`],
-  "read-facts": (t) => [`${kinds(t)} page text`, `${plural(t.answers.rows.length, "saved answer")} from ${listed([...new Set(t.answers.rows.map((a) => a.model))])}`],
+  "read-facts": (t) => [`${kinds(t)} page text`, readerAnswers(t)],
   "check-facts": (t) => {
     const kept = t.fact_checks.rows.filter((r) => r.kept).length;
     return [plural(t.fact_checks.rows.length, "fact"), `${kept} kept, ${t.fact_checks.rows.length - kept} rejected`];
@@ -221,31 +226,54 @@ const PROMPT_ROLES = {
   review: "reviewer prompt",
 };
 const READING = ["read", "reread"];
+// A prompt's dir is facts/[inherited/]<group>/<role>, or facts/review.
+const roleOf = (p) => p.dir.split("/").at(-1);
+const groupOf = (p) => p.dir.split("/").length > 2 ? p.dir.split("/").at(-2) : null;
+const isReading = (p) => READING.includes(roleOf(p));
+
+// Each prompt once, with its answer. An inherited task repeats a prompt.
+function uniquePrompts(t, reading) {
+  const found = new Map();
+  for (const answer of t.answers.rows) for (const p of answer.prompts) {
+    if (isReading(p) === reading && !found.has(p.prompt)) found.set(p.prompt, { p, answer });
+  }
+  return [...found.values()];
+}
+
+function promptLabel(t, p) {
+  const kind = docKindOf(t, p.task);
+  const group = groupOf(p);
+  const reviewed = roleOf(p) === "review" && t.fact_checks.rows?.find((r) => r.reviewer.prompt === p.prompt);
+  return `${kind ? `${kind} ` : ""}${PROMPT_ROLES[roleOf(p)] ?? "prompt"}${group ? ` for the ${group} group` : ""}`
+    + (reviewed ? ` for ${checkedFactLabel(t, reviewed)}` : "");
+}
 
 function promptLinks(t, reading) {
   if (t.answers.status !== "traced") return [];
-  return t.answers.rows.flatMap((answer) => answer.prompts.map((p) => ({ p, answer })))
-    .filter(({ p }) => READING.includes(p.dir.split("/").at(-1)) === reading)
-    .map(({ p, answer }) => {
-      const role = PROMPT_ROLES[p.dir.split("/").at(-1)] ?? "prompt";
-      const kind = docKindOf(t, p.task);
-      const retry = p.task.includes(".retry.") ? ", retried" : "";
-      return { text: `${kind ? `${kind} ` : ""}${role}${retry}, answered by ${answer.model}`, href: p.url };
-    });
+  const links = uniquePrompts(t, reading).map(({ p, answer }) => ({ p, answer, label: promptLabel(t, p) }));
+  const shared = (label) => links.filter((l) => l.label === label).length > 1;
+  return links.map(({ p, answer, label }) => ({
+    text: `${label}${shared(label) ? ` ${p.prompt.slice(0, 8)}` : ""}${p.task.includes(".retry.") ? ", retried" : ""}, answered by ${answer.model}`,
+    href: p.url,
+  }));
 }
 
 const factLabel = (kind, page, f) =>
-  `${kind ?? "Unknown document"}${page ? ` page ${page}` : ""}, ${[f.benefit, f.amount].filter(Boolean).join(" ")}`;
+  `${kind ?? "Unknown document"}${page ? ` page ${page}` : ""}, ${[f.benefit, f.amount].filter(Boolean).join(" ")}${f.condition ? ` (${f.condition})` : ""}`;
 const verdict = (who, check) => `${who} ${check.ok ? "agreed" : "disagreed"}: ${check.reason.replace(/\.$/, "")}`;
 
 const taskOf = (t, prompt) => t.answers.rows?.flatMap((a) => a.prompts).find((p) => p.prompt === prompt)?.task;
 
-function factCheck(t, row) {
+// A fact that failed its quote check has no id, so its document comes from the prompt that stated it.
+function checkedFactLabel(t, row) {
   const statedBy = row.stated_by[0];
   const stated = statedBy?.stated ?? {};
-  // A fact that failed its quote check has no id, so its document comes from the prompt that stated it.
   const task = taskOf(t, statedBy?.prompt);
-  const parts = [row.fact ? factLabel(row.fact.source, row.fact.page, stated) : factLabel(task && docKindOf(t, task), stated.page, stated)];
+  return row.fact ? factLabel(row.fact.source, row.fact.page, stated) : factLabel(task && docKindOf(t, task), stated.page, stated);
+}
+
+function factCheck(t, row) {
+  const parts = [checkedFactLabel(t, row)];
   if (row.code_check && row.code_check !== "passed") parts.push(`Quote check failed: ${row.code_check}`);
   parts.push(...row.verifier.map((v) => verdict("Verifier", v)));
   if (row.reviewer.status === "traced") parts.push(verdict("Reviewer", row.reviewer));
@@ -309,8 +337,7 @@ const RECORDS = {
   "extract-text": [checkedCsv(input), pageText(output)],
   "read-facts": [pageText(input),
     output(["answers", "documents"], "answers/*.json", "one saved answer per reader prompt", ["answer", "model", "document", "prompt"],
-      (t) => t.answers.rows.flatMap((a) => a.prompts.filter((p) => READING.includes(p.dir.split("/").at(-1)))
-        .map((p) => [a.key, a.model, docKindOf(t, p.task) ?? "", p.dir.split("/").at(-2)])))],
+      (t) => uniquePrompts(t, true).map(({ p, answer: a }) => [a.key, a.model, docKindOf(t, p.task) ?? "", groupOf(p)]))],
   "check-facts": [
     input(["fact_checks", "documents"], "facts in the answers", "highlighted facts were kept", FACT_COLS,
       (t) => t.fact_checks.rows.map((r) => factRow(statedKind(t, r), stated(r).page, stated(r))),
