@@ -2,7 +2,7 @@
 import { el, svg } from "./dom.js";
 import { format } from "./permalink.js";
 import {
-  EXAMPLE, NODES, STEPS, STORES, SHEET_TABLES, inputs, NODE_W, NODE_H, RING, MAP_W, MAP_H,
+  EXAMPLE, NODES, STEPS, STORES, inputs, nodeName, NODE_W, NODE_H, RING, MAP_W, MAP_H,
   nodeBox, pillBox, paths, before, after, strip, details, records, nodeHref,
 } from "./pipeline.js";
 
@@ -13,7 +13,6 @@ const SCALE = RAIL_W / MAP_W;
 export const howLink = (year, cell, step) => format({ year, view: "how", sheet: cell.sheet, plan: cell.plan, column: cell.column, step: step.id });
 export const traceUrl = (year, sheet, plan, columnKey) => `trace/${year}/${sheet}/${plan}/${columnKey}`;
 const shown = (id) => NODES[id].table ?? NODES[id].text;
-const label = (id, sheet) => id === "sheet" ? SHEET_TABLES[sheet] : NODES[id].label;
 const store = (id) => STORES[NODES[id].store];
 const isExample = (cell) => cell.sheet === EXAMPLE.sheet && cell.plan === EXAMPLE.plan && cell.column === EXAMPLE.column;
 
@@ -49,7 +48,7 @@ function map(step, link, at) {
     }))));
   const downloads = [];
   const nodes = Object.entries(NODES).map(([id, n]) => {
-    const b = nodeBox(id), href = nodeHref(id, at), name = label(id, at.sheet);
+    const b = nodeBox(id), href = nodeHref(id, at), name = nodeName(id, at.sheet);
     const attrs = {
       class: `how-node store-${n.store}${on.has(id) ? " on" : ""}`,
       style: `left:${b.x}px;top:${b.y}px;width:${NODE_W}px;height:${NODE_H}px`,
@@ -97,22 +96,21 @@ function lens(step, link, terms, example, trace, sheet) {
   const chips = (near, cls, text) => near.length ? el("div", { class: `how-chips ${cls}` },
     ...near.map((s) => el("a", { href: link(s) }, text(s.label)))) : null;
   const end = (id) => el("div", { class: `how-end store-${NODES[id].store}` },
-    el("small", {}, store(id).label), el("code", {}, example ? linked(shown(id).name, shown(id).href) : label(id, sheet)));
+    el("small", {}, store(id).label), el("code", {}, example ? linked(nodeName(id, sheet), shown(id).href) : nodeName(id, sheet)));
   const fromTo = example ? [example.before, example.after] : strip(step, trace);
-  const live = records(step, trace);
   const para = (p) => el("p", {}, ...p.map((s) => typeof s === "string" ? s : term(terms[s[0]], s[1])));
   return el("section", { class: "how-lens" },
     chips(before(step), "before", (l) => `↖ after: ${l}`),
     // A size container, so the edge stacks when the lens is narrow. It holds no pop-overs, which containment would anchor to it.
-    el("div", { class: "how-edge-box" }, el("div", { class: "how-edge-big" }, end(step.from), el("span", { class: "how-wire" }),
-      el("h2", { class: "how-step", tabindex: "-1" }, step.label), el("span", { class: "how-wire to" }), end(step.to))),
+    el("div", { class: "how-edge-box" }, el("div", { class: "how-edge-big" }, el("div", { class: "how-ins" }, ...inputs(step).map(end)),
+      el("span", { class: "how-wire" }), el("h2", { class: "how-step", tabindex: "-1" }, step.label), el("span", { class: "how-wire to" }), end(step.to))),
     el("div", { class: "how-card" },
       fromTo ? el("p", { class: "how-strip" }, el("code", { class: "from" }, fromTo[0]), " becomes ", el("code", { class: "to" }, fromTo[1])) : null,
       ...step.paras.map(para), ...(example?.paras ?? []).map(para), workList(details(step, trace))),
-    ...["Input", "Output"].flatMap((role, i) => {
-      const mine = live.filter((r) => r.role === role);
-      if (mine.length) return mine.map((r) => table(role, r.name, r.note, r.cols, r.rows, r.hi));
-      return example ? [rows(role, i ? step.to : step.from, example.highlight[i])] : [];
+    ...records(step, trace, sheet).map((r) => {
+      if (r.rows) return table(r.role, r.name, r.note, r.cols, r.rows, r.hi);
+      if (example) return rows(r.role, r.node, sheet, example.highlight[r.node] ?? []);
+      return frame(r.role, r.name, r.note, el("p", { class: "how-none" }, trace ? "Not recorded in this build." : "No trace for this cell."));
     }),
     traceRecord(step, trace),
     chips(after(step), "after", (l) => `next: ${l} ↘`));
@@ -200,8 +198,10 @@ document.addEventListener("click", (e) => {
 });
 document.addEventListener("scroll", (e) => opened && !opened.box.contains(e.target) && opened.close(), true);
 
-function rows(role, id, highlight) {
-  const n = NODES[id], { name, note } = shown(id);
+// The example's rows of a node. The note names the example's own file when the node's name does not.
+function rows(role, id, sheet, highlight) {
+  const n = NODES[id], name = nodeName(id, sheet), { name: file, note: about } = shown(id);
+  const note = file === name ? about : `${file} · ${about}`;
   if (n.table) return table(role, name, note, n.table.cols, n.table.rows, highlight);
   const hi = new Set(highlight);
   return frame(role, name, note, el("pre", {}, ...n.text.lines.map((l, i) => el("span", hi.has(i) ? { class: "hi" } : {}, l))));

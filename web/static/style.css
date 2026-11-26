@@ -182,8 +182,10 @@ button.how-node { display: flex; flex-direction: column; justify-content: flex-s
   .how-wire { flex: none; align-self: center; width: 2px; min-width: 0; height: 16px; }
   .how-wire.to::after { content: "▼"; right: -5px; top: auto; bottom: -10px; }
   .how-step { white-space: normal; }
+  .how-ins { flex-flow: row wrap; justify-content: center; }
 }
 .how-edge-big { display: flex; align-items: center; margin: 14px 0 18px; animation: how-zoom .4s cubic-bezier(.2, .8, .2, 1) both; }
+.how-ins { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
 .how-end { padding: 10px 14px; border: 1.5px solid var(--accent); border-radius: 10px; background: var(--page); min-width: 0; }
 .how-end code { font-size: 13px; font-weight: 600; overflow-wrap: break-word; }
 .how-wire { flex: 1; min-width: 32px; height: 2px; background: var(--accent); position: relative; }
