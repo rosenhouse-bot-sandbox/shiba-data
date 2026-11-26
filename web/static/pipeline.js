@@ -30,7 +30,8 @@ export const NODES = {
       rows: [["H1036-153-0", "SB", "ce13e925c0384896d725da85a06c14df…", "24", ""],
         ["H1036-153-0", "EOC", "64e05773e847b56e0eeb5425979d5499…", "188", ""]] } },
   text: { col: 1, row: 5, kind: "files in R2", source: true, label: "page text",
-    text: { name: "ce13e925c0384896.txt", note: "SB page 9",
+    text: { name: "6ebca98d895a45b3.txt", note: "SB page 9",
+      href: "blobs/6ebca98d895a45b3d8c15ea4fd6a6052d6a31ade9374ff3cdfe194d957f8c1b7.txt",
       lines: ["=====PAGE 9=====", " SKILLED NURSING FACILITY (SNF)",
         " This plan covers up to 100 days in a SNF        $10 copay per day for days 1-20", " AMBULANCE",
         " Air                                             20% of the cost",
@@ -269,15 +270,16 @@ const traced = (r) => r?.status === "traced";
 const table = (role) => (needs, name, note, cols, rows, hi = () => []) => ({ role, needs, name, note, cols, rows, hi });
 const input = table("Input"), output = table("Output");
 const short = (sha) => sha ? `${sha.slice(0, 16)}…` : "";
+const blob = (sha, href) => sha ? { text: short(sha), href: href(sha) } : "";
 const FACT_COLS = ["source", "page", "benefit", "setting", "network", "condition", "amount"];
 const factRow = (kind, page, f) => [kind ?? "", String(page ?? ""), f.benefit, f.setting, f.network, f.condition ?? "", f.amount];
 const PLAN_COLS = ["plan_id", "plan_name", "plan_type", "organization", "premium", "moop_in_network"];
 const documentsCsv = (make) => make(["documents"], "documents.csv", "the plan's rows", ["kind", "url", "found_via"],
   (t) => t.documents.documents.map((d) => [d.kind, d.url, d.found_via]));
 const checkedCsv = (make) => make(["documents"], "documents_checked", "the plan's rows, selected columns", ["kind", "sha256", "pages", "cover_problems"],
-  (t) => t.documents.documents.map((d) => [d.kind, short(d.sha256), String(d.pages ?? ""), d.cover_problems]));
+  (t) => t.documents.documents.map((d) => [d.kind, blob(d.sha256, (s) => `docs/${s}.pdf`), String(d.pages ?? ""), d.cover_problems]));
 const pageText = (make) => make(["documents"], "page text", "one file per PDF, named by the text's hash", ["kind", "pages", "text file"],
-  (t) => t.documents.documents.map((d) => [d.kind, String(d.pages ?? ""), short(d.text?.layout)]));
+  (t) => t.documents.documents.map((d) => [d.kind, String(d.pages ?? ""), blob(d.text?.layout, (s) => `blobs/${s}.txt`)]));
 const statedKind = (t, row) => {
   const task = taskOf(t, row.stated_by[0]?.prompt);
   return row.fact?.source ?? (task && docKindOf(t, task));
