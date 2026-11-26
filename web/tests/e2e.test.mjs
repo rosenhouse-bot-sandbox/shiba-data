@@ -1003,7 +1003,7 @@ test("pipeline view: a step on the map opens in the lens, and Back returns", asy
   await openHow(page, "main/H1036-153-0/ambulance/check-facts");
   await page.click(".how-pill:text-is('Column rules')");
   await page.waitForFunction(() => document.querySelector(".how-step")?.textContent === "Column rules");
-  assert.equal(await page.locator(".how-node.on").count(), 2);
+  assert.equal(await page.locator(".how-node.on").count(), 3);
   assert.equal(await page.locator(".how-rows.input .hi").count(), 5);
   assert.equal(await page.evaluate(() => document.activeElement.className), "how-step");
   await page.goBack();
@@ -1042,11 +1042,27 @@ test("pipeline view: a CMS box warns before it downloads a zip file", async () =
   assert.equal(await warning.count(), 0);
 });
 
-test("pipeline view: Find PDFs shows every URL offered to the plan and marks the winners", async () => {
+test("pipeline view: Find PDFs shows the URLs each source offered the plan and marks the winners", async () => {
   await openHow(page, "main/H3805-048-0/ambulance/find-pdfs");
-  const offered = page.locator(".how-rows.input", { hasText: "URLs offered" });
-  assert.equal(await offered.locator("tbody tr").count(), 5);
-  assert.deepEqual(await offered.locator("tbody tr.hi td:nth-child(2)").allTextContents(), ["RIDER", "EOC", "SB"]);
+  const offered = (name) => page.locator(".how-rows.input", { has: page.locator(`.how-rows-head code:text-is("${name}")`) });
+  assert.deepEqual(await offered("found").locator("tbody tr.hi td:nth-child(1)").allTextContents(), ["RIDER", "EOC", "SB"]);
+  assert.equal(await offered("links").locator("tbody tr").count(), 2);
+  assert.equal(await offered("links").locator("tbody tr.hi").count(), 0);
+});
+
+test("pipeline view: every step's header and input tables name the inputs the map lights", async () => {
+  for (const cell of ["main/H1036-153-0/ambulance", "dvha/H1036-153-0/vision"]) {
+    for (const { id: step } of STEPS) {
+      await openHow(page, `${cell}/${step}`);
+      const lit = await page.locator(".how-node.on code").allTextContents();
+      const header = await page.locator(".how-ins code").allTextContents();
+      const output = await page.locator(".how-edge-big > .how-end code").textContent();
+      const tables = await page.locator(".how-rows.input .how-rows-head code").allTextContents();
+      assert.deepEqual([...header, output].sort(), lit.sort(), `${cell} ${step} header`);
+      assert.deepEqual(tables, header, `${cell} ${step} tables`);
+      assert.deepEqual(await page.locator(".how-rows.output .how-rows-head code").allTextContents(), [output], `${cell} ${step} output`);
+    }
+  }
 });
 
 test("pipeline view: at phone width the lens sits below the map at full width", async () => {
@@ -1205,7 +1221,7 @@ test("pipeline view: a DVHA cell's detail links to its pipeline view, which show
   assert.match(await page.textContent(".how-cell"), /Vision/);
   assert.ok((await page.locator(".how-pill").allTextContents()).includes("Column rules"));
   await openHow(page, "dvha/H1036-153-0/vision/sheet");
-  assert.deepEqual(await page.locator(".how-end code").allTextContents(), ["document_facts", "dvha"]);
+  assert.deepEqual(await page.locator(".how-end code").allTextContents(), ["document_facts", "pbp_facts", "dvha"]);
   assert.match(await page.textContent(".how-strip"), /the column rule/);
   await page.click(".how-trace summary");
   assert.match(await page.textContent(".how-trace pre"), /pipeline\/present\.py/);
