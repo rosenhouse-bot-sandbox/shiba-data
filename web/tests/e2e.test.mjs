@@ -1125,11 +1125,18 @@ test("pipeline view: the map scrolls to show the selected step", async () => {
 });
 
 test("pipeline view: the map scrolls to show every table the selected step reads and writes, when they fit", async () => {
-  await openHow(page, "main/H1036-153-0/ambulance/cms-facts");
-  const map = await page.locator(".how-map").boundingBox();
-  for (const box of [...await page.locator(".how-node.on").all(), page.locator(".how-pill.on")]) {
-    const b = await box.boundingBox();
-    assert.ok(b.y >= map.y && b.y + b.height <= map.y + map.height, `${await box.textContent()} at ${b.y}px, map shows ${map.y}-${map.y + map.height}px`);
+  await page.setViewportSize({ width: 1600, height: 1200 });
+  try {
+    await openHow(page, "main/H1036-153-0/ambulance/publish");
+    await page.click(".how-pill:text-is('Read CMS fields')");
+    await page.waitForFunction(() => document.querySelector(".how-step")?.textContent === "Read CMS fields");
+    const map = await page.locator(".how-map").boundingBox();
+    for (const box of [...await page.locator(".how-node.on").all(), page.locator(".how-pill.on")]) {
+      const b = await box.boundingBox();
+      assert.ok(b.y >= map.y && b.y + b.height <= map.y + map.height, `${await box.textContent()} at ${b.y}px, map shows ${map.y}-${map.y + map.height}px`);
+    }
+  } finally {
+    await page.setViewportSize({ width: 1600, height: 1000 });
   }
 });
 
