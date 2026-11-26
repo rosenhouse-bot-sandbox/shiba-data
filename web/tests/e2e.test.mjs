@@ -1026,9 +1026,20 @@ test("pipeline view: each box says where its data lives and opens it in a new ta
   assert.match(await node("links").getAttribute("href"), /^https:\/\/github\.com\/.+\/blob\/[0-9a-f]{40}\/data\/2027\/links\.csv$/);
   assert.equal(await node("links").getAttribute("target"), "_blank");
   assert.match(await node("main_chart").getAttribute("href"), /^tables\/2027\/[0-9a-f]{40}\/main_chart\.json$/);
-  assert.equal(await node("CMS PBP tables").getAttribute("href"), site.cms_files.PBP);
   assert.equal(await node("plans").evaluate((e) => e.tagName), "DIV");
   assert.match(await page.textContent(".how-legend"), /In git.*In R2.*In D1.*CI only.*Website/);
+});
+
+test("pipeline view: a CMS box warns before it downloads a zip file", async () => {
+  await openHow(page, "main/H1036-153-0/ambulance/publish");
+  const url = page.url();
+  await page.locator(".how-node", { has: page.locator('code:text-is("CMS PBP tables")') }).click();
+  const warning = page.locator(".how-download:popover-open");
+  assert.match(await warning.textContent(), /zip file/);
+  assert.equal(await warning.getByRole("link").getAttribute("href"), site.cms_files.PBP);
+  assert.equal(page.url(), url);
+  await page.keyboard.press("Escape");
+  assert.equal(await warning.count(), 0);
 });
 
 test("pipeline view: Find PDFs shows every URL offered to the plan and marks the winners", async () => {

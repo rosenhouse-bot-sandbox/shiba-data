@@ -47,14 +47,22 @@ function map(step, link, at) {
       d: p.d, class: `how-edge${s === step ? " on" : ""}`,
       ...(p.arrow ? { "marker-end": `url(#how-arrow-${s === step ? "on" : "off"})` } : {}),
     }))));
+  const downloads = [];
   const nodes = Object.entries(NODES).map(([id, n]) => {
     const b = nodeBox(id), href = nodeHref(id, at), name = label(id, at.sheet);
-    return el(href ? "a" : "div", {
+    const attrs = {
       class: `how-node store-${n.store}${on.has(id) ? " on" : ""}`,
       style: `left:${b.x}px;top:${b.y}px;width:${NODE_W}px;height:${NODE_H}px`,
       title: `${store(id).label}: ${name}`,
-      ...(href ? { href, target: "_blank", rel: "noopener", "aria-label": `${store(id).label}: ${name}, opens in a new tab` } : {}),
-    }, el("small", {}, store(id).label), " ", el("code", {}, name));
+    };
+    const kids = [el("small", {}, store(id).label), " ", el("code", {}, name)];
+    if (href && n.cms) {
+      const warning = download(`how-download-${id}`, n.cms, href);
+      downloads.push(warning);
+      return el("button", { ...attrs, type: "button", popovertarget: warning.id }, ...kids);
+    }
+    if (href) Object.assign(attrs, { href, target: "_blank", rel: "noopener", "aria-label": `${store(id).label}: ${name}, opens in a new tab` });
+    return el(href ? "a" : "div", attrs, ...kids);
   });
   const pills = STEPS.map((s) => {
     const b = pillBox(s);
@@ -66,8 +74,23 @@ function map(step, link, at) {
     el("h2", {}, "Tables and steps"),
     el("div", { class: "how-frame", style: `width:${RAIL_W}px;height:${Math.ceil(MAP_H * SCALE)}px` },
       el("div", { class: "how-world", style: `width:${MAP_W}px;height:${MAP_H}px;--ring:${RING}px;transform:scale(${SCALE})` }, lines, ...nodes, ...pills)),
+    ...downloads,
     el("p", { class: "how-legend" }, ...Object.entries(STORES).map(([key, s]) =>
       el("span", {}, el("b", { class: `store-${key}` }, s.label), s.note ? ` ${s.note}` : ""))));
+}
+
+// A CMS file is a large zip, so its box asks before it downloads.
+function download(id, file, href) {
+  const pop = el("div", { id, class: "how-download", popover: "" },
+    el("p", {}, `This downloads the CMS ${file} file from cms.gov. It is a zip file of tens of megabytes.`),
+    el("p", {}, el("a", { href }, "Download the zip file"), " ", el("button", { type: "button", popovertarget: id, popovertargetaction: "hide" }, "Cancel")));
+  pop.addEventListener("beforetoggle", (e) => {
+    if (e.newState !== "open") return;
+    const r = document.querySelector(`[popovertarget="${id}"]`).getBoundingClientRect();
+    pop.style.top = `${r.bottom + 4}px`;
+    pop.style.left = `${Math.max(8, Math.min(r.left, innerWidth - 328))}px`;
+  });
+  return pop;
 }
 
 function lens(step, link, terms, example, trace, sheet) {
