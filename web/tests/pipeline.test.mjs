@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import fs from "node:fs";
 import assert from "node:assert/strict";
-import { NODES, STEPS, RING, MIN_GAP, inputs, nodeBox, pillBox, paths, before, after, stepById, strip, details, records } from "../static/pipeline.js";
+import { NODES, STEPS, STORES, RING, MIN_GAP, inputs, nodeBox, pillBox, paths, before, after, stepById, strip, details, records, nodeHref } from "../static/pipeline.js";
 
 const inside = ([x, y], b) => x > b.x && x < b.x + b.w && y > b.y && y < b.y + b.h;
 
@@ -70,8 +70,8 @@ test("every step joins known nodes and has a unique id", () => {
 
 test("a step's inputs join at its one label, which points to its output", () => {
   assert.deepEqual(inputs(stepById("find-pdfs")), ["links", "plans", "found"]);
-  assert.deepEqual(inputs(stepById("sheet")), ["facts", "pbp"]);
-  assert.deepEqual(inputs(stepById("publish")), ["sheet", "presented"]);
+  assert.deepEqual(inputs(stepById("sheet")), ["facts", "cmsFacts"]);
+  assert.deepEqual(inputs(stepById("publish")), ["sheet", "presented", "notes"]);
   for (const s of STEPS.filter((s) => inputs(s).length > 1)) {
     const p = pillBox(s), top = [p.x + p.w / 2, p.y], bottom = [p.x + p.w / 2, p.y + p.h];
     const ins = paths(s).filter((e) => !e.arrow), [out] = paths(s).filter((e) => e.arrow);
@@ -115,6 +115,42 @@ test("neighbouring steps share a table", () => {
   assert.deepEqual(before(stepById("publish")).map((s) => s.id), ["column-rules", "sheet"]);
 });
 
+test("every node says where its data lives, and names it without a file extension", () => {
+  for (const [id, n] of Object.entries(NODES)) {
+    assert.ok(STORES[n.store], id);
+    if (n.store !== "web") assert.doesNotMatch(n.label, /\.(csv|json|txt)$/, id);
+  }
+  assert.equal(NODES.sheet.store, "d1");
+  assert.equal(NODES.presented.store, "d1");
+  assert.deepEqual(["plans", "documents", "facts", "cmsFacts"].map((id) => NODES[id].store), ["ci", "ci", "ci", "ci"]);
+});
+
+test("a node links to its data where the data has a URL", () => {
+  const at = { year: 2027, sheet: "dvha", sha: "abc123", cell: "#/2027/dvha/H1-1-0/vision" };
+  const repo = "https://github.com/rosenhouse-bot-sandbox/shiba-data";
+  assert.equal(nodeHref("links", at), `${repo}/blob/abc123/data/2027/links.csv`);
+  assert.equal(nodeHref("checked", at), `${repo}/blob/abc123/data/2027/generated/documents_checked.csv`);
+  assert.equal(nodeHref("answers", at), `${repo}/tree/abc123/data/2027/answers`);
+  assert.equal(nodeHref("sheet", at), "tables/2027/abc123/dvha.json");
+  assert.equal(nodeHref("presented", at), "tables/2027/abc123/presented.json");
+  assert.equal(nodeHref("site", at), "#/2027/dvha/H1-1-0/vision");
+  assert.match(nodeHref("landscape", at), /^https:\/\/www\.cms\.gov\/.*landscape.*\.zip$/);
+  for (const id of ["plans", "documents", "facts", "cmsFacts"]) assert.equal(nodeHref(id, at), null, id);
+});
+
+test("Publish shows the cell's note", () => {
+  const t = { ...full, notes: { status: "traced", rows: [{ kind: "caveat", comment: "Limits apply." }] } };
+  const notes = records(stepById("publish"), t).find((r) => r.name === "comments");
+  assert.deepEqual(notes.rows, [["caveat", "Limits apply."]]);
+  assert.equal(records(stepById("publish"), { ...full, notes: { status: "none", rows: [] } }).find((r) => r.name === "comments"), undefined);
+});
+
+test("without a build, git links go to main and D1 tables have no link", () => {
+  const at = { year: 2027, sheet: "main", sha: null, cell: "#/2027/main/H1-1-0/ambulance" };
+  assert.match(nodeHref("found", at), /\/blob\/main\/data\/2027\/found\.csv$/);
+  assert.equal(nodeHref("sheet", at), null);
+});
+
 const EOC = "https://x/eoc.pdf";
 const full = {
   cell: { value: "" },
@@ -133,7 +169,7 @@ const full = {
 const stripOf = (id, t = full) => strip(stepById(id), t);
 
 test("each step's strip reads the cell's own records", () => {
-  assert.deepEqual(stripOf("list-plans"), ["H1-1-0 in the Landscape file", "plans.csv: Plan One"]);
+  assert.deepEqual(stripOf("list-plans"), ["H1-1-0 in the Landscape file", "plans: Plan One"]);
   assert.deepEqual(stripOf("find-pdfs"), ["5 URLs from 3 sources", "SB, EOC and RIDER URLs"]);
   assert.deepEqual(stripOf("download"), ["3 URLs", "SB, 10 pages; EOC, 90 pages; RIDER, 4 pages, cover problems"]);
   assert.deepEqual(stripOf("extract-text"), ["3 PDFs", "text of 104 pages"]);
@@ -169,9 +205,22 @@ test("a replayed trace writes the fact steps' strips", () => {
   assert.deepEqual(strip(stepById("column-rules"), replay), ["5 facts used, 2 set aside", "line 1 $325 or 20%; line 2 $325"]);
 });
 
+// The example cell's rule reads no CMS facts, so this replay gives one a CMS fact.
+const PBP_FACT = { ...replay.rule.set_aside[0], benefit: "medical_deductible", cost_kind: "deductible", amount: "$0", source: "PBP", origin: "pbp",
+  page: "", quotes: '["pbp_d_inn_deduct_yn"]', reasons: ["not this column"] };
+const withCms = { ...replay, rule: { ...replay.rule, set_aside: [...replay.rule.set_aside, PBP_FACT] } };
+
+test("Facts from CMS data shows the column's CMS facts and the fields behind them", () => {
+  const [fields, facts] = records(stepById("cms-facts"), withCms);
+  assert.deepEqual(fields.rows, [["medical_deductible", "pbp_d_inn_deduct_yn"]]);
+  assert.deepEqual(facts.rows, [["medical_deductible", "in", "deductible", "$0", "PBP"]]);
+  assert.deepEqual(strip(stepById("cms-facts"), withCms), ["the plan's PBP and Landscape fields", "1 CMS fact for this column"]);
+  assert.equal(strip(stepById("cms-facts"), replay)[1], "no CMS facts for this column");
+});
+
 test("every step shows a replayed cell's input and output rows", () => {
   for (const s of STEPS) {
-    const tables = records(s, replay);
+    const tables = records(s, withCms);
     for (const role of ["Input", "Output"]) assert.ok(tables.some((r) => r.role === role && r.rows.length), `${s.id} ${role}`);
     for (const r of tables) for (const row of r.rows) assert.equal(row.length, r.cols.length, `${s.id} ${r.name}`);
   }
@@ -180,7 +229,7 @@ test("every step shows a replayed cell's input and output rows", () => {
 test("a step shows the tables whose records the trace has", () => {
   const unread = { ...replay, answers: { status: "not_recorded" } };
   assert.deepEqual(records(stepById("read-facts"), unread).map((r) => r.name), ["page text"]);
-  assert.deepEqual(records(stepById("find-pdfs"), { ...replay, plan: { status: "none" } }).map((r) => r.name), ["URLs offered", "documents.csv"]);
+  assert.deepEqual(records(stepById("find-pdfs"), { ...replay, plan: { status: "none" } }).map((r) => r.name), ["URLs offered", "documents"]);
 });
 
 test("Read facts lists only the reader prompts' answers", () => {
