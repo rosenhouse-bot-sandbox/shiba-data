@@ -17,7 +17,7 @@ const store = (id) => STORES[NODES[id].store];
 const isExample = (cell) => cell.sheet === EXAMPLE.sheet && cell.plan === EXAMPLE.plan && cell.column === EXAMPLE.column;
 
 // cell is { sheet, plan, column, label, value }.
-export function howView({ year, cell, step, terms, trace, cms }) {
+export function howView({ year, cell, step, terms, trace, cms, code }) {
   const at = STEPS.indexOf(step);
   const link = (s) => howLink(year, cell, s);
   const prev = STEPS[at - 1], next = STEPS[at + 1];
@@ -32,7 +32,7 @@ export function howView({ year, cell, step, terms, trace, cms }) {
       next ? el("a", { class: "how-nav primary", href: link(next), rel: "next" }, "Next →") : el("span", { class: "how-nav primary off" }, "Next →")),
     el("div", { class: "how-body" }, map(step, link, { year, sheet: cell.sheet, sha: trace?.build?.sha ?? null,
       cell: format({ year, view: cell.sheet, plan: cell.plan, column: cell.column }), cms }),
-      lens(step, link, terms, isExample(cell) ? step.example : null, trace, cell.sheet)));
+      lens(step, link, terms, isExample(cell) ? step.example : null, trace, cell.sheet, code)));
 }
 
 // at says where each node's data is: { year, sheet, sha, cell }, as nodeHref takes it.
@@ -92,7 +92,7 @@ function download(id, file, href) {
   return pop;
 }
 
-function lens(step, link, terms, example, trace, sheet) {
+function lens(step, link, terms, example, trace, sheet, code) {
   const chips = (near, cls, text) => near.length ? el("div", { class: `how-chips ${cls}` },
     ...near.map((s) => el("a", { href: link(s) }, text(s.label)))) : null;
   const end = (id) => el("div", { class: `how-end store-${NODES[id].store}` },
@@ -107,7 +107,7 @@ function lens(step, link, terms, example, trace, sheet) {
     el("div", { class: "how-card" },
       fromTo ? el("p", { class: "how-strip" }, el("code", { class: "from" }, fromTo[0]), " becomes ", el("code", { class: "to" }, fromTo[1])) : null,
       ...step.paras.map(para), ...(example?.paras ?? []).map(para), workList(details(step, trace))),
-    ...records(step, trace, sheet).map((r) => {
+    ...records(step, trace, sheet, code).map((r) => {
       if (r.rows) return table(r.role, r.name, r.note, r.cols, r.rows, r.hi);
       if (example) return rows(r.role, r.node, sheet, example.highlight[r.node] ?? []);
       return frame(r.role, r.name, r.note, trace ? el("p", { class: "how-none" }, "Not recorded in this build.") : null);

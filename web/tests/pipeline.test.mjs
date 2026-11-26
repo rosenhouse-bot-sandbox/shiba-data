@@ -241,7 +241,7 @@ test("CMS facts shows the column's CMS facts and the fields behind them", () => 
 
 test("every step shows a replayed cell's input and output rows", () => {
   for (const s of STEPS) {
-    const tables = records(s, withCms);
+    const tables = records(s, withCms, "main", CODE);
     for (const role of ["Input", "Output"]) assert.ok(tables.some((r) => r.role === role && r.rows.length), `${s.id} ${role}`);
     for (const r of tables) for (const row of r.rows) assert.equal(row.length, r.cols.length, `${s.id} ${r.name}`);
   }
@@ -388,7 +388,9 @@ test("a fact that failed its quote check names its document from the prompt that
     /^Rejected: SB page 9, ambulance\.\w+ \S+\. Quote check failed: quote not found\. Verifier agreed: .*\. Reviewer disagreed: Wrong row\.$/);
 });
 
-const ruleTable = (id, t = replay) => records(stepById("column-rules"), t).find((r) => r.node === id);
+const blob = "https://github.com/rosenhouse-bot-sandbox/shiba-data/blob/x/pipeline/present.py";
+const CODE = [{ name: "AB_ambulance in COLUMNS", url: `${blob}#L1626-L1626` }, { name: "ambulance", url: `${blob}#L243-L268` }];
+const ruleTable = (id, t = replay) => records(stepById("column-rules"), t, "main", CODE).find((r) => r.node === id);
 
 test("Column rules lists the facts each line used, then those set aside and why", () => {
   const facts = ruleTable("facts");
@@ -400,8 +402,8 @@ test("Column rules lists the facts each line used, then those set aside and why"
   assert.ok(facts.hi.every((i) => facts.rows[i][0] !== ""));
 });
 
-test("Column rules links the rule's code at the build's commit", () => {
-  const blob = "https://github.com/rosenhouse-bot-sandbox/shiba-data/blob/x/pipeline/present.py";
+test("Column rules links the rule's code, and shows the example's without links", () => {
+  assert.equal(records(stepById("column-rules"), replay, "main").find((r) => r.node === "rules").rows, null);
   assert.deepEqual(ruleTable("rules").rows, [
     ["AB_ambulance in COLUMNS", { text: "present.py line 1626", href: `${blob}#L1626-L1626` }],
     ["ambulance", { text: "present.py lines 243–268", href: `${blob}#L243-L268` }]]);

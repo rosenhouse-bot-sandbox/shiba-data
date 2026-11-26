@@ -995,7 +995,7 @@ test("pipeline view: Next steps through the example cell's steps, each showing i
     await next.click();
     await page.waitForFunction((n) => document.querySelector(".how-count")?.textContent.startsWith(`${n} `), labels.length + 1);
   }
-  assert.equal(labels.length, 10);
+  assert.equal(labels.length, 9);
   assert.equal(labels.at(-1), "Publish");
 });
 
@@ -1003,19 +1003,19 @@ test("pipeline view: a step on the map opens in the lens, and Back returns", asy
   await openHow(page, "main/H1036-153-0/ambulance/check-facts");
   await page.click(".how-pill:text-is('Column rules')");
   await page.waitForFunction(() => document.querySelector(".how-step")?.textContent === "Column rules");
-  assert.equal(await page.locator(".how-node.on").count(), 3);
+  assert.equal(await page.locator(".how-node.on").count(), 5);
   assert.equal(await page.locator(".how-rows.input .hi").count(), 5);
   assert.equal(await page.evaluate(() => document.activeElement.className), "how-step");
   await page.goBack();
   await page.waitForFunction(() => document.querySelector(".how-step")?.textContent === "Check facts");
 });
 
-test("pipeline view: a step with two inputs lights both and joins them at its one label", async () => {
-  await openHow(page, "main/H1036-153-0/ambulance/sheet");
-  assert.equal(await page.locator(".how-node.on").count(), 3);
-  assert.equal(await page.locator(".how-edge.on").count(), 3);
+test("pipeline view: a step with three inputs and two outputs lights them all, joining and splitting at its one label", async () => {
+  await openHow(page, "main/H1036-153-0/ambulance/column-rules");
+  assert.equal(await page.locator(".how-node.on").count(), 5);
+  assert.equal(await page.locator(".how-edge.on").count(), 5);
   assert.equal(await page.locator(".how-pill.on").count(), 1);
-  assert.equal(await page.locator(".how-pill").count(), 10);
+  assert.equal(await page.locator(".how-pill").count(), 9);
   assert.equal(await page.locator(".how-edge[marker-end]").count(), 10);
 });
 
@@ -1158,11 +1158,11 @@ test("pipeline view: Extract page text links each PDF and text file to its blob"
 });
 
 test("pipeline view: each step shows its record from the cell's trace", async () => {
-  await openHow(page, "main/H1036-153-0/ambulance/sheet");
-  assert.match(await page.textContent(".how-trace-head"), /sheet\s*Traced/);
+  await openHow(page, "main/H1036-153-0/ambulance/column-rules");
+  assert.match(await page.textContent(".how-trace-head"), /rule\s*Traced/);
   assert.ok(!(await page.locator(".how-trace pre").isVisible()));
   await page.click(".how-trace summary");
-  assert.match(await page.textContent(".how-trace pre"), /pipeline\/present\.py/);
+  assert.match(await page.textContent(".how-trace pre"), /"set_aside"/);
   await openHow(page, "main/H1036-153-0/ambulance/read-facts");
   await page.waitForFunction(() => document.querySelector(".how-trace-head")?.textContent.includes("Not recorded in this build"));
   assert.equal(await page.locator(".how-trace pre").count(), 0);
@@ -1173,7 +1173,7 @@ test("pipeline view: a cell with no trace says so, and the next step loads it ag
   opened.push(fresh);
   let fail = true;
   await fresh.route("**/trace/**", (route) => fail ? route.fulfill({ status: 404, body: "Not found" }) : route.continue());
-  await fresh.goto(`${base}#/2027/how/main/H1036-153-0/ambulance/sheet`);
+  await fresh.goto(`${base}#/2027/how/main/H1036-153-0/ambulance/publish`);
   await fresh.waitForFunction(() => document.querySelector(".how-trace")?.textContent.includes("This build has no trace for this cell."));
   fail = false;
   await fresh.click("a.how-nav[rel=prev]");
@@ -1220,13 +1220,11 @@ test("pipeline view: a DVHA cell's detail links to its pipeline view, which show
   assert.match(page.url(), /#\/2027\/how\/dvha\/H1036-153-0\/vision\/publish$/);
   assert.match(await page.textContent(".how-cell"), /Vision/);
   assert.ok((await page.locator(".how-pill").allTextContents()).includes("Column rules"));
-  await openHow(page, "dvha/H1036-153-0/vision/sheet");
-  assert.deepEqual(await page.locator(".how-end code").allTextContents(), ["document_facts", "pbp_facts", "dvha"]);
-  assert.match(await page.textContent(".how-strip"), /the column rule/);
-  await page.click(".how-trace summary");
-  assert.match(await page.textContent(".how-trace pre"), /pipeline\/present\.py/);
   await openHow(page, "dvha/H1036-153-0/vision/column-rules");
+  assert.deepEqual(await page.locator(".how-end code").allTextContents(), ["document_facts", "rule code", "pbp_facts", "presented", "dvha"]);
   assert.match(await page.textContent(".how-strip"), /becomes line 1 /);
+  const code = page.locator(".how-rows", { has: page.locator('.how-rows-head code:text-is("rule code")') });
+  assert.equal(await code.locator("td").first().textContent(), "G_vision in DVHA");
 });
 
 test("pipeline view: How it's made opens the selected cell's last step, or the example cell when none is selected", async () => {
@@ -1274,12 +1272,12 @@ test("a Notes link that names no sheet shows Notes", async () => {
 });
 
 test("pipeline view: a link to no cell shows the example cell and says so", async () => {
-  await openHow(page, "main/NOPE/ambulance/sheet");
+  await openHow(page, "main/NOPE/ambulance/publish");
   assert.match(await page.textContent(".warn"), /names no cell/);
-  assert.match(page.url(), /H1036-153-0\/ambulance\/sheet$/);
-  await openHow(page, "dvha/H1036-153-0/ambulance/sheet");
-  assert.match(page.url(), /how\/main\/H1036-153-0\/ambulance\/sheet$/);
-  await openHow(page, "docs/H1036-153-0/ambulance/sheet");
+  assert.match(page.url(), /H1036-153-0\/ambulance\/publish$/);
+  await openHow(page, "dvha/H1036-153-0/ambulance/publish");
+  assert.match(page.url(), /how\/main\/H1036-153-0\/ambulance\/publish$/);
+  await openHow(page, "docs/H1036-153-0/ambulance/publish");
   assert.match(await page.textContent(".warn"), /names no cell/);
 });
 

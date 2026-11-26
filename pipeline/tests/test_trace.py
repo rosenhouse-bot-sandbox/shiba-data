@@ -76,7 +76,8 @@ class TraceTest(unittest.TestCase):
 
     def test_traces_a_dvha_cell_from_its_rule(self):
         records = self.cell("dvha", "H2923-001-0", "F_dental")
-        self.assertEqual(records["rule"]["code"], trace.rule_code("dvha", "F_dental", present.current(years.data_dir(), ""), SHA))
+        self.assertEqual(records["rule"]["status"], trace.TRACED)
+        self.assertTrue(records["rule"]["lines"])
 
     def test_says_why_the_pinned_version_holds_a_dvha_cell(self):
         self.assertEqual(self.cell("dvha", "H2923-025-0", "F_dental")["rule"]["held"], "a held DVHA cell")
@@ -100,7 +101,6 @@ class TraceTest(unittest.TestCase):
 
     def test_lists_the_facts_each_line_used_and_why_the_rule_set_others_aside(self):
         rule = self.cell(*AMBULANCE)["rule"]
-        self.assertEqual([r["name"] for r in rule["code"]], ["AB_ambulance in COLUMNS", "ambulance"])
         self.assertEqual([(n["line"], n["value"], n["presented"]) for n in rule["lines"]],
                          [(1, "$325 or 20%", True), (2, "$325", True)])
         self.assertIn("ae326523b26fbf5e", [f["fact_id"] for f in rule["lines"][0]["facts"]])
@@ -154,7 +154,7 @@ class TraceTest(unittest.TestCase):
         build = self.cell(*AMBULANCE)["build"]
         self.assertEqual(build["sha"], SHA)
         self.assertEqual(build["steps"], json.loads((years.data_dir() / "steps.json").read_text()))
-        self.assertTrue(self.cell(*AMBULANCE)["rule"]["code"][0]["url"].startswith(f"{trace.REPO_URL}/blob/{SHA}/"))
+        self.assertEqual(build["code"], f"{trace.REPO_URL}/blob/{SHA}/")
 
     def export(self):
         """(manifest, {file name: text}) that export writes."""
@@ -198,36 +198,6 @@ class TraceTest(unittest.TestCase):
     def test_rejects_an_unknown_cell(self):
         with self.assertRaises(LookupError):
             self.cell("main", "H1036-153-0", "ZZ_nothing")
-
-
-class RuleCodeTest(unittest.TestCase):
-    def cited(self, ref):
-        """The present.py lines that a code reference's URL names."""
-        prefix = f"{trace.REPO_URL}/blob/{SHA}/pipeline/present.py#L"
-        self.assertTrue(ref["url"].startswith(prefix), ref["url"])
-        start, _, end = ref["url"][len(prefix):].partition("-L")
-        with open(present.__file__) as f:
-            return "".join(f.readlines()[int(start) - 1:int(end or start)])
-
-    def test_links_the_columns_entry_then_each_function_it_names(self):
-        refs = trace.rule_code("main", "K_tests_labs", max(present.VERSIONS), SHA)
-        self.assertEqual([r["name"] for r in refs], ["K_tests_labs in COLUMNS", "every_test_and_lab"])
-        self.assertIn('"K_tests_labs": every_test_and_lab', self.cited(refs[0]))
-        self.assertTrue(self.cited(refs[1]).startswith("def every_test_and_lab("))
-        self.assertTrue(self.cited(refs[1]).rstrip().endswith("tests + labs)]"))
-
-    def test_links_every_function_a_composed_rule_names_in_order(self):
-        refs = trace.rule_code("dvha", "F_dental", max(present.VERSIONS), SHA)
-        self.assertEqual([r["name"] for r in refs][:4], ["F_dental in DVHA", "or_none", "with_lacking", "with_packages"])
-        self.assertIn('"F_dental": or_none(', self.cited(refs[0]))
-        self.assertIn('"dental")', self.cited(refs[0]))
-        for ref in refs[1:]:
-            self.assertTrue(self.cited(ref).startswith(f"def {ref['name']}("), ref)
-
-    def test_links_the_earlier_rules_when_the_version_predates_the_column_rule(self):
-        refs = trace.rule_code("dvha", "F_dental", 31, SHA)
-        self.assertEqual([r["name"] for r in refs], ["EARLIER_RULES"])
-        self.assertTrue(self.cited(refs[0]).startswith("EARLIER_RULES = {"))
 
 
 class ScriptTest(unittest.TestCase):

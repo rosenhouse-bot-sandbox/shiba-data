@@ -55,7 +55,7 @@ export const NODES = {
       lines: ["# Task", "", "You help Medicare counselors compare plans. Read the pages below from a plan's {KIND} for plan year {YEAR},",
         "and list every benefit fact they state about the benefits named below. A wrong fact is much worse than a missing one.",
         "", "The document covers these plans:", "{PLANS}", "…", "{VOCABULARY}"] } },
-  sheet: { col: 2, row: 7, store: "d1", label: "main_chart",
+  sheet: { col: 1, row: 7, store: "d1", label: "main_chart",
     table: { name: "main_chart", note: "every rule's value, selected columns", cols: ["plan_id", "plan_name", "AB_ambulance"],
       rows: [["H1036-153-0", "Humana Total Complete (HMO)", "$325 or 20% | $325"]] } },
   answers: { col: 0, row: 5, store: "git", label: "model answers",
@@ -85,7 +85,7 @@ export const NODES = {
   cmsFacts: { col: 2, row: 6, store: "ci", label: "pbp_facts",
     table: { name: "pbp_facts", note: "the facts the Ambulance rule considers, selected columns", cols: ["benefit", "setting", "condition", "amount", "source"],
       rows: [["emergency", "outside_us", "", "$115", "PBP"], ["emergency", "outside_us", "urgently needed services", "$40", "PBP"]] } },
-  notes: { col: 1, row: 7, store: "git", label: "comments", git: "comments.csv",
+  notes: { col: 2, row: 7, store: "git", label: "comments", git: "comments.csv",
     table: { name: "comments", note: "the cell has no note", cols: ["sheet", "plan_id", "column", "kind", "comment"], rows: [] } },
   site: { col: 1, row: 8, store: "web", label: "pdxplans.org",
     text: { name: "pdxplans.org", note: "after a volunteer clicks the cell",
@@ -152,8 +152,10 @@ export const STEPS = [
 
 // A step reads from first, then each node in also.
 export const inputs = (step) => [step.from, ...(step.also ?? [])];
-// A step writes to, then each node in alsoTo.
+// A step writes to its to node first, then each node in alsoTo.
 export const outputs = (step) => [step.to, ...(step.alsoTo ?? [])];
+// A step with several inputs or outputs joins and splits its edges at its label.
+const branches = (step) => inputs(step).length > 1 || outputs(step).length > 1;
 
 export const NODE_W = 128;
 export const NODE_H = 54;
@@ -170,7 +172,7 @@ const ROW_STEP = NODE_H + 2 * (RING + MIN_GAP) + PILL_H;
 const MARGIN = 10;
 
 // Rows that a merging step writes to are taller by the extra room its edges need.
-const mergeRows = new Set(STEPS.filter((s) => inputs(s).length > 1).map((s) => NODES[s.to].row));
+const mergeRows = new Set(STEPS.filter(branches).map((s) => NODES[s.to].row));
 const rowY = (row) => MARGIN + row * ROW_STEP + [...mergeRows].filter((r) => r <= row).length * (MERGE_ROOM - MIN_GAP);
 
 export function nodeBox(id) {
@@ -197,7 +199,6 @@ const bottom = (b) => [b.x + b.w / 2, b.y + b.h];
 const top = (b) => [b.x + b.w / 2, b.y];
 
 const center = (boxes) => boxes.reduce((x, b) => x + b.x + b.w / 2, 0) / boxes.length;
-const branches = (step) => inputs(step).length > 1 || outputs(step).length > 1;
 
 // Every label sits MIN_GAP above its outputs, which share a row. A step with one input and one output has its label on
 // its edge; otherwise the inputs join above the outputs' center, and the edges split there.
@@ -385,7 +386,7 @@ const ruleFacts = (origin, note) => {
     (t) => [...usedBy(t), ...t.rule.set_aside.filter((f) => f.origin === origin).map((f) => ruleFactRow("", f, f.reasons.join("; ")))],
     (t) => usedBy(t).map((_, i) => i));
 };
-// "present.py lines 323–332" for a link to those lines.
+// Names the lines that a link to code points to, such as "present.py lines 323–332".
 const codeLines = (url) => {
   const [start, end] = url.split("#L")[1].split("-L");
   return `${url.split("/").at(-1).split("#")[0]} ${start === end ? `line ${start}` : `lines ${start}–${end}`}`;
@@ -433,8 +434,8 @@ export const RECORDS = {
   },
   "column-rules": {
     facts: ruleFacts("document", "the document facts the rule considered"),
-    rules: table(["rule"], "the column's entry, then each function it names, at the build's commit", ["code", "lines"],
-      (t) => t.rule.code.map((c) => [c.name, { text: codeLines(c.url), href: c.url }])),
+    rules: table([], "where the column gets its rule, then each function and name the rule uses", ["code", "lines"],
+      (t, code) => code.length ? code.map((c) => [c.name, { text: codeLines(c.url), href: c.url }]) : null),
     cmsFacts: ruleFacts("pbp", "the CMS facts the rule considered"),
     presented: table(["citations", "documents"], "the cell's citations", CITE_COLS, (t) => citationRows(t, allCitations(t))),
     sheet: sheetRow,
@@ -449,11 +450,12 @@ export const RECORDS = {
 };
 
 // A step shows one table per input, in the map's order, then its outputs. rows is null when the trace lacks a record
-// the table needs, and empty when a record says no step touched the cell.
-export const records = (step, trace, sheet = trace?.cell?.sheet) => [...inputs(step), ...outputs(step)].map((id, i) => {
+// the table needs, and empty when a record says no step touched the cell. code is the column's rule code links, from
+// the site's data.
+export const records = (step, trace, sheet = trace?.cell?.sheet, code = []) => [...inputs(step), ...outputs(step)].map((id, i) => {
   const r = RECORDS[step.id][id];
   const status = r.needs.map((k) => trace?.[k]?.status);
-  const rows = status.every((s) => s === "traced") ? r.rows(trace) : status.every((s) => s === "traced" || s === "none") ? [] : null;
+  const rows = status.every((s) => s === "traced") ? r.rows(trace, code) : status.every((s) => s === "traced" || s === "none") ? [] : null;
   return { role: i < inputs(step).length ? "Input" : "Output", node: id, name: nodeName(id, sheet),
     note: r.note, cols: r.cols, rows, hi: rows?.length ? r.hi(trace) : [] };
 });

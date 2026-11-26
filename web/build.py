@@ -24,6 +24,7 @@ HERE = pathlib.Path(__file__).resolve().parent
 sys.path[:0] = [str(HERE), str(HERE.parent / "pipeline")]
 import cms_sources  # noqa: E402
 import fields  # noqa: E402
+import rule_code  # noqa: E402
 import sheets  # noqa: E402
 import terms  # noqa: E402
 import trace  # noqa: E402
@@ -177,6 +178,7 @@ def main(command, out=None):
     (out_dir / "index.html").write_text(titled((HERE / "static" / "index.html").read_text(), site))
     site["built"] = datetime.datetime.now(datetime.timezone.utc).isoformat()
     site["terms"] = terms.resolve(HERE.parent, commit())
+    site["rule_code"] = rule_code.resolve(DATA, commit())
     write_traces(out_dir, commit())
     (out_dir / "data.json").write_text(json.dumps(site))
 
