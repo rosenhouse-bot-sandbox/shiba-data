@@ -54,6 +54,7 @@ flowchart TD
   read --> check[6. Code and Claude check each fact]
   check --> present[7. Rules turn facts into values]
   cmsfacts --> present
+  rules[(Rule code in git)] --> present
   present --> notes[8. Claude sessions write notes]
   present --> publish[9. Publish the site and Google Sheet]
   notes --> publish
@@ -286,7 +287,13 @@ ambulance.air     any         in                                medicare      co
 
 ## 7. Rules turn facts into values
 
-Each column has a rule, written in code from the domain expert's instructions. The Ambulance rule, in pseudocode:
+Each column has a rule, written in code from the domain expert's instructions. `COLUMNS` in `pipeline/present.py` names each main column's rule, and `DVHA` each DVHA column's:
+
+```python
+COLUMNS = {..., "AB_ambulance": ambulance, ...}
+```
+
+The Ambulance rule, in pseudocode:
 
 ```
 line 1 (in the U.S.):

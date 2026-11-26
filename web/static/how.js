@@ -2,7 +2,7 @@
 import { el, svg } from "./dom.js";
 import { format } from "./permalink.js";
 import {
-  EXAMPLE, NODES, STEPS, STORES, inputs, nodeName, NODE_W, NODE_H, RING, MAP_W, MAP_H,
+  EXAMPLE, NODES, STEPS, STORES, inputs, outputs, nodeName, NODE_W, NODE_H, RING, MAP_W, MAP_H,
   nodeBox, pillBox, paths, before, after, strip, details, records, nodeHref,
 } from "./pipeline.js";
 
@@ -17,7 +17,7 @@ const store = (id) => STORES[NODES[id].store];
 const isExample = (cell) => cell.sheet === EXAMPLE.sheet && cell.plan === EXAMPLE.plan && cell.column === EXAMPLE.column;
 
 // cell is { sheet, plan, column, label, value }.
-export function howView({ year, cell, step, terms, trace, cms }) {
+export function howView({ year, cell, step, terms, trace, cms, code }) {
   const at = STEPS.indexOf(step);
   const link = (s) => howLink(year, cell, s);
   const prev = STEPS[at - 1], next = STEPS[at + 1];
@@ -31,12 +31,12 @@ export function howView({ year, cell, step, terms, trace, cms }) {
       el("span", { class: "how-count" }, `${at + 1} of ${STEPS.length}`),
       next ? el("a", { class: "how-nav primary", href: link(next), rel: "next" }, "Next →") : el("span", { class: "how-nav primary off" }, "Next →")),
     el("div", { class: "how-body" }, map(step, link, cell.sheet),
-      lens(step, link, terms, isExample(cell) ? step.example : null, trace, { year, sheet: cell.sheet, sha: trace?.build?.sha ?? null,
+      lens(step, link, terms, isExample(cell) ? step.example : null, trace, code, { year, sheet: cell.sheet, sha: trace?.build?.sha ?? null,
         cell: format({ year, view: cell.sheet, plan: cell.plan, column: cell.column }), cms })));
 }
 
 function map(step, link, sheet) {
-  const on = new Set([...inputs(step), step.to]);
+  const on = new Set([...inputs(step), ...outputs(step)]);
   const lines = svg("svg", { width: MAP_W, height: MAP_H, "aria-hidden": "true" },
     svg("defs", {}, ...["off", "on"].map((k) => svg("marker", {
       id: `how-arrow-${k}`, viewBox: "0 0 10 10", refX: "9", refY: "5", markerWidth: "10", markerHeight: "10", markerUnits: "userSpaceOnUse", orient: "auto",
@@ -81,7 +81,7 @@ function download(id, file, href) {
 }
 
 // at says where each table's data is: { year, sheet, sha, cell, cms }, as nodeHref takes it.
-function lens(step, link, terms, example, trace, at) {
+function lens(step, link, terms, example, trace, code, at) {
   const { sheet } = at;
   const chips = (near, cls, text) => near.length ? el("div", { class: `how-chips ${cls}` },
     ...near.map((s) => el("a", { href: link(s) }, text(s.label)))) : null;
@@ -102,7 +102,7 @@ function lens(step, link, terms, example, trace, at) {
   };
   const fromTo = example ? [example.before, example.after] : strip(step, trace);
   const para = (p) => el("p", {}, ...p.map((s) => typeof s === "string" ? s : term(terms[s[0]], s[1])));
-  const tables = records(step, trace, sheet).map((r) => {
+  const tables = records(step, trace, sheet, code).map((r) => {
     const head = heading(r.node);
     if (r.rows) return table(r.role, head, r.note, r.cols, r.rows, r.hi);
     if (example) return rows(r.role, head, r.node, sheet, example.highlight[r.node] ?? []);

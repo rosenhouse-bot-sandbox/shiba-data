@@ -1,14 +1,14 @@
 import { test } from "node:test";
 import fs from "node:fs";
 import assert from "node:assert/strict";
-import { NODES, STEPS, STORES, RING, MIN_GAP, RECORDS, inputs, nodeName, nodeBox, pillBox, paths, before, after, stepById, strip, details, records, nodeHref } from "../static/pipeline.js";
+import { NODES, STEPS, STORES, RING, MIN_GAP, RECORDS, inputs, outputs, nodeName, nodeBox, pillBox, paths, before, after, stepById, strip, details, records, nodeHref } from "../static/pipeline.js";
 
 const inside = ([x, y], b) => x > b.x && x < b.x + b.w && y > b.y && y < b.y + b.h;
 
 test("no edge passes behind a node", () => {
   for (const s of STEPS) for (const { at } of paths(s)) {
     for (const id of Object.keys(NODES)) {
-      if (id === s.to || inputs(s).includes(id)) continue;
+      if (outputs(s).includes(id) || inputs(s).includes(id)) continue;
       for (let t = 0; t <= 1; t += 0.01) assert.ok(!inside(at(t), nodeBox(id)), `${s.id} crosses ${id}`);
     }
   }
@@ -65,57 +65,62 @@ test("no two nodes overlap", () => {
 
 test("every step joins known nodes and has a unique id", () => {
   assert.equal(new Set(STEPS.map((s) => s.id)).size, STEPS.length);
-  for (const s of STEPS) for (const id of [...inputs(s), s.to]) assert.ok(NODES[id], s.id);
+  for (const s of STEPS) for (const id of [...inputs(s), ...outputs(s)]) assert.ok(NODES[id], s.id);
 });
 
-test("a step's inputs join at its one label, which points to its output", () => {
+test("a step's inputs join at its one label, which points to its outputs", () => {
   assert.deepEqual(inputs(stepById("find-pdfs")), ["plans", "found", "links"]);
-  assert.deepEqual(inputs(stepById("column-rules")), ["facts", "cmsFacts"]);
-  assert.deepEqual(inputs(stepById("sheet")), ["facts", "cmsFacts"]);
+  assert.deepEqual(inputs(stepById("column-rules")), ["facts", "rules", "cmsFacts"]);
+  assert.deepEqual(outputs(stepById("column-rules")), ["presented", "sheet"]);
   assert.deepEqual(inputs(stepById("publish")), ["sheet", "presented", "notes"]);
   assert.deepEqual(inputs(stepById("read-facts")), ["text", "prompt"]);
   for (const s of STEPS.filter((s) => inputs(s).length > 1)) {
     const p = pillBox(s), top = [p.x + p.w / 2, p.y], bottom = [p.x + p.w / 2, p.y + p.h];
-    const ins = paths(s).filter((e) => !e.arrow), [out] = paths(s).filter((e) => e.arrow);
+    const ins = paths(s).filter((e) => !e.arrow), outs = paths(s).filter((e) => e.arrow);
     assert.equal(ins.length, inputs(s).length, s.id);
     for (const e of ins) assert.deepEqual(e.at(1), top, s.id);
-    assert.deepEqual(out.at(0), bottom, s.id);
-    const to = nodeBox(s.to);
-    assert.deepEqual(out.at(1), [to.x + to.w / 2, to.y], s.id);
+    for (const e of outs) assert.deepEqual(e.at(0), bottom, s.id);
     assert.ok(p.y > Math.max(...inputs(s).map((id) => nodeBox(id).y + nodeBox(id).h)), `${s.id} label sits below its inputs`);
   }
 });
 
-test("each step draws one arrow, into its output", () => {
+test("each step draws one arrow into each output", () => {
   for (const s of STEPS) {
-    const arrows = paths(s).filter((e) => e.arrow), to = nodeBox(s.to);
-    assert.equal(arrows.length, 1, s.id);
-    assert.deepEqual(arrows[0].at(1), [to.x + to.w / 2, to.y], s.id);
+    const tops = outputs(s).map(nodeBox).map((b) => [b.x + b.w / 2, b.y]);
+    assert.deepEqual(paths(s).filter((e) => e.arrow).map((e) => e.at(1)), tops, s.id);
+  }
+});
+
+test("a step's outputs share a row, and its label sits between them", () => {
+  for (const s of STEPS) {
+    assert.equal(new Set(outputs(s).map((id) => NODES[id].row)).size, 1, s.id);
+    const xs = outputs(s).map((id) => nodeBox(id).x), p = pillBox(s);
+    assert.ok(p.x >= Math.min(...xs) && p.x + p.w <= Math.max(...xs) + nodeBox(s.to).w, s.id);
   }
 });
 
 test("highlighted rows exist in the step's own tables", () => {
   for (const s of STEPS) for (const [id, hi] of Object.entries(s.example.highlight)) {
-    assert.ok([...inputs(s), s.to].includes(id), `${s.id} highlights ${id}`);
+    assert.ok([...inputs(s), ...outputs(s)].includes(id), `${s.id} highlights ${id}`);
     const n = NODES[id], count = (n.table?.rows ?? n.text.lines).length;
     for (const r of hi) assert.ok(r < count, `${s.id} row ${r} of ${id}`);
   }
 });
 
 test("every table a step reads or writes has example rows", () => {
-  for (const s of STEPS) for (const id of [...inputs(s), s.to]) assert.ok(NODES[id].table ?? NODES[id].text, `${s.id} ${id}`);
+  for (const s of STEPS) for (const id of [...inputs(s), ...outputs(s)]) assert.ok(NODES[id].table ?? NODES[id].text, `${s.id} ${id}`);
 });
 
-test("each step highlights the example's rows in its first input and its output", () => {
-  for (const s of STEPS) for (const id of [s.from, s.to]) assert.ok(s.example.highlight[id]?.length, `${s.id} ${id}`);
+test("each step highlights the example's rows in its first input and its outputs", () => {
+  for (const s of STEPS) for (const id of [s.from, ...outputs(s)]) assert.ok(s.example.highlight[id]?.length, `${s.id} ${id}`);
 });
 
-test("a step's tables are the map's inputs, in order, then its output", () => {
-  for (const s of STEPS) assert.deepEqual(Object.keys(RECORDS[s.id]), [...inputs(s), s.to], s.id);
+test("a step's tables are the map's inputs, in order, then its outputs", () => {
+  for (const s of STEPS) assert.deepEqual(Object.keys(RECORDS[s.id]), [...inputs(s), ...outputs(s)], s.id);
   for (const t of [null, full, replay, { ...replay, answers: { status: "not_recorded" } }]) for (const s of STEPS) {
     const tables = records(s, t, "dvha");
-    assert.deepEqual(tables.map((r) => r.name), [...inputs(s), s.to].map((id) => nodeName(id, "dvha")), s.id);
-    assert.deepEqual(tables.map((r) => r.role), [...inputs(s).map(() => "Input"), "Output"], s.id);
+    assert.deepEqual(tables.map((r) => r.name), [...inputs(s), ...outputs(s)].map((id) => nodeName(id, "dvha")), s.id);
+    assert.deepEqual(tables.map((r) => r.role), [...inputs(s).map(() => "Input"), ...outputs(s).map(() => "Output")], s.id);
   }
 });
 
@@ -123,10 +128,9 @@ test("neighbouring steps share a table", () => {
   const rules = stepById("column-rules");
   assert.deepEqual(before(rules).map((s) => s.id), ["cms-facts", "check-facts"]);
   assert.deepEqual(after(rules).map((s) => s.id), ["publish"]);
-  assert.deepEqual(after(stepById("sheet")).map((s) => s.id), ["publish"]);
   assert.deepEqual(before(stepById("list-plans")), []);
   assert.deepEqual(after(stepById("list-plans")).map((s) => s.id), ["find-pdfs", "cms-facts"]);
-  assert.deepEqual(before(stepById("publish")).map((s) => s.id), ["column-rules", "sheet"]);
+  assert.deepEqual(before(stepById("publish")).map((s) => s.id), ["column-rules"]);
 });
 
 test("every node says where its data lives, and names it without a file extension", () => {
@@ -147,6 +151,7 @@ test("a node links to its data where the data has a URL", () => {
     sheet: "tables/2027/abc123/dvha.json", answers: null, facts: null, presented: "tables/2027/abc123/presented.json",
     cmsFacts: null, notes: `${blob}/comments.csv`, site: "#/2027/dvha/H1-1-0/vision",
     prompt: "https://github.com/rosenhouse-bot-sandbox/shiba-data/blob/abc123/pipeline/fact_prompt.md",
+    rules: "https://github.com/rosenhouse-bot-sandbox/shiba-data/blob/abc123/pipeline/present.py",
   });
 });
 
@@ -186,7 +191,6 @@ test("each step's strip reads the cell's own records", () => {
   assert.deepEqual(stripOf("find-pdfs"), ["5 URLs from 3 sources", "SB, EOC and RIDER URLs"]);
   assert.deepEqual(stripOf("download"), ["3 URLs", "SB, 10 pages; EOC, 90 pages; RIDER, 4 pages, cover problems"]);
   assert.deepEqual(stripOf("extract-text"), ["3 PDFs", "text of 104 pages"]);
-  assert.deepEqual(stripOf("sheet"), ["the column rule", "blank"]);
   assert.deepEqual(stripOf("publish"), ["sheet blank", "site cell blank with 2 quotes from EOC page 5; SB page 2"]);
 });
 
@@ -210,7 +214,7 @@ test("a strip says when the trace has no quotes to name", () => {
 test("a step whose record the trace lacks, or that has no strip, gets none", () => {
   assert.equal(strip(stepById("list-plans"), { ...full, plan: { status: "not_recorded" } }), null);
   assert.equal(strip(stepById("read-facts"), full), null);
-  assert.equal(strip(stepById("sheet"), null), null);
+  assert.equal(strip(stepById("column-rules"), null), null);
 });
 
 // A replayed build's trace of the example cell, which records answers, checks and the rule.
@@ -238,7 +242,7 @@ test("CMS facts shows the column's CMS facts and the fields behind them", () => 
 
 test("every step shows a replayed cell's input and output rows", () => {
   for (const s of STEPS) {
-    const tables = records(s, withCms);
+    const tables = records(s, withCms, "main", CODE);
     for (const role of ["Input", "Output"]) assert.ok(tables.some((r) => r.role === role && r.rows.length), `${s.id} ${role}`);
     for (const r of tables) for (const row of r.rows) assert.equal(row.length, r.cols.length, `${s.id} ${r.name}`);
   }
@@ -287,10 +291,10 @@ test("Check facts marks the kept facts and outputs only those", () => {
 });
 
 test("Column rules marks the facts its lines used", () => {
-  const [facts, cms, cited] = records(stepById("column-rules"), withCms);
+  const [facts, , cms, cited] = records(stepById("column-rules"), withCms);
   assert.equal(facts.rows.length, 7);
   assert.deepEqual(facts.hi, [0, 1, 2, 3, 4]);
-  assert.deepEqual(cms.rows.map((r) => r[2]), ["medical_deductible"]);
+  assert.deepEqual(cms.rows.map((r) => r[3]), ["medical_deductible"]);
   assert.deepEqual(cms.hi, []);
   assert.equal(cited.rows.length, 5);
 });
@@ -385,22 +389,42 @@ test("a fact that failed its quote check names its document from the prompt that
     /^Rejected: SB page 9, ambulance\.\w+ \S+\. Quote check failed: quote not found\. Verifier agreed: .*\. Reviewer disagreed: Wrong row\.$/);
 });
 
-test("Column rules lists the facts each line used and why others were set aside", () => {
-  const got = lines("column-rules");
-  assert.ok(got.includes("Line 2 ($325) used EOC page 46, ambulance $325 (Emergency Ambulance)"));
-  assert.ok(got.includes("Set aside SB page 9, ambulance.air 20%: SB ranks below EOC"));
+const blob = "https://github.com/rosenhouse-bot-sandbox/shiba-data/blob/x/pipeline/present.py";
+const CODE = [{ name: "AB_ambulance in COLUMNS", url: `${blob}#L1626-L1626` }, { name: "ambulance", url: `${blob}#L243-L268` }];
+const ruleTable = (id, t = replay) => records(stepById("column-rules"), t, "main", CODE).find((r) => r.node === id);
+
+test("Column rules lists the facts each line used, then those set aside and why", () => {
+  const facts = ruleTable("facts");
+  const at = (line, page, benefit) => facts.rows.findIndex((r) => r[0] === line && r[2] === page && r[3] === benefit);
+  const used = at("2", "46", "ambulance"), aside = at("", "9", "ambulance.air");
+  assert.ok(facts.hi.includes(used));
+  assert.equal(facts.rows[aside][5], "SB ranks below EOC");
+  assert.ok(!facts.hi.includes(aside));
+  assert.ok(facts.hi.every((i) => facts.rows[i][0] !== ""));
 });
 
-test("a held rule says why, and a fact with no page names none", () => {
-  const pbp = { ...replay.rule.set_aside[0], source: "PBP", page: "" };
+test("Column rules links the rule's code, and shows the example's without links", () => {
+  assert.equal(records(stepById("column-rules"), replay, "main").find((r) => r.node === "rules").rows, null);
+  assert.deepEqual(ruleTable("rules").rows, [
+    ["AB_ambulance in COLUMNS", { text: "present.py line 1626", href: `${blob}#L1626-L1626` }],
+    ["ambulance", { text: "present.py lines 243–268", href: `${blob}#L243-L268` }]]);
+});
+
+test("Column rules writes the sheet's value and the citations", () => {
+  assert.deepEqual(ruleTable("sheet").rows, [[replay.cell.plan_id, replay.cell.col, "$325 or 20% | $325"]]);
+  assert.ok(ruleTable("presented").rows.length);
+});
+
+test("a held rule says why, and its set-aside CMS fact has no page", () => {
+  const pbp = { ...replay.rule.set_aside[0], source: "PBP", page: "", origin: "pbp" };
   const t = { ...replay, rule: { ...replay.rule, held: "the EOC and SB disagree", lines: [], set_aside: [pbp] } };
-  assert.deepEqual(lines("column-rules", t), ["The rule leaves this cell blank, because the EOC and SB disagree",
-    "Set aside PBP, ambulance.air 20%: SB ranks below EOC"]);
+  assert.deepEqual(lines("column-rules", t), ["The rule leaves this cell blank, because the EOC and SB disagree"]);
+  assert.deepEqual(ruleTable("cmsFacts", t).rows.map((r) => r.slice(0, 3)), [["", "PBP", ""]]);
 });
 
 test("a step without a traced record has no details", () => {
   assert.deepEqual(lines("check-facts", { ...replay, fact_checks: { status: "not_recorded" } }), []);
   assert.deepEqual(lines("check-facts", { ...replay, answers: { status: "not_recorded" } }).length, 8);
-  assert.deepEqual(lines("sheet"), []);
-  assert.deepEqual(details(stepById("sheet"), null), []);
+  assert.deepEqual(lines("column-rules", { ...replay, rule: { status: "not_recorded" } }), []);
+  assert.deepEqual(details(stepById("column-rules"), null), []);
 });

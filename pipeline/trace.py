@@ -182,7 +182,7 @@ def load_rules(db, data):
                           for identity, reasons in sorted(aside.items())])
 
 
-def rule(db, sheet, plan_id, col, code):
+def rule(db, sheet, plan_id, col):
     """Returns record 6, the rule's lines and the facts it used and set aside."""
     lines = rows(db, "SELECT line, value, presented, held FROM rule_line WHERE sheet = ? AND plan_id = ? AND col = ? "
                      "ORDER BY line", sheet, plan_id, col)
@@ -190,8 +190,7 @@ def rule(db, sheet, plan_id, col, code):
                               FROM rule_fact r JOIN fact f USING (fact_id, source, doc_sha, page)
                               WHERE r.sheet = ? AND r.plan_id = ? AND r.col = ? ORDER BY r.line, f.fact_id""",
                       sheet, plan_id, col)
-    function = present.SHEETS[sheet][0][col].__qualname__.split(".")[0]
-    return considered, record(True, code=dict(file="pipeline/present.py", function=function, url=code + "pipeline/present.py"),
+    return considered, record(True,
                               held=lines[0]["held"], lines=[dict(
                                   line=n["line"], value=n["value"], presented=bool(n["presented"]),
                                   facts=[fact_of(f) for f in considered if f["line"] == n["line"]]) for n in lines],
@@ -330,7 +329,7 @@ def cell(db, sheet, plan_id, col):
         d["unlinked_answers"] = unlinked(db, d["sha256"]) if build_row["checked"] else {"status": NOT_RECORDED}
     landscape = rows(db, "SELECT plan_field, field, value FROM landscape_read WHERE plan_id = ? ORDER BY position", plan_id)
     landscape_row = list({(n["field"], n["value"]): dict(field=n["field"], value=n["value"]) for n in landscape}.values())
-    considered, rule_record = rule(db, sheet, plan_id, col, code)
+    considered, rule_record = rule(db, sheet, plan_id, col)
     if build_row["checked"]:
         prompts, fact_checks = checks(db, sheet, plan_id, col, considered)
     else:
@@ -348,7 +347,7 @@ def cell(db, sheet, plan_id, col):
                        landscape_row=record(landscape_row, fields=landscape_row)),
         "documents": record(documents, documents=documents, candidates=[dict(c, used=bool(c["used"])) for c in rows(
             db, "SELECT source, kind, url, found_via, used FROM candidate WHERE plan_id = ? ORDER BY position", plan_id)]),
-        "sheet": record(True, value=value, code=rule_record["code"]),
+        "sheet": record(True, value=value),
         "answers": answers,
         "fact_checks": fact_checks,
         "rule": rule_record,

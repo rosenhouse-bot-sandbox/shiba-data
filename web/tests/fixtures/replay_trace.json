@@ -165,12 +165,7 @@
  },
  "sheet": {
   "status": "traced",
-  "value": "$325 or 20% | $325",
-  "code": {
-   "file": "pipeline/present.py",
-   "function": "ambulance",
-   "url": "https://github.com/rosenhouse-bot-sandbox/shiba-data/blob/x/pipeline/present.py"
-  }
+  "value": "$325 or 20% | $325"
  },
  "answers": {
   "status": "traced",
@@ -632,11 +627,6 @@
  },
  "rule": {
   "status": "traced",
-  "code": {
-   "file": "pipeline/present.py",
-   "function": "ambulance",
-   "url": "https://github.com/rosenhouse-bot-sandbox/shiba-data/blob/x/pipeline/present.py"
-  },
   "held": null,
   "lines": [
    {

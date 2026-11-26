@@ -177,7 +177,8 @@ async function routeHow(state) {
   const hash = howLink(site.year, cell, step);
   if (location.hash !== hash) history.replaceState(null, "", hash);
   routed = location.hash;
-  content.replaceChildren(howView({ year: site.year, cell, step, terms: site.terms, trace, cms: site.cms_files }));
+  content.replaceChildren(howView({ year: site.year, cell, step, terms: site.terms, trace, cms: site.cms_files,
+    code: site.rule_code?.[sheet]?.[column.key] ?? [] }));
   if (state.plan && !known) content.prepend(el("p", { class: "warn" }, "That link names no cell, so this shows the example cell."));
   const rail = content.querySelector(".how-map");
   rail.scrollTop = mapTop;

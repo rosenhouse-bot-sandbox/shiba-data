@@ -76,8 +76,8 @@ class TraceTest(unittest.TestCase):
 
     def test_traces_a_dvha_cell_from_its_rule(self):
         records = self.cell("dvha", "H2923-001-0", "F_dental")
-        self.assertEqual(records["sheet"]["code"]["file"], "pipeline/present.py")
-        self.assertEqual(records["rule"]["code"]["function"], "dental")
+        self.assertEqual(records["rule"]["status"], trace.TRACED)
+        self.assertTrue(records["rule"]["lines"])
 
     def test_says_why_the_pinned_version_holds_a_dvha_cell(self):
         self.assertEqual(self.cell("dvha", "H2923-025-0", "F_dental")["rule"]["held"], "a held DVHA cell")
@@ -101,7 +101,6 @@ class TraceTest(unittest.TestCase):
 
     def test_lists_the_facts_each_line_used_and_why_the_rule_set_others_aside(self):
         rule = self.cell(*AMBULANCE)["rule"]
-        self.assertEqual(rule["code"]["function"], "ambulance")
         self.assertEqual([(n["line"], n["value"], n["presented"]) for n in rule["lines"]],
                          [(1, "$325 or 20%", True), (2, "$325", True)])
         self.assertIn("ae326523b26fbf5e", [f["fact_id"] for f in rule["lines"][0]["facts"]])
@@ -155,8 +154,7 @@ class TraceTest(unittest.TestCase):
         build = self.cell(*AMBULANCE)["build"]
         self.assertEqual(build["sha"], SHA)
         self.assertEqual(build["steps"], json.loads((years.data_dir() / "steps.json").read_text()))
-        self.assertEqual(self.cell(*AMBULANCE)["sheet"]["code"]["url"],
-                         f"{trace.REPO_URL}/blob/{SHA}/pipeline/present.py")
+        self.assertEqual(build["code"], f"{trace.REPO_URL}/blob/{SHA}/")
 
     def export(self):
         """(manifest, {file name: text}) that export writes."""
