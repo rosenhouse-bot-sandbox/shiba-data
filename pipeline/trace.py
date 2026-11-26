@@ -12,7 +12,7 @@ checks' outcomes.
 `export` writes every cell's records and each plan's rows of TABLES once by content, which web/worker.js loads into D1.
 `page` prints a page's layout text from a run's <work_dir>/texts, where blobs.py puts it.
 """
-import csv, glob, hashlib, json, os, sqlite3, sys
+import ast, csv, glob, hashlib, json, os, sqlite3, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -182,7 +182,30 @@ def load_rules(db, data):
                           for identity, reasons in sorted(aside.items())])
 
 
-def rule(db, sheet, plan_id, col, code):
+RULE_TABLES = {"main": "COLUMNS", "dvha": "DVHA"}
+
+
+def rule_code(sheet, col, version, sha):
+    """Links to the code of a column's rule at a version: its entry in present.py, then each function the entry names.
+    A version that uses an earlier rule links EARLIER_RULES whole."""
+    with open(present.__file__) as f:
+        tree = ast.parse(f.read())
+    assigned = {n.targets[0].id: n for n in tree.body if isinstance(n, ast.Assign) and isinstance(n.targets[0], ast.Name)}
+    functions = {n.name: n for n in tree.body if isinstance(n, ast.FunctionDef)}
+    link = lambda name, start, end: dict(name=name, url=f"{REPO_URL}/blob/{sha}/pipeline/present.py#L{start}-L{end}")
+    if present.rule(sheet, col, version) is not present.SHEETS[sheet][0][col]:
+        earlier = assigned["EARLIER_RULES"]
+        return [link("EARLIER_RULES", earlier.lineno, earlier.end_lineno)]
+    table = RULE_TABLES[sheet]
+    entries = assigned[table].value
+    (key, value), = [(k, v) for k, v in zip(entries.keys, entries.values) if k.value == col]
+    names = sorted((n for n in ast.walk(value) if isinstance(n, ast.Name) and n.id in functions),
+                   key=lambda n: (n.lineno, n.col_offset))
+    return [link(f"{col} in {table}", key.lineno, value.end_lineno)] + [
+        link(name, functions[name].lineno, functions[name].end_lineno) for name in dict.fromkeys(n.id for n in names)]
+
+
+def rule(db, sheet, plan_id, col, version, sha):
     """Returns record 6, the rule's lines and the facts it used and set aside."""
     lines = rows(db, "SELECT line, value, presented, held FROM rule_line WHERE sheet = ? AND plan_id = ? AND col = ? "
                      "ORDER BY line", sheet, plan_id, col)
@@ -190,8 +213,7 @@ def rule(db, sheet, plan_id, col, code):
                               FROM rule_fact r JOIN fact f USING (fact_id, source, doc_sha, page)
                               WHERE r.sheet = ? AND r.plan_id = ? AND r.col = ? ORDER BY r.line, f.fact_id""",
                       sheet, plan_id, col)
-    function = present.SHEETS[sheet][0][col].__qualname__.split(".")[0]
-    return considered, record(True, code=dict(file="pipeline/present.py", function=function, url=code + "pipeline/present.py"),
+    return considered, record(True, code=rule_code(sheet, col, version, sha),
                               held=lines[0]["held"], lines=[dict(
                                   line=n["line"], value=n["value"], presented=bool(n["presented"]),
                                   facts=[fact_of(f) for f in considered if f["line"] == n["line"]]) for n in lines],
@@ -330,7 +352,7 @@ def cell(db, sheet, plan_id, col):
         d["unlinked_answers"] = unlinked(db, d["sha256"]) if build_row["checked"] else {"status": NOT_RECORDED}
     landscape = rows(db, "SELECT plan_field, field, value FROM landscape_read WHERE plan_id = ? ORDER BY position", plan_id)
     landscape_row = list({(n["field"], n["value"]): dict(field=n["field"], value=n["value"]) for n in landscape}.values())
-    considered, rule_record = rule(db, sheet, plan_id, col, code)
+    considered, rule_record = rule(db, sheet, plan_id, col, json.loads(build_row["steps"])["present"], build_row["sha"])
     if build_row["checked"]:
         prompts, fact_checks = checks(db, sheet, plan_id, col, considered)
     else:
