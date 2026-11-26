@@ -150,9 +150,9 @@ test("a node links to its data where the data has a URL", () => {
   const blob = "https://github.com/rosenhouse-bot-sandbox/shiba-data/blob/abc123/data/2027";
   assert.deepEqual(Object.fromEntries(Object.keys(NODES).map((id) => [id, nodeHref(id, at)])), {
     landscape: CMS.Landscape, links: `${blob}/links.csv`, found: `${blob}/found.csv`, pbp: CMS.PBP,
-    plans: null, documents: null, checked: `${blob}/generated/documents_checked.csv`, text: null,
-    sheet: "tables/2027/abc123/dvha.json", answers: null, facts: null, presented: "tables/2027/abc123/presented.json",
-    cmsFacts: null, notes: `${blob}/comments.csv`, site: "#/2027/dvha/H1-1-0/vision",
+    plans: "tables/2027/abc123/plans.json", documents: "tables/2027/abc123/documents.json", checked: `${blob}/generated/documents_checked.csv`, text: null,
+    sheet: "tables/2027/abc123/dvha.json", answers: null, facts: "tables/2027/abc123/document_facts.json", presented: "tables/2027/abc123/presented.json",
+    cmsFacts: "tables/2027/abc123/pbp_facts.json", notes: `${blob}/comments.csv`, site: "#/2027/dvha/H1-1-0/vision",
     prompt: "https://github.com/rosenhouse-bot-sandbox/shiba-data/blob/abc123/pipeline/fact_prompt.md",
     rules: "https://github.com/rosenhouse-bot-sandbox/shiba-data/blob/abc123/pipeline/present.py",
   });

@@ -9,14 +9,15 @@ Usage:
 `cell` prints JSON. Each record has a status: "traced", "none" when no step touched the cell, or "not_recorded" when
 nothing kept the record. With a work_dir from a run, `build` adds the run's prompts, their saved answers and the
 checks' outcomes.
-`export` writes every cell's records and each plan's rows of TABLES once by content, which web/worker.js loads into D1.
+`export` writes, once by content, every cell's records and each plan's rows of each table in tables.WRITES.
+web/worker.js loads them into D1.
 `page` prints a page's layout text from a run's <work_dir>/texts, where blobs.py puts it.
 """
 import csv, glob, hashlib, json, os, sqlite3, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-import ask, blobs, eoc, extract, facts, fields, find_docs, sheets, present, review, years
+import ask, blobs, eoc, extract, facts, fields, find_docs, sheets, present, review, tables, years
 
 REPO_URL = "https://github.com/rosenhouse-bot-sandbox/shiba-data"
 PROMPT_URL = "https://pdxplans.org/blobs/{}.txt"
@@ -362,26 +363,25 @@ def cell(db, sheet, plan_id, col):
 COMMIT = "${commit}"
 
 
-# Main uploads these tables with each build's traces.
-TABLES = (*(f"generated/{name}" for name in sheets.SHEETS.values()), sheets.PRESENTED)
-
-
 def table_items(data):
-    """{tables/<name>/<n>/<plan_id>: the rows of the table's nth run of one plan's rows, as JSON}, in file order."""
+    """{tables/<name>/<n>/<plan>: the rows of the table's nth run of one plan's rows, as JSON}, in file order.
+    A row's plan is its plan_id, or its plan_ids when one document covers several plans."""
     items = {}
-    for path in TABLES:
+    for path in tables.WRITES:
         name, runs = os.path.basename(path).removesuffix(".csv"), []
         with open(data / path, newline="", encoding="utf-8") as f:
-            for row in csv.DictReader(f):
-                if not runs or runs[-1][0]["plan_id"] != row["plan_id"]:
+            reader = csv.DictReader(f)
+            plan = "plan_id" if "plan_id" in reader.fieldnames else "plan_ids"
+            for row in reader:
+                if not runs or runs[-1][0][plan] != row[plan]:
                     runs.append([])
                 runs[-1].append(row)
-        items |= {f"tables/{name}/{n}/{run[0]['plan_id']}": json.dumps(run, ensure_ascii=False) for n, run in enumerate(runs)}
+        items |= {f"tables/{name}/{n}/{run[0][plan]}": json.dumps(run, ensure_ascii=False) for n, run in enumerate(runs)}
     return items
 
 
 def export(db, out):
-    """Writes each cell's records, and each plan's rows of TABLES, to <out>/items/<sha256>.json,
+    """Writes each cell's records, and each plan's rows of each table that tables.py writes, to <out>/items/<sha256>.json,
     and <out>/<commit>.json, which names each item's file."""
     sha, year = db.execute("SELECT sha, year FROM build").fetchone()
     os.makedirs(os.path.join(out, "items"), exist_ok=True)

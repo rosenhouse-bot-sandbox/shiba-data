@@ -1030,10 +1030,13 @@ test("pipeline view: a table heading says where its data lives and opens it in a
   assert.equal(await source("links").getAttribute("aria-label"), "links, opens in a new tab");
   assert.match(await source("links").getAttribute("href"), /^https:\/\/github\.com\/.+\/blob\/[0-9a-f]{40}\/data\/2027\/links\.csv$/);
   assert.equal(await source("links").getAttribute("target"), "_blank");
-  assert.equal(await source("plans").count(), 0);
+  assert.equal(await head("plans").locator(".how-store").textContent(), "In D1");
+  assert.match(await source("plans").getAttribute("href"), /^tables\/2027\/[0-9a-f]{40}\/plans\.json$/);
+  await openHow(page, "main/H1036-153-0/ambulance/read-facts");
+  assert.equal(await source("model answers").count(), 0);
   await openHow(page, "main/H1036-153-0/ambulance/publish");
   assert.match(await source("main_chart").getAttribute("href"), /^tables\/2027\/[0-9a-f]{40}\/main_chart\.json$/);
-  assert.match(await page.textContent(".how-legend"), /In git.*In R2.*In D1.*CI only.*Website/);
+  assert.match(await page.textContent(".how-legend"), /In git.*In R2.*In D1.*Website/);
 });
 
 test("pipeline view: the map's boxes open nothing", async () => {

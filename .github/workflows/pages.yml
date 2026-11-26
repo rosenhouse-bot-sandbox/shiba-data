@@ -179,7 +179,7 @@ jobs:
             aws s3 sync "trace/$year/items" "s3://pdxplans/trace/$year/items/" --size-only --only-show-errors
             aws s3 cp "$manifest" "s3://pdxplans/$manifest" --only-show-errors
             url="https://pdxplans.org/trace/$year/load/$(jq -er .sha "$manifest")"
-            for _ in $(seq 200); do
+            for _ in $(seq 400); do
               status=$(curl -sS --max-time 60 --retry 3 -X POST -o response.txt -w "%{http_code}" \
                 -H "Authorization: Bearer $LOAD_TOKEN" "$url")
               cat response.txt; echo
