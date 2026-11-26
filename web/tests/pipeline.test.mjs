@@ -112,7 +112,8 @@ test("every table a step reads or writes has example rows", () => {
 });
 
 test("each step highlights the example's rows in its first input and its outputs", () => {
-  for (const s of STEPS) for (const id of [s.from, ...outputs(s)]) assert.ok(s.example.highlight[id]?.length, `${s.id} ${id}`);
+  assert.deepEqual(NODES.notes.table.rows, [], "the example cell has no note");
+  for (const s of STEPS) for (const id of [s.from, ...outputs(s)].filter((id) => id !== "notes")) assert.ok(s.example.highlight[id]?.length, `${s.id} ${id}`);
 });
 
 test("a step's tables are the map's inputs, in order, then its outputs", () => {
@@ -127,10 +128,12 @@ test("a step's tables are the map's inputs, in order, then its outputs", () => {
 test("neighbouring steps share a table", () => {
   const rules = stepById("column-rules");
   assert.deepEqual(before(rules).map((s) => s.id), ["cms-facts", "check-facts"]);
-  assert.deepEqual(after(rules).map((s) => s.id), ["publish"]);
+  assert.deepEqual(after(rules).map((s) => s.id), ["write-notes", "publish"]);
   assert.deepEqual(before(stepById("list-plans")), []);
   assert.deepEqual(after(stepById("list-plans")).map((s) => s.id), ["find-pdfs", "cms-facts"]);
-  assert.deepEqual(before(stepById("publish")).map((s) => s.id), ["column-rules"]);
+  assert.deepEqual(before(stepById("publish")).map((s) => s.id), ["column-rules", "write-notes"]);
+  assert.deepEqual(before(stepById("write-notes")).map((s) => s.id), ["column-rules"]);
+  assert.deepEqual(before(stepById("check-facts")).map((s) => s.id), ["extract-text", "read-facts"]);
 });
 
 test("every node says where its data lives, and names it without a file extension", () => {
@@ -241,8 +244,9 @@ test("Read CMS fields shows the column's CMS facts and the fields behind them", 
 });
 
 test("every step shows a replayed cell's input and output rows", () => {
+  const noted = { ...withCms, notes: { status: "traced", rows: [{ kind: "caveat", comment: "Limits apply." }] } };
   for (const s of STEPS) {
-    const tables = records(s, withCms, "main", CODE);
+    const tables = records(s, noted, "main", CODE);
     for (const role of ["Input", "Output"]) assert.ok(tables.some((r) => r.role === role && r.rows.length), `${s.id} ${role}`);
     for (const r of tables) for (const row of r.rows) assert.equal(row.length, r.cols.length, `${s.id} ${r.name}`);
   }
@@ -284,7 +288,7 @@ test("Publish outputs only the shown citations, naming each document", () => {
 });
 
 test("Check facts marks the kept facts and outputs only those", () => {
-  const [stated, kept] = records(stepById("check-facts"), replay);
+  const [stated, , kept] = records(stepById("check-facts"), replay);
   assert.equal(stated.rows.length, 8);
   assert.equal(stated.hi.length, 7);
   assert.deepEqual(kept.rows.map((r) => r.slice(2)), stated.hi.map((i) => stated.rows[i].slice(2)));
@@ -304,8 +308,10 @@ test("a held cell's rule strip says why", () => {
   assert.deepEqual(strip(stepById("column-rules"), held), ["0 facts used, 2 set aside", "held: the EOC and SB disagree"]);
 });
 
-test("every step has a strip for a replayed trace", () => {
-  assert.deepEqual(STEPS.filter((s) => !strip(s, replay)).map((s) => s.id), []);
+test("every step has a strip for a replayed trace, except Write notes for a cell with no note", () => {
+  assert.deepEqual(STEPS.filter((s) => !strip(s, replay)).map((s) => s.id), ["write-notes"]);
+  const noted = { ...replay, notes: { status: "traced", rows: [{ kind: "caveat", comment: "Limits apply." }] } };
+  assert.deepEqual(strip(stepById("write-notes"), noted), ["sheet $325 or 20% | $325", "caveat note"]);
 });
 
 const BLOBS = "https://pdxplans.org/blobs/";

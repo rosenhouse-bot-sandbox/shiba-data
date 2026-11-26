@@ -27,7 +27,7 @@ export const NODES = {
         ["H1036-153-0", "EOC", "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf"]] } },
   found: { col: 0, row: 0, store: "git", label: "found", git: "found.csv",
     table: { name: "found", note: "Claude sessions found no URL for this plan", cols: ["plan_ids", "kind", "url", "found_via"], rows: [] } },
-  pbp: { col: 1, row: 5, store: "r2", label: "CMS PBP tables", cms: "PBP",
+  pbp: { col: 3, row: 5, store: "r2", label: "CMS PBP tables", cms: "PBP",
     table: { name: "pbp_b4_emerg_urgent.txt", note: "the plan's emergency and urgent care copays abroad",
       cols: ["bid_id", "pbp_b4c_copay_amt_wec_min", "pbp_b4c_copay_amt_wec_max", "pbp_b4c_copay_amt_wuc_min", "pbp_b4c_copay_amt_wuc_max"],
       rows: [["H1036_153_0", "115.00", "115.00", "40.00", "40.00"]] } },
@@ -64,7 +64,7 @@ export const NODES = {
         '[{"benefit": "ambulance.air", "setting": "any", "network": "in", "cost_kind": "coinsurance", "amount": "20%", "page": 9, "quotes": ["20% of the cost"]},',
         ' {"benefit": "ambulance.ground", "setting": "any", "network": "in", "cost_kind": "copay", "amount": "$325", "page": 9, "quotes": ["$325 copay per date of service"]},',
         ' {"benefit": "ambulance", "setting": "outside_us", "covered_by": "medicare", "amount": "$325", "page": 6, "quotes": ["Emergency ambulance: $325 copay per date of"]}]'] } },
-  facts: { col: 0, row: 6, store: "ci", label: "document_facts",
+  facts: { col: 1, row: 6, store: "ci", label: "document_facts",
     table: { name: "document_facts", note: "accepted facts, selected columns",
       cols: ["benefit", "setting", "network", "condition", "covered_by", "cost_kind", "amount", "source", "page"],
       rows: [["ambulance.ground", "any", "in", "Emergency Ambulance", "medicare", "copay", "$325", "EOC", "46"],
@@ -73,7 +73,7 @@ export const NODES = {
         ["ambulance", "outside_us", "out", "Emergency Ambulance", "supplemental", "copay", "$325", "EOC", "46"],
         ["ambulance.ground", "any", "in", "", "medicare", "copay", "$325", "SB", "9"],
         ["ambulance.air", "any", "in", "", "medicare", "coinsurance", "20%", "SB", "9"]] } },
-  rules: { col: 1, row: 6, store: "git", label: "rule code", code: "pipeline/present.py",
+  rules: { col: 0, row: 6, store: "git", label: "rule code", code: "pipeline/present.py",
     text: { name: "pipeline/present.py", note: "the Ambulance column's entry in COLUMNS, and the rule it names",
       lines: ['COLUMNS = {..., "AB_ambulance": ambulance, ...}', "", "def ambulance(organization, found):",
         '    """Line 1 is trips within the U.S. and line 2 is emergency trips abroad, each as (value, cited facts).', "    …"] } },
@@ -85,9 +85,9 @@ export const NODES = {
   cmsFacts: { col: 2, row: 6, store: "ci", label: "pbp_facts",
     table: { name: "pbp_facts", note: "the facts the Ambulance rule considers, selected columns", cols: ["benefit", "setting", "condition", "amount", "source"],
       rows: [["emergency", "outside_us", "", "$115", "PBP"], ["emergency", "outside_us", "urgently needed services", "$40", "PBP"]] } },
-  notes: { col: 2, row: 7, store: "git", label: "comments", git: "comments.csv",
+  notes: { col: 2, row: 8, store: "git", label: "comments", git: "comments.csv",
     table: { name: "comments", note: "the cell has no note", cols: ["sheet", "plan_id", "column", "kind", "comment"], rows: [] } },
-  site: { col: 1, row: 8, store: "web", label: "pdxplans.org",
+  site: { col: 1, row: 9, store: "web", label: "pdxplans.org",
     text: { name: "pdxplans.org", note: "after a volunteer clicks the cell",
       lines: ["Humana Total Complete (HMO) · Ambulance", "  $325 or 20% | $325", "", "EOC page 46, highlighted in the PDF beside the sheet:",
         '  "In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number',
@@ -137,14 +137,18 @@ export const STEPS = [
       ["The answer is ", ["hash", "saved under a hash of the model, effort and prompt"], ", so a rerun calls no model."]],
     example: { highlight: { text: [3, 4, 5], answers: [0, 1, 2] }, before: "Ground  $325 copay per date of service", after: "{benefit: ambulance.ground, amount: $325, page: 9}",
       paras: [["The Ambulance column uses the ambulance and emergency groups, so Claude gets four prompts, one per group and document. For the SB and the ambulance group, Claude answers with three facts."]] } },
-  { id: "check-facts", record: "fact_checks", from: "answers", to: "facts", label: "Check facts",
-    paras: [["Code runs a ", ["quoteCheck", "quote check"], " on every fact. A verifier, Claude Opus, then judges each fact mixed with ", ["decoy", "decoys"], ". Last, a ", ["reviewer", "reviewer"], " checks each fact a value would cite."]],
+  { id: "check-facts", record: "fact_checks", from: "answers", also: ["text"], to: "facts", label: "Check facts",
+    paras: [["Code runs a ", ["quoteCheck", "quote check"], " of every fact against its page's text. A verifier, Claude Opus, then reads the page and judges each fact mixed with ", ["decoy", "decoys"], ". Last, a ", ["reviewer", "reviewer"], " checks each fact a value would cite. The verifier's and reviewer's answers are saved with the reader's."]],
     example: { highlight: { answers: [2], facts: [3, 4, 5] }, before: "SB: abroad, covered_by medicare", after: "rejected; the EOC's supplemental fact stands",
       paras: [["The verifier rejected the SB's worldwide fact: Medicare doesn't cover care abroad, so it is supplemental. The EOC's fact, already marked supplemental, passed."]] } },
   { id: "column-rules", record: "rule", from: "facts", also: ["rules", "cmsFacts"], to: "presented", alsoTo: ["sheet"], label: "Apply column rules",
     paras: [["Each column has a rule, written in code from the domain expert's instructions. It takes facts from the ", ["bestSource", "best source"], " and cites their quotes. It writes each value to the sheet and each citation to presented. A line that only CMS data backs has no citation, so a volunteer can't check it."]],
     example: { highlight: { facts: [0, 1, 2, 3], rules: [0, 2], presented: [0, 1, 2], sheet: [0] }, before: "ground $325, air 20%, abroad $325", after: "$325 or 20% | $325",
       paras: [["In the ", ["rule", "Ambulance rule"], ", line 1 takes in-network, Medicare-covered ground and air trips from the EOC. Line 2 takes trips abroad. Each line cites the quotes of the facts it used, so line 1 gets four citations and line 2 one, all from EOC page 46."]] } },
+  { id: "write-notes", record: "notes", from: "sheet", also: ["presented"], to: "notes", label: "Write notes",
+    paras: [["Claude sessions write a note in a pull request where a value needs explaining. They read the cell and its citations, and each note cites a page and quote."]],
+    example: { highlight: { sheet: [0], presented: [0, 1, 2] }, before: "$325 or 20% | $325", after: "no note",
+      paras: [["The Ambulance cell has no note."]] } },
   { id: "publish", record: "citations", from: "sheet", also: ["presented", "notes"], to: "site", label: "Publish",
     paras: [["Merging to main builds the site from the sheet, its citations and the notes that Claude sessions write. ", ["worker", "The pdxplans Worker"], " serves it at pdxplans.org, and the same build updates the volunteers' Google Sheet."]],
     example: { highlight: { sheet: [0], presented: [0, 1, 2], site: [1, 4, 5] }, before: "$325 or 20% | $325, 5 quotes", after: "cell + EOC page 46 highlight", paras: [] } },
@@ -260,6 +264,7 @@ const STRIPS = {
   },
   "column-rules": (t) => [`${plural(t.rule.lines.reduce((n, l) => n + l.facts.length, 0), "fact")} used, ${t.rule.set_aside.length} set aside`,
     t.rule.held ? `held: ${t.rule.held}` : t.rule.lines.map((l) => `line ${l.line} ${shownValue(l.value)}`).join("; ")],
+  "write-notes": (t) => [`sheet ${shownValue(t.sheet.value)}`, t.notes.rows.length ? `${t.notes.rows[0].kind} note` : "no note"],
   "publish": (t) => [`sheet ${shownValue(t.sheet.value)}`, `site cell ${shownValue(t.sheet.value)} with ${quotes(t.citations.shown, t)}`],
 };
 
@@ -393,10 +398,12 @@ const codeLines = (url) => {
   return `${url.split("/").at(-1).split("#")[0]} ${start === end ? `line ${start}` : `lines ${start}–${end}`}`;
 };
 const sheetRow = table(["sheet"], "the cell", ["plan_id", "column", "value"], (t) => [[t.cell.plan_id, t.cell.col, shownValue(t.sheet.value)]]);
+const cellNote = table(["notes"], "the cell's note", ["kind", "comment"], (t) => t.notes.rows.map((r) => [r.kind, r.comment]));
 const kindOf = (t, url) => t.documents.documents.find((d) => d.url === url)?.kind ?? "";
 const CITE_COLS = ["line", "value", "document", "pdf_page", "quote"];
 const citationRows = (t, rows) => rows.map((c) => [String(c.line ?? ""), shownValue(c.value ?? ""), kindOf(t, c.url), String(c.pdf_page), c.quote]);
 const allCitations = (t) => [...t.citations.shown, ...t.citations.hidden];
+const cellCitations = table(["citations", "documents"], "the cell's citations", CITE_COLS, (t) => citationRows(t, allCitations(t)));
 
 export const RECORDS = {
   "list-plans": {
@@ -431,6 +438,7 @@ export const RECORDS = {
     answers: table(["fact_checks", "documents"], "the facts they state; highlighted facts were kept", FACT_COLS,
       (t) => t.fact_checks.rows.map((r) => factRow(statedKind(t, r), stated(r).page, stated(r))),
       (t) => t.fact_checks.rows.flatMap((r, i) => r.kept ? [i] : [])),
+    text: pageText,
     facts: table(["fact_checks"], "the kept facts", FACT_COLS,
       (t) => t.fact_checks.rows.filter((r) => r.kept).map((r) => factRow(r.fact?.source, r.fact?.page, stated(r)))),
   },
@@ -439,14 +447,19 @@ export const RECORDS = {
     rules: table([], "where the column gets its rule, then each function and name the rule uses", ["code", "lines"],
       (t, code) => code.length ? code.map((c) => [c.name, { text: codeLines(c.url), href: c.url }]) : null),
     cmsFacts: ruleFacts("pbp", "the CMS facts the rule considered"),
-    presented: table(["citations", "documents"], "the cell's citations", CITE_COLS, (t) => citationRows(t, allCitations(t))),
+    presented: cellCitations,
     sheet: sheetRow,
+  },
+  "write-notes": {
+    sheet: sheetRow,
+    presented: cellCitations,
+    notes: cellNote,
   },
   "publish": {
     sheet: sheetRow,
     presented: table(["citations", "documents"], "the cell's citations; highlighted ones are shown", CITE_COLS,
       (t) => citationRows(t, allCitations(t)), (t) => t.citations.shown.map((_, i) => i)),
-    notes: table(["notes"], "the cell's note", ["kind", "comment"], (t) => t.notes.rows.map((r) => [r.kind, r.comment])),
+    notes: cellNote,
     site: table(["citations", "documents"], "the quotes the cell shows", CITE_COLS, (t) => citationRows(t, t.citations.shown)),
   },
 };

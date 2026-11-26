@@ -6,7 +6,7 @@ import http from "node:http";
 import fs from "node:fs";
 import path from "node:path";
 import { chromium, devices } from "playwright";
-import { STEPS, MIN_GAP } from "../static/pipeline.js";
+import { NODES, STEPS, MIN_GAP, outputs } from "../static/pipeline.js";
 
 const { SITE, DOCS, FAILURES } = process.env;
 const TYPES = { ".html": "text/html", ".js": "text/javascript", ".mjs": "text/javascript", ".css": "text/css", ".json": "application/json", ".pdf": "application/pdf" };
@@ -985,9 +985,12 @@ test("pipeline view: the nav link opens the example cell's first step", async ()
 test("pipeline view: Next steps through the example cell's steps, each showing its input and output rows", async () => {
   await openHow(page, "");
   const labels = [];
+  // The example cell has no note, so Write notes outputs no rows.
+  const hasOutputRows = (label) => outputs(STEPS.find((s) => s.label === label)).some((id) => NODES[id].table?.rows.length ?? true);
   for (;;) {
     labels.push(await page.textContent(".how-step"));
     for (const side of ["input", "output"]) {
+      if (side === "output" && !hasOutputRows(labels.at(-1))) continue;
       assert.ok(await page.locator(`.how-rows.${side} :is(tbody tr, pre span)`).count(), `${labels.at(-1)} ${side}`);
     }
     const next = page.locator("a.how-nav[rel=next]");
@@ -995,7 +998,7 @@ test("pipeline view: Next steps through the example cell's steps, each showing i
     await next.click();
     await page.waitForFunction((n) => document.querySelector(".how-count")?.textContent.startsWith(`${n} `), labels.length + 1);
   }
-  assert.equal(labels.length, 9);
+  assert.equal(labels.length, 10);
   assert.equal(labels.at(-1), "Publish");
 });
 
@@ -1015,8 +1018,8 @@ test("pipeline view: a step with three inputs and two outputs lights them all, j
   assert.equal(await page.locator(".how-node.on").count(), 5);
   assert.equal(await page.locator(".how-edge.on").count(), 5);
   assert.equal(await page.locator(".how-pill.on").count(), 1);
-  assert.equal(await page.locator(".how-pill").count(), 9);
-  assert.equal(await page.locator(".how-edge[marker-end]").count(), 10);
+  assert.equal(await page.locator(".how-pill").count(), 10);
+  assert.equal(await page.locator(".how-edge[marker-end]").count(), 11);
 });
 
 test("pipeline view: a table heading says where its data lives and opens it in a new tab when it has a URL", async () => {
@@ -1210,7 +1213,8 @@ test("pipeline view: a cell with no trace says so, and the next step loads it ag
   await fresh.waitForFunction(() => document.querySelector(".how-trace")?.textContent.includes("This build has no trace for this cell."));
   fail = false;
   await fresh.click("a.how-nav[rel=prev]");
-  await fresh.waitForSelector(".how-trace pre", { state: "attached" });
+  await fresh.waitForFunction(() => document.querySelector(".how-step")?.textContent === "Write notes");
+  await fresh.waitForFunction(() => document.querySelector(".how-trace-head")?.textContent.includes("No step touched this cell"));
 });
 
 test("pipeline view: a record's status reads in words, and a record the trace lacks reads as not recorded", async () => {

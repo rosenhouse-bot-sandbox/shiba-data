@@ -52,6 +52,7 @@ flowchart TD
   cms --> cmsfacts[4. Read facts from CMS data]
   text --> read[5. Claude reads facts from the PDFs]
   read --> check[6. Code and Claude check each fact]
+  text --> check
   check --> present[7. Rules turn facts into values]
   cmsfacts --> present
   rules[(Rule code in git)] --> present
