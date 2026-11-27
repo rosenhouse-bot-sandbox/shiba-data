@@ -114,7 +114,8 @@ class MainTest(unittest.TestCase):
                                  model_steps=lambda *a: order.append("model_steps"), asker=lambda *a: None), \
              mock.patch.object(run.subprocess, "run"), mock.patch.object(run.blobs, "record_cms"), \
              mock.patch.object(run.blobs, "record_texts"), mock.patch.object(run, "pdfs"), \
-             mock.patch.object(run.present, "write", lambda data, version: order.append("present")):
+             mock.patch.object(run.present, "write", lambda data, version: order.append("present")), \
+             mock.patch.object(run.store, "pull", lambda data, work: order.append("pull")):
             data = pathlib.Path(root, str(years.LIVE))
             (data / "machine").mkdir(parents=True)
             for name in ("config.json", "steps.json"):
@@ -129,10 +130,10 @@ class MainTest(unittest.TestCase):
         self.assertEqual(self.run_main("api", "present@2")[:2], [("code", "present@2"), "get"])
 
     def test_checks_the_quotes_of_the_earlier_facts_before_any_model_call(self):
-        self.assertEqual(self.run_main("api")[-5:], ["present", "check_quotes", "model_steps", "check_quotes", ("checks", "")])
+        self.assertEqual(self.run_main("api")[-6:], ["present", "check_quotes", "pull", "model_steps", "check_quotes", ("checks", "")])
 
     def test_without_earlier_facts_checks_only_the_new_quotes(self):
-        self.assertEqual(self.run_main("replay", facts=False), [("code", ""), "model_steps", "check_quotes", ("checks", "")])
+        self.assertEqual(self.run_main("replay", facts=False), [("code", ""), "pull", "model_steps", "check_quotes", ("checks", "")])
 
     def test_checks_the_built_data_after_the_model_steps(self):
         self.assertEqual(self.run_main("replay")[-3:], ["model_steps", "check_quotes", ("checks", "")])

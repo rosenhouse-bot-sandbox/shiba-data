@@ -59,7 +59,7 @@ class FetchTest(unittest.TestCase):
 
 
 class MainTest(unittest.TestCase):
-    def test_writes_the_cms_tables_then_replays_the_model_steps(self):
+    def test_writes_the_cms_tables_then_pulls_the_saved_answers_and_replays_the_model_steps(self):
         order = []
 
         def model_steps(data, texts, work, answer, versions):
@@ -68,11 +68,12 @@ class MainTest(unittest.TestCase):
         out = io.StringIO()
         with mock.patch.object(tables, "fetch", lambda gen, work: order.append("fetch")), \
              mock.patch.object(tables.run, "cms_tables", lambda data, config, work: order.append("cms_tables")), \
-             mock.patch.object(tables.run, "model_steps", model_steps), contextlib.redirect_stdout(out):
+             mock.patch.object(tables.run, "model_steps", model_steps), contextlib.redirect_stdout(out), \
+             mock.patch.object(tables.store, "pull", lambda data, work: order.append("pull")):
             with tempfile.TemporaryDirectory() as tmp, contextlib.chdir(tmp):
                 tables.main(str(years.LIVE), "work")
         pinned = tables.steps.versions(years.data_dir(), tables.run.STEPS)
-        self.assertEqual(order, ["fetch", "cms_tables", ("model_steps", True, True, None, pinned)])
+        self.assertEqual(order, ["fetch", "cms_tables", "pull", ("model_steps", True, True, None, pinned)])
         self.assertEqual(out.getvalue(), "")
 
     def test_prints_the_model_steps_output_when_they_stop(self):
@@ -83,7 +84,7 @@ class MainTest(unittest.TestCase):
         with mock.patch.object(tables, "fetch", lambda gen, work: None), \
              mock.patch.object(tables.run, "cms_tables", lambda *a: None), \
              mock.patch.object(tables.run, "model_steps", model_steps), contextlib.redirect_stdout(out), \
-             self.assertRaises(SystemExit), tempfile.TemporaryDirectory() as work:
+             mock.patch.object(tables.store, "pull", lambda *a: None), self.assertRaises(SystemExit), tempfile.TemporaryDirectory() as work:
             tables.main(str(years.LIVE), work)
         self.assertIn("2 of 9 tasks", out.getvalue())
 

@@ -13,3 +13,6 @@ data/*/generated/main_chart.csv
 data/*/generated/dvha.csv
 data/*/generated/presented.csv
 _tables/
+# pipeline/store.py pulls these from the packs that data/<year>/lock.json pins.
+data/*/answers/
+data/*/evaluations/*/answers/
