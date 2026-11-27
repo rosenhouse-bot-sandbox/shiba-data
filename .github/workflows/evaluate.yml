@@ -102,7 +102,12 @@ jobs:
             git add "data/$YEAR/evaluations"
             # The lock must not name a pack that R2 lacks.
             git checkout HEAD -- "data/$YEAR/lock.json" 2>/dev/null || rm -f "data/$YEAR/lock.json"
-            python3 -I pipeline/store.py unpacked "$YEAR" "$RUNNER_TEMP/tables" | xargs -r git add -f --
+            # If the locked packs are unreadable, keep every saved answer.
+            if python3 -I pipeline/store.py unpacked "$YEAR" "$RUNNER_TEMP/tables" > _unpacked.txt; then
+              xargs -r git add -f -- < _unpacked.txt
+            else
+              git add -f "data/$YEAR/evaluations"
+            fi
           fi
           git commit -m "Save the evaluation answers of run $GITHUB_RUN_ID" || exit 0
           git push "https://x-access-token:$GH_TOKEN@github.com/$GITHUB_REPOSITORY.git" "$branch"
