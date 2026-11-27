@@ -23,6 +23,7 @@ const cases = [
   ["#/2027/tables/presented/H1036-153-0/main/AB_ambulance",
     { year: 2027, view: "tables", table: "presented", plan: "H1036-153-0", sheet: "main", column: "AB_ambulance" }],
   ["#/2027/tables/presented/all/dvha/C_premium", { year: 2027, view: "tables", table: "presented", sheet: "dvha", column: "C_premium" }],
+  [`#/2027/tables/${"a1".repeat(20)}/presented/H1`, { year: 2027, view: "tables", build: "a1".repeat(20), table: "presented", plan: "H1" }],
 ];
 
 test("format and parse round-trip", () => {

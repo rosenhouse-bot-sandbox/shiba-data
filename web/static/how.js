@@ -93,7 +93,7 @@ function lens(step, link, terms, example, trace, code, at) {
       return [where, el("button", { type: "button", class: "how-source", popovertarget: warning.id, "aria-label": `${name}, download from cms.gov` },
         el("code", {}, name), " ↓")];
     }
-    if (href?.startsWith("#")) return [where, el("a", { class: "how-source", href, "aria-label": `${name}, opens in Tables` }, el("code", {}, name), " →")];
+    if (href && n.store === "d1") return [where, el("a", { class: "how-source", href, "aria-label": `${name}, opens in Tables` }, el("code", {}, name), " →")];
     if (href) return [where, el("a", { class: "how-source", href, target: "_blank", rel: "noopener",
       "aria-label": `${name}, opens in a new tab` }, el("code", {}, name), " ↗")];
     return [where, el("code", {}, name)];

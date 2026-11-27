@@ -5,7 +5,7 @@ import { parse, format } from "./permalink.js";
 import { el } from "./dom.js";
 import { howView, howLink, traceUrl } from "./how.js";
 import { initAppearance } from "./appearance.js";
-import { tablesView, ordered } from "./tables.js";
+import { tablesView, ordered, known } from "./tables.js";
 import { EXAMPLE, STEPS, NODES, nodeHref } from "./pipeline.js";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = "pdfjs/pdf.worker.min.mjs";
@@ -195,13 +195,11 @@ async function routeHow(state) {
   if (map) content.querySelector(".how-step").focus({ preventScroll: true });
 }
 
-// The build the visitor picked in the tables view, if any. Otherwise it shows the deployed build's tables.
-let pickedBuild = null;
 // A failed load is not kept, so the next visit tries again.
-const tableLoads = {};
 const fetchJson = (cache, url) => cache[url] ??= fetch(url).then((r) => r.ok ? r.json() : null).catch(() => null)
   .then((data) => data ?? (delete cache[url], null));
-let buildsLoad = null;
+// D1 may load a build or drop one at any time, so each visit to the tables view from another view fetches afresh.
+let tableLoads = {};
 
 async function routeTables(state) {
   hideViewer();
@@ -210,33 +208,33 @@ async function routeTables(state) {
   document.querySelectorAll("header nav a").forEach((a) => a.classList.toggle("active", a.dataset.view === "tables"));
   const content = $("#content");
   if (here?.view !== "tables") {
-    buildsLoad = null;
+    tableLoads = {};
     if (here) scrollTops[here.key] = content.scrollTop;
     content.replaceChildren(el("p", { class: "tables-note" }, "Loading the table…"));
   }
   here = { key: "tables", view: "tables" };
-  // builds.json changes with each load, so each visit from another view fetches it again.
-  const builds = await (buildsLoad ??= fetch(`tables/${site.year}/builds.json`).then((r) => r.ok ? r.json() : null).catch(() => null));
-  if (ticket !== howTicket || location.hash !== asked) return;
+  const stale = () => ticket !== howTicket || location.hash !== asked;
+  const builds = await fetchJson(tableLoads, `tables/${site.year}/builds.json`);
+  if (stale()) return;
   if (!builds?.builds.length) {
-    buildsLoad = null;
-    content.replaceChildren(el("p", { class: "tables-note warn" }, "No tables are available here. D1 keeps them only on pdxplans.org."));
+    content.replaceChildren(el("p", { class: "tables-note warn" }, builds ? "D1 keeps no builds yet." : "The list of builds did not load. Try again later."));
     return;
   }
   const kept = (sha) => builds.builds.find((b) => b.sha === sha);
-  const build = kept(pickedBuild) ?? kept(builds.deployed) ?? builds.builds[0];
+  const build = kept(state.build) ?? kept(builds.deployed) ?? builds.builds[0];
   const table = build.tables.includes(state.table) ? state.table : ordered(build.tables)[0];
   const rows = await fetchJson(tableLoads, `tables/${site.year}/${build.sha}/${table}.json`);
-  if (ticket !== howTicket || location.hash !== asked) return;
+  if (stale()) return;
   if (!rows) {
     content.replaceChildren(el("p", { class: "tables-note warn" }, `The ${table} table did not load. Try again later.`));
     return;
   }
-  const hasColumn = rows.length > 0 && "column" in rows[0];
-  const shownState = { ...state, table, ...(hasColumn ? {} : { sheet: undefined, column: undefined }) };
-  const hash = format(shownState);
+  const shown = known({ ...state, table, build: kept(state.build) && state.build }, rows);
+  const hash = format(shown);
   if (location.hash !== hash) history.replaceState(null, "", hash);
   routed = location.hash;
+  // The header's Tables link returns to the last table shown.
+  $("header nav a[data-view=tables]").href = hash;
   const gitTables = Object.entries(NODES).filter(([, n]) => n.git).map(([id, n]) => ({ name: n.label, href: nodeHref(id, { year: site.year, sha: build.sha }) }));
   const docByUrl = Object.fromEntries(Object.values(site.docs).map((d) => [d.url, d]));
   const pageHref = (row, page) => {
@@ -248,19 +246,21 @@ async function routeTables(state) {
     const column = sheetOf({ sheet })?.columns.find((c) => c.key === key);
     return column ? `${SHEET_NAMES[sheet]} · ${column.label}` : `${sheet} · ${key}`;
   };
-  const focused = document.activeElement?.id;
-  content.replaceChildren(tablesView({ year: site.year, state: shownState, table, rows, builds, sha: build.sha, gitTables,
-    planName: (id) => plans[id]?.plan_name ?? "", columnLabel, pageHref,
-    onBuild: (sha) => { pickedBuild = sha; routeTables(parse(location.hash, site.year)); } }));
-  if (focused) document.getElementById(focused)?.focus();
+  // Focus stays on the control that changed the view.
+  const focused = document.activeElement;
+  const inList = focused?.closest?.(".tables-list");
+  content.replaceChildren(tablesView({ year: site.year, state: shown, table, rows, builds, sha: build.sha, gitTables,
+    planName: (id) => plans[id]?.plan_name ?? "", columnLabel, pageHref }));
+  const notes = [state.build && !shown.build ? `D1 no longer keeps build ${state.build.slice(0, 7)}, so this shows build ${build.sha.slice(0, 7)}.` : null,
+    state.table && state.table !== table ? `Build ${build.sha.slice(0, 7)} has no ${state.table} table.` : null,
+    state.plan && !shown.plan ? `The ${table} table has no rows for ${state.plan}.` : null,
+    state.column && !shown.column && "column" in (rows[0] ?? {}) ? `The ${table} table has no rows for that column.` : null].filter(Boolean);
+  if (notes.length) content.querySelector(".tables-main").prepend(...notes.map((n) => el("p", { class: "warn" }, n)));
+  (inList ? content.querySelector(".tables-list a[aria-current]") : focused?.id && document.getElementById(focused.id))?.focus();
 }
 
 const traces = {};
-const traceOf = (sheet, plan, columnKey) => {
-  const url = traceUrl(site.year, sheet, plan, columnKey);
-  return traces[url] ??= fetch(url).then((r) => r.ok ? r.json() : null).catch(() => null)
-    .then((trace) => trace ?? (delete traces[url], null));
-};
+const traceOf = (sheet, plan, columnKey) => fetchJson(traces, traceUrl(site.year, sheet, plan, columnKey));
 
 const planSb = (plan) => plan.docs.find((d) => site.docs[d].kind === "SB");
 

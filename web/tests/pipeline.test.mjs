@@ -145,16 +145,17 @@ test("every node says where its data lives, and names it without a file extensio
 
 const CMS = { Landscape: "https://cms/landscape.zip", PBP: "https://cms/pbp.zip" };
 
+const SHA = "abc123".padEnd(40, "0");
 test("a node links to its data where the data has a URL", () => {
-  const at = { year: 2027, sheet: "dvha", plan: "H1-1-0", column: "G_vision", sha: "abc123", cell: "#/2027/dvha/H1-1-0/vision", cms: CMS };
-  const blob = "https://github.com/rosenhouse-bot-sandbox/shiba-data/blob/abc123/data/2027";
+  const at = { year: 2027, sheet: "dvha", plan: "H1-1-0", column: "G_vision", sha: SHA, cell: "#/2027/dvha/H1-1-0/vision", cms: CMS };
+  const blob = `https://github.com/rosenhouse-bot-sandbox/shiba-data/blob/${SHA}/data/2027`;
   assert.deepEqual(Object.fromEntries(Object.keys(NODES).map((id) => [id, nodeHref(id, at)])), {
     landscape: CMS.Landscape, links: `${blob}/links.csv`, found: `${blob}/found.csv`, pbp: CMS.PBP,
-    plans: "#/2027/tables/plans/H1-1-0", documents: "#/2027/tables/documents/H1-1-0", checked: `${blob}/generated/documents_checked.csv`, text: null,
-    sheet: "#/2027/tables/dvha/H1-1-0", answers: null, facts: "#/2027/tables/document_facts/H1-1-0",
-    presented: "#/2027/tables/presented/H1-1-0/dvha/G_vision", cmsFacts: "#/2027/tables/pbp_facts/H1-1-0", notes: `${blob}/comments.csv`, site: "#/2027/dvha/H1-1-0/vision",
-    prompt: "https://github.com/rosenhouse-bot-sandbox/shiba-data/blob/abc123/pipeline/fact_prompt.md",
-    rules: "https://github.com/rosenhouse-bot-sandbox/shiba-data/blob/abc123/pipeline/present.py",
+    plans: `#/2027/tables/${SHA}/plans/H1-1-0`, documents: `#/2027/tables/${SHA}/documents/H1-1-0`, checked: `${blob}/generated/documents_checked.csv`, text: null,
+    sheet: `#/2027/tables/${SHA}/dvha/H1-1-0`, answers: null, facts: `#/2027/tables/${SHA}/document_facts/H1-1-0`,
+    presented: `#/2027/tables/${SHA}/presented/H1-1-0/dvha/G_vision`, cmsFacts: `#/2027/tables/${SHA}/pbp_facts/H1-1-0`, notes: `${blob}/comments.csv`, site: "#/2027/dvha/H1-1-0/vision",
+    prompt: `https://github.com/rosenhouse-bot-sandbox/shiba-data/blob/${SHA}/pipeline/fact_prompt.md`,
+    rules: `https://github.com/rosenhouse-bot-sandbox/shiba-data/blob/${SHA}/pipeline/present.py`,
   });
 });
 

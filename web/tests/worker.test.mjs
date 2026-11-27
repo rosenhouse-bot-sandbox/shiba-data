@@ -331,7 +331,13 @@ test("serves a loaded build's table, its rows in the build's order", async () =>
   await load(e, OLD);
   const response = await at(e, `/tables/2027/${OLD}/presented.json`);
   assert.equal(response.headers.get("Content-Type"), "application/json; charset=utf-8");
-  assert.equal(response.headers.get("Cache-Control"), "public, max-age=86400");
+  assert.equal(response.headers.get("Cache-Control"), "no-cache");
+  const etag = response.headers.get("ETag");
+  assert.match(etag, /^"[0-9a-f]{64}"$/);
+  const again = await worker.fetch(new Request(`https://pdxplans.org/tables/2027/${OLD}/presented.json`, { headers: { "If-None-Match": etag } }), e);
+  assert.equal(again.status, 304);
+  assert.equal(again.headers.get("ETag"), etag);
+  assert.notEqual((await at(e, `/tables/2027/${OLD}/main.json`)).headers.get("ETag"), etag);
   assert.deepEqual(await response.json(), [{ n: "1" }, { n: "2" }, { n: "3" }]);
   assert.deepEqual(await (await at(e, `/tables/2027/${OLD}/main.json`)).json(), [{ n: "4" }]);
   for (const path of [`/tables/2027/${OLD}/dvha.json`, `/tables/2027/${NEW}/presented.json`, `/tables/2026/${OLD}/presented.json`]) {
@@ -357,10 +363,12 @@ test("lists the kept builds, newest first, with their tables and the deployed co
   const response = await at(e, "/tables/2027/builds.json");
   assert.equal(response.headers.get("Content-Type"), "application/json; charset=utf-8");
   assert.equal(response.headers.get("Cache-Control"), "no-cache");
-  assert.deepEqual(await response.json(), { deployed: NEW, builds: [
+  const { deployed, builds } = await response.json();
+  assert.equal(deployed, NEW);
+  assert.deepEqual(builds.map((b) => ({ ...b, tables: b.tables.toSorted() })), [
     { sha: NEW, loaded: 2000, tables: [] },
     { sha: OLD, loaded: 1000, tables: ["plans", "presented"] },
-  ] });
+  ]);
   assert.equal((await at(e, "/tables/2026/builds.json")).status, 404);
 });
 

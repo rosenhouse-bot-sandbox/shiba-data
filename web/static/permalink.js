@@ -1,7 +1,7 @@
 // A permalink is #/<year>/<view>[/<cell>][/<document kind>/<PDF page>], where the cell is
 // <plan>/<column> on a sheet, <sheet>/<plan>/<column> on Notes, and <sheet>/<column> on a plan's page.
 // The pipeline view is #/<year>/how[/<sheet>/<plan>/<column>[/<step>]].
-// The tables view is #/<year>/tables[/<table>[/<plan or all>[/<sheet>/<column>]]].
+// The tables view is #/<year>/tables[/<build's commit>][/<table>[/<plan or all>[/<sheet>/<column>]]].
 // Links from before the year was added start at the view.
 const SHEETS = ["main", "dvha"];
 const VIEWS = [...SHEETS, "plan", "notes", "how", "tables"];
@@ -22,6 +22,7 @@ export function parse(hash, liveYear) {
   const view = VIEWS.includes(parts[0]) ? parts.shift() : "main";
   const state = { year, view };
   if (view === "tables") {
+    if (/^[0-9a-f]{40}$/.test(parts[0])) state.build = parts.shift();
     const [table, plan, sheet, column] = parts;
     Object.assign(state, { table, plan: plan === ALL ? undefined : plan, sheet, column: sheet && column });
     if (!column) delete state.sheet;
@@ -42,9 +43,10 @@ export function parse(hash, liveYear) {
   return state;
 }
 
-export function format({ year, view, plan, sheet, column, kind, page, step, table }) {
+export function format({ year, view, plan, sheet, column, kind, page, step, table, build }) {
   const parts = [year, view];
   if (view === "tables") {
+    if (build) parts.push(build);
     if (table) parts.push(table, ...(plan || column ? [plan ?? ALL] : []), ...(column ? [sheet, column] : []));
     return `#/${parts.map((p) => encodeURIComponent(p)).join("/")}`;
   }
