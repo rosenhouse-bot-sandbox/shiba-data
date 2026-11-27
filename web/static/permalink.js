@@ -1,9 +1,11 @@
 // A permalink is #/<year>/<view>[/<cell>][/<document kind>/<PDF page>], where the cell is
 // <plan>/<column> on a sheet, <sheet>/<plan>/<column> on Notes, and <sheet>/<column> on a plan's page.
 // The pipeline view is #/<year>/how[/<sheet>/<plan>/<column>[/<step>]].
+// The tables view is #/<year>/tables[/<build's commit>][/<table>[/<plan or all>[/<sheet>/<column>]]].
 // Links from before the year was added start at the view.
 const SHEETS = ["main", "dvha"];
-const VIEWS = [...SHEETS, "plan", "notes", "how"];
+const VIEWS = [...SHEETS, "plan", "notes", "how", "tables"];
+const ALL = "all";
 
 const decode = (s) => {
   try {
@@ -19,6 +21,14 @@ export function parse(hash, liveYear) {
   if (parts[0] === "ambiguities") parts[0] = "notes";
   const view = VIEWS.includes(parts[0]) ? parts.shift() : "main";
   const state = { year, view };
+  if (view === "tables") {
+    if (/^[0-9a-f]{7,40}$/i.test(parts[0])) state.build = parts.shift().toLowerCase();
+    const [table, plan, sheet, column] = parts;
+    Object.assign(state, { table, plan: plan === ALL ? undefined : plan, sheet, column: sheet && column });
+    if (!column) delete state.sheet;
+    for (const k of Object.keys(state)) if (state[k] === undefined) delete state[k];
+    return state;
+  }
   if (view === "plan" && parts.length) state.plan = parts.shift();
   const cellFirst = view === "notes" || view === "how";
   const sheet = SHEETS.includes(view) ? view : cellFirst || SHEETS.includes(parts[0]) ? parts.shift() : null;
@@ -33,8 +43,13 @@ export function parse(hash, liveYear) {
   return state;
 }
 
-export function format({ year, view, plan, sheet, column, kind, page, step }) {
+export function format({ year, view, plan, sheet, column, kind, page, step, table, build }) {
   const parts = [year, view];
+  if (view === "tables") {
+    if (build) parts.push(build);
+    if (table) parts.push(table, ...(plan || column ? [plan ?? ALL] : []), ...(column ? [sheet, column] : []));
+    return `#/${parts.map((p) => encodeURIComponent(p)).join("/")}`;
+  }
   if (view === "plan") parts.push(plan);
   if (column) parts.push(...(view === "plan" ? [sheet, column] : view === "notes" || view === "how" ? [sheet, plan, column] : [plan, column]));
   if (view === "how" && column && step) parts.push(step);

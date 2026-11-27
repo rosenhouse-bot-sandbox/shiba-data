@@ -1022,7 +1022,7 @@ test("pipeline view: a step with three inputs and two outputs lights them all, j
   assert.equal(await page.locator(".how-edge[marker-end]").count(), 11);
 });
 
-test("pipeline view: a table heading says where its data lives and opens it in a new tab when it has a URL", async () => {
+test("pipeline view: a table heading says where its data lives and opens it, in a new tab when it is elsewhere", async () => {
   await openHow(page, "main/H1036-153-0/ambulance/find-pdfs");
   const head = (name) => page.locator(".how-rows-head", { has: page.locator(`code:text-is("${name}")`) });
   const source = (name) => head(name).locator(".how-source");
@@ -1031,11 +1031,15 @@ test("pipeline view: a table heading says where its data lives and opens it in a
   assert.match(await source("links").getAttribute("href"), /^https:\/\/github\.com\/.+\/blob\/[0-9a-f]{40}\/data\/2027\/links\.csv$/);
   assert.equal(await source("links").getAttribute("target"), "_blank");
   assert.equal(await head("plans").locator(".how-store").textContent(), "In D1");
-  assert.match(await source("plans").getAttribute("href"), /^tables\/2027\/[0-9a-f]{40}\/plans\.json$/);
+  assert.equal(await source("plans").getAttribute("href"), `#/2027/tables/${DEPLOYED}/plans/H1036-153-0`);
+  assert.equal(await source("plans").getAttribute("aria-label"), "plans, opens in Tables");
+  assert.equal(await source("plans").getAttribute("target"), null);
   await openHow(page, "main/H1036-153-0/ambulance/read-facts");
   assert.equal(await source("model answers").count(), 0);
   await openHow(page, "main/H1036-153-0/ambulance/publish");
-  assert.match(await source("main_chart").getAttribute("href"), /^tables\/2027\/[0-9a-f]{40}\/main_chart\.json$/);
+  assert.equal(await source("main_chart").getAttribute("href"), `#/2027/tables/${DEPLOYED}/main_chart/H1036-153-0`);
+  assert.equal(await source("presented").getAttribute("href"), `#/2027/tables/${DEPLOYED}/presented/H1036-153-0/main/AB_ambulance`);
+  assert.equal(await source("pdxplans.org").getAttribute("aria-label"), "pdxplans.org, opens in a new tab");
   assert.match(await page.textContent(".how-legend"), /In git.*In R2.*In D1.*Website/);
 });
 
@@ -1456,4 +1460,293 @@ test("landscape phone: a term's pop-over leaves its term uncovered", async () =>
   const pop = await p.locator(".how-pop:visible").boundingBox(), at = await term.boundingBox();
   assert.ok(pop.y >= at.y + at.height || pop.y + pop.height <= at.y, JSON.stringify({ pop, at }));
   assert.ok(pop.y >= 0 && pop.y + pop.height <= p.viewportSize().height, JSON.stringify(pop));
+});
+
+// The pdxplans Worker serves tables from D1, so these tests serve two builds' tables instead.
+// The deployed build is the one the traces name, so How it's made links to it.
+const DEPLOYED = JSON.parse(fs.readFileSync(path.join(SITE, "trace/2027/main/H1036-153-0/AB_ambulance.json"))).build.sha;
+const OLDER = "e".repeat(40);
+const EOC = Object.values(site.docs).find((d) => d.kind === "EOC" && d.plan_ids.includes("H1036-153-0"));
+const factRows = (n) => Array.from({ length: n }, (_, i) => ({
+  plan_id: i % 2 ? "H1036-153-0" : "H3805-048-0", benefit: i === 3 ? "ambulance.ground" : `b${i}`, amount: `$${(i * 37) % 1000}`,
+  source: "EOC", doc_sha: EOC.sha256, page: String((i * 7) % 200 + 1), quotes: i === 3 ? `["${"a long quote ".repeat(20)}"]` : "[]" }));
+const TABLE_DATA = {
+  [DEPLOYED]: {
+    plans: [{ plan_id: "H1036-153-0", plan_name: "Humana Total Complete (HMO)" }, { plan_id: "H3805-048-0", plan_name: "AARP" }],
+    document_facts: factRows(250),
+    presented: [{ sheet: "main", plan_id: "H1036-153-0", column: "AB_ambulance", value: "$325" },
+                { sheet: "main", plan_id: "H1036-153-0", column: "C_premium", value: "$0" },
+                { sheet: "dvha", plan_id: "H1036-153-0", column: "C_premium", value: "$0" }],
+    documents: [{ plan_ids: "H1036-153-0;H3805-048-0", kind: "EOC", url: "x" }, { plan_ids: "H3805-048-0", kind: "SB", url: "y" }],
+    cms_sources: [{ plan_id: "H1036-153-0", column: "C_premium", field: "Part C Premium" }],
+  },
+  [OLDER]: { presented: [{ sheet: "main", plan_id: "H1036-153-0", column: "AB_ambulance", value: "$300" }] },
+};
+
+async function serveTables(p, { builds = true } = {}) {
+  await p.route("**/tables/2027/**", (route) => {
+    const path = new URL(route.request().url()).pathname;
+    if (path === "/tables/2027/builds.json") {
+      return builds ? route.fulfill({ json: { deployed: DEPLOYED, builds: [
+        { sha: DEPLOYED, loaded: Date.now() - 3600e3, tables: Object.keys(TABLE_DATA[DEPLOYED]).toSorted() },
+        { sha: OLDER, loaded: Date.now() - 86400e3, tables: ["presented"] }] } }) : route.fulfill({ status: 404, body: "Not found" });
+    }
+    const [, sha, table] = path.match(/^\/tables\/2027\/(\w+)\/(\w+)\.json$/) ?? [];
+    const rows = TABLE_DATA[sha]?.[table];
+    return rows ? route.fulfill({ json: rows }) : route.fulfill({ status: 404, body: "Not found" });
+  });
+}
+
+const pageErrors = new WeakMap();
+async function openTables(p, path) {
+  if (!pageErrors.has(p)) {
+    pageErrors.set(p, []);
+    p.on("pageerror", (e) => pageErrors.get(p).push(String(e)));
+  }
+  await serveTables(p);
+  await p.goto("about:blank");
+  await p.goto(`${base}#/2027/tables${path ? `/${path}` : ""}`);
+  await p.waitForSelector(".tables-scroll tbody tr");
+}
+
+const bodyColumn = (p, col) => p.locator(`.tables-scroll tbody td[data-col="${col}"]`).allTextContents();
+
+test("tables view: the Tables link opens the deployed build's first table in the pipeline's order", async () => {
+  const fresh = await newPage();
+  await serveTables(fresh);
+  await fresh.goto(base);
+  await fresh.click("header nav a[data-view=tables]");
+  await fresh.waitForSelector(".tables-scroll tbody tr");
+  assert.equal(new URL(fresh.url()).hash, "#/2027/tables/plans");
+  assert.deepEqual(await fresh.locator(".tables-list a[aria-current]").allTextContents(), ["plans"]);
+  assert.deepEqual(await fresh.locator(".tables-list ul").first().locator("a").allTextContents(), ["plans", "documents", "document_facts", "cms_sources", "presented"]);
+  assert.match(await fresh.locator("#tables-build option:checked").textContent(), new RegExp(`^${DEPLOYED.slice(0, 7)} · on the site now · loaded`));
+});
+
+test("tables view: a D1 table heading in How it's made opens the table, filtered to the cell", async () => {
+  const fresh = await newPage();
+  await serveTables(fresh);
+  await openHow(fresh, "main/H1036-153-0/ambulance/publish");
+  await fresh.locator('.how-source:has(code:text-is("presented"))').click();
+  await fresh.waitForSelector(".tables-scroll tbody tr");
+  assert.equal(new URL(fresh.url()).hash, `#/2027/tables/${DEPLOYED}/presented/H1036-153-0/main/AB_ambulance`);
+  assert.deepEqual(await bodyColumn(fresh, "value"), ["$325"]);
+  assert.equal(await fresh.textContent(".tables-count"), "1 of 3 match");
+  assert.equal(await fresh.locator("#tables-column option:checked").textContent(), "Main chart · Ambulance Domestic/International");
+  assert.equal(await fresh.locator("#tables-plan option:checked").textContent(), "H1036-153-0 · Humana Total Complete (HMO)");
+  await fresh.goBack();
+  await fresh.waitForSelector(".how-lens");
+});
+
+test("tables view: the column filter keeps one sheet's column, and a table without columns has no column filter", async () => {
+  await openTables(page, "presented/all/dvha/C_premium");
+  assert.deepEqual(await bodyColumn(page, "sheet"), ["dvha"]);
+  await page.selectOption("#tables-column", "");
+  await page.waitForFunction(() => location.hash === "#/2027/tables/presented");
+  assert.equal((await bodyColumn(page, "value")).length, 3);
+  await page.selectOption("#tables-column", "main/C_premium");
+  await page.waitForFunction(() => location.hash === "#/2027/tables/presented/all/main/C_premium");
+  await page.click('.tables-list a:has(code:text-is("document_facts"))');
+  await page.waitForFunction(() => document.querySelector(".tables-head code")?.textContent === "document_facts");
+  assert.equal(await page.locator("#tables-column").count(), 0);
+  assert.equal(new URL(page.url()).hash, "#/2027/tables/document_facts");
+  assert.equal(await page.evaluate(() => document.activeElement.getAttribute("aria-current")), "page");
+});
+
+test("tables view: a plan filter includes documents that cover several plans, and changes the link", async () => {
+  await openTables(page, "documents");
+  await page.focus("#tables-plan");
+  await page.selectOption("#tables-plan", "H1036-153-0");
+  await page.waitForFunction(() => location.hash === "#/2027/tables/documents/H1036-153-0");
+  await page.waitForFunction(() => document.querySelectorAll(".tables-scroll tbody tr").length === 1);
+  assert.deepEqual(await bodyColumn(page, "kind"), ["EOC"]);
+  assert.equal(await page.evaluate(() => document.activeElement.id), "tables-plan");
+});
+
+test("tables view: a header sorts its column as numbers, and again in reverse", async () => {
+  await openTables(page, "document_facts/H1036-153-0");
+  const header = page.locator('.tables-scroll th:has(code:text-is("page"))');
+  await header.locator("button").click();
+  assert.equal(await header.getAttribute("aria-sort"), "ascending");
+  assert.equal(await page.locator(".tables-scroll th[aria-sort]").count(), 1);
+  const pages = (await bodyColumn(page, "page")).map(Number);
+  assert.deepEqual(pages, pages.toSorted((a, b) => a - b));
+  assert.ok(pages.some((n) => n >= 10) && pages.some((n) => n < 10));
+  await header.locator("button").click();
+  assert.equal(await header.getAttribute("aria-sort"), "descending");
+  const reversed = (await bodyColumn(page, "page")).map(Number);
+  assert.deepEqual(reversed, reversed.toSorted((a, b) => b - a));
+  assert.ok(reversed[0] > pages[0]);
+  assert.equal(await page.evaluate(() => document.activeElement.textContent), "page");
+});
+
+test("tables view: pages hold 100 rows, and a search goes back to the first page", async () => {
+  await openTables(page, "document_facts");
+  assert.equal(await page.textContent(".tables-pager span"), "Rows 1–100 of 250");
+  await page.click('.tables-pager button:text-is("Next →")');
+  await page.click('.tables-pager button:text-is("Next →")');
+  assert.equal(await page.textContent(".tables-pager span"), "Rows 201–250 of 250");
+  assert.ok(await page.locator('.tables-pager button:text-is("Next →")').isDisabled());
+  await page.fill("#tables-search", "AMBULANCE");
+  assert.equal(await page.textContent(".tables-pager span"), "Rows 1–1 of 1");
+  assert.equal(await page.textContent(".tables-count"), "1 of 250 match");
+});
+
+test("tables view: the column menu hides a column", async () => {
+  await openTables(page, "document_facts");
+  await page.click(".tables-columns summary");
+  await page.uncheck('.tables-columns input[value="quotes"]');
+  assert.equal(await page.locator('.tables-scroll th:has(code:text-is("quotes"))').count(), 0);
+  assert.equal(await page.textContent(".tables-columns summary"), "Columns · 6 of 7");
+});
+
+test("tables view: Download CSV saves the shown rows and columns", async () => {
+  const fresh = await newPage();
+  await openTables(fresh, "documents/H3805-048-0");
+  const [download] = await Promise.all([fresh.waitForEvent("download"), fresh.click('button:text-is("Download CSV")')]);
+  assert.equal(download.suggestedFilename(), `documents-${DEPLOYED.slice(0, 7)}.csv`);
+  const text = fs.readFileSync(await download.path(), "utf8");
+  assert.equal(text, "plan_ids,kind,url\r\nH1036-153-0;H3805-048-0,EOC,x\r\nH3805-048-0,SB,y\r\n");
+});
+
+test("tables view: the build menu shows an older build's table", async () => {
+  const fresh = await newPage();
+  await openTables(fresh, "presented");
+  const length = await fresh.evaluate(() => history.length);
+  await fresh.selectOption("#tables-build", OLDER);
+  await fresh.waitForFunction(() => document.querySelector('.tables-scroll td[data-col="value"]')?.textContent === "$300");
+  assert.equal(new URL(fresh.url()).hash, `#/2027/tables/${OLDER}/presented`);
+  assert.equal(await fresh.evaluate(() => history.length), length);
+  assert.deepEqual(await fresh.locator(".tables-list ul").first().locator("a").allTextContents(), ["presented"]);
+});
+
+test("tables view: says so when this server has no tables", async () => {
+  const fresh = await newPage();
+  await serveTables(fresh, { builds: false });
+  await fresh.goto(`${base}#/2027/tables/presented`);
+  await fresh.waitForSelector(".tables-note.warn");
+  assert.equal(await fresh.textContent(".tables-note"), "The list of builds did not load. Try again later.");
+});
+
+test("tables view: a table that fails to load says so, and loads on the next visit", async () => {
+  const fresh = await newPage();
+  let fail = true;
+  await serveTables(fresh);
+  await fresh.route(`**/tables/2027/${DEPLOYED}/plans.json`, (route) => fail ? route.fulfill({ status: 500, body: "" }) : route.fallback());
+  await fresh.goto(`${base}#/2027/tables/plans`);
+  await fresh.waitForSelector(".tables-note.warn");
+  assert.equal(await fresh.textContent(".tables-note"), "The plans table did not load. Try again later.");
+  fail = false;
+  await fresh.goto(`${base}#/2027/main`);
+  await fresh.goto(`${base}#/2027/tables/plans`);
+  await fresh.waitForSelector(".tables-scroll tbody tr");
+});
+
+test("tables view: a build may be named by the start of its commit", async () => {
+  await openTables(page, `${DEPLOYED.slice(0, 7).toUpperCase()}/documents`);
+  assert.equal(new URL(page.url()).hash, `#/2027/tables/${DEPLOYED}/documents`);
+  assert.equal(await page.locator(".tables-main > .warn").count(), 0);
+});
+
+test("tables view: rendering, filtering and following links raise no page errors", async () => {
+  const fresh = await newPage();
+  await openTables(fresh, "documents");
+  await fresh.click('.tables-list a:has(code:text-is("plans"))');
+  await fresh.waitForFunction(() => document.querySelector(".tables-head code")?.textContent === "plans");
+  await fresh.selectOption("#tables-plan", "H1036-153-0");
+  await fresh.waitForFunction(() => location.hash === "#/2027/tables/plans/H1036-153-0");
+  assert.deepEqual(pageErrors.get(fresh), []);
+});
+
+test("tables view: an unknown build, table or plan in a link shows what is kept and says so", async () => {
+  const fresh = await newPage();
+  await serveTables(fresh);
+  await fresh.goto(`${base}#/2027/tables/${"f".repeat(40)}/nope/BOGUS`);
+  await fresh.waitForSelector(".tables-scroll tbody tr");
+  assert.equal(new URL(fresh.url()).hash, "#/2027/tables/plans");
+  assert.deepEqual(await fresh.locator(".tables-main > .warn").allTextContents(), [
+    `D1 no longer keeps build fffffff, so this shows build ${DEPLOYED.slice(0, 7)}.`,
+    `Build ${DEPLOYED.slice(0, 7)} has no nope table.`,
+    "The plans table has no rows for BOGUS."]);
+  assert.equal(await fresh.locator("#tables-plan option:checked").textContent(), "All plans");
+  await fresh.goto(`${base}#/2027/tables/presented/all/main/NOPE`);
+  await fresh.waitForFunction(() => location.hash === "#/2027/tables/presented");
+  assert.deepEqual(await fresh.locator(".tables-main > .warn").allTextContents(), ["The presented table has no rows for that column."]);
+});
+
+test("tables view: a long value shows its start, and the row's one button shows the whole row", async () => {
+  await openTables(page, "document_facts/H1036-153-0");
+  const row = page.locator(".tables-scroll tbody tr").nth(1);
+  const more = row.locator(".tables-more");
+  const quote = row.locator('td[data-col="quotes"] > div');
+  assert.equal(await more.count(), 1);
+  assert.equal(await more.getAttribute("aria-expanded"), "false");
+  const shut = (await quote.boundingBox()).height;
+  await more.focus();
+  await page.keyboard.press("Enter");
+  assert.equal(await more.getAttribute("aria-expanded"), "true");
+  assert.ok((await quote.boundingBox()).height > shut * 2);
+});
+
+test("tables view: a page number opens the plan's document at that page", async () => {
+  await openTables(page, "document_facts/H1036-153-0");
+  const link = page.locator('.tables-scroll td[data-col="page"] a').first();
+  const n = await link.textContent();
+  assert.equal(await link.getAttribute("href"), `#/2027/plan/H1036-153-0/EOC/${n}`);
+});
+
+test("phone: tables show each row as a card, and the page does not scroll sideways", async () => {
+  const phone = await newPage({ ...devices["iPhone 13"] });
+  await openTables(phone, "document_facts/H1036-153-0");
+  assert.equal(await phone.locator(".tables-scroll thead").isVisible(), false);
+  assert.ok(await phone.locator("#tables-sort").isVisible());
+  const widths = await phone.evaluate(() => [document.documentElement.scrollWidth, document.querySelector("#content").scrollWidth, innerWidth]);
+  assert.ok(widths[0] <= widths[2] && widths[1] <= widths[2], String(widths));
+  await phone.selectOption("#tables-sort", "page descending");
+  const pages = (await bodyColumn(phone, "page")).map(Number);
+  assert.deepEqual(pages, pages.toSorted((a, b) => b - a));
+});
+
+test("tables view: another plan starts at the first page, and replaces the history entry", async () => {
+  const fresh = await newPage();
+  await openTables(fresh, "document_facts");
+  await fresh.click('.tables-pager button:text-is("Next →")');
+  const length = await fresh.evaluate(() => history.length);
+  await fresh.selectOption("#tables-plan", "H1036-153-0");
+  await fresh.waitForFunction(() => location.hash === "#/2027/tables/document_facts/H1036-153-0");
+  await fresh.waitForFunction(() => document.querySelector(".tables-pager span").textContent === "Rows 1–100 of 125");
+  assert.equal(await fresh.evaluate(() => history.length), length);
+});
+
+test("tables view: Next on the last page leaves focus on Prev", async () => {
+  await openTables(page, "document_facts");
+  await page.focus('.tables-pager button:text-is("Next →")');
+  await page.keyboard.press("Enter");
+  await page.keyboard.press("Enter");
+  assert.equal(await page.evaluate(() => document.activeElement.textContent), "← Prev");
+});
+
+test("tables view: hiding the sorted column unsorts, and the last column cannot be hidden", async () => {
+  await openTables(page, "plans");
+  await page.click('.tables-scroll th button:has(code:text-is("plan_name"))');
+  assert.deepEqual(await bodyColumn(page, "plan_id"), ["H3805-048-0", "H1036-153-0"]);
+  await page.click(".tables-columns summary");
+  await page.uncheck('.tables-columns input[value="plan_name"]');
+  assert.deepEqual(await bodyColumn(page, "plan_id"), ["H1036-153-0", "H3805-048-0"]);
+  assert.ok(await page.locator('.tables-columns input[value="plan_id"]').isDisabled());
+  await page.check('.tables-columns input[value="plan_name"]');
+});
+
+test("tables view: a table without a sheet field labels its columns as the main sheet's", async () => {
+  await openTables(page, "cms_sources");
+  assert.deepEqual(await page.locator("#tables-column option").allTextContents(), ["All columns", "Main chart · Premium"]);
+});
+
+test("tables view: the header's Tables link returns to the last table shown", async () => {
+  const fresh = await newPage();
+  await openTables(fresh, "documents/H1036-153-0");
+  await fresh.click("header nav a[data-view=main]");
+  await fresh.click("header nav a[data-view=tables]");
+  await fresh.waitForSelector(".tables-scroll tbody tr");
+  assert.equal(new URL(fresh.url()).hash, "#/2027/tables/documents/H1036-153-0");
 });

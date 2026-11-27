@@ -331,11 +331,50 @@ test("serves a loaded build's table, its rows in the build's order", async () =>
   await load(e, OLD);
   const response = await at(e, `/tables/2027/${OLD}/presented.json`);
   assert.equal(response.headers.get("Content-Type"), "application/json; charset=utf-8");
+  assert.equal(response.headers.get("Cache-Control"), "no-cache");
+  const etag = response.headers.get("ETag");
+  assert.match(etag, /^"[0-9a-f]{64}"$/);
+  const again = await worker.fetch(new Request(`https://pdxplans.org/tables/2027/${OLD}/presented.json`, { headers: { "If-None-Match": etag } }), e);
+  assert.equal(again.status, 304);
+  assert.equal(again.headers.get("ETag"), etag);
+  for (const header of [`W/${etag}`, `"x", ${etag}`, "*"]) {
+    const response = await worker.fetch(new Request(`https://pdxplans.org/tables/2027/${OLD}/presented.json`, { headers: { "If-None-Match": header } }), e);
+    assert.equal(response.status, 304, header);
+  }
+  assert.equal((await worker.fetch(new Request(`https://pdxplans.org/tables/2027/${OLD}/presented.json`, { headers: { "If-None-Match": '"x"' } }), e)).status, 200);
+  assert.notEqual((await at(e, `/tables/2027/${OLD}/main.json`)).headers.get("ETag"), etag);
   assert.deepEqual(await response.json(), [{ n: "1" }, { n: "2" }, { n: "3" }]);
   assert.deepEqual(await (await at(e, `/tables/2027/${OLD}/main.json`)).json(), [{ n: "4" }]);
   for (const path of [`/tables/2027/${OLD}/dvha.json`, `/tables/2027/${NEW}/presented.json`, `/tables/2026/${OLD}/presented.json`]) {
     assert.equal((await at(e, path)).status, 404, path);
   }
+});
+
+test("lists the kept builds, newest first, with their tables and the deployed commit", async (t) => {
+  const e = traceEnv(NEW);
+  assert.deepEqual(await (await at(e, "/tables/2027/builds.json")).json(), { deployed: NEW, builds: [] });
+  t.mock.method(Date, "now", () => 1000);
+  upload(e, OLD);
+  const manifest = JSON.parse(e.BLOBS.objects[`trace/2027/${OLD}.json`]);
+  for (const [i, key] of ["tables/presented/0/P1", "tables/plans/0/P1", "tables/presented/1/P2"].entries()) {
+    manifest.items[key] = own(i);
+    e.BLOBS.objects[`trace/2027/items/${own(i)}.json`] = "[]";
+  }
+  e.BLOBS.objects[`trace/2027/${OLD}.json`] = JSON.stringify(manifest);
+  await load(e, OLD);
+  t.mock.method(Date, "now", () => 2000);
+  upload(e, NEW);
+  await load(e, NEW);
+  const response = await at(e, "/tables/2027/builds.json");
+  assert.equal(response.headers.get("Content-Type"), "application/json; charset=utf-8");
+  assert.equal(response.headers.get("Cache-Control"), "no-cache");
+  const { deployed, builds } = await response.json();
+  assert.equal(deployed, NEW);
+  assert.deepEqual(builds.map((b) => ({ ...b, tables: b.tables.toSorted() })), [
+    { sha: NEW, loaded: 2000, tables: [] },
+    { sha: OLD, loaded: 1000, tables: ["plans", "presented"] },
+  ]);
+  assert.equal((await at(e, "/tables/2026/builds.json")).status, 404);
 });
 
 test("an unfinished build drops nothing", async () => {

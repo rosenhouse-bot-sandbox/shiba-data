@@ -1,5 +1,6 @@
 // The pipeline as a graph: tables are nodes and operations are edges.
 // The rows are the example cell's, copied from main's 2027 data.
+import { format } from "./permalink.js";
 
 export const EXAMPLE = { sheet: "main", plan: "H1036-153-0", column: "ambulance" };
 
@@ -13,7 +14,7 @@ export const STORES = {
 const REPO = "https://github.com/rosenhouse-bot-sandbox/shiba-data";
 
 // col and row place a node in the map's lanes. git is a path under data/<year>/, code a path in the repo, and cms names
-// the CMS file that R2 copies.
+// the CMS file that R2 copies. A byColumn table's link filters it to the cell's column too.
 export const NODES = {
   landscape: { col: 2, row: 0, store: "r2", label: "CMS Landscape", cms: "Landscape",
     table: { name: "CY2027_Landscape_202610.csv", note: "one row per plan per county",
@@ -76,7 +77,7 @@ export const NODES = {
     text: { name: "pipeline/present.py", note: "the Ambulance column's entry in COLUMNS, and the rule it names",
       lines: ['COLUMNS = {..., "AB_ambulance": ambulance, ...}', "", "def ambulance(organization, found):",
         '    """Line 1 is trips within the U.S. and line 2 is emergency trips abroad, each as (value, cited facts).', "    …"] } },
-  presented: { col: 0, row: 7, store: "d1", label: "presented",
+  presented: { col: 0, row: 7, store: "d1", label: "presented", byColumn: true,
     table: { name: "presented", note: "one row per citation", cols: ["plan_id", "column", "line", "value", "pdf_page", "quote"],
       rows: [["H1036-153-0", "AB_ambulance", "1", "$325 or 20%", "46", "In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance"],
         ["H1036-153-0", "AB_ambulance", "1", "$325 or 20%", "46", "… Ground Ambulance 20% coinsurance regardless of the number of trips – Air Ambulance"],
@@ -96,13 +97,13 @@ export const NODES = {
 export const SHEET_TABLES = { main: "main_chart", dvha: "dvha" };
 export const nodeName = (id, sheet) => id === "sheet" ? SHEET_TABLES[sheet] : NODES[id].label;
 
-// The URL of a node's data, or null. at is { year, sheet, sha, cell, cms }: sha is the build's commit, if known,
-// cell the cell's link on the site, and cms the CMS download URLs by file.
-export function nodeHref(id, { year, sheet, sha, cell, cms }) {
+// The URL of a node's data, or null. at is { year, sheet, plan, column, sha, cell, cms }: column is the cell's column key,
+// sha the build's commit, if known, cell the cell's link on the site, and cms the CMS download URLs by file.
+export function nodeHref(id, { year, sheet, plan, column, sha, cell, cms }) {
   const n = NODES[id];
   if (n.git) return `${REPO}/blob/${sha ?? "main"}/data/${year}/${n.git}`;
   if (n.code) return `${REPO}/blob/${sha ?? "main"}/${n.code}`;
-  if (n.store === "d1") return sha ? `tables/${year}/${sha}/${nodeName(id, sheet)}.json` : null;
+  if (n.store === "d1") return sha ? format({ year, view: "tables", build: sha, table: nodeName(id, sheet), plan, ...(n.byColumn ? { sheet, column } : {}) }) : null;
   if (n.store === "web") return cell;
   return n.cms ? cms[n.cms] : null;
 }

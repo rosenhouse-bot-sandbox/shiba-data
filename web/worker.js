@@ -5,6 +5,7 @@
 // /trace/2027/<sheet>/<plan_id>/<col> serves a cell's trace from D1 once every cell of the deployed commit's build has
 // loaded. Until then, and for other years, it serves the static file that web/build.py writes.
 // /tables/2027/<sha>/<table>.json serves any table that pipeline/tables.py writes, for each build that D1 keeps.
+// /tables/2027/builds.json lists those builds and the deployed commit.
 // Only a build load may change anything, so every other request must be a GET or HEAD.
 export default {
   async fetch(request, env) {
@@ -29,8 +30,10 @@ export default {
       }
       return env.ASSETS.fetch(new Request(new URL(`${url.pathname}.json`, url), request));
     }
+    const [, buildsYear] = url.pathname.match(/^\/tables\/(\d+)\/builds\.json$/) ?? [];
+    if (buildsYear) return buildsYear === D1_YEAR ? builds(env) : missing();
     const [, tableYear, tableBuild, table] = url.pathname.match(/^\/tables\/(\d+)\/([0-9a-f]{40})\/(\w+)\.json$/) ?? [];
-    if (tableYear) return tableYear === D1_YEAR ? tableRows(env, tableBuild, table) : missing();
+    if (tableYear) return tableYear === D1_YEAR ? tableRows(env, tableBuild, table, request) : missing();
     const [, pdf, text] = url.pathname.match(/^\/(?:docs\/([0-9a-f]{64})\.pdf|blobs\/([0-9a-f]{64})\.txt)$/) ?? [];
     const sha = pdf ?? text;
     if (!sha) return env.ASSETS.fetch(request);
@@ -75,14 +78,32 @@ const SCHEMA = [
 const missing = () => new Response("Not found", { status: 404 });
 const LACKING = "SELECT value AS hash FROM json_each(?1) WHERE value NOT IN (SELECT hash FROM item)";
 
-async function tableRows(env, sha, table) {
+// A table's ETag hashes the hashes of its items, so a build loaded again with other rows gets another ETag.
+async function tableRows(env, sha, table, request) {
   const { results } = await env.TRACE.prepare(
-    "SELECT item.json FROM data_build, json_each(data_build.items) AS j JOIN item ON item.hash = j.value " +
+    "SELECT item.hash, item.json FROM data_build, json_each(data_build.items) AS j JOIN item ON item.hash = j.value " +
     "WHERE data_build.sha = ? AND j.key GLOB ? ORDER BY j.id").bind(sha, `tables/${table}/*`).all().catch(() => ({ results: [] }));
   if (!results.length) return missing();
-  const rows = results.map((r) => r.json.slice(1, -1));
-  return new Response(`[${rows.join(",")}]`, { headers: { "Content-Type": "application/json; charset=utf-8" } });
+  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(results.map((r) => r.hash).join()));
+  const etag = `"${[...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, "0")).join("")}"`;
+  if (matches(request.headers.get("If-None-Match"), etag)) return new Response(null, { status: 304, headers: { ETag: etag, "Cache-Control": "no-cache" } });
+  const response = json(`[${results.map((r) => r.json.slice(1, -1)).join(",")}]`, "no-cache");
+  response.headers.set("ETag", etag);
+  return response;
 }
+
+async function builds(env) {
+  const { results } = await env.TRACE.prepare(
+    "SELECT sha, loaded, (SELECT json_group_array(DISTINCT name) FROM (SELECT substr(key, 8, instr(substr(key, 8), '/') - 1) AS name " +
+    "FROM json_each(items) WHERE key GLOB 'tables/*')) AS tables FROM data_build ORDER BY loaded DESC")
+    .all().catch(() => ({ results: [] }));
+  const kept = results.map((b) => ({ sha: b.sha, loaded: b.loaded, tables: JSON.parse(b.tables) }));
+  return json(JSON.stringify({ deployed: env.COMMIT ?? null, builds: kept }), "no-cache");
+}
+
+// Cloudflare weakens an ETag when it compresses the response, so a weak match counts.
+const matches = (header, etag) => header?.split(",").some((t) => ["*", etag].includes(t.trim().replace(/^W\//, ""))) ?? false;
+const json = (body, cache) => new Response(body, { headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": cache } });
 
 async function load(env, sha) {
   const manifest = await (await env.BLOBS.get(`${PREFIX}${sha}.json`))?.json();
