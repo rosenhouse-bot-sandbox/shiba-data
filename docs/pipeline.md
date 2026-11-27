@@ -216,7 +216,7 @@ The same prompt for the 188-page EOC got five facts, including:
  "quotes": ["In-Network: Emergency Ambulance $325 copayment per date of service regardless of the number of trips – Ground Ambulance"]}
 ```
 
-Every answer is saved under a hash of its model, effort and prompt. A rerun with the same prompts reuses the saved answers and calls no model. `answers/e920fcee050a431f.json` holds the SB answer above:
+Every answer is saved under a hash of its model, effort and prompt. A rerun with the same prompts reuses the saved answers and calls no model. The saved answers live in R2 as packs, which `lock.json` pins, and `pipeline/store.py` pulls them into `answers/`. `answers/e920fcee050a431f.json` holds the SB answer above:
 
 ```json
 {"model": "claude-opus-5-5", "effort": "high", "task": "ce13e925c0384896.md",
@@ -349,6 +349,6 @@ The `pdxplans` Cloudflare Worker serves the site at [pdxplans.org](https://pdxpl
 ## Reproducible runs
 
 - **Pinned versions.** `steps.json` pins each model step's version, such as `{"document_facts": 38, "present": 32}`.
-- **Three-stage deploys.** Only workflows on main can call the Claude API. A new version (1) merges unpinned. (2) The Pipeline workflow runs it on main and pushes the new answers to a new branch, such as `pipeline/2027-41966948424`. (3) A pull request from that branch pins the version.
-- **Built tables.** Git keeps the inputs, the rules and the saved answers, but no table that a step writes. `pipeline/tables.py` rebuilds the CMS tables, `documents.csv`, `document_facts.csv`, the sheets and `presented.csv` from them in about 2 minutes, with no API access. Each main build loads them all into D1, and the site's Tables view shows them. "How it's made" links each D1 table there.
+- **Three-stage deploys.** Only workflows on main can call the Claude API. A new version (1) merges unpinned. (2) The Pipeline workflow runs it on main, uploads a pack of the new answers, and pushes a branch whose `lock.json` names the pack, such as `pipeline/2027-41966948424`. (3) A pull request from that branch pins the version.
+- **Built tables.** Git keeps the inputs, the rules and `lock.json`, which pins the packs of saved answers in R2, but no table that a step writes. `pipeline/tables.py` rebuilds the CMS tables, `documents.csv`, `document_facts.csv`, the sheets and `presented.csv` from them in about 2 minutes, with no API access. Each main build loads them all into D1, and the site's Tables view shows them. "How it's made" links each D1 table there.
 - **Pull request checks.** `reproduce` reruns the pipeline from R2 and the saved answers, with no API access, then runs the checks of the data it built. Its summary lists each sheet cell that the pull request changes. `build` runs the code tests, which see no built data, builds the site, and opens each linked PDF.

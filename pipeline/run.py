@@ -29,6 +29,7 @@ import sheets  # noqa: E402
 import present  # noqa: E402
 import reach  # noqa: E402
 import steps  # noqa: E402
+import store  # noqa: E402
 import years  # noqa: E402
 
 CMS = ("landscape", "pbp")
@@ -179,6 +180,7 @@ def main(year, work, mode="", candidate=""):
         if (data / FACTS).exists():
             present.write(data, versions["present"])
             check_quotes(data, f"{work}/texts")
+        store.pull(data, work)
         answer = Answers(data, asker(mode, data, work, versions, candidate), work)
         model_steps(data, f"{work}/texts", work, answer, versions)
         check_quotes(data, f"{work}/texts")

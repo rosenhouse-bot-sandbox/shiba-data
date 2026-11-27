@@ -58,7 +58,7 @@ export const NODES = {
   sheet: { col: 1, row: 7, store: "d1", label: "main_chart",
     table: { name: "main_chart", note: "every rule's value, selected columns", cols: ["plan_id", "plan_name", "AB_ambulance"],
       rows: [["H1036-153-0", "Humana Total Complete (HMO)", "$325 or 20% | $325"]] } },
-  answers: { col: 0, row: 5, store: "git", label: "model answers",
+  answers: { col: 0, row: 5, store: "r2", label: "model answers",
     text: { name: "answers/e920fcee050a431f.json", note: "Claude Opus, high effort · 3,479 in / 954 out tokens",
       lines: [
         '[{"benefit": "ambulance.air", "setting": "any", "network": "in", "cost_kind": "coinsurance", "amount": "20%", "page": 9, "quotes": ["20% of the cost"]},',

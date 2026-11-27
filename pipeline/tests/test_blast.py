@@ -69,8 +69,9 @@ class ChangedTest(unittest.TestCase):
 class MainTest(unittest.TestCase):
     """main with the model steps faked: the pinned run lists no tasks, and the candidate run lists the given tasks."""
 
-    def main(self, tasks=(), saved=(), status="", before=None, after=None, candidate="document_facts@23"):
-        """main's order of steps and its output, for candidate tasks as (key, prompt text) and saved answer keys."""
+    def main(self, tasks=(), saved=(), pulled=(), status="", before=None, after=None, candidate="document_facts@23"):
+        """main's order of steps and its output, for candidate tasks as (key, prompt text), and the keys of answers
+        saved before it starts and of answers it pulls."""
         order, out = [], io.StringIO()
         with tempfile.TemporaryDirectory() as tmp:
             data, work = pathlib.Path(tmp, "data"), pathlib.Path(tmp, "work")
@@ -96,18 +97,25 @@ class MainTest(unittest.TestCase):
                                      restore=lambda d: order.append("restore")), \
                  mock.patch.object(blast.years, "data_dir", lambda year: data), \
                  mock.patch.object(blast.extract, "documents", lambda d: []), \
+                 mock.patch.object(blast.store, "pull", lambda d, w: [ask.write(f"{d}/answers/{k}.json", {"reply": "[]"})
+                                                                     for k in pulled]), \
                  contextlib.redirect_stdout(out):
                 try:
                     blast.main("2027", str(work), candidate)
                     failed = None
                 except SystemExit as e:
                     failed = str(e)
-            self.assertEqual(sorted(os.listdir(data / "answers")), sorted(f"{k}.json" for k in saved))
+            self.assertEqual(sorted(os.listdir(data / "answers")), sorted(f"{k}.json" for k in (*saved, *pulled)))
         return order, failed, out.getvalue()
 
     def test_fails_when_a_new_task_is_about_a_plan_outside_the_targets(self):
         _, failed, _ = self.main(tasks=[("new", review("H1036-001-0"))])
         self.assertIn("hearing H1036-001-0", failed)
+
+    def test_counts_pulled_answers_as_saved(self):
+        _, failed, out = self.main(tasks=[("old", review("H1036-001-0"))], pulled=["old"])
+        self.assertIsNone(failed)
+        self.assertIn("0 of 1 tasks would call the API.", out)
 
     def test_passes_when_only_tasks_about_its_targets_are_new(self):
         _, failed, out = self.main(tasks=[("new", review("H9003-009-0")), ("old", review("H1036-001-0"))], saved=["old"])
