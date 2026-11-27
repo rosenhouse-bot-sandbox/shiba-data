@@ -22,7 +22,7 @@ export function parse(hash, liveYear) {
   const view = VIEWS.includes(parts[0]) ? parts.shift() : "main";
   const state = { year, view };
   if (view === "tables") {
-    if (/^[0-9a-f]{40}$/.test(parts[0])) state.build = parts.shift();
+    if (/^[0-9a-f]{7,40}$/i.test(parts[0])) state.build = parts.shift().toLowerCase();
     const [table, plan, sheet, column] = parts;
     Object.assign(state, { table, plan: plan === ALL ? undefined : plan, sheet, column: sheet && column });
     if (!column) delete state.sheet;

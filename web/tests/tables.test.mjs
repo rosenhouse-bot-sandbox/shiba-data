@@ -93,3 +93,10 @@ test("a text column sorts amounts with thousands separators by their value", () 
   const rows = ["$1,980 per admit", "$250 | 1-5", "$10", "n/a", "$5,100"].map((v) => ({ v }));
   assert.deepEqual(sortRows(rows, "v", "ascending").map((r) => r.v), ["$10", "$250 | 1-5", "$1,980 per admit", "$5,100", "n/a"]);
 });
+
+test("a table without a sheet field holds the main sheet's columns", () => {
+  const sources = [{ plan_id: "H1", column: "C_premium" }];
+  assert.deepEqual(shown(sources, { sheet: "dvha", column: "C_premium" }), []);
+  assert.deepEqual(known({ sheet: "dvha", column: "C_premium" }, sources), { plan: undefined, sheet: undefined, column: undefined });
+  assert.deepEqual(known({ sheet: "main", column: "C_premium" }, sources), { plan: undefined, sheet: "main", column: "C_premium" });
+});

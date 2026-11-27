@@ -1497,7 +1497,12 @@ async function serveTables(p, { builds = true } = {}) {
   });
 }
 
+const pageErrors = new WeakMap();
 async function openTables(p, path) {
+  if (!pageErrors.has(p)) {
+    pageErrors.set(p, []);
+    p.on("pageerror", (e) => pageErrors.get(p).push(String(e)));
+  }
   await serveTables(p);
   await p.goto("about:blank");
   await p.goto(`${base}#/2027/tables${path ? `/${path}` : ""}`);
@@ -1607,9 +1612,11 @@ test("tables view: Download CSV saves the shown rows and columns", async () => {
 test("tables view: the build menu shows an older build's table", async () => {
   const fresh = await newPage();
   await openTables(fresh, "presented");
+  const length = await fresh.evaluate(() => history.length);
   await fresh.selectOption("#tables-build", OLDER);
   await fresh.waitForFunction(() => document.querySelector('.tables-scroll td[data-col="value"]')?.textContent === "$300");
   assert.equal(new URL(fresh.url()).hash, `#/2027/tables/${OLDER}/presented`);
+  assert.equal(await fresh.evaluate(() => history.length), length);
   assert.deepEqual(await fresh.locator(".tables-list ul").first().locator("a").allTextContents(), ["presented"]);
 });
 
@@ -1635,6 +1642,22 @@ test("tables view: a table that fails to load says so, and loads on the next vis
   await fresh.waitForSelector(".tables-scroll tbody tr");
 });
 
+test("tables view: a build may be named by the start of its commit", async () => {
+  await openTables(page, `${DEPLOYED.slice(0, 7).toUpperCase()}/documents`);
+  assert.equal(new URL(page.url()).hash, `#/2027/tables/${DEPLOYED}/documents`);
+  assert.equal(await page.locator(".tables-main > .warn").count(), 0);
+});
+
+test("tables view: rendering, filtering and following links raise no page errors", async () => {
+  const fresh = await newPage();
+  await openTables(fresh, "documents");
+  await fresh.click('.tables-list a:has(code:text-is("plans"))');
+  await fresh.waitForFunction(() => document.querySelector(".tables-head code")?.textContent === "plans");
+  await fresh.selectOption("#tables-plan", "H1036-153-0");
+  await fresh.waitForFunction(() => location.hash === "#/2027/tables/plans/H1036-153-0");
+  assert.deepEqual(pageErrors.get(fresh), []);
+});
+
 test("tables view: an unknown build, table or plan in a link shows what is kept and says so", async () => {
   const fresh = await newPage();
   await serveTables(fresh);
@@ -1646,17 +1669,23 @@ test("tables view: an unknown build, table or plan in a link shows what is kept 
     `Build ${DEPLOYED.slice(0, 7)} has no nope table.`,
     "The plans table has no rows for BOGUS."]);
   assert.equal(await fresh.locator("#tables-plan option:checked").textContent(), "All plans");
+  await fresh.goto(`${base}#/2027/tables/presented/all/main/NOPE`);
+  await fresh.waitForFunction(() => location.hash === "#/2027/tables/presented");
+  assert.deepEqual(await fresh.locator(".tables-main > .warn").allTextContents(), ["The presented table has no rows for that column."]);
 });
 
-test("tables view: a long value shows its start, and its button shows the whole row", async () => {
+test("tables view: a long value shows its start, and the row's one button shows the whole row", async () => {
   await openTables(page, "document_facts/H1036-153-0");
-  const more = page.locator('td[data-col="quotes"] .tables-more');
+  const row = page.locator(".tables-scroll tbody tr").nth(1);
+  const more = row.locator(".tables-more");
+  const quote = row.locator('td[data-col="quotes"] > div');
+  assert.equal(await more.count(), 1);
   assert.equal(await more.getAttribute("aria-expanded"), "false");
-  const shut = (await more.boundingBox()).height;
+  const shut = (await quote.boundingBox()).height;
   await more.focus();
   await page.keyboard.press("Enter");
   assert.equal(await more.getAttribute("aria-expanded"), "true");
-  assert.ok((await more.boundingBox()).height > shut * 2);
+  assert.ok((await quote.boundingBox()).height > shut * 2);
 });
 
 test("tables view: a page number opens the plan's document at that page", async () => {

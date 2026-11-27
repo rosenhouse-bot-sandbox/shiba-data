@@ -24,11 +24,15 @@ export const ordered = (names) => {
 
 const plansOf = (row) => (row.plan_id ?? row.plan_ids ?? "").split(";");
 
+// A row without a sheet field, like cms_sources', is about the main sheet.
+const sheetOf = (row) => row.sheet ?? "main";
+const inColumn = (row, sheet, column) => row.column === column && sheetOf(row) === sheet;
+
 // The rows that match the plan, the sheet's column, and the search. A filter applies only to a table with its field.
 export function shown(rows, { plan, sheet, column, query }) {
   const words = query?.trim().toLowerCase();
   return rows.filter((r) => (!plan || plansOf(r).includes(plan))
-    && (!column || !("column" in r) || (r.column === column && (!("sheet" in r) || r.sheet === sheet)))
+    && (!column || !("column" in r) || inColumn(r, sheet, column))
     && (!words || Object.values(r).some((v) => v.toLowerCase().includes(words))));
 }
 
@@ -61,7 +65,7 @@ export const rowCount = (n) => `${n.toLocaleString("en-US")} ${n === 1 ? "row" :
 export function known(state, rows) {
   const plans = new Set(rows.flatMap(plansOf));
   const plan = plans.has(state.plan) ? state.plan : undefined;
-  const column = rows.some((r) => r.column === state.column && (!("sheet" in r) || r.sheet === state.sheet)) ? state.column : undefined;
+  const column = rows.some((r) => inColumn(r, state.sheet, state.column)) ? state.column : undefined;
   return { ...state, plan, sheet: column && state.sheet, column };
 }
 
@@ -94,7 +98,7 @@ export function tablesView(at) {
       el("a", { href: t.href, target: "_blank", rel: "noopener", "aria-label": `${t.name}, opens GitHub in a new tab` }, el("code", {}, t.name), " ↗")))),
     el("p", {}, "How it's made links to page text and model answers, which are files rather than tables."));
 
-  const age = (b) => new Intl.RelativeTimeFormat(undefined, { numeric: "auto" }).format(Math.round((b.loaded - Date.now()) / 3600000), "hour");
+  const age = (b) => new Intl.RelativeTimeFormat("en-US", { numeric: "auto" }).format(Math.round((b.loaded - Date.now()) / 3600000), "hour");
   const buildPick = el("select", { id: "tables-build" }, ...builds.builds.filter((b) => b.tables.includes(table)).map((b) => {
     const label = `${b.sha.slice(0, 7)}${b.sha === builds.deployed ? " · on the site now" : ""} · loaded ${age(b)}`;
     return el("option", { value: b.sha, ...(b.sha === sha ? { selected: "" } : {}) }, label);
@@ -105,8 +109,7 @@ export function tablesView(at) {
   const planIds = [...new Set(rows.flatMap(plansOf))].filter(Boolean).toSorted(collator.compare);
   const planPick = select("tables-plan", "Plan", [["", "All plans"], ...planIds.map((p) => [p, `${p} · ${planName(p)}`])], state.plan ?? "",
     (v) => location.replace(link({ plan: v || undefined })));
-  // A table without a sheet field, like cms_sources, holds the main sheet's columns.
-  const columnKeys = hasColumn ? [...new Set(rows.map((r) => `${r.sheet ?? "main"}/${r.column}`))] : [];
+  const columnKeys = hasColumn ? [...new Set(rows.map((r) => `${sheetOf(r)}/${r.column}`))] : [];
   const columnPick = hasColumn ? select("tables-column", "Column", [["", "All columns"],
     ...columnKeys.map((k) => [k, columnLabel(...k.split("/"))])], state.column ? `${state.sheet}/${state.column}` : "",
   (v) => { const [s, c] = v ? v.split("/") : []; location.replace(link({ sheet: s, column: c })); }) : null;
@@ -184,9 +187,13 @@ export function tablesView(at) {
         `${c} ${d === "ascending" ? "▲" : "▼"}`))));
     tbody.replaceChildren(...page.rows.map((r) => {
       const tr = el("tr");
+      // Only a row's first long value is a button, so a page of rows keeps few tab stops.
+      let button = null;
       tr.append(...shownCols.map((c) => {
         const value = r[c] ?? "", href = (c === "page" || c === "pdf_page") && value ? pageHref(r, value) : null;
-        return el("td", { "data-col": c }, href ? el("div", {}, el("a", { href }, value)) : value.length > LONG ? more(tr, value) : el("div", {}, value));
+        const long = !href && value.length > LONG;
+        return el("td", { "data-col": c }, href ? el("div", {}, el("a", { href }, value))
+          : long && !button ? (button = more(tr, value)) : el("div", long ? { title: value } : {}, value));
       }));
       return tr;
     }));
@@ -217,8 +224,9 @@ const LONG = 40;
 function more(tr, value) {
   const button = el("button", { type: "button", class: "tables-more", "aria-expanded": "false", title: value }, value);
   button.addEventListener("click", () => {
-    const open = tr.classList.toggle("open");
-    tr.querySelectorAll(".tables-more").forEach((b) => b.setAttribute("aria-expanded", String(open)));
+    // The click that ends selecting text leaves the row as it was.
+    if (getSelection().toString()) return;
+    button.setAttribute("aria-expanded", String(tr.classList.toggle("open")));
   });
   return button;
 }

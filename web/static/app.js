@@ -220,7 +220,7 @@ async function routeTables(state) {
     content.replaceChildren(el("p", { class: "tables-note warn" }, builds ? "D1 keeps no builds yet." : "The list of builds did not load. Try again later."));
     return;
   }
-  const kept = (sha) => builds.builds.find((b) => b.sha === sha);
+  const kept = (sha) => sha && builds.builds.find((b) => b.sha.startsWith(sha));
   const build = kept(state.build) ?? kept(builds.deployed) ?? builds.builds[0];
   const table = build.tables.includes(state.table) ? state.table : ordered(build.tables)[0];
   const rows = await fetchJson(tableLoads, `tables/${site.year}/${build.sha}/${table}.json`);
@@ -229,7 +229,7 @@ async function routeTables(state) {
     content.replaceChildren(el("p", { class: "tables-note warn" }, `The ${table} table did not load. Try again later.`));
     return;
   }
-  const shown = known({ ...state, table, build: kept(state.build) && state.build }, rows);
+  const shown = known({ ...state, table, build: kept(state.build)?.sha }, rows);
   const hash = format(shown);
   if (location.hash !== hash) history.replaceState(null, "", hash);
   routed = location.hash;
@@ -256,7 +256,8 @@ async function routeTables(state) {
     state.plan && !shown.plan ? `The ${table} table has no rows for ${state.plan}.` : null,
     state.column && !shown.column && "column" in (rows[0] ?? {}) ? `The ${table} table has no rows for that column.` : null].filter(Boolean);
   if (notes.length) content.querySelector(".tables-main").prepend(...notes.map((n) => el("p", { class: "warn" }, n)));
-  (inList ? content.querySelector(".tables-list a[aria-current]") : focused?.id && document.getElementById(focused.id))?.focus();
+  const refocus = inList ? content.querySelector(".tables-list a[aria-current]") : focused?.id ? document.getElementById(focused.id) : null;
+  refocus?.focus();
 }
 
 const traces = {};

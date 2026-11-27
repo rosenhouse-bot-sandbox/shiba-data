@@ -62,3 +62,8 @@ test("a pipeline link with no step opens the cell's first step", () => {
   assert.deepEqual(parse("#/2027/how/main/H1/ambulance", 2027),
     { year: 2027, view: "how", plan: "H1", sheet: "main", column: "ambulance" });
 });
+
+test("a tables link's build may be short or upper case", () => {
+  assert.deepEqual(parse("#/2027/tables/ABC1234/plans", 2027), { year: 2027, view: "tables", build: "abc1234", table: "plans" });
+  assert.deepEqual(parse("#/2027/tables/plans/H1", 2027), { year: 2027, view: "tables", table: "plans", plan: "H1" });
+});

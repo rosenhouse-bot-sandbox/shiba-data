@@ -86,7 +86,7 @@ async function tableRows(env, sha, table, request) {
   if (!results.length) return missing();
   const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(results.map((r) => r.hash).join()));
   const etag = `"${[...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, "0")).join("")}"`;
-  if (request.headers.get("If-None-Match") === etag) return new Response(null, { status: 304, headers: { ETag: etag, "Cache-Control": "no-cache" } });
+  if (matches(request.headers.get("If-None-Match"), etag)) return new Response(null, { status: 304, headers: { ETag: etag, "Cache-Control": "no-cache" } });
   const response = json(`[${results.map((r) => r.json.slice(1, -1)).join(",")}]`, "no-cache");
   response.headers.set("ETag", etag);
   return response;
@@ -101,6 +101,8 @@ async function builds(env) {
   return json(JSON.stringify({ deployed: env.COMMIT ?? null, builds: kept }), "no-cache");
 }
 
+// Cloudflare weakens an ETag when it compresses the response, so a weak match counts.
+const matches = (header, etag) => header?.split(",").some((t) => ["*", etag].includes(t.trim().replace(/^W\//, ""))) ?? false;
 const json = (body, cache) => new Response(body, { headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": cache } });
 
 async function load(env, sha) {

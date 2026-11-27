@@ -337,6 +337,11 @@ test("serves a loaded build's table, its rows in the build's order", async () =>
   const again = await worker.fetch(new Request(`https://pdxplans.org/tables/2027/${OLD}/presented.json`, { headers: { "If-None-Match": etag } }), e);
   assert.equal(again.status, 304);
   assert.equal(again.headers.get("ETag"), etag);
+  for (const header of [`W/${etag}`, `"x", ${etag}`, "*"]) {
+    const response = await worker.fetch(new Request(`https://pdxplans.org/tables/2027/${OLD}/presented.json`, { headers: { "If-None-Match": header } }), e);
+    assert.equal(response.status, 304, header);
+  }
+  assert.equal((await worker.fetch(new Request(`https://pdxplans.org/tables/2027/${OLD}/presented.json`, { headers: { "If-None-Match": '"x"' } }), e)).status, 200);
   assert.notEqual((await at(e, `/tables/2027/${OLD}/main.json`)).headers.get("ETag"), etag);
   assert.deepEqual(await response.json(), [{ n: "1" }, { n: "2" }, { n: "3" }]);
   assert.deepEqual(await (await at(e, `/tables/2027/${OLD}/main.json`)).json(), [{ n: "4" }]);
