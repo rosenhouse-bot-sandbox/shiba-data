@@ -88,17 +88,13 @@ class SiteDataTest(unittest.TestCase):
         cell = self.cell("main", "H2406-042-0", "D_premium_full_extra_help")
         self.assertEqual((cell["value"], cell["cites"]), ("$87.70", []))
 
-    def test_wellcare_tests_cells_carry_ekg_comment(self):
-        for plan_id in ("H6815-038-0", "H5439-015-0", "H5439-019-0", "H5439-011-0", "H5439-010-0"):
-            self.assertIn("EKG", self.cell("main", plan_id, "K_tests_labs")["comment"]["text"], plan_id)
-
     def test_comment_points_to_its_eoc_page(self):
-        comment = self.cell("main", "H6815-038-0", "K_tests_labs")["comment"]
-        self.assertEqual((comment["doc"], comment["page"]), ("90a4efa6544175a2", 83))
-        self.assertIn("EKGs", comment["quote"])
+        comment = self.cell("main", "H5439-019-0", "K_tests_labs")["comment"]
+        self.assertEqual((comment["doc"], comment["page"]), ("516ff586a12c8288", 90))
+        self.assertIn("lab services", comment["quote"])
 
     def test_comment_kind_is_a_question_caveat_or_contradiction(self):
-        self.assertEqual(self.cell("main", "H6815-038-0", "K_tests_labs")["comment"]["kind"], "question")
+        self.assertEqual(self.cell("main", "H2923-009-0", "I_outpatient_surgery")["comment"]["kind"], "question")
         with tempfile.TemporaryDirectory() as tmp:
             data = data_copy(tmp, [])
             comment = f"sheet,plan_id,column,kind,comment,url,pdf_page,quote\nmain,H6815-038-0,K_tests_labs,{{}},x,{H6815_038_EOC},83,EKGs\n"

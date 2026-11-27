@@ -335,10 +335,10 @@ test("resizing keeps the cited quote in view", async () => {
   assert.ok(visible);
 });
 
-test("yellow marks a comment, shown on hover and in the note", async () => {
+test("color marks a comment, shown on hover and in the note", async () => {
   await page.goto(`${base}#/main`);
   const index = site.main.columns.findIndex((c) => c.key === "K_tests_labs");
-  const cell = row("H6815-038-0").locator("td").nth(index);
+  const cell = row("H5439-019-0").locator("td").nth(index);
   assert.match(await cell.getAttribute("class"), /commented/);
   assert.match(await cell.getAttribute("title"), /EKG/);
   assert.equal(await page.locator("td.commented").count(), site.main.rows.flatMap((r) => Object.values(r.cells)).filter((c) => c.comment).length);
@@ -346,7 +346,7 @@ test("yellow marks a comment, shown on hover and in the note", async () => {
   assert.notEqual(await background(row("H2001-045-0").locator("td.cited").first()), await background(cell));
   await cell.click();
   assert.match(await page.textContent("#source-note .comment"), /EKG/);
-  const { doc, page: n, quote } = site.main.rows.find((r) => r.plan_id === "H6815-038-0").cells.K_tests_labs.comment;
+  const { doc, page: n, quote } = site.main.rows.find((r) => r.plan_id === "H5439-019-0").cells.K_tests_labs.comment;
   await shown(doc, n);
   await page.$eval("#page-area", (area) => { area.scrollTop = 0; delete area.dataset.shown; });
   await page.locator("#source-note .comment-source a", { hasText: `EOC page ${n}` }).click();
@@ -386,13 +386,13 @@ test("Notes lists every comment with links to its document page and cell", async
   const rows = page.locator("table.notes tbody tr");
   await rows.first().waitFor();
   assert.equal(await rows.count(), comments.length);
-  const wellcare = rows.filter({ has: page.locator('td[data-plan="H6815-038-0"][data-col="K_tests_labs"]') });
+  const wellcare = rows.filter({ has: page.locator('td[data-plan="H5439-019-0"][data-col="K_tests_labs"]') });
   assert.match(await wellcare.textContent(), /EKGs/);
-  await wellcare.locator("td.links a", { hasText: "EOC page 83" }).click();
-  await shown(docOf("H6815-038-0", "EOC"), 83);
+  await wellcare.locator("td.links a", { hasText: "EOC page 90" }).click();
+  await shown(docOf("H5439-019-0", "EOC"), 90);
   await wellcare.locator("td.links a", { hasText: "Show in Main chart" }).click();
   await page.waitForSelector(".sheet-wrap td.selected");
-  assert.match(await cellTd("H6815-038-0", "K_tests_labs").getAttribute("class"), /selected/);
+  assert.match(await cellTd("H5439-019-0", "K_tests_labs").getAttribute("class"), /selected/);
 });
 
 test("going back to Notes keeps the scroll position", async () => {
@@ -421,14 +421,14 @@ test("page references in comment text open that page", async () => {
   const fresh = await newPage({ viewport: { width: 1600, height: 1000 } });
   await fresh.route("**/data.json", (route) => {
     const edited = structuredClone(site);
-    edited.main.rows.find((r) => r.plan_id === "H6815-038-0").cells.K_tests_labs.comment.text = "See EOC page 82 for EKGs.";
+    edited.main.rows.find((r) => r.plan_id === "H5439-019-0").cells.K_tests_labs.comment.text = "See EOC page 82 for EKGs.";
     route.fulfill({ json: edited });
   });
   await fresh.goto(`${base}#/main`);
-  await fresh.locator('table.sheet td[data-plan="H6815-038-0"][data-col="K_tests_labs"]').click();
-  await fresh.waitForSelector(`#page-area[data-shown="${docOf("H6815-038-0", "EOC")} 83"]`);
+  await fresh.locator('table.sheet td[data-plan="H5439-019-0"][data-col="K_tests_labs"]').click();
+  await fresh.waitForSelector(`#page-area[data-shown="${docOf("H5439-019-0", "EOC")} 90"]`);
   await fresh.locator("#source-note .comment a", { hasText: "EOC page 82" }).click();
-  await fresh.waitForSelector(`#page-area[data-shown="${docOf("H6815-038-0", "EOC")} 82"]`);
+  await fresh.waitForSelector(`#page-area[data-shown="${docOf("H5439-019-0", "EOC")} 82"]`);
   await fresh.close();
 });
 
@@ -956,14 +956,14 @@ test("permalink: an old Ambiguities link opens Notes, and a page link in a note 
   const fresh = await newPage({ viewport: { width: 1600, height: 1000 } });
   await fresh.route("**/data.json", (route) => {
     const edited = structuredClone(site);
-    edited.main.rows.find((r) => r.plan_id === "H6815-038-0").cells.K_tests_labs.comment.text = "See EOC page 82 for EKGs.";
+    edited.main.rows.find((r) => r.plan_id === "H5439-019-0").cells.K_tests_labs.comment.text = "See EOC page 82 for EKGs.";
     route.fulfill({ json: edited });
   });
   await fresh.goto(`${base}#/2027/ambiguities/main/H2001-045-0/part_b_drugs`);
   await fresh.waitForSelector("td.selected");
-  await fresh.locator('tr:has(td[data-plan="H6815-038-0"][data-col="K_tests_labs"]) td.comment-text a').click();
-  await fresh.waitForSelector(`#page-area[data-shown="${docOf("H6815-038-0", "EOC")} 82"]`);
-  await fresh.waitForFunction(() => location.hash === "#/2027/notes/main/H6815-038-0/tests_labs/EOC/82");
+  await fresh.locator('tr:has(td[data-plan="H5439-019-0"][data-col="K_tests_labs"]) td.comment-text a').click();
+  await fresh.waitForSelector(`#page-area[data-shown="${docOf("H5439-019-0", "EOC")} 82"]`);
+  await fresh.waitForFunction(() => location.hash === "#/2027/notes/main/H5439-019-0/tests_labs/EOC/82");
   await fresh.close();
 });
 
