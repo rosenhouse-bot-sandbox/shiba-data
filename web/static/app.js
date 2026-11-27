@@ -255,9 +255,11 @@ async function routeTables(state) {
   refocus?.focus();
 }
 
+let docByUrl;
 // Links a table row's page to that page of the plan's PDF, when the plan has a document of that kind.
 function pageHref(row, page) {
-  const doc = row.doc_sha ? site.docs[row.doc_sha.slice(0, 16)] : Object.values(site.docs).find((d) => d.url === row.url);
+  docByUrl ??= Object.fromEntries(Object.values(site.docs).map((d) => [d.url, d]));
+  const doc = row.doc_sha ? site.docs[row.doc_sha.slice(0, 16)] : docByUrl[row.url];
   return doc && plans[row.plan_id]?.docs.some((d) => site.docs[d].kind === doc.kind)
     ? format({ year: site.year, view: "plan", plan: row.plan_id, kind: doc.kind, page: Number(page) }) : null;
 }

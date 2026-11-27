@@ -210,7 +210,9 @@ td.selected { outline: 3px solid var(--ink); outline-offset: -3px; }
 .how-scopes { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 0; padding: 6px 14px; border: 0; border-bottom: 1px solid var(--line); font-size: 12px; }
 .how-scopes legend { float: left; margin-right: 4px; color: var(--muted); }
 .how-peek-pager { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; padding: 8px 14px; font-size: 12px; color: var(--muted); }
-.how-open { margin-left: auto; }
+.how-peek-pager a { margin-left: auto; }
+.how-scopes + .how-none:empty { display: none; }
+.how-peek { max-height: 70vh; overflow: auto; }
 .how-rows.input .hi { background: var(--hi-in); font-weight: 600; }
 .how-rows.output .hi { background: var(--hi-out); font-weight: 600; }
 .tables { display: flex; flex-wrap: wrap; min-height: 100%; }
@@ -254,13 +256,14 @@ td.selected { outline: 3px solid var(--ink); outline-offset: -3px; }
 .tables-scroll th[aria-sort="ascending"] .tables-arrow::after { content: "▲"; }
 .tables-scroll th[aria-sort="descending"] .tables-arrow::after { content: "▼"; }
 .tables-scroll td { padding: 4px 8px; border-bottom: 1px solid var(--line); vertical-align: top; cursor: default; }
-.tables-scroll td:hover { outline: none; }
+.tables-scroll td:hover, .how-peek td:hover { outline: none; }
+.how-peek td { cursor: default; }
 .tables-scroll tbody tr:nth-child(even) { background: var(--subtle); }
-.tables-scroll td > :is(div, .tables-more) { display: block; max-width: 28em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+:is(.tables-scroll, .how-peek) td > :is(div, .tables-more) { display: block; max-width: 28em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .tables-more { all: unset; cursor: pointer; text-align: left; }
 .tables-more:hover { text-decoration: underline dotted; }
 .tables-more:focus-visible { outline: 2px solid var(--accent); }
-.tables-scroll tr.open td > :is(div, .tables-more) { white-space: pre-wrap; overflow-wrap: anywhere; }
+:is(.tables-scroll, .how-peek) tr.open td > :is(div, .tables-more) { white-space: pre-wrap; overflow-wrap: anywhere; }
 .tables-pager { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 13px; color: var(--muted); }
 .tables-note { padding: 16px; }
 /* Narrow: each row is a card of label and value pairs, and a menu sorts. */
@@ -274,7 +277,7 @@ td.selected { outline: 3px solid var(--ink); outline-offset: -3px; }
   .tables-scroll tbody tr:nth-child(even) { background: var(--page); }
   .tables-scroll td { display: grid; grid-template-columns: 9em minmax(0, 1fr); gap: 8px; padding: 2px 0; border: 0; }
   .tables-scroll td[data-col]::before { content: attr(data-col); color: var(--muted); font: 12px ui-monospace, monospace; overflow-wrap: anywhere; }
-  .tables-scroll td > :is(div, .tables-more) { max-width: none; }
+  :is(.tables-scroll, .how-peek) td > :is(div, .tables-more) { max-width: none; }
 }
 @media (max-width: 900px) {
   .how-body { flex-direction: column; }

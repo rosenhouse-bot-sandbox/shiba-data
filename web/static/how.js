@@ -5,11 +5,11 @@ import {
   EXAMPLE, NODES, STEPS, STORES, inputs, outputs, nodeName, NODE_W, NODE_H, RING, MAP_W, MAP_H,
   nodeBox, pillBox, paths, before, after, strip, details, records, nodeHref,
 } from "./pipeline.js";
-import { shown as matching, pageOf, bodyRow } from "./tables.js";
+import { shown, pageOf, pager, bodyRow, rowCount } from "./tables.js";
 
 export const howLink = (year, cell, step) => format({ year, view: "how", sheet: cell.sheet, plan: cell.plan, column: cell.column, step: step.id });
 export const traceUrl = (year, sheet, plan, columnKey) => `trace/${year}/${sheet}/${plan}/${columnKey}`;
-const shown = (id) => NODES[id].table ?? NODES[id].text;
+const exampleOf = (id) => NODES[id].table ?? NODES[id].text;
 const store = (id) => STORES[NODES[id].store];
 const isExample = (cell) => cell.sheet === EXAMPLE.sheet && cell.plan === EXAMPLE.plan && cell.column === EXAMPLE.column;
 
@@ -87,7 +87,7 @@ function lens(step, link, terms, example, trace, code, at) {
   const downloads = [];
   // A table's heading says where its data lives, and opens the data when it has a URL.
   const heading = (id) => {
-    const n = NODES[id], name = nodeName(id, sheet), href = nodeHref(id, at) ?? (example ? shown(id).href : null);
+    const n = NODES[id], name = nodeName(id, sheet), href = nodeHref(id, at) ?? (example ? exampleOf(id).href : null);
     const where = el("small", { class: `how-store store-${n.store}` }, store(id).label);
     if (href && n.cms) {
       const warning = download(`how-download-${id}`, n.cms, href);
@@ -121,57 +121,56 @@ function lens(step, link, terms, example, trace, code, at) {
     chips(after(step), "after", (l) => `next: ${l} ↘`));
 }
 
-const PEEK_SIZE = 50;
 const SCOPES = [["cell", "This cell"], ["plan", "This plan"], ["all", "All plans"]];
 
 // A D1 table also shows the build's rows for the cell's plan or for every plan, loaded when asked.
 function scoped(box, id, at) {
   const { year, sha, plan, load, pageHref } = at, name = nodeName(id, at.sheet);
-  const cellRows = [...box.children].slice(1);
-  const area = el("div", { class: "how-peek" }, ...cellRows);
-  const pick = el("fieldset", { class: "how-scopes" }, el("legend", {}, "Rows"), ...SCOPES.map(([value, label]) =>
+  const [head, ...cellRows] = box.children;
+  const status = el("p", { class: "how-none", role: "status" });
+  const area = el("div", {}, ...cellRows);
+  const pick = el("fieldset", { class: "how-scopes", "aria-label": `${name} rows` }, el("legend", {}, "Rows"), ...SCOPES.map(([value, label]) =>
     el("label", {}, el("input", { type: "radio", name: `how-scope-${id}`, value, ...(value === "cell" ? { checked: "" } : {}) }), ` ${label}`)));
   const chosen = () => pick.querySelector("input:checked").value;
   pick.addEventListener("change", async () => {
     const scope = chosen();
+    status.textContent = "";
     if (scope === "cell") return area.replaceChildren(...cellRows);
-    area.replaceChildren(el("p", { class: "how-none" }, "Loading the table…"));
+    status.textContent = "Loading the table…";
+    area.replaceChildren();
     const rows = await load(name);
     if (chosen() !== scope) return;
-    const open = el("a", { class: "how-open", href: format({ year, view: "tables", build: sha, table: name, plan: scope === "plan" ? plan : undefined }) }, "Open in Tables →");
-    if (!rows) return area.replaceChildren(el("p", { class: "how-none" }, `The ${name} table did not load. Try again later.`), open);
-    peek(area, scope === "plan" ? matching(rows, { plan }) : rows, Object.keys(rows[0] ?? {}), pageHref, open);
+    const open = el("a", { href: format({ year, view: "tables", build: sha, table: name, plan: scope === "plan" ? plan : undefined }) }, "Open in Tables →");
+    if (!rows) {
+      status.textContent = `The ${name} table did not load.`;
+      return area.replaceChildren(el("p", { class: "how-peek-pager" }, open));
+    }
+    const some = scope === "plan" ? shown(rows, { plan }) : rows;
+    status.textContent = rowCount(some.length);
+    peek(area, some, Object.keys(rows[0] ?? {}), pageHref, open);
   });
-  box.replaceChildren(box.firstChild, pick, area);
+  box.replaceChildren(head, pick, status, area);
   return box;
 }
 
+// Shows rows a page at a time, with the pager above them so the keyboard reaches it first.
 function peek(area, rows, cols, pageHref, open) {
+  if (!rows.length) return area.replaceChildren(el("p", { class: "how-peek-pager" }, open));
   let page = 1;
-  const where = el("span", { class: "how-peek-where" });
-  const prev = el("button", { type: "button" }, "← Prev"), next = el("button", { type: "button" }, "Next →");
   const tbody = el("tbody");
   const draw = () => {
-    const p = pageOf(rows, page, PEEK_SIZE);
-    page = p.page;
+    const p = pageOf(rows, page);
     tbody.replaceChildren(...p.rows.map((r) => bodyRow(r, cols, pageHref)));
-    if (!p.rows.length) tbody.append(el("tr", {}, el("td", { colspan: cols.length || 1 }, "none")));
-    where.textContent = `Rows ${p.first.toLocaleString("en-US")}–${p.last.toLocaleString("en-US")} of ${rows.length.toLocaleString("en-US")}`;
-    prev.disabled = p.page === 1;
-    next.disabled = p.page === p.pages;
+    pages.show(p, rows.length);
   };
-  const turn = (by) => {
+  const pages = pager("how-peek-pager", (by) => {
     page += by;
     draw();
-    // A button that the last or first page disables gives focus to the other.
-    if (document.activeElement?.disabled) (by > 0 ? prev : next).focus();
-  };
-  prev.addEventListener("click", () => turn(-1));
-  next.addEventListener("click", () => turn(1));
+  });
+  pages.box.append(open);
   draw();
-  area.replaceChildren(el("div", { class: "how-scroll tables-scroll" },
-    el("table", {}, el("thead", {}, el("tr", {}, ...cols.map((c) => el("th", {}, c)))), tbody)),
-  el("div", { class: "how-peek-pager" }, prev, where, next, open));
+  area.replaceChildren(pages.box, el("div", { class: "how-scroll how-peek" },
+    el("table", {}, el("thead", {}, el("tr", {}, ...cols.map((c) => el("th", {}, c)))), tbody)));
 }
 
 const STATUS = {
@@ -258,7 +257,7 @@ document.addEventListener("scroll", (e) => opened && !opened.box.contains(e.targ
 
 // An example table's note names the example's own file when the node's name does not.
 function rows(role, head, id, sheet, highlight) {
-  const n = NODES[id], { name: file, note: about } = shown(id);
+  const n = NODES[id], { name: file, note: about } = exampleOf(id);
   const note = file === nodeName(id, sheet) ? about : `${file} · ${about}`;
   if (n.table) return table(role, head, note, n.table.cols, n.table.rows, highlight);
   const hi = new Set(highlight);

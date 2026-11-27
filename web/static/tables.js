@@ -52,11 +52,11 @@ export function sortRows(rows, col, direction) {
   return rows.map((r, i) => [values[i], r]).sort(([a], [b]) => !a || !b ? !a - !b : factor * order(a, b)).map(([, r]) => r);
 }
 
-export function pageOf(rows, page, size = PAGE_SIZE) {
-  const pages = Math.max(1, Math.ceil(rows.length / size));
+export function pageOf(rows, page) {
+  const pages = Math.max(1, Math.ceil(rows.length / PAGE_SIZE));
   const at = Math.min(Math.max(1, page), pages);
-  const start = (at - 1) * size;
-  return { page: at, pages, first: rows.length ? start + 1 : 0, last: Math.min(start + size, rows.length), rows: rows.slice(start, start + size) };
+  const start = (at - 1) * PAGE_SIZE;
+  return { page: at, pages, first: rows.length ? start + 1 : 0, last: Math.min(start + PAGE_SIZE, rows.length), rows: rows.slice(start, start + PAGE_SIZE) };
 }
 
 export const rowCount = (n) => `${n.toLocaleString("en-US")} ${n === 1 ? "row" : "rows"}`;
@@ -146,10 +146,11 @@ export function tablesView(at) {
   const captionId = "tables-caption";
   const thead = el("thead"), tbody = el("tbody");
   const status = el("p", { class: "tables-count", role: "status" });
-  const prev = el("button", { type: "button" }, "← Prev"), next = el("button", { type: "button" }, "Next →");
-  const where = el("span");
-  prev.addEventListener("click", () => turn(-1));
-  next.addEventListener("click", () => turn(1));
+  const pages = pager("tables-pager", (by) => {
+    view.page += by;
+    refresh();
+    status.scrollIntoView({ block: "nearest" });
+  });
 
   const visible = () => cols.filter((c) => !view.hidden.has(c));
   const matching = () => shown(rows, { ...filters, query: view.query });
@@ -158,13 +159,6 @@ export function tablesView(at) {
     view.sort = col ? { col, direction } : null;
     view.page = 1;
     refresh();
-  }
-  function turn(by) {
-    view.page += by;
-    refresh();
-    // A button that the last or first page disables gives focus to the other.
-    if (document.activeElement === document.body || document.activeElement?.disabled) (by > 0 ? prev : next).focus();
-    status.scrollIntoView({ block: "nearest" });
   }
 
   function refresh() {
@@ -189,9 +183,7 @@ export function tablesView(at) {
     if (!page.rows.length) tbody.append(el("tr", {}, el("td", { colspan: shownCols.length || 1 }, "No rows match.")));
     const of = filters.plan || filters.column || view.query.trim() ? ` of ${rows.length.toLocaleString("en-US")} match` : "";
     status.textContent = of ? `${all.length.toLocaleString("en-US")}${of}` : rowCount(all.length);
-    where.textContent = `Rows ${page.first.toLocaleString("en-US")}–${page.last.toLocaleString("en-US")} of ${all.length.toLocaleString("en-US")}`;
-    prev.disabled = page.page === 1;
-    next.disabled = page.page === page.pages;
+    pages.show(page, all.length);
   }
   refresh();
 
@@ -205,7 +197,26 @@ export function tablesView(at) {
       status,
       el("div", { class: "tables-scroll", role: "region", tabindex: "0", "aria-labelledby": captionId },
         el("table", {}, el("caption", { id: captionId }, `${table} rows`), thead, tbody)),
-      el("div", { class: "tables-pager" }, prev, where, next)));
+      pages.box));
+}
+
+// Prev and Next buttons around which rows a page shows. turn(by) moves by pages and redraws.
+export function pager(cls, turn) {
+  const prev = el("button", { type: "button" }, "← Prev"), next = el("button", { type: "button" }, "Next →");
+  const where = el("span");
+  const go = (by) => {
+    turn(by);
+    // A button that the last or first page disables gives focus to the other.
+    if (document.activeElement === document.body || document.activeElement?.disabled) (by > 0 ? prev : next).focus({ preventScroll: true });
+  };
+  prev.addEventListener("click", () => go(-1));
+  next.addEventListener("click", () => go(1));
+  const show = (page, total) => {
+    where.textContent = `Rows ${page.first.toLocaleString("en-US")}–${page.last.toLocaleString("en-US")} of ${total.toLocaleString("en-US")}`;
+    prev.disabled = page.page === 1;
+    next.disabled = page.page === page.pages;
+  };
+  return { box: el("div", { class: cls }, prev, where, next), show };
 }
 
 // A row of a table's values. A page value links to that page of the plan's PDF when pageHref gives a link.
