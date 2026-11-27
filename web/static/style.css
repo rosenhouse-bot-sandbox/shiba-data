@@ -278,6 +278,11 @@ td.selected { outline: 3px solid var(--ink); outline-offset: -3px; }
   .how-lens { overflow: visible; padding: 16px; }
   .how { height: auto; }
 }
+/* Short windows: the title, links and meta take two lines. */
+@media (max-height: 500px) {
+  header nav { order: 1; }
+  h1 span { display: none; }
+}
 /* Phones and short windows: a compact header and document toolbar. */
 @media (max-width: 700px), (max-height: 500px) {
   header { padding: 4px 12px 6px; gap: 2px 8px; }
