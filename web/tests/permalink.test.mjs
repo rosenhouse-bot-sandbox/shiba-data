@@ -17,6 +17,12 @@ const cases = [
     { year: 2027, view: "how", plan: "H1036-153-0", sheet: "main", column: "ambulance", step: "column-rules" }],
   ["#/2027/notes/main/H3805-048-0/ambulance/RIDER/2",
     { year: 2027, view: "notes", plan: "H3805-048-0", sheet: "main", column: "ambulance", kind: "RIDER", page: 2 }],
+  ["#/2027/tables", { year: 2027, view: "tables" }],
+  ["#/2027/tables/presented", { year: 2027, view: "tables", table: "presented" }],
+  ["#/2027/tables/presented/H1036-153-0", { year: 2027, view: "tables", table: "presented", plan: "H1036-153-0" }],
+  ["#/2027/tables/presented/H1036-153-0/main/AB_ambulance",
+    { year: 2027, view: "tables", table: "presented", plan: "H1036-153-0", sheet: "main", column: "AB_ambulance" }],
+  ["#/2027/tables/presented/all/dvha/C_premium", { year: 2027, view: "tables", table: "presented", sheet: "dvha", column: "C_premium" }],
 ];
 
 test("format and parse round-trip", () => {

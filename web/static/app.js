@@ -4,13 +4,14 @@ import { ago } from "./ago.js";
 import { parse, format } from "./permalink.js";
 import { el } from "./dom.js";
 import { howView, howLink, traceUrl } from "./how.js";
-import { EXAMPLE, STEPS } from "./pipeline.js";
 import { initAppearance } from "./appearance.js";
+import { tablesView, ordered } from "./tables.js";
+import { EXAMPLE, STEPS, NODES, nodeHref } from "./pipeline.js";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = "pdfjs/pdf.worker.min.mjs";
 
 const SHEET_NAMES = { main: "Main chart", dvha: "Dental, vision, hearing & extras" };
-const VIEW_NAMES = { ...SHEET_NAMES, notes: "Notes", how: "How it's made" };
+const VIEW_NAMES = { ...SHEET_NAMES, notes: "Notes", how: "How it's made", tables: "Tables" };
 // Keep in sync with KIND_NAMES in web/sheet_layout.py.
 const KIND_NAMES = { question: "Open question", caveat: "Caveat", contradiction: "Volunteer chart differs" };
 let kindFilter = "";
@@ -109,6 +110,7 @@ function route() {
   }
   if (otherYear) hideViewer();
   if (state.view === "how") return routeHow(state);
+  if (state.view === "tables") return routeTables(state);
   const { view } = state;
   const plan = view === "plan" && plans[state.plan];
   document.title = `${plan ? plan.plan_name : VIEW_NAMES[view]} – ${TITLE}`;
@@ -173,7 +175,7 @@ async function routeHow(state) {
   if (ticket !== howTicket || location.hash !== asked) return;
   const step = STEPS.find((s) => s.id === state.step) ?? STEPS[0];
   const value = site[sheet].rows.find((r) => r.plan_id === plan).cells[column.key].value;
-  const cell = { sheet, plan, column: column.id, label: `${plans[plan].plan_name} · ${column.label}`, value };
+  const cell = { sheet, plan, column: column.id, key: column.key, label: `${plans[plan].plan_name} · ${column.label}`, value };
   const hash = howLink(site.year, cell, step);
   if (location.hash !== hash) history.replaceState(null, "", hash);
   routed = location.hash;
@@ -193,7 +195,66 @@ async function routeHow(state) {
   if (map) content.querySelector(".how-step").focus({ preventScroll: true });
 }
 
+// The build the visitor picked in the tables view, if any. Otherwise it shows the deployed build's tables.
+let pickedBuild = null;
 // A failed load is not kept, so the next visit tries again.
+const tableLoads = {};
+const fetchJson = (cache, url) => cache[url] ??= fetch(url).then((r) => r.ok ? r.json() : null).catch(() => null)
+  .then((data) => data ?? (delete cache[url], null));
+let buildsLoad = null;
+
+async function routeTables(state) {
+  hideViewer();
+  const ticket = ++howTicket, asked = location.hash;
+  document.title = `${VIEW_NAMES.tables} – ${TITLE}`;
+  document.querySelectorAll("header nav a").forEach((a) => a.classList.toggle("active", a.dataset.view === "tables"));
+  const content = $("#content");
+  if (here?.view !== "tables") {
+    buildsLoad = null;
+    if (here) scrollTops[here.key] = content.scrollTop;
+    content.replaceChildren(el("p", { class: "tables-note" }, "Loading the table…"));
+  }
+  here = { key: "tables", view: "tables" };
+  // builds.json changes with each load, so each visit from another view fetches it again.
+  const builds = await (buildsLoad ??= fetch(`tables/${site.year}/builds.json`).then((r) => r.ok ? r.json() : null).catch(() => null));
+  if (ticket !== howTicket || location.hash !== asked) return;
+  if (!builds?.builds.length) {
+    buildsLoad = null;
+    content.replaceChildren(el("p", { class: "tables-note warn" }, "No tables are available here. D1 keeps them only on pdxplans.org."));
+    return;
+  }
+  const kept = (sha) => builds.builds.find((b) => b.sha === sha);
+  const build = kept(pickedBuild) ?? kept(builds.deployed) ?? builds.builds[0];
+  const table = build.tables.includes(state.table) ? state.table : ordered(build.tables)[0];
+  const rows = await fetchJson(tableLoads, `tables/${site.year}/${build.sha}/${table}.json`);
+  if (ticket !== howTicket || location.hash !== asked) return;
+  if (!rows) {
+    content.replaceChildren(el("p", { class: "tables-note warn" }, `The ${table} table did not load. Try again later.`));
+    return;
+  }
+  const hasColumn = rows.length > 0 && "column" in rows[0];
+  const shownState = { ...state, table, ...(hasColumn ? {} : { sheet: undefined, column: undefined }) };
+  const hash = format(shownState);
+  if (location.hash !== hash) history.replaceState(null, "", hash);
+  routed = location.hash;
+  const gitTables = Object.entries(NODES).filter(([, n]) => n.git).map(([id, n]) => ({ name: n.label, href: nodeHref(id, { year: site.year, sha: build.sha }) }));
+  const docByUrl = Object.fromEntries(Object.values(site.docs).map((d) => [d.url, d]));
+  const pageHref = (row, page) => {
+    const doc = row.doc_sha ? site.docs[row.doc_sha.slice(0, 16)] : docByUrl[row.url];
+    return doc && plans[row.plan_id]?.docs.some((d) => site.docs[d].kind === doc.kind)
+      ? format({ year: site.year, view: "plan", plan: row.plan_id, kind: doc.kind, page: Number(page) }) : null;
+  };
+  const columnLabel = (sheet, key) => {
+    const column = sheetOf({ sheet })?.columns.find((c) => c.key === key);
+    return column ? `${SHEET_NAMES[sheet]} · ${column.label}` : `${sheet} · ${key}`;
+  };
+  const focused = document.activeElement?.id;
+  content.replaceChildren(tablesView({ year: site.year, state: shownState, table, rows, builds, sha: build.sha, gitTables,
+    planName: (id) => plans[id]?.plan_name ?? "", columnLabel, pageHref,
+    onBuild: (sha) => { pickedBuild = sha; routeTables(parse(location.hash, site.year)); } }));
+  if (focused) document.getElementById(focused)?.focus();
+}
+
 const traces = {};
 const traceOf = (sheet, plan, columnKey) => {
   const url = traceUrl(site.year, sheet, plan, columnKey);
@@ -242,7 +303,7 @@ function updateUrl() {
   const push = pushNext;
   pushNext = false;
   // A link changed the hash, and its hashchange event has not yet run route().
-  if (!here || here.view === "how" || location.hash !== routed) return;
+  if (!here || ["how", "tables"].includes(here.view) || location.hash !== routed) return;
   const state = { year: site.year, view: here.view, plan: here.plan };
   if (selection) {
     const { plan, sheet, col } = selection.dataset;

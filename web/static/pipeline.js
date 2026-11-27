@@ -1,5 +1,6 @@
 // The pipeline as a graph: tables are nodes and operations are edges.
 // The rows are the example cell's, copied from main's 2027 data.
+import { format } from "./permalink.js";
 
 export const EXAMPLE = { sheet: "main", plan: "H1036-153-0", column: "ambulance" };
 
@@ -96,13 +97,14 @@ export const NODES = {
 export const SHEET_TABLES = { main: "main_chart", dvha: "dvha" };
 export const nodeName = (id, sheet) => id === "sheet" ? SHEET_TABLES[sheet] : NODES[id].label;
 
-// The URL of a node's data, or null. at is { year, sheet, sha, cell, cms }: sha is the build's commit, if known,
-// cell the cell's link on the site, and cms the CMS download URLs by file.
-export function nodeHref(id, { year, sheet, sha, cell, cms }) {
+// The URL of a node's data, or null. at is { year, sheet, plan, column, sha, cell, cms }: column is the cell's column key,
+// sha the build's commit, if known, cell the cell's link on the site, and cms the CMS download URLs by file.
+// A D1 table opens in the tables view, filtered to the cell's plan, and to its column when the table has one.
+export function nodeHref(id, { year, sheet, plan, column, sha, cell, cms }) {
   const n = NODES[id];
   if (n.git) return `${REPO}/blob/${sha ?? "main"}/data/${year}/${n.git}`;
   if (n.code) return `${REPO}/blob/${sha ?? "main"}/${n.code}`;
-  if (n.store === "d1") return sha ? `tables/${year}/${sha}/${nodeName(id, sheet)}.json` : null;
+  if (n.store === "d1") return sha ? format({ year, view: "tables", table: nodeName(id, sheet), plan, ...(id === "presented" ? { sheet, column } : {}) }) : null;
   if (n.store === "web") return cell;
   return n.cms ? cms[n.cms] : null;
 }

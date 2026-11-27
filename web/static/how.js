@@ -12,7 +12,7 @@ const shown = (id) => NODES[id].table ?? NODES[id].text;
 const store = (id) => STORES[NODES[id].store];
 const isExample = (cell) => cell.sheet === EXAMPLE.sheet && cell.plan === EXAMPLE.plan && cell.column === EXAMPLE.column;
 
-// cell is { sheet, plan, column, label, value }.
+// cell is { sheet, plan, column, key, label, value }, where column is the column's id and key its key.
 export function howView({ year, cell, step, terms, trace, cms, code }) {
   const at = STEPS.indexOf(step);
   const link = (s) => howLink(year, cell, s);
@@ -27,7 +27,8 @@ export function howView({ year, cell, step, terms, trace, cms, code }) {
       el("span", { class: "how-count" }, `${at + 1} of ${STEPS.length}`),
       next ? el("a", { class: "how-nav primary", href: link(next), rel: "next" }, "Next →") : el("span", { class: "how-nav primary off" }, "Next →")),
     el("div", { class: "how-body" }, map(step, link, cell.sheet),
-      lens(step, link, terms, isExample(cell) ? step.example : null, trace, code, { year, sheet: cell.sheet, sha: trace?.build?.sha ?? null,
+      lens(step, link, terms, isExample(cell) ? step.example : null, trace, code, { year, sheet: cell.sheet, plan: cell.plan, column: cell.key,
+        sha: trace?.build?.sha ?? null,
         cell: format({ year, view: cell.sheet, plan: cell.plan, column: cell.column }), cms })));
 }
 
@@ -76,7 +77,7 @@ function download(id, file, href) {
   return pop;
 }
 
-// at says where each table's data is: { year, sheet, sha, cell, cms }, as nodeHref takes it.
+// at says where each table's data is, as nodeHref takes it.
 function lens(step, link, terms, example, trace, code, at) {
   const { sheet } = at;
   const chips = (near, cls, text) => near.length ? el("div", { class: `how-chips ${cls}` },
@@ -92,6 +93,7 @@ function lens(step, link, terms, example, trace, code, at) {
       return [where, el("button", { type: "button", class: "how-source", popovertarget: warning.id, "aria-label": `${name}, download from cms.gov` },
         el("code", {}, name), " ↓")];
     }
+    if (href?.startsWith("#")) return [where, el("a", { class: "how-source", href, "aria-label": `${name}, opens in Tables` }, el("code", {}, name), " →")];
     if (href) return [where, el("a", { class: "how-source", href, target: "_blank", rel: "noopener",
       "aria-label": `${name}, opens in a new tab` }, el("code", {}, name), " ↗")];
     return [where, el("code", {}, name)];
