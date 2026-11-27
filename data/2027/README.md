@@ -5,7 +5,7 @@ They come only from the CMS Landscape and PBP Benefits files, carrier websites, 
 The methods doc, `docs/2027-bootstrap/CLAUDE_ANALYSIS_METHODS.md`, and its Appendix B are the 2027 bootstrap's, which git history keeps.
 
 `python3 -I pipeline/run.py 2027 <work_dir>` lists plan documents from `found.csv` and `links.csv`, downloads them and the sources named in `config.json`, and regenerates `generated/`.
-It then reads facts into `machine/document_facts.csv` from the answers saved in `answers/`, and writes the sheets, `generated/main_chart.csv` and `generated/dvha.csv`, and their citations, `generated/presented.csv`.
+It then reads facts into `machine/document_facts.csv` from the saved answers, which `pipeline/store.py` pulls from R2 into `answers/`, and writes the sheets, `generated/main_chart.csv` and `generated/dvha.csv`, and their citations, `generated/presented.csv`.
 
 ## Results
 
