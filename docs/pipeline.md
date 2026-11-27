@@ -326,12 +326,12 @@ Rules write every value to the sheets, `generated/main_chart.csv` and `generated
 
 Some values need explaining. Claude sessions write notes in pull requests.
 
-A **note** explains a cell to volunteers. A `caveat`, in lavender, gives a settled detail the value leaves out. A `question`, in yellow, flags a value that needs a domain expert's check. A `contradiction`, in orange, says what the volunteer chart shows and what the documents show where they disagree. `comments.csv`, selected columns:
+A **note** explains a cell to volunteers. A `caveat`, in lavender, gives a settled detail the value leaves out. A `question`, in yellow, flags something the documents leave unclear. A `contradiction`, in orange, says what the volunteer chart shows and what the documents show where they disagree. `comments.csv`, selected columns:
 
 ```
 sheet,plan_id,column,kind,comment,pdf_page,quote
 dvha,H1372-003-0,F_dental,caveat,"EOC page 57 says there is no coinsurance or copayment for supplemental dental benefits, … The EOC does not say how often the maximum resets.",57,"Maximum: $1,000 for"
-main,H7199-002-0,L_xray_imaging,question,"EOC page 96 prices X-rays at $25 in every office setting. …",96,X-rays PCP's office: $25 copay
+main,H2923-009-0,I_outpatient_surgery,question,"At an ambulatory surgical center, EOC page 95 adds 30% coinsurance for the professional fee to the 50% facility coinsurance.",95,30% coinsurance for outpatient procedures/ surgery at an ASC - professional
 ```
 
 Claude sessions also list, in `note_facts.csv`, the cell's cited facts that each note is about. A note about something the cell does not cite gets no rows. A test fails if a note's cell stops citing one of its facts.
