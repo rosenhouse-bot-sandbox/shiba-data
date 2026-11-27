@@ -180,7 +180,8 @@ async function routeHow(state) {
   if (location.hash !== hash) history.replaceState(null, "", hash);
   routed = location.hash;
   content.replaceChildren(howView({ year: site.year, cell, step, terms: site.terms, trace, cms: site.cms_files,
-    code: site.rule_code?.[sheet]?.[column.key] ?? [] }));
+    code: site.rule_code?.[sheet]?.[column.key] ?? [], pageHref,
+    load: (table) => fetchJson(tableLoads, `tables/${site.year}/${trace.build.sha}/${table}.json`) }));
   if (state.plan && !known) content.prepend(el("p", { class: "warn" }, "That link names no cell, so this shows the example cell."));
   const rail = content.querySelector(".how-map");
   rail.scrollTop = mapTop;
@@ -236,12 +237,6 @@ async function routeTables(state) {
   // The header's Tables link returns to the last table shown.
   $("header nav a[data-view=tables]").href = hash;
   const gitTables = Object.entries(NODES).filter(([, n]) => n.git).map(([id, n]) => ({ name: n.label, href: nodeHref(id, { year: site.year, sha: build.sha }) }));
-  const docByUrl = Object.fromEntries(Object.values(site.docs).map((d) => [d.url, d]));
-  const pageHref = (row, page) => {
-    const doc = row.doc_sha ? site.docs[row.doc_sha.slice(0, 16)] : docByUrl[row.url];
-    return doc && plans[row.plan_id]?.docs.some((d) => site.docs[d].kind === doc.kind)
-      ? format({ year: site.year, view: "plan", plan: row.plan_id, kind: doc.kind, page: Number(page) }) : null;
-  };
   const columnLabel = (sheet, key) => {
     const column = sheetOf({ sheet })?.columns.find((c) => c.key === key);
     return column ? `${SHEET_NAMES[sheet]} · ${column.label}` : `${sheet} · ${key}`;
@@ -258,6 +253,15 @@ async function routeTables(state) {
   if (notes.length) content.querySelector(".tables-main").prepend(...notes.map((n) => el("p", { class: "warn" }, n)));
   const refocus = inList ? content.querySelector(".tables-list a[aria-current]") : focused?.id ? document.getElementById(focused.id) : null;
   refocus?.focus();
+}
+
+let docByUrl;
+// Links a table row's page to that page of the plan's PDF, when the plan has a document of that kind.
+function pageHref(row, page) {
+  docByUrl ??= Object.fromEntries(Object.values(site.docs).map((d) => [d.url, d]));
+  const doc = row.doc_sha ? site.docs[row.doc_sha.slice(0, 16)] : docByUrl[row.url];
+  return doc && plans[row.plan_id]?.docs.some((d) => site.docs[d].kind === doc.kind)
+    ? format({ year: site.year, view: "plan", plan: row.plan_id, kind: doc.kind, page: Number(page) }) : null;
 }
 
 const traces = {};

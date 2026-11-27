@@ -1511,6 +1511,97 @@ async function openTables(p, path) {
 
 const bodyColumn = (p, col) => p.locator(`.tables-scroll tbody td[data-col="${col}"]`).allTextContents();
 
+const scope = (p, name, label) => p.locator(".how-rows", { has: p.locator(`.how-rows-head code:text-is("${name}")`) }).getByRole("radio", { name: label });
+const framed = (p, name) => p.locator(".how-rows", { has: p.locator(`.how-rows-head code:text-is("${name}")`) });
+
+test("pipeline view: a D1 table shows the cell's rows, or on asking its plan's or every plan's", async () => {
+  const fresh = await newPage();
+  await serveTables(fresh);
+  await openHow(fresh, "main/H1036-153-0/ambulance/column-rules");
+  const facts = framed(fresh, "document_facts");
+  const where = facts.locator(".how-peek-pager span");
+  const cellRows = await facts.locator("tbody tr").count();
+  assert.ok(await scope(fresh, "document_facts", "This cell").isChecked());
+  assert.equal(await facts.getByRole("group").getAttribute("aria-label"), "document_facts rows");
+  await scope(fresh, "document_facts", "This plan").check();
+  await where.waitFor();
+  assert.equal(await facts.getByRole("status").textContent(), "125 rows");
+  assert.equal(await where.textContent(), "Rows 1–100 of 125");
+  assert.equal(await facts.locator("tbody tr").count(), 100);
+  assert.deepEqual([...new Set(await facts.locator('td[data-col="plan_id"]').allTextContents())], ["H1036-153-0"]);
+  assert.equal(await facts.locator('td[data-col="page"] a').first().getAttribute("href"), `#/2027/plan/H1036-153-0/EOC/${TABLE_DATA[DEPLOYED].document_facts[1].page}`);
+  await facts.getByRole("button", { name: "Next →" }).click();
+  assert.equal(await where.textContent(), "Rows 101–125 of 125");
+  assert.equal(await fresh.evaluate(() => document.activeElement.textContent), "← Prev");
+  await scope(fresh, "document_facts", "All plans").check();
+  await where.filter({ hasText: "of 250" }).waitFor();
+  assert.equal(await where.textContent(), "Rows 1–100 of 250");
+  assert.equal(await facts.getByRole("link", { name: /Open in Tables/ }).getAttribute("href"), `#/2027/tables/${DEPLOYED}/document_facts`);
+  await scope(fresh, "document_facts", "This plan").check();
+  assert.equal(await facts.getByRole("link", { name: /Open in Tables/ }).getAttribute("href"), `#/2027/tables/${DEPLOYED}/document_facts/H1036-153-0`);
+  await scope(fresh, "document_facts", "This cell").check();
+  assert.equal(await facts.locator("tbody tr").count(), cellRows);
+  assert.equal(await where.count(), 0);
+  assert.equal(await facts.locator("[role=status]").textContent(), "");
+  await fresh.close();
+});
+
+test("pipeline view: a D1 table with no rows for the plan says so", async () => {
+  const fresh = await newPage();
+  await serveTables(fresh);
+  await fresh.route("**/tables/2027/*/pbp_facts.json", (route) => route.fulfill({ json: [{ plan_id: "H3805-048-0", benefit: "emergency" }] }));
+  await openHow(fresh, "main/H1036-153-0/ambulance/column-rules");
+  const facts = framed(fresh, "pbp_facts");
+  await scope(fresh, "pbp_facts", "This plan").check();
+  await facts.getByRole("status").filter({ hasText: "0 rows" }).waitFor();
+  assert.equal(await facts.locator(".how-peek-pager button").count(), 0);
+  assert.equal(await facts.getByRole("link", { name: /Open in Tables/ }).getAttribute("href"), `#/2027/tables/${DEPLOYED}/pbp_facts/H1036-153-0`);
+  await fresh.close();
+});
+
+test("pipeline view: a table outside D1 offers no rows to ask for", async () => {
+  await openHow(page, "main/H1036-153-0/ambulance/column-rules");
+  assert.equal(await framed(page, "rule code").getByRole("radio").count(), 0);
+  assert.equal(await framed(page, "presented").getByRole("radio").count(), 3);
+});
+
+test("pipeline view: a D1 table's rows that load after the visitor goes back to the cell's rows stay hidden", async () => {
+  const fresh = await newPage();
+  await serveTables(fresh);
+  let release;
+  const held = new Promise((r) => { release = r; });
+  await fresh.route("**/tables/2027/*/document_facts.json", async (route) => {
+    await held;
+    await route.fallback();
+  });
+  await openHow(fresh, "main/H1036-153-0/ambulance/column-rules");
+  const facts = framed(fresh, "document_facts");
+  const cellRows = await facts.locator("tbody tr").count();
+  await scope(fresh, "document_facts", "This plan").check();
+  assert.equal(await facts.getByRole("status").textContent(), "Loading the table…");
+  assert.equal(await facts.locator("tbody tr").count(), 0);
+  await scope(fresh, "document_facts", "This cell").check();
+  const loaded = fresh.waitForResponse("**/document_facts.json");
+  release();
+  await loaded;
+  await fresh.evaluate(() => new Promise(requestAnimationFrame));
+  assert.equal(await facts.locator("tbody tr").count(), cellRows);
+  await fresh.close();
+});
+
+test("pipeline view: a D1 table that does not load says so, and a cell with no trace offers no rows to ask for", async () => {
+  const fresh = await newPage();
+  await serveTables(fresh);
+  await openHow(fresh, "main/H1036-153-0/ambulance/column-rules");
+  await scope(fresh, "pbp_facts", "All plans").check();
+  await framed(fresh, "pbp_facts").getByRole("status").filter({ hasText: "The pbp_facts table did not load." }).waitFor();
+  assert.equal(await framed(fresh, "pbp_facts").getByRole("link", { name: /Open in Tables/ }).getAttribute("href"), `#/2027/tables/${DEPLOYED}/pbp_facts`);
+  await fresh.route("**/trace/2027/**", (route) => route.fulfill({ status: 404, body: "Not found" }));
+  await openHow(fresh, "main/H1036-153-0/ambulance/column-rules");
+  assert.equal(await fresh.getByRole("radio").count(), 0);
+  await fresh.close();
+});
+
 test("tables view: the Tables link opens the deployed build's first table in the pipeline's order", async () => {
   const fresh = await newPage();
   await serveTables(fresh);
@@ -1724,6 +1815,14 @@ test("tables view: Next on the last page leaves focus on Prev", async () => {
   await page.keyboard.press("Enter");
   await page.keyboard.press("Enter");
   assert.equal(await page.evaluate(() => document.activeElement.textContent), "← Prev");
+});
+
+test("phone: paging to the last page of a table keeps its row count in view", async () => {
+  const p = await newPage(devices["iPhone 13"]);
+  await openTables(p, "document_facts");
+  for (const _ of [1, 2]) await p.click('.tables-pager button:text-is("Next →")');
+  assert.ok(await p.locator(".tables-count").evaluate((e) => e.getBoundingClientRect().top >= 0));
+  await p.close();
 });
 
 test("tables view: hiding the sorted column unsorts, and the last column cannot be hidden", async () => {

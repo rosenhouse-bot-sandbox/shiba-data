@@ -146,10 +146,11 @@ export function tablesView(at) {
   const captionId = "tables-caption";
   const thead = el("thead"), tbody = el("tbody");
   const status = el("p", { class: "tables-count", role: "status" });
-  const prev = el("button", { type: "button" }, "← Prev"), next = el("button", { type: "button" }, "Next →");
-  const where = el("span");
-  prev.addEventListener("click", () => turn(-1));
-  next.addEventListener("click", () => turn(1));
+  const pages = pager("tables-pager", (by) => {
+    view.page += by;
+    refresh();
+    status.scrollIntoView({ block: "nearest" });
+  });
 
   const visible = () => cols.filter((c) => !view.hidden.has(c));
   const matching = () => shown(rows, { ...filters, query: view.query });
@@ -158,13 +159,6 @@ export function tablesView(at) {
     view.sort = col ? { col, direction } : null;
     view.page = 1;
     refresh();
-  }
-  function turn(by) {
-    view.page += by;
-    refresh();
-    // A button that the last or first page disables gives focus to the other.
-    if (document.activeElement === document.body || document.activeElement?.disabled) (by > 0 ? prev : next).focus();
-    status.scrollIntoView({ block: "nearest" });
   }
 
   function refresh() {
@@ -185,24 +179,11 @@ export function tablesView(at) {
     sortPick.querySelector("select").replaceChildren(el("option", { value: "" }, "table order"), ...shownCols.flatMap((c) => ["ascending", "descending"].map((d) =>
       el("option", { value: `${c} ${d}`, ...(view.sort?.col === c && view.sort.direction === d ? { selected: "" } : {}) },
         `${c} ${d === "ascending" ? "▲" : "▼"}`))));
-    tbody.replaceChildren(...page.rows.map((r) => {
-      const tr = el("tr");
-      // Only a row's first long value is a button, so a page of rows keeps few tab stops.
-      let button = null;
-      tr.append(...shownCols.map((c) => {
-        const value = r[c] ?? "", href = (c === "page" || c === "pdf_page") && value ? pageHref(r, value) : null;
-        const long = !href && value.length > LONG;
-        return el("td", { "data-col": c }, href ? el("div", {}, el("a", { href }, value))
-          : long && !button ? (button = more(tr, value)) : el("div", long ? { title: value } : {}, value));
-      }));
-      return tr;
-    }));
+    tbody.replaceChildren(...page.rows.map((r) => bodyRow(r, shownCols, pageHref)));
     if (!page.rows.length) tbody.append(el("tr", {}, el("td", { colspan: shownCols.length || 1 }, "No rows match.")));
     const of = filters.plan || filters.column || view.query.trim() ? ` of ${rows.length.toLocaleString("en-US")} match` : "";
     status.textContent = of ? `${all.length.toLocaleString("en-US")}${of}` : rowCount(all.length);
-    where.textContent = `Rows ${page.first.toLocaleString("en-US")}–${page.last.toLocaleString("en-US")} of ${all.length.toLocaleString("en-US")}`;
-    prev.disabled = page.page === 1;
-    next.disabled = page.page === page.pages;
+    pages.show(page, all.length);
   }
   refresh();
 
@@ -216,7 +197,40 @@ export function tablesView(at) {
       status,
       el("div", { class: "tables-scroll", role: "region", tabindex: "0", "aria-labelledby": captionId },
         el("table", {}, el("caption", { id: captionId }, `${table} rows`), thead, tbody)),
-      el("div", { class: "tables-pager" }, prev, where, next)));
+      pages.box));
+}
+
+// Prev and Next buttons around which rows a page shows. turn(by) moves by pages and redraws.
+export function pager(cls, turn) {
+  const prev = el("button", { type: "button" }, "← Prev"), next = el("button", { type: "button" }, "Next →");
+  const where = el("span");
+  const go = (by) => {
+    turn(by);
+    // A button that the last or first page disables gives focus to the other.
+    if (document.activeElement === document.body || document.activeElement?.disabled) (by > 0 ? prev : next).focus({ preventScroll: true });
+  };
+  prev.addEventListener("click", () => go(-1));
+  next.addEventListener("click", () => go(1));
+  const show = (page, total) => {
+    where.textContent = `Rows ${page.first.toLocaleString("en-US")}–${page.last.toLocaleString("en-US")} of ${total.toLocaleString("en-US")}`;
+    prev.disabled = page.page === 1;
+    next.disabled = page.page === page.pages;
+  };
+  return { box: el("div", { class: cls }, prev, where, next), show };
+}
+
+// A row of a table's values. A page value links to that page of the plan's PDF when pageHref gives a link.
+export function bodyRow(r, cols, pageHref) {
+  const tr = el("tr");
+  // Only a row's first long value is a button, so a page of rows keeps few tab stops.
+  let button = null;
+  tr.append(...cols.map((c) => {
+    const value = r[c] ?? "", href = (c === "page" || c === "pdf_page") && value ? pageHref(r, value) : null;
+    const long = !href && value.length > LONG;
+    return el("td", { "data-col": c }, href ? el("div", {}, el("a", { href }, value))
+      : long && !button ? (button = more(tr, value)) : el("div", long ? { title: value } : {}, value));
+  }));
+  return tr;
 }
 
 // A value longer than this shows its start, and a button shows the whole row's values.

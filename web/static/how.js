@@ -5,15 +5,17 @@ import {
   EXAMPLE, NODES, STEPS, STORES, inputs, outputs, nodeName, NODE_W, NODE_H, RING, MAP_W, MAP_H,
   nodeBox, pillBox, paths, before, after, strip, details, records, nodeHref,
 } from "./pipeline.js";
+import { shown, pageOf, pager, bodyRow, rowCount } from "./tables.js";
 
 export const howLink = (year, cell, step) => format({ year, view: "how", sheet: cell.sheet, plan: cell.plan, column: cell.column, step: step.id });
 export const traceUrl = (year, sheet, plan, columnKey) => `trace/${year}/${sheet}/${plan}/${columnKey}`;
-const shown = (id) => NODES[id].table ?? NODES[id].text;
+const exampleOf = (id) => NODES[id].table ?? NODES[id].text;
 const store = (id) => STORES[NODES[id].store];
 const isExample = (cell) => cell.sheet === EXAMPLE.sheet && cell.plan === EXAMPLE.plan && cell.column === EXAMPLE.column;
 
 // cell is { sheet, plan, column, key, label, value }, where column is the column's id and key its key.
-export function howView({ year, cell, step, terms, trace, cms, code }) {
+// load(table) gets a D1 table of the trace's build, and pageHref(row, page) links to a page that a row names.
+export function howView({ year, cell, step, terms, trace, cms, code, load, pageHref }) {
   const at = STEPS.indexOf(step);
   const link = (s) => howLink(year, cell, s);
   const prev = STEPS[at - 1], next = STEPS[at + 1];
@@ -29,7 +31,7 @@ export function howView({ year, cell, step, terms, trace, cms, code }) {
     el("div", { class: "how-body" }, map(step, link, cell.sheet),
       lens(step, link, terms, isExample(cell) ? step.example : null, trace, code, { year, sheet: cell.sheet, plan: cell.plan, column: cell.key,
         sha: trace?.build?.sha ?? null,
-        cell: format({ year, view: cell.sheet, plan: cell.plan, column: cell.column }), cms })));
+        cell: format({ year, view: cell.sheet, plan: cell.plan, column: cell.column }), cms, load, pageHref })));
 }
 
 function map(step, link, sheet) {
@@ -85,7 +87,7 @@ function lens(step, link, terms, example, trace, code, at) {
   const downloads = [];
   // A table's heading says where its data lives, and opens the data when it has a URL.
   const heading = (id) => {
-    const n = NODES[id], name = nodeName(id, sheet), href = nodeHref(id, at) ?? (example ? shown(id).href : null);
+    const n = NODES[id], name = nodeName(id, sheet), href = nodeHref(id, at) ?? (example ? exampleOf(id).href : null);
     const where = el("small", { class: `how-store store-${n.store}` }, store(id).label);
     if (href && n.cms) {
       const warning = download(`how-download-${id}`, n.cms, href);
@@ -102,9 +104,10 @@ function lens(step, link, terms, example, trace, code, at) {
   const para = (p) => el("p", {}, ...p.map((s) => typeof s === "string" ? s : term(terms[s[0]], s[1])));
   const tables = records(step, trace, sheet, code).map((r) => {
     const head = heading(r.node);
-    if (r.rows) return table(r.role, head, r.note, r.cols, r.rows, r.hi);
-    if (example) return rows(r.role, head, r.node, sheet, example.highlight[r.node] ?? []);
-    return frame(r.role, head, r.note, trace ? el("p", { class: "how-none" }, "Not recorded in this build.") : null);
+    const box = r.rows ? table(r.role, head, r.note, r.cols, r.rows, r.hi)
+      : example ? rows(r.role, head, r.node, sheet, example.highlight[r.node] ?? [])
+        : frame(r.role, head, r.note, trace ? el("p", { class: "how-none" }, "Not recorded in this build.") : null);
+    return NODES[r.node].store === "d1" && at.sha ? scoped(box, r.node, at) : box;
   });
   return el("section", { class: "how-lens" },
     chips(before(step), "before", (l) => `↖ after: ${l}`),
@@ -116,6 +119,58 @@ function lens(step, link, terms, example, trace, code, at) {
     ...downloads,
     traceRecord(step, trace),
     chips(after(step), "after", (l) => `next: ${l} ↘`));
+}
+
+const SCOPES = [["cell", "This cell"], ["plan", "This plan"], ["all", "All plans"]];
+
+// A D1 table also shows the build's rows for the cell's plan or for every plan, loaded when asked.
+function scoped(box, id, at) {
+  const { year, sha, plan, load, pageHref } = at, name = nodeName(id, at.sheet);
+  const [head, ...cellRows] = box.children;
+  const status = el("p", { class: "how-none", role: "status" });
+  const area = el("div", {}, ...cellRows);
+  const pick = el("fieldset", { class: "how-scopes", "aria-label": `${name} rows` }, el("legend", {}, "Rows"), ...SCOPES.map(([value, label]) =>
+    el("label", {}, el("input", { type: "radio", name: `how-scope-${id}`, value, ...(value === "cell" ? { checked: "" } : {}) }), ` ${label}`)));
+  const chosen = () => pick.querySelector("input:checked").value;
+  pick.addEventListener("change", async () => {
+    const scope = chosen();
+    status.textContent = "";
+    if (scope === "cell") return area.replaceChildren(...cellRows);
+    status.textContent = "Loading the table…";
+    area.replaceChildren();
+    const rows = await load(name);
+    if (chosen() !== scope) return;
+    const open = el("a", { href: format({ year, view: "tables", build: sha, table: name, plan: scope === "plan" ? plan : undefined }) }, "Open in Tables →");
+    if (!rows) {
+      status.textContent = `The ${name} table did not load.`;
+      return area.replaceChildren(el("p", { class: "how-peek-pager" }, open));
+    }
+    const some = scope === "plan" ? shown(rows, { plan }) : rows;
+    status.textContent = rowCount(some.length);
+    peek(area, some, Object.keys(rows[0] ?? {}), pageHref, open);
+  });
+  box.replaceChildren(head, pick, status, area);
+  return box;
+}
+
+// Shows rows a page at a time, with the pager above them so the keyboard reaches it first.
+function peek(area, rows, cols, pageHref, open) {
+  if (!rows.length) return area.replaceChildren(el("p", { class: "how-peek-pager" }, open));
+  let page = 1;
+  const tbody = el("tbody");
+  const draw = () => {
+    const p = pageOf(rows, page);
+    tbody.replaceChildren(...p.rows.map((r) => bodyRow(r, cols, pageHref)));
+    pages.show(p, rows.length);
+  };
+  const pages = pager("how-peek-pager", (by) => {
+    page += by;
+    draw();
+  });
+  pages.box.append(open);
+  draw();
+  area.replaceChildren(pages.box, el("div", { class: "how-scroll how-peek" },
+    el("table", {}, el("thead", {}, el("tr", {}, ...cols.map((c) => el("th", {}, c)))), tbody)));
 }
 
 const STATUS = {
@@ -202,7 +257,7 @@ document.addEventListener("scroll", (e) => opened && !opened.box.contains(e.targ
 
 // An example table's note names the example's own file when the node's name does not.
 function rows(role, head, id, sheet, highlight) {
-  const n = NODES[id], { name: file, note: about } = shown(id);
+  const n = NODES[id], { name: file, note: about } = exampleOf(id);
   const note = file === nodeName(id, sheet) ? about : `${file} · ${about}`;
   if (n.table) return table(role, head, note, n.table.cols, n.table.rows, highlight);
   const hi = new Set(highlight);
