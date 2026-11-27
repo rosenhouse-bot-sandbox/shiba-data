@@ -29,6 +29,7 @@ import sheets  # noqa: E402
 import reach  # noqa: E402
 import run  # noqa: E402
 import steps  # noqa: E402
+import store  # noqa: E402
 import years  # noqa: E402
 
 
@@ -137,6 +138,7 @@ def main(year, work, candidate):
         raise SystemExit("blast.py checks one document_facts candidate.")
     if git("status", "--porcelain", "--", str(data)):
         raise SystemExit(f"{data} has uncommitted changes.")
+    store.pull(data, work)
     saved = set(os.listdir(data / "answers"))
     versions = steps.versions(data, run.STEPS, candidate)
     try:

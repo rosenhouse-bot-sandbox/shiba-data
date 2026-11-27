@@ -84,6 +84,7 @@ jobs:
         timeout-minutes: 15
         continue-on-error: true
       # Upload before committing any data that names these blobs. Keys are content hashes, so a re-upload changes nothing.
+      # store.py packs the new saved answers and adds the pack to lock.json.
       - id: upload
         if: always()
         timeout-minutes: 20
@@ -94,6 +95,7 @@ jobs:
           export AWS_SECRET_ACCESS_KEY
           echo "::add-mask::$AWS_SECRET_ACCESS_KEY"
           python3 -I pipeline/blobs.py upload "data/$YEAR" _work > _blobs.txt
+          python3 -I pipeline/store.py pack "$YEAR" _work >> _blobs.txt
           while read -r key path; do
             aws s3 cp "$path" "s3://pdxplans/$key" --only-show-errors < /dev/null
           done < _blobs.txt
@@ -106,8 +108,20 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
           git checkout -b "$branch"
-          # Without every blob, keep only the saved answers.
-          if [ "${{ steps.upload.outcome }}" = success ]; then git add "data/$YEAR"; else git add "data/$YEAR/answers"; fi
+          # Without every blob, keep only the saved answers, in git.
+          if [ "${{ steps.upload.outcome }}" = success ]; then
+            git add "data/$YEAR"
+            python3 -I pipeline/store.py untrack "$YEAR"
+          else
+            # The lock must not name a pack that R2 lacks.
+            git checkout HEAD -- "data/$YEAR/lock.json" 2>/dev/null || rm -f "data/$YEAR/lock.json"
+            # If the locked packs are unreadable, keep every saved answer.
+            if python3 -I pipeline/store.py unpacked "$YEAR" _work > _unpacked.txt; then
+              xargs -r git add -f -- < _unpacked.txt
+            else
+              git add -f "data/$YEAR/answers"
+            fi
+          fi
           git commit -m "Rebuild $YEAR in run $GITHUB_RUN_ID${CANDIDATE:+ with $CANDIDATE}" || exit 0
           git push "https://x-access-token:$GH_TOKEN@github.com/$GITHUB_REPOSITORY.git" "$branch"
           echo "::notice::Pushed $branch. Open a pull request from it."

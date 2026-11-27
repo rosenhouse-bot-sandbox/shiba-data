@@ -3,7 +3,8 @@ documents list, the document facts, and the sheets and their citations.
 
 Usage: python3 -I pipeline/tables.py <year> <work_dir>
 
-Git does not keep these tables. This downloads each CMS zip and PDF text that generated/ pins, unless <work_dir> has it.
+Git does not keep these tables. This downloads each CMS zip and PDF text that generated/ pins, unless <work_dir> has it,
+and pulls the saved answers that lock.json pins.
 It replays the model steps, so it calls no API, and stops if a task has no saved answer.
 """
 import concurrent.futures
@@ -18,6 +19,7 @@ import blobs  # noqa: E402
 import run  # noqa: E402
 import sheets  # noqa: E402
 import steps  # noqa: E402
+import store  # noqa: E402
 import years  # noqa: E402
 
 WRITES = ("generated/plans.csv", "generated/landscape_reads.csv", "generated/documents.csv", "generated/pbp_facts.csv",
@@ -52,6 +54,7 @@ def main(year, work):
     os.makedirs(work, exist_ok=True)
     fetch(data / "generated", work)
     run.cms_tables(data, years.config(data), work)
+    store.pull(data, work)
     out = io.StringIO()
     try:
         with contextlib.redirect_stdout(out):
