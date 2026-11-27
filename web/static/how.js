@@ -5,6 +5,7 @@ import {
   EXAMPLE, NODES, STEPS, STORES, inputs, outputs, nodeName, NODE_W, NODE_H, RING, MAP_W, MAP_H,
   nodeBox, pillBox, paths, before, after, strip, details, records, nodeHref,
 } from "./pipeline.js";
+import { shown as matching, pageOf, bodyRow } from "./tables.js";
 
 export const howLink = (year, cell, step) => format({ year, view: "how", sheet: cell.sheet, plan: cell.plan, column: cell.column, step: step.id });
 export const traceUrl = (year, sheet, plan, columnKey) => `trace/${year}/${sheet}/${plan}/${columnKey}`;
@@ -13,7 +14,8 @@ const store = (id) => STORES[NODES[id].store];
 const isExample = (cell) => cell.sheet === EXAMPLE.sheet && cell.plan === EXAMPLE.plan && cell.column === EXAMPLE.column;
 
 // cell is { sheet, plan, column, key, label, value }, where column is the column's id and key its key.
-export function howView({ year, cell, step, terms, trace, cms, code }) {
+// load(table) gets a D1 table of the trace's build, and pageHref(row, page) links to a page that a row names.
+export function howView({ year, cell, step, terms, trace, cms, code, load, pageHref }) {
   const at = STEPS.indexOf(step);
   const link = (s) => howLink(year, cell, s);
   const prev = STEPS[at - 1], next = STEPS[at + 1];
@@ -29,7 +31,7 @@ export function howView({ year, cell, step, terms, trace, cms, code }) {
     el("div", { class: "how-body" }, map(step, link, cell.sheet),
       lens(step, link, terms, isExample(cell) ? step.example : null, trace, code, { year, sheet: cell.sheet, plan: cell.plan, column: cell.key,
         sha: trace?.build?.sha ?? null,
-        cell: format({ year, view: cell.sheet, plan: cell.plan, column: cell.column }), cms })));
+        cell: format({ year, view: cell.sheet, plan: cell.plan, column: cell.column }), cms, load, pageHref })));
 }
 
 function map(step, link, sheet) {
@@ -102,9 +104,10 @@ function lens(step, link, terms, example, trace, code, at) {
   const para = (p) => el("p", {}, ...p.map((s) => typeof s === "string" ? s : term(terms[s[0]], s[1])));
   const tables = records(step, trace, sheet, code).map((r) => {
     const head = heading(r.node);
-    if (r.rows) return table(r.role, head, r.note, r.cols, r.rows, r.hi);
-    if (example) return rows(r.role, head, r.node, sheet, example.highlight[r.node] ?? []);
-    return frame(r.role, head, r.note, trace ? el("p", { class: "how-none" }, "Not recorded in this build.") : null);
+    const box = r.rows ? table(r.role, head, r.note, r.cols, r.rows, r.hi)
+      : example ? rows(r.role, head, r.node, sheet, example.highlight[r.node] ?? [])
+        : frame(r.role, head, r.note, trace ? el("p", { class: "how-none" }, "Not recorded in this build.") : null);
+    return NODES[r.node].store === "d1" && at.sha ? scoped(box, r.node, at) : box;
   });
   return el("section", { class: "how-lens" },
     chips(before(step), "before", (l) => `↖ after: ${l}`),
@@ -116,6 +119,59 @@ function lens(step, link, terms, example, trace, code, at) {
     ...downloads,
     traceRecord(step, trace),
     chips(after(step), "after", (l) => `next: ${l} ↘`));
+}
+
+const PEEK_SIZE = 50;
+const SCOPES = [["cell", "This cell"], ["plan", "This plan"], ["all", "All plans"]];
+
+// A D1 table also shows the build's rows for the cell's plan or for every plan, loaded when asked.
+function scoped(box, id, at) {
+  const { year, sha, plan, load, pageHref } = at, name = nodeName(id, at.sheet);
+  const cellRows = [...box.children].slice(1);
+  const area = el("div", { class: "how-peek" }, ...cellRows);
+  const pick = el("fieldset", { class: "how-scopes" }, el("legend", {}, "Rows"), ...SCOPES.map(([value, label]) =>
+    el("label", {}, el("input", { type: "radio", name: `how-scope-${id}`, value, ...(value === "cell" ? { checked: "" } : {}) }), ` ${label}`)));
+  const chosen = () => pick.querySelector("input:checked").value;
+  pick.addEventListener("change", async () => {
+    const scope = chosen();
+    if (scope === "cell") return area.replaceChildren(...cellRows);
+    area.replaceChildren(el("p", { class: "how-none" }, "Loading the table…"));
+    const rows = await load(name);
+    if (chosen() !== scope) return;
+    const open = el("a", { class: "how-open", href: format({ year, view: "tables", build: sha, table: name, plan: scope === "plan" ? plan : undefined }) }, "Open in Tables →");
+    if (!rows) return area.replaceChildren(el("p", { class: "how-none" }, `The ${name} table did not load. Try again later.`), open);
+    peek(area, scope === "plan" ? matching(rows, { plan }) : rows, Object.keys(rows[0] ?? {}), pageHref, open);
+  });
+  box.replaceChildren(box.firstChild, pick, area);
+  return box;
+}
+
+function peek(area, rows, cols, pageHref, open) {
+  let page = 1;
+  const where = el("span", { class: "how-peek-where" });
+  const prev = el("button", { type: "button" }, "← Prev"), next = el("button", { type: "button" }, "Next →");
+  const tbody = el("tbody");
+  const draw = () => {
+    const p = pageOf(rows, page, PEEK_SIZE);
+    page = p.page;
+    tbody.replaceChildren(...p.rows.map((r) => bodyRow(r, cols, pageHref)));
+    if (!p.rows.length) tbody.append(el("tr", {}, el("td", { colspan: cols.length || 1 }, "none")));
+    where.textContent = `Rows ${p.first.toLocaleString("en-US")}–${p.last.toLocaleString("en-US")} of ${rows.length.toLocaleString("en-US")}`;
+    prev.disabled = p.page === 1;
+    next.disabled = p.page === p.pages;
+  };
+  const turn = (by) => {
+    page += by;
+    draw();
+    // A button that the last or first page disables gives focus to the other.
+    if (document.activeElement?.disabled) (by > 0 ? prev : next).focus();
+  };
+  prev.addEventListener("click", () => turn(-1));
+  next.addEventListener("click", () => turn(1));
+  draw();
+  area.replaceChildren(el("div", { class: "how-scroll tables-scroll" },
+    el("table", {}, el("thead", {}, el("tr", {}, ...cols.map((c) => el("th", {}, c)))), tbody)),
+  el("div", { class: "how-peek-pager" }, prev, where, next, open));
 }
 
 const STATUS = {

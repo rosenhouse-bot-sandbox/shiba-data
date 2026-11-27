@@ -1511,6 +1511,47 @@ async function openTables(p, path) {
 
 const bodyColumn = (p, col) => p.locator(`.tables-scroll tbody td[data-col="${col}"]`).allTextContents();
 
+const scope = (p, name, label) => p.locator(".how-rows", { has: p.locator(`.how-rows-head code:text-is("${name}")`) }).getByRole("radio", { name: label });
+const framed = (p, name) => p.locator(".how-rows", { has: p.locator(`.how-rows-head code:text-is("${name}")`) });
+
+test("pipeline view: a D1 table shows the cell's rows, or on asking its plan's or every plan's, in pages of 50", async () => {
+  const fresh = await newPage();
+  await serveTables(fresh);
+  await openHow(fresh, "main/H1036-153-0/ambulance/column-rules");
+  const facts = framed(fresh, "document_facts");
+  const cellRows = await facts.locator("tbody tr").count();
+  assert.ok(await scope(fresh, "document_facts", "This cell").isChecked());
+  await scope(fresh, "document_facts", "This plan").check();
+  await facts.locator(".how-peek-where", { hasText: "of 125" }).waitFor();
+  assert.equal(await facts.locator(".how-peek-where").textContent(), "Rows 1–50 of 125");
+  assert.equal(await facts.locator("tbody tr").count(), 50);
+  assert.deepEqual([...new Set(await facts.locator('td[data-col="plan_id"]').allTextContents())], ["H1036-153-0"]);
+  assert.equal(await facts.locator('td[data-col="page"] a').first().getAttribute("href"), `#/2027/plan/H1036-153-0/EOC/${TABLE_DATA[DEPLOYED].document_facts[1].page}`);
+  await facts.getByRole("button", { name: "Next →" }).click();
+  assert.equal(await facts.locator(".how-peek-where").textContent(), "Rows 51–100 of 125");
+  await scope(fresh, "document_facts", "All plans").check();
+  assert.equal(await facts.locator(".how-peek-where").textContent(), "Rows 1–50 of 250");
+  assert.equal(await facts.getByRole("link", { name: /Open in Tables/ }).getAttribute("href"), `#/2027/tables/${DEPLOYED}/document_facts`);
+  await scope(fresh, "document_facts", "This plan").check();
+  assert.equal(await facts.getByRole("link", { name: /Open in Tables/ }).getAttribute("href"), `#/2027/tables/${DEPLOYED}/document_facts/H1036-153-0`);
+  await scope(fresh, "document_facts", "This cell").check();
+  assert.equal(await facts.locator("tbody tr").count(), cellRows);
+  assert.equal(await facts.locator(".how-peek-where").count(), 0);
+  await fresh.close();
+});
+
+test("pipeline view: a D1 table that does not load says so, and a table with no trace offers no rows to ask for", async () => {
+  const fresh = await newPage();
+  await serveTables(fresh);
+  await openHow(fresh, "main/H1036-153-0/ambulance/column-rules");
+  await scope(fresh, "pbp_facts", "All plans").check();
+  await framed(fresh, "pbp_facts").locator(".how-none", { hasText: "did not load" }).waitFor();
+  await fresh.route("**/trace/2027/**", (route) => route.fulfill({ status: 404, body: "Not found" }));
+  await openHow(fresh, "main/H1036-153-0/ambulance/column-rules");
+  assert.equal(await fresh.getByRole("radio").count(), 0);
+  await fresh.close();
+});
+
 test("tables view: the Tables link opens the deployed build's first table in the pipeline's order", async () => {
   const fresh = await newPage();
   await serveTables(fresh);

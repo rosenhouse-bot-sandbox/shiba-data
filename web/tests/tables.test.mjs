@@ -61,6 +61,7 @@ test("pages hold 100 rows, and a page past the end shows the last page", () => {
   assert.deepEqual(pageOf(rows, 1), { page: 1, pages: 3, first: 1, last: 100, rows: rows.slice(0, 100) });
   assert.deepEqual(pageOf(rows, 9), { page: 3, pages: 3, first: 201, last: 250, rows: rows.slice(200) });
   assert.deepEqual(pageOf([], 1), { page: 1, pages: 1, first: 0, last: 0, rows: [] });
+  assert.deepEqual(pageOf(rows, 2, 50), { page: 2, pages: 5, first: 51, last: 100, rows: rows.slice(50, 100) });
 });
 
 test("CSV quotes values that need it", () => {

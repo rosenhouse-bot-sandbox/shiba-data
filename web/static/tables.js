@@ -52,11 +52,11 @@ export function sortRows(rows, col, direction) {
   return rows.map((r, i) => [values[i], r]).sort(([a], [b]) => !a || !b ? !a - !b : factor * order(a, b)).map(([, r]) => r);
 }
 
-export function pageOf(rows, page) {
-  const pages = Math.max(1, Math.ceil(rows.length / PAGE_SIZE));
+export function pageOf(rows, page, size = PAGE_SIZE) {
+  const pages = Math.max(1, Math.ceil(rows.length / size));
   const at = Math.min(Math.max(1, page), pages);
-  const start = (at - 1) * PAGE_SIZE;
-  return { page: at, pages, first: rows.length ? start + 1 : 0, last: Math.min(start + PAGE_SIZE, rows.length), rows: rows.slice(start, start + PAGE_SIZE) };
+  const start = (at - 1) * size;
+  return { page: at, pages, first: rows.length ? start + 1 : 0, last: Math.min(start + size, rows.length), rows: rows.slice(start, start + size) };
 }
 
 export const rowCount = (n) => `${n.toLocaleString("en-US")} ${n === 1 ? "row" : "rows"}`;
@@ -185,18 +185,7 @@ export function tablesView(at) {
     sortPick.querySelector("select").replaceChildren(el("option", { value: "" }, "table order"), ...shownCols.flatMap((c) => ["ascending", "descending"].map((d) =>
       el("option", { value: `${c} ${d}`, ...(view.sort?.col === c && view.sort.direction === d ? { selected: "" } : {}) },
         `${c} ${d === "ascending" ? "▲" : "▼"}`))));
-    tbody.replaceChildren(...page.rows.map((r) => {
-      const tr = el("tr");
-      // Only a row's first long value is a button, so a page of rows keeps few tab stops.
-      let button = null;
-      tr.append(...shownCols.map((c) => {
-        const value = r[c] ?? "", href = (c === "page" || c === "pdf_page") && value ? pageHref(r, value) : null;
-        const long = !href && value.length > LONG;
-        return el("td", { "data-col": c }, href ? el("div", {}, el("a", { href }, value))
-          : long && !button ? (button = more(tr, value)) : el("div", long ? { title: value } : {}, value));
-      }));
-      return tr;
-    }));
+    tbody.replaceChildren(...page.rows.map((r) => bodyRow(r, shownCols, pageHref)));
     if (!page.rows.length) tbody.append(el("tr", {}, el("td", { colspan: shownCols.length || 1 }, "No rows match.")));
     const of = filters.plan || filters.column || view.query.trim() ? ` of ${rows.length.toLocaleString("en-US")} match` : "";
     status.textContent = of ? `${all.length.toLocaleString("en-US")}${of}` : rowCount(all.length);
@@ -217,6 +206,20 @@ export function tablesView(at) {
       el("div", { class: "tables-scroll", role: "region", tabindex: "0", "aria-labelledby": captionId },
         el("table", {}, el("caption", { id: captionId }, `${table} rows`), thead, tbody)),
       el("div", { class: "tables-pager" }, prev, where, next)));
+}
+
+// A row of a table's values. A page value links to that page of the plan's PDF when pageHref gives a link.
+export function bodyRow(r, cols, pageHref) {
+  const tr = el("tr");
+  // Only a row's first long value is a button, so a page of rows keeps few tab stops.
+  let button = null;
+  tr.append(...cols.map((c) => {
+    const value = r[c] ?? "", href = (c === "page" || c === "pdf_page") && value ? pageHref(r, value) : null;
+    const long = !href && value.length > LONG;
+    return el("td", { "data-col": c }, href ? el("div", {}, el("a", { href }, value))
+      : long && !button ? (button = more(tr, value)) : el("div", long ? { title: value } : {}, value));
+  }));
+  return tr;
 }
 
 // A value longer than this shows its start, and a button shows the whole row's values.
