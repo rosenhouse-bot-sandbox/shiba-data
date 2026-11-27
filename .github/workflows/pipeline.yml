@@ -111,9 +111,11 @@ jobs:
           # Without every blob, keep only the saved answers, in git.
           if [ "${{ steps.upload.outcome }}" = success ]; then
             git add "data/$YEAR"
-            git rm -r -q --cached --ignore-unmatch "data/$YEAR/answers" "data/$YEAR/evaluations/*/answers"
+            python3 -I pipeline/store.py untrack "$YEAR"
           else
-            git add -f "data/$YEAR/answers"
+            # The lock must not name a pack that R2 lacks.
+            git checkout HEAD -- "data/$YEAR/lock.json" 2>/dev/null || rm -f "data/$YEAR/lock.json"
+            python3 -I pipeline/store.py unpacked "$YEAR" _work | xargs -r git add -f --
           fi
           git commit -m "Rebuild $YEAR in run $GITHUB_RUN_ID${CANDIDATE:+ with $CANDIDATE}" || exit 0
           git push "https://x-access-token:$GH_TOKEN@github.com/$GITHUB_REPOSITORY.git" "$branch"

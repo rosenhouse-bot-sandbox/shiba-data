@@ -54,7 +54,7 @@ jobs:
           git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
           git checkout -b "$branch"
           if [ -f "data/$YEAR/lock.json" ]; then git add "data/$YEAR/lock.json"; fi
-          git rm -r -q --cached --ignore-unmatch "data/$YEAR/answers" "data/$YEAR/evaluations/*/answers"
+          python3 -I pipeline/store.py untrack "$YEAR"
           git commit -m "Keep the saved answers of $YEAR in R2 packs" || exit 0
           git push "https://x-access-token:$GH_TOKEN@github.com/$GITHUB_REPOSITORY.git" "$branch"
           echo "::notice::Pushed $branch. Open a pull request from it."

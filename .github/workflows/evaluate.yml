@@ -81,7 +81,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY=$(printf %s "$CLOUDFLARE_API_TOKEN" | sha256sum | cut -c1-64)
           export AWS_SECRET_ACCESS_KEY
           echo "::add-mask::$AWS_SECRET_ACCESS_KEY"
-          python3 -I pipeline/store.py pack "$YEAR" _work > _blobs.txt
+          python3 -I pipeline/store.py pack "$YEAR" "$RUNNER_TEMP/tables" > _blobs.txt
           while read -r key path; do
             aws s3 cp "$path" "s3://pdxplans/$key" --only-show-errors < /dev/null
           done < _blobs.txt
@@ -97,9 +97,12 @@ jobs:
           if [ "${{ steps.upload.outcome }}" = success ]; then
             git add "data/$YEAR/evaluations"
             if [ -f "data/$YEAR/lock.json" ]; then git add "data/$YEAR/lock.json"; fi
-            git rm -r -q --cached --ignore-unmatch "data/$YEAR/answers" "data/$YEAR/evaluations/*/answers"
+            python3 -I pipeline/store.py untrack "$YEAR"
           else
-            git add -f "data/$YEAR/evaluations"
+            git add "data/$YEAR/evaluations"
+            # The lock must not name a pack that R2 lacks.
+            git checkout HEAD -- "data/$YEAR/lock.json" 2>/dev/null || rm -f "data/$YEAR/lock.json"
+            python3 -I pipeline/store.py unpacked "$YEAR" "$RUNNER_TEMP/tables" | xargs -r git add -f --
           fi
           git commit -m "Save the evaluation answers of run $GITHUB_RUN_ID" || exit 0
           git push "https://x-access-token:$GH_TOKEN@github.com/$GITHUB_REPOSITORY.git" "$branch"
