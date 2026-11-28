@@ -94,7 +94,7 @@ export const NODES = {
       rows: [["emergency", "outside_us", "", "$115", "PBP"], ["emergency", "outside_us", "urgently needed services", "$40", "PBP"]] } },
   caveats: { col: 2, row: 7, store: "d1", label: "caveats",
     table: { name: "caveats", note: "the rule wrote no caveat", cols: ["sheet", "plan_id", "column", "kind", "comment"], rows: [] } },
-  notes: { col: 2, row: 8, store: "git", label: "comments", git: "comments.csv",
+  notes: { col: 0, row: 8, store: "git", label: "comments", git: "comments.csv",
     table: { name: "comments", note: "the cell has no note", cols: ["sheet", "plan_id", "column", "kind", "comment"], rows: [] } },
   site: { col: 1, row: 9, store: "web", label: "pdxplans.org",
     text: { name: "pdxplans.org", note: "after a volunteer clicks the cell",
