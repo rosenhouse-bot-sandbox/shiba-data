@@ -57,7 +57,7 @@ def documents(plans, found, links, year):
     """Prints a warning for each plan left without an SB or EOC."""
     ids = {p["plan_id"] for p in plans}
     for r in found + links:
-        if r["kind"] not in KINDS + ("RIDER",) or not set(r["plan_ids"].split(";")) <= ids:
+        if r["kind"] not in KINDS + ("RIDER", "DENTAL") or not set(r["plan_ids"].split(";")) <= ids:
             raise SystemExit(f"A row names an unknown kind or plan: {r}")
     offered = offers(plans, found, links, year)
     rows = [dict(r, plan_ids=";".join(gives)) for _, r, gives in offered if gives]

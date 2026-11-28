@@ -97,11 +97,24 @@ def page_text(pages):
     return "\n\n".join(f"=====PAGE {p}=====\n{pages[p].rstrip()}" for p in sorted(pages))
 
 
+# Kinds about one benefit, by name. Only the groups a version names read them, with only the version's note for the
+# kind, and their tasks show every page.
+ONE_BENEFIT_KINDS = {"DENTAL": "Dental Benefit Details"}
+
+
+def doc_notes(doc, groups, notes, plan_notes, plan_ids, kinds):
+    """The notes a document's task shows: a kind about one benefit shows only the version's note for that kind."""
+    if doc["kind"] in ONE_BENEFIT_KINDS:
+        return dict.fromkeys(groups, kinds[doc["kind"]])
+    return for_plans(notes, plan_notes, plan_ids)
+
+
 def fill(template, doc, plan_rows, data, **values):
     names = "\n".join(f"- {p}: {plan_rows.get(p, {}).get('plan_name', '')}" for p in doc["plan_ids"])
     orgs = sorted({plan_rows[p]["organization"] for p in doc["plan_ids"] if p in plan_rows} & set(CARRIERS))
-    notes = "".join(f"\nSeen in {o} documents: {CARRIERS[o]}" for o in orgs)
-    values = dict(KIND=doc["kind"], PLANS=names, NOTES=notes, YEAR=str(years.config(data)["year"]), **values)
+    notes = "".join(f"\nSeen in {o} documents: {CARRIERS[o]}" for o in orgs if doc["kind"] not in ONE_BENEFIT_KINDS)
+    values = dict(KIND=ONE_BENEFIT_KINDS.get(doc["kind"], doc["kind"]), PLANS=names, NOTES=notes,
+                  YEAR=str(years.config(data)["year"]), **values)
     with open(f"{HERE}/{template}") as f:
         text = f.read()
     for k, v in values.items():
@@ -141,7 +154,7 @@ def task(doc, plan_rows, pages, group, data, failed=(), known=None, plan_ids=(),
                      "Code keeps the facts that passed. Reply with fixed versions of only these answers, "
                      "and leave out any you cannot fix.\n\n"
                      + "\n".join(f"- {printable(a)}: {why}" for a, why in failed))
-    parts.append("## Pages\n\n" + page_text(shown_pages(pages, group, after, find)))
+    parts.append("## Pages\n\n" + page_text(pages if doc["kind"] in ONE_BENEFIT_KINDS else shown_pages(pages, group, after, find)))
     return "\n\n".join(parts) + "\n"
 
 
@@ -327,17 +340,19 @@ def write_outcomes(out_dir, outcomes):
         json.dump(outcomes, f, indent=1, ensure_ascii=False)
 
 
-def read(work, out_dir, group, data=DATA, ids=None, notes={}, find=(), plan_notes={}):
-    """Writes a task for each document that mentions the group, or for those of them named in ids."""
+def read(work, out_dir, group, data=DATA, ids=None, notes={}, find=(), plan_notes={}, kinds={}):
+    """Writes a task for each document that mentions the group, or for those of them named in ids. It reads a kind
+    about one benefit only when kinds gives its note."""
     os.makedirs(out_dir, exist_ok=True)
     plan_rows = plans(data)
     for doc in documents(data):
-        if ids is not None and doc["id"] not in ids:
+        if (ids is not None and doc["id"] not in ids) or (doc["kind"] in ONE_BENEFIT_KINDS and doc["kind"] not in kinds):
             continue
         pages = Doc(work, doc["id"]).pages("layout")
-        if relevant(pages, group, find):
+        if doc["kind"] in ONE_BENEFIT_KINDS or relevant(pages, group, find):
             with open(f"{out_dir}/{doc['id']}.md", "w") as f:
-                f.write(task(doc, plan_rows, pages, group, data, notes=for_plans(notes, plan_notes, doc["plan_ids"]), find=find))
+                f.write(task(doc, plan_rows, pages, group, data, find=find,
+                             notes=doc_notes(doc, [group], notes, plan_notes, doc["plan_ids"], kinds)))
 
 
 def reread(work, out_dir, group, plan_ids, known, data=DATA, notes={}, plan_notes={}, plan_after={}, find=()):
@@ -346,7 +361,7 @@ def reread(work, out_dir, group, plan_ids, known, data=DATA, notes={}, plan_note
     os.makedirs(out_dir, exist_ok=True)
     plan_rows = plans(data)
     for doc in documents(data):
-        mine = [p for p in doc["plan_ids"] if p in plan_ids]
+        mine = [p for p in doc["plan_ids"] if p in plan_ids and doc["kind"] not in ONE_BENEFIT_KINDS]
         pages = Doc(work, doc["id"]).pages("layout") if mine else {}
         if mine and relevant(pages, group, find):
             theirs = [f for f in known if f["doc_sha"] == doc["sha256"] and f["plan_id"] in mine]
@@ -356,7 +371,7 @@ def reread(work, out_dir, group, plan_ids, known, data=DATA, notes={}, plan_note
 
 
 def extract_facts(work, answers_dir, group, out, data=DATA, merge=False, notes={}, zero=ZERO_GROUPS, plan_notes={},
-                  plan_after={}, reimburses=(), find=(), no_cost=NO_COST):
+                  plan_after={}, reimburses=(), find=(), no_cost=NO_COST, kinds={}):
     plan_rows, found, retries, outcomes = plans(data), [], 0, []
     for doc in documents(data):
         first = f"{answers_dir}/{doc['id']}.json"
@@ -375,7 +390,8 @@ def extract_facts(work, answers_dir, group, out, data=DATA, merge=False, notes={
         if failed:
             named_plans = {a.get("plan_id") for a, _ in failed if isinstance(a, dict) and isinstance(a.get("plan_id"), str)}
             with open(f"{answers_dir}/{doc['id']}.retry.md", "w") as f:
-                f.write(task(doc, plan_rows, pages, group, data, failed, notes=for_plans(notes, plan_notes, named_plans),
+                f.write(task(doc, plan_rows, pages, group, data, failed,
+                             notes=doc_notes(doc, [group], notes, plan_notes, named_plans, kinds),
                              after=following(plan_after, named_plans), find=find))
             retries += 1
         found += got
@@ -385,7 +401,7 @@ def extract_facts(work, answers_dir, group, out, data=DATA, merge=False, notes={
     print(len(found), "facts;", retries, "retry tasks")
 
 
-def verify(work, facts_path, out_dir, data=DATA, known=(), notes={}, after={}, before={}, plan_notes={}):
+def verify(work, facts_path, out_dir, data=DATA, known=(), notes={}, after={}, before={}, plan_notes={}, kinds={}):
     """Known facts are not checked again, but help make decoys."""
     os.makedirs(out_dir, exist_ok=True)
     with open(facts_path) as f:
@@ -401,7 +417,8 @@ def verify(work, facts_path, out_dir, data=DATA, known=(), notes={}, after={}, b
         rnd.shuffle(mixed)
         with open(f"{out_dir}/v-{doc['id']}.md", "w") as f:
             f.write(verifier_task(doc, plan_rows, Doc(work, doc["id"]).pages("layout"), mixed, data,
-                                  for_plans(notes, plan_notes, {f["plan_id"] for f in mine}), after, before))
+                                  doc_notes(doc, {f["benefit"].split(".")[0] for f in mine}, notes, plan_notes,
+                                            {f["plan_id"] for f in mine}, kinds), after, before))
         items += [dict(c, task=doc["id"]) for c in mixed]
     with open(f"{out_dir}/items.json", "w") as f:
         json.dump(items, f, indent=1)

@@ -28,7 +28,7 @@ CREATE TABLE plan (
 CREATE TABLE document (
   url       TEXT PRIMARY KEY,
   position  INTEGER NOT NULL UNIQUE,
-  kind      TEXT NOT NULL CHECK (kind IN ('SB', 'EOC', 'RIDER')),
+  kind      TEXT NOT NULL CHECK (kind IN ('SB', 'EOC', 'RIDER', 'DENTAL')),
   found_via TEXT NOT NULL
 );
 

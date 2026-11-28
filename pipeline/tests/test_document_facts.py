@@ -34,6 +34,32 @@ class StepTest(StepsTest):
                          [("copay", "$0-$40", "EOC"), ("covered", "", "EOC")])
         self.assertEqual(asked, [("read", "r", "high"), ("read", "r", "high"), ("check", "v", "low")])
 
+    def test_a_version_names_the_groups_that_read_a_kind_about_one_benefit_and_its_note(self):
+        dental = self.add_dental_details().name[:-3]
+        covered = answer(benefit="dental.comprehensive", covered_by="supplemental", cost_kind="covered", amount="",
+                         condition="teledentistry", page=2, quotes=["D9995 Teledentistry"])
+        for kinds, read in (({}, False), ({"dental": {"DENTAL": "Kind note."}}, True)):
+            prompts = {}
+
+            def fake(task_dir, model, effort):
+                for task in glob.glob(f"{task_dir}/*.md"):
+                    name = os.path.basename(task)
+                    prompts[f"{os.path.basename(task_dir)}/{name}"] = text = pathlib.Path(task).read_text()
+                    reply = ([{"id": n, "ok": True} for n in range(text.count('{"id": '))] if name.startswith("v-")
+                             else [] if ".retry" in name else [covered, dict(covered, quotes=["not on the page"])])
+                    with open(task[:-3] + ".json", "w") as f:
+                        json.dump(reply, f)
+
+            version = dict(groups=("dental",), reader=("r", "high"), verifier=("v", "low"), kinds=kinds,
+                           notes={"dental": "Group note."}, plan_notes={"dental": {"H1036-306-0": "Plan note."}})
+            with mock.patch.dict(document_facts.VERSIONS, {9: version}):
+                document_facts.step(self.data, self.work, self.dir, fake, 9)
+            mine = {name: text for name, text in prompts.items() if dental in name}
+            self.assertEqual(sorted(mine), [f"check/v-{dental}.md", f"read/{dental}.md", f"read/{dental}.retry.md"]
+                             if read else [], kinds)
+            self.assertEqual([n for n, t in mine.items() if "Kind note." not in t or "Group note." in t or "Plan note." in t], [])
+            self.assertEqual([n for n, t in prompts.items() if n not in mine and "Group note." not in t], [])
+
     def test_a_versions_notes_reach_every_prompt(self):
         with open(self.data / "generated" / "documents_checked.csv", "w") as f:
             f.write(f"plan_ids,kind,sha256\nH1036-306-0;H1036-307-0,EOC,{SHA}\n")
