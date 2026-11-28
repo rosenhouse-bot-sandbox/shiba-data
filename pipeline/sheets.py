@@ -13,6 +13,7 @@ PRESENTED = "generated/presented.csv"
 NOTE_COLUMNS = ["sheet", "plan_id", "column", "kind", "comment", "url", "pdf_page", "quote"]
 COMMENTS = "comments.csv"
 CAVEATS = "generated/caveats.csv"
+FINAL_CHART = "final_chart.csv"
 # Why the site leaves out a citation.
 NOT_SB_CITES_CELL = "not_sb_cites_cell"
 

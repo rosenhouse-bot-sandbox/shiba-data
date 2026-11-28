@@ -22,6 +22,7 @@ It then reads facts into `machine/document_facts.csv` from the saved answers, wh
 
 Web search did not index any 2027 plan document. The documents were found as follows.
 `found.csv` records the browser finds. `links.csv` transcribes the Links sheet from methods doc Appendix A.
+`final_chart.csv` transcribes the prices in SHIBA's final 2027 chart for the main sheet.
 
 | Carriers | How |
 |---|---|

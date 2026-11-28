@@ -2001,6 +2001,9 @@ VERSIONS[34] = {}
 VERSIONS[35] = {}
 # Version 36 names the only comprehensive dental services that a plan's Dental Benefit Details lists.
 VERSIONS[36] = {}
+# Version 37 writes a contradiction note where a main cell lacks a price the final chart shows.
+VERSIONS[37] = {}
+CONTRADICTIONS_SINCE = 37
 # The version that first presents each later column. Earlier versions hold its cells.
 SINCE = {("dvha", "C_premium"): 3, ("dvha", "G_vision"): 4, ("dvha", "H_hearing"): 4, ("dvha", "E_optional_packages"): 5,
          ("dvha", "F_dental"): 6, ("dvha", "I_alt_care_otc_travel"): 6, ("dvha", "J_extra_benefits"): 6,
@@ -2064,6 +2067,43 @@ def conditional(value, cited):
 CAVEATS = {("main", "K_tests_labs"): genetic_labs} | {("main", c): conditional for c, r in COLUMNS.items() if getattr(r, "dot", False)}
 
 
+TOKEN = re.compile(r"\$[\d,]+(?:\.\d+)?|\d+%")
+
+
+def chart_lacks(value, chart_value):
+    """The chart's prices that value neither shows nor spans with a range of the same kind."""
+    have = set(TOKEN.findall(value))
+    spans = re.findall(r"(\$[\d,]+|\d+%)-(\$[\d,]+|\d+%)", value)
+
+    def number(token):
+        return float(token.strip("$%").replace(",", ""))
+
+    def inside(token):
+        unit = token[-1] == "%"
+        return token in ("$0", "0%") and have & {"$0", "0%"} or any(
+            (a[-1] == "%") == unit == (b[-1] == "%") and number(a) <= number(token) <= number(b) for a, b in spans)
+    return sorted(t for t in set(TOKEN.findall(chart_value)) - have if not inside(t))
+
+
+# The halves of a "tests/labs" cell: each one's name, and whether a cited fact backs it.
+HALVES = (("tests", lambda f: not kin(f["benefit"], "tests.lab")), ("labs", lambda f: kin(f["benefit"], "tests.lab")))
+
+
+def contradiction(column, value, chart_value, cited):
+    """(text, fact) naming the final chart's prices that the cell's in-network prices lack, or None.
+    The fact is one the cell cites for the flagged half, if any."""
+    split = column == "K_tests_labs" and value.count("/") == chart_value.count("/") == 1
+    pairs = (zip(HALVES, value.split("/"), chart_value.split("/")) if split
+             else [((None, lambda f: True), value, chart_value)])
+    for (half, backs), v, c in pairs:
+        if missing := chart_lacks(v, c):
+            facts_ = [f for f in cited if backs(f)] or cited
+            where_ = f" for {half}" if half else ""
+            return (f"The volunteer chart shows {c.strip()}{where_}, where this cell shows {v.strip()}. "
+                    f"The plan's documents give no in-network {' or '.join(missing)}{where_}."), facts_[0]
+    return None
+
+
 def caveats(sheet, column, value, cited, version):
     """(text, fact) explaining a line from the facts it cites, or None."""
     template = CAVEATS.get((sheet, column)) if version >= CAVEATS_SINCE else None
@@ -2106,18 +2146,32 @@ def citation_rows(data, version=None):
 
 
 def caveat_rows(data, version=None):
-    """One note row per cell that a caveat explains, its lines' caveats joined."""
+    """One note row per cell that a caveat or a contradiction of the final chart explains, its texts joined.
+    A contradiction comes first, and cites a fact behind the part of the cell it names."""
     version = version or current(data)
     url = {d["sha256"]: d["url"] for d in sheets.rows(data / "generated" / "documents_checked.csv") if d["sha256"]}
-    out = {}
+
+    def note(key, kind, text, f):
+        return dict(zip(("sheet", "plan_id", "column"), key), kind=kind, comment=text,
+                    url=url[f["doc_sha"]], pdf_page=f["page"], quote=json.loads(f["quotes"])[0])
+    out, cells = {}, collections.defaultdict(lambda: ([], []))
     for sheet, plan_id, column, _, value, cited in presented_lines(data, version):
+        key = (sheet, plan_id, column)
+        cells[key][0].append(value)
+        cells[key][1].extend(f for f in cited if presents([f]))
         if got := caveats(sheet, column, value, cited, version):
             text, f = got
-            if (sheet, plan_id, column) in out:
-                out[sheet, plan_id, column]["comment"] += " " + text
+            if key in out:
+                out[key]["comment"] += " " + text
                 continue
-            out[sheet, plan_id, column] = dict(sheet=sheet, plan_id=plan_id, column=column, kind="caveat", comment=text,
-                                               url=url[f["doc_sha"]], pdf_page=f["page"], quote=json.loads(f["quotes"])[0])
+            out[key] = note(key, "caveat", text, f)
+    chart = data / sheets.FINAL_CHART
+    for r in sheets.rows(chart) if version >= CONTRADICTIONS_SINCE and chart.exists() else []:
+        key = ("main", r["plan_id"], r["column"])
+        values, cited = cells.get(key, ([], []))
+        if cited and (got := contradiction(r["column"], " | ".join(values), r["chart"], cited)):
+            text, f = got
+            out[key] = note(key, "contradiction", f"{text} {out[key]['comment']}" if key in out else text, f)
     return list(out.values())
 
 

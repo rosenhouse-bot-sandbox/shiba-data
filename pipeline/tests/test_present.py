@@ -1,4 +1,4 @@
-import csv, json, os, pathlib, re, sys, tempfile, unittest
+import csv, json, os, pathlib, sys, tempfile, unittest
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -2423,53 +2423,47 @@ class EveryPriceChartTest(unittest.TestCase):
         self.assertEqual(chart("G_specialist", priced("visits", "telehealth", "$10")), [""])
 
 
-TOKEN = re.compile(r"\$[\d,]+(?:\.\d+)?|\d+%")
-
-
-def lacks(value, chart_value):
-    """The chart's prices that value neither shows nor spans with a range of the same kind."""
-    have = set(TOKEN.findall(value))
-    spans = re.findall(r"(\$[\d,]+|\d+%)-(\$[\d,]+|\d+%)", value)
-
-    def number(token):
-        return float(token.strip("$%").replace(",", ""))
-
-    def inside(token):
-        unit = token[-1] == "%"
-        return token in ("$0", "0%") and have & {"$0", "0%"} or any(
-            (a[-1] == "%") == unit == (b[-1] == "%") and number(a) <= number(token) <= number(b) for a, b in spans)
-    return sorted(t for t in set(TOKEN.findall(chart_value)) - have if not inside(t))
-
-
-# The chart's prices that the plan documents contradict. Each cell's contradiction note explains why.
-CHART_ERRORS = [("H5439-019-0", "K_tests_labs", " $0-20%")]
+# The main cells that lack a price the final chart shows, because the plan documents contradict it.
+CHART_ERRORS = [("H5439-019-0", "K_tests_labs")]
 
 
 class FinalChartPricesTest(unittest.TestCase):
     def test_lacks_a_price_outside_every_range(self):
-        self.assertEqual(lacks("$0-$145 | $345", "$40 $330 $345 0%"), ["$330"])
-        self.assertEqual(lacks("$0-20%", "$10 20%"), ["$10"])
+        self.assertEqual(present.chart_lacks("$0-$145 | $345", "$40 $330 $345 0%"), ["$330"])
+        self.assertEqual(present.chart_lacks("$0-20%", "$10 20%"), ["$10"])
+
+    def test_a_contradiction_names_the_half_and_cites_a_fact_behind_it(self):
+        test = extra("tests.diagnostic", cost_kind="coinsurance", amount="20%", page="92")
+        lab = extra("tests.lab", cost_kind="copay", amount="$10", page="90")
+        self.assertEqual(present.contradiction("K_tests_labs", "0%-20%/$0-$10", "$0/$0-20%", [test, lab]), (
+            "The volunteer chart shows $0-20% for labs, where this cell shows $0-$10. "
+            "The plan's documents give no in-network 20% for labs.", lab))
+        self.assertEqual(present.contradiction("I_outpatient_surgery", "$0-$145 | $345", "$330 $345", [test])[0],
+                         "The volunteer chart shows $330 $345, where this cell shows $0-$145 | $345. "
+                         "The plan's documents give no in-network $330.")
+        self.assertIsNone(present.contradiction("K_tests_labs", "$0/$0-$50", "$0/$0-$10", [lab]))
+
+    def test_a_contradiction_comes_before_the_cells_caveat_and_needs_version_37(self):
+        test = extra("tests.diagnostic", cost_kind="coinsurance", amount="20%", doc_sha="d", page="92", quotes='["20% x"]')
+        lab = dict(test, benefit="tests.lab", cost_kind="copay", amount="$10", page="90", quotes='["$10 copay", "x"]')
+        lines = [("main", "H1-001-0", "K_tests_labs", "", "0%-20%/$0-$10", [test, lab])]
+        with tempfile.TemporaryDirectory() as tmp, mock.patch.object(present, "presented_lines", lambda data, version: lines), \
+                mock.patch.object(present, "caveats", lambda *a: ("Labs caveat.", test)):
+            os.makedirs(f"{tmp}/generated")
+            pathlib.Path(tmp, "generated/documents_checked.csv").write_text("sha256,url\nd,https://eoc\n")
+            self.assertEqual([r["kind"] for r in present.caveat_rows(pathlib.Path(tmp), 37)], ["caveat"])
+            pathlib.Path(tmp, sheets.FINAL_CHART).write_text("plan_id,column,chart\nH1-001-0,K_tests_labs,$0/$0-20%\n")
+            self.assertEqual(present.caveat_rows(pathlib.Path(tmp), 37), [dict(
+                sheet="main", plan_id="H1-001-0", column="K_tests_labs", kind="contradiction",
+                comment="The volunteer chart shows $0-20% for labs, where this cell shows $0-$10. "
+                        "The plan's documents give no in-network 20% for labs. Labs caveat.",
+                url="https://eoc", pdf_page="90", quote="$10 copay")])
+            self.assertEqual([r["kind"] for r in present.caveat_rows(pathlib.Path(tmp), 36)], ["caveat"])
 
     @built.check
-    def test_every_main_cell_shows_every_price_the_final_chart_shows(self):
-        data = years.data_dir(YEAR)
-        path = pathlib.Path(__file__).parent / "fixtures" / "final_chart_prices_2027.csv"
-        with path.open(newline="") as f:
-            charted = list(csv.DictReader(f))
-        shown = {c: present.lines(data, c, sheet="main", version=max(present.VERSIONS)) for c in {r["column"] for r in charted}}
-        missing = []
-        for r in charted:
-            value = " | ".join(v for v, _ in shown[r["column"]][r["plan_id"]])
-            pairs = (zip(value.split("/"), r["chart"].split("/")) if value.count("/") == r["chart"].count("/") == 1
-                     else [(value, r["chart"])])
-            missing += [(r["plan_id"], r["column"], c) for v, c in pairs if lacks(v, c)]
-        self.assertEqual(missing, CHART_ERRORS)
-
-    def test_each_chart_error_has_a_contradiction_note(self):
-        with (years.data_dir(YEAR) / "comments.csv").open(newline="") as f:
-            contradicted = {(c["plan_id"], c["column"]) for c in csv.DictReader(f)
-                            if c["sheet"] == "main" and c["kind"] == "contradiction"}
-        self.assertEqual([e[:2] for e in CHART_ERRORS if e[:2] not in contradicted], [])
+    def test_only_the_charts_errors_get_contradictions(self):
+        rows = present.caveat_rows(years.data_dir(YEAR), 37)
+        self.assertEqual([(r["plan_id"], r["column"]) for r in rows if r["kind"] == "contradiction"], CHART_ERRORS)
 
 
 def segments(value):
@@ -2488,7 +2482,7 @@ class LostPricesTest(unittest.TestCase):
             for plan, lines in old.items():
                 for (before, _), (after, _) in zip(lines, new[plan]):
                     for a, b in zip(segments(before), segments(after)):
-                        if lacks(b, a):
+                        if present.chart_lacks(b, a):
                             lost.append((plan, column, a, b))
         self.assertEqual(lost, [])
 
