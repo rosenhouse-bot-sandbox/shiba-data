@@ -51,13 +51,14 @@ def group_facts(texts, work, group, answer, v, data):
     read, check = fresh(f"{work}/{group}/read"), fresh(f"{work}/{group}/check")
     found = f"{read}/facts.json"
     notes, find, plan_notes = v.get("notes", {}), v.get("find", {}).get(group, ()), v.get("plan_notes", {})
-    extract.read(texts, read, group, data, notes=notes, find=find, plan_notes=plan_notes)
+    kinds = v.get("kinds", {}).get(group, {})
+    extract.read(texts, read, group, data, notes=notes, find=find, plan_notes=plan_notes, kinds=kinds)
     for _ in range(2):
         answer(read, *v["reader"])
         extract.extract_facts(texts, read, group, found, data, merging(v, group), notes, zero=zero(v), find=find,
-                              plan_notes=plan_notes)
+                              plan_notes=plan_notes, kinds=kinds)
     extract.verify(texts, found, check, data, notes=review.checker_notes(v), after=v.get("check_after", {}),
-                   before=v.get("check_before", {}), plan_notes=plan_notes)
+                   before=v.get("check_before", {}), plan_notes=plan_notes, kinds=kinds)
     answer(check, *v["verifier"])
     extract.accept(check, f"{check}/accepted.csv")
     accepted = facts.read(f"{check}/accepted.csv")
@@ -425,3 +426,11 @@ VERSIONS[38] = dict(
         "vision": {"H5216-428-2": "Page 85 of the Evidence of Coverage gives the in-network routine eye exam a `$75 "
                                   "allowance`: a `vision.exam` max $75 fact with `limit` `per year`."}},
     targets={"vision": ("H5216-428-2",)})
+BRONZE_DENTAL = ("This document lists by code every dental service the plan covers, and gives no prices. Each heading of "
+                 "services that are not diagnostic or preventive is one `dental.comprehensive` `supplemental` `covered` "
+                 "fact with `network` `any`, `condition` naming the services under it in plain words, such as "
+                 "`teledentistry`, and the heading as its quote, such as `Adjunctive General Services`. No other fact "
+                 "comes from this document.")
+# Version 39 reads the comprehensive dental services that Wellcare's Bronze Dental Benefit Details lists.
+VERSIONS[39] = dict(VERSIONS[38], kinds={"dental": {"DENTAL": BRONZE_DENTAL}},
+                    targets={"dental": ("H5439-015-0", "H5439-019-0", "H6815-038-0")})

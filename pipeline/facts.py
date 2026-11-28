@@ -245,8 +245,8 @@ COST_KINDS = {
 }
 VOCABULARIES = {"benefit": BENEFITS, "setting": SETTINGS, "network": NETWORKS, "covered_by": COVERED_BY,
                 "cost_kind": COST_KINDS}
-SOURCES_BEST_FIRST = ("EOC", "RIDER", "SB", "PBP", "Landscape")
-DOCUMENTS = ("EOC", "RIDER", "SB")
+SOURCES_BEST_FIRST = ("EOC", "RIDER", "SB", "DENTAL", "PBP", "Landscape")
+DOCUMENTS = ("EOC", "RIDER", "SB", "DENTAL")
 PLAN_ID = r"[HRS]\d{4}-\d{3}-\d"
 
 DOLLARS = r"\$(?:0|[1-9]\d{0,2}(?:,\d{3})*)(?:\.\d\d)?"

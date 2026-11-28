@@ -36,6 +36,9 @@ class CheckTest(unittest.TestCase):
     def test_accepts_a_good_fact(self):
         self.assertEqual(facts.check(fact()), [])
 
+    def test_accepts_a_fact_from_dental_benefit_details(self):
+        self.assertEqual(facts.check(fact(source="DENTAL")), [])
+
     def test_accepts_amount_shapes(self):
         for kind, amount in [("copay", "$0"), ("copay", "$1,250.50"), ("copay", "$100 or $200"),
                              ("copay", "$0-$100 or $200-$300"), ("coinsurance", "20%"), ("coinsurance", "20.5%"),

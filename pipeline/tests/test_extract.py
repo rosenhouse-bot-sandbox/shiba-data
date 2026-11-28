@@ -347,6 +347,35 @@ class StepsTest(unittest.TestCase):
         self.step(extract.read, self.work, self.dir, "imaging", ids=set())
         self.assertEqual(os.listdir(self.dir), [])
 
+    def add_dental_details(self, text="Schedule of Benefits"):
+        dental = "ab" * 8
+        with open(self.data / "generated" / "documents_checked.csv", "a") as f:
+            f.write(f"H1036-306-0,DENTAL,{dental * 4}\n")
+        for sub in ("text", "layout"):
+            (self.work / sub / f"{dental}.txt").write_text(f"=====PAGE 1=====\n{text}\n\n=====PAGE 2=====\nD9995 Teledentistry\n")
+        (self.work / "items" / f"{dental}.json").write_text(json.dumps(
+            {"1": {"strs": [text], "lefts": [0]}, "2": {"strs": ["D9995 Teledentistry"], "lefts": [0]}}))
+        return self.dir / f"{dental}.md"
+
+    def test_only_the_groups_a_version_names_read_a_kind_about_one_benefit(self):
+        task = self.add_dental_details()
+        self.step(extract.read, self.work, self.dir, "dental")
+        self.assertFalse(task.exists())
+        self.step(extract.read, self.work, self.dir, "dental", notes={"dental": "Group note."},
+                  plan_notes={"dental": {"H1036-306-0": "Plan note."}}, kinds={"DENTAL": "Kind note."})
+        text = task.read_text()
+        self.assertIn("a plan's Dental Benefit Details for plan year", text)
+        self.assertIn("Kind note.", text)
+        self.assertNotIn("Group note.", text)
+        self.assertNotIn("Plan note.", text)
+        self.assertNotIn("Seen in Humana documents", text)
+        self.assertIn("D9995 Teledentistry", text)
+
+    def test_reread_skips_a_kind_about_one_benefit(self):
+        task = self.add_dental_details("Covered dental benefits")
+        self.step(extract.reread, self.work, self.dir, "dental", plan_ids={"H1036-306-0"}, known=[])
+        self.assertFalse(task.exists())
+
     def known(self, **changes):
         row = {c: "" for c in facts.COLUMNS}
         row.update(plan_id="H1036-306-0", benefit="imaging.xray", setting="any", network="in", covered_by="medicare",

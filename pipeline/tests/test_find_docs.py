@@ -55,14 +55,15 @@ class DocumentsTest(unittest.TestCase):
         return [(d["plan_ids"], d["kind"], d["url"]) for d in docs], out.getvalue()
 
     def test_browser_finds_beat_the_links_sheet_which_beats_templates(self):
-        found = [doc("H1036-153-0", "SB", "found-sb"), doc("H1036-153-0", "RIDER", "found-rider")]
+        found = [doc("H1036-153-0", "SB", "found-sb"), doc("H1036-153-0", "RIDER", "found-rider"),
+                 doc("H1036-153-0", "DENTAL", "found-dental")]
         links = [doc("H1036-153-0", "SB", "link-sb"),
                  doc("H2056-003-0", "SB", "aetna-sb"), doc("H2056-003-0", "EOC", "aetna-eoc"),
                  doc("H7006-018-0;H7006-021-0", "SB", "atrio-sb"), doc("H7006-018-0", "EOC", "atrio-eoc-018"),
                  doc("H7006-021-0", "EOC", "atrio-eoc-021")]
         docs, warned = self.documents(found, links)
         self.assertEqual([u for _, _, u in docs], [
-            "found-sb", "found-rider", "aetna-sb", "aetna-eoc", "atrio-sb", "atrio-eoc-018", "atrio-eoc-021",
+            "found-sb", "found-rider", "found-dental", "aetna-sb", "aetna-eoc", "atrio-sb", "atrio-eoc-018", "atrio-eoc-021",
             "https://assets.humana.com/is/content/humana/H1036153000EOC27pdf"])
         self.assertEqual(warned, "")
         docs, _ = self.documents([], [doc("H1036-153-0", "EOC", "link-eoc")])
@@ -88,13 +89,15 @@ class DocumentsTest(unittest.TestCase):
 
 class Rebuild2027Test(unittest.TestCase):
     @built.check
-    def test_lists_the_documents_the_last_download_checked(self):
+    def test_lists_the_documents_the_last_download_checked_and_new_ones(self):
         gen = years.data_dir(2027) / "generated"
         with open(gen / "documents.csv", newline="") as f:
             listed = list(csv.DictReader(f))
         with open(gen / "documents_checked.csv", newline="") as f:
-            checked = [{k: r[k] for k in listed[0]} for r in csv.DictReader(f)]
-        self.assertEqual(listed, checked)
+            checked = list(csv.DictReader(f))
+        # A Pipeline run on main downloads the documents that found.csv or links.csv adds.
+        urls = {r["url"] for r in checked}
+        self.assertEqual([r for r in listed if r["url"] in urls], [{k: r[k] for k in listed[0]} for r in checked])
 
 
 if __name__ == "__main__":
