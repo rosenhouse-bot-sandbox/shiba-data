@@ -1223,6 +1223,29 @@ class DentalTest(unittest.TestCase):
             self.assertEqual(column(limited, perio, other)[0][0], "COMP $0 for periodontal maintenance", other)
         self.assertEqual(column(limited, perio, limit, dict(limit, amount="2"))[0][0], "COMP $0 for periodontal maintenance")
 
+    def test_dental_benefit_details_name_the_only_comprehensive_services(self):
+        adjunctive = routine("dental.comprehensive", quotes='["Adjunctive General Services In-Network $0 copay"]')
+        listed = routine("dental.comprehensive", "covered", "", condition="teledentistry", network="any", source="DENTAL",
+                         quotes='["Adjunctive General Services"]')
+
+        def comp(*found, listed_services=True):
+            return present.dental("Wellcare", [adjunctive, *found], broad_services=True, listed_services=listed_services)[0]
+        self.assertEqual(comp(listed), ("COMP $0 (teledentistry only)", [adjunctive, listed]))
+        self.assertEqual(comp(listed, dict(listed, condition="nitrous oxide"))[0],
+                         "COMP $0 (nitrous oxide, teledentistry only)")
+        self.assertEqual(comp(listed, listed_services=False)[0], "COMP $0 for adjunctive services")
+        self.assertEqual(comp(listed, dict(listed, plan_id="H0000-000-0"))[0], "COMP $0 (teledentistry only)")
+        for ignored in (dict(listed, source="EOC"), dict(listed, cost_kind="not_covered"), dict(listed, condition=""),
+                        dict(listed, benefit="dental.preventive"), dict(listed, package="Dental Plus"),
+                        dict(listed, network="out"), dict(listed, condition="provider network"),
+                        dict(listed, condition="members with diabetes")):
+            self.assertEqual(comp(ignored)[0], "COMP $0 for adjunctive services", ignored)
+        broad = routine("dental.comprehensive", quotes='["$0 copay for fillings, crowns and root canals"]')
+        self.assertEqual(comp(listed, broad)[0], "COMP $0")
+        exams = dict(listed, benefit="dental.preventive", condition="oral exams")
+        self.assertEqual(present.dental("Wellcare", [routine("dental.preventive"), exams], listed_services=True)[0][0],
+                         "PREV $0")
+
     def test_a_card_shared_with_other_benefits_is_not_a_max(self):
         card = dict(pool="Spendables", limit="per month")
         found = [routine("dental.preventive"), routine("dental", "allowance", "$20", **card),
@@ -1862,6 +1885,15 @@ class WriteTest(unittest.TestCase):
         changed = {p for p in got[34] if got[33][p] != got[34][p]}
         self.assertEqual(changed, {"H5439-011-0"})
         self.assertTrue(got[34]["H5439-011-0"][0][0].startswith("PREV $0; COMP $0; COMP max $1,000/year"))
+
+    @built.check
+    def test_version_36_names_the_only_comprehensive_dental_services_a_schedule_lists(self):
+        self.assertEqual(present.VERSIONS[36], {})
+        data = years.data_dir(YEAR)
+        got = {v: present.lines(data, "F_dental", sheet="dvha", version=v) for v in (35, 36)}
+        changed = {p for p in got[36] if got[35][p] != got[36][p]}
+        self.assertEqual(changed, {"H5439-015-0", "H5439-019-0", "H6815-038-0"})
+        self.assertEqual({got[36][p][0][0].split("; ")[1] for p in changed}, {"COMP $0 (teledentistry only)"})
 
     def test_dental_rollover_shows_only_with_an_allowance_or_maximum(self):
         never = fact("dental", covered_by="supplemental", cost_kind="not_covered", amount="", condition="rollover")

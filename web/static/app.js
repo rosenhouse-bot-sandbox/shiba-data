@@ -562,7 +562,7 @@ function benefitTable(name, plan) {
     ...sheet.columns.map((c) => el("tr", {}, el("th", { scope: "row" }, aboutColumn(c)), valueCell("plan", name, plan, c, row.cells[c.key]))))));
 }
 
-const kindName = (k) => ({ SB: "Summary of Benefits", EOC: "Evidence of Coverage", RIDER: "Optional rider" })[k] || k;
+const kindName = (k) => ({ SB: "Summary of Benefits", EOC: "Evidence of Coverage", RIDER: "Optional rider", DENTAL: "Dental Benefit Details" })[k] || k;
 
 const viewer = {
   showing: null, page: null, doc: null, loading: null, pdf: null, sizes: [], cite: null, quotes: [], target: null, anchor: null, width: 0,
