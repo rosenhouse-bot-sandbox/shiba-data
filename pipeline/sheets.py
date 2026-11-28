@@ -12,6 +12,8 @@ PRESENTED = "generated/presented.csv"
 # Notes come from comments.csv, which Claude sessions write, and caveats.csv, which column rules write.
 NOTE_COLUMNS = ["sheet", "plan_id", "column", "kind", "comment", "url", "pdf_page", "quote"]
 COMMENTS = "comments.csv"
+# A comment names the cell value it explains, so it goes stale when the cell changes.
+COMMENT_COLUMNS = NOTE_COLUMNS + ["cell"]
 CAVEATS = "generated/caveats.csv"
 FINAL_CHART = "final_chart.csv"
 # Why the site leaves out a citation.
@@ -31,6 +33,7 @@ def notes(data):
     """Each noted cell's note. A cell with a comment and a caveat gets the comment, then the caveat's text."""
     out = {}
     for n in rows(data / COMMENTS):
+        n = {k: n[k] for k in NOTE_COLUMNS}
         key = (n["sheet"], n["plan_id"], n["column"])
         if key in out:
             raise ValueError(f"{COMMENTS} names a cell twice: {' '.join(key)}")
@@ -39,6 +42,13 @@ def notes(data):
         key = (c["sheet"], c["plan_id"], c["column"])
         out[key] = dict(out[key], comment=f"{out[key]['comment']} {c['comment']}") if key in out else c
     return list(out.values())
+
+
+def stale_comments(data):
+    """The comments whose cell no longer shows the value they explain."""
+    shown = {(sheet, r["plan_id"], column): value for sheet, sheet_rows in read(data).items() for r in sheet_rows
+             for column, value in r.items()}
+    return [c for c in rows(data / COMMENTS) if shown.get((c["sheet"], c["plan_id"], c["column"])) != c["cell"]]
 
 
 def where(c):
