@@ -16,7 +16,7 @@ DOT = ("A dot means the plan covers the routine (supplemental) benefit, not only
        "A benefit only in an optional package gets the Opt Packages dot instead (methods R13). "
        "A benefit only for some members, such as SSBCI, gets no dot unless the plan also covers it for all members.")
 
-OFFICE = "When the SB prices settings separately, use office and freestanding prices, not outpatient hospital (expert)."
+EVERY = "Show every in-network price at an office, freestanding facility or outpatient hospital (final chart)."
 SAME = "Two identical lines show once (final chart)."
 
 COLUMNS = [
@@ -43,16 +43,14 @@ COLUMNS = [
            "Leave out re-evaluations (#31 section 2.3). Outpatient hospital prices count (final chart)."),
     Column("main", "K_tests_labs", "Diagnostic Tests / Labs",
            "\"tests/labs\", e.g. \"$35/$0\". Tests = non-radiological diagnostic tests (EKG, sleep studies, stress tests). "
-           "Labs = outpatient lab services. Leave out X-rays, imaging and genetic testing (#31 section 2.4). "
-           "For AgeRight, a $0 diagnostic colonoscopy or mammogram also counts as a test (final chart). "
-           "Tests use office and freestanding prices. Labs also count outpatient hospital prices (final chart). "
-           "Humana H1036-306 keeps its $140 sleep study, which only outpatient hospitals offer (expert)."),
+           "Labs = outpatient lab services, including genetic testing (final chart). Leave out X-rays and imaging (#31 section 2.4). "
+           "For AgeRight, a $0 diagnostic colonoscopy or mammogram also counts as a test (final chart). " + EVERY),
     Column("main", "L_xray_imaging", "X-Ray / Diag Radiology",
-           "Line 1 = X-rays. Line 2 = advanced imaging: CT, MRI and PET scans only (methods 6.5). "
-           "A $0 diagnostic mammogram does not count (final chart). "
-           f"Leave out ultrasounds and other tests. {OFFICE} {SAME}"),
+           "Line 1 = X-rays. Line 2 = advanced imaging: CT, MRI and PET scans (methods 6.5), and a $0 diagnostic mammogram (final chart). "
+           f"Leave out ultrasounds and other tests. {EVERY} {SAME}"),
     Column("main", "M_part_b_drugs", "Chemo / Part B Drugs",
-           "Medicare Part B prescription drugs (incl. chemotherapy): the highest coinsurance (final chart)."),
+           "Medicare Part B prescription drugs (incl. chemotherapy): every in-network price, e.g. \"$0-$35 or 20%\" (final chart). "
+           "The $0 is usually for vaccines or allergy shots."),
     Column("main", "N_pharmacy_deductible", "Pharmacy Deductible",
            "Part D drug deductible. \"$685 not tiers 1,2\" = deductible that does not apply to tiers 1 and 2."),
     Column("main", "O_medical_deductible", "Medical Deductible",

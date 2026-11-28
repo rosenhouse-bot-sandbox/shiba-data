@@ -1193,6 +1193,22 @@ class DentalTest(unittest.TestCase):
         unnamed = routine("dental.comprehensive", source="SB", quotes='["What you pay: 0% coinsurance"]')
         self.assertEqual(column(present.dental, adjunctive, unnamed)[0][0], "COMP $0")
 
+    def test_a_broader_service_priced_on_its_own_drops_the_narrow_names(self):
+        adjunctive = routine("dental.comprehensive", quotes='["Adjunctive General Services In-Network $0 copay"]')
+        restorative = routine("dental.comprehensive", condition="restorative services", quotes='["$0 copay"]')
+
+        def comp(*found):
+            return present.dental("Aetna", [adjunctive, *found], broad_services=True)[0][0]
+        self.assertEqual(comp(restorative), "COMP $0")
+        self.assertEqual(comp(dict(restorative, condition="", quotes='["$0 copay for each restorative service."]')),
+                         "COMP $0")
+        self.assertEqual(column(present.dental, adjunctive, restorative)[0][0], "COMP $0 for adjunctive services")
+        for kept in (dict(restorative, network="out"), dict(restorative, package="Optional Dental"),
+                     dict(restorative, condition="restorative services for members with diabetes"),
+                     dict(restorative, cost_kind="max", amount="$1,000"),
+                     dict(restorative, benefit="dental.preventive")):
+            self.assertEqual(comp(kept), "COMP $0 for adjunctive services", kept)
+
     def test_a_card_shared_with_other_benefits_is_not_a_max(self):
         card = dict(pool="Spendables", limit="per month")
         found = [routine("dental.preventive"), routine("dental", "allowance", "$20", **card),
@@ -1823,6 +1839,15 @@ class WriteTest(unittest.TestCase):
         self.assertTrue(changed)
         self.assertTrue(all(p.startswith(("H2923-", "H7199-")) for p in changed), changed)
         self.assertIn("excludes Cosmetic procedures, dental implants, elective procedures", got[32]["H2923-001-0"][0][0])
+
+    @built.check
+    def test_version_34_names_no_narrow_dental_services_beside_a_broader_price(self):
+        self.assertEqual(present.VERSIONS[34], {})
+        data = years.data_dir(YEAR)
+        got = {v: present.lines(data, "F_dental", sheet="dvha", version=v) for v in (33, 34)}
+        changed = {p for p in got[34] if got[33][p] != got[34][p]}
+        self.assertEqual(changed, {"H5439-011-0"})
+        self.assertTrue(got[34]["H5439-011-0"][0][0].startswith("PREV $0; COMP $0; COMP max $1,000/year"))
 
     def test_dental_rollover_shows_only_with_an_allowance_or_maximum(self):
         never = fact("dental", covered_by="supplemental", cost_kind="not_covered", amount="", condition="rollover")
