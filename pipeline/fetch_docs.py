@@ -60,6 +60,11 @@ def cover_check(text, plan_ids, kind, names, year, counties):
     return problems
 
 
+def cached_pdf(cache, url):
+    """Where main keeps a URL's download. An existing file is not downloaded again."""
+    return os.path.join(cache, "pdf", hashlib.sha256(url.encode()).hexdigest()[:16] + ".pdf")
+
+
 def main(docs_csv, plans_csv, cache, out_csv, year, counties):
     with open(plans_csv) as f:
         names = {r["plan_id"]: r["plan_name"] for r in csv.DictReader(f)}
@@ -70,7 +75,7 @@ def main(docs_csv, plans_csv, cache, out_csv, year, counties):
     with open(docs_csv) as f:
         docs = list(csv.DictReader(f))
     for d in docs:
-        tmp = os.path.join(cache, "pdf", hashlib.sha256(d["url"].encode()).hexdigest()[:16] + ".pdf")
+        tmp = cached_pdf(cache, d["url"])
         if not os.path.exists(tmp):
             subprocess.run(["curl", "-sS", "-L", "--max-time", "180", "-A", "Mozilla/5.0", "-o", tmp, d["url"]],
                            check=False)

@@ -103,13 +103,37 @@ class RunTestsTest(unittest.TestCase):
         self.assertEqual(kwargs["env"][run.present.CANDIDATE], "present@2")
 
 
+class CheckedPdfsTest(unittest.TestCase):
+    def setUp(self):
+        gen, work = tempfile.TemporaryDirectory(), tempfile.TemporaryDirectory()
+        self.addCleanup(gen.cleanup)
+        self.addCleanup(work.cleanup)
+        self.gen, self.work = gen.name, work.name
+        with open(f"{self.gen}/documents_checked.csv", "w") as f:
+            f.write(f"plan_ids,kind,url,sha256\nH1036-306-0,SB,{URL},{'ab' * 32}\nH1036-306-0,EOC,https://x/new.pdf,\n")
+
+    def test_refuses_without_the_checked_pdfs(self):
+        with self.assertRaisesRegex(SystemExit, "needs the checked PDFs"):
+            run.reuse_checked(self.gen, self.work)
+
+    def test_puts_each_checked_pdf_where_fetch_docs_looks_for_its_download(self):
+        blobs.pdf_path(self.work, "ab" * 32).parent.mkdir()
+        blobs.pdf_path(self.work, "ab" * 32).write_bytes(b"%PDF")
+        for _ in range(2):  # as a rerun in the same work dir does
+            run.reuse_checked(self.gen, self.work)
+        downloaded = pathlib.Path(run.fetch_docs.cached_pdf(f"{self.work}/docs", URL))
+        self.assertEqual(downloaded.read_bytes(), b"%PDF")
+        self.assertEqual(os.listdir(f"{self.work}/docs/pdf"), [downloaded.name])
+
+
 class MainTest(unittest.TestCase):
     def run_main(self, mode, candidate="", facts=True):
         """Lists the order of run.main's steps. The year's data has steps.json, and has earlier facts if facts is true."""
         order = []
         with tempfile.TemporaryDirectory() as work, tempfile.TemporaryDirectory() as root, \
              mock.patch.multiple(run, run_tests=lambda kind, candidate: order.append((kind, candidate)),
-                                 get=lambda *a: order.append("get"), py=lambda *a: None,
+                                 get=lambda *a: order.append("get"), py=lambda script, *a: order.append(script) if script == "fetch_docs.py" else None,
+                                 reuse_checked=lambda *a: order.append("reuse_checked"),
                                  check_quotes=lambda *a: order.append("check_quotes"),
                                  model_steps=lambda *a: order.append("model_steps"), asker=lambda *a: None), \
              mock.patch.object(run.subprocess, "run"), mock.patch.object(run.blobs, "record_cms"), \
@@ -137,6 +161,11 @@ class MainTest(unittest.TestCase):
 
     def test_checks_the_built_data_after_the_model_steps(self):
         self.assertEqual(self.run_main("replay")[-3:], ["model_steps", "check_quotes", ("checks", "")])
+
+    def test_a_candidate_downloads_only_documents_no_run_checked(self):
+        order = self.run_main("api", "present@2")
+        self.assertLess(order.index("reuse_checked"), order.index("fetch_docs.py"))
+        self.assertNotIn("reuse_checked", self.run_main("api"))
 
     def test_leaves_a_candidates_data_for_its_pin_to_check(self):
         self.assertEqual(self.run_main("api", "present@2")[-2:], ["model_steps", "check_quotes"])
