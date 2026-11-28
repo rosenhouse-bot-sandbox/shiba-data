@@ -50,11 +50,14 @@ jobs:
       - run: pip install pypdfium2==5.13.0 openpyxl==3.1.5 anthropic==2.3.0
       - run: npm ci
         working-directory: pipeline
-      # texts.py keeps these texts instead of extracting them again.
-      - name: Download the recorded PDF texts
+      # texts.py keeps these texts instead of extracting them again. A candidate run also keeps the PDFs and CMS zips
+      # that earlier runs checked, so only its version changes the data.
+      - name: Download the recorded inputs
         timeout-minutes: 20
         run: |
-          python3 -I pipeline/blobs.py texts "data/$YEAR" _work > _texts.txt
+          recorded=texts
+          if [ -n "$CANDIDATE" ]; then recorded=inputs; fi
+          python3 -I pipeline/blobs.py "$recorded" "data/$YEAR" _work > _texts.txt
           while read -r digest path; do
             mkdir -p "$(dirname "$path")"
             curl -sSfL --retry 5 --retry-all-errors --max-time 300 -o "$path" "https://pdxplans.org/docs/$digest.pdf" < /dev/null

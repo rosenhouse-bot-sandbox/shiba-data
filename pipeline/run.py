@@ -12,8 +12,8 @@ Needs pypdfium2, poppler's pdftotext and `npm ci` here, and the anthropic packag
 """
 import csv
 import glob
-import hashlib
 import os
+import pathlib
 import subprocess
 import sys
 import threading
@@ -25,6 +25,7 @@ import ask  # noqa: E402
 import blobs  # noqa: E402
 import document_facts  # noqa: E402
 import eoc  # noqa: E402
+import fetch_docs  # noqa: E402
 import sheets  # noqa: E402
 import present  # noqa: E402
 import reach  # noqa: E402
@@ -53,10 +54,23 @@ def pdfs(gen, work):
     with open(gen / "documents_checked.csv") as f:
         for d in csv.DictReader(f):
             if d["sha256"]:
-                src = f"{work}/docs/pdf/{hashlib.sha256(d['url'].encode()).hexdigest()[:16]}.pdf"
+                src = fetch_docs.cached_pdf(f"{work}/docs", d["url"])
                 dst = blobs.pdf_path(work, d["sha256"])
                 if not os.path.exists(dst):
                     os.link(src, dst)
+
+
+def reuse_checked(gen, work):
+    """Links each checked PDF where fetch_docs.py looks for its download."""
+    os.makedirs(f"{work}/docs/pdf", exist_ok=True)
+    with open(pathlib.Path(gen, "documents_checked.csv")) as f:
+        for d in csv.DictReader(f):
+            src, dst = blobs.pdf_path(work, d["sha256"]), fetch_docs.cached_pdf(f"{work}/docs", d["url"])
+            if not d["sha256"] or os.path.exists(dst):
+                continue
+            if not src.exists():
+                raise SystemExit(f"A candidate run needs the checked PDFs in {work}/pdfs, such as {src.name}.")
+            os.link(src, dst)
 
 
 def lost_quotes(data, texts):
@@ -166,6 +180,9 @@ def main(year, work, mode="", candidate=""):
     blobs.record_cms(CMS, work, gen / blobs.CMS_FILES)
     cms_tables(data, config, work)
     if web:
+        # A candidate run changes only what its version changes, so it keeps the documents earlier runs checked.
+        if candidate:
+            reuse_checked(gen, work)
         py("fetch_docs.py", gen / "documents.csv", gen / "plans.csv", f"{work}/docs", gen / "documents_checked.csv",
            config["year"], ",".join(config["counties"]))
         pdfs(gen, work)
