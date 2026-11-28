@@ -3,7 +3,7 @@ import { el, svg } from "./dom.js";
 import { hint } from "./hint.js";
 import { format } from "./permalink.js";
 import {
-  EXAMPLE, NODES, STEPS, STORES, inputs, outputs, nodeName, NODE_W, NODE_H, RING, MAP_W, MAP_H,
+  EXAMPLE, NODES, STEPS, STORES, WORKFLOWS, inputs, outputs, nodeName, NODE_W, NODE_H, RING, MAP_W, MAP_H,
   nodeBox, pillBox, paths, before, after, strip, details, records, nodeHref,
 } from "./pipeline.js";
 import { shown, pageOf, pager, bodyRow, rowCount } from "./tables.js";
@@ -115,7 +115,7 @@ function lens(step, link, terms, example, trace, code, at) {
     el("div", { class: "how-card" },
       el("h2", { class: "how-step", tabindex: "-1" }, step.label),
       fromTo ? el("p", { class: "how-strip" }, el("code", { class: "from" }, fromTo[0]), " becomes ", el("code", { class: "to" }, fromTo[1])) : null,
-      ...step.paras.map(para), ...(example?.paras ?? []).map(para), workList(details(step, trace))),
+      ...step.paras.map(para), ...(example?.paras ?? []).map(para), runsIn(step), workList(details(step, trace))),
     ...tables,
     ...downloads,
     traceRecord(step, trace),
@@ -191,6 +191,16 @@ function traceRecord(step, trace) {
 
 const workList = (lines) => lines.length ? el("ul", { class: "how-details" }, ...lines.map((l) => el("li", {},
   l.href ? el("a", { href: l.href, target: "_blank", rel: "noopener" }, `${l.text} ↗`) : l.text))) : null;
+
+function runsIn(step) {
+  if (!step.runs.length) return el("p", { class: "how-runs" }, "No workflow runs this step.");
+  const named = step.runs.map((id) => {
+    const w = WORKFLOWS[id];
+    return hint(w.label, el("strong", {}, `${w.label} workflow`), el("span", {}, w.text),
+      el("a", { href: w.href, target: "_blank", rel: "noopener" }, "Run history ↗"));
+  });
+  return el("p", { class: "how-runs" }, "Runs in ", ...named.flatMap((n, i) => i ? [" and ", n] : [n]));
+}
 
 // Hovering or focusing a term shows what it means and the code behind it. Clicking pins it open.
 const term = (t, text) => hint(text, el("strong", {}, t.title), el("span", {}, t.text), t.code ? el("pre", {}, t.code) : null,
