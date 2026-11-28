@@ -43,8 +43,7 @@ H6815_038_EOC = "https://www.wellcareor.com/content/dam/centene/medicare/pdfs/ae
 class NoteWordingTest(unittest.TestCase):
     def test_notes_do_not_name_the_pipeline(self):
         jargon = re.compile(r"reader|expert's|#\d", re.I)
-        with open(DATA / "comments.csv") as comments:
-            notes = [r["comment"] for r in csv.DictReader(comments)]
+        notes = [r["comment"] for r in build.sheets.notes(DATA)]
         self.assertEqual([n for n in notes if jargon.search(n)], [])
 
 
@@ -87,6 +86,10 @@ class SiteDataTest(unittest.TestCase):
     def test_uncited_cell_has_no_cites(self):
         cell = self.cell("main", "H2406-042-0", "D_premium_full_extra_help")
         self.assertEqual((cell["value"], cell["cites"]), ("$87.70", []))
+
+    def test_a_caveat_the_rule_wrote_is_a_note(self):
+        comment = self.cell("main", "H9003-006-0", "X_transportation")["comment"]
+        self.assertEqual((comment["kind"], comment["page"]), ("caveat", 99))
 
     def test_comment_points_to_its_eoc_page(self):
         comment = self.cell("main", "H5439-019-0", "K_tests_labs")["comment"]

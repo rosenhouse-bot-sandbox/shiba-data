@@ -514,6 +514,74 @@ class DotTest(unittest.TestCase):
         self.assertEqual(column(dental, medicare), [("", [medicare])])
 
 
+class CaveatTest(unittest.TestCase):
+    def test_names_the_lab_price_that_only_a_genetic_test_gives(self):
+        lab, genetic = priced("tests.lab", amount="$10"), priced("tests.genetic", amount="20%", page="86")
+        self.assertEqual(present.genetic_labs("$0/$10 or 20%", [lab, genetic]),
+                         ("In the labs range, the 20% is for genetic testing (EOC page 86).", genetic))
+        self.assertEqual(present.genetic_labs("$0/$0-$50", [priced("tests.lab"), priced("tests.genetic", amount="$50")])[0],
+                         "In the labs range, the $50 is for genetic testing (EOC page 60).")
+
+    def test_no_lab_caveat_when_a_lab_also_gives_the_price_or_it_is_a_test_price(self):
+        genetic = priced("tests.genetic", amount="$50")
+        self.assertIsNone(present.genetic_labs("$0/$50", [priced("tests.lab", amount="$50"), genetic]))
+        self.assertIsNone(present.genetic_labs("$50/$0", [priced("tests.diagnostic", amount="$50"), priced("tests.lab"), genetic]))
+        self.assertIsNone(present.genetic_labs("$0/$0", [priced("tests.lab")]))
+
+    def test_no_lab_caveat_when_a_broader_test_or_a_cms_lab_fact_gives_the_price(self):
+        genetic = priced("tests.genetic", amount="20%")
+        self.assertIsNone(present.genetic_labs("$0/$0 or 20%", [priced("tests", amount="20%"), genetic]))
+        self.assertIsNone(present.genetic_labs("$0/$0 or 20%", [priced("tests.lab", amount="20%", source="PBP"), genetic]))
+        self.assertIsNone(present.genetic_labs("$0/$0 or 20%", [priced("tests.lab"), dict(genetic, source="PBP")]))
+
+    def test_names_every_price_only_genetic_tests_give(self):
+        self.assertEqual(present.genetic_labs("$0/$0-$50 or 20%", [priced("tests.lab"), priced("tests.genetic", amount="$50"),
+                                                                    priced("tests.genetic", amount="20%")])[0],
+                         "In the labs range, the $50 and 20% are for genetic testing (EOC page 60).")
+
+    def test_names_the_condition_of_a_blank_dot_cells_benefit(self):
+        ride = extra("extras.transportation", cost_kind="copay", amount="$0", page="99",
+                     condition="immediately following an inpatient hospitalization")
+        self.assertEqual(present.conditional("", [ride]),
+                         ("EOC page 99 covers this at $0 only immediately following an inpatient hospitalization.", ride))
+        covered = dict(ride, cost_kind="covered", amount="")
+        self.assertEqual(present.conditional("", [covered])[0],
+                         "EOC page 99 covers this only immediately following an inpatient hospitalization.")
+
+    def test_no_condition_caveat_for_a_dot_or_a_benefit_members_cannot_get_for_a_condition_alone(self):
+        ride = extra("extras.transportation", cost_kind="copay", amount="$0", condition="after a hospital stay")
+        self.assertIsNone(present.conditional("●", [ride]))
+        for f in (dict(ride, condition=""), dict(ride, covered_by="medicare"), dict(ride, package="Advantage Plus"),
+                  dict(ride, cost_kind="not_covered", amount=""), dict(ride, condition="provider network"),
+                  dict(ride, condition="Available for people with chronic low back pain"), dict(ride, source="PBP")):
+            self.assertIsNone(present.conditional("", [f]), f)
+
+    def test_a_cells_caveats_make_one_note_from_its_first_caveats_fact(self):
+        ride = extra("extras.transportation", cost_kind="copay", amount="$0", condition="after a stay", doc_sha="d",
+                     quotes='["Rides", "$0"]')
+        lines = [("main", "H1-001-0", "X_transportation", "1", "", [ride]),
+                 ("main", "H1-001-0", "X_transportation", "2", "", [dict(ride, condition="after surgery", page="7")])]
+        with tempfile.TemporaryDirectory() as tmp, mock.patch.object(present, "presented_lines", lambda data, version: lines):
+            os.makedirs(f"{tmp}/generated")
+            pathlib.Path(tmp, "generated/documents_checked.csv").write_text("sha256,url\nd,https://eoc\n")
+            self.assertEqual(present.caveat_rows(pathlib.Path(tmp), 33), [dict(
+                sheet="main", plan_id="H1-001-0", column="X_transportation", kind="caveat",
+                comment="EOC page 60 covers this at $0 only after a stay. EOC page 7 covers this at $0 only after surgery.",
+                url="https://eoc", pdf_page="60", quote="Rides")])
+
+    @built.check
+    def test_the_rules_write_the_caveats_that_replaced_notes(self):
+        rows = {(r["plan_id"], r["column"]): r["comment"] for r in sheets.rows(years.data_dir(YEAR) / sheets.CAVEATS)}
+        self.assertEqual(rows[("H2923-001-0", "K_tests_labs")], "In the labs range, the 20% is for genetic testing (EOC page 86).")
+        self.assertRegex(rows[("H9003-006-0", "X_transportation")], r"^EOC page 99 covers this at \$0 only immediately following")
+
+    def test_versions_before_33_write_no_caveats(self):
+        ride = extra("extras.transportation", cost_kind="copay", amount="$0", condition="after a hospital stay")
+        self.assertEqual(present.caveats("main", "X_transportation", "", [ride], 32), None)
+        self.assertEqual(present.caveats("main", "X_transportation", "", [ride], 33)[1], ride)
+        self.assertIsNone(present.caveats("dvha", "J_extra_benefits", "", [ride], 33))
+
+
 class PackagesTest(unittest.TestCase):
     def test_a_package_premium_gets_a_dot(self):
         for benefit in ("packages", "dental"):
@@ -1486,16 +1554,18 @@ def shown(lines, line):
 
 
 class WriteTest(unittest.TestCase):
-    def test_writes_the_sheets_and_their_citations(self):
-        row = dict.fromkeys(sheets.COLUMNS, "x")
+    def test_writes_the_sheets_their_citations_and_caveats(self):
+        row, caveat = dict.fromkeys(sheets.COLUMNS, "x"), dict.fromkeys(sheets.NOTE_COLUMNS, "c")
 
         def sheet_rows(data, sheet, version):
             return [dict.fromkeys(["section", "plan_id", "plan_name"] + list(fields.labels(sheet)), f"{sheet} {version}")]
         with tempfile.TemporaryDirectory() as tmp, mock.patch.object(present, "citation_rows", lambda data, version: [row] * version), \
+                mock.patch.object(present, "caveat_rows", lambda data, version: [caveat] * version), \
                 mock.patch.object(present, "sheet_rows", sheet_rows):
             os.makedirs(f"{tmp}/generated")
             present.write(pathlib.Path(tmp), 1)
             self.assertEqual(sheets.rows(pathlib.Path(tmp, sheets.PRESENTED)), [row])
+            self.assertEqual(sheets.rows(pathlib.Path(tmp, sheets.CAVEATS)), [caveat])
             self.assertEqual(sheets.read(pathlib.Path(tmp))["dvha"], sheet_rows(None, "dvha", 1))
             self.assertTrue(pathlib.Path(tmp, "generated", sheets.SHEETS["main"]).read_bytes().endswith(b"main 1\r\n"))
 

@@ -99,6 +99,10 @@ class TraceTest(unittest.TestCase):
         records = self.cell(*AMBULANCE)
         self.assertEqual(records["notes"], {"status": trace.NONE, "rows": []})
 
+    def test_lists_a_caveat_the_rule_wrote(self):
+        rows = self.cell("main", "H9003-006-0", "X_transportation")["notes"]["rows"]
+        self.assertEqual([(r["kind"], r["pdf_page"]) for r in rows], [("caveat", 99)])
+
     def test_lists_the_facts_each_line_used_and_why_the_rule_set_others_aside(self):
         rule = self.cell(*AMBULANCE)["rule"]
         self.assertEqual([(n["line"], n["value"], n["presented"]) for n in rule["lines"]],
@@ -188,7 +192,7 @@ class TraceTest(unittest.TestCase):
         manifest, texts = self.export()
         paths = ["generated/plans", "generated/landscape_reads", "generated/documents", "generated/pbp_facts",
                  "generated/cms_sources", "machine/document_facts", "generated/main_chart", "generated/dvha",
-                 "generated/presented"]
+                 "generated/presented", "generated/caveats"]
         names = {path.split("/")[1] for path in paths}
         for path in paths:
             name = path.split("/")[1]

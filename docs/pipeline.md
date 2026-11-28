@@ -322,11 +322,18 @@ main,H1036-153-0,AB_ambulance,2,$325,…H1036153000EOC27pdf,46,Worldwide Coverag
 
 Rules write every value to the sheets, `generated/main_chart.csv` and `generated/dvha.csv`. A line that only CMS facts back has no citation.
 
+Some rules also write a `caveat` from the facts a cell cites, to `generated/caveats.csv`. When only genetic tests give a lab price, the Tests/Labs rule says so:
+
+```
+sheet,plan_id,column,kind,comment,pdf_page,quote
+main,H2923-001-0,K_tests_labs,caveat,"In the labs range, the 20% is for genetic testing (EOC page 86).",86,Office or Freestanding location: 20% coinsurance
+```
+
 ## 8. Claude sessions write notes
 
-Some values need explaining. Claude sessions write notes in pull requests.
+Some values need explaining that no rule gives. Claude sessions write those notes in pull requests.
 
-A **note** explains a cell to volunteers. A `caveat`, in lavender, gives a settled detail the value leaves out. A `question`, in yellow, flags something the documents leave unclear. A `contradiction`, in orange, says what the volunteer chart shows and what the documents show where they disagree. `comments.csv`, selected columns:
+A **note** explains a cell to volunteers. A cell with a note and a rule's caveat shows both. A `caveat`, in lavender, gives a settled detail the value leaves out. A `question`, in yellow, flags something the documents leave unclear. A `contradiction`, in orange, says what the volunteer chart shows and what the documents show where they disagree. `comments.csv`, selected columns:
 
 ```
 sheet,plan_id,column,kind,comment,pdf_page,quote
@@ -343,12 +350,12 @@ dvha,H1372-003-0,F_dental,e210a35ad12e5069
 
 ## 9. Publish
 
-Merging to main builds the site from the sheets and `presented.csv`. Where an EOC or rider cites a cell, the site leaves out the cell's SB citations.
+Merging to main builds the site from the sheets, `presented.csv` and the notes. Where an EOC or rider cites a cell, the site leaves out the cell's SB citations.
 The `pdxplans` Cloudflare Worker serves the site at [pdxplans.org](https://pdxplans.org), and serves the PDFs from R2. The same build updates the volunteers' Google Sheet in place, so their comments stay on their cells. The Sheet's Details tab lists every fact.
 
 ## Reproducible runs
 
 - **Pinned versions.** `steps.json` pins each model step's version, such as `{"document_facts": 38, "present": 32}`.
 - **Three-stage deploys.** Only workflows on main can call the Claude API. A new version (1) merges unpinned. (2) The Pipeline workflow runs it on main, uploads a pack of the new answers, and pushes a branch whose `lock.json` names the pack, such as `pipeline/2027-41966948424`. (3) A pull request from that branch pins the version.
-- **Built tables.** Git keeps the inputs, the rules and `lock.json`, which pins the packs of saved answers in R2, but no table that a step writes. `pipeline/tables.py` rebuilds the CMS tables, `documents.csv`, `document_facts.csv`, the sheets and `presented.csv` from them in about 2 minutes, with no API access. Each main build loads them all into D1, and the site's Tables view shows them. "How it's made" links each D1 table there.
+- **Built tables.** Git keeps the inputs, the rules and `lock.json`, which pins the packs of saved answers in R2, but no table that a step writes. `pipeline/tables.py` rebuilds the CMS tables, `documents.csv`, `document_facts.csv`, the sheets, `presented.csv` and `caveats.csv` from them in about 2 minutes, with no API access. Each main build loads them all into D1, and the site's Tables view shows them. "How it's made" links each D1 table there.
 - **Pull request checks.** `reproduce` reruns the pipeline from R2 and the saved answers, with no API access, then runs the checks of the data it built. Its summary lists each sheet cell that the pull request changes. `build` runs the code tests, which see no built data, builds the site, and opens each linked PDF.

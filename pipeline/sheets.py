@@ -9,6 +9,10 @@ import fields
 SHEETS = {"main": "main_chart.csv", "dvha": "dvha.csv"}
 COLUMNS = ["sheet", "plan_id", "column", "line", "value", "url", "pdf_page", "quote"]
 PRESENTED = "generated/presented.csv"
+# Notes come from comments.csv, which Claude sessions write, and caveats.csv, which column rules write.
+NOTE_COLUMNS = ["sheet", "plan_id", "column", "kind", "comment", "url", "pdf_page", "quote"]
+COMMENTS = "comments.csv"
+CAVEATS = "generated/caveats.csv"
 # Why the site leaves out a citation.
 NOT_SB_CITES_CELL = "not_sb_cites_cell"
 
@@ -20,6 +24,20 @@ def rows(path):
 
 def read(data):
     return {sheet: rows(data / "generated" / name) for sheet, name in SHEETS.items()}
+
+
+def notes(data):
+    """Each noted cell's note. A cell with a comment and a caveat gets the comment, then the caveat's text."""
+    out = {}
+    for n in rows(data / COMMENTS):
+        key = (n["sheet"], n["plan_id"], n["column"])
+        if key in out:
+            raise ValueError(f"{COMMENTS} names a cell twice: {' '.join(key)}")
+        out[key] = n
+    for c in rows(data / CAVEATS):
+        key = (c["sheet"], c["plan_id"], c["column"])
+        out[key] = dict(out[key], comment=f"{out[key]['comment']} {c['comment']}") if key in out else c
+    return list(out.values())
 
 
 def where(c):

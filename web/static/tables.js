@@ -13,6 +13,7 @@ export const TABLES = {
   document_facts: "Facts Claude read from the PDFs, after checks. One row per fact and page.",
   cms_sources: "Which CMS field fed which sheet column.",
   presented: "One row per citation in the sheets.",
+  caveats: "The notes that column rules write.",
   main_chart: "The main sheet.",
   dvha: "The dental, vision, hearing and extras sheet.",
 };

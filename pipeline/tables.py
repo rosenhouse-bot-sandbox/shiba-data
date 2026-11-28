@@ -24,7 +24,7 @@ import years  # noqa: E402
 
 WRITES = ("generated/plans.csv", "generated/landscape_reads.csv", "generated/documents.csv", "generated/pbp_facts.csv",
           "generated/cms_sources.csv", run.FACTS, *(f"generated/{name}" for name in sheets.SHEETS.values()),
-          sheets.PRESENTED)
+          sheets.PRESENTED, sheets.CAVEATS)
 
 
 def pins(gen, work):

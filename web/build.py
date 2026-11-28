@@ -113,19 +113,17 @@ def site_data(data_dir=DATA):
         p["plan_finder_url"] = f"https://www.medicare.gov/plan-compare/#/plan-details/{year}-{p['plan_id']}?year={year}&lang=en"
     labeled = {name: (sheet_rows[name], fields.labels(name)) for name in ("main", "dvha")}
     comments = {"main": {}, "dvha": {}}
-    for c in rows("comments.csv", data_dir):
+    for c in sheets.notes(data_dir):
         csv_rows, labels = labeled[c["sheet"]]
         if c["column"] not in labels or c["plan_id"] not in {r["plan_id"] for r in csv_rows}:
-            raise ValueError(f"comments.csv names no cell: {c['sheet']} {c['plan_id']} {c['column']}")
-        if (c["plan_id"], c["column"]) in comments[c["sheet"]]:
-            raise ValueError(f"comments.csv names a cell twice: {c['sheet']} {c['plan_id']} {c['column']}")
+            raise ValueError(f"A note names no cell: {c['sheet']} {c['plan_id']} {c['column']}")
         if c["kind"] not in ("question", "caveat", "contradiction"):
-            raise ValueError(f"comments.csv {c['plan_id']} {c['column']}: unknown kind {c['kind']}")
+            raise ValueError(f"Note {c['plan_id']} {c['column']}: unknown kind {c['kind']}")
         for ref in PAGE_REF.finditer(c["comment"]):
             kind, page = ref[1].upper(), int(ref[2])
             matches = [d for d in docs.values() if d["kind"] == kind and c["plan_id"] in d["plan_ids"]]
             if len(matches) != 1 or page > matches[0]["pages"]:
-                raise ValueError(f"comments.csv {c['plan_id']} {c['column']}: {ref[0]} names no single document page")
+                raise ValueError(f"Note {c['plan_id']} {c['column']}: {ref[0]} names no single document page")
         comments[c["sheet"]][(c["plan_id"], c["column"])] = {
             "kind": c["kind"], "text": c["comment"], "doc": doc_by_url[c["url"]], "page": int(c["pdf_page"]), "quote": c["quote"]}
     return {
