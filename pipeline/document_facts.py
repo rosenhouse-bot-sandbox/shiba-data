@@ -434,3 +434,5 @@ BRONZE_DENTAL = ("This document lists by code every dental service the plan cove
 # Version 39 reads the comprehensive dental services that Wellcare's Bronze Dental Benefit Details lists.
 VERSIONS[39] = dict(VERSIONS[38], kinds={"dental": {"DENTAL": BRONZE_DENTAL}},
                     targets={"dental": ("H5439-015-0", "H5439-019-0", "H6815-038-0")})
+# The reviewer of version 39 rejected its Bronze facts without the note its readers saw. Version 40 shows it the note.
+VERSIONS[40] = dict(VERSIONS[39], reviewer_sees_kinds=True)

@@ -104,7 +104,7 @@ ONE_BENEFIT_KINDS = {"DENTAL": "Dental Benefit Details"}
 
 def doc_notes(doc, groups, notes, plan_notes, plan_ids, kinds):
     """The notes a document's task shows: a kind about one benefit shows only the version's note for that kind."""
-    if doc["kind"] in ONE_BENEFIT_KINDS:
+    if doc["kind"] in kinds:
         return dict.fromkeys(groups, kinds[doc["kind"]])
     return for_plans(notes, plan_notes, plan_ids)
 
