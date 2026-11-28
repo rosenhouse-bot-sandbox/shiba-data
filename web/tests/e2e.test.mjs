@@ -617,6 +617,8 @@ test("plan page lists the plan's documents", async () => {
   const docs = await page.locator("table.docs").textContent();
   assert.match(docs, /Summary of Benefits/);
   assert.match(docs, /Evidence of Coverage/);
+  await page.goto(`${base}#/plan/H5439-019-0`);
+  assert.match(await page.locator("table.docs").textContent(), /Dental Benefit Details/);
 });
 
 test("every citation's and comment's quote is highlighted in full on its page", { timeout: 1_200_000 }, async () => {

@@ -1545,12 +1545,12 @@ def narrow_limit(found, leaf, name):
     return (f" {limits[0]['amount']}/year", limits) if len({f["amount"] for f in limits}) == 1 else ("", [])
 
 
-def dental_price(found, leaf, services=False, broad_services=False, limits=False):
+def dental_price(found, leaf, services=False, broad_services=False, limits=False, listed_services=False):
     """The best source's prices, and how the cell shows them. It names the narrow services that all sources' prices
     name, without saying they are the only ones, since readers may miss some. With broad_services, it names none
     when the plan's own in-network price names a broader service. With limits, each narrow service shows its yearly
     limit. With services, a plan's own prices for several named services give the range when no price covers every
-    service."""
+    service. With listed_services, it names the only services that the plan's Dental Benefit Details lists for leaf."""
     prices = exactly(found, (leaf,), lambda f: everyone(f) and f["cost_kind"] in PRICED,
                      "it is not a supplemental in-network price for every member")
     if services and not prices:
@@ -1561,6 +1561,10 @@ def dental_price(found, leaf, services=False, broad_services=False, limits=False
     got = top(prices)
     shown = show(got)
     shown = "$0" if shown == "0%" else shown.replace("0%-", "$0-") if got else ""
+    listed = [f for f in found if f["source"] == "DENTAL" and f["benefit"] == leaf and f["cost_kind"] == "covered"
+              and f["condition"]] if listed_services and got else []
+    if listed:
+        return got + listed, f"{shown} ({', '.join(sorted({f['condition'] for f in listed}))} only)"
     only = [] if broad_services and prices_broader(found, leaf) else narrow(prices)
     if not only:
         return got, shown
@@ -1575,12 +1579,12 @@ def prices_broader(found, leaf):
                and BROAD.search(f"{f['condition']} {f['quotes']}") for f in found)
 
 
-def dental(organization, found, services=True, broad_services=False, limits=False):
+def dental(organization, found, services=True, broad_services=False, limits=False, listed_services=False):
     """Shows routine preventive and comprehensive dental prices and the maximum, naming the services that share it.
     A plan with only an allowance shows it. An allowance on a card shared with other benefits is not a maximum.
     Without routine dental, it cites a blank as the main sheet's dental column does. See dental_price for services."""
-    prev, prev_shown = dental_price(found, "dental.preventive", services, broad_services, limits)
-    comp, comp_shown = dental_price(found, "dental.comprehensive", services, broad_services, limits)
+    prev, prev_shown = dental_price(found, "dental.preventive", services, broad_services, limits, listed_services)
+    comp, comp_shown = dental_price(found, "dental.comprehensive", services, broad_services, limits, listed_services)
     others = {f["pool"] for f in found if f["pool"] and not facts.covers("dental", f["benefit"])
               and not f["benefit"].startswith("extras.")}
     eligible = exactly(found, ("dental", "dental.preventive", "dental.comprehensive"),
@@ -1682,7 +1686,7 @@ HEARING_OON_31 = out_of_network(("exam", "hearing.exam"), ("fitting", "hearing.e
 DVHA = {"C_premium": plan_premium, "D_premium_full_extra_help": extra_help_premium,
         "E_optional_packages": lambda o, found: optional_packages(o, found, details=False),
         "F_dental": or_none(with_lacking(with_packages(with_details(
-            lambda o, found: dental(o, found, broad_services=True, limits=True),
+            lambda o, found: dental(o, found, broad_services=True, limits=True, listed_services=True),
             no_maximum, dental_deductible, dental_rollover, dental_reimbursement,
             lambda found: dental_exclusions(found, summary_first=True), DENTAL_OON, preventive_limits,
             provider_network("dental"))), ("no COMP", "dental.comprehensive")), "dental"),
@@ -1781,6 +1785,11 @@ EARLIER_RULES = {
                                ("no COMP", "dental.comprehensive")), "dental")),
                            (35, or_none(with_lacking(with_packages(with_details(
                                lambda o, found: dental(o, found, broad_services=True),
+                               no_maximum, dental_deductible, dental_rollover, dental_reimbursement,
+                               lambda found: dental_exclusions(found, summary_first=True), DENTAL_OON, preventive_limits,
+                               provider_network("dental"))), ("no COMP", "dental.comprehensive")), "dental")),
+                           (36, or_none(with_lacking(with_packages(with_details(
+                               lambda o, found: dental(o, found, broad_services=True, limits=True),
                                no_maximum, dental_deductible, dental_rollover, dental_reimbursement,
                                lambda found: dental_exclusions(found, summary_first=True), DENTAL_OON, preventive_limits,
                                provider_network("dental"))), ("no COMP", "dental.comprehensive")), "dental"))),
@@ -1987,6 +1996,8 @@ CAVEATS_SINCE = 33
 VERSIONS[34] = {}
 # Version 35 shows a narrow DVHA comprehensive dental service's yearly limit.
 VERSIONS[35] = {}
+# Version 36 names the only comprehensive dental services that a plan's Dental Benefit Details lists.
+VERSIONS[36] = {}
 # The version that first presents each later column. Earlier versions hold its cells.
 SINCE = {("dvha", "C_premium"): 3, ("dvha", "G_vision"): 4, ("dvha", "H_hearing"): 4, ("dvha", "E_optional_packages"): 5,
          ("dvha", "F_dental"): 6, ("dvha", "I_alt_care_otc_travel"): 6, ("dvha", "J_extra_benefits"): 6,

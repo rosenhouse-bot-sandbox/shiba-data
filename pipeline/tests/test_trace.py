@@ -139,6 +139,10 @@ class TraceTest(unittest.TestCase):
         self.assertTrue(eoc[0]["sha256"].startswith("64e05773e847b56e"))
         self.assertEqual(len(eoc[0]["text"]["layout"]), 64)
 
+    def test_lists_a_plans_dental_benefit_details(self):
+        documents = self.cell("dvha", "H5439-019-0", "F_dental")["documents"]["documents"]
+        self.assertIn("DENTAL", [d["kind"] for d in documents])
+
     def test_lists_every_url_each_source_offered_the_plan_in_the_order_tried(self):
         kaiser = "https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/health-plan-documents/"
         self.assertEqual(self.offered("H9003-006-0", "EOC"), [
