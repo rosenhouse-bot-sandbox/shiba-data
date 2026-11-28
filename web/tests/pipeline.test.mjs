@@ -71,8 +71,8 @@ test("every step joins known nodes and has a unique id", () => {
 test("a step's inputs join at its one label, which points to its outputs", () => {
   assert.deepEqual(inputs(stepById("find-pdfs")), ["plans", "found", "links"]);
   assert.deepEqual(inputs(stepById("column-rules")), ["facts", "rules", "cmsFacts"]);
-  assert.deepEqual(outputs(stepById("column-rules")), ["presented", "sheet"]);
-  assert.deepEqual(inputs(stepById("publish")), ["sheet", "presented", "notes"]);
+  assert.deepEqual(outputs(stepById("column-rules")), ["presented", "sheet", "caveats"]);
+  assert.deepEqual(inputs(stepById("publish")), ["sheet", "presented", "notes", "caveats"]);
   assert.deepEqual(inputs(stepById("read-facts")), ["text", "prompt"]);
   for (const s of STEPS.filter((s) => inputs(s).length > 1)) {
     const p = pillBox(s), top = [p.x + p.w / 2, p.y], bottom = [p.x + p.w / 2, p.y + p.h];
@@ -112,8 +112,8 @@ test("every table a step reads or writes has example rows", () => {
 });
 
 test("each step highlights the example's rows in its first input and its outputs", () => {
-  assert.deepEqual(NODES.notes.table.rows, [], "the example cell has no note");
-  for (const s of STEPS) for (const id of [s.from, ...outputs(s)].filter((id) => id !== "notes")) assert.ok(s.example.highlight[id]?.length, `${s.id} ${id}`);
+  assert.deepEqual([NODES.notes.table.rows, NODES.caveats.table.rows], [[], []], "the example cell has no note or caveat");
+  for (const s of STEPS) for (const id of [s.from, ...outputs(s)].filter((id) => !["notes", "caveats"].includes(id))) assert.ok(s.example.highlight[id]?.length, `${s.id} ${id}`);
 });
 
 test("a step's tables are the map's inputs, in order, then its outputs", () => {
@@ -153,7 +153,7 @@ test("a node links to its data where the data has a URL", () => {
     landscape: CMS.Landscape, links: `${blob}/links.csv`, found: `${blob}/found.csv`, pbp: CMS.PBP,
     plans: `#/2027/tables/${SHA}/plans/H1-1-0`, documents: `#/2027/tables/${SHA}/documents/H1-1-0`, checked: `${blob}/generated/documents_checked.csv`, text: null,
     sheet: `#/2027/tables/${SHA}/dvha/H1-1-0`, answers: null, facts: `#/2027/tables/${SHA}/document_facts/H1-1-0`,
-    presented: `#/2027/tables/${SHA}/presented/H1-1-0/dvha/G_vision`, cmsFacts: `#/2027/tables/${SHA}/pbp_facts/H1-1-0`, notes: `${blob}/comments.csv`, site: "#/2027/dvha/H1-1-0/vision",
+    presented: `#/2027/tables/${SHA}/presented/H1-1-0/dvha/G_vision`, cmsFacts: `#/2027/tables/${SHA}/pbp_facts/H1-1-0`, caveats: `#/2027/tables/${SHA}/caveats/H1-1-0`, notes: `${blob}/comments.csv`, site: "#/2027/dvha/H1-1-0/vision",
     prompt: `https://github.com/rosenhouse-bot-sandbox/shiba-data/blob/${SHA}/pipeline/fact_prompt.md`,
     rules: `https://github.com/rosenhouse-bot-sandbox/shiba-data/blob/${SHA}/pipeline/present.py`,
   });
@@ -170,6 +170,13 @@ test("Publish shows the cell's note", () => {
   const notes = records(stepById("publish"), t).find((r) => r.name === "comments");
   assert.deepEqual(notes.rows, [["caveat", "Limits apply."]]);
   assert.deepEqual(records(stepById("publish"), { ...full, notes: { status: "none", rows: [] } }).find((r) => r.name === "comments").rows, []);
+});
+
+test("Apply column rules and Publish show the cell's caveat", () => {
+  const t = { ...full, caveats: { status: "traced", rows: [{ kind: "caveat", comment: "The 20% is for genetic testing." }] } };
+  for (const id of ["column-rules", "publish"]) {
+    assert.deepEqual(records(stepById(id), t).find((r) => r.name === "caveats").rows, [["caveat", "The 20% is for genetic testing."]], id);
+  }
 });
 
 
@@ -281,7 +288,7 @@ test("the example's page text links to its blob", () => {
 test("Publish outputs only the shown citations, naming each document", () => {
   const [first, ...rest] = replay.citations.shown;
   const t = { ...replay, citations: { status: "traced", shown: rest, hidden: [first] } };
-  const [, presented, , site] = records(stepById("publish"), t);
+  const [, presented, , , site] = records(stepById("publish"), t);
   assert.equal(presented.rows.length, 5);
   assert.deepEqual(presented.hi, [0, 1, 2, 3]);
   assert.deepEqual(site.rows, presented.rows.slice(0, 4));

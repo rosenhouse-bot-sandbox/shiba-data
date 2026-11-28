@@ -85,6 +85,8 @@ export const NODES = {
   cmsFacts: { col: 2, row: 6, store: "d1", label: "pbp_facts",
     table: { name: "pbp_facts", note: "the facts the Ambulance rule considers, selected columns", cols: ["benefit", "setting", "condition", "amount", "source"],
       rows: [["emergency", "outside_us", "", "$115", "PBP"], ["emergency", "outside_us", "urgently needed services", "$40", "PBP"]] } },
+  caveats: { col: 2, row: 7, store: "d1", label: "caveats",
+    table: { name: "caveats", note: "the rule wrote no caveat", cols: ["sheet", "plan_id", "column", "kind", "comment"], rows: [] } },
   notes: { col: 2, row: 8, store: "git", label: "comments", git: "comments.csv",
     table: { name: "comments", note: "the cell has no note", cols: ["sheet", "plan_id", "column", "kind", "comment"], rows: [] } },
   site: { col: 1, row: 9, store: "web", label: "pdxplans.org",
@@ -141,16 +143,17 @@ export const STEPS = [
     paras: [["Code runs a ", ["quoteCheck", "quote check"], " of every fact against its page's text. A verifier, Claude Opus, then reads the page and judges each fact mixed with ", ["decoy", "decoys"], ". Last, a ", ["reviewer", "reviewer"], " checks each fact a value would cite. The verifier's and reviewer's answers are saved with the reader's."]],
     example: { highlight: { answers: [2], facts: [3, 4, 5] }, before: "SB: abroad, covered_by medicare", after: "rejected; the EOC's supplemental fact stands",
       paras: [["The verifier rejected the SB's worldwide fact: Medicare doesn't cover care abroad, so it is supplemental. The EOC's fact, already marked supplemental, passed."]] } },
-  { id: "column-rules", record: "rule", from: "facts", also: ["rules", "cmsFacts"], to: "presented", alsoTo: ["sheet"], label: "Apply column rules",
-    paras: [["Each column has a rule, written in code from the domain expert's instructions. It takes facts from the ", ["bestSource", "best source"], " and cites their quotes. It writes each value to the sheet and each citation to presented. A line that only CMS data backs has no citation, so a volunteer can't check it."]],
+  { id: "column-rules", record: "rule", from: "facts", also: ["rules", "cmsFacts"], to: "presented", alsoTo: ["sheet", "caveats"], label: "Apply column rules",
+    paras: [["Each column has a rule, written in code from the domain expert's instructions. It takes facts from the ", ["bestSource", "best source"], " and cites their quotes. It writes each value to the sheet and each citation to presented. A line that only CMS data backs has no citation, so a volunteer can't check it."],
+      ["Some rules also write a caveat from the facts a cell cites, such as \"In the labs range, the 20% is for genetic testing.\""]],
     example: { highlight: { facts: [0, 1, 2, 3], rules: [0, 2], presented: [0, 1, 2], sheet: [0] }, before: "ground $325, air 20%, abroad $325", after: "$325 or 20% | $325",
       paras: [["In the ", ["rule", "Ambulance rule"], ", line 1 takes in-network, Medicare-covered ground and air trips from the EOC. Line 2 takes trips abroad. Each line cites the quotes of the facts it used, so line 1 gets four citations and line 2 one, all from EOC page 46."]] } },
   { id: "write-notes", record: "notes", from: "sheet", also: ["presented"], to: "notes", label: "Write notes",
-    paras: [["Claude sessions write a note in a pull request where a value needs explaining. They read the cell and its citations, and each note cites a page and quote."]],
+    paras: [["Claude sessions write a note in a pull request where a value needs explaining that no rule gives, such as something the documents leave unclear. No workflow runs this step. Each note cites a page and quote."]],
     example: { highlight: { sheet: [0], presented: [0, 1, 2] }, before: "$325 or 20% | $325", after: "no note",
       paras: [["The Ambulance cell has no note."]] } },
-  { id: "publish", record: "citations", from: "sheet", also: ["presented", "notes"], to: "site", label: "Publish",
-    paras: [["Merging to main builds the site from the sheet, its citations and the notes that Claude sessions write. ", ["worker", "The pdxplans Worker"], " serves it at pdxplans.org, and the same build updates the volunteers' Google Sheet."]],
+  { id: "publish", record: "citations", from: "sheet", also: ["presented", "notes", "caveats"], to: "site", label: "Publish",
+    paras: [["Merging to main builds the site from the sheet, its citations, the notes that Claude sessions write and the rules' caveats. A cell with both shows both. ", ["worker", "The pdxplans Worker"], " serves it at pdxplans.org, and the same build updates the volunteers' Google Sheet."]],
     example: { highlight: { sheet: [0], presented: [0, 1, 2], site: [1, 4, 5] }, before: "$325 or 20% | $325, 5 quotes", after: "cell + EOC page 46 highlight", paras: [] } },
 ];
 
@@ -399,6 +402,7 @@ const codeLines = (url) => {
 };
 const sheetRow = table(["sheet"], "the cell", ["plan_id", "column", "value"], (t) => [[t.cell.plan_id, t.cell.col, shownValue(t.sheet.value)]]);
 const cellNote = table(["notes"], "the cell's note", ["kind", "comment"], (t) => t.notes.rows.map((r) => [r.kind, r.comment]));
+const cellCaveat = table(["caveats"], "the cell's caveat", ["kind", "comment"], (t) => t.caveats.rows.map((r) => [r.kind, r.comment]));
 const kindOf = (t, url) => t.documents.documents.find((d) => d.url === url)?.kind ?? "";
 const CITE_COLS = ["line", "value", "document", "pdf_page", "quote"];
 const citationRows = (t, rows) => rows.map((c) => [String(c.line ?? ""), shownValue(c.value ?? ""), kindOf(t, c.url), String(c.pdf_page), c.quote]);
@@ -449,6 +453,7 @@ export const RECORDS = {
     cmsFacts: ruleFacts("pbp", "the CMS facts the rule considered"),
     presented: cellCitations,
     sheet: sheetRow,
+    caveats: cellCaveat,
   },
   "write-notes": {
     sheet: sheetRow,
@@ -460,6 +465,7 @@ export const RECORDS = {
     presented: table(["citations", "documents"], "the cell's citations; highlighted ones are shown", CITE_COLS,
       (t) => citationRows(t, allCitations(t)), (t) => t.citations.shown.map((_, i) => i)),
     notes: cellNote,
+    caveats: cellCaveat,
     site: table(["citations", "documents"], "the quotes the cell shows", CITE_COLS, (t) => citationRows(t, t.citations.shown)),
   },
 };
