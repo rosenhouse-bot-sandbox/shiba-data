@@ -72,7 +72,7 @@ class MainTest(unittest.TestCase):
     def main(self, tasks=(), saved=(), pulled=(), status="", before=None, after=None, candidate="document_facts@23"):
         """main's order of steps and its output, for candidate tasks as (key, prompt text), and the keys of answers
         saved before it starts and of answers it pulls."""
-        order, out = [], io.StringIO()
+        order, out, self.presents = [], io.StringIO(), []
         with tempfile.TemporaryDirectory() as tmp:
             data, work = pathlib.Path(tmp, "data"), pathlib.Path(tmp, "work")
             (data / "answers").mkdir(parents=True)
@@ -82,6 +82,7 @@ class MainTest(unittest.TestCase):
 
             def model_steps(data_, work_, versions, asker, copy):
                 order.append(("model_steps", versions["document_facts"]))
+                self.presents.append(versions["present"])
                 if asker is None:
                     return []
                 order.append(("copy", sorted(os.listdir(copy))))
@@ -137,9 +138,14 @@ class MainTest(unittest.TestCase):
         self.assertNotIn("--ignored", order[0])
         self.assertIn("uncommitted changes", failed)
 
-    def test_refuses_more_than_one_candidate(self):
-        order, failed, _ = self.main(candidate="present@16,document_facts@23")
+    def test_refuses_a_candidate_without_document_facts(self):
+        order, failed, _ = self.main(candidate="present@36")
         self.assertEqual((order, failed), ([], "blast.py checks one document_facts candidate."))
+
+    def test_runs_the_other_candidates_beside_document_facts(self):
+        order, failed, _ = self.main(saved=["old"], candidate="present@36,document_facts@23")
+        self.assertIsNone(failed)
+        self.assertEqual(self.presents, [36, 36])
 
 
 class RestoreTest(unittest.TestCase):
