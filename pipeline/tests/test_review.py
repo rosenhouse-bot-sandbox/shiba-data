@@ -201,6 +201,20 @@ class VersionTest(unittest.TestCase):
         notes = {c.args[3][0]["plan_id"]: c.args[-1] for c in verifier_task.call_args_list}
         self.assertEqual(notes[plan], {"imaging": "Every reader. This plan."})
 
+    @built.check
+    def test_asks_about_a_fact_of_a_kind_about_one_benefit_with_its_kind_note_if_the_version_says(self):
+        dental = fact(plan_id="H5439-019-0", source="DENTAL", benefit="dental.comprehensive")
+        eoc = fact(plan_id="H5439-019-0", benefit="dental.comprehensive")
+        version = dict(notes={"dental": "Teeth."}, kinds={"dental": {"DENTAL": "Kind note."}},
+                       plan_notes={"dental": {"H5439-019-0": "This plan.", "H5439-015-0": "Another plan."}})
+        with mock.patch.object(review, "Doc"), \
+                mock.patch.object(extract, "verifier_task", return_value="task") as verifier_task:
+            sees = review.reviewer_task(DATA, None, dict(version, reviewer_sees_kinds=True))
+            sees(dental), sees(eoc)
+            review.reviewer_task(DATA, None, version)(dental)
+        self.assertEqual([c.args[-1] for c in verifier_task.call_args_list],
+                         [{"dental": "Kind note."}, {"dental": "Teeth. This plan."}, {"dental": "Teeth. This plan."}])
+
     def test_plan_notes_keep_the_order_the_version_gives_its_plans(self):
         plans = [f"H{n:04}-000-0" for n in range(20)]
         version = dict(plan_notes={"imaging": {p: p for p in plans}}, recheck_plan_notes={"imaging": {plans[0]: "Again."}})

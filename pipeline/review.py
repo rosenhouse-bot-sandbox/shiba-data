@@ -58,23 +58,23 @@ def plan_notes(version):
                 for p in dict.fromkeys([*first.get(g, {}), *second.get(g, {})])} for g in set(first) | set(second)}
 
 
-def task(data, texts, notes={}, after={}, before={}, plan_notes={}):
+def task(data, texts, notes={}, after={}, before={}, plan_notes={}, kinds={}):
     docs = {d["sha256"]: d for d in extract.documents(data)}
     plan_rows = extract.plans(data)
     pages = {}
 
     def of(f):
-        doc = docs[f["doc_sha"]]
+        doc, group = docs[f["doc_sha"]], f["benefit"].split(".")[0]
         if doc["id"] not in pages:
             pages[doc["id"]] = Doc(texts, doc["id"]).pages("layout")
-        return extract.verifier_task(doc, plan_rows, pages[doc["id"]], [f], data,
-                                     extract.for_plans(notes, plan_notes, (f["plan_id"],)), after=after, before=before)
+        return extract.verifier_task(doc, plan_rows, pages[doc["id"]], [f], data, extract.doc_notes(
+            doc, (group,), notes, plan_notes, (f["plan_id"],), kinds.get(group, {})), after=after, before=before)
     return of
 
 
 def reviewer_task(data, texts, version):
     return task(data, texts, second_notes(version), version.get("check_after", {}), version.get("check_before", {}),
-                plan_notes(version))
+                plan_notes(version), version.get("kinds", {}) if version.get("reviewer_sees_kinds") else {})
 
 
 def saved(data, model, text, effort):
