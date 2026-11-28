@@ -538,6 +538,7 @@ def dot(*leaves):
                     lambda f: f["network"] in ("in", "any"), lambda f: f"network is {f['network']!r}")
         yes = screen(mine, offers)
         return [("●", top(yes))] if yes else [("", top(mine) if mine else [])]
+    rule.dot = True
     return rule
 
 
@@ -1948,6 +1949,9 @@ VERSIONS[30] = {}
 VERSIONS[31] = {}
 # Version 32 takes dental exclusions from the Summary of Benefits when it lists them.
 VERSIONS[32] = {}
+# Version 33 writes caveats.
+VERSIONS[33] = {}
+CAVEATS_SINCE = 33
 # The version that first presents each later column. Earlier versions hold its cells.
 SINCE = {("dvha", "C_premium"): 3, ("dvha", "G_vision"): 4, ("dvha", "H_hearing"): 4, ("dvha", "E_optional_packages"): 5,
          ("dvha", "F_dental"): 6, ("dvha", "I_alt_care_otc_travel"): 6, ("dvha", "J_extra_benefits"): 6,
@@ -1970,8 +1974,55 @@ def held(data, version=None):
                                 for r in plans(data)}
 
 
-def cited_lines(data, version=None):
-    """Yields (sheet, plan_id, column, line, value, document facts) for each line a presented cell shows.
+PRICE = re.compile(r"\$[\d,]+(?:\.\d+)?|\d+(?:\.\d+)?%")
+
+
+def prices(found):
+    return {(a.startswith("$"), facts.number(a)) for a in amounts(found) if PRICE.fullmatch(a)}
+
+
+def where_stated(f):
+    return f"{f['source']} page {f['page']}"
+
+
+def genetic_labs(value, cited):
+    """Names the prices in the labs range that only genetic tests give."""
+    genetic = [f for f in cited if facts.covers("tests.genetic", f["benefit"]) and presents([f])]
+    labs = prices([f for f in cited if kin(f["benefit"], "tests.lab") and not facts.covers("tests.genetic", f["benefit"])])
+    named = [(price, givers[0]) for price in PRICE.findall(value.partition("/")[2])
+             if (key := (price.startswith("$"), facts.number(price))) not in labs
+             and (givers := [f for f in genetic if key in prices([f])])]
+    if not named:
+        return None
+    priced_ = " and ".join(price for price, _ in named)
+    verb = "are" if len(named) > 1 else "is"
+    return f"In the labs range, the {priced_} {verb} for genetic testing ({where_stated(named[0][1])}).", named[0][1]
+
+
+# A condition that reads as the end of "covers this only ...".
+WHEN = re.compile(r"(?:immediately )?(?:after|following|when|if|while|during|within|upon|before)\b")
+
+
+def conditional(value, cited):
+    """Names the condition that keeps a blank dot cell's benefit from a dot."""
+    for f in cited if not value else []:
+        if WHEN.match(f["condition"]) and offers(dict(f, condition="")) and presents([f]):
+            price = f" at {f['amount']}" if f["cost_kind"] in PRICED else ""
+            return f"{where_stated(f)} covers this{price} only {f['condition']}.", f
+    return None
+
+
+CAVEATS = {("main", "K_tests_labs"): genetic_labs} | {("main", c): conditional for c, r in COLUMNS.items() if getattr(r, "dot", False)}
+
+
+def caveats(sheet, column, value, cited, version):
+    """(text, fact) explaining a line from the facts it cites, or None."""
+    template = CAVEATS.get((sheet, column)) if version >= CAVEATS_SINCE else None
+    return template(value, cited) if template else None
+
+
+def presented_lines(data, version=None):
+    """Yields (sheet, plan_id, column, line, value, facts) for each line a presented cell shows.
     A one-line cell's line is blank."""
     version = version or current(data)
     held_cells = held(data, version)
@@ -1983,7 +2034,13 @@ def cited_lines(data, version=None):
                 value = shown(got)
                 got, one_line = got[:value.count(" | ") + 1], " | " not in value
                 for n, (value, cited) in enumerate(got, 1):
-                    yield sheet, plan_id, column, "" if one_line else str(n), value, [f for f in cited if presents([f])]
+                    yield sheet, plan_id, column, "" if one_line else str(n), value, cited
+
+
+def cited_lines(data, version=None):
+    """Like presented_lines, with only the document facts."""
+    for *line, cited in presented_lines(data, version):
+        yield *line, [f for f in cited if presents([f])]
 
 
 def citation_rows(data, version=None):
@@ -1997,6 +2054,22 @@ def citation_rows(data, version=None):
                 full = dict(row, url=url[f["doc_sha"]], pdf_page=f["page"], quote=quote)
                 out[tuple(full.values())] = full
     return sorted(out.values(), key=lambda r: tuple(r.values()))
+
+
+def caveat_rows(data, version=None):
+    """One note row per cell that a caveat explains, its lines' caveats joined."""
+    version = version or current(data)
+    url = {d["sha256"]: d["url"] for d in sheets.rows(data / "generated" / "documents_checked.csv") if d["sha256"]}
+    out = {}
+    for sheet, plan_id, column, _, value, cited in presented_lines(data, version):
+        if got := caveats(sheet, column, value, cited, version):
+            text, f = got
+            if (sheet, plan_id, column) in out:
+                out[sheet, plan_id, column]["comment"] += " " + text
+                continue
+            out[sheet, plan_id, column] = dict(sheet=sheet, plan_id=plan_id, column=column, kind="caveat", comment=text,
+                                               url=url[f["doc_sha"]], pdf_page=f["page"], quote=json.loads(f["quotes"])[0])
+    return list(out.values())
 
 
 def cited_facts(data, version=None):
@@ -2025,6 +2098,10 @@ def write(data, version=None):
         out = csv.DictWriter(f, sheets.COLUMNS, lineterminator="\n")
         out.writeheader()
         out.writerows(citation_rows(data, version))
+    with open(data / sheets.CAVEATS, "w", newline="") as f:
+        out = csv.DictWriter(f, sheets.NOTE_COLUMNS, lineterminator="\n")
+        out.writeheader()
+        out.writerows(caveat_rows(data, version))
 
 
 if __name__ == "__main__":

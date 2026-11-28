@@ -12,6 +12,7 @@ data/*/machine/document_facts.csv
 data/*/generated/main_chart.csv
 data/*/generated/dvha.csv
 data/*/generated/presented.csv
+data/*/generated/caveats.csv
 _tables/
 # pipeline/store.py pulls these from the packs that data/<year>/lock.json pins.
 data/*/answers/

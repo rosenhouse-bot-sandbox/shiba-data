@@ -67,5 +67,21 @@ class CitationsTest(unittest.TestCase):
             sheets.citations(self.data, {"u": "EOC"})
 
 
+def note(column, comment, kind="caveat"):
+    return dict(sheet="main", plan_id="H1-001-0", column=column, kind=kind, comment=comment, url="u", pdf_page="1", quote="q")
+
+
+class NotesTest(unittest.TestCase):
+    def test_a_cell_with_a_comment_and_a_caveat_gets_both_texts_and_the_comments_source(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            data = pathlib.Path(tmp)
+            write(data / sheets.COMMENTS, [note("G_specialist", "Odd.", "question"), note("L_xray_imaging", "Hand.")],
+                  sheets.NOTE_COLUMNS)
+            write(data / sheets.CAVEATS, [dict(note("L_xray_imaging", "Rule."), url="v"), note("U_naturopath", "Only.")],
+                  sheets.NOTE_COLUMNS)
+            self.assertEqual(sheets.notes(data), [note("G_specialist", "Odd.", "question"), note("L_xray_imaging", "Hand. Rule."),
+                                                  note("U_naturopath", "Only.")])
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -89,7 +89,7 @@ def build(year, out, sha, work=None):
             load_answers(db, data, work)
         if outcomes:
             load_checks(db, work)
-        insert(db, "comment", (dict(renamed(c), pdf_page=number(c["pdf_page"])) for c in read(data / "comments.csv")))
+        insert(db, "comment", (dict(renamed(c), pdf_page=number(c["pdf_page"])) for c in sheets.notes(data)))
         db.commit()
     finally:
         db.close()
