@@ -90,7 +90,8 @@ def build(year, out, sha, work=None):
         if outcomes:
             load_checks(db, work)
         for table, path in (("comment", sheets.COMMENTS), ("caveat", sheets.CAVEATS)):
-            insert(db, table, (dict(renamed(c), pdf_page=number(c["pdf_page"])) for c in read(data / path)))
+            insert(db, table, (dict(renamed({k: c[k] for k in sheets.NOTE_COLUMNS}), pdf_page=number(c["pdf_page"]))
+                               for c in read(data / path)))
         db.commit()
     finally:
         db.close()

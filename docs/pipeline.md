@@ -343,6 +343,8 @@ dvha,H1372-003-0,F_dental,caveat,"EOC page 57 says there is no coinsurance or co
 main,H2923-009-0,I_outpatient_surgery,question,"At an ambulatory surgical center, EOC page 95 adds 30% coinsurance for the professional fee to the 50% facility coinsurance.",95,30% coinsurance for outpatient procedures/ surgery at an ASC - professional
 ```
 
+Each comment's `cell` column holds the value it explains. A test fails once the cell shows another value, so the comment gets rewritten or deleted.
+
 Claude sessions also list, in `note_facts.csv`, the cell's cited facts that each note is about. A note about something the cell does not cite gets no rows. A test fails if a note's cell stops citing one of its facts.
 
 ```

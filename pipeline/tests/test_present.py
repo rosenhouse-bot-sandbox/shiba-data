@@ -2487,6 +2487,14 @@ class LostPricesTest(unittest.TestCase):
         self.assertEqual(lost, [])
 
 
+class StaleCommentsTest(unittest.TestCase):
+    @built.check
+    def test_every_comment_explains_the_value_its_cell_shows(self):
+        stale = sheets.stale_comments(years.data_dir(YEAR))
+        self.assertEqual([f"{c['sheet']} {c['plan_id']} {c['column']}: {c['cell']}" for c in stale], [],
+                         "Rewrite each stale comment for its cell's new value, or delete it, and update its cell column.")
+
+
 class NoteFactsTest(unittest.TestCase):
     def test_a_tag_must_name_a_note_and_a_fact_its_cell_cites(self):
         cell = ("main", "H1036-153-0", "K_tests_labs")

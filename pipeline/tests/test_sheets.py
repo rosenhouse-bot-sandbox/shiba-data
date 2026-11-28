@@ -82,6 +82,19 @@ class NotesTest(unittest.TestCase):
             self.assertEqual(sheets.notes(data), [note("G_specialist", "Odd.", "question"), note("L_xray_imaging", "Hand. Rule."),
                                                   note("U_naturopath", "Only.")])
 
+    def test_a_comment_is_stale_once_its_cell_shows_another_value(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            data = pathlib.Path(tmp)
+            os.makedirs(data / "generated")
+            for sheet, name in sheets.SHEETS.items():
+                write(data / "generated" / name, [dict(plan_id="H1-001-0", G_specialist="$40", L_xray_imaging="$5")],
+                      ["plan_id", "G_specialist", "L_xray_imaging"])
+            write(data / sheets.COMMENTS, [dict(note("G_specialist", "Odd.", "question"), cell="$40"),
+                                           dict(note("L_xray_imaging", "Old."), cell="$0")], sheets.COMMENT_COLUMNS)
+            write(data / sheets.CAVEATS, [], sheets.NOTE_COLUMNS)
+            self.assertEqual([c["column"] for c in sheets.stale_comments(data)], ["L_xray_imaging"])
+            self.assertEqual(sheets.notes(data)[0], note("G_specialist", "Odd.", "question"))
+
 
 if __name__ == "__main__":
     unittest.main()
