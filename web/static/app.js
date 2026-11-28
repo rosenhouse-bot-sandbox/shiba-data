@@ -5,6 +5,7 @@ import { parse, format } from "./permalink.js";
 import { el } from "./dom.js";
 import { howView, howLink, traceUrl } from "./how.js";
 import { initAppearance } from "./appearance.js";
+import { hint } from "./hint.js";
 import { tablesView, ordered, known } from "./tables.js";
 import { EXAMPLE, STEPS, NODES, nodeHref } from "./pipeline.js";
 
@@ -323,11 +324,14 @@ function updateUrl() {
   routed = location.hash;
 }
 
+// A column's label, which shows what the column means when hovered, focused or clicked.
+const aboutColumn = (c) => hint(c.label, el("span", {}, c.about));
+
 function sheetView(name) {
   const sheet = site[name];
   const table = el("table", { class: "sheet" });
   table.append(el("thead", {}, el("tr", {}, el("th", { class: "plan", scope: "col" }, "Plan"),
-    ...sheet.columns.map((c) => el("th", { scope: "col" }, c.label)))));
+    ...sheet.columns.map((c) => el("th", { scope: "col" }, aboutColumn(c))))));
   const body = el("tbody");
   let section;
   for (const row of sheet.rows) {
@@ -555,7 +559,7 @@ function benefitTable(name, plan) {
   const sheet = site[name];
   const row = sheet.rows.find((r) => r.plan_id === plan.plan_id);
   return el("section", {}, el("h3", {}, SHEET_NAMES[name]), el("table", { class: "benefits" }, el("tbody", {},
-    ...sheet.columns.map((c) => el("tr", {}, el("th", { scope: "row" }, c.label), valueCell("plan", name, plan, c, row.cells[c.key]))))));
+    ...sheet.columns.map((c) => el("tr", {}, el("th", { scope: "row" }, aboutColumn(c)), valueCell("plan", name, plan, c, row.cells[c.key]))))));
 }
 
 const kindName = (k) => ({ SB: "Summary of Benefits", EOC: "Evidence of Coverage", RIDER: "Optional rider" })[k] || k;

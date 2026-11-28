@@ -143,3 +143,63 @@ CARRIERS = {
 
 def labels(sheet):
     return {c.key: c.label for c in COLUMNS if c.sheet == sheet}
+
+
+# What each column shows, for volunteers. The site shows it on the column's header.
+DOT_ABOUT = ("A dot means every member gets the routine benefit, beyond what Original Medicare covers. "
+             "A benefit only in an optional package, or only for members with certain conditions, gets no dot.")
+ONE_LINE = "One line means both lines would be the same."
+ABOUT = {
+    ("main", "C_premium"): "The monthly plan premium, on top of the Part B premium.",
+    ("main", "D_premium_full_extra_help"): "The monthly premium for a member with full Extra Help. \"n/a\" means the plan has no drug coverage.",
+    ("main", "E_moop"): "The most a member pays in a year for covered medical care. Line 1 is in network. "
+                        f"For a PPO, line 2 is in and out of network combined. {ONE_LINE}",
+    ("main", "F_primary_care"): "The copay for a primary care visit. Line 1 is in network, line 2 out of network. "
+                                f"A range covers every in-network price, including telehealth visits. {ONE_LINE}",
+    ("main", "G_specialist"): "The copay for a specialist visit. Line 1 is in network, line 2 out of network. "
+                              f"A range covers every in-network price, including telehealth visits. {ONE_LINE}",
+    ("main", "H_inpatient"): "The cost of a hospital stay. \"$395 | 1-5\" means $395 a day for days 1 to 5, then $0. "
+                             "\"per admit\" means one copay per stay.",
+    ("main", "I_outpatient_surgery"): "Line 1 is surgery at an outpatient hospital, line 2 at an ambulatory surgical center. "
+                                      "A $0 low end often comes from a diagnostic colonoscopy or skin biopsy, not surgery. "
+                                      f"{ONE_LINE}",
+    ("main", "J_outpatient_rehab"): "The copay for a physical, occupational or speech therapy visit.",
+    ("main", "K_tests_labs"): "The cell shows tests, then labs. Tests are diagnostic tests such as EKGs and sleep studies. "
+                              "Labs are outpatient lab services, including genetic tests.",
+    ("main", "L_xray_imaging"): "Line 1 is X-rays. Line 2 is CT, MRI and PET scans. "
+                                f"A $0 low end on line 2 often comes from a diagnostic mammogram. {ONE_LINE}",
+    ("main", "M_part_b_drugs"): "The cost of Part B drugs, such as chemotherapy, insulin and vaccines. "
+                                "The low end usually comes from vaccines or allergy shots, not chemotherapy. "
+                                "A copay, such as $35, is usually for insulin.",
+    ("main", "N_pharmacy_deductible"): "The Part D drug deductible. \"not tiers 1,2\" means drugs in tiers 1 and 2 skip it.",
+    ("main", "O_medical_deductible"): "The deductible for medical care. \"some\" means it applies to some services only. "
+                                      "\"some OON\" means it applies only out of network. "
+                                      "\"Same as 2027 Pt B Deductible\" means Original Medicare's Part B deductible.",
+    ("main", "P_vision"): f"The column covers routine eye exams and eyewear. {DOT_ABOUT}",
+    ("main", "Q_hearing"): f"The column covers routine hearing exams and hearing aids. {DOT_ABOUT}",
+    ("main", "R_dental"): f"The column covers preventive and comprehensive dental care. {DOT_ABOUT}",
+    ("main", "S_acupuncture"): f"The column covers acupuncture beyond Medicare's benefit for chronic low back pain. {DOT_ABOUT}",
+    ("main", "T_chiropractic"): f"The column covers chiropractic care beyond Medicare's spinal manipulation. {DOT_ABOUT}",
+    ("main", "U_naturopath"): f"The column covers visits to a naturopathic doctor. {DOT_ABOUT}",
+    ("main", "V_massage"): f"The column covers massage therapy. {DOT_ABOUT}",
+    ("main", "W_fitness"): f"The column covers a gym membership or fitness program. {DOT_ABOUT}",
+    ("main", "X_transportation"): f"The column covers rides to medical appointments. {DOT_ABOUT}",
+    ("main", "Y_otc"): f"The column covers an allowance for over-the-counter items. Rewards programs do not count. {DOT_ABOUT}",
+    ("main", "Z_part_b_reduction"): "A dot means the plan pays part of the member's Part B premium.",
+    ("main", "AA_opt_packages"): "A dot means the plan sells optional benefit packages for an extra monthly premium.",
+    ("main", "AB_ambulance"): "The cost of an ambulance trip. Line 1 is within the U.S., line 2 is an emergency outside it. "
+                              "\"EOC unclear\" means the plan's Evidence of Coverage covers emergency care abroad "
+                              "but does not mention ambulances there.",
+    ("dvha", "C_premium"): "The monthly plan premium, on top of the Part B premium.",
+    ("dvha", "D_premium_full_extra_help"): "The monthly premium for a member with full Extra Help. \"n/a\" means the plan has no drug coverage.",
+    ("dvha", "E_optional_packages"): "The cell lists optional benefit packages a member can buy, with their monthly premiums.",
+    ("dvha", "F_dental"): "The cell shows the plan's dental benefit, and any optional dental rider's. "
+                          "PREV is preventive care, such as cleanings. COMP is comprehensive care, such as fillings and crowns. "
+                          "\"max\" is the yearly limit the plan pays.",
+    ("dvha", "G_vision"): "The cell shows routine eye exams and the eyewear allowance.",
+    ("dvha", "H_hearing"): "The cell shows routine hearing exams and hearing aids, priced per aid or as an allowance.",
+    ("dvha", "I_alt_care_otc_travel"): "The cell shows acupuncture, chiropractic, naturopathy, massage, fitness, telehealth, "
+                                       "the over-the-counter allowance, and emergency care outside the U.S.",
+    ("dvha", "J_extra_benefits"): "The cell shows other extra benefits, such as meals, rewards and nurse lines. "
+                                  "Some are only for members with certain conditions.",
+}

@@ -335,6 +335,21 @@ test("resizing keeps the cited quote in view", async () => {
   assert.ok(visible);
 });
 
+test("a column header says what the column shows on hover, and a click pins it", async () => {
+  await page.goto(`${base}#/main`);
+  const column = site.main.columns.find((c) => c.key === "M_part_b_drugs");
+  const box = page.locator("table.sheet thead .term-box", { has: page.locator(".term", { hasText: column.label }) });
+  const pop = box.locator(".term-pop");
+  assert.equal(await pop.isVisible(), false);
+  await box.locator(".term").hover();
+  assert.equal(await pop.textContent(), column.about);
+  await box.locator(".term").click();
+  await page.mouse.move(0, 0);
+  assert.ok(await pop.isVisible());
+  await page.keyboard.press("Escape");
+  assert.equal(await pop.isVisible(), false);
+});
+
 test("color marks a comment, shown on hover and in the note", async () => {
   await page.goto(`${base}#/main`);
   const index = site.main.columns.findIndex((c) => c.key === "K_tests_labs");
@@ -1157,8 +1172,8 @@ test("pipeline view: an unknown step opens the first step", async () => {
 
 test("pipeline view: hovering a term shows its code, linked at the build's commit; clicking pins it and Escape closes it", async () => {
   await openHow(page, "main/H1036-153-0/ambulance/column-rules");
-  const box = page.locator(".how-term-box", { has: page.locator("button", { hasText: "Ambulance rule" }) });
-  const pop = box.locator(".how-pop");
+  const box = page.locator(".term-box", { has: page.locator("button", { hasText: "Ambulance rule" }) });
+  const pop = box.locator(".term-pop");
   await box.hover();
   assert.ok(await pop.isVisible());
   assert.match(await pop.locator("pre").textContent(), /^def ambulance\(/);
@@ -1178,15 +1193,15 @@ test("pipeline view: a term's pop-over stays inside the window, and opening anot
   try {
     await openHow(page, "main/H1036-153-0/ambulance/check-facts");
     for (const name of ["quote check", "decoys", "reviewer"]) {
-      await page.locator(".how-term", { hasText: name }).first().focus();
-      const pops = page.locator(".how-pop:visible");
+      await page.locator(".term", { hasText: name }).first().focus();
+      const pops = page.locator(".term-pop:visible");
       assert.equal(await pops.count(), 1, name);
       const r = await pops.boundingBox();
       assert.ok(r.x >= 0 && r.x + r.width <= 1000 && r.y >= 0 && r.y + r.height <= 700, `${name}: ${JSON.stringify(r)}`);
     }
-    await page.locator(".how-term", { hasText: "reviewer" }).first().click();
+    await page.locator(".term", { hasText: "reviewer" }).first().click();
     await page.mouse.click(5, 690);
-    assert.equal(await page.locator(".how-pop:visible").count(), 0);
+    assert.equal(await page.locator(".term-pop:visible").count(), 0);
   } finally {
     await page.setViewportSize({ width: 1600, height: 1000 });
   }
@@ -1452,12 +1467,12 @@ test("landscape phone: a term's pop-over leaves its term uncovered", async () =>
   const p = await newPage({ ...devices["iPhone 13 landscape"] });
   await p.goto(`${base}#/2027/how/main/H1036-153-0/ambulance/check-facts`);
   await p.waitForSelector(".how-lens");
-  const term = p.locator(".how-term", { hasText: "quote check" }).first();
+  const term = p.locator(".term", { hasText: "quote check" }).first();
   // Scrolling closes a pop-over, so the scroll that brings the term into view must land before the tap.
   await term.scrollIntoViewIfNeeded();
   await p.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))));
   await term.tap();
-  const pop = await p.locator(".how-pop:visible").boundingBox(), at = await term.boundingBox();
+  const pop = await p.locator(".term-pop:visible").boundingBox(), at = await term.boundingBox();
   assert.ok(pop.y >= at.y + at.height || pop.y + pop.height <= at.y, JSON.stringify({ pop, at }));
   assert.ok(pop.y >= 0 && pop.y + pop.height <= p.viewportSize().height, JSON.stringify(pop));
 });
