@@ -355,12 +355,12 @@ test("color marks a comment, shown on hover and in the note", async () => {
   const index = site.main.columns.findIndex((c) => c.key === "K_tests_labs");
   const cell = row("H5439-019-0").locator("td").nth(index);
   assert.match(await cell.getAttribute("class"), /commented/);
-  assert.match(await cell.getAttribute("title"), /EKG/);
+  assert.match(await cell.getAttribute("title"), /volunteer chart/);
   assert.equal(await page.locator("td.commented").count(), site.main.rows.flatMap((r) => Object.values(r.cells)).filter((c) => c.comment).length);
   const background = (td) => td.evaluate((e) => getComputedStyle(e).backgroundColor);
   assert.notEqual(await background(row("H2001-045-0").locator("td.cited").first()), await background(cell));
   await cell.click();
-  assert.match(await page.textContent("#source-note .comment"), /EKG/);
+  assert.match(await page.textContent("#source-note .comment"), /volunteer chart/);
   const { doc, page: n, quote } = site.main.rows.find((r) => r.plan_id === "H5439-019-0").cells.K_tests_labs.comment;
   await shown(doc, n);
   await page.$eval("#page-area", (area) => { area.scrollTop = 0; delete area.dataset.shown; });
@@ -402,7 +402,7 @@ test("Notes lists every comment with links to its document page and cell", async
   await rows.first().waitFor();
   assert.equal(await rows.count(), comments.length);
   const wellcare = rows.filter({ has: page.locator('td[data-plan="H5439-019-0"][data-col="K_tests_labs"]') });
-  assert.match(await wellcare.textContent(), /EKGs/);
+  assert.match(await wellcare.textContent(), /genetic testing/);
   await wellcare.locator("td.links a", { hasText: "EOC page 90" }).click();
   await shown(docOf("H5439-019-0", "EOC"), 90);
   await wellcare.locator("td.links a", { hasText: "Show in Main chart" }).click();
