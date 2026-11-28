@@ -329,6 +329,8 @@ sheet,plan_id,column,kind,comment,pdf_page,quote
 main,H2923-001-0,K_tests_labs,caveat,"In the labs range, the 20% is for genetic testing (EOC page 86).",86,Office or Freestanding location: 20% coinsurance
 ```
 
+Since present 37, where a main cell lacks a price that SHIBA's final chart, `final_chart.csv`, shows, the rules also write a `contradiction` note, which goes before any caveat.
+
 ## 8. Claude sessions write notes
 
 Some values need explaining that no rule gives. Claude sessions write those notes in pull requests.
