@@ -1006,20 +1006,20 @@ test("pipeline view: a step on the map opens in the lens, and Back returns", asy
   await openHow(page, "main/H1036-153-0/ambulance/check-facts");
   await page.click(".how-pill:text-is('Apply column rules')");
   await page.waitForFunction(() => document.querySelector(".how-step")?.textContent === "Apply column rules");
-  assert.equal(await page.locator(".how-node.on").count(), 5);
+  assert.equal(await page.locator(".how-node.on").count(), 6);
   assert.equal(await page.locator(".how-rows.input .hi").count(), 5);
   assert.equal(await page.evaluate(() => document.activeElement.className), "how-step");
   await page.goBack();
   await page.waitForFunction(() => document.querySelector(".how-step")?.textContent === "Check facts");
 });
 
-test("pipeline view: a step with three inputs and two outputs lights them all, joining and splitting at its one label", async () => {
+test("pipeline view: a step with three inputs and three outputs lights them all, joining and splitting at its one label", async () => {
   await openHow(page, "main/H1036-153-0/ambulance/column-rules");
-  assert.equal(await page.locator(".how-node.on").count(), 5);
-  assert.equal(await page.locator(".how-edge.on").count(), 5);
+  assert.equal(await page.locator(".how-node.on").count(), 6);
+  assert.equal(await page.locator(".how-edge.on").count(), 6);
   assert.equal(await page.locator(".how-pill.on").count(), 1);
   assert.equal(await page.locator(".how-pill").count(), 10);
-  assert.equal(await page.locator(".how-edge[marker-end]").count(), 11);
+  assert.equal(await page.locator(".how-edge[marker-end]").count(), 12);
 });
 
 test("pipeline view: a table heading says where its data lives and opens it, in a new tab when it is elsewhere", async () => {
@@ -1265,7 +1265,7 @@ test("pipeline view: a DVHA cell's detail links to its pipeline view, which show
   assert.match(await page.textContent(".how-cell"), /Vision/);
   assert.ok((await page.locator(".how-pill").allTextContents()).includes("Apply column rules"));
   await openHow(page, "dvha/H1036-153-0/vision/column-rules");
-  assert.deepEqual(await page.locator(".how-rows-head code").allTextContents(), ["document_facts", "rule code", "pbp_facts", "presented", "dvha"]);
+  assert.deepEqual(await page.locator(".how-rows-head code").allTextContents(), ["document_facts", "rule code", "pbp_facts", "presented", "dvha", "caveats"]);
   assert.match(await page.textContent(".how-strip"), /becomes line 1 /);
   const code = page.locator(".how-rows", { has: page.locator('.how-rows-head code:text-is("rule code")') });
   assert.equal(await code.locator("td").first().textContent(), "G_vision in DVHA");

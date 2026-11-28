@@ -89,7 +89,8 @@ def build(year, out, sha, work=None):
             load_answers(db, data, work)
         if outcomes:
             load_checks(db, work)
-        insert(db, "comment", (dict(renamed(c), pdf_page=number(c["pdf_page"])) for c in sheets.notes(data)))
+        for table, path in (("comment", sheets.COMMENTS), ("caveat", sheets.CAVEATS)):
+            insert(db, table, (dict(renamed(c), pdf_page=number(c["pdf_page"])) for c in read(data / path)))
         db.commit()
     finally:
         db.close()
@@ -354,6 +355,8 @@ def cell(db, sheet, plan_id, col):
         "rule": rule_record,
         "notes": record(n := rows(db, "SELECT kind, comment, url, pdf_page, quote FROM comment WHERE sheet = ? AND plan_id = ? "
                                       "AND col = ?", sheet, plan_id, col), rows=n),
+        "caveats": record(c := rows(db, "SELECT kind, comment, url, pdf_page, quote FROM caveat WHERE sheet = ? AND plan_id = ? "
+                                        "AND col = ?", sheet, plan_id, col), rows=c),
         "citations": record(True, shown=[r for r in cited if not r["hidden"]], hidden=[r for r in cited if r["hidden"]]),
         "build": record(True, sha=build_row["sha"], steps=json.loads(build_row["steps"]), code=code),
     }

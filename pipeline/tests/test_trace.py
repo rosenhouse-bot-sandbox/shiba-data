@@ -52,7 +52,7 @@ class TraceTest(unittest.TestCase):
                         self.assertEqual(records["cell"]["value"], r[col])
                         self.assertEqual(set(records), {
                             "cell", "plan", "documents", "sheet", "answers", "fact_checks", "rule",
-                            "notes", "citations", "build"})
+                            "notes", "caveats", "citations", "build"})
                         self.assertLessEqual(statuses(records), STATUSES)
 
     def test_shows_the_values_and_citations_the_site_shows_in_its_order(self):
@@ -100,8 +100,9 @@ class TraceTest(unittest.TestCase):
         self.assertEqual(records["notes"], {"status": trace.NONE, "rows": []})
 
     def test_lists_a_caveat_the_rule_wrote(self):
-        rows = self.cell("main", "H9003-006-0", "X_transportation")["notes"]["rows"]
-        self.assertEqual([(r["kind"], r["pdf_page"]) for r in rows], [("caveat", 99)])
+        records = self.cell("main", "H9003-006-0", "X_transportation")
+        self.assertEqual([(r["kind"], r["pdf_page"]) for r in records["caveats"]["rows"]], [("caveat", 99)])
+        self.assertEqual(records["notes"]["rows"], [])
 
     def test_lists_the_facts_each_line_used_and_why_the_rule_set_others_aside(self):
         rule = self.cell(*AMBULANCE)["rule"]

@@ -105,6 +105,19 @@ CREATE TABLE comment (
   FOREIGN KEY (sheet, plan_id, col) REFERENCES sheet_cell
 );
 
+CREATE TABLE caveat (
+  sheet    TEXT NOT NULL,
+  plan_id  TEXT NOT NULL,
+  col      TEXT NOT NULL,
+  kind     TEXT NOT NULL,
+  comment  TEXT NOT NULL,
+  url      TEXT NOT NULL,
+  pdf_page INTEGER,
+  quote    TEXT NOT NULL,
+  PRIMARY KEY (sheet, plan_id, col),
+  FOREIGN KEY (sheet, plan_id, col) REFERENCES sheet_cell
+);
+
 -- facts.IDENTITY names a fact. fact_id alone repeats across an SB and an EOC.
 CREATE TABLE fact (
   fact_id       TEXT NOT NULL,

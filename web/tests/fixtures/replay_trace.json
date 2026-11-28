@@ -811,6 +811,10 @@
   "status": "none",
   "rows": []
  },
+ "caveats": {
+  "status": "none",
+  "rows": []
+ },
  "citations": {
   "status": "traced",
   "shown": [
