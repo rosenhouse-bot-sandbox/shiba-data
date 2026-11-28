@@ -1537,11 +1537,20 @@ def narrow(prices):
     return [name for name, _ in NARROW if any(name in n for n in named)]
 
 
-def dental_price(found, leaf, services=False, broad_services=False):
+def narrow_limit(found, leaf, name):
+    """The yearly limit that the best source's facts agree on for a narrow service, such as " 4/year", and its facts."""
+    words = dict(NARROW)[name]
+    limits = top([f for f in found if f["benefit"] == leaf and f["cost_kind"] == "visit_limit"
+                  and extra(f) and words.search(f["condition"]) and how_often(f) == "year" and not PER_PART.search(f["limit"])])
+    return (f" {limits[0]['amount']}/year", limits) if len({f["amount"] for f in limits}) == 1 else ("", [])
+
+
+def dental_price(found, leaf, services=False, broad_services=False, limits=False):
     """The best source's prices, and how the cell shows them. It names the narrow services that all sources' prices
     name, without saying they are the only ones, since readers may miss some. With broad_services, it names none
-    when the plan's own in-network price names a broader service. With services, a plan's own prices for several named services
-    give the range when no price covers every service."""
+    when the plan's own in-network price names a broader service. With limits, each narrow service shows its yearly
+    limit. With services, a plan's own prices for several named services give the range when no price covers every
+    service."""
     prices = exactly(found, (leaf,), lambda f: everyone(f) and f["cost_kind"] in PRICED,
                      "it is not a supplemental in-network price for every member")
     if services and not prices:
@@ -1553,7 +1562,10 @@ def dental_price(found, leaf, services=False, broad_services=False):
     shown = show(got)
     shown = "$0" if shown == "0%" else shown.replace("0%-", "$0-") if got else ""
     only = [] if broad_services and prices_broader(found, leaf) else narrow(prices)
-    return got, f"{shown} for {', '.join(only)}" if only else shown
+    if not only:
+        return got, shown
+    named = [(name, *narrow_limit(found, leaf, name)) if limits else (name, "", []) for name in only]
+    return got + [f for *_, used in named for f in used], f"{shown} for {', '.join(n + text for n, text, _ in named)}"
 
 
 def prices_broader(found, leaf):
@@ -1563,12 +1575,12 @@ def prices_broader(found, leaf):
                and BROAD.search(f"{f['condition']} {f['quotes']}") for f in found)
 
 
-def dental(organization, found, services=True, broad_services=False):
+def dental(organization, found, services=True, broad_services=False, limits=False):
     """Shows routine preventive and comprehensive dental prices and the maximum, naming the services that share it.
     A plan with only an allowance shows it. An allowance on a card shared with other benefits is not a maximum.
     Without routine dental, it cites a blank as the main sheet's dental column does. See dental_price for services."""
-    prev, prev_shown = dental_price(found, "dental.preventive", services, broad_services)
-    comp, comp_shown = dental_price(found, "dental.comprehensive", services, broad_services)
+    prev, prev_shown = dental_price(found, "dental.preventive", services, broad_services, limits)
+    comp, comp_shown = dental_price(found, "dental.comprehensive", services, broad_services, limits)
     others = {f["pool"] for f in found if f["pool"] and not facts.covers("dental", f["benefit"])
               and not f["benefit"].startswith("extras.")}
     eligible = exactly(found, ("dental", "dental.preventive", "dental.comprehensive"),
@@ -1670,7 +1682,7 @@ HEARING_OON_31 = out_of_network(("exam", "hearing.exam"), ("fitting", "hearing.e
 DVHA = {"C_premium": plan_premium, "D_premium_full_extra_help": extra_help_premium,
         "E_optional_packages": lambda o, found: optional_packages(o, found, details=False),
         "F_dental": or_none(with_lacking(with_packages(with_details(
-            lambda o, found: dental(o, found, broad_services=True),
+            lambda o, found: dental(o, found, broad_services=True, limits=True),
             no_maximum, dental_deductible, dental_rollover, dental_reimbursement,
             lambda found: dental_exclusions(found, summary_first=True), DENTAL_OON, preventive_limits,
             provider_network("dental"))), ("no COMP", "dental.comprehensive")), "dental"),
@@ -1766,7 +1778,12 @@ EARLIER_RULES = {
                                dental, no_maximum, dental_deductible, dental_rollover, dental_reimbursement,
                                lambda found: dental_exclusions(found, summary_first=True), DENTAL_OON, preventive_limits,
                                provider_network("dental"))),
-                               ("no COMP", "dental.comprehensive")), "dental"))),
+                               ("no COMP", "dental.comprehensive")), "dental")),
+                           (35, or_none(with_lacking(with_packages(with_details(
+                               lambda o, found: dental(o, found, broad_services=True),
+                               no_maximum, dental_deductible, dental_rollover, dental_reimbursement,
+                               lambda found: dental_exclusions(found, summary_first=True), DENTAL_OON, preventive_limits,
+                               provider_network("dental"))), ("no COMP", "dental.comprehensive")), "dental"))),
     ("dvha", "G_vision"): ((19, vision), (22, with_packages(with_details(vision, VISION_OON))),
                            (24, or_none(with_lacking(with_packages(with_details(vision, VISION_OON)),
                                                      ("no eyewear allowance", "vision.eyewear")), "vision")),
@@ -1968,6 +1985,8 @@ VERSIONS[33] = {}
 CAVEATS_SINCE = 33
 # Version 34 names no narrow DVHA comprehensive dental services when the plan's own in-network price names a broader one.
 VERSIONS[34] = {}
+# Version 35 shows a narrow DVHA comprehensive dental service's yearly limit.
+VERSIONS[35] = {}
 # The version that first presents each later column. Earlier versions hold its cells.
 SINCE = {("dvha", "C_premium"): 3, ("dvha", "G_vision"): 4, ("dvha", "H_hearing"): 4, ("dvha", "E_optional_packages"): 5,
          ("dvha", "F_dental"): 6, ("dvha", "I_alt_care_otc_travel"): 6, ("dvha", "J_extra_benefits"): 6,

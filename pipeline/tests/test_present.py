@@ -1209,6 +1209,20 @@ class DentalTest(unittest.TestCase):
                      dict(restorative, benefit="dental.preventive")):
             self.assertEqual(comp(kept), "COMP $0 for adjunctive services", kept)
 
+    def test_names_a_yearly_limit_on_a_narrow_service(self):
+        dental = present.DVHA["F_dental"]
+        perio = routine("dental.comprehensive", quotes='["$0 copay for periodontal maintenance"]')
+        limit = routine("dental.comprehensive", "visit_limit", "4", condition="periodontal maintenance", limit="per year")
+        self.assertEqual(column(present.dental, perio, limit), [("COMP $0 for periodontal maintenance", [perio])])
+        self.assertEqual(column(dental, perio, limit)[0][0], "COMP $0 for periodontal maintenance 4/year")
+        limited = lambda o, found: present.dental(o, found, limits=True)  # noqa: E731
+        self.assertEqual(column(limited, perio, limit), [("COMP $0 for periodontal maintenance 4/year", [perio, limit])])
+        for other in (dict(limit, limit="every date of service"), dict(limit, condition="fillings"),
+                      dict(limit, package="Plus"), dict(limit, cost_kind="copay"),
+                      dict(limit, benefit="dental.preventive"), dict(limit, limit="per tooth per year")):
+            self.assertEqual(column(limited, perio, other)[0][0], "COMP $0 for periodontal maintenance", other)
+        self.assertEqual(column(limited, perio, limit, dict(limit, amount="2"))[0][0], "COMP $0 for periodontal maintenance")
+
     def test_a_card_shared_with_other_benefits_is_not_a_max(self):
         card = dict(pool="Spendables", limit="per month")
         found = [routine("dental.preventive"), routine("dental", "allowance", "$20", **card),
