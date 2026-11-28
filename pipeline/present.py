@@ -1550,7 +1550,8 @@ def dental_price(found, leaf, services=False, broad_services=False, limits=False
     name, without saying they are the only ones, since readers may miss some. With broad_services, it names none
     when the plan's own in-network price names a broader service. With limits, each narrow service shows its yearly
     limit. With services, a plan's own prices for several named services give the range when no price covers every
-    service. With listed_services, it names the only services that the plan's Dental Benefit Details lists for leaf."""
+    service. With listed_services, it names the only comprehensive services that the plan's Dental Benefit Details
+    lists, unless one of the plan's own prices names a broader service."""
     prices = exactly(found, (leaf,), lambda f: everyone(f) and f["cost_kind"] in PRICED,
                      "it is not a supplemental in-network price for every member")
     if services and not prices:
@@ -1562,7 +1563,9 @@ def dental_price(found, leaf, services=False, broad_services=False, limits=False
     shown = show(got)
     shown = "$0" if shown == "0%" else shown.replace("0%-", "$0-") if got else ""
     listed = [f for f in found if f["source"] == "DENTAL" and f["benefit"] == leaf and f["cost_kind"] == "covered"
-              and f["condition"]] if listed_services and got else []
+              and extra(f) and f["condition"] and not DETAIL.search(f["condition"])
+              and not re.search(r"\bmembers?\b", f["condition"], re.I)] if (
+        listed_services and got and leaf == "dental.comprehensive" and not prices_broader(found, leaf)) else []
     if listed:
         return got + listed, f"{shown} ({', '.join(sorted({f['condition'] for f in listed}))} only)"
     only = [] if broad_services and prices_broader(found, leaf) else narrow(prices)

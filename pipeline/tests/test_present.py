@@ -1234,9 +1234,17 @@ class DentalTest(unittest.TestCase):
         self.assertEqual(comp(listed, dict(listed, condition="nitrous oxide"))[0],
                          "COMP $0 (nitrous oxide, teledentistry only)")
         self.assertEqual(comp(listed, listed_services=False)[0], "COMP $0 for adjunctive services")
+        self.assertEqual(comp(listed, dict(listed, plan_id="H0000-000-0"))[0], "COMP $0 (teledentistry only)")
         for ignored in (dict(listed, source="EOC"), dict(listed, cost_kind="not_covered"), dict(listed, condition=""),
-                        dict(listed, benefit="dental.preventive")):
+                        dict(listed, benefit="dental.preventive"), dict(listed, package="Dental Plus"),
+                        dict(listed, network="out"), dict(listed, condition="provider network"),
+                        dict(listed, condition="members with diabetes")):
             self.assertEqual(comp(ignored)[0], "COMP $0 for adjunctive services", ignored)
+        broad = routine("dental.comprehensive", quotes='["$0 copay for fillings, crowns and root canals"]')
+        self.assertEqual(comp(listed, broad)[0], "COMP $0")
+        exams = dict(listed, benefit="dental.preventive", condition="oral exams")
+        self.assertEqual(present.dental("Wellcare", [routine("dental.preventive"), exams], listed_services=True)[0][0],
+                         "PREV $0")
 
     def test_a_card_shared_with_other_benefits_is_not_a_max(self):
         card = dict(pool="Spendables", limit="per month")
