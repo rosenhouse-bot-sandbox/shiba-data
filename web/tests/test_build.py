@@ -87,6 +87,11 @@ class SiteDataTest(unittest.TestCase):
         cell = self.cell("main", "H2406-042-0", "D_premium_full_extra_help")
         self.assertEqual((cell["value"], cell["cites"]), ("$87.70", []))
 
+    def test_each_column_says_what_it_shows(self):
+        shown = {(name, c["key"]): c["about"] for name in ("main", "dvha") for c in self.site[name]["columns"]}
+        self.assertEqual(shown, build.fields.ABOUT)
+        self.assertIn("vaccines", shown["main", "M_part_b_drugs"])
+
     def test_a_caveat_the_rule_wrote_is_a_note(self):
         comment = self.cell("main", "H9003-006-0", "X_transportation")["comment"]
         self.assertEqual((comment["kind"], comment["page"]), ("caveat", 99))
@@ -174,7 +179,8 @@ class SiteDataTest(unittest.TestCase):
         for sheet in ("main", "dvha"):
             self.assertEqual([(c["key"], c["label"]) for c in self.site[sheet]["columns"]],
                              list(build.fields.labels(sheet).items()))
-        self.assertIn({"key": "L_xray_imaging", "id": "xray_imaging", "label": "X-Ray / Diag Radiology"}, self.site["main"]["columns"])
+        self.assertIn({"key": "L_xray_imaging", "id": "xray_imaging", "label": "X-Ray / Diag Radiology",
+                       "about": build.fields.ABOUT["main", "L_xray_imaging"]}, self.site["main"]["columns"])
 
     def test_column_ids_drop_the_sheet_letter_and_are_unique(self):
         for sheet in ("main", "dvha"):
@@ -197,7 +203,8 @@ class SiteDataTest(unittest.TestCase):
     def test_links_the_cms_files_and_names_the_column_on_medicare_gov(self):
         self.assertEqual(self.site["cms_files"], {"Landscape": "https://www.cms.gov/files/zip/cy2027-landscape-202610.zip",
                                                   "PBP": "https://www.cms.gov/files/zip/pbp-benefits-2027.zip"})
-        self.assertIn({"key": "O_medical_deductible", "id": "medical_deductible", "label": "Medical Deductible", "medicare_gov": "It shows this as “Health deductible”."},
+        self.assertIn({"key": "O_medical_deductible", "id": "medical_deductible", "label": "Medical Deductible",
+                       "about": build.fields.ABOUT["main", "O_medical_deductible"], "medicare_gov": "It shows this as “Health deductible”."},
                       self.site["main"]["columns"])
 
     def test_doc_ids_are_sha_prefixes(self):

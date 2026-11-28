@@ -48,9 +48,9 @@ def rows(name, data_dir):
         return list(csv.DictReader(f))
 
 
-def sheet(csv_rows, labels, cites, comments, cms):
+def sheet(name, csv_rows, labels, cites, comments, cms):
     return {
-        "columns": [column(k, v) for k, v in labels.items()],
+        "columns": [column(name, k, v) for k, v in labels.items()],
         "rows": [{
             "plan_id": r["plan_id"],
             "section": r["section"],
@@ -60,8 +60,8 @@ def sheet(csv_rows, labels, cites, comments, cms):
     }
 
 
-def column(key, label):
-    c = {"key": key, "id": re.sub(r"^[A-Z]+_", "", key), "label": label}
+def column(sheet, key, label):
+    c = {"key": key, "id": re.sub(r"^[A-Z]+_", "", key), "label": label, "about": fields.ABOUT[sheet, key]}
     if key in cms_sources.MEDICARE_GOV:
         c["medicare_gov"] = cms_sources.MEDICARE_GOV[key]
     return c
@@ -134,7 +134,7 @@ def site_data(data_dir=DATA):
         "plans": plans,
         "docs": docs,
         "cms_files": {"Landscape": config["landscape_zip"], "PBP": config["pbp_zip"]},
-        **{name: sheet(csv_rows, labels, cites[name], comments[name], cms)
+        **{name: sheet(name, csv_rows, labels, cites[name], comments[name], cms)
            for name, (csv_rows, labels) in labeled.items()},
     }
 

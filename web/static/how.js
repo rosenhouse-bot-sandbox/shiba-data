@@ -1,5 +1,6 @@
 // The pipeline view: a map of tables and steps, and a lens on one step.
 import { el, svg } from "./dom.js";
+import { hint } from "./hint.js";
 import { format } from "./permalink.js";
 import {
   EXAMPLE, NODES, STEPS, STORES, inputs, outputs, nodeName, NODE_W, NODE_H, RING, MAP_W, MAP_H,
@@ -191,69 +192,9 @@ function traceRecord(step, trace) {
 const workList = (lines) => lines.length ? el("ul", { class: "how-details" }, ...lines.map((l) => el("li", {},
   l.href ? el("a", { href: l.href, target: "_blank", rel: "noopener" }, `${l.text} ↗`) : l.text))) : null;
 
-let pops = 0;
-// The one open pop-over, if any.
-let opened = null;
-
-const MARGIN = 8;
-
 // Hovering or focusing a term shows what it means and the code behind it. Clicking pins it open.
-function term(t, text) {
-  const id = `how-pop-${++pops}`;
-  const button = el("button", { type: "button", class: "how-term", "aria-expanded": "false", "aria-controls": id }, text);
-  const pop = el("div", { class: "how-pop", id },
-    el("strong", {}, t.title), el("span", {}, t.text),
-    t.code ? el("pre", {}, t.code) : null,
-    el("a", { href: t.url, target: "_blank", rel: "noopener" }, `${t.where} ↗`));
-  const box = el("span", { class: "how-term-box" }, button, pop);
-  let pinned = false;
-  const close = () => {
-    pinned = false;
-    box.classList.remove("open");
-    button.setAttribute("aria-expanded", "false");
-    if (opened?.box === box) opened = null;
-  };
-  const open = () => {
-    if (opened?.box !== box) opened?.close();
-    opened = { box, close };
-    box.classList.add("open");
-    button.setAttribute("aria-expanded", "true");
-    place(pop, button.getBoundingClientRect());
-  };
-  const leave = () => pinned || box.contains(document.activeElement) || close();
-  box.addEventListener("mouseenter", open);
-  box.addEventListener("mouseleave", leave);
-  button.addEventListener("focus", open);
-  box.addEventListener("focusout", (e) => pinned || box.contains(e.relatedTarget) || close());
-  button.addEventListener("click", () => {
-    if (pinned) return close();
-    open();
-    pinned = true;
-  });
-  return box;
-}
-
-// Places a pop-over under its term, or above it when it fits only there or there is more room, and shrinks it to fit.
-function place(pop, at) {
-  const { innerWidth: w, innerHeight: h } = window;
-  pop.style.maxWidth = `${w - 2 * MARGIN}px`;
-  const roomBelow = h - MARGIN - at.bottom - 4, roomAbove = at.top - 4 - MARGIN;
-  pop.style.maxHeight = "";
-  const fitsBelow = pop.getBoundingClientRect().height <= roomBelow;
-  const room = fitsBelow || roomBelow >= roomAbove ? roomBelow : roomAbove;
-  pop.style.maxHeight = `${room}px`;
-  const { width, height } = pop.getBoundingClientRect();
-  pop.style.left = `${Math.max(MARGIN, Math.min(at.left, w - width - MARGIN))}px`;
-  pop.style.top = `${room === roomBelow ? at.bottom + 4 : at.top - 4 - height}px`;
-}
-
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") opened?.close();
-});
-document.addEventListener("click", (e) => {
-  if (opened && !opened.box.contains(e.target)) opened.close();
-});
-document.addEventListener("scroll", (e) => opened && !opened.box.contains(e.target) && opened.close(), true);
+const term = (t, text) => hint(text, el("strong", {}, t.title), el("span", {}, t.text), t.code ? el("pre", {}, t.code) : null,
+  el("a", { href: t.url, target: "_blank", rel: "noopener" }, `${t.where} ↗`));
 
 // An example table's note names the example's own file when the node's name does not.
 function rows(role, head, id, sheet, highlight) {
