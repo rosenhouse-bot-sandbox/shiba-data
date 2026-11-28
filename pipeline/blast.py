@@ -1,13 +1,13 @@
 """Shows, without the API, which plans a candidate document_facts version would change, and fails if any plan is
 outside the version's targets.
 
-Usage: python3 -I pipeline/blast.py <year> <work_dir> document_facts@<version>
+Usage: python3 -I pipeline/blast.py <year> <work_dir> document_facts@<version>[,<step>@<version>...]
 
 <work_dir> needs the PDF texts that run.py's replay reads, and data/<year> needs the tables that tables.py writes.
-This runs the model steps twice: pinned, then with the candidate. In the candidate run, a task without a saved answer
-gets the answer the pinned run implies: a reader gets the pinned run's answer for the same document, and a verifier or
-reviewer keeps what the pinned run kept. A plan fails if a task without a saved answer is about it, or if its document
-facts or presented cells change. Each run writes data/<year>, so data/<year> must be clean. Git restores it after each
+This runs the model steps twice: pinned, then with the candidate. Other steps' candidates run both times. In the
+candidate run, a task without a saved answer gets the answer the pinned run implies: a reader gets the pinned run's
+answer for the same document, and a verifier or reviewer keeps what the pinned run kept. A plan fails if a task without
+a saved answer is about it, or if its document facts or presented cells change. Each run writes data/<year>, so data/<year> must be clean. Git restores it after each
 run, except for the tables it ignores, which the candidate run leaves.
 """
 import contextlib
@@ -134,7 +134,7 @@ def model_steps(data, work, versions, asker, saved):
 
 def main(year, work, candidate):
     data, work = years.data_dir(year), os.path.abspath(work)
-    if candidate.partition("@")[0] != "document_facts" or "," in candidate:
+    if "document_facts@" not in candidate:
         raise SystemExit("blast.py checks one document_facts candidate.")
     if git("status", "--porcelain", "--", str(data)):
         raise SystemExit(f"{data} has uncommitted changes.")
@@ -142,7 +142,8 @@ def main(year, work, candidate):
     saved = set(os.listdir(data / "answers"))
     versions = steps.versions(data, run.STEPS, candidate)
     try:
-        pinned = Pinned(work, model_steps(data, work, steps.versions(data, run.STEPS), None, None))
+        others = ",".join(c for c in candidate.split(",") if not c.strip().startswith("document_facts@"))
+        pinned = Pinned(work, model_steps(data, work, steps.versions(data, run.STEPS, others), None, None))
         before = outputs(data)
         restore(data)
         # The stand-in answers go to a copy, so data/<year>/answers never holds them.
