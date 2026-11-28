@@ -73,17 +73,33 @@ def reuse_checked(gen, work):
             os.link(src, dst)
 
 
-def lost_quotes(data, texts):
-    """Citations whose quote the site cannot highlight on its page."""
+def lost_quotes(data, texts, skip=frozenset()):
+    """Citations whose quote the site cannot highlight on its page, but for those of the skipped URLs."""
     with open(data / "generated" / "documents_checked.csv") as f:
         doc = {d["url"]: d["sha256"][:16] for d in csv.DictReader(f)}
     cites = [dict(c, doc=doc[c["url"]], page=c["pdf_page"]) for c in sheets.rows(data / sheets.PRESENTED)
-             if c["quote"].strip() and c["url"] in doc]
+             if c["quote"].strip() and c["url"] in doc and c["url"] not in skip]
+    if failed := sorted({c["url"] for c in cites if not c["doc"]}):
+        raise SystemExit("These cited documents did not download:\n" + "\n".join(failed))
     return [c for c, found in zip(cites, eoc.highlights(texts, cites, "found")) if not found]
 
 
-def check_quotes(data, texts):
-    lost = lost_quotes(data, texts)
+def checked(gen):
+    """Each checked URL's sha256."""
+    path = pathlib.Path(gen, "documents_checked.csv")
+    if not path.exists():
+        return {}
+    with open(path) as f:
+        return {d["url"]: d["sha256"] for d in csv.DictReader(f) if d["sha256"]}
+
+
+def replaced(before, after):
+    """The URLs whose PDF changed."""
+    return {url for url, sha in before.items() if after.get(url, sha) != sha}
+
+
+def check_quotes(data, texts, skip=frozenset()):
+    lost = lost_quotes(data, texts, skip)
     if lost:
         raise SystemExit("The site cannot highlight these quotes:\n" + "\n".join(f"{sheets.where(c)}: {c['quote']}" for c in lost))
 
@@ -179,6 +195,14 @@ def main(year, work, mode="", candidate=""):
             get(config[f"{name}_zip"], blobs.cms_path(work, name))
     blobs.record_cms(CMS, work, gen / blobs.CMS_FILES)
     cms_tables(data, config, work)
+    live = config["year"] == years.LIVE
+    earlier = live and (data / FACTS).exists()
+    if live:
+        versions = steps.versions(data, STEPS, candidate)
+    # present.write finds each fact's URL in documents_checked.csv, so it runs before fetch_docs.py rewrites that file.
+    if earlier:
+        present.write(data, versions["present"])
+    before = checked(gen)
     if web:
         # A candidate run changes only what its version changes, so it keeps the documents earlier runs checked.
         if candidate:
@@ -191,12 +215,11 @@ def main(year, work, mode="", candidate=""):
     if config["year"] == appendix_b.YEAR:
         py("tests/make_fixture.py", f"{work}/pbp")
 
-    if config["year"] == years.LIVE:
-        versions = steps.versions(data, STEPS, candidate)
-        # The new texts must highlight the quotes the earlier facts give, before any model call.
-        if (data / FACTS).exists():
-            present.write(data, versions["present"])
-            check_quotes(data, f"{work}/texts")
+    if live:
+        # The new texts must highlight the quotes the earlier facts give, before any model call. A replaced document
+        # gets new facts.
+        if earlier:
+            check_quotes(data, f"{work}/texts", replaced(before, checked(gen)))
         store.pull(data, work)
         answer = Answers(data, asker(mode, data, work, versions, candidate), work)
         model_steps(data, f"{work}/texts", work, answer, versions)

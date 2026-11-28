@@ -27,7 +27,25 @@ class LostQuotesTest(unittest.TestCase):
                     w.writerow(dict(sheet="main", plan_id="P", column="G_specialist", line="", value="$40", url=URL,
                                     pdf_page="2", quote=quote))
             lost = run.lost_quotes(data, texts)
+            with self.assertRaisesRegex(SystemExit, "Specialist \\$50"):
+                run.check_quotes(data, texts)
+            run.check_quotes(data, texts, skip={URL})
+            with open(data / "generated" / "documents_checked.csv", "w") as f:
+                f.write(f"url,sha256\n{URL},\n")
+            with self.assertRaisesRegex(SystemExit, f"did not download:\n{URL}"):
+                run.lost_quotes(data, texts)
         self.assertEqual([c["quote"] for c in lost], ["Specialist $50"])
+
+    def test_names_the_documents_a_download_replaced(self):
+        with tempfile.TemporaryDirectory() as gen:
+            with open(f"{gen}/documents_checked.csv", "w") as f:
+                f.write(f"url,sha256\n{URL},{'a' * 64}\nhttps://x/eoc.pdf,{'b' * 64}\nhttps://x/moved.pdf,{'e' * 64}\n"
+                        f"https://x/dropped.pdf,{'f' * 64}\nhttps://x/gone.pdf,\n")
+            before = run.checked(gen)
+            with open(f"{gen}/documents_checked.csv", "w") as f:
+                f.write(f"url,sha256\n{URL},{'c' * 64}\nhttps://x/eoc.pdf,{'b' * 64}\nhttps://x/moved.pdf,\n"
+                        f"https://x/new.pdf,{'d' * 64}\nhttps://x/gone.pdf,{'a' * 64}\n")
+            self.assertEqual(run.replaced(before, run.checked(gen)), {URL})
 
 
 class AnswersTest(unittest.TestCase):
@@ -127,15 +145,22 @@ class CheckedPdfsTest(unittest.TestCase):
 
 
 class MainTest(unittest.TestCase):
-    def run_main(self, mode, candidate="", facts=True):
-        """Lists the order of run.main's steps. The year's data has steps.json, and has earlier facts if facts is true."""
+    def run_main(self, mode, candidate="", facts=True, checked=("", ""), **patches):
+        """Lists the order of run.main's steps. The year's data has steps.json, and has earlier facts if facts is true.
+        checked holds the documents_checked.csv rows before and after fetch_docs.py. patches replace run's functions."""
         order = []
+
+        def fetched(script, *args):
+            if script == "fetch_docs.py":
+                order.append(script)
+                pathlib.Path(args[3]).write_text(f"url,sha256\n{checked[1]}")
+
         with tempfile.TemporaryDirectory() as work, tempfile.TemporaryDirectory() as root, \
-             mock.patch.multiple(run, run_tests=lambda kind, candidate: order.append((kind, candidate)),
-                                 get=lambda *a: order.append("get"), py=lambda script, *a: order.append(script) if script == "fetch_docs.py" else None,
-                                 reuse_checked=lambda *a: order.append("reuse_checked"),
-                                 check_quotes=lambda *a: order.append("check_quotes"),
-                                 model_steps=lambda *a: order.append("model_steps"), asker=lambda *a: None), \
+             mock.patch.multiple(run, **{**dict(
+                 run_tests=lambda kind, candidate: order.append((kind, candidate)), get=lambda *a: order.append("get"),
+                 py=fetched, reuse_checked=lambda *a: order.append("reuse_checked"),
+                 check_quotes=lambda *a: order.append("check_quotes"),
+                 model_steps=lambda *a: order.append("model_steps"), asker=lambda *a: None), **patches}), \
              mock.patch.object(run.subprocess, "run"), mock.patch.object(run.blobs, "record_cms"), \
              mock.patch.object(run.blobs, "record_texts"), mock.patch.object(run, "pdfs"), \
              mock.patch.object(run.present, "write", lambda data, version: order.append("present")), \
@@ -146,6 +171,8 @@ class MainTest(unittest.TestCase):
                 shutil.copy(years.data_dir() / name, data)
             if facts:
                 (data / run.FACTS).write_text("")
+            (data / "generated").mkdir()
+            (data / "generated" / "documents_checked.csv").write_text(f"url,sha256\n{checked[0]}")
             with mock.patch.object(run.years, "data_dir", lambda year: data):
                 run.main(str(years.LIVE), work, mode, candidate)
         return order
@@ -154,7 +181,14 @@ class MainTest(unittest.TestCase):
         self.assertEqual(self.run_main("api", "present@2")[:2], [("code", "present@2"), "get"])
 
     def test_checks_the_quotes_of_the_earlier_facts_before_any_model_call(self):
-        self.assertEqual(self.run_main("api")[-6:], ["present", "check_quotes", "pull", "model_steps", "check_quotes", ("checks", "")])
+        self.assertEqual(self.run_main("api")[-7:], ["present", "fetch_docs.py", "check_quotes", "pull", "model_steps",
+                                                    "check_quotes", ("checks", "")])
+
+    def test_the_earlier_quotes_need_no_highlight_in_a_document_the_download_replaced(self):
+        checks = []
+        self.run_main("api", checked=(f"{URL},{'a' * 64}\n", f"{URL},{'b' * 64}\n"),
+                      check_quotes=lambda data, texts, skip=frozenset(): checks.append(skip))
+        self.assertEqual(checks, [{URL}, frozenset()])
 
     def test_without_earlier_facts_checks_only_the_new_quotes(self):
         self.assertEqual(self.run_main("replay", facts=False), [("code", ""), "pull", "model_steps", "check_quotes", ("checks", "")])
