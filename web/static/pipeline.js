@@ -13,6 +13,13 @@ export const STORES = {
 
 const REPO = "https://github.com/rosenhouse-bot-sandbox/shiba-data";
 
+export const WORKFLOWS = {
+  pipeline: { label: "Pipeline", href: `${REPO}/actions/workflows/pipeline.yml`,
+    text: "It runs only when started by hand on main. It downloads the PDFs from carriers and asks Claude for the answers the site uses. It pushes the rebuilt data to a branch for a pull request." },
+  site: { label: "Site", href: `${REPO}/actions/workflows/pages.yml`,
+    text: "It runs on every pull request and every merge to main. It replays the saved answers and reads the saved PDFs. It never contacts carriers or Claude. A merge to main also publishes the site." },
+};
+
 // col and row place a node in the map's lanes. git is a path under data/<year>/, code a path in the repo, and cms names
 // the CMS file that R2 copies. A byColumn table's link filters it to the cell's column too.
 export const NODES = {
@@ -115,44 +122,44 @@ export function nodeHref(id, { year, sheet, plan, column, sha, cell, cms }) {
 // paras hold for any cell. example holds only for the example cell: highlight lists, by node, the example rows
 // that the cell uses.
 export const STEPS = [
-  { id: "list-plans", record: "plan", from: "landscape", to: "plans", label: "List the plans",
+  { id: "list-plans", runs: ["pipeline", "site"], record: "plan", from: "landscape", to: "plans", label: "List the plans",
     paras: [["Code keeps ", ["bothCounties", "plans sold in both counties"], ". A plan's Landscape rows become one row of plans."]],
     example: { highlight: { landscape: [0, 1], plans: [0] }, before: "H1036_153_0 in Multnomah and Clackamas", after: "H1036-153-0, one row",
       paras: [["The plan has one Landscape row per county. 39 plans remain."]] } },
-  { id: "find-pdfs", record: "documents", from: "plans", also: ["found", "links"], to: "documents", label: "Find PDFs",
+  { id: "find-pdfs", runs: ["pipeline", "site"], record: "documents", from: "plans", also: ["found", "links"], to: "documents", label: "Find PDFs",
     paras: [["plans lists the plans that need an SB and EOC. Three sources offer URLs: found holds what Claude sessions found on carrier sites, links copies the volunteers' Links sheet, and code fills URL templates for carriers whose URLs follow a pattern. ",
       ["firstUrl", "The first URL found wins"], "."]],
     example: { highlight: { plans: [0], links: [0, 1], documents: [0, 1] }, before: "links: …H1036153000EOC27pdf", after: "documents: EOC URL",
       paras: [] } },
-  { id: "download", record: "documents", from: "documents", to: "checked", label: "Download PDFs",
+  { id: "download", runs: ["pipeline"], record: "documents", from: "documents", to: "checked", label: "Download PDFs",
     paras: [["The pipeline downloads each PDF, runs a ", ["cover", "cover check"], ", and records the PDF's SHA-256 hash."]],
     example: { highlight: { documents: [0], checked: [0] }, before: "…/H1036153000SB27pdf", after: "sha256 ce13e925…, 24 pages", paras: [] } },
-  { id: "extract-text", record: "documents", from: "checked", to: "text", label: "Extract page text",
+  { id: "extract-text", runs: ["pipeline", "site"], record: "documents", from: "checked", to: "text", label: "Extract page text",
     paras: [["Code turns each page into ", ["layoutText", "text that keeps the page's columns"], ". The PDFs and texts are stored in R2, named by hash, so every later run reads the same bytes."]],
     example: { highlight: { checked: [0], text: [3, 4, 5] }, before: "PDF ce13e925…", after: "text of page 9", paras: [] } },
-  { id: "cms-facts", record: "rule", from: "pbp", also: ["plans"], to: "cmsFacts", label: "Read CMS fields",
+  { id: "cms-facts", runs: ["pipeline", "site"], record: "rule", from: "pbp", also: ["plans"], to: "cmsFacts", label: "Read CMS fields",
     paras: [["Code turns the plan's PBP fields into facts, and the premiums and drug deductible that plans copies from the Landscape file. They rank below every document, so a rule uses one only when no document gives the value. A value built from one has no citation."]],
     example: { highlight: { pbp: [0], plans: [0], cmsFacts: [0, 1] }, before: "pbp_b4c_copay_amt_wec_min = 115.00", after: "emergency abroad $115",
       paras: [["Line 2 of the Ambulance rule considers these facts, but sets them aside because the EOC prices ambulance trips abroad."]] } },
-  { id: "read-facts", record: "answers", from: "text", also: ["prompt"], to: "answers", label: "Claude reads facts",
+  { id: "read-facts", runs: ["pipeline", "site"], record: "answers", from: "text", also: ["prompt"], to: "answers", label: "Claude reads facts",
     paras: [["Code fills fact_prompt.md to make ", ["prompt", "one prompt"], " per document and benefit group. Claude Opus answers each with facts, each with its quotes and page."],
       ["The answer is ", ["hash", "saved under a hash of the model, effort and prompt"], ", so a rerun calls no model."]],
     example: { highlight: { text: [3, 4, 5], answers: [0, 1, 2] }, before: "Ground  $325 copay per date of service", after: "{benefit: ambulance.ground, amount: $325, page: 9}",
       paras: [["The Ambulance column uses the ambulance and emergency groups, so Claude gets four prompts, one per group and document. For the SB and the ambulance group, Claude answers with three facts."]] } },
-  { id: "check-facts", record: "fact_checks", from: "answers", also: ["text"], to: "facts", label: "Check facts",
+  { id: "check-facts", runs: ["pipeline", "site"], record: "fact_checks", from: "answers", also: ["text"], to: "facts", label: "Check facts",
     paras: [["Code runs a ", ["quoteCheck", "quote check"], " of every fact against its page's text. A verifier, Claude Opus, then reads the page and judges each fact mixed with ", ["decoy", "decoys"], ". Last, a ", ["reviewer", "reviewer"], " checks each fact a value would cite. The verifier's and reviewer's answers are saved with the reader's."]],
     example: { highlight: { answers: [2], facts: [3, 4, 5] }, before: "SB: abroad, covered_by medicare", after: "rejected; the EOC's supplemental fact stands",
       paras: [["The verifier rejected the SB's worldwide fact: Medicare doesn't cover care abroad, so it is supplemental. The EOC's fact, already marked supplemental, passed."]] } },
-  { id: "column-rules", record: "rule", from: "facts", also: ["rules", "cmsFacts"], to: "presented", alsoTo: ["sheet", "caveats"], label: "Apply column rules",
+  { id: "column-rules", runs: ["pipeline", "site"], record: "rule", from: "facts", also: ["rules", "cmsFacts"], to: "presented", alsoTo: ["sheet", "caveats"], label: "Apply column rules",
     paras: [["Each column has a rule, written in code from the domain expert's instructions. It takes facts from the ", ["bestSource", "best source"], " and cites their quotes. It writes each value to the sheet and each citation to presented. A line that only CMS data backs has no citation, so a volunteer can't check it."],
       ["Some rules also write a caveat from the facts a cell cites, such as \"In the labs range, the 20% is for genetic testing.\""]],
     example: { highlight: { facts: [0, 1, 2, 3], rules: [0, 2], presented: [0, 1, 2], sheet: [0] }, before: "ground $325, air 20%, abroad $325", after: "$325 or 20% | $325",
       paras: [["In the ", ["rule", "Ambulance rule"], ", line 1 takes in-network, Medicare-covered ground and air trips from the EOC. Line 2 takes trips abroad. Each line cites the quotes of the facts it used, so line 1 gets four citations and line 2 one, all from EOC page 46."]] } },
-  { id: "write-notes", record: "notes", from: "sheet", also: ["presented"], to: "notes", label: "Write notes",
-    paras: [["Claude sessions write a note in a pull request where a value needs explaining that no rule gives, such as something the documents leave unclear. No workflow runs this step. Each note cites a page and quote."]],
+  { id: "write-notes", runs: [], record: "notes", from: "sheet", also: ["presented"], to: "notes", label: "Write notes",
+    paras: [["Claude sessions write a note in a pull request where a value needs explaining that no rule gives, such as something the documents leave unclear. Each note cites a page and quote."]],
     example: { highlight: { sheet: [0], presented: [0, 1, 2] }, before: "$325 or 20% | $325", after: "no note",
       paras: [["The Ambulance cell has no note."]] } },
-  { id: "publish", record: "citations", from: "sheet", also: ["presented", "notes", "caveats"], to: "site", label: "Publish",
+  { id: "publish", runs: ["site"], record: "citations", from: "sheet", also: ["presented", "notes", "caveats"], to: "site", label: "Publish",
     paras: [["Merging to main builds the site from the sheet, its citations, the notes that Claude sessions write and the rules' caveats. A cell with both shows both. ", ["worker", "The pdxplans Worker"], " serves it at pdxplans.org, and the same build updates the volunteers' Google Sheet."]],
     example: { highlight: { sheet: [0], presented: [0, 1, 2], site: [1, 4, 5] }, before: "$325 or 20% | $325, 5 quotes", after: "cell + EOC page 46 highlight", paras: [] } },
 ];

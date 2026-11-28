@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import fs from "node:fs";
 import assert from "node:assert/strict";
-import { NODES, STEPS, STORES, RING, MIN_GAP, RECORDS, inputs, outputs, nodeName, nodeBox, pillBox, paths, before, after, stepById, strip, details, records, nodeHref } from "../static/pipeline.js";
+import { NODES, STEPS, STORES, WORKFLOWS, RING, MIN_GAP, RECORDS, inputs, outputs, nodeName, nodeBox, pillBox, paths, before, after, stepById, strip, details, records, nodeHref } from "../static/pipeline.js";
 
 const inside = ([x, y], b) => x > b.x && x < b.x + b.w && y > b.y && y < b.y + b.h;
 
@@ -134,6 +134,15 @@ test("neighbouring steps share a table", () => {
   assert.deepEqual(before(stepById("publish")).map((s) => s.id), ["column-rules", "write-notes"]);
   assert.deepEqual(before(stepById("write-notes")).map((s) => s.id), ["column-rules"]);
   assert.deepEqual(before(stepById("check-facts")).map((s) => s.id), ["extract-text", "read-facts"]);
+});
+
+test("every step names the workflows that run it", () => {
+  for (const s of STEPS) for (const w of s.runs) assert.ok(WORKFLOWS[w], `${s.id} runs in ${w}`);
+  assert.deepEqual(Object.fromEntries(STEPS.map((s) => [s.id, s.runs.join(" ")])), {
+    "list-plans": "pipeline site", "find-pdfs": "pipeline site", "download": "pipeline", "extract-text": "pipeline site",
+    "cms-facts": "pipeline site", "read-facts": "pipeline site", "check-facts": "pipeline site",
+    "column-rules": "pipeline site", "write-notes": "", "publish": "site",
+  });
 });
 
 test("every node says where its data lives, and names it without a file extension", () => {

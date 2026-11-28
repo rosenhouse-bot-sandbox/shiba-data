@@ -997,6 +997,16 @@ test("pipeline view: the nav link opens the example cell's first step", async ()
   assert.equal(await page.textContent(".how-step"), "List the plans");
 });
 
+test("pipeline view: a step names the workflows that run it", async () => {
+  await page.goto(`${base}#/2027/how/main/H1036-153-0/ambulance/download`);
+  await page.waitForSelector(".how-runs");
+  assert.equal(await page.innerText(".how-runs"), "Runs in Pipeline");
+  await page.hover(".how-runs .term");
+  assert.match(await page.textContent(".how-runs .term-pop"), /asks Claude for the answers/);
+  await page.goto(`${base}#/2027/how/main/H1036-153-0/ambulance/write-notes`);
+  await page.waitForFunction(() => document.querySelector(".how-runs")?.innerText === "No workflow runs this step.");
+});
+
 test("pipeline view: Next steps through the example cell's steps, each showing its input and output rows", async () => {
   await openHow(page, "");
   const labels = [];
